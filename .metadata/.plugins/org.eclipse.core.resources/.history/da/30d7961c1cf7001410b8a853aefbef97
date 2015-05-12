@@ -1,0 +1,9 @@
+package com.marklynch.tactics.objects.level;
+
+import java.util.Vector;
+
+public class Level {
+
+	private Vector<Grid> grids;
+	
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="libs/ibxm.jar"/>
+	<classpathentry kind="lib" path="libs/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="libs/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl_util_applet.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="libs/natives-linux.jar"/>
+	<classpathentry kind="lib" path="libs/natives-mac.jar"/>
+	<classpathentry kind="lib" path="libs/natives-windows.jar"/>
+	<classpathentry kind="lib" path="libs/slick-util.jar" sourcepath="C:/dev/slick-util/src"/>
+	<classpathentry kind="lib" path="libs/AppleJavaExtensions.jar"/>
+	<classpathentry kind="lib" path="libs/asm-debug-all.jar"/>
+	<classpathentry kind="lib" path="libs/jinput.jar"/>
+	<classpathentry kind="lib" path="libs/laf-plugin-7.2.1.jar"/>
+	<classpathentry kind="lib" path="libs/laf-widget-7.2.1.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-api-2.0-beta9.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl_test.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl-debug.jar"/>
+	<classpathentry kind="lib" path="libs/lwjgl.jar" sourcepath="C:/dev/lwjgl-2.9.3/lwjgl-source-2.9.3.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/dev/lwjgl-2.9.3/lwjgl-docs-2.9.3.zip!/"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="tactics_project/libs/lwjgl_native"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="libs/lzma.jar"/>
+	<classpathentry kind="lib" path="libs/substance-7.2.1.jar"/>
+	<classpathentry kind="lib" path="libs/trident-7.2.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,11 @@
+package com.marklynch.utils;
+
+public class LoadedResources {
+
+	//split in to global images, level images...
+	//then clear the level images after each level
+	//but no need to remove the globals
+	
+	private static HashMap<String, > images;
+	
+}

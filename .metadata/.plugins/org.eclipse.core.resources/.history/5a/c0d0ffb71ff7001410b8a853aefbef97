@@ -1,0 +1,23 @@
+package com.marklynch.tactics.objects.level;
+
+import java.util.Vector;
+
+public class Level {
+
+	int width;
+	int height;
+	private Square[][] squares;
+	
+//	java representation of a grid??
+//	2d array?
+	
+	public Level(int width, int height)
+	{
+		this.width = width;
+		this.height = height;
+		squares = new Square[width][height];
+	}
+	
+	
+	
+}

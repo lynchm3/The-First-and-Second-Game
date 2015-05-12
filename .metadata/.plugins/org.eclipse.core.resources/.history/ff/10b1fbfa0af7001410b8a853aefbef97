@@ -1,0 +1,9 @@
+package com.marklynch.utils;
+
+public class LoadedResources {
+
+	//split in to global images, level images...
+	
+	private static HashMap<String, > images;
+	
+}

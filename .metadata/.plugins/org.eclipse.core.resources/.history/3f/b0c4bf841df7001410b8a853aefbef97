@@ -1,0 +1,19 @@
+package com.marklynch.tactics.objects.level;
+
+import java.util.Vector;
+
+public class Level {
+
+	private Vector<Square> squares = new Vector<Square>();
+	
+//	java representation of a grid??
+//	2d array?
+	
+	public Level()
+	{
+		
+	}
+	
+	
+	
+}

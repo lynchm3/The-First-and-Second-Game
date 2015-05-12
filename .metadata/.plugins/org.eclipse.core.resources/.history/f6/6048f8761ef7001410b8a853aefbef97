@@ -1,0 +1,24 @@
+package com.marklynch.tactics.objects.level;
+
+import static com.marklynch.utils.LoadedResources.loadGlobalImage;
+
+import org.newdawn.slick.opengl.Texture;
+
+public class Square {
+
+	// image
+	private String imagePath = "avatar.png";
+	private Texture imageTexture = null;
+
+	public Square(int strength, int dexterity, int intelligence, int endurance,
+			String imagePath) {
+		super();
+		this.strength = strength;
+		this.dexterity = dexterity;
+		this.intelligence = intelligence;
+		this.endurance = endurance;
+		this.imagePath = imagePath;
+		this.imageTexture = loadGlobalImage(imagePath);
+	}
+
+}

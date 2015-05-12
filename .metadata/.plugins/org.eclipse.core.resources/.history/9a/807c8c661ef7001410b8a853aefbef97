@@ -1,0 +1,11 @@
+package com.marklynch.tactics.objects.level;
+
+import org.newdawn.slick.opengl.Texture;
+
+public class Square {
+
+	// image
+	private String imagePath = "avatar.png";
+	private Texture imageTexture = null;
+
+}

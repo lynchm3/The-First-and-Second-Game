@@ -1,0 +1,38 @@
+package com.marklynch.utils;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+import org.newdawn.slick.util.ResourceLoader;
+
+public class LoadedResources {
+
+	private static HashMap<String, Texture> globalImages;
+	private static HashMap<String, Texture> levelImages;
+	
+	public static void loadGlobalImage(String imagePath)
+	{
+		try{
+			TextureLoader.getTexture("PNG",
+				ResourceLoader.getResourceAsStream("res/images/" + imagePath));		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void unloadLevelImages()
+	{
+		ResourceLoader.
+		
+//		Texture t;
+//		t.release()
+		
+		//levelImages = null
+		
+	}
+	
+	
+	
+}

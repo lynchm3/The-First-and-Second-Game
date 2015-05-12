@@ -1,0 +1,24 @@
+package com.marklynch.notes;
+
+public class Settings {
+	
+	/*
+	 
+	 Player movement speed - normal, double, instant
+	 
+	 Screen edge panning
+	 
+	 full/windowed
+	 
+	 resolution
+	 
+	 FX volume
+	 Speach volume
+	 Music volume
+	 
+	 Space info window
+	 
+	 
+	 */
+
+}

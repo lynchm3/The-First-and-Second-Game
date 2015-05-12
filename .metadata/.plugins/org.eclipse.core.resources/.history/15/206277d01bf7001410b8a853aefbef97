@@ -1,0 +1,5 @@
+package com.marklynch.tactics.objects.level;
+
+public class Level {
+
+}

@@ -1,0 +1,16 @@
+package com.marklynch.utils;
+
+import java.util.HashMap;
+
+import org.newdawn.slick.opengl.Texture;
+
+public static class LoadedResources {
+
+	private static HashMap<String, Texture> globalImages;
+	private static HashMap<String, Texture> levelImages;
+	
+	private static
+	
+	
+	
+}

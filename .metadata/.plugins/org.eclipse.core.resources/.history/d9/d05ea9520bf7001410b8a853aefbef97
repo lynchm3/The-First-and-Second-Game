@@ -1,0 +1,10 @@
+package com.marklynch.utils;
+
+public class LoadedResources {
+
+	private static HashMap<String, Texture> globalImages;
+	private static HashMap<String, Texture> levelImages;
+	
+	
+	
+}
