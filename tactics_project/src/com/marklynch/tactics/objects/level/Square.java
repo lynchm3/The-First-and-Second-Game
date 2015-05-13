@@ -11,7 +11,7 @@ public class Square {
 	public final int x;
 	public final int y;
 	public int travelCost;
-	public boolean walkable = false;
+	public boolean reachableBySelectedCaharater = false;
 
 	// image
 	public String imagePath;

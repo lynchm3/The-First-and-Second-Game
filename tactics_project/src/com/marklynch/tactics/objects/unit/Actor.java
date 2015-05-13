@@ -46,7 +46,7 @@ public class Actor {
 		{
 			for(int j = 0; j<squares.length; j++)
 			{
-				squares[i][j].walkable = false;
+				squares[i][j].reachableBySelectedCaharater = false;
 			}
 		}
 		
@@ -99,7 +99,7 @@ public class Actor {
 		if(currentSquare != null && currentSquare.actor == null && !squaresInThisPath.contains(currentSquare))
 		{
 			squaresInThisPath.add(currentSquare);
-			currentSquare.walkable = true;
+			currentSquare.reachableBySelectedCaharater = true;
 			remainingDistance -= parentSquare.travelCost;			
 			if(remainingDistance > 0)
 			{
