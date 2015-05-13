@@ -42,6 +42,10 @@ public class art {
 	 
 	 make caroonized cars and shit, start populating a level and u'll feel better ;)
 	 
+	 shadows on objects
+	 
+	 Record the cartooning and saturation process so that u dont have to do it every time
+	 
 	 
 	 * 
 	 * 

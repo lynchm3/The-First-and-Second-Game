@@ -4,9 +4,9 @@ import java.util.Vector;
 
 public class Level {
 
-	int width;
-	int height;
-	private Square[][] squares;
+	public int width;
+	public int height;
+	public Square[][] squares;
 	
 //	java representation of a grid??
 //	2d array?
@@ -30,28 +30,14 @@ public class Level {
 		}
 	}
 
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public Square[][] getSquares() {
-		return squares;
-	}
-
-	public void setSquares(Square[][] squares) {
-		this.squares = squares;
+	public void removeWalkingHighlight() {
+		for(int i = 0; i<squares.length; i++)
+		{
+			for(int j = 0; j<squares.length; j++)
+			{
+				squares[i][j].walkable = false;
+			}
+		}
 	}
 	
 	

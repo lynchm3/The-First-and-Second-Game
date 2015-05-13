@@ -82,12 +82,12 @@ public class Game {
 		
 		//Actors
 		actors = new Vector<Actor>();
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.getSquares()[0][0]));
-		level.getSquares()[0][0].setActor(actors.get(0));
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.getSquares()[2][7]));
-		level.getSquares()[2][7].setActor(actors.get(1));
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.getSquares()[5][3]));
-		level.getSquares()[5][3].setActor(actors.get(2));
+		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[0][0]));
+		level.squares[0][0].actor = actors.get(0);
+		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[2][7]));
+		level.squares[2][7].actor = actors.get(1);
+		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[5][3]));
+		level.squares[5][3].actor = actors.get(2);
 		
 		//Cursor
 		gameCursor = new GameCursor("highlight.png");
@@ -139,33 +139,39 @@ public class Game {
 		if (mouseButtonStateLeft == false && Mouse.isButtonDown(0)) {
 			// CLICK
 			
-			Square squareClicked = level.getSquares()[(int) mouseXInSquares][(int) mouseYInSquares];
+			Square squareClicked = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
 
 			for (Actor actor : actors) {
-				if (actor.getSquare() == squareClicked) {
+				if (actor.squareActorIsStandingOn == squareClicked) {
 					selectedActor = actor;
-					selectedActor.calculateWalkableSquares(level.getSquares());
-					gameCursor.setSquare(selectedActor.getSquare());
+					selectedActor.calculateWalkableSquares(level.squares);
+					gameCursor.square = selectedActor.squareActorIsStandingOn;
 				}
 			}
 
 			
-			if (selectedActor != null && squareClicked.isWalkable()) {	
-				selectedActor.getSquare().setActor(null);
-				selectedActor.setSquare(squareClicked);
-				squareClicked.setActor(selectedActor);
-				gameCursor.setSquare(selectedActor
-						.getSquare());
-				System.out.println("squareClicked = " + squareClicked);
-				System.out.println("selectedActor = " + selectedActor);
-				System.out.println("selectedActor.getSquare() = " + selectedActor.getSquare());
-				System.out.println("selectedActor.getSquare().getX() = " + selectedActor.getSquare().getX());
+			if (selectedActor != null && squareClicked.walkable) {	
+				selectedActor.squareActorIsStandingOn.actor = null;
+				selectedActor.squareActorIsStandingOn = null;
+				selectedActor.squareActorIsStandingOn = squareClicked;
+				squareClicked.actor = selectedActor;
+				gameCursor.square = selectedActor.squareActorIsStandingOn;
+				selectedActor.calculateWalkableSquares(level.squares);
 			}
 
 			lastMoveTime = lastFPS;
 			mouseButtonStateLeft = true;
 		} else if (!Mouse.isButtonDown(0)) {
 			mouseButtonStateLeft = false;
+		}
+
+		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)) {
+			//right click
+			level.removeWalkingHighlight();
+			selectedActor = null;
+			mouseButtonStateRight = true;
+		} else if (!Mouse.isButtonDown(1)) {
+			mouseButtonStateRight = false;
 		}
 
 		if (keyStateLeft == false && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
@@ -259,13 +265,13 @@ public class Game {
 		GL11.glTranslatef(-windowWidth / 2, -windowHeight / 2, 0);
 
 		// Squares
-		for (int i = 0; i < level.getWidth(); i++) {
-			for (int j = 0; j < level.getHeight(); j++) {
+		for (int i = 0; i < level.width; i++) {
+			for (int j = 0; j < level.height; j++) {
 				// is it better to bind once and draw all the same ones
-				if(level.getSquares()[i][j].isWalkable())
-					gameCursor.getImageTexture().bind();					
+				if(level.squares[i][j].walkable)
+					gameCursor.imageTexture.bind();					
 				else
-					level.getSquares()[i][j].getImageTexture().bind();
+					level.squares[i][j].imageTexture.bind();
 
 				int squarePositionX = i * (int) squareWidth;
 				int squarePositionY = j * (int) squareHeight;
@@ -286,10 +292,10 @@ public class Game {
 
 		// Cursor
 		if (selectedActor != null) {
-			gameCursor.getImageTexture().bind();
-			int cursorPositionXInPixels = gameCursor.getSquare().getX()
+			gameCursor.imageTexture.bind();
+			int cursorPositionXInPixels = gameCursor.square.x
 					* (int) squareWidth;
-			int cursorPositionYInPixels = gameCursor.getSquare().getY()
+			int cursorPositionYInPixels = gameCursor.square.y
 					* (int) squareHeight;
 			GL11.glPushMatrix();
 			GL11.glBegin(GL11.GL_QUADS);
@@ -297,16 +303,16 @@ public class Game {
 			GL11.glVertex2f(cursorPositionXInPixels, cursorPositionYInPixels);
 			GL11.glTexCoord2f(1, 0);
 			GL11.glVertex2f(cursorPositionXInPixels
-					+ gameCursor.getImageTexture().getTextureWidth(),
+					+ gameCursor.imageTexture.getTextureWidth(),
 					cursorPositionYInPixels);
 			GL11.glTexCoord2f(1, 1);
 			GL11.glVertex2f(cursorPositionXInPixels
-					+ gameCursor.getImageTexture().getTextureWidth(),
+					+ gameCursor.imageTexture.getTextureWidth(),
 					cursorPositionYInPixels
-							+ gameCursor.getImageTexture().getTextureHeight());
+							+ gameCursor.imageTexture.getTextureHeight());
 			GL11.glTexCoord2f(0, 1);
 			GL11.glVertex2f(cursorPositionXInPixels, cursorPositionYInPixels
-					+ gameCursor.getImageTexture().getTextureHeight());
+					+ gameCursor.imageTexture.getTextureHeight());
 			GL11.glEnd();
 			GL11.glPopMatrix();
 		}
@@ -315,10 +321,10 @@ public class Game {
 
 		for(Actor actor : actors)
 		{
-			actor.getImageTexture().bind();
-			int actorPositionXInPixels = actor.getSquare().getX()
+			actor.imageTexture.bind();
+			int actorPositionXInPixels = actor.squareActorIsStandingOn.x
 					* (int) squareWidth;
-			int actorPositionYInPixels = actor.getSquare().getY()
+			int actorPositionYInPixels = actor.squareActorIsStandingOn.y
 					* (int) squareHeight;
 	
 			GL11.glPushMatrix();
@@ -327,16 +333,16 @@ public class Game {
 			GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels);
 			GL11.glTexCoord2f(1, 0);
 			GL11.glVertex2f(actorPositionXInPixels
-					+ actor.getImageTexture().getTextureWidth(),
+					+ actor.imageTexture.getTextureWidth(),
 					actorPositionYInPixels);
 			GL11.glTexCoord2f(1, 1);
 			GL11.glVertex2f(actorPositionXInPixels
-					+ actor.getImageTexture().getTextureWidth(),
+					+ actor.imageTexture.getTextureWidth(),
 					actorPositionYInPixels
-							+ actor.getImageTexture().getTextureHeight());
+							+ actor.imageTexture.getTextureHeight());
 			GL11.glTexCoord2f(0, 1);
 			GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels
-					+ actor.getImageTexture().getTextureHeight());
+					+ actor.imageTexture.getTextureHeight());
 			GL11.glEnd();
 			GL11.glPopMatrix();
 		}

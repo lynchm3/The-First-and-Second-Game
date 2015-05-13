@@ -646,6 +646,15 @@ public class Notes {
 	 Your decision need to have an effect on the final battle.
 	 Bosses that have weaknesses and aren't just impervious tanks.
 	 
+	 shadows on objects
+	 
+	 Move through ur own guys!?
+	 
+	 Record the cartooning and saturation process so that u dont have to do it every time
+	 
+	 Theres a nice little feature in TT where u press alt and it gives u a litte info box about whatever ur hovering over.
+	 Why didn't they use tab? i'll use tab...
+	 
 	 
 	
 	 *
