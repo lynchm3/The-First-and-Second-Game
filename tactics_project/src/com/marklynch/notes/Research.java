@@ -25,6 +25,7 @@ public class Research {
 	 wesnoth
 	 ff tactics
 	 massive chalice
+	 Wasteland 2!!!
 	 
 	 
 	 */

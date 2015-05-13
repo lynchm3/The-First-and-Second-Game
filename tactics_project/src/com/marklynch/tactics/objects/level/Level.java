@@ -25,7 +25,7 @@ public class Level {
 		{
 			for(int j = 0; j<height; j++)
 			{
-				squares[i][j] = new Square(i,j,"grass.png");
+				squares[i][j] = new Square(i,j,"grass.png",1);
 			}
 		}
 	}

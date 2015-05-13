@@ -628,6 +628,25 @@ public class Notes {
 	 Defenses maybe?
 	 
 	 custom mouse
+	 
+	 Underwater cool stuff...
+	 like that gtav mod.
+	 I dunno, I just liked the mod...
+	 
+	 An economy, track money, rather than magically have money appear and dissappear.
+	 
+	 You can have all ur characters in a mission, or find other things for them to do while on the mission.
+	 Send your thrief/scout on a recon mission elsewhere rather than having to protect them in a massive brawl
+	 Make this clear to the user.
+	 Same the other way around... if u've got a stealth mission maybe you only need one person, but your other peeps could be
+	 building defenses, or picking up missed goods, or improving relations...
+	 
+	 Stealing shit? (Like... from innocent people... not the baddies...)
+	 
+	 Your decision need to have an effect on the final battle.
+	 Bosses that have weaknesses and aren't just impervious tanks.
+	 
+	 
 	
 	 *
 	 *
