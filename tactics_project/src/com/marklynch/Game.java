@@ -31,8 +31,8 @@ public class Game {
 	Vector<Actor> actors;
 	Actor selectedActor = null;
 	Level level;
-	float squareWidth = 64f;
-	float squareHeight = 64f;
+	float squareWidth = 128f;
+	float squareHeight = 128f;
 
 	boolean keyStateLeft = false;
 	boolean keyStateRight = false;
@@ -41,10 +41,18 @@ public class Game {
 	boolean mouseButtonStateLeft = false;
 	boolean mouseButtonStateRight = false;
 
-	int windowWidth = 640;
+	int windowWidth = 1280;
 	int windowHeight = 640;
 
-	float zoom = 1.0f;
+	float zoom = 1f;
+
+	float dragX = 0;
+	float dragY = 0;
+	float mouseDownX = -1;
+	float mouseDownY = -1;
+	float mouseLastX = -1;
+	float mouseLastY = -1;
+	boolean dragging = false;
 
 	private void initGL(int width, int height) {
 		try {
@@ -77,19 +85,19 @@ public class Game {
 	 * Initialise resources
 	 */
 	public void init() {
-		//Level
+		// Level
 		level = new Level(10, 10);
-		
-		//Actors
+
+		// Actors
 		actors = new Vector<Actor>();
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.getSquares()[0][0]));
-		level.getSquares()[0][0].setActor(actors.get(0));
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.getSquares()[2][7]));
-		level.getSquares()[2][7].setActor(actors.get(1));
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.getSquares()[5][3]));
-		level.getSquares()[5][3].setActor(actors.get(2));
-		
-		//Cursor
+		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[0][0]));
+		level.squares[0][0].actor = actors.get(0);
+		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[2][7]));
+		level.squares[2][7].actor = actors.get(1);
+		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[5][3]));
+		level.squares[5][3].actor = actors.get(2);
+
+		// Cursor
 		gameCursor = new GameCursor("highlight.png");
 	}
 
@@ -122,10 +130,10 @@ public class Game {
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
 
-		float mouseXInSquares = (int) (((windowWidth / 2 - (windowWidth / 2)
-				/ zoom) + (mouseXinPixels / zoom)) / squareWidth);
-		float mouseYInSquares = (int) (((windowHeight / 2 - (windowHeight / 2)
-				/ zoom) + ((windowHeight - mouseYinPixels) / zoom)) / squareHeight);
+		float mouseXInSquares = (int) ((((windowWidth / 2) - dragX - (windowWidth / 2) / zoom) + (mouseXinPixels) / zoom)	/ squareWidth);
+		float mouseYInSquares = (int) (((windowHeight / 2 - dragY - (windowHeight / 2)	/ zoom) + (((windowHeight - mouseYinPixels)) / zoom)) / squareHeight);
+
+		// mouseYInSquares += Math.round((dragY/zoom)/squareHeight);
 
 		zoom += 0.001 * Mouse.getDWheel();
 		if (zoom < 0.5)
@@ -136,36 +144,73 @@ public class Game {
 		// if (dWheel != 0)
 		// System.out.println(dWheel);
 
-		if (mouseButtonStateLeft == false && Mouse.isButtonDown(0)) {
+		if (Mouse.isButtonDown(0)) {
+			if (mouseDownX == -1) {
+				mouseDownX = Mouse.getX();
+				mouseDownY = Mouse.getY();
+				mouseLastX = Mouse.getX();
+				mouseLastY = Mouse.getY();
+				dragging = false;
+			}
+			mouseButtonStateLeft = true;
+
+			if (Mouse.getX() - mouseDownX > 20
+					|| Mouse.getX() - mouseDownX < -20
+					|| Mouse.getY() - mouseDownY > 20
+					|| Mouse.getY() - mouseDownY < -20) {
+				dragging = true;
+				dragX += (Mouse.getX() - mouseLastX) / zoom;
+				dragY -= (Mouse.getY() - mouseLastY) / zoom;
+			}
+			mouseLastX = Mouse.getX();
+			mouseLastY = Mouse.getY();
+		}
+
+		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
+				&& dragging == false && (int) mouseXInSquares > -1
+				&& (int) mouseXInSquares < level.squares.length
+				&& (int) mouseYInSquares > -1
+				&& (int) mouseYInSquares < level.squares[0].length) {
 			// CLICK
-			
-			Square squareClicked = level.getSquares()[(int) mouseXInSquares][(int) mouseYInSquares];
+
+			Square squareClicked = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
 
 			for (Actor actor : actors) {
-				if (actor.getSquare() == squareClicked) {
+				if (actor.squareActorIsStandingOn == squareClicked) {
 					selectedActor = actor;
-					selectedActor.calculateWalkableSquares(level.getSquares());
-					gameCursor.setSquare(selectedActor.getSquare());
+					selectedActor.calculateWalkableSquares(level.squares);
+					gameCursor.square = selectedActor.squareActorIsStandingOn;
 				}
 			}
 
-			
-			if (selectedActor != null && squareClicked.isWalkable()) {	
-				selectedActor.getSquare().setActor(null);
-				selectedActor.setSquare(squareClicked);
-				squareClicked.setActor(selectedActor);
-				gameCursor.setSquare(selectedActor
-						.getSquare());
-				System.out.println("squareClicked = " + squareClicked);
-				System.out.println("selectedActor = " + selectedActor);
-				System.out.println("selectedActor.getSquare() = " + selectedActor.getSquare());
-				System.out.println("selectedActor.getSquare().getX() = " + selectedActor.getSquare().getX());
+			if (selectedActor != null
+					&& squareClicked.reachableBySelectedCaharater) {
+				selectedActor.squareActorIsStandingOn.actor = null;
+				selectedActor.squareActorIsStandingOn = null;
+				selectedActor.squareActorIsStandingOn = squareClicked;
+				squareClicked.actor = selectedActor;
+				gameCursor.square = selectedActor.squareActorIsStandingOn;
+				selectedActor.calculateWalkableSquares(level.squares);
 			}
 
 			lastMoveTime = lastFPS;
-			mouseButtonStateLeft = true;
+			mouseButtonStateLeft = false;
+
+			mouseDownX = -1;
+			mouseDownY = -1;
 		} else if (!Mouse.isButtonDown(0)) {
 			mouseButtonStateLeft = false;
+			mouseDownX = -1;
+			mouseDownY = -1;
+		}
+
+		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)) {
+			// right click
+			level.removeWalkingHighlight();
+			selectedActor = null;
+			mouseButtonStateRight = true;
+		} else if (!Mouse.isButtonDown(1)) {
+			mouseButtonStateRight = false;
 		}
 
 		if (keyStateLeft == false && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
@@ -254,18 +299,17 @@ public class Game {
 
 		// zoom
 		GL11.glPushMatrix();
+
 		GL11.glTranslatef(windowWidth / 2, windowHeight / 2, 0);
 		GL11.glScalef(zoom, zoom, 0);
+		GL11.glTranslatef(dragX, dragY, 0);
 		GL11.glTranslatef(-windowWidth / 2, -windowHeight / 2, 0);
 
 		// Squares
-		for (int i = 0; i < level.getWidth(); i++) {
-			for (int j = 0; j < level.getHeight(); j++) {
+		for (int i = 0; i < level.width; i++) {
+			for (int j = 0; j < level.height; j++) {
 				// is it better to bind once and draw all the same ones
-				if(level.getSquares()[i][j].isWalkable())
-					gameCursor.getImageTexture().bind();					
-				else
-					level.getSquares()[i][j].getImageTexture().bind();
+				level.squares[i][j].imageTexture.bind();
 
 				int squarePositionX = i * (int) squareWidth;
 				int squarePositionY = j * (int) squareHeight;
@@ -284,63 +328,83 @@ public class Game {
 			}
 		}
 
+		// Highlighted Squares
+		for (int i = 0; i < level.width; i++) {
+			for (int j = 0; j < level.height; j++) {
+				// is it better to bind once and draw all the same ones
+				if (level.squares[i][j].reachableBySelectedCaharater) {
+					gameCursor.imageTexture.bind();
+
+					int squarePositionX = i * (int) squareWidth;
+					int squarePositionY = j * (int) squareHeight;
+
+					GL11.glBegin(GL11.GL_QUADS);
+					GL11.glTexCoord2f(0, 0);
+					GL11.glVertex2f(squarePositionX, squarePositionY);
+					GL11.glTexCoord2f(1, 0);
+					GL11.glVertex2f(squarePositionX + squareWidth,
+							squarePositionY);
+					GL11.glTexCoord2f(1, 1);
+					GL11.glVertex2f(squarePositionX + squareWidth,
+							squarePositionY + squareHeight);
+					GL11.glTexCoord2f(0, 1);
+					GL11.glVertex2f(squarePositionX, squarePositionY
+							+ squareHeight);
+					GL11.glEnd();
+				}
+			}
+		}
+
 		// Cursor
 		if (selectedActor != null) {
-			gameCursor.getImageTexture().bind();
-			int cursorPositionXInPixels = gameCursor.getSquare().getX()
+			gameCursor.imageTexture.bind();
+			int cursorPositionXInPixels = gameCursor.square.x
 					* (int) squareWidth;
-			int cursorPositionYInPixels = gameCursor.getSquare().getY()
+			int cursorPositionYInPixels = gameCursor.square.y
 					* (int) squareHeight;
 			GL11.glPushMatrix();
 			GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2f(0, 0);
 			GL11.glVertex2f(cursorPositionXInPixels, cursorPositionYInPixels);
 			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2f(cursorPositionXInPixels
-					+ gameCursor.getImageTexture().getTextureWidth(),
+			GL11.glVertex2f(cursorPositionXInPixels + squareWidth,
 					cursorPositionYInPixels);
 			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2f(cursorPositionXInPixels
-					+ gameCursor.getImageTexture().getTextureWidth(),
-					cursorPositionYInPixels
-							+ gameCursor.getImageTexture().getTextureHeight());
+			GL11.glVertex2f(cursorPositionXInPixels + squareWidth,
+					cursorPositionYInPixels + squareHeight);
 			GL11.glTexCoord2f(0, 1);
 			GL11.glVertex2f(cursorPositionXInPixels, cursorPositionYInPixels
-					+ gameCursor.getImageTexture().getTextureHeight());
+					+ squareHeight);
 			GL11.glEnd();
 			GL11.glPopMatrix();
 		}
 
 		// Actor
 
-		for(Actor actor : actors)
-		{
-			actor.getImageTexture().bind();
-			int actorPositionXInPixels = actor.getSquare().getX()
+		for (Actor actor : actors) {
+			actor.imageTexture.bind();
+			int actorPositionXInPixels = actor.squareActorIsStandingOn.x
 					* (int) squareWidth;
-			int actorPositionYInPixels = actor.getSquare().getY()
+			int actorPositionYInPixels = actor.squareActorIsStandingOn.y
 					* (int) squareHeight;
-	
+
 			GL11.glPushMatrix();
 			GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2f(0, 0);
 			GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels);
 			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2f(actorPositionXInPixels
-					+ actor.getImageTexture().getTextureWidth(),
+			GL11.glVertex2f(actorPositionXInPixels + squareWidth,
 					actorPositionYInPixels);
 			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2f(actorPositionXInPixels
-					+ actor.getImageTexture().getTextureWidth(),
-					actorPositionYInPixels
-							+ actor.getImageTexture().getTextureHeight());
+			GL11.glVertex2f(actorPositionXInPixels + squareWidth,
+					actorPositionYInPixels + squareHeight);
 			GL11.glTexCoord2f(0, 1);
 			GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels
-					+ actor.getImageTexture().getTextureHeight());
+					+ squareHeight);
 			GL11.glEnd();
 			GL11.glPopMatrix();
 		}
-		
+
 		// zoom end
 		GL11.glPopMatrix();
 

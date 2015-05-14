@@ -2,10 +2,10 @@ package com.marklynch.tactics.objects.unit.abilities;
 
 public class Abilities {
 
-	int scout; //ncreases detail of briefing
-	int attack;
-	int defense;
-	int mind;
-	int knowledge; //ability to recognise stats and abilities of enemies
+	public int scout; //ncreases detail of briefing
+	public int attack;
+	public int defense;
+	public int mind;
+	public int knowledge; //ability to recognise stats and abilities of enemies
 	
 }

@@ -17,16 +17,16 @@ public class Actor {
 	}
 
 	// attributes
-	private int strength = 0;
-	private int dexterity = 0;
-	private int intelligence = 0;
-	private int endurance = 0;
-	private int travelDistance = 4;
+	public int strength = 0;
+	public int dexterity = 0;
+	public int intelligence = 0;
+	public int endurance = 0;
+	public int travelDistance = 4;
 
 	// image
-	private String imagePath = "";
-	private Texture imageTexture = null;
-	private Square squareActorIsStandingOn;
+	public String imagePath = "";
+	public Texture imageTexture = null;
+	public Square squareActorIsStandingOn;
 
 	public Actor(int strength, int dexterity, int intelligence, int endurance,
 			String imagePath, Square square) {
@@ -39,72 +39,14 @@ public class Actor {
 		this.imageTexture = loadGlobalImage(imagePath);
 		this.squareActorIsStandingOn = square;
 	}
-
-	public int getStrength() {
-		return strength;
-	}
-
-	public void setStrength(int strength) {
-		this.strength = strength;
-	}
-
-	public int getDexterity() {
-		return dexterity;
-	}
-
-	public void setDexterity(int dexterity) {
-		this.dexterity = dexterity;
-	}
-
-	public int getIntelligence() {
-		return intelligence;
-	}
-
-	public void setIntelligence(int intelligence) {
-		this.intelligence = intelligence;
-	}
-
-	public int getEndurance() {
-		return endurance;
-	}
-
-	public void setEndurance(int endurance) {
-		this.endurance = endurance;
-	}
-
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-
-	public Texture getImageTexture() {
-		return imageTexture;
-	}
-
-	public void setImageTexture(Texture imageTexture) {
-		this.imageTexture = imageTexture;
-	}
-
-	public Square getSquare() {
-		return squareActorIsStandingOn;
-	}
-
-	public void setSquare(Square square) {
-		this.squareActorIsStandingOn = square;
-	}
 	
 	public void calculateWalkableSquares(Square[][] squares)
 	{
-		
-		System.out.println("calculateWalkableSquares a");
 		for(int i = 0; i<squares.length; i++)
 		{
 			for(int j = 0; j<squares.length; j++)
 			{
-				squares[i][j].setWalkable(false);
+				squares[i][j].reachableBySelectedCaharater = false;
 			}
 		}
 		
@@ -126,43 +68,41 @@ public class Actor {
 		
 		if(direction == Direction.UP)
 		{
-			if(parentSquare.getY() - 1 >= 0)
+			if(parentSquare.y - 1 >= 0)
 			{
-				currentSquare = squares[parentSquare.getX()][parentSquare.getY() - 1];
+				currentSquare = squares[parentSquare.x][parentSquare.y - 1];
 			}
 		}
 		else if(direction == Direction.RIGHT)
 		{
-			if(parentSquare.getX() + 1 < squares.length)
+			if(parentSquare.x + 1 < squares.length)
 			{
-				currentSquare = squares[parentSquare.getX() + 1][parentSquare.getY()];
+				currentSquare = squares[parentSquare.x + 1][parentSquare.y];
 			}
 		}
 		else if(direction == Direction.DOWN)
 		{
 
-			if(parentSquare.getY() + 1 < squares[0].length)
+			if(parentSquare.y + 1 < squares[0].length)
 			{
-				currentSquare = squares[parentSquare.getX()][parentSquare.getY() + 1];
+				currentSquare = squares[parentSquare.x][parentSquare.y + 1];
 			}
 		}
 		else if(direction == Direction.LEFT)
 		{
-			if(parentSquare.getX() - 1 >= 0)
+			if(parentSquare.x - 1 >= 0)
 			{
-				currentSquare = squares[parentSquare.getX() - 1][parentSquare.getY()];
+				currentSquare = squares[parentSquare.x - 1][parentSquare.y];
 			}
 		}	
 		
-		if(currentSquare != null && currentSquare.getActor() == null && !squaresInThisPath.contains(currentSquare))
+		if(currentSquare != null && currentSquare.actor == null && !squaresInThisPath.contains(currentSquare))
 		{
-			System.out.println("calculateWalkableSquares c");
 			squaresInThisPath.add(currentSquare);
-			currentSquare.setWalkable(true);
-			remainingDistance -= parentSquare.getTravelCost();			
+			currentSquare.reachableBySelectedCaharater = true;
+			remainingDistance -= parentSquare.travelCost;			
 			if(remainingDistance > 0)
 			{
-				System.out.println("calculateWalkableSquares d");
 				calculateWalkableSquares(squares, remainingDistance, currentSquare, Direction.UP, squaresInThisPath);
 				calculateWalkableSquares(squares, remainingDistance, currentSquare, Direction.RIGHT, squaresInThisPath);
 				calculateWalkableSquares(squares, remainingDistance, currentSquare, Direction.DOWN, squaresInThisPath);

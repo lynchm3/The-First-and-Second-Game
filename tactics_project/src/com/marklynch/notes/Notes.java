@@ -652,6 +652,16 @@ public class Notes {
 	 What would work well with the gameplay?
 	 When were guns and bos and swords all in use at the same time - do an alternate rality of that time
 	 (SHOGUN!?!? :O )
+
+	 shadows on objects
+	 
+	 Move through ur own guys!?
+	 
+	 Record the cartooning and saturation process so that u dont have to do it every time
+	 
+	 Theres a nice little feature in TT where u press alt and it gives u a litte info box about whatever ur hovering over.
+	 Why didn't they use tab? i'll use tab...
+
 	 
 	 
 	
