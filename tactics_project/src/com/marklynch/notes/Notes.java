@@ -646,6 +646,13 @@ public class Notes {
 	 Your decision need to have an effect on the final battle.
 	 Bosses that have weaknesses and aren't just impervious tanks.
 	 
+	 Option to name saves, but default name to "%location %time"
+	 
+	 Don't settle on a setting til u have to ;)
+	 What would work well with the gameplay?
+	 When were guns and bos and swords all in use at the same time - do an alternate rality of that time
+	 (SHOGUN!?!? :O )
+	 
 	 
 	
 	 *
