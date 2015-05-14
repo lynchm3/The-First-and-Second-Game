@@ -83,7 +83,7 @@ public class Weapon {
 			}
 		}	
 		
-		if(currentSquare != null && currentSquare.actor == null && !squaresInThisPath.contains(currentSquare))
+		if(currentSquare != null && !squaresInThisPath.contains(currentSquare))
 		{
 			squaresInThisPath.add(currentSquare);
 			currentSquare.weaponsThatCanAttack.add(this);
