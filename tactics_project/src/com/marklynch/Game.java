@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.weapons.Weapon;
 
 public class Game {
 
@@ -90,15 +91,22 @@ public class Game {
 
 		// Actors
 		actors = new Vector<Actor>();
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[0][0]));
+		
+		Weapon weapon1ForActor1 = new Weapon(3,1, "avatar.png");
+		Weapon weapon2ForActor1 = new Weapon(2,2, "avatar.png");
+		Vector<Weapon> weaponsForActor1 = new Vector<Weapon>();
+		weaponsForActor1.add(weapon1ForActor1);
+		weaponsForActor1.add(weapon2ForActor1);
+		
+		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[0][0], weaponsForActor1));
 		level.squares[0][0].actor = actors.get(0);
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[2][7]));
+		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[2][7], new Vector<Weapon>()));
 		level.squares[2][7].actor = actors.get(1);
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[5][3]));
+		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[5][3], new Vector<Weapon>()));
 		level.squares[5][3].actor = actors.get(2);
 
 		// Cursor
-		gameCursor = new GameCursor("highlight.png");
+		gameCursor = new GameCursor("highlight.png", "highlight2.png");
 	}
 
 	public void start() {
@@ -175,22 +183,25 @@ public class Game {
 
 			Square squareClicked = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
 
+			
 			for (Actor actor : actors) {
 				if (actor.squareActorIsStandingOn == squareClicked) {
 					selectedActor = actor;
-					selectedActor.calculateWalkableSquares(level.squares);
+					selectedActor.calculateReachableSquares(level.squares);
+					selectedActor.calculateAttackableSquares(level.squares);
 					gameCursor.square = selectedActor.squareActorIsStandingOn;
 				}
 			}
 
 			if (selectedActor != null
-					&& squareClicked.reachableBySelectedCaharater) {
+					&& squareClicked.reachableBySelectedCharater) {
 				selectedActor.squareActorIsStandingOn.actor = null;
 				selectedActor.squareActorIsStandingOn = null;
 				selectedActor.squareActorIsStandingOn = squareClicked;
 				squareClicked.actor = selectedActor;
 				gameCursor.square = selectedActor.squareActorIsStandingOn;
-				selectedActor.calculateWalkableSquares(level.squares);
+				selectedActor.calculateReachableSquares(level.squares);
+				selectedActor.calculateAttackableSquares(level.squares);
 			}
 
 			lastMoveTime = lastFPS;
@@ -332,8 +343,13 @@ public class Game {
 		for (int i = 0; i < level.width; i++) {
 			for (int j = 0; j < level.height; j++) {
 				// is it better to bind once and draw all the same ones
-				if (level.squares[i][j].reachableBySelectedCaharater) {
-					gameCursor.imageTexture.bind();
+				if (level.squares[i][j].reachableBySelectedCharater
+						|| level.squares[i][j].weaponsThatCanAttack.size() > 0) {
+					
+					if (level.squares[i][j].reachableBySelectedCharater)
+						gameCursor.imageTexture.bind();
+					else
+						gameCursor.imageTexture2.bind();
 
 					int squarePositionX = i * (int) squareWidth;
 					int squarePositionY = j * (int) squareHeight;

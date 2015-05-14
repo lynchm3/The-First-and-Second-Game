@@ -2,6 +2,7 @@ package com.marklynch.tactics.objects.unit;
 
 import static com.marklynch.utils.LoadedResources.loadGlobalImage;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -9,6 +10,7 @@ import java.util.Vector;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.tactics.objects.weapons.Weapon;
 
 public class Actor {
 	
@@ -22,14 +24,20 @@ public class Actor {
 	public int intelligence = 0;
 	public int endurance = 0;
 	public int travelDistance = 4;
+	
+	//Inventory
+	public Vector<Weapon> weapons = new Vector<Weapon>();
+	
+	//Interaction with the level
+	public Square squareActorIsStandingOn = null;
 
 	// image
 	public String imagePath = "";
 	public Texture imageTexture = null;
-	public Square squareActorIsStandingOn;
+	
 
 	public Actor(int strength, int dexterity, int intelligence, int endurance,
-			String imagePath, Square square) {
+			String imagePath, Square square, Vector<Weapon> weapons) {
 		super();
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -38,15 +46,16 @@ public class Actor {
 		this.imagePath = imagePath;
 		this.imageTexture = loadGlobalImage(imagePath);
 		this.squareActorIsStandingOn = square;
+		this.weapons = weapons;
 	}
 	
-	public void calculateWalkableSquares(Square[][] squares)
+	public void calculateReachableSquares(Square[][] squares)
 	{
 		for(int i = 0; i<squares.length; i++)
 		{
 			for(int j = 0; j<squares.length; j++)
 			{
-				squares[i][j].reachableBySelectedCaharater = false;
+				squares[i][j].reachableBySelectedCharater = false;
 			}
 		}
 		
@@ -55,14 +64,14 @@ public class Actor {
 		
 		if(travelDistance > 0)
 		{
-			calculateWalkableSquares(squares, this.travelDistance, this.squareActorIsStandingOn, Direction.UP, squaresInThisPath);
-			calculateWalkableSquares(squares, this.travelDistance, this.squareActorIsStandingOn, Direction.RIGHT, squaresInThisPath);
-			calculateWalkableSquares(squares, this.travelDistance, this.squareActorIsStandingOn, Direction.DOWN, squaresInThisPath);
-			calculateWalkableSquares(squares, this.travelDistance, this.squareActorIsStandingOn, Direction.LEFT, squaresInThisPath);
+			calculateReachableSquares(squares, this.travelDistance, this.squareActorIsStandingOn, Direction.UP, squaresInThisPath);
+			calculateReachableSquares(squares, this.travelDistance, this.squareActorIsStandingOn, Direction.RIGHT, squaresInThisPath);
+			calculateReachableSquares(squares, this.travelDistance, this.squareActorIsStandingOn, Direction.DOWN, squaresInThisPath);
+			calculateReachableSquares(squares, this.travelDistance, this.squareActorIsStandingOn, Direction.LEFT, squaresInThisPath);
 		}
 	}
 	
-	public void calculateWalkableSquares(Square[][] squares, int remainingDistance, Square parentSquare, Direction direction, Vector<Square> squaresInThisPath)
+	public void calculateReachableSquares(Square[][] squares, int remainingDistance, Square parentSquare, Direction direction, Vector<Square> squaresInThisPath)
 	{
 		Square currentSquare = null;
 		
@@ -99,20 +108,33 @@ public class Actor {
 		if(currentSquare != null && currentSquare.actor == null && !squaresInThisPath.contains(currentSquare))
 		{
 			squaresInThisPath.add(currentSquare);
-			currentSquare.reachableBySelectedCaharater = true;
+			currentSquare.reachableBySelectedCharater = true;
 			remainingDistance -= parentSquare.travelCost;			
 			if(remainingDistance > 0)
 			{
-				calculateWalkableSquares(squares, remainingDistance, currentSquare, Direction.UP, squaresInThisPath);
-				calculateWalkableSquares(squares, remainingDistance, currentSquare, Direction.RIGHT, squaresInThisPath);
-				calculateWalkableSquares(squares, remainingDistance, currentSquare, Direction.DOWN, squaresInThisPath);
-				calculateWalkableSquares(squares, remainingDistance, currentSquare, Direction.LEFT, squaresInThisPath);
+				calculateReachableSquares(squares, remainingDistance, currentSquare, Direction.UP, squaresInThisPath);
+				calculateReachableSquares(squares, remainingDistance, currentSquare, Direction.RIGHT, squaresInThisPath);
+				calculateReachableSquares(squares, remainingDistance, currentSquare, Direction.DOWN, squaresInThisPath);
+				calculateReachableSquares(squares, remainingDistance, currentSquare, Direction.LEFT, squaresInThisPath);
 			}
 			squaresInThisPath.remove(currentSquare);
 		}
 		
 	}
 	
-	
-
+	public void calculateAttackableSquares(Square[][] squares)
+	{
+		for(int i = 0; i<squares.length; i++)
+		{
+			for(int j = 0; j<squares.length; j++)
+			{
+				squares[i][j].weaponsThatCanAttack = new Vector<Weapon>();
+			}
+		}
+		
+		for(Weapon weapon : weapons)
+		{
+			weapon.calculateAttackableSquares(squares);
+		}
+	}
 }

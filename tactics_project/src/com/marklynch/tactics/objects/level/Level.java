@@ -35,7 +35,7 @@ public class Level {
 		{
 			for(int j = 0; j<squares.length; j++)
 			{
-				squares[i][j].reachableBySelectedCaharater = false;
+				squares[i][j].reachableBySelectedCharater = false;
 			}
 		}
 	}
