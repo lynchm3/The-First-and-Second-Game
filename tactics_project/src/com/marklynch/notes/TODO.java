@@ -26,6 +26,9 @@ public class TODO {
 		//Color blue/red/yellow depending on how u'll do
 		
 	
+	//watch the fire emblem battle animations, the 3d ones are pretty good
+	//one where the screen turned red and black...
+	
 	//DONE
 	
 }
