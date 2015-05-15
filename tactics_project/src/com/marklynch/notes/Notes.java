@@ -646,6 +646,13 @@ public class Notes {
 	 Your decision need to have an effect on the final battle.
 	 Bosses that have weaknesses and aren't just impervious tanks.
 	 
+	 Option to name saves, but default name to "%location %time"
+	 
+	 Don't settle on a setting til u have to ;)
+	 What would work well with the gameplay?
+	 When were guns and bos and swords all in use at the same time - do an alternate rality of that time
+	 (SHOGUN!?!? :O )
+
 	 shadows on objects
 	 
 	 Move through ur own guys!?
@@ -654,6 +661,7 @@ public class Notes {
 	 
 	 Theres a nice little feature in TT where u press alt and it gives u a litte info box about whatever ur hovering over.
 	 Why didn't they use tab? i'll use tab...
+
 	 
 	 When THAT person turns to look at u, their body should still be facing sideways and they just turn their head
 	 maybe turn their head a little bit and let their eyes do the work

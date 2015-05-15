@@ -10,11 +10,13 @@ public class GameCursor {
 	
 	public String imagePath = "";
 	public Texture imageTexture = null;
+	public Texture imageTexture2 = null;
 	public Square square = null;
 	
-	public GameCursor(String imagePath)
+	public GameCursor(String imagePath, String imagePath2)
 	{
 		this.imagePath = imagePath;
 		this.imageTexture = loadGlobalImage(imagePath);
+		this.imageTexture2 = loadGlobalImage(imagePath2);
 	}
 }
