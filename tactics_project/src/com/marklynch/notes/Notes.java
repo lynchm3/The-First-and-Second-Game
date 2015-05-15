@@ -655,6 +655,61 @@ public class Notes {
 	 Theres a nice little feature in TT where u press alt and it gives u a litte info box about whatever ur hovering over.
 	 Why didn't they use tab? i'll use tab...
 	 
+	 When THAT person turns to look at u, their body should still be facing sideways and they just turn their head
+	 maybe turn their head a little bit and let their eyes do the work
+	 Maybe tilt their head down a bit so that theyre looking up at you
+	 
+	 a level thats different, messes with lights and shadow
+	 
+	 maybe everyone wears masks? good way to get around model release, i wonder if there's a mask museum...
+	 at the very least have one character that wears a mask
+	 Is there a photoshop effect for making a mask... out of a face or something?
+	 OR maybe... use masks and try to make them look like normal human faces... that'd give a really creepy look
+	 
+	 a disfigured characet maybe the mask character?
+	 the character who's disfigured houldnt be the obvious ones - torturer, fighter etc.
+	 maybe there's a story event where u can convince them to take off their maks
+	 
+	 ALL SPEACH EVENTS SHOULD END UP WITH SOME STAT GOING UP
+	 maybe their trainign with eachother
+	 or learning to pick locks
+	 or their speach ability goes up...
+	 
+	 Stats go up as they're used?! SKRMMMM
+	 
+	 Check pixabay for artistic shit too
+	 and for enviroments
+	 and everything i need
+	 I should find what i need, or sometimes a better alternative, or get my crativity running
+	 
+	 look at chroma squad animations
+	 
+	 a disease outbreak (pathalogical)
+	 
+	 rps on patholigic
+	 http://www.rockpapershotgun.com/2014/10/05/pathologic-review/
+	 "Kieron’s talked before about how Deus Ex is one of the few games ever to have characters who actually lie to you. Not huge, pantomime deceptions, but little half-truths and tricks delivered deadpan by those you consider to be your friends," -- rps
+	 Player needs closure it says, need to know who lied and why, is this true??
+	 "in Pathologic absolutely everybody has an angle, everyone’s bending the truth and trying to twist you round their fingers, and the developers can do this because they have two whole other narratives to explain why."
+	 "As you’re scrambling from one location to the next there are a few buildings which aren’t going to escape your attention. First, there’s the Abattoir. "
+	 "the Polyhedron is a mammoth angular structure resembling an Escher-like interpretation of a conch seashell stuck into the ground by the pointy end. The physics of it are impossible. The town’s children have recently commandeered it, keeping the door locked to everyone except other children."
+	 "A lot of people are aware of the game design trick where you show the player something they can’t access at the beginning of the game, so it sticks in the back of their mind until eventually you grace them with the ability to go back and get it. These buildings in Pathologic take that idea and run with it, sprint with it, go skydiving with it. For most of the game these structures are brooding over you, their contents a dark mystery, and half of everything you learn about the town relates to them in some way."
+	 "For instance, you hear that the meat-men inside the Abattoir think of themselves as an animal brotherhood. And you hear that inmates have been wrenching themselves out of the Aviary’s windows, trying to escape something inside. You hear the smaller children of the Polyhedron have been sent out into the town to gather powders and pills for the big kids. These black rumours are endless, and the more you hear the more fascinating and terrifying these buildings become. Yet as much as you don’t want to go inside them, the fact that you can’t enter them anyway makes them oh-so-intriguing. Ain’t human nature a drag."
+	 
+	 items only where they make sense to be
+	 
+	 location summaries show if theyre clear or shit needs to be done (chests, new quests, quest location, new recruit...) 
+	 also show if those new things are available to u now. do u have the ability to open the chest
+	 show "ALL CLEAR" (or better wording) when the whole area is done
+	 
+	 Look at those big headed weirdos in pathologic :D
+	 
+	 
+	 
+	 SOmeone whos wears a balaclava
+	 
+	 google photoshop profile tutorial
+	 
 	 
 	
 	 *

@@ -44,7 +44,7 @@ public class Game {
 	int windowWidth = 1280;
 	int windowHeight = 640;
 
-	float zoom = 1f;
+	float zoom = 0.5f;
 
 	float dragX = 0;
 	float dragY = 0;
