@@ -10,6 +10,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -27,13 +28,12 @@ public class Game {
 
 	long lastMoveTime = 0l;
 	long timeBetweenMoveCommands = 1l;
-
-	GameCursor gameCursor;
-	Vector<Actor> actors;
-	Actor selectedActor = null;
 	Level level;
 	float squareWidth = 128f;
 	float squareHeight = 128f;
+	
+
+
 
 	boolean keyStateLeft = false;
 	boolean keyStateRight = false;
@@ -90,7 +90,7 @@ public class Game {
 		level = new Level(10, 10);
 
 		// Actors
-		actors = new Vector<Actor>();
+		level.actors = new Vector<Actor>();
 		
 		Weapon weapon1ForActor1 = new Weapon(3,1, "avatar.png");
 		Weapon weapon2ForActor1 = new Weapon(2,2, "avatar.png");
@@ -98,15 +98,17 @@ public class Game {
 		weaponsForActor1.add(weapon1ForActor1);
 		weaponsForActor1.add(weapon2ForActor1);
 		
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[0][0], weaponsForActor1));
-		level.squares[0][0].actor = actors.get(0);
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[2][7], new Vector<Weapon>()));
-		level.squares[2][7].actor = actors.get(1);
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[5][3], new Vector<Weapon>()));
-		level.squares[5][3].actor = actors.get(2);
+		level.actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[0][0], weaponsForActor1));
+		level.actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[2][7], new Vector<Weapon>()));
+		level.actors.add(new Actor(0, 0, 0, 0, "avatar.png", level.squares[5][3], new Vector<Weapon>()));
+		
+		//Game Objects
+		level.gameObjects = new Vector<GameObject>();
+		level.gameObjects.add(new GameObject(0, 0, 0, 0, "skip.png", level.squares[3][3], weaponsForActor1));
+		
 
 		// Cursor
-		gameCursor = new GameCursor("highlight.png", "highlight2.png");
+		level.gameCursor = new GameCursor("highlight.png", "highlight2.png");
 	}
 
 	public void start() {
@@ -184,24 +186,24 @@ public class Game {
 			Square squareClicked = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
 
 			
-			for (Actor actor : actors) {
+			for (Actor actor : level.actors) {
 				if (actor.squareActorIsStandingOn == squareClicked) {
-					selectedActor = actor;
-					selectedActor.calculateReachableSquares(level.squares);
-					selectedActor.calculateAttackableSquares(level.squares);
-					gameCursor.square = selectedActor.squareActorIsStandingOn;
+					level.selectedActor = actor;
+					level.selectedActor.calculateReachableSquares(level.squares);
+					level.selectedActor.calculateAttackableSquares(level.squares);
+					level.gameCursor.square = level.selectedActor.squareActorIsStandingOn;
 				}
 			}
 
-			if (selectedActor != null
+			if (level.selectedActor != null
 					&& squareClicked.reachableBySelectedCharater) {
-				selectedActor.squareActorIsStandingOn.actor = null;
-				selectedActor.squareActorIsStandingOn = null;
-				selectedActor.squareActorIsStandingOn = squareClicked;
-				squareClicked.actor = selectedActor;
-				gameCursor.square = selectedActor.squareActorIsStandingOn;
-				selectedActor.calculateReachableSquares(level.squares);
-				selectedActor.calculateAttackableSquares(level.squares);
+				level.selectedActor.squareActorIsStandingOn.actor = null;
+				level.selectedActor.squareActorIsStandingOn = null;
+				level.selectedActor.squareActorIsStandingOn = squareClicked;
+				squareClicked.actor = level.selectedActor;
+				level.gameCursor.square = level.selectedActor.squareActorIsStandingOn;
+				level.selectedActor.calculateReachableSquares(level.squares);
+				level.selectedActor.calculateAttackableSquares(level.squares);
 			}
 
 			lastMoveTime = lastFPS;
@@ -218,7 +220,7 @@ public class Game {
 		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)) {
 			// right click
 			level.removeWalkingHighlight();
-			selectedActor = null;
+			level.selectedActor = null;
 			mouseButtonStateRight = true;
 		} else if (!Mouse.isButtonDown(1)) {
 			mouseButtonStateRight = false;
@@ -347,9 +349,9 @@ public class Game {
 						|| level.squares[i][j].weaponsThatCanAttack.size() > 0) {
 					
 					if (level.squares[i][j].reachableBySelectedCharater)
-						gameCursor.imageTexture.bind();
+						level.gameCursor.imageTexture.bind();
 					else
-						gameCursor.imageTexture2.bind();
+						level.gameCursor.imageTexture2.bind();
 
 					int squarePositionX = i * (int) squareWidth;
 					int squarePositionY = j * (int) squareHeight;
@@ -372,11 +374,11 @@ public class Game {
 		}
 
 		// Cursor
-		if (selectedActor != null) {
-			gameCursor.imageTexture.bind();
-			int cursorPositionXInPixels = gameCursor.square.x
+		if (level.selectedActor != null) {
+			level.gameCursor.imageTexture.bind();
+			int cursorPositionXInPixels = level.gameCursor.square.x
 					* (int) squareWidth;
-			int cursorPositionYInPixels = gameCursor.square.y
+			int cursorPositionYInPixels = level.gameCursor.square.y
 					* (int) squareHeight;
 			GL11.glPushMatrix();
 			GL11.glBegin(GL11.GL_QUADS);
@@ -395,9 +397,35 @@ public class Game {
 			GL11.glPopMatrix();
 		}
 
-		// Actor
+		// Objects
 
-		for (Actor actor : actors) {
+		for (GameObject gameObject : level.gameObjects) {
+			gameObject.imageTexture.bind();
+			int actorPositionXInPixels = gameObject.squareGameObjectIsOn.x
+					* (int) squareWidth;
+			int actorPositionYInPixels = gameObject.squareGameObjectIsOn.y
+					* (int) squareHeight;
+
+			GL11.glPushMatrix();
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels);
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex2f(actorPositionXInPixels + squareWidth,
+					actorPositionYInPixels);
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex2f(actorPositionXInPixels + squareWidth,
+					actorPositionYInPixels + squareHeight);
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels
+					+ squareHeight);
+			GL11.glEnd();
+			GL11.glPopMatrix();
+		}
+
+		// Actors
+
+		for (Actor actor : level.actors) {
 			actor.imageTexture.bind();
 			int actorPositionXInPixels = actor.squareActorIsStandingOn.x
 					* (int) squareWidth;

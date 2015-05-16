@@ -1,9 +1,0 @@
-package com.marklynch.notes;
-
-public class TODO {
-	
-	//draw background
-	//draw character
-	//move character around the screen
-
-}

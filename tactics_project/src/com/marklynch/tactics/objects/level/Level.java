@@ -2,10 +2,18 @@ package com.marklynch.tactics.objects.level;
 
 import java.util.Vector;
 
+import com.marklynch.GameCursor;
+import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.unit.Actor;
+
 public class Level {
 
 	public int width;
 	public int height;
+	public GameCursor gameCursor;
+	public Vector<Actor> actors;
+	public Actor selectedActor = null;
+	public Vector<GameObject> gameObjects;
 	public Square[][] squares;
 	
 //	java representation of a grid??

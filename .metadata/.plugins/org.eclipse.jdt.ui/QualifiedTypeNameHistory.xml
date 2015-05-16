@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.marklynch.tactics.objects.unit.abilities.Actor"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.opengl.Texture"/>
-<fullyQualifiedTypeName name="java.util.Vector"/>
-<fullyQualifiedTypeName name="com.marklynch.tactics.objects.level.Level"/>
-<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
-<fullyQualifiedTypeName name="org.lwjgl.input.Mouse"/>
-</qualifiedTypeNameHistroy>

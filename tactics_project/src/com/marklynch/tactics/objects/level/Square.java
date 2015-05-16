@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import org.newdawn.slick.opengl.Texture;
 
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 
@@ -20,8 +21,9 @@ public class Square {
 	// image
 	public String imagePath;
 	public Texture imageTexture = null;
-	
+
 	public Actor actor = null;
+	public GameObject gameObject = null;
 	
 	
 

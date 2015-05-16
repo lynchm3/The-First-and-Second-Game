@@ -37,7 +37,7 @@ public class Actor {
 	
 
 	public Actor(int strength, int dexterity, int intelligence, int endurance,
-			String imagePath, Square square, Vector<Weapon> weapons) {
+			String imagePath, Square squareActorIsStandingOn, Vector<Weapon> weapons) {
 		super();
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -45,8 +45,9 @@ public class Actor {
 		this.endurance = endurance;
 		this.imagePath = imagePath;
 		this.imageTexture = loadGlobalImage(imagePath);
-		this.squareActorIsStandingOn = square;
+		this.squareActorIsStandingOn = squareActorIsStandingOn;
 		this.weapons = weapons;
+		this.squareActorIsStandingOn.actor = this;
 	}
 	
 	public void calculateReachableSquares(Square[][] squares)
@@ -105,7 +106,7 @@ public class Actor {
 			}
 		}	
 		
-		if(currentSquare != null && currentSquare.actor == null && !squaresInThisPath.contains(currentSquare))
+		if(currentSquare != null && currentSquare.actor == null && !squaresInThisPath.contains(currentSquare) && currentSquare.gameObject == null)
 		{
 			squaresInThisPath.add(currentSquare);
 			currentSquare.reachableBySelectedCharater = true;

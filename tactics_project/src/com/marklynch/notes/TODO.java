@@ -11,6 +11,14 @@ public class TODO {
 	//convert to cm/inches for mouse dragging calculation!?
 	//calc reachable and attackable squares is being called twice in update...
 	
+	//route drawer(the route is sorta worked out when u finding which squares are available to to) (when we end on a square could have routeTo.add(this.squaresInPath.clone)
+	////WAIT... need to add ROUTETO even if square is not at the end of a route :D
+	//For now I could just highlight squares in the route, draw the lines and arrows later
+	//route drawn needs to show how many steps it takes... probably... i think..... or how many u'll have left????
+	//dialogs
+	//factions
+	//attacking
+	
 	//Weapons and weapon reach
 	//On the square for weapon reach draw
 		//How it will compare to the enemey
@@ -33,5 +41,6 @@ public class TODO {
 	//Take a photo of ur own face u dork!!
 	
 	//DONE
+	//impassable objects
 	
 }
