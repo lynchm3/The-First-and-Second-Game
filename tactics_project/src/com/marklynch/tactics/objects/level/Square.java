@@ -10,6 +10,7 @@ import org.newdawn.slick.opengl.Texture;
 import com.marklynch.Dialog;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 
 public class Square {
@@ -26,6 +27,8 @@ public class Square {
 	public Texture imageTexture = null;
 	public GameObject gameObject = null;
 	public Vector<Dialog> dialogs;
+
+	public boolean showingDialogs = false;
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation) {
 		super();
@@ -93,12 +96,38 @@ public class Square {
 	}
 
 	public void showDialogs() {
-		dialogs.add(new Dialog(this, 200, 100, "dialogbg.png",
+		dialogs.add(new Dialog(this, 200, 200, "dialogbg.png",
 				"KeepCalm-Medium.ttf"));
+		showingDialogs = true;
+	}
+
+	public void clearDialogs() {
+		dialogs.clear();
+		showingDialogs = false;
 	}
 
 	public String[] getDetails() {
-		return new String[] { "" + x + " , " + y,
-				"\nTravel Cost = " + travelCost, "\nElevation = " + elevation };
+
+		if (this.gameObject == null) {
+			// Nothing on the square
+			return new String[] { "" + x + " , " + y,
+					"\nTravel Cost = " + travelCost,
+					"\nElevation = " + elevation, "(Click again to dismiss)" };
+		} else if (this.gameObject instanceof Actor) {
+			// Actor on the square
+			Actor actor = (Actor) this.gameObject;
+			return new String[] { "" + x + " , " + y,
+					"\nTravel Cost = " + travelCost,
+					"\nElevation = " + elevation, "" + actor.name,
+					"lvl" + actor.level + " " + actor.title,
+					"(Click again to dismiss)" };
+
+		} else {
+			// Object on the square
+			return new String[] { "" + x + " , " + y,
+					"\nTravel Cost = " + travelCost,
+					"\nElevation = " + elevation, "(Click again to dismiss)" };
+
+		}
 	}
 }

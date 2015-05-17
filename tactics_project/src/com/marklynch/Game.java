@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.ui.Button;
 
 public class Game {
 
@@ -158,6 +159,7 @@ public class Game {
 			mouseLastY = Mouse.getY();
 		}
 
+		Button buttonClicked = null;
 		Square squareClicked = null;
 		if ((int) mouseXInSquares > -1
 				&& (int) mouseXInSquares < level.squares.length
@@ -166,7 +168,14 @@ public class Game {
 			squareClicked = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
 		}
 
+		if (dragging == false) {
+			buttonClicked = level.getButtonFromMousePosition();
+		}
+
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
+				&& dragging == false && buttonClicked != null) {
+			buttonClicked.click();
+		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && squareClicked != null) {
 			// CLICK
 
@@ -192,15 +201,17 @@ public class Game {
 				level.selectedActor.calculateAttackableSquares(level.squares);
 			}
 
-			lastMoveTime = lastFPS;
 			mouseButtonStateLeft = false;
 
 			mouseDownX = -1;
 			mouseDownY = -1;
-		} else if (!Mouse.isButtonDown(0)) {
+		}
+
+		if (!Mouse.isButtonDown(0)) {
 			mouseButtonStateLeft = false;
 			mouseDownX = -1;
 			mouseDownY = -1;
+			lastMoveTime = lastFPS;
 		}
 
 		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)) {
@@ -211,7 +222,10 @@ public class Game {
 				level.removeWeaponsThatCanAttackHighlight();
 				level.selectedActor = null;
 			} else if (squareClicked != null) {
-				squareClicked.showDialogs();
+				if (squareClicked.showingDialogs == false)
+					squareClicked.showDialogs();
+				else
+					squareClicked.clearDialogs();
 
 				// level.dialogs.addElement(new Dialog(Mouse.getX(),
 				// windowHeight-Mouse.getY(),64,64,"marlene.png"));

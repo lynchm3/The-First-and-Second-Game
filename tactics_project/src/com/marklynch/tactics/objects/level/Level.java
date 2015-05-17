@@ -2,6 +2,7 @@ package com.marklynch.tactics.objects.level;
 
 import java.util.Vector;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.marklynch.Dialog;
@@ -10,6 +11,7 @@ import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.ui.Button;
 
 public class Level {
 
@@ -21,6 +23,7 @@ public class Level {
 	public Vector<GameObject> gameObjects;
 	public Vector<Dialog> dialogs;
 	public Square[][] squares;
+	public Button endTurnButton;
 
 	// java representation of a grid??
 	// 2d array?
@@ -32,6 +35,8 @@ public class Level {
 		initGrid();
 		initObjects();
 		dialogs = new Vector<Dialog>();
+		endTurnButton = new Button(Game.windowWidth - 210,
+				Game.windowHeight - 110, 200, 100, "end_turn_button.png");
 	}
 
 	private void initGrid() {
@@ -53,12 +58,12 @@ public class Level {
 		weaponsForActor1.add(weapon1ForActor1);
 		weaponsForActor1.add(weapon2ForActor1);
 
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", squares[0][0],
-				weaponsForActor1));
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", squares[2][7],
-				new Vector<Weapon>()));
-		actors.add(new Actor(0, 0, 0, 0, "avatar.png", squares[5][3],
-				new Vector<Weapon>()));
+		actors.add(new Actor("John Lennon", "Fighter", 1, 0, 0, 0, 0,
+				"avatar.png", squares[0][0], weaponsForActor1));
+		actors.add(new Actor("Paul McCartney", "Maniac", 2, 0, 0, 0, 0,
+				"avatar.png", squares[2][7], new Vector<Weapon>()));
+		actors.add(new Actor("George Harrison", "Thief", 3, 0, 0, 0, 0,
+				"avatar.png", squares[5][3], new Vector<Weapon>()));
 
 		// Game Objects
 		gameObjects = new Vector<GameObject>();
@@ -141,13 +146,16 @@ public class Level {
 		// zoom end
 		GL11.glPopMatrix();
 
-		// Squares
+		// Dialogs
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				// is it better to bind once and draw all the same ones?
 				squares[i][j].drawDialogs();
 			}
 		}
+
+		// End Turn Button
+		endTurnButton.draw();
 	}
 
 	public void clearDialogs() {
@@ -159,5 +167,18 @@ public class Level {
 				squares[i][j].dialogs.clear();
 			}
 		}
+	}
+
+	public Button getButtonFromMousePosition() {
+
+		if (Mouse.getX() > endTurnButton.x
+				&& Mouse.getX() < endTurnButton.x + endTurnButton.width
+				&& Game.windowHeight - Mouse.getY() > endTurnButton.y
+				&& Game.windowHeight - Mouse.getY() < endTurnButton.y
+						+ endTurnButton.height) {
+
+			return endTurnButton;
+		}
+		return null;
 	}
 }

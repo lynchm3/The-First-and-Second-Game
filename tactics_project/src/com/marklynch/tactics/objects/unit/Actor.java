@@ -12,11 +12,18 @@ public class Actor extends GameObject {
 		UP, RIGHT, DOWN, LEFT
 	}
 
-	public Actor(int strength, int dexterity, int intelligence, int endurance,
-			String imagePath, Square squareActorIsStandingOn,
-			Vector<Weapon> weapons) {
+	public String title = "";
+	public int level = 1;
+	public String name = "";
+
+	public Actor(String name, String title, int level, int strength,
+			int dexterity, int intelligence, int endurance, String imagePath,
+			Square squareActorIsStandingOn, Vector<Weapon> weapons) {
 		super(strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, weapons);
+		this.name = name;
+		this.title = title;
+		this.level = level;
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {

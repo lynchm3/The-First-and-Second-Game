@@ -758,8 +758,10 @@ public class Notes {
 	 * right click is annoying me, need a third button :P. DESELECT VS SHOW
 	 * INFO.....
 	 * 
-	 * Character Title - Maniac Being able to change character titles is really
-	 * cool If u plan on reporposing someone, u can rename their title and
+	 * Character Title - Maniac
+	 * 
+	 * Being able to change character titles is really cool If u plan on
+	 * reporposing someone, u can rename their title and
 	 * *******BOOM*****......... now u know what way to lvl them up
 	 * 
 	 * Ways to effect other factions thoughts on eachother -send peeps on
@@ -771,6 +773,24 @@ public class Notes {
 	 * 9patch for dialogs? :/ NAH, well... kinda :/
 	 * 
 	 * A bit of fecking transparency on the ol' dialog there...
+	 * 
+	 * show moves left on character
+	 * 
+	 * transparency on the dialog
+	 * 
+	 * japanese writing, maybe for a brand.
+	 * 
+	 * Neon glow style (future punk shite?)
+	 * 
+	 * 
+	 * Flat AF style it the way to go. look up androids style guidelines or iOS
+	 * or web, fucking flat is now
+	 * 
+	 * Hover and down states for buttons and items and squares and characters.
+	 * WOuld be so cool if characters moved on the spot when u hovered over them
+	 * (i can imagine fire embem does this), ye in fire emblem awakening they're
+	 * all constantly moving, and then they move MORE when u hover over or
+	 * select them
 	 */
 
 }

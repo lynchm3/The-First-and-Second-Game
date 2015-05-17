@@ -4,6 +4,8 @@ public class TODO {
 
 	// TO DO
 
+	// turns + teams
+
 	// Maybe you could get the getGlobalImage etc. actually running from memory
 	// when the object is already loaded? :D
 	// The lookup on the map definitely doesnt work :D ur an idiot.
