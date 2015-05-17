@@ -4,6 +4,8 @@ import java.util.Vector;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 
 import com.marklynch.Dialog;
 import com.marklynch.Game;
@@ -12,6 +14,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.Button;
+import com.marklynch.utils.Resources;
 
 public class Level {
 
@@ -24,6 +27,8 @@ public class Level {
 	public Vector<Dialog> dialogs;
 	public Square[][] squares;
 	public Button endTurnButton;
+	public int turn = 1;
+	public TrueTypeFont font;
 
 	// java representation of a grid??
 	// 2d array?
@@ -36,7 +41,8 @@ public class Level {
 		initObjects();
 		dialogs = new Vector<Dialog>();
 		endTurnButton = new Button(Game.windowWidth - 210,
-				Game.windowHeight - 110, 200, 100, "end_turn_button.png");
+				Game.windowHeight - 110, 200, 100, "end_turn_button.png", this);
+		font = Resources.getGlobalFont("KeepCalm-Medium.ttf");
 	}
 
 	private void initGrid() {
@@ -156,6 +162,10 @@ public class Level {
 
 		// End Turn Button
 		endTurnButton.draw();
+
+		// Turn text
+		font.drawString(Game.windowWidth - 100, 20, "Turn " + turn, Color.black);
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
 	public void clearDialogs() {
@@ -180,5 +190,9 @@ public class Level {
 			return endTurnButton;
 		}
 		return null;
+	}
+
+	public void endTurn() {
+		this.turn++;
 	}
 }
