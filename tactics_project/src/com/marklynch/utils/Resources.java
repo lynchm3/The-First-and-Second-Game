@@ -1,0 +1,127 @@
+package com.marklynch.utils;
+
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+import org.newdawn.slick.util.ResourceLoader;
+
+public class Resources {
+
+	private static HashMap<String, Texture> globalImages = new HashMap<String, Texture>();
+	private static HashMap<String, Texture> levelImages = new HashMap<String, Texture>();
+	private static HashMap<String, TrueTypeFont> globalFonts = new HashMap<String, TrueTypeFont>();
+	private static HashMap<String, TrueTypeFont> levelFonts = new HashMap<String, TrueTypeFont>();
+
+	public static Texture getGlobalImage(String path) {
+
+		Texture texture = null;
+		for (String key : globalImages.keySet()) {
+			if (key.equals(path)) {
+				texture = globalImages.get(key);
+				break;
+			}
+		}
+
+		if (texture != null) {
+		} else {
+
+			try {
+				texture = TextureLoader.getTexture("PNG", ResourceLoader
+						.getResourceAsStream("res/images/" + path));
+				globalImages.put(path, texture);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return texture;
+	}
+
+	public static void unloadLevelImages() {
+
+		// ResourceLoader??
+		// TextureLoader??
+
+		// Texture t;
+		// t.release()
+
+		// levelImages = null
+
+	}
+
+	public static void unloadLevelImage(String path) {
+
+		// ResourceLoader??
+		// TextureLoader??
+
+		// Texture t;
+		// t.release()
+
+		// levelImages = null
+
+	}
+
+	public static void unloadGlobalImages() {
+
+		// ResourceLoader??
+		// TextureLoader??
+
+		// Texture t;
+		// t.release()
+
+		// levelImages = null
+
+	}
+
+	public static void unloadGlobalImage(String path) {
+
+		// ResourceLoader??
+		// TextureLoader??
+
+		// Texture t;
+		// t.release()
+
+		// levelImages = null
+
+	}
+
+	public static TrueTypeFont getGlobalFont(String path) {
+
+		TrueTypeFont font = null;
+		for (String key : globalFonts.keySet()) {
+			if (key.equals(path)) {
+				font = globalFonts.get(key);
+				break;
+			}
+		}
+
+		if (font != null) {
+
+		} else {
+
+			try {
+
+				Font awtFont2;
+				InputStream inputStream = ResourceLoader
+						.getResourceAsStream("res/fonts/" + path); // move
+																	// this
+				awtFont2 = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+				awtFont2 = awtFont2.deriveFont(12f); // set font size
+				font = new TrueTypeFont(awtFont2, true);
+				globalFonts.put(path, font);
+			} catch (FontFormatException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return font;
+	}
+}
