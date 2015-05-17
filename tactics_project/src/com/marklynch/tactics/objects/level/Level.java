@@ -65,11 +65,11 @@ public class Level {
 		weaponsForActor1.add(weapon2ForActor1);
 
 		actors.add(new Actor("John Lennon", "Fighter", 1, 0, 0, 0, 0,
-				"avatar.png", squares[0][0], weaponsForActor1));
+				"avatar.png", squares[0][0], weaponsForActor1, 4));
 		actors.add(new Actor("Paul McCartney", "Maniac", 2, 0, 0, 0, 0,
-				"avatar.png", squares[2][7], new Vector<Weapon>()));
+				"avatar.png", squares[2][7], new Vector<Weapon>(), 6));
 		actors.add(new Actor("George Harrison", "Thief", 3, 0, 0, 0, 0,
-				"avatar.png", squares[5][3], new Vector<Weapon>()));
+				"avatar.png", squares[5][3], new Vector<Weapon>(), 10));
 
 		// Game Objects
 		gameObjects = new Vector<GameObject>();
@@ -194,5 +194,11 @@ public class Level {
 
 	public void endTurn() {
 		this.turn++;
+		for (Actor actor : actors) {
+			actor.distanceMovedThisTurn = 0;
+		}
+		removeWalkingHighlight();
+		removeWeaponsThatCanAttackHighlight();
+		selectedActor = null;
 	}
 }

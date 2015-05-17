@@ -15,39 +15,54 @@ public class Actor extends GameObject {
 	public String title = "";
 	public int level = 1;
 	public String name = "";
+	public int distanceMovedThisTurn = 0;
+	public int travelDistance = 4;
 
 	public Actor(String name, String title, int level, int strength,
 			int dexterity, int intelligence, int endurance, String imagePath,
-			Square squareActorIsStandingOn, Vector<Weapon> weapons) {
+			Square squareActorIsStandingOn, Vector<Weapon> weapons,
+			int travelDistance) {
 		super(strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, weapons);
 		this.name = name;
 		this.title = title;
 		this.level = level;
+		this.travelDistance = travelDistance;
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
 		for (int i = 0; i < squares.length; i++) {
 			for (int j = 0; j < squares.length; j++) {
 				squares[i][j].reachableBySelectedCharater = false;
+				squares[i][j].pathsToThisSquare.clear();
+				squares[i][j].distanceToSquare = 0;
+				;
 			}
 		}
 
 		Vector<Square> squaresInThisPath = new Vector<Square>();
 		squaresInThisPath.add(this.squareGameObjectIsOn);
+		this.squareGameObjectIsOn.reachableBySelectedCharater = true;
 
-		if (travelDistance > 0) {
-			calculateReachableSquares(squares, this.travelDistance,
-					this.squareGameObjectIsOn, Direction.UP, squaresInThisPath);
-			calculateReachableSquares(squares, this.travelDistance,
-					this.squareGameObjectIsOn, Direction.RIGHT,
-					squaresInThisPath);
-			calculateReachableSquares(squares, this.travelDistance,
-					this.squareGameObjectIsOn, Direction.DOWN,
-					squaresInThisPath);
-			calculateReachableSquares(squares, this.travelDistance,
-					this.squareGameObjectIsOn, Direction.LEFT,
-					squaresInThisPath);
+		if (this.travelDistance - this.distanceMovedThisTurn > 0) {
+			calculateReachableSquares(squares, this.travelDistance
+					- this.distanceMovedThisTurn, this.squareGameObjectIsOn,
+					Direction.UP, squaresInThisPath);
+			calculateReachableSquares(squares, this.travelDistance
+					- this.distanceMovedThisTurn, this.squareGameObjectIsOn,
+					Direction.RIGHT, squaresInThisPath);
+			calculateReachableSquares(squares, this.travelDistance
+					- this.distanceMovedThisTurn, this.squareGameObjectIsOn,
+					Direction.DOWN, squaresInThisPath);
+			calculateReachableSquares(squares, this.travelDistance
+					- this.distanceMovedThisTurn, this.squareGameObjectIsOn,
+					Direction.LEFT, squaresInThisPath);
+		}
+
+		for (int i = 0; i < squares.length; i++) {
+			for (int j = 0; j < squares.length; j++) {
+				squares[i][j].calculateDistanceToSquare();
+			}
 		}
 	}
 
@@ -77,6 +92,8 @@ public class Actor extends GameObject {
 
 		if (currentSquare != null && currentSquare.gameObject == null
 				&& !squaresInThisPath.contains(currentSquare)) {
+			currentSquare.pathsToThisSquare
+					.add((Vector<Square>) squaresInThisPath.clone());
 			squaresInThisPath.add(currentSquare);
 			currentSquare.reachableBySelectedCharater = true;
 			remainingDistance -= parentSquare.travelCost;

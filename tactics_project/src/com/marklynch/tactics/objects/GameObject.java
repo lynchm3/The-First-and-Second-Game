@@ -18,7 +18,6 @@ public class GameObject {
 	public int dexterity = 0;
 	public int intelligence = 0;
 	public int endurance = 0;
-	public int travelDistance = 4;
 
 	// Inventory
 	public Vector<Weapon> weapons = new Vector<Weapon>();

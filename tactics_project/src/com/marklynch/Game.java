@@ -194,6 +194,7 @@ public class Game {
 					&& squareClicked.reachableBySelectedCharater) {
 				level.selectedActor.squareGameObjectIsOn.gameObject = null;
 				level.selectedActor.squareGameObjectIsOn = null;
+				level.selectedActor.distanceMovedThisTurn += squareClicked.distanceToSquare;
 				level.selectedActor.squareGameObjectIsOn = squareClicked;
 				squareClicked.gameObject = level.selectedActor;
 				level.gameCursor.square = level.selectedActor.squareGameObjectIsOn;

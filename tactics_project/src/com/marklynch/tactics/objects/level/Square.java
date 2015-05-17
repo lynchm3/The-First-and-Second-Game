@@ -2,9 +2,11 @@ package com.marklynch.tactics.objects.level;
 
 import static com.marklynch.utils.Resources.getGlobalImage;
 
+import java.util.Comparator;
 import java.util.Vector;
 
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Dialog;
@@ -29,6 +31,10 @@ public class Square {
 	public Vector<Dialog> dialogs;
 
 	public boolean showingDialogs = false;
+	public Vector<Vector<Square>> pathsToThisSquare = new Vector<Vector<Square>>();
+	public int distanceToSquare = 0;
+
+	public static PathComparator pathComparator;
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation) {
 		super();
@@ -39,6 +45,8 @@ public class Square {
 		this.travelCost = travelCost;
 		this.dialogs = new Vector<Dialog>();
 		this.elevation = elevation;
+		if (pathComparator == null)
+			pathComparator = new PathComparator();
 	}
 
 	public void draw(Level level) {
@@ -85,6 +93,10 @@ public class Square {
 			GL11.glEnd();
 		}
 
+		level.font.drawString(squarePositionX, squarePositionY, "cost "
+				+ distanceToSquare, Color.black);
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+
 	}
 
 	public void drawDialogs() {
@@ -129,5 +141,41 @@ public class Square {
 					"\nElevation = " + elevation, "(Click again to dismiss)" };
 
 		}
+	}
+
+	public class PathComparator implements Comparator<Vector<Square>> {
+
+		@Override
+		public int compare(Vector<Square> path1, Vector<Square> path2) {
+
+			int path1Distance = 0;
+			for (Square squareInPath : path1)
+				path1Distance += squareInPath.travelCost;
+
+			int path2Distance = 0;
+			for (Square squareInPath : path2)
+				path2Distance += squareInPath.travelCost;
+
+			if (path1Distance < path2Distance)
+				return -1;
+			if (path1Distance > path2Distance)
+				return 1;
+			return 0;
+		}
+
+	}
+
+	public void calculateDistanceToSquare() {
+		if (pathsToThisSquare.size() > 0) {
+			distanceToSquare = 0;
+			pathsToThisSquare.sort(pathComparator);
+
+			Vector<Square> shortestPath = pathsToThisSquare.get(0);
+
+			for (Square square : shortestPath) {
+				distanceToSquare += square.travelCost;
+			}
+		}
+
 	}
 }
