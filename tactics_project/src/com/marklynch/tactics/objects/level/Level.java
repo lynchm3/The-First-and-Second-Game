@@ -140,6 +140,10 @@ public class Level {
 				squares[i][j].draw(this);
 			}
 		}
+		
+
+		
+		
 
 		// Cursor
 		// if (selectedActor != null) {

@@ -3,8 +3,12 @@ package com.marklynch.notes;
 public class TODO {
 
 	// TO DO
-
-	// turns + teams
+	
+	//AI to take over on their turn
+	
+	//show path that will be taken
+	
+	//tkae time to move.....
 
 	// make the dialog stay on screen by moving to other corners
 

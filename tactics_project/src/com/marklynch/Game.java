@@ -1,5 +1,7 @@
 package com.marklynch;
 
+import java.util.Vector;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
@@ -48,6 +50,9 @@ public class Game {
 	float mouseLastX = -1;
 	float mouseLastY = -1;
 	boolean dragging = false;
+	
+	public static Square squareMouseIsOver;
+	public static Vector<Square> path;
 
 	public static void main(String[] argv) {
 		Game game = new Game();
@@ -160,12 +165,34 @@ public class Game {
 		}
 
 		Button buttonClicked = null;
-		Square squareClicked = null;
+		squareMouseIsOver = null;
 		if ((int) mouseXInSquares > -1
 				&& (int) mouseXInSquares < level.squares.length
 				&& (int) mouseYInSquares > -1
 				&& (int) mouseYInSquares < level.squares[0].length) {
-			squareClicked = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+			squareMouseIsOver = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+		}
+		
+		//Clear path highlights
+		for (int i = 0; i < level.width; i++) {
+			for (int j = 0; j < level.height; j++) {
+				level.squares[i][j].inPath = false;
+			}
+		}	
+		
+		//Path highlights
+		if (level.selectedActor != null
+				&& squareMouseIsOver != null
+				&& squareMouseIsOver.reachableBySelectedCharater
+				&& squareMouseIsOver.pathsToSquare.size() > 0
+				&& level.selectedActor.faction == level.factions.get(0)
+				&& level.currentFactionMoving == level.factions.get(0))
+		{
+			path = Game.squareMouseIsOver.pathsToSquare.get(0);
+			for(Square square : path)
+			{
+				square.inPath = true;
+			}
 		}
 
 		if (dragging == false) {
@@ -176,11 +203,11 @@ public class Game {
 				&& dragging == false && buttonClicked != null) {
 			buttonClicked.click();
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
-				&& dragging == false && squareClicked != null) {
+				&& dragging == false && squareMouseIsOver != null) {
 			// CLICK
 
 			for (Actor actor : level.actors) {
-				if (actor.squareGameObjectIsOn == squareClicked) {
+				if (actor.squareGameObjectIsOn == squareMouseIsOver) {
 					level.selectedActor = actor;
 					level.selectedActor
 							.calculateReachableSquares(level.squares);
@@ -191,14 +218,14 @@ public class Game {
 			}
 
 			if (level.selectedActor != null
-					&& squareClicked.reachableBySelectedCharater
+					&& squareMouseIsOver.reachableBySelectedCharater
 					&& level.selectedActor.faction == level.factions.get(0)
 					&& level.currentFactionMoving == level.factions.get(0)) {
 				level.selectedActor.squareGameObjectIsOn.gameObject = null;
 				level.selectedActor.squareGameObjectIsOn = null;
-				level.selectedActor.distanceMovedThisTurn += squareClicked.distanceToSquare;
-				level.selectedActor.squareGameObjectIsOn = squareClicked;
-				squareClicked.gameObject = level.selectedActor;
+				level.selectedActor.distanceMovedThisTurn += squareMouseIsOver.distanceToSquare;
+				level.selectedActor.squareGameObjectIsOn = squareMouseIsOver;
+				squareMouseIsOver.gameObject = level.selectedActor;
 				level.gameCursor.square = level.selectedActor.squareGameObjectIsOn;
 				level.selectedActor.calculateReachableSquares(level.squares);
 				level.selectedActor.calculateAttackableSquares(level.squares);
@@ -224,11 +251,11 @@ public class Game {
 				level.removeWalkingHighlight();
 				level.removeWeaponsThatCanAttackHighlight();
 				level.selectedActor = null;
-			} else if (squareClicked != null) {
-				if (squareClicked.showingDialogs == false)
-					squareClicked.showDialogs();
+			} else if (squareMouseIsOver != null) {
+				if (squareMouseIsOver.showingDialogs == false)
+					squareMouseIsOver.showDialogs();
 				else
-					squareClicked.clearDialogs();
+					squareMouseIsOver.clearDialogs();
 
 				// level.dialogs.addElement(new Dialog(Mouse.getX(),
 				// windowHeight-Mouse.getY(),64,64,"marlene.png"));

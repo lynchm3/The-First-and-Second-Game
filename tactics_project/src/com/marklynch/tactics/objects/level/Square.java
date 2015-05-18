@@ -22,6 +22,7 @@ public class Square {
 	public final int elevation;
 	public int travelCost;
 	public boolean reachableBySelectedCharater = false;
+	public boolean inPath = false;
 	public Vector<Weapon> weaponsThatCanAttack = new Vector<Weapon>();
 
 	// image
@@ -31,7 +32,7 @@ public class Square {
 	public Vector<Dialog> dialogs;
 
 	public boolean showingDialogs = false;
-	public Vector<Vector<Square>> pathsToThisSquare = new Vector<Vector<Square>>();
+	public Vector<Vector<Square>> pathsToSquare = new Vector<Vector<Square>>();
 	public int distanceToSquare = 0;
 
 	public static PathComparator pathComparator;
@@ -73,7 +74,9 @@ public class Square {
 
 		if (reachableBySelectedCharater || weaponsThatCanAttack.size() > 0) {
 
-			if (reachableBySelectedCharater)
+			if(inPath)
+				level.gameCursor.imageTexture2.bind();				
+			else if (reachableBySelectedCharater)
 				level.gameCursor.imageTexture.bind();
 			else
 				level.gameCursor.imageTexture2.bind();
@@ -169,11 +172,11 @@ public class Square {
 	}
 
 	public void calculateDistanceToSquare() {
-		if (pathsToThisSquare.size() > 0) {
+		if (pathsToSquare.size() > 0) {
 			distanceToSquare = 0;
-			pathsToThisSquare.sort(pathComparator);
+			pathsToSquare.sort(pathComparator);
 
-			Vector<Square> shortestPath = pathsToThisSquare.get(0);
+			Vector<Square> shortestPath = pathsToSquare.get(0);
 
 			for (Square square : shortestPath) {
 				distanceToSquare += square.travelCost;

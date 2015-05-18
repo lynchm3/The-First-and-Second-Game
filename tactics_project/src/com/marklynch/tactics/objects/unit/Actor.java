@@ -36,7 +36,7 @@ public class Actor extends GameObject {
 		for (int i = 0; i < squares.length; i++) {
 			for (int j = 0; j < squares.length; j++) {
 				squares[i][j].reachableBySelectedCharater = false;
-				squares[i][j].pathsToThisSquare.clear();
+				squares[i][j].pathsToSquare.clear();
 				squares[i][j].distanceToSquare = 0;
 				;
 			}
@@ -94,7 +94,7 @@ public class Actor extends GameObject {
 
 		if (currentSquare != null && currentSquare.gameObject == null
 				&& !squaresInThisPath.contains(currentSquare)) {
-			currentSquare.pathsToThisSquare
+			currentSquare.pathsToSquare
 					.add((Vector<Square>) squaresInThisPath.clone());
 			squaresInThisPath.add(currentSquare);
 			currentSquare.reachableBySelectedCharater = true;
