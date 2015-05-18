@@ -94,8 +94,8 @@ public class Actor extends GameObject {
 
 		if (currentSquare != null && currentSquare.gameObject == null
 				&& !squaresInThisPath.contains(currentSquare)) {
-			currentSquare.pathsToSquare
-					.add((Vector<Square>) squaresInThisPath.clone());
+			currentSquare.pathsToSquare.add((Vector<Square>) squaresInThisPath
+					.clone());
 			squaresInThisPath.add(currentSquare);
 			currentSquare.reachableBySelectedCharater = true;
 			remainingDistance -= parentSquare.travelCost;
@@ -117,7 +117,7 @@ public class Actor extends GameObject {
 	public void calculateAttackableSquares(Square[][] squares) {
 		for (int i = 0; i < squares.length; i++) {
 			for (int j = 0; j < squares.length; j++) {
-				squares[i][j].weaponsThatCanAttack = new Vector<Weapon>();
+				squares[i][j].weaponsThatCanAttack.clear();
 			}
 		}
 

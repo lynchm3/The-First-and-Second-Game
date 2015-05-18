@@ -74,8 +74,8 @@ public class Square {
 
 		if (reachableBySelectedCharater || weaponsThatCanAttack.size() > 0) {
 
-			if(inPath)
-				level.gameCursor.imageTexture2.bind();				
+			if (inPath || this == Game.squareMouseIsOver)
+				level.gameCursor.imageTexture3.bind();
 			else if (reachableBySelectedCharater)
 				level.gameCursor.imageTexture.bind();
 			else
@@ -96,8 +96,7 @@ public class Square {
 			GL11.glEnd();
 		}
 
-		if(this.reachableBySelectedCharater)
-		{
+		if (this.reachableBySelectedCharater) {
 			level.font.drawString(squarePositionX, squarePositionY, "cost "
 					+ distanceToSquare, Color.black);
 			GL11.glColor3f(1.0f, 1.0f, 1.0f);

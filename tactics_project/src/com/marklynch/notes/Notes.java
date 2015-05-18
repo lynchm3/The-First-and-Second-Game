@@ -791,10 +791,19 @@ public class Notes {
 	 * (i can imagine fire embem does this), ye in fire emblem awakening they're
 	 * all constantly moving, and then they move MORE when u hover over or
 	 * select them
-
-	 ITS A TRAP! moment, but make it unexpected
-	 
-	 Elemental shit from divinity original sin
+	 * 
+	 * ITS A TRAP! moment, but make it unexpected
+	 * 
+	 * Elemental shit from divinity original sin
+	 * 
+	 * SHould I let them directly attack the enemy or first move then attack?
+	 * THink it means i'll need to highlight the attack squares and the path
+	 * together... and for a ranged attack that means missing the square in the
+	 * middle btw!
+	 * 
+	 * Also btw... cant exclude walking squares from the attack square
+	 * calculation, if ur lowest attack range isnt 1 then u cant neccesarily
+	 * attack every square u can walk on...
 	 */
 
 }

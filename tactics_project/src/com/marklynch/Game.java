@@ -50,7 +50,7 @@ public class Game {
 	float mouseLastX = -1;
 	float mouseLastY = -1;
 	boolean dragging = false;
-	
+
 	public static Square squareMouseIsOver;
 	public static Vector<Square> path;
 
@@ -172,25 +172,22 @@ public class Game {
 				&& (int) mouseYInSquares < level.squares[0].length) {
 			squareMouseIsOver = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
 		}
-		
-		//Clear path highlights
+
+		// Clear path highlights
 		for (int i = 0; i < level.width; i++) {
 			for (int j = 0; j < level.height; j++) {
 				level.squares[i][j].inPath = false;
 			}
-		}	
-		
-		//Path highlights
-		if (level.selectedActor != null
-				&& squareMouseIsOver != null
+		}
+
+		// Path highlights
+		if (level.selectedActor != null && squareMouseIsOver != null
 				&& squareMouseIsOver.reachableBySelectedCharater
 				&& squareMouseIsOver.pathsToSquare.size() > 0
 				&& level.selectedActor.faction == level.factions.get(0)
-				&& level.currentFactionMoving == level.factions.get(0))
-		{
+				&& level.currentFactionMoving == level.factions.get(0)) {
 			path = Game.squareMouseIsOver.pathsToSquare.get(0);
-			for(Square square : path)
-			{
+			for (Square square : path) {
 				square.inPath = true;
 			}
 		}
@@ -213,7 +210,6 @@ public class Game {
 							.calculateReachableSquares(level.squares);
 					level.selectedActor
 							.calculateAttackableSquares(level.squares);
-					level.gameCursor.square = level.selectedActor.squareGameObjectIsOn;
 				}
 			}
 
@@ -226,7 +222,6 @@ public class Game {
 				level.selectedActor.distanceMovedThisTurn += squareMouseIsOver.distanceToSquare;
 				level.selectedActor.squareGameObjectIsOn = squareMouseIsOver;
 				squareMouseIsOver.gameObject = level.selectedActor;
-				level.gameCursor.square = level.selectedActor.squareGameObjectIsOn;
 				level.selectedActor.calculateReachableSquares(level.squares);
 				level.selectedActor.calculateAttackableSquares(level.squares);
 			}

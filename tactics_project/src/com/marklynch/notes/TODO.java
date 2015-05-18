@@ -3,12 +3,15 @@ package com.marklynch.notes;
 public class TODO {
 
 	// TO DO
-	
-	//AI to take over on their turn
-	
-	//show path that will be taken
-	
-	//tkae time to move.....
+
+	// AI to take over on their turn
+
+	// show path for attack squares too
+	// cant necessarily attack squares u can walk if ur min range isnt 1
+
+	// undo button
+
+	// tkae time to move.....
 
 	// make the dialog stay on screen by moving to other corners
 
@@ -55,9 +58,8 @@ public class TODO {
 
 	// stop running when minimized
 
-
-	//watch the fire emblem battle animations, the 3d ones are pretty good
-	//one where the screen turned red and black...
+	// watch the fire emblem battle animations, the 3d ones are pretty good
+	// one where the screen turned red and black...
 
 	// DONE
 }

@@ -1,7 +1,5 @@
 package com.marklynch.tactics.objects.level;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 import org.lwjgl.input.Mouse;
@@ -59,17 +57,17 @@ public class Level {
 	}
 
 	private void initObjects() {
-		
-		//Factions
+
+		// Factions
 		factions = new Vector<Faction>();
 		factions.add(new Faction("Good Guys"));
 		factions.add(new Faction("Bad Guys"));
-		
-		//Good guys relationships	
-		factions.get(0).relationships.put(factions.get(1), -100);	
-		
-		//Bad guys relationships
-		factions.get(1).relationships.put(factions.get(0), -100);		
+
+		// Good guys relationships
+		factions.get(0).relationships.put(factions.get(1), -100);
+
+		// Bad guys relationships
+		factions.get(1).relationships.put(factions.get(0), -100);
 
 		// Actors
 		actors = new Vector<Actor>();
@@ -92,11 +90,11 @@ public class Level {
 				"red.png", squares[5][3], new Vector<Weapon>(), 4));
 		actors.get(2).faction = factions.get(1);
 		factions.get(1).actors.add(actors.get(2));
-		
+
 		currentFactionMovingIndex = 0;
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
-		
-		//Adding actors to factions
+
+		// Adding actors to factions
 
 		// Game Objects
 		gameObjects = new Vector<GameObject>();
@@ -104,7 +102,7 @@ public class Level {
 				weaponsForActor1));
 
 		// Cursor
-		gameCursor = new GameCursor("highlight.png", "highlight2.png");
+		gameCursor = new GameCursor();
 	}
 
 	public void removeWalkingHighlight() {
@@ -140,10 +138,6 @@ public class Level {
 				squares[i][j].draw(this);
 			}
 		}
-		
-
-		
-		
 
 		// Cursor
 		// if (selectedActor != null) {
@@ -195,7 +189,8 @@ public class Level {
 		endTurnButton.draw();
 
 		// Turn text
-		font.drawString(Game.windowWidth - 150, 20, currentFactionMoving.name + " turn " + turn, Color.black);
+		font.drawString(Game.windowWidth - 150, 20, currentFactionMoving.name
+				+ " turn " + turn, Color.black);
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
@@ -231,8 +226,7 @@ public class Level {
 		removeWeaponsThatCanAttackHighlight();
 		selectedActor = null;
 		currentFactionMovingIndex++;
-		if(currentFactionMovingIndex >= factions.size())
-		{
+		if (currentFactionMovingIndex >= factions.size()) {
 			currentFactionMovingIndex = 0;
 			this.turn++;
 		}
