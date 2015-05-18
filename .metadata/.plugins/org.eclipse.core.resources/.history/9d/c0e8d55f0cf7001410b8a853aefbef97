@@ -1,7 +1,0 @@
-package com.marklynch.notes;
-
-public class Reading {
-	
-	//Look up an image loader/cacher for lwjgl
-
-}

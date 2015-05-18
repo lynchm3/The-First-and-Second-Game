@@ -1,7 +1,0 @@
-package com.marklynch.tactics.objects.level;
-
-public class Level {
-
-	private Vector<Grid> grids;
-	
-}

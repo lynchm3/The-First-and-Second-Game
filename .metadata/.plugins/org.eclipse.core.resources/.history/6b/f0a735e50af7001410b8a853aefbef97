@@ -1,7 +1,0 @@
-package com.marklynch.utils;
-
-public class LoadedResources {
-
-	ptivate static HashMap<String, > images;
-	
-}
