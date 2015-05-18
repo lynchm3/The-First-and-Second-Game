@@ -41,7 +41,7 @@ public class Button {
 	}
 
 	public void click() {
-		level.endTurn();
+		level.endPlayerTurn();
 	}
 
 }

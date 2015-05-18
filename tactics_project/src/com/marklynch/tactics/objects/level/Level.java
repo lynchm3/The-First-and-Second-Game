@@ -32,6 +32,8 @@ public class Level {
 	public int turn = 1;
 	public TrueTypeFont font;
 	public Vector<Faction> factions;
+	public Faction currentFactionMoving;
+	public int currentFactionMovingIndex;
 
 	// java representation of a grid??
 	// 2d array?
@@ -60,8 +62,8 @@ public class Level {
 		
 		//Factions
 		factions = new Vector<Faction>();
-		factions.add(new Faction("Good"));
-		factions.add(new Faction("Evil"));
+		factions.add(new Faction("Good Guys"));
+		factions.add(new Faction("Bad Guys"));
 		
 		//Good guys relationships	
 		factions.get(0).relationships.put(factions.get(1), -100);	
@@ -90,6 +92,9 @@ public class Level {
 				"red.png", squares[5][3], new Vector<Weapon>(), 4));
 		actors.get(2).faction = factions.get(1);
 		factions.get(1).actors.add(actors.get(2));
+		
+		currentFactionMovingIndex = 0;
+		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		
 		//Adding actors to factions
 
@@ -186,7 +191,7 @@ public class Level {
 		endTurnButton.draw();
 
 		// Turn text
-		font.drawString(Game.windowWidth - 100, 20, "Turn " + turn, Color.black);
+		font.drawString(Game.windowWidth - 150, 20, currentFactionMoving.name + " turn " + turn, Color.black);
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
@@ -214,13 +219,19 @@ public class Level {
 		return null;
 	}
 
-	public void endTurn() {
-		this.turn++;
+	public void endPlayerTurn() {
 		for (Actor actor : actors) {
 			actor.distanceMovedThisTurn = 0;
 		}
 		removeWalkingHighlight();
 		removeWeaponsThatCanAttackHighlight();
 		selectedActor = null;
+		currentFactionMovingIndex++;
+		if(currentFactionMovingIndex >= factions.size())
+		{
+			currentFactionMovingIndex = 0;
+			this.turn++;
+		}
+		currentFactionMoving = factions.get(currentFactionMovingIndex);
 	}
 }

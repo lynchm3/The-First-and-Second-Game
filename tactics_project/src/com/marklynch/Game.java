@@ -192,7 +192,8 @@ public class Game {
 
 			if (level.selectedActor != null
 					&& squareClicked.reachableBySelectedCharater
-					&& level.selectedActor.faction == level.factions.get(0)) {
+					&& level.selectedActor.faction == level.factions.get(0)
+					&& level.currentFactionMoving == level.factions.get(0)) {
 				level.selectedActor.squareGameObjectIsOn.gameObject = null;
 				level.selectedActor.squareGameObjectIsOn = null;
 				level.selectedActor.distanceMovedThisTurn += squareClicked.distanceToSquare;
