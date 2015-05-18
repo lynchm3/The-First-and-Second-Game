@@ -807,6 +807,13 @@ public class Notes {
 	 * un-attackable... coz theres nothing there to attack? ...what about allies
 	 * though... might be able to walkthrough them, really bothered me in TT
 	 * when i couldnt.especially if im putting in unlimited units per lvl
+	 * 
+	 * Dark sad pixely style like dustbowl? or that other really creepy game i
+	 * played? Look up good pixel art examples in games. ALSO... grab sprites
+	 * for different characters from different games and see what looks could
+	 * int he confines of a grdit. Maybe could do somehing about how theyre made
+	 * of grids and the games made of grids, maybe when u zoom out each square
+	 * is a pixel in the image of the city. cool effect bra....
 	 */
 
 }
