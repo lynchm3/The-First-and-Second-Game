@@ -98,8 +98,14 @@ public class Level {
 
 		// Game Objects
 		gameObjects = new Vector<GameObject>();
-		gameObjects.add(new GameObject(0, 0, 0, 0, "skip.png", squares[3][3],
+		gameObjects.add(new GameObject(0, 0, 0, 0, "skip.png", squares[0][3],
 				weaponsForActor1));
+		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow.png",
+				squares[1][3], weaponsForActor1));
+		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow2.png",
+				squares[2][3], weaponsForActor1));
+		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow3.png",
+				squares[3][3], weaponsForActor1));
 
 		// Cursor
 		gameCursor = new GameCursor();
