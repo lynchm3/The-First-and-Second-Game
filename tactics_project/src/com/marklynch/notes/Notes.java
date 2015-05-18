@@ -662,7 +662,9 @@ public class Notes {
 	 Theres a nice little feature in TT where u press alt and it gives u a litte info box about whatever ur hovering over.
 	 Why didn't they use tab? i'll use tab...
 
+	 ITS A TRAP! moment, but make it unexpected
 	 
+	 Elemental shit from divinity original sin
 	 
 	
 	 *
