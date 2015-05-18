@@ -803,7 +803,10 @@ public class Notes {
 	 * 
 	 * Also btw... cant exclude walking squares from the attack square
 	 * calculation, if ur lowest attack range isnt 1 then u cant neccesarily
-	 * attack every square u can walk on...
+	 * attack every square u can walk on... Although... if it's walkable isnt it
+	 * un-attackable... coz theres nothing there to attack? ...what about allies
+	 * though... might be able to walkthrough them, really bothered me in TT
+	 * when i couldnt.especially if im putting in unlimited units per lvl
 	 */
 
 }
