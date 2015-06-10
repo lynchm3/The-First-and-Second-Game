@@ -60,8 +60,8 @@ public class Level {
 
 		// Factions
 		factions = new Vector<Faction>();
-		factions.add(new Faction("Good Guys"));
-		factions.add(new Faction("Bad Guys"));
+		factions.add(new Faction("Good Guys", this));
+		factions.add(new Faction("Bad Guys", this));
 
 		// Good guys relationships
 		factions.get(0).relationships.put(factions.get(1), -100);
@@ -199,6 +199,14 @@ public class Level {
 				+ " turn " + turn, Color.black);
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
+	
+	public void update(int delta)
+	{
+		if(currentFactionMoving != factions.get(0))
+		{
+			currentFactionMoving.update(delta);
+		}
+	}
 
 	public void clearDialogs() {
 		// Level
@@ -224,7 +232,7 @@ public class Level {
 		return null;
 	}
 
-	public void endPlayerTurn() {
+	public void endTurn() {
 		for (Actor actor : actors) {
 			actor.distanceMovedThisTurn = 0;
 		}

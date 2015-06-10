@@ -5,6 +5,11 @@ public class TODO {
 	// TO DO
 
 	// AI to take over on their turn
+		//DONE - Phase 1. End their turn
+		//DONE - Phase 2. Move their dudes randomly
+		//DONE - Phase 3. Put timers in so that u can see them move
+		//Phase 4. Turn level plan
+		//Phase 5. Battle level plan
 
 	// show path for attack squares too
 	// cant necessarily attack squares u can walk if ur min range isnt 1

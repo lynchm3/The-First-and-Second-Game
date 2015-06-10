@@ -2,7 +2,7 @@ package com.marklynch.tactics.objects.unit;
 
 public class Abilities {
 
-	public int scout; // ncreases detail of briefing
+	public int scout; // increases detail of briefing
 	public int attack;
 	public int defense;
 	public int mind;

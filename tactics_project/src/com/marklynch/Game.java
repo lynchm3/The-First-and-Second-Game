@@ -302,6 +302,8 @@ public class Game {
 		// if (actorPositionY > 9)
 		// actorPositionY = 9;
 
+		level.update(delta);
+		
 		updateFPS(); // update FPS Counter
 	}
 
