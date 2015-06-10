@@ -74,7 +74,8 @@ public class Square {
 
 		if (reachableBySelectedCharater || weaponsThatCanAttack.size() > 0) {
 
-			if (inPath || this == Game.squareMouseIsOver)
+			if (level.currentFactionMovingIndex == 0
+					&& (inPath || this == Game.squareMouseIsOver))
 				level.gameCursor.imageTexture3.bind();
 			else if (reachableBySelectedCharater)
 				level.gameCursor.imageTexture.bind();

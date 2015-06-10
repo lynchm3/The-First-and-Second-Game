@@ -30,72 +30,56 @@ public class Faction {
 		this.level = level;
 	}
 
-	public void update(int delta)
-	{
-		if(currentStage == STAGE.SELECT)
-		{
-			if(timeAtCurrentStage == 0)
-			{
+	public void update(int delta) {
+		if (currentStage == STAGE.SELECT) {
+			if (timeAtCurrentStage == 0) {
 				currentActor = actors.get(currentActorIndex);
 				level.selectedActor = currentActor;
-				level.selectedActor
-						.calculateReachableSquares(level.squares);
-				level.selectedActor.calculateAttackableSquares(level.squares);	
-				timeAtCurrentStage += delta;				
-			}
-			else if(timeAtCurrentStage >= STAGE_DURATION)
-			{		
+				level.selectedActor.calculateReachableSquares(level.squares);
+				level.selectedActor.calculateAttackableSquares(level.squares);
+				timeAtCurrentStage += delta;
+			} else if (timeAtCurrentStage >= STAGE_DURATION) {
 				currentStage = STAGE.MOVE;
 				timeAtCurrentStage = 0;
+			} else {
+				timeAtCurrentStage += delta;
 			}
-			else
-			{
-				timeAtCurrentStage += delta;					
-			}					
-		}
-		else if(currentStage == STAGE.MOVE)
-		{
-			if(timeAtCurrentStage == 0)
-			{
+		} else if (currentStage == STAGE.MOVE) {
+			if (timeAtCurrentStage == 0) {
 				ArrayList<Square> reachableSquares = new ArrayList<Square>();
-				for(int j = 0; j<level.squares.length; j++)
-				{
-					for(int k = 0; k<level.squares[0].length; k++)
-					{
-						if(level.squares[j][k].reachableBySelectedCharater)
-						{
+				for (int j = 0; j < level.squares.length; j++) {
+					for (int k = 0; k < level.squares[0].length; k++) {
+						if (level.squares[j][k].reachableBySelectedCharater) {
 							reachableSquares.add(level.squares[j][k]);
 						}
 					}
 				}
-				
-				int random = (int) (Math.random()*(reachableSquares.size()-1));
-				Square squareToMoveTo = reachableSquares.get(random);
-			
-				level.selectedActor.squareGameObjectIsOn.gameObject = null;
-				level.selectedActor.squareGameObjectIsOn = null;
-				level.selectedActor.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
-				level.selectedActor.squareGameObjectIsOn = squareToMoveTo;
-				squareToMoveTo.gameObject = level.selectedActor;
-				level.selectedActor.calculateReachableSquares(level.squares);
-				level.selectedActor.calculateAttackableSquares(level.squares);		
-				timeAtCurrentStage += delta;		
-			}
-			else if(timeAtCurrentStage >= STAGE_DURATION)
-			{		
+
+				if (reachableSquares.size() > 0) {
+					int random = (int) (Math.random() * (reachableSquares
+							.size() - 1));
+					Square squareToMoveTo = reachableSquares.get(random);
+					level.selectedActor.squareGameObjectIsOn.gameObject = null;
+					level.selectedActor.squareGameObjectIsOn = null;
+					level.selectedActor.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
+					level.selectedActor.squareGameObjectIsOn = squareToMoveTo;
+					squareToMoveTo.gameObject = level.selectedActor;
+					level.selectedActor
+							.calculateReachableSquares(level.squares);
+					level.selectedActor
+							.calculateAttackableSquares(level.squares);
+				}
+
+				timeAtCurrentStage += delta;
+			} else if (timeAtCurrentStage >= STAGE_DURATION) {
 				currentStage = STAGE.ATTACK;
 				timeAtCurrentStage = 0;
+			} else {
+				timeAtCurrentStage += delta;
 			}
-			else
-			{
-				timeAtCurrentStage += delta;					
-			}	
-		}
-		else if(currentStage == STAGE.ATTACK)
-		{
+		} else if (currentStage == STAGE.ATTACK) {
 			currentActorIndex++;
-			if(currentActorIndex >= actors.size())
-			{
+			if (currentActorIndex >= actors.size()) {
 				currentActorIndex = 0;
 				currentStage = STAGE.SELECT;
 				timeAtCurrentStage = 0;

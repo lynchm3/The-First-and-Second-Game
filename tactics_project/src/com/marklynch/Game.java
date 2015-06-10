@@ -197,10 +197,12 @@ public class Game {
 		}
 
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
-				&& dragging == false && buttonClicked != null) {
+				&& dragging == false && buttonClicked != null
+				&& level.currentFactionMovingIndex == 0) {
 			buttonClicked.click();
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
-				&& dragging == false && squareMouseIsOver != null) {
+				&& dragging == false && squareMouseIsOver != null
+				&& level.currentFactionMovingIndex == 0) {
 			// CLICK
 
 			for (Actor actor : level.actors) {
@@ -225,11 +227,6 @@ public class Game {
 				level.selectedActor.calculateReachableSquares(level.squares);
 				level.selectedActor.calculateAttackableSquares(level.squares);
 			}
-
-			mouseButtonStateLeft = false;
-
-			mouseDownX = -1;
-			mouseDownY = -1;
 		}
 
 		if (!Mouse.isButtonDown(0)) {
@@ -239,7 +236,8 @@ public class Game {
 			lastMoveTime = lastFPS;
 		}
 
-		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)) {
+		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)
+				&& level.currentFactionMovingIndex == 0) {
 			level.clearDialogs();
 			// right click
 			if (level.selectedActor != null) {
@@ -255,6 +253,9 @@ public class Game {
 				// level.dialogs.addElement(new Dialog(Mouse.getX(),
 				// windowHeight-Mouse.getY(),64,64,"marlene.png"));
 			}
+		}
+
+		if (Mouse.isButtonDown(1)) {
 			mouseButtonStateRight = true;
 		} else if (!Mouse.isButtonDown(1)) {
 			mouseButtonStateRight = false;
@@ -303,7 +304,7 @@ public class Game {
 		// actorPositionY = 9;
 
 		level.update(delta);
-		
+
 		updateFPS(); // update FPS Counter
 	}
 
