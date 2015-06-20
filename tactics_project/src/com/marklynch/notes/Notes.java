@@ -786,6 +786,10 @@ public class Notes {
 	 * Flat AF style it the way to go. look up androids style guidelines or iOS
 	 * or web, fucking flat is now
 	 * 
+	 * Moivng after attacking with some units? ye... maybe... but make it the
+	 * unit's special ability and let them all have special abilities, don't
+	 * want one unit to be objectively better *
+	 * 
 	 * Hover and down states for buttons and items and squares and characters.
 	 * WOuld be so cool if characters moved on the spot when u hovered over them
 	 * (i can imagine fire embem does this), ye in fire emblem awakening they're
@@ -814,6 +818,8 @@ public class Notes {
 	 * int he confines of a grdit. Maybe could do somehing about how theyre made
 	 * of grids and the games made of grids, maybe when u zoom out each square
 	 * is a pixel in the image of the city. cool effect bra....
+	 * 
+	 * enchanted cave 2 does grid without looking like it...
 	 */
 
 }

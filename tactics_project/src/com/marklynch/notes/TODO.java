@@ -8,15 +8,38 @@ public class TODO {
 	// DONE - Phase 1. End their turn
 	// DONE - Phase 2. Move their dudes randomly
 	// DONE - Phase 3. Put timers in so that u can see them move
+	// Move towards nearest enemy
 	// Phase 4. Turn level plan
 	// Phase 5. Battle level plan
 
+	// There's got to be a better way to calculate distances for EVERY square
+	// from the selected guy (mark selected guys as zero, all others as
+	// integer.max
+	// got around in a circle and set all free squares to 1 (or 0 + travel cost)
+	// go around all the 1s and set all free squares that dont have a number to
+	// (1 + travelcost)
+	// continue until u run out of squares w/ numbers to go around
+	// this sounds a lot better :'D
+	// blllllllergh
+	// so if travel distance is 5 and attack range is 2 1-5 is reachable, 1-7 is
+	// attackable (unless we have a min range!!!
+
 	// Don't highlight AI square when u mouse over it...
+
+	// object should give indication it contains something,
+	// a little twinkle or something
+	// so that user doesnt have to click everything
 
 	// show path for attack squares too
 	// cant necessarily attack squares u can walk if ur min range isnt 1
 
 	// undo button
+
+	// how about using neural networking to teach different types of strategies?
+	// offensive, defensive...
+	// would have to be a random setup every time
+	// visibles are - empty squares, enemies squares, allies squares,
+	// impasssable squares
 
 	// tkae time to move.....
 

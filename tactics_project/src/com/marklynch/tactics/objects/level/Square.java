@@ -32,7 +32,6 @@ public class Square {
 	public Vector<Dialog> dialogs;
 
 	public boolean showingDialogs = false;
-	public Vector<Vector<Square>> pathsToSquare = new Vector<Vector<Square>>();
 	public int distanceToSquare = 0;
 
 	public static PathComparator pathComparator;
@@ -46,8 +45,6 @@ public class Square {
 		this.travelCost = travelCost;
 		this.dialogs = new Vector<Dialog>();
 		this.elevation = elevation;
-		if (pathComparator == null)
-			pathComparator = new PathComparator();
 	}
 
 	public void draw(Level level) {
@@ -97,11 +94,11 @@ public class Square {
 			GL11.glEnd();
 		}
 
-		if (this.reachableBySelectedCharater) {
-			level.font.drawString(squarePositionX, squarePositionY, "cost "
-					+ distanceToSquare, Color.black);
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
-		}
+		// if (this.reachableBySelectedCharater) {
+		level.font.drawString(squarePositionX, squarePositionY, "cost "
+				+ distanceToSquare, Color.black);
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		// }
 
 	}
 
@@ -137,7 +134,7 @@ public class Square {
 			return new String[] { "" + x + " , " + y,
 					"\nTravel Cost = " + travelCost,
 					"\nElevation = " + elevation, "" + actor.name,
-					"lvl" + actor.level + " " + actor.title,
+					"lvl" + actor.actorLevel + " " + actor.title,
 					"(Click again to dismiss)" };
 
 		} else {
@@ -171,17 +168,9 @@ public class Square {
 
 	}
 
-	public void calculateDistanceToSquare() {
-		if (pathsToSquare.size() > 0) {
-			distanceToSquare = 0;
-			pathsToSquare.sort(pathComparator);
-
-			Vector<Square> shortestPath = pathsToSquare.get(0);
-
-			for (Square square : shortestPath) {
-				distanceToSquare += square.travelCost;
-			}
-		}
+	@Override
+	public String toString() {
+		return "" + this.x + "," + this.y;
 
 	}
 }

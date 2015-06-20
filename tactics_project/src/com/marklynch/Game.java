@@ -1,7 +1,5 @@
 package com.marklynch;
 
-import java.util.Vector;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
@@ -13,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.ui.Button;
 
 public class Game {
@@ -52,7 +51,7 @@ public class Game {
 	boolean dragging = false;
 
 	public static Square squareMouseIsOver;
-	public static Vector<Square> path;
+	public static Path path;
 
 	public static void main(String[] argv) {
 		Game game = new Game();
@@ -183,11 +182,10 @@ public class Game {
 		// Path highlights
 		if (level.selectedActor != null && squareMouseIsOver != null
 				&& squareMouseIsOver.reachableBySelectedCharater
-				&& squareMouseIsOver.pathsToSquare.size() > 0
 				&& level.selectedActor.faction == level.factions.get(0)
 				&& level.currentFactionMoving == level.factions.get(0)) {
-			path = Game.squareMouseIsOver.pathsToSquare.get(0);
-			for (Square square : path) {
+			path = level.selectedActor.paths.get(squareMouseIsOver);
+			for (Square square : path.squares) {
 				square.inPath = true;
 			}
 		}
@@ -209,6 +207,8 @@ public class Game {
 				if (actor.squareGameObjectIsOn == squareMouseIsOver) {
 					level.selectedActor = actor;
 					level.selectedActor
+							.calculatePathToAllSquares(level.squares);
+					level.selectedActor
 							.calculateReachableSquares(level.squares);
 					level.selectedActor
 							.calculateAttackableSquares(level.squares);
@@ -224,6 +224,7 @@ public class Game {
 				level.selectedActor.distanceMovedThisTurn += squareMouseIsOver.distanceToSquare;
 				level.selectedActor.squareGameObjectIsOn = squareMouseIsOver;
 				squareMouseIsOver.gameObject = level.selectedActor;
+				level.selectedActor.calculatePathToAllSquares(level.squares);
 				level.selectedActor.calculateReachableSquares(level.squares);
 				level.selectedActor.calculateAttackableSquares(level.squares);
 			}
