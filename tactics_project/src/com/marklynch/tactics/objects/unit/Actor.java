@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
+import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
 
@@ -42,11 +43,11 @@ public class Actor extends GameObject {
 				if (pathToSquare == null
 						|| pathToSquare.travelCost > (this.travelDistance - this.distanceMovedThisTurn)) {
 					squares[i][j].reachableBySelectedCharater = false;
-					squares[i][j].distanceToSquare = Integer.MAX_VALUE;
+					// squares[i][j].distanceToSquare = Integer.MAX_VALUE;
 
 				} else {
 					squares[i][j].reachableBySelectedCharater = true;
-					squares[i][j].distanceToSquare = pathToSquare.travelCost;
+					// squares[i][j].distanceToSquare = pathToSquare.travelCost;
 				}
 
 			}
@@ -68,9 +69,17 @@ public class Actor extends GameObject {
 	int highestPathCostSeen = 0;
 
 	public void calculatePathToAllSquares(Square[][] squares) {
+
+		for (int i = 0; i < squares.length; i++) {
+			for (int j = 0; j < squares.length; j++) {
+				squares[i][j].distanceToSquare = Integer.MAX_VALUE;
+			}
+		}
+
 		highestPathCostSeen = 0;
 		paths.clear();
 		Square currentSquare = squareGameObjectIsOn;
+		currentSquare.distanceToSquare = 0;
 
 		Vector<Square> startPath = new Vector<Square>();
 		startPath.add(currentSquare);
@@ -144,5 +153,11 @@ public class Actor extends GameObject {
 			Path newPath = new Path(newPathSquares, newDistance);
 			paths.put(newSquare, newPath);
 		}
+	}
+
+	public static void highlightSelectedCharactersSquares(Level level) {
+		level.selectedActor.calculatePathToAllSquares(level.squares);
+		level.selectedActor.calculateReachableSquares(level.squares);
+		level.selectedActor.calculateAttackableSquares(level.squares);
 	}
 }

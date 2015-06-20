@@ -206,12 +206,7 @@ public class Game {
 			for (Actor actor : level.actors) {
 				if (actor.squareGameObjectIsOn == squareMouseIsOver) {
 					level.selectedActor = actor;
-					level.selectedActor
-							.calculatePathToAllSquares(level.squares);
-					level.selectedActor
-							.calculateReachableSquares(level.squares);
-					level.selectedActor
-							.calculateAttackableSquares(level.squares);
+					Actor.highlightSelectedCharactersSquares(level);
 				}
 			}
 
@@ -224,9 +219,7 @@ public class Game {
 				level.selectedActor.distanceMovedThisTurn += squareMouseIsOver.distanceToSquare;
 				level.selectedActor.squareGameObjectIsOn = squareMouseIsOver;
 				squareMouseIsOver.gameObject = level.selectedActor;
-				level.selectedActor.calculatePathToAllSquares(level.squares);
-				level.selectedActor.calculateReachableSquares(level.squares);
-				level.selectedActor.calculateAttackableSquares(level.squares);
+				Actor.highlightSelectedCharactersSquares(level);
 			}
 		}
 

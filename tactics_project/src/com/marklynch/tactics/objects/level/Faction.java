@@ -1,10 +1,12 @@
 package com.marklynch.tactics.objects.level;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.unit.Path;
 
 public class Faction {
 
@@ -50,13 +52,66 @@ public class Faction {
 		} else if (currentStage == STAGE.MOVE) {
 			if (timeAtCurrentStage == 0) {
 
-				// MOVE TOWARDS NEAREST ENEMY
-				// a. it's gotta be a reachable enemy
-				// b. gotta be by distace to a reachable square
-				// level.selectedActor
-				// .pathTo(level.factions.get(0).actors.get(0).squareGameObjectIsOn,
-				// level.squares);
-				// findNearestEnemy();
+				// MOVE TOWARDS A POINT
+				// get as close to the point as possible
+				// with as few moves as possible
+
+				// for now... just go for this guy...
+				Actor target = level.factions.get(0).actors.get(0);
+				target.calculatePathToAllSquares(level.squares);
+				this.currentActor.calculatePathToAllSquares(level.squares);
+				// get matching squares in paths (only reachable squares for
+				// current actor)
+				Vector<Square> currentActorReachableSquares = new Vector<Square>();
+				for (Square square : currentActor.paths.keySet()) {
+					if (square.travelCost <= currentActor.travelDistance)
+						currentActorReachableSquares.add(square);
+				}
+
+				Vector<Path> targetPaths = new Vector<Path>();
+				for (Path path : target.paths.values()) {
+					targetPaths.add(path);
+				}
+				targetPaths.sort(new PathComparator());
+
+				// get ones closest to target
+				int bestDistanceFoundTarget = Integer.MAX_VALUE;
+				Vector<Square> potentialSquares = new Vector<Square>();
+				for (Path path : targetPaths) {
+					if (path.travelCost > bestDistanceFoundTarget)
+						break;
+
+					if (currentActorReachableSquares.contains(path.squares
+							.lastElement())) {
+						potentialSquares.add(path.squares.lastElement());
+						bestDistanceFoundTarget = path.travelCost;
+					}
+				}
+
+				// get one closest to current actor
+				int bestDistanceFoundCurrentActor = Integer.MAX_VALUE;
+				Square squareToMoveTo = null;
+				for (Square square : potentialSquares) {
+					if (currentActor.paths.get(square).travelCost < bestDistanceFoundCurrentActor) {
+						bestDistanceFoundCurrentActor = currentActor.paths
+								.get(square).travelCost;
+						squareToMoveTo = square;
+					}
+				}
+
+				level.selectedActor.squareGameObjectIsOn.gameObject = null;
+				level.selectedActor.squareGameObjectIsOn = null;
+				level.selectedActor.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
+				level.selectedActor.squareGameObjectIsOn = squareToMoveTo;
+				squareToMoveTo.gameObject = level.selectedActor;
+				level.selectedActor.calculatePathToAllSquares(level.squares);
+				level.selectedActor.calculateReachableSquares(level.squares);
+				level.selectedActor.calculateAttackableSquares(level.squares);
+
+				// TODO
+				// ehhhhhhhhhh.... if it's not fully reachable then just go
+				// closest as the crow flies?
+				// also... have ideal distance (for ranged VS melee for e.g.)
 
 				// MOVE TO RANDOM SQUARE - maybe for a broken robot or confused
 				// enemy
@@ -80,11 +135,14 @@ public class Faction {
 				// level.selectedActor.squareGameObjectIsOn = squareToMoveTo;
 				// squareToMoveTo.gameObject = level.selectedActor;
 				// level.selectedActor
+				// .calculatePathToAllSquares(level.squares);
+				// level.selectedActor
 				// .calculateReachableSquares(level.squares);
 				// level.selectedActor
 				// .calculateAttackableSquares(level.squares);
 				// }
 
+				// /////////////////////////////////////////////////////////
 				timeAtCurrentStage += delta;
 			} else if (timeAtCurrentStage >= STAGE_DURATION) {
 				currentStage = STAGE.ATTACK;
@@ -101,6 +159,14 @@ public class Faction {
 				timeAtCurrentStage = 0;
 				level.endTurn();
 			}
+		}
+	}
+
+	class PathComparator implements Comparator<Path> {
+		@Override
+		public int compare(Path a, Path b) {
+			return a.travelCost < b.travelCost ? -1
+					: a.travelCost == b.travelCost ? 0 : 1;
 		}
 	}
 

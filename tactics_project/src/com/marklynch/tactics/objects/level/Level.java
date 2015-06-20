@@ -72,24 +72,35 @@ public class Level {
 		// Actors
 		actors = new Vector<Actor>();
 
-		Weapon weapon1ForActor1 = new Weapon(3, 1, "avatar.png");
-		Weapon weapon2ForActor1 = new Weapon(2, 2, "avatar.png");
-		Vector<Weapon> weaponsForActor1 = new Vector<Weapon>();
-		weaponsForActor1.add(weapon1ForActor1);
-		weaponsForActor1.add(weapon2ForActor1);
+		Weapon weapon0ForActor0 = new Weapon(3, 1, "avatar.png");
+		Weapon weapon1ForActor0 = new Weapon(2, 2, "avatar.png");
+		Vector<Weapon> weaponsForActor0 = new Vector<Weapon>();
+		weaponsForActor0.add(weapon0ForActor0);
+		weaponsForActor0.add(weapon1ForActor0);
+
+		Weapon weapon0ForActor3 = new Weapon(2, 2, "avatar.png");
+		Vector<Weapon> weaponsForActor3 = new Vector<Weapon>();
+		weaponsForActor3.add(weapon0ForActor3);
 
 		actors.add(new Actor("John Lennon", "Fighter", 1, 0, 0, 0, 0,
-				"avatar.png", squares[0][0], weaponsForActor1, 4));
+				"avatar.png", squares[0][0], weaponsForActor0, 4));
 		actors.get(0).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(0));
+
 		actors.add(new Actor("Paul McCartney", "Maniac", 2, 0, 0, 0, 0,
 				"avatar.png", squares[2][7], new Vector<Weapon>(), 4));
 		actors.get(1).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(1));
+
+		actors.add(new Actor("Steve", "Maniac", 2, 0, 0, 0, 0, "avatar.png",
+				squares[2][8], new Vector<Weapon>(), 4));
+		actors.get(2).faction = factions.get(0);
+		factions.get(0).actors.add(actors.get(2));
+
 		actors.add(new Actor("George Harrison", "Thief", 3, 0, 0, 0, 0,
-				"red.png", squares[5][3], new Vector<Weapon>(), 4));
-		actors.get(2).faction = factions.get(1);
-		factions.get(1).actors.add(actors.get(2));
+				"red.png", squares[5][3], weaponsForActor3, 4));
+		actors.get(3).faction = factions.get(1);
+		factions.get(1).actors.add(actors.get(3));
 
 		currentFactionMovingIndex = 0;
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
@@ -99,13 +110,13 @@ public class Level {
 		// Game Objects
 		gameObjects = new Vector<GameObject>();
 		gameObjects.add(new GameObject(0, 0, 0, 0, "skip.png", squares[0][3],
-				weaponsForActor1));
+				weaponsForActor0));
 		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow.png",
-				squares[1][3], weaponsForActor1));
+				squares[1][3], weaponsForActor0));
 		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow2.png",
-				squares[2][3], weaponsForActor1));
+				squares[2][3], weaponsForActor0));
 		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow3.png",
-				squares[3][3], weaponsForActor1));
+				squares[3][3], weaponsForActor0));
 
 		// Cursor
 		gameCursor = new GameCursor();
@@ -199,11 +210,9 @@ public class Level {
 				+ " turn " + turn, Color.black);
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
-	
-	public void update(int delta)
-	{
-		if(currentFactionMoving != factions.get(0))
-		{
+
+	public void update(int delta) {
+		if (currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);
 		}
 	}

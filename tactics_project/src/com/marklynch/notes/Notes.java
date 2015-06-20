@@ -820,6 +820,11 @@ public class Notes {
 	 * is a pixel in the image of the city. cool effect bra....
 	 * 
 	 * enchanted cave 2 does grid without looking like it...
+	 * 
+	 * option to skip enemy turn, fast enemy turn, slow speed enemy turn
+	 * 
+	 * I think enemy paths are going to be predictable and that may be an issue,
+	 * maybe go through paths of same length and mix them up ;)
 	 */
 
 }
