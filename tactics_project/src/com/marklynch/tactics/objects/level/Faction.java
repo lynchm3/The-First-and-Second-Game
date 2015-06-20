@@ -62,19 +62,23 @@ public class Faction {
 				this.currentActor.calculatePathToAllSquares(level.squares);
 				// get matching squares in paths (only reachable squares for
 				// current actor)
+
+				// Get squares reachable by currentActor
 				Vector<Square> currentActorReachableSquares = new Vector<Square>();
 				for (Square square : currentActor.paths.keySet()) {
-					if (square.travelCost <= currentActor.travelDistance)
+					if (currentActor.paths.get(square).travelCost <= currentActor.travelDistance)
 						currentActorReachableSquares.add(square);
 				}
 
+				// Get all squares not blocked off by target
 				Vector<Path> targetPaths = new Vector<Path>();
 				for (Path path : target.paths.values()) {
 					targetPaths.add(path);
 				}
 				targetPaths.sort(new PathComparator());
 
-				// get ones closest to target
+				// Get squares that are in both sets, as close as possible to
+				// the target
 				int bestDistanceFoundTarget = Integer.MAX_VALUE;
 				Vector<Square> potentialSquares = new Vector<Square>();
 				for (Path path : targetPaths) {
@@ -109,38 +113,12 @@ public class Faction {
 				level.selectedActor.calculateAttackableSquares(level.squares);
 
 				// TODO
+				// currently if there's no path it crashes
+				// also... stay still fi ur already at the best part :P, issue
+				// is, its not in target's list of paths
 				// ehhhhhhhhhh.... if it's not fully reachable then just go
 				// closest as the crow flies?
 				// also... have ideal distance (for ranged VS melee for e.g.)
-
-				// MOVE TO RANDOM SQUARE - maybe for a broken robot or confused
-				// enemy
-				// moveToRandomSquare()
-				// ArrayList<Square> reachableSquares = new ArrayList<Square>();
-				// for (int j = 0; j < level.squares.length; j++) {
-				// for (int k = 0; k < level.squares[0].length; k++) {
-				// if (level.squares[j][k].reachableBySelectedCharater) {
-				// reachableSquares.add(level.squares[j][k]);
-				// }
-				// }
-				// }
-				// if (reachableSquares.size() > 0) {
-				// int random = (int) (Math.random() * (reachableSquares
-				// .size() - 1));
-				// Square squareToMoveTo = reachableSquares.get(random);
-				// level.selectedActor.squareGameObjectIsOn.gameObject = null;
-				// level.selectedActor.squareGameObjectIsOn = null;
-				// level.selectedActor.distanceMovedThisTurn +=
-				// squareToMoveTo.distanceToSquare;
-				// level.selectedActor.squareGameObjectIsOn = squareToMoveTo;
-				// squareToMoveTo.gameObject = level.selectedActor;
-				// level.selectedActor
-				// .calculatePathToAllSquares(level.squares);
-				// level.selectedActor
-				// .calculateReachableSquares(level.squares);
-				// level.selectedActor
-				// .calculateAttackableSquares(level.squares);
-				// }
 
 				// /////////////////////////////////////////////////////////
 				timeAtCurrentStage += delta;
@@ -170,20 +148,28 @@ public class Faction {
 		}
 	}
 
-	// a. it's gotta be a reachable enemy
-	// b. gotta be by distace to a reachable square
-	// Square[] findNearestEnemy() {
-	//
-	// // TODO do i need to exclude enemies that will never be reachable?
-	// // I think i need a method PATH TO yep, and get the shortest one of
-	// // those FUUUUUUUUUUUUUUCK
-	//
-	// // Create list of enemies -
-	//
-	// for (int j = 0; j < level.squares.length; j++) {
-	// for (int k = 0; k < level.squares[0].length; k++) {
-	//
-	// }
-	// }
-	// }
+	public void moveToRandomSquare() {
+		// MOVE TO RANDOM SQUARE - maybe for a broken robot or confused
+		// enemy
+		Vector<Square> reachableSquares = new Vector<Square>();
+		for (int j = 0; j < level.squares.length; j++) {
+			for (int k = 0; k < level.squares[0].length; k++) {
+				if (level.squares[j][k].reachableBySelectedCharater) {
+					reachableSquares.add(level.squares[j][k]);
+				}
+			}
+		}
+		if (reachableSquares.size() > 0) {
+			int random = (int) (Math.random() * (reachableSquares.size() - 1));
+			Square squareToMoveTo = reachableSquares.get(random);
+			level.selectedActor.squareGameObjectIsOn.gameObject = null;
+			level.selectedActor.squareGameObjectIsOn = null;
+			level.selectedActor.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
+			level.selectedActor.squareGameObjectIsOn = squareToMoveTo;
+			squareToMoveTo.gameObject = level.selectedActor;
+			level.selectedActor.calculatePathToAllSquares(level.squares);
+			level.selectedActor.calculateReachableSquares(level.squares);
+			level.selectedActor.calculateAttackableSquares(level.squares);
+		}
+	}
 }
