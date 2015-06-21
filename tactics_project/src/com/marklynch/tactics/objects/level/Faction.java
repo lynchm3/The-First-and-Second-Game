@@ -115,10 +115,24 @@ public class Faction {
 					currentStage = STAGE.SELECT;
 					timeAtCurrentStage = 0;
 
-					currentActorIndex++;
-					if (currentActorIndex >= actors.size()) {
+					if (actors.size() <= currentActorIndex) {
+						// last dude in the array died, next faction's turn
 						currentActorIndex = 0;
 						level.endTurn();
+					} else {
+						if (currentActor != actors.get(currentActorIndex)) {
+							// actor died, so the array has shifted...
+							// next actor is at his old position in the array,
+							// so don't increment
+							// index
+						} else {
+							// actor didnt die, proceed as expected...
+							currentActorIndex++;
+						}
+						if (currentActorIndex >= actors.size()) {
+							currentActorIndex = 0;
+							level.endTurn();
+						}
 					}
 				} else {
 					timeAtCurrentStage += delta;

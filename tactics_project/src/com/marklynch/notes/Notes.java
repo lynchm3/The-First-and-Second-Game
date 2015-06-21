@@ -870,6 +870,9 @@ public class Notes {
 	 * /r/AskReddit/comments/2eanh8/whats_the_best_insult_youve_ever_heard/
 	 * https
 	 * ://www.reddit.com/r/AskReddit/comments/2lhqoc/what_is_your_best_insult/
+	 * 
+	 * 
+	 * AI that goes around destroying objects :D
 	 */
 
 }

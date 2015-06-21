@@ -4,13 +4,6 @@ public class TODO {
 
 	// TO DO
 
-	// What about skipping the select phase if there's nothing to attack or move
-	// to :D
-
-	// if dude dies on his turn and hes the last dude in the faction it'll crash
-	// the game, try it out (e.g. if he was poisoned)
-	// probably crash (e.g. from poison, try it out...)
-
 	// draw what you can attack the square with
 
 	// draw enemy weapons on the right hand side of their square
@@ -18,13 +11,9 @@ public class TODO {
 	// match enemy weapons with yours for what they'll counter w/, or draw
 	// arrows from one to the other :D MESSYI
 
-	// AI that goes around destroying objects :D
+	// counter attacks :P
 
 	// DONE
-	// If there's nowhere to move to skip the attack phase immediately
-	// If there's nothing to attack end the attack phase immediately
-	// Stop Ai moving to another square beside the enemy if they're already
-	// beside them :D
 
 	// Dialogs stay open if open after ending turn
 
