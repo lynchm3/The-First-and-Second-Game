@@ -834,6 +834,9 @@ public class Notes {
 	 * they go in to random mode, attacking eachother, could do this on singular
 	 * enemies on a more regular basis too. Could also have them randomly not
 	 * attack or not move on their turn, but that's fucking boring
+	 * 
+	 * DEUS EX multiple ways to do shit stealth, aggressive, hacking, social....
+	 * PILLARZ
 	 */
 
 }

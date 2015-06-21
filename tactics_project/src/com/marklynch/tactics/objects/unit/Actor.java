@@ -3,6 +3,9 @@ package com.marklynch.tactics.objects.unit;
 import java.util.HashMap;
 import java.util.Vector;
 
+import org.lwjgl.opengl.GL11;
+
+import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.ActivityLog;
 import com.marklynch.tactics.objects.level.Faction;
@@ -204,5 +207,36 @@ public class Actor extends GameObject {
 				+ squareToMoveTo, this.faction));
 		System.out.println("" + this.name + " moved to " + squareToMoveTo);
 
+	}
+
+	@Override
+	public void draw() {
+		super.draw();
+		float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
+		float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
+		for (int i = 0; i < weapons.size(); i++) {
+
+			Weapon weapon = weapons.get(i);
+			weapon.imageTexture.bind();
+
+			float weaponPositionXInPixels = this.squareGameObjectIsOn.x
+					* (int) Game.SQUARE_WIDTH;
+			float weaponPositionYInPixels = this.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT + (i * weaponHeightInPixels);
+
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex2f(weaponPositionXInPixels, weaponPositionYInPixels);
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
+					weaponPositionYInPixels);
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
+					weaponPositionYInPixels + weaponHeightInPixels);
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex2f(weaponPositionXInPixels, weaponPositionYInPixels
+					+ weaponHeightInPixels);
+			GL11.glEnd();
+		}
 	}
 }

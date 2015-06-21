@@ -14,16 +14,26 @@ public class TODO {
 	// ranges -
 	// currently weapon range works as any range up to it's range value
 	// So if range is 3, the weapon can attack 1,2 or 3 blocks away
+	// Does it make sense u can use a bow at short range? kinda does, and
+	// doesn't...
+	// It's close enough to get hit b a sword so......
+	// Also, i think all the box dudes should have weak daggers by default, and
+	// be shit at using them :D
 
-	// WRITE A RULE BOOK
+	// WRITE A RULE BOOK, this is cool and appreciated by retro fans and easy to
+	// do
+	// ALSO... it must be completely pointless coz if u need instructions ur app
+	// is broken
 
 	// More enemies on screen for better testing
 
 	// Colorize the log to match enemy/ally
 
-	// Log on the screen
-	// e.g. X moved to Y
-	// e.g. X attacked Y for Z damage
+	// When u highlight a square to move to, also highlight where u can attack
+	// if you move there... LOTS of highlighting.
+	// Maybe like. X on the squares u can attack
+	// OOOOORRRRR show the icon of the weapon(s) that can attack there ;)
+	// YES, start putting in all these useful icons....
 
 	// AI to take over on their turn
 	// DONE - Phase 1. End their turn
