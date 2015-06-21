@@ -96,15 +96,23 @@ public class Actor extends GameObject {
 		level.logOnScreen(new ActivityLog("" + this.name + " attacked "
 				+ gameObject.name + " with " + selectedWeapon.name + " for "
 				+ selectedWeapon.damage + " damage", this.faction));
-		gameObject.checkIfDestroyed();
+		if (gameObject.checkIfDestroyed())
+			if (gameObject instanceof Actor)
+				level.logOnScreen(new ActivityLog("" + this.name + " killed "
+						+ gameObject.name, this.faction));
+			else
+				level.logOnScreen(new ActivityLog("" + this.name
+						+ " destroyed a " + gameObject.name, this.faction));
 	}
 
 	@Override
-	public void checkIfDestroyed() {
+	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
 			this.squareGameObjectIsOn.gameObject = null;
 			this.faction.actors.remove(this);
+			return true;
 		}
+		return false;
 	}
 
 	public void moveTo(Square squareToMoveTo) {

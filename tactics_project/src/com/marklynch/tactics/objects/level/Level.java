@@ -23,7 +23,7 @@ public class Level {
 	public GameCursor gameCursor;
 	public Vector<Actor> actors;
 	public Actor activeActor;
-	public Vector<GameObject> gameObjects;
+	public Vector<GameObject> inanimateObjects;
 	public Vector<Dialog> dialogs;
 	public Square[][] squares;
 	public Button endTurnButton;
@@ -114,17 +114,17 @@ public class Level {
 		// Adding actors to factions
 
 		// Game Objects
-		gameObjects = new Vector<GameObject>();
-		gameObjects.add(new GameObject("Dumpster", 100, 0, 0, 0, 0, "skip.png",
-				squares[0][3], weaponsForActor0, this));
-		gameObjects.add(new GameObject("Dumpster", 100, 0, 0, 0, 0,
+		inanimateObjects = new Vector<GameObject>();
+		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
+				"skip.png", squares[0][3], weaponsForActor0, this));
+		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
 				"skip_with_shadow.png", squares[1][3], weaponsForActor0, this));
-		gameObjects
-				.add(new GameObject("Dumpster", 100, 0, 0, 0, 0,
+		inanimateObjects
+				.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
 						"skip_with_shadow2.png", squares[2][3],
 						weaponsForActor0, this));
-		gameObjects
-				.add(new GameObject("Dumpster", 100, 0, 0, 0, 0,
+		inanimateObjects
+				.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
 						"skip_with_shadow3.png", squares[3][3],
 						weaponsForActor0, this));
 
@@ -192,7 +192,7 @@ public class Level {
 
 		// Objects
 
-		for (GameObject gameObject : gameObjects) {
+		for (GameObject gameObject : inanimateObjects) {
 			gameObject.draw();
 		}
 

@@ -16,6 +16,11 @@ public class Notes {
 	 * 
 	 * If the game is easy, you're probably an asshole
 	 * 
+	 * If can't reach target, fall back to reachable enemy that's closest to
+	 * target
+	 * 
+	 * If can't attack target, fall back to enemy that's closest
+	 * 
 	 * After battle the supporting cast stand still, or move to a place they
 	 * wont be on the way, you can move around with the main character and talk
 	 * to people, collect items and shit, you can collect the items or recruit
@@ -837,6 +842,34 @@ public class Notes {
 	 * 
 	 * DEUS EX multiple ways to do shit stealth, aggressive, hacking, social....
 	 * PILLARZ
+	 * 
+	 * Some text - "They're going to single-mindedly come for steve, we need to
+	 * protect him" - make it a useless character that they're coming for
+	 * though, or someone weak, someone who'll come in useful... or maybe
+	 * someone who won't become useful :D -
+	 * "Fuck him, it's not worth risking our real fighters to save this lanky streak of piss"
+	 * 
+	 * Character - really weak guy, pretty useless, maybe never becomes useful?
+	 * or... hmm... have to do something with him, there's a mission where the
+	 * enemy just targets him... you don't fail if he dies, it's just something
+	 * that happens... is it ok to keep him useless? I think it fits for what
+	 * i'm going for, and the witcher vibe... maybe hes just a nice guy, then
+	 * could have a really useful character whos an asshole who's put in the
+	 * same situation (where the enemy exclusively targets him), and if you keep
+	 * the super useful asshole alive... he fucks u up a mission or two later...
+	 * that's gratitude for you... if the asshole is the guy with the
+	 * imaginative insults, maybe someone uses an interesting insult to describe
+	 * him after he defects :D
+	 * 
+	 * Character - someone who uses fantastic (or not) (but imaginative at
+	 * least) insults - could reddit best insults ;)
+	 * https://www.reddit.com/r/AskReddit
+	 * /comments/30v09f/reddit_whats_the_best_insult_you_can_think_of/
+	 * https://www.reddit.com/r/insults/top/?sort=top&t=all
+	 * https://www.reddit.com
+	 * /r/AskReddit/comments/2eanh8/whats_the_best_insult_youve_ever_heard/
+	 * https
+	 * ://www.reddit.com/r/AskReddit/comments/2lhqoc/what_is_your_best_insult/
 	 */
 
 }

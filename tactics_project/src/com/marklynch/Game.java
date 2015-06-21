@@ -8,7 +8,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
-import com.marklynch.tactics.objects.level.Faction;
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -38,13 +38,13 @@ public class Game {
 	boolean mouseButtonStateLeft = false;
 	boolean mouseButtonStateRight = false;
 
-	public static int windowWidth = 1280;
-	public static int windowHeight = 640;
+	public static int windowWidth = 1900;
+	public static int windowHeight = 1000;
 
-	public static float zoom = 0.5f;
+	public static float zoom = 0.8f;
 
-	public static float dragX = 0;
-	public static float dragY = 0;
+	public static float dragX = 100;
+	public static float dragY = -100;
 	float mouseDownX = -1;
 	float mouseDownY = -1;
 	float mouseLastX = -1;
@@ -207,26 +207,30 @@ public class Game {
 				&& level.currentFactionMovingIndex == 0) {
 			// click square we're on
 
-			for (Faction faction : level.factions) {
-				for (Actor actor : faction.actors) {
-					if (actor.squareGameObjectIsOn == squareMouseIsOver) {
-						Actor clickedActor = actor;
-						if (clickedActor.faction == level.currentFactionMoving) {
-							level.activeActor = clickedActor;
-							Actor.highlightSelectedCharactersSquares(level);
-						} else if (level.activeActor != null) {
-							int weaponDistance = level.activeActor
-									.weaponDistanceTo(squareMouseIsOver);
-							if (level.activeActor.hasRange(weaponDistance)) {
-								level.activeActor.attack(clickedActor);
-								level.activeActor
-										.highlightSelectedCharactersSquares(level);
-							}
-						}
+			GameObject clickedGameObject = squareMouseIsOver.gameObject;
+			if (clickedGameObject != null) {
+				boolean selectedNewActor = false;
+				if (clickedGameObject instanceof Actor) {
+					Actor clickedActor = (Actor) clickedGameObject;
+					if (clickedActor.faction == level.currentFactionMoving) {
+						level.activeActor = clickedActor;
+						Actor.highlightSelectedCharactersSquares(level);
+						selectedNewActor = true;
+					}
+				}
+
+				if (level.activeActor != null && selectedNewActor == false) {
+					int weaponDistance = level.activeActor
+							.weaponDistanceTo(squareMouseIsOver);
+					if (level.activeActor.hasRange(weaponDistance)) {
+						level.activeActor.attack(clickedGameObject);
+						Actor.highlightSelectedCharactersSquares(level);
 					}
 				}
 			}
 
+			// Check if we clicked on an empty reachable square and act
+			// accordingly
 			if (level.activeActor != null
 					&& squareMouseIsOver.reachableBySelectedCharater
 					&& level.activeActor.faction == level.factions.get(0)

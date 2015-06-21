@@ -4,12 +4,6 @@ public class TODO {
 
 	// TO DO
 
-	// test AI attacking randomly (incl. it's allies)
-
-	// AI attack spcific gameObject, if not... pick an enemy?
-
-	// Attack objects
-
 	// If there's nowhere to move to skip the attack phase immediately
 
 	// If there's nothing to attack end the attack phase immediately
@@ -24,11 +18,18 @@ public class TODO {
 	// the game, try it out (e.g. if he was poisoned)
 	// probably crash (e.g. from poison, try it out...)
 
+	// draw what you can attack the square with
+
+	// draw enemy weapons on the right hand side of their square
+
+	// match enemy weapons with yours for what they'll counter w/, or draw
+	// arrows from one to the other :D MESSYI
+
+	// AI that goes around destroying objects :D
+
 	// DONE
-	// Log end turn
-	// AI target objects
-	// add more enemies
-	// BUG i can attack dead enemies
+
+	// Dialogs stay open if open after ending turn
 
 	// attacking enemies
 	// currently when i click on an enemy it just selects them
@@ -147,6 +148,20 @@ public class TODO {
 
 	// watch the fire emblem battle animations, the 3d ones are pretty good
 	// one where the screen turned red and black...
+
+	// Make all the over the top details configurable
+	// The weapons icons beside the characters
+	// The wepaons icons on where you can attack
+	// maybe ur weapon icons are always on the left and the enemies are always
+	// on the right, w/ a VS or something... i dunno... VS what they'd retaliate
+	// with, i'm sure i'll work it out CONCEPT GO
+
+	// In log text, make it personal to the player / target / weapons that were
+	// used, so that the actors / weapons / styles will grow on the player
+	// Also... if they do something clever, tell them (ITS SUPER EFFECTIVE!!!!!)
+	// (Robots don't like lightning strikes, ShitBot 3000 has been overcharged)
+	// or speach bubbles rather than log text? or speachbubbles and log the
+	// speach like aoe2)
 
 	// DONE
 }

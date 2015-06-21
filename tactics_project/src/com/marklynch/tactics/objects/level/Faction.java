@@ -14,7 +14,15 @@ import com.marklynch.tactics.objects.unit.Path;
 public class Faction {
 
 	enum AI_MODE {
-		TARGET_SPECIFIC_ENEMY, TARGET_NEAREST_ENEMY, TARGET_WEAKEST_ENEMY, RANDOM_ATTACK_ENEMIES_ONLY, RANDOM_ATTACK_ENEMIES_AND_ALLIES, RANDOM_ATTACK_ENEMIES_AND_ALLIES_AND_OBJECTS
+		TARGET_SPECIFIC_OBJECT,
+		TARGET_NEAREST_ENEMY,
+		TARGET_NEAREST_ENEMY_IN_A_FACTION,
+		TARGET_WEAKEST_ENEMY,
+		TARGET_WEAKEST_ENEMY_IN_A_FACTION,
+		RANDOM_ATTACK_ENEMIES_ONLY,
+		RANDOM_ATTACK_ENEMIES_AND_ALLIES,
+		RANDOM_ATTACK_ENEMIES_AND_ALLIES_AND_OBJECT,
+		TARGET_NEAREST_OBJECT
 	};
 
 	public String name;
@@ -66,10 +74,12 @@ public class Faction {
 		} else if (currentStage == STAGE.MOVE) {
 			if (timeAtCurrentStage == 0) {
 
-				moveTowardsTarget(level.gameObjects.elementAt(0));
+				moveTowardsTarget(level.factions.get(0).actors.get(0));
+				// moveTowardsTarget(level.inanimateObjects.elementAt(0));
 				// moveToRandomSquare();
 				// TODO lure enemy in (like in WOW)
-				// TODO moveTowardsNearestTarget
+				// TODO moveTowardsNearestEnemy
+				// TODO moveTowardsNearestObjecy
 
 				// /////////////////////////////////////////////////////////
 				timeAtCurrentStage += delta;
@@ -84,7 +94,9 @@ public class Faction {
 
 			if (timeAtCurrentStage == 0) {
 				// start of attack phase, act
-				attackRandomEnemyOrAlly();
+				// attackRandomEnemy();
+				// attackRandomEnemyOrAlly();
+				attackTarget(level.factions.get(0).actors.get(0));
 
 				// /////////////////////////////////////////////////////////
 				timeAtCurrentStage += delta;
@@ -243,5 +255,17 @@ public class Faction {
 			level.activeActor.attack(actorToAttack);
 			level.activeActor.highlightSelectedCharactersSquares(level);
 		}
+	}
+
+	private void attackTarget(GameObject gameObject) {
+		int weaponDistance = level.activeActor
+				.weaponDistanceTo(gameObject.squareGameObjectIsOn);
+		if (level.activeActor.hasRange(weaponDistance)) {
+			level.activeActor.attack(gameObject);
+			Actor.highlightSelectedCharactersSquares(level);
+		} else {
+			attackRandomEnemy();
+		}
+
 	}
 }

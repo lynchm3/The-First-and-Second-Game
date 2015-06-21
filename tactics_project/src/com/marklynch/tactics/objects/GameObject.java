@@ -100,11 +100,13 @@ public class GameObject {
 
 	}
 
-	public void checkIfDestroyed() {
+	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
 			this.squareGameObjectIsOn.gameObject = null;
-			level.gameObjects.remove(this);
+			level.inanimateObjects.remove(this);
+			return true;
 		}
+		return false;
 	}
 
 	int highestPathCostSeen = 0;

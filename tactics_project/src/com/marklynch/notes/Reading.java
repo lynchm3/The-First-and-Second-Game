@@ -11,5 +11,12 @@ public class Reading {
 	 * PS tutorial on making shit look grimey/gritty.
 	 * 
 	 * I also want large outer outlines
+	 * 
+	 * 
+	 * Article about how the witcher cant solve all the worlds problems coz hes
+	 * just a dude http://midnightresistance.co.uk/articles/useless-professional
+	 * 
+	 * In general, just check out the sunday papers and devblogs (tag devblog)
+	 * on RPS, gotta be someuseful stuff there
 	 */
 }
