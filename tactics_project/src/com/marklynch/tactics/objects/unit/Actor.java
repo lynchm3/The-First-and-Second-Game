@@ -131,6 +131,8 @@ public class Actor extends GameObject {
 	@Override
 	public void draw() {
 		super.draw();
+
+		// draw weapon icons on square
 		float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
 		float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
 		for (int i = 0; i < weapons.size(); i++) {
@@ -138,10 +140,22 @@ public class Actor extends GameObject {
 			Weapon weapon = weapons.get(i);
 			weapon.imageTexture.bind();
 
-			float weaponPositionXInPixels = this.squareGameObjectIsOn.x
-					* (int) Game.SQUARE_WIDTH;
-			float weaponPositionYInPixels = this.squareGameObjectIsOn.y
-					* (int) Game.SQUARE_HEIGHT + (i * weaponHeightInPixels);
+			float weaponPositionXInPixels = 0;
+			float weaponPositionYInPixels = 0;
+
+			if (this.faction == level.factions.get(0)) {
+				weaponPositionXInPixels = this.squareGameObjectIsOn.x
+						* (int) Game.SQUARE_WIDTH;
+				weaponPositionYInPixels = this.squareGameObjectIsOn.y
+						* (int) Game.SQUARE_HEIGHT + (i * weaponHeightInPixels);
+			} else {
+				weaponPositionXInPixels = this.squareGameObjectIsOn.x
+						* (int) Game.SQUARE_WIDTH + Game.SQUARE_WIDTH
+						- weaponWidthInPixels;
+				weaponPositionYInPixels = this.squareGameObjectIsOn.y
+						* (int) Game.SQUARE_HEIGHT + (i * weaponHeightInPixels);
+
+			}
 
 			GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2f(0, 0);

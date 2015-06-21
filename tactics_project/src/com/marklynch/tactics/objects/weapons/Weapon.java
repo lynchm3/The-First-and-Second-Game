@@ -79,7 +79,8 @@ public class Weapon {
 
 		if (currentSquare != null && !squaresInThisPath.contains(currentSquare)) {
 			squaresInThisPath.add(currentSquare);
-			currentSquare.weaponsThatCanAttack.add(this);
+			if (!currentSquare.weaponsThatCanAttack.contains(this))
+				currentSquare.weaponsThatCanAttack.add(this);
 			remainingRange -= 1;
 			if (remainingRange > 0) {
 				calculateAttackableSquares(squares, remainingRange,

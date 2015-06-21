@@ -4,10 +4,6 @@ public class TODO {
 
 	// TO DO
 
-	// draw what you can attack the square with
-
-	// draw enemy weapons on the right hand side of their square
-
 	// match enemy weapons with yours for what they'll counter w/, or draw
 	// arrows from one to the other :D MESSYI
 

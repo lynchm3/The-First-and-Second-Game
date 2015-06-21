@@ -873,6 +873,9 @@ public class Notes {
 	 * 
 	 * 
 	 * AI that goes around destroying objects :D
+	 * 
+	 * Is there a better way to display what weapons they can attack with? maybe
+	 * put the weapon in their hands or on their backs or hmmmmmmmmmmmmmm
 	 */
 
 }
