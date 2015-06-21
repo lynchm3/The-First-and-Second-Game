@@ -198,7 +198,6 @@ public class Faction {
 	}
 
 	public void attackRandomEnemy() {
-		System.out.println("attackRandomEnemy()");
 
 		// make a list of attackable enemies
 		Vector<Actor> attackableActors = new Vector<Actor>();
@@ -207,17 +206,12 @@ public class Faction {
 				int weaponDistance = level.activeActor
 						.weaponDistanceTo(actor.squareGameObjectIsOn);
 
-				System.out.println("weaponDistance = weaponDistance");
-
 				if (faction != this
 						&& level.activeActor.hasRange(weaponDistance)) {
 					attackableActors.add(actor);
 				}
 			}
 		}
-
-		System.out.println("attackableActors.size() = "
-				+ attackableActors.size());
 
 		if (attackableActors.size() > 0) {
 			int random = (int) (Math.random() * (attackableActors.size() - 1));

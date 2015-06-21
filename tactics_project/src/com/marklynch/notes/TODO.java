@@ -4,6 +4,10 @@ public class TODO {
 
 	// TO DO
 
+	// Death
+
+	// Draw health
+
 	// attacking enemies
 	// currently when i click on an enemy it just selects them
 	// in TT you attack enemies by selecting the sword then the square to

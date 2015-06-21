@@ -212,7 +212,7 @@ public class Game {
 					if (clickedActor.faction == level.currentFactionMoving) {
 						level.activeActor = clickedActor;
 						Actor.highlightSelectedCharactersSquares(level);
-					} else {
+					} else if (level.activeActor != null) {
 						int weaponDistance = level.activeActor
 								.weaponDistanceTo(squareMouseIsOver);
 						if (level.activeActor.hasRange(weaponDistance)) {

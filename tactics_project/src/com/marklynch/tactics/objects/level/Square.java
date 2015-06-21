@@ -95,8 +95,9 @@ public class Square {
 		}
 
 		// if (this.reachableBySelectedCharater) {
-		level.font.drawString(squarePositionX, squarePositionY, "cost "
-				+ distanceToSquare, Color.black);
+		if (distanceToSquare != Integer.MAX_VALUE)
+			level.font.drawString(squarePositionX, squarePositionY, "cost "
+					+ distanceToSquare, Color.black);
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		// }
 

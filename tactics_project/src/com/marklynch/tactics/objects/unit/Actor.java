@@ -21,20 +21,18 @@ public class Actor extends GameObject {
 
 	public String title = "";
 	public int actorLevel = 1;
-	public String name = "";
 	public int distanceMovedThisTurn = 0;
 	public int travelDistance = 4;
 	public Faction faction;
 	public HashMap<Square, Path> paths = new HashMap<Square, Path>();
 	public Weapon selectedWeapon = null;
 
-	public Actor(String name, String title, int actorLevel, int strength,
-			int dexterity, int intelligence, int endurance, String imagePath,
-			Square squareActorIsStandingOn, Vector<Weapon> weapons,
-			int travelDistance, Level level) {
-		super(strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, weapons, level);
-		this.name = name;
+	public Actor(String name, String title, int actorLevel, int health,
+			int strength, int dexterity, int intelligence, int endurance,
+			String imagePath, Square squareActorIsStandingOn,
+			Vector<Weapon> weapons, int travelDistance, Level level) {
+		super(name, health, strength, dexterity, intelligence, endurance,
+				imagePath, squareActorIsStandingOn, weapons, level);
 		this.title = title;
 		this.actorLevel = actorLevel;
 		this.travelDistance = travelDistance;
@@ -183,16 +181,21 @@ public class Actor extends GameObject {
 		return false;
 	}
 
-	public void attack(Actor actor) {
-		actor.remainingHealth -= selectedWeapon.damage;
+	public void attack(GameObject gameObject) {
+		gameObject.remainingHealth -= selectedWeapon.damage;
 		this.distanceMovedThisTurn = Integer.MAX_VALUE;
 		level.logOnScreen(new ActivityLog("" + this.name + " attacked "
-				+ actor.name + " with " + selectedWeapon.name + " for "
+				+ gameObject.name + " with " + selectedWeapon.name + " for "
 				+ selectedWeapon.damage + " damage", this.faction));
-		System.out.println("" + this.name + " attacked " + actor.name
-				+ " with " + selectedWeapon.name + " for "
-				+ selectedWeapon.damage + " damage");
+		gameObject.checkIfDestroyed();
+	}
 
+	@Override
+	public void checkIfDestroyed() {
+		if (remainingHealth <= 0) {
+			this.squareGameObjectIsOn.gameObject = null;
+			this.faction.actors.remove(this);
+		}
 	}
 
 	public void moveTo(Square squareToMoveTo) {
@@ -205,7 +208,6 @@ public class Actor extends GameObject {
 		Actor.highlightSelectedCharactersSquares(level);
 		level.logOnScreen(new ActivityLog("" + this.name + " moved to "
 				+ squareToMoveTo, this.faction));
-		System.out.println("" + this.name + " moved to " + squareToMoveTo);
 
 	}
 

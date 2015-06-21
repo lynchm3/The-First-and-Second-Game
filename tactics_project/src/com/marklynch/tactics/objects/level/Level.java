@@ -83,22 +83,22 @@ public class Level {
 		Vector<Weapon> weaponsForActor3 = new Vector<Weapon>();
 		weaponsForActor3.add(weapon0ForActor3);
 
-		actors.add(new Actor("John Lennon", "Fighter", 1, 0, 0, 0, 0,
+		actors.add(new Actor("John Lennon", "Fighter", 1, 10, 0, 0, 0, 0,
 				"avatar.png", squares[0][0], weaponsForActor0, 4, this));
 		actors.get(0).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(0));
 
-		actors.add(new Actor("Paul McCartney", "Maniac", 2, 0, 0, 0, 0,
+		actors.add(new Actor("Paul McCartney", "Maniac", 2, 10, 0, 0, 0, 0,
 				"avatar.png", squares[2][7], new Vector<Weapon>(), 4, this));
 		actors.get(1).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(1));
 
-		actors.add(new Actor("Steve", "Maniac", 2, 0, 0, 0, 0, "avatar.png",
-				squares[2][8], new Vector<Weapon>(), 4, this));
+		actors.add(new Actor("Steve", "Maniac", 2, 100, 0, 0, 0, 0,
+				"avatar.png", squares[2][8], new Vector<Weapon>(), 4, this));
 		actors.get(2).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(2));
 
-		actors.add(new Actor("George Harrison", "Thief", 3, 0, 0, 0, 0,
+		actors.add(new Actor("George Harrison", "Thief", 3, 10, 0, 0, 0, 0,
 				"red.png", squares[5][3], weaponsForActor3, 4, this));
 		actors.get(3).faction = factions.get(1);
 		factions.get(1).actors.add(actors.get(3));
@@ -110,14 +110,18 @@ public class Level {
 
 		// Game Objects
 		gameObjects = new Vector<GameObject>();
-		gameObjects.add(new GameObject(0, 0, 0, 0, "skip.png", squares[0][3],
-				weaponsForActor0, this));
-		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow.png",
-				squares[1][3], weaponsForActor0, this));
-		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow2.png",
-				squares[2][3], weaponsForActor0, this));
-		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow3.png",
-				squares[3][3], weaponsForActor0, this));
+		gameObjects.add(new GameObject("Dumpster", 100, 0, 0, 0, 0, "skip.png",
+				squares[0][3], weaponsForActor0, this));
+		gameObjects.add(new GameObject("Dumpster", 100, 0, 0, 0, 0,
+				"skip_with_shadow.png", squares[1][3], weaponsForActor0, this));
+		gameObjects
+				.add(new GameObject("Dumpster", 100, 0, 0, 0, 0,
+						"skip_with_shadow2.png", squares[2][3],
+						weaponsForActor0, this));
+		gameObjects
+				.add(new GameObject("Dumpster", 100, 0, 0, 0, 0,
+						"skip_with_shadow3.png", squares[3][3],
+						weaponsForActor0, this));
 
 		// Cursor
 		gameCursor = new GameCursor();
@@ -188,10 +192,12 @@ public class Level {
 		}
 
 		// Actors
-
-		for (Actor actor : actors) {
-			actor.draw();
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				actor.draw();
+			}
 		}
+
 		// zoom end
 		GL11.glPopMatrix();
 
@@ -208,7 +214,7 @@ public class Level {
 
 		// Turn text
 		font.drawString(Game.windowWidth - 150, 20, currentFactionMoving.name
-				+ " turn " + turn, Color.black);
+				+ " turn " + turn, Color.magenta);
 
 		// Log text
 		for (int i = log.size() - 1; i > -1; i--) {
@@ -250,8 +256,10 @@ public class Level {
 	}
 
 	public void endTurn() {
-		for (Actor actor : actors) {
-			actor.distanceMovedThisTurn = 0;
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				actor.distanceMovedThisTurn = 0;
+			}
 		}
 		removeWalkingHighlight();
 		removeWeaponsThatCanAttackHighlight();
@@ -261,10 +269,18 @@ public class Level {
 			currentFactionMovingIndex = 0;
 			this.turn++;
 		}
+		while (factions.get(currentFactionMovingIndex).actors.size() == 0) {
+			currentFactionMovingIndex++;
+			if (currentFactionMovingIndex >= factions.size()) {
+				currentFactionMovingIndex = 0;
+				this.turn++;
+			}
+		}
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 	}
 
 	public void logOnScreen(ActivityLog stringToLog) {
 		log.add(stringToLog);
+		System.out.println(stringToLog.text);
 	}
 }
