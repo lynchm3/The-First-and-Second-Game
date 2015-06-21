@@ -4,9 +4,31 @@ public class TODO {
 
 	// TO DO
 
-	// Death
+	// test AI attacking randomly (incl. it's allies)
 
-	// Draw health
+	// AI attack spcific gameObject, if not... pick an enemy?
+
+	// Attack objects
+
+	// If there's nowhere to move to skip the attack phase immediately
+
+	// If there's nothing to attack end the attack phase immediately
+
+	// What about skipping the select phase if there's nothing to attack or move
+	// to :D
+
+	// Stop Ai mving to another square beside the enemy if they're already
+	// beside them :D
+
+	// if dude dies on his turn and hes the last dude in the faction it'll crash
+	// the game, try it out (e.g. if he was poisoned)
+	// probably crash (e.g. from poison, try it out...)
+
+	// DONE
+	// Log end turn
+	// AI target objects
+	// add more enemies
+	// BUG i can attack dead enemies
 
 	// attacking enemies
 	// currently when i click on an enemy it just selects them

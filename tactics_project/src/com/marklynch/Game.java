@@ -8,6 +8,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -206,19 +207,21 @@ public class Game {
 				&& level.currentFactionMovingIndex == 0) {
 			// click square we're on
 
-			for (Actor actor : level.actors) {
-				if (actor.squareGameObjectIsOn == squareMouseIsOver) {
-					Actor clickedActor = actor;
-					if (clickedActor.faction == level.currentFactionMoving) {
-						level.activeActor = clickedActor;
-						Actor.highlightSelectedCharactersSquares(level);
-					} else if (level.activeActor != null) {
-						int weaponDistance = level.activeActor
-								.weaponDistanceTo(squareMouseIsOver);
-						if (level.activeActor.hasRange(weaponDistance)) {
-							level.activeActor.attack(clickedActor);
-							level.activeActor
-									.highlightSelectedCharactersSquares(level);
+			for (Faction faction : level.factions) {
+				for (Actor actor : faction.actors) {
+					if (actor.squareGameObjectIsOn == squareMouseIsOver) {
+						Actor clickedActor = actor;
+						if (clickedActor.faction == level.currentFactionMoving) {
+							level.activeActor = clickedActor;
+							Actor.highlightSelectedCharactersSquares(level);
+						} else if (level.activeActor != null) {
+							int weaponDistance = level.activeActor
+									.weaponDistanceTo(squareMouseIsOver);
+							if (level.activeActor.hasRange(weaponDistance)) {
+								level.activeActor.attack(clickedActor);
+								level.activeActor
+										.highlightSelectedCharactersSquares(level);
+							}
 						}
 					}
 				}

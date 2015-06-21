@@ -103,6 +103,11 @@ public class Level {
 		actors.get(3).faction = factions.get(1);
 		factions.get(1).actors.add(actors.get(3));
 
+		actors.add(new Actor("Ghandi", "Thief", 3, 10, 0, 0, 0, 0, "red.png",
+				squares[6][3], new Vector<Weapon>(), 4, this));
+		actors.get(4).faction = factions.get(1);
+		factions.get(1).actors.add(actors.get(4));
+
 		currentFactionMovingIndex = 0;
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 
@@ -256,6 +261,10 @@ public class Level {
 	}
 
 	public void endTurn() {
+
+		this.logOnScreen(new ActivityLog("" + currentFactionMoving.name
+				+ " ended turn " + this.turn, this.currentFactionMoving));
+
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {
 				actor.distanceMovedThisTurn = 0;

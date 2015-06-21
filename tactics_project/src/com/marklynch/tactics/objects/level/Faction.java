@@ -7,13 +7,14 @@ import java.util.Vector;
 
 import org.newdawn.slick.Color;
 
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
 
 public class Faction {
 
 	enum AI_MODE {
-		TARGET_SPECIFIC_ENEMY, TARGET_NEAREST_ENEMY, TARGET_WEAKEST_ENEMY, RANDOM_ATTACK_ENEMIES_ONLY, RANDOM_ATTACK_ENEMIES_AND_ALLIES
+		TARGET_SPECIFIC_ENEMY, TARGET_NEAREST_ENEMY, TARGET_WEAKEST_ENEMY, RANDOM_ATTACK_ENEMIES_ONLY, RANDOM_ATTACK_ENEMIES_AND_ALLIES, RANDOM_ATTACK_ENEMIES_AND_ALLIES_AND_OBJECTS
 	};
 
 	public String name;
@@ -65,7 +66,7 @@ public class Faction {
 		} else if (currentStage == STAGE.MOVE) {
 			if (timeAtCurrentStage == 0) {
 
-				moveTowardsTarget(level.factions.get(0).actors.get(0));
+				moveTowardsTarget(level.gameObjects.elementAt(0));
 				// moveToRandomSquare();
 				// TODO lure enemy in (like in WOW)
 				// TODO moveTowardsNearestTarget
@@ -83,7 +84,7 @@ public class Faction {
 
 			if (timeAtCurrentStage == 0) {
 				// start of attack phase, act
-				attackRandomEnemy();
+				attackRandomEnemyOrAlly();
 
 				// /////////////////////////////////////////////////////////
 				timeAtCurrentStage += delta;
@@ -113,7 +114,7 @@ public class Faction {
 		}
 	}
 
-	public void moveTowardsTarget(Actor target) {
+	public void moveTowardsTarget(GameObject target) {
 
 		// TODO
 		// currently if there's no path it crashes
@@ -222,6 +223,7 @@ public class Faction {
 	}
 
 	public void attackRandomEnemyOrAlly() {
+		// TODO needs to be tested
 		// make a list of attackable enemies
 		Vector<Actor> attackableActors = new Vector<Actor>();
 		for (Faction faction : level.factions) {
