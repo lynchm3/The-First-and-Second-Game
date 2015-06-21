@@ -102,33 +102,36 @@ public class Square {
 		// }
 
 		// draw weapon icons on square
-		float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
-		float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
-		for (int i = 0; i < this.weaponsThatCanAttack.size(); i++) {
+		if (level.currentFactionMoving == level.factions.get(0)) {
+			float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
+			float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
+			for (int i = 0; i < this.weaponsThatCanAttack.size(); i++) {
 
-			Weapon weapon = this.weaponsThatCanAttack.get(i);
-			weapon.imageTexture.bind();
+				Weapon weapon = this.weaponsThatCanAttack.get(i);
+				weapon.imageTexture.bind();
 
-			float weaponPositionXInPixels = 0;
-			float weaponPositionYInPixels = 0;
+				float weaponPositionXInPixels = 0;
+				float weaponPositionYInPixels = 0;
 
-			weaponPositionXInPixels = this.x * (int) Game.SQUARE_WIDTH;
-			weaponPositionYInPixels = this.y * (int) Game.SQUARE_HEIGHT
-					+ (i * weaponHeightInPixels);
+				weaponPositionXInPixels = this.x * (int) Game.SQUARE_WIDTH;
+				weaponPositionYInPixels = this.y * (int) Game.SQUARE_HEIGHT
+						+ (i * weaponHeightInPixels);
 
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2f(0, 0);
-			GL11.glVertex2f(weaponPositionXInPixels, weaponPositionYInPixels);
-			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
-					weaponPositionYInPixels);
-			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
-					weaponPositionYInPixels + weaponHeightInPixels);
-			GL11.glTexCoord2f(0, 1);
-			GL11.glVertex2f(weaponPositionXInPixels, weaponPositionYInPixels
-					+ weaponHeightInPixels);
-			GL11.glEnd();
+				GL11.glBegin(GL11.GL_QUADS);
+				GL11.glTexCoord2f(0, 0);
+				GL11.glVertex2f(weaponPositionXInPixels,
+						weaponPositionYInPixels);
+				GL11.glTexCoord2f(1, 0);
+				GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
+						weaponPositionYInPixels);
+				GL11.glTexCoord2f(1, 1);
+				GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
+						weaponPositionYInPixels + weaponHeightInPixels);
+				GL11.glTexCoord2f(0, 1);
+				GL11.glVertex2f(weaponPositionXInPixels,
+						weaponPositionYInPixels + weaponHeightInPixels);
+				GL11.glEnd();
+			}
 		}
 
 	}
