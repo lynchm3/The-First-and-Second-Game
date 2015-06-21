@@ -55,9 +55,10 @@ public class Faction {
 
 	public void update(int delta) {
 
-		// Selecting a hero
 		if (currentStage == STAGE.SELECT) {
+			// Selecting a hero
 			if (timeAtCurrentStage == 0) {
+				// start of stage, perform action
 				currentActor = actors.get(currentActorIndex);
 				level.activeActor = currentActor;
 				level.activeActor.calculatePathToAllSquares(level.squares);
@@ -70,11 +71,21 @@ public class Faction {
 			} else {
 				timeAtCurrentStage += delta;
 			}
-			// Moving with selected hero
 		} else if (currentStage == STAGE.MOVE) {
+			// Moving with selected hero
 			if (timeAtCurrentStage == 0) {
+				// start of stage, perform action
 
-				moveTowardsTarget(level.factions.get(0).actors.get(0));
+				boolean performedMove = moveTowardsTarget(level.factions.get(0).actors
+						.get(0));
+				if (performedMove == false) {
+					currentStage = STAGE.ATTACK;
+					timeAtCurrentStage = 0;
+				} else {
+					timeAtCurrentStage += delta;
+
+				}
+
 				// moveTowardsTarget(level.inanimateObjects.elementAt(0));
 				// moveToRandomSquare();
 				// TODO lure enemy in (like in WOW)
@@ -82,8 +93,8 @@ public class Faction {
 				// TODO moveTowardsNearestObjecy
 
 				// /////////////////////////////////////////////////////////
-				timeAtCurrentStage += delta;
 			} else if (timeAtCurrentStage >= STAGE_DURATION) {
+				// end of move phase
 				currentStage = STAGE.ATTACK;
 				timeAtCurrentStage = 0;
 			} else {
@@ -96,10 +107,24 @@ public class Faction {
 				// start of attack phase, act
 				// attackRandomEnemy();
 				// attackRandomEnemyOrAlly();
-				attackTarget(level.factions.get(0).actors.get(0));
+
+				boolean performedAttack = attackTarget(level.factions.get(0).actors
+						.get(0));
+
+				if (performedAttack == false) {
+					currentStage = STAGE.SELECT;
+					timeAtCurrentStage = 0;
+
+					currentActorIndex++;
+					if (currentActorIndex >= actors.size()) {
+						currentActorIndex = 0;
+						level.endTurn();
+					}
+				} else {
+					timeAtCurrentStage += delta;
+				}
 
 				// /////////////////////////////////////////////////////////
-				timeAtCurrentStage += delta;
 			} else if (timeAtCurrentStage >= STAGE_DURATION) {
 				// end of attack phase
 				currentStage = STAGE.SELECT;
@@ -126,7 +151,7 @@ public class Faction {
 		}
 	}
 
-	public void moveTowardsTarget(GameObject target) {
+	public boolean moveTowardsTarget(GameObject target) {
 
 		// TODO
 		// currently if there's no path it crashes
@@ -164,6 +189,21 @@ public class Faction {
 
 		// Get squares that are in both sets, as close as possible to
 		// the target
+
+		int idealWeaponDistance = 2;// TODO this needs to be calculated based on
+		// weapons available
+		// TODO what if we're stuck being closed than ideal distance, need to
+		// run through this, and there could be a list of ideal distances......
+		// :/
+		// TODO ideal weapon distance could be on the other side of an object...
+		// need to factor this in when choosing a good square :/, when talking
+		// about targets squares I need to make list of attack squares, this
+		// shit is heavy
+
+		// Check if we're already at the ideal distance
+		if (level.activeActor.weaponDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistance)
+			return false;
+
 		int bestDistanceFoundTarget = Integer.MAX_VALUE;
 		Vector<Square> potentialSquares = new Vector<Square>();
 		for (Path path : targetPaths) {
@@ -171,7 +211,7 @@ public class Faction {
 				break;
 
 			if (currentActorReachableSquares.contains(path.squares
-					.lastElement())) {
+					.lastElement()) && path.travelCost >= idealWeaponDistance) {
 				potentialSquares.add(path.squares.lastElement());
 				bestDistanceFoundTarget = path.travelCost;
 			}
@@ -189,10 +229,13 @@ public class Faction {
 
 		if (squareToMoveTo != null) {
 			level.activeActor.moveTo(squareToMoveTo);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
-	public void moveToRandomSquare() {
+	public boolean moveToRandomSquare() {
 		// MOVE TO RANDOM SQUARE - maybe for a broken robot or confused
 		// enemy
 		Vector<Square> reachableSquares = new Vector<Square>();
@@ -207,10 +250,13 @@ public class Faction {
 			int random = (int) (Math.random() * (reachableSquares.size() - 1));
 			Square squareToMoveTo = reachableSquares.get(random);
 			level.activeActor.moveTo(squareToMoveTo);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
-	public void attackRandomEnemy() {
+	public boolean attackRandomEnemy() {
 
 		// make a list of attackable enemies
 		Vector<Actor> attackableActors = new Vector<Actor>();
@@ -231,10 +277,13 @@ public class Faction {
 			Actor actorToAttack = attackableActors.get(random);
 			level.activeActor.attack(actorToAttack);
 			level.activeActor.highlightSelectedCharactersSquares(level);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
-	public void attackRandomEnemyOrAlly() {
+	public boolean attackRandomEnemyOrAlly() {
 		// TODO needs to be tested
 		// make a list of attackable enemies
 		Vector<Actor> attackableActors = new Vector<Actor>();
@@ -254,17 +303,21 @@ public class Faction {
 			Actor actorToAttack = attackableActors.get(random);
 			level.activeActor.attack(actorToAttack);
 			level.activeActor.highlightSelectedCharactersSquares(level);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
-	private void attackTarget(GameObject gameObject) {
+	private boolean attackTarget(GameObject gameObject) {
 		int weaponDistance = level.activeActor
 				.weaponDistanceTo(gameObject.squareGameObjectIsOn);
 		if (level.activeActor.hasRange(weaponDistance)) {
 			level.activeActor.attack(gameObject);
 			Actor.highlightSelectedCharactersSquares(level);
+			return true;
 		} else {
-			attackRandomEnemy();
+			return attackRandomEnemy();
 		}
 
 	}

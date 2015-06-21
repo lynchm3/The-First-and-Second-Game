@@ -4,15 +4,8 @@ public class TODO {
 
 	// TO DO
 
-	// If there's nowhere to move to skip the attack phase immediately
-
-	// If there's nothing to attack end the attack phase immediately
-
 	// What about skipping the select phase if there's nothing to attack or move
 	// to :D
-
-	// Stop Ai mving to another square beside the enemy if they're already
-	// beside them :D
 
 	// if dude dies on his turn and hes the last dude in the faction it'll crash
 	// the game, try it out (e.g. if he was poisoned)
@@ -28,6 +21,10 @@ public class TODO {
 	// AI that goes around destroying objects :D
 
 	// DONE
+	// If there's nowhere to move to skip the attack phase immediately
+	// If there's nothing to attack end the attack phase immediately
+	// Stop Ai moving to another square beside the enemy if they're already
+	// beside them :D
 
 	// Dialogs stay open if open after ending turn
 
