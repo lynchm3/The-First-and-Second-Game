@@ -8,16 +8,21 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
 
 public class GameObject {
+
+	public Level level;
 
 	// attributes
 	public int strength = 0;
 	public int dexterity = 0;
 	public int intelligence = 0;
 	public int endurance = 0;
+	public int totalHealth = 0;
+	public int remainingHealth = 0;
 
 	// Inventory
 	public Vector<Weapon> weapons = new Vector<Weapon>();
@@ -31,7 +36,7 @@ public class GameObject {
 
 	public GameObject(int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareGameObjectIsOn,
-			Vector<Weapon> weapons) {
+			Vector<Weapon> weapons, Level level) {
 		super();
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -42,6 +47,7 @@ public class GameObject {
 		this.squareGameObjectIsOn = squareGameObjectIsOn;
 		this.squareGameObjectIsOn.gameObject = this;
 		this.weapons = weapons;
+		this.level = level;
 	}
 
 	public void draw() {

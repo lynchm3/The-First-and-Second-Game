@@ -22,7 +22,7 @@ public class Level {
 	public int height;
 	public GameCursor gameCursor;
 	public Vector<Actor> actors;
-	public Actor selectedActor;
+	public Actor activeActor;
 	public Vector<GameObject> gameObjects;
 	public Vector<Dialog> dialogs;
 	public Square[][] squares;
@@ -32,6 +32,7 @@ public class Level {
 	public Vector<Faction> factions;
 	public Faction currentFactionMoving;
 	public int currentFactionMovingIndex;
+	public Vector<ActivityLog> log = new Vector<ActivityLog>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -60,8 +61,8 @@ public class Level {
 
 		// Factions
 		factions = new Vector<Faction>();
-		factions.add(new Faction("Good Guys", this));
-		factions.add(new Faction("Bad Guys", this));
+		factions.add(new Faction("Good Guys", this, Color.blue));
+		factions.add(new Faction("Bad Guys", this, Color.red));
 
 		// Good guys relationships
 		factions.get(0).relationships.put(factions.get(1), -100);
@@ -72,33 +73,33 @@ public class Level {
 		// Actors
 		actors = new Vector<Actor>();
 
-		Weapon weapon0ForActor0 = new Weapon(3, 1, "avatar.png");
-		Weapon weapon1ForActor0 = new Weapon(2, 2, "avatar.png");
+		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, "avatar.png");
+		Weapon weapon1ForActor0 = new Weapon("a2r2", 2, 2, "avatar.png");
 		Vector<Weapon> weaponsForActor0 = new Vector<Weapon>();
 		weaponsForActor0.add(weapon0ForActor0);
 		weaponsForActor0.add(weapon1ForActor0);
 
-		Weapon weapon0ForActor3 = new Weapon(2, 2, "avatar.png");
+		Weapon weapon0ForActor3 = new Weapon("a2r2", 2, 2, "avatar.png");
 		Vector<Weapon> weaponsForActor3 = new Vector<Weapon>();
 		weaponsForActor3.add(weapon0ForActor3);
 
 		actors.add(new Actor("John Lennon", "Fighter", 1, 0, 0, 0, 0,
-				"avatar.png", squares[0][0], weaponsForActor0, 4));
+				"avatar.png", squares[0][0], weaponsForActor0, 4, this));
 		actors.get(0).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(0));
 
 		actors.add(new Actor("Paul McCartney", "Maniac", 2, 0, 0, 0, 0,
-				"avatar.png", squares[2][7], new Vector<Weapon>(), 4));
+				"avatar.png", squares[2][7], new Vector<Weapon>(), 4, this));
 		actors.get(1).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(1));
 
 		actors.add(new Actor("Steve", "Maniac", 2, 0, 0, 0, 0, "avatar.png",
-				squares[2][8], new Vector<Weapon>(), 4));
+				squares[2][8], new Vector<Weapon>(), 4, this));
 		actors.get(2).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(2));
 
 		actors.add(new Actor("George Harrison", "Thief", 3, 0, 0, 0, 0,
-				"red.png", squares[5][3], weaponsForActor3, 4));
+				"red.png", squares[5][3], weaponsForActor3, 4, this));
 		actors.get(3).faction = factions.get(1);
 		factions.get(1).actors.add(actors.get(3));
 
@@ -110,13 +111,13 @@ public class Level {
 		// Game Objects
 		gameObjects = new Vector<GameObject>();
 		gameObjects.add(new GameObject(0, 0, 0, 0, "skip.png", squares[0][3],
-				weaponsForActor0));
+				weaponsForActor0, this));
 		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow.png",
-				squares[1][3], weaponsForActor0));
+				squares[1][3], weaponsForActor0, this));
 		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow2.png",
-				squares[2][3], weaponsForActor0));
+				squares[2][3], weaponsForActor0, this));
 		gameObjects.add(new GameObject(0, 0, 0, 0, "skip_with_shadow3.png",
-				squares[3][3], weaponsForActor0));
+				squares[3][3], weaponsForActor0, this));
 
 		// Cursor
 		gameCursor = new GameCursor();
@@ -208,6 +209,13 @@ public class Level {
 		// Turn text
 		font.drawString(Game.windowWidth - 150, 20, currentFactionMoving.name
 				+ " turn " + turn, Color.black);
+
+		// Log text
+		for (int i = log.size() - 1; i > -1; i--) {
+			font.drawString(150, 100 + i * 20, log.get(i).text,
+					log.get(i).faction.color);
+		}
+
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
@@ -247,12 +255,16 @@ public class Level {
 		}
 		removeWalkingHighlight();
 		removeWeaponsThatCanAttackHighlight();
-		selectedActor = null;
+		activeActor = null;
 		currentFactionMovingIndex++;
 		if (currentFactionMovingIndex >= factions.size()) {
 			currentFactionMovingIndex = 0;
 			this.turn++;
 		}
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
+	}
+
+	public void logOnScreen(ActivityLog stringToLog) {
+		log.add(stringToLog);
 	}
 }

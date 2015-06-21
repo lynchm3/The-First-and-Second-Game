@@ -18,9 +18,11 @@ public class Weapon {
 	// image
 	public String imagePath = "";
 	public Texture imageTexture = null;
+	public String name;
 
-	public Weapon(int damage, int range, String imagePath) {
+	public Weapon(String name, int damage, int range, String imagePath) {
 		super();
+		this.name = name;
 		this.damage = damage;
 		this.range = range;
 		this.imagePath = imagePath;

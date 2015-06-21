@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.level.ActivityLog;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
@@ -22,16 +23,17 @@ public class Actor extends GameObject {
 	public int travelDistance = 4;
 	public Faction faction;
 	public HashMap<Square, Path> paths = new HashMap<Square, Path>();
+	public Weapon selectedWeapon = null;
 
-	public Actor(String name, String title, int level, int strength,
+	public Actor(String name, String title, int actorLevel, int strength,
 			int dexterity, int intelligence, int endurance, String imagePath,
 			Square squareActorIsStandingOn, Vector<Weapon> weapons,
-			int travelDistance) {
+			int travelDistance, Level level) {
 		super(strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, weapons);
+				squareActorIsStandingOn, weapons, level);
 		this.name = name;
 		this.title = title;
-		this.actorLevel = level;
+		this.actorLevel = actorLevel;
 		this.travelDistance = travelDistance;
 	}
 
@@ -156,8 +158,51 @@ public class Actor extends GameObject {
 	}
 
 	public static void highlightSelectedCharactersSquares(Level level) {
-		level.selectedActor.calculatePathToAllSquares(level.squares);
-		level.selectedActor.calculateReachableSquares(level.squares);
-		level.selectedActor.calculateAttackableSquares(level.squares);
+		level.activeActor.calculatePathToAllSquares(level.squares);
+		level.activeActor.calculateReachableSquares(level.squares);
+		level.activeActor.calculateAttackableSquares(level.squares);
+	}
+
+	public int weaponDistanceTo(Square square) {
+
+		return Math.abs(square.x - this.squareGameObjectIsOn.x)
+				+ Math.abs(square.y - this.squareGameObjectIsOn.y);
+
+	}
+
+	public boolean hasRange(int weaponDistance) {
+		for (Weapon weapon : weapons) {
+			if (weapon.range >= weaponDistance) {
+				selectedWeapon = weapon;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void attack(Actor actor) {
+		actor.remainingHealth -= selectedWeapon.damage;
+		this.distanceMovedThisTurn = Integer.MAX_VALUE;
+		level.logOnScreen(new ActivityLog("" + this.name + " attacked "
+				+ actor.name + " with " + selectedWeapon.name + " for "
+				+ selectedWeapon.damage + " damage", this.faction));
+		System.out.println("" + this.name + " attacked " + actor.name
+				+ " with " + selectedWeapon.name + " for "
+				+ selectedWeapon.damage + " damage");
+
+	}
+
+	public void moveTo(Square squareToMoveTo) {
+
+		this.squareGameObjectIsOn.gameObject = null;
+		this.squareGameObjectIsOn = null;
+		this.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
+		this.squareGameObjectIsOn = squareToMoveTo;
+		squareToMoveTo.gameObject = level.activeActor;
+		Actor.highlightSelectedCharactersSquares(level);
+		level.logOnScreen(new ActivityLog("" + this.name + " moved to "
+				+ squareToMoveTo, this.faction));
+		System.out.println("" + this.name + " moved to " + squareToMoveTo);
+
 	}
 }

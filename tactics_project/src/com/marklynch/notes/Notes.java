@@ -825,6 +825,15 @@ public class Notes {
 	 * 
 	 * I think enemy paths are going to be predictable and that may be an issue,
 	 * maybe go through paths of same length and mix them up ;)
+	 * 
+	 * Weapons get damaged over time? I never reallly liked that... felt like i
+	 * had to stock up, but then if i dont use the extra weapons its a waste of
+	 * moneys...
+	 * 
+	 * Level with robots, who are good at strategy, but if you hack a terminal
+	 * they go in to random mode, attacking eachother, could do this on singular
+	 * enemies on a more regular basis too. Could also have them randomly not
+	 * attack or not move on their turn, but that's fucking boring
 	 */
 
 }

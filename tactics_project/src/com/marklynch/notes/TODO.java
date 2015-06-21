@@ -4,6 +4,27 @@ public class TODO {
 
 	// TO DO
 
+	// attacking enemies
+	// currently when i click on an enemy it just selects them
+	// in TT you attack enemies by selecting the sword then the square to
+	// attack, this is a good system, flexible but slow
+	// also... in TT it doesn't show u where u can attack given ur start pos
+	// in FE you move beside them and attack
+
+	// ranges -
+	// currently weapon range works as any range up to it's range value
+	// So if range is 3, the weapon can attack 1,2 or 3 blocks away
+
+	// WRITE A RULE BOOK
+
+	// More enemies on screen for better testing
+
+	// Colorize the log to match enemy/ally
+
+	// Log on the screen
+	// e.g. X moved to Y
+	// e.g. X attacked Y for Z damage
+
 	// AI to take over on their turn
 	// DONE - Phase 1. End their turn
 	// DONE - Phase 2. Move their dudes randomly

@@ -180,11 +180,11 @@ public class Game {
 		}
 
 		// Path highlights
-		if (level.selectedActor != null && squareMouseIsOver != null
+		if (level.activeActor != null && squareMouseIsOver != null
 				&& squareMouseIsOver.reachableBySelectedCharater
-				&& level.selectedActor.faction == level.factions.get(0)
+				&& level.activeActor.faction == level.factions.get(0)
 				&& level.currentFactionMoving == level.factions.get(0)) {
-			path = level.selectedActor.paths.get(squareMouseIsOver);
+			path = level.activeActor.paths.get(squareMouseIsOver);
 			for (Square square : path.squares) {
 				square.inPath = true;
 			}
@@ -194,32 +194,42 @@ public class Game {
 			buttonClicked = level.getButtonFromMousePosition();
 		}
 
+		// TODO test out button clicking, like if u drag off it or on to it or
+		// anything, just subtleties
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && buttonClicked != null
 				&& level.currentFactionMovingIndex == 0) {
+			// click button if we're on one
 			buttonClicked.click();
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && squareMouseIsOver != null
 				&& level.currentFactionMovingIndex == 0) {
-			// CLICK
+			// click square we're on
 
 			for (Actor actor : level.actors) {
 				if (actor.squareGameObjectIsOn == squareMouseIsOver) {
-					level.selectedActor = actor;
-					Actor.highlightSelectedCharactersSquares(level);
+					Actor clickedActor = actor;
+					if (clickedActor.faction == level.currentFactionMoving) {
+						level.activeActor = clickedActor;
+						Actor.highlightSelectedCharactersSquares(level);
+					} else {
+						int weaponDistance = level.activeActor
+								.weaponDistanceTo(squareMouseIsOver);
+						if (level.activeActor.hasRange(weaponDistance)) {
+							level.activeActor.attack(clickedActor);
+							level.activeActor
+									.highlightSelectedCharactersSquares(level);
+						}
+					}
 				}
 			}
 
-			if (level.selectedActor != null
+			if (level.activeActor != null
 					&& squareMouseIsOver.reachableBySelectedCharater
-					&& level.selectedActor.faction == level.factions.get(0)
-					&& level.currentFactionMoving == level.factions.get(0)) {
-				level.selectedActor.squareGameObjectIsOn.gameObject = null;
-				level.selectedActor.squareGameObjectIsOn = null;
-				level.selectedActor.distanceMovedThisTurn += squareMouseIsOver.distanceToSquare;
-				level.selectedActor.squareGameObjectIsOn = squareMouseIsOver;
-				squareMouseIsOver.gameObject = level.selectedActor;
-				Actor.highlightSelectedCharactersSquares(level);
+					&& level.activeActor.faction == level.factions.get(0)
+					&& level.currentFactionMoving == level.factions.get(0)
+					&& level.activeActor.squareGameObjectIsOn != squareMouseIsOver) {
+				level.activeActor.moveTo(squareMouseIsOver);
 			}
 		}
 
@@ -234,10 +244,10 @@ public class Game {
 				&& level.currentFactionMovingIndex == 0) {
 			level.clearDialogs();
 			// right click
-			if (level.selectedActor != null) {
+			if (level.activeActor != null) {
 				level.removeWalkingHighlight();
 				level.removeWeaponsThatCanAttackHighlight();
-				level.selectedActor = null;
+				level.activeActor = null;
 			} else if (squareMouseIsOver != null) {
 				if (squareMouseIsOver.showingDialogs == false)
 					squareMouseIsOver.showDialogs();
@@ -339,6 +349,7 @@ public class Game {
 	public void renderGL() {
 
 		// Clear The Screen And The Depth Buffer
+		GL11.glClearColor(0, 0, 0, 1);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		level.draw();
 	}
