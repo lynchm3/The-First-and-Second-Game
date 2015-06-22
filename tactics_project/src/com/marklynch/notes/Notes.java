@@ -1098,7 +1098,21 @@ public class Notes {
 	 * tactics go through greenlight? Need to be different enough from telepath
 	 * tactics. A nice style would be step one. And find ALL the things they
 	 * fucked up adn do it right. 1. It's minging. 2. It's the same fucking
-	 * setting as always. 3. Identical fucking units.
+	 * setting as always. 3. Identical fucking units. // * // * Is there a
+	 * better way to display what weapons they can attack with? maybe // * put
+	 * the weapon in their hands or on their backs or hmmmmmmmmmmmmmm // + * //
+	 * + * what way do counter attacks work? counter if u havent attacked in ur
+	 * // + * turn? counter always? counter with best weapon? counter with what
+	 * u used // + * last (FE)? See what the others do? // + * // + * I feel
+	 * like i'm taking out a lot of complexities - direction facing, // + *
+	 * countering w/ last used weapon, all characters being able to use all // +
+	 * * weapons (to varying degrees... am i over-simplifying? Should I go with
+	 * // + * the more complex versions of rules? Should I go with what feels
+	 * like a // + * realistic representation of a real battle? I know I
+	 * personally hate the // + * complicated parts :D, but I think it's what
+	 * most fans would go for. that // + * super hero one (wtf was it called)
+	 * was overly simple and boring. Maybe I // + * should be adding as many
+	 * complications (Subtleties?) as i can... //
 	 */
 
 }

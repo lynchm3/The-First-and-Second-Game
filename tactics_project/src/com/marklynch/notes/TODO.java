@@ -14,6 +14,13 @@ public class TODO {
 	 * retarded. Bloodborne - "Prey Slaughtered" VERY COOL
 	 */
 
+	// + // Work on user manual, make it COOL
+	// +
+	// + // Work on design rules
+	// +
+	// // match enemy weapons with yours for what they'll counter w/, or draw
+	// // arrows from one to the other :D MESSYI
+
 	// Show lvl of dude on his square
 
 	// SORT THE NOTES IN TO CATEGORIES
