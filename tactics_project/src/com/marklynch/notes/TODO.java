@@ -4,24 +4,41 @@ public class TODO {
 
 	// TO DO
 
+	// draw cost right in the middle of the fucking square... for some reason
+	// and clear if when theres noone selected FFS
+
 	// font tools for the next todo below
 
-	/*
-	 * Shit written on walls/ground like stealth bastard. Text could take up a
-	 * whole row of a grid. One word per row. Cool style. "YOUR TURN",
-	 * "YOU WIN", "HERO VANQUISHED", "YOU DIED", Dark souls - (BONFIRE LIT, YOU
-	 * DIED, YOU DEFEATED), i particularly like bonfire lit, coz it seemed so
-	 * retarded. Bloodborne - "Prey Slaughtered" VERY COOL
-	 */
-
-	// + // Work on user manual, make it COOL
-	// +
-	// + // Work on design rules
-	// +
-	// // match enemy weapons with yours for what they'll counter w/, or draw
-	// // arrows from one to the other :D MESSYI
-
 	// Show lvl of dude on his square
+
+	// show if actor can attack
+
+	// show if actor can move
+
+	// see if u can find a font that will work over 60
+
+	// should i take some time out and make it look prettier? might make me
+	// appreciate it more. Like take a saturday and do graphical tweaks :) YUS
+
+	// when u hover over an attackable enemy u could cover them with battle
+	// preview for each weapon
+	// OR there could be a tooltip with the info (w/ translucent BG)
+
+	// the bars look a lot better on the right, that could just be because of
+	// the player model
+
+	// Shit written on walls/ground like stealth bastard. Text could take up a
+	// whole row of a grid. One word per row. Cool style. "YOUR TURN",
+	// "YOU WIN", "HERO VANQUISHED", "YOU DIED", Dark souls - (BONFIRE LIT, YOU
+	// DIED, YOU DEFEATED), i particularly like bonfire lit, coz it seemed so
+	// retarded. Bloodborne - "Prey Slaughtered" VERY COOL
+
+	// Work on user manual, make it COOL
+
+	// Work on design rules
+
+	// match enemy weapons with yours for what they'll counter w/, or draw
+	// arrows from one to the other :D MESSYI
 
 	// SORT THE NOTES IN TO CATEGORIES
 
@@ -168,6 +185,8 @@ public class TODO {
 	// (Robots don't like lightning strikes, ShitBot 3000 has been overcharged)
 	// or speach bubbles rather than log text? or speachbubbles and log the
 	// speach like aoe2)
+
+	// multi colored log msgs
 
 	// DONE
 }

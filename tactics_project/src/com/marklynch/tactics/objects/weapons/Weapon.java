@@ -1,6 +1,6 @@
 package com.marklynch.tactics.objects.weapons;
 
-import static com.marklynch.utils.Resources.getGlobalImage;
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.Vector;
 

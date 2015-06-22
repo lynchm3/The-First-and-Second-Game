@@ -1,6 +1,6 @@
 package com.marklynch.tactics.objects.level;
 
-import static com.marklynch.utils.Resources.getGlobalImage;
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.Comparator;
 import java.util.Vector;
@@ -96,7 +96,7 @@ public class Square {
 
 		// if (this.reachableBySelectedCharater) {
 		if (distanceToSquare != Integer.MAX_VALUE)
-			level.font.drawString(squarePositionX, squarePositionY, "cost "
+			level.font12.drawString(squarePositionX, squarePositionY, "cost "
 					+ distanceToSquare, Color.black);
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		// }

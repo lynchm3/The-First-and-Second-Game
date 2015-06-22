@@ -1,6 +1,6 @@
 package com.marklynch;
 
-import static com.marklynch.utils.Resources.getGlobalImage;
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import org.newdawn.slick.opengl.Texture;
 

@@ -14,7 +14,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.Button;
-import com.marklynch.utils.Resources;
+import com.marklynch.utils.ResourceUtils;
 
 public class Level {
 
@@ -28,7 +28,8 @@ public class Level {
 	public Square[][] squares;
 	public Button endTurnButton;
 	public int turn = 1;
-	public TrueTypeFont font;
+	public TrueTypeFont font12;
+	public TrueTypeFont font60;
 	public Vector<Faction> factions;
 	public Faction currentFactionMoving;
 	public int currentFactionMovingIndex;
@@ -46,7 +47,8 @@ public class Level {
 		dialogs = new Vector<Dialog>();
 		endTurnButton = new Button(Game.windowWidth - 210,
 				Game.windowHeight - 110, 200, 100, "end_turn_button.png", this);
-		font = Resources.getGlobalFont("KeepCalm-Medium.ttf");
+		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
+		font60 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 60);
 	}
 
 	private void initGrid() {
@@ -203,6 +205,12 @@ public class Level {
 			}
 		}
 
+		// GL11.glColor4f;
+		font60.drawString(0, 0, "YOUR", new Color(1.0f, 0.5f, 0.5f, 0.75f));
+		font60.drawString(0, Game.SQUARE_HEIGHT, "TURN ", new Color(1.0f, 0.5f,
+				0.5f, 0.75f));
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+
 		// zoom end
 		GL11.glPopMatrix();
 
@@ -218,12 +226,12 @@ public class Level {
 		endTurnButton.draw();
 
 		// Turn text
-		font.drawString(Game.windowWidth - 150, 20, currentFactionMoving.name
+		font12.drawString(Game.windowWidth - 150, 20, currentFactionMoving.name
 				+ " turn " + turn, Color.magenta);
 
 		// Log text
 		for (int i = log.size() - 1; i > -1; i--) {
-			font.drawString(150, 100 + i * 20, log.get(i).text,
+			font12.drawString(150, 100 + i * 20, log.get(i).text,
 					log.get(i).faction.color);
 		}
 

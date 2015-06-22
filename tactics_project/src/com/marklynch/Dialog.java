@@ -1,6 +1,6 @@
 package com.marklynch;
 
-import static com.marklynch.utils.Resources.getGlobalImage;
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
@@ -8,7 +8,6 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.tactics.objects.level.Square;
-import com.marklynch.utils.Resources;
 
 public class Dialog {
 
@@ -31,7 +30,6 @@ public class Dialog {
 		this.height = height;
 		this.backgroundImagePath = backgroundImagePath;
 		this.backgroundImageTexture = getGlobalImage(backgroundImagePath);
-		font = Resources.getGlobalFont(fontPath);
 	}
 
 	public void draw() {

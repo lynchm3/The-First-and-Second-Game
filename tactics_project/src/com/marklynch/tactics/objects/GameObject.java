@@ -1,6 +1,6 @@
 package com.marklynch.tactics.objects;
 
-import static com.marklynch.utils.Resources.getGlobalImage;
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.HashMap;
 import java.util.Vector;
@@ -94,7 +94,7 @@ public class GameObject {
 		float healthPositionYInPixels = this.squareGameObjectIsOn.y
 				* (int) Game.SQUARE_HEIGHT;
 
-		level.font.drawString(healthPositionXInPixels, healthPositionYInPixels,
+		level.font12.drawString(healthPositionXInPixels, healthPositionYInPixels,
 				"" + remainingHealth + "/" + totalHealth, Color.black);
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 

@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.tactics.objects.level.Level;
-import com.marklynch.utils.Resources;
+import com.marklynch.utils.ResourceUtils;
 
 public class Button {
 
@@ -19,7 +19,7 @@ public class Button {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.texture = Resources.getGlobalImage(texturePath);
+		this.texture = ResourceUtils.getGlobalImage(texturePath);
 		this.level = level;
 	}
 
