@@ -876,6 +876,12 @@ public class Notes {
 	 * 
 	 * Is there a better way to display what weapons they can attack with? maybe
 	 * put the weapon in their hands or on their backs or hmmmmmmmmmmmmmm
+	 * 
+	 * Divinity original sin style elemental crap
+	 * 
+	 * Enemies with super duper awesome AOE fuck u up powers
+	 * 
+	 * Unkillable enemies
 	 */
 
 }
