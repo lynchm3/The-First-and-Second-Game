@@ -1086,6 +1086,19 @@ public class Notes {
 	 * Maybe show all controls on screen and have a config to turn them off?! :/
 	 * 
 	 * It's not an army... its a troupe or some shit.
+	 * 
+	 * Add tactical games to ur steam library so that if u ever make it to steam
+	 * people will think ur cool
+	 * 
+	 * What is steam greenlight? How do u get on steam?
+	 * http://steamcommunity.com/workshop/about/?appid=765&section=faq
+	 * Greenlight is basically the submission process for anyone who hasnt
+	 * published on steam before. SHit on greenligh looks FUCKING BORING videos
+	 * with text like "solve puzzles", "follow your brother" JESUS Did telepath
+	 * tactics go through greenlight? Need to be different enough from telepath
+	 * tactics. A nice style would be step one. And find ALL the things they
+	 * fucked up adn do it right. 1. It's minging. 2. It's the same fucking
+	 * setting as always. 3. Identical fucking units.
 	 */
 
 }

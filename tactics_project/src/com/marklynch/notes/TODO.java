@@ -4,6 +4,8 @@ public class TODO {
 
 	// TO DO
 
+	// font tools for the next todo below
+
 	/*
 	 * Shit written on walls/ground like stealth bastard. Text could take up a
 	 * whole row of a grid. One word per row. Cool style. "YOUR TURN",
@@ -11,6 +13,8 @@ public class TODO {
 	 * DIED, YOU DEFEATED), i particularly like bonfire lit, coz it seemed so
 	 * retarded. Bloodborne - "Prey Slaughtered" VERY COOL
 	 */
+
+	// Show lvl of dude on his square
 
 	// SORT THE NOTES IN TO CATEGORIES
 
