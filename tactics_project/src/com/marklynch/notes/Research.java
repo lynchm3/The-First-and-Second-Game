@@ -22,6 +22,9 @@ public class Research {
 	 * 
 	 * STYLISH THINGS Look at highly stylized low-res shit Badass Inc., hotline
 	 * miami, the last door, superhot,
+	 * 
+	 * Need to go through the games and root out the deeper problems, I took
+	 * issue with some stuff from TT and Chroma squad, but what was it!?
 	 */
 
 }
