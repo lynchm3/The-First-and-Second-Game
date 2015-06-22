@@ -3,6 +3,9 @@ package com.marklynch.notes;
 public class TODO {
 
 	// TO DO
+	// Weapon bar also health bar?
+	// Underneath of bar goes from white to black as they're dying, also colored part of bar goes down
+	
 
 	// match enemy weapons with yours for what they'll counter w/, or draw
 	// arrows from one to the other :D MESSYI
@@ -10,6 +13,9 @@ public class TODO {
 	// counter attacks :P
 
 	// DONE
+	//Weapon icons only drawn on reachable things you can attack
+	//Weapon bar
+	
 
 	// Dialogs stay open if open after ending turn
 

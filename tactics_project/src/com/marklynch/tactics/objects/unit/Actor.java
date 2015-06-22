@@ -130,6 +130,44 @@ public class Actor extends GameObject {
 
 	@Override
 	public void draw() {
+		
+
+		//draw sidebar on square
+		float weaponAreaWidthInPixels = Game.SQUARE_WIDTH / 5;
+		float weaponAreaHeightInPixels = Game.SQUARE_HEIGHT;
+		float weaponAreaPositionXInPixels = 0;
+		float weaponAreaPositionYInPixels = 0;
+
+		if (this.faction == level.factions.get(0)) {
+			weaponAreaPositionXInPixels = this.squareGameObjectIsOn.x
+					* (int) Game.SQUARE_WIDTH;
+			weaponAreaPositionYInPixels = this.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT;
+		} else {
+			weaponAreaPositionXInPixels = this.squareGameObjectIsOn.x
+					* (int) Game.SQUARE_WIDTH + Game.SQUARE_WIDTH
+					- weaponAreaWidthInPixels;
+			weaponAreaPositionYInPixels = this.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT;
+
+		}
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		
+		GL11.glBegin(GL11.GL_QUADS);
+		GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		GL11.glColor4f(this.faction.color.r, this.faction.color.g, this.faction.color.b, 0.5f);
+		GL11.glVertex2f(weaponAreaPositionXInPixels + 1, weaponAreaPositionYInPixels + 1);
+		GL11.glVertex2f(weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
+				weaponAreaPositionYInPixels + 1);
+		GL11.glVertex2f(weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
+				weaponAreaPositionYInPixels + weaponAreaHeightInPixels -1);
+		GL11.glVertex2f(weaponAreaPositionXInPixels + 1, weaponAreaPositionYInPixels
+				+ weaponAreaHeightInPixels - 1);
+		GL11.glEnd();
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		
 		super.draw();
 
 		// draw weapon icons on square
