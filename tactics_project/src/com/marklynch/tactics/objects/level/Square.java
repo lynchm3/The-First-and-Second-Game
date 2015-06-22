@@ -102,7 +102,8 @@ public class Square {
 		// }
 
 		// draw weapon icons on square
-		if (level.currentFactionMoving == level.factions.get(0)) {
+		if (this.gameObject != null &&				
+				level.currentFactionMoving == level.factions.get(0)) {
 			float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
 			float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
 			for (int i = 0; i < this.weaponsThatCanAttack.size(); i++) {

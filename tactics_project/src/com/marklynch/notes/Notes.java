@@ -876,6 +876,229 @@ public class Notes {
 	 * 
 	 * Is there a better way to display what weapons they can attack with? maybe
 	 * put the weapon in their hands or on their backs or hmmmmmmmmmmmmmm
+	 * 
+	 * Divinity original sin style elemental crap
+	 * 
+	 * Enemies with super duper awesome AOE fuck u up powers
+	 * 
+	 * Unkillable enemies
+	 * 
+	 * Shoot a stupid live action video for a trailer
+	 * 
+	 * Objectives - king of the hill, horde mode, kidnap someone mode (like
+	 * capture the flag) Maybe hill isnt objective but gives perks and attaks
+	 * enemies (shogun 2) When introducing a new (mode) give them an easy level
+	 * to start with so that they can see wats up in a safeish enviroment
+	 * 
+	 * Combne story mode with a shogun style map domination, but story is always
+	 * most important. I'm not sure randomish battles are a good thing in this
+	 * type of game. If there are random battles... randomly generate the map
+	 * too?
+	 * 
+	 * Based on your scout ability u get different info about a map. From
+	 * suggested lvl, to troop count, to detailed troop count, to treasure info,
+	 * to whole map. BUT... the problem with this is, if u fail, you come back
+	 * and retry, and you know where everything is. Maybe it could help choosing
+	 * what order to do missions in if you have a choice? But same dillema and
+	 * ability to cheat... WOULD work well with random maps
+	 * 
+	 * Doorways block field of view. For the torturer guy, when u go to open the
+	 * door - "u hearing screaming on the other side" - "open door", "leave"
+	 * 
+	 * Hover over weapon icon for info
+	 * 
+	 * 
+	 * Open world? Can quick travel out of battle. Not sure how moving around
+	 * works w/ 10 people when ur not in battle
+	 * 
+	 * Design rules - take the hard MEMORY work away from the player, show them
+	 * as much info as you can on the screen so that they can concentrate on
+	 * strategy. You have 20 units on the field, your gonna forget and
+	 * misremember. I wanna save some of your brain's proccessing power.
+	 * 
+	 * Show actor lvl on card. V. important. FOR when you want to level the
+	 * weakest for e.g.
+	 * 
+	 * AI that runs away, AI that lures you in, AI that picks someone they dont
+	 * liek, ai that goes for chests then leaves (Thieves faction)
+	 * 
+	 * Ability to send your dudes off the battle field
+	 * 
+	 * Morale system? Sanity system?
+	 * 
+	 * Lies and deception. People straight up lie to u without it being obvious.
+	 * mislead u. (Dark souls 2 fail forward video.
+	 * 
+	 * Wathc the RPS fail forward videos and their dev blog entries etc.
+	 * 
+	 * Play banner saga and the others a bit more.
+	 * 
+	 * Is my zooming enough? should I configure it so that u can always zoom out
+	 * far enough to see the whole battlefield. Or u can zoom forevs and zoom
+	 * all the way out to the world map :D Need fog of war then
+	 * 
+	 * Crosscode start of the demo lets u see in a nice way where you can and
+	 * cannot go. Crosscode made it obvious when something was weak to fire, but
+	 * it was too obvious. I think for my tutorial a buddy from another faction
+	 * should show u how to do some things, as subtle as possible. Maybe if the
+	 * user doesnt do what they're supposed after 10 secs tell them in a really
+	 * obvious way. The idea is that u see the other guy do stuff that's
+	 * unexpected and u'll be like "hmmm... how did he do that", then try it out
+	 * urself
+	 * 
+	 * U shopuld be able to hit/attack enemies, neutrals, allies, ur own team
+	 * (dunno why) AOE attacks hurt who? just enemy? enemy + neutral? Everyone?
+	 * does AOE attack lower ur standing?
+	 * 
+	 * Should i force the player into situations where their standing with
+	 * another faction could be hurt? (In combat AOE attacks for e.g.)
+	 * 
+	 * See.. killing allies/neutrals... you'll get EXP for that, level up ur
+	 * players faster... BUT everyone will be hostile towards you INTERESTING
+	 * PAY OFF SYSTEM, interesting mechanic. Need to highlight it to the user
+	 * SUBTLEY.
+	 * 
+	 * Need to have actor(s) that get pissed off with you and join a different
+	 * faction and then u end up fighting them later on
+	 * 
+	 * Autosave every 10 turns. Notes u pick up that lead u to more missions
+	 * (masterplan)
+	 * 
+	 * Investigative work to find your enemies weaknesses. Maybe one of them is
+	 * allergic to something (that's could, i like the allergy angle, it's
+	 * light). Look at hitman for interesting killings. Make user have to look
+	 * for subtle hints in dialog.
+	 * 
+	 * Start from different points of view and have the characters come together
+	 * (trine, gta)
+	 * 
+	 * Some of the start peeps should be on their own and some in a group of 2
+	 * or 3. What if i do this every time theres a new person? they have their
+	 * own mission that you run, before meeting up w/ the team.
+	 * 
+	 * For peeps images - can i use photos of old paintings or photos of dead
+	 * people
+	 * 
+	 * (Stealth) Camera timing puzzle like master plan. Make it clear where the
+	 * camera will turn to on next turn. Ways to get trapped :D
+	 * 
+	 * (Stealth) Make it clear what areas u are and arent allowed in. Masterplan
+	 * kinda does this... (Stealth) if there's any specific requirements for the
+	 * mission (even for optional objectives) let it be known (we need 3 people
+	 * to carry the cash), masterplan failed to do this.
+	 * 
+	 * Track stats like trustworthyness (but dont show the player) (Witcher
+	 * style, like how it affects Ciri x/5 key points decides whether u make or
+	 * break her confidence, so it was tracking her confidence level)
+	 * Ramifications come much later. (Witcher) Wrap things up in a light
+	 * passive way where possible(Witcher - chick tied to the rock)
+	 * 
+	 * Rate aggressiveness VS defensiveness VS skill VS strategy VS
+	 * trustworthyness (Star hammer)
+	 * 
+	 * Lists of everything like Dark Dreams Dont Die - food list, notes list,
+	 * missions list, bestiary.............
+	 * 
+	 * Dont have retarded inventory live the witcher. Need more categories.
+	 * Switching categories needs to load instantly.
+	 * 
+	 * Story - woman who proposes to a dude, or had proposed previously. Just a
+	 * quirk to add to a female character.
+	 * 
+	 * Flick through some books on game design, although... blogs and RPS are
+	 * probably more interesting, i wonder what Strategies RPS has put under the
+	 * microscope, hopefully they'll do a fail forward of TT or something...
+	 * 
+	 * Research - look up Ted Talks on games
+	 * 
+	 * When a battle starts grid goes from transparent to opaque
+	 * 
+	 * Someone whos an eejit but thinks everyone else is the eejit. (Dougle).
+	 * Same w/ someone crazy. L?! :D.
+	 * 
+	 * Dialog - "Huh?", "I didn't say anything" (L)
+	 * 
+	 * Write down interesting convos u have w/ real people
+	 * 
+	 * J - "I need you to focus today, do you get what I'm saying?" ...vague
+	 * 
+	 * I think for dialog it's very important that it sounds like something
+	 * someone would actually say... despite the weird situation. OR if the
+	 * person says something weird, the other person has to call it out and
+	 * bring it back down to earth (True detective), although in fairness... the
+	 * shit the crazy was spouting in true detective wasnt that crazy :DA
+	 * 
+	 * Beseige is very pretty while still being super simple / minimalistic -
+	 * low budget :) less effort :)
+	 * 
+	 * Shit written on walls/ground like stealth bastard. Text could take up a
+	 * whole row of a grid. One word per row. Cool style. "YOUR TURN",
+	 * "YOU WIN", "HERO VANQUISHED", "YOU DIED", Dark souls - (BONFIRE LIT, YOU
+	 * DIED, YOU DEFEATED), i particularly like bonfire lit, coz it seemed so
+	 * retarded. Bloodborne - "Prey Slaughtered" VERY COOL
+	 * 
+	 * Should the style all be around a cool as grid style? Text
+	 * blocky(hmmmmm......)?
+	 * 
+	 * Animal w/ retarded troll speech? :) (witcher)
+	 * 
+	 * People or monsters mentioned in passing should show up later. But when
+	 * mentioned in passing it should be something memorable (sex, violence,
+	 * shock, a quirk (asked a man to marry her, he laughed coz a woman was
+	 * asking a man, she ripped his nuts off... that's not bad actually...
+	 * IRONIC... coz she made him a woman (say this in a more subtle way :D)))
+	 * 
+	 * Story - before u meet this lady, u hear that she proposed, he laughed at
+	 * her coz of gender roles, she ripped his nuts off, "Ironic really". - is
+	 * ironic ok to use here? :D
+	 * 
+	 * Story - asshole character who goes thru a rough time and comes out more
+	 * likeable. (Red baron witcher 3)
+	 * 
+	 * Open world 2d dragonfall. Would need a huge line fo sight to avoid
+	 * fights. Line of sight could be in the upgrade list. (START WITH NOTHING)
+	 * 
+	 * When you get in to a fight ur units line up in a formation that u have
+	 * specified previously. Game remembers the last formation u picked...
+	 * 
+	 * 
+	 * Need interesting lvling system - FF10 (endless cavern 2 had similar),
+	 * witcher 3, perks from fallout. Witcher 3 slots and powers system would be
+	 * great if u could make up set for VS magic, VS monsters, VS fire then pick
+	 * one b4 each mission. Weird perks like the ant in fallout or the vampire
+	 * in skyrim.
+	 * 
+	 * With the scouting power u could be alerted to battle events that will
+	 * happen later on - 5 enemies will enter from the east on turn 5 (like that
+	 * TT mission where you are protecting ur tent), also, could have markers on
+	 * the edge of the map with a countdown to their arrival. In FE i think u
+	 * could block their arrival by standing on the square where they spawn.
+	 * 
+	 * Random awkward powers that people will use in interesting ways. Not just
+	 * boring convenient powers. Bombs that u can only throw northeast :D
+	 * 
+	 * i like the way in witcher i can see all craftables, powers etc. even when
+	 * i can't make/use/unlock them yet
+	 * 
+	 * All those loads and loads of number and bars and stops and icons need
+	 * config - always hide, show on hover, show on click, always show
+	 * 
+	 * Maybe show all controls on screen and have a config to turn them off?! :/
+	 * 
+	 * It's not an army... its a troupe or some shit.
+	 * 
+	 * Add tactical games to ur steam library so that if u ever make it to steam
+	 * people will think ur cool
+	 * 
+	 * What is steam greenlight? How do u get on steam?
+	 * http://steamcommunity.com/workshop/about/?appid=765&section=faq
+	 * Greenlight is basically the submission process for anyone who hasnt
+	 * published on steam before. SHit on greenligh looks FUCKING BORING videos
+	 * with text like "solve puzzles", "follow your brother" JESUS Did telepath
+	 * tactics go through greenlight? Need to be different enough from telepath
+	 * tactics. A nice style would be step one. And find ALL the things they
+	 * fucked up adn do it right. 1. It's minging. 2. It's the same fucking
+	 * setting as always. 3. Identical fucking units.
 	 */
 
 }

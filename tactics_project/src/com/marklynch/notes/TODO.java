@@ -4,6 +4,23 @@ public class TODO {
 
 	// TO DO
 
+	// font tools for the next todo below
+
+	/*
+	 * Shit written on walls/ground like stealth bastard. Text could take up a
+	 * whole row of a grid. One word per row. Cool style. "YOUR TURN",
+	 * "YOU WIN", "HERO VANQUISHED", "YOU DIED", Dark souls - (BONFIRE LIT, YOU
+	 * DIED, YOU DEFEATED), i particularly like bonfire lit, coz it seemed so
+	 * retarded. Bloodborne - "Prey Slaughtered" VERY COOL
+	 */
+
+	// Show lvl of dude on his square
+
+	// SORT THE NOTES IN TO CATEGORIES
+
+	// Underneath of bar goes from white to black as they're dying, also colored
+	// part of bar goes down
+
 	// match enemy weapons with yours for what they'll counter w/, or draw
 	// arrows from one to the other :D MESSYI
 
