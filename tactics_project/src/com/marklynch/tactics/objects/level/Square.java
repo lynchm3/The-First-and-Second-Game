@@ -32,11 +32,14 @@ public class Square {
 	public Vector<Dialog> dialogs;
 
 	public boolean showingDialogs = false;
-	public int distanceToSquare = 0;
+	public int distanceToSquare = Integer.MAX_VALUE;
 
 	public static PathComparator pathComparator;
 
-	public Square(int x, int y, String imagePath, int travelCost, int elevation) {
+	Level level;
+
+	public Square(int x, int y, String imagePath, int travelCost,
+			int elevation, Level level) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -45,6 +48,7 @@ public class Square {
 		this.travelCost = travelCost;
 		this.dialogs = new Vector<Dialog>();
 		this.elevation = elevation;
+		this.level = level;
 	}
 
 	public void draw(Level level) {
@@ -95,15 +99,23 @@ public class Square {
 		}
 
 		// if (this.reachableBySelectedCharater) {
-		if (distanceToSquare != Integer.MAX_VALUE)
-			level.font12.drawString(squarePositionX, squarePositionY, "cost "
-					+ distanceToSquare, Color.black);
+		int costTextWidth = level.font60.getWidth("" + distanceToSquare);
+		System.out.println("costTextWidth = " + costTextWidth);
+		float costPositionX = squarePositionX
+				+ (Game.SQUARE_WIDTH - costTextWidth) / 2f;
+		float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) / 2f;
+
+		if (distanceToSquare != Integer.MAX_VALUE && level.activeActor != null) {
+			level.font60.drawString(costPositionX, costPositionY, ""
+					+ distanceToSquare, new Color(1.0f, 0.5f, 0.5f, 0.25f));
+		}
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+
 		// }
 
 		// draw weapon icons on square
-		if (this.gameObject != null &&				
-				level.currentFactionMoving == level.factions.get(0)) {
+		if (this.gameObject != null
+				&& level.currentFactionMoving == level.factions.get(0)) {
 			float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
 			float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
 			for (int i = 0; i < this.weaponsThatCanAttack.size(); i++) {
@@ -147,7 +159,7 @@ public class Square {
 
 	public void showDialogs() {
 		dialogs.add(new Dialog(this, 200, 200, "dialogbg.png",
-				"KeepCalm-Medium.ttf"));
+				"KeepCalm-Medium.ttf", level));
 		showingDialogs = true;
 	}
 

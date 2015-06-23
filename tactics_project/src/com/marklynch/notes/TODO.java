@@ -4,18 +4,33 @@ public class TODO {
 
 	// TO DO
 
-	// draw cost right in the middle of the fucking square... for some reason
-	// and clear if when theres noone selected FFS
+	// bug - if i move to 3,1 at the start, the first AI goes mental, seeing a
+	// lot of weird movement in fact, it's definitely getAllSquaresAtDistance
 
-	// font tools for the next todo below
+	// different attack text based on weapon type - slashed, shot, blugeoned,
+	// gored
 
-	// Show lvl of dude on his square
+	// check if death by counter / ending faction by counter is a crash
+
+	// log when faction is demolished
+
+	// Weapon has minimum and maximum range
+
+	// method that works out ideal distanceS from the enemy, and puts them in a
+	// sorted array, based on weapon
+
+	// auto select best weapon for counter
+
+	// AI select best weapon for attack
 
 	// show if actor can attack
 
 	// show if actor can move
 
 	// see if u can find a font that will work over 60
+
+	// here's one, if player is dead on their turn level.activeActor should be
+	// nulled may be a crash
 
 	// should i take some time out and make it look prettier? might make me
 	// appreciate it more. Like take a saturday and do graphical tweaks :) YUS

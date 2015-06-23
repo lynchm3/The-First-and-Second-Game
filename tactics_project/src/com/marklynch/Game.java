@@ -220,10 +220,9 @@ public class Game {
 				}
 
 				if (level.activeActor != null && selectedNewActor == false) {
-					int weaponDistance = level.activeActor
-							.weaponDistanceTo(squareMouseIsOver);
-					if (level.activeActor.hasRange(weaponDistance)) {
-						level.activeActor.attack(clickedGameObject);
+					if (level.activeActor.hasRange(level.activeActor
+							.weaponDistanceTo(squareMouseIsOver))) {
+						level.activeActor.attack(clickedGameObject, false);
 						Actor.highlightSelectedCharactersSquares(level);
 					}
 				}

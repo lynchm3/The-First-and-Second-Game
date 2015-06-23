@@ -54,7 +54,7 @@ public class Level {
 	private void initGrid() {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				squares[i][j] = new Square(i, j, "grass.png", 1, 0);
+				squares[i][j] = new Square(i, j, "grass.png", 1, 0, this);
 			}
 		}
 	}
@@ -206,10 +206,11 @@ public class Level {
 		}
 
 		// GL11.glColor4f;
-		font60.drawString(0, 0, "YOUR", new Color(1.0f, 0.5f, 0.5f, 0.75f));
-		font60.drawString(0, Game.SQUARE_HEIGHT, "TURN ", new Color(1.0f, 0.5f,
-				0.5f, 0.75f));
-		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		// font60.drawString(0, 0, "YOUR", new Color(1.0f, 0.5f, 0.5f, 0.75f));
+		// font60.drawString(0, Game.SQUARE_HEIGHT, "TURN ", new Color(1.0f,
+		// 0.5f,
+		// 0.5f, 0.75f));
+		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
 		// zoom end
 		GL11.glPopMatrix();

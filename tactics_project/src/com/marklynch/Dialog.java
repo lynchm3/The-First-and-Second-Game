@@ -4,9 +4,9 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
 
+import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 
 public class Dialog {
@@ -19,17 +19,17 @@ public class Dialog {
 	public String backgroundImagePath = "";
 	public Texture backgroundImageTexture = null;
 
-	// font
-	TrueTypeFont font;
+	Level level;
 
 	public Dialog(Square reference, float width, float height,
-			String backgroundImagePath, String fontPath) {
+			String backgroundImagePath, String fontPath, Level level) {
 		super();
 		this.reference = reference;
 		this.width = width;
 		this.height = height;
 		this.backgroundImagePath = backgroundImagePath;
 		this.backgroundImageTexture = getGlobalImage(backgroundImagePath);
+		this.level = level;
 	}
 
 	public void draw() {
@@ -80,8 +80,8 @@ public class Dialog {
 
 		int i = 0;
 		for (String string : strings) {
-			font.drawString(positionXInPixels + 10, positionYInPixels + 20 + i,
-					string, Color.black);
+			level.font12.drawString(positionXInPixels + 10, positionYInPixels
+					+ 20 + i, string, Color.black);
 			i += 20;
 		}
 

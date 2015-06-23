@@ -3,6 +3,7 @@ package com.marklynch.tactics.objects.unit;
 import java.util.Vector;
 
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
@@ -90,12 +91,23 @@ public class Actor extends GameObject {
 		return false;
 	}
 
-	public void attack(GameObject gameObject) {
+	public void attack(GameObject gameObject, boolean isCounter) {
 		gameObject.remainingHealth -= selectedWeapon.damage;
 		this.distanceMovedThisTurn = Integer.MAX_VALUE;
-		level.logOnScreen(new ActivityLog("" + this.name + " attacked "
-				+ gameObject.name + " with " + selectedWeapon.name + " for "
-				+ selectedWeapon.damage + " damage", this.faction));
+		String attackTypeString;
+		if (isCounter)
+			attackTypeString = "countered";
+		else
+			attackTypeString = "attacked ";
+		level.logOnScreen(new ActivityLog("" + this.name + " "
+				+ attackTypeString + " " + gameObject.name + " with "
+				+ selectedWeapon.name + " for " + selectedWeapon.damage
+				+ " damage", this.faction));
+
+		Actor actor = null;
+		if (gameObject instanceof Actor)
+			actor = (Actor) gameObject;
+
 		if (gameObject.checkIfDestroyed())
 			if (gameObject instanceof Actor)
 				level.logOnScreen(new ActivityLog("" + this.name + " killed "
@@ -103,6 +115,15 @@ public class Actor extends GameObject {
 			else
 				level.logOnScreen(new ActivityLog("" + this.name
 						+ " destroyed a " + gameObject.name, this.faction));
+
+		if (!isCounter && gameObject instanceof Actor)
+			actor.counter(this);
+	}
+
+	public void counter(GameObject gameObject) {
+		if (hasRange(this.weaponDistanceTo(gameObject.squareGameObjectIsOn))) {
+			attack(gameObject, true);
+		}
 	}
 
 	@Override
@@ -231,5 +252,22 @@ public class Actor extends GameObject {
 					+ weaponHeightInPixels);
 			GL11.glEnd();
 		}
+
+		// Draw level text
+		String levelString = "LVL" + this.actorLevel;
+		float levelWidthInPixels = level.font12.getWidth(levelString);// Game.SQUARE_WIDTH
+																		// / 2;
+
+		float levelPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+				+ Game.SQUARE_WIDTH
+				- levelWidthInPixels
+				- Game.SQUARE_WIDTH
+				/ 5;
+		float levelPositionYInPixels = this.squareGameObjectIsOn.y
+				* (int) Game.SQUARE_HEIGHT;
+
+		level.font12.drawString(levelPositionXInPixels, levelPositionYInPixels,
+				levelString, Color.black);
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 }

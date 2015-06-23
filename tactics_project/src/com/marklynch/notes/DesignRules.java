@@ -2,6 +2,12 @@ package com.marklynch.notes;
 
 public class DesignRules {
 
+	// BATTLE MECHANICS BROAD PLAN
+	// 1. Design the most basic simplified, easy turn based strategy as
+	// possible.
+	// 2. Add intricacies which can be turned on/off with a config
+	// 3. Hone
+
 	// show as musch info as possible to the user, but without cluttering
 	// reasoning - like... when they don't compare weapons for you... fucking
 	// bullshit (maybe I could word this reasoning better?) :D

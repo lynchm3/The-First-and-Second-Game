@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
@@ -15,6 +14,7 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.utils.ArrayUtils;
 
 public class GameObject {
 
@@ -84,19 +84,6 @@ public class GameObject {
 		GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels
 				+ Game.SQUARE_HEIGHT);
 		GL11.glEnd();
-
-		// Draw health
-		float healthWidthInPixels = Game.SQUARE_WIDTH / 2;
-		float healthHeightInPixels = Game.SQUARE_HEIGHT / 5;
-
-		float healthPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
-				+ Game.SQUARE_WIDTH - healthWidthInPixels;
-		float healthPositionYInPixels = this.squareGameObjectIsOn.y
-				* (int) Game.SQUARE_HEIGHT;
-
-		level.font12.drawString(healthPositionXInPixels, healthPositionYInPixels,
-				"" + remainingHealth + "/" + totalHealth, Color.black);
-		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
 	}
 
@@ -196,5 +183,37 @@ public class GameObject {
 			Path newPath = new Path(newPathSquares, newDistance);
 			paths.put(newSquare, newPath);
 		}
+	}
+
+	public Vector<Square> getAllSquaresAtDistance(int distance) {
+		Vector<Square> squares = new Vector<Square>();
+		int x = 0;
+		int y = 0;
+		for (int i = 0; i < distance; i++) {
+			x = this.squareGameObjectIsOn.x + i;
+			y = this.squareGameObjectIsOn.y + (distance - i);
+			if (ArrayUtils.inBounds(level.squares, x, y)) {
+				squares.add(level.squares[x][y]);
+			}
+
+			x = this.squareGameObjectIsOn.x + i;
+			y = this.squareGameObjectIsOn.y - (distance - i);
+			if (ArrayUtils.inBounds(level.squares, x, y)) {
+				squares.add(level.squares[x][y]);
+			}
+
+			x = this.squareGameObjectIsOn.x + (distance - i);
+			y = this.squareGameObjectIsOn.y + i;
+			if (ArrayUtils.inBounds(level.squares, x, y)) {
+				squares.add(level.squares[x][y]);
+			}
+
+			x = this.squareGameObjectIsOn.x - (distance - i);
+			y = this.squareGameObjectIsOn.y + i + distance;
+			if (ArrayUtils.inBounds(level.squares, x, y)) {
+				squares.add(level.squares[x][y]);
+			}
+		}
+		return squares;
 	}
 }
