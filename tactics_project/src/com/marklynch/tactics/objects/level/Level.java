@@ -81,7 +81,7 @@ public class Level {
 		weaponsForActor0.add(weapon0ForActor0);
 		weaponsForActor0.add(weapon1ForActor0);
 
-		Weapon weapon0ForActor3 = new Weapon("a2r2", 2, 2, "a2r2.png");
+		Weapon weapon0ForActor3 = new Weapon("a2r3", 2, 3, "a2r2.png");
 		Vector<Weapon> weaponsForActor3 = new Vector<Weapon>();
 		weaponsForActor3.add(weapon0ForActor3);
 

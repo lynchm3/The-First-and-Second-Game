@@ -6,8 +6,8 @@ public class TODO {
 
 	// merge actor and game object?
 
-	// bug - if i move to 3,1 at the start, the first AI goes mental, seeing a
-	// lot of weird movement in fact, it's definitely getAllSquaresAtDistance
+	// bug - they're picking squares at the correct distance from the enemy, but
+	// not the squares closest to them :D
 
 	// different attack text based on weapon type - slashed, shot, blugeoned,
 	// gored
@@ -68,6 +68,8 @@ public class TODO {
 	// counter attacks :P
 
 	// DONE
+	// bug - if i move to 3,1 at the start, the first AI goes mental, seeing a
+	// lot of weird movement in fact, it's definitely getAllSquaresAtDistance
 
 	// Dialogs stay open if open after ending turn
 

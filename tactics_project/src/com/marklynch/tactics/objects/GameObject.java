@@ -219,38 +219,80 @@ public class GameObject {
 
 	public Vector<Square> getAllSquaresAtDistance(int distance) {
 		Vector<Square> squares = new Vector<Square>();
-		int x = 0;
-		int y = 0;
 
-		for (int i = 0; i < distance; i++) {
-			x = this.squareGameObjectIsOn.x + i;
-			y = this.squareGameObjectIsOn.y + (distance - i);
-			if (ArrayUtils.inBounds(level.squares, x, y)) {
-				squares.add(level.squares[x][y]);
+		boolean xGoingUp = true;
+		boolean yGoingUp = true;
+		for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+			if (ArrayUtils.inBounds(level.squares, this.squareGameObjectIsOn.x
+					+ x, this.squareGameObjectIsOn.y + y)) {
+				squares.add(level.squares[this.squareGameObjectIsOn.x + x][this.squareGameObjectIsOn.y
+						+ y]);
 			}
-			System.out.println("1 - " + x + ", " + y);
+			System.out.println(x + ", " + y);
 
-			x = this.squareGameObjectIsOn.x + i;
-			y = this.squareGameObjectIsOn.y - (distance - i);
-			if (ArrayUtils.inBounds(level.squares, x, y)) {
-				squares.add(level.squares[x][y]);
+			if (xGoingUp) {
+				if (x == distance) {
+					xGoingUp = false;
+					x--;
+				} else {
+					x++;
+				}
+			} else {
+				if (x == -distance) {
+					xGoingUp = true;
+					x++;
+				} else {
+					x--;
+				}
 			}
-			System.out.println("2 - " + x + ", " + y);
 
-			x = this.squareGameObjectIsOn.x + (distance - i);
-			y = this.squareGameObjectIsOn.y + i;
-			if (ArrayUtils.inBounds(level.squares, x, y)) {
-				squares.add(level.squares[x][y]);
+			if (yGoingUp) {
+				if (y == distance) {
+					yGoingUp = false;
+					y--;
+				} else {
+					y++;
+				}
+			} else {
+				if (y == -distance) {
+					yGoingUp = true;
+					y++;
+				} else {
+					y--;
+				}
 			}
-			System.out.println("3 - " + x + ", " + y);
 
-			x = this.squareGameObjectIsOn.x - (distance - i);
-			y = this.squareGameObjectIsOn.y + i;
-			if (ArrayUtils.inBounds(level.squares, x, y)) {
-				squares.add(level.squares[x][y]);
-			}
-			System.out.println("4 - " + x + ", " + y);
 		}
+
+		// for (int i = 0; i < distance; i++) {
+		// x = this.squareGameObjectIsOn.x + i;
+		// y = this.squareGameObjectIsOn.y + (distance - i);
+		// if (ArrayUtils.inBounds(level.squares, x, y)) {
+		// squares.add(level.squares[x][y]);
+		// }
+		// System.out.println("1 - " + x + ", " + y);
+		//
+		// x = this.squareGameObjectIsOn.x + i;
+		// y = this.squareGameObjectIsOn.y - (distance - i);
+		// if (ArrayUtils.inBounds(level.squares, x, y)) {
+		// squares.add(level.squares[x][y]);
+		// }
+		// System.out.println("2 - " + x + ", " + y);
+		//
+		// x = this.squareGameObjectIsOn.x - (distance - i);
+		// y = this.squareGameObjectIsOn.y - i;
+		// if (ArrayUtils.inBounds(level.squares, x, y)) {
+		// squares.add(level.squares[x][y]);
+		// }
+		// System.out.println("3 - " + x + ", " + y);
+		//
+		// x = this.squareGameObjectIsOn.x - (distance - i);
+		// y = this.squareGameObjectIsOn.y + i;
+		// if (ArrayUtils.inBounds(level.squares, x, y)) {
+		// squares.add(level.squares[x][y]);
+		// }
+		// System.out.println("4 - " + x + ", " + y);
+		// }
 		return squares;
 	}
 
