@@ -6,13 +6,8 @@ public class TODO {
 
 	// merge actor and game object?
 
-	// bug - they're picking squares at the correct distance from the enemy, but
-	// not the squares closest to them :D
-
 	// different attack text based on weapon type - slashed, shot, blugeoned,
 	// gored
-
-	// check if death by counter / ending faction by counter is a crash
 
 	// log when faction is demolished
 
@@ -65,11 +60,7 @@ public class TODO {
 	// match enemy weapons with yours for what they'll counter w/, or draw
 	// arrows from one to the other :D MESSYI
 
-	// counter attacks :P
-
 	// DONE
-	// bug - if i move to 3,1 at the start, the first AI goes mental, seeing a
-	// lot of weird movement in fact, it's definitely getAllSquaresAtDistance
 
 	// Dialogs stay open if open after ending turn
 

@@ -81,11 +81,15 @@ public class Level {
 		weaponsForActor0.add(weapon0ForActor0);
 		weaponsForActor0.add(weapon1ForActor0);
 
-		Weapon weapon0ForActor3 = new Weapon("a2r3", 2, 3, "a2r2.png");
+		Weapon weapon0ForActor3 = new Weapon("a2r3", 2, 2, "a2r2.png");
 		Vector<Weapon> weaponsForActor3 = new Vector<Weapon>();
 		weaponsForActor3.add(weapon0ForActor3);
 
-		actors.add(new Actor("John Lennon", "Fighter", 1, 10, 0, 0, 0, 0,
+		Weapon weapon0ForActor4 = new Weapon("a2r3", 2, 2, "a2r2.png");
+		Vector<Weapon> weaponsForActor4 = new Vector<Weapon>();
+		weaponsForActor4.add(weapon0ForActor4);
+
+		actors.add(new Actor("John Lennon", "Fighter", 1, 100, 0, 0, 0, 0,
 				"avatar.png", squares[0][0], weaponsForActor0, 4, this));
 		actors.get(0).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(0));
@@ -106,7 +110,7 @@ public class Level {
 		factions.get(1).actors.add(actors.get(3));
 
 		actors.add(new Actor("Ghandi", "Thief", 3, 10, 0, 0, 0, 0, "red.png",
-				squares[6][3], new Vector<Weapon>(), 4, this));
+				squares[6][3], weaponsForActor4, 4, this));
 		actors.get(4).faction = factions.get(1);
 		factions.get(1).actors.add(actors.get(4));
 
