@@ -116,7 +116,8 @@ public class Actor extends GameObject {
 				level.logOnScreen(new ActivityLog("" + this.name
 						+ " destroyed a " + gameObject.name, this.faction));
 
-		if (!isCounter && gameObject instanceof Actor)
+		if (!isCounter && gameObject.remainingHealth > 0
+				&& gameObject instanceof Actor)
 			actor.counter(this);
 
 		this.showPow(gameObject);

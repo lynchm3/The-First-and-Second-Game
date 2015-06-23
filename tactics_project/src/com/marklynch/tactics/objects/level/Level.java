@@ -205,6 +205,19 @@ public class Level {
 			}
 		}
 
+		// Objects
+
+		for (GameObject gameObject : inanimateObjects) {
+			gameObject.draw2();
+		}
+
+		// Actors
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				actor.draw2();
+			}
+		}
+
 		// GL11.glColor4f;
 		// font60.drawString(0, 0, "YOUR", new Color(1.0f, 0.5f, 0.5f, 0.75f));
 		// font60.drawString(0, Game.SQUARE_HEIGHT, "TURN ", new Color(1.0f,

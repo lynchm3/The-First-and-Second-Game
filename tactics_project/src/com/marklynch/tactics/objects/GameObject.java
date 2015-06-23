@@ -90,6 +90,9 @@ public class GameObject {
 		GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels
 				+ Game.SQUARE_HEIGHT);
 		GL11.glEnd();
+	}
+
+	public void draw2() {
 
 		// Draw POW
 		if (showPow == true) {
