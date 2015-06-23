@@ -118,6 +118,8 @@ public class Actor extends GameObject {
 
 		if (!isCounter && gameObject instanceof Actor)
 			actor.counter(this);
+
+		this.showPow(gameObject);
 	}
 
 	public void counter(GameObject gameObject) {

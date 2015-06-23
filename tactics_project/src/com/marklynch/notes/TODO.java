@@ -4,6 +4,8 @@ public class TODO {
 
 	// TO DO
 
+	// Draw pow on top of echar :D, need second pass draw
+
 	// bug - if i move to 3,1 at the start, the first AI goes mental, seeing a
 	// lot of weird movement in fact, it's definitely getAllSquaresAtDistance
 

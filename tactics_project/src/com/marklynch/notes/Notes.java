@@ -1120,6 +1120,12 @@ public class Notes {
 	 * Objects that counter :D (FE)
 	 * 
 	 * attack x2 times if speed if high enough (FE)
+	 * 
+	 * 
+	 * // Little POW image between attacker and attackee :D, could be random
+	 * each time, BAM, BIFF, and could be based on weapon SLASH, THUD, *PIERCE*,
+	 * AND... could be based on how much damage is done FIZZLE, GRAZE ,SUPER
+	 * EFFECTIVE. :D FUN
 	 */
 
 }

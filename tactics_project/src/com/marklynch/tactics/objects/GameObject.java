@@ -39,9 +39,14 @@ public class GameObject {
 	// image
 	public String imagePath = "";
 	public Texture imageTexture = null;
+	public Texture powTexture = null;
 
 	// paths
 	public HashMap<Square, Path> paths = new HashMap<Square, Path>();
+
+	// POW
+	public GameObject powTarget = null;
+	public boolean showPow = false;
 
 	public GameObject(String name, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath,
@@ -56,6 +61,7 @@ public class GameObject {
 		this.endurance = endurance;
 		this.imagePath = imagePath;
 		this.imageTexture = getGlobalImage(imagePath);
+		this.powTexture = getGlobalImage("pow.png");
 		this.squareGameObjectIsOn = squareGameObjectIsOn;
 		this.squareGameObjectIsOn.gameObject = this;
 		this.weapons = weapons;
@@ -85,6 +91,29 @@ public class GameObject {
 				+ Game.SQUARE_HEIGHT);
 		GL11.glEnd();
 
+		// Draw POW
+		if (showPow == true) {
+			this.powTexture.bind();
+			int powPositionXInPixels = Math
+					.abs((powTarget.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH));
+			int powPositionYInPixels = powTarget.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT;
+
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex2f(powPositionXInPixels, powPositionYInPixels);
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex2f(powPositionXInPixels + Game.SQUARE_WIDTH,
+					powPositionYInPixels);
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex2f(powPositionXInPixels + Game.SQUARE_WIDTH,
+					powPositionYInPixels + Game.SQUARE_HEIGHT);
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex2f(powPositionXInPixels, powPositionYInPixels
+					+ Game.SQUARE_HEIGHT);
+			GL11.glEnd();
+
+		}
 	}
 
 	public boolean checkIfDestroyed() {
@@ -215,5 +244,31 @@ public class GameObject {
 			}
 		}
 		return squares;
+	}
+
+	public void showPow(GameObject target) {
+		powTarget = target;
+		showPow = true;
+		new HidePowThread(this).start();
+	}
+
+	public class HidePowThread extends Thread {
+
+		GameObject gameObject;
+
+		public HidePowThread(GameObject gameObject) {
+			this.gameObject = gameObject;
+		}
+
+		@Override
+		public void run() {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			showPow = false;
+		}
 	}
 }
