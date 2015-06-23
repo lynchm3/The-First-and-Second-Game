@@ -221,30 +221,35 @@ public class GameObject {
 		Vector<Square> squares = new Vector<Square>();
 		int x = 0;
 		int y = 0;
+
 		for (int i = 0; i < distance; i++) {
 			x = this.squareGameObjectIsOn.x + i;
 			y = this.squareGameObjectIsOn.y + (distance - i);
 			if (ArrayUtils.inBounds(level.squares, x, y)) {
 				squares.add(level.squares[x][y]);
 			}
+			System.out.println("1 - " + x + ", " + y);
 
 			x = this.squareGameObjectIsOn.x + i;
 			y = this.squareGameObjectIsOn.y - (distance - i);
 			if (ArrayUtils.inBounds(level.squares, x, y)) {
 				squares.add(level.squares[x][y]);
 			}
+			System.out.println("2 - " + x + ", " + y);
 
 			x = this.squareGameObjectIsOn.x + (distance - i);
 			y = this.squareGameObjectIsOn.y + i;
 			if (ArrayUtils.inBounds(level.squares, x, y)) {
 				squares.add(level.squares[x][y]);
 			}
+			System.out.println("3 - " + x + ", " + y);
 
 			x = this.squareGameObjectIsOn.x - (distance - i);
-			y = this.squareGameObjectIsOn.y + i + distance;
+			y = this.squareGameObjectIsOn.y + i;
 			if (ArrayUtils.inBounds(level.squares, x, y)) {
 				squares.add(level.squares[x][y]);
 			}
+			System.out.println("4 - " + x + ", " + y);
 		}
 		return squares;
 	}

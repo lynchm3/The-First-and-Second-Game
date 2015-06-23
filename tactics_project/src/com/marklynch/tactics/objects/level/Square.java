@@ -100,7 +100,6 @@ public class Square {
 
 		// if (this.reachableBySelectedCharater) {
 		int costTextWidth = level.font60.getWidth("" + distanceToSquare);
-		System.out.println("costTextWidth = " + costTextWidth);
 		float costPositionX = squarePositionX
 				+ (Game.SQUARE_WIDTH - costTextWidth) / 2f;
 		float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) / 2f;

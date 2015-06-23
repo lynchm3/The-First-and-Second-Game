@@ -212,6 +212,7 @@ public class Faction {
 			// issue.
 			// Reachable is best.
 			// if There's multiple reachable then safest out of them is best :P
+			// OR somewhere u can attack someone from is the best... i dunno :D
 			for (Square targetSquare : targetSquares) {
 				Path currentActorPathToThisSquare = currentActor.paths
 						.get(targetSquare);
