@@ -14,4 +14,17 @@ public class HateList {
 
 	// RPGS - constant trecks to the fecking shop to sell off ur crap,
 	// especially in late game (witcher, skyrim, DA:I)
+
+	// Boring fucking walls of text from boring fucking charactes (FE)
+
+	// Slimey fucking NPCs that come in behind you with no warning, oneshotting
+	// your back line so that u have to restart (FE)
+
+	// When you get to a point in these games where you have more troops than
+	// you can use... Do u train all or focus on a few? THere's no way to know.
+	// U
+	// need to be able to tell the future. My game needs to let you use all your
+	// troops, and push you, to use all your troops. In the other games you
+	// don't know if the max will change or stay the same, and what the max will
+	// be in the end (FE,TT)
 }

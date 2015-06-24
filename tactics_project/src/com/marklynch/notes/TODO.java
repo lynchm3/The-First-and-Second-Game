@@ -6,17 +6,19 @@ public class TODO {
 
 	// bug - it's allowing me to hit multiple times per turn
 
+	// method that works out ideal distanceS from the enemy, and puts them in a
+	// sorted array, based on weapon (incl. "projectedOutcome" method). Avoid
+	// fights where u'll die. Pick fights where you take no damage. After that,
+	// pick fights with the best damage diff
+
+	// go through the code and add comments b4 i foget what the fuck i was doing
+
 	// merge actor and game object?
 
 	// different attack text based on weapon type - slashed, shot, blugeoned,
 	// gored
 
 	// log when faction is demolished
-
-	// Weapon has minimum and maximum range
-
-	// method that works out ideal distanceS from the enemy, and puts them in a
-	// sorted array, based on weapon
 
 	// auto select best weapon for counter
 

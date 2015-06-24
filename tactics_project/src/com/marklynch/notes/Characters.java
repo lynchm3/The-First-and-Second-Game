@@ -3,7 +3,13 @@ package com.marklynch.notes;
 public class Characters {
 
 	/*
-	 * 
+	 * YOU A super human entity? If you are a super human entity... what's your
+	 * drive? I think it should be nefarious. Could do like... a backwards
+	 * bioshock. At the end u start doing bad shit. And ur controlling these
+	 * guys who dont want to do bad shit. The troops cant resist, can't stop
+	 * themselves. But maybe those with high willpower can stop themselves. So
+	 * you end up in a fight with your own team, the weak-willed against the
+	 * strong-willed.
 	 * 
 	 * 
 	 * For all these, have a few references from popular/unpopular media to draw
@@ -81,7 +87,7 @@ public class Characters {
 	 * can be their thing, people think hes a zombie BODYBUILDER BRO BROSCCIENCE
 	 * TYPE
 	 * 
-	 * 
+	 * buzzing coffee junkie - tweak from souhpark, can use personal experience
 	 * 
 	 * Clint eastwood face
 	 * 

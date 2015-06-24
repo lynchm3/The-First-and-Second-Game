@@ -1134,12 +1134,118 @@ public class Notes {
 	 * Call it... User Interface? Screen? Battle Screen? See what other games
 	 * call it.
 	 * 
+	 * 
 	 * I like the idea of being able to evacuate bitches from the battlefield,
 	 * helps keep them alive
 	 * 
 	 * Need to manage item flow so that ur not going to the shop to sell off ur
 	 * shit all the time. SO BORING. I like the way TT let u send extra items to
 	 * storage. Also, break items down in to LOTS of categories.
+	 * 
+	 * Name all characters, even foot soldiers. From:
+	 * https://en.wikipedia.org/wiki/Fire_Emblem_Awakening#Development
+	 * 
+	 * Give the actor's images props? "While designing (APPEARANCE) the
+	 * characters, Kozaki took their backstories into account: for example,
+	 * Gaius was drawn with a sack of sweets as he had a love for them."
+	 * 
+	 * Difficulty levels? Casual mode (no perma-death)? Change level difficulty
+	 * on the fly? "One of the more controversial ideas that made it into the
+	 * final game was the Causal Mode . Initially opposed by staff members at
+	 * Nintendo and Intelligent Systems, Yamagami and others successfully
+	 * defended the feature. Yamagami's stance was that modern gamers would not
+	 * be pleased with needing to invest extra time because a character had
+	 * died." From:
+	 * https://en.wikipedia.org/wiki/Fire_Emblem_Awakening#Development
+	 * 
+	 * FE:A review - Despite feeling mixed about the interface and multiplayer,
+	 * GameSpot's Heidi Kemps called Awakening the best installment in the
+	 * series for some time.[51] From:
+	 * https://en.wikipedia.org/wiki/Fire_Emblem_Awakening#Development
+	 * 
+	 * FE:A review - Awakening made me scratch and claw for victory, and I
+	 * savored every moment [52] From:
+	 * https://en.wikipedia.org/wiki/Fire_Emblem_Awakening#Development
+	 * 
+	 * Health bar flashes when ur fucked, on/off configurable, % at which it
+	 * flashes configurable
+	 * 
+	 * Actual playable area on the settings screen with everything on the
+	 * screen. For you to try out settings. Can go between full screen and half
+	 * screen (w/ other half showing settings). Put everything on the test map
+	 * (multiple factions, chars, objs, starting w/ variable weapons, no
+	 * weapons, one weapon, health levels)
+	 * 
+	 * Utility items - spafe, pickaxe, tree axe - better at clearing objs than
+	 * normal weapons
+	 * 
+	 * All weapons and inventory items need short descriptions, be hilarious
+	 * 
+	 * Weapons more effective at certain ranges? Super long-bows (sniper rifles)
+	 * a game breaker? siege weapons?
+	 * 
+	 * Level with a sniper, and you've got to take cover from him as you make
+	 * your way to him. a cone of light shows where he can and cannot shoot.
+	 * Some cover moves. NEED COVER :D
+	 * 
+	 * POWs different sizes. Graze pow could be tiny, "SUPER EFFECTIVE",
+	 * "CRITICAL" could be massive, bigger than a square.
+	 * 
+	 * Don't use normal words like "critical". If at all possivle.altho this
+	 * might just make things confusing :/
+	 * 
+	 * Starting with super-strong character? Basically a body guard (FE)
+	 * 
+	 * What about seeing the hand/mouse of the other factions doing stuff? For
+	 * tutorial? All the time? Even when it's not their turn. And if you take
+	 * too long to make a move they could shake vigourously or circle a player,
+	 * or 'draw' patterns (figure of 8) to get your attention. Could make this
+	 * configurable.
+	 * 
+	 * How does shogun get away with tiny icons?! :D
+	 * 
+	 * Order weapons in the side bar by how much damamge they do based on player
+	 * wepaon combo
+	 * 
+	 * Levels of organisation ai, make it clear in briefing that theyre
+	 * organised or not or a bit. Organised factions have faction level goals -
+	 * protect X, kill Y, be defensive, target weak, hold back and let other
+	 * factions kill eachother. Mission summary needs to describe these in some
+	 * way.
+	 * 
+	 * With multiple factions in a brawl. u can hold back... but u'll miss out
+	 * on xp :D i like this TRADE OFF.
+	 * 
+	 * // Shit written on walls/ground like stealth bastard. Text could take up
+	 * a whole row of a grid. One word per row. Cool style. "YOUR TURN",
+	 * "YOU WIN", "HERO VANQUISHED", "YOU DIED", Dark souls - (BONFIRE LIT, YOU
+	 * DIED, YOU DEFEATED), i particularly like bonfire lit, coz it seemed so
+	 * retarded. Bloodborne - "Prey Slaughtered" VERY COOL
+	 * 
+	 * Level where all the eneimes make a beeline straight for a spcific
+	 * character. Maybe the mission is about the character. It needs to be clear
+	 * in the briefing that this will happen. Do a mass effect 2 style mission
+	 * for each character?
+	 * 
+	 * Traders give you discounts, gifts, offer items they wouldnt normally if
+	 * they like you. They could be tied to a faction and that decides how much
+	 * they like you.
+	 * 
+	 * BRANDS :D - defo need a coffee company and a delivery compant and an
+	 * internet company
+	 * 
+	 * Drinks that are all different. Each could be a different type of coffee.
+	 * Look at the coffee.jp blog
+	 * 
+	 * Food that heals you? Drinks to regain mana? Do we have mana?
+	 * 
+	 * Look up best scifi films. Fifht element "Multipass". Could have a
+	 * simpleton like her (ogres in witcher)
+	 * 
+	 * 2 battles at the same time, where you have to split your forces, and
+	 * every turn it switches between the two :D (Technical implementation -
+	 * could have them on same board, just with a massive gap in the board... to
+	 * split the two battles.
 	 */
 
 }
