@@ -27,4 +27,7 @@ public class HateList {
 	// troops, and push you, to use all your troops. In the other games you
 	// don't know if the max will change or stay the same, and what the max will
 	// be in the end (FE,TT)
+
+	// XCOM ENEMY UNKNOWN - those cunt enemies just popping up out of nowhere...
+	// Should confirm im not just imagining this...
 }

@@ -17,4 +17,7 @@ public class DesignRules {
 	// reasoning - subleties add depth, without the depth the game is just
 	// fucking boring
 
+	// AI - make the AI brutal... then lop bits of it's brain off to make the
+	// easier difficulties, no AI cheating (stat bumps/more luck/more resources)
+
 }

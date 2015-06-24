@@ -6,6 +6,15 @@ public class TODO {
 
 	// bug - it's allowing me to hit multiple times per turn
 
+	// Done
+	// notes
+	//
+	// change reachable squares to black and attackable squares to white
+	// dont hight attackables squares unless u can attack them?
+
+	// Look up strategy guides for similar games, will help with AI writing,
+	// will help clarify some of the subtleties in these games
+
 	// method that works out ideal distanceS from the enemy, and puts them in a
 	// sorted array, based on weapon (incl. "projectedOutcome" method). Avoid
 	// fights where u'll die. Pick fights where you take no damage. After that,

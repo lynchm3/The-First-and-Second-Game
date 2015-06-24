@@ -3,7 +3,7 @@ package com.marklynch.notes;
 public class Notes {
 
 	/*
-	 * 
+	 * FE MEETS TOTAL WAR MEETS XCOM :D ? - ye, sure, no biggy
 	 * 
 	 * 
 	 * Tactical RPG, Strategy RPG
@@ -36,7 +36,9 @@ public class Notes {
 	 * that you can choose to fight one based on your abilities or whatevs
 	 * 
 	 * Mission briefing that tells you what you'll come up against, have
-	 * ridiculous shit like "magic users only" or "100 weak cunts"
+	 * ridiculous shit like "magic users only" or "100 weak cunts", in BB i had
+	 * to cancel missions coz they turned out to be impossible after accepting
+	 * them (of the games own admittance.
 	 * 
 	 * Ascii art fun here and there?
 	 * 
@@ -861,6 +863,8 @@ public class Notes {
 	 * imaginative insults, maybe someone uses an interesting insult to describe
 	 * him after he defects :D
 	 * 
+	 * insult - "shit dribble"
+	 * 
 	 * Character - someone who uses fantastic (or not) (but imaginative at
 	 * least) insults - could reddit best insults ;)
 	 * https://www.reddit.com/r/AskReddit
@@ -1246,6 +1250,151 @@ public class Notes {
 	 * every turn it switches between the two :D (Technical implementation -
 	 * could have them on same board, just with a massive gap in the board... to
 	 * split the two battles.
+	 * 
+	 * Specific type of enemy unit always goes fro specific unit type. e.g.
+	 * Priests always go for vampires.
+	 * 
+	 * NEW stars next to new items
+	 * 
+	 * Setup own categories and list of items (like a playlist) - right click on
+	 * sword, add to list > new list, "try out", "keep"
+	 * 
+	 * Sell junk option, ability to mark items as junk. Will i have junk? I like
+	 * items (daimonds, gold nuggets) that u can sell for lots of money. Or it
+	 * could be tech stuff... where u have to choose whether to seel or use to
+	 * improve wepaons and shit.
+	 * 
+	 * Use a fecking name thats fecking easy to find ENEMY is not a good name
+	 * for a game. It's cool, but not searchable.
+	 * 
+	 * Is finding the enemy part of the game? XCOM VS FE. fuck new xcom
+	 * though... those bastards just popped up out of nowhere.
+	 * 
+	 * Tech tree?
+	 * 
+	 * you manage research, funding, spending, satellites, UFO tracking, UFO
+	 * intercepting???? (XCOM) - these ARE my fave bits of shogun...
+	 * 
+	 * Battle brothers - in the city it's unclear what bits u can click on BB -
+	 * troops have a daily cost, but i cant see my daily income, do i have one?
+	 * BB - When recuiting i couldnt see the units deets - just cost BB - no
+	 * compare for items in stash FML BB - there's a scout report before battle
+	 * :) "ur scout has reported seeing some bandit thugs, a bandit marksman",
+	 * with option to engage or cancel, would like more details (my game will
+	 * show more details based on ur scout stats), twist - it said there'd be a
+	 * marksman, but i dont see one... that is interesting though, innacurate
+	 * scout reports... as long as the player knows its innacurate. O wait...
+	 * there is an archer, but hes a "hideen opponent". BB - i'm having trouble
+	 * who does what at a glance... BB - the turn system is like niormal RPGs, u
+	 * dont get to choose who goes when
+	 * 
+	 * Comparison of you to challenge/mission/battle/map - if u have the
+	 * scouting ability up high enough
+	 * 
+	 * I want u to start with nothing. not a map, not a notion of what's
+	 * happening.
+	 * 
+	 * BB - shows nice stats screen at end of game. BB - started of much too
+	 * difficult, bit of a learning curve would be nice
+	 * 
+	 * BB- animations of attacks and misses are nice and simple and easy
+	 * 
+	 * Tooltips on loading screens should shed light on the subtleties of the
+	 * game. [Click to continue]
+	 * 
+	 * BB - gives u list of quests, no mention of difficulty on the quest, u
+	 * only know after u've accepted it and u see the enemy and beside the enemy
+	 * it says [IMPOSSIBLE]
+	 * 
+	 * BB - shows + and - on fight preview e.g. -height disadvantage, +height
+	 * advantage
+	 * 
+	 * BB - on first fucking mission i didnt realise I had to hit "LOOT ALL" to
+	 * get the items, left the whole thing behing. There really should have been
+	 * a pop-up saying "Are u sure u dont want to loot anything?"
+	 * 
+	 * BB - the lack of compare is really making it unplayable. Loads of loot,
+	 * no compare.
+	 * 
+	 * BB - a tool tip informed me that accuracy drps with distance.
+	 * 
+	 * Why are they all the same fucking setting??!
+	 * 
+	 * If I have a tutorial section it should be under it's own heading on the
+	 * main menu, not under "scenarios". Will i have a tutorial section? Could
+	 * put it all at the start of the campaign? Or... make the first few
+	 * missions skippable "Is this your first playthrough of TACTICS!!!!?"
+	 * 
+	 * a siege lvl. no idea what that entails. could totally work in a
+	 * modern/future setting ;)
+	 * 
+	 * BB - has retreating, tooltip said to get to the edge of the map b4 trying
+	 * to retreat
+	 * 
+	 * BB - only one weapon, shown as icon on character, equip system is like
+	 * real rpg, which is fine as long as u dont have too many units to equip,
+	 * would love if it showed lvl on battle screen
+	 * 
+	 * BB - each character has a bag which allows them to carry stuff, so i
+	 * guess they can switch weapon. They can upgrade to have more bag slots.
+	 * 
+	 * BB - little bushes to hid in work quite well
+	 * 
+	 * BB - armor and health bars
+	 * 
+	 * BB - too many oneshots for my liking.
+	 * 
+	 * BB - cool permanent perk-like attributes - founding member (+5 attack),
+	 * disloyal, coward (this is like crusader kings)
+	 * 
+	 * BB - has retreat from combat button, makes all chars run away
+	 * 
+	 * BB - spending ages chasing fucking archers down when they're the last one
+	 * left
+	 * 
+	 * BB - on the statistics and loot screen at the end of the battle it should
+	 * really start on the loot screen, they're just asking for u to forget to
+	 * loot, actually... everything should be auto-looted anyway in fairness.
+	 * 
+	 * I want to have quite a bit of loot in the game, BB reinded me of how fun
+	 * it is.
+	 * 
+	 * BB - time passes while ur not moving >:O, which i guess is for the other
+	 * units to move around freely, still gay tho
+	 * 
+	 * BB - no real direction. i want a bit of direction. u shouldnt have to
+	 * follow it, but it's nice to have. Need a bit of direction, for if ur at a
+	 * loss of what to do, and that bit of direction should lead u past other
+	 * shit that might grab ur attention.
+	 * 
+	 * BB - as ur wandering around u reveal locations. v. cool
+	 * 
+	 * BB - every fucking missin i get is impossible, there needs to be circles
+	 * of difficulty moving out from the starting point
+	 * 
+	 * BB - i dont know the enemies health - so who it's worth hitting.
+	 * 
+	 * BB - there's just nothing keeping me playing. No direction. No drive. Not
+	 * much is explained properly. They move too slow on the map screen. MAYBE,
+	 * time should move quicker when ur moving and slow down when ur not? OOOOR
+	 * manual speed controls (Shogun, aoe2)
+	 * 
+	 * BB - i do like the living worl they try to portray with the caravans and
+	 * the guards moving around. random units moving around too would be cool,
+	 * that u can hire or whatever.
+	 * 
+	 * Could have HUGE dragonrun-style levels that kind of force you to split ur
+	 * time up in some way. OR u have to concurrent missions, so have to split
+	 * ur team up. OR u split up at the start and both teams enter from
+	 * different directions.
+	 * 
+	 * BB - awkward to see shit
+	 * 
+	 * BB - awkward to know whereu can move
+	 * 
+	 * mission where urteam starts off circling the enemy, ur ambushing them.
+	 * make it a super easy one where enemy has the attribute (drowsy) and
+	 * they're not wearing full armor
 	 */
 
 }

@@ -31,8 +31,23 @@ public class Research {
 	 * 
 	 * More about fire emblem -What's the dev team size?
 	 * 
-	 * That retro xcomm thing looked interesting, want to play it. Feels like it
-	 * could have been great if it was more approachable.
+	 * Xenonauts! :P That retro xcomm thing looked interesting, want to play it.
+	 * Feels like it could have been great if it was more approachable.
+	 * 
+	 * battle brothers, xcom games, enemy
+	 * 
+	 * Was looking at differences between xcom and fe - Battle is only about 50%
+	 * of the game, though. Unlike FE, you actually have to manage more than
+	 * your soldiers -- you manage research, funding, spending, satellites, UFO
+	 * tracking, UFO intercepting, etc...
+	 * 
+	 * Battle brothers when it comes of of early access, playing 0.4.0.44 at the
+	 * moment and its annoying me. NO COMPARE OF ITEMS!!!
+	 * 
+	 * Look up strategy guides for these games for tips on writingAI and for
+	 * info on subtleties
+	 * 
+	 * Read negative reviews of these games (and positive and funny i suppose)
 	 */
 
 }

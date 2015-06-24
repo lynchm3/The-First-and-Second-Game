@@ -1,6 +1,6 @@
 package com.marklynch.notes;
 
-public class UserManual {
+public class RuleBook {
 
 	// How do counters work!?
 	// If a unit is attacked and they have a weapon that can reach the attacked,
@@ -15,5 +15,8 @@ public class UserManual {
 	// Can you pass through units of the same faction?
 	// When I couldn't do this in TT it REALLY annoyed me.
 	// Pretty sure u can do i in fire emblem... will check
+
+	// HOW DO TURNS WORK?
+	// faction by faction(FE, TT)? Player by player based on speed (BB)?
 
 }
