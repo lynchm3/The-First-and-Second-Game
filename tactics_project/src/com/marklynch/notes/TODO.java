@@ -4,6 +4,8 @@ public class TODO {
 
 	// TO DO
 
+	// bug - it's allowing me to hit multiple times per turn
+
 	// merge actor and game object?
 
 	// different attack text based on weapon type - slashed, shot, blugeoned,

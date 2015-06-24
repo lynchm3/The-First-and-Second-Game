@@ -7,4 +7,11 @@ public class HateList {
 
 	// RPGs that dont show u comparisons EVERYWHERE (should be in crafting, shop
 	// and inventory screens!)
+
+	// TT characters look the fucking same
+
+	// Witcher - items aren't broken down in to nearly enough categories
+
+	// RPGS - constant trecks to the fecking shop to sell off ur crap,
+	// especially in late game (witcher, skyrim, DA:I)
 }
