@@ -321,4 +321,14 @@ public class GameObject {
 			showPow = false;
 		}
 	}
+
+	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon,
+			int range) {
+		for (Weapon weapon : weapons) {
+			if (range >= weapon.minRange && range <= weapon.maxRange) {
+				return weapon;
+			}
+		}
+		return null;
+	}
 }

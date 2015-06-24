@@ -274,4 +274,27 @@ public class Actor extends GameObject {
 				levelString, Color.black);
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
+
+	public Vector<Integer> calculateIdealDistanceFrom(GameObject target) {
+
+		Vector<Fight> fights = new Vector<Fight>();
+		for (Weapon weapon : this.weapons) {
+			for (int range = weapon.minRange; range <= weapon.maxRange; range++) {
+				Fight fight = new Fight(this, weapon, target,
+						target.bestCounterWeapon(this, weapon, range), range);
+				fight.projectOutcome();
+				fights.add(fight);
+			}
+		}
+
+		fights.sort(new Fight.FightComparator());
+
+		Vector<Integer> idealDistances = new Vector<Integer>();
+
+		for (Fight fight : fights) {
+			idealDistances.add(fight.range);
+		}
+
+		return idealDistances;
+	}
 }

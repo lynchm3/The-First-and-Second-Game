@@ -197,8 +197,12 @@ public class Faction {
 
 		this.currentActor.calculatePathToAllSquares(level.squares);
 
-		Vector<Integer> idealWeaponDistances = new Vector<Integer>();
-		idealWeaponDistances.add(2);
+		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
+		// idealWeaponDistances.add(2);
+
+		Vector<Integer> idealWeaponDistances = level.activeActor
+				.calculateIdealDistanceFrom(target);
+
 		// TODO this needs to be calculated based on
 		// weapons available and the taret and their weapons
 		// TODO what if we're stuck being closed than ideal distance, need to

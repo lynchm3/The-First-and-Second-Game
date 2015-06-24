@@ -75,32 +75,46 @@ public class Level {
 		// Actors
 		actors = new Vector<Actor>();
 
+		// Goody weapons
 		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
 		Weapon weapon1ForActor0 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
 		Vector<Weapon> weaponsForActor0 = new Vector<Weapon>();
 		weaponsForActor0.add(weapon0ForActor0);
 		weaponsForActor0.add(weapon1ForActor0);
 
-		Weapon weapon0ForActor3 = new Weapon("a2r3", 2, 2, 2, "a2r2.png");
+		Weapon weapon0ForActor1 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
+		Vector<Weapon> weaponsForActor1 = new Vector<Weapon>();
+		weaponsForActor1.add(weapon0ForActor1);
+
+		Weapon weapon0ForActor2 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
+		Vector<Weapon> weaponsForActor2 = new Vector<Weapon>();
+		weaponsForActor2.add(weapon0ForActor2);
+
+		// Baddy weapons
+		Weapon weapon0ForActor3 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
+		Weapon weapon1ForActor3 = new Weapon("a2r3", 2, 2, 2, "a2r2.png");
 		Vector<Weapon> weaponsForActor3 = new Vector<Weapon>();
 		weaponsForActor3.add(weapon0ForActor3);
+		weaponsForActor3.add(weapon1ForActor3);
 
-		Weapon weapon0ForActor4 = new Weapon("a2r3", 2, 2, 2, "a2r2.png");
+		Weapon weapon0ForActor4 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
+		Weapon weapon1ForActor4 = new Weapon("a2r3", 2, 2, 2, "a2r2.png");
 		Vector<Weapon> weaponsForActor4 = new Vector<Weapon>();
 		weaponsForActor4.add(weapon0ForActor4);
+		weaponsForActor4.add(weapon1ForActor4);
 
-		actors.add(new Actor("John Lennon", "Fighter", 1, 100, 0, 0, 0, 0,
+		actors.add(new Actor("John Lennon", "Fighter", 1, 10, 0, 0, 0, 0,
 				"avatar.png", squares[0][0], weaponsForActor0, 4, this));
 		actors.get(0).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(0));
 
 		actors.add(new Actor("Paul McCartney", "Maniac", 2, 10, 0, 0, 0, 0,
-				"avatar.png", squares[2][7], new Vector<Weapon>(), 4, this));
+				"avatar.png", squares[2][7], weaponsForActor1, 4, this));
 		actors.get(1).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(1));
 
 		actors.add(new Actor("Steve", "Maniac", 2, 100, 0, 0, 0, 0,
-				"avatar.png", squares[2][8], new Vector<Weapon>(), 4, this));
+				"avatar.png", squares[2][8], weaponsForActor2, 4, this));
 		actors.get(2).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(2));
 

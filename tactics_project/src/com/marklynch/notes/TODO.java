@@ -4,12 +4,12 @@ public class TODO {
 
 	// TO DO
 
-	// max/min range for weapons
-
 	// method that works out ideal distanceS from the enemy, and puts them in a
 	// sorted array, based on weapon (incl. "projectedOutcome" method). Avoid
 	// fights where u'll die. Pick fights where you take no damage. After that,
 	// pick fights with the best damage diff
+
+	// go through the code and add comments b4 i foget what the fuck i was doing
 
 	// merge actor and game object?
 
