@@ -6,6 +6,9 @@ public class Research {
 	 * 
 	 * WORK SMART AND HARD ;) *
 	 * 
+	 * Watch some general making of videos for games, see wassup e.g.The Making
+	 * of Oblivion (FULL | HQ)
+	 * 
 	 * Look at manuals, videos, trailers, screen grabs, EVERYTHING for these,
 	 * model on their pros
 	 * 
@@ -25,6 +28,11 @@ public class Research {
 	 * 
 	 * Need to go through the games and root out the deeper problems, I took
 	 * issue with some stuff from TT and Chroma squad, but what was it!?
+	 * 
+	 * More about fire emblem -What's the dev team size?
+	 * 
+	 * That retro xcomm thing looked interesting, want to play it. Feels like it
+	 * could have been great if it was more approachable.
 	 */
 
 }
