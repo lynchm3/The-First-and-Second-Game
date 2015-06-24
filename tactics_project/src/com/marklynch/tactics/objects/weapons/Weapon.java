@@ -13,18 +13,21 @@ public class Weapon {
 
 	// attributes
 	public int damage = 0;
-	public int range = 0;
+	public int minRange = 0;
+	public int maxRange = 0;
 
 	// image
 	public String imagePath = "";
 	public Texture imageTexture = null;
 	public String name;
 
-	public Weapon(String name, int damage, int range, String imagePath) {
+	public Weapon(String name, int damage, int minRange, int maxRange,
+			String imagePath) {
 		super();
 		this.name = name;
 		this.damage = damage;
-		this.range = range;
+		this.minRange = minRange;
+		this.maxRange = maxRange;
 		this.imagePath = imagePath;
 		this.imageTexture = getGlobalImage(imagePath);
 	}
@@ -33,18 +36,18 @@ public class Weapon {
 		for (int i = 0; i < squares.length; i++) {
 			for (int j = 0; j < squares.length; j++) {
 				if (squares[i][j].reachableBySelectedCharater) {
-					if (range > 0) {
+					for (int range = minRange; range <= maxRange; range++) {
 						Vector<Square> squaresInThisPath = new Vector<Square>();
 						squaresInThisPath.add(squares[i][j]);
-						calculateAttackableSquares(squares, this.range,
+						calculateAttackableSquares(squares, range,
 								squares[i][j], Direction.UP, squaresInThisPath);
-						calculateAttackableSquares(squares, this.range,
+						calculateAttackableSquares(squares, range,
 								squares[i][j], Direction.RIGHT,
 								squaresInThisPath);
-						calculateAttackableSquares(squares, this.range,
+						calculateAttackableSquares(squares, range,
 								squares[i][j], Direction.DOWN,
 								squaresInThisPath);
-						calculateAttackableSquares(squares, this.range,
+						calculateAttackableSquares(squares, range,
 								squares[i][j], Direction.LEFT,
 								squaresInThisPath);
 					}

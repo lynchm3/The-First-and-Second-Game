@@ -75,17 +75,17 @@ public class Level {
 		// Actors
 		actors = new Vector<Actor>();
 
-		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, "a3r1.png");
-		Weapon weapon1ForActor0 = new Weapon("a2r2", 2, 2, "a2r2.png");
+		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
+		Weapon weapon1ForActor0 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
 		Vector<Weapon> weaponsForActor0 = new Vector<Weapon>();
 		weaponsForActor0.add(weapon0ForActor0);
 		weaponsForActor0.add(weapon1ForActor0);
 
-		Weapon weapon0ForActor3 = new Weapon("a2r3", 2, 2, "a2r2.png");
+		Weapon weapon0ForActor3 = new Weapon("a2r3", 2, 2, 2, "a2r2.png");
 		Vector<Weapon> weaponsForActor3 = new Vector<Weapon>();
 		weaponsForActor3.add(weapon0ForActor3);
 
-		Weapon weapon0ForActor4 = new Weapon("a2r3", 2, 2, "a2r2.png");
+		Weapon weapon0ForActor4 = new Weapon("a2r3", 2, 2, 2, "a2r2.png");
 		Vector<Weapon> weaponsForActor4 = new Vector<Weapon>();
 		weaponsForActor4.add(weapon0ForActor4);
 

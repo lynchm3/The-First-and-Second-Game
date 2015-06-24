@@ -83,7 +83,8 @@ public class Actor extends GameObject {
 
 	public boolean hasRange(int weaponDistance) {
 		for (Weapon weapon : weapons) {
-			if (weapon.range >= weaponDistance) {
+			if (weaponDistance >= weapon.minRange
+					&& weaponDistance <= weapon.maxRange) {
 				selectedWeapon = weapon;
 				return true;
 			}
