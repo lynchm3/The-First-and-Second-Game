@@ -2,10 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// when u hover over an attackable enemy u could cover them with battle
-	// preview for each weapon
-	// OR there could be a tooltip with the info (w/ translucent BG)
-	// Make this configurable in my new configurables file that i'm making :D
+	// Text tool to insert images in to text message (have a method
+	// .printToScreen (text,posX,posY, Vector<> images) which will insert images
+	// in to the text and put the whole thing where u wanted it.
+
+	// Text tool to line shit up in a table
 
 	// DONE
 
