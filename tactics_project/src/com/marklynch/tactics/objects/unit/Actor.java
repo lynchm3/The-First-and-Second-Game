@@ -322,11 +322,11 @@ public class Actor extends GameObject {
 
 			String[][] tableContents = new String[hoverFightPreviewFights
 					.size() + 1][5];
-			tableContents[0][0] = "Range";
-			tableContents[0][1] = "Weapon";
-			tableContents[0][2] = "Damage";
-			tableContents[0][3] = "Weapon";
-			tableContents[0][4] = "Damage";
+			tableContents[0][0] = "Rng";
+			tableContents[0][1] = "Wpn";
+			tableContents[0][2] = "Dmg";
+			tableContents[0][3] = "Wpn";
+			tableContents[0][4] = "Dmg";
 
 			for (int i = 0; i < hoverFightPreviewFights.size(); i++) {
 
