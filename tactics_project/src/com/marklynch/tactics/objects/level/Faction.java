@@ -10,6 +10,7 @@ import org.newdawn.slick.Color;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
+import com.marklynch.ui.ActivityLog;
 
 public class Faction {
 
@@ -362,8 +363,8 @@ public class Faction {
 
 	public void checkIfDestroyed() {
 		if (this.actors.size() == 0)
-			level.logOnScreen(new ActivityLog("" + this.name
-					+ " have been stopped", this));
+			level.logOnScreen(new ActivityLog(new Object[] { "" + this.name
+					+ " have been stopped" }));
 
 	}
 }

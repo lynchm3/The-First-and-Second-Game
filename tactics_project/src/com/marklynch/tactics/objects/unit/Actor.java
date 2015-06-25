@@ -7,11 +7,11 @@ import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.level.ActivityLog;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.TextUtils;
 
 public class Actor extends GameObject {
@@ -111,10 +111,11 @@ public class Actor extends GameObject {
 			attackTypeString = "countered";
 		else
 			attackTypeString = "attacked ";
-		level.logOnScreen(new ActivityLog("" + this.name + " "
-				+ attackTypeString + " " + gameObject.name + " with "
-				+ selectedWeapon.name + " for " + selectedWeapon.damage
-				+ " damage", this.faction));
+		level.logOnScreen(new ActivityLog(new Object[] {
+
+		this.name + " " + attackTypeString + " " + gameObject.name + " with ",
+				selectedWeapon.imageTexture,
+				" for " + selectedWeapon.damage + " damage" }));
 
 		Actor actor = null;
 		if (gameObject instanceof Actor)
@@ -122,12 +123,12 @@ public class Actor extends GameObject {
 
 		if (gameObject.checkIfDestroyed()) {
 			if (gameObject instanceof Actor) {
-				level.logOnScreen(new ActivityLog("" + this.name + " killed "
-						+ gameObject.name, this.faction));
+				level.logOnScreen(new ActivityLog(new Object[] { "" + this.name
+						+ " killed " + gameObject.name }));
 				((Actor) gameObject).faction.checkIfDestroyed();
 			} else {
-				level.logOnScreen(new ActivityLog("" + this.name
-						+ " destroyed a " + gameObject.name, this.faction));
+				level.logOnScreen(new ActivityLog(new Object[] { "" + this.name
+						+ " destroyed a " + gameObject.name }));
 			}
 
 		}
@@ -163,8 +164,8 @@ public class Actor extends GameObject {
 		this.squareGameObjectIsOn = squareToMoveTo;
 		squareToMoveTo.gameObject = level.activeActor;
 		Actor.highlightSelectedCharactersSquares(level);
-		level.logOnScreen(new ActivityLog("" + this.name + " moved to "
-				+ squareToMoveTo, this.faction));
+		level.logOnScreen(new ActivityLog(new Object[] { "" + this.name
+				+ " moved to " + squareToMoveTo }));
 
 	}
 

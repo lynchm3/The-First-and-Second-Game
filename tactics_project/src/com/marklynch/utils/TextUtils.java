@@ -80,4 +80,36 @@ public class TextUtils {
 			}
 		}
 	}
+
+	public static void printTextWithImages(Object[] contents, float posX,
+			float posY, Level level) {
+		int offsetX = 0;
+		for (Object content : contents) {
+			if (content instanceof String) {
+				String string = (String) content;
+				level.font20.drawString(posX + offsetX, posY, string,
+						Color.white);
+				offsetX += level.font20.getWidth(string);
+
+			} else if (content instanceof Texture) {
+				Texture texture = (Texture) content;
+				texture.bind();
+				float x = posX + offsetX;
+
+				GL11.glBegin(GL11.GL_QUADS);
+				GL11.glTexCoord2f(0, 0);
+				GL11.glVertex2f(x, posY);
+				GL11.glTexCoord2f(1, 0);
+				GL11.glVertex2f(x + 20, posY);
+				GL11.glTexCoord2f(1, 1);
+				GL11.glVertex2f(x + 20, posY + 20);
+				GL11.glTexCoord2f(0, 1);
+				GL11.glVertex2f(x, posY + 20);
+				GL11.glEnd();
+				offsetX += 20;
+
+			}
+		}
+
+	}
 }

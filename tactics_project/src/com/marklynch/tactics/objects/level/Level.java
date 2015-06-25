@@ -7,14 +7,16 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
-import com.marklynch.Dialog;
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.Button;
+import com.marklynch.ui.Dialog;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextUtils;
 
 public class Level {
 
@@ -34,7 +36,7 @@ public class Level {
 	public Vector<Faction> factions;
 	public Faction currentFactionMoving;
 	public int currentFactionMovingIndex;
-	public Vector<ActivityLog> log = new Vector<ActivityLog>();
+	public Vector<ActivityLog> logs = new Vector<ActivityLog>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -263,9 +265,9 @@ public class Level {
 				+ " turn " + turn, Color.magenta);
 
 		// Log text
-		for (int i = log.size() - 1; i > -1; i--) {
-			font12.drawString(150, 100 + i * 20, log.get(i).text,
-					log.get(i).faction.color);
+		for (int i = logs.size() - 1; i > -1; i--) {
+			TextUtils.printTextWithImages(logs.get(i).contents, 150,
+					100 + i * 20, this);
 		}
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
@@ -303,8 +305,8 @@ public class Level {
 
 	public void endTurn() {
 
-		this.logOnScreen(new ActivityLog("" + currentFactionMoving.name
-				+ " ended turn " + this.turn, this.currentFactionMoving));
+		this.logOnScreen(new ActivityLog(new Object[] { ""
+				+ currentFactionMoving.name + " ended turn " + this.turn }));
 
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {
@@ -331,7 +333,7 @@ public class Level {
 	}
 
 	public void logOnScreen(ActivityLog stringToLog) {
-		log.add(stringToLog);
-		System.out.println(stringToLog.text);
+		logs.add(stringToLog);
+		// System.out.println(stringToLog.text);
 	}
 }
