@@ -27,6 +27,11 @@ public class Actor extends GameObject {
 	public Weapon selectedWeapon = null;
 	public boolean hasAttackedThisTurn = false;
 
+	// Fight preview on hover
+	public boolean showHoverFightPreview = false;
+	public GameObject hoverFightPreviewDefender = null;
+	public Vector<Fight> hoverFightPreviewFights = new Vector<Fight>();
+
 	public Actor(String name, String title, int actorLevel, int health,
 			int strength, int dexterity, int intelligence, int endurance,
 			String imagePath, Square squareActorIsStandingOn,
@@ -307,6 +312,73 @@ public class Actor extends GameObject {
 		}
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		if (this.showHoverFightPreview) {
+
+			float hoverFightPreviewPositionXInPixels = (hoverFightPreviewDefender.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+					+ Game.SQUARE_WIDTH;
+			float hoverFightPreviewPositionYInPixels = hoverFightPreviewDefender.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
+			for (int i = 0; i < hoverFightPreviewFights.size(); i++) {
+				if (hoverFightPreviewFights.get(i).attackerWeapon != null
+						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
+					level.font12
+							.drawString(
+									hoverFightPreviewPositionXInPixels,
+									hoverFightPreviewPositionYInPixels + i * 15,
+									hoverFightPreviewFights.get(i).range
+											+ " "
+											+ hoverFightPreviewFights.get(i).attackerWeapon.name
+											+ " "
+											+ hoverFightPreviewFights.get(i).attackerWeapon.damage
+											+ " VS "
+											+ hoverFightPreviewFights.get(i).defenderWeapon.name
+											+ " "
+											+ hoverFightPreviewFights.get(i).defenderWeapon.damage,
+									Color.white);
+				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
+						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
+					level.font12
+							.drawString(
+									hoverFightPreviewPositionXInPixels,
+									hoverFightPreviewPositionYInPixels + i * 15,
+									hoverFightPreviewFights.get(i).range
+											+ " "
+											+ " "
+											+ " "
+											+ " "
+											+ " VS "
+											+ hoverFightPreviewFights.get(i).defenderWeapon.name
+											+ " "
+											+ hoverFightPreviewFights.get(i).defenderWeapon.damage,
+									Color.white);
+				} else if (hoverFightPreviewFights.get(i).attackerWeapon != null
+						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
+					level.font12
+							.drawString(
+									hoverFightPreviewPositionXInPixels,
+									hoverFightPreviewPositionYInPixels + i * 15,
+									hoverFightPreviewFights.get(i).range
+											+ " "
+											+ hoverFightPreviewFights.get(i).attackerWeapon.name
+											+ " "
+											+ hoverFightPreviewFights.get(i).attackerWeapon.damage
+											+ " VS " + " " + " " + " ",
+									Color.white);
+				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
+						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
+					level.font12.drawString(hoverFightPreviewPositionXInPixels,
+							hoverFightPreviewPositionYInPixels + i * 15,
+							hoverFightPreviewFights.get(i).range + " " + " "
+									+ " " + " " + " VS " + " " + " " + " ",
+							Color.white);
+				}
+
+			}
+			// hoverFightPreviewDefender = defender;
+			// hoverFightPreviewFights.clear();
+		}
+
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
 	public Vector<Integer> calculateIdealDistanceFrom(GameObject target) {
@@ -330,5 +402,28 @@ public class Actor extends GameObject {
 		}
 
 		return idealDistances;
+	}
+
+	public void showHoverFightPreview(GameObject defender) {
+		this.showHoverFightPreview = true;
+		hoverFightPreviewDefender = defender;
+		hoverFightPreviewFights.clear();
+		for (Weapon weapon : weapons) {
+			if (defender.squareGameObjectIsOn.weaponsThatCanAttack
+					.contains(weapon)) {
+				for (int range = weapon.minRange; range <= weapon.maxRange; range++) {
+					Fight fight = new Fight(this, weapon, defender,
+							defender.bestCounterWeapon(this, weapon, range),
+							range);
+					hoverFightPreviewFights.add(fight);
+				}
+			}
+
+		}
+
+	}
+
+	public void hideHoverFightPreview() {
+		this.showHoverFightPreview = false;
 	}
 }

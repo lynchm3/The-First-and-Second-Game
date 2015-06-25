@@ -2,12 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// TO DO
-	// show if actor can attack
-	// show if actor can move
-	// grey them out if they're done
-	// maybe just the grey?
-	// maybe? not sure...
+	// when u hover over an attackable enemy u could cover them with battle
+	// preview for each weapon
+	// OR there could be a tooltip with the info (w/ translucent BG)
+	// Make this configurable in my new configurables file that i'm making :D
 
 	// DONE
 
@@ -17,15 +15,8 @@ public class TODO {
 
 	// see if u can find a font that will work over 60
 
-	// here's one, if player is dead on their turn level.activeActor should be
-	// nulled may be a crash
-
 	// should i take some time out and make it look prettier? might make me
 	// appreciate it more. Like take a saturday and do graphical tweaks :) YUS
-
-	// when u hover over an attackable enemy u could cover them with battle
-	// preview for each weapon
-	// OR there could be a tooltip with the info (w/ translucent BG)
 
 	// the bars look a lot better on the right, that could just be because of
 	// the player model
@@ -188,6 +179,8 @@ public class TODO {
 	// speach like aoe2)
 
 	// multi colored log msgs
+
+	// grey out actor if they cant move or atttack?
 
 	// DONE
 }

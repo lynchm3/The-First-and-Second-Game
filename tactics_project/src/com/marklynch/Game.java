@@ -244,6 +244,17 @@ public class Game {
 			mouseDownX = -1;
 			mouseDownY = -1;
 			lastMoveTime = lastFPS;
+
+			// Hover preview
+			if (squareMouseIsOver != null
+					&& squareMouseIsOver.gameObject != null
+					&& level.activeActor != null
+					&& squareMouseIsOver.gameObject != level.activeActor)
+				level.activeActor
+						.showHoverFightPreview(squareMouseIsOver.gameObject);
+			else if (level.activeActor != null)
+				level.activeActor.hideHoverFightPreview();
+
 		}
 
 		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)

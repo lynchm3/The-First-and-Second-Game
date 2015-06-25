@@ -1265,6 +1265,9 @@ public class Notes {
 	 * 
 	 * Map where u're racing with a 3rd party to get to the middle of a level,
 	 * you both arrive at different entrances
+	 * 
+	 * Level(s) where you set up defenses? Need to know where enemy will come
+	 * from maybe though...
 	 */
 
 }
