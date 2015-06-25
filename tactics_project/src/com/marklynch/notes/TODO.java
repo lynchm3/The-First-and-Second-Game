@@ -3,22 +3,17 @@ package com.marklynch.notes;
 public class TODO {
 
 	// TO DO
+	// show if actor can attack
+	// show if actor can move
+	// grey them out if they're done
+	// maybe just the grey?
+	// maybe? not sure...
 
 	// DONE
 
 	// go through the code and add comments b4 i foget what the fuck i was doing
 
 	// merge actor and game object?
-
-	// log when faction is demolished
-
-	// auto select best weapon for counter
-
-	// AI select best weapon for attack
-
-	// show if actor can attack
-
-	// show if actor can move
 
 	// see if u can find a font that will work over 60
 

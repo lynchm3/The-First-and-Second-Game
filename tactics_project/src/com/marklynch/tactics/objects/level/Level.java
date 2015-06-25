@@ -308,7 +308,7 @@ public class Level {
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {
 				actor.distanceMovedThisTurn = 0;
-				actor.attackedThisTurn = false;
+				actor.hasAttackedThisTurn = false;
 			}
 		}
 		removeWalkingHighlight();
