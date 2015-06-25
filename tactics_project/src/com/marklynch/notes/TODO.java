@@ -4,6 +4,8 @@ public class TODO {
 
 	// TO DO
 
+	// bug - it's allowing me to hit multiple times per turn
+
 	// method that works out ideal distanceS from the enemy, and puts them in a
 	// sorted array, based on weapon (incl. "projectedOutcome" method). Avoid
 	// fights where u'll die. Pick fights where you take no damage. After that,

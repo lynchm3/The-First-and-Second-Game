@@ -1134,6 +1134,14 @@ public class Notes {
 	 * Call it... User Interface? Screen? Battle Screen? See what other games
 	 * call it.
 	 * 
+	 * 
+	 * I like the idea of being able to evacuate bitches from the battlefield,
+	 * helps keep them alive
+	 * 
+	 * Need to manage item flow so that ur not going to the shop to sell off ur
+	 * shit all the time. SO BORING. I like the way TT let u send extra items to
+	 * storage. Also, break items down in to LOTS of categories.
+	 * 
 	 * Name all characters, even foot soldiers. From:
 	 * https://en.wikipedia.org/wiki/Fire_Emblem_Awakening#Development
 	 * 
