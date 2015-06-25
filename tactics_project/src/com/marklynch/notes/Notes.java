@@ -1238,6 +1238,10 @@ public class Notes {
 	 * every turn it switches between the two :D (Technical implementation -
 	 * could have them on same board, just with a massive gap in the board... to
 	 * split the two battles.
+	 * 
+	 * Special powers.... in BB they are always like 23% chance to hit, use all
+	 * ur action points. I think they should be easier to hit, but have a
+	 * recharge time (Kings bounty)
 	 */
 
 }

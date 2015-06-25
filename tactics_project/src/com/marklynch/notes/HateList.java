@@ -20,4 +20,11 @@ public class HateList {
 	// troops, and push you, to use all your troops. In the other games you
 	// don't know if the max will change or stay the same, and what the max will
 	// be in the end (FE,TT)
+
+	// Special moves that you never use coz the hit chance is so low, only time
+	// it would actually hit is against a weak guy u wouldnt need to use it on
+	// (BB)
+
+	// No direction, no leads. Not that u should have to follow them, just a
+	// guaranteed doable quest. (BB)
 }

@@ -21,7 +21,7 @@ public class Research {
 	 * Damned, Sproggiwood, Age of Fear 2: The Chaos Lord, Blood Bowl: Chaos
 	 * Edition, frozen synapse, the other frozen synapse game (frozen cortex?),
 	 * Fallen: A2P Protocol, divinity original sin, shadow run, Rime Berta,
-	 * Valkyria Chronicles,
+	 * Valkyria Chronicles, kings bounty
 	 * 
 	 * STYLISH THINGS Look at highly stylized low-res shit Badass Inc., hotline
 	 * miami, the last door, superhot,
