@@ -1,0 +1,7 @@
+package com.marklynch.notes;
+
+public class USPs {
+
+	// Big battles with multiple factions rather than always 2 teams :/
+
+}

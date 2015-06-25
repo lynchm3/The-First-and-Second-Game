@@ -1251,6 +1251,7 @@ public class Notes {
 	 * could have them on same board, just with a massive gap in the board... to
 	 * split the two battles.
 	 * 
+	 * 
 	 * Specific type of enemy unit always goes fro specific unit type. e.g.
 	 * Priests always go for vampires.
 	 * 
@@ -1395,6 +1396,28 @@ public class Notes {
 	 * mission where urteam starts off circling the enemy, ur ambushing them.
 	 * make it a super easy one where enemy has the attribute (drowsy) and
 	 * they're not wearing full armor
+	 * 
+	 * Special powers.... in BB they are always like 23% chance to hit, use all
+	 * ur action points. I think they should be easier to hit, but have a
+	 * recharge time (Kings bounty)
+	 * 
+	 * Interesting stats like sanity, willpower, fatigue, happiness, equality,
+	 * lonliness, boredom, thrist, hunger, energy, fear,
+	 * 
+	 * How am i doing energy? Travel distance + 1 attack (FE)? Moving and
+	 * attacking costs stamina (BB)?
+	 * 
+	 * 
+	 * different attack text based on weapon type - slashed, shot, blugeoned,
+	 * gored
+	 * 
+	 * I like the dead bodies in BB
+	 * 
+	 * Map where u're racing with a 3rd party to get to the middle of a level,
+	 * you both arrive at different entrances
+	 * 
+	 * Level(s) where you set up defenses? Need to know where enemy will come
+	 * from maybe though...
 	 */
 
 }

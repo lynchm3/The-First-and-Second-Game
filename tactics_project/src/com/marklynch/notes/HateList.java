@@ -30,4 +30,12 @@ public class HateList {
 
 	// XCOM ENEMY UNKNOWN - those cunt enemies just popping up out of nowhere...
 	// Should confirm im not just imagining this...
+
+	// Special moves that you never use coz the hit chance is so low, only time
+	// it would actually hit is against a weak guy u wouldnt need to use it on
+	// (BB)
+
+	// No direction, no leads. Not that u should have to follow them, just a
+	// guaranteed doable quest. (BB)
+
 }

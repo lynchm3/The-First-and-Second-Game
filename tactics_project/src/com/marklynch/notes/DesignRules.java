@@ -20,4 +20,7 @@ public class DesignRules {
 	// AI - make the AI brutal... then lop bits of it's brain off to make the
 	// easier difficulties, no AI cheating (stat bumps/more luck/more resources)
 
+	// NEED original ideas, there's loads of these games. And I'm modeling on
+	// them hard, but at what stage am i gonna add my own stuff?
+
 }

@@ -12,6 +12,7 @@ import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.utils.TextUtils;
 
 public class Actor extends GameObject {
 
@@ -25,6 +26,12 @@ public class Actor extends GameObject {
 	public int travelDistance = 4;
 	public Faction faction;
 	public Weapon selectedWeapon = null;
+	public boolean hasAttackedThisTurn = false;
+
+	// Fight preview on hover
+	public boolean showHoverFightPreview = false;
+	public GameObject hoverFightPreviewDefender = null;
+	public Vector<Fight> hoverFightPreviewFights = new Vector<Fight>();
 
 	public Actor(String name, String title, int actorLevel, int health,
 			int strength, int dexterity, int intelligence, int endurance,
@@ -93,8 +100,12 @@ public class Actor extends GameObject {
 	}
 
 	public void attack(GameObject gameObject, boolean isCounter) {
+		if (hasAttackedThisTurn == true && !isCounter) {
+			return;
+		}
 		gameObject.remainingHealth -= selectedWeapon.damage;
 		this.distanceMovedThisTurn = Integer.MAX_VALUE;
+		this.hasAttackedThisTurn = true;
 		String attackTypeString;
 		if (isCounter)
 			attackTypeString = "countered";
@@ -109,13 +120,17 @@ public class Actor extends GameObject {
 		if (gameObject instanceof Actor)
 			actor = (Actor) gameObject;
 
-		if (gameObject.checkIfDestroyed())
-			if (gameObject instanceof Actor)
+		if (gameObject.checkIfDestroyed()) {
+			if (gameObject instanceof Actor) {
 				level.logOnScreen(new ActivityLog("" + this.name + " killed "
 						+ gameObject.name, this.faction));
-			else
+				((Actor) gameObject).faction.checkIfDestroyed();
+			} else {
 				level.logOnScreen(new ActivityLog("" + this.name
 						+ " destroyed a " + gameObject.name, this.faction));
+			}
+
+		}
 
 		if (!isCounter && gameObject.remainingHealth > 0
 				&& gameObject instanceof Actor)
@@ -257,21 +272,114 @@ public class Actor extends GameObject {
 			GL11.glEnd();
 		}
 
-		// Draw level text
-		String levelString = "LVL" + this.actorLevel;
-		float levelWidthInPixels = level.font12.getWidth(levelString);// Game.SQUARE_WIDTH
-																		// / 2;
+		// Draw actor level text
+		String actorLevelString = "LVL" + this.actorLevel;
+		float actorLevelWidthInPixels = level.font12.getWidth(actorLevelString);// Game.SQUARE_WIDTH
+		// / 2;
 
-		float levelPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+		float actorLevelPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
 				+ Game.SQUARE_WIDTH
-				- levelWidthInPixels
-				- Game.SQUARE_WIDTH
-				/ 5;
-		float levelPositionYInPixels = this.squareGameObjectIsOn.y
+				- actorLevelWidthInPixels
+				- Game.SQUARE_WIDTH / 5;
+		float actorLevelPositionYInPixels = this.squareGameObjectIsOn.y
 				* (int) Game.SQUARE_HEIGHT;
 
-		level.font12.drawString(levelPositionXInPixels, levelPositionYInPixels,
-				levelString, Color.black);
+		level.font12.drawString(actorLevelPositionXInPixels,
+				actorLevelPositionYInPixels, actorLevelString, Color.black);
+
+		// draw if you can move and/or attack
+		float moveAttackStatusWidthInPixels = level.font12.getWidth("MA");// Game.SQUARE_WIDTH
+		float attackStatusWidthInPixels = level.font12.getWidth("A");// Game.SQUARE_WIDTH
+
+		float moveAttackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+				+ Game.SQUARE_WIDTH
+				- moveAttackStatusWidthInPixels
+				- Game.SQUARE_WIDTH / 5;
+		float attackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+				+ Game.SQUARE_WIDTH
+				- attackStatusWidthInPixels
+				- Game.SQUARE_WIDTH / 5;
+		float moveAttackStatusPositionYInPixels = this.squareGameObjectIsOn.y
+				* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT - 14;
+
+		if (hasAttackedThisTurn == false) {
+			if (this.distanceMovedThisTurn < this.travelDistance) {
+				level.font12.drawString(moveAttackStatusPositionXInPixels,
+						moveAttackStatusPositionYInPixels, "MA", Color.black);
+			} else {
+				level.font12.drawString(attackStatusPositionXInPixels,
+						moveAttackStatusPositionYInPixels, "A", Color.black);
+			}
+		}
+
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		if (this.showHoverFightPreview) {
+
+			float hoverFightPreviewPositionXInPixels = (hoverFightPreviewDefender.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+					+ Game.SQUARE_WIDTH;
+			float hoverFightPreviewPositionYInPixels = hoverFightPreviewDefender.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
+
+			String[][] tableContents = new String[hoverFightPreviewFights
+					.size() + 1][5];
+			tableContents[0][0] = "Range";
+			tableContents[0][1] = "Weapon";
+			tableContents[0][2] = "Damage";
+			tableContents[0][3] = "Weapon";
+			tableContents[0][4] = "Damage";
+
+			for (int i = 0; i < hoverFightPreviewFights.size(); i++) {
+
+				if (hoverFightPreviewFights.get(i).attackerWeapon != null
+						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
+
+					tableContents[i + 1][0] = ""
+							+ hoverFightPreviewFights.get(i).range;
+					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.name;
+					tableContents[i + 1][2] = ""
+							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
+					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.name;
+					tableContents[i + 1][4] = ""
+							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
+				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
+						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
+
+					tableContents[i + 1][0] = ""
+							+ hoverFightPreviewFights.get(i).range;
+					tableContents[i + 1][1] = "";
+					tableContents[i + 1][2] = "";
+					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.name;
+					tableContents[i + 1][4] = ""
+							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
+				} else if (hoverFightPreviewFights.get(i).attackerWeapon != null
+						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
+
+					tableContents[i + 1][0] = ""
+							+ hoverFightPreviewFights.get(i).range;
+					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.name;
+					tableContents[i + 1][2] = ""
+							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
+					tableContents[i + 1][3] = "";
+					tableContents[i + 1][4] = "";
+				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
+						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
+
+					tableContents[i + 1][0] = ""
+							+ hoverFightPreviewFights.get(i).range;
+					tableContents[i + 1][1] = "";
+					tableContents[i + 1][2] = "";
+					tableContents[i + 1][3] = "";
+					tableContents[i + 1][4] = "";
+				}
+
+			}
+
+			TextUtils.printTable(tableContents,
+					hoverFightPreviewPositionXInPixels,
+					hoverFightPreviewPositionYInPixels, 15f, level);
+
+		}
+
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
@@ -296,5 +404,28 @@ public class Actor extends GameObject {
 		}
 
 		return idealDistances;
+	}
+
+	public void showHoverFightPreview(GameObject defender) {
+		this.showHoverFightPreview = true;
+		hoverFightPreviewDefender = defender;
+		hoverFightPreviewFights.clear();
+		for (Weapon weapon : weapons) {
+			// if (defender.squareGameObjectIsOn.weaponsThatCanAttack
+			// .contains(weapon)) {
+
+			for (int range = weapon.minRange; range <= weapon.maxRange; range++) {
+				Fight fight = new Fight(this, weapon, defender,
+						defender.bestCounterWeapon(this, weapon, range), range);
+				hoverFightPreviewFights.add(fight);
+			}
+			// }
+
+		}
+
+	}
+
+	public void hideHoverFightPreview() {
+		this.showHoverFightPreview = false;
 	}
 }

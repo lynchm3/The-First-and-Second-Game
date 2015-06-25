@@ -8,6 +8,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import com.marklynch.config.Config;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
@@ -213,6 +214,8 @@ public class Game {
 				if (clickedGameObject instanceof Actor) {
 					Actor clickedActor = (Actor) clickedGameObject;
 					if (clickedActor.faction == level.currentFactionMoving) {
+						if (level.activeActor != null)
+							level.activeActor.hideHoverFightPreview();
 						level.activeActor = clickedActor;
 						Actor.highlightSelectedCharactersSquares(level);
 						selectedNewActor = true;
@@ -244,6 +247,18 @@ public class Game {
 			mouseDownX = -1;
 			mouseDownY = -1;
 			lastMoveTime = lastFPS;
+
+			// Hover preview
+			if (Config.SHOW_BATTLE_PREVIEW_ON_HOVER
+					&& squareMouseIsOver != null
+					&& squareMouseIsOver.gameObject != null
+					&& level.activeActor != null
+					&& squareMouseIsOver.gameObject != level.activeActor)
+				level.activeActor
+						.showHoverFightPreview(squareMouseIsOver.gameObject);
+			else if (level.activeActor != null)
+				level.activeActor.hideHoverFightPreview();
+
 		}
 
 		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)
@@ -253,6 +268,7 @@ public class Game {
 			if (level.activeActor != null) {
 				level.removeWalkingHighlight();
 				level.removeWeaponsThatCanAttackHighlight();
+				level.activeActor.hideHoverFightPreview();
 				level.activeActor = null;
 			} else if (squareMouseIsOver != null) {
 				if (squareMouseIsOver.showingDialogs == false)

@@ -2,9 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// TO DO
+	// Text tool to line shit up in a table
 
-	// bug - it's allowing me to hit multiple times per turn
+	// Special preview for when neither of them have weapons :D, when
+	// fights.size() == 0
 
 	// dont highlight attackable squares unless u can reach dem
 
@@ -16,34 +17,22 @@ public class TODO {
 	// fights where u'll die. Pick fights where you take no damage. After that,
 	// pick fights with the best damage diff
 
+	// Text tool to insert images in to text message (have a method
+	// .printToScreen (text,posX,posY, Vector<> images) which will insert images
+	// in to the text and put the whole thing where u wanted it. You can pass in
+	// any object/class u want and the textUtil will know what to do :D (but
+	// mostly texture and strings)(create class colored string...)
+
+	// DONE
+
 	// go through the code and add comments b4 i foget what the fuck i was doing
 
 	// merge actor and game object?
 
-	// different attack text based on weapon type - slashed, shot, blugeoned,
-	// gored
-
-	// log when faction is demolished
-
-	// auto select best weapon for counter
-
-	// AI select best weapon for attack
-
-	// show if actor can attack
-
-	// show if actor can move
-
 	// see if u can find a font that will work over 60
-
-	// here's one, if player is dead on their turn level.activeActor should be
-	// nulled may be a crash
 
 	// should i take some time out and make it look prettier? might make me
 	// appreciate it more. Like take a saturday and do graphical tweaks :) YUS
-
-	// when u hover over an attackable enemy u could cover them with battle
-	// preview for each weapon
-	// OR there could be a tooltip with the info (w/ translucent BG)
 
 	// the bars look a lot better on the right, that could just be because of
 	// the player model
@@ -206,6 +195,8 @@ public class TODO {
 	// speach like aoe2)
 
 	// multi colored log msgs
+
+	// grey out actor if they cant move or atttack?
 
 	// DONE
 }
