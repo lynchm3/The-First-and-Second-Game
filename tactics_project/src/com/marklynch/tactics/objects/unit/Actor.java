@@ -320,7 +320,7 @@ public class Actor extends GameObject {
 			float hoverFightPreviewPositionYInPixels = hoverFightPreviewDefender.squareGameObjectIsOn.y
 					* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
 
-			String[][] tableContents = new String[hoverFightPreviewFights
+			Object[][] tableContents = new Object[hoverFightPreviewFights
 					.size() + 1][5];
 			tableContents[0][0] = "Rng";
 			tableContents[0][1] = "Wpn";
@@ -335,10 +335,10 @@ public class Actor extends GameObject {
 
 					tableContents[i + 1][0] = ""
 							+ hoverFightPreviewFights.get(i).range;
-					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.name;
+					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.imageTexture;
 					tableContents[i + 1][2] = ""
 							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
-					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.name;
+					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.imageTexture;
 					tableContents[i + 1][4] = ""
 							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
 				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
@@ -348,7 +348,7 @@ public class Actor extends GameObject {
 							+ hoverFightPreviewFights.get(i).range;
 					tableContents[i + 1][1] = "";
 					tableContents[i + 1][2] = "";
-					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.name;
+					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.imageTexture;
 					tableContents[i + 1][4] = ""
 							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
 				} else if (hoverFightPreviewFights.get(i).attackerWeapon != null
@@ -356,7 +356,7 @@ public class Actor extends GameObject {
 
 					tableContents[i + 1][0] = ""
 							+ hoverFightPreviewFights.get(i).range;
-					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.name;
+					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.imageTexture;
 					tableContents[i + 1][2] = ""
 							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
 					tableContents[i + 1][3] = "";
