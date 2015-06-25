@@ -123,6 +123,7 @@ public class GameObject {
 		if (remainingHealth <= 0) {
 			this.squareGameObjectIsOn.gameObject = null;
 			level.inanimateObjects.remove(this);
+
 			return true;
 		}
 		return false;

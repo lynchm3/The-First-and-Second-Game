@@ -114,13 +114,17 @@ public class Actor extends GameObject {
 		if (gameObject instanceof Actor)
 			actor = (Actor) gameObject;
 
-		if (gameObject.checkIfDestroyed())
-			if (gameObject instanceof Actor)
+		if (gameObject.checkIfDestroyed()) {
+			if (gameObject instanceof Actor) {
 				level.logOnScreen(new ActivityLog("" + this.name + " killed "
 						+ gameObject.name, this.faction));
-			else
+				((Actor) gameObject).faction.checkIfDestroyed();
+			} else {
 				level.logOnScreen(new ActivityLog("" + this.name
 						+ " destroyed a " + gameObject.name, this.faction));
+			}
+
+		}
 
 		if (!isCounter && gameObject.remainingHealth > 0
 				&& gameObject instanceof Actor)

@@ -1256,6 +1256,15 @@ public class Notes {
 	 * 
 	 * How am i doing energy? Travel distance + 1 attack (FE)? Moving and
 	 * attacking costs stamina (BB)?
+	 * 
+	 * 
+	 * different attack text based on weapon type - slashed, shot, blugeoned,
+	 * gored
+	 * 
+	 * I like the dead bodies in BB
+	 * 
+	 * Map where u're racing with a 3rd party to get to the middle of a level,
+	 * you both arrive at different entrances
 	 */
 
 }
