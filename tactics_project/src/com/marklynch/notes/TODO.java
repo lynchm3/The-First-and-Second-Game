@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Colored text in logs (StringWithColor)
+	// Factions need image for logs and for start of their turn
+
 	// Text tool to line shit up in a table
 
 	// Special preview for when neither of them have weapons :D, when

@@ -83,7 +83,25 @@ public class TextUtils {
 
 	public static void printTextWithImages(Object[] contents, float posX,
 			float posY, Level level) {
+
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+
+		// black to white bit under health bar
+		GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		GL11.glBegin(GL11.GL_QUADS);
+		// GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		// GL11.glColor4f(this.faction.color.r, this.faction.color.g,
+		// this.faction.color.b, 0.5f);
+		GL11.glVertex2f(posX, posY);
+		GL11.glVertex2f(posX + 500, posY);
+		GL11.glVertex2f(posX + 500, posY + 20);
+		GL11.glVertex2f(posX, posY + 20);
+		GL11.glEnd();
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+
 		int offsetX = 0;
+
 		for (Object content : contents) {
 			if (content instanceof String) {
 				String string = (String) content;
@@ -92,6 +110,9 @@ public class TextUtils {
 				offsetX += level.font20.getWidth(string);
 
 			} else if (content instanceof Texture) {
+
+				GL11.glColor3f(1.0f, 1.0f, 1.0f);
+
 				Texture texture = (Texture) content;
 				texture.bind();
 				float x = posX + offsetX;
