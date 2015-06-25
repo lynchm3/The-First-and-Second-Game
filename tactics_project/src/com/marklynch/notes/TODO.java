@@ -6,11 +6,7 @@ public class TODO {
 
 	// bug - it's allowing me to hit multiple times per turn
 
-	// Done
-	// notes
-	//
-	// change reachable squares to black and attackable squares to white
-	// dont hight attackables squares unless u can attack them?
+	// dont highlight attackable squares unless u can reach dem
 
 	// Look up strategy guides for similar games, will help with AI writing,
 	// will help clarify some of the subtleties in these games

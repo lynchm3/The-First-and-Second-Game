@@ -48,6 +48,8 @@ public class Research {
 	 * info on subtleties
 	 * 
 	 * Read negative reviews of these games (and positive and funny i suppose)
+	 * 
+	 * Shining Force, Fire Emblem, or Warsong
 	 */
 
 }
