@@ -12,6 +12,7 @@ import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.utils.TextUtils;
 
 public class Actor extends GameObject {
 
@@ -318,64 +319,65 @@ public class Actor extends GameObject {
 					+ Game.SQUARE_WIDTH;
 			float hoverFightPreviewPositionYInPixels = hoverFightPreviewDefender.squareGameObjectIsOn.y
 					* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
+
+			String[][] tableContents = new String[hoverFightPreviewFights
+					.size() + 1][5];
+			tableContents[0][0] = "Range";
+			tableContents[0][1] = "Weapon";
+			tableContents[0][2] = "Damage";
+			tableContents[0][3] = "Weapon";
+			tableContents[0][4] = "Damage";
+
 			for (int i = 0; i < hoverFightPreviewFights.size(); i++) {
+
 				if (hoverFightPreviewFights.get(i).attackerWeapon != null
 						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
-					level.font12
-							.drawString(
-									hoverFightPreviewPositionXInPixels,
-									hoverFightPreviewPositionYInPixels + i * 15,
-									hoverFightPreviewFights.get(i).range
-											+ " "
-											+ hoverFightPreviewFights.get(i).attackerWeapon.name
-											+ " "
-											+ hoverFightPreviewFights.get(i).attackerWeapon.damage
-											+ " VS "
-											+ hoverFightPreviewFights.get(i).defenderWeapon.name
-											+ " "
-											+ hoverFightPreviewFights.get(i).defenderWeapon.damage,
-									Color.white);
+
+					tableContents[i + 1][0] = ""
+							+ hoverFightPreviewFights.get(i).range;
+					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.name;
+					tableContents[i + 1][2] = ""
+							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
+					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.name;
+					tableContents[i + 1][4] = ""
+							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
 				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
 						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
-					level.font12
-							.drawString(
-									hoverFightPreviewPositionXInPixels,
-									hoverFightPreviewPositionYInPixels + i * 15,
-									hoverFightPreviewFights.get(i).range
-											+ " "
-											+ " "
-											+ " "
-											+ " "
-											+ " VS "
-											+ hoverFightPreviewFights.get(i).defenderWeapon.name
-											+ " "
-											+ hoverFightPreviewFights.get(i).defenderWeapon.damage,
-									Color.white);
+
+					tableContents[i + 1][0] = ""
+							+ hoverFightPreviewFights.get(i).range;
+					tableContents[i + 1][1] = "";
+					tableContents[i + 1][2] = "";
+					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.name;
+					tableContents[i + 1][4] = ""
+							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
 				} else if (hoverFightPreviewFights.get(i).attackerWeapon != null
 						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
-					level.font12
-							.drawString(
-									hoverFightPreviewPositionXInPixels,
-									hoverFightPreviewPositionYInPixels + i * 15,
-									hoverFightPreviewFights.get(i).range
-											+ " "
-											+ hoverFightPreviewFights.get(i).attackerWeapon.name
-											+ " "
-											+ hoverFightPreviewFights.get(i).attackerWeapon.damage
-											+ " VS " + " " + " " + " ",
-									Color.white);
+
+					tableContents[i + 1][0] = ""
+							+ hoverFightPreviewFights.get(i).range;
+					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.name;
+					tableContents[i + 1][2] = ""
+							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
+					tableContents[i + 1][3] = "";
+					tableContents[i + 1][4] = "";
 				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
 						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
-					level.font12.drawString(hoverFightPreviewPositionXInPixels,
-							hoverFightPreviewPositionYInPixels + i * 15,
-							hoverFightPreviewFights.get(i).range + " " + " "
-									+ " " + " " + " VS " + " " + " " + " ",
-							Color.white);
+
+					tableContents[i + 1][0] = ""
+							+ hoverFightPreviewFights.get(i).range;
+					tableContents[i + 1][1] = "";
+					tableContents[i + 1][2] = "";
+					tableContents[i + 1][3] = "";
+					tableContents[i + 1][4] = "";
 				}
 
 			}
-			// hoverFightPreviewDefender = defender;
-			// hoverFightPreviewFights.clear();
+
+			TextUtils.printTable(tableContents,
+					hoverFightPreviewPositionXInPixels,
+					hoverFightPreviewPositionYInPixels, 15f, level);
+
 		}
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
@@ -411,6 +413,7 @@ public class Actor extends GameObject {
 		for (Weapon weapon : weapons) {
 			// if (defender.squareGameObjectIsOn.weaponsThatCanAttack
 			// .contains(weapon)) {
+
 			for (int range = weapon.minRange; range <= weapon.maxRange; range++) {
 				Fight fight = new Fight(this, weapon, defender,
 						defender.bestCounterWeapon(this, weapon, range), range);

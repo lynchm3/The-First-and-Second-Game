@@ -2,11 +2,16 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Text tool to line shit up in a table
+
+	// Special preview for when neither of them have weapons :D, when
+	// fights.size() == 0
+
 	// Text tool to insert images in to text message (have a method
 	// .printToScreen (text,posX,posY, Vector<> images) which will insert images
-	// in to the text and put the whole thing where u wanted it.
-
-	// Text tool to line shit up in a table
+	// in to the text and put the whole thing where u wanted it. You can pass in
+	// any object/class u want and the textUtil will know what to do :D (but
+	// mostly texture and strings)(create class colored string...)
 
 	// DONE
 
