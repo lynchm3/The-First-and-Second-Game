@@ -8,6 +8,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import com.marklynch.config.Config;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
@@ -246,7 +247,8 @@ public class Game {
 			lastMoveTime = lastFPS;
 
 			// Hover preview
-			if (squareMouseIsOver != null
+			if (Config.SHOW_BATTLE_PREVIEW_ON_HOVER
+					&& squareMouseIsOver != null
 					&& squareMouseIsOver.gameObject != null
 					&& level.activeActor != null
 					&& squareMouseIsOver.gameObject != level.activeActor)

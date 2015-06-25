@@ -409,15 +409,14 @@ public class Actor extends GameObject {
 		hoverFightPreviewDefender = defender;
 		hoverFightPreviewFights.clear();
 		for (Weapon weapon : weapons) {
-			if (defender.squareGameObjectIsOn.weaponsThatCanAttack
-					.contains(weapon)) {
-				for (int range = weapon.minRange; range <= weapon.maxRange; range++) {
-					Fight fight = new Fight(this, weapon, defender,
-							defender.bestCounterWeapon(this, weapon, range),
-							range);
-					hoverFightPreviewFights.add(fight);
-				}
+			// if (defender.squareGameObjectIsOn.weaponsThatCanAttack
+			// .contains(weapon)) {
+			for (int range = weapon.minRange; range <= weapon.maxRange; range++) {
+				Fight fight = new Fight(this, weapon, defender,
+						defender.bestCounterWeapon(this, weapon, range), range);
+				hoverFightPreviewFights.add(fight);
 			}
+			// }
 
 		}
 
