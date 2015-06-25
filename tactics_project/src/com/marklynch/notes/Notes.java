@@ -1418,6 +1418,12 @@ public class Notes {
 	 * 
 	 * Level(s) where you set up defenses? Need to know where enemy will come
 	 * from maybe though...
+	 * 
+	 * The dumpsters are too perfectly centered in the squares
+	 * 
+	 * log text can probably be bigger (the images are shite at the moment, too
+	 * small), will they really care about more than the last 5 log msgs
+	 * anyway?!
 	 */
 
 }

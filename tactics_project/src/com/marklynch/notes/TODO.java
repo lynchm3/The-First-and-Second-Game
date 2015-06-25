@@ -3,28 +3,30 @@ package com.marklynch.notes;
 public class TODO {
 
 	// Colored text in logs (StringWithColor)
+
+	// bug - hover previews are visible on enemy's turn
+
 	// Factions need image for logs and for start of their turn
 
-	// Text tool to line shit up in a table
+	// white bg for log needs to match width of text
+
+	// show image + name for logs? weapons, actors, objects, factions
+
+	// hover fight preview needs to be better, w/ big VS image underneath
+
+	// show icons for potential death, advantage (up/down arrows like FE)
+
+	// enemy move grid all/single/toggle multiple
+
+	// button to show the battle preview info for all enemies
+
+	// undo button for moves
 
 	// Special preview for when neither of them have weapons :D, when
 	// fights.size() == 0
 
-	// dont highlight attackable squares unless u can reach dem
-
 	// Look up strategy guides for similar games, will help with AI writing,
 	// will help clarify some of the subtleties in these games
-
-	// method that works out ideal distanceS from the enemy, and puts them in a
-	// sorted array, based on weapon (incl. "projectedOutcome" method). Avoid
-	// fights where u'll die. Pick fights where you take no damage. After that,
-	// pick fights with the best damage diff
-
-	// Text tool to insert images in to text message (have a method
-	// .printToScreen (text,posX,posY, Vector<> images) which will insert images
-	// in to the text and put the whole thing where u wanted it. You can pass in
-	// any object/class u want and the textUtil will know what to do :D (but
-	// mostly texture and strings)(create class colored string...)
 
 	// DONE
 
