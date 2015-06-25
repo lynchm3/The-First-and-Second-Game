@@ -4,6 +4,7 @@ public class TODO {
 
 	// TO DO
 
+	// DONE
 	// bug - it's allowing me to hit multiple times per turn
 
 	// method that works out ideal distanceS from the enemy, and puts them in a

@@ -17,4 +17,7 @@ public class DesignRules {
 	// reasoning - subleties add depth, without the depth the game is just
 	// fucking boring
 
+	// NEED original ideas, there's loads of these games. And I'm modeling on
+	// them hard, but at what stage am i gonna add my own stuff?
+
 }

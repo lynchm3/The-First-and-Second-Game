@@ -25,6 +25,7 @@ public class Actor extends GameObject {
 	public int travelDistance = 4;
 	public Faction faction;
 	public Weapon selectedWeapon = null;
+	public boolean attackedThisTurn = false;
 
 	public Actor(String name, String title, int actorLevel, int health,
 			int strength, int dexterity, int intelligence, int endurance,
@@ -93,8 +94,12 @@ public class Actor extends GameObject {
 	}
 
 	public void attack(GameObject gameObject, boolean isCounter) {
+		if (attackedThisTurn == true && !isCounter) {
+			return;
+		}
 		gameObject.remainingHealth -= selectedWeapon.damage;
 		this.distanceMovedThisTurn = Integer.MAX_VALUE;
+		this.attackedThisTurn = true;
 		String attackTypeString;
 		if (isCounter)
 			attackTypeString = "countered";
