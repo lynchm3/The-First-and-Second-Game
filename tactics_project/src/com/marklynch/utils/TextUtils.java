@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
+import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
 
 public class TextUtils {
@@ -11,6 +12,22 @@ public class TextUtils {
 
 	public static void printTable(Object[][] tableContents, float posX,
 			float posY, float rowHeight, Level level) {
+
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+
+		// black to white bit under health bar
+		GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		GL11.glBegin(GL11.GL_QUADS);
+		// GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		// GL11.glColor4f(this.faction.color.r, this.faction.color.g,
+		// this.faction.color.b, 0.5f);
+		GL11.glVertex2f(posX, posY);
+		GL11.glVertex2f(posX + Game.SQUARE_WIDTH, posY);
+		GL11.glVertex2f(posX + Game.SQUARE_WIDTH, posY + Game.SQUARE_HEIGHT);
+		GL11.glVertex2f(posX, posY + Game.SQUARE_HEIGHT);
+		GL11.glEnd();
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 		int rowCount = tableContents.length;
 		int columnCount = tableContents[0].length;
@@ -42,7 +59,7 @@ public class TextUtils {
 				float x = columnOffsets[j] + posX;
 				float y = i * rowHeight + posY;
 				if (tableContents[i][j] instanceof String) {
-					level.font12.drawString(x, y, (String) tableContents[i][j],
+					level.font20.drawString(x, y, (String) tableContents[i][j],
 							Color.white);
 				} else if (tableContents[i][j] instanceof Texture) {
 

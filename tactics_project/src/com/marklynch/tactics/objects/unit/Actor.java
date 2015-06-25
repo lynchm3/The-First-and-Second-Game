@@ -311,76 +311,80 @@ public class Actor extends GameObject {
 						moveAttackStatusPositionYInPixels, "A", Color.black);
 			}
 		}
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+	}
+
+	@Override
+	public void draw2() {
+		super.draw2();
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		if (this.showHoverFightPreview) {
 
-			float hoverFightPreviewPositionXInPixels = (hoverFightPreviewDefender.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
-					+ Game.SQUARE_WIDTH;
+			float hoverFightPreviewPositionXInPixels = (hoverFightPreviewDefender.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH);
 			float hoverFightPreviewPositionYInPixels = hoverFightPreviewDefender.squareGameObjectIsOn.y
-					* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
+					* (int) Game.SQUARE_HEIGHT;
 
 			Object[][] tableContents = new Object[hoverFightPreviewFights
-					.size() + 1][5];
-			tableContents[0][0] = "Rng";
-			tableContents[0][1] = "Wpn";
-			tableContents[0][2] = "Dmg";
-			tableContents[0][3] = "Wpn";
-			tableContents[0][4] = "Dmg";
+					.size()][4];
+			// tableContents[0][0] = "Rng";
+			// tableContents[0][1] = "Wpn";
+			// tableContents[0][2] = "Dmg";
+			// tableContents[0][3] = "Wpn";
+			// tableContents[0][4] = "Dmg";
 
 			for (int i = 0; i < hoverFightPreviewFights.size(); i++) {
 
 				if (hoverFightPreviewFights.get(i).attackerWeapon != null
 						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
 
-					tableContents[i + 1][0] = ""
-							+ hoverFightPreviewFights.get(i).range;
-					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.imageTexture;
-					tableContents[i + 1][2] = ""
+					// tableContents[i][0] = ""
+					// + hoverFightPreviewFights.get(i).range;
+					tableContents[i][0] = hoverFightPreviewFights.get(i).attackerWeapon.imageTexture;
+					tableContents[i][1] = ""
 							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
-					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.imageTexture;
-					tableContents[i + 1][4] = ""
+					tableContents[i][2] = hoverFightPreviewFights.get(i).defenderWeapon.imageTexture;
+					tableContents[i][3] = ""
 							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
 				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
 						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
 
-					tableContents[i + 1][0] = ""
-							+ hoverFightPreviewFights.get(i).range;
-					tableContents[i + 1][1] = "";
-					tableContents[i + 1][2] = "";
-					tableContents[i + 1][3] = hoverFightPreviewFights.get(i).defenderWeapon.imageTexture;
-					tableContents[i + 1][4] = ""
+					// tableContents[i][0] = ""
+					// + hoverFightPreviewFights.get(i).range;
+					tableContents[i][0] = "";
+					tableContents[i][1] = "";
+					tableContents[i][2] = hoverFightPreviewFights.get(i).defenderWeapon.imageTexture;
+					tableContents[i][3] = ""
 							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
 				} else if (hoverFightPreviewFights.get(i).attackerWeapon != null
 						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
 
-					tableContents[i + 1][0] = ""
-							+ hoverFightPreviewFights.get(i).range;
-					tableContents[i + 1][1] = hoverFightPreviewFights.get(i).attackerWeapon.imageTexture;
-					tableContents[i + 1][2] = ""
+					// tableContents[i][0] = ""
+					// + hoverFightPreviewFights.get(i).range;
+					tableContents[i][0] = hoverFightPreviewFights.get(i).attackerWeapon.imageTexture;
+					tableContents[i][1] = ""
 							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
-					tableContents[i + 1][3] = "";
-					tableContents[i + 1][4] = "";
+					tableContents[i][2] = "";
+					tableContents[i][3] = "";
 				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
 						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
 
-					tableContents[i + 1][0] = ""
-							+ hoverFightPreviewFights.get(i).range;
-					tableContents[i + 1][1] = "";
-					tableContents[i + 1][2] = "";
-					tableContents[i + 1][3] = "";
-					tableContents[i + 1][4] = "";
+					// tableContents[i][0] = ""
+					// + hoverFightPreviewFights.get(i).range;
+					tableContents[i][0] = "";
+					tableContents[i][1] = "";
+					tableContents[i][2] = "";
+					tableContents[i][3] = "";
 				}
 
 			}
 
 			TextUtils.printTable(tableContents,
 					hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionYInPixels, 15f, level);
+					hoverFightPreviewPositionYInPixels, 20f, level);
 
 		}
 
-		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
 	public Vector<Integer> calculateIdealDistanceFrom(GameObject target) {

@@ -29,6 +29,7 @@ public class Level {
 	public Button endTurnButton;
 	public int turn = 1;
 	public TrueTypeFont font12;
+	public TrueTypeFont font20;
 	public TrueTypeFont font60;
 	public Vector<Faction> factions;
 	public Faction currentFactionMoving;
@@ -48,6 +49,7 @@ public class Level {
 		endTurnButton = new Button(Game.windowWidth - 210,
 				Game.windowHeight - 110, 200, 100, "end_turn_button.png", this);
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
+		font20 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 20);
 		font60 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 60);
 	}
 
