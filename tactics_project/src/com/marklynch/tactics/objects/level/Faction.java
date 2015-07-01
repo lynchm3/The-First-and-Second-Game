@@ -206,7 +206,7 @@ public class Faction {
 		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
 		// idealWeaponDistances.add(2);
 
-		Vector<Integer> idealWeaponDistances = level.activeActor
+		Vector<Float> idealWeaponDistances = level.activeActor
 				.calculateIdealDistanceFrom(target);
 
 		// TODO this needs to be calculated based on

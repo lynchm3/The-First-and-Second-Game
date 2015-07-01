@@ -10,21 +10,22 @@ public class Fight {
 	public Weapon attackerWeapon;
 	public GameObject defender;
 	public Weapon defenderWeapon;
-	public int range;
+	public float range;
 
-	public int damageTakenByAttacker;
-	public int damageTakenByDefender;
+	public float damageTakenByAttacker;
+	public float damageTakenByDefender;
 
 	public Fight(Actor attacker, Weapon attackerWeapon, GameObject target,
-			Weapon defenderWeapon, int range) {
+			Weapon defenderWeapon, float range) {
 		this.attacker = attacker;
 		this.attackerWeapon = attackerWeapon;
 		this.defender = target;
 		this.defenderWeapon = defenderWeapon;
 		this.range = range;
+		projectOutcome();
 	}
 
-	public void projectOutcome() {
+	private void projectOutcome() {
 		if (defenderWeapon == null) {
 			damageTakenByAttacker = 0;
 		} else {
@@ -78,10 +79,10 @@ public class Fight {
 				return 1;
 
 			// 4. Best damage diff
-			int fight0DamageDifference = fight0.damageTakenByAttacker
+			float fight0DamageDifference = fight0.damageTakenByAttacker
 					- fight0.damageTakenByDefender;
 
-			int fight1DamageDifference = fight1.damageTakenByAttacker
+			float fight1DamageDifference = fight1.damageTakenByAttacker
 					- fight1.damageTakenByDefender;
 
 			if (fight0DamageDifference > fight1DamageDifference)

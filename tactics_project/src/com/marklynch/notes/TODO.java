@@ -2,15 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// hover fight preview needs to be better, w/ big VS image underneath
+
 	// feck it in to Android and c what happens ;)
 
-	// "FACTION X TURN" w/ images
-
-	// white bg for log needs to match width of text
-
-	// show image + name for logs? weapons, actors, objects, factions
-
-	// hover fight preview needs to be better, w/ big VS image underneath
+	// removed white bg from log
 
 	// show icons for potential death, advantage (up/down arrows like FE)
 

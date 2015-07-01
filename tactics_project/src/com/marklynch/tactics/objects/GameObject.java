@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
@@ -27,8 +28,8 @@ public class GameObject {
 	public int dexterity = 0;
 	public int intelligence = 0;
 	public int endurance = 0;
-	public int totalHealth = 0;
-	public int remainingHealth = 0;
+	public float totalHealth = 0;
+	public float remainingHealth = 0;
 
 	// Inventory
 	public Vector<Weapon> weapons = new Vector<Weapon>();
@@ -47,6 +48,8 @@ public class GameObject {
 	// POW
 	public GameObject powTarget = null;
 	public boolean showPow = false;
+
+	public Faction faction;
 
 	public GameObject(String name, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath,
@@ -218,16 +221,16 @@ public class GameObject {
 		}
 	}
 
-	public Vector<Square> getAllSquaresAtDistance(int distance) {
+	public Vector<Square> getAllSquaresAtDistance(float distance) {
 		Vector<Square> squares = new Vector<Square>();
 
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
-		for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
 			if (ArrayUtils.inBounds(level.squares, this.squareGameObjectIsOn.x
 					+ x, this.squareGameObjectIsOn.y + y)) {
-				squares.add(level.squares[this.squareGameObjectIsOn.x + x][this.squareGameObjectIsOn.y
-						+ y]);
+				squares.add(level.squares[this.squareGameObjectIsOn.x + (int) x][this.squareGameObjectIsOn.y
+						+ (int) y]);
 			}
 
 			if (xGoingUp) {
@@ -293,7 +296,7 @@ public class GameObject {
 	}
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon,
-			int range) {
+			float range) {
 		for (Weapon weapon : weapons) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				return weapon;

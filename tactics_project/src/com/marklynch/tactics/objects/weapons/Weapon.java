@@ -12,9 +12,9 @@ import com.marklynch.tactics.objects.unit.Actor.Direction;
 public class Weapon {
 
 	// attributes
-	public int damage = 0;
-	public int minRange = 0;
-	public int maxRange = 0;
+	public float damage = 0;
+	public float minRange = 0;
+	public float maxRange = 0;
 
 	// image
 	public String imagePath = "";
@@ -36,7 +36,7 @@ public class Weapon {
 		for (int i = 0; i < squares.length; i++) {
 			for (int j = 0; j < squares.length; j++) {
 				if (squares[i][j].reachableBySelectedCharater) {
-					for (int range = minRange; range <= maxRange; range++) {
+					for (float range = minRange; range <= maxRange; range++) {
 						Vector<Square> squaresInThisPath = new Vector<Square>();
 						squaresInThisPath.add(squares[i][j]);
 						calculateAttackableSquares(squares, range,
@@ -57,7 +57,7 @@ public class Weapon {
 	}
 
 	public void calculateAttackableSquares(Square[][] squares,
-			int remainingRange, Square parentSquare, Direction direction,
+			float remainingRange, Square parentSquare, Direction direction,
 			Vector<Square> squaresInThisPath) {
 		Square currentSquare = null;
 
