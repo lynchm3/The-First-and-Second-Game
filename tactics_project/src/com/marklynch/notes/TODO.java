@@ -2,11 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Colored text in logs (StringWithColor)
+	// feck it in to Android and c what happens ;)
 
-	// bug - hover previews are visible on enemy's turn
-
-	// Factions need image for logs and for start of their turn
+	// "FACTION X TURN" w/ images
 
 	// white bg for log needs to match width of text
 

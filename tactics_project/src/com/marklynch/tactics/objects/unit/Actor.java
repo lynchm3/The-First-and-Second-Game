@@ -113,8 +113,8 @@ public class Actor extends GameObject {
 			attackTypeString = "attacked ";
 		level.logOnScreen(new ActivityLog(new Object[] {
 
-		this.imageTexture, " " + attackTypeString + " ",
-				gameObject.imageTexture, " with ", selectedWeapon.imageTexture,
+		this, " " + attackTypeString + " ", gameObject, " with ",
+				selectedWeapon.imageTexture,
 				" for " + selectedWeapon.damage + " damage" }));
 
 		Actor actor = null;
@@ -124,12 +124,11 @@ public class Actor extends GameObject {
 		if (gameObject.checkIfDestroyed()) {
 			if (gameObject instanceof Actor) {
 				level.logOnScreen(new ActivityLog(new Object[] {
-						"" + this.name + " killed ", gameObject.imageTexture }));
+						"" + this + " killed ", gameObject }));
 				((Actor) gameObject).faction.checkIfDestroyed();
 			} else {
-				level.logOnScreen(new ActivityLog(new Object[] {
-						this.imageTexture, " destroyed a ",
-						gameObject.imageTexture }));
+				level.logOnScreen(new ActivityLog(new Object[] { this,
+						" destroyed a ", gameObject }));
 			}
 
 		}
@@ -165,7 +164,7 @@ public class Actor extends GameObject {
 		this.squareGameObjectIsOn = squareToMoveTo;
 		squareToMoveTo.gameObject = level.activeActor;
 		Actor.highlightSelectedCharactersSquares(level);
-		level.logOnScreen(new ActivityLog(new Object[] { this.imageTexture,
+		level.logOnScreen(new ActivityLog(new Object[] { this,
 				" moved to " + squareToMoveTo }));
 
 	}

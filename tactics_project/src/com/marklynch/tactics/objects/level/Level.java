@@ -37,6 +37,7 @@ public class Level {
 	public Faction currentFactionMoving;
 	public int currentFactionMovingIndex;
 	public Vector<ActivityLog> logs = new Vector<ActivityLog>();
+	public boolean showTurnNotification = false;
 
 	// java representation of a grid??
 	// 2d array?
@@ -67,8 +68,9 @@ public class Level {
 
 		// Factions
 		factions = new Vector<Faction>();
-		factions.add(new Faction("Good Guys", this, Color.blue));
-		factions.add(new Faction("Bad Guys", this, Color.red));
+		factions.add(new Faction("Good Guys", this, Color.blue,
+				"faction_blue.png"));
+		factions.add(new Faction("Bad Guys", this, Color.red, "faction_red.png"));
 
 		// Good guys relationships
 		factions.get(0).relationships.put(factions.get(1), -100);
@@ -270,6 +272,11 @@ public class Level {
 					100 + i * 20, this);
 		}
 
+		if (showTurnNotification) {
+			TextUtils.printTextWithImages(new Object[] {
+					this.currentFactionMoving, "'s turn" }, 500, 500, this);
+		}
+
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
@@ -305,8 +312,8 @@ public class Level {
 
 	public void endTurn() {
 
-		this.logOnScreen(new ActivityLog(new Object[] { ""
-				+ currentFactionMoving.name + " ended turn " + this.turn }));
+		this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
+				" ended turn " + this.turn }));
 
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {
@@ -330,10 +337,31 @@ public class Level {
 			}
 		}
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
+
+		showTurnNotification();
 	}
 
 	public void logOnScreen(ActivityLog stringToLog) {
 		logs.add(stringToLog);
 		// System.out.println(stringToLog.text);
+	}
+
+	public void showTurnNotification() {
+		showTurnNotification = true;
+		new hideTurnNotificationThread().start();
+	}
+
+	public class hideTurnNotificationThread extends Thread {
+
+		@Override
+		public void run() {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			showTurnNotification = false;
+		}
 	}
 }

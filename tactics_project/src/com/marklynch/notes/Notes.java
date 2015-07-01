@@ -1424,6 +1424,20 @@ public class Notes {
 	 * log text can probably be bigger (the images are shite at the moment, too
 	 * small), will they really care about more than the last 5 log msgs
 	 * anyway?!
+	 * 
+	 * http://www.rockpapershotgun.com/2015/06/26/fast-travel-is-rubbish/ At the
+	 * end of Dragon Age: Origins, for example, you get a rundown of all the
+	 * decisions you’ve made – a kind of record of your life as it occurred.
+	 * It’s small but it’s something. In Crusader Kings II they recently added a
+	 * feature that posts a post-game chronicle of your entire dynasty when your
+	 * game ends – a brilliant move.
+	 * 
+	 * Short cuts between areas as u progress (dark souls)
+	 * 
+	 * On morrowind fast travel - I think the Bunnyhop youtube guy highlighted
+	 * how neat the way travel progressed in Morrowind. Something along the
+	 * lines of “at the start of the game you had to take the bus like everyone
+	 * else, by the end of the game you could fly
 	 */
 
 }

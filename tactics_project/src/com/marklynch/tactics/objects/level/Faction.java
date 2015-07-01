@@ -1,11 +1,14 @@
 package com.marklynch.tactics.objects.level;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -37,6 +40,7 @@ public class Faction {
 
 	public Actor currentActor;
 	public int currentActorIndex = 0;
+	public Texture imageTexture = null;
 
 	public Color color;
 
@@ -48,10 +52,11 @@ public class Faction {
 	public int timeAtCurrentStage = 0;
 	public final int STAGE_DURATION = 1000;
 
-	public Faction(String name, Level level, Color color) {
+	public Faction(String name, Level level, Color color, String imagePath) {
 		this.name = name;
 		this.level = level;
 		this.color = color;
+		this.imageTexture = getGlobalImage(imagePath);
 	}
 
 	public void update(int delta) {
@@ -363,8 +368,8 @@ public class Faction {
 
 	public void checkIfDestroyed() {
 		if (this.actors.size() == 0)
-			level.logOnScreen(new ActivityLog(new Object[] { "" + this.name
-					+ " have been stopped" }));
+			level.logOnScreen(new ActivityLog(new Object[] { this,
+					" have been stopped" }));
 
 	}
 }
