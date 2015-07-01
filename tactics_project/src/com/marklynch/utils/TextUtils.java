@@ -5,7 +5,10 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
+import com.marklynch.tactics.objects.unit.Actor;
 
 public class TextUtils {
 	// fit font to width, this could be awkward coz they're loaded w/ font sizes
@@ -128,6 +131,57 @@ public class TextUtils {
 				GL11.glVertex2f(x, posY + 20);
 				GL11.glEnd();
 				offsetX += 20;
+
+			} else if (content instanceof GameObject) {
+
+				GameObject gameObject = (GameObject) content;
+
+				// Name
+				if (gameObject instanceof Actor) {
+					Actor actor = (Actor) gameObject;
+
+					level.font20.drawString(posX + offsetX, posY,
+							gameObject.name, actor.faction.color);
+					;
+				} else {
+					level.font20.drawString(posX + offsetX, posY,
+							gameObject.name, Color.gray);
+				}
+				offsetX += level.font20.getWidth(gameObject.name);
+
+				// Image
+
+				GL11.glColor3f(1.0f, 1.0f, 1.0f);
+
+				gameObject.imageTexture.bind();
+
+				float x = posX + offsetX;
+
+				GL11.glBegin(GL11.GL_QUADS);
+				GL11.glTexCoord2f(0, 0);
+				GL11.glVertex2f(x, posY);
+				GL11.glTexCoord2f(1, 0);
+				GL11.glVertex2f(x + 20, posY);
+				GL11.glTexCoord2f(1, 1);
+				GL11.glVertex2f(x + 20, posY + 20);
+				GL11.glTexCoord2f(0, 1);
+				GL11.glVertex2f(x, posY + 20);
+				GL11.glEnd();
+				offsetX += 20;
+
+			} else if (content instanceof Faction) {
+
+				Faction faction = (Faction) content;
+
+				// Name
+
+				level.font20.drawString(posX + offsetX, posY, faction.name,
+						faction.color);
+				offsetX += level.font20.getWidth(faction.name);
+
+				// Image??
+
+			} else if (content instanceof StringWithColor) {
 
 			}
 		}

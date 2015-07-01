@@ -363,8 +363,8 @@ public class Faction {
 
 	public void checkIfDestroyed() {
 		if (this.actors.size() == 0)
-			level.logOnScreen(new ActivityLog(new Object[] { "" + this.name
-					+ " have been stopped" }));
+			level.logOnScreen(new ActivityLog(new Object[] { this,
+					" have been stopped" }));
 
 	}
 }
