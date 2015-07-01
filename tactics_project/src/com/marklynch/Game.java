@@ -114,35 +114,25 @@ public class Game {
 
 	public void update(int delta) {
 
-		// Movement
-		// if(lastFPS - lastMoveTime >= timeBetweenMoveCommands)
-		// {
-
+		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
 
-		// a = ((((b / 2) - c - (b / 2) / d) + (e) / d) / f)
-
-		// mouseXInSquares a
-		// windowWidth b
-		// dragX c
-		// zoom d
-		// mouseXinPixels g
-		// SQUARE_WIDTH f
-
+		// Getting what square coordinates the mouse is on (as in squares on the
+		// grid)
 		float mouseXInSquares = (int) ((((windowWidth / 2) - dragX - (windowWidth / 2)
 				/ zoom) + (mouseXinPixels) / zoom) / SQUARE_WIDTH);
 		float mouseYInSquares = (int) (((windowHeight / 2 - dragY - (windowHeight / 2)
 				/ zoom) + (((windowHeight - mouseYinPixels)) / zoom)) / SQUARE_HEIGHT);
 
-		// mouseYInSquares += Math.round((dragY/zoom)/squareHeight);
-
+		// Calculate zoom
 		zoom += 0.001 * Mouse.getDWheel();
 		if (zoom < 0.5)
 			zoom = 0.5f;
 		if (zoom > 2)
 			zoom = 2f;
 
+		// Checking for drag
 		if (Mouse.isButtonDown(0)) {
 			if (mouseDownX == -1) {
 				mouseDownX = Mouse.getX();
@@ -165,6 +155,7 @@ public class Game {
 			mouseLastY = Mouse.getY();
 		}
 
+		// Get the square that we're hovering over
 		Button buttonClicked = null;
 		squareMouseIsOver = null;
 		if ((int) mouseXInSquares > -1
@@ -192,21 +183,21 @@ public class Game {
 			}
 		}
 
+		// Getting button that we have clicked, if any
 		if (dragging == false) {
 			buttonClicked = level.getButtonFromMousePosition();
 		}
 
-		// TODO test out button clicking, like if u drag off it or on to it or
-		// anything, just subtleties
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && buttonClicked != null
 				&& level.currentFactionMovingIndex == 0) {
 			// click button if we're on one
 			buttonClicked.click();
+
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && squareMouseIsOver != null
 				&& level.currentFactionMovingIndex == 0) {
-			// click square we're on
+			// click square if we're on one
 
 			GameObject clickedGameObject = squareMouseIsOver.gameObject;
 			if (clickedGameObject != null) {
@@ -248,16 +239,20 @@ public class Game {
 			mouseDownY = -1;
 			lastMoveTime = lastFPS;
 
-			// Hover preview
+			// Show/hide Hover preview
 			if (Config.SHOW_BATTLE_PREVIEW_ON_HOVER
 					&& squareMouseIsOver != null
 					&& squareMouseIsOver.gameObject != null
 					&& level.activeActor != null
-					&& squareMouseIsOver.gameObject != level.activeActor)
+					&& squareMouseIsOver.gameObject != level.activeActor
+					&& level.currentFactionMoving == level.factions.get(0)) {
+				// show hover preview
 				level.activeActor
 						.showHoverFightPreview(squareMouseIsOver.gameObject);
-			else if (level.activeActor != null)
+			} else if (level.activeActor != null) {
+				// hide Hover Preview
 				level.activeActor.hideHoverFightPreview();
+			}
 
 		}
 
