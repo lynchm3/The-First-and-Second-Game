@@ -37,6 +37,7 @@ public class Level {
 	public Faction currentFactionMoving;
 	public int currentFactionMovingIndex;
 	public Vector<ActivityLog> logs = new Vector<ActivityLog>();
+	public boolean showTurnNotification = false;
 
 	// java representation of a grid??
 	// 2d array?
@@ -271,6 +272,11 @@ public class Level {
 					100 + i * 20, this);
 		}
 
+		if (showTurnNotification) {
+			TextUtils.printTextWithImages(new Object[] {
+					this.currentFactionMoving, "'s turn" }, 500, 500, this);
+		}
+
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
@@ -331,10 +337,31 @@ public class Level {
 			}
 		}
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
+
+		showTurnNotification();
 	}
 
 	public void logOnScreen(ActivityLog stringToLog) {
 		logs.add(stringToLog);
 		// System.out.println(stringToLog.text);
+	}
+
+	public void showTurnNotification() {
+		showTurnNotification = true;
+		new hideTurnNotificationThread().start();
+	}
+
+	public class hideTurnNotificationThread extends Thread {
+
+		@Override
+		public void run() {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			showTurnNotification = false;
+		}
 	}
 }

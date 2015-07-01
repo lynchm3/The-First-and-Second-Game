@@ -4,7 +4,7 @@ public class TODO {
 
 	// feck it in to Android and c what happens ;)
 
-	// Factions need image for logs and for start of their turn
+	// "FACTION X TURN" w/ images
 
 	// white bg for log needs to match width of text
 
