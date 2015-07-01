@@ -2,10 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// comments
-
-	// bug - hover previews are visible on enemy's turn
-
 	// feck it in to Android and c what happens ;)
 
 	// Factions need image for logs and for start of their turn

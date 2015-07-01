@@ -67,8 +67,9 @@ public class Level {
 
 		// Factions
 		factions = new Vector<Faction>();
-		factions.add(new Faction("Good Guys", this, Color.blue));
-		factions.add(new Faction("Bad Guys", this, Color.red));
+		factions.add(new Faction("Good Guys", this, Color.blue,
+				"faction_blue.png"));
+		factions.add(new Faction("Bad Guys", this, Color.red, "faction_red.png"));
 
 		// Good guys relationships
 		factions.get(0).relationships.put(factions.get(1), -100);

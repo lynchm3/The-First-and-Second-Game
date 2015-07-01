@@ -181,6 +181,26 @@ public class TextUtils {
 
 				// Image??
 
+				// Image
+
+				GL11.glColor3f(1.0f, 1.0f, 1.0f);
+
+				faction.imageTexture.bind();
+
+				float x = posX + offsetX;
+
+				GL11.glBegin(GL11.GL_QUADS);
+				GL11.glTexCoord2f(0, 0);
+				GL11.glVertex2f(x, posY);
+				GL11.glTexCoord2f(1, 0);
+				GL11.glVertex2f(x + 20, posY);
+				GL11.glTexCoord2f(1, 1);
+				GL11.glVertex2f(x + 20, posY + 20);
+				GL11.glTexCoord2f(0, 1);
+				GL11.glVertex2f(x, posY + 20);
+				GL11.glEnd();
+				offsetX += 20;
+
 			} else if (content instanceof StringWithColor) {
 
 			}
