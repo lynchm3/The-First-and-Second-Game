@@ -14,6 +14,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.Dialog;
+import com.marklynch.utils.TextureUtils;
 
 public class Square {
 
@@ -54,48 +55,28 @@ public class Square {
 	public void draw(Level level) {
 
 		// square texture
-		imageTexture.bind();
-
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
-
-		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glTexCoord2f(0, 0);
-		GL11.glVertex2f(squarePositionX, squarePositionY);
-		GL11.glTexCoord2f(1, 0);
-		GL11.glVertex2f(squarePositionX + Game.SQUARE_WIDTH, squarePositionY);
-		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(squarePositionX + Game.SQUARE_WIDTH, squarePositionY
+		TextureUtils.drawTexture(imageTexture, squarePositionX, squarePositionX
+				+ Game.SQUARE_WIDTH, squarePositionY, squarePositionY
 				+ Game.SQUARE_HEIGHT);
-		GL11.glTexCoord2f(0, 1);
-		GL11.glVertex2f(squarePositionX, squarePositionY + Game.SQUARE_HEIGHT);
-		GL11.glEnd();
 
 		// square highlights
 
 		if (reachableBySelectedCharater || weaponsThatCanAttack.size() > 0) {
 
+			Texture highlightTexture = null;
+
 			if (level.currentFactionMovingIndex == 0
 					&& (inPath || this == Game.squareMouseIsOver))
-				level.gameCursor.imageTexture3.bind();
+				highlightTexture = level.gameCursor.imageTexture3;
 			else if (reachableBySelectedCharater)
-				level.gameCursor.imageTexture.bind();
+				highlightTexture = level.gameCursor.imageTexture;
 			else
-				level.gameCursor.imageTexture2.bind();
-
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2f(0, 0);
-			GL11.glVertex2f(squarePositionX, squarePositionY);
-			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2f(squarePositionX + Game.SQUARE_WIDTH,
-					squarePositionY);
-			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2f(squarePositionX + Game.SQUARE_WIDTH,
+				highlightTexture = level.gameCursor.imageTexture2;
+			TextureUtils.drawTexture(highlightTexture, squarePositionX,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
 					squarePositionY + Game.SQUARE_HEIGHT);
-			GL11.glTexCoord2f(0, 1);
-			GL11.glVertex2f(squarePositionX, squarePositionY
-					+ Game.SQUARE_HEIGHT);
-			GL11.glEnd();
 		}
 
 		// if (this.reachableBySelectedCharater) {
@@ -120,8 +101,6 @@ public class Square {
 			for (int i = 0; i < this.weaponsThatCanAttack.size(); i++) {
 
 				Weapon weapon = this.weaponsThatCanAttack.get(i);
-				weapon.imageTexture.bind();
-
 				float weaponPositionXInPixels = 0;
 				float weaponPositionYInPixels = 0;
 
@@ -129,20 +108,10 @@ public class Square {
 				weaponPositionYInPixels = this.y * (int) Game.SQUARE_HEIGHT
 						+ (i * weaponHeightInPixels);
 
-				GL11.glBegin(GL11.GL_QUADS);
-				GL11.glTexCoord2f(0, 0);
-				GL11.glVertex2f(weaponPositionXInPixels,
-						weaponPositionYInPixels);
-				GL11.glTexCoord2f(1, 0);
-				GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
-						weaponPositionYInPixels);
-				GL11.glTexCoord2f(1, 1);
-				GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
+				TextureUtils.drawTexture(weapon.imageTexture,
+						weaponPositionXInPixels, weaponPositionXInPixels
+								+ weaponWidthInPixels, weaponPositionYInPixels,
 						weaponPositionYInPixels + weaponHeightInPixels);
-				GL11.glTexCoord2f(0, 1);
-				GL11.glVertex2f(weaponPositionXInPixels,
-						weaponPositionYInPixels + weaponHeightInPixels);
-				GL11.glEnd();
 			}
 		}
 

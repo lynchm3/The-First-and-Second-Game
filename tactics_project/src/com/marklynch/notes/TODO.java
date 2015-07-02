@@ -2,6 +2,21 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// resize the fucking VS image... or maybe its cool in the corner?
+	// remove all calls to texture.bind()!!!
+	// remove GL11.glDisable(GL11.GL_TEXTURE_2D);
+	// remove GL11.glEnbable(GL11.GL_TEXTURE_2D);
+	// work out what bits i fucked up by looking at old screen grabs
+	// Replace the VS w/ FIGHT, move the VS TO THE MIDDLE
+	// make a single item for all these reused colors, WAY too many calls to new
+	// color
+
+	// seperate the attack + counter attack
+
+	// draw the health bar in 3 non-overlapping parts.
+	// potential damage bit should flash, btween the 2 colours
+	// potential damage bit should flash faster if someone is going to die
+
 	// method for drawing images within rect, theres WAY too many lines of code
 	// doing this
 

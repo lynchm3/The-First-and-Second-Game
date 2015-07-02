@@ -1,10 +1,10 @@
 package com.marklynch.ui;
 
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextureUtils;
 
 public class Button {
 
@@ -25,19 +25,7 @@ public class Button {
 
 	public void draw() {
 
-		// End turn button
-		this.texture.bind();
-
-		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glTexCoord2f(0, 0);
-		GL11.glVertex2f(x, y);
-		GL11.glTexCoord2f(1, 0);
-		GL11.glVertex2f(x + width, y);
-		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(x + width, y + height);
-		GL11.glTexCoord2f(0, 1);
-		GL11.glVertex2f(x, y + height);
-		GL11.glEnd();
+		TextureUtils.drawTexture(texture, x, x + width, y, y + height);
 	}
 
 	public void click() {

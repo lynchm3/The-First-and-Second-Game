@@ -5,7 +5,6 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.HashMap;
 import java.util.Vector;
 
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
@@ -16,6 +15,7 @@ import com.marklynch.tactics.objects.unit.Actor.Direction;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
+import com.marklynch.utils.TextureUtils;
 
 public class GameObject {
 
@@ -76,50 +76,30 @@ public class GameObject {
 	public void draw() {
 
 		// Draw object
-		this.imageTexture.bind();
 		int actorPositionXInPixels = this.squareGameObjectIsOn.x
 				* (int) Game.SQUARE_WIDTH;
 		int actorPositionYInPixels = this.squareGameObjectIsOn.y
 				* (int) Game.SQUARE_HEIGHT;
 
-		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glTexCoord2f(0, 0);
-		GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels);
-		GL11.glTexCoord2f(1, 0);
-		GL11.glVertex2f(actorPositionXInPixels + Game.SQUARE_WIDTH,
-				actorPositionYInPixels);
-		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(actorPositionXInPixels + Game.SQUARE_WIDTH,
-				actorPositionYInPixels + Game.SQUARE_HEIGHT);
-		GL11.glTexCoord2f(0, 1);
-		GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels
-				+ Game.SQUARE_HEIGHT);
-		GL11.glEnd();
+		TextureUtils.drawTexture(imageTexture, actorPositionXInPixels,
+				actorPositionXInPixels + Game.SQUARE_WIDTH,
+				actorPositionYInPixels, actorPositionYInPixels
+						+ Game.SQUARE_HEIGHT);
 	}
 
 	public void draw2() {
 
 		// Draw POW
 		if (showPow == true) {
-			this.powTexture.bind();
 			int powPositionXInPixels = Math
 					.abs((powTarget.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH));
 			int powPositionYInPixels = powTarget.squareGameObjectIsOn.y
 					* (int) Game.SQUARE_HEIGHT;
 
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2f(0, 0);
-			GL11.glVertex2f(powPositionXInPixels, powPositionYInPixels);
-			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2f(powPositionXInPixels + Game.SQUARE_WIDTH,
-					powPositionYInPixels);
-			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2f(powPositionXInPixels + Game.SQUARE_WIDTH,
-					powPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glTexCoord2f(0, 1);
-			GL11.glVertex2f(powPositionXInPixels, powPositionYInPixels
-					+ Game.SQUARE_HEIGHT);
-			GL11.glEnd();
+			TextureUtils.drawTexture(this.powTexture, powPositionXInPixels,
+					powPositionXInPixels + Game.SQUARE_WIDTH,
+					powPositionYInPixels, powPositionYInPixels
+							+ Game.SQUARE_HEIGHT);
 
 		}
 	}

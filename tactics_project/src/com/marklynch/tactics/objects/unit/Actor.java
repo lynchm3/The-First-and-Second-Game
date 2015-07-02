@@ -11,6 +11,8 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.TextureUtils;
 
 public class Actor extends GameObject {
 
@@ -120,8 +122,8 @@ public class Actor extends GameObject {
 
 		if (gameObject.checkIfDestroyed()) {
 			if (gameObject instanceof Actor) {
-				level.logOnScreen(new ActivityLog(new Object[] {
-						"" + this + " killed ", gameObject }));
+				level.logOnScreen(new ActivityLog(new Object[] { this,
+						" killed ", gameObject }));
 				((Actor) gameObject).faction.checkIfDestroyed();
 			} else {
 				level.logOnScreen(new ActivityLog(new Object[] { this,
@@ -198,42 +200,21 @@ public class Actor extends GameObject {
 						* (int) Game.SQUARE_HEIGHT;
 
 			}
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
 
 			// White bit under health bar
-			GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glVertex2f(weaponAreaPositionXInPixels + 1,
-					weaponAreaPositionYInPixels + 1);
-			GL11.glVertex2f(weaponAreaPositionXInPixels
-					+ weaponAreaWidthInPixels - 1,
-					weaponAreaPositionYInPixels + 1);
-			GL11.glVertex2f(weaponAreaPositionXInPixels
-					+ weaponAreaWidthInPixels - 1, weaponAreaPositionYInPixels
-					+ weaponAreaHeightInPixels - 1);
-			GL11.glVertex2f(weaponAreaPositionXInPixels + 1,
+			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
+					weaponAreaPositionXInPixels + 1,
+					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
+					weaponAreaPositionYInPixels + 1,
 					weaponAreaPositionYInPixels + weaponAreaHeightInPixels - 1);
-			GL11.glEnd();
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
 			// Colored health bar
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glColor4f(this.faction.color.r, this.faction.color.g,
-					this.faction.color.b, 0.5f);
-			GL11.glVertex2f(weaponAreaPositionXInPixels + 1,
-					weaponAreaPositionYInPixels + 1);
-			GL11.glVertex2f(weaponAreaPositionXInPixels
-					+ weaponAreaWidthInPixels - 1,
-					weaponAreaPositionYInPixels + 1);
-			GL11.glVertex2f(weaponAreaPositionXInPixels
-					+ weaponAreaWidthInPixels - 1, weaponAreaPositionYInPixels
-					+ healthBarHeightInPixels - 1);
-			GL11.glVertex2f(weaponAreaPositionXInPixels + 1,
+			QuadUtils.drawQuad(new Color(this.faction.color.r,
+					this.faction.color.g, this.faction.color.b, 0.5f),
+					weaponAreaPositionXInPixels + 1,
+					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
+					weaponAreaPositionYInPixels + 1,
 					weaponAreaPositionYInPixels + healthBarHeightInPixels - 1);
-			GL11.glEnd();
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
 		}
 		super.draw();
 		if (level.activeActor != null
@@ -247,7 +228,6 @@ public class Actor extends GameObject {
 			for (int i = 0; i < weapons.size(); i++) {
 
 				Weapon weapon = weapons.get(i);
-				weapon.imageTexture.bind();
 
 				float weaponPositionXInPixels = 0;
 				float weaponPositionYInPixels = 0;
@@ -267,21 +247,10 @@ public class Actor extends GameObject {
 							+ (i * weaponHeightInPixels);
 
 				}
-
-				GL11.glBegin(GL11.GL_QUADS);
-				GL11.glTexCoord2f(0, 0);
-				GL11.glVertex2f(weaponPositionXInPixels,
-						weaponPositionYInPixels);
-				GL11.glTexCoord2f(1, 0);
-				GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
-						weaponPositionYInPixels);
-				GL11.glTexCoord2f(1, 1);
-				GL11.glVertex2f(weaponPositionXInPixels + weaponWidthInPixels,
+				TextureUtils.drawTexture(weapon.imageTexture,
+						weaponPositionXInPixels, weaponPositionXInPixels
+								+ weaponWidthInPixels, weaponPositionYInPixels,
 						weaponPositionYInPixels + weaponHeightInPixels);
-				GL11.glTexCoord2f(0, 1);
-				GL11.glVertex2f(weaponPositionXInPixels,
-						weaponPositionYInPixels + weaponHeightInPixels);
-				GL11.glEnd();
 			}
 		}
 
@@ -391,150 +360,76 @@ public class Actor extends GameObject {
 
 			}
 
-			// VS image
-
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-
-			this.vsTexture.bind();
-
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2f(0, 0);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-					+ Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels);
-			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-					+ Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels
-					+ Game.SQUARE_HEIGHT);
-			GL11.glTexCoord2f(0, 1);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glEnd();
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-
 			// BG white
-			// black to white bit under health bar
-			// GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-			// GL11.glBegin(GL11.GL_QUADS);
-			// // GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-			// // GL11.glColor4f(this.faction.color.r, this.faction.color.g,
-			// // this.faction.color.b, 0.5f);
-			// GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-			// hoverFightPreviewPositionYInPixels);
-			// GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-			// + Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels);
-			// GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-			// + Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels
-			// + Game.SQUARE_HEIGHT);
-			// GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-			// hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			// GL11.glEnd();
-			// GL11.glColor3f(1.0f, 1.0f, 1.0f);
-			// GL11.glEnable(GL11.GL_TEXTURE_2D);
+			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 1.0f),
+					hoverFightPreviewPositionXInPixels,
+					hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
+					hoverFightPreviewPositionYInPixels,
+					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 
-			// White bit under health bar
-			// GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-			// GL11.glBegin(GL11.GL_QUADS);
-			// GL11.glVertex2f(weaponAreaPositionXInPixels + 1,
-			// weaponAreaPositionYInPixels + 1);
-			// GL11.glVertex2f(weaponAreaPositionXInPixels
-			// + weaponAreaWidthInPixels - 1,
-			// weaponAreaPositionYInPixels + 1);
-			// GL11.glVertex2f(weaponAreaPositionXInPixels
-			// + weaponAreaWidthInPixels - 1, weaponAreaPositionYInPixels
-			// + weaponAreaHeightInPixels - 1);
-			// GL11.glVertex2f(weaponAreaPositionXInPixels + 1,
-			// weaponAreaPositionYInPixels + weaponAreaHeightInPixels - 1);
-			// GL11.glEnd();
-			// GL11.glColor3f(1.0f, 1.0f, 1.0f);
+			// line down the middle
+			float linePositionX = hoverFightPreviewPositionXInPixels
+					+ Game.SQUARE_WIDTH / 2f - 0.5f;
+			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 1.0f),
+					linePositionX, linePositionX + 1,
+					hoverFightPreviewPositionYInPixels,
+					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+
+			// VS image
+			TextureUtils.drawTexture(this.vsTexture,
+					hoverFightPreviewPositionXInPixels,
+					hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
+					hoverFightPreviewPositionYInPixels,
+					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+
+			// Attacker current health
 
 			float attackerCurrentHealthWidth = (Game.SQUARE_WIDTH / 2)
 					* (this.remainingHealth / totalHealth);
-
-			System.out.println("attackerCurrentHealthWidth = "
-					+ attackerCurrentHealthWidth);
-
-			// Attacker current health
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glColor4f(this.faction.color.r, this.faction.color.g,
-					this.faction.color.b, 0.5f);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-					+ attackerCurrentHealthWidth,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-					+ attackerCurrentHealthWidth,
+			QuadUtils.drawQuad(new Color(this.faction.color.r,
+					this.faction.color.g, this.faction.color.b, 0.5f),
+					hoverFightPreviewPositionXInPixels,
+					hoverFightPreviewPositionXInPixels
+							+ attackerCurrentHealthWidth,
+					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glEnd();
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
 			// Attacker potential health
 
 			float potentialAttackerHealth = this.remainingHealth
 					- hoverFightPreviewFights.get(0).damageTakenByAttacker;
-			System.out
-					.println("this.remainingHealth = " + this.remainingHealth);
-			System.out
-					.println("hoverFightPreviewFights.get(0).damageTakenByAttacker = "
-							+ hoverFightPreviewFights.get(0).damageTakenByAttacker);// this
-																					// is
-																					// 0
-			System.out.println("potentialAttackerHealth = "
-					+ potentialAttackerHealth);
 			if (potentialAttackerHealth < 0) {
 				potentialAttackerHealth = 0;
 			}
 
 			float attackerPotentialHealthWidth = (Game.SQUARE_WIDTH / 2)
 					* (potentialAttackerHealth / totalHealth);
-			System.out.println("attackerPotentialHealthWidth = "
-					+ attackerPotentialHealthWidth);
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glColor4f(this.faction.color.r, this.faction.color.g,
-					this.faction.color.b, 0.5f);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-					+ attackerPotentialHealthWidth,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-					+ attackerPotentialHealthWidth,
+			QuadUtils.drawQuad(new Color(this.faction.color.r,
+					this.faction.color.g, this.faction.color.b, 0.5f),
+					hoverFightPreviewPositionXInPixels,
+					hoverFightPreviewPositionXInPixels
+							+ attackerPotentialHealthWidth,
+					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glEnd();
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
 			// Defender current health
 			float defenderHealthPositionXInPixels = hoverFightPreviewPositionXInPixels
 					+ (Game.SQUARE_WIDTH);
 			float defenderCurrentHealthWidth = (Game.SQUARE_WIDTH / 2)
 					* (hoverFightPreviewDefender.remainingHealth / hoverFightPreviewDefender.totalHealth);
-			GL11.glBegin(GL11.GL_QUADS);
+			Color color = null;
 			if (hoverFightPreviewDefender.faction == null) {
-				GL11.glColor4f(0.5f, 0.5f, 0.5f, 0.5f);
+				color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 			} else {
-				GL11.glColor4f(hoverFightPreviewDefender.faction.color.r,
+				color = new Color(hoverFightPreviewDefender.faction.color.r,
 						hoverFightPreviewDefender.faction.color.g,
 						hoverFightPreviewDefender.faction.color.b, 0.5f);
 			}
-			GL11.glVertex2f(defenderHealthPositionXInPixels,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(defenderHealthPositionXInPixels
-					- defenderCurrentHealthWidth,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(defenderHealthPositionXInPixels
-					- defenderCurrentHealthWidth,
+			QuadUtils.drawQuad(color, defenderHealthPositionXInPixels,
+					defenderHealthPositionXInPixels
+							- defenderCurrentHealthWidth,
+					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glVertex2f(defenderHealthPositionXInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glEnd();
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
 			// Defender potential health
 			float potentialDefenderHealth = hoverFightPreviewDefender.remainingHealth
@@ -544,28 +439,11 @@ public class Actor extends GameObject {
 			}
 			float defenderPotentialHealthWidth = (Game.SQUARE_WIDTH / 2)
 					* (potentialDefenderHealth / hoverFightPreviewDefender.totalHealth);
-			GL11.glBegin(GL11.GL_QUADS);
-			if (hoverFightPreviewDefender.faction == null) {
-				GL11.glColor4f(0.5f, 0.5f, 0.5f, 0.5f);
-			} else {
-				GL11.glColor4f(hoverFightPreviewDefender.faction.color.r,
-						hoverFightPreviewDefender.faction.color.g,
-						hoverFightPreviewDefender.faction.color.b, 0.5f);
-			}
-			GL11.glVertex2f(defenderHealthPositionXInPixels,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(defenderHealthPositionXInPixels
-					- defenderPotentialHealthWidth,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(defenderHealthPositionXInPixels
-					- defenderPotentialHealthWidth,
+			QuadUtils.drawQuad(color, defenderHealthPositionXInPixels,
+					defenderHealthPositionXInPixels
+							- defenderPotentialHealthWidth,
+					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glVertex2f(defenderHealthPositionXInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glEnd();
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 			// TextUtils.printTable(tableContents,
 			// hoverFightPreviewPositionXInPixels,

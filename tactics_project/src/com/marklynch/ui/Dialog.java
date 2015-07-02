@@ -9,6 +9,7 @@ import org.newdawn.slick.opengl.Texture;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.utils.TextureUtils;
 
 public class Dialog {
 
@@ -62,18 +63,9 @@ public class Dialog {
 		// GL11.glLineWidth(1.0f);
 		// drawCircle(10);
 
-		this.backgroundImageTexture.bind();
-
-		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glTexCoord2f(0, 0);
-		GL11.glVertex2f(positionXInPixels, positionYInPixels);
-		GL11.glTexCoord2f(1, 0);
-		GL11.glVertex2f(positionXInPixels + width, positionYInPixels);
-		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(positionXInPixels + width, positionYInPixels + height);
-		GL11.glTexCoord2f(0, 1);
-		GL11.glVertex2f(positionXInPixels, positionYInPixels + height);
-		GL11.glEnd();
+		TextureUtils.drawTexture(this.backgroundImageTexture,
+				positionXInPixels, positionXInPixels + width,
+				positionYInPixels, positionYInPixels + height);
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
