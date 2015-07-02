@@ -5,6 +5,8 @@ public class TODO {
 	// method for drawing images within rect, theres WAY too many lines of code
 	// doing this
 
+	// Look up "the mechanics of fire emblem"
+
 	// hover fight preview needs to be better, w/ big VS image underneath
 
 	// feck it in to Android and c what happens ;)

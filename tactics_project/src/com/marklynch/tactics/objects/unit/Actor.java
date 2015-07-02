@@ -391,26 +391,47 @@ public class Actor extends GameObject {
 
 			}
 
+			// VS image
+
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+
+			this.vsTexture.bind();
+
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
+					hoverFightPreviewPositionYInPixels);
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
+					+ Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels);
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
+					+ Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels
+					+ Game.SQUARE_HEIGHT);
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
+					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+			GL11.glEnd();
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 
 			// BG white
 			// black to white bit under health bar
-			GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-			GL11.glBegin(GL11.GL_QUADS);
 			// GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-			// GL11.glColor4f(this.faction.color.r, this.faction.color.g,
-			// this.faction.color.b, 0.5f);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-					+ Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels
-					+ Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels
-					+ Game.SQUARE_HEIGHT);
-			GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glEnd();
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
+			// GL11.glBegin(GL11.GL_QUADS);
+			// // GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+			// // GL11.glColor4f(this.faction.color.r, this.faction.color.g,
+			// // this.faction.color.b, 0.5f);
+			// GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
+			// hoverFightPreviewPositionYInPixels);
+			// GL11.glVertex2f(hoverFightPreviewPositionXInPixels
+			// + Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels);
+			// GL11.glVertex2f(hoverFightPreviewPositionXInPixels
+			// + Game.SQUARE_WIDTH, hoverFightPreviewPositionYInPixels
+			// + Game.SQUARE_HEIGHT);
+			// GL11.glVertex2f(hoverFightPreviewPositionXInPixels,
+			// hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+			// GL11.glEnd();
+			// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 			// GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 			// White bit under health bar
