@@ -2,15 +2,28 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// feck it in to Android and c what happens ;)
+	// work out what bits i fucked up by looking at old screen grabs
+	// Replace the VS w/ FIGHT, move the VS TO THE MIDDLE
+	// make a single item for all these reused colors, WAY too many calls to new
+	// color
+	// dialog has a weird drawing thing...
 
-	// "FACTION X TURN" w/ images
+	// seperate the attack + counter attack
 
-	// white bg for log needs to match width of text
+	// draw the health bar in 3 non-overlapping parts.
+	// potential damage bit should flash, btween the 2 colours
+	// potential damage bit should flash faster if someone is going to die
 
-	// show image + name for logs? weapons, actors, objects, factions
+	// method for drawing images within rect, theres WAY too many lines of code
+	// doing this
+
+	// Look up "the mechanics of fire emblem"
 
 	// hover fight preview needs to be better, w/ big VS image underneath
+
+	// feck it in to Android and c what happens ;)
+
+	// removed white bg from log
 
 	// show icons for potential death, advantage (up/down arrows like FE)
 

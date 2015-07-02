@@ -5,16 +5,17 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.HashMap;
 import java.util.Vector;
 
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
+import com.marklynch.utils.TextureUtils;
 
 public class GameObject {
 
@@ -27,8 +28,8 @@ public class GameObject {
 	public int dexterity = 0;
 	public int intelligence = 0;
 	public int endurance = 0;
-	public int totalHealth = 0;
-	public int remainingHealth = 0;
+	public float totalHealth = 0;
+	public float remainingHealth = 0;
 
 	// Inventory
 	public Vector<Weapon> weapons = new Vector<Weapon>();
@@ -40,6 +41,7 @@ public class GameObject {
 	public String imagePath = "";
 	public Texture imageTexture = null;
 	public Texture powTexture = null;
+	public Texture vsTexture = null;
 
 	// paths
 	public HashMap<Square, Path> paths = new HashMap<Square, Path>();
@@ -47,6 +49,8 @@ public class GameObject {
 	// POW
 	public GameObject powTarget = null;
 	public boolean showPow = false;
+
+	public Faction faction;
 
 	public GameObject(String name, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath,
@@ -62,6 +66,7 @@ public class GameObject {
 		this.imagePath = imagePath;
 		this.imageTexture = getGlobalImage(imagePath);
 		this.powTexture = getGlobalImage("pow.png");
+		this.vsTexture = getGlobalImage("vs.png");
 		this.squareGameObjectIsOn = squareGameObjectIsOn;
 		this.squareGameObjectIsOn.gameObject = this;
 		this.weapons = weapons;
@@ -71,50 +76,30 @@ public class GameObject {
 	public void draw() {
 
 		// Draw object
-		this.imageTexture.bind();
 		int actorPositionXInPixels = this.squareGameObjectIsOn.x
 				* (int) Game.SQUARE_WIDTH;
 		int actorPositionYInPixels = this.squareGameObjectIsOn.y
 				* (int) Game.SQUARE_HEIGHT;
 
-		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glTexCoord2f(0, 0);
-		GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels);
-		GL11.glTexCoord2f(1, 0);
-		GL11.glVertex2f(actorPositionXInPixels + Game.SQUARE_WIDTH,
-				actorPositionYInPixels);
-		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(actorPositionXInPixels + Game.SQUARE_WIDTH,
-				actorPositionYInPixels + Game.SQUARE_HEIGHT);
-		GL11.glTexCoord2f(0, 1);
-		GL11.glVertex2f(actorPositionXInPixels, actorPositionYInPixels
-				+ Game.SQUARE_HEIGHT);
-		GL11.glEnd();
+		TextureUtils.drawTexture(imageTexture, actorPositionXInPixels,
+				actorPositionXInPixels + Game.SQUARE_WIDTH,
+				actorPositionYInPixels, actorPositionYInPixels
+						+ Game.SQUARE_HEIGHT);
 	}
 
 	public void draw2() {
 
 		// Draw POW
 		if (showPow == true) {
-			this.powTexture.bind();
 			int powPositionXInPixels = Math
 					.abs((powTarget.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH));
 			int powPositionYInPixels = powTarget.squareGameObjectIsOn.y
 					* (int) Game.SQUARE_HEIGHT;
 
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2f(0, 0);
-			GL11.glVertex2f(powPositionXInPixels, powPositionYInPixels);
-			GL11.glTexCoord2f(1, 0);
-			GL11.glVertex2f(powPositionXInPixels + Game.SQUARE_WIDTH,
-					powPositionYInPixels);
-			GL11.glTexCoord2f(1, 1);
-			GL11.glVertex2f(powPositionXInPixels + Game.SQUARE_WIDTH,
-					powPositionYInPixels + Game.SQUARE_HEIGHT);
-			GL11.glTexCoord2f(0, 1);
-			GL11.glVertex2f(powPositionXInPixels, powPositionYInPixels
-					+ Game.SQUARE_HEIGHT);
-			GL11.glEnd();
+			TextureUtils.drawTexture(this.powTexture, powPositionXInPixels,
+					powPositionXInPixels + Game.SQUARE_WIDTH,
+					powPositionYInPixels, powPositionYInPixels
+							+ Game.SQUARE_HEIGHT);
 
 		}
 	}
@@ -218,16 +203,16 @@ public class GameObject {
 		}
 	}
 
-	public Vector<Square> getAllSquaresAtDistance(int distance) {
+	public Vector<Square> getAllSquaresAtDistance(float distance) {
 		Vector<Square> squares = new Vector<Square>();
 
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
-		for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
 			if (ArrayUtils.inBounds(level.squares, this.squareGameObjectIsOn.x
 					+ x, this.squareGameObjectIsOn.y + y)) {
-				squares.add(level.squares[this.squareGameObjectIsOn.x + x][this.squareGameObjectIsOn.y
-						+ y]);
+				squares.add(level.squares[this.squareGameObjectIsOn.x + (int) x][this.squareGameObjectIsOn.y
+						+ (int) y]);
 			}
 
 			if (xGoingUp) {
@@ -293,7 +278,7 @@ public class GameObject {
 	}
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon,
-			int range) {
+			float range) {
 		for (Weapon weapon : weapons) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				return weapon;

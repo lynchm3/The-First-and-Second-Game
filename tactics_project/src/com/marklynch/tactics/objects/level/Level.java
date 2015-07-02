@@ -191,30 +191,6 @@ public class Level {
 			}
 		}
 
-		// Cursor
-		// if (selectedActor != null) {
-		// gameCursor.imageTexture.bind();
-		// int cursorPositionXInPixels = gameCursor.square.x
-		// * (int) Game.SQUARE_WIDTH;
-		// int cursorPositionYInPixels = gameCursor.square.y
-		// * (int) Game.SQUARE_HEIGHT;
-		// GL11.glPushMatrix();
-		// GL11.glBegin(GL11.GL_QUADS);
-		// GL11.glTexCoord2f(0, 0);
-		// GL11.glVertex2f(cursorPositionXInPixels, cursorPositionYInPixels);
-		// GL11.glTexCoord2f(1, 0);
-		// GL11.glVertex2f(cursorPositionXInPixels + Game.SQUARE_WIDTH,
-		// cursorPositionYInPixels);
-		// GL11.glTexCoord2f(1, 1);
-		// GL11.glVertex2f(cursorPositionXInPixels + Game.SQUARE_WIDTH,
-		// cursorPositionYInPixels + Game.SQUARE_HEIGHT);
-		// GL11.glTexCoord2f(0, 1);
-		// GL11.glVertex2f(cursorPositionXInPixels, cursorPositionYInPixels
-		// + Game.SQUARE_HEIGHT);
-		// GL11.glEnd();
-		// GL11.glPopMatrix();
-		// }
-
 		// Objects
 
 		for (GameObject gameObject : inanimateObjects) {

@@ -16,21 +16,8 @@ public class TextUtils {
 	public static void printTable(Object[][] tableContents, float posX,
 			float posY, float rowHeight, Level level) {
 
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-
-		// black to white bit under health bar
-		GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-		GL11.glBegin(GL11.GL_QUADS);
-		// GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-		// GL11.glColor4f(this.faction.color.r, this.faction.color.g,
-		// this.faction.color.b, 0.5f);
-		GL11.glVertex2f(posX, posY);
-		GL11.glVertex2f(posX + Game.SQUARE_WIDTH, posY);
-		GL11.glVertex2f(posX + Game.SQUARE_WIDTH, posY + Game.SQUARE_HEIGHT);
-		GL11.glVertex2f(posX, posY + Game.SQUARE_HEIGHT);
-		GL11.glEnd();
-		GL11.glColor3f(1.0f, 1.0f, 1.0f);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), posX, posX
+				+ Game.SQUARE_WIDTH, posY, posY + Game.SQUARE_HEIGHT);
 
 		int rowCount = tableContents.length;
 		int columnCount = tableContents[0].length;
@@ -66,19 +53,8 @@ public class TextUtils {
 							Color.white);
 				} else if (tableContents[i][j] instanceof Texture) {
 
-					Texture texture = (Texture) tableContents[i][j];
-					texture.bind();
-
-					GL11.glBegin(GL11.GL_QUADS);
-					GL11.glTexCoord2f(0, 0);
-					GL11.glVertex2f(x, y);
-					GL11.glTexCoord2f(1, 0);
-					GL11.glVertex2f(x + rowHeight, y);
-					GL11.glTexCoord2f(1, 1);
-					GL11.glVertex2f(x + rowHeight, y + rowHeight);
-					GL11.glTexCoord2f(0, 1);
-					GL11.glVertex2f(x, y + rowHeight);
-					GL11.glEnd();
+					TextureUtils.drawTexture((Texture) tableContents[i][j], x,
+							x + rowHeight, y, y + rowHeight);
 				}
 			}
 		}
@@ -87,20 +63,19 @@ public class TextUtils {
 	public static void printTextWithImages(Object[] contents, float posX,
 			float posY, Level level) {
 
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-
-		// black to white bit under health bar
-		GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-		GL11.glBegin(GL11.GL_QUADS);
+		// GL11.glDisable(GL11.GL_TEXTURE_2D);
+		//
 		// GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-		// GL11.glColor4f(this.faction.color.r, this.faction.color.g,
-		// this.faction.color.b, 0.5f);
-		GL11.glVertex2f(posX, posY);
-		GL11.glVertex2f(posX + 500, posY);
-		GL11.glVertex2f(posX + 500, posY + 20);
-		GL11.glVertex2f(posX, posY + 20);
-		GL11.glEnd();
-		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		// GL11.glBegin(GL11.GL_QUADS);
+		// // GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		// // GL11.glColor4f(this.faction.color.r, this.faction.color.g,
+		// // this.faction.color.b, 0.5f);
+		// GL11.glVertex2f(posX, posY);
+		// GL11.glVertex2f(posX + 500, posY);
+		// GL11.glVertex2f(posX + 500, posY + 20);
+		// GL11.glVertex2f(posX, posY + 20);
+		// GL11.glEnd();
+		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 		int offsetX = 0;
@@ -114,23 +89,9 @@ public class TextUtils {
 
 			} else if (content instanceof Texture) {
 
-				GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-				Texture texture = (Texture) content;
-				texture.bind();
 				float x = posX + offsetX;
-
-				GL11.glBegin(GL11.GL_QUADS);
-				GL11.glTexCoord2f(0, 0);
-				GL11.glVertex2f(x, posY);
-				GL11.glTexCoord2f(1, 0);
-				GL11.glVertex2f(x + 20, posY);
-				GL11.glTexCoord2f(1, 1);
-				GL11.glVertex2f(x + 20, posY + 20);
-				GL11.glTexCoord2f(0, 1);
-				GL11.glVertex2f(x, posY + 20);
-				GL11.glEnd();
-				offsetX += 20;
+				TextureUtils.drawTexture((Texture) content, x, x + 20, posY,
+						posY + 20);
 
 			} else if (content instanceof GameObject) {
 
@@ -151,22 +112,9 @@ public class TextUtils {
 
 				// Image
 
-				GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-				gameObject.imageTexture.bind();
-
 				float x = posX + offsetX;
-
-				GL11.glBegin(GL11.GL_QUADS);
-				GL11.glTexCoord2f(0, 0);
-				GL11.glVertex2f(x, posY);
-				GL11.glTexCoord2f(1, 0);
-				GL11.glVertex2f(x + 20, posY);
-				GL11.glTexCoord2f(1, 1);
-				GL11.glVertex2f(x + 20, posY + 20);
-				GL11.glTexCoord2f(0, 1);
-				GL11.glVertex2f(x, posY + 20);
-				GL11.glEnd();
+				TextureUtils.drawTexture(gameObject.imageTexture, x, x + 20,
+						posY, posY + 20);
 				offsetX += 20;
 
 			} else if (content instanceof Faction) {
@@ -183,22 +131,9 @@ public class TextUtils {
 
 				// Image
 
-				GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-				faction.imageTexture.bind();
-
 				float x = posX + offsetX;
-
-				GL11.glBegin(GL11.GL_QUADS);
-				GL11.glTexCoord2f(0, 0);
-				GL11.glVertex2f(x, posY);
-				GL11.glTexCoord2f(1, 0);
-				GL11.glVertex2f(x + 20, posY);
-				GL11.glTexCoord2f(1, 1);
-				GL11.glVertex2f(x + 20, posY + 20);
-				GL11.glTexCoord2f(0, 1);
-				GL11.glVertex2f(x, posY + 20);
-				GL11.glEnd();
+				TextureUtils.drawTexture(faction.imageTexture, x, x + 20, posY,
+						posY + 20);
 				offsetX += 20;
 
 			} else if (content instanceof StringWithColor) {
