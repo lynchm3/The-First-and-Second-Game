@@ -3,7 +3,7 @@ package com.marklynch.notes;
 public class art {
 
 	/*
-	 * 
+	 * Try a double exposure effect http://imgur.com/a/aVZoi
 	 * 
 	 * Try the cartoon effect but put accessories on the subject first goggle
 	 * and guns and ammo beltes over the shoulder and a bow and a sword and bow
