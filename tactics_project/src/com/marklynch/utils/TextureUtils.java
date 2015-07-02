@@ -8,7 +8,6 @@ public class TextureUtils {
 	public static void drawTexture(Texture texture, float x1, float x2,
 			float y1, float y2) {
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		texture.bind();
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2f(0, 0);

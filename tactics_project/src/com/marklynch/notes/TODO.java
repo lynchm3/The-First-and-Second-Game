@@ -2,14 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// resize the fucking VS image... or maybe its cool in the corner?
-	// remove all calls to texture.bind()!!!
-	// remove GL11.glDisable(GL11.GL_TEXTURE_2D);
-	// remove GL11.glEnbable(GL11.GL_TEXTURE_2D);
 	// work out what bits i fucked up by looking at old screen grabs
 	// Replace the VS w/ FIGHT, move the VS TO THE MIDDLE
 	// make a single item for all these reused colors, WAY too many calls to new
 	// color
+	// dialog has a weird drawing thing...
 
 	// seperate the attack + counter attack
 
