@@ -142,15 +142,15 @@ public class Level {
 		// Game Objects
 		inanimateObjects = new Vector<GameObject>();
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip.png", squares[0][3], new Vector<Weapon>(), this));
+				"skip_with_shadow.png", squares[0][3], new Vector<Weapon>(),
+				this));
+		inanimateObjects.add(new GameObject("sign", 5, 0, 0, 0, 0, "sign.png",
+				squares[1][3], new Vector<Weapon>(), this));
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", squares[1][3], new Vector<Weapon>(),
+				"skip_with_shadow.png", squares[2][3], new Vector<Weapon>(),
 				this));
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow2.png", squares[2][3], new Vector<Weapon>(),
-				this));
-		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow3.png", squares[3][3], new Vector<Weapon>(),
+				"skip_with_shadow.png", squares[3][3], new Vector<Weapon>(),
 				this));
 
 		// Cursor
