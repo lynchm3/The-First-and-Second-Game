@@ -30,12 +30,20 @@ public class Fight {
 			damageTakenByAttacker = 0;
 		} else {
 			damageTakenByAttacker = defenderWeapon.damage;
+			if (damageTakenByAttacker > attacker.remainingHealth)
+				damageTakenByAttacker = attacker.remainingHealth;// maybe dont
+																	// limit
+																	// this here
 		}
 
 		if (attackerWeapon == null) {
 			damageTakenByDefender = 0;
 		} else {
 			damageTakenByDefender = attackerWeapon.damage;
+			if (damageTakenByDefender > defender.remainingHealth)
+				damageTakenByDefender = defender.remainingHealth;// maybe dont
+																	// limit
+																	// this here
 		}
 	}
 

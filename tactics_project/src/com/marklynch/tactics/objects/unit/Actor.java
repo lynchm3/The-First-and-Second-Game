@@ -210,7 +210,7 @@ public class Actor extends GameObject {
 
 			// Colored health bar
 			QuadUtils.drawQuad(new Color(this.faction.color.r,
-					this.faction.color.g, this.faction.color.b, 0.5f),
+					this.faction.color.g, this.faction.color.b),
 					weaponAreaPositionXInPixels + 1,
 					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
 					weaponAreaPositionYInPixels + 1,
@@ -367,11 +367,11 @@ public class Actor extends GameObject {
 					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 
-			// line down the middle
-			float linePositionX = hoverFightPreviewPositionXInPixels
-					+ Game.SQUARE_WIDTH / 2f - 0.5f;
-			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 1.0f),
-					linePositionX, linePositionX + 1,
+			// Target image
+			TextureUtils.drawTexture(
+					hoverFightPreviewFights.get(0).defender.imageTexture,
+					hoverFightPreviewPositionXInPixels,
+					hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
 					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 
@@ -382,66 +382,107 @@ public class Actor extends GameObject {
 					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 
-			// Attacker current health
+			// QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 1.0f),
+			// hoverFightPreviewPositionXInPixels,
+			// hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
+			// hoverFightPreviewPositionYInPixels,
+			// hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+
+			// Attacker Widths of bars
+			float attackerTotalHealthWidth = Game.SQUARE_WIDTH / 2;
 
 			float attackerCurrentHealthWidth = (Game.SQUARE_WIDTH / 2)
 					* (this.remainingHealth / totalHealth);
-			QuadUtils.drawQuad(new Color(this.faction.color.r,
-					this.faction.color.g, this.faction.color.b, 0.5f),
-					hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionXInPixels
-							+ attackerCurrentHealthWidth,
+
+			float attackerPotentialHealthLossWidth = (Game.SQUARE_WIDTH / 2)
+					* (hoverFightPreviewFights.get(0).damageTakenByAttacker / totalHealth);
+
+			float attackerPotentialRemainingHealthWidth = attackerCurrentHealthWidth
+					- attackerPotentialHealthLossWidth;
+
+			// Attacker Positions of bars
+			float attackerTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+					* Game.SQUARE_WIDTH;
+
+			float attackerCurrentHealthX = attackerTotalHealthX;
+
+			float attackerPotentialRemainingHealthX = attackerCurrentHealthX;
+
+			float attackerPotentialHealthLossX = attackerPotentialRemainingHealthX
+					+ attackerPotentialRemainingHealthWidth;
+
+			// Attacker remaining potential health
+			QuadUtils.drawQuad(this.faction.color,
+					attackerPotentialRemainingHealthX,
+					attackerPotentialRemainingHealthX
+							+ attackerPotentialRemainingHealthWidth,
 					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 
-			// Attacker potential health
-
-			float potentialAttackerHealth = this.remainingHealth
-					- hoverFightPreviewFights.get(0).damageTakenByAttacker;
-			if (potentialAttackerHealth < 0) {
-				potentialAttackerHealth = 0;
-			}
-
-			float attackerPotentialHealthWidth = (Game.SQUARE_WIDTH / 2)
-					* (potentialAttackerHealth / totalHealth);
-			QuadUtils.drawQuad(new Color(this.faction.color.r,
-					this.faction.color.g, this.faction.color.b, 0.5f),
-					hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionXInPixels
-							+ attackerPotentialHealthWidth,
-					hoverFightPreviewPositionYInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
-
-			// Defender current health
-			float defenderHealthPositionXInPixels = hoverFightPreviewPositionXInPixels
-					+ (Game.SQUARE_WIDTH);
-			float defenderCurrentHealthWidth = (Game.SQUARE_WIDTH / 2)
-					* (hoverFightPreviewDefender.remainingHealth / hoverFightPreviewDefender.totalHealth);
-			Color color = null;
-			if (hoverFightPreviewDefender.faction == null) {
-				color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+			float alpha = Game.getTime() % 2000f;
+			if (alpha <= 1000) {
+				alpha = alpha / 1000;
 			} else {
-				color = new Color(hoverFightPreviewDefender.faction.color.r,
-						hoverFightPreviewDefender.faction.color.g,
-						hoverFightPreviewDefender.faction.color.b, 0.5f);
+				alpha = (2000 - alpha) / 1000;
 			}
-			QuadUtils.drawQuad(color, defenderHealthPositionXInPixels,
-					defenderHealthPositionXInPixels
-							- defenderCurrentHealthWidth,
+
+			// Attacker potential health loss
+			QuadUtils.drawQuad(new Color(this.faction.color.r,
+					this.faction.color.g, this.faction.color.b, alpha),
+					attackerPotentialHealthLossX, attackerPotentialHealthLossX
+							+ attackerPotentialHealthLossWidth,
 					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 
-			// Defender potential health
-			float potentialDefenderHealth = hoverFightPreviewDefender.remainingHealth
-					- hoverFightPreviewFights.get(0).damageTakenByDefender;
-			if (potentialDefenderHealth < 0) {
-				potentialDefenderHealth = 0;
+			// Widths of bars
+			float defenderTotalHealthWidth = Game.SQUARE_WIDTH / 2;
+
+			float defenderCurrentHealthWidth = (Game.SQUARE_WIDTH / 2)
+					* (this.hoverFightPreviewDefender.remainingHealth / totalHealth);
+
+			float defenderPotentialHealthLossWidth = (Game.SQUARE_WIDTH / 2)
+					* (hoverFightPreviewFights.get(0).damageTakenByDefender / totalHealth);
+
+			float defenderPotentialRemainingHealthWidth = defenderCurrentHealthWidth
+					- defenderPotentialHealthLossWidth;
+
+			// Positions of bars
+			float defenderTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2f;
+
+			float defenderCurrentHealthX = defenderTotalHealthX;
+
+			float defenderPotentialRemainingHealthX = defenderCurrentHealthX;
+
+			float defenderPotentialHealthLossX = defenderPotentialRemainingHealthX
+					+ defenderPotentialRemainingHealthWidth;
+
+			Color color = null;
+			if (this.hoverFightPreviewDefender.faction != null) {
+				color = this.hoverFightPreviewDefender.faction.color;
+			} else {
+				color = new Color(0.5f, 0.5f, 0.5f);
 			}
-			float defenderPotentialHealthWidth = (Game.SQUARE_WIDTH / 2)
-					* (potentialDefenderHealth / hoverFightPreviewDefender.totalHealth);
-			QuadUtils.drawQuad(color, defenderHealthPositionXInPixels,
-					defenderHealthPositionXInPixels
-							- defenderPotentialHealthWidth,
+
+			// Attacker remaining potential health
+			QuadUtils.drawQuad(color, defenderPotentialRemainingHealthX,
+					defenderPotentialRemainingHealthX
+							+ defenderPotentialRemainingHealthWidth,
+					hoverFightPreviewPositionYInPixels,
+					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+
+			// Attacker potential health loss
+			QuadUtils.drawQuad(new Color(color.r, color.g, color.b, alpha),
+					defenderPotentialHealthLossX, defenderPotentialHealthLossX
+							+ defenderPotentialHealthLossWidth,
+					hoverFightPreviewPositionYInPixels,
+					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+
+			// line down the middle
+			float linePositionX = hoverFightPreviewPositionXInPixels
+					+ Game.SQUARE_WIDTH / 2f - 0.5f;
+			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 1.0f),
+					linePositionX, linePositionX + 1,
 					hoverFightPreviewPositionYInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 

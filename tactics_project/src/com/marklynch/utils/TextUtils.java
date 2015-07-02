@@ -92,6 +92,7 @@ public class TextUtils {
 				float x = posX + offsetX;
 				TextureUtils.drawTexture((Texture) content, x, x + 20, posY,
 						posY + 20);
+				offsetX += 20;
 
 			} else if (content instanceof GameObject) {
 
