@@ -491,7 +491,7 @@ public class Actor extends GameObject {
 
 			// Defender current health
 			float defenderHealthPositionXInPixels = hoverFightPreviewPositionXInPixels
-					+ (Game.SQUARE_WIDTH / 2);
+					+ (Game.SQUARE_WIDTH);
 			float defenderCurrentHealthWidth = (Game.SQUARE_WIDTH / 2)
 					* (hoverFightPreviewDefender.remainingHealth / hoverFightPreviewDefender.totalHealth);
 			GL11.glBegin(GL11.GL_QUADS);
@@ -505,10 +505,39 @@ public class Actor extends GameObject {
 			GL11.glVertex2f(defenderHealthPositionXInPixels,
 					hoverFightPreviewPositionYInPixels);
 			GL11.glVertex2f(defenderHealthPositionXInPixels
-					+ defenderCurrentHealthWidth,
+					- defenderCurrentHealthWidth,
 					hoverFightPreviewPositionYInPixels);
 			GL11.glVertex2f(defenderHealthPositionXInPixels
-					+ defenderCurrentHealthWidth,
+					- defenderCurrentHealthWidth,
+					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+			GL11.glVertex2f(defenderHealthPositionXInPixels,
+					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+			GL11.glEnd();
+			GL11.glColor3f(1.0f, 1.0f, 1.0f);
+
+			// Defender potential health
+			float potentialDefenderHealth = hoverFightPreviewDefender.remainingHealth
+					- hoverFightPreviewFights.get(0).damageTakenByDefender;
+			if (potentialDefenderHealth < 0) {
+				potentialDefenderHealth = 0;
+			}
+			float defenderPotentialHealthWidth = (Game.SQUARE_WIDTH / 2)
+					* (potentialDefenderHealth / hoverFightPreviewDefender.totalHealth);
+			GL11.glBegin(GL11.GL_QUADS);
+			if (hoverFightPreviewDefender.faction == null) {
+				GL11.glColor4f(0.5f, 0.5f, 0.5f, 0.5f);
+			} else {
+				GL11.glColor4f(hoverFightPreviewDefender.faction.color.r,
+						hoverFightPreviewDefender.faction.color.g,
+						hoverFightPreviewDefender.faction.color.b, 0.5f);
+			}
+			GL11.glVertex2f(defenderHealthPositionXInPixels,
+					hoverFightPreviewPositionYInPixels);
+			GL11.glVertex2f(defenderHealthPositionXInPixels
+					- defenderPotentialHealthWidth,
+					hoverFightPreviewPositionYInPixels);
+			GL11.glVertex2f(defenderHealthPositionXInPixels
+					- defenderPotentialHealthWidth,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 			GL11.glVertex2f(defenderHealthPositionXInPixels,
 					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);

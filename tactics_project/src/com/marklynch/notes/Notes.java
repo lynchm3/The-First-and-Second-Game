@@ -1438,6 +1438,9 @@ public class Notes {
 	 * how neat the way travel progressed in Morrowind. Something along the
 	 * lines of “at the start of the game you had to take the bus like everyone
 	 * else, by the end of the game you could fly
+	 * 
+	 * Entirely controllable by mouse and/or keyboard and/or joypad. buttons
+	 * around the edge of the screen.
 	 */
 
 }
