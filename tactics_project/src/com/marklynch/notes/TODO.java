@@ -16,6 +16,10 @@ public class TODO {
 	// thin line between the different parts of the preview health (so 7ish
 	// lines in total)
 	// also... need textures rather than flat color probably
+	// Need to find a way to make the preview clearer, at the moment its just
+	// messy and confusing. Maybe lines. Or health bars only as big as a weapon
+	// symbol... Also, health bars need a bg (same as the normal health bars
+	// probably...
 
 	// Make a util to fill an area with a texture
 
