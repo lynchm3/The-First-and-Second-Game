@@ -384,11 +384,11 @@ public class Actor extends GameObject {
 						+ attackerPotentialRemainingHealthWidth;
 
 				// Attacker draw total health
-				// QuadUtils.drawQuad(new Color(this.faction.color.r,
-				// this.faction.color.g, this.faction.color.b, 0.5f),
-				// attackerTotalHealthX, attackerTotalHealthX
-				// + attackerTotalHealthWidth,
-				// previewPositionYs[i], previewPositionYs[i] + 28);
+				QuadUtils.drawQuad(new Color(this.faction.color.r,
+						this.faction.color.g, this.faction.color.b, 0.25f),
+						attackerTotalHealthX, attackerTotalHealthX
+								+ attackerTotalHealthWidth,
+						previewPositionYs[i], previewPositionYs[i] + 28);
 
 				// Attacker draw potential remaining health
 				QuadUtils.drawQuad(this.faction.color,
@@ -541,11 +541,10 @@ public class Actor extends GameObject {
 				}
 
 				// defender draw total health
-				// QuadUtils.drawQuad(new Color(color.r, color.g, color.b,
-				// 0.5f),
-				// defenderTotalHealthX, defenderTotalHealthX
-				// + defenderTotalHealthWidth,
-				// previewPositionYs[i], previewPositionYs[i] + 28);
+				QuadUtils.drawQuad(new Color(color.r, color.g, color.b, 0.25f),
+						defenderTotalHealthX, defenderTotalHealthX
+								+ defenderTotalHealthWidth,
+						previewPositionYs[i], previewPositionYs[i] + 28);
 
 				// defender remaining potential health
 				QuadUtils.drawQuad(color, defenderPotentialRemainingHealthX,

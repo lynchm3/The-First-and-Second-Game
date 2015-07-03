@@ -5,14 +5,13 @@ public class TODO {
 	// I think the things should empty from a different direction, dont like the
 	// middle. BUT... the text is getting hard to read :D
 
-	// Draw weapon, hit chance, damage x how many times they'll hit,
 	// advantage/disadvantage, whos gonna die (could put death symbol hanging
 	// off the edge, would make it more noticeable), special effects(sleep,
 	// confuse, poison etc.)
-	// Draw the weapon big I think, coz thats kind of the decider on what the
-	// preview is based on.
 
-	// fade out the other baddies when looking at preview
+	// fade out the other baddies when looking at preview, or hide them
+	// completely... or... i dunno... but its overlapping w/ weapon images on
+	// other enemies squares which is shite.
 
 	// use different colour than white for highlights, its confusing
 
