@@ -355,7 +355,7 @@ public class Actor extends GameObject {
 			float attackerPotentialHealthLossX = attackerPotentialRemainingHealthX
 					+ attackerPotentialRemainingHealthWidth;
 
-			// Attacker remaining potential health
+			// Attacker draw potential remaining health
 			QuadUtils.drawQuad(this.faction.color,
 					attackerPotentialRemainingHealthX,
 					attackerPotentialRemainingHealthX
@@ -370,7 +370,7 @@ public class Actor extends GameObject {
 				alpha = (2000 - alpha) / 1000;
 			}
 
-			// Attacker potential health loss
+			// Attacker draw potential health loss
 			QuadUtils.drawQuad(new Color(this.faction.color.r,
 					this.faction.color.g, this.faction.color.b, alpha),
 					attackerPotentialHealthLossX, attackerPotentialHealthLossX
@@ -378,7 +378,29 @@ public class Actor extends GameObject {
 					hoverFightPreviewPositionYInPixels + 50,
 					hoverFightPreviewPositionYInPixels + 78);
 
-			// Widths of bars
+			// Attacker line 1
+			QuadUtils.drawQuad(Color.white, attackerPotentialRemainingHealthX,
+					attackerPotentialRemainingHealthX + 1,
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
+
+			// Attacker line 2
+			QuadUtils.drawQuad(Color.white, attackerPotentialRemainingHealthX
+					+ attackerPotentialRemainingHealthWidth,
+					attackerPotentialRemainingHealthX
+							+ attackerPotentialRemainingHealthWidth + 1,
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
+
+			// Attacker line 3
+			QuadUtils.drawQuad(Color.white, attackerPotentialHealthLossX
+					+ attackerPotentialHealthLossWidth,
+					attackerPotentialHealthLossX
+							+ attackerPotentialHealthLossWidth + 1,
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
+
+			// Defender Widths of bars
 
 			float defenderCurrentHealthWidth = ((Game.SQUARE_WIDTH + 20) / 2)
 					* (this.hoverFightPreviewDefender.remainingHealth / this.hoverFightPreviewDefender.totalHealth);
@@ -392,7 +414,7 @@ public class Actor extends GameObject {
 			float defenderCurrentMissingHealthWidth = ((Game.SQUARE_WIDTH + 20) / 2)
 					* ((this.hoverFightPreviewDefender.totalHealth - this.hoverFightPreviewDefender.remainingHealth) / this.hoverFightPreviewDefender.totalHealth);
 
-			// Positions of bars
+			// Defender Positions of bars
 			float defenderTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2f;
 
@@ -409,20 +431,42 @@ public class Actor extends GameObject {
 			if (this.hoverFightPreviewDefender.faction != null) {
 				color = this.hoverFightPreviewDefender.faction.color;
 			} else {
-				color = new Color(0.5f, 0.5f, 0.5f);
+				color = new Color(0.25f, 0.25f, 0.25f);
 			}
 
-			// Attacker remaining potential health
+			// defender remaining potential health
 			QuadUtils.drawQuad(color, defenderPotentialRemainingHealthX,
 					defenderPotentialRemainingHealthX
 							+ defenderPotentialRemainingHealthWidth,
 					hoverFightPreviewPositionYInPixels + 50,
 					hoverFightPreviewPositionYInPixels + 78);
 
-			// Attacker potential health loss
+			// defender potential health loss
 			QuadUtils.drawQuad(new Color(color.r, color.g, color.b, alpha),
 					defenderPotentialHealthLossX, defenderPotentialHealthLossX
 							+ defenderPotentialHealthLossWidth,
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
+
+			// defender line 1
+			QuadUtils.drawQuad(Color.white, defenderPotentialHealthLossX,
+					defenderPotentialHealthLossX + 1,
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
+
+			// defender line 2
+			QuadUtils.drawQuad(Color.white, defenderPotentialRemainingHealthX
+					+ defenderPotentialRemainingHealthWidth,
+					defenderPotentialRemainingHealthX
+							+ defenderPotentialRemainingHealthWidth + 1,
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
+
+			// defender line 3
+			QuadUtils.drawQuad(Color.white, defenderPotentialHealthLossX
+					+ defenderPotentialHealthLossWidth,
+					defenderPotentialHealthLossX
+							+ defenderPotentialHealthLossWidth + 1,
 					hoverFightPreviewPositionYInPixels + 50,
 					hoverFightPreviewPositionYInPixels + 78);
 
