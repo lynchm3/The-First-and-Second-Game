@@ -649,30 +649,30 @@ public class Actor extends GameObject {
 										previewPositionYs[i] - 2,
 										previewPositionYs[i] + 30);
 					}
-
-					// Defender skull symbol
-					if (hoverFightPreviewFights.get(i).damageTakenByDefender >= hoverFightPreviewFights
-							.get(i).defender.remainingHealth) {
-						TextureUtils
-								.drawTexture(
-										skullTexture,
-										this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-												* (Game.SQUARE_WIDTH)
-												+ (Game.SQUARE_WIDTH) + 16,
-										this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-												* (Game.SQUARE_WIDTH)
-												+ (Game.SQUARE_WIDTH) + 48,
-										previewPositionYs[i] - 2,
-										previewPositionYs[i] + 30);
-					}
-
-					// line down the middle
-					float linePositionX = hoverFightPreviewPositionXInPixels
-							+ Game.SQUARE_WIDTH / 2f - 0.5f;
-					QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 1.0f),
-							linePositionX, linePositionX + 1,
-							previewPositionYs[i], previewPositionYs[i] + 28);
 				}
+
+				// Defender skull symbol
+				if (hoverFightPreviewFights.get(i).damageTakenByDefender >= hoverFightPreviewFights
+						.get(i).defender.remainingHealth) {
+					TextureUtils
+							.drawTexture(
+									skullTexture,
+									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH)
+											+ (Game.SQUARE_WIDTH) + 16,
+									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH)
+											+ (Game.SQUARE_WIDTH) + 48,
+									previewPositionYs[i] - 2,
+									previewPositionYs[i] + 30);
+				}
+
+				// line down the middle
+				float linePositionX = hoverFightPreviewPositionXInPixels
+						+ Game.SQUARE_WIDTH / 2f - 0.5f;
+				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 1.0f),
+						linePositionX, linePositionX + 1, previewPositionYs[i],
+						previewPositionYs[i] + 28);
 
 			}
 
