@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// DONE
+	// Drawing total health bar underneath on fight preview
+	//
+
 	// work out what bits i fucked up by looking at old screen grabs
 	// Replace the VS w/ FIGHT, move the VS TO THE MIDDLE
 	// Also, could use HEAL, FIGHT, PUSH...
