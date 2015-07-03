@@ -480,15 +480,20 @@ public class Actor extends GameObject {
 										+ "%", Color.black);
 
 				// attacker damage
-				level.font12
-						.drawString(
-								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-										* (Game.SQUARE_WIDTH),
-								previewPositionYs[i] + 14,
-								FormattingUtils
-										.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
-												.get(i).damageTakenByDefender),
-								Color.black);
+				String attackerDamageString = FormattingUtils
+						.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
+								.get(i).damageTakenByDefender)
+						+ "×"
+						+ FormattingUtils
+								.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
+										.get(i).damageTakenByDefenderMultiplier);
+
+				level.font12.drawString(
+						this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+								* (Game.SQUARE_WIDTH),
+						previewPositionYs[i] + 14, attackerDamageString,
+						Color.black);
+
 				// attacker weapon
 				TextureUtils
 						.drawTexture(
@@ -595,54 +600,63 @@ public class Actor extends GameObject {
 								+ defenderPotentialHealthLossWidth + 1,
 						previewPositionYs[i], previewPositionYs[i] + 28);
 
-				// line down the middle
-				float linePositionX = hoverFightPreviewPositionXInPixels
-						+ Game.SQUARE_WIDTH / 2f - 0.5f;
-				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 1.0f),
-						linePositionX, linePositionX + 1, previewPositionYs[i],
-						previewPositionYs[i] + 28);
+				if (this.hoverFightPreviewFights.get(i).defenderWeapon == null) {
 
-				// defender hit chance
-				level.font12
-						.drawString(
-								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-										* (Game.SQUARE_WIDTH)
-										+ (Game.SQUARE_WIDTH)
-										- level.font12.getWidth(this.hoverFightPreviewFights
-												.get(i).chanceOfHittingAttacker
-												+ "%"),
-								previewPositionYs[i],
-								this.hoverFightPreviewFights.get(i).chanceOfHittingAttacker
-										+ "%", Color.black);
+				} else {
 
-				// defender damage
-				level.font12
-						.drawString(
-								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-										* (Game.SQUARE_WIDTH)
-										+ (Game.SQUARE_WIDTH)
-										- level.font12
-												.getWidth(FormattingUtils
-														.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
-																.get(i).damageTakenByAttacker)),
-								previewPositionYs[i] + 14,
-								FormattingUtils
-										.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
-												.get(i).damageTakenByAttacker),
-								Color.black);
-				// defender weapon
-				if (this.hoverFightPreviewFights.get(i).defenderWeapon != null) {
-					TextureUtils
-							.drawTexture(
-									this.hoverFightPreviewFights.get(i).defenderWeapon.imageTexture,
+					// defender hit chance
+					level.font12
+							.drawString(
 									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 											* (Game.SQUARE_WIDTH)
-											+ (Game.SQUARE_WIDTH),
+											+ (Game.SQUARE_WIDTH)
+											- level.font12.getWidth(this.hoverFightPreviewFights
+													.get(i).chanceOfHittingAttacker
+													+ "%"),
+									previewPositionYs[i],
+									this.hoverFightPreviewFights.get(i).chanceOfHittingAttacker
+											+ "%", Color.black);
+
+					// defender damage
+					String defenderDamageString = FormattingUtils
+							.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
+									.get(i).damageTakenByAttacker)
+							+ "×"
+							+ FormattingUtils
+									.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
+											.get(i).damageTakenByAttackerMultiplier);
+
+					level.font12
+							.drawString(
 									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 											* (Game.SQUARE_WIDTH)
-											+ (Game.SQUARE_WIDTH) + 32,
-									previewPositionYs[i] - 2,
-									previewPositionYs[i] + 30);
+											+ (Game.SQUARE_WIDTH)
+											- level.font12
+													.getWidth(defenderDamageString),
+									previewPositionYs[i] + 14,
+									defenderDamageString, Color.black);
+
+					// defender weapon
+					if (this.hoverFightPreviewFights.get(i).defenderWeapon != null) {
+						TextureUtils
+								.drawTexture(
+										this.hoverFightPreviewFights.get(i).defenderWeapon.imageTexture,
+										this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+												* (Game.SQUARE_WIDTH)
+												+ (Game.SQUARE_WIDTH),
+										this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+												* (Game.SQUARE_WIDTH)
+												+ (Game.SQUARE_WIDTH) + 32,
+										previewPositionYs[i] - 2,
+										previewPositionYs[i] + 30);
+					}
+
+					// line down the middle
+					float linePositionX = hoverFightPreviewPositionXInPixels
+							+ Game.SQUARE_WIDTH / 2f - 0.5f;
+					QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 1.0f),
+							linePositionX, linePositionX + 1,
+							previewPositionYs[i], previewPositionYs[i] + 28);
 				}
 
 				// Defender skull symbol

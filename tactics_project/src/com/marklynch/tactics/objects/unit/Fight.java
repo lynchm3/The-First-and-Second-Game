@@ -15,6 +15,9 @@ public class Fight {
 	public float damageTakenByAttacker;
 	public float damageTakenByDefender;
 
+	public float damageTakenByAttackerMultiplier;
+	public float damageTakenByDefenderMultiplier;
+
 	public int chanceOfHittingAttacker;
 	public int chanceOfHittingDefender;
 
@@ -49,6 +52,8 @@ public class Fight {
 																	// this here
 		}
 
+		damageTakenByAttackerMultiplier = 1;
+		damageTakenByDefenderMultiplier = 1;
 		chanceOfHittingAttacker = 99;
 		chanceOfHittingDefender = 99;
 	}
