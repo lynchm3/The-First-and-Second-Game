@@ -11,6 +11,7 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.FormattingUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -477,6 +478,17 @@ public class Actor extends GameObject {
 								previewPositionYs[i],
 								this.hoverFightPreviewFights.get(i).chanceOfHittingDefender
 										+ "%", Color.black);
+
+				// attacker damage
+				level.font12
+						.drawString(
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+										* (Game.SQUARE_WIDTH),
+								previewPositionYs[i] + 14,
+								FormattingUtils
+										.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
+												.get(i).damageTakenByDefender),
+								Color.black);
 				// attacker weapon
 				TextureUtils
 						.drawTexture(
@@ -602,6 +614,22 @@ public class Actor extends GameObject {
 								previewPositionYs[i],
 								this.hoverFightPreviewFights.get(i).chanceOfHittingAttacker
 										+ "%", Color.black);
+
+				// defender damage
+				level.font12
+						.drawString(
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+										* (Game.SQUARE_WIDTH)
+										+ (Game.SQUARE_WIDTH)
+										- level.font12
+												.getWidth(FormattingUtils
+														.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
+																.get(i).damageTakenByAttacker)),
+								previewPositionYs[i] + 14,
+								FormattingUtils
+										.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
+												.get(i).damageTakenByAttacker),
+								Color.black);
 				// defender weapon
 				if (this.hoverFightPreviewFights.get(i).defenderWeapon != null) {
 					TextureUtils

@@ -9,7 +9,14 @@ public class TODO {
 	// Draw the weapon big I think, coz thats kind of the decider on what the
 	// preview is based on.
 
+	// fade out the other baddies when looking at preview
+
+	// use different colour than white for highlights, its confusing
+
 	// skull should flash
+
+	// blocked symbol if they have no weapon to attack with, or maybe leave it
+	// as nothing?
 
 	// make a single item for all these reused colors, WAY too many calls to new
 	// color
