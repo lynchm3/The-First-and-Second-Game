@@ -215,13 +215,8 @@ public class Actor extends GameObject {
 					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
 					weaponAreaPositionYInPixels + 1,
 					weaponAreaPositionYInPixels + healthBarHeightInPixels - 1);
-		}
-		super.draw();
-		if (level.activeActor != null
-				&& level.activeActor.showHoverFightPreview
-				&& level.activeActor.hoverFightPreviewDefender == this) {
 
-		} else {
+			super.draw();
 			// draw weapon icons on square
 			float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
 			float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
@@ -252,46 +247,50 @@ public class Actor extends GameObject {
 								+ weaponWidthInPixels, weaponPositionYInPixels,
 						weaponPositionYInPixels + weaponHeightInPixels);
 			}
-		}
 
-		// Draw actor level text
-		String actorLevelString = "LVL" + this.actorLevel;
-		float actorLevelWidthInPixels = level.font12.getWidth(actorLevelString);
-		float actorLevelPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
-				+ Game.SQUARE_WIDTH
-				- actorLevelWidthInPixels
-				- Game.SQUARE_WIDTH / 5;
-		float actorLevelPositionYInPixels = this.squareGameObjectIsOn.y
-				* (int) Game.SQUARE_HEIGHT;
+			// Draw actor level text
+			String actorLevelString = "LVL" + this.actorLevel;
+			float actorLevelWidthInPixels = level.font12
+					.getWidth(actorLevelString);
+			float actorLevelPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+					+ Game.SQUARE_WIDTH
+					- actorLevelWidthInPixels
+					- Game.SQUARE_WIDTH / 5;
+			float actorLevelPositionYInPixels = this.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT;
 
-		level.font12.drawString(actorLevelPositionXInPixels,
-				actorLevelPositionYInPixels, actorLevelString, Color.black);
+			level.font12.drawString(actorLevelPositionXInPixels,
+					actorLevelPositionYInPixels, actorLevelString, Color.black);
 
-		// draw indicators of whether you can move and/or attack
-		float moveAttackStatusWidthInPixels = level.font12.getWidth("MA");// Game.SQUARE_WIDTH
-		float attackStatusWidthInPixels = level.font12.getWidth("A");// Game.SQUARE_WIDTH
+			// draw indicators of whether you can move and/or attack
+			float moveAttackStatusWidthInPixels = level.font12.getWidth("MA");// Game.SQUARE_WIDTH
+			float attackStatusWidthInPixels = level.font12.getWidth("A");// Game.SQUARE_WIDTH
 
-		float moveAttackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
-				+ Game.SQUARE_WIDTH
-				- moveAttackStatusWidthInPixels
-				- Game.SQUARE_WIDTH / 5;
-		float attackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
-				+ Game.SQUARE_WIDTH
-				- attackStatusWidthInPixels
-				- Game.SQUARE_WIDTH / 5;
-		float moveAttackStatusPositionYInPixels = this.squareGameObjectIsOn.y
-				* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT - 14;
+			float moveAttackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+					+ Game.SQUARE_WIDTH
+					- moveAttackStatusWidthInPixels
+					- Game.SQUARE_WIDTH / 5;
+			float attackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+					+ Game.SQUARE_WIDTH
+					- attackStatusWidthInPixels
+					- Game.SQUARE_WIDTH / 5;
+			float moveAttackStatusPositionYInPixels = this.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT - 14;
 
-		if (hasAttackedThisTurn == false) {
-			if (this.distanceMovedThisTurn < this.travelDistance) {
-				level.font12.drawString(moveAttackStatusPositionXInPixels,
-						moveAttackStatusPositionYInPixels, "MA", Color.black);
-			} else {
-				level.font12.drawString(attackStatusPositionXInPixels,
-						moveAttackStatusPositionYInPixels, "A", Color.black);
+			if (hasAttackedThisTurn == false) {
+				if (this.distanceMovedThisTurn < this.travelDistance) {
+					level.font12.drawString(moveAttackStatusPositionXInPixels,
+							moveAttackStatusPositionYInPixels, "MA",
+							Color.black);
+				} else {
+					level.font12
+							.drawString(attackStatusPositionXInPixels,
+									moveAttackStatusPositionYInPixels, "A",
+									Color.black);
+				}
 			}
+			GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		}
-		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
 	@Override
@@ -306,62 +305,8 @@ public class Actor extends GameObject {
 			float hoverFightPreviewPositionYInPixels = hoverFightPreviewDefender.squareGameObjectIsOn.y
 					* (int) Game.SQUARE_HEIGHT;
 
-			Object[][] tableContents = new Object[hoverFightPreviewFights
-					.size()][4];
-			// tableContents[0][0] = "Rng";
-			// tableContents[0][1] = "Wpn";
-			// tableContents[0][2] = "Dmg";
-			// tableContents[0][3] = "Wpn";
-			// tableContents[0][4] = "Dmg";
-
-			for (int i = 0; i < hoverFightPreviewFights.size(); i++) {
-
-				if (hoverFightPreviewFights.get(i).attackerWeapon != null
-						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
-
-					// tableContents[i][0] = ""
-					// + hoverFightPreviewFights.get(i).range;
-					tableContents[i][0] = hoverFightPreviewFights.get(i).attackerWeapon.imageTexture;
-					tableContents[i][1] = ""
-							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
-					tableContents[i][2] = hoverFightPreviewFights.get(i).defenderWeapon.imageTexture;
-					tableContents[i][3] = ""
-							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
-				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
-						&& hoverFightPreviewFights.get(i).defenderWeapon != null) {
-
-					// tableContents[i][0] = ""
-					// + hoverFightPreviewFights.get(i).range;
-					tableContents[i][0] = "";
-					tableContents[i][1] = "";
-					tableContents[i][2] = hoverFightPreviewFights.get(i).defenderWeapon.imageTexture;
-					tableContents[i][3] = ""
-							+ hoverFightPreviewFights.get(i).defenderWeapon.damage;
-				} else if (hoverFightPreviewFights.get(i).attackerWeapon != null
-						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
-
-					// tableContents[i][0] = ""
-					// + hoverFightPreviewFights.get(i).range;
-					tableContents[i][0] = hoverFightPreviewFights.get(i).attackerWeapon.imageTexture;
-					tableContents[i][1] = ""
-							+ hoverFightPreviewFights.get(i).attackerWeapon.damage;
-					tableContents[i][2] = "";
-					tableContents[i][3] = "";
-				} else if (hoverFightPreviewFights.get(i).attackerWeapon == null
-						&& hoverFightPreviewFights.get(i).defenderWeapon == null) {
-
-					// tableContents[i][0] = ""
-					// + hoverFightPreviewFights.get(i).range;
-					tableContents[i][0] = "";
-					tableContents[i][1] = "";
-					tableContents[i][2] = "";
-					tableContents[i][3] = "";
-				}
-
-			}
-
 			// BG white
-			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 1.0f),
+			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
 					hoverFightPreviewPositionXInPixels,
 					hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
 					hoverFightPreviewPositionYInPixels,
@@ -389,12 +334,11 @@ public class Actor extends GameObject {
 			// hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 
 			// Attacker Widths of bars
-			float attackerTotalHealthWidth = Game.SQUARE_WIDTH / 2;
 
-			float attackerCurrentHealthWidth = (Game.SQUARE_WIDTH / 2)
+			float attackerCurrentHealthWidth = ((Game.SQUARE_WIDTH + 20) / 2)
 					* (this.remainingHealth / totalHealth);
 
-			float attackerPotentialHealthLossWidth = (Game.SQUARE_WIDTH / 2)
+			float attackerPotentialHealthLossWidth = ((Game.SQUARE_WIDTH + 20) / 2)
 					* (hoverFightPreviewFights.get(0).damageTakenByAttacker / totalHealth);
 
 			float attackerPotentialRemainingHealthWidth = attackerCurrentHealthWidth
@@ -402,7 +346,7 @@ public class Actor extends GameObject {
 
 			// Attacker Positions of bars
 			float attackerTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-					* Game.SQUARE_WIDTH;
+					* (Game.SQUARE_WIDTH) - 10;
 
 			float attackerCurrentHealthX = attackerTotalHealthX;
 
@@ -416,8 +360,8 @@ public class Actor extends GameObject {
 					attackerPotentialRemainingHealthX,
 					attackerPotentialRemainingHealthX
 							+ attackerPotentialRemainingHealthWidth,
-					hoverFightPreviewPositionYInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
 
 			float alpha = Game.getTime() % 2000f;
 			if (alpha <= 1000) {
@@ -431,31 +375,35 @@ public class Actor extends GameObject {
 					this.faction.color.g, this.faction.color.b, alpha),
 					attackerPotentialHealthLossX, attackerPotentialHealthLossX
 							+ attackerPotentialHealthLossWidth,
-					hoverFightPreviewPositionYInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
 
 			// Widths of bars
-			float defenderTotalHealthWidth = Game.SQUARE_WIDTH / 2;
 
-			float defenderCurrentHealthWidth = (Game.SQUARE_WIDTH / 2)
-					* (this.hoverFightPreviewDefender.remainingHealth / totalHealth);
+			float defenderCurrentHealthWidth = ((Game.SQUARE_WIDTH + 20) / 2)
+					* (this.hoverFightPreviewDefender.remainingHealth / this.hoverFightPreviewDefender.totalHealth);
 
-			float defenderPotentialHealthLossWidth = (Game.SQUARE_WIDTH / 2)
-					* (hoverFightPreviewFights.get(0).damageTakenByDefender / totalHealth);
+			float defenderPotentialHealthLossWidth = ((Game.SQUARE_WIDTH + 20) / 2)
+					* (hoverFightPreviewFights.get(0).damageTakenByDefender / this.hoverFightPreviewDefender.totalHealth);
 
 			float defenderPotentialRemainingHealthWidth = defenderCurrentHealthWidth
 					- defenderPotentialHealthLossWidth;
+
+			float defenderCurrentMissingHealthWidth = ((Game.SQUARE_WIDTH + 20) / 2)
+					* ((this.hoverFightPreviewDefender.totalHealth - this.hoverFightPreviewDefender.remainingHealth) / this.hoverFightPreviewDefender.totalHealth);
 
 			// Positions of bars
 			float defenderTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2f;
 
-			float defenderCurrentHealthX = defenderTotalHealthX;
+			float defenderCurrentHealthX = defenderTotalHealthX
+					+ defenderCurrentMissingHealthWidth;
 
-			float defenderPotentialRemainingHealthX = defenderCurrentHealthX;
+			float defenderPotentialRemainingHealthX = defenderCurrentHealthX
+					+ defenderPotentialHealthLossWidth;
 
-			float defenderPotentialHealthLossX = defenderPotentialRemainingHealthX
-					+ defenderPotentialRemainingHealthWidth;
+			float defenderPotentialHealthLossX = defenderTotalHealthX
+					+ defenderCurrentMissingHealthWidth;
 
 			Color color = null;
 			if (this.hoverFightPreviewDefender.faction != null) {
@@ -468,23 +416,23 @@ public class Actor extends GameObject {
 			QuadUtils.drawQuad(color, defenderPotentialRemainingHealthX,
 					defenderPotentialRemainingHealthX
 							+ defenderPotentialRemainingHealthWidth,
-					hoverFightPreviewPositionYInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
 
 			// Attacker potential health loss
 			QuadUtils.drawQuad(new Color(color.r, color.g, color.b, alpha),
 					defenderPotentialHealthLossX, defenderPotentialHealthLossX
 							+ defenderPotentialHealthLossWidth,
-					hoverFightPreviewPositionYInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
 
 			// line down the middle
 			float linePositionX = hoverFightPreviewPositionXInPixels
 					+ Game.SQUARE_WIDTH / 2f - 0.5f;
 			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 1.0f),
 					linePositionX, linePositionX + 1,
-					hoverFightPreviewPositionYInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+					hoverFightPreviewPositionYInPixels + 50,
+					hoverFightPreviewPositionYInPixels + 78);
 
 			// TextUtils.printTable(tableContents,
 			// hoverFightPreviewPositionXInPixels,
