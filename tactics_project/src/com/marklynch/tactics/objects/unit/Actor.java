@@ -505,6 +505,21 @@ public class Actor extends GameObject {
 								previewPositionYs[i] - 2,
 								previewPositionYs[i] + 30);
 
+				// Attacker skull symbol
+				if (hoverFightPreviewFights.get(i).damageTakenByAttacker >= hoverFightPreviewFights
+						.get(i).attacker.remainingHealth) {
+					TextureUtils
+							.drawTexture(
+									skullTexture,
+									attackerHealthLossAlpha,
+									hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH) - 48,
+									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH) - 16,
+									previewPositionYs[i] - 2,
+									previewPositionYs[i] + 30);
+				}
+
 				// Defender Widths of bars
 				float defenderTotalHealthWidth = ((Game.SQUARE_WIDTH + 20) / 2);
 
@@ -657,7 +672,8 @@ public class Actor extends GameObject {
 					TextureUtils
 							.drawTexture(
 									skullTexture,
-									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+									defenderHealthLossAlpha,
+									hoverFightPreviewDefender.squareGameObjectIsOn.x
 											* (Game.SQUARE_WIDTH)
 											+ (Game.SQUARE_WIDTH) + 16,
 									this.hoverFightPreviewDefender.squareGameObjectIsOn.x

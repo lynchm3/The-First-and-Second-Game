@@ -2,7 +2,12 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// advantage/disadvantage (goes on top of weapon), whos gonna die (could put
+	// Skull for attacker
+
+	// i think the skull needs to be on the health bar? maybe? see how it looks?
+
+	// advantage/disadvantage (goes on top of weapon, tick VS X), whos gonna die
+	// (could put
 	// death symbol hanging
 	// off the edge, would make it more noticeable), special effects(sleep,
 	// confuse, poison etc.)
