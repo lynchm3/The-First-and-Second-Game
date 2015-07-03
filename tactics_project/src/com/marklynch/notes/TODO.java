@@ -1,18 +1,12 @@
 package com.marklynch.notes;
 
 public class TODO {
-	// Replace the VS w/ FIGHT, move the VS TO THE MIDDLE
-	// Also, could use HEAL, FIGHT, PUSH...
+
 	// make a single item for all these reused colors, WAY too many calls to new
 	// color
 	// dialog has a weird drawing thing...
 	// SOmething clever where the health bar pulls back to reveal a skull or
 	// something :P
-	// Should the bars face the same way... or comeout from the middle?
-	// sometimes pass outside the bounds of the square?
-	// Some bits need to pass outside thebounds of the square
-	// thin line between the different parts of the preview health (so 7ish
-	// lines in total)
 	// also... need textures rather than flat color probably
 
 	// see if theres a way to force the white lines to draw even when they're

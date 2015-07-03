@@ -43,6 +43,7 @@ public class GameObject {
 	public Texture powTexture = null;
 	public Texture vsTexture = null;
 	public Texture fightTexture = null;
+	public Texture skullTexture = null;
 
 	// paths
 	public HashMap<Square, Path> paths = new HashMap<Square, Path>();
@@ -69,6 +70,7 @@ public class GameObject {
 		this.powTexture = getGlobalImage("pow.png");
 		this.vsTexture = getGlobalImage("vs.png");
 		this.fightTexture = getGlobalImage("fight.png");
+		this.skullTexture = getGlobalImage("skull.png");
 		this.squareGameObjectIsOn = squareGameObjectIsOn;
 		this.squareGameObjectIsOn.gameObject = this;
 		this.weapons = weapons;

@@ -1441,6 +1441,9 @@ public class Notes {
 	 * 
 	 * Entirely controllable by mouse and/or keyboard and/or joypad. buttons
 	 * around the edge of the screen.
+	 * 
+	 * 
+	 * FIGHT fist icon - could also use HEAL, FIGHT, PUSH...
 	 */
 
 }
