@@ -2,12 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// I think the things should empty from a different direction, dont like the
-	// middle. BUT... the text is getting hard to read :D
-
-	// advantage/disadvantage, whos gonna die (could put death symbol hanging
+	// advantage/disadvantage (goes on top of weapon), whos gonna die (could put
+	// death symbol hanging
 	// off the edge, would make it more noticeable), special effects(sleep,
 	// confuse, poison etc.)
+
+	// I think the things should empty from a different direction, dont like the
+	// middle. BUT... the text is getting hard to read :D
 
 	// fade out the other baddies when looking at preview, or hide them
 	// completely... or... i dunno... but its overlapping w/ weapon images on
