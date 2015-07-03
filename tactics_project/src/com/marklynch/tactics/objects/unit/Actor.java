@@ -547,6 +547,17 @@ public class Actor extends GameObject {
 					hoverFightPreviewPositionYInPixels + 50,
 					hoverFightPreviewPositionYInPixels + 78);
 
+			// fight symbol
+			TextureUtils.drawTexture(fightTexture,
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+							* (Game.SQUARE_WIDTH) - 10,
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+							* (Game.SQUARE_WIDTH) + 22,
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.y
+							* (Game.SQUARE_HEIGHT) - 10,
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.y
+							* (Game.SQUARE_HEIGHT) + 22);
+
 			// TextUtils.printTable(tableContents,
 			// hoverFightPreviewPositionXInPixels,
 			// hoverFightPreviewPositionYInPixels, 20f, level);

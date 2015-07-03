@@ -1,12 +1,6 @@
 package com.marklynch.notes;
 
 public class TODO {
-
-	// DONE
-	// Drawing total health bar underneath on fight preview
-	//
-
-	// work out what bits i fucked up by looking at old screen grabs
 	// Replace the VS w/ FIGHT, move the VS TO THE MIDDLE
 	// Also, could use HEAL, FIGHT, PUSH...
 	// make a single item for all these reused colors, WAY too many calls to new
@@ -20,6 +14,11 @@ public class TODO {
 	// thin line between the different parts of the preview health (so 7ish
 	// lines in total)
 	// also... need textures rather than flat color probably
+
+	// see if theres a way to force the white lines to draw even when they're
+	// tiny, maybe if i draw lines rather than quads?
+
+	// make the white lines translucent? that might look better
 
 	// Make a util to fill an area with a texture
 
