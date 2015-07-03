@@ -15,6 +15,9 @@ public class Fight {
 	public float damageTakenByAttacker;
 	public float damageTakenByDefender;
 
+	public int chanceOfHittingAttacker;
+	public int chanceOfHittingDefender;
+
 	public Fight(Actor attacker, Weapon attackerWeapon, GameObject target,
 			Weapon defenderWeapon, float range) {
 		this.attacker = attacker;
@@ -45,6 +48,9 @@ public class Fight {
 																	// limit
 																	// this here
 		}
+
+		chanceOfHittingAttacker = 99;
+		chanceOfHittingDefender = 99;
 	}
 
 	// Order by battles by

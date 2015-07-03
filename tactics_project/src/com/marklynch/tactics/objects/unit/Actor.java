@@ -445,17 +445,48 @@ public class Actor extends GameObject {
 						previewPositionYs[i], previewPositionYs[i] + 28);
 
 				// attacker skull symbol
-				if (hoverFightPreviewFights.get(i).damageTakenByAttacker >= this.remainingHealth) {
-					TextureUtils
-							.drawTexture(
-									skullTexture,
-									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-											* (Game.SQUARE_WIDTH) - 32,
-									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-											* (Game.SQUARE_WIDTH),
-									previewPositionYs[i] - 2,
-									previewPositionYs[i] + 30);
-				}
+				// if (hoverFightPreviewFights.get(i).damageTakenByAttacker >=
+				// this.remainingHealth) {
+				// TextureUtils
+				// .drawTexture(
+				// skullTexture,
+				// this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+				// * (Game.SQUARE_WIDTH) - 32,
+				// this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+				// * (Game.SQUARE_WIDTH),
+				// previewPositionYs[i] - 2,
+				// previewPositionYs[i] + 30);
+				// }
+
+				// attacker weapon
+				TextureUtils
+						.drawTexture(
+								this.hoverFightPreviewFights.get(i).attackerWeapon.imageTexture,
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+										* (Game.SQUARE_WIDTH) - 32,
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+										* (Game.SQUARE_WIDTH),
+								previewPositionYs[i] - 2,
+								previewPositionYs[i] + 30);
+
+				// attacker hit chance
+				level.font12
+						.drawString(
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+										* (Game.SQUARE_WIDTH),
+								previewPositionYs[i],
+								this.hoverFightPreviewFights.get(i).chanceOfHittingDefender
+										+ "%", Color.black);
+				// attacker weapon
+				TextureUtils
+						.drawTexture(
+								this.hoverFightPreviewFights.get(i).attackerWeapon.imageTexture,
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+										* (Game.SQUARE_WIDTH) - 32,
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+										* (Game.SQUARE_WIDTH),
+								previewPositionYs[i] - 2,
+								previewPositionYs[i] + 30);
 
 				// Defender Widths of bars
 				float defenderTotalHealthWidth = ((Game.SQUARE_WIDTH + 20) / 2);
@@ -559,12 +590,23 @@ public class Actor extends GameObject {
 						linePositionX, linePositionX + 1, previewPositionYs[i],
 						previewPositionYs[i] + 28);
 
-				// Defender skull symbol
-				if (hoverFightPreviewFights.get(i).damageTakenByDefender >= hoverFightPreviewFights
-						.get(i).defender.remainingHealth) {
+				// defender hit chance
+				level.font12
+						.drawString(
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+										* (Game.SQUARE_WIDTH)
+										+ (Game.SQUARE_WIDTH)
+										- level.font12.getWidth(this.hoverFightPreviewFights
+												.get(i).chanceOfHittingAttacker
+												+ "%"),
+								previewPositionYs[i],
+								this.hoverFightPreviewFights.get(i).chanceOfHittingAttacker
+										+ "%", Color.black);
+				// defender weapon
+				if (this.hoverFightPreviewFights.get(i).defenderWeapon != null) {
 					TextureUtils
 							.drawTexture(
-									skullTexture,
+									this.hoverFightPreviewFights.get(i).defenderWeapon.imageTexture,
 									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 											* (Game.SQUARE_WIDTH)
 											+ (Game.SQUARE_WIDTH),
@@ -575,18 +617,41 @@ public class Actor extends GameObject {
 									previewPositionYs[i] + 30);
 				}
 
+				// Defender skull symbol
+				// if (hoverFightPreviewFights.get(i).damageTakenByDefender >=
+				// hoverFightPreviewFights
+				// .get(i).defender.remainingHealth) {
+				// TextureUtils
+				// .drawTexture(
+				// skullTexture,
+				// this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+				// * (Game.SQUARE_WIDTH)
+				// + (Game.SQUARE_WIDTH),
+				// this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+				// * (Game.SQUARE_WIDTH)
+				// + (Game.SQUARE_WIDTH) + 32,
+				// previewPositionYs[i] - 2,
+				// previewPositionYs[i] + 30);
+				// }
+
 			}
 
 			// fight symbol
-			TextureUtils.drawTexture(fightTexture,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-							* (Game.SQUARE_WIDTH) - 10,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.x
-							* (Game.SQUARE_WIDTH) + 22,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.y
-							* (Game.SQUARE_HEIGHT) - 10,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.y
-							* (Game.SQUARE_HEIGHT) + 22);
+			TextureUtils
+					.drawTexture(
+							fightTexture,
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+									* (Game.SQUARE_WIDTH)
+									+ Game.SQUARE_WIDTH
+									/ 2f - 16,
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+									* (Game.SQUARE_WIDTH)
+									+ Game.SQUARE_WIDTH
+									/ 2f + 16,
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.y
+									* (Game.SQUARE_HEIGHT) - 40,
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.y
+									* (Game.SQUARE_HEIGHT) - 8);
 
 			// TextUtils.printTable(tableContents,
 			// hoverFightPreviewPositionXInPixels,

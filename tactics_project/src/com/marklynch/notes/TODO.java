@@ -2,6 +2,15 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Draw weapon, hit chance, damage x how many times they'll hit,
+	// advantage/disadvantage, whos gonna die (could put death symbol hanging
+	// off the edge, would make it more noticeable), special effects(sleep,
+	// confuse, poison etc.)
+	// Draw the weapon big I think, coz thats kind of the decider on what the
+	// preview is based on.
+
+	// skull should flash
+
 	// make a single item for all these reused colors, WAY too many calls to new
 	// color
 	// dialog has a weird drawing thing...
