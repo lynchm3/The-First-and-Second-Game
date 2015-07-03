@@ -85,9 +85,13 @@ public class Level {
 		// Goody weapons
 		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
 		Weapon weapon1ForActor0 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
+		Weapon weapon2ForActor0 = new Weapon("a5r3", 5, 3, 3, "a2r2.png");
+		// Weapon weapon3ForActor0 = new Weapon("a5r3", 5, 3, 3, "a2r2.png");
 		Vector<Weapon> weaponsForActor0 = new Vector<Weapon>();
 		weaponsForActor0.add(weapon0ForActor0);
 		weaponsForActor0.add(weapon1ForActor0);
+		weaponsForActor0.add(weapon2ForActor0);
+		// weaponsForActor0.add(weapon3ForActor0);
 
 		Weapon weapon0ForActor1 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
 		Vector<Weapon> weaponsForActor1 = new Vector<Weapon>();

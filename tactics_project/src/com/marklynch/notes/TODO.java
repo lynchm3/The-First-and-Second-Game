@@ -2,24 +2,40 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// work out what bits i fucked up by looking at old screen grabs
-	// Replace the VS w/ FIGHT, move the VS TO THE MIDDLE
-	// Also, could use HEAL, FIGHT, PUSH...
+	// advantage/disadvantage (goes on top of weapon), whos gonna die (could put
+	// death symbol hanging
+	// off the edge, would make it more noticeable), special effects(sleep,
+	// confuse, poison etc.)
+
+	// I think the things should empty from a different direction, dont like the
+	// middle. BUT... the text is getting hard to read :D
+
+	// fade out the other baddies when looking at preview, or hide them
+	// completely... or... i dunno... but its overlapping w/ weapon images on
+	// other enemies squares which is shite.
+
+	// use different colour than white for highlights, its confusing
+
+	// skull should flash
+
+	// blocked symbol if they have no weapon to attack with, or maybe leave it
+	// as nothing?
+
 	// make a single item for all these reused colors, WAY too many calls to new
 	// color
 	// dialog has a weird drawing thing...
 	// SOmething clever where the health bar pulls back to reveal a skull or
 	// something :P
-	// Should the bars face the same way... or comeout from the middle?
-	// sometimes pass outside the bounds of the square?
-	// Some bits need to pass outside thebounds of the square
-	// thin line between the different parts of the preview health (so 7ish
-	// lines in total)
 	// also... need textures rather than flat color probably
 	// Need to find a way to make the preview clearer, at the moment its just
 	// messy and confusing. Maybe lines. Or health bars only as big as a weapon
 	// symbol... Also, health bars need a bg (same as the normal health bars
 	// probably...
+
+	// see if theres a way to force the white lines to draw even when they're
+	// tiny, maybe if i draw lines rather than quads?
+
+	// make the white lines translucent? that might look better
 
 	// Make a util to fill an area with a texture
 

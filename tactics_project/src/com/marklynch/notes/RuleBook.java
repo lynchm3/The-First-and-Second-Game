@@ -19,4 +19,10 @@ public class RuleBook {
 	// HOW DO TURNS WORK?
 	// faction by faction(FE, TT)? Player by player based on speed (BB)?
 
+	// WEAPON TRIANGLES?
+	// Am I doing weapon trianlges? it feels like a purely FE thing... look up
+	// examples of weapons triangle online? OR like pokemon - complicated
+	// relations
+	// between types...
+
 }
