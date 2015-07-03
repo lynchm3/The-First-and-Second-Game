@@ -2,10 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Skull for attacker
-
-	// i think the skull needs to be on the health bar? maybe? see how it looks?
-
 	// advantage/disadvantage (goes on top of weapon, tick VS X), whos gonna die
 	// (could put
 	// death symbol hanging
@@ -20,8 +16,6 @@ public class TODO {
 	// other enemies squares which is shite.
 
 	// use different colour than white for highlights, its confusing
-
-	// skull should flash
 
 	// blocked symbol if they have no weapon to attack with, or maybe leave it
 	// as nothing?
@@ -44,24 +38,11 @@ public class TODO {
 
 	// Make a util to fill an area with a texture
 
-	// seperate the attack + counter attack
-
-	// draw the health bar in 3 non-overlapping parts.
-	// potential damage bit should flash, btween the 2 colours
-	// potential damage bit should flash faster if someone is going to die
-
-	// method for drawing images within rect, theres WAY too many lines of code
-	// doing this
+	// seperate the attack + counter attack by 250ms
 
 	// Look up "the mechanics of fire emblem"
 
-	// hover fight preview needs to be better, w/ big VS image underneath
-
 	// feck it in to Android and c what happens ;)
-
-	// removed white bg from log
-
-	// show icons for potential death, advantage (up/down arrows like FE)
 
 	// enemy move grid all/single/toggle multiple
 

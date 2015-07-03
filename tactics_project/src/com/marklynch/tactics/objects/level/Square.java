@@ -94,26 +94,26 @@ public class Square {
 		// }
 
 		// draw weapon icons on square
-		if (this.gameObject != null
-				&& level.currentFactionMoving == level.factions.get(0)) {
-			float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
-			float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
-			for (int i = 0; i < this.weaponsThatCanAttack.size(); i++) {
-
-				Weapon weapon = this.weaponsThatCanAttack.get(i);
-				float weaponPositionXInPixels = 0;
-				float weaponPositionYInPixels = 0;
-
-				weaponPositionXInPixels = this.x * (int) Game.SQUARE_WIDTH;
-				weaponPositionYInPixels = this.y * (int) Game.SQUARE_HEIGHT
-						+ (i * weaponHeightInPixels);
-
-				TextureUtils.drawTexture(weapon.imageTexture,
-						weaponPositionXInPixels, weaponPositionXInPixels
-								+ weaponWidthInPixels, weaponPositionYInPixels,
-						weaponPositionYInPixels + weaponHeightInPixels);
-			}
-		}
+		// if (this.gameObject != null
+		// && level.currentFactionMoving == level.factions.get(0)) {
+		// float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
+		// float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
+		// for (int i = 0; i < this.weaponsThatCanAttack.size(); i++) {
+		//
+		// Weapon weapon = this.weaponsThatCanAttack.get(i);
+		// float weaponPositionXInPixels = 0;
+		// float weaponPositionYInPixels = 0;
+		//
+		// weaponPositionXInPixels = this.x * (int) Game.SQUARE_WIDTH;
+		// weaponPositionYInPixels = this.y * (int) Game.SQUARE_HEIGHT
+		// + (i * weaponHeightInPixels);
+		//
+		// TextureUtils.drawTexture(weapon.imageTexture,
+		// weaponPositionXInPixels, weaponPositionXInPixels
+		// + weaponWidthInPixels, weaponPositionYInPixels,
+		// weaponPositionYInPixels + weaponHeightInPixels);
+		// }
+		// }
 
 	}
 

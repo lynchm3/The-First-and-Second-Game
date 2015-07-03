@@ -179,78 +179,93 @@ public class Actor extends GameObject {
 		} else {
 			// HEALTH COLORZ HERE YO
 
-			// draw sidebar on square
-			float healthPercentage = (remainingHealth) / (totalHealth);
-			float weaponAreaWidthInPixels = Game.SQUARE_WIDTH / 5;
-			float weaponAreaHeightInPixels = Game.SQUARE_HEIGHT;
-			float healthBarHeightInPixels = Game.SQUARE_HEIGHT
-					* healthPercentage;
-			float weaponAreaPositionXInPixels = 0;
-			float weaponAreaPositionYInPixels = 0;
+			if (level.activeActor != null
+					&& level.activeActor.showHoverFightPreview) {
 
-			if (this.faction == level.factions.get(0)) {
-				weaponAreaPositionXInPixels = this.squareGameObjectIsOn.x
-						* (int) Game.SQUARE_WIDTH;
-				weaponAreaPositionYInPixels = this.squareGameObjectIsOn.y
-						* (int) Game.SQUARE_HEIGHT;
 			} else {
-				weaponAreaPositionXInPixels = this.squareGameObjectIsOn.x
-						* (int) Game.SQUARE_WIDTH + Game.SQUARE_WIDTH
-						- weaponAreaWidthInPixels;
-				weaponAreaPositionYInPixels = this.squareGameObjectIsOn.y
-						* (int) Game.SQUARE_HEIGHT;
 
-			}
-
-			// White bit under health bar
-			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
-					weaponAreaPositionXInPixels + 1,
-					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
-					weaponAreaPositionYInPixels + 1,
-					weaponAreaPositionYInPixels + weaponAreaHeightInPixels - 1);
-
-			// Colored health bar
-			QuadUtils.drawQuad(new Color(this.faction.color.r,
-					this.faction.color.g, this.faction.color.b),
-					weaponAreaPositionXInPixels + 1,
-					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
-					weaponAreaPositionYInPixels + 1,
-					weaponAreaPositionYInPixels + healthBarHeightInPixels - 1);
-
-			super.draw();
-			// draw weapon icons on square
-			float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
-			float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
-			for (int i = 0; i < weapons.size(); i++) {
-
-				Weapon weapon = weapons.get(i);
-
-				float weaponPositionXInPixels = 0;
-				float weaponPositionYInPixels = 0;
+				// draw sidebar on square
+				float healthPercentage = (remainingHealth) / (totalHealth);
+				float weaponAreaWidthInPixels = Game.SQUARE_WIDTH / 5;
+				float weaponAreaHeightInPixels = Game.SQUARE_HEIGHT;
+				float healthBarHeightInPixels = Game.SQUARE_HEIGHT
+						* healthPercentage;
+				float weaponAreaPositionXInPixels = 0;
+				float weaponAreaPositionYInPixels = 0;
 
 				if (this.faction == level.factions.get(0)) {
-					weaponPositionXInPixels = this.squareGameObjectIsOn.x
+					weaponAreaPositionXInPixels = this.squareGameObjectIsOn.x
 							* (int) Game.SQUARE_WIDTH;
-					weaponPositionYInPixels = this.squareGameObjectIsOn.y
-							* (int) Game.SQUARE_HEIGHT
-							+ (i * weaponHeightInPixels);
+					weaponAreaPositionYInPixels = this.squareGameObjectIsOn.y
+							* (int) Game.SQUARE_HEIGHT;
 				} else {
-					weaponPositionXInPixels = this.squareGameObjectIsOn.x
+					weaponAreaPositionXInPixels = this.squareGameObjectIsOn.x
 							* (int) Game.SQUARE_WIDTH + Game.SQUARE_WIDTH
-							- weaponWidthInPixels;
-					weaponPositionYInPixels = this.squareGameObjectIsOn.y
-							* (int) Game.SQUARE_HEIGHT
-							+ (i * weaponHeightInPixels);
+							- weaponAreaWidthInPixels;
+					weaponAreaPositionYInPixels = this.squareGameObjectIsOn.y
+							* (int) Game.SQUARE_HEIGHT;
 
 				}
-				TextureUtils.drawTexture(weapon.imageTexture,
-						weaponPositionXInPixels, weaponPositionXInPixels
-								+ weaponWidthInPixels, weaponPositionYInPixels,
-						weaponPositionYInPixels + weaponHeightInPixels);
+
+				// White bit under health bar
+				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
+						weaponAreaPositionXInPixels + 1,
+						weaponAreaPositionXInPixels + weaponAreaWidthInPixels
+								- 1, weaponAreaPositionYInPixels + 1,
+						weaponAreaPositionYInPixels + weaponAreaHeightInPixels
+								- 1);
+
+				// Colored health bar
+				QuadUtils.drawQuad(new Color(this.faction.color.r,
+						this.faction.color.g, this.faction.color.b),
+						weaponAreaPositionXInPixels + 1,
+						weaponAreaPositionXInPixels + weaponAreaWidthInPixels
+								- 1, weaponAreaPositionYInPixels + 1,
+						weaponAreaPositionYInPixels + healthBarHeightInPixels
+								- 1);
+			}
+
+			super.draw();
+
+			if (level.activeActor != null
+					&& level.activeActor.showHoverFightPreview) {
+
+			} else {
+				// draw weapon icons on square
+				float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
+				float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
+				for (int i = 0; i < weapons.size(); i++) {
+
+					Weapon weapon = weapons.get(i);
+
+					float weaponPositionXInPixels = 0;
+					float weaponPositionYInPixels = 0;
+
+					if (this.faction == level.factions.get(0)) {
+						weaponPositionXInPixels = this.squareGameObjectIsOn.x
+								* (int) Game.SQUARE_WIDTH;
+						weaponPositionYInPixels = this.squareGameObjectIsOn.y
+								* (int) Game.SQUARE_HEIGHT
+								+ (i * weaponHeightInPixels);
+					} else {
+						weaponPositionXInPixels = this.squareGameObjectIsOn.x
+								* (int) Game.SQUARE_WIDTH + Game.SQUARE_WIDTH
+								- weaponWidthInPixels;
+						weaponPositionYInPixels = this.squareGameObjectIsOn.y
+								* (int) Game.SQUARE_HEIGHT
+								+ (i * weaponHeightInPixels);
+
+					}
+					TextureUtils.drawTexture(weapon.imageTexture,
+							weaponPositionXInPixels, weaponPositionXInPixels
+									+ weaponWidthInPixels,
+							weaponPositionYInPixels, weaponPositionYInPixels
+									+ weaponHeightInPixels);
+				}
 			}
 
 			// Draw actor level text
-			String actorLevelString = "LVL" + this.actorLevel;
+			String actorLevelString = "L" + this.actorLevel;
 			float actorLevelWidthInPixels = level.font12
 					.getWidth(actorLevelString);
 			float actorLevelPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
