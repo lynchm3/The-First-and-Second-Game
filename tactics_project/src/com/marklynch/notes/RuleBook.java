@@ -25,4 +25,7 @@ public class RuleBook {
 	// relations
 	// between types...
 
+	// COUNTERS?
+	// If there weren't counters previews would be easier to show
+
 }

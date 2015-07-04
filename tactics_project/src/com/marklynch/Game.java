@@ -14,7 +14,7 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
-import com.marklynch.ui.Button;
+import com.marklynch.ui.button.Button;
 
 public class Game {
 

@@ -1,5 +1,7 @@
 package com.marklynch.tactics.objects.level;
 
+import java.util.ArrayList;
+import java.util.Stack;
 import java.util.Vector;
 
 import org.lwjgl.input.Mouse;
@@ -11,10 +13,13 @@ import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.unit.Move;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.ui.Button;
 import com.marklynch.ui.Dialog;
+import com.marklynch.ui.button.Button;
+import com.marklynch.ui.button.EndTurnButton;
+import com.marklynch.ui.button.UndoButton;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 
@@ -28,7 +33,6 @@ public class Level {
 	public Vector<GameObject> inanimateObjects;
 	public Vector<Dialog> dialogs;
 	public Square[][] squares;
-	public Button endTurnButton;
 	public int turn = 1;
 	public TrueTypeFont font12;
 	public TrueTypeFont font20;
@@ -38,6 +42,11 @@ public class Level {
 	public int currentFactionMovingIndex;
 	public Vector<ActivityLog> logs = new Vector<ActivityLog>();
 	public boolean showTurnNotification = false;
+	public Stack<Move> undoList = new Stack<Move>();
+
+	public EndTurnButton endTurnButton;
+	public UndoButton undoButton;
+	public ArrayList<Button> buttons = new ArrayList<Button>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -49,11 +58,16 @@ public class Level {
 		initGrid();
 		initObjects();
 		dialogs = new Vector<Dialog>();
-		endTurnButton = new Button(Game.windowWidth - 210,
+		endTurnButton = new EndTurnButton(Game.windowWidth - 210,
 				Game.windowHeight - 110, 200, 100, "end_turn_button.png", this);
+		buttons.add(endTurnButton);
+		undoButton = new UndoButton(Game.windowWidth - 420,
+				Game.windowHeight - 110, 200, 100, "undo_button.png", this);
+		buttons.add(undoButton);
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
 		font20 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 20);
 		font60 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 60);
+
 	}
 
 	private void initGrid() {
@@ -240,8 +254,9 @@ public class Level {
 			}
 		}
 
-		// End Turn Button
-		endTurnButton.draw();
+		for (Button button : buttons) {
+			button.draw();
+		}
 
 		// Turn text
 		font12.drawString(Game.windowWidth - 150, 20, currentFactionMoving.name
@@ -280,14 +295,18 @@ public class Level {
 
 	public Button getButtonFromMousePosition() {
 
-		if (Mouse.getX() > endTurnButton.x
-				&& Mouse.getX() < endTurnButton.x + endTurnButton.width
-				&& Game.windowHeight - Mouse.getY() > endTurnButton.y
-				&& Game.windowHeight - Mouse.getY() < endTurnButton.y
-						+ endTurnButton.height) {
+		for (Button button : this.buttons) {
 
-			return endTurnButton;
+			if (Mouse.getX() > button.x
+					&& Mouse.getX() < button.x + button.width
+					&& Game.windowHeight - Mouse.getY() > button.y
+					&& Game.windowHeight - Mouse.getY() < button.y
+							+ button.height) {
+
+				return button;
+			}
 		}
+
 		return null;
 	}
 
@@ -320,6 +339,10 @@ public class Level {
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 
 		showTurnNotification();
+
+		undoList.clear();
+		undoButton.enabled = false;
+
 	}
 
 	public void logOnScreen(ActivityLog stringToLog) {
@@ -344,5 +367,25 @@ public class Level {
 			}
 			showTurnNotification = false;
 		}
+	}
+
+	public void undo() {
+		if (!this.undoList.isEmpty()) {
+			Move move = undoList.pop();
+			move.actor.distanceMovedThisTurn -= move.travelCost;
+			move.actor.squareGameObjectIsOn = move.squareMovedFrom;
+			move.squareMovedFrom.gameObject = move.actor;
+			move.squareMovedTo.gameObject = null;
+			activeActor = move.actor;
+			Actor.highlightSelectedCharactersSquares(this);
+			removeLastLog();
+			if (this.undoList.isEmpty()) {
+				undoButton.enabled = false;
+			}
+		}
+	}
+
+	private void removeLastLog() {
+		logs.remove(logs.lastElement());
 	}
 }

@@ -8,6 +8,14 @@ public class TODO {
 	// off the edge, would make it more noticeable), special effects(sleep,
 	// confuse, poison etc.)
 
+	// UNDO button for moves
+
+	// decoration objects (the sign!)
+
+	// pushing (the skips, other enemies)
+
+	// Look up what type of text is most legible
+
 	// I think the things should empty from a different direction, dont like the
 	// middle. BUT... the text is getting hard to read :D
 

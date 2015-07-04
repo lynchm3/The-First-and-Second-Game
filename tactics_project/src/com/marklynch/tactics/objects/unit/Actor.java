@@ -138,6 +138,11 @@ public class Actor extends GameObject {
 			actor.counter(this);
 
 		this.showPow(gameObject);
+
+		if (this.faction == level.factions.get(0)) {
+			level.undoList.clear();
+			level.undoButton.enabled = false;
+		}
 	}
 
 	public void counter(GameObject gameObject) {
@@ -157,9 +162,9 @@ public class Actor extends GameObject {
 	}
 
 	public void moveTo(Square squareToMoveTo) {
-
+		Square oldSquare = this.squareGameObjectIsOn;
+		int distanceTraveled = squareToMoveTo.distanceToSquare;
 		this.squareGameObjectIsOn.gameObject = null;
-		this.squareGameObjectIsOn = null;
 		this.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
 		this.squareGameObjectIsOn = squareToMoveTo;
 		squareToMoveTo.gameObject = level.activeActor;
@@ -167,6 +172,11 @@ public class Actor extends GameObject {
 		level.logOnScreen(new ActivityLog(new Object[] { this,
 				" moved to " + squareToMoveTo }));
 
+		if (this.faction == level.factions.get(0)) {
+			level.undoList.push(new Move(this, oldSquare, squareToMoveTo,
+					distanceTraveled));
+			level.undoButton.enabled = true;
+		}
 	}
 
 	@Override
@@ -321,12 +331,12 @@ public class Actor extends GameObject {
 			float hoverFightPreviewPositionYInPixels = hoverFightPreviewDefender.squareGameObjectIsOn.y
 					* (int) Game.SQUARE_HEIGHT;
 
-			// BG white
-			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
-					hoverFightPreviewPositionXInPixels,
-					hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
-					hoverFightPreviewPositionYInPixels,
-					hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
+			// // BG white
+			// QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
+			// hoverFightPreviewPositionXInPixels,
+			// hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
+			// hoverFightPreviewPositionYInPixels,
+			// hoverFightPreviewPositionYInPixels + Game.SQUARE_HEIGHT);
 
 			// Target image
 			TextureUtils.drawTexture(

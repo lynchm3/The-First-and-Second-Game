@@ -1,4 +1,4 @@
-package com.marklynch.ui;
+package com.marklynch.ui.button;
 
 import org.newdawn.slick.opengl.Texture;
 
@@ -6,11 +6,12 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
-public class Button {
+public abstract class Button {
 
 	public Texture texture;
 	public int x, y, width, height;
 	public Level level;
+	public boolean enabled = false;
 
 	public Button(int x, int y, int width, int height, String texturePath,
 			Level level) {
@@ -28,8 +29,7 @@ public class Button {
 		TextureUtils.drawTexture(texture, x, x + width, y, y + height);
 	}
 
-	public void click() {
-		level.endTurn();
-	}
+	public abstract void click();
+	// level.endTurn();
 
 }
