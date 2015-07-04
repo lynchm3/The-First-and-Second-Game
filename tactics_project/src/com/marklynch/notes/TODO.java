@@ -8,8 +8,6 @@ public class TODO {
 	// off the edge, would make it more noticeable), special effects(sleep,
 	// confuse, poison etc.)
 
-	// UNDO button for moves
-
 	// decoration objects (the sign!)
 
 	// pushing (the skips, other enemies)

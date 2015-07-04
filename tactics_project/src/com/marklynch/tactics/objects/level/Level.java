@@ -33,6 +33,7 @@ public class Level {
 	public Vector<GameObject> inanimateObjects;
 	public Vector<Dialog> dialogs;
 	public Square[][] squares;
+	public Vector<Decoration> decorations;
 	public int turn = 1;
 	public TrueTypeFont font12;
 	public TrueTypeFont font20;
@@ -163,14 +164,18 @@ public class Level {
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
 				"skip_with_shadow.png", squares[0][3], new Vector<Weapon>(),
 				this));
-		inanimateObjects.add(new GameObject("sign", 5, 0, 0, 0, 0, "sign.png",
-				squares[1][3], new Vector<Weapon>(), this));
+		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
+				"sign.png", squares[1][3], new Vector<Weapon>(), this));
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
 				"skip_with_shadow.png", squares[2][3], new Vector<Weapon>(),
 				this));
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
 				"skip_with_shadow.png", squares[3][3], new Vector<Weapon>(),
 				this));
+
+		decorations = new Vector<Decoration>();
+		decorations
+				.add(new Decoration(300f, 240f, 28f, 28f, false, "sign.png"));
 
 		// Cursor
 		gameCursor = new GameCursor();
@@ -210,6 +215,12 @@ public class Level {
 			}
 		}
 
+		// Background decorations
+
+		for (Decoration decoration : decorations) {
+			decoration.draw();
+		}
+
 		// Objects
 
 		for (GameObject gameObject : inanimateObjects) {
@@ -234,6 +245,12 @@ public class Level {
 			for (Actor actor : faction.actors) {
 				actor.draw2();
 			}
+		}
+
+		// Foreground decorations
+
+		for (Decoration decoration : decorations) {
+			decoration.draw2();
 		}
 
 		// GL11.glColor4f;
