@@ -23,6 +23,12 @@ public class Fight {
 
 	public boolean reachable;
 
+	public Advantage advantage = Advantage.NO_ADVANTAGE;
+
+	public enum Advantage {
+		NO_ADVANTAGE, ATTACKER_ADVANTAGE, DEFENDER_ADVANTAGE
+	};
+
 	public Fight(Actor attacker, Weapon attackerWeapon, GameObject target,
 			Weapon defenderWeapon, float range) {
 		this.attacker = attacker;
@@ -65,6 +71,8 @@ public class Fight {
 		} else {
 			reachable = false;
 		}
+
+		this.advantage = Advantage.ATTACKER_ADVANTAGE;
 	}
 
 	// Order by battles by

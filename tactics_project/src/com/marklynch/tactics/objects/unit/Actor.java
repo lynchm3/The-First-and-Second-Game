@@ -529,6 +529,29 @@ public class Actor extends GameObject {
 								previewPositionYs[i] - 2,
 								previewPositionYs[i] + 30);
 
+				// attacker advantage/disadvantage
+				if (this.hoverFightPreviewFights.get(i).advantage == Fight.Advantage.ATTACKER_ADVANTAGE) {
+					TextureUtils
+							.drawTexture(
+									upTexture,
+									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH) - 20,
+									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH) - 4,
+									previewPositionYs[i] + 14,
+									previewPositionYs[i] + 30);
+				} else if (this.hoverFightPreviewFights.get(i).advantage == Fight.Advantage.DEFENDER_ADVANTAGE) {
+					TextureUtils
+							.drawTexture(
+									downTexture,
+									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH) - 20,
+									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH) - 4,
+									previewPositionYs[i] + 14,
+									previewPositionYs[i] + 30);
+				}
+
 				// Attacker skull symbol
 				if (hoverFightPreviewFights.get(i).damageTakenByAttacker >= hoverFightPreviewFights
 						.get(i).attacker.remainingHealth) {
@@ -686,6 +709,33 @@ public class Actor extends GameObject {
 												* (Game.SQUARE_WIDTH)
 												+ (Game.SQUARE_WIDTH) + 32,
 										previewPositionYs[i] - 2,
+										previewPositionYs[i] + 30);
+					}
+
+					// attacker advantage/disadvantage
+					if (this.hoverFightPreviewFights.get(i).advantage == Fight.Advantage.DEFENDER_ADVANTAGE) {
+						TextureUtils
+								.drawTexture(
+										upTexture,
+										this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+												* (Game.SQUARE_WIDTH)
+												+ (Game.SQUARE_WIDTH) + 12,
+										this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+												* (Game.SQUARE_WIDTH)
+												+ (Game.SQUARE_WIDTH) + 28,
+										previewPositionYs[i] + 14,
+										previewPositionYs[i] + 30);
+					} else if (this.hoverFightPreviewFights.get(i).advantage == Fight.Advantage.ATTACKER_ADVANTAGE) {
+						TextureUtils
+								.drawTexture(
+										downTexture,
+										this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+												* (Game.SQUARE_WIDTH)
+												+ (Game.SQUARE_WIDTH) + 12,
+										this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+												* (Game.SQUARE_WIDTH)
+												+ (Game.SQUARE_WIDTH) + 28,
+										previewPositionYs[i] + 14,
 										previewPositionYs[i] + 30);
 					}
 				}
