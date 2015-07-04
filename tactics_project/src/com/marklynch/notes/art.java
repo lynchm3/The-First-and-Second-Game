@@ -48,5 +48,9 @@ public class art {
 	 * 
 	 * Record the cartooning and saturation process so that u dont have to do it
 	 * every time
+	 * 
+	 * http://blog.newspapers.library.in.gov/wp-content/uploads/2015/04/
+	 * Victor_Bulla_-_Young_Pioneers_Defence-Leningrad-1937-1024x735.jpg Creepy
+	 * gas mask people (see Dr Who also)
 	 */
 }

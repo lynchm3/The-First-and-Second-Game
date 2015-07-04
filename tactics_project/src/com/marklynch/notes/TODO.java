@@ -2,13 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// X beside fight if out of reach
+
 	// advantage/disadvantage (goes on top of weapon, tick VS X), whos gonna die
 	// (could put
 	// death symbol hanging
 	// off the edge, would make it more noticeable), special effects(sleep,
 	// confuse, poison etc.)
-
-	// decoration objects (the sign!)
 
 	// pushing (the skips, other enemies)
 

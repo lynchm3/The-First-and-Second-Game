@@ -85,7 +85,13 @@ public class GameObject {
 		int actorPositionYInPixels = this.squareGameObjectIsOn.y
 				* (int) Game.SQUARE_HEIGHT;
 
-		TextureUtils.drawTexture(imageTexture, actorPositionXInPixels,
+		float alpha = 1.0f;
+		if (level.activeActor != null
+				&& level.activeActor.showHoverFightPreview == true
+				&& level.activeActor.hoverFightPreviewDefender != this) {
+			alpha = 0.5f;
+		}
+		TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
 				actorPositionXInPixels + Game.SQUARE_WIDTH,
 				actorPositionYInPixels, actorPositionYInPixels
 						+ Game.SQUARE_HEIGHT);

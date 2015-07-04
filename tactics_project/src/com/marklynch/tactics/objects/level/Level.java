@@ -176,6 +176,8 @@ public class Level {
 		decorations = new Vector<Decoration>();
 		decorations
 				.add(new Decoration(300f, 240f, 28f, 28f, false, "sign.png"));
+		decorations.add(new Decoration(468f, 200f, 28f, 28f, true,
+				"skip_with_shadow.png"));
 
 		// Cursor
 		gameCursor = new GameCursor();
