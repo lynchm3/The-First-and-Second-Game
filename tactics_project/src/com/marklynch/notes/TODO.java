@@ -4,6 +4,11 @@ public class TODO {
 
 	// X beside fight if out of reach
 
+	// dont show the preview against ur own guys? or do? i dunno...
+
+	// The VS looks really cool on its own, maybe move the bars out so that u
+	// can see the VS, then make the bars drain in the same direction
+
 	// advantage/disadvantage (goes on top of weapon, tick VS X), whos gonna die
 	// (could put
 	// death symbol hanging

@@ -31,6 +31,8 @@ public class GameObject {
 	public float totalHealth = 0;
 	public float remainingHealth = 0;
 
+	public boolean hasAttackedThisTurn = false;
+
 	// Inventory
 	public Vector<Weapon> weapons = new Vector<Weapon>();
 
@@ -91,6 +93,12 @@ public class GameObject {
 				&& level.activeActor.hoverFightPreviewDefender != this) {
 			alpha = 0.5f;
 		}
+
+		if (hasAttackedThisTurn == true && this.faction != null
+				&& level.currentFactionMoving == this.faction) {
+			alpha = 0.5f;
+		}
+
 		TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
 				actorPositionXInPixels + Game.SQUARE_WIDTH,
 				actorPositionYInPixels, actorPositionYInPixels

@@ -21,6 +21,8 @@ public class Fight {
 	public int chanceOfHittingAttacker;
 	public int chanceOfHittingDefender;
 
+	public boolean reachable;
+
 	public Fight(Actor attacker, Weapon attackerWeapon, GameObject target,
 			Weapon defenderWeapon, float range) {
 		this.attacker = attacker;
@@ -56,6 +58,13 @@ public class Fight {
 		damageTakenByDefenderMultiplier = 1;
 		chanceOfHittingAttacker = 99;
 		chanceOfHittingDefender = 99;
+
+		if (defender.squareGameObjectIsOn.weaponsThatCanAttack
+				.contains(attackerWeapon)) {
+			reachable = true;
+		} else {
+			reachable = false;
+		}
 	}
 
 	// Order by battles by

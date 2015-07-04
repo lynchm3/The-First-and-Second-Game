@@ -26,7 +26,6 @@ public class Actor extends GameObject {
 	public int distanceMovedThisTurn = 0;
 	public int travelDistance = 4;
 	public Weapon selectedWeapon = null;
-	public boolean hasAttackedThisTurn = false;
 
 	// Fight preview on hover
 	public boolean showHoverFightPreview = false;
@@ -340,7 +339,7 @@ public class Actor extends GameObject {
 
 			// Target image
 			TextureUtils.drawTexture(
-					hoverFightPreviewFights.get(0).defender.imageTexture,
+					this.hoverFightPreviewDefender.imageTexture,
 					hoverFightPreviewPositionXInPixels,
 					hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
 					hoverFightPreviewPositionYInPixels,
@@ -775,7 +774,8 @@ public class Actor extends GameObject {
 			for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
 				Fight fight = new Fight(this, weapon, defender,
 						defender.bestCounterWeapon(this, weapon, range), range);
-				hoverFightPreviewFights.add(fight);
+				if (fight.reachable)
+					hoverFightPreviewFights.add(fight);
 			}
 			// }
 
