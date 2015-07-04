@@ -714,6 +714,21 @@ public class Actor extends GameObject {
 						linePositionX, linePositionX + 1, previewPositionYs[i],
 						previewPositionYs[i] + 28);
 
+				// X symbol because it's out of range
+				if (hoverFightPreviewFights.get(i).reachable == false) {
+					TextureUtils
+							.drawTexture(
+									this.xTexture,
+									hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH)
+											+ Game.SQUARE_WIDTH / 2 - 16,
+									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
+											* (Game.SQUARE_WIDTH)
+											+ Game.SQUARE_WIDTH / 2 + 16,
+									previewPositionYs[i] - 2,
+									previewPositionYs[i] + 30);
+				}
+
 			}
 
 			// fight symbol
@@ -774,8 +789,8 @@ public class Actor extends GameObject {
 			for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
 				Fight fight = new Fight(this, weapon, defender,
 						defender.bestCounterWeapon(this, weapon, range), range);
-				if (fight.reachable)
-					hoverFightPreviewFights.add(fight);
+				// if (fight.reachable)
+				hoverFightPreviewFights.add(fight);
 			}
 			// }
 

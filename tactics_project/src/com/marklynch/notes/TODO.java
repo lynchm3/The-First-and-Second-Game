@@ -2,7 +2,7 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// X beside fight if out of reach
+	// For decoration - a can, a bottle, rubbish bag
 
 	// dont show the preview against ur own guys? or do? i dunno...
 
