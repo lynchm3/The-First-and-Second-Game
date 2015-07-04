@@ -2,20 +2,17 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// For decoration - a can, a bottle, rubbish bag
+	// disabled state for buttons
 
-	// dont show the preview against ur own guys? or do? i dunno...
+	// pushing (the skips, enemies, allies)
+
+	// For decoration - a can, a bottle, rubbish bag
 
 	// The VS looks really cool on its own, maybe move the bars out so that u
 	// can see the VS, then make the bars drain in the same direction
 
-	// advantage/disadvantage (goes on top of weapon, tick VS X), whos gonna die
-	// (could put
-	// death symbol hanging
-	// off the edge, would make it more noticeable), special effects(sleep,
-	// confuse, poison etc.)
-
-	// pushing (the skips, other enemies)
+	// advantage/disadvantage (goes on top of weapon, tick VS X), special
+	// effects(sleep, confuse, poison etc.)
 
 	// Look up what type of text is most legible
 

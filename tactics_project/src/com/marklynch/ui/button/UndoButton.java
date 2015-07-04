@@ -4,9 +4,10 @@ import com.marklynch.tactics.objects.level.Level;
 
 public class UndoButton extends Button {
 
-	public UndoButton(int x, int y, int width, int height, String texturePath,
-			Level level) {
-		super(x, y, width, height, texturePath, level);
+	public UndoButton(int x, int y, int width, int height,
+			String enabledTexturePath, String disabledTexturePath, Level level) {
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
+				level);
 	}
 
 	@Override

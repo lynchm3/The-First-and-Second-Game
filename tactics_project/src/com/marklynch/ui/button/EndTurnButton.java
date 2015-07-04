@@ -5,8 +5,9 @@ import com.marklynch.tactics.objects.level.Level;
 public class EndTurnButton extends Button {
 
 	public EndTurnButton(int x, int y, int width, int height,
-			String texturePath, Level level) {
-		super(x, y, width, height, texturePath, level);
+			String enabledTexturePath, String disabledTexturePath, Level level) {
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
+				level);
 	}
 
 	@Override
