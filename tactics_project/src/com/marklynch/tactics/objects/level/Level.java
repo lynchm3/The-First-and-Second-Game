@@ -386,7 +386,6 @@ public class Level {
 
 	public void logOnScreen(ActivityLog stringToLog) {
 		logs.add(stringToLog);
-		// System.out.println(stringToLog.text);
 	}
 
 	public void showTurnNotification() {

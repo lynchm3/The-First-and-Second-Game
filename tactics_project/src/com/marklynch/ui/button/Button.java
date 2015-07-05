@@ -10,11 +10,11 @@ public abstract class Button {
 
 	public Texture enabledTexture;
 	public Texture disabledTexture;
-	public int x, y, width, height;
+	public float x, y, width, height;
 	public Level level;
 	public boolean enabled = false;
 
-	public Button(int x, int y, int width, int height,
+	public Button(float x, float y, float width, float height,
 			String enabledTexturePath, String disabledTexturePath, Level level) {
 		super();
 		this.x = x;

@@ -2,9 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// move towards nearest enemy
+	// Attack -> weapon selection -> Attack enemy
 
-	// move towards optimal enemy (best fight, out of reachable)
+	// When you hover over a square you can move to show where you can reach and
+	// with what weapon... ot something... i dunno, maybe just highlight the
+	// squares
+
+	// Push
 
 	// In the fight sorter, should take enemy damage post attack in to account,
 	// they keep attacking that guy w/ 100 health :D

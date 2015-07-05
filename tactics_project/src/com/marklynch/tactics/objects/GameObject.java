@@ -39,8 +39,7 @@ public class GameObject {
 	// Interaction with the level
 	public Square squareGameObjectIsOn = null;
 
-	// image
-	public String imagePath = "";
+	// images
 	public Texture imageTexture = null;
 	public Texture powTexture = null;
 	public Texture vsTexture = null;
@@ -70,7 +69,6 @@ public class GameObject {
 		this.dexterity = dexterity;
 		this.intelligence = intelligence;
 		this.endurance = endurance;
-		this.imagePath = imagePath;
 		this.imageTexture = getGlobalImage(imagePath);
 		this.powTexture = getGlobalImage("pow.png");
 		this.vsTexture = getGlobalImage("vs.png");

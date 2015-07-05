@@ -1,5 +1,6 @@
 package com.marklynch.tactics.objects.unit;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.lwjgl.opengl.GL11;
@@ -11,6 +12,8 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.button.AttackButton;
+import com.marklynch.ui.button.Button;
 import com.marklynch.utils.FormattingUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextureUtils;
@@ -26,6 +29,11 @@ public class Actor extends GameObject {
 	public int distanceMovedThisTurn = 0;
 	public int travelDistance = 4;
 	public Weapon selectedWeapon = null;
+	public boolean showWeaponSelection = false;
+
+	// buttons
+	public ArrayList<Button> buttons = new ArrayList<Button>();
+	public AttackButton attackButton = null;
 
 	// Fight preview on hover
 	public boolean showHoverFightPreview = false;
@@ -41,6 +49,11 @@ public class Actor extends GameObject {
 		this.title = title;
 		this.actorLevel = actorLevel;
 		this.travelDistance = travelDistance;
+
+		this.attackButton = new AttackButton(0, 0, 50, 50, "attack.png",
+				"attack.png", level);
+
+		buttons.add(attackButton);
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
@@ -804,6 +817,16 @@ public class Actor extends GameObject {
 
 		}
 
+		// actor buttons
+		if (level.activeActor == this && this.faction == level.factions.get(0)) {
+			// Draw attack button
+			attackButton.x = this.squareGameObjectIsOn.x
+					* (int) Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
+			attackButton.y = this.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
+			attackButton.draw();
+		}
+
 	}
 
 	public Vector<Float> calculateIdealDistanceFrom(GameObject target) {
@@ -850,5 +873,25 @@ public class Actor extends GameObject {
 
 	public void hideHoverFightPreview() {
 		this.showHoverFightPreview = false;
+	}
+
+	public void attackClicked() {
+		showWeaponSelection = !showWeaponSelection;
+	}
+
+	public Button getButtonFromMousePosition(float alteredMouseX,
+			float alteredMouseY) {
+
+		for (Button button : this.buttons) {
+			if (alteredMouseX > button.x
+					&& alteredMouseX < button.x + button.width
+					&& alteredMouseY > button.y
+					&& alteredMouseY < button.y + button.height) {
+
+				return button;
+			}
+		}
+
+		return null;
 	}
 }

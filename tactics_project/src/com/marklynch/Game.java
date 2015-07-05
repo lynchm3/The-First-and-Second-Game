@@ -117,12 +117,17 @@ public class Game {
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
 
+		// Transformed mouse coords
+
+		float mouseXTransformed = (((windowWidth / 2) - dragX - (windowWidth / 2)
+				/ zoom) + (mouseXinPixels) / zoom);
+		float mouseYTransformed = ((windowHeight / 2 - dragY - (windowHeight / 2)
+				/ zoom) + (((windowHeight - mouseYinPixels)) / zoom));
+
 		// Getting what square coordinates the mouse is on (as in squares on the
 		// grid)
-		float mouseXInSquares = (int) ((((windowWidth / 2) - dragX - (windowWidth / 2)
-				/ zoom) + (mouseXinPixels) / zoom) / SQUARE_WIDTH);
-		float mouseYInSquares = (int) (((windowHeight / 2 - dragY - (windowHeight / 2)
-				/ zoom) + (((windowHeight - mouseYinPixels)) / zoom)) / SQUARE_HEIGHT);
+		float mouseXInSquares = (int) (mouseXTransformed / SQUARE_WIDTH);
+		float mouseYInSquares = (int) (mouseYTransformed / SQUARE_HEIGHT);
 
 		// Calculate zoom
 		zoom += 0.001 * Mouse.getDWheel();
@@ -155,7 +160,7 @@ public class Game {
 		}
 
 		// Get the square that we're hovering over
-		Button buttonClicked = null;
+		Button buttonHoveringOver = null;
 		squareMouseIsOver = null;
 		if ((int) mouseXInSquares > -1
 				&& (int) mouseXInSquares < level.squares.length
@@ -184,14 +189,20 @@ public class Game {
 
 		// Getting button that we have clicked, if any
 		if (dragging == false) {
-			buttonClicked = level.getButtonFromMousePosition();
+			buttonHoveringOver = level.getButtonFromMousePosition();
+			if (buttonHoveringOver == null && level.activeActor != null
+					&& level.activeActor.faction == level.factions.get(0)) {
+				buttonHoveringOver = level.activeActor
+						.getButtonFromMousePosition(mouseXTransformed,
+								mouseYTransformed);
+			}
 		}
 
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
-				&& dragging == false && buttonClicked != null
+				&& dragging == false && buttonHoveringOver != null
 				&& level.currentFactionMovingIndex == 0) {
 			// click button if we're on one
-			buttonClicked.click();
+			buttonHoveringOver.click();
 
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && squareMouseIsOver != null
