@@ -54,6 +54,7 @@ public class Actor extends GameObject {
 				"attack.png", level);
 
 		buttons.add(attackButton);
+		attackButton.enabled = true;
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
@@ -825,6 +826,19 @@ public class Actor extends GameObject {
 			attackButton.y = this.squareGameObjectIsOn.y
 					* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
 			attackButton.draw();
+		}
+
+		// System.out.println("showWeaponSelection = " + showWeaponSelection);
+
+		if (showWeaponSelection) {
+			for (int i = 0; i < weapons.size(); i++) {
+				TextureUtils.drawTexture(weapons.get(i).imageTexture,
+						attackButton.x, attackButton.x + attackButton.width,
+						attackButton.y + attackButton.height
+								+ attackButton.height * i, attackButton.y
+								+ attackButton.height + attackButton.height * i
+								+ attackButton.height);
+			}
 		}
 
 	}
