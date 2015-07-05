@@ -69,6 +69,8 @@ public class Faction {
 			if (timeAtCurrentStage == 0) {
 				// start of stage, perform action
 				currentActor = actors.get(currentActorIndex);
+				if (level.activeActor != null)
+					level.activeActor.unselected();
 				level.activeActor = currentActor;
 				level.activeActor.calculatePathToAllSquares(level.squares);
 				level.activeActor.calculateReachableSquares(level.squares);

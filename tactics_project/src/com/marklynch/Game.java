@@ -216,8 +216,9 @@ public class Game {
 				if (clickedGameObject instanceof Actor) {
 					Actor clickedActor = (Actor) clickedGameObject;
 					if (clickedActor.faction == level.currentFactionMoving) {
-						if (level.activeActor != null)
-							level.activeActor.hideHoverFightPreview();
+						if (level.activeActor != null) {
+							level.activeActor.unselected();
+						}
 						level.activeActor = clickedActor;
 						Actor.highlightSelectedCharactersSquares(level);
 						selectedNewActor = true;
@@ -272,9 +273,7 @@ public class Game {
 			level.clearDialogs();
 			// right click
 			if (level.activeActor != null) {
-				level.removeWalkingHighlight();
-				level.removeWeaponsThatCanAttackHighlight();
-				level.activeActor.hideHoverFightPreview();
+				level.activeActor.unselected();
 				level.activeActor = null;
 			} else if (squareMouseIsOver != null) {
 				if (squareMouseIsOver.showingDialogs == false)

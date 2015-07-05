@@ -908,4 +908,11 @@ public class Actor extends GameObject {
 
 		return null;
 	}
+
+	public void unselected() {
+		this.showWeaponSelection = false;
+		level.removeWalkingHighlight();
+		level.removeWeaponsThatCanAttackHighlight();
+		level.activeActor.hideHoverFightPreview();
+	}
 }

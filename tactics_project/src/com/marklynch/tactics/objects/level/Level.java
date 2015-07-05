@@ -362,6 +362,9 @@ public class Level {
 		}
 		removeWalkingHighlight();
 		removeWeaponsThatCanAttackHighlight();
+
+		if (activeActor != null)
+			activeActor.unselected();
 		activeActor = null;
 		currentFactionMovingIndex++;
 		if (currentFactionMovingIndex >= factions.size()) {
@@ -414,6 +417,8 @@ public class Level {
 			move.actor.squareGameObjectIsOn = move.squareMovedFrom;
 			move.squareMovedFrom.gameObject = move.actor;
 			move.squareMovedTo.gameObject = null;
+			if (activeActor != null)
+				activeActor.unselected();
 			activeActor = move.actor;
 			Actor.highlightSelectedCharactersSquares(this);
 			removeLastLog();
