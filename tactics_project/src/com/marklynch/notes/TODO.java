@@ -2,9 +2,23 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// disabled state for buttons
+	// try make a 16 bit character for the game board out of a profile image,
+	// all pixels and shit and awesome, i could use like any body... once it
+	// shrunk down enough it wont matter...
+
+	// Character made out of a creepy doll face!
+
+	// do profile image of character w/ gas mask in photoshop
+
+	// weapon in the dumpster
+
+	// attributes along bottom of character's square
 
 	// pushing (the skips, enemies, allies)
+
+	// third (green) team with relationships towards others
+
+	// More AI (see the enum list at the top of Faction.java)
 
 	// For decoration - a can, a bottle, rubbish bag
 

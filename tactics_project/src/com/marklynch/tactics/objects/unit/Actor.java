@@ -370,18 +370,18 @@ public class Actor extends GameObject {
 
 			for (int i = 0; i < hoverFightPreviewFights.size(); i++) {
 
-				// BG white under attacker health bar
-				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
-						hoverFightPreviewPositionXInPixels,
-						hoverFightPreviewPositionXInPixels - 10,
-						previewPositionYs[i], previewPositionYs[i] + 28);
-
-				// BG white under defender health bar
-				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
-						hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
-						hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH
-								+ 10, previewPositionYs[i],
-						previewPositionYs[i] + 28);
+				// // BG white under attacker health bar
+				// QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
+				// hoverFightPreviewPositionXInPixels,
+				// hoverFightPreviewPositionXInPixels - 10,
+				// previewPositionYs[i], previewPositionYs[i] + 28);
+				//
+				// // BG white under defender health bar
+				// QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
+				// hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH,
+				// hoverFightPreviewPositionXInPixels + Game.SQUARE_WIDTH
+				// + 10, previewPositionYs[i],
+				// previewPositionYs[i] + 28);
 
 				// Attacker Widths of bars
 

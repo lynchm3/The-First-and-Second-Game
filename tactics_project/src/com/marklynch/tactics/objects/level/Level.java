@@ -131,8 +131,8 @@ public class Level {
 		weaponsForActor4.add(weapon0ForActor4);
 		weaponsForActor4.add(weapon1ForActor4);
 
-		actors.add(new Actor("John Lennon", "Fighter", 1, 10, 0, 0, 0, 0,
-				"avatar.png", squares[0][0], weaponsForActor0, 4, this));
+		actors.add(new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+				"red1.png", squares[0][0], weaponsForActor0, 4, this));
 		actors.get(0).faction = factions.get(0);
 		factions.get(0).actors.add(actors.get(0));
 

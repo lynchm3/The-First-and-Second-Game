@@ -3,6 +3,10 @@ package com.marklynch.notes;
 public class art {
 
 	/*
+	 * 8bit effect - diplicate layer, Filter -> pixelate -> mosaic, select cell
+	 * size 4ish, duplicate later, Filter -> stylize -> find edges, blend ->
+	 * multiply
+	 * 
 	 * Try a double exposure effect http://imgur.com/a/aVZoi
 	 * 
 	 * Try the cartoon effect but put accessories on the subject first goggle
