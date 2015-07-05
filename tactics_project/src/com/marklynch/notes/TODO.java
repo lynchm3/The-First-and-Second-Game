@@ -6,6 +6,9 @@ public class TODO {
 
 	// move towards optimal enemy (best fight, out of reachable)
 
+	// In the fight sorter, should take enemy damage post attack in to account,
+	// they keep attacking that guy w/ 100 health :D
+
 	// pushing (the skips, enemies, allies)
 
 	// third (green) team with relationships towards others

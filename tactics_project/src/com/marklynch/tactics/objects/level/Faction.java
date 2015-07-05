@@ -13,7 +13,9 @@ import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.unit.Fight;
 import com.marklynch.tactics.objects.unit.Path;
+import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
 public class Faction {
@@ -83,7 +85,17 @@ public class Faction {
 			if (timeAtCurrentStage == 0) {
 
 				// Nearest enemy
-				boolean performedMove = moveTowardsNearestEnemyToAttack();
+				// boolean performedMove = moveTowardsNearestEnemyToAttack();
+				// if (performedMove == false) {
+				// currentStage = STAGE.ATTACK;
+				// timeAtCurrentStage = 0;
+				// } else {
+				// timeAtCurrentStage += delta;
+				//
+				// }
+
+				// Optimal enemy
+				boolean performedMove = moveTowardsOptimalEnemyToAttack();
 				if (performedMove == false) {
 					currentStage = STAGE.ATTACK;
 					timeAtCurrentStage = 0;
@@ -240,8 +252,7 @@ public class Faction {
 
 	public boolean moveTowardsNearestEnemyToAttack() {
 
-		Actor bestEnemy = null;
-		Square bestEnemySquareToMoveTo = null;
+		Square squareToMoveTo = null;
 		int costToBest = Integer.MAX_VALUE;
 
 		// TODO
@@ -258,14 +269,12 @@ public class Faction {
 		this.currentActor.calculatePathToAllSquares(level.squares);
 
 		// 1. create list of enemies
-		ArrayList<Actor> enemies = new ArrayList<Actor>();
 		for (Faction faction : level.factions) {
 			if (faction != this && this.relationships.get(faction) < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
 					if (square != null && square.distanceToSquare < costToBest) {
-						bestEnemy = actor;
-						bestEnemySquareToMoveTo = square;
+						squareToMoveTo = square;
 						costToBest = square.distanceToSquare;
 					}
 				}
@@ -285,8 +294,83 @@ public class Faction {
 		// about targets squares I need to make list of attack squares, this
 		// shit is heavy
 
-		if (bestEnemySquareToMoveTo != null) {
-			level.activeActor.moveTo(bestEnemySquareToMoveTo);
+		if (squareToMoveTo != null) {
+			level.activeActor.moveTo(squareToMoveTo);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean moveTowardsOptimalEnemyToAttack() {
+
+		int turnsToBest = Integer.MAX_VALUE;
+		ArrayList<Actor> bestTargetsBasedOnTurnsToReach = new ArrayList<Actor>();
+
+		// TODO
+		// currently if there's no path it crashes
+		// also... stay still fi ur already at the best part :P, issue (need to
+		// know ideal distance for this one though)
+		// is, its not in target's list of paths
+		// ehhhhhhhhhh.... if it's not fully reachable then just go
+		// closest as the crow flies?
+		// also... have ideal distance (for ranged VS melee for e.g.) (this is
+		// weapon distance, not travel distance)
+
+		// Calculate paths to all squares
+		this.currentActor.calculatePathToAllSquares(level.squares);
+
+		// 1. create list of enemies reachable within lowest possible turns
+		for (Faction faction : level.factions) {
+			if (faction != this && this.relationships.get(faction) < 0) {
+				for (Actor actor : faction.actors) {
+					Square square = calculateSquareToMoveToForTarget(actor);
+					int turns = square.distanceToSquare
+							/ level.activeActor.travelDistance;
+					if (square != null && turns < turnsToBest) {
+						bestTargetsBasedOnTurnsToReach.clear();
+						bestTargetsBasedOnTurnsToReach.add(actor);
+						turnsToBest = turns;
+					} else if (square != null && turns == turnsToBest) {
+						bestTargetsBasedOnTurnsToReach.add(actor);
+					}
+				}
+			}
+		}
+
+		// 2. pick which is the best
+		ArrayList<Fight> fights = new ArrayList<Fight>();
+		for (Actor actor : bestTargetsBasedOnTurnsToReach) {
+			for (Weapon weapon : level.activeActor.weapons) {
+				for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
+					Fight fight = new Fight(level.activeActor, weapon, actor,
+							actor.bestCounterWeapon(level.activeActor, weapon,
+									range), range);
+					fights.add(fight);
+				}
+			}
+		}
+
+		fights.sort(new Fight.FightComparator());
+
+		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
+		// idealWeaponDistances.add(2);
+
+		// TODO this needs to be calculated based on
+		// weapons available and the taret and their weapons
+		// TODO what if we're stuck being closed than ideal distance, need to
+		// run through this, and there could be a list of ideal distances......
+		// :/
+		// TODO ideal weapon distance could be on the other side of an object...
+		// need to factor this in when choosing a good square :/, when talking
+		// about targets squares I need to make list of attack squares, this
+		// shit is heavy
+		Square squareToMoveTo = null;
+		if (fights.size() > 0)
+			squareToMoveTo = calculateSquareToMoveToForTarget(fights.get(0).defender);
+
+		if (squareToMoveTo != null) {
+			level.activeActor.moveTo(squareToMoveTo);
 			return true;
 		} else {
 			return false;
