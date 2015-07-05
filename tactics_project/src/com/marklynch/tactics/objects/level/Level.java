@@ -89,12 +89,20 @@ public class Level {
 				0.77f), "faction_blue.png"));
 		factions.add(new Faction("Bad Guys", this,
 				new Color(0.8f, 0.37f, 0.27f), "faction_red.png"));
+		factions.add(new Faction("Green Party", this, new Color(0.30f, 0.8f,
+				0.30f), "faction_red.png"));
 
 		// Good guys relationships
 		factions.get(0).relationships.put(factions.get(1), -100);
+		factions.get(0).relationships.put(factions.get(2), -100);
 
 		// Bad guys relationships
 		factions.get(1).relationships.put(factions.get(0), -100);
+		factions.get(1).relationships.put(factions.get(2), -100);
+
+		// Green party relationships
+		factions.get(2).relationships.put(factions.get(0), -100);
+		factions.get(2).relationships.put(factions.get(1), -100);
 
 		// Actors
 		actors = new Vector<Actor>();
@@ -131,6 +139,11 @@ public class Level {
 		weaponsForActor4.add(weapon0ForActor4);
 		weaponsForActor4.add(weapon1ForActor4);
 
+		// Green Party Weapons
+		Weapon weapon0ForActor5 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
+		Vector<Weapon> weaponsForActor5 = new Vector<Weapon>();
+		weaponsForActor5.add(weapon0ForActor5);
+
 		actors.add(new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
 				"red1.png", squares[0][0], weaponsForActor0, 4, this));
 		actors.get(0).faction = factions.get(0);
@@ -155,6 +168,11 @@ public class Level {
 				squares[6][3], weaponsForActor4, 4, this));
 		actors.get(4).faction = factions.get(1);
 		factions.get(1).actors.add(actors.get(4));
+
+		actors.add(new Actor("Green1", "Hippy", 3, 10, 0, 0, 0, 0, "green.png",
+				squares[8][6], weaponsForActor5, 6, this));
+		actors.get(5).faction = factions.get(2);
+		factions.get(2).actors.add(actors.get(5));
 
 		currentFactionMovingIndex = 0;
 		currentFactionMoving = factions.get(currentFactionMovingIndex);

@@ -2,6 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// move towards nearest enemy
+
+	// move towards optimal enemy (best fight, out of reachable)
+
+	// pushing (the skips, enemies, allies)
+
+	// third (green) team with relationships towards others
+
 	// try make a 16 bit character for the game board out of a profile image,
 	// all pixels and shit and awesome, i could use like any body... once it
 	// shrunk down enough it wont matter...
@@ -13,10 +21,6 @@ public class TODO {
 	// weapon in the dumpster
 
 	// attributes along bottom of character's square
-
-	// pushing (the skips, enemies, allies)
-
-	// third (green) team with relationships towards others
 
 	// More AI (see the enum list at the top of Faction.java)
 

@@ -2,6 +2,7 @@ package com.marklynch.tactics.objects.level;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -80,10 +81,9 @@ public class Faction {
 		} else if (currentStage == STAGE.MOVE) {
 			// Moving with selected hero
 			if (timeAtCurrentStage == 0) {
-				// start of stage, perform action
 
-				boolean performedMove = moveTowardsTarget(level.factions.get(0).actors
-						.get(0));
+				// Nearest enemy
+				boolean performedMove = moveTowardsNearestEnemyToAttack();
 				if (performedMove == false) {
 					currentStage = STAGE.ATTACK;
 					timeAtCurrentStage = 0;
@@ -91,6 +91,18 @@ public class Faction {
 					timeAtCurrentStage += delta;
 
 				}
+
+				// Specific enemy
+				// boolean performedMove =
+				// moveTowardsTargetToAttack(level.factions
+				// .get(0).actors.get(0));
+				// if (performedMove == false) {
+				// currentStage = STAGE.ATTACK;
+				// timeAtCurrentStage = 0;
+				// } else {
+				// timeAtCurrentStage += delta;
+				//
+				// }
 
 				// moveTowardsTarget(level.inanimateObjects.elementAt(0));
 				// moveToRandomSquare();
@@ -185,7 +197,7 @@ public class Faction {
 		}
 	}
 
-	public boolean moveTowardsTarget(GameObject target) {
+	public boolean moveTowardsTargetToAttack(GameObject target) {
 
 		// TODO
 		// currently if there's no path it crashes
@@ -206,8 +218,62 @@ public class Faction {
 		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
 		// idealWeaponDistances.add(2);
 
-		Vector<Float> idealWeaponDistances = level.activeActor
-				.calculateIdealDistanceFrom(target);
+		// TODO this needs to be calculated based on
+		// weapons available and the taret and their weapons
+		// TODO what if we're stuck being closed than ideal distance, need to
+		// run through this, and there could be a list of ideal distances......
+		// :/
+		// TODO ideal weapon distance could be on the other side of an object...
+		// need to factor this in when choosing a good square :/, when talking
+		// about targets squares I need to make list of attack squares, this
+		// shit is heavy
+
+		Square squareToMoveTo = calculateSquareToMoveToForTarget(target);
+
+		if (squareToMoveTo != null) {
+			level.activeActor.moveTo(squareToMoveTo);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean moveTowardsNearestEnemyToAttack() {
+
+		Actor bestEnemy = null;
+		Square bestEnemySquareToMoveTo = null;
+		int costToBest = Integer.MAX_VALUE;
+
+		// TODO
+		// currently if there's no path it crashes
+		// also... stay still fi ur already at the best part :P, issue (need to
+		// know ideal distance for this one though)
+		// is, its not in target's list of paths
+		// ehhhhhhhhhh.... if it's not fully reachable then just go
+		// closest as the crow flies?
+		// also... have ideal distance (for ranged VS melee for e.g.) (this is
+		// weapon distance, not travel distance)
+
+		// Calculate paths to all squares
+		this.currentActor.calculatePathToAllSquares(level.squares);
+
+		// 1. create list of enemies
+		ArrayList<Actor> enemies = new ArrayList<Actor>();
+		for (Faction faction : level.factions) {
+			if (faction != this && this.relationships.get(faction) < 0) {
+				for (Actor actor : faction.actors) {
+					Square square = calculateSquareToMoveToForTarget(actor);
+					if (square != null && square.distanceToSquare < costToBest) {
+						bestEnemy = actor;
+						bestEnemySquareToMoveTo = square;
+						costToBest = square.distanceToSquare;
+					}
+				}
+			}
+		}
+
+		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
+		// idealWeaponDistances.add(2);
 
 		// TODO this needs to be calculated based on
 		// weapons available and the taret and their weapons
@@ -219,15 +285,28 @@ public class Faction {
 		// about targets squares I need to make list of attack squares, this
 		// shit is heavy
 
+		if (bestEnemySquareToMoveTo != null) {
+			level.activeActor.moveTo(bestEnemySquareToMoveTo);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Square calculateSquareToMoveToForTarget(GameObject target) {
+
+		Vector<Float> idealWeaponDistances = level.activeActor
+				.calculateIdealDistanceFrom(target);
+
 		Vector<Square> targetSquares = new Vector<Square>();
 		int bestTravelCostFound = Integer.MAX_VALUE;
 		Path pathToSquare = null;
 		for (int i = 0; i < idealWeaponDistances.size(); i++) {
 
-			// Check if we're already at this ditance
+			// Check if we're already at this distance
 			if (level.activeActor.weaponDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
 					.get(i))
-				return false;
+				return level.activeActor.squareGameObjectIsOn;
 
 			targetSquares = target.getAllSquaresAtDistance(idealWeaponDistances
 					.get(i));
@@ -253,7 +332,7 @@ public class Faction {
 		}
 
 		if (pathToSquare == null) {
-			return false;
+			return null;
 		}
 
 		// TODO move this to an actor method called moveAlongPath
@@ -271,12 +350,8 @@ public class Faction {
 			}
 		}
 
-		if (squareToMoveTo != null) {
-			level.activeActor.moveTo(squareToMoveTo);
-			return true;
-		} else {
-			return false;
-		}
+		return squareToMoveTo;
+
 	}
 
 	public boolean moveToRandomSquare() {
