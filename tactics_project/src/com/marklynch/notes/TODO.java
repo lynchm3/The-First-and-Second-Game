@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// its showing "x moved to y" when they stay on the same spot
+
 	// Attack -> weapon selection -> Attack enemy
 
 	// need unselected method for actors, - hide wepaons buttons etc.
