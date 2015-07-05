@@ -176,17 +176,6 @@ public class Game {
 			}
 		}
 
-		// Path highlights
-		if (level.activeActor != null && squareMouseIsOver != null
-				&& squareMouseIsOver.reachableBySelectedCharater
-				&& level.activeActor.faction == level.factions.get(0)
-				&& level.currentFactionMoving == level.factions.get(0)) {
-			path = level.activeActor.paths.get(squareMouseIsOver);
-			for (Square square : path.squares) {
-				square.inPath = true;
-			}
-		}
-
 		// Getting button that we have clicked, if any
 		if (dragging == false) {
 			buttonHoveringOver = level.getButtonFromMousePosition();
@@ -195,6 +184,18 @@ public class Game {
 				buttonHoveringOver = level.activeActor
 						.getButtonFromMousePosition(mouseXTransformed,
 								mouseYTransformed);
+			}
+		}
+
+		// Path highlights
+		if (buttonHoveringOver == null && level.activeActor != null
+				&& squareMouseIsOver != null
+				&& squareMouseIsOver.reachableBySelectedCharater
+				&& level.activeActor.faction == level.factions.get(0)
+				&& level.currentFactionMoving == level.factions.get(0)) {
+			path = level.activeActor.paths.get(squareMouseIsOver);
+			for (Square square : path.squares) {
+				square.inPath = true;
 			}
 		}
 
@@ -322,6 +323,10 @@ public class Game {
 			keyStateDown = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
 			keyStateDown = false;
+		}
+
+		if (!Mouse.isButtonDown(0)) {
+			dragging = false;
 		}
 
 		// keep char on the screen

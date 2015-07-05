@@ -67,8 +67,8 @@ public class Square {
 
 			Texture highlightTexture = null;
 
-			if (level.currentFactionMovingIndex == 0
-					&& (inPath || this == Game.squareMouseIsOver))
+			if (level.currentFactionMovingIndex == 0 && (inPath))// || this ==
+																	// Game.squareMouseIsOver))
 				highlightTexture = level.gameCursor.imageTexture3;
 			else if (reachableBySelectedCharater)
 				highlightTexture = level.gameCursor.imageTexture;
