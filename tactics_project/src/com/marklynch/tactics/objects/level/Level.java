@@ -90,7 +90,7 @@ public class Level {
 		factions.add(new Faction("Bad Guys", this,
 				new Color(0.8f, 0.37f, 0.27f), "faction_red.png"));
 		factions.add(new Faction("Green Party", this, new Color(0.30f, 0.8f,
-				0.30f), "faction_red.png"));
+				0.30f), "faction_green.png"));
 
 		// Good guys relationships
 		factions.get(0).relationships.put(factions.get(1), -100);
