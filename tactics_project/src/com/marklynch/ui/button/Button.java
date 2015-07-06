@@ -52,6 +52,14 @@ public abstract class Button {
 
 	}
 
+	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
+		if (mouseX > x && mouseX < x + width && mouseY > y
+				&& mouseY < y + height) {
+			return true;
+		}
+		return false;
+	}
+
 	public abstract void click();
 	// level.endTurn();
 

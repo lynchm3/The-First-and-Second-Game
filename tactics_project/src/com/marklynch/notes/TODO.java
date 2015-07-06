@@ -4,7 +4,7 @@ public class TODO {
 
 	// highlight squares that u can attack
 
-	// Buttons are drawing weirdly :P
+	// Undo + end turn Buttons are drawing weirdly :P
 
 	// write equipBestWeapon method - create fights at that distance and kill
 	// dem bitches... interesting problem coz u know the enemy is gonna select
@@ -25,7 +25,10 @@ public class TODO {
 	// Make sure undo is disabled when you attack
 
 	// The way they hold the selected weapon is really cool, build that in, an
-	// anchor point for the weapons (for where the persons hand(s) are)
+	// anchor point for the weapons (for where the persons hand(s) are), and
+	// maybe arms with anchor points... and maybe some elbows w/ anchor point on
+	// those arms... animate them the way that u do for 3d items like that....
+	// (move the camera, not the arm...)
 
 	// do a withinBounds() method for the buttons
 

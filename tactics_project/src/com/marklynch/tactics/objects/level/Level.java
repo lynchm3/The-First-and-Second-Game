@@ -339,13 +339,9 @@ public class Level {
 			float alteredMouseX, float alteredMouseY) {
 
 		for (Button button : this.buttons) {
-
-			if (mouseX > button.x && mouseX < button.x + button.width
-					&& Game.windowHeight - mouseY > button.y
-					&& Game.windowHeight - mouseY < button.y + button.height) {
-
+			if (button.calculateIfPointInBoundsOfButton(mouseX,
+					Game.windowHeight - mouseY))
 				return button;
-			}
 		}
 
 		if (activeActor != null && activeActor.faction == factions.get(0))

@@ -998,29 +998,19 @@ public class Actor extends GameObject {
 
 	public Button getButtonFromMousePosition(float alteredMouseX,
 			float alteredMouseY) {
-
 		for (Button button : this.buttons) {
-			if (alteredMouseX >= button.x
-					&& alteredMouseX <= button.x + button.width
-					&& alteredMouseY >= button.y
-					&& alteredMouseY <= button.y + button.height) {
-
+			if (button.calculateIfPointInBoundsOfButton(alteredMouseX,
+					alteredMouseY))
 				return button;
-			}
 		}
 
 		if (showWeaponButtons) {
 			for (Button button : this.weaponButtons) {
-				if (alteredMouseX >= button.x
-						&& alteredMouseX <= button.x + button.width
-						&& alteredMouseY >= button.y
-						&& alteredMouseY <= button.y + button.height) {
-
+				if (button.calculateIfPointInBoundsOfButton(alteredMouseX,
+						alteredMouseY))
 					return button;
-				}
 			}
 		}
-
 		return null;
 	}
 
