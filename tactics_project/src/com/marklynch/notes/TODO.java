@@ -4,8 +4,6 @@ public class TODO {
 
 	// Attack -> weapon selection -> Attack enemy
 
-	// need unselected method for actors, - hide wepaons buttons etc.
-
 	// When you hover over a square you can move to show where you can reach and
 	// with what weapon... ot something... i dunno, maybe just highlight the
 	// squares
