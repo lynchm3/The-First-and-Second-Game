@@ -16,6 +16,7 @@ public class art {
 	 * on making shit gritty) weird coloured hair (thats what peeps do in the
 	 * future!)
 	 * 
+	 * caroon effect - http://www.digitalcameraworld.com/2014/01/22/photo-to-cartoon-effect-how-to-use-photoshop-to-turn-images-into-drawings-or-paintings/
 	 * 
 	 * AND different expressions!
 	 * 

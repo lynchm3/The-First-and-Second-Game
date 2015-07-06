@@ -95,6 +95,10 @@ public class Characters {
 	 * 
 	 * Cartoony effect grimey effect merge faces effect retro 8bit effect /
 	 * pixely effect
+	 * 
+	 * someone with a dog
+	 * 
+	 * someone in a wheelchair
 	 */
 
 }

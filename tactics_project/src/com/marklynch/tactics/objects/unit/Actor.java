@@ -175,6 +175,10 @@ public class Actor extends GameObject {
 	}
 
 	public void moveTo(Square squareToMoveTo) {
+
+		if (squareToMoveTo == this.squareGameObjectIsOn)
+			return;
+
 		Square oldSquare = this.squareGameObjectIsOn;
 		int distanceTraveled = squareToMoveTo.distanceToSquare;
 		this.squareGameObjectIsOn.gameObject = null;

@@ -327,14 +327,16 @@ public class Faction {
 			if (faction != this && this.relationships.get(faction) < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
-					int turns = square.distanceToSquare
-							/ level.activeActor.travelDistance;
-					if (square != null && turns < turnsToBest) {
-						bestTargetsBasedOnTurnsToReach.clear();
-						bestTargetsBasedOnTurnsToReach.add(actor);
-						turnsToBest = turns;
-					} else if (square != null && turns == turnsToBest) {
-						bestTargetsBasedOnTurnsToReach.add(actor);
+					if (square != null) {
+						int turns = square.distanceToSquare
+								/ level.activeActor.travelDistance;
+						if (turns < turnsToBest) {
+							bestTargetsBasedOnTurnsToReach.clear();
+							bestTargetsBasedOnTurnsToReach.add(actor);
+							turnsToBest = turns;
+						} else if (square != null && turns == turnsToBest) {
+							bestTargetsBasedOnTurnsToReach.add(actor);
+						}
 					}
 				}
 			}
