@@ -1446,6 +1446,15 @@ public class Notes {
 	 * FIGHT fist icon - could also use HEAL, FIGHT, PUSH...
 	 * 
 	 * Super spells like armour princess?
+	 * 
+	 * I want an investigation!!! look in to her story, black closet... RPS must
+	 * ref some serious mystery/investigation games. PHEONIX WRIGHT :P (which
+	 * was BULLSHIT!!!!!!!!)
+	 * 
+	 * Clouds when u zoom out far enough! :D (skyrim)
+	 * 
+	 * Could go around on a bus and take loads of photos and construct a city
+	 * myself :D (i dont think i'd be quite at the correct height though...
 	 */
 
 }

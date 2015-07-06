@@ -4,8 +4,6 @@ public class Research {
 
 	/*
 	 * 
-	 * WORK SMART AND HARD ;) *
-	 * 
 	 * Watch some general making of videos for games, see wassup e.g.The Making
 	 * of Oblivion (FULL | HQ)
 	 * 
@@ -50,6 +48,9 @@ public class Research {
 	 * Read negative reviews of these games (and positive and funny i suppose)
 	 * 
 	 * Shining Force, Fire Emblem, or Warsong
+	 * 
+	 * Black closet... UI was fucking awfful... had no idea what i was doing,
+	 * even though it was bare
 	 */
 
 }
