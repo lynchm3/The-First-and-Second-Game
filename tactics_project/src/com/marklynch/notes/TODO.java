@@ -4,6 +4,8 @@ public class TODO {
 
 	// highlight squares that u can attack
 
+	// Buttons are drawing weirdly :P
+
 	// write equipBestWeapon method - create fights at that distance and kill
 	// dem bitches... interesting problem coz u know the enemy is gonna select
 	// the best weapon to counter you... need to take that in to a/c in the sort
@@ -11,6 +13,12 @@ public class TODO {
 	// problem, not a game mechanics problem, so it's fine to be complicated.
 	// ALSO... need to check this for all sorting of best fights. If weapon will
 	// kill someone or cant be countered... its the best :D
+	// HERE IT IS FOR ALL RANGES (so for not all ranges it sshould be easier...)
+	// do it from the enemy's point of view......
+	// so all attacks from all ranges......
+	// work out how they'll counter......
+	// then compile their selections the (0) after sorting...
+	// switch to our guy, using those fights... pick the best...
 
 	// bug undo button's bounds are way off (to the right anyway....)
 

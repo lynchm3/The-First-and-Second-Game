@@ -182,13 +182,8 @@ public class Game {
 
 		// Getting button that we have clicked, if any
 		if (dragging == false) {
-			buttonHoveringOver = level.getButtonFromMousePosition();
-			if (buttonHoveringOver == null && level.activeActor != null
-					&& level.activeActor.faction == level.factions.get(0)) {
-				buttonHoveringOver = level.activeActor
-						.getButtonFromMousePosition(mouseXTransformed,
-								mouseYTransformed);
-			}
+			buttonHoveringOver = level.getButtonFromMousePosition(Mouse.getX(),
+					Mouse.getY(), mouseXTransformed, mouseYTransformed);
 		}
 
 		// Path highlights
@@ -263,7 +258,8 @@ public class Game {
 					&& squareMouseIsOver.gameObject != null
 					&& level.activeActor != null
 					&& squareMouseIsOver.gameObject != level.activeActor
-					&& level.currentFactionMoving == level.factions.get(0)) {
+					&& level.currentFactionMoving == level.factions.get(0)
+					&& buttonHoveringOver == null) {
 				// show hover preview
 				level.activeActor
 						.showHoverFightPreview(squareMouseIsOver.gameObject);
