@@ -56,8 +56,8 @@ public class Actor extends GameObject {
 		this.attackButton = new AttackButton(0, 0, 50, 50, "attack.png",
 				"attack.png", level);
 
-		this.pushButton = new AttackButton(0, 0, 50, 50, "attack.png",
-				"attack.png", level);
+		this.pushButton = new AttackButton(0, 0, 50, 50, "push.png",
+				"push.png", level);
 
 		buttons.add(attackButton);
 		buttons.add(pushButton);

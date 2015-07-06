@@ -18,5 +18,10 @@ public class Reading {
 	 * 
 	 * In general, just check out the sunday papers and devblogs (tag devblog)
 	 * on RPS, gotta be someuseful stuff there
+	 * 
+	 * Minecraft is written in java apparently (according to
+	 * http://www.rockpapershotgun
+	 * .com/2015/07/06/minecraft-windows-10-edition-beta/), see if there's dev
+	 * blod or something about writing something so massive in java.
 	 */
 }
