@@ -30,7 +30,6 @@ public class ResourceUtils {
 
 		if (texture != null) {
 		} else {
-
 			try {
 				texture = TextureLoader.getTexture("PNG", ResourceLoader
 						.getResourceAsStream("res/images/" + path));

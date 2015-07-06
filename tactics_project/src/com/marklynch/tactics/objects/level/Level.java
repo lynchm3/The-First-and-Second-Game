@@ -19,7 +19,6 @@ import com.marklynch.ui.Dialog;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.EndTurnButton;
 import com.marklynch.ui.button.UndoButton;
-import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 
@@ -295,9 +294,6 @@ public class Level {
 
 		for (Button button : buttons) {
 			button.draw();
-
-			QuadUtils.drawQuad(new Color(1f, 0f, 0f, 0.5f), button.x, button.x
-					+ button.width, button.y, button.y + button.height);
 		}
 
 		// Turn text

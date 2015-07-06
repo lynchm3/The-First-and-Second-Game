@@ -4,8 +4,6 @@ public class TODO {
 
 	// highlight squares that u can attack
 
-	// Undo + end turn Buttons are drawing weirdly :P
-
 	// write equipBestWeapon method - create fights at that distance and kill
 	// dem bitches... interesting problem coz u know the enemy is gonna select
 	// the best weapon to counter you... need to take that in to a/c in the sort
