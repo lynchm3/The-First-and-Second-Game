@@ -179,14 +179,20 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public void counter(GameObject gameObject) {
-		if (hasRange(this.weaponDistanceTo(gameObject.squareGameObjectIsOn))) {
-			this.equipBestWeapon(gameObject);
-			attack(gameObject, true);
+	public void counter(Actor actor) {
+		if (hasRange(this.weaponDistanceTo(actor.squareGameObjectIsOn))) {
+			this.equipBestWeaponForCounter(actor, actor.equippedWeapon);
+			attack(actor, true);
 		}
 	}
 
 	public void equipBestWeapon(GameObject target) {
+
+		// take countering in to account, this is quite an interesting issue,
+		// coz I know the enemy is going to pick the best weapon to counter
+		// with....
+		// weird...
+
 		int range = this.weaponDistanceTo(target.squareGameObjectIsOn);
 		for (Weapon weapon : weapons) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
@@ -195,6 +201,34 @@ public class Actor extends GameObject {
 		}
 		System.out.println("equipBestWeapon() - equippedWeapon = "
 				+ this.equippedWeapon);
+	}
+
+	public void equipBestWeaponForCounter(GameObject target,
+			Weapon targetsWeapon) {
+
+		ArrayList<Weapon> potentialWeaponsToEquip = new ArrayList<Weapon>();
+
+		int range = this.weaponDistanceTo(target.squareGameObjectIsOn);
+		for (Weapon weapon : weapons) {
+			if (range >= weapon.minRange && range <= weapon.maxRange) {
+				potentialWeaponsToEquip.add(weapon);
+			}
+		}
+
+		if (potentialWeaponsToEquip.size() == 0) {
+			equippedWeapon = null;
+		} else if (potentialWeaponsToEquip.size() == 1) {
+			equippedWeapon = potentialWeaponsToEquip.get(0);
+		} else {
+			ArrayList<Fight> fights = new ArrayList<Fight>();
+			for (Weapon weapon : potentialWeaponsToEquip) {
+				Fight fight = new Fight(this, weapon, target, targetsWeapon,
+						range);
+				fights.add(fight);
+			}
+			fights.sort(new Fight.FightComparator());
+			equippedWeapon = fights.get(0).attackerWeapon;
+		}
 	}
 
 	@Override

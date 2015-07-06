@@ -1,8 +1,16 @@
 package com.marklynch.notes;
 
 public class TODO {
+
+	// highlight squares that u can attack
+
 	// write equipBestWeapon method - create fights at that distance and kill
-	// dem bitches
+	// dem bitches... interesting problem coz u know the enemy is gonna select
+	// the best weapon to counter you... need to take that in to a/c in the sort
+	// method... maybe... it's quite a confusing problem. BUT... it's an AI
+	// problem, not a game mechanics problem, so it's fine to be complicated.
+	// ALSO... need to check this for all sorting of best fights. If weapon will
+	// kill someone or cant be countered... its the best :D
 
 	// bug undo button's bounds are way off (to the right anyway....)
 
