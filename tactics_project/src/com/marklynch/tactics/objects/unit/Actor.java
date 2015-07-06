@@ -831,28 +831,32 @@ public class Actor extends GameObject {
 
 		// actor buttons
 		if (level.activeActor == this && this.faction == level.factions.get(0)) {
-			System.out.println("Game.delta = " + Game.delta);
+
+			// animationX
 			buttonsAnimateCurrentTime += Game.delta;
-			System.out.println("buttonsAnimateCurrentTime = "
-					+ buttonsAnimateCurrentTime);
 			float animationEndPointX = this.squareGameObjectIsOn.x
 					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
-			float animationStartPointX = -(buttons.size() * 50);
+			float animationStartPointX = animationEndPointX
+					- (buttons.size() * 50);
 			float animationDistanceX = animationEndPointX
 					- animationStartPointX;
-			System.out.println("animationDistanceX = " + animationDistanceX);
 			if (buttonsAnimateCurrentTime > buttonsAnimateMaxTime) {
 				buttonsAnimateCurrentTime = buttonsAnimateMaxTime;
 			}
-			float animationOffset = (buttonsAnimateCurrentTime / buttonsAnimateMaxTime)
+			float animationOffsetX = (buttonsAnimateCurrentTime / buttonsAnimateMaxTime)
 					* animationDistanceX;
-			float buttonsX = animationStartPointX + animationOffset;
+			float buttonsX = animationStartPointX + animationOffsetX;
 			for (int i = 0; i < buttons.size(); i++) {
-				// Draw attack button
 				buttons.get(i).x = buttonsX + 50 * i;
 				buttons.get(i).y = this.squareGameObjectIsOn.y
 						* Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
-				buttons.get(i).draw();
+				buttons.get(i).drawWithinBounds(
+						animationEndPointX,
+						animationEndPointX + (buttons.size() * 50),
+						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT
+								+ Game.SQUARE_HEIGHT,
+						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT
+								+ Game.SQUARE_HEIGHT + 50);
 			}
 		}
 

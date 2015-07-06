@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// method to draw within bounds
+
 	// Attack -> weapon selection -> Attack enemy
 
 	// animate the buttons comin out of the playa
