@@ -16,7 +16,9 @@ public class art {
 	 * on making shit gritty) weird coloured hair (thats what peeps do in the
 	 * future!)
 	 * 
-	 * caroon effect - http://www.digitalcameraworld.com/2014/01/22/photo-to-cartoon-effect-how-to-use-photoshop-to-turn-images-into-drawings-or-paintings/
+	 * caroon effect -
+	 * http://www.digitalcameraworld.com/2014/01/22/photo-to-cartoon
+	 * -effect-how-to-use-photoshop-to-turn-images-into-drawings-or-paintings/
 	 * 
 	 * AND different expressions!
 	 * 
@@ -57,5 +59,11 @@ public class art {
 	 * http://blog.newspapers.library.in.gov/wp-content/uploads/2015/04/
 	 * Victor_Bulla_-_Young_Pioneers_Defence-Leningrad-1937-1024x735.jpg Creepy
 	 * gas mask people (see Dr Who also)
+	 * 
+	 * WHile design is still up in the air... i should really go for something
+	 * awesome. BUT has to be something I can achieve AND something that doesnt
+	 * interfer with the mechanics of the game :D Look at this shit -
+	 * http://www.rockpapershotgun.com/2015/07/05/dolly-free-puzzle-platformer/
+	 * http://www.rockpapershotgun.com/2015/07/06/the-hollow-visual-novel/
 	 */
 }

@@ -34,6 +34,9 @@ public class Actor extends GameObject {
 	// buttons
 	public ArrayList<Button> buttons = new ArrayList<Button>();
 	public AttackButton attackButton = null;
+	public AttackButton pushButton = null;
+	public float buttonsAnimateCurrentTime = 0f;
+	public float buttonsAnimateMaxTime = 200f;
 
 	// Fight preview on hover
 	public boolean showHoverFightPreview = false;
@@ -53,7 +56,11 @@ public class Actor extends GameObject {
 		this.attackButton = new AttackButton(0, 0, 50, 50, "attack.png",
 				"attack.png", level);
 
+		this.pushButton = new AttackButton(0, 0, 50, 50, "attack.png",
+				"attack.png", level);
+
 		buttons.add(attackButton);
+		buttons.add(pushButton);
 		attackButton.enabled = true;
 	}
 
@@ -824,12 +831,29 @@ public class Actor extends GameObject {
 
 		// actor buttons
 		if (level.activeActor == this && this.faction == level.factions.get(0)) {
-			// Draw attack button
-			attackButton.x = this.squareGameObjectIsOn.x
-					* (int) Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
-			attackButton.y = this.squareGameObjectIsOn.y
-					* (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
-			attackButton.draw();
+			System.out.println("Game.delta = " + Game.delta);
+			buttonsAnimateCurrentTime += Game.delta;
+			System.out.println("buttonsAnimateCurrentTime = "
+					+ buttonsAnimateCurrentTime);
+			float animationEndPointX = this.squareGameObjectIsOn.x
+					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
+			float animationStartPointX = -(buttons.size() * 50);
+			float animationDistanceX = animationEndPointX
+					- animationStartPointX;
+			System.out.println("animationDistanceX = " + animationDistanceX);
+			if (buttonsAnimateCurrentTime > buttonsAnimateMaxTime) {
+				buttonsAnimateCurrentTime = buttonsAnimateMaxTime;
+			}
+			float animationOffset = (buttonsAnimateCurrentTime / buttonsAnimateMaxTime)
+					* animationDistanceX;
+			float buttonsX = animationStartPointX + animationOffset;
+			for (int i = 0; i < buttons.size(); i++) {
+				// Draw attack button
+				buttons.get(i).x = buttonsX + 50 * i;
+				buttons.get(i).y = this.squareGameObjectIsOn.y
+						* Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
+				buttons.get(i).draw();
+			}
 		}
 
 		// System.out.println("showWeaponSelection = " + showWeaponSelection);
@@ -914,6 +938,7 @@ public class Actor extends GameObject {
 	}
 
 	public void unselected() {
+		buttonsAnimateCurrentTime = 0;
 		this.showWeaponSelection = false;
 		level.removeWalkingHighlight();
 		level.removeWeaponsThatCanAttackHighlight();

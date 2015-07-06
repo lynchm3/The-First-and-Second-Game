@@ -19,7 +19,7 @@ import com.marklynch.ui.button.Button;
 public class Game {
 
 	/** time at last frame */
-	long lastFrame;
+	static long lastFrame;
 
 	/** frames per second */
 	int fps;
@@ -39,8 +39,10 @@ public class Game {
 	boolean mouseButtonStateLeft = false;
 	boolean mouseButtonStateRight = false;
 
-	public static int windowWidth = 1900;
-	public static int windowHeight = 1000;
+	// public static int windowWidth = 1900;
+	// public static int windowHeight = 1000;
+	public static int windowWidth = 400;
+	public static int windowHeight = 400;
 
 	public static float zoom = 0.8f;
 
@@ -51,6 +53,8 @@ public class Game {
 	float mouseLastX = -1;
 	float mouseLastY = -1;
 	boolean dragging = false;
+
+	public static int delta = 0;
 
 	public static Square squareMouseIsOver;
 	public static Path path;
@@ -68,7 +72,7 @@ public class Game {
 		lastFPS = getTime(); // call before loop to initialise fps timer
 
 		while (!Display.isCloseRequested()) {
-			int delta = getDelta();
+			delta = getDelta();
 
 			update(delta);
 			renderGL();
@@ -348,7 +352,7 @@ public class Game {
 	 * 
 	 * @return milliseconds passed since last frame
 	 */
-	public int getDelta() {
+	public static int getDelta() {
 		long time = getTime();
 		int delta = (int) (time - lastFrame);
 		lastFrame = time;
