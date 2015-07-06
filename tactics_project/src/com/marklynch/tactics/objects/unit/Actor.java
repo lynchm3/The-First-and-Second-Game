@@ -849,14 +849,11 @@ public class Actor extends GameObject {
 			for (int i = 0; i < buttons.size(); i++) {
 				buttons.get(i).x = buttonsX + 50 * i;
 				buttons.get(i).y = this.squareGameObjectIsOn.y
-						* Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
-				buttons.get(i).drawWithinBounds(
-						animationEndPointX,
+						* Game.SQUARE_HEIGHT;
+				buttons.get(i).drawWithinBounds(animationEndPointX,
 						animationEndPointX + (buttons.size() * 50),
-						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT
-								+ Game.SQUARE_HEIGHT,
-						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT
-								+ Game.SQUARE_HEIGHT + 50);
+						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT,
+						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT + 50);
 			}
 		}
 
