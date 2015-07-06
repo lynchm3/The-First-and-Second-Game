@@ -8,6 +8,7 @@ public class AttackButton extends Button {
 			String enabledTexturePath, String disabledTexturePath, Level level) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
 				level);
+		this.enabled = true;
 	}
 
 	@Override

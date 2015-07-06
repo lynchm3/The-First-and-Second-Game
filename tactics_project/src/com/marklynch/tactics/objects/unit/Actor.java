@@ -14,6 +14,7 @@ import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.AttackButton;
 import com.marklynch.ui.button.Button;
+import com.marklynch.ui.button.WeaponButton;
 import com.marklynch.utils.FormattingUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextureUtils;
@@ -28,8 +29,8 @@ public class Actor extends GameObject {
 	public int actorLevel = 1;
 	public int distanceMovedThisTurn = 0;
 	public int travelDistance = 4;
-	public Weapon selectedWeapon = null;
-	public boolean showWeaponSelection = false;
+	public Weapon equippedWeapon = null;
+	public boolean showWeaponButtons = false;
 
 	// buttons
 	public ArrayList<Button> buttons = new ArrayList<Button>();
@@ -37,6 +38,9 @@ public class Actor extends GameObject {
 	public AttackButton pushButton = null;
 	public float buttonsAnimateCurrentTime = 0f;
 	public float buttonsAnimateMaxTime = 200f;
+
+	// weapon buttons
+	public ArrayList<Button> weaponButtons = new ArrayList<Button>();
 
 	// Fight preview on hover
 	public boolean showHoverFightPreview = false;
@@ -62,6 +66,11 @@ public class Actor extends GameObject {
 		buttons.add(attackButton);
 		buttons.add(pushButton);
 		attackButton.enabled = true;
+
+		for (Weapon weapon : weapons) {
+			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath,
+					weapon.imagePath, level, weapon));
+		}
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
@@ -112,7 +121,7 @@ public class Actor extends GameObject {
 		for (Weapon weapon : weapons) {
 			if (weaponDistance >= weapon.minRange
 					&& weaponDistance <= weapon.maxRange) {
-				selectedWeapon = weapon;
+				// selectedWeapon = weapon;
 				return true;
 			}
 		}
@@ -120,10 +129,15 @@ public class Actor extends GameObject {
 	}
 
 	public void attack(GameObject gameObject, boolean isCounter) {
+		System.out.println("attack() - isCounter = " + isCounter);
+		System.out.println("attack() 1 - equippedWeapon = "
+				+ this.equippedWeapon);
 		if (hasAttackedThisTurn == true && !isCounter) {
 			return;
 		}
-		gameObject.remainingHealth -= selectedWeapon.damage;
+		System.out.println("attack() 2 - equippedWeapon = "
+				+ this.equippedWeapon);
+		gameObject.remainingHealth -= equippedWeapon.damage;
 		this.distanceMovedThisTurn = Integer.MAX_VALUE;
 		this.hasAttackedThisTurn = true;
 		String attackTypeString;
@@ -134,8 +148,8 @@ public class Actor extends GameObject {
 		level.logOnScreen(new ActivityLog(new Object[] {
 
 		this, " " + attackTypeString + " ", gameObject, " with ",
-				selectedWeapon.imageTexture,
-				" for " + selectedWeapon.damage + " damage" }));
+				equippedWeapon.imageTexture,
+				" for " + equippedWeapon.damage + " damage" }));
 
 		Actor actor = null;
 		if (gameObject instanceof Actor)
@@ -167,8 +181,20 @@ public class Actor extends GameObject {
 
 	public void counter(GameObject gameObject) {
 		if (hasRange(this.weaponDistanceTo(gameObject.squareGameObjectIsOn))) {
+			this.equipBestWeapon(gameObject);
 			attack(gameObject, true);
 		}
+	}
+
+	public void equipBestWeapon(GameObject target) {
+		int range = this.weaponDistanceTo(target.squareGameObjectIsOn);
+		for (Weapon weapon : weapons) {
+			if (range >= weapon.minRange && range <= weapon.maxRange) {
+				equippedWeapon = weapon;
+			}
+		}
+		System.out.println("equipBestWeapon() - equippedWeapon = "
+				+ this.equippedWeapon);
 	}
 
 	@Override
@@ -855,21 +881,32 @@ public class Actor extends GameObject {
 						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT,
 						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT + 50);
 			}
-		}
 
-		// System.out.println("showWeaponSelection = " + showWeaponSelection);
+			// System.out.println("showWeaponSelection = " +
+			// showWeaponSelection);
 
-		if (showWeaponSelection) {
-			for (int i = 0; i < weapons.size(); i++) {
-				TextureUtils.drawTexture(weapons.get(i).imageTexture,
-						attackButton.x, attackButton.x + attackButton.width,
-						attackButton.y + attackButton.height
-								+ attackButton.height * i, attackButton.y
-								+ attackButton.height + attackButton.height * i
-								+ attackButton.height);
+			if (showWeaponButtons) {
+				for (int i = 0; i < weaponButtons.size(); i++) {
+					weaponButtons.get(i).x = attackButton.x;
+					weaponButtons.get(i).y = attackButton.y
+							+ attackButton.height + attackButton.height * i;
+					weaponButtons.get(i).draw();
+				}
 			}
+
 		}
 
+		if (equippedWeapon != null) {
+			TextureUtils.drawTexture(equippedWeapon.imageTexture,
+					this.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+							+ Game.SQUARE_WIDTH / 2f - 0,
+					this.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+							+ Game.SQUARE_WIDTH / 2f + 32,
+					this.squareGameObjectIsOn.y * (Game.SQUARE_HEIGHT)
+							+ Game.SQUARE_WIDTH / 2f - 16,
+					this.squareGameObjectIsOn.y * (Game.SQUARE_HEIGHT)
+							+ Game.SQUARE_WIDTH / 2f + 16);
+		}
 	}
 
 	public Vector<Float> calculateIdealDistanceFrom(GameObject target) {
@@ -919,19 +956,34 @@ public class Actor extends GameObject {
 	}
 
 	public void attackClicked() {
-		showWeaponSelection = !showWeaponSelection;
+		showWeaponButtons = !showWeaponButtons;
+		if (showWeaponButtons == false) {
+			equippedWeapon = null;
+		}
 	}
 
 	public Button getButtonFromMousePosition(float alteredMouseX,
 			float alteredMouseY) {
 
 		for (Button button : this.buttons) {
-			if (alteredMouseX > button.x
-					&& alteredMouseX < button.x + button.width
-					&& alteredMouseY > button.y
-					&& alteredMouseY < button.y + button.height) {
+			if (alteredMouseX >= button.x
+					&& alteredMouseX <= button.x + button.width
+					&& alteredMouseY >= button.y
+					&& alteredMouseY <= button.y + button.height) {
 
 				return button;
+			}
+		}
+
+		if (showWeaponButtons) {
+			for (Button button : this.weaponButtons) {
+				if (alteredMouseX >= button.x
+						&& alteredMouseX <= button.x + button.width
+						&& alteredMouseY >= button.y
+						&& alteredMouseY <= button.y + button.height) {
+
+					return button;
+				}
 			}
 		}
 
@@ -939,10 +991,15 @@ public class Actor extends GameObject {
 	}
 
 	public void unselected() {
+		this.equippedWeapon = null;
 		buttonsAnimateCurrentTime = 0;
-		this.showWeaponSelection = false;
+		this.showWeaponButtons = false;
 		level.removeWalkingHighlight();
 		level.removeWeaponsThatCanAttackHighlight();
 		level.activeActor.hideHoverFightPreview();
+	}
+
+	public void weaponButtonClicked(Weapon weapon) {
+		this.equippedWeapon = weapon;
 	}
 }

@@ -99,4 +99,11 @@ public class Weapon {
 		}
 
 	}
+
+	public boolean hasRange(int weaponDistanceTo) {
+		if (weaponDistanceTo >= minRange && weaponDistanceTo <= maxRange) {
+			return true;
+		}
+		return false;
+	}
 }

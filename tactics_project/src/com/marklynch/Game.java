@@ -229,12 +229,14 @@ public class Game {
 					}
 				}
 
-				if (level.activeActor != null && selectedNewActor == false) {
-					if (level.activeActor.hasRange(level.activeActor
-							.weaponDistanceTo(squareMouseIsOver))) {
-						level.activeActor.attack(clickedGameObject, false);
-						Actor.highlightSelectedCharactersSquares(level);
-					}
+				if (level.activeActor != null
+						&& selectedNewActor == false
+						&& level.activeActor.equippedWeapon != null
+						&& level.activeActor.equippedWeapon
+								.hasRange(level.activeActor
+										.weaponDistanceTo(squareMouseIsOver))) {
+					level.activeActor.attack(clickedGameObject, false);
+					Actor.highlightSelectedCharactersSquares(level);
 				}
 			}
 

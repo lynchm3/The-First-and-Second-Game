@@ -1,10 +1,17 @@
 package com.marklynch.notes;
 
 public class TODO {
+	// write equipBestWeapon method - create fights at that distance and kill
+	// dem bitches
 
-	// method to draw within bounds
+	// bug undo button's bounds are way off (to the right anyway....)
 
-	// Attack -> weapon selection -> Attack enemy
+	// Make sure undo is disabled when you attack
+
+	// The way they hold the selected weapon is really cool, build that in, an
+	// anchor point for the weapons (for where the persons hand(s) are)
+
+	// do a withinBounds() method for the buttons
 
 	// animate the buttons comin out of the playa
 

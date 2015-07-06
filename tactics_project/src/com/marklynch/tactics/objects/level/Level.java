@@ -336,10 +336,10 @@ public class Level {
 
 		for (Button button : this.buttons) {
 
-			if (Mouse.getX() > button.x
-					&& Mouse.getX() < button.x + button.width
-					&& Game.windowHeight - Mouse.getY() > button.y
-					&& Game.windowHeight - Mouse.getY() < button.y
+			if (Mouse.getX() >= button.x
+					&& Mouse.getX() <= button.x + button.width
+					&& Game.windowHeight - Mouse.getY() >= button.y
+					&& Game.windowHeight - Mouse.getY() <= button.y
 							+ button.height) {
 
 				return button;

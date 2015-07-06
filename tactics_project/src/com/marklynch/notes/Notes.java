@@ -1444,6 +1444,8 @@ public class Notes {
 	 * 
 	 * 
 	 * FIGHT fist icon - could also use HEAL, FIGHT, PUSH...
+	 * 
+	 * Super spells like armour princess?
 	 */
 
 }

@@ -482,6 +482,7 @@ public class Faction {
 		if (attackableActors.size() > 0) {
 			int random = (int) (Math.random() * (attackableActors.size() - 1));
 			Actor actorToAttack = attackableActors.get(random);
+			level.activeActor.equipBestWeapon(actorToAttack);
 			level.activeActor.attack(actorToAttack, false);
 			level.activeActor.highlightSelectedCharactersSquares(level);
 			return true;
@@ -508,6 +509,7 @@ public class Faction {
 		if (attackableActors.size() > 0) {
 			int random = (int) (Math.random() * (attackableActors.size() - 1));
 			Actor actorToAttack = attackableActors.get(random);
+			level.activeActor.equipBestWeapon(actorToAttack);
 			level.activeActor.attack(actorToAttack, false);
 			level.activeActor.highlightSelectedCharactersSquares(level);
 			return true;
@@ -520,6 +522,7 @@ public class Faction {
 		int weaponDistance = level.activeActor
 				.weaponDistanceTo(gameObject.squareGameObjectIsOn);
 		if (level.activeActor.hasRange(weaponDistance)) {
+			level.activeActor.equipBestWeapon(gameObject);
 			level.activeActor.attack(gameObject, false);
 			Actor.highlightSelectedCharactersSquares(level);
 			return true;
