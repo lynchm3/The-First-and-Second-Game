@@ -1,6 +1,7 @@
 package com.marklynch.notes;
 
 public class TODO {
+	// highlight squares that u can attack with equipped weapon
 
 	// Try build a full level...
 	// Needs dialog at the start
@@ -9,9 +10,8 @@ public class TODO {
 	// What size is a FE level? Awakenings chapter 9 is 20x20, chapter 5 is
 	// 16x21, prologue chapter is 14x15,
 	// http://fireemblem.wikia.com/wiki/List_of_chapters_in_Fire_Emblem:_Awakening
-	// highlight squares that u can attack
 
-	// When it's your turn its should say YOUR TURN click to continue
+	// bug - pow doesnt show up coz of the hover preview
 
 	// Public domain map to build my world around, this link may be public
 	// domain stuff... http://www.usgs.gov/pubprod/
@@ -32,10 +32,6 @@ public class TODO {
 
 	// ANALYZE TT VS FE (there might be a youtube video or an aticle about it.
 	// See where one beats the other.)
-
-	// bug undo button's bounds are way off (to the right anyway....)
-
-	// Make sure undo is disabled when you attack
 
 	// The way they hold the selected weapon is really cool, build that in, an
 	// anchor point for the weapons (for where the persons hand(s) are), and

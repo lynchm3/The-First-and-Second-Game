@@ -67,8 +67,16 @@ public class Square {
 
 			Texture highlightTexture = null;
 
-			if (level.currentFactionMovingIndex == 0 && (inPath))// || this ==
-																	// Game.squareMouseIsOver))
+			if (level.activeActor != null
+					&& level.activeActor.equippedWeapon != null
+					&& level.activeActor.equippedWeapon
+							.hasRange(level.activeActor.weaponDistanceTo(this))
+					&& !level.activeActor.hasAttackedThisTurn) {
+				highlightTexture = level.gameCursor.imageTexture4;
+			} else if (level.currentFactionMovingIndex == 0 && (inPath))// ||
+																		// this
+																		// ==
+																		// Game.squareMouseIsOver))
 				highlightTexture = level.gameCursor.imageTexture3;
 			else if (reachableBySelectedCharater)
 				highlightTexture = level.gameCursor.imageTexture;
