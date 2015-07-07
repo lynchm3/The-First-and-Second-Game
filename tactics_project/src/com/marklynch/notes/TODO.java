@@ -6,6 +6,8 @@ public class TODO {
 
 	// When it's your turn its should say YOUR TURN click to continue
 
+	// http://www.reddit.com/r/gamedev
+
 	// Public domain map to build my world around, this link may be public
 	// domain stuff... http://www.usgs.gov/pubprod/
 

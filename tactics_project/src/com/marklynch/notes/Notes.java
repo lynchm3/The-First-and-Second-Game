@@ -1453,6 +1453,28 @@ public class Notes {
 	 * 
 	 * Clouds when u zoom out far enough! :D (skyrim)
 	 * 
+	 * Open worl with blocked off interior areas, but fights can happen int he
+	 * open areas. AND make the switch to the indoor areas completely seemless
+	 * (withcer). LOL... no biggy...
+	 * 
+	 * For testing - use monkey or omething similar to just hammer the shit out
+	 * of the game. (remember to disable the exit button :D)
+	 * 
+	 * Teleptah tactics cost 14.99, CHroma SQuad cost 14:99, Fallen: A2P
+	 * Protocol is 14.99 (Early access)
+	 * 
+	 * When releasing, check the calendar for similar games, check the calendar
+	 * for big games, don't release near steam winter/summer sale time
+	 * 
+	 * WTF is Disgaea?
+	 * 
+	 * Mention fire emblem, shadowrun ETC. in the game's description the way
+	 * that telepath tactics does, coz then if someone searches for those it'll
+	 * show up ur game too ;) - "The indie lovechild of Fire Emblem and Disgaea,
+	 * Telepath Tactics is a strategy RPG with destructible battlefields,
+	 * bridge- and barricade-building, and the ability to fling enemies off
+	 * cliffs and into lava. "
+	 * 
 	 * Could go around on a bus and take loads of photos and construct a city
 	 * myself :D (i dont think i'd be quite at the correct height though...
 	 */
