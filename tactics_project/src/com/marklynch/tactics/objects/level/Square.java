@@ -67,7 +67,8 @@ public class Square {
 
 			Texture highlightTexture = null;
 
-			if (level.activeActor != null
+			if (this.gameObject != null
+					&& level.activeActor != null
 					&& level.activeActor.equippedWeapon != null
 					&& level.activeActor.equippedWeapon
 							.hasRange(level.activeActor.weaponDistanceTo(this))
