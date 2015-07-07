@@ -3,6 +3,11 @@ package com.marklynch.notes;
 public class Research {
 
 	/*
+	 * TT WIKI (you can build and destroy the lvl as u see fit, does this
+	 * Disagea game do that?) http://telepath.wikia.com/wiki/Telepath_Tactics TT
+	 * has multiplayer and a fucking map editor :/
+	 * 
+	 * FE WIKI http://fireemblem.wikia.com/wiki/Fire_Emblem_(series)
 	 * 
 	 * Watch some general making of videos for games, see wassup e.g.The Making
 	 * of Oblivion (FULL | HQ)

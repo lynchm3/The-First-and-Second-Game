@@ -117,6 +117,20 @@ public class Game {
 
 	public void update(int delta) {
 
+		// if (level.script.activeScriptEvent != null
+		// && level.script.activeScriptEvent.blockUserInput == true) {
+		//
+		// } else {
+		userInput(delta);
+		// }
+
+		level.update(delta);
+
+		updateFPS(); // update FPS Counter
+	}
+
+	private void userInput(int delta2) {
+
 		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
@@ -135,8 +149,8 @@ public class Game {
 
 		// Calculate zoom
 		zoom += 0.001 * Mouse.getDWheel();
-		if (zoom < 0.5)
-			zoom = 0.5f;
+		if (zoom < 0.1)
+			zoom = 0.1f;
 		if (zoom > 2)
 			zoom = 2f;
 
@@ -163,8 +177,13 @@ public class Game {
 			mouseLastY = Mouse.getY();
 		}
 
+		boolean scriptGetsClick = false;
+		if (level.script.activeScriptEvent != null
+				&& level.script.activeScriptEvent.blockUserInput == true) {
+			scriptGetsClick = true;
+		}
+
 		// Get the square that we're hovering over
-		Button buttonHoveringOver = null;
 		squareMouseIsOver = null;
 		if ((int) mouseXInSquares > -1
 				&& (int) mouseXInSquares < level.squares.length
@@ -181,14 +200,15 @@ public class Game {
 		}
 
 		// Getting button that we have clicked, if any
+		Button buttonHoveringOver = null;
 		if (dragging == false) {
 			buttonHoveringOver = level.getButtonFromMousePosition(Mouse.getX(),
 					Mouse.getY(), mouseXTransformed, mouseYTransformed);
 		}
 
 		// Path highlights
-		if (buttonHoveringOver == null && level.activeActor != null
-				&& squareMouseIsOver != null
+		if (scriptGetsClick == false && buttonHoveringOver == null
+				&& level.activeActor != null && squareMouseIsOver != null
 				&& squareMouseIsOver.reachableBySelectedCharater
 				&& level.activeActor.faction == level.factions.get(0)
 				&& level.currentFactionMoving == level.factions.get(0)) {
@@ -198,7 +218,15 @@ public class Game {
 			}
 		}
 
-		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
+		if (scriptGetsClick && mouseButtonStateLeft == true
+				&& !Mouse.isButtonDown(0) && dragging == false) {
+			level.script.click();
+		} else if (level.waitingForPlayerClick == true
+				&& mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
+				&& dragging == false) {
+			level.waitingForPlayerClick = false;
+			level.showTurnNotification = false;
+		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && buttonHoveringOver != null
 				&& level.currentFactionMovingIndex == 0) {
 			// click button if we're on one
@@ -340,9 +368,6 @@ public class Game {
 		// if (actorPositionY > 9)
 		// actorPositionY = 9;
 
-		level.update(delta);
-
-		updateFPS(); // update FPS Counter
 	}
 
 	/**
