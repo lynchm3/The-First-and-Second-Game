@@ -11,6 +11,11 @@ import org.newdawn.slick.TrueTypeFont;
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.level.script.Script;
+import com.marklynch.tactics.objects.level.script.ScriptEvent;
+import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
+import com.marklynch.tactics.objects.level.script.Speech;
+import com.marklynch.tactics.objects.level.script.SpeechPart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
 import com.marklynch.tactics.objects.weapons.Weapon;
@@ -49,6 +54,8 @@ public class Level {
 
 	public boolean showTurnNotification = true;
 	public boolean waitingForPlayerClick = true;
+
+	public Script script;
 
 	// java representation of a grid??
 	// 2d array?
@@ -202,6 +209,35 @@ public class Level {
 
 		// Cursor
 		gameCursor = new GameCursor();
+
+		// Script
+
+		Vector<Actor> speechActors = new Vector<Actor>();
+		speechActors.add(factions.get(0).actors.get(0));
+
+		Vector<Float> speechPositions = new Vector<Float>();
+		speechPositions.add(0f);
+
+		Vector<SpeechPart.DIRECTION> speechDirections = new Vector<SpeechPart.DIRECTION>();
+		speechDirections.add(SpeechPart.DIRECTION.RIGHT);
+
+		SpeechPart speechPart = new SpeechPart(speechActors, speechPositions,
+				speechDirections, factions.get(0).actors.get(0),
+				new Object[] { "HI, THIS IS SCRIPTED SPEECH :D" }, this);
+
+		Vector<SpeechPart> speechParts = new Vector<SpeechPart>();
+		speechParts.add(speechPart);
+
+		Speech speech = new Speech(speechParts);
+
+		ScriptEventSpeech scriptEventSpeech = new ScriptEventSpeech(1, 0, true,
+				speech);
+
+		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
+		scriptEvents.add(scriptEventSpeech);
+
+		script = new Script(scriptEvents);
+		script.activateScriptEvent(turn, currentFactionMovingIndex);
 	}
 
 	public void removeWalkingHighlight() {
@@ -319,11 +355,21 @@ public class Level {
 			}
 		}
 
+		// script
+		if (script.activeScriptEvent != null)
+			script.draw();
+
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
 	public void update(int delta) {
-		if (currentFactionMoving != factions.get(0)) {
+		if (this.script.activeScriptEvent != null) {
+			script.update(delta);
+			if ((this.script.activeScriptEvent == null || script.activeScriptEvent.blockUserInput == false)
+					&& currentFactionMoving != factions.get(0)) {
+				currentFactionMoving.update(delta);
+			}
+		} else if (currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);
 		}
 	}
@@ -387,6 +433,8 @@ public class Level {
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		if (currentFactionMovingIndex == 0)
 			waitingForPlayerClick = true;
+
+		script.activateScriptEvent(turn, currentFactionMovingIndex);
 
 		showTurnNotification();
 

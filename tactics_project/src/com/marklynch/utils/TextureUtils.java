@@ -59,9 +59,6 @@ public class TextureUtils {
 			return;
 		} else {
 			textureX2 = 1f - (outOfBoundsRight / imageWidth);
-			System.out.println("outOfBoundsRight = " + outOfBoundsRight);
-			System.out.println("imageWidth = " + imageWidth);
-			System.out.println("textureX2 = " + textureX2);
 			vertexX2 = boundsX2;
 		}
 

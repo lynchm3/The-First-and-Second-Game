@@ -83,6 +83,7 @@ public class TextUtils {
 		for (Object content : contents) {
 			if (content instanceof String) {
 				String string = (String) content;
+
 				level.font20.drawString(posX + offsetX, posY, string,
 						Color.white);
 				offsetX += level.font20.getWidth(string);

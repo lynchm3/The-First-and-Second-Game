@@ -129,14 +129,9 @@ public class Actor extends GameObject {
 	}
 
 	public void attack(GameObject gameObject, boolean isCounter) {
-		System.out.println("attack() - isCounter = " + isCounter);
-		System.out.println("attack() 1 - equippedWeapon = "
-				+ this.equippedWeapon);
 		if (hasAttackedThisTurn == true && !isCounter) {
 			return;
 		}
-		System.out.println("attack() 2 - equippedWeapon = "
-				+ this.equippedWeapon);
 		gameObject.remainingHealth -= equippedWeapon.damage;
 		this.distanceMovedThisTurn = Integer.MAX_VALUE;
 		this.hasAttackedThisTurn = true;
@@ -199,8 +194,6 @@ public class Actor extends GameObject {
 				equippedWeapon = weapon;
 			}
 		}
-		System.out.println("equipBestWeapon() - equippedWeapon = "
-				+ this.equippedWeapon);
 	}
 
 	public void equipBestWeaponForCounter(GameObject target,
@@ -915,9 +908,6 @@ public class Actor extends GameObject {
 						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT,
 						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT + 50);
 			}
-
-			// System.out.println("showWeaponSelection = " +
-			// showWeaponSelection);
 
 			if (showWeaponButtons) {
 				for (int i = 0; i < weaponButtons.size(); i++) {
