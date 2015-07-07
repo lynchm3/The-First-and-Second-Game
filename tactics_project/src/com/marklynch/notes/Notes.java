@@ -1455,6 +1455,18 @@ public class Notes {
 	 * 
 	 * Could go around on a bus and take loads of photos and construct a city
 	 * myself :D (i dont think i'd be quite at the correct height though...
+	 * 
+	 * Probably need to show relationships somewhere on the screen (i mean
+	 * faction to faction relationships)
+	 * 
+	 * I could do the teamup shite that they do in FE:A, but show hearts or
+	 * something on characters that the currently selected character can team
+	 * up. Rather than having to remember the fucking interweaving relationships
+	 * of 15 different fucking characters. Also... it was very synthetic - can
+	 * only have 3 relationships, no negative relationships, only one intimate
+	 * relationship. Just not very natural...
+	 * 
+	 * Water, lava, trap, dangerous squares
 	 */
 
 }

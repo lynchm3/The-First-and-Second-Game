@@ -2,6 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Try build a full level...
+	// Needs dialog at the start
+	// Needs a goal
+	// Needs dialog at the end
+	// What size is a FE level? Awakenings chapter 9 is 20x20, chapter 5 is
+	// 16x21, prologue chapter is 14x15,
+	// http://fireemblem.wikia.com/wiki/List_of_chapters_in_Fire_Emblem:_Awakening
 	// highlight squares that u can attack
 
 	// When it's your turn its should say YOUR TURN click to continue

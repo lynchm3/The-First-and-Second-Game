@@ -135,8 +135,8 @@ public class Game {
 
 		// Calculate zoom
 		zoom += 0.001 * Mouse.getDWheel();
-		if (zoom < 0.5)
-			zoom = 0.5f;
+		if (zoom < 0.1)
+			zoom = 0.1f;
 		if (zoom > 2)
 			zoom = 2f;
 
@@ -198,7 +198,11 @@ public class Game {
 			}
 		}
 
-		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
+		if (level.waitingForPlayerClick == true && mouseButtonStateLeft == true
+				&& !Mouse.isButtonDown(0) && dragging == false) {
+			level.waitingForPlayerClick = false;
+			level.showTurnNotification = false;
+		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && buttonHoveringOver != null
 				&& level.currentFactionMovingIndex == 0) {
 			// click button if we're on one

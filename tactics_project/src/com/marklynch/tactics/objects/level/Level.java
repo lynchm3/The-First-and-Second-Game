@@ -41,12 +41,14 @@ public class Level {
 	public Faction currentFactionMoving;
 	public int currentFactionMovingIndex;
 	public Vector<ActivityLog> logs = new Vector<ActivityLog>();
-	public boolean showTurnNotification = false;
 	public Stack<Move> undoList = new Stack<Move>();
 
 	public EndTurnButton endTurnButton;
 	public UndoButton undoButton;
 	public ArrayList<Button> buttons = new ArrayList<Button>();
+
+	public boolean showTurnNotification = true;
+	public boolean waitingForPlayerClick = true;
 
 	// java representation of a grid??
 	// 2d array?
@@ -307,8 +309,14 @@ public class Level {
 		}
 
 		if (showTurnNotification) {
-			TextUtils.printTextWithImages(new Object[] {
-					this.currentFactionMoving, "'s turn" }, 500, 500, this);
+			if (currentFactionMoving == factions.get(0)) {
+				TextUtils.printTextWithImages(new Object[] { "Your turn ",
+						this.currentFactionMoving.imageTexture,
+						", click to continue." }, 500, 500, this);
+			} else {
+				TextUtils.printTextWithImages(new Object[] {
+						this.currentFactionMoving, "'s turn" }, 500, 500, this);
+			}
 		}
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
@@ -377,6 +385,8 @@ public class Level {
 			}
 		}
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
+		if (currentFactionMovingIndex == 0)
+			waitingForPlayerClick = true;
 
 		showTurnNotification();
 
@@ -391,7 +401,8 @@ public class Level {
 
 	public void showTurnNotification() {
 		showTurnNotification = true;
-		new hideTurnNotificationThread().start();
+		if (this.currentFactionMoving != factions.get(0))
+			new hideTurnNotificationThread().start();
 	}
 
 	public class hideTurnNotificationThread extends Thread {
