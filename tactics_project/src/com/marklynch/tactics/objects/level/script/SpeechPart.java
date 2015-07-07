@@ -33,7 +33,13 @@ public class SpeechPart {
 	}
 
 	public void draw() {
-		TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
+
+		for (int i = 0; i < actors.size(); i++) {
+			TextureUtils.drawTextureBackwards(actors.get(i).imageTexture, 1.0f,
+					positions.get(i), positions.get(i) + 128, 0, 0 + 128);
+		}
+
+		// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
 		TextUtils.printTextWithImages(text, 150, 0, level);
 	}
 }

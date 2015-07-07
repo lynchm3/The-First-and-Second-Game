@@ -6,4 +6,6 @@ public class USPs {
 
 	// Focus on Big battles w/ multiple factions, interesting AI, open world
 
+	// The flexibility of a single developer
+
 }

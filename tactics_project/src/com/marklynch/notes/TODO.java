@@ -1,7 +1,13 @@
 package com.marklynch.notes;
 
 public class TODO {
-	// highlight squares that u can attack with equipped weapon
+
+	// Merge the textureUtils methods in to one draw + alpha + bounds +
+	// backwards + upside down
+
+	// Texture Util for drawing image backwards
+
+	// draw image of actors during speech events
 
 	// Try build a full level...
 	// Needs dialog at the start
