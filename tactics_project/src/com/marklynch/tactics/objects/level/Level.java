@@ -214,19 +214,31 @@ public class Level {
 
 		Vector<Actor> speechActors = new Vector<Actor>();
 		speechActors.add(factions.get(0).actors.get(0));
+		speechActors.add(factions.get(0).actors.get(1));
 
 		Vector<Float> speechPositions = new Vector<Float>();
 		speechPositions.add(0f);
+		speechPositions.add(1000f);
 
 		Vector<SpeechPart.DIRECTION> speechDirections = new Vector<SpeechPart.DIRECTION>();
 		speechDirections.add(SpeechPart.DIRECTION.RIGHT);
+		speechDirections.add(SpeechPart.DIRECTION.LEFT);
 
-		SpeechPart speechPart = new SpeechPart(speechActors, speechPositions,
+		SpeechPart speechPart1 = new SpeechPart(speechActors, speechPositions,
 				speechDirections, factions.get(0).actors.get(0),
 				new Object[] { "HI, THIS IS SCRIPTED SPEECH :D" }, this);
 
+		SpeechPart speechPart2 = new SpeechPart(
+				speechActors,
+				speechPositions,
+				speechDirections,
+				factions.get(0).actors.get(0),
+				new Object[] { "HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT" },
+				this);
+
 		Vector<SpeechPart> speechParts = new Vector<SpeechPart>();
-		speechParts.add(speechPart);
+		speechParts.add(speechPart1);
+		speechParts.add(speechPart2);
 
 		Speech speech = new Speech(speechParts);
 

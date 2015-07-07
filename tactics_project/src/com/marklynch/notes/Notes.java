@@ -1497,6 +1497,8 @@ public class Notes {
 	 * 
 	 * Dialog where the players on the field talk, rather than their profile
 	 * images talking, and they can move around while this is happening. EPIC.
+	 * 
+	 * I used the overly detailed hover preview for real :D
 	 */
 
 }
