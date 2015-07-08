@@ -2,7 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Resizing of window :) (should have done this at the start...)
+	// Refactor day
+
+	// Pretty art day
 
 	// Text needs to wrap if its heading off the edge of the screen
 
