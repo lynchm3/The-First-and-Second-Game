@@ -39,8 +39,8 @@ public class Game {
 	boolean mouseButtonStateLeft = false;
 	boolean mouseButtonStateRight = false;
 
-	public static int windowWidth = 1900;
-	public static int windowHeight = 1000;
+	public static int windowWidth = 800;
+	public static int windowHeight = 800;
 	// public static int windowWidth = 400;
 	// public static int windowHeight = 400;
 

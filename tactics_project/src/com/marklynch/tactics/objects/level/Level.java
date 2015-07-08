@@ -218,7 +218,7 @@ public class Level {
 
 		Vector<Float> speechPositions = new Vector<Float>();
 		speechPositions.add(0f);
-		speechPositions.add(1000f);
+		speechPositions.add(0f);
 
 		Vector<SpeechPart.DIRECTION> speechDirections = new Vector<SpeechPart.DIRECTION>();
 		speechDirections.add(SpeechPart.DIRECTION.RIGHT);

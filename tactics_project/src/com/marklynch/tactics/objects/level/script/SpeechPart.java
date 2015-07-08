@@ -2,6 +2,7 @@ package com.marklynch.tactics.objects.level.script;
 
 import java.util.Vector;
 
+import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.utils.TextUtils;
@@ -40,13 +41,18 @@ public class SpeechPart {
 						positions.get(i), positions.get(i) + 128, 0, 0 + 128);
 			} else {
 				TextureUtils.drawTextureBackwards(actors.get(i).imageTexture,
-						1.0f, positions.get(i), positions.get(i) + 128, 0,
-						0 + 128);
-
+						1.0f, Game.windowWidth - positions.get(i) - 128,
+						Game.windowWidth - positions.get(i), 0, 0 + 128);
 			}
 		}
 
+		float textX1 = 150;
+		float textX2 = Game.windowWidth - 150;
+		float width = textX2 - textX1;
+		if (width <= 100)
+			width = 100;
+
 		// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
-		TextUtils.printTextWithImages(text, 150, 0, level);
+		TextUtils.printTextWithImages(text, 150, 0, level, width);
 	}
 }

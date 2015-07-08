@@ -6,10 +6,10 @@ public class TODO {
 
 	// Pretty art day
 
-	// Text needs to wrap if its heading off the edge of the screen
+	// Print Text within bounds........
+	// Test for when window is tiny, probably breaks shit
 
-	// Merge the textureUtils methods in to one draw + alpha + bounds +
-	// backwards + upside down
+	// Text needs to wrap if its heading off the edge of the screen
 
 	// Texture Util for drawing image backwards
 
