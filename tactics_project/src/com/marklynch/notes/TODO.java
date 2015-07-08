@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Resizing of window :) (should have done this at the start...)
+
+	// Text needs to wrap if its heading off the edge of the screen
+
 	// Merge the textureUtils methods in to one draw + alpha + bounds +
 	// backwards + upside down
 

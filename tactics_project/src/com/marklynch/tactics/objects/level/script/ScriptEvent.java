@@ -8,7 +8,12 @@ public abstract class ScriptEvent {
 	public SCRIPT_TYPE scriptType;
 
 	public enum SCRIPT_TYPE {
-		DIALOG, DIALOG_IN_FIELD, NEW_ACTORS, NEW_FACTION, OBJECTIVE_CHANGE
+		DIALOG,
+		DIALOG_IN_FIELD,
+		NEW_ACTORS,
+		NEW_FACTION,
+		OBJECTIVE_CHANGE,
+		MOVE_CHARACTER
 	};
 
 	public ScriptEvent(int turn, int factionTurn, boolean blockUserInput) {

@@ -74,6 +74,50 @@ public class Game {
 		while (!Display.isCloseRequested()) {
 			delta = getDelta();
 
+			// So... these work...
+			if (windowWidth != Display.getWidth()
+					|| windowHeight != Display.getHeight()) {
+				windowWidth = Display.getWidth();
+				windowHeight = Display.getHeight();
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+				GL11.glViewport(0, 0, Display.getWidth(), Display.getHeight());
+				GL11.glMatrixMode(GL11.GL_MODELVIEW);
+
+				GL11.glMatrixMode(GL11.GL_PROJECTION);
+				GL11.glLoadIdentity();
+				GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1,
+						-1);
+				GL11.glMatrixMode(GL11.GL_MODELVIEW);
+			}
+			// How do i reset the fecking window to deal w/ this shit though?!
+
+			// while (SDL_PollEvent())
+			//
+			// {
+			//
+			// switch (event.type)
+			//
+			// {
+			//
+			// case SDL_VIDEORESIZE:
+			// ResizeWindow();
+			// break; // resizing called here
+			// case SDL_QUIT:
+			// running = false;
+			// break;
+			// case SDL_KEYDOWN:
+			// square.Handle_Input(down);
+			// break;
+			// case SDL_KEYUP:
+			// square.Handle_Input(up);
+			// break;
+			//
+			// }
+			//
+			// }
+
 			update(delta);
 			renderGL();
 
@@ -92,6 +136,7 @@ public class Game {
 	private void initGL(int width, int height) {
 		try {
 			Display.setDisplayMode(new DisplayMode(width, height));
+			Display.setResizable(true);
 			Display.create();
 			Display.setVSyncEnabled(true);
 		} catch (LWJGLException e) {
