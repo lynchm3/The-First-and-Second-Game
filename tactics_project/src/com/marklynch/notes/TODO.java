@@ -6,14 +6,7 @@ public class TODO {
 
 	// Pretty art day
 
-	// Print Text within bounds........
-	// Test for when window is tiny, probably breaks shit
-
-	// Text needs to wrap if its heading off the edge of the screen
-
-	// Texture Util for drawing image backwards
-
-	// draw image of actors during speech events
+	// BUG - buttons are positioned like arse if u resize
 
 	// Try build a full level...
 	// Needs dialog at the start

@@ -22,9 +22,16 @@ public class TextUtils {
 		float offsetY = 0;
 
 		for (Object content : contents) {
-			if (content instanceof String) {
-
-				String string = (String) content;
+			if (content instanceof String || content instanceof StringWithColor) {
+				String string = null;
+				Color color = Color.white;
+				if (content instanceof String) {
+					string = (String) content;
+				} else if (content instanceof StringWithColor) {
+					StringWithColor stringWithColor = (StringWithColor) content;
+					string = stringWithColor.string;
+					color = stringWithColor.color;
+				}
 
 				String[] stringParts = string
 						.split("(?<=[\\p{Punct}\\p{Space}|\\p{Space}\\p{Punct}|\\p{Punct}|\\p{Space}])");
@@ -38,7 +45,8 @@ public class TextUtils {
 					}
 
 					level.font20.drawString(posX + offsetX, posY + offsetY,
-							stringPart, Color.white);
+							stringPart, color);
+
 					offsetX += width;
 
 				}

@@ -1,6 +1,6 @@
 package com.marklynch.utils;
 
-import java.awt.Color;
+import org.newdawn.slick.Color;
 
 public class StringWithColor {
 

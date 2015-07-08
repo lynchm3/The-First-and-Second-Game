@@ -39,8 +39,8 @@ public class Game {
 	boolean mouseButtonStateLeft = false;
 	boolean mouseButtonStateRight = false;
 
-	public static int windowWidth = 800;
-	public static int windowHeight = 800;
+	public static float windowWidth = 800;
+	public static float windowHeight = 800;
 	// public static int windowWidth = 400;
 	// public static int windowHeight = 400;
 
@@ -133,9 +133,9 @@ public class Game {
 		level = new Level(10, 10);
 	}
 
-	private void initGL(int width, int height) {
+	private void initGL(float width, float height) {
 		try {
-			Display.setDisplayMode(new DisplayMode(width, height));
+			Display.setDisplayMode(new DisplayMode((int) width, (int) height));
 			Display.setResizable(true);
 			Display.create();
 			Display.setVSyncEnabled(true);
@@ -151,7 +151,7 @@ public class Game {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		GL11.glViewport(0, 0, width, height);
+		GL11.glViewport(0, 0, (int) width, (int) height);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
 		GL11.glMatrixMode(GL11.GL_PROJECTION);

@@ -25,6 +25,7 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.EndTurnButton;
 import com.marklynch.ui.button.UndoButton;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
 public class Level {
@@ -67,12 +68,12 @@ public class Level {
 		initGrid();
 		initObjects();
 		dialogs = new Vector<Dialog>();
-		endTurnButton = new EndTurnButton(Game.windowWidth - 210,
-				Game.windowHeight - 110, 200, 100, "end_turn_button.png",
+		endTurnButton = new EndTurnButton(Game.windowWidth - 210f,
+				Game.windowHeight - 110f, 200f, 100f, "end_turn_button.png",
 				"end_turn_button.png", this);
 		buttons.add(endTurnButton);
-		undoButton = new UndoButton(Game.windowWidth - 420,
-				Game.windowHeight - 110, 200, 100, "undo_button.png",
+		undoButton = new UndoButton(Game.windowWidth - 420f,
+				Game.windowHeight - 110f, 200f, 100f, "undo_button.png",
 				"undo_button_disabled.png", this);
 		buttons.add(undoButton);
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
@@ -212,9 +213,13 @@ public class Level {
 
 		// Script
 
-		Vector<Actor> speechActors = new Vector<Actor>();
-		speechActors.add(factions.get(0).actors.get(0));
-		speechActors.add(factions.get(0).actors.get(1));
+		Vector<Actor> speechActors1 = new Vector<Actor>();
+		speechActors1.add(factions.get(0).actors.get(0));
+		speechActors1.add(factions.get(0).actors.get(1));
+
+		Vector<Actor> speechActors2 = new Vector<Actor>();
+		speechActors2.add(factions.get(2).actors.get(0));
+		speechActors2.add(factions.get(0).actors.get(1));
 
 		Vector<Float> speechPositions = new Vector<Float>();
 		speechPositions.add(0f);
@@ -224,29 +229,44 @@ public class Level {
 		speechDirections.add(SpeechPart.DIRECTION.RIGHT);
 		speechDirections.add(SpeechPart.DIRECTION.LEFT);
 
-		SpeechPart speechPart1 = new SpeechPart(speechActors, speechPositions,
+		SpeechPart speechPart1 = new SpeechPart(speechActors1, speechPositions,
 				speechDirections, factions.get(0).actors.get(0),
-				new Object[] { "HI, THIS IS SCRIPTED SPEECH :D" }, this);
+				new Object[] { new StringWithColor(
+						"HI, THIS IS SCRIPTED SPEECH :D", Color.black) }, this);
 
 		SpeechPart speechPart2 = new SpeechPart(
-				speechActors,
+				speechActors1,
 				speechPositions,
 				speechDirections,
 				factions.get(0).actors.get(0),
-				new Object[] { "HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT" },
-				this);
+				new Object[] { new StringWithColor(
+						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
+						Color.black) }, this);
 
-		Vector<SpeechPart> speechParts = new Vector<SpeechPart>();
-		speechParts.add(speechPart1);
-		speechParts.add(speechPart2);
+		SpeechPart speechPart3 = new SpeechPart(speechActors2, speechPositions,
+				speechDirections, factions.get(2).actors.get(0),
+				new Object[] { new StringWithColor("GREEN TEAM HOOOOOOOO",
+						Color.black) }, this);
 
-		Speech speech = new Speech(speechParts);
+		Vector<SpeechPart> speechParts1 = new Vector<SpeechPart>();
+		speechParts1.add(speechPart1);
+		speechParts1.add(speechPart2);
 
-		ScriptEventSpeech scriptEventSpeech = new ScriptEventSpeech(1, 0, true,
-				speech);
+		Vector<SpeechPart> speechParts2 = new Vector<SpeechPart>();
+		speechParts2.add(speechPart3);
+
+		Speech speech1 = new Speech(speechParts1);
+		Speech speech2 = new Speech(speechParts2);
+
+		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(1, 0,
+				true, speech1);
+
+		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(1, 2,
+				true, speech2);
 
 		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
-		scriptEvents.add(scriptEventSpeech);
+		scriptEvents.add(scriptEventSpeech1);
+		scriptEvents.add(scriptEventSpeech2);
 
 		script = new Script(scriptEvents);
 		script.activateScriptEvent(turn, currentFactionMovingIndex);

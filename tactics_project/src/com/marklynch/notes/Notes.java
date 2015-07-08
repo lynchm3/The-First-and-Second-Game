@@ -1499,6 +1499,9 @@ public class Notes {
 	 * images talking, and they can move around while this is happening. EPIC.
 	 * 
 	 * I used the overly detailed hover preview for real :D
+	 * 
+	 * Some sort of time travel, time manipulation, time control aspect?
+	 * PRIMER!!
 	 */
 
 }
