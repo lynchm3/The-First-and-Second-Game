@@ -29,4 +29,15 @@ public class EndTurnButton extends Button {
 					Game.windowWidth - 210f + width, Game.windowHeight - 110f,
 					Game.windowHeight - 110f + height);
 	}
+
+	@Override
+	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
+		if (mouseX > Game.windowWidth - 210f
+				&& mouseX < Game.windowWidth - 210f + width
+				&& mouseY > Game.windowHeight - 110f
+				&& mouseY < Game.windowHeight - 110f + height) {
+			return true;
+		}
+		return false;
+	}
 }

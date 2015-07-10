@@ -32,4 +32,15 @@ public class UndoButton extends Button {
 					Game.windowHeight - 110f + height);
 	}
 
+	@Override
+	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
+		if (mouseX > Game.windowWidth - 420f
+				&& mouseX < Game.windowWidth - 420f + width
+				&& mouseY > Game.windowHeight - 110f
+				&& mouseY < Game.windowHeight - 110f + height) {
+			return true;
+		}
+		return false;
+	}
+
 }
