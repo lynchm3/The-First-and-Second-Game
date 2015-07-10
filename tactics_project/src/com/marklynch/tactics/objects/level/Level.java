@@ -71,13 +71,12 @@ public class Level {
 		initGrid();
 		initObjects();
 		dialogs = new Vector<Dialog>();
-		endTurnButton = new EndTurnButton(Game.windowWidth - 210f,
-				Game.windowHeight - 110f, 200f, 100f, "end_turn_button.png",
-				"end_turn_button.png", this);
+		endTurnButton = new EndTurnButton(210f, 110f, 200f, 100f,
+				"end_turn_button.png", "end_turn_button.png", this, false,
+				false);
 		buttons.add(endTurnButton);
-		undoButton = new UndoButton(Game.windowWidth - 420f,
-				Game.windowHeight - 110f, 200f, 100f, "undo_button.png",
-				"undo_button_disabled.png", this);
+		undoButton = new UndoButton(420f, 110f, 200f, 100f, "undo_button.png",
+				"undo_button_disabled.png", this, false, false);
 		buttons.add(undoButton);
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
 		font20 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 20);

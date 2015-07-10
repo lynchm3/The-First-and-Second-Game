@@ -2,8 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Need to rewrite EndTurn and UndoButton and their ilk - need to have
-	// LevelButton VS ActorButton
+	// I've fixed the levelbutton, but the actorbutton should do the same kind
+	// of thing where it's all relative to the actor
 
 	// I think I need to merge some of the script classes, there's fucking loads
 	// of them
