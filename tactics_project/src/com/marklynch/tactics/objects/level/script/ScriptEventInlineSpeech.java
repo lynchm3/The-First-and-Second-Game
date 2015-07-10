@@ -1,34 +1,46 @@
 package com.marklynch.tactics.objects.level.script;
 
+import java.util.Vector;
+
 public class ScriptEventInlineSpeech extends ScriptEvent {
 
-	public InlineSpeech inlineSpeech;
+	public Vector<InlineSpeechPart> speechParts;
+	public int speechIndex = 0;
+	public int timeOnCurrentPart = 0;
+	public int timePerPart = 10000;
 
 	public ScriptEventInlineSpeech(int turn, int factionTurn,
-			boolean blockUserInput, InlineSpeech inlineSpeech) {
+			boolean blockUserInput, Vector<InlineSpeechPart> speechParts) {
 		super(turn, factionTurn, blockUserInput);
 		scriptType = ScriptEvent.SCRIPT_TYPE.DIALOG;
-		this.inlineSpeech = inlineSpeech;
+		this.speechParts = speechParts;
 	}
 
 	@Override
 	public boolean checkIfCompleted() {
-		return inlineSpeech.checkIfCompleted();
+		if (speechIndex >= speechParts.size())
+			return true;
+		return false;
 	}
 
 	@Override
 	public void click() {
-		inlineSpeech.click();
-	}
-
-	@Override
-	public void update(int delta) {
-		inlineSpeech.update(delta);
 	}
 
 	@Override
 	public void draw() {
-		inlineSpeech.draw();
+		if (speechIndex < speechParts.size()) {
+			speechParts.get(speechIndex).draw();
+		}
+	}
+
+	@Override
+	public void update(int delta) {
+		timeOnCurrentPart += delta;
+		if (timeOnCurrentPart >= timePerPart) {
+			speechIndex++;
+			timeOnCurrentPart = 0;
+		}
 
 	}
 

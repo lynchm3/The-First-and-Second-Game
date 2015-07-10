@@ -1,24 +1,29 @@
 package com.marklynch.tactics.objects.level.script;
 
+import java.util.Vector;
+
 public class ScriptEventSpeech extends ScriptEvent {
 
-	public Speech speech;
+	public Vector<SpeechPart> speechParts;
+	public int speechIndex = 0;
 
 	public ScriptEventSpeech(int turn, int factionTurn, boolean blockUserInput,
-			Speech dialog) {
+			Vector<SpeechPart> speechParts) {
 		super(turn, factionTurn, blockUserInput);
 		scriptType = ScriptEvent.SCRIPT_TYPE.DIALOG;
-		this.speech = dialog;
+		this.speechParts = speechParts;
 	}
 
 	@Override
 	public boolean checkIfCompleted() {
-		return speech.checkIfCompleted();
+		if (speechIndex >= speechParts.size())
+			return true;
+		return false;
 	}
 
 	@Override
 	public void click() {
-		speech.click();
+		speechIndex++;
 	}
 
 	@Override
@@ -28,7 +33,9 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 	@Override
 	public void draw() {
-		speech.draw();
+		if (speechIndex < speechParts.size()) {
+			speechParts.get(speechIndex).draw();
+		}
 
 	}
 

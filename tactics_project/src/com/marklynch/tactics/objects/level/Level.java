@@ -11,13 +11,11 @@ import org.newdawn.slick.TrueTypeFont;
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.level.script.InlineSpeech;
 import com.marklynch.tactics.objects.level.script.InlineSpeechPart;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
-import com.marklynch.tactics.objects.level.script.Speech;
 import com.marklynch.tactics.objects.level.script.SpeechPart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
@@ -246,10 +244,9 @@ public class Level {
 		Vector<SpeechPart> speechParts1 = new Vector<SpeechPart>();
 		speechParts1.add(speechPart1_1);
 		speechParts1.add(speechPart1_2);
-		Speech speech1 = new Speech(speechParts1);
 
 		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(1, 0,
-				true, speech1);
+				true, speechParts1);
 
 		// Speech 2
 
@@ -274,10 +271,8 @@ public class Level {
 		Vector<SpeechPart> speechParts2 = new Vector<SpeechPart>();
 		speechParts2.add(speechPart2_1);
 
-		Speech speech2 = new Speech(speechParts2);
-
 		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(1, 2,
-				true, speech2);
+				true, speechParts2);
 
 		// Inline speechVector<Actor> speechActors1 = new Vector<Actor>();
 
@@ -295,10 +290,9 @@ public class Level {
 		Vector<InlineSpeechPart> inlineSpeechParts1 = new Vector<InlineSpeechPart>();
 		inlineSpeechParts1.add(inlineSpeechPart1_1);
 		inlineSpeechParts1.add(inlineSpeechPart1_2);
-		InlineSpeech inlineSpeech1 = new InlineSpeech(inlineSpeechParts1);
 
 		ScriptEventInlineSpeech inlineScriptEventSpeech1 = new ScriptEventInlineSpeech(
-				2, 0, false, inlineSpeech1);
+				2, 0, false, inlineSpeechParts1);
 
 		// The script
 

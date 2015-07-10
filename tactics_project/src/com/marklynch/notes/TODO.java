@@ -2,11 +2,7 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// I've fixed the levelbutton, but the actorbutton should do the same kind
-	// of thing where it's all relative to the actor
-
-	// I think I need to merge some of the script classes, there's fucking loads
-	// of them
+	// If a guy dies during inline speech it'll probably keep going....
 
 	// Refactor day
 
