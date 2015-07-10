@@ -2,6 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Bug - undo and end turn button dont do resizing well
+
+	// Bug - the inline speech is fucked (need to transform b4 draw)
+
+	// I think I need to merge some of the script classes, there's fucking loads
+	// of them
+
 	// Refactor day
 
 	// Pretty art day

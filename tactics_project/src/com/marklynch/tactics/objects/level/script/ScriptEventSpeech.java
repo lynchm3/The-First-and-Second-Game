@@ -2,23 +2,23 @@ package com.marklynch.tactics.objects.level.script;
 
 public class ScriptEventSpeech extends ScriptEvent {
 
-	public Speech dialog;
+	public Speech speech;
 
 	public ScriptEventSpeech(int turn, int factionTurn, boolean blockUserInput,
 			Speech dialog) {
 		super(turn, factionTurn, blockUserInput);
 		scriptType = ScriptEvent.SCRIPT_TYPE.DIALOG;
-		this.dialog = dialog;
+		this.speech = dialog;
 	}
 
 	@Override
 	public boolean checkIfCompleted() {
-		return dialog.checkIfCompleted();
+		return speech.checkIfCompleted();
 	}
 
 	@Override
 	public void click() {
-		dialog.click();
+		speech.click();
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 	@Override
 	public void draw() {
-		dialog.draw();
+		speech.draw();
 
 	}
 
