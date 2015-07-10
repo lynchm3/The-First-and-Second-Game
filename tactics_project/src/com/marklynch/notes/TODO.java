@@ -2,8 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Bug - the inline speech is fucked (need to transform b4 draw)
-
 	// Need to rewrite EndTurn and UndoButton and their ilk - need to have
 	// LevelButton VS ActorButton
 
@@ -13,8 +11,6 @@ public class TODO {
 	// Refactor day
 
 	// Pretty art day
-
-	// BUG - buttons are positioned like arse if u resize
 
 	// Try build a full level...
 	// Needs dialog at the start
