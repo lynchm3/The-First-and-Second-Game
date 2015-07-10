@@ -15,10 +15,8 @@ public class Script {
 	public void activateScriptEvent(int turn, int activeFaction) {
 		activeScriptEvent = null;
 		for (ScriptEvent scriptEvent : this.scriptEvents) {
-			if (scriptEvent.turn == turn
-					&& scriptEvent.factionTurn == activeFaction) {
-				activeScriptEvent = scriptEvent;
-			}
+			if (scriptEvent.scriptTrigger.checkTrigger())
+				this.activeScriptEvent = scriptEvent;
 		}
 	}
 

@@ -7,10 +7,9 @@ public class ScriptEventSpeech extends ScriptEvent {
 	public Vector<SpeechPart> speechParts;
 	public int speechIndex = 0;
 
-	public ScriptEventSpeech(int turn, int factionTurn, boolean blockUserInput,
-			Vector<SpeechPart> speechParts) {
-		super(turn, factionTurn, blockUserInput);
-		scriptType = ScriptEvent.SCRIPT_TYPE.DIALOG;
+	public ScriptEventSpeech(boolean blockUserInput,
+			Vector<SpeechPart> speechParts, ScriptTrigger scriptTrigger) {
+		super(blockUserInput, scriptTrigger);
 		this.speechParts = speechParts;
 	}
 

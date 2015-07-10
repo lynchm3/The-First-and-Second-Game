@@ -9,10 +9,9 @@ public class ScriptEventInlineSpeech extends ScriptEvent {
 	public int timeOnCurrentPart = 0;
 	public int timePerPart = 10000;
 
-	public ScriptEventInlineSpeech(int turn, int factionTurn,
-			boolean blockUserInput, Vector<InlineSpeechPart> speechParts) {
-		super(turn, factionTurn, blockUserInput);
-		scriptType = ScriptEvent.SCRIPT_TYPE.DIALOG;
+	public ScriptEventInlineSpeech(boolean blockUserInput,
+			Vector<InlineSpeechPart> speechParts, ScriptTrigger scriptTrigger) {
+		super(blockUserInput, scriptTrigger);
 		this.speechParts = speechParts;
 	}
 

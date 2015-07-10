@@ -16,6 +16,8 @@ import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
+import com.marklynch.tactics.objects.level.script.ScriptTrigger;
+import com.marklynch.tactics.objects.level.script.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.level.script.SpeechPart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
@@ -245,8 +247,10 @@ public class Level {
 		speechParts1.add(speechPart1_1);
 		speechParts1.add(speechPart1_2);
 
-		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(1, 0,
-				true, speechParts1);
+		ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1, 0);
+
+		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
+				speechParts1, scriptTrigger1);
 
 		// Speech 2
 
@@ -271,8 +275,10 @@ public class Level {
 		Vector<SpeechPart> speechParts2 = new Vector<SpeechPart>();
 		speechParts2.add(speechPart2_1);
 
-		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(1, 2,
-				true, speechParts2);
+		ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(this, 1, 2);
+
+		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(true,
+				speechParts2, scriptTrigger2);
 
 		// Inline speechVector<Actor> speechActors1 = new Vector<Actor>();
 
@@ -291,8 +297,10 @@ public class Level {
 		inlineSpeechParts1.add(inlineSpeechPart1_1);
 		inlineSpeechParts1.add(inlineSpeechPart1_2);
 
+		ScriptTrigger scriptTrigger3 = new ScriptTriggerTurnStart(this, 2, 0);
+
 		ScriptEventInlineSpeech inlineScriptEventSpeech1 = new ScriptEventInlineSpeech(
-				2, 0, false, inlineSpeechParts1);
+				false, inlineSpeechParts1, scriptTrigger3);
 
 		// The script
 

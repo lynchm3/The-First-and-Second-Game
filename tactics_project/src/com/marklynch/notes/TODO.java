@@ -2,6 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// other script triggers
+	// death
+	// character moves
+	// character dies
+
+	// need to make multiple script events at once
+
 	// If a guy dies during inline speech it'll probably keep going....
 
 	// Refactor day
