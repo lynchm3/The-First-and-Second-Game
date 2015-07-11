@@ -2,11 +2,18 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// other script triggers
+	// death
+	// character moves
+	// character dies
+
+	// need to make multiple script events at once
+
+	// If a guy dies during inline speech it'll probably keep going....
+
 	// Refactor day
 
 	// Pretty art day
-
-	// BUG - buttons are positioned like arse if u resize
 
 	// Try build a full level...
 	// Needs dialog at the start

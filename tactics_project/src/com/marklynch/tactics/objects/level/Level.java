@@ -11,10 +11,13 @@ import org.newdawn.slick.TrueTypeFont;
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.level.script.InlineSpeechPart;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
+import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
-import com.marklynch.tactics.objects.level.script.Speech;
+import com.marklynch.tactics.objects.level.script.ScriptTrigger;
+import com.marklynch.tactics.objects.level.script.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.level.script.SpeechPart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
@@ -68,13 +71,12 @@ public class Level {
 		initGrid();
 		initObjects();
 		dialogs = new Vector<Dialog>();
-		endTurnButton = new EndTurnButton(Game.windowWidth - 210f,
-				Game.windowHeight - 110f, 200f, 100f, "end_turn_button.png",
-				"end_turn_button.png", this);
+		endTurnButton = new EndTurnButton(210f, 110f, 200f, 100f,
+				"end_turn_button.png", "end_turn_button.png", this, false,
+				false);
 		buttons.add(endTurnButton);
-		undoButton = new UndoButton(Game.windowWidth - 420f,
-				Game.windowHeight - 110f, 200f, 100f, "undo_button.png",
-				"undo_button_disabled.png", this);
+		undoButton = new UndoButton(420f, 110f, 200f, 100f, "undo_button.png",
+				"undo_button_disabled.png", this, false, false);
 		buttons.add(undoButton);
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
 		font20 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 20);
@@ -213,60 +215,99 @@ public class Level {
 
 		// Script
 
+		// Speech 1
 		Vector<Actor> speechActors1 = new Vector<Actor>();
 		speechActors1.add(factions.get(0).actors.get(0));
 		speechActors1.add(factions.get(0).actors.get(1));
 
-		Vector<Actor> speechActors2 = new Vector<Actor>();
-		speechActors2.add(factions.get(2).actors.get(0));
-		speechActors2.add(factions.get(0).actors.get(1));
+		Vector<Float> speechPositions1 = new Vector<Float>();
+		speechPositions1.add(0f);
+		speechPositions1.add(0f);
 
-		Vector<Float> speechPositions = new Vector<Float>();
-		speechPositions.add(0f);
-		speechPositions.add(0f);
+		Vector<SpeechPart.DIRECTION> speechDirections1 = new Vector<SpeechPart.DIRECTION>();
+		speechDirections1.add(SpeechPart.DIRECTION.RIGHT);
+		speechDirections1.add(SpeechPart.DIRECTION.LEFT);
 
-		Vector<SpeechPart.DIRECTION> speechDirections = new Vector<SpeechPart.DIRECTION>();
-		speechDirections.add(SpeechPart.DIRECTION.RIGHT);
-		speechDirections.add(SpeechPart.DIRECTION.LEFT);
-
-		SpeechPart speechPart1 = new SpeechPart(speechActors1, speechPositions,
-				speechDirections, factions.get(0).actors.get(0),
+		SpeechPart speechPart1_1 = new SpeechPart(speechActors1,
+				speechPositions1, speechDirections1,
+				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
 						"HI, THIS IS SCRIPTED SPEECH :D", Color.black) }, this);
 
-		SpeechPart speechPart2 = new SpeechPart(
+		SpeechPart speechPart1_2 = new SpeechPart(
 				speechActors1,
-				speechPositions,
-				speechDirections,
+				speechPositions1,
+				speechDirections1,
 				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
 						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
 						Color.black) }, this);
 
-		SpeechPart speechPart3 = new SpeechPart(speechActors2, speechPositions,
-				speechDirections, factions.get(2).actors.get(0),
+		Vector<SpeechPart> speechParts1 = new Vector<SpeechPart>();
+		speechParts1.add(speechPart1_1);
+		speechParts1.add(speechPart1_2);
+
+		ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1, 0);
+
+		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
+				speechParts1, scriptTrigger1);
+
+		// Speech 2
+
+		Vector<Actor> speechActors2 = new Vector<Actor>();
+		speechActors2.add(factions.get(2).actors.get(0));
+		speechActors2.add(factions.get(0).actors.get(1));
+
+		Vector<Float> speechPositions2 = new Vector<Float>();
+		speechPositions2.add(0f);
+		speechPositions2.add(0f);
+
+		Vector<SpeechPart.DIRECTION> speechDirections2 = new Vector<SpeechPart.DIRECTION>();
+		speechDirections2.add(SpeechPart.DIRECTION.RIGHT);
+		speechDirections2.add(SpeechPart.DIRECTION.LEFT);
+
+		SpeechPart speechPart2_1 = new SpeechPart(speechActors2,
+				speechPositions2, speechDirections2,
+				factions.get(2).actors.get(0),
 				new Object[] { new StringWithColor("GREEN TEAM HOOOOOOOO",
 						Color.black) }, this);
 
-		Vector<SpeechPart> speechParts1 = new Vector<SpeechPart>();
-		speechParts1.add(speechPart1);
-		speechParts1.add(speechPart2);
-
 		Vector<SpeechPart> speechParts2 = new Vector<SpeechPart>();
-		speechParts2.add(speechPart3);
+		speechParts2.add(speechPart2_1);
 
-		Speech speech1 = new Speech(speechParts1);
-		Speech speech2 = new Speech(speechParts2);
+		ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(this, 1, 2);
 
-		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(1, 0,
-				true, speech1);
+		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(true,
+				speechParts2, scriptTrigger2);
 
-		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(1, 2,
-				true, speech2);
+		// Inline speechVector<Actor> speechActors1 = new Vector<Actor>();
+
+		InlineSpeechPart inlineSpeechPart1_1 = new InlineSpeechPart(
+				factions.get(0).actors.get(0),
+				new Object[] { new StringWithColor("HOLLA INLINE SPEECH YO",
+						Color.black) }, this);
+
+		InlineSpeechPart inlineSpeechPart1_2 = new InlineSpeechPart(
+				factions.get(0).actors.get(0),
+				new Object[] { new StringWithColor(
+						"HOLLA, PART 2 OF THE INLINE SPEECH, WANT TO PUSH IT TO OVER 2 LINES, JUST TO SEE WTF IT LOOKS LIKE HOLLA",
+						Color.black) }, this);
+
+		Vector<InlineSpeechPart> inlineSpeechParts1 = new Vector<InlineSpeechPart>();
+		inlineSpeechParts1.add(inlineSpeechPart1_1);
+		inlineSpeechParts1.add(inlineSpeechPart1_2);
+
+		ScriptTrigger scriptTrigger3 = new ScriptTriggerTurnStart(this, 2, 0);
+
+		ScriptEventInlineSpeech inlineScriptEventSpeech1 = new ScriptEventInlineSpeech(
+				false, inlineSpeechParts1, scriptTrigger3);
+
+		// The script
 
 		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
 		scriptEvents.add(scriptEventSpeech1);
 		scriptEvents.add(scriptEventSpeech2);
+		scriptEvents.add(inlineScriptEventSpeech1);
 
 		script = new Script(scriptEvents);
 		script.activateScriptEvent(turn, currentFactionMovingIndex);

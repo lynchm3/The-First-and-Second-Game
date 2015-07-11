@@ -1505,7 +1505,18 @@ public class Notes {
 	 * 
 	 * 
 	 * 
+	 * 
 	 * I like these designs http://imgur.com/a/erEXz
+	 * 
+	 * 
+	 * Look for things that have square grids, use them in artwork
+	 * http://www.rockpapershotgun.com/2015/07/10/the-flare-path-hex-interview/
+	 * http
+	 * ://www.rockpapershotgun.com/2015/07/09/co-op-christening-the-behemoths
+	 * -game-4-is-pit-people/ chcocolate graphpaper photoboothphotos sudoku
+	 * goldengrahams/shreddies/cereal chess/draftsboard tablecloth fishnet,
+	 * also... just take some square shit and order them in to a grid, will do
+	 * for loading screens or whatevs
 	 */
 
 }

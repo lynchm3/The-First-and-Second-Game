@@ -3,7 +3,7 @@ package com.marklynch.ui.button;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.weapons.Weapon;
 
-public class WeaponButton extends Button {
+public class WeaponButton extends ActorButton {
 
 	Weapon weapon;
 

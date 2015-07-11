@@ -4,12 +4,13 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.utils.TextureUtils;
 
-public class EndTurnButton extends Button {
+public class EndTurnButton extends LevelButton {
 
 	public EndTurnButton(float x, float y, float width, float height,
-			String enabledTexturePath, String disabledTexturePath, Level level) {
+			String enabledTexturePath, String disabledTexturePath, Level level,
+			boolean xFromLeft, boolean yFromTop) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
-				level);
+				level, xFromLeft, yFromTop);
 	}
 
 	@Override

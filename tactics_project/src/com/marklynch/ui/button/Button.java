@@ -4,7 +4,6 @@ import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.TextureUtils;
 
 public abstract class Button {
 
@@ -27,31 +26,6 @@ public abstract class Button {
 		this.level = level;
 	}
 
-	public void draw() {
-
-		if (enabled)
-			TextureUtils.drawTexture(enabledTexture, x, x + width, y, y
-					+ height);
-		else
-			TextureUtils.drawTexture(disabledTexture, x, x + width, y, y
-					+ height);
-
-	}
-
-	public void drawWithinBounds(float boundsX1, float boundsX2,
-			float boundsY1, float boundsY2) {
-
-		if (enabled)
-			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, x, x
-					+ width, y, y + height, boundsX1, boundsX2, boundsY1,
-					boundsY2);
-		else
-			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, x, x
-					+ width, y, y + height, boundsX1, boundsX2, boundsY1,
-					boundsY2);
-
-	}
-
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
 		if (mouseX > x && mouseX < x + width && mouseY > y
 				&& mouseY < y + height) {
@@ -61,6 +35,11 @@ public abstract class Button {
 	}
 
 	public abstract void click();
+
+	public abstract void draw();
+
+	public abstract void drawWithinBounds(float boundsX1, float boundsX2,
+			float boundsY1, float boundsY2);
 	// level.endTurn();
 
 }
