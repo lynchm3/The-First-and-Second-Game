@@ -432,8 +432,7 @@ public class Level {
 		}
 
 		// script
-		if (script.activeScriptEvent != null)
-			script.draw();
+		script.draw();
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
@@ -441,7 +440,7 @@ public class Level {
 	public void update(int delta) {
 		// if (this.script.activeScriptEvent != null) {
 		script.update(delta);
-		if ((this.script.activeScriptEvent == null || script.activeScriptEvent.blockUserInput == false)
+		if (!this.script.checkIfBlocking()
 				&& currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);
 		}

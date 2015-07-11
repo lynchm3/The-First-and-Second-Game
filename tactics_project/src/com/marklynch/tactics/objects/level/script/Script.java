@@ -5,7 +5,7 @@ import java.util.Vector;
 public class Script {
 
 	public Vector<ScriptEvent> scriptEvents;
-	public ScriptEvent activeScriptEvent;
+	public Vector<ScriptEvent> activeScriptEvents = new Vector<ScriptEvent>();
 
 	public Script(Vector<ScriptEvent> scriptEvents) {
 		super();
@@ -17,34 +17,46 @@ public class Script {
 		for (ScriptEvent scriptEvent : this.scriptEvents) {
 			if (scriptEvent.scriptTrigger.triggered == false
 					&& scriptEvent.scriptTrigger.checkTrigger()) {
-				this.activeScriptEvent = scriptEvent;
+				this.activeScriptEvents.addElement(scriptEvent);
 				scriptEvent.scriptTrigger.triggered = true;
 			}
 		}
 	}
 
-	public boolean checkIfCurrentScriptEventCompleted() {
-		if (activeScriptEvent == null)
-			return true;
-
-		return activeScriptEvent.checkIfCompleted();
-	}
-
 	public void click() {
-		if (activeScriptEvent != null)
+		for (ScriptEvent activeScriptEvent : activeScriptEvents) {
 			activeScriptEvent.click();
+		}
 	}
 
 	public void update(int delta) {
 		activateScriptEvent();
-		if (activeScriptEvent != null)
+
+		Vector<ScriptEvent> completedScriptEvents = new Vector<ScriptEvent>();
+
+		for (ScriptEvent activeScriptEvent : activeScriptEvents) {
 			activeScriptEvent.update(delta);
-		if (checkIfCurrentScriptEventCompleted())
-			activeScriptEvent = null;
+			if (activeScriptEvent.checkIfCompleted()) {
+				completedScriptEvents.add(activeScriptEvent);
+			}
+		}
+
+		for (ScriptEvent completedScriptEvent : completedScriptEvents) {
+			activeScriptEvents.remove(completedScriptEvent);
+		}
 	}
 
 	public void draw() {
-		if (activeScriptEvent != null)
+		for (ScriptEvent activeScriptEvent : activeScriptEvents) {
 			activeScriptEvent.draw();
+		}
+	}
+
+	public boolean checkIfBlocking() {
+		for (ScriptEvent activeScriptEvent : activeScriptEvents) {
+			if (activeScriptEvent.blockUserInput)
+				return true;
+		}
+		return false;
 	}
 }

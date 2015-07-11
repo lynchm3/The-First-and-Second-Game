@@ -18,6 +18,10 @@ public class TODO {
 	// When are triggers checked!? Need to be checking constantly. check on
 	// every update call!??!
 
+	// I've put in the ability to have multiple scriptevents at a time, but...
+	// need to sort out some sort of precedence, particularly for clicks
+	// (maybe...)
+
 	// need to make multiple script events at once
 
 	// If a guy dies during inline speech it'll probably keep going....

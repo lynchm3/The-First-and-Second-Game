@@ -223,8 +223,7 @@ public class Game {
 		}
 
 		boolean scriptGetsClick = false;
-		if (level.script.activeScriptEvent != null
-				&& level.script.activeScriptEvent.blockUserInput == true) {
+		if (level.script.checkIfBlocking()) {
 			scriptGetsClick = true;
 		}
 
