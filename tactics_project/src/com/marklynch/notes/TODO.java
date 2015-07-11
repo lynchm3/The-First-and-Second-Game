@@ -2,8 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// other script triggers
-	// character selected
+	// Create scriptEventGroup WHICH extends scriptevent ;) AWWWW YISSSSSS
+
+	// other script triggers (this trigger system is THE fucking business...)
 	// character moves
 	// character dies
 	// any character moves to specific square
