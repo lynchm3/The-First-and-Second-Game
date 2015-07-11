@@ -12,11 +12,14 @@ public class Script {
 		this.scriptEvents = scriptEvents;
 	}
 
-	public void activateScriptEvent(int turn, int activeFaction) {
-		activeScriptEvent = null;
+	public void activateScriptEvent() {
+		// activeScriptEvent = null;
 		for (ScriptEvent scriptEvent : this.scriptEvents) {
-			if (scriptEvent.scriptTrigger.checkTrigger())
+			if (scriptEvent.scriptTrigger.triggered == false
+					&& scriptEvent.scriptTrigger.checkTrigger()) {
 				this.activeScriptEvent = scriptEvent;
+				scriptEvent.scriptTrigger.triggered = true;
+			}
 		}
 	}
 
@@ -33,6 +36,7 @@ public class Script {
 	}
 
 	public void update(int delta) {
+		activateScriptEvent();
 		if (activeScriptEvent != null)
 			activeScriptEvent.update(delta);
 		if (checkIfCurrentScriptEventCompleted())

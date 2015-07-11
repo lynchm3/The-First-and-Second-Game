@@ -15,11 +15,8 @@ public class ScriptTriggerTurnStart extends ScriptTrigger {
 
 	@Override
 	public boolean checkTrigger() {
-		if (triggered)
-			return false;
 		if (level.turn == turn
 				&& level.currentFactionMovingIndex == factionIndex) {
-			triggered = true;
 			return true;
 		}
 

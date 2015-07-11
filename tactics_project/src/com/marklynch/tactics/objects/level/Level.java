@@ -247,6 +247,9 @@ public class Level {
 		speechParts1.add(speechPart1_1);
 		speechParts1.add(speechPart1_2);
 
+		// ScriptTrigger scriptTrigger1 = new
+		// ScriptTriggerDestructionOfSpecificGameObject(
+		// this, factions.get(0).actors.get(0));
 		ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1, 0);
 
 		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
@@ -310,7 +313,7 @@ public class Level {
 		scriptEvents.add(inlineScriptEventSpeech1);
 
 		script = new Script(scriptEvents);
-		script.activateScriptEvent(turn, currentFactionMovingIndex);
+		// script.activateScriptEvent();
 	}
 
 	public void removeWalkingHighlight() {
@@ -436,15 +439,15 @@ public class Level {
 	}
 
 	public void update(int delta) {
-		if (this.script.activeScriptEvent != null) {
-			script.update(delta);
-			if ((this.script.activeScriptEvent == null || script.activeScriptEvent.blockUserInput == false)
-					&& currentFactionMoving != factions.get(0)) {
-				currentFactionMoving.update(delta);
-			}
-		} else if (currentFactionMoving != factions.get(0)) {
+		// if (this.script.activeScriptEvent != null) {
+		script.update(delta);
+		if ((this.script.activeScriptEvent == null || script.activeScriptEvent.blockUserInput == false)
+				&& currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);
 		}
+		// } else if (currentFactionMoving != factions.get(0)) {
+		// currentFactionMoving.update(delta);
+		// }
 	}
 
 	public void clearDialogs() {
@@ -506,8 +509,6 @@ public class Level {
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		if (currentFactionMovingIndex == 0)
 			waitingForPlayerClick = true;
-
-		script.activateScriptEvent(turn, currentFactionMovingIndex);
 
 		showTurnNotification();
 

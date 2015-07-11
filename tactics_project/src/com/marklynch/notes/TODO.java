@@ -6,6 +6,17 @@ public class TODO {
 	// death
 	// character moves
 	// character dies
+	// any character moves to specific square
+	// any character from specific faction reaches square
+	// specific character reaches specific square
+	// faction down to x amount of actors
+
+	// Need to maintain an array of active events
+
+	// Put these triggers in to one file as inner classes?
+
+	// When are triggers checked!? Need to be checking constantly. check on
+	// every update call!??!
 
 	// need to make multiple script events at once
 
