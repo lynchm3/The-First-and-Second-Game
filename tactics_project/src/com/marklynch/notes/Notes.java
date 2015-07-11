@@ -1502,6 +1502,10 @@ public class Notes {
 	 * 
 	 * Some sort of time travel, time manipulation, time control aspect?
 	 * PRIMER!!
+	 * 
+	 * 
+	 * 
+	 * I like these designs http://imgur.com/a/erEXz
 	 */
 
 }
