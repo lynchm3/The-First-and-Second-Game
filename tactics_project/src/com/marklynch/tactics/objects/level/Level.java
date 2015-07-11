@@ -17,6 +17,7 @@ import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptTrigger;
+import com.marklynch.tactics.objects.level.script.ScriptTriggerActorSelected;
 import com.marklynch.tactics.objects.level.script.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.level.script.SpeechPart;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -250,7 +251,10 @@ public class Level {
 		// ScriptTrigger scriptTrigger1 = new
 		// ScriptTriggerDestructionOfSpecificGameObject(
 		// this, factions.get(0).actors.get(0));
-		ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1, 0);
+		ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(this,
+				factions.get(0).actors.get(0));
+		// ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1,
+		// 0);
 
 		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
 				speechParts1, scriptTrigger1);

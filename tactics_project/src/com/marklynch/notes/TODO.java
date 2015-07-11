@@ -3,7 +3,7 @@ package com.marklynch.notes;
 public class TODO {
 
 	// other script triggers
-	// death
+	// character selected
 	// character moves
 	// character dies
 	// any character moves to specific square
