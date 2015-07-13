@@ -64,6 +64,8 @@ public class Game {
 		game.start();
 	}
 
+	public boolean paused = false;
+
 	public void start() {
 
 		initGL(windowWidth, windowHeight); // init OpenGL
@@ -72,6 +74,20 @@ public class Game {
 		lastFPS = getTime(); // call before loop to initialise fps timer
 
 		while (!Display.isCloseRequested()) {
+
+			if (!Display.isActive())
+				paused = true;
+			else
+				paused = false;
+
+			// while (!Display.isActive()) {
+			// try {
+			// Thread.sleep(1000);
+			// } catch (InterruptedException e) {
+			// e.printStackTrace();
+			// }
+			// System.out.println("!Display.isActive()");
+			// }
 
 			delta = getDelta();
 
@@ -119,7 +135,9 @@ public class Game {
 			//
 			// }
 
-			update(delta);
+			if (!paused)
+				update(delta);
+
 			renderGL();
 
 			Display.update();

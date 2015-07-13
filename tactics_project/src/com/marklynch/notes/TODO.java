@@ -2,7 +2,7 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// ScriptEventEndLevel
+	// stop running when minimized
 
 	// Why does script trigger get level?
 
@@ -300,11 +300,6 @@ public class TODO {
 
 	// Take a photo of ur own face u dork!!
 
-	// stop running when minimized
-
-	// watch the fire emblem battle animations, the 3d ones are pretty good
-	// one where the screen turned red and black...
-
 	// Make all the over the top details configurable
 	// The weapons icons beside the characters
 	// The wepaons icons on where you can attack
@@ -318,10 +313,4 @@ public class TODO {
 	// (Robots don't like lightning strikes, ShitBot 3000 has been overcharged)
 	// or speach bubbles rather than log text? or speachbubbles and log the
 	// speach like aoe2)
-
-	// multi colored log msgs
-
-	// grey out actor if they cant move or atttack?
-
-	// DONE
 }

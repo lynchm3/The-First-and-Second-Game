@@ -1517,6 +1517,9 @@ public class Notes {
 	 * goldengrahams/shreddies/cereal chess/draftsboard tablecloth fishnet,
 	 * also... just take some square shit and order them in to a grid, will do
 	 * for loading screens or whatevs
+	 * 
+	 * watch the fire emblem battle animations, the 3d ones are pretty good one
+	 * where the screen turned red and black...
 	 */
 
 }
