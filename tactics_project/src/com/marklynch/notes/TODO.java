@@ -2,8 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// stop running when minimized
-
 	// Why does script trigger get level?
 
 	// Look at the map maker for TT... Might reveal some info on the mechanics

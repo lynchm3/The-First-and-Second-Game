@@ -1,14 +1,12 @@
 package com.marklynch.tactics.objects.level.script.trigger;
 
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 
 public class ScriptTriggerSquareOccupied extends ScriptTrigger {
 
 	Square square;
 
-	public ScriptTriggerSquareOccupied(Level level, Square square) {
-		super(level);
+	public ScriptTriggerSquareOccupied(Square square) {
 		this.square = square;
 	}
 

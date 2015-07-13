@@ -6,11 +6,12 @@ public class ScriptTriggerTurnStart extends ScriptTrigger {
 
 	int turn;
 	int factionIndex;
+	Level level;
 
 	public ScriptTriggerTurnStart(Level level, int turn, int factionIndex) {
-		super(level);
 		this.turn = turn;
 		this.factionIndex = factionIndex;
+		this.level = level;
 	}
 
 	@Override

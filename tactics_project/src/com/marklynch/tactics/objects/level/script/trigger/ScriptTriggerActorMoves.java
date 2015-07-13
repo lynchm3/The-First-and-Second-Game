@@ -1,14 +1,12 @@
 package com.marklynch.tactics.objects.level.script.trigger;
 
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
 
 public class ScriptTriggerActorMoves extends ScriptTrigger {
 
 	Actor actor;
 
-	public ScriptTriggerActorMoves(Level level, Actor actor) {
-		super(level);
+	public ScriptTriggerActorMoves(Actor actor) {
 		this.actor = actor;
 	}
 

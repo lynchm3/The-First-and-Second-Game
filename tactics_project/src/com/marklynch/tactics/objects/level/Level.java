@@ -318,7 +318,7 @@ public class Level {
 		// ScriptTrigger scriptTrigger3 = new ScriptTriggerTurnStart(this, 2,
 		// 0);
 		ScriptTriggerScriptEventEnded scriptTrigger3 = new ScriptTriggerScriptEventEnded(
-				this, scriptEventEndLevel);
+				scriptEventEndLevel);
 
 		ScriptEventInlineSpeech inlineScriptEventSpeech1 = new ScriptEventInlineSpeech(
 				false, inlineSpeechParts1, scriptTrigger3);

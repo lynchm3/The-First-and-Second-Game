@@ -1,6 +1,5 @@
 package com.marklynch.tactics.objects.level.script.trigger;
 
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 
@@ -9,9 +8,7 @@ public class ScriptTriggerSpecficActorOccupiesSquare extends ScriptTrigger {
 	Actor actor;
 	Square square;
 
-	public ScriptTriggerSpecficActorOccupiesSquare(Level level, Actor actor,
-			Square square) {
-		super(level);
+	public ScriptTriggerSpecficActorOccupiesSquare(Actor actor, Square square) {
 		this.actor = actor;
 		this.square = square;
 	}

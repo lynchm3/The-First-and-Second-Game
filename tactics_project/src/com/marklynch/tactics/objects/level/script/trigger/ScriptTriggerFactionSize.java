@@ -1,15 +1,13 @@
 package com.marklynch.tactics.objects.level.script.trigger;
 
 import com.marklynch.tactics.objects.level.Faction;
-import com.marklynch.tactics.objects.level.Level;
 
 public class ScriptTriggerFactionSize extends ScriptTrigger {
 
 	Faction faction;
 	int size;
 
-	public ScriptTriggerFactionSize(Level level, Faction faction, int size) {
-		super(level);
+	public ScriptTriggerFactionSize(Faction faction, int size) {
 		this.faction = faction;
 		this.size = size;
 	}

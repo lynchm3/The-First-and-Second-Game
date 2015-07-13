@@ -1520,6 +1520,8 @@ public class Notes {
 	 * 
 	 * watch the fire emblem battle animations, the 3d ones are pretty good one
 	 * where the screen turned red and black...
+	 * 
+	 * Make pause game on minimize and option
 	 */
 
 }

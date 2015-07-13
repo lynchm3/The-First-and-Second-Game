@@ -1,14 +1,12 @@
 package com.marklynch.tactics.objects.level.script.trigger;
 
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
 
 public class ScriptTriggerDestructionOfSpecificGameObject extends ScriptTrigger {
 
 	Actor actor;
 
-	public ScriptTriggerDestructionOfSpecificGameObject(Level level, Actor actor) {
-		super(level);
+	public ScriptTriggerDestructionOfSpecificGameObject(Actor actor) {
 		this.actor = actor;
 
 	}
