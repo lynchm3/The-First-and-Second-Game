@@ -2,10 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Why does script trigger get level?
-
+	// I think I need a level editor...
+	// Based on Classes...
+	// How hard could it be???
 	// Look at the map maker for TT... Might reveal some info on the mechanics
 	// they use...
+
+	// Why does script trigger get level?
 
 	// Need to maintain an array of active events
 
