@@ -3,6 +3,7 @@ package com.marklynch.notes;
 public class TODO {
 
 	// Create scriptEventGroup WHICH extends scriptevent ;) AWWWW YISSSSSS
+	// Added ScriptEventGroup - need to test it
 
 	// other script triggers (this trigger system is THE fucking business...)
 	// character moves
