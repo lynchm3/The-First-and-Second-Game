@@ -19,6 +19,7 @@ import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.ScriptTriggerActorSelected;
+import com.marklynch.tactics.objects.level.script.ScriptTriggerScriptEventEnded;
 import com.marklynch.tactics.objects.level.script.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.level.script.SpeechPart;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -311,7 +312,10 @@ public class Level {
 		inlineSpeechParts1.add(inlineSpeechPart1_1);
 		inlineSpeechParts1.add(inlineSpeechPart1_2);
 
-		ScriptTrigger scriptTrigger3 = new ScriptTriggerTurnStart(this, 2, 0);
+		// ScriptTrigger scriptTrigger3 = new ScriptTriggerTurnStart(this, 2,
+		// 0);
+		ScriptTriggerScriptEventEnded scriptTrigger3 = new ScriptTriggerScriptEventEnded(
+				this, scriptEventGroup);
 
 		ScriptEventInlineSpeech inlineScriptEventSpeech1 = new ScriptEventInlineSpeech(
 				false, inlineSpeechParts1, scriptTrigger3);

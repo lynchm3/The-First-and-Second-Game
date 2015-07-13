@@ -13,9 +13,7 @@ public class ScriptTriggerScriptEventEnded extends ScriptTrigger {
 
 	@Override
 	public boolean checkTrigger() {
-		if (scriptEvent.checkIfCompleted())
-			return true;
-		return false;
+		return scriptEvent.checkIfCompleted();
 	}
 
 }

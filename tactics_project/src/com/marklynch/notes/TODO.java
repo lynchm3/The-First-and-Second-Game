@@ -2,18 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// ScriptGroup works... BUT, is limited to blocked/not blocked for the whole
-	// thing
-	// I guess it's ok for now
-	// I also want...... ScriptTriggerEventEnded
-
 	// other script triggers (this trigger system is THE fucking business...)
 	// character moves
-	// character dies
 	// any character moves to specific square
 	// any character from specific faction reaches square
 	// specific character reaches specific square
 	// faction down to x amount of actors
+	// Square emptied unoccupied
 
 	// Need to maintain an array of active events
 
