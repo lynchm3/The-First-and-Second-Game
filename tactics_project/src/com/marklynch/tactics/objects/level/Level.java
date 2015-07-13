@@ -10,6 +10,7 @@ import org.newdawn.slick.TrueTypeFont;
 
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
+import com.marklynch.UserInput;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.script.InlineSpeechPart;
 import com.marklynch.tactics.objects.level.script.Script;
@@ -356,8 +357,8 @@ public class Level {
 		GL11.glPushMatrix();
 
 		GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
-		GL11.glScalef(Game.zoom, Game.zoom, 0);
-		GL11.glTranslatef(Game.dragX, Game.dragY, 0);
+		GL11.glScalef(UserInput.zoom, UserInput.zoom, 0);
+		GL11.glTranslatef(UserInput.dragX, UserInput.dragY, 0);
 		GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
 
 		// Squares

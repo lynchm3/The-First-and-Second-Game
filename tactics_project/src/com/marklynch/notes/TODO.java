@@ -2,11 +2,43 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Created userinput class to clean up game class
+
+	// I want whatever ur hovering over to light up, this no light up shite it
+	// BULLSHIT
+	// Could just be an outline of the square... i dunno
+
+	// Under the mouse it should say MOVE,SELECT,ATTACK,HEAL like a contextual A
+	// button. Mayeb the hover details should come out of the mouse?!
+	// Interesting...
+
+	// vsync in settings Display.setVSyncEnabled(true);
+
+	// FUCK PIVOT
+	// board size (text box)
+	// add/remove/edit faction (text box, check box, button, dropdown)
+	// add/remove/edit character
+	// add/remove/edit object
+	// add/remove/edit script event
+	// add/remove/edit script trigger
+
+	// So GUI items - theres swing, and a bunch of libs that provide gui
+	// elements for lwjgl...
+	// http://wiki.lwjgl.org/wiki/Game_Engines_and_Libraries_Using_LWJGL#GUI_Libraries
+	// i dunnooooo.....
+
 	// I think I need a level editor...
 	// Based on Classes...
 	// How hard could it be???
 	// Look at the map maker for TT... Might reveal some info on the mechanics
 	// they use...
+	// I want to be able to try out a level im playing immediately (see aoe2,
+	// the TT lvl editor is bollox and must have seriously hindered development)
+
+	// unit tests + monkey...
+
+	// random generator button for the level editor... might help people (me...)
+	// with creativity
 
 	// Why does script trigger get level?
 

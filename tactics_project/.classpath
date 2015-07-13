@@ -34,5 +34,6 @@
 	<classpathentry kind="lib" path="libs/pivot-web-server-2.0.4.jar"/>
 	<classpathentry kind="lib" path="libs/pivot-wtk-2.0.4.jar"/>
 	<classpathentry kind="lib" path="libs/pivot-wtk-terra-2.0.4.jar"/>
+	<classpathentry kind="lib" path="libs/xpp3-1.1.4c.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

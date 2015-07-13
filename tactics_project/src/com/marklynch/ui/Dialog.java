@@ -7,6 +7,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
+import com.marklynch.UserInput;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.utils.TextureUtils;
@@ -35,13 +36,13 @@ public class Dialog {
 	}
 
 	public void draw() {
-		int positionYInPixels = (int) ((reference.y + 1) * Game.zoom
-				* Game.SQUARE_HEIGHT - (Game.windowHeight * Game.zoom) / 2
-				+ Game.dragY * Game.zoom + Game.windowHeight / 2);
+		int positionYInPixels = (int) ((reference.y + 1) * UserInput.zoom
+				* Game.SQUARE_HEIGHT - (Game.windowHeight * UserInput.zoom) / 2
+				+ UserInput.dragY * UserInput.zoom + Game.windowHeight / 2);
 
-		int positionXInPixels = (int) ((reference.x + 1) * Game.zoom
-				* Game.SQUARE_WIDTH - (Game.windowWidth * Game.zoom) / 2
-				+ Game.dragX * Game.zoom + Game.windowWidth / 2);
+		int positionXInPixels = (int) ((reference.x + 1) * UserInput.zoom
+				* Game.SQUARE_WIDTH - (Game.windowWidth * UserInput.zoom) / 2
+				+ UserInput.dragX * UserInput.zoom + Game.windowWidth / 2);
 
 		// background
 		// this.backgroundImageTexture.bind();
@@ -56,8 +57,8 @@ public class Dialog {
 		GL11.glTexCoord2f(0, 0);
 		GL11.glVertex2f(positionXInPixels + 5, positionYInPixels + 5);
 		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(positionXInPixels - 64 * Game.zoom, positionYInPixels
-				- 64 * Game.zoom);
+		GL11.glVertex2f(positionXInPixels - 64 * UserInput.zoom,
+				positionYInPixels - 64 * UserInput.zoom);
 		GL11.glEnd();
 
 		// GL11.glLineWidth(1.0f);
