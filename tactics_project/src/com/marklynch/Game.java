@@ -144,7 +144,13 @@ public class Game {
 
 		public SimpleGameMenu() {
 			buttons = new Button[3];
-			buttons[0] = new Button("Start Game");
+			buttons[0] = new Button("End Turn");
+			buttons[0].addCallback(new Runnable() {
+				@Override
+				public void run() {
+					level.endTurn();
+				}
+			});
 			buttons[1] = new Button("Options");
 			buttons[2] = new Button("Quit");
 

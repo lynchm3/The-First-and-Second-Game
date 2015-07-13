@@ -12,6 +12,10 @@ public class TODO {
 	// button. Mayeb the hover details should come out of the mouse?!
 	// Interesting...
 
+	// buttons do not resize nicely
+
+	// buttons do not take the click from the level
+
 	// vsync in settings Display.setVSyncEnabled(true);
 
 	// FUCK PIVOT
