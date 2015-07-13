@@ -1,5 +1,7 @@
 package com.marklynch.tactics.objects.level.script;
 
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
+
 public abstract class ScriptEvent {
 
 	public boolean blockUserInput;

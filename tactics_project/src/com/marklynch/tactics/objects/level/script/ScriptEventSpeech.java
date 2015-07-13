@@ -2,6 +2,8 @@ package com.marklynch.tactics.objects.level.script;
 
 import java.util.Vector;
 
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
+
 public class ScriptEventSpeech extends ScriptEvent {
 
 	public Vector<SpeechPart> speechParts;

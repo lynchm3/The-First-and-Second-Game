@@ -2,13 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// other script triggers (this trigger system is THE fucking business...)
-	// character moves
-	// any character moves to specific square
-	// any character from specific faction reaches square
-	// specific character reaches specific square
-	// faction down to x amount of actors
-	// Square emptied unoccupied
+	// Look at the map maker for TT... Might reveal some info on the mechanics
+	// they use...
 
 	// Need to maintain an array of active events
 

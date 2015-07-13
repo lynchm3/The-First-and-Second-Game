@@ -1,4 +1,4 @@
-package com.marklynch.tactics.objects.level.script;
+package com.marklynch.tactics.objects.level.script.trigger;
 
 import com.marklynch.tactics.objects.level.Level;
 
