@@ -15,7 +15,8 @@ public class Script {
 	public void activateScriptEvent() {
 		// activeScriptEvent = null;
 		for (ScriptEvent scriptEvent : this.scriptEvents) {
-			if (scriptEvent.scriptTrigger.triggered == false
+			if (scriptEvent.scriptTrigger != null
+					&& scriptEvent.scriptTrigger.triggered == false
 					&& scriptEvent.scriptTrigger.checkTrigger()) {
 				this.activeScriptEvents.addElement(scriptEvent);
 				scriptEvent.scriptTrigger.triggered = true;

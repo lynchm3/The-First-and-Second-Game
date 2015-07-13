@@ -2,8 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Create scriptEventGroup WHICH extends scriptevent ;) AWWWW YISSSSSS
-	// Added ScriptEventGroup - need to test it
+	// ScriptGroup works... BUT, is limited to blocked/not blocked for the whole
+	// thing
+	// I guess it's ok for now
+	// I also want...... ScriptTriggerEventEnded
 
 	// other script triggers (this trigger system is THE fucking business...)
 	// character moves

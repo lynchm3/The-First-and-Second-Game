@@ -14,6 +14,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.script.InlineSpeechPart;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
+import com.marklynch.tactics.objects.level.script.ScriptEventGroup;
 import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptTrigger;
@@ -257,7 +258,7 @@ public class Level {
 		// 0);
 
 		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
-				speechParts1, scriptTrigger1);
+				speechParts1, null);
 
 		// Speech 2
 
@@ -285,7 +286,13 @@ public class Level {
 		ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(this, 1, 2);
 
 		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(true,
-				speechParts2, scriptTrigger2);
+				speechParts2, null);
+
+		Vector<ScriptEvent> scriptEventsForGroup = new Vector<ScriptEvent>();
+		scriptEventsForGroup.add(scriptEventSpeech1);
+		scriptEventsForGroup.add(scriptEventSpeech2);
+		ScriptEventGroup scriptEventGroup = new ScriptEventGroup(true,
+				scriptTrigger1, scriptEventsForGroup);
 
 		// Inline speechVector<Actor> speechActors1 = new Vector<Actor>();
 
@@ -312,8 +319,8 @@ public class Level {
 		// The script
 
 		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
-		scriptEvents.add(scriptEventSpeech1);
-		scriptEvents.add(scriptEventSpeech2);
+		scriptEvents.add(scriptEventGroup);
+		// scriptEvents.add(scriptEventSpeech2);
 		scriptEvents.add(inlineScriptEventSpeech1);
 
 		script = new Script(scriptEvents);
