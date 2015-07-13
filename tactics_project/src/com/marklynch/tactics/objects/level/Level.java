@@ -14,7 +14,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.script.InlineSpeechPart;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.ScriptEventGroup;
+import com.marklynch.tactics.objects.level.script.ScriptEventEndLevel;
 import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
 import com.marklynch.tactics.objects.level.script.SpeechPart;
@@ -63,6 +63,7 @@ public class Level {
 	public boolean waitingForPlayerClick = true;
 
 	public Script script;
+	public boolean ended = false;
 
 	// java representation of a grid??
 	// 2d array?
@@ -258,8 +259,10 @@ public class Level {
 		// ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1,
 		// 0);
 
-		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
-				speechParts1, null);
+		ScriptEventEndLevel scriptEventEndLevel = new ScriptEventEndLevel(true,
+				scriptTrigger1, this, new Object[] { "GAME OVER" });
+		// ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
+		// speechParts1, null);
 
 		// Speech 2
 
@@ -289,11 +292,11 @@ public class Level {
 		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(true,
 				speechParts2, null);
 
-		Vector<ScriptEvent> scriptEventsForGroup = new Vector<ScriptEvent>();
-		scriptEventsForGroup.add(scriptEventSpeech1);
-		scriptEventsForGroup.add(scriptEventSpeech2);
-		ScriptEventGroup scriptEventGroup = new ScriptEventGroup(true,
-				scriptTrigger1, scriptEventsForGroup);
+		// Vector<ScriptEvent> scriptEventsForGroup = new Vector<ScriptEvent>();
+		// scriptEventsForGroup.add(scriptEventSpeech1);
+		// scriptEventsForGroup.add(scriptEventSpeech2);
+		// ScriptEventGroup scriptEventGroup = new ScriptEventGroup(true,
+		// scriptTrigger1, scriptEventsForGroup);
 
 		// Inline speechVector<Actor> speechActors1 = new Vector<Actor>();
 
@@ -315,7 +318,7 @@ public class Level {
 		// ScriptTrigger scriptTrigger3 = new ScriptTriggerTurnStart(this, 2,
 		// 0);
 		ScriptTriggerScriptEventEnded scriptTrigger3 = new ScriptTriggerScriptEventEnded(
-				this, scriptEventGroup);
+				this, scriptEventEndLevel);
 
 		ScriptEventInlineSpeech inlineScriptEventSpeech1 = new ScriptEventInlineSpeech(
 				false, inlineSpeechParts1, scriptTrigger3);
@@ -323,8 +326,8 @@ public class Level {
 		// The script
 
 		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
-		scriptEvents.add(scriptEventGroup);
-		// scriptEvents.add(scriptEventSpeech2);
+		scriptEvents.add(scriptEventEndLevel);
+		scriptEvents.add(scriptEventSpeech2);
 		scriptEvents.add(inlineScriptEventSpeech1);
 
 		script = new Script(scriptEvents);
@@ -575,5 +578,9 @@ public class Level {
 
 	private void removeLastLog() {
 		logs.remove(logs.lastElement());
+	}
+
+	public void end() {
+		this.ended = true;
 	}
 }

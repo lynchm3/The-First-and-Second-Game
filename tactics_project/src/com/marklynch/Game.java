@@ -72,6 +72,7 @@ public class Game {
 		lastFPS = getTime(); // call before loop to initialise fps timer
 
 		while (!Display.isCloseRequested()) {
+
 			delta = getDelta();
 
 			// So... these work...
@@ -123,9 +124,13 @@ public class Game {
 
 			Display.update();
 			Display.sync(60); // cap fps to 60fps
+
+			if (level.ended) {
+				Display.destroy();
+				break;
+			}
 		}
 
-		Display.destroy();
 	}
 
 	public void init() {

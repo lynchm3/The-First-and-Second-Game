@@ -2,23 +2,20 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// ScriptEventEndLevel
+
+	// Why does script trigger get level?
+
 	// Look at the map maker for TT... Might reveal some info on the mechanics
 	// they use...
 
 	// Need to maintain an array of active events
 
-	// Put these triggers in to one file as inner classes?
-
-	// When are triggers checked!? Need to be checking constantly. check on
-	// every update call!??!
+	// multiple triggers for an event :D
 
 	// I've put in the ability to have multiple scriptevents at a time, but...
 	// need to sort out some sort of precedence, particularly for clicks
 	// (maybe...)
-
-	// need to make multiple script events at once
-
-	// If a guy dies during inline speech it'll probably keep going....
 
 	// Refactor day
 
