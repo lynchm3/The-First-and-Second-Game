@@ -12,10 +12,12 @@ public abstract class Button {
 	public float x, y, width, height;
 	public Level level;
 	public boolean enabled = true;
-	ClickListener clickListener;
+	public ClickListener clickListener;
+	public String text;
 
 	public Button(float x, float y, float width, float height,
-			String enabledTexturePath, String disabledTexturePath, Level level) {
+			String enabledTexturePath, String disabledTexturePath, String text,
+			Level level) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -24,6 +26,7 @@ public abstract class Button {
 		this.enabledTexture = ResourceUtils.getGlobalImage(enabledTexturePath);
 		this.disabledTexture = ResourceUtils
 				.getGlobalImage(disabledTexturePath);
+		this.text = text;
 		this.level = level;
 	}
 

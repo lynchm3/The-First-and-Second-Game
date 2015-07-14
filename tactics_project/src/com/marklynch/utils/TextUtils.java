@@ -1,5 +1,6 @@
 package com.marklynch.utils;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
@@ -23,6 +24,8 @@ public class TextUtils {
 
 		for (Object content : contents) {
 			if (content instanceof String || content instanceof StringWithColor) {
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
+
 				String string = null;
 				Color color = Color.white;
 				if (content instanceof String) {
@@ -117,8 +120,6 @@ public class TextUtils {
 				TextureUtils.drawTexture(faction.imageTexture, x, x + 20, posY
 						+ offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
-
-			} else if (content instanceof StringWithColor) {
 
 			}
 		}

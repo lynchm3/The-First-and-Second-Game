@@ -77,18 +77,24 @@ public class Level {
 		initObjects();
 		dialogs = new Vector<Dialog>();
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f,
-				"end_turn_button.png", "end_turn_button.png", this, false,
-				false);
+				"end_turn_button.png", "end_turn_button.png", "END TURN", this,
+				false, false);
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				System.out.println("ClickListener().click()");
 				Level.this.endTurn();
 			}
 		});
 		buttons.add(endTurnButton);
 		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png",
-				"undo_button_disabled.png", this, false, false);
+				"undo_button_disabled.png", "UNDO", this, false, false);
+		undoButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.undo();
+			}
+		});
+		undoButton.enabled = false;
 		buttons.add(undoButton);
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
 		font20 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 20);

@@ -7,10 +7,11 @@ public abstract class ActorButton extends Button {
 
 	public ActorButton(float x, float y, float width, float height,
 			String enabledTexturePath, String disabledTexturePath, Level level) {
-		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath, "",
 				level);
 	}
 
+	@Override
 	public void draw() {
 
 		if (enabled)
@@ -22,6 +23,7 @@ public abstract class ActorButton extends Button {
 
 	}
 
+	@Override
 	public void drawWithinBounds(float boundsX1, float boundsX2,
 			float boundsY1, float boundsY2) {
 

@@ -1,7 +1,11 @@
 package com.marklynch.ui.button;
 
+import org.newdawn.slick.Color;
+
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
+import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class LevelButton extends Button {
@@ -10,10 +14,10 @@ public class LevelButton extends Button {
 	boolean yFromTop;
 
 	public LevelButton(float x, float y, float width, float height,
-			String enabledTexturePath, String disabledTexturePath, Level level,
-			boolean xFromLeft, boolean yFromTop) {
+			String enabledTexturePath, String disabledTexturePath, String text,
+			Level level, boolean xFromLeft, boolean yFromTop) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
-				level);
+				text, level);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 	}
@@ -29,12 +33,17 @@ public class LevelButton extends Button {
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
 
-		if (enabled)
-			TextureUtils.drawTexture(enabledTexture, realX, realX + width,
-					realY, realY + height);
-		else
-			TextureUtils.drawTexture(disabledTexture, realX, realX + width,
-					realY, realY + height);
+		if (enabled) {
+			QuadUtils.drawQuad(Color.blue, realX, realX + width, realY, realY
+					+ height);
+			TextUtils.printTextWithImages(new Object[] { text }, realX, realY,
+					level);
+		} else {
+			QuadUtils.drawQuad(Color.red, realX, realX + width, realY, realY
+					+ height);
+			TextUtils.printTextWithImages(new Object[] { text }, realX, realY,
+					level);
+		}
 
 	}
 
@@ -50,14 +59,15 @@ public class LevelButton extends Button {
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
 
-		if (enabled)
+		if (enabled) {
 			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, realX,
 					realX + width, realY, realY + height, boundsX1, boundsX2,
 					boundsY1, boundsY2);
-		else
+		} else {
 			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, realX,
 					realX + width, realY, realY + height, boundsX1, boundsX2,
 					boundsY1, boundsY2);
+		}
 
 	}
 
