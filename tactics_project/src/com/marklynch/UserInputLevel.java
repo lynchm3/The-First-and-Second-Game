@@ -10,7 +10,7 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
 
-public class UserInput {
+public class UserInputLevel {
 
 	public static float zoom = 0.8f;
 

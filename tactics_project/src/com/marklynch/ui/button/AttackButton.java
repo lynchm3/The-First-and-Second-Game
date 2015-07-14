@@ -4,11 +4,13 @@ import com.marklynch.tactics.objects.level.Level;
 
 public class AttackButton extends ActorButton {
 
+	Level level;
+
 	public AttackButton(int x, int y, int width, int height,
 			String enabledTexturePath, String disabledTexturePath, Level level) {
-		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
-				level);
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath);
 		this.enabled = true;
+		this.level = level;
 	}
 
 	@Override

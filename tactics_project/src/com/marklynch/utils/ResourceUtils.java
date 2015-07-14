@@ -34,7 +34,7 @@ public class ResourceUtils {
 				texture = TextureLoader.getTexture("PNG", ResourceLoader
 						.getResourceAsStream("res/images/" + path));
 				globalImages.put(path, texture);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

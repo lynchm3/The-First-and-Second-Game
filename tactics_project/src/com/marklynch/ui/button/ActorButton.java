@@ -1,14 +1,12 @@
 package com.marklynch.ui.button;
 
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.utils.TextureUtils;
 
 public abstract class ActorButton extends Button {
 
 	public ActorButton(float x, float y, float width, float height,
-			String enabledTexturePath, String disabledTexturePath, Level level) {
-		super(x, y, width, height, enabledTexturePath, disabledTexturePath, "",
-				level);
+			String enabledTexturePath, String disabledTexturePath) {
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath, "");
 	}
 
 	@Override

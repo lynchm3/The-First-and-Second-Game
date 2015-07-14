@@ -12,6 +12,9 @@ public class TODO {
 	// button. Mayeb the hover details should come out of the mouse?!
 	// Interesting...
 
+	// look up how to switch between textures and quads in opengl, coz the way
+	// im doing it feels like BS
+
 	// buttons do not resize nicely
 
 	// buttons do not take the click from the level

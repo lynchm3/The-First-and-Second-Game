@@ -4,20 +4,20 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
+import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
 
 public class TextUtils {
 
 	public static void printTextWithImages(Object[] contents, float posX,
-			float posY, Level level) {
-		printTextWithImages(contents, posX, posY, level, Float.MAX_VALUE);
+			float posY) {
+		printTextWithImages(contents, posX, posY, Float.MAX_VALUE);
 	}
 
 	public static void printTextWithImages(Object[] contents, float posX,
-			float posY, Level level, float maxWidth) {
+			float posY, float maxWidth) {
 
 		float offsetX = 0;
 		float offsetY = 0;
@@ -41,13 +41,13 @@ public class TextUtils {
 
 				for (String stringPart : stringParts) {
 
-					float width = level.font20.getWidth(stringPart);
+					float width = Game.font20.getWidth(stringPart);
 					if (offsetX + width > maxWidth && offsetX != 0) {
 						offsetY += 20;
 						offsetX = 0;
 					}
 
-					level.font20.drawString(posX + offsetX, posY + offsetY,
+					Game.font20.drawString(posX + offsetX, posY + offsetY,
 							stringPart, color);
 
 					offsetX += width;
@@ -69,7 +69,7 @@ public class TextUtils {
 
 				GameObject gameObject = (GameObject) content;
 
-				float textWidth = level.font20.getWidth(gameObject.name);
+				float textWidth = Game.font20.getWidth(gameObject.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -82,10 +82,10 @@ public class TextUtils {
 				if (gameObject instanceof Actor) {
 					Actor actor = (Actor) gameObject;
 
-					level.font20.drawString(posX + offsetX, posY + offsetY,
+					Game.font20.drawString(posX + offsetX, posY + offsetY,
 							gameObject.name, actor.faction.color);
 				} else {
-					level.font20.drawString(posX + offsetX, posY + offsetY,
+					Game.font20.drawString(posX + offsetX, posY + offsetY,
 							gameObject.name, Color.gray);
 				}
 				offsetX += textWidth;
@@ -99,7 +99,7 @@ public class TextUtils {
 			} else if (content instanceof Faction) {
 				Faction faction = (Faction) content;
 
-				float textWidth = level.font20.getWidth(faction.name);
+				float textWidth = Game.font20.getWidth(faction.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -110,7 +110,7 @@ public class TextUtils {
 
 				// Name
 
-				level.font20.drawString(posX + offsetX, posY + offsetY,
+				Game.font20.drawString(posX + offsetX, posY + offsetY,
 						faction.name, faction.color);
 				offsetX += textWidth;
 

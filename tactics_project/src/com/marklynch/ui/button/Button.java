@@ -2,7 +2,6 @@ package com.marklynch.ui.button;
 
 import org.newdawn.slick.opengl.Texture;
 
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.utils.ResourceUtils;
 
 public abstract class Button {
@@ -10,14 +9,12 @@ public abstract class Button {
 	public Texture enabledTexture;
 	public Texture disabledTexture;
 	public float x, y, width, height;
-	public Level level;
 	public boolean enabled = true;
 	public ClickListener clickListener;
 	public String text;
 
 	public Button(float x, float y, float width, float height,
-			String enabledTexturePath, String disabledTexturePath, String text,
-			Level level) {
+			String enabledTexturePath, String disabledTexturePath, String text) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -27,7 +24,6 @@ public abstract class Button {
 		this.disabledTexture = ResourceUtils
 				.getGlobalImage(disabledTexturePath);
 		this.text = text;
-		this.level = level;
 	}
 
 	public void setClickListener(ClickListener clickListener) {

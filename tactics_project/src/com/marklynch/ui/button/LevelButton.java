@@ -3,7 +3,6 @@ package com.marklynch.ui.button;
 import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -15,9 +14,9 @@ public class LevelButton extends Button {
 
 	public LevelButton(float x, float y, float width, float height,
 			String enabledTexturePath, String disabledTexturePath, String text,
-			Level level, boolean xFromLeft, boolean yFromTop) {
+			boolean xFromLeft, boolean yFromTop) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
-				text, level);
+				text);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 	}
@@ -36,13 +35,11 @@ public class LevelButton extends Button {
 		if (enabled) {
 			QuadUtils.drawQuad(Color.blue, realX, realX + width, realY, realY
 					+ height);
-			TextUtils.printTextWithImages(new Object[] { text }, realX, realY,
-					level);
+			TextUtils.printTextWithImages(new Object[] { text }, realX, realY);
 		} else {
 			QuadUtils.drawQuad(Color.red, realX, realX + width, realY, realY
 					+ height);
-			TextUtils.printTextWithImages(new Object[] { text }, realX, realY,
-					level);
+			TextUtils.printTextWithImages(new Object[] { text }, realX, realY);
 		}
 
 	}

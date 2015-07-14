@@ -10,7 +10,7 @@ import org.newdawn.slick.TrueTypeFont;
 
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
-import com.marklynch.UserInput;
+import com.marklynch.UserInputLevel;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.script.InlineSpeechPart;
 import com.marklynch.tactics.objects.level.script.Script;
@@ -48,7 +48,6 @@ public class Level {
 	public Vector<Decoration> decorations;
 	public int turn = 1;
 	public TrueTypeFont font12;
-	public TrueTypeFont font20;
 	public TrueTypeFont font60;
 	public Vector<Faction> factions;
 	public Faction currentFactionMoving;
@@ -77,7 +76,7 @@ public class Level {
 		initObjects();
 		dialogs = new Vector<Dialog>();
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f,
-				"end_turn_button.png", "end_turn_button.png", "END TURN", this,
+				"end_turn_button.png", "end_turn_button.png", "END TURN",
 				false, false);
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
@@ -87,7 +86,7 @@ public class Level {
 		});
 		buttons.add(endTurnButton);
 		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png",
-				"undo_button_disabled.png", "UNDO", this, false, false);
+				"undo_button_disabled.png", "UNDO", false, false);
 		undoButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -97,7 +96,6 @@ public class Level {
 		undoButton.enabled = false;
 		buttons.add(undoButton);
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
-		font20 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 20);
 		font60 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 60);
 
 	}
@@ -370,8 +368,8 @@ public class Level {
 		GL11.glPushMatrix();
 
 		GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
-		GL11.glScalef(UserInput.zoom, UserInput.zoom, 0);
-		GL11.glTranslatef(UserInput.dragX, UserInput.dragY, 0);
+		GL11.glScalef(UserInputLevel.zoom, UserInputLevel.zoom, 0);
+		GL11.glTranslatef(UserInputLevel.dragX, UserInputLevel.dragY, 0);
 		GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
 
 		// Squares
@@ -449,17 +447,17 @@ public class Level {
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
 			TextUtils.printTextWithImages(logs.get(i).contents, 150,
-					100 + i * 20, this);
+					100 + i * 20);
 		}
 
 		if (showTurnNotification) {
 			if (currentFactionMoving == factions.get(0)) {
 				TextUtils.printTextWithImages(new Object[] { "Your turn ",
 						this.currentFactionMoving.imageTexture,
-						", click to continue." }, 500, 500, this);
+						", click to continue." }, 500, 500);
 			} else {
 				TextUtils.printTextWithImages(new Object[] {
-						this.currentFactionMoving, "'s turn" }, 500, 500, this);
+						this.currentFactionMoving, "'s turn" }, 500, 500);
 			}
 		}
 

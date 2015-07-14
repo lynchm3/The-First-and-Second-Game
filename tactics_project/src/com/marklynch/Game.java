@@ -5,13 +5,11 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.TrueTypeFont;
 
+import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.Level;
-
-import de.matthiasmann.twl.Button;
-import de.matthiasmann.twl.Event;
-import de.matthiasmann.twl.FPSCounter;
-import de.matthiasmann.twl.Widget;
+import com.marklynch.utils.ResourceUtils;
 
 public class Game {
 
@@ -25,6 +23,8 @@ public class Game {
 
 	long timeBetweenMoveCommands = 1l;
 	Level level;
+	Editor editor;
+	boolean editorMode = true;
 	public static float SQUARE_WIDTH = 128f;
 	public static float SQUARE_HEIGHT = 128f;
 
@@ -81,16 +81,16 @@ public class Game {
 
 			renderGL();
 
-			// GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-			// gui.update();
-
 			Display.update();
 			Display.sync(60); // cap fps to 60fps
 
-			if (level.ended) {
-				// gui.destroy();
-				Display.destroy();
-				break;
+			if (editorMode) {
+
+			} else {
+				if (level.ended) {
+					Display.destroy();
+					break;
+				}
 			}
 		}
 
@@ -104,9 +104,15 @@ public class Game {
 
 	public boolean quit;
 
+	public static TrueTypeFont font20;
+
 	public void init() {
 		// Level
-		level = new Level(10, 10);
+		if (editorMode)
+			editor = new Editor();
+		else
+			level = new Level(10, 10);
+		Game.font20 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 20);
 
 		// LWJGLRenderer renderer = null;
 		// try {
@@ -128,72 +134,6 @@ public class Game {
 		// e.printStackTrace();
 		// }
 		// gui.applyTheme(theme);
-	}
-
-	public class SimpleGameMenu extends Widget {
-
-		private final FPSCounter fpsCounter;
-		private final Button[] buttons;
-
-		public boolean quit;
-
-		public SimpleGameMenu() {
-			buttons = new Button[3];
-			buttons[0] = new Button("End Turn");
-			buttons[0].addCallback(new Runnable() {
-				@Override
-				public void run() {
-					level.endTurn();
-				}
-			});
-			buttons[1] = new Button("Options");
-			buttons[2] = new Button("Quit");
-
-			for (int i = 0; i < buttons.length; i++) {
-				add(buttons[i]);
-			}
-
-			fpsCounter = new FPSCounter();
-			add(fpsCounter);
-		}
-
-		private static final int TITLE_HEIGHT = 200;
-		private static final int BUTTON_WIDTH = 300;
-		private static final int BUTTON_HEIGHT = 50;
-
-		@Override
-		protected void layout() {
-			int centerX = getInnerX() + getInnerWidth() / 2;
-			int distY = (getInnerHeight() - TITLE_HEIGHT)
-					/ (buttons.length + 1);
-
-			for (int i = 0; i < buttons.length; i++) {
-				buttons[i].setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-				buttons[i].setPosition(centerX - BUTTON_WIDTH / 2, TITLE_HEIGHT
-						+ (i + 1) * distY - BUTTON_HEIGHT / 2);
-			}
-
-			fpsCounter.adjustSize();
-			fpsCounter.setPosition(getInnerWidth() - fpsCounter.getWidth(),
-					getInnerHeight() - fpsCounter.getHeight());
-		}
-
-		@Override
-		protected boolean handleEvent(Event evt) {
-			if (super.handleEvent(evt)) {
-				return true;
-			}
-			switch (evt.getType()) {
-			case KEY_PRESSED:
-				switch (evt.getKeyCode()) {
-				case Event.KEY_ESCAPE:
-					quit = true;
-					return true;
-				}
-			}
-			return false;
-		}
-
 	}
 
 	private void initGL(float width, float height) {
@@ -224,17 +164,13 @@ public class Game {
 	}
 
 	public void update(int delta) {
-
-		// if (level.script.activeScriptEvent != null
-		// && level.script.activeScriptEvent.blockUserInput == true) {
-		//
-		// } else {
-		UserInput.userInput(delta, level);
-		// }
-
-		// gui.update();
-
-		level.update(delta);
+		if (editorMode) {
+			UserInputEditor.userInput(delta, editor);
+			editor.update(delta);
+		} else {
+			UserInputLevel.userInput(delta, level);
+			level.update(delta);
+		}
 
 		updateFPS(); // update FPS Counter
 	}
@@ -278,6 +214,9 @@ public class Game {
 		// Clear The Screen And The Depth Buffer
 		GL11.glClearColor(0, 0, 0, 1);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-		level.draw();
+		if (editorMode)
+			editor.draw();
+		else
+			level.draw();
 	}
 }
