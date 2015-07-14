@@ -146,6 +146,17 @@ public class UserInputEditor {
 			}
 		}
 
+		// right click
+		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)) {
+			editor.rightClick();
+		}
+
+		if (Mouse.isButtonDown(1)) {
+			mouseButtonStateRight = true;
+		} else if (!Mouse.isButtonDown(1)) {
+			mouseButtonStateRight = false;
+		}
+
 		if (!Mouse.isButtonDown(0)) {
 			mouseButtonStateLeft = false;
 			mouseDownX = -1;

@@ -34,7 +34,7 @@ public class Editor {
 	public WindowButton attributeButton = null;
 
 	public enum STATE {
-		DEFAULT, ADD_OBJECT, MOVE_OBJECT, EDIT_ATTRIBUTE
+		DEFAULT, ADD_OBJECT, SELECTED_OBJECT
 	}
 
 	STATE state = STATE.DEFAULT;
@@ -42,11 +42,16 @@ public class Editor {
 	public Editor() {
 		level = new Level(10, 10);
 
+		// Add a game object
 		GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
 				"skip_with_shadow.png", level.squares[0][3],
 				new Vector<Weapon>(), level);
 		level.inanimateObjects.add(gameObject);
 		level.squares[0][3].gameObject = gameObject;
+
+		// Add a faction
+		level.factions.add(new Faction("Faction " + level.factions.size(),
+				level, Color.blue, "faction_blue.png"));
 
 		addFactionButton = new LevelButton(50, 50, 100, 50, "", "",
 				"ADD FACTION", true, true);
@@ -58,7 +63,6 @@ public class Editor {
 						+ level.factions.size(), level, Color.blue,
 						"faction_blue.png"));
 				clearSelectedObject();
-				System.out.println("Added faction @ " + level.factions.size());
 			}
 		});
 		buttons.add(addFactionButton);
@@ -140,8 +144,8 @@ public class Editor {
 			this.selectedObject = gameObject;
 			detailsWindow = new DetailsWindow(300, 0, 200, 200, selectedObject,
 					this);
-			state = STATE.MOVE_OBJECT;
-		} else if (state == STATE.MOVE_OBJECT) {
+			state = STATE.SELECTED_OBJECT;
+		} else if (state == STATE.SELECTED_OBJECT) {
 			swapGameObjects(this.selectedObject, gameObject);
 			clearSelectedObject();
 			state = STATE.DEFAULT;
@@ -157,7 +161,7 @@ public class Editor {
 			level.inanimateObjects.add(gameObject);
 			square.gameObject = gameObject;
 			// state = STATE.DEFAULT;
-		} else if (state == STATE.MOVE_OBJECT) {
+		} else if (state == STATE.SELECTED_OBJECT) {
 			if (square.gameObject != null) {
 				swapGameObjects(this.selectedObject, square.gameObject);
 			} else {
@@ -199,7 +203,7 @@ public class Editor {
 		System.out.println("this.textEntered - " + this.textEntered);
 		System.out.println("state - " + state);
 
-		if (state == STATE.EDIT_ATTRIBUTE) {
+		if (state == STATE.SELECTED_OBJECT && objectToEdit != null) {
 			if (objectToEdit != null && attributeToEdit != null
 					&& this.textEntered != null) {
 				if (objectToEdit instanceof GameObject) {
@@ -240,8 +244,7 @@ public class Editor {
 	}
 
 	public void enterTyped() {
-		if (state == STATE.EDIT_ATTRIBUTE) {
-			state = STATE.DEFAULT;
+		if (state == STATE.SELECTED_OBJECT && objectToEdit != null) {
 			objectToEdit = null;
 			attributeToEdit = null;
 			this.textEntered = "";
@@ -251,12 +254,13 @@ public class Editor {
 
 	public void backTyped() {
 		System.out.println("backTyped()");
-		if (state == STATE.EDIT_ATTRIBUTE && textEntered.length() > 0) {
+		if (state == STATE.SELECTED_OBJECT && objectToEdit != null
+				&& textEntered.length() > 0) {
 			this.textEntered = this.textEntered.substring(0,
 					this.textEntered.length() - 1);
 		}
-		if (objectToEdit != null && attributeToEdit != null
-				&& this.textEntered != null) {
+		if (state == STATE.SELECTED_OBJECT && objectToEdit != null
+				&& attributeToEdit != null && this.textEntered != null) {
 			if (objectToEdit instanceof GameObject) {
 				GameObject gameObject = (GameObject) objectToEdit;
 
@@ -292,7 +296,7 @@ public class Editor {
 
 	public void editAttribute(Object object, String attribute,
 			WindowButton attributeButton) {
-		state = Editor.STATE.EDIT_ATTRIBUTE;
+		state = Editor.STATE.SELECTED_OBJECT;
 		objectToEdit = object;
 		attributeToEdit = attribute;
 		// if (objectToEdit instanceof GameObject) {
@@ -313,5 +317,19 @@ public class Editor {
 	public void clearSelectedObject() {
 		this.selectedObject = null;
 		this.detailsWindow = null;
+		objectToEdit = null;
+		attributeToEdit = null;
+		textEntered = "";
+		this.attributeButton = null;
+	}
+
+	public void rightClick() {
+		if (state == STATE.ADD_OBJECT) {
+			addObjectButton.down = false;
+			state = STATE.DEFAULT;
+		} else if (state == STATE.SELECTED_OBJECT) {
+			clearSelectedObject();
+			state = STATE.DEFAULT;
+		}
 	}
 }
