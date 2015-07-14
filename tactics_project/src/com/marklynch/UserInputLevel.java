@@ -9,6 +9,7 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
+import com.marklynch.ui.button.Button;
 
 public class UserInputLevel {
 
@@ -80,18 +81,10 @@ public class UserInputLevel {
 			mouseLastY = Mouse.getY();
 		}
 
-		boolean scriptGetsClick = false;
+		// Check if a script is hogging the screen and intercepting clicks
+		boolean scriptInterceptsClick = false;
 		if (level.script.checkIfBlocking()) {
-			scriptGetsClick = true;
-		}
-
-		// Get the square that we're hovering over
-		squareMouseIsOver = null;
-		if ((int) mouseXInSquares > -1
-				&& (int) mouseXInSquares < level.squares.length
-				&& (int) mouseYInSquares > -1
-				&& (int) mouseYInSquares < level.squares[0].length) {
-			squareMouseIsOver = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+			scriptInterceptsClick = true;
 		}
 
 		// Clear path highlights
@@ -102,14 +95,14 @@ public class UserInputLevel {
 		}
 
 		// Getting button that we have clicked, if any
-		com.marklynch.ui.button.Button buttonHoveringOver = null;
+		Button buttonHoveringOver = null;
 		if (dragging == false) {
 			buttonHoveringOver = level.getButtonFromMousePosition(Mouse.getX(),
 					Mouse.getY(), mouseXTransformed, mouseYTransformed);
 		}
 
 		// Path highlights
-		if (scriptGetsClick == false && buttonHoveringOver == null
+		if (scriptInterceptsClick == false && buttonHoveringOver == null
 				&& level.activeActor != null && squareMouseIsOver != null
 				&& squareMouseIsOver.reachableBySelectedCharater
 				&& level.activeActor.faction == level.factions.get(0)
@@ -120,7 +113,8 @@ public class UserInputLevel {
 			}
 		}
 
-		if (scriptGetsClick && mouseButtonStateLeft == true
+		// If we've clicked... where are we putting it?
+		if (scriptInterceptsClick && mouseButtonStateLeft == true
 				&& !Mouse.isButtonDown(0) && dragging == false) {
 			level.script.click();
 		} else if (level.waitingForPlayerClick == true

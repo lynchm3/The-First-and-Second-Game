@@ -3,6 +3,7 @@ package com.marklynch;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.editor.Editor;
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.ui.button.Button;
@@ -77,6 +78,15 @@ public class UserInputEditor {
 			mouseLastY = Mouse.getY();
 		}
 
+		// Get the square that we're hovering over
+		squareMouseIsOver = null;
+		if ((int) mouseXInSquares > -1
+				&& (int) mouseXInSquares < editor.level.squares.length
+				&& (int) mouseYInSquares > -1
+				&& (int) mouseYInSquares < editor.level.squares[0].length) {
+			squareMouseIsOver = editor.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+		}
+
 		// Getting button that we have clicked, if any
 		Button buttonHoveringOver = null;
 		if (dragging == false) {
@@ -84,9 +94,21 @@ public class UserInputEditor {
 					Mouse.getX(), Mouse.getY());
 		}
 
+		// left click logic
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && buttonHoveringOver != null) {
+			// click button
 			buttonHoveringOver.click();
+		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
+				&& dragging == false && squareMouseIsOver != null) {
+			// click square/game object if we're on one
+
+			GameObject clickedGameObject = squareMouseIsOver.gameObject;
+			if (clickedGameObject != null) {
+				editor.gameObjectClicked(clickedGameObject);
+			} else {
+				editor.squareClicked(squareMouseIsOver);
+			}
 		}
 
 		if (!Mouse.isButtonDown(0)) {

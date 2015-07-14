@@ -22,9 +22,9 @@ public class Game {
 	long lastFPS;
 
 	long timeBetweenMoveCommands = 1l;
-	Level level;
+	public static Level level;
 	Editor editor;
-	boolean editorMode = true;
+	public static boolean editorMode = true;
 	public static float SQUARE_WIDTH = 128f;
 	public static float SQUARE_HEIGHT = 128f;
 

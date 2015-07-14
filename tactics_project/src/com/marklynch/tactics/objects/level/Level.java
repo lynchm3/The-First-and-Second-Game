@@ -73,7 +73,14 @@ public class Level {
 		this.height = height;
 		squares = new Square[width][height];
 		initGrid();
-		initObjects();
+
+		factions = new Vector<Faction>();
+		inanimateObjects = new Vector<GameObject>();
+		decorations = new Vector<Decoration>();
+		script = new Script(new Vector<ScriptEvent>());
+
+		// initObjects();
+
 		dialogs = new Vector<Dialog>();
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f,
 				"end_turn_button.png", "end_turn_button.png", "END TURN",
@@ -111,7 +118,6 @@ public class Level {
 	private void initObjects() {
 
 		// Factions
-		factions = new Vector<Faction>();
 		factions.add(new Faction("Good Guys", this, new Color(0.29f, 0.31f,
 				0.77f), "faction_blue.png"));
 		factions.add(new Faction("Bad Guys", this,
@@ -202,12 +208,10 @@ public class Level {
 		factions.get(2).actors.add(actors.get(5));
 
 		currentFactionMovingIndex = 0;
-		currentFactionMoving = factions.get(currentFactionMovingIndex);
 
 		// Adding actors to factions
 
 		// Game Objects
-		inanimateObjects = new Vector<GameObject>();
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
 				"skip_with_shadow.png", squares[0][3], new Vector<Weapon>(),
 				this));
@@ -220,7 +224,6 @@ public class Level {
 				"skip_with_shadow.png", squares[3][3], new Vector<Weapon>(),
 				this));
 
-		decorations = new Vector<Decoration>();
 		decorations
 				.add(new Decoration(300f, 240f, 28f, 28f, false, "sign.png"));
 		decorations.add(new Decoration(468f, 200f, 28f, 28f, true,
@@ -342,7 +345,7 @@ public class Level {
 		scriptEvents.add(scriptEventSpeech2);
 		scriptEvents.add(inlineScriptEventSpeech1);
 
-		script = new Script(scriptEvents);
+		script.scriptEvents = scriptEvents;
 		// script.activateScriptEvent();
 	}
 
@@ -436,13 +439,15 @@ public class Level {
 			}
 		}
 
-		for (Button button : buttons) {
-			button.draw();
-		}
+		if (!Game.editorMode)
+			for (Button button : buttons) {
+				button.draw();
+			}
 
 		// Turn text
-		font12.drawString(Game.windowWidth - 150, 20, currentFactionMoving.name
-				+ " turn " + turn, Color.magenta);
+		if (currentFactionMoving != null)
+			font12.drawString(Game.windowWidth - 150, 20,
+					currentFactionMoving.name + " turn " + turn, Color.magenta);
 
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
@@ -450,14 +455,16 @@ public class Level {
 					100 + i * 20);
 		}
 
-		if (showTurnNotification) {
-			if (currentFactionMoving == factions.get(0)) {
-				TextUtils.printTextWithImages(new Object[] { "Your turn ",
-						this.currentFactionMoving.imageTexture,
-						", click to continue." }, 500, 500);
-			} else {
-				TextUtils.printTextWithImages(new Object[] {
-						this.currentFactionMoving, "'s turn" }, 500, 500);
+		if (factions.size() > 0 && currentFactionMoving != null) {
+			if (showTurnNotification) {
+				if (currentFactionMoving == factions.get(0)) {
+					TextUtils.printTextWithImages(new Object[] { "Your turn ",
+							this.currentFactionMoving.imageTexture,
+							", click to continue." }, 500, 500);
+				} else {
+					TextUtils.printTextWithImages(new Object[] {
+							this.currentFactionMoving, "'s turn" }, 500, 500);
+				}
 			}
 		}
 
