@@ -196,7 +196,6 @@ public class Editor {
 		if (state == STATE.EDIT_ATTRIBUTE) {
 			if (objectToEdit != null && attributeToEdit != null
 					&& this.textEntered != null) {
-				this.textEntered += character;
 				if (objectToEdit instanceof GameObject) {
 					GameObject gameObject = (GameObject) objectToEdit;
 
@@ -205,8 +204,18 @@ public class Editor {
 					try {
 						Field field = gameObjectClass.getField(attributeToEdit);
 
-						if (field.getType().isAssignableFrom(int.class)) { // int
-							field.set(gameObject, 147);
+						if (field.getType().isAssignableFrom(int.class)
+								|| field.getType()
+										.isAssignableFrom(float.class)) { // int
+																			// or
+																			// float
+							if (48 <= character && character <= 57
+									&& textEntered.length() < 8) {
+								this.textEntered += character;
+								field.set(gameObject,
+										Integer.valueOf(this.textEntered)
+												.intValue());
+							}
 						} else if (field.getType()
 								.isAssignableFrom(float.class)) { // float
 							field.set(gameObject, 11001f);
@@ -227,34 +236,11 @@ public class Editor {
 	}
 
 	public void enterTyped() {
-
 		if (state == STATE.EDIT_ATTRIBUTE) {
-			if (objectToEdit != null && attributeToEdit != null
-					&& this.textEntered != null && !"".equals(this.textEntered)) {
-				if (objectToEdit instanceof GameObject) {
-					GameObject gameObject = (GameObject) objectToEdit;
-
-					Class<? extends GameObject> gameObjectClass = gameObject
-							.getClass();
-					try {
-						Field field = gameObjectClass.getField(attributeToEdit);
-
-						if (field.getType().isAssignableFrom(int.class)) { // int
-							field.set(gameObject, 147);
-						} else if (field.getType()
-								.isAssignableFrom(float.class)) { // float
-							field.set(gameObject, 11001f);
-						} else if (field.getType().isAssignableFrom(
-								String.class)) { // string
-							field.set(gameObject, textEntered);
-						}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-
-			}
+			state = STATE.DEFAULT;
+			objectToEdit = null;
+			attributeToEdit = null;
+			this.textEntered = "";
 			detailsWindow.depressButtons();
 		}
 	}
