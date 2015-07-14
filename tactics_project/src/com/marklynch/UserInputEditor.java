@@ -128,7 +128,7 @@ public class UserInputEditor {
 		if (keyStateQ == false && Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 			editor.keyTyped('q');
 			keyStateQ = true;
-		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 			keyStateQ = false;
 		}
 

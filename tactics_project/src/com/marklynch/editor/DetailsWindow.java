@@ -24,6 +24,10 @@ public class DetailsWindow {
 
 	public Editor editor;
 
+	public final static String[] gameObjectFields = { "name", "strength",
+			"dexterity", "intelligence", "endurance", "totalHealth",
+			"remainingHealth" };
+
 	public DetailsWindow(float x, float y, float width, float height,
 			Object object, final Editor editor) {
 		super();
@@ -38,17 +42,30 @@ public class DetailsWindow {
 
 			final GameObject gameObject = (GameObject) object;
 
-			// Name
-			WindowButton nameButton = new WindowButton(0, 0, 200, 50,
-					gameObject, "name", true, true, this);
-			buttons.add(nameButton);
-			nameButton.setClickListener(new ClickListener() {
+			for (int i = 0; i < gameObjectFields.length; i++) {
+				final int index = i;
+				final WindowButton button = new WindowButton(0, 0 + index * 50,
+						200, 50, gameObject, gameObjectFields[i], true, true,
+						this);
+				buttons.add(button);
+				button.setClickListener(new ClickListener() {
+					@Override
+					public void click() {
+						button.down = !button.down;
+						if (button.down) {
+							depressButtons();
+							button.down = true;
+							editor.editAttribute(gameObject,
+									gameObjectFields[index], button);
+						} else {
+							editor.enterTyped();
+						}
+					}
+				});
 
-				@Override
-				public void click() {
-					editor.editAttribute(gameObject, "name");
-				}
-			});
+			}
+
+			// Name
 
 			// // attributes
 			// public int strength = 0;
@@ -75,6 +92,13 @@ public class DetailsWindow {
 		for (Button button : buttons) {
 			button.draw();
 		}
+	}
+
+	public void depressButtons() {
+		for (Button button : buttons) {
+			button.down = false;
+		}
+
 	}
 
 }

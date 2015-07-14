@@ -15,6 +15,7 @@ import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.button.WindowButton;
 
 public class Editor {
 	public ArrayList<Button> buttons = new ArrayList<Button>();
@@ -30,6 +31,7 @@ public class Editor {
 	public Object objectToEdit = null;
 	public String attributeToEdit = "";
 	public String textEntered = "";
+	public WindowButton attributeButton = null;
 
 	public enum STATE {
 		DEFAULT, ADD_OBJECT, MOVE_OBJECT, EDIT_ATTRIBUTE
@@ -49,6 +51,7 @@ public class Editor {
 				level.factions.add(new Faction("Faction "
 						+ level.factions.size(), level, Color.blue,
 						"faction_blue.png"));
+				clearSelectedObject();
 				System.out.println("Added faction @ " + level.factions.size());
 			}
 		});
@@ -61,10 +64,12 @@ public class Editor {
 			@Override
 			public void click() {
 				addObjectButton.down = !addObjectButton.down;
-				if (addObjectButton.down)
+				if (addObjectButton.down) {
 					state = STATE.ADD_OBJECT;
-				else
+					clearSelectedObject();
+				} else {
 					state = STATE.DEFAULT;
+				}
 
 			}
 		});
@@ -127,12 +132,12 @@ public class Editor {
 		System.out.println("gameObjectClicked is " + gameObject);
 		if (state == STATE.DEFAULT) {
 			this.selectedObject = gameObject;
-			detailsWindow = new DetailsWindow(200, 0, 200, 200, selectedObject,
+			detailsWindow = new DetailsWindow(300, 0, 200, 200, selectedObject,
 					this);
 			state = STATE.MOVE_OBJECT;
 		} else if (state == STATE.MOVE_OBJECT) {
 			swapGameObjects(this.selectedObject, gameObject);
-			this.selectedObject = null;
+			clearSelectedObject();
 			state = STATE.DEFAULT;
 		}
 
@@ -152,7 +157,7 @@ public class Editor {
 			} else {
 				moveGameObject(this.selectedObject, square);
 			}
-			this.selectedObject = null;
+			clearSelectedObject();
 			state = STATE.DEFAULT;
 		}
 
@@ -199,7 +204,18 @@ public class Editor {
 							.getClass();
 					try {
 						Field field = gameObjectClass.getField(attributeToEdit);
-						field.set(gameObject, textEntered);
+
+						if (field.getType().isAssignableFrom(int.class)) { // int
+							field.set(gameObject, 147);
+						} else if (field.getType()
+								.isAssignableFrom(float.class)) { // float
+							field.set(gameObject, 11001f);
+						} else if (field.getType().isAssignableFrom(
+								String.class)) { // string
+							field.set(gameObject, textEntered);
+						}
+
+						// field.set(gameObject, textEntered);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -222,7 +238,16 @@ public class Editor {
 							.getClass();
 					try {
 						Field field = gameObjectClass.getField(attributeToEdit);
-						field.set(gameObject, textEntered);
+
+						if (field.getType().isAssignableFrom(int.class)) { // int
+							field.set(gameObject, 147);
+						} else if (field.getType()
+								.isAssignableFrom(float.class)) { // float
+							field.set(gameObject, 11001f);
+						} else if (field.getType().isAssignableFrom(
+								String.class)) { // string
+							field.set(gameObject, textEntered);
+						}
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -230,14 +255,21 @@ public class Editor {
 				}
 
 			}
-			state = STATE.DEFAULT;
+			detailsWindow.depressButtons();
 		}
 	}
 
-	public void editAttribute(Object object, String attribute) {
+	public void editAttribute(Object object, String attribute,
+			WindowButton attributeButton) {
 		state = Editor.STATE.EDIT_ATTRIBUTE;
 		objectToEdit = object;
 		attributeToEdit = attribute;
 		textEntered = "";
+		this.attributeButton = attributeButton;
+	}
+
+	public void clearSelectedObject() {
+		this.selectedObject = null;
+		this.detailsWindow = null;
 	}
 }
