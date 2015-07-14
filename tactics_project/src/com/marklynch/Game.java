@@ -104,6 +104,12 @@ public class Game {
 
 	public boolean quit;
 
+	public static float dragY = -100;
+
+	public static float dragX = 100;
+
+	public static float zoom = 0.8f;
+
 	public static TrueTypeFont font20;
 
 	public void init() {

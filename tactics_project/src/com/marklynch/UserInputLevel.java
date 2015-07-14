@@ -13,10 +13,6 @@ import com.marklynch.ui.button.Button;
 
 public class UserInputLevel {
 
-	public static float zoom = 0.8f;
-
-	public static float dragX = 100;
-	public static float dragY = -100;
 	public static float mouseDownX = -1;
 	public static float mouseDownY = -1;
 	public static float mouseLastX = -1;
@@ -41,10 +37,10 @@ public class UserInputLevel {
 
 		// Transformed mouse coords
 
-		float mouseXTransformed = (((Game.windowWidth / 2) - dragX - (Game.windowWidth / 2)
-				/ zoom) + (mouseXinPixels) / zoom);
-		float mouseYTransformed = ((Game.windowHeight / 2 - dragY - (Game.windowHeight / 2)
-				/ zoom) + (((Game.windowHeight - mouseYinPixels)) / zoom));
+		float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2)
+				/ Game.zoom) + (mouseXinPixels) / Game.zoom);
+		float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY - (Game.windowHeight / 2)
+				/ Game.zoom) + (((Game.windowHeight - mouseYinPixels)) / Game.zoom));
 
 		// Getting what square coordinates the mouse is on (as in squares on the
 		// grid)
@@ -52,11 +48,11 @@ public class UserInputLevel {
 		float mouseYInSquares = (int) (mouseYTransformed / Game.SQUARE_HEIGHT);
 
 		// Calculate zoom
-		zoom += 0.001 * Mouse.getDWheel();
-		if (zoom < 0.1)
-			zoom = 0.1f;
-		if (zoom > 2)
-			zoom = 2f;
+		Game.zoom += 0.001 * Mouse.getDWheel();
+		if (Game.zoom < 0.1)
+			Game.zoom = 0.1f;
+		if (Game.zoom > 2)
+			Game.zoom = 2f;
 
 		// Checking for drag
 		if (Mouse.isButtonDown(0)) {
@@ -74,8 +70,8 @@ public class UserInputLevel {
 					|| Mouse.getY() - mouseDownY > 20
 					|| Mouse.getY() - mouseDownY < -20) {
 				dragging = true;
-				dragX += (Mouse.getX() - mouseLastX) / zoom;
-				dragY -= (Mouse.getY() - mouseLastY) / zoom;
+				Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;
+				Game.dragY -= (Mouse.getY() - mouseLastY) / Game.zoom;
 			}
 			mouseLastX = Mouse.getX();
 			mouseLastY = Mouse.getY();
