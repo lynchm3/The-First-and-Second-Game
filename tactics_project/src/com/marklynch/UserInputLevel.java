@@ -83,6 +83,15 @@ public class UserInputLevel {
 			scriptInterceptsClick = true;
 		}
 
+		// Get the square that we're hovering over
+		squareMouseIsOver = null;
+		if ((int) mouseXInSquares > -1
+				&& (int) mouseXInSquares < level.squares.length
+				&& (int) mouseYInSquares > -1
+				&& (int) mouseYInSquares < level.squares[0].length) {
+			squareMouseIsOver = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+		}
+
 		// Clear path highlights
 		for (int i = 0; i < level.width; i++) {
 			for (int j = 0; j < level.height; j++) {

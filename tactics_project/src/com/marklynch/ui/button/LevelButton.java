@@ -33,10 +33,19 @@ public class LevelButton extends Button {
 			realY = Game.windowHeight - y;
 
 		if (enabled) {
-			QuadUtils.drawQuad(Color.blue, realX, realX + width, realY, realY
-					+ height);
-			TextUtils.printTextWithImages(new Object[] { text }, realX, realY);
+			if (down) {
+				QuadUtils.drawQuad(Color.green, realX, realX + width, realY,
+						realY + height);
+				TextUtils.printTextWithImages(new Object[] { text }, realX,
+						realY);
+			} else {
+				QuadUtils.drawQuad(Color.blue, realX, realX + width, realY,
+						realY + height);
+				TextUtils.printTextWithImages(new Object[] { text }, realX,
+						realY);
+			}
 		} else {
+
 			QuadUtils.drawQuad(Color.red, realX, realX + width, realY, realY
 					+ height);
 			TextUtils.printTextWithImages(new Object[] { text }, realX, realY);

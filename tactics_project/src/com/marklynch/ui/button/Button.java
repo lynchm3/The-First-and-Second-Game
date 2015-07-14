@@ -10,6 +10,7 @@ public abstract class Button {
 	public Texture disabledTexture;
 	public float x, y, width, height;
 	public boolean enabled = true;
+	public boolean down = false;
 	public ClickListener clickListener;
 	public String text;
 

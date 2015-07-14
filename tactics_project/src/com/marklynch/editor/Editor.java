@@ -53,7 +53,12 @@ public class Editor {
 
 			@Override
 			public void click() {
-				state = STATE.ADD_OBJECT;
+				addObjectButton.down = !addObjectButton.down;
+				if (addObjectButton.down)
+					state = STATE.ADD_OBJECT;
+				else
+					state = STATE.DEFAULT;
+
 			}
 		});
 		buttons.add(addObjectButton);
@@ -80,6 +85,9 @@ public class Editor {
 	public void draw() {
 
 		level.draw();
+		if (selectedObject != null) {
+			selectedObject.squareGameObjectIsOn.drawHighlight();
+		}
 		for (Button button : buttons) {
 			button.draw();
 		}
@@ -115,7 +123,7 @@ public class Editor {
 					"skip_with_shadow.png", square, new Vector<Weapon>(), level);
 			level.inanimateObjects.add(gameObject);
 			square.gameObject = gameObject;
-			state = STATE.DEFAULT;
+			// state = STATE.DEFAULT;
 		} else if (state == STATE.MOVE_OBJECT) {
 			if (square.gameObject != null) {
 				swapGameObjects(this.selectedObject, square.gameObject);

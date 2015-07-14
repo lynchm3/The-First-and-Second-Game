@@ -126,6 +126,21 @@ public class Square {
 
 	}
 
+	public void drawHighlight() {
+		GL11.glPushMatrix();
+
+		GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
+		GL11.glScalef(Game.zoom, Game.zoom, 0);
+		GL11.glTranslatef(Game.dragX, Game.dragY, 0);
+		GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
+		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
+		TextureUtils.drawTexture(level.gameCursor.imageTexture2,
+				squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
+				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+		GL11.glPopMatrix();
+	}
+
 	public void drawDialogs() {
 
 		for (Dialog dialog : dialogs) {

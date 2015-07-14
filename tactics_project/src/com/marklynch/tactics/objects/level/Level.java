@@ -77,6 +77,7 @@ public class Level {
 		inanimateObjects = new Vector<GameObject>();
 		decorations = new Vector<Decoration>();
 		script = new Script(new Vector<ScriptEvent>());
+		gameCursor = new GameCursor();
 
 		// initObjects();
 
@@ -227,9 +228,6 @@ public class Level {
 				.add(new Decoration(300f, 240f, 28f, 28f, false, "sign.png"));
 		decorations.add(new Decoration(468f, 200f, 28f, 28f, true,
 				"skip_with_shadow.png"));
-
-		// Cursor
-		gameCursor = new GameCursor();
 
 		// Script
 
