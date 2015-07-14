@@ -16,8 +16,12 @@ public class UserInputEditor {
 	public static float mouseLastY = -1;
 	public static boolean dragging = false;
 
+	public static boolean capsLock = false;
 	public static boolean keyStateReturn = false;
 	public static boolean keyStateBack = false;
+	public static boolean keyStateLeftShift = false;
+	public static boolean keyStateRightShift = false;
+	public static boolean keyStateSpace = false;
 	public static boolean keyStateA = false;
 	public static boolean keyStateB = false;
 	public static boolean keyStateC = false;
@@ -166,183 +170,516 @@ public class UserInputEditor {
 			keyStateBack = false;
 		}
 
+		if (keyStateLeftShift == false
+				&& Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+			keyStateLeftShift = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+			keyStateLeftShift = false;
+		}
+
+		if (keyStateRightShift == false
+				&& Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+			keyStateRightShift = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+			keyStateRightShift = false;
+		}
+
+		if (keyStateSpace == false && Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+			editor.keyTyped(' ');
+			keyStateSpace = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+			keyStateSpace = false;
+		}
+
 		if (keyStateA == false && Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			editor.keyTyped('a');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('a');
+				} else {
+					editor.keyTyped('A');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('A');
+				} else {
+					editor.keyTyped('a');
+				}
+			}
 			keyStateA = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			keyStateA = false;
 		}
 
 		if (keyStateB == false && Keyboard.isKeyDown(Keyboard.KEY_B)) {
-			editor.keyTyped('b');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('b');
+				} else {
+					editor.keyTyped('B');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('B');
+				} else {
+					editor.keyTyped('b');
+				}
+			}
 			keyStateB = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_B)) {
 			keyStateB = false;
 		}
 
 		if (keyStateC == false && Keyboard.isKeyDown(Keyboard.KEY_C)) {
-			editor.keyTyped('c');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('c');
+				} else {
+					editor.keyTyped('C');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('C');
+				} else {
+					editor.keyTyped('c');
+				}
+			}
 			keyStateC = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_C)) {
 			keyStateC = false;
 		}
 
 		if (keyStateD == false && Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			editor.keyTyped('d');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('d');
+				} else {
+					editor.keyTyped('D');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('D');
+				} else {
+					editor.keyTyped('d');
+				}
+			}
 			keyStateD = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_D)) {
 			keyStateD = false;
 		}
 
 		if (keyStateE == false && Keyboard.isKeyDown(Keyboard.KEY_E)) {
-			editor.keyTyped('e');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('e');
+				} else {
+					editor.keyTyped('E');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('E');
+				} else {
+					editor.keyTyped('e');
+				}
+			}
 			keyStateE = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_E)) {
 			keyStateE = false;
 		}
 
 		if (keyStateF == false && Keyboard.isKeyDown(Keyboard.KEY_F)) {
-			editor.keyTyped('f');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('f');
+				} else {
+					editor.keyTyped('F');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('F');
+				} else {
+					editor.keyTyped('f');
+				}
+			}
 			keyStateF = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_F)) {
 			keyStateF = false;
 		}
 
 		if (keyStateG == false && Keyboard.isKeyDown(Keyboard.KEY_G)) {
-			editor.keyTyped('g');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('g');
+				} else {
+					editor.keyTyped('G');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('G');
+				} else {
+					editor.keyTyped('g');
+				}
+			}
 			keyStateG = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_G)) {
 			keyStateG = false;
 		}
 
 		if (keyStateH == false && Keyboard.isKeyDown(Keyboard.KEY_H)) {
-			editor.keyTyped('h');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('h');
+				} else {
+					editor.keyTyped('H');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('H');
+				} else {
+					editor.keyTyped('h');
+				}
+			}
 			keyStateH = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_H)) {
 			keyStateH = false;
 		}
 
 		if (keyStateI == false && Keyboard.isKeyDown(Keyboard.KEY_I)) {
-			editor.keyTyped('i');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('i');
+				} else {
+					editor.keyTyped('I');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('I');
+				} else {
+					editor.keyTyped('i');
+				}
+			}
 			keyStateI = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_I)) {
 			keyStateI = false;
 		}
 
 		if (keyStateJ == false && Keyboard.isKeyDown(Keyboard.KEY_J)) {
-			editor.keyTyped('j');
-			keyStateJ = true;
-		} else if (!Keyboard.isKeyDown(Keyboard.KEY_J)) {
-			keyStateJ = false;
-		}
-
-		if (keyStateJ == false && Keyboard.isKeyDown(Keyboard.KEY_J)) {
-			editor.keyTyped('j');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('j');
+				} else {
+					editor.keyTyped('J');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('J');
+				} else {
+					editor.keyTyped('j');
+				}
+			}
 			keyStateJ = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_J)) {
 			keyStateJ = false;
 		}
 
 		if (keyStateK == false && Keyboard.isKeyDown(Keyboard.KEY_K)) {
-			editor.keyTyped('k');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('k');
+				} else {
+					editor.keyTyped('K');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('K');
+				} else {
+					editor.keyTyped('k');
+				}
+			}
 			keyStateK = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_K)) {
 			keyStateK = false;
 		}
 
 		if (keyStateL == false && Keyboard.isKeyDown(Keyboard.KEY_L)) {
-			editor.keyTyped('l');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('l');
+				} else {
+					editor.keyTyped('L');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('L');
+				} else {
+					editor.keyTyped('l');
+				}
+			}
 			keyStateL = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_L)) {
 			keyStateL = false;
 		}
 
 		if (keyStateM == false && Keyboard.isKeyDown(Keyboard.KEY_M)) {
-			editor.keyTyped('m');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('m');
+				} else {
+					editor.keyTyped('M');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('M');
+				} else {
+					editor.keyTyped('m');
+				}
+			}
 			keyStateM = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_M)) {
 			keyStateM = false;
 		}
 
+		if (keyStateN == false && Keyboard.isKeyDown(Keyboard.KEY_N)) {
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('n');
+				} else {
+					editor.keyTyped('N');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('N');
+				} else {
+					editor.keyTyped('n');
+				}
+			}
+			keyStateN = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_N)) {
+			keyStateN = false;
+		}
+
 		if (keyStateO == false && Keyboard.isKeyDown(Keyboard.KEY_O)) {
-			editor.keyTyped('o');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('o');
+				} else {
+					editor.keyTyped('O');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('O');
+				} else {
+					editor.keyTyped('o');
+				}
+			}
 			keyStateO = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_O)) {
 			keyStateO = false;
 		}
 
 		if (keyStateP == false && Keyboard.isKeyDown(Keyboard.KEY_P)) {
-			editor.keyTyped('p');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('p');
+				} else {
+					editor.keyTyped('P');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('P');
+				} else {
+					editor.keyTyped('p');
+				}
+			}
 			keyStateP = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_P)) {
 			keyStateP = false;
 		}
 
 		if (keyStateQ == false && Keyboard.isKeyDown(Keyboard.KEY_Q)) {
-			editor.keyTyped('q');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('q');
+				} else {
+					editor.keyTyped('Q');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('Q');
+				} else {
+					editor.keyTyped('q');
+				}
+			}
 			keyStateQ = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 			keyStateQ = false;
 		}
 
 		if (keyStateR == false && Keyboard.isKeyDown(Keyboard.KEY_R)) {
-			editor.keyTyped('r');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('r');
+				} else {
+					editor.keyTyped('R');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('R');
+				} else {
+					editor.keyTyped('r');
+				}
+			}
 			keyStateR = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_R)) {
 			keyStateR = false;
 		}
 
 		if (keyStateS == false && Keyboard.isKeyDown(Keyboard.KEY_S)) {
-			editor.keyTyped('s');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('s');
+				} else {
+					editor.keyTyped('S');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('S');
+				} else {
+					editor.keyTyped('s');
+				}
+			}
 			keyStateS = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_S)) {
 			keyStateS = false;
 		}
 
 		if (keyStateT == false && Keyboard.isKeyDown(Keyboard.KEY_T)) {
-			editor.keyTyped('t');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('t');
+				} else {
+					editor.keyTyped('T');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('T');
+				} else {
+					editor.keyTyped('t');
+				}
+			}
 			keyStateT = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_T)) {
 			keyStateT = false;
 		}
 
 		if (keyStateU == false && Keyboard.isKeyDown(Keyboard.KEY_U)) {
-			editor.keyTyped('u');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('u');
+				} else {
+					editor.keyTyped('U');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('U');
+				} else {
+					editor.keyTyped('U');
+				}
+			}
 			keyStateU = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_U)) {
 			keyStateU = false;
 		}
 
 		if (keyStateV == false && Keyboard.isKeyDown(Keyboard.KEY_V)) {
-			editor.keyTyped('v');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('v');
+				} else {
+					editor.keyTyped('V');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('V');
+				} else {
+					editor.keyTyped('v');
+				}
+			}
 			keyStateV = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_V)) {
 			keyStateV = false;
 		}
 
 		if (keyStateW == false && Keyboard.isKeyDown(Keyboard.KEY_W)) {
-			editor.keyTyped('w');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('w');
+				} else {
+					editor.keyTyped('W');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('W');
+				} else {
+					editor.keyTyped('w');
+				}
+			}
 			keyStateW = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			keyStateW = false;
 		}
 
 		if (keyStateX == false && Keyboard.isKeyDown(Keyboard.KEY_X)) {
-			editor.keyTyped('x');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('x');
+				} else {
+					editor.keyTyped('X');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('X');
+				} else {
+					editor.keyTyped('x');
+				}
+			}
 			keyStateX = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_X)) {
 			keyStateX = false;
 		}
 
 		if (keyStateY == false && Keyboard.isKeyDown(Keyboard.KEY_Y)) {
-			editor.keyTyped('y');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('y');
+				} else {
+					editor.keyTyped('Y');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('Y');
+				} else {
+					editor.keyTyped('y');
+				}
+			}
 			keyStateY = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_Y)) {
 			keyStateY = false;
 		}
 
 		if (keyStateZ == false && Keyboard.isKeyDown(Keyboard.KEY_Z)) {
-			editor.keyTyped('z');
+			if (capsLock) {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('z');
+				} else {
+					editor.keyTyped('Z');
+				}
+			} else {
+				if (keyStateLeftShift || keyStateRightShift) {
+					editor.keyTyped('Z');
+				} else {
+					editor.keyTyped('z');
+				}
+			}
 			keyStateZ = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_Z)) {
 			keyStateZ = false;

@@ -295,6 +295,17 @@ public class Editor {
 		state = Editor.STATE.EDIT_ATTRIBUTE;
 		objectToEdit = object;
 		attributeToEdit = attribute;
+		// if (objectToEdit instanceof GameObject) {
+		// GameObject gameObject = (GameObject) objectToEdit;
+		// Class<? extends GameObject> gameObjectClass = gameObject.getClass();
+		// try {
+		// Field field;
+		// field = gameObjectClass.getField(attributeToEdit);
+		// textEntered = "" + field.get(gameObject);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// }
 		textEntered = "";
 		this.attributeButton = attributeButton;
 	}
