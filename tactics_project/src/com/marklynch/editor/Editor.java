@@ -42,6 +42,12 @@ public class Editor {
 	public Editor() {
 		level = new Level(10, 10);
 
+		GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
+				"skip_with_shadow.png", level.squares[0][3],
+				new Vector<Weapon>(), level);
+		level.inanimateObjects.add(gameObject);
+		level.squares[0][3].gameObject = gameObject;
+
 		addFactionButton = new LevelButton(50, 50, 100, 50, "", "",
 				"ADD FACTION", true, true);
 		addFactionButton.setClickListener(new ClickListener() {
@@ -216,11 +222,9 @@ public class Editor {
 										Integer.valueOf(this.textEntered)
 												.intValue());
 							}
-						} else if (field.getType()
-								.isAssignableFrom(float.class)) { // float
-							field.set(gameObject, 11001f);
 						} else if (field.getType().isAssignableFrom(
 								String.class)) { // string
+							this.textEntered += character;
 							field.set(gameObject, textEntered);
 						}
 
@@ -242,6 +246,47 @@ public class Editor {
 			attributeToEdit = null;
 			this.textEntered = "";
 			detailsWindow.depressButtons();
+		}
+	}
+
+	public void backTyped() {
+		System.out.println("backTyped()");
+		if (state == STATE.EDIT_ATTRIBUTE && textEntered.length() > 0) {
+			this.textEntered = this.textEntered.substring(0,
+					this.textEntered.length() - 1);
+		}
+		if (objectToEdit != null && attributeToEdit != null
+				&& this.textEntered != null) {
+			if (objectToEdit instanceof GameObject) {
+				GameObject gameObject = (GameObject) objectToEdit;
+
+				Class<? extends GameObject> gameObjectClass = gameObject
+						.getClass();
+				try {
+					Field field = gameObjectClass.getField(attributeToEdit);
+
+					if (field.getType().isAssignableFrom(int.class)
+							|| field.getType().isAssignableFrom(float.class)) { // int
+																				// or
+																				// float
+						if (textEntered.length() == 0) {
+							field.set(gameObject, 0);
+						} else {
+							field.set(gameObject,
+									Integer.valueOf(this.textEntered)
+											.intValue());
+						}
+					} else if (field.getType().isAssignableFrom(String.class)) { // string
+						field.set(gameObject, textEntered);
+					}
+
+					// field.set(gameObject, textEntered);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 		}
 	}
 

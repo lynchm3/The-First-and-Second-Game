@@ -17,6 +17,7 @@ public class UserInputEditor {
 	public static boolean dragging = false;
 
 	public static boolean keyStateReturn = false;
+	public static boolean keyStateBack = false;
 	public static boolean keyStateA = false;
 	public static boolean keyStateB = false;
 	public static boolean keyStateC = false;
@@ -156,6 +157,13 @@ public class UserInputEditor {
 			keyStateReturn = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
 			keyStateReturn = false;
+		}
+
+		if (keyStateBack == false && Keyboard.isKeyDown(Keyboard.KEY_BACK)) {
+			editor.backTyped();
+			keyStateBack = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_BACK)) {
+			keyStateBack = false;
 		}
 
 		if (keyStateA == false && Keyboard.isKeyDown(Keyboard.KEY_A)) {
