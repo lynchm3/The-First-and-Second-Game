@@ -1,5 +1,6 @@
 package com.marklynch.editor;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -24,8 +25,14 @@ public class Editor {
 
 	public GameObject selectedObject;
 
+	public DetailsWindow detailsWindow;
+
+	public Object objectToEdit = null;
+	public String attributeToEdit = "";
+	public String textEntered = "";
+
 	public enum STATE {
-		DEFAULT, ADD_OBJECT, MOVE_OBJECT
+		DEFAULT, ADD_OBJECT, MOVE_OBJECT, EDIT_ATTRIBUTE
 	}
 
 	STATE state = STATE.DEFAULT;
@@ -85,9 +92,14 @@ public class Editor {
 	public void draw() {
 
 		level.draw();
+
 		if (selectedObject != null) {
 			selectedObject.squareGameObjectIsOn.drawHighlight();
 		}
+
+		if (detailsWindow != null)
+			detailsWindow.draw();
+
 		for (Button button : buttons) {
 			button.draw();
 		}
@@ -100,6 +112,14 @@ public class Editor {
 				return button;
 		}
 
+		if (detailsWindow != null) {
+			for (Button button : detailsWindow.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX,
+						Game.windowHeight - mouseY))
+					return button;
+			}
+		}
+
 		return null;
 	}
 
@@ -107,6 +127,8 @@ public class Editor {
 		System.out.println("gameObjectClicked is " + gameObject);
 		if (state == STATE.DEFAULT) {
 			this.selectedObject = gameObject;
+			detailsWindow = new DetailsWindow(200, 0, 200, 200, selectedObject,
+					this);
 			state = STATE.MOVE_OBJECT;
 		} else if (state == STATE.MOVE_OBJECT) {
 			swapGameObjects(this.selectedObject, gameObject);
@@ -155,5 +177,67 @@ public class Editor {
 		square2.gameObject = gameObject1;
 
 		gameObject1.squareGameObjectIsOn = square2;
+	}
+
+	public void keyTyped(char character) {
+
+		System.out.println("keyTyped - " + character);
+		System.out.println("state - " + state);
+		System.out.println("objectToEdit - " + objectToEdit);
+		System.out.println("attributeToEdit - " + attributeToEdit);
+		System.out.println("this.textEntered - " + this.textEntered);
+		System.out.println("state - " + state);
+
+		if (state == STATE.EDIT_ATTRIBUTE) {
+			if (objectToEdit != null && attributeToEdit != null
+					&& this.textEntered != null) {
+				this.textEntered += character;
+				if (objectToEdit instanceof GameObject) {
+					GameObject gameObject = (GameObject) objectToEdit;
+
+					Class<? extends GameObject> gameObjectClass = gameObject
+							.getClass();
+					try {
+						Field field = gameObjectClass.getField(attributeToEdit);
+						field.set(gameObject, textEntered);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			}
+		}
+	}
+
+	public void enterTyped() {
+
+		if (state == STATE.EDIT_ATTRIBUTE) {
+			if (objectToEdit != null && attributeToEdit != null
+					&& this.textEntered != null && !"".equals(this.textEntered)) {
+				if (objectToEdit instanceof GameObject) {
+					GameObject gameObject = (GameObject) objectToEdit;
+
+					Class<? extends GameObject> gameObjectClass = gameObject
+							.getClass();
+					try {
+						Field field = gameObjectClass.getField(attributeToEdit);
+						field.set(gameObject, textEntered);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			}
+			state = STATE.DEFAULT;
+		}
+	}
+
+	public void editAttribute(Object object, String attribute) {
+		state = Editor.STATE.EDIT_ATTRIBUTE;
+		objectToEdit = object;
+		attributeToEdit = attribute;
+		textEntered = "";
 	}
 }

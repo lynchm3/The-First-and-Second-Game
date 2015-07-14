@@ -35,7 +35,7 @@ public class ResourceUtils {
 						.getResourceAsStream("res/images/" + path));
 				globalImages.put(path, texture);
 			} catch (Exception e) {
-				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 

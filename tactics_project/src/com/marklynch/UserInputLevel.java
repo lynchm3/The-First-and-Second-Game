@@ -1,6 +1,5 @@
 package com.marklynch;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.config.Config;
@@ -220,34 +219,6 @@ public class UserInputLevel {
 			mouseButtonStateRight = true;
 		} else if (!Mouse.isButtonDown(1)) {
 			mouseButtonStateRight = false;
-		}
-
-		if (keyStateLeft == false && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-			// actorPositionX -= 1;
-			keyStateLeft = true;
-		} else if (!Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-			keyStateLeft = false;
-		}
-
-		if (keyStateRight == false && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-			// actorPositionX += 1;
-			keyStateRight = true;
-		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-			keyStateRight = false;
-		}
-
-		if (keyStateUp == false && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-			// actorPositionY -= 1;
-			keyStateUp = true;
-		} else if (!Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-			keyStateUp = false;
-		}
-
-		if (keyStateDown == false && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-			// actorPositionY += 1;
-			keyStateDown = true;
-		} else if (!Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-			keyStateDown = false;
 		}
 
 		if (!Mouse.isButtonDown(0)) {

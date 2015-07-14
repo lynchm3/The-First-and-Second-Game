@@ -1,5 +1,6 @@
 package com.marklynch;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.editor.Editor;
@@ -15,7 +16,8 @@ public class UserInputEditor {
 	public static float mouseLastY = -1;
 	public static boolean dragging = false;
 
-	public static boolean keyStateLeft = false;
+	public static boolean keyStateReturn = false;
+	public static boolean keyStateQ = false;
 	public static boolean keyStateRight = false;
 	public static boolean keyStateUp = false;
 	public static boolean keyStateDown = false;
@@ -112,6 +114,37 @@ public class UserInputEditor {
 			mouseDownY = -1;
 		}
 
-	}
+		if (!Mouse.isButtonDown(0)) {
+			dragging = false;
+		}
 
+		if (keyStateReturn == false && Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
+			editor.enterTyped();
+			keyStateReturn = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
+			keyStateReturn = false;
+		}
+
+		if (keyStateQ == false && Keyboard.isKeyDown(Keyboard.KEY_Q)) {
+			editor.keyTyped('q');
+			keyStateQ = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+			keyStateQ = false;
+		}
+
+		if (keyStateUp == false && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+			// actorPositionY -= 1;
+			keyStateUp = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+			keyStateUp = false;
+		}
+
+		if (keyStateDown == false && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+			// actorPositionY += 1;
+			keyStateDown = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+			keyStateDown = false;
+		}
+
+	}
 }
