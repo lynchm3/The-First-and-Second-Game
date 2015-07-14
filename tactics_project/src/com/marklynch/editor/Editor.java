@@ -22,6 +22,14 @@ public class Editor {
 	Button playLevelButton;
 	public Level level;
 
+	public GameObject selectedObject;
+
+	public enum STATE {
+		DEFAULT, ADD_OBJECT, MOVE_OBJECT
+	}
+
+	STATE state = STATE.DEFAULT;
+
 	public Editor() {
 		level = new Level(10, 10);
 
@@ -45,13 +53,7 @@ public class Editor {
 
 			@Override
 			public void click() {
-				GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0,
-						0, "skip_with_shadow.png", level.squares[0][3],
-						new Vector<Weapon>(), level);
-				level.inanimateObjects.add(gameObject);
-				level.squares[0][3].gameObject = gameObject;
-				System.out.println("Added object @ "
-						+ level.inanimateObjects.size());
+				state = STATE.ADD_OBJECT;
 			}
 		});
 		buttons.add(addObjectButton);
@@ -95,12 +97,55 @@ public class Editor {
 
 	public void gameObjectClicked(GameObject gameObject) {
 		System.out.println("gameObjectClicked is " + gameObject);
+		if (state == STATE.DEFAULT) {
+			this.selectedObject = gameObject;
+			state = STATE.MOVE_OBJECT;
+		} else if (state == STATE.MOVE_OBJECT) {
+			swapGameObjects(this.selectedObject, gameObject);
+			this.selectedObject = null;
+			state = STATE.DEFAULT;
+		}
 
 	}
 
 	public void squareClicked(Square square) {
 		System.out.println("squareClicked is " + square);
+		if (state == STATE.ADD_OBJECT) {
+			GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
+					"skip_with_shadow.png", square, new Vector<Weapon>(), level);
+			level.inanimateObjects.add(gameObject);
+			square.gameObject = gameObject;
+			state = STATE.DEFAULT;
+		} else if (state == STATE.MOVE_OBJECT) {
+			if (square.gameObject != null) {
+				swapGameObjects(this.selectedObject, square.gameObject);
+			} else {
+				moveGameObject(this.selectedObject, square);
+			}
+			this.selectedObject = null;
+			state = STATE.DEFAULT;
+		}
 
 	}
 
+	public void swapGameObjects(GameObject gameObject1, GameObject gameObject2) {
+		Square square1 = gameObject1.squareGameObjectIsOn;
+		Square square2 = gameObject2.squareGameObjectIsOn;
+
+		square1.gameObject = gameObject2;
+		square2.gameObject = gameObject1;
+
+		gameObject1.squareGameObjectIsOn = square2;
+		gameObject2.squareGameObjectIsOn = square1;
+
+	}
+
+	public void moveGameObject(GameObject gameObject1, Square square2) {
+		Square square1 = gameObject1.squareGameObjectIsOn;
+
+		square1.gameObject = null;
+		square2.gameObject = gameObject1;
+
+		gameObject1.squareGameObjectIsOn = square2;
+	}
 }
