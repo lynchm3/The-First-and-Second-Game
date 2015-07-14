@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
@@ -16,6 +17,7 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.WindowButton;
+import com.marklynch.utils.TextureUtils;
 
 public class Editor {
 	public ArrayList<Button> buttons = new ArrayList<Button>();
@@ -117,6 +119,26 @@ public class Editor {
 
 		for (Button button : buttons) {
 			button.draw();
+		}
+
+		if (state == STATE.ADD_OBJECT) {
+			TextureUtils.drawTexture(
+					level.inanimateObjects.get(0).imageTexture,
+					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
+							- Mouse.getY() + 20,
+					Game.windowHeight - Mouse.getY() + 40);
+		}
+
+		if (state == STATE.SELECTED_OBJECT) {
+			TextureUtils.drawTexture(level.gameCursor.imageTexture2,
+					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
+							- Mouse.getY() + 20,
+					Game.windowHeight - Mouse.getY() + 40);
+			TextureUtils.drawTexture(
+					level.inanimateObjects.get(0).imageTexture,
+					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
+							- Mouse.getY() + 20,
+					Game.windowHeight - Mouse.getY() + 40);
 		}
 	}
 

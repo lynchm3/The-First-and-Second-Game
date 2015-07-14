@@ -2,8 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// A BUTTON
-
 	// I want whatever ur hovering over to light up, this no light up shite it
 	// BULLSHIT
 	// Could just be an outline of the square... i dunno
