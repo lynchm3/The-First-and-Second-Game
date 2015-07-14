@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.utils.TextureUtils;
 
-public abstract class LevelButton extends Button {
+public class LevelButton extends Button {
 
 	boolean xFromLeft;
 	boolean yFromTop;
@@ -17,9 +17,6 @@ public abstract class LevelButton extends Button {
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 	}
-
-	@Override
-	public abstract void click();
 
 	@Override
 	public void draw() {
@@ -41,6 +38,7 @@ public abstract class LevelButton extends Button {
 
 	}
 
+	@Override
 	public void drawWithinBounds(float boundsX1, float boundsX2,
 			float boundsY1, float boundsY2) {
 
@@ -72,10 +70,8 @@ public abstract class LevelButton extends Button {
 			realX = Game.windowWidth - x;
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
-		
-		if (mouseX > realX
-				&& mouseX < realX + width
-				&& mouseY > realY
+
+		if (mouseX > realX && mouseX < realX + width && mouseY > realY
 				&& mouseY < realY + height) {
 			return true;
 		}

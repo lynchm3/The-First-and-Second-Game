@@ -11,7 +11,8 @@ public abstract class Button {
 	public Texture disabledTexture;
 	public float x, y, width, height;
 	public Level level;
-	public boolean enabled = false;
+	public boolean enabled = true;
+	ClickListener clickListener;
 
 	public Button(float x, float y, float width, float height,
 			String enabledTexturePath, String disabledTexturePath, Level level) {
@@ -26,6 +27,10 @@ public abstract class Button {
 		this.level = level;
 	}
 
+	public void setClickListener(ClickListener clickListener) {
+		this.clickListener = clickListener;
+	}
+
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
 		if (mouseX > x && mouseX < x + width && mouseY > y
 				&& mouseY < y + height) {
@@ -34,7 +39,10 @@ public abstract class Button {
 		return false;
 	}
 
-	public abstract void click();
+	public void click() {
+		if (clickListener != null && enabled)
+			clickListener.click();
+	}
 
 	public abstract void draw();
 

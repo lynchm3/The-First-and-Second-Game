@@ -2,7 +2,7 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Created userinput class to clean up game class
+	// A BUTTON
 
 	// I want whatever ur hovering over to light up, this no light up shite it
 	// BULLSHIT

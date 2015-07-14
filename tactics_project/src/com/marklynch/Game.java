@@ -1,7 +1,5 @@
 package com.marklynch;
 
-import java.io.IOException;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
@@ -13,10 +11,7 @@ import com.marklynch.tactics.objects.level.Level;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.Event;
 import de.matthiasmann.twl.FPSCounter;
-import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Widget;
-import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
-import de.matthiasmann.twl.theme.ThemeManager;
 
 public class Game {
 
@@ -87,13 +82,13 @@ public class Game {
 			renderGL();
 
 			// GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-			gui.update();
+			// gui.update();
 
 			Display.update();
 			Display.sync(60); // cap fps to 60fps
 
 			if (level.ended) {
-				gui.destroy();
+				// gui.destroy();
 				Display.destroy();
 				break;
 			}
@@ -101,11 +96,11 @@ public class Game {
 
 	}
 
-	GUI gui;
-	protected LWJGLRenderer renderer;
-
-	private FPSCounter fpsCounter;
-	private Button[] buttons;
+	// GUI gui;
+	// protected LWJGLRenderer renderer;
+	//
+	// private FPSCounter fpsCounter;
+	// private Button[] buttons;
 
 	public boolean quit;
 
@@ -113,26 +108,26 @@ public class Game {
 		// Level
 		level = new Level(10, 10);
 
-		LWJGLRenderer renderer = null;
-		try {
-			renderer = new LWJGLRenderer();
-		} catch (LWJGLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		SimpleGameMenu gameUI = new SimpleGameMenu();
-		gui = new GUI(gameUI, renderer);
-
-		ThemeManager theme = null;
-		try {
-			theme = ThemeManager.createThemeManager(
-					SimpleGameMenu.class.getResource("simpleGameMenu.xml"),
-					renderer);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		gui.applyTheme(theme);
+		// LWJGLRenderer renderer = null;
+		// try {
+		// renderer = new LWJGLRenderer();
+		// } catch (LWJGLException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// SimpleGameMenu gameUI = new SimpleGameMenu();
+		// // gui = new GUI(gameUI, renderer);
+		//
+		// ThemeManager theme = null;
+		// try {
+		// theme = ThemeManager.createThemeManager(
+		// SimpleGameMenu.class.getResource("simpleGameMenu.xml"),
+		// renderer);
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// gui.applyTheme(theme);
 	}
 
 	public class SimpleGameMenu extends Widget {
@@ -237,7 +232,7 @@ public class Game {
 		UserInput.userInput(delta, level);
 		// }
 
-		gui.update();
+		// gui.update();
 
 		level.update(delta);
 

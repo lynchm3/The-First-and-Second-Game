@@ -29,8 +29,8 @@ import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.Dialog;
 import com.marklynch.ui.button.Button;
-import com.marklynch.ui.button.EndTurnButton;
-import com.marklynch.ui.button.UndoButton;
+import com.marklynch.ui.button.ClickListener;
+import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -56,8 +56,8 @@ public class Level {
 	public Vector<ActivityLog> logs = new Vector<ActivityLog>();
 	public Stack<Move> undoList = new Stack<Move>();
 
-	public EndTurnButton endTurnButton;
-	public UndoButton undoButton;
+	public LevelButton endTurnButton;
+	public LevelButton undoButton;
 	public ArrayList<Button> buttons = new ArrayList<Button>();
 
 	public boolean showTurnNotification = true;
@@ -76,11 +76,18 @@ public class Level {
 		initGrid();
 		initObjects();
 		dialogs = new Vector<Dialog>();
-		endTurnButton = new EndTurnButton(210f, 110f, 200f, 100f,
+		endTurnButton = new LevelButton(210f, 110f, 200f, 100f,
 				"end_turn_button.png", "end_turn_button.png", this, false,
 				false);
+		endTurnButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				System.out.println("ClickListener().click()");
+				Level.this.endTurn();
+			}
+		});
 		buttons.add(endTurnButton);
-		undoButton = new UndoButton(420f, 110f, 200f, 100f, "undo_button.png",
+		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png",
 				"undo_button_disabled.png", this, false, false);
 		buttons.add(undoButton);
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
