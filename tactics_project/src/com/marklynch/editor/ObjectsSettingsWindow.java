@@ -38,10 +38,11 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			public void click() {
 				addObjectButton.down = !addObjectButton.down;
 				if (addObjectButton.down) {
-					ObjectsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
+					ObjectsSettingsWindow.this.editor
+							.depressButtonsSettingsAndDetailsButtons();
+					ObjectsSettingsWindow.this.editor.clearSelectedObject();
 					addObjectButton.down = true;
 					ObjectsSettingsWindow.this.editor.state = STATE.ADD_OBJECT;
-					ObjectsSettingsWindow.this.editor.clearSelectedObject();
 				} else {
 					ObjectsSettingsWindow.this.editor.state = STATE.DEFAULT;
 				}

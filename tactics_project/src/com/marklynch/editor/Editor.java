@@ -48,10 +48,13 @@ public class Editor {
 	public GameObject selectedGameObject;
 
 	public AttributesWindow attributesWindow;
+
 	public SettingsWindow settingsWindow;
 	public LevelSettingsWindow levelSettingsWindow;
 	public SquaresSettingsWindow squaresSettingsWindow;
 	public ObjectsSettingsWindow objectsSettingsWindow;
+	public ActorsSettingsWindow actorsSettingsWindow;
+
 	public Object objectToEdit = null;
 	public String attributeToEdit = "";
 	public String textEntered = "";
@@ -70,6 +73,7 @@ public class Editor {
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
 		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);
+		actorsSettingsWindow = new ActorsSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -139,6 +143,19 @@ public class Editor {
 			}
 		};
 		buttons.add(objectsTabButton);
+
+		final Button actorsTabButton = new LevelButton(320, 10, 100, 30, "",
+				"", "ACTORS", true, true);
+		actorsTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				actorsTabButton.down = true;
+				settingsWindow = actorsSettingsWindow;
+			}
+		};
+		buttons.add(actorsTabButton);
 
 		// BUTTONS
 		// addFactionButton = new LevelButton(50, 50, 100, 50, "", "",
