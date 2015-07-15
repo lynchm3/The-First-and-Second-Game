@@ -5,6 +5,7 @@ import java.util.Vector;
 import org.newdawn.slick.Color;
 
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.WindowButton;
@@ -65,17 +66,33 @@ public class DetailsWindow {
 
 			}
 
-			final WindowButton button = new WindowButton(0, 0 + i * 30, 200,
-					30, gameObject, "delete", true, true, this);
-			buttons.add(button);
-			button.setClickListener(new ClickListener() {
-				@Override
-				public void click() {
-					depressButtons();
-					editor.level.inanimateObjects.remove(gameObject);
-					editor.clearSelectedObject();
-				}
-			});
+			if (gameObject instanceof Actor) {
+				final Actor actor = (Actor) gameObject;
+				final WindowButton button = new WindowButton(0, 0 + i * 30,
+						200, 30, actor, "delete", true, true, this);
+				buttons.add(button);
+				button.setClickListener(new ClickListener() {
+					@Override
+					public void click() {
+						depressButtons();
+						actor.faction.actors.remove(actor);
+						editor.clearSelectedObject();
+					}
+				});
+
+			} else {
+				final WindowButton button = new WindowButton(0, 0 + i * 30,
+						200, 30, gameObject, "delete", true, true, this);
+				buttons.add(button);
+				button.setClickListener(new ClickListener() {
+					@Override
+					public void click() {
+						depressButtons();
+						editor.level.inanimateObjects.remove(gameObject);
+						editor.clearSelectedObject();
+					}
+				});
+			}
 
 			// Name
 

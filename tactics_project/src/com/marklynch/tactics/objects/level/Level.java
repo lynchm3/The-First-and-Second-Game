@@ -39,7 +39,7 @@ public class Level {
 	public int width;
 	public int height;
 	public GameCursor gameCursor;
-	public Vector<Actor> actors;
+	// public Vector<Actor> actors;
 	public Actor activeActor;
 	public Vector<GameObject> inanimateObjects;
 	public Vector<Dialog> dialogs;
@@ -74,7 +74,6 @@ public class Level {
 		initGrid();
 
 		factions = new Vector<Faction>();
-		actors = new Vector<Actor>();
 		inanimateObjects = new Vector<GameObject>();
 		decorations = new Vector<Decoration>();
 		script = new Script(new Vector<ScriptEvent>());
@@ -177,35 +176,35 @@ public class Level {
 		Vector<Weapon> weaponsForActor5 = new Vector<Weapon>();
 		weaponsForActor5.add(weapon0ForActor5);
 
-		actors.add(new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", squares[0][0], weaponsForActor0, 4, this));
-		actors.get(0).faction = factions.get(0);
-		factions.get(0).actors.add(actors.get(0));
+		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+				"red1.png", squares[0][0], weaponsForActor0, 4, this);
+		actor0.faction = factions.get(0);
+		factions.get(0).actors.add(actor0);
 
-		actors.add(new Actor("Paul McCartney", "Maniac", 2, 10, 0, 0, 0, 0,
-				"avatar.png", squares[2][7], weaponsForActor1, 4, this));
-		actors.get(1).faction = factions.get(0);
-		factions.get(0).actors.add(actors.get(1));
+		Actor actor1 = new Actor("Paul McCartney", "Maniac", 2, 10, 0, 0, 0, 0,
+				"avatar.png", squares[2][7], weaponsForActor1, 4, this);
+		actor1.faction = factions.get(0);
+		factions.get(0).actors.add(actor1);
 
-		actors.add(new Actor("Steve", "Maniac", 2, 100, 0, 0, 0, 0,
-				"avatar.png", squares[2][8], weaponsForActor2, 4, this));
-		actors.get(2).faction = factions.get(0);
-		factions.get(0).actors.add(actors.get(2));
+		Actor actor2 = new Actor("Steve", "Maniac", 2, 100, 0, 0, 0, 0,
+				"avatar.png", squares[2][8], weaponsForActor2, 4, this);
+		actor2.faction = factions.get(0);
+		factions.get(0).actors.add(actor2);
 
-		actors.add(new Actor("George Harrison", "Thief", 3, 10, 0, 0, 0, 0,
-				"red.png", squares[5][3], weaponsForActor3, 4, this));
-		actors.get(3).faction = factions.get(1);
-		factions.get(1).actors.add(actors.get(3));
+		Actor actor3 = new Actor("George Harrison", "Thief", 3, 10, 0, 0, 0, 0,
+				"red.png", squares[5][3], weaponsForActor3, 4, this);
+		actor3.faction = factions.get(1);
+		factions.get(1).actors.add(actor3);
 
-		actors.add(new Actor("Ghandi", "Thief", 3, 10, 0, 0, 0, 0, "red.png",
-				squares[6][3], weaponsForActor4, 4, this));
-		actors.get(4).faction = factions.get(1);
-		factions.get(1).actors.add(actors.get(4));
+		Actor actor4 = new Actor("Ghandi", "Thief", 3, 10, 0, 0, 0, 0,
+				"red.png", squares[6][3], weaponsForActor4, 4, this);
+		actor4.faction = factions.get(1);
+		factions.get(1).actors.add(actor4);
 
-		actors.add(new Actor("Green1", "Hippy", 3, 10, 0, 0, 0, 0, "green.png",
-				squares[8][6], weaponsForActor5, 6, this));
-		actors.get(5).faction = factions.get(2);
-		factions.get(2).actors.add(actors.get(5));
+		Actor actor5 = new Actor("Green1", "Hippy", 3, 10, 0, 0, 0, 0,
+				"green.png", squares[8][6], weaponsForActor5, 6, this);
+		actor5.faction = factions.get(2);
+		factions.get(2).actors.add(actor5);
 
 		currentFactionMovingIndex = 0;
 

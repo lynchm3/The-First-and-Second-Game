@@ -2,6 +2,17 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Delete actor button doesnt work coz it tries to delete from
+	// lvl.gameObjects :D
+
+	// Is there a level.actors? if so nuke it
+
+	// Tabs on left of screen - faction, actors, object, scriptevent, script
+	// trigger, weapon,
+	// level, squares
+
+	// Info dialog thing on right of screen
+
 	// Ghost object / Ghost actor should appear over the square when ur in add
 	// mode and... hovering over a square
 

@@ -67,10 +67,10 @@ public class Editor {
 		weaponsForActor0.add(weapon2ForActor0);
 
 		// Add actor
-		level.actors.add(new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", level.squares[0][4], weaponsForActor0, 4, level));
-		level.actors.get(0).faction = level.factions.get(0);
-		level.factions.get(0).actors.add(level.actors.get(0));
+		Actor actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+				"red1.png", level.squares[0][4], weaponsForActor0, 4, level);
+		actor.faction = level.factions.get(0);
+		level.factions.get(0).actors.add(actor);
 
 		addFactionButton = new LevelButton(50, 50, 100, 50, "", "",
 				"ADD FACTION", true, true);
@@ -96,6 +96,7 @@ public class Editor {
 				if (addObjectButton.down) {
 					state = STATE.ADD_OBJECT;
 					clearSelectedObject();
+					addActorButton.down = false;
 				} else {
 					state = STATE.DEFAULT;
 				}
@@ -114,6 +115,7 @@ public class Editor {
 				if (addActorButton.down) {
 					state = STATE.ADD_ACTOR;
 					clearSelectedObject();
+					addObjectButton.down = false;
 				} else {
 					state = STATE.DEFAULT;
 				}
