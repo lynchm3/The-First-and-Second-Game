@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Ghost object / Ghost actor should appear over the square when ur in add
+	// mode and... hovering over a square
+
 	// check unnessesary exceptions, like the one in WindowButton
 
 	// I want whatever ur hovering over to light up, this no light up shite it

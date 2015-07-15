@@ -74,6 +74,7 @@ public class Level {
 		initGrid();
 
 		factions = new Vector<Faction>();
+		actors = new Vector<Actor>();
 		inanimateObjects = new Vector<GameObject>();
 		decorations = new Vector<Decoration>();
 		script = new Script(new Vector<ScriptEvent>());
@@ -138,7 +139,6 @@ public class Level {
 		factions.get(2).relationships.put(factions.get(1), -100);
 
 		// Actors
-		actors = new Vector<Actor>();
 
 		// Goody weapons
 		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");

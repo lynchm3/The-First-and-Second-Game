@@ -12,6 +12,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -23,6 +24,7 @@ public class Editor {
 	public ArrayList<Button> buttons = new ArrayList<Button>();
 	Button addFactionButton;
 	Button addObjectButton;
+	Button addActorButton;
 	Button playLevelButton;
 	public Level level;
 
@@ -36,7 +38,7 @@ public class Editor {
 	public WindowButton attributeButton = null;
 
 	public enum STATE {
-		DEFAULT, ADD_OBJECT, SELECTED_OBJECT
+		DEFAULT, ADD_OBJECT, ADD_ACTOR, SELECTED_OBJECT
 	}
 
 	STATE state = STATE.DEFAULT;
@@ -54,6 +56,21 @@ public class Editor {
 		// Add a faction
 		level.factions.add(new Faction("Faction " + level.factions.size(),
 				level, Color.blue, "faction_blue.png"));
+
+		// Weapons
+		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
+		Weapon weapon1ForActor0 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
+		Weapon weapon2ForActor0 = new Weapon("a5r3", 5, 3, 3, "a2r2.png");
+		Vector<Weapon> weaponsForActor0 = new Vector<Weapon>();
+		weaponsForActor0.add(weapon0ForActor0);
+		weaponsForActor0.add(weapon1ForActor0);
+		weaponsForActor0.add(weapon2ForActor0);
+
+		// Add actor
+		level.actors.add(new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+				"red1.png", level.squares[0][4], weaponsForActor0, 4, level));
+		level.actors.get(0).faction = level.factions.get(0);
+		level.factions.get(0).actors.add(level.actors.get(0));
 
 		addFactionButton = new LevelButton(50, 50, 100, 50, "", "",
 				"ADD FACTION", true, true);
@@ -86,6 +103,24 @@ public class Editor {
 			}
 		});
 		buttons.add(addObjectButton);
+
+		addActorButton = new LevelButton(50, 250, 100, 50, "", "", "ADD ACTOR",
+				true, true);
+		addActorButton.setClickListener(new ClickListener() {
+
+			@Override
+			public void click() {
+				addActorButton.down = !addActorButton.down;
+				if (addActorButton.down) {
+					state = STATE.ADD_ACTOR;
+					clearSelectedObject();
+				} else {
+					state = STATE.DEFAULT;
+				}
+
+			}
+		});
+		buttons.add(addActorButton);
 
 		addFactionButton = new LevelButton(50, 650, 100, 50, "", "",
 				"PLAY LEVEL", true, true);
@@ -181,6 +216,14 @@ public class Editor {
 					"skip_with_shadow.png", square, new Vector<Weapon>(), level);
 			level.inanimateObjects.add(gameObject);
 			square.gameObject = gameObject;
+			// state = STATE.DEFAULT;
+		} else if (state == STATE.ADD_ACTOR) {
+			// Add actor
+			Actor actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+					"red1.png", square, new Vector<Weapon>(), 4, level);
+			actor.faction = level.factions.get(0);
+			level.factions.get(0).actors.add(actor);
+			square.gameObject = actor;
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.SELECTED_OBJECT) {
 			if (square.gameObject != null) {
