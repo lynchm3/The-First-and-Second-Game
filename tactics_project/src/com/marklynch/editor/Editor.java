@@ -17,6 +17,7 @@ import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
+import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
@@ -46,9 +47,11 @@ public class Editor {
 
 	public GameObject selectedObject;
 
-	public AttributesWindow detailsWindow;
+	public AttributesWindow attributesWindow;
 	public SettingsWindow settingsWindow;
-	public SettingsWindow levelSettingsWindow;
+	public LevelSettingsWindow levelSettingsWindow;
+	public SquaresSettingsWindow squaresSettingsWindow;
+	public ObjectsSettingsWindow objectsSettingsWindow;
 	public Object objectToEdit = null;
 	public String attributeToEdit = "";
 	public String textEntered = "";
@@ -64,7 +67,9 @@ public class Editor {
 	public Editor() {
 		level = new Level(10, 10);
 
-		levelSettingsWindow = new SettingsWindow(200, this);
+		levelSettingsWindow = new LevelSettingsWindow(200, this);
+		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
+		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -95,17 +100,44 @@ public class Editor {
 		level.factions.get(0).actors.add(actor);
 
 		// TABS
-		Button levelTabButton = new LevelButton(10, 10, 70, 30, "", "",
+		final Button levelTabButton = new LevelButton(10, 10, 70, 30, "", "",
 				"LEVEL", true, true);
 		buttons.add(levelTabButton);
+		levelTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				levelTabButton.down = true;
+				settingsWindow = levelSettingsWindow;
+			}
+		};
 		levelTabButton.down = true;
 
-		Button squaresTabButton = new LevelButton(90, 10, 110, 30, "", "",
-				"SQUARES", true, true);
+		final Button squaresTabButton = new LevelButton(90, 10, 110, 30, "",
+				"", "SQUARES", true, true);
+		squaresTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				squaresTabButton.down = true;
+				settingsWindow = squaresSettingsWindow;
+			}
+		};
 		buttons.add(squaresTabButton);
 
-		Button objectsTabButton = new LevelButton(210, 10, 100, 30, "", "",
-				"OBJECTS", true, true);
+		final Button objectsTabButton = new LevelButton(210, 10, 100, 30, "",
+				"", "OBJECTS", true, true);
+		objectsTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				objectsTabButton.down = true;
+				settingsWindow = objectsSettingsWindow;
+			}
+		};
 		buttons.add(objectsTabButton);
 
 		// BUTTONS
@@ -123,20 +155,7 @@ public class Editor {
 		// });
 		// buttons.add(addFactionButton);
 		//
-		// addObjectButton = new LevelButton(50, 150, 100, 50, "", "",
-		// "ADD OBJECT", true, true);
-		// addObjectButton.setClickListener(new ClickListener() {
-		//
-		// @Override
-		// public void click() {
-		// addObjectButton.down = !addObjectButton.down;
-		// if (addObjectButton.down) {
-		// state = STATE.ADD_OBJECT;
-		// clearSelectedObject();
-		// addActorButton.down = false;
-		// } else {
-		// state = STATE.DEFAULT;
-		// }
+
 		//
 		// }
 		// });
@@ -222,8 +241,8 @@ public class Editor {
 
 		}
 
-		if (detailsWindow != null)
-			detailsWindow.draw();
+		if (attributesWindow != null)
+			attributesWindow.draw();
 
 		settingsWindow.draw();
 
@@ -258,8 +277,8 @@ public class Editor {
 				return button;
 		}
 
-		if (detailsWindow != null) {
-			for (Button button : detailsWindow.buttons) {
+		if (attributesWindow != null) {
+			for (Button button : attributesWindow.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX,
 						Game.windowHeight - mouseY))
 					return button;
@@ -280,14 +299,15 @@ public class Editor {
 		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR
 				|| state == STATE.ADD_OBJECT || state == STATE.SETTINGS_CHANGE) {
 			this.selectedObject = gameObject;
-			detailsWindow = new AttributesWindow(0, 200, selectedObject, this);
+			attributesWindow = new AttributesWindow(0, 200, selectedObject,
+					this);
 			state = STATE.SELECTED_OBJECT;
-			depressButtons();
+			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.SELECTED_OBJECT) {
 			swapGameObjects(this.selectedObject, gameObject);
 			clearSelectedObject();
 			state = STATE.DEFAULT;
-			depressButtons();
+			depressButtonsSettingsAndDetailsButtons();
 		}
 
 	}
@@ -392,7 +412,7 @@ public class Editor {
 			objectToEdit = null;
 			attributeToEdit = null;
 			this.textEntered = "";
-			detailsWindow.depressButtons();
+			attributesWindow.depressButtons();
 		}
 	}
 
@@ -466,7 +486,7 @@ public class Editor {
 
 	public void clearSelectedObject() {
 		this.selectedObject = null;
-		this.detailsWindow = null;
+		this.attributesWindow = null;
 		objectToEdit = null;
 		attributeToEdit = null;
 		textEntered = "";
@@ -476,15 +496,20 @@ public class Editor {
 	}
 
 	public void rightClick() {
-		depressButtons();
+		depressButtonsSettingsAndDetailsButtons();
 		clearSelectedObject();
 		state = STATE.DEFAULT;
 	}
 
-	public void depressButtons() {
+	public void depressTabButtons() {
 		for (Button button : buttons) {
 			button.down = false;
 		}
+	}
+
+	public void depressButtonsSettingsAndDetailsButtons() {
 		settingsWindow.depressButtons();
+		if (attributesWindow != null)
+			attributesWindow.depressButtons();
 	}
 }
