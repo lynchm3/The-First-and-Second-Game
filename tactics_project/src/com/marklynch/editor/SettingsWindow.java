@@ -59,11 +59,18 @@ public class SettingsWindow {
 					this.text = "Level Width: " + textEntered;
 				}
 			}
+
+			@Override
+			public void depress() {
+				text = "Level Width: " + editor.level.width;
+
+			}
 		};
 		widthButton.clickListener = new ClickListener() {
 
 			@Override
 			public void click() {
+				depressButtons();
 				editor.state = Editor.STATE.SETTINGS_CHANGE;
 				editor.settingsButton = widthButton;
 				widthButton.textEntered = "";
@@ -104,11 +111,17 @@ public class SettingsWindow {
 					this.text = "Level Height: " + textEntered;
 				}
 			}
+
+			@Override
+			public void depress() {
+				text = "Level Height: " + editor.level.height;
+			}
 		};
 		heightButton.clickListener = new ClickListener() {
 
 			@Override
 			public void click() {
+				depressButtons();
 				editor.state = Editor.STATE.SETTINGS_CHANGE;
 				editor.settingsButton = heightButton;
 				heightButton.textEntered = "";
@@ -126,8 +139,9 @@ public class SettingsWindow {
 	}
 
 	public void depressButtons() {
-		for (Button button : buttons) {
+		for (SettingsWindowButton button : buttons) {
 			button.down = false;
+			button.depress();
 		}
 
 	}

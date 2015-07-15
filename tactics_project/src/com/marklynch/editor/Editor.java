@@ -278,7 +278,7 @@ public class Editor {
 	public void gameObjectClicked(GameObject gameObject) {
 		System.out.println("gameObjectClicked is " + gameObject);
 		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR
-				|| state == STATE.ADD_OBJECT) {
+				|| state == STATE.ADD_OBJECT || state == STATE.SETTINGS_CHANGE) {
 			this.selectedObject = gameObject;
 			detailsWindow = new AttributesWindow(0, 200, selectedObject, this);
 			state = STATE.SELECTED_OBJECT;
@@ -485,5 +485,6 @@ public class Editor {
 		for (Button button : buttons) {
 			button.down = false;
 		}
+		settingsWindow.depressButtons();
 	}
 }

@@ -86,4 +86,6 @@ public abstract class SettingsWindowButton extends Button {
 	public abstract void enterTyped();
 
 	public abstract void backTyped();
+
+	public abstract void depress();
 }
