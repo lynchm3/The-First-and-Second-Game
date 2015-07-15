@@ -91,6 +91,7 @@ public class Editor {
 		// Add a faction
 		level.factions.add(new Faction("Faction " + level.factions.size(),
 				level, Color.blue, "faction_blue.png"));
+		factionsSettingsWindow.updateFactionsButtons();
 
 		// Weapons
 		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");

@@ -6,6 +6,7 @@ import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.ui.button.AtributesWindowButton;
@@ -37,6 +38,8 @@ public class AttributesWindow {
 
 	public final static String[] squareFields = { "elevation", "travelCost" };
 
+	public final static String[] factionFields = { "name" };
+
 	String[] fields;
 
 	public AttributesWindow(float x, float width, final Object object,
@@ -53,6 +56,8 @@ public class AttributesWindow {
 			fields = actorFields;
 		} else if (object instanceof GameObject) {
 			fields = gameObjectFields;
+		} else if (object instanceof Faction) {
+			fields = factionFields;
 		}
 
 		int i = 0;
@@ -87,8 +92,6 @@ public class AttributesWindow {
 				@Override
 				public void click() {
 					depressButtons();
-					actor.faction.actors.remove(actor);
-					actor.squareGameObjectIsOn.gameObject = null;
 					editor.clearSelectedObject();
 				}
 			});
@@ -104,6 +107,22 @@ public class AttributesWindow {
 					depressButtons();
 					editor.level.inanimateObjects.remove(gameObject);
 					gameObject.squareGameObjectIsOn.gameObject = null;
+					editor.clearSelectedObject();
+				}
+			});
+		} else if (object instanceof Faction) {
+			final Faction faction = (Faction) object;
+			final AtributesWindowButton button = new AtributesWindowButton(0,
+					0 + i * 30, 200, 30, faction, "delete", true, true, this);
+			buttons.add(button);
+			button.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+					depressButtons();
+					for (Actor actor : faction.actors) {
+						actor.squareGameObjectIsOn.gameObject = null;
+					}
+					editor.level.factions.remove(faction);
 					editor.clearSelectedObject();
 				}
 			});
