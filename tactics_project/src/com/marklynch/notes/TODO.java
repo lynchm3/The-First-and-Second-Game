@@ -2,7 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Actor tab
+	// SELECT FACTION
+
+	// Need to make enter and backspace work generically
 
 	// next i need to handle Lists and booleans generically (TOTES DOABLE)
 	// for lists show them the options 0 to X, they tap one of them, BOOM

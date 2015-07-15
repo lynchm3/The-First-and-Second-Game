@@ -21,6 +21,8 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
+import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Editor {
@@ -267,6 +269,33 @@ public class Editor {
 			button.draw();
 		}
 
+		if (objectToEdit != null) {
+			try {
+				Class<? extends Object> objectClass = objectToEdit.getClass();
+				Field field = objectClass.getField(attributeToEdit);
+
+				if (field.getType().isAssignableFrom(int.class)
+						|| field.getType().isAssignableFrom(float.class)) {
+					// int or float
+				} else if (field.getType().isAssignableFrom(String.class)) {
+					// string
+				} else if (field.getType().isAssignableFrom(Faction.class)) {
+					// faction
+					QuadUtils.drawQuad(Color.black, 0, Game.windowWidth, 0,
+							Game.windowHeight);
+					for (int i = 0; i < level.factions.size(); i++) {
+						TextUtils.printTextWithImages(
+								new Object[] { level.factions.get(0) }, 200,
+								i * 100 + 200);
+					}
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		// if (state == STATE.ADD_OBJECT) {
 		// TextureUtils.drawTexture(
 		// level.inanimateObjects.get(0).imageTexture,
@@ -332,7 +361,6 @@ public class Editor {
 	public void squareClicked(Square square) {
 		System.out.println("squareClicked is " + square);
 		if (state == STATE.DEFAULT || state == STATE.SETTINGS_CHANGE) {
-			selectedGameObject = null;
 			attributesWindow = new AttributesWindow(0, 200, square, this);
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.ADD_OBJECT) {
@@ -408,6 +436,25 @@ public class Editor {
 					} else if (field.getType().isAssignableFrom(String.class)) { // string
 						this.textEntered += character;
 						field.set(objectToEdit, textEntered);
+					} else if (field.getType().isAssignableFrom(Faction.class)) {
+						System.out.println("a");
+						if (48 <= character && character <= 57) {
+							System.out.println("b");
+							int factionIndex = character - 48;
+							System.out
+									.println("factionIndex = " + factionIndex);
+							System.out.println("level.factions.size() = "
+									+ level.factions.size());
+							if (factionIndex < level.factions.size()) {
+
+								System.out.println("v");
+								field.set(objectToEdit,
+										level.factions.get(factionIndex));
+								this.clearSelectedObject();
+								this.depressButtonsSettingsAndDetailsButtons();
+							}
+						}
+
 					}
 
 				} catch (Exception e) {

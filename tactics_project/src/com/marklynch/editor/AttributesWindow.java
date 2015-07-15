@@ -31,6 +31,10 @@ public class AttributesWindow {
 			"dexterity", "intelligence", "endurance", "totalHealth",
 			"remainingHealth" };
 
+	public final static String[] actorFields = { "faction", "name", "strength",
+			"dexterity", "intelligence", "endurance", "totalHealth",
+			"remainingHealth" };
+
 	public final static String[] squareFields = { "elevation", "travelCost" };
 
 	String[] fields;
@@ -45,6 +49,8 @@ public class AttributesWindow {
 
 		if (object instanceof Square) {
 			fields = squareFields;
+		} else if (object instanceof Actor) {
+			fields = actorFields;
 		} else if (object instanceof GameObject) {
 			fields = gameObjectFields;
 		}

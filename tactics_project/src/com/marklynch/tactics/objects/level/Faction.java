@@ -538,4 +538,9 @@ public class Faction {
 					" have been stopped" }));
 
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
 }

@@ -66,6 +66,7 @@ public class TextUtils {
 				offsetX += width;
 
 			} else if (content instanceof GameObject) {
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 				GameObject gameObject = (GameObject) content;
 
@@ -97,6 +98,7 @@ public class TextUtils {
 				offsetX += textureWidth;
 
 			} else if (content instanceof Faction) {
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				Faction faction = (Faction) content;
 
 				float textWidth = Game.font20.getWidth(faction.name);
