@@ -2,7 +2,7 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// SELECT FACTION
+	// FACTION TAB WITH FACTION SELECTION
 
 	// Need to make enter and backspace work generically
 

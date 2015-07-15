@@ -56,6 +56,7 @@ public class Editor {
 	public SquaresSettingsWindow squaresSettingsWindow;
 	public ObjectsSettingsWindow objectsSettingsWindow;
 	public ActorsSettingsWindow actorsSettingsWindow;
+	public FactionsSettingsWindow factionsSettingsWindow;
 
 	public Object objectToEdit = null;
 	public String attributeToEdit = "";
@@ -76,6 +77,7 @@ public class Editor {
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
 		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);
 		actorsSettingsWindow = new ActorsSettingsWindow(200, this);
+		factionsSettingsWindow = new FactionsSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -158,6 +160,19 @@ public class Editor {
 			}
 		};
 		buttons.add(actorsTabButton);
+
+		final Button factionsTabButton = new LevelButton(430, 10, 120, 30, "",
+				"", "FACTIONS", true, true);
+		factionsTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				factionsTabButton.down = true;
+				settingsWindow = factionsSettingsWindow;
+			}
+		};
+		buttons.add(factionsTabButton);
 
 		// BUTTONS
 		// addFactionButton = new LevelButton(50, 50, 100, 50, "", "",
@@ -284,9 +299,8 @@ public class Editor {
 					QuadUtils.drawQuad(Color.black, 0, Game.windowWidth, 0,
 							Game.windowHeight);
 					for (int i = 0; i < level.factions.size(); i++) {
-						TextUtils.printTextWithImages(
-								new Object[] { level.factions.get(0) }, 200,
-								i * 100 + 200);
+						TextUtils.printTextWithImages(new Object[] { i + " - ",
+								level.factions.get(i) }, 200, i * 100 + 200);
 					}
 				}
 
