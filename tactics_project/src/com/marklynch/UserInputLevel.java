@@ -8,7 +8,6 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
-import com.marklynch.ui.button.Button;
 
 public class UserInputLevel {
 
@@ -98,14 +97,15 @@ public class UserInputLevel {
 		}
 
 		// Getting button that we have clicked, if any
-		Button buttonHoveringOver = null;
+		Game.buttonHoveringOver = null;
 		if (dragging == false) {
-			buttonHoveringOver = level.getButtonFromMousePosition(Mouse.getX(),
-					Mouse.getY(), mouseXTransformed, mouseYTransformed);
+			Game.buttonHoveringOver = level.getButtonFromMousePosition(
+					Mouse.getX(), Mouse.getY(), mouseXTransformed,
+					mouseYTransformed);
 		}
 
 		// Path highlights
-		if (scriptInterceptsClick == false && buttonHoveringOver == null
+		if (scriptInterceptsClick == false && Game.buttonHoveringOver == null
 				&& level.activeActor != null && Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver.reachableBySelectedCharater
 				&& level.activeActor.faction == level.factions.get(0)
@@ -126,10 +126,10 @@ public class UserInputLevel {
 			level.waitingForPlayerClick = false;
 			level.showTurnNotification = false;
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
-				&& dragging == false && buttonHoveringOver != null
+				&& dragging == false && Game.buttonHoveringOver != null
 				&& level.currentFactionMovingIndex == 0) {
 			// click button if we're on one
-			buttonHoveringOver.click();
+			Game.buttonHoveringOver.click();
 
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && Game.squareMouseIsOver != null
@@ -185,7 +185,7 @@ public class UserInputLevel {
 					&& level.activeActor != null
 					&& Game.squareMouseIsOver.gameObject != level.activeActor
 					&& level.currentFactionMoving == level.factions.get(0)
-					&& buttonHoveringOver == null) {
+					&& Game.buttonHoveringOver == null) {
 				// show hover preview
 				level.activeActor
 						.showHoverFightPreview(Game.squareMouseIsOver.gameObject);

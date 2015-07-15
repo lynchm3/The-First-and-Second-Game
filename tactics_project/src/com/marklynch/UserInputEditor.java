@@ -6,7 +6,6 @@ import org.lwjgl.input.Mouse;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Path;
-import com.marklynch.ui.button.Button;
 
 public class UserInputEditor {
 	public static float mouseDownX = -1;
@@ -121,17 +120,17 @@ public class UserInputEditor {
 		}
 
 		// Getting button that we have clicked, if any
-		Button buttonHoveringOver = null;
+		Game.buttonHoveringOver = null;
 		if (dragging == false) {
-			buttonHoveringOver = editor.getButtonFromMousePosition(
+			Game.buttonHoveringOver = editor.getButtonFromMousePosition(
 					Mouse.getX(), Mouse.getY());
 		}
 
 		// left click logic
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
-				&& dragging == false && buttonHoveringOver != null) {
+				&& dragging == false && Game.buttonHoveringOver != null) {
 			// click button
-			buttonHoveringOver.click();
+			Game.buttonHoveringOver.click();
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && Game.squareMouseIsOver != null) {
 			// click square/game object if we're on one

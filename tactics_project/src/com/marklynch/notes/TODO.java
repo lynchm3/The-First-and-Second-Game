@@ -2,9 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Line + arrow if the character will be moved
-
-	// NEED that hover shit
+	// drawing a circle around selected satuff looks kinda cool, although my
+	// current circle graphic is fucking shite
 
 	// Tabs on left of screen - faction, actors, object, scriptevent, script
 	// trigger, weapon,

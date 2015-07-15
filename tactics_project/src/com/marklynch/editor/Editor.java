@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
@@ -18,6 +19,7 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.DetailsWindowButton;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Editor {
@@ -147,8 +149,41 @@ public class Editor {
 
 		level.draw();
 
+		// draw highlight on selected object
 		if (selectedObject != null) {
 			selectedObject.squareGameObjectIsOn.drawHighlight();
+		}
+
+		// Draw a move line if click will result in move
+		if (Game.buttonHoveringOver == null
+				&& state == STATE.SELECTED_OBJECT
+				&& Game.squareMouseIsOver != null
+				&& Game.squareMouseIsOver != this.selectedObject.squareGameObjectIsOn) {
+			GL11.glPushMatrix();
+
+			GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
+			GL11.glScalef(Game.zoom, Game.zoom, 0);
+			GL11.glTranslatef(Game.dragX, Game.dragY, 0);
+			GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
+
+			float x1 = this.selectedObject.squareGameObjectIsOn.x
+					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
+			float y1 = this.selectedObject.squareGameObjectIsOn.y
+					* Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
+			float x2 = Game.squareMouseIsOver.x * Game.SQUARE_WIDTH
+					+ Game.SQUARE_WIDTH / 2;
+			float y2 = Game.squareMouseIsOver.y * Game.SQUARE_HEIGHT
+					+ Game.SQUARE_HEIGHT / 2;
+
+			// CircleUtils.drawCircle(Color.white, 10d, x1, y1);
+			TextureUtils.drawTexture(level.gameCursor.circle, x1 - 10, x1 + 10,
+					y1 - 10, y1 + 10);
+			LineUtils.drawLine(Color.white, x1, y1, x2, y2);
+			TextureUtils.drawTexture(level.gameCursor.circle, x2 - 10, x2 + 10,
+					y2 - 10, y2 + 10);
+
+			GL11.glPopMatrix();
+
 		}
 
 		if (detailsWindow != null)

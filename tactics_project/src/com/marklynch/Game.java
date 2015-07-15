@@ -10,6 +10,7 @@ import org.newdawn.slick.TrueTypeFont;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.ui.button.Button;
 import com.marklynch.utils.ResourceUtils;
 
 public class Game {
@@ -46,6 +47,8 @@ public class Game {
 	}
 
 	public boolean paused = false;
+
+	public static Button buttonHoveringOver = null;
 
 	public void start() {
 

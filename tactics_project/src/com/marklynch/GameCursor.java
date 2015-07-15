@@ -11,6 +11,7 @@ public class GameCursor {
 	public Texture imageTexture3 = null;
 	public Texture imageTexture4 = null;
 	public Texture cursor = null;
+	public Texture circle = null;
 
 	public GameCursor() {
 		this.imageTexture = getGlobalImage("highlight.png");
@@ -18,5 +19,6 @@ public class GameCursor {
 		this.imageTexture3 = getGlobalImage("highlight3.png");
 		this.imageTexture4 = getGlobalImage("highlight4.png");
 		this.cursor = getGlobalImage("cursor.png");
+		this.circle = getGlobalImage("circle.png");
 	}
 }
