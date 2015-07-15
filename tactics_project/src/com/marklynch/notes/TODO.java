@@ -2,9 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// removed pivot lib, twl lib, lwjgl tutorials,
+
 	// Tabs on left of screen - faction, actors, object, scriptevent, script
 	// trigger, weapon,
 	// level, squares
+
+	// I think the attributes window should be beside the settins windwo
 
 	// circle around selected character looks kinda cool... could have circle
 	// around selected and trianlge around target... or something...

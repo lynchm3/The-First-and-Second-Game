@@ -15,29 +15,43 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
-import com.marklynch.ui.button.ClickListener;
-import com.marklynch.ui.button.DetailsWindowButton;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Editor {
 	public ArrayList<Button> buttons = new ArrayList<Button>();
-	Button addFactionButton;
-	Button addObjectButton;
-	Button addActorButton;
-	Button playLevelButton;
+
+	// faction, actors, object, scriptevent, script
+	// trigger, weapon,
+	// level, squares
+
+	Button levelTabButton;
+	Button squaresTabButton;
+	Button objectsTabButton;
+	Button factionsTabButton;
+	Button actorsTabButton;
+	Button weaponsTabButton;
+	Button scriptEventsTabButton;
+	Button scriptTriggersTabButton;
+
+	// Button addFactionButton;
+	// Button addObjectButton;
+	// Button addActorButton;
+	// Button playLevelButton;
 	public Level level;
 
 	public GameObject selectedObject;
 
-	public DetailsWindow detailsWindow;
-
+	public AttributesWindow detailsWindow;
+	public SettingsWindow settingsWindow;
+	public SettingsWindow levelSettingsWindow;
 	public Object objectToEdit = null;
 	public String attributeToEdit = "";
 	public String textEntered = "";
-	public DetailsWindowButton attributeButton = null;
+	public AtributesWindowButton attributeButton = null;
 
 	public enum STATE {
 		DEFAULT, ADD_OBJECT, ADD_ACTOR, SELECTED_OBJECT
@@ -47,6 +61,10 @@ public class Editor {
 
 	public Editor() {
 		level = new Level(10, 10);
+
+		levelSettingsWindow = new SettingsWindow(200, this);
+
+		settingsWindow = levelSettingsWindow;
 
 		// Add a game object
 		GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
@@ -74,71 +92,87 @@ public class Editor {
 		actor.faction = level.factions.get(0);
 		level.factions.get(0).actors.add(actor);
 
-		addFactionButton = new LevelButton(50, 50, 100, 50, "", "",
-				"ADD FACTION", true, true);
-		addFactionButton.setClickListener(new ClickListener() {
+		// TABS
+		Button levelTabButton = new LevelButton(10, 10, 70, 30, "", "",
+				"LEVEL", true, true);
+		buttons.add(levelTabButton);
+		levelTabButton.down = true;
 
-			@Override
-			public void click() {
-				level.factions.add(new Faction("Faction "
-						+ level.factions.size(), level, Color.blue,
-						"faction_blue.png"));
-				clearSelectedObject();
-			}
-		});
-		buttons.add(addFactionButton);
+		Button squaresTabButton = new LevelButton(90, 10, 110, 30, "", "",
+				"SQUARES", true, true);
+		buttons.add(squaresTabButton);
 
-		addObjectButton = new LevelButton(50, 150, 100, 50, "", "",
-				"ADD OBJECT", true, true);
-		addObjectButton.setClickListener(new ClickListener() {
+		Button objectsTabButton = new LevelButton(210, 10, 100, 30, "", "",
+				"OBJECTS", true, true);
+		buttons.add(objectsTabButton);
 
-			@Override
-			public void click() {
-				addObjectButton.down = !addObjectButton.down;
-				if (addObjectButton.down) {
-					state = STATE.ADD_OBJECT;
-					clearSelectedObject();
-					addActorButton.down = false;
-				} else {
-					state = STATE.DEFAULT;
-				}
-
-			}
-		});
-		buttons.add(addObjectButton);
-
-		addActorButton = new LevelButton(50, 250, 100, 50, "", "", "ADD ACTOR",
-				true, true);
-		addActorButton.setClickListener(new ClickListener() {
-
-			@Override
-			public void click() {
-				addActorButton.down = !addActorButton.down;
-				if (addActorButton.down) {
-					state = STATE.ADD_ACTOR;
-					clearSelectedObject();
-					addObjectButton.down = false;
-				} else {
-					state = STATE.DEFAULT;
-				}
-
-			}
-		});
-		buttons.add(addActorButton);
-
-		addFactionButton = new LevelButton(50, 650, 100, 50, "", "",
-				"PLAY LEVEL", true, true);
-		addFactionButton.setClickListener(new ClickListener() {
-
-			@Override
-			public void click() {
-				level.currentFactionMoving = level.factions
-						.get(level.currentFactionMovingIndex);
-				Game.level = level;
-				Game.editorMode = false;
-			}
-		});
-		buttons.add(addFactionButton);
+		// BUTTONS
+		// addFactionButton = new LevelButton(50, 50, 100, 50, "", "",
+		// "ADD FACTION", true, true);
+		// addFactionButton.setClickListener(new ClickListener() {
+		//
+		// @Override
+		// public void click() {
+		// level.factions.add(new Faction("Faction "
+		// + level.factions.size(), level, Color.blue,
+		// "faction_blue.png"));
+		// clearSelectedObject();
+		// }
+		// });
+		// buttons.add(addFactionButton);
+		//
+		// addObjectButton = new LevelButton(50, 150, 100, 50, "", "",
+		// "ADD OBJECT", true, true);
+		// addObjectButton.setClickListener(new ClickListener() {
+		//
+		// @Override
+		// public void click() {
+		// addObjectButton.down = !addObjectButton.down;
+		// if (addObjectButton.down) {
+		// state = STATE.ADD_OBJECT;
+		// clearSelectedObject();
+		// addActorButton.down = false;
+		// } else {
+		// state = STATE.DEFAULT;
+		// }
+		//
+		// }
+		// });
+		// buttons.add(addObjectButton);
+		//
+		// addActorButton = new LevelButton(50, 250, 100, 50, "", "",
+		// "ADD ACTOR",
+		// true, true);
+		// addActorButton.setClickListener(new ClickListener() {
+		//
+		// @Override
+		// public void click() {
+		// addActorButton.down = !addActorButton.down;
+		// if (addActorButton.down) {
+		// state = STATE.ADD_ACTOR;
+		// clearSelectedObject();
+		// addObjectButton.down = false;
+		// } else {
+		// state = STATE.DEFAULT;
+		// }
+		//
+		// }
+		// });
+		// buttons.add(addActorButton);
+		//
+		// addFactionButton = new LevelButton(50, 650, 100, 50, "", "",
+		// "PLAY LEVEL", true, true);
+		// addFactionButton.setClickListener(new ClickListener() {
+		//
+		// @Override
+		// public void click() {
+		// level.currentFactionMoving = level.factions
+		// .get(level.currentFactionMovingIndex);
+		// Game.level = level;
+		// Game.editorMode = false;
+		// }
+		// });
+		// buttons.add(addFactionButton);
 	}
 
 	public void update(int delta) {
@@ -189,6 +223,8 @@ public class Editor {
 		if (detailsWindow != null)
 			detailsWindow.draw();
 
+		settingsWindow.draw();
+
 		for (Button button : buttons) {
 			button.draw();
 		}
@@ -228,6 +264,12 @@ public class Editor {
 			}
 		}
 
+		for (Button button : settingsWindow.buttons) {
+			if (button.calculateIfPointInBoundsOfButton(mouseX,
+					Game.windowHeight - mouseY))
+				return button;
+		}
+
 		return null;
 	}
 
@@ -235,15 +277,15 @@ public class Editor {
 		System.out.println("gameObjectClicked is " + gameObject);
 		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR
 				|| state == STATE.ADD_OBJECT) {
-			addObjectButton.down = false;
-			addActorButton.down = false;
 			this.selectedObject = gameObject;
-			detailsWindow = new DetailsWindow(0, 200, selectedObject, this);
+			detailsWindow = new AttributesWindow(0, 200, selectedObject, this);
 			state = STATE.SELECTED_OBJECT;
+			depressButtons();
 		} else if (state == STATE.SELECTED_OBJECT) {
 			swapGameObjects(this.selectedObject, gameObject);
 			clearSelectedObject();
 			state = STATE.DEFAULT;
+			depressButtons();
 		}
 
 	}
@@ -398,7 +440,7 @@ public class Editor {
 	}
 
 	public void editAttribute(Object object, String attribute,
-			DetailsWindowButton attributeButton) {
+			AtributesWindowButton attributeButton) {
 		state = Editor.STATE.SELECTED_OBJECT;
 		objectToEdit = object;
 		attributeToEdit = attribute;
@@ -429,15 +471,14 @@ public class Editor {
 	}
 
 	public void rightClick() {
-		if (state == STATE.ADD_OBJECT) {
-			addObjectButton.down = false;
-			state = STATE.DEFAULT;
-		} else if (state == STATE.ADD_ACTOR) {
-			addActorButton.down = false;
-			state = STATE.DEFAULT;
-		} else if (state == STATE.SELECTED_OBJECT) {
-			clearSelectedObject();
-			state = STATE.DEFAULT;
+		depressButtons();
+		clearSelectedObject();
+		state = STATE.DEFAULT;
+	}
+
+	public void depressButtons() {
+		for (Button button : buttons) {
+			button.down = false;
 		}
 	}
 }

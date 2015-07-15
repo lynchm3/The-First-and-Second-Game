@@ -71,7 +71,7 @@ public class Level {
 		this.width = width;
 		this.height = height;
 		squares = new Square[width][height];
-		initGrid();
+		initGrid(this.squares, this.width, this.height);
 
 		factions = new Vector<Faction>();
 		inanimateObjects = new Vector<GameObject>();
@@ -107,7 +107,7 @@ public class Level {
 
 	}
 
-	private void initGrid() {
+	private void initGrid(Square[][] squares, int width, int height) {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				squares[i][j] = new Square(i, j, "grass.png", 1, 0, this);
@@ -601,5 +601,33 @@ public class Level {
 
 	public void end() {
 		this.ended = true;
+	}
+
+	public void changeSize(int newWidth, int newHeight) {
+		Square[][] newSquares = new Square[newWidth][newHeight];
+		initGrid(newSquares, newWidth, newHeight);
+
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				if (i <= newWidth && j < newHeight) {
+					// Transfer old squares over to new grid if they fit
+					newSquares[i][j] = squares[i][j];
+				} else {
+					// Delete old squares if they don't fit
+					if (squares[i][j].gameObject == null) {
+
+					} else if (squares[i][j].gameObject instanceof Actor) {
+						Actor actor = (Actor) squares[i][j].gameObject;
+						actor.faction.actors.remove(actor);
+					} else {
+						inanimateObjects.remove(squares[i][j].gameObject);
+					}
+				}
+			}
+		}
+
+		this.width = newWidth;
+		this.height = newHeight;
+		this.squares = newSquares;
 	}
 }
