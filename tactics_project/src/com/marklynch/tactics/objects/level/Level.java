@@ -417,7 +417,7 @@ public class Level {
 			decoration.draw2();
 		}
 
-		if (Game.squareMouseIsOver != null)
+		if (Game.buttonHoveringOver == null && Game.squareMouseIsOver != null)
 			Game.squareMouseIsOver.drawCursor();
 
 		// GL11.glColor4f;

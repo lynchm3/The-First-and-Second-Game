@@ -77,8 +77,12 @@ public class UserInputEditor {
 
 		// Getting what square coordinates the mouse is on (as in squares on the
 		// grid)
-		float mouseXInSquares = (int) (mouseXTransformed / Game.SQUARE_WIDTH);
-		float mouseYInSquares = (int) (mouseYTransformed / Game.SQUARE_HEIGHT);
+		float mouseXInSquares = -1;
+		float mouseYInSquares = -1;
+		if (mouseXTransformed >= 0)
+			mouseXInSquares = (int) (mouseXTransformed / Game.SQUARE_WIDTH);
+		if (mouseYTransformed >= 0)
+			mouseYInSquares = (int) (mouseYTransformed / Game.SQUARE_HEIGHT);
 
 		// Calculate zoom
 		Game.zoom += 0.001 * Mouse.getDWheel();
@@ -112,7 +116,8 @@ public class UserInputEditor {
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
-		if ((int) mouseXInSquares > -1
+		if (mouseXInSquares >= 0 && mouseYInSquares >= 0
+				&& (int) mouseXInSquares > -1
 				&& (int) mouseXInSquares < editor.level.squares.length
 				&& (int) mouseYInSquares > -1
 				&& (int) mouseYInSquares < editor.level.squares[0].length) {

@@ -2,12 +2,12 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// drawing a circle around selected satuff looks kinda cool, although my
-	// current circle graphic is fucking shite
-
 	// Tabs on left of screen - faction, actors, object, scriptevent, script
 	// trigger, weapon,
 	// level, squares
+
+	// circle around selected character looks kinda cool... could have circle
+	// around selected and trianlge around target... or something...
 
 	// Info dialog thing on right of screen
 
