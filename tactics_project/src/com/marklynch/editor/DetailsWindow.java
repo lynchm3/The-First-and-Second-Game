@@ -4,24 +4,25 @@ import java.util.Vector;
 
 import org.newdawn.slick.Color;
 
+import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
-import com.marklynch.ui.button.WindowButton;
+import com.marklynch.ui.button.DetailsWindowButton;
 import com.marklynch.utils.QuadUtils;
 
 public class DetailsWindow {
 
 	public float x;
-	public float y;
-
 	public float width;
-	public float height;
+
+	public float realX1;
+	public float realX2;
 
 	public Object object;
 
-	public Vector<WindowButton> buttons = new Vector<WindowButton>();
+	public Vector<DetailsWindowButton> buttons = new Vector<DetailsWindowButton>();
 
 	public Editor editor;
 
@@ -29,13 +30,11 @@ public class DetailsWindow {
 			"dexterity", "intelligence", "endurance", "totalHealth",
 			"remainingHealth" };
 
-	public DetailsWindow(float x, float y, float width, float height,
-			Object object, final Editor editor) {
+	public DetailsWindow(float x, float width, Object object,
+			final Editor editor) {
 		super();
 		this.x = x;
-		this.y = y;
 		this.width = width;
-		this.height = height;
 		this.object = object;
 		this.editor = editor;
 
@@ -45,9 +44,9 @@ public class DetailsWindow {
 			int i = 0;
 			for (; i < gameObjectFields.length; i++) {
 				final int index = i;
-				final WindowButton button = new WindowButton(0, 0 + index * 30,
-						200, 30, gameObject, gameObjectFields[i], true, true,
-						this);
+				final DetailsWindowButton button = new DetailsWindowButton(0,
+						0 + index * 30, 200, 30, gameObject,
+						gameObjectFields[i], true, true, this);
 				buttons.add(button);
 				button.setClickListener(new ClickListener() {
 					@Override
@@ -68,27 +67,30 @@ public class DetailsWindow {
 
 			if (gameObject instanceof Actor) {
 				final Actor actor = (Actor) gameObject;
-				final WindowButton button = new WindowButton(0, 0 + i * 30,
-						200, 30, actor, "delete", true, true, this);
+				final DetailsWindowButton button = new DetailsWindowButton(0,
+						0 + i * 30, 200, 30, actor, "delete", true, true, this);
 				buttons.add(button);
 				button.setClickListener(new ClickListener() {
 					@Override
 					public void click() {
 						depressButtons();
 						actor.faction.actors.remove(actor);
+						actor.squareGameObjectIsOn.gameObject = null;
 						editor.clearSelectedObject();
 					}
 				});
 
 			} else {
-				final WindowButton button = new WindowButton(0, 0 + i * 30,
-						200, 30, gameObject, "delete", true, true, this);
+				final DetailsWindowButton button = new DetailsWindowButton(0,
+						0 + i * 30, 200, 30, gameObject, "delete", true, true,
+						this);
 				buttons.add(button);
 				button.setClickListener(new ClickListener() {
 					@Override
 					public void click() {
 						depressButtons();
 						editor.level.inanimateObjects.remove(gameObject);
+						gameObject.squareGameObjectIsOn.gameObject = null;
 						editor.clearSelectedObject();
 					}
 				});
@@ -117,7 +119,10 @@ public class DetailsWindow {
 	}
 
 	public void draw() {
-		QuadUtils.drawQuad(Color.white, x, x + width, y, y + height);
+		realX1 = Game.windowWidth - x - width;
+		realX2 = Game.windowWidth - x;
+		QuadUtils.drawQuad(Color.white, Game.windowWidth - x - width,
+				Game.windowWidth - x, 0, Game.windowHeight);
 		for (Button button : buttons) {
 			button.draw();
 		}

@@ -11,7 +11,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-public class WindowButton extends Button {
+public class DetailsWindowButton extends Button {
 
 	boolean xFromLeft;
 	boolean yFromTop;
@@ -19,7 +19,7 @@ public class WindowButton extends Button {
 	Object object;
 	String attribute;
 
-	public WindowButton(float x, float y, float width, float height,
+	public DetailsWindowButton(float x, float y, float width, float height,
 			Object object, String attribute, boolean xFromLeft,
 			boolean yFromTop, DetailsWindow detailsWindow) {
 		super(x, y, width, height, null, null, "");
@@ -48,14 +48,14 @@ public class WindowButton extends Button {
 		float realX = x;
 		float realY = y;
 		if (this.xFromLeft == false)
-			realX = detailsWindow.x + detailsWindow.width - x;
+			realX = detailsWindow.realX1 + detailsWindow.width - x;
 		else
-			realX = detailsWindow.x + x;
+			realX = detailsWindow.realX1 + x;
 
 		if (this.yFromTop == false)
-			realY = detailsWindow.y + detailsWindow.height - y;
+			realY = Game.windowHeight - y;
 		else
-			realY = detailsWindow.y + y;
+			realY = y;
 
 		if (enabled) {
 			if (down) {
@@ -108,14 +108,14 @@ public class WindowButton extends Button {
 		float realX = x;
 		float realY = y;
 		if (this.xFromLeft == false)
-			realX = detailsWindow.x + detailsWindow.width - x;
+			realX = detailsWindow.realX1 + detailsWindow.width - x;
 		else
-			realX = detailsWindow.x + x;
+			realX = detailsWindow.realX1 + x;
 
 		if (this.yFromTop == false)
-			realY = detailsWindow.y + detailsWindow.height - y;
+			realY = Game.windowHeight - y;
 		else
-			realY = detailsWindow.y + y;
+			realY = y;
 
 		if (mouseX > realX && mouseX < realX + width && mouseY > realY
 				&& mouseY < realY + height) {

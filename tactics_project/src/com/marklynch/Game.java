@@ -9,6 +9,7 @@ import org.newdawn.slick.TrueTypeFont;
 
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.Level;
+import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.utils.ResourceUtils;
 
 public class Game {
@@ -30,8 +31,12 @@ public class Game {
 
 	public static float windowWidth = 800;
 	public static float windowHeight = 800;
-	// public static int windowWidth = 400;
-	// public static int windowHeight = 400;
+
+	public static Square squareMouseIsOver;
+	public static float dragY = -100;
+	public static float dragX = 100;
+	public static float zoom = 0.8f;
+	public static TrueTypeFont font20;
 
 	public static int delta = 0;
 
@@ -101,16 +106,6 @@ public class Game {
 	//
 	// private FPSCounter fpsCounter;
 	// private Button[] buttons;
-
-	public boolean quit;
-
-	public static float dragY = -100;
-
-	public static float dragX = 100;
-
-	public static float zoom = 0.8f;
-
-	public static TrueTypeFont font20;
 
 	public void init() {
 		// Level

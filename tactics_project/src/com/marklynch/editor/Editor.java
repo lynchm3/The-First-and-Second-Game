@@ -16,8 +16,8 @@ import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
+import com.marklynch.ui.button.DetailsWindowButton;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.ui.button.WindowButton;
 import com.marklynch.utils.TextureUtils;
 
 public class Editor {
@@ -35,7 +35,7 @@ public class Editor {
 	public Object objectToEdit = null;
 	public String attributeToEdit = "";
 	public String textEntered = "";
-	public WindowButton attributeButton = null;
+	public DetailsWindowButton attributeButton = null;
 
 	public enum STATE {
 		DEFAULT, ADD_OBJECT, ADD_ACTOR, SELECTED_OBJECT
@@ -203,8 +203,7 @@ public class Editor {
 			addObjectButton.down = false;
 			addActorButton.down = false;
 			this.selectedObject = gameObject;
-			detailsWindow = new DetailsWindow(300, 0, 200, 200, selectedObject,
-					this);
+			detailsWindow = new DetailsWindow(0, 200, selectedObject, this);
 			state = STATE.SELECTED_OBJECT;
 		} else if (state == STATE.SELECTED_OBJECT) {
 			swapGameObjects(this.selectedObject, gameObject);
@@ -364,7 +363,7 @@ public class Editor {
 	}
 
 	public void editAttribute(Object object, String attribute,
-			WindowButton attributeButton) {
+			DetailsWindowButton attributeButton) {
 		state = Editor.STATE.SELECTED_OBJECT;
 		objectToEdit = object;
 		attributeToEdit = attribute;

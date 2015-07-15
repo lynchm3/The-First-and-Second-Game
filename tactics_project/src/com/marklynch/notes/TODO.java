@@ -2,10 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Delete actor button doesnt work coz it tries to delete from
-	// lvl.gameObjects :D
+	// Line + arrow if the character will be moved
 
-	// Is there a level.actors? if so nuke it
+	// NEED that hover shit
 
 	// Tabs on left of screen - faction, actors, object, scriptevent, script
 	// trigger, weapon,

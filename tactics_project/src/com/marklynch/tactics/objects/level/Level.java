@@ -417,6 +417,9 @@ public class Level {
 			decoration.draw2();
 		}
 
+		if (Game.squareMouseIsOver != null)
+			Game.squareMouseIsOver.drawCursor();
+
 		// GL11.glColor4f;
 		// font60.drawString(0, 0, "YOUR", new Color(1.0f, 0.5f, 0.5f, 0.75f));
 		// font60.drawString(0, Game.SQUARE_HEIGHT, "TURN ", new Color(1.0f,
@@ -435,10 +438,11 @@ public class Level {
 			}
 		}
 
-		if (!Game.editorMode)
+		if (!Game.editorMode) {
 			for (Button button : buttons) {
 				button.draw();
 			}
+		}
 
 		// Turn text
 		if (currentFactionMoving != null)
