@@ -609,7 +609,7 @@ public class Level {
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				if (i <= newWidth && j < newHeight) {
+				if (i < newWidth && j < newHeight) {
 					// Transfer old squares over to new grid if they fit
 					newSquares[i][j] = squares[i][j];
 				} else {

@@ -18,6 +18,7 @@ import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -52,9 +53,10 @@ public class Editor {
 	public String attributeToEdit = "";
 	public String textEntered = "";
 	public AtributesWindowButton attributeButton = null;
+	public SettingsWindowButton settingsButton = null;
 
 	public enum STATE {
-		DEFAULT, ADD_OBJECT, ADD_ACTOR, SELECTED_OBJECT
+		DEFAULT, ADD_OBJECT, ADD_ACTOR, SELECTED_OBJECT, SETTINGS_CHANGE
 	}
 
 	STATE state = STATE.DEFAULT;
@@ -341,14 +343,9 @@ public class Editor {
 
 	public void keyTyped(char character) {
 
-		System.out.println("keyTyped - " + character);
-		System.out.println("state - " + state);
-		System.out.println("objectToEdit - " + objectToEdit);
-		System.out.println("attributeToEdit - " + attributeToEdit);
-		System.out.println("this.textEntered - " + this.textEntered);
-		System.out.println("state - " + state);
-
-		if (state == STATE.SELECTED_OBJECT && objectToEdit != null) {
+		if (state == STATE.SETTINGS_CHANGE && settingsButton != null) {
+			settingsButton.keyTyped(character);
+		} else if (state == STATE.SELECTED_OBJECT && objectToEdit != null) {
 			if (objectToEdit != null && attributeToEdit != null
 					&& this.textEntered != null) {
 				if (objectToEdit instanceof GameObject) {
@@ -389,7 +386,9 @@ public class Editor {
 	}
 
 	public void enterTyped() {
-		if (state == STATE.SELECTED_OBJECT && objectToEdit != null) {
+		if (state == STATE.SETTINGS_CHANGE && settingsButton != null) {
+			settingsButton.enterTyped();
+		} else if (state == STATE.SELECTED_OBJECT && objectToEdit != null) {
 			objectToEdit = null;
 			attributeToEdit = null;
 			this.textEntered = "";
@@ -398,12 +397,18 @@ public class Editor {
 	}
 
 	public void backTyped() {
+		if (state == STATE.SETTINGS_CHANGE && settingsButton != null) {
+			settingsButton.backTyped();
+			return;
+		}
+
 		System.out.println("backTyped()");
 		if (state == STATE.SELECTED_OBJECT && objectToEdit != null
 				&& textEntered.length() > 0) {
 			this.textEntered = this.textEntered.substring(0,
 					this.textEntered.length() - 1);
 		}
+
 		if (state == STATE.SELECTED_OBJECT && objectToEdit != null
 				&& attributeToEdit != null && this.textEntered != null) {
 			if (objectToEdit instanceof GameObject) {

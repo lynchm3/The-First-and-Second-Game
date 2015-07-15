@@ -2,8 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// removed pivot lib, twl lib, lwjgl tutorials,
-
 	// Tabs on left of screen - faction, actors, object, scriptevent, script
 	// trigger, weapon,
 	// level, squares

@@ -7,11 +7,13 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-public class SettingsWindowButton extends Button {
+public abstract class SettingsWindowButton extends Button {
 
 	boolean xFromLeft;
 	boolean yFromTop;
 	SettingsWindow settingsWindow;
+
+	public String textEntered = "";
 
 	public SettingsWindowButton(float x, float y, float width, float height,
 			String text, boolean xFromLeft, boolean yFromTop,
@@ -79,4 +81,9 @@ public class SettingsWindowButton extends Button {
 		return false;
 	}
 
+	public abstract void keyTyped(char character);
+
+	public abstract void enterTyped();
+
+	public abstract void backTyped();
 }
