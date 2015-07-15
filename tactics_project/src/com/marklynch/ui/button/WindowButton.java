@@ -41,7 +41,7 @@ public class WindowButton extends Button {
 				Field field = gameObjectClass.getField(attribute);
 				text = attribute + ": " + field.get(gameObject);
 			} catch (Exception e) {
-				e.printStackTrace();
+				text = attribute;
 			}
 		}
 

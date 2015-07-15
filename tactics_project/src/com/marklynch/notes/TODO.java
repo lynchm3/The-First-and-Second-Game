@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// check unnessesary exceptions, like the one in WindowButton
+
 	// I want whatever ur hovering over to light up, this no light up shite it
 	// BULLSHIT
 	// Could just be an outline of the square... i dunno

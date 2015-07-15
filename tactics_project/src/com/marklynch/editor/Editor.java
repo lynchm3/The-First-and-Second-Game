@@ -121,21 +121,20 @@ public class Editor {
 			button.draw();
 		}
 
-		if (state == STATE.ADD_OBJECT) {
-			TextureUtils.drawTexture(
-					level.inanimateObjects.get(0).imageTexture,
-					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
-							- Mouse.getY() + 20,
-					Game.windowHeight - Mouse.getY() + 40);
-		}
+		// if (state == STATE.ADD_OBJECT) {
+		// TextureUtils.drawTexture(
+		// level.inanimateObjects.get(0).imageTexture,
+		// Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
+		// - Mouse.getY() + 20,
+		// Game.windowHeight - Mouse.getY() + 40);
+		// }
 
 		if (state == STATE.SELECTED_OBJECT) {
 			TextureUtils.drawTexture(level.gameCursor.imageTexture2,
 					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
 							- Mouse.getY() + 20,
 					Game.windowHeight - Mouse.getY() + 40);
-			TextureUtils.drawTexture(
-					level.inanimateObjects.get(0).imageTexture,
+			TextureUtils.drawTexture(selectedObject.imageTexture,
 					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
 							- Mouse.getY() + 20,
 					Game.windowHeight - Mouse.getY() + 40);
@@ -343,6 +342,8 @@ public class Editor {
 		attributeToEdit = null;
 		textEntered = "";
 		this.attributeButton = null;
+		if (state == STATE.SELECTED_OBJECT)
+			state = STATE.DEFAULT;
 	}
 
 	public void rightClick() {

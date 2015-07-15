@@ -41,11 +41,11 @@ public class DetailsWindow {
 		if (object instanceof GameObject) {
 
 			final GameObject gameObject = (GameObject) object;
-
-			for (int i = 0; i < gameObjectFields.length; i++) {
+			int i = 0;
+			for (; i < gameObjectFields.length; i++) {
 				final int index = i;
-				final WindowButton button = new WindowButton(0, 0 + index * 50,
-						200, 50, gameObject, gameObjectFields[i], true, true,
+				final WindowButton button = new WindowButton(0, 0 + index * 30,
+						200, 30, gameObject, gameObjectFields[i], true, true,
 						this);
 				buttons.add(button);
 				button.setClickListener(new ClickListener() {
@@ -64,6 +64,18 @@ public class DetailsWindow {
 				});
 
 			}
+
+			final WindowButton button = new WindowButton(0, 0 + i * 30, 200,
+					30, gameObject, "delete", true, true, this);
+			buttons.add(button);
+			button.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+					depressButtons();
+					editor.level.inanimateObjects.remove(gameObject);
+					editor.clearSelectedObject();
+				}
+			});
 
 			// Name
 
