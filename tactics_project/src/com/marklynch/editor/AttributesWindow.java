@@ -33,7 +33,9 @@ public class AttributesWindow {
 
 	public final static String[] squareFields = { "elevation", "travelCost" };
 
-	public AttributesWindow(float x, float width, Object object,
+	String[] fields;
+
+	public AttributesWindow(float x, float width, final Object object,
 			final Editor editor) {
 		super();
 		this.x = x;
@@ -42,90 +44,63 @@ public class AttributesWindow {
 		this.editor = editor;
 
 		if (object instanceof Square) {
-
-			final Square square = (Square) object;
-			int i = 0;
-			for (; i < squareFields.length; i++) {
-				final int index = i;
-				final AtributesWindowButton button = new AtributesWindowButton(
-						0, 0 + index * 30, 200, 30, square, squareFields[i],
-						true, true, this);
-				buttons.add(button);
-				button.setClickListener(new ClickListener() {
-					@Override
-					public void click() {
-						button.down = !button.down;
-						if (button.down) {
-							depressButtons();
-							button.down = true;
-							editor.editAttribute(square, squareFields[index],
-									button);
-						} else {
-							editor.enterTyped();
-						}
-					}
-				});
-
-			}
+			fields = squareFields;
 		} else if (object instanceof GameObject) {
+			fields = gameObjectFields;
+		}
 
+		int i = 0;
+		for (; i < fields.length; i++) {
+			final int index = i;
+			final AtributesWindowButton button = new AtributesWindowButton(0,
+					0 + index * 30, 200, 30, object, fields[i], true, true,
+					this);
+			buttons.add(button);
+			button.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+					button.down = !button.down;
+					if (button.down) {
+						depressButtons();
+						button.down = true;
+						editor.editAttribute(object, fields[index], button);
+					} else {
+						editor.enterTyped();
+					}
+				}
+			});
+
+		}
+
+		if (object instanceof Actor) {
+			final Actor actor = (Actor) object;
+			final AtributesWindowButton button = new AtributesWindowButton(0,
+					0 + i * 30, 200, 30, actor, "delete", true, true, this);
+			buttons.add(button);
+			button.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+					depressButtons();
+					actor.faction.actors.remove(actor);
+					actor.squareGameObjectIsOn.gameObject = null;
+					editor.clearSelectedObject();
+				}
+			});
+
+		} else if (object instanceof GameObject) {
 			final GameObject gameObject = (GameObject) object;
-			int i = 0;
-			for (; i < gameObjectFields.length; i++) {
-				final int index = i;
-				final AtributesWindowButton button = new AtributesWindowButton(
-						0, 0 + index * 30, 200, 30, gameObject,
-						gameObjectFields[i], true, true, this);
-				buttons.add(button);
-				button.setClickListener(new ClickListener() {
-					@Override
-					public void click() {
-						button.down = !button.down;
-						if (button.down) {
-							depressButtons();
-							button.down = true;
-							editor.editAttribute(gameObject,
-									gameObjectFields[index], button);
-						} else {
-							editor.enterTyped();
-						}
-					}
-				});
-
-			}
-
-			if (gameObject instanceof Actor) {
-				final Actor actor = (Actor) gameObject;
-				final AtributesWindowButton button = new AtributesWindowButton(
-						0, 0 + i * 30, 200, 30, actor, "delete", true, true,
-						this);
-				buttons.add(button);
-				button.setClickListener(new ClickListener() {
-					@Override
-					public void click() {
-						depressButtons();
-						actor.faction.actors.remove(actor);
-						actor.squareGameObjectIsOn.gameObject = null;
-						editor.clearSelectedObject();
-					}
-				});
-
-			} else {
-				final AtributesWindowButton button = new AtributesWindowButton(
-						0, 0 + i * 30, 200, 30, gameObject, "delete", true,
-						true, this);
-				buttons.add(button);
-				button.setClickListener(new ClickListener() {
-					@Override
-					public void click() {
-						depressButtons();
-						editor.level.inanimateObjects.remove(gameObject);
-						gameObject.squareGameObjectIsOn.gameObject = null;
-						editor.clearSelectedObject();
-					}
-				});
-			}
-
+			final AtributesWindowButton button = new AtributesWindowButton(0,
+					0 + i * 30, 200, 30, gameObject, "delete", true, true, this);
+			buttons.add(button);
+			button.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+					depressButtons();
+					editor.level.inanimateObjects.remove(gameObject);
+					gameObject.squareGameObjectIsOn.gameObject = null;
+					editor.clearSelectedObject();
+				}
+			});
 		}
 	}
 
