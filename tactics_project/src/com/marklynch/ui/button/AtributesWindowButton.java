@@ -6,7 +6,6 @@ import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
-import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -33,16 +32,12 @@ public class AtributesWindowButton extends Button {
 	@Override
 	public void draw() {
 
-		if (object instanceof GameObject) {
-			GameObject gameObject = (GameObject) object;
-
-			Class<? extends GameObject> gameObjectClass = gameObject.getClass();
-			try {
-				Field field = gameObjectClass.getField(attribute);
-				text = attribute + ": " + field.get(gameObject);
-			} catch (Exception e) {
-				text = attribute;
-			}
+		Class<? extends Object> objectClass = object.getClass();
+		try {
+			Field field = objectClass.getField(attribute);
+			text = attribute + ": " + field.get(object);
+		} catch (Exception e) {
+			text = attribute;
 		}
 
 		float realX = x;

@@ -45,7 +45,7 @@ public class Editor {
 	// Button playLevelButton;
 	public Level level;
 
-	public GameObject selectedObject;
+	public GameObject selectedGameObject;
 
 	public AttributesWindow attributesWindow;
 	public SettingsWindow settingsWindow;
@@ -205,15 +205,15 @@ public class Editor {
 		level.draw();
 
 		// draw highlight on selected object
-		if (selectedObject != null) {
-			selectedObject.squareGameObjectIsOn.drawHighlight();
+		if (selectedGameObject != null) {
+			selectedGameObject.squareGameObjectIsOn.drawHighlight();
 		}
 
 		// Draw a move line if click will result in move
 		if (Game.buttonHoveringOver == null
 				&& state == STATE.SELECTED_OBJECT
 				&& Game.squareMouseIsOver != null
-				&& Game.squareMouseIsOver != this.selectedObject.squareGameObjectIsOn) {
+				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 			GL11.glPushMatrix();
 
 			GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
@@ -221,9 +221,9 @@ public class Editor {
 			GL11.glTranslatef(Game.dragX, Game.dragY, 0);
 			GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
 
-			float x1 = this.selectedObject.squareGameObjectIsOn.x
+			float x1 = this.selectedGameObject.squareGameObjectIsOn.x
 					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
-			float y1 = this.selectedObject.squareGameObjectIsOn.y
+			float y1 = this.selectedGameObject.squareGameObjectIsOn.y
 					* Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
 			float x2 = Game.squareMouseIsOver.x * Game.SQUARE_WIDTH
 					+ Game.SQUARE_WIDTH / 2;
@@ -263,7 +263,7 @@ public class Editor {
 					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
 							- Mouse.getY() + 20,
 					Game.windowHeight - Mouse.getY() + 40);
-			TextureUtils.drawTexture(selectedObject.imageTexture,
+			TextureUtils.drawTexture(selectedGameObject.imageTexture,
 					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
 							- Mouse.getY() + 20,
 					Game.windowHeight - Mouse.getY() + 40);
@@ -298,13 +298,13 @@ public class Editor {
 		System.out.println("gameObjectClicked is " + gameObject);
 		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR
 				|| state == STATE.ADD_OBJECT || state == STATE.SETTINGS_CHANGE) {
-			this.selectedObject = gameObject;
-			attributesWindow = new AttributesWindow(0, 200, selectedObject,
+			this.selectedGameObject = gameObject;
+			attributesWindow = new AttributesWindow(0, 200, selectedGameObject,
 					this);
 			state = STATE.SELECTED_OBJECT;
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.SELECTED_OBJECT) {
-			swapGameObjects(this.selectedObject, gameObject);
+			swapGameObjects(this.selectedGameObject, gameObject);
 			clearSelectedObject();
 			state = STATE.DEFAULT;
 			depressButtonsSettingsAndDetailsButtons();
@@ -314,7 +314,11 @@ public class Editor {
 
 	public void squareClicked(Square square) {
 		System.out.println("squareClicked is " + square);
-		if (state == STATE.ADD_OBJECT) {
+		if (state == STATE.DEFAULT || state == STATE.SETTINGS_CHANGE) {
+			selectedGameObject = null;
+			attributesWindow = new AttributesWindow(0, 200, square, this);
+			depressButtonsSettingsAndDetailsButtons();
+		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
 					"skip_with_shadow.png", square, new Vector<Weapon>(), level);
 			level.inanimateObjects.add(gameObject);
@@ -330,9 +334,9 @@ public class Editor {
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.SELECTED_OBJECT) {
 			if (square.gameObject != null) {
-				swapGameObjects(this.selectedObject, square.gameObject);
+				swapGameObjects(this.selectedGameObject, square.gameObject);
 			} else {
-				moveGameObject(this.selectedObject, square);
+				moveGameObject(this.selectedGameObject, square);
 			}
 			clearSelectedObject();
 			state = STATE.DEFAULT;
@@ -365,40 +369,33 @@ public class Editor {
 
 		if (state == STATE.SETTINGS_CHANGE && settingsButton != null) {
 			settingsButton.keyTyped(character);
-		} else if (state == STATE.SELECTED_OBJECT && objectToEdit != null) {
-			if (objectToEdit != null && attributeToEdit != null
-					&& this.textEntered != null) {
-				if (objectToEdit instanceof GameObject) {
-					GameObject gameObject = (GameObject) objectToEdit;
+		} else if (objectToEdit != null) {
+			if (attributeToEdit != null && this.textEntered != null) {
 
-					Class<? extends GameObject> gameObjectClass = gameObject
+				try {
+					Class<? extends Object> objectClass = objectToEdit
 							.getClass();
-					try {
-						Field field = gameObjectClass.getField(attributeToEdit);
+					Field field = objectClass.getField(attributeToEdit);
 
-						if (field.getType().isAssignableFrom(int.class)
-								|| field.getType()
-										.isAssignableFrom(float.class)) { // int
-																			// or
-																			// float
-							if (48 <= character && character <= 57
-									&& textEntered.length() < 8) {
-								this.textEntered += character;
-								field.set(gameObject,
-										Integer.valueOf(this.textEntered)
-												.intValue());
-							}
-						} else if (field.getType().isAssignableFrom(
-								String.class)) { // string
+					if (field.getType().isAssignableFrom(int.class)
+							|| field.getType().isAssignableFrom(float.class)) { // int
+																				// or
+																				// float
+						if (48 <= character && character <= 57
+								&& textEntered.length() < 8) {
 							this.textEntered += character;
-							field.set(gameObject, textEntered);
+							field.set(objectToEdit,
+									Integer.valueOf(this.textEntered)
+											.intValue());
 						}
-
-						// field.set(gameObject, textEntered);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					} else if (field.getType().isAssignableFrom(String.class)) { // string
+						this.textEntered += character;
+						field.set(objectToEdit, textEntered);
 					}
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 
 			}
@@ -466,7 +463,6 @@ public class Editor {
 
 	public void editAttribute(Object object, String attribute,
 			AtributesWindowButton attributeButton) {
-		state = Editor.STATE.SELECTED_OBJECT;
 		objectToEdit = object;
 		attributeToEdit = attribute;
 		// if (objectToEdit instanceof GameObject) {
@@ -485,7 +481,7 @@ public class Editor {
 	}
 
 	public void clearSelectedObject() {
-		this.selectedObject = null;
+		this.selectedGameObject = null;
 		this.attributesWindow = null;
 		objectToEdit = null;
 		attributeToEdit = null;

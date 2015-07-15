@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// I think my AttributesWindow is just too much of a dream, something like
+	// SettingsWindow
+	// is a much better option
+
 	// Tabs on left of screen - faction, actors, object, scriptevent, script
 	// trigger, weapon,
 	// level, squares
