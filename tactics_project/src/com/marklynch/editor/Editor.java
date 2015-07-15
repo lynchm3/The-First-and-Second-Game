@@ -198,7 +198,10 @@ public class Editor {
 
 	public void gameObjectClicked(GameObject gameObject) {
 		System.out.println("gameObjectClicked is " + gameObject);
-		if (state == STATE.DEFAULT) {
+		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR
+				|| state == STATE.ADD_OBJECT) {
+			addObjectButton.down = false;
+			addActorButton.down = false;
 			this.selectedObject = gameObject;
 			detailsWindow = new DetailsWindow(300, 0, 200, 200, selectedObject,
 					this);
@@ -394,6 +397,9 @@ public class Editor {
 	public void rightClick() {
 		if (state == STATE.ADD_OBJECT) {
 			addObjectButton.down = false;
+			state = STATE.DEFAULT;
+		} else if (state == STATE.ADD_ACTOR) {
+			addActorButton.down = false;
 			state = STATE.DEFAULT;
 		} else if (state == STATE.SELECTED_OBJECT) {
 			clearSelectedObject();
