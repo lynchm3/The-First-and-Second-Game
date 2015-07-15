@@ -117,4 +117,9 @@ public class LevelSettingsWindow extends SettingsWindow {
 		buttons.add(heightButton);
 	}
 
+	@Override
+	public void update() {
+
+	}
+
 }

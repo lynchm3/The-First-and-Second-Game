@@ -50,4 +50,9 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 		};
 		buttons.add(addObjectButton);
 	}
+
+	@Override
+	public void update() {
+
+	}
 }

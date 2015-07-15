@@ -118,12 +118,17 @@ public class AttributesWindow {
 			button.setClickListener(new ClickListener() {
 				@Override
 				public void click() {
+
+					if (editor.level.factions.size() == 1)
+						return;
+
 					depressButtons();
 					for (Actor actor : faction.actors) {
 						actor.squareGameObjectIsOn.gameObject = null;
 					}
 					editor.level.factions.remove(faction);
 					editor.clearSelectedObject();
+					editor.factionsSettingsWindow.updateFactionsButtons();
 				}
 			});
 		}

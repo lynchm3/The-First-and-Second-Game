@@ -479,6 +479,7 @@ public class Editor {
 
 			}
 		}
+		settingsWindow.update();
 	}
 
 	public void enterTyped() {

@@ -2,11 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// test removing last faction
-	// update faction list on the tab after renaming or removing the faction
-	// max factions to 10
-	// min factions 1
-
 	// min actors 1
 
 	// Need to make enter and backspace work generically

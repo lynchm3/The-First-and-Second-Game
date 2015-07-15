@@ -41,6 +41,9 @@ public class FactionsSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
+				if (editor.level.factions.size() == 10)
+					return;
+
 				editor.level.factions.add(new Faction("Faction "
 						+ editor.level.factions.size(),
 						FactionsSettingsWindow.this.editor.level, Color.blue,
@@ -93,6 +96,12 @@ public class FactionsSettingsWindow extends SettingsWindow {
 			buttons.add(factionButton);
 
 		}
+
+	}
+
+	@Override
+	public void update() {
+		updateFactionsButtons();
 
 	}
 }

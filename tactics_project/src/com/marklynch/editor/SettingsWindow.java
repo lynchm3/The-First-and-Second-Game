@@ -41,4 +41,6 @@ public abstract class SettingsWindow {
 
 	}
 
+	public abstract void update();
+
 }

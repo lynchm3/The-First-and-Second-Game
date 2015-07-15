@@ -50,4 +50,9 @@ public class ActorsSettingsWindow extends SettingsWindow {
 		};
 		buttons.add(addActorButton);
 	}
+
+	@Override
+	public void update() {
+
+	}
 }
