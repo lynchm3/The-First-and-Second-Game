@@ -105,6 +105,7 @@ public class AttributesWindow {
 
 		}
 
+		// Delete buttons
 		if (object instanceof Actor) {
 			final Actor actor = (Actor) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
@@ -114,8 +115,16 @@ public class AttributesWindow {
 			button.setClickListener(new ClickListener() {
 				@Override
 				public void click() {
-					depressButtons();
-					editor.clearSelectedObject();
+					int actorCount = 0;
+					for (Faction faction : editor.level.factions) {
+						actorCount += faction.actors.size();
+					}
+					if (actorCount > 1) {
+						depressButtons();
+						actor.faction.actors.remove(actor);
+						actor.squareGameObjectIsOn.gameObject = null;
+						editor.clearSelectedObject();
+					}
 				}
 			});
 

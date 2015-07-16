@@ -2,8 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// min actors 1
-
 	// Need to make enter and backspace work generically
 
 	// next i need to handle Lists and booleans generically (TOTES DOABLE)
