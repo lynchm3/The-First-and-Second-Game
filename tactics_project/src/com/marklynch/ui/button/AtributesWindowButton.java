@@ -14,7 +14,7 @@ public class AtributesWindowButton extends Button {
 
 	boolean xFromLeft;
 	boolean yFromTop;
-	AttributesWindow detailsWindow;
+	AttributesWindow attributesWindow;
 	Object object;
 	String attribute;
 
@@ -24,7 +24,7 @@ public class AtributesWindowButton extends Button {
 		super(x, y, width, height, null, null, "");
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
-		this.detailsWindow = detailsWindow;
+		this.attributesWindow = detailsWindow;
 		this.object = object;
 		this.attribute = attribute;
 	}
@@ -41,16 +41,16 @@ public class AtributesWindowButton extends Button {
 		}
 
 		float realX = x;
-		float realY = y;
+		float realY = attributesWindow.y + y;
 		if (this.xFromLeft == false)
-			realX = detailsWindow.realX1 + detailsWindow.width - x;
+			realX = attributesWindow.x + attributesWindow.width - x;
 		else
-			realX = detailsWindow.realX1 + x;
+			realX = attributesWindow.x + x;
 
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
 		else
-			realY = y;
+			realY = attributesWindow.y + y;
 
 		if (enabled) {
 			if (down) {
@@ -78,7 +78,7 @@ public class AtributesWindowButton extends Button {
 			float boundsY1, float boundsY2) {
 
 		float realX = x;
-		float realY = y;
+		float realY = attributesWindow.y + y;
 		if (this.xFromLeft == false)
 			realX = Game.windowWidth - x;
 
@@ -101,16 +101,16 @@ public class AtributesWindowButton extends Button {
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
 
 		float realX = x;
-		float realY = y;
+		float realY = attributesWindow.y + y;
 		if (this.xFromLeft == false)
-			realX = detailsWindow.realX1 + detailsWindow.width - x;
+			realX = attributesWindow.x + attributesWindow.width - x;
 		else
-			realX = detailsWindow.realX1 + x;
+			realX = attributesWindow.x + x;
 
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
 		else
-			realY = y;
+			realY = attributesWindow.y + y;
 
 		if (mouseX > realX && mouseX < realX + width && mouseY > realY
 				&& mouseY < realY + height) {

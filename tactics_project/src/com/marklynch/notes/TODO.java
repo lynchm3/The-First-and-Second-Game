@@ -1,8 +1,11 @@
 package com.marklynch.notes;
 
 public class TODO {
-
 	// Attributes window needs title (Square @ 1,1, 0: Faction 0....)
+
+	// Move attributes panel to left
+
+	// Switch to square tab when u select a square etc.
 
 	// min actors 1
 

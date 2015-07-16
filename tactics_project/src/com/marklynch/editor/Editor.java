@@ -320,8 +320,8 @@ public class Editor {
 		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR
 				|| state == STATE.ADD_OBJECT || state == STATE.SETTINGS_CHANGE) {
 			this.selectedGameObject = gameObject;
-			attributesWindow = new AttributesWindow(0, 200, selectedGameObject,
-					this);
+			attributesWindow = new AttributesWindow(200, 200, 350,
+					selectedGameObject, this);
 			state = STATE.SELECTED_OBJECT;
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.SELECTED_OBJECT) {
@@ -336,7 +336,7 @@ public class Editor {
 	public void squareClicked(Square square) {
 		System.out.println("squareClicked is " + square);
 		if (state == STATE.DEFAULT || state == STATE.SETTINGS_CHANGE) {
-			attributesWindow = new AttributesWindow(0, 200, square, this);
+			attributesWindow = new AttributesWindow(200, 200, 350, square, this);
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,

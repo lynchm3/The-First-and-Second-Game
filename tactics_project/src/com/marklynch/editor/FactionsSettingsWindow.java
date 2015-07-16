@@ -98,8 +98,8 @@ public class FactionsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					factionButton.down = true;
-					editor.attributesWindow = new AttributesWindow(0, 200,
-							editor.level.factions.get(index), editor);
+					editor.attributesWindow = new AttributesWindow(200, 200,
+							350, editor.level.factions.get(index), editor);
 
 				}
 			};

@@ -13,14 +13,15 @@ import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.StringWithColor;
+import com.marklynch.utils.TextUtils;
 
 public class AttributesWindow {
 
 	public float x;
 	public float width;
 
-	public float realX1;
-	public float realX2;
+	public float y;
 
 	public Object object;
 
@@ -42,10 +43,13 @@ public class AttributesWindow {
 
 	String[] fields;
 
-	public AttributesWindow(float x, float width, final Object object,
+	String title = "";
+
+	public AttributesWindow(float x, float width, float y, final Object object,
 			final Editor editor) {
 		super();
 		this.x = x;
+		this.y = y;
 		this.width = width;
 		this.object = object;
 		this.editor = editor;
@@ -60,12 +64,30 @@ public class AttributesWindow {
 			fields = factionFields;
 		}
 
+		// Title
+		if (object instanceof Actor) {
+			Actor actor = (Actor) object;
+			title = "Actor @ " + actor.squareGameObjectIsOn.x + ","
+					+ actor.squareGameObjectIsOn.y;
+		} else if (object instanceof GameObject) {
+			GameObject gameObject = (GameObject) object;
+			title = "Object @ " + gameObject.squareGameObjectIsOn.x + ","
+					+ gameObject.squareGameObjectIsOn.y;
+		} else if (object instanceof Faction) {
+			Faction faction = (Faction) object;
+			title = "Faction " + editor.level.factions.indexOf(faction);
+		} else if (object instanceof Square) {
+			Square square = (Square) object;
+			title = "Square @ " + square.x + "," + square.y;
+		}
+
+		// Attribute buttons
 		int i = 0;
 		for (; i < fields.length; i++) {
 			final int index = i;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + index * 30, 200, 30, object, fields[i], true, true,
-					this);
+					0 + (index + 1) * 30, 200, 30, object, fields[i], true,
+					true, this);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -86,7 +108,8 @@ public class AttributesWindow {
 		if (object instanceof Actor) {
 			final Actor actor = (Actor) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + i * 30, 200, 30, actor, "delete", true, true, this);
+					0 + (i + 1) * 30, 200, 30, actor, "delete", true, true,
+					this);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -99,7 +122,8 @@ public class AttributesWindow {
 		} else if (object instanceof GameObject) {
 			final GameObject gameObject = (GameObject) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + i * 30, 200, 30, gameObject, "delete", true, true, this);
+					0 + (i + 1) * 30, 200, 30, gameObject, "delete", true,
+					true, this);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -113,7 +137,8 @@ public class AttributesWindow {
 		} else if (object instanceof Faction) {
 			final Faction faction = (Faction) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + i * 30, 200, 30, faction, "delete", true, true, this);
+					0 + (i + 1) * 30, 200, 30, faction, "delete", true, true,
+					this);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -138,10 +163,11 @@ public class AttributesWindow {
 	}
 
 	public void draw() {
-		realX1 = Game.windowWidth - x - width;
-		realX2 = Game.windowWidth - x;
-		QuadUtils.drawQuad(Color.white, Game.windowWidth - x - width,
-				Game.windowWidth - x, 0, Game.windowHeight);
+		QuadUtils.drawQuad(Color.white, x, x + width, y, Game.windowHeight);
+
+		TextUtils.printTextWithImages(new Object[] { new StringWithColor(title,
+				Color.black) }, x, y);
+
 		for (Button button : buttons) {
 			button.draw();
 		}
