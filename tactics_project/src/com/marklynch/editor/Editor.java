@@ -175,60 +175,6 @@ public class Editor {
 		};
 		buttons.add(factionsTabButton);
 
-		// BUTTONS
-		// addFactionButton = new LevelButton(50, 50, 100, 50, "", "",
-		// "ADD FACTION", true, true);
-		// addFactionButton.setClickListener(new ClickListener() {
-		//
-		// @Override
-		// public void click() {
-		// level.factions.add(new Faction("Faction "
-		// + level.factions.size(), level, Color.blue,
-		// "faction_blue.png"));
-		// clearSelectedObject();
-		// }
-		// });
-		// buttons.add(addFactionButton);
-		//
-
-		//
-		// }
-		// });
-		// buttons.add(addObjectButton);
-		//
-		// addActorButton = new LevelButton(50, 250, 100, 50, "", "",
-		// "ADD ACTOR",
-		// true, true);
-		// addActorButton.setClickListener(new ClickListener() {
-		//
-		// @Override
-		// public void click() {
-		// addActorButton.down = !addActorButton.down;
-		// if (addActorButton.down) {
-		// state = STATE.ADD_ACTOR;
-		// clearSelectedObject();
-		// addObjectButton.down = false;
-		// } else {
-		// state = STATE.DEFAULT;
-		// }
-		//
-		// }
-		// });
-		// buttons.add(addActorButton);
-		//
-		// addFactionButton = new LevelButton(50, 650, 100, 50, "", "",
-		// "PLAY LEVEL", true, true);
-		// addFactionButton.setClickListener(new ClickListener() {
-		//
-		// @Override
-		// public void click() {
-		// level.currentFactionMoving = level.factions
-		// .get(level.currentFactionMovingIndex);
-		// Game.level = level;
-		// Game.editorMode = false;
-		// }
-		// });
-		// buttons.add(addFactionButton);
 	}
 
 	public void update(int delta) {

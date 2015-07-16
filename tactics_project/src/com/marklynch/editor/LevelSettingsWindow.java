@@ -1,11 +1,12 @@
 package com.marklynch.editor;
 
+import com.marklynch.Game;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
 public class LevelSettingsWindow extends SettingsWindow {
 
-	public LevelSettingsWindow(float width, Editor editor) {
+	public LevelSettingsWindow(float width, final Editor editor) {
 		super(width, editor);
 
 		// Width Button
@@ -115,6 +116,50 @@ public class LevelSettingsWindow extends SettingsWindow {
 			}
 		};
 		buttons.add(heightButton);
+
+		// Height Button
+		final SettingsWindowButton playLevelButton = new SettingsWindowButton(
+				0, 300, 200, 30, "Play Level", true, true, this) {
+
+			@Override
+			public void keyTyped(char character) {
+			}
+
+			@Override
+			public void enterTyped() {
+			}
+
+			@Override
+			public void backTyped() {
+			}
+
+			@Override
+			public void depress() {
+			}
+		};
+		playLevelButton.clickListener = new ClickListener() {
+
+			@Override
+			public void click() {
+				editor.level.currentFactionMoving = editor.level.factions
+						.get(editor.level.currentFactionMovingIndex);
+				editor.level.turn = 1;
+				Game.level = editor.level;
+				Game.editorMode = false;
+			}
+		};
+		buttons.add(playLevelButton);
+
+		//
+		// playLevelButton = new LevelButton(50, 650, 100, 50, "", "",
+		// "PLAY LEVEL", true, true);
+		// addFactionButton.setClickListener(new ClickListener() {
+		//
+		// @Override
+		// public void click() {
+		// }
+		// });
+		// buttons.add(addFactionButton);
 	}
 
 	@Override
