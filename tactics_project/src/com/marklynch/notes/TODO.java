@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// AI Factions arent taking their turns...
+	// Edit faction colors
+
 	// min actors 1
 
 	// Need to make enter and backspace work generically

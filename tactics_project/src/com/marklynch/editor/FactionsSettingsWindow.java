@@ -44,13 +44,22 @@ public class FactionsSettingsWindow extends SettingsWindow {
 				if (editor.level.factions.size() == 10)
 					return;
 
-				editor.level.factions.add(new Faction("Faction "
+				Faction newFaction = new Faction("Faction "
 						+ editor.level.factions.size(),
 						FactionsSettingsWindow.this.editor.level, Color.blue,
-						"faction_blue.png"));
+						"faction_blue.png");
+				editor.level.factions.add(newFaction);
 				updateFactionsButtons();
 				editor.clearSelectedObject();
 				editor.depressButtonsSettingsAndDetailsButtons();
+
+				for (Faction faction : editor.level.factions) {
+					if (faction != newFaction) {
+						faction.relationships.put(newFaction, -100);
+						newFaction.relationships.put(faction, -100);
+					}
+				}
+
 			}
 		};
 		buttons.add(addFactionButton);

@@ -129,6 +129,9 @@ public class AttributesWindow {
 					editor.level.factions.remove(faction);
 					editor.clearSelectedObject();
 					editor.factionsSettingsWindow.updateFactionsButtons();
+					for (Faction faction : editor.level.factions) {
+						faction.relationships.remove(faction);
+					}
 				}
 			});
 		}

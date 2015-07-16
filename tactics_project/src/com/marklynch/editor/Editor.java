@@ -406,11 +406,14 @@ public class Editor {
 									.println("factionIndex = " + factionIndex);
 							System.out.println("level.factions.size() = "
 									+ level.factions.size());
-							if (factionIndex < level.factions.size()) {
 
-								System.out.println("v");
-								field.set(objectToEdit,
-										level.factions.get(factionIndex));
+							if (factionIndex < level.factions.size()) {
+								Actor actor = (Actor) objectToEdit;
+								actor.faction.actors.remove(actor);
+								level.factions.get(factionIndex).actors
+										.add(actor);
+								actor.faction = level.factions
+										.get(factionIndex);
 								this.clearSelectedObject();
 								this.depressButtonsSettingsAndDetailsButtons();
 							}
