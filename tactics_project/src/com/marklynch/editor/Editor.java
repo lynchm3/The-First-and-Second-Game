@@ -66,7 +66,11 @@ public class Editor {
 	public SettingsWindowButton settingsButton = null;
 
 	public enum STATE {
-		DEFAULT, ADD_OBJECT, ADD_ACTOR, SELECTED_OBJECT, SETTINGS_CHANGE
+		DEFAULT,
+		ADD_OBJECT,
+		ADD_ACTOR,
+		MOVEABLE_OBJECT_SELECTED,
+		SETTINGS_CHANGE
 	}
 
 	STATE state = STATE.DEFAULT;
@@ -95,7 +99,6 @@ public class Editor {
 		// Add a faction
 		level.factions.add(new Faction("Faction " + level.factions.size(),
 				level, Color.blue, "faction_blue.png"));
-		factionsSettingsWindow.updateFactionsButtons();
 
 		// Weapons
 		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
@@ -124,6 +127,7 @@ public class Editor {
 				depressTabButtons();
 				levelTabButton.down = true;
 				settingsWindow = levelSettingsWindow;
+				settingsWindow.update();
 			}
 		};
 		levelTabButton.down = true;
@@ -138,6 +142,7 @@ public class Editor {
 				depressTabButtons();
 				squaresTabButton.down = true;
 				settingsWindow = squaresSettingsWindow;
+				settingsWindow.update();
 			}
 		};
 		buttons.add(squaresTabButton);
@@ -152,6 +157,7 @@ public class Editor {
 				depressTabButtons();
 				objectsTabButton.down = true;
 				settingsWindow = objectsSettingsWindow;
+				settingsWindow.update();
 			}
 		};
 		buttons.add(objectsTabButton);
@@ -166,6 +172,7 @@ public class Editor {
 				depressTabButtons();
 				actorsTabButton.down = true;
 				settingsWindow = actorsSettingsWindow;
+				settingsWindow.update();
 			}
 		};
 		buttons.add(actorsTabButton);
@@ -180,6 +187,7 @@ public class Editor {
 				depressTabButtons();
 				factionsTabButton.down = true;
 				settingsWindow = factionsSettingsWindow;
+				settingsWindow.update();
 			}
 		};
 		buttons.add(factionsTabButton);
@@ -201,7 +209,7 @@ public class Editor {
 
 		// Draw a move line if click will result in move
 		if (Game.buttonHoveringOver == null
-				&& state == STATE.SELECTED_OBJECT
+				&& state == STATE.MOVEABLE_OBJECT_SELECTED
 				&& Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 			GL11.glPushMatrix();
@@ -284,7 +292,7 @@ public class Editor {
 		// Game.windowHeight - Mouse.getY() + 40);
 		// }
 
-		if (state == STATE.SELECTED_OBJECT) {
+		if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
 			TextureUtils.drawTexture(level.gameCursor.imageTexture2,
 					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
 							- Mouse.getY() + 20,
@@ -321,30 +329,27 @@ public class Editor {
 	}
 
 	public void gameObjectClicked(GameObject gameObject) {
-		System.out.println("gameObjectClicked is " + gameObject);
 		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR
 				|| state == STATE.ADD_OBJECT || state == STATE.SETTINGS_CHANGE) {
 			if (gameObject instanceof Actor) {
-				actorsTabButton.click();
+				if (this.settingsWindow != this.actorsSettingsWindow)
+					actorsTabButton.click();
+				actorsSettingsWindow.getButton(gameObject).click();
 			} else {
-				objectsTabButton.click();
+				if (this.settingsWindow != this.objectsSettingsWindow)
+					objectsTabButton.click();
+				objectsSettingsWindow.getButton(gameObject).click();
 			}
-			this.clearSelectedObject();
-			this.selectedGameObject = gameObject;
-			attributesWindow = new AttributesWindow(200, 200, 350,
-					selectedGameObject, this);
-			state = STATE.SELECTED_OBJECT;
-			depressButtonsSettingsAndDetailsButtons();
-		} else if (state == STATE.SELECTED_OBJECT) {
+		} else if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
 			swapGameObjects(this.selectedGameObject, gameObject);
 		}
 
 	}
 
 	public void squareClicked(Square square) {
-		System.out.println("squareClicked is " + square);
 		if (state == STATE.DEFAULT || state == STATE.SETTINGS_CHANGE) {
-			squaresTabButton.click();
+			if (this.settingsWindow != this.squaresSettingsWindow)
+				squaresTabButton.click();
 			this.clearSelectedObject();
 			attributesWindow = new AttributesWindow(200, 200, 350, square, this);
 			depressButtonsSettingsAndDetailsButtons();
@@ -353,6 +358,7 @@ public class Editor {
 					"skip_with_shadow.png", square, new Vector<Weapon>(), level);
 			level.inanimateObjects.add(gameObject);
 			square.gameObject = gameObject;
+			this.objectsSettingsWindow.update();
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.ADD_ACTOR) {
 			// Add actor
@@ -361,8 +367,9 @@ public class Editor {
 			actor.faction = level.factions.get(0);
 			level.factions.get(0).actors.add(actor);
 			square.gameObject = actor;
+			this.actorsSettingsWindow.update();
 			// state = STATE.DEFAULT;
-		} else if (state == STATE.SELECTED_OBJECT) {
+		} else if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
 			if (square.gameObject != null) {
 				swapGameObjects(this.selectedGameObject, square.gameObject);
 			} else {
@@ -458,7 +465,8 @@ public class Editor {
 	public void enterTyped() {
 		if (state == STATE.SETTINGS_CHANGE && settingsButton != null) {
 			settingsButton.enterTyped();
-		} else if (state == STATE.SELECTED_OBJECT && objectToEdit != null) {
+		} else if (state == STATE.MOVEABLE_OBJECT_SELECTED
+				&& objectToEdit != null) {
 			objectToEdit = null;
 			attributeToEdit = null;
 			this.textEntered = "";
@@ -472,14 +480,13 @@ public class Editor {
 			return;
 		}
 
-		System.out.println("backTyped()");
-		if (state == STATE.SELECTED_OBJECT && objectToEdit != null
+		if (state == STATE.MOVEABLE_OBJECT_SELECTED && objectToEdit != null
 				&& textEntered.length() > 0) {
 			this.textEntered = this.textEntered.substring(0,
 					this.textEntered.length() - 1);
 		}
 
-		if (state == STATE.SELECTED_OBJECT && objectToEdit != null
+		if (state == STATE.MOVEABLE_OBJECT_SELECTED && objectToEdit != null
 				&& attributeToEdit != null && this.textEntered != null) {
 			if (objectToEdit instanceof GameObject) {
 				GameObject gameObject = (GameObject) objectToEdit;
@@ -540,7 +547,7 @@ public class Editor {
 		attributeToEdit = null;
 		textEntered = "";
 		this.attributeButton = null;
-		if (state == STATE.SELECTED_OBJECT)
+		if (state == STATE.MOVEABLE_OBJECT_SELECTED)
 			state = STATE.DEFAULT;
 	}
 
@@ -557,6 +564,7 @@ public class Editor {
 	}
 
 	public void depressButtonsSettingsAndDetailsButtons() {
+		System.out.println("depressButtonsSettingsAndDetailsButtons()");
 		settingsWindow.depressButtons();
 		if (attributesWindow != null)
 			attributesWindow.depressButtons();

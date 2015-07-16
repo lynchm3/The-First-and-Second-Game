@@ -11,9 +11,7 @@ import com.marklynch.utils.QuadUtils;
 
 public abstract class SettingsWindow {
 	public float width;
-
 	public Vector<SettingsWindowButton> buttons = new Vector<SettingsWindowButton>();
-
 	public Editor editor;
 
 	public final static String[] gameObjectFields = { "name", "strength",
@@ -39,6 +37,14 @@ public abstract class SettingsWindow {
 			button.depress();
 		}
 
+	}
+
+	public SettingsWindowButton getButton(Object object) {
+		for (SettingsWindowButton button : buttons) {
+			if (button.object == object)
+				return button;
+		}
+		return null;
 	}
 
 	public abstract void update();

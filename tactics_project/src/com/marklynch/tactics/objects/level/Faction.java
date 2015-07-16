@@ -137,11 +137,11 @@ public class Faction {
 
 			if (timeAtCurrentStage == 0) {
 				// start of attack phase, act
-				// attackRandomEnemy();
+				// boolean performedAttack = attackRandomEnemy();
 				// attackRandomEnemyOrAlly();
 
-				boolean performedAttack = attackTarget(level.factions.get(0).actors
-						.get(0));
+				boolean performedAttack = this.attackTarget(level.factions
+						.get(0).actors.get(0));
 
 				if (performedAttack == false) {
 					currentStage = STAGE.SELECT;

@@ -15,13 +15,16 @@ public abstract class SettingsWindowButton extends Button {
 
 	public String textEntered = "";
 
+	public Object object;
+
 	public SettingsWindowButton(float x, float y, float width, float height,
-			Object text, boolean xFromLeft, boolean yFromTop,
+			Object object, boolean xFromLeft, boolean yFromTop,
 			SettingsWindow settingsWindow) {
-		super(x, y, width, height, null, null, text);
+		super(x, y, width, height, null, null, object);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 		this.settingsWindow = settingsWindow;
+		this.object = object;
 	}
 
 	@Override

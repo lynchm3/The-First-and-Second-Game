@@ -2,19 +2,17 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// List of squares, actors, objects on right
+
 	// Need to make enter and backspace work generically
 
 	// next i need to handle Lists and booleans generically (TOTES DOABLE)
 	// for lists show them the options 0 to X, they tap one of them, BOOM
 	// booleans can be toggles
 
-	// I think my AttributesWindow is just too much of a dream, something like
-	// SettingsWindow
-	// is a much better option
-
 	// Tabs on left of screen - faction, actors, object, scriptevent, script
 	// trigger, weapon,
-	// level, squares
+	// level, squares, relationships, decoration
 
 	// I think the attributes window should be beside the settins windwo
 

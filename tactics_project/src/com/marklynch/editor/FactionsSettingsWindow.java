@@ -64,9 +64,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 		};
 		buttons.add(addFactionButton);
 
-		System.out.println("SSS");
 		for (int i = 0; i < editor.level.factions.size(); i++) {
-			System.out.println("RRRRRRRRR");
 			final int index = i;
 
 			final SettingsWindowButton factionButton = new SettingsWindowButton(
@@ -112,6 +110,9 @@ public class FactionsSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateFactionsButtons();
+		SettingsWindowButton button = this.getButton(editor.objectToEdit);
+		if (button != null)
+			button.down = true;
 
 	}
 }
