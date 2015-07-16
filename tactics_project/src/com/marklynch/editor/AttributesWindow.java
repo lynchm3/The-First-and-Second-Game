@@ -38,7 +38,7 @@ public class AttributesWindow {
 
 	public final static String[] squareFields = { "elevation", "travelCost" };
 
-	public final static String[] factionFields = { "name" };
+	public final static String[] factionFields = { "name", "color" };
 
 	String[] fields;
 

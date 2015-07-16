@@ -2,7 +2,7 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Edit faction colors
+	// Attributes window needs title (Square @ 1,1, 0: Faction 0....)
 
 	// min actors 1
 

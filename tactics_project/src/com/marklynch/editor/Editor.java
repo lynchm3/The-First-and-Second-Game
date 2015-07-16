@@ -22,6 +22,7 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -69,6 +70,9 @@ public class Editor {
 	}
 
 	STATE state = STATE.DEFAULT;
+
+	Color[] colors = new Color[] { Color.red, Color.blue, Color.green,
+			Color.magenta, Color.cyan, Color.orange };
 
 	public Editor() {
 		level = new Level(10, 10);
@@ -231,6 +235,8 @@ public class Editor {
 			button.draw();
 		}
 
+		// Depending on what we're editing, might wnat to show something
+		// different
 		if (objectToEdit != null) {
 			try {
 				Class<? extends Object> objectClass = objectToEdit.getClass();
@@ -249,10 +255,18 @@ public class Editor {
 						TextUtils.printTextWithImages(new Object[] { i + " - ",
 								level.factions.get(i) }, 200, i * 100 + 200);
 					}
+				} else if (field.getType().isAssignableFrom(Color.class)) {
+					// color
+					QuadUtils.drawQuad(Color.black, 0, Game.windowWidth, 0,
+							Game.windowHeight);
+					for (int i = 0; i < colors.length; i++) {
+						TextUtils.printTextWithImages(new Object[] { i + " - ",
+								new StringWithColor("Color " + i, colors[i]) },
+								200, i * 100 + 200);
+					}
 				}
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -397,15 +411,9 @@ public class Editor {
 					} else if (field.getType().isAssignableFrom(String.class)) { // string
 						this.textEntered += character;
 						field.set(objectToEdit, textEntered);
-					} else if (field.getType().isAssignableFrom(Faction.class)) {
-						System.out.println("a");
+					} else if (field.getType().isAssignableFrom(Faction.class)) {// faction
 						if (48 <= character && character <= 57) {
-							System.out.println("b");
 							int factionIndex = character - 48;
-							System.out
-									.println("factionIndex = " + factionIndex);
-							System.out.println("level.factions.size() = "
-									+ level.factions.size());
 
 							if (factionIndex < level.factions.size()) {
 								Actor actor = (Actor) objectToEdit;
@@ -419,10 +427,18 @@ public class Editor {
 							}
 						}
 
+					} else if (field.getType().isAssignableFrom(Color.class)) {// color
+						if (48 <= character && character <= 57) {
+							int colorIndex = character - 48;
+							if (colorIndex < colors.length) {
+								field.set(objectToEdit, colors[colorIndex]);
+								this.clearSelectedObject();
+								this.depressButtonsSettingsAndDetailsButtons();
+							}
+						}
 					}
 
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
