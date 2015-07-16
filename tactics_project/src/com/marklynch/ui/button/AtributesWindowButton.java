@@ -33,12 +33,6 @@ public class AtributesWindowButton extends Button {
 	public void draw() {
 
 		Class<? extends Object> objectClass = object.getClass();
-		try {
-			Field field = objectClass.getField(attribute);
-			text = attribute + ": " + field.get(object);
-		} catch (Exception e) {
-			text = attribute;
-		}
 
 		float realX = x;
 		float realY = attributesWindow.y + y;
@@ -52,23 +46,32 @@ public class AtributesWindowButton extends Button {
 		else
 			realY = attributesWindow.y + y;
 
-		if (enabled) {
-			if (down) {
-				QuadUtils.drawQuad(Color.green, realX, realX + width, realY,
-						realY + height);
-				TextUtils.printTextWithImages(new Object[] { text }, realX,
-						realY);
+		try {
+			Field field = objectClass.getField(attribute);
+			if (enabled) {
+				if (down) {
+					QuadUtils.drawQuad(Color.green, realX, realX + width,
+							realY, realY + height);
+					TextUtils
+							.printTextWithImages(new Object[] {
+									attribute + ": ", field.get(object) },
+									realX, realY);
+				} else {
+					QuadUtils.drawQuad(Color.blue, realX, realX + width, realY,
+							realY + height);
+					TextUtils
+							.printTextWithImages(new Object[] {
+									attribute + ": ", field.get(object) },
+									realX, realY);
+				}
 			} else {
-				QuadUtils.drawQuad(Color.blue, realX, realX + width, realY,
-						realY + height);
-				TextUtils.printTextWithImages(new Object[] { text }, realX,
-						realY);
-			}
-		} else {
 
-			QuadUtils.drawQuad(Color.red, realX, realX + width, realY, realY
-					+ height);
-			TextUtils.printTextWithImages(new Object[] { text }, realX, realY);
+				QuadUtils.drawQuad(Color.red, realX, realX + width, realY,
+						realY + height);
+				TextUtils.printTextWithImages(new Object[] { attribute + ": ",
+						field.get(object) }, realX, realY);
+			}
+		} catch (Exception e) {
 		}
 
 	}

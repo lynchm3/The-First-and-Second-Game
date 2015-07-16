@@ -18,17 +18,24 @@ public class TextUtils {
 
 	public static void printTextWithImages(Object[] contents, float posX,
 			float posY, float maxWidth) {
+		System.out.println("printTextWithImages");
 
 		float offsetX = 0;
 		float offsetY = 0;
 
 		for (Object content : contents) {
-			if (content instanceof String || content instanceof StringWithColor) {
+
+			System.out.println("content.getClass() = " + content.getClass());
+			if (content instanceof String || content instanceof StringWithColor
+					|| content instanceof Integer || content instanceof Float) {
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 				String string = null;
 				Color color = Color.white;
-				if (content instanceof String) {
+
+				if (content instanceof Integer || content instanceof Float) {
+					string = "" + content;
+				} else if (content instanceof String) {
 					string = (String) content;
 				} else if (content instanceof StringWithColor) {
 					StringWithColor stringWithColor = (StringWithColor) content;
@@ -122,6 +129,17 @@ public class TextUtils {
 				TextureUtils.drawTexture(faction.imageTexture, x, x + 20, posY
 						+ offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
+
+			} else if (content instanceof Color) {
+
+				// Image
+
+				Color color = (Color) content;
+
+				float x = posX + offsetX;
+				QuadUtils.drawQuad(color, x, x + 20, posY + offsetY, posY
+						+ offsetY + 20);
+				offsetX += 20;
 
 			}
 		}

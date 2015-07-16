@@ -2,9 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// List of squares, actors, objects on right
+	// missing actor attributes...
+	// title
+	// actorLevel
+	// travelDistance
+	// equipped weapon
 
-	// Need to make enter and backspace work generically
+	// missing object attributes
+	// weapons
 
 	// next i need to handle Lists and booleans generically (TOTES DOABLE)
 	// for lists show them the options 0 to X, they tap one of them, BOOM
