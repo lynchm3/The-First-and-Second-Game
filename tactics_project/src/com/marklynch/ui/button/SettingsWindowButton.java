@@ -16,7 +16,7 @@ public abstract class SettingsWindowButton extends Button {
 	public String textEntered = "";
 
 	public SettingsWindowButton(float x, float y, float width, float height,
-			String text, boolean xFromLeft, boolean yFromTop,
+			Object text, boolean xFromLeft, boolean yFromTop,
 			SettingsWindow settingsWindow) {
 		super(x, y, width, height, null, null, text);
 		this.xFromLeft = xFromLeft;

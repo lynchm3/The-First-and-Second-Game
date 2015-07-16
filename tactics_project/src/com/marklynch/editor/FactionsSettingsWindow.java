@@ -46,7 +46,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 
 				Faction newFaction = new Faction("Faction "
 						+ editor.level.factions.size(),
-						FactionsSettingsWindow.this.editor.level, Color.blue,
+						FactionsSettingsWindow.this.editor.level, Color.red,
 						"faction_blue.png");
 				editor.level.factions.add(newFaction);
 				updateFactionsButtons();
@@ -70,8 +70,8 @@ public class FactionsSettingsWindow extends SettingsWindow {
 			final int index = i;
 
 			final SettingsWindowButton factionButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30,
-					"" + editor.level.factions.get(i), true, true, this) {
+					0, 200 + i * 30, 200, 30, editor.level.factions.get(i),
+					true, true, this) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -97,6 +97,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 				public void click() {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
+					factionButton.down = true;
 					editor.attributesWindow = new AttributesWindow(0, 200,
 							editor.level.factions.get(index), editor);
 

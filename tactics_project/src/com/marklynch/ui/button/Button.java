@@ -12,10 +12,10 @@ public abstract class Button {
 	public boolean enabled = true;
 	public boolean down = false;
 	public ClickListener clickListener;
-	public String text;
+	public Object text;
 
 	public Button(float x, float y, float width, float height,
-			String enabledTexturePath, String disabledTexturePath, String text) {
+			String enabledTexturePath, String disabledTexturePath, Object text) {
 		super();
 		this.x = x;
 		this.y = y;
