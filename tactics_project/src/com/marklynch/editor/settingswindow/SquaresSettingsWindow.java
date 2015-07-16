@@ -1,4 +1,6 @@
-package com.marklynch.editor;
+package com.marklynch.editor.settingswindow;
+
+import com.marklynch.editor.Editor;
 
 public class SquaresSettingsWindow extends SettingsWindow {
 

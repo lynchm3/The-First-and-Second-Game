@@ -2,7 +2,7 @@ package com.marklynch.ui.button;
 
 import org.newdawn.slick.Color;
 
-import com.marklynch.editor.SettingsWindow;
+import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;

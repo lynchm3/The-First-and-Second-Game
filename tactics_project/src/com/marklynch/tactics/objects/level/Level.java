@@ -48,7 +48,7 @@ public class Level {
 	public int turn = 1;
 	public TrueTypeFont font12;
 	public TrueTypeFont font60;
-	public Vector<Faction> factions;
+	public ArrayList<Faction> factions;
 	public Faction currentFactionMoving;
 	public int currentFactionMovingIndex;
 	public Vector<ActivityLog> logs = new Vector<ActivityLog>();
@@ -73,7 +73,7 @@ public class Level {
 		squares = new Square[width][height];
 		initGrid(this.squares, this.width, this.height);
 
-		factions = new Vector<Faction>();
+		factions = new ArrayList<Faction>();
 		inanimateObjects = new Vector<GameObject>();
 		decorations = new Vector<Decoration>();
 		script = new Script(new Vector<ScriptEvent>());

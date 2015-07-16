@@ -8,7 +8,6 @@ import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
 
 public class AtributesWindowButton extends Button {
 
@@ -77,30 +76,6 @@ public class AtributesWindowButton extends Button {
 	}
 
 	@Override
-	public void drawWithinBounds(float boundsX1, float boundsX2,
-			float boundsY1, float boundsY2) {
-
-		float realX = x;
-		float realY = attributesWindow.y + y;
-		if (this.xFromLeft == false)
-			realX = Game.windowWidth - x;
-
-		if (this.yFromTop == false)
-			realY = Game.windowHeight - y;
-
-		if (enabled) {
-			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, realX,
-					realX + width, realY, realY + height, boundsX1, boundsX2,
-					boundsY1, boundsY2);
-		} else {
-			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, realX,
-					realX + width, realY, realY + height, boundsX1, boundsX2,
-					boundsY1, boundsY2);
-		}
-
-	}
-
-	@Override
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
 
 		float realX = x;
@@ -120,6 +95,13 @@ public class AtributesWindowButton extends Button {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void drawWithinBounds(float boundsX1, float boundsX2,
+			float boundsY1, float boundsY2) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -1,10 +1,11 @@
-package com.marklynch.editor;
+package com.marklynch.editor.settingswindow;
 
 import java.util.Vector;
 
 import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
+import com.marklynch.editor.Editor;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.QuadUtils;

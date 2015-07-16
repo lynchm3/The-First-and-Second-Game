@@ -1,5 +1,7 @@
-package com.marklynch.editor;
+package com.marklynch.editor.settingswindow;
 
+import com.marklynch.editor.AttributesWindow;
+import com.marklynch.editor.Editor;
 import com.marklynch.editor.Editor.STATE;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.ui.button.ClickListener;

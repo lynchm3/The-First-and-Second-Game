@@ -11,6 +11,12 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
+import com.marklynch.editor.settingswindow.ActorsSettingsWindow;
+import com.marklynch.editor.settingswindow.FactionsSettingsWindow;
+import com.marklynch.editor.settingswindow.LevelSettingsWindow;
+import com.marklynch.editor.settingswindow.ObjectsSettingsWindow;
+import com.marklynch.editor.settingswindow.SettingsWindow;
+import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
@@ -69,6 +75,8 @@ public class Editor {
 
 	public Vector<Texture> textures = new Vector<Texture>();
 
+	public SelectionWindow selectionWindow;
+
 	public enum STATE {
 		DEFAULT,
 		ADD_OBJECT,
@@ -77,7 +85,7 @@ public class Editor {
 		SETTINGS_CHANGE
 	}
 
-	STATE state = STATE.DEFAULT;
+	public STATE state = STATE.DEFAULT;
 
 	Color[] colors = new Color[] { Color.red, Color.blue, Color.green,
 			Color.magenta, Color.cyan, Color.orange };
@@ -276,13 +284,7 @@ public class Editor {
 				} else if (field.getType().isAssignableFrom(String.class)) {
 					// string
 				} else if (field.getType().isAssignableFrom(Faction.class)) {
-					// faction
-					QuadUtils.drawQuad(Color.black, 0, Game.windowWidth, 0,
-							Game.windowHeight);
-					for (int i = 0; i < level.factions.size(); i++) {
-						TextUtils.printTextWithImages(new Object[] { i + " - ",
-								level.factions.get(i) }, 200, i * 100 + 200);
-					}
+					selectionWindow.draw();
 				} else if (field.getType().isAssignableFrom(Color.class)) {
 					// color
 					QuadUtils.drawQuad(Color.black, 0, Game.windowWidth, 0,
@@ -327,6 +329,32 @@ public class Editor {
 	}
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY) {
+
+		if (objectToEdit != null) {
+			try {
+				Class<? extends Object> objectClass = objectToEdit.getClass();
+				Field field = objectClass.getField(attributeToEdit);
+
+				if (field.getType().isAssignableFrom(Faction.class)) {
+					// faction
+					return selectionWindow.getButtonFromMousePosition(mouseX,
+							mouseY);
+				}
+				// else if (field.getType().isAssignableFrom(Color.class)) {
+				// // color
+				// return colorSelectionWindow.getButtonFromMousePosition(
+				// mouseX, mouseY);
+				// } else if (field.getType().isAssignableFrom(Texture.class)) {
+				// // texture
+				// return textureSelectionWindow.getButtonFromMousePosition(
+				// mouseX, mouseY);
+				// }
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		for (Button button : this.buttons) {
 			if (button.calculateIfPointInBoundsOfButton(mouseX,
 					Game.windowHeight - mouseY))
@@ -448,21 +476,6 @@ public class Editor {
 					} else if (field.getType().isAssignableFrom(String.class)) { // string
 						this.textEntered += character;
 						field.set(objectToEdit, textEntered);
-					} else if (field.getType().isAssignableFrom(Faction.class)) {// faction
-						if (48 <= character && character <= 57) {
-							int factionIndex = character - 48;
-
-							if (factionIndex < level.factions.size()) {
-								Actor actor = (Actor) objectToEdit;
-								actor.faction.actors.remove(actor);
-								level.factions.get(factionIndex).actors
-										.add(actor);
-								actor.faction = level.factions
-										.get(factionIndex);
-								stopEditingAttribute();
-							}
-						}
-
 					} else if (field.getType().isAssignableFrom(Color.class)) {// color
 						if (48 <= character && character <= 57) {
 							int colorIndex = character - 48;
@@ -542,17 +555,28 @@ public class Editor {
 			AtributesWindowButton attributeButton) {
 		objectToEdit = object;
 		attributeToEdit = attribute;
-		// if (objectToEdit instanceof GameObject) {
-		// GameObject gameObject = (GameObject) objectToEdit;
-		// Class<? extends GameObject> gameObjectClass = gameObject.getClass();
-		// try {
-		// Field field;
-		// field = gameObjectClass.getField(attributeToEdit);
-		// textEntered = "" + field.get(gameObject);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		// }
+		try {
+			Class<? extends Object> objectClass = objectToEdit.getClass();
+			Field field = objectClass.getField(attributeToEdit);
+
+			if (field.getType().isAssignableFrom(Faction.class)) {
+				// faction
+				selectionWindow = new SelectionWindow(level.factions, false,
+						this);
+			}
+			// else if (field.getType().isAssignableFrom(Color.class)) {
+			// // color
+			// return colorSelectionWindow.getButtonFromMousePosition(
+			// mouseX, mouseY);
+			// } else if (field.getType().isAssignableFrom(Texture.class)) {
+			// // texture
+			// return textureSelectionWindow.getButtonFromMousePosition(
+			// mouseX, mouseY);
+			// }
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		textEntered = "";
 		this.attributeButton = attributeButton;
 	}
