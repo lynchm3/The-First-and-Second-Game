@@ -124,6 +124,7 @@ public class AttributesWindow {
 						actor.faction.actors.remove(actor);
 						actor.squareGameObjectIsOn.gameObject = null;
 						editor.clearSelectedObject();
+						editor.settingsWindow.update();
 					}
 				}
 			});
@@ -141,6 +142,7 @@ public class AttributesWindow {
 					editor.level.inanimateObjects.remove(gameObject);
 					gameObject.squareGameObjectIsOn.gameObject = null;
 					editor.clearSelectedObject();
+					editor.settingsWindow.update();
 				}
 			});
 		} else if (object instanceof Faction) {
@@ -166,6 +168,7 @@ public class AttributesWindow {
 					for (Faction faction : editor.level.factions) {
 						faction.relationships.remove(faction);
 					}
+					editor.settingsWindow.update();
 				}
 			});
 		}

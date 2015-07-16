@@ -1522,6 +1522,14 @@ public class Notes {
 	 * where the screen turned red and black...
 	 * 
 	 * Make pause game on minimize and option
+	 * 
+	 * DEUS EX guys talking about deus ex
+	 * https://www.youtube.com/watch?v=aTVBSxnwiCo
+	 * "I like this cinematic coz it's the only time you get a view outside of the characters viewpoint and linear space/time and get a view of the whole world"
+	 * At video time 3:07
+	 * 
+	 * AMA w/ the deus ex guy - https://www.reddit.com/r/IAmA/comments/34fdjb/
+	 * hi_i_am_warren_spector_a_game_developer_from/
 	 */
 
 }

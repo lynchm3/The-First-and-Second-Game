@@ -60,13 +60,14 @@ public class ActorsSettingsWindow extends SettingsWindow {
 
 		buttons.add(addActorButton);
 
+		int buttonCount = 0;
 		for (final Faction faction : editor.level.factions) {
 			for (int i = 0; i < faction.actors.size(); i++) {
 				final int index = i;
 
 				final SettingsWindowButton actorButton = new SettingsWindowButton(
-						0, 200 + i * 30, 200, 30, faction.actors.get(index),
-						true, true, this) {
+						0, 200 + buttonCount * 30, 200, 30,
+						faction.actors.get(index), true, true, this) {
 
 					@Override
 					public void keyTyped(char character) {
@@ -103,6 +104,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 					}
 				};
 				buttons.add(actorButton);
+				buttonCount++;
 
 			}
 		}
