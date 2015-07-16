@@ -2,6 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// esc button usage, particularly when ur going full screen
+
+	// weapons attribute :/
+	// could limit the user to 5 weapons.........
+	// so the attributes would be weapon0 to weapon4
+
+	// image attribute.......
+
 	// missing actor attributes...
 	// title
 	// actorLevel

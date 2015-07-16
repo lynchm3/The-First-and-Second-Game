@@ -1530,6 +1530,12 @@ public class Notes {
 	 * 
 	 * AMA w/ the deus ex guy - https://www.reddit.com/r/IAmA/comments/34fdjb/
 	 * hi_i_am_warren_spector_a_game_developer_from/
+	 * 
+	 * http://sinisterdesign.net/ is TTs company's page, and it has a dev blog,
+	 * incl one about sales and money -
+	 * http://sinisterdesign.net/telepath-tactics
+	 * -brass-tacks-and-sales-stats-part-1/ , this really makes it seem not too
+	 * tough...
 	 */
 
 }

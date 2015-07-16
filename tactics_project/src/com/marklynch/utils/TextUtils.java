@@ -18,14 +18,11 @@ public class TextUtils {
 
 	public static void printTextWithImages(Object[] contents, float posX,
 			float posY, float maxWidth) {
-		System.out.println("printTextWithImages");
 
 		float offsetX = 0;
 		float offsetY = 0;
 
 		for (Object content : contents) {
-
-			System.out.println("content.getClass() = " + content.getClass());
 			if (content instanceof String || content instanceof StringWithColor
 					|| content instanceof Integer || content instanceof Float) {
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -132,7 +129,7 @@ public class TextUtils {
 
 			} else if (content instanceof Color) {
 
-				// Image
+				// COlor
 
 				Color color = (Color) content;
 

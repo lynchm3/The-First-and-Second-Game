@@ -29,13 +29,13 @@ public class AttributesWindow {
 
 	public Editor editor;
 
-	public final static String[] gameObjectFields = { "name", "weapons",
-			"strength", "dexterity", "intelligence", "endurance",
+	public final static String[] gameObjectFields = { "name", "imageTexture",
+			"weapons", "strength", "dexterity", "intelligence", "endurance",
 			"totalHealth", "remainingHealth" };
 
-	public final static String[] actorFields = { "name", "faction", "weapons",
-			"strength", "dexterity", "intelligence", "endurance",
-			"totalHealth", "remainingHealth" };
+	public final static String[] actorFields = { "name", "imageTexture",
+			"faction", "weapons", "strength", "dexterity", "intelligence",
+			"endurance", "totalHealth", "remainingHealth" };
 
 	public final static String[] squareFields = { "elevation", "travelCost" };
 

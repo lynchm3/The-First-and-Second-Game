@@ -1,5 +1,6 @@
 package com.marklynch.editor;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -7,6 +8,7 @@ import java.util.Vector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
@@ -22,7 +24,7 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
-import com.marklynch.utils.StringWithColor;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -65,6 +67,8 @@ public class Editor {
 	public AtributesWindowButton attributeButton = null;
 	public SettingsWindowButton settingsButton = null;
 
+	public Vector<Texture> textures = new Vector<Texture>();
+
 	public enum STATE {
 		DEFAULT,
 		ADD_OBJECT,
@@ -79,6 +83,17 @@ public class Editor {
 			Color.magenta, Color.cyan, Color.orange };
 
 	public Editor() {
+
+		// LOAD THE TEXTURES
+		File file = new File("res/images/");
+		File[] listOfFiles = file.listFiles();
+		for (File imageFile : listOfFiles) {
+			Texture texture = ResourceUtils.getGlobalImage(imageFile.getName());
+			if (texture != null) {
+				textures.add(texture);
+			}
+		}
+
 		level = new Level(10, 10);
 
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
@@ -274,8 +289,15 @@ public class Editor {
 							Game.windowHeight);
 					for (int i = 0; i < colors.length; i++) {
 						TextUtils.printTextWithImages(new Object[] { i + " - ",
-								new StringWithColor("Color " + i, colors[i]) },
-								200, i * 100 + 200);
+								colors[i] }, 200, i * 100 + 200);
+					}
+				} else if (field.getType().isAssignableFrom(Texture.class)) {
+					// texture
+					QuadUtils.drawQuad(Color.black, 0, Game.windowWidth, 0,
+							Game.windowHeight);
+					for (int i = 0; i < textures.size(); i++) {
+						TextUtils.printTextWithImages(new Object[] { i + " - ",
+								textures.get(i) }, 200, i * 100 + 200);
 					}
 				}
 
@@ -446,6 +468,15 @@ public class Editor {
 							int colorIndex = character - 48;
 							if (colorIndex < colors.length) {
 								field.set(objectToEdit, colors[colorIndex]);
+								stopEditingAttribute();
+							}
+						}
+					} else if (field.getType().isAssignableFrom(Texture.class)) {// texture
+						if (48 <= character && character <= 57) {
+							int textureIndex = character - 48;
+							if (textureIndex < textures.size()) {
+								field.set(objectToEdit,
+										textures.get(textureIndex));
 								stopEditingAttribute();
 							}
 						}
