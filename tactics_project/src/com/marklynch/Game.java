@@ -35,7 +35,7 @@ public class Game {
 
 	public static Square squareMouseIsOver;
 	public static float dragY = -100;
-	public static float dragX = 100;
+	public static float dragX = 300;
 	public static float zoom = 0.8f;
 	public static TrueTypeFont font20;
 

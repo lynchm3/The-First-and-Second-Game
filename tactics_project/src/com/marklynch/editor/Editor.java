@@ -113,12 +113,13 @@ public class Editor {
 		level.factions.get(0).actors.add(actor);
 
 		// TABS
-		final Button levelTabButton = new LevelButton(10, 10, 70, 30, "", "",
-				"LEVEL", true, true);
+		levelTabButton = new LevelButton(10, 10, 70, 30, "", "", "LEVEL", true,
+				true);
 		buttons.add(levelTabButton);
 		levelTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
+				clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
 				depressTabButtons();
 				levelTabButton.down = true;
@@ -127,11 +128,12 @@ public class Editor {
 		};
 		levelTabButton.down = true;
 
-		final Button squaresTabButton = new LevelButton(90, 10, 110, 30, "",
-				"", "SQUARES", true, true);
+		squaresTabButton = new LevelButton(90, 10, 110, 30, "", "", "SQUARES",
+				true, true);
 		squaresTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
+				clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
 				depressTabButtons();
 				squaresTabButton.down = true;
@@ -140,11 +142,12 @@ public class Editor {
 		};
 		buttons.add(squaresTabButton);
 
-		final Button objectsTabButton = new LevelButton(210, 10, 100, 30, "",
-				"", "OBJECTS", true, true);
+		objectsTabButton = new LevelButton(210, 10, 100, 30, "", "", "OBJECTS",
+				true, true);
 		objectsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
+				clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
 				depressTabButtons();
 				objectsTabButton.down = true;
@@ -153,11 +156,12 @@ public class Editor {
 		};
 		buttons.add(objectsTabButton);
 
-		final Button actorsTabButton = new LevelButton(320, 10, 100, 30, "",
-				"", "ACTORS", true, true);
+		actorsTabButton = new LevelButton(320, 10, 100, 30, "", "", "ACTORS",
+				true, true);
 		actorsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
+				clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
 				depressTabButtons();
 				actorsTabButton.down = true;
@@ -166,11 +170,12 @@ public class Editor {
 		};
 		buttons.add(actorsTabButton);
 
-		final Button factionsTabButton = new LevelButton(430, 10, 120, 30, "",
-				"", "FACTIONS", true, true);
+		factionsTabButton = new LevelButton(430, 10, 120, 30, "", "",
+				"FACTIONS", true, true);
 		factionsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
+				clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
 				depressTabButtons();
 				factionsTabButton.down = true;
@@ -319,6 +324,12 @@ public class Editor {
 		System.out.println("gameObjectClicked is " + gameObject);
 		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR
 				|| state == STATE.ADD_OBJECT || state == STATE.SETTINGS_CHANGE) {
+			if (gameObject instanceof Actor) {
+				actorsTabButton.click();
+			} else {
+				objectsTabButton.click();
+			}
+			this.clearSelectedObject();
 			this.selectedGameObject = gameObject;
 			attributesWindow = new AttributesWindow(200, 200, 350,
 					selectedGameObject, this);
@@ -326,9 +337,6 @@ public class Editor {
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.SELECTED_OBJECT) {
 			swapGameObjects(this.selectedGameObject, gameObject);
-			clearSelectedObject();
-			state = STATE.DEFAULT;
-			depressButtonsSettingsAndDetailsButtons();
 		}
 
 	}
@@ -336,6 +344,8 @@ public class Editor {
 	public void squareClicked(Square square) {
 		System.out.println("squareClicked is " + square);
 		if (state == STATE.DEFAULT || state == STATE.SETTINGS_CHANGE) {
+			squaresTabButton.click();
+			this.clearSelectedObject();
 			attributesWindow = new AttributesWindow(200, 200, 350, square, this);
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.ADD_OBJECT) {
@@ -358,8 +368,6 @@ public class Editor {
 			} else {
 				moveGameObject(this.selectedGameObject, square);
 			}
-			clearSelectedObject();
-			state = STATE.DEFAULT;
 		}
 
 	}
