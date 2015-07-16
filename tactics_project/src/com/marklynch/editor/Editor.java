@@ -437,8 +437,7 @@ public class Editor {
 										.add(actor);
 								actor.faction = level.factions
 										.get(factionIndex);
-								this.clearSelectedObject();
-								this.depressButtonsSettingsAndDetailsButtons();
+								stopEditingAttribute();
 							}
 						}
 
@@ -447,8 +446,7 @@ public class Editor {
 							int colorIndex = character - 48;
 							if (colorIndex < colors.length) {
 								field.set(objectToEdit, colors[colorIndex]);
-								this.clearSelectedObject();
-								this.depressButtonsSettingsAndDetailsButtons();
+								stopEditingAttribute();
 							}
 						}
 					}
@@ -465,12 +463,8 @@ public class Editor {
 	public void enterTyped() {
 		if (state == STATE.SETTINGS_CHANGE && settingsButton != null) {
 			settingsButton.enterTyped();
-		} else if (state == STATE.MOVEABLE_OBJECT_SELECTED
-				&& objectToEdit != null) {
-			objectToEdit = null;
-			attributeToEdit = null;
-			this.textEntered = "";
-			attributesWindow.depressButtons();
+		} else if (objectToEdit != null && attributeToEdit != null) {
+			stopEditingAttribute();
 		}
 	}
 
@@ -480,42 +474,34 @@ public class Editor {
 			return;
 		}
 
-		if (state == STATE.MOVEABLE_OBJECT_SELECTED && objectToEdit != null
-				&& textEntered.length() > 0) {
+		if (objectToEdit != null && attributeToEdit != null
+				&& this.textEntered != null && textEntered.length() > 0) {
 			this.textEntered = this.textEntered.substring(0,
 					this.textEntered.length() - 1);
 		}
 
-		if (state == STATE.MOVEABLE_OBJECT_SELECTED && objectToEdit != null
-				&& attributeToEdit != null && this.textEntered != null) {
-			if (objectToEdit instanceof GameObject) {
-				GameObject gameObject = (GameObject) objectToEdit;
+		if (objectToEdit != null && attributeToEdit != null
+				&& this.textEntered != null) {
 
-				Class<? extends GameObject> gameObjectClass = gameObject
-						.getClass();
-				try {
-					Field field = gameObjectClass.getField(attributeToEdit);
+			Class<? extends Object> objectClass = objectToEdit.getClass();
+			try {
+				Field field = objectClass.getField(attributeToEdit);
 
-					if (field.getType().isAssignableFrom(int.class)
-							|| field.getType().isAssignableFrom(float.class)) { // int
-																				// or
-																				// float
-						if (textEntered.length() == 0) {
-							field.set(gameObject, 0);
-						} else {
-							field.set(gameObject,
-									Integer.valueOf(this.textEntered)
-											.intValue());
-						}
-					} else if (field.getType().isAssignableFrom(String.class)) { // string
-						field.set(gameObject, textEntered);
+				if (field.getType().isAssignableFrom(int.class)
+						|| field.getType().isAssignableFrom(float.class)) { // int
+																			// or
+																			// float
+					if (textEntered.length() == 0) {
+						field.set(objectToEdit, 0);
+					} else {
+						field.set(objectToEdit,
+								Integer.valueOf(this.textEntered).intValue());
 					}
-
-					// field.set(gameObject, textEntered);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} else if (field.getType().isAssignableFrom(String.class)) { // string
+					field.set(objectToEdit, textEntered);
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
 		}
@@ -549,6 +535,14 @@ public class Editor {
 		this.attributeButton = null;
 		if (state == STATE.MOVEABLE_OBJECT_SELECTED)
 			state = STATE.DEFAULT;
+	}
+
+	public void stopEditingAttribute() {
+
+		objectToEdit = null;
+		attributeToEdit = null;
+		this.textEntered = "";
+		attributesWindow.depressButtons();
 	}
 
 	public void rightClick() {
