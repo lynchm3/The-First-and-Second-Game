@@ -345,7 +345,7 @@ public class Faction {
 		// 2. pick which is the best
 		ArrayList<Fight> fights = new ArrayList<Fight>();
 		for (Actor actor : bestTargetsBasedOnTurnsToReach) {
-			for (Weapon weapon : level.activeActor.weapons) {
+			for (Weapon weapon : level.activeActor.weapons.weapons) {
 				for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
 					Fight fight = new Fight(level.activeActor, weapon, actor,
 							actor.bestCounterWeapon(level.activeActor, weapon,

@@ -1536,6 +1536,9 @@ public class Notes {
 	 * http://sinisterdesign.net/telepath-tactics
 	 * -brass-tacks-and-sales-stats-part-1/ , this really makes it seem not too
 	 * tough...
+	 * 
+	 * I want a white colored team, and maybe a black colored team, but
+	 * definitely a white colored team
 	 */
 
 }

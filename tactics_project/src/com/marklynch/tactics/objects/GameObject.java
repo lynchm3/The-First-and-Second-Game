@@ -2,6 +2,7 @@ package com.marklynch.tactics.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -14,6 +15,7 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -34,7 +36,7 @@ public class GameObject {
 	public boolean hasAttackedThisTurn = false;
 
 	// Inventory
-	public Vector<Weapon> weapons = new Vector<Weapon>();
+	public Weapons weapons = new Weapons();
 
 	// Interaction with the level
 	public Square squareGameObjectIsOn = null;
@@ -60,7 +62,7 @@ public class GameObject {
 
 	public GameObject(String name, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath,
-			Square squareGameObjectIsOn, Vector<Weapon> weapons, Level level) {
+			Square squareGameObjectIsOn, ArrayList<Weapon> weapons, Level level) {
 		super();
 		this.name = name;
 		this.totalHealth = health;
@@ -79,7 +81,9 @@ public class GameObject {
 		this.downTexture = getGlobalImage("down.png");
 		this.squareGameObjectIsOn = squareGameObjectIsOn;
 		this.squareGameObjectIsOn.gameObject = this;
-		this.weapons = weapons;
+		this.weapons = new Weapons();
+		this.weapons.weapons = weapons;
+		;
 		this.level = level;
 	}
 
@@ -301,7 +305,7 @@ public class GameObject {
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon,
 			float range) {
-		for (Weapon weapon : weapons) {
+		for (Weapon weapon : weapons.weapons) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				return weapon;
 			}

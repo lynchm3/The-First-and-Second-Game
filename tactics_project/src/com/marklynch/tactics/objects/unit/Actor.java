@@ -50,7 +50,7 @@ public class Actor extends GameObject {
 	public Actor(String name, String title, int actorLevel, int health,
 			int strength, int dexterity, int intelligence, int endurance,
 			String imagePath, Square squareActorIsStandingOn,
-			Vector<Weapon> weapons, int travelDistance, Level level) {
+			ArrayList<Weapon> weapons, int travelDistance, Level level) {
 		super(name, health, strength, dexterity, intelligence, endurance,
 				imagePath, squareActorIsStandingOn, weapons, level);
 		this.title = title;
@@ -99,7 +99,7 @@ public class Actor extends GameObject {
 			}
 		}
 
-		for (Weapon weapon : weapons) {
+		for (Weapon weapon : weapons.weapons) {
 			weapon.calculateAttackableSquares(squares);
 		}
 	}
@@ -118,7 +118,7 @@ public class Actor extends GameObject {
 	}
 
 	public boolean hasRange(int weaponDistance) {
-		for (Weapon weapon : weapons) {
+		for (Weapon weapon : weapons.weapons) {
 			if (weaponDistance >= weapon.minRange
 					&& weaponDistance <= weapon.maxRange) {
 				// selectedWeapon = weapon;
@@ -189,7 +189,7 @@ public class Actor extends GameObject {
 		// weird...
 
 		int range = this.weaponDistanceTo(target.squareGameObjectIsOn);
-		for (Weapon weapon : weapons) {
+		for (Weapon weapon : weapons.weapons) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				equippedWeapon = weapon;
 			}
@@ -202,7 +202,7 @@ public class Actor extends GameObject {
 		ArrayList<Weapon> potentialWeaponsToEquip = new ArrayList<Weapon>();
 
 		int range = this.weaponDistanceTo(target.squareGameObjectIsOn);
-		for (Weapon weapon : weapons) {
+		for (Weapon weapon : weapons.weapons) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				potentialWeaponsToEquip.add(weapon);
 			}
@@ -321,9 +321,9 @@ public class Actor extends GameObject {
 				// draw weapon icons on square
 				float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
 				float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
-				for (int i = 0; i < weapons.size(); i++) {
+				for (int i = 0; i < weapons.weapons.size(); i++) {
 
-					Weapon weapon = weapons.get(i);
+					Weapon weapon = weapons.weapons.get(i);
 
 					float weaponPositionXInPixels = 0;
 					float weaponPositionYInPixels = 0;
@@ -936,7 +936,7 @@ public class Actor extends GameObject {
 	public Vector<Float> calculateIdealDistanceFrom(GameObject target) {
 
 		Vector<Fight> fights = new Vector<Fight>();
-		for (Weapon weapon : this.weapons) {
+		for (Weapon weapon : this.weapons.weapons) {
 			for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
 				Fight fight = new Fight(this, weapon, target,
 						target.bestCounterWeapon(this, weapon, range), range);
@@ -959,7 +959,7 @@ public class Actor extends GameObject {
 		this.showHoverFightPreview = true;
 		hoverFightPreviewDefender = defender;
 		hoverFightPreviewFights.clear();
-		for (Weapon weapon : weapons) {
+		for (Weapon weapon : weapons.weapons) {
 			// if (defender.squareGameObjectIsOn.weaponsThatCanAttack
 			// .contains(weapon)) {
 

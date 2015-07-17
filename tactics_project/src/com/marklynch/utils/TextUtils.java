@@ -8,6 +8,8 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.tactics.objects.weapons.Weapons;
 
 public class TextUtils {
 
@@ -100,6 +102,43 @@ public class TextUtils {
 				TextureUtils.drawTexture(gameObject.imageTexture, x, x + 20,
 						posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
+
+			} else if (content instanceof Weapon) {
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
+
+				Weapon weapon = (Weapon) content;
+
+				float textWidth = Game.font20.getWidth(weapon.name);
+				float textureWidth = 20;
+
+				float width = textWidth + textureWidth;
+				if (offsetX + width > maxWidth) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
+				// Name
+				Game.font20.drawString(posX + offsetX, posY + offsetY,
+						weapon.name, Color.gray);
+				offsetX += textWidth;
+
+				// Image
+				float x = posX + offsetX;
+				TextureUtils.drawTexture(weapon.imageTexture, x, x + 20, posY
+						+ offsetY, posY + offsetY + 20);
+				offsetX += textureWidth;
+
+			} else if (content instanceof Weapons) {
+
+				Weapons weapons = (Weapons) content;
+
+				for (Weapon weapon : weapons.weapons) {
+					// Image
+					float x = posX + offsetX;
+					TextureUtils.drawTexture(weapon.imageTexture, x, x + 20,
+							posY + offsetY, posY + offsetY + 20);
+					offsetX += 20;
+				}
 
 			} else if (content instanceof Faction) {
 				GL11.glEnable(GL11.GL_TEXTURE_2D);

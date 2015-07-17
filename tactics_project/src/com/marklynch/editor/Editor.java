@@ -3,7 +3,6 @@ package com.marklynch.editor;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -23,6 +22,7 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -72,6 +72,7 @@ public class Editor {
 	public SettingsWindowButton settingsButton = null;
 
 	public ArrayList<Texture> textures = new ArrayList<Texture>();
+	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 
 	public SelectionWindow selectionWindow;
 
@@ -107,6 +108,14 @@ public class Editor {
 		colors.add(Color.cyan);
 		colors.add(Color.orange);
 
+		// LOAD Weapons// Weapons
+		Weapon weapon0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
+		weapons.add(weapon0);
+		Weapon weapon1 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
+		weapons.add(weapon1);
+		Weapon weapon2 = new Weapon("a5r3", 5, 3, 3, "a2r2.png");
+		weapons.add(weapon2);
+
 		level = new Level(10, 10);
 
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
@@ -120,7 +129,7 @@ public class Editor {
 		// Add a game object
 		GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
 				"skip_with_shadow.png", level.squares[0][3],
-				new Vector<Weapon>(), level);
+				new ArrayList<Weapon>(), level);
 		level.inanimateObjects.add(gameObject);
 		level.squares[0][3].gameObject = gameObject;
 
@@ -129,13 +138,10 @@ public class Editor {
 				level, Color.blue, "faction_blue.png"));
 
 		// Weapons
-		Weapon weapon0ForActor0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
-		Weapon weapon1ForActor0 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
-		Weapon weapon2ForActor0 = new Weapon("a5r3", 5, 3, 3, "a2r2.png");
-		Vector<Weapon> weaponsForActor0 = new Vector<Weapon>();
-		weaponsForActor0.add(weapon0ForActor0);
-		weaponsForActor0.add(weapon1ForActor0);
-		weaponsForActor0.add(weapon2ForActor0);
+		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
+		weaponsForActor0.add(weapon0);
+		weaponsForActor0.add(weapon1);
+		weaponsForActor0.add(weapon2);
 
 		// Add actor
 		Actor actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
@@ -290,7 +296,8 @@ public class Editor {
 					// string
 				} else if (field.getType().isAssignableFrom(Faction.class)
 						|| field.getType().isAssignableFrom(Color.class)
-						|| field.getType().isAssignableFrom(Texture.class)) {
+						|| field.getType().isAssignableFrom(Texture.class)
+						|| field.getType().isAssignableFrom(Weapons.class)) {
 					selectionWindow.draw();
 				}
 
@@ -328,7 +335,8 @@ public class Editor {
 
 				if (field.getType().isAssignableFrom(Faction.class)
 						|| field.getType().isAssignableFrom(Color.class)
-						|| field.getType().isAssignableFrom(Texture.class)) {
+						|| field.getType().isAssignableFrom(Texture.class)
+						|| field.getType().isAssignableFrom(Weapons.class)) {
 					// faction, color, texture
 					return selectionWindow.getButtonFromMousePosition(mouseX,
 							mouseY);
@@ -389,7 +397,8 @@ public class Editor {
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
-					"skip_with_shadow.png", square, new Vector<Weapon>(), level);
+					"skip_with_shadow.png", square, new ArrayList<Weapon>(),
+					level);
 			level.inanimateObjects.add(gameObject);
 			square.gameObject = gameObject;
 			this.objectsSettingsWindow.update();
@@ -397,7 +406,7 @@ public class Editor {
 		} else if (state == STATE.ADD_ACTOR) {
 			// Add actor
 			Actor actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-					"red1.png", square, new Vector<Weapon>(), 4, level);
+					"red1.png", square, new ArrayList<Weapon>(), 4, level);
 			actor.faction = level.factions.get(0);
 			level.factions.get(0).actors.add(actor);
 			square.gameObject = actor;
@@ -528,14 +537,20 @@ public class Editor {
 
 			if (field.getType().isAssignableFrom(Faction.class)) {
 				// faction
-				selectionWindow = new SelectionWindow(level.factions, false,
-						this);
+				selectionWindow = new SelectionWindow(level.factions, null,
+						false, this);
 			} else if (field.getType().isAssignableFrom(Color.class)) {
 				// color
-				selectionWindow = new SelectionWindow(colors, false, this);
+				selectionWindow = new SelectionWindow(colors, null, false, this);
 			} else if (field.getType().isAssignableFrom(Texture.class)) {
 				// texture
-				selectionWindow = new SelectionWindow(textures, false, this);
+				selectionWindow = new SelectionWindow(textures, null, false,
+						this);
+			} else if (field.getType().isAssignableFrom(Weapons.class)) {
+				// weapons
+				Actor actor = (Actor) object;
+				selectionWindow = new SelectionWindow(weapons,
+						actor.weapons.weapons, false, this);
 			}
 
 		} catch (Exception e) {

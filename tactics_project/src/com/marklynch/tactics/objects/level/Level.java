@@ -162,36 +162,36 @@ public class Level {
 		Weapon weapon1ForActor0 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
 		Weapon weapon2ForActor0 = new Weapon("a5r3", 5, 3, 3, "a2r2.png");
 		// Weapon weapon3ForActor0 = new Weapon("a5r3", 5, 3, 3, "a2r2.png");
-		Vector<Weapon> weaponsForActor0 = new Vector<Weapon>();
+		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
 		weaponsForActor0.add(weapon0ForActor0);
 		weaponsForActor0.add(weapon1ForActor0);
 		weaponsForActor0.add(weapon2ForActor0);
 		// weaponsForActor0.add(weapon3ForActor0);
 
 		Weapon weapon0ForActor1 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
-		Vector<Weapon> weaponsForActor1 = new Vector<Weapon>();
+		ArrayList<Weapon> weaponsForActor1 = new ArrayList<Weapon>();
 		weaponsForActor1.add(weapon0ForActor1);
 
 		Weapon weapon0ForActor2 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
-		Vector<Weapon> weaponsForActor2 = new Vector<Weapon>();
+		ArrayList<Weapon> weaponsForActor2 = new ArrayList<Weapon>();
 		weaponsForActor2.add(weapon0ForActor2);
 
 		// Baddy weapons
 		Weapon weapon0ForActor3 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
 		Weapon weapon1ForActor3 = new Weapon("a2r3", 2, 2, 2, "a2r2.png");
-		Vector<Weapon> weaponsForActor3 = new Vector<Weapon>();
+		ArrayList<Weapon> weaponsForActor3 = new ArrayList<Weapon>();
 		weaponsForActor3.add(weapon0ForActor3);
 		weaponsForActor3.add(weapon1ForActor3);
 
 		Weapon weapon0ForActor4 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
 		Weapon weapon1ForActor4 = new Weapon("a2r3", 2, 2, 2, "a2r2.png");
-		Vector<Weapon> weaponsForActor4 = new Vector<Weapon>();
+		ArrayList<Weapon> weaponsForActor4 = new ArrayList<Weapon>();
 		weaponsForActor4.add(weapon0ForActor4);
 		weaponsForActor4.add(weapon1ForActor4);
 
 		// Green Party Weapons
 		Weapon weapon0ForActor5 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
-		Vector<Weapon> weaponsForActor5 = new Vector<Weapon>();
+		ArrayList<Weapon> weaponsForActor5 = new ArrayList<Weapon>();
 		weaponsForActor5.add(weapon0ForActor5);
 
 		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
@@ -230,15 +230,15 @@ public class Level {
 
 		// Game Objects
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", squares[0][3], new Vector<Weapon>(),
+				"skip_with_shadow.png", squares[0][3], new ArrayList<Weapon>(),
 				this));
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"sign.png", squares[1][3], new Vector<Weapon>(), this));
+				"sign.png", squares[1][3], new ArrayList<Weapon>(), this));
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", squares[2][3], new Vector<Weapon>(),
+				"skip_with_shadow.png", squares[2][3], new ArrayList<Weapon>(),
 				this));
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", squares[3][3], new Vector<Weapon>(),
+				"skip_with_shadow.png", squares[3][3], new ArrayList<Weapon>(),
 				this));
 
 		decorations
