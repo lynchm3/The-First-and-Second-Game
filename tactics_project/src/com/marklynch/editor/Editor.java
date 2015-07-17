@@ -29,9 +29,7 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
-import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Editor {
@@ -73,7 +71,7 @@ public class Editor {
 	public AtributesWindowButton attributeButton = null;
 	public SettingsWindowButton settingsButton = null;
 
-	public Vector<Texture> textures = new Vector<Texture>();
+	public ArrayList<Texture> textures = new ArrayList<Texture>();
 
 	public SelectionWindow selectionWindow;
 
@@ -87,8 +85,7 @@ public class Editor {
 
 	public STATE state = STATE.DEFAULT;
 
-	Color[] colors = new Color[] { Color.red, Color.blue, Color.green,
-			Color.magenta, Color.cyan, Color.orange };
+	ArrayList<Color> colors = new ArrayList<Color>();
 
 	public Editor() {
 
@@ -101,6 +98,14 @@ public class Editor {
 				textures.add(texture);
 			}
 		}
+
+		// LOAD COLORS
+		colors.add(Color.blue);
+		colors.add(Color.red);
+		colors.add(Color.green);
+		colors.add(Color.magenta);
+		colors.add(Color.cyan);
+		colors.add(Color.orange);
 
 		level = new Level(10, 10);
 
@@ -283,24 +288,10 @@ public class Editor {
 					// int or float
 				} else if (field.getType().isAssignableFrom(String.class)) {
 					// string
-				} else if (field.getType().isAssignableFrom(Faction.class)) {
+				} else if (field.getType().isAssignableFrom(Faction.class)
+						|| field.getType().isAssignableFrom(Color.class)
+						|| field.getType().isAssignableFrom(Texture.class)) {
 					selectionWindow.draw();
-				} else if (field.getType().isAssignableFrom(Color.class)) {
-					// color
-					QuadUtils.drawQuad(Color.black, 0, Game.windowWidth, 0,
-							Game.windowHeight);
-					for (int i = 0; i < colors.length; i++) {
-						TextUtils.printTextWithImages(new Object[] { i + " - ",
-								colors[i] }, 200, i * 100 + 200);
-					}
-				} else if (field.getType().isAssignableFrom(Texture.class)) {
-					// texture
-					QuadUtils.drawQuad(Color.black, 0, Game.windowWidth, 0,
-							Game.windowHeight);
-					for (int i = 0; i < textures.size(); i++) {
-						TextUtils.printTextWithImages(new Object[] { i + " - ",
-								textures.get(i) }, 200, i * 100 + 200);
-					}
 				}
 
 			} catch (Exception e) {
@@ -335,20 +326,13 @@ public class Editor {
 				Class<? extends Object> objectClass = objectToEdit.getClass();
 				Field field = objectClass.getField(attributeToEdit);
 
-				if (field.getType().isAssignableFrom(Faction.class)) {
-					// faction
+				if (field.getType().isAssignableFrom(Faction.class)
+						|| field.getType().isAssignableFrom(Color.class)
+						|| field.getType().isAssignableFrom(Texture.class)) {
+					// faction, color, texture
 					return selectionWindow.getButtonFromMousePosition(mouseX,
 							mouseY);
 				}
-				// else if (field.getType().isAssignableFrom(Color.class)) {
-				// // color
-				// return colorSelectionWindow.getButtonFromMousePosition(
-				// mouseX, mouseY);
-				// } else if (field.getType().isAssignableFrom(Texture.class)) {
-				// // texture
-				// return textureSelectionWindow.getButtonFromMousePosition(
-				// mouseX, mouseY);
-				// }
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -476,23 +460,6 @@ public class Editor {
 					} else if (field.getType().isAssignableFrom(String.class)) { // string
 						this.textEntered += character;
 						field.set(objectToEdit, textEntered);
-					} else if (field.getType().isAssignableFrom(Color.class)) {// color
-						if (48 <= character && character <= 57) {
-							int colorIndex = character - 48;
-							if (colorIndex < colors.length) {
-								field.set(objectToEdit, colors[colorIndex]);
-								stopEditingAttribute();
-							}
-						}
-					} else if (field.getType().isAssignableFrom(Texture.class)) {// texture
-						if (48 <= character && character <= 57) {
-							int textureIndex = character - 48;
-							if (textureIndex < textures.size()) {
-								field.set(objectToEdit,
-										textures.get(textureIndex));
-								stopEditingAttribute();
-							}
-						}
 					}
 
 				} catch (Exception e) {
@@ -563,16 +530,13 @@ public class Editor {
 				// faction
 				selectionWindow = new SelectionWindow(level.factions, false,
 						this);
+			} else if (field.getType().isAssignableFrom(Color.class)) {
+				// color
+				selectionWindow = new SelectionWindow(colors, false, this);
+			} else if (field.getType().isAssignableFrom(Texture.class)) {
+				// texture
+				selectionWindow = new SelectionWindow(textures, false, this);
 			}
-			// else if (field.getType().isAssignableFrom(Color.class)) {
-			// // color
-			// return colorSelectionWindow.getButtonFromMousePosition(
-			// mouseX, mouseY);
-			// } else if (field.getType().isAssignableFrom(Texture.class)) {
-			// // texture
-			// return textureSelectionWindow.getButtonFromMousePosition(
-			// mouseX, mouseY);
-			// }
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,8 +1,10 @@
 package com.marklynch.editor;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Faction;
@@ -38,13 +40,35 @@ public class SelectionWindow {
 				@Override
 				public void click() {
 
-					// faction
-					Actor actor = (Actor) editor.objectToEdit;
-					Faction faction = (Faction) objects.get(index);
-					actor.faction.actors.remove(actor);
-					faction.actors.add(actor);
-					actor.faction = faction;
-					editor.stopEditingAttribute();
+					try {
+						Class<? extends Object> objectClass = editor.objectToEdit
+								.getClass();
+						Field field = objectClass
+								.getField(editor.attributeToEdit);
+
+						if (field.getType().isAssignableFrom(Faction.class)) {// faction
+
+							Actor actor = (Actor) editor.objectToEdit;
+							Faction faction = (Faction) objects.get(index);
+							actor.faction.actors.remove(actor);
+							faction.actors.add(actor);
+							actor.faction = faction;
+							editor.stopEditingAttribute();
+						} else if (field.getType()
+								.isAssignableFrom(Color.class)) {// color
+							field.set(editor.objectToEdit, objects.get(index));
+							editor.stopEditingAttribute();
+
+						} else if (field.getType().isAssignableFrom(
+								Texture.class)) {// texture
+							field.set(editor.objectToEdit, objects.get(index));
+							editor.stopEditingAttribute();
+
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 
 				}
 			};

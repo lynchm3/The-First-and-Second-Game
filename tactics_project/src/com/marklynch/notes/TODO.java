@@ -1,10 +1,8 @@
 package com.marklynch.notes;
 
 public class TODO {
-
-	// The selection modes need to be buttons, not multiple choice numerical
-	// selection
-	// 2 types - single selection and multiple selection
+	// Selection mode for weapons (multi)
+	// colors tab
 
 	// esc button usage, particularly when ur going full screen
 
