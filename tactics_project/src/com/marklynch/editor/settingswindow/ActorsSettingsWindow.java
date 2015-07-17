@@ -100,7 +100,6 @@ public class ActorsSettingsWindow extends SettingsWindow {
 						editor.selectedGameObject = faction.actors.get(index);
 						editor.attributesWindow = new AttributesWindow(200,
 								200, 350, editor.selectedGameObject, editor);
-						System.out.println("actorButton.click");
 						// getButton(editor.selectedGameObject).down = true;
 						actorButton.down = true;
 					}

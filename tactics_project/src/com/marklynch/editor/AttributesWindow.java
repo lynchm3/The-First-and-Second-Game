@@ -9,6 +9,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -41,6 +42,9 @@ public class AttributesWindow {
 
 	public final static String[] factionFields = { "name", "color" };
 
+	public final static String[] weaponFields = { "name", "imageTexture",
+			"damage", "minRange", "maxRange" };
+
 	String[] fields;
 
 	String title = "";
@@ -62,6 +66,8 @@ public class AttributesWindow {
 			fields = gameObjectFields;
 		} else if (object instanceof Faction) {
 			fields = factionFields;
+		} else if (object instanceof Weapon) {
+			fields = weaponFields;
 		}
 
 		// Title
@@ -79,6 +85,9 @@ public class AttributesWindow {
 		} else if (object instanceof Square) {
 			Square square = (Square) object;
 			title = "Square @ " + square.x + "," + square.y;
+		} else if (object instanceof Weapon) {
+			Weapon weapon = (Weapon) object;
+			title = "Weapon " + editor.weapons.indexOf(weapon);
 		}
 
 		// Attribute buttons
@@ -109,12 +118,14 @@ public class AttributesWindow {
 		if (object instanceof Actor) {
 			final Actor actor = (Actor) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (i + 1) * 30, 200, 30, actor, "delete", true, true,
+					0 + (i + 2) * 30, 200, 30, actor, "delete", true, true,
 					this);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
 				public void click() {
+
+					System.out.println("delete");
 					int actorCount = 0;
 					for (Faction faction : editor.level.factions) {
 						actorCount += faction.actors.size();
@@ -132,7 +143,7 @@ public class AttributesWindow {
 		} else if (object instanceof GameObject) {
 			final GameObject gameObject = (GameObject) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (i + 1) * 30, 200, 30, gameObject, "delete", true,
+					0 + (i + 2) * 30, 200, 30, gameObject, "delete", true,
 					true, this);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
@@ -148,7 +159,7 @@ public class AttributesWindow {
 		} else if (object instanceof Faction) {
 			final Faction faction = (Faction) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (i + 1) * 30, 200, 30, faction, "delete", true, true,
+					0 + (i + 2) * 30, 200, 30, faction, "delete", true, true,
 					this);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
@@ -171,6 +182,32 @@ public class AttributesWindow {
 					editor.settingsWindow.update();
 				}
 			});
+		} else if (object instanceof Weapon) {
+			final Weapon weapon = (Weapon) object;
+			final AtributesWindowButton button = new AtributesWindowButton(0,
+					0 + (i + 2) * 30, 200, 30, weapon, "delete", true, true,
+					this);
+			buttons.add(button);
+			button.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+
+					if (editor.level.factions.size() == 1)
+						return;
+
+					depressButtons();
+					for (Faction faction : editor.level.factions) {
+						for (Actor actor : faction.actors) {
+							if (actor.weapons.weapons.contains(weapon))
+								actor.weapons.weapons.remove(weapon);
+						}
+					}
+					editor.weapons.remove(weapon);
+					editor.clearSelectedObject();
+					editor.weaponsSettingsWindow.updateWeaponsButtons();
+					editor.settingsWindow.update();
+				}
+			});
 		}
 	}
 
@@ -180,7 +217,7 @@ public class AttributesWindow {
 		TextUtils.printTextWithImages(new Object[] { new StringWithColor(title,
 				Color.black) }, x, y);
 
-		for (Button button : buttons) {
+		for (AtributesWindowButton button : buttons) {
 			button.draw();
 		}
 	}

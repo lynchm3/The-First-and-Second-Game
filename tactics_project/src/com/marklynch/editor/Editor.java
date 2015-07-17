@@ -16,6 +16,7 @@ import com.marklynch.editor.settingswindow.LevelSettingsWindow;
 import com.marklynch.editor.settingswindow.ObjectsSettingsWindow;
 import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
+import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
@@ -39,6 +40,8 @@ public class Editor {
 	// trigger, weapon,
 	// level, squares
 
+	public AttributesWindow attributesWindow;
+
 	Button levelTabButton;
 	Button squaresTabButton;
 	Button objectsTabButton;
@@ -48,6 +51,14 @@ public class Editor {
 	Button scriptEventsTabButton;
 	Button scriptTriggersTabButton;
 
+	public SettingsWindow settingsWindow;
+	public LevelSettingsWindow levelSettingsWindow;
+	public SquaresSettingsWindow squaresSettingsWindow;
+	public ObjectsSettingsWindow objectsSettingsWindow;
+	public ActorsSettingsWindow actorsSettingsWindow;
+	public FactionsSettingsWindow factionsSettingsWindow;
+	public WeaponsSettingsWindow weaponsSettingsWindow;
+
 	// Button addFactionButton;
 	// Button addObjectButton;
 	// Button addActorButton;
@@ -55,15 +66,6 @@ public class Editor {
 	public Level level;
 
 	public GameObject selectedGameObject;
-
-	public AttributesWindow attributesWindow;
-
-	public SettingsWindow settingsWindow;
-	public LevelSettingsWindow levelSettingsWindow;
-	public SquaresSettingsWindow squaresSettingsWindow;
-	public ObjectsSettingsWindow objectsSettingsWindow;
-	public ActorsSettingsWindow actorsSettingsWindow;
-	public FactionsSettingsWindow factionsSettingsWindow;
 
 	public Object objectToEdit = null;
 	public String attributeToEdit = "";
@@ -123,6 +125,7 @@ public class Editor {
 		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);
 		actorsSettingsWindow = new ActorsSettingsWindow(200, this);
 		factionsSettingsWindow = new FactionsSettingsWindow(200, this);
+		weaponsSettingsWindow = new WeaponsSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -225,6 +228,21 @@ public class Editor {
 			}
 		};
 		buttons.add(factionsTabButton);
+
+		weaponsTabButton = new LevelButton(560, 10, 120, 30, "", "", "WEAPONS",
+				true, true);
+		weaponsTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				weaponsTabButton.down = true;
+				settingsWindow = weaponsSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		buttons.add(weaponsTabButton);
 
 	}
 
@@ -354,7 +372,7 @@ public class Editor {
 		}
 
 		if (attributesWindow != null) {
-			for (Button button : attributesWindow.buttons) {
+			for (AtributesWindowButton button : attributesWindow.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX,
 						Game.windowHeight - mouseY))
 					return button;
@@ -592,7 +610,6 @@ public class Editor {
 	}
 
 	public void depressButtonsSettingsAndDetailsButtons() {
-		System.out.println("depressButtonsSettingsAndDetailsButtons()");
 		settingsWindow.depressButtons();
 		if (attributesWindow != null)
 			attributesWindow.depressButtons();

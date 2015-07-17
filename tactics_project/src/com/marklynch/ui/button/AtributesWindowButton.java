@@ -14,7 +14,7 @@ public class AtributesWindowButton extends Button {
 	boolean xFromLeft;
 	boolean yFromTop;
 	AttributesWindow attributesWindow;
-	Object object;
+	public Object object;
 	String attribute;
 
 	public AtributesWindowButton(float x, float y, float width, float height,
@@ -71,6 +71,25 @@ public class AtributesWindowButton extends Button {
 						field.get(object) }, realX, realY);
 			}
 		} catch (Exception e) {
+			if (enabled) {
+				if (down) {
+					QuadUtils.drawQuad(Color.green, realX, realX + width,
+							realY, realY + height);
+					TextUtils.printTextWithImages(new Object[] { attribute },
+							realX, realY);
+				} else {
+					QuadUtils.drawQuad(Color.blue, realX, realX + width, realY,
+							realY + height);
+					TextUtils.printTextWithImages(new Object[] { attribute },
+							realX, realY);
+				}
+			} else {
+
+				QuadUtils.drawQuad(Color.red, realX, realX + width, realY,
+						realY + height);
+				TextUtils.printTextWithImages(new Object[] { attribute },
+						realX, realY);
+			}
 		}
 
 	}

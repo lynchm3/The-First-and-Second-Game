@@ -1,12 +1,13 @@
 package com.marklynch.notes;
 
 public class TODO {
-	// Weapons tab
-	// Selection mode for weapons (multi)
-	// colors tab
-	// TextUtils for weapons
 
-	// decorations tab (will need boolean)
+	// attributes delete weapon button
+	// Weapons tab
+	// colors tab
+
+	// decorations tab (will need boolean), anchor the decorations to a square i
+	// think...
 
 	// esc button usage, particularly when ur going full screen
 
