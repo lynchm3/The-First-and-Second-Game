@@ -2,7 +2,6 @@ package com.marklynch.editor.settingswindow;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;
-import com.marklynch.editor.Editor.STATE;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -119,7 +118,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 		};
 		buttons.add(heightButton);
 
-		// Height Button
+		// Play lvl Button
 		final SettingsWindowButton playLevelButton = new SettingsWindowButton(
 				0, 300, 200, 30, "Play Level", true, true, this) {
 

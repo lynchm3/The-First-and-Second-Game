@@ -99,6 +99,9 @@ public class Characters {
 	 * someone with a dog
 	 * 
 	 * someone in a wheelchair
+	 * 
+	 * Base characters on real life people... look up who the joker was based
+	 * on...
 	 */
 
 }

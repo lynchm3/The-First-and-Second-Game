@@ -56,6 +56,7 @@ public class Level {
 
 	public LevelButton endTurnButton;
 	public LevelButton undoButton;
+	public LevelButton editorButton;
 	public ArrayList<Button> buttons = new ArrayList<Button>();
 
 	public boolean showTurnNotification = true;
@@ -102,6 +103,23 @@ public class Level {
 		});
 		undoButton.enabled = false;
 		buttons.add(undoButton);
+		editorButton = new LevelButton(630f, 110f, 200f, 100f,
+				"undo_button.png", "undo_button_disabled.png", "EDITOR", false,
+				false);
+		editorButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.editorMode = true;
+				clearDialogs();
+				// right click
+				if (activeActor != null) {
+					activeActor.unselected();
+					activeActor = null;
+				}
+			}
+		});
+		editorButton.enabled = true;
+		buttons.add(editorButton);
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
 		font60 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 60);
 
