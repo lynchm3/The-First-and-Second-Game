@@ -11,6 +11,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.editor.settingswindow.ActorsSettingsWindow;
+import com.marklynch.editor.settingswindow.ColorSettingsWindow;
 import com.marklynch.editor.settingswindow.FactionsSettingsWindow;
 import com.marklynch.editor.settingswindow.LevelSettingsWindow;
 import com.marklynch.editor.settingswindow.ObjectsSettingsWindow;
@@ -46,6 +47,7 @@ public class Editor {
 	Button squaresTabButton;
 	Button objectsTabButton;
 	Button factionsTabButton;
+	Button colorsTabButton;
 	Button actorsTabButton;
 	Button weaponsTabButton;
 	Button scriptEventsTabButton;
@@ -58,6 +60,7 @@ public class Editor {
 	public ActorsSettingsWindow actorsSettingsWindow;
 	public FactionsSettingsWindow factionsSettingsWindow;
 	public WeaponsSettingsWindow weaponsSettingsWindow;
+	public ColorSettingsWindow colorsSettingsWindow;
 
 	// Button addFactionButton;
 	// Button addObjectButton;
@@ -88,7 +91,7 @@ public class Editor {
 
 	public STATE state = STATE.DEFAULT;
 
-	ArrayList<Color> colors = new ArrayList<Color>();
+	public ArrayList<Color> colors = new ArrayList<Color>();
 
 	public Editor() {
 
@@ -103,12 +106,12 @@ public class Editor {
 		}
 
 		// LOAD COLORS
-		colors.add(Color.blue);
-		colors.add(Color.red);
-		colors.add(Color.green);
-		colors.add(Color.magenta);
-		colors.add(Color.cyan);
-		colors.add(Color.orange);
+		colors.add(new Color(Color.blue));
+		colors.add(new Color(Color.red));
+		colors.add(new Color(Color.green));
+		colors.add(new Color(Color.magenta));
+		colors.add(new Color(Color.cyan));
+		colors.add(new Color(Color.orange));
 
 		// LOAD Weapons// Weapons
 		Weapon weapon0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
@@ -126,6 +129,7 @@ public class Editor {
 		actorsSettingsWindow = new ActorsSettingsWindow(200, this);
 		factionsSettingsWindow = new FactionsSettingsWindow(200, this);
 		weaponsSettingsWindow = new WeaponsSettingsWindow(200, this);
+		colorsSettingsWindow = new ColorSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -243,6 +247,21 @@ public class Editor {
 			}
 		};
 		buttons.add(weaponsTabButton);
+
+		colorsTabButton = new LevelButton(700, 10, 120, 30, "", "", "COLORS",
+				true, true);
+		colorsTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				colorsTabButton.down = true;
+				settingsWindow = colorsSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		buttons.add(colorsTabButton);
 
 	}
 

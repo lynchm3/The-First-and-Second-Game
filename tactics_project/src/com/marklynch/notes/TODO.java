@@ -2,9 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// attributes delete weapon button
-	// Weapons tab
 	// colors tab
+
+	// color delete button... hmmmmmmm.............. keep minimum to one
+	// color... if faction has color... put them at color(0) after the delete
 
 	// decorations tab (will need boolean), anchor the decorations to a square i
 	// think...

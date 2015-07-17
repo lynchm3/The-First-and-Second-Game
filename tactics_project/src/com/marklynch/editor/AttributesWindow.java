@@ -45,6 +45,8 @@ public class AttributesWindow {
 	public final static String[] weaponFields = { "name", "imageTexture",
 			"damage", "minRange", "maxRange" };
 
+	public final static String[] colorFields = { "r", "g", "b", "a" };
+
 	String[] fields;
 
 	String title = "";
@@ -68,6 +70,8 @@ public class AttributesWindow {
 			fields = factionFields;
 		} else if (object instanceof Weapon) {
 			fields = weaponFields;
+		} else if (object instanceof Color) {
+			fields = colorFields;
 		}
 
 		// Title
@@ -80,14 +84,14 @@ public class AttributesWindow {
 			title = "Object @ " + gameObject.squareGameObjectIsOn.x + ","
 					+ gameObject.squareGameObjectIsOn.y;
 		} else if (object instanceof Faction) {
-			Faction faction = (Faction) object;
-			title = "Faction " + editor.level.factions.indexOf(faction);
+			title = "Faction " + editor.level.factions.indexOf(object);
 		} else if (object instanceof Square) {
 			Square square = (Square) object;
 			title = "Square @ " + square.x + "," + square.y;
 		} else if (object instanceof Weapon) {
-			Weapon weapon = (Weapon) object;
-			title = "Weapon " + editor.weapons.indexOf(weapon);
+			title = "Weapon " + editor.weapons.indexOf(object);
+		} else if (object instanceof Color) {
+			title = "Color " + editor.colors.indexOf(object);
 		}
 
 		// Attribute buttons
