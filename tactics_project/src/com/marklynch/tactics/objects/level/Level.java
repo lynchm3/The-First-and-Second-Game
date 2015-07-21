@@ -40,30 +40,30 @@ public class Level {
 	public int height;
 	public GameCursor gameCursor;
 	// public Vector<Actor> actors;
-	public Actor activeActor;
+	public transient Actor activeActor;
 	public Vector<GameObject> inanimateObjects;
-	public Vector<Dialog> dialogs;
+	public transient Vector<Dialog> dialogs;
 	public Square[][] squares;
 	public Vector<Decoration> decorations;
-	public int turn = 1;
-	public TrueTypeFont font12;
-	public TrueTypeFont font60;
+	public transient int turn = 1;
+	public transient TrueTypeFont font12;
+	public transient TrueTypeFont font60;
 	public ArrayList<Faction> factions;
-	public Faction currentFactionMoving;
-	public int currentFactionMovingIndex;
-	public Vector<ActivityLog> logs = new Vector<ActivityLog>();
-	public Stack<Move> undoList = new Stack<Move>();
+	public transient Faction currentFactionMoving;
+	public transient int currentFactionMovingIndex;
+	public transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
+	public transient Stack<Move> undoList = new Stack<Move>();
 
-	public LevelButton endTurnButton;
-	public LevelButton undoButton;
-	public LevelButton editorButton;
-	public ArrayList<Button> buttons = new ArrayList<Button>();
+	public transient LevelButton endTurnButton;
+	public transient LevelButton undoButton;
+	public transient LevelButton editorButton;
+	public transient ArrayList<Button> buttons = new ArrayList<Button>();
 
-	public boolean showTurnNotification = true;
-	public boolean waitingForPlayerClick = true;
+	public transient boolean showTurnNotification = true;
+	public transient boolean waitingForPlayerClick = true;
 
-	public Script script;
-	public boolean ended = false;
+	public transient Script script;
+	public transient boolean ended = false;
 
 	// java representation of a grid??
 	// 2d array?

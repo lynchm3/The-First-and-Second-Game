@@ -27,25 +27,25 @@ public class Actor extends GameObject {
 
 	public String title = "";
 	public int actorLevel = 1;
-	public int distanceMovedThisTurn = 0;
+	public transient int distanceMovedThisTurn = 0;
 	public int travelDistance = 4;
-	public Weapon equippedWeapon = null;
-	public boolean showWeaponButtons = false;
+	public transient Weapon equippedWeapon = null;
+	public transient boolean showWeaponButtons = false;
 
 	// buttons
-	public ArrayList<Button> buttons = new ArrayList<Button>();
-	public AttackButton attackButton = null;
-	public AttackButton pushButton = null;
-	public float buttonsAnimateCurrentTime = 0f;
-	public float buttonsAnimateMaxTime = 200f;
+	public transient ArrayList<Button> buttons = new ArrayList<Button>();
+	public transient AttackButton attackButton = null;
+	public transient AttackButton pushButton = null;
+	public transient float buttonsAnimateCurrentTime = 0f;
+	public transient float buttonsAnimateMaxTime = 200f;
 
 	// weapon buttons
-	public ArrayList<Button> weaponButtons = new ArrayList<Button>();
+	public transient ArrayList<Button> weaponButtons = new ArrayList<Button>();
 
 	// Fight preview on hover
-	public boolean showHoverFightPreview = false;
-	public GameObject hoverFightPreviewDefender = null;
-	public Vector<Fight> hoverFightPreviewFights = new Vector<Fight>();
+	public transient boolean showHoverFightPreview = false;
+	public transient GameObject hoverFightPreviewDefender = null;
+	public transient Vector<Fight> hoverFightPreviewFights = new Vector<Fight>();
 
 	public Actor(String name, String title, int actorLevel, int health,
 			int strength, int dexterity, int intelligence, int endurance,

@@ -6,8 +6,8 @@ import com.marklynch.utils.ResourceUtils;
 
 public abstract class Button {
 
-	public Texture enabledTexture;
-	public Texture disabledTexture;
+	public transient Texture enabledTexture;
+	public transient Texture disabledTexture;
 	public float x, y, width, height;
 	public boolean enabled = true;
 	public boolean down = false;

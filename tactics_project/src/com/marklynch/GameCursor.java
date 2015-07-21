@@ -6,12 +6,12 @@ import org.newdawn.slick.opengl.Texture;
 
 public class GameCursor {
 
-	public Texture imageTexture = null;
-	public Texture imageTexture2 = null;
-	public Texture imageTexture3 = null;
-	public Texture imageTexture4 = null;
-	public Texture cursor = null;
-	public Texture circle = null;
+	public transient Texture imageTexture = null;
+	public transient Texture imageTexture2 = null;
+	public transient Texture imageTexture3 = null;
+	public transient Texture imageTexture4 = null;
+	public transient Texture cursor = null;
+	public transient Texture circle = null;
 
 	public GameCursor() {
 		this.imageTexture = getGlobalImage("highlight.png");

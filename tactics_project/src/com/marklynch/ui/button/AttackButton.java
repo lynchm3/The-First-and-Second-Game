@@ -4,7 +4,7 @@ import com.marklynch.tactics.objects.level.Level;
 
 public class AttackButton extends ActorButton {
 
-	Level level;
+	public transient Level level;
 
 	public AttackButton(int x, int y, int width, int height,
 			String enabledTexturePath, String disabledTexturePath, Level level) {

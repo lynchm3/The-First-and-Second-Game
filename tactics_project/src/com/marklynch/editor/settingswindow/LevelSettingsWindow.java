@@ -1,5 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
+import com.google.gson.Gson;
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;
 import com.marklynch.ui.button.ClickListener;
@@ -150,6 +151,94 @@ public class LevelSettingsWindow extends SettingsWindow {
 			}
 		};
 		buttons.add(playLevelButton);
+
+		// Save lvl Button
+		final SettingsWindowButton saveLevelButton = new SettingsWindowButton(
+				0, 400, 200, 30, "Save Level", true, true, this) {
+
+			@Override
+			public void keyTyped(char character) {
+			}
+
+			@Override
+			public void enterTyped() {
+			}
+
+			@Override
+			public void backTyped() {
+			}
+
+			@Override
+			public void depress() {
+			}
+		};
+		saveLevelButton.clickListener = new ClickListener() {
+
+			@Override
+			public void click() {
+				Gson gson = new Gson();
+				String levelJson = gson.toJson(editor.level);
+				System.out.println(levelJson);
+
+				// I HAVE REMOVED
+				// GameObject.level
+				// Faction.level
+				// Square.level
+				// AttackButton.level
+				// WeaponButton.level
+				//
+				// All Textures, so I need to hang on to their URL
+				//
+				// Square.gameObject
+				//
+				// GameObject.faction
+
+				// ISSUES
+				// GAMEOBJECT <-> SQUARE
+				// Faction.relationships
+
+				// Transiented the shit out of
+				// Square.java
+				// GameObject.java
+				// Faction.java
+				// Actor.java
+				// Level.java
+
+				// SO... saving the game..... Like... mid game..... :/
+				// Saving at the start of the turn should be fine... but
+				// mid-turn???
+
+			}
+		};
+		buttons.add(saveLevelButton);
+
+		// Load lvl Button
+		final SettingsWindowButton loadLevelButton = new SettingsWindowButton(
+				0, 500, 200, 30, "Play Level", true, true, this) {
+
+			@Override
+			public void keyTyped(char character) {
+			}
+
+			@Override
+			public void enterTyped() {
+			}
+
+			@Override
+			public void backTyped() {
+			}
+
+			@Override
+			public void depress() {
+			}
+		};
+		loadLevelButton.clickListener = new ClickListener() {
+
+			@Override
+			public void click() {
+			}
+		};
+		buttons.add(loadLevelButton);
 
 		//
 		// playLevelButton = new LevelButton(50, 650, 100, 50, "", "",

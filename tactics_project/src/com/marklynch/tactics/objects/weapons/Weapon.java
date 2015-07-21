@@ -18,7 +18,7 @@ public class Weapon {
 
 	// image
 	public String imagePath = "";
-	public Texture imageTexture = null;
+	public transient Texture imageTexture = null;
 	public String name;
 
 	public Weapon(String name, int damage, int minRange, int maxRange,

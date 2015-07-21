@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// SAVE LEVEL
+	// LOAD LEVEL
+
 	// colors tab
 
 	// color delete button... hmmmmmmm.............. keep minimum to one

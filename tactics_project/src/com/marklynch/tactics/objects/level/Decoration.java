@@ -8,7 +8,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class Decoration {
 
-	public Texture imageTexture = null;
+	public transient Texture imageTexture = null;
 	public float x, y, width, height;
 	boolean background;
 

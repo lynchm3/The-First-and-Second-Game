@@ -39,11 +39,11 @@ public class Faction {
 	 */
 	public Map<Faction, Integer> relationships = new HashMap<Faction, Integer>();
 	public Vector<Actor> actors = new Vector<Actor>();
-	public Level level;
+	public transient Level level;
 
-	public Actor currentActor;
-	public int currentActorIndex = 0;
-	public Texture imageTexture = null;
+	public transient Actor currentActor;
+	public transient int currentActorIndex = 0;
+	public transient Texture imageTexture = null;
 
 	public Color color;
 
@@ -51,9 +51,9 @@ public class Faction {
 		SELECT, MOVE, ATTACK
 	};
 
-	public STAGE currentStage = STAGE.SELECT;
-	public int timeAtCurrentStage = 0;
-	public final int STAGE_DURATION = 1000;
+	public transient STAGE currentStage = STAGE.SELECT;
+	public transient int timeAtCurrentStage = 0;
+	public transient final int STAGE_DURATION = 1000;
 
 	public Faction(String name, Level level, Color color, String imagePath) {
 		this.name = name;

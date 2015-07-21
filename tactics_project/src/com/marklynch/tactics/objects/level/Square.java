@@ -22,22 +22,22 @@ public class Square {
 	public final int y;
 	public final int elevation;
 	public int travelCost;
-	public boolean reachableBySelectedCharater = false;
-	public boolean inPath = false;
-	public Vector<Weapon> weaponsThatCanAttack = new Vector<Weapon>();
+	public transient boolean reachableBySelectedCharater = false;
+	public transient boolean inPath = false;
+	public transient Vector<Weapon> weaponsThatCanAttack = new Vector<Weapon>();
 
 	// image
 	public String imagePath;
-	public Texture imageTexture = null;
-	public GameObject gameObject = null;
-	public Vector<Dialog> dialogs;
+	public transient Texture imageTexture = null;
+	public transient GameObject gameObject = null;
+	public transient Vector<Dialog> dialogs;
 
-	public boolean showingDialogs = false;
-	public int distanceToSquare = Integer.MAX_VALUE;
+	public transient boolean showingDialogs = false;
+	public transient int distanceToSquare = Integer.MAX_VALUE;
 
-	public static PathComparator pathComparator;
+	public transient static PathComparator pathComparator;
 
-	Level level;
+	public transient Level level;
 
 	public Square(int x, int y, String imagePath, int travelCost,
 			int elevation, Level level) {

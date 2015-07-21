@@ -21,7 +21,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class GameObject {
 
-	public Level level;
+	public transient Level level;
 
 	public String name = "";
 
@@ -33,7 +33,7 @@ public class GameObject {
 	public float totalHealth = 0;
 	public float remainingHealth = 0;
 
-	public boolean hasAttackedThisTurn = false;
+	public transient boolean hasAttackedThisTurn = false;
 
 	// Inventory
 	public Weapons weapons = new Weapons();
@@ -42,23 +42,23 @@ public class GameObject {
 	public Square squareGameObjectIsOn = null;
 
 	// images
-	public Texture imageTexture = null;
-	public Texture powTexture = null;
-	public Texture vsTexture = null;
-	public Texture fightTexture = null;
-	public Texture skullTexture = null;
-	public Texture xTexture = null;
-	public Texture upTexture = null;
-	public Texture downTexture = null;
+	public transient Texture imageTexture = null;
+	public transient Texture powTexture = null;
+	public transient Texture vsTexture = null;
+	public transient Texture fightTexture = null;
+	public transient Texture skullTexture = null;
+	public transient Texture xTexture = null;
+	public transient Texture upTexture = null;
+	public transient Texture downTexture = null;
 
 	// paths
-	public HashMap<Square, Path> paths = new HashMap<Square, Path>();
+	public transient HashMap<Square, Path> paths = new HashMap<Square, Path>();
 
 	// POW
-	public GameObject powTarget = null;
-	public boolean showPow = false;
+	public transient GameObject powTarget = null;
+	public transient boolean showPow = false;
 
-	public Faction faction;
+	public transient Faction faction;
 
 	public GameObject(String name, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath,
