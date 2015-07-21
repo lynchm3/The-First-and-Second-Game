@@ -41,8 +41,11 @@ public class GameObject {
 	// Interaction with the level
 	public Square squareGameObjectIsOn = null;
 
-	// images
+	// image
 	public transient Texture imageTexture = null;
+	public String imagePath = null;
+
+	// images
 	public transient Texture powTexture = null;
 	public transient Texture vsTexture = null;
 	public transient Texture fightTexture = null;
@@ -71,6 +74,16 @@ public class GameObject {
 		this.dexterity = dexterity;
 		this.intelligence = intelligence;
 		this.endurance = endurance;
+		this.imagePath = imagePath;
+		this.squareGameObjectIsOn = squareGameObjectIsOn;
+		this.squareGameObjectIsOn.gameObject = this;
+		this.weapons = new Weapons();
+		this.weapons.weapons = weapons;
+		this.level = level;
+		loadImages();
+	}
+
+	public void loadImages() {
 		this.imageTexture = getGlobalImage(imagePath);
 		this.powTexture = getGlobalImage("pow.png");
 		this.vsTexture = getGlobalImage("vs.png");
@@ -79,12 +92,16 @@ public class GameObject {
 		this.xTexture = getGlobalImage("x.png");
 		this.upTexture = getGlobalImage("up.png");
 		this.downTexture = getGlobalImage("down.png");
-		this.squareGameObjectIsOn = squareGameObjectIsOn;
-		this.squareGameObjectIsOn.gameObject = this;
-		this.weapons = new Weapons();
-		this.weapons.weapons = weapons;
-		;
+		for (Weapon weapon : this.weapons.weapons) {
+			weapon.loadImages();
+		}
+	}
+
+	public void postLoad(Level level, Faction faction) {
 		this.level = level;
+		this.faction = faction;
+		this.squareGameObjectIsOn = level.squares[this.squareGameObjectIsOn.x][this.squareGameObjectIsOn.y];
+		this.squareGameObjectIsOn.gameObject = this;
 	}
 
 	public void draw() {

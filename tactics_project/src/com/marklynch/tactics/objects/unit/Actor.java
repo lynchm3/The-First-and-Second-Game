@@ -8,6 +8,7 @@ import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
@@ -33,14 +34,14 @@ public class Actor extends GameObject {
 	public transient boolean showWeaponButtons = false;
 
 	// buttons
-	public transient ArrayList<Button> buttons = new ArrayList<Button>();
+	public transient ArrayList<Button> buttons;
 	public transient AttackButton attackButton = null;
 	public transient AttackButton pushButton = null;
 	public transient float buttonsAnimateCurrentTime = 0f;
 	public transient float buttonsAnimateMaxTime = 200f;
 
 	// weapon buttons
-	public transient ArrayList<Button> weaponButtons = new ArrayList<Button>();
+	public transient ArrayList<Button> weaponButtons;
 
 	// Fight preview on hover
 	public transient boolean showHoverFightPreview = false;
@@ -56,6 +57,8 @@ public class Actor extends GameObject {
 		this.title = title;
 		this.actorLevel = actorLevel;
 		this.travelDistance = travelDistance;
+		buttons = new ArrayList<Button>();
+		weaponButtons = new ArrayList<Button>();
 
 		this.attackButton = new AttackButton(0, 0, 50, 50, "attack.png",
 				"attack.png", level);
@@ -67,7 +70,30 @@ public class Actor extends GameObject {
 		buttons.add(pushButton);
 		attackButton.enabled = true;
 
-		for (Weapon weapon : weapons) {
+		for (Weapon weapon : this.weapons.weapons) {
+			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath,
+					weapon.imagePath, level, weapon));
+		}
+	}
+
+	@Override
+	public void postLoad(Level level, Faction faction) {
+
+		super.postLoad(level, faction);
+
+		buttons = new ArrayList<Button>();
+		weaponButtons = new ArrayList<Button>();
+		this.attackButton = new AttackButton(0, 0, 50, 50, "attack.png",
+				"attack.png", level);
+
+		this.pushButton = new AttackButton(0, 0, 50, 50, "push.png",
+				"push.png", level);
+
+		buttons.add(attackButton);
+		buttons.add(pushButton);
+		attackButton.enabled = true;
+
+		for (Weapon weapon : this.weapons.weapons) {
 			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath,
 					weapon.imagePath, level, weapon));
 		}

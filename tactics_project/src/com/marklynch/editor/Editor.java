@@ -35,6 +35,9 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Editor {
+
+	public String json = null;
+
 	public ArrayList<Button> buttons = new ArrayList<Button>();
 
 	// faction, actors, object, scriptevent, script

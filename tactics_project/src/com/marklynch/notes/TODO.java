@@ -5,6 +5,8 @@ public class TODO {
 	// SAVE LEVEL
 	// LOAD LEVEL
 
+	// put decorations in to the save
+
 	// colors tab
 
 	// color delete button... hmmmmmmm.............. keep minimum to one

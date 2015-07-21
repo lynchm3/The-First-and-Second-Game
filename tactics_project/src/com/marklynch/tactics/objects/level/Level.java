@@ -44,20 +44,20 @@ public class Level {
 	public Vector<GameObject> inanimateObjects;
 	public transient Vector<Dialog> dialogs;
 	public Square[][] squares;
-	public Vector<Decoration> decorations;
+	public transient Vector<Decoration> decorations;
 	public transient int turn = 1;
 	public transient TrueTypeFont font12;
 	public transient TrueTypeFont font60;
 	public ArrayList<Faction> factions;
 	public transient Faction currentFactionMoving;
 	public transient int currentFactionMovingIndex;
-	public transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
-	public transient Stack<Move> undoList = new Stack<Move>();
+	public transient Vector<ActivityLog> logs;
+	public transient Stack<Move> undoList;
 
 	public transient LevelButton endTurnButton;
 	public transient LevelButton undoButton;
 	public transient LevelButton editorButton;
-	public transient ArrayList<Button> buttons = new ArrayList<Button>();
+	public transient ArrayList<Button> buttons;
 
 	public transient boolean showTurnNotification = true;
 	public transient boolean waitingForPlayerClick = true;
@@ -74,15 +74,17 @@ public class Level {
 		squares = new Square[width][height];
 		initGrid(this.squares, this.width, this.height);
 
+		logs = new Vector<ActivityLog>();
+		undoList = new Stack<Move>();
+		buttons = new ArrayList<Button>();
+		dialogs = new Vector<Dialog>();
+		decorations = new Vector<Decoration>();
+		gameCursor = new GameCursor();
+		script = new Script(new Vector<ScriptEvent>());
+
 		factions = new ArrayList<Faction>();
 		inanimateObjects = new Vector<GameObject>();
-		decorations = new Vector<Decoration>();
-		script = new Script(new Vector<ScriptEvent>());
-		gameCursor = new GameCursor();
 
-		// initObjects();
-
-		dialogs = new Vector<Dialog>();
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f,
 				"end_turn_button.png", "end_turn_button.png", "END TURN",
 				false, false);
@@ -123,6 +125,87 @@ public class Level {
 		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
 		font60 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 60);
 
+	}
+
+	public void postLoad() {
+		logs = new Vector<ActivityLog>();
+		undoList = new Stack<Move>();
+		buttons = new ArrayList<Button>();
+		dialogs = new Vector<Dialog>();
+		decorations = new Vector<Decoration>();
+		gameCursor = new GameCursor();
+		script = new Script(new Vector<ScriptEvent>());
+
+		endTurnButton = new LevelButton(210f, 110f, 200f, 100f,
+				"end_turn_button.png", "end_turn_button.png", "END TURN",
+				false, false);
+		endTurnButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.endTurn();
+			}
+		});
+		buttons.add(endTurnButton);
+		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png",
+				"undo_button_disabled.png", "UNDO", false, false);
+		undoButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.undo();
+			}
+		});
+		undoButton.enabled = false;
+		buttons.add(undoButton);
+		editorButton = new LevelButton(630f, 110f, 200f, 100f,
+				"undo_button.png", "undo_button_disabled.png", "EDITOR", false,
+				false);
+		editorButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.editorMode = true;
+				clearDialogs();
+				// right click
+				if (activeActor != null) {
+					activeActor.unselected();
+					activeActor = null;
+				}
+			}
+		});
+		editorButton.enabled = true;
+		buttons.add(editorButton);
+		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
+		font60 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 60);
+
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				squares[i][j].postLoad(this);
+			}
+		}
+
+		for (GameObject inanimateObject : inanimateObjects) {
+			inanimateObject.postLoad(this, null);
+		}
+
+		for (Faction faction : factions) {
+			faction.postLoad(this);
+		}
+
+	}
+
+	public void loadImages() {
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				squares[i][j].loadImages();
+			}
+		}
+
+		for (GameObject inanimateObject : inanimateObjects) {
+			inanimateObject.loadImages();
+		}
+
+		for (Faction faction : factions) {
+			faction.loadImages();
+		}
 	}
 
 	private void initGrid(Square[][] squares, int width, int height) {

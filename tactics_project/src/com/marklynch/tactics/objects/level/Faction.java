@@ -43,6 +43,8 @@ public class Faction {
 
 	public transient Actor currentActor;
 	public transient int currentActorIndex = 0;
+
+	public String imagePath = null;
 	public transient Texture imageTexture = null;
 
 	public Color color;
@@ -59,7 +61,22 @@ public class Faction {
 		this.name = name;
 		this.level = level;
 		this.color = color;
+		this.imagePath = imagePath;
+		loadImages();
+	}
+
+	public void loadImages() {
 		this.imageTexture = getGlobalImage(imagePath);
+		for (Actor actor : actors) {
+			actor.loadImages();
+		}
+	}
+
+	public void postLoad(Level level) {
+		this.level = level;
+		for (Actor actor : actors) {
+			actor.postLoad(level, this);
+		}
 	}
 
 	public void update(int delta) {

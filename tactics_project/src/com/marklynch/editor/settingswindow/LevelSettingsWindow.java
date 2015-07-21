@@ -3,6 +3,7 @@ package com.marklynch.editor.settingswindow;
 import com.google.gson.Gson;
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;
+import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -177,8 +178,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 				Gson gson = new Gson();
-				String levelJson = gson.toJson(editor.level);
-				System.out.println(levelJson);
+				editor.json = gson.toJson(editor.level);
+				System.out.println(editor.json);
 
 				// I HAVE REMOVED
 				// GameObject.level
@@ -208,13 +209,15 @@ public class LevelSettingsWindow extends SettingsWindow {
 				// Saving at the start of the turn should be fine... but
 				// mid-turn???
 
+				// Theres also Editor.stuff I want to save too...
+
 			}
 		};
 		buttons.add(saveLevelButton);
 
 		// Load lvl Button
 		final SettingsWindowButton loadLevelButton = new SettingsWindowButton(
-				0, 500, 200, 30, "Play Level", true, true, this) {
+				0, 500, 200, 30, "Load Level", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -236,6 +239,15 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
+				if (editor.json != null) {
+					Gson gson = new Gson();
+					Level level = gson.fromJson(editor.json, Level.class);
+					editor.level = level;
+
+					editor.level.postLoad();
+					editor.level.loadImages();
+
+				}
 			}
 		};
 		buttons.add(loadLevelButton);

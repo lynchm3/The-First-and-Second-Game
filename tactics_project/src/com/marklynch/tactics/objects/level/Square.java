@@ -24,7 +24,7 @@ public class Square {
 	public int travelCost;
 	public transient boolean reachableBySelectedCharater = false;
 	public transient boolean inPath = false;
-	public transient Vector<Weapon> weaponsThatCanAttack = new Vector<Weapon>();
+	public transient Vector<Weapon> weaponsThatCanAttack;
 
 	// image
 	public String imagePath;
@@ -45,11 +45,23 @@ public class Square {
 		this.x = x;
 		this.y = y;
 		this.imagePath = imagePath;
-		this.imageTexture = getGlobalImage(imagePath);
 		this.travelCost = travelCost;
-		this.dialogs = new Vector<Dialog>();
 		this.elevation = elevation;
 		this.level = level;
+		loadImages();
+		weaponsThatCanAttack = new Vector<Weapon>();
+		dialogs = new Vector<Dialog>();
+	}
+
+	public void loadImages() {
+		this.imageTexture = getGlobalImage(imagePath);
+
+	}
+
+	public void postLoad(Level level) {
+		this.level = level;
+		weaponsThatCanAttack = new Vector<Weapon>();
+		dialogs = new Vector<Dialog>();
 	}
 
 	public void draw(Level level) {
@@ -150,6 +162,7 @@ public class Square {
 		// GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
+
 		TextureUtils.drawTexture(level.gameCursor.cursor, squarePositionX,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
 				squarePositionY + Game.SQUARE_HEIGHT);

@@ -29,6 +29,10 @@ public class Weapon {
 		this.minRange = minRange;
 		this.maxRange = maxRange;
 		this.imagePath = imagePath;
+		loadImages();
+	}
+
+	public void loadImages() {
 		this.imageTexture = getGlobalImage(imagePath);
 	}
 
