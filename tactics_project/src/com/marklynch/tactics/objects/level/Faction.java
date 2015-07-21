@@ -74,6 +74,8 @@ public class Faction {
 
 	public void postLoad(Level level) {
 		this.level = level;
+		this.color = new Color(this.color.r, this.color.g, this.color.b,
+				this.color.a);
 		for (Actor actor : actors) {
 			actor.postLoad(level, this);
 		}
