@@ -2,10 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// SAVE LEVEL
-	// LOAD LEVEL
+	// Save and load to disk ;)
 
 	// put decorations in to the save
+
+	// could use the save/load functionality to make a undo/redo process :D
+
+	// colors need to be handled better in the save/load process
 
 	// colors tab
 
