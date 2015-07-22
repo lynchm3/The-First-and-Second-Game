@@ -6,6 +6,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
@@ -26,13 +27,15 @@ public class TextUtils {
 
 		for (Object content : contents) {
 			if (content instanceof String || content instanceof StringWithColor
-					|| content instanceof Integer || content instanceof Float) {
+					|| content instanceof Integer || content instanceof Float
+					|| content instanceof Boolean) {
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 				String string = null;
 				Color color = Color.white;
 
-				if (content instanceof Integer || content instanceof Float) {
+				if (content instanceof Integer || content instanceof Float
+						|| content instanceof Boolean) {
 					string = "" + content;
 				} else if (content instanceof String) {
 					string = (String) content;
@@ -163,6 +166,32 @@ public class TextUtils {
 				float x = posX + offsetX;
 				TextureUtils.drawTexture(faction.imageTexture, x, x + 20, posY
 						+ offsetY, posY + offsetY + 20);
+				offsetX += textureWidth;
+
+			} else if (content instanceof Decoration) {
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
+				Decoration decoration = (Decoration) content;
+
+				float textWidth = Game.font20.getWidth(decoration.name);
+				float textureWidth = 20;
+
+				float width = textWidth + textureWidth;
+				if (offsetX + width > maxWidth) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
+				// Name
+
+				Game.font20.drawString(posX + offsetX, posY + offsetY,
+						decoration.name, Color.white);
+				offsetX += textWidth;
+
+				// Image
+
+				float x = posX + offsetX;
+				TextureUtils.drawTexture(decoration.imageTexture, x, x + 20,
+						posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 
 			} else if (content instanceof Color) {

@@ -12,6 +12,7 @@ import org.newdawn.slick.opengl.Texture;
 import com.marklynch.Game;
 import com.marklynch.editor.settingswindow.ActorsSettingsWindow;
 import com.marklynch.editor.settingswindow.ColorSettingsWindow;
+import com.marklynch.editor.settingswindow.DecorationsSettingsWindow;
 import com.marklynch.editor.settingswindow.FactionsSettingsWindow;
 import com.marklynch.editor.settingswindow.LevelSettingsWindow;
 import com.marklynch.editor.settingswindow.ObjectsSettingsWindow;
@@ -53,6 +54,7 @@ public class Editor {
 	Button colorsTabButton;
 	Button actorsTabButton;
 	Button weaponsTabButton;
+	Button decorationsTabButton;
 	Button scriptEventsTabButton;
 	Button scriptTriggersTabButton;
 
@@ -63,6 +65,7 @@ public class Editor {
 	public ActorsSettingsWindow actorsSettingsWindow;
 	public FactionsSettingsWindow factionsSettingsWindow;
 	public WeaponsSettingsWindow weaponsSettingsWindow;
+	public DecorationsSettingsWindow decorationsSettingsWindow;
 	public ColorSettingsWindow colorsSettingsWindow;
 
 	// Button addFactionButton;
@@ -132,6 +135,7 @@ public class Editor {
 		actorsSettingsWindow = new ActorsSettingsWindow(200, this);
 		factionsSettingsWindow = new FactionsSettingsWindow(200, this);
 		weaponsSettingsWindow = new WeaponsSettingsWindow(200, this);
+		decorationsSettingsWindow = new DecorationsSettingsWindow(200, this);
 		colorsSettingsWindow = new ColorSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
@@ -251,7 +255,7 @@ public class Editor {
 		};
 		buttons.add(weaponsTabButton);
 
-		colorsTabButton = new LevelButton(700, 10, 120, 30, "", "", "COLORS",
+		colorsTabButton = new LevelButton(690, 10, 120, 30, "", "", "COLORS",
 				true, true);
 		colorsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -265,6 +269,21 @@ public class Editor {
 			}
 		};
 		buttons.add(colorsTabButton);
+
+		decorationsTabButton = new LevelButton(10, 50, 160, 30, "", "",
+				"DECORATIONS", true, true);
+		decorationsTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				decorationsTabButton.down = true;
+				settingsWindow = decorationsSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		buttons.add(decorationsTabButton);
 
 	}
 
@@ -591,6 +610,11 @@ public class Editor {
 				Actor actor = (Actor) object;
 				selectionWindow = new SelectionWindow(weapons,
 						actor.weapons.weapons, true, this);
+			} else if (field.getType().isAssignableFrom(boolean.class)) {
+				boolean b = (boolean) field.get(objectToEdit);
+				field.set(objectToEdit, !b);
+				settingsWindow.update();
+				stopEditingAttribute();
 			}
 
 		} catch (Exception e) {

@@ -6,6 +6,7 @@ import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -47,6 +48,9 @@ public class AttributesWindow {
 
 	public final static String[] colorFields = { "r", "g", "b", "a" };
 
+	public final static String[] decorationFields = { "name", "x", "y",
+			"width", "height", "imageTexture", "background" };
+
 	String[] fields;
 
 	String title = "";
@@ -72,6 +76,8 @@ public class AttributesWindow {
 			fields = weaponFields;
 		} else if (object instanceof Color) {
 			fields = colorFields;
+		} else if (object instanceof Decoration) {
+			fields = decorationFields;
 		}
 
 		// Title
@@ -92,6 +98,8 @@ public class AttributesWindow {
 			title = "Weapon " + editor.weapons.indexOf(object);
 		} else if (object instanceof Color) {
 			title = "Color " + editor.colors.indexOf(object);
+		} else if (object instanceof Decoration) {
+			title = "Decoration...";
 		}
 
 		// Attribute buttons
@@ -195,9 +203,6 @@ public class AttributesWindow {
 				@Override
 				public void click() {
 
-					if (editor.level.factions.size() == 1)
-						return;
-
 					depressButtons();
 					for (Faction faction : editor.level.factions) {
 						for (Actor actor : faction.actors) {
@@ -208,6 +213,21 @@ public class AttributesWindow {
 					editor.weapons.remove(weapon);
 					editor.clearSelectedObject();
 					editor.weaponsSettingsWindow.updateWeaponsButtons();
+					editor.settingsWindow.update();
+				}
+			});
+		} else if (object instanceof Decoration) {
+			final AtributesWindowButton button = new AtributesWindowButton(0,
+					0 + (i + 2) * 30, 200, 30, object, "delete", true, true,
+					this);
+			buttons.add(button);
+			button.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+					depressButtons();
+					editor.level.decorations.remove(object);
+					editor.clearSelectedObject();
+					editor.decorationsSettingsWindow.updateDecorationsButtons();
 					editor.settingsWindow.update();
 				}
 			});

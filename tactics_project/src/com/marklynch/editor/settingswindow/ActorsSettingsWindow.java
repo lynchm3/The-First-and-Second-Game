@@ -8,13 +8,13 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
 public class ActorsSettingsWindow extends SettingsWindow {
-	SettingsWindowButton addActorButton;
+	SettingsWindowButton addActorsButton;
 
 	public ActorsSettingsWindow(float width, final Editor editor) {
 		super(width, editor);
 
-		addActorButton = new SettingsWindowButton(0, 100, 200, 30, "ADD ACTOR",
-				true, true, this) {
+		addActorsButton = new SettingsWindowButton(0, 100, 200, 30,
+				"ADD ACTORS", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -36,17 +36,17 @@ public class ActorsSettingsWindow extends SettingsWindow {
 
 		};
 
-		addActorButton.clickListener = new ClickListener() {
+		addActorsButton.clickListener = new ClickListener() {
 
 			@Override
 			public void click() {
 
-				addActorButton.down = !addActorButton.down;
-				if (addActorButton.down) {
+				addActorsButton.down = !addActorsButton.down;
+				if (addActorsButton.down) {
 					ActorsSettingsWindow.this.editor
 							.depressButtonsSettingsAndDetailsButtons();
 					ActorsSettingsWindow.this.editor.clearSelectedObject();
-					addActorButton.down = true;
+					addActorsButton.down = true;
 					ActorsSettingsWindow.this.editor.state = STATE.ADD_ACTOR;
 				} else {
 					ActorsSettingsWindow.this.editor.state = STATE.DEFAULT;
@@ -60,7 +60,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 
 		buttons.clear();
 
-		buttons.add(addActorButton);
+		buttons.add(addActorsButton);
 
 		int buttonCount = 0;
 		for (final Faction faction : editor.level.factions) {

@@ -328,9 +328,9 @@ public class Level {
 				"skip_with_shadow.png", squares[3][3], new ArrayList<Weapon>(),
 				this));
 
-		decorations
-				.add(new Decoration(300f, 240f, 28f, 28f, false, "sign.png"));
-		decorations.add(new Decoration(468f, 200f, 28f, 28f, true,
+		decorations.add(new Decoration("dec0", 300f, 240f, 28f, 28f, false,
+				"sign.png"));
+		decorations.add(new Decoration("dec1", 468f, 200f, 28f, 28f, true,
 				"skip_with_shadow.png"));
 
 		// Script

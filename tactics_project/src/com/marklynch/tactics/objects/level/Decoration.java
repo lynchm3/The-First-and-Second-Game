@@ -8,20 +8,23 @@ import com.marklynch.utils.TextureUtils;
 
 public class Decoration {
 
+	public String name;
 	public String imagePath;
 	public transient Texture imageTexture = null;
 	public float x, y, width, height;
-	boolean background;
+	public boolean background;
 
-	public Decoration(float x, float y, float width, float height,
+	public Decoration(String name, float x, float y, float width, float height,
 			boolean background, String imagePath) {
 		super();
+		this.name = name;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.background = background;
 		this.imagePath = imagePath;
+		loadImages();
 	}
 
 	public void loadImages() {

@@ -7,13 +7,13 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
 public class ObjectsSettingsWindow extends SettingsWindow {
-	SettingsWindowButton addObjectButton;
+	SettingsWindowButton addObjectsButton;
 
 	public ObjectsSettingsWindow(float width, Editor editor) {
 		super(width, editor);
 
-		addObjectButton = new SettingsWindowButton(0, 100, 200, 30,
-				"ADD OBJECT", true, true, this) {
+		addObjectsButton = new SettingsWindowButton(0, 100, 200, 30,
+				"ADD OBJECTS", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -35,16 +35,16 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 
 		};
 
-		addObjectButton.clickListener = new ClickListener() {
+		addObjectsButton.clickListener = new ClickListener() {
 
 			@Override
 			public void click() {
-				addObjectButton.down = !addObjectButton.down;
-				if (addObjectButton.down) {
+				addObjectsButton.down = !addObjectsButton.down;
+				if (addObjectsButton.down) {
 					ObjectsSettingsWindow.this.editor
 							.depressButtonsSettingsAndDetailsButtons();
 					ObjectsSettingsWindow.this.editor.clearSelectedObject();
-					addObjectButton.down = true;
+					addObjectsButton.down = true;
 					ObjectsSettingsWindow.this.editor.state = STATE.ADD_OBJECT;
 				} else {
 					ObjectsSettingsWindow.this.editor.state = STATE.DEFAULT;
@@ -58,7 +58,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 
 		buttons.clear();
 
-		buttons.add(addObjectButton);
+		buttons.add(addObjectsButton);
 
 		for (int i = 0; i < editor.level.inanimateObjects.size(); i++) {
 			final int index = i;

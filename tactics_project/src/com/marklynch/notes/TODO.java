@@ -2,15 +2,23 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// After a load - images, colors, weapons wont line up... weapons is the big
+	// one coz its multiple selection...
+
+	// Cant change colours coz of the attributes bit assuming everything is an
+	// int :D
+
+	// change to the imagetexture wont save :D it doesnt update the imagepath,
+	// just the texture
+
+	// highlight decorations when selected in the list
+
+	// When u tap an actor again the square is selected
+
 	// Play around with sounds
 
 	// Put in some opengl 2d particle effects/ water effects/ special effects, i
 	// dunno, give it a google
-
-	// Selection window is FUCKED. wepaons is working, but faction, texture,
-	// color are fucked
-
-	// decorations on the editor screen
 
 	// could use the save/load functionality to make a undo/redo process in the
 	// editor :D
