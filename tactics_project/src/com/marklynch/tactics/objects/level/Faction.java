@@ -8,8 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import mdesl.graphics.Texture;
+
 import org.newdawn.slick.Color;
-import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;

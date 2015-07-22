@@ -1,10 +1,10 @@
 package com.marklynch.ui;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+import mdesl.graphics.Texture;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
@@ -56,8 +56,8 @@ public class Dialog {
 		GL11.glTexCoord2f(0, 0);
 		GL11.glVertex2f(positionXInPixels + 5, positionYInPixels + 5);
 		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(positionXInPixels - 64 * Game.zoom,
-				positionYInPixels - 64 * Game.zoom);
+		GL11.glVertex2f(positionXInPixels - 64 * Game.zoom, positionYInPixels
+				- 64 * Game.zoom);
 		GL11.glEnd();
 
 		// GL11.glLineWidth(1.0f);

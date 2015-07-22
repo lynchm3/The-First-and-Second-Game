@@ -4,10 +4,11 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import mdesl.graphics.Texture;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.editor.settingswindow.ActorsSettingsWindow;

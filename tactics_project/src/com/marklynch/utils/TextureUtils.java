@@ -1,7 +1,10 @@
 package com.marklynch.utils;
 
+import mdesl.graphics.Texture;
+
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
+
+import com.marklynch.tactics.objects.GameObject;
 
 public class TextureUtils {
 
@@ -86,22 +89,36 @@ public class TextureUtils {
 
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, alpha);
-		texture.bind();
-		GL11.glBegin(GL11.GL_QUADS);
 
-		GL11.glTexCoord2f(textureX1, textureY1);
-		GL11.glVertex2f(vertexX1, vertexY1);
+		// start our batch
+		GameObject.batch.begin();
 
-		GL11.glTexCoord2f(textureX2, textureY1);
-		GL11.glVertex2f(vertexX2, vertexY1);
+		// draw some sprites... they will all be affected by our shaders
+		// batch.draw(tex, 10, 10);
+		GameObject.batch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1,
+				vertexY2 - vertexY1);
 
-		GL11.glTexCoord2f(textureX2, textureY2);
-		GL11.glVertex2f(vertexX2, vertexY2);
+		// end our batch
+		GameObject.batch.end();
 
-		GL11.glTexCoord2f(textureX1, textureY2);
-		GL11.glVertex2f(vertexX1, vertexY2);
-
-		GL11.glEnd();
+		// GL11.glEnable(GL11.GL_TEXTURE_2D);
+		// GL11.glColor4f(1.0f, 1.0f, 1.0f, alpha);
+		// texture.bind();
+		// GL11.glBegin(GL11.GL_QUADS);
+		//
+		// GL11.glTexCoord2f(textureX1, textureY1);
+		// GL11.glVertex2f(vertexX1, vertexY1);
+		//
+		// GL11.glTexCoord2f(textureX2, textureY1);
+		// GL11.glVertex2f(vertexX2, vertexY1);
+		//
+		// GL11.glTexCoord2f(textureX2, textureY2);
+		// GL11.glVertex2f(vertexX2, vertexY2);
+		//
+		// GL11.glTexCoord2f(textureX1, textureY2);
+		// GL11.glVertex2f(vertexX1, vertexY2);
+		//
+		// GL11.glEnd();
 
 	}
 

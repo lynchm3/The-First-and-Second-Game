@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
+import mdesl.graphics.Texture;
+import mdesl.test.Util;
+
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class ResourceUtils {
@@ -31,8 +32,9 @@ public class ResourceUtils {
 		if (texture != null) {
 		} else {
 			try {
-				texture = TextureLoader.getTexture("PNG", ResourceLoader
-						.getResourceAsStream("res/images/" + path));
+				texture = new mdesl.graphics.Texture(
+						Util.getResource("res/images/" + path),
+						mdesl.graphics.Texture.NEAREST);
 				globalImages.put(path, texture);
 			} catch (Exception e) {
 				// e.printStackTrace();

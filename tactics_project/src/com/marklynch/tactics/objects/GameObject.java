@@ -2,11 +2,15 @@ package com.marklynch.tactics.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
-import org.newdawn.slick.opengl.Texture;
+import mdesl.graphics.SpriteBatch;
+import mdesl.graphics.Texture;
+import mdesl.graphics.glutils.ShaderProgram;
+import mdesl.test.Util;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Faction;
@@ -83,6 +87,9 @@ public class GameObject {
 		loadImages();
 	}
 
+	public static SpriteBatch batch;
+	mdesl.graphics.Texture tex;
+
 	public void loadImages() {
 		this.imageTexture = getGlobalImage(imagePath);
 		this.powTexture = getGlobalImage("pow.png");
@@ -95,6 +102,42 @@ public class GameObject {
 		for (Weapon weapon : this.weapons.weapons) {
 			weapon.loadImages();
 		}
+
+		// // this will be ignored in this lesson...
+		try {
+			tex = new mdesl.graphics.Texture(Util.getResource("res/images/"
+					+ imagePath), mdesl.graphics.Texture.NEAREST);
+		} catch (IOException e) {
+			throw new RuntimeException("couldn't decode texture");
+		}
+
+		// load our shader program and sprite batch
+		try {
+			final String VERTEX = Util
+					.readFile(Util
+							.getResourceAsStream("res/shadertut/base_shader_vertex.vert"));
+			final String FRAGMENT = Util
+					.readFile(Util
+							.getResourceAsStream("res/shadertut/base_shader_fragment.frag"));
+
+			// create our shader program -- be sure to pass SpriteBatch's
+			// default attributes!
+			ShaderProgram program = new ShaderProgram(VERTEX, FRAGMENT,
+					SpriteBatch.ATTRIBUTES);
+
+			// Good idea to log any warnings if they exist
+			if (program.getLog().length() != 0)
+				System.out.println(program.getLog());
+
+			// create our sprite batch
+			batch = new SpriteBatch(program);// THIS LINE TURNS THE WHOLE
+												// FUCKING SCREEN RED...
+		} catch (Exception e) {
+			// simple exception handling...
+			e.printStackTrace();
+			System.exit(0);
+		}
+
 	}
 
 	public void postLoad(Level level, Faction faction) {

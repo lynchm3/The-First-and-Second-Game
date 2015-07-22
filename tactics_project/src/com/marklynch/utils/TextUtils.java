@@ -1,8 +1,9 @@
 package com.marklynch.utils;
 
+import mdesl.graphics.Texture;
+
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;

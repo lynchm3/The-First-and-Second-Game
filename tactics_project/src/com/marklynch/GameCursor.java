@@ -1,8 +1,7 @@
 package com.marklynch;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
-
-import org.newdawn.slick.opengl.Texture;
+import mdesl.graphics.Texture;
 
 public class GameCursor {
 

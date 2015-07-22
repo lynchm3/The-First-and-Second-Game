@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Upgrading to another opengl lib that sits on top of lwjgl... got textures
+	// working, but not shapes and text and scaling and translating :',D
+
 	// After a load - images, colors, weapons wont line up... weapons is the big
 	// one coz its multiple selection...
 

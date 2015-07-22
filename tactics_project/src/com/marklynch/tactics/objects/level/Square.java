@@ -5,9 +5,10 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.Comparator;
 import java.util.Vector;
 
+import mdesl.graphics.Texture;
+
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;

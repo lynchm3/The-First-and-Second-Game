@@ -1,5 +1,7 @@
 package com.marklynch;
 
+import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
@@ -82,6 +84,8 @@ public class Game {
 				GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1,
 						-1);
 				GL11.glMatrixMode(GL11.GL_MODELVIEW);
+
+				GL11.glDisable(GL_DEPTH_TEST);
 			}
 
 			if (!paused)

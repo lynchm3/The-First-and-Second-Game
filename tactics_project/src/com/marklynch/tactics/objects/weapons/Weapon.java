@@ -4,7 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.Vector;
 
-import org.newdawn.slick.opengl.Texture;
+import mdesl.graphics.Texture;
 
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;

@@ -1,6 +1,6 @@
 package com.marklynch.ui.button;
 
-import org.newdawn.slick.opengl.Texture;
+import mdesl.graphics.Texture;
 
 import com.marklynch.utils.ResourceUtils;
 
