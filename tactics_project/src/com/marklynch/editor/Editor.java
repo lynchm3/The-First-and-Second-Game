@@ -590,7 +590,7 @@ public class Editor {
 				// weapons
 				Actor actor = (Actor) object;
 				selectionWindow = new SelectionWindow(weapons,
-						actor.weapons.weapons, false, this);
+						actor.weapons.weapons, true, this);
 			}
 
 		} catch (Exception e) {

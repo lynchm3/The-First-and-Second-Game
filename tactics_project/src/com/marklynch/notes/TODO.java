@@ -2,6 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Play around with sounds
+
+	// Put in some opengl 2d particle effects/ water effects/ special effects, i
+	// dunno, give it a google
+
 	// Selection window is FUCKED. wepaons is working, but faction, texture,
 	// color are fucked
 

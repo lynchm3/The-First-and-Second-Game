@@ -39,7 +39,8 @@ public class SelectionWindow<T> {
 
 			final SelectionWindowButton selectionWindowButton = new SelectionWindowButton(
 					x, y, 190, 30, null, null, "", true, true, objects.get(i));
-			if (selectedObjects.contains(objects.get(i)))
+			if (multi && selectedObjects != null
+					&& selectedObjects.contains(objects.get(i)))
 				selectionWindowButton.down = true;
 
 			selectionWindowButton.clickListener = new ClickListener() {
