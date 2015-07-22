@@ -3,6 +3,8 @@ package com.marklynch.notes;
 public class Technical {
 
 	/*
+	 * Experiment with unknowns early on to save headaches
+	 * (saving/loading/screen size change/android)
 	 * 
 	 * com.utils.LoadedResources split in to global images, level images... then
 	 * clear the level images after each level but no need to remove the globals

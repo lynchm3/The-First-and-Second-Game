@@ -6,6 +6,7 @@ import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
+import com.marklynch.utils.FileUtils;
 
 public class LevelSettingsWindow extends SettingsWindow {
 
@@ -178,8 +179,9 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 				Gson gson = new Gson();
-				editor.json = gson.toJson(editor.level);
-				System.out.println(editor.json);
+				String json = gson.toJson(editor.level);
+				// System.out.println(editor.json);
+				FileUtils.saveFile(json);
 
 				// I HAVE REMOVED
 				// GameObject.level
@@ -239,14 +241,15 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				if (editor.json != null) {
-					Gson gson = new Gson();
-					Level level = gson.fromJson(editor.json, Level.class);
+				Gson gson = new Gson();
+				String json = FileUtils.openFile();
+				// System.out.println(editor.json);
+				// FileUtils.saveFile(json);
+				if (json != null) {
+					Level level = gson.fromJson(json, Level.class);
 					editor.level = level;
-
 					editor.level.postLoad();
 					editor.level.loadImages();
-
 				}
 			}
 		};
