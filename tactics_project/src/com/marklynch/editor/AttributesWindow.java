@@ -129,7 +129,6 @@ public class AttributesWindow {
 				@Override
 				public void click() {
 
-					System.out.println("delete");
 					int actorCount = 0;
 					for (Faction faction : editor.level.factions) {
 						actorCount += faction.actors.size();

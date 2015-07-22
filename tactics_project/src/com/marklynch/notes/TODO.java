@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Selection window is FUCKED. wepaons is working, but faction, texture,
+	// color are fucked
+
 	// decorations on the editor screen
 
 	// could use the save/load functionality to make a undo/redo process in the

@@ -88,9 +88,6 @@ public class TextUtils {
 				// Name
 				if (gameObject instanceof Actor) {
 					Actor actor = (Actor) gameObject;
-
-					System.out.println("actor.faction.color = "
-							+ actor.faction.color);
 					Game.font20.drawString(posX + offsetX, posY + offsetY,
 							gameObject.name, actor.faction.color);
 				} else {
@@ -156,9 +153,6 @@ public class TextUtils {
 				}
 
 				// Name
-
-				System.out.println("faction.name = " + faction.name);
-				System.out.println("faction.color = " + faction.color);
 
 				Game.font20.drawString(posX + offsetX, posY + offsetY,
 						faction.name, faction.color);
