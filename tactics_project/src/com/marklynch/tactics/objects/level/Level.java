@@ -44,7 +44,7 @@ public class Level {
 	public Vector<GameObject> inanimateObjects;
 	public transient Vector<Dialog> dialogs;
 	public Square[][] squares;
-	public transient Vector<Decoration> decorations;
+	public Vector<Decoration> decorations;
 	public transient int turn = 1;
 	public transient TrueTypeFont font12;
 	public transient TrueTypeFont font60;
@@ -205,6 +205,10 @@ public class Level {
 
 		for (Faction faction : factions) {
 			faction.loadImages();
+		}
+
+		for (Decoration decoration : decorations) {
+			decoration.loadImages();
 		}
 	}
 

@@ -2,11 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Save and load to disk ;)
+	// decorations on the editor screen
 
-	// put decorations in to the save
-
-	// could use the save/load functionality to make a undo/redo process :D
+	// could use the save/load functionality to make a undo/redo process in the
+	// editor :D
 
 	// colors need to be handled better in the save/load process
 
