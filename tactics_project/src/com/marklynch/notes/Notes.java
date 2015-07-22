@@ -1539,6 +1539,10 @@ public class Notes {
 	 * 
 	 * I want a white colored team, and maybe a black colored team, but
 	 * definitely a white colored team
+	 * 
+	 * Use the term war crimes somewhere - sniper elite 3 calls its side
+	 * missions "war crimes", what other terms are cool at the moment?
+	 * whistleblower. Could have a whistleblower character
 	 */
 
 }

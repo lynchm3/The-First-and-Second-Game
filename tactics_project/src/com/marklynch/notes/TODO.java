@@ -5,7 +5,8 @@ public class TODO {
 	// After a load - images, colors, weapons wont line up... weapons is the big
 	// one coz its multiple selection...
 
-	// Cant change colours coz of the attributes bit assuming everything is an
+	// Cant change the rgba of colours coz of the attributes bit assuming
+	// everything is an
 	// int :D
 
 	// change to the imagetexture wont save :D it doesnt update the imagepath,
