@@ -2,7 +2,7 @@ package com.marklynch.ui.button;
 
 import java.lang.reflect.Field;
 
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
 
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
@@ -49,14 +49,14 @@ public class AtributesWindowButton extends Button {
 			Field field = objectClass.getField(attribute);
 			if (enabled) {
 				if (down) {
-					QuadUtils.drawQuad(Color.green, realX, realX + width,
+					QuadUtils.drawQuad(Color.GREEN, realX, realX + width,
 							realY, realY + height);
 					TextUtils
 							.printTextWithImages(new Object[] {
 									attribute + ": ", field.get(object) },
 									realX, realY);
 				} else {
-					QuadUtils.drawQuad(Color.blue, realX, realX + width, realY,
+					QuadUtils.drawQuad(Color.BLUE, realX, realX + width, realY,
 							realY + height);
 					TextUtils
 							.printTextWithImages(new Object[] {
@@ -65,7 +65,7 @@ public class AtributesWindowButton extends Button {
 				}
 			} else {
 
-				QuadUtils.drawQuad(Color.red, realX, realX + width, realY,
+				QuadUtils.drawQuad(Color.RED, realX, realX + width, realY,
 						realY + height);
 				TextUtils.printTextWithImages(new Object[] { attribute + ": ",
 						field.get(object) }, realX, realY);
@@ -73,19 +73,19 @@ public class AtributesWindowButton extends Button {
 		} catch (Exception e) {
 			if (enabled) {
 				if (down) {
-					QuadUtils.drawQuad(Color.green, realX, realX + width,
+					QuadUtils.drawQuad(Color.GREEN, realX, realX + width,
 							realY, realY + height);
 					TextUtils.printTextWithImages(new Object[] { attribute },
 							realX, realY);
 				} else {
-					QuadUtils.drawQuad(Color.blue, realX, realX + width, realY,
+					QuadUtils.drawQuad(Color.BLUE, realX, realX + width, realY,
 							realY + height);
 					TextUtils.printTextWithImages(new Object[] { attribute },
 							realX, realY);
 				}
 			} else {
 
-				QuadUtils.drawQuad(Color.red, realX, realX + width, realY,
+				QuadUtils.drawQuad(Color.RED, realX, realX + width, realY,
 						realY + height);
 				TextUtils.printTextWithImages(new Object[] { attribute },
 						realX, realY);

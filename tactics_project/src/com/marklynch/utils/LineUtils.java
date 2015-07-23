@@ -1,7 +1,8 @@
 package com.marklynch.utils;
 
+import mdesl.graphics.Color;
+
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
 

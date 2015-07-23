@@ -3,7 +3,8 @@ package com.marklynch.editor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
+
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
@@ -98,7 +99,7 @@ public class SelectionWindow<T> {
 
 	public void draw() {
 		// faction
-		QuadUtils.drawQuad(Color.black, 0, Game.windowWidth, 0,
+		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0,
 				Game.windowHeight);
 		for (SelectionWindowButton button : buttons) {
 			button.draw();

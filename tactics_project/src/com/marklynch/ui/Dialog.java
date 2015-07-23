@@ -4,11 +4,11 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import mdesl.graphics.Texture;
 
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Dialog {
@@ -73,8 +73,8 @@ public class Dialog {
 
 		int i = 0;
 		for (String string : strings) {
-			level.font12.drawString(positionXInPixels + 10, positionYInPixels
-					+ 20 + i, string, Color.black);
+			TextUtils.printTextWithImages(new Object[] { string },
+					positionXInPixels + 10, positionYInPixels + 20 + i);
 			i += 20;
 		}
 

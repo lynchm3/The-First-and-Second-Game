@@ -1,8 +1,11 @@
 package com.marklynch.tactics.objects.level.script;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.utils.TextUtils;
@@ -20,14 +23,22 @@ public class InlineSpeechPart {
 	}
 
 	public void draw() {
+		// get the instance of the view matrix for our batch
+		Matrix4f view = GameObject.batch.getViewMatrix();
 
-		// zoom
-		GL11.glPushMatrix();
+		// reset the matrix to identity, i.e. "no camera transform"
 
-		GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
-		GL11.glScalef(Game.zoom, Game.zoom, 0);
-		GL11.glTranslatef(Game.dragX, Game.dragY, 0);
-		GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
+		GameObject.batch.flush();
+		view.setIdentity();
+
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2,
+				-Game.windowHeight / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
+
+		// update the new view matrix
+		GameObject.batch.updateUniforms();
 
 		float textX1 = actor.squareGameObjectIsOn.x * Game.SQUARE_WIDTH
 				+ Game.SQUARE_WIDTH;
@@ -35,6 +46,11 @@ public class InlineSpeechPart {
 
 		// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
 		TextUtils.printTextWithImages(text, textX1, textY1, 200);
-		GL11.glPopMatrix();
+
+		// reset the matrix to identity, i.e. "no camera transform"
+
+		GameObject.batch.flush();
+		view.setIdentity();
+		GameObject.batch.updateUniforms();
 	}
 }

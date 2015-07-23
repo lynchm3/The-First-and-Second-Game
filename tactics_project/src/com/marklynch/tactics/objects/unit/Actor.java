@@ -3,8 +3,7 @@ package com.marklynch.tactics.objects.unit;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
@@ -18,6 +17,7 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.WeaponButton;
 import com.marklynch.utils.FormattingUtils;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Actor extends GameObject {
@@ -379,7 +379,7 @@ public class Actor extends GameObject {
 
 			// Draw actor level text
 			String actorLevelString = "L" + this.actorLevel;
-			float actorLevelWidthInPixels = level.font12
+			float actorLevelWidthInPixels = GameObject.font
 					.getWidth(actorLevelString);
 			float actorLevelPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
 					+ Game.SQUARE_WIDTH
@@ -388,12 +388,13 @@ public class Actor extends GameObject {
 			float actorLevelPositionYInPixels = this.squareGameObjectIsOn.y
 					* (int) Game.SQUARE_HEIGHT;
 
-			level.font12.drawString(actorLevelPositionXInPixels,
-					actorLevelPositionYInPixels, actorLevelString, Color.black);
+			TextUtils.printTextWithImages(new Object[] { actorLevelString },
+					actorLevelPositionXInPixels, actorLevelPositionYInPixels);
 
 			// draw indicators of whether you can move and/or attack
-			float moveAttackStatusWidthInPixels = level.font12.getWidth("MA");// Game.SQUARE_WIDTH
-			float attackStatusWidthInPixels = level.font12.getWidth("A");// Game.SQUARE_WIDTH
+			float moveAttackStatusWidthInPixels = GameObject.font
+					.getWidth("MA");// Game.SQUARE_WIDTH
+			float attackStatusWidthInPixels = GameObject.font.getWidth("A");// Game.SQUARE_WIDTH
 
 			float moveAttackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
 					+ Game.SQUARE_WIDTH
@@ -408,17 +409,18 @@ public class Actor extends GameObject {
 
 			if (hasAttackedThisTurn == false) {
 				if (this.distanceMovedThisTurn < this.travelDistance) {
-					level.font12.drawString(moveAttackStatusPositionXInPixels,
-							moveAttackStatusPositionYInPixels, "MA",
-							Color.black);
+
+					TextUtils.printTextWithImages(new Object[] { "MA" },
+							moveAttackStatusPositionXInPixels,
+							moveAttackStatusPositionYInPixels);
 				} else {
-					level.font12
-							.drawString(attackStatusPositionXInPixels,
-									moveAttackStatusPositionYInPixels, "A",
-									Color.black);
+
+					TextUtils.printTextWithImages(new Object[] { "A" },
+							attackStatusPositionXInPixels,
+							moveAttackStatusPositionYInPixels);
 				}
 			}
-			GL11.glColor3f(1.0f, 1.0f, 1.0f);
+			// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		}
 	}
 
@@ -427,7 +429,7 @@ public class Actor extends GameObject {
 		super.draw2();
 
 		// Hover fight preview
-		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		if (this.showHoverFightPreview) {
 
 			float hoverFightPreviewPositionXInPixels = (hoverFightPreviewDefender.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH);
@@ -553,13 +555,13 @@ public class Actor extends GameObject {
 						previewPositionYs[i], previewPositionYs[i] + 28);
 
 				// Attacker line 1
-				QuadUtils.drawQuad(Color.white,
+				QuadUtils.drawQuad(Color.WHITE,
 						attackerPotentialRemainingHealthX,
 						attackerPotentialRemainingHealthX + 1,
 						previewPositionYs[i], previewPositionYs[i] + 28);
 
 				// Attacker line 2
-				QuadUtils.drawQuad(Color.white,
+				QuadUtils.drawQuad(Color.WHITE,
 						attackerPotentialRemainingHealthX
 								+ attackerPotentialRemainingHealthWidth,
 						attackerPotentialRemainingHealthX
@@ -567,7 +569,7 @@ public class Actor extends GameObject {
 						previewPositionYs[i], previewPositionYs[i] + 28);
 
 				// Attacker line 3
-				QuadUtils.drawQuad(Color.white, attackerPotentialHealthLossX
+				QuadUtils.drawQuad(Color.WHITE, attackerPotentialHealthLossX
 						+ attackerPotentialHealthLossWidth,
 						attackerPotentialHealthLossX
 								+ attackerPotentialHealthLossWidth + 1,
@@ -599,13 +601,14 @@ public class Actor extends GameObject {
 								previewPositionYs[i] + 30);
 
 				// attacker hit chance
-				level.font12
-						.drawString(
+
+				TextUtils
+						.printTextWithImages(
+								new Object[] { this.hoverFightPreviewFights
+										.get(i).chanceOfHittingDefender + "%" },
 								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 										* (Game.SQUARE_WIDTH),
-								previewPositionYs[i],
-								this.hoverFightPreviewFights.get(i).chanceOfHittingDefender
-										+ "%", Color.black);
+								previewPositionYs[i]);
 
 				// attacker damage
 				String attackerDamageString = FormattingUtils
@@ -616,11 +619,11 @@ public class Actor extends GameObject {
 								.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
 										.get(i).damageTakenByDefenderMultiplier);
 
-				level.font12.drawString(
+				TextUtils.printTextWithImages(
+						new Object[] { attackerDamageString },
 						this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 								* (Game.SQUARE_WIDTH),
-						previewPositionYs[i] + 14, attackerDamageString,
-						Color.black);
+						previewPositionYs[i] + 14);
 
 				// attacker weapon
 				TextureUtils
@@ -746,12 +749,12 @@ public class Actor extends GameObject {
 						previewPositionYs[i], previewPositionYs[i] + 28);
 
 				// defender line 1
-				QuadUtils.drawQuad(Color.white, defenderPotentialHealthLossX,
+				QuadUtils.drawQuad(Color.WHITE, defenderPotentialHealthLossX,
 						defenderPotentialHealthLossX + 1, previewPositionYs[i],
 						previewPositionYs[i] + 28);
 
 				// defender line 2
-				QuadUtils.drawQuad(Color.white,
+				QuadUtils.drawQuad(Color.WHITE,
 						defenderPotentialRemainingHealthX
 								+ defenderPotentialRemainingHealthWidth,
 						defenderPotentialRemainingHealthX
@@ -759,7 +762,7 @@ public class Actor extends GameObject {
 						previewPositionYs[i], previewPositionYs[i] + 28);
 
 				// defender line 3
-				QuadUtils.drawQuad(Color.white, defenderPotentialHealthLossX
+				QuadUtils.drawQuad(Color.WHITE, defenderPotentialHealthLossX
 						+ defenderPotentialHealthLossWidth,
 						defenderPotentialHealthLossX
 								+ defenderPotentialHealthLossWidth + 1,
@@ -770,17 +773,18 @@ public class Actor extends GameObject {
 				} else {
 
 					// defender hit chance
-					level.font12
-							.drawString(
+					TextUtils
+							.printTextWithImages(
+									new Object[] { this.hoverFightPreviewFights
+											.get(i).chanceOfHittingAttacker
+											+ "%" },
 									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 											* (Game.SQUARE_WIDTH)
 											+ (Game.SQUARE_WIDTH)
-											- level.font12.getWidth(this.hoverFightPreviewFights
+											- GameObject.font.getWidth(this.hoverFightPreviewFights
 													.get(i).chanceOfHittingAttacker
 													+ "%"),
-									previewPositionYs[i],
-									this.hoverFightPreviewFights.get(i).chanceOfHittingAttacker
-											+ "%", Color.black);
+									previewPositionYs[i]);
 
 					// defender damage
 					String defenderDamageString = FormattingUtils
@@ -790,16 +794,15 @@ public class Actor extends GameObject {
 							+ FormattingUtils
 									.formatFloatRemoveUnneccessaryDigits(this.hoverFightPreviewFights
 											.get(i).damageTakenByAttackerMultiplier);
-
-					level.font12
-							.drawString(
+					TextUtils
+							.printTextWithImages(
+									new Object[] { defenderDamageString },
 									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 											* (Game.SQUARE_WIDTH)
 											+ (Game.SQUARE_WIDTH)
-											- level.font12
+											- GameObject.font
 													.getWidth(defenderDamageString),
-									previewPositionYs[i] + 14,
-									defenderDamageString, Color.black);
+									previewPositionYs[i] + 14);
 
 					// defender weapon
 					if (this.hoverFightPreviewFights.get(i).defenderWeapon != null) {
@@ -909,42 +912,44 @@ public class Actor extends GameObject {
 		}
 
 		// actor buttons
-		if (level.activeActor == this && this.faction == level.factions.get(0)) {
-
-			// animationX
-			buttonsAnimateCurrentTime += Game.delta;
-			float animationEndPointX = this.squareGameObjectIsOn.x
-					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
-			float animationStartPointX = animationEndPointX
-					- (buttons.size() * 50);
-			float animationDistanceX = animationEndPointX
-					- animationStartPointX;
-			if (buttonsAnimateCurrentTime > buttonsAnimateMaxTime) {
-				buttonsAnimateCurrentTime = buttonsAnimateMaxTime;
-			}
-			float animationOffsetX = (buttonsAnimateCurrentTime / buttonsAnimateMaxTime)
-					* animationDistanceX;
-			float buttonsX = animationStartPointX + animationOffsetX;
-			for (int i = 0; i < buttons.size(); i++) {
-				buttons.get(i).x = buttonsX + 50 * i;
-				buttons.get(i).y = this.squareGameObjectIsOn.y
-						* Game.SQUARE_HEIGHT;
-				buttons.get(i).drawWithinBounds(animationEndPointX,
-						animationEndPointX + (buttons.size() * 50),
-						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT,
-						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT + 50);
-			}
-
-			if (showWeaponButtons) {
-				for (int i = 0; i < weaponButtons.size(); i++) {
-					weaponButtons.get(i).x = attackButton.x;
-					weaponButtons.get(i).y = attackButton.y
-							+ attackButton.height + attackButton.height * i;
-					weaponButtons.get(i).draw();
-				}
-			}
-
-		}
+		// if (level.activeActor == this && this.faction ==
+		// level.factions.get(0)) {
+		//
+		// // animationX
+		// buttonsAnimateCurrentTime += Game.delta;
+		// float animationEndPointX = this.squareGameObjectIsOn.x
+		// * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
+		// float animationStartPointX = animationEndPointX
+		// - (buttons.size() * 50);
+		// float animationDistanceX = animationEndPointX
+		// - animationStartPointX;
+		// if (buttonsAnimateCurrentTime > buttonsAnimateMaxTime) {
+		// buttonsAnimateCurrentTime = buttonsAnimateMaxTime;
+		// }
+		// float animationOffsetX = (buttonsAnimateCurrentTime /
+		// buttonsAnimateMaxTime)
+		// * animationDistanceX;
+		// float buttonsX = animationStartPointX + animationOffsetX;
+		// for (int i = 0; i < buttons.size(); i++) {
+		// buttons.get(i).x = buttonsX + 50 * i;
+		// buttons.get(i).y = this.squareGameObjectIsOn.y
+		// * Game.SQUARE_HEIGHT;
+		// buttons.get(i).drawWithinBounds(animationEndPointX,
+		// animationEndPointX + (buttons.size() * 50),
+		// this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT,
+		// this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT + 50);
+		// }
+		//
+		// if (showWeaponButtons) {
+		// for (int i = 0; i < weaponButtons.size(); i++) {
+		// weaponButtons.get(i).x = attackButton.x;
+		// weaponButtons.get(i).y = attackButton.y
+		// + attackButton.height + attackButton.height * i;
+		// weaponButtons.get(i).draw();
+		// }
+		// }
+		//
+		// }
 
 		if (equippedWeapon != null) {
 			TextureUtils.drawTexture(equippedWeapon.imageTexture,

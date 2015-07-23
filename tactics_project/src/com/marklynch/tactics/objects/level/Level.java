@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
 
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
+import mdesl.graphics.Color;
+
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
@@ -30,7 +32,6 @@ import com.marklynch.ui.Dialog;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
@@ -46,8 +47,6 @@ public class Level {
 	public Square[][] squares;
 	public Vector<Decoration> decorations;
 	public transient int turn = 1;
-	public transient TrueTypeFont font12;
-	public transient TrueTypeFont font60;
 	public ArrayList<Faction> factions;
 	public transient Faction currentFactionMoving;
 	public transient int currentFactionMovingIndex;
@@ -122,8 +121,6 @@ public class Level {
 		});
 		editorButton.enabled = true;
 		buttons.add(editorButton);
-		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
-		font60 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 60);
 
 	}
 
@@ -173,8 +170,6 @@ public class Level {
 		});
 		editorButton.enabled = true;
 		buttons.add(editorButton);
-		font12 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 12);
-		font60 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 60);
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
@@ -352,7 +347,7 @@ public class Level {
 				speechPositions1, speechDirections1,
 				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
-						"HI, THIS IS SCRIPTED SPEECH :D", Color.black) }, this);
+						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) }, this);
 
 		SpeechPart speechPart1_2 = new SpeechPart(
 				speechActors1,
@@ -361,7 +356,7 @@ public class Level {
 				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
 						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
-						Color.black) }, this);
+						Color.BLACK) }, this);
 
 		Vector<SpeechPart> speechParts1 = new Vector<SpeechPart>();
 		speechParts1.add(speechPart1_1);
@@ -398,7 +393,7 @@ public class Level {
 				speechPositions2, speechDirections2,
 				factions.get(2).actors.get(0),
 				new Object[] { new StringWithColor("GREEN TEAM HOOOOOOOO",
-						Color.black) }, this);
+						Color.BLACK) }, this);
 
 		Vector<SpeechPart> speechParts2 = new Vector<SpeechPart>();
 		speechParts2.add(speechPart2_1);
@@ -419,13 +414,13 @@ public class Level {
 		InlineSpeechPart inlineSpeechPart1_1 = new InlineSpeechPart(
 				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor("HOLLA INLINE SPEECH YO",
-						Color.black) }, this);
+						Color.BLACK) }, this);
 
 		InlineSpeechPart inlineSpeechPart1_2 = new InlineSpeechPart(
 				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
 						"HOLLA, PART 2 OF THE INLINE SPEECH, WANT TO PUSH IT TO OVER 2 LINES, JUST TO SEE WTF IT LOOKS LIKE HOLLA",
-						Color.black) }, this);
+						Color.BLACK) }, this);
 
 		Vector<InlineSpeechPart> inlineSpeechParts1 = new Vector<InlineSpeechPart>();
 		inlineSpeechParts1.add(inlineSpeechPart1_1);
@@ -468,13 +463,21 @@ public class Level {
 
 	public void draw() {
 
-		// zoom
-		GL11.glPushMatrix();
+		// get the instance of the view matrix for our batch
+		Matrix4f view = GameObject.batch.getViewMatrix();
 
-		GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
-		GL11.glScalef(Game.zoom, Game.zoom, 0);
-		GL11.glTranslatef(Game.dragX, Game.dragY, 0);
-		GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
+		GameObject.batch.flush();
+		// reset the matrix to identity, i.e. "no camera transform"
+		view.setIdentity();
+
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2,
+				-Game.windowHeight / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
+
+		// update the new view matrix
+		GameObject.batch.updateUniforms();
 
 		// Squares
 		for (int i = 0; i < width; i++) {
@@ -533,7 +536,15 @@ public class Level {
 		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
 		// zoom end
-		GL11.glPopMatrix();
+		// GL11.glPopMatrix();
+
+		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
+
+		// reset the matrix to identity, i.e. "no camera transform"
+
+		GameObject.batch.flush();
+		view.setIdentity();
+		GameObject.batch.updateUniforms();
 
 		// Dialogs
 		for (int i = 0; i < width; i++) {
@@ -550,9 +561,12 @@ public class Level {
 		}
 
 		// Turn text
-		if (currentFactionMoving != null)
-			font12.drawString(Game.windowWidth - 150, 20,
-					currentFactionMoving.name + " turn " + turn, Color.magenta);
+		if (currentFactionMoving != null) {
+			TextUtils
+					.printTextWithImages(
+							new Object[] { currentFactionMoving.name + " turn "
+									+ turn }, Game.windowWidth - 150, 20);
+		}
 
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
@@ -575,8 +589,6 @@ public class Level {
 
 		// script
 		script.draw();
-
-		GL11.glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
 	public void update(int delta) {

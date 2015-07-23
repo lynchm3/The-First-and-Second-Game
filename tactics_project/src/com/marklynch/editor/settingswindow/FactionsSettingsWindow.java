@@ -1,6 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
 
 import com.marklynch.editor.AttributesWindow;
 import com.marklynch.editor.Editor;
@@ -48,7 +48,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 
 				Faction newFaction = new Faction("Faction "
 						+ editor.level.factions.size(),
-						FactionsSettingsWindow.this.editor.level, Color.red,
+						FactionsSettingsWindow.this.editor.level, Color.RED,
 						"faction_blue.png");
 				editor.level.factions.add(newFaction);
 				updateFactionsButtons();

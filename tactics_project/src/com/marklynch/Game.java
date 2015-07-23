@@ -7,13 +7,13 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.TrueTypeFont;
+import org.lwjgl.util.vector.Matrix4f;
 
 import com.marklynch.editor.Editor;
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.ui.button.Button;
-import com.marklynch.utils.ResourceUtils;
 
 public class Game {
 
@@ -39,7 +39,6 @@ public class Game {
 	public static float dragY = -100;
 	public static float dragX = 300;
 	public static float zoom = 0.8f;
-	public static TrueTypeFont font20;
 
 	public static int delta = 0;
 
@@ -120,7 +119,6 @@ public class Game {
 			editor = new Editor();
 		else
 			level = new Level(10, 10);
-		Game.font20 = ResourceUtils.getGlobalFont("KeepCalm-Medium.ttf", 20);
 
 		// LWJGLRenderer renderer = null;
 		// try {
@@ -221,10 +219,20 @@ public class Game {
 
 		// Clear The Screen And The Depth Buffer
 		GL11.glClearColor(0, 0, 0, 1);
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+
+		Matrix4f view = GameObject.batch.getViewMatrix();
+		view.setIdentity();
+		GameObject.batch.updateUniforms();
+		// start our batch
+		GameObject.batch.begin();
 		if (editorMode)
 			editor.draw();
 		else
 			level.draw();
+
+		GameObject.batch.flush();
+		// start our batch
+		GameObject.batch.end();
 	}
 }

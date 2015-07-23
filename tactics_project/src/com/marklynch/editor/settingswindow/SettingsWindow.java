@@ -2,7 +2,7 @@ package com.marklynch.editor.settingswindow;
 
 import java.util.Vector;
 
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;
@@ -26,7 +26,7 @@ public abstract class SettingsWindow {
 	}
 
 	public void draw() {
-		QuadUtils.drawQuad(Color.white, 0, width, 100, Game.windowHeight);
+		QuadUtils.drawQuad(Color.WHITE, 0, width, 100, Game.windowHeight);
 		for (Button button : buttons) {
 			button.draw();
 		}

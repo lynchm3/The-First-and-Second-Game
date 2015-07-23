@@ -1,6 +1,6 @@
 package com.marklynch.tactics.objects.level.script;
 
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;

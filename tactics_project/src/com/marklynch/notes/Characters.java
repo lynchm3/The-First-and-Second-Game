@@ -102,6 +102,23 @@ public class Characters {
 	 * 
 	 * Base characters on real life people... look up who the joker was based
 	 * on...
+	 * 
+	 * whistleblower
+	 * 
+	 * it genius they keeped locked up in a cell because he refused to work for
+	 * them (thought of this watching mr. robot), hes a genius but refused to
+	 * work for an evil corp, so now they force him to. maybe they torture him?
+	 * maybe they've threatened his family. his family think he abandoned them
+	 * or killed himself.All this to turn an extra profit. maybe he tried to get
+	 * a message out to them but got caught and kashed. maybe there's people in
+	 * the corp who are friendly towards himbut cant do anything.
+	 * 
+	 * A junkie character - plays in to gameplay because they're great when they
+	 * have their fix and shite when they dont. Should be a shtty prescription
+	 * drug thats way over priced. Cool in a bored rich kid kind of way.Our
+	 * evilcorp could be the ones selling thi stuff. It's not safe and highly
+	 * addictive but they pushed it through the FDA coz they own the patent and
+	 * would make a killing.
 	 */
 
 }

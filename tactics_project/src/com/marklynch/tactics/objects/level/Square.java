@@ -7,14 +7,16 @@ import java.util.Vector;
 
 import mdesl.graphics.Texture;
 
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.Dialog;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Square {
@@ -102,16 +104,17 @@ public class Square {
 		}
 
 		// if (this.reachableBySelectedCharater) {
-		int costTextWidth = level.font60.getWidth("" + distanceToSquare);
+		int costTextWidth = GameObject.font.getWidth("" + distanceToSquare);
 		float costPositionX = squarePositionX
 				+ (Game.SQUARE_WIDTH - costTextWidth) / 2f;
 		float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) / 2f;
 
 		if (distanceToSquare != Integer.MAX_VALUE && level.activeActor != null) {
-			level.font60.drawString(costPositionX, costPositionY, ""
-					+ distanceToSquare, new Color(1.0f, 0.5f, 0.5f, 0.25f));
+			TextUtils.printTextWithImages(
+					new Object[] { "" + distanceToSquare }, costPositionX,
+					costPositionY);
 		}
-		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
 		// }
 
@@ -140,18 +143,34 @@ public class Square {
 	}
 
 	public void drawHighlight() {
-		GL11.glPushMatrix();
+		// get the instance of the view matrix for our batch
+		Matrix4f view = GameObject.batch.getViewMatrix();
 
-		GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
-		GL11.glScalef(Game.zoom, Game.zoom, 0);
-		GL11.glTranslatef(Game.dragX, Game.dragY, 0);
-		GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
+		// reset the matrix to identity, i.e. "no camera transform"
+
+		GameObject.batch.flush();
+		view.setIdentity();
+
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2,
+				-Game.windowHeight / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
+
+		// update the new view matrix
+		GameObject.batch.updateUniforms();
+
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
 		TextureUtils.drawTexture(level.gameCursor.imageTexture2,
 				squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
 				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
-		GL11.glPopMatrix();
+
+		// reset the matrix to identity, i.e. "no camera transform"
+
+		GameObject.batch.flush();
+		view.setIdentity();
+		GameObject.batch.updateUniforms();
 	}
 
 	public void drawCursor() {

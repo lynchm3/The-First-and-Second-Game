@@ -1,6 +1,6 @@
 package com.marklynch.ui.button;
 
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
 
 import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.utils.QuadUtils;
@@ -44,15 +44,15 @@ public abstract class SettingsWindowButton extends Button {
 
 		if (enabled) {
 			if (down) {
-				QuadUtils.drawQuad(Color.green, x, x + width, y, y + height);
+				QuadUtils.drawQuad(Color.GREEN, x, x + width, y, y + height);
 				TextUtils.printTextWithImages(new Object[] { text }, x, y);
 			} else {
-				QuadUtils.drawQuad(Color.blue, x, x + width, y, y + height);
+				QuadUtils.drawQuad(Color.BLUE, x, x + width, y, y + height);
 				TextUtils.printTextWithImages(new Object[] { text }, x, y);
 			}
 		} else {
 
-			QuadUtils.drawQuad(Color.red, x, x + width, y, y + height);
+			QuadUtils.drawQuad(Color.RED, x, x + width, y, y + height);
 			TextUtils.printTextWithImages(new Object[] { text }, x, y);
 		}
 

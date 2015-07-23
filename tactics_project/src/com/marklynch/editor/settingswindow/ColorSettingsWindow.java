@@ -1,6 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
 
 import com.marklynch.editor.AttributesWindow;
 import com.marklynch.editor.Editor;
@@ -43,7 +43,7 @@ public class ColorSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				editor.colors.add(new Color(Color.red));
+				editor.colors.add(new Color(Color.RED));
 				updateColorsButtons();
 				editor.clearSelectedObject();
 				editor.depressButtonsSettingsAndDetailsButtons();

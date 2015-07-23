@@ -1543,6 +1543,26 @@ public class Notes {
 	 * Use the term war crimes somewhere - sniper elite 3 calls its side
 	 * missions "war crimes", what other terms are cool at the moment?
 	 * whistleblower. Could have a whistleblower character
+	 * 
+	 * limbo has a nice water effect
+	 * 
+	 * Baddies need to be calm collected salespeople, friendly, but fake
+	 * 
+	 * Drugdealers that carry shit loads of drugs in a satchel are cool. And
+	 * have everything u need right then and there (Mr robot) friendly. And at
+	 * the end maybe you brak through their facade
+	 * 
+	 * I feel like the ending should be really unfullfilling, like there's no1
+	 * to blame, the people are just cogs in a shitty machine.
+	 * 
+	 * So the fighting is like a metaphor for... eh... legal battles? taking on
+	 * the man? In what ways do people take on corps? boycots, in court,
+	 * strikes, protests, negatie publicity... look up how the biggest corps to
+	 * go down have gone down, and how 99% of the people go away scot free.
+	 * FIFA, ENRON...
+	 * 
+	 * Keep the drawing of the cost to get to each square but make it cool and
+	 * stylized and futuristic HUD-like. This is a battle map.
 	 */
 
 }

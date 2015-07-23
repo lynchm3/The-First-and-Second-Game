@@ -4,11 +4,13 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.editor.settingswindow.ActorsSettingsWindow;
@@ -113,12 +115,12 @@ public class Editor {
 		}
 
 		// LOAD COLORS
-		colors.add(new Color(Color.blue));
-		colors.add(new Color(Color.red));
-		colors.add(new Color(Color.green));
-		colors.add(new Color(Color.magenta));
-		colors.add(new Color(Color.cyan));
-		colors.add(new Color(Color.orange));
+		colors.add(new Color(Color.BLUE));
+		colors.add(new Color(Color.RED));
+		colors.add(new Color(Color.GREEN));
+		colors.add(new Color(Color.MAGENTA));
+		colors.add(new Color(Color.CYAN));
+		colors.add(new Color(Color.ORANGE));
 
 		// LOAD Weapons// Weapons
 		Weapon weapon0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
@@ -150,7 +152,7 @@ public class Editor {
 
 		// Add a faction
 		level.factions.add(new Faction("Faction " + level.factions.size(),
-				level, Color.blue, "faction_blue.png"));
+				level, Color.BLUE, "faction_blue.png"));
 
 		// Weapons
 		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
@@ -306,12 +308,23 @@ public class Editor {
 				&& state == STATE.MOVEABLE_OBJECT_SELECTED
 				&& Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
-			GL11.glPushMatrix();
 
-			GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
-			GL11.glScalef(Game.zoom, Game.zoom, 0);
-			GL11.glTranslatef(Game.dragX, Game.dragY, 0);
-			GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
+			// get the instance of the view matrix for our batch
+			GameObject.batch.flush();
+			Matrix4f view = GameObject.batch.getViewMatrix();
+
+			// reset the matrix to identity, i.e. "no camera transform"
+			view.setIdentity();
+
+			view.translate(new Vector2f(Game.windowWidth / 2,
+					Game.windowHeight / 2));
+			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+			view.translate(new Vector2f(-Game.windowWidth / 2,
+					-Game.windowHeight / 2));
+			view.translate(new Vector2f(Game.dragX, Game.dragY));
+
+			// update the new view matrix
+			GameObject.batch.updateUniforms();
 
 			float x1 = this.selectedGameObject.squareGameObjectIsOn.x
 					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
@@ -325,11 +338,13 @@ public class Editor {
 			// CircleUtils.drawCircle(Color.white, 10d, x1, y1);
 			TextureUtils.drawTexture(level.gameCursor.circle, x1 - 10, x1 + 10,
 					y1 - 10, y1 + 10);
-			LineUtils.drawLine(Color.white, x1, y1, x2, y2, 10f);
+			LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 10f);
 			TextureUtils.drawTexture(level.gameCursor.circle, x2 - 10, x2 + 10,
 					y2 - 10, y2 + 10);
 
-			GL11.glPopMatrix();
+			GameObject.batch.flush();
+			view.setIdentity();
+			GameObject.batch.updateUniforms();
 
 		}
 

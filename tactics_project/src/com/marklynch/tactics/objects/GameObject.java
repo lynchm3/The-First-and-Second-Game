@@ -2,14 +2,15 @@ package com.marklynch.tactics.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
+import mdesl.graphics.TextureRegion;
 import mdesl.graphics.glutils.ShaderProgram;
+import mdesl.graphics.text.BitmapFont;
 import mdesl.test.Util;
 
 import com.marklynch.Game;
@@ -88,7 +89,11 @@ public class GameObject {
 	}
 
 	public static SpriteBatch batch;
-	mdesl.graphics.Texture tex;
+
+	// a simple font to play with
+	public static BitmapFont font;
+	public static Texture fontTexture;
+	public static TextureRegion quadTexture;
 
 	public void loadImages() {
 		this.imageTexture = getGlobalImage(imagePath);
@@ -103,16 +108,21 @@ public class GameObject {
 			weapon.loadImages();
 		}
 
-		// // this will be ignored in this lesson...
-		try {
-			tex = new mdesl.graphics.Texture(Util.getResource("res/images/"
-					+ imagePath), mdesl.graphics.Texture.NEAREST);
-		} catch (IOException e) {
-			throw new RuntimeException("couldn't decode texture");
-		}
-
 		// load our shader program and sprite batch
 		try {
+			fontTexture = new Texture(Util.getResource("res/ptsans_00.png"),
+					Texture.NEAREST);
+
+			// in Photoshop, we included a small white box at the bottom right
+			// of our font sheet
+			// we will use this to draw lines and rectangles within the same
+			// batch as our text
+			quadTexture = new TextureRegion(fontTexture,
+					fontTexture.getWidth() - 2, fontTexture.getHeight() - 2, 1,
+					1);
+
+			font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
+					fontTexture);
 			final String VERTEX = Util
 					.readFile(Util
 							.getResourceAsStream("res/shadertut/base_shader_vertex.vert"));
@@ -130,8 +140,8 @@ public class GameObject {
 				System.out.println(program.getLog());
 
 			// create our sprite batch
-			batch = new SpriteBatch(program);// THIS LINE TURNS THE WHOLE
-												// FUCKING SCREEN RED...
+			batch = new SpriteBatch();// THIS LINE TURNS THE WHOLE
+			// FUCKING SCREEN RED...
 		} catch (Exception e) {
 			// simple exception handling...
 			e.printStackTrace();

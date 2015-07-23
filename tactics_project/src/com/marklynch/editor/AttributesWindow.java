@@ -2,7 +2,7 @@ package com.marklynch.editor;
 
 import java.util.Vector;
 
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
@@ -235,10 +235,10 @@ public class AttributesWindow {
 	}
 
 	public void draw() {
-		QuadUtils.drawQuad(Color.white, x, x + width, y, Game.windowHeight);
+		QuadUtils.drawQuad(Color.WHITE, x, x + width, y, Game.windowHeight);
 
 		TextUtils.printTextWithImages(new Object[] { new StringWithColor(title,
-				Color.black) }, x, y);
+				Color.BLACK) }, x, y);
 
 		for (AtributesWindowButton button : buttons) {
 			button.draw();

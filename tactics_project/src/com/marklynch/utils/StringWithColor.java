@@ -1,6 +1,6 @@
 package com.marklynch.utils;
 
-import org.newdawn.slick.Color;
+import mdesl.graphics.Color;
 
 public class StringWithColor {
 
