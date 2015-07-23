@@ -1563,6 +1563,8 @@ public class Notes {
 	 * 
 	 * Keep the drawing of the cost to get to each square but make it cool and
 	 * stylized and futuristic HUD-like. This is a battle map.
+	 * 
+	 * Shit needs to overlap the bounds of the squares whenever possible
 	 */
 
 }

@@ -1,6 +1,12 @@
 package com.marklynch;
 
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+import mdesl.graphics.SpriteBatch;
+import mdesl.graphics.Texture;
+import mdesl.graphics.TextureRegion;
+import mdesl.graphics.glutils.ShaderProgram;
+import mdesl.graphics.text.BitmapFont;
+import mdesl.test.Util;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
@@ -10,7 +16,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.ui.button.Button;
@@ -49,6 +54,15 @@ public class Game {
 
 	public boolean paused = false;
 
+	public static TextureRegion quadTexture;
+
+	public static Texture fontTexture;
+
+	// a simple font to play with
+	public static BitmapFont font;
+
+	public static SpriteBatch batch;
+
 	public static Button buttonHoveringOver = null;
 
 	public void start() {
@@ -85,6 +99,51 @@ public class Game {
 				GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
 				GL11.glDisable(GL_DEPTH_TEST);
+
+				// load our shader program and sprite batch
+				try {
+					Game.fontTexture = new Texture(
+							Util.getResource("res/ptsans_00.png"),
+							Texture.NEAREST);
+
+					// in Photoshop, we included a small white box at the bottom
+					// right
+					// of our font sheet
+					// we will use this to draw lines and rectangles within the
+					// same
+					// batch as our text
+					Game.quadTexture = new TextureRegion(Game.fontTexture,
+							Game.fontTexture.getWidth() - 2,
+							Game.fontTexture.getHeight() - 2, 1, 1);
+
+					Game.font = new BitmapFont(
+							Util.getResource("res/ptsans.fnt"),
+							Game.fontTexture);
+					final String VERTEX = Util
+							.readFile(Util
+									.getResourceAsStream("res/shadertut/base_shader_vertex.vert"));
+					final String FRAGMENT = Util
+							.readFile(Util
+									.getResourceAsStream("res/shadertut/base_shader_fragment.frag"));
+
+					// create our shader program -- be sure to pass
+					// SpriteBatch's
+					// default attributes!
+					ShaderProgram program = new ShaderProgram(VERTEX, FRAGMENT,
+							SpriteBatch.ATTRIBUTES);
+
+					// Good idea to log any warnings if they exist
+					if (program.getLog().length() != 0)
+						System.out.println(program.getLog());
+
+					// create our sprite batch
+					Game.batch = new SpriteBatch();
+					// FUCKING SCREEN RED...
+				} catch (Exception e) {
+					// simple exception handling...
+					e.printStackTrace();
+					System.exit(0);
+				}
 			}
 
 			if (!paused)
@@ -167,6 +226,46 @@ public class Game {
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0, width, height, 0, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+
+		// load our shader program and sprite batch
+		try {
+			Game.fontTexture = new Texture(
+					Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+
+			// in Photoshop, we included a small white box at the bottom right
+			// of our font sheet
+			// we will use this to draw lines and rectangles within the same
+			// batch as our text
+			Game.quadTexture = new TextureRegion(Game.fontTexture,
+					Game.fontTexture.getWidth() - 2,
+					Game.fontTexture.getHeight() - 2, 1, 1);
+
+			Game.font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
+					Game.fontTexture);
+			final String VERTEX = Util
+					.readFile(Util
+							.getResourceAsStream("res/shadertut/base_shader_vertex.vert"));
+			final String FRAGMENT = Util
+					.readFile(Util
+							.getResourceAsStream("res/shadertut/base_shader_fragment.frag"));
+
+			// create our shader program -- be sure to pass SpriteBatch's
+			// default attributes!
+			ShaderProgram program = new ShaderProgram(VERTEX, FRAGMENT,
+					SpriteBatch.ATTRIBUTES);
+
+			// Good idea to log any warnings if they exist
+			if (program.getLog().length() != 0)
+				System.out.println(program.getLog());
+
+			// create our sprite batch
+			Game.batch = new SpriteBatch();
+			// FUCKING SCREEN RED...
+		} catch (Exception e) {
+			// simple exception handling...
+			e.printStackTrace();
+			System.exit(0);
+		}
 	}
 
 	public void update(int delta) {
@@ -221,18 +320,18 @@ public class Game {
 		GL11.glClearColor(0, 0, 0, 1);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 
-		Matrix4f view = GameObject.batch.getViewMatrix();
+		Matrix4f view = Game.batch.getViewMatrix();
 		view.setIdentity();
-		GameObject.batch.updateUniforms();
+		Game.batch.updateUniforms();
 		// start our batch
-		GameObject.batch.begin();
+		Game.batch.begin();
 		if (editorMode)
 			editor.draw();
 		else
 			level.draw();
 
-		GameObject.batch.flush();
+		Game.batch.flush();
 		// start our batch
-		GameObject.batch.end();
+		Game.batch.end();
 	}
 }

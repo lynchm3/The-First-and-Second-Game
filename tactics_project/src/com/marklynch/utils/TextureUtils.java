@@ -3,7 +3,7 @@ package com.marklynch.utils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.Game;
 
 public class TextureUtils {
 
@@ -89,11 +89,11 @@ public class TextureUtils {
 		// GL11.glEnable(GL11.GL_TEXTURE_2D);
 		// GL11.glColor4f(1.0f, 1.0f, 1.0f, alpha);
 
-		GameObject.batch.setColor(Color.WHITE);
+		Game.batch.setColor(Color.WHITE);
 
 		// draw some sprites... they will all be affected by our shaders
 		// batch.draw(tex, 10, 10);
-		GameObject.batch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1,
+		Game.batch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1,
 				vertexY2 - vertexY1);
 
 		// GL11.glEnable(GL11.GL_TEXTURE_2D);

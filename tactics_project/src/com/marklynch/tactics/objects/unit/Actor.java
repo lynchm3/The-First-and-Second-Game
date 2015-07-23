@@ -379,7 +379,7 @@ public class Actor extends GameObject {
 
 			// Draw actor level text
 			String actorLevelString = "L" + this.actorLevel;
-			float actorLevelWidthInPixels = GameObject.font
+			float actorLevelWidthInPixels = Game.font
 					.getWidth(actorLevelString);
 			float actorLevelPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
 					+ Game.SQUARE_WIDTH
@@ -392,9 +392,9 @@ public class Actor extends GameObject {
 					actorLevelPositionXInPixels, actorLevelPositionYInPixels);
 
 			// draw indicators of whether you can move and/or attack
-			float moveAttackStatusWidthInPixels = GameObject.font
+			float moveAttackStatusWidthInPixels = Game.font
 					.getWidth("MA");// Game.SQUARE_WIDTH
-			float attackStatusWidthInPixels = GameObject.font.getWidth("A");// Game.SQUARE_WIDTH
+			float attackStatusWidthInPixels = Game.font.getWidth("A");// Game.SQUARE_WIDTH
 
 			float moveAttackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
 					+ Game.SQUARE_WIDTH
@@ -781,7 +781,7 @@ public class Actor extends GameObject {
 									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 											* (Game.SQUARE_WIDTH)
 											+ (Game.SQUARE_WIDTH)
-											- GameObject.font.getWidth(this.hoverFightPreviewFights
+											- Game.font.getWidth(this.hoverFightPreviewFights
 													.get(i).chanceOfHittingAttacker
 													+ "%"),
 									previewPositionYs[i]);
@@ -800,7 +800,7 @@ public class Actor extends GameObject {
 									this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 											* (Game.SQUARE_WIDTH)
 											+ (Game.SQUARE_WIDTH)
-											- GameObject.font
+											- Game.font
 													.getWidth(defenderDamageString),
 									previewPositionYs[i] + 14);
 

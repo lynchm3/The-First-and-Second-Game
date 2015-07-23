@@ -104,7 +104,7 @@ public class Square {
 		}
 
 		// if (this.reachableBySelectedCharater) {
-		int costTextWidth = GameObject.font.getWidth("" + distanceToSquare);
+		int costTextWidth = Game.font.getWidth("" + distanceToSquare);
 		float costPositionX = squarePositionX
 				+ (Game.SQUARE_WIDTH - costTextWidth) / 2f;
 		float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) / 2f;
@@ -144,11 +144,11 @@ public class Square {
 
 	public void drawHighlight() {
 		// get the instance of the view matrix for our batch
-		Matrix4f view = GameObject.batch.getViewMatrix();
+		Matrix4f view = Game.batch.getViewMatrix();
 
 		// reset the matrix to identity, i.e. "no camera transform"
 
-		GameObject.batch.flush();
+		Game.batch.flush();
 		view.setIdentity();
 
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
@@ -158,7 +158,7 @@ public class Square {
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 
 		// update the new view matrix
-		GameObject.batch.updateUniforms();
+		Game.batch.updateUniforms();
 
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
@@ -168,9 +168,9 @@ public class Square {
 
 		// reset the matrix to identity, i.e. "no camera transform"
 
-		GameObject.batch.flush();
+		Game.batch.flush();
 		view.setIdentity();
-		GameObject.batch.updateUniforms();
+		Game.batch.updateUniforms();
 	}
 
 	public void drawCursor() {

@@ -2,7 +2,7 @@ package com.marklynch.utils;
 
 import mdesl.graphics.Color;
 
-import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.Game;
 
 public class QuadUtils {
 
@@ -11,8 +11,8 @@ public class QuadUtils {
 		// GL11.glDisable(GL11.GL_TEXTURE_2D);
 		// GL11.glColor4f(color.r, color.g, color.b, color.a);
 
-		GameObject.batch.setColor(color);
-		GameObject.batch.draw(GameObject.quadTexture, x1, y1, x2
+		Game.batch.setColor(color);
+		Game.batch.draw(Game.quadTexture, x1, y1, x2
 				- x1, y2 - y1);
 		// GL11.glBegin(GL11.GL_QUADS);
 		// GL11.glVertex2f(x1, y1);

@@ -464,9 +464,9 @@ public class Level {
 	public void draw() {
 
 		// get the instance of the view matrix for our batch
-		Matrix4f view = GameObject.batch.getViewMatrix();
+		Matrix4f view = Game.batch.getViewMatrix();
 
-		GameObject.batch.flush();
+		Game.batch.flush();
 		// reset the matrix to identity, i.e. "no camera transform"
 		view.setIdentity();
 
@@ -477,7 +477,7 @@ public class Level {
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 
 		// update the new view matrix
-		GameObject.batch.updateUniforms();
+		Game.batch.updateUniforms();
 
 		// Squares
 		for (int i = 0; i < width; i++) {
@@ -542,9 +542,9 @@ public class Level {
 
 		// reset the matrix to identity, i.e. "no camera transform"
 
-		GameObject.batch.flush();
+		Game.batch.flush();
 		view.setIdentity();
-		GameObject.batch.updateUniforms();
+		Game.batch.updateUniforms();
 
 		// Dialogs
 		for (int i = 0; i < width; i++) {

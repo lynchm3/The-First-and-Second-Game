@@ -3,6 +3,7 @@ package com.marklynch.utils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
+import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
@@ -22,7 +23,7 @@ public class TextUtils {
 
 		float offsetX = 0;
 		float offsetY = 0;
-		GameObject.batch.setColor(Color.WHITE);
+		Game.batch.setColor(Color.WHITE);
 
 		for (Object content : contents) {
 			if (content instanceof String || content instanceof StringWithColor
@@ -42,21 +43,21 @@ public class TextUtils {
 					string = stringWithColor.string;
 					color = stringWithColor.color;
 				}
-				GameObject.batch.setColor(color);
+				Game.batch.setColor(color);
 
 				String[] stringParts = string
 						.split("(?<=[\\p{Punct}\\p{Space}|\\p{Space}\\p{Punct}|\\p{Punct}|\\p{Space}])");
 
 				for (String stringPart : stringParts) {
 
-					float width = GameObject.font.getWidth(stringPart);
+					float width = Game.font.getWidth(stringPart);
 					if (offsetX + width > maxWidth && offsetX != 0) {
 						offsetY += 20;
 						offsetX = 0;
 					}
 
 					// GameObject.font.
-					GameObject.font.drawText(GameObject.batch, stringPart, posX
+					Game.font.drawText(Game.batch, stringPart, posX
 							+ offsetX, posY + offsetY);
 
 					offsetX += width;
@@ -78,7 +79,7 @@ public class TextUtils {
 
 				GameObject gameObject = (GameObject) content;
 
-				float textWidth = GameObject.font.getWidth(gameObject.name);
+				float textWidth = Game.font.getWidth(gameObject.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -88,14 +89,14 @@ public class TextUtils {
 				}
 
 				// Name
-				GameObject.batch.setColor(Color.GRAY);
+				Game.batch.setColor(Color.GRAY);
 				if (gameObject instanceof Actor) {
 					Actor actor = (Actor) gameObject;
-					GameObject.batch.setColor(actor.faction.color);
-					GameObject.font.drawText(GameObject.batch, gameObject.name,
+					Game.batch.setColor(actor.faction.color);
+					Game.font.drawText(Game.batch, gameObject.name,
 							posX + offsetX, posY + offsetY);
 				} else {
-					GameObject.font.drawText(GameObject.batch, gameObject.name,
+					Game.font.drawText(Game.batch, gameObject.name,
 							posX + offsetX, posY + offsetY);
 				}
 				offsetX += textWidth;
@@ -110,7 +111,7 @@ public class TextUtils {
 
 				Weapon weapon = (Weapon) content;
 
-				float textWidth = GameObject.font.getWidth(weapon.name);
+				float textWidth = Game.font.getWidth(weapon.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -120,7 +121,7 @@ public class TextUtils {
 				}
 
 				// Name
-				GameObject.font.drawText(GameObject.batch, weapon.name, posX
+				Game.font.drawText(Game.batch, weapon.name, posX
 						+ offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -145,7 +146,7 @@ public class TextUtils {
 			} else if (content instanceof Faction) {
 				Faction faction = (Faction) content;
 
-				float textWidth = GameObject.font.getWidth(faction.name);
+				float textWidth = Game.font.getWidth(faction.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -156,8 +157,8 @@ public class TextUtils {
 
 				// Name
 
-				GameObject.batch.setColor(faction.color);
-				GameObject.font.drawText(GameObject.batch, faction.name, posX
+				Game.batch.setColor(faction.color);
+				Game.font.drawText(Game.batch, faction.name, posX
 						+ offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -171,7 +172,7 @@ public class TextUtils {
 			} else if (content instanceof Decoration) {
 				Decoration decoration = (Decoration) content;
 
-				float textWidth = GameObject.font.getWidth(decoration.name);
+				float textWidth = Game.font.getWidth(decoration.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -182,7 +183,7 @@ public class TextUtils {
 
 				// Name
 
-				GameObject.font.drawText(GameObject.batch, decoration.name,
+				Game.font.drawText(Game.batch, decoration.name,
 						posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 

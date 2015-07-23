@@ -152,7 +152,7 @@ public class Editor {
 
 		// Add a faction
 		level.factions.add(new Faction("Faction " + level.factions.size(),
-				level, Color.BLUE, "faction_blue.png"));
+				level, colors.get(1), "faction_blue.png"));
 
 		// Weapons
 		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
@@ -310,8 +310,8 @@ public class Editor {
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
 			// get the instance of the view matrix for our batch
-			GameObject.batch.flush();
-			Matrix4f view = GameObject.batch.getViewMatrix();
+			Game.batch.flush();
+			Matrix4f view = Game.batch.getViewMatrix();
 
 			// reset the matrix to identity, i.e. "no camera transform"
 			view.setIdentity();
@@ -324,7 +324,7 @@ public class Editor {
 			view.translate(new Vector2f(Game.dragX, Game.dragY));
 
 			// update the new view matrix
-			GameObject.batch.updateUniforms();
+			Game.batch.updateUniforms();
 
 			float x1 = this.selectedGameObject.squareGameObjectIsOn.x
 					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
@@ -342,9 +342,9 @@ public class Editor {
 			TextureUtils.drawTexture(level.gameCursor.circle, x2 - 10, x2 + 10,
 					y2 - 10, y2 + 10);
 
-			GameObject.batch.flush();
+			Game.batch.flush();
 			view.setIdentity();
-			GameObject.batch.updateUniforms();
+			Game.batch.updateUniforms();
 
 		}
 

@@ -5,7 +5,6 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.utils.TextUtils;
@@ -24,11 +23,11 @@ public class InlineSpeechPart {
 
 	public void draw() {
 		// get the instance of the view matrix for our batch
-		Matrix4f view = GameObject.batch.getViewMatrix();
+		Matrix4f view = Game.batch.getViewMatrix();
 
 		// reset the matrix to identity, i.e. "no camera transform"
 
-		GameObject.batch.flush();
+		Game.batch.flush();
 		view.setIdentity();
 
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
@@ -38,7 +37,7 @@ public class InlineSpeechPart {
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 
 		// update the new view matrix
-		GameObject.batch.updateUniforms();
+		Game.batch.updateUniforms();
 
 		float textX1 = actor.squareGameObjectIsOn.x * Game.SQUARE_WIDTH
 				+ Game.SQUARE_WIDTH;
@@ -49,8 +48,8 @@ public class InlineSpeechPart {
 
 		// reset the matrix to identity, i.e. "no camera transform"
 
-		GameObject.batch.flush();
+		Game.batch.flush();
 		view.setIdentity();
-		GameObject.batch.updateUniforms();
+		Game.batch.updateUniforms();
 	}
 }
