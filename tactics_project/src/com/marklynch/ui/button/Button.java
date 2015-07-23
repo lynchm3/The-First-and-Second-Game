@@ -24,6 +24,8 @@ public abstract class Button {
 		this.enabledTexture = ResourceUtils.getGlobalImage(enabledTexturePath);
 		this.disabledTexture = ResourceUtils
 				.getGlobalImage(disabledTexturePath);
+		System.out.println("texture  = " + enabledTexture);
+		System.out.println("enabledTexturePath  = " + enabledTexturePath);
 		this.text = text;
 	}
 
@@ -48,6 +50,5 @@ public abstract class Button {
 
 	public abstract void drawWithinBounds(float boundsX1, float boundsX2,
 			float boundsY1, float boundsY2);
-	// level.endTurn();
 
 }

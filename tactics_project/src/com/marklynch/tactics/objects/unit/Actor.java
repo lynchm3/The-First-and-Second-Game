@@ -392,8 +392,7 @@ public class Actor extends GameObject {
 					actorLevelPositionXInPixels, actorLevelPositionYInPixels);
 
 			// draw indicators of whether you can move and/or attack
-			float moveAttackStatusWidthInPixels = Game.font
-					.getWidth("MA");// Game.SQUARE_WIDTH
+			float moveAttackStatusWidthInPixels = Game.font.getWidth("MA");// Game.SQUARE_WIDTH
 			float attackStatusWidthInPixels = Game.font.getWidth("A");// Game.SQUARE_WIDTH
 
 			float moveAttackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
@@ -912,44 +911,42 @@ public class Actor extends GameObject {
 		}
 
 		// actor buttons
-		// if (level.activeActor == this && this.faction ==
-		// level.factions.get(0)) {
-		//
-		// // animationX
-		// buttonsAnimateCurrentTime += Game.delta;
-		// float animationEndPointX = this.squareGameObjectIsOn.x
-		// * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
-		// float animationStartPointX = animationEndPointX
-		// - (buttons.size() * 50);
-		// float animationDistanceX = animationEndPointX
-		// - animationStartPointX;
-		// if (buttonsAnimateCurrentTime > buttonsAnimateMaxTime) {
-		// buttonsAnimateCurrentTime = buttonsAnimateMaxTime;
-		// }
-		// float animationOffsetX = (buttonsAnimateCurrentTime /
-		// buttonsAnimateMaxTime)
-		// * animationDistanceX;
-		// float buttonsX = animationStartPointX + animationOffsetX;
-		// for (int i = 0; i < buttons.size(); i++) {
-		// buttons.get(i).x = buttonsX + 50 * i;
-		// buttons.get(i).y = this.squareGameObjectIsOn.y
-		// * Game.SQUARE_HEIGHT;
-		// buttons.get(i).drawWithinBounds(animationEndPointX,
-		// animationEndPointX + (buttons.size() * 50),
-		// this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT,
-		// this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT + 50);
-		// }
-		//
-		// if (showWeaponButtons) {
-		// for (int i = 0; i < weaponButtons.size(); i++) {
-		// weaponButtons.get(i).x = attackButton.x;
-		// weaponButtons.get(i).y = attackButton.y
-		// + attackButton.height + attackButton.height * i;
-		// weaponButtons.get(i).draw();
-		// }
-		// }
-		//
-		// }
+		if (level.activeActor == this && this.faction == level.factions.get(0)) {
+
+			// animationX
+			buttonsAnimateCurrentTime += Game.delta;
+			float animationEndPointX = this.squareGameObjectIsOn.x
+					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
+			float animationStartPointX = animationEndPointX
+					- (buttons.size() * 50);
+			float animationDistanceX = animationEndPointX
+					- animationStartPointX;
+			if (buttonsAnimateCurrentTime > buttonsAnimateMaxTime) {
+				buttonsAnimateCurrentTime = buttonsAnimateMaxTime;
+			}
+			float animationOffsetX = (buttonsAnimateCurrentTime / buttonsAnimateMaxTime)
+					* animationDistanceX;
+			float buttonsX = animationStartPointX + animationOffsetX;
+			for (int i = 0; i < buttons.size(); i++) {
+				buttons.get(i).x = buttonsX + 50 * i;
+				buttons.get(i).y = this.squareGameObjectIsOn.y
+						* Game.SQUARE_HEIGHT;
+				buttons.get(i).drawWithinBounds(animationEndPointX,
+						animationEndPointX + (buttons.size() * 50),
+						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT,
+						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT + 50);
+			}
+
+			if (showWeaponButtons) {
+				for (int i = 0; i < weaponButtons.size(); i++) {
+					weaponButtons.get(i).x = attackButton.x;
+					weaponButtons.get(i).y = attackButton.y
+							+ attackButton.height + attackButton.height * i;
+					weaponButtons.get(i).draw();
+				}
+			}
+
+		}
 
 		if (equippedWeapon != null) {
 			TextureUtils.drawTexture(equippedWeapon.imageTexture,

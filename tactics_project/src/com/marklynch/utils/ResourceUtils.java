@@ -37,7 +37,8 @@ public class ResourceUtils {
 						mdesl.graphics.Texture.NEAREST);
 				globalImages.put(path, texture);
 			} catch (Exception e) {
-				// e.printStackTrace();
+				e.printStackTrace();
+				System.err.println("path = " + path);
 			}
 		}
 

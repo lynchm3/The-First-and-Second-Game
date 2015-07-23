@@ -2,10 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// resize widnow
-
-	// lineUtils
-
 	// After a load - images, colors, weapons wont line up... weapons is the big
 	// one coz its multiple selection...
 
