@@ -90,6 +90,7 @@ public class TextureUtils {
 		// GL11.glColor4f(1.0f, 1.0f, 1.0f, alpha);
 
 		Game.batch.setColor(Color.WHITE);
+		// Game.batch.setColor(1f, 1.0f, 1.0f, 0.1f);
 
 		// draw some sprites... they will all be affected by our shaders
 		// batch.draw(tex, 10, 10);

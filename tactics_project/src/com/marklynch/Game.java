@@ -1,6 +1,6 @@
 package com.marklynch;
 
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+import static org.lwjgl.opengl.GL11.glViewport;
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.TextureRegion;
@@ -62,12 +62,13 @@ public class Game {
 	public static BitmapFont font;
 
 	public static SpriteBatch batch;
+	public static ShaderProgram program;
 
 	public static Button buttonHoveringOver = null;
 
 	public void start() {
 
-		initGL(windowWidth, windowHeight); // init OpenGL
+		initGL(windowWidth, windowHeight, false); // init OpenGL
 		init();
 		getDelta(); // call once before loop to initialise lastFrame
 		lastFPS = getTime(); // call before loop to initialise fps timer
@@ -84,66 +85,72 @@ public class Game {
 			// So... these work...
 			if (windowWidth != Display.getWidth()
 					|| windowHeight != Display.getHeight()) {
+
 				windowWidth = Display.getWidth();
 				windowHeight = Display.getHeight();
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-				GL11.glViewport(0, 0, Display.getWidth(), Display.getHeight());
-				GL11.glMatrixMode(GL11.GL_MODELVIEW);
+				initGL(windowWidth, windowHeight, true);
 
-				GL11.glMatrixMode(GL11.GL_PROJECTION);
-				GL11.glLoadIdentity();
-				GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1,
-						-1);
-				GL11.glMatrixMode(GL11.GL_MODELVIEW);
-
-				GL11.glDisable(GL_DEPTH_TEST);
-
-				// load our shader program and sprite batch
-				try {
-					Game.fontTexture = new Texture(
-							Util.getResource("res/ptsans_00.png"),
-							Texture.NEAREST);
-
-					// in Photoshop, we included a small white box at the bottom
-					// right
-					// of our font sheet
-					// we will use this to draw lines and rectangles within the
-					// same
-					// batch as our text
-					Game.quadTexture = new TextureRegion(Game.fontTexture,
-							Game.fontTexture.getWidth() - 2,
-							Game.fontTexture.getHeight() - 2, 1, 1);
-
-					Game.font = new BitmapFont(
-							Util.getResource("res/ptsans.fnt"),
-							Game.fontTexture);
-					final String VERTEX = Util
-							.readFile(Util
-									.getResourceAsStream("res/shadertut/base_shader_vertex.vert"));
-					final String FRAGMENT = Util
-							.readFile(Util
-									.getResourceAsStream("res/shadertut/base_shader_fragment.frag"));
-
-					// create our shader program -- be sure to pass
-					// SpriteBatch's
-					// default attributes!
-					ShaderProgram program = new ShaderProgram(VERTEX, FRAGMENT,
-							SpriteBatch.ATTRIBUTES);
-
-					// Good idea to log any warnings if they exist
-					if (program.getLog().length() != 0)
-						System.out.println(program.getLog());
-
-					// create our sprite batch
-					Game.batch = new SpriteBatch();
-					// FUCKING SCREEN RED...
-				} catch (Exception e) {
-					// simple exception handling...
-					e.printStackTrace();
-					System.exit(0);
-				}
+				// GL11.glEnable(GL11.GL_BLEND);
+				// GL11.glBlendFunc(GL11.GL_SRC_ALPHA,
+				// GL11.GL_ONE_MINUS_SRC_ALPHA);
+				//
+				// GL11.glViewport(0, 0, Display.getWidth(),
+				// Display.getHeight());
+				// GL11.glMatrixMode(GL11.GL_MODELVIEW);
+				//
+				// GL11.glMatrixMode(GL11.GL_PROJECTION);
+				// GL11.glLoadIdentity();
+				// GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0,
+				// 1,
+				// -1);
+				// GL11.glMatrixMode(GL11.GL_MODELVIEW);
+				//
+				// GL11.glDisable(GL_DEPTH_TEST);
+				//
+				// // load our shader program and sprite batch
+				// try {
+				// Game.fontTexture = new Texture(
+				// Util.getResource("res/ptsans_00.png"),
+				// Texture.NEAREST);
+				//
+				// // in Photoshop, we included a small white box at the bottom
+				// // right
+				// // of our font sheet
+				// // we will use this to draw lines and rectangles within the
+				// // same
+				// // batch as our text
+				// Game.quadTexture = new TextureRegion(Game.fontTexture,
+				// Game.fontTexture.getWidth() - 2,
+				// Game.fontTexture.getHeight() - 2, 1, 1);
+				//
+				// Game.font = new BitmapFont(
+				// Util.getResource("res/ptsans.fnt"),
+				// Game.fontTexture);
+				// final String VERTEX = Util.readFile(Util
+				// .getResourceAsStream("res/shadertut/lesson6.vert"));
+				// final String FRAGMENT = Util
+				// .readFile(Util
+				// .getResourceAsStream("res/shadertut/lesson6a.frag"));
+				//
+				// // create our shader program -- be sure to pass
+				// // SpriteBatch's
+				// // default attributes!
+				// ShaderProgram program = new ShaderProgram(VERTEX, FRAGMENT,
+				// SpriteBatch.ATTRIBUTES);
+				//
+				// // Good idea to log any warnings if they exist
+				// if (program.getLog().length() != 0)
+				// System.out.println(program.getLog());
+				//
+				// // create our sprite batch
+				// Game.batch = new SpriteBatch(program);
+				// // FUCKING SCREEN RED...
+				// } catch (Exception e) {
+				// // simple exception handling...
+				// e.printStackTrace();
+				// System.exit(0);
+				// }
 			}
 
 			if (!paused)
@@ -201,70 +208,84 @@ public class Game {
 		// gui.applyTheme(theme);
 	}
 
-	private void initGL(float width, float height) {
-		try {
-			Display.setDisplayMode(new DisplayMode((int) width, (int) height));
-			Display.setResizable(true);
-			Display.create();
-			Display.setVSyncEnabled(true);
-		} catch (LWJGLException e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+	private void initGL(float width, float height, boolean resize) {
+		if (!resize) {
+			try {
+				Display.setDisplayMode(new DisplayMode((int) width,
+						(int) height));
+				Display.setResizable(true);
+				Display.create();
+				Display.setVSyncEnabled(true);
+				GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-		GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+				GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+			} catch (LWJGLException e) {
+				e.printStackTrace();
+				System.exit(0);
+			}
 
-		// enable alpha blending
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			// enable alpha blending
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		GL11.glViewport(0, 0, (int) width, (int) height);
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+			GL11.glViewport(0, 0, (int) width, (int) height);
+			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
-		GL11.glMatrixMode(GL11.GL_PROJECTION);
-		GL11.glLoadIdentity();
-		GL11.glOrtho(0, width, height, 0, 1, -1);
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+			GL11.glMatrixMode(GL11.GL_PROJECTION);
+			GL11.glLoadIdentity();
+			GL11.glOrtho(0, width, height, 0, 1, -1);
+			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
-		// load our shader program and sprite batch
-		try {
-			Game.fontTexture = new Texture(
-					Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+			// load our shader program and sprite batch
+			try {
+				Game.fontTexture = new Texture(
+						Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
 
-			// in Photoshop, we included a small white box at the bottom right
-			// of our font sheet
-			// we will use this to draw lines and rectangles within the same
-			// batch as our text
-			Game.quadTexture = new TextureRegion(Game.fontTexture,
-					Game.fontTexture.getWidth() - 2,
-					Game.fontTexture.getHeight() - 2, 1, 1);
+				// in Photoshop, we included a small white box at the bottom
+				// right
+				// of our font sheet
+				// we will use this to draw lines and rectangles within the same
+				// batch as our text
+				Game.quadTexture = new TextureRegion(Game.fontTexture,
+						Game.fontTexture.getWidth() - 2,
+						Game.fontTexture.getHeight() - 2, 1, 1);
 
-			Game.font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
-					Game.fontTexture);
-			final String VERTEX = Util
-					.readFile(Util
-							.getResourceAsStream("res/shadertut/base_shader_vertex.vert"));
-			final String FRAGMENT = Util
-					.readFile(Util
-							.getResourceAsStream("res/shadertut/base_shader_fragment.frag"));
+				Game.font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
+						Game.fontTexture);
+				final String VERTEX = Util.readFile(Util
+						.getResourceAsStream("res/shadertut/lesson2.vert"));
+				final String FRAGMENT = Util.readFile(Util
+						.getResourceAsStream("res/shadertut/lesson2.frag"));
 
-			// create our shader program -- be sure to pass SpriteBatch's
-			// default attributes!
-			ShaderProgram program = new ShaderProgram(VERTEX, FRAGMENT,
-					SpriteBatch.ATTRIBUTES);
+				// create our shader program -- be sure to pass SpriteBatch's
+				// default attributes!
+				program = new ShaderProgram(VERTEX, FRAGMENT,
+						SpriteBatch.ATTRIBUTES);
 
-			// Good idea to log any warnings if they exist
-			if (program.getLog().length() != 0)
-				System.out.println(program.getLog());
+				// Good idea to log any warnings if they exist
+				if (program.getLog().length() != 0)
+					System.out.println(program.getLog());
 
-			// create our sprite batch
-			Game.batch = new SpriteBatch();
-			// FUCKING SCREEN RED...
-		} catch (Exception e) {
-			// simple exception handling...
-			e.printStackTrace();
-			System.exit(0);
+				// create our sprite batch
+				Game.batch = new SpriteBatch(program);
+				// FUCKING SCREEN RED...
+			} catch (Exception e) {
+				// simple exception handling...
+				e.printStackTrace();
+				System.exit(0);
+			}
+		} else {
+
+			glViewport(0, 0, Display.getWidth(), Display.getHeight());
+
+			// resize our batch with the new screen size
+			batch.resize(Display.getWidth(), Display.getHeight());
+
+			// whenever our screen resizes, we need to update our uniform
+			program.use();
+			program.setUniformf("resolution", Display.getWidth(),
+					Display.getHeight());
+
 		}
 	}
 

@@ -14,4 +14,5 @@ void main() {
 	
 	//final color
 	gl_FragColor = texColor * vColor;
+	//gl_FragColor = vec4(vec3(vTexCoord.s), 1.0) * texColor;
 }
