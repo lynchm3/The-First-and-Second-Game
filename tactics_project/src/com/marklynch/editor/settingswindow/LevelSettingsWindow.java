@@ -150,6 +150,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 				editor.level.turn = 1;
 				Game.level = editor.level;
 				Game.editorMode = false;
+				Game.runBlurAnimation();
 			}
 		};
 		buttons.add(playLevelButton);

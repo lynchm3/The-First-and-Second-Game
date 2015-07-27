@@ -14,7 +14,6 @@ import mdesl.test.Util;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -81,13 +80,16 @@ public class Game {
 	public static SpriteBatch blurBatch;
 	int BLUR_FBO_SIZE = 1024;
 	float blurRadius = 3f;
-	float MAX_BLUR = 3f;
+	float MAX_BLUR = 10f;
 
 	enum DRAW_MODE {
 		NORMAL, BLUR
 	};
 
-	public static DRAW_MODE drawMode = DRAW_MODE.NORMAL;
+	public static DRAW_MODE drawMode = DRAW_MODE.BLUR;
+
+	public static float blurTime = 0f;
+	public static float blurTimeMax = 5000f;
 
 	public void start() {
 
@@ -290,6 +292,12 @@ public class Game {
 			level.update(delta);
 		}
 
+		if (this.drawMode == DRAW_MODE.BLUR) {
+			blurTime += delta;
+			if (blurTime > blurTimeMax)
+				this.drawMode = DRAW_MODE.NORMAL;
+		}
+
 		updateFPS(); // update FPS Counter
 	}
 
@@ -328,6 +336,12 @@ public class Game {
 	}
 
 	public void render() {
+
+		if (Game.drawMode == DRAW_MODE.BLUR) {
+			blurTime += delta;
+			if (blurTime > blurTimeMax)
+				Game.drawMode = DRAW_MODE.NORMAL;
+		}
 
 		if (drawMode == DRAW_MODE.NORMAL) {
 			renderNormal();
@@ -396,8 +410,8 @@ public class Game {
 		// ensure the direction is along the X-axis only
 		blurShader.setUniformf("dir", 1f, 0f);
 		// determine radius of blur based on mouse position
-		float mouseXAmt = Mouse.getX() / (float) Display.getWidth();
-		blurShader.setUniformf("radius", mouseXAmt * MAX_BLUR);
+		float blurTimeProgress = 1f - blurTime / blurTimeMax;
+		blurShader.setUniformf("radius", blurTimeProgress * MAX_BLUR);
 		// start rendering to target B
 		blurTargetB.begin();
 		// no need to clear since targetA has an opaque background
@@ -420,9 +434,7 @@ public class Game {
 		blurShader.setUniformf("dir", 0f, 1f);
 
 		// update Y-axis blur radius based on mouse
-		float mouseYAmt = (Display.getHeight() - Mouse.getY() - 1)
-				/ (float) Display.getHeight();
-		blurShader.setUniformf("radius", mouseYAmt * MAX_BLUR);
+		blurShader.setUniformf("radius", blurTimeProgress * MAX_BLUR);
 
 		// draw the horizontally-blurred FBO B to the screen, applying the
 		// vertical blur as we go
@@ -430,5 +442,10 @@ public class Game {
 
 		activeBatch.end();
 
+	}
+
+	public static void runBlurAnimation() {
+		blurTime = 0l;
+		drawMode = DRAW_MODE.BLUR;
 	}
 }
