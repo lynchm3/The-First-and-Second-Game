@@ -23,7 +23,7 @@ public class TextUtils {
 
 		float offsetX = 0;
 		float offsetY = 0;
-		Game.batch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(Color.WHITE);
 
 		for (Object content : contents) {
 			if (content instanceof String || content instanceof StringWithColor
@@ -43,7 +43,7 @@ public class TextUtils {
 					string = stringWithColor.string;
 					color = stringWithColor.color;
 				}
-				Game.batch.setColor(color);
+				Game.activeBatch.setColor(color);
 
 				String[] stringParts = string
 						.split("(?<=[\\p{Punct}\\p{Space}|\\p{Space}\\p{Punct}|\\p{Punct}|\\p{Space}])");
@@ -57,7 +57,7 @@ public class TextUtils {
 					}
 
 					// GameObject.font.
-					Game.font.drawText(Game.batch, stringPart, posX
+					Game.font.drawText(Game.activeBatch, stringPart, posX
 							+ offsetX, posY + offsetY);
 
 					offsetX += width;
@@ -89,14 +89,14 @@ public class TextUtils {
 				}
 
 				// Name
-				Game.batch.setColor(Color.GRAY);
+				Game.activeBatch.setColor(Color.GRAY);
 				if (gameObject instanceof Actor) {
 					Actor actor = (Actor) gameObject;
-					Game.batch.setColor(actor.faction.color);
-					Game.font.drawText(Game.batch, gameObject.name,
+					Game.activeBatch.setColor(actor.faction.color);
+					Game.font.drawText(Game.activeBatch, gameObject.name,
 							posX + offsetX, posY + offsetY);
 				} else {
-					Game.font.drawText(Game.batch, gameObject.name,
+					Game.font.drawText(Game.activeBatch, gameObject.name,
 							posX + offsetX, posY + offsetY);
 				}
 				offsetX += textWidth;
@@ -121,7 +121,7 @@ public class TextUtils {
 				}
 
 				// Name
-				Game.font.drawText(Game.batch, weapon.name, posX
+				Game.font.drawText(Game.activeBatch, weapon.name, posX
 						+ offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -157,8 +157,8 @@ public class TextUtils {
 
 				// Name
 
-				Game.batch.setColor(faction.color);
-				Game.font.drawText(Game.batch, faction.name, posX
+				Game.activeBatch.setColor(faction.color);
+				Game.font.drawText(Game.activeBatch, faction.name, posX
 						+ offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -183,7 +183,7 @@ public class TextUtils {
 
 				// Name
 
-				Game.font.drawText(Game.batch, decoration.name,
+				Game.font.drawText(Game.activeBatch, decoration.name,
 						posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 

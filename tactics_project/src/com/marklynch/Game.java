@@ -1,15 +1,20 @@
 package com.marklynch;
 
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL11.glViewport;
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.TextureRegion;
+import mdesl.graphics.glutils.FrameBuffer;
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.graphics.text.BitmapFont;
 import mdesl.test.Util;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -61,10 +66,26 @@ public class Game {
 	// a simple font to play with
 	public static BitmapFont font;
 
-	public static SpriteBatch batch;
+	public static SpriteBatch activeBatch;
 	public static ShaderProgram program;
 
+	public static SpriteBatch normalBatch;
+
 	public static Button buttonHoveringOver = null;
+
+	// Gaussian blur stuff
+	// our blur shader
+	ShaderProgram blurShader;
+	// our offscreen buffers
+	FrameBuffer blurTargetA, blurTargetB;
+	public static SpriteBatch blurBatch;
+	int BLUR_FBO_SIZE = 1024;
+	float blurRadius = 3f;
+	float MAX_BLUR = 3f;
+
+	enum DRAW_MODE {
+		NORMAL, BLUR
+	};
 
 	public void start() {
 
@@ -252,23 +273,10 @@ public class Game {
 
 				Game.font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
 						Game.fontTexture);
-				final String VERTEX = Util.readFile(Util
-						.getResourceAsStream("res/shadertut/lesson2.vert"));
-				final String FRAGMENT = Util.readFile(Util
-						.getResourceAsStream("res/shadertut/lesson2.frag"));
 
-				// create our shader program -- be sure to pass SpriteBatch's
-				// default attributes!
-				program = new ShaderProgram(VERTEX, FRAGMENT,
-						SpriteBatch.ATTRIBUTES);
-
-				// Good idea to log any warnings if they exist
-				if (program.getLog().length() != 0)
-					System.out.println(program.getLog());
-
-				// create our sprite batch
-				Game.batch = new SpriteBatch(program);
-				// FUCKING SCREEN RED...
+				initNormalBatch();
+				initBlurBatch();
+				activeBatch = blurBatch;
 			} catch (Exception e) {
 				// simple exception handling...
 				e.printStackTrace();
@@ -279,13 +287,62 @@ public class Game {
 			glViewport(0, 0, Display.getWidth(), Display.getHeight());
 
 			// resize our batch with the new screen size
-			batch.resize(Display.getWidth(), Display.getHeight());
+			activeBatch.resize(Display.getWidth(), Display.getHeight());
 
 			// whenever our screen resizes, we need to update our uniform
-			program.use();
-			program.setUniformf("resolution", Display.getWidth(),
-					Display.getHeight());
+			// program.use();
+			// program.setUniformf("resolution", Display.getWidth(),
+			// Display.getHeight());
 
+		}
+	}
+
+	public void initBlurBatch() {
+		try {
+
+			// create our FBOs
+			blurTargetA = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE,
+					Texture.LINEAR);
+			blurTargetB = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE,
+					Texture.LINEAR);
+
+			// our basic pass-through vertex shader
+			final String VERT = Util.readFile(Util
+					.getResourceAsStream("res/shadertut/lesson5.vert"));
+
+			// our fragment shader, which does the blur in one direction at a
+			// time
+			final String FRAG = Util.readFile(Util
+					.getResourceAsStream("res/shadertut/lesson5.frag"));
+
+			// create our shader program
+			blurShader = new ShaderProgram(VERT, FRAG, SpriteBatch.ATTRIBUTES);
+
+			// Good idea to log any warnings if they exist
+			if (blurShader.getLog().length() != 0)
+				System.out.println(blurShader.getLog());
+
+			// always a good idea to set up default uniforms...
+			blurShader.use();
+			blurShader.setUniformf("dir", 0f, 0f); // direction of blur; nil for
+													// now
+			blurShader.setUniformf("resolution", BLUR_FBO_SIZE); // size of FBO
+			// texture
+			blurShader.setUniformf("radius", blurRadius); // radius of blur
+
+			blurBatch = new SpriteBatch();
+		} catch (Exception e) {
+			// simple exception handling...
+			e.printStackTrace();
+			System.exit(0);
+		}
+	}
+
+	public void initNormalBatch() {
+		try {
+			Game.normalBatch = new SpriteBatch();
+		} catch (LWJGLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -337,22 +394,79 @@ public class Game {
 
 	public void renderGL() {
 
-		// Clear The Screen And The Depth Buffer
-		GL11.glClearColor(0, 0, 0, 1);
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+		// RENDER SCENE ()
 
-		Matrix4f view = Game.batch.getViewMatrix();
+		// Bind FBO target A
+		blurTargetA.begin();
+		// Clear FBO A with an opaque colour to minimize blending issues
+		glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
-		Game.batch.updateUniforms();
-		// start our batch
-		Game.batch.begin();
+		activeBatch.updateUniforms();
+		// Reset batch to default shader (without blur)
+		try {
+			activeBatch.setShader(SpriteBatch.getDefaultShader());
+		} catch (LWJGLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// send the new projection matrix (FBO size) to the default shader
+		activeBatch.resize(blurTargetA.getWidth(), blurTargetA.getHeight());
+		// now we can start our batch
+		activeBatch.begin();
+		// render our scene fully to FBO A
 		if (editorMode)
 			editor.draw();
 		else
 			level.draw();
+		// flush the batch, i.e. render entities to GPU
+		activeBatch.flush();
+		// After flushing, we can finish rendering to FBO target A
+		blurTargetA.end();
 
-		Game.batch.flush();
-		// start our batch
-		Game.batch.end();
+		// HORIZONTAL BLUR ()
+		// swap the shaders
+		// this will send the batch's (FBO-sized) projection matrix to our blur
+		// shader
+		view.setIdentity();
+		activeBatch.updateUniforms();
+		activeBatch.setShader(blurShader);
+		// ensure the direction is along the X-axis only
+		blurShader.setUniformf("dir", 1f, 0f);
+		// determine radius of blur based on mouse position
+		float mouseXAmt = Mouse.getX() / (float) Display.getWidth();
+		blurShader.setUniformf("radius", mouseXAmt * MAX_BLUR);
+		// start rendering to target B
+		blurTargetB.begin();
+		// no need to clear since targetA has an opaque background
+		// render target A (the scene) using our horizontal blur shader
+		// it will be placed into target B
+		activeBatch.draw(blurTargetA, 0, 0);
+		// flush the batch before ending target B
+		activeBatch.flush();
+		// finish rendering target B
+		blurTargetB.end();
+		// now we can render to the screen using the vertical blur shader
+
+		// VERTICAL BLUR()
+		// send the screen-size projection matrix to the blurShader
+		view.setIdentity();
+		activeBatch.updateUniforms();
+		activeBatch.resize(Display.getWidth(), Display.getHeight());
+
+		// apply the blur only along Y-axis
+		blurShader.setUniformf("dir", 0f, 1f);
+
+		// update Y-axis blur radius based on mouse
+		float mouseYAmt = (Display.getHeight() - Mouse.getY() - 1)
+				/ (float) Display.getHeight();
+		blurShader.setUniformf("radius", mouseYAmt * MAX_BLUR);
+
+		// draw the horizontally-blurred FBO B to the screen, applying the
+		// vertical blur as we go
+		activeBatch.draw(blurTargetB, 0, 0);
+
+		activeBatch.end();
 	}
 }

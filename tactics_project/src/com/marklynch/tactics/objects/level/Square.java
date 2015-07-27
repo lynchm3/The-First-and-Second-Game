@@ -144,11 +144,11 @@ public class Square {
 
 	public void drawHighlight() {
 		// get the instance of the view matrix for our batch
-		Matrix4f view = Game.batch.getViewMatrix();
+		Matrix4f view = Game.activeBatch.getViewMatrix();
 
 		// reset the matrix to identity, i.e. "no camera transform"
 
-		Game.batch.flush();
+		Game.activeBatch.flush();
 		view.setIdentity();
 
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
@@ -158,7 +158,7 @@ public class Square {
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 
 		// update the new view matrix
-		Game.batch.updateUniforms();
+		Game.activeBatch.updateUniforms();
 
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
@@ -168,9 +168,9 @@ public class Square {
 
 		// reset the matrix to identity, i.e. "no camera transform"
 
-		Game.batch.flush();
+		Game.activeBatch.flush();
 		view.setIdentity();
-		Game.batch.updateUniforms();
+		Game.activeBatch.updateUniforms();
 	}
 
 	public void drawCursor() {

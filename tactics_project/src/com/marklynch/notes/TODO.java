@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Make the lighting from lesson 5 (Gaussian blur) work w/ the game
+
 	// After a load - images, colors, weapons wont line up... weapons is the big
 	// one coz its multiple selection...
 

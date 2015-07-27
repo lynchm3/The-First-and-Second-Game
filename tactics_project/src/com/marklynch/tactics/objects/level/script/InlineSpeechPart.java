@@ -23,11 +23,11 @@ public class InlineSpeechPart {
 
 	public void draw() {
 		// get the instance of the view matrix for our batch
-		Matrix4f view = Game.batch.getViewMatrix();
+		Matrix4f view = Game.activeBatch.getViewMatrix();
 
 		// reset the matrix to identity, i.e. "no camera transform"
 
-		Game.batch.flush();
+		Game.activeBatch.flush();
 		view.setIdentity();
 
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
@@ -37,7 +37,7 @@ public class InlineSpeechPart {
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 
 		// update the new view matrix
-		Game.batch.updateUniforms();
+		Game.activeBatch.updateUniforms();
 
 		float textX1 = actor.squareGameObjectIsOn.x * Game.SQUARE_WIDTH
 				+ Game.SQUARE_WIDTH;
@@ -48,8 +48,8 @@ public class InlineSpeechPart {
 
 		// reset the matrix to identity, i.e. "no camera transform"
 
-		Game.batch.flush();
+		Game.activeBatch.flush();
 		view.setIdentity();
-		Game.batch.updateUniforms();
+		Game.activeBatch.updateUniforms();
 	}
 }

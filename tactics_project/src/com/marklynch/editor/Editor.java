@@ -310,8 +310,8 @@ public class Editor {
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
 			// get the instance of the view matrix for our batch
-			Game.batch.flush();
-			Matrix4f view = Game.batch.getViewMatrix();
+			Game.activeBatch.flush();
+			Matrix4f view = Game.activeBatch.getViewMatrix();
 
 			// reset the matrix to identity, i.e. "no camera transform"
 			view.setIdentity();
@@ -324,7 +324,7 @@ public class Editor {
 			view.translate(new Vector2f(Game.dragX, Game.dragY));
 
 			// update the new view matrix
-			Game.batch.updateUniforms();
+			Game.activeBatch.updateUniforms();
 
 			float x1 = this.selectedGameObject.squareGameObjectIsOn.x
 					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
@@ -342,9 +342,9 @@ public class Editor {
 			TextureUtils.drawTexture(level.gameCursor.circle, x2 - 10, x2 + 10,
 					y2 - 10, y2 + 10);
 
-			Game.batch.flush();
+			Game.activeBatch.flush();
 			view.setIdentity();
-			Game.batch.updateUniforms();
+			Game.activeBatch.updateUniforms();
 
 		}
 

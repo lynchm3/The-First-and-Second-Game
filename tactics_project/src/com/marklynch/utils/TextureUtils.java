@@ -89,7 +89,7 @@ public class TextureUtils {
 		// GL11.glEnable(GL11.GL_TEXTURE_2D);
 		// GL11.glColor4f(1.0f, 1.0f, 1.0f, alpha);
 
-		Game.batch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(Color.WHITE);
 		// Game.batch.setColor(1f, 1.0f, 1.0f, 0.1f);
 
 		// draw some sprites... they will all be affected by our shaders
@@ -98,7 +98,7 @@ public class TextureUtils {
 		// textureY2, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2
 		// - vertexY1);
 
-		Game.batch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1,
+		Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1,
 				vertexY2 - vertexY1);
 
 	}
