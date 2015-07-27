@@ -46,8 +46,8 @@ public class GameObject {
 	public String imagePath = null;
 
 	// images
-	public transient Texture powTexture = null;
-	public transient Texture vsTexture = null;
+	public static transient Texture powTexture = null;
+	public static transient Texture vsTexture = null;
 	public transient Texture fightTexture = null;
 	public transient Texture skullTexture = null;
 	public transient Texture xTexture = null;

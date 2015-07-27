@@ -1,5 +1,8 @@
 package com.marklynch.utils;
 
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE1;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
@@ -98,6 +101,15 @@ public class TextureUtils {
 		// textureY2, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2
 		// - vertexY1);
 
+		// bind normal map to texture unit 1
+		glActiveTexture(GL_TEXTURE1);
+		texture.bind();
+
+		// bind diffuse color to texture unit 0
+		glActiveTexture(GL_TEXTURE0);
+		texture.bind();
+
+		// draw the texture unit 0 with our shader effect applied
 		Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1,
 				vertexY2 - vertexY1);
 

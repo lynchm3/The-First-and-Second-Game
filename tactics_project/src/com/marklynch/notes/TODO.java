@@ -2,7 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Blur first 5 secs of game
+	// Generate normals for the grass or something...
+	// I could do different shader for bg VS caharacters + objects
+
+	// Light effect from lesson 6
 
 	// After a load - images, colors, weapons wont line up... weapons is the big
 	// one coz its multiple selection...
