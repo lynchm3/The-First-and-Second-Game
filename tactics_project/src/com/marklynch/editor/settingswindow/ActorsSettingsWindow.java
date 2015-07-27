@@ -106,6 +106,8 @@ public class ActorsSettingsWindow extends SettingsWindow {
 				};
 				buttons.add(actorButton);
 				buttonCount++;
+				if (actorButton.object == editor.selectedGameObject)
+					actorButton.down = true;
 
 			}
 		}

@@ -91,6 +91,8 @@ public class SelectionWindow<T> {
 						e.printStackTrace();
 					}
 
+					editor.settingsWindow.update();
+
 				}
 			};
 			buttons.add(selectionWindowButton);
