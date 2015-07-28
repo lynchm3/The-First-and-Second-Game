@@ -7,6 +7,7 @@ import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.GameObject;
 
 public class TextureUtils {
 
@@ -103,7 +104,7 @@ public class TextureUtils {
 
 		// bind normal map to texture unit 1
 		glActiveTexture(GL_TEXTURE1);
-		texture.bind();
+		GameObject.grassNormalTexture.bind();
 
 		// bind diffuse color to texture unit 0
 		glActiveTexture(GL_TEXTURE0);

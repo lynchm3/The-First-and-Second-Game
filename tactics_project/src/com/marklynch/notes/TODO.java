@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Resize grass tile to 128 :/
+
 	// Generate normals for the grass or something...
 	// I could do different shader for bg VS caharacters + objects
 

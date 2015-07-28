@@ -53,6 +53,7 @@ public class GameObject {
 	public transient Texture xTexture = null;
 	public transient Texture upTexture = null;
 	public transient Texture downTexture = null;
+	public static transient Texture grassNormalTexture = null;
 
 	// paths
 	public transient HashMap<Square, Path> paths = new HashMap<Square, Path>();
@@ -92,6 +93,7 @@ public class GameObject {
 		this.xTexture = getGlobalImage("x.png");
 		this.upTexture = getGlobalImage("up.png");
 		this.downTexture = getGlobalImage("down.png");
+		grassNormalTexture = getGlobalImage("grass_NRM.png");
 		for (Weapon weapon : this.weapons.weapons) {
 			weapon.loadImages();
 		}
