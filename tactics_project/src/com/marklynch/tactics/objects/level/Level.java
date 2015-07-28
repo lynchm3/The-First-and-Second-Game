@@ -487,6 +487,8 @@ public class Level {
 			}
 		}
 
+		Game.activeBatch.flush();
+
 		// Background decorations
 
 		for (Decoration decoration : decorations) {

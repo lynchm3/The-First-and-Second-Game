@@ -11,6 +11,8 @@ import com.marklynch.tactics.objects.GameObject;
 
 public class TextureUtils {
 
+	public static boolean skip = false;
+
 	// master drawTexture method
 	public static void drawTexture(Texture texture, float alpha, float x1,
 			float x2, float y1, float y2, boolean inBounds, float boundsX1,
@@ -104,8 +106,11 @@ public class TextureUtils {
 
 		// bind normal map to texture unit 1
 		glActiveTexture(GL_TEXTURE1);
-		GameObject.grassNormalTexture.bind();
-
+		if (!skip) {
+			GameObject.grassNormalTexture.bind();
+		} else {
+			GameObject.skipNormalTexture.bind();
+		}
 		// bind diffuse color to texture unit 0
 		glActiveTexture(GL_TEXTURE0);
 		texture.bind();

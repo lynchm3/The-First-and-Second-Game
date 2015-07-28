@@ -54,6 +54,7 @@ public class GameObject {
 	public transient Texture upTexture = null;
 	public transient Texture downTexture = null;
 	public static transient Texture grassNormalTexture = null;
+	public static transient Texture skipNormalTexture = null;
 
 	// paths
 	public transient HashMap<Square, Path> paths = new HashMap<Square, Path>();
@@ -94,6 +95,7 @@ public class GameObject {
 		this.upTexture = getGlobalImage("up.png");
 		this.downTexture = getGlobalImage("down.png");
 		grassNormalTexture = getGlobalImage("grass_NRM.png");
+		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png");
 		for (Weapon weapon : this.weapons.weapons) {
 			weapon.loadImages();
 		}
@@ -108,6 +110,8 @@ public class GameObject {
 	}
 
 	public void draw() {
+
+		System.out.println("GO.draw()");
 
 		// Draw object
 		int actorPositionXInPixels = this.squareGameObjectIsOn.x
@@ -127,10 +131,12 @@ public class GameObject {
 			alpha = 0.5f;
 		}
 
+		TextureUtils.skip = true;
 		TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
 				actorPositionXInPixels + Game.SQUARE_WIDTH,
 				actorPositionYInPixels, actorPositionYInPixels
 						+ Game.SQUARE_HEIGHT);
+		TextureUtils.skip = false;
 	}
 
 	public void draw2() {

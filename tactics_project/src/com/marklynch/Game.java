@@ -524,8 +524,7 @@ public class Game {
 	}
 
 	public void renderLight() {
-
-		System.out.println("LIGHT");
+		System.out.println("renderLight()");
 
 		activeBatch = lightBatch;
 
