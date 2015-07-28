@@ -99,10 +99,10 @@ public class Game {
 	public static final Vector3f FALLOFF = new Vector3f(.4f, 3f, 20f);
 
 	enum DRAW_MODE {
-		NORMAL, BLUR, LIGHT
+		NORMAL, BLUR, LIGHT, SHADOW
 	};
 
-	public static DRAW_MODE drawMode = DRAW_MODE.LIGHT;
+	public static DRAW_MODE drawMode = DRAW_MODE.SHADOW;
 
 	public static float blurTime = 0f;
 	public static float blurTimeMax = 1000f;
@@ -525,6 +525,51 @@ public class Game {
 
 	public void renderLight() {
 		System.out.println("renderLight()");
+
+		activeBatch = lightBatch;
+
+		activeBatch.begin();
+		// Clear FBO A with an opaque colour to minimize blending issues
+		glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.setIdentity();
+		activeBatch.updateUniforms();
+
+		// shader will now be in use...
+
+		// update light position, normalized to screen resolution
+		float x = Mouse.getX() / (float) Display.getWidth();
+		float y = Mouse.getY() / (float) Display.getHeight();
+		LIGHT_POS.x = x;
+		LIGHT_POS.y = y;
+
+		// send a Vector4f to GLSL
+		lightShader.setUniformf("LightPos", LIGHT_POS);
+
+		// // bind normal map to texture unit 1
+		// glActiveTexture(GL_TEXTURE1);
+		// rockNormals.bind();
+		//
+		// // bind diffuse color to texture unit 0
+		// glActiveTexture(GL_TEXTURE0);
+		// rock.bind();
+
+		// render our scene fully to FBO A
+		if (editorMode)
+			editor.draw();
+		else
+			level.draw();
+
+		// draw the texture unit 0 with our shader effect applied
+		// activeBatch.draw(rock, 50, 50);
+
+		activeBatch.end();
+
+	}
+
+	public void renderShadow() {
+		System.out.println("renderShadow()");
 
 		activeBatch = lightBatch;
 
