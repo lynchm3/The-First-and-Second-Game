@@ -111,8 +111,6 @@ public class GameObject {
 
 	public void draw() {
 
-		System.out.println("GO.draw()");
-
 		// Draw object
 		int actorPositionXInPixels = this.squareGameObjectIsOn.x
 				* (int) Game.SQUARE_WIDTH;

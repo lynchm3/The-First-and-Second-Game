@@ -1,13 +1,17 @@
 package mdesl.test.shadertut;
 
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_ONE;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glClearColor;
 
 import java.util.ArrayList;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
-import mdesl.graphics.TextureRegion;
 import mdesl.graphics.glutils.FrameBuffer;
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.graphics.text.BitmapFont;
@@ -16,8 +20,8 @@ import mdesl.test.SimpleGame;
 import mdesl.test.Util;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 
 /**
@@ -29,35 +33,11 @@ import org.lwjgl.util.vector.Vector2f;
 public class Shadow extends SimpleGame {
 
 	public static void main(String[] args) throws LWJGLException {
+
 		Game game = new Shadow();
 		game.setDisplayMode(800, 600, false);
 		game.start();
 	}
-
-	private final int lightSize = 256;
-
-	private final float upScale = 1f; // for example; try lightSize=128,
-										// upScale=1.5f
-
-	SpriteBatch batch;
-
-	BitmapFont font;
-
-	TextureRegion shadowMap1D; // 1 dimensional shadow map
-	TextureRegion occluders; // occluder map
-
-	FrameBuffer shadowMapFBO;
-	FrameBuffer occludersFBO;
-
-	Texture casterSprites;
-	Texture light;
-
-	ShaderProgram shadowMapShader, shadowRenderShader;
-
-	ArrayList<Light> lights = new ArrayList<Light>();
-
-	boolean additive = true;
-	boolean softShadows = true;
 
 	/**
 	 * Compiles a new instance of the default shader for this batch and returns
@@ -77,6 +57,33 @@ public class Shadow extends SimpleGame {
 		return prog;
 	}
 
+	private final int lightSize = 256;
+
+	private final float upScale = 1f; // for example; try lightSize=128,
+										// upScale=1.5f
+
+	SpriteBatch batch;
+	// CHANGE
+	// OrthographicCamera cam;
+
+	BitmapFont font;
+
+	// TextureRegion shadowMap1D; // 1 dimensional shadow map
+	// TextureRegion occluders; // occluder map
+
+	FrameBuffer shadowMapFBO;
+	FrameBuffer occludersFBO;
+
+	Texture casterSprites;
+	Texture light;
+
+	ShaderProgram shadowMapShader, shadowRenderShader;
+
+	ArrayList<Light> lights = new ArrayList<Light>();
+
+	boolean additive = true;
+	boolean softShadows = true;
+
 	class Light {
 
 		float x, y;
@@ -91,16 +98,11 @@ public class Shadow extends SimpleGame {
 
 	@Override
 	public void create() {
+
+		// TRY
+		// Get my code for opengl init and normal batch init
+
 		try {
-			// Display.setDisplayMode(new DisplayMode(800, 600));
-			// Display.setResizable(true);
-			// Display.create();
-			// Display.setVSyncEnabled(true);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-
-			GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
-
-			GL11.glDisable(GL_DEPTH_TEST);
 			// enable alpha blending
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -112,10 +114,9 @@ public class Shadow extends SimpleGame {
 			GL11.glLoadIdentity();
 			GL11.glOrtho(0, 800, 600, 0, 1, -1);
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
-
 			batch = new SpriteBatch();
+			// CHANGE ShaderProgram.pedantic = false;
 			ShaderProgram.setStrictMode(false);
-			// ShaderProgram.pedantic = false;
 
 			// read vertex pass-through shader
 			final String VERT_SRC = Util.readFile(Util
@@ -129,46 +130,68 @@ public class Shadow extends SimpleGame {
 					.getResourceAsStream("res/shadertut/shadow_render.frag")));
 
 			// the occluders
-			new Texture(Util.getResource("res/rock.png"), Texture.LINEAR);
 			casterSprites = new Texture(Util.getResource("res/cat4.png"),
 					Texture.LINEAR);
 			// the light sprite
+			// TRY WRAP
 			light = new Texture(Util.getResource("res/light.png"),
 					Texture.LINEAR);
 
 			// build frame buffers
+			// CHANGE occludersFBO = new FrameBuffer(Format.RGBA8888, lightSize,
+			// lightSize, false); //FrameBuffer(Pixmap.Format format, int width,
+			// int
+			// height, boolean hasDepth)
+			// TRY WRAP, TRY CHECK IF U CAN CHANGE THE FORMAT
 			occludersFBO = new FrameBuffer(lightSize, lightSize, Texture.LINEAR);
-			occluders = new TextureRegion(occludersFBO.getTexture());
-			occluders.flip(false, true);
+
+			// CHANGE occluders = new
+			// TextureRegion(occludersFBO.getColorBufferTexture());
+			// getColorBufferTexture() Returns: the gl texture
+			// occluders = new TextureRegion(occludersFBO.getTexture());
+			// occluders.flip(false, true);
 
 			// our 1D shadow map, lightSize x 1 pixels, no depth
+			// CHANGE shadowMapFBO = new FrameBuffer(Format.RGBA8888, lightSize,
+			// 1,
+			// false);
+			// TRY WRAP, TRY CHECK IF U CAN CHANGE THE FORMAT
 			shadowMapFBO = new FrameBuffer(lightSize, 1, Texture.LINEAR);
+
+			// CHANGE Texture shadowMapTex =
+			// shadowMapFBO.getColorBufferTexture();
 			Texture shadowMapTex = shadowMapFBO.getTexture();
 
 			// use linear filtering and repeat wrap mode when sampling
+			// CHANGE
+			// shadowMapTex.setFilter(TextureFilter.Linear,
+			// TextureFilter.Linear);
+			// shadowMapTex.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 			shadowMapTex.setFilter(Texture.LINEAR, Texture.LINEAR);
 			shadowMapTex.setWrap(Texture.REPEAT);
 
 			// for debugging only; in order to render the 1D shadow map FBO to
 			// screen
-			shadowMap1D = new TextureRegion(shadowMapTex);
-			shadowMap1D.flip(false, true);
+			// shadowMap1D = new TextureRegion(shadowMapTex);
+			// shadowMap1D.flip(false, true);
+
+			// CHANGE font = new BitmapFont();
 			Texture fontTexture = new Texture(
 					Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
 			font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
 					fontTexture);
-
-			GL11.glOrtho(0, 800, 600, 0, 1, -1);
-
-			// cam = new OrthographicCamera(Gdx.graphics.getWidth(),
-			// Gdx.graphics.getHeight());
-			// cam.setToOrtho(false);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(0);
 		}
 
-		// INPUT
+		// CHANGE just skipping this
+		// cam = new OrthographicCamera(Gdx.graphics.getWidth(),
+		// Gdx.graphics.getHeight());
+		// cam.setToOrtho(false);
+
+		// CHANGE I remove the input
 		// Gdx.input.setInputProcessor(new InputAdapter() {
 		//
 		// public boolean touchDown(int x, int y, int pointer, int button) {
@@ -194,32 +217,40 @@ public class Shadow extends SimpleGame {
 		// });
 
 		clearLights();
+		resize(800, 600);
 	}
 
 	// RESIZE
-	// @Override
-	// public void resize(int width, int height) {
-	// cam.setToOrtho(false, width, height);
-	// batch.setProjectionMatrix(cam.combined);
-	// }
+	public void resize(int width, int height) {
+
+		// CHANGE
+		// cam.setToOrtho(false, width, height);
+		// batch.setProjectionMatrix(cam.combined);
+
+		batch.resize(width, height);
+	}
 
 	@Override
 	public void render() {
 		// clear frame
 		GL11.glClearColor(0.25f, 0.25f, 0.25f, 1f);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-		Matrix4f view = batch.getViewMatrix();
-		view.setIdentity();
+
+		// TRY resize batch and reset view
+		batch.setColor(Color.WHITE);
+		batch.resize(Display.getWidth(), Display.getHeight());
+		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
 
 		float mx = 100;
 		float my = 100;
 
-		if (additive)
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-		// batch.setBlendFunction(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+		if (additive) {
+			// CHANGE
+			// batch.setBlendFunction(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+			glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+		}
 
-		System.out.println("lights.size() = " + lights.size());
 		for (int i = 0; i < lights.size(); i++) {
 			Light light = lights.get(i);
 			if (i == lights.size() - 1) {
@@ -229,38 +260,64 @@ public class Shadow extends SimpleGame {
 			renderLight(light);
 		}
 
-		if (additive)
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+		if (additive) {
+			// CHANGE
+			// batch.setBlendFunction(GL11.GL_SRC_ALPHA,
+			// GL11.GL_ONE_MINUS_SRC_ALPHA);
+			glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		}
+
+		// TRY resize batch and reset view
+		batch.resize(Display.getWidth(), Display.getHeight());
+		batch.getViewMatrix().setIdentity();
+		batch.updateUniforms();
 
 		// STEP 4. render sprites in full colour
-		batch.begin();
 		try {
 			batch.setShader(SpriteBatch.getDefaultShader());
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(0);
 		} // default shader
+		batch.begin();
 
 		batch.draw(casterSprites, 0, 0);
 
-		// DEBUG RENDERING -- show occluder map and 1D shadow map
-		batch.setColor(Color.BLACK);
-		batch.draw(occluders, 800 - lightSize, 0);
-		batch.setColor(Color.WHITE);
-		batch.draw(shadowMap1D, 800 - lightSize, lightSize + 5);
-
-		// DEBUG RENDERING -- show light
-		batch.draw(light, mx - light.getWidth() / 2f, my - light.getHeight()
-				/ 2f); // mouse
-		batch.draw(light, 800 - lightSize / 2f - light.getWidth() / 2f,
-				lightSize / 2f - light.getHeight() / 2f);
+		// // DEBUG RENDERING -- show occluder map and 1D shadow map
+		// batch.setColor(Color.PINK);
+		// // CHANGE Gdx.graphics.getWidth()
+		// batch.draw(this.occludersFBO.getTexture(), Display.getWidth()
+		// - lightSize, 0);
+		// batch.setColor(Color.CYAN);
+		// // CHANGE Gdx.graphics.getWidth()
+		// batch.draw(this.shadowMapFBO.getTexture(), Display.getWidth()
+		// - lightSize, lightSize + 5);
+		//
+		// // DEBUG RENDERING -- show light
+		// batch.draw(light, mx - light.getWidth() / 2f, my - light.getHeight()
+		// / 2f); // mouse
+		// // CHANGE Gdx.graphics.getWidth()
+		// batch.draw(light,
+		// Display.getWidth() - lightSize / 2f - light.getWidth() / 2f,
+		// lightSize / 2f - light.getHeight() / 2f);
 
 		// draw FPS
-		// font.drawMultiLine(batch, "FPS: " + Gdx.graphics.getFramesPerSecond()
-		// + "\n\nLights: " + lights.size + "\nSPACE to clear lights"
+		// CHANGE Gdx.graphics.getWidth()
+		// CHANGE Gdx.graphics.getHeight()
+		batch.setColor(Color.BLACK);
+		font.drawText(batch,
+				"FPS: " + ":P" + "           Lights: " + lights.size()
+						+ "                  SPACE to clear lights"
+						+ "                  A to toggle additive blending"
+						+ "                  S to toggle soft shadows", 10,
+				Display.getHeight() - 100);
+		// font.drawMultiLine(batch,
+		// "FPS: " + ":P" + "\n\nLights: " + lights.size()
+		// + "\nSPACE to clear lights"
 		// + "\nA to toggle additive blending"
 		// + "\nS to toggle soft shadows", 10,
-		// Gdx.graphics.getHeight() - 10);
+		// Display.getHeight() - 10);
 
 		batch.end();
 	}
@@ -280,105 +337,122 @@ public class Shadow extends SimpleGame {
 		float mx = o.x;
 		float my = o.y;
 
+		// OCCLUSION
 		// STEP 1. render light region to occluder FBO
 
-		// bind the occluder FBO
+		// Bind FBO target A
 		occludersFBO.begin();
 
-		// clear the FBO
-		GL11.glClearColor(0.25f, 0.25f, 0.25f, 1f);
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+		// Clear FBO A with an opaque colour to minimize blending issues
+		glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		glClear(GL_COLOR_BUFFER_BIT);
 
-		// set the orthographic camera to the size of our FBO
-
-		GL11.glOrtho(0, occludersFBO.getWidth(), occludersFBO.getHeight(), 0,
-				1, -1);
-		// cam.setToOrtho(false, occludersFBO.getWidth(),
-		// occludersFBO.getHeight());
-
-		Matrix4f view = batch.getViewMatrix();
-		// translate camera so that light is in the center
-		view.translate(new Vector2f(mx - lightSize / 2f, my - lightSize / 2f));
-
-		// update camera matrices
-		batch.updateUniforms();
-
-		// set up our batch for the occluder pass
-		// batch.setProjectionMatrix(cam.combined);
+		// Reset batch to default shader (without blur)
 		try {
 			batch.setShader(SpriteBatch.getDefaultShader());
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} // use default shader
+			System.exit(0);
+		}
+
+		// send the new projection matrix (FBO size) to the default shader
+		batch.resize(occludersFBO.getWidth(), occludersFBO.getHeight());
+
+		// now we can start our batch
 		batch.begin();
-		// ... draw any sprites that will cast shadows here ... //
+
+		batch.getViewMatrix().translate(
+				new Vector2f(mx - lightSize / 2f, my - lightSize / 2f));
+		batch.updateUniforms();
+
+		// render our scene fully to FBO A
 		batch.draw(casterSprites, 0, 0);
 
-		// end the batch before unbinding the FBO
-		batch.end();
+		// flush the batch, i.e. render entities to GPU
+		batch.flush();
 
-		// unbind the FBO
+		// After flushing, we can finish rendering to FBO target A
 		occludersFBO.end();
 
-		// STEP 2. build a 1D shadow map from occlude FBO
+		batch.end();
 
-		// bind shadow map
+		// ====================================================================================================================
+
+		// STEP 2
+		// SHADOW MAP
+		// Bind FBO target A
 		shadowMapFBO.begin();
 
-		// clear it
-		GL11.glClearColor(0f, 0f, 0f, 0f);
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+		// Clear FBO A with an opaque colour to minimize blending issues
+		glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		glClear(GL_COLOR_BUFFER_BIT);
 
-		// set our shadow map shader
+		// Reset batch to default shader (without blur)
 		batch.setShader(shadowMapShader);
-		batch.begin();
 		shadowMapShader.setUniformf("resolution", lightSize, lightSize);
 		shadowMapShader.setUniformf("upScale", upScale);
 
-		// reset our projection matrix to the FBO size
-		GL11.glOrtho(0, shadowMapFBO.getWidth(), shadowMapFBO.getHeight(), 0,
-				1, -1);
-		// cam.setToOrtho(false, shadowMapFBO.getWidth(),
-		// shadowMapFBO.getHeight());
-		// batch.setProjectionMatrix(cam.combined);
+		// send the new projection matrix (FBO size) to the default shader
+		batch.resize(shadowMapFBO.getWidth(), shadowMapFBO.getHeight());
 
-		// draw the occluders texture to our 1D shadow map FBO
-		batch.draw(occluders.getTexture(), 0, 0, lightSize,
-				shadowMapFBO.getHeight());
-
-		// flush batch
-		batch.end();
-
-		// unbind shadow map FBO
-		shadowMapFBO.end();
-
-		// STEP 3. render the blurred shadows
-
-		// reset projection matrix to screen
-		// cam.setToOrtho(false);
-		// batch.setProjectionMatrix(cam.combined);
-
-		// set the shader which actually draws the light/shadow
-		batch.setShader(shadowRenderShader);
+		// now we can start our batch
 		batch.begin();
 
+		batch.getViewMatrix().setIdentity();
+		batch.updateUniforms();
+
+		// render our scene fully to FBO A
+		batch.draw(this.occludersFBO.getTexture(), 0, 0, lightSize,
+				shadowMapFBO.getHeight());
+
+		// flush the batch, i.e. render entities to GPU
+		batch.flush();
+
+		// After flushing, we can finish rendering to FBO target A
+		shadowMapFBO.end();
+
+		batch.end();
+
+		// ====================================================================================================================
+
+		// STEP 3. render the blurred shadows
+		// Clear FBO A with an opaque colour to minimize blending issues
+		glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		// Reset batch to default shader (without blur)
+		batch.setShader(shadowRenderShader);
 		shadowRenderShader.setUniformf("resolution", lightSize, lightSize);
 		shadowRenderShader.setUniformf("softShadows", softShadows ? 1f : 0f);
-		// set color to light
+
 		batch.setColor(o.color);
 
+		// send the new projection matrix (FBO size) to the default shader
+		// batch.resize(Display.getWidth(), Display.getHeight());
+		// batch.resize(lightSize, lightSize);
+		batch.begin();
+
+		batch.getViewMatrix().setIdentity();
+		batch.updateUniforms();
+
+		// render our scene fully to FBO A
 		float finalSize = lightSize * upScale;
 
 		// draw centered on light position
-		batch.draw(shadowMap1D.getTexture(), mx - finalSize / 2f, my
+		batch.draw(this.shadowMapFBO.getTexture(), mx - finalSize / 2f, my
 				- finalSize / 2f, finalSize, finalSize);
 
-		// flush the batch before swapping shaders
+		// batch.draw(this.shadowMapFBO.getTexture(), 0, 0, 100, 100);
+
+		// flush the batch, i.e. render entities to GPU
+		batch.flush();
+
+		// After flushing, we can finish rendering to FBO target A
+
 		batch.end();
 
 		// reset color
 		batch.setColor(Color.WHITE);
 	}
-
 }

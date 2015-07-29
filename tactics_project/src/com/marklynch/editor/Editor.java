@@ -298,6 +298,12 @@ public class Editor {
 
 		level.draw();
 
+		Game.activeBatch.flush();
+		Game.activeBatch.end();
+
+		Game.activeBatch = Game.normalBatch;
+		Game.activeBatch.begin();
+
 		// draw highlight on selected object
 		if (selectedGameObject != null) {
 			selectedGameObject.squareGameObjectIsOn.drawHighlight();
@@ -399,6 +405,7 @@ public class Editor {
 							- Mouse.getY() + 20,
 					Game.windowHeight - Mouse.getY() + 40);
 		}
+		// Game.activeBatch.begin();
 	}
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY) {

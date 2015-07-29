@@ -99,11 +99,6 @@ public class ShaderLesson5 extends SimpleGame {
 		}
 	}
 
-	protected void drawEntities(SpriteBatch batch) {
-		batch.draw(tex, 50, 50);
-		batch.draw(tex2, tex.getWidth() + 20, 100);
-	}
-
 	void renderScene() throws LWJGLException {
 		// Bind FBO target A
 		blurTargetA.begin();
@@ -122,7 +117,8 @@ public class ShaderLesson5 extends SimpleGame {
 		batch.begin();
 
 		// render our scene fully to FBO A
-		drawEntities(batch);
+		batch.draw(tex, 50, 50);
+		batch.draw(tex2, tex.getWidth() + 20, 100);
 
 		// flush the batch, i.e. render entities to GPU
 		batch.flush();

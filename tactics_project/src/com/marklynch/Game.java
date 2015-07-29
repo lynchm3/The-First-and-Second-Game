@@ -102,7 +102,7 @@ public class Game {
 		NORMAL, BLUR, LIGHT, SHADOW
 	};
 
-	public static DRAW_MODE drawMode = DRAW_MODE.SHADOW;
+	public static DRAW_MODE drawMode = DRAW_MODE.LIGHT;
 
 	public static float blurTime = 0f;
 	public static float blurTimeMax = 1000f;
@@ -426,6 +426,8 @@ public class Game {
 			renderBlur();
 		} else if (drawMode == DRAW_MODE.LIGHT) {
 			renderLight();
+		} else if (drawMode == DRAW_MODE.SHADOW) {
+			renderShadow();
 		}
 	}
 
@@ -524,7 +526,6 @@ public class Game {
 	}
 
 	public void renderLight() {
-		System.out.println("renderLight()");
 
 		activeBatch = lightBatch;
 
@@ -569,7 +570,6 @@ public class Game {
 	}
 
 	public void renderShadow() {
-		System.out.println("renderShadow()");
 
 		activeBatch = lightBatch;
 

@@ -11,8 +11,6 @@ public class AttackButton extends ActorButton {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath);
 		this.enabled = true;
 		this.level = level;
-		System.out.println("texture  = " + this.enabledTexture);
-		System.out.println("texturePath  = " + enabledTexturePath);
 	}
 
 	@Override

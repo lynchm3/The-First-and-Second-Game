@@ -24,8 +24,6 @@ public abstract class Button {
 		this.enabledTexture = ResourceUtils.getGlobalImage(enabledTexturePath);
 		this.disabledTexture = ResourceUtils
 				.getGlobalImage(disabledTexturePath);
-		System.out.println("texture  = " + enabledTexture);
-		System.out.println("enabledTexturePath  = " + enabledTexturePath);
 		this.text = text;
 	}
 
