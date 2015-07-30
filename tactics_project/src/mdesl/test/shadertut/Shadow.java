@@ -53,7 +53,7 @@ public class Shadow extends SimpleGame {
 			if (prog.getLog().length() != 0)
 				System.out.println(prog.getLog());
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return prog;
 	}
@@ -79,12 +79,15 @@ public class Shadow extends SimpleGame {
 	Texture light;
 	Texture fakeShadowMap;
 
-	ShaderProgram shadowMapShader, shadowRenderShader;
+	ShaderProgram shadowMapShader, shadowRenderShader, lesson2Shader;
 
 	ArrayList<Light> lights = new ArrayList<Light>();
 
 	boolean additive = true;
 	boolean softShadows = true;
+
+	private TextureRegion shadowMapTextureRegion;
+	private TextureRegion occludersTextureRegion;
 
 	class Light {
 
@@ -125,12 +128,18 @@ public class Shadow extends SimpleGame {
 			// .getResourceAsStream("res/shadertut/shadow_pass.vert"));
 
 			// renders occluders to 1D shadow map
-			shadowMapShader = createShader(Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson2.vert")),
+			shadowMapShader = createShader(
 					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/lesson2.frag")));
+							.getResourceAsStream("res/shadertut/shadow_pass.vert")),
+					Util.readFile(Util
+							.getResourceAsStream("res/shadertut/shadow_map.frag")));
 			// samples 1D shadow map to create the blurred soft shadow
-			shadowRenderShader = createShader(Util.readFile(Util
+			shadowRenderShader = createShader(
+					Util.readFile(Util
+							.getResourceAsStream("res/shadertut/shadow_pass.vert")),
+					Util.readFile(Util
+							.getResourceAsStream("res/shadertut/shadow_render.frag")));
+			lesson2Shader = createShader(Util.readFile(Util
 					.getResourceAsStream("res/shadertut/lesson2.vert")),
 					Util.readFile(Util
 							.getResourceAsStream("res/shadertut/lesson2.frag")));
@@ -296,17 +305,6 @@ public class Shadow extends SimpleGame {
 		// DEBUG RENDERING -- show occluder map and 1D shadow map
 		batch.setColor(Color.WHITE);
 		// CHANGE Gdx.graphics.getWidth()
-		Texture occludersTexture = this.occludersFBO.getTexture();
-		TextureRegion occludersTextureRegion = new TextureRegion(
-				occludersTexture, 0, 0, occludersTexture.getWidth(),
-				occludersTexture.getHeight());
-		occludersTextureRegion.flip(false, true);
-
-		Texture shadowMapTexture = this.shadowMapFBO.getTexture();
-		TextureRegion shadowMapTextureRegion = new TextureRegion(
-				shadowMapTexture, 0, 0, shadowMapTexture.getWidth(),
-				shadowMapTexture.getHeight());
-		shadowMapTextureRegion.flip(false, true);
 
 		batch.draw(occludersTextureRegion, 0, 0);
 		batch.draw(shadowMapTextureRegion, 0, lightSize + 5);
@@ -422,14 +420,16 @@ public class Shadow extends SimpleGame {
 		// Reset batch to default shader (without blur)
 		try {
 			// batch.setShader(batch.getDefaultShader());
+
 			batch.setShader(this.shadowMapShader);
+			shadowMapShader.use();
+			shadowMapShader.setUniformf("resolution", lightSize, lightSize);
+
+			// batch.setShader(this.lesson2Shader);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		shadowMapShader.setUniformf("resolution", lightSize, lightSize);
-		shadowMapShader.setUniformf("upScale", upScale);
-		shadowMapShader.use();
 
 		// send the new projection matrix (FBO size) to the default shader
 		batch.resize(shadowMapFBO.getWidth(), shadowMapFBO.getHeight());
@@ -441,13 +441,12 @@ public class Shadow extends SimpleGame {
 		batch.updateUniforms();
 
 		Texture occludersTexture = this.occludersFBO.getTexture();
-		TextureRegion occludersTextureRegion = new TextureRegion(
-				occludersTexture, 0, 0, occludersTexture.getWidth(),
-				occludersTexture.getHeight());
+		occludersTextureRegion = new TextureRegion(occludersTexture, 0, 0,
+				occludersTexture.getWidth(), occludersTexture.getHeight());
 		occludersTextureRegion.flip(false, true);
 
 		// render our scene fully to FBO A
-		batch.draw(this.fakeShadowMap, 0, 0, lightSize,
+		batch.draw(occludersTextureRegion, 0, 0, lightSize,
 				shadowMapFBO.getHeight());
 		// batch.draw(fakeShadowMap, 0, 0, lightSize, shadowMapFBO.getHeight());
 
@@ -471,9 +470,21 @@ public class Shadow extends SimpleGame {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// Reset batch to default shader (without blur)
-		batch.setShader(shadowRenderShader);
-		shadowRenderShader.setUniformf("resolution", lightSize, lightSize);
-		shadowRenderShader.setUniformf("softShadows", softShadows ? 1f : 0f);
+		try {
+			// batch.setShader(batch.getDefaultShader());
+
+			// batch.setShader(shadowRenderShader);
+			// shadowMapShader.use();
+			// shadowRenderShader.setUniformf("resolution", lightSize,
+			// lightSize);
+			// shadowRenderShader.setUniformf("softShadows", softShadows ? 1f :
+			// 0f);
+
+			batch.setShader(this.lesson2Shader);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		batch.setColor(o.color);
 
@@ -489,16 +500,9 @@ public class Shadow extends SimpleGame {
 		float finalSize = lightSize * upScale;
 
 		Texture shadowMapTexture = this.shadowMapFBO.getTexture();
-		TextureRegion shadowMapTextureRegion = new TextureRegion(
-				shadowMapTexture, 0, 0, shadowMapTexture.getWidth(),
-				shadowMapTexture.getHeight());
+		shadowMapTextureRegion = new TextureRegion(shadowMapTexture, 0, 0,
+				shadowMapTexture.getWidth(), shadowMapTexture.getHeight());
 		shadowMapTextureRegion.flip(false, true);
-
-		System.out.println("shadowMapTexture.getWidth() = "
-				+ shadowMapTexture.getWidth());
-		System.out.println("shadowMapTexture.getHeight() = "
-				+ shadowMapTexture.getHeight());
-		System.out.println("finalSize = " + finalSize);
 
 		// draw centered on light position
 		batch.draw(shadowMapTextureRegion, mx - finalSize / 2f, my - finalSize

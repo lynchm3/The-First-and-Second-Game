@@ -6,7 +6,7 @@ precision mediump float;
 #endif
 
 #define PI 3.14
-varying vec2 vTexCoord0;
+varying vec2 vTexCoord;
 varying LOWP vec4 vColor;
 
 uniform sampler2D u_texture;
@@ -21,7 +21,7 @@ float sample(vec2 coord, float r) {
 
 void main(void) {
     //rectangular to polar
-	vec2 norm = vTexCoord0.st * 2.0 - 1.0;
+	vec2 norm = vTexCoord.st * 2.0 - 1.0;
 	float theta = atan(norm.y, norm.x);
 	float r = length(norm);	
 	float coord = (theta + PI) / (2.0*PI);

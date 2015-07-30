@@ -6,14 +6,14 @@ precision mediump float;
 #endif
 
 #define PI 3.14
-varying vec2 vTexCoord0;
+varying vec2 vTexCoord;
 varying LOWP vec4 vColor;
 
 uniform sampler2D u_texture;
 uniform vec2 resolution;
 
 //for debugging; use a constant value in final release
-uniform float upScale;
+const float upScale = 1.0;
 
 //alpha threshold for our occlusion map
 const float THRESHOLD = 0.75;
@@ -24,7 +24,7 @@ void main(void) {
   
   for (float y=0.0; y<resolution.y; y+=1.0) {
     	//rectangular to polar filter
-		vec2 norm = vec2(vTexCoord0.s, y/resolution.y) * 2.0 - 1.0;
+		vec2 norm = vec2(vTexCoord.s, y/resolution.y) * 2.0 - 1.0;
 		float theta = PI*1.5 + norm.x * PI; 
 		float r = (1.0 + norm.y) * 0.5;
 		
