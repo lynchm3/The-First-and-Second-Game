@@ -473,14 +473,13 @@ public class Shadow extends SimpleGame {
 		try {
 			// batch.setShader(batch.getDefaultShader());
 
-			// batch.setShader(shadowRenderShader);
-			// shadowMapShader.use();
-			// shadowRenderShader.setUniformf("resolution", lightSize,
-			// lightSize);
-			// shadowRenderShader.setUniformf("softShadows", softShadows ? 1f :
-			// 0f);
+			batch.setShader(shadowRenderShader);
+			shadowRenderShader.use();
+			shadowRenderShader.setUniformf("resolution", lightSize, lightSize);
+			shadowRenderShader
+					.setUniformf("softShadows", softShadows ? 1f : 0f);
 
-			batch.setShader(this.lesson2Shader);
+			// batch.setShader(this.lesson2Shader);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
