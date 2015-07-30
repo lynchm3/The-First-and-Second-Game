@@ -49,7 +49,7 @@ public class Shadow extends SimpleGame {
 	public static ShaderProgram createShader(String vert, String frag) {
 		ShaderProgram prog = null;
 		try {
-			prog = new ShaderProgram(vert, frag);
+			prog = new ShaderProgram(vert, frag, SpriteBatch.ATTRIBUTES);
 			if (prog.getLog().length() != 0)
 				System.out.println(prog.getLog());
 		} catch (Exception e) {
@@ -126,9 +126,9 @@ public class Shadow extends SimpleGame {
 
 			// renders occluders to 1D shadow map
 			shadowMapShader = createShader(Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson1.vert")),
+					.getResourceAsStream("res/shadertut/lesson2.vert")),
 					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/lesson1.frag")));
+							.getResourceAsStream("res/shadertut/lesson2.frag")));
 			// samples 1D shadow map to create the blurred soft shadow
 			shadowRenderShader = createShader(
 					Util.readFile(Util
@@ -422,6 +422,7 @@ public class Shadow extends SimpleGame {
 
 		// Reset batch to default shader (without blur)
 		try {
+			// batch.setShader(batch.getDefaultShader());
 			batch.setShader(this.shadowMapShader);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -447,7 +448,7 @@ public class Shadow extends SimpleGame {
 		occludersTextureRegion.flip(false, true);
 
 		// render our scene fully to FBO A
-		batch.draw(occludersTextureRegion, 0, 0, lightSize,
+		batch.draw(this.fakeShadowMap, 0, 0, lightSize,
 				shadowMapFBO.getHeight());
 		// batch.draw(fakeShadowMap, 0, 0, lightSize, shadowMapFBO.getHeight());
 
