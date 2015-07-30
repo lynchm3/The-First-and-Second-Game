@@ -130,11 +130,10 @@ public class Shadow extends SimpleGame {
 					Util.readFile(Util
 							.getResourceAsStream("res/shadertut/lesson2.frag")));
 			// samples 1D shadow map to create the blurred soft shadow
-			shadowRenderShader = createShader(
+			shadowRenderShader = createShader(Util.readFile(Util
+					.getResourceAsStream("res/shadertut/lesson2.vert")),
 					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_pass.vert")),
-					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_render.frag")));
+							.getResourceAsStream("res/shadertut/lesson2.frag")));
 
 			// the occluders
 			casterSprites = new Texture(Util.getResource("res/cat4.png"),
@@ -494,6 +493,12 @@ public class Shadow extends SimpleGame {
 				shadowMapTexture, 0, 0, shadowMapTexture.getWidth(),
 				shadowMapTexture.getHeight());
 		shadowMapTextureRegion.flip(false, true);
+
+		System.out.println("shadowMapTexture.getWidth() = "
+				+ shadowMapTexture.getWidth());
+		System.out.println("shadowMapTexture.getHeight() = "
+				+ shadowMapTexture.getHeight());
+		System.out.println("finalSize = " + finalSize);
 
 		// draw centered on light position
 		batch.draw(shadowMapTextureRegion, mx - finalSize / 2f, my - finalSize
