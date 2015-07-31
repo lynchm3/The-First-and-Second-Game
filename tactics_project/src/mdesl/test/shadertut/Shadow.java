@@ -17,6 +17,7 @@ import mdesl.test.SimpleGame;
 import mdesl.test.Util;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
@@ -122,6 +123,11 @@ public class Shadow extends SimpleGame {
 
 	@Override
 	public void render() {
+		glClear(GL_COLOR_BUFFER_BIT);
+		float x = Mouse.getX();
+		float y = Display.getHeight() - Mouse.getY();
+		lights.get(0).x = x;
+		lights.get(0).y = y;
 		GL11.glClearColor(0.25f, 0.25f, 0.25f, 1f);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		batch.setColor(Color.WHITE);

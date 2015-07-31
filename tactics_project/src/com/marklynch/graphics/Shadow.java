@@ -78,6 +78,7 @@ public class Shadow {
 		lights.get(0).x = x;
 		lights.get(0).y = y;
 
+		// Draw lights
 		Game.activeBatch.setColor(Color.WHITE);
 		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
 		Game.activeBatch.getViewMatrix().setIdentity();
@@ -85,6 +86,8 @@ public class Shadow {
 		for (int i = 0; i < lights.size(); i++) {
 			renderLight(lights.get(i));
 		}
+
+		// draw lvl
 		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
 		Game.activeBatch.getViewMatrix().setIdentity();
 		Game.activeBatch.updateUniforms();
@@ -95,11 +98,15 @@ public class Shadow {
 			System.exit(0);
 		}
 		Game.activeBatch.setColor(Color.WHITE);
-		if (Game.editorMode)
-			Game.editor.draw();
-		else
-			Game.level.draw();
 
+		if (Game.editorMode)
+			Game.editor.level.drawObjectsAndActors();
+		else
+			Game.level.drawObjectsAndActors();
+
+		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
+		Game.activeBatch.getViewMatrix().setIdentity();
+		Game.activeBatch.updateUniforms();
 		// Debug
 		batch.setColor(Color.BLACK);
 		batch.draw(occludersFBO.getTexture(), Display.getWidth() - lightSize, 0);
@@ -132,10 +139,11 @@ public class Shadow {
 				new Vector2f(-(light.x - lightSize / 2f),
 						-(light.y - lightSize / 2f)));
 		batch.updateUniforms();
-		// if (Game.editorMode)
-		// Game.editor.draw();
-		// else
-		// Game.level.draw();
+
+		if (Game.editorMode)
+			Game.editor.level.drawObjectsAndActors();
+		else
+			Game.level.drawObjectsAndActors();
 		batch.flush();
 		occludersFBO.end();
 		// batch.end();
@@ -152,6 +160,7 @@ public class Shadow {
 		// batch.begin();
 		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
+		batch.setColor(Color.WHITE);
 		batch.draw(occludersFBO.getTexture(), 0, 0, lightSize,
 				shadowMapFBO.getHeight());
 		batch.flush();

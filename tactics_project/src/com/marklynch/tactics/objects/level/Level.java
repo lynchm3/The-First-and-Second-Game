@@ -495,31 +495,7 @@ public class Level {
 			decoration.draw();
 		}
 
-		// Objects
-
-		for (GameObject gameObject : inanimateObjects) {
-			gameObject.draw();
-		}
-
-		// Actors
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.draw();
-			}
-		}
-
-		// Objects
-
-		for (GameObject gameObject : inanimateObjects) {
-			gameObject.draw2();
-		}
-
-		// Actors
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.draw2();
-			}
-		}
+		drawObjectsAndActors();
 
 		// Foreground decorations
 
@@ -591,6 +567,36 @@ public class Level {
 
 		// script
 		script.draw();
+	}
+
+	public void drawObjectsAndActors() {
+
+		// Objects 1
+
+		for (GameObject gameObject : inanimateObjects) {
+			gameObject.draw();
+		}
+
+		// Actors 1
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				actor.draw();
+			}
+		}
+
+		// Objects 2
+
+		for (GameObject gameObject : inanimateObjects) {
+			gameObject.draw2();
+		}
+
+		// Actors 2
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				actor.draw2();
+			}
+		}
+
 	}
 
 	public void update(int delta) {
