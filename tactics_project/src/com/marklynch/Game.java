@@ -5,9 +5,6 @@ import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL11.glViewport;
-
-import java.io.IOException;
-
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.TextureRegion;
@@ -18,15 +15,14 @@ import mdesl.test.Util;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
 
 import com.marklynch.editor.Editor;
+import com.marklynch.graphics.Light;
+import com.marklynch.graphics.Shadow;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.ui.button.Button;
@@ -43,7 +39,7 @@ public class Game {
 
 	long timeBetweenMoveCommands = 1l;
 	public static Level level;
-	Editor editor;
+	public static Editor editor;
 	public static boolean editorMode = true;
 	public static float SQUARE_WIDTH = 128f;
 	public static float SQUARE_HEIGHT = 128f;
@@ -87,22 +83,11 @@ public class Game {
 	float blurRadius = 3f;
 	float MAX_BLUR = 10f;
 
-	// LIGHT
-	SpriteBatch lightBatch;
-	ShaderProgram lightShader;
-	public static final float DEFAULT_LIGHT_Z = 0.075f;
-	public static final Vector3f LIGHT_POS = new Vector3f(0f, 0f,
-			DEFAULT_LIGHT_Z);
-	public static final Vector4f LIGHT_COLOR = new Vector4f(1f, 0.8f, 0.6f, 1f);
-	public static final Vector4f AMBIENT_COLOR = new Vector4f(0.6f, 0.6f, 1f,
-			0.2f);
-	public static final Vector3f FALLOFF = new Vector3f(.4f, 3f, 20f);
-
 	enum DRAW_MODE {
 		NORMAL, BLUR, LIGHT, SHADOW
 	};
 
-	public static DRAW_MODE drawMode = DRAW_MODE.LIGHT;
+	public static DRAW_MODE drawMode = DRAW_MODE.SHADOW;
 
 	public static float blurTime = 0f;
 	public static float blurTimeMax = 1000f;
@@ -230,7 +215,8 @@ public class Game {
 
 			initNormalBatch();
 			initBlurBatch();
-			initLightBatch();
+			Light.initLightBatch();
+			Shadow.initShadowBatch();
 			resize();
 		} catch (Exception e) {
 			// simple exception handling...
@@ -244,14 +230,12 @@ public class Game {
 		windowHeight = Display.getHeight();
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
 
-		lightShader.use();
-		lightShader.setUniformf("Resolution", Display.getWidth(),
-				Display.getHeight());
+		Light.resize();
+		Shadow.resize();
 
 		// resize our batch with the new screen size
 		normalBatch.resize(Display.getWidth(), Display.getHeight());
 		blurBatch.resize(Display.getWidth(), Display.getHeight());
-		lightBatch.resize(Display.getWidth(), Display.getHeight());
 
 		// whenever our screen resizes, we need to update our uniform
 		// program.use();
@@ -305,58 +289,6 @@ public class Game {
 			Game.normalBatch = new SpriteBatch();
 		} catch (LWJGLException e) {
 			e.printStackTrace();
-		}
-	}
-
-	public static Texture rock;
-	public static Texture rockNormals;
-
-	public void initLightBatch() {
-
-		try {
-			// load our texture with linear filter
-			rock = new Texture(Util.getResource("res/rock.png"), Texture.LINEAR);
-			rockNormals = new Texture(Util.getResource("res/rock_n.png"),
-					Texture.LINEAR);
-		} catch (IOException e) {
-			throw new RuntimeException("couldn't decode texture");
-		}
-
-		// load our shader program and sprite batch
-		try {
-			// our basic pass-through vertex shader
-			final String VERT = Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson6.vert"));
-
-			// our fragment shader, which does the blur in one direction at a
-			// time
-			final String FRAG = Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson6.frag"));
-
-			// create our shader program
-			ShaderProgram.setStrictMode(false);
-			lightShader = new ShaderProgram(VERT, FRAG, SpriteBatch.ATTRIBUTES);
-
-			// Good idea to log any warnings if they exist
-			if (lightShader.getLog().length() != 0)
-				System.out.println(lightShader.getLog());
-
-			// always a good idea to set up default uniforms...
-			lightShader.use();
-
-			// our normal map
-			lightShader.setUniformi("u_normals", 1); // GL_TEXTURE1
-
-			// light/ambient colors
-			lightShader.setUniformf("LightColor", LIGHT_COLOR);
-			lightShader.setUniformf("AmbientColor", AMBIENT_COLOR);
-			lightShader.setUniformf("Falloff", FALLOFF);
-
-			lightBatch = new SpriteBatch(lightShader);
-		} catch (Exception e) {
-			// simple exception handling...
-			e.printStackTrace();
-			System.exit(0);
 		}
 	}
 
@@ -425,9 +357,9 @@ public class Game {
 		} else if (drawMode == DRAW_MODE.BLUR) {
 			renderBlur();
 		} else if (drawMode == DRAW_MODE.LIGHT) {
-			renderLight();
+			Light.renderLight();
 		} else if (drawMode == DRAW_MODE.SHADOW) {
-			renderShadow();
+			Shadow.renderShadow();
 		}
 	}
 
@@ -520,94 +452,6 @@ public class Game {
 		// draw the horizontally-blurred FBO B to the screen, applying the
 		// vertical blur as we go
 		activeBatch.draw(blurTargetB, 0, 0);
-
-		activeBatch.end();
-
-	}
-
-	public void renderLight() {
-
-		activeBatch = lightBatch;
-
-		activeBatch.begin();
-		// Clear FBO A with an opaque colour to minimize blending issues
-		glClearColor(0.5f, 0.5f, 0.5f, 1f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.setIdentity();
-		activeBatch.updateUniforms();
-
-		// shader will now be in use...
-
-		// update light position, normalized to screen resolution
-		float x = Mouse.getX() / (float) Display.getWidth();
-		float y = Mouse.getY() / (float) Display.getHeight();
-		LIGHT_POS.x = x;
-		LIGHT_POS.y = y;
-
-		// send a Vector4f to GLSL
-		lightShader.setUniformf("LightPos", LIGHT_POS);
-
-		// // bind normal map to texture unit 1
-		// glActiveTexture(GL_TEXTURE1);
-		// rockNormals.bind();
-		//
-		// // bind diffuse color to texture unit 0
-		// glActiveTexture(GL_TEXTURE0);
-		// rock.bind();
-
-		// render our scene fully to FBO A
-		if (editorMode)
-			editor.draw();
-		else
-			level.draw();
-
-		// draw the texture unit 0 with our shader effect applied
-		// activeBatch.draw(rock, 50, 50);
-
-		activeBatch.end();
-
-	}
-
-	public void renderShadow() {
-
-		activeBatch = lightBatch;
-
-		activeBatch.begin();
-		// Clear FBO A with an opaque colour to minimize blending issues
-		glClearColor(0.5f, 0.5f, 0.5f, 1f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.setIdentity();
-		activeBatch.updateUniforms();
-
-		// shader will now be in use...
-
-		// update light position, normalized to screen resolution
-		float x = Mouse.getX() / (float) Display.getWidth();
-		float y = Mouse.getY() / (float) Display.getHeight();
-		LIGHT_POS.x = x;
-		LIGHT_POS.y = y;
-
-		// send a Vector4f to GLSL
-		lightShader.setUniformf("LightPos", LIGHT_POS);
-
-		// // bind normal map to texture unit 1
-		// glActiveTexture(GL_TEXTURE1);
-		// rockNormals.bind();
-		//
-		// // bind diffuse color to texture unit 0
-		// glActiveTexture(GL_TEXTURE0);
-		// rock.bind();
-
-		// render our scene fully to FBO A
-		if (editorMode)
-			editor.draw();
-		else
-			level.draw();
-
-		// draw the texture unit 0 with our shader effect applied
-		// activeBatch.draw(rock, 50, 50);
 
 		activeBatch.end();
 
