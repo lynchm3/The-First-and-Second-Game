@@ -86,7 +86,7 @@ public class Shadow extends SimpleGame {
 	boolean additive = true;
 	boolean softShadows = true;
 
-	private TextureRegion shadowMapTextureRegion;
+	// private TextureRegion shadowMapTextureRegion;
 	private TextureRegion occludersTextureRegion;
 
 	class Light {
@@ -307,7 +307,7 @@ public class Shadow extends SimpleGame {
 		// CHANGE Gdx.graphics.getWidth()
 
 		batch.draw(occludersTextureRegion, 0, 0);
-		batch.draw(shadowMapTextureRegion, 0, lightSize + 5);
+		// batch.draw(shadowMapTextureRegion, 0, lightSize + 5);
 
 		//
 		// // DEBUG RENDERING -- show light
@@ -459,8 +459,6 @@ public class Shadow extends SimpleGame {
 		batch.end();
 	}
 
-	// TRY -> Make a fake shadowmap :P
-
 	public void renderShadows(Light o) {
 		float mx = o.x;
 		float my = o.y;
@@ -485,27 +483,30 @@ public class Shadow extends SimpleGame {
 			e.printStackTrace();
 		}
 
-		batch.setColor(o.color);
+		batch.setColor(Color.BLUE);
 
 		// send the new projection matrix (FBO size) to the default shader
-		// batch.resize(Display.getWidth(), Display.getHeight());
+		batch.resize(Display.getWidth(), Display.getHeight());
 		// batch.resize(lightSize, lightSize);
 		batch.begin();
 
-		batch.getViewMatrix().setIdentity();
-		batch.updateUniforms();
+		// batch.getViewMatrix().setIdentity();
+		// batch.updateUniforms();
 
 		// render our scene fully to FBO A
-		float finalSize = lightSize * upScale;
+		// float finalSize = lightSize * upScale;
 
 		Texture shadowMapTexture = this.shadowMapFBO.getTexture();
-		shadowMapTextureRegion = new TextureRegion(shadowMapTexture, 0, 0,
-				shadowMapTexture.getWidth(), shadowMapTexture.getHeight());
-		shadowMapTextureRegion.flip(false, true);
+		shadowMapTexture.setFilter(Texture.LINEAR, Texture.LINEAR);
+		shadowMapTexture.setWrap(Texture.REPEAT);
+		// shadowMapTextureRegion = new TextureRegion(shadowMapTexture, 0, 0,
+		// shadowMapTexture.getWidth(), shadowMapTexture.getHeight());
+		// shadowMapTextureRegion.flip(false, true);
+		// Texture t = new Texture(shadowMapTextureRegion);
 
 		// draw centered on light position
-		batch.draw(shadowMapTextureRegion, mx - finalSize / 2f, my - finalSize
-				/ 2f, finalSize, finalSize);
+		batch.draw(shadowMapTexture, mx - lightSize / 2f, my - lightSize / 2f,
+				lightSize, lightSize);
 
 		// batch.draw(this.shadowMapFBO.getTexture(), 0, 0, 100, 100);
 

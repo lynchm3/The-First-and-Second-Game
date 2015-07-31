@@ -7,7 +7,7 @@ precision mediump float;
 
 #define PI 3.14
 varying vec2 vTexCoord;
-varying LOWP vec4 vColor;
+varying vec4 vColor;
 
 uniform sampler2D u_texture;
 uniform vec2 resolution;
@@ -58,5 +58,10 @@ void main(void) {
  	//multiply the summed amount by our distance, which gives us a radial falloff
  	//then multiply by vertex (light) color  
  	gl_FragColor = vColor * vec4(vec3(1.0), lit * smoothstep(1.0, 0.0, r));
- 	gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+ 	
+ 	//gl_FragColor = vec4(1.0,0,0,1.0);
+ 	//gl_FragColor = vColor;
+ 	//gl_FragColor = vec4(vec3(1.0), lit * smoothstep(1.0, 0.0, r))
+ 	//vec4 texColor = texture2D(u_texture, vTexCoord);
+ 	gl_FragColor = vec4(sum,sum,sum,1.0);
 }
