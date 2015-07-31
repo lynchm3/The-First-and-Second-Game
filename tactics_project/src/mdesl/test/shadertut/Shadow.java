@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import mdesl.graphics.Color;
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
-import mdesl.graphics.TextureRegion;
 import mdesl.graphics.glutils.FrameBuffer;
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.graphics.text.BitmapFont;
@@ -31,18 +30,11 @@ import org.lwjgl.util.vector.Vector2f;
 public class Shadow extends SimpleGame {
 
 	public static void main(String[] args) throws LWJGLException {
-
 		Game game = new Shadow();
 		game.setDisplayMode(800, 600, false);
 		game.start();
 	}
 
-	/**
-	 * Compiles a new instance of the default shader for this batch and returns
-	 * it. If compilation was unsuccessful, GdxRuntimeException will be thrown.
-	 * 
-	 * @return the default shader
-	 */
 	public static ShaderProgram createShader(String vert, String frag) {
 		ShaderProgram prog = null;
 		try {
@@ -55,23 +47,15 @@ public class Shadow extends SimpleGame {
 		return prog;
 	}
 
-	private final int lightSize = 256;
-
+	private final float lightSize = 500;
 	SpriteBatch batch;
-
 	BitmapFont font;
-
 	FrameBuffer occludersFBO;
 	FrameBuffer shadowMapFBO;
-
 	Texture casterSprites;
-
 	ShaderProgram shadowMapShader, shadowRenderShader;
-
 	ArrayList<Light> lights = new ArrayList<Light>();
 	boolean softShadows = true;
-
-	private TextureRegion occludersTextureRegion;
 
 	class Light {
 
@@ -112,8 +96,9 @@ public class Shadow extends SimpleGame {
 							.getResourceAsStream("res/shadertut/shadow_render.frag")));
 			casterSprites = new Texture(Util.getResource("res/cat4.png"),
 					Texture.LINEAR);
-			occludersFBO = new FrameBuffer(lightSize, lightSize, Texture.LINEAR);
-			shadowMapFBO = new FrameBuffer(lightSize, 1, Texture.LINEAR);
+			occludersFBO = new FrameBuffer((int) lightSize, (int) lightSize,
+					Texture.LINEAR);
+			shadowMapFBO = new FrameBuffer((int) lightSize, 1, Texture.LINEAR);
 			Texture shadowMapTex = shadowMapFBO.getTexture();
 			shadowMapTex.setFilter(Texture.LINEAR, Texture.LINEAR);
 			shadowMapTex.setWrap(Texture.REPEAT);
@@ -139,20 +124,16 @@ public class Shadow extends SimpleGame {
 	public void render() {
 		GL11.glClearColor(0.25f, 0.25f, 0.25f, 1f);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-
 		batch.setColor(Color.WHITE);
 		batch.resize(Display.getWidth(), Display.getHeight());
 		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
-
 		for (int i = 0; i < lights.size(); i++) {
 			renderLight(lights.get(i));
 		}
-
 		batch.resize(Display.getWidth(), Display.getHeight());
 		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
-
 		try {
 			batch.setShader(SpriteBatch.getDefaultShader());
 		} catch (LWJGLException e) {
@@ -161,15 +142,22 @@ public class Shadow extends SimpleGame {
 		}
 		batch.setColor(Color.WHITE);
 		batch.begin();
-
 		batch.draw(casterSprites, 0, 0);
+
+		// Debug
+		batch.setColor(Color.BLACK);
+		batch.draw(this.occludersFBO.getTexture(), Display.getWidth()
+				- lightSize, 0);
+		batch.setColor(Color.WHITE);
+		batch.draw(this.shadowMapFBO.getTexture(), Display.getWidth()
+				- lightSize, lightSize + 5);
 		batch.end();
 	}
 
 	void clearLights() {
 		lights.clear();
-		lights.add(new Light(128, 128, Color.BLUE));
-		lights.add(new Light(128, 128, Color.RED));
+		lights.add(new Light(200, 200, Color.BLUE));
+		// lights.add(new Light(128, 128, Color.RED));
 	}
 
 	static Color randomColor() {
@@ -196,10 +184,9 @@ public class Shadow extends SimpleGame {
 		}
 		batch.resize(occludersFBO.getWidth(), occludersFBO.getHeight());
 		batch.begin();
-		batch.getViewMatrix()
-				.translate(
-						new Vector2f(light.x - lightSize / 2f, light.y
-								- lightSize / 2f));
+		batch.getViewMatrix().translate(
+				new Vector2f(-(light.x - lightSize / 2f),
+						-(light.y - lightSize / 2f)));
 		batch.updateUniforms();
 		batch.draw(casterSprites, 0, 0);
 		batch.flush();
@@ -218,10 +205,7 @@ public class Shadow extends SimpleGame {
 		batch.begin();
 		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
-		Texture occludersTexture = this.occludersFBO.getTexture();
-		occludersTextureRegion = new TextureRegion(occludersTexture, 0, 0,
-				occludersTexture.getWidth(), occludersTexture.getHeight());
-		batch.draw(occludersTextureRegion, 0, 0, lightSize,
+		batch.draw(this.occludersFBO.getTexture(), 0, 0, lightSize,
 				shadowMapFBO.getHeight());
 		batch.flush();
 		shadowMapFBO.end();
@@ -238,9 +222,8 @@ public class Shadow extends SimpleGame {
 		batch.setColor(light.color);
 		batch.resize(Display.getWidth(), Display.getHeight());
 		batch.begin();
-		Texture shadowMapTexture = this.shadowMapFBO.getTexture();
-		batch.draw(shadowMapTexture, light.x - lightSize / 2f, light.y
-				- lightSize / 2f, lightSize, lightSize);
+		batch.draw(this.shadowMapFBO.getTexture(), light.x - lightSize / 2f,
+				light.y - lightSize / 2f, lightSize, lightSize);
 		batch.flush();
 		batch.end();
 	}
