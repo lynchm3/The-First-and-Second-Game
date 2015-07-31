@@ -145,19 +145,20 @@ public class Shadow extends SimpleGame {
 		batch.draw(casterSprites, 0, 0);
 
 		// Debug
-		batch.setColor(Color.BLACK);
-		batch.draw(this.occludersFBO.getTexture(), Display.getWidth()
-				- lightSize, 0);
-		batch.setColor(Color.WHITE);
-		batch.draw(this.shadowMapFBO.getTexture(), Display.getWidth()
-				- lightSize, lightSize + 5);
+		// batch.setColor(Color.BLACK);
+		// batch.draw(this.occludersFBO.getTexture(), Display.getWidth()
+		// - lightSize, 0);
+		// batch.setColor(Color.WHITE);
+		// batch.draw(this.shadowMapFBO.getTexture(), Display.getWidth()
+		// - lightSize, lightSize + 5);
+
 		batch.end();
 	}
 
 	void clearLights() {
 		lights.clear();
+		lights.add(new Light(128, 128, Color.RED));
 		lights.add(new Light(200, 200, Color.BLUE));
-		// lights.add(new Light(128, 128, Color.RED));
 	}
 
 	static Color randomColor() {
@@ -213,8 +214,9 @@ public class Shadow extends SimpleGame {
 	}
 
 	public void renderShadows(Light light) {
-		glClearColor(0.5f, 0.5f, 0.5f, 1f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		// glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		// glClear(GL_COLOR_BUFFER_BIT);
+
 		batch.setShader(shadowRenderShader);
 		shadowRenderShader.use();
 		shadowRenderShader.setUniformf("resolution", lightSize, lightSize);
@@ -222,9 +224,11 @@ public class Shadow extends SimpleGame {
 		batch.setColor(light.color);
 		batch.resize(Display.getWidth(), Display.getHeight());
 		batch.begin();
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		batch.draw(this.shadowMapFBO.getTexture(), light.x - lightSize / 2f,
 				light.y - lightSize / 2f, lightSize, lightSize);
 		batch.flush();
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		batch.end();
 	}
 }
