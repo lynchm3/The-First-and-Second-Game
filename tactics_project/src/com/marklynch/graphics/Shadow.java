@@ -101,12 +101,11 @@ public class Shadow {
 			Game.level.draw();
 
 		// Debug
-		// batch.setColor(Color.BLACK);
-		// batch.draw(this.occludersFBO.getTexture(), Display.getWidth()
-		// - lightSize, 0);
-		// batch.setColor(Color.WHITE);
-		// batch.draw(this.shadowMapFBO.getTexture(), Display.getWidth()
-		// - lightSize, lightSize + 5);
+		batch.setColor(Color.BLACK);
+		batch.draw(occludersFBO.getTexture(), Display.getWidth() - lightSize, 0);
+		batch.setColor(Color.WHITE);
+		batch.draw(shadowMapFBO.getTexture(), Display.getWidth() - lightSize,
+				lightSize + 5);
 
 		Game.activeBatch.end();
 	}
@@ -133,10 +132,10 @@ public class Shadow {
 				new Vector2f(-(light.x - lightSize / 2f),
 						-(light.y - lightSize / 2f)));
 		batch.updateUniforms();
-		if (Game.editorMode)
-			Game.editor.draw();
-		else
-			Game.level.draw();
+		// if (Game.editorMode)
+		// Game.editor.draw();
+		// else
+		// Game.level.draw();
 		batch.flush();
 		occludersFBO.end();
 		// batch.end();
@@ -182,7 +181,7 @@ public class Shadow {
 	static void clearLights() {
 		lights.clear();
 		lights.add(new Light(128, 128, Color.RED));
-		lights.add(new Light(200, 200, Color.BLUE));
+		// lights.add(new Light(200, 200, Color.BLUE));
 	}
 
 	public static ShaderProgram createShader(String vert, String frag) {
