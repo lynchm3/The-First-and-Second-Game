@@ -63,5 +63,5 @@ void main(void) {
  	//gl_FragColor = vColor;
  	//gl_FragColor = vec4(vec3(1.0), lit * smoothstep(1.0, 0.0, r))
  	//vec4 texColor = texture2D(u_texture, vTexCoord);
- 	gl_FragColor = vec4(sum,sum,sum,1.0);
+ 	//gl_FragColor = vec4(vColor.r,vColor.g,vColor.b,1-r);
 }
