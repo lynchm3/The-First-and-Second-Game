@@ -20,6 +20,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
+import com.marklynch.Game;
+
 public class Shadow {
 
 	private final static float lightSize = 500;
@@ -27,7 +29,6 @@ public class Shadow {
 	static BitmapFont font;
 	static FrameBuffer occludersFBO;
 	static FrameBuffer shadowMapFBO;
-	static Texture casterSprites;
 	static ShaderProgram shadowMapShader;
 	static ShaderProgram shadowRenderShader;
 	static ArrayList<Light> lights = new ArrayList<Light>();
@@ -48,18 +49,14 @@ public class Shadow {
 							.getResourceAsStream("res/shadertut/shadow_pass.vert")),
 					Util.readFile(Util
 							.getResourceAsStream("res/shadertut/shadow_render.frag")));
-			casterSprites = new Texture(Util.getResource("res/cat4.png"),
-					Texture.LINEAR);
+			// casterSprites = new Texture(Util.getResource("res/cat4.png"),
+			// Texture.LINEAR);
 			occludersFBO = new FrameBuffer((int) lightSize, (int) lightSize,
 					Texture.LINEAR);
 			shadowMapFBO = new FrameBuffer((int) lightSize, 1, Texture.LINEAR);
 			Texture shadowMapTex = shadowMapFBO.getTexture();
 			shadowMapTex.setFilter(Texture.LINEAR, Texture.LINEAR);
 			shadowMapTex.setWrap(Texture.REPEAT);
-			Texture fontTexture = new Texture(
-					Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
-			font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
-					fontTexture);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(0);
@@ -69,32 +66,39 @@ public class Shadow {
 	}
 
 	public static void renderShadow() {
+
+		Game.activeBatch = batch;
+
+		Game.activeBatch.begin();
+
+		glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		glClear(GL_COLOR_BUFFER_BIT);
 		float x = Mouse.getX();
 		float y = Display.getHeight() - Mouse.getY();
 		lights.get(0).x = x;
 		lights.get(0).y = y;
 
-		GL11.glClearColor(0.25f, 0.25f, 0.25f, 1f);
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-		batch.setColor(Color.WHITE);
-		batch.resize(Display.getWidth(), Display.getHeight());
-		batch.getViewMatrix().setIdentity();
-		batch.updateUniforms();
+		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
+		Game.activeBatch.getViewMatrix().setIdentity();
+		Game.activeBatch.updateUniforms();
 		for (int i = 0; i < lights.size(); i++) {
 			renderLight(lights.get(i));
 		}
-		batch.resize(Display.getWidth(), Display.getHeight());
-		batch.getViewMatrix().setIdentity();
-		batch.updateUniforms();
+		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
+		Game.activeBatch.getViewMatrix().setIdentity();
+		Game.activeBatch.updateUniforms();
 		try {
-			batch.setShader(SpriteBatch.getDefaultShader());
+			Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		batch.setColor(Color.WHITE);
-		batch.begin();
-		batch.draw(casterSprites, 0, 0);
+		Game.activeBatch.setColor(Color.WHITE);
+		if (Game.editorMode)
+			Game.editor.draw();
+		else
+			Game.level.draw();
 
 		// Debug
 		// batch.setColor(Color.BLACK);
@@ -104,7 +108,7 @@ public class Shadow {
 		// batch.draw(this.shadowMapFBO.getTexture(), Display.getWidth()
 		// - lightSize, lightSize + 5);
 
-		batch.end();
+		Game.activeBatch.end();
 	}
 
 	static void renderLight(Light light) {
@@ -124,15 +128,18 @@ public class Shadow {
 			System.exit(0);
 		}
 		batch.resize(occludersFBO.getWidth(), occludersFBO.getHeight());
-		batch.begin();
+		// batch.begin();
 		batch.getViewMatrix().translate(
 				new Vector2f(-(light.x - lightSize / 2f),
 						-(light.y - lightSize / 2f)));
 		batch.updateUniforms();
-		batch.draw(casterSprites, 0, 0);
+		if (Game.editorMode)
+			Game.editor.draw();
+		else
+			Game.level.draw();
 		batch.flush();
 		occludersFBO.end();
-		batch.end();
+		// batch.end();
 	}
 
 	public static void shadowMap() {
@@ -143,14 +150,14 @@ public class Shadow {
 		shadowMapShader.use();
 		shadowMapShader.setUniformf("resolution", lightSize, lightSize);
 		batch.resize(shadowMapFBO.getWidth(), shadowMapFBO.getHeight());
-		batch.begin();
+		// batch.begin();
 		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
 		batch.draw(occludersFBO.getTexture(), 0, 0, lightSize,
 				shadowMapFBO.getHeight());
 		batch.flush();
 		shadowMapFBO.end();
-		batch.end();
+		// batch.end();
 	}
 
 	public static void renderShadows(Light light) {
@@ -163,13 +170,13 @@ public class Shadow {
 		shadowRenderShader.setUniformf("softShadows", softShadows ? 1f : 0f);
 		batch.setColor(light.color);
 		batch.resize(Display.getWidth(), Display.getHeight());
-		batch.begin();
+		// batch.begin();
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		batch.draw(shadowMapFBO.getTexture(), light.x - lightSize / 2f, light.y
 				- lightSize / 2f, lightSize, lightSize);
 		batch.flush();
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		batch.end();
+		// batch.end();
 	}
 
 	static void clearLights() {

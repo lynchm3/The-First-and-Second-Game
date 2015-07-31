@@ -34,7 +34,7 @@ public class ResourceUtils {
 			try {
 				texture = new mdesl.graphics.Texture(
 						Util.getResource("res/images/" + path),
-						mdesl.graphics.Texture.NEAREST);
+						mdesl.graphics.Texture.LINEAR);
 				globalImages.put(path, texture);
 			} catch (Exception e) {
 				e.printStackTrace();
