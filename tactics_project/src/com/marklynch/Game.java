@@ -23,6 +23,7 @@ import org.lwjgl.util.vector.Matrix4f;
 import com.marklynch.editor.Editor;
 import com.marklynch.graphics.Light;
 import com.marklynch.graphics.Shadow;
+import com.marklynch.graphics.ShadowLight;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.ui.button.Button;
@@ -84,10 +85,10 @@ public class Game {
 	float MAX_BLUR = 10f;
 
 	enum DRAW_MODE {
-		NORMAL, BLUR, LIGHT, SHADOW
+		NORMAL, BLUR, LIGHT, SHADOW, SHADOW_LIGHT
 	};
 
-	public static DRAW_MODE drawMode = DRAW_MODE.SHADOW;
+	public static DRAW_MODE drawMode = DRAW_MODE.SHADOW_LIGHT;
 
 	public static float blurTime = 0f;
 	public static float blurTimeMax = 1000f;
@@ -215,8 +216,9 @@ public class Game {
 
 			initNormalBatch();
 			initBlurBatch();
-			Light.initLightBatch();
-			Shadow.initShadowBatch();
+			Light.initBatch();
+			Shadow.initBatch();
+			ShadowLight.initBatch();
 			resize();
 		} catch (Exception e) {
 			// simple exception handling...
@@ -232,6 +234,7 @@ public class Game {
 
 		Light.resize();
 		Shadow.resize();
+		ShadowLight.resize();
 
 		// resize our batch with the new screen size
 		normalBatch.resize(Display.getWidth(), Display.getHeight());
@@ -360,6 +363,8 @@ public class Game {
 			Light.renderLight();
 		} else if (drawMode == DRAW_MODE.SHADOW) {
 			Shadow.renderShadow();
+		} else if (drawMode == DRAW_MODE.SHADOW_LIGHT) {
+			ShadowLight.renderShadow();
 		}
 	}
 

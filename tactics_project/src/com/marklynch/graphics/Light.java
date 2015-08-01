@@ -78,7 +78,7 @@ public class Light {
 
 	}
 
-	public static void initLightBatch() {
+	public static void initBatch() {
 
 		try {
 			// load our texture with linear filter
