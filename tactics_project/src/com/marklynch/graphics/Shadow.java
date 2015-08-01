@@ -151,6 +151,9 @@ public class Shadow {
 		else
 			Game.level.drawUI();
 
+		if (Game.editorMode)
+			Game.editor.drawUI();
+
 		Game.activeBatch.flush();
 		// reset the matrix to identity, i.e. "no camera transform"
 		view.setIdentity();

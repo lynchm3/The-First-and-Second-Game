@@ -297,6 +297,11 @@ public class Editor {
 	public void draw() {
 
 		level.draw();
+		drawUI();
+
+	}
+
+	public void drawUI() {
 
 		Game.activeBatch.flush();
 		Game.activeBatch.end();
