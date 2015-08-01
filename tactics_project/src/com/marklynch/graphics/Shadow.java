@@ -136,7 +136,7 @@ public class Shadow {
 		Game.activeBatch.updateUniforms();
 		// Debug
 		batch.setColor(Color.BLACK);
-		batch.draw(occludersFBO.getTexture(), Display.getWidth() - lightSize, 0);
+		batch.draw(occludersFBO.getTexture(), 0, 0);
 		batch.setColor(Color.WHITE);
 		batch.draw(shadowMapFBO.getTexture(), Display.getWidth() - lightSize,
 				lightSize + 5);
@@ -164,13 +164,6 @@ public class Shadow {
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		// view.setIdentity();
 
-		view.translate(new Vector2f(occludersFBO.getWidth() / 2, occludersFBO
-				.getHeight() / 2));
-		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		view.translate(new Vector2f(-occludersFBO.getWidth() / 2, -occludersFBO
-				.getHeight() / 2));
-		view.translate(new Vector2f(Game.dragX, Game.dragY));
-		// batch.begin();
 		view.translate(new Vector2f(-(light.x - lightSize / 2f),
 				-(light.y - lightSize / 2f)));
 		batch.updateUniforms();
@@ -198,7 +191,6 @@ public class Shadow {
 		shadowMapShader.use();
 		shadowMapShader.setUniformf("resolution", lightSize, lightSize);
 		batch.resize(shadowMapFBO.getWidth(), shadowMapFBO.getHeight());
-		// batch.begin();
 		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
 		batch.setColor(Color.WHITE);
@@ -219,6 +211,21 @@ public class Shadow {
 		shadowRenderShader.setUniformf("softShadows", softShadows ? 1f : 0f);
 		batch.setColor(light.color);
 		batch.resize(Display.getWidth(), Display.getHeight());
+
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		// view.setIdentity();
+
+		view.translate(new Vector2f(Display.getWidth() / 2,
+				Display.getHeight() / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Display.getWidth() / 2, -Display
+				.getHeight() / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
+		// batch.begin();
+		// view.translate(new Vector2f(-(light.x - lightSize / 2f),
+		// -(light.y - lightSize / 2f)));
+		batch.updateUniforms();
+
 		// batch.begin();
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		batch.draw(shadowMapFBO.getTexture(), light.x - lightSize / 2f, light.y
