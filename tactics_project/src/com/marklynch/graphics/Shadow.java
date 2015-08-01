@@ -18,7 +18,9 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 
@@ -97,12 +99,37 @@ public class Shadow {
 			e.printStackTrace();
 			System.exit(0);
 		}
+
+		// It's drawing the shadow, but in the place b4 translation and zoom
+		// Could try w/o the zoom, can make life easier
+
 		Game.activeBatch.setColor(Color.WHITE);
+
+		Game.activeBatch.flush();
+		// reset the matrix to identity, i.e. "no camera transform"
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.setIdentity();
+
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2,
+				-Game.windowHeight / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
+
+		// update the new view matrix
+		Game.activeBatch.updateUniforms();
 
 		if (Game.editorMode)
 			Game.editor.level.drawObjectsAndActors();
 		else
 			Game.level.drawObjectsAndActors();
+
+		Game.activeBatch.flush();
+		// reset the matrix to identity, i.e. "no camera transform"
+		view.setIdentity();
+
+		// update the new view matrix
+		Game.activeBatch.updateUniforms();
 
 		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
 		Game.activeBatch.getViewMatrix().setIdentity();
@@ -134,17 +161,31 @@ public class Shadow {
 			System.exit(0);
 		}
 		batch.resize(occludersFBO.getWidth(), occludersFBO.getHeight());
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		// view.setIdentity();
+
+		view.translate(new Vector2f(occludersFBO.getWidth() / 2, occludersFBO
+				.getHeight() / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-occludersFBO.getWidth() / 2, -occludersFBO
+				.getHeight() / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
 		// batch.begin();
-		batch.getViewMatrix().translate(
-				new Vector2f(-(light.x - lightSize / 2f),
-						-(light.y - lightSize / 2f)));
+		view.translate(new Vector2f(-(light.x - lightSize / 2f),
+				-(light.y - lightSize / 2f)));
 		batch.updateUniforms();
+
+		// update the new view matrix
+		// Game.activeBatch.updateUniforms();
 
 		if (Game.editorMode)
 			Game.editor.level.drawObjectsAndActors();
 		else
 			Game.level.drawObjectsAndActors();
 		batch.flush();
+		view.setIdentity();
+		// update the new view matrix
+		Game.activeBatch.updateUniforms();
 		occludersFBO.end();
 		// batch.end();
 	}
