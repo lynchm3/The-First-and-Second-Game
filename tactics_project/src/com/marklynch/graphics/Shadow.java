@@ -84,6 +84,23 @@ public class Shadow {
 		float y = mouseYTransformed;
 		lights.get(0).x = x;
 		lights.get(0).y = y;
+		// reset the matrix to identity, i.e. "no camera transform"
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.setIdentity();
+
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2,
+				-Game.windowHeight / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
+
+		// update the new view matrix
+		Game.activeBatch.updateUniforms();
+
+		if (Game.editorMode)
+			Game.editor.level.drawBackground();
+		else
+			Game.level.drawBackground();
 
 		// Draw lights
 		Game.activeBatch.setColor(Color.WHITE);
@@ -112,7 +129,7 @@ public class Shadow {
 
 		Game.activeBatch.flush();
 		// reset the matrix to identity, i.e. "no camera transform"
-		Matrix4f view = Game.activeBatch.getViewMatrix();
+		// Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
 
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
@@ -125,9 +142,14 @@ public class Shadow {
 		Game.activeBatch.updateUniforms();
 
 		if (Game.editorMode)
-			Game.editor.level.drawObjectsAndActors();
+			Game.editor.level.drawForeground();
 		else
-			Game.level.drawObjectsAndActors();
+			Game.level.drawForeground();
+
+		if (Game.editorMode)
+			Game.editor.level.drawUI();
+		else
+			Game.level.drawUI();
 
 		Game.activeBatch.flush();
 		// reset the matrix to identity, i.e. "no camera transform"
@@ -140,11 +162,11 @@ public class Shadow {
 		Game.activeBatch.getViewMatrix().setIdentity();
 		Game.activeBatch.updateUniforms();
 		// Debug
-		batch.setColor(Color.BLACK);
-		batch.draw(occludersFBO.getTexture(), 0, 0);
-		batch.setColor(Color.WHITE);
-		batch.draw(shadowMapFBO.getTexture(), Display.getWidth() - lightSize,
-				lightSize + 5);
+		// batch.setColor(Color.BLACK);
+		// batch.draw(occludersFBO.getTexture(), 0, 0);
+		// batch.setColor(Color.WHITE);
+		// batch.draw(shadowMapFBO.getTexture(), Display.getWidth() - lightSize,
+		// lightSize + 5);
 
 		Game.activeBatch.end();
 	}
@@ -177,9 +199,9 @@ public class Shadow {
 		// Game.activeBatch.updateUniforms();
 
 		if (Game.editorMode)
-			Game.editor.level.drawObjectsAndActors();
+			Game.editor.level.drawForeground();
 		else
-			Game.level.drawObjectsAndActors();
+			Game.level.drawForeground();
 		batch.flush();
 		view.setIdentity();
 		// update the new view matrix

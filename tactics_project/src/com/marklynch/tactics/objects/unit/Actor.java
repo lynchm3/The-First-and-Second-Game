@@ -283,7 +283,7 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public void draw() {
+	public void drawForeground() {
 
 		if (level.activeActor != null
 				&& level.activeActor.showHoverFightPreview
@@ -338,7 +338,7 @@ public class Actor extends GameObject {
 								- 1);
 			}
 
-			super.draw();
+			super.drawForeground();
 
 			if (level.activeActor != null
 					&& level.activeActor.showHoverFightPreview) {
@@ -424,8 +424,8 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public void draw2() {
-		super.draw2();
+	public void drawUI() {
+		super.drawUI();
 
 		// Hover fight preview
 		// GL11.glColor3f(1.0f, 1.0f, 1.0f);

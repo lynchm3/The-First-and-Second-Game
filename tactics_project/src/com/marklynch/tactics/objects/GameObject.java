@@ -109,7 +109,7 @@ public class GameObject {
 		this.squareGameObjectIsOn.gameObject = this;
 	}
 
-	public void draw() {
+	public void drawForeground() {
 
 		// Draw object
 		int actorPositionXInPixels = this.squareGameObjectIsOn.x
@@ -137,7 +137,7 @@ public class GameObject {
 		TextureUtils.skip = false;
 	}
 
-	public void draw2() {
+	public void drawUI() {
 
 		// Draw POW
 		if (showPow == true) {

@@ -479,6 +479,13 @@ public class Level {
 		// update the new view matrix
 		Game.activeBatch.updateUniforms();
 
+		drawBackground();
+		drawForeground();
+		drawUI();
+	}
+
+	public void drawBackground() {
+
 		// Squares
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
@@ -489,18 +496,50 @@ public class Level {
 
 		Game.activeBatch.flush();
 
+	}
+
+	public void drawForeground() {
+
 		// Background decorations
 
 		for (Decoration decoration : decorations) {
 			decoration.draw();
 		}
 
-		drawObjectsAndActors();
+		// Objects 1
+
+		for (GameObject gameObject : inanimateObjects) {
+			gameObject.drawForeground();
+		}
+
+		// Actors 1
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				actor.drawForeground();
+			}
+		}
 
 		// Foreground decorations
 
 		for (Decoration decoration : decorations) {
 			decoration.draw2();
+		}
+
+	}
+
+	public void drawUI() {
+
+		// Objects 2
+
+		for (GameObject gameObject : inanimateObjects) {
+			gameObject.drawUI();
+		}
+
+		// Actors 2
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				actor.drawUI();
+			}
 		}
 
 		if (Game.buttonHoveringOver == null && Game.squareMouseIsOver != null)
@@ -521,6 +560,7 @@ public class Level {
 		// reset the matrix to identity, i.e. "no camera transform"
 
 		Game.activeBatch.flush();
+		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
 		Game.activeBatch.updateUniforms();
 
@@ -567,35 +607,6 @@ public class Level {
 
 		// script
 		script.draw();
-	}
-
-	public void drawObjectsAndActors() {
-
-		// Objects 1
-
-		for (GameObject gameObject : inanimateObjects) {
-			gameObject.draw();
-		}
-
-		// Actors 1
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.draw();
-			}
-		}
-
-		// Objects 2
-
-		for (GameObject gameObject : inanimateObjects) {
-			gameObject.draw2();
-		}
-
-		// Actors 2
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.draw2();
-			}
-		}
 
 	}
 
