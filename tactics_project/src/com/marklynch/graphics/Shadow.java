@@ -75,8 +75,13 @@ public class Shadow {
 
 		glClearColor(0.5f, 0.5f, 0.5f, 1f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		float x = Mouse.getX();
-		float y = Display.getHeight() - Mouse.getY();
+
+		float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2)
+				/ Game.zoom) + (Mouse.getX()) / Game.zoom);
+		float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY - (Game.windowHeight / 2)
+				/ Game.zoom) + (((Game.windowHeight - Mouse.getY())) / Game.zoom));
+		float x = mouseXTransformed;
+		float y = mouseYTransformed;
 		lights.get(0).x = x;
 		lights.get(0).y = y;
 
