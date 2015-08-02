@@ -485,7 +485,6 @@ public class Level {
 	}
 
 	public void drawBackground() {
-
 		// Squares
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
@@ -493,9 +492,6 @@ public class Level {
 				squares[i][j].draw(this);
 			}
 		}
-
-		Game.activeBatch.flush();
-
 	}
 
 	public void drawForeground() {

@@ -15,6 +15,7 @@ import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.graphics.text.BitmapFont;
 import mdesl.test.Util;
 
+import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -36,7 +37,7 @@ public class ShadowLight {
 	public static final float DEFAULT_LIGHT_Z = 0.075f;
 	public static final Vector4f LIGHT_COLOR = new Vector4f(1f, 0.8f, 0.6f, 1f);
 	public static final Vector4f AMBIENT_COLOR = new Vector4f(0.6f, 0.6f, 1f,
-			0.2f);
+			0.5f);
 	public static final Vector3f FALLOFF = new Vector3f(.4f, 3f, 20f);
 	public static final Vector3f lightPos = new Vector3f(0f, 0f,
 			DEFAULT_LIGHT_Z);
@@ -55,8 +56,7 @@ public class ShadowLight {
 
 	public static void initBatch() {
 
-		// LIGHT
-
+		// LIGHT init
 		try {
 			// load our texture with linear filter
 			rock = new Texture(Util.getResource("res/rock.png"), Texture.LINEAR);
@@ -87,22 +87,18 @@ public class ShadowLight {
 
 			// always a good idea to set up default uniforms...
 			lightShader.use();
-
 			// our normal map
 			lightShader.setUniformi("u_normals", 1); // GL_TEXTURE1
-
 			// light/ambient colors
 			lightShader.setUniformf("LightColor", LIGHT_COLOR);
 			lightShader.setUniformf("AmbientColor", AMBIENT_COLOR);
 			lightShader.setUniformf("Falloff", FALLOFF);
 		} catch (Exception e) {
-			// simple exception handling...
 			e.printStackTrace();
 			System.exit(0);
 		}
 
-		// SHADOW
-
+		// SHADOW Init
 		try {
 			batch = new SpriteBatch();
 			ShaderProgram.setStrictMode(false);
@@ -116,8 +112,6 @@ public class ShadowLight {
 							.getResourceAsStream("res/shadertut/shadow_pass.vert")),
 					Util.readFile(Util
 							.getResourceAsStream("res/shadertut/shadow_render.frag")));
-			// casterSprites = new Texture(Util.getResource("res/cat4.png"),
-			// Texture.LINEAR);
 			occludersFBO = new FrameBuffer((int) lightSize, (int) lightSize,
 					Texture.LINEAR);
 			shadowMapFBO = new FrameBuffer((int) lightSize, 1, Texture.LINEAR);
@@ -132,7 +126,7 @@ public class ShadowLight {
 		clearLights();
 	}
 
-	public static void renderShadow() {
+	public static void render() {
 
 		Game.activeBatch = batch;
 
@@ -149,32 +143,30 @@ public class ShadowLight {
 		float y = mouseYTransformed;
 		lights.get(0).x = x;
 		lights.get(0).y = y;
-		// reset the matrix to identity, i.e. "no camera transform"
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.setIdentity();
+		lightPos.x = Mouse.getX() / (float) Display.getWidth();
+		lightPos.y = Mouse.getY() / (float) Display.getHeight();
 
-		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
-		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		view.translate(new Vector2f(-Game.windowWidth / 2,
-				-Game.windowHeight / 2));
-		view.translate(new Vector2f(Game.dragX, Game.dragY));
-
-		lightPos.x = x;
-		lightPos.y = y;
-
-		// send a Vector4f to GLSL
+		// Bump map shader
 		Game.activeBatch.setShader(lightShader);
 		lightShader.setUniformf("LightPos", lightPos);
 		lightShader.setUniformf("Resolution", Display.getWidth(),
 				Display.getHeight());
 
-		// update the new view matrix
+		// Draw level BG
+		Game.activeBatch.setColor(Color.WHITE);
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.setIdentity();
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2,
+				-Game.windowHeight / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
 		Game.activeBatch.updateUniforms();
-
 		if (Game.editorMode)
 			Game.editor.level.drawBackground();
 		else
 			Game.level.drawBackground();
+		Game.activeBatch.flush();
 
 		// Draw lights
 		Game.activeBatch.setColor(Color.WHITE);
@@ -184,71 +176,77 @@ public class ShadowLight {
 		for (int i = 0; i < lights.size(); i++) {
 			renderLight(lights.get(i));
 		}
+		Game.activeBatch.flush();
 
-		// draw lvl
+		// draw lvl foreground
 		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
 		Game.activeBatch.getViewMatrix().setIdentity();
 		Game.activeBatch.updateUniforms();
-		try {
-			Game.activeBatch.setShader(lightShader);
-			// Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
-
-		// It's drawing the shadow, but in the place b4 translation and zoom
-		// Could try w/o the zoom, can make life easier
-
+		Game.activeBatch.setShader(lightShader);
 		Game.activeBatch.setColor(Color.WHITE);
-
-		Game.activeBatch.flush();
-		// reset the matrix to identity, i.e. "no camera transform"
-		// Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
-
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
 		view.translate(new Vector2f(-Game.windowWidth / 2,
 				-Game.windowHeight / 2));
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
-
-		// update the new view matrix
 		Game.activeBatch.updateUniforms();
-
-		Game.activeBatch.flush();
-
 		if (Game.editorMode)
 			Game.editor.level.drawForeground();
 		else
 			Game.level.drawForeground();
-
 		Game.activeBatch.flush();
 
+		// Draw level UI
+		view.setIdentity();
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2,
+				-Game.windowHeight / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
+		Game.activeBatch.updateUniforms();
+		try {
+			Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+		} catch (LWJGLException e) {
+			e.printStackTrace();
+		}
+		Game.activeBatch.setColor(Color.WHITE);
 		if (Game.editorMode)
 			Game.editor.level.drawUI();
 		else
 			Game.level.drawUI();
-
-		if (Game.editorMode)
-			Game.editor.drawUI();
-
 		Game.activeBatch.flush();
-		// reset the matrix to identity, i.e. "no camera transform"
-		view.setIdentity();
 
-		// update the new view matrix
-		Game.activeBatch.updateUniforms();
+		if (Game.editorMode) {
+			// Draw editor overlay
+			try {
+				Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+			} catch (LWJGLException e) {
+				e.printStackTrace();
+			}
+			view.setIdentity();
+			view.translate(new Vector2f(Game.windowWidth / 2,
+					Game.windowHeight / 2));
+			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+			view.translate(new Vector2f(-Game.windowWidth / 2,
+					-Game.windowHeight / 2));
+			view.translate(new Vector2f(Game.dragX, Game.dragY));
+			Game.activeBatch.updateUniforms();
+			Game.editor.drawOverlay();
+			Game.activeBatch.flush();
 
-		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
-		Game.activeBatch.getViewMatrix().setIdentity();
-		Game.activeBatch.updateUniforms();
-		// Debug
-		// batch.setColor(Color.BLACK);
-		// batch.draw(occludersFBO.getTexture(), 0, 0);
-		// batch.setColor(Color.WHITE);
-		// batch.draw(shadowMapFBO.getTexture(), Display.getWidth() - lightSize,
-		// lightSize + 5);
+			// Draw Editor UI
+			try {
+				Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+			} catch (LWJGLException e) {
+				e.printStackTrace();
+			}
+			view.setIdentity();
+			Game.activeBatch.updateUniforms();
+			Game.activeBatch.setColor(Color.WHITE);
+			Game.editor.drawUI();
+			Game.activeBatch.flush();
+		}
 
 		Game.activeBatch.end();
 	}

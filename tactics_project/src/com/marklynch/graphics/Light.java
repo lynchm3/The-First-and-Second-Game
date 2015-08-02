@@ -34,7 +34,7 @@ public class Light {
 	public static final Vector3f lightPos = new Vector3f(0f, 0f,
 			DEFAULT_LIGHT_Z);
 
-	public static void renderLight() {
+	public static void render() {
 
 		Game.activeBatch = lightBatch;
 

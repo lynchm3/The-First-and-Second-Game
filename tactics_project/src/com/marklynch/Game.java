@@ -360,11 +360,11 @@ public class Game {
 		} else if (drawMode == DRAW_MODE.BLUR) {
 			renderBlur();
 		} else if (drawMode == DRAW_MODE.LIGHT) {
-			Light.renderLight();
+			Light.render();
 		} else if (drawMode == DRAW_MODE.SHADOW) {
 			Shadow.renderShadow();
 		} else if (drawMode == DRAW_MODE.SHADOW_LIGHT) {
-			ShadowLight.renderShadow();
+			ShadowLight.render();
 		}
 	}
 

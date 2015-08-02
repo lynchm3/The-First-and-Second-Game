@@ -11,7 +11,7 @@ import com.marklynch.tactics.objects.GameObject;
 
 public class TextureUtils {
 
-	public static boolean skip = false;
+	public static boolean skipNormals = false;
 
 	// master drawTexture method
 	public static void drawTexture(Texture texture, float alpha, float x1,
@@ -106,7 +106,7 @@ public class TextureUtils {
 
 		// bind normal map to texture unit 1
 		glActiveTexture(GL_TEXTURE1);
-		if (!skip) {
+		if (!skipNormals) {
 			GameObject.grassNormalTexture.bind();
 		} else {
 			GameObject.skipNormalTexture.bind();

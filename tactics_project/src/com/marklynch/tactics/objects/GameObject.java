@@ -129,12 +129,12 @@ public class GameObject {
 			alpha = 0.5f;
 		}
 
-		TextureUtils.skip = true;
+		TextureUtils.skipNormals = true;
 		TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
 				actorPositionXInPixels + Game.SQUARE_WIDTH,
 				actorPositionYInPixels, actorPositionYInPixels
 						+ Game.SQUARE_HEIGHT);
-		TextureUtils.skip = false;
+		TextureUtils.skipNormals = false;
 	}
 
 	public void drawUI() {

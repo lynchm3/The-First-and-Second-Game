@@ -8,9 +8,6 @@ import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.editor.settingswindow.ActorsSettingsWindow;
@@ -301,13 +298,7 @@ public class Editor {
 
 	}
 
-	public void drawUI() {
-
-		Game.activeBatch.flush();
-		Game.activeBatch.end();
-
-		Game.activeBatch = Game.normalBatch;
-		Game.activeBatch.begin();
+	public void drawOverlay() {
 
 		// draw highlight on selected object
 		if (selectedGameObject != null) {
@@ -319,23 +310,6 @@ public class Editor {
 				&& state == STATE.MOVEABLE_OBJECT_SELECTED
 				&& Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
-
-			// get the instance of the view matrix for our batch
-			Game.activeBatch.flush();
-			Matrix4f view = Game.activeBatch.getViewMatrix();
-
-			// reset the matrix to identity, i.e. "no camera transform"
-			view.setIdentity();
-
-			view.translate(new Vector2f(Game.windowWidth / 2,
-					Game.windowHeight / 2));
-			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-			view.translate(new Vector2f(-Game.windowWidth / 2,
-					-Game.windowHeight / 2));
-			view.translate(new Vector2f(Game.dragX, Game.dragY));
-
-			// update the new view matrix
-			Game.activeBatch.updateUniforms();
 
 			float x1 = this.selectedGameObject.squareGameObjectIsOn.x
 					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
@@ -353,11 +327,10 @@ public class Editor {
 			TextureUtils.drawTexture(level.gameCursor.circle, x2 - 10, x2 + 10,
 					y2 - 10, y2 + 10);
 
-			Game.activeBatch.flush();
-			view.setIdentity();
-			Game.activeBatch.updateUniforms();
-
 		}
+	}
+
+	public void drawUI() {
 
 		if (attributesWindow != null)
 			attributesWindow.draw();
@@ -392,14 +365,6 @@ public class Editor {
 			}
 		}
 
-		// if (state == STATE.ADD_OBJECT) {
-		// TextureUtils.drawTexture(
-		// level.inanimateObjects.get(0).imageTexture,
-		// Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
-		// - Mouse.getY() + 20,
-		// Game.windowHeight - Mouse.getY() + 40);
-		// }
-
 		if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
 			TextureUtils.drawTexture(level.gameCursor.imageTexture2,
 					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
@@ -410,7 +375,6 @@ public class Editor {
 							- Mouse.getY() + 20,
 					Game.windowHeight - Mouse.getY() + 40);
 		}
-		// Game.activeBatch.begin();
 	}
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY) {
