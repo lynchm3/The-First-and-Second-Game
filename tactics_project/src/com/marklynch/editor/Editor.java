@@ -291,13 +291,6 @@ public class Editor {
 
 	}
 
-	public void draw() {
-
-		level.draw();
-		drawUI();
-
-	}
-
 	public void drawOverlay() {
 
 		// draw highlight on selected object

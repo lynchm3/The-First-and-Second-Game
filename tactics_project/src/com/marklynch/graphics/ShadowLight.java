@@ -35,12 +35,13 @@ public class ShadowLight {
 
 	static ShaderProgram lightShader;
 	public static final float DEFAULT_LIGHT_Z = 0.075f;
-	public static final Vector4f LIGHT_COLOR = new Vector4f(1f, 0.8f, 0.6f, 1f);
+	public static final Vector4f LIGHT_COLOR = new Vector4f(1f, 0.0f, 0.0f, 1f);
 	public static final Vector4f AMBIENT_COLOR = new Vector4f(0.6f, 0.6f, 1f,
 			0.5f);
 	public static final Vector3f FALLOFF = new Vector3f(.4f, 3f, 20f);
 	public static final Vector3f lightPos = new Vector3f(0f, 0f,
 			DEFAULT_LIGHT_Z);
+	static FrameBuffer lightsFBO;
 
 	// SHADOW
 
@@ -54,7 +55,18 @@ public class ShadowLight {
 	static ArrayList<Light> lights = new ArrayList<Light>();
 	static boolean softShadows = true;
 
-	public static void initBatch() {
+	// BLUR
+	static ShaderProgram blurShader;
+	static FrameBuffer blur1FBO, blur2FBO;
+	static int BLUR_FBO_SIZE = 1024;
+	static float blurRadius = 3f;
+	static float MAX_BLUR = 10f;
+	public static float blurTime = 0f;
+	public static float blurTimeMax = 1000f;
+
+	boolean blur = true;
+
+	public static void init() {
 
 		// LIGHT init
 		try {
@@ -115,10 +127,53 @@ public class ShadowLight {
 			occludersFBO = new FrameBuffer((int) lightSize, (int) lightSize,
 					Texture.LINEAR);
 			shadowMapFBO = new FrameBuffer((int) lightSize, 1, Texture.LINEAR);
+
+			lightsFBO = new FrameBuffer(Display.getWidth(),
+					Display.getHeight(), Texture.LINEAR);
+
 			Texture shadowMapTex = shadowMapFBO.getTexture();
 			shadowMapTex.setFilter(Texture.LINEAR, Texture.LINEAR);
 			shadowMapTex.setWrap(Texture.REPEAT);
 		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+
+		// Blur init
+
+		try {
+
+			// create our FBOs
+			blur1FBO = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE,
+					Texture.LINEAR);
+			blur2FBO = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE,
+					Texture.LINEAR);
+
+			// our basic pass-through vertex shader
+			final String VERT = Util.readFile(Util
+					.getResourceAsStream("res/shadertut/lesson5.vert"));
+
+			// our fragment shader, which does the blur in one direction at a
+			// time
+			final String FRAG = Util.readFile(Util
+					.getResourceAsStream("res/shadertut/lesson5.frag"));
+
+			// create our shader program
+			blurShader = new ShaderProgram(VERT, FRAG, SpriteBatch.ATTRIBUTES);
+
+			// Good idea to log any warnings if they exist
+			if (blurShader.getLog().length() != 0)
+				System.out.println(blurShader.getLog());
+
+			// always a good idea to set up default uniforms...
+			blurShader.use();
+			blurShader.setUniformf("dir", 0f, 0f); // direction of blur; nil for
+													// now
+			blurShader.setUniformf("resolution", BLUR_FBO_SIZE); // size of FBO
+			// texture
+			blurShader.setUniformf("radius", blurRadius); // radius of blur
+		} catch (Exception e) {
+			// simple exception handling...
 			e.printStackTrace();
 			System.exit(0);
 		}
@@ -131,6 +186,11 @@ public class ShadowLight {
 		Game.activeBatch = batch;
 
 		Game.activeBatch.begin();
+
+		glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		lightsFBO.begin();
 
 		glClearColor(0.5f, 0.5f, 0.5f, 1f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -167,6 +227,7 @@ public class ShadowLight {
 		else
 			Game.level.drawBackground();
 		Game.activeBatch.flush();
+		lightsFBO.end();
 
 		// Draw lights
 		Game.activeBatch.setColor(Color.WHITE);
@@ -177,6 +238,8 @@ public class ShadowLight {
 			renderLight(lights.get(i));
 		}
 		Game.activeBatch.flush();
+
+		lightsFBO.begin();
 
 		// draw lvl foreground
 		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
@@ -247,6 +310,10 @@ public class ShadowLight {
 			Game.editor.drawUI();
 			Game.activeBatch.flush();
 		}
+		lightsFBO.end();
+
+		Game.activeBatch.draw(lightsFBO, 0, 0, lightsFBO.getWidth(),
+				lightsFBO.getHeight());
 
 		Game.activeBatch.end();
 	}
@@ -312,6 +379,7 @@ public class ShadowLight {
 		// glClearColor(0.5f, 0.5f, 0.5f, 1f);
 		// glClear(GL_COLOR_BUFFER_BIT);
 
+		lightsFBO.begin();
 		batch.setShader(shadowRenderShader);
 		shadowRenderShader.use();
 		shadowRenderShader.setUniformf("resolution", lightSize, lightSize);
@@ -338,6 +406,7 @@ public class ShadowLight {
 		batch.draw(shadowMapFBO.getTexture(), light.x - lightSize / 2f, light.y
 				- lightSize / 2f, lightSize, lightSize);
 		batch.flush();
+		lightsFBO.end();
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		// batch.end();
 	}
@@ -374,6 +443,84 @@ public class ShadowLight {
 
 	public static void resize() {
 		batch.resize(Display.getWidth(), Display.getHeight());
+	}
+
+	public static void renderBlur() {
+		batch.setShader(blurShader);
+
+		// RENDER SCENE ()
+
+		// Bind FBO target A
+		blur1FBO.begin();
+		// Clear FBO A with an opaque colour to minimize blending issues
+		glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.setIdentity();
+		Game.activeBatch.updateUniforms();
+		// Reset batch to default shader (without blur)
+		try {
+			Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+		} catch (LWJGLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// send the new projection matrix (FBO size) to the default shader
+		Game.activeBatch.resize(blur1FBO.getWidth(), blur1FBO.getHeight());
+		// now we can start our batch
+		Game.activeBatch.begin();
+		// render our scene fully to FBO A
+		if (Game.editorMode)
+			Game.editor.drawUI();
+		else
+			Game.level.drawUI();
+		// flush the batch, i.e. render entities to GPU
+		Game.activeBatch.flush();
+		// After flushing, we can finish rendering to FBO target A
+		blur1FBO.end();
+
+		// HORIZONTAL BLUR ()
+		// swap the shaders
+		// this will send the batch's (FBO-sized) projection matrix to our blur
+		// shader
+		view.setIdentity();
+		Game.activeBatch.updateUniforms();
+		Game.activeBatch.setShader(blurShader);
+		// ensure the direction is along the X-axis only
+		blurShader.setUniformf("dir", 1f, 0f);
+		// determine radius of blur based on mouse position
+		float blurTimeProgress = 1f - blurTime / blurTimeMax;
+		blurShader.setUniformf("radius", blurTimeProgress * MAX_BLUR);
+		// start rendering to target B
+		blur2FBO.begin();
+		// no need to clear since targetA has an opaque background
+		// render target A (the scene) using our horizontal blur shader
+		// it will be placed into target B
+		Game.activeBatch.draw(blur1FBO, 0, 0);
+		// flush the batch before ending target B
+		Game.activeBatch.flush();
+		// finish rendering target B
+		blur2FBO.end();
+		// now we can render to the screen using the vertical blur shader
+
+		// VERTICAL BLUR()
+		// send the screen-size projection matrix to the blurShader
+		view.setIdentity();
+		Game.activeBatch.updateUniforms();
+		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
+
+		// apply the blur only along Y-axis
+		blurShader.setUniformf("dir", 0f, 1f);
+
+		// update Y-axis blur radius based on mouse
+		blurShader.setUniformf("radius", blurTimeProgress * MAX_BLUR);
+
+		// draw the horizontally-blurred FBO B to the screen, applying the
+		// vertical blur as we go
+		Game.activeBatch.draw(blur2FBO, 0, 0);
+
+		Game.activeBatch.end();
+
 	}
 
 }

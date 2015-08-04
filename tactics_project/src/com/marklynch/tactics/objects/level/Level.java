@@ -7,8 +7,6 @@ import java.util.Vector;
 import mdesl.graphics.Color;
 
 import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
@@ -459,29 +457,6 @@ public class Level {
 				squares[i][j].weaponsThatCanAttack.clear();
 			}
 		}
-	}
-
-	public void draw() {
-
-		// get the instance of the view matrix for our batch
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-
-		Game.activeBatch.flush();
-		// reset the matrix to identity, i.e. "no camera transform"
-		view.setIdentity();
-
-		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
-		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		view.translate(new Vector2f(-Game.windowWidth / 2,
-				-Game.windowHeight / 2));
-		view.translate(new Vector2f(Game.dragX, Game.dragY));
-
-		// update the new view matrix
-		Game.activeBatch.updateUniforms();
-
-		drawBackground();
-		drawForeground();
-		drawUI();
 	}
 
 	public void drawBackground() {
