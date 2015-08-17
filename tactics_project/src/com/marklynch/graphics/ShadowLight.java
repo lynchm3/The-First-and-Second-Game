@@ -57,7 +57,7 @@ public class ShadowLight {
 
 	// BLUR
 	static ShaderProgram blurShader;
-	static FrameBuffer blur1FBO, blur2FBO;
+	static FrameBuffer blur2FBO, blur3FBO;
 	static int BLUR_FBO_SIZE = 1024;
 	static float blurRadius = 3f;
 	static float MAX_BLUR = 10f;
@@ -144,9 +144,9 @@ public class ShadowLight {
 		try {
 
 			// create our FBOs
-			blur1FBO = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE,
-					Texture.LINEAR);
 			blur2FBO = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE,
+					Texture.LINEAR);
+			blur3FBO = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE,
 					Texture.LINEAR);
 
 			// our basic pass-through vertex shader
@@ -190,10 +190,12 @@ public class ShadowLight {
 		glClearColor(0.5f, 0.5f, 0.5f, 1f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		lightsFBO.begin();
+		// lightsFBO.begin();
+		// GL11.glEnable(GL11.GL_BLEND);
+		// GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		glClearColor(0.5f, 0.5f, 0.5f, 1f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		// glClearColor(0.5f, 0.5f, 0.5f, 1f);
+		// glClear(GL_COLOR_BUFFER_BIT);
 
 		float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2)
 				/ Game.zoom) + (Mouse.getX()) / Game.zoom);
@@ -211,6 +213,7 @@ public class ShadowLight {
 		lightShader.setUniformf("LightPos", lightPos);
 		lightShader.setUniformf("Resolution", Display.getWidth(),
 				Display.getHeight());
+		// GL11.glEnable(GL_DEPTH_TEST);
 
 		// Draw level BG
 		Game.activeBatch.setColor(Color.WHITE);
@@ -227,7 +230,8 @@ public class ShadowLight {
 		else
 			Game.level.drawBackground();
 		Game.activeBatch.flush();
-		lightsFBO.end();
+		// lightsFBO.end();
+		// GL11.glDisable(GL_DEPTH_TEST);
 
 		// Draw lights
 		Game.activeBatch.setColor(Color.WHITE);
@@ -235,13 +239,14 @@ public class ShadowLight {
 		Game.activeBatch.getViewMatrix().setIdentity();
 		Game.activeBatch.updateUniforms();
 		for (int i = 0; i < lights.size(); i++) {
-			renderLight(lights.get(i));
+			renderLight(lights.get(i), null);
 		}
 		Game.activeBatch.flush();
 
-		lightsFBO.begin();
+		// lightsFBO.begin();
 
 		// draw lvl foreground
+		// GL11.glEnable(GL_DEPTH_TEST);
 		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
 		Game.activeBatch.getViewMatrix().setIdentity();
 		Game.activeBatch.updateUniforms();
@@ -259,6 +264,7 @@ public class ShadowLight {
 		else
 			Game.level.drawForeground();
 		Game.activeBatch.flush();
+		// GL11.glDisable(GL_DEPTH_TEST);
 
 		// Draw level UI
 		view.setIdentity();
@@ -310,22 +316,27 @@ public class ShadowLight {
 			Game.editor.drawUI();
 			Game.activeBatch.flush();
 		}
-		lightsFBO.end();
+		// lightsFBO.end();
 
-		Game.activeBatch.draw(lightsFBO, 0, 0, lightsFBO.getWidth(),
-				lightsFBO.getHeight());
+		// renderBlur();
+		// Game.activeBatch.draw(blur3FBO, 0, 0, blur3FBO.getWidth(),
+		// blur3FBO.getHeight());
+		// Game.activeBatch.draw(lightsFBO, 0, 0, lightsFBO.getWidth(),
+		// lightsFBO.getHeight());
 
 		Game.activeBatch.end();
 	}
 
-	static void renderLight(Light light) {
+	static void renderLight(Light light, FrameBuffer frameBuffer) {
 		occlusion(light);
 		shadowMap();
-		renderShadows(light);
+		renderShadows(light, frameBuffer);
 	}
 
 	public static void occlusion(Light light) {
 		occludersFBO.begin();
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		glClearColor(0f, 0f, 0f, 0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		try {
@@ -359,6 +370,8 @@ public class ShadowLight {
 
 	public static void shadowMap() {
 		shadowMapFBO.begin();
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		glClearColor(0f, 0f, 0f, 0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		batch.setShader(shadowMapShader);
@@ -375,11 +388,15 @@ public class ShadowLight {
 		// batch.end();
 	}
 
-	public static void renderShadows(Light light) {
+	public static void renderShadows(Light light, FrameBuffer frameBuffer) {
 		// glClearColor(0.5f, 0.5f, 0.5f, 1f);
 		// glClear(GL_COLOR_BUFFER_BIT);
 
-		lightsFBO.begin();
+		if (frameBuffer != null) {
+			frameBuffer.begin();
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		}
 		batch.setShader(shadowRenderShader);
 		shadowRenderShader.use();
 		shadowRenderShader.setUniformf("resolution", lightSize, lightSize);
@@ -406,7 +423,9 @@ public class ShadowLight {
 		batch.draw(shadowMapFBO.getTexture(), light.x - lightSize / 2f, light.y
 				- lightSize / 2f, lightSize, lightSize);
 		batch.flush();
-		lightsFBO.end();
+		if (frameBuffer != null) {
+			frameBuffer.end();
+		}
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		// batch.end();
 	}
@@ -445,82 +464,30 @@ public class ShadowLight {
 		batch.resize(Display.getWidth(), Display.getHeight());
 	}
 
-	public static void renderBlur() {
-		batch.setShader(blurShader);
-
-		// RENDER SCENE ()
-
-		// Bind FBO target A
-		blur1FBO.begin();
-		// Clear FBO A with an opaque colour to minimize blending issues
-		glClearColor(0.5f, 0.5f, 0.5f, 1f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.setIdentity();
-		Game.activeBatch.updateUniforms();
-		// Reset batch to default shader (without blur)
-		try {
-			Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
-		} catch (LWJGLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// send the new projection matrix (FBO size) to the default shader
-		Game.activeBatch.resize(blur1FBO.getWidth(), blur1FBO.getHeight());
-		// now we can start our batch
-		Game.activeBatch.begin();
-		// render our scene fully to FBO A
-		if (Game.editorMode)
-			Game.editor.drawUI();
-		else
-			Game.level.drawUI();
-		// flush the batch, i.e. render entities to GPU
-		Game.activeBatch.flush();
-		// After flushing, we can finish rendering to FBO target A
-		blur1FBO.end();
-
-		// HORIZONTAL BLUR ()
-		// swap the shaders
-		// this will send the batch's (FBO-sized) projection matrix to our blur
-		// shader
-		view.setIdentity();
-		Game.activeBatch.updateUniforms();
-		Game.activeBatch.setShader(blurShader);
-		// ensure the direction is along the X-axis only
-		blurShader.setUniformf("dir", 1f, 0f);
-		// determine radius of blur based on mouse position
-		float blurTimeProgress = 1f - blurTime / blurTimeMax;
-		blurShader.setUniformf("radius", blurTimeProgress * MAX_BLUR);
-		// start rendering to target B
-		blur2FBO.begin();
-		// no need to clear since targetA has an opaque background
-		// render target A (the scene) using our horizontal blur shader
-		// it will be placed into target B
-		Game.activeBatch.draw(blur1FBO, 0, 0);
-		// flush the batch before ending target B
-		Game.activeBatch.flush();
-		// finish rendering target B
-		blur2FBO.end();
-		// now we can render to the screen using the vertical blur shader
-
-		// VERTICAL BLUR()
-		// send the screen-size projection matrix to the blurShader
-		view.setIdentity();
-		Game.activeBatch.updateUniforms();
-		Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
-
-		// apply the blur only along Y-axis
-		blurShader.setUniformf("dir", 0f, 1f);
-
-		// update Y-axis blur radius based on mouse
-		blurShader.setUniformf("radius", blurTimeProgress * MAX_BLUR);
-
-		// draw the horizontally-blurred FBO B to the screen, applying the
-		// vertical blur as we go
-		Game.activeBatch.draw(blur2FBO, 0, 0);
-
-		Game.activeBatch.end();
-
-	}
-
+	// public static void renderBlur() {
+	// Matrix4f view = Game.activeBatch.getViewMatrix();
+	//
+	// blur2FBO.begin();
+	// view.setIdentity();
+	// Game.activeBatch.updateUniforms();
+	// Game.activeBatch.setShader(blurShader);
+	// blurShader.setUniformf("dir", 1f, 0f);
+	// blurShader.setUniformf("radius", 2);
+	// GL11.glEnable(GL_DEPTH_TEST);
+	// Game.activeBatch.draw(lightsFBO, 0, 0);
+	// GL11.glDisable(GL_DEPTH_TEST);
+	// Game.activeBatch.flush();
+	// blur2FBO.end();
+	//
+	// // VERTICAL BLUR()
+	// blur3FBO.begin();
+	// view.setIdentity();
+	// Game.activeBatch.updateUniforms();
+	// Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
+	// blurShader.setUniformf("dir", 0f, 1f);
+	// blurShader.setUniformf("radius", 2);
+	// Game.activeBatch.draw(blur2FBO, 0, 0);
+	// Game.activeBatch.flush();
+	// blur3FBO.end();
+	// }
 }
