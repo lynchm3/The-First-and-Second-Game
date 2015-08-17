@@ -2,10 +2,7 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Generate normals for the grass or something...
-	// I could do different shader for bg VS caharacters + objects
-
-	// Light effect from lesson 6
+	// Play around with sounds
 
 	// After a load - images, colors, weapons wont line up... weapons is the big
 	// one coz its multiple selection...
@@ -18,10 +15,6 @@ public class TODO {
 	// just the texture
 
 	// highlight decorations when selected in the list
-
-	// When u tap an actor again the square is selected
-
-	// Play around with sounds
 
 	// Put in some opengl 2d particle effects/ water effects/ special effects, i
 	// dunno, give it a google

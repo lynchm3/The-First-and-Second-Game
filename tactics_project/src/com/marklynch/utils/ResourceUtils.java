@@ -10,6 +10,8 @@ import mdesl.graphics.Texture;
 import mdesl.test.Util;
 
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class ResourceUtils {
@@ -18,6 +20,7 @@ public class ResourceUtils {
 	private static HashMap<String, Texture> levelImages = new HashMap<String, Texture>();
 	private static HashMap<String, TrueTypeFont> globalFonts = new HashMap<String, TrueTypeFont>();
 	private static HashMap<String, TrueTypeFont> levelFonts = new HashMap<String, TrueTypeFont>();
+	private static HashMap<String, Audio> globalSounds = new HashMap<String, Audio>();
 
 	public static Texture getGlobalImage(String path) {
 
@@ -43,6 +46,31 @@ public class ResourceUtils {
 		}
 
 		return texture;
+	}
+
+	public static Audio getGlobalSound(String path) {
+
+		Audio sound = null;
+		for (String key : globalSounds.keySet()) {
+			if (key.equals(path)) {
+				sound = globalSounds.get(key);
+				break;
+			}
+		}
+
+		if (sound != null) {
+		} else {
+			try {
+				sound = AudioLoader.getAudio("WAV", ResourceLoader
+						.getResourceAsStream("res/sounds/" + path));
+				globalSounds.put(path, sound);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.err.println("path = " + path);
+			}
+		}
+
+		return sound;
 	}
 
 	public static void unloadLevelImages() {

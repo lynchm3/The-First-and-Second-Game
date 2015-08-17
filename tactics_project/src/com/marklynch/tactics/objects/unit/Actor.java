@@ -255,6 +255,7 @@ public class Actor extends GameObject {
 		if (remainingHealth <= 0) {
 			this.squareGameObjectIsOn.gameObject = null;
 			this.faction.actors.remove(this);
+			screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
 			return true;
 		}
 		return false;

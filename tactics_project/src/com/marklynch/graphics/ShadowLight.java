@@ -35,9 +35,8 @@ public class ShadowLight {
 
 	static ShaderProgram lightShader;
 	public static final float DEFAULT_LIGHT_Z = 0.075f;
-	public static final Vector4f LIGHT_COLOR = new Vector4f(1f, 0.0f, 0.0f, 1f);
-	public static final Vector4f AMBIENT_COLOR = new Vector4f(0.6f, 0.6f, 1f,
-			0.5f);
+	public static final Vector4f LIGHT_COLOR = new Vector4f(1f, 1f, 1f, 1f);
+	public static final Vector4f AMBIENT_COLOR = new Vector4f(1f, 1f, 1f, 1f);
 	public static final Vector3f FALLOFF = new Vector3f(.4f, 3f, 20f);
 	public static final Vector3f lightPos = new Vector3f(0f, 0f,
 			DEFAULT_LIGHT_Z);
@@ -45,7 +44,7 @@ public class ShadowLight {
 
 	// SHADOW
 
-	private final static float lightSize = 500;
+	private final static float lightSize = 100;
 	static SpriteBatch batch;
 	static BitmapFont font;
 	static FrameBuffer occludersFBO;
@@ -432,7 +431,7 @@ public class ShadowLight {
 
 	static void clearLights() {
 		lights.clear();
-		lights.add(new Light(128, 128, Color.RED));
+		lights.add(new Light(128, 128, Color.WHITE));
 		// lights.add(new Light(200, 200, Color.BLUE));
 	}
 

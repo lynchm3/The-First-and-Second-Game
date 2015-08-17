@@ -8,6 +8,8 @@ import java.util.Vector;
 
 import mdesl.graphics.Texture;
 
+import org.newdawn.slick.openal.Audio;
+
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
@@ -17,6 +19,7 @@ import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.utils.ArrayUtils;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class GameObject {
@@ -55,6 +58,9 @@ public class GameObject {
 	public transient Texture downTexture = null;
 	public static transient Texture grassNormalTexture = null;
 	public static transient Texture skipNormalTexture = null;
+
+	// sounds
+	public static transient Audio screamAudio = null;
 
 	// paths
 	public transient HashMap<Square, Path> paths = new HashMap<Square, Path>();
@@ -96,6 +102,7 @@ public class GameObject {
 		this.downTexture = getGlobalImage("down.png");
 		grassNormalTexture = getGlobalImage("grass_NRM.png");
 		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png");
+		screamAudio = ResourceUtils.getGlobalSound("scream.wav");
 		for (Weapon weapon : this.weapons.weapons) {
 			weapon.loadImages();
 		}
