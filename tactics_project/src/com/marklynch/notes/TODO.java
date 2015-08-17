@@ -2,18 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Break level/editor draw methods in to background, foreground and UI
-
-	// Merge the 2 lightings :/ (the shaders i guess? the last shader for shadow
-	// + the one for the light)
-
-	// Shadow shader is needed if I'm doing lighting...
-	// https://github.com/mattdesl/lwjgl-basics/wiki/2D-Pixel-Perfect-Shadows
-	// BOOM
-	// gonna have to convert it to lwjgl-basics :D
-
-	// Resize grass tile to 128 :/
-
 	// Generate normals for the grass or something...
 	// I could do different shader for bg VS caharacters + objects
 
