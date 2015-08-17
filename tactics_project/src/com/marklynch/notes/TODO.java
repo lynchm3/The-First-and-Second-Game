@@ -2,7 +2,7 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Play around with sounds
+	// Put together a level, something to work with from the get-go
 
 	// After a load - images, colors, weapons wont line up... weapons is the big
 	// one coz its multiple selection...
@@ -23,8 +23,6 @@ public class TODO {
 	// editor :D
 
 	// colors need to be handled better in the save/load process
-
-	// colors tab
 
 	// color delete button... hmmmmmmm.............. keep minimum to one
 	// color... if faction has color... put them at color(0) after the delete

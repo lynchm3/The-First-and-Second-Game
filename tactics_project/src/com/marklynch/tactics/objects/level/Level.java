@@ -274,6 +274,7 @@ public class Level {
 		ArrayList<Weapon> weaponsForActor5 = new ArrayList<Weapon>();
 		weaponsForActor5.add(weapon0ForActor5);
 
+		//
 		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
 				"red1.png", squares[0][0], weaponsForActor0, 4, this);
 		actor0.faction = factions.get(0);

@@ -3,6 +3,7 @@ package com.marklynch.editor;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
@@ -23,6 +24,15 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.tactics.objects.level.script.InlineSpeechPart;
+import com.marklynch.tactics.objects.level.script.ScriptEvent;
+import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
+import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
+import com.marklynch.tactics.objects.level.script.SpeechPart;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerScriptEventEnded;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
@@ -33,6 +43,7 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextureUtils;
 
 public class Editor {
@@ -140,28 +151,7 @@ public class Editor {
 
 		settingsWindow = levelSettingsWindow;
 
-		// Add a game object
-		GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", level.squares[0][3],
-				new ArrayList<Weapon>(), level);
-		level.inanimateObjects.add(gameObject);
-		level.squares[0][3].gameObject = gameObject;
-
-		// Add a faction
-		level.factions.add(new Faction("Faction " + level.factions.size(),
-				level, colors.get(1), "faction_blue.png"));
-
-		// Weapons
-		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
-		weaponsForActor0.add(weapon0);
-		weaponsForActor0.add(weapon1);
-		weaponsForActor0.add(weapon2);
-
-		// Add actor
-		Actor actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", level.squares[0][4], weaponsForActor0, 4, level);
-		actor.faction = level.factions.get(0);
-		level.factions.get(0).actors.add(actor);
+		generateTestObjects();
 
 		// TABS
 		levelTabButton = new LevelButton(10, 10, 70, 30, "", "", "LEVEL", true,
@@ -284,6 +274,180 @@ public class Editor {
 			}
 		};
 		buttons.add(decorationsTabButton);
+
+	}
+
+	public void generateTestObjects() {
+
+		// Add a game object
+		GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
+				"skip_with_shadow.png", level.squares[0][3],
+				new ArrayList<Weapon>(), level);
+		level.inanimateObjects.add(gameObject);
+		level.squares[0][3].gameObject = gameObject;
+
+		// Add factions
+		level.factions.add(new Faction("Faction " + level.factions.size(),
+				level, colors.get(0), "faction_blue.png"));
+		level.factions.add(new Faction("Faction " + level.factions.size(),
+				level, colors.get(1), "faction_red.png"));
+		level.factions.add(new Faction("Faction " + level.factions.size(),
+				level, colors.get(2), "faction_green.png"));
+
+		// relationships
+		level.factions.get(0).relationships.put(level.factions.get(1), -100);
+		level.factions.get(0).relationships.put(level.factions.get(2), -100);
+		level.factions.get(1).relationships.put(level.factions.get(0), -100);
+		level.factions.get(1).relationships.put(level.factions.get(2), -100);
+		level.factions.get(2).relationships.put(level.factions.get(0), -100);
+		level.factions.get(2).relationships.put(level.factions.get(1), -100);
+
+		// Weapons
+		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
+		weaponsForActor0.add(weapons.get(0));
+		weaponsForActor0.add(weapons.get(1));
+		weaponsForActor0.add(weapons.get(2));
+		ArrayList<Weapon> weaponsForActor1 = new ArrayList<Weapon>();
+		weaponsForActor1.add(weapons.get(0));
+		weaponsForActor1.add(weapons.get(1));
+		weaponsForActor1.add(weapons.get(2));
+
+		// Add actor
+		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+				"red1.png", level.squares[0][4], weaponsForActor0, 4, level);
+		actor0.faction = level.factions.get(0);
+		level.factions.get(0).actors.add(actor0);
+		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+				"red1.png", level.squares[0][5], weaponsForActor0, 4, level);
+		actor1.faction = level.factions.get(0);
+		level.factions.get(0).actors.add(actor1);
+
+		Actor actor2 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+				"red1.png", level.squares[5][5], weaponsForActor1, 4, level);
+		actor2.faction = level.factions.get(1);
+		level.factions.get(1).actors.add(actor2);
+
+		Actor actor3 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+				"red1.png", level.squares[5][9], weaponsForActor1, 4, level);
+		actor3.faction = level.factions.get(2);
+		level.factions.get(2).actors.add(actor3);
+
+		// Script
+
+		// Speech 1
+		Vector<Actor> speechActors1 = new Vector<Actor>();
+		speechActors1.add(level.factions.get(0).actors.get(0));
+		speechActors1.add(level.factions.get(0).actors.get(1));
+
+		Vector<Float> speechPositions1 = new Vector<Float>();
+		speechPositions1.add(0f);
+		speechPositions1.add(0f);
+
+		Vector<SpeechPart.DIRECTION> speechDirections1 = new Vector<SpeechPart.DIRECTION>();
+		speechDirections1.add(SpeechPart.DIRECTION.RIGHT);
+		speechDirections1.add(SpeechPart.DIRECTION.LEFT);
+
+		SpeechPart speechPart1_1 = new SpeechPart(speechActors1,
+				speechPositions1, speechDirections1,
+				level.factions.get(0).actors.get(0),
+				new Object[] { new StringWithColor(
+						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) }, level);
+
+		SpeechPart speechPart1_2 = new SpeechPart(
+				speechActors1,
+				speechPositions1,
+				speechDirections1,
+				level.factions.get(0).actors.get(0),
+				new Object[] { new StringWithColor(
+						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
+						Color.BLACK) }, level);
+
+		Vector<SpeechPart> speechParts1 = new Vector<SpeechPart>();
+		speechParts1.add(speechPart1_1);
+		speechParts1.add(speechPart1_2);
+
+		// ScriptTrigger scriptTrigger1 = new
+		// ScriptTriggerDestructionOfSpecificGameObject(
+		// this, factions.get(0).actors.get(0));
+		ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(level,
+				level.factions.get(0).actors.get(0));
+		// ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1,
+		// 0);
+
+		// ScriptEventEndLevel scriptEventEndLevel = new
+		// ScriptEventEndLevel(true,
+		// scriptTrigger1, level, new Object[] { "GAME OVER" });
+		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
+				speechParts1, null);
+
+		// Speech 2
+
+		Vector<Actor> speechActors2 = new Vector<Actor>();
+		speechActors2.add(level.factions.get(2).actors.get(0));
+		speechActors2.add(level.factions.get(0).actors.get(1));
+
+		Vector<Float> speechPositions2 = new Vector<Float>();
+		speechPositions2.add(0f);
+		speechPositions2.add(0f);
+
+		Vector<SpeechPart.DIRECTION> speechDirections2 = new Vector<SpeechPart.DIRECTION>();
+		speechDirections2.add(SpeechPart.DIRECTION.RIGHT);
+		speechDirections2.add(SpeechPart.DIRECTION.LEFT);
+
+		SpeechPart speechPart2_1 = new SpeechPart(speechActors2,
+				speechPositions2, speechDirections2,
+				level.factions.get(2).actors.get(0),
+				new Object[] { new StringWithColor("GREEN TEAM HOOOOOOOO",
+						Color.BLACK) }, level);
+
+		Vector<SpeechPart> speechParts2 = new Vector<SpeechPart>();
+		speechParts2.add(speechPart2_1);
+
+		ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(level, 1, 2);
+
+		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(true,
+				speechParts2, null);
+
+		// Vector<ScriptEvent> scriptEventsForGroup = new Vector<ScriptEvent>();
+		// scriptEventsForGroup.add(scriptEventSpeech1);
+		// scriptEventsForGroup.add(scriptEventSpeech2);
+		// ScriptEventGroup scriptEventGroup = new ScriptEventGroup(true,
+		// scriptTrigger1, scriptEventsForGroup);
+
+		// Inline speechVector<Actor> speechActors1 = new Vector<Actor>();
+
+		InlineSpeechPart inlineSpeechPart1_1 = new InlineSpeechPart(
+				level.factions.get(0).actors.get(0),
+				new Object[] { new StringWithColor("HOLLA INLINE SPEECH YO",
+						Color.BLACK) }, level);
+
+		InlineSpeechPart inlineSpeechPart1_2 = new InlineSpeechPart(
+				level.factions.get(0).actors.get(0),
+				new Object[] { new StringWithColor(
+						"HOLLA, PART 2 OF THE INLINE SPEECH, WANT TO PUSH IT TO OVER 2 LINES, JUST TO SEE WTF IT LOOKS LIKE HOLLA",
+						Color.BLACK) }, level);
+
+		Vector<InlineSpeechPart> inlineSpeechParts1 = new Vector<InlineSpeechPart>();
+		inlineSpeechParts1.add(inlineSpeechPart1_1);
+		inlineSpeechParts1.add(inlineSpeechPart1_2);
+
+		// ScriptTrigger scriptTrigger3 = new ScriptTriggerTurnStart(this, 2,
+		// 0);
+		ScriptTriggerScriptEventEnded scriptTrigger3 = new ScriptTriggerScriptEventEnded(
+				scriptEventSpeech1);
+
+		ScriptEventInlineSpeech inlineScriptEventSpeech1 = new ScriptEventInlineSpeech(
+				false, inlineSpeechParts1, scriptTrigger3);
+
+		// The script
+
+		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
+		scriptEvents.add(scriptEventSpeech1);
+		scriptEvents.add(scriptEventSpeech2);
+		scriptEvents.add(inlineScriptEventSpeech1);
+
+		level.script.scriptEvents = scriptEvents;
+		// script.activateScriptEvent();
 
 	}
 
