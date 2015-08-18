@@ -114,6 +114,7 @@ public class GameObject {
 		this.faction = faction;
 		this.squareGameObjectIsOn = level.squares[this.squareGameObjectIsOn.x][this.squareGameObjectIsOn.y];
 		this.squareGameObjectIsOn.gameObject = this;
+		this.paths = new HashMap<Square, Path>();
 	}
 
 	public void drawForeground() {

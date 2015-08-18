@@ -1,6 +1,7 @@
 package com.marklynch.tactics.objects.unit;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.Vector;
 
 import mdesl.graphics.Color;
@@ -25,6 +26,8 @@ public class Actor extends GameObject {
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT
 	}
+
+	public String guid = UUID.randomUUID().toString();
 
 	public String title = "";
 	public int actorLevel = 1;
@@ -97,6 +100,8 @@ public class Actor extends GameObject {
 			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath,
 					weapon.imagePath, level, weapon));
 		}
+
+		hoverFightPreviewFights = new Vector<Fight>();
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {

@@ -10,7 +10,7 @@ import com.marklynch.utils.TextUtils;
 
 public class ScriptEventEndLevel extends ScriptEvent {
 
-	Level level;
+	transient Level level;
 	Object[] text;
 	boolean completed = false;
 

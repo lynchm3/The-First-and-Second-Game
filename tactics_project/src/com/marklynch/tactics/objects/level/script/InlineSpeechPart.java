@@ -12,7 +12,7 @@ import com.marklynch.utils.TextUtils;
 public class InlineSpeechPart {
 	public Actor actor;
 	public Object[] text;
-	public Level level;
+	public transient Level level;
 
 	public InlineSpeechPart(Actor actor, Object[] text, Level level) {
 		super();

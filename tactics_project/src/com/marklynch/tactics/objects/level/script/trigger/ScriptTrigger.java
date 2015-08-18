@@ -1,9 +1,10 @@
 package com.marklynch.tactics.objects.level.script.trigger;
 
-
-public abstract class ScriptTrigger {
+public class ScriptTrigger {
 
 	public boolean triggered = false;
 
-	public abstract boolean checkTrigger();
+	public boolean checkTrigger() {
+		return false;
+	};
 }

@@ -1,9 +1,12 @@
 package com.marklynch.editor.settingswindow;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;
+import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
+import com.marklynch.tactics.objects.level.script.SpeechPart;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.FileUtils;
@@ -179,7 +182,19 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				Gson gson = new Gson();
+
+				// Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				// String json = gson.toJson(obj);
+				// System.out.println(json);
+
+				Gson gson = new GsonBuilder()
+						.setPrettyPrinting()
+						.registerTypeAdapterFactory(
+								new SpeechPart.SpeechPartTypeAdapterFactory())
+						.registerTypeAdapterFactory(
+								new Faction.FactionTypeAdapterFactory())
+						.create();
+
 				String json = gson.toJson(editor.level);
 				// System.out.println(editor.json);
 				FileUtils.saveFile(json);

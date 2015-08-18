@@ -6,7 +6,7 @@ public class ScriptTriggerTurnStart extends ScriptTrigger {
 
 	int turn;
 	int factionIndex;
-	Level level;
+	transient Level level;
 
 	public ScriptTriggerTurnStart(Level level, int turn, int factionIndex) {
 		this.turn = turn;

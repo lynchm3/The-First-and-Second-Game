@@ -1,9 +1,11 @@
 package com.marklynch.tactics.objects.level.script;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import mdesl.graphics.Color;
 
+import com.marklynch.CustomizedTypeAdapterFactory;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -13,12 +15,15 @@ import com.marklynch.utils.TextureUtils;
 
 public class SpeechPart {
 
-	public Vector<Actor> actors;
+	public transient Vector<Actor> actors = null;
 	public Vector<Float> positions;
 	public Vector<DIRECTION> directions;
 	public Actor talker;
 	public Object[] text;
-	public Level level;
+	public transient Level level = null;
+
+	// For saving and loading
+	public ArrayList<String> actorGUIDs = new ArrayList<String>();
 
 	public enum DIRECTION {
 		LEFT, RIGHT
@@ -69,5 +74,30 @@ public class SpeechPart {
 
 		// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
 		TextUtils.printTextWithImages(text, textX1, posY, width);
+	}
+
+	public static class SpeechPartTypeAdapterFactory extends
+			CustomizedTypeAdapterFactory<SpeechPart> {
+		public SpeechPartTypeAdapterFactory() {
+			super(SpeechPart.class);
+		}
+
+		@Override
+		protected void beforeWrite(SpeechPart object) {
+			for (Actor actor : object.actors) {
+				object.actorGUIDs.add(actor.guid);
+			}
+		}
+
+		@Override
+		protected SpeechPart afterRead(SpeechPart object) {
+			object.actors = new Vector<Actor>();
+			for (int i = 0; i < object.actorGUIDs.size(); i++) {
+				object.actors.add(Game.level
+						.findActorFromGUID(object.actorGUIDs.get(i)));
+			}
+			object.level = Game.level;
+			return object;
+		}
 	}
 }

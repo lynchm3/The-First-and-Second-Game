@@ -59,8 +59,9 @@ public class Level {
 	public transient boolean showTurnNotification = true;
 	public transient boolean waitingForPlayerClick = true;
 
-	public transient Script script;
 	public transient boolean ended = false;
+
+	public Script script;
 
 	// java representation of a grid??
 	// 2d array?
@@ -737,5 +738,25 @@ public class Level {
 		this.width = newWidth;
 		this.height = newHeight;
 		this.squares = newSquares;
+	}
+
+	public Actor findActorFromGUID(String guid) {
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				if (actor.guid.equals(guid)) {
+					return actor;
+				}
+			}
+		}
+		return null;
+	}
+
+	public Faction findFactionFromGUID(String guid) {
+		for (Faction faction : factions) {
+			if (faction.guid.equals(guid)) {
+				return faction;
+			}
+		}
+		return null;
 	}
 }

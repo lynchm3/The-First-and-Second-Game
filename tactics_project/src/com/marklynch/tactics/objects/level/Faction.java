@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.Vector;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
+import com.marklynch.CustomizedTypeAdapterFactory;
+import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Fight;
@@ -37,7 +40,7 @@ public class Faction {
 	/**
 	 * Map relationships of this faction towards others +-100
 	 */
-	public Map<Faction, Integer> relationships = new HashMap<Faction, Integer>();
+	public transient Map<Faction, Integer> relationships = new HashMap<Faction, Integer>();
 	public Vector<Actor> actors = new Vector<Actor>();
 	public transient Level level;
 
@@ -56,6 +59,10 @@ public class Faction {
 	public transient STAGE currentStage = STAGE.SELECT;
 	public transient int timeAtCurrentStage = 0;
 	public transient final int STAGE_DURATION = 1000;
+
+	// For saving and loading
+	public String guid = UUID.randomUUID().toString();
+	public Map<String, Integer> relationshipGUIDs = new HashMap<String, Integer>();
 
 	public Faction(String name, Level level, Color color, String imagePath) {
 		this.name = name;
@@ -561,5 +568,32 @@ public class Faction {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public static class FactionTypeAdapterFactory extends
+			CustomizedTypeAdapterFactory<Faction> {
+		public FactionTypeAdapterFactory() {
+			super(Faction.class);
+		}
+
+		@Override
+		protected void beforeWrite(Faction object) {
+			// Relationships
+			for (Faction faction : object.relationships.keySet()) {
+				faction.relationshipGUIDs.put(faction.guid,
+						object.relationships.get(faction));
+			}
+		}
+
+		@Override
+		protected Faction afterRead(Faction object) {
+			object.actors = new Vector<Actor>();
+			for (String factionGUID : object.relationshipGUIDs.keySet()) {
+				object.relationships.put(
+						Game.level.findFactionFromGUID(factionGUID),
+						object.relationshipGUIDs.get(factionGUID));
+			}
+			return object;
+		}
 	}
 }

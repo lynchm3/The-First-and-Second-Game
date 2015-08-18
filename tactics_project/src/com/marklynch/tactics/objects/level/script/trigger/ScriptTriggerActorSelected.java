@@ -6,7 +6,7 @@ import com.marklynch.tactics.objects.unit.Actor;
 public class ScriptTriggerActorSelected extends ScriptTrigger {
 
 	Actor actor;
-	Level level;
+	transient Level level;
 
 	public ScriptTriggerActorSelected(Level level, Actor actor) {
 		this.actor = actor;

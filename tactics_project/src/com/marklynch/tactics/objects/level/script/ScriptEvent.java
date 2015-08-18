@@ -2,7 +2,7 @@ package com.marklynch.tactics.objects.level.script;
 
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 
-public abstract class ScriptEvent {
+public class ScriptEvent {
 
 	public boolean blockUserInput;
 
@@ -14,11 +14,16 @@ public abstract class ScriptEvent {
 		this.scriptTrigger = scriptTrigger;
 	}
 
-	public abstract boolean checkIfCompleted();
+	public boolean checkIfCompleted() {
+		return false;
+	}
 
-	public abstract void click();
+	public void click() {
+	}
 
-	public abstract void update(int delta);
+	public void update(int delta) {
+	}
 
-	public abstract void draw();
+	public void draw() {
+	}
 }
