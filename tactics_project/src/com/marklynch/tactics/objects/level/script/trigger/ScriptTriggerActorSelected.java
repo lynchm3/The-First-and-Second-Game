@@ -1,17 +1,15 @@
 package com.marklynch.tactics.objects.level.script.trigger;
 
-import com.marklynch.CustomizedTypeAdapterFactory;
-import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
 
 public class ScriptTriggerActorSelected extends ScriptTrigger {
 
-	transient Actor actor;
-	transient Level level;
+	public transient Actor actor;
+	public transient Level level;
 
 	// for saving and loading
-	String actorGUID = null;
+	public String actorGUID = null;
 
 	public ScriptTriggerActorSelected(Level level, Actor actor) {
 		this.actor = actor;
@@ -31,26 +29,4 @@ public class ScriptTriggerActorSelected extends ScriptTrigger {
 			return true;
 		return false;
 	}
-
-	public static class ScriptTriggerActorSelectedAdapterFactory extends
-			CustomizedTypeAdapterFactory<ScriptTriggerActorSelected> {
-		public ScriptTriggerActorSelectedAdapterFactory() {
-			super(ScriptTriggerActorSelected.class);
-		}
-
-		@Override
-		protected void beforeWrite(ScriptTriggerActorSelected object) {
-			object.actorGUID = object.actor.guid;
-		}
-
-		@Override
-		protected ScriptTriggerActorSelected afterRead(
-				ScriptTriggerActorSelected object) {
-			object.actor = Game.editor.level
-					.findActorFromGUID(object.actorGUID);
-			object.level = Game.editor.level;
-			return object;
-		}
-	}
-
 }

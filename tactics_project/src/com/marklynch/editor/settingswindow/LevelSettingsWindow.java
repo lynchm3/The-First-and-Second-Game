@@ -19,6 +19,7 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.SpeechPart;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.FileUtils;
@@ -326,6 +327,11 @@ public class LevelSettingsWindow extends SettingsWindow {
 		public JsonElement serialize(C src, Type typeOfSrc,
 				JsonSerializationContext context) {
 
+			if (src instanceof ScriptTriggerActorSelected) {
+				ScriptTriggerActorSelected scriptTriggerActorSelected = (ScriptTriggerActorSelected) src;
+				scriptTriggerActorSelected.actorGUID = scriptTriggerActorSelected.actor.guid;
+			}
+
 			JsonObject retValue = new JsonObject();
 			String className = src.getClass().getCanonicalName();
 			retValue.addProperty(CLASSNAME, className);
@@ -348,7 +354,16 @@ public class LevelSettingsWindow extends SettingsWindow {
 				e.printStackTrace();
 				throw new JsonParseException(e.getMessage());
 			}
-			return context.deserialize(jsonObject.get(INSTANCE), klass);
+
+			C object = context.deserialize(jsonObject.get(INSTANCE), klass);
+			if (object instanceof ScriptTriggerActorSelected) {
+				ScriptTriggerActorSelected scriptTriggerActorSelected = (ScriptTriggerActorSelected) object;
+				scriptTriggerActorSelected.actor = Game.editor.level
+						.findActorFromGUID(scriptTriggerActorSelected.actorGUID);
+				scriptTriggerActorSelected.level = Game.editor.level;
+
+			}
+			return object;
 		}
 	}
 
