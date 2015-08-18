@@ -1,12 +1,24 @@
 package com.marklynch.editor.settingswindow;
 
+import java.lang.reflect.Type;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
+import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.SpeechPart;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.FileUtils;
@@ -193,6 +205,13 @@ public class LevelSettingsWindow extends SettingsWindow {
 								new SpeechPart.SpeechPartTypeAdapterFactory())
 						.registerTypeAdapterFactory(
 								new Faction.FactionTypeAdapterFactory())
+						// .registerTypeAdapterFactory(
+						// new
+						// ScriptTriggerActorSelected.ScriptTriggerActorSelectedAdapterFactory())
+						.registerTypeAdapter(ScriptEvent.class,
+								new SubClassFriendlyAdapter<ScriptEvent>())
+						.registerTypeAdapter(ScriptTrigger.class,
+								new SubClassFriendlyAdapter<ScriptTrigger>())
 						.create();
 
 				String json = gson.toJson(editor.level);
@@ -253,11 +272,25 @@ public class LevelSettingsWindow extends SettingsWindow {
 			public void depress() {
 			}
 		};
+
 		loadLevelButton.clickListener = new ClickListener() {
 
 			@Override
 			public void click() {
-				Gson gson = new Gson();
+				Gson gson = new GsonBuilder()
+						.setPrettyPrinting()
+						.registerTypeAdapterFactory(
+								new SpeechPart.SpeechPartTypeAdapterFactory())
+						.registerTypeAdapterFactory(
+								new Faction.FactionTypeAdapterFactory())
+						// .registerTypeAdapterFactory(
+						// new
+						// ScriptTriggerActorSelected.ScriptTriggerActorSelectedAdapterFactory())
+						.registerTypeAdapter(ScriptEvent.class,
+								new SubClassFriendlyAdapter<ScriptEvent>())
+						.registerTypeAdapter(ScriptTrigger.class,
+								new SubClassFriendlyAdapter<ScriptTrigger>())
+						.create();
 				String json = FileUtils.openFile();
 				// System.out.println(editor.json);
 				// FileUtils.saveFile(json);
@@ -281,6 +314,42 @@ public class LevelSettingsWindow extends SettingsWindow {
 		// }
 		// });
 		// buttons.add(addFactionButton);
+	}
+
+	public static class SubClassFriendlyAdapter<C> implements
+			JsonSerializer<C>, JsonDeserializer<C> {
+
+		private static final String CLASSNAME = "CLASSNAME";
+		private static final String INSTANCE = "INSTANCE";
+
+		@Override
+		public JsonElement serialize(C src, Type typeOfSrc,
+				JsonSerializationContext context) {
+
+			JsonObject retValue = new JsonObject();
+			String className = src.getClass().getCanonicalName();
+			retValue.addProperty(CLASSNAME, className);
+			JsonElement elem = context.serialize(src);
+			retValue.add(INSTANCE, elem);
+			return retValue;
+		}
+
+		@Override
+		public C deserialize(JsonElement json, Type typeOfT,
+				JsonDeserializationContext context) throws JsonParseException {
+			JsonObject jsonObject = json.getAsJsonObject();
+			JsonPrimitive prim = (JsonPrimitive) jsonObject.get(CLASSNAME);
+			String className = prim.getAsString();
+
+			Class<?> klass = null;
+			try {
+				klass = Class.forName(className);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				throw new JsonParseException(e.getMessage());
+			}
+			return context.deserialize(jsonObject.get(INSTANCE), klass);
+		}
 	}
 
 	@Override

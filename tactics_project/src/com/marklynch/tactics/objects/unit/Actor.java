@@ -41,7 +41,7 @@ public class Actor extends GameObject {
 	public transient AttackButton attackButton = null;
 	public transient AttackButton pushButton = null;
 	public transient float buttonsAnimateCurrentTime = 0f;
-	public transient float buttonsAnimateMaxTime = 200f;
+	public final transient float buttonsAnimateMaxTime = 200f;
 
 	// weapon buttons
 	public transient ArrayList<Button> weaponButtons;

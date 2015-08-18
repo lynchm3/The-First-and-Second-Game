@@ -86,6 +86,13 @@ public class Faction {
 		for (Actor actor : actors) {
 			actor.postLoad(level, this);
 		}
+		currentStage = STAGE.SELECT;
+		relationships = new HashMap<Faction, Integer>();
+		for (String factionGUID : relationshipGUIDs.keySet()) {
+			relationships.put(
+					Game.editor.level.findFactionFromGUID(factionGUID),
+					relationshipGUIDs.get(factionGUID));
+		}
 	}
 
 	public void update(int delta) {
@@ -578,21 +585,15 @@ public class Faction {
 
 		@Override
 		protected void beforeWrite(Faction object) {
-			// Relationships
+			System.out.println("beforeWrite");
 			for (Faction faction : object.relationships.keySet()) {
-				faction.relationshipGUIDs.put(faction.guid,
+				object.relationshipGUIDs.put(faction.guid,
 						object.relationships.get(faction));
 			}
 		}
 
 		@Override
 		protected Faction afterRead(Faction object) {
-			object.actors = new Vector<Actor>();
-			for (String factionGUID : object.relationshipGUIDs.keySet()) {
-				object.relationships.put(
-						Game.level.findFactionFromGUID(factionGUID),
-						object.relationshipGUIDs.get(factionGUID));
-			}
 			return object;
 		}
 	}

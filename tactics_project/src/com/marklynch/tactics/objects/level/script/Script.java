@@ -13,8 +13,13 @@ public class Script {
 	}
 
 	public void activateScriptEvent() {
+
+		System.out.println("activateScriptEvent()");
+
 		// activeScriptEvent = null;
 		for (ScriptEvent scriptEvent : this.scriptEvents) {
+			System.out.println("scriptEvent.scriptTrigger.triggered = "
+					+ scriptEvent.scriptTrigger.triggered);
 			if (scriptEvent.scriptTrigger != null
 					&& scriptEvent.scriptTrigger.triggered == false
 					&& scriptEvent.scriptTrigger.checkTrigger()) {

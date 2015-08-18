@@ -40,6 +40,7 @@ public abstract class CustomizedTypeAdapterFactory<C> implements
 
 			@Override
 			public C read(JsonReader in) throws IOException {
+				System.out.println("read(JsonReader in) - ");
 				return afterRead(delegate.fromJsonTree(elementAdapter.read(in)));
 			}
 		};

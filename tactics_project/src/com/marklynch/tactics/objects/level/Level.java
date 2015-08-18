@@ -130,7 +130,6 @@ public class Level {
 		dialogs = new Vector<Dialog>();
 		decorations = new Vector<Decoration>();
 		gameCursor = new GameCursor();
-		script = new Script(new Vector<ScriptEvent>());
 
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f,
 				"end_turn_button.png", "end_turn_button.png", "END TURN",
@@ -183,6 +182,15 @@ public class Level {
 		for (Faction faction : factions) {
 			faction.postLoad(this);
 		}
+
+		showTurnNotification = true;
+		waitingForPlayerClick = true;
+
+		System.out.println("script = " + script);
+		System.out.println("script.scriptEvents.get(0) = "
+				+ script.scriptEvents.get(0));
+		System.out.println("script.scriptEvents.get(0).scriptTrigger = "
+				+ script.scriptEvents.get(0).scriptTrigger);
 
 	}
 

@@ -24,6 +24,7 @@ public class SpeechPart {
 
 	// For saving and loading
 	public ArrayList<String> actorGUIDs = new ArrayList<String>();
+	public String talkerGUID = null;
 
 	public enum DIRECTION {
 		LEFT, RIGHT
@@ -87,16 +88,24 @@ public class SpeechPart {
 			for (Actor actor : object.actors) {
 				object.actorGUIDs.add(actor.guid);
 			}
+
+			object.talkerGUID = object.talker.guid;
 		}
 
 		@Override
 		protected SpeechPart afterRead(SpeechPart object) {
+			System.out.println("SpeechPart afterRead()");
 			object.actors = new Vector<Actor>();
+
 			for (int i = 0; i < object.actorGUIDs.size(); i++) {
-				object.actors.add(Game.level
+				object.actors.add(Game.editor.level
 						.findActorFromGUID(object.actorGUIDs.get(i)));
 			}
-			object.level = Game.level;
+
+			object.talker = Game.editor.level
+					.findActorFromGUID(object.talkerGUID);
+
+			object.level = Game.editor.level;
 			return object;
 		}
 	}
