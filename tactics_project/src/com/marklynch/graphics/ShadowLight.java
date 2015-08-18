@@ -225,7 +225,7 @@ public class ShadowLight {
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 		Game.activeBatch.updateUniforms();
 		if (Game.editorMode)
-			Game.editor.level.drawBackground();
+			Game.level.drawBackground();
 		else
 			Game.level.drawBackground();
 		Game.activeBatch.flush();
@@ -259,7 +259,7 @@ public class ShadowLight {
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 		Game.activeBatch.updateUniforms();
 		if (Game.editorMode)
-			Game.editor.level.drawForeground();
+			Game.level.drawForeground();
 		else
 			Game.level.drawForeground();
 		Game.activeBatch.flush();
@@ -280,7 +280,7 @@ public class ShadowLight {
 		}
 		Game.activeBatch.setColor(Color.WHITE);
 		if (Game.editorMode)
-			Game.editor.level.drawUI();
+			Game.level.drawUI();
 		else
 			Game.level.drawUI();
 		Game.activeBatch.flush();
@@ -356,7 +356,7 @@ public class ShadowLight {
 		// Game.activeBatch.updateUniforms();
 
 		if (Game.editorMode)
-			Game.editor.level.drawForeground();
+			Game.level.drawForeground();
 		else
 			Game.level.drawForeground();
 		batch.flush();

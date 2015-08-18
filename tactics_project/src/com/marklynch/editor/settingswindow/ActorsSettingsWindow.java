@@ -1,5 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
+import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.Editor.STATE;
@@ -63,7 +64,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 		buttons.add(addActorsButton);
 
 		int buttonCount = 0;
-		for (final Faction faction : editor.level.factions) {
+		for (final Faction faction : Game.level.factions) {
 			for (int i = 0; i < faction.actors.size(); i++) {
 				final int index = i;
 

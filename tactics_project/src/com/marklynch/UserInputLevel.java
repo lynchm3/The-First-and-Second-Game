@@ -4,7 +4,6 @@ import org.lwjgl.input.Mouse;
 
 import com.marklynch.config.Config;
 import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
@@ -26,7 +25,7 @@ public class UserInputLevel {
 
 	public static Path path;
 
-	public static void userInput(int delta2, Level level) {
+	public static void userInput(int delta2) {
 
 		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();
@@ -76,41 +75,44 @@ public class UserInputLevel {
 
 		// Check if a script is hogging the screen and intercepting clicks
 		boolean scriptInterceptsClick = false;
-		if (level.script.checkIfBlocking()) {
+		if (Game.level.script.checkIfBlocking()) {
 			scriptInterceptsClick = true;
 		}
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
 		if ((int) mouseXInSquares > -1
-				&& (int) mouseXInSquares < level.squares.length
+				&& (int) mouseXInSquares < Game.level.squares.length
 				&& (int) mouseYInSquares > -1
-				&& (int) mouseYInSquares < level.squares[0].length) {
-			Game.squareMouseIsOver = level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+				&& (int) mouseYInSquares < Game.level.squares[0].length) {
+			Game.squareMouseIsOver = Game.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
 		}
 
 		// Clear path highlights
-		for (int i = 0; i < level.width; i++) {
-			for (int j = 0; j < level.height; j++) {
-				level.squares[i][j].inPath = false;
+		for (int i = 0; i < Game.level.width; i++) {
+			for (int j = 0; j < Game.level.height; j++) {
+				Game.level.squares[i][j].inPath = false;
 			}
 		}
 
 		// Getting button that we have clicked, if any
 		Game.buttonHoveringOver = null;
 		if (dragging == false) {
-			Game.buttonHoveringOver = level.getButtonFromMousePosition(
+			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(
 					Mouse.getX(), Mouse.getY(), mouseXTransformed,
 					mouseYTransformed);
 		}
 
 		// Path highlights
-		if (scriptInterceptsClick == false && Game.buttonHoveringOver == null
-				&& level.activeActor != null && Game.squareMouseIsOver != null
+		if (scriptInterceptsClick == false
+				&& Game.buttonHoveringOver == null
+				&& Game.level.activeActor != null
+				&& Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver.reachableBySelectedCharater
-				&& level.activeActor.faction == level.factions.get(0)
-				&& level.currentFactionMoving == level.factions.get(0)) {
-			path = level.activeActor.paths.get(Game.squareMouseIsOver);
+				&& Game.level.activeActor.faction == Game.level.factions.get(0)
+				&& Game.level.currentFactionMoving == Game.level.factions
+						.get(0)) {
+			path = Game.level.activeActor.paths.get(Game.squareMouseIsOver);
 			for (Square square : path.squares) {
 				square.inPath = true;
 			}
@@ -119,21 +121,21 @@ public class UserInputLevel {
 		// If we've clicked... where are we putting it?
 		if (scriptInterceptsClick && mouseButtonStateLeft == true
 				&& !Mouse.isButtonDown(0) && dragging == false) {
-			level.script.click();
-		} else if (level.waitingForPlayerClick == true
+			Game.level.script.click();
+		} else if (Game.level.waitingForPlayerClick == true
 				&& mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false) {
-			level.waitingForPlayerClick = false;
-			level.showTurnNotification = false;
+			Game.level.waitingForPlayerClick = false;
+			Game.level.showTurnNotification = false;
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && Game.buttonHoveringOver != null
-				&& level.currentFactionMovingIndex == 0) {
+				&& Game.level.currentFactionMovingIndex == 0) {
 			// click button if we're on one
 			Game.buttonHoveringOver.click();
 
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
 				&& dragging == false && Game.squareMouseIsOver != null
-				&& level.currentFactionMovingIndex == 0) {
+				&& Game.level.currentFactionMovingIndex == 0) {
 			// click square if we're on one
 
 			GameObject clickedGameObject = Game.squareMouseIsOver.gameObject;
@@ -141,35 +143,37 @@ public class UserInputLevel {
 				boolean selectedNewActor = false;
 				if (clickedGameObject instanceof Actor) {
 					Actor clickedActor = (Actor) clickedGameObject;
-					if (clickedActor.faction == level.currentFactionMoving) {
-						if (level.activeActor != null) {
-							level.activeActor.unselected();
+					if (clickedActor.faction == Game.level.currentFactionMoving) {
+						if (Game.level.activeActor != null) {
+							Game.level.activeActor.unselected();
 						}
-						level.activeActor = clickedActor;
-						Actor.highlightSelectedCharactersSquares(level);
+						Game.level.activeActor = clickedActor;
+						Actor.highlightSelectedCharactersSquares(Game.level);
 						selectedNewActor = true;
 					}
 				}
 
-				if (level.activeActor != null
+				if (Game.level.activeActor != null
 						&& selectedNewActor == false
-						&& level.activeActor.equippedWeapon != null
-						&& level.activeActor.equippedWeapon
-								.hasRange(level.activeActor
+						&& Game.level.activeActor.equippedWeapon != null
+						&& Game.level.activeActor.equippedWeapon
+								.hasRange(Game.level.activeActor
 										.weaponDistanceTo(Game.squareMouseIsOver))) {
-					level.activeActor.attack(clickedGameObject, false);
-					Actor.highlightSelectedCharactersSquares(level);
+					Game.level.activeActor.attack(clickedGameObject, false);
+					Actor.highlightSelectedCharactersSquares(Game.level);
 				}
 			}
 
 			// Check if we clicked on an empty reachable square and act
 			// accordingly
-			if (level.activeActor != null
+			if (Game.level.activeActor != null
 					&& Game.squareMouseIsOver.reachableBySelectedCharater
-					&& level.activeActor.faction == level.factions.get(0)
-					&& level.currentFactionMoving == level.factions.get(0)
-					&& level.activeActor.squareGameObjectIsOn != Game.squareMouseIsOver) {
-				level.activeActor.moveTo(Game.squareMouseIsOver);
+					&& Game.level.activeActor.faction == Game.level.factions
+							.get(0)
+					&& Game.level.currentFactionMoving == Game.level.factions
+							.get(0)
+					&& Game.level.activeActor.squareGameObjectIsOn != Game.squareMouseIsOver) {
+				Game.level.activeActor.moveTo(Game.squareMouseIsOver);
 			}
 		}
 
@@ -182,27 +186,27 @@ public class UserInputLevel {
 			if (Config.SHOW_BATTLE_PREVIEW_ON_HOVER
 					&& Game.squareMouseIsOver != null
 					&& Game.squareMouseIsOver.gameObject != null
-					&& level.activeActor != null
-					&& Game.squareMouseIsOver.gameObject != level.activeActor
-					&& level.currentFactionMoving == level.factions.get(0)
-					&& Game.buttonHoveringOver == null) {
+					&& Game.level.activeActor != null
+					&& Game.squareMouseIsOver.gameObject != Game.level.activeActor
+					&& Game.level.currentFactionMoving == Game.level.factions
+							.get(0) && Game.buttonHoveringOver == null) {
 				// show hover preview
-				level.activeActor
+				Game.level.activeActor
 						.showHoverFightPreview(Game.squareMouseIsOver.gameObject);
-			} else if (level.activeActor != null) {
+			} else if (Game.level.activeActor != null) {
 				// hide Hover Preview
-				level.activeActor.hideHoverFightPreview();
+				Game.level.activeActor.hideHoverFightPreview();
 			}
 
 		}
 
 		if (mouseButtonStateRight == false && Mouse.isButtonDown(1)
-				&& level.currentFactionMovingIndex == 0) {
-			level.clearDialogs();
+				&& Game.level.currentFactionMovingIndex == 0) {
+			Game.level.clearDialogs();
 			// right click
-			if (level.activeActor != null) {
-				level.activeActor.unselected();
-				level.activeActor = null;
+			if (Game.level.activeActor != null) {
+				Game.level.activeActor.unselected();
+				Game.level.activeActor = null;
 			} else if (Game.squareMouseIsOver != null) {
 				if (Game.squareMouseIsOver.showingDialogs == false)
 					Game.squareMouseIsOver.showDialogs();

@@ -176,7 +176,7 @@ public class Level {
 		}
 
 		for (GameObject inanimateObject : inanimateObjects) {
-			inanimateObject.postLoad(this, null);
+			inanimateObject.postLoad(null);
 		}
 
 		for (Faction faction : factions) {
@@ -319,17 +319,20 @@ public class Level {
 		// Adding actors to factions
 
 		// Game Objects
+		inanimateObjects
+				.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
+						"skip_with_shadow.png", squares[0][3],
+						new ArrayList<Weapon>()));
 		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", squares[0][3], new ArrayList<Weapon>(),
-				this));
-		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"sign.png", squares[1][3], new ArrayList<Weapon>(), this));
-		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", squares[2][3], new ArrayList<Weapon>(),
-				this));
-		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", squares[3][3], new ArrayList<Weapon>(),
-				this));
+				"sign.png", squares[1][3], new ArrayList<Weapon>()));
+		inanimateObjects
+				.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
+						"skip_with_shadow.png", squares[2][3],
+						new ArrayList<Weapon>()));
+		inanimateObjects
+				.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
+						"skip_with_shadow.png", squares[3][3],
+						new ArrayList<Weapon>()));
 
 		decorations.add(new Decoration("dec0", 300f, 240f, 28f, 28f, false,
 				"sign.png"));

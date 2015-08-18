@@ -1,5 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
+import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.Decoration;
@@ -39,13 +40,10 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				Decoration newDecoration = new Decoration(
-						"Decoration "
-								+ DecorationsSettingsWindow.this.editor.level.decorations
-										.size(),
-						0, 0, 100, 100, true, "sign.png");
-				DecorationsSettingsWindow.this.editor.level.decorations
-						.add(newDecoration);
+				Decoration newDecoration = new Decoration("Decoration "
+						+ Game.level.decorations.size(), 0, 0, 100, 100, true,
+						"sign.png");
+				Game.level.decorations.add(newDecoration);
 				updateDecorationsButtons();
 				DecorationsSettingsWindow.this.editor.clearSelectedObject();
 				DecorationsSettingsWindow.this.editor
@@ -61,12 +59,12 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 
 		buttons.add(addDecorationButton);
 
-		for (int i = 0; i < editor.level.decorations.size(); i++) {
+		for (int i = 0; i < Game.level.decorations.size(); i++) {
 			final int index = i;
 
 			final SettingsWindowButton decorationButton = new SettingsWindowButton(
 					0, 200 + i * 30, 200, 30,
-					editor.level.decorations.get(index), true, true, this) {
+					Game.level.decorations.get(index), true, true, this) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -94,7 +92,7 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					decorationButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, editor.level.decorations.get(index), editor);
+							350, Game.level.decorations.get(index), editor);
 				}
 			};
 			buttons.add(decorationButton);

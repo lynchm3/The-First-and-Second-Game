@@ -75,12 +75,6 @@ public class Editor {
 	public DecorationsSettingsWindow decorationsSettingsWindow;
 	public ColorSettingsWindow colorsSettingsWindow;
 
-	// Button addFactionButton;
-	// Button addObjectButton;
-	// Button addActorButton;
-	// Button playLevelButton;
-	public Level level;
-
 	public GameObject selectedGameObject;
 
 	public Object objectToEdit = null;
@@ -134,7 +128,7 @@ public class Editor {
 		Weapon weapon2 = new Weapon("a5r3", 5, 3, 3, "a2r2.png");
 		weapons.add(weapon2);
 
-		level = new Level(10, 10);
+		Game.level = new Level(10, 10);
 
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
@@ -277,26 +271,35 @@ public class Editor {
 
 		// Add a game object
 		GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", level.squares[0][3],
-				new ArrayList<Weapon>(), level);
-		level.inanimateObjects.add(gameObject);
-		level.squares[0][3].gameObject = gameObject;
+				"skip_with_shadow.png", Game.level.squares[0][3],
+				new ArrayList<Weapon>());
+		Game.level.inanimateObjects.add(gameObject);
+		Game.level.squares[0][3].gameObject = gameObject;
 
 		// Add factions
-		level.factions.add(new Faction("Faction " + level.factions.size(),
-				level, colors.get(0), "faction_blue.png"));
-		level.factions.add(new Faction("Faction " + level.factions.size(),
-				level, colors.get(1), "faction_red.png"));
-		level.factions.add(new Faction("Faction " + level.factions.size(),
-				level, colors.get(2), "faction_green.png"));
+		Game.level.factions.add(new Faction("Faction "
+				+ Game.level.factions.size(), Game.level, colors.get(0),
+				"faction_blue.png"));
+		Game.level.factions.add(new Faction("Faction "
+				+ Game.level.factions.size(), Game.level, colors.get(1),
+				"faction_red.png"));
+		Game.level.factions.add(new Faction("Faction "
+				+ Game.level.factions.size(), Game.level, colors.get(2),
+				"faction_green.png"));
 
 		// relationships
-		level.factions.get(0).relationships.put(level.factions.get(1), -100);
-		level.factions.get(0).relationships.put(level.factions.get(2), -100);
-		level.factions.get(1).relationships.put(level.factions.get(0), -100);
-		level.factions.get(1).relationships.put(level.factions.get(2), -100);
-		level.factions.get(2).relationships.put(level.factions.get(0), -100);
-		level.factions.get(2).relationships.put(level.factions.get(1), -100);
+		Game.level.factions.get(0).relationships.put(
+				Game.level.factions.get(1), -100);
+		Game.level.factions.get(0).relationships.put(
+				Game.level.factions.get(2), -100);
+		Game.level.factions.get(1).relationships.put(
+				Game.level.factions.get(0), -100);
+		Game.level.factions.get(1).relationships.put(
+				Game.level.factions.get(2), -100);
+		Game.level.factions.get(2).relationships.put(
+				Game.level.factions.get(0), -100);
+		Game.level.factions.get(2).relationships.put(
+				Game.level.factions.get(1), -100);
 
 		// Weapons
 		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
@@ -310,30 +313,34 @@ public class Editor {
 
 		// Add actor
 		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", level.squares[0][4], weaponsForActor0, 4, level);
-		actor0.faction = level.factions.get(0);
-		level.factions.get(0).actors.add(actor0);
+				"red1.png", Game.level.squares[0][4], weaponsForActor0, 4,
+				Game.level);
+		actor0.faction = Game.level.factions.get(0);
+		Game.level.factions.get(0).actors.add(actor0);
 		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", level.squares[0][5], weaponsForActor0, 4, level);
-		actor1.faction = level.factions.get(0);
-		level.factions.get(0).actors.add(actor1);
+				"red1.png", Game.level.squares[0][5], weaponsForActor0, 4,
+				Game.level);
+		actor1.faction = Game.level.factions.get(0);
+		Game.level.factions.get(0).actors.add(actor1);
 
 		Actor actor2 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", level.squares[5][5], weaponsForActor1, 4, level);
-		actor2.faction = level.factions.get(1);
-		level.factions.get(1).actors.add(actor2);
+				"red1.png", Game.level.squares[5][5], weaponsForActor1, 4,
+				Game.level);
+		actor2.faction = Game.level.factions.get(1);
+		Game.level.factions.get(1).actors.add(actor2);
 
 		Actor actor3 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", level.squares[5][9], weaponsForActor1, 4, level);
-		actor3.faction = level.factions.get(2);
-		level.factions.get(2).actors.add(actor3);
+				"red1.png", Game.level.squares[5][9], weaponsForActor1, 4,
+				Game.level);
+		actor3.faction = Game.level.factions.get(2);
+		Game.level.factions.get(2).actors.add(actor3);
 
 		// Script
 
 		// Speech 1
 		Vector<Actor> speechActors1 = new Vector<Actor>();
-		speechActors1.add(level.factions.get(0).actors.get(0));
-		speechActors1.add(level.factions.get(0).actors.get(1));
+		speechActors1.add(Game.level.factions.get(0).actors.get(0));
+		speechActors1.add(Game.level.factions.get(0).actors.get(1));
 		Vector<Float> speechPositions1 = new Vector<Float>();
 		speechPositions1.add(0f);
 		speechPositions1.add(0f);
@@ -343,28 +350,29 @@ public class Editor {
 
 		SpeechPart speechPart1_1 = new SpeechPart(speechActors1,
 				speechPositions1, speechDirections1,
-				level.factions.get(0).actors.get(0),
+				Game.level.factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
-						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) }, level);
+						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) },
+				Game.level);
 		SpeechPart speechPart1_2 = new SpeechPart(
 				speechActors1,
 				speechPositions1,
 				speechDirections1,
-				level.factions.get(0).actors.get(0),
+				Game.level.factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
 						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
-						Color.BLACK) }, level);
+						Color.BLACK) }, Game.level);
 		Vector<SpeechPart> speechParts1 = new Vector<SpeechPart>();
 		speechParts1.add(speechPart1_1);
 		speechParts1.add(speechPart1_2);
-		ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(level,
-				level.factions.get(0).actors.get(0));
+		ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(
+				Game.level, Game.level.factions.get(0).actors.get(0));
 		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
 				speechParts1, scriptTrigger1);
 		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
 		scriptEvents.add(scriptEventSpeech1);
 
-		level.script.scriptEvents = scriptEvents;
+		Game.level.script.scriptEvents = scriptEvents;
 		// script.activateScriptEvent();
 
 	}
@@ -396,11 +404,11 @@ public class Editor {
 					+ Game.SQUARE_HEIGHT / 2;
 
 			// CircleUtils.drawCircle(Color.white, 10d, x1, y1);
-			TextureUtils.drawTexture(level.gameCursor.circle, x1 - 10, x1 + 10,
-					y1 - 10, y1 + 10);
+			TextureUtils.drawTexture(Game.level.gameCursor.circle, x1 - 10,
+					x1 + 10, y1 - 10, y1 + 10);
 			LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 10f);
-			TextureUtils.drawTexture(level.gameCursor.circle, x2 - 10, x2 + 10,
-					y2 - 10, y2 + 10);
+			TextureUtils.drawTexture(Game.level.gameCursor.circle, x2 - 10,
+					x2 + 10, y2 - 10, y2 + 10);
 
 		}
 	}
@@ -441,7 +449,7 @@ public class Editor {
 		}
 
 		if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
-			TextureUtils.drawTexture(level.gameCursor.imageTexture2,
+			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
 					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
 							- Mouse.getY() + 20,
 					Game.windowHeight - Mouse.getY() + 40);
@@ -523,18 +531,17 @@ public class Editor {
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
-					"skip_with_shadow.png", square, new ArrayList<Weapon>(),
-					level);
-			level.inanimateObjects.add(gameObject);
+					"skip_with_shadow.png", square, new ArrayList<Weapon>());
+			Game.level.inanimateObjects.add(gameObject);
 			square.gameObject = gameObject;
 			this.objectsSettingsWindow.update();
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.ADD_ACTOR) {
 			// Add actor
 			Actor actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-					"red1.png", square, new ArrayList<Weapon>(), 4, level);
-			actor.faction = level.factions.get(0);
-			level.factions.get(0).actors.add(actor);
+					"red1.png", square, new ArrayList<Weapon>(), 4, Game.level);
+			actor.faction = Game.level.factions.get(0);
+			Game.level.factions.get(0).actors.add(actor);
 			square.gameObject = actor;
 			this.actorsSettingsWindow.update();
 			// state = STATE.DEFAULT;
@@ -663,8 +670,8 @@ public class Editor {
 
 			if (field.getType().isAssignableFrom(Faction.class)) {
 				// faction
-				selectionWindow = new SelectionWindow(level.factions, null,
-						false, this);
+				selectionWindow = new SelectionWindow(Game.level.factions,
+						null, false, this);
 			} else if (field.getType().isAssignableFrom(Color.class)) {
 				// color
 				selectionWindow = new SelectionWindow(colors, null, false, this);

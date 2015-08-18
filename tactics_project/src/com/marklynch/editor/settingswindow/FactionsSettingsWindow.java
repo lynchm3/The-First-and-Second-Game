@@ -2,6 +2,7 @@ package com.marklynch.editor.settingswindow;
 
 import mdesl.graphics.Color;
 
+import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.Faction;
@@ -43,19 +44,18 @@ public class FactionsSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				if (editor.level.factions.size() == 10)
+				if (Game.level.factions.size() == 10)
 					return;
 
 				Faction newFaction = new Faction("Faction "
-						+ editor.level.factions.size(),
-						FactionsSettingsWindow.this.editor.level, Color.RED,
+						+ Game.level.factions.size(), Game.level, Color.RED,
 						"faction_blue.png");
-				editor.level.factions.add(newFaction);
+				Game.level.factions.add(newFaction);
 				updateFactionsButtons();
 				editor.clearSelectedObject();
 				editor.depressButtonsSettingsAndDetailsButtons();
 
-				for (Faction faction : editor.level.factions) {
+				for (Faction faction : Game.level.factions) {
 					if (faction != newFaction) {
 						faction.relationships.put(newFaction, -100);
 						newFaction.relationships.put(faction, -100);
@@ -66,12 +66,12 @@ public class FactionsSettingsWindow extends SettingsWindow {
 		};
 		buttons.add(addFactionButton);
 
-		for (int i = 0; i < editor.level.factions.size(); i++) {
+		for (int i = 0; i < Game.level.factions.size(); i++) {
 			final int index = i;
 
 			final SettingsWindowButton factionButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30, editor.level.factions.get(i),
-					true, true, this) {
+					0, 200 + i * 30, 200, 30, Game.level.factions.get(i), true,
+					true, this) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -99,7 +99,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					factionButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, editor.level.factions.get(index), editor);
+							350, Game.level.factions.get(index), editor);
 
 				}
 			};

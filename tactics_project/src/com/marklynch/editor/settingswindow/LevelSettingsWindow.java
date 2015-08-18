@@ -31,7 +31,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 		// Width Button
 		final SettingsWindowButton widthButton = new SettingsWindowButton(0,
-				100, 200, 30, "Level Width: " + editor.level.width, true, true,
+				100, 200, 30, "Level Width: " + Game.level.width, true, true,
 				this) {
 
 			@Override
@@ -49,8 +49,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 				int newWidth = 0;
 				if (this.textEntered.length() > 0)
 					newWidth = Integer.valueOf(this.textEntered).intValue();
-				LevelSettingsWindow.this.editor.level.changeSize(newWidth,
-						LevelSettingsWindow.this.editor.level.height);
+				Game.level.changeSize(newWidth, Game.level.height);
 				LevelSettingsWindow.this.editor.state = Editor.STATE.DEFAULT;
 				this.down = false;
 			}
@@ -66,8 +65,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void depress() {
-				text = "Level Width: "
-						+ LevelSettingsWindow.this.editor.level.width;
+				text = "Level Width: " + Game.level.width;
 
 			}
 		};
@@ -86,8 +84,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 		// Height Button
 		final SettingsWindowButton heightButton = new SettingsWindowButton(0,
-				130, 200, 30, "Level Height: " + editor.level.height, true,
-				true, this) {
+				130, 200, 30, "Level Height: " + Game.level.height, true, true,
+				this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -104,8 +102,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 				int newHeight = 0;
 				if (this.textEntered.length() > 0)
 					newHeight = Integer.valueOf(this.textEntered).intValue();
-				LevelSettingsWindow.this.editor.level.changeSize(
-						LevelSettingsWindow.this.editor.level.width, newHeight);
+				Game.level.changeSize(Game.level.width, newHeight);
 				this.down = false;
 			}
 
@@ -120,8 +117,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void depress() {
-				text = "Level Height: "
-						+ LevelSettingsWindow.this.editor.level.height;
+				text = "Level Height: " + Game.level.height;
 			}
 		};
 		heightButton.clickListener = new ClickListener() {
@@ -161,10 +157,10 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				editor.level.currentFactionMoving = editor.level.factions
-						.get(editor.level.currentFactionMovingIndex);
-				editor.level.turn = 1;
-				Game.level = editor.level;
+				Game.level.currentFactionMoving = Game.level.factions
+						.get(Game.level.currentFactionMovingIndex);
+				Game.level.turn = 1;
+				Game.level = Game.level;
 				Game.editorMode = false;
 				// Game.runBlurAnimation();
 			}
@@ -215,7 +211,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 								new SubClassFriendlyAdapter<ScriptTrigger>())
 						.create();
 
-				String json = gson.toJson(editor.level);
+				String json = gson.toJson(Game.level);
 				// System.out.println(editor.json);
 				FileUtils.saveFile(json);
 
@@ -296,10 +292,9 @@ public class LevelSettingsWindow extends SettingsWindow {
 				// System.out.println(editor.json);
 				// FileUtils.saveFile(json);
 				if (json != null) {
-					Level level = gson.fromJson(json, Level.class);
-					editor.level = level;
-					editor.level.postLoad();
-					editor.level.loadImages();
+					Game.level = gson.fromJson(json, Level.class);
+					Game.level.postLoad();
+					Game.level.loadImages();
 				}
 			}
 		};
@@ -358,9 +353,9 @@ public class LevelSettingsWindow extends SettingsWindow {
 			C object = context.deserialize(jsonObject.get(INSTANCE), klass);
 			if (object instanceof ScriptTriggerActorSelected) {
 				ScriptTriggerActorSelected scriptTriggerActorSelected = (ScriptTriggerActorSelected) object;
-				scriptTriggerActorSelected.actor = Game.editor.level
+				scriptTriggerActorSelected.actor = Game.level
 						.findActorFromGUID(scriptTriggerActorSelected.actorGUID);
-				scriptTriggerActorSelected.level = Game.editor.level;
+				scriptTriggerActorSelected.level = Game.level;
 
 			}
 			return object;

@@ -217,7 +217,7 @@ public class Game {
 			UserInputEditor.userInput(delta, editor);
 			editor.update(delta);
 		} else {
-			UserInputLevel.userInput(delta, level);
+			UserInputLevel.userInput(delta);
 			level.update(delta);
 		}
 		updateFPS(); // update FPS Counter

@@ -90,7 +90,7 @@ public class AttributesWindow {
 			title = "Object @ " + gameObject.squareGameObjectIsOn.x + ","
 					+ gameObject.squareGameObjectIsOn.y;
 		} else if (object instanceof Faction) {
-			title = "Faction " + editor.level.factions.indexOf(object);
+			title = "Faction " + Game.level.factions.indexOf(object);
 		} else if (object instanceof Square) {
 			Square square = (Square) object;
 			title = "Square @ " + square.x + "," + square.y;
@@ -138,7 +138,7 @@ public class AttributesWindow {
 				public void click() {
 
 					int actorCount = 0;
-					for (Faction faction : editor.level.factions) {
+					for (Faction faction : Game.level.factions) {
 						actorCount += faction.actors.size();
 					}
 					if (actorCount > 1) {
@@ -161,7 +161,7 @@ public class AttributesWindow {
 				@Override
 				public void click() {
 					depressButtons();
-					editor.level.inanimateObjects.remove(gameObject);
+					Game.level.inanimateObjects.remove(gameObject);
 					gameObject.squareGameObjectIsOn.gameObject = null;
 					editor.clearSelectedObject();
 					editor.settingsWindow.update();
@@ -177,17 +177,17 @@ public class AttributesWindow {
 				@Override
 				public void click() {
 
-					if (editor.level.factions.size() == 1)
+					if (Game.level.factions.size() == 1)
 						return;
 
 					depressButtons();
 					for (Actor actor : faction.actors) {
 						actor.squareGameObjectIsOn.gameObject = null;
 					}
-					editor.level.factions.remove(faction);
+					Game.level.factions.remove(faction);
 					editor.clearSelectedObject();
 					editor.factionsSettingsWindow.updateFactionsButtons();
-					for (Faction faction : editor.level.factions) {
+					for (Faction faction : Game.level.factions) {
 						faction.relationships.remove(faction);
 					}
 					editor.settingsWindow.update();
@@ -204,7 +204,7 @@ public class AttributesWindow {
 				public void click() {
 
 					depressButtons();
-					for (Faction faction : editor.level.factions) {
+					for (Faction faction : Game.level.factions) {
 						for (Actor actor : faction.actors) {
 							if (actor.weapons.weapons.contains(weapon))
 								actor.weapons.weapons.remove(weapon);
@@ -225,7 +225,7 @@ public class AttributesWindow {
 				@Override
 				public void click() {
 					depressButtons();
-					editor.level.decorations.remove(object);
+					Game.level.decorations.remove(object);
 					editor.clearSelectedObject();
 					editor.decorationsSettingsWindow.updateDecorationsButtons();
 					editor.settingsWindow.update();

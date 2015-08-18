@@ -98,14 +98,13 @@ public class SpeechPart {
 			object.actors = new Vector<Actor>();
 
 			for (int i = 0; i < object.actorGUIDs.size(); i++) {
-				object.actors.add(Game.editor.level
+				object.actors.add(Game.level
 						.findActorFromGUID(object.actorGUIDs.get(i)));
 			}
 
-			object.talker = Game.editor.level
-					.findActorFromGUID(object.talkerGUID);
+			object.talker = Game.level.findActorFromGUID(object.talkerGUID);
 
-			object.level = Game.editor.level;
+			object.level = Game.level;
 			return object;
 		}
 	}

@@ -12,7 +12,6 @@ import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Faction;
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 import com.marklynch.tactics.objects.unit.Path;
@@ -23,8 +22,6 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class GameObject {
-
-	public transient Level level;
 
 	public String name = "";
 
@@ -73,7 +70,7 @@ public class GameObject {
 
 	public GameObject(String name, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath,
-			Square squareGameObjectIsOn, ArrayList<Weapon> weapons, Level level) {
+			Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
 		super();
 		this.name = name;
 		this.totalHealth = health;
@@ -87,7 +84,6 @@ public class GameObject {
 		this.squareGameObjectIsOn.gameObject = this;
 		this.weapons = new Weapons();
 		this.weapons.weapons = weapons;
-		this.level = level;
 		loadImages();
 	}
 
@@ -109,10 +105,9 @@ public class GameObject {
 
 	}
 
-	public void postLoad(Level level, Faction faction) {
-		this.level = level;
+	public void postLoad(Faction faction) {
 		this.faction = faction;
-		this.squareGameObjectIsOn = level.squares[this.squareGameObjectIsOn.x][this.squareGameObjectIsOn.y];
+		this.squareGameObjectIsOn = Game.level.squares[this.squareGameObjectIsOn.x][this.squareGameObjectIsOn.y];
 		this.squareGameObjectIsOn.gameObject = this;
 		this.paths = new HashMap<Square, Path>();
 	}
@@ -126,14 +121,14 @@ public class GameObject {
 				* (int) Game.SQUARE_HEIGHT;
 
 		float alpha = 1.0f;
-		if (level.activeActor != null
-				&& level.activeActor.showHoverFightPreview == true
-				&& level.activeActor.hoverFightPreviewDefender != this) {
+		if (Game.level.activeActor != null
+				&& Game.level.activeActor.showHoverFightPreview == true
+				&& Game.level.activeActor.hoverFightPreviewDefender != this) {
 			alpha = 0.5f;
 		}
 
 		if (hasAttackedThisTurn == true && this.faction != null
-				&& level.currentFactionMoving == this.faction) {
+				&& Game.level.currentFactionMoving == this.faction) {
 			alpha = 0.5f;
 		}
 
@@ -165,7 +160,7 @@ public class GameObject {
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
 			this.squareGameObjectIsOn.gameObject = null;
-			level.inanimateObjects.remove(this);
+			Game.level.inanimateObjects.remove(this);
 
 			return true;
 		}
@@ -267,10 +262,11 @@ public class GameObject {
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
 		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-			if (ArrayUtils.inBounds(level.squares, this.squareGameObjectIsOn.x
-					+ x, this.squareGameObjectIsOn.y + y)) {
-				squares.add(level.squares[this.squareGameObjectIsOn.x + (int) x][this.squareGameObjectIsOn.y
-						+ (int) y]);
+			if (ArrayUtils.inBounds(Game.level.squares,
+					this.squareGameObjectIsOn.x + x,
+					this.squareGameObjectIsOn.y + y)) {
+				squares.add(Game.level.squares[this.squareGameObjectIsOn.x
+						+ (int) x][this.squareGameObjectIsOn.y + (int) y]);
 			}
 
 			if (xGoingUp) {

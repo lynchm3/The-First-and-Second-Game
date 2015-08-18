@@ -89,8 +89,7 @@ public class Faction {
 		currentStage = STAGE.SELECT;
 		relationships = new HashMap<Faction, Integer>();
 		for (String factionGUID : relationshipGUIDs.keySet()) {
-			relationships.put(
-					Game.editor.level.findFactionFromGUID(factionGUID),
+			relationships.put(Game.level.findFactionFromGUID(factionGUID),
 					relationshipGUIDs.get(factionGUID));
 		}
 	}

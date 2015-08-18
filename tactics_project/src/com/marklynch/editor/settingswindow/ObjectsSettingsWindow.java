@@ -1,5 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
+import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.Editor.STATE;
@@ -60,12 +61,12 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 
 		buttons.add(addObjectsButton);
 
-		for (int i = 0; i < editor.level.inanimateObjects.size(); i++) {
+		for (int i = 0; i < Game.level.inanimateObjects.size(); i++) {
 			final int index = i;
 
 			final SettingsWindowButton objectButton = new SettingsWindowButton(
 					0, 200 + i * 30, 200, 30,
-					editor.level.inanimateObjects.get(index), true, true, this) {
+					Game.level.inanimateObjects.get(index), true, true, this) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -93,7 +94,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					editor.state = STATE.MOVEABLE_OBJECT_SELECTED;
-					editor.selectedGameObject = editor.level.inanimateObjects
+					editor.selectedGameObject = Game.level.inanimateObjects
 							.get(index);
 					editor.attributesWindow = new AttributesWindow(200, 200,
 							350, editor.selectedGameObject, editor);
