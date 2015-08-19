@@ -4,6 +4,8 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 
 public class ScriptEvent {
 
+	public String name;
+
 	public boolean blockUserInput;
 
 	public ScriptTrigger scriptTrigger;
@@ -29,5 +31,10 @@ public class ScriptEvent {
 
 	public void postLoad() {
 		scriptTrigger.postLoad();
+	}
+
+	@Override
+	public String toString() {
+		return "" + this.getClass() + " - " + name;
 	}
 }

@@ -99,6 +99,7 @@ public class Actor extends GameObject {
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
+		ai = new AI(this);
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {

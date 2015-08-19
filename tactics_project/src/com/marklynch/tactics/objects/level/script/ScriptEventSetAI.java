@@ -21,6 +21,7 @@ public class ScriptEventSetAI extends ScriptEvent {
 		this.actor = actor;
 		this.actorGUID = actor.guid;
 		this.ai = ai;
+		this.name = "ScriptEventSetAI";
 	}
 
 	@Override

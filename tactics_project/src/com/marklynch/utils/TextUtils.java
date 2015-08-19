@@ -7,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
+import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
@@ -93,11 +94,11 @@ public class TextUtils {
 				if (gameObject instanceof Actor) {
 					Actor actor = (Actor) gameObject;
 					Game.activeBatch.setColor(actor.faction.color);
-					Game.font.drawText(Game.activeBatch, gameObject.name,
-							posX + offsetX, posY + offsetY);
+					Game.font.drawText(Game.activeBatch, gameObject.name, posX
+							+ offsetX, posY + offsetY);
 				} else {
-					Game.font.drawText(Game.activeBatch, gameObject.name,
-							posX + offsetX, posY + offsetY);
+					Game.font.drawText(Game.activeBatch, gameObject.name, posX
+							+ offsetX, posY + offsetY);
 				}
 				offsetX += textWidth;
 
@@ -183,8 +184,8 @@ public class TextUtils {
 
 				// Name
 
-				Game.font.drawText(Game.activeBatch, decoration.name,
-						posX + offsetX, posY + offsetY);
+				Game.font.drawText(Game.activeBatch, decoration.name, posX
+						+ offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
@@ -204,6 +205,15 @@ public class TextUtils {
 				QuadUtils.drawQuad(color, x, x + 20, posY + offsetY, posY
 						+ offsetY + 20);
 				offsetX += 20;
+
+			} else if (content instanceof ScriptEvent) {
+
+				ScriptEvent scriptEvent = (ScriptEvent) content;
+
+				float textWidth = Game.font.getWidth(scriptEvent.name);
+				Game.font.drawText(Game.activeBatch, scriptEvent.name, posX
+						+ offsetX, posY + offsetY);
+				offsetX += textWidth;
 
 			}
 		}

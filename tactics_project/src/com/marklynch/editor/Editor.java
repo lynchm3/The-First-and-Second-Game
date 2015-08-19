@@ -17,6 +17,7 @@ import com.marklynch.editor.settingswindow.DecorationsSettingsWindow;
 import com.marklynch.editor.settingswindow.FactionsSettingsWindow;
 import com.marklynch.editor.settingswindow.LevelSettingsWindow;
 import com.marklynch.editor.settingswindow.ObjectsSettingsWindow;
+import com.marklynch.editor.settingswindow.ScriptEventSettingsWindow;
 import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
@@ -28,7 +29,7 @@ import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
-import com.marklynch.tactics.objects.unit.ai.AItargetObject;
+import com.marklynch.tactics.objects.unit.ai.AITargetObject;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.AtributesWindowButton;
@@ -70,8 +71,9 @@ public class Editor {
 	public ActorsSettingsWindow actorsSettingsWindow;
 	public FactionsSettingsWindow factionsSettingsWindow;
 	public WeaponsSettingsWindow weaponsSettingsWindow;
-	public DecorationsSettingsWindow decorationsSettingsWindow;
 	public ColorSettingsWindow colorsSettingsWindow;
+	public DecorationsSettingsWindow decorationsSettingsWindow;
+	public ScriptEventSettingsWindow scriptsEventSettingsWindow;
 
 	public GameObject selectedGameObject;
 
@@ -134,8 +136,9 @@ public class Editor {
 		actorsSettingsWindow = new ActorsSettingsWindow(200, this);
 		factionsSettingsWindow = new FactionsSettingsWindow(200, this);
 		weaponsSettingsWindow = new WeaponsSettingsWindow(200, this);
-		decorationsSettingsWindow = new DecorationsSettingsWindow(200, this);
 		colorsSettingsWindow = new ColorSettingsWindow(200, this);
+		decorationsSettingsWindow = new DecorationsSettingsWindow(200, this);
+		scriptsEventSettingsWindow = new ScriptEventSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -263,6 +266,21 @@ public class Editor {
 		};
 		buttons.add(decorationsTabButton);
 
+		scriptEventsTabButton = new LevelButton(180, 50, 160, 30, "", "",
+				"SCRIPT EVENTS", true, true);
+		scriptEventsTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				scriptEventsTabButton.down = true;
+				settingsWindow = scriptsEventSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		buttons.add(scriptEventsTabButton);
+
 	}
 
 	public void generateTestObjects() {
@@ -349,7 +367,7 @@ public class Editor {
 
 		ScriptEventSetAI scriptEventSetAIAttackDumpster = new ScriptEventSetAI(
 				false, new ScriptTriggerTurnStart(1, 0), actor1,
-				new AItargetObject(gameObject, actor1));
+				new AITargetObject(gameObject, actor1));
 
 		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
 		// scriptEvents.add(scriptEventSpeech1);
