@@ -351,13 +351,13 @@ public class LevelSettingsWindow extends SettingsWindow {
 			}
 
 			C object = context.deserialize(jsonObject.get(INSTANCE), klass);
-			if (object instanceof ScriptTriggerActorSelected) {
-				ScriptTriggerActorSelected scriptTriggerActorSelected = (ScriptTriggerActorSelected) object;
-				scriptTriggerActorSelected.actor = Game.level
-						.findActorFromGUID(scriptTriggerActorSelected.actorGUID);
-				scriptTriggerActorSelected.level = Game.level;
-
-			}
+			// if (object instanceof ScriptTriggerActorSelected) {
+			// ScriptTriggerActorSelected scriptTriggerActorSelected =
+			// (ScriptTriggerActorSelected) object;
+			// scriptTriggerActorSelected.actor = Game.level
+			// .findActorFromGUID(scriptTriggerActorSelected.actorGUID);
+			//
+			// }
 			return object;
 		}
 	}

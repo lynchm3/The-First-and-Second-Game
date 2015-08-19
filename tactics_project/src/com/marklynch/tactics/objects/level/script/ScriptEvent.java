@@ -26,4 +26,8 @@ public class ScriptEvent {
 
 	public void draw() {
 	}
+
+	public void postLoad() {
+		scriptTrigger.postLoad();
+	}
 }

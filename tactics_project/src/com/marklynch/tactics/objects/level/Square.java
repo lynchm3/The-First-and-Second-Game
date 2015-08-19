@@ -36,17 +36,13 @@ public class Square {
 
 	public transient static PathComparator pathComparator;
 
-	public transient Level level;
-
-	public Square(int x, int y, String imagePath, int travelCost,
-			int elevation, Level level) {
+	public Square(int x, int y, String imagePath, int travelCost, int elevation) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.imagePath = imagePath;
 		this.travelCost = travelCost;
 		this.elevation = elevation;
-		this.level = level;
 		loadImages();
 		weaponsThatCanAttack = new Vector<Weapon>();
 		dialogs = new Vector<Dialog>();
@@ -57,13 +53,12 @@ public class Square {
 
 	}
 
-	public void postLoad(Level level) {
-		this.level = level;
+	public void postLoad() {
 		weaponsThatCanAttack = new Vector<Weapon>();
 		dialogs = new Vector<Dialog>();
 	}
 
-	public void draw(Level level) {
+	public void draw() {
 
 		// square texture
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
@@ -78,22 +73,23 @@ public class Square {
 
 			Texture highlightTexture = null;
 
-			if (level.activeActor != null
-					&& level.activeActor.equippedWeapon != null
+			if (Game.level.activeActor != null
+					&& Game.level.activeActor.equippedWeapon != null
 					&& this.gameObject != null
-					&& level.activeActor.equippedWeapon
-							.hasRange(level.activeActor.weaponDistanceTo(this))
-					&& !level.activeActor.hasAttackedThisTurn) {
-				highlightTexture = level.gameCursor.imageTexture4;
-			} else if (level.currentFactionMovingIndex == 0 && (inPath))// ||
-																		// this
-																		// ==
-																		// Game.squareMouseIsOver))
-				highlightTexture = level.gameCursor.imageTexture3;
+					&& Game.level.activeActor.equippedWeapon
+							.hasRange(Game.level.activeActor
+									.weaponDistanceTo(this))
+					&& !Game.level.activeActor.hasAttackedThisTurn) {
+				highlightTexture = Game.level.gameCursor.imageTexture4;
+			} else if (Game.level.currentFactionMovingIndex == 0 && (inPath))// ||
+				// this
+				// ==
+				// Game.squareMouseIsOver))
+				highlightTexture = Game.level.gameCursor.imageTexture3;
 			else if (reachableBySelectedCharater)
-				highlightTexture = level.gameCursor.imageTexture;
+				highlightTexture = Game.level.gameCursor.imageTexture;
 			else
-				highlightTexture = level.gameCursor.imageTexture2;
+				highlightTexture = Game.level.gameCursor.imageTexture2;
 			TextureUtils.drawTexture(highlightTexture, squarePositionX,
 					squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
 					squarePositionY + Game.SQUARE_HEIGHT);
@@ -105,7 +101,8 @@ public class Square {
 				+ (Game.SQUARE_WIDTH - costTextWidth) / 2f;
 		float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) / 2f;
 
-		if (distanceToSquare != Integer.MAX_VALUE && level.activeActor != null) {
+		if (distanceToSquare != Integer.MAX_VALUE
+				&& Game.level.activeActor != null) {
 			TextUtils.printTextWithImages(
 					new Object[] { "" + distanceToSquare }, costPositionX,
 					costPositionY);
@@ -142,7 +139,7 @@ public class Square {
 
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(level.gameCursor.imageTexture2,
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
 				squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
 				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
@@ -158,7 +155,7 @@ public class Square {
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
 
-		TextureUtils.drawTexture(level.gameCursor.cursor, squarePositionX,
+		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
 				squarePositionY + Game.SQUARE_HEIGHT);
 		// GL11.glPopMatrix();
@@ -174,7 +171,7 @@ public class Square {
 
 	public void showDialogs() {
 		dialogs.add(new Dialog(this, 200, 200, "dialogbg.png",
-				"KeepCalm-Medium.ttf", level));
+				"KeepCalm-Medium.ttf"));
 		showingDialogs = true;
 	}
 

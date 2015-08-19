@@ -9,7 +9,6 @@ import mdesl.graphics.Color;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
@@ -54,9 +53,9 @@ public class Actor extends GameObject {
 	public Actor(String name, String title, int actorLevel, int health,
 			int strength, int dexterity, int intelligence, int endurance,
 			String imagePath, Square squareActorIsStandingOn,
-			ArrayList<Weapon> weapons, int travelDistance, Level level) {
+			ArrayList<Weapon> weapons, int travelDistance) {
 		super(name, health, strength, dexterity, intelligence, endurance,
-				imagePath, squareActorIsStandingOn, weapons, level);
+				imagePath, squareActorIsStandingOn, weapons);
 		this.title = title;
 		this.actorLevel = actorLevel;
 		this.travelDistance = travelDistance;
@@ -64,10 +63,9 @@ public class Actor extends GameObject {
 		weaponButtons = new ArrayList<Button>();
 
 		this.attackButton = new AttackButton(0, 0, 50, 50, "attack.png",
-				"attack.png", level);
+				"attack.png");
 
-		this.pushButton = new AttackButton(0, 0, 50, 50, "push.png",
-				"push.png", level);
+		this.pushButton = new AttackButton(0, 0, 50, 50, "push.png", "push.png");
 
 		buttons.add(attackButton);
 		buttons.add(pushButton);
@@ -75,22 +73,21 @@ public class Actor extends GameObject {
 
 		for (Weapon weapon : this.weapons.weapons) {
 			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath,
-					weapon.imagePath, level, weapon));
+					weapon.imagePath, weapon));
 		}
 	}
 
 	@Override
-	public void postLoad(Level level, Faction faction) {
+	public void postLoad(Faction faction) {
 
-		super.postLoad(level, faction);
+		super.postLoad(faction);
 
 		buttons = new ArrayList<Button>();
 		weaponButtons = new ArrayList<Button>();
 		this.attackButton = new AttackButton(0, 0, 50, 50, "attack.png",
-				"attack.png", level);
+				"attack.png");
 
-		this.pushButton = new AttackButton(0, 0, 50, 50, "push.png",
-				"push.png", level);
+		this.pushButton = new AttackButton(0, 0, 50, 50, "push.png", "push.png");
 
 		buttons.add(attackButton);
 		buttons.add(pushButton);
@@ -98,7 +95,7 @@ public class Actor extends GameObject {
 
 		for (Weapon weapon : this.weapons.weapons) {
 			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath,
-					weapon.imagePath, level, weapon));
+					weapon.imagePath, weapon));
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
@@ -135,10 +132,10 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public static void highlightSelectedCharactersSquares(Level level) {
-		level.activeActor.calculatePathToAllSquares(level.squares);
-		level.activeActor.calculateReachableSquares(level.squares);
-		level.activeActor.calculateAttackableSquares(level.squares);
+	public static void highlightSelectedCharactersSquares() {
+		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+		Game.level.activeActor.calculateReachableSquares(Game.level.squares);
+		Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
 	}
 
 	public int weaponDistanceTo(Square square) {
@@ -171,7 +168,7 @@ public class Actor extends GameObject {
 			attackTypeString = "countered";
 		else
 			attackTypeString = "attacked ";
-		level.logOnScreen(new ActivityLog(new Object[] {
+		Game.level.logOnScreen(new ActivityLog(new Object[] {
 
 		this, " " + attackTypeString + " ", gameObject, " with ",
 				equippedWeapon.imageTexture,
@@ -183,11 +180,11 @@ public class Actor extends GameObject {
 
 		if (gameObject.checkIfDestroyed()) {
 			if (gameObject instanceof Actor) {
-				level.logOnScreen(new ActivityLog(new Object[] { this,
+				Game.level.logOnScreen(new ActivityLog(new Object[] { this,
 						" killed ", gameObject }));
 				((Actor) gameObject).faction.checkIfDestroyed();
 			} else {
-				level.logOnScreen(new ActivityLog(new Object[] { this,
+				Game.level.logOnScreen(new ActivityLog(new Object[] { this,
 						" destroyed a ", gameObject }));
 			}
 
@@ -199,9 +196,9 @@ public class Actor extends GameObject {
 
 		this.showPow(gameObject);
 
-		if (this.faction == level.factions.get(0)) {
-			level.undoList.clear();
-			level.undoButton.enabled = false;
+		if (this.faction == Game.level.factions.get(0)) {
+			Game.level.undoList.clear();
+			Game.level.undoButton.enabled = false;
 		}
 	}
 
@@ -276,30 +273,30 @@ public class Actor extends GameObject {
 		this.squareGameObjectIsOn.gameObject = null;
 		this.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
 		this.squareGameObjectIsOn = squareToMoveTo;
-		squareToMoveTo.gameObject = level.activeActor;
-		Actor.highlightSelectedCharactersSquares(level);
-		level.logOnScreen(new ActivityLog(new Object[] { this,
+		squareToMoveTo.gameObject = Game.level.activeActor;
+		Actor.highlightSelectedCharactersSquares();
+		Game.level.logOnScreen(new ActivityLog(new Object[] { this,
 				" moved to " + squareToMoveTo }));
 
-		if (this.faction == level.factions.get(0)) {
-			level.undoList.push(new Move(this, oldSquare, squareToMoveTo,
+		if (this.faction == Game.level.factions.get(0)) {
+			Game.level.undoList.push(new Move(this, oldSquare, squareToMoveTo,
 					distanceTraveled));
-			level.undoButton.enabled = true;
+			Game.level.undoButton.enabled = true;
 		}
 	}
 
 	@Override
 	public void drawForeground() {
 
-		if (level.activeActor != null
-				&& level.activeActor.showHoverFightPreview
-				&& level.activeActor.hoverFightPreviewDefender == this) {
+		if (Game.level.activeActor != null
+				&& Game.level.activeActor.showHoverFightPreview
+				&& Game.level.activeActor.hoverFightPreviewDefender == this) {
 
 		} else {
 			// HEALTH COLORZ HERE YO
 
-			if (level.activeActor != null
-					&& level.activeActor.showHoverFightPreview) {
+			if (Game.level.activeActor != null
+					&& Game.level.activeActor.showHoverFightPreview) {
 
 			} else {
 
@@ -312,7 +309,7 @@ public class Actor extends GameObject {
 				float weaponAreaPositionXInPixels = 0;
 				float weaponAreaPositionYInPixels = 0;
 
-				if (this.faction == level.factions.get(0)) {
+				if (this.faction == Game.level.factions.get(0)) {
 					weaponAreaPositionXInPixels = this.squareGameObjectIsOn.x
 							* (int) Game.SQUARE_WIDTH;
 					weaponAreaPositionYInPixels = this.squareGameObjectIsOn.y
@@ -346,8 +343,8 @@ public class Actor extends GameObject {
 
 			super.drawForeground();
 
-			if (level.activeActor != null
-					&& level.activeActor.showHoverFightPreview) {
+			if (Game.level.activeActor != null
+					&& Game.level.activeActor.showHoverFightPreview) {
 
 			} else {
 				// draw weapon icons on square
@@ -360,7 +357,7 @@ public class Actor extends GameObject {
 					float weaponPositionXInPixels = 0;
 					float weaponPositionYInPixels = 0;
 
-					if (this.faction == level.factions.get(0)) {
+					if (this.faction == Game.level.factions.get(0)) {
 						weaponPositionXInPixels = this.squareGameObjectIsOn.x
 								* (int) Game.SQUARE_WIDTH;
 						weaponPositionYInPixels = this.squareGameObjectIsOn.y
@@ -917,7 +914,8 @@ public class Actor extends GameObject {
 		}
 
 		// actor buttons
-		if (level.activeActor == this && this.faction == level.factions.get(0)) {
+		if (Game.level.activeActor == this
+				&& this.faction == Game.level.factions.get(0)) {
 
 			// animationX
 			buttonsAnimateCurrentTime += Game.delta;
@@ -1042,9 +1040,9 @@ public class Actor extends GameObject {
 		this.equippedWeapon = null;
 		buttonsAnimateCurrentTime = 0;
 		this.showWeaponButtons = false;
-		level.removeWalkingHighlight();
-		level.removeWeaponsThatCanAttackHighlight();
-		level.activeActor.hideHoverFightPreview();
+		Game.level.removeWalkingHighlight();
+		Game.level.removeWeaponsThatCanAttackHighlight();
+		Game.level.activeActor.hideHoverFightPreview();
 	}
 
 	public void weaponButtonClicked(Weapon weapon) {

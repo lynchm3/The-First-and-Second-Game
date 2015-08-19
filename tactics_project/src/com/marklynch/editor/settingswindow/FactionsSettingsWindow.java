@@ -48,7 +48,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 					return;
 
 				Faction newFaction = new Faction("Faction "
-						+ Game.level.factions.size(), Game.level, Color.RED,
+						+ Game.level.factions.size(), Color.RED,
 						"faction_blue.png");
 				Game.level.factions.add(newFaction);
 				updateFactionsButtons();

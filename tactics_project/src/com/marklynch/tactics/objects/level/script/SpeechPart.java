@@ -7,7 +7,6 @@ import mdesl.graphics.Color;
 
 import com.marklynch.CustomizedTypeAdapterFactory;
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
@@ -20,7 +19,6 @@ public class SpeechPart {
 	public Vector<DIRECTION> directions;
 	public Actor talker;
 	public Object[] text;
-	public transient Level level = null;
 
 	// For saving and loading
 	public ArrayList<String> actorGUIDs = new ArrayList<String>();
@@ -31,15 +29,13 @@ public class SpeechPart {
 	}
 
 	public SpeechPart(Vector<Actor> actors, Vector<Float> positions,
-			Vector<DIRECTION> directions, Actor talker, Object[] text,
-			Level level) {
+			Vector<DIRECTION> directions, Actor talker, Object[] text) {
 		super();
 		this.actors = actors;
 		this.positions = positions;
 		this.directions = directions;
 		this.talker = talker;
 		this.text = text;
-		this.level = level;
 	}
 
 	public void draw() {
@@ -88,24 +84,21 @@ public class SpeechPart {
 			for (Actor actor : object.actors) {
 				object.actorGUIDs.add(actor.guid);
 			}
-
 			object.talkerGUID = object.talker.guid;
 		}
 
 		@Override
 		protected SpeechPart afterRead(SpeechPart object) {
-			System.out.println("SpeechPart afterRead()");
-			object.actors = new Vector<Actor>();
-
-			for (int i = 0; i < object.actorGUIDs.size(); i++) {
-				object.actors.add(Game.level
-						.findActorFromGUID(object.actorGUIDs.get(i)));
-			}
-
-			object.talker = Game.level.findActorFromGUID(object.talkerGUID);
-
-			object.level = Game.level;
 			return object;
 		}
+	}
+
+	public void postLoad() {
+		actors = new Vector<Actor>();
+		for (String actorGUID : actorGUIDs) {
+			actors.add(Game.level.findActorFromGUID(actorGUID));
+		}
+
+		this.talker = Game.level.findActorFromGUID(talkerGUID);
 	}
 }

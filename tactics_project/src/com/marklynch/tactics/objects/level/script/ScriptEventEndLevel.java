@@ -3,21 +3,18 @@ package com.marklynch.tactics.objects.level.script;
 import mdesl.graphics.Color;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
 public class ScriptEventEndLevel extends ScriptEvent {
 
-	transient Level level;
 	Object[] text;
 	boolean completed = false;
 
 	public ScriptEventEndLevel(boolean blockUserInput,
-			ScriptTrigger scriptTrigger, Level level, Object[] text) {
+			ScriptTrigger scriptTrigger, Object[] text) {
 		super(blockUserInput, scriptTrigger);
-		this.level = level;
 		this.text = text;
 	}
 
@@ -28,7 +25,7 @@ public class ScriptEventEndLevel extends ScriptEvent {
 
 	@Override
 	public void click() {
-		level.end();
+		Game.level.end();
 		completed = true;
 	}
 

@@ -148,7 +148,7 @@ public class UserInputLevel {
 							Game.level.activeActor.unselected();
 						}
 						Game.level.activeActor = clickedActor;
-						Actor.highlightSelectedCharactersSquares(Game.level);
+						Actor.highlightSelectedCharactersSquares();
 						selectedNewActor = true;
 					}
 				}
@@ -160,7 +160,7 @@ public class UserInputLevel {
 								.hasRange(Game.level.activeActor
 										.weaponDistanceTo(Game.squareMouseIsOver))) {
 					Game.level.activeActor.attack(clickedGameObject, false);
-					Actor.highlightSelectedCharactersSquares(Game.level);
+					Actor.highlightSelectedCharactersSquares();
 				}
 			}
 

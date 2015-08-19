@@ -5,20 +5,17 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.utils.TextUtils;
 
 public class InlineSpeechPart {
 	public Actor actor;
 	public Object[] text;
-	public transient Level level;
 
-	public InlineSpeechPart(Actor actor, Object[] text, Level level) {
+	public InlineSpeechPart(Actor actor, Object[] text) {
 		super();
 		this.actor = actor;
 		this.text = text;
-		this.level = level;
 	}
 
 	public void draw() {

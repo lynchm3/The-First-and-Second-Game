@@ -171,7 +171,7 @@ public class Level {
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				squares[i][j].postLoad(this);
+				squares[i][j].postLoad();
 			}
 		}
 
@@ -180,8 +180,10 @@ public class Level {
 		}
 
 		for (Faction faction : factions) {
-			faction.postLoad(this);
+			faction.postLoad();
 		}
+
+		script.postLoad();
 
 		showTurnNotification = true;
 		waitingForPlayerClick = true;
@@ -217,7 +219,7 @@ public class Level {
 	private void initGrid(Square[][] squares, int width, int height) {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				squares[i][j] = new Square(i, j, "grass.png", 1, 0, this);
+				squares[i][j] = new Square(i, j, "grass.png", 1, 0);
 			}
 		}
 	}
@@ -225,12 +227,12 @@ public class Level {
 	private void initObjects() {
 
 		// Factions
-		factions.add(new Faction("Good Guys", this, new Color(0.29f, 0.31f,
-				0.77f), "faction_blue.png"));
-		factions.add(new Faction("Bad Guys", this,
-				new Color(0.8f, 0.37f, 0.27f), "faction_red.png"));
-		factions.add(new Faction("Green Party", this, new Color(0.30f, 0.8f,
-				0.30f), "faction_green.png"));
+		factions.add(new Faction("Good Guys", new Color(0.29f, 0.31f, 0.77f),
+				"faction_blue.png"));
+		factions.add(new Faction("Bad Guys", new Color(0.8f, 0.37f, 0.27f),
+				"faction_red.png"));
+		factions.add(new Faction("Green Party", new Color(0.30f, 0.8f, 0.30f),
+				"faction_green.png"));
 
 		// Good guys relationships
 		factions.get(0).relationships.put(factions.get(1), -100);
@@ -285,32 +287,32 @@ public class Level {
 
 		//
 		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", squares[0][0], weaponsForActor0, 4, this);
+				"red1.png", squares[0][0], weaponsForActor0, 4);
 		actor0.faction = factions.get(0);
 		factions.get(0).actors.add(actor0);
 
 		Actor actor1 = new Actor("Paul McCartney", "Maniac", 2, 10, 0, 0, 0, 0,
-				"avatar.png", squares[2][7], weaponsForActor1, 4, this);
+				"avatar.png", squares[2][7], weaponsForActor1, 4);
 		actor1.faction = factions.get(0);
 		factions.get(0).actors.add(actor1);
 
 		Actor actor2 = new Actor("Steve", "Maniac", 2, 100, 0, 0, 0, 0,
-				"avatar.png", squares[2][8], weaponsForActor2, 4, this);
+				"avatar.png", squares[2][8], weaponsForActor2, 4);
 		actor2.faction = factions.get(0);
 		factions.get(0).actors.add(actor2);
 
 		Actor actor3 = new Actor("George Harrison", "Thief", 3, 10, 0, 0, 0, 0,
-				"red.png", squares[5][3], weaponsForActor3, 4, this);
+				"red.png", squares[5][3], weaponsForActor3, 4);
 		actor3.faction = factions.get(1);
 		factions.get(1).actors.add(actor3);
 
 		Actor actor4 = new Actor("Ghandi", "Thief", 3, 10, 0, 0, 0, 0,
-				"red.png", squares[6][3], weaponsForActor4, 4, this);
+				"red.png", squares[6][3], weaponsForActor4, 4);
 		actor4.faction = factions.get(1);
 		factions.get(1).actors.add(actor4);
 
 		Actor actor5 = new Actor("Green1", "Hippy", 3, 10, 0, 0, 0, 0,
-				"green.png", squares[8][6], weaponsForActor5, 6, this);
+				"green.png", squares[8][6], weaponsForActor5, 6);
 		actor5.faction = factions.get(2);
 		factions.get(2).actors.add(actor5);
 
@@ -358,7 +360,7 @@ public class Level {
 				speechPositions1, speechDirections1,
 				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
-						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) }, this);
+						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) });
 
 		SpeechPart speechPart1_2 = new SpeechPart(
 				speechActors1,
@@ -367,7 +369,7 @@ public class Level {
 				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
 						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
-						Color.BLACK) }, this);
+						Color.BLACK) });
 
 		Vector<SpeechPart> speechParts1 = new Vector<SpeechPart>();
 		speechParts1.add(speechPart1_1);
@@ -376,13 +378,13 @@ public class Level {
 		// ScriptTrigger scriptTrigger1 = new
 		// ScriptTriggerDestructionOfSpecificGameObject(
 		// this, factions.get(0).actors.get(0));
-		ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(this,
+		ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(
 				factions.get(0).actors.get(0));
 		// ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1,
 		// 0);
 
 		ScriptEventEndLevel scriptEventEndLevel = new ScriptEventEndLevel(true,
-				scriptTrigger1, this, new Object[] { "GAME OVER" });
+				scriptTrigger1, new Object[] { "GAME OVER" });
 		// ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
 		// speechParts1, null);
 
@@ -404,12 +406,12 @@ public class Level {
 				speechPositions2, speechDirections2,
 				factions.get(2).actors.get(0),
 				new Object[] { new StringWithColor("GREEN TEAM HOOOOOOOO",
-						Color.BLACK) }, this);
+						Color.BLACK) });
 
 		Vector<SpeechPart> speechParts2 = new Vector<SpeechPart>();
 		speechParts2.add(speechPart2_1);
 
-		ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(this, 1, 2);
+		ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(1, 2);
 
 		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(true,
 				speechParts2, null);
@@ -425,13 +427,13 @@ public class Level {
 		InlineSpeechPart inlineSpeechPart1_1 = new InlineSpeechPart(
 				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor("HOLLA INLINE SPEECH YO",
-						Color.BLACK) }, this);
+						Color.BLACK) });
 
 		InlineSpeechPart inlineSpeechPart1_2 = new InlineSpeechPart(
 				factions.get(0).actors.get(0),
 				new Object[] { new StringWithColor(
 						"HOLLA, PART 2 OF THE INLINE SPEECH, WANT TO PUSH IT TO OVER 2 LINES, JUST TO SEE WTF IT LOOKS LIKE HOLLA",
-						Color.BLACK) }, this);
+						Color.BLACK) });
 
 		Vector<InlineSpeechPart> inlineSpeechParts1 = new Vector<InlineSpeechPart>();
 		inlineSpeechParts1.add(inlineSpeechPart1_1);
@@ -477,7 +479,7 @@ public class Level {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				// is it better to bind once and draw all the same ones?
-				squares[i][j].draw(this);
+				squares[i][j].draw();
 			}
 		}
 	}
@@ -707,7 +709,7 @@ public class Level {
 			if (activeActor != null)
 				activeActor.unselected();
 			activeActor = move.actor;
-			Actor.highlightSelectedCharactersSquares(this);
+			Actor.highlightSelectedCharactersSquares();
 			removeLastLog();
 			if (this.undoList.isEmpty()) {
 				undoButton.enabled = false;

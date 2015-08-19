@@ -42,7 +42,6 @@ public class Faction {
 	 */
 	public transient Map<Faction, Integer> relationships = new HashMap<Faction, Integer>();
 	public Vector<Actor> actors = new Vector<Actor>();
-	public transient Level level;
 
 	public transient Actor currentActor;
 	public transient int currentActorIndex = 0;
@@ -64,9 +63,8 @@ public class Faction {
 	public String guid = UUID.randomUUID().toString();
 	public Map<String, Integer> relationshipGUIDs = new HashMap<String, Integer>();
 
-	public Faction(String name, Level level, Color color, String imagePath) {
+	public Faction(String name, Color color, String imagePath) {
 		this.name = name;
-		this.level = level;
 		this.color = color;
 		this.imagePath = imagePath;
 		loadImages();
@@ -79,12 +77,11 @@ public class Faction {
 		}
 	}
 
-	public void postLoad(Level level) {
-		this.level = level;
+	public void postLoad() {
 		this.color = new Color(this.color.r, this.color.g, this.color.b,
 				this.color.a);
 		for (Actor actor : actors) {
-			actor.postLoad(level, this);
+			actor.postLoad(this);
 		}
 		currentStage = STAGE.SELECT;
 		relationships = new HashMap<Faction, Integer>();
@@ -101,12 +98,15 @@ public class Faction {
 			if (timeAtCurrentStage == 0) {
 				// start of stage, perform action
 				currentActor = actors.get(currentActorIndex);
-				if (level.activeActor != null)
-					level.activeActor.unselected();
-				level.activeActor = currentActor;
-				level.activeActor.calculatePathToAllSquares(level.squares);
-				level.activeActor.calculateReachableSquares(level.squares);
-				level.activeActor.calculateAttackableSquares(level.squares);
+				if (Game.level.activeActor != null)
+					Game.level.activeActor.unselected();
+				Game.level.activeActor = currentActor;
+				Game.level.activeActor
+						.calculatePathToAllSquares(Game.level.squares);
+				Game.level.activeActor
+						.calculateReachableSquares(Game.level.squares);
+				Game.level.activeActor
+						.calculateAttackableSquares(Game.level.squares);
 				timeAtCurrentStage += delta;
 			} else if (timeAtCurrentStage >= STAGE_DURATION) {
 				currentStage = STAGE.MOVE;
@@ -172,7 +172,7 @@ public class Faction {
 				// boolean performedAttack = attackRandomEnemy();
 				// attackRandomEnemyOrAlly();
 
-				boolean performedAttack = this.attackTarget(level.factions
+				boolean performedAttack = this.attackTarget(Game.level.factions
 						.get(0).actors.get(0));
 
 				if (performedAttack == false) {
@@ -182,7 +182,7 @@ public class Faction {
 					if (actors.size() <= currentActorIndex) {
 						// last dude in the array died, next faction's turn
 						currentActorIndex = 0;
-						level.endTurn();
+						Game.level.endTurn();
 					} else {
 						if (currentActor != actors.get(currentActorIndex)) {
 							// actor died, so the array has shifted...
@@ -195,7 +195,7 @@ public class Faction {
 						}
 						if (currentActorIndex >= actors.size()) {
 							currentActorIndex = 0;
-							level.endTurn();
+							Game.level.endTurn();
 						}
 					}
 				} else {
@@ -211,7 +211,7 @@ public class Faction {
 				if (actors.size() <= currentActorIndex) {
 					// last dude in the array died, next faction's turn
 					currentActorIndex = 0;
-					level.endTurn();
+					Game.level.endTurn();
 				} else {
 					if (currentActor != actors.get(currentActorIndex)) {
 						// actor died, so the array has shifted...
@@ -224,7 +224,7 @@ public class Faction {
 					}
 					if (currentActorIndex >= actors.size()) {
 						currentActorIndex = 0;
-						level.endTurn();
+						Game.level.endTurn();
 					}
 				}
 
@@ -259,7 +259,7 @@ public class Faction {
 		// get as close to the point as possible
 		// with as few moves as possible
 
-		this.currentActor.calculatePathToAllSquares(level.squares);
+		this.currentActor.calculatePathToAllSquares(Game.level.squares);
 
 		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
 		// idealWeaponDistances.add(2);
@@ -277,7 +277,7 @@ public class Faction {
 		Square squareToMoveTo = calculateSquareToMoveToForTarget(target);
 
 		if (squareToMoveTo != null) {
-			level.activeActor.moveTo(squareToMoveTo);
+			Game.level.activeActor.moveTo(squareToMoveTo);
 			return true;
 		} else {
 			return false;
@@ -300,10 +300,10 @@ public class Faction {
 		// weapon distance, not travel distance)
 
 		// Calculate paths to all squares
-		this.currentActor.calculatePathToAllSquares(level.squares);
+		this.currentActor.calculatePathToAllSquares(Game.level.squares);
 
 		// 1. create list of enemies
-		for (Faction faction : level.factions) {
+		for (Faction faction : Game.level.factions) {
 			if (faction != this && this.relationships.get(faction) < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
@@ -329,7 +329,7 @@ public class Faction {
 		// shit is heavy
 
 		if (squareToMoveTo != null) {
-			level.activeActor.moveTo(squareToMoveTo);
+			Game.level.activeActor.moveTo(squareToMoveTo);
 			return true;
 		} else {
 			return false;
@@ -352,16 +352,16 @@ public class Faction {
 		// weapon distance, not travel distance)
 
 		// Calculate paths to all squares
-		this.currentActor.calculatePathToAllSquares(level.squares);
+		this.currentActor.calculatePathToAllSquares(Game.level.squares);
 
 		// 1. create list of enemies reachable within lowest possible turns
-		for (Faction faction : level.factions) {
+		for (Faction faction : Game.level.factions) {
 			if (faction != this && this.relationships.get(faction) < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
 					if (square != null) {
 						int turns = square.distanceToSquare
-								/ level.activeActor.travelDistance;
+								/ Game.level.activeActor.travelDistance;
 						if (turns < turnsToBest) {
 							bestTargetsBasedOnTurnsToReach.clear();
 							bestTargetsBasedOnTurnsToReach.add(actor);
@@ -377,11 +377,12 @@ public class Faction {
 		// 2. pick which is the best
 		ArrayList<Fight> fights = new ArrayList<Fight>();
 		for (Actor actor : bestTargetsBasedOnTurnsToReach) {
-			for (Weapon weapon : level.activeActor.weapons.weapons) {
+			for (Weapon weapon : Game.level.activeActor.weapons.weapons) {
 				for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
-					Fight fight = new Fight(level.activeActor, weapon, actor,
-							actor.bestCounterWeapon(level.activeActor, weapon,
-									range), range);
+					Fight fight = new Fight(Game.level.activeActor, weapon,
+							actor, actor.bestCounterWeapon(
+									Game.level.activeActor, weapon, range),
+							range);
 					fights.add(fight);
 				}
 			}
@@ -406,7 +407,7 @@ public class Faction {
 			squareToMoveTo = calculateSquareToMoveToForTarget(fights.get(0).defender);
 
 		if (squareToMoveTo != null) {
-			level.activeActor.moveTo(squareToMoveTo);
+			Game.level.activeActor.moveTo(squareToMoveTo);
 			return true;
 		} else {
 			return false;
@@ -415,7 +416,7 @@ public class Faction {
 
 	public Square calculateSquareToMoveToForTarget(GameObject target) {
 
-		Vector<Float> idealWeaponDistances = level.activeActor
+		Vector<Float> idealWeaponDistances = Game.level.activeActor
 				.calculateIdealDistanceFrom(target);
 
 		Vector<Square> targetSquares = new Vector<Square>();
@@ -424,9 +425,10 @@ public class Faction {
 		for (int i = 0; i < idealWeaponDistances.size(); i++) {
 
 			// Check if we're already at this distance
-			if (level.activeActor.weaponDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
+			if (Game.level.activeActor
+					.weaponDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
 					.get(i))
-				return level.activeActor.squareGameObjectIsOn;
+				return Game.level.activeActor.squareGameObjectIsOn;
 
 			targetSquares = target.getAllSquaresAtDistance(idealWeaponDistances
 					.get(i));
@@ -478,17 +480,17 @@ public class Faction {
 		// MOVE TO RANDOM SQUARE - maybe for a broken robot or confused
 		// enemy
 		Vector<Square> reachableSquares = new Vector<Square>();
-		for (int j = 0; j < level.squares.length; j++) {
-			for (int k = 0; k < level.squares[0].length; k++) {
-				if (level.squares[j][k].reachableBySelectedCharater) {
-					reachableSquares.add(level.squares[j][k]);
+		for (int j = 0; j < Game.level.squares.length; j++) {
+			for (int k = 0; k < Game.level.squares[0].length; k++) {
+				if (Game.level.squares[j][k].reachableBySelectedCharater) {
+					reachableSquares.add(Game.level.squares[j][k]);
 				}
 			}
 		}
 		if (reachableSquares.size() > 0) {
 			int random = (int) (Math.random() * (reachableSquares.size() - 1));
 			Square squareToMoveTo = reachableSquares.get(random);
-			level.activeActor.moveTo(squareToMoveTo);
+			Game.level.activeActor.moveTo(squareToMoveTo);
 			return true;
 		} else {
 			return false;
@@ -499,13 +501,13 @@ public class Faction {
 
 		// make a list of attackable enemies
 		Vector<Actor> attackableActors = new Vector<Actor>();
-		for (Faction faction : level.factions) {
+		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
-				int weaponDistance = level.activeActor
+				int weaponDistance = Game.level.activeActor
 						.weaponDistanceTo(actor.squareGameObjectIsOn);
 
 				if (faction != this
-						&& level.activeActor.hasRange(weaponDistance)) {
+						&& Game.level.activeActor.hasRange(weaponDistance)) {
 					attackableActors.add(actor);
 				}
 			}
@@ -514,9 +516,9 @@ public class Faction {
 		if (attackableActors.size() > 0) {
 			int random = (int) (Math.random() * (attackableActors.size() - 1));
 			Actor actorToAttack = attackableActors.get(random);
-			level.activeActor.equipBestWeapon(actorToAttack);
-			level.activeActor.attack(actorToAttack, false);
-			level.activeActor.highlightSelectedCharactersSquares(level);
+			Game.level.activeActor.equipBestWeapon(actorToAttack);
+			Game.level.activeActor.attack(actorToAttack, false);
+			Game.level.activeActor.highlightSelectedCharactersSquares();
 			return true;
 		} else {
 			return false;
@@ -527,12 +529,12 @@ public class Faction {
 		// TODO needs to be tested
 		// make a list of attackable enemies
 		Vector<Actor> attackableActors = new Vector<Actor>();
-		for (Faction faction : level.factions) {
+		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
-				int weaponDistance = level.activeActor
+				int weaponDistance = Game.level.activeActor
 						.weaponDistanceTo(actor.squareGameObjectIsOn);
-				if (actor != level.activeActor
-						&& level.activeActor.hasRange(weaponDistance)) {
+				if (actor != Game.level.activeActor
+						&& Game.level.activeActor.hasRange(weaponDistance)) {
 					attackableActors.add(actor);
 				}
 			}
@@ -541,9 +543,9 @@ public class Faction {
 		if (attackableActors.size() > 0) {
 			int random = (int) (Math.random() * (attackableActors.size() - 1));
 			Actor actorToAttack = attackableActors.get(random);
-			level.activeActor.equipBestWeapon(actorToAttack);
-			level.activeActor.attack(actorToAttack, false);
-			level.activeActor.highlightSelectedCharactersSquares(level);
+			Game.level.activeActor.equipBestWeapon(actorToAttack);
+			Game.level.activeActor.attack(actorToAttack, false);
+			Game.level.activeActor.highlightSelectedCharactersSquares();
 			return true;
 		} else {
 			return false;
@@ -551,12 +553,12 @@ public class Faction {
 	}
 
 	private boolean attackTarget(GameObject gameObject) {
-		int weaponDistance = level.activeActor
+		int weaponDistance = Game.level.activeActor
 				.weaponDistanceTo(gameObject.squareGameObjectIsOn);
-		if (level.activeActor.hasRange(weaponDistance)) {
-			level.activeActor.equipBestWeapon(gameObject);
-			level.activeActor.attack(gameObject, false);
-			Actor.highlightSelectedCharactersSquares(level);
+		if (Game.level.activeActor.hasRange(weaponDistance)) {
+			Game.level.activeActor.equipBestWeapon(gameObject);
+			Game.level.activeActor.attack(gameObject, false);
+			Actor.highlightSelectedCharactersSquares();
 			return true;
 		} else {
 			return attackRandomEnemy();
@@ -566,7 +568,7 @@ public class Faction {
 
 	public void checkIfDestroyed() {
 		if (this.actors.size() == 0)
-			level.logOnScreen(new ActivityLog(new Object[] { this,
+			Game.level.logOnScreen(new ActivityLog(new Object[] { this,
 					" have been stopped" }));
 
 	}

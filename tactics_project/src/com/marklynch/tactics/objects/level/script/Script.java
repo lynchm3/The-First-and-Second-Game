@@ -65,4 +65,11 @@ public class Script {
 		}
 		return false;
 	}
+
+	public void postLoad() {
+		for (ScriptEvent scriptEvent : scriptEvents) {
+			scriptEvent.postLoad();
+		}
+
+	}
 }

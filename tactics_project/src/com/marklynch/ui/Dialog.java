@@ -6,7 +6,6 @@ import mdesl.graphics.Texture;
 import org.lwjgl.opengl.GL11;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -21,17 +20,14 @@ public class Dialog {
 	public String backgroundImagePath = "";
 	public Texture backgroundImageTexture = null;
 
-	Level level;
-
 	public Dialog(Square reference, float width, float height,
-			String backgroundImagePath, String fontPath, Level level) {
+			String backgroundImagePath, String fontPath) {
 		super();
 		this.reference = reference;
 		this.width = width;
 		this.height = height;
 		this.backgroundImagePath = backgroundImagePath;
 		this.backgroundImageTexture = getGlobalImage(backgroundImagePath);
-		this.level = level;
 	}
 
 	public void draw() {

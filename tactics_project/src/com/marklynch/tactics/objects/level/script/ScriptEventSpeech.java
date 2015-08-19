@@ -40,4 +40,10 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 	}
 
+	@Override
+	public void postLoad() {
+		super.postLoad();
+		for (SpeechPart speechPart : speechParts)
+			speechPart.postLoad();
+	}
 }
