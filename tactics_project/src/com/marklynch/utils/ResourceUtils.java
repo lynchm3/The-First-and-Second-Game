@@ -40,8 +40,8 @@ public class ResourceUtils {
 						mdesl.graphics.Texture.LINEAR);
 				globalImages.put(path, texture);
 			} catch (Exception e) {
-				e.printStackTrace();
-				System.err.println("path = " + path);
+				// e.printStackTrace();
+				// System.err.println("path = " + path);
 			}
 		}
 

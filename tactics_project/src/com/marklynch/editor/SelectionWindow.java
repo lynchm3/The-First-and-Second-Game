@@ -33,6 +33,8 @@ public class SelectionWindow<T> {
 		this.editor = editor;
 		for (int i = 0; i < objects.size(); i++) {
 
+			System.out.println("LOOP");
+
 			final int index = i;
 
 			float x = i / ((int) Game.windowHeight / 30) * 200;

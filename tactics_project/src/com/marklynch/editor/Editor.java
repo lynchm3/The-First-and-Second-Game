@@ -440,7 +440,8 @@ public class Editor {
 				} else if (field.getType().isAssignableFrom(Faction.class)
 						|| field.getType().isAssignableFrom(Color.class)
 						|| field.getType().isAssignableFrom(Texture.class)
-						|| field.getType().isAssignableFrom(Weapons.class)) {
+						|| field.getType().isAssignableFrom(Weapons.class)
+						|| field.getType().isAssignableFrom(Actor.class)) {
 					selectionWindow.draw();
 				}
 
@@ -665,6 +666,7 @@ public class Editor {
 			AtributesWindowButton attributeButton) {
 		objectToEdit = object;
 		attributeToEdit = attribute;
+		System.out.println("WOOP?");
 		try {
 			Class<? extends Object> objectClass = objectToEdit.getClass();
 			Field field = objectClass.getField(attributeToEdit);
@@ -685,6 +687,17 @@ public class Editor {
 				Actor actor = (Actor) object;
 				selectionWindow = new SelectionWindow(weapons,
 						actor.weapons.weapons, true, this);
+			} else if (field.getType().isAssignableFrom(Actor.class)) {
+				System.out.println("WOOP!");
+				// actor
+				ArrayList<Actor> actors = new ArrayList<Actor>();
+				for (Faction faction : Game.level.factions) {
+					for (Actor actor : faction.actors) {
+						actors.add(actor);
+						System.out.println("ADD!");
+					}
+				}
+				selectionWindow = new SelectionWindow(actors, null, false, this);
 			} else if (field.getType().isAssignableFrom(boolean.class)) {
 				boolean b = (boolean) field.get(objectToEdit);
 				field.set(objectToEdit, !b);
