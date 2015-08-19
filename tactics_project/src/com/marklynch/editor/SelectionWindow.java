@@ -26,7 +26,7 @@ public class SelectionWindow<T> {
 
 	public SelectionWindow(final ArrayList<T> objects,
 			final ArrayList<T> selectedObjects, boolean multi,
-			final Editor editor) {
+			final Editor editor, final Object ownerOfAttribute) {
 		this.multi = multi;
 		this.objects = objects;
 		this.selectedObjects = selectedObjects;
@@ -66,6 +66,14 @@ public class SelectionWindow<T> {
 							actor.faction = faction;
 							editor.stopEditingAttribute();
 						} else if (field.getType()
+								.isAssignableFrom(Actor.class)) {
+							Actor actor = (Actor) objects.get(index);
+							ownerOfAttribute.getClass().getField("actor")
+									.set(ownerOfAttribute, actor);
+							ownerOfAttribute.getClass().getField("actorGUID")
+									.set(ownerOfAttribute, actor.guid);
+							editor.stopEditingAttribute();
+						} else if (field.getType()
 								.isAssignableFrom(Color.class)) {// color
 							field.set(editor.objectToEdit, objects.get(index));
 							editor.stopEditingAttribute();
@@ -91,6 +99,7 @@ public class SelectionWindow<T> {
 
 					} catch (Exception e) {
 						e.printStackTrace();
+						System.err.println("AGHHHH");
 					}
 
 					editor.settingsWindow.update();

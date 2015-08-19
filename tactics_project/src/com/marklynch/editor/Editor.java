@@ -472,7 +472,8 @@ public class Editor {
 				if (field.getType().isAssignableFrom(Faction.class)
 						|| field.getType().isAssignableFrom(Color.class)
 						|| field.getType().isAssignableFrom(Texture.class)
-						|| field.getType().isAssignableFrom(Weapons.class)) {
+						|| field.getType().isAssignableFrom(Weapons.class)
+						|| field.getType().isAssignableFrom(Actor.class)) {
 					// faction, color, texture
 					return selectionWindow.getButtonFromMousePosition(mouseX,
 							mouseY);
@@ -674,19 +675,20 @@ public class Editor {
 			if (field.getType().isAssignableFrom(Faction.class)) {
 				// faction
 				selectionWindow = new SelectionWindow(Game.level.factions,
-						null, false, this);
+						null, false, this, null);
 			} else if (field.getType().isAssignableFrom(Color.class)) {
 				// color
-				selectionWindow = new SelectionWindow(colors, null, false, this);
+				selectionWindow = new SelectionWindow(colors, null, false,
+						this, null);
 			} else if (field.getType().isAssignableFrom(Texture.class)) {
 				// texture
 				selectionWindow = new SelectionWindow(textures, null, false,
-						this);
+						this, null);
 			} else if (field.getType().isAssignableFrom(Weapons.class)) {
 				// weapons
 				Actor actor = (Actor) object;
 				selectionWindow = new SelectionWindow(weapons,
-						actor.weapons.weapons, true, this);
+						actor.weapons.weapons, true, this, null);
 			} else if (field.getType().isAssignableFrom(Actor.class)) {
 				System.out.println("WOOP!");
 				// actor
@@ -697,7 +699,8 @@ public class Editor {
 						System.out.println("ADD!");
 					}
 				}
-				selectionWindow = new SelectionWindow(actors, null, false, this);
+				selectionWindow = new SelectionWindow(actors, null, false,
+						this, objectToEdit);
 			} else if (field.getType().isAssignableFrom(boolean.class)) {
 				boolean b = (boolean) field.get(objectToEdit);
 				field.set(objectToEdit, !b);
