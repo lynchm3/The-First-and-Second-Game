@@ -17,9 +17,9 @@ import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
+import com.marklynch.tactics.objects.unit.ai.AI;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.FileUtils;
@@ -195,8 +195,6 @@ public class LevelSettingsWindow extends SettingsWindow {
 				Gson gson = new GsonBuilder()
 						.setPrettyPrinting()
 						.registerTypeAdapterFactory(
-								new ScriptEventSpeech.SpeechPart.SpeechPartTypeAdapterFactory())
-						.registerTypeAdapterFactory(
 								new Faction.FactionTypeAdapterFactory())
 						// .registerTypeAdapterFactory(
 						// new
@@ -274,8 +272,6 @@ public class LevelSettingsWindow extends SettingsWindow {
 				Gson gson = new GsonBuilder()
 						.setPrettyPrinting()
 						.registerTypeAdapterFactory(
-								new ScriptEventSpeech.SpeechPart.SpeechPartTypeAdapterFactory())
-						.registerTypeAdapterFactory(
 								new Faction.FactionTypeAdapterFactory())
 						// .registerTypeAdapterFactory(
 						// new
@@ -286,7 +282,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 								new SubClassFriendlyAdapter<ScriptEvent>())
 						.registerTypeAdapter(ScriptTrigger.class,
 								new SubClassFriendlyAdapter<ScriptTrigger>())
-						.create();
+						.registerTypeAdapter(AI.class,
+								new SubClassFriendlyAdapter<AI>()).create();
 				String json = FileUtils.openFile();
 				// System.out.println(editor.json);
 				// FileUtils.saveFile(json);

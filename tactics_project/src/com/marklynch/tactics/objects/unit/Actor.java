@@ -1,7 +1,6 @@
 package com.marklynch.tactics.objects.unit;
 
 import java.util.ArrayList;
-import java.util.UUID;
 import java.util.Vector;
 
 import mdesl.graphics.Color;
@@ -10,6 +9,7 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.tactics.objects.unit.ai.AI;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.AttackButton;
@@ -25,8 +25,6 @@ public class Actor extends GameObject {
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT
 	}
-
-	public String guid = UUID.randomUUID().toString();
 
 	public String title = "";
 	public int actorLevel = 1;
@@ -49,6 +47,8 @@ public class Actor extends GameObject {
 	public transient boolean showHoverFightPreview = false;
 	public transient GameObject hoverFightPreviewDefender = null;
 	public transient Vector<Fight> hoverFightPreviewFights = new Vector<Fight>();
+
+	public transient AI ai = new AI(this);
 
 	public Actor(String name, String title, int actorLevel, int health,
 			int strength, int dexterity, int intelligence, int endurance,

@@ -763,6 +763,22 @@ public class Level {
 		return null;
 	}
 
+	public GameObject findObjectFromGUID(String guid) {
+		for (GameObject object : inanimateObjects) {
+			if (object.guid.equals(guid)) {
+				return object;
+			}
+		}
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				if (actor.guid.equals(guid)) {
+					return actor;
+				}
+			}
+		}
+		return null;
+	}
+
 	public Faction findFactionFromGUID(String guid) {
 		for (Faction faction : factions) {
 			if (faction.guid.equals(guid)) {

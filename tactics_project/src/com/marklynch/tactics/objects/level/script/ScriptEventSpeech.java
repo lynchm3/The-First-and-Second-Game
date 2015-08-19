@@ -5,7 +5,6 @@ import java.util.Vector;
 
 import mdesl.graphics.Color;
 
-import com.marklynch.CustomizedTypeAdapterFactory;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -75,6 +74,10 @@ public class ScriptEventSpeech extends ScriptEvent {
 			this.directions = directions;
 			this.talker = talker;
 			this.text = text;
+			for (Actor actor : actors) {
+				actorGUIDs.add(actor.guid);
+			}
+			talkerGUID = talker.guid;
 		}
 
 		public void draw() {
@@ -114,41 +117,5 @@ public class ScriptEventSpeech extends ScriptEvent {
 			// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
 			TextUtils.printTextWithImages(text, textX1, posY, width);
 		}
-
-		public static class SpeechPartTypeAdapterFactory extends
-				CustomizedTypeAdapterFactory<SpeechPart> {
-			public SpeechPartTypeAdapterFactory() {
-				super(SpeechPart.class);
-			}
-
-			@Override
-			protected void beforeWrite(SpeechPart object) {
-				for (Actor actor : object.actors) {
-					object.actorGUIDs.add(actor.guid);
-				}
-				object.talkerGUID = object.talker.guid;
-			}
-
-			@Override
-			protected SpeechPart afterRead(SpeechPart object) {
-				return object;
-			}
-		}
-
-		public void postLoad() {
-			actors = new Vector<Actor>();
-			for (String actorGUID : actorGUIDs) {
-				actors.add(Game.level.findActorFromGUID(actorGUID));
-			}
-
-			this.talker = Game.level.findActorFromGUID(talkerGUID);
-		}
-	}
-
-	@Override
-	public void postLoad() {
-		super.postLoad();
-		for (SpeechPart speechPart : speechParts)
-			speechPart.postLoad();
 	}
 }

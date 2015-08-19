@@ -25,11 +25,10 @@ import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
+import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.unit.ai.AItargetObject;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.AtributesWindowButton;
@@ -39,7 +38,6 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextureUtils;
 
 public class Editor {
@@ -283,23 +281,12 @@ public class Editor {
 		Game.level.factions
 				.add(new Faction("Faction " + Game.level.factions.size(),
 						colors.get(1), "faction_red.png"));
-		Game.level.factions.add(new Faction("Faction "
-				+ Game.level.factions.size(), colors.get(2),
-				"faction_green.png"));
 
 		// relationships
 		Game.level.factions.get(0).relationships.put(
 				Game.level.factions.get(1), -100);
-		Game.level.factions.get(0).relationships.put(
-				Game.level.factions.get(2), -100);
 		Game.level.factions.get(1).relationships.put(
 				Game.level.factions.get(0), -100);
-		Game.level.factions.get(1).relationships.put(
-				Game.level.factions.get(2), -100);
-		Game.level.factions.get(2).relationships.put(
-				Game.level.factions.get(0), -100);
-		Game.level.factions.get(2).relationships.put(
-				Game.level.factions.get(1), -100);
 
 		// Weapons
 		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
@@ -316,56 +303,57 @@ public class Editor {
 				"red1.png", Game.level.squares[0][4], weaponsForActor0, 4);
 		actor0.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(actor0);
+
 		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
 				"red1.png", Game.level.squares[0][5], weaponsForActor0, 4);
-		actor1.faction = Game.level.factions.get(0);
-		Game.level.factions.get(0).actors.add(actor1);
-
-		Actor actor2 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", Game.level.squares[5][5], weaponsForActor1, 4);
-		actor2.faction = Game.level.factions.get(1);
-		Game.level.factions.get(1).actors.add(actor2);
-
-		Actor actor3 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", Game.level.squares[5][9], weaponsForActor1, 4);
-		actor3.faction = Game.level.factions.get(2);
-		Game.level.factions.get(2).actors.add(actor3);
+		actor1.faction = Game.level.factions.get(1);
+		Game.level.factions.get(1).actors.add(actor1);
 
 		// Script
 
 		// Speech 1
-		Vector<Actor> speechActors1 = new Vector<Actor>();
-		speechActors1.add(Game.level.factions.get(0).actors.get(0));
-		speechActors1.add(Game.level.factions.get(0).actors.get(1));
-		Vector<Float> speechPositions1 = new Vector<Float>();
-		speechPositions1.add(0f);
-		speechPositions1.add(0f);
-		Vector<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections1 = new Vector<ScriptEventSpeech.SpeechPart.DIRECTION>();
-		speechDirections1.add(SpeechPart.DIRECTION.RIGHT);
-		speechDirections1.add(SpeechPart.DIRECTION.LEFT);
+		// Vector<Actor> speechActors1 = new Vector<Actor>();
+		// speechActors1.add(Game.level.factions.get(0).actors.get(0));
+		// speechActors1.add(Game.level.factions.get(0).actors.get(1));
+		// Vector<Float> speechPositions1 = new Vector<Float>();
+		// speechPositions1.add(0f);
+		// speechPositions1.add(0f);
+		// Vector<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections1 =
+		// new Vector<ScriptEventSpeech.SpeechPart.DIRECTION>();
+		// speechDirections1.add(SpeechPart.DIRECTION.RIGHT);
+		// speechDirections1.add(SpeechPart.DIRECTION.LEFT);
+		//
+		// ScriptEventSpeech.SpeechPart speechPart1_1 = new
+		// ScriptEventSpeech.SpeechPart(
+		// speechActors1, speechPositions1, speechDirections1,
+		// Game.level.factions.get(0).actors.get(0),
+		// new StringWithColor[] { new StringWithColor(
+		// "HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) });
+		// ScriptEventSpeech.SpeechPart speechPart1_2 = new
+		// ScriptEventSpeech.SpeechPart(
+		// speechActors1,
+		// speechPositions1,
+		// speechDirections1,
+		// Game.level.factions.get(0).actors.get(0),
+		// new StringWithColor[] { new StringWithColor(
+		// "HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
+		// Color.BLACK) });
+		// Vector<ScriptEventSpeech.SpeechPart> speechParts1 = new
+		// Vector<ScriptEventSpeech.SpeechPart>();
+		// speechParts1.add(speechPart1_1);
+		// speechParts1.add(speechPart1_2);
+		// ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(
+		// Game.level.factions.get(0).actors.get(0));
+		// ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
+		// speechParts1, scriptTrigger1);
 
-		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(
-				speechActors1, speechPositions1, speechDirections1,
-				Game.level.factions.get(0).actors.get(0),
-				new StringWithColor[] { new StringWithColor(
-						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) });
-		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(
-				speechActors1,
-				speechPositions1,
-				speechDirections1,
-				Game.level.factions.get(0).actors.get(0),
-				new StringWithColor[] { new StringWithColor(
-						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
-						Color.BLACK) });
-		Vector<ScriptEventSpeech.SpeechPart> speechParts1 = new Vector<ScriptEventSpeech.SpeechPart>();
-		speechParts1.add(speechPart1_1);
-		speechParts1.add(speechPart1_2);
-		ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(
-				Game.level.factions.get(0).actors.get(0));
-		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
-				speechParts1, scriptTrigger1);
+		ScriptEventSetAI scriptEventSetAIAttackDumpster = new ScriptEventSetAI(
+				false, new ScriptTriggerTurnStart(1, 0), actor1,
+				new AItargetObject(gameObject, actor1));
+
 		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
-		scriptEvents.add(scriptEventSpeech1);
+		// scriptEvents.add(scriptEventSpeech1);
+		scriptEvents.add(scriptEventSetAIAttackDumpster);
 
 		Game.level.script.scriptEvents = scriptEvents;
 		// script.activateScriptEvent();

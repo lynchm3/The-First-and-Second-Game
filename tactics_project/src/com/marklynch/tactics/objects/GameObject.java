@@ -4,6 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 import java.util.Vector;
 
 import mdesl.graphics.Texture;
@@ -22,6 +23,8 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class GameObject {
+
+	public String guid = UUID.randomUUID().toString();
 
 	public String name = "";
 
