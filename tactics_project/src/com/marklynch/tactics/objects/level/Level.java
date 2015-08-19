@@ -17,7 +17,6 @@ import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.ScriptEventEndLevel;
 import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
-import com.marklynch.tactics.objects.level.script.SpeechPart;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerScriptEventEnded;
@@ -352,26 +351,26 @@ public class Level {
 		speechPositions1.add(0f);
 		speechPositions1.add(0f);
 
-		Vector<SpeechPart.DIRECTION> speechDirections1 = new Vector<SpeechPart.DIRECTION>();
-		speechDirections1.add(SpeechPart.DIRECTION.RIGHT);
-		speechDirections1.add(SpeechPart.DIRECTION.LEFT);
+		Vector<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections1 = new Vector<ScriptEventSpeech.SpeechPart.DIRECTION>();
+		speechDirections1.add(ScriptEventSpeech.SpeechPart.DIRECTION.RIGHT);
+		speechDirections1.add(ScriptEventSpeech.SpeechPart.DIRECTION.LEFT);
 
-		SpeechPart speechPart1_1 = new SpeechPart(speechActors1,
-				speechPositions1, speechDirections1,
+		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(
+				speechActors1, speechPositions1, speechDirections1,
 				factions.get(0).actors.get(0),
-				new Object[] { new StringWithColor(
+				new StringWithColor[] { new StringWithColor(
 						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) });
 
-		SpeechPart speechPart1_2 = new SpeechPart(
+		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(
 				speechActors1,
 				speechPositions1,
 				speechDirections1,
 				factions.get(0).actors.get(0),
-				new Object[] { new StringWithColor(
+				new StringWithColor[] { new StringWithColor(
 						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
 						Color.BLACK) });
 
-		Vector<SpeechPart> speechParts1 = new Vector<SpeechPart>();
+		Vector<ScriptEventSpeech.SpeechPart> speechParts1 = new Vector<ScriptEventSpeech.SpeechPart>();
 		speechParts1.add(speechPart1_1);
 		speechParts1.add(speechPart1_2);
 
@@ -398,17 +397,17 @@ public class Level {
 		speechPositions2.add(0f);
 		speechPositions2.add(0f);
 
-		Vector<SpeechPart.DIRECTION> speechDirections2 = new Vector<SpeechPart.DIRECTION>();
-		speechDirections2.add(SpeechPart.DIRECTION.RIGHT);
-		speechDirections2.add(SpeechPart.DIRECTION.LEFT);
+		Vector<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections2 = new Vector<ScriptEventSpeech.SpeechPart.DIRECTION>();
+		speechDirections2.add(ScriptEventSpeech.SpeechPart.DIRECTION.RIGHT);
+		speechDirections2.add(ScriptEventSpeech.SpeechPart.DIRECTION.LEFT);
 
-		SpeechPart speechPart2_1 = new SpeechPart(speechActors2,
-				speechPositions2, speechDirections2,
+		ScriptEventSpeech.SpeechPart speechPart2_1 = new ScriptEventSpeech.SpeechPart(
+				speechActors2, speechPositions2, speechDirections2,
 				factions.get(2).actors.get(0),
-				new Object[] { new StringWithColor("GREEN TEAM HOOOOOOOO",
-						Color.BLACK) });
+				new StringWithColor[] { new StringWithColor(
+						"GREEN TEAM HOOOOOOOO", Color.BLACK) });
 
-		Vector<SpeechPart> speechParts2 = new Vector<SpeechPart>();
+		Vector<ScriptEventSpeech.SpeechPart> speechParts2 = new Vector<ScriptEventSpeech.SpeechPart>();
 		speechParts2.add(speechPart2_1);
 
 		ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(1, 2);

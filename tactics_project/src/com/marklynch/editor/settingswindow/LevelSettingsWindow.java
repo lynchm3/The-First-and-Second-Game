@@ -17,7 +17,7 @@ import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.SpeechPart;
+import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.ui.button.ClickListener;
@@ -192,19 +192,17 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				// Gson gson = new GsonBuilder().setPrettyPrinting().create();
-				// String json = gson.toJson(obj);
-				// System.out.println(json);
-
 				Gson gson = new GsonBuilder()
 						.setPrettyPrinting()
 						.registerTypeAdapterFactory(
-								new SpeechPart.SpeechPartTypeAdapterFactory())
+								new ScriptEventSpeech.SpeechPart.SpeechPartTypeAdapterFactory())
 						.registerTypeAdapterFactory(
 								new Faction.FactionTypeAdapterFactory())
 						// .registerTypeAdapterFactory(
 						// new
 						// ScriptTriggerActorSelected.ScriptTriggerActorSelectedAdapterFactory())
+						// .registerTypeAdapter(Object.class,
+						// new SubClassFriendlyAdapter<Object>())
 						.registerTypeAdapter(ScriptEvent.class,
 								new SubClassFriendlyAdapter<ScriptEvent>())
 						.registerTypeAdapter(ScriptTrigger.class,
@@ -212,7 +210,6 @@ public class LevelSettingsWindow extends SettingsWindow {
 						.create();
 
 				String json = gson.toJson(Game.level);
-				// System.out.println(editor.json);
 				FileUtils.saveFile(json);
 
 				// I HAVE REMOVED
@@ -277,12 +274,14 @@ public class LevelSettingsWindow extends SettingsWindow {
 				Gson gson = new GsonBuilder()
 						.setPrettyPrinting()
 						.registerTypeAdapterFactory(
-								new SpeechPart.SpeechPartTypeAdapterFactory())
+								new ScriptEventSpeech.SpeechPart.SpeechPartTypeAdapterFactory())
 						.registerTypeAdapterFactory(
 								new Faction.FactionTypeAdapterFactory())
 						// .registerTypeAdapterFactory(
 						// new
 						// ScriptTriggerActorSelected.ScriptTriggerActorSelectedAdapterFactory())
+						// .registerTypeAdapter(Object.class,
+						// new SubClassFriendlyAdapter<>())
 						.registerTypeAdapter(ScriptEvent.class,
 								new SubClassFriendlyAdapter<ScriptEvent>())
 						.registerTypeAdapter(ScriptTrigger.class,
@@ -332,6 +331,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 			retValue.addProperty(CLASSNAME, className);
 			JsonElement elem = context.serialize(src);
 			retValue.add(INSTANCE, elem);
+
 			return retValue;
 		}
 
@@ -351,7 +351,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 			}
 
 			C object = context.deserialize(jsonObject.get(INSTANCE), klass);
-			// if (object instanceof ScriptTriggerActorSelected) {
+			// if (object instanceof SpeechPart) {
 			// ScriptTriggerActorSelected scriptTriggerActorSelected =
 			// (ScriptTriggerActorSelected) object;
 			// scriptTriggerActorSelected.actor = Game.level
