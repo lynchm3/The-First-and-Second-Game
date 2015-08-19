@@ -31,7 +31,7 @@ public class AI {
 	}
 
 	public void postLoad() {
-
+		actor = Game.level.findActorFromGUID(actorGUID);
 	}
 
 	public boolean moveTowardsTargetToAttack(GameObject target) {

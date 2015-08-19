@@ -6,7 +6,7 @@ import com.marklynch.tactics.objects.unit.Actor;
 
 public class AItargetObject extends AI {
 
-	GameObject object;
+	transient GameObject object;
 
 	// For loading and saving
 	String objectGUID;
@@ -36,6 +36,7 @@ public class AItargetObject extends AI {
 
 	@Override
 	public void postLoad() {
+		super.postLoad();
 		object = Game.level.findObjectFromGUID(objectGUID);
 	}
 }

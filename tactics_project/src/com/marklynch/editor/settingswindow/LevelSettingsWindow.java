@@ -205,7 +205,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 								new SubClassFriendlyAdapter<ScriptEvent>())
 						.registerTypeAdapter(ScriptTrigger.class,
 								new SubClassFriendlyAdapter<ScriptTrigger>())
-						.create();
+						.registerTypeAdapter(AI.class,
+								new SubClassFriendlyAdapter<AI>()).create();
 
 				String json = gson.toJson(Game.level);
 				FileUtils.saveFile(json);
