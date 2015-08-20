@@ -6,4 +6,8 @@ public class Weapons {
 
 	public ArrayList<Weapon> weapons;
 
+	public Weapons() {
+		this.weapons = new ArrayList<Weapon>();
+	}
+
 }

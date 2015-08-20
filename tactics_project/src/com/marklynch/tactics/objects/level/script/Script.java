@@ -2,14 +2,21 @@ package com.marklynch.tactics.objects.level.script;
 
 import java.util.Vector;
 
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
+
 public class Script {
 
 	public Vector<ScriptEvent> scriptEvents;
 	public Vector<ScriptEvent> activeScriptEvents = new Vector<ScriptEvent>();
+	public Vector<ScriptTrigger> scriptTriggers;
 
 	public Script(Vector<ScriptEvent> scriptEvents) {
 		super();
 		this.scriptEvents = scriptEvents;
+		this.scriptTriggers = new Vector<ScriptTrigger>();
+		for (ScriptEvent scriptEvent : scriptEvents) {
+			scriptTriggers.add(scriptEvent.scriptTrigger);
+		}
 	}
 
 	public void activateScriptEvent() {

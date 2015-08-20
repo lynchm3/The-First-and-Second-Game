@@ -10,6 +10,7 @@ import org.newdawn.slick.opengl.Texture;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -19,17 +20,15 @@ import com.marklynch.utils.QuadUtils;
 public class SelectionWindow<T> {
 
 	ArrayList<T> objects;
-	ArrayList<T> selectedObjects;
+	ArrayList<T> selectedObjects = new ArrayList<T>();
 	public ArrayList<SelectionWindowButton> buttons = new ArrayList<SelectionWindowButton>();
 	public boolean multi = false;
 	public Editor editor;
 
-	public SelectionWindow(final ArrayList<T> objects,
-			final ArrayList<T> selectedObjects, boolean multi,
+	public SelectionWindow(final ArrayList<T> objects, boolean multi,
 			final Editor editor, final Object ownerOfAttribute) {
 		this.multi = multi;
 		this.objects = objects;
-		this.selectedObjects = selectedObjects;
 		this.editor = editor;
 		for (int i = 0; i < objects.size(); i++) {
 
@@ -95,6 +94,14 @@ public class SelectionWindow<T> {
 								selectedObjects
 										.add((T) selectionWindowButton.object);
 							}
+
+							Weapons weapons = new Weapons();
+							for (T selectedObject : selectedObjects) {
+								Weapon weapon = (Weapon) selectedObject;
+								weapons.weapons.add(weapon.makeCopy());
+							}
+							ownerOfAttribute.getClass().getField("weapons")
+									.set(ownerOfAttribute, weapons);
 						}
 
 					} catch (Exception e) {

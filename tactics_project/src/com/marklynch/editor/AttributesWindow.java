@@ -210,12 +210,6 @@ public class AttributesWindow {
 				public void click() {
 
 					depressButtons();
-					for (Faction faction : Game.level.factions) {
-						for (Actor actor : faction.actors) {
-							if (actor.weapons.weapons.contains(weapon))
-								actor.weapons.weapons.remove(weapon);
-						}
-					}
 					editor.weapons.remove(weapon);
 					editor.clearSelectedObject();
 					editor.weaponsSettingsWindow.updateWeaponsButtons();

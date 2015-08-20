@@ -308,13 +308,13 @@ public class Editor {
 
 		// Weapons
 		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
-		weaponsForActor0.add(weapons.get(0));
-		weaponsForActor0.add(weapons.get(1));
-		weaponsForActor0.add(weapons.get(2));
+		weaponsForActor0.add(weapons.get(0).makeCopy());
+		weaponsForActor0.add(weapons.get(1).makeCopy());
+		weaponsForActor0.add(weapons.get(2).makeCopy());
 		ArrayList<Weapon> weaponsForActor1 = new ArrayList<Weapon>();
-		weaponsForActor1.add(weapons.get(0));
-		weaponsForActor1.add(weapons.get(1));
-		weaponsForActor1.add(weapons.get(2));
+		weaponsForActor1.add(weapons.get(0).makeCopy());
+		weaponsForActor1.add(weapons.get(1).makeCopy());
+		weaponsForActor1.add(weapons.get(2).makeCopy());
 
 		// Add actor
 		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
@@ -323,7 +323,7 @@ public class Editor {
 		Game.level.factions.get(0).actors.add(actor0);
 
 		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", Game.level.squares[0][5], weaponsForActor0, 4);
+				"red1.png", Game.level.squares[0][5], weaponsForActor1, 4);
 		actor1.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(actor1);
 
@@ -675,20 +675,18 @@ public class Editor {
 			if (field.getType().isAssignableFrom(Faction.class)) {
 				// faction
 				selectionWindow = new SelectionWindow(Game.level.factions,
-						null, false, this, null);
+						false, this, null);
 			} else if (field.getType().isAssignableFrom(Color.class)) {
 				// color
-				selectionWindow = new SelectionWindow(colors, null, false,
-						this, null);
+				selectionWindow = new SelectionWindow(colors, false, this, null);
 			} else if (field.getType().isAssignableFrom(Texture.class)) {
 				// texture
-				selectionWindow = new SelectionWindow(textures, null, false,
-						this, null);
+				selectionWindow = new SelectionWindow(textures, false, this,
+						null);
 			} else if (field.getType().isAssignableFrom(Weapons.class)) {
 				// weapons
-				Actor actor = (Actor) object;
-				selectionWindow = new SelectionWindow(weapons,
-						actor.weapons.weapons, true, this, null);
+				selectionWindow = new SelectionWindow(weapons, true, this,
+						objectToEdit);
 			} else if (field.getType().isAssignableFrom(Actor.class)) {
 				System.out.println("WOOP!");
 				// actor
@@ -699,8 +697,8 @@ public class Editor {
 						System.out.println("ADD!");
 					}
 				}
-				selectionWindow = new SelectionWindow(actors, null, false,
-						this, objectToEdit);
+				selectionWindow = new SelectionWindow(actors, false, this,
+						objectToEdit);
 			} else if (field.getType().isAssignableFrom(boolean.class)) {
 				boolean b = (boolean) field.get(objectToEdit);
 				field.set(objectToEdit, !b);

@@ -54,7 +54,7 @@ public class ScriptTriggerSettingsWindow extends SettingsWindow {
 		buttons.add(addScriptTriggerButton);
 
 		int count = 0;
-		for (int i = 0; i < Game.level.script.scriptEvents.size(); i++) {
+		for (int i = 0; i < Game.level.script.scriptTriggers.size(); i++) {
 
 			final int index = count;
 
@@ -88,11 +88,8 @@ public class ScriptTriggerSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					scriptButton.down = true;
-					editor.attributesWindow = new AttributesWindow(
-							200,
-							200,
-							350,
-							Game.level.script.scriptEvents.get(index).scriptTrigger,
+					editor.attributesWindow = new AttributesWindow(200, 200,
+							350, Game.level.script.scriptTriggers.get(index),
 							editor);
 
 				}

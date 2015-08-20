@@ -21,7 +21,7 @@ public class Weapon {
 	public transient Texture imageTexture = null;
 	public String name;
 
-	public Weapon(String name, int damage, int minRange, int maxRange,
+	public Weapon(String name, float damage, float minRange, float maxRange,
 			String imagePath) {
 		super();
 		this.name = name;
@@ -109,5 +109,10 @@ public class Weapon {
 			return true;
 		}
 		return false;
+	}
+
+	public Weapon makeCopy() {
+		return new Weapon(new String(name), damage, minRange, maxRange,
+				new String(imagePath));
 	}
 }
