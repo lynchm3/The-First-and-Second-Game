@@ -4,10 +4,11 @@ import com.marklynch.Game;
 
 public class ScriptTriggerTurnStart extends ScriptTrigger {
 
-	int turn;
-	int factionIndex;
+	public int turn;
+	public int factionIndex;
 
 	public ScriptTriggerTurnStart(int turn, int factionIndex) {
+		this.name = "ScriptTriggerTurnStart";
 		this.turn = turn;
 		this.factionIndex = factionIndex;
 	}
@@ -20,5 +21,10 @@ public class ScriptTriggerTurnStart extends ScriptTrigger {
 		}
 
 		return false;
+	}
+
+	@Override
+	public ScriptTrigger makeCopy() {
+		return new ScriptTriggerTurnStart(turn, factionIndex);
 	}
 }

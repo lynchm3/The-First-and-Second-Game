@@ -3,6 +3,7 @@ package com.marklynch.tactics.objects.level.script.trigger;
 public class ScriptTrigger {
 
 	public boolean triggered = false;
+	public String name = "";
 
 	public boolean checkTrigger() {
 		return false;
@@ -10,5 +11,9 @@ public class ScriptTrigger {
 
 	public void postLoad() {
 
+	}
+
+	public ScriptTrigger makeCopy() {
+		return null;
 	}
 }

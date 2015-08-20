@@ -17,7 +17,8 @@ import com.marklynch.editor.settingswindow.DecorationsSettingsWindow;
 import com.marklynch.editor.settingswindow.FactionsSettingsWindow;
 import com.marklynch.editor.settingswindow.LevelSettingsWindow;
 import com.marklynch.editor.settingswindow.ObjectsSettingsWindow;
-import com.marklynch.editor.settingswindow.ScriptEventSettingsWindow;
+import com.marklynch.editor.settingswindow.ScriptEventsSettingsWindow;
+import com.marklynch.editor.settingswindow.ScriptTriggersSettingsWindow;
 import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
@@ -27,6 +28,7 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.AITargetObject;
@@ -73,7 +75,8 @@ public class Editor {
 	public WeaponsSettingsWindow weaponsSettingsWindow;
 	public ColorSettingsWindow colorsSettingsWindow;
 	public DecorationsSettingsWindow decorationsSettingsWindow;
-	public ScriptEventSettingsWindow scriptsEventSettingsWindow;
+	public ScriptEventsSettingsWindow scriptsEventsSettingsWindow;
+	public ScriptTriggersSettingsWindow scriptsTriggersSettingsWindow;
 
 	public GameObject selectedGameObject;
 
@@ -138,7 +141,9 @@ public class Editor {
 		weaponsSettingsWindow = new WeaponsSettingsWindow(200, this);
 		colorsSettingsWindow = new ColorSettingsWindow(200, this);
 		decorationsSettingsWindow = new DecorationsSettingsWindow(200, this);
-		scriptsEventSettingsWindow = new ScriptEventSettingsWindow(200, this);
+		scriptsEventsSettingsWindow = new ScriptEventsSettingsWindow(200, this);
+		scriptsTriggersSettingsWindow = new ScriptTriggersSettingsWindow(200,
+				this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -275,11 +280,26 @@ public class Editor {
 				depressButtonsSettingsAndDetailsButtons();
 				depressTabButtons();
 				scriptEventsTabButton.down = true;
-				settingsWindow = scriptsEventSettingsWindow;
+				settingsWindow = scriptsEventsSettingsWindow;
 				settingsWindow.update();
 			}
 		};
 		buttons.add(scriptEventsTabButton);
+
+		scriptTriggersTabButton = new LevelButton(350, 50, 160, 30, "", "",
+				"SCRIPT TRIGGERS", true, true);
+		scriptTriggersTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				scriptTriggersTabButton.down = true;
+				settingsWindow = scriptsTriggersSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		buttons.add(scriptTriggersTabButton);
 
 	}
 
@@ -365,9 +385,11 @@ public class Editor {
 		// ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
 		// speechParts1, scriptTrigger1);
 
+		Game.level.script.scriptTriggers.add(new ScriptTriggerTurnStart(1, 0));
+
 		ScriptEventSetAI scriptEventSetAIAttackDumpster = new ScriptEventSetAI(
-				false, new ScriptTriggerTurnStart(1, 0), actor1,
-				new AITargetObject(gameObject, actor1));
+				false, Game.level.script.scriptTriggers.get(0).makeCopy(),
+				actor1, new AITargetObject(gameObject, actor1));
 
 		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
 		// scriptEvents.add(scriptEventSpeech1);
@@ -441,7 +463,9 @@ public class Editor {
 						|| field.getType().isAssignableFrom(Color.class)
 						|| field.getType().isAssignableFrom(Texture.class)
 						|| field.getType().isAssignableFrom(Weapons.class)
-						|| field.getType().isAssignableFrom(Actor.class)) {
+						|| field.getType().isAssignableFrom(Actor.class)
+						|| field.getType()
+								.isAssignableFrom(ScriptTrigger.class)) {
 					selectionWindow.draw();
 				}
 
@@ -667,7 +691,6 @@ public class Editor {
 			AtributesWindowButton attributeButton) {
 		objectToEdit = object;
 		attributeToEdit = attribute;
-		System.out.println("WOOP?");
 		try {
 			Class<? extends Object> objectClass = objectToEdit.getClass();
 			Field field = objectClass.getField(attributeToEdit);
@@ -688,16 +711,18 @@ public class Editor {
 				selectionWindow = new SelectionWindow(weapons, true, this,
 						objectToEdit);
 			} else if (field.getType().isAssignableFrom(Actor.class)) {
-				System.out.println("WOOP!");
 				// actor
 				ArrayList<Actor> actors = new ArrayList<Actor>();
 				for (Faction faction : Game.level.factions) {
 					for (Actor actor : faction.actors) {
 						actors.add(actor);
-						System.out.println("ADD!");
 					}
 				}
 				selectionWindow = new SelectionWindow(actors, false, this,
+						objectToEdit);
+			} else if (field.getType().isAssignableFrom(ScriptTrigger.class)) {
+				selectionWindow = new SelectionWindow(
+						Game.level.script.scriptTriggers, false, this,
 						objectToEdit);
 			} else if (field.getType().isAssignableFrom(boolean.class)) {
 				boolean b = (boolean) field.get(objectToEdit);

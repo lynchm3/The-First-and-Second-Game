@@ -1,5 +1,6 @@
 package com.marklynch.tactics.objects.level.script;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
@@ -8,12 +9,12 @@ public class Script {
 
 	public Vector<ScriptEvent> scriptEvents;
 	public Vector<ScriptEvent> activeScriptEvents = new Vector<ScriptEvent>();
-	public Vector<ScriptTrigger> scriptTriggers;
+	public ArrayList<ScriptTrigger> scriptTriggers;
 
 	public Script(Vector<ScriptEvent> scriptEvents) {
 		super();
 		this.scriptEvents = scriptEvents;
-		this.scriptTriggers = new Vector<ScriptTrigger>();
+		this.scriptTriggers = new ArrayList<ScriptTrigger>();
 		for (ScriptEvent scriptEvent : scriptEvents) {
 			scriptTriggers.add(scriptEvent.scriptTrigger);
 		}

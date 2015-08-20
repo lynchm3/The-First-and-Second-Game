@@ -9,6 +9,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Faction;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
@@ -74,7 +75,10 @@ public class SelectionWindow<T> {
 							editor.stopEditingAttribute();
 						} else if (field.getType()
 								.isAssignableFrom(Color.class)) {// color
-							field.set(editor.objectToEdit, objects.get(index));
+
+							Color color = (Color) objects.get(index);
+
+							field.set(editor.objectToEdit, new Color(color));
 							editor.stopEditingAttribute();
 
 						} else if (field.getType().isAssignableFrom(
@@ -102,6 +106,15 @@ public class SelectionWindow<T> {
 							}
 							ownerOfAttribute.getClass().getField("weapons")
 									.set(ownerOfAttribute, weapons);
+						} else if (field.getType().isAssignableFrom(
+								ScriptTrigger.class)) {// script trigger
+							ScriptTrigger scriptTrigger = (ScriptTrigger) objects
+									.get(index);
+							ownerOfAttribute
+									.getClass()
+									.getField("scriptTrigger")
+									.set(ownerOfAttribute,
+											scriptTrigger.makeCopy());
 						}
 
 					} catch (Exception e) {

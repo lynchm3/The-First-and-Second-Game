@@ -10,6 +10,7 @@ import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.AtributesWindowButton;
@@ -55,6 +56,9 @@ public class AttributesWindow {
 	public final static String[] scriptEventSetAiFields = { "name",
 			"blockUserInput", "scriptTrigger", "actor", "ai" };
 
+	public final static String[] scriptTriggerTurnStartFields = { "name",
+			"turn", "factionIndex" };
+
 	String[] fields;
 
 	String title = "";
@@ -84,6 +88,8 @@ public class AttributesWindow {
 			fields = decorationFields;
 		} else if (object instanceof ScriptEventSetAI) {
 			fields = scriptEventSetAiFields;
+		} else if (object instanceof ScriptTriggerTurnStart) {
+			fields = scriptTriggerTurnStartFields;
 		}
 
 		// Title

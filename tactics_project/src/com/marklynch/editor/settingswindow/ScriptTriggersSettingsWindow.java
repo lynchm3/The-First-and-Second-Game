@@ -6,9 +6,9 @@ import com.marklynch.editor.Editor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
-public class ScriptTriggerSettingsWindow extends SettingsWindow {
+public class ScriptTriggersSettingsWindow extends SettingsWindow {
 
-	public ScriptTriggerSettingsWindow(float width, final Editor editor) {
+	public ScriptTriggersSettingsWindow(float width, final Editor editor) {
 		super(width, editor);
 		updateScriptsButtons();
 	}

@@ -8,6 +8,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
@@ -212,6 +213,15 @@ public class TextUtils {
 
 				float textWidth = Game.font.getWidth(scriptEvent.name);
 				Game.font.drawText(Game.activeBatch, scriptEvent.name, posX
+						+ offsetX, posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof ScriptTrigger) {
+
+				ScriptTrigger scriptTrigger = (ScriptTrigger) content;
+
+				float textWidth = Game.font.getWidth(scriptTrigger.name);
+				Game.font.drawText(Game.activeBatch, scriptTrigger.name, posX
 						+ offsetX, posY + offsetY);
 				offsetX += textWidth;
 
