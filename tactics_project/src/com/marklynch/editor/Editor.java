@@ -89,7 +89,7 @@ public class Editor {
 	public ArrayList<Texture> textures = new ArrayList<Texture>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 
-	public SelectionWindow selectionWindow;
+	public AttributeSelectionWindow attributeSelectionWindow;
 
 	public enum STATE {
 		DEFAULT,
@@ -102,6 +102,8 @@ public class Editor {
 	public STATE state = STATE.DEFAULT;
 
 	public ArrayList<Color> colors = new ArrayList<Color>();
+
+	public ClassSelectionWindow classSelectionWindow;
 
 	public Editor() {
 
@@ -449,29 +451,37 @@ public class Editor {
 
 		// Depending on what we're editing, might wnat to show something
 		// different
-		if (objectToEdit != null) {
-			try {
-				Class<? extends Object> objectClass = objectToEdit.getClass();
-				Field field = objectClass.getField(attributeToEdit);
+		// if (objectToEdit != null) {
+		// try {
+		// Class<? extends Object> objectClass = objectToEdit.getClass();
+		// Field field = objectClass.getField(attributeToEdit);
+		//
+		// if (field.getType().isAssignableFrom(int.class)
+		// || field.getType().isAssignableFrom(float.class)) {
+		// // int or float
+		// } else if (field.getType().isAssignableFrom(String.class)) {
+		// // string
+		// } else if (field.getType().isAssignableFrom(Faction.class)
+		// || field.getType().isAssignableFrom(Color.class)
+		// || field.getType().isAssignableFrom(Texture.class)
+		// || field.getType().isAssignableFrom(Weapons.class)
+		// || field.getType().isAssignableFrom(Actor.class)
+		// || field.getType()
+		// .isAssignableFrom(ScriptTrigger.class)) {
+		// selectionWindow.draw();
+		// }
+		//
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// }
 
-				if (field.getType().isAssignableFrom(int.class)
-						|| field.getType().isAssignableFrom(float.class)) {
-					// int or float
-				} else if (field.getType().isAssignableFrom(String.class)) {
-					// string
-				} else if (field.getType().isAssignableFrom(Faction.class)
-						|| field.getType().isAssignableFrom(Color.class)
-						|| field.getType().isAssignableFrom(Texture.class)
-						|| field.getType().isAssignableFrom(Weapons.class)
-						|| field.getType().isAssignableFrom(Actor.class)
-						|| field.getType()
-								.isAssignableFrom(ScriptTrigger.class)) {
-					selectionWindow.draw();
-				}
+		if (attributeSelectionWindow != null) {
+			attributeSelectionWindow.draw();
+		}
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if (classSelectionWindow != null) {
+			classSelectionWindow.draw();
 		}
 
 		if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
@@ -488,24 +498,17 @@ public class Editor {
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY) {
 
-		if (objectToEdit != null) {
-			try {
-				Class<? extends Object> objectClass = objectToEdit.getClass();
-				Field field = objectClass.getField(attributeToEdit);
+		if (attributeSelectionWindow != null) {
+			return attributeSelectionWindow.getButtonFromMousePosition(mouseX,
+					mouseY);
 
-				if (field.getType().isAssignableFrom(Faction.class)
-						|| field.getType().isAssignableFrom(Color.class)
-						|| field.getType().isAssignableFrom(Texture.class)
-						|| field.getType().isAssignableFrom(Weapons.class)
-						|| field.getType().isAssignableFrom(Actor.class)) {
-					// faction, color, texture
-					return selectionWindow.getButtonFromMousePosition(mouseX,
-							mouseY);
-				}
+		}
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if (classSelectionWindow != null) {
+			// faction, color, texture
+			return classSelectionWindow.getButtonFromMousePosition(mouseX,
+					mouseY);
+
 		}
 
 		for (Button button : this.buttons) {
@@ -697,19 +700,20 @@ public class Editor {
 
 			if (field.getType().isAssignableFrom(Faction.class)) {
 				// faction
-				selectionWindow = new SelectionWindow(Game.level.factions,
-						false, this, null);
+				attributeSelectionWindow = new AttributeSelectionWindow(
+						Game.level.factions, false, this, null);
 			} else if (field.getType().isAssignableFrom(Color.class)) {
 				// color
-				selectionWindow = new SelectionWindow(colors, false, this, null);
+				attributeSelectionWindow = new AttributeSelectionWindow(colors,
+						false, this, null);
 			} else if (field.getType().isAssignableFrom(Texture.class)) {
 				// texture
-				selectionWindow = new SelectionWindow(textures, false, this,
-						null);
+				attributeSelectionWindow = new AttributeSelectionWindow(
+						textures, false, this, null);
 			} else if (field.getType().isAssignableFrom(Weapons.class)) {
 				// weapons
-				selectionWindow = new SelectionWindow(weapons, true, this,
-						objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(
+						weapons, true, this, objectToEdit);
 			} else if (field.getType().isAssignableFrom(Actor.class)) {
 				// actor
 				ArrayList<Actor> actors = new ArrayList<Actor>();
@@ -718,10 +722,10 @@ public class Editor {
 						actors.add(actor);
 					}
 				}
-				selectionWindow = new SelectionWindow(actors, false, this,
-						objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(actors,
+						false, this, objectToEdit);
 			} else if (field.getType().isAssignableFrom(ScriptTrigger.class)) {
-				selectionWindow = new SelectionWindow(
+				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.script.scriptTriggers, false, this,
 						objectToEdit);
 			} else if (field.getType().isAssignableFrom(boolean.class)) {
@@ -739,6 +743,8 @@ public class Editor {
 	}
 
 	public void clearSelectedObject() {
+		attributeSelectionWindow = null;
+		classSelectionWindow = null;
 		this.selectedGameObject = null;
 		this.attributesWindow = null;
 		objectToEdit = null;
@@ -751,6 +757,8 @@ public class Editor {
 
 	public void stopEditingAttribute() {
 
+		attributeSelectionWindow = null;
+		classSelectionWindow = null;
 		objectToEdit = null;
 		attributeToEdit = null;
 		this.textEntered = "";
@@ -758,6 +766,8 @@ public class Editor {
 	}
 
 	public void rightClick() {
+		attributeSelectionWindow = null;
+		classSelectionWindow = null;
 		depressButtonsSettingsAndDetailsButtons();
 		clearSelectedObject();
 		state = STATE.DEFAULT;

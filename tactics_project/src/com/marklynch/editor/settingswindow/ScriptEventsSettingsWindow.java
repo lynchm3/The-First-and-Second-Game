@@ -1,8 +1,17 @@
 package com.marklynch.editor.settingswindow;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
+import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
+import com.marklynch.tactics.objects.level.script.ScriptEvent;
+import com.marklynch.tactics.objects.level.script.ScriptEventEndLevel;
+import com.marklynch.tactics.objects.level.script.ScriptEventGroup;
+import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
+import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
+import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -42,13 +51,15 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				// Weapon newWeapon = new Weapon("Weapon" +
-				// editor.weapons.size(),
-				// 3, 1, 1, "a3r1.png");
-				// editor.weapons.add(newWeapon);
-				// updateWeaponsButtons();
-				// editor.clearSelectedObject();
-				// editor.depressButtonsSettingsAndDetailsButtons();
+				ArrayList<Class> classes = new ArrayList<Class>();
+				classes.add(ScriptEventEndLevel.class);
+				classes.add(ScriptEventGroup.class);
+				classes.add(ScriptEventInlineSpeech.class);
+				classes.add(ScriptEventSetAI.class);
+				classes.add(ScriptEventSpeech.class);
+
+				editor.classSelectionWindow = new ClassSelectionWindow(classes,
+						editor, ScriptEvent.class);
 			}
 		};
 		buttons.add(addScriptButton);

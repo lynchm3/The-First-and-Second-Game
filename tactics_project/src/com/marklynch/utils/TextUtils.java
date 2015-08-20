@@ -23,6 +23,9 @@ public class TextUtils {
 	public static void printTextWithImages(Object[] contents, float posX,
 			float posY, float maxWidth) {
 
+		if (contents == null)
+			return;
+
 		float offsetX = 0;
 		float offsetY = 0;
 		Game.activeBatch.setColor(Color.WHITE);
@@ -223,6 +226,15 @@ public class TextUtils {
 				float textWidth = Game.font.getWidth(scriptTrigger.name);
 				Game.font.drawText(Game.activeBatch, scriptTrigger.name, posX
 						+ offsetX, posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof Class) {
+
+				Class klass = (Class) content;
+
+				float textWidth = Game.font.getWidth(klass.getSimpleName());
+				Game.font.drawText(Game.activeBatch, klass.getSimpleName(),
+						posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			}

@@ -5,6 +5,9 @@ public class ScriptTrigger {
 	public boolean triggered = false;
 	public String name = "";
 
+	public ScriptTrigger() {
+	}
+
 	public boolean checkTrigger() {
 		return false;
 	}

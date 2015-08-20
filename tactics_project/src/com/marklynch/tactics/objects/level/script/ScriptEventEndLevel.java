@@ -12,9 +12,14 @@ public class ScriptEventEndLevel extends ScriptEvent {
 	Object[] text;
 	boolean completed = false;
 
+	public ScriptEventEndLevel() {
+		name = "ScriptEventEndLevel";
+	}
+
 	public ScriptEventEndLevel(boolean blockUserInput,
 			ScriptTrigger scriptTrigger, Object[] text) {
 		super(blockUserInput, scriptTrigger);
+		name = "ScriptEventEndLevel";
 		this.text = text;
 	}
 

@@ -18,7 +18,7 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
 import com.marklynch.utils.QuadUtils;
 
-public class SelectionWindow<T> {
+public class AttributeSelectionWindow<T> {
 
 	ArrayList<T> objects;
 	ArrayList<T> selectedObjects = new ArrayList<T>();
@@ -26,7 +26,7 @@ public class SelectionWindow<T> {
 	public boolean multi = false;
 	public Editor editor;
 
-	public SelectionWindow(final ArrayList<T> objects, boolean multi,
+	public AttributeSelectionWindow(final ArrayList<T> objects, boolean multi,
 			final Editor editor, final Object ownerOfAttribute) {
 		this.multi = multi;
 		this.objects = objects;
@@ -115,6 +115,7 @@ public class SelectionWindow<T> {
 									.getField("scriptTrigger")
 									.set(ownerOfAttribute,
 											scriptTrigger.makeCopy());
+							editor.stopEditingAttribute();
 						}
 
 					} catch (Exception e) {

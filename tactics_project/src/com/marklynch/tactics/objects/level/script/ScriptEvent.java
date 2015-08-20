@@ -10,6 +10,9 @@ public class ScriptEvent {
 
 	public ScriptTrigger scriptTrigger;
 
+	public ScriptEvent() {
+	}
+
 	public ScriptEvent(boolean blockUserInput, ScriptTrigger scriptTrigger) {
 		super();
 		this.blockUserInput = blockUserInput;
