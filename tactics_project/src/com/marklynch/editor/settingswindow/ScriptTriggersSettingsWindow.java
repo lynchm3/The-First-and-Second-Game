@@ -1,8 +1,21 @@
 package com.marklynch.editor.settingswindow;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
+import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorMoves;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerDestructionOfSpecificGameObject;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerFactionSize;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerScriptEventEnded;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerSpecficActorOccupiesSquare;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerSquareOccupied;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerSquareUnoccupied;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -42,13 +55,19 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				// Weapon newWeapon = new Weapon("Weapon" +
-				// editor.weapons.size(),
-				// 3, 1, 1, "a3r1.png");
-				// editor.weapons.add(newWeapon);
-				// updateWeaponsButtons();
-				// editor.clearSelectedObject();
-				// editor.depressButtonsSettingsAndDetailsButtons();
+				ArrayList<Class> classes = new ArrayList<Class>();
+				classes.add(ScriptTriggerActorMoves.class);
+				classes.add(ScriptTriggerActorSelected.class);
+				classes.add(ScriptTriggerDestructionOfSpecificGameObject.class);
+				classes.add(ScriptTriggerFactionSize.class);
+				classes.add(ScriptTriggerScriptEventEnded.class);
+				classes.add(ScriptTriggerSpecficActorOccupiesSquare.class);
+				classes.add(ScriptTriggerSquareOccupied.class);
+				classes.add(ScriptTriggerSquareUnoccupied.class);
+				classes.add(ScriptTriggerTurnStart.class);
+
+				editor.classSelectionWindow = new ClassSelectionWindow(classes,
+						editor, ScriptTrigger.class);
 			}
 		};
 		buttons.add(addScriptTriggerButton);
