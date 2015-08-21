@@ -4,8 +4,15 @@ import com.marklynch.Game;
 
 public class ScriptTriggerTurnStart extends ScriptTrigger {
 
+	public final static String[] editableAttributes = { "name", "turn",
+			"factionIndex" };
+
 	public int turn;
 	public int factionIndex;
+
+	public ScriptTriggerTurnStart() {
+		this.name = this.getClass().getSimpleName();
+	}
 
 	public ScriptTriggerTurnStart(int turn, int factionIndex) {
 		this.name = "ScriptTriggerTurnStart";

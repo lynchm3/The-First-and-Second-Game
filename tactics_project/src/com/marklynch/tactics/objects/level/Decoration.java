@@ -7,6 +7,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class Decoration {
 
+	public final static String[] editableAttributes = { "name", "x", "y",
+			"width", "height", "imageTexture", "background" };
 	public String name;
 	public String imagePath;
 	public transient Texture imageTexture = null;

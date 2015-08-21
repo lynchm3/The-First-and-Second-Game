@@ -6,6 +6,7 @@ public class ScriptTrigger {
 	public String name = "";
 
 	public ScriptTrigger() {
+		name = "ScriptTrigger";
 	}
 
 	public boolean checkTrigger() {

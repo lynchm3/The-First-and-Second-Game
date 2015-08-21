@@ -6,6 +6,10 @@ public class ScriptTriggerSquareOccupied extends ScriptTrigger {
 
 	Square square;
 
+	public ScriptTriggerSquareOccupied() {
+		this.name = this.getClass().getSimpleName();
+	}
+
 	public ScriptTriggerSquareOccupied(Square square) {
 		this.square = square;
 	}

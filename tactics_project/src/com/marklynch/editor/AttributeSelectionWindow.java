@@ -8,9 +8,11 @@ import mdesl.graphics.Color;
 import org.newdawn.slick.opengl.Texture;
 
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.unit.ai.AI;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.Button;
@@ -65,13 +67,37 @@ public class AttributeSelectionWindow<T> {
 							faction.actors.add(actor);
 							actor.faction = faction;
 							editor.stopEditingAttribute();
+						} else if (field.getType().isAssignableFrom(
+								GameObject.class)) {
+							GameObject gameObject = (GameObject) objects
+									.get(index);
+							field.set(ownerOfAttribute, gameObject);
+							try {
+								Field guidField = objectClass
+										.getField(editor.attributeToEdit
+												+ "GUID");
+								if (guidField != null) {
+									guidField.set(ownerOfAttribute,
+											gameObject.guid);
+								}
+							} catch (Exception e) {
+
+							}
+							editor.stopEditingAttribute();
 						} else if (field.getType()
 								.isAssignableFrom(Actor.class)) {
 							Actor actor = (Actor) objects.get(index);
-							ownerOfAttribute.getClass().getField("actor")
-									.set(ownerOfAttribute, actor);
-							ownerOfAttribute.getClass().getField("actorGUID")
-									.set(ownerOfAttribute, actor.guid);
+							field.set(ownerOfAttribute, actor);
+							try {
+								Field guidField = objectClass
+										.getField(editor.attributeToEdit
+												+ "GUID");
+								if (guidField != null) {
+									guidField.set(ownerOfAttribute, actor.guid);
+								}
+							} catch (Exception e) {
+
+							}
 							editor.stopEditingAttribute();
 						} else if (field.getType()
 								.isAssignableFrom(Color.class)) {// color
@@ -115,6 +141,12 @@ public class AttributeSelectionWindow<T> {
 									.getField("scriptTrigger")
 									.set(ownerOfAttribute,
 											scriptTrigger.makeCopy());
+							editor.stopEditingAttribute();
+						} else if (field.getType().isAssignableFrom(AI.class)) {// script
+																				// trigger
+							AI ai = (AI) objects.get(index);
+							ownerOfAttribute.getClass().getField("ai")
+									.set(ownerOfAttribute, ai.makeCopy());
 							editor.stopEditingAttribute();
 						}
 

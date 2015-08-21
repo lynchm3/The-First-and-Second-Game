@@ -6,6 +6,10 @@ public class ScriptTriggerActorMoves extends ScriptTrigger {
 
 	Actor actor;
 
+	public ScriptTriggerActorMoves() {
+		name = "ScriptTriggerActorMoves";
+	}
+
 	public ScriptTriggerActorMoves(Actor actor) {
 		this.actor = actor;
 	}

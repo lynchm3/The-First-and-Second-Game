@@ -24,6 +24,9 @@ import com.marklynch.utils.TextureUtils;
 
 public class GameObject {
 
+	public final static String[] editableAttributes = { "name", "imageTexture",
+			"weapons", "strength", "dexterity", "intelligence", "endurance",
+			"totalHealth", "remainingHealth" };
 	public String guid = UUID.randomUUID().toString();
 
 	public String name = "";

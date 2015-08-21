@@ -10,6 +10,8 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 
 public class Weapon {
+	public final static String[] editableAttributes = { "name", "imageTexture",
+			"damage", "minRange", "maxRange" };
 
 	// attributes
 	public float damage = 0;

@@ -14,13 +14,10 @@ import com.marklynch.tactics.objects.weapons.Weapon;
 
 public class AI {
 
-	public transient Actor actor;
-	public String actorGUID = null;
-	public CharSequence name = "AI";
+	public String name = "AI";
 
-	public AI(Actor actor) {
-		this.actor = actor;
-		actorGUID = actor.guid;
+	public AI() {
+		name = this.getClass().getSimpleName();
 	}
 
 	public boolean move() {
@@ -32,7 +29,6 @@ public class AI {
 	}
 
 	public void postLoad() {
-		actor = Game.level.findActorFromGUID(actorGUID);
 	}
 
 	public boolean moveTowardsTargetToAttack(GameObject target) {
@@ -51,7 +47,7 @@ public class AI {
 		// get as close to the point as possible
 		// with as few moves as possible
 
-		actor.calculatePathToAllSquares(Game.level.squares);
+		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
 		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
 		// idealWeaponDistances.add(2);
@@ -69,7 +65,7 @@ public class AI {
 		Square squareToMoveTo = calculateSquareToMoveToForTarget(target);
 
 		if (squareToMoveTo != null) {
-			actor.moveTo(squareToMoveTo);
+			Game.level.activeActor.moveTo(squareToMoveTo);
 			return true;
 		} else {
 			return false;
@@ -92,12 +88,13 @@ public class AI {
 		// weapon distance, not travel distance)
 
 		// Calculate paths to all squares
-		actor.calculatePathToAllSquares(Game.level.squares);
+		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
 		// 1. create list of enemies
 		for (Faction faction : Game.level.factions) {
-			if (faction != actor.faction
-					&& actor.faction.relationships.get(faction) < 0) {
+			if (faction != Game.level.activeActor.faction
+					&& Game.level.activeActor.faction.relationships
+							.get(faction) < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
 					if (square != null && square.distanceToSquare < costToBest) {
@@ -145,12 +142,13 @@ public class AI {
 		// weapon distance, not travel distance)
 
 		// Calculate paths to all squares
-		actor.calculatePathToAllSquares(Game.level.squares);
+		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
 		// 1. create list of enemies reachable within lowest possible turns
 		for (Faction faction : Game.level.factions) {
-			if (faction != actor.faction
-					&& actor.faction.relationships.get(faction) < 0) {
+			if (faction != Game.level.activeActor.faction
+					&& Game.level.activeActor.faction.relationships
+							.get(faction) < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
 					if (square != null) {
@@ -233,7 +231,7 @@ public class AI {
 			// if There's multiple reachable then safest out of them is best :P
 			// OR somewhere u can attack someone from is the best... i dunno :D
 			for (Square targetSquare : targetSquares) {
-				Path currentActorPathToThisSquare = actor.paths
+				Path currentActorPathToThisSquare = Game.level.activeActor.paths
 						.get(targetSquare);
 				if (currentActorPathToThisSquare != null
 						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
@@ -255,11 +253,12 @@ public class AI {
 		Square squareToMoveTo = null;
 		// squareToMoveTo = pathToSquare.squares.lastElement(); this line works,
 		// but allows CPU to cheat
-		if (pathToSquare.travelCost <= actor.travelDistance) {
+		if (pathToSquare.travelCost <= Game.level.activeActor.travelDistance) {
 			squareToMoveTo = pathToSquare.squares.lastElement();
 		} else {
 			for (int i = pathToSquare.squares.size() - 1; i >= 0; i--) {
-				if (actor.paths.get(pathToSquare.squares.get(i)).travelCost <= actor.travelDistance) {
+				if (Game.level.activeActor.paths.get(pathToSquare.squares
+						.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
 					squareToMoveTo = pathToSquare.squares.get(i);
 					break;
 				}
@@ -358,6 +357,10 @@ public class AI {
 			return attackRandomEnemy();
 		}
 
+	}
+
+	public AITargetObject makeCopy() {
+		return null;
 	}
 
 }

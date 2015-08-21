@@ -15,8 +15,15 @@ import com.marklynch.utils.TextureUtils;
 
 public class ScriptEventSpeech extends ScriptEvent {
 
+	public final static String[] editableAttributes = { "name",
+			"blockUserInput", "scriptTrigger", "speechParts" };
+
 	public Vector<SpeechPart> speechParts;
 	public int speechIndex = 0;
+
+	public ScriptEventSpeech() {
+		name = "ScriptEventSpeech";
+	}
 
 	public ScriptEventSpeech(boolean blockUserInput,
 			Vector<SpeechPart> speechParts, ScriptTrigger scriptTrigger) {
@@ -117,5 +124,10 @@ public class ScriptEventSpeech extends ScriptEvent {
 			// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
 			TextUtils.printTextWithImages(text, textX1, posY, width);
 		}
+	}
+
+	@Override
+	public void postLoad() {
+		super.postLoad();
 	}
 }

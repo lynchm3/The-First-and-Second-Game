@@ -7,6 +7,9 @@ import com.marklynch.tactics.objects.unit.ai.AI;
 
 public class ScriptEventSetAI extends ScriptEvent {
 
+	public final static String[] editableAttributes = { "name",
+			"blockUserInput", "scriptTrigger", "actor", "ai" };
+
 	public transient Actor actor;
 	public AI ai;
 
@@ -14,6 +17,10 @@ public class ScriptEventSetAI extends ScriptEvent {
 
 	// for save + load
 	public String actorGUID;
+
+	public ScriptEventSetAI() {
+		name = "ScriptEventSetAI";
+	}
 
 	public ScriptEventSetAI(boolean blockUserInput,
 			ScriptTrigger scriptTrigger, Actor actor, AI ai) {

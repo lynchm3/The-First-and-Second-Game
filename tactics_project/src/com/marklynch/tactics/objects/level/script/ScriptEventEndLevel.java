@@ -9,6 +9,9 @@ import com.marklynch.utils.TextUtils;
 
 public class ScriptEventEndLevel extends ScriptEvent {
 
+	public final static String[] editableAttributes = { "name",
+			"blockUserInput", "scriptTrigger", "text" };
+
 	Object[] text;
 	boolean completed = false;
 
@@ -55,5 +58,10 @@ public class ScriptEventEndLevel extends ScriptEvent {
 
 		// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
 		TextUtils.printTextWithImages(text, textX1, posY, width);
+	}
+
+	@Override
+	public void postLoad() {
+		super.postLoad();
 	}
 }

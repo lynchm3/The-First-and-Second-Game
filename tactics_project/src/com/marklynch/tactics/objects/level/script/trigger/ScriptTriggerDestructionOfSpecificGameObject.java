@@ -6,6 +6,10 @@ public class ScriptTriggerDestructionOfSpecificGameObject extends ScriptTrigger 
 
 	Actor actor;
 
+	public ScriptTriggerDestructionOfSpecificGameObject() {
+		this.name = this.getClass().getSimpleName();
+	}
+
 	public ScriptTriggerDestructionOfSpecificGameObject(Actor actor) {
 		this.actor = actor;
 

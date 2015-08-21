@@ -7,6 +7,10 @@ public class ScriptTriggerFactionSize extends ScriptTrigger {
 	Faction faction;
 	int size;
 
+	public ScriptTriggerFactionSize() {
+		this.name = this.getClass().getSimpleName();
+	}
+
 	public ScriptTriggerFactionSize(Faction faction, int size) {
 		this.faction = faction;
 		this.size = size;

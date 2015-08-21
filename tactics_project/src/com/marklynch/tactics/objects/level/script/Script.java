@@ -74,6 +74,9 @@ public class Script {
 		for (ScriptEvent scriptEvent : scriptEvents) {
 			scriptEvent.postLoad();
 		}
+		for (ScriptTrigger scriptTrigger : scriptTriggers) {
+			scriptTrigger.postLoad();
+		}
 
 	}
 }

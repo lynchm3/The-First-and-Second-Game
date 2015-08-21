@@ -18,6 +18,7 @@ import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.ui.ActivityLog;
 
 public class Faction {
+	public final static String[] editableAttributes = { "name", "color" };
 
 	enum AI_MODE {
 		TARGET_SPECIFIC_OBJECT,

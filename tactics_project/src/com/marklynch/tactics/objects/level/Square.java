@@ -16,6 +16,8 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Square {
+	public final static String[] editableAttributes = { "elevation",
+			"travelCost" };
 
 	public final int x;
 	public final int y;

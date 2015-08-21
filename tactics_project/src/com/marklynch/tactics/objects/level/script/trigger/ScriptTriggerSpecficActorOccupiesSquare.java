@@ -8,6 +8,10 @@ public class ScriptTriggerSpecficActorOccupiesSquare extends ScriptTrigger {
 	Actor actor;
 	Square square;
 
+	public ScriptTriggerSpecficActorOccupiesSquare() {
+		this.name = this.getClass().getSimpleName();
+	}
+
 	public ScriptTriggerSpecficActorOccupiesSquare(Actor actor, Square square) {
 		this.actor = actor;
 		this.square = square;

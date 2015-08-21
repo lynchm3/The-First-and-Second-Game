@@ -22,6 +22,10 @@ import com.marklynch.utils.TextureUtils;
 
 public class Actor extends GameObject {
 
+	public final static String[] editableAttributes = { "name", "imageTexture",
+			"faction", "weapons", "strength", "dexterity", "intelligence",
+			"endurance", "totalHealth", "remainingHealth" };
+
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT
 	}
@@ -48,7 +52,7 @@ public class Actor extends GameObject {
 	public transient GameObject hoverFightPreviewDefender = null;
 	public transient Vector<Fight> hoverFightPreviewFights = new Vector<Fight>();
 
-	public transient AI ai = new AI(this);
+	public transient AI ai = new AI();
 
 	public Actor(String name, String title, int actorLevel, int health,
 			int strength, int dexterity, int intelligence, int endurance,
@@ -99,7 +103,7 @@ public class Actor extends GameObject {
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
-		ai = new AI(this);
+		ai = new AI();
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {

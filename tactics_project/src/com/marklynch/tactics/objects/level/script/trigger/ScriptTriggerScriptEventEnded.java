@@ -6,6 +6,10 @@ public class ScriptTriggerScriptEventEnded extends ScriptTrigger {
 
 	ScriptEvent scriptEvent;
 
+	public ScriptTriggerScriptEventEnded() {
+		this.name = this.getClass().getSimpleName();
+	}
+
 	public ScriptTriggerScriptEventEnded(ScriptEvent scriptEvent) {
 		this.scriptEvent = scriptEvent;
 	}

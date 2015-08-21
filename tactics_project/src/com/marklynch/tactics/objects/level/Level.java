@@ -23,6 +23,7 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerScriptEve
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
+import com.marklynch.tactics.objects.unit.ai.AI;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.Dialog;
@@ -61,6 +62,7 @@ public class Level {
 	public transient boolean ended = false;
 
 	public Script script;
+	public ArrayList<AI> ais = new ArrayList<AI>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -183,6 +185,10 @@ public class Level {
 		}
 
 		script.postLoad();
+
+		for (AI ai : ais) {
+			ai.postLoad();
+		}
 
 		showTurnNotification = true;
 		waitingForPlayerClick = true;

@@ -6,8 +6,15 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 
 public class ScriptEventGroup extends ScriptEvent {
 
+	public final static String[] editableAttributes = { "name",
+			"blockUserInput", "scriptTrigger", "scriptEvents" };
+
 	Vector<ScriptEvent> scriptEvents;
 	int scriptEventIndex = 0;
+
+	public ScriptEventGroup() {
+		name = "ScriptEventGroup";
+	}
 
 	public ScriptEventGroup(boolean blockUserInput,
 			ScriptTrigger scriptTrigger, Vector<ScriptEvent> scriptEvents) {
@@ -56,5 +63,10 @@ public class ScriptEventGroup extends ScriptEvent {
 		if (scriptEventIndex >= scriptEvents.size())
 			return;
 		scriptEvents.get(scriptEventIndex).draw();
+	}
+
+	@Override
+	public void postLoad() {
+		super.postLoad();
 	}
 }

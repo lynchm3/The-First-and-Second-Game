@@ -10,6 +10,10 @@ public class ScriptTriggerActorSelected extends ScriptTrigger {
 	// for saving and loading
 	public String actorGUID = null;
 
+	public ScriptTriggerActorSelected() {
+		this.name = this.getClass().getSimpleName();
+	}
+
 	public ScriptTriggerActorSelected(Actor actor) {
 		this.actor = actor;
 	}

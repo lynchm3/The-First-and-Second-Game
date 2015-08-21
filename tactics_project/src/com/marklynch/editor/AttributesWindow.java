@@ -9,9 +9,6 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
-import com.marklynch.tactics.objects.level.script.ScriptEventEndLevel;
-import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.AtributesWindowButton;
@@ -23,6 +20,8 @@ import com.marklynch.utils.TextUtils;
 
 public class AttributesWindow {
 
+	public final static String[] colorFields = { "r", "g", "b", "a" };
+
 	public float x;
 	public float width;
 
@@ -33,35 +32,6 @@ public class AttributesWindow {
 	public Vector<AtributesWindowButton> buttons = new Vector<AtributesWindowButton>();
 
 	public Editor editor;
-
-	public final static String[] gameObjectFields = { "name", "imageTexture",
-			"weapons", "strength", "dexterity", "intelligence", "endurance",
-			"totalHealth", "remainingHealth" };
-
-	public final static String[] actorFields = { "name", "imageTexture",
-			"faction", "weapons", "strength", "dexterity", "intelligence",
-			"endurance", "totalHealth", "remainingHealth" };
-
-	public final static String[] squareFields = { "elevation", "travelCost" };
-
-	public final static String[] factionFields = { "name", "color" };
-
-	public final static String[] weaponFields = { "name", "imageTexture",
-			"damage", "minRange", "maxRange" };
-
-	public final static String[] colorFields = { "r", "g", "b", "a" };
-
-	public final static String[] decorationFields = { "name", "x", "y",
-			"width", "height", "imageTexture", "background" };
-
-	public final static String[] scriptEventSetAiFields = { "name",
-			"blockUserInput", "scriptTrigger", "actor", "ai" };
-
-	public final static String[] scriptEventEndLevelFields = { "name",
-			"blockUserInput", "scriptTrigger", "text" };
-
-	public final static String[] scriptTriggerTurnStartFields = { "name",
-			"turn", "factionIndex" };
 
 	String[] fields;
 
@@ -76,27 +46,35 @@ public class AttributesWindow {
 		this.object = object;
 		this.editor = editor;
 
-		if (object instanceof Square) {
-			fields = squareFields;
-		} else if (object instanceof Actor) {
-			fields = actorFields;
-		} else if (object instanceof GameObject) {
-			fields = gameObjectFields;
-		} else if (object instanceof Faction) {
-			fields = factionFields;
-		} else if (object instanceof Weapon) {
-			fields = weaponFields;
-		} else if (object instanceof Color) {
+		if (object instanceof Color) {
 			fields = colorFields;
-		} else if (object instanceof Decoration) {
-			fields = decorationFields;
-		} else if (object instanceof ScriptEventSetAI) {
-			fields = scriptEventSetAiFields;
-		} else if (object instanceof ScriptTriggerTurnStart) {
-			fields = scriptTriggerTurnStartFields;
-		} else if (object instanceof ScriptEventEndLevel) {
-			fields = scriptEventEndLevelFields;
+		} else {
+			try {
+				fields = (String[]) object.getClass()
+						.getField("editableAttributes").get(object);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		// if (object instanceof Square) {
+		// } else if (object instanceof Actor) {
+		// fields = actorFields;
+		// } else if (object instanceof GameObject) {
+		// fields = gameObjectFields;
+		// } else if (object instanceof Faction) {
+		// fields = factionFields;
+		// } else if (object instanceof Weapon) {
+		// fields = weaponFields;
+		// } else
+		// } else if (object instanceof Decoration) {
+		// fields = decorationFields;
+		// } else if (object instanceof ScriptEventSetAI) {
+		// fields = scriptEventSetAiFields;
+		// } else if (object instanceof ScriptTriggerTurnStart) {
+		// fields = scriptTriggerTurnStartFields;
+		// } else if (object instanceof ScriptEventEndLevel) {
+		// fields = scriptEventEndLevelFields;
+		// }
 
 		// Title
 		if (object instanceof Actor) {

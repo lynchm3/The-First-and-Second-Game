@@ -31,6 +31,7 @@ import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.unit.ai.AI;
 import com.marklynch.tactics.objects.unit.ai.AITargetObject;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
@@ -88,7 +89,6 @@ public class Editor {
 
 	public ArrayList<Texture> textures = new ArrayList<Texture>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
-
 	public AttributeSelectionWindow attributeSelectionWindow;
 
 	public enum STATE {
@@ -388,10 +388,14 @@ public class Editor {
 		// speechParts1, scriptTrigger1);
 
 		Game.level.script.scriptTriggers.add(new ScriptTriggerTurnStart(1, 0));
+		Game.level.ais.add(new AITargetObject(gameObject));
+		Game.level.ais.get(0).name = "attackDumpster";
+		Game.level.ais.add(new AITargetObject(actor0));
+		Game.level.ais.get(1).name = "attackPlayer";
 
 		ScriptEventSetAI scriptEventSetAIAttackDumpster = new ScriptEventSetAI(
 				false, Game.level.script.scriptTriggers.get(0).makeCopy(),
-				actor1, new AITargetObject(gameObject, actor1));
+				actor1, Game.level.ais.get(0).makeCopy());
 
 		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
 		// scriptEvents.add(scriptEventSpeech1);
@@ -728,6 +732,9 @@ public class Editor {
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.script.scriptTriggers, false, this,
 						objectToEdit);
+			} else if (field.getType().isAssignableFrom(AI.class)) {
+				attributeSelectionWindow = new AttributeSelectionWindow(
+						Game.level.ais, false, this, objectToEdit);
 			} else if (field.getType().isAssignableFrom(boolean.class)) {
 				boolean b = (boolean) field.get(objectToEdit);
 				field.set(objectToEdit, !b);
