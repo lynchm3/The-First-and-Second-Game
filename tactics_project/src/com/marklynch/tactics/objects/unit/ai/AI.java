@@ -16,6 +16,7 @@ public class AI {
 
 	public transient Actor actor;
 	public String actorGUID = null;
+	public CharSequence name = "AI";
 
 	public AI(Actor actor) {
 		this.actor = actor;

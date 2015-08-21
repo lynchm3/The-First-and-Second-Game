@@ -10,6 +10,7 @@ import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.unit.ai.AI;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
 
@@ -235,6 +236,15 @@ public class TextUtils {
 				float textWidth = Game.font.getWidth(klass.getSimpleName());
 				Game.font.drawText(Game.activeBatch, klass.getSimpleName(),
 						posX + offsetX, posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof AI) {
+
+				AI ai = (AI) content;
+
+				float textWidth = Game.font.getWidth(ai.name);
+				Game.font.drawText(Game.activeBatch, ai.name, posX + offsetX,
+						posY + offsetY);
 				offsetX += textWidth;
 
 			}

@@ -15,6 +15,7 @@ public class AITargetObject extends AI {
 		super(actor);
 		this.object = object;
 		objectGUID = object.guid;
+		name = "AITargetObject";
 	}
 
 	@Override
