@@ -154,4 +154,15 @@ public class ResourceUtils {
 
 		return font;
 	}
+
+	public static String getPathForTexture(Texture texture) {
+
+		for (String path : globalImages.keySet()) {
+			if (globalImages.get(path) == texture) {
+				return path;
+			}
+		}
+
+		return null;
+	}
 }

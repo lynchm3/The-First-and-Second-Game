@@ -2,6 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// The script trigger that triggers when a script event is completed might
+	// not work at the moment in the editor coz we're making copies :P
+
+	// Triggers - obj destroyed, obj attacked, object health < x, object
+	// !destroyed
+
+	// Changing object drawable using postload + imagePath
+
 	// Put together a level, something to work with from the get-go
 
 	// After a load - images, colors, weapons wont line up... weapons is the big

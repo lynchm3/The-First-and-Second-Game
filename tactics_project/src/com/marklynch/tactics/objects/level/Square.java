@@ -31,7 +31,7 @@ public class Square {
 	public transient Vector<Weapon> weaponsThatCanAttack;
 
 	// image
-	public String imagePath;
+	public String imageTexturePath;
 	public transient Texture imageTexture = null;
 	public transient GameObject gameObject = null;
 	public transient Vector<Dialog> dialogs;
@@ -45,7 +45,7 @@ public class Square {
 		super();
 		this.x = x;
 		this.y = y;
-		this.imagePath = imagePath;
+		this.imageTexturePath = imagePath;
 		this.travelCost = travelCost;
 		this.elevation = elevation;
 		loadImages();
@@ -54,7 +54,7 @@ public class Square {
 	}
 
 	public void loadImages() {
-		this.imageTexture = getGlobalImage(imagePath);
+		this.imageTexture = getGlobalImage(imageTexturePath);
 
 	}
 

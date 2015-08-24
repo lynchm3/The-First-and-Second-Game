@@ -4,8 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import mdesl.graphics.Color;
-
-import org.newdawn.slick.opengl.Texture;
+import mdesl.graphics.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
@@ -21,6 +20,7 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.ResourceUtils;
 
 public class AttributeSelectionWindow<T> {
 
@@ -36,8 +36,6 @@ public class AttributeSelectionWindow<T> {
 		this.objects = objects;
 		this.editor = editor;
 		for (int i = 0; i < objects.size(); i++) {
-
-			System.out.println("LOOP");
 
 			final int index = i;
 
@@ -166,7 +164,21 @@ public class AttributeSelectionWindow<T> {
 
 						} else if (field.getType().isAssignableFrom(
 								Texture.class)) {// texture
+							Texture texture = (Texture) objects.get(index);
 							field.set(editor.objectToEdit, objects.get(index));
+							try {
+								Field guidField = objectClass
+										.getField(editor.attributeToEdit
+												+ "Path");
+								if (guidField != null) {
+									guidField
+											.set(ownerOfAttribute,
+													ResourceUtils
+															.getPathForTexture(texture));
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 							editor.stopEditingAttribute();
 
 						} else if (field.getType().isAssignableFrom(

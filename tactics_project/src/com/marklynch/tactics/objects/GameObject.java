@@ -49,7 +49,7 @@ public class GameObject {
 
 	// image
 	public transient Texture imageTexture = null;
-	public String imagePath = null;
+	public String imageTexturePath = null;
 
 	// images
 	public static transient Texture powTexture = null;
@@ -85,7 +85,7 @@ public class GameObject {
 		this.dexterity = dexterity;
 		this.intelligence = intelligence;
 		this.endurance = endurance;
-		this.imagePath = imagePath;
+		this.imageTexturePath = imagePath;
 		this.squareGameObjectIsOn = squareGameObjectIsOn;
 		this.squareGameObjectIsOn.gameObject = this;
 		this.weapons = new Weapons();
@@ -94,7 +94,7 @@ public class GameObject {
 	}
 
 	public void loadImages() {
-		this.imageTexture = getGlobalImage(imagePath);
+		this.imageTexture = getGlobalImage(imageTexturePath);
 		this.powTexture = getGlobalImage("pow.png");
 		this.vsTexture = getGlobalImage("vs.png");
 		this.fightTexture = getGlobalImage("fight.png");
