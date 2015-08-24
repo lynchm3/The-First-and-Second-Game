@@ -34,13 +34,13 @@ public class LevelButton extends Button {
 
 		if (enabled) {
 			if (down) {
-				QuadUtils.drawQuad(Color.GREEN, realX, realX + width, realY,
+				QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY,
 						realY + height);
 				TextUtils.printTextWithImages(new Object[] { text }, realX,
 						realY);
 			} else {
-				QuadUtils.drawQuad(Color.BLUE, realX, realX + width, realY,
-						realY + height);
+				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width,
+						realY, realY + height);
 				TextUtils.printTextWithImages(new Object[] { text }, realX,
 						realY);
 			}

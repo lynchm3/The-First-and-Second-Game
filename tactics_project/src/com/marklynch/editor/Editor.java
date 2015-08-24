@@ -10,6 +10,7 @@ import mdesl.graphics.Texture;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
+import com.marklynch.editor.settingswindow.AIsSettingsWindow;
 import com.marklynch.editor.settingswindow.ActorsSettingsWindow;
 import com.marklynch.editor.settingswindow.ColorSettingsWindow;
 import com.marklynch.editor.settingswindow.DecorationsSettingsWindow;
@@ -65,6 +66,7 @@ public class Editor {
 	Button decorationsTabButton;
 	Button scriptEventsTabButton;
 	Button scriptTriggersTabButton;
+	Button aisTabButton;
 
 	public SettingsWindow settingsWindow;
 	public LevelSettingsWindow levelSettingsWindow;
@@ -77,6 +79,7 @@ public class Editor {
 	public DecorationsSettingsWindow decorationsSettingsWindow;
 	public ScriptEventsSettingsWindow scriptsEventsSettingsWindow;
 	public ScriptTriggersSettingsWindow scriptsTriggersSettingsWindow;
+	public AIsSettingsWindow aisSettingsWindow;
 
 	public GameObject selectedGameObject;
 
@@ -145,6 +148,7 @@ public class Editor {
 		scriptsEventsSettingsWindow = new ScriptEventsSettingsWindow(200, this);
 		scriptsTriggersSettingsWindow = new ScriptTriggersSettingsWindow(200,
 				this);
+		aisSettingsWindow = new AIsSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -301,6 +305,21 @@ public class Editor {
 			}
 		};
 		buttons.add(scriptTriggersTabButton);
+
+		aisTabButton = new LevelButton(520, 50, 60, 30, "", "", "AIS", true,
+				true);
+		aisTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				aisTabButton.down = true;
+				settingsWindow = aisSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		buttons.add(aisTabButton);
 
 	}
 
@@ -732,6 +751,18 @@ public class Editor {
 				// weapons
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						weapons, true, this, objectToEdit);
+			} else if (field.getType().isAssignableFrom(GameObject.class)) {
+				// actor
+
+				ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+				for (Faction faction : Game.level.factions) {
+					for (Actor actor : faction.actors) {
+						gameObjects.add(actor);
+					}
+				}
+				gameObjects.addAll(Game.level.inanimateObjects);
+				attributeSelectionWindow = new AttributeSelectionWindow(
+						gameObjects, false, this, objectToEdit);
 			} else if (field.getType().isAssignableFrom(Actor.class)) {
 				// actor
 				ArrayList<Actor> actors = new ArrayList<Actor>();

@@ -4,20 +4,20 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 
 public class AITargetObject extends AI {
-
-	transient GameObject object;
+	public final static String[] editableAttributes = { "name", "object" };
+	public transient GameObject object;
 
 	// For loading and saving
-	String objectGUID;
+	public String objectGUID;
 
 	public AITargetObject() {
 		name = this.getClass().getSimpleName();
 	}
 
 	public AITargetObject(GameObject object) {
+		name = this.getClass().getSimpleName();
 		this.object = object;
 		objectGUID = object.guid;
-		name = "AITargetObject";
 	}
 
 	@Override

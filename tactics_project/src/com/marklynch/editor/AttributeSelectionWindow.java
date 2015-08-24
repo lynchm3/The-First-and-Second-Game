@@ -61,7 +61,24 @@ public class AttributeSelectionWindow<T> {
 						Field field = objectClass
 								.getField(editor.attributeToEdit);
 
-						if (field.getType().isAssignableFrom(Faction.class)) {// faction
+						if (field.getType().isAssignableFrom(GameObject.class)) {
+							GameObject gameObject = (GameObject) objects
+									.get(index);
+							field.set(ownerOfAttribute, gameObject);
+							try {
+								Field guidField = objectClass
+										.getField(editor.attributeToEdit
+												+ "GUID");
+								if (guidField != null) {
+									guidField.set(ownerOfAttribute,
+											gameObject.guid);
+								}
+							} catch (Exception e) {
+
+							}
+							editor.stopEditingAttribute();
+						} else if (field.getType().isAssignableFrom(
+								Faction.class)) {// faction
 							Faction faction = (Faction) objects.get(index);
 
 							if (editor.objectToEdit instanceof Actor) {
@@ -82,23 +99,6 @@ public class AttributeSelectionWindow<T> {
 								} catch (Exception e) {
 
 								}
-							}
-							editor.stopEditingAttribute();
-						} else if (field.getType().isAssignableFrom(
-								GameObject.class)) {
-							GameObject gameObject = (GameObject) objects
-									.get(index);
-							field.set(ownerOfAttribute, gameObject);
-							try {
-								Field guidField = objectClass
-										.getField(editor.attributeToEdit
-												+ "GUID");
-								if (guidField != null) {
-									guidField.set(ownerOfAttribute,
-											gameObject.guid);
-								}
-							} catch (Exception e) {
-
 							}
 							editor.stopEditingAttribute();
 						} else if (field.getType().isAssignableFrom(
@@ -222,7 +222,7 @@ public class AttributeSelectionWindow<T> {
 
 	public void draw() {
 		// faction
-		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0,
+		QuadUtils.drawQuad(Color.WHITE, 0, Game.windowWidth, 0,
 				Game.windowHeight);
 		for (SelectionWindowButton button : buttons) {
 			button.draw();

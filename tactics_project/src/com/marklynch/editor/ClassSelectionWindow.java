@@ -7,6 +7,7 @@ import mdesl.graphics.Color;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
+import com.marklynch.tactics.objects.unit.ai.AI;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
@@ -52,6 +53,10 @@ public class ClassSelectionWindow<T> {
 									.add((ScriptTrigger) classes.get(index)
 											.newInstance());
 							editor.classSelectionWindow = null;
+						} else if (superClass == AI.class) {
+							Game.level.ais.add((AI) classes.get(index)
+									.newInstance());
+							editor.classSelectionWindow = null;
 						}
 
 					} catch (Exception e) {
@@ -68,7 +73,7 @@ public class ClassSelectionWindow<T> {
 
 	public void draw() {
 		// faction
-		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0,
+		QuadUtils.drawQuad(Color.WHITE, 0, Game.windowWidth, 0,
 				Game.windowHeight);
 		for (SelectionWindowButton button : buttons) {
 			button.draw();
