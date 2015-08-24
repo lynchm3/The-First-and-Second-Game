@@ -9,7 +9,7 @@ import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorMoves;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerDestructionOfSpecificGameObject;
+import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerObjectDestroyed;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerFactionSize;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerScriptEventEnded;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerSpecficActorOccupiesSquare;
@@ -58,7 +58,7 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 				ArrayList<Class> classes = new ArrayList<Class>();
 				classes.add(ScriptTriggerActorMoves.class);
 				classes.add(ScriptTriggerActorSelected.class);
-				classes.add(ScriptTriggerDestructionOfSpecificGameObject.class);
+				classes.add(ScriptTriggerObjectDestroyed.class);
 				classes.add(ScriptTriggerFactionSize.class);
 				classes.add(ScriptTriggerScriptEventEnded.class);
 				classes.add(ScriptTriggerSpecficActorOccupiesSquare.class);

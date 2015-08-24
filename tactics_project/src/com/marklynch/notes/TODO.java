@@ -5,8 +5,10 @@ public class TODO {
 	// The script trigger that triggers when a script event is completed might
 	// not work at the moment in the editor coz we're making copies :P
 
-	// Triggers - obj destroyed, obj attacked, object health < x, object
+	// Triggers - obj attacked, object health < x, object
 	// !destroyed
+
+	// multiple triggers per event
 
 	// Changing object drawable using postload + imagePath
 
