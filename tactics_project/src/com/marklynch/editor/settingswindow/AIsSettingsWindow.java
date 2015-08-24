@@ -7,6 +7,9 @@ import com.marklynch.editor.AttributesWindow;
 import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.unit.ai.AI;
+import com.marklynch.tactics.objects.unit.ai.AIFreeze;
+import com.marklynch.tactics.objects.unit.ai.AIMoveToSquare;
+import com.marklynch.tactics.objects.unit.ai.AIStationary;
 import com.marklynch.tactics.objects.unit.ai.AITargetObject;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
@@ -49,6 +52,9 @@ public class AIsSettingsWindow extends SettingsWindow {
 
 				ArrayList<Class> classes = new ArrayList<Class>();
 				classes.add(AITargetObject.class);
+				classes.add(AIStationary.class);
+				classes.add(AIFreeze.class);
+				classes.add(AIMoveToSquare.class);
 
 				editor.classSelectionWindow = new ClassSelectionWindow(classes,
 						editor, AI.class);

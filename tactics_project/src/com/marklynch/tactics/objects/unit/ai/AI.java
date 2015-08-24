@@ -269,6 +269,48 @@ public class AI {
 
 	}
 
+	public boolean moveTowardsTargetSquare(Square square) {
+
+		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+
+		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
+
+		if (squareToMoveTo != null) {
+			Game.level.activeActor.moveTo(squareToMoveTo);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Square calculateSquareToMoveToForTargetSquare(Square square) {
+
+		Path pathToSquare = Game.level.activeActor.paths.get(square);
+
+		if (pathToSquare == null) {
+			return null;
+		}
+
+		// TODO move this to an actor method called moveAlongPath
+		Square squareToMoveTo = null;
+		// squareToMoveTo = pathToSquare.squares.lastElement(); this line works,
+		// but allows CPU to cheat
+		if (pathToSquare.travelCost <= Game.level.activeActor.travelDistance) {
+			squareToMoveTo = pathToSquare.squares.lastElement();
+		} else {
+			for (int i = pathToSquare.squares.size() - 1; i >= 0; i--) {
+				if (Game.level.activeActor.paths.get(pathToSquare.squares
+						.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
+					squareToMoveTo = pathToSquare.squares.get(i);
+					break;
+				}
+			}
+		}
+
+		return squareToMoveTo;
+
+	}
+
 	public boolean moveToRandomSquare() {
 		// MOVE TO RANDOM SQUARE - maybe for a broken robot or confused
 		// enemy
@@ -359,7 +401,7 @@ public class AI {
 
 	}
 
-	public AITargetObject makeCopy() {
+	public AI makeCopy() {
 		return null;
 	}
 
