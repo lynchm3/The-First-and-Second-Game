@@ -1,6 +1,6 @@
 package com.marklynch.tactics.objects.level.script.trigger;
 
-public class ScriptTrigger {
+public abstract class ScriptTrigger {
 
 	public boolean triggered = false;
 	public String name = "";
@@ -9,15 +9,9 @@ public class ScriptTrigger {
 		name = "ScriptTrigger";
 	}
 
-	public boolean checkTrigger() {
-		return false;
-	}
+	public abstract boolean checkTrigger();
 
-	public void postLoad() {
+	public abstract void postLoad();
 
-	}
-
-	public ScriptTrigger makeCopy() {
-		return null;
-	}
+	public abstract ScriptTrigger makeCopy();
 }

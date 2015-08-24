@@ -1,14 +1,18 @@
 package com.marklynch.tactics.objects.level.script;
 
+import java.util.UUID;
+
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 
-public class ScriptEvent {
+public abstract class ScriptEvent {
 
 	public String name;
 
 	public boolean blockUserInput;
 
 	public ScriptTrigger scriptTrigger;
+
+	public String guid = UUID.randomUUID().toString();
 
 	public ScriptEvent() {
 	}
@@ -19,22 +23,15 @@ public class ScriptEvent {
 		this.scriptTrigger = scriptTrigger;
 	}
 
-	public boolean checkIfCompleted() {
-		return false;
-	}
+	public abstract boolean checkIfCompleted();
 
-	public void click() {
-	}
+	public abstract void click();
 
-	public void update(int delta) {
-	}
+	public abstract void update(int delta);
 
-	public void draw() {
-	}
+	public abstract void draw();
 
-	public void postLoad() {
-		scriptTrigger.postLoad();
-	}
+	public abstract void postLoad();
 
 	@Override
 	public String toString() {

@@ -3,6 +3,7 @@ package com.marklynch.tactics.objects.level;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.Comparator;
+import java.util.UUID;
 import java.util.Vector;
 
 import mdesl.graphics.Texture;
@@ -16,6 +17,8 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class Square {
+
+	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation",
 			"travelCost" };
 

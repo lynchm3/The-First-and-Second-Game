@@ -62,6 +62,6 @@ public class ScriptEventEndLevel extends ScriptEvent {
 
 	@Override
 	public void postLoad() {
-		super.postLoad();
+		scriptTrigger.postLoad();
 	}
 }

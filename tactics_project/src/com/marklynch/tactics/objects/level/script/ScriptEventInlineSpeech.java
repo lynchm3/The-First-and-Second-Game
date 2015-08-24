@@ -54,7 +54,7 @@ public class ScriptEventInlineSpeech extends ScriptEvent {
 
 	@Override
 	public void postLoad() {
-		super.postLoad();
+		scriptTrigger.postLoad();
 	}
 
 }

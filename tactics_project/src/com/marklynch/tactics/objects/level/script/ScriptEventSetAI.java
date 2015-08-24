@@ -33,7 +33,7 @@ public class ScriptEventSetAI extends ScriptEvent {
 
 	@Override
 	public void postLoad() {
-		super.postLoad();
+		scriptTrigger.postLoad();
 		actor = Game.level.findActorFromGUID(actorGUID);
 		ai.postLoad();
 	}
@@ -42,5 +42,22 @@ public class ScriptEventSetAI extends ScriptEvent {
 	public void update(int delta) {
 		actor.ai = ai;
 		completed = true;
+	}
+
+	@Override
+	public boolean checkIfCompleted() {
+		return completed;
+	}
+
+	@Override
+	public void click() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+
 	}
 }

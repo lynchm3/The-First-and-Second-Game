@@ -15,7 +15,7 @@ public class ScriptTriggerTurnStart extends ScriptTrigger {
 	}
 
 	public ScriptTriggerTurnStart(int turn, int factionIndex) {
-		this.name = "ScriptTriggerTurnStart";
+		this.name = this.getClass().getSimpleName();
 		this.turn = turn;
 		this.factionIndex = factionIndex;
 	}
@@ -33,5 +33,10 @@ public class ScriptTriggerTurnStart extends ScriptTrigger {
 	@Override
 	public ScriptTrigger makeCopy() {
 		return new ScriptTriggerTurnStart(turn, factionIndex);
+	}
+
+	@Override
+	public void postLoad() {
+
 	}
 }

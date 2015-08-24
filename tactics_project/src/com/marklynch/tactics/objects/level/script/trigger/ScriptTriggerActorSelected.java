@@ -6,6 +6,7 @@ import com.marklynch.tactics.objects.unit.Actor;
 public class ScriptTriggerActorSelected extends ScriptTrigger {
 
 	public transient Actor actor;
+	public final static String[] editableAttributes = { "name", "actor" };
 
 	// for saving and loading
 	public String actorGUID = null;
@@ -15,7 +16,9 @@ public class ScriptTriggerActorSelected extends ScriptTrigger {
 	}
 
 	public ScriptTriggerActorSelected(Actor actor) {
+		this.name = this.getClass().getSimpleName();
 		this.actor = actor;
+		this.actorGUID = actor.guid;
 	}
 
 	@Override
@@ -28,5 +31,10 @@ public class ScriptTriggerActorSelected extends ScriptTrigger {
 	@Override
 	public void postLoad() {
 		actor = Game.level.findActorFromGUID(actorGUID);
+	}
+
+	@Override
+	public ScriptTrigger makeCopy() {
+		return new ScriptTriggerActorSelected(actor);
 	}
 }

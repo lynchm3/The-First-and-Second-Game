@@ -3,7 +3,6 @@ package com.marklynch.editor;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
@@ -397,7 +396,7 @@ public class Editor {
 				false, Game.level.script.scriptTriggers.get(0).makeCopy(),
 				actor1, Game.level.ais.get(0).makeCopy());
 
-		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
+		ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
 		// scriptEvents.add(scriptEventSpeech1);
 		scriptEvents.add(scriptEventSetAIAttackDumpster);
 
@@ -705,15 +704,30 @@ public class Editor {
 			if (field.getType().isAssignableFrom(Faction.class)) {
 				// faction
 				attributeSelectionWindow = new AttributeSelectionWindow(
-						Game.level.factions, false, this, null);
+						Game.level.factions, false, this, objectToEdit);
 			} else if (field.getType().isAssignableFrom(Color.class)) {
 				// color
 				attributeSelectionWindow = new AttributeSelectionWindow(colors,
-						false, this, null);
+						false, this, objectToEdit);
+			} else if (field.getType().isAssignableFrom(Square.class)) {
+				// square
+				ArrayList<Square> squares = new ArrayList<Square>();
+				for (Square[] squareArray : Game.level.squares) {
+					for (Square square : squareArray) {
+						squares.add(square);
+					}
+				}
+				attributeSelectionWindow = new AttributeSelectionWindow(
+						squares, false, this, objectToEdit);
+			} else if (field.getType().isAssignableFrom(ScriptEvent.class)) {
+				// scriptEvent
+				attributeSelectionWindow = new AttributeSelectionWindow(
+						Game.level.script.scriptEvents, false, this,
+						objectToEdit);
 			} else if (field.getType().isAssignableFrom(Texture.class)) {
 				// texture
 				attributeSelectionWindow = new AttributeSelectionWindow(
-						textures, false, this, null);
+						textures, false, this, objectToEdit);
 			} else if (field.getType().isAssignableFrom(Weapons.class)) {
 				// weapons
 				attributeSelectionWindow = new AttributeSelectionWindow(

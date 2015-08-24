@@ -7,11 +7,11 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 
 public class Script {
 
-	public Vector<ScriptEvent> scriptEvents;
+	public ArrayList<ScriptEvent> scriptEvents;
 	public Vector<ScriptEvent> activeScriptEvents = new Vector<ScriptEvent>();
 	public ArrayList<ScriptTrigger> scriptTriggers;
 
-	public Script(Vector<ScriptEvent> scriptEvents) {
+	public Script(ArrayList<ScriptEvent> scriptEvents) {
 		super();
 		this.scriptEvents = scriptEvents;
 		this.scriptTriggers = new ArrayList<ScriptTrigger>();
@@ -78,5 +78,14 @@ public class Script {
 			scriptTrigger.postLoad();
 		}
 
+	}
+
+	public ScriptEvent findScriptEventFromGUID(String guid) {
+		for (ScriptEvent scriptEvent : scriptEvents) {
+			if (scriptEvent.guid.equals(guid)) {
+				return scriptEvent;
+			}
+		}
+		return null;
 	}
 }

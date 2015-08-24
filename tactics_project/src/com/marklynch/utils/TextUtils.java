@@ -7,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
+import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -244,6 +245,16 @@ public class TextUtils {
 
 				float textWidth = Game.font.getWidth(ai.name);
 				Game.font.drawText(Game.activeBatch, ai.name, posX + offsetX,
+						posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof Square) {
+
+				Square square = (Square) content;
+				String string = "Square @ " + square.x + " , " + square.y;
+
+				float textWidth = Game.font.getWidth(string);
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX,
 						posY + offsetY);
 				offsetX += textWidth;
 

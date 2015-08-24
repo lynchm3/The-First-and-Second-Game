@@ -1,17 +1,23 @@
 package com.marklynch.tactics.objects.level.script.trigger;
 
+import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Square;
 
 public class ScriptTriggerSquareUnoccupied extends ScriptTrigger {
 
-	Square square;
+	public transient Square square;
+
+	public final static String[] editableAttributes = { "name", "square" };
+	public String squareGUID = null;
 
 	public ScriptTriggerSquareUnoccupied() {
 		this.name = this.getClass().getSimpleName();
 	}
 
 	public ScriptTriggerSquareUnoccupied(Square square) {
+		this.name = this.getClass().getSimpleName();
 		this.square = square;
+		this.squareGUID = square.guid;
 	}
 
 	@Override
@@ -20,5 +26,15 @@ public class ScriptTriggerSquareUnoccupied extends ScriptTrigger {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void postLoad() {
+		square = Game.level.findSquareFromGUID(squareGUID);
+	}
+
+	@Override
+	public ScriptTrigger makeCopy() {
+		return new ScriptTriggerSquareUnoccupied(square);
 	}
 }

@@ -79,7 +79,7 @@ public class Level {
 		dialogs = new Vector<Dialog>();
 		decorations = new Vector<Decoration>();
 		gameCursor = new GameCursor();
-		script = new Script(new Vector<ScriptEvent>());
+		script = new Script(new ArrayList<ScriptEvent>());
 
 		factions = new ArrayList<Faction>();
 		inanimateObjects = new Vector<GameObject>();
@@ -454,7 +454,7 @@ public class Level {
 
 		// The script
 
-		Vector<ScriptEvent> scriptEvents = new Vector<ScriptEvent>();
+		ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
 		scriptEvents.add(scriptEventEndLevel);
 		scriptEvents.add(scriptEventSpeech2);
 		scriptEvents.add(inlineScriptEventSpeech1);
@@ -789,6 +789,18 @@ public class Level {
 		for (Faction faction : factions) {
 			if (faction.guid.equals(guid)) {
 				return faction;
+			}
+		}
+		return null;
+	}
+
+	public Square findSquareFromGUID(String guid) {
+
+		ArrayList<Square> squares = new ArrayList<Square>();
+		for (Square[] squareArray : Game.level.squares) {
+			for (Square square : squareArray) {
+				if (square.guid.equals(guid))
+					return square;
 			}
 		}
 		return null;

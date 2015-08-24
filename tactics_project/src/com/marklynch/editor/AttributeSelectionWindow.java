@@ -10,6 +10,8 @@ import org.newdawn.slick.opengl.Texture;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
+import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.AI;
@@ -60,12 +62,27 @@ public class AttributeSelectionWindow<T> {
 								.getField(editor.attributeToEdit);
 
 						if (field.getType().isAssignableFrom(Faction.class)) {// faction
-
-							Actor actor = (Actor) editor.objectToEdit;
 							Faction faction = (Faction) objects.get(index);
-							actor.faction.actors.remove(actor);
-							faction.actors.add(actor);
-							actor.faction = faction;
+
+							if (editor.objectToEdit instanceof Actor) {
+								Actor actor = (Actor) editor.objectToEdit;
+								actor.faction.actors.remove(actor);
+								faction.actors.add(actor);
+								actor.faction = faction;
+							} else {
+								field.set(ownerOfAttribute, faction);
+								try {
+									Field guidField = objectClass
+											.getField(editor.attributeToEdit
+													+ "GUID");
+									if (guidField != null) {
+										guidField.set(ownerOfAttribute,
+												faction.guid);
+									}
+								} catch (Exception e) {
+
+								}
+							}
 							editor.stopEditingAttribute();
 						} else if (field.getType().isAssignableFrom(
 								GameObject.class)) {
@@ -79,6 +96,46 @@ public class AttributeSelectionWindow<T> {
 								if (guidField != null) {
 									guidField.set(ownerOfAttribute,
 											gameObject.guid);
+								}
+							} catch (Exception e) {
+
+							}
+							editor.stopEditingAttribute();
+						} else if (field.getType().isAssignableFrom(
+								Square.class)) {
+
+							Square square = (Square) objects.get(index);
+
+							System.out.println("square = " + square);
+							System.out.println("ownerOfAttribute = "
+									+ ownerOfAttribute);
+							System.out.println("field = " + field);
+
+							field.set(ownerOfAttribute, square);
+							try {
+								Field guidField = objectClass
+										.getField(editor.attributeToEdit
+												+ "GUID");
+								if (guidField != null) {
+									guidField
+											.set(ownerOfAttribute, square.guid);
+								}
+							} catch (Exception e) {
+
+							}
+							editor.stopEditingAttribute();
+						} else if (field.getType().isAssignableFrom(
+								ScriptEvent.class)) {
+							ScriptEvent scriptEvent = (ScriptEvent) objects
+									.get(index);
+							field.set(ownerOfAttribute, scriptEvent);
+							try {
+								Field guidField = objectClass
+										.getField(editor.attributeToEdit
+												+ "GUID");
+								if (guidField != null) {
+									guidField.set(ownerOfAttribute,
+											scriptEvent.guid);
 								}
 							} catch (Exception e) {
 

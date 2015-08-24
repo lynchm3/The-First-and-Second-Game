@@ -128,6 +128,6 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 	@Override
 	public void postLoad() {
-		super.postLoad();
+		scriptTrigger.postLoad();
 	}
 }

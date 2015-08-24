@@ -67,6 +67,6 @@ public class ScriptEventGroup extends ScriptEvent {
 
 	@Override
 	public void postLoad() {
-		super.postLoad();
+		scriptTrigger.postLoad();
 	}
 }
