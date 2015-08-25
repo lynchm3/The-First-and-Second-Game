@@ -92,6 +92,7 @@ public class Editor {
 	public ArrayList<Texture> textures = new ArrayList<Texture>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public AttributeSelectionWindow attributeSelectionWindow;
+	public GameObject gameObjectTemplate;
 
 	public enum STATE {
 		DEFAULT,
@@ -582,8 +583,14 @@ public class Editor {
 			attributesWindow = new AttributesWindow(200, 200, 350, square, this);
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.ADD_OBJECT) {
-			GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
-					"skip_with_shadow.png", square, new ArrayList<Weapon>());
+			GameObject gameObject = null;
+			if (gameObjectTemplate == null) {
+				gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
+						"skip_with_shadow.png", square, new ArrayList<Weapon>());
+			} else {
+				gameObject = gameObjectTemplate.makeCopy(square);
+			}
+
 			Game.level.inanimateObjects.add(gameObject);
 			square.gameObject = gameObject;
 			this.objectsSettingsWindow.update();

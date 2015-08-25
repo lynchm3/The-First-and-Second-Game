@@ -5,6 +5,7 @@ import java.util.Vector;
 import mdesl.graphics.Color;
 
 import com.marklynch.Game;
+import com.marklynch.editor.Editor.STATE;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
@@ -149,11 +150,11 @@ public class AttributesWindow {
 
 		} else if (object instanceof GameObject) {
 			final GameObject gameObject = (GameObject) object;
-			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (i + 2) * 30, 200, 30, gameObject, "delete", true,
+			final AtributesWindowButton deleteButton = new AtributesWindowButton(
+					0, 0 + (i + 2) * 30, 200, 30, gameObject, "delete", true,
 					true, this);
-			buttons.add(button);
-			button.setClickListener(new ClickListener() {
+			buttons.add(deleteButton);
+			deleteButton.setClickListener(new ClickListener() {
 				@Override
 				public void click() {
 					depressButtons();
@@ -161,6 +162,23 @@ public class AttributesWindow {
 					gameObject.squareGameObjectIsOn.gameObject = null;
 					editor.clearSelectedObject();
 					editor.settingsWindow.update();
+				}
+			});
+			final AtributesWindowButton copyButton = new AtributesWindowButton(
+					0, 0 + (i + 3) * 30, 200, 30, gameObject, "copy", true,
+					true, this);
+			buttons.add(copyButton);
+			copyButton.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+					depressButtons();
+					editor.depressButtonsSettingsAndDetailsButtons();
+					editor.clearSelectedObject();
+					editor.state = STATE.ADD_OBJECT;
+					editor.gameObjectTemplate = gameObject;
+					editor.clearSelectedObject();
+					editor.settingsWindow.update();
+					editor.objectsSettingsWindow.addObjectsButton.down = true;
 				}
 			});
 		} else if (object instanceof Faction) {

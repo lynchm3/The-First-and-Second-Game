@@ -346,4 +346,10 @@ public class GameObject {
 		}
 		return null;
 	}
+
+	public GameObject makeCopy(Square square) {
+		return new GameObject(name, (int) totalHealth, strength, dexterity,
+				intelligence, endurance, imageTexturePath, square,
+				weapons.weapons);
+	}
 }

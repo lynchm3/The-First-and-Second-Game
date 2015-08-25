@@ -8,7 +8,7 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
 public class ObjectsSettingsWindow extends SettingsWindow {
-	SettingsWindowButton addObjectsButton;
+	public SettingsWindowButton addObjectsButton;
 
 	public ObjectsSettingsWindow(float width, Editor editor) {
 		super(width, editor);

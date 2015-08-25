@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Copy button for actors
+
 	// The script trigger that triggers when a script event is completed might
 	// not work at the moment in the editor coz we're making copies :P
 
