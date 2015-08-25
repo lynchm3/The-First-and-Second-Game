@@ -348,8 +348,12 @@ public class GameObject {
 	}
 
 	public GameObject makeCopy(Square square) {
+
+		ArrayList<Weapon> weaponArray = new ArrayList<Weapon>();
+		for (Weapon weapon : this.weapons.weapons) {
+			weaponArray.add(weapon.makeCopy());
+		}
 		return new GameObject(name, (int) totalHealth, strength, dexterity,
-				intelligence, endurance, imageTexturePath, square,
-				weapons.weapons);
+				intelligence, endurance, imageTexturePath, square, weaponArray);
 	}
 }

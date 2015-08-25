@@ -1053,4 +1053,17 @@ public class Actor extends GameObject {
 	public void weaponButtonClicked(Weapon weapon) {
 		this.equippedWeapon = weapon;
 	}
+
+	@Override
+	public Actor makeCopy(Square square) {
+
+		ArrayList<Weapon> weaponArray = new ArrayList<Weapon>();
+		for (Weapon weapon : this.weapons.weapons) {
+			weaponArray.add(weapon.makeCopy());
+		}
+
+		return new Actor(name, title, actorLevel, (int) totalHealth, strength,
+				dexterity, intelligence, endurance, imageTexturePath, square,
+				weaponArray, travelDistance);
+	}
 }

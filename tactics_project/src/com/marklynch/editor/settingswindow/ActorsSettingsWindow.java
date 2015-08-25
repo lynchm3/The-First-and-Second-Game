@@ -9,7 +9,7 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
 public class ActorsSettingsWindow extends SettingsWindow {
-	SettingsWindowButton addActorsButton;
+	public SettingsWindowButton addActorsButton;
 
 	public ActorsSettingsWindow(float width, final Editor editor) {
 		super(width, editor);

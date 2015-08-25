@@ -93,6 +93,7 @@ public class Editor {
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public AttributeSelectionWindow attributeSelectionWindow;
 	public GameObject gameObjectTemplate;
+	public Actor actorTemplate;
 
 	public enum STATE {
 		DEFAULT,
@@ -597,10 +598,24 @@ public class Editor {
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.ADD_ACTOR) {
 			// Add actor
-			Actor actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-					"red1.png", square, new ArrayList<Weapon>(), 4);
-			actor.faction = Game.level.factions.get(0);
-			Game.level.factions.get(0).actors.add(actor);
+			Actor actor = null;
+			if (actorTemplate == null) {
+				actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
+						"red1.png", square, new ArrayList<Weapon>(), 4);
+				actor.faction = Game.level.factions.get(0);
+			} else {
+				actor = actorTemplate.makeCopy(square);
+				actor.faction = actorTemplate.faction;
+			}
+
+			System.out.println("actorTemplate = " + actorTemplate);
+			System.out.println("actorTemplate.faction = "
+					+ actorTemplate.faction);
+			System.out.println("actor.faction = " + actor.faction);
+			System.out
+					.println("actor.faction.actors = " + actor.faction.actors);
+
+			actor.faction.actors.add(actor);
 			square.gameObject = actor;
 			this.actorsSettingsWindow.update();
 			// state = STATE.DEFAULT;

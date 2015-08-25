@@ -147,6 +147,23 @@ public class AttributesWindow {
 					}
 				}
 			});
+			final AtributesWindowButton copyButton = new AtributesWindowButton(
+					0, 0 + (i + 3) * 30, 200, 30, actor, "copy", true, true,
+					this);
+			buttons.add(copyButton);
+			copyButton.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+					depressButtons();
+					editor.depressButtonsSettingsAndDetailsButtons();
+					editor.clearSelectedObject();
+					editor.state = STATE.ADD_ACTOR;
+					editor.actorTemplate = actor;
+					editor.clearSelectedObject();
+					editor.settingsWindow.update();
+					editor.actorsSettingsWindow.addActorsButton.down = true;
+				}
+			});
 
 		} else if (object instanceof GameObject) {
 			final GameObject gameObject = (GameObject) object;
