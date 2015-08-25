@@ -608,13 +608,6 @@ public class Editor {
 				actor.faction = actorTemplate.faction;
 			}
 
-			System.out.println("actorTemplate = " + actorTemplate);
-			System.out.println("actorTemplate.faction = "
-					+ actorTemplate.faction);
-			System.out.println("actor.faction = " + actor.faction);
-			System.out
-					.println("actor.faction.actors = " + actor.faction.actors);
-
 			actor.faction.actors.add(actor);
 			square.gameObject = actor;
 			this.actorsSettingsWindow.update();
