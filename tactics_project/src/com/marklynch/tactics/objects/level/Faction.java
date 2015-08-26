@@ -37,7 +37,7 @@ public class Faction {
 	/**
 	 * Map relationships of this faction towards others +-100
 	 */
-	public transient Map<Faction, Integer> relationships = new HashMap<Faction, Integer>();
+	public transient Map<Faction, FactionRelationship> relationships = new HashMap<Faction, FactionRelationship>();
 	public Vector<Actor> actors = new Vector<Actor>();
 
 	public transient Actor currentActor;
@@ -58,7 +58,7 @@ public class Faction {
 
 	// For saving and loading
 	public String guid = UUID.randomUUID().toString();
-	public Map<String, Integer> relationshipGUIDs = new HashMap<String, Integer>();
+	public Map<String, FactionRelationship> relationshipGUIDs = new HashMap<String, FactionRelationship>();
 
 	public Faction(String name, Color color, String imagePath) {
 		this.name = name;
@@ -81,10 +81,14 @@ public class Faction {
 			actor.postLoad(this);
 		}
 		currentStage = STAGE.SELECT;
-		relationships = new HashMap<Faction, Integer>();
+		relationships = new HashMap<Faction, FactionRelationship>();
 		for (String factionGUID : relationshipGUIDs.keySet()) {
 			relationships.put(Game.level.findFactionFromGUID(factionGUID),
 					relationshipGUIDs.get(factionGUID));
+		}
+
+		for (Faction faction : relationships.keySet()) {
+			relationships.get(faction).postLoad(this, faction);
 		}
 	}
 

@@ -7,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
+import com.marklynch.tactics.objects.level.FactionRelationship;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
@@ -258,7 +259,20 @@ public class TextUtils {
 						posY + offsetY);
 				offsetX += textWidth;
 
+			} else if (content instanceof FactionRelationship) {
+
+				FactionRelationship factionRelationship = (FactionRelationship) content;
+				String string = "" + factionRelationship.source + " -> "
+						+ factionRelationship.target + " ("
+						+ factionRelationship.relationship + ")";
+
+				float textWidth = Game.font.getWidth(string);
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX,
+						posY + offsetY);
+				offsetX += textWidth;
+
 			}
+
 		}
 
 	}

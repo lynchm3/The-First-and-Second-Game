@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Edit in editor for strings in script events
+
+	// negative values for ints and floats
+
 	// Copy button for actors
 
 	// The script trigger that triggers when a script event is completed might

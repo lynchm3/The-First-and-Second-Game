@@ -17,6 +17,7 @@ import com.marklynch.editor.settingswindow.DecorationsSettingsWindow;
 import com.marklynch.editor.settingswindow.FactionsSettingsWindow;
 import com.marklynch.editor.settingswindow.LevelSettingsWindow;
 import com.marklynch.editor.settingswindow.ObjectsSettingsWindow;
+import com.marklynch.editor.settingswindow.RelationsSettingsWindow;
 import com.marklynch.editor.settingswindow.ScriptEventsSettingsWindow;
 import com.marklynch.editor.settingswindow.ScriptTriggersSettingsWindow;
 import com.marklynch.editor.settingswindow.SettingsWindow;
@@ -24,6 +25,7 @@ import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
+import com.marklynch.tactics.objects.level.FactionRelationship;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
@@ -67,6 +69,7 @@ public class Editor {
 	Button scriptEventsTabButton;
 	Button scriptTriggersTabButton;
 	Button aisTabButton;
+	Button relationsTabButton;
 
 	public SettingsWindow settingsWindow;
 	public LevelSettingsWindow levelSettingsWindow;
@@ -80,6 +83,7 @@ public class Editor {
 	public ScriptEventsSettingsWindow scriptsEventsSettingsWindow;
 	public ScriptTriggersSettingsWindow scriptsTriggersSettingsWindow;
 	public AIsSettingsWindow aisSettingsWindow;
+	public RelationsSettingsWindow relationsSettingsWindow;
 
 	public GameObject selectedGameObject;
 
@@ -151,6 +155,7 @@ public class Editor {
 		scriptsTriggersSettingsWindow = new ScriptTriggersSettingsWindow(200,
 				this);
 		aisSettingsWindow = new AIsSettingsWindow(200, this);
+		relationsSettingsWindow = new RelationsSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -323,6 +328,21 @@ public class Editor {
 		};
 		buttons.add(aisTabButton);
 
+		relationsTabButton = new LevelButton(590, 50, 130, 30, "", "",
+				"RELATIONS", true, true);
+		relationsTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				relationsTabButton.down = true;
+				settingsWindow = relationsSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		buttons.add(relationsTabButton);
+
 	}
 
 	public void generateTestObjects() {
@@ -343,10 +363,12 @@ public class Editor {
 						colors.get(1), "faction_red.png"));
 
 		// relationships
-		Game.level.factions.get(0).relationships.put(
-				Game.level.factions.get(1), -100);
-		Game.level.factions.get(1).relationships.put(
-				Game.level.factions.get(0), -100);
+		Game.level.factions.get(0).relationships
+				.put(Game.level.factions.get(1), new FactionRelationship(-100,
+						Game.level.factions.get(0), Game.level.factions.get(1)));
+		Game.level.factions.get(1).relationships
+				.put(Game.level.factions.get(0), new FactionRelationship(-100,
+						Game.level.factions.get(1), Game.level.factions.get(0)));
 
 		// Weapons
 		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();

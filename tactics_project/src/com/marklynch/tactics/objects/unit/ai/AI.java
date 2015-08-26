@@ -94,7 +94,7 @@ public class AI {
 		for (Faction faction : Game.level.factions) {
 			if (faction != Game.level.activeActor.faction
 					&& Game.level.activeActor.faction.relationships
-							.get(faction) < 0) {
+							.get(faction).relationship < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
 					if (square != null && square.distanceToSquare < costToBest) {
@@ -148,7 +148,7 @@ public class AI {
 		for (Faction faction : Game.level.factions) {
 			if (faction != Game.level.activeActor.faction
 					&& Game.level.activeActor.faction.relationships
-							.get(faction) < 0) {
+							.get(faction).relationship < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
 					if (square != null) {

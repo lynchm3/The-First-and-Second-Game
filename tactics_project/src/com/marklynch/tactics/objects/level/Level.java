@@ -240,16 +240,34 @@ public class Level {
 				"faction_green.png"));
 
 		// Good guys relationships
-		factions.get(0).relationships.put(factions.get(1), -100);
-		factions.get(0).relationships.put(factions.get(2), -100);
+		factions.get(0).relationships
+				.put(factions.get(1),
+						new FactionRelationship(-100, factions.get(0), factions
+								.get(1)));
+		factions.get(0).relationships
+				.put(factions.get(2),
+						new FactionRelationship(-100, factions.get(0), factions
+								.get(2)));
 
 		// Bad guys relationships
-		factions.get(1).relationships.put(factions.get(0), -100);
-		factions.get(1).relationships.put(factions.get(2), -100);
+		factions.get(1).relationships
+				.put(factions.get(0),
+						new FactionRelationship(-100, factions.get(1), factions
+								.get(0)));
+		factions.get(1).relationships
+				.put(factions.get(2),
+						new FactionRelationship(-100, factions.get(1), factions
+								.get(2)));
 
 		// Green party relationships
-		factions.get(2).relationships.put(factions.get(0), -100);
-		factions.get(2).relationships.put(factions.get(1), -100);
+		factions.get(2).relationships
+				.put(factions.get(0),
+						new FactionRelationship(-100, factions.get(2), factions
+								.get(0)));
+		factions.get(2).relationships
+				.put(factions.get(1),
+						new FactionRelationship(-100, factions.get(2), factions
+								.get(1)));
 
 		// Actors
 
