@@ -20,25 +20,27 @@ public class Script {
 		System.out.println("this.scriptEvents.size() = "
 				+ this.scriptEvents.size());
 
-		for (ScriptEvent scriptEvent : this.scriptEvents) {
-			scriptTriggers.add(scriptEvent.scriptTrigger.makeCopy());
-			if (scriptEvent instanceof ScriptEventSpeech) {
-				System.out.println("scriptEvent instanceof ScriptEventSpeech");
-				System.out
-						.println("((ScriptEventSpeech) scriptEvent).speechParts.size() = "
-								+ ((ScriptEventSpeech) scriptEvent).speechParts
-										.size());
-
-				for (SpeechPart speechPart : ((ScriptEventSpeech) scriptEvent).speechParts) {
-					this.speechParts.add(speechPart.makeCopy());
-				}
-			}
-			if (scriptEvent instanceof ScriptEventInlineSpeech) {
-				for (SpeechPart speechPart : ((ScriptEventInlineSpeech) scriptEvent).speechParts) {
-					this.speechParts.add(speechPart.makeCopy());
-				}
-			}
-		}
+		// for (ScriptEvent scriptEvent : this.scriptEvents) {
+		// scriptTriggers.add(scriptEvent.scriptTrigger.makeCopy());
+		// if (scriptEvent instanceof ScriptEventSpeech) {
+		// System.out.println("scriptEvent instanceof ScriptEventSpeech");
+		// System.out
+		// .println("((ScriptEventSpeech) scriptEvent).speechParts.size() = "
+		// + ((ScriptEventSpeech) scriptEvent).speechParts
+		// .size());
+		//
+		// for (SpeechPart speechPart : ((ScriptEventSpeech)
+		// scriptEvent).speechParts) {
+		// this.speechParts.add(speechPart.makeCopy());
+		// }
+		// }
+		// if (scriptEvent instanceof ScriptEventInlineSpeech) {
+		// for (SpeechPart speechPart : ((ScriptEventInlineSpeech)
+		// scriptEvent).speechParts) {
+		// this.speechParts.add(speechPart.makeCopy());
+		// }
+		// }
+		// }
 	}
 
 	public void activateScriptEvent() {

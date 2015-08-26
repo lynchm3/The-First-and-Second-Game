@@ -13,14 +13,7 @@ import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.ScriptEventEndLevel;
-import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerScriptEventEnded;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
 import com.marklynch.tactics.objects.unit.ai.AI;
@@ -30,7 +23,6 @@ import com.marklynch.ui.Dialog;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
 public class Level {
@@ -379,105 +371,120 @@ public class Level {
 		speechDirections1.add(ScriptEventSpeech.SpeechPart.DIRECTION.RIGHT);
 		speechDirections1.add(ScriptEventSpeech.SpeechPart.DIRECTION.LEFT);
 
-		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(
-				speechActors1, speechPositions1, speechDirections1,
-				factions.get(0).actors.get(0),
-				new StringWithColor[] { new StringWithColor(
-						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) });
-
-		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(
-				speechActors1,
-				speechPositions1,
-				speechDirections1,
-				factions.get(0).actors.get(0),
-				new StringWithColor[] { new StringWithColor(
-						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
-						Color.BLACK) });
-
-		Vector<ScriptEventSpeech.SpeechPart> speechParts1 = new Vector<ScriptEventSpeech.SpeechPart>();
-		speechParts1.add(speechPart1_1);
-		speechParts1.add(speechPart1_2);
-
-		// ScriptTrigger scriptTrigger1 = new
-		// ScriptTriggerDestructionOfSpecificGameObject(
-		// this, factions.get(0).actors.get(0));
-		ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(
-				factions.get(0).actors.get(0));
-		// ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1,
-		// 0);
-
-		ScriptEventEndLevel scriptEventEndLevel = new ScriptEventEndLevel(true,
-				scriptTrigger1, new String[] { "GAME OVER" });
-		// ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
-		// speechParts1, null);
-
-		// Speech 2
-
-		ArrayList<Actor> speechActors2 = new ArrayList<Actor>();
-		speechActors2.add(factions.get(2).actors.get(0));
-		speechActors2.add(factions.get(0).actors.get(1));
-
-		ArrayList<Float> speechPositions2 = new ArrayList<Float>();
-		speechPositions2.add(0f);
-		speechPositions2.add(0f);
-
-		ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections2 = new ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION>();
-		speechDirections2.add(ScriptEventSpeech.SpeechPart.DIRECTION.RIGHT);
-		speechDirections2.add(ScriptEventSpeech.SpeechPart.DIRECTION.LEFT);
-
-		ScriptEventSpeech.SpeechPart speechPart2_1 = new ScriptEventSpeech.SpeechPart(
-				speechActors2, speechPositions2, speechDirections2,
-				factions.get(2).actors.get(0),
-				new StringWithColor[] { new StringWithColor(
-						"GREEN TEAM HOOOOOOOO", Color.BLACK) });
-
-		ArrayList<ScriptEventSpeech.SpeechPart> speechParts2 = new ArrayList<ScriptEventSpeech.SpeechPart>();
-		speechParts2.add(speechPart2_1);
-
-		ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(1, 2);
-
-		ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(true,
-				speechParts2, null);
-
-		// Vector<ScriptEvent> scriptEventsForGroup = new Vector<ScriptEvent>();
-		// scriptEventsForGroup.add(scriptEventSpeech1);
-		// scriptEventsForGroup.add(scriptEventSpeech2);
-		// ScriptEventGroup scriptEventGroup = new ScriptEventGroup(true,
-		// scriptTrigger1, scriptEventsForGroup);
-
-		// Inline speechVector<Actor> speechActors1 = new Vector<Actor>();
-
-		SpeechPart inlineSpeechPart1_1 = new SpeechPart(
-				factions.get(0).actors.get(0),
-				new StringWithColor[] { new StringWithColor(
-						"HOLLA INLINE SPEECH YO", Color.BLACK) });
-
-		SpeechPart inlineSpeechPart1_2 = new SpeechPart(
-				factions.get(0).actors.get(0),
-				new StringWithColor[] { new StringWithColor(
-						"HOLLA, PART 2 OF THE INLINE SPEECH, WANT TO PUSH IT TO OVER 2 LINES, JUST TO SEE WTF IT LOOKS LIKE HOLLA",
-						Color.BLACK) });
-
-		Vector<SpeechPart> inlineSpeechParts1 = new Vector<SpeechPart>();
-		inlineSpeechParts1.add(inlineSpeechPart1_1);
-		inlineSpeechParts1.add(inlineSpeechPart1_2);
-
-		// ScriptTrigger scriptTrigger3 = new ScriptTriggerTurnStart(this, 2,
-		// 0);
-		ScriptTriggerScriptEventEnded scriptTrigger3 = new ScriptTriggerScriptEventEnded(
-				scriptEventEndLevel);
-
-		ScriptEventInlineSpeech inlineScriptEventSpeech1 = new ScriptEventInlineSpeech(
-				false, inlineSpeechParts1, scriptTrigger3);
-
-		// The script
-
-		ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
-		scriptEvents.add(scriptEventEndLevel);
-		scriptEvents.add(scriptEventSpeech2);
-		scriptEvents.add(inlineScriptEventSpeech1);
-
-		script.scriptEvents = scriptEvents;
+		// ScriptEventSpeech.SpeechPart speechPart1_1 = new
+		// ScriptEventSpeech.SpeechPart(
+		// speechActors1, speechPositions1, speechDirections1,
+		// factions.get(0).actors.get(0),
+		// new StringWithColor[] { new StringWithColor(
+		// "HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) });
+		//
+		// ScriptEventSpeech.SpeechPart speechPart1_2 = new
+		// ScriptEventSpeech.SpeechPart(
+		// speechActors1,
+		// speechPositions1,
+		// speechDirections1,
+		// factions.get(0).actors.get(0),
+		// new StringWithColor[] { new StringWithColor(
+		// "HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
+		// Color.BLACK) });
+		//
+		// Vector<ScriptEventSpeech.SpeechPart> speechParts1 = new
+		// Vector<ScriptEventSpeech.SpeechPart>();
+		// speechParts1.add(speechPart1_1);
+		// speechParts1.add(speechPart1_2);
+		//
+		// // ScriptTrigger scriptTrigger1 = new
+		// // ScriptTriggerDestructionOfSpecificGameObject(
+		// // this, factions.get(0).actors.get(0));
+		// ScriptTrigger scriptTrigger1 = new ScriptTriggerActorSelected(
+		// factions.get(0).actors.get(0));
+		// // ScriptTrigger scriptTrigger1 = new ScriptTriggerTurnStart(this, 1,
+		// // 0);
+		//
+		// ScriptEventEndLevel scriptEventEndLevel = new
+		// ScriptEventEndLevel(true,
+		// scriptTrigger1, new String[] { "GAME OVER" });
+		// // ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
+		// // speechParts1, null);
+		//
+		// // Speech 2
+		//
+		// ArrayList<Actor> speechActors2 = new ArrayList<Actor>();
+		// speechActors2.add(factions.get(2).actors.get(0));
+		// speechActors2.add(factions.get(0).actors.get(1));
+		//
+		// ArrayList<Float> speechPositions2 = new ArrayList<Float>();
+		// speechPositions2.add(0f);
+		// speechPositions2.add(0f);
+		//
+		// ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections2 =
+		// new ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION>();
+		// speechDirections2.add(ScriptEventSpeech.SpeechPart.DIRECTION.RIGHT);
+		// speechDirections2.add(ScriptEventSpeech.SpeechPart.DIRECTION.LEFT);
+		//
+		// StringWithColor stringWithColor2 = new StringWithColor(
+		// "GREEN TEAM HOOOOOOOO", Color.BLACK);
+		//
+		// ScriptEventSpeech.SpeechPart speechPart2_1 = new
+		// ScriptEventSpeech.SpeechPart(
+		// speechActors2, speechPositions2, speechDirections2,
+		// factions.get(2).actors.get(0),
+		//
+		// new ArrayList(new Object())
+		//
+		// new StringWithColor[] { });
+		//
+		// ArrayList<ScriptEventSpeech.SpeechPart> speechParts2 = new
+		// ArrayList<ScriptEventSpeech.SpeechPart>();
+		// speechParts2.add(speechPart2_1);
+		//
+		// ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(1, 2);
+		//
+		// ScriptEventSpeech scriptEventSpeech2 = new ScriptEventSpeech(true,
+		// speechParts2, null);
+		//
+		// // Vector<ScriptEvent> scriptEventsForGroup = new
+		// Vector<ScriptEvent>();
+		// // scriptEventsForGroup.add(scriptEventSpeech1);
+		// // scriptEventsForGroup.add(scriptEventSpeech2);
+		// // ScriptEventGroup scriptEventGroup = new ScriptEventGroup(true,
+		// // scriptTrigger1, scriptEventsForGroup);
+		//
+		// // Inline speechVector<Actor> speechActors1 = new Vector<Actor>();
+		//
+		// SpeechPart inlineSpeechPart1_1 = new SpeechPart(
+		// factions.get(0).actors.get(0),
+		// new StringWithColor[] { new StringWithColor(
+		// "HOLLA INLINE SPEECH YO", Color.BLACK) });
+		//
+		// SpeechPart inlineSpeechPart1_2 = new SpeechPart(
+		// factions.get(0).actors.get(0),
+		// new StringWithColor[] { new StringWithColor(
+		// "HOLLA, PART 2 OF THE INLINE SPEECH, WANT TO PUSH IT TO OVER 2 LINES, JUST TO SEE WTF IT LOOKS LIKE HOLLA",
+		// Color.BLACK) });
+		//
+		// Vector<SpeechPart> inlineSpeechParts1 = new Vector<SpeechPart>();
+		// inlineSpeechParts1.add(inlineSpeechPart1_1);
+		// inlineSpeechParts1.add(inlineSpeechPart1_2);
+		//
+		// // ScriptTrigger scriptTrigger3 = new ScriptTriggerTurnStart(this, 2,
+		// // 0);
+		// ScriptTriggerScriptEventEnded scriptTrigger3 = new
+		// ScriptTriggerScriptEventEnded(
+		// scriptEventEndLevel);
+		//
+		// ScriptEventInlineSpeech inlineScriptEventSpeech1 = new
+		// ScriptEventInlineSpeech(
+		// false, inlineSpeechParts1, scriptTrigger3);
+		//
+		// // The script
+		//
+		// ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
+		// scriptEvents.add(scriptEventEndLevel);
+		// scriptEvents.add(scriptEventSpeech2);
+		// scriptEvents.add(inlineScriptEventSpeech1);
+		//
+		// script.scriptEvents = scriptEvents;
 		// script.activateScriptEvent();
 	}
 

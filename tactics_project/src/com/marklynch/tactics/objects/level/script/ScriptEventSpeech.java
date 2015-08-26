@@ -73,7 +73,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 		public ArrayList<Float> positions = new ArrayList<Float>();
 		public ArrayList<DIRECTION> directions = new ArrayList<DIRECTION>();
 		public transient Actor talker;
-		public StringWithColor[] text;
+		public ArrayList<StringWithColor> text;
 		public boolean inline = false;
 
 		// For saving and loading
@@ -84,7 +84,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 			LEFT, RIGHT
 		}
 
-		public SpeechPart(Actor talker, StringWithColor[] text) {
+		public SpeechPart(Actor talker, ArrayList text) {
 			super();
 			this.talker = talker;
 			this.text = text;
@@ -96,8 +96,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 		}
 
 		public SpeechPart(ArrayList<Actor> actors, ArrayList<Float> positions,
-				ArrayList<DIRECTION> directions, Actor talker,
-				StringWithColor[] text) {
+				ArrayList<DIRECTION> directions, Actor talker, ArrayList text) {
 			super();
 			this.actors = actors;
 			this.positions = positions;
@@ -194,9 +193,9 @@ public class ScriptEventSpeech extends ScriptEvent {
 		public SpeechPart makeCopy() {
 
 			if (inline) {
-				StringWithColor[] text = new StringWithColor[this.text.length];
-				for (int i = 0; i < this.text.length; i++) {
-					text[i] = this.text[i].makeCopy();
+				ArrayList<StringWithColor> text = new ArrayList<StringWithColor>();
+				for (int i = 0; i < this.text.size(); i++) {
+					text.add(this.text.get(i).makeCopy());
 				}
 				return new SpeechPart(talker, text);
 			} else {
@@ -207,9 +206,9 @@ public class ScriptEventSpeech extends ScriptEvent {
 				positions.addAll(positions);
 				ArrayList<DIRECTION> directions = new ArrayList<DIRECTION>();
 				directions.addAll(directions);
-				StringWithColor[] text = new StringWithColor[this.text.length];
-				for (int i = 0; i < this.text.length; i++) {
-					text[i] = this.text[i].makeCopy();
+				ArrayList<StringWithColor> text = new ArrayList<StringWithColor>();
+				for (int i = 0; i < this.text.size(); i++) {
+					text.add(this.text.get(i).makeCopy());
 				}
 				return new SpeechPart(actors, positions, directions, talker,
 						text);

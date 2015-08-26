@@ -2,6 +2,27 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Add Actor butto in SpeechPart is adding and actor to both speech parts
+
+	// Text for the speech isnt showing up in the attributes window, no idea why
+
+	// DOoooooooooooooooooo new class for holding Text instead of Object[]
+	// Will work muuuuuch better
+	// TEXT(Objects... objects)
+
+	// public void postLoad() {
+	// for (ScriptEvent scriptEvent : scriptEvents) {
+	// scriptEvent.postLoad();
+	// }
+	// for (ScriptTrigger scriptTrigger : scriptTriggers) {
+	// scriptTrigger.postLoad();
+	// }
+	//
+	// HERE
+	// SPEECHEVENTS.POSTLOAD()
+	//
+	// }
+
 	// when changing the arraylist in speech event need to alter the guid too.
 	// OR have preSave() method!?!
 
