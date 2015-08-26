@@ -66,10 +66,13 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 	public static class SpeechPart {
 
+		public final static String[] editableAttributes = { "actors",
+				"positions", "directions", "talker", "text", "inline" };
+
 		public transient ArrayList<Actor> actors = null;
 		public ArrayList<Float> positions;
 		public ArrayList<DIRECTION> directions;
-		public Actor talker;
+		public transient Actor talker;
 		public StringWithColor[] text;
 		public boolean inline = false;
 

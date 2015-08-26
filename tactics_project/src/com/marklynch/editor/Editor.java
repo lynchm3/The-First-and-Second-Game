@@ -74,6 +74,7 @@ public class Editor {
 	Button scriptTriggersTabButton;
 	Button aisTabButton;
 	Button relationsTabButton;
+	Button speechPartTabButton;
 
 	public SettingsWindow settingsWindow;
 	public LevelSettingsWindow levelSettingsWindow;
@@ -88,6 +89,7 @@ public class Editor {
 	public ScriptTriggersSettingsWindow scriptsTriggersSettingsWindow;
 	public AIsSettingsWindow aisSettingsWindow;
 	public RelationsSettingsWindow relationsSettingsWindow;
+	// public SpeechPartSettingsWindow speechPartSettingsWindow;
 
 	public GameObject selectedGameObject;
 
@@ -416,12 +418,10 @@ public class Editor {
 						"HI, THIS IS SCRIPTED SPEECH :D", Color.BLACK) });
 
 		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(
-				speechActors1,
-				speechPositions1,
-				speechDirections1,
+				speechActors1, speechPositions1, speechDirections1,
 				Game.level.factions.get(0).actors.get(0),
 				new StringWithColor[] { new StringWithColor(
-						"HI, THIS IS THE SECOND PART, WOO, THIS IS GOING GREAT",
+						"THE SECOND PART, WOO, THIS IS GOING GREAT",
 						Color.BLACK) });
 		ArrayList<ScriptEventSpeech.SpeechPart> speechParts1 = new ArrayList<ScriptEventSpeech.SpeechPart>();
 		speechParts1.add(speechPart1_1);

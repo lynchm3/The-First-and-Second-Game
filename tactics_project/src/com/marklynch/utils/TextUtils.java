@@ -10,6 +10,7 @@ import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
+import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.AI;
@@ -265,6 +266,20 @@ public class TextUtils {
 				String string = "" + factionRelationship.source + " -> "
 						+ factionRelationship.target + " ("
 						+ factionRelationship.relationship + ")";
+
+				float textWidth = Game.font.getWidth(string);
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX,
+						posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof SpeechPart) {
+
+				SpeechPart speechPart = (SpeechPart) content;
+				String string = speechPart.text[0].string;
+				if (string.length() > 10) {
+					string = string.substring(0, 10) + "...";
+				}
+				string = "\"" + string + "\"";
 
 				float textWidth = Game.font.getWidth(string);
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX,
