@@ -1,5 +1,7 @@
 package com.marklynch.editor;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import mdesl.graphics.Color;
@@ -101,29 +103,69 @@ public class AttributesWindow {
 
 		// Attribute buttons
 		int i = 0;
+		int count = 0;
 		for (; i < fields.length; i++) {
-			final int index = i;
-			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (index + 1) * 30, 200, 30, object, fields[i], true,
-					true, this);
-			buttons.add(button);
-			button.setClickListener(new ClickListener() {
-				@Override
-				public void click() {
-					button.down = !button.down;
-					if (button.down) {
-						depressButtons();
-						button.down = true;
-						editor.editAttribute(object, fields[index], button);
-					} else {
-						editor.enterTyped();
-					}
+			Field field = null;
+			ArrayList arrayList = null;
+
+			try {
+				field = object.getClass().getField(fields[i]);
+				if (field.getType().isAssignableFrom(ArrayList.class)) {
+					arrayList = (ArrayList) field.get(object);
 				}
-			});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			if (arrayList != null) {
+				for (int j = 0; j < arrayList.size(); j++) {
+					final int arrayListIndex = j;
+					final int index = count;
+					final AtributesWindowButton button = new AtributesWindowButton(
+							0, 0 + (index + 1) * 30, 200, 30, arrayList,
+							"" + j, true, true, this);
+					buttons.add(button);
+					button.setClickListener(new ClickListener() {
+						@Override
+						public void click() {
+							button.down = !button.down;
+							if (button.down) {
+								depressButtons();
+								button.down = true;
+								editor.editAttribute(object, ""
+										+ arrayListIndex, button);
+							} else {
+								editor.enterTyped();
+							}
+						}
+					});
+					count++;
+				}
+			} else {
+				final int index = count;
+				final AtributesWindowButton button = new AtributesWindowButton(
+						0, 0 + (index + 1) * 30, 200, 30, object, fields[i],
+						true, true, this);
+				buttons.add(button);
+				button.setClickListener(new ClickListener() {
+					@Override
+					public void click() {
+						button.down = !button.down;
+						if (button.down) {
+							depressButtons();
+							button.down = true;
+							editor.editAttribute(object, fields[index], button);
+						} else {
+							editor.enterTyped();
+						}
+					}
+				});
+				count++;
+			}
 
 		}
 
-		// Delete buttons
+		// Custom buttons (copy, delete...)
 		if (object instanceof Actor) {
 			final Actor actor = (Actor) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,

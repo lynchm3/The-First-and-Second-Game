@@ -11,12 +11,12 @@ import org.lwjgl.util.vector.Matrix4f;
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.level.script.InlineSpeechPart;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.ScriptEventEndLevel;
 import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
+import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerScriptEventEnded;
@@ -367,15 +367,15 @@ public class Level {
 		// Script
 
 		// Speech 1
-		Vector<Actor> speechActors1 = new Vector<Actor>();
+		ArrayList<Actor> speechActors1 = new ArrayList<Actor>();
 		speechActors1.add(factions.get(0).actors.get(0));
 		speechActors1.add(factions.get(0).actors.get(1));
 
-		Vector<Float> speechPositions1 = new Vector<Float>();
+		ArrayList<Float> speechPositions1 = new ArrayList<Float>();
 		speechPositions1.add(0f);
 		speechPositions1.add(0f);
 
-		Vector<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections1 = new Vector<ScriptEventSpeech.SpeechPart.DIRECTION>();
+		ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections1 = new ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION>();
 		speechDirections1.add(ScriptEventSpeech.SpeechPart.DIRECTION.RIGHT);
 		speechDirections1.add(ScriptEventSpeech.SpeechPart.DIRECTION.LEFT);
 
@@ -407,21 +407,21 @@ public class Level {
 		// 0);
 
 		ScriptEventEndLevel scriptEventEndLevel = new ScriptEventEndLevel(true,
-				scriptTrigger1, new Object[] { "GAME OVER" });
+				scriptTrigger1, new String[] { "GAME OVER" });
 		// ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
 		// speechParts1, null);
 
 		// Speech 2
 
-		Vector<Actor> speechActors2 = new Vector<Actor>();
+		ArrayList<Actor> speechActors2 = new ArrayList<Actor>();
 		speechActors2.add(factions.get(2).actors.get(0));
 		speechActors2.add(factions.get(0).actors.get(1));
 
-		Vector<Float> speechPositions2 = new Vector<Float>();
+		ArrayList<Float> speechPositions2 = new ArrayList<Float>();
 		speechPositions2.add(0f);
 		speechPositions2.add(0f);
 
-		Vector<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections2 = new Vector<ScriptEventSpeech.SpeechPart.DIRECTION>();
+		ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections2 = new ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION>();
 		speechDirections2.add(ScriptEventSpeech.SpeechPart.DIRECTION.RIGHT);
 		speechDirections2.add(ScriptEventSpeech.SpeechPart.DIRECTION.LEFT);
 
@@ -431,7 +431,7 @@ public class Level {
 				new StringWithColor[] { new StringWithColor(
 						"GREEN TEAM HOOOOOOOO", Color.BLACK) });
 
-		Vector<ScriptEventSpeech.SpeechPart> speechParts2 = new Vector<ScriptEventSpeech.SpeechPart>();
+		ArrayList<ScriptEventSpeech.SpeechPart> speechParts2 = new ArrayList<ScriptEventSpeech.SpeechPart>();
 		speechParts2.add(speechPart2_1);
 
 		ScriptTrigger scriptTrigger2 = new ScriptTriggerTurnStart(1, 2);
@@ -447,18 +447,18 @@ public class Level {
 
 		// Inline speechVector<Actor> speechActors1 = new Vector<Actor>();
 
-		InlineSpeechPart inlineSpeechPart1_1 = new InlineSpeechPart(
+		SpeechPart inlineSpeechPart1_1 = new SpeechPart(
 				factions.get(0).actors.get(0),
-				new Object[] { new StringWithColor("HOLLA INLINE SPEECH YO",
-						Color.BLACK) });
+				new StringWithColor[] { new StringWithColor(
+						"HOLLA INLINE SPEECH YO", Color.BLACK) });
 
-		InlineSpeechPart inlineSpeechPart1_2 = new InlineSpeechPart(
+		SpeechPart inlineSpeechPart1_2 = new SpeechPart(
 				factions.get(0).actors.get(0),
-				new Object[] { new StringWithColor(
+				new StringWithColor[] { new StringWithColor(
 						"HOLLA, PART 2 OF THE INLINE SPEECH, WANT TO PUSH IT TO OVER 2 LINES, JUST TO SEE WTF IT LOOKS LIKE HOLLA",
 						Color.BLACK) });
 
-		Vector<InlineSpeechPart> inlineSpeechParts1 = new Vector<InlineSpeechPart>();
+		Vector<SpeechPart> inlineSpeechParts1 = new Vector<SpeechPart>();
 		inlineSpeechParts1.add(inlineSpeechPart1_1);
 		inlineSpeechParts1.add(inlineSpeechPart1_2);
 

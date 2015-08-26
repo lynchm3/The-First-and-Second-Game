@@ -12,7 +12,7 @@ public class ScriptEventEndLevel extends ScriptEvent {
 	public final static String[] editableAttributes = { "name",
 			"blockUserInput", "scriptTrigger", "text" };
 
-	Object[] text;
+	String[] text;
 	boolean completed = false;
 
 	public ScriptEventEndLevel() {
@@ -20,7 +20,7 @@ public class ScriptEventEndLevel extends ScriptEvent {
 	}
 
 	public ScriptEventEndLevel(boolean blockUserInput,
-			ScriptTrigger scriptTrigger, Object[] text) {
+			ScriptTrigger scriptTrigger, String[] text) {
 		super(blockUserInput, scriptTrigger);
 		name = "ScriptEventEndLevel";
 		this.text = text;

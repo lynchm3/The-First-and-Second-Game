@@ -1,9 +1,12 @@
 package com.marklynch.tactics.objects.level.script;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import mdesl.graphics.Color;
+
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
@@ -18,7 +21,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 	public final static String[] editableAttributes = { "name",
 			"blockUserInput", "scriptTrigger", "speechParts" };
 
-	public Vector<SpeechPart> speechParts;
+	public ArrayList<SpeechPart> speechParts;
 	public int speechIndex = 0;
 
 	public ScriptEventSpeech() {
@@ -26,9 +29,10 @@ public class ScriptEventSpeech extends ScriptEvent {
 	}
 
 	public ScriptEventSpeech(boolean blockUserInput,
-			Vector<SpeechPart> speechParts, ScriptTrigger scriptTrigger) {
+			ArrayList<SpeechPart> speechParts, ScriptTrigger scriptTrigger) {
 		super(blockUserInput, scriptTrigger);
 		this.speechParts = speechParts;
+		name = "ScriptEventSpeech";
 	}
 
 	@Override
@@ -58,11 +62,12 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 	public static class SpeechPart {
 
-		public transient Vector<Actor> actors = null;
-		public Vector<Float> positions;
-		public Vector<DIRECTION> directions;
+		public transient ArrayList<Actor> actors = null;
+		public ArrayList<Float> positions;
+		public ArrayList<DIRECTION> directions;
 		public Actor talker;
 		public StringWithColor[] text;
+		public boolean inline = false;
 
 		// For saving and loading
 		public ArrayList<String> actorGUIDs = new ArrayList<String>();
@@ -72,8 +77,20 @@ public class ScriptEventSpeech extends ScriptEvent {
 			LEFT, RIGHT
 		}
 
-		public SpeechPart(Vector<Actor> actors, Vector<Float> positions,
-				Vector<DIRECTION> directions, Actor talker,
+		public SpeechPart(Actor talker, StringWithColor[] text) {
+			super();
+			this.talker = talker;
+			this.text = text;
+			this.inline = inline;
+			for (Actor actor : actors) {
+				actorGUIDs.add(actor.guid);
+			}
+			talkerGUID = talker.guid;
+			inline = true;
+		}
+
+		public SpeechPart(ArrayList<Actor> actors, ArrayList<Float> positions,
+				ArrayList<DIRECTION> directions, Actor talker,
 				StringWithColor[] text) {
 			super();
 			this.actors = actors;
@@ -81,48 +98,91 @@ public class ScriptEventSpeech extends ScriptEvent {
 			this.directions = directions;
 			this.talker = talker;
 			this.text = text;
+			inline = false;
 			for (Actor actor : actors) {
 				actorGUIDs.add(actor.guid);
 			}
 			talkerGUID = talker.guid;
+
 		}
 
 		public void draw() {
+			if (inline) {
 
-			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), 0f,
-					Game.windowWidth, 0f, Game.windowHeight);
+				// INLINE
 
-			float posY = Game.windowHeight / 2f;
+				// get the instance of the view matrix for our batch
+				Matrix4f view = Game.activeBatch.getViewMatrix();
 
-			for (int i = 0; i < actors.size(); i++) {
+				// reset the matrix to identity, i.e. "no camera transform"
 
-				float alpha = 1f;
+				Game.activeBatch.flush();
+				view.setIdentity();
 
-				if (actors.get(i) != this.talker) {
-					alpha = 0.5f;
+				view.translate(new Vector2f(Game.windowWidth / 2,
+						Game.windowHeight / 2));
+				view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+				view.translate(new Vector2f(-Game.windowWidth / 2,
+						-Game.windowHeight / 2));
+				view.translate(new Vector2f(Game.dragX, Game.dragY));
+
+				// update the new view matrix
+				Game.activeBatch.updateUniforms();
+
+				float textX1 = talker.squareGameObjectIsOn.x
+						* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
+				float textY1 = talker.squareGameObjectIsOn.y
+						* Game.SQUARE_HEIGHT;
+
+				// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128,
+				// 128);
+				TextUtils.printTextWithImages(text, textX1, textY1, 200);
+
+				// reset the matrix to identity, i.e. "no camera transform"
+
+				Game.activeBatch.flush();
+				view.setIdentity();
+				Game.activeBatch.updateUniforms();
+			} else {
+				// NOT INLINE
+
+				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), 0f,
+						Game.windowWidth, 0f, Game.windowHeight);
+
+				float posY = Game.windowHeight / 2f;
+
+				for (int i = 0; i < actors.size(); i++) {
+
+					float alpha = 1f;
+
+					if (actors.get(i) != this.talker) {
+						alpha = 0.5f;
+					}
+					if (directions.get(i).equals(DIRECTION.RIGHT)) {
+						TextureUtils.drawTexture(actors.get(i).imageTexture,
+								alpha, positions.get(i),
+								positions.get(i) + 256, posY, posY + 256);
+					} else {
+						TextureUtils.drawTextureBackwards(
+								actors.get(i).imageTexture, alpha,
+								Game.windowWidth - positions.get(i) - 256,
+								Game.windowWidth - positions.get(i), posY,
+								posY + 256);
+					}
 				}
-				if (directions.get(i).equals(DIRECTION.RIGHT)) {
-					TextureUtils.drawTexture(actors.get(i).imageTexture, alpha,
-							positions.get(i), positions.get(i) + 256, posY,
-							posY + 256);
-				} else {
-					TextureUtils.drawTextureBackwards(
-							actors.get(i).imageTexture, alpha, Game.windowWidth
-									- positions.get(i) - 256, Game.windowWidth
-									- positions.get(i), posY, posY + 256);
-				}
+
+				float textX1 = 300;
+				float textX2 = Game.windowWidth - 300;
+				float width = textX2 - textX1;
+				if (width <= 100)
+					width = 100;
+
+				System.out.println("text = " + text);
+
+				// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128,
+				// 128);
+				TextUtils.printTextWithImages(text, textX1, posY, width);
 			}
-
-			float textX1 = 300;
-			float textX2 = Game.windowWidth - 300;
-			float width = textX2 - textX1;
-			if (width <= 100)
-				width = 100;
-
-			System.out.println("text = " + text);
-
-			// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
-			TextUtils.printTextWithImages(text, textX1, posY, width);
 		}
 	}
 
