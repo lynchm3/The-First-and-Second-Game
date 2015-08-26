@@ -57,7 +57,7 @@ public class AttributeSelectionWindow<T> {
 						Class<? extends Object> objectClass = editor.objectToEdit
 								.getClass();
 						Field field = objectClass
-								.getField(editor.attributeToEdit);
+								.getField(editor.attributeToEditName);
 
 						if (field.getType().isAssignableFrom(GameObject.class)) {
 							GameObject gameObject = (GameObject) objects
@@ -65,7 +65,7 @@ public class AttributeSelectionWindow<T> {
 							field.set(ownerOfAttribute, gameObject);
 							try {
 								Field guidField = objectClass
-										.getField(editor.attributeToEdit
+										.getField(editor.attributeToEditName
 												+ "GUID");
 								if (guidField != null) {
 									guidField.set(ownerOfAttribute,
@@ -88,7 +88,7 @@ public class AttributeSelectionWindow<T> {
 								field.set(ownerOfAttribute, faction);
 								try {
 									Field guidField = objectClass
-											.getField(editor.attributeToEdit
+											.getField(editor.attributeToEditName
 													+ "GUID");
 									if (guidField != null) {
 										guidField.set(ownerOfAttribute,
@@ -112,7 +112,7 @@ public class AttributeSelectionWindow<T> {
 							field.set(ownerOfAttribute, square);
 							try {
 								Field guidField = objectClass
-										.getField(editor.attributeToEdit
+										.getField(editor.attributeToEditName
 												+ "GUID");
 								if (guidField != null) {
 									guidField
@@ -129,7 +129,7 @@ public class AttributeSelectionWindow<T> {
 							field.set(ownerOfAttribute, scriptEvent);
 							try {
 								Field guidField = objectClass
-										.getField(editor.attributeToEdit
+										.getField(editor.attributeToEditName
 												+ "GUID");
 								if (guidField != null) {
 									guidField.set(ownerOfAttribute,
@@ -145,7 +145,7 @@ public class AttributeSelectionWindow<T> {
 							field.set(ownerOfAttribute, actor);
 							try {
 								Field guidField = objectClass
-										.getField(editor.attributeToEdit
+										.getField(editor.attributeToEditName
 												+ "GUID");
 								if (guidField != null) {
 									guidField.set(ownerOfAttribute, actor.guid);
@@ -168,7 +168,7 @@ public class AttributeSelectionWindow<T> {
 							field.set(editor.objectToEdit, objects.get(index));
 							try {
 								Field guidField = objectClass
-										.getField(editor.attributeToEdit
+										.getField(editor.attributeToEditName
 												+ "Path");
 								if (guidField != null) {
 									guidField

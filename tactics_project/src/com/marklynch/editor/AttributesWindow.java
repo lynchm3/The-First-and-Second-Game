@@ -105,6 +105,7 @@ public class AttributesWindow {
 		int i = 0;
 		int count = 0;
 		for (; i < fields.length; i++) {
+			final int fieldIndex = i;
 			Field field = null;
 			ArrayList arrayList = null;
 
@@ -122,8 +123,9 @@ public class AttributesWindow {
 					final int arrayListIndex = j;
 					final int index = count;
 					final AtributesWindowButton button = new AtributesWindowButton(
-							0, 0 + (index + 1) * 30, 200, 30, arrayList,
-							"" + j, true, true, this);
+							0, 0 + (index + 1) * 30, 200, 30, object,
+							fields[fieldIndex], true, true, this,
+							arrayListIndex);
 					buttons.add(button);
 					button.setClickListener(new ClickListener() {
 						@Override
@@ -132,8 +134,9 @@ public class AttributesWindow {
 							if (button.down) {
 								depressButtons();
 								button.down = true;
-								editor.editAttribute(object, ""
-										+ arrayListIndex, button);
+								editor.editAttribute(object,
+										fields[fieldIndex], button,
+										arrayListIndex);
 							} else {
 								editor.enterTyped();
 							}
@@ -144,8 +147,8 @@ public class AttributesWindow {
 			} else {
 				final int index = count;
 				final AtributesWindowButton button = new AtributesWindowButton(
-						0, 0 + (index + 1) * 30, 200, 30, object, fields[i],
-						true, true, this);
+						0, 0 + (index + 1) * 30, 200, 30, object,
+						fields[fieldIndex], true, true, this, 0);
 				buttons.add(button);
 				button.setClickListener(new ClickListener() {
 					@Override
@@ -154,7 +157,8 @@ public class AttributesWindow {
 						if (button.down) {
 							depressButtons();
 							button.down = true;
-							editor.editAttribute(object, fields[index], button);
+							editor.editAttribute(object, fields[fieldIndex],
+									button, 0);
 						} else {
 							editor.enterTyped();
 						}
@@ -170,7 +174,7 @@ public class AttributesWindow {
 			final Actor actor = (Actor) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
 					0 + (i + 2) * 30, 200, 30, actor, "delete", true, true,
-					this);
+					this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -191,7 +195,7 @@ public class AttributesWindow {
 			});
 			final AtributesWindowButton copyButton = new AtributesWindowButton(
 					0, 0 + (i + 3) * 30, 200, 30, actor, "copy", true, true,
-					this);
+					this, 0);
 			buttons.add(copyButton);
 			copyButton.setClickListener(new ClickListener() {
 				@Override
@@ -211,7 +215,7 @@ public class AttributesWindow {
 			final GameObject gameObject = (GameObject) object;
 			final AtributesWindowButton deleteButton = new AtributesWindowButton(
 					0, 0 + (i + 2) * 30, 200, 30, gameObject, "delete", true,
-					true, this);
+					true, this, 0);
 			buttons.add(deleteButton);
 			deleteButton.setClickListener(new ClickListener() {
 				@Override
@@ -225,7 +229,7 @@ public class AttributesWindow {
 			});
 			final AtributesWindowButton copyButton = new AtributesWindowButton(
 					0, 0 + (i + 3) * 30, 200, 30, gameObject, "copy", true,
-					true, this);
+					true, this, 0);
 			buttons.add(copyButton);
 			copyButton.setClickListener(new ClickListener() {
 				@Override
@@ -244,7 +248,7 @@ public class AttributesWindow {
 			final Faction faction = (Faction) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
 					0 + (i + 2) * 30, 200, 30, faction, "delete", true, true,
-					this);
+					this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -270,7 +274,7 @@ public class AttributesWindow {
 			final Weapon weapon = (Weapon) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
 					0 + (i + 2) * 30, 200, 30, weapon, "delete", true, true,
-					this);
+					this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -286,7 +290,7 @@ public class AttributesWindow {
 		} else if (object instanceof Decoration) {
 			final AtributesWindowButton button = new AtributesWindowButton(0,
 					0 + (i + 2) * 30, 200, 30, object, "delete", true, true,
-					this);
+					this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override

@@ -92,7 +92,8 @@ public class Editor {
 	public GameObject selectedGameObject;
 
 	public Object objectToEdit = null;
-	public String attributeToEdit = "";
+	public String attributeToEditName = "";
+	public int attributeToEditIndex = 0;
 	public String textEntered = "";
 	public AtributesWindowButton attributeButton = null;
 	public SettingsWindowButton settingsButton = null;
@@ -669,49 +670,103 @@ public class Editor {
 	}
 
 	public void keyTyped(char character) {
+		System.out.println("keyTyped()");
 
 		if (state == STATE.SETTINGS_CHANGE && settingsButton != null) {
 			settingsButton.keyTyped(character);
 		} else if (objectToEdit != null) {
-			if (attributeToEdit != null && this.textEntered != null) {
+			if (attributeToEditName != null && this.textEntered != null) {
+				System.out.println("objectToEdit = " + objectToEdit);
 
 				try {
 					Class<? extends Object> objectClass = objectToEdit
 							.getClass();
-					Field field = objectClass.getField(attributeToEdit);
+					Field field = objectClass.getField(attributeToEditName);
+					System.out.println("field = " + field);
+					if (field.getType().isAssignableFrom(ArrayList.class)) {
+						System.out
+								.println("field.getType().isAssignableFrom(ArrayList.class)");
+						ArrayList arrayList = (ArrayList) field
+								.get(objectToEdit);
+						Class attributeClass = arrayList.get(
+								attributeToEditIndex).getClass();
+						System.out
+								.println("attributeClass = " + attributeClass);
+						System.out.println("attributeToEditIndex = "
+								+ attributeToEditIndex);
+						if (attributeClass.isAssignableFrom(Integer.class)) { // int
+							if (48 <= character && character <= 57
+									&& textEntered.length() < 8) {
+								this.textEntered += character;
+								arrayList.set(this.attributeToEditIndex,
+										Integer.valueOf(this.textEntered)
+												.intValue());
+							} else if (character == '-'
+									&& textEntered.length() == 0) {
+								this.textEntered += character;
+							}
+						} else if (attributeClass.isAssignableFrom(Float.class)) {
+							// float
+							if (48 <= character && character <= 57
+									&& textEntered.length() < 8) {
+								this.textEntered += character;
+								arrayList
+										.set(this.attributeToEditIndex, Float
+												.valueOf(this.textEntered)
+												.floatValue());
+							} else if (character == '-'
+									&& textEntered.length() == 0) {
+								this.textEntered += character;
+							} else if (character == '.'
+									&& !textEntered.contains(".")
+									&& textEntered.length() > 0
+									&& textEntered.length() < 8) {
+								this.textEntered += character;
+							}
+							System.out.println("Text entered = " + textEntered);
+						} else if (attributeClass
+								.isAssignableFrom(String.class)) { // string
+							this.textEntered += character;
+							arrayList.set(this.attributeToEditIndex,
+									textEntered);
+						}
 
-					if (field.getType().isAssignableFrom(int.class)) { // int
-						if (48 <= character && character <= 57
-								&& textEntered.length() < 8) {
+					} else {
+						if (field.getType().isAssignableFrom(int.class)) { // int
+							if (48 <= character && character <= 57
+									&& textEntered.length() < 8) {
+								this.textEntered += character;
+								field.set(objectToEdit,
+										Integer.valueOf(this.textEntered)
+												.intValue());
+							} else if (character == '-'
+									&& textEntered.length() == 0) {
+								this.textEntered += character;
+							}
+						} else if (field.getType()
+								.isAssignableFrom(float.class)) {
+							// float
+							if (48 <= character && character <= 57
+									&& textEntered.length() < 8) {
+								this.textEntered += character;
+								field.set(objectToEdit,
+										Float.valueOf(this.textEntered)
+												.floatValue());
+							} else if (character == '-'
+									&& textEntered.length() == 0) {
+								this.textEntered += character;
+							} else if (character == '.'
+									&& !textEntered.contains(".")
+									&& textEntered.length() > 0
+									&& textEntered.length() < 8) {
+								this.textEntered += character;
+							}
+							System.out.println("Text entered = " + textEntered);
+						} else if (field.getType().isAssignableFrom(
+								String.class)) { // string
 							this.textEntered += character;
-							field.set(objectToEdit,
-									Integer.valueOf(this.textEntered)
-											.intValue());
-						} else if (character == '-'
-								&& textEntered.length() == 0) {
-							this.textEntered += character;
+							field.set(objectToEdit, textEntered);
 						}
-					} else if (field.getType().isAssignableFrom(float.class)) {
-						// float
-						if (48 <= character && character <= 57
-								&& textEntered.length() < 8) {
-							this.textEntered += character;
-							field.set(objectToEdit,
-									Float.valueOf(this.textEntered)
-											.floatValue());
-						} else if (character == '-'
-								&& textEntered.length() == 0) {
-							this.textEntered += character;
-						} else if (character == '.'
-								&& !textEntered.contains(".")
-								&& textEntered.length() > 0
-								&& textEntered.length() < 8) {
-							this.textEntered += character;
-						}
-						System.out.println("Text entered = " + textEntered);
-					} else if (field.getType().isAssignableFrom(String.class)) { // string
-						this.textEntered += character;
-						field.set(objectToEdit, textEntered);
 					}
 
 				} catch (Exception e) {
@@ -726,7 +781,7 @@ public class Editor {
 	public void enterTyped() {
 		if (state == STATE.SETTINGS_CHANGE && settingsButton != null) {
 			settingsButton.enterTyped();
-		} else if (objectToEdit != null && attributeToEdit != null) {
+		} else if (objectToEdit != null && attributeToEditName != null) {
 			stopEditingAttribute();
 		}
 	}
@@ -737,18 +792,18 @@ public class Editor {
 			return;
 		}
 
-		if (objectToEdit != null && attributeToEdit != null
+		if (objectToEdit != null && attributeToEditName != null
 				&& this.textEntered != null && textEntered.length() > 0) {
 			this.textEntered = this.textEntered.substring(0,
 					this.textEntered.length() - 1);
 		}
 
-		if (objectToEdit != null && attributeToEdit != null
+		if (objectToEdit != null && attributeToEditName != null
 				&& this.textEntered != null) {
 
 			Class<? extends Object> objectClass = objectToEdit.getClass();
 			try {
-				Field field = objectClass.getField(attributeToEdit);
+				Field field = objectClass.getField(attributeToEditName);
 
 				if (field.getType().isAssignableFrom(int.class)) { // int
 					if (textEntered.length() == 0) {
@@ -776,12 +831,15 @@ public class Editor {
 	}
 
 	public void editAttribute(Object object, String attribute,
-			AtributesWindowButton attributeButton) {
+			AtributesWindowButton attributeButton, int index) {
 		objectToEdit = object;
-		attributeToEdit = attribute;
+		attributeToEditName = attribute;
+		attributeToEditIndex = index;
 		try {
+
 			Class<? extends Object> objectClass = objectToEdit.getClass();
-			Field field = objectClass.getField(attributeToEdit);
+
+			Field field = objectClass.getField(attributeToEditName);
 
 			if (field.getType().isAssignableFrom(Faction.class)) {
 				// faction
@@ -863,7 +921,7 @@ public class Editor {
 		this.selectedGameObject = null;
 		this.attributesWindow = null;
 		objectToEdit = null;
-		attributeToEdit = null;
+		attributeToEditName = null;
 		textEntered = "";
 		this.attributeButton = null;
 		if (state == STATE.MOVEABLE_OBJECT_SELECTED)
@@ -875,7 +933,7 @@ public class Editor {
 		attributeSelectionWindow = null;
 		classSelectionWindow = null;
 		objectToEdit = null;
-		attributeToEdit = null;
+		attributeToEditName = null;
 		this.textEntered = "";
 		attributesWindow.depressButtons();
 	}

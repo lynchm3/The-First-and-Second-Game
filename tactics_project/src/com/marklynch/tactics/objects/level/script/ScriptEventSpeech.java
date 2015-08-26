@@ -19,9 +19,10 @@ import com.marklynch.utils.TextureUtils;
 public class ScriptEventSpeech extends ScriptEvent {
 
 	public final static String[] editableAttributes = { "name",
-			"blockUserInput", "scriptTrigger", "speechParts" };
+			"blockUserInput", "scriptTrigger", "speechParts", "intTest" };
 
 	public ArrayList<SpeechPart> speechParts;
+	public ArrayList<Integer> intTest;
 	public int speechIndex = 0;
 
 	public ScriptEventSpeech() {
@@ -33,6 +34,9 @@ public class ScriptEventSpeech extends ScriptEvent {
 		super(blockUserInput, scriptTrigger);
 		this.speechParts = speechParts;
 		name = "ScriptEventSpeech";
+		intTest = new ArrayList<Integer>();
+		intTest.add(1);
+		intTest.add(2);
 	}
 
 	@Override
