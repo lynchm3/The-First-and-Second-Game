@@ -56,6 +56,8 @@ public class UserInputEditor {
 	public static boolean keyState8 = false;
 	public static boolean keyState9 = false;
 	public static boolean keyState0 = false;
+	public static boolean keyStateMinus = false;
+	public static boolean keyStatePeriod = false;
 
 	public static boolean mouseButtonStateLeft = false;
 	public static boolean mouseButtonStateRight = false;
@@ -595,7 +597,7 @@ public class UserInputEditor {
 				if (keyStateLeftShift || keyStateRightShift) {
 					editor.keyTyped('U');
 				} else {
-					editor.keyTyped('U');
+					editor.keyTyped('u');
 				}
 			}
 			keyStateU = true;
@@ -766,6 +768,20 @@ public class UserInputEditor {
 			keyState0 = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_0)) {
 			keyState0 = false;
+		}
+
+		if (keyStateMinus == false && Keyboard.isKeyDown(Keyboard.KEY_MINUS)) {
+			editor.keyTyped('-');
+			keyStateMinus = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_MINUS)) {
+			keyStateMinus = false;
+		}
+
+		if (keyStatePeriod == false && Keyboard.isKeyDown(Keyboard.KEY_PERIOD)) {
+			editor.keyTyped('.');
+			keyStatePeriod = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_PERIOD)) {
+			keyStatePeriod = false;
 		}
 
 	}

@@ -677,17 +677,35 @@ public class Editor {
 							.getClass();
 					Field field = objectClass.getField(attributeToEdit);
 
-					if (field.getType().isAssignableFrom(int.class)
-							|| field.getType().isAssignableFrom(float.class)) { // int
-																				// or
-																				// float
+					if (field.getType().isAssignableFrom(int.class)) { // int
 						if (48 <= character && character <= 57
 								&& textEntered.length() < 8) {
 							this.textEntered += character;
 							field.set(objectToEdit,
 									Integer.valueOf(this.textEntered)
 											.intValue());
+						} else if (character == '-'
+								&& textEntered.length() == 0) {
+							this.textEntered += character;
 						}
+					} else if (field.getType().isAssignableFrom(float.class)) {
+						// float
+						if (48 <= character && character <= 57
+								&& textEntered.length() < 8) {
+							this.textEntered += character;
+							field.set(objectToEdit,
+									Float.valueOf(this.textEntered)
+											.floatValue());
+						} else if (character == '-'
+								&& textEntered.length() == 0) {
+							this.textEntered += character;
+						} else if (character == '.'
+								&& !textEntered.contains(".")
+								&& textEntered.length() > 0
+								&& textEntered.length() < 8) {
+							this.textEntered += character;
+						}
+						System.out.println("Text entered = " + textEntered);
 					} else if (field.getType().isAssignableFrom(String.class)) { // string
 						this.textEntered += character;
 						field.set(objectToEdit, textEntered);
@@ -729,15 +747,20 @@ public class Editor {
 			try {
 				Field field = objectClass.getField(attributeToEdit);
 
-				if (field.getType().isAssignableFrom(int.class)
-						|| field.getType().isAssignableFrom(float.class)) { // int
-																			// or
-																			// float
+				if (field.getType().isAssignableFrom(int.class)) { // int
 					if (textEntered.length() == 0) {
 						field.set(objectToEdit, 0);
 					} else {
 						field.set(objectToEdit,
 								Integer.valueOf(this.textEntered).intValue());
+					}
+				} else if (field.getType().isAssignableFrom(float.class)) {
+					// float
+					if (textEntered.length() == 0) {
+						field.set(objectToEdit, 0);
+					} else {
+						field.set(objectToEdit, Float.valueOf(this.textEntered)
+								.floatValue());
 					}
 				} else if (field.getType().isAssignableFrom(String.class)) { // string
 					field.set(objectToEdit, textEntered);
