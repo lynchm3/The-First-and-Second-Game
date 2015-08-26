@@ -3,6 +3,7 @@ package com.marklynch.tactics.objects.level.script;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 
 public class Script {
@@ -10,13 +11,33 @@ public class Script {
 	public ArrayList<ScriptEvent> scriptEvents;
 	public Vector<ScriptEvent> activeScriptEvents = new Vector<ScriptEvent>();
 	public ArrayList<ScriptTrigger> scriptTriggers;
+	public ArrayList<SpeechPart> speechParts = new ArrayList<SpeechPart>();
 
 	public Script(ArrayList<ScriptEvent> scriptEvents) {
 		super();
 		this.scriptEvents = scriptEvents;
 		this.scriptTriggers = new ArrayList<ScriptTrigger>();
-		for (ScriptEvent scriptEvent : scriptEvents) {
-			scriptTriggers.add(scriptEvent.scriptTrigger);
+		System.out.println("this.scriptEvents.size() = "
+				+ this.scriptEvents.size());
+
+		for (ScriptEvent scriptEvent : this.scriptEvents) {
+			scriptTriggers.add(scriptEvent.scriptTrigger.makeCopy());
+			if (scriptEvent instanceof ScriptEventSpeech) {
+				System.out.println("scriptEvent instanceof ScriptEventSpeech");
+				System.out
+						.println("((ScriptEventSpeech) scriptEvent).speechParts.size() = "
+								+ ((ScriptEventSpeech) scriptEvent).speechParts
+										.size());
+
+				for (SpeechPart speechPart : ((ScriptEventSpeech) scriptEvent).speechParts) {
+					this.speechParts.add(speechPart.makeCopy());
+				}
+			}
+			if (scriptEvent instanceof ScriptEventInlineSpeech) {
+				for (SpeechPart speechPart : ((ScriptEventInlineSpeech) scriptEvent).speechParts) {
+					this.speechParts.add(speechPart.makeCopy());
+				}
+			}
 		}
 	}
 

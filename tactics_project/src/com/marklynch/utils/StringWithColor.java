@@ -12,4 +12,9 @@ public class StringWithColor {
 		this.string = string;
 		this.color = color;
 	}
+
+	public StringWithColor makeCopy() {
+		return new StringWithColor(new String(string), new Color(color.r,
+				color.g, color.b, color.a));
+	}
 }

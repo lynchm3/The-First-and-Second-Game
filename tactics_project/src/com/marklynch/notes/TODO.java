@@ -2,6 +2,15 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// when changing the arraylist in speech event need to alter the guid too.
+	// OR have preSave() method!?!
+
+	// Speechpart needs total postLoad()
+
+	// preSave() method... probably... maybe... defo...
+
+	// Snow that falls and lands on the ground (shader? probably not...)
+
 	// Edit in editor for strings in script events
 
 	// negative values for ints and floats

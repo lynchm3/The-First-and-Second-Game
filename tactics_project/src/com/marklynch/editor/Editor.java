@@ -21,6 +21,7 @@ import com.marklynch.editor.settingswindow.RelationsSettingsWindow;
 import com.marklynch.editor.settingswindow.ScriptEventsSettingsWindow;
 import com.marklynch.editor.settingswindow.ScriptTriggersSettingsWindow;
 import com.marklynch.editor.settingswindow.SettingsWindow;
+import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
@@ -89,7 +90,7 @@ public class Editor {
 	public ScriptTriggersSettingsWindow scriptsTriggersSettingsWindow;
 	public AIsSettingsWindow aisSettingsWindow;
 	public RelationsSettingsWindow relationsSettingsWindow;
-	// public SpeechPartSettingsWindow speechPartSettingsWindow;
+	public SpeechPartSettingsWindow speechPartSettingsWindow;
 
 	public GameObject selectedGameObject;
 
@@ -163,6 +164,7 @@ public class Editor {
 				this);
 		aisSettingsWindow = new AIsSettingsWindow(200, this);
 		relationsSettingsWindow = new RelationsSettingsWindow(200, this);
+		speechPartSettingsWindow = new SpeechPartSettingsWindow(200, this);
 
 		settingsWindow = levelSettingsWindow;
 
@@ -349,6 +351,21 @@ public class Editor {
 			}
 		};
 		buttons.add(relationsTabButton);
+
+		speechPartTabButton = new LevelButton(730, 50, 130, 30, "", "",
+				"SPEECH PART", true, true);
+		speechPartTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				speechPartTabButton.down = true;
+				settingsWindow = speechPartSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		buttons.add(speechPartTabButton);
 
 	}
 
