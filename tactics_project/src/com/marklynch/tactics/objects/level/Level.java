@@ -79,7 +79,7 @@ public class Level {
 		dialogs = new Vector<Dialog>();
 		decorations = new Vector<Decoration>();
 		gameCursor = new GameCursor();
-		script = new Script(new ArrayList<ScriptEvent>());
+		script = new Script();
 
 		factions = new ArrayList<Faction>();
 		inanimateObjects = new Vector<GameObject>();

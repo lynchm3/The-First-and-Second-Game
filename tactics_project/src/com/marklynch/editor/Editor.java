@@ -450,6 +450,8 @@ public class Editor {
 
 		Game.level.script.scriptTriggers.add(new ScriptTriggerTurnStart(1, 0));
 		Game.level.script.scriptTriggers.add(scriptTriggerActorSelected);
+		Game.level.script.speechParts.add(speechPart1_1);
+		Game.level.script.speechParts.add(speechPart1_2);
 		Game.level.ais.add(new AITargetObject(gameObject));
 		Game.level.ais.get(0).name = "attackDumpster";
 		Game.level.ais.add(new AITargetObject(actor0));

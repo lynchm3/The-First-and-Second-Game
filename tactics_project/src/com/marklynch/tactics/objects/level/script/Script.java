@@ -8,37 +8,43 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 
 public class Script {
 
-	public ArrayList<ScriptEvent> scriptEvents;
-	public Vector<ScriptEvent> activeScriptEvents = new Vector<ScriptEvent>();
-	public ArrayList<ScriptTrigger> scriptTriggers;
+	public ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
+	public ArrayList<ScriptEvent> activeScriptEvents = new ArrayList<ScriptEvent>();
+	public ArrayList<ScriptTrigger> scriptTriggers = new ArrayList<ScriptTrigger>();
 	public ArrayList<SpeechPart> speechParts = new ArrayList<SpeechPart>();
 
-	public Script(ArrayList<ScriptEvent> scriptEvents) {
+	public Script() {
 		super();
-		this.scriptEvents = scriptEvents;
-		this.scriptTriggers = new ArrayList<ScriptTrigger>();
+
+		scriptEvents = new ArrayList<ScriptEvent>();
+		activeScriptEvents = new ArrayList<ScriptEvent>();
+		scriptTriggers = new ArrayList<ScriptTrigger>();
+		speechParts = new ArrayList<SpeechPart>();
+
 		System.out.println("this.scriptEvents.size() = "
 				+ this.scriptEvents.size());
 
-		for (ScriptEvent scriptEvent : this.scriptEvents) {
-			scriptTriggers.add(scriptEvent.scriptTrigger.makeCopy());
-			if (scriptEvent instanceof ScriptEventSpeech) {
-				System.out.println("scriptEvent instanceof ScriptEventSpeech");
-				System.out
-						.println("((ScriptEventSpeech) scriptEvent).speechParts.size() = "
-								+ ((ScriptEventSpeech) scriptEvent).speechParts
-										.size());
-
-				for (SpeechPart speechPart : ((ScriptEventSpeech) scriptEvent).speechParts) {
-					this.speechParts.add(speechPart.makeCopy());
-				}
-			}
-			if (scriptEvent instanceof ScriptEventInlineSpeech) {
-				for (SpeechPart speechPart : ((ScriptEventInlineSpeech) scriptEvent).speechParts) {
-					this.speechParts.add(speechPart.makeCopy());
-				}
-			}
-		}
+		// for (ScriptEvent scriptEvent : this.scriptEvents) {
+		// scriptTriggers.add(scriptEvent.scriptTrigger.makeCopy());
+		// if (scriptEvent instanceof ScriptEventSpeech) {
+		// System.out.println("scriptEvent instanceof ScriptEventSpeech");
+		// System.out
+		// .println("((ScriptEventSpeech) scriptEvent).speechParts.size() = "
+		// + ((ScriptEventSpeech) scriptEvent).speechParts
+		// .size());
+		//
+		// for (SpeechPart speechPart : ((ScriptEventSpeech)
+		// scriptEvent).speechParts) {
+		// this.speechParts.add(speechPart.makeCopy());
+		// }
+		// }
+		// if (scriptEvent instanceof ScriptEventInlineSpeech) {
+		// for (SpeechPart speechPart : ((ScriptEventInlineSpeech)
+		// scriptEvent).speechParts) {
+		// this.speechParts.add(speechPart.makeCopy());
+		// }
+		// }
+		// }
 	}
 
 	public void activateScriptEvent() {
@@ -48,7 +54,7 @@ public class Script {
 			if (scriptEvent.scriptTrigger != null
 					&& scriptEvent.scriptTrigger.triggered == false
 					&& scriptEvent.scriptTrigger.checkTrigger()) {
-				this.activeScriptEvents.addElement(scriptEvent);
+				this.activeScriptEvents.add(scriptEvent);
 				scriptEvent.scriptTrigger.triggered = true;
 			}
 		}
