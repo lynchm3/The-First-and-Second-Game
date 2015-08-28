@@ -439,15 +439,13 @@ public class Editor {
 		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(
 				speechActors1, speechPositions1, speechDirections1,
 				Game.level.factions.get(0).actors.get(0), arrayList1);
-		Game.level.script.speechParts.add(speechPart1_1);
 
 		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(
 				speechActors1, speechPositions1, speechDirections1,
 				Game.level.factions.get(0).actors.get(0), arrayList2);
-		Game.level.script.speechParts.add(speechPart1_2);
 		ArrayList<ScriptEventSpeech.SpeechPart> speechParts1 = new ArrayList<ScriptEventSpeech.SpeechPart>();
-		speechParts1.add(speechPart1_1);
-		speechParts1.add(speechPart1_2);
+		speechParts1.add(speechPart1_1.makeCopy());
+		speechParts1.add(speechPart1_2.makeCopy());
 		ScriptTrigger scriptTriggerActorSelected = new ScriptTriggerActorSelected(
 				Game.level.factions.get(0).actors.get(0));
 		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
