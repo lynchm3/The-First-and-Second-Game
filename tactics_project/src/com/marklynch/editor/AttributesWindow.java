@@ -319,7 +319,7 @@ public class AttributesWindow {
 					speechPart.directions.add(true);
 
 					depressButtons();
-					editor.clearSelectedObject();
+					// editor.clearSelectedObject();
 					editor.settingsWindow.update();
 				}
 			});
