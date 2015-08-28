@@ -22,25 +22,14 @@ import com.marklynch.tactics.objects.weapons.Weapons;
 
 public class TextUtils {
 
-	public static void printTextWithImages(ArrayList contents, float posX,
-			float posY) {
-		printTextWithImages(contents, posX, posY, Float.MAX_VALUE);
-	}
-
 	public static void printTextWithImages(Object[] contents, float posX,
-			float posY) {
+			float posY, float maxWidth, boolean wrap) {
 		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY,
-				Float.MAX_VALUE);
-	}
-
-	public static void printTextWithImages(Object[] contents, float posX,
-			float posY, float maxWidth) {
-		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY,
-				maxWidth);
+				maxWidth, wrap);
 	}
 
 	public static void printTextWithImages(ArrayList contents, float posX,
-			float posY, float maxWidth) {
+			float posY, float maxWidth, boolean wrap) {
 
 		if (contents == null)
 			return;
@@ -76,8 +65,12 @@ public class TextUtils {
 
 					float width = Game.font.getWidth(stringPart);
 					if (offsetX + width > maxWidth && offsetX != 0) {
-						offsetY += 20;
-						offsetX = 0;
+						if (wrap) {
+							offsetY += 20;
+							offsetX = 0;
+						} else {
+							return;
+						}
 					}
 
 					// GameObject.font.
@@ -90,9 +83,13 @@ public class TextUtils {
 			} else if (content instanceof Texture) {
 
 				float width = 20;
-				if (offsetX + width > maxWidth) {
-					offsetY += 20;
-					offsetX = 0;
+				if (offsetX + width > maxWidth && offsetX != 0) {
+					if (wrap) {
+						offsetY += 20;
+						offsetX = 0;
+					} else {
+						return;
+					}
 				}
 				TextureUtils.drawTexture((Texture) content, posX + offsetX,
 						posX + offsetX + 20, posY + offsetY, posY + offsetY
@@ -107,9 +104,13 @@ public class TextUtils {
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
-				if (offsetX + width > maxWidth) {
-					offsetY += 20;
-					offsetX = 0;
+				if (offsetX + width > maxWidth && offsetX != 0) {
+					if (wrap) {
+						offsetY += 20;
+						offsetX = 0;
+					} else {
+						return;
+					}
 				}
 
 				// Name
@@ -139,9 +140,13 @@ public class TextUtils {
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
-				if (offsetX + width > maxWidth) {
-					offsetY += 20;
-					offsetX = 0;
+				if (offsetX + width > maxWidth && offsetX != 0) {
+					if (wrap) {
+						offsetY += 20;
+						offsetX = 0;
+					} else {
+						return;
+					}
 				}
 
 				// Name
@@ -174,9 +179,13 @@ public class TextUtils {
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
-				if (offsetX + width > maxWidth) {
-					offsetY += 20;
-					offsetX = 0;
+				if (offsetX + width > maxWidth && offsetX != 0) {
+					if (wrap) {
+						offsetY += 20;
+						offsetX = 0;
+					} else {
+						return;
+					}
 				}
 
 				// Name
@@ -200,9 +209,13 @@ public class TextUtils {
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
-				if (offsetX + width > maxWidth) {
-					offsetY += 20;
-					offsetX = 0;
+				if (offsetX + width > maxWidth && offsetX != 0) {
+					if (wrap) {
+						offsetY += 20;
+						offsetX = 0;
+					} else {
+						return;
+					}
 				}
 
 				// Name

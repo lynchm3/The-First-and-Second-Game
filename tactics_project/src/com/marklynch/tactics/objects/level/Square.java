@@ -110,7 +110,7 @@ public class Square {
 				&& Game.level.activeActor != null) {
 			TextUtils.printTextWithImages(
 					new Object[] { "" + distanceToSquare }, costPositionX,
-					costPositionY);
+					costPositionY, Integer.MAX_VALUE, true);
 		}
 		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 

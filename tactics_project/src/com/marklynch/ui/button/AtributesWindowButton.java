@@ -53,22 +53,22 @@ public class AtributesWindowButton extends Button {
 
 			if (enabled) {
 				if (down) {
-					QuadUtils.drawQuad(Color.GREEN, realX, realX + width,
+					QuadUtils.drawQuad(Color.BLACK, realX, realX + width,
 							realY, realY + height);
 					TextUtils.printTextWithImages(new Object[] { attribute },
-							realX, realY);
+							realX, realY, Integer.MAX_VALUE, true);
 				} else {
-					QuadUtils.drawQuad(Color.BLUE, realX, realX + width, realY,
-							realY + height);
+					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width,
+							realY, realY + height);
 					TextUtils.printTextWithImages(new Object[] { attribute },
-							realX, realY, 200);
+							realX, realY, 200, false);
 				}
 			} else {
 
 				QuadUtils.drawQuad(Color.RED, realX, realX + width, realY,
 						realY + height);
 				TextUtils.printTextWithImages(new Object[] { attribute },
-						realX, realY, 200);
+						realX, realY, 200, false);
 			}
 
 		} else {
@@ -93,7 +93,7 @@ public class AtributesWindowButton extends Button {
 									new Object[] {
 											attribute + "[" + index + "]: ",
 											arrayList.get(index) }, realX,
-									realY);
+									realY, Integer.MAX_VALUE, true);
 						} else {
 							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX
 									+ width, realY, realY + height);
@@ -101,7 +101,7 @@ public class AtributesWindowButton extends Button {
 									new Object[] {
 											attribute + "[" + index + "]: ",
 											arrayList.get(index) }, realX,
-									realY, 200);
+									realY, 200, false);
 						}
 					} else {
 
@@ -110,7 +110,7 @@ public class AtributesWindowButton extends Button {
 						TextUtils.printTextWithImages(
 								new Object[] { attribute + "[" + index + "]: ",
 										arrayList.get(index) }, realX, realY,
-								200);
+								200, false);
 					}
 
 				} else {
@@ -120,13 +120,13 @@ public class AtributesWindowButton extends Button {
 									+ width, realY, realY + height);
 							TextUtils.printTextWithImages(new Object[] {
 									attribute + ": ", field.get(object) },
-									realX, realY);
+									realX, realY, Integer.MAX_VALUE, true);
 						} else {
 							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX
 									+ width, realY, realY + height);
 							TextUtils.printTextWithImages(new Object[] {
 									attribute + ": ", field.get(object) },
-									realX, realY, 200);
+									realX, realY, 200, false);
 						}
 					} else {
 
@@ -134,7 +134,7 @@ public class AtributesWindowButton extends Button {
 								realY, realY + height);
 						TextUtils.printTextWithImages(new Object[] {
 								attribute + ": ", field.get(object) }, realX,
-								realY, 200);
+								realY, 200, false);
 					}
 
 				}

@@ -397,7 +397,8 @@ public class Actor extends GameObject {
 					* (int) Game.SQUARE_HEIGHT;
 
 			TextUtils.printTextWithImages(new Object[] { actorLevelString },
-					actorLevelPositionXInPixels, actorLevelPositionYInPixels);
+					actorLevelPositionXInPixels, actorLevelPositionYInPixels,
+					Integer.MAX_VALUE, true);
 
 			// draw indicators of whether you can move and/or attack
 			float moveAttackStatusWidthInPixels = Game.font.getWidth("MA");// Game.SQUARE_WIDTH
@@ -419,12 +420,14 @@ public class Actor extends GameObject {
 
 					TextUtils.printTextWithImages(new Object[] { "MA" },
 							moveAttackStatusPositionXInPixels,
-							moveAttackStatusPositionYInPixels);
+							moveAttackStatusPositionYInPixels,
+							Integer.MAX_VALUE, true);
 				} else {
 
 					TextUtils.printTextWithImages(new Object[] { "A" },
 							attackStatusPositionXInPixels,
-							moveAttackStatusPositionYInPixels);
+							moveAttackStatusPositionYInPixels,
+							Integer.MAX_VALUE, true);
 				}
 			}
 			// GL11.glColor3f(1.0f, 1.0f, 1.0f);
@@ -615,7 +618,7 @@ public class Actor extends GameObject {
 										.get(i).chanceOfHittingDefender + "%" },
 								this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 										* (Game.SQUARE_WIDTH),
-								previewPositionYs[i]);
+								previewPositionYs[i], Integer.MAX_VALUE, true);
 
 				// attacker damage
 				String attackerDamageString = FormattingUtils
@@ -630,7 +633,7 @@ public class Actor extends GameObject {
 						new Object[] { attackerDamageString },
 						this.hoverFightPreviewDefender.squareGameObjectIsOn.x
 								* (Game.SQUARE_WIDTH),
-						previewPositionYs[i] + 14);
+						previewPositionYs[i] + 14, Integer.MAX_VALUE, true);
 
 				// attacker weapon
 				TextureUtils
@@ -791,7 +794,8 @@ public class Actor extends GameObject {
 											- Game.font.getWidth(this.hoverFightPreviewFights
 													.get(i).chanceOfHittingAttacker
 													+ "%"),
-									previewPositionYs[i]);
+									previewPositionYs[i], Integer.MAX_VALUE,
+									true);
 
 					// defender damage
 					String defenderDamageString = FormattingUtils
@@ -809,7 +813,8 @@ public class Actor extends GameObject {
 											+ (Game.SQUARE_WIDTH)
 											- Game.font
 													.getWidth(defenderDamageString),
-									previewPositionYs[i] + 14);
+									previewPositionYs[i] + 14,
+									Integer.MAX_VALUE, true);
 
 					// defender weapon
 					if (this.hoverFightPreviewFights.get(i).defenderWeapon != null) {

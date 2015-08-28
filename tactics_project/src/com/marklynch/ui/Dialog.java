@@ -70,7 +70,8 @@ public class Dialog {
 		int i = 0;
 		for (String string : strings) {
 			TextUtils.printTextWithImages(new Object[] { string },
-					positionXInPixels + 10, positionYInPixels + 20 + i);
+					positionXInPixels + 10, positionYInPixels + 20 + i,
+					Integer.MAX_VALUE, true);
 			i += 20;
 		}
 

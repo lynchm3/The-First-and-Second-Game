@@ -597,13 +597,14 @@ public class Level {
 			TextUtils
 					.printTextWithImages(
 							new Object[] { currentFactionMoving.name + " turn "
-									+ turn }, Game.windowWidth - 150, 20);
+									+ turn }, Game.windowWidth - 150, 20,
+							Integer.MAX_VALUE, true);
 		}
 
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
 			TextUtils.printTextWithImages(logs.get(i).contents, 150,
-					100 + i * 20);
+					100 + i * 20, Integer.MAX_VALUE, true);
 		}
 
 		if (factions.size() > 0 && currentFactionMoving != null) {
@@ -611,10 +612,12 @@ public class Level {
 				if (currentFactionMoving == factions.get(0)) {
 					TextUtils.printTextWithImages(new Object[] { "Your turn ",
 							this.currentFactionMoving.imageTexture,
-							", click to continue." }, 500, 500);
+							", click to continue." }, 500, 500,
+							Integer.MAX_VALUE, true);
 				} else {
 					TextUtils.printTextWithImages(new Object[] {
-							this.currentFactionMoving, "'s turn" }, 500, 500);
+							this.currentFactionMoving, "'s turn" }, 500, 500,
+							Integer.MAX_VALUE, true);
 				}
 			}
 		}

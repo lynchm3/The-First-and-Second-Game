@@ -137,7 +137,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 				// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128,
 				// 128);
-				TextUtils.printTextWithImages(text, textX1, textY1, 200);
+				TextUtils.printTextWithImages(text, textX1, textY1, 200, true);
 
 				// reset the matrix to identity, i.e. "no camera transform"
 
@@ -182,7 +182,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 				// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128,
 				// 128);
-				TextUtils.printTextWithImages(text, textX1, posY, width);
+				TextUtils.printTextWithImages(text, textX1, posY, width, true);
 			}
 		}
 

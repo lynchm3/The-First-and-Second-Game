@@ -37,18 +37,19 @@ public class LevelButton extends Button {
 				QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY,
 						realY + height);
 				TextUtils.printTextWithImages(new Object[] { text }, realX,
-						realY);
+						realY, Integer.MAX_VALUE, true);
 			} else {
 				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width,
 						realY, realY + height);
 				TextUtils.printTextWithImages(new Object[] { text }, realX,
-						realY);
+						realY, Integer.MAX_VALUE, true);
 			}
 		} else {
 
 			QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY
 					+ height);
-			TextUtils.printTextWithImages(new Object[] { text }, realX, realY);
+			TextUtils.printTextWithImages(new Object[] { text }, realX, realY,
+					Integer.MAX_VALUE, true);
 		}
 
 	}
