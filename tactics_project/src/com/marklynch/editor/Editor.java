@@ -47,7 +47,6 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextureUtils;
 
 public class Editor {
@@ -427,13 +426,11 @@ public class Editor {
 		speechDirections1.add(true);
 		speechDirections1.add(false);
 
-		ArrayList arrayList1 = new ArrayList();
-		arrayList1.add(new StringWithColor("HI, THIS IS SCRIPTED SPEECH :D",
-				Color.BLACK));
+		ArrayList<String> arrayList1 = new ArrayList();
+		arrayList1.add("HI, THIS IS SCRIPTED SPEECH :D");
 
-		ArrayList arrayList2 = new ArrayList();
-		arrayList2.add(new StringWithColor(
-				"THE SECOND PART, WOO, THIS IS GOING GREAT", Color.BLACK));
+		ArrayList<String> arrayList2 = new ArrayList();
+		arrayList2.add("THE SECOND PART, WOO, THIS IS GOING GREAT");
 
 		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(
 				speechActors1, speechPositions1, speechDirections1,
@@ -750,6 +747,7 @@ public class Editor {
 							this.textEntered += character;
 							arrayList.set(this.attributeToEditIndex,
 									textEntered);
+
 						}
 
 					} else {
@@ -922,7 +920,9 @@ public class Editor {
 			} else if (field.getType().isAssignableFrom(AI.class)) {
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.ais, false, this, objectToEdit);
-			} else if (field.getType().isAssignableFrom(boolean.class)) {
+			} else if (field.getType().isAssignableFrom(boolean.class)) {// YO
+																			// YO
+																			// YO
 				boolean b = (boolean) field.get(objectToEdit);
 				field.set(objectToEdit, !b);
 				settingsWindow.update();

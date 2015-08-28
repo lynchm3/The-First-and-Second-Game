@@ -290,7 +290,7 @@ public class TextUtils {
 			} else if (content instanceof SpeechPart) {
 
 				SpeechPart speechPart = (SpeechPart) content;
-				String string = speechPart.text.get(0).string;
+				String string = speechPart.text.get(0);
 				if (string.length() > 10) {
 					string = string.substring(0, 10) + "...";
 				}

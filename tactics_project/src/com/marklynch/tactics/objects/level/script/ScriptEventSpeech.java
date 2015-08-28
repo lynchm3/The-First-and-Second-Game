@@ -12,7 +12,6 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.utils.QuadUtils;
-import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -73,14 +72,14 @@ public class ScriptEventSpeech extends ScriptEvent {
 		public ArrayList<Float> positions = new ArrayList<Float>();
 		public ArrayList<Boolean> directions = new ArrayList<Boolean>();
 		public transient Actor talker;
-		public ArrayList<StringWithColor> text;
+		public ArrayList<String> text;
 		public boolean inline = false;
 
 		// For saving and loading
 		public ArrayList<String> actorGUIDs = new ArrayList<String>();
 		public String talkerGUID = null;
 
-		public SpeechPart(Actor talker, ArrayList text) {
+		public SpeechPart(Actor talker, ArrayList<String> text) {
 			super();
 			this.talker = talker;
 			this.text = text;
@@ -92,7 +91,8 @@ public class ScriptEventSpeech extends ScriptEvent {
 		}
 
 		public SpeechPart(ArrayList<Actor> actors, ArrayList<Float> positions,
-				ArrayList<Boolean> directions, Actor talker, ArrayList text) {
+				ArrayList<Boolean> directions, Actor talker,
+				ArrayList<String> text) {
 			super();
 			this.actors = actors;
 			this.positions = positions;
@@ -189,9 +189,9 @@ public class ScriptEventSpeech extends ScriptEvent {
 		public SpeechPart makeCopy() {
 
 			if (inline) {
-				ArrayList<StringWithColor> text = new ArrayList<StringWithColor>();
+				ArrayList<String> text = new ArrayList<String>();
 				for (int i = 0; i < this.text.size(); i++) {
-					text.add(this.text.get(i).makeCopy());
+					text.add(this.text.get(i));
 				}
 				return new SpeechPart(talker, text);
 			} else {
@@ -202,9 +202,9 @@ public class ScriptEventSpeech extends ScriptEvent {
 				positions.addAll(positions);
 				ArrayList<Boolean> directions = new ArrayList<Boolean>();
 				directions.addAll(directions);
-				ArrayList<StringWithColor> text = new ArrayList<StringWithColor>();
+				ArrayList<String> text = new ArrayList<String>();
 				for (int i = 0; i < this.text.size(); i++) {
-					text.add(this.text.get(i).makeCopy());
+					text.add(this.text.get(i));
 				}
 				return new SpeechPart(actors, positions, directions, talker,
 						text);
