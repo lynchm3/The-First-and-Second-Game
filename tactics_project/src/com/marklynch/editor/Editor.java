@@ -32,7 +32,6 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
@@ -424,9 +423,9 @@ public class Editor {
 		ArrayList<Float> speechPositions1 = new ArrayList<Float>();
 		speechPositions1.add(0f);
 		speechPositions1.add(0f);
-		ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections1 = new ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION>();
-		speechDirections1.add(SpeechPart.DIRECTION.RIGHT);
-		speechDirections1.add(SpeechPart.DIRECTION.LEFT);
+		ArrayList<Boolean> speechDirections1 = new ArrayList<Boolean>();
+		speechDirections1.add(true);
+		speechDirections1.add(false);
 
 		ArrayList arrayList1 = new ArrayList();
 		arrayList1.add(new StringWithColor("HI, THIS IS SCRIPTED SPEECH :D",

@@ -71,7 +71,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 		public transient ArrayList<Actor> actors = new ArrayList<Actor>();
 		public ArrayList<Float> positions = new ArrayList<Float>();
-		public ArrayList<DIRECTION> directions = new ArrayList<DIRECTION>();
+		public ArrayList<Boolean> directions = new ArrayList<Boolean>();
 		public transient Actor talker;
 		public ArrayList<StringWithColor> text;
 		public boolean inline = false;
@@ -79,10 +79,6 @@ public class ScriptEventSpeech extends ScriptEvent {
 		// For saving and loading
 		public ArrayList<String> actorGUIDs = new ArrayList<String>();
 		public String talkerGUID = null;
-
-		public enum DIRECTION {
-			LEFT, RIGHT
-		}
 
 		public SpeechPart(Actor talker, ArrayList text) {
 			super();
@@ -96,7 +92,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 		}
 
 		public SpeechPart(ArrayList<Actor> actors, ArrayList<Float> positions,
-				ArrayList<DIRECTION> directions, Actor talker, ArrayList text) {
+				ArrayList<Boolean> directions, Actor talker, ArrayList text) {
 			super();
 			this.actors = actors;
 			this.positions = positions;
@@ -163,7 +159,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 					if (actors.get(i) != this.talker) {
 						alpha = 0.5f;
 					}
-					if (directions.get(i).equals(DIRECTION.RIGHT)) {
+					if (directions.get(i).equals(true)) {
 						TextureUtils.drawTexture(actors.get(i).imageTexture,
 								alpha, positions.get(i),
 								positions.get(i) + 256, posY, posY + 256);
@@ -204,7 +200,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 				actors.addAll(actors);
 				ArrayList<Float> positions = new ArrayList<Float>();
 				positions.addAll(positions);
-				ArrayList<DIRECTION> directions = new ArrayList<DIRECTION>();
+				ArrayList<Boolean> directions = new ArrayList<Boolean>();
 				directions.addAll(directions);
 				ArrayList<StringWithColor> text = new ArrayList<StringWithColor>();
 				for (int i = 0; i < this.text.size(); i++) {

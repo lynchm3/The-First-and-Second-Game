@@ -13,7 +13,6 @@ import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart.DIRECTION;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.AtributesWindowButton;
@@ -317,7 +316,7 @@ public class AttributesWindow {
 					speechPart.actors.add(Game.level.factions.get(0).actors
 							.get(0));
 					speechPart.positions.add(100f);
-					speechPart.directions.add(DIRECTION.RIGHT);
+					speechPart.directions.add(true);
 
 					depressButtons();
 					editor.clearSelectedObject();

@@ -12,8 +12,6 @@ import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.script.Script;
-import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
 import com.marklynch.tactics.objects.unit.ai.AI;
@@ -367,9 +365,9 @@ public class Level {
 		speechPositions1.add(0f);
 		speechPositions1.add(0f);
 
-		ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION> speechDirections1 = new ArrayList<ScriptEventSpeech.SpeechPart.DIRECTION>();
-		speechDirections1.add(ScriptEventSpeech.SpeechPart.DIRECTION.RIGHT);
-		speechDirections1.add(ScriptEventSpeech.SpeechPart.DIRECTION.LEFT);
+		ArrayList<Boolean> speechDirections1 = new ArrayList<Boolean>();
+		speechDirections1.add(true);
+		speechDirections1.add(false);
 
 		// ScriptEventSpeech.SpeechPart speechPart1_1 = new
 		// ScriptEventSpeech.SpeechPart(
