@@ -97,7 +97,7 @@ public class AIsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					aiButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, Game.level.ais.get(index), editor);
+							200, Game.level.ais.get(index), editor);
 
 				}
 			};

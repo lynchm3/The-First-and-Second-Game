@@ -97,7 +97,7 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					scriptButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, Game.level.script.scriptEvents.get(index),
+							200, Game.level.script.scriptEvents.get(index),
 							editor);
 
 				}

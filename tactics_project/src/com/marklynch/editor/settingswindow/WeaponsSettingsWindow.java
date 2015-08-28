@@ -85,7 +85,7 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					weaponButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, editor.weapons.get(index), editor);
+							200, editor.weapons.get(index), editor);
 
 				}
 			};

@@ -63,7 +63,7 @@ public class RelationsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					scriptButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, factionRelationships.get(index), editor);
+							200, factionRelationships.get(index), editor);
 
 				}
 			};

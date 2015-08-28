@@ -92,7 +92,7 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					decorationButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, Game.level.decorations.get(index), editor);
+							200, Game.level.decorations.get(index), editor);
 				}
 			};
 			buttons.add(decorationButton);

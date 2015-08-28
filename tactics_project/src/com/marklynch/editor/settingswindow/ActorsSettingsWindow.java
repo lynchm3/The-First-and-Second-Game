@@ -100,7 +100,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 						editor.state = STATE.MOVEABLE_OBJECT_SELECTED;
 						editor.selectedGameObject = faction.actors.get(index);
 						editor.attributesWindow = new AttributesWindow(200,
-								200, 350, editor.selectedGameObject, editor);
+								200, 200, editor.selectedGameObject, editor);
 						// getButton(editor.selectedGameObject).down = true;
 						actorButton.down = true;
 					}

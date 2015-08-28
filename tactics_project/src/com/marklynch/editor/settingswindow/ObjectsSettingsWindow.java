@@ -97,7 +97,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 					editor.selectedGameObject = Game.level.inanimateObjects
 							.get(index);
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, editor.selectedGameObject, editor);
+							200, editor.selectedGameObject, editor);
 					// getButton(editor.selectedGameObject).down = true;
 					objectButton.down = true;
 				}

@@ -18,7 +18,6 @@ import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
-import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
@@ -327,7 +326,7 @@ public class AttributesWindow {
 	}
 
 	public void draw() {
-		QuadUtils.drawQuad(Color.WHITE, x, x + width, y, Game.windowHeight);
+		// QuadUtils.drawQuad(Color.WHITE, x, x + width, y, Game.windowHeight);
 
 		TextUtils.printTextWithImages(new Object[] { new StringWithColor(title,
 				Color.BLACK) }, x, y);

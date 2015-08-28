@@ -104,7 +104,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					factionButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, Game.level.factions.get(index), editor);
+							200, Game.level.factions.get(index), editor);
 
 				}
 			};

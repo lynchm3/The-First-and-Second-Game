@@ -97,7 +97,7 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					speechPartButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, Game.level.script.speechParts.get(index),
+							200, Game.level.script.speechParts.get(index),
 							editor);
 				}
 			};

@@ -625,7 +625,7 @@ public class Editor {
 			if (this.settingsWindow != this.squaresSettingsWindow)
 				squaresTabButton.click();
 			this.clearSelectedObject();
-			attributesWindow = new AttributesWindow(200, 200, 350, square, this);
+			attributesWindow = new AttributesWindow(200, 200, 200, square, this);
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = null;
@@ -704,8 +704,13 @@ public class Editor {
 					if (field.getType().isAssignableFrom(ArrayList.class)) {
 						System.out
 								.println("field.getType().isAssignableFrom(ArrayList.class)");
+						System.out.println("attributeToEditIndex = "
+								+ attributeToEditIndex);
+						System.out.println("objectToEdit = " + objectToEdit);
+
 						ArrayList arrayList = (ArrayList) field
 								.get(objectToEdit);
+						System.out.println("arrayList = " + arrayList);
 						Class attributeClass = arrayList.get(
 								attributeToEditIndex).getClass();
 						System.out

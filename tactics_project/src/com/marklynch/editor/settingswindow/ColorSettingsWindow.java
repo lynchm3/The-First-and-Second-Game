@@ -84,7 +84,7 @@ public class ColorSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					collorButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							350, editor.colors.get(index), editor);
+							200, editor.colors.get(index), editor);
 
 				}
 			};

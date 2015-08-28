@@ -1,5 +1,7 @@
 package com.marklynch.tactics.objects.level.script;
 
+import java.util.ArrayList;
+
 import mdesl.graphics.Color;
 
 import com.marklynch.Game;
@@ -12,15 +14,15 @@ public class ScriptEventEndLevel extends ScriptEvent {
 	public final static String[] editableAttributes = { "name",
 			"blockUserInput", "scriptTrigger", "text" };
 
-	String[] text;
-	boolean completed = false;
+	public ArrayList<String> text = new ArrayList<String>();
+	public boolean completed = false;
 
 	public ScriptEventEndLevel() {
 		name = "ScriptEventEndLevel";
 	}
 
 	public ScriptEventEndLevel(boolean blockUserInput,
-			ScriptTrigger scriptTrigger, String[] text) {
+			ScriptTrigger scriptTrigger, ArrayList<String> text) {
 		super(blockUserInput, scriptTrigger);
 		name = "ScriptEventEndLevel";
 		this.text = text;
