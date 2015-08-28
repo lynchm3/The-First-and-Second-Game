@@ -56,6 +56,10 @@ public class Research {
 	 * 
 	 * Black closet... UI was fucking awfful... had no idea what i was doing,
 	 * even though it was bare
+	 * 
+	 * Judge Dread. Judge Dredd is cool. Look up similar movies.
+	 * 
+	 * Mad Max? Maybe too extreme? Maybe perfectly extreme...
 	 */
 
 }

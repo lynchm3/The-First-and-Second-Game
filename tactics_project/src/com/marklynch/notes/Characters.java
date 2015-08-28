@@ -119,6 +119,10 @@ public class Characters {
 	 * evilcorp could be the ones selling thi stuff. It's not safe and highly
 	 * addictive but they pushed it through the FDA coz they own the patent and
 	 * would make a killing.
+	 * 
+	 * Judge Dredd type... Judge Dredd is cool I AM THE LAW (Philisophical shit
+	 * w/ Dredd... explore it... police states, authoritarianism, and the rule
+	 * of law. Wikipedia page is probably a decent start point
 	 */
 
 }
