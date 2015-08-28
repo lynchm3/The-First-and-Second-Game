@@ -112,9 +112,6 @@ public class AIsSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateAIsButtons();
-		SettingsWindowButton button = this.getButton(editor.objectToEdit);
-		if (button != null)
-			button.down = true;
 
 	}
 }

@@ -318,9 +318,21 @@ public class AttributesWindow {
 					speechPart.positions.add(100f);
 					speechPart.directions.add(true);
 
-					depressButtons();
+					Object object = AttributesWindow.this.object;
+
+					Button buttonForObject = editor.settingsWindow
+							.getButton(object);
+
+					editor.clearSelectedObject();
+					editor.depressButtonsSettingsAndDetailsButtons();
+					buttonForObject.down = true;
+					editor.attributesWindow = new AttributesWindow(200, 200,
+							200, object, editor);
+
+					// depressButtons();
 					// editor.clearSelectedObject();
-					editor.settingsWindow.update();
+					// editor.settingsWindow.update();
+
 				}
 			});
 		}

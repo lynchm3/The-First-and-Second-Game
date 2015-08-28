@@ -104,8 +104,5 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateDecorationsButtons();
-		SettingsWindowButton button = this.getButton(editor.objectToEdit);
-		if (button != null)
-			button.down = true;
 	}
 }

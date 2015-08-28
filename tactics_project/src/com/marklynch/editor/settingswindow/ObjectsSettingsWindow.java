@@ -111,8 +111,5 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateObjectsButtons();
-		SettingsWindowButton button = this.getButton(editor.objectToEdit);
-		if (button != null)
-			button.down = true;
 	}
 }

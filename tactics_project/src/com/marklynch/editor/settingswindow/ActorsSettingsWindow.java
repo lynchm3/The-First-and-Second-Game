@@ -118,8 +118,5 @@ public class ActorsSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateActorsButtons();
-		SettingsWindowButton button = this.getButton(editor.objectToEdit);
-		if (button != null)
-			button.down = true;
 	}
 }

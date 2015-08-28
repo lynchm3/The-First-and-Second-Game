@@ -98,9 +98,6 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateWeaponsButtons();
-		SettingsWindowButton button = this.getButton(editor.objectToEdit);
-		if (button != null)
-			button.down = true;
 
 	}
 }

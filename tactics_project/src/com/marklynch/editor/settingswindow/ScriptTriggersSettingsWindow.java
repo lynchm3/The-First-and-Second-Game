@@ -123,9 +123,6 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateScriptsButtons();
-		SettingsWindowButton button = this.getButton(editor.objectToEdit);
-		if (button != null)
-			button.down = true;
 
 	}
 }
