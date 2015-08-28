@@ -101,11 +101,15 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 							editor);
 				}
 			};
+			if (speechPartButton.object == editor.objectToEdit)
+				speechPartButton.down = true;
+
 			buttons.add(speechPartButton);
 
-			if (editor.objectToEdit == Game.level.script.speechParts.get(index)) {
-				speechPartButton.click();
-			}
+			// if (editor.objectToEdit ==
+			// Game.level.script.speechParts.get(index)) {
+			// speechPartButton.click();
+			// }
 
 		}
 

@@ -2,6 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Speech part attributes booleans are fucked
+	// Strings + numbers stop after one character
+
+	// End level event doesn't have text section in attributes pane
+
 	// Add Actor butto in SpeechPart is adding and actor to both speech parts
 
 	// Text for the speech isnt showing up in the attributes window, no idea why
