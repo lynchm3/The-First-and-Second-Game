@@ -1,5 +1,7 @@
 package com.marklynch.editor.settingswindow;
 
+import java.util.ArrayList;
+
 import mdesl.graphics.Color;
 
 import com.marklynch.Game;
@@ -43,10 +45,11 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
+				ArrayList arrayList1 = new ArrayList();
+				arrayList1.add(new StringWithColor("TEXT IN SPEECH PART",
+						Color.BLACK));
 				SpeechPart newSpeechPart = new SpeechPart(
-						Game.level.factions.get(0).actors.get(0),
-						new StringWithColor[] { new StringWithColor(
-								"TEXT IN SPEECH PART", Color.BLACK) });
+						Game.level.factions.get(0).actors.get(0), arrayList1);
 				Game.level.script.speechParts.add(newSpeechPart);
 				updateSpeechPartsButtons();
 				SpeechPartSettingsWindow.this.editor.clearSelectedObject();

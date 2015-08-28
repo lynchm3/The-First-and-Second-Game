@@ -12,6 +12,8 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
+import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart.DIRECTION;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.AtributesWindowButton;
@@ -173,7 +175,7 @@ public class AttributesWindow {
 		if (object instanceof Actor) {
 			final Actor actor = (Actor) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (i + 2) * 30, 200, 30, actor, "delete", true, true,
+					0 + (count + 2) * 30, 200, 30, actor, "delete", true, true,
 					this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
@@ -194,8 +196,8 @@ public class AttributesWindow {
 				}
 			});
 			final AtributesWindowButton copyButton = new AtributesWindowButton(
-					0, 0 + (i + 3) * 30, 200, 30, actor, "copy", true, true,
-					this, 0);
+					0, 0 + (count + 3) * 30, 200, 30, actor, "copy", true,
+					true, this, 0);
 			buttons.add(copyButton);
 			copyButton.setClickListener(new ClickListener() {
 				@Override
@@ -214,8 +216,8 @@ public class AttributesWindow {
 		} else if (object instanceof GameObject) {
 			final GameObject gameObject = (GameObject) object;
 			final AtributesWindowButton deleteButton = new AtributesWindowButton(
-					0, 0 + (i + 2) * 30, 200, 30, gameObject, "delete", true,
-					true, this, 0);
+					0, 0 + (count + 2) * 30, 200, 30, gameObject, "delete",
+					true, true, this, 0);
 			buttons.add(deleteButton);
 			deleteButton.setClickListener(new ClickListener() {
 				@Override
@@ -228,7 +230,7 @@ public class AttributesWindow {
 				}
 			});
 			final AtributesWindowButton copyButton = new AtributesWindowButton(
-					0, 0 + (i + 3) * 30, 200, 30, gameObject, "copy", true,
+					0, 0 + (count + 3) * 30, 200, 30, gameObject, "copy", true,
 					true, this, 0);
 			buttons.add(copyButton);
 			copyButton.setClickListener(new ClickListener() {
@@ -247,8 +249,8 @@ public class AttributesWindow {
 		} else if (object instanceof Faction) {
 			final Faction faction = (Faction) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (i + 2) * 30, 200, 30, faction, "delete", true, true,
-					this, 0);
+					0 + (count + 2) * 30, 200, 30, faction, "delete", true,
+					true, this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -273,8 +275,8 @@ public class AttributesWindow {
 		} else if (object instanceof Weapon) {
 			final Weapon weapon = (Weapon) object;
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (i + 2) * 30, 200, 30, weapon, "delete", true, true,
-					this, 0);
+					0 + (count + 2) * 30, 200, 30, weapon, "delete", true,
+					true, this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -289,8 +291,8 @@ public class AttributesWindow {
 			});
 		} else if (object instanceof Decoration) {
 			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (i + 2) * 30, 200, 30, object, "delete", true, true,
-					this, 0);
+					0 + (count + 2) * 30, 200, 30, object, "delete", true,
+					true, this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -299,6 +301,26 @@ public class AttributesWindow {
 					Game.level.decorations.remove(object);
 					editor.clearSelectedObject();
 					editor.decorationsSettingsWindow.updateDecorationsButtons();
+					editor.settingsWindow.update();
+				}
+			});
+		} else if (object instanceof SpeechPart) {
+			final AtributesWindowButton button = new AtributesWindowButton(0,
+					0 + (count + 2) * 30, 200, 30, object, "Add actor", true,
+					true, this, 0);
+			buttons.add(button);
+			final SpeechPart speechPart = (SpeechPart) object;
+			button.setClickListener(new ClickListener() {
+				@Override
+				public void click() {
+
+					speechPart.actors.add(Game.level.factions.get(0).actors
+							.get(0));
+					speechPart.positions.add(100f);
+					speechPart.directions.add(DIRECTION.RIGHT);
+
+					depressButtons();
+					editor.clearSelectedObject();
 					editor.settingsWindow.update();
 				}
 			});

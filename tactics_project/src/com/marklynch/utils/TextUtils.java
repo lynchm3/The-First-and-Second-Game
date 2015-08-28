@@ -1,5 +1,8 @@
 package com.marklynch.utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
@@ -19,12 +22,24 @@ import com.marklynch.tactics.objects.weapons.Weapons;
 
 public class TextUtils {
 
-	public static void printTextWithImages(Object[] contents, float posX,
+	public static void printTextWithImages(ArrayList contents, float posX,
 			float posY) {
 		printTextWithImages(contents, posX, posY, Float.MAX_VALUE);
 	}
 
 	public static void printTextWithImages(Object[] contents, float posX,
+			float posY) {
+		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY,
+				Float.MAX_VALUE);
+	}
+
+	public static void printTextWithImages(Object[] contents, float posX,
+			float posY, float maxWidth) {
+		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY,
+				maxWidth);
+	}
+
+	public static void printTextWithImages(ArrayList contents, float posX,
 			float posY, float maxWidth) {
 
 		if (contents == null)
@@ -275,7 +290,7 @@ public class TextUtils {
 			} else if (content instanceof SpeechPart) {
 
 				SpeechPart speechPart = (SpeechPart) content;
-				String string = speechPart.text[0].string;
+				String string = speechPart.text.get(0).string;
 				if (string.length() > 10) {
 					string = string.substring(0, 10) + "...";
 				}

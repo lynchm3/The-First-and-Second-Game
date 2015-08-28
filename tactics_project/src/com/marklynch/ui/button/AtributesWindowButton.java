@@ -7,6 +7,7 @@ import mdesl.graphics.Color;
 
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
+import com.marklynch.utils.ClassUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
@@ -48,66 +49,8 @@ public class AtributesWindowButton extends Button {
 		else
 			realY = attributesWindow.y + y;
 
-		try {
-			Field field = null;
-			ArrayList arrayList = null;
-			field = objectClass.getField(attribute);
-			if (field.getType().isAssignableFrom(ArrayList.class)) {
-				arrayList = (ArrayList) field.get(object);
-			}
+		if (!ClassUtils.classContainsField(objectClass, attribute)) {
 
-			if (arrayList != null) {
-				if (enabled) {
-					if (down) {
-						QuadUtils.drawQuad(Color.BLACK, realX, realX + width,
-								realY, realY + height);
-						TextUtils.printTextWithImages(
-								new Object[] { attribute + "[" + index + "]: ",
-										arrayList.get(index) }, realX, realY);
-					} else {
-						QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX
-								+ width, realY, realY + height);
-						TextUtils.printTextWithImages(
-								new Object[] { attribute + "[" + index + "]: ",
-										arrayList.get(index) }, realX, realY);
-					}
-				} else {
-
-					QuadUtils.drawQuad(Color.RED, realX, realX + width, realY,
-							realY + height);
-					TextUtils.printTextWithImages(
-							new Object[] { attribute + "[" + index + "]: ",
-									arrayList.get(index) }, realX, realY);
-				}
-
-			} else {
-				if (enabled) {
-					if (down) {
-						QuadUtils.drawQuad(Color.BLACK, realX, realX + width,
-								realY, realY + height);
-						TextUtils.printTextWithImages(new Object[] {
-								attribute + ": ", field.get(object) }, realX,
-								realY);
-					} else {
-						QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX
-								+ width, realY, realY + height);
-						TextUtils.printTextWithImages(new Object[] {
-								attribute + ": ", field.get(object) }, realX,
-								realY);
-					}
-				} else {
-
-					QuadUtils.drawQuad(Color.RED, realX, realX + width, realY,
-							realY + height);
-					TextUtils
-							.printTextWithImages(new Object[] {
-									attribute + ": ", field.get(object) },
-									realX, realY);
-				}
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
 			if (enabled) {
 				if (down) {
 					QuadUtils.drawQuad(Color.GREEN, realX, realX + width,
@@ -126,6 +69,76 @@ public class AtributesWindowButton extends Button {
 						realY + height);
 				TextUtils.printTextWithImages(new Object[] { attribute },
 						realX, realY);
+			}
+
+		} else {
+
+			try {
+
+				Field field = null;
+				ArrayList arrayList = null;
+
+				field = objectClass.getField(attribute);
+
+				if (field.getType().isAssignableFrom(ArrayList.class)) {
+					arrayList = (ArrayList) field.get(object);
+				}
+
+				if (arrayList != null) {
+					if (enabled) {
+						if (down) {
+							QuadUtils.drawQuad(Color.BLACK, realX, realX
+									+ width, realY, realY + height);
+							TextUtils.printTextWithImages(
+									new Object[] {
+											attribute + "[" + index + "]: ",
+											arrayList.get(index) }, realX,
+									realY);
+						} else {
+							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX
+									+ width, realY, realY + height);
+							TextUtils.printTextWithImages(
+									new Object[] {
+											attribute + "[" + index + "]: ",
+											arrayList.get(index) }, realX,
+									realY);
+						}
+					} else {
+
+						QuadUtils.drawQuad(Color.RED, realX, realX + width,
+								realY, realY + height);
+						TextUtils.printTextWithImages(
+								new Object[] { attribute + "[" + index + "]: ",
+										arrayList.get(index) }, realX, realY);
+					}
+
+				} else {
+					if (enabled) {
+						if (down) {
+							QuadUtils.drawQuad(Color.BLACK, realX, realX
+									+ width, realY, realY + height);
+							TextUtils.printTextWithImages(new Object[] {
+									attribute + ": ", field.get(object) },
+									realX, realY);
+						} else {
+							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX
+									+ width, realY, realY + height);
+							TextUtils.printTextWithImages(new Object[] {
+									attribute + ": ", field.get(object) },
+									realX, realY);
+						}
+					} else {
+
+						QuadUtils.drawQuad(Color.RED, realX, realX + width,
+								realY, realY + height);
+						TextUtils.printTextWithImages(new Object[] {
+								attribute + ": ", field.get(object) }, realX,
+								realY);
+					}
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
