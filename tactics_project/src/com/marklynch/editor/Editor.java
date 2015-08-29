@@ -878,11 +878,12 @@ public class Editor {
 			Class<? extends Object> objectClass = objectToEdit.getClass();
 			Field field = objectClass.getField(attributeToEditName);
 			Class type = null;
+			ArrayList arrayList = null;
 			if (field.getType().isAssignableFrom(ArrayList.class)) {
-				ArrayList arrayList = (ArrayList) field.get(objectToEdit);
+				arrayList = (ArrayList) field.get(objectToEdit);
 				type = arrayList.get(attributeToEditIndex).getClass();
 			} else {
-				field.getType();
+				type = field.getType();
 			}
 
 			if (type.isAssignableFrom(Faction.class)) {
@@ -945,11 +946,17 @@ public class Editor {
 			} else if (type.isAssignableFrom(AI.class)) {
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.ais, false, this, objectToEdit);
-			} else if (type.isAssignableFrom(boolean.class)) {// YO
-																// YO
-																// YO
-				boolean b = (boolean) field.get(objectToEdit);
-				field.set(objectToEdit, !b);
+			} else if (type.isAssignableFrom(boolean.class)
+					|| type.isAssignableFrom(Boolean.class)) {
+
+				if (arrayList != null) {
+					arrayList.set(attributeToEditIndex,
+							!(boolean) arrayList.get(attributeToEditIndex));
+
+				} else {
+					boolean b = (boolean) field.get(objectToEdit);
+					field.set(objectToEdit, !b);
+				}
 				settingsWindow.update();
 				stopEditingAttribute();
 			}
