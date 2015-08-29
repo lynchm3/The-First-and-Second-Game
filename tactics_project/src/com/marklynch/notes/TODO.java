@@ -4,6 +4,13 @@ public class TODO {
 
 	// Speech part attributes booleans are fucked
 	// Strings + numbers stop after one character
+	// Speech part actor selector also fucked
+	// SpeechParts selector in speechpartscriptevent too
+
+	// When adding an actor to the speechPart, make sure u add in his GUID too
+	// :D
+
+	// WHen removing actor from speechpart remember to delete their guid
 
 	// End level event doesn't have text section in attributes pane
 

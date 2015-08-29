@@ -317,6 +317,8 @@ public class AttributesWindow {
 							.get(0));
 					speechPart.positions.add(100f);
 					speechPart.directions.add(true);
+					speechPart.actorsGUIDs.add(Game.level.factions.get(0).actors
+							.get(0).guid);
 
 					Object object = AttributesWindow.this.object;
 
