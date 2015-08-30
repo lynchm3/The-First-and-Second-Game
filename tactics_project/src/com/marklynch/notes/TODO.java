@@ -2,9 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Speech part attributes booleans are fucked
-	// Strings + numbers stop after one character
-	// Speech part actor selector also fucked
+	// TODO write a cat that will run away from characters that get too close,
+	// and will run off the screen after being disturbed too many times :D
+	// Little details like this make a good game great
+
+	// I need a style.
+	// Side pane for game time :)
+	// Lets say 300px and on the left at the moment
+
 	// SpeechParts selector in speechpartscriptevent too
 
 	// When adding an actor to the speechPart, make sure u add in his GUID too
