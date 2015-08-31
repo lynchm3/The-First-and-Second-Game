@@ -19,6 +19,7 @@ import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
+import com.marklynch.utils.ClassUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 
@@ -58,25 +59,51 @@ public class AttributeSelectionWindow<T> {
 								.getClass();
 						Field field = objectClass
 								.getField(editor.attributeToEditName);
+						Class type;
 
-						if (field.getType().isAssignableFrom(GameObject.class)) {
+						ArrayList arrayList = null;
+						if (field.getType().isAssignableFrom(ArrayList.class)) {
+							arrayList = (ArrayList) field
+									.get(editor.objectToEdit);
+							type = arrayList.get(editor.attributeToEditIndex)
+									.getClass();
+						} else {
+							type = field.getType();
+						}
+
+						if (type.isAssignableFrom(GameObject.class)) {
 							GameObject gameObject = (GameObject) objects
 									.get(index);
-							field.set(ownerOfAttribute, gameObject);
-							try {
-								Field guidField = objectClass
-										.getField(editor.attributeToEditName
-												+ "GUID");
-								if (guidField != null) {
-									guidField.set(ownerOfAttribute,
-											gameObject.guid);
+							if (arrayList == null) {
+								field.set(ownerOfAttribute, gameObject);
+								if (ClassUtils.classContainsField(objectClass,
+										editor.attributeToEditName + "GUID")) {
+									Field guidField = objectClass
+											.getField(editor.attributeToEditName
+													+ "GUID");
+									if (guidField != null) {
+										guidField.set(ownerOfAttribute,
+												gameObject.guid);
+									}
 								}
-							} catch (Exception e) {
+							} else {
+								arrayList.set(editor.attributeToEditIndex,
+										gameObject);
+								if (ClassUtils.classContainsField(objectClass,
+										editor.attributeToEditName + "GUIDs")) {
+									Field guidField = objectClass
+											.getField(editor.attributeToEditName
+													+ "GUIDs");
+									ArrayList arrayListGUIDs = (ArrayList) guidField
+											.get(editor.objectToEdit);
+									arrayListGUIDs.set(
+											editor.attributeToEditIndex,
+											gameObject.guid);
 
+								}
 							}
 							editor.stopEditingAttribute();
-						} else if (field.getType().isAssignableFrom(
-								Faction.class)) {// faction
+						} else if (type.isAssignableFrom(Faction.class)) {// faction
 							Faction faction = (Faction) objects.get(index);
 
 							if (editor.objectToEdit instanceof Actor) {
@@ -99,15 +126,9 @@ public class AttributeSelectionWindow<T> {
 								}
 							}
 							editor.stopEditingAttribute();
-						} else if (field.getType().isAssignableFrom(
-								Square.class)) {
+						} else if (type.isAssignableFrom(Square.class)) {
 
 							Square square = (Square) objects.get(index);
-
-							System.out.println("square = " + square);
-							System.out.println("ownerOfAttribute = "
-									+ ownerOfAttribute);
-							System.out.println("field = " + field);
 
 							field.set(ownerOfAttribute, square);
 							try {
@@ -122,8 +143,7 @@ public class AttributeSelectionWindow<T> {
 
 							}
 							editor.stopEditingAttribute();
-						} else if (field.getType().isAssignableFrom(
-								ScriptEvent.class)) {
+						} else if (type.isAssignableFrom(ScriptEvent.class)) {
 							ScriptEvent scriptEvent = (ScriptEvent) objects
 									.get(index);
 							field.set(ownerOfAttribute, scriptEvent);
@@ -139,31 +159,46 @@ public class AttributeSelectionWindow<T> {
 
 							}
 							editor.stopEditingAttribute();
-						} else if (field.getType()
-								.isAssignableFrom(Actor.class)) {
+						} else if (type.isAssignableFrom(Actor.class)) {
 							Actor actor = (Actor) objects.get(index);
-							field.set(ownerOfAttribute, actor);
-							try {
-								Field guidField = objectClass
-										.getField(editor.attributeToEditName
-												+ "GUID");
-								if (guidField != null) {
-									guidField.set(ownerOfAttribute, actor.guid);
-								}
-							} catch (Exception e) {
+							if (arrayList == null) {
+								field.set(ownerOfAttribute, actor);
+								try {
+									Field guidField = objectClass
+											.getField(editor.attributeToEditName
+													+ "GUID");
+									if (guidField != null) {
+										guidField.set(ownerOfAttribute,
+												actor.guid);
+									}
+								} catch (Exception e) {
 
+								}
+							} else {
+								arrayList.set(editor.attributeToEditIndex,
+										actor);
+								if (ClassUtils.classContainsField(objectClass,
+										editor.attributeToEditName + "GUIDs")) {
+									Field guidField = objectClass
+											.getField(editor.attributeToEditName
+													+ "GUIDs");
+									ArrayList arrayListGUIDs = (ArrayList) guidField
+											.get(editor.objectToEdit);
+									arrayListGUIDs.set(
+											editor.attributeToEditIndex,
+											actor.guid);
+
+								}
 							}
 							editor.stopEditingAttribute();
-						} else if (field.getType()
-								.isAssignableFrom(Color.class)) {// color
+						} else if (type.isAssignableFrom(Color.class)) {// color
 
 							Color color = (Color) objects.get(index);
 
 							field.set(editor.objectToEdit, new Color(color));
 							editor.stopEditingAttribute();
 
-						} else if (field.getType().isAssignableFrom(
-								Texture.class)) {// texture
+						} else if (type.isAssignableFrom(Texture.class)) {// texture
 							Texture texture = (Texture) objects.get(index);
 							field.set(editor.objectToEdit, objects.get(index));
 							try {
@@ -181,8 +216,7 @@ public class AttributeSelectionWindow<T> {
 							}
 							editor.stopEditingAttribute();
 
-						} else if (field.getType().isAssignableFrom(
-								Weapons.class)) {// weapons
+						} else if (type.isAssignableFrom(Weapons.class)) {// weapons
 
 							if (selectionWindowButton.down == true) {
 								selectionWindowButton.down = false;
@@ -201,8 +235,8 @@ public class AttributeSelectionWindow<T> {
 							}
 							ownerOfAttribute.getClass().getField("weapons")
 									.set(ownerOfAttribute, weapons);
-						} else if (field.getType().isAssignableFrom(
-								ScriptTrigger.class)) {// script trigger
+						} else if (type.isAssignableFrom(ScriptTrigger.class)) {// script
+																				// trigger
 							ScriptTrigger scriptTrigger = (ScriptTrigger) objects
 									.get(index);
 							ownerOfAttribute
@@ -211,8 +245,8 @@ public class AttributeSelectionWindow<T> {
 									.set(ownerOfAttribute,
 											scriptTrigger.makeCopy());
 							editor.stopEditingAttribute();
-						} else if (field.getType().isAssignableFrom(AI.class)) {// script
-																				// trigger
+						} else if (type.isAssignableFrom(AI.class)) {// script
+																		// trigger
 							AI ai = (AI) objects.get(index);
 							ownerOfAttribute.getClass().getField("ai")
 									.set(ownerOfAttribute, ai.makeCopy());

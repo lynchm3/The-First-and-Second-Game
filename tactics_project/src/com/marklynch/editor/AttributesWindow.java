@@ -317,10 +317,24 @@ public class AttributesWindow {
 							.get(0));
 					speechPart.positions.add(100f);
 					speechPart.directions.add(true);
+					speechPart.actorsGUIDs.add(Game.level.factions.get(0).actors
+							.get(0).guid);
 
-					depressButtons();
+					Object object = AttributesWindow.this.object;
+
+					Button buttonForObject = editor.settingsWindow
+							.getButton(object);
+
+					editor.clearSelectedObject();
+					editor.depressButtonsSettingsAndDetailsButtons();
+					buttonForObject.down = true;
+					editor.attributesWindow = new AttributesWindow(200, 200,
+							200, object, editor);
+
+					// depressButtons();
 					// editor.clearSelectedObject();
-					editor.settingsWindow.update();
+					// editor.settingsWindow.update();
+
 				}
 			});
 		}

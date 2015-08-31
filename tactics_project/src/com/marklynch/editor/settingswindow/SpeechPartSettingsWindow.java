@@ -101,7 +101,15 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 							editor);
 				}
 			};
+			if (speechPartButton.object == editor.objectToEdit)
+				speechPartButton.down = true;
+
 			buttons.add(speechPartButton);
+
+			// if (editor.objectToEdit ==
+			// Game.level.script.speechParts.get(index)) {
+			// speechPartButton.click();
+			// }
 
 		}
 
@@ -110,8 +118,5 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateSpeechPartsButtons();
-		SettingsWindowButton button = this.getButton(editor.objectToEdit);
-		if (button != null)
-			button.down = true;
 	}
 }

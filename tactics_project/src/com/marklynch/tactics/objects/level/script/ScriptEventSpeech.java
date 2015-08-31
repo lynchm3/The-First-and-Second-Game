@@ -76,7 +76,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 		public boolean inline = false;
 
 		// For saving and loading
-		public ArrayList<String> actorGUIDs = new ArrayList<String>();
+		public ArrayList<String> actorsGUIDs = new ArrayList<String>();
 		public String talkerGUID = null;
 
 		public SpeechPart(Actor talker, ArrayList<String> text) {
@@ -84,7 +84,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 			this.talker = talker;
 			this.text = text;
 			for (Actor actor : actors) {
-				actorGUIDs.add(actor.guid);
+				actorsGUIDs.add(actor.guid);
 			}
 			talkerGUID = talker.guid;
 			inline = true;
@@ -100,7 +100,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 			this.talker = talker;
 			this.text = text;
 			for (Actor actor : actors) {
-				actorGUIDs.add(actor.guid);
+				actorsGUIDs.add(actor.guid);
 			}
 			talkerGUID = talker.guid;
 			inline = false;

@@ -2,6 +2,23 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// TODO write a cat that will run away from characters that get too close,
+	// and will run off the screen after being disturbed too many times :D
+	// Little details like this make a good game great
+
+	// I need a style.
+	// Side pane for game time :)
+	// Lets say 300px and on the left at the moment
+
+	// SpeechParts selector in speechpartscriptevent too
+
+	// When adding an actor to the speechPart, make sure u add in his GUID too
+	// :D
+
+	// WHen removing actor from speechpart remember to delete their guid
+
+	// End level event doesn't have text section in attributes pane
+
 	// Add Actor butto in SpeechPart is adding and actor to both speech parts
 
 	// Text for the speech isnt showing up in the attributes window, no idea why

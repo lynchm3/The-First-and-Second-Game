@@ -880,19 +880,28 @@ public class Editor {
 		attributeToEditIndex = index;
 		try {
 
+			// if (field.getType().isAssignableFrom(ArrayList.class)) {
+
 			Class<? extends Object> objectClass = objectToEdit.getClass();
-
 			Field field = objectClass.getField(attributeToEditName);
+			Class type = null;
+			ArrayList arrayList = null;
+			if (field.getType().isAssignableFrom(ArrayList.class)) {
+				arrayList = (ArrayList) field.get(objectToEdit);
+				type = arrayList.get(attributeToEditIndex).getClass();
+			} else {
+				type = field.getType();
+			}
 
-			if (field.getType().isAssignableFrom(Faction.class)) {
+			if (type.isAssignableFrom(Faction.class)) {
 				// faction
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.factions, false, this, objectToEdit);
-			} else if (field.getType().isAssignableFrom(Color.class)) {
+			} else if (type.isAssignableFrom(Color.class)) {
 				// color
 				attributeSelectionWindow = new AttributeSelectionWindow(colors,
 						false, this, objectToEdit);
-			} else if (field.getType().isAssignableFrom(Square.class)) {
+			} else if (type.isAssignableFrom(Square.class)) {
 				// square
 				ArrayList<Square> squares = new ArrayList<Square>();
 				for (Square[] squareArray : Game.level.squares) {
@@ -902,20 +911,20 @@ public class Editor {
 				}
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						squares, false, this, objectToEdit);
-			} else if (field.getType().isAssignableFrom(ScriptEvent.class)) {
+			} else if (type.isAssignableFrom(ScriptEvent.class)) {
 				// scriptEvent
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.script.scriptEvents, false, this,
 						objectToEdit);
-			} else if (field.getType().isAssignableFrom(Texture.class)) {
+			} else if (type.isAssignableFrom(Texture.class)) {
 				// texture
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						textures, false, this, objectToEdit);
-			} else if (field.getType().isAssignableFrom(Weapons.class)) {
+			} else if (type.isAssignableFrom(Weapons.class)) {
 				// weapons
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						weapons, true, this, objectToEdit);
-			} else if (field.getType().isAssignableFrom(GameObject.class)) {
+			} else if (type.isAssignableFrom(GameObject.class)) {
 				// actor
 
 				ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
@@ -927,7 +936,7 @@ public class Editor {
 				gameObjects.addAll(Game.level.inanimateObjects);
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						gameObjects, false, this, objectToEdit);
-			} else if (field.getType().isAssignableFrom(Actor.class)) {
+			} else if (type.isAssignableFrom(Actor.class)) {
 				// actor
 				ArrayList<Actor> actors = new ArrayList<Actor>();
 				for (Faction faction : Game.level.factions) {
@@ -937,18 +946,24 @@ public class Editor {
 				}
 				attributeSelectionWindow = new AttributeSelectionWindow(actors,
 						false, this, objectToEdit);
-			} else if (field.getType().isAssignableFrom(ScriptTrigger.class)) {
+			} else if (type.isAssignableFrom(ScriptTrigger.class)) {
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.script.scriptTriggers, false, this,
 						objectToEdit);
-			} else if (field.getType().isAssignableFrom(AI.class)) {
+			} else if (type.isAssignableFrom(AI.class)) {
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.ais, false, this, objectToEdit);
-			} else if (field.getType().isAssignableFrom(boolean.class)) {// YO
-																			// YO
-																			// YO
-				boolean b = (boolean) field.get(objectToEdit);
-				field.set(objectToEdit, !b);
+			} else if (type.isAssignableFrom(boolean.class)
+					|| type.isAssignableFrom(Boolean.class)) {
+
+				if (arrayList != null) {
+					arrayList.set(attributeToEditIndex,
+							!(boolean) arrayList.get(attributeToEditIndex));
+
+				} else {
+					boolean b = (boolean) field.get(objectToEdit);
+					field.set(objectToEdit, !b);
+				}
 				settingsWindow.update();
 				stopEditingAttribute();
 			}

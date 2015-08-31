@@ -78,9 +78,6 @@ public class RelationsSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateRelationsButtons();
-		SettingsWindowButton button = this.getButton(editor.objectToEdit);
-		if (button != null)
-			button.down = true;
 
 	}
 }

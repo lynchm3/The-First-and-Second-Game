@@ -117,9 +117,6 @@ public class FactionsSettingsWindow extends SettingsWindow {
 	@Override
 	public void update() {
 		updateFactionsButtons();
-		SettingsWindowButton button = this.getButton(editor.objectToEdit);
-		if (button != null)
-			button.down = true;
 
 	}
 }
