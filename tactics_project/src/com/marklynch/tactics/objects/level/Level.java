@@ -182,13 +182,6 @@ public class Level {
 
 		showTurnNotification = true;
 		waitingForPlayerClick = true;
-
-		System.out.println("script = " + script);
-		System.out.println("script.scriptEvents.get(0) = "
-				+ script.scriptEvents.get(0));
-		System.out.println("script.scriptEvents.get(0).scriptTrigger = "
-				+ script.scriptEvents.get(0).scriptTrigger);
-
 	}
 
 	public void loadImages() {

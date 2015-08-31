@@ -415,10 +415,8 @@ public class Editor {
 		Game.level.factions.get(1).actors.add(actor1);
 
 		// Decorations
-		Cat cat = new Cat("Cat", 0f, 0f, 0f, 0f, false, "cat.png");
+		Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");
 		Game.level.decorations.add(cat);
-		Cat notCat = new Cat("notCat", 0f, 0f, 0f, 0f, false, "cat.png");
-		Game.level.decorations.add(notCat);
 
 		// Script
 
@@ -707,35 +705,22 @@ public class Editor {
 	}
 
 	public void keyTyped(char character) {
-		System.out.println("keyTyped()");
 
 		if (state == STATE.SETTINGS_CHANGE && settingsButton != null) {
 			settingsButton.keyTyped(character);
 		} else if (objectToEdit != null) {
 			if (attributeToEditName != null && this.textEntered != null) {
-				System.out.println("objectToEdit = " + objectToEdit);
 
 				try {
 					Class<? extends Object> objectClass = objectToEdit
 							.getClass();
 					Field field = objectClass.getField(attributeToEditName);
-					System.out.println("field = " + field);
 					if (field.getType().isAssignableFrom(ArrayList.class)) {
-						System.out
-								.println("field.getType().isAssignableFrom(ArrayList.class)");
-						System.out.println("attributeToEditIndex = "
-								+ attributeToEditIndex);
-						System.out.println("objectToEdit = " + objectToEdit);
 
 						ArrayList arrayList = (ArrayList) field
 								.get(objectToEdit);
-						System.out.println("arrayList = " + arrayList);
 						Class attributeClass = arrayList.get(
 								attributeToEditIndex).getClass();
-						System.out
-								.println("attributeClass = " + attributeClass);
-						System.out.println("attributeToEditIndex = "
-								+ attributeToEditIndex);
 						if (attributeClass.isAssignableFrom(Integer.class)) { // int
 							if (48 <= character && character <= 57
 									&& textEntered.length() < 8) {
@@ -765,7 +750,6 @@ public class Editor {
 									&& textEntered.length() < 8) {
 								this.textEntered += character;
 							}
-							System.out.println("Text entered = " + textEntered);
 						} else if (attributeClass
 								.isAssignableFrom(String.class)) { // string
 							this.textEntered += character;
@@ -804,7 +788,6 @@ public class Editor {
 									&& textEntered.length() < 8) {
 								this.textEntered += character;
 							}
-							System.out.println("Text entered = " + textEntered);
 						} else if (field.getType().isAssignableFrom(
 								String.class)) { // string
 							this.textEntered += character;

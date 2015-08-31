@@ -5,8 +5,8 @@ import com.marklynch.tactics.objects.unit.Actor;
 
 public class Cat extends Decoration {
 
-	public final double minDistanceFromPeople = 100;
-	public final double interactionDistance = 50;
+	public final double minDistanceFromPeople = 500;
+	public final double interactionDistance = 300;
 
 	public Cat(String name, float x, float y, float width, float height,
 			boolean background, String imagePath) {
@@ -15,7 +15,7 @@ public class Cat extends Decoration {
 	}
 
 	@Override
-	public void update(int delta) {
+	public void update(double delta) {
 
 		// find closest actor
 		// if closer than 100 px move in opposite direction to them
@@ -49,11 +49,30 @@ public class Cat extends Decoration {
 			}
 		}
 
+		System.out.println("closestDistance = " + closestDistance);
+
 		if (closestDistance < minDistanceFromPeople) {
-			double distanceToMoveX = (x1 - closestX2) / closestDistance;
-			double distanceToMoveY = (y1 - closestY2) / closestDistance;
-			this.x += distanceToMoveX;
-			this.y += distanceToMoveY;
+			if (closestDistance == 0)
+				closestDistance = 1;
+			double distanceToMoveX = ((x1 - closestX2) / closestDistance)
+					* delta;
+			double distanceToMoveY = ((y1 - closestY2) / closestDistance)
+					* delta;
+
+			double potentialX = this.x + distanceToMoveX;
+			if (potentialX > 0
+					&& potentialX < Game.level.width * Game.SQUARE_WIDTH)
+				this.x = (float) potentialX;
+
+			double potentialY = this.y + distanceToMoveY;
+			if (potentialY > 0
+					&& potentialY < Game.level.height * Game.SQUARE_HEIGHT)
+				this.y = (float) potentialY;
+
+			System.out.println("distanceToMoveX = " + distanceToMoveX);
+			System.out.println("distanceToMoveY = " + distanceToMoveY);
+			System.out.println("this.x = " + this.x);
+			System.out.println("this.y = " + this.y);
 		}
 	}
 }

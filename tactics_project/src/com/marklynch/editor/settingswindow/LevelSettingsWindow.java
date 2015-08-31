@@ -286,7 +286,6 @@ public class LevelSettingsWindow extends SettingsWindow {
 						.registerTypeAdapter(AI.class,
 								new SubClassFriendlyAdapter<AI>()).create();
 				String json = FileUtils.openFile();
-				// System.out.println(editor.json);
 				// FileUtils.saveFile(json);
 				if (json != null) {
 					Game.level = gson.fromJson(json, Level.class);

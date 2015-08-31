@@ -239,7 +239,6 @@ public class Faction {
 
 		@Override
 		protected void beforeWrite(Faction object) {
-			System.out.println("beforeWrite");
 			for (Faction faction : object.relationships.keySet()) {
 				object.relationshipGUIDs.put(faction.guid,
 						object.relationships.get(faction));

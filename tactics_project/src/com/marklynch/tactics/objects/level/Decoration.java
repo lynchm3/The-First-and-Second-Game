@@ -28,7 +28,7 @@ public class Decoration {
 		loadImages();
 	}
 
-	public void update(int delta) {
+	public void update(double delta) {
 
 	}
 

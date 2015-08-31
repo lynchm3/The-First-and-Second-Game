@@ -21,9 +21,6 @@ public class Script {
 		scriptTriggers = new ArrayList<ScriptTrigger>();
 		speechParts = new ArrayList<SpeechPart>();
 
-		System.out.println("this.scriptEvents.size() = "
-				+ this.scriptEvents.size());
-
 		// for (ScriptEvent scriptEvent : this.scriptEvents) {
 		// scriptTriggers.add(scriptEvent.scriptTrigger.makeCopy());
 		// if (scriptEvent instanceof ScriptEventSpeech) {

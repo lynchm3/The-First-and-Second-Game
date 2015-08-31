@@ -178,8 +178,6 @@ public class ScriptEventSpeech extends ScriptEvent {
 				if (width <= 100)
 					width = 100;
 
-				System.out.println("text = " + text);
-
 				// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128,
 				// 128);
 				TextUtils.printTextWithImages(text, textX1, posY, width, true);

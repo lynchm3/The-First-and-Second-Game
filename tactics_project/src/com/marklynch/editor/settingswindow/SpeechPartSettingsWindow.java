@@ -61,8 +61,6 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 		buttons.clear();
 
 		buttons.add(addSpeechPartButton);
-		System.out.println("Game.level.script.speechParts.size() = "
-				+ Game.level.script.speechParts.size());
 
 		for (int i = 0; i < Game.level.script.speechParts.size(); i++) {
 			final int index = i;
