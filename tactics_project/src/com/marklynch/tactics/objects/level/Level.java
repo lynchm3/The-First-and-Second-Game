@@ -630,6 +630,13 @@ public class Level {
 	public void update(int delta) {
 		// if (this.script.activeScriptEvent != null) {
 		script.update(delta);
+
+		for (GameObject inanimateObject : inanimateObjects)
+			inanimateObject.update(delta);
+
+		for (Decoration decoration : decorations)
+			decoration.update(delta);
+
 		if (!this.script.checkIfBlocking()
 				&& currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);

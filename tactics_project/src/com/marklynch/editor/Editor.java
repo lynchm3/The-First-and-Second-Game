@@ -25,6 +25,7 @@ import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
 import com.marklynch.tactics.objects.level.Level;
@@ -412,6 +413,12 @@ public class Editor {
 				"red1.png", Game.level.squares[0][5], weaponsForActor1, 4);
 		actor1.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(actor1);
+
+		// Decorations
+		Cat cat = new Cat("Cat", 0f, 0f, 0f, 0f, false, "cat.png");
+		Game.level.decorations.add(cat);
+		Cat notCat = new Cat("notCat", 0f, 0f, 0f, 0f, false, "cat.png");
+		Game.level.decorations.add(notCat);
 
 		// Script
 

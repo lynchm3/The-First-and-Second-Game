@@ -28,6 +28,10 @@ public class Decoration {
 		loadImages();
 	}
 
+	public void update(int delta) {
+
+	}
+
 	public void loadImages() {
 		this.imageTexture = getGlobalImage(imageTexturePath);
 	}

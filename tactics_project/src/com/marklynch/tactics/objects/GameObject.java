@@ -356,4 +356,9 @@ public class GameObject {
 		return new GameObject(name, (int) totalHealth, strength, dexterity,
 				intelligence, endurance, imageTexturePath, square, weaponArray);
 	}
+
+	public void update(int delta) {
+		// TODO Auto-generated method stub
+
+	}
 }
