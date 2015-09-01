@@ -123,6 +123,9 @@ public class Characters {
 	 * Judge Dredd type... Judge Dredd is cool I AM THE LAW (Philisophical shit
 	 * w/ Dredd... explore it... police states, authoritarianism, and the rule
 	 * of law. Wikipedia page is probably a decent start point
+	 * 
+	 * A character covered in tatoos. REALLY bad tatoos? And like... address the
+	 * fact that all his tatoos are bad. HILARE.
 	 */
 
 }
