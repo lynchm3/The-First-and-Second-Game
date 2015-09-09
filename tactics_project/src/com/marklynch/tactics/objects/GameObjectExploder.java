@@ -72,6 +72,9 @@ public class GameObjectExploder extends GameObject {
 	@Override
 	public void drawForeground() {
 
+		 MAYBE THE U AND V ARE A RATIO (0 to 1)? yup...
+				 TRIED THAT below, didnt work, needs tsome debugging...
+
 		if (this.remainingHealth > 0) {
 			super.drawForeground();
 			return;
@@ -81,15 +84,23 @@ public class GameObjectExploder extends GameObject {
 			if (i == pieceCount - 1) {
 				TriangleUtils.drawTriangle(imageTexture, edgePixelsX[i],
 						centerPixelX, edgePixelsX[0], edgePixelsY[i],
-						centerPixelY, edgePixelsY[0], edgePixelsX[i],
-						centerPixelX, edgePixelsX[0], edgePixelsY[i],
-						centerPixelY, edgePixelsY[0]);
+						centerPixelY, edgePixelsY[0], edgePixelsX[i]
+								/ imageTexture.getWidth(), centerPixelX
+								/ imageTexture.getWidth(), edgePixelsX[0]
+								/ imageTexture.getWidth(), edgePixelsY[i]
+								/ imageTexture.getHeight(), centerPixelY
+								/ imageTexture.getHeight(), edgePixelsY[0]
+								/ imageTexture.getHeight());
 			} else {
 				TriangleUtils.drawTriangle(imageTexture, edgePixelsX[i],
 						centerPixelX, edgePixelsX[i + 1], edgePixelsY[i],
-						centerPixelY, edgePixelsY[i + 1], edgePixelsX[i],
-						centerPixelX, edgePixelsX[i + 1], edgePixelsY[i],
-						centerPixelY, edgePixelsY[i + 1]);
+						centerPixelY, edgePixelsY[i + 1], edgePixelsX[i]
+								/ imageTexture.getWidth(), centerPixelX
+								/ imageTexture.getWidth(), edgePixelsX[i + 1]
+								/ imageTexture.getWidth(), edgePixelsY[i]
+								/ imageTexture.getHeight(), centerPixelY
+								/ imageTexture.getHeight(), edgePixelsY[i + 1]
+								/ imageTexture.getHeight());
 			}
 		}
 
