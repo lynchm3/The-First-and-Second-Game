@@ -22,6 +22,7 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.TriangleUtils;
 
 public class Level {
 
@@ -531,6 +532,9 @@ public class Level {
 		for (Decoration decoration : decorations) {
 			decoration.draw2();
 		}
+
+		TriangleUtils.drawTriangle(factions.get(0).imageTexture, 0, 20, 0, 0,
+				20, 20, 0, 20, 0, 0, 20, 20);
 
 	}
 

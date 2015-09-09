@@ -2,12 +2,15 @@ package com.marklynch.tactics.objects;
 
 import java.util.ArrayList;
 
-import mdesl.graphics.Texture;
-
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
 
 public class GameObjectExploder extends GameObject {
+
+	int centerPixelX;
+	int centerPixelY;
+	int[] edgePixelsX;
+	int[] edgePixelsY;
 
 	public GameObjectExploder(String name, int health, int strength,
 			int dexterity, int intelligence, int endurance, String imagePath,
@@ -29,6 +32,7 @@ public class GameObjectExploder extends GameObject {
 	}
 
 	public void explode() {
+		createPieces(4);
 
 		// 1. create pieces
 
@@ -44,109 +48,69 @@ public class GameObjectExploder extends GameObject {
 	}
 
 	public void createPieces(int pieceCount) {
-		int totalAmountOfPixels = this.imageTexture.getWidth()
-				* this.imageTexture.getHeight();
 		int imageWidth = this.imageTexture.getWidth();
 		int imageHeight = this.imageTexture.getHeight();
 
-		int fairShare = totalAmountOfPixels / pieceCount;
-		int[] pieceSizes = new int[pieceCount];
-		int pixelsAcountedFor = 0;
-		for (int i = 0; i < pieceCount - 1; i++) {
-			double pieceSize = (Math.random() * totalAmountOfPixels)
-					/ pieceCount;
-			pieceSizes[i] = (int) pieceSize;
-			pixelsAcountedFor += pieceSize;
-		}
-		pieceSizes[pieceCount - 1] = totalAmountOfPixels - pixelsAcountedFor;
+		// 1. select random pixel
+		centerPixelX = (int) (Math.random() * imageWidth);
+		centerPixelY = (int) (Math.random() * imageHeight);
 
-		int[][] pixelReservations = new int[imageWidth][imageHeight];
-		for (int i = 0; i < imageWidth; i++) {
-			for (int j = 0; j < imageHeight; j++) {
-				pixelReservations[i][j] = -1;
-			}
-		}
-
+		// 2. select X random edge pixels
+		edgePixelsX = new int[pieceCount];
+		edgePixelsY = new int[pieceCount];
 		for (int i = 0; i < pieceCount; i++) {
-			// 1 pick a random pixel to start with
-			int pixelX = (int) (imageWidth * Math.random());
-			int pixelY = (int) (imageHeight * Math.random());
-
-			while (pixelReservations[pixelX][pixelY] != -1) {
-				pixelX++;
-				if (pixelX >= imageWidth) {
-					pixelX = 0;
-					pixelY++;
-					if (pixelY >= imageHeight) {
-						pixelY++;
-					}
-				}
+			if (i % 4 == 0) {
+				edgePixelsX[i] = 0;
+				edgePixelsY[i] = (int) (Math.random() * imageHeight);
+			} else if (i % 4 == 1) {
+				edgePixelsX[i] = (int) (Math.random() * imageWidth);
+				edgePixelsY[i] = 0;
+			} else if (i % 4 == 2) {
+				edgePixelsX[i] = imageWidth - 1;
+				edgePixelsY[i] = (int) (Math.random() * imageHeight);
+			} else if (i % 4 == 3) {
+				edgePixelsX[i] = (int) (Math.random() * imageWidth);
+				edgePixelsY[i] = imageHeight - 1;
 			}
-
-			pixelReservations[pixelX][pixelY] = i;
-
-			for (int j = 1; j < pieceSizes[i]; j++) {
-				int direction = (int) (Math.random() * 4);
-				for (int k = 0; k < 4; k++) {
-
-					int directionX = 1;
-					int directionY = 1;
-
-					if (direction == 0) {
-						directionX = 1;
-						directionY = 1;
-					}
-
-					if (direction == 1) {
-						directionX = -1;
-						directionY = 1;
-					}
-
-					if (direction == 2) {
-						directionX = 1;
-						directionY = -1;
-					}
-
-					if (direction == 3) {
-						directionX = -1;
-						directionY = -1;
-					}
-
-					int potentialPixelX = pixelX + directionX;
-					int potentialPixelY = pixelY + directionX;
-
-					if (potentialPixelX > -1
-							&& potentialPixelX < imageWidth
-							&& potentialPixelY > -1
-							&& potentialPixelY < imageHeight
-							&& pixelReservations[potentialPixelX][potentialPixelY] == -1) {
-						pixelX = potentialPixelX;
-						pixelY = potentialPixelY;
-						pixelReservations[pixelX][pixelY] = i;
-						break;
-					}
-
-					direction++;
-					if (direction == 4)
-						direction = 0;
-
-					if (k == 3)
-						j = pieceSizes[i];
-				}
-			}
-
 		}
 
-		 OK... now I have an array of what pixel belongs to what piece...
-		 now to build a new texture from it...a
+	}
 
-		Texture[] textures = new Texture[pieceCount];
-		for (int i = 0; i < pieceCount; i++) {
-			Texture texture = new Texture();
-			
-			
-			
+	@Override
+	public void drawForeground() {
+
+		if (this.remainingHealth > 0) {
+			super.drawForeground();
+			return;
 		}
 
+		// draw the pieces at 0,0
+		// Game.activeBatch.dr
+
+		// Draw object
+		// int actorPositionXInPixels = this.squareGameObjectIsOn.x
+		// * (int) Game.SQUARE_WIDTH;
+		// int actorPositionYInPixels = this.squareGameObjectIsOn.y
+		// * (int) Game.SQUARE_HEIGHT;
+		//
+		// float alpha = 1.0f;
+		// if (Game.level.activeActor != null
+		// && Game.level.activeActor.showHoverFightPreview == true
+		// && Game.level.activeActor.hoverFightPreviewDefender != this) {
+		// alpha = 0.5f;
+		// }
+		//
+		// if (hasAttackedThisTurn == true && this.faction != null
+		// && Game.level.currentFactionMoving == this.faction) {
+		// alpha = 0.5f;
+		// }
+		//
+		// TextureUtils.skipNormals = true;
+		//
+		// TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
+		// actorPositionXInPixels + Game.SQUARE_WIDTH,
+		// actorPositionYInPixels, actorPositionYInPixels
+		// + Game.SQUARE_HEIGHT);
+		// TextureUtils.skipNormals = false;
 	}
 }

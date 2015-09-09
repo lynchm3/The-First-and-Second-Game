@@ -13,6 +13,7 @@ public class QuadUtils {
 
 		Game.activeBatch.setColor(color);
 		Game.activeBatch.draw(Game.quadTexture, x1, y1, x2 - x1, y2 - y1);
+
 		// GL11.glBegin(GL11.GL_QUADS);
 		// GL11.glVertex2f(x1, y1);
 		// GL11.glVertex2f(x2, y1);
