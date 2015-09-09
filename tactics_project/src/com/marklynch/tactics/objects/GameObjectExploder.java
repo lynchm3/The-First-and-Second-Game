@@ -4,19 +4,23 @@ import java.util.ArrayList;
 
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.utils.TriangleUtils;
 
 public class GameObjectExploder extends GameObject {
 
-	int centerPixelX;
-	int centerPixelY;
-	int[] edgePixelsX;
-	int[] edgePixelsY;
+	public int centerPixelX;
+	public int centerPixelY;
+	public int[] edgePixelsX;
+	public int[] edgePixelsY;
+	public int pieceCount;
 
 	public GameObjectExploder(String name, int health, int strength,
 			int dexterity, int intelligence, int endurance, String imagePath,
 			Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
 		super(name, health, strength, dexterity, intelligence, endurance,
 				imagePath, squareGameObjectIsOn, weapons);
+		remainingHealth = 0;
+		explode();
 	}
 
 	@Override
@@ -33,21 +37,10 @@ public class GameObjectExploder extends GameObject {
 
 	public void explode() {
 		createPieces(4);
-
-		// 1. create pieces
-
-		// explosion effect
-
-		// o, o, o... break down the object in to pieces!!!
-
-		// put some debris down
-		// blow debris out
-		// blow other debris out
-		// scare the cat
-		// damage shit
 	}
 
 	public void createPieces(int pieceCount) {
+		this.pieceCount = pieceCount;
 		int imageWidth = this.imageTexture.getWidth();
 		int imageHeight = this.imageTexture.getHeight();
 
@@ -82,6 +75,22 @@ public class GameObjectExploder extends GameObject {
 		if (this.remainingHealth > 0) {
 			super.drawForeground();
 			return;
+		}
+
+		for (int i = 0; i < pieceCount; i++) {
+			if (i == pieceCount - 1) {
+				TriangleUtils.drawTriangle(imageTexture, edgePixelsX[i],
+						centerPixelX, edgePixelsX[0], edgePixelsY[i],
+						centerPixelY, edgePixelsY[0], edgePixelsX[i],
+						centerPixelX, edgePixelsX[0], edgePixelsY[i],
+						centerPixelY, edgePixelsY[0]);
+			} else {
+				TriangleUtils.drawTriangle(imageTexture, edgePixelsX[i],
+						centerPixelX, edgePixelsX[i + 1], edgePixelsY[i],
+						centerPixelY, edgePixelsY[i + 1], edgePixelsX[i],
+						centerPixelX, edgePixelsX[i + 1], edgePixelsY[i],
+						centerPixelY, edgePixelsY[i + 1]);
+			}
 		}
 
 		// draw the pieces at 0,0

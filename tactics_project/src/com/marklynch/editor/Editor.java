@@ -25,6 +25,7 @@ import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.GameObjectExploder;
 import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
@@ -371,8 +372,8 @@ public class Editor {
 	public void generateTestObjects() {
 
 		// Add a game object
-		GameObject gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"skip_with_shadow.png", Game.level.squares[0][3],
+		GameObject gameObject = new GameObjectExploder("dumpster", 5, 0, 0, 0,
+				0, "skip_with_shadow.png", Game.level.squares[0][3],
 				new ArrayList<Weapon>());
 		Game.level.inanimateObjects.add(gameObject);
 		Game.level.squares[0][3].gameObject = gameObject;
