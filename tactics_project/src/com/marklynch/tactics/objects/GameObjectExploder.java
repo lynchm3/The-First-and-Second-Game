@@ -8,11 +8,11 @@ import com.marklynch.utils.TriangleUtils;
 
 public class GameObjectExploder extends GameObject {
 
-	public int centerPixelX;
-	public int centerPixelY;
-	public int[] edgePixelsX;
-	public int[] edgePixelsY;
-	public int pieceCount;
+	public float centerPixelX;
+	public float centerPixelY;
+	public float[] edgePixelsX;
+	public float[] edgePixelsY;
+	public float pieceCount;
 
 	public GameObjectExploder(String name, int health, int strength,
 			int dexterity, int intelligence, int endurance, String imagePath,
@@ -49,8 +49,8 @@ public class GameObjectExploder extends GameObject {
 		centerPixelY = (int) (Math.random() * imageHeight);
 
 		// 2. select X random edge pixels
-		edgePixelsX = new int[pieceCount];
-		edgePixelsY = new int[pieceCount];
+		edgePixelsX = new float[pieceCount];
+		edgePixelsY = new float[pieceCount];
 		for (int i = 0; i < pieceCount; i++) {
 			if (i % 4 == 0) {
 				edgePixelsX[i] = 0;
@@ -72,35 +72,84 @@ public class GameObjectExploder extends GameObject {
 	@Override
 	public void drawForeground() {
 
-		 MAYBE THE U AND V ARE A RATIO (0 to 1)? yup...
-				 TRIED THAT below, didnt work, needs tsome debugging...
+		// MAYBE THE U AND V ARE A RATIO (0 to 1)? yup...
+		// TRIED THAT below, didnt work, needs tsome debugging...
+
+		// THEYRE INTS, WHOOPS :D:D:D
 
 		if (this.remainingHealth > 0) {
 			super.drawForeground();
 			return;
 		}
 
+		// float x1 = 0;
+		// float x2 = 120;
+		// float x3 = 0;
+		// float y1 = 0;
+		// float y2 = 0;
+		// float y3 = 120;
+		// float u1 = 0;
+		// float u2 = 1;
+		// float u3 = 0;
+		// float v1 = 0;
+		// float v2 = 0;
+		// float v3 = 1;
+		// TriangleUtils.drawTriangle(imageTexture, x1, x2, x3, y1, y2, y3, u1,
+		// u2, u3, v1, v2, v3);
+		//
+		// System.out.println("Triangles " + 0 + " - x1 = " + x1 + ", x2 = " +
+		// x2
+		// + ", x3 = " + x3 + ", y1 = " + y1 + ", y2 = " + y2 + ", y3 = "
+		// + y3 + ", u1 = " + u1 + ", u2 = " + u2 + ", u3 = " + u3
+		// + ", v1 = " + v1 + ", v2 = " + v2 + ", v3 = " + v3);
+
 		for (int i = 0; i < pieceCount; i++) {
 			if (i == pieceCount - 1) {
-				TriangleUtils.drawTriangle(imageTexture, edgePixelsX[i],
-						centerPixelX, edgePixelsX[0], edgePixelsY[i],
-						centerPixelY, edgePixelsY[0], edgePixelsX[i]
-								/ imageTexture.getWidth(), centerPixelX
-								/ imageTexture.getWidth(), edgePixelsX[0]
-								/ imageTexture.getWidth(), edgePixelsY[i]
-								/ imageTexture.getHeight(), centerPixelY
-								/ imageTexture.getHeight(), edgePixelsY[0]
-								/ imageTexture.getHeight());
+
+				float x1 = edgePixelsX[i] + i * 120f;
+				float x2 = centerPixelX + i * 120f;
+				float x3 = edgePixelsX[0] + i * 120f;
+				float y1 = edgePixelsY[i];
+				float y2 = centerPixelY;
+				float y3 = edgePixelsY[0];
+				float u1 = edgePixelsX[i] / imageTexture.getWidth();
+				float u2 = centerPixelX / imageTexture.getWidth();
+				float u3 = edgePixelsX[0] / imageTexture.getWidth();
+				float v1 = edgePixelsY[i] / imageTexture.getHeight();
+				float v2 = centerPixelY / imageTexture.getHeight();
+				float v3 = edgePixelsY[0] / imageTexture.getHeight();
+
+				TriangleUtils.drawTriangle(imageTexture, x1, x2, x3, y1, y2,
+						y3, u1, u2, u3, v1, v2, v3);
+
+				System.out.println("Triangles " + i + " - x1 = " + x1
+						+ ", x2 = " + x2 + ", x3 = " + x3 + ", y1 = " + y1
+						+ ", y2 = " + y2 + ", y3 = " + y3 + ", u1 = " + u1
+						+ ", u2 = " + u2 + ", u3 = " + u3 + ", v1 = " + v1
+						+ ", v2 = " + v2 + ", v3 = " + v3);
+
 			} else {
-				TriangleUtils.drawTriangle(imageTexture, edgePixelsX[i],
-						centerPixelX, edgePixelsX[i + 1], edgePixelsY[i],
-						centerPixelY, edgePixelsY[i + 1], edgePixelsX[i]
-								/ imageTexture.getWidth(), centerPixelX
-								/ imageTexture.getWidth(), edgePixelsX[i + 1]
-								/ imageTexture.getWidth(), edgePixelsY[i]
-								/ imageTexture.getHeight(), centerPixelY
-								/ imageTexture.getHeight(), edgePixelsY[i + 1]
-								/ imageTexture.getHeight());
+
+				float x1 = edgePixelsX[i] + i * 120f;
+				float x2 = centerPixelX + i * 120f;
+				float x3 = edgePixelsX[i + 1] + i * 120f;
+				float y1 = edgePixelsY[i];
+				float y2 = centerPixelY;
+				float y3 = edgePixelsY[i + 1];
+				float u1 = edgePixelsX[i] / imageTexture.getWidth();
+				float u2 = centerPixelX / imageTexture.getWidth();
+				float u3 = edgePixelsX[i + 1] / imageTexture.getWidth();
+				float v1 = edgePixelsY[i] / imageTexture.getHeight();
+				float v2 = centerPixelY / imageTexture.getHeight();
+				float v3 = edgePixelsY[i + 1] / imageTexture.getHeight();
+				TriangleUtils.drawTriangle(imageTexture, x1, x2, x3, y1, y2,
+						y3, u1, u2, u3, v1, v2, v3);
+
+				System.out.println("Triangles " + i + " - x1 = " + x1
+						+ ", x2 = " + x2 + ", x3 = " + x3 + ", y1 = " + y1
+						+ ", y2 = " + y2 + ", y3 = " + y3 + ", u1 = " + u1
+						+ ", u2 = " + u2 + ", u3 = " + u3 + ", v1 = " + v1
+						+ ", v2 = " + v2 + ", v3 = " + v3);
 			}
 		}
 
