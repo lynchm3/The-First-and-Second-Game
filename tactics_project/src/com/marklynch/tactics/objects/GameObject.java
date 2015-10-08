@@ -59,6 +59,7 @@ public class GameObject {
 	public transient Texture xTexture = null;
 	public transient Texture upTexture = null;
 	public transient Texture downTexture = null;
+	public transient Texture armTexture = null;
 	public static transient Texture grassNormalTexture = null;
 	public static transient Texture skipNormalTexture = null;
 
@@ -102,6 +103,7 @@ public class GameObject {
 		this.xTexture = getGlobalImage("x.png");
 		this.upTexture = getGlobalImage("up.png");
 		this.downTexture = getGlobalImage("down.png");
+		this.armTexture = getGlobalImage("arm.png");
 		grassNormalTexture = getGlobalImage("grass_NRM.png");
 		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png");
 		screamAudio = ResourceUtils.getGlobalSound("scream.wav");

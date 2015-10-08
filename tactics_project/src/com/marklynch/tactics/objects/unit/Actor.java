@@ -60,6 +60,7 @@ public class Actor extends GameObject {
 			ArrayList<Weapon> weapons, int travelDistance) {
 		super(name, health, strength, dexterity, intelligence, endurance,
 				imagePath, squareActorIsStandingOn, weapons);
+
 		this.title = title;
 		this.actorLevel = actorLevel;
 		this.travelDistance = travelDistance;
@@ -347,6 +348,46 @@ public class Actor extends GameObject {
 			}
 
 			super.drawForeground();
+
+			// Draw arm
+
+			// OLD LADY IMAGE
+			// origin 0,0
+			// shoulder 65, 41
+			// total 128,128
+
+			// ARM IMAGE
+			// origin 0,0
+			// shoulder 11, 13
+			// hand 70,110
+			// total 128, 128
+
+			int actorPositionXInPixels = this.squareGameObjectIsOn.x
+					* (int) Game.SQUARE_WIDTH;
+			int actorPositionYInPixels = this.squareGameObjectIsOn.y
+					* (int) Game.SQUARE_HEIGHT;
+
+			int armPositionXInPixels = actorPositionXInPixels + 65 - 11;
+			int armPositionYInPixels = actorPositionYInPixels + 41 - 13;
+
+			float alpha = 1.0f;
+			if (Game.level.activeActor != null
+					&& Game.level.activeActor.showHoverFightPreview == true
+					&& Game.level.activeActor.hoverFightPreviewDefender != this) {
+				alpha = 0.5f;
+			}
+
+			if (hasAttackedThisTurn == true && this.faction != null
+					&& Game.level.currentFactionMoving == this.faction) {
+				alpha = 0.5f;
+			}
+
+			TextureUtils.skipNormals = true;
+			TextureUtils.drawTexture(armTexture, alpha, armPositionXInPixels,
+					armPositionXInPixels + Game.SQUARE_WIDTH,
+					armPositionYInPixels, armPositionYInPixels
+							+ Game.SQUARE_HEIGHT);
+			TextureUtils.skipNormals = false;
 
 			if (Game.level.activeActor != null
 					&& Game.level.activeActor.showHoverFightPreview) {
