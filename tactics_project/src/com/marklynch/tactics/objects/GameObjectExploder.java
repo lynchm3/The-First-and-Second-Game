@@ -20,8 +20,6 @@ public class GameObjectExploder extends GameObject {
 			Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
 		super(name, health, strength, dexterity, intelligence, endurance,
 				imagePath, squareGameObjectIsOn, weapons);
-		// remainingHealth = 0;
-		// explode();
 	}
 
 	@Override
