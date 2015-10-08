@@ -166,7 +166,7 @@ public class GameObject {
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
 			this.squareGameObjectIsOn.gameObject = null;
-			Game.level.inanimateObjects.remove(this);
+			// Game.level.inanimateObjects.remove(this);
 
 			return true;
 		}

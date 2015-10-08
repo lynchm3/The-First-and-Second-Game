@@ -3,6 +3,7 @@ package com.marklynch.tactics.objects;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.utils.QuadUtils;
@@ -19,8 +20,8 @@ public class GameObjectExploder extends GameObject {
 			Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
 		super(name, health, strength, dexterity, intelligence, endurance,
 				imagePath, squareGameObjectIsOn, weapons);
-		remainingHealth = 0;
-		explode();
+		// remainingHealth = 0;
+		// explode();
 	}
 
 	@Override
@@ -46,18 +47,27 @@ public class GameObjectExploder extends GameObject {
 		float pieceWidth = this.imageTexture.getWidth() / root;
 		float pieceHeight = this.imageTexture.getHeight() / root;
 
+		float positionXInPixels = this.squareGameObjectIsOn.x
+				* (int) Game.SQUARE_WIDTH;
+		float positionYInPixels = this.squareGameObjectIsOn.y
+				* (int) Game.SQUARE_HEIGHT;
+
 		for (float i = 0; i < root; i++) {
 			for (float j = 0; j < root; j++) {
 
 				SquarePiece squarePiece = squarePieces[(int) (i * root + j)] = new SquarePiece();
-				squarePiece.x1 = i * pieceWidth;
-				squarePiece.x2 = i * pieceWidth + pieceWidth;
-				squarePiece.x3 = i * pieceWidth + pieceWidth;
-				squarePiece.x4 = i * pieceWidth;
-				squarePiece.y1 = j * pieceHeight;
-				squarePiece.y2 = j * pieceHeight;
-				squarePiece.y3 = j * pieceHeight + pieceHeight;
-				squarePiece.y4 = j * pieceHeight + pieceHeight;
+				squarePiece.x1 = i * pieceWidth + positionXInPixels;
+				squarePiece.x2 = i * pieceWidth + pieceWidth
+						+ positionXInPixels;
+				squarePiece.x3 = i * pieceWidth + pieceWidth
+						+ positionXInPixels;
+				squarePiece.x4 = i * pieceWidth + positionXInPixels;
+				squarePiece.y1 = j * pieceHeight + positionYInPixels;
+				squarePiece.y2 = j * pieceHeight + positionYInPixels;
+				squarePiece.y3 = j * pieceHeight + pieceHeight
+						+ positionYInPixels;
+				squarePiece.y4 = j * pieceHeight + pieceHeight
+						+ positionYInPixels;
 				squarePiece.u1 = (i * pieceWidth) / imageTexture.getWidth();
 				squarePiece.u2 = (i * pieceWidth + pieceWidth)
 						/ imageTexture.getWidth();
@@ -71,8 +81,8 @@ public class GameObjectExploder extends GameObject {
 				squarePiece.v4 = (j * pieceHeight + pieceHeight)
 						/ imageTexture.getHeight();
 
-				squarePiece.centreX = squarePiece.x1;
-				squarePiece.centreY = squarePiece.y1;
+				squarePiece.centreX = squarePiece.x1 + pieceWidth / 2f;
+				squarePiece.centreY = squarePiece.y1 + pieceHeight / 2f;
 				squarePiece.velocityX = (float) Math.random() * 50 - 25;
 				squarePiece.velocityY = (float) Math.random() * 50 - 25;
 				squarePiece.rotationVelocity = (float) Math.random() * 50 - 25;
@@ -289,9 +299,6 @@ public class GameObjectExploder extends GameObject {
 			if (rotationVelocity < 1 && rotationVelocity > -1) {
 				rotationVelocity = 0;
 			}
-
-			if (rotationVelocity != 0)
-				System.out.println("rotationVelocity = " + rotationVelocity);
 
 			if (velocityX == 0 && velocityY == 0)
 				rotationVelocity = 0;
