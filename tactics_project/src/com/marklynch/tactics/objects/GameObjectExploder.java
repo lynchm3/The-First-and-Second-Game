@@ -73,9 +73,9 @@ public class GameObjectExploder extends GameObject {
 
 				squarePiece.centreX = squarePiece.x1;
 				squarePiece.centreY = squarePiece.y1;
-				squarePiece.velocityX = (float) Math.random() * 20 - 10;
-				squarePiece.velocityY = (float) Math.random() * 20 - 10;
-				squarePiece.rotationVelocity = 0;
+				squarePiece.velocityX = (float) Math.random() * 50 - 25;
+				squarePiece.velocityY = (float) Math.random() * 50 - 25;
+				squarePiece.rotationVelocity = (float) Math.random() * 50 - 25;
 			}
 		}
 
@@ -141,8 +141,6 @@ public class GameObjectExploder extends GameObject {
 		// TRIED THAT below, didnt work, needs tsome debugging...
 
 		// THEYRE INTS, WHOOPS :D:D:D
-
-		System.out.println("remainingHealth = " + remainingHealth);
 
 		if (this.remainingHealth > 0) {
 			super.drawForeground();
@@ -220,6 +218,10 @@ public class GameObjectExploder extends GameObject {
 		}
 
 		public void update() {
+
+			if (velocityX == 0 && velocityY == 0)
+				return;
+
 			this.x1 += velocityX;
 			this.x2 += velocityX;
 			this.x3 += velocityX;
@@ -258,9 +260,10 @@ public class GameObjectExploder extends GameObject {
 			y4 = pt4[1];
 
 			if (velocityX > 0) {
-				velocityX--;
+				velocityX -= velocityX / 25;
 			} else if (velocityX < 0) {
-				velocityX++;
+				velocityX -= velocityX / 25;
+				;
 			}
 
 			if (velocityX < 1 && velocityX > -1) {
@@ -268,9 +271,9 @@ public class GameObjectExploder extends GameObject {
 			}
 
 			if (velocityY > 0) {
-				velocityY--;
+				velocityY -= velocityY / 25;
 			} else if (velocityY < 0) {
-				velocityY++;
+				velocityY -= velocityY / 25;
 			}
 
 			if (velocityY < 1 && velocityY > -1) {
@@ -278,14 +281,20 @@ public class GameObjectExploder extends GameObject {
 			}
 
 			if (rotationVelocity > 0) {
-				rotationVelocity--;
+				rotationVelocity -= rotationVelocity / 25;
 			} else if (rotationVelocity < 0) {
-				rotationVelocity++;
+				rotationVelocity -= rotationVelocity / 25;
 			}
 
 			if (rotationVelocity < 1 && rotationVelocity > -1) {
 				rotationVelocity = 0;
 			}
+
+			if (rotationVelocity != 0)
+				System.out.println("rotationVelocity = " + rotationVelocity);
+
+			if (velocityX == 0 && velocityY == 0)
+				rotationVelocity = 0;
 		}
 	}
 
