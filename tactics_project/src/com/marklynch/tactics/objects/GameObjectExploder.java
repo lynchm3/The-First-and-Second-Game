@@ -1,5 +1,6 @@
 package com.marklynch.tactics.objects;
 
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 import com.marklynch.tactics.objects.level.Square;
@@ -69,6 +70,12 @@ public class GameObjectExploder extends GameObject {
 						/ imageTexture.getHeight();
 				squarePiece.v4 = (j * pieceHeight + pieceHeight)
 						/ imageTexture.getHeight();
+
+				squarePiece.centreX = squarePiece.x1;
+				squarePiece.centreY = squarePiece.y1;
+				squarePiece.velocityX = (float) Math.random() * 20 - 10;
+				squarePiece.velocityY = (float) Math.random() * 20 - 10;
+				squarePiece.rotationVelocity = 0;
 			}
 		}
 
@@ -135,6 +142,8 @@ public class GameObjectExploder extends GameObject {
 
 		// THEYRE INTS, WHOOPS :D:D:D
 
+		System.out.println("remainingHealth = " + remainingHealth);
+
 		if (this.remainingHealth > 0) {
 			super.drawForeground();
 			return;
@@ -145,30 +154,39 @@ public class GameObjectExploder extends GameObject {
 			if (trianglePieces[i] == null)
 				continue;
 
-			TriangleUtils.drawTriangle(imageTexture, trianglePieces[i].x1,
-					trianglePieces[i].x2, trianglePieces[i].x3,
-					trianglePieces[i].y1, trianglePieces[i].y2,
-					trianglePieces[i].y3, trianglePieces[i].u1,
-					trianglePieces[i].u2, trianglePieces[i].u3,
-					trianglePieces[i].v1, trianglePieces[i].v2,
-					trianglePieces[i].v3);
+			trianglePieces[i].draw();
 		}
 
 		for (int i = 0; squarePieces != null && i < squarePieces.length; i++) {
 
 			if (squarePieces[i] == null)
 				continue;
-
-			QuadUtils.drawQuad(imageTexture, squarePieces[i].x1,
-					squarePieces[i].x2, squarePieces[i].x3, squarePieces[i].x4,
-					squarePieces[i].y1, squarePieces[i].y2, squarePieces[i].y3,
-					squarePieces[i].y4, squarePieces[i].u1, squarePieces[i].u2,
-					squarePieces[i].u3, squarePieces[i].u4, squarePieces[i].v1,
-					squarePieces[i].v2, squarePieces[i].v3, squarePieces[i].v4);
+			squarePieces[i].draw();
 		}
 	}
 
-	public static class SquarePiece {
+	@Override
+	public void update(int delta) {
+		super.update(delta);
+
+		for (int i = 0; trianglePieces != null && i < trianglePieces.length; i++) {
+
+			if (trianglePieces[i] == null)
+				continue;
+
+			trianglePieces[i].update();
+		}
+
+		for (int i = 0; squarePieces != null && i < squarePieces.length; i++) {
+
+			if (squarePieces[i] == null)
+				continue;
+			squarePieces[i].update();
+		}
+
+	}
+
+	public class SquarePiece {
 		float x1;
 		float x2;
 		float x3;
@@ -185,9 +203,93 @@ public class GameObjectExploder extends GameObject {
 		float v2;
 		float v3;
 		float v4;
+
+		float centreX;
+		float centreY;
+
+		float velocityX;
+		float velocityY;
+		float rotationVelocity;
+
+		public void draw() {
+
+			QuadUtils.drawQuad(imageTexture, this.x1, this.x2, this.x3,
+					this.x4, this.y1, this.y2, this.y3, this.y4, this.u1,
+					this.u2, this.u3, this.u4, this.v1, this.v2, this.v3,
+					this.v4);
+		}
+
+		public void update() {
+			this.x1 += velocityX;
+			this.x2 += velocityX;
+			this.x3 += velocityX;
+			this.x4 += velocityX;
+
+			this.y1 += velocityY;
+			this.y2 += velocityY;
+			this.y3 += velocityY;
+			this.y4 += velocityY;
+
+			this.centreX += velocityX;
+			this.centreY += velocityY;
+
+			float[] pt1 = { x1, y1 };
+			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity),
+					centreX, centreY).transform(pt1, 0, pt1, 0, 1);
+			x1 = pt1[0];
+			y1 = pt1[1];
+
+			float[] pt2 = { x2, y2 };
+			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity),
+					centreX, centreY).transform(pt2, 0, pt2, 0, 1);
+			x2 = pt2[0];
+			y2 = pt2[1];
+
+			float[] pt3 = { x3, y3 };
+			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity),
+					centreX, centreY).transform(pt3, 0, pt3, 0, 1);
+			x3 = pt3[0];
+			y3 = pt3[1];
+
+			float[] pt4 = { x4, y4 };
+			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity),
+					centreX, centreY).transform(pt4, 0, pt4, 0, 1);
+			x4 = pt4[0];
+			y4 = pt4[1];
+
+			if (velocityX > 0) {
+				velocityX--;
+			} else if (velocityX < 0) {
+				velocityX++;
+			}
+
+			if (velocityX < 1 && velocityX > -1) {
+				velocityX = 0;
+			}
+
+			if (velocityY > 0) {
+				velocityY--;
+			} else if (velocityY < 0) {
+				velocityY++;
+			}
+
+			if (velocityY < 1 && velocityY > -1) {
+				velocityY = 0;
+			}
+
+			if (rotationVelocity > 0) {
+				rotationVelocity--;
+			} else if (rotationVelocity < 0) {
+				rotationVelocity++;
+			}
+
+			if (rotationVelocity < 1 && rotationVelocity > -1) {
+				rotationVelocity = 0;
+			}
+		}
 	}
 
-	public static class TrianglePiece {
+	public class TrianglePiece {
 		float x1;
 		float x2;
 		float x3;
@@ -200,5 +302,26 @@ public class GameObjectExploder extends GameObject {
 		float v1;
 		float v2;
 		float v3;
+
+		float velocityX;
+		float velocityY;
+		float rotationVelocityX;
+		float rotationVelocityY;
+
+		public void draw() {
+			TriangleUtils.drawTriangle(imageTexture, this.x1, this.x2, this.x3,
+					this.y1, this.y2, this.y3, this.u1, this.u2, this.u3,
+					this.v1, this.v2, this.v3);
+		}
+
+		public void update() {
+			this.x1 += velocityX;
+			this.x2 += velocityX;
+			this.x3 += velocityX;
+
+			this.y1 += velocityY;
+			this.y2 += velocityY;
+			this.y3 += velocityY;
+		}
 	}
 }
