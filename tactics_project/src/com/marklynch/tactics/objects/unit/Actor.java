@@ -5,6 +5,10 @@ import java.util.Vector;
 
 import mdesl.graphics.Color;
 
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
@@ -50,7 +54,7 @@ public class Actor extends GameObject {
 	// Fight preview on hover
 	public transient boolean showHoverFightPreview = false;
 	public transient GameObject hoverFightPreviewDefender = null;
-	public transient Vector<Fight> hoverFightPreviewFights = new Vector<Fight>();
+	public transient Vector<Fight> hoverFightPreviewFights;
 
 	public transient AI ai = new AI();
 
@@ -80,6 +84,13 @@ public class Actor extends GameObject {
 			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath,
 					weapon.imagePath, weapon));
 		}
+
+		if (this.weapons.weapons.size() > 0
+				&& this.weapons.weapons.get(0) != null) {
+			equippedWeapon = this.weapons.weapons.get(0);
+		}
+
+		hoverFightPreviewFights = new Vector<Fight>();
 	}
 
 	@Override
@@ -101,6 +112,11 @@ public class Actor extends GameObject {
 		for (Weapon weapon : this.weapons.weapons) {
 			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath,
 					weapon.imagePath, weapon));
+		}
+
+		if (this.weapons.weapons.size() > 0
+				&& this.weapons.weapons.get(0) != null) {
+			equippedWeapon = this.weapons.weapons.get(0);
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
@@ -362,13 +378,30 @@ public class Actor extends GameObject {
 			// hand 70,110
 			// total 128, 128
 
+			// AXE IMAGE
+			// origin 0,0
+			// hand 20,86
+			// total 128, 128
+
+			// Need to scale it, rotate it on attack, put weapon in hand
+			// Also have dude move over to the enemy :P
+			// and short attack animation where he just bumps in the general
+			// direction... based on a setting
+
 			int actorPositionXInPixels = this.squareGameObjectIsOn.x
 					* (int) Game.SQUARE_WIDTH;
 			int actorPositionYInPixels = this.squareGameObjectIsOn.y
 					* (int) Game.SQUARE_HEIGHT;
 
+			// body shoulder coords, arm shoulder coords
 			int armPositionXInPixels = actorPositionXInPixels + 65 - 11;
 			int armPositionYInPixels = actorPositionYInPixels + 41 - 13;
+
+			int rotateXInPixels = actorPositionXInPixels + 65;
+			int rotateYInPixels = actorPositionYInPixels + 41;
+
+			int equippedWeaponPositionXInPixels = armPositionXInPixels + 70 - 20;
+			int equippedWeaponPositionYInPixels = armPositionYInPixels + 110 - 86;
 
 			float alpha = 1.0f;
 			if (Game.level.activeActor != null
@@ -382,12 +415,48 @@ public class Actor extends GameObject {
 				alpha = 0.5f;
 			}
 
+			Game.activeBatch.flush();
+			Matrix4f view = Game.activeBatch.getViewMatrix();
+			view.translate(new Vector2f(rotateXInPixels, rotateYInPixels));
+			view.rotate((float) Math.toRadians(60), new Vector3f(0f, 0f, 1f));
+			// view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+			view.translate(new Vector2f(-rotateXInPixels, -rotateYInPixels));
+			Game.activeBatch.updateUniforms();
+
+			// Draw weapon
+			if (equippedWeapon != null) {
+				TextureUtils.skipNormals = true;
+				TextureUtils.drawTexture(equippedWeapon.imageTexture, alpha,
+						equippedWeaponPositionXInPixels,
+						equippedWeaponPositionXInPixels + Game.SQUARE_WIDTH,
+						equippedWeaponPositionYInPixels,
+						equippedWeaponPositionYInPixels + Game.SQUARE_HEIGHT);
+				TextureUtils.skipNormals = false;
+				// TextureUtils.drawTexture(equippedWeapon.imageTexture,
+				// this.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+				// + Game.SQUARE_WIDTH / 2f - 0,
+				// this.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+				// + Game.SQUARE_WIDTH / 2f + 32,
+				// this.squareGameObjectIsOn.y * (Game.SQUARE_HEIGHT)
+				// + Game.SQUARE_WIDTH / 2f - 16,
+				// this.squareGameObjectIsOn.y * (Game.SQUARE_HEIGHT)
+				// + Game.SQUARE_WIDTH / 2f + 16);
+			}
+
+			// Draw arm
 			TextureUtils.skipNormals = true;
 			TextureUtils.drawTexture(armTexture, alpha, armPositionXInPixels,
 					armPositionXInPixels + Game.SQUARE_WIDTH,
 					armPositionYInPixels, armPositionYInPixels
 							+ Game.SQUARE_HEIGHT);
 			TextureUtils.skipNormals = false;
+
+			Game.activeBatch.flush();
+			view.translate(new Vector2f(rotateXInPixels, rotateYInPixels));
+			view.rotate((float) Math.toRadians(-60), new Vector3f(0f, 0f, 1f));
+			// view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+			view.translate(new Vector2f(-rotateXInPixels, -rotateYInPixels));
+			Game.activeBatch.updateUniforms();
 
 			if (Game.level.activeActor != null
 					&& Game.level.activeActor.showHoverFightPreview) {
@@ -400,29 +469,30 @@ public class Actor extends GameObject {
 
 					Weapon weapon = weapons.weapons.get(i);
 
-					float weaponPositionXInPixels = 0;
-					float weaponPositionYInPixels = 0;
+					float weaponIconPositionXInPixels = 0;
+					float weaponIconPositionYInPixels = 0;
 
 					if (this.faction == Game.level.factions.get(0)) {
-						weaponPositionXInPixels = this.squareGameObjectIsOn.x
+						weaponIconPositionXInPixels = this.squareGameObjectIsOn.x
 								* (int) Game.SQUARE_WIDTH;
-						weaponPositionYInPixels = this.squareGameObjectIsOn.y
+						weaponIconPositionYInPixels = this.squareGameObjectIsOn.y
 								* (int) Game.SQUARE_HEIGHT
 								+ (i * weaponHeightInPixels);
 					} else {
-						weaponPositionXInPixels = this.squareGameObjectIsOn.x
-								* (int) Game.SQUARE_WIDTH + Game.SQUARE_WIDTH
+						weaponIconPositionXInPixels = this.squareGameObjectIsOn.x
+								* (int) Game.SQUARE_WIDTH
+								+ Game.SQUARE_WIDTH
 								- weaponWidthInPixels;
-						weaponPositionYInPixels = this.squareGameObjectIsOn.y
+						weaponIconPositionYInPixels = this.squareGameObjectIsOn.y
 								* (int) Game.SQUARE_HEIGHT
 								+ (i * weaponHeightInPixels);
 
 					}
 					TextureUtils.drawTexture(weapon.imageTexture,
-							weaponPositionXInPixels, weaponPositionXInPixels
-									+ weaponWidthInPixels,
-							weaponPositionYInPixels, weaponPositionYInPixels
-									+ weaponHeightInPixels);
+							weaponIconPositionXInPixels,
+							weaponIconPositionXInPixels + weaponWidthInPixels,
+							weaponIconPositionYInPixels,
+							weaponIconPositionYInPixels + weaponHeightInPixels);
 				}
 			}
 
@@ -1001,18 +1071,6 @@ public class Actor extends GameObject {
 				}
 			}
 
-		}
-
-		if (equippedWeapon != null) {
-			TextureUtils.drawTexture(equippedWeapon.imageTexture,
-					this.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
-							+ Game.SQUARE_WIDTH / 2f - 0,
-					this.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
-							+ Game.SQUARE_WIDTH / 2f + 32,
-					this.squareGameObjectIsOn.y * (Game.SQUARE_HEIGHT)
-							+ Game.SQUARE_WIDTH / 2f - 16,
-					this.squareGameObjectIsOn.y * (Game.SQUARE_HEIGHT)
-							+ Game.SQUARE_WIDTH / 2f + 16);
 		}
 	}
 

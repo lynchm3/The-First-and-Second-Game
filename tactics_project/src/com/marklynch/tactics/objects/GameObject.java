@@ -91,6 +91,7 @@ public class GameObject {
 		this.squareGameObjectIsOn.gameObject = this;
 		this.weapons = new Weapons();
 		this.weapons.weapons = weapons;
+
 		loadImages();
 	}
 
