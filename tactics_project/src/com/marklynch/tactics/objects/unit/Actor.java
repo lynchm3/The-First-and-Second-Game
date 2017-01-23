@@ -1163,7 +1163,7 @@ public class Actor extends GameObject {
 
 		ArrayList<Weapon> weaponArray = new ArrayList<Weapon>();
 		for (Weapon weapon : this.weapons.weapons) {
-			weaponArray.add(weapon.makeCopy());
+			weaponArray.add(weapon.makeWeapon());
 		}
 
 		return new Actor(name, title, actorLevel, (int) totalHealth, strength,

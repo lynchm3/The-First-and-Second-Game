@@ -95,7 +95,7 @@ public class AttributesWindow {
 			Square square = (Square) object;
 			title = "Square @ " + square.x + "," + square.y;
 		} else if (object instanceof Weapon) {
-			title = "Weapon " + editor.weapons.indexOf(object);
+			title = "Weapon " + editor.weaponTemplates.indexOf(object);
 		} else if (object instanceof Color) {
 			title = "Color " + editor.colors.indexOf(object);
 		} else if (object instanceof Decoration) {
@@ -282,7 +282,7 @@ public class AttributesWindow {
 				public void click() {
 
 					depressButtons();
-					editor.weapons.remove(weapon);
+					editor.weaponTemplates.remove(weapon);
 					editor.clearSelectedObject();
 					editor.weaponsSettingsWindow.updateWeaponsButtons();
 					editor.settingsWindow.update();

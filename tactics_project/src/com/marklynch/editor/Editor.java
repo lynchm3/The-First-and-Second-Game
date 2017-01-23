@@ -4,9 +4,6 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import mdesl.graphics.Color;
-import mdesl.graphics.Texture;
-
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
@@ -23,6 +20,7 @@ import com.marklynch.editor.settingswindow.ScriptTriggersSettingsWindow;
 import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
+import com.marklynch.editor.settingswindow.WeaponTemplatesSettingsWindow;
 import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectExploder;
@@ -41,6 +39,7 @@ import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.tactics.objects.weapons.WeaponTemplate;
 import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
@@ -50,6 +49,9 @@ import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
+
+import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class Editor {
 
@@ -69,6 +71,7 @@ public class Editor {
 	Button factionsTabButton;
 	Button colorsTabButton;
 	Button actorsTabButton;
+	Button weaponTemplatesTabButton;
 	Button weaponsTabButton;
 	Button decorationsTabButton;
 	Button scriptEventsTabButton;
@@ -83,6 +86,7 @@ public class Editor {
 	public ObjectsSettingsWindow objectsSettingsWindow;
 	public ActorsSettingsWindow actorsSettingsWindow;
 	public FactionsSettingsWindow factionsSettingsWindow;
+	public WeaponTemplatesSettingsWindow weaponTemplatesSettingsWindow;
 	public WeaponsSettingsWindow weaponsSettingsWindow;
 	public ColorSettingsWindow colorsSettingsWindow;
 	public DecorationsSettingsWindow decorationsSettingsWindow;
@@ -102,6 +106,7 @@ public class Editor {
 	public SettingsWindowButton settingsButton = null;
 
 	public ArrayList<Texture> textures = new ArrayList<Texture>();
+	public ArrayList<WeaponTemplate> weaponTemplates = new ArrayList<WeaponTemplate>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public AttributeSelectionWindow attributeSelectionWindow;
 	public GameObject gameObjectTemplate;
@@ -120,7 +125,8 @@ public class Editor {
 	public ArrayList<Color> colors = new ArrayList<Color>();
 
 	public ClassSelectionWindow classSelectionWindow;
-
+	public InstanceSelectionWindow instanceSelectionWindow;
+	
 	public Editor() {
 
 		// LOAD THE TEXTURES
@@ -142,12 +148,16 @@ public class Editor {
 		colors.add(new Color(Color.ORANGE));
 
 		// LOAD Weapons// Weapons
-		Weapon weapon0 = new Weapon("a3r1", 3, 1, 1, "a3r1.png");
-		weapons.add(weapon0);
-		Weapon weapon1 = new Weapon("a2r2", 2, 2, 2, "a2r2.png");
-		weapons.add(weapon1);
-		Weapon weapon2 = new Weapon("a5r3", 5, 3, 3, "a2r2.png");
-		weapons.add(weapon2);
+		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png");
+		weaponTemplates.add(weaponTemplate0);
+		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png");
+		weaponTemplates.add(weaponTemplate1);
+		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png");
+		weaponTemplates.add(weaponTemplate2);
+		for(int i = 0; i<weaponTemplates.size(); i++)
+		{
+			weaponTemplates.get(i).loadImages();
+		}
 
 		Game.level = new Level(10, 10);
 
@@ -156,6 +166,7 @@ public class Editor {
 		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);
 		actorsSettingsWindow = new ActorsSettingsWindow(200, this);
 		factionsSettingsWindow = new FactionsSettingsWindow(200, this);
+		weaponTemplatesSettingsWindow = new WeaponTemplatesSettingsWindow(200, this);
 		weaponsSettingsWindow = new WeaponsSettingsWindow(200, this);
 		colorsSettingsWindow = new ColorSettingsWindow(200, this);
 		decorationsSettingsWindow = new DecorationsSettingsWindow(200, this);
@@ -246,8 +257,23 @@ public class Editor {
 			}
 		};
 		buttons.add(factionsTabButton);
+		
+		weaponTemplatesTabButton = new LevelButton(560, 10, 150, 30, "", "", "WEAPON TEMPLATES",
+				true, true);
+		weaponTemplatesTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				weaponTemplatesTabButton.down = true;
+				settingsWindow = weaponTemplatesSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		buttons.add(weaponTemplatesTabButton);
 
-		weaponsTabButton = new LevelButton(560, 10, 120, 30, "", "", "WEAPONS",
+		weaponsTabButton = new LevelButton(560, 15, 120, 30, "", "", "WEAPONS",
 				true, true);
 		weaponsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -396,14 +422,23 @@ public class Editor {
 
 		// Weapons
 		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
-		weaponsForActor0.add(weapons.get(0).makeCopy());
-		weaponsForActor0.add(weapons.get(1).makeCopy());
-		weaponsForActor0.add(weapons.get(2).makeCopy());
+		weaponsForActor0.add(weaponTemplates.get(0).makeWeapon());
+		weaponsForActor0.add(weaponTemplates.get(1).makeWeapon());
+		weaponsForActor0.add(weaponTemplates.get(2).makeWeapon());		
+		for(int i = 0; i<weaponsForActor0.size(); i++)
+		{
+			weapons.add(weaponsForActor0.get(i));
+		}
 		ArrayList<Weapon> weaponsForActor1 = new ArrayList<Weapon>();
-		weaponsForActor1.add(weapons.get(0).makeCopy());
-		weaponsForActor1.add(weapons.get(1).makeCopy());
-		weaponsForActor1.add(weapons.get(2).makeCopy());
-
+		weaponsForActor1.add(weaponTemplates.get(0).makeWeapon());
+		weaponsForActor1.add(weaponTemplates.get(1).makeWeapon());
+		weaponsForActor1.add(weaponTemplates.get(2).makeWeapon());	
+		for(int i = 0; i<weaponsForActor1.size(); i++)
+		{
+			weapons.add(weaponsForActor1.get(i));
+		}
+		
+		
 		// Add actor
 		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
 				"red1.png", Game.level.squares[0][4], weaponsForActor0, 4);
@@ -570,6 +605,10 @@ public class Editor {
 			classSelectionWindow.draw();
 		}
 
+		if (instanceSelectionWindow != null) {
+			instanceSelectionWindow.draw();
+		}
+
 		if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
 			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
 					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
@@ -593,6 +632,13 @@ public class Editor {
 		if (classSelectionWindow != null) {
 			// faction, color, texture
 			return classSelectionWindow.getButtonFromMousePosition(mouseX,
+					mouseY);
+
+		}
+
+		if (instanceSelectionWindow != null) {
+			// used for new weapon selection right now
+			return instanceSelectionWindow.getButtonFromMousePosition(mouseX,
 					mouseY);
 
 		}
@@ -907,7 +953,7 @@ public class Editor {
 			} else if (type.isAssignableFrom(Weapons.class)) {
 				// weapons
 				attributeSelectionWindow = new AttributeSelectionWindow(
-						weapons, true, this, objectToEdit);
+						weaponTemplates, true, this, objectToEdit);
 			} else if (type.isAssignableFrom(GameObject.class)) {
 				// actor
 
@@ -962,6 +1008,7 @@ public class Editor {
 	public void clearSelectedObject() {
 		attributeSelectionWindow = null;
 		classSelectionWindow = null;
+		instanceSelectionWindow = null;
 		this.selectedGameObject = null;
 		this.attributesWindow = null;
 		objectToEdit = null;
@@ -976,6 +1023,7 @@ public class Editor {
 
 		attributeSelectionWindow = null;
 		classSelectionWindow = null;
+		instanceSelectionWindow = null;
 		objectToEdit = null;
 		attributeToEditName = null;
 		this.textEntered = "";
@@ -985,6 +1033,7 @@ public class Editor {
 	public void rightClick() {
 		attributeSelectionWindow = null;
 		classSelectionWindow = null;
+		instanceSelectionWindow = null;
 		depressButtonsSettingsAndDetailsButtons();
 		clearSelectedObject();
 		state = STATE.DEFAULT;

@@ -1,19 +1,15 @@
 package com.marklynch.editor.settingswindow;
 
-import java.util.ArrayList;
-
 import com.marklynch.editor.AttributesWindow;
-import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
-import com.marklynch.editor.InstanceSelectionWindow;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
+import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.WeaponTemplate;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
-public class WeaponsSettingsWindow extends SettingsWindow {
+public class WeaponTemplatesSettingsWindow extends SettingsWindow {
 
-	public WeaponsSettingsWindow(float width, final Editor editor) {
+	public WeaponTemplatesSettingsWindow(float width, final Editor editor) {
 		super(width, editor);
 		updateWeaponsButtons();
 	}
@@ -21,8 +17,8 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 	public void updateWeaponsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addWeaponButton = new SettingsWindowButton(
-				0, 100, 200, 30, "ADD WEAPON", true, true, this) {
+		final SettingsWindowButton addWeaponTemplateButton = new SettingsWindowButton(
+				0, 100, 200, 30, "ADD WEAPON TEMPLATE", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -42,24 +38,26 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 
 		};
 
-		addWeaponButton.clickListener = new ClickListener() {
+		addWeaponTemplateButton.clickListener = new ClickListener() {
 
 			@Override
 			public void click() {
-				
-				ArrayList<WeaponTemplate> weaponTemplates =	editor.weaponTemplates;
 
-				editor.instanceSelectionWindow = new InstanceSelectionWindow<WeaponTemplate>(weaponTemplates,
-						editor);
+				WeaponTemplate newWeapon = new WeaponTemplate("Weapon" + editor.weaponTemplates.size(),
+						3, 1, 1, "a3r1.png");
+				editor.weaponTemplates.add(newWeapon);
+				updateWeaponsButtons();
+				editor.clearSelectedObject();
+				editor.depressButtonsSettingsAndDetailsButtons();
 			}
 		};
-		buttons.add(addWeaponButton);
+		buttons.add(addWeaponTemplateButton);
 
-		for (int i = 0; i < editor.weapons.size(); i++) {
+		for (int i = 0; i < editor.weaponTemplates.size(); i++) {
 			final int index = i;
 
 			final SettingsWindowButton weaponButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30, editor.weapons.get(i), true,
+					0, 200 + i * 30, 200, 30, editor.weaponTemplates.get(i), true,
 					true, this) {
 
 				@Override
@@ -88,7 +86,7 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					weaponButton.down = true;
 					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, editor.weapons.get(index), editor);
+							200, editor.weaponTemplates.get(index), editor);
 
 				}
 			};

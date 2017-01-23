@@ -1,0 +1,1137 @@
+{
+  "width": 10,
+  "height": 10,
+  "gameCursor": {},
+  "inanimateObjects": [
+    {
+      "guid": "b4ee45a6-7be1-4cf6-862a-e6a196fde4b9",
+      "name": "dumpster",
+      "strength": 0,
+      "dexterity": 0,
+      "intelligence": 0,
+      "endurance": 0,
+      "totalHealth": 5.0,
+      "remainingHealth": 5.0,
+      "weapons": {
+        "weapons": []
+      },
+      "squareGameObjectIsOn": {
+        "guid": "f5d89d82-cde2-41bc-bfd8-8f2d597868c2",
+        "x": 0,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      "imageTexturePath": "skip_with_shadow.png",
+      "highestPathCostSeen": 0
+    }
+  ],
+  "squares": [
+    [
+      {
+        "guid": "b20b040c-3d69-4ae6-98bd-abcc0655ffc7",
+        "x": 0,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "fcb54de8-4cc4-4e21-9726-32012fdb2604",
+        "x": 0,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "4f91c122-fa20-477d-9945-e902fe0ca073",
+        "x": 0,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "f5d89d82-cde2-41bc-bfd8-8f2d597868c2",
+        "x": 0,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "e60acc82-473f-44ef-b642-8b71849fd639",
+        "x": 0,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "8ad736d0-1668-4c59-87b6-a381e62e20e2",
+        "x": 0,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "52c5f191-5943-4eb5-a67b-ca865319f2cc",
+        "x": 0,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "44d4f4b0-6550-427d-93d2-6a9cd1d3fc70",
+        "x": 0,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "d077c49b-7b9f-49e9-af0f-6c5f17a21257",
+        "x": 0,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "47a72980-d393-4e90-99be-be54af158b47",
+        "x": 0,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ],
+    [
+      {
+        "guid": "3b020a2f-c7d0-4e07-b574-79b7c4ac6f72",
+        "x": 1,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "eab77fe2-f2b6-42c1-b851-e2306afa16d3",
+        "x": 1,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "b191c455-7045-4658-9225-442637f96103",
+        "x": 1,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "11afa8f8-2551-4de4-a795-20ad4dd625cf",
+        "x": 1,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "2d903451-4c06-421f-95b2-9b27eda2714d",
+        "x": 1,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "84969dc4-1cdf-4fa2-a56e-ed0a22444316",
+        "x": 1,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "1f434e9d-2029-463b-8ab4-0cd3f16b8e78",
+        "x": 1,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "32d46ce6-a405-4f12-95a8-1f1b8cdce413",
+        "x": 1,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "4a99d2b3-0e71-4a03-87cc-6e99ca384098",
+        "x": 1,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "975936e6-4c1d-4291-86a3-579ec592d5c1",
+        "x": 1,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ],
+    [
+      {
+        "guid": "05cd1b48-6be6-497c-9ebb-d40003915e38",
+        "x": 2,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "21f8a540-e3ae-4954-a5ba-3158611d564b",
+        "x": 2,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "24c06143-14e6-43a0-9e11-816816da56f0",
+        "x": 2,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "ea84b5f1-b165-4d17-8e04-4e4a35e876bd",
+        "x": 2,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "3a1280df-6974-473e-9a59-ac87bf1f6df6",
+        "x": 2,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "09604949-2bd6-4a1b-b008-5e9f93db378d",
+        "x": 2,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "defd7963-6bb4-486d-b045-75a35335c38c",
+        "x": 2,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "bf9959eb-a0de-4b01-bbed-871cc310b585",
+        "x": 2,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "434ac9f6-a47a-4a3c-8866-552c7eda27af",
+        "x": 2,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "c9ec2152-5cd9-402d-ba56-e360bfcd4ce1",
+        "x": 2,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ],
+    [
+      {
+        "guid": "947af832-9aa9-4bed-8d3e-43d195358b2a",
+        "x": 3,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "8853236c-2643-438e-8888-ca951c5273fd",
+        "x": 3,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "a7c0500e-dc26-4788-b0ca-d4f2db330775",
+        "x": 3,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "8eaa9b05-5d5c-448e-b0b3-c0bc41ff13a2",
+        "x": 3,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "7f90daae-97cc-4535-bc11-b8c6164beb52",
+        "x": 3,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "66a15057-bdf6-4ab0-95fd-1f6e4b452d0f",
+        "x": 3,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "32426867-3a57-4c8c-a2ee-ba901a650549",
+        "x": 3,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "85507a58-bc7d-498e-9f04-ec5cd943055f",
+        "x": 3,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "998278cb-39de-4901-8209-aa59f728c6c1",
+        "x": 3,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "bee3e1ad-3015-4b60-8493-246c605d826f",
+        "x": 3,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ],
+    [
+      {
+        "guid": "338ead36-6627-4f1f-bd2e-08611722af56",
+        "x": 4,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "a058a965-4a98-4df6-81a4-cac25e9e7ded",
+        "x": 4,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "45866f98-ab59-4acf-891a-07cfdb357675",
+        "x": 4,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "59a48b68-2a75-4d0c-82ce-aed15a705833",
+        "x": 4,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "30d7aca6-38cd-4fa9-ae79-bcb50e7b460a",
+        "x": 4,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "9769f05a-c670-4d1a-96f9-0f6edce93d7d",
+        "x": 4,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "74005b7c-a69b-4e40-9c8f-5dc771034ae8",
+        "x": 4,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "b3e71fd6-1232-4551-bc99-20a0ccceb476",
+        "x": 4,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "f8a2580e-c595-4252-ad67-39c6cda3ffe4",
+        "x": 4,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "758716a2-3724-470f-9582-550ecc95692f",
+        "x": 4,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ],
+    [
+      {
+        "guid": "dcc40949-8778-4897-bbc2-20ec2322bb70",
+        "x": 5,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "c6748cb1-df2b-4e3d-b31d-c4e30680a2ae",
+        "x": 5,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "503767ff-848f-4571-b0f6-fedb15eadef4",
+        "x": 5,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "e9220ed8-bf19-443e-bede-e27d05be6a69",
+        "x": 5,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "cc4186f7-7929-4116-afa3-d3acfb338483",
+        "x": 5,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "9b98e5c7-d49a-43f7-b355-f936f47a4045",
+        "x": 5,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "7153a846-758f-4c28-9ab7-63950727e59f",
+        "x": 5,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "e11e45aa-1588-47d5-89f8-b04f747c02fa",
+        "x": 5,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "9c4a8345-72aa-41a8-b8d4-4c8deab07928",
+        "x": 5,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "41ebc8c5-62e5-4d9e-bdcc-bc34890800b6",
+        "x": 5,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ],
+    [
+      {
+        "guid": "a5c1a42a-bc4e-4b2e-a416-a180b329dc17",
+        "x": 6,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "8daa2bad-50f6-4c6c-9dd4-19e4ca022e0d",
+        "x": 6,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "22b4c9cc-895e-4eed-817f-0c4304f4daf0",
+        "x": 6,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "5c40625c-d35b-454a-a280-4a81da1fa3df",
+        "x": 6,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "0ce8fdf0-dc4e-43b3-8ce3-18188ce1fed7",
+        "x": 6,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "988607e6-0350-467d-a712-58d34ff58da6",
+        "x": 6,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "e9cbb740-f537-4ff4-92c9-b7e802b4d5e2",
+        "x": 6,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "fa6147ab-8a29-4b41-9582-d70cfc7fd499",
+        "x": 6,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "383455b4-ff78-4fe2-bd96-ae9e5b60ebaf",
+        "x": 6,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "55418b14-c8ed-488d-b623-238e98e33c22",
+        "x": 6,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ],
+    [
+      {
+        "guid": "3e5e527d-3ad1-48b8-b6b8-98c295ef1bed",
+        "x": 7,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "c37db64f-f269-4064-84b1-7f306fab1b62",
+        "x": 7,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "47850d29-5837-4440-8c38-d7d5fc75a0fc",
+        "x": 7,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "a18add83-5b04-426e-a540-3e6fe5588883",
+        "x": 7,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "0165b8f7-5d86-4415-9fc1-c76921ef9bb1",
+        "x": 7,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "5931cfcf-cb25-46a7-b229-c49195e2a67d",
+        "x": 7,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "413a1ca7-1742-4ed1-aeda-0c496730d20e",
+        "x": 7,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "8a954479-e16d-416d-9c0e-c13ec6f441de",
+        "x": 7,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "950ae1bc-92b8-4378-b899-247930aa32ea",
+        "x": 7,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "ee86ba08-0810-4284-8122-a4c904fd7935",
+        "x": 7,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ],
+    [
+      {
+        "guid": "30668b4b-20b4-4ce5-bf7c-fb2c9cc86c96",
+        "x": 8,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "61d30343-6fa0-4e41-a032-f6e3106b6b5c",
+        "x": 8,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "8d860a84-c6a3-40c2-a8c3-126919163c6b",
+        "x": 8,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "0f32ff94-8260-4236-a6b2-063c52f6a253",
+        "x": 8,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "f093411b-60f5-489f-b847-94c93a9d036f",
+        "x": 8,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "5e699bd0-1fdb-4403-b4e2-6263fa0fead1",
+        "x": 8,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "96a17085-1889-4944-ac73-9b15bf8698f1",
+        "x": 8,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "cc8fb2c8-e149-40c9-8623-6b987e675e3c",
+        "x": 8,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "3b9dd9ec-6ee5-48e1-b6ee-d8107ff7a640",
+        "x": 8,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "f5ff0c14-893c-4827-87ef-b126470d219a",
+        "x": 8,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ],
+    [
+      {
+        "guid": "8423f543-a84c-497a-b210-d4c2e8d6b5d4",
+        "x": 9,
+        "y": 0,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "0c2205df-421e-42df-8c34-20704c144299",
+        "x": 9,
+        "y": 1,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "18d80b0c-d12f-4229-af81-34aabb03c025",
+        "x": 9,
+        "y": 2,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "4cb3b934-541e-4f99-b541-9d74e26932ef",
+        "x": 9,
+        "y": 3,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "4af1c7d9-3f74-4f72-9540-11a012753218",
+        "x": 9,
+        "y": 4,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "e033b9fc-efb5-4267-9525-b1914761f2db",
+        "x": 9,
+        "y": 5,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "c8efe805-55ff-4986-8ecf-d4a9fdcea686",
+        "x": 9,
+        "y": 6,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "44d8110d-6714-47a4-a178-e0a23c58891c",
+        "x": 9,
+        "y": 7,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "5872d9bd-7384-4d74-82cf-1ebfcda1d232",
+        "x": 9,
+        "y": 8,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      },
+      {
+        "guid": "ff6a9647-1747-4a2f-b62e-2ee8637c5de3",
+        "x": 9,
+        "y": 9,
+        "elevation": 0,
+        "travelCost": 1,
+        "imageTexturePath": "grass.png"
+      }
+    ]
+  ],
+  "decorations": [
+    {
+      "minDistanceFromPeople": 500.0,
+      "interactionDistance": 300.0,
+      "state": "WAITING",
+      "wanderingTargetX": 0.0,
+      "wanderingTargetY": 0.0,
+      "name": "Cat",
+      "imageTexturePath": "cat.png",
+      "x": 345.0,
+      "y": 464.0,
+      "width": 128.0,
+      "height": 128.0,
+      "background": false
+    }
+  ],
+  "factions": [
+    {
+      "name": "Faction 0",
+      "actors": [
+        {
+          "title": "Fighter",
+          "actorLevel": 1,
+          "travelDistance": 4,
+          "guid": "a25dfc57-85cb-41ee-87ba-16ff0bb47afa",
+          "name": "Mark",
+          "strength": 0,
+          "dexterity": 0,
+          "intelligence": 0,
+          "endurance": 0,
+          "totalHealth": 10.0,
+          "remainingHealth": 10.0,
+          "weapons": {
+            "weapons": [
+              {
+                "damage": 3.0,
+                "minRange": 1.0,
+                "maxRange": 1.0,
+                "imagePath": "a3r1.png",
+                "name": "a3r1"
+              },
+              {
+                "damage": 2.0,
+                "minRange": 2.0,
+                "maxRange": 2.0,
+                "imagePath": "a2r2.png",
+                "name": "a2r2"
+              },
+              {
+                "damage": 5.0,
+                "minRange": 3.0,
+                "maxRange": 3.0,
+                "imagePath": "a2r2.png",
+                "name": "a5r3"
+              }
+            ]
+          },
+          "squareGameObjectIsOn": {
+            "guid": "e60acc82-473f-44ef-b642-8b71849fd639",
+            "x": 0,
+            "y": 4,
+            "elevation": 0,
+            "travelCost": 1,
+            "imageTexturePath": "grass.png"
+          },
+          "imageTexturePath": "red1.png",
+          "highestPathCostSeen": 0
+        }
+      ],
+      "imageTexturePath": "faction_blue.png",
+      "color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 1.0,
+        "a": 1.0
+      },
+      "guid": "d25cdae1-8519-4ac6-ba41-5a8062bee6d2",
+      "relationshipGUIDs": {
+        "e0491f1b-46cb-4749-ba85-a3c4b8b5d32e": {
+          "relationship": -100
+        }
+      }
+    },
+    {
+      "name": "Faction 1",
+      "actors": [
+        {
+          "title": "Fighter",
+          "actorLevel": 1,
+          "travelDistance": 4,
+          "guid": "cb01213f-7f11-4701-ad61-913868f519c3",
+          "name": "Steve",
+          "strength": 0,
+          "dexterity": 0,
+          "intelligence": 0,
+          "endurance": 0,
+          "totalHealth": 10.0,
+          "remainingHealth": 10.0,
+          "weapons": {
+            "weapons": [
+              {
+                "damage": 3.0,
+                "minRange": 1.0,
+                "maxRange": 1.0,
+                "imagePath": "a3r1.png",
+                "name": "a3r1"
+              }
+            ]
+          },
+          "squareGameObjectIsOn": {
+            "guid": "8ad736d0-1668-4c59-87b6-a381e62e20e2",
+            "x": 0,
+            "y": 5,
+            "elevation": 0,
+            "travelCost": 1,
+            "imageTexturePath": "grass.png"
+          },
+          "imageTexturePath": "red1.png",
+          "highestPathCostSeen": 0
+        }
+      ],
+      "imageTexturePath": "faction_red.png",
+      "color": {
+        "r": 1.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+      },
+      "guid": "e0491f1b-46cb-4749-ba85-a3c4b8b5d32e",
+      "relationshipGUIDs": {
+        "d25cdae1-8519-4ac6-ba41-5a8062bee6d2": {
+          "relationship": -100
+        }
+      }
+    }
+  ],
+  "script": {
+    "scriptEvents": [
+      {
+        "CLASSNAME": "com.marklynch.tactics.objects.level.script.ScriptEventSetAI",
+        "INSTANCE": {
+          "ai": {
+            "CLASSNAME": "com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject",
+            "INSTANCE": {
+              "objectGUID": "b4ee45a6-7be1-4cf6-862a-e6a196fde4b9",
+              "name": "attackDumpster"
+            }
+          },
+          "completed": false,
+          "actorGUID": "cb01213f-7f11-4701-ad61-913868f519c3",
+          "name": "ScriptEventSetAI",
+          "blockUserInput": false,
+          "scriptTrigger": {
+            "CLASSNAME": "com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart",
+            "INSTANCE": {
+              "turn": 1,
+              "factionIndex": 0,
+              "triggered": false,
+              "name": "ScriptTriggerTurnStart"
+            }
+          },
+          "guid": "061598d4-830c-40bf-9694-20b73d09439c"
+        }
+      },
+      {
+        "CLASSNAME": "com.marklynch.tactics.objects.level.script.ScriptEventSpeech",
+        "INSTANCE": {
+          "speechParts": [
+            {
+              "positions": [],
+              "directions": [],
+              "text": [
+                "HI, THIS IS SCRIPTED SPEECH :D"
+              ],
+              "inline": false,
+              "actorsGUIDs": [],
+              "talkerGUID": "a25dfc57-85cb-41ee-87ba-16ff0bb47afa"
+            },
+            {
+              "positions": [],
+              "directions": [],
+              "text": [
+                "HI, PT2 OF THIS TALK"
+              ],
+              "inline": false,
+              "actorsGUIDs": [],
+              "talkerGUID": "a25dfc57-85cb-41ee-87ba-16ff0bb47afa"
+            }
+          ],
+          "intTest": [
+            1,
+            2
+          ],
+          "speechIndex": 0,
+          "name": "ScriptEventSpeech",
+          "blockUserInput": true,
+          "scriptTrigger": {
+            "CLASSNAME": "com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected",
+            "INSTANCE": {
+              "actorGUID": "a25dfc57-85cb-41ee-87ba-16ff0bb47afa",
+              "triggered": false,
+              "name": "ScriptTriggerActorSelected"
+            }
+          },
+          "guid": "ab2e7186-92fe-470a-9f8b-a507c0a6e5bd"
+        }
+      }
+    ],
+    "activeScriptEvents": [],
+    "scriptTriggers": [
+      {
+        "CLASSNAME": "com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart",
+        "INSTANCE": {
+          "turn": 1,
+          "factionIndex": 0,
+          "triggered": false,
+          "name": "ScriptTriggerTurnStart"
+        }
+      },
+      {
+        "CLASSNAME": "com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected",
+        "INSTANCE": {
+          "actorGUID": "a25dfc57-85cb-41ee-87ba-16ff0bb47afa",
+          "triggered": false,
+          "name": "ScriptTriggerActorSelected"
+        }
+      }
+    ],
+    "speechParts": [
+      {
+        "positions": [
+          0.0,
+          0.0
+        ],
+        "directions": [
+          true,
+          false
+        ],
+        "text": [
+          "HI, THIS IS SCRIPTED SPEECH :D"
+        ],
+        "inline": false,
+        "actorsGUIDs": [
+          "a25dfc57-85cb-41ee-87ba-16ff0bb47afa",
+          "cb01213f-7f11-4701-ad61-913868f519c3"
+        ],
+        "talkerGUID": "a25dfc57-85cb-41ee-87ba-16ff0bb47afa"
+      },
+      {
+        "positions": [
+          0.0,
+          0.0
+        ],
+        "directions": [
+          true,
+          false
+        ],
+        "text": [
+          "HI, PT2 OF THIS TALK"
+        ],
+        "inline": false,
+        "actorsGUIDs": [
+          "a25dfc57-85cb-41ee-87ba-16ff0bb47afa",
+          "cb01213f-7f11-4701-ad61-913868f519c3"
+        ],
+        "talkerGUID": "a25dfc57-85cb-41ee-87ba-16ff0bb47afa"
+      }
+    ]
+  },
+  "ais": [
+    {
+      "CLASSNAME": "com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject",
+      "INSTANCE": {
+        "objectGUID": "b4ee45a6-7be1-4cf6-862a-e6a196fde4b9",
+        "name": "attackDumpster"
+      }
+    },
+    {
+      "CLASSNAME": "com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject",
+      "INSTANCE": {
+        "objectGUID": "a25dfc57-85cb-41ee-87ba-16ff0bb47afa",
+        "name": "attackPlayer"
+      }
+    }
+  ]
+}

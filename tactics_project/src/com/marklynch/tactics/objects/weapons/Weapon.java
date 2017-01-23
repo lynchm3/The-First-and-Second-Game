@@ -9,33 +9,14 @@ import mdesl.graphics.Texture;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 
-public class Weapon {
+public class Weapon extends WeaponTemplate {
 	public final static String[] editableAttributes = { "name", "imageTexture",
 			"damage", "minRange", "maxRange" };
 
-	// attributes
-	public float damage = 0;
-	public float minRange = 0;
-	public float maxRange = 0;
-
-	// image
-	public String imagePath = "";
-	public transient Texture imageTexture = null;
-	public String name;
-
 	public Weapon(String name, float damage, float minRange, float maxRange,
 			String imagePath) {
-		super();
-		this.name = name;
-		this.damage = damage;
-		this.minRange = minRange;
-		this.maxRange = maxRange;
-		this.imagePath = imagePath;
-		loadImages();
-	}
-
-	public void loadImages() {
-		this.imageTexture = getGlobalImage(imagePath);
+		super(name, damage, minRange, maxRange,
+				imagePath);
 	}
 
 	public void calculateAttackableSquares(Square[][] squares) {
@@ -113,7 +94,7 @@ public class Weapon {
 		return false;
 	}
 
-	public Weapon makeCopy() {
+	public Weapon makeWeapon() {
 		return new Weapon(new String(name), damage, minRange, maxRange,
 				new String(imagePath));
 	}

@@ -185,6 +185,7 @@ public class Level {
 	}
 
 	public void loadImages() {
+		
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				squares[i][j].loadImages();

@@ -354,7 +354,7 @@ public class GameObject {
 
 		ArrayList<Weapon> weaponArray = new ArrayList<Weapon>();
 		for (Weapon weapon : this.weapons.weapons) {
-			weaponArray.add(weapon.makeCopy());
+			weaponArray.add(weapon.makeWeapon());
 		}
 		return new GameObject(name, (int) totalHealth, strength, dexterity,
 				intelligence, endurance, imageTexturePath, square, weaponArray);

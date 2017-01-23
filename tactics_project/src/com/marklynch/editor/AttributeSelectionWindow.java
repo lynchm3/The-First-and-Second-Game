@@ -231,7 +231,7 @@ public class AttributeSelectionWindow<T> {
 							Weapons weapons = new Weapons();
 							for (T selectedObject : selectedObjects) {
 								Weapon weapon = (Weapon) selectedObject;
-								weapons.weapons.add(weapon.makeCopy());
+								weapons.weapons.add(weapon.makeWeapon());
 							}
 							ownerOfAttribute.getClass().getField("weapons")
 									.set(ownerOfAttribute, weapons);
