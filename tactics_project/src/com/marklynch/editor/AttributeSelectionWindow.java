@@ -13,7 +13,7 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
-import com.marklynch.tactics.objects.unit.ai.AI;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.Button;
@@ -245,9 +245,9 @@ public class AttributeSelectionWindow<T> {
 									.set(ownerOfAttribute,
 											scriptTrigger.makeCopy());
 							editor.stopEditingAttribute();
-						} else if (type.isAssignableFrom(AI.class)) {// script
+						} else if (type.isAssignableFrom(AIRoutine.class)) {// script
 																		// trigger
-							AI ai = (AI) objects.get(index);
+							AIRoutine ai = (AIRoutine) objects.get(index);
 							ownerOfAttribute.getClass().getField("ai")
 									.set(ownerOfAttribute, ai.makeCopy());
 							editor.stopEditingAttribute();

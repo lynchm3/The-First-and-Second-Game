@@ -1,9 +1,9 @@
-package com.marklynch.tactics.objects.unit.ai;
+package com.marklynch.tactics.objects.unit.ai.routines;
 
-public class AIFreeze extends AI {
+public class AIRoutineFreeze extends AIRoutine {
 	public final static String[] editableAttributes = { "name" };
 
-	public AIFreeze() {
+	public AIRoutineFreeze() {
 		name = this.getClass().getSimpleName();
 	}
 
@@ -18,8 +18,8 @@ public class AIFreeze extends AI {
 	}
 
 	@Override
-	public AI makeCopy() {
-		AIFreeze ai = new AIFreeze();
+	public AIRoutine makeCopy() {
+		AIRoutineFreeze ai = new AIRoutineFreeze();
 		ai.name = new String(name);
 		return ai;
 	}

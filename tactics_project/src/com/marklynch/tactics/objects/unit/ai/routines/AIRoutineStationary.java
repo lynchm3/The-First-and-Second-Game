@@ -1,9 +1,9 @@
-package com.marklynch.tactics.objects.unit.ai;
+package com.marklynch.tactics.objects.unit.ai.routines;
 
-public class AIStationary extends AI {
+public class AIRoutineStationary extends AIRoutine {
 	public final static String[] editableAttributes = { "name", };
 
-	public AIStationary() {
+	public AIRoutineStationary() {
 		name = this.getClass().getSimpleName();
 	}
 

@@ -13,7 +13,7 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
-import com.marklynch.tactics.objects.unit.ai.AI;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.AttackButton;
@@ -56,7 +56,7 @@ public class Actor extends GameObject {
 	public transient GameObject hoverFightPreviewDefender = null;
 	public transient Vector<Fight> hoverFightPreviewFights;
 
-	public transient AI ai = new AI();
+	public transient AIRoutine ai = new AIRoutine();
 
 	public Actor(String name, String title, int actorLevel, int health,
 			int strength, int dexterity, int intelligence, int endurance,
@@ -120,7 +120,7 @@ public class Actor extends GameObject {
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
-		ai = new AI();
+		ai = new AIRoutine();
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {

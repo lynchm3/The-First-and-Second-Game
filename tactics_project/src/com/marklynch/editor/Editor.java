@@ -38,8 +38,8 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
-import com.marklynch.tactics.objects.unit.ai.AI;
-import com.marklynch.tactics.objects.unit.ai.AITargetObject;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.AtributesWindowButton;
@@ -469,9 +469,9 @@ public class Editor {
 		Game.level.script.scriptTriggers.add(scriptTriggerActorSelected);
 		Game.level.script.speechParts.add(speechPart1_1);
 		Game.level.script.speechParts.add(speechPart1_2);
-		Game.level.ais.add(new AITargetObject(gameObject));
+		Game.level.ais.add(new AIRoutineTargetObject(gameObject));
 		Game.level.ais.get(0).name = "attackDumpster";
-		Game.level.ais.add(new AITargetObject(actor0));
+		Game.level.ais.add(new AIRoutineTargetObject(actor0));
 		Game.level.ais.get(1).name = "attackPlayer";
 
 		ScriptEventSetAI scriptEventSetAIAttackDumpster = new ScriptEventSetAI(
@@ -934,7 +934,7 @@ public class Editor {
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.script.scriptTriggers, false, this,
 						objectToEdit);
-			} else if (type.isAssignableFrom(AI.class)) {
+			} else if (type.isAssignableFrom(AIRoutine.class)) {
 				attributeSelectionWindow = new AttributeSelectionWindow(
 						Game.level.ais, false, this, objectToEdit);
 			} else if (type.isAssignableFrom(boolean.class)

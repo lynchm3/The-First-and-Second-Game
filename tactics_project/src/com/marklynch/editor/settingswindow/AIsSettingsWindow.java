@@ -6,11 +6,11 @@ import com.marklynch.Game;
 import com.marklynch.editor.AttributesWindow;
 import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.unit.ai.AI;
-import com.marklynch.tactics.objects.unit.ai.AIFreeze;
-import com.marklynch.tactics.objects.unit.ai.AIMoveToSquare;
-import com.marklynch.tactics.objects.unit.ai.AIStationary;
-import com.marklynch.tactics.objects.unit.ai.AITargetObject;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineFreeze;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineMoveToSquare;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineStationary;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -51,13 +51,13 @@ public class AIsSettingsWindow extends SettingsWindow {
 			public void click() {
 
 				ArrayList<Class> classes = new ArrayList<Class>();
-				classes.add(AITargetObject.class);
-				classes.add(AIStationary.class);
-				classes.add(AIFreeze.class);
-				classes.add(AIMoveToSquare.class);
+				classes.add(AIRoutineTargetObject.class);
+				classes.add(AIRoutineStationary.class);
+				classes.add(AIRoutineFreeze.class);
+				classes.add(AIRoutineMoveToSquare.class);
 
 				editor.classSelectionWindow = new ClassSelectionWindow(classes,
-						editor, AI.class);
+						editor, AIRoutine.class);
 			}
 		};
 		buttons.add(addAIButton);

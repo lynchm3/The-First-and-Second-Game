@@ -1,20 +1,20 @@
-package com.marklynch.tactics.objects.unit.ai;
+package com.marklynch.tactics.objects.unit.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 
-public class AITargetObject extends AI {
+public class AIRoutineTargetObject extends AIRoutine {
 	public final static String[] editableAttributes = { "name", "object" };
 	public transient GameObject object;
 
 	// For loading and saving
 	public String objectGUID;
 
-	public AITargetObject() {
+	public AIRoutineTargetObject() {
 		name = this.getClass().getSimpleName();
 	}
 
-	public AITargetObject(GameObject object) {
+	public AIRoutineTargetObject(GameObject object) {
 		name = this.getClass().getSimpleName();
 		this.object = object;
 		objectGUID = object.guid;
@@ -44,8 +44,8 @@ public class AITargetObject extends AI {
 	}
 
 	@Override
-	public AITargetObject makeCopy() {
-		AITargetObject ai = new AITargetObject(object);
+	public AIRoutineTargetObject makeCopy() {
+		AIRoutineTargetObject ai = new AIRoutineTargetObject(object);
 		ai.name = new String(name);
 		return ai;
 	}

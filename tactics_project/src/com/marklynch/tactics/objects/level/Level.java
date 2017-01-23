@@ -14,7 +14,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
-import com.marklynch.tactics.objects.unit.ai.AI;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.Dialog;
@@ -52,7 +52,7 @@ public class Level {
 	public transient boolean ended = false;
 
 	public Script script;
-	public ArrayList<AI> ais = new ArrayList<AI>();
+	public ArrayList<AIRoutine> ais = new ArrayList<AIRoutine>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -176,7 +176,7 @@ public class Level {
 
 		script.postLoad();
 
-		for (AI ai : ais) {
+		for (AIRoutine ai : ais) {
 			ai.postLoad();
 		}
 

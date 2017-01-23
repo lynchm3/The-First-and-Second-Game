@@ -3,7 +3,7 @@ package com.marklynch.tactics.objects.level.script;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
-import com.marklynch.tactics.objects.unit.ai.AI;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 
 public class ScriptEventSetAI extends ScriptEvent {
 
@@ -11,7 +11,7 @@ public class ScriptEventSetAI extends ScriptEvent {
 			"blockUserInput", "scriptTrigger", "actor", "ai" };
 
 	public transient Actor actor;
-	public AI ai;
+	public AIRoutine ai;
 
 	boolean completed = false;
 
@@ -23,7 +23,7 @@ public class ScriptEventSetAI extends ScriptEvent {
 	}
 
 	public ScriptEventSetAI(boolean blockUserInput,
-			ScriptTrigger scriptTrigger, Actor actor, AI ai) {
+			ScriptTrigger scriptTrigger, Actor actor, AIRoutine ai) {
 		super(blockUserInput, scriptTrigger);
 		this.actor = actor;
 		this.actorGUID = actor.guid;

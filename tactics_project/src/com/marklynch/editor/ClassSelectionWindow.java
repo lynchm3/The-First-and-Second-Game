@@ -7,7 +7,7 @@ import mdesl.graphics.Color;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
-import com.marklynch.tactics.objects.unit.ai.AI;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
@@ -53,8 +53,8 @@ public class ClassSelectionWindow<T> {
 									.add((ScriptTrigger) classes.get(index)
 											.newInstance());
 							editor.classSelectionWindow = null;
-						} else if (superClass == AI.class) {
-							Game.level.ais.add((AI) classes.get(index)
+						} else if (superClass == AIRoutine.class) {
+							Game.level.ais.add((AIRoutine) classes.get(index)
 									.newInstance());
 							editor.classSelectionWindow = null;
 						}

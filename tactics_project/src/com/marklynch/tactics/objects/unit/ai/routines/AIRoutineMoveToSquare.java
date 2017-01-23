@@ -1,20 +1,20 @@
-package com.marklynch.tactics.objects.unit.ai;
+package com.marklynch.tactics.objects.unit.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Square;
 
-public class AIMoveToSquare extends AI {
+public class AIRoutineMoveToSquare extends AIRoutine {
 	public final static String[] editableAttributes = { "name", "square" };
 	public transient Square square;
 
 	// For loading and saving
 	public String squareGUID;
 
-	public AIMoveToSquare() {
+	public AIRoutineMoveToSquare() {
 		name = this.getClass().getSimpleName();
 	}
 
-	public AIMoveToSquare(Square square) {
+	public AIRoutineMoveToSquare(Square square) {
 		name = this.getClass().getSimpleName();
 		this.square = square;
 		squareGUID = square.guid;
@@ -41,8 +41,8 @@ public class AIMoveToSquare extends AI {
 	}
 
 	@Override
-	public AI makeCopy() {
-		AIMoveToSquare ai = new AIMoveToSquare(square);
+	public AIRoutine makeCopy() {
+		AIRoutineMoveToSquare ai = new AIRoutineMoveToSquare(square);
 		ai.name = new String(name);
 		return ai;
 	}

@@ -1,4 +1,4 @@
-package com.marklynch.tactics.objects.unit.ai;
+package com.marklynch.tactics.objects.unit.ai.routines;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -12,11 +12,11 @@ import com.marklynch.tactics.objects.unit.Fight;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.weapons.Weapon;
 
-public class AI {
+public class AIRoutine {
 
 	public String name = "AI";
 
-	public AI() {
+	public AIRoutine() {
 		name = this.getClass().getSimpleName();
 	}
 
@@ -401,7 +401,7 @@ public class AI {
 
 	}
 
-	public AI makeCopy() {
+	public AIRoutine makeCopy() {
 		return null;
 	}
 
