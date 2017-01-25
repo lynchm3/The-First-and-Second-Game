@@ -1,7 +1,6 @@
 package com.marklynch.tactics.objects;
 
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Square;
@@ -11,7 +10,7 @@ import com.marklynch.utils.TriangleUtils;
 public class GameObjectExploder extends GameObject {
 
 	public GameObjectExploder(String name, int health, String imagePath, Square squareGameObjectIsOn,
-			ArrayList<GameObject> inventory, boolean showInventory) {
+			Inventory inventory, boolean showInventory) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory);
 	}
 

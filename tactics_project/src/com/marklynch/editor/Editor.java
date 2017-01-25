@@ -24,6 +24,7 @@ import com.marklynch.editor.settingswindow.WeaponTemplatesSettingsWindow;
 import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectExploder;
+import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
@@ -431,9 +432,9 @@ public class Editor {
 
 		// Add a game object
 		GameObject gameObject = new GameObjectExploder("dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
-				new ArrayList<GameObject>(), true);
+				new Inventory(), true);
 		Game.level.inanimateObjects.add(gameObject);
-		Game.level.squares[0][3].gameObject = gameObject;
+		Game.level.squares[0][3].inventory.gameObjects.add(gameObject);
 
 		// Add factions
 		Game.level.factions
@@ -447,35 +448,45 @@ public class Editor {
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
 		// Inventory
+		Inventory inventoryForActor0 = new Inventory();
 		ArrayList<GameObject> weaponsForActor0 = new ArrayList<GameObject>();
 		weaponsForActor0.add(weaponTemplates.get(0).makeWeapon());
 		weaponsForActor0.add(weaponTemplates.get(1).makeWeapon());
 		weaponsForActor0.add(weaponTemplates.get(2).makeWeapon());
-		for (int i = 0; i < weaponsForActor0.size(); i++) {
-			if (weaponsForActor0.get(i) instanceof Weapon)
-				weapons.add((Weapon) weaponsForActor0.get(i));
-			Game.level.inanimateObjects.add(weaponsForActor0.get(i));
-		}
+		inventoryForActor0.gameObjects = weaponsForActor0;
+		// for (int i = 0; i < weaponsForActor0.size(); i++) {
+		// if (weaponsForActor0.get(i) instanceof Weapon)
+		// weapons.add((Weapon) weaponsForActor0.get(i));
+		// // Game.level.inanimateObjects.add(weaponsForActor0.get(i));
+		// }
+		Inventory inventoryForActor1 = new Inventory();
 		ArrayList<GameObject> weaponsForActor1 = new ArrayList<GameObject>();
 		weaponsForActor1.add(weaponTemplates.get(0).makeWeapon());
 		weaponsForActor1.add(weaponTemplates.get(1).makeWeapon());
 		weaponsForActor1.add(weaponTemplates.get(2).makeWeapon());
-		for (int i = 0; i < weaponsForActor1.size(); i++) {
-			if (weaponsForActor1.get(i) instanceof Weapon)
-				weapons.add((Weapon) weaponsForActor1.get(i));
-			Game.level.inanimateObjects.add(weaponsForActor1.get(i));
-		}
+		inventoryForActor1.gameObjects = weaponsForActor1;
+		// for (int i = 0; i < weaponsForActor1.size(); i++) {
+		// if (weaponsForActor1.get(i) instanceof Weapon)
+		// weapons.add((Weapon) weaponsForActor1.get(i));
+		// // Game.level.inanimateObjects.add(weaponsForActor1.get(i));
+		// }
 
 		// Add actor
 		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 4,
-				weaponsForActor0, true);
+				inventoryForActor0, true);
 		actor0.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(actor0);
+		for (int i = 0; i < actor0.inventory.gameObjects.size(); i++) {
+			actor0.inventory.gameObjects.get(i).inventoryThatHoldsThisObject = actor0.inventory;
+		}
 
 		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5], 4,
-				weaponsForActor1, true);
+				inventoryForActor1, true);
 		actor1.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(actor1);
+		for (int i = 0; i < actor1.inventory.gameObjects.size(); i++) {
+			actor1.inventory.gameObjects.get(i).inventoryThatHoldsThisObject = actor1.inventory;
+		}
 
 		// Decorations
 		Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");
@@ -686,7 +697,8 @@ public class Editor {
 				objectsSettingsWindow.getButton(gameObject).click();
 			}
 		} else if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
-			swapGameObjects(this.selectedGameObject, gameObject);
+			moveGameObject(this.selectedGameObject, gameObject.squareGameObjectIsOn);
+			// swapGameObjects(this.selectedGameObject, gameObject);
 		}
 
 	}
@@ -701,22 +713,21 @@ public class Editor {
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = null;
 			if (gameObjectTemplate == null) {
-				gameObject = new GameObject("dumpster", 5, "skip_with_shadow.png", square, new ArrayList<GameObject>(),
-						true);
+				gameObject = new GameObject("dumpster", 5, "skip_with_shadow.png", square, new Inventory(), true);
 			} else {
 				gameObject = gameObjectTemplate.makeCopy(square);
 			}
 
 			Game.level.inanimateObjects.add(gameObject);
-			square.gameObject = gameObject;
+			square.inventory.gameObjects.add(gameObject);
 			this.objectsSettingsWindow.update();
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.ADD_ACTOR) {
 			// Add actor
 			Actor actor = null;
 			if (actorTemplate == null) {
-				actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", square, 4,
-						new ArrayList<GameObject>(), true);
+				actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", square, 4, new Inventory(),
+						true);
 				actor.faction = Game.level.factions.get(0);
 			} else {
 				actor = actorTemplate.makeCopy(square);
@@ -724,37 +735,38 @@ public class Editor {
 			}
 
 			actor.faction.actors.add(actor);
-			square.gameObject = actor;
+			square.inventory.gameObjects.add(actor);
 			this.actorsSettingsWindow.update();
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
-			if (square.gameObject != null) {
-				swapGameObjects(this.selectedGameObject, square.gameObject);
-			} else {
-				moveGameObject(this.selectedGameObject, square);
-			}
+			// if (square.gameObject != null) {
+			// swapGameObjects(this.selectedGameObject, square.gameObject);
+			// } else {
+			moveGameObject(this.selectedGameObject, square);
+			// }
 		}
 
 	}
 
-	public void swapGameObjects(GameObject gameObject1, GameObject gameObject2) {
-		Square square1 = gameObject1.squareGameObjectIsOn;
-		Square square2 = gameObject2.squareGameObjectIsOn;
-
-		square1.gameObject = gameObject2;
-		square2.gameObject = gameObject1;
-
-		gameObject1.squareGameObjectIsOn = square2;
-		gameObject2.squareGameObjectIsOn = square1;
-
-	}
+	// public void swapGameObjects(GameObject gameObject1, GameObject
+	// gameObject2) {
+	// Square square1 = gameObject1.squareGameObjectIsOn;
+	// Square square2 = gameObject2.squareGameObjectIsOn;
+	//
+	// square1.gameObject = gameObject2;
+	// square2.gameObject = gameObject1;
+	//
+	// gameObject1.squareGameObjectIsOn = square2;
+	// gameObject2.squareGameObjectIsOn = square1;
+	//
+	// }
 
 	public void moveGameObject(GameObject gameObject1, Square square2) {
 		Square square1 = gameObject1.squareGameObjectIsOn;
 
 		if (square1 != null)
-			square1.gameObject = null;
-		square2.gameObject = gameObject1;
+			square1.inventory.gameObjects.remove(gameObject1);
+		square2.inventory.gameObjects.add(gameObject1);
 
 		gameObject1.squareGameObjectIsOn = square2;
 	}

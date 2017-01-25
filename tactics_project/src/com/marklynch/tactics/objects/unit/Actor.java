@@ -9,6 +9,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
@@ -64,8 +65,8 @@ public class Actor extends GameObject implements Owner {
 	public transient AIRoutine ai = new AIRoutine();
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
-			ArrayList<GameObject> inventory, boolean showInventory) {
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Inventory inventory,
+			boolean showInventory) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory);
 
 		this.strength = strength;
@@ -276,7 +277,7 @@ public class Actor extends GameObject implements Owner {
 	@Override
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
-			this.squareGameObjectIsOn.gameObject = null;
+			this.squareGameObjectIsOn.inventory.gameObjects.remove(this);
 			this.faction.actors.remove(this);
 			screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
 			return true;
@@ -291,10 +292,10 @@ public class Actor extends GameObject implements Owner {
 
 		Square oldSquare = this.squareGameObjectIsOn;
 		int distanceTraveled = squareToMoveTo.distanceToSquare;
-		this.squareGameObjectIsOn.gameObject = null;
+		this.squareGameObjectIsOn.inventory.gameObjects.remove(Game.level.activeActor);
 		this.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
 		this.squareGameObjectIsOn = squareToMoveTo;
-		squareToMoveTo.gameObject = Game.level.activeActor;
+		squareToMoveTo.inventory.gameObjects.add(Game.level.activeActor);
 		Actor.highlightSelectedCharactersSquares();
 		Game.level.logOnScreen(new ActivityLog(new Object[] { this, " moved to " + squareToMoveTo }));
 

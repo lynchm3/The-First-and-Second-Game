@@ -137,11 +137,13 @@ public class UserInputEditor {
 				&& Game.squareMouseIsOver != null) {
 			// click square/game object if we're on one
 
-			GameObject clickedGameObject = Game.squareMouseIsOver.gameObject;
-			if (clickedGameObject != null) {
-				editor.gameObjectClicked(clickedGameObject);
-			} else {
-				editor.squareClicked(Game.squareMouseIsOver);
+			if (Game.squareMouseIsOver.inventory.gameObjects.size() != 0) {
+				GameObject clickedGameObject = Game.squareMouseIsOver.inventory.gameObjects.get(0);
+				if (clickedGameObject != null) {
+					editor.gameObjectClicked(clickedGameObject);
+				} else {
+					editor.squareClicked(Game.squareMouseIsOver);
+				}
 			}
 		}
 

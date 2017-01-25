@@ -2,11 +2,44 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// draw Incentory devices whether the inventory is drawn or now
+	// OBJECT HOLDER
+	// Set it up in the test data
+	// Set up every time u create object
+	// every time u move object
+	// every time u put and object in an inventory
+
+	// concept of "passable" or "can be traversed" for objects...
+
+	// contextual option to "eat" people ur attacking, does damage to them,
+	// heals u a bit
+
+	// when u click on stacked game objects u'll just get the first
+	// one,Game.squareMouseIsOver.inventory.gameObjects.get(0), time to
+	// implement pop up windows
+
+	// Context menu should show some details and the options. Options should
+	// include "View full deatils"
+
+	// Right click opens context menu, left click does default (talk to allies,
+	// attack hostiles...), the deafult action shows under the mouse when u
+	// hover (maybe in the form of icons rather than text?) (maybe thats an
+	// option in the options menu - icon, text, icon + text or nothing)
+
+	// Put this in marketing blurb - The contextual options on click will
+	// encourage experimentation
+
+	// make inventory
+
+	// drawInventory boolean decides whether the inventory is drawn or not
 	// For a chest it won't be drawn, for an empty square it will
 	// remove weapons collection that objects have
 
 	// check the make copy methods, i think they might b shit
+
+	// Maybe change objects to "loose objects"
+	// And have an inventory for each character that u can view
+
+	// Just have ADD OBJECT, which asks Weapon, GameObject or Explosive Object
 
 	// Select owner by clicking on person.
 	// When you click on the person you get asked whether to set them or the

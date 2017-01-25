@@ -22,7 +22,8 @@ public class ScriptTriggerSquareUnoccupied extends ScriptTrigger {
 
 	@Override
 	public boolean checkTrigger() {
-		if (square.gameObject == null) {
+
+		if (square.inventory.gameObjects.size() == 0) {
 			return true;
 		}
 		return false;

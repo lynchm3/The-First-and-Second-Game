@@ -9,6 +9,7 @@ import org.lwjgl.util.vector.Matrix4f;
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
@@ -201,7 +202,7 @@ public class Level {
 	private void initGrid(Square[][] squares, int width, int height) {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				squares[i][j] = new Square(i, j, "grass.png", 1, 0);
+				squares[i][j] = new Square(i, j, "grass.png", 1, 0, new Inventory());
 			}
 		}
 	}
@@ -450,8 +451,8 @@ public class Level {
 			Move move = undoList.pop();
 			move.actor.distanceMovedThisTurn -= move.travelCost;
 			move.actor.squareGameObjectIsOn = move.squareMovedFrom;
-			move.squareMovedFrom.gameObject = move.actor;
-			move.squareMovedTo.gameObject = null;
+			move.squareMovedFrom.inventory.gameObjects.add(move.actor);
+			move.squareMovedTo.inventory.gameObjects.remove(move.actor);
 			if (activeActor != null)
 				activeActor.unselected();
 			activeActor = move.actor;
@@ -482,13 +483,17 @@ public class Level {
 					newSquares[i][j] = squares[i][j];
 				} else {
 					// Delete old squares if they don't fit
-					if (squares[i][j].gameObject == null) {
+					if (squares[i][j].inventory.gameObjects.size() == 0) {
 
-					} else if (squares[i][j].gameObject instanceof Actor) {
-						Actor actor = (Actor) squares[i][j].gameObject;
-						actor.faction.actors.remove(actor);
 					} else {
-						inanimateObjects.remove(squares[i][j].gameObject);
+						for (int k = 0; k < squares[i][j].inventory.gameObjects.size(); k++) {
+							if (squares[i][j].inventory.gameObjects.get(k) instanceof Actor) {
+								Actor actor = (Actor) squares[i][j].inventory.gameObjects.get(k);
+								actor.faction.actors.remove(actor);
+							} else {
+								inanimateObjects.remove(squares[i][j].inventory.gameObjects.get(k));
+							}
+						}
 					}
 				}
 			}

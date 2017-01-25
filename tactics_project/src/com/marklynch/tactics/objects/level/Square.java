@@ -2,13 +2,12 @@ package com.marklynch.tactics.objects.level;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.UUID;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.Dialog;
@@ -20,13 +19,13 @@ import mdesl.graphics.Texture;
 public class Square {
 
 	public String guid = UUID.randomUUID().toString();
-	public final static String[] editableAttributes = { "elevation", "travelCost", "inventory", "showInventory" };
+	public final static String[] editableAttributes = { "elevation", "travelCost" };
 
 	public final int x;
 	public final int y;
 	public final int elevation;
 	public int travelCost;
-	public ArrayList<GameObject> inventory;
+	public Inventory inventory;
 	public boolean showInventory;
 
 	public transient boolean reachableBySelectedCharater = false;
@@ -36,7 +35,6 @@ public class Square {
 	// image
 	public String imageTexturePath;
 	public transient Texture imageTexture = null;
-	public transient GameObject gameObject = null;
 	public transient Vector<Dialog> dialogs;
 
 	public transient boolean showingDialogs = false;
@@ -44,7 +42,7 @@ public class Square {
 
 	public transient static PathComparator pathComparator;
 
-	public Square(int x, int y, String imagePath, int travelCost, int elevation) {
+	public Square(int x, int y, String imagePath, int travelCost, int elevation, Inventory inventory) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -54,6 +52,8 @@ public class Square {
 		loadImages();
 		weaponsThatCanAttack = new Vector<Weapon>();
 		dialogs = new Vector<Dialog>();
+		this.inventory = inventory;
+		showInventory = true;
 	}
 
 	public void loadImages() {
@@ -81,7 +81,7 @@ public class Square {
 			Texture highlightTexture = null;
 
 			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
-					&& this.gameObject != null
+					&& this.inventory.gameObjects.size() != 0
 					&& Game.level.activeActor.equippedWeapon.hasRange(Game.level.activeActor.weaponDistanceTo(this))
 					&& !Game.level.activeActor.hasAttackedThisTurn) {
 				highlightTexture = Game.level.gameCursor.imageTexture4;
@@ -179,21 +179,40 @@ public class Square {
 
 	public String[] getDetails() {
 
-		if (this.gameObject == null) {
+		if (this.inventory.gameObjects.size() == 0) {
 			// Nothing on the square
 			return new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
 					"(Click again to dismiss)" };
-		} else if (this.gameObject instanceof Actor) {
-			// Actor on the square
-			Actor actor = (Actor) this.gameObject;
-			return new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
-					"" + actor.name, "lvl" + actor.actorLevel + " " + actor.title, "(Click again to dismiss)" };
+		} else
 
-		} else {
-			// Object on the square
-			return new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
-					"(Click again to dismiss)" };
+		{
 
+			String[] details = new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost,
+					"\nElevation = " + elevation };
+
+			for (int i = 0; i < inventory.gameObjects.size(); i++) {
+				if (this.inventory.gameObjects.get(i) instanceof Actor) {
+					// TODO
+					// // Actor on the square
+					// Actor actor = (Actor) this.inventory.gameObjects.get(i);
+					// String[] actorDetails = { "" + actor.name, "lvl" +
+					// actor.actorLevel + " " + actor.title };
+					// String[] both = (String[])ArrayUtils.addAll(first,
+					// second);
+
+				} else {
+					// TODO
+					// Object on the square
+					// return new String[] { "" + x + " , " + y, "\nTravel Cost
+					// = " + travelCost,
+					// "\nElevation = " + elevation, "(Click again to dismiss)"
+					// };
+
+				}
+			}
+
+			// (Click again to dismiss)" };
+			return details;
 		}
 	}
 

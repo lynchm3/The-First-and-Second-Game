@@ -33,7 +33,7 @@ public class GameObject {
 	public float totalHealth = 0;
 	public float remainingHealth = 0;
 	public Owner owner;
-	public ArrayList<GameObject> inventory;
+	public Inventory inventory;
 	public boolean showInventory;
 
 	public transient boolean hasAttackedThisTurn = false;
@@ -69,18 +69,29 @@ public class GameObject {
 
 	public transient Faction faction;
 
-	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn,
-			ArrayList<GameObject> inventory, boolean showInventory) {
+	public Inventory inventoryThatHoldsThisObject;
+
+	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
+			boolean showInventory) {
 		super();
 		this.name = name;
 		this.totalHealth = health;
 		this.remainingHealth = health;
 		this.imageTexturePath = imagePath;
-		if (squareGameObjectIsOn != null) {
-			this.squareGameObjectIsOn = squareGameObjectIsOn;
-			this.squareGameObjectIsOn.gameObject = this;
-		}
 		this.inventory = inventory;
+
+		System.out.println("squareGameObjectIsOn = " + squareGameObjectIsOn);
+
+		// System.out.println("this.squareGameObjectIsOn = " +
+		// this.squareGameObjectIsOn);
+
+		if (squareGameObjectIsOn != null) {
+			System.out.println("squareGameObjectIsOn.inventory = " + squareGameObjectIsOn.inventory);
+			System.out.println(
+					"squareGameObjectIsOn.inventory.gameObjects = " + squareGameObjectIsOn.inventory.gameObjects);
+			this.squareGameObjectIsOn = squareGameObjectIsOn;
+			this.squareGameObjectIsOn.inventory.gameObjects.add(this);
+		}
 		this.showInventory = showInventory;
 
 		loadImages();
@@ -106,7 +117,7 @@ public class GameObject {
 		this.faction = faction;
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn = Game.level.squares[this.squareGameObjectIsOn.x][this.squareGameObjectIsOn.y];
-			this.squareGameObjectIsOn.gameObject = this;
+			this.squareGameObjectIsOn.inventory.gameObjects.add(this);
 		}
 		this.paths = new HashMap<Square, Path>();
 	}
@@ -159,7 +170,7 @@ public class GameObject {
 		if (remainingHealth <= 0) {
 
 			if (squareGameObjectIsOn != null) {
-				this.squareGameObjectIsOn.gameObject = null;
+				this.squareGameObjectIsOn.inventory.gameObjects.remove(this);
 			}
 			// Game.level.inanimateObjects.remove(this);
 
@@ -236,7 +247,7 @@ public class GameObject {
 			}
 		}
 
-		if (newSquare != null && newSquare.gameObject == null && !squaresInThisPath.contains(newSquare)
+		if (newSquare != null && newSquare.inventory.gameObjects.size() == 0 && !squaresInThisPath.contains(newSquare)
 				&& !paths.containsKey(newSquare)) {
 			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
 			newPathSquares.add(newSquare);
@@ -325,7 +336,7 @@ public class GameObject {
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon, float range) {
 
-		for (GameObject gameObject : inventory) {
+		for (GameObject gameObject : inventory.gameObjects) {
 			if (gameObject instanceof Weapon) {
 				Weapon weapon = (Weapon) gameObject;
 				if (range >= weapon.minRange && range <= weapon.maxRange) {
@@ -348,7 +359,7 @@ public class GameObject {
 
 	public ArrayList<Weapon> getWeaponsInInventory() {
 		ArrayList<Weapon> weapons = new ArrayList<Weapon>();
-		for (GameObject gameObject : inventory) {
+		for (GameObject gameObject : inventory.gameObjects) {
 			if (gameObject instanceof Weapon) {
 				weapons.add((Weapon) gameObject);
 			}
