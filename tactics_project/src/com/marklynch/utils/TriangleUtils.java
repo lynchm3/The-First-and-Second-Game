@@ -6,9 +6,8 @@ import com.marklynch.Game;
 
 public class TriangleUtils {
 
-	public static void drawTriangle(Texture texture, float x1, float x2,
-			float x3, float y1, float y2, float y3, float u1, float u2,
-			float u3, float v1, float v2, float v3) {
+	public static void drawTriangle(Texture texture, float x1, float x2, float x3, float y1, float y2, float y3,
+			float u1, float u2, float u3, float v1, float v2, float v3) {
 		// GL11.glDisable(GL11.GL_TEXTURE_2D);
 		// GL11.glColor4f(color.r, color.g, color.b, color.a);
 

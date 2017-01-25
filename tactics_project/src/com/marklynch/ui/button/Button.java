@@ -14,16 +14,15 @@ public abstract class Button {
 	public ClickListener clickListener;
 	public Object text;
 
-	public Button(float x, float y, float width, float height,
-			String enabledTexturePath, String disabledTexturePath, Object text) {
+	public Button(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
+			Object text) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.enabledTexture = ResourceUtils.getGlobalImage(enabledTexturePath);
-		this.disabledTexture = ResourceUtils
-				.getGlobalImage(disabledTexturePath);
+		this.disabledTexture = ResourceUtils.getGlobalImage(disabledTexturePath);
 		this.text = text;
 	}
 
@@ -32,8 +31,7 @@ public abstract class Button {
 	}
 
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
-		if (mouseX > x && mouseX < x + width && mouseY > y
-				&& mouseY < y + height) {
+		if (mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height) {
 			return true;
 		}
 		return false;
@@ -46,7 +44,6 @@ public abstract class Button {
 
 	public abstract void draw();
 
-	public abstract void drawWithinBounds(float boundsX1, float boundsX2,
-			float boundsY1, float boundsY2);
+	public abstract void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2);
 
 }

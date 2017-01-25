@@ -6,8 +6,7 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 
 public class ScriptEventGroup extends ScriptEvent {
 
-	public final static String[] editableAttributes = { "name",
-			"blockUserInput", "scriptTrigger", "scriptEvents" };
+	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "scriptEvents" };
 
 	Vector<ScriptEvent> scriptEvents;
 	int scriptEventIndex = 0;
@@ -16,8 +15,7 @@ public class ScriptEventGroup extends ScriptEvent {
 		name = "ScriptEventGroup";
 	}
 
-	public ScriptEventGroup(boolean blockUserInput,
-			ScriptTrigger scriptTrigger, Vector<ScriptEvent> scriptEvents) {
+	public ScriptEventGroup(boolean blockUserInput, ScriptTrigger scriptTrigger, Vector<ScriptEvent> scriptEvents) {
 		super(blockUserInput, scriptTrigger);
 		this.scriptEvents = scriptEvents;
 	}
@@ -26,8 +24,7 @@ public class ScriptEventGroup extends ScriptEvent {
 	public boolean checkIfCompleted() {
 		if (scriptEventIndex >= scriptEvents.size())
 			return true;
-		if (scriptEventIndex == scriptEvents.size() - 1
-				&& scriptEvents.lastElement().checkIfCompleted())
+		if (scriptEventIndex == scriptEvents.size() - 1 && scriptEvents.lastElement().checkIfCompleted())
 			return true;
 		return false;
 	}

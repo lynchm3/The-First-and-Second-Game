@@ -15,11 +15,15 @@
  ******************************************************************************/
 package mdesl.graphics;
 
-/** A trimmed down version of TextureRegion from LibGDX. 
- * Defines a rectangular area of a texture. The coordinate system used has its origin in the upper left corner with the x-axis
- * pointing to the right and the y axis pointing downwards.
+/**
+ * A trimmed down version of TextureRegion from LibGDX. Defines a rectangular
+ * area of a texture. The coordinate system used has its origin in the upper
+ * left corner with the x-axis pointing to the right and the y axis pointing
+ * downwards.
+ * 
  * @author mzechner
- * @author Nathan Sweet */
+ * @author Nathan Sweet
+ */
 public class TextureRegion implements ITexture {
 
 	protected Texture texture;
@@ -27,39 +31,37 @@ public class TextureRegion implements ITexture {
 	protected float v;
 	protected float u2;
 	protected float v2;
-	
+
 	protected int regionWidth;
 	protected int regionHeight;
-	
+
 	public TextureRegion(Texture texture) {
 		this(texture, 0, 0);
 	}
-	
+
 	public TextureRegion(Texture texture, int x, int y) {
 		this(texture, x, y, texture.getWidth(), texture.getHeight());
 	}
-	
+
 	public TextureRegion(Texture texture, int x, int y, int width, int height) {
 		set(texture, x, y, width, height);
 	}
-	
+
 	public TextureRegion(Texture texture, float u, float v, float u2, float v2) {
 		set(texture, u, v, u2, v2);
 	}
-	
+
 	public TextureRegion(TextureRegion region, int x, int y, int width, int height) {
 		set(region, x, y, width, height);
 	}
-	
+
 	public void set(Texture texture, int x, int y, int width, int height) {
-		set(texture, x / (float)texture.getWidth(),
-					 y / (float)texture.getHeight(),
-					(x + width) / (float)texture.getWidth(),
-					(y + height) / (float)texture.getHeight());
+		set(texture, x / (float) texture.getWidth(), y / (float) texture.getHeight(),
+				(x + width) / (float) texture.getWidth(), (y + height) / (float) texture.getHeight());
 		regionWidth = Math.round(width);
 		regionHeight = Math.round(height);
 	}
-	
+
 	public void set(Texture texture, float u, float v, float u2, float v2) {
 		this.texture = texture;
 		this.u = u;
@@ -69,20 +71,20 @@ public class TextureRegion implements ITexture {
 		regionWidth = Math.round(Math.abs(u2 - u) * texture.getWidth());
 		regionHeight = Math.round(Math.abs(v2 - v) * texture.getHeight());
 	}
-	
+
 	public void set(TextureRegion region, int x, int y, int width, int height) {
 		set(region.texture, x + region.getRegionX(), y + region.getRegionY(), width, height);
 	}
 
-	public int getRegionX () {
+	public int getRegionX() {
 		return Math.round(u * texture.getWidth());
 	}
-	
-	public int getRegionY () {
+
+	public int getRegionY() {
 		return Math.round(v * texture.getHeight());
 	}
-	
-	public void flip (boolean x, boolean y) {
+
+	public void flip(boolean x, boolean y) {
 		if (x) {
 			float temp = u;
 			u = u2;
@@ -94,7 +96,7 @@ public class TextureRegion implements ITexture {
 			v2 = temp;
 		}
 	}
-	
+
 	/**
 	 * @return the texture
 	 */
@@ -103,7 +105,8 @@ public class TextureRegion implements ITexture {
 	}
 
 	/**
-	 * @param texture the texture to set
+	 * @param texture
+	 *            the texture to set
 	 */
 	public void setTexture(Texture texture) {
 		this.texture = texture;
@@ -117,7 +120,8 @@ public class TextureRegion implements ITexture {
 	}
 
 	/**
-	 * @param u the u to set
+	 * @param u
+	 *            the u to set
 	 */
 	public void setU(float u) {
 		this.u = u;
@@ -131,7 +135,8 @@ public class TextureRegion implements ITexture {
 	}
 
 	/**
-	 * @param v the v to set
+	 * @param v
+	 *            the v to set
 	 */
 	public void setV(float v) {
 		this.v = v;
@@ -145,7 +150,8 @@ public class TextureRegion implements ITexture {
 	}
 
 	/**
-	 * @param u2 the u2 to set
+	 * @param u2
+	 *            the u2 to set
 	 */
 	public void setU2(float u2) {
 		this.u2 = u2;
@@ -159,7 +165,8 @@ public class TextureRegion implements ITexture {
 	}
 
 	/**
-	 * @param v2 the v2 to set
+	 * @param v2
+	 *            the v2 to set
 	 */
 	public void setV2(float v2) {
 		this.v2 = v2;
@@ -167,6 +174,7 @@ public class TextureRegion implements ITexture {
 
 	/**
 	 * Returns the width (in pixels) of this region.
+	 * 
 	 * @return the width of this region
 	 */
 	@Override
@@ -176,11 +184,12 @@ public class TextureRegion implements ITexture {
 
 	/**
 	 * Returns the height (in pixels) of this region.
+	 * 
 	 * @return the height of this region
 	 */
 	@Override
 	public int getHeight() {
 		return regionHeight;
 	}
-	
+
 }

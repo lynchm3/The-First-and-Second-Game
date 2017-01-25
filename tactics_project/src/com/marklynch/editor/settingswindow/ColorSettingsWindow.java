@@ -17,8 +17,8 @@ public class ColorSettingsWindow extends SettingsWindow {
 	public void updateColorsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addColorButton = new SettingsWindowButton(0,
-				100, 200, 30, "ADD COLOR", true, true, this) {
+		final SettingsWindowButton addColorButton = new SettingsWindowButton(0, 100, 200, 30, "ADD COLOR", true, true,
+				this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -54,9 +54,8 @@ public class ColorSettingsWindow extends SettingsWindow {
 		for (int i = 0; i < editor.colors.size(); i++) {
 			final int index = i;
 
-			final SettingsWindowButton collorButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30, editor.colors.get(i), true, true,
-					this) {
+			final SettingsWindowButton collorButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
+					editor.colors.get(i), true, true, this) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -83,8 +82,7 @@ public class ColorSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					collorButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, editor.colors.get(index), editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200, editor.colors.get(index), editor);
 
 				}
 			};

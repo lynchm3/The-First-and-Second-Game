@@ -15,9 +15,8 @@ public abstract class SettingsWindow {
 	public Vector<SettingsWindowButton> buttons = new Vector<SettingsWindowButton>();
 	public Editor editor;
 
-	public final static String[] gameObjectFields = { "name", "strength",
-			"dexterity", "intelligence", "endurance", "totalHealth",
-			"remainingHealth" };
+	public final static String[] gameObjectFields = { "name", "strength", "dexterity", "intelligence", "endurance",
+			"totalHealth", "remainingHealth" };
 
 	public SettingsWindow(float width, final Editor editor) {
 		super();

@@ -20,9 +20,8 @@ public class AtributesWindowButton extends Button {
 	String attribute;
 	int index;
 
-	public AtributesWindowButton(float x, float y, float width, float height,
-			Object object, String attribute, boolean xFromLeft,
-			boolean yFromTop, AttributesWindow detailsWindow, int index) {
+	public AtributesWindowButton(float x, float y, float width, float height, Object object, String attribute,
+			boolean xFromLeft, boolean yFromTop, AttributesWindow detailsWindow, int index) {
 		super(x, y, width, height, null, null, "");
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
@@ -53,22 +52,16 @@ public class AtributesWindowButton extends Button {
 
 			if (enabled) {
 				if (down) {
-					QuadUtils.drawQuad(Color.BLACK, realX, realX + width,
-							realY, realY + height);
-					TextUtils.printTextWithImages(new Object[] { attribute },
-							realX, realY, Integer.MAX_VALUE, true);
+					QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
+					TextUtils.printTextWithImages(new Object[] { attribute }, realX, realY, Integer.MAX_VALUE, true);
 				} else {
-					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width,
-							realY, realY + height);
-					TextUtils.printTextWithImages(new Object[] { attribute },
-							realX, realY, 200, false);
+					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
+					TextUtils.printTextWithImages(new Object[] { attribute }, realX, realY, 200, false);
 				}
 			} else {
 
-				QuadUtils.drawQuad(Color.RED, realX, realX + width, realY,
-						realY + height);
-				TextUtils.printTextWithImages(new Object[] { attribute },
-						realX, realY, 200, false);
+				QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
+				TextUtils.printTextWithImages(new Object[] { attribute }, realX, realY, 200, false);
 			}
 
 		} else {
@@ -87,53 +80,39 @@ public class AtributesWindowButton extends Button {
 				if (arrayList != null) {
 					if (enabled) {
 						if (down) {
-							QuadUtils.drawQuad(Color.BLACK, realX, realX
-									+ width, realY, realY + height);
+							QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
 							TextUtils.printTextWithImages(
-									new Object[] {
-											attribute + "[" + index + "]: ",
-											arrayList.get(index) }, realX,
+									new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) }, realX,
 									realY, Integer.MAX_VALUE, true);
 						} else {
-							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX
-									+ width, realY, realY + height);
+							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
 							TextUtils.printTextWithImages(
-									new Object[] {
-											attribute + "[" + index + "]: ",
-											arrayList.get(index) }, realX,
+									new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) }, realX,
 									realY, 200, false);
 						}
 					} else {
 
-						QuadUtils.drawQuad(Color.RED, realX, realX + width,
-								realY, realY + height);
+						QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
 						TextUtils.printTextWithImages(
-								new Object[] { attribute + "[" + index + "]: ",
-										arrayList.get(index) }, realX, realY,
+								new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) }, realX, realY,
 								200, false);
 					}
 
 				} else {
 					if (enabled) {
 						if (down) {
-							QuadUtils.drawQuad(Color.BLACK, realX, realX
-									+ width, realY, realY + height);
-							TextUtils.printTextWithImages(new Object[] {
-									attribute + ": ", field.get(object) },
-									realX, realY, Integer.MAX_VALUE, true);
+							QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
+							TextUtils.printTextWithImages(new Object[] { attribute + ": ", field.get(object) }, realX,
+									realY, Integer.MAX_VALUE, true);
 						} else {
-							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX
-									+ width, realY, realY + height);
-							TextUtils.printTextWithImages(new Object[] {
-									attribute + ": ", field.get(object) },
-									realX, realY, 200, false);
+							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
+							TextUtils.printTextWithImages(new Object[] { attribute + ": ", field.get(object) }, realX,
+									realY, 200, false);
 						}
 					} else {
 
-						QuadUtils.drawQuad(Color.RED, realX, realX + width,
-								realY, realY + height);
-						TextUtils.printTextWithImages(new Object[] {
-								attribute + ": ", field.get(object) }, realX,
+						QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
+						TextUtils.printTextWithImages(new Object[] { attribute + ": ", field.get(object) }, realX,
 								realY, 200, false);
 					}
 
@@ -160,16 +139,14 @@ public class AtributesWindowButton extends Button {
 		else
 			realY = attributesWindow.y + y;
 
-		if (mouseX > realX && mouseX < realX + width && mouseY > realY
-				&& mouseY < realY + height) {
+		if (mouseX > realX && mouseX < realX + width && mouseY > realY && mouseY < realY + height) {
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public void drawWithinBounds(float boundsX1, float boundsX2,
-			float boundsY1, float boundsY2) {
+	public void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
 		// TODO Auto-generated method stub
 
 	}

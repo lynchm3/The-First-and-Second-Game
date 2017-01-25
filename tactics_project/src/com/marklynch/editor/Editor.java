@@ -1,6 +1,5 @@
 package com.marklynch.editor;
 
-import java.awt.Font;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -114,11 +113,7 @@ public class Editor {
 	public Actor actorTemplate;
 
 	public enum STATE {
-		DEFAULT,
-		ADD_OBJECT,
-		ADD_ACTOR,
-		MOVEABLE_OBJECT_SELECTED,
-		SETTINGS_CHANGE
+		DEFAULT, ADD_OBJECT, ADD_ACTOR, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
 	}
 
 	public STATE state = STATE.DEFAULT;
@@ -127,7 +122,7 @@ public class Editor {
 
 	public ClassSelectionWindow classSelectionWindow;
 	public InstanceSelectionWindow instanceSelectionWindow;
-	
+
 	public Editor() {
 
 		// LOAD THE TEXTURES
@@ -155,8 +150,7 @@ public class Editor {
 		weaponTemplates.add(weaponTemplate1);
 		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png");
 		weaponTemplates.add(weaponTemplate2);
-		for(int i = 0; i<weaponTemplates.size(); i++)
-		{
+		for (int i = 0; i < weaponTemplates.size(); i++) {
 			weaponTemplates.get(i).loadImages();
 		}
 
@@ -172,8 +166,7 @@ public class Editor {
 		colorsSettingsWindow = new ColorSettingsWindow(200, this);
 		decorationsSettingsWindow = new DecorationsSettingsWindow(200, this);
 		scriptsEventsSettingsWindow = new ScriptEventsSettingsWindow(200, this);
-		scriptsTriggersSettingsWindow = new ScriptTriggersSettingsWindow(200,
-				this);
+		scriptsTriggersSettingsWindow = new ScriptTriggersSettingsWindow(200, this);
 		aisSettingsWindow = new AIsSettingsWindow(200, this);
 		relationsSettingsWindow = new RelationsSettingsWindow(200, this);
 		speechPartSettingsWindow = new SpeechPartSettingsWindow(200, this);
@@ -182,14 +175,9 @@ public class Editor {
 
 		generateTestObjects();
 
-		
-		
-		
-		
 		// TABS
 		String tabText = "LEVEL";
-		levelTabButton = new LevelButton(10, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true,
-				true);
+		levelTabButton = new LevelButton(10, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		tabs.add(levelTabButton);
 		levelTabButton.clickListener = new ClickListener() {
 			@Override
@@ -205,8 +193,7 @@ public class Editor {
 		levelTabButton.down = true;
 
 		tabText = "SQUARES";
-		squaresTabButton = new LevelButton(90, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
-				true, true);
+		squaresTabButton = new LevelButton(90, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		squaresTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -221,8 +208,7 @@ public class Editor {
 		tabs.add(squaresTabButton);
 
 		tabText = "OBJECTS";
-		objectsTabButton = new LevelButton(210, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
-				true, true);
+		objectsTabButton = new LevelButton(210, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		objectsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -237,8 +223,7 @@ public class Editor {
 		tabs.add(objectsTabButton);
 
 		tabText = "ACTORS";
-		actorsTabButton = new LevelButton(320, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
-				true, true);
+		actorsTabButton = new LevelButton(320, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		actorsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -266,10 +251,10 @@ public class Editor {
 			}
 		};
 		tabs.add(factionsTabButton);
-		
+
 		tabText = "WEAPON TEMPLATES";
-		weaponTemplatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
-				true, true);
+		weaponTemplatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true,
+				true);
 		weaponTemplatesTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -284,8 +269,7 @@ public class Editor {
 		tabs.add(weaponTemplatesTabButton);
 
 		tabText = "WEAPONS";
-		weaponsTabButton = new LevelButton(560, 15, Game.font.getWidth(tabText), 30, "", "", tabText,
-				true, true);
+		weaponsTabButton = new LevelButton(560, 15, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		weaponsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -300,8 +284,7 @@ public class Editor {
 		tabs.add(weaponsTabButton);
 
 		tabText = "COLORS";
-		colorsTabButton = new LevelButton(690, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
-				true, true);
+		colorsTabButton = new LevelButton(690, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		colorsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -346,7 +329,8 @@ public class Editor {
 		tabs.add(scriptEventsTabButton);
 
 		tabText = "SCRIPT TRIGGERS";
-		scriptTriggersTabButton = new LevelButton(350, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		scriptTriggersTabButton = new LevelButton(350, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true,
+				true);
 		scriptTriggersTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -361,8 +345,7 @@ public class Editor {
 		tabs.add(scriptTriggersTabButton);
 
 		tabText = "AIS";
-		aisTabButton = new LevelButton(520, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true,
-				true);
+		aisTabButton = new LevelButton(520, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		aisTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -405,102 +388,89 @@ public class Editor {
 			}
 		};
 		tabs.add(speechPartTabButton);
-		
-		//Place the tabs
+
+		// Place the tabs
 		placeTabs();
 
 	}
-	
-	public void resize()
-	{
+
+	public void resize() {
 		placeTabs();
 	}
-	
-	public void placeTabs()
-	{
+
+	public void placeTabs() {
 		float tabRow = 0;
 		float tabHeight = 30;
 		float margin = 10;
 		float tabPositionX = margin;
-		
+
 		Button tab = null;
-		
-		for(int i = 0; i<tabs.size(); i++)
-		{
+
+		for (int i = 0; i < tabs.size(); i++) {
 			tab = tabs.get(i);
-//			if(tabPositionX == 0)
-//			{
-//				tab.x = 0;
-//				tab.y = tabRow*tabHeight;
-//			}
-//			else
-//			{
-				if(tabPositionX + tab.width > Game.windowWidth)
-				{
-					tabRow++;
-					tabPositionX = margin;
-				}
-				
-				tab.x = tabPositionX;
-				tab.y = tabRow*(tabHeight + margin) + margin; 
-//			}
-			
+			// if(tabPositionX == 0)
+			// {
+			// tab.x = 0;
+			// tab.y = tabRow*tabHeight;
+			// }
+			// else
+			// {
+			if (tabPositionX + tab.width > Game.windowWidth) {
+				tabRow++;
+				tabPositionX = margin;
+			}
+
+			tab.x = tabPositionX;
+			tab.y = tabRow * (tabHeight + margin) + margin;
+			// }
+
 			tabPositionX += tab.width + margin;
-		}		
+		}
 	}
 
 	public void generateTestObjects() {
 
 		// Add a game object
-		GameObject gameObject = new GameObjectExploder("dumpster", 5, 0, 0, 0,
-				0, "skip_with_shadow.png", Game.level.squares[0][3],
-				new ArrayList<Weapon>());
+		GameObject gameObject = new GameObjectExploder("dumpster", 5, 0, 0, 0, 0, "skip_with_shadow.png",
+				Game.level.squares[0][3], new ArrayList<Weapon>());
 		Game.level.inanimateObjects.add(gameObject);
 		Game.level.squares[0][3].gameObject = gameObject;
 
 		// Add factions
 		Game.level.factions
-				.add(new Faction("Faction " + Game.level.factions.size(),
-						colors.get(0), "faction_blue.png"));
-		Game.level.factions
-				.add(new Faction("Faction " + Game.level.factions.size(),
-						colors.get(1), "faction_red.png"));
+				.add(new Faction("Faction " + Game.level.factions.size(), colors.get(0), "faction_blue.png"));
+		Game.level.factions.add(new Faction("Faction " + Game.level.factions.size(), colors.get(1), "faction_red.png"));
 
 		// relationships
-		Game.level.factions.get(0).relationships
-				.put(Game.level.factions.get(1), new FactionRelationship(-100,
-						Game.level.factions.get(0), Game.level.factions.get(1)));
-		Game.level.factions.get(1).relationships
-				.put(Game.level.factions.get(0), new FactionRelationship(-100,
-						Game.level.factions.get(1), Game.level.factions.get(0)));
+		Game.level.factions.get(0).relationships.put(Game.level.factions.get(1),
+				new FactionRelationship(-100, Game.level.factions.get(0), Game.level.factions.get(1)));
+		Game.level.factions.get(1).relationships.put(Game.level.factions.get(0),
+				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
 		// Weapons
 		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
 		weaponsForActor0.add(weaponTemplates.get(0).makeWeapon());
 		weaponsForActor0.add(weaponTemplates.get(1).makeWeapon());
-		weaponsForActor0.add(weaponTemplates.get(2).makeWeapon());		
-		for(int i = 0; i<weaponsForActor0.size(); i++)
-		{
+		weaponsForActor0.add(weaponTemplates.get(2).makeWeapon());
+		for (int i = 0; i < weaponsForActor0.size(); i++) {
 			weapons.add(weaponsForActor0.get(i));
 		}
 		ArrayList<Weapon> weaponsForActor1 = new ArrayList<Weapon>();
 		weaponsForActor1.add(weaponTemplates.get(0).makeWeapon());
 		weaponsForActor1.add(weaponTemplates.get(1).makeWeapon());
-		weaponsForActor1.add(weaponTemplates.get(2).makeWeapon());	
-		for(int i = 0; i<weaponsForActor1.size(); i++)
-		{
+		weaponsForActor1.add(weaponTemplates.get(2).makeWeapon());
+		for (int i = 0; i < weaponsForActor1.size(); i++) {
 			weapons.add(weaponsForActor1.get(i));
 		}
-		
-		
+
 		// Add actor
-		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", Game.level.squares[0][4], weaponsForActor0, 4);
+		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4],
+				weaponsForActor0, 4);
 		actor0.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(actor0);
 
-		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", Game.level.squares[0][5], weaponsForActor1, 4);
+		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5],
+				weaponsForActor1, 4);
 		actor1.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(actor1);
 
@@ -524,9 +494,8 @@ public class Editor {
 		ArrayList<String> arrayList1 = new ArrayList();
 		arrayList1.add("HI, THIS IS SCRIPTED SPEECH :D");
 
-		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(
-				speechActors1, speechPositions1, speechDirections1,
-				Game.level.factions.get(0).actors.get(0), arrayList1);
+		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(speechActors1, speechPositions1,
+				speechDirections1, Game.level.factions.get(0).actors.get(0), arrayList1);
 
 		// SpeechPart 2
 		ArrayList<Actor> speechActors2 = new ArrayList<Actor>();
@@ -542,17 +511,15 @@ public class Editor {
 		ArrayList<String> arrayList2 = new ArrayList();
 		arrayList2.add("HI, PT2 OF THIS TALK");
 
-		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(
-				speechActors2, speechPositions2, speechDirections2,
-				Game.level.factions.get(0).actors.get(0), arrayList2);
+		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(speechActors2, speechPositions2,
+				speechDirections2, Game.level.factions.get(0).actors.get(0), arrayList2);
 
 		ArrayList<ScriptEventSpeech.SpeechPart> speechParts = new ArrayList<ScriptEventSpeech.SpeechPart>();
 		speechParts.add(speechPart1_1.makeCopy());
 		speechParts.add(speechPart1_2.makeCopy());
 		ScriptTrigger scriptTriggerActorSelected = new ScriptTriggerActorSelected(
 				Game.level.factions.get(0).actors.get(0));
-		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
-				speechParts, scriptTriggerActorSelected);
+		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true, speechParts, scriptTriggerActorSelected);
 
 		Game.level.script.scriptTriggers.add(new ScriptTriggerTurnStart(1, 0));
 		Game.level.script.scriptTriggers.add(scriptTriggerActorSelected);
@@ -563,9 +530,8 @@ public class Editor {
 		Game.level.ais.add(new AIRoutineTargetObject(actor0));
 		Game.level.ais.get(1).name = "attackPlayer";
 
-		ScriptEventSetAI scriptEventSetAIAttackDumpster = new ScriptEventSetAI(
-				false, Game.level.script.scriptTriggers.get(0).makeCopy(),
-				actor1, Game.level.ais.get(0).makeCopy());
+		ScriptEventSetAI scriptEventSetAIAttackDumpster = new ScriptEventSetAI(false,
+				Game.level.script.scriptTriggers.get(0).makeCopy(), actor1, Game.level.ais.get(0).makeCopy());
 
 		ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
 		// scriptEvents.add(scriptEventSpeech1);
@@ -589,26 +555,18 @@ public class Editor {
 		}
 
 		// Draw a move line if click will result in move
-		if (Game.buttonHoveringOver == null
-				&& state == STATE.MOVEABLE_OBJECT_SELECTED
-				&& Game.squareMouseIsOver != null
+		if (Game.buttonHoveringOver == null && state == STATE.MOVEABLE_OBJECT_SELECTED && Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
-			float x1 = this.selectedGameObject.squareGameObjectIsOn.x
-					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
-			float y1 = this.selectedGameObject.squareGameObjectIsOn.y
-					* Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
-			float x2 = Game.squareMouseIsOver.x * Game.SQUARE_WIDTH
-					+ Game.SQUARE_WIDTH / 2;
-			float y2 = Game.squareMouseIsOver.y * Game.SQUARE_HEIGHT
-					+ Game.SQUARE_HEIGHT / 2;
+			float x1 = this.selectedGameObject.squareGameObjectIsOn.x * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
+			float y1 = this.selectedGameObject.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
+			float x2 = Game.squareMouseIsOver.x * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
+			float y2 = Game.squareMouseIsOver.y * Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
 
 			// CircleUtils.drawCircle(Color.white, 10d, x1, y1);
-			TextureUtils.drawTexture(Game.level.gameCursor.circle, x1 - 10,
-					x1 + 10, y1 - 10, y1 + 10);
+			TextureUtils.drawTexture(Game.level.gameCursor.circle, x1 - 10, x1 + 10, y1 - 10, y1 + 10);
 			LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 10f);
-			TextureUtils.drawTexture(Game.level.gameCursor.circle, x2 - 10,
-					x2 + 10, y2 - 10, y2 + 10);
+			TextureUtils.drawTexture(Game.level.gameCursor.circle, x2 - 10, x2 + 10, y2 - 10, y2 + 10);
 
 		}
 	}
@@ -664,56 +622,46 @@ public class Editor {
 		}
 
 		if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
-			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
-					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
-							- Mouse.getY() + 20,
-					Game.windowHeight - Mouse.getY() + 40);
-			TextureUtils.drawTexture(selectedGameObject.imageTexture,
-					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
-							- Mouse.getY() + 20,
-					Game.windowHeight - Mouse.getY() + 40);
+			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, Mouse.getX() + 10, Mouse.getX() + 30,
+					Game.windowHeight - Mouse.getY() + 20, Game.windowHeight - Mouse.getY() + 40);
+			TextureUtils.drawTexture(selectedGameObject.imageTexture, Mouse.getX() + 10, Mouse.getX() + 30,
+					Game.windowHeight - Mouse.getY() + 20, Game.windowHeight - Mouse.getY() + 40);
 		}
 	}
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY) {
 
 		if (attributeSelectionWindow != null) {
-			return attributeSelectionWindow.getButtonFromMousePosition(mouseX,
-					mouseY);
+			return attributeSelectionWindow.getButtonFromMousePosition(mouseX, mouseY);
 
 		}
 
 		if (classSelectionWindow != null) {
 			// faction, color, texture
-			return classSelectionWindow.getButtonFromMousePosition(mouseX,
-					mouseY);
+			return classSelectionWindow.getButtonFromMousePosition(mouseX, mouseY);
 
 		}
 
 		if (instanceSelectionWindow != null) {
 			// used for new weapon selection right now
-			return instanceSelectionWindow.getButtonFromMousePosition(mouseX,
-					mouseY);
+			return instanceSelectionWindow.getButtonFromMousePosition(mouseX, mouseY);
 
 		}
 
 		for (Button button : this.tabs) {
-			if (button.calculateIfPointInBoundsOfButton(mouseX,
-					Game.windowHeight - mouseY))
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}
 
 		if (attributesWindow != null) {
 			for (AtributesWindowButton button : attributesWindow.buttons) {
-				if (button.calculateIfPointInBoundsOfButton(mouseX,
-						Game.windowHeight - mouseY))
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
 		}
 
 		for (Button button : settingsWindow.buttons) {
-			if (button.calculateIfPointInBoundsOfButton(mouseX,
-					Game.windowHeight - mouseY))
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}
 
@@ -721,8 +669,8 @@ public class Editor {
 	}
 
 	public void gameObjectClicked(GameObject gameObject) {
-		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR
-				|| state == STATE.ADD_OBJECT || state == STATE.SETTINGS_CHANGE) {
+		if (state == STATE.DEFAULT || state == STATE.ADD_ACTOR || state == STATE.ADD_OBJECT
+				|| state == STATE.SETTINGS_CHANGE) {
 			if (gameObject instanceof Actor) {
 				if (this.settingsWindow != this.actorsSettingsWindow)
 					actorsTabButton.click();
@@ -748,8 +696,8 @@ public class Editor {
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = null;
 			if (gameObjectTemplate == null) {
-				gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0,
-						"skip_with_shadow.png", square, new ArrayList<Weapon>());
+				gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0, "skip_with_shadow.png", square,
+						new ArrayList<Weapon>());
 			} else {
 				gameObject = gameObjectTemplate.makeCopy(square);
 			}
@@ -762,8 +710,8 @@ public class Editor {
 			// Add actor
 			Actor actor = null;
 			if (actorTemplate == null) {
-				actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-						"red1.png", square, new ArrayList<Weapon>(), 4);
+				actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", square, new ArrayList<Weapon>(),
+						4);
 				actor.faction = Game.level.factions.get(0);
 			} else {
 				actor = actorTemplate.makeCopy(square);
@@ -813,84 +761,56 @@ public class Editor {
 			if (attributeToEditName != null && this.textEntered != null) {
 
 				try {
-					Class<? extends Object> objectClass = objectToEdit
-							.getClass();
+					Class<? extends Object> objectClass = objectToEdit.getClass();
 					Field field = objectClass.getField(attributeToEditName);
 					if (field.getType().isAssignableFrom(ArrayList.class)) {
 
-						ArrayList arrayList = (ArrayList) field
-								.get(objectToEdit);
-						Class attributeClass = arrayList.get(
-								attributeToEditIndex).getClass();
+						ArrayList arrayList = (ArrayList) field.get(objectToEdit);
+						Class attributeClass = arrayList.get(attributeToEditIndex).getClass();
 						if (attributeClass.isAssignableFrom(Integer.class)) { // int
-							if (48 <= character && character <= 57
-									&& textEntered.length() < 8) {
+							if (48 <= character && character <= 57 && textEntered.length() < 8) {
 								this.textEntered += character;
-								arrayList.set(this.attributeToEditIndex,
-										Integer.valueOf(this.textEntered)
-												.intValue());
-							} else if (character == '-'
-									&& textEntered.length() == 0) {
+								arrayList.set(this.attributeToEditIndex, Integer.valueOf(this.textEntered).intValue());
+							} else if (character == '-' && textEntered.length() == 0) {
 								this.textEntered += character;
 							}
 						} else if (attributeClass.isAssignableFrom(Float.class)) {
 							// float
-							if (48 <= character && character <= 57
-									&& textEntered.length() < 8) {
+							if (48 <= character && character <= 57 && textEntered.length() < 8) {
 								this.textEntered += character;
-								arrayList
-										.set(this.attributeToEditIndex, Float
-												.valueOf(this.textEntered)
-												.floatValue());
-							} else if (character == '-'
-									&& textEntered.length() == 0) {
+								arrayList.set(this.attributeToEditIndex, Float.valueOf(this.textEntered).floatValue());
+							} else if (character == '-' && textEntered.length() == 0) {
 								this.textEntered += character;
-							} else if (character == '.'
-									&& !textEntered.contains(".")
-									&& textEntered.length() > 0
+							} else if (character == '.' && !textEntered.contains(".") && textEntered.length() > 0
 									&& textEntered.length() < 8) {
 								this.textEntered += character;
 							}
-						} else if (attributeClass
-								.isAssignableFrom(String.class)) { // string
+						} else if (attributeClass.isAssignableFrom(String.class)) { // string
 							this.textEntered += character;
-							arrayList.set(this.attributeToEditIndex,
-									textEntered);
+							arrayList.set(this.attributeToEditIndex, textEntered);
 
 						}
 
 					} else {
 						if (field.getType().isAssignableFrom(int.class)) { // int
-							if (48 <= character && character <= 57
-									&& textEntered.length() < 8) {
+							if (48 <= character && character <= 57 && textEntered.length() < 8) {
 								this.textEntered += character;
-								field.set(objectToEdit,
-										Integer.valueOf(this.textEntered)
-												.intValue());
-							} else if (character == '-'
-									&& textEntered.length() == 0) {
+								field.set(objectToEdit, Integer.valueOf(this.textEntered).intValue());
+							} else if (character == '-' && textEntered.length() == 0) {
 								this.textEntered += character;
 							}
-						} else if (field.getType()
-								.isAssignableFrom(float.class)) {
+						} else if (field.getType().isAssignableFrom(float.class)) {
 							// float
-							if (48 <= character && character <= 57
-									&& textEntered.length() < 8) {
+							if (48 <= character && character <= 57 && textEntered.length() < 8) {
 								this.textEntered += character;
-								field.set(objectToEdit,
-										Float.valueOf(this.textEntered)
-												.floatValue());
-							} else if (character == '-'
-									&& textEntered.length() == 0) {
+								field.set(objectToEdit, Float.valueOf(this.textEntered).floatValue());
+							} else if (character == '-' && textEntered.length() == 0) {
 								this.textEntered += character;
-							} else if (character == '.'
-									&& !textEntered.contains(".")
-									&& textEntered.length() > 0
+							} else if (character == '.' && !textEntered.contains(".") && textEntered.length() > 0
 									&& textEntered.length() < 8) {
 								this.textEntered += character;
 							}
-						} else if (field.getType().isAssignableFrom(
-								String.class)) { // string
+						} else if (field.getType().isAssignableFrom(String.class)) { // string
 							this.textEntered += character;
 							field.set(objectToEdit, textEntered);
 						}
@@ -919,14 +839,12 @@ public class Editor {
 			return;
 		}
 
-		if (objectToEdit != null && attributeToEditName != null
-				&& this.textEntered != null && textEntered.length() > 0) {
-			this.textEntered = this.textEntered.substring(0,
-					this.textEntered.length() - 1);
+		if (objectToEdit != null && attributeToEditName != null && this.textEntered != null
+				&& textEntered.length() > 0) {
+			this.textEntered = this.textEntered.substring(0, this.textEntered.length() - 1);
 		}
 
-		if (objectToEdit != null && attributeToEditName != null
-				&& this.textEntered != null) {
+		if (objectToEdit != null && attributeToEditName != null && this.textEntered != null) {
 
 			Class<? extends Object> objectClass = objectToEdit.getClass();
 			try {
@@ -936,16 +854,14 @@ public class Editor {
 					if (textEntered.length() == 0) {
 						field.set(objectToEdit, 0);
 					} else {
-						field.set(objectToEdit,
-								Integer.valueOf(this.textEntered).intValue());
+						field.set(objectToEdit, Integer.valueOf(this.textEntered).intValue());
 					}
 				} else if (field.getType().isAssignableFrom(float.class)) {
 					// float
 					if (textEntered.length() == 0) {
 						field.set(objectToEdit, 0);
 					} else {
-						field.set(objectToEdit, Float.valueOf(this.textEntered)
-								.floatValue());
+						field.set(objectToEdit, Float.valueOf(this.textEntered).floatValue());
 					}
 				} else if (field.getType().isAssignableFrom(String.class)) { // string
 					field.set(objectToEdit, textEntered);
@@ -957,8 +873,7 @@ public class Editor {
 		}
 	}
 
-	public void editAttribute(Object object, String attribute,
-			AtributesWindowButton attributeButton, int index) {
+	public void editAttribute(Object object, String attribute, AtributesWindowButton attributeButton, int index) {
 		objectToEdit = object;
 		attributeToEditName = attribute;
 		attributeToEditIndex = index;
@@ -979,12 +894,10 @@ public class Editor {
 
 			if (type.isAssignableFrom(Faction.class)) {
 				// faction
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						Game.level.factions, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.factions, false, this, objectToEdit);
 			} else if (type.isAssignableFrom(Color.class)) {
 				// color
-				attributeSelectionWindow = new AttributeSelectionWindow(colors,
-						false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(colors, false, this, objectToEdit);
 			} else if (type.isAssignableFrom(Square.class)) {
 				// square
 				ArrayList<Square> squares = new ArrayList<Square>();
@@ -993,21 +906,17 @@ public class Editor {
 						squares.add(square);
 					}
 				}
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						squares, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(squares, false, this, objectToEdit);
 			} else if (type.isAssignableFrom(ScriptEvent.class)) {
 				// scriptEvent
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						Game.level.script.scriptEvents, false, this,
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.script.scriptEvents, false, this,
 						objectToEdit);
 			} else if (type.isAssignableFrom(Texture.class)) {
 				// texture
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						textures, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(textures, false, this, objectToEdit);
 			} else if (type.isAssignableFrom(Weapons.class)) {
 				// weapons
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						weaponTemplates, true, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(weaponTemplates, true, this, objectToEdit);
 			} else if (type.isAssignableFrom(GameObject.class)) {
 				// actor
 
@@ -1018,8 +927,7 @@ public class Editor {
 					}
 				}
 				gameObjects.addAll(Game.level.inanimateObjects);
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						gameObjects, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(gameObjects, false, this, objectToEdit);
 			} else if (type.isAssignableFrom(Actor.class)) {
 				// actor
 				ArrayList<Actor> actors = new ArrayList<Actor>();
@@ -1028,21 +936,16 @@ public class Editor {
 						actors.add(actor);
 					}
 				}
-				attributeSelectionWindow = new AttributeSelectionWindow(actors,
-						false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(actors, false, this, objectToEdit);
 			} else if (type.isAssignableFrom(ScriptTrigger.class)) {
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						Game.level.script.scriptTriggers, false, this,
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.script.scriptTriggers, false, this,
 						objectToEdit);
 			} else if (type.isAssignableFrom(AIRoutine.class)) {
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						Game.level.ais, false, this, objectToEdit);
-			} else if (type.isAssignableFrom(boolean.class)
-					|| type.isAssignableFrom(Boolean.class)) {
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.ais, false, this, objectToEdit);
+			} else if (type.isAssignableFrom(boolean.class) || type.isAssignableFrom(Boolean.class)) {
 
 				if (arrayList != null) {
-					arrayList.set(attributeToEditIndex,
-							!(boolean) arrayList.get(attributeToEditIndex));
+					arrayList.set(attributeToEditIndex, !(boolean) arrayList.get(attributeToEditIndex));
 
 				} else {
 					boolean b = (boolean) field.get(objectToEdit);

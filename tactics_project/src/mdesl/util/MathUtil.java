@@ -33,15 +33,18 @@ package mdesl.util;
 import org.lwjgl.util.vector.Matrix4f;
 
 /**
- * Math utilities; adapted from LibGDX's vector classes for use with LWJGL Vector utilities
+ * Math utilities; adapted from LibGDX's vector classes for use with LWJGL
+ * Vector utilities
  */
 public class MathUtil {
-	
+
 	/**
-	 * Sets the given matrix to an orthographic 2D projection matrix, and returns it. If the given matrix
-	 * is null, a new one will be created and returned. 
+	 * Sets the given matrix to an orthographic 2D projection matrix, and
+	 * returns it. If the given matrix is null, a new one will be created and
+	 * returned.
 	 * 
-	 * @param m the matrix to re-use, or null to create a new matrix
+	 * @param m
+	 *            the matrix to re-use, or null to create a new matrix
 	 * @param x
 	 * @param y
 	 * @param width
@@ -51,40 +54,47 @@ public class MathUtil {
 	public static Matrix4f toOrtho2D(Matrix4f m, float x, float y, float width, float height) {
 		return toOrtho(m, x, x + width, y + height, y, 1, -1);
 	}
-	
+
 	/**
-	 * Sets the given matrix to an orthographic 2D projection matrix, and returns it. If the given matrix
-	 * is null, a new one will be created and returned. 
+	 * Sets the given matrix to an orthographic 2D projection matrix, and
+	 * returns it. If the given matrix is null, a new one will be created and
+	 * returned.
 	 * 
-	 * @param m the matrix to re-use, or null to create a new matrix
+	 * @param m
+	 *            the matrix to re-use, or null to create a new matrix
 	 * @param x
 	 * @param y
 	 * @param width
 	 * @param height
-	 * @param near near clipping plane
-	 * @param far far clipping plane
+	 * @param near
+	 *            near clipping plane
+	 * @param far
+	 *            far clipping plane
 	 * @return the given matrix, or a newly created matrix if none was specified
 	 */
 	public static Matrix4f toOrtho2D(Matrix4f m, float x, float y, float width, float height, float near, float far) {
 		return toOrtho(m, x, x + width, y, y + height, near, far);
 	}
-	
+
 	/**
-	 * Sets the given matrix to an orthographic projection matrix, and returns it. If the given matrix
-	 * is null, a new one will be created and returned. 
+	 * Sets the given matrix to an orthographic projection matrix, and returns
+	 * it. If the given matrix is null, a new one will be created and returned.
 	 * 
-	 * @param m the matrix to re-use, or null to create a new matrix
-	 * @param left 
+	 * @param m
+	 *            the matrix to re-use, or null to create a new matrix
+	 * @param left
 	 * @param right
 	 * @param bottom
 	 * @param top
-	 * @param near near clipping plane
-	 * @param far far clipping plane
+	 * @param near
+	 *            near clipping plane
+	 * @param far
+	 *            far clipping plane
 	 * @return the given matrix, or a newly created matrix if none was specified
 	 */
-	public static Matrix4f toOrtho(Matrix4f m, float left, float right, float bottom, float top,
-			float near, float far) {
-		if (m==null)
+	public static Matrix4f toOrtho(Matrix4f m, float left, float right, float bottom, float top, float near,
+			float far) {
+		if (m == null)
 			m = new Matrix4f();
 		float x_orth = 2 / (right - left);
 		float y_orth = 2 / (top - bottom);
@@ -112,20 +122,26 @@ public class MathUtil {
 		m.m33 = 1;
 		return m;
 	}
-	
-	
-	/** Sets the matrix to a projection matrix with a near- and far plane, a field of view in degrees and an aspect ratio.
+
+	/**
+	 * Sets the matrix to a projection matrix with a near- and far plane, a
+	 * field of view in degrees and an aspect ratio.
 	 * 
-	 * @param near The near plane
-	 * @param far The far plane
-	 * @param fov The field of view in degrees
-	 * @param aspectRatio The aspect ratio
-	 * @return This matrix for the purpose of chaining methods together. */
-	public static Matrix4f setToProjection (Matrix4f m, float near, float far, float fov, float aspectRatio) {
-		if (m==null)
+	 * @param near
+	 *            The near plane
+	 * @param far
+	 *            The far plane
+	 * @param fov
+	 *            The field of view in degrees
+	 * @param aspectRatio
+	 *            The aspect ratio
+	 * @return This matrix for the purpose of chaining methods together.
+	 */
+	public static Matrix4f setToProjection(Matrix4f m, float near, float far, float fov, float aspectRatio) {
+		if (m == null)
 			m = new Matrix4f();
 		m.setIdentity();
-		float l_fd = (float)(1.0 / Math.tan((fov * (Math.PI / 180)) / 2.0));
+		float l_fd = (float) (1.0 / Math.tan((fov * (Math.PI / 180)) / 2.0));
 		float l_a1 = (far + near) / (near - far);
 		float l_a2 = (2 * far * near) / (near - far);
 		m.m00 = l_fd / aspectRatio;

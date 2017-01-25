@@ -15,8 +15,7 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 	public SpeechPartSettingsWindow(float width, Editor editor) {
 		super(width, editor);
 
-		addSpeechPartButton = new SettingsWindowButton(0, 100, 200, 30,
-				"ADD SPEECH PART", true, true, this) {
+		addSpeechPartButton = new SettingsWindowButton(0, 100, 200, 30, "ADD SPEECH PART", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -44,13 +43,11 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 			public void click() {
 				ArrayList<String> arrayList1 = new ArrayList<String>();
 				arrayList1.add("TEXT IN SPEECH PART");
-				SpeechPart newSpeechPart = new SpeechPart(
-						Game.level.factions.get(0).actors.get(0), arrayList1);
+				SpeechPart newSpeechPart = new SpeechPart(Game.level.factions.get(0).actors.get(0), arrayList1);
 				Game.level.script.speechParts.add(newSpeechPart);
 				updateSpeechPartsButtons();
 				SpeechPartSettingsWindow.this.editor.clearSelectedObject();
-				SpeechPartSettingsWindow.this.editor
-						.depressButtonsSettingsAndDetailsButtons();
+				SpeechPartSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
 			}
 		};
 		updateSpeechPartsButtons();
@@ -65,8 +62,7 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 		for (int i = 0; i < Game.level.script.speechParts.size(); i++) {
 			final int index = i;
 
-			final SettingsWindowButton speechPartButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30,
+			final SettingsWindowButton speechPartButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
 					Game.level.script.speechParts.get(index), true, true, this) {
 
 				@Override
@@ -94,9 +90,8 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					speechPartButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, Game.level.script.speechParts.get(index),
-							editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200,
+							Game.level.script.speechParts.get(index), editor);
 				}
 			};
 			if (speechPartButton.object == editor.objectToEdit)

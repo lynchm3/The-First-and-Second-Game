@@ -50,10 +50,8 @@ public class ShaderLesson5 extends SimpleGame {
 
 		try {
 			// load our texture with linear filter
-			tex = new Texture(Util.getResource("res/slider.png"),
-					Texture.LINEAR);
-			tex2 = new Texture(Util.getResource("res/tiles.png"),
-					Texture.LINEAR);
+			tex = new Texture(Util.getResource("res/slider.png"), Texture.LINEAR);
+			tex2 = new Texture(Util.getResource("res/tiles.png"), Texture.LINEAR);
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode texture");
 		}
@@ -68,13 +66,11 @@ public class ShaderLesson5 extends SimpleGame {
 			blurTargetB = new FrameBuffer(FBO_SIZE, FBO_SIZE, Texture.LINEAR);
 
 			// our basic pass-through vertex shader
-			final String VERT = Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson5.vert"));
+			final String VERT = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson5.vert"));
 
 			// our fragment shader, which does the blur in one direction at a
 			// time
-			final String FRAG = Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson5.frag"));
+			final String FRAG = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson5.frag"));
 
 			// create our shader program
 			blurShader = new ShaderProgram(VERT, FRAG, SpriteBatch.ATTRIBUTES);
@@ -165,8 +161,7 @@ public class ShaderLesson5 extends SimpleGame {
 		blurShader.setUniformf("dir", 0f, 1f);
 
 		// update Y-axis blur radius based on mouse
-		float mouseYAmt = (Display.getHeight() - Mouse.getY() - 1)
-				/ (float) Display.getHeight();
+		float mouseYAmt = (Display.getHeight() - Mouse.getY() - 1) / (float) Display.getHeight();
 		blurShader.setUniformf("radius", mouseYAmt * MAX_BLUR);
 
 		// draw the horizontally-blurred FBO B to the screen, applying the

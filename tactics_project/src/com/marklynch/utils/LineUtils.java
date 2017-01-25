@@ -8,8 +8,7 @@ import com.marklynch.Game;
 
 public class LineUtils {
 
-	public static void drawLine(Color color, float x1, float y1, float x2,
-			float y2, float lineWidth) {
+	public static void drawLine(Color color, float x1, float y1, float x2, float y2, float lineWidth) {
 		GL11.glLineWidth(lineWidth * Game.zoom);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4f(color.r, color.g, color.b, color.a);

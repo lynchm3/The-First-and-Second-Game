@@ -5,8 +5,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import mdesl.graphics.Texture;
 
 public class WeaponTemplate {
-	public final static String[] editableAttributes = { "name", "imageTexture",
-			"damage", "minRange", "maxRange" };
+	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange" };
 
 	// attributes
 	public float damage = 0;
@@ -18,8 +17,7 @@ public class WeaponTemplate {
 	public transient Texture imageTexture = null;
 	public String name;
 
-	public WeaponTemplate(String name, float damage, float minRange, float maxRange,
-			String imagePath) {
+	public WeaponTemplate(String name, float damage, float minRange, float maxRange, String imagePath) {
 		super();
 		this.name = name;
 		this.damage = damage;
@@ -32,9 +30,8 @@ public class WeaponTemplate {
 	public void loadImages() {
 		this.imageTexture = getGlobalImage(imagePath);
 	}
-	
+
 	public Weapon makeWeapon() {
-		return new Weapon(new String(name), damage, minRange, maxRange,
-				new String(imagePath));
+		return new Weapon(new String(name), damage, minRange, maxRange, new String(imagePath));
 	}
 }

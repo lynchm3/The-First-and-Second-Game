@@ -7,8 +7,7 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 
 public class ScriptEventInlineSpeech extends ScriptEvent {
 
-	public final static String[] editableAttributes = { "name",
-			"blockUserInput", "scriptTrigger", "speechParts" };
+	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "speechParts" };
 
 	public Vector<SpeechPart> speechParts;
 	public transient int speechIndex = 0;
@@ -19,8 +18,8 @@ public class ScriptEventInlineSpeech extends ScriptEvent {
 		name = "ScriptEventInlineSpeech";
 	}
 
-	public ScriptEventInlineSpeech(boolean blockUserInput,
-			Vector<SpeechPart> speechParts, ScriptTrigger scriptTrigger) {
+	public ScriptEventInlineSpeech(boolean blockUserInput, Vector<SpeechPart> speechParts,
+			ScriptTrigger scriptTrigger) {
 		super(blockUserInput, scriptTrigger);
 		this.speechParts = speechParts;
 		name = "ScriptEventInlineSpeech";

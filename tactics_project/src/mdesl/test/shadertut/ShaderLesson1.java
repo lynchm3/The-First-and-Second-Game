@@ -20,38 +20,39 @@ public class ShaderLesson1 extends SimpleGame {
 		game.start();
 	}
 
-	//our texture
+	// our texture
 	Texture tex;
-	
-	//our sprite batch
+
+	// our sprite batch
 	SpriteBatch batch;
 
 	protected void create() throws LWJGLException {
 		super.create();
 
-		//this will be ignored in this lesson... 
+		// this will be ignored in this lesson...
 		try {
 			tex = new Texture(Util.getResource("res/grass.png"), Texture.NEAREST);
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode texture");
 		}
-		
-		//load our shader program and sprite batch
+
+		// load our shader program and sprite batch
 		try {
 			final String VERTEX = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson1.vert"));
 			final String FRAGMENT = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson1.frag"));
-			
-			//create our shader program -- be sure to pass SpriteBatch's default attributes!
+
+			// create our shader program -- be sure to pass SpriteBatch's
+			// default attributes!
 			ShaderProgram program = new ShaderProgram(VERTEX, FRAGMENT, SpriteBatch.ATTRIBUTES);
-			
-			//Good idea to log any warnings if they exist
-			if (program.getLog().length()!=0)
+
+			// Good idea to log any warnings if they exist
+			if (program.getLog().length() != 0)
 				System.out.println(program.getLog());
-			
-			//create our sprite batch
+
+			// create our sprite batch
 			batch = new SpriteBatch(program);
-		} catch (Exception e) { 
-			//simple exception handling...
+		} catch (Exception e) {
+			// simple exception handling...
 			e.printStackTrace();
 			System.exit(0);
 		}

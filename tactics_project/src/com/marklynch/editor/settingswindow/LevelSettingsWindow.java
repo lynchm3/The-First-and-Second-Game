@@ -30,14 +30,12 @@ public class LevelSettingsWindow extends SettingsWindow {
 		super(width, editor);
 
 		// Width Button
-		final SettingsWindowButton widthButton = new SettingsWindowButton(0,
-				100, 200, 30, "Level Width: " + Game.level.width, true, true,
-				this) {
+		final SettingsWindowButton widthButton = new SettingsWindowButton(0, 100, 200, 30,
+				"Level Width: " + Game.level.width, true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
-				if (48 <= character && character <= 57
-						&& textEntered.length() < 2) {
+				if (48 <= character && character <= 57 && textEntered.length() < 2) {
 					this.textEntered += character;
 					this.text = "Level Width: " + textEntered;
 				}
@@ -57,8 +55,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void backTyped() {
 				if (textEntered.length() > 0) {
-					this.textEntered = this.textEntered.substring(0,
-							this.textEntered.length() - 1);
+					this.textEntered = this.textEntered.substring(0, this.textEntered.length() - 1);
 					this.text = "Level Width: " + textEntered;
 				}
 			}
@@ -83,14 +80,12 @@ public class LevelSettingsWindow extends SettingsWindow {
 		buttons.add(widthButton);
 
 		// Height Button
-		final SettingsWindowButton heightButton = new SettingsWindowButton(0,
-				130, 200, 30, "Level Height: " + Game.level.height, true, true,
-				this) {
+		final SettingsWindowButton heightButton = new SettingsWindowButton(0, 130, 200, 30,
+				"Level Height: " + Game.level.height, true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
-				if (48 <= character && character <= 57
-						&& textEntered.length() < 2) {
+				if (48 <= character && character <= 57 && textEntered.length() < 2) {
 					this.textEntered += character;
 				}
 				this.text = "Level Height: " + textEntered;
@@ -109,8 +104,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void backTyped() {
 				if (textEntered.length() > 0) {
-					this.textEntered = this.textEntered.substring(0,
-							this.textEntered.length() - 1);
+					this.textEntered = this.textEntered.substring(0, this.textEntered.length() - 1);
 					this.text = "Level Height: " + textEntered;
 				}
 			}
@@ -134,8 +128,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 		buttons.add(heightButton);
 
 		// Play lvl Button
-		final SettingsWindowButton playLevelButton = new SettingsWindowButton(
-				0, 300, 200, 30, "Play Level", true, true, this) {
+		final SettingsWindowButton playLevelButton = new SettingsWindowButton(0, 300, 200, 30, "Play Level", true, true,
+				this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -157,8 +151,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				Game.level.currentFactionMoving = Game.level.factions
-						.get(Game.level.currentFactionMovingIndex);
+				Game.level.currentFactionMoving = Game.level.factions.get(Game.level.currentFactionMovingIndex);
 				Game.level.turn = 1;
 				Game.level = Game.level;
 				Game.editorMode = false;
@@ -168,8 +161,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 		buttons.add(playLevelButton);
 
 		// Save lvl Button
-		final SettingsWindowButton saveLevelButton = new SettingsWindowButton(
-				0, 400, 200, 30, "Save Level", true, true, this) {
+		final SettingsWindowButton saveLevelButton = new SettingsWindowButton(0, 400, 200, 30, "Save Level", true, true,
+				this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -192,21 +185,16 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				Gson gson = new GsonBuilder()
-						.setPrettyPrinting()
-						.registerTypeAdapterFactory(
-								new Faction.FactionTypeAdapterFactory())
+				Gson gson = new GsonBuilder().setPrettyPrinting()
+						.registerTypeAdapterFactory(new Faction.FactionTypeAdapterFactory())
 						// .registerTypeAdapterFactory(
 						// new
 						// ScriptTriggerActorSelected.ScriptTriggerActorSelectedAdapterFactory())
 						// .registerTypeAdapter(Object.class,
 						// new SubClassFriendlyAdapter<Object>())
-						.registerTypeAdapter(ScriptEvent.class,
-								new SubClassFriendlyAdapter<ScriptEvent>())
-						.registerTypeAdapter(ScriptTrigger.class,
-								new SubClassFriendlyAdapter<ScriptTrigger>())
-						.registerTypeAdapter(AIRoutine.class,
-								new SubClassFriendlyAdapter<AIRoutine>()).create();
+						.registerTypeAdapter(ScriptEvent.class, new SubClassFriendlyAdapter<ScriptEvent>())
+						.registerTypeAdapter(ScriptTrigger.class, new SubClassFriendlyAdapter<ScriptTrigger>())
+						.registerTypeAdapter(AIRoutine.class, new SubClassFriendlyAdapter<AIRoutine>()).create();
 
 				String json = gson.toJson(Game.level);
 				FileUtils.saveFile(json);
@@ -246,8 +234,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 		buttons.add(saveLevelButton);
 
 		// Load lvl Button
-		final SettingsWindowButton loadLevelButton = new SettingsWindowButton(
-				0, 500, 200, 30, "Load Level", true, true, this) {
+		final SettingsWindowButton loadLevelButton = new SettingsWindowButton(0, 500, 200, 30, "Load Level", true, true,
+				this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -270,21 +258,16 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				Gson gson = new GsonBuilder()
-						.setPrettyPrinting()
-						.registerTypeAdapterFactory(
-								new Faction.FactionTypeAdapterFactory())
+				Gson gson = new GsonBuilder().setPrettyPrinting()
+						.registerTypeAdapterFactory(new Faction.FactionTypeAdapterFactory())
 						// .registerTypeAdapterFactory(
 						// new
 						// ScriptTriggerActorSelected.ScriptTriggerActorSelectedAdapterFactory())
 						// .registerTypeAdapter(Object.class,
 						// new SubClassFriendlyAdapter<>())
-						.registerTypeAdapter(ScriptEvent.class,
-								new SubClassFriendlyAdapter<ScriptEvent>())
-						.registerTypeAdapter(ScriptTrigger.class,
-								new SubClassFriendlyAdapter<ScriptTrigger>())
-						.registerTypeAdapter(AIRoutine.class,
-								new SubClassFriendlyAdapter<AIRoutine>()).create();
+						.registerTypeAdapter(ScriptEvent.class, new SubClassFriendlyAdapter<ScriptEvent>())
+						.registerTypeAdapter(ScriptTrigger.class, new SubClassFriendlyAdapter<ScriptTrigger>())
+						.registerTypeAdapter(AIRoutine.class, new SubClassFriendlyAdapter<AIRoutine>()).create();
 				String json = FileUtils.openFile();
 				// FileUtils.saveFile(json);
 				if (json != null) {
@@ -308,15 +291,13 @@ public class LevelSettingsWindow extends SettingsWindow {
 		// buttons.add(addFactionButton);
 	}
 
-	public static class SubClassFriendlyAdapter<C> implements
-			JsonSerializer<C>, JsonDeserializer<C> {
+	public static class SubClassFriendlyAdapter<C> implements JsonSerializer<C>, JsonDeserializer<C> {
 
 		private static final String CLASSNAME = "CLASSNAME";
 		private static final String INSTANCE = "INSTANCE";
 
 		@Override
-		public JsonElement serialize(C src, Type typeOfSrc,
-				JsonSerializationContext context) {
+		public JsonElement serialize(C src, Type typeOfSrc, JsonSerializationContext context) {
 
 			if (src instanceof ScriptTriggerActorSelected) {
 				ScriptTriggerActorSelected scriptTriggerActorSelected = (ScriptTriggerActorSelected) src;
@@ -333,8 +314,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 		}
 
 		@Override
-		public C deserialize(JsonElement json, Type typeOfT,
-				JsonDeserializationContext context) throws JsonParseException {
+		public C deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
 			JsonObject jsonObject = json.getAsJsonObject();
 			JsonPrimitive prim = (JsonPrimitive) jsonObject.get(CLASSNAME);
 			String className = prim.getAsString();

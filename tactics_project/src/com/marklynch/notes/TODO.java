@@ -1,19 +1,24 @@
 package com.marklynch.notes;
 
 public class TODO {
-	
-	//Make the top tabs auto organize themselves, can use font.size to auto size	
-	//InterfaceSelectionWindow and ClassSelection Window can be merged or subclassed in to eachother
-	//location and owner interfaces
-	//Object and SQuare implement location
-	//Actor and Faction implement owner
-	
-	//Add a title to the class selection window and instance selection window
-	
-	//Slider for editor to only list items within X distance, or those on screen.
-	//So for actors for example, you can slid all the way to the right to list all actors, or all the way to the left and it will only list those on screen in the settings menu on the left
-	
-	//Junk objects automatically give you money, like in Dishonoured
+
+	// Make the top tabs auto organize themselves, can use font.size to auto
+	// size
+	// InterfaceSelectionWindow and ClassSelection Window can be merged or
+	// subclassed in to eachother
+	// location and owner interfaces
+	// Object and SQuare implement location
+	// Actor and Faction implement owner
+
+	// Add a title to the class selection window and instance selection window
+
+	// Slider for editor to only list items within X distance, or those on
+	// screen.
+	// So for actors for example, you can slid all the way to the right to list
+	// all actors, or all the way to the left and it will only list those on
+	// screen in the settings menu on the left
+
+	// Junk objects automatically give you money, like in Dishonoured
 
 	// TODO write a cat that will run away from characters that get too close,
 	// and will run off the screen after being disturbed too many times :D

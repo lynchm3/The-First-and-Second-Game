@@ -126,8 +126,7 @@ public class SoundTut {
 
 			// you can play wavs by loading the complete thing into
 			// a sound
-			wavEffect = AudioLoader.getAudio("WAV",
-					ResourceLoader.getResourceAsStream("res/FancyPants.wav"));
+			wavEffect = AudioLoader.getAudio("WAV", ResourceLoader.getResourceAsStream("res/FancyPants.wav"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -23,14 +23,11 @@ import mdesl.graphics.Texture;
 
 public class TextUtils {
 
-	public static void printTextWithImages(Object[] contents, float posX,
-			float posY, float maxWidth, boolean wrap) {
-		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY,
-				maxWidth, wrap);
+	public static void printTextWithImages(Object[] contents, float posX, float posY, float maxWidth, boolean wrap) {
+		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY, maxWidth, wrap);
 	}
 
-	public static void printTextWithImages(ArrayList contents, float posX,
-			float posY, float maxWidth, boolean wrap) {
+	public static void printTextWithImages(ArrayList contents, float posX, float posY, float maxWidth, boolean wrap) {
 
 		if (contents == null)
 			return;
@@ -40,15 +37,13 @@ public class TextUtils {
 		Game.activeBatch.setColor(Color.WHITE);
 
 		for (Object content : contents) {
-			if (content instanceof String || content instanceof StringWithColor
-					|| content instanceof Integer || content instanceof Float
-					|| content instanceof Boolean) {
+			if (content instanceof String || content instanceof StringWithColor || content instanceof Integer
+					|| content instanceof Float || content instanceof Boolean) {
 
 				String string = null;
 				Color color = Color.WHITE;
 
-				if (content instanceof Integer || content instanceof Float
-						|| content instanceof Boolean) {
+				if (content instanceof Integer || content instanceof Float || content instanceof Boolean) {
 					string = "" + content;
 				} else if (content instanceof String) {
 					string = (String) content;
@@ -75,8 +70,7 @@ public class TextUtils {
 					}
 
 					// GameObject.font.
-					Game.font.drawText(Game.activeBatch, stringPart, posX
-							+ offsetX, posY + offsetY);
+					Game.font.drawText(Game.activeBatch, stringPart, posX + offsetX, posY + offsetY);
 
 					offsetX += width;
 
@@ -92,9 +86,8 @@ public class TextUtils {
 						return;
 					}
 				}
-				TextureUtils.drawTexture((Texture) content, posX + offsetX,
-						posX + offsetX + 20, posY + offsetY, posY + offsetY
-								+ 20);
+				TextureUtils.drawTexture((Texture) content, posX + offsetX, posX + offsetX + 20, posY + offsetY,
+						posY + offsetY + 20);
 				offsetX += width;
 
 			} else if (content instanceof GameObject) {
@@ -119,18 +112,15 @@ public class TextUtils {
 				if (gameObject instanceof Actor) {
 					Actor actor = (Actor) gameObject;
 					Game.activeBatch.setColor(actor.faction.color);
-					Game.font.drawText(Game.activeBatch, gameObject.name, posX
-							+ offsetX, posY + offsetY);
+					Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
 				} else {
-					Game.font.drawText(Game.activeBatch, gameObject.name, posX
-							+ offsetX, posY + offsetY);
+					Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
 				}
 				offsetX += textWidth;
 
 				// Image
 				float x = posX + offsetX;
-				TextureUtils.drawTexture(gameObject.imageTexture, x, x + 20,
-						posY + offsetY, posY + offsetY + 20);
+				TextureUtils.drawTexture(gameObject.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 
 			} else if (content instanceof Weapon || content instanceof WeaponTemplate) {
@@ -151,14 +141,12 @@ public class TextUtils {
 				}
 
 				// Name
-				Game.font.drawText(Game.activeBatch, weaponTemplate.name, posX
-						+ offsetX, posY + offsetY);
+				Game.font.drawText(Game.activeBatch, weaponTemplate.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
 				float x = posX + offsetX;
-				TextureUtils.drawTexture(weaponTemplate.imageTexture, x, x + 20, posY
-						+ offsetY, posY + offsetY + 20);
+				TextureUtils.drawTexture(weaponTemplate.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 
 			} else if (content instanceof Weapons) {
@@ -168,8 +156,7 @@ public class TextUtils {
 				for (Weapon weapon : weapons.weapons) {
 					// Image
 					float x = posX + offsetX;
-					TextureUtils.drawTexture(weapon.imageTexture, x, x + 20,
-							posY + offsetY, posY + offsetY + 20);
+					TextureUtils.drawTexture(weapon.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 					offsetX += 20;
 				}
 
@@ -192,15 +179,13 @@ public class TextUtils {
 				// Name
 
 				Game.activeBatch.setColor(faction.color);
-				Game.font.drawText(Game.activeBatch, faction.name, posX
-						+ offsetX, posY + offsetY);
+				Game.font.drawText(Game.activeBatch, faction.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
 
 				float x = posX + offsetX;
-				TextureUtils.drawTexture(faction.imageTexture, x, x + 20, posY
-						+ offsetY, posY + offsetY + 20);
+				TextureUtils.drawTexture(faction.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 
 			} else if (content instanceof Decoration) {
@@ -221,15 +206,13 @@ public class TextUtils {
 
 				// Name
 
-				Game.font.drawText(Game.activeBatch, decoration.name, posX
-						+ offsetX, posY + offsetY);
+				Game.font.drawText(Game.activeBatch, decoration.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
 
 				float x = posX + offsetX;
-				TextureUtils.drawTexture(decoration.imageTexture, x, x + 20,
-						posY + offsetY, posY + offsetY + 20);
+				TextureUtils.drawTexture(decoration.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 
 			} else if (content instanceof Color) {
@@ -239,8 +222,7 @@ public class TextUtils {
 				Color color = (Color) content;
 
 				float x = posX + offsetX;
-				QuadUtils.drawQuad(color, x, x + 20, posY + offsetY, posY
-						+ offsetY + 20);
+				QuadUtils.drawQuad(color, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += 20;
 
 			} else if (content instanceof ScriptEvent) {
@@ -248,8 +230,7 @@ public class TextUtils {
 				ScriptEvent scriptEvent = (ScriptEvent) content;
 
 				float textWidth = Game.font.getWidth(scriptEvent.name);
-				Game.font.drawText(Game.activeBatch, scriptEvent.name, posX
-						+ offsetX, posY + offsetY);
+				Game.font.drawText(Game.activeBatch, scriptEvent.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof ScriptTrigger) {
@@ -257,8 +238,7 @@ public class TextUtils {
 				ScriptTrigger scriptTrigger = (ScriptTrigger) content;
 
 				float textWidth = Game.font.getWidth(scriptTrigger.name);
-				Game.font.drawText(Game.activeBatch, scriptTrigger.name, posX
-						+ offsetX, posY + offsetY);
+				Game.font.drawText(Game.activeBatch, scriptTrigger.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof Class) {
@@ -266,8 +246,7 @@ public class TextUtils {
 				Class klass = (Class) content;
 
 				float textWidth = Game.font.getWidth(klass.getSimpleName());
-				Game.font.drawText(Game.activeBatch, klass.getSimpleName(),
-						posX + offsetX, posY + offsetY);
+				Game.font.drawText(Game.activeBatch, klass.getSimpleName(), posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof AIRoutine) {
@@ -275,8 +254,7 @@ public class TextUtils {
 				AIRoutine ai = (AIRoutine) content;
 
 				float textWidth = Game.font.getWidth(ai.name);
-				Game.font.drawText(Game.activeBatch, ai.name, posX + offsetX,
-						posY + offsetY);
+				Game.font.drawText(Game.activeBatch, ai.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof Square) {
@@ -285,20 +263,17 @@ public class TextUtils {
 				String string = "Square @ " + square.x + " , " + square.y;
 
 				float textWidth = Game.font.getWidth(string);
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX,
-						posY + offsetY);
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof FactionRelationship) {
 
 				FactionRelationship factionRelationship = (FactionRelationship) content;
-				String string = "" + factionRelationship.source + " -> "
-						+ factionRelationship.target + " ("
+				String string = "" + factionRelationship.source + " -> " + factionRelationship.target + " ("
 						+ factionRelationship.relationship + ")";
 
 				float textWidth = Game.font.getWidth(string);
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX,
-						posY + offsetY);
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof SpeechPart) {
@@ -311,8 +286,7 @@ public class TextUtils {
 				string = "\"" + string + "\"";
 
 				float textWidth = Game.font.getWidth(string);
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX,
-						posY + offsetY);
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			}

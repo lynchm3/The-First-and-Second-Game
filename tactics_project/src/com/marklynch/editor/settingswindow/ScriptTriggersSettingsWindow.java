@@ -29,8 +29,8 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 	public void updateScriptsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addScriptTriggerButton = new SettingsWindowButton(
-				0, 100, 200, 30, "ADD SCRIPT TRIGGER", true, true, this) {
+		final SettingsWindowButton addScriptTriggerButton = new SettingsWindowButton(0, 100, 200, 30,
+				"ADD SCRIPT TRIGGER", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -66,8 +66,8 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 				classes.add(ScriptTriggerSquareUnoccupied.class);
 				classes.add(ScriptTriggerTurnStart.class);
 
-				editor.classSelectionWindow = new ClassSelectionWindow(classes,
-						editor, ScriptTrigger.class, "Select a Script Trigger Type");
+				editor.classSelectionWindow = new ClassSelectionWindow(classes, editor, ScriptTrigger.class,
+						"Select a Script Trigger Type");
 			}
 		};
 		buttons.add(addScriptTriggerButton);
@@ -77,8 +77,7 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 
 			final int index = count;
 
-			final SettingsWindowButton scriptButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30,
+			final SettingsWindowButton scriptButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
 					Game.level.script.scriptTriggers.get(i), true, true, this) {
 
 				@Override
@@ -106,9 +105,8 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					scriptButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, Game.level.script.scriptTriggers.get(index),
-							editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200,
+							Game.level.script.scriptTriggers.get(index), editor);
 
 				}
 			};

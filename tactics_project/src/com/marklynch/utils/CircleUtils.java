@@ -12,8 +12,7 @@ public class CircleUtils {
 		GL11.glBegin(GL11.GL_LINE_LOOP);
 		for (int i = 0; i < 360; i++) {
 			double degInRad = Math.toRadians(i);
-			GL11.glVertex2d(Math.cos(degInRad) * radius + x, Math.sin(degInRad)
-					* radius + y);
+			GL11.glVertex2d(Math.cos(degInRad) * radius + x, Math.sin(degInRad) * radius + y);
 		}
 		GL11.glEnd();
 	}

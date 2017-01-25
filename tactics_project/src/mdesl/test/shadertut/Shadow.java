@@ -85,28 +85,18 @@ public class Shadow extends SimpleGame {
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			batch = new SpriteBatch();
 			ShaderProgram.setStrictMode(false);
-			shadowMapShader = createShader(
-					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_pass.vert")),
-					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_map.frag")));
-			shadowRenderShader = createShader(
-					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_pass.vert")),
-					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_render.frag")));
-			casterSprites = new Texture(Util.getResource("res/cat4.png"),
-					Texture.LINEAR);
-			occludersFBO = new FrameBuffer((int) lightSize, (int) lightSize,
-					Texture.LINEAR);
+			shadowMapShader = createShader(Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_pass.vert")),
+					Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_map.frag")));
+			shadowRenderShader = createShader(Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_pass.vert")),
+					Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_render.frag")));
+			casterSprites = new Texture(Util.getResource("res/cat4.png"), Texture.LINEAR);
+			occludersFBO = new FrameBuffer((int) lightSize, (int) lightSize, Texture.LINEAR);
 			shadowMapFBO = new FrameBuffer((int) lightSize, 1, Texture.LINEAR);
 			Texture shadowMapTex = shadowMapFBO.getTexture();
 			shadowMapTex.setFilter(Texture.LINEAR, Texture.LINEAR);
 			shadowMapTex.setWrap(Texture.REPEAT);
-			Texture fontTexture = new Texture(
-					Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
-			font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
-					fontTexture);
+			Texture fontTexture = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+			font = new BitmapFont(Util.getResource("res/ptsans.fnt"), fontTexture);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(0);
@@ -169,8 +159,7 @@ public class Shadow extends SimpleGame {
 
 	static Color randomColor() {
 		float intensity = (float) Math.random() * 0.5f + 0.5f;
-		return new Color((float) Math.random(), (float) Math.random(),
-				(float) Math.random(), intensity);
+		return new Color((float) Math.random(), (float) Math.random(), (float) Math.random(), intensity);
 	}
 
 	void renderLight(Light light) {
@@ -191,9 +180,7 @@ public class Shadow extends SimpleGame {
 		}
 		batch.resize(occludersFBO.getWidth(), occludersFBO.getHeight());
 		batch.begin();
-		batch.getViewMatrix().translate(
-				new Vector2f(-(light.x - lightSize / 2f),
-						-(light.y - lightSize / 2f)));
+		batch.getViewMatrix().translate(new Vector2f(-(light.x - lightSize / 2f), -(light.y - lightSize / 2f)));
 		batch.updateUniforms();
 		batch.draw(casterSprites, 0, 0);
 		batch.flush();
@@ -212,8 +199,7 @@ public class Shadow extends SimpleGame {
 		batch.begin();
 		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
-		batch.draw(this.occludersFBO.getTexture(), 0, 0, lightSize,
-				shadowMapFBO.getHeight());
+		batch.draw(this.occludersFBO.getTexture(), 0, 0, lightSize, shadowMapFBO.getHeight());
 		batch.flush();
 		shadowMapFBO.end();
 		batch.end();
@@ -231,8 +217,8 @@ public class Shadow extends SimpleGame {
 		batch.resize(Display.getWidth(), Display.getHeight());
 		batch.begin();
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-		batch.draw(this.shadowMapFBO.getTexture(), light.x - lightSize / 2f,
-				light.y - lightSize / 2f, lightSize, lightSize);
+		batch.draw(this.shadowMapFBO.getTexture(), light.x - lightSize / 2f, light.y - lightSize / 2f, lightSize,
+				lightSize);
 		batch.flush();
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		batch.end();

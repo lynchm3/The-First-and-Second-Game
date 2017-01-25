@@ -15,11 +15,9 @@ public class GameObjectExploder extends GameObject {
 
 	public TrianglePiece[] trianglePieces;
 
-	public GameObjectExploder(String name, int health, int strength,
-			int dexterity, int intelligence, int endurance, String imagePath,
-			Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
-		super(name, health, strength, dexterity, intelligence, endurance,
-				imagePath, squareGameObjectIsOn, weapons);
+	public GameObjectExploder(String name, int health, int strength, int dexterity, int intelligence, int endurance,
+			String imagePath, Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
+		super(name, health, strength, dexterity, intelligence, endurance, imagePath, squareGameObjectIsOn, weapons);
 	}
 
 	@Override
@@ -45,39 +43,29 @@ public class GameObjectExploder extends GameObject {
 		float pieceWidth = this.imageTexture.getWidth() / root;
 		float pieceHeight = this.imageTexture.getHeight() / root;
 
-		float positionXInPixels = this.squareGameObjectIsOn.x
-				* (int) Game.SQUARE_WIDTH;
-		float positionYInPixels = this.squareGameObjectIsOn.y
-				* (int) Game.SQUARE_HEIGHT;
+		float positionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
+		float positionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
 
 		for (float i = 0; i < root; i++) {
 			for (float j = 0; j < root; j++) {
 
 				SquarePiece squarePiece = squarePieces[(int) (i * root + j)] = new SquarePiece();
 				squarePiece.x1 = i * pieceWidth + positionXInPixels;
-				squarePiece.x2 = i * pieceWidth + pieceWidth
-						+ positionXInPixels;
-				squarePiece.x3 = i * pieceWidth + pieceWidth
-						+ positionXInPixels;
+				squarePiece.x2 = i * pieceWidth + pieceWidth + positionXInPixels;
+				squarePiece.x3 = i * pieceWidth + pieceWidth + positionXInPixels;
 				squarePiece.x4 = i * pieceWidth + positionXInPixels;
 				squarePiece.y1 = j * pieceHeight + positionYInPixels;
 				squarePiece.y2 = j * pieceHeight + positionYInPixels;
-				squarePiece.y3 = j * pieceHeight + pieceHeight
-						+ positionYInPixels;
-				squarePiece.y4 = j * pieceHeight + pieceHeight
-						+ positionYInPixels;
+				squarePiece.y3 = j * pieceHeight + pieceHeight + positionYInPixels;
+				squarePiece.y4 = j * pieceHeight + pieceHeight + positionYInPixels;
 				squarePiece.u1 = (i * pieceWidth) / imageTexture.getWidth();
-				squarePiece.u2 = (i * pieceWidth + pieceWidth)
-						/ imageTexture.getWidth();
-				squarePiece.u3 = (i * pieceWidth + pieceWidth)
-						/ imageTexture.getWidth();
+				squarePiece.u2 = (i * pieceWidth + pieceWidth) / imageTexture.getWidth();
+				squarePiece.u3 = (i * pieceWidth + pieceWidth) / imageTexture.getWidth();
 				squarePiece.u4 = (i * pieceWidth) / imageTexture.getWidth();
 				squarePiece.v1 = (j * pieceHeight) / imageTexture.getHeight();
 				squarePiece.v2 = (j * pieceHeight) / imageTexture.getHeight();
-				squarePiece.v3 = (j * pieceHeight + pieceHeight)
-						/ imageTexture.getHeight();
-				squarePiece.v4 = (j * pieceHeight + pieceHeight)
-						/ imageTexture.getHeight();
+				squarePiece.v3 = (j * pieceHeight + pieceHeight) / imageTexture.getHeight();
+				squarePiece.v4 = (j * pieceHeight + pieceHeight) / imageTexture.getHeight();
 
 				squarePiece.centreX = squarePiece.x1 + pieceWidth / 2f;
 				squarePiece.centreY = squarePiece.y1 + pieceHeight / 2f;
@@ -219,10 +207,8 @@ public class GameObjectExploder extends GameObject {
 
 		public void draw() {
 
-			QuadUtils.drawQuad(imageTexture, this.x1, this.x2, this.x3,
-					this.x4, this.y1, this.y2, this.y3, this.y4, this.u1,
-					this.u2, this.u3, this.u4, this.v1, this.v2, this.v3,
-					this.v4);
+			QuadUtils.drawQuad(imageTexture, this.x1, this.x2, this.x3, this.x4, this.y1, this.y2, this.y3, this.y4,
+					this.u1, this.u2, this.u3, this.u4, this.v1, this.v2, this.v3, this.v4);
 		}
 
 		public void update() {
@@ -244,26 +230,26 @@ public class GameObjectExploder extends GameObject {
 			this.centreY += velocityY;
 
 			float[] pt1 = { x1, y1 };
-			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity),
-					centreX, centreY).transform(pt1, 0, pt1, 0, 1);
+			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity), centreX, centreY).transform(pt1, 0, pt1,
+					0, 1);
 			x1 = pt1[0];
 			y1 = pt1[1];
 
 			float[] pt2 = { x2, y2 };
-			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity),
-					centreX, centreY).transform(pt2, 0, pt2, 0, 1);
+			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity), centreX, centreY).transform(pt2, 0, pt2,
+					0, 1);
 			x2 = pt2[0];
 			y2 = pt2[1];
 
 			float[] pt3 = { x3, y3 };
-			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity),
-					centreX, centreY).transform(pt3, 0, pt3, 0, 1);
+			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity), centreX, centreY).transform(pt3, 0, pt3,
+					0, 1);
 			x3 = pt3[0];
 			y3 = pt3[1];
 
 			float[] pt4 = { x4, y4 };
-			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity),
-					centreX, centreY).transform(pt4, 0, pt4, 0, 1);
+			AffineTransform.getRotateInstance(Math.toRadians(rotationVelocity), centreX, centreY).transform(pt4, 0, pt4,
+					0, 1);
 			x4 = pt4[0];
 			y4 = pt4[1];
 
@@ -323,9 +309,8 @@ public class GameObjectExploder extends GameObject {
 		float rotationVelocityY;
 
 		public void draw() {
-			TriangleUtils.drawTriangle(imageTexture, this.x1, this.x2, this.x3,
-					this.y1, this.y2, this.y3, this.u1, this.u2, this.u3,
-					this.v1, this.v2, this.v3);
+			TriangleUtils.drawTriangle(imageTexture, this.x1, this.x2, this.x3, this.y1, this.y2, this.y3, this.u1,
+					this.u2, this.u3, this.v1, this.v2, this.v3);
 		}
 
 		public void update() {

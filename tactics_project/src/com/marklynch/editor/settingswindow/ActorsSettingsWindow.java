@@ -14,8 +14,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 	public ActorsSettingsWindow(float width, final Editor editor) {
 		super(width, editor);
 
-		addActorsButton = new SettingsWindowButton(0, 100, 200, 30,
-				"ADD ACTORS", true, true, this) {
+		addActorsButton = new SettingsWindowButton(0, 100, 200, 30, "ADD ACTORS", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -44,8 +43,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 
 				addActorsButton.down = !addActorsButton.down;
 				if (addActorsButton.down) {
-					ActorsSettingsWindow.this.editor
-							.depressButtonsSettingsAndDetailsButtons();
+					ActorsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
 					ActorsSettingsWindow.this.editor.clearSelectedObject();
 					addActorsButton.down = true;
 					ActorsSettingsWindow.this.editor.state = STATE.ADD_ACTOR;
@@ -68,8 +66,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 			for (int i = 0; i < faction.actors.size(); i++) {
 				final int index = i;
 
-				final SettingsWindowButton actorButton = new SettingsWindowButton(
-						0, 200 + buttonCount * 30, 200, 30,
+				final SettingsWindowButton actorButton = new SettingsWindowButton(0, 200 + buttonCount * 30, 200, 30,
 						faction.actors.get(index), true, true, this) {
 
 					@Override
@@ -99,8 +96,8 @@ public class ActorsSettingsWindow extends SettingsWindow {
 						editor.depressButtonsSettingsAndDetailsButtons();
 						editor.state = STATE.MOVEABLE_OBJECT_SELECTED;
 						editor.selectedGameObject = faction.actors.get(index);
-						editor.attributesWindow = new AttributesWindow(200,
-								200, 200, editor.selectedGameObject, editor);
+						editor.attributesWindow = new AttributesWindow(200, 200, 200, editor.selectedGameObject,
+								editor);
 						// getButton(editor.selectedGameObject).down = true;
 						actorButton.down = true;
 					}

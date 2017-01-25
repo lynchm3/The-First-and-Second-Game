@@ -39,14 +39,14 @@ import org.lwjgl.opengl.DisplayMode;
 
 /**
  * A bare-bones implementation of a LWJGL application.
+ * 
  * @author davedes
  */
 public abstract class Game {
-	
+
 	// Whether our game loop is running
 	protected boolean running = false;
-	
-	
+
 	/** time at last frame */
 	private long lastFrame;
 	private int fpsTick;
@@ -56,48 +56,47 @@ public abstract class Game {
 	private long lastFPS;
 	/** the delta time in milliseconds */
 	private int delta;
-	
-	
+
 	private boolean mouseWasDown = false;
 	private int lastMouseX, lastMouseY;
-	
+
 	public void setDisplayMode(int width, int height) throws LWJGLException {
 		Display.setDisplayMode(new DisplayMode(width, height));
 	}
-	
+
 	public void setDisplayMode(int width, int height, boolean fullscreen) throws LWJGLException {
 		setDisplayMode(width, height);
 		Display.setFullscreen(fullscreen);
 	}
-		
+
 	// Start our game
 	public void start() throws LWJGLException {
-		// Set up our display 
+		// Set up our display
 		Display.setTitle("Game");
 		Display.setResizable(true);
 		Display.setVSyncEnabled(true);
-		
+
 		Display.create();
-		
+
 		// Create our OpenGL context and initialize any resources
 		create();
-		
+
 		// Starting size...
 		resize();
-		
+
 		running = true;
-		
+
 		delta = tick();
 		lastFPS = getTime();
-		
-		// While we're still running and the user hasn't closed the window... 
+
+		// While we're still running and the user hasn't closed the window...
 		while (running && !Display.isCloseRequested()) {
 			delta = tick();
-			
+
 			// If the game was resized, we need to update our projection
 			if (Display.wasResized())
 				resize();
-			
+
 			Keyboard.poll();
 			while (Keyboard.next()) {
 				char c = Keyboard.getEventCharacter();
@@ -115,97 +114,98 @@ public abstract class Game {
 				int wheel = Mouse.getEventDWheel();
 				int x = Mouse.getEventX();
 				int y = Mouse.getEventY();
-//				System.out.println(x+" "+y+" "+dx+" "+dy+" "+wheel+" "+btnDown);
-				
+				// System.out.println(x+" "+y+" "+dx+" "+dy+" "+wheel+"
+				// "+btnDown);
+
 				if (btnDown) {
 					mouseWasDown = true;
 					mousePressed(x, y, btn);
 				} else if (mouseWasDown) {
 					mouseWasDown = false;
-//					mouseReleased(x, y, btn);	
+					// mouseReleased(x, y, btn);
 				}
-				if (lastMouseX!=x || lastMouseY!=y) {
-//					mouseMoved(x, y, lastMouseX, lastMouseY);
+				if (lastMouseX != x || lastMouseY != y) {
+					// mouseMoved(x, y, lastMouseX, lastMouseY);
 					lastMouseX = x;
-					lastMouseY = y;						
+					lastMouseY = y;
 				}
-				
-				if (wheel!=0) {
-					mouseWheelChanged(wheel/120);
+
+				if (wheel != 0) {
+					mouseWheelChanged(wheel / 120);
 				}
 			}
-			
+
 			// Render the game
 			render();
-			
-			//update FPS ticker
+
+			// update FPS ticker
 			updateFPS();
-			
+
 			// Flip the buffers and sync to 60 FPS
 			Display.update();
 			Display.sync(60);
 		}
-		
+
 		// Dispose any resources and destroy our window
 		dispose();
 		Display.destroy();
 	}
-	
+
 	// Exit our game loop and close the window
 	public void exit() {
 		running = false;
 	}
-	
+
 	protected void keyPressed(int key, char c) {
-		
+
 	}
-	
+
 	protected void keyReleased(int key, char c) {
-		
+
 	}
-	
-//	protected void mouseMoved(int x, int y, int ox, int oy) {
-//		System.out.println("moved");
-//	}
-	
+
+	// protected void mouseMoved(int x, int y, int ox, int oy) {
+	// System.out.println("moved");
+	// }
+
 	protected void mousePressed(int x, int y, int button) {
-	
+
 	}
-//	
-//	protected void mouseReleased(int x, int y, int button) {
-//		System.out.println("rel");
-//	}
-	
+	//
+	// protected void mouseReleased(int x, int y, int button) {
+	// System.out.println("rel");
+	// }
+
 	protected void mouseWheelChanged(int delta) {
 	}
-	
+
 	// Called to setup our game and context
 	protected abstract void create() throws LWJGLException;
-	
+
 	// Called to render our game
 	protected abstract void render() throws LWJGLException;
-	
+
 	// Called to resize our game
 	protected abstract void resize() throws LWJGLException;
-	
+
 	// Called to destroy our game upon exiting
 	protected abstract void dispose() throws LWJGLException;
-	
+
 	public int getDeltaTime() {
 		return delta;
 	}
-	
+
 	public int getFPS() {
 		return fps;
 	}
-	
+
 	private int tick() {
 		long time = getTime();
-		int delta = (int)(time - lastFrame);
+		int delta = (int) (time - lastFrame);
 		lastFrame = time;
 		return delta;
 	}
-	
+
 	public void updateFPS() {
 		if (getTime() - lastFPS > 1000) {
 			fps = fpsTick;
@@ -221,6 +221,6 @@ public abstract class Game {
 	 * @return The system time in milliseconds
 	 */
 	public long getTime() {
-	    return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
 }

@@ -21,8 +21,8 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 	public void updateWeaponsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addWeaponButton = new SettingsWindowButton(
-				0, 100, 200, 30, "ADD WEAPON", true, true, this) {
+		final SettingsWindowButton addWeaponButton = new SettingsWindowButton(0, 100, 200, 30, "ADD WEAPON", true, true,
+				this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -46,11 +46,11 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				
-				ArrayList<WeaponTemplate> weaponTemplates =	editor.weaponTemplates;
 
-				editor.instanceSelectionWindow = new InstanceSelectionWindow<WeaponTemplate>(weaponTemplates,
-						editor, "Select a Weapon Template");
+				ArrayList<WeaponTemplate> weaponTemplates = editor.weaponTemplates;
+
+				editor.instanceSelectionWindow = new InstanceSelectionWindow<WeaponTemplate>(weaponTemplates, editor,
+						"Select a Weapon Template");
 			}
 		};
 		buttons.add(addWeaponButton);
@@ -58,9 +58,8 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 		for (int i = 0; i < editor.weapons.size(); i++) {
 			final int index = i;
 
-			final SettingsWindowButton weaponButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30, editor.weapons.get(i), true,
-					true, this) {
+			final SettingsWindowButton weaponButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
+					editor.weapons.get(i), true, true, this) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -87,8 +86,7 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					weaponButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, editor.weapons.get(index), editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200, editor.weapons.get(index), editor);
 
 				}
 			};

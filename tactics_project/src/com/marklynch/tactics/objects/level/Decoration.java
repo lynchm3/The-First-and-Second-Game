@@ -7,16 +7,15 @@ import com.marklynch.utils.TextureUtils;
 
 public class Decoration {
 
-	public final static String[] editableAttributes = { "name", "x", "y",
-			"width", "height", "imageTexture", "background" };
+	public final static String[] editableAttributes = { "name", "x", "y", "width", "height", "imageTexture",
+			"background" };
 	public String name;
 	public String imageTexturePath;
 	public transient Texture imageTexture = null;
 	public float x, y, width, height;
 	public boolean background;
 
-	public Decoration(String name, float x, float y, float width, float height,
-			boolean background, String imagePath) {
+	public Decoration(String name, float x, float y, float width, float height, boolean background, String imagePath) {
 		super();
 		this.name = name;
 		this.x = x;

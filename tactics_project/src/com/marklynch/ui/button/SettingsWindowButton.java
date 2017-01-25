@@ -17,9 +17,8 @@ public abstract class SettingsWindowButton extends Button {
 
 	public Object object;
 
-	public SettingsWindowButton(float x, float y, float width, float height,
-			Object object, boolean xFromLeft, boolean yFromTop,
-			SettingsWindow settingsWindow) {
+	public SettingsWindowButton(float x, float y, float width, float height, Object object, boolean xFromLeft,
+			boolean yFromTop, SettingsWindow settingsWindow) {
 		super(x, y, width, height, null, null, object);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
@@ -45,35 +44,28 @@ public abstract class SettingsWindowButton extends Button {
 		if (enabled) {
 			if (down) {
 				QuadUtils.drawQuad(Color.BLACK, x, x + width, y, y + height);
-				TextUtils.printTextWithImages(new Object[] { text }, x, y,
-						Integer.MAX_VALUE, true);
+				TextUtils.printTextWithImages(new Object[] { text }, x, y, Integer.MAX_VALUE, true);
 			} else {
-				QuadUtils
-						.drawQuad(Color.DARK_GRAY, x, x + width, y, y + height);
-				TextUtils.printTextWithImages(new Object[] { text }, x, y, 200,
-						false);
+				QuadUtils.drawQuad(Color.DARK_GRAY, x, x + width, y, y + height);
+				TextUtils.printTextWithImages(new Object[] { text }, x, y, 200, false);
 			}
 		} else {
 
 			QuadUtils.drawQuad(Color.RED, x, x + width, y, y + height);
-			TextUtils.printTextWithImages(new Object[] { text }, x, y, 200,
-					false);
+			TextUtils.printTextWithImages(new Object[] { text }, x, y, 200, false);
 		}
 
 	}
 
 	@Override
-	public void drawWithinBounds(float boundsX1, float boundsX2,
-			float boundsY1, float boundsY2) {
+	public void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
 
 		if (enabled) {
-			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, x, x
-					+ width, y, y + height, boundsX1, boundsX2, boundsY1,
-					boundsY2);
+			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, x, x + width, y, y + height, boundsX1, boundsX2,
+					boundsY1, boundsY2);
 		} else {
-			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, x, x
-					+ width, y, y + height, boundsX1, boundsX2, boundsY1,
-					boundsY2);
+			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, x, x + width, y, y + height, boundsX1, boundsX2,
+					boundsY1, boundsY2);
 		}
 
 	}
@@ -81,8 +73,7 @@ public abstract class SettingsWindowButton extends Button {
 	@Override
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
 
-		if (mouseX > x && mouseX < x + width && mouseY > y
-				&& mouseY < y + height) {
+		if (mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height) {
 			return true;
 		}
 		return false;

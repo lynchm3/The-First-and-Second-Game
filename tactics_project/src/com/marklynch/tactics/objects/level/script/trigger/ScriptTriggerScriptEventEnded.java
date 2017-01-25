@@ -26,8 +26,7 @@ public class ScriptTriggerScriptEventEnded extends ScriptTrigger {
 
 	@Override
 	public void postLoad() {
-		scriptEvent = Game.level.script
-				.findScriptEventFromGUID(scriptEventGUID);
+		scriptEvent = Game.level.script.findScriptEventFromGUID(scriptEventGUID);
 	}
 
 	@Override

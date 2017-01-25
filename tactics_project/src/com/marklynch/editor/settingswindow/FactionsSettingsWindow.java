@@ -20,8 +20,8 @@ public class FactionsSettingsWindow extends SettingsWindow {
 	public void updateFactionsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addFactionButton = new SettingsWindowButton(
-				0, 100, 200, 30, "ADD FACTION", true, true, this) {
+		final SettingsWindowButton addFactionButton = new SettingsWindowButton(0, 100, 200, 30, "ADD FACTION", true,
+				true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -48,8 +48,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 				if (Game.level.factions.size() == 10)
 					return;
 
-				Faction newFaction = new Faction("Faction "
-						+ Game.level.factions.size(), Color.RED,
+				Faction newFaction = new Faction("Faction " + Game.level.factions.size(), Color.RED,
 						"faction_blue.png");
 				Game.level.factions.add(newFaction);
 				updateFactionsButtons();
@@ -58,12 +57,8 @@ public class FactionsSettingsWindow extends SettingsWindow {
 
 				for (Faction faction : Game.level.factions) {
 					if (faction != newFaction) {
-						faction.relationships.put(newFaction,
-								new FactionRelationship(-100, faction,
-										newFaction));
-						newFaction.relationships.put(faction,
-								new FactionRelationship(-100, newFaction,
-										faction));
+						faction.relationships.put(newFaction, new FactionRelationship(-100, faction, newFaction));
+						newFaction.relationships.put(faction, new FactionRelationship(-100, newFaction, faction));
 					}
 				}
 
@@ -74,9 +69,8 @@ public class FactionsSettingsWindow extends SettingsWindow {
 		for (int i = 0; i < Game.level.factions.size(); i++) {
 			final int index = i;
 
-			final SettingsWindowButton factionButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30, Game.level.factions.get(i), true,
-					true, this) {
+			final SettingsWindowButton factionButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
+					Game.level.factions.get(i), true, true, this) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -103,8 +97,8 @@ public class FactionsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					factionButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, Game.level.factions.get(index), editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200, Game.level.factions.get(index),
+							editor);
 
 				}
 			};

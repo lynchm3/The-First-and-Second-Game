@@ -14,7 +14,6 @@ public class StringWithColor {
 	}
 
 	public StringWithColor makeCopy() {
-		return new StringWithColor(new String(string), new Color(color.r,
-				color.g, color.b, color.a));
+		return new StringWithColor(new String(string), new Color(color.r, color.g, color.b, color.a));
 	}
 }

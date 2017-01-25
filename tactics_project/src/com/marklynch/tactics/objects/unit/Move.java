@@ -9,8 +9,7 @@ public class Move {
 	public Square squareMovedTo;
 	public int travelCost;
 
-	public Move(Actor actor, Square squareMovedFrom, Square squareMovedTo,
-			int travelCost) {
+	public Move(Actor actor, Square squareMovedFrom, Square squareMovedTo, int travelCost) {
 		super();
 		this.actor = actor;
 		this.squareMovedFrom = squareMovedFrom;

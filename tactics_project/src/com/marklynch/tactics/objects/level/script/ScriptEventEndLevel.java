@@ -11,8 +11,7 @@ import com.marklynch.utils.TextUtils;
 
 public class ScriptEventEndLevel extends ScriptEvent {
 
-	public final static String[] editableAttributes = { "name",
-			"blockUserInput", "scriptTrigger", "text" };
+	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "text" };
 
 	public ArrayList<String> text = new ArrayList<String>();
 	public boolean completed = false;
@@ -21,8 +20,7 @@ public class ScriptEventEndLevel extends ScriptEvent {
 		name = "ScriptEventEndLevel";
 	}
 
-	public ScriptEventEndLevel(boolean blockUserInput,
-			ScriptTrigger scriptTrigger, ArrayList<String> text) {
+	public ScriptEventEndLevel(boolean blockUserInput, ScriptTrigger scriptTrigger, ArrayList<String> text) {
 		super(blockUserInput, scriptTrigger);
 		name = "ScriptEventEndLevel";
 		this.text = text;
@@ -47,8 +45,7 @@ public class ScriptEventEndLevel extends ScriptEvent {
 	@Override
 	public void draw() {
 
-		QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), 0f,
-				Game.windowWidth, 0f, Game.windowHeight);
+		QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), 0f, Game.windowWidth, 0f, Game.windowHeight);
 
 		float posY = Game.windowHeight / 2f;
 

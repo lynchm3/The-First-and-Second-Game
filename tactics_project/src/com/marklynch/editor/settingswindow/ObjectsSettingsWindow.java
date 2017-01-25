@@ -13,8 +13,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 	public ObjectsSettingsWindow(float width, Editor editor) {
 		super(width, editor);
 
-		addObjectsButton = new SettingsWindowButton(0, 100, 200, 30,
-				"ADD OBJECTS", true, true, this) {
+		addObjectsButton = new SettingsWindowButton(0, 100, 200, 30, "ADD OBJECTS", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -42,8 +41,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			public void click() {
 				addObjectsButton.down = !addObjectsButton.down;
 				if (addObjectsButton.down) {
-					ObjectsSettingsWindow.this.editor
-							.depressButtonsSettingsAndDetailsButtons();
+					ObjectsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
 					ObjectsSettingsWindow.this.editor.clearSelectedObject();
 					addObjectsButton.down = true;
 					ObjectsSettingsWindow.this.editor.state = STATE.ADD_OBJECT;
@@ -64,8 +62,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 		for (int i = 0; i < Game.level.inanimateObjects.size(); i++) {
 			final int index = i;
 
-			final SettingsWindowButton objectButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30,
+			final SettingsWindowButton objectButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
 					Game.level.inanimateObjects.get(index), true, true, this) {
 
 				@Override
@@ -94,10 +91,8 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					editor.state = STATE.MOVEABLE_OBJECT_SELECTED;
-					editor.selectedGameObject = Game.level.inanimateObjects
-							.get(index);
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, editor.selectedGameObject, editor);
+					editor.selectedGameObject = Game.level.inanimateObjects.get(index);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200, editor.selectedGameObject, editor);
 					// getButton(editor.selectedGameObject).down = true;
 					objectButton.down = true;
 				}

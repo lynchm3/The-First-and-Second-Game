@@ -74,9 +74,8 @@ public class Level {
 		factions = new ArrayList<Faction>();
 		inanimateObjects = new Vector<GameObject>();
 
-		endTurnButton = new LevelButton(210f, 110f, 200f, 100f,
-				"end_turn_button.png", "end_turn_button.png", "END TURN",
-				false, false);
+		endTurnButton = new LevelButton(210f, 110f, 200f, 100f, "end_turn_button.png", "end_turn_button.png",
+				"END TURN", false, false);
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -84,8 +83,8 @@ public class Level {
 			}
 		});
 		buttons.add(endTurnButton);
-		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png",
-				"undo_button_disabled.png", "UNDO", false, false);
+		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "UNDO",
+				false, false);
 		undoButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -94,9 +93,8 @@ public class Level {
 		});
 		undoButton.enabled = false;
 		buttons.add(undoButton);
-		editorButton = new LevelButton(630f, 110f, 200f, 100f,
-				"undo_button.png", "undo_button_disabled.png", "EDITOR", false,
-				false);
+		editorButton = new LevelButton(630f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
+				false, false);
 		editorButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -122,9 +120,8 @@ public class Level {
 		decorations = new Vector<Decoration>();
 		gameCursor = new GameCursor();
 
-		endTurnButton = new LevelButton(210f, 110f, 200f, 100f,
-				"end_turn_button.png", "end_turn_button.png", "END TURN",
-				false, false);
+		endTurnButton = new LevelButton(210f, 110f, 200f, 100f, "end_turn_button.png", "end_turn_button.png",
+				"END TURN", false, false);
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -132,8 +129,8 @@ public class Level {
 			}
 		});
 		buttons.add(endTurnButton);
-		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png",
-				"undo_button_disabled.png", "UNDO", false, false);
+		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "UNDO",
+				false, false);
 		undoButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -142,9 +139,8 @@ public class Level {
 		});
 		undoButton.enabled = false;
 		buttons.add(undoButton);
-		editorButton = new LevelButton(630f, 110f, 200f, 100f,
-				"undo_button.png", "undo_button_disabled.png", "EDITOR", false,
-				false);
+		editorButton = new LevelButton(630f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
+				false, false);
 		editorButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -185,7 +181,7 @@ public class Level {
 	}
 
 	public void loadImages() {
-		
+
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				squares[i][j].loadImages();
@@ -216,42 +212,27 @@ public class Level {
 	private void initObjects() {
 
 		// Factions
-		factions.add(new Faction("Good Guys", new Color(0.29f, 0.31f, 0.77f),
-				"faction_blue.png"));
-		factions.add(new Faction("Bad Guys", new Color(0.8f, 0.37f, 0.27f),
-				"faction_red.png"));
-		factions.add(new Faction("Green Party", new Color(0.30f, 0.8f, 0.30f),
-				"faction_green.png"));
+		factions.add(new Faction("Good Guys", new Color(0.29f, 0.31f, 0.77f), "faction_blue.png"));
+		factions.add(new Faction("Bad Guys", new Color(0.8f, 0.37f, 0.27f), "faction_red.png"));
+		factions.add(new Faction("Green Party", new Color(0.30f, 0.8f, 0.30f), "faction_green.png"));
 
 		// Good guys relationships
-		factions.get(0).relationships
-				.put(factions.get(1),
-						new FactionRelationship(-100, factions.get(0), factions
-								.get(1)));
-		factions.get(0).relationships
-				.put(factions.get(2),
-						new FactionRelationship(-100, factions.get(0), factions
-								.get(2)));
+		factions.get(0).relationships.put(factions.get(1),
+				new FactionRelationship(-100, factions.get(0), factions.get(1)));
+		factions.get(0).relationships.put(factions.get(2),
+				new FactionRelationship(-100, factions.get(0), factions.get(2)));
 
 		// Bad guys relationships
-		factions.get(1).relationships
-				.put(factions.get(0),
-						new FactionRelationship(-100, factions.get(1), factions
-								.get(0)));
-		factions.get(1).relationships
-				.put(factions.get(2),
-						new FactionRelationship(-100, factions.get(1), factions
-								.get(2)));
+		factions.get(1).relationships.put(factions.get(0),
+				new FactionRelationship(-100, factions.get(1), factions.get(0)));
+		factions.get(1).relationships.put(factions.get(2),
+				new FactionRelationship(-100, factions.get(1), factions.get(2)));
 
 		// Green party relationships
-		factions.get(2).relationships
-				.put(factions.get(0),
-						new FactionRelationship(-100, factions.get(2), factions
-								.get(0)));
-		factions.get(2).relationships
-				.put(factions.get(1),
-						new FactionRelationship(-100, factions.get(2), factions
-								.get(1)));
+		factions.get(2).relationships.put(factions.get(0),
+				new FactionRelationship(-100, factions.get(2), factions.get(0)));
+		factions.get(2).relationships.put(factions.get(1),
+				new FactionRelationship(-100, factions.get(2), factions.get(1)));
 
 		// Actors
 
@@ -293,33 +274,31 @@ public class Level {
 		weaponsForActor5.add(weapon0ForActor5);
 
 		//
-		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0,
-				"red1.png", squares[0][0], weaponsForActor0, 4);
+		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", squares[0][0], weaponsForActor0,
+				4);
 		actor0.faction = factions.get(0);
 		factions.get(0).actors.add(actor0);
 
-		Actor actor1 = new Actor("Paul McCartney", "Maniac", 2, 10, 0, 0, 0, 0,
-				"avatar.png", squares[2][7], weaponsForActor1, 4);
+		Actor actor1 = new Actor("Paul McCartney", "Maniac", 2, 10, 0, 0, 0, 0, "avatar.png", squares[2][7],
+				weaponsForActor1, 4);
 		actor1.faction = factions.get(0);
 		factions.get(0).actors.add(actor1);
 
-		Actor actor2 = new Actor("Steve", "Maniac", 2, 100, 0, 0, 0, 0,
-				"avatar.png", squares[2][8], weaponsForActor2, 4);
+		Actor actor2 = new Actor("Steve", "Maniac", 2, 100, 0, 0, 0, 0, "avatar.png", squares[2][8], weaponsForActor2,
+				4);
 		actor2.faction = factions.get(0);
 		factions.get(0).actors.add(actor2);
 
-		Actor actor3 = new Actor("George Harrison", "Thief", 3, 10, 0, 0, 0, 0,
-				"red.png", squares[5][3], weaponsForActor3, 4);
+		Actor actor3 = new Actor("George Harrison", "Thief", 3, 10, 0, 0, 0, 0, "red.png", squares[5][3],
+				weaponsForActor3, 4);
 		actor3.faction = factions.get(1);
 		factions.get(1).actors.add(actor3);
 
-		Actor actor4 = new Actor("Ghandi", "Thief", 3, 10, 0, 0, 0, 0,
-				"red.png", squares[6][3], weaponsForActor4, 4);
+		Actor actor4 = new Actor("Ghandi", "Thief", 3, 10, 0, 0, 0, 0, "red.png", squares[6][3], weaponsForActor4, 4);
 		actor4.faction = factions.get(1);
 		factions.get(1).actors.add(actor4);
 
-		Actor actor5 = new Actor("Green1", "Hippy", 3, 10, 0, 0, 0, 0,
-				"green.png", squares[8][6], weaponsForActor5, 6);
+		Actor actor5 = new Actor("Green1", "Hippy", 3, 10, 0, 0, 0, 0, "green.png", squares[8][6], weaponsForActor5, 6);
 		actor5.faction = factions.get(2);
 		factions.get(2).actors.add(actor5);
 
@@ -328,25 +307,17 @@ public class Level {
 		// Adding actors to factions
 
 		// Game Objects
+		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0, "skip_with_shadow.png", squares[0][3],
+				new ArrayList<Weapon>()));
 		inanimateObjects
-				.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-						"skip_with_shadow.png", squares[0][3],
-						new ArrayList<Weapon>()));
-		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-				"sign.png", squares[1][3], new ArrayList<Weapon>()));
-		inanimateObjects
-				.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-						"skip_with_shadow.png", squares[2][3],
-						new ArrayList<Weapon>()));
-		inanimateObjects
-				.add(new GameObject("dumpster", 5, 0, 0, 0, 0,
-						"skip_with_shadow.png", squares[3][3],
-						new ArrayList<Weapon>()));
+				.add(new GameObject("dumpster", 5, 0, 0, 0, 0, "sign.png", squares[1][3], new ArrayList<Weapon>()));
+		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0, "skip_with_shadow.png", squares[2][3],
+				new ArrayList<Weapon>()));
+		inanimateObjects.add(new GameObject("dumpster", 5, 0, 0, 0, 0, "skip_with_shadow.png", squares[3][3],
+				new ArrayList<Weapon>()));
 
-		decorations.add(new Decoration("dec0", 300f, 240f, 28f, 28f, false,
-				"sign.png"));
-		decorations.add(new Decoration("dec1", 468f, 200f, 28f, 28f, true,
-				"skip_with_shadow.png"));
+		decorations.add(new Decoration("dec0", 300f, 240f, 28f, 28f, false, "sign.png"));
+		decorations.add(new Decoration("dec1", 468f, 200f, 28f, 28f, true, "skip_with_shadow.png"));
 
 		// Script
 
@@ -452,7 +423,8 @@ public class Level {
 		// SpeechPart inlineSpeechPart1_2 = new SpeechPart(
 		// factions.get(0).actors.get(0),
 		// new StringWithColor[] { new StringWithColor(
-		// "HOLLA, PART 2 OF THE INLINE SPEECH, WANT TO PUSH IT TO OVER 2 LINES, JUST TO SEE WTF IT LOOKS LIKE HOLLA",
+		// "HOLLA, PART 2 OF THE INLINE SPEECH, WANT TO PUSH IT TO OVER 2 LINES,
+		// JUST TO SEE WTF IT LOOKS LIKE HOLLA",
 		// Color.BLACK) });
 		//
 		// Vector<SpeechPart> inlineSpeechParts1 = new Vector<SpeechPart>();
@@ -588,29 +560,22 @@ public class Level {
 
 		// Turn text
 		if (currentFactionMoving != null) {
-			TextUtils
-					.printTextWithImages(
-							new Object[] { currentFactionMoving.name + " turn "
-									+ turn }, Game.windowWidth - 150, 20,
-							Integer.MAX_VALUE, true);
+			TextUtils.printTextWithImages(new Object[] { currentFactionMoving.name + " turn " + turn },
+					Game.windowWidth - 150, 20, Integer.MAX_VALUE, true);
 		}
 
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
-			TextUtils.printTextWithImages(logs.get(i).contents, 150,
-					100 + i * 20, Integer.MAX_VALUE, true);
+			TextUtils.printTextWithImages(logs.get(i).contents, 150, 100 + i * 20, Integer.MAX_VALUE, true);
 		}
 
 		if (factions.size() > 0 && currentFactionMoving != null) {
 			if (showTurnNotification) {
 				if (currentFactionMoving == factions.get(0)) {
-					TextUtils.printTextWithImages(new Object[] { "Your turn ",
-							this.currentFactionMoving.imageTexture,
-							", click to continue." }, 500, 500,
-							Integer.MAX_VALUE, true);
+					TextUtils.printTextWithImages(new Object[] { "Your turn ", this.currentFactionMoving.imageTexture,
+							", click to continue." }, 500, 500, Integer.MAX_VALUE, true);
 				} else {
-					TextUtils.printTextWithImages(new Object[] {
-							this.currentFactionMoving, "'s turn" }, 500, 500,
+					TextUtils.printTextWithImages(new Object[] { this.currentFactionMoving, "'s turn" }, 500, 500,
 							Integer.MAX_VALUE, true);
 				}
 			}
@@ -631,8 +596,7 @@ public class Level {
 		for (Decoration decoration : decorations)
 			decoration.update(delta);
 
-		if (!this.script.checkIfBlocking()
-				&& currentFactionMoving != factions.get(0)) {
+		if (!this.script.checkIfBlocking() && currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);
 		}
 		// } else if (currentFactionMoving != factions.get(0)) {
@@ -651,26 +615,22 @@ public class Level {
 		}
 	}
 
-	public Button getButtonFromMousePosition(float mouseX, float mouseY,
-			float alteredMouseX, float alteredMouseY) {
+	public Button getButtonFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
 
 		for (Button button : this.buttons) {
-			if (button.calculateIfPointInBoundsOfButton(mouseX,
-					Game.windowHeight - mouseY))
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}
 
 		if (activeActor != null && activeActor.faction == factions.get(0))
-			return this.activeActor.getButtonFromMousePosition(alteredMouseX,
-					alteredMouseY);
+			return this.activeActor.getButtonFromMousePosition(alteredMouseX, alteredMouseY);
 
 		return null;
 	}
 
 	public void endTurn() {
 
-		this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
-				" ended turn " + this.turn }));
+		this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving, " ended turn " + this.turn }));
 
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {

@@ -19,8 +19,7 @@ import com.marklynch.utils.TextureUtils;
 public class Square {
 
 	public String guid = UUID.randomUUID().toString();
-	public final static String[] editableAttributes = { "elevation",
-			"travelCost" };
+	public final static String[] editableAttributes = { "elevation", "travelCost" };
 
 	public final int x;
 	public final int y;
@@ -68,9 +67,8 @@ public class Square {
 		// square texture
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(imageTexture, squarePositionX, squarePositionX
-				+ Game.SQUARE_WIDTH, squarePositionY, squarePositionY
-				+ Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(imageTexture, squarePositionX, squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
+				squarePositionY + Game.SQUARE_HEIGHT);
 
 		// square highlights
 
@@ -78,12 +76,9 @@ public class Square {
 
 			Texture highlightTexture = null;
 
-			if (Game.level.activeActor != null
-					&& Game.level.activeActor.equippedWeapon != null
+			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
 					&& this.gameObject != null
-					&& Game.level.activeActor.equippedWeapon
-							.hasRange(Game.level.activeActor
-									.weaponDistanceTo(this))
+					&& Game.level.activeActor.equippedWeapon.hasRange(Game.level.activeActor.weaponDistanceTo(this))
 					&& !Game.level.activeActor.hasAttackedThisTurn) {
 				highlightTexture = Game.level.gameCursor.imageTexture4;
 			} else if (Game.level.currentFactionMovingIndex == 0 && (inPath))// ||
@@ -95,22 +90,18 @@ public class Square {
 				highlightTexture = Game.level.gameCursor.imageTexture;
 			else
 				highlightTexture = Game.level.gameCursor.imageTexture2;
-			TextureUtils.drawTexture(highlightTexture, squarePositionX,
-					squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
-					squarePositionY + Game.SQUARE_HEIGHT);
+			TextureUtils.drawTexture(highlightTexture, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
+					squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 		}
 
 		// if (this.reachableBySelectedCharater) {
 		int costTextWidth = Game.font.getWidth("" + distanceToSquare);
-		float costPositionX = squarePositionX
-				+ (Game.SQUARE_WIDTH - costTextWidth) / 2f;
+		float costPositionX = squarePositionX + (Game.SQUARE_WIDTH - costTextWidth) / 2f;
 		float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) / 2f;
 
-		if (distanceToSquare != Integer.MAX_VALUE
-				&& Game.level.activeActor != null) {
-			TextUtils.printTextWithImages(
-					new Object[] { "" + distanceToSquare }, costPositionX,
-					costPositionY, Integer.MAX_VALUE, true);
+		if (distanceToSquare != Integer.MAX_VALUE && Game.level.activeActor != null) {
+			TextUtils.printTextWithImages(new Object[] { "" + distanceToSquare }, costPositionX, costPositionY,
+					Integer.MAX_VALUE, true);
 		}
 		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
@@ -144,9 +135,8 @@ public class Square {
 
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
-				squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
-				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
 
@@ -160,9 +150,8 @@ public class Square {
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
 
-		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
-				squarePositionY + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
+				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 		// GL11.glPopMatrix();
 	}
 
@@ -175,8 +164,7 @@ public class Square {
 	}
 
 	public void showDialogs() {
-		dialogs.add(new Dialog(this, 200, 200, "dialogbg.png",
-				"KeepCalm-Medium.ttf"));
+		dialogs.add(new Dialog(this, 200, 200, "dialogbg.png", "KeepCalm-Medium.ttf"));
 		showingDialogs = true;
 	}
 
@@ -189,23 +177,18 @@ public class Square {
 
 		if (this.gameObject == null) {
 			// Nothing on the square
-			return new String[] { "" + x + " , " + y,
-					"\nTravel Cost = " + travelCost,
-					"\nElevation = " + elevation, "(Click again to dismiss)" };
+			return new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
+					"(Click again to dismiss)" };
 		} else if (this.gameObject instanceof Actor) {
 			// Actor on the square
 			Actor actor = (Actor) this.gameObject;
-			return new String[] { "" + x + " , " + y,
-					"\nTravel Cost = " + travelCost,
-					"\nElevation = " + elevation, "" + actor.name,
-					"lvl" + actor.actorLevel + " " + actor.title,
-					"(Click again to dismiss)" };
+			return new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
+					"" + actor.name, "lvl" + actor.actorLevel + " " + actor.title, "(Click again to dismiss)" };
 
 		} else {
 			// Object on the square
-			return new String[] { "" + x + " , " + y,
-					"\nTravel Cost = " + travelCost,
-					"\nElevation = " + elevation, "(Click again to dismiss)" };
+			return new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
+					"(Click again to dismiss)" };
 
 		}
 	}

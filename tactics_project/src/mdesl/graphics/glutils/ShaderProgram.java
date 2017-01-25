@@ -122,8 +122,7 @@ public class ShaderProgram {
 	 */
 	public static boolean isSupported() {
 		ContextCapabilities c = GLContext.getCapabilities();
-		return c.GL_ARB_shader_objects && c.GL_ARB_vertex_shader
-				&& c.GL_ARB_fragment_shader;
+		return c.GL_ARB_shader_objects && c.GL_ARB_vertex_shader && c.GL_ARB_fragment_shader;
 		// return c.OpenGL20;
 	}
 
@@ -206,13 +205,12 @@ public class ShaderProgram {
 	 * @throws IllegalArgumentException
 	 *             if there was an issue
 	 */
-	public ShaderProgram(String vertexShaderSource, String fragShaderSource,
-			List<VertexAttrib> attribLocations) throws LWJGLException {
+	public ShaderProgram(String vertexShaderSource, String fragShaderSource, List<VertexAttrib> attribLocations)
+			throws LWJGLException {
 		if (vertexShaderSource == null || fragShaderSource == null)
 			throw new IllegalArgumentException("shader source must be non-null");
 		if (!isSupported())
-			throw new LWJGLException(
-					"no shader support found; shaders require OpenGL 2.0");
+			throw new LWJGLException("no shader support found; shaders require OpenGL 2.0");
 		this.vertShaderSource = vertexShaderSource;
 		this.fragShaderSource = fragShaderSource;
 		vert = compileShader(VERTEX_SHADER, vertexShaderSource);
@@ -254,8 +252,7 @@ public class ShaderProgram {
 	 * @throws IllegalArgumentException
 	 *             if there was an issue
 	 */
-	public ShaderProgram(String vertexShaderSource, String fragShaderSource)
-			throws LWJGLException {
+	public ShaderProgram(String vertexShaderSource, String fragShaderSource) throws LWJGLException {
 		this(vertexShaderSource, fragShaderSource, null);
 	}
 
@@ -280,8 +277,7 @@ public class ShaderProgram {
 	protected int createProgram() throws LWJGLException {
 		int program = glCreateProgram();
 		if (program == 0)
-			throw new LWJGLException(
-					"could not create program; check ShaderProgram.isSupported()");
+			throw new LWJGLException("could not create program; check ShaderProgram.isSupported()");
 		return program;
 	}
 
@@ -313,8 +309,7 @@ public class ShaderProgram {
 	protected int compileShader(int type, String source) throws LWJGLException {
 		int shader = glCreateShader(type);
 		if (shader == 0)
-			throw new LWJGLException(
-					"could not create shader object; check ShaderProgram.isSupported()");
+			throw new LWJGLException("could not create shader object; check ShaderProgram.isSupported()");
 		glShaderSource(shader, source);
 		glCompileShader(shader);
 
@@ -325,8 +320,7 @@ public class ShaderProgram {
 		if (err != null && err.length() != 0)
 			log += t + " compile log:\n" + err + "\n";
 		if (comp == GL11.GL_FALSE)
-			throw new LWJGLException(log.length() != 0 ? log
-					: "Could not compile " + shaderTypeString(type));
+			throw new LWJGLException(log.length() != 0 ? log : "Could not compile " + shaderTypeString(type));
 		return shader;
 	}
 
@@ -350,11 +344,9 @@ public class ShaderProgram {
 	 *             if this program is invalid (released) or if the link was
 	 *             unsuccessful
 	 */
-	protected void linkProgram(List<VertexAttrib> attribLocations)
-			throws LWJGLException {
+	protected void linkProgram(List<VertexAttrib> attribLocations) throws LWJGLException {
 		if (!valid())
-			throw new LWJGLException(
-					"trying to link an invalid (i.e. released) program");
+			throw new LWJGLException("trying to link an invalid (i.e. released) program");
 
 		uniforms.clear();
 
@@ -376,8 +368,7 @@ public class ShaderProgram {
 		if (log != null)
 			log = log.trim();
 		if (comp == GL11.GL_FALSE)
-			throw new LWJGLException(log.length() != 0 ? log
-					: "Could not link program");
+			throw new LWJGLException(log.length() != 0 ? log : "Could not link program");
 
 		fetchUniforms();
 		fetchAttributes();
@@ -401,8 +392,7 @@ public class ShaderProgram {
 	 */
 	public void use() {
 		if (!valid())
-			throw new IllegalStateException(
-					"trying to enable a program that is not valid");
+			throw new IllegalStateException("trying to enable a program that is not valid");
 		glUseProgram(program);
 	}
 
@@ -544,9 +534,8 @@ public class ShaderProgram {
 			location = locI.intValue();
 		// throw an exception if not found...
 		if (location == -1 && strict)
-			throw new IllegalArgumentException("no active uniform by name '"
-					+ name + "' "
-					+ "(disable strict compiling to suppress warnings)");
+			throw new IllegalArgumentException(
+					"no active uniform by name '" + name + "' " + "(disable strict compiling to suppress warnings)");
 		return location;
 	}
 
@@ -557,9 +546,8 @@ public class ShaderProgram {
 		}
 		// throw an exception if not found...
 		if (strict)
-			throw new IllegalArgumentException("no active attribute by name '"
-					+ name + "' "
-					+ "(disable strict compiling to suppress warnings)");
+			throw new IllegalArgumentException(
+					"no active attribute by name '" + name + "' " + "(disable strict compiling to suppress warnings)");
 		return null;
 	}
 

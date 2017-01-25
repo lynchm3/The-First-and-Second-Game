@@ -22,7 +22,8 @@ public class Story {
 	// the breaking point, and when they couldn't squeeze the people anymore for
 	// profit they began squeezing eachother. WHich eventually led to their
 	// collapse. Or stalemate. Or unification.
-	// "When they couldn't push down anymore, they pushed out against eachother and were met with resistance"
+	// "When they couldn't push down anymore, they pushed out against eachother
+	// and were met with resistance"
 	// This whole enslavement of people though... eh... What about the robots.
 
 	// Maybe that the thing to explore. Not the magic bipedal robots like in

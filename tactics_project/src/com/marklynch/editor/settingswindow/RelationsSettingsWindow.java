@@ -22,8 +22,7 @@ public class RelationsSettingsWindow extends SettingsWindow {
 
 		final ArrayList<FactionRelationship> factionRelationships = new ArrayList<FactionRelationship>();
 		for (Faction faction : Game.level.factions) {
-			for (FactionRelationship factionRelationship : faction.relationships
-					.values()) {
+			for (FactionRelationship factionRelationship : faction.relationships.values()) {
 				factionRelationships.add(factionRelationship);
 			}
 		}
@@ -33,9 +32,8 @@ public class RelationsSettingsWindow extends SettingsWindow {
 
 			final int index = count;
 
-			final SettingsWindowButton scriptButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30, factionRelationships.get(i),
-					true, true, this) {
+			final SettingsWindowButton scriptButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
+					factionRelationships.get(i), true, true, this) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -62,8 +60,8 @@ public class RelationsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					scriptButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, factionRelationships.get(index), editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200, factionRelationships.get(index),
+							editor);
 
 				}
 			};

@@ -12,11 +12,9 @@ public class LevelButton extends Button {
 	boolean xFromLeft;
 	boolean yFromTop;
 
-	public LevelButton(float x, float y, float width, float height,
-			String enabledTexturePath, String disabledTexturePath, String text,
-			boolean xFromLeft, boolean yFromTop) {
-		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
-				text);
+	public LevelButton(float x, float y, float width, float height, String enabledTexturePath,
+			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop) {
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 	}
@@ -34,29 +32,22 @@ public class LevelButton extends Button {
 
 		if (enabled) {
 			if (down) {
-				QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY,
-						realY + height);
-				TextUtils.printTextWithImages(new Object[] { text }, realX,
-						realY, Integer.MAX_VALUE, true);
+				QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
+				TextUtils.printTextWithImages(new Object[] { text }, realX, realY, Integer.MAX_VALUE, true);
 			} else {
-				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width,
-						realY, realY + height);
-				TextUtils.printTextWithImages(new Object[] { text }, realX,
-						realY, Integer.MAX_VALUE, true);
+				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
+				TextUtils.printTextWithImages(new Object[] { text }, realX, realY, Integer.MAX_VALUE, true);
 			}
 		} else {
 
-			QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY
-					+ height);
-			TextUtils.printTextWithImages(new Object[] { text }, realX, realY,
-					Integer.MAX_VALUE, true);
+			QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
+			TextUtils.printTextWithImages(new Object[] { text }, realX, realY, Integer.MAX_VALUE, true);
 		}
 
 	}
 
 	@Override
-	public void drawWithinBounds(float boundsX1, float boundsX2,
-			float boundsY1, float boundsY2) {
+	public void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
 
 		float realX = x;
 		float realY = y;
@@ -67,13 +58,11 @@ public class LevelButton extends Button {
 			realY = Game.windowHeight - y;
 
 		if (enabled) {
-			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, realX,
-					realX + width, realY, realY + height, boundsX1, boundsX2,
-					boundsY1, boundsY2);
+			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, realX, realX + width, realY, realY + height,
+					boundsX1, boundsX2, boundsY1, boundsY2);
 		} else {
-			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, realX,
-					realX + width, realY, realY + height, boundsX1, boundsX2,
-					boundsY1, boundsY2);
+			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, realX, realX + width, realY, realY + height,
+					boundsX1, boundsX2, boundsY1, boundsY2);
 		}
 
 	}
@@ -88,8 +77,7 @@ public class LevelButton extends Button {
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
 
-		if (mouseX > realX && mouseX < realX + width && mouseY > realY
-				&& mouseY < realY + height) {
+		if (mouseX > realX && mouseX < realX + width && mouseY > realY && mouseY < realY + height) {
 			return true;
 		}
 		return false;

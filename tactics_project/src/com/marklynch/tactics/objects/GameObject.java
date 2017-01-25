@@ -24,9 +24,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class GameObject {
 
-	public final static String[] editableAttributes = { "name", "imageTexture",
-			"weapons", "strength", "dexterity", "intelligence", "endurance",
-			"totalHealth", "remainingHealth" };
+	public final static String[] editableAttributes = { "name", "imageTexture", "weapons", "strength", "dexterity",
+			"intelligence", "endurance", "totalHealth", "remainingHealth" };
 	public String guid = UUID.randomUUID().toString();
 
 	public String name = "";
@@ -75,9 +74,8 @@ public class GameObject {
 
 	public transient Faction faction;
 
-	public GameObject(String name, int health, int strength, int dexterity,
-			int intelligence, int endurance, String imagePath,
-			Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
+	public GameObject(String name, int health, int strength, int dexterity, int intelligence, int endurance,
+			String imagePath, Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
 		super();
 		this.name = name;
 		this.totalHealth = health;
@@ -124,28 +122,23 @@ public class GameObject {
 	public void drawForeground() {
 
 		// Draw object
-		int actorPositionXInPixels = this.squareGameObjectIsOn.x
-				* (int) Game.SQUARE_WIDTH;
-		int actorPositionYInPixels = this.squareGameObjectIsOn.y
-				* (int) Game.SQUARE_HEIGHT;
+		int actorPositionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
+		int actorPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
 
 		float alpha = 1.0f;
-		if (Game.level.activeActor != null
-				&& Game.level.activeActor.showHoverFightPreview == true
+		if (Game.level.activeActor != null && Game.level.activeActor.showHoverFightPreview == true
 				&& Game.level.activeActor.hoverFightPreviewDefender != this) {
 			alpha = 0.5f;
 		}
 
-		if (hasAttackedThisTurn == true && this.faction != null
-				&& Game.level.currentFactionMoving == this.faction) {
+		if (hasAttackedThisTurn == true && this.faction != null && Game.level.currentFactionMoving == this.faction) {
 			alpha = 0.5f;
 		}
 
 		TextureUtils.skipNormals = true;
 		TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
-				actorPositionXInPixels + Game.SQUARE_WIDTH,
-				actorPositionYInPixels, actorPositionYInPixels
-						+ Game.SQUARE_HEIGHT);
+				actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels,
+				actorPositionYInPixels + Game.SQUARE_HEIGHT);
 		TextureUtils.skipNormals = false;
 	}
 
@@ -153,15 +146,11 @@ public class GameObject {
 
 		// Draw POW
 		if (showPow == true) {
-			int powPositionXInPixels = Math
-					.abs((powTarget.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH));
-			int powPositionYInPixels = powTarget.squareGameObjectIsOn.y
-					* (int) Game.SQUARE_HEIGHT;
+			int powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH));
+			int powPositionYInPixels = powTarget.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
 
-			TextureUtils.drawTexture(this.powTexture, powPositionXInPixels,
-					powPositionXInPixels + Game.SQUARE_WIDTH,
-					powPositionYInPixels, powPositionYInPixels
-							+ Game.SQUARE_HEIGHT);
+			TextureUtils.drawTexture(this.powTexture, powPositionXInPixels, powPositionXInPixels + Game.SQUARE_WIDTH,
+					powPositionYInPixels, powPositionYInPixels + Game.SQUARE_HEIGHT);
 
 		}
 	}
@@ -193,8 +182,7 @@ public class GameObject {
 
 		Vector<Square> startPath = new Vector<Square>();
 		startPath.add(currentSquare);
-		paths.put(currentSquare,
-				new Path((Vector<Square>) startPath.clone(), 0));
+		paths.put(currentSquare, new Path((Vector<Square>) startPath.clone(), 0));
 
 		for (int i = 0; i <= highestPathCostSeen; i++) {
 			// get all paths with that cost
@@ -210,26 +198,21 @@ public class GameObject {
 
 			for (int j = 0; j < pathsWithCurrentCost.size(); j++) {
 				Vector<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
-				calculatePathToAllSquares2(squares, Direction.UP,
-						squaresInThisPath, i);
-				calculatePathToAllSquares2(squares, Direction.RIGHT,
-						squaresInThisPath, i);
-				calculatePathToAllSquares2(squares, Direction.DOWN,
-						squaresInThisPath, i);
-				calculatePathToAllSquares2(squares, Direction.LEFT,
-						squaresInThisPath, i);
+				calculatePathToAllSquares2(squares, Direction.UP, squaresInThisPath, i);
+				calculatePathToAllSquares2(squares, Direction.RIGHT, squaresInThisPath, i);
+				calculatePathToAllSquares2(squares, Direction.DOWN, squaresInThisPath, i);
+				calculatePathToAllSquares2(squares, Direction.LEFT, squaresInThisPath, i);
 
 			}
 		}
 	}
 
-	public void calculatePathToAllSquares2(Square[][] squares,
-			Direction direction, Vector<Square> squaresInThisPath, int pathCost) {
+	public void calculatePathToAllSquares2(Square[][] squares, Direction direction, Vector<Square> squaresInThisPath,
+			int pathCost) {
 
 		Square newSquare = null;
 
-		Square parentSquare = squaresInThisPath
-				.get(squaresInThisPath.size() - 1);
+		Square parentSquare = squaresInThisPath.get(squaresInThisPath.size() - 1);
 
 		if (direction == Direction.UP) {
 			if (parentSquare.y - 1 >= 0) {
@@ -250,11 +233,9 @@ public class GameObject {
 			}
 		}
 
-		if (newSquare != null && newSquare.gameObject == null
-				&& !squaresInThisPath.contains(newSquare)
+		if (newSquare != null && newSquare.gameObject == null && !squaresInThisPath.contains(newSquare)
 				&& !paths.containsKey(newSquare)) {
-			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath
-					.clone();
+			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
 			newPathSquares.add(newSquare);
 			int newDistance = pathCost + parentSquare.travelCost;
 			newSquare.distanceToSquare = newDistance;
@@ -271,11 +252,10 @@ public class GameObject {
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
 		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-			if (ArrayUtils.inBounds(Game.level.squares,
-					this.squareGameObjectIsOn.x + x,
+			if (ArrayUtils.inBounds(Game.level.squares, this.squareGameObjectIsOn.x + x,
 					this.squareGameObjectIsOn.y + y)) {
-				squares.add(Game.level.squares[this.squareGameObjectIsOn.x
-						+ (int) x][this.squareGameObjectIsOn.y + (int) y]);
+				squares.add(Game.level.squares[this.squareGameObjectIsOn.x + (int) x][this.squareGameObjectIsOn.y
+						+ (int) y]);
 			}
 
 			if (xGoingUp) {
@@ -340,8 +320,7 @@ public class GameObject {
 		}
 	}
 
-	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon,
-			float range) {
+	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon, float range) {
 		for (Weapon weapon : weapons.weapons) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				return weapon;
@@ -356,8 +335,8 @@ public class GameObject {
 		for (Weapon weapon : this.weapons.weapons) {
 			weaponArray.add(weapon.makeWeapon());
 		}
-		return new GameObject(name, (int) totalHealth, strength, dexterity,
-				intelligence, endurance, imageTexturePath, square, weaponArray);
+		return new GameObject(name, (int) totalHealth, strength, dexterity, intelligence, endurance, imageTexturePath,
+				square, weaponArray);
 	}
 
 	public void update(int delta) {

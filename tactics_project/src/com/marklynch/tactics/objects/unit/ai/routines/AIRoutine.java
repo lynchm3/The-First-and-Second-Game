@@ -93,8 +93,7 @@ public class AIRoutine {
 		// 1. create list of enemies
 		for (Faction faction : Game.level.factions) {
 			if (faction != Game.level.activeActor.faction
-					&& Game.level.activeActor.faction.relationships
-							.get(faction).relationship < 0) {
+					&& Game.level.activeActor.faction.relationships.get(faction).relationship < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
 					if (square != null && square.distanceToSquare < costToBest) {
@@ -147,13 +146,11 @@ public class AIRoutine {
 		// 1. create list of enemies reachable within lowest possible turns
 		for (Faction faction : Game.level.factions) {
 			if (faction != Game.level.activeActor.faction
-					&& Game.level.activeActor.faction.relationships
-							.get(faction).relationship < 0) {
+					&& Game.level.activeActor.faction.relationships.get(faction).relationship < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToForTarget(actor);
 					if (square != null) {
-						int turns = square.distanceToSquare
-								/ Game.level.activeActor.travelDistance;
+						int turns = square.distanceToSquare / Game.level.activeActor.travelDistance;
 						if (turns < turnsToBest) {
 							bestTargetsBasedOnTurnsToReach.clear();
 							bestTargetsBasedOnTurnsToReach.add(actor);
@@ -171,10 +168,8 @@ public class AIRoutine {
 		for (Actor actor : bestTargetsBasedOnTurnsToReach) {
 			for (Weapon weapon : Game.level.activeActor.weapons.weapons) {
 				for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
-					Fight fight = new Fight(Game.level.activeActor, weapon,
-							actor, actor.bestCounterWeapon(
-									Game.level.activeActor, weapon, range),
-							range);
+					Fight fight = new Fight(Game.level.activeActor, weapon, actor,
+							actor.bestCounterWeapon(Game.level.activeActor, weapon, range), range);
 					fights.add(fight);
 				}
 			}
@@ -208,8 +203,7 @@ public class AIRoutine {
 
 	public Square calculateSquareToMoveToForTarget(GameObject target) {
 
-		Vector<Float> idealWeaponDistances = Game.level.activeActor
-				.calculateIdealDistanceFrom(target);
+		Vector<Float> idealWeaponDistances = Game.level.activeActor.calculateIdealDistanceFrom(target);
 
 		Vector<Square> targetSquares = new Vector<Square>();
 		int bestTravelCostFound = Integer.MAX_VALUE;
@@ -217,13 +211,10 @@ public class AIRoutine {
 		for (int i = 0; i < idealWeaponDistances.size(); i++) {
 
 			// Check if we're already at this distance
-			if (Game.level.activeActor
-					.weaponDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
-					.get(i))
+			if (Game.level.activeActor.weaponDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances.get(i))
 				return Game.level.activeActor.squareGameObjectIsOn;
 
-			targetSquares = target.getAllSquaresAtDistance(idealWeaponDistances
-					.get(i));
+			targetSquares = target.getAllSquaresAtDistance(idealWeaponDistances.get(i));
 
 			// TODO picking which of these squares is the best is an interesting
 			// issue.
@@ -231,8 +222,7 @@ public class AIRoutine {
 			// if There's multiple reachable then safest out of them is best :P
 			// OR somewhere u can attack someone from is the best... i dunno :D
 			for (Square targetSquare : targetSquares) {
-				Path currentActorPathToThisSquare = Game.level.activeActor.paths
-						.get(targetSquare);
+				Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(targetSquare);
 				if (currentActorPathToThisSquare != null
 						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
 					pathToSquare = currentActorPathToThisSquare;
@@ -257,8 +247,8 @@ public class AIRoutine {
 			squareToMoveTo = pathToSquare.squares.lastElement();
 		} else {
 			for (int i = pathToSquare.squares.size() - 1; i >= 0; i--) {
-				if (Game.level.activeActor.paths.get(pathToSquare.squares
-						.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
+				if (Game.level.activeActor.paths
+						.get(pathToSquare.squares.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
 					squareToMoveTo = pathToSquare.squares.get(i);
 					break;
 				}
@@ -299,8 +289,8 @@ public class AIRoutine {
 			squareToMoveTo = pathToSquare.squares.lastElement();
 		} else {
 			for (int i = pathToSquare.squares.size() - 1; i >= 0; i--) {
-				if (Game.level.activeActor.paths.get(pathToSquare.squares
-						.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
+				if (Game.level.activeActor.paths
+						.get(pathToSquare.squares.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
 					squareToMoveTo = pathToSquare.squares.get(i);
 					break;
 				}
@@ -338,11 +328,9 @@ public class AIRoutine {
 		Vector<Actor> attackableActors = new Vector<Actor>();
 		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
-				int weaponDistance = Game.level.activeActor
-						.weaponDistanceTo(actor.squareGameObjectIsOn);
+				int weaponDistance = Game.level.activeActor.weaponDistanceTo(actor.squareGameObjectIsOn);
 
-				if (faction != actor.faction
-						&& Game.level.activeActor.hasRange(weaponDistance)) {
+				if (faction != actor.faction && Game.level.activeActor.hasRange(weaponDistance)) {
 					attackableActors.add(actor);
 				}
 			}
@@ -366,10 +354,8 @@ public class AIRoutine {
 		Vector<Actor> attackableActors = new Vector<Actor>();
 		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
-				int weaponDistance = Game.level.activeActor
-						.weaponDistanceTo(actor.squareGameObjectIsOn);
-				if (actor != Game.level.activeActor
-						&& Game.level.activeActor.hasRange(weaponDistance)) {
+				int weaponDistance = Game.level.activeActor.weaponDistanceTo(actor.squareGameObjectIsOn);
+				if (actor != Game.level.activeActor && Game.level.activeActor.hasRange(weaponDistance)) {
 					attackableActors.add(actor);
 				}
 			}
@@ -388,8 +374,7 @@ public class AIRoutine {
 	}
 
 	public boolean attackTarget(GameObject gameObject) {
-		int weaponDistance = Game.level.activeActor
-				.weaponDistanceTo(gameObject.squareGameObjectIsOn);
+		int weaponDistance = Game.level.activeActor.weaponDistanceTo(gameObject.squareGameObjectIsOn);
 		if (Game.level.activeActor.hasRange(weaponDistance)) {
 			Game.level.activeActor.equipBestWeapon(gameObject);
 			Game.level.activeActor.attack(gameObject, false);

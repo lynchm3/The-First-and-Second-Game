@@ -13,8 +13,7 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 	public DecorationsSettingsWindow(float width, Editor editor) {
 		super(width, editor);
 
-		addDecorationButton = new SettingsWindowButton(0, 100, 200, 30,
-				"ADD DECORATION", true, true, this) {
+		addDecorationButton = new SettingsWindowButton(0, 100, 200, 30, "ADD DECORATION", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -40,14 +39,12 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				Decoration newDecoration = new Decoration("Decoration "
-						+ Game.level.decorations.size(), 0, 0, 100, 100, true,
-						"sign.png");
+				Decoration newDecoration = new Decoration("Decoration " + Game.level.decorations.size(), 0, 0, 100, 100,
+						true, "sign.png");
 				Game.level.decorations.add(newDecoration);
 				updateDecorationsButtons();
 				DecorationsSettingsWindow.this.editor.clearSelectedObject();
-				DecorationsSettingsWindow.this.editor
-						.depressButtonsSettingsAndDetailsButtons();
+				DecorationsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
 			}
 		};
 		updateDecorationsButtons();
@@ -62,8 +59,7 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 		for (int i = 0; i < Game.level.decorations.size(); i++) {
 			final int index = i;
 
-			final SettingsWindowButton decorationButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30,
+			final SettingsWindowButton decorationButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
 					Game.level.decorations.get(index), true, true, this) {
 
 				@Override
@@ -91,8 +87,8 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					decorationButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, Game.level.decorations.get(index), editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200, Game.level.decorations.get(index),
+							editor);
 				}
 			};
 			buttons.add(decorationButton);

@@ -17,8 +17,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class ScriptEventSpeech extends ScriptEvent {
 
-	public final static String[] editableAttributes = { "name",
-			"blockUserInput", "scriptTrigger", "speechParts", "intTest" };
+	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "speechParts",
+			"intTest" };
 
 	public ArrayList<SpeechPart> speechParts;
 	public ArrayList<Integer> intTest;
@@ -28,8 +28,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 		name = "ScriptEventSpeech";
 	}
 
-	public ScriptEventSpeech(boolean blockUserInput,
-			ArrayList<SpeechPart> speechParts, ScriptTrigger scriptTrigger) {
+	public ScriptEventSpeech(boolean blockUserInput, ArrayList<SpeechPart> speechParts, ScriptTrigger scriptTrigger) {
 		super(blockUserInput, scriptTrigger);
 		this.speechParts = speechParts;
 		name = "ScriptEventSpeech";
@@ -65,8 +64,8 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 	public static class SpeechPart {
 
-		public final static String[] editableAttributes = { "actors",
-				"positions", "directions", "talker", "text", "inline" };
+		public final static String[] editableAttributes = { "actors", "positions", "directions", "talker", "text",
+				"inline" };
 
 		public transient ArrayList<Actor> actors = new ArrayList<Actor>();
 		public ArrayList<Float> positions = new ArrayList<Float>();
@@ -90,9 +89,8 @@ public class ScriptEventSpeech extends ScriptEvent {
 			inline = true;
 		}
 
-		public SpeechPart(ArrayList<Actor> actors, ArrayList<Float> positions,
-				ArrayList<Boolean> directions, Actor talker,
-				ArrayList<String> text) {
+		public SpeechPart(ArrayList<Actor> actors, ArrayList<Float> positions, ArrayList<Boolean> directions,
+				Actor talker, ArrayList<String> text) {
 			super();
 			this.actors = actors;
 			this.positions = positions;
@@ -120,20 +118,16 @@ public class ScriptEventSpeech extends ScriptEvent {
 				Game.activeBatch.flush();
 				view.setIdentity();
 
-				view.translate(new Vector2f(Game.windowWidth / 2,
-						Game.windowHeight / 2));
+				view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 				view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-				view.translate(new Vector2f(-Game.windowWidth / 2,
-						-Game.windowHeight / 2));
+				view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
 				view.translate(new Vector2f(Game.dragX, Game.dragY));
 
 				// update the new view matrix
 				Game.activeBatch.updateUniforms();
 
-				float textX1 = talker.squareGameObjectIsOn.x
-						* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
-				float textY1 = talker.squareGameObjectIsOn.y
-						* Game.SQUARE_HEIGHT;
+				float textX1 = talker.squareGameObjectIsOn.x * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
+				float textY1 = talker.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT;
 
 				// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128,
 				// 128);
@@ -147,8 +141,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 			} else {
 				// NOT INLINE
 
-				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), 0f,
-						Game.windowWidth, 0f, Game.windowHeight);
+				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), 0f, Game.windowWidth, 0f, Game.windowHeight);
 
 				float posY = Game.windowHeight / 2f;
 
@@ -160,14 +153,11 @@ public class ScriptEventSpeech extends ScriptEvent {
 						alpha = 0.5f;
 					}
 					if (directions.get(i).equals(true)) {
-						TextureUtils.drawTexture(actors.get(i).imageTexture,
-								alpha, positions.get(i),
+						TextureUtils.drawTexture(actors.get(i).imageTexture, alpha, positions.get(i),
 								positions.get(i) + 256, posY, posY + 256);
 					} else {
-						TextureUtils.drawTextureBackwards(
-								actors.get(i).imageTexture, alpha,
-								Game.windowWidth - positions.get(i) - 256,
-								Game.windowWidth - positions.get(i), posY,
+						TextureUtils.drawTextureBackwards(actors.get(i).imageTexture, alpha,
+								Game.windowWidth - positions.get(i) - 256, Game.windowWidth - positions.get(i), posY,
 								posY + 256);
 					}
 				}
@@ -204,8 +194,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 				for (int i = 0; i < this.text.size(); i++) {
 					text.add(this.text.get(i));
 				}
-				return new SpeechPart(actors, positions, directions, talker,
-						text);
+				return new SpeechPart(actors, positions, directions, talker, text);
 			}
 		}
 	}

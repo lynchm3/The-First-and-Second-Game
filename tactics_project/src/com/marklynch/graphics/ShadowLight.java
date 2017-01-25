@@ -38,8 +38,7 @@ public class ShadowLight {
 	public static final Vector4f LIGHT_COLOR = new Vector4f(1f, 1f, 1f, 1f);
 	public static final Vector4f AMBIENT_COLOR = new Vector4f(1f, 1f, 1f, 1f);
 	public static final Vector3f FALLOFF = new Vector3f(.4f, 3f, 20f);
-	public static final Vector3f lightPos = new Vector3f(0f, 0f,
-			DEFAULT_LIGHT_Z);
+	public static final Vector3f lightPos = new Vector3f(0f, 0f, DEFAULT_LIGHT_Z);
 	static FrameBuffer lightsFBO;
 
 	// SHADOW
@@ -71,8 +70,7 @@ public class ShadowLight {
 		try {
 			// load our texture with linear filter
 			rock = new Texture(Util.getResource("res/rock.png"), Texture.LINEAR);
-			rockNormals = new Texture(Util.getResource("res/rock_n.png"),
-					Texture.LINEAR);
+			rockNormals = new Texture(Util.getResource("res/rock_n.png"), Texture.LINEAR);
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode texture");
 		}
@@ -80,13 +78,11 @@ public class ShadowLight {
 		// load our shader program and sprite batch
 		try {
 			// our basic pass-through vertex shader
-			final String VERT = Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson6.vert"));
+			final String VERT = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson6.vert"));
 
 			// our fragment shader, which does the blur in one direction at a
 			// time
-			final String FRAG = Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson6.frag"));
+			final String FRAG = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson6.frag"));
 
 			// create our shader program
 			ShaderProgram.setStrictMode(false);
@@ -113,22 +109,14 @@ public class ShadowLight {
 		try {
 			batch = new SpriteBatch();
 			ShaderProgram.setStrictMode(false);
-			shadowMapShader = createShader(
-					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_pass.vert")),
-					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_map.frag")));
-			shadowRenderShader = createShader(
-					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_pass.vert")),
-					Util.readFile(Util
-							.getResourceAsStream("res/shadertut/shadow_render.frag")));
-			occludersFBO = new FrameBuffer((int) lightSize, (int) lightSize,
-					Texture.LINEAR);
+			shadowMapShader = createShader(Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_pass.vert")),
+					Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_map.frag")));
+			shadowRenderShader = createShader(Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_pass.vert")),
+					Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_render.frag")));
+			occludersFBO = new FrameBuffer((int) lightSize, (int) lightSize, Texture.LINEAR);
 			shadowMapFBO = new FrameBuffer((int) lightSize, 1, Texture.LINEAR);
 
-			lightsFBO = new FrameBuffer(Display.getWidth(),
-					Display.getHeight(), Texture.LINEAR);
+			lightsFBO = new FrameBuffer(Display.getWidth(), Display.getHeight(), Texture.LINEAR);
 
 			Texture shadowMapTex = shadowMapFBO.getTexture();
 			shadowMapTex.setFilter(Texture.LINEAR, Texture.LINEAR);
@@ -143,19 +131,15 @@ public class ShadowLight {
 		try {
 
 			// create our FBOs
-			blur2FBO = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE,
-					Texture.LINEAR);
-			blur3FBO = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE,
-					Texture.LINEAR);
+			blur2FBO = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE, Texture.LINEAR);
+			blur3FBO = new FrameBuffer(BLUR_FBO_SIZE, BLUR_FBO_SIZE, Texture.LINEAR);
 
 			// our basic pass-through vertex shader
-			final String VERT = Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson5.vert"));
+			final String VERT = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson5.vert"));
 
 			// our fragment shader, which does the blur in one direction at a
 			// time
-			final String FRAG = Util.readFile(Util
-					.getResourceAsStream("res/shadertut/lesson5.frag"));
+			final String FRAG = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson5.frag"));
 
 			// create our shader program
 			blurShader = new ShaderProgram(VERT, FRAG, SpriteBatch.ATTRIBUTES);
@@ -196,10 +180,10 @@ public class ShadowLight {
 		// glClearColor(0.5f, 0.5f, 0.5f, 1f);
 		// glClear(GL_COLOR_BUFFER_BIT);
 
-		float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2)
-				/ Game.zoom) + (Mouse.getX()) / Game.zoom);
-		float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY - (Game.windowHeight / 2)
-				/ Game.zoom) + (((Game.windowHeight - Mouse.getY())) / Game.zoom));
+		float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2) / Game.zoom)
+				+ (Mouse.getX()) / Game.zoom);
+		float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY - (Game.windowHeight / 2) / Game.zoom)
+				+ (((Game.windowHeight - Mouse.getY())) / Game.zoom));
 		float x = mouseXTransformed;
 		float y = mouseYTransformed;
 		lights.get(0).x = x;
@@ -210,8 +194,7 @@ public class ShadowLight {
 		// Bump map shader
 		Game.activeBatch.setShader(lightShader);
 		lightShader.setUniformf("LightPos", lightPos);
-		lightShader.setUniformf("Resolution", Display.getWidth(),
-				Display.getHeight());
+		lightShader.setUniformf("Resolution", Display.getWidth(), Display.getHeight());
 		// GL11.glEnable(GL_DEPTH_TEST);
 
 		// Draw level BG
@@ -220,8 +203,7 @@ public class ShadowLight {
 		view.setIdentity();
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		view.translate(new Vector2f(-Game.windowWidth / 2,
-				-Game.windowHeight / 2));
+		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 		Game.activeBatch.updateUniforms();
 		if (Game.editorMode)
@@ -254,8 +236,7 @@ public class ShadowLight {
 		view.setIdentity();
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		view.translate(new Vector2f(-Game.windowWidth / 2,
-				-Game.windowHeight / 2));
+		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 		Game.activeBatch.updateUniforms();
 		if (Game.editorMode)
@@ -269,8 +250,7 @@ public class ShadowLight {
 		view.setIdentity();
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		view.translate(new Vector2f(-Game.windowWidth / 2,
-				-Game.windowHeight / 2));
+		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 		Game.activeBatch.updateUniforms();
 		try {
@@ -293,11 +273,9 @@ public class ShadowLight {
 				e.printStackTrace();
 			}
 			view.setIdentity();
-			view.translate(new Vector2f(Game.windowWidth / 2,
-					Game.windowHeight / 2));
+			view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-			view.translate(new Vector2f(-Game.windowWidth / 2,
-					-Game.windowHeight / 2));
+			view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
 			view.translate(new Vector2f(Game.dragX, Game.dragY));
 			Game.activeBatch.updateUniforms();
 			Game.editor.drawOverlay();
@@ -348,8 +326,7 @@ public class ShadowLight {
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		// view.setIdentity();
 
-		view.translate(new Vector2f(-(light.x - lightSize / 2f),
-				-(light.y - lightSize / 2f)));
+		view.translate(new Vector2f(-(light.x - lightSize / 2f), -(light.y - lightSize / 2f)));
 		batch.updateUniforms();
 
 		// update the new view matrix
@@ -380,8 +357,7 @@ public class ShadowLight {
 		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
 		batch.setColor(Color.WHITE);
-		batch.draw(occludersFBO.getTexture(), 0, 0, lightSize,
-				shadowMapFBO.getHeight());
+		batch.draw(occludersFBO.getTexture(), 0, 0, lightSize, shadowMapFBO.getHeight());
 		batch.flush();
 		shadowMapFBO.end();
 		// batch.end();
@@ -406,11 +382,9 @@ public class ShadowLight {
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		// view.setIdentity();
 
-		view.translate(new Vector2f(Display.getWidth() / 2,
-				Display.getHeight() / 2));
+		view.translate(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2));
 		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		view.translate(new Vector2f(-Display.getWidth() / 2, -Display
-				.getHeight() / 2));
+		view.translate(new Vector2f(-Display.getWidth() / 2, -Display.getHeight() / 2));
 		view.translate(new Vector2f(Game.dragX, Game.dragY));
 		// batch.begin();
 		// view.translate(new Vector2f(-(light.x - lightSize / 2f),
@@ -419,8 +393,7 @@ public class ShadowLight {
 
 		// batch.begin();
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-		batch.draw(shadowMapFBO.getTexture(), light.x - lightSize / 2f, light.y
-				- lightSize / 2f, lightSize, lightSize);
+		batch.draw(shadowMapFBO.getTexture(), light.x - lightSize / 2f, light.y - lightSize / 2f, lightSize, lightSize);
 		batch.flush();
 		if (frameBuffer != null) {
 			frameBuffer.end();

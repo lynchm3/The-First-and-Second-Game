@@ -7,8 +7,7 @@ public class ScriptTriggerFactionSize extends ScriptTrigger {
 
 	public transient Faction faction;
 	int size;
-	public final static String[] editableAttributes = { "name", "faction",
-			"size" };
+	public final static String[] editableAttributes = { "name", "faction", "size" };
 	String factionGUID;
 
 	public ScriptTriggerFactionSize() {

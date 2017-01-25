@@ -7,8 +7,7 @@ import com.marklynch.Game;
 
 public class QuadUtils {
 
-	public static void drawQuad(Color color, float x1, float x2, float y1,
-			float y2) {
+	public static void drawQuad(Color color, float x1, float x2, float y1, float y2) {
 		// GL11.glDisable(GL11.GL_TEXTURE_2D);
 		// GL11.glColor4f(color.r, color.g, color.b, color.a);
 
@@ -23,9 +22,8 @@ public class QuadUtils {
 		// GL11.glEnd();
 	}
 
-	public static void drawQuad(Texture texture, float x1, float x2, float x3,
-			float x4, float y1, float y2, float y3, float y4, float u1,
-			float u2, float u3, float u4, float v1, float v2, float v3, float v4) {
+	public static void drawQuad(Texture texture, float x1, float x2, float x3, float x4, float y1, float y2, float y3,
+			float y4, float u1, float u2, float u3, float u4, float v1, float v2, float v3, float v4) {
 		// GL11.glDisable(GL11.GL_TEXTURE_2D);
 		// GL11.glColor4f(color.r, color.g, color.b, color.a);
 

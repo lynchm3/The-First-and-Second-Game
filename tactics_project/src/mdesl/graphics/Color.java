@@ -30,9 +30,11 @@
  */
 package mdesl.graphics;
 
-/** A minimal Color utility, which holds four float values representing RGBA.
+/**
+ * A minimal Color utility, which holds four float values representing RGBA.
  * 
- * @author davedes */
+ * @author davedes
+ */
 public class Color {
 
 	/** The fixed color transparent */
@@ -63,7 +65,7 @@ public class Color {
 	public final static Color ORANGE = new Color(255, 200, 0, 255);
 	/** The fixed colour dark magenta */
 	public final static Color MAGENTA = new Color(255, 0, 255, 255);
-	
+
 	/** The red component [0.0 - 1.0]. */
 	public float r;
 	/** The green component [0.0 - 1.0]. */
@@ -73,12 +75,18 @@ public class Color {
 	/** The alpha component [0.0 - 1.0]. */
 	public float a;
 
-	/** Create a 4 component colour
+	/**
+	 * Create a 4 component colour
 	 * 
-	 * @param r The red component of the colour (0.0 -> 1.0)
-	 * @param g The green component of the colour (0.0 -> 1.0)
-	 * @param b The blue component of the colour (0.0 -> 1.0)
-	 * @param a The alpha component of the colour (0.0 -> 1.0) */
+	 * @param r
+	 *            The red component of the colour (0.0 -> 1.0)
+	 * @param g
+	 *            The green component of the colour (0.0 -> 1.0)
+	 * @param b
+	 *            The blue component of the colour (0.0 -> 1.0)
+	 * @param a
+	 *            The alpha component of the colour (0.0 -> 1.0)
+	 */
 	public Color(float r, float g, float b, float a) {
 		this.r = r;
 		this.g = g;
@@ -86,30 +94,46 @@ public class Color {
 		this.a = a;
 	}
 
-	/** Create a 3 component colour; alpha is passed as 1.0 (255).
+	/**
+	 * Create a 3 component colour; alpha is passed as 1.0 (255).
 	 * 
-	 * @param r The red component of the colour (0.0 -> 1.0)
-	 * @param g The green component of the colour (0.0 -> 1.0)
-	 * @param b The blue component of the colour (0.0 -> 1.0) */
+	 * @param r
+	 *            The red component of the colour (0.0 -> 1.0)
+	 * @param g
+	 *            The green component of the colour (0.0 -> 1.0)
+	 * @param b
+	 *            The blue component of the colour (0.0 -> 1.0)
+	 */
 	public Color(float r, float g, float b) {
 		this(r, g, b, 1f);
 	}
 
-	/** Create a 4 component colour
+	/**
+	 * Create a 4 component colour
 	 * 
-	 * @param r The red component of the colour (0 -> 255)
-	 * @param g The green component of the colour (0 -> 255)
-	 * @param b The blue component of the colour (0 -> 255)
-	 * @param a The alpha component of the colour (0 -> 255) */
+	 * @param r
+	 *            The red component of the colour (0 -> 255)
+	 * @param g
+	 *            The green component of the colour (0 -> 255)
+	 * @param b
+	 *            The blue component of the colour (0 -> 255)
+	 * @param a
+	 *            The alpha component of the colour (0 -> 255)
+	 */
 	public Color(int r, int g, int b, int a) {
 		this(r / 255f, g / 255f, b / 255f, a / 255f);
 	}
 
-	/** Create a 3 component colour; alpha is passed as 255 (1.0).
+	/**
+	 * Create a 3 component colour; alpha is passed as 255 (1.0).
 	 * 
-	 * @param r The red component of the colour (0 -> 255)
-	 * @param g The green component of the colour (0 -> 255)
-	 * @param b The blue component of the colour (0 -> 255) */
+	 * @param r
+	 *            The red component of the colour (0 -> 255)
+	 * @param g
+	 *            The green component of the colour (0 -> 255)
+	 * @param b
+	 *            The blue component of the colour (0 -> 255)
+	 */
 	public Color(int r, int g, int b) {
 		this(r, g, b, 255);
 	}
@@ -119,18 +143,24 @@ public class Color {
 		this(Color.WHITE);
 	}
 
-	/** Copy constructor
+	/**
+	 * Copy constructor
 	 * 
-	 * @param color The color to copy into the new instance */
+	 * @param color
+	 *            The color to copy into the new instance
+	 */
 	public Color(Color color) {
 		this(color.r, color.g, color.b, color.a);
 	}
 
-	/** Create a colour from an integer packed 0xAARRGGBB. If AA is specified as
+	/**
+	 * Create a colour from an integer packed 0xAARRGGBB. If AA is specified as
 	 * zero then it will be interpreted as unspecified and hence a value of 255
 	 * will be recorded.
 	 * 
-	 * @param value The value to interpret for the colour */
+	 * @param value
+	 *            The value to interpret for the colour
+	 */
 	public Color(int value) {
 		int r = (value & 0x00FF0000) >> 16;
 		int g = (value & 0x0000FF00) >> 8;
@@ -146,64 +176,77 @@ public class Color {
 		this.a = a / 255.0f;
 	}
 
-	/** Decode a number in a string and process it as a colour.
+	/**
+	 * Decode a number in a string and process it as a colour.
 	 * 
-	 * @param nm The number string to decode
+	 * @param nm
+	 *            The number string to decode
 	 * @return The color created from the number read
-	 * @throws NumberFormatException if the string was invalid */
+	 * @throws NumberFormatException
+	 *             if the string was invalid
+	 */
 	public static Color decode(String nm) {
 		return new Color(Integer.decode(nm).intValue());
 	}
 
-	/** Get the red byte component of this colour
+	/**
+	 * Get the red byte component of this colour
 	 * 
-	 * @return The red component (range 0-255) */
+	 * @return The red component (range 0-255)
+	 */
 	public int red() {
 		return (int) (r * 255);
 	}
 
-	/** Get the green byte component of this colour
+	/**
+	 * Get the green byte component of this colour
 	 * 
-	 * @return The green component (range 0-255) */
+	 * @return The green component (range 0-255)
+	 */
 	public int green() {
 		return (int) (g * 255);
 	}
 
-	/** Get the blue byte component of this colour
+	/**
+	 * Get the blue byte component of this colour
 	 * 
-	 * @return The blue component (range 0-255) */
+	 * @return The blue component (range 0-255)
+	 */
 	public int blue() {
 		return (int) (b * 255);
 	}
 
-	/** Get the alpha byte component of this colour
+	/**
+	 * Get the alpha byte component of this colour
 	 * 
-	 * @return The alpha component (range 0-255) */
+	 * @return The alpha component (range 0-255)
+	 */
 	public int alpha() {
 		return (int) (a * 255);
 	}
-	
+
 	public void set(Color color) {
 		set(color.r, color.g, color.b, color.a);
 	}
-	
+
 	public void set(float r, float g, float b, float a) {
 		set(r, g, b);
 		this.a = a;
 	}
-	
+
 	public void set(float r, float g, float b) {
 		this.r = r;
 		this.g = g;
 		this.b = b;
 	}
 
-	/** Packs the 4 components of this color into a 32-bit int.
+	/**
+	 * Packs the 4 components of this color into a 32-bit int.
 	 * 
-	 * @return the packed color as a 32-bit int. */
+	 * @return the packed color as a 32-bit int.
+	 */
 	public int toIntBits() {
-		int color = ((int) (255 * a) << 24) | ((int) (255 * b) << 16) | ((int) (255 * g) << 8)
-				| ((int) (255 * r));
+		int color = ((int) (255 * a) << 24) | ((int) (255 * b) << 16) | ((int) (255 * g) << 8) | ((int) (255 * r));
 		return color;
 	}
 

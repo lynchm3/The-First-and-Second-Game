@@ -29,8 +29,7 @@ public class Fight {
 		NO_ADVANTAGE, ATTACKER_ADVANTAGE, DEFENDER_ADVANTAGE
 	};
 
-	public Fight(Actor attacker, Weapon attackerWeapon, GameObject target,
-			Weapon defenderWeapon, float range) {
+	public Fight(Actor attacker, Weapon attackerWeapon, GameObject target, Weapon defenderWeapon, float range) {
 		this.attacker = attacker;
 		this.attackerWeapon = attackerWeapon;
 		this.defender = target;
@@ -65,8 +64,7 @@ public class Fight {
 		chanceOfHittingAttacker = 99;
 		chanceOfHittingDefender = 99;
 
-		if (defender.squareGameObjectIsOn.weaponsThatCanAttack
-				.contains(attackerWeapon)) {
+		if (defender.squareGameObjectIsOn.weaponsThatCanAttack.contains(attackerWeapon)) {
 			reachable = true;
 		} else {
 			reachable = false;
@@ -106,20 +104,16 @@ public class Fight {
 				return 1;
 
 			// 3. You take no damage
-			if (fight0.damageTakenByAttacker <= 0
-					&& fight1.damageTakenByAttacker > 0)
+			if (fight0.damageTakenByAttacker <= 0 && fight1.damageTakenByAttacker > 0)
 				return -1;
 
-			if (fight0.damageTakenByAttacker > 0
-					&& fight1.damageTakenByAttacker <= 0)
+			if (fight0.damageTakenByAttacker > 0 && fight1.damageTakenByAttacker <= 0)
 				return 1;
 
 			// 4. Best damage diff
-			float fight0DamageDifference = fight0.damageTakenByAttacker
-					- fight0.damageTakenByDefender;
+			float fight0DamageDifference = fight0.damageTakenByAttacker - fight0.damageTakenByDefender;
 
-			float fight1DamageDifference = fight1.damageTakenByAttacker
-					- fight1.damageTakenByDefender;
+			float fight1DamageDifference = fight1.damageTakenByAttacker - fight1.damageTakenByDefender;
 
 			if (fight0DamageDifference > fight1DamageDifference)
 				return -1;

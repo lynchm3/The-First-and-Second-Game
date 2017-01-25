@@ -7,8 +7,7 @@ import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 
 public class ScriptEventSetAI extends ScriptEvent {
 
-	public final static String[] editableAttributes = { "name",
-			"blockUserInput", "scriptTrigger", "actor", "ai" };
+	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "actor", "ai" };
 
 	public transient Actor actor;
 	public AIRoutine ai;
@@ -22,8 +21,7 @@ public class ScriptEventSetAI extends ScriptEvent {
 		name = "ScriptEventSetAI";
 	}
 
-	public ScriptEventSetAI(boolean blockUserInput,
-			ScriptTrigger scriptTrigger, Actor actor, AIRoutine ai) {
+	public ScriptEventSetAI(boolean blockUserInput, ScriptTrigger scriptTrigger, Actor actor, AIRoutine ai) {
 		super(blockUserInput, scriptTrigger);
 		this.actor = actor;
 		this.actorGUID = actor.guid;

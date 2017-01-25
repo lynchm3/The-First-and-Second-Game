@@ -19,8 +19,7 @@ public class InstanceSelectionWindow<T> {
 	public Editor editor;
 	public String title;
 
-	public InstanceSelectionWindow(final ArrayList<T> instances,
-			final Editor editor, String title) {
+	public InstanceSelectionWindow(final ArrayList<T> instances, final Editor editor, String title) {
 		this.editor = editor;
 		this.instances = instances;
 		this.title = title;
@@ -32,8 +31,8 @@ public class InstanceSelectionWindow<T> {
 			float x = i / ((int) Game.windowHeight / 30) * 200;
 			float y = i % (Game.windowHeight / 30) * 30;
 
-			final SelectionWindowButton selectionWindowButton = new SelectionWindowButton(
-					x, y, 190, 30, null, null, "", true, true, instances.get(i));
+			final SelectionWindowButton selectionWindowButton = new SelectionWindowButton(x, y, 190, 30, null, null, "",
+					true, true, instances.get(i));
 
 			selectionWindowButton.clickListener = new ClickListener() {
 
@@ -43,7 +42,7 @@ public class InstanceSelectionWindow<T> {
 					try {
 
 						if (instances.get(index) instanceof WeaponTemplate) {
-							WeaponTemplate weaponTemplate = (WeaponTemplate)instances.get(index);
+							WeaponTemplate weaponTemplate = (WeaponTemplate) instances.get(index);
 							Weapon weapon = weaponTemplate.makeWeapon();
 							editor.weapons.add(weapon);
 							editor.instanceSelectionWindow = null;
@@ -62,24 +61,22 @@ public class InstanceSelectionWindow<T> {
 	}
 
 	public void draw() {
-				
-		QuadUtils.drawQuad(Color.WHITE, 0, Game.windowWidth, 0,
-				Game.windowHeight);
-		
+
+		QuadUtils.drawQuad(Color.WHITE, 0, Game.windowWidth, 0, Game.windowHeight);
+
 		for (SelectionWindowButton button : buttons) {
 			button.draw();
 		}
 
 		float textWidth = Game.font.getWidth(title);
 		Game.activeBatch.setColor(Color.RED);
-		Game.font.drawText(Game.activeBatch, title, 200,50);
+		Game.font.drawText(Game.activeBatch, title, 200, 50);
 
 	}
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY) {
 		for (Button button : buttons) {
-			if (button.calculateIfPointInBoundsOfButton(mouseX,
-					Game.windowHeight - mouseY))
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}
 		return null;

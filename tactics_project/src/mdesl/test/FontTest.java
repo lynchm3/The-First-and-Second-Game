@@ -54,7 +54,7 @@ public class FontTest extends SimpleGame {
 	protected void create() throws LWJGLException {
 		super.create();
 
-		//Load some textures
+		// Load some textures
 		try {
 			font = new BitmapFont(Util.getResource("res/ptsans.fnt"), Util.getResource("res/ptsans_00.png"));
 		} catch (IOException e) {
@@ -63,26 +63,25 @@ public class FontTest extends SimpleGame {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		//create our sprite batch
+		// create our sprite batch
 		batch = new SpriteBatch();
 	}
 
 	protected void render() throws LWJGLException {
-		super.render();		
-		
-		//start the sprite batch
+		super.render();
+
+		// start the sprite batch
 		batch.begin();
-		
+
 		batch.setColor(Color.WHITE);
 		font.drawText(batch, "The quick brown fox jumps over the lazy dog!", 10, 10);
-		
-		//testing some unicode values
+
+		// testing some unicode values
 		batch.setColor(Color.GRAY);
 		font.drawText(batch, "\u2122\u00e2\u00C9\u0110\u2082\u2264", 10, font.getLineHeight() + 10);
-		
+
 		batch.end();
 	}
-	
 
 	protected void resize() throws LWJGLException {
 		super.resize();

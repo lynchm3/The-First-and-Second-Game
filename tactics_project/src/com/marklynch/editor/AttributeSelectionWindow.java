@@ -31,8 +31,8 @@ public class AttributeSelectionWindow<T> {
 	public boolean multi = false;
 	public Editor editor;
 
-	public AttributeSelectionWindow(final ArrayList<T> objects, boolean multi,
-			final Editor editor, final Object ownerOfAttribute) {
+	public AttributeSelectionWindow(final ArrayList<T> objects, boolean multi, final Editor editor,
+			final Object ownerOfAttribute) {
 		this.multi = multi;
 		this.objects = objects;
 		this.editor = editor;
@@ -43,10 +43,9 @@ public class AttributeSelectionWindow<T> {
 			float x = i / ((int) Game.windowHeight / 30) * 200;
 			float y = i % (Game.windowHeight / 30) * 30;
 
-			final SelectionWindowButton selectionWindowButton = new SelectionWindowButton(
-					x, y, 190, 30, null, null, "", true, true, objects.get(i));
-			if (multi && selectedObjects != null
-					&& selectedObjects.contains(objects.get(i)))
+			final SelectionWindowButton selectionWindowButton = new SelectionWindowButton(x, y, 190, 30, null, null, "",
+					true, true, objects.get(i));
+			if (multi && selectedObjects != null && selectedObjects.contains(objects.get(i)))
 				selectionWindowButton.down = true;
 
 			selectionWindowButton.clickListener = new ClickListener() {
@@ -55,50 +54,34 @@ public class AttributeSelectionWindow<T> {
 				public void click() {
 
 					try {
-						Class<? extends Object> objectClass = editor.objectToEdit
-								.getClass();
-						Field field = objectClass
-								.getField(editor.attributeToEditName);
+						Class<? extends Object> objectClass = editor.objectToEdit.getClass();
+						Field field = objectClass.getField(editor.attributeToEditName);
 						Class type;
 
 						ArrayList arrayList = null;
 						if (field.getType().isAssignableFrom(ArrayList.class)) {
-							arrayList = (ArrayList) field
-									.get(editor.objectToEdit);
-							type = arrayList.get(editor.attributeToEditIndex)
-									.getClass();
+							arrayList = (ArrayList) field.get(editor.objectToEdit);
+							type = arrayList.get(editor.attributeToEditIndex).getClass();
 						} else {
 							type = field.getType();
 						}
 
 						if (type.isAssignableFrom(GameObject.class)) {
-							GameObject gameObject = (GameObject) objects
-									.get(index);
+							GameObject gameObject = (GameObject) objects.get(index);
 							if (arrayList == null) {
 								field.set(ownerOfAttribute, gameObject);
-								if (ClassUtils.classContainsField(objectClass,
-										editor.attributeToEditName + "GUID")) {
-									Field guidField = objectClass
-											.getField(editor.attributeToEditName
-													+ "GUID");
+								if (ClassUtils.classContainsField(objectClass, editor.attributeToEditName + "GUID")) {
+									Field guidField = objectClass.getField(editor.attributeToEditName + "GUID");
 									if (guidField != null) {
-										guidField.set(ownerOfAttribute,
-												gameObject.guid);
+										guidField.set(ownerOfAttribute, gameObject.guid);
 									}
 								}
 							} else {
-								arrayList.set(editor.attributeToEditIndex,
-										gameObject);
-								if (ClassUtils.classContainsField(objectClass,
-										editor.attributeToEditName + "GUIDs")) {
-									Field guidField = objectClass
-											.getField(editor.attributeToEditName
-													+ "GUIDs");
-									ArrayList arrayListGUIDs = (ArrayList) guidField
-											.get(editor.objectToEdit);
-									arrayListGUIDs.set(
-											editor.attributeToEditIndex,
-											gameObject.guid);
+								arrayList.set(editor.attributeToEditIndex, gameObject);
+								if (ClassUtils.classContainsField(objectClass, editor.attributeToEditName + "GUIDs")) {
+									Field guidField = objectClass.getField(editor.attributeToEditName + "GUIDs");
+									ArrayList arrayListGUIDs = (ArrayList) guidField.get(editor.objectToEdit);
+									arrayListGUIDs.set(editor.attributeToEditIndex, gameObject.guid);
 
 								}
 							}
@@ -114,12 +97,9 @@ public class AttributeSelectionWindow<T> {
 							} else {
 								field.set(ownerOfAttribute, faction);
 								try {
-									Field guidField = objectClass
-											.getField(editor.attributeToEditName
-													+ "GUID");
+									Field guidField = objectClass.getField(editor.attributeToEditName + "GUID");
 									if (guidField != null) {
-										guidField.set(ownerOfAttribute,
-												faction.guid);
+										guidField.set(ownerOfAttribute, faction.guid);
 									}
 								} catch (Exception e) {
 
@@ -132,28 +112,21 @@ public class AttributeSelectionWindow<T> {
 
 							field.set(ownerOfAttribute, square);
 							try {
-								Field guidField = objectClass
-										.getField(editor.attributeToEditName
-												+ "GUID");
+								Field guidField = objectClass.getField(editor.attributeToEditName + "GUID");
 								if (guidField != null) {
-									guidField
-											.set(ownerOfAttribute, square.guid);
+									guidField.set(ownerOfAttribute, square.guid);
 								}
 							} catch (Exception e) {
 
 							}
 							editor.stopEditingAttribute();
 						} else if (type.isAssignableFrom(ScriptEvent.class)) {
-							ScriptEvent scriptEvent = (ScriptEvent) objects
-									.get(index);
+							ScriptEvent scriptEvent = (ScriptEvent) objects.get(index);
 							field.set(ownerOfAttribute, scriptEvent);
 							try {
-								Field guidField = objectClass
-										.getField(editor.attributeToEditName
-												+ "GUID");
+								Field guidField = objectClass.getField(editor.attributeToEditName + "GUID");
 								if (guidField != null) {
-									guidField.set(ownerOfAttribute,
-											scriptEvent.guid);
+									guidField.set(ownerOfAttribute, scriptEvent.guid);
 								}
 							} catch (Exception e) {
 
@@ -164,29 +137,19 @@ public class AttributeSelectionWindow<T> {
 							if (arrayList == null) {
 								field.set(ownerOfAttribute, actor);
 								try {
-									Field guidField = objectClass
-											.getField(editor.attributeToEditName
-													+ "GUID");
+									Field guidField = objectClass.getField(editor.attributeToEditName + "GUID");
 									if (guidField != null) {
-										guidField.set(ownerOfAttribute,
-												actor.guid);
+										guidField.set(ownerOfAttribute, actor.guid);
 									}
 								} catch (Exception e) {
 
 								}
 							} else {
-								arrayList.set(editor.attributeToEditIndex,
-										actor);
-								if (ClassUtils.classContainsField(objectClass,
-										editor.attributeToEditName + "GUIDs")) {
-									Field guidField = objectClass
-											.getField(editor.attributeToEditName
-													+ "GUIDs");
-									ArrayList arrayListGUIDs = (ArrayList) guidField
-											.get(editor.objectToEdit);
-									arrayListGUIDs.set(
-											editor.attributeToEditIndex,
-											actor.guid);
+								arrayList.set(editor.attributeToEditIndex, actor);
+								if (ClassUtils.classContainsField(objectClass, editor.attributeToEditName + "GUIDs")) {
+									Field guidField = objectClass.getField(editor.attributeToEditName + "GUIDs");
+									ArrayList arrayListGUIDs = (ArrayList) guidField.get(editor.objectToEdit);
+									arrayListGUIDs.set(editor.attributeToEditIndex, actor.guid);
 
 								}
 							}
@@ -202,14 +165,9 @@ public class AttributeSelectionWindow<T> {
 							Texture texture = (Texture) objects.get(index);
 							field.set(editor.objectToEdit, objects.get(index));
 							try {
-								Field guidField = objectClass
-										.getField(editor.attributeToEditName
-												+ "Path");
+								Field guidField = objectClass.getField(editor.attributeToEditName + "Path");
 								if (guidField != null) {
-									guidField
-											.set(ownerOfAttribute,
-													ResourceUtils
-															.getPathForTexture(texture));
+									guidField.set(ownerOfAttribute, ResourceUtils.getPathForTexture(texture));
 								}
 							} catch (Exception e) {
 								e.printStackTrace();
@@ -220,12 +178,10 @@ public class AttributeSelectionWindow<T> {
 
 							if (selectionWindowButton.down == true) {
 								selectionWindowButton.down = false;
-								selectedObjects
-										.remove(selectionWindowButton.object);
+								selectedObjects.remove(selectionWindowButton.object);
 							} else {
 								selectionWindowButton.down = true;
-								selectedObjects
-										.add((T) selectionWindowButton.object);
+								selectedObjects.add((T) selectionWindowButton.object);
 							}
 
 							Weapons weapons = new Weapons();
@@ -233,23 +189,17 @@ public class AttributeSelectionWindow<T> {
 								Weapon weapon = (Weapon) selectedObject;
 								weapons.weapons.add(weapon.makeWeapon());
 							}
-							ownerOfAttribute.getClass().getField("weapons")
-									.set(ownerOfAttribute, weapons);
+							ownerOfAttribute.getClass().getField("weapons").set(ownerOfAttribute, weapons);
 						} else if (type.isAssignableFrom(ScriptTrigger.class)) {// script
 																				// trigger
-							ScriptTrigger scriptTrigger = (ScriptTrigger) objects
-									.get(index);
-							ownerOfAttribute
-									.getClass()
-									.getField("scriptTrigger")
-									.set(ownerOfAttribute,
-											scriptTrigger.makeCopy());
+							ScriptTrigger scriptTrigger = (ScriptTrigger) objects.get(index);
+							ownerOfAttribute.getClass().getField("scriptTrigger").set(ownerOfAttribute,
+									scriptTrigger.makeCopy());
 							editor.stopEditingAttribute();
 						} else if (type.isAssignableFrom(AIRoutine.class)) {// script
-																		// trigger
+							// trigger
 							AIRoutine ai = (AIRoutine) objects.get(index);
-							ownerOfAttribute.getClass().getField("ai")
-									.set(ownerOfAttribute, ai.makeCopy());
+							ownerOfAttribute.getClass().getField("ai").set(ownerOfAttribute, ai.makeCopy());
 							editor.stopEditingAttribute();
 						}
 
@@ -268,8 +218,7 @@ public class AttributeSelectionWindow<T> {
 
 	public void draw() {
 		// faction
-		QuadUtils.drawQuad(Color.WHITE, 0, Game.windowWidth, 0,
-				Game.windowHeight);
+		QuadUtils.drawQuad(Color.WHITE, 0, Game.windowWidth, 0, Game.windowHeight);
 		for (SelectionWindowButton button : buttons) {
 			button.draw();
 		}
@@ -278,8 +227,7 @@ public class AttributeSelectionWindow<T> {
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY) {
 		for (Button button : buttons) {
-			if (button.calculateIfPointInBoundsOfButton(mouseX,
-					Game.windowHeight - mouseY))
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}
 		return null;

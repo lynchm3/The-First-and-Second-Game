@@ -20,8 +20,7 @@ public class Dialog {
 	public String backgroundImagePath = "";
 	public Texture backgroundImageTexture = null;
 
-	public Dialog(Square reference, float width, float height,
-			String backgroundImagePath, String fontPath) {
+	public Dialog(Square reference, float width, float height, String backgroundImagePath, String fontPath) {
 		super();
 		this.reference = reference;
 		this.width = width;
@@ -31,13 +30,11 @@ public class Dialog {
 	}
 
 	public void draw() {
-		int positionYInPixels = (int) ((reference.y + 1) * Game.zoom
-				* Game.SQUARE_HEIGHT - (Game.windowHeight * Game.zoom) / 2
-				+ Game.dragY * Game.zoom + Game.windowHeight / 2);
+		int positionYInPixels = (int) ((reference.y + 1) * Game.zoom * Game.SQUARE_HEIGHT
+				- (Game.windowHeight * Game.zoom) / 2 + Game.dragY * Game.zoom + Game.windowHeight / 2);
 
-		int positionXInPixels = (int) ((reference.x + 1) * Game.zoom
-				* Game.SQUARE_WIDTH - (Game.windowWidth * Game.zoom) / 2
-				+ Game.dragX * Game.zoom + Game.windowWidth / 2);
+		int positionXInPixels = (int) ((reference.x + 1) * Game.zoom * Game.SQUARE_WIDTH
+				- (Game.windowWidth * Game.zoom) / 2 + Game.dragX * Game.zoom + Game.windowWidth / 2);
 
 		// background
 		// this.backgroundImageTexture.bind();
@@ -52,15 +49,13 @@ public class Dialog {
 		GL11.glTexCoord2f(0, 0);
 		GL11.glVertex2f(positionXInPixels + 5, positionYInPixels + 5);
 		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(positionXInPixels - 64 * Game.zoom, positionYInPixels
-				- 64 * Game.zoom);
+		GL11.glVertex2f(positionXInPixels - 64 * Game.zoom, positionYInPixels - 64 * Game.zoom);
 		GL11.glEnd();
 
 		// GL11.glLineWidth(1.0f);
 		// drawCircle(10);
 
-		TextureUtils.drawTexture(this.backgroundImageTexture,
-				positionXInPixels, positionXInPixels + width,
+		TextureUtils.drawTexture(this.backgroundImageTexture, positionXInPixels, positionXInPixels + width,
 				positionYInPixels, positionYInPixels + height);
 
 		GL11.glColor3f(1.0f, 1.0f, 1.0f);
@@ -69,8 +64,7 @@ public class Dialog {
 
 		int i = 0;
 		for (String string : strings) {
-			TextUtils.printTextWithImages(new Object[] { string },
-					positionXInPixels + 10, positionYInPixels + 20 + i,
+			TextUtils.printTextWithImages(new Object[] { string }, positionXInPixels + 10, positionYInPixels + 20 + i,
 					Integer.MAX_VALUE, true);
 			i += 20;
 		}
@@ -84,8 +78,7 @@ public class Dialog {
 
 		for (int i = 0; i < 360; i++) {
 			double degInRad = Math.toRadians(i);
-			GL11.glVertex2d(Math.cos(degInRad) * radius, Math.sin(degInRad)
-					* radius);
+			GL11.glVertex2d(Math.cos(degInRad) * radius, Math.sin(degInRad) * radius);
 		}
 
 		GL11.glEnd();

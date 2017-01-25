@@ -42,15 +42,13 @@ public class RectTest extends SimpleGame {
 		super.create();
 		// create our font
 		try {
-			fontTex = new Texture(Util.getResource("res/ptsans_00.png"),
-					Texture.NEAREST);
+			fontTex = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
 
 			// in Photoshop, we included a small white box at the bottom right
 			// of our font sheet
 			// we will use this to draw lines and rectangles within the same
 			// batch as our text
-			rect = new TextureRegion(fontTex, fontTex.getWidth() - 2,
-					fontTex.getHeight() - 2, 1, 1);
+			rect = new TextureRegion(fontTex, fontTex.getWidth() - 2, fontTex.getHeight() - 2, 1, 1);
 
 			font = new BitmapFont(Util.getResource("res/ptsans.fnt"), fontTex);
 		} catch (IOException e) {
@@ -116,13 +114,11 @@ public class RectTest extends SimpleGame {
 		// drawRect(180, y + 50, 50, 25, 3);
 
 		// test drawing a rotated line
-		batch.draw(rect, x + width + 30, 25, 100, 1, 0, 0,
-				(float) Math.toRadians(45));
+		batch.draw(rect, x + width + 30, 25, 100, 1, 0, 0, (float) Math.toRadians(45));
 
 		// test drawing line from point A to point B
 		batch.setColor(Color.PINK);
-		drawLine(400, 300, Mouse.getX(),
-				Display.getHeight() - Mouse.getY() - 1, 3);
+		drawLine(400, 300, Mouse.getX(), Display.getHeight() - Mouse.getY() - 1, 3);
 
 		batch.end();
 	}

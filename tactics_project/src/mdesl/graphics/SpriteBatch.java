@@ -58,24 +58,18 @@ public class SpriteBatch {
 	public static final String ATTR_POSITION = "Position";
 	public static final String ATTR_TEXCOORD = "TexCoord";
 
-	public static final String DEFAULT_VERT_SHADER = "uniform mat4 "
-			+ U_PROJ_VIEW + ";\n" + "attribute vec4 " + ATTR_COLOR + ";\n"
-			+ "attribute vec2 " + ATTR_TEXCOORD + ";\n" + "attribute vec2 "
-			+ ATTR_POSITION + ";\n" + "varying vec4 vColor;\n"
-			+ "varying vec2 vTexCoord; \n" + "void main() {\n" + "	vColor = "
-			+ ATTR_COLOR + ";\n" + "	vTexCoord = " + ATTR_TEXCOORD + ";\n"
-			+ "	gl_Position = " + U_PROJ_VIEW + " * vec4(" + ATTR_POSITION
-			+ ".xy, 0.0, 1.0);\n" + "}";
+	public static final String DEFAULT_VERT_SHADER = "uniform mat4 " + U_PROJ_VIEW + ";\n" + "attribute vec4 "
+			+ ATTR_COLOR + ";\n" + "attribute vec2 " + ATTR_TEXCOORD + ";\n" + "attribute vec2 " + ATTR_POSITION + ";\n"
+			+ "varying vec4 vColor;\n" + "varying vec2 vTexCoord; \n" + "void main() {\n" + "	vColor = " + ATTR_COLOR
+			+ ";\n" + "	vTexCoord = " + ATTR_TEXCOORD + ";\n" + "	gl_Position = " + U_PROJ_VIEW + " * vec4("
+			+ ATTR_POSITION + ".xy, 0.0, 1.0);\n" + "}";
 
-	public static final String DEFAULT_FRAG_SHADER = "uniform sampler2D "
-			+ U_TEXTURE + ";\n" + "varying vec4 vColor;\n"
-			+ "varying vec2 vTexCoord;\n" + "void main() {\n"
-			+ "	vec4 texColor = texture2D(" + U_TEXTURE + ", vTexCoord);\n"
-			+ "	gl_FragColor = vColor * texColor;\n" + "}";
+	public static final String DEFAULT_FRAG_SHADER = "uniform sampler2D " + U_TEXTURE + ";\n" + "varying vec4 vColor;\n"
+			+ "varying vec2 vTexCoord;\n" + "void main() {\n" + "	vec4 texColor = texture2D(" + U_TEXTURE
+			+ ", vTexCoord);\n" + "	gl_FragColor = vColor * texColor;\n" + "}";
 
-	public static final List<VertexAttrib> ATTRIBUTES = Arrays.asList(
-			new VertexAttrib(0, ATTR_POSITION, 2), new VertexAttrib(1,
-					ATTR_COLOR, 4), new VertexAttrib(2, ATTR_TEXCOORD, 2));
+	public static final List<VertexAttrib> ATTRIBUTES = Arrays.asList(new VertexAttrib(0, ATTR_POSITION, 2),
+			new VertexAttrib(1, ATTR_COLOR, 4), new VertexAttrib(2, ATTR_TEXCOORD, 2));
 
 	static ShaderProgram defaultShader;
 	public static int renderCalls = 0;
@@ -99,8 +93,8 @@ public class SpriteBatch {
 	private boolean drawing = false;
 
 	public static ShaderProgram getDefaultShader() throws LWJGLException {
-		return defaultShader == null ? (defaultShader = new ShaderProgram(
-				DEFAULT_VERT_SHADER, DEFAULT_FRAG_SHADER, ATTRIBUTES))
+		return defaultShader == null
+				? (defaultShader = new ShaderProgram(DEFAULT_VERT_SHADER, DEFAULT_FRAG_SHADER, ATTRIBUTES))
 				: defaultShader;
 	}
 
@@ -149,8 +143,7 @@ public class SpriteBatch {
 	}
 
 	public Matrix4f getCombinedMatrix() {
-		Matrix4f.mul(Matrix4f.transpose(projMatrix, transpositionPool),
-				viewMatrix, projViewMatrix);
+		Matrix4f.mul(Matrix4f.transpose(projMatrix, transpositionPool), viewMatrix, projViewMatrix);
 		return projViewMatrix;
 	}
 
@@ -242,8 +235,7 @@ public class SpriteBatch {
 	 */
 	public void setShader(ShaderProgram program, boolean updateUniforms) {
 		if (program == null)
-			throw new NullPointerException(
-					"shader cannot be null; use getDefaultShader instead");
+			throw new NullPointerException("shader cannot be null; use getDefaultShader instead");
 		if (drawing) // if we are already drawing, flush the batch before
 						// switching shaders
 			flush();
@@ -272,8 +264,7 @@ public class SpriteBatch {
 
 	public void begin() {
 		if (drawing)
-			throw new IllegalStateException(
-					"must not be drawing before calling begin()");
+			throw new IllegalStateException("must not be drawing before calling begin()");
 		drawing = true;
 		program.use();
 		idx = 0;
@@ -283,8 +274,7 @@ public class SpriteBatch {
 
 	public void end() {
 		if (!drawing)
-			throw new IllegalStateException(
-					"must be drawing before calling end()");
+			throw new IllegalStateException("must be drawing before calling end()");
 		drawing = false;
 		flush();
 	}
@@ -298,15 +288,13 @@ public class SpriteBatch {
 		}
 	}
 
-	public void drawRegion(Texture tex, float srcX, float srcY, float srcWidth,
-			float srcHeight, float dstX, float dstY) {
-		drawRegion(tex, srcX, srcY, srcWidth, srcHeight, dstX, dstY, srcWidth,
-				srcHeight);
+	public void drawRegion(Texture tex, float srcX, float srcY, float srcWidth, float srcHeight, float dstX,
+			float dstY) {
+		drawRegion(tex, srcX, srcY, srcWidth, srcHeight, dstX, dstY, srcWidth, srcHeight);
 	}
 
-	public void drawRegion(Texture tex, float srcX, float srcY, float srcWidth,
-			float srcHeight, float dstX, float dstY, float dstWidth,
-			float dstHeight) {
+	public void drawRegion(Texture tex, float srcX, float srcY, float srcWidth, float srcHeight, float dstX, float dstY,
+			float dstWidth, float dstHeight) {
 		float u = srcX / tex.getWidth();
 		float v = srcY / tex.getHeight();
 		float u2 = (srcX + srcWidth) / tex.getWidth();
@@ -314,18 +302,15 @@ public class SpriteBatch {
 		draw(tex, dstX, dstY, dstWidth, dstHeight, u, v, u2, v2);
 	}
 
-	public void drawRegion(TextureRegion region, float srcX, float srcY,
-			float srcWidth, float srcHeight, float dstX, float dstY) {
-		drawRegion(region, srcX, srcY, srcWidth, srcHeight, dstX, dstY,
-				srcWidth, srcHeight);
+	public void drawRegion(TextureRegion region, float srcX, float srcY, float srcWidth, float srcHeight, float dstX,
+			float dstY) {
+		drawRegion(region, srcX, srcY, srcWidth, srcHeight, dstX, dstY, srcWidth, srcHeight);
 	}
 
-	public void drawRegion(TextureRegion region, float srcX, float srcY,
-			float srcWidth, float srcHeight, float dstX, float dstY,
-			float dstWidth, float dstHeight) {
-		drawRegion(region.getTexture(), region.getRegionX() + srcX,
-				region.getRegionY() + srcY, srcWidth, srcHeight, dstX, dstY,
-				dstWidth, dstHeight);
+	public void drawRegion(TextureRegion region, float srcX, float srcY, float srcWidth, float srcHeight, float dstX,
+			float dstY, float dstWidth, float dstHeight) {
+		drawRegion(region.getTexture(), region.getRegionX() + srcX, region.getRegionY() + srcY, srcWidth, srcHeight,
+				dstX, dstY, dstWidth, dstHeight);
 	}
 
 	public void draw(ITexture tex, float x, float y) {
@@ -333,25 +318,21 @@ public class SpriteBatch {
 	}
 
 	public void draw(ITexture tex, float x, float y, float width, float height) {
-		draw(tex, x, y, width, height, tex.getU(), tex.getV(), tex.getU2(),
+		draw(tex, x, y, width, height, tex.getU(), tex.getV(), tex.getU2(), tex.getV2());
+	}
+
+	public void draw(ITexture tex, float x, float y, float originX, float originY, float rotationRadians) {
+		draw(tex, x, y, tex.getWidth(), tex.getHeight(), originX, originY, rotationRadians);
+	}
+
+	public void draw(ITexture tex, float x, float y, float width, float height, float originX, float originY,
+			float rotationRadians) {
+		draw(tex, x, y, width, height, originX, originY, rotationRadians, tex.getU(), tex.getV(), tex.getU2(),
 				tex.getV2());
 	}
 
-	public void draw(ITexture tex, float x, float y, float originX,
-			float originY, float rotationRadians) {
-		draw(tex, x, y, tex.getWidth(), tex.getHeight(), originX, originY,
-				rotationRadians);
-	}
-
-	public void draw(ITexture tex, float x, float y, float width, float height,
-			float originX, float originY, float rotationRadians) {
-		draw(tex, x, y, width, height, originX, originY, rotationRadians,
-				tex.getU(), tex.getV(), tex.getU2(), tex.getV2());
-	}
-
-	public void draw(ITexture tex, float x, float y, float width, float height,
-			float originX, float originY, float rotationRadians, float u,
-			float v, float u2, float v2) {
+	public void draw(ITexture tex, float x, float y, float width, float height, float originX, float originY,
+			float rotationRadians, float u, float v, float u2, float v2) {
 		checkFlush(tex);
 		final float r = color.r;
 		final float g = color.g;
@@ -412,15 +393,14 @@ public class SpriteBatch {
 		vertex(x4, y4, r, g, b, a, u, v2);
 	}
 
-	public void draw(ITexture tex, float x, float y, float width, float height,
-			float u, float v, float u2, float v2) {
+	public void draw(ITexture tex, float x, float y, float width, float height, float u, float v, float u2, float v2) {
 		draw(tex, x, y, width, height, x, y, 0f, u, v, u2, v2);
 	}
 
 	/**
 	 * Renders a texture using custom vertex attributes; e.g. for different
-	 * vertex colours. This will ignore the current batch color and
-	 * "x/y translation", as well as the U/V coordinates of the given ITexture.
+	 * vertex colours. This will ignore the current batch color and "x/y
+	 * translation", as well as the U/V coordinates of the given ITexture.
 	 * 
 	 * @param tex
 	 *            the texture to use
@@ -436,8 +416,7 @@ public class SpriteBatch {
 		idx += 6;
 	}
 
-	public VertexData vertex(float x, float y, float r, float g, float b,
-			float a, float u, float v) {
+	public VertexData vertex(float x, float y, float r, float g, float b, float a, float u, float v) {
 		data.put(x).put(y).put(r).put(g).put(b).put(a).put(u).put(v);
 		idx++;
 		return data;

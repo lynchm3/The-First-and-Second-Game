@@ -8,8 +8,7 @@ public class ScriptTriggerSpecficActorOccupiesSquare extends ScriptTrigger {
 
 	public transient Actor actor;
 	public transient Square square;
-	public final static String[] editableAttributes = { "name", "actor",
-			"square" };
+	public final static String[] editableAttributes = { "name", "actor", "square" };
 	public String actorGUID = null;
 	public String squareGUID = null;
 

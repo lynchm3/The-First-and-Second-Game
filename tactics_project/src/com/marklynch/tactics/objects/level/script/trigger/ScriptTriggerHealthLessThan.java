@@ -7,8 +7,7 @@ public class ScriptTriggerHealthLessThan extends ScriptTrigger {
 
 	public transient GameObject gameObject;
 	public int healthLimit;
-	public final static String[] editableAttributes = { "name", "gameObject",
-			"healthLimit" };
+	public final static String[] editableAttributes = { "name", "gameObject", "healthLimit" };
 	public String gameObjectGUID = null;
 
 	public ScriptTriggerHealthLessThan() {

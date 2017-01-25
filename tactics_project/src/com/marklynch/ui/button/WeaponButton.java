@@ -7,8 +7,8 @@ public class WeaponButton extends ActorButton {
 
 	Weapon weapon;
 
-	public WeaponButton(int x, int y, int width, int height,
-			String enabledTexturePath, String disabledTexturePath, Weapon weapon) {
+	public WeaponButton(int x, int y, int width, int height, String enabledTexturePath, String disabledTexturePath,
+			Weapon weapon) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath);
 
 		this.weapon = weapon;

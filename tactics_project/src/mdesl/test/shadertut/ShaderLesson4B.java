@@ -26,27 +26,27 @@ public class ShaderLesson4B extends SimpleGame {
 		game.start();
 	}
 
-	//our grass texture
+	// our grass texture
 	Texture tex0;
-	
-	//our dirt texture
+
+	// our dirt texture
 	Texture tex1;
-	
-	//our mask texture
+
+	// our mask texture
 	Texture mask;
-	
-	//our sprite batch
+
+	// our sprite batch
 	SpriteBatch batch;
 
-	//our program
+	// our program
 	ShaderProgram program;
-	
-	//our very simple timing mechanism which we'll send to the shader
+
+	// our very simple timing mechanism which we'll send to the shader
 	float tick = 0;
-	
+
 	protected void create() throws LWJGLException {
 		super.create();
-		
+
 		try {
 			tex0 = new Texture(Util.getResource("res/grass.png"), Texture.NEAREST, Texture.REPEAT);
 			tex1 = new Texture(Util.getResource("res/dirt.png"), Texture.NEAREST, Texture.REPEAT);
@@ -54,64 +54,64 @@ public class ShaderLesson4B extends SimpleGame {
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode textures");
 		}
-		
-		//load our shader program and sprite batch
+
+		// load our shader program and sprite batch
 		try {
 			final String VERTEX = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson4.vert"));
 			final String FRAGMENT = Util.readFile(Util.getResourceAsStream("res/shadertut/lesson4b.frag"));
-			
-			//create our shader program -- be sure to pass SpriteBatch's default attributes!
+
+			// create our shader program -- be sure to pass SpriteBatch's
+			// default attributes!
 			program = new ShaderProgram(VERTEX, FRAGMENT, SpriteBatch.ATTRIBUTES);
-			
-			//Good idea to log any warnings if they exist
-			if (program.getLog().length()!=0)
+
+			// Good idea to log any warnings if they exist
+			if (program.getLog().length() != 0)
 				System.out.println(program.getLog());
-			
-			//bind our program
+
+			// bind our program
 			program.use();
-			
-			//set our sampler2D uniforms
+
+			// set our sampler2D uniforms
 			program.setUniformi("u_texture1", 1);
 			program.setUniformi("u_mask", 2);
 			program.setUniformf("time", tick);
-			
-			//create our sprite batch
+
+			// create our sprite batch
 			batch = new SpriteBatch(program);
-		} catch (Exception e) { 
-			//simple exception handling...
+		} catch (Exception e) {
+			// simple exception handling...
 			e.printStackTrace();
 			System.exit(0);
 		}
-		
-		
-		//make GL_TEXTURE2 the active texture unit, then bind our mask texture
+
+		// make GL_TEXTURE2 the active texture unit, then bind our mask texture
 		glActiveTexture(GL_TEXTURE2);
 		mask.bind();
-		
-		//do the same for our other two texture units
+
+		// do the same for our other two texture units
 		glActiveTexture(GL_TEXTURE1);
 		tex1.bind();
-		
+
 		glActiveTexture(GL_TEXTURE0);
 		tex0.bind();
-		
-		//gray clear colour
+
+		// gray clear colour
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	}
-	
+
 	protected void render() throws LWJGLException {
 		super.render();
-		
+
 		batch.begin();
-		
-		//shader will be bound already
-		program.setUniformf("time", tick+=0.01f);
-		
+
+		// shader will be bound already
+		program.setUniformf("time", tick += 0.01f);
+
 		batch.draw(tex0, 10, 10);
-		
+
 		batch.end();
 	}
-	
+
 	// called to resize the display
 	protected void resize() throws LWJGLException {
 		super.resize();

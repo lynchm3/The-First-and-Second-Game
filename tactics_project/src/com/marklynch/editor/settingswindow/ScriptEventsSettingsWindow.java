@@ -25,8 +25,8 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 	public void updateScriptsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addScriptButton = new SettingsWindowButton(
-				0, 100, 200, 30, "ADD SCRIPT EVENT", true, true, this) {
+		final SettingsWindowButton addScriptButton = new SettingsWindowButton(0, 100, 200, 30, "ADD SCRIPT EVENT", true,
+				true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -58,8 +58,8 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 				classes.add(ScriptEventSetAI.class);
 				classes.add(ScriptEventSpeech.class);
 
-				editor.classSelectionWindow = new ClassSelectionWindow(classes,
-						editor, ScriptEvent.class, "Select a Script Event Type");
+				editor.classSelectionWindow = new ClassSelectionWindow(classes, editor, ScriptEvent.class,
+						"Select a Script Event Type");
 			}
 		};
 		buttons.add(addScriptButton);
@@ -67,8 +67,7 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 		for (int i = 0; i < Game.level.script.scriptEvents.size(); i++) {
 			final int index = i;
 
-			final SettingsWindowButton scriptButton = new SettingsWindowButton(
-					0, 200 + i * 30, 200, 30,
+			final SettingsWindowButton scriptButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
 					Game.level.script.scriptEvents.get(i), true, true, this) {
 
 				@Override
@@ -96,9 +95,8 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					scriptButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, Game.level.script.scriptEvents.get(index),
-							editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200,
+							Game.level.script.scriptEvents.get(index), editor);
 
 				}
 			};

@@ -41,8 +41,7 @@ public class AttributesWindow {
 
 	String title = "";
 
-	public AttributesWindow(float x, float width, float y, final Object object,
-			final Editor editor) {
+	public AttributesWindow(float x, float width, float y, final Object object, final Editor editor) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -54,8 +53,7 @@ public class AttributesWindow {
 			fields = colorFields;
 		} else {
 			try {
-				fields = (String[]) object.getClass()
-						.getField("editableAttributes").get(object);
+				fields = (String[]) object.getClass().getField("editableAttributes").get(object);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -83,12 +81,10 @@ public class AttributesWindow {
 		// Title
 		if (object instanceof Actor) {
 			Actor actor = (Actor) object;
-			title = "Actor @ " + actor.squareGameObjectIsOn.x + ","
-					+ actor.squareGameObjectIsOn.y;
+			title = "Actor @ " + actor.squareGameObjectIsOn.x + "," + actor.squareGameObjectIsOn.y;
 		} else if (object instanceof GameObject) {
 			GameObject gameObject = (GameObject) object;
-			title = "Object @ " + gameObject.squareGameObjectIsOn.x + ","
-					+ gameObject.squareGameObjectIsOn.y;
+			title = "Object @ " + gameObject.squareGameObjectIsOn.x + "," + gameObject.squareGameObjectIsOn.y;
 		} else if (object instanceof Faction) {
 			title = "Faction " + Game.level.factions.indexOf(object);
 		} else if (object instanceof Square) {
@@ -123,10 +119,8 @@ public class AttributesWindow {
 				for (int j = 0; j < arrayList.size(); j++) {
 					final int arrayListIndex = j;
 					final int index = count;
-					final AtributesWindowButton button = new AtributesWindowButton(
-							0, 0 + (index + 1) * 30, 200, 30, object,
-							fields[fieldIndex], true, true, this,
-							arrayListIndex);
+					final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (index + 1) * 30, 200, 30,
+							object, fields[fieldIndex], true, true, this, arrayListIndex);
 					buttons.add(button);
 					button.setClickListener(new ClickListener() {
 						@Override
@@ -135,9 +129,7 @@ public class AttributesWindow {
 							if (button.down) {
 								depressButtons();
 								button.down = true;
-								editor.editAttribute(object,
-										fields[fieldIndex], button,
-										arrayListIndex);
+								editor.editAttribute(object, fields[fieldIndex], button, arrayListIndex);
 							} else {
 								editor.enterTyped();
 							}
@@ -147,8 +139,7 @@ public class AttributesWindow {
 				}
 			} else {
 				final int index = count;
-				final AtributesWindowButton button = new AtributesWindowButton(
-						0, 0 + (index + 1) * 30, 200, 30, object,
+				final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (index + 1) * 30, 200, 30, object,
 						fields[fieldIndex], true, true, this, 0);
 				buttons.add(button);
 				button.setClickListener(new ClickListener() {
@@ -158,8 +149,7 @@ public class AttributesWindow {
 						if (button.down) {
 							depressButtons();
 							button.down = true;
-							editor.editAttribute(object, fields[fieldIndex],
-									button, 0);
+							editor.editAttribute(object, fields[fieldIndex], button, 0);
 						} else {
 							editor.enterTyped();
 						}
@@ -173,9 +163,8 @@ public class AttributesWindow {
 		// Custom buttons (copy, delete...)
 		if (object instanceof Actor) {
 			final Actor actor = (Actor) object;
-			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (count + 2) * 30, 200, 30, actor, "delete", true, true,
-					this, 0);
+			final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30, actor,
+					"delete", true, true, this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -194,9 +183,8 @@ public class AttributesWindow {
 					}
 				}
 			});
-			final AtributesWindowButton copyButton = new AtributesWindowButton(
-					0, 0 + (count + 3) * 30, 200, 30, actor, "copy", true,
-					true, this, 0);
+			final AtributesWindowButton copyButton = new AtributesWindowButton(0, 0 + (count + 3) * 30, 200, 30, actor,
+					"copy", true, true, this, 0);
 			buttons.add(copyButton);
 			copyButton.setClickListener(new ClickListener() {
 				@Override
@@ -214,9 +202,8 @@ public class AttributesWindow {
 
 		} else if (object instanceof GameObject) {
 			final GameObject gameObject = (GameObject) object;
-			final AtributesWindowButton deleteButton = new AtributesWindowButton(
-					0, 0 + (count + 2) * 30, 200, 30, gameObject, "delete",
-					true, true, this, 0);
+			final AtributesWindowButton deleteButton = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30,
+					gameObject, "delete", true, true, this, 0);
 			buttons.add(deleteButton);
 			deleteButton.setClickListener(new ClickListener() {
 				@Override
@@ -228,9 +215,8 @@ public class AttributesWindow {
 					editor.settingsWindow.update();
 				}
 			});
-			final AtributesWindowButton copyButton = new AtributesWindowButton(
-					0, 0 + (count + 3) * 30, 200, 30, gameObject, "copy", true,
-					true, this, 0);
+			final AtributesWindowButton copyButton = new AtributesWindowButton(0, 0 + (count + 3) * 30, 200, 30,
+					gameObject, "copy", true, true, this, 0);
 			buttons.add(copyButton);
 			copyButton.setClickListener(new ClickListener() {
 				@Override
@@ -247,9 +233,8 @@ public class AttributesWindow {
 			});
 		} else if (object instanceof Faction) {
 			final Faction faction = (Faction) object;
-			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (count + 2) * 30, 200, 30, faction, "delete", true,
-					true, this, 0);
+			final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30, faction,
+					"delete", true, true, this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -273,9 +258,8 @@ public class AttributesWindow {
 			});
 		} else if (object instanceof Weapon) {
 			final Weapon weapon = (Weapon) object;
-			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (count + 2) * 30, 200, 30, weapon, "delete", true,
-					true, this, 0);
+			final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30, weapon,
+					"delete", true, true, this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -289,9 +273,8 @@ public class AttributesWindow {
 				}
 			});
 		} else if (object instanceof Decoration) {
-			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (count + 2) * 30, 200, 30, object, "delete", true,
-					true, this, 0);
+			final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30, object,
+					"delete", true, true, this, 0);
 			buttons.add(button);
 			button.setClickListener(new ClickListener() {
 				@Override
@@ -304,32 +287,27 @@ public class AttributesWindow {
 				}
 			});
 		} else if (object instanceof SpeechPart) {
-			final AtributesWindowButton button = new AtributesWindowButton(0,
-					0 + (count + 2) * 30, 200, 30, object, "Add actor", true,
-					true, this, 0);
+			final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30, object,
+					"Add actor", true, true, this, 0);
 			buttons.add(button);
 			final SpeechPart speechPart = (SpeechPart) object;
 			button.setClickListener(new ClickListener() {
 				@Override
 				public void click() {
 
-					speechPart.actors.add(Game.level.factions.get(0).actors
-							.get(0));
+					speechPart.actors.add(Game.level.factions.get(0).actors.get(0));
 					speechPart.positions.add(100f);
 					speechPart.directions.add(true);
-					speechPart.actorsGUIDs.add(Game.level.factions.get(0).actors
-							.get(0).guid);
+					speechPart.actorsGUIDs.add(Game.level.factions.get(0).actors.get(0).guid);
 
 					Object object = AttributesWindow.this.object;
 
-					Button buttonForObject = editor.settingsWindow
-							.getButton(object);
+					Button buttonForObject = editor.settingsWindow.getButton(object);
 
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					buttonForObject.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, object, editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200, object, editor);
 
 					// depressButtons();
 					// editor.clearSelectedObject();
@@ -345,8 +323,7 @@ public class AttributesWindow {
 
 		QuadUtils.drawQuad(Color.WHITE, x, x + 200, y, y + 30);
 
-		TextUtils.printTextWithImages(new Object[] { new StringWithColor(title,
-				Color.BLACK) }, x, y, 200, true);
+		TextUtils.printTextWithImages(new Object[] { new StringWithColor(title, Color.BLACK) }, x, y, 200, true);
 
 		for (AtributesWindowButton button : buttons) {
 			button.draw();

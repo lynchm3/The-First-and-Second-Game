@@ -35,8 +35,7 @@ public class ResourceUtils {
 		if (texture != null) {
 		} else {
 			try {
-				texture = new mdesl.graphics.Texture(
-						Util.getResource("res/images/" + path),
+				texture = new mdesl.graphics.Texture(Util.getResource("res/images/" + path),
 						mdesl.graphics.Texture.LINEAR);
 				globalImages.put(path, texture);
 			} catch (Exception e) {
@@ -61,8 +60,7 @@ public class ResourceUtils {
 		if (sound != null) {
 		} else {
 			try {
-				sound = AudioLoader.getAudio("WAV", ResourceLoader
-						.getResourceAsStream("res/sounds/" + path));
+				sound = AudioLoader.getAudio("WAV", ResourceLoader.getResourceAsStream("res/sounds/" + path));
 				globalSounds.put(path, sound);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -138,9 +136,8 @@ public class ResourceUtils {
 			try {
 
 				Font awtFont2;
-				InputStream inputStream = ResourceLoader
-						.getResourceAsStream("res/fonts/" + path); // move
-																	// this
+				InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/" + path); // move
+																									// this
 				awtFont2 = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 				awtFont2 = awtFont2.deriveFont(size); // set font size
 				font = new TrueTypeFont(awtFont2, true);

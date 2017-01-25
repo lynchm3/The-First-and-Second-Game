@@ -48,8 +48,7 @@ public class Script {
 
 		// activeScriptEvent = null;
 		for (ScriptEvent scriptEvent : this.scriptEvents) {
-			if (scriptEvent.scriptTrigger != null
-					&& scriptEvent.scriptTrigger.triggered == false
+			if (scriptEvent.scriptTrigger != null && scriptEvent.scriptTrigger.triggered == false
 					&& scriptEvent.scriptTrigger.checkTrigger()) {
 				this.activeScriptEvents.add(scriptEvent);
 				scriptEvent.scriptTrigger.triggered = true;

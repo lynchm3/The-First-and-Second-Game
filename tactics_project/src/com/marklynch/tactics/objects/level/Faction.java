@@ -21,15 +21,7 @@ public class Faction {
 	public final static String[] editableAttributes = { "name", "color" };
 
 	enum AI_MODE {
-		TARGET_SPECIFIC_OBJECT,
-		TARGET_NEAREST_ENEMY,
-		TARGET_NEAREST_ENEMY_IN_A_FACTION,
-		TARGET_WEAKEST_ENEMY,
-		TARGET_WEAKEST_ENEMY_IN_A_FACTION,
-		RANDOM_ATTACK_ENEMIES_ONLY,
-		RANDOM_ATTACK_ENEMIES_AND_ALLIES,
-		RANDOM_ATTACK_ENEMIES_AND_ALLIES_AND_OBJECT,
-		TARGET_NEAREST_OBJECT
+		TARGET_SPECIFIC_OBJECT, TARGET_NEAREST_ENEMY, TARGET_NEAREST_ENEMY_IN_A_FACTION, TARGET_WEAKEST_ENEMY, TARGET_WEAKEST_ENEMY_IN_A_FACTION, RANDOM_ATTACK_ENEMIES_ONLY, RANDOM_ATTACK_ENEMIES_AND_ALLIES, RANDOM_ATTACK_ENEMIES_AND_ALLIES_AND_OBJECT, TARGET_NEAREST_OBJECT
 	};
 
 	public String name;
@@ -75,16 +67,14 @@ public class Faction {
 	}
 
 	public void postLoad() {
-		this.color = new Color(this.color.r, this.color.g, this.color.b,
-				this.color.a);
+		this.color = new Color(this.color.r, this.color.g, this.color.b, this.color.a);
 		for (Actor actor : actors) {
 			actor.postLoad(this);
 		}
 		currentStage = STAGE.SELECT;
 		relationships = new HashMap<Faction, FactionRelationship>();
 		for (String factionGUID : relationshipGUIDs.keySet()) {
-			relationships.put(Game.level.findFactionFromGUID(factionGUID),
-					relationshipGUIDs.get(factionGUID));
+			relationships.put(Game.level.findFactionFromGUID(factionGUID), relationshipGUIDs.get(factionGUID));
 		}
 
 		for (Faction faction : relationships.keySet()) {
@@ -102,12 +92,9 @@ public class Faction {
 				if (Game.level.activeActor != null)
 					Game.level.activeActor.unselected();
 				Game.level.activeActor = currentActor;
-				Game.level.activeActor
-						.calculatePathToAllSquares(Game.level.squares);
-				Game.level.activeActor
-						.calculateReachableSquares(Game.level.squares);
-				Game.level.activeActor
-						.calculateAttackableSquares(Game.level.squares);
+				Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+				Game.level.activeActor.calculateReachableSquares(Game.level.squares);
+				Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
 				timeAtCurrentStage += delta;
 			} else if (timeAtCurrentStage >= STAGE_DURATION) {
 				currentStage = STAGE.MOVE;
@@ -214,15 +201,13 @@ public class Faction {
 	class PathComparator implements Comparator<Path> {
 		@Override
 		public int compare(Path a, Path b) {
-			return a.travelCost < b.travelCost ? -1
-					: a.travelCost == b.travelCost ? 0 : 1;
+			return a.travelCost < b.travelCost ? -1 : a.travelCost == b.travelCost ? 0 : 1;
 		}
 	}
 
 	public void checkIfDestroyed() {
 		if (this.actors.size() == 0)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { this,
-					" have been stopped" }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " have been stopped" }));
 
 	}
 
@@ -231,8 +216,7 @@ public class Faction {
 		return name;
 	}
 
-	public static class FactionTypeAdapterFactory extends
-			CustomizedTypeAdapterFactory<Faction> {
+	public static class FactionTypeAdapterFactory extends CustomizedTypeAdapterFactory<Faction> {
 		public FactionTypeAdapterFactory() {
 			super(Faction.class);
 		}
@@ -240,8 +224,7 @@ public class Faction {
 		@Override
 		protected void beforeWrite(Faction object) {
 			for (Faction faction : object.relationships.keySet()) {
-				object.relationshipGUIDs.put(faction.guid,
-						object.relationships.get(faction));
+				object.relationshipGUIDs.put(faction.guid, object.relationships.get(faction));
 			}
 		}
 

@@ -59,24 +59,24 @@ public class SpriteBatchTest extends SimpleGame {
 	Texture tex, tex2;
 	TextureRegion tile;
 	SpriteBatch batch;
-	
-	float panX, panY, rot, zoom=1f;
+
+	float panX, panY, rot, zoom = 1f;
 	BitmapFont font;
 	final float MOVE_SPEED = 10f;
 	final float ZOOM_SPEED = 0.025f;
 	final float ROT_SPEED = 0.05f;
-	
+
 	protected void create() throws LWJGLException {
 		super.create();
 
-		//Load some textures
+		// Load some textures
 		try {
 			tex = new Texture(Util.getResource("res/tiles.png"), Texture.NEAREST);
 			tex2 = new Texture(Util.getResource("res/ptsans_00.png"));
 			tile = new TextureRegion(tex, 128, 64, 64, 64);
-			
+
 			font = new BitmapFont(Util.getResource("res/ptsans.fnt"), Util.getResource("res/ptsans_00.png"));
-			
+
 		} catch (IOException e) {
 			// ... do something here ...
 			Sys.alert("Error", "Could not decode images!");
@@ -84,73 +84,71 @@ public class SpriteBatchTest extends SimpleGame {
 			System.exit(0);
 		}
 		glClearColor(0.5f, .5f, .5f, 1f);
-		//create our sprite batch
+		// create our sprite batch
 		batch = new SpriteBatch();
 	}
-	
+
 	void drawGame() {
-		//get the instance of the view matrix for our batch
+		// get the instance of the view matrix for our batch
 		Matrix4f view = batch.getViewMatrix();
-		
-		//reset the matrix to identity, i.e. "no camera transform"
+
+		// reset the matrix to identity, i.e. "no camera transform"
 		view.setIdentity();
-		
-		//scale the view
+
+		// scale the view
 		if (zoom != 1f) {
 			view.scale(new Vector3f(zoom, zoom, 1f));
 		}
-		
-		//pan the camera by translating the view matrix
+
+		// pan the camera by translating the view matrix
 		view.translate(new Vector2f(panX, panY));
-		
-		//after translation, we can rotate...
-		if (rot!=0f) {
-			//we want to rotate by a center origin point, so first we translate
-			view.translate(new Vector2f(Display.getWidth()/2, Display.getHeight()/2));
-			
-			//then we rotate
+
+		// after translation, we can rotate...
+		if (rot != 0f) {
+			// we want to rotate by a center origin point, so first we translate
+			view.translate(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2));
+
+			// then we rotate
 			view.rotate(rot, new Vector3f(0, 0, 1));
-			
-			//then we translate back
-			view.translate(new Vector2f(-Display.getWidth()/2, -Display.getHeight()/2));
+
+			// then we translate back
+			view.translate(new Vector2f(-Display.getWidth() / 2, -Display.getHeight() / 2));
 		}
-		
-		//apply other transformations here...
-		
-		
-		//update the new view matrix
+
+		// apply other transformations here...
+
+		// update the new view matrix
 		batch.updateUniforms();
-		
-		//start the sprite batch
+
+		// start the sprite batch
 		batch.begin();
 
-		//draw a tile from our sprite sheet
+		// draw a tile from our sprite sheet
 		batch.draw(tile, 10, 10);
-		
-		batch.draw(tile, 10, 100, 128, 128); //we can stretch it with a new width/height
-		
-		//we can also draw a region of a Texture on the fly like so:
-		batch.drawRegion(tex, 0, 0, 32, 32, 	  //srcX, srcY, srcWidth, srcHeight
-							   10, 250, 32, 32);  //dstX, dstY, dstWidth, dstHeight
-		
-		//tint batch red
-		batch.setColor(Color.RED); 
-		batch.draw(tex2, 0, 0, Display.getWidth(), Display.getHeight());
-		
-		//reset color
-		batch.setColor(Color.WHITE);
-		
 
-		//finish the sprite batch and push the tiles to the GPU
+		batch.draw(tile, 10, 100, 128, 128); // we can stretch it with a new
+												// width/height
+
+		// we can also draw a region of a Texture on the fly like so:
+		batch.drawRegion(tex, 0, 0, 32, 32, // srcX, srcY, srcWidth, srcHeight
+				10, 250, 32, 32); // dstX, dstY, dstWidth, dstHeight
+
+		// tint batch red
+		batch.setColor(Color.RED);
+		batch.draw(tex2, 0, 0, Display.getWidth(), Display.getHeight());
+
+		// reset color
+		batch.setColor(Color.WHITE);
+
+		// finish the sprite batch and push the tiles to the GPU
 		batch.end();
 	}
-	
+
 	void drawHUD() {
-		//draw the text with identity matrix, i.e. no camera transformation
+		// draw the text with identity matrix, i.e. no camera transformation
 		batch.getViewMatrix().setIdentity();
 		batch.updateUniforms();
-		
-		
+
 		batch.begin();
 		// ... render any hud elements
 		font.drawText(batch, "Control camera with WASD, UP/DOWN and LEFT/RIGHT", 10, 10);
@@ -158,9 +156,8 @@ public class SpriteBatchTest extends SimpleGame {
 	}
 
 	protected void render() throws LWJGLException {
-		super.render();		
-		
-		
+		super.render();
+
 		if (Keyboard.isKeyDown(Keyboard.KEY_A))
 			panX -= MOVE_SPEED;
 		if (Keyboard.isKeyDown(Keyboard.KEY_D))
@@ -169,28 +166,27 @@ public class SpriteBatchTest extends SimpleGame {
 			panY -= MOVE_SPEED;
 		if (Keyboard.isKeyDown(Keyboard.KEY_S))
 			panY += MOVE_SPEED;
-		
+
 		if (Keyboard.isKeyDown(Keyboard.KEY_UP))
 			zoom += ZOOM_SPEED;
 		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))
 			zoom -= ZOOM_SPEED;
 
 		zoom = Math.max(0.15f, zoom);
-		
+
 		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))
 			rot -= ROT_SPEED;
 		if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))
 			rot += ROT_SPEED;
-		
+
 		drawGame();
-		
+
 		drawHUD();
 	}
-	
 
 	protected void resize() throws LWJGLException {
 		super.resize();
 		batch.resize(Display.getWidth(), Display.getHeight());
 	}
-	
+
 }

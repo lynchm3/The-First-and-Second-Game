@@ -12,11 +12,9 @@ public class SelectionWindowButton extends Button {
 	boolean yFromTop;
 	public Object object;
 
-	public SelectionWindowButton(float x, float y, float width, float height,
-			String enabledTexturePath, String disabledTexturePath, String text,
-			boolean xFromLeft, boolean yFromTop, Object object) {
-		super(x, y, width, height, enabledTexturePath, disabledTexturePath,
-				text);
+	public SelectionWindowButton(float x, float y, float width, float height, String enabledTexturePath,
+			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Object object) {
+		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 		this.object = object;
@@ -35,22 +33,16 @@ public class SelectionWindowButton extends Button {
 
 		if (enabled) {
 			if (down) {
-				QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY,
-						realY + height);
-				TextUtils.printTextWithImages(new Object[] { object }, realX,
-						realY, Integer.MAX_VALUE, true);
+				QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
+				TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 			} else {
-				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width,
-						realY, realY + height);
-				TextUtils.printTextWithImages(new Object[] { object }, realX,
-						realY, Integer.MAX_VALUE, true);
+				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
+				TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 			}
 		} else {
 
-			QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY
-					+ height);
-			TextUtils.printTextWithImages(new Object[] { object }, realX,
-					realY, Integer.MAX_VALUE, true);
+			QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
+			TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 		}
 
 	}
@@ -65,16 +57,14 @@ public class SelectionWindowButton extends Button {
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
 
-		if (mouseX > realX && mouseX < realX + width && mouseY > realY
-				&& mouseY < realY + height) {
+		if (mouseX > realX && mouseX < realX + width && mouseY > realY && mouseY < realY + height) {
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public void drawWithinBounds(float boundsX1, float boundsX2,
-			float boundsY1, float boundsY2) {
+	public void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
 	}
 
 }

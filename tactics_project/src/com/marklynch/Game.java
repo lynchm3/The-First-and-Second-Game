@@ -86,8 +86,7 @@ public class Game {
 			delta = getDelta();
 
 			// Resize?
-			if (windowWidth != Display.getWidth()
-					|| windowHeight != Display.getHeight()) {
+			if (windowWidth != Display.getWidth() || windowHeight != Display.getHeight()) {
 				resize();
 			}
 
@@ -175,20 +174,17 @@ public class Game {
 
 		// load our shader program and sprite batch
 		try {
-			Game.fontTexture = new Texture(
-					Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+			Game.fontTexture = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
 
 			// in Photoshop, we included a small white box at the bottom
 			// right
 			// of our font sheet
 			// we will use this to draw lines and rectangles within the same
 			// batch as our text
-			Game.quadTexture = new TextureRegion(Game.fontTexture,
-					Game.fontTexture.getWidth() - 2,
+			Game.quadTexture = new TextureRegion(Game.fontTexture, Game.fontTexture.getWidth() - 2,
 					Game.fontTexture.getHeight() - 2, 1, 1);
 
-			Game.font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
-					Game.fontTexture);
+			Game.font = new BitmapFont(Util.getResource("res/ptsans.fnt"), Game.fontTexture);
 
 			ShadowLight.init();
 			resize();
@@ -205,8 +201,8 @@ public class Game {
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
 
 		ShadowLight.resize();
-		
-		if(editor != null)
+
+		if (editor != null)
 			editor.resize();
 
 		// whenever our screen resizes, we need to update our uniform

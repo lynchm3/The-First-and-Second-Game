@@ -24,8 +24,7 @@ public class AIsSettingsWindow extends SettingsWindow {
 	public void updateAIsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addAIButton = new SettingsWindowButton(0,
-				100, 200, 30, "ADD AI", true, true, this) {
+		final SettingsWindowButton addAIButton = new SettingsWindowButton(0, 100, 200, 30, "ADD AI", true, true, this) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -56,8 +55,8 @@ public class AIsSettingsWindow extends SettingsWindow {
 				classes.add(AIRoutineFreeze.class);
 				classes.add(AIRoutineMoveToSquare.class);
 
-				editor.classSelectionWindow = new ClassSelectionWindow(classes,
-						editor, AIRoutine.class, "Select an AI routine");
+				editor.classSelectionWindow = new ClassSelectionWindow(classes, editor, AIRoutine.class,
+						"Select an AI routine");
 			}
 		};
 		buttons.add(addAIButton);
@@ -67,9 +66,8 @@ public class AIsSettingsWindow extends SettingsWindow {
 
 			final int index = count;
 
-			final SettingsWindowButton aiButton = new SettingsWindowButton(0,
-					200 + i * 30, 200, 30, Game.level.ais.get(i), true, true,
-					this) {
+			final SettingsWindowButton aiButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
+					Game.level.ais.get(i), true, true, this) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -96,8 +94,7 @@ public class AIsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					aiButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200,
-							200, Game.level.ais.get(index), editor);
+					editor.attributesWindow = new AttributesWindow(200, 200, 200, Game.level.ais.get(index), editor);
 
 				}
 			};

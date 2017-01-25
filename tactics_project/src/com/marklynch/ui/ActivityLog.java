@@ -1,6 +1,5 @@
 package com.marklynch.ui;
 
-
 public class ActivityLog {
 
 	public Object[] contents;

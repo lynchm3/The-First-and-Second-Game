@@ -6,13 +6,10 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 
 public class Weapon extends WeaponTemplate {
-	public final static String[] editableAttributes = { "name", "imageTexture",
-			"damage", "minRange", "maxRange" };
+	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange" };
 
-	public Weapon(String name, float damage, float minRange, float maxRange,
-			String imagePath) {
-		super(name, damage, minRange, maxRange,
-				imagePath);
+	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath) {
+		super(name, damage, minRange, maxRange, imagePath);
 	}
 
 	public void calculateAttackableSquares(Square[][] squares) {
@@ -22,26 +19,18 @@ public class Weapon extends WeaponTemplate {
 					for (float range = minRange; range <= maxRange; range++) {
 						Vector<Square> squaresInThisPath = new Vector<Square>();
 						squaresInThisPath.add(squares[i][j]);
-						calculateAttackableSquares(squares, range,
-								squares[i][j], Direction.UP, squaresInThisPath);
-						calculateAttackableSquares(squares, range,
-								squares[i][j], Direction.RIGHT,
-								squaresInThisPath);
-						calculateAttackableSquares(squares, range,
-								squares[i][j], Direction.DOWN,
-								squaresInThisPath);
-						calculateAttackableSquares(squares, range,
-								squares[i][j], Direction.LEFT,
-								squaresInThisPath);
+						calculateAttackableSquares(squares, range, squares[i][j], Direction.UP, squaresInThisPath);
+						calculateAttackableSquares(squares, range, squares[i][j], Direction.RIGHT, squaresInThisPath);
+						calculateAttackableSquares(squares, range, squares[i][j], Direction.DOWN, squaresInThisPath);
+						calculateAttackableSquares(squares, range, squares[i][j], Direction.LEFT, squaresInThisPath);
 					}
 				}
 			}
 		}
 	}
 
-	public void calculateAttackableSquares(Square[][] squares,
-			float remainingRange, Square parentSquare, Direction direction,
-			Vector<Square> squaresInThisPath) {
+	public void calculateAttackableSquares(Square[][] squares, float remainingRange, Square parentSquare,
+			Direction direction, Vector<Square> squaresInThisPath) {
 		Square currentSquare = null;
 
 		if (direction == Direction.UP) {
@@ -69,14 +58,10 @@ public class Weapon extends WeaponTemplate {
 				currentSquare.weaponsThatCanAttack.add(this);
 			remainingRange -= 1;
 			if (remainingRange > 0) {
-				calculateAttackableSquares(squares, remainingRange,
-						currentSquare, Direction.UP, squaresInThisPath);
-				calculateAttackableSquares(squares, remainingRange,
-						currentSquare, Direction.RIGHT, squaresInThisPath);
-				calculateAttackableSquares(squares, remainingRange,
-						currentSquare, Direction.DOWN, squaresInThisPath);
-				calculateAttackableSquares(squares, remainingRange,
-						currentSquare, Direction.LEFT, squaresInThisPath);
+				calculateAttackableSquares(squares, remainingRange, currentSquare, Direction.UP, squaresInThisPath);
+				calculateAttackableSquares(squares, remainingRange, currentSquare, Direction.RIGHT, squaresInThisPath);
+				calculateAttackableSquares(squares, remainingRange, currentSquare, Direction.DOWN, squaresInThisPath);
+				calculateAttackableSquares(squares, remainingRange, currentSquare, Direction.LEFT, squaresInThisPath);
 			}
 			squaresInThisPath.remove(currentSquare);
 		}
@@ -91,7 +76,6 @@ public class Weapon extends WeaponTemplate {
 	}
 
 	public Weapon makeWeapon() {
-		return new Weapon(new String(name), damage, minRange, maxRange,
-				new String(imagePath));
+		return new Weapon(new String(name), damage, minRange, maxRange, new String(imagePath));
 	}
 }

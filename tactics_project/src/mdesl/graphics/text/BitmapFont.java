@@ -84,8 +84,7 @@ public class BitmapFont {
 
 		void updateRegion(TextureRegion tex) {
 			if (region == null)
-				region = new TextureRegion(tex, 0, 0, tex.getWidth(),
-						tex.getHeight());
+				region = new TextureRegion(tex, 0, 0, tex.getWidth(), tex.getHeight());
 			region.set(tex, x, y, width, height);
 		}
 	}
@@ -102,18 +101,15 @@ public class BitmapFont {
 		this(fontDef.openStream(), texture);
 	}
 
-	public BitmapFont(InputStream fontDef, TextureRegion texture)
-			throws IOException {
+	public BitmapFont(InputStream fontDef, TextureRegion texture) throws IOException {
 		this(fontDef, new TextureRegion[] { texture });
 	}
 
-	public BitmapFont(InputStream fontDef, TextureRegion[] texturePages)
-			throws IOException {
+	public BitmapFont(InputStream fontDef, TextureRegion[] texturePages) throws IOException {
 		this(fontDef, Charset.defaultCharset(), texturePages);
 	}
 
-	public BitmapFont(InputStream fontDef, Charset charset,
-			TextureRegion[] texturePages) throws IOException {
+	public BitmapFont(InputStream fontDef, Charset charset, TextureRegion[] texturePages) throws IOException {
 		this.texturePages = texturePages;
 		parseFont(fontDef, charset);
 	}
@@ -130,8 +126,7 @@ public class BitmapFont {
 		drawText(batch, text, x, y, 0, text.length());
 	}
 
-	public void drawText(SpriteBatch batch, CharSequence text, float x,
-			float y, int start, int end) {
+	public void drawText(SpriteBatch batch, CharSequence text, float x, float y, int start, int end) {
 		Glyph lastGlyph = null;
 		for (int i = start; i < end; i++) {
 			char c = text.charAt(i);
@@ -146,8 +141,7 @@ public class BitmapFont {
 				x += lastGlyph.getKerning(c);
 
 			lastGlyph = g;
-			batch.draw(g.region, x + g.xoffset, y + g.yoffset, g.width,
-					g.height);
+			batch.draw(g.region, x + g.xoffset, y + g.yoffset, g.width, g.height);
 			x += g.xadvance;
 		}
 	}
@@ -199,15 +193,12 @@ public class BitmapFont {
 		try {
 			return Integer.parseInt(parse(line, tag));
 		} catch (NumberFormatException e) {
-			throw new IOException("data for " + tag + " is corrupt/missing: "
-					+ parse(line, tag));
+			throw new IOException("data for " + tag + " is corrupt/missing: " + parse(line, tag));
 		}
 	}
 
-	protected void parseFont(InputStream fontFile, Charset charset)
-			throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(fontFile,
-				charset), 512);
+	protected void parseFont(InputStream fontFile, Charset charset) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(fontFile, charset), 512);
 		String info = br.readLine();
 		String common = br.readLine();
 		lineHeight = parseInt(common, "lineHeight");
@@ -272,8 +263,7 @@ public class BitmapFont {
 
 			if (glyph.page > texturePages.length)
 				throw new IOException(
-						"not enough texturePages supplied; glyph " + glyph.chr
-								+ " expects page index " + glyph.page);
+						"not enough texturePages supplied; glyph " + glyph.chr + " expects page index " + glyph.page);
 			glyph.updateRegion(texturePages[glyph.page]);
 
 			if (glyph.width > 0 && glyph.height > 0)
@@ -298,8 +288,7 @@ public class BitmapFont {
 			int first = Integer.parseInt(tokens.nextToken());
 			tokens.nextToken();
 			int second = Integer.parseInt(tokens.nextToken());
-			if (first < 0 || first > Character.MAX_VALUE || second < 0
-					|| second > Character.MAX_VALUE)
+			if (first < 0 || first > Character.MAX_VALUE || second < 0 || second > Character.MAX_VALUE)
 				continue;
 
 			Glyph glyph = glyphs[first];

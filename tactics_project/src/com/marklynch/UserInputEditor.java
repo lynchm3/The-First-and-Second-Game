@@ -72,10 +72,10 @@ public class UserInputEditor {
 
 		// Transformed mouse coords
 
-		float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2)
-				/ Game.zoom) + (mouseXinPixels) / Game.zoom);
-		float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY - (Game.windowHeight / 2)
-				/ Game.zoom) + (((Game.windowHeight - mouseYinPixels)) / Game.zoom));
+		float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2) / Game.zoom)
+				+ (mouseXinPixels) / Game.zoom);
+		float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY - (Game.windowHeight / 2) / Game.zoom)
+				+ (((Game.windowHeight - mouseYinPixels)) / Game.zoom));
 
 		// Getting what square coordinates the mouse is on (as in squares on the
 		// grid)
@@ -104,9 +104,7 @@ public class UserInputEditor {
 			}
 			mouseButtonStateLeft = true;
 
-			if (Mouse.getX() - mouseDownX > 20
-					|| Mouse.getX() - mouseDownX < -20
-					|| Mouse.getY() - mouseDownY > 20
+			if (Mouse.getX() - mouseDownX > 20 || Mouse.getX() - mouseDownX < -20 || Mouse.getY() - mouseDownY > 20
 					|| Mouse.getY() - mouseDownY < -20) {
 				dragging = true;
 				Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;
@@ -118,10 +116,8 @@ public class UserInputEditor {
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
-		if (mouseXInSquares >= 0 && mouseYInSquares >= 0
-				&& (int) mouseXInSquares > -1
-				&& (int) mouseXInSquares < Game.level.squares.length
-				&& (int) mouseYInSquares > -1
+		if (mouseXInSquares >= 0 && mouseYInSquares >= 0 && (int) mouseXInSquares > -1
+				&& (int) mouseXInSquares < Game.level.squares.length && (int) mouseYInSquares > -1
 				&& (int) mouseYInSquares < Game.level.squares[0].length) {
 			Game.squareMouseIsOver = Game.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
 		}
@@ -129,17 +125,16 @@ public class UserInputEditor {
 		// Getting button that we have clicked, if any
 		Game.buttonHoveringOver = null;
 		if (dragging == false) {
-			Game.buttonHoveringOver = editor.getButtonFromMousePosition(
-					Mouse.getX(), Mouse.getY());
+			Game.buttonHoveringOver = editor.getButtonFromMousePosition(Mouse.getX(), Mouse.getY());
 		}
 
 		// left click logic
-		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
-				&& dragging == false && Game.buttonHoveringOver != null) {
+		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
+				&& Game.buttonHoveringOver != null) {
 			// click button
 			Game.buttonHoveringOver.click();
-		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
-				&& dragging == false && Game.squareMouseIsOver != null) {
+		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
+				&& Game.squareMouseIsOver != null) {
 			// click square/game object if we're on one
 
 			GameObject clickedGameObject = Game.squareMouseIsOver.gameObject;
@@ -185,15 +180,13 @@ public class UserInputEditor {
 			keyStateBack = false;
 		}
 
-		if (keyStateLeftShift == false
-				&& Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+		if (keyStateLeftShift == false && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			keyStateLeftShift = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			keyStateLeftShift = false;
 		}
 
-		if (keyStateRightShift == false
-				&& Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+		if (keyStateRightShift == false && Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 			keyStateRightShift = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 			keyStateRightShift = false;
