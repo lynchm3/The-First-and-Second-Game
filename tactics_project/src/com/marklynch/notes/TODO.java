@@ -2,11 +2,36 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// draw Incentory devices whether the inventory is drawn or now
+	// For a chest it won't be drawn, for an empty square it will
+	// remove weapons collection that objects have
+
+	// check the make copy methods, i think they might b shit
+
+	// Select owner by clicking on person.
+	// When you click on the person you get asked whether to set them or the
+	// faction as the owner... or dont have ownership on a factin lvl... i
+	// dunno...
+
+	// Need object, square, and actor templates
+
+	// Need concept of vision for player character and enemy characters
+
+	// Vision should definitely be an attribute that you can upgrade
+
+	// Ability - show NPC vision (you can right click on an NPC and select see
+	// vision) Then you can see whether they can see you or not. Good for
+	// sneaking, stealing shit.
+
 	// InterfaceSelectionWindow and ClassSelection Window can be merged or
 	// subclassed in to eachother
+
 	// location and owner interfaces
 	// Object and SQuare implement location
 	// Actor and Faction implement owner
+
+	// When adding a new object select whtehter it'll be onject class or
+	// exploder class
 
 	// Add a title to the class selection window and instance selection window
 

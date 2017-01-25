@@ -8,16 +8,17 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.Vector;
 
-import mdesl.graphics.Color;
-import mdesl.graphics.Texture;
-
 import com.marklynch.CustomizedTypeAdapterFactory;
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.ui.ActivityLog;
 
-public class Faction {
+import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
+
+public class Faction implements Owner {
 	public final static String[] editableAttributes = { "name", "color" };
 
 	enum AI_MODE {

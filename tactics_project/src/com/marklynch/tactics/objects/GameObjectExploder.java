@@ -11,14 +11,14 @@ import com.marklynch.utils.TriangleUtils;
 
 public class GameObjectExploder extends GameObject {
 
+	public GameObjectExploder(String name, int health, String imagePath, Square squareGameObjectIsOn,
+			ArrayList<Weapon> weapons, ArrayList<GameObject> inventory, boolean showInventory) {
+		super(name, health, imagePath, squareGameObjectIsOn, weapons, inventory, showInventory);
+	}
+
 	public SquarePiece[] squarePieces;
 
 	public TrianglePiece[] trianglePieces;
-
-	public GameObjectExploder(String name, int health, int strength, int dexterity, int intelligence, int endurance,
-			String imagePath, Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
-		super(name, health, strength, dexterity, intelligence, endurance, imagePath, squareGameObjectIsOn, weapons);
-	}
 
 	@Override
 	public boolean checkIfDestroyed() {

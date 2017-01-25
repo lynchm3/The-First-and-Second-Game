@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.Vector;
 
-import mdesl.graphics.Texture;
-
 import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
@@ -22,21 +20,22 @@ import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
+import mdesl.graphics.Texture;
+
 public class GameObject {
 
-	public final static String[] editableAttributes = { "name", "imageTexture", "weapons", "strength", "dexterity",
-			"intelligence", "endurance", "totalHealth", "remainingHealth" };
+	public final static String[] editableAttributes = { "name", "imageTexture", "weapons", "totalHealth",
+			"remainingHealth", "owner", "inventory", "showInventory" };
 	public String guid = UUID.randomUUID().toString();
 
 	public String name = "";
 
 	// attributes
-	public int strength = 0;
-	public int dexterity = 0;
-	public int intelligence = 0;
-	public int endurance = 0;
 	public float totalHealth = 0;
 	public float remainingHealth = 0;
+	public Owner owner;
+	public ArrayList<GameObject> inventory;
+	public boolean showInventory;
 
 	public transient boolean hasAttackedThisTurn = false;
 
@@ -74,21 +73,19 @@ public class GameObject {
 
 	public transient Faction faction;
 
-	public GameObject(String name, int health, int strength, int dexterity, int intelligence, int endurance,
-			String imagePath, Square squareGameObjectIsOn, ArrayList<Weapon> weapons) {
+	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, ArrayList<Weapon> weapons,
+			ArrayList<GameObject> inventory, boolean showInventory) {
 		super();
 		this.name = name;
 		this.totalHealth = health;
 		this.remainingHealth = health;
-		this.strength = strength;
-		this.dexterity = dexterity;
-		this.intelligence = intelligence;
-		this.endurance = endurance;
 		this.imageTexturePath = imagePath;
 		this.squareGameObjectIsOn = squareGameObjectIsOn;
 		this.squareGameObjectIsOn.gameObject = this;
 		this.weapons = new Weapons();
 		this.weapons.weapons = weapons;
+		this.inventory = inventory;
+		this.showInventory = showInventory;
 
 		loadImages();
 	}
@@ -335,8 +332,8 @@ public class GameObject {
 		for (Weapon weapon : this.weapons.weapons) {
 			weaponArray.add(weapon.makeWeapon());
 		}
-		return new GameObject(name, (int) totalHealth, strength, dexterity, intelligence, endurance, imageTexturePath,
-				square, weaponArray);
+		return new GameObject(new String(name), (int) totalHealth, new String(imageTexturePath), square, weaponArray,
+				inventory, showInventory);
 	}
 
 	public void update(int delta) {

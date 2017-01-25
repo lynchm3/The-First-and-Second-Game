@@ -2,14 +2,21 @@ package com.marklynch.tactics.objects.weapons;
 
 import java.util.Vector;
 
+import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 
 public class Weapon extends WeaponTemplate {
-	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange" };
+	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
+			"owner" };
 
-	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath) {
-		super(name, damage, minRange, maxRange, imagePath);
+	public Owner owner;
+
+	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, Owner owner,
+			float health, Square squareGameObjectIsOn) {
+		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn);
+
+		this.owner = owner;
 	}
 
 	public void calculateAttackableSquares(Square[][] squares) {
@@ -73,9 +80,5 @@ public class Weapon extends WeaponTemplate {
 			return true;
 		}
 		return false;
-	}
-
-	public Weapon makeWeapon() {
-		return new Weapon(new String(name), damage, minRange, maxRange, new String(imagePath));
 	}
 }

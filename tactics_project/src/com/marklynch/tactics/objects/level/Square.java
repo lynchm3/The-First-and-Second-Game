@@ -2,11 +2,10 @@ package com.marklynch.tactics.objects.level;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.UUID;
 import java.util.Vector;
-
-import mdesl.graphics.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
@@ -16,15 +15,20 @@ import com.marklynch.ui.Dialog;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
+import mdesl.graphics.Texture;
+
 public class Square {
 
 	public String guid = UUID.randomUUID().toString();
-	public final static String[] editableAttributes = { "elevation", "travelCost" };
+	public final static String[] editableAttributes = { "elevation", "travelCost", "inventory", "showInventory" };
 
 	public final int x;
 	public final int y;
 	public final int elevation;
 	public int travelCost;
+	public ArrayList<GameObject> inventory;
+	public boolean showInventory;
+
 	public transient boolean reachableBySelectedCharater = false;
 	public transient boolean inPath = false;
 	public transient Vector<Weapon> weaponsThatCanAttack;

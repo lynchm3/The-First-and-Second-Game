@@ -2,7 +2,6 @@ package com.marklynch.editor.settingswindow;
 
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.WeaponTemplate;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
@@ -43,8 +42,8 @@ public class WeaponTemplatesSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				WeaponTemplate newWeapon = new WeaponTemplate("Weapon" + editor.weaponTemplates.size(), 3, 1, 1,
-						"a3r1.png");
+				WeaponTemplate newWeapon = new WeaponTemplate("Weapon Template " + editor.weaponTemplates.size(), 3, 1,
+						1, "a3r1.png", 100, null);
 				editor.weaponTemplates.add(newWeapon);
 				updateWeaponsButtons();
 				editor.clearSelectedObject();

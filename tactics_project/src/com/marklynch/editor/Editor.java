@@ -144,11 +144,11 @@ public class Editor {
 		colors.add(new Color(Color.ORANGE));
 
 		// LOAD Weapons// Weapons
-		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png");
+		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png", 100, null);
 		weaponTemplates.add(weaponTemplate0);
-		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png");
+		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png", 100, null);
 		weaponTemplates.add(weaponTemplate1);
-		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png");
+		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png", 100, null);
 		weaponTemplates.add(weaponTemplate2);
 		for (int i = 0; i < weaponTemplates.size(); i++) {
 			weaponTemplates.get(i).loadImages();
@@ -431,8 +431,8 @@ public class Editor {
 	public void generateTestObjects() {
 
 		// Add a game object
-		GameObject gameObject = new GameObjectExploder("dumpster", 5, 0, 0, 0, 0, "skip_with_shadow.png",
-				Game.level.squares[0][3], new ArrayList<Weapon>());
+		GameObject gameObject = new GameObjectExploder("dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
+				new ArrayList<Weapon>(), new ArrayList<GameObject>(), true);
 		Game.level.inanimateObjects.add(gameObject);
 		Game.level.squares[0][3].gameObject = gameObject;
 
@@ -465,12 +465,12 @@ public class Editor {
 
 		// Add actor
 		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4],
-				weaponsForActor0, 4);
+				weaponsForActor0, 4, new ArrayList<GameObject>(), true);
 		actor0.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(actor0);
 
 		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5],
-				weaponsForActor1, 4);
+				weaponsForActor1, 4, new ArrayList<GameObject>(), true);
 		actor1.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(actor1);
 
@@ -696,8 +696,8 @@ public class Editor {
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = null;
 			if (gameObjectTemplate == null) {
-				gameObject = new GameObject("dumpster", 5, 0, 0, 0, 0, "skip_with_shadow.png", square,
-						new ArrayList<Weapon>());
+				gameObject = new GameObject("dumpster", 5, "skip_with_shadow.png", square, new ArrayList<Weapon>(),
+						new ArrayList<GameObject>(), true);
 			} else {
 				gameObject = gameObjectTemplate.makeCopy(square);
 			}
@@ -711,7 +711,7 @@ public class Editor {
 			Actor actor = null;
 			if (actorTemplate == null) {
 				actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", square, new ArrayList<Weapon>(),
-						4);
+						4, new ArrayList<GameObject>(), true);
 				actor.faction = Game.level.factions.get(0);
 			} else {
 				actor = actorTemplate.makeCopy(square);

@@ -3,14 +3,13 @@ package com.marklynch.tactics.objects.unit;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import mdesl.graphics.Color;
-
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
@@ -24,14 +23,21 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-public class Actor extends GameObject {
+import mdesl.graphics.Color;
+
+public class Actor extends GameObject implements Owner {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "weapons", "strength",
-			"dexterity", "intelligence", "endurance", "totalHealth", "remainingHealth" };
+			"dexterity", "intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory" };
 
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT
 	}
+
+	int strength;
+	int dexterity;
+	int intelligence;
+	int endurance;
 
 	public String title = "";
 	public int actorLevel = 1;
@@ -59,8 +65,13 @@ public class Actor extends GameObject {
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, ArrayList<Weapon> weapons,
-			int travelDistance) {
-		super(name, health, strength, dexterity, intelligence, endurance, imagePath, squareActorIsStandingOn, weapons);
+			int travelDistance, ArrayList<GameObject> inventory, boolean showInventory) {
+		super(name, health, imagePath, squareActorIsStandingOn, weapons, inventory, showInventory);
+
+		this.strength = strength;
+		this.dexterity = dexterity;
+		this.intelligence = intelligence;
+		this.endurance = endurance;
 
 		this.title = title;
 		this.actorLevel = actorLevel;
@@ -982,6 +993,6 @@ public class Actor extends GameObject {
 		}
 
 		return new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
-				imageTexturePath, square, weaponArray, travelDistance);
+				imageTexturePath, square, weaponArray, travelDistance, inventory, showInventory);
 	}
 }
