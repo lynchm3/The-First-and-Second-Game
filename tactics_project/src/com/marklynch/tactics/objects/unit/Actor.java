@@ -27,8 +27,8 @@ import mdesl.graphics.Color;
 
 public class Actor extends GameObject implements Owner {
 
-	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "weapons", "strength",
-			"dexterity", "intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory" };
+	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
+			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory" };
 
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT
@@ -64,9 +64,9 @@ public class Actor extends GameObject implements Owner {
 	public transient AIRoutine ai = new AIRoutine();
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, ArrayList<Weapon> weapons,
-			int travelDistance, ArrayList<GameObject> inventory, boolean showInventory) {
-		super(name, health, imagePath, squareActorIsStandingOn, weapons, inventory, showInventory);
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
+			ArrayList<GameObject> inventory, boolean showInventory) {
+		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory);
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -87,12 +87,15 @@ public class Actor extends GameObject implements Owner {
 		buttons.add(pushButton);
 		attackButton.enabled = true;
 
-		for (Weapon weapon : this.weapons.weapons) {
-			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath, weapon.imagePath, weapon));
-		}
+		ArrayList<Weapon> weapons = getWeaponsInInventory();
+		//
+		// for (Weapon weapon : weapons) {
+		// weaponButtons.add(new WeaponButton(0, 0, 50, 50,
+		// weapon.imageTexturePath, weapon.imageTexturePath, weapon));
+		// }
 
-		if (this.weapons.weapons.size() > 0 && this.weapons.weapons.get(0) != null) {
-			equippedWeapon = this.weapons.weapons.get(0);
+		if (weapons.size() > 0 && weapons.get(0) != null) {
+			equippedWeapon = weapons.get(0);
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
@@ -113,12 +116,14 @@ public class Actor extends GameObject implements Owner {
 		buttons.add(pushButton);
 		attackButton.enabled = true;
 
-		for (Weapon weapon : this.weapons.weapons) {
-			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imagePath, weapon.imagePath, weapon));
+		ArrayList<Weapon> weapons = getWeaponsInInventory();
+
+		for (Weapon weapon : weapons) {
+			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imageTexturePath, weapon.imageTexturePath, weapon));
 		}
 
-		if (this.weapons.weapons.size() > 0 && this.weapons.weapons.get(0) != null) {
-			equippedWeapon = this.weapons.weapons.get(0);
+		if (weapons.size() > 0 && weapons.get(0) != null) {
+			equippedWeapon = weapons.get(0);
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
@@ -151,7 +156,7 @@ public class Actor extends GameObject implements Owner {
 			}
 		}
 
-		for (Weapon weapon : weapons.weapons) {
+		for (Weapon weapon : getWeaponsInInventory()) {
 			weapon.calculateAttackableSquares(squares);
 		}
 	}
@@ -169,7 +174,7 @@ public class Actor extends GameObject implements Owner {
 	}
 
 	public boolean hasRange(int weaponDistance) {
-		for (Weapon weapon : weapons.weapons) {
+		for (Weapon weapon : getWeaponsInInventory()) {
 			if (weaponDistance >= weapon.minRange && weaponDistance <= weapon.maxRange) {
 				// selectedWeapon = weapon;
 				return true;
@@ -235,7 +240,7 @@ public class Actor extends GameObject implements Owner {
 		// weird...
 
 		int range = this.weaponDistanceTo(target.squareGameObjectIsOn);
-		for (Weapon weapon : weapons.weapons) {
+		for (Weapon weapon : getWeaponsInInventory()) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				equippedWeapon = weapon;
 			}
@@ -247,7 +252,7 @@ public class Actor extends GameObject implements Owner {
 		ArrayList<Weapon> potentialWeaponsToEquip = new ArrayList<Weapon>();
 
 		int range = this.weaponDistanceTo(target.squareGameObjectIsOn);
-		for (Weapon weapon : weapons.weapons) {
+		for (Weapon weapon : getWeaponsInInventory()) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				potentialWeaponsToEquip.add(weapon);
 			}
@@ -401,6 +406,10 @@ public class Actor extends GameObject implements Owner {
 			// Draw weapon
 			if (equippedWeapon != null) {
 				TextureUtils.skipNormals = true;
+
+				System.out.println("equippedWeapon = " + equippedWeapon);
+				System.out.println("equippedWeapon.imageTexture = " + equippedWeapon.imageTexture);
+
 				TextureUtils.drawTexture(equippedWeapon.imageTexture, alpha, equippedWeaponPositionXInPixels,
 						equippedWeaponPositionXInPixels + Game.SQUARE_WIDTH, equippedWeaponPositionYInPixels,
 						equippedWeaponPositionYInPixels + Game.SQUARE_HEIGHT);
@@ -435,9 +444,10 @@ public class Actor extends GameObject implements Owner {
 				// draw weapon icons on square
 				float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
 				float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
-				for (int i = 0; i < weapons.weapons.size(); i++) {
+				ArrayList<Weapon> weapons = getWeaponsInInventory();
+				for (int i = 0; i < weapons.size(); i++) {
 
-					Weapon weapon = weapons.weapons.get(i);
+					Weapon weapon = weapons.get(i);
 
 					float weaponIconPositionXInPixels = 0;
 					float weaponIconPositionYInPixels = 0;
@@ -908,7 +918,7 @@ public class Actor extends GameObject implements Owner {
 	public Vector<Float> calculateIdealDistanceFrom(GameObject target) {
 
 		Vector<Fight> fights = new Vector<Fight>();
-		for (Weapon weapon : this.weapons.weapons) {
+		for (Weapon weapon : getWeaponsInInventory()) {
 			for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
 				Fight fight = new Fight(this, weapon, target, target.bestCounterWeapon(this, weapon, range), range);
 				fights.add(fight);
@@ -930,7 +940,7 @@ public class Actor extends GameObject implements Owner {
 		this.showHoverFightPreview = true;
 		hoverFightPreviewDefender = defender;
 		hoverFightPreviewFights.clear();
-		for (Weapon weapon : weapons.weapons) {
+		for (Weapon weapon : getWeaponsInInventory()) {
 			// if (defender.squareGameObjectIsOn.weaponsThatCanAttack
 			// .contains(weapon)) {
 
@@ -987,12 +997,7 @@ public class Actor extends GameObject implements Owner {
 	@Override
 	public Actor makeCopy(Square square) {
 
-		ArrayList<Weapon> weaponArray = new ArrayList<Weapon>();
-		for (Weapon weapon : this.weapons.weapons) {
-			weaponArray.add(weapon.makeWeapon());
-		}
-
 		return new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
-				imageTexturePath, square, weaponArray, travelDistance, inventory, showInventory);
+				imageTexturePath, square, travelDistance, inventory, showInventory);
 	}
 }

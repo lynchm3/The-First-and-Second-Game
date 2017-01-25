@@ -40,7 +40,6 @@ import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.WeaponTemplate;
-import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -432,7 +431,7 @@ public class Editor {
 
 		// Add a game object
 		GameObject gameObject = new GameObjectExploder("dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
-				new ArrayList<Weapon>(), new ArrayList<GameObject>(), true);
+				new ArrayList<GameObject>(), true);
 		Game.level.inanimateObjects.add(gameObject);
 		Game.level.squares[0][3].gameObject = gameObject;
 
@@ -447,30 +446,34 @@ public class Editor {
 		Game.level.factions.get(1).relationships.put(Game.level.factions.get(0),
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
-		// Weapons
-		ArrayList<Weapon> weaponsForActor0 = new ArrayList<Weapon>();
+		// Inventory
+		ArrayList<GameObject> weaponsForActor0 = new ArrayList<GameObject>();
 		weaponsForActor0.add(weaponTemplates.get(0).makeWeapon());
 		weaponsForActor0.add(weaponTemplates.get(1).makeWeapon());
 		weaponsForActor0.add(weaponTemplates.get(2).makeWeapon());
 		for (int i = 0; i < weaponsForActor0.size(); i++) {
-			weapons.add(weaponsForActor0.get(i));
+			if (weaponsForActor0.get(i) instanceof Weapon)
+				weapons.add((Weapon) weaponsForActor0.get(i));
+			Game.level.inanimateObjects.add(weaponsForActor0.get(i));
 		}
-		ArrayList<Weapon> weaponsForActor1 = new ArrayList<Weapon>();
+		ArrayList<GameObject> weaponsForActor1 = new ArrayList<GameObject>();
 		weaponsForActor1.add(weaponTemplates.get(0).makeWeapon());
 		weaponsForActor1.add(weaponTemplates.get(1).makeWeapon());
 		weaponsForActor1.add(weaponTemplates.get(2).makeWeapon());
 		for (int i = 0; i < weaponsForActor1.size(); i++) {
-			weapons.add(weaponsForActor1.get(i));
+			if (weaponsForActor1.get(i) instanceof Weapon)
+				weapons.add((Weapon) weaponsForActor1.get(i));
+			Game.level.inanimateObjects.add(weaponsForActor1.get(i));
 		}
 
 		// Add actor
-		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4],
-				weaponsForActor0, 4, new ArrayList<GameObject>(), true);
+		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 4,
+				weaponsForActor0, true);
 		actor0.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(actor0);
 
-		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5],
-				weaponsForActor1, 4, new ArrayList<GameObject>(), true);
+		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5], 4,
+				weaponsForActor1, true);
 		actor1.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(actor1);
 
@@ -696,8 +699,8 @@ public class Editor {
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = null;
 			if (gameObjectTemplate == null) {
-				gameObject = new GameObject("dumpster", 5, "skip_with_shadow.png", square, new ArrayList<Weapon>(),
-						new ArrayList<GameObject>(), true);
+				gameObject = new GameObject("dumpster", 5, "skip_with_shadow.png", square, new ArrayList<GameObject>(),
+						true);
 			} else {
 				gameObject = gameObjectTemplate.makeCopy(square);
 			}
@@ -710,8 +713,8 @@ public class Editor {
 			// Add actor
 			Actor actor = null;
 			if (actorTemplate == null) {
-				actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", square, new ArrayList<Weapon>(),
-						4, new ArrayList<GameObject>(), true);
+				actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", square, 4,
+						new ArrayList<GameObject>(), true);
 				actor.faction = Game.level.factions.get(0);
 			} else {
 				actor = actorTemplate.makeCopy(square);
@@ -918,16 +921,18 @@ public class Editor {
 				// texture
 				attributeSelectionWindow = new AttributeSelectionWindow(textures, false, this, objectToEdit,
 						"Select a Texture");
-			} else if (type.isAssignableFrom(Weapons.class)) {
-				// weapons
-				attributeSelectionWindow = new AttributeSelectionWindow(weapons, true, this, objectToEdit,
-						"Select a Weapon");
-				// } else if (type.isAssignableFrom(WeaponTemplate.class)) {
-				// // weapon templates
+				// } else if (type.isAssignableFrom(Weapons.class)) { HERE IS
+				// THE ISSUE
+				// // weapons
 				// attributeSelectionWindow = new
-				// AttributeSelectionWindow(weaponTemplates, true, this,
-				// objectToEdit,
-				// "Select a Weapon Template");
+				// AttributeSelectionWindow(weapons, true, this, objectToEdit,
+				// "Select a Weapon");
+				// // } else if (type.isAssignableFrom(WeaponTemplate.class)) {
+				// // // weapon templates
+				// // attributeSelectionWindow = new
+				// // AttributeSelectionWindow(weaponTemplates, true, this,
+				// // objectToEdit,
+				// // "Select a Weapon Template");
 			} else if (type.isAssignableFrom(GameObject.class)) {
 				// actor
 

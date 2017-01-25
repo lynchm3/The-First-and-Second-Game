@@ -16,7 +16,6 @@ import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.WeaponTemplate;
-import com.marklynch.tactics.objects.weapons.Weapons;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
@@ -149,16 +148,17 @@ public class TextUtils {
 				TextureUtils.drawTexture(weaponTemplate.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 
-			} else if (content instanceof Weapons) {
-
-				Weapons weapons = (Weapons) content;
-
-				for (Weapon weapon : weapons.weapons) {
-					// Image
-					float x = posX + offsetX;
-					TextureUtils.drawTexture(weapon.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
-					offsetX += 20;
-				}
+				// } else if (content instanceof Weapons) {
+				//
+				// Weapons weapons = (Weapons) content;
+				//
+				// for (Weapon weapon : weapons.weapons) {
+				// // Image
+				// float x = posX + offsetX;
+				// TextureUtils.drawTexture(weapon.imageTexture, x, x + 20, posY
+				// + offsetY, posY + offsetY + 20);
+				// offsetX += 20;
+				// }
 
 			} else if (content instanceof Faction) {
 				Faction faction = (Faction) content;

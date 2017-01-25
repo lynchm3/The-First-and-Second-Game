@@ -11,8 +11,6 @@ import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
-import com.marklynch.tactics.objects.weapons.Weapon;
-import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
@@ -175,22 +173,25 @@ public class AttributeSelectionWindow<T> {
 							}
 							editor.stopEditingAttribute();
 
-						} else if (type.isAssignableFrom(Weapons.class)) {// weapons
-
-							if (selectionWindowButton.down == true) {
-								selectionWindowButton.down = false;
-								selectedObjects.remove(selectionWindowButton.object);
-							} else {
-								selectionWindowButton.down = true;
-								selectedObjects.add((T) selectionWindowButton.object);
-							}
-
-							Weapons weapons = new Weapons();
-							for (T selectedObject : selectedObjects) {
-								Weapon weapon = (Weapon) selectedObject;
-								weapons.weapons.add(weapon.makeWeapon());
-							}
-							ownerOfAttribute.getClass().getField("weapons").set(ownerOfAttribute, weapons);
+							// } else if (type.isAssignableFrom(Weapons.class))
+							// {// weapons
+							//
+							// if (selectionWindowButton.down == true) {
+							// selectionWindowButton.down = false;
+							// selectedObjects.remove(selectionWindowButton.object);
+							// } else {
+							// selectionWindowButton.down = true;
+							// selectedObjects.add((T)
+							// selectionWindowButton.object);
+							// }
+							//
+							// Weapons weapons = new Weapons();
+							// for (T selectedObject : selectedObjects) {
+							// Weapon weapon = (Weapon) selectedObject;
+							// weapons.weapons.add(weapon.makeWeapon());
+							// }
+							// ownerOfAttribute.getClass().getField("weapons").set(ownerOfAttribute,
+							// weapons);
 						} else if (type.isAssignableFrom(ScriptTrigger.class)) {// script
 																				// trigger
 							ScriptTrigger scriptTrigger = (ScriptTrigger) objects.get(index);

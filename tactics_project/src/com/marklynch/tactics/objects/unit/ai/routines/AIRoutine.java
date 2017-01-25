@@ -166,12 +166,16 @@ public class AIRoutine {
 		// 2. pick which is the best
 		ArrayList<Fight> fights = new ArrayList<Fight>();
 		for (Actor actor : bestTargetsBasedOnTurnsToReach) {
-			for (Weapon weapon : Game.level.activeActor.weapons.weapons) {
-				for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
-					Fight fight = new Fight(Game.level.activeActor, weapon, actor,
-							actor.bestCounterWeapon(Game.level.activeActor, weapon, range), range);
-					fights.add(fight);
+			for (GameObject gameObject : Game.level.activeActor.inventory) {
+				if (gameObject instanceof Weapon) {
+					Weapon weapon = (Weapon) gameObject;
+					for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
+						Fight fight = new Fight(Game.level.activeActor, weapon, actor,
+								actor.bestCounterWeapon(Game.level.activeActor, weapon, range), range);
+						fights.add(fight);
+					}
 				}
+
 			}
 		}
 

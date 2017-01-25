@@ -15,7 +15,6 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.weapons.Weapon;
-import com.marklynch.tactics.objects.weapons.Weapons;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
@@ -24,8 +23,8 @@ import mdesl.graphics.Texture;
 
 public class GameObject {
 
-	public final static String[] editableAttributes = { "name", "imageTexture", "weapons", "totalHealth",
-			"remainingHealth", "owner", "inventory", "showInventory" };
+	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
+			"owner", "inventory", "showInventory" };
 	public String guid = UUID.randomUUID().toString();
 
 	public String name = "";
@@ -38,9 +37,6 @@ public class GameObject {
 	public boolean showInventory;
 
 	public transient boolean hasAttackedThisTurn = false;
-
-	// Inventory
-	public Weapons weapons = new Weapons();
 
 	// Interaction with the level
 	public Square squareGameObjectIsOn = null;
@@ -73,17 +69,17 @@ public class GameObject {
 
 	public transient Faction faction;
 
-	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, ArrayList<Weapon> weapons,
+	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn,
 			ArrayList<GameObject> inventory, boolean showInventory) {
 		super();
 		this.name = name;
 		this.totalHealth = health;
 		this.remainingHealth = health;
 		this.imageTexturePath = imagePath;
-		this.squareGameObjectIsOn = squareGameObjectIsOn;
-		this.squareGameObjectIsOn.gameObject = this;
-		this.weapons = new Weapons();
-		this.weapons.weapons = weapons;
+		if (squareGameObjectIsOn != null) {
+			this.squareGameObjectIsOn = squareGameObjectIsOn;
+			this.squareGameObjectIsOn.gameObject = this;
+		}
 		this.inventory = inventory;
 		this.showInventory = showInventory;
 
@@ -103,58 +99,68 @@ public class GameObject {
 		grassNormalTexture = getGlobalImage("grass_NRM.png");
 		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png");
 		screamAudio = ResourceUtils.getGlobalSound("scream.wav");
-		for (Weapon weapon : this.weapons.weapons) {
-			weapon.loadImages();
-		}
 
 	}
 
 	public void postLoad(Faction faction) {
 		this.faction = faction;
-		this.squareGameObjectIsOn = Game.level.squares[this.squareGameObjectIsOn.x][this.squareGameObjectIsOn.y];
-		this.squareGameObjectIsOn.gameObject = this;
+		if (squareGameObjectIsOn != null) {
+			this.squareGameObjectIsOn = Game.level.squares[this.squareGameObjectIsOn.x][this.squareGameObjectIsOn.y];
+			this.squareGameObjectIsOn.gameObject = this;
+		}
 		this.paths = new HashMap<Square, Path>();
 	}
 
 	public void drawForeground() {
 
 		// Draw object
-		int actorPositionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
-		int actorPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
 
-		float alpha = 1.0f;
-		if (Game.level.activeActor != null && Game.level.activeActor.showHoverFightPreview == true
-				&& Game.level.activeActor.hoverFightPreviewDefender != this) {
-			alpha = 0.5f;
+		if (squareGameObjectIsOn != null) {
+			int actorPositionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
+			int actorPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
+
+			float alpha = 1.0f;
+			if (Game.level.activeActor != null && Game.level.activeActor.showHoverFightPreview == true
+					&& Game.level.activeActor.hoverFightPreviewDefender != this) {
+				alpha = 0.5f;
+			}
+
+			if (hasAttackedThisTurn == true && this.faction != null
+					&& Game.level.currentFactionMoving == this.faction) {
+				alpha = 0.5f;
+			}
+
+			TextureUtils.skipNormals = true;
+			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
+					actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels,
+					actorPositionYInPixels + Game.SQUARE_HEIGHT);
+			TextureUtils.skipNormals = false;
 		}
-
-		if (hasAttackedThisTurn == true && this.faction != null && Game.level.currentFactionMoving == this.faction) {
-			alpha = 0.5f;
-		}
-
-		TextureUtils.skipNormals = true;
-		TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
-				actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels,
-				actorPositionYInPixels + Game.SQUARE_HEIGHT);
-		TextureUtils.skipNormals = false;
 	}
 
 	public void drawUI() {
 
 		// Draw POW
-		if (showPow == true) {
-			int powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH));
-			int powPositionYInPixels = powTarget.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
 
-			TextureUtils.drawTexture(this.powTexture, powPositionXInPixels, powPositionXInPixels + Game.SQUARE_WIDTH,
-					powPositionYInPixels, powPositionYInPixels + Game.SQUARE_HEIGHT);
+		if (squareGameObjectIsOn != null) {
+			if (showPow == true) {
+				int powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH));
+				int powPositionYInPixels = powTarget.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
 
+				TextureUtils.drawTexture(this.powTexture, powPositionXInPixels,
+						powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels,
+						powPositionYInPixels + Game.SQUARE_HEIGHT);
+
+			}
 		}
 	}
 
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
-			this.squareGameObjectIsOn.gameObject = null;
+
+			if (squareGameObjectIsOn != null) {
+				this.squareGameObjectIsOn.gameObject = null;
+			}
 			// Game.level.inanimateObjects.remove(this);
 
 			return true;
@@ -318,26 +324,35 @@ public class GameObject {
 	}
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon, float range) {
-		for (Weapon weapon : weapons.weapons) {
-			if (range >= weapon.minRange && range <= weapon.maxRange) {
-				return weapon;
+
+		for (GameObject gameObject : inventory) {
+			if (gameObject instanceof Weapon) {
+				Weapon weapon = (Weapon) gameObject;
+				if (range >= weapon.minRange && range <= weapon.maxRange) {
+					return weapon;
+				}
 			}
 		}
 		return null;
 	}
 
 	public GameObject makeCopy(Square square) {
-
-		ArrayList<Weapon> weaponArray = new ArrayList<Weapon>();
-		for (Weapon weapon : this.weapons.weapons) {
-			weaponArray.add(weapon.makeWeapon());
-		}
-		return new GameObject(new String(name), (int) totalHealth, new String(imageTexturePath), square, weaponArray,
-				inventory, showInventory);
+		return new GameObject(new String(name), (int) totalHealth, new String(imageTexturePath), square, inventory,
+				showInventory);
 	}
 
 	public void update(int delta) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public ArrayList<Weapon> getWeaponsInInventory() {
+		ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+		for (GameObject gameObject : inventory) {
+			if (gameObject instanceof Weapon) {
+				weapons.add((Weapon) gameObject);
+			}
+		}
+		return weapons;
 	}
 }

@@ -5,15 +5,14 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Square;
-import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TriangleUtils;
 
 public class GameObjectExploder extends GameObject {
 
 	public GameObjectExploder(String name, int health, String imagePath, Square squareGameObjectIsOn,
-			ArrayList<Weapon> weapons, ArrayList<GameObject> inventory, boolean showInventory) {
-		super(name, health, imagePath, squareGameObjectIsOn, weapons, inventory, showInventory);
+			ArrayList<GameObject> inventory, boolean showInventory) {
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory);
 	}
 
 	public SquarePiece[] squarePieces;
