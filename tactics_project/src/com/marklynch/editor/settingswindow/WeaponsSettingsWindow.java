@@ -50,7 +50,7 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 				ArrayList<WeaponTemplate> weaponTemplates =	editor.weaponTemplates;
 
 				editor.instanceSelectionWindow = new InstanceSelectionWindow<WeaponTemplate>(weaponTemplates,
-						editor);
+						editor, "Select a Weapon Template");
 			}
 		};
 		buttons.add(addWeaponButton);

@@ -2,28 +2,28 @@ package com.marklynch.editor;
 
 import java.util.ArrayList;
 
-import mdesl.graphics.Color;
-
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.tactics.objects.weapons.WeaponTemplate;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
 import com.marklynch.utils.QuadUtils;
+
+import mdesl.graphics.Color;
 
 public class InstanceSelectionWindow<T> {
 
 	ArrayList<T> instances;
 	public ArrayList<SelectionWindowButton> buttons = new ArrayList<SelectionWindowButton>();
 	public Editor editor;
+	public String title;
 
 	public InstanceSelectionWindow(final ArrayList<T> instances,
-			final Editor editor) {
+			final Editor editor, String title) {
 		this.editor = editor;
 		this.instances = instances;
+		this.title = title;
 
 		for (int i = 0; i < instances.size(); i++) {
 
@@ -42,10 +42,11 @@ public class InstanceSelectionWindow<T> {
 
 					try {
 
-						if (instances.get(index) instanceof Weapon) {
-							Weapon weaponTemplate = (Weapon)instances.get(index);
+						if (instances.get(index) instanceof WeaponTemplate) {
+							WeaponTemplate weaponTemplate = (WeaponTemplate)instances.get(index);
 							Weapon weapon = weaponTemplate.makeWeapon();
 							editor.weapons.add(weapon);
+							editor.instanceSelectionWindow = null;
 						}
 
 					} catch (Exception e) {
@@ -61,12 +62,17 @@ public class InstanceSelectionWindow<T> {
 	}
 
 	public void draw() {
-		// faction
+				
 		QuadUtils.drawQuad(Color.WHITE, 0, Game.windowWidth, 0,
 				Game.windowHeight);
+		
 		for (SelectionWindowButton button : buttons) {
 			button.draw();
 		}
+
+		float textWidth = Game.font.getWidth(title);
+		Game.activeBatch.setColor(Color.RED);
+		Game.font.drawText(Game.activeBatch, title, 200,50);
 
 	}
 

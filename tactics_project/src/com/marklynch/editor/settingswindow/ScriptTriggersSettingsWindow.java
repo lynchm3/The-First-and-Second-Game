@@ -67,7 +67,7 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 				classes.add(ScriptTriggerTurnStart.class);
 
 				editor.classSelectionWindow = new ClassSelectionWindow(classes,
-						editor, ScriptTrigger.class);
+						editor, ScriptTrigger.class, "Select a Script Trigger Type");
 			}
 		};
 		buttons.add(addScriptTriggerButton);

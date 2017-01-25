@@ -1,5 +1,6 @@
 package com.marklynch.editor;
 
+import java.awt.Font;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class Editor {
 
 	public String json = null;
 
-	public ArrayList<Button> buttons = new ArrayList<Button>();
+	public ArrayList<Button> tabs = new ArrayList<Button>();
 
 	// faction, actors, object, scriptevent, script
 	// trigger, weapon,
@@ -181,10 +182,15 @@ public class Editor {
 
 		generateTestObjects();
 
+		
+		
+		
+		
 		// TABS
-		levelTabButton = new LevelButton(10, 10, 70, 30, "", "", "LEVEL", true,
+		String tabText = "LEVEL";
+		levelTabButton = new LevelButton(10, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true,
 				true);
-		buttons.add(levelTabButton);
+		tabs.add(levelTabButton);
 		levelTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -198,7 +204,8 @@ public class Editor {
 		};
 		levelTabButton.down = true;
 
-		squaresTabButton = new LevelButton(90, 10, 110, 30, "", "", "SQUARES",
+		tabText = "SQUARES";
+		squaresTabButton = new LevelButton(90, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
 				true, true);
 		squaresTabButton.clickListener = new ClickListener() {
 			@Override
@@ -211,9 +218,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(squaresTabButton);
+		tabs.add(squaresTabButton);
 
-		objectsTabButton = new LevelButton(210, 10, 100, 30, "", "", "OBJECTS",
+		tabText = "OBJECTS";
+		objectsTabButton = new LevelButton(210, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
 				true, true);
 		objectsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -226,9 +234,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(objectsTabButton);
+		tabs.add(objectsTabButton);
 
-		actorsTabButton = new LevelButton(320, 10, 100, 30, "", "", "ACTORS",
+		tabText = "ACTORS";
+		actorsTabButton = new LevelButton(320, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
 				true, true);
 		actorsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -241,10 +250,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(actorsTabButton);
+		tabs.add(actorsTabButton);
 
-		factionsTabButton = new LevelButton(430, 10, 120, 30, "", "",
-				"FACTIONS", true, true);
+		tabText = "FACTIONS";
+		factionsTabButton = new LevelButton(430, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		factionsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -256,9 +265,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(factionsTabButton);
+		tabs.add(factionsTabButton);
 		
-		weaponTemplatesTabButton = new LevelButton(560, 10, 150, 30, "", "", "WEAPON TEMPLATES",
+		tabText = "WEAPON TEMPLATES";
+		weaponTemplatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
 				true, true);
 		weaponTemplatesTabButton.clickListener = new ClickListener() {
 			@Override
@@ -271,9 +281,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(weaponTemplatesTabButton);
+		tabs.add(weaponTemplatesTabButton);
 
-		weaponsTabButton = new LevelButton(560, 15, 120, 30, "", "", "WEAPONS",
+		tabText = "WEAPONS";
+		weaponsTabButton = new LevelButton(560, 15, Game.font.getWidth(tabText), 30, "", "", tabText,
 				true, true);
 		weaponsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -286,9 +297,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(weaponsTabButton);
+		tabs.add(weaponsTabButton);
 
-		colorsTabButton = new LevelButton(690, 10, 120, 30, "", "", "COLORS",
+		tabText = "COLORS";
+		colorsTabButton = new LevelButton(690, 10, Game.font.getWidth(tabText), 30, "", "", tabText,
 				true, true);
 		colorsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -301,10 +313,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(colorsTabButton);
+		tabs.add(colorsTabButton);
 
-		decorationsTabButton = new LevelButton(10, 50, 160, 30, "", "",
-				"DECORATIONS", true, true);
+		tabText = "DECORATIONS";
+		decorationsTabButton = new LevelButton(10, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		decorationsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -316,10 +328,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(decorationsTabButton);
+		tabs.add(decorationsTabButton);
 
-		scriptEventsTabButton = new LevelButton(180, 50, 160, 30, "", "",
-				"SCRIPT EVENTS", true, true);
+		tabText = "SCRIPT EVENTS";
+		scriptEventsTabButton = new LevelButton(180, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		scriptEventsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -331,10 +343,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(scriptEventsTabButton);
+		tabs.add(scriptEventsTabButton);
 
-		scriptTriggersTabButton = new LevelButton(350, 50, 160, 30, "", "",
-				"SCRIPT TRIGGERS", true, true);
+		tabText = "SCRIPT TRIGGERS";
+		scriptTriggersTabButton = new LevelButton(350, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		scriptTriggersTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -346,9 +358,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(scriptTriggersTabButton);
+		tabs.add(scriptTriggersTabButton);
 
-		aisTabButton = new LevelButton(520, 50, 60, 30, "", "", "AIS", true,
+		tabText = "AIS";
+		aisTabButton = new LevelButton(520, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true,
 				true);
 		aisTabButton.clickListener = new ClickListener() {
 			@Override
@@ -361,10 +374,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(aisTabButton);
+		tabs.add(aisTabButton);
 
-		relationsTabButton = new LevelButton(590, 50, 130, 30, "", "",
-				"RELATIONS", true, true);
+		tabText = "RELATIONS";
+		relationsTabButton = new LevelButton(590, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		relationsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -376,10 +389,10 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(relationsTabButton);
+		tabs.add(relationsTabButton);
 
-		speechPartTabButton = new LevelButton(730, 50, 130, 30, "", "",
-				"SPEECH PART", true, true);
+		tabText = "SPEECH PART";
+		speechPartTabButton = new LevelButton(730, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		speechPartTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -391,8 +404,49 @@ public class Editor {
 				settingsWindow.update();
 			}
 		};
-		buttons.add(speechPartTabButton);
+		tabs.add(speechPartTabButton);
+		
+		//Place the tabs
+		placeTabs();
 
+	}
+	
+	public void resize()
+	{
+		placeTabs();
+	}
+	
+	public void placeTabs()
+	{
+		float tabRow = 0;
+		float tabHeight = 30;
+		float margin = 10;
+		float tabPositionX = margin;
+		
+		Button tab = null;
+		
+		for(int i = 0; i<tabs.size(); i++)
+		{
+			tab = tabs.get(i);
+//			if(tabPositionX == 0)
+//			{
+//				tab.x = 0;
+//				tab.y = tabRow*tabHeight;
+//			}
+//			else
+//			{
+				if(tabPositionX + tab.width > Game.windowWidth)
+				{
+					tabRow++;
+					tabPositionX = margin;
+				}
+				
+				tab.x = tabPositionX;
+				tab.y = tabRow*(tabHeight + margin) + margin; 
+//			}
+			
+			tabPositionX += tab.width + margin;
+		}		
 	}
 
 	public void generateTestObjects() {
@@ -566,7 +620,7 @@ public class Editor {
 
 		settingsWindow.draw();
 
-		for (Button button : buttons) {
+		for (Button button : tabs) {
 			button.draw();
 		}
 
@@ -643,7 +697,7 @@ public class Editor {
 
 		}
 
-		for (Button button : this.buttons) {
+		for (Button button : this.tabs) {
 			if (button.calculateIfPointInBoundsOfButton(mouseX,
 					Game.windowHeight - mouseY))
 				return button;
@@ -1040,7 +1094,7 @@ public class Editor {
 	}
 
 	public void depressTabButtons() {
-		for (Button button : buttons) {
+		for (Button button : tabs) {
 			button.down = false;
 		}
 	}

@@ -3,9 +3,6 @@ package com.marklynch.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import mdesl.graphics.Color;
-import mdesl.graphics.Texture;
-
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
@@ -18,7 +15,11 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.tactics.objects.weapons.WeaponTemplate;
 import com.marklynch.tactics.objects.weapons.Weapons;
+
+import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class TextUtils {
 
@@ -132,11 +133,11 @@ public class TextUtils {
 						posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 
-			} else if (content instanceof Weapon) {
+			} else if (content instanceof Weapon || content instanceof WeaponTemplate) {
 
-				Weapon weapon = (Weapon) content;
+				WeaponTemplate weaponTemplate = (WeaponTemplate) content;
 
-				float textWidth = Game.font.getWidth(weapon.name);
+				float textWidth = Game.font.getWidth(weaponTemplate.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -150,13 +151,13 @@ public class TextUtils {
 				}
 
 				// Name
-				Game.font.drawText(Game.activeBatch, weapon.name, posX
+				Game.font.drawText(Game.activeBatch, weaponTemplate.name, posX
 						+ offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
 				float x = posX + offsetX;
-				TextureUtils.drawTexture(weapon.imageTexture, x, x + 20, posY
+				TextureUtils.drawTexture(weaponTemplate.imageTexture, x, x + 20, posY
 						+ offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 

@@ -19,13 +19,15 @@ public class ClassSelectionWindow<T> {
 	public ArrayList<SelectionWindowButton> buttons = new ArrayList<SelectionWindowButton>();
 	public Editor editor;
 	public Class superClass;
+	public String title;
 
 	public ClassSelectionWindow(final ArrayList<Class> classes,
-			final Editor editor, final Class superClass) {
+			final Editor editor, final Class superClass, String title) {
 		this.editor = editor;
 		this.classes = classes;
 		this.superClass = superClass;
-
+		this.title = title;
+		
 		for (int i = 0; i < classes.size(); i++) {
 
 			final int index = i;
@@ -72,12 +74,15 @@ public class ClassSelectionWindow<T> {
 	}
 
 	public void draw() {
-		// faction
 		QuadUtils.drawQuad(Color.WHITE, 0, Game.windowWidth, 0,
 				Game.windowHeight);
 		for (SelectionWindowButton button : buttons) {
 			button.draw();
 		}
+
+		float textWidth = Game.font.getWidth(title);
+		Game.activeBatch.setColor(Color.RED);
+		Game.font.drawText(Game.activeBatch, title, 200,50);
 
 	}
 

@@ -59,7 +59,7 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 				classes.add(ScriptEventSpeech.class);
 
 				editor.classSelectionWindow = new ClassSelectionWindow(classes,
-						editor, ScriptEvent.class);
+						editor, ScriptEvent.class, "Select a Script Event Type");
 			}
 		};
 		buttons.add(addScriptButton);

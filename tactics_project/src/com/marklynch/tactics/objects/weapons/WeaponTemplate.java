@@ -2,12 +2,7 @@ package com.marklynch.tactics.objects.weapons;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.Vector;
-
 import mdesl.graphics.Texture;
-
-import com.marklynch.tactics.objects.level.Square;
-import com.marklynch.tactics.objects.unit.Actor.Direction;
 
 public class WeaponTemplate {
 	public final static String[] editableAttributes = { "name", "imageTexture",

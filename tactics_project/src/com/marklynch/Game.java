@@ -205,6 +205,9 @@ public class Game {
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
 
 		ShadowLight.resize();
+		
+		if(editor != null)
+			editor.resize();
 
 		// whenever our screen resizes, we need to update our uniform
 		// program.use();

@@ -57,7 +57,7 @@ public class AIsSettingsWindow extends SettingsWindow {
 				classes.add(AIRoutineMoveToSquare.class);
 
 				editor.classSelectionWindow = new ClassSelectionWindow(classes,
-						editor, AIRoutine.class);
+						editor, AIRoutine.class, "Select an AI routine");
 			}
 		};
 		buttons.add(addAIButton);
