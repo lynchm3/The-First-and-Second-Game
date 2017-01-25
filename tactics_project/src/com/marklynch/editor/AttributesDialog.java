@@ -95,7 +95,11 @@ public class AttributesDialog {
 			title = "Actor @ " + actor.squareGameObjectIsOn.x + "," + actor.squareGameObjectIsOn.y;
 		} else if (object instanceof GameObject) {
 			GameObject gameObject = (GameObject) object;
-			title = "Object @ " + gameObject.squareGameObjectIsOn.x + "," + gameObject.squareGameObjectIsOn.y;
+			if (gameObject.squareGameObjectIsOn != null) {
+				title = "Object @ " + gameObject.squareGameObjectIsOn.x + "," + gameObject.squareGameObjectIsOn.y;
+			} else {
+				title = "" + gameObject.name;
+			}
 		} else if (object instanceof Faction) {
 			title = "Faction " + Game.level.factions.indexOf(object);
 		} else if (object instanceof Square) {

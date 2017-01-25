@@ -553,12 +553,13 @@ public class Editor {
 	public void drawOverlay() {
 
 		// draw highlight on selected object
-		if (selectedGameObject != null) {
+		if (selectedGameObject != null && selectedGameObject.squareGameObjectIsOn != null) {
 			selectedGameObject.squareGameObjectIsOn.drawHighlight();
 		}
 
 		// Draw a move line if click will result in move
-		if (Game.buttonHoveringOver == null && state == STATE.MOVEABLE_OBJECT_SELECTED && Game.squareMouseIsOver != null
+		if (selectedGameObject.squareGameObjectIsOn != null && Game.buttonHoveringOver == null
+				&& state == STATE.MOVEABLE_OBJECT_SELECTED && Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
 			float x1 = this.selectedGameObject.squareGameObjectIsOn.x * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
