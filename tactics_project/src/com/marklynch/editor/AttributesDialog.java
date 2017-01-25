@@ -4,8 +4,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import mdesl.graphics.Color;
-
 import com.marklynch.Game;
 import com.marklynch.editor.Editor.STATE;
 import com.marklynch.tactics.objects.GameObject;
@@ -22,7 +20,19 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
-public class AttributesWindow {
+import mdesl.graphics.Color;
+
+/**
+ * 
+ * @author Mark.Lynch
+ * 
+ *         Dialog listing attributes for selected item in editor For example, if
+ *         you select an actor, this dialog will display and allow you to edit
+ *         their name, image, faction etc.
+ *
+ */
+
+public class AttributesDialog {
 
 	public final static String[] colorFields = { "r", "g", "b", "a" };
 
@@ -41,8 +51,9 @@ public class AttributesWindow {
 
 	String title = "";
 
-	public AttributesWindow(float x, float width, float y, final Object object, final Editor editor) {
+	public AttributesDialog(float x, float width, float y, final Object object, final Editor editor) {
 		super();
+		System.out.println("" + this.getClass().toString());
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -300,14 +311,14 @@ public class AttributesWindow {
 					speechPart.directions.add(true);
 					speechPart.actorsGUIDs.add(Game.level.factions.get(0).actors.get(0).guid);
 
-					Object object = AttributesWindow.this.object;
+					Object object = AttributesDialog.this.object;
 
 					Button buttonForObject = editor.settingsWindow.getButton(object);
 
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					buttonForObject.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200, 200, object, editor);
+					editor.attributesWindow = new AttributesDialog(200, 200, 200, object, editor);
 
 					// depressButtons();
 					// editor.clearSelectedObject();

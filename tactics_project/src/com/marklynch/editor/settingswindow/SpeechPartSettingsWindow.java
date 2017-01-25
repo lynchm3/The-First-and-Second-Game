@@ -3,7 +3,7 @@ package com.marklynch.editor.settingswindow;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.editor.AttributesWindow;
+import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.ui.button.ClickListener;
@@ -90,7 +90,7 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					speechPartButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200, 200,
+					editor.attributesWindow = new AttributesDialog(200, 200, 200,
 							Game.level.script.speechParts.get(index), editor);
 				}
 			};

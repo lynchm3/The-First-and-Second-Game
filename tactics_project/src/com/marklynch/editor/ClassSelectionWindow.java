@@ -2,8 +2,6 @@ package com.marklynch.editor;
 
 import java.util.ArrayList;
 
-import mdesl.graphics.Color;
-
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
@@ -12,6 +10,8 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
 import com.marklynch.utils.QuadUtils;
+
+import mdesl.graphics.Color;
 
 public class ClassSelectionWindow<T> {
 
@@ -23,6 +23,7 @@ public class ClassSelectionWindow<T> {
 
 	public ClassSelectionWindow(final ArrayList<Class> classes, final Editor editor, final Class superClass,
 			String title) {
+		System.out.println("" + this.getClass().toString());
 		this.editor = editor;
 		this.classes = classes;
 		this.superClass = superClass;

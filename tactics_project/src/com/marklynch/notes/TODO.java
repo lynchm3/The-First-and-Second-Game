@@ -2,8 +2,6 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Make the top tabs auto organize themselves, can use font.size to auto
-	// size
 	// InterfaceSelectionWindow and ClassSelection Window can be merged or
 	// subclassed in to eachother
 	// location and owner interfaces

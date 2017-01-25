@@ -2,7 +2,7 @@ package com.marklynch.editor.settingswindow;
 
 import mdesl.graphics.Color;
 
-import com.marklynch.editor.AttributesWindow;
+import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
@@ -82,7 +82,7 @@ public class ColorSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					collorButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200, 200, editor.colors.get(index), editor);
+					editor.attributesWindow = new AttributesDialog(200, 200, 200, editor.colors.get(index), editor);
 
 				}
 			};

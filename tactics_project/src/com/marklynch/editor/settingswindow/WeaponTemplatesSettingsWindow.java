@@ -1,6 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
-import com.marklynch.editor.AttributesWindow;
+import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.WeaponTemplate;
@@ -84,7 +84,7 @@ public class WeaponTemplatesSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					weaponButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200, 200, editor.weaponTemplates.get(index),
+					editor.attributesWindow = new AttributesDialog(200, 200, 200, editor.weaponTemplates.get(index),
 							editor);
 
 				}

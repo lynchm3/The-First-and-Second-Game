@@ -3,9 +3,6 @@ package com.marklynch.editor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import mdesl.graphics.Color;
-import mdesl.graphics.Texture;
-
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Faction;
@@ -23,6 +20,9 @@ import com.marklynch.utils.ClassUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 
+import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
+
 public class AttributeSelectionWindow<T> {
 
 	ArrayList<T> objects;
@@ -30,9 +30,10 @@ public class AttributeSelectionWindow<T> {
 	public ArrayList<SelectionWindowButton> buttons = new ArrayList<SelectionWindowButton>();
 	public boolean multi = false;
 	public Editor editor;
+	public String title;
 
 	public AttributeSelectionWindow(final ArrayList<T> objects, boolean multi, final Editor editor,
-			final Object ownerOfAttribute) {
+			final Object ownerOfAttribute, String title) {
 		this.multi = multi;
 		this.objects = objects;
 		this.editor = editor;

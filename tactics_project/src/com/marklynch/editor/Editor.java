@@ -63,7 +63,7 @@ public class Editor {
 	// trigger, weapon,
 	// level, squares
 
-	public AttributesWindow attributesWindow;
+	public AttributesDialog attributesWindow;
 
 	Button levelTabButton;
 	Button squaresTabButton;
@@ -691,7 +691,7 @@ public class Editor {
 			if (this.settingsWindow != this.squaresSettingsWindow)
 				squaresTabButton.click();
 			this.clearSelectedObject();
-			attributesWindow = new AttributesWindow(200, 200, 200, square, this);
+			attributesWindow = new AttributesDialog(200, 200, 200, square, this);
 			depressButtonsSettingsAndDetailsButtons();
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = null;
@@ -894,10 +894,12 @@ public class Editor {
 
 			if (type.isAssignableFrom(Faction.class)) {
 				// faction
-				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.factions, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.factions, false, this, objectToEdit,
+						"Select a Faction");
 			} else if (type.isAssignableFrom(Color.class)) {
 				// color
-				attributeSelectionWindow = new AttributeSelectionWindow(colors, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(colors, false, this, objectToEdit,
+						"Select a Color");
 			} else if (type.isAssignableFrom(Square.class)) {
 				// square
 				ArrayList<Square> squares = new ArrayList<Square>();
@@ -906,17 +908,26 @@ public class Editor {
 						squares.add(square);
 					}
 				}
-				attributeSelectionWindow = new AttributeSelectionWindow(squares, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(squares, false, this, objectToEdit,
+						"Select a Square");
 			} else if (type.isAssignableFrom(ScriptEvent.class)) {
 				// scriptEvent
 				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.script.scriptEvents, false, this,
-						objectToEdit);
+						objectToEdit, "Select a Script Event");
 			} else if (type.isAssignableFrom(Texture.class)) {
 				// texture
-				attributeSelectionWindow = new AttributeSelectionWindow(textures, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(textures, false, this, objectToEdit,
+						"Select a Texture");
 			} else if (type.isAssignableFrom(Weapons.class)) {
 				// weapons
-				attributeSelectionWindow = new AttributeSelectionWindow(weaponTemplates, true, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(weapons, true, this, objectToEdit,
+						"Select a Weapon");
+				// } else if (type.isAssignableFrom(WeaponTemplate.class)) {
+				// // weapon templates
+				// attributeSelectionWindow = new
+				// AttributeSelectionWindow(weaponTemplates, true, this,
+				// objectToEdit,
+				// "Select a Weapon Template");
 			} else if (type.isAssignableFrom(GameObject.class)) {
 				// actor
 
@@ -927,7 +938,8 @@ public class Editor {
 					}
 				}
 				gameObjects.addAll(Game.level.inanimateObjects);
-				attributeSelectionWindow = new AttributeSelectionWindow(gameObjects, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(gameObjects, false, this, objectToEdit,
+						"Select an Object");
 			} else if (type.isAssignableFrom(Actor.class)) {
 				// actor
 				ArrayList<Actor> actors = new ArrayList<Actor>();
@@ -936,12 +948,14 @@ public class Editor {
 						actors.add(actor);
 					}
 				}
-				attributeSelectionWindow = new AttributeSelectionWindow(actors, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(actors, false, this, objectToEdit,
+						"Select an Actor");
 			} else if (type.isAssignableFrom(ScriptTrigger.class)) {
 				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.script.scriptTriggers, false, this,
-						objectToEdit);
+						objectToEdit, "Select a Script Trigger");
 			} else if (type.isAssignableFrom(AIRoutine.class)) {
-				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.ais, false, this, objectToEdit);
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.ais, false, this, objectToEdit,
+						"Select an AI Routine");
 			} else if (type.isAssignableFrom(boolean.class) || type.isAssignableFrom(Boolean.class)) {
 
 				if (arrayList != null) {

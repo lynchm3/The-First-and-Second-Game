@@ -2,11 +2,9 @@ package com.marklynch.editor.settingswindow;
 
 import java.util.ArrayList;
 
-import com.marklynch.editor.AttributesWindow;
-import com.marklynch.editor.ClassSelectionWindow;
+import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.InstanceSelectionWindow;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.weapons.WeaponTemplate;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
@@ -51,6 +49,10 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 
 				editor.instanceSelectionWindow = new InstanceSelectionWindow<WeaponTemplate>(weaponTemplates, editor,
 						"Select a Weapon Template");
+
+				// public AttributeSelectionWindow(final ArrayList<T> objects,
+				// boolean multi, final Editor editor,
+				// final Object ownerOfAttribute)
 			}
 		};
 		buttons.add(addWeaponButton);
@@ -86,7 +88,7 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					weaponButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200, 200, editor.weapons.get(index), editor);
+					editor.attributesWindow = new AttributesDialog(200, 200, 200, editor.weapons.get(index), editor);
 
 				}
 			};

@@ -3,7 +3,7 @@ package com.marklynch.editor.settingswindow;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.editor.AttributesWindow;
+import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
@@ -95,7 +95,7 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					scriptButton.down = true;
-					editor.attributesWindow = new AttributesWindow(200, 200, 200,
+					editor.attributesWindow = new AttributesDialog(200, 200, 200,
 							Game.level.script.scriptEvents.get(index), editor);
 
 				}

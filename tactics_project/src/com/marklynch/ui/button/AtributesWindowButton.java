@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import mdesl.graphics.Color;
 
 import com.marklynch.Game;
-import com.marklynch.editor.AttributesWindow;
+import com.marklynch.editor.AttributesDialog;
 import com.marklynch.utils.ClassUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
@@ -15,13 +15,13 @@ public class AtributesWindowButton extends Button {
 
 	boolean xFromLeft;
 	boolean yFromTop;
-	AttributesWindow attributesWindow;
+	AttributesDialog attributesWindow;
 	public Object object;
 	String attribute;
 	int index;
 
 	public AtributesWindowButton(float x, float y, float width, float height, Object object, String attribute,
-			boolean xFromLeft, boolean yFromTop, AttributesWindow detailsWindow, int index) {
+			boolean xFromLeft, boolean yFromTop, AttributesDialog detailsWindow, int index) {
 		super(x, y, width, height, null, null, "");
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;

@@ -1,7 +1,7 @@
 package com.marklynch.editor.settingswindow;
 
 import com.marklynch.Game;
-import com.marklynch.editor.AttributesWindow;
+import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.Editor.STATE;
 import com.marklynch.ui.button.ClickListener;
@@ -92,7 +92,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					editor.state = STATE.MOVEABLE_OBJECT_SELECTED;
 					editor.selectedGameObject = Game.level.inanimateObjects.get(index);
-					editor.attributesWindow = new AttributesWindow(200, 200, 200, editor.selectedGameObject, editor);
+					editor.attributesWindow = new AttributesDialog(200, 200, 200, editor.selectedGameObject, editor);
 					// getButton(editor.selectedGameObject).down = true;
 					objectButton.down = true;
 				}
