@@ -558,8 +558,9 @@ public class Editor {
 		}
 
 		// Draw a move line if click will result in move
-		if (selectedGameObject.squareGameObjectIsOn != null && Game.buttonHoveringOver == null
-				&& state == STATE.MOVEABLE_OBJECT_SELECTED && Game.squareMouseIsOver != null
+		if (selectedGameObject != null && selectedGameObject.squareGameObjectIsOn != null
+				&& Game.buttonHoveringOver == null && state == STATE.MOVEABLE_OBJECT_SELECTED
+				&& Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
 			float x1 = this.selectedGameObject.squareGameObjectIsOn.x * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
@@ -751,7 +752,8 @@ public class Editor {
 	public void moveGameObject(GameObject gameObject1, Square square2) {
 		Square square1 = gameObject1.squareGameObjectIsOn;
 
-		square1.gameObject = null;
+		if (square1 != null)
+			square1.gameObject = null;
 		square2.gameObject = gameObject1;
 
 		gameObject1.squareGameObjectIsOn = square2;
