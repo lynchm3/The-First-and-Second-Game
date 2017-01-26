@@ -8,8 +8,14 @@ public class TODO {
 
 	// GameObject.canHoldObjects
 
+	// A filter in game object tab, by distance from center of screen and type
+	// (weapon, object, exploding object....)
+
 	// Still using squareObjectIsOn... but also have attribute
 	// InventoryThisItemBelongsTo...
+
+	// If u were to move an actor from 2,2 to 0,0, it stil says "actor @ 2,2" in
+	// the attributes
 
 	// put canShareSquare in to path finding
 
@@ -23,6 +29,9 @@ public class TODO {
 	// In userInputEditor and TWICE in UserInputLevel, look for inventory.size()
 
 	// ADD_ACTOR and ADD_OBJECT need to check shareSquare
+
+	// An enemy (or enemy type) that always runs away, and is fast, so u need a
+	// good speed stat to catch him and beat him
 
 	// Should be able to place item on square that has unsharable object, make
 	// the object u place sharable, this also applies to moving objects...

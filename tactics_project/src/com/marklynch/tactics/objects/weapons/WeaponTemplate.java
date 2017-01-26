@@ -5,8 +5,7 @@ import com.marklynch.tactics.objects.level.Square;
 
 public class WeaponTemplate extends GameObject {
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
-			"strength", "dexterity", "intelligence", "endurance", "totalHealth", "remainingHealth", "owner",
-			"inventory", "showInventory" };
+			"totalHealth", "remainingHealth", "owner", "inventory", "showInventory" };
 
 	// attributes
 	public float damage = 0;
