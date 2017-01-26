@@ -35,4 +35,20 @@ public class Inventory {
 		return gameObjects.contains(gameObject);
 	}
 
+	public boolean canShareSquare() {
+		for (GameObject gameObject : gameObjects) {
+			if (!gameObject.canShareSquare)
+				return false;
+		}
+		return true;
+	}
+
+	public GameObject getGameObjectThatCantShareSquare() {
+		for (GameObject gameObject : gameObjects) {
+			if (!gameObject.canShareSquare)
+				return gameObject;
+		}
+		return null;
+	}
+
 }

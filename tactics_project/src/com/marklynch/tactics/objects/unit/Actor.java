@@ -67,7 +67,7 @@ public class Actor extends GameObject implements Owner {
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Inventory inventory,
 			boolean showInventory) {
-		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory);
+		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false);
 
 		this.strength = strength;
 		this.dexterity = dexterity;

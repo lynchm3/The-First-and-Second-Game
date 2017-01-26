@@ -10,8 +10,8 @@ import com.marklynch.utils.TriangleUtils;
 public class GameObjectExploder extends GameObject {
 
 	public GameObjectExploder(String name, int health, String imagePath, Square squareGameObjectIsOn,
-			Inventory inventory, boolean showInventory) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory);
+			Inventory inventory, boolean showInventory, boolean canShareSquare) {
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare);
 	}
 
 	public SquarePiece[] squarePieces;

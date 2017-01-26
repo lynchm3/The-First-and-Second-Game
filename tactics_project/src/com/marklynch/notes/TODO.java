@@ -2,6 +2,30 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// GameObject.canShareSquare
+
+	// GameObject.canBePlacedInInventory
+
+	// GameObject.canHoldObjects
+
+	// Still using squareObjectIsOn... but also have attribute
+	// InventoryThisItemBelongsTo...
+
+	// put canShareSquare in to path finding
+
+	// Editor.gameObjectClicked shoule be rplaced with squareClicked
+	// Level/Game.gameObjectClicked shoule be rplaced with squareClicked
+	// In userInputEditor and TWICE in UserInputLevel, look for inventory.size()
+
+	// Issue, what if an object is sharing a square and u turn off
+	// canShareSquare?? (in
+	// editor)
+
+	// IDEA: the ability to move objects
+	// There's a raid on the way and u can move shit around to protect urself
+	// Also... the guys coming for the raid have always existed, so u could have
+	// killed them before if u met them in the game
+
 	// OBJECT HOLDER
 	// Set it up in the test data
 	// Set up every time u create object

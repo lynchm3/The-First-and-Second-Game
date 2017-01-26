@@ -432,7 +432,7 @@ public class Editor {
 
 		// Add a game object
 		GameObject gameObject = new GameObjectExploder("dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
-				new Inventory(), true);
+				new Inventory(), true, false);
 		Game.level.inanimateObjects.add(gameObject);
 		Game.level.squares[0][3].inventory.add(gameObject);
 
@@ -697,8 +697,15 @@ public class Editor {
 				objectsSettingsWindow.getButton(gameObject).click();
 			}
 		} else if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
-			moveGameObject(this.selectedGameObject, gameObject.squareGameObjectIsOn);
-			// swapGameObjects(this.selectedGameObject, gameObject);
+
+			Square square = gameObject.squareGameObjectIsOn;
+			boolean squareCanShare = square.inventory.canShareSquare();
+
+			if (!this.selectedGameObject.canShareSquare && !square.inventory.canShareSquare()) {
+				swapGameObjects(this.selectedGameObject, square.inventory.getGameObjectThatCantShareSquare());
+			} else {
+				moveGameObject(this.selectedGameObject, square);
+			}
 		}
 
 	}
@@ -715,7 +722,8 @@ public class Editor {
 		} else if (state == STATE.ADD_OBJECT) {
 			GameObject gameObject = null;
 			if (gameObjectTemplate == null) {
-				gameObject = new GameObject("dumpster", 5, "skip_with_shadow.png", square, new Inventory(), true);
+				gameObject = new GameObject("dumpster", 5, "skip_with_shadow.png", square, new Inventory(), true,
+						false);
 			} else {
 				gameObject = gameObjectTemplate.makeCopy(square);
 			}
@@ -741,27 +749,29 @@ public class Editor {
 			this.actorsSettingsWindow.update();
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
-			// if (square.gameObject != null) {
-			// swapGameObjects(this.selectedGameObject, square.gameObject);
-			// } else {
-			moveGameObject(this.selectedGameObject, square);
-			// }
+			if (!this.selectedGameObject.canShareSquare && !square.inventory.canShareSquare()) {
+				swapGameObjects(this.selectedGameObject, square.inventory.getGameObjectThatCantShareSquare());
+			} else {
+				moveGameObject(this.selectedGameObject, square);
+			}
 		}
 
 	}
 
-	// public void swapGameObjects(GameObject gameObject1, GameObject
-	// gameObject2) {
-	// Square square1 = gameObject1.squareGameObjectIsOn;
-	// Square square2 = gameObject2.squareGameObjectIsOn;
-	//
-	// square1.gameObject = gameObject2;
-	// square2.gameObject = gameObject1;
-	//
-	// gameObject1.squareGameObjectIsOn = square2;
-	// gameObject2.squareGameObjectIsOn = square1;
-	//
-	// }
+	public void swapGameObjects(GameObject gameObject1, GameObject gameObject2) {
+		Square square1 = gameObject1.squareGameObjectIsOn;
+		Square square2 = gameObject2.squareGameObjectIsOn;
+
+		square1.inventory.remove(gameObject1);
+		square2.inventory.remove(gameObject2);
+
+		square1.inventory.add(gameObject2);
+		square2.inventory.add(gameObject1);
+
+		gameObject1.squareGameObjectIsOn = square2;
+		gameObject2.squareGameObjectIsOn = square1;
+
+	}
 
 	public void moveGameObject(GameObject gameObject1, Square square2) {
 		System.out.println("moveGameObject " + gameObject1 + ", " + square2);

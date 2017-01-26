@@ -24,7 +24,7 @@ import mdesl.graphics.Texture;
 public class GameObject {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
-			"owner", "inventory", "showInventory" };
+			"owner", "inventory", "showInventory", "canShareSquare" };
 	public String guid = UUID.randomUUID().toString();
 
 	public String name = "";
@@ -35,6 +35,7 @@ public class GameObject {
 	public Owner owner;
 	public Inventory inventory;
 	public boolean showInventory;
+	public boolean canShareSquare;
 
 	public transient boolean hasAttackedThisTurn = false;
 
@@ -72,13 +73,15 @@ public class GameObject {
 	public Inventory inventoryThatHoldsThisObject;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-			boolean showInventory) {
+			boolean showInventory, boolean canShareSquare) {
 		super();
 		this.name = name;
 		this.totalHealth = health;
 		this.remainingHealth = health;
 		this.imageTexturePath = imagePath;
 		this.inventory = inventory;
+		this.showInventory = showInventory;
+		this.canShareSquare = canShareSquare;
 
 		System.out.println("squareGameObjectIsOn = " + squareGameObjectIsOn);
 
@@ -92,7 +95,6 @@ public class GameObject {
 			this.squareGameObjectIsOn = squareGameObjectIsOn;
 			this.squareGameObjectIsOn.inventory.add(this);
 		}
-		this.showInventory = showInventory;
 
 		loadImages();
 	}
@@ -247,7 +249,7 @@ public class GameObject {
 			}
 		}
 
-		if (newSquare != null && newSquare.inventory.size() == 0 && !squaresInThisPath.contains(newSquare)
+		if (newSquare != null && newSquare.inventory.canShareSquare() && !squaresInThisPath.contains(newSquare)
 				&& !paths.containsKey(newSquare)) {
 			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
 			newPathSquares.add(newSquare);
@@ -349,7 +351,7 @@ public class GameObject {
 
 	public GameObject makeCopy(Square square) {
 		return new GameObject(new String(name), (int) totalHealth, new String(imageTexturePath), square, inventory,
-				showInventory);
+				showInventory, canShareSquare);
 	}
 
 	public void update(int delta) {

@@ -16,7 +16,7 @@ public class WeaponTemplate extends GameObject {
 	public WeaponTemplate(String name, float damage, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn) {
 
-		super(name, (int) health, imagePath, squareGameObjectIsOn, null, false);
+		super(name, (int) health, imagePath, squareGameObjectIsOn, null, false, true);
 
 		this.damage = damage;
 		this.minRange = minRange;
