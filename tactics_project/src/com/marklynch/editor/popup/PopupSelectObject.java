@@ -8,50 +8,28 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
-import com.marklynch.ui.button.SettingsWindowButton;
-import com.marklynch.utils.QuadUtils;
-
-import mdesl.graphics.Color;
+import com.marklynch.ui.button.PopupButton;
 
 public class PopupSelectObject {
 
 	public float width;
-	public Vector<SettingsWindowButton> buttons = new Vector<SettingsWindowButton>();
+	public Vector<PopupButton> buttons = new Vector<PopupButton>();
 	public Editor editor;
 	public Square square;
-	public SettingsWindowButton selectSquareButton;
+	public PopupButton selectSquareButton;
+	public float drawPositionX, drawPositionY;
 
 	public PopupSelectObject(float width, Editor editor, Square square) {
 		this.width = width;
 		this.editor = editor;
 		this.square = square;
-		selectSquareButton = new SettingsWindowButton(0, 0, 200, 30, "" + square, true, true) {
-
-			@Override
-			public void keyTyped(char character) {
-			}
-
-			@Override
-			public void enterTyped() {
-			}
-
-			@Override
-			public void backTyped() {
-			}
-
-			@Override
-			public void depress() {
-				if (PopupSelectObject.this.editor.editorState == Editor.EDITOR_STATE.ADD_OBJECT)
-					PopupSelectObject.this.editor.editorState = Editor.EDITOR_STATE.DEFAULT;
-			}
-
-		};
+		selectSquareButton = new PopupButton(0, 0, 200, 30, null, null, "" + square, true, true, square, this);
 
 		selectSquareButton.clickListener = new ClickListener() {
 
 			@Override
 			public void click() {
-				PopupSelectObject.this.editor.selectSquare(PopupSelectObject.this.square);
+				squareSelected(PopupSelectObject.this.square);
 			}
 		};
 		updateObjectsButtons();
@@ -71,27 +49,8 @@ public class PopupSelectObject {
 
 			// BUT... I dont want the buttons to zoom :P
 
-			final SettingsWindowButton objectButton = new SettingsWindowButton(0, 30 + i * 30, 200, 30,
-					square.inventory.get(index), true, true) {
-
-				@Override
-				public void keyTyped(char character) {
-				}
-
-				@Override
-				public void enterTyped() {
-				}
-
-				@Override
-				public void backTyped() {
-				}
-
-				@Override
-				public void depress() {
-					squareSelected(square);
-				}
-
-			};
+			final PopupButton objectButton = new PopupButton(0, 30 + i * 30, 200, 30, null, null,
+					"" + square.inventory.get(index), true, true, square.inventory.get(index), this);
 
 			objectButton.clickListener = new ClickListener() {
 
@@ -132,27 +91,26 @@ public class PopupSelectObject {
 		int squarePositionX = square.x * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = square.y * (int) Game.SQUARE_HEIGHT;
 
-		float drawPositionX = (Game.windowWidth / 2)
-				+ (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.dragX));
-		float drawPositionY = (Game.windowHeight / 2)
-				+ (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.dragY));
+		drawPositionX = (Game.windowWidth / 2) + (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.dragX));
+		drawPositionY = (Game.windowHeight / 2) + (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.dragY));
 
-		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, Game.windowHeight);
+		// QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width,
+		// drawPositionY, Game.windowHeight);
 		for (Button button : buttons) {
 			button.draw();
 		}
 	}
 
 	public void depressButtons() {
-		for (SettingsWindowButton button : buttons) {
+		for (PopupButton button : buttons) {
 			button.down = false;
-			button.depress();
+			// button.depress();
 		}
 
 	}
 
-	public SettingsWindowButton getButton(Object object) {
-		for (SettingsWindowButton button : buttons) {
+	public PopupButton getButton(Object object) {
+		for (PopupButton button : buttons) {
 			if (button.object == object)
 				return button;
 		}

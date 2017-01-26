@@ -33,6 +33,10 @@ public class TODO {
 	// The update() method in the windows and popup seem unneccesary, when is
 	// update called?
 
+	// "Ergonomically terrific!" from a game covered in this
+	// https://www.rockpapershotgun.com/2017/01/26/have-you-played-mega-lo-mania/
+	// , see comments, would be nice to have quirky silly shit like this :)
+
 	// Issue, what if an object is sharing a square and u turn off
 	// canShareSquare?? (in
 	// editor)
