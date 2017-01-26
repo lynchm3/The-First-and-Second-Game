@@ -24,8 +24,7 @@ public class WeaponTemplate extends GameObjectTemplate {
 	}
 
 	@Override
-	public GameObject makeObject() {
-		return new Weapon(new String(name), damage, minRange, maxRange, imageTexturePath, owner, totalHealth,
-				squareGameObjectIsOn);
+	public GameObject makeCopy(Square square) {
+		return new Weapon(new String(name), damage, minRange, maxRange, imageTexturePath, owner, totalHealth, square);
 	}
 }

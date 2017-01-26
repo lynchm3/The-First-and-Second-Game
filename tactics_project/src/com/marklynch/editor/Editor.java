@@ -74,7 +74,7 @@ public class Editor {
 	public Button factionsTabButton;
 	public Button colorsTabButton;
 	public Button actorsTabButton;
-	public Button weaponTemplatesTabButton;
+	public Button templatesTabButton;
 	public Button weaponsTabButton;
 	public Button decorationsTabButton;
 	public Button scriptEventsTabButton;
@@ -257,21 +257,20 @@ public class Editor {
 		};
 		tabs.add(factionsTabButton);
 
-		tabText = "WEAPON TEMPLATES";
-		weaponTemplatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true,
-				true);
-		weaponTemplatesTabButton.clickListener = new ClickListener() {
+		tabText = "OBJECT TEMPLATES";
+		templatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		templatesTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
 				clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
 				depressTabButtons();
-				weaponTemplatesTabButton.down = true;
+				templatesTabButton.down = true;
 				settingsWindow = weaponTemplatesSettingsWindow;
 				settingsWindow.update();
 			}
 		};
-		tabs.add(weaponTemplatesTabButton);
+		tabs.add(templatesTabButton);
 
 		tabText = "WEAPONS";
 		weaponsTabButton = new LevelButton(560, 15, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
@@ -441,6 +440,11 @@ public class Editor {
 		Game.level.inanimateObjects.add(gameObject);
 		Game.level.squares[0][3].inventory.add(gameObject);
 
+		// Add a game object templates
+		GameObjectTemplate gameObjectTemplate = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",
+				Game.level.squares[0][3], new Inventory(), true, false);
+		gameObjectTemplates.add(gameObjectTemplate);
+
 		// Add factions
 		Game.level.factions
 				.add(new Faction("Faction " + Game.level.factions.size(), colors.get(0), "faction_blue.png"));
@@ -455,9 +459,9 @@ public class Editor {
 		// Inventory
 		Inventory inventoryForActor0 = new Inventory();
 		ArrayList<GameObject> weaponsForActor0 = new ArrayList<GameObject>();
-		weaponsForActor0.add(gameObjectTemplates.get(0).makeObject());
-		weaponsForActor0.add(gameObjectTemplates.get(1).makeObject());
-		weaponsForActor0.add(gameObjectTemplates.get(2).makeObject());
+		weaponsForActor0.add(gameObjectTemplates.get(0).makeCopy(null));
+		weaponsForActor0.add(gameObjectTemplates.get(1).makeCopy(null));
+		weaponsForActor0.add(gameObjectTemplates.get(2).makeCopy(null));
 		inventoryForActor0.setGameObjects(weaponsForActor0);
 		// for (int i = 0; i < weaponsForActor0.size(); i++) {
 		// if (weaponsForActor0.get(i) instanceof Weapon)
@@ -466,9 +470,9 @@ public class Editor {
 		// }
 		Inventory inventoryForActor1 = new Inventory();
 		ArrayList<GameObject> weaponsForActor1 = new ArrayList<GameObject>();
-		weaponsForActor1.add(gameObjectTemplates.get(0).makeObject());
-		weaponsForActor1.add(gameObjectTemplates.get(1).makeObject());
-		weaponsForActor1.add(gameObjectTemplates.get(2).makeObject());
+		weaponsForActor1.add(gameObjectTemplates.get(0).makeCopy(null));
+		weaponsForActor1.add(gameObjectTemplates.get(1).makeCopy(null));
+		weaponsForActor1.add(gameObjectTemplates.get(2).makeCopy(null));
 		inventoryForActor1.setGameObjects(weaponsForActor1);
 		// for (int i = 0; i < weaponsForActor1.size(); i++) {
 		// if (weaponsForActor1.get(i) instanceof Weapon)
@@ -780,6 +784,13 @@ public class Editor {
 			gameObject = new GameObject("dumpster", 5, "skip_with_shadow.png", square, new Inventory(), true, true);
 		} else {
 			gameObject = gameObjectTemplate.makeCopy(square);
+
+			// if (gameObject instanceof WeaponTemplate) {
+			// gameObject = ((WeaponTemplate)
+			// gameObjectTemplate).makeCopy(square);
+			// } else {
+			// }
+
 		}
 
 		Game.level.inanimateObjects.add(gameObject);

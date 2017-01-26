@@ -51,4 +51,12 @@ public class Inventory {
 		return null;
 	}
 
+	public Inventory makeCopy() {
+		Inventory copy = new Inventory();
+		for (GameObject gameObject : gameObjects) {
+			copy.add(gameObject.makeCopy(null));
+		}
+		return null;
+	}
+
 }

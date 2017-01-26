@@ -20,8 +20,8 @@ public class TemplatesSettingsWindow extends SettingsWindow {
 	public void updateButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addWeaponTemplateButton = new SettingsWindowButton(0, 100, 200, 30, "ADD TEMPLATE",
-				true, true) {
+		final SettingsWindowButton addTemplateButton = new SettingsWindowButton(0, 100, 200, 30, "ADD TEMPLATE", true,
+				true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -41,25 +41,25 @@ public class TemplatesSettingsWindow extends SettingsWindow {
 
 		};
 
-		addWeaponTemplateButton.clickListener = new ClickListener() {
+		addTemplateButton.clickListener = new ClickListener() {
 
 			@Override
 			public void click() {
 
-				WeaponTemplate newWeapon = new WeaponTemplate("Weapon Template " + editor.gameObjectTemplates.size(), 3, 1,
-						1, "a3r1.png", 100, null);
+				WeaponTemplate newWeapon = new WeaponTemplate("Weapon Template " + editor.gameObjectTemplates.size(), 3,
+						1, 1, "a3r1.png", 100, null);
 				editor.gameObjectTemplates.add(newWeapon);
 				updateButtons();
 				editor.clearSelectedObject();
 				editor.depressButtonsSettingsAndDetailsButtons();
 			}
 		};
-		buttons.add(addWeaponTemplateButton);
+		buttons.add(addTemplateButton);
 
 		for (int i = 0; i < editor.gameObjectTemplates.size(); i++) {
 			final int index = i;
 
-			final SettingsWindowButton weaponButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
+			final SettingsWindowButton templateButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
 					editor.gameObjectTemplates.get(i), true, true) {
 
 				@Override
@@ -80,19 +80,19 @@ public class TemplatesSettingsWindow extends SettingsWindow {
 
 			};
 
-			weaponButton.clickListener = new ClickListener() {
+			templateButton.clickListener = new ClickListener() {
 
 				@Override
 				public void click() {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
-					weaponButton.down = true;
+					templateButton.down = true;
 					editor.attributesWindow = new AttributesDialog(200, 200, 200, editor.gameObjectTemplates.get(index),
 							editor);
 
 				}
 			};
-			buttons.add(weaponButton);
+			buttons.add(templateButton);
 
 		}
 

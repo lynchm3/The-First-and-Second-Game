@@ -338,6 +338,9 @@ public class GameObject {
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon, float range) {
 
+		if (inventory == null)
+			return null;
+
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			if (gameObject instanceof Weapon) {
 				Weapon weapon = (Weapon) gameObject;
@@ -350,7 +353,7 @@ public class GameObject {
 	}
 
 	public GameObject makeCopy(Square square) {
-		return new GameObject(new String(name), (int) totalHealth, new String(imageTexturePath), square, inventory,
+		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare);
 	}
 

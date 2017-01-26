@@ -4,7 +4,8 @@ import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.Editor.EDITOR_STATE;
-import com.marklynch.ui.Toast;
+import com.marklynch.editor.InstanceSelectionWindow;
+import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -40,16 +41,26 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				addObjectsButton.down = !addObjectsButton.down;
-				if (addObjectsButton.down) {
-					ObjectsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
-					ObjectsSettingsWindow.this.editor.clearSelectedObject();
-					addObjectsButton.down = true;
-					ObjectsSettingsWindow.this.editor.editorState = EDITOR_STATE.ADD_OBJECT;
-					ObjectsSettingsWindow.this.editor.toast = new Toast(200, 50, "Select location to add object");
-				} else {
-					ObjectsSettingsWindow.this.editor.editorState = EDITOR_STATE.DEFAULT;
-				}
+
+				ObjectsSettingsWindow.this.editor.clearSelectedObject();
+				ObjectsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
+
+				ObjectsSettingsWindow.this.editor.instanceSelectionWindow = new InstanceSelectionWindow<GameObjectTemplate>(
+						ObjectsSettingsWindow.this.editor.gameObjectTemplates, ObjectsSettingsWindow.this.editor,
+						"Select a Template");
+				// addObjectsButton.down = !addObjectsButton.down;
+				// if (addObjectsButton.down) {
+				// ObjectsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
+				// ObjectsSettingsWindow.this.editor.clearSelectedObject();
+				// addObjectsButton.down = true;
+				// ObjectsSettingsWindow.this.editor.editorState =
+				// EDITOR_STATE.ADD_OBJECT;
+				// ObjectsSettingsWindow.this.editor.toast = new Toast(200, 50,
+				// "Select location to add object");
+				// } else {
+				// ObjectsSettingsWindow.this.editor.editorState =
+				// EDITOR_STATE.DEFAULT;
+				// }
 			}
 		};
 		updateObjectsButtons();
