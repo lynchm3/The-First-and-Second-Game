@@ -88,9 +88,9 @@ public class GameObject {
 		if (squareGameObjectIsOn != null) {
 			System.out.println("squareGameObjectIsOn.inventory = " + squareGameObjectIsOn.inventory);
 			System.out.println(
-					"squareGameObjectIsOn.inventory.gameObjects = " + squareGameObjectIsOn.inventory.gameObjects);
+					"squareGameObjectIsOn.inventory.gameObjects = " + squareGameObjectIsOn.inventory.getGameObjects());
 			this.squareGameObjectIsOn = squareGameObjectIsOn;
-			this.squareGameObjectIsOn.inventory.gameObjects.add(this);
+			this.squareGameObjectIsOn.inventory.add(this);
 		}
 		this.showInventory = showInventory;
 
@@ -117,7 +117,7 @@ public class GameObject {
 		this.faction = faction;
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn = Game.level.squares[this.squareGameObjectIsOn.x][this.squareGameObjectIsOn.y];
-			this.squareGameObjectIsOn.inventory.gameObjects.add(this);
+			this.squareGameObjectIsOn.inventory.add(this);
 		}
 		this.paths = new HashMap<Square, Path>();
 	}
@@ -170,7 +170,7 @@ public class GameObject {
 		if (remainingHealth <= 0) {
 
 			if (squareGameObjectIsOn != null) {
-				this.squareGameObjectIsOn.inventory.gameObjects.remove(this);
+				this.squareGameObjectIsOn.inventory.remove(this);
 			}
 			// Game.level.inanimateObjects.remove(this);
 
@@ -247,7 +247,7 @@ public class GameObject {
 			}
 		}
 
-		if (newSquare != null && newSquare.inventory.gameObjects.size() == 0 && !squaresInThisPath.contains(newSquare)
+		if (newSquare != null && newSquare.inventory.size() == 0 && !squaresInThisPath.contains(newSquare)
 				&& !paths.containsKey(newSquare)) {
 			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
 			newPathSquares.add(newSquare);
@@ -336,7 +336,7 @@ public class GameObject {
 
 	public Weapon bestCounterWeapon(GameObject attacker, Weapon attackerWeapon, float range) {
 
-		for (GameObject gameObject : inventory.gameObjects) {
+		for (GameObject gameObject : inventory.getGameObjects()) {
 			if (gameObject instanceof Weapon) {
 				Weapon weapon = (Weapon) gameObject;
 				if (range >= weapon.minRange && range <= weapon.maxRange) {
@@ -359,7 +359,7 @@ public class GameObject {
 
 	public ArrayList<Weapon> getWeaponsInInventory() {
 		ArrayList<Weapon> weapons = new ArrayList<Weapon>();
-		for (GameObject gameObject : inventory.gameObjects) {
+		for (GameObject gameObject : inventory.getGameObjects()) {
 			if (gameObject instanceof Weapon) {
 				weapons.add((Weapon) gameObject);
 			}

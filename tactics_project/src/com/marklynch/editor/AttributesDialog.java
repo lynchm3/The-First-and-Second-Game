@@ -192,7 +192,7 @@ public class AttributesDialog {
 					if (actorCount > 1) {
 						depressButtons();
 						actor.faction.actors.remove(actor);
-						actor.squareGameObjectIsOn.inventory.gameObjects.remove(actor);
+						actor.squareGameObjectIsOn.inventory.remove(actor);
 						editor.clearSelectedObject();
 						editor.settingsWindow.update();
 					}
@@ -225,7 +225,7 @@ public class AttributesDialog {
 				public void click() {
 					depressButtons();
 					Game.level.inanimateObjects.remove(gameObject);
-					gameObject.squareGameObjectIsOn.inventory.gameObjects.remove(gameObject);
+					gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
 					editor.clearSelectedObject();
 					editor.settingsWindow.update();
 				}
@@ -260,7 +260,7 @@ public class AttributesDialog {
 
 					depressButtons();
 					for (Actor actor : faction.actors) {
-						actor.squareGameObjectIsOn.inventory.gameObjects.remove(actor);
+						actor.squareGameObjectIsOn.inventory.remove(actor);
 					}
 					Game.level.factions.remove(faction);
 					editor.clearSelectedObject();

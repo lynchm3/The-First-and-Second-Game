@@ -81,7 +81,7 @@ public class Square {
 			Texture highlightTexture = null;
 
 			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
-					&& this.inventory.gameObjects.size() != 0
+					&& this.inventory.size() != 0
 					&& Game.level.activeActor.equippedWeapon.hasRange(Game.level.activeActor.weaponDistanceTo(this))
 					&& !Game.level.activeActor.hasAttackedThisTurn) {
 				highlightTexture = Game.level.gameCursor.imageTexture4;
@@ -179,7 +179,7 @@ public class Square {
 
 	public String[] getDetails() {
 
-		if (this.inventory.gameObjects.size() == 0) {
+		if (this.inventory.size() == 0) {
 			// Nothing on the square
 			return new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
 					"(Click again to dismiss)" };
@@ -190,8 +190,8 @@ public class Square {
 			String[] details = new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost,
 					"\nElevation = " + elevation };
 
-			for (int i = 0; i < inventory.gameObjects.size(); i++) {
-				if (this.inventory.gameObjects.get(i) instanceof Actor) {
+			for (int i = 0; i < inventory.size(); i++) {
+				if (this.inventory.get(i) instanceof Actor) {
 					// TODO
 					// // Actor on the square
 					// Actor actor = (Actor) this.inventory.gameObjects.get(i);

@@ -26,7 +26,7 @@ public class ScriptTriggerSpecficActorOccupiesSquare extends ScriptTrigger {
 
 	@Override
 	public boolean checkTrigger() {
-		if (square.inventory.gameObjects.contains(actor))
+		if (square.inventory.contains(actor))
 			return true;
 		return false;
 	}

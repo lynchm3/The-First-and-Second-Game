@@ -434,7 +434,7 @@ public class Editor {
 		GameObject gameObject = new GameObjectExploder("dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
 				new Inventory(), true);
 		Game.level.inanimateObjects.add(gameObject);
-		Game.level.squares[0][3].inventory.gameObjects.add(gameObject);
+		Game.level.squares[0][3].inventory.add(gameObject);
 
 		// Add factions
 		Game.level.factions
@@ -453,7 +453,7 @@ public class Editor {
 		weaponsForActor0.add(weaponTemplates.get(0).makeWeapon());
 		weaponsForActor0.add(weaponTemplates.get(1).makeWeapon());
 		weaponsForActor0.add(weaponTemplates.get(2).makeWeapon());
-		inventoryForActor0.gameObjects = weaponsForActor0;
+		inventoryForActor0.setGameObjects(weaponsForActor0);
 		// for (int i = 0; i < weaponsForActor0.size(); i++) {
 		// if (weaponsForActor0.get(i) instanceof Weapon)
 		// weapons.add((Weapon) weaponsForActor0.get(i));
@@ -464,7 +464,7 @@ public class Editor {
 		weaponsForActor1.add(weaponTemplates.get(0).makeWeapon());
 		weaponsForActor1.add(weaponTemplates.get(1).makeWeapon());
 		weaponsForActor1.add(weaponTemplates.get(2).makeWeapon());
-		inventoryForActor1.gameObjects = weaponsForActor1;
+		inventoryForActor1.setGameObjects(weaponsForActor1);
 		// for (int i = 0; i < weaponsForActor1.size(); i++) {
 		// if (weaponsForActor1.get(i) instanceof Weapon)
 		// weapons.add((Weapon) weaponsForActor1.get(i));
@@ -476,16 +476,16 @@ public class Editor {
 				inventoryForActor0, true);
 		actor0.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(actor0);
-		for (int i = 0; i < actor0.inventory.gameObjects.size(); i++) {
-			actor0.inventory.gameObjects.get(i).inventoryThatHoldsThisObject = actor0.inventory;
+		for (int i = 0; i < actor0.inventory.size(); i++) {
+			actor0.inventory.get(i).inventoryThatHoldsThisObject = actor0.inventory;
 		}
 
 		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5], 4,
 				inventoryForActor1, true);
 		actor1.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(actor1);
-		for (int i = 0; i < actor1.inventory.gameObjects.size(); i++) {
-			actor1.inventory.gameObjects.get(i).inventoryThatHoldsThisObject = actor1.inventory;
+		for (int i = 0; i < actor1.inventory.size(); i++) {
+			actor1.inventory.get(i).inventoryThatHoldsThisObject = actor1.inventory;
 		}
 
 		// Decorations
@@ -704,6 +704,8 @@ public class Editor {
 	}
 
 	public void squareClicked(Square square) {
+		System.out.println("squareClicked " + square + ", state = " + STATE.DEFAULT);
+
 		if (state == STATE.DEFAULT || state == STATE.SETTINGS_CHANGE) {
 			if (this.settingsWindow != this.squaresSettingsWindow)
 				squaresTabButton.click();
@@ -719,7 +721,7 @@ public class Editor {
 			}
 
 			Game.level.inanimateObjects.add(gameObject);
-			square.inventory.gameObjects.add(gameObject);
+			square.inventory.add(gameObject);
 			this.objectsSettingsWindow.update();
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.ADD_ACTOR) {
@@ -735,7 +737,7 @@ public class Editor {
 			}
 
 			actor.faction.actors.add(actor);
-			square.inventory.gameObjects.add(actor);
+			square.inventory.add(actor);
 			this.actorsSettingsWindow.update();
 			// state = STATE.DEFAULT;
 		} else if (state == STATE.MOVEABLE_OBJECT_SELECTED) {
@@ -762,11 +764,27 @@ public class Editor {
 	// }
 
 	public void moveGameObject(GameObject gameObject1, Square square2) {
+		System.out.println("moveGameObject " + gameObject1 + ", " + square2);
+
 		Square square1 = gameObject1.squareGameObjectIsOn;
+		System.out.println("moveGameObject square1 = " + square1);
+
+		for (int i = 0; i < square1.inventory.size(); i++) {
+			System.out.println("moveGameObject preremove square1.inventory " + i + " " + square1.inventory.get(i));
+		}
+
+		System.out.println("moveGameObject removing " + gameObject1);
 
 		if (square1 != null)
-			square1.inventory.gameObjects.remove(gameObject1);
-		square2.inventory.gameObjects.add(gameObject1);
+			square1.inventory.remove(gameObject1);
+
+		for (int i = 0; i < square1.inventory.size(); i++) {
+			System.out.println("moveGameObject square1.inventory " + i + " " + square1.inventory.get(i));
+		}
+
+		System.out.println("moveGameObject square1 = " + square1);
+
+		square2.inventory.add(gameObject1);
 
 		gameObject1.squareGameObjectIsOn = square2;
 	}

@@ -451,8 +451,8 @@ public class Level {
 			Move move = undoList.pop();
 			move.actor.distanceMovedThisTurn -= move.travelCost;
 			move.actor.squareGameObjectIsOn = move.squareMovedFrom;
-			move.squareMovedFrom.inventory.gameObjects.add(move.actor);
-			move.squareMovedTo.inventory.gameObjects.remove(move.actor);
+			move.squareMovedFrom.inventory.add(move.actor);
+			move.squareMovedTo.inventory.remove(move.actor);
 			if (activeActor != null)
 				activeActor.unselected();
 			activeActor = move.actor;
@@ -483,15 +483,15 @@ public class Level {
 					newSquares[i][j] = squares[i][j];
 				} else {
 					// Delete old squares if they don't fit
-					if (squares[i][j].inventory.gameObjects.size() == 0) {
+					if (squares[i][j].inventory.size() == 0) {
 
 					} else {
-						for (int k = 0; k < squares[i][j].inventory.gameObjects.size(); k++) {
-							if (squares[i][j].inventory.gameObjects.get(k) instanceof Actor) {
-								Actor actor = (Actor) squares[i][j].inventory.gameObjects.get(k);
+						for (int k = 0; k < squares[i][j].inventory.size(); k++) {
+							if (squares[i][j].inventory.get(k) instanceof Actor) {
+								Actor actor = (Actor) squares[i][j].inventory.get(k);
 								actor.faction.actors.remove(actor);
 							} else {
-								inanimateObjects.remove(squares[i][j].inventory.gameObjects.get(k));
+								inanimateObjects.remove(squares[i][j].inventory.get(k));
 							}
 						}
 					}

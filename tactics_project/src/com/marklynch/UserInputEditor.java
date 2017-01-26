@@ -4,7 +4,6 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.unit.Path;
 
 public class UserInputEditor {
@@ -137,13 +136,11 @@ public class UserInputEditor {
 				&& Game.squareMouseIsOver != null) {
 			// click square/game object if we're on one
 
-			if (Game.squareMouseIsOver.inventory.gameObjects.size() != 0) {
-				GameObject clickedGameObject = Game.squareMouseIsOver.inventory.gameObjects.get(0);
-				if (clickedGameObject != null) {
-					editor.gameObjectClicked(clickedGameObject);
-				} else {
-					editor.squareClicked(Game.squareMouseIsOver);
-				}
+			System.out.println("Game.squareMouseIsOver = " + Game.squareMouseIsOver);
+			if (Game.squareMouseIsOver.inventory.size() != 0) {
+				editor.gameObjectClicked(Game.squareMouseIsOver.inventory.get(0));
+			} else {
+				editor.squareClicked(Game.squareMouseIsOver);
 			}
 		}
 

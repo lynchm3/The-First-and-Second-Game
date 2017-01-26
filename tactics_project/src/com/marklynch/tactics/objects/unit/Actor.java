@@ -35,10 +35,10 @@ public class Actor extends GameObject implements Owner {
 		UP, RIGHT, DOWN, LEFT
 	}
 
-	int strength;
-	int dexterity;
-	int intelligence;
-	int endurance;
+	public int strength;
+	public int dexterity;
+	public int intelligence;
+	public int endurance;
 
 	public String title = "";
 	public int actorLevel = 1;
@@ -277,7 +277,7 @@ public class Actor extends GameObject implements Owner {
 	@Override
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
-			this.squareGameObjectIsOn.inventory.gameObjects.remove(this);
+			this.squareGameObjectIsOn.inventory.remove(this);
 			this.faction.actors.remove(this);
 			screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
 			return true;
@@ -292,10 +292,10 @@ public class Actor extends GameObject implements Owner {
 
 		Square oldSquare = this.squareGameObjectIsOn;
 		int distanceTraveled = squareToMoveTo.distanceToSquare;
-		this.squareGameObjectIsOn.inventory.gameObjects.remove(Game.level.activeActor);
+		this.squareGameObjectIsOn.inventory.remove(Game.level.activeActor);
 		this.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
 		this.squareGameObjectIsOn = squareToMoveTo;
-		squareToMoveTo.inventory.gameObjects.add(Game.level.activeActor);
+		squareToMoveTo.inventory.add(Game.level.activeActor);
 		Actor.highlightSelectedCharactersSquares();
 		Game.level.logOnScreen(new ActivityLog(new Object[] { this, " moved to " + squareToMoveTo }));
 
@@ -407,9 +407,6 @@ public class Actor extends GameObject implements Owner {
 			// Draw weapon
 			if (equippedWeapon != null) {
 				TextureUtils.skipNormals = true;
-
-				System.out.println("equippedWeapon = " + equippedWeapon);
-				System.out.println("equippedWeapon.imageTexture = " + equippedWeapon.imageTexture);
 
 				TextureUtils.drawTexture(equippedWeapon.imageTexture, alpha, equippedWeaponPositionXInPixels,
 						equippedWeaponPositionXInPixels + Game.SQUARE_WIDTH, equippedWeaponPositionYInPixels,

@@ -125,7 +125,10 @@ public class UserInputLevel {
 				&& Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
 			// click square if we're on one
 
-			GameObject clickedGameObject = Game.squareMouseIsOver.inventory.gameObjects.get(0);
+			GameObject clickedGameObject = null;
+			if (Game.squareMouseIsOver.inventory.size() != 0)
+				clickedGameObject = Game.squareMouseIsOver.inventory.get(0);
+
 			if (clickedGameObject != null) {
 				boolean selectedNewActor = false;
 				if (clickedGameObject instanceof Actor) {
@@ -165,12 +168,13 @@ public class UserInputLevel {
 
 			// Show/hide Hover preview
 			if (Config.SHOW_BATTLE_PREVIEW_ON_HOVER && Game.squareMouseIsOver != null
-					&& Game.squareMouseIsOver.inventory.gameObjects.get(0) != null && Game.level.activeActor != null
-					&& Game.squareMouseIsOver.inventory.gameObjects.get(0) != Game.level.activeActor
+					&& Game.squareMouseIsOver.inventory.size() != 0 && Game.squareMouseIsOver.inventory.get(0) != null
+					&& Game.level.activeActor != null
+					&& Game.squareMouseIsOver.inventory.get(0) != Game.level.activeActor
 					&& Game.level.currentFactionMoving == Game.level.factions.get(0)
 					&& Game.buttonHoveringOver == null) {
 				// show hover preview
-				Game.level.activeActor.showHoverFightPreview(Game.squareMouseIsOver.inventory.gameObjects.get(0));
+				Game.level.activeActor.showHoverFightPreview(Game.squareMouseIsOver.inventory.get(0));
 			} else if (Game.level.activeActor != null) {
 				// hide Hover Preview
 				Game.level.activeActor.hideHoverFightPreview();
