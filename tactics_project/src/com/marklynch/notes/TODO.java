@@ -21,6 +21,9 @@ public class TODO {
 
 	// Put EDITOR STATE somewhere on screen
 
+	// I wonder if i can build in a working economy, google what games have
+	// attempted tis b4, probably just dwarf fortress in any meaningful way...
+
 	// Add object button in PopupSelectObject?, can copy from
 	// ObjectsSettingsWindow
 

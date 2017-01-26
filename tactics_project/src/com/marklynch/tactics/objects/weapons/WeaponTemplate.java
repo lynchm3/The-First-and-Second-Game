@@ -1,9 +1,10 @@
 package com.marklynch.tactics.objects.weapons;
 
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.tactics.objects.level.Square;
 
-public class WeaponTemplate extends GameObject {
+public class WeaponTemplate extends GameObjectTemplate {
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
 			"totalHealth", "remainingHealth", "owner", "inventory", "showInventory" };
 
@@ -22,7 +23,8 @@ public class WeaponTemplate extends GameObject {
 		this.maxRange = maxRange;
 	}
 
-	public Weapon makeWeapon() {
+	@Override
+	public GameObject makeObject() {
 		return new Weapon(new String(name), damage, minRange, maxRange, imageTexturePath, owner, totalHealth,
 				squareGameObjectIsOn);
 	}

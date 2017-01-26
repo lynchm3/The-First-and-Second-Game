@@ -21,10 +21,11 @@ import com.marklynch.editor.settingswindow.ScriptTriggersSettingsWindow;
 import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
-import com.marklynch.editor.settingswindow.WeaponTemplatesSettingsWindow;
+import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectExploder;
+import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
@@ -42,6 +43,7 @@ import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.WeaponTemplate;
+import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -87,7 +89,7 @@ public class Editor {
 	public ObjectsSettingsWindow objectsSettingsWindow;
 	public ActorsSettingsWindow actorsSettingsWindow;
 	public FactionsSettingsWindow factionsSettingsWindow;
-	public WeaponTemplatesSettingsWindow weaponTemplatesSettingsWindow;
+	public TemplatesSettingsWindow weaponTemplatesSettingsWindow;
 	public WeaponsSettingsWindow weaponsSettingsWindow;
 	public ColorSettingsWindow colorsSettingsWindow;
 	public DecorationsSettingsWindow decorationsSettingsWindow;
@@ -97,6 +99,7 @@ public class Editor {
 	public RelationsSettingsWindow relationsSettingsWindow;
 	public SpeechPartSettingsWindow speechPartSettingsWindow;
 	public PopupSelectObject popupSelectObject;
+	public Toast toast;
 
 	public GameObject selectedGameObject;
 
@@ -108,7 +111,7 @@ public class Editor {
 	public SettingsWindowButton settingsButton = null;
 
 	public ArrayList<Texture> textures = new ArrayList<Texture>();
-	public ArrayList<WeaponTemplate> weaponTemplates = new ArrayList<WeaponTemplate>();
+	public ArrayList<GameObjectTemplate> gameObjectTemplates = new ArrayList<GameObjectTemplate>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public AttributeSelectionWindow attributeSelectionWindow;
 	public GameObject gameObjectTemplate;
@@ -147,13 +150,13 @@ public class Editor {
 
 		// LOAD Weapons// Weapons
 		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png", 100, null);
-		weaponTemplates.add(weaponTemplate0);
+		gameObjectTemplates.add(weaponTemplate0);
 		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png", 100, null);
-		weaponTemplates.add(weaponTemplate1);
+		gameObjectTemplates.add(weaponTemplate1);
 		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png", 100, null);
-		weaponTemplates.add(weaponTemplate2);
-		for (int i = 0; i < weaponTemplates.size(); i++) {
-			weaponTemplates.get(i).loadImages();
+		gameObjectTemplates.add(weaponTemplate2);
+		for (int i = 0; i < gameObjectTemplates.size(); i++) {
+			gameObjectTemplates.get(i).loadImages();
 		}
 
 		Game.level = new Level(10, 10);
@@ -163,7 +166,7 @@ public class Editor {
 		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);
 		actorsSettingsWindow = new ActorsSettingsWindow(200, this);
 		factionsSettingsWindow = new FactionsSettingsWindow(200, this);
-		weaponTemplatesSettingsWindow = new WeaponTemplatesSettingsWindow(200, this);
+		weaponTemplatesSettingsWindow = new TemplatesSettingsWindow(200, this);
 		weaponsSettingsWindow = new WeaponsSettingsWindow(200, this);
 		colorsSettingsWindow = new ColorSettingsWindow(200, this);
 		decorationsSettingsWindow = new DecorationsSettingsWindow(200, this);
@@ -452,9 +455,9 @@ public class Editor {
 		// Inventory
 		Inventory inventoryForActor0 = new Inventory();
 		ArrayList<GameObject> weaponsForActor0 = new ArrayList<GameObject>();
-		weaponsForActor0.add(weaponTemplates.get(0).makeWeapon());
-		weaponsForActor0.add(weaponTemplates.get(1).makeWeapon());
-		weaponsForActor0.add(weaponTemplates.get(2).makeWeapon());
+		weaponsForActor0.add(gameObjectTemplates.get(0).makeObject());
+		weaponsForActor0.add(gameObjectTemplates.get(1).makeObject());
+		weaponsForActor0.add(gameObjectTemplates.get(2).makeObject());
 		inventoryForActor0.setGameObjects(weaponsForActor0);
 		// for (int i = 0; i < weaponsForActor0.size(); i++) {
 		// if (weaponsForActor0.get(i) instanceof Weapon)
@@ -463,9 +466,9 @@ public class Editor {
 		// }
 		Inventory inventoryForActor1 = new Inventory();
 		ArrayList<GameObject> weaponsForActor1 = new ArrayList<GameObject>();
-		weaponsForActor1.add(weaponTemplates.get(0).makeWeapon());
-		weaponsForActor1.add(weaponTemplates.get(1).makeWeapon());
-		weaponsForActor1.add(weaponTemplates.get(2).makeWeapon());
+		weaponsForActor1.add(gameObjectTemplates.get(0).makeObject());
+		weaponsForActor1.add(gameObjectTemplates.get(1).makeObject());
+		weaponsForActor1.add(gameObjectTemplates.get(2).makeObject());
 		inventoryForActor1.setGameObjects(weaponsForActor1);
 		// for (int i = 0; i < weaponsForActor1.size(); i++) {
 		// if (weaponsForActor1.get(i) instanceof Weapon)
@@ -641,6 +644,10 @@ public class Editor {
 
 		if (popupSelectObject != null) {
 			popupSelectObject.draw();
+		}
+
+		if (toast != null) {
+			toast.draw();
 		}
 
 		if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
@@ -1075,6 +1082,7 @@ public class Editor {
 		objectToEdit = null;
 		attributeToEditName = null;
 		popupSelectObject = null;
+		toast = null;
 		textEntered = "";
 		this.attributeButton = null;
 		if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED)
@@ -1089,6 +1097,7 @@ public class Editor {
 		objectToEdit = null;
 		attributeToEditName = null;
 		popupSelectObject = null;
+		toast = null;
 		this.textEntered = "";
 		attributesWindow.depressButtons();
 	}
@@ -1098,6 +1107,7 @@ public class Editor {
 		classSelectionWindow = null;
 		instanceSelectionWindow = null;
 		popupSelectObject = null;
+		toast = null;
 		depressButtonsSettingsAndDetailsButtons();
 		clearSelectedObject();
 		editorState = EDITOR_STATE.DEFAULT;

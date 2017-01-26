@@ -13,6 +13,7 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
+import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -106,7 +107,7 @@ public class AttributesDialog {
 			Square square = (Square) object;
 			title = "Square @ " + square.x + "," + square.y;
 		} else if (object instanceof Weapon) {
-			title = "Weapon " + editor.weaponTemplates.indexOf(object);
+			title = "Weapon " + editor.gameObjectTemplates.indexOf(object);
 		} else if (object instanceof Color) {
 			title = "Color " + editor.colors.indexOf(object);
 		} else if (object instanceof Decoration) {
@@ -244,6 +245,7 @@ public class AttributesDialog {
 					editor.clearSelectedObject();
 					editor.settingsWindow.update();
 					editor.objectsSettingsWindow.addObjectsButton.down = true;
+					editor.toast = new Toast(200, 50, "Select location to add object");
 				}
 			});
 		} else if (object instanceof Faction) {
@@ -281,7 +283,7 @@ public class AttributesDialog {
 				public void click() {
 
 					depressButtons();
-					editor.weaponTemplates.remove(weapon);
+					editor.gameObjectTemplates.remove(weapon);
 					editor.clearSelectedObject();
 					editor.weaponsSettingsWindow.updateWeaponsButtons();
 					editor.settingsWindow.update();

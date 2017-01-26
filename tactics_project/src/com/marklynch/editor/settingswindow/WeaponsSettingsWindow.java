@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.InstanceSelectionWindow;
+import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.tactics.objects.weapons.WeaponTemplate;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
@@ -45,10 +46,15 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				ArrayList<WeaponTemplate> weaponTemplates = editor.weaponTemplates;
+				ArrayList<GameObjectTemplate> weaponTemplates = new ArrayList<GameObjectTemplate>();
+				for (GameObjectTemplate gameObjectTemplate : editor.gameObjectTemplates) {
+					if (gameObjectTemplate instanceof WeaponTemplate) {
+						weaponTemplates.add(gameObjectTemplate);
+					}
+				}
 
-				editor.instanceSelectionWindow = new InstanceSelectionWindow<WeaponTemplate>(weaponTemplates, editor,
-						"Select a Weapon Template");
+				editor.instanceSelectionWindow = new InstanceSelectionWindow<GameObjectTemplate>(weaponTemplates,
+						editor, "Select a Weapon Template");
 
 				// public AttributeSelectionWindow(final ArrayList<T> objects,
 				// boolean multi, final Editor editor,
