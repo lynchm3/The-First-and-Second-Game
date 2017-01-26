@@ -31,7 +31,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 		// Width Button
 		final SettingsWindowButton widthButton = new SettingsWindowButton(0, 100, 200, 30,
-				"Level Width: " + Game.level.width, true, true, this) {
+				"Level Width: " + Game.level.width, true, true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -48,7 +48,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 				if (this.textEntered.length() > 0)
 					newWidth = Integer.valueOf(this.textEntered).intValue();
 				Game.level.changeSize(newWidth, Game.level.height);
-				LevelSettingsWindow.this.editor.state = Editor.STATE.DEFAULT;
+				LevelSettingsWindow.this.editor.editorState = Editor.EDITOR_STATE.DEFAULT;
 				this.down = false;
 			}
 
@@ -71,7 +71,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 				depressButtons();
-				LevelSettingsWindow.this.editor.state = Editor.STATE.SETTINGS_CHANGE;
+				LevelSettingsWindow.this.editor.editorState = Editor.EDITOR_STATE.SETTINGS_CHANGE;
 				LevelSettingsWindow.this.editor.settingsButton = widthButton;
 				widthButton.textEntered = "";
 				widthButton.down = true;
@@ -81,7 +81,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 		// Height Button
 		final SettingsWindowButton heightButton = new SettingsWindowButton(0, 130, 200, 30,
-				"Level Height: " + Game.level.height, true, true, this) {
+				"Level Height: " + Game.level.height, true, true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -119,7 +119,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 				depressButtons();
-				LevelSettingsWindow.this.editor.state = Editor.STATE.SETTINGS_CHANGE;
+				LevelSettingsWindow.this.editor.editorState = Editor.EDITOR_STATE.SETTINGS_CHANGE;
 				LevelSettingsWindow.this.editor.settingsButton = heightButton;
 				heightButton.textEntered = "";
 				heightButton.down = true;
@@ -128,8 +128,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 		buttons.add(heightButton);
 
 		// Play lvl Button
-		final SettingsWindowButton playLevelButton = new SettingsWindowButton(0, 300, 200, 30, "Play Level", true, true,
-				this) {
+		final SettingsWindowButton playLevelButton = new SettingsWindowButton(0, 300, 200, 30, "Play Level", true,
+				true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -161,8 +161,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 		buttons.add(playLevelButton);
 
 		// Save lvl Button
-		final SettingsWindowButton saveLevelButton = new SettingsWindowButton(0, 400, 200, 30, "Save Level", true, true,
-				this) {
+		final SettingsWindowButton saveLevelButton = new SettingsWindowButton(0, 400, 200, 30, "Save Level", true,
+				true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -234,8 +234,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 		buttons.add(saveLevelButton);
 
 		// Load lvl Button
-		final SettingsWindowButton loadLevelButton = new SettingsWindowButton(0, 500, 200, 30, "Load Level", true, true,
-				this) {
+		final SettingsWindowButton loadLevelButton = new SettingsWindowButton(0, 500, 200, 30, "Load Level", true,
+				true) {
 
 			@Override
 			public void keyTyped(char character) {

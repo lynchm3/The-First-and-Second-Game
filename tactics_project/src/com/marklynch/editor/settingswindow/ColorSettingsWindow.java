@@ -1,11 +1,11 @@
 package com.marklynch.editor.settingswindow;
 
-import mdesl.graphics.Color;
-
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
+
+import mdesl.graphics.Color;
 
 public class ColorSettingsWindow extends SettingsWindow {
 
@@ -17,8 +17,7 @@ public class ColorSettingsWindow extends SettingsWindow {
 	public void updateColorsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addColorButton = new SettingsWindowButton(0, 100, 200, 30, "ADD COLOR", true, true,
-				this) {
+		final SettingsWindowButton addColorButton = new SettingsWindowButton(0, 100, 200, 30, "ADD COLOR", true, true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -55,7 +54,7 @@ public class ColorSettingsWindow extends SettingsWindow {
 			final int index = i;
 
 			final SettingsWindowButton collorButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					editor.colors.get(i), true, true, this) {
+					editor.colors.get(i), true, true) {
 
 				@Override
 				public void keyTyped(char character) {

@@ -13,7 +13,7 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 	public DecorationsSettingsWindow(float width, Editor editor) {
 		super(width, editor);
 
-		addDecorationButton = new SettingsWindowButton(0, 100, 200, 30, "ADD DECORATION", true, true, this) {
+		addDecorationButton = new SettingsWindowButton(0, 100, 200, 30, "ADD DECORATION", true, true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -29,8 +29,8 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void depress() {
-				if (DecorationsSettingsWindow.this.editor.state == Editor.STATE.ADD_OBJECT)
-					DecorationsSettingsWindow.this.editor.state = Editor.STATE.DEFAULT;
+				if (DecorationsSettingsWindow.this.editor.editorState == Editor.EDITOR_STATE.ADD_OBJECT)
+					DecorationsSettingsWindow.this.editor.editorState = Editor.EDITOR_STATE.DEFAULT;
 			}
 
 		};
@@ -60,7 +60,7 @@ public class DecorationsSettingsWindow extends SettingsWindow {
 			final int index = i;
 
 			final SettingsWindowButton decorationButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					Game.level.decorations.get(index), true, true, this) {
+					Game.level.decorations.get(index), true, true) {
 
 				@Override
 				public void keyTyped(char character) {

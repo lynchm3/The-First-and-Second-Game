@@ -137,11 +137,11 @@ public class UserInputEditor {
 			// click square/game object if we're on one
 
 			System.out.println("Game.squareMouseIsOver = " + Game.squareMouseIsOver);
-			if (Game.squareMouseIsOver.inventory.size() != 0) {
-				editor.gameObjectClicked(Game.squareMouseIsOver.inventory.get(0));
-			} else {
-				editor.squareClicked(Game.squareMouseIsOver);
-			}
+			// if (Game.squareMouseIsOver.inventory.size() != 0) {
+			// editor.gameObjectClicked(Game.squareMouseIsOver.inventory.get(0));
+			// } else {
+			editor.squareClicked(Game.squareMouseIsOver);
+			// }
 		}
 
 		// right click

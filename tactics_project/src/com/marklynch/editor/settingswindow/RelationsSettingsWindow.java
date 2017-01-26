@@ -33,7 +33,7 @@ public class RelationsSettingsWindow extends SettingsWindow {
 			final int index = count;
 
 			final SettingsWindowButton scriptButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					factionRelationships.get(i), true, true, this) {
+					factionRelationships.get(i), true, true) {
 
 				@Override
 				public void keyTyped(char character) {

@@ -15,7 +15,7 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 	public SpeechPartSettingsWindow(float width, Editor editor) {
 		super(width, editor);
 
-		addSpeechPartButton = new SettingsWindowButton(0, 100, 200, 30, "ADD SPEECH PART", true, true, this) {
+		addSpeechPartButton = new SettingsWindowButton(0, 100, 200, 30, "ADD SPEECH PART", true, true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -31,8 +31,8 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void depress() {
-				if (SpeechPartSettingsWindow.this.editor.state == Editor.STATE.ADD_OBJECT)
-					SpeechPartSettingsWindow.this.editor.state = Editor.STATE.DEFAULT;
+				if (SpeechPartSettingsWindow.this.editor.editorState == Editor.EDITOR_STATE.ADD_OBJECT)
+					SpeechPartSettingsWindow.this.editor.editorState = Editor.EDITOR_STATE.DEFAULT;
 			}
 
 		};
@@ -63,7 +63,7 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 			final int index = i;
 
 			final SettingsWindowButton speechPartButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					Game.level.script.speechParts.get(index), true, true, this) {
+					Game.level.script.speechParts.get(index), true, true) {
 
 				@Override
 				public void keyTyped(char character) {

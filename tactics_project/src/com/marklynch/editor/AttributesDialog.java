@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.editor.Editor.STATE;
+import com.marklynch.editor.Editor.EDITOR_STATE;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
@@ -207,7 +207,7 @@ public class AttributesDialog {
 					depressButtons();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					editor.clearSelectedObject();
-					editor.state = STATE.ADD_ACTOR;
+					editor.editorState = EDITOR_STATE.ADD_ACTOR;
 					editor.actorTemplate = actor;
 					editor.clearSelectedObject();
 					editor.settingsWindow.update();
@@ -239,7 +239,7 @@ public class AttributesDialog {
 					depressButtons();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					editor.clearSelectedObject();
-					editor.state = STATE.ADD_OBJECT;
+					editor.editorState = EDITOR_STATE.ADD_OBJECT;
 					editor.gameObjectTemplate = gameObject;
 					editor.clearSelectedObject();
 					editor.settingsWindow.update();

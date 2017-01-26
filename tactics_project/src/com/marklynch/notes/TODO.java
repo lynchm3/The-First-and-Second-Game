@@ -13,9 +13,25 @@ public class TODO {
 
 	// put canShareSquare in to path finding
 
+	// Put EDITOR STATE somewhere on screen
+
+	// Add object button in PopupSelectObject?, can copy from
+	// ObjectsSettingsWindow
+
 	// Editor.gameObjectClicked shoule be rplaced with squareClicked
 	// Level/Game.gameObjectClicked shoule be rplaced with squareClicked
 	// In userInputEditor and TWICE in UserInputLevel, look for inventory.size()
+
+	// ADD_ACTOR and ADD_OBJECT need to check shareSquare
+
+	// Should be able to place item on square that has unsharable object, make
+	// the object u place sharable, this also applies to moving objects...
+
+	// Show a toast "NO SPACE FOR ACTOR" if you try to add a new actor to a
+	// square that has no share sapce
+
+	// The update() method in the windows and popup seem unneccesary, when is
+	// update called?
 
 	// Issue, what if an object is sharing a square and u turn off
 	// canShareSquare?? (in

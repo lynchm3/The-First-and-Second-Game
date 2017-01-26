@@ -1,7 +1,5 @@
 package com.marklynch.editor.settingswindow;
 
-import mdesl.graphics.Color;
-
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
@@ -9,6 +7,8 @@ import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
+
+import mdesl.graphics.Color;
 
 public class FactionsSettingsWindow extends SettingsWindow {
 
@@ -21,7 +21,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 		buttons.clear();
 
 		final SettingsWindowButton addFactionButton = new SettingsWindowButton(0, 100, 200, 30, "ADD FACTION", true,
-				true, this) {
+				true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -70,7 +70,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 			final int index = i;
 
 			final SettingsWindowButton factionButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					Game.level.factions.get(i), true, true, this) {
+					Game.level.factions.get(i), true, true) {
 
 				@Override
 				public void keyTyped(char character) {

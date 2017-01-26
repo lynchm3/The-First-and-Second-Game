@@ -19,8 +19,8 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 	public void updateWeaponsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addWeaponButton = new SettingsWindowButton(0, 100, 200, 30, "ADD WEAPON", true, true,
-				this) {
+		final SettingsWindowButton addWeaponButton = new SettingsWindowButton(0, 100, 200, 30, "ADD WEAPON", true,
+				true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -61,7 +61,7 @@ public class WeaponsSettingsWindow extends SettingsWindow {
 			final int index = i;
 
 			final SettingsWindowButton weaponButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					editor.weapons.get(i), true, true, this) {
+					editor.weapons.get(i), true, true) {
 
 				@Override
 				public void keyTyped(char character) {

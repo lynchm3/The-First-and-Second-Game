@@ -1,28 +1,25 @@
 package com.marklynch.ui.button;
 
-import mdesl.graphics.Color;
-
-import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
+
+import mdesl.graphics.Color;
 
 public abstract class SettingsWindowButton extends Button {
 
 	boolean xFromLeft;
 	boolean yFromTop;
-	SettingsWindow settingsWindow;
 
 	public String textEntered = "";
 
 	public Object object;
 
 	public SettingsWindowButton(float x, float y, float width, float height, Object object, boolean xFromLeft,
-			boolean yFromTop, SettingsWindow settingsWindow) {
+			boolean yFromTop) {
 		super(x, y, width, height, null, null, object);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
-		this.settingsWindow = settingsWindow;
 		this.object = object;
 	}
 

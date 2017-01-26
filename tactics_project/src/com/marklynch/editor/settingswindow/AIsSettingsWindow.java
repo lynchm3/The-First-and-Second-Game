@@ -24,7 +24,7 @@ public class AIsSettingsWindow extends SettingsWindow {
 	public void updateAIsButtons() {
 		buttons.clear();
 
-		final SettingsWindowButton addAIButton = new SettingsWindowButton(0, 100, 200, 30, "ADD AI", true, true, this) {
+		final SettingsWindowButton addAIButton = new SettingsWindowButton(0, 100, 200, 30, "ADD AI", true, true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -67,7 +67,7 @@ public class AIsSettingsWindow extends SettingsWindow {
 			final int index = count;
 
 			final SettingsWindowButton aiButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					Game.level.ais.get(i), true, true, this) {
+					Game.level.ais.get(i), true, true) {
 
 				@Override
 				public void keyTyped(char character) {

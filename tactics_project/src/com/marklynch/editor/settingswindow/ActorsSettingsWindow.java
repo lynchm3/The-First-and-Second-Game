@@ -3,7 +3,7 @@ package com.marklynch.editor.settingswindow;
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
-import com.marklynch.editor.Editor.STATE;
+import com.marklynch.editor.Editor.EDITOR_STATE;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
@@ -14,7 +14,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 	public ActorsSettingsWindow(float width, final Editor editor) {
 		super(width, editor);
 
-		addActorsButton = new SettingsWindowButton(0, 100, 200, 30, "ADD ACTORS", true, true, this) {
+		addActorsButton = new SettingsWindowButton(0, 100, 200, 30, "ADD ACTORS", true, true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -30,8 +30,8 @@ public class ActorsSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void depress() {
-				if (ActorsSettingsWindow.this.editor.state == Editor.STATE.ADD_ACTOR)
-					ActorsSettingsWindow.this.editor.state = Editor.STATE.DEFAULT;
+				if (ActorsSettingsWindow.this.editor.editorState == Editor.EDITOR_STATE.ADD_ACTOR)
+					ActorsSettingsWindow.this.editor.editorState = Editor.EDITOR_STATE.DEFAULT;
 			}
 
 		};
@@ -46,9 +46,9 @@ public class ActorsSettingsWindow extends SettingsWindow {
 					ActorsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
 					ActorsSettingsWindow.this.editor.clearSelectedObject();
 					addActorsButton.down = true;
-					ActorsSettingsWindow.this.editor.state = STATE.ADD_ACTOR;
+					ActorsSettingsWindow.this.editor.editorState = EDITOR_STATE.ADD_ACTOR;
 				} else {
-					ActorsSettingsWindow.this.editor.state = STATE.DEFAULT;
+					ActorsSettingsWindow.this.editor.editorState = EDITOR_STATE.DEFAULT;
 				}
 			}
 		};
@@ -67,7 +67,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 				final int index = i;
 
 				final SettingsWindowButton actorButton = new SettingsWindowButton(0, 200 + buttonCount * 30, 200, 30,
-						faction.actors.get(index), true, true, this) {
+						faction.actors.get(index), true, true) {
 
 					@Override
 					public void keyTyped(char character) {
@@ -94,7 +94,7 @@ public class ActorsSettingsWindow extends SettingsWindow {
 
 						editor.clearSelectedObject();
 						editor.depressButtonsSettingsAndDetailsButtons();
-						editor.state = STATE.MOVEABLE_OBJECT_SELECTED;
+						editor.editorState = EDITOR_STATE.MOVEABLE_OBJECT_SELECTED;
 						editor.selectedGameObject = faction.actors.get(index);
 						editor.attributesWindow = new AttributesDialog(200, 200, 200, editor.selectedGameObject,
 								editor);

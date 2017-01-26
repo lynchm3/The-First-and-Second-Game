@@ -7,14 +7,6 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import mdesl.graphics.Color;
-import mdesl.graphics.SpriteBatch;
-import mdesl.graphics.Texture;
-import mdesl.graphics.glutils.FrameBuffer;
-import mdesl.graphics.glutils.ShaderProgram;
-import mdesl.graphics.text.BitmapFont;
-import mdesl.test.Util;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -25,6 +17,14 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import com.marklynch.Game;
+
+import mdesl.graphics.Color;
+import mdesl.graphics.SpriteBatch;
+import mdesl.graphics.Texture;
+import mdesl.graphics.glutils.FrameBuffer;
+import mdesl.graphics.glutils.ShaderProgram;
+import mdesl.graphics.text.BitmapFont;
+import mdesl.test.Util;
 
 public class ShadowLight {
 
@@ -259,10 +259,7 @@ public class ShadowLight {
 			e.printStackTrace();
 		}
 		Game.activeBatch.setColor(Color.WHITE);
-		if (Game.editorMode)
-			Game.level.drawUI();
-		else
-			Game.level.drawUI();
+		Game.level.drawUI();
 		Game.activeBatch.flush();
 
 		if (Game.editorMode) {

@@ -17,7 +17,7 @@ public class WeaponTemplatesSettingsWindow extends SettingsWindow {
 		buttons.clear();
 
 		final SettingsWindowButton addWeaponTemplateButton = new SettingsWindowButton(0, 100, 200, 30,
-				"ADD WEAPON TEMPLATE", true, true, this) {
+				"ADD WEAPON TEMPLATE", true, true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -56,7 +56,7 @@ public class WeaponTemplatesSettingsWindow extends SettingsWindow {
 			final int index = i;
 
 			final SettingsWindowButton weaponButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					editor.weaponTemplates.get(i), true, true, this) {
+					editor.weaponTemplates.get(i), true, true) {
 
 				@Override
 				public void keyTyped(char character) {

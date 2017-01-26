@@ -30,7 +30,7 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 		buttons.clear();
 
 		final SettingsWindowButton addScriptTriggerButton = new SettingsWindowButton(0, 100, 200, 30,
-				"ADD SCRIPT TRIGGER", true, true, this) {
+				"ADD SCRIPT TRIGGER", true, true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -78,7 +78,7 @@ public class ScriptTriggersSettingsWindow extends SettingsWindow {
 			final int index = count;
 
 			final SettingsWindowButton scriptButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					Game.level.script.scriptTriggers.get(i), true, true, this) {
+					Game.level.script.scriptTriggers.get(i), true, true) {
 
 				@Override
 				public void keyTyped(char character) {

@@ -26,7 +26,7 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 		buttons.clear();
 
 		final SettingsWindowButton addScriptButton = new SettingsWindowButton(0, 100, 200, 30, "ADD SCRIPT EVENT", true,
-				true, this) {
+				true) {
 
 			@Override
 			public void keyTyped(char character) {
@@ -68,7 +68,7 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 			final int index = i;
 
 			final SettingsWindowButton scriptButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					Game.level.script.scriptEvents.get(i), true, true, this) {
+					Game.level.script.scriptEvents.get(i), true, true) {
 
 				@Override
 				public void keyTyped(char character) {
