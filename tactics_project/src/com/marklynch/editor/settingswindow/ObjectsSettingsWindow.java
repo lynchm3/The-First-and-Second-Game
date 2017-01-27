@@ -9,7 +9,7 @@ import com.marklynch.editor.Editor.EDITOR_STATE;
 import com.marklynch.editor.InstanceSelectionWindow;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectTemplate;
-import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
@@ -92,6 +92,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 				objectSettingsFilter = OBJECT_SETTINGS_FILTER.ALL;
+				updateObjectsButtons();
 			}
 		};
 
@@ -120,6 +121,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 				objectSettingsFilter = OBJECT_SETTINGS_FILTER.ACTORS;
+				updateObjectsButtons();
 			}
 		};
 
@@ -148,6 +150,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 				objectSettingsFilter = OBJECT_SETTINGS_FILTER.OBJECTS;
+				updateObjectsButtons();
 			}
 		};
 
@@ -176,6 +179,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 				objectSettingsFilter = OBJECT_SETTINGS_FILTER.WEAPONS;
+				updateObjectsButtons();
 			}
 		};
 		updateObjectsButtons();
@@ -191,17 +195,19 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 		buttons.add(objectsFilterButton);
 		buttons.add(weaponsFilterButton);
 
-		ArrayList<GameObject> objects = new ArrayList<GameObject>();
+		final ArrayList<GameObject> objects = new ArrayList<GameObject>();
 		if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.ALL) {
 			objects.addAll(Game.level.inanimateObjects);
+			for (Faction faction : Game.level.factions) {
+				objects.addAll(faction.actors);
+			}
 			allFilterButton.down = true;
 			actorsFilterButton.down = false;
 			objectsFilterButton.down = false;
 			weaponsFilterButton.down = false;
 		} else if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.ACTORS) {
-			for (GameObject gameObject : Game.level.inanimateObjects) {
-				if (gameObject instanceof Actor)
-					objects.add(gameObject);
+			for (Faction faction : Game.level.factions) {
+				objects.addAll(faction.actors);
 			}
 			allFilterButton.down = false;
 			actorsFilterButton.down = true;
@@ -209,7 +215,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			weaponsFilterButton.down = false;
 		} else if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.OBJECTS) {
 			for (GameObject gameObject : Game.level.inanimateObjects) {
-				if (!(gameObject instanceof Actor) && !(gameObject instanceof Weapon))
+				if (!(gameObject instanceof Weapon))
 					objects.add(gameObject);
 			}
 			allFilterButton.down = false;
@@ -227,11 +233,11 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			weaponsFilterButton.down = true;
 		}
 
-		for (int i = 0; i < Game.level.inanimateObjects.size(); i++) {
+		for (int i = 0; i < objects.size(); i++) {
 			final int index = i;
 
 			final SettingsWindowButton objectButton = new SettingsWindowButton(0, 230 + i * 30, 200, 30,
-					Game.level.inanimateObjects.get(index), true, true) {
+					objects.get(index), true, true) {
 
 				@Override
 				public void keyTyped(char character) {
@@ -259,7 +265,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 					editor.clearSelectedObject();
 					editor.depressButtonsSettingsAndDetailsButtons();
 					editor.editorState = EDITOR_STATE.MOVEABLE_OBJECT_SELECTED;
-					editor.selectedGameObject = Game.level.inanimateObjects.get(index);
+					editor.selectedGameObject = objects.get(index);
 					editor.attributesWindow = new AttributesDialog(200, 200, 200, editor.selectedGameObject, editor);
 					// getButton(editor.selectedGameObject).down = true;
 					objectButton.down = true;

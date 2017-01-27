@@ -720,8 +720,8 @@ public class Editor {
 				selectSquare(square);
 			} else if (editorState == EDITOR_STATE.ADD_OBJECT) {
 				addNewObjectToSquare(square);
-			} else if (editorState == EDITOR_STATE.ADD_ACTOR) {
-				addNewActorToSquare(square);
+				// } else if (editorState == EDITOR_STATE.ADD_ACTOR) {
+				// addNewActorToSquare(square);
 			} else if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
 				if (!this.selectedGameObject.canShareSquare && !square.inventory.canShareSquare()) {
 					swapGameObjects(this.selectedGameObject, square.inventory.getGameObjectThatCantShareSquare());
@@ -737,8 +737,8 @@ public class Editor {
 				popupSelectObject = new PopupSelectObject(100, this, square);
 			} else if (editorState == EDITOR_STATE.ADD_OBJECT) {
 				addNewObjectToSquare(square);
-			} else if (editorState == EDITOR_STATE.ADD_ACTOR) {
-				addNewActorToSquare(square);
+				// } else if (editorState == EDITOR_STATE.ADD_ACTOR) {
+				// addNewActorToSquare(square);
 			} else if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
 				moveGameObject(this.selectedGameObject, square);
 			}
@@ -763,15 +763,24 @@ public class Editor {
 	}
 
 	public void selectGameObject(GameObject gameObject) {
+		// if (gameObject instanceof Actor) {
+		// if (this.settingsWindow != this.actorsSettingsWindow)
+		// actorsTabButton.click();
+		// actorsSettingsWindow.getButton(gameObject).click();
+		// } else {
+		if (this.settingsWindow != this.objectsSettingsWindow)
+			objectsTabButton.click();
 		if (gameObject instanceof Actor) {
-			if (this.settingsWindow != this.actorsSettingsWindow)
-				actorsTabButton.click();
-			actorsSettingsWindow.getButton(gameObject).click();
+			objectsSettingsWindow.actorsFilterButton.click();
+			objectsSettingsWindow.getButton(gameObject).click();
+		} else if (gameObject instanceof Weapon) {
+			objectsSettingsWindow.weaponsFilterButton.click();
+			objectsSettingsWindow.getButton(gameObject).click();
 		} else {
-			if (this.settingsWindow != this.objectsSettingsWindow)
-				objectsTabButton.click();
+			objectsSettingsWindow.objectsFilterButton.click();
 			objectsSettingsWindow.getButton(gameObject).click();
 		}
+		// }
 	}
 
 	public void selectSquare(Square square) {
@@ -787,30 +796,35 @@ public class Editor {
 			this.toast = new Toast("No space for the object here! Pick a different square.");
 		} else {
 			GameObject gameObject = gameObjectTemplate.makeCopy(square);
-			Game.level.inanimateObjects.add(gameObject);
+			if (gameObject instanceof Actor) {
+				gameObject.faction.actors.add((Actor) gameObject);
+			} else {
+				Game.level.inanimateObjects.add(gameObject);
+			}
 			square.inventory.add(gameObject);
 			this.objectsSettingsWindow.update();
 			this.toast = new Toast("Select a location to add object");
 		}
 	}
 
-	public void addNewActorToSquare(Square square) {
-		// Add actor
-		Actor actor = null;
-		if (actorTemplate == null) {
-			actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", square, 4, new Inventory(), true);
-			actor.faction = Game.level.factions.get(0);
-		} else {
-			actor = actorTemplate.makeCopy(square);
-			actor.faction = actorTemplate.faction;
-		}
-
-		actor.faction.actors.add(actor);
-		square.inventory.add(actor);
-		this.actorsSettingsWindow.update();
-		// state = STATE.DEFAULT;
-
-	}
+	// public void addNewActorToSquare(Square square) {
+	// // Add actor
+	// Actor actor = null;
+	// if (actorTemplate == null) {
+	// actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png",
+	// square, 4, new Inventory(), true);
+	// actor.faction = Game.level.factions.get(0);
+	// } else {
+	// actor = actorTemplate.makeCopy(square);
+	// actor.faction = actorTemplate.faction;
+	// }
+	//
+	// actor.faction.actors.add(actor);
+	// square.inventory.add(actor);
+	// this.actorsSettingsWindow.update();
+	// // state = STATE.DEFAULT;
+	//
+	// }
 
 	public void swapGameObjects(GameObject gameObject1, GameObject gameObject2) {
 		Square square1 = gameObject1.squareGameObjectIsOn;
