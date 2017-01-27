@@ -441,8 +441,8 @@ public class Editor {
 		Game.level.squares[0][3].inventory.add(gameObject);
 
 		// Add a game object templates
-		GameObjectTemplate gameObjectTemplate = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",
-				Game.level.squares[0][3], new Inventory(), true, false);
+		GameObjectTemplate gameObjectTemplate = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png", null,
+				new Inventory(), true, false);
 		gameObjectTemplates.add(gameObjectTemplate);
 
 		// Add factions
@@ -779,25 +779,15 @@ public class Editor {
 	}
 
 	public void addNewObjectToSquare(Square square) {
-		GameObject gameObject = null;
-		if (gameObjectTemplate == null) {
-			gameObject = new GameObject("dumpster", 5, "skip_with_shadow.png", square, new Inventory(), true, true);
+		if (!gameObjectTemplate.canShareSquare && !square.inventory.canShareSquare()) {
+			this.toast = new Toast("No space for the object here! Pick a different square.");
 		} else {
-			gameObject = gameObjectTemplate.makeCopy(square);
-
-			// if (gameObject instanceof WeaponTemplate) {
-			// gameObject = ((WeaponTemplate)
-			// gameObjectTemplate).makeCopy(square);
-			// } else {
-			// }
-
+			GameObject gameObject = gameObjectTemplate.makeCopy(square);
+			Game.level.inanimateObjects.add(gameObject);
+			square.inventory.add(gameObject);
+			this.objectsSettingsWindow.update();
+			this.toast = new Toast("Select a location to add object");
 		}
-
-		Game.level.inanimateObjects.add(gameObject);
-		square.inventory.add(gameObject);
-		this.objectsSettingsWindow.update();
-		// state = STATE.DEFAULT;
-
 	}
 
 	public void addNewActorToSquare(Square square) {

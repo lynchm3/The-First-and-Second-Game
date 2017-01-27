@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Take away the ability to put an actor on a no share square, i already did
+	// it for objects. ACTUALLY...
+
 	// GameObject.canShareSquare
 
 	// GameObject.canBePlacedInInventory
@@ -23,6 +26,39 @@ public class TODO {
 
 	// I wonder if i can build in a working economy, google what games have
 	// attempted tis b4, probably just dwarf fortress in any meaningful way...
+
+	// Concept of territory for factions, when u zoom out far enough the map is
+	// colored in the different faction colors so that u can see the territory,
+	// could refer to them as "countries" :) Territory is exerted out from
+	// posts/buildings/...something
+
+	// Could have to protect one group/person from another. In the design I'd
+	// put in a choke point where you can stand. If your have a good standing
+	// with the attackers you could just stand in their path and work as a choke
+	// point so that they can't get to te victim.
+
+	// At a certain point u get a quest/message/cutscene (the map could zoom all
+	// the way out and show it) about a flash of light. The message also tells
+	// you how many km and in what direction. The message also points out that
+	// others will be heading towards it too. At this point a bunch of random
+	// ais go towards the light too. (Or maybe the AIs are selected based on
+	// criteria like same distance as u, same level as u). The flash of light
+	// could be a tower or area or whatever with loads of monsters in it, and
+	// something awesome in the middle. Maybe a kind of maze to force u and the
+	// AIs to bump in to eachother. So when u arrive there'll probably already
+	// be enemis and allies already there. AND they'll probably still be
+	// arriving after it.
+
+	// An option to turn quest markers on/off. So u can make it like an old
+	// school RPG where u have to read and work shit out. U can put pins on the
+	// map urself so that u can mark the names of areas and shit. Maybe another
+	// option to mark towns on ur map???? I dunno.... I kind of like the idea of
+	// the whole map being blank at thee start. U'll have to explore or follow
+	// directions from NPCs. Paths between points of interest are important tho,
+	// roads/paths/trails.
+
+	// If an AI can't reach something, they should at least most to the closest
+	// square that they can reach. Or give up and do something else i guess...
 
 	// Add object button in PopupSelectObject?, can copy from
 	// ObjectsSettingsWindow
