@@ -176,47 +176,51 @@ public class AttributesDialog {
 
 		}
 
-		// Custom buttons (copy, delete...)
-		if (object instanceof Actor) {
-			final Actor actor = (Actor) object;
-			final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30, actor,
-					"delete", true, true, this, 0);
-			buttons.add(button);
-			button.setClickListener(new ClickListener() {
-				@Override
-				public void click() {
+		// // Custom buttons (copy, delete...)
+		// if (object instanceof Actor) {
+		// final Actor actor = (Actor) object;
+		// final AtributesWindowButton button = new AtributesWindowButton(0, 0 +
+		// (count + 2) * 30, 200, 30, actor,
+		// "delete", true, true, this, 0);
+		// buttons.add(button);
+		// button.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		//
+		// int actorCount = 0;
+		// for (Faction faction : Game.level.factions) {
+		// actorCount += faction.actors.size();
+		// }
+		// if (actorCount > 1) {
+		// depressButtons();
+		// actor.faction.actors.remove(actor);
+		// actor.squareGameObjectIsOn.inventory.remove(actor);
+		// editor.clearSelectedObject();
+		// editor.settingsWindow.update();
+		// }
+		// }
+		// });
+		// final AtributesWindowButton copyButton = new AtributesWindowButton(0,
+		// 0 + (count + 3) * 30, 200, 30, actor,
+		// "copy", true, true, this, 0);
+		// buttons.add(copyButton);
+		// copyButton.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// depressButtons();
+		// editor.depressButtonsSettingsAndDetailsButtons();
+		// editor.clearSelectedObject();
+		// editor.editorState = EDITOR_STATE.ADD_ACTOR;
+		// editor.actorTemplate = actor;
+		// editor.clearSelectedObject();
+		// editor.settingsWindow.update();
+		// editor.actorsSettingsWindow.addActorsButton.down = true;
+		// }
+		// });
+		//
+		// } else
 
-					int actorCount = 0;
-					for (Faction faction : Game.level.factions) {
-						actorCount += faction.actors.size();
-					}
-					if (actorCount > 1) {
-						depressButtons();
-						actor.faction.actors.remove(actor);
-						actor.squareGameObjectIsOn.inventory.remove(actor);
-						editor.clearSelectedObject();
-						editor.settingsWindow.update();
-					}
-				}
-			});
-			final AtributesWindowButton copyButton = new AtributesWindowButton(0, 0 + (count + 3) * 30, 200, 30, actor,
-					"copy", true, true, this, 0);
-			buttons.add(copyButton);
-			copyButton.setClickListener(new ClickListener() {
-				@Override
-				public void click() {
-					depressButtons();
-					editor.depressButtonsSettingsAndDetailsButtons();
-					editor.clearSelectedObject();
-					editor.editorState = EDITOR_STATE.ADD_ACTOR;
-					editor.actorTemplate = actor;
-					editor.clearSelectedObject();
-					editor.settingsWindow.update();
-					editor.actorsSettingsWindow.addActorsButton.down = true;
-				}
-			});
-
-		} else if (object instanceof GameObject) {
+		if (object instanceof GameObject) {
 			final GameObject gameObject = (GameObject) object;
 			final AtributesWindowButton deleteButton = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30,
 					gameObject, "delete", true, true, this, 0);
@@ -273,23 +277,26 @@ public class AttributesDialog {
 					editor.settingsWindow.update();
 				}
 			});
-		} else if (object instanceof Weapon) {
-			final Weapon weapon = (Weapon) object;
-			final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30, weapon,
-					"delete", true, true, this, 0);
-			buttons.add(button);
-			button.setClickListener(new ClickListener() {
-				@Override
-				public void click() {
-
-					depressButtons();
-					editor.gameObjectTemplates.remove(weapon);
-					editor.clearSelectedObject();
-					editor.weaponsSettingsWindow.updateWeaponsButtons();
-					editor.settingsWindow.update();
-				}
-			});
-		} else if (object instanceof Decoration) {
+		}
+		// else if (object instanceof Weapon) {
+		// final Weapon weapon = (Weapon) object;
+		// final AtributesWindowButton button = new AtributesWindowButton(0, 0 +
+		// (count + 2) * 30, 200, 30, weapon,
+		// "delete", true, true, this, 0);
+		// buttons.add(button);
+		// button.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		//
+		// depressButtons();
+		// editor.gameObjectTemplates.remove(weapon);
+		// editor.clearSelectedObject();
+		// editor.weaponsSettingsWindow.updateWeaponsButtons();
+		// editor.settingsWindow.update();
+		// }
+		// });
+		// }
+		else if (object instanceof Decoration) {
 			final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30, object,
 					"delete", true, true, this, 0);
 			buttons.add(button);

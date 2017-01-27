@@ -9,7 +9,6 @@ import org.lwjgl.input.Mouse;
 import com.marklynch.Game;
 import com.marklynch.editor.popup.PopupSelectObject;
 import com.marklynch.editor.settingswindow.AIsSettingsWindow;
-import com.marklynch.editor.settingswindow.ActorsSettingsWindow;
 import com.marklynch.editor.settingswindow.ColorSettingsWindow;
 import com.marklynch.editor.settingswindow.DecorationsSettingsWindow;
 import com.marklynch.editor.settingswindow.FactionsSettingsWindow;
@@ -22,7 +21,6 @@ import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
-import com.marklynch.editor.settingswindow.WeaponsSettingsWindow;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectExploder;
 import com.marklynch.tactics.objects.GameObjectTemplate;
@@ -74,9 +72,7 @@ public class Editor {
 	public Button objectsTabButton;
 	public Button factionsTabButton;
 	public Button colorsTabButton;
-	public Button actorsTabButton;
 	public Button templatesTabButton;
-	public Button weaponsTabButton;
 	public Button decorationsTabButton;
 	public Button scriptEventsTabButton;
 	public Button scriptTriggersTabButton;
@@ -88,10 +84,8 @@ public class Editor {
 	public LevelSettingsWindow levelSettingsWindow;
 	public SquaresSettingsWindow squaresSettingsWindow;
 	public ObjectsSettingsWindow objectsSettingsWindow;
-	public ActorsSettingsWindow actorsSettingsWindow;
 	public FactionsSettingsWindow factionsSettingsWindow;
 	public TemplatesSettingsWindow weaponTemplatesSettingsWindow;
-	public WeaponsSettingsWindow weaponsSettingsWindow;
 	public ColorSettingsWindow colorsSettingsWindow;
 	public DecorationsSettingsWindow decorationsSettingsWindow;
 	public ScriptEventsSettingsWindow scriptsEventsSettingsWindow;
@@ -119,7 +113,7 @@ public class Editor {
 	public Actor actorTemplate;
 
 	public enum EDITOR_STATE {
-		DEFAULT, ADD_OBJECT, ADD_ACTOR, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
+		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
 	}
 
 	public EDITOR_STATE editorState = EDITOR_STATE.DEFAULT;
@@ -173,10 +167,8 @@ public class Editor {
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
 		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);
-		actorsSettingsWindow = new ActorsSettingsWindow(200, this);
 		factionsSettingsWindow = new FactionsSettingsWindow(200, this);
 		weaponTemplatesSettingsWindow = new TemplatesSettingsWindow(200, this);
-		weaponsSettingsWindow = new WeaponsSettingsWindow(200, this);
 		colorsSettingsWindow = new ColorSettingsWindow(200, this);
 		decorationsSettingsWindow = new DecorationsSettingsWindow(200, this);
 		scriptsEventsSettingsWindow = new ScriptEventsSettingsWindow(200, this);
@@ -236,21 +228,6 @@ public class Editor {
 		};
 		tabs.add(objectsTabButton);
 
-		tabText = "ACTORS";
-		actorsTabButton = new LevelButton(320, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
-		actorsTabButton.clickListener = new ClickListener() {
-			@Override
-			public void click() {
-				clearSelectedObject();
-				depressButtonsSettingsAndDetailsButtons();
-				depressTabButtons();
-				actorsTabButton.down = true;
-				settingsWindow = actorsSettingsWindow;
-				settingsWindow.update();
-			}
-		};
-		tabs.add(actorsTabButton);
-
 		tabText = "FACTIONS";
 		factionsTabButton = new LevelButton(430, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		factionsTabButton.clickListener = new ClickListener() {
@@ -280,21 +257,6 @@ public class Editor {
 			}
 		};
 		tabs.add(templatesTabButton);
-
-		tabText = "WEAPONS";
-		weaponsTabButton = new LevelButton(560, 15, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
-		weaponsTabButton.clickListener = new ClickListener() {
-			@Override
-			public void click() {
-				clearSelectedObject();
-				depressButtonsSettingsAndDetailsButtons();
-				depressTabButtons();
-				weaponsTabButton.down = true;
-				settingsWindow = weaponsSettingsWindow;
-				settingsWindow.update();
-			}
-		};
-		tabs.add(weaponsTabButton);
 
 		tabText = "COLORS";
 		colorsTabButton = new LevelButton(690, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
@@ -744,8 +706,7 @@ public class Editor {
 			}
 		} else {
 			// Something on the square, but cant share the space
-			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.ADD_ACTOR
-					|| editorState == EDITOR_STATE.SETTINGS_CHANGE) {
+			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.SETTINGS_CHANGE) {
 				this.clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
 				popupSelectObject = new PopupSelectObject(100, this, square);
@@ -806,25 +767,6 @@ public class Editor {
 			this.toast = new Toast("Select a location to add object");
 		}
 	}
-
-	// public void addNewActorToSquare(Square square) {
-	// // Add actor
-	// Actor actor = null;
-	// if (actorTemplate == null) {
-	// actor = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png",
-	// square, 4, new Inventory(), true);
-	// actor.faction = Game.level.factions.get(0);
-	// } else {
-	// actor = actorTemplate.makeCopy(square);
-	// actor.faction = actorTemplate.faction;
-	// }
-	//
-	// actor.faction.actors.add(actor);
-	// square.inventory.add(actor);
-	// this.actorsSettingsWindow.update();
-	// // state = STATE.DEFAULT;
-	//
-	// }
 
 	public void swapGameObjects(GameObject gameObject1, GameObject gameObject2) {
 		Square square1 = gameObject1.squareGameObjectIsOn;
