@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Skill that lets you know what people have in their inventory!!
+
+	// Access inventory and move objects out of the inventory
+
 	// Maybe always show popup when placing an object...
 
 	// if showInventoryItems make draw loop thru the items and show them
