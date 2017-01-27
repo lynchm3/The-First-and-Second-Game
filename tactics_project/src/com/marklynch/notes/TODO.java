@@ -2,6 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Maybe always show popup when placing an object...
+
+	// if showInventoryItems make draw loop thru the items and show them
+
+	// Use fitsInInventory flag, when u move an object or create a new object on
+	// top of an object it will ask what u want to put it in to with a pop up :)
+	// Matbe need another flag canStoreItemsInInventory
+
 	// Take away the ability to put an actor on a no share square, i already did
 	// it for objects. ACTUALLY... lets do actor templates to start with
 
@@ -16,6 +24,9 @@ public class TODO {
 
 	// Still using squareObjectIsOn... but also have attribute
 	// InventoryThisItemBelongsTo...
+
+	// merge up the UI elements @ some stage, they're getting silly. start with
+	// the popup classes
 
 	// If u were to move an actor from 2,2 to 0,0, it stil says "actor @ 2,2" in
 	// the attributes

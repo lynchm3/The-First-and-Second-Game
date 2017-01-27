@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
+import com.marklynch.editor.popup.Popup;
 import com.marklynch.editor.popup.PopupSelectObject;
+import com.marklynch.editor.popup.PopupSelectPlaceToPutObject;
 import com.marklynch.editor.settingswindow.AIsSettingsWindow;
 import com.marklynch.editor.settingswindow.ColorSettingsWindow;
 import com.marklynch.editor.settingswindow.DecorationsSettingsWindow;
@@ -93,7 +95,7 @@ public class Editor {
 	public AIsSettingsWindow aisSettingsWindow;
 	public RelationsSettingsWindow relationsSettingsWindow;
 	public SpeechPartSettingsWindow speechPartSettingsWindow;
-	public PopupSelectObject popupSelectObject;
+	public Popup popup;
 	public Toast toast;
 
 	public GameObject selectedGameObject;
@@ -143,19 +145,19 @@ public class Editor {
 		colors.add(new Color(Color.CYAN));
 		colors.add(new Color(Color.ORANGE));
 
-		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png", 100, null);
+		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png", 100, null, true, false);
 		gameObjectTemplates.add(weaponTemplate0);
-		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png", 100, null);
+		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png", 100, null, true, false);
 		gameObjectTemplates.add(weaponTemplate1);
-		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png", 100, null);
+		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png", 100, null, true, false);
 		gameObjectTemplates.add(weaponTemplate2);
 
 		GameObjectTemplate gameObjectTemplate = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png", null,
-				new Inventory(), true, false);
+				new Inventory(), true, false, false, true);
 		gameObjectTemplates.add(gameObjectTemplate);
 
 		ActorTemplate actorTemplate = new ActorTemplate("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", null, 4,
-				new Inventory(), true);
+				new Inventory(), false, false, true);
 		gameObjectTemplates.add(actorTemplate);
 
 		for (int i = 0; i < gameObjectTemplates.size(); i++) {
@@ -407,7 +409,7 @@ public class Editor {
 
 		// Add a game object
 		GameObject gameObject = new GameObjectExploder("dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
-				new Inventory(), true, false);
+				new Inventory(), true, false, false, true);
 		Game.level.inanimateObjects.add(gameObject);
 		Game.level.squares[0][3].inventory.add(gameObject);
 
@@ -448,7 +450,7 @@ public class Editor {
 
 		// Add actor
 		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 4,
-				inventoryForActor0, true);
+				inventoryForActor0, true, false, true);
 		actor0.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(actor0);
 		for (int i = 0; i < actor0.inventory.size(); i++) {
@@ -456,7 +458,7 @@ public class Editor {
 		}
 
 		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5], 4,
-				inventoryForActor1, true);
+				inventoryForActor1, true, false, true);
 		actor1.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(actor1);
 		for (int i = 0; i < actor1.inventory.size(); i++) {
@@ -612,8 +614,8 @@ public class Editor {
 			instanceSelectionWindow.draw();
 		}
 
-		if (popupSelectObject != null) {
-			popupSelectObject.draw();
+		if (popup != null) {
+			popup.draw();
 		}
 
 		if (toast != null) {
@@ -652,8 +654,8 @@ public class Editor {
 				return button;
 		}
 
-		if (popupSelectObject != null) {
-			for (Button button : popupSelectObject.buttons) {
+		if (popup != null) {
+			for (Button button : popup.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
@@ -681,7 +683,7 @@ public class Editor {
 			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.SETTINGS_CHANGE) {
 				selectSquare(square);
 			} else if (editorState == EDITOR_STATE.ADD_OBJECT) {
-				addNewObjectToSquare(square);
+				attemptToAddNewObjectToSquare(square);
 				// } else if (editorState == EDITOR_STATE.ADD_ACTOR) {
 				// addNewActorToSquare(square);
 			} else if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
@@ -696,9 +698,9 @@ public class Editor {
 			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.SETTINGS_CHANGE) {
 				this.clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
-				popupSelectObject = new PopupSelectObject(100, this, square);
+				popup = new PopupSelectObject(100, this, square);
 			} else if (editorState == EDITOR_STATE.ADD_OBJECT) {
-				addNewObjectToSquare(square);
+				attemptToAddNewObjectToSquare(square);
 				// } else if (editorState == EDITOR_STATE.ADD_ACTOR) {
 				// addNewActorToSquare(square);
 			} else if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
@@ -709,9 +711,9 @@ public class Editor {
 			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.SETTINGS_CHANGE) {
 				this.clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
-				popupSelectObject = new PopupSelectObject(100, this, square);
+				popup = new PopupSelectObject(100, this, square);
 			} else if (editorState == EDITOR_STATE.ADD_OBJECT) {
-				addNewObjectToSquare(square);
+				attemptToAddNewObjectToSquare(square);
 			} else if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
 				if (this.selectedGameObject.canShareSquare) {
 					moveGameObject(this.selectedGameObject, square);
@@ -752,20 +754,53 @@ public class Editor {
 		depressButtonsSettingsAndDetailsButtons();
 	}
 
-	public void addNewObjectToSquare(Square square) {
-		if (!gameObjectTemplate.canShareSquare && !square.inventory.canShareSquare()) {
-			this.toast = new Toast("No space for the object here! Pick a different square.");
+	public void attemptToAddNewObjectToSquare(Square square) {
+
+		boolean canBePlaceOnGround = gameObjectTemplate.canShareSquare || square.inventory.canShareSquare();
+		boolean canBePlacedInAnInventory = square.inventory.hasGameObjectsThatCanContainOtherObjects();
+
+		if (!canBePlacedInAnInventory && canBePlaceOnGround) {
+			// Only option is to place the gameObject on the ground
+			placeObjectOnSquare(square);
+		} else if (canBePlacedInAnInventory) {
+
+			this.clearSelectedObject();
+			depressButtonsSettingsAndDetailsButtons();
+			popup = new PopupSelectPlaceToPutObject(100, this, square);
+			// Give a popup to choose either
+			// Place on ground (MAYBE)
+			// Give to Actor X
+			// Put in Object Y
 		} else {
-			GameObject gameObject = gameObjectTemplate.makeCopy(square);
-			if (gameObject instanceof Actor) {
-				gameObject.faction.actors.add((Actor) gameObject);
-			} else {
-				Game.level.inanimateObjects.add(gameObject);
-			}
-			square.inventory.add(gameObject);
-			this.objectsSettingsWindow.update();
-			this.toast = new Toast("Select a location to add object");
+			this.toast = new Toast("No space for the object here! Please pick a different square. :)");
 		}
+	}
+
+	public void placeObjectOnSquare(Square square) {
+		GameObject gameObject = gameObjectTemplate.makeCopy(square);
+		if (gameObject instanceof Actor) {
+			gameObject.faction.actors.add((Actor) gameObject);
+		} else {
+			Game.level.inanimateObjects.add(gameObject);
+		}
+		square.inventory.add(gameObject);
+		this.objectsSettingsWindow.update();
+		this.toast = new Toast("Select a location to add object");
+	}
+
+	public void placeObjectInInventory(GameObject gameObjectThatCanHoldOtherObjects) {
+		GameObject gameObjectToPutInInventroy = gameObjectTemplate.makeCopy(null);
+		gameObjectThatCanHoldOtherObjects.inventory.getGameObjects().add(gameObjectToPutInInventroy);
+		this.objectsSettingsWindow.update();
+		this.toast = new Toast("Select a location to add object");
+		// if (gameObject instanceof Actor) {
+		// gameObject.faction.actors.add((Actor) gameObject);
+		// } else {
+		// Game.level.inanimateObjects.add(gameObject);
+		// }
+		// square.inventory.add(gameObject);
+		// this.objectsSettingsWindow.update();
+		// this.toast = new Toast("Select a location to add object");
 	}
 
 	public void swapGameObjects(GameObject gameObject1, GameObject gameObject2) {
@@ -1042,7 +1077,7 @@ public class Editor {
 		this.attributesWindow = null;
 		objectToEdit = null;
 		attributeToEditName = null;
-		popupSelectObject = null;
+		popup = null;
 		toast = null;
 		textEntered = "";
 		this.attributeButton = null;
@@ -1057,7 +1092,7 @@ public class Editor {
 		instanceSelectionWindow = null;
 		objectToEdit = null;
 		attributeToEditName = null;
-		popupSelectObject = null;
+		popup = null;
 		toast = null;
 		this.textEntered = "";
 		attributesWindow.depressButtons();
@@ -1067,7 +1102,7 @@ public class Editor {
 		attributeSelectionWindow = null;
 		classSelectionWindow = null;
 		instanceSelectionWindow = null;
-		popupSelectObject = null;
+		popup = null;
 		toast = null;
 		depressButtonsSettingsAndDetailsButtons();
 		clearSelectedObject();

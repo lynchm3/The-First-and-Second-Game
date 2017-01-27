@@ -1,26 +1,30 @@
 package com.marklynch.editor.popup;
 
+import java.util.ArrayList;
+
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.PopupButton;
 
-public class PopupSelectObject extends Popup {
+public class PopupSelectPlaceToPutObject extends Popup {
 
-	public PopupSelectObject(float width, Editor editor, Square square) {
-
+	public PopupSelectPlaceToPutObject(float width, final Editor editor, final Square square) {
 		super(width, editor, square);
+		boolean canBePlacedOnGround = editor.gameObjectTemplate.canShareSquare || square.inventory.canShareSquare();
 
-		selectSquareButton = new PopupButton(0, 0, 200, 30, null, null, "" + square, true, true, square, this);
+		if (canBePlacedOnGround) {
+			selectSquareButton = new PopupButton(0, 0, 200, 30, null, null, "" + square, true, true, square, this);
 
-		selectSquareButton.clickListener = new ClickListener() {
+			selectSquareButton.clickListener = new ClickListener() {
 
-			@Override
-			public void click() {
-				squareSelected(PopupSelectObject.this.square);
-			}
-		};
+				@Override
+				public void click() {
+					editor.placeObjectOnSquare(square);
+				}
+			};
+		}
 		updateObjectsButtons();
 	}
 
@@ -28,9 +32,13 @@ public class PopupSelectObject extends Popup {
 
 		buttons.clear();
 
-		buttons.add(selectSquareButton);
+		if (selectSquareButton != null)
+			buttons.add(selectSquareButton);
 
-		for (int i = 0; i < square.inventory.size(); i++) {
+		final ArrayList<GameObject> gameObjectsThatCanContainOtherObjects = square.inventory
+				.getGameObjectsThatCanContainOtherObjects();
+
+		for (int i = 0; i < gameObjectsThatCanContainOtherObjects.size(); i++) {
 			final int index = i;
 
 			// The line and the highlight are drawn in relation to zoom and
@@ -39,14 +47,15 @@ public class PopupSelectObject extends Popup {
 			// BUT... I dont want the buttons to zoom :P
 
 			final PopupButton objectButton = new PopupButton(0, 30 + i * 30, 200, 30, null, null,
-					"" + square.inventory.get(index), true, true, square.inventory.get(index), this);
+					"" + gameObjectsThatCanContainOtherObjects.get(index), true, true,
+					gameObjectsThatCanContainOtherObjects.get(index), this);
 
 			objectButton.clickListener = new ClickListener() {
 
 				@Override
 				public void click() {
 
-					gameObjectSelected(square.inventory.get(index));
+					editor.placeObjectInInventory(gameObjectsThatCanContainOtherObjects.get(index));
 					// editor.popupSelectObject = null; MAYYBE?
 
 					// editor.clearSelectedObject();

@@ -17,12 +17,13 @@ public class ActorTemplate extends GameObjectTemplate {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory",
-			"fitsInInventory" };
+			"fitsInInventory", "canContainOtherObjects" };
 
 	public ActorTemplate(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
-			Inventory inventory, boolean showInventory, boolean fitsInInventory) {
-		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory);
+			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {
+		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
+				canContainOtherObjects);
 		this.strength = strength;
 		this.dexterity = dexterity;
 		this.intelligence = intelligence;
@@ -36,7 +37,7 @@ public class ActorTemplate extends GameObjectTemplate {
 	public Actor makeCopy(Square square) {
 		Actor actor = new Actor(new String(name), new String(title), actorLevel, (int) totalHealth, strength, dexterity,
 				intelligence, endurance, imageTexturePath, square, travelDistance, inventory.makeCopy(), showInventory,
-				fitsInInventory);
+				fitsInInventory, canContainOtherObjects);
 		actor.faction = Game.level.factions.get(1);
 		return actor;
 

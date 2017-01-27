@@ -1,6 +1,6 @@
 package com.marklynch.ui.button;
 
-import com.marklynch.editor.popup.PopupSelectObject;
+import com.marklynch.editor.popup.Popup;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
@@ -11,29 +11,28 @@ public class PopupButton extends Button {
 	boolean xFromLeft;
 	boolean yFromTop;
 	public Object object;
-	PopupSelectObject popupSelectObject;
+	public Popup popup;
 
 	public PopupButton(float x, float y, float width, float height, String enabledTexturePath,
-			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Object object,
-			PopupSelectObject popupSelectObject) {
+			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Object object, Popup popup) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 		this.object = object;
-		this.popupSelectObject = popupSelectObject;
+		this.popup = popup;
 	}
 
 	@Override
 	public void draw() {
 
-		float realX = x + popupSelectObject.drawPositionX;
-		float realY = y + popupSelectObject.drawPositionY;
+		float realX = x + popup.drawPositionX;
+		float realY = y + popup.drawPositionY;
 
 		if (this.xFromLeft == false)
-			realX = popupSelectObject.drawPositionX - x;
+			realX = popup.drawPositionX - x;
 
 		if (this.yFromTop == false)
-			realY = popupSelectObject.drawPositionY - y;
+			realY = popup.drawPositionY - y;
 
 		if (enabled) {
 			if (down) {
@@ -54,14 +53,14 @@ public class PopupButton extends Button {
 	@Override
 	public boolean calculateIfPointInBoundsOfButton(float mouseX, float mouseY) {
 
-		float realX = x + popupSelectObject.drawPositionX;
-		float realY = y + popupSelectObject.drawPositionY;
+		float realX = x + popup.drawPositionX;
+		float realY = y + popup.drawPositionY;
 
 		if (this.xFromLeft == false)
-			realX = popupSelectObject.drawPositionX - x;
+			realX = popup.drawPositionX - x;
 
 		if (this.yFromTop == false)
-			realY = popupSelectObject.drawPositionY - y;
+			realY = popup.drawPositionY - y;
 
 		if (mouseX > realX && mouseX < realX + width && mouseY > realY && mouseY < realY + height) {
 			return true;

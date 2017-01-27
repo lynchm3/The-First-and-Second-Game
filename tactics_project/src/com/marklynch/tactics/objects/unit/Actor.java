@@ -30,7 +30,7 @@ public class Actor extends GameObject implements Owner {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory",
-			"fitsInInventory" };
+			"fitsInInventory", "canContainOtherObjects" };
 
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT
@@ -67,8 +67,9 @@ public class Actor extends GameObject implements Owner {
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Inventory inventory,
-			boolean showInventory, boolean fitsInInventory) {
-		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory);
+			boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {
+		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
+				canContainOtherObjects);
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -997,6 +998,7 @@ public class Actor extends GameObject implements Owner {
 	public Actor makeCopy(Square square) {
 
 		return new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
-				imageTexturePath, square, travelDistance, inventory, showInventory, fitsInInventory);
+				imageTexturePath, square, travelDistance, inventory, showInventory, fitsInInventory,
+				canContainOtherObjects);
 	}
 }

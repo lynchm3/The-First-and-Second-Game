@@ -51,6 +51,24 @@ public class Inventory {
 		return null;
 	}
 
+	public boolean hasGameObjectsThatCanContainOtherObjects() {
+		// TODO Auto-generated method stubArrayList<GameObject>
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.canContainOtherObjects)
+				return true;
+		}
+		return false;
+	}
+
+	public ArrayList<GameObject> getGameObjectsThatCanContainOtherObjects() {
+		ArrayList<GameObject> gameObjectsThatCanContainOtherObjects = new ArrayList<GameObject>();
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.canContainOtherObjects)
+				gameObjectsThatCanContainOtherObjects.add(gameObject);
+		}
+		return gameObjectsThatCanContainOtherObjects;
+	}
+
 	public Inventory makeCopy() {
 		Inventory copy = new Inventory();
 		for (GameObject gameObject : gameObjects) {
