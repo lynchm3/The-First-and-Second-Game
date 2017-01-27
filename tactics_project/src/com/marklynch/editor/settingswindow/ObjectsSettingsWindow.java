@@ -1,16 +1,32 @@
 package com.marklynch.editor.settingswindow;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.Editor.EDITOR_STATE;
 import com.marklynch.editor.InstanceSelectionWindow;
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectTemplate;
+import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
 public class ObjectsSettingsWindow extends SettingsWindow {
+
+	public enum OBJECT_SETTINGS_FILTER {
+		ALL, ACTORS, OBJECTS, WEAPONS
+	}
+
+	public OBJECT_SETTINGS_FILTER objectSettingsFilter = OBJECT_SETTINGS_FILTER.ALL;
+
 	public SettingsWindowButton addObjectsButton;
+	public SettingsWindowButton allFilterButton;
+	public SettingsWindowButton actorsFilterButton;
+	public SettingsWindowButton objectsFilterButton;
+	public SettingsWindowButton weaponsFilterButton;
 
 	public ObjectsSettingsWindow(float width, Editor editor) {
 		super(width, editor);
@@ -48,19 +64,118 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 				ObjectsSettingsWindow.this.editor.instanceSelectionWindow = new InstanceSelectionWindow<GameObjectTemplate>(
 						ObjectsSettingsWindow.this.editor.gameObjectTemplates, ObjectsSettingsWindow.this.editor,
 						"Select a Template");
-				// addObjectsButton.down = !addObjectsButton.down;
-				// if (addObjectsButton.down) {
-				// ObjectsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
-				// ObjectsSettingsWindow.this.editor.clearSelectedObject();
-				// addObjectsButton.down = true;
-				// ObjectsSettingsWindow.this.editor.editorState =
-				// EDITOR_STATE.ADD_OBJECT;
-				// ObjectsSettingsWindow.this.editor.toast = new Toast(200, 50,
-				// "Select location to add object");
-				// } else {
-				// ObjectsSettingsWindow.this.editor.editorState =
-				// EDITOR_STATE.DEFAULT;
-				// }
+			}
+		};
+
+		allFilterButton = new SettingsWindowButton(0, 130, 50, 30, "ALL", true, true) {
+
+			@Override
+			public void keyTyped(char character) {
+			}
+
+			@Override
+			public void enterTyped() {
+			}
+
+			@Override
+			public void backTyped() {
+			}
+
+			@Override
+			public void depress() {
+			}
+
+		};
+
+		allFilterButton.clickListener = new ClickListener() {
+
+			@Override
+			public void click() {
+				objectSettingsFilter = OBJECT_SETTINGS_FILTER.ALL;
+			}
+		};
+
+		actorsFilterButton = new SettingsWindowButton(50, 130, 50, 30, "ACTORS", true, true) {
+
+			@Override
+			public void keyTyped(char character) {
+			}
+
+			@Override
+			public void enterTyped() {
+			}
+
+			@Override
+			public void backTyped() {
+			}
+
+			@Override
+			public void depress() {
+			}
+
+		};
+
+		actorsFilterButton.clickListener = new ClickListener() {
+
+			@Override
+			public void click() {
+				objectSettingsFilter = OBJECT_SETTINGS_FILTER.ACTORS;
+			}
+		};
+
+		objectsFilterButton = new SettingsWindowButton(100, 130, 50, 30, "OBJECTS", true, true) {
+
+			@Override
+			public void keyTyped(char character) {
+			}
+
+			@Override
+			public void enterTyped() {
+			}
+
+			@Override
+			public void backTyped() {
+			}
+
+			@Override
+			public void depress() {
+			}
+
+		};
+
+		objectsFilterButton.clickListener = new ClickListener() {
+
+			@Override
+			public void click() {
+				objectSettingsFilter = OBJECT_SETTINGS_FILTER.OBJECTS;
+			}
+		};
+
+		weaponsFilterButton = new SettingsWindowButton(150, 130, 50, 30, "WEAPONS", true, true) {
+
+			@Override
+			public void keyTyped(char character) {
+			}
+
+			@Override
+			public void enterTyped() {
+			}
+
+			@Override
+			public void backTyped() {
+			}
+
+			@Override
+			public void depress() {
+			}
+
+		};
+
+		weaponsFilterButton.clickListener = new ClickListener() {
+
+			@Override
+			public void click() {
+				objectSettingsFilter = OBJECT_SETTINGS_FILTER.WEAPONS;
 			}
 		};
 		updateObjectsButtons();
@@ -71,11 +186,51 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 		buttons.clear();
 
 		buttons.add(addObjectsButton);
+		buttons.add(allFilterButton);
+		buttons.add(actorsFilterButton);
+		buttons.add(objectsFilterButton);
+		buttons.add(weaponsFilterButton);
+
+		ArrayList<GameObject> objects = new ArrayList<GameObject>();
+		if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.ALL) {
+			objects.addAll(Game.level.inanimateObjects);
+			allFilterButton.down = true;
+			actorsFilterButton.down = false;
+			objectsFilterButton.down = false;
+			weaponsFilterButton.down = false;
+		} else if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.ACTORS) {
+			for (GameObject gameObject : Game.level.inanimateObjects) {
+				if (gameObject instanceof Actor)
+					objects.add(gameObject);
+			}
+			allFilterButton.down = false;
+			actorsFilterButton.down = true;
+			objectsFilterButton.down = false;
+			weaponsFilterButton.down = false;
+		} else if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.OBJECTS) {
+			for (GameObject gameObject : Game.level.inanimateObjects) {
+				if (!(gameObject instanceof Actor) && !(gameObject instanceof Weapon))
+					objects.add(gameObject);
+			}
+			allFilterButton.down = false;
+			actorsFilterButton.down = false;
+			objectsFilterButton.down = true;
+			weaponsFilterButton.down = false;
+		} else if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.WEAPONS) {
+			for (GameObject gameObject : Game.level.inanimateObjects) {
+				if (gameObject instanceof Weapon)
+					objects.add(gameObject);
+			}
+			allFilterButton.down = false;
+			actorsFilterButton.down = false;
+			objectsFilterButton.down = false;
+			weaponsFilterButton.down = true;
+		}
 
 		for (int i = 0; i < Game.level.inanimateObjects.size(); i++) {
 			final int index = i;
 
-			final SettingsWindowButton objectButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
+			final SettingsWindowButton objectButton = new SettingsWindowButton(0, 230 + i * 30, 200, 30,
 					Game.level.inanimateObjects.get(index), true, true) {
 
 				@Override
