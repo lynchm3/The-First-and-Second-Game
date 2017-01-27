@@ -24,6 +24,9 @@ public class TODO {
 
 	// Put EDITOR STATE somewhere on screen
 
+	// Actors that can fit in inventory? Like a fairy or demon or something, and
+	// u can let it out and it'll do stuff...
+
 	// I wonder if i can build in a working economy, google what games have
 	// attempted tis b4, probably just dwarf fortress in any meaningful way...
 

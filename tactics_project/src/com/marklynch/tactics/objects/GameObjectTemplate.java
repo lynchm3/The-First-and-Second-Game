@@ -5,14 +5,14 @@ import com.marklynch.tactics.objects.level.Square;
 public class GameObjectTemplate extends GameObject {
 
 	public GameObjectTemplate(String name, int health, String imagePath, Square squareGameObjectIsOn,
-			Inventory inventory, boolean showInventory, boolean canShareSquare) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare);
+			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory) {
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory);
 	}
 
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare);
+				showInventory, canShareSquare, fitsInInventory);
 	}
 
 }

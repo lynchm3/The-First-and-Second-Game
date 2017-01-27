@@ -29,7 +29,8 @@ import mdesl.graphics.Color;
 public class Actor extends GameObject implements Owner {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
-			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory" };
+			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory",
+			"fitsInInventory" };
 
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT
@@ -66,8 +67,8 @@ public class Actor extends GameObject implements Owner {
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Inventory inventory,
-			boolean showInventory) {
-		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false);
+			boolean showInventory, boolean fitsInInventory) {
+		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory);
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -996,6 +997,6 @@ public class Actor extends GameObject implements Owner {
 	public Actor makeCopy(Square square) {
 
 		return new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
-				imageTexturePath, square, travelDistance, inventory, showInventory);
+				imageTexturePath, square, travelDistance, inventory, showInventory, fitsInInventory);
 	}
 }

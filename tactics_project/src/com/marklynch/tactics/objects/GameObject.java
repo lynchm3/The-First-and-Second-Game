@@ -24,7 +24,7 @@ import mdesl.graphics.Texture;
 public class GameObject {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
-			"owner", "inventory", "showInventory", "canShareSquare" };
+			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory" };
 	public String guid = UUID.randomUUID().toString();
 
 	public String name = "";
@@ -36,6 +36,7 @@ public class GameObject {
 	public Inventory inventory;
 	public boolean showInventory;
 	public boolean canShareSquare;
+	public boolean fitsInInventory;
 
 	public transient boolean hasAttackedThisTurn = false;
 
@@ -73,7 +74,7 @@ public class GameObject {
 	public Inventory inventoryThatHoldsThisObject;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-			boolean showInventory, boolean canShareSquare) {
+			boolean showInventory, boolean canShareSquare, boolean fitsInInventory) {
 		super();
 		this.name = name;
 		this.totalHealth = health;
@@ -82,6 +83,7 @@ public class GameObject {
 		this.inventory = inventory;
 		this.showInventory = showInventory;
 		this.canShareSquare = canShareSquare;
+		this.fitsInInventory = fitsInInventory;
 
 		System.out.println("squareGameObjectIsOn = " + squareGameObjectIsOn);
 
@@ -354,7 +356,7 @@ public class GameObject {
 
 	public GameObject makeCopy(Square square) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare);
+				showInventory, canShareSquare, fitsInInventory);
 	}
 
 	public void update(int delta) {
