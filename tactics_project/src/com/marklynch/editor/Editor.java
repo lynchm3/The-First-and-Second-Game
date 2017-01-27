@@ -39,6 +39,7 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.tactics.objects.unit.ActorTemplate;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject;
 import com.marklynch.tactics.objects.weapons.Weapon;
@@ -148,13 +149,21 @@ public class Editor {
 		colors.add(new Color(Color.CYAN));
 		colors.add(new Color(Color.ORANGE));
 
-		// LOAD Weapons// Weapons
 		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png", 100, null);
 		gameObjectTemplates.add(weaponTemplate0);
 		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png", 100, null);
 		gameObjectTemplates.add(weaponTemplate1);
 		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png", 100, null);
 		gameObjectTemplates.add(weaponTemplate2);
+
+		GameObjectTemplate gameObjectTemplate = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png", null,
+				new Inventory(), true, false);
+		gameObjectTemplates.add(gameObjectTemplate);
+
+		ActorTemplate actorTemplate = new ActorTemplate("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", null, 4,
+				new Inventory(), true);
+		gameObjectTemplates.add(actorTemplate);
+
 		for (int i = 0; i < gameObjectTemplates.size(); i++) {
 			gameObjectTemplates.get(i).loadImages();
 		}
@@ -439,11 +448,6 @@ public class Editor {
 				new Inventory(), true, false);
 		Game.level.inanimateObjects.add(gameObject);
 		Game.level.squares[0][3].inventory.add(gameObject);
-
-		// Add a game object templates
-		GameObjectTemplate gameObjectTemplate = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png", null,
-				new Inventory(), true, false);
-		gameObjectTemplates.add(gameObjectTemplate);
 
 		// Add factions
 		Game.level.factions

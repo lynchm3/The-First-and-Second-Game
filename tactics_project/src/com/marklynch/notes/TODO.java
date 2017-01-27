@@ -3,7 +3,7 @@ package com.marklynch.notes;
 public class TODO {
 
 	// Take away the ability to put an actor on a no share square, i already did
-	// it for objects. ACTUALLY...
+	// it for objects. ACTUALLY... lets do actor templates to start with
 
 	// GameObject.canShareSquare
 

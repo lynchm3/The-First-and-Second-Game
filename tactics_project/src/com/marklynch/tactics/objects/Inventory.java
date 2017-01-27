@@ -56,7 +56,7 @@ public class Inventory {
 		for (GameObject gameObject : gameObjects) {
 			copy.add(gameObject.makeCopy(null));
 		}
-		return null;
+		return copy;
 	}
 
 }
