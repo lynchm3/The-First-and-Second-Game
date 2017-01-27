@@ -7,14 +7,13 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 
 public class Weapon extends WeaponTemplate {
-	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
-			"owner" };
 
 	public Owner owner;
 
 	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, Owner owner,
-			float health, Square squareGameObjectIsOn) {
-		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn);
+			float health, Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects) {
+		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
+				canContainOtherObjects);
 
 		this.owner = owner;
 	}
