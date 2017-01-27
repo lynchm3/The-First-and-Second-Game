@@ -31,7 +31,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 	public ObjectsSettingsWindow(float width, Editor editor) {
 		super(width, editor);
 
-		addObjectsButton = new SettingsWindowButton(0, 100, 200, 30, "ADD OBJECTS", true, true) {
+		addObjectsButton = new SettingsWindowButton(0, 100, 200, 30, "ADD ACTORS/OBJECTS", true, true) {
 
 			@Override
 			public void keyTyped(char character) {

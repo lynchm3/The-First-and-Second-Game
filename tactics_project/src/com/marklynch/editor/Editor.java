@@ -213,7 +213,7 @@ public class Editor {
 		};
 		tabs.add(squaresTabButton);
 
-		tabText = "OBJECTS";
+		tabText = "ACTORS + OBJECTS";
 		objectsTabButton = new LevelButton(210, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
 		objectsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -227,6 +227,21 @@ public class Editor {
 			}
 		};
 		tabs.add(objectsTabButton);
+
+		tabText = "TEMPLATES";
+		templatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		templatesTabButton.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				clearSelectedObject();
+				depressButtonsSettingsAndDetailsButtons();
+				depressTabButtons();
+				templatesTabButton.down = true;
+				settingsWindow = weaponTemplatesSettingsWindow;
+				settingsWindow.update();
+			}
+		};
+		tabs.add(templatesTabButton);
 
 		tabText = "FACTIONS";
 		factionsTabButton = new LevelButton(430, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
@@ -242,21 +257,6 @@ public class Editor {
 			}
 		};
 		tabs.add(factionsTabButton);
-
-		tabText = "OBJECT TEMPLATES";
-		templatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
-		templatesTabButton.clickListener = new ClickListener() {
-			@Override
-			public void click() {
-				clearSelectedObject();
-				depressButtonsSettingsAndDetailsButtons();
-				depressTabButtons();
-				templatesTabButton.down = true;
-				settingsWindow = weaponTemplatesSettingsWindow;
-				settingsWindow.update();
-			}
-		};
-		tabs.add(templatesTabButton);
 
 		tabText = "COLORS";
 		colorsTabButton = new LevelButton(690, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
