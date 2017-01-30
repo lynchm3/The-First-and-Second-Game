@@ -541,6 +541,14 @@ public class Editor {
 	public void drawOverlay() {
 
 		// draw highlight on selected object
+
+		if (Game.inventoryHoveringOver == null && Game.inventorySquareMouseIsOver != null) {
+			Game.inventorySquareMouseIsOver.drawCursor();
+		} else if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null
+				&& Game.squareMouseIsOver != null) {
+			Game.squareMouseIsOver.drawCursor();
+		}
+
 		if (selectedGameObject != null && selectedGameObject.squareGameObjectIsOn != null) {
 			selectedGameObject.squareGameObjectIsOn.drawHighlight();
 		}

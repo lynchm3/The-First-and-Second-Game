@@ -45,7 +45,7 @@ public class Level {
 	public transient ArrayList<Button> buttons;
 
 	public transient boolean showTurnNotification = true;
-	public transient boolean waitingForPlayerClick = true;
+	public transient boolean waitingForPlayerClickToBeginTurn = true;
 
 	public transient boolean ended = false;
 
@@ -176,7 +176,7 @@ public class Level {
 		}
 
 		showTurnNotification = true;
-		waitingForPlayerClick = true;
+		waitingForPlayerClickToBeginTurn = true;
 	}
 
 	public void loadImages() {
@@ -278,8 +278,14 @@ public class Level {
 			}
 		}
 
-		if (Game.buttonHoveringOver == null && Game.squareMouseIsOver != null)
+		// if (Game.inventoryHoveringOver == null &&
+		// Game.inventorySquareMouseIsOver != null) {
+		// Game.inventorySquareMouseIsOver.drawCursor();
+		// } else
+		//
+		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 			Game.squareMouseIsOver.drawCursor();
+		}
 
 		// GL11.glColor4f;
 		// font60.drawString(0, 0, "YOUR", new Color(1.0f, 0.5f, 0.5f, 0.75f));
@@ -407,6 +413,17 @@ public class Level {
 		return null;
 	}
 
+	public Inventory getInventoryFromMousePosition(float mouseX, float mouseY, float alteredMouseX,
+			float alteredMouseY) {
+
+		for (Inventory inventory : this.openInventories) {
+			if (inventory.calculateIfPointInBoundsOfInventory(mouseX, Game.windowHeight - mouseY))
+				return inventory;
+		}
+
+		return null;
+	}
+
 	public void endTurn() {
 
 		this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving, " ended turn " + this.turn }));
@@ -437,7 +454,7 @@ public class Level {
 		}
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		if (currentFactionMovingIndex == 0)
-			waitingForPlayerClick = true;
+			waitingForPlayerClickToBeginTurn = true;
 
 		showTurnNotification();
 

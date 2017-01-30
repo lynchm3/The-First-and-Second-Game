@@ -91,12 +91,22 @@ public class UserInputLevel {
 			}
 		}
 
-		// Getting button that we have clicked, if any
+		// Getting button that the mouse is over, if any
 		Game.buttonHoveringOver = null;
 		if (dragging == false) {
 			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
 		}
+
+		// Getting inventory that the mouse is over, if any
+		Game.inventoryHoveringOver = null;
+		if (dragging == false) {
+			Game.inventoryHoveringOver = Game.level.getInventoryFromMousePosition(Mouse.getX(), Mouse.getY(),
+					mouseXTransformed, mouseYTransformed);
+
+		}
+
+		System.out.println("Game.inventoryHoveringOver = " + Game.inventoryHoveringOver);
 
 		// Path highlights
 		if (scriptInterceptsClick == false && Game.buttonHoveringOver == null && Game.level.activeActor != null
@@ -112,9 +122,11 @@ public class UserInputLevel {
 		// If we've clicked... where are we putting it?
 		if (scriptInterceptsClick && mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
 			Game.level.script.click();
-		} else if (Game.level.waitingForPlayerClick == true && mouseButtonStateLeft == true && !Mouse.isButtonDown(0)
-				&& dragging == false) {
-			Game.level.waitingForPlayerClick = false;
+		} else if (Game.level.waitingForPlayerClickToBeginTurn == true && mouseButtonStateLeft == true
+				&& !Mouse.isButtonDown(0) && dragging == false) {
+			// This is the "Your turn, click to continue" @ the start of every
+			// level
+			Game.level.waitingForPlayerClickToBeginTurn = false;
 			Game.level.showTurnNotification = false;
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
 				&& Game.buttonHoveringOver != null && Game.level.currentFactionMovingIndex == 0) {

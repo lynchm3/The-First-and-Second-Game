@@ -2,6 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Need some sort of clean window system, its getting gross
+
+	// Need to draw highlight and cursor and move line for inventory
+
+	// LevelInput and EditorInput can surely be merged? subclass at leats,
+	// theyre fucking gross
+
 	// Split inventory and ground... subclass
 
 	// Put the level in a smaller window when the editor is on.....

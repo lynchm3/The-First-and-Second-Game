@@ -2,12 +2,6 @@ package com.marklynch;
 
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.glViewport;
-import mdesl.graphics.SpriteBatch;
-import mdesl.graphics.Texture;
-import mdesl.graphics.TextureRegion;
-import mdesl.graphics.glutils.ShaderProgram;
-import mdesl.graphics.text.BitmapFont;
-import mdesl.test.Util;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
@@ -17,9 +11,18 @@ import org.lwjgl.opengl.GL11;
 
 import com.marklynch.editor.Editor;
 import com.marklynch.graphics.ShadowLight;
+import com.marklynch.tactics.objects.Inventory;
+import com.marklynch.tactics.objects.InventorySquare;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.ui.button.Button;
+
+import mdesl.graphics.SpriteBatch;
+import mdesl.graphics.Texture;
+import mdesl.graphics.TextureRegion;
+import mdesl.graphics.glutils.ShaderProgram;
+import mdesl.graphics.text.BitmapFont;
+import mdesl.test.Util;
 
 public class Game {
 
@@ -68,6 +71,9 @@ public class Game {
 	public static SpriteBatch normalBatch;
 
 	public static Button buttonHoveringOver = null;
+
+	public static Inventory inventoryHoveringOver = null;
+	public static InventorySquare inventorySquareMouseIsOver = null;
 
 	public void start() {
 

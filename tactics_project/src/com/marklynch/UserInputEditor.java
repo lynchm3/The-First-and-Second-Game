@@ -7,6 +7,8 @@ import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.unit.Path;
 
 public class UserInputEditor {
+	public static float mouseXinPixels;
+	public static float mouseYinPixels;
 	public static float mouseDownX = -1;
 	public static float mouseDownY = -1;
 	public static float mouseLastX = -1;
@@ -66,8 +68,8 @@ public class UserInputEditor {
 	public static void userInput(int delta2, Editor editor) {
 
 		// Getting what square pixel the mouse is on
-		float mouseXinPixels = Mouse.getX();
-		float mouseYinPixels = Mouse.getY();
+		mouseXinPixels = Mouse.getX();
+		mouseYinPixels = Mouse.getY();
 
 		// Transformed mouse coords
 
@@ -127,11 +129,25 @@ public class UserInputEditor {
 			Game.buttonHoveringOver = editor.getButtonFromMousePosition(Mouse.getX(), Mouse.getY());
 		}
 
+		// Getting inventory that the mouse is over, if any
+		Game.inventoryHoveringOver = null;
+		// if (dragging == false) {
+		Game.inventoryHoveringOver = Game.level.getInventoryFromMousePosition(Mouse.getX(), Mouse.getY(),
+				mouseXTransformed, mouseYTransformed);
+		if (Game.inventoryHoveringOver != null)
+			Game.inventoryHoveringOver.userInput();
+
+		// }
+
 		// left click logic
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
 				&& Game.buttonHoveringOver != null) {
 			// click button
 			Game.buttonHoveringOver.click();
+		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
+				&& Game.inventoryHoveringOver != null) {
+			// click button
+			// Game.inventoryHoveringOver.click();
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
 				&& Game.squareMouseIsOver != null) {
 			// click square/game object if we're on one
