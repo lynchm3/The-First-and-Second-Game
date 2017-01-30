@@ -2,6 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Split inventory and ground... subclass
+
+	// Put the level in a smaller window when the editor is on.....
+
+	// make the background a tile set of mountains, make it move and zoom
+	// correctly...
+
 	// Inventory to be drawn + controlled like th level is.
 
 	// Skill that lets you know what people have in their inventory!!(perception

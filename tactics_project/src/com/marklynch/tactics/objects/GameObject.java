@@ -171,8 +171,12 @@ public class GameObject {
 
 			}
 		}
+	}
 
-		inventory.draw();
+	public void drawStaticUI() {
+
+		// inventory.drawStaticUI();
+
 	}
 
 	public boolean checkIfDestroyed() {

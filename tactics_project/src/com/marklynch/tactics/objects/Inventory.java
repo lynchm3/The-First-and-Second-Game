@@ -2,11 +2,15 @@ package com.marklynch.tactics.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
+
 public class Inventory {
 
 	public InventorySquare[][] inventorySquares = new InventorySquare[5][5];
 
 	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+
+	private boolean isOpen = false;
 
 	public Inventory() {
 		for (int i = 0; i < inventorySquares.length; i++) {
@@ -104,12 +108,28 @@ public class Inventory {
 
 	}
 
-	public void draw() {
+	public void drawStaticUI() {
+		// if (isOpen) {
 		for (int i = 0; i < inventorySquares.length; i++) {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
-				inventorySquares[i][j].draw();
+				inventorySquares[i][j].drawStaticUI();
 			}
 		}
+		// }
+	}
+
+	public boolean isOpen() {
+		return isOpen;
+	}
+
+	public void open() {
+		this.isOpen = true;
+		Game.level.openInventories.add(this);
+	}
+
+	public void close() {
+		this.isOpen = false;
+		Game.level.openInventories.remove(this);
 	}
 
 }

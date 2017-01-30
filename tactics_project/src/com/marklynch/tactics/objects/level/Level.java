@@ -51,6 +51,7 @@ public class Level {
 
 	public Script script;
 	public ArrayList<AIRoutine> ais = new ArrayList<AIRoutine>();
+	public ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -298,6 +299,29 @@ public class Level {
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
 		Game.activeBatch.updateUniforms();
+
+		// Static UI (not zoomed)
+		for (GameObject gameObject : inanimateObjects) {
+			gameObject.drawStaticUI();
+		}
+
+		// Actors 2
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				actor.drawStaticUI();
+			}
+		}
+
+		// System.out.println("drawing openInventories");
+		for (Inventory inventory : openInventories) {
+
+			// System.out.println("inventory.drawStaticUI();");
+			inventory.drawStaticUI();
+		}
+
+		// if (Game.buttonHoveringOver == null && Game.squareMouseIsOver !=
+		// null)
+		// Game.squareMouseIsOver.drawCursor();
 
 		// Dialogs
 		for (int i = 0; i < width; i++) {

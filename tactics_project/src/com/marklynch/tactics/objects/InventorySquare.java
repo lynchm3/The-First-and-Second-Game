@@ -39,7 +39,7 @@ public class InventorySquare {
 
 	}
 
-	public void draw() {
+	public void drawStaticUI() {
 
 		// square texture
 		int squarePositionX = x * (int) Game.SQUARE_WIDTH;

@@ -7,7 +7,6 @@ import java.util.Vector;
 import com.marklynch.Game;
 import com.marklynch.editor.Editor.EDITOR_STATE;
 import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
@@ -177,9 +176,7 @@ public class AttributesDialog {
 
 		}
 
-		if (object instanceof Inventory) {
-
-		} else if (object instanceof GameObject) {
+		if (object instanceof GameObject) {
 			final GameObject gameObject = (GameObject) object;
 			final AtributesWindowButton deleteButton = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30,
 					gameObject, "delete", true, true, this, 0);

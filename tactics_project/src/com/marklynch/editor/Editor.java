@@ -983,7 +983,10 @@ public class Editor {
 				type = field.getType();
 			}
 
-			if (type.isAssignableFrom(Faction.class)) {
+			if (type.isAssignableFrom(Inventory.class)) {
+				// faction
+				((GameObject) objectToEdit).inventory.open();
+			} else if (type.isAssignableFrom(Faction.class)) {
 				// faction
 				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.factions, false, this, objectToEdit,
 						"Select a Faction");
