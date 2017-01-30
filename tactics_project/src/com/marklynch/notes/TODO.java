@@ -2,7 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Skill that lets you know what people have in their inventory!!
+	// Inventory to be drawn + controlled like th level is.
+
+	// Skill that lets you know what people have in their inventory!!(perception
+	// tree?)
 
 	// Access inventory and move objects out of the inventory
 

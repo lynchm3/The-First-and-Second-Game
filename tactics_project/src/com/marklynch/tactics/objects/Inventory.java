@@ -4,7 +4,26 @@ import java.util.ArrayList;
 
 public class Inventory {
 
+	public InventorySquare[][] inventorySquares = new InventorySquare[5][5];
+
 	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+
+	public Inventory() {
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+				inventorySquares[i][j] = new InventorySquare(i, j, "grass.png", this);
+			}
+		}
+
+	}
+
+	public void loadImages() {
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+				inventorySquares[i][j].loadImages();
+			}
+		}
+	}
 
 	public GameObject get(int i) {
 		return gameObjects.get(i);
@@ -75,6 +94,22 @@ public class Inventory {
 			copy.add(gameObject.makeCopy(null));
 		}
 		return copy;
+	}
+
+	public void drawBackground() {
+
+	}
+
+	public void drawForeground() {
+
+	}
+
+	public void draw() {
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+				inventorySquares[i][j].draw();
+			}
+		}
 	}
 
 }
