@@ -913,6 +913,8 @@ public class Actor extends GameObject implements Owner {
 			}
 
 		}
+
+		inventory.draw();
 	}
 
 	public Vector<Float> calculateIdealDistanceFrom(GameObject target) {

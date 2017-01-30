@@ -2,6 +2,7 @@ package com.marklynch.tactics.objects.weapons;
 
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectTemplate;
+import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.level.Square;
 
 public class WeaponTemplate extends GameObjectTemplate {
@@ -17,7 +18,7 @@ public class WeaponTemplate extends GameObjectTemplate {
 	public WeaponTemplate(String name, float damage, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects) {
 
-		super(name, (int) health, imagePath, squareGameObjectIsOn, null, false, true, fitsInInventory,
+		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
 				canContainOtherObjects);
 
 		this.damage = damage;

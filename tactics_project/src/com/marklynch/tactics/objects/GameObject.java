@@ -116,6 +116,7 @@ public class GameObject {
 		grassNormalTexture = getGlobalImage("grass_NRM.png");
 		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png");
 		screamAudio = ResourceUtils.getGlobalSound("scream.wav");
+		inventory.loadImages();
 
 	}
 
@@ -170,6 +171,8 @@ public class GameObject {
 
 			}
 		}
+
+		inventory.draw();
 	}
 
 	public boolean checkIfDestroyed() {
