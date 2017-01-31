@@ -26,8 +26,8 @@ public class Popup {
 
 	public void draw() {
 
-		int squarePositionX = square.x * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = square.y * (int) Game.SQUARE_HEIGHT;
+		int squarePositionX = square.xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = square.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 		drawPositionX = (Game.windowWidth / 2) + (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.dragX));
 		drawPositionY = (Game.windowHeight / 2) + (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.dragY));

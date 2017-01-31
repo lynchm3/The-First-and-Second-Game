@@ -40,8 +40,8 @@ public class Cat extends Decoration {
 		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
 				// Draw object
-				int actorPositionXInPixels = actor.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
-				int actorPositionYInPixels = actor.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
+				int actorPositionXInPixels = actor.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+				int actorPositionYInPixels = actor.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 				double x2 = actorPositionXInPixels + 64;
 				double y2 = actorPositionYInPixels + 64;
 				double distanceToActor = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));

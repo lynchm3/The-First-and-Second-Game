@@ -172,7 +172,7 @@ public class Actor extends GameObject implements Owner {
 
 	public int weaponDistanceTo(Square square) {
 
-		return Math.abs(square.x - this.squareGameObjectIsOn.x) + Math.abs(square.y - this.squareGameObjectIsOn.y);
+		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid) + Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
 
 	}
 
@@ -329,12 +329,12 @@ public class Actor extends GameObject implements Owner {
 				float weaponAreaPositionYInPixels = 0;
 
 				if (this.faction == Game.level.factions.get(0)) {
-					weaponAreaPositionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
-					weaponAreaPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
+					weaponAreaPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+					weaponAreaPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 				} else {
-					weaponAreaPositionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH
+					weaponAreaPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
 							+ Game.SQUARE_WIDTH - weaponAreaWidthInPixels;
-					weaponAreaPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
+					weaponAreaPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 				}
 
@@ -374,8 +374,8 @@ public class Actor extends GameObject implements Owner {
 			// and short attack animation where he just bumps in the general
 			// direction... based on a setting
 
-			int actorPositionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
-			int actorPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
+			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 			// body shoulder coords, arm shoulder coords
 			int armPositionXInPixels = actorPositionXInPixels + 65 - 11;
@@ -453,13 +453,13 @@ public class Actor extends GameObject implements Owner {
 					float weaponIconPositionYInPixels = 0;
 
 					if (this.faction == Game.level.factions.get(0)) {
-						weaponIconPositionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
-						weaponIconPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT
+						weaponIconPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+						weaponIconPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
 								+ (i * weaponHeightInPixels);
 					} else {
-						weaponIconPositionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH
+						weaponIconPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
 								+ Game.SQUARE_WIDTH - weaponWidthInPixels;
-						weaponIconPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT
+						weaponIconPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
 								+ (i * weaponHeightInPixels);
 
 					}
@@ -472,9 +472,9 @@ public class Actor extends GameObject implements Owner {
 			// Draw actor level text
 			String actorLevelString = "L" + this.actorLevel;
 			float actorLevelWidthInPixels = Game.font.getWidth(actorLevelString);
-			float actorLevelPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+			float actorLevelPositionXInPixels = (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH)
 					+ Game.SQUARE_WIDTH - actorLevelWidthInPixels - Game.SQUARE_WIDTH / 5;
-			float actorLevelPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
+			float actorLevelPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 			TextUtils.printTextWithImages(new Object[] { actorLevelString }, actorLevelPositionXInPixels,
 					actorLevelPositionYInPixels, Integer.MAX_VALUE, true);
@@ -483,11 +483,11 @@ public class Actor extends GameObject implements Owner {
 			float moveAttackStatusWidthInPixels = Game.font.getWidth("MA");// Game.SQUARE_WIDTH
 			float attackStatusWidthInPixels = Game.font.getWidth("A");// Game.SQUARE_WIDTH
 
-			float moveAttackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+			float moveAttackStatusPositionXInPixels = (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH)
 					+ Game.SQUARE_WIDTH - moveAttackStatusWidthInPixels - Game.SQUARE_WIDTH / 5;
-			float attackStatusPositionXInPixels = (this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH)
+			float attackStatusPositionXInPixels = (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH)
 					+ Game.SQUARE_WIDTH - attackStatusWidthInPixels - Game.SQUARE_WIDTH / 5;
-			float moveAttackStatusPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT
+			float moveAttackStatusPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
 					+ Game.SQUARE_HEIGHT - 14;
 
 			if (hasAttackedThisTurn == false) {
@@ -513,9 +513,9 @@ public class Actor extends GameObject implements Owner {
 		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		if (this.showHoverFightPreview) {
 
-			float hoverFightPreviewPositionXInPixels = (hoverFightPreviewDefender.squareGameObjectIsOn.x
+			float hoverFightPreviewPositionXInPixels = (hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid
 					* (int) Game.SQUARE_WIDTH);
-			float hoverFightPreviewPositionYInPixels = hoverFightPreviewDefender.squareGameObjectIsOn.y
+			float hoverFightPreviewPositionYInPixels = hoverFightPreviewDefender.squareGameObjectIsOn.yInGrid
 					* (int) Game.SQUARE_HEIGHT;
 
 			// // BG white
@@ -579,7 +579,7 @@ public class Actor extends GameObject implements Owner {
 						- attackerPotentialHealthLossWidth;
 
 				// Attacker Positions of bars
-				float attackerTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+				float attackerTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 						- 10;
 
 				float attackerCurrentHealthX = attackerTotalHealthX;
@@ -656,15 +656,15 @@ public class Actor extends GameObject implements Owner {
 
 				// attacker weapon
 				TextureUtils.drawTexture(this.hoverFightPreviewFights.get(i).attackerWeapon.imageTexture,
-						this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) - 32,
-						this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH),
+						this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) - 32,
+						this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH),
 						previewPositionYs[i] - 2, previewPositionYs[i] + 30);
 
 				// attacker hit chance
 
 				TextUtils.printTextWithImages(
 						new Object[] { this.hoverFightPreviewFights.get(i).chanceOfHittingDefender + "%" },
-						this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH),
+						this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH),
 						previewPositionYs[i], Integer.MAX_VALUE, true);
 
 				// attacker damage
@@ -674,25 +674,25 @@ public class Actor extends GameObject implements Owner {
 								this.hoverFightPreviewFights.get(i).damageTakenByDefenderMultiplier);
 
 				TextUtils.printTextWithImages(new Object[] { attackerDamageString },
-						this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH),
+						this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH),
 						previewPositionYs[i] + 14, Integer.MAX_VALUE, true);
 
 				// attacker weapon
 				TextureUtils.drawTexture(this.hoverFightPreviewFights.get(i).attackerWeapon.imageTexture,
-						this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) - 32,
-						this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH),
+						this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) - 32,
+						this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH),
 						previewPositionYs[i] - 2, previewPositionYs[i] + 30);
 
 				// attacker advantage/disadvantage
 				if (this.hoverFightPreviewFights.get(i).advantage == Fight.Advantage.ATTACKER_ADVANTAGE) {
 					TextureUtils.drawTexture(upTexture,
-							this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) - 20,
-							this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) - 4,
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) - 20,
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) - 4,
 							previewPositionYs[i] + 14, previewPositionYs[i] + 30);
 				} else if (this.hoverFightPreviewFights.get(i).advantage == Fight.Advantage.DEFENDER_ADVANTAGE) {
 					TextureUtils.drawTexture(downTexture,
-							this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) - 20,
-							this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) - 4,
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) - 20,
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) - 4,
 							previewPositionYs[i] + 14, previewPositionYs[i] + 30);
 				}
 
@@ -700,8 +700,8 @@ public class Actor extends GameObject implements Owner {
 				if (hoverFightPreviewFights
 						.get(i).damageTakenByAttacker >= hoverFightPreviewFights.get(i).attacker.remainingHealth) {
 					TextureUtils.drawTexture(skullTexture, attackerHealthLossAlpha,
-							hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) - 48,
-							this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) - 16,
+							hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) - 48,
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) - 16,
 							previewPositionYs[i] - 2, previewPositionYs[i] + 30);
 				}
 
@@ -723,7 +723,7 @@ public class Actor extends GameObject implements Owner {
 								/ this.hoverFightPreviewDefender.totalHealth);
 
 				// Defender Positions of bars
-				float defenderTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.x * Game.SQUARE_WIDTH
+				float defenderTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH
 						+ Game.SQUARE_WIDTH / 2f;
 
 				float defenderCurrentHealthX = defenderTotalHealthX + defenderCurrentMissingHealthWidth;
@@ -796,7 +796,7 @@ public class Actor extends GameObject implements Owner {
 					// defender hit chance
 					TextUtils.printTextWithImages(
 							new Object[] { this.hoverFightPreviewFights.get(i).chanceOfHittingAttacker + "%" },
-							this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 									+ (Game.SQUARE_WIDTH)
 									- Game.font.getWidth(
 											this.hoverFightPreviewFights.get(i).chanceOfHittingAttacker + "%"),
@@ -808,16 +808,16 @@ public class Actor extends GameObject implements Owner {
 							+ FormattingUtils.formatFloatRemoveUnneccessaryDigits(
 									this.hoverFightPreviewFights.get(i).damageTakenByAttackerMultiplier);
 					TextUtils.printTextWithImages(new Object[] { defenderDamageString },
-							this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 									+ (Game.SQUARE_WIDTH) - Game.font.getWidth(defenderDamageString),
 							previewPositionYs[i] + 14, Integer.MAX_VALUE, true);
 
 					// defender weapon
 					if (this.hoverFightPreviewFights.get(i).defenderWeapon != null) {
 						TextureUtils.drawTexture(this.hoverFightPreviewFights.get(i).defenderWeapon.imageTexture,
-								this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 										+ (Game.SQUARE_WIDTH),
-								this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 										+ (Game.SQUARE_WIDTH) + 32,
 								previewPositionYs[i] - 2, previewPositionYs[i] + 30);
 					}
@@ -825,16 +825,16 @@ public class Actor extends GameObject implements Owner {
 					// attacker advantage/disadvantage
 					if (this.hoverFightPreviewFights.get(i).advantage == Fight.Advantage.DEFENDER_ADVANTAGE) {
 						TextureUtils.drawTexture(upTexture,
-								this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 										+ (Game.SQUARE_WIDTH) + 12,
-								this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 										+ (Game.SQUARE_WIDTH) + 28,
 								previewPositionYs[i] + 14, previewPositionYs[i] + 30);
 					} else if (this.hoverFightPreviewFights.get(i).advantage == Fight.Advantage.ATTACKER_ADVANTAGE) {
 						TextureUtils.drawTexture(downTexture,
-								this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 										+ (Game.SQUARE_WIDTH) + 12,
-								this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+								this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 										+ (Game.SQUARE_WIDTH) + 28,
 								previewPositionYs[i] + 14, previewPositionYs[i] + 30);
 					}
@@ -844,9 +844,9 @@ public class Actor extends GameObject implements Owner {
 				if (hoverFightPreviewFights
 						.get(i).damageTakenByDefender >= hoverFightPreviewFights.get(i).defender.remainingHealth) {
 					TextureUtils.drawTexture(skullTexture, defenderHealthLossAlpha,
-							hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) + (Game.SQUARE_WIDTH)
+							hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) + (Game.SQUARE_WIDTH)
 									+ 16,
-							this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 									+ (Game.SQUARE_WIDTH) + 48,
 							previewPositionYs[i] - 2, previewPositionYs[i] + 30);
 				}
@@ -859,9 +859,9 @@ public class Actor extends GameObject implements Owner {
 				// X symbol because it's out of range
 				if (hoverFightPreviewFights.get(i).reachable == false) {
 					TextureUtils.drawTexture(this.xTexture,
-							hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+							hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 									+ Game.SQUARE_WIDTH / 2 - 16,
-							this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
+							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 									+ Game.SQUARE_WIDTH / 2 + 16,
 							previewPositionYs[i] - 2, previewPositionYs[i] + 30);
 				}
@@ -870,12 +870,12 @@ public class Actor extends GameObject implements Owner {
 
 			// fight symbol
 			TextureUtils.drawTexture(fightTexture,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) + Game.SQUARE_WIDTH / 2f
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) + Game.SQUARE_WIDTH / 2f
 							- 16,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH) + Game.SQUARE_WIDTH / 2f
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) + Game.SQUARE_WIDTH / 2f
 							+ 16,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.y * (Game.SQUARE_HEIGHT) - 40,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.y * (Game.SQUARE_HEIGHT) - 8);
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.yInGrid * (Game.SQUARE_HEIGHT) - 40,
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.yInGrid * (Game.SQUARE_HEIGHT) - 8);
 
 			// TextUtils.printTable(tableContents,
 			// hoverFightPreviewPositionXInPixels,
@@ -888,7 +888,7 @@ public class Actor extends GameObject implements Owner {
 
 			// animationX
 			buttonsAnimateCurrentTime += Game.delta;
-			float animationEndPointX = this.squareGameObjectIsOn.x * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
+			float animationEndPointX = this.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
 			float animationStartPointX = animationEndPointX - (buttons.size() * 50);
 			float animationDistanceX = animationEndPointX - animationStartPointX;
 			if (buttonsAnimateCurrentTime > buttonsAnimateMaxTime) {
@@ -898,10 +898,10 @@ public class Actor extends GameObject implements Owner {
 			float buttonsX = animationStartPointX + animationOffsetX;
 			for (int i = 0; i < buttons.size(); i++) {
 				buttons.get(i).x = buttonsX + 50 * i;
-				buttons.get(i).y = this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT;
+				buttons.get(i).y = this.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT;
 				buttons.get(i).drawWithinBounds(animationEndPointX, animationEndPointX + (buttons.size() * 50),
-						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT,
-						this.squareGameObjectIsOn.y * Game.SQUARE_HEIGHT + 50);
+						this.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT,
+						this.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + 50);
 			}
 
 			if (showWeaponButtons) {

@@ -4,13 +4,18 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.UserInputEditor;
-import com.marklynch.utils.TextureUtils;
 
 public class Inventory {
 
+	public enum INVENTORY_STATE {
+		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
+	}
+
+	public INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
+
 	public InventorySquare[][] inventorySquares = new InventorySquare[5][5];
 
-	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(25);
 
 	private boolean isOpen = false;
 
@@ -19,7 +24,8 @@ public class Inventory {
 	float width = 5 * Game.SQUARE_WIDTH;
 	float height = 5 * Game.SQUARE_HEIGHT;
 
-	private InventorySquare inventorySquaresMouseIsOver;
+	private InventorySquare inventorySquareMouseIsOver;
+	private GameObject selectedGameObject;
 
 	public Inventory() {
 		for (int i = 0; i < inventorySquares.length; i++) {
@@ -27,7 +33,6 @@ public class Inventory {
 				inventorySquares[i][j] = new InventorySquare(i, j, "dialogbg.png", this);
 			}
 		}
-
 	}
 
 	public void loadImages() {
@@ -45,10 +50,28 @@ public class Inventory {
 	public void add(GameObject gameObject) {
 		if (!gameObjects.contains(gameObject))
 			gameObjects.add(gameObject);
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+				if (inventorySquares[i][j].gameObject == null) {
+					inventorySquares[i][j].gameObject = gameObject;
+					gameObject.squareGameObjectIsOn = inventorySquares[i][j];
+					return;
+				}
+			}
+		}
 	}
 
 	public void remove(GameObject gameObject) {
 		gameObjects.remove(gameObject);
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+				if (inventorySquares[i][j].gameObject == gameObject) {
+					inventorySquares[i][j].gameObject.squareGameObjectIsOn = null;
+					inventorySquares[i][j].gameObject = null;
+					return;
+				}
+			}
+		}
 	}
 
 	public int size() {
@@ -61,6 +84,20 @@ public class Inventory {
 
 	public void setGameObjects(ArrayList<GameObject> gameObjects) {
 		this.gameObjects = gameObjects;
+		int index = 0;
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+
+				if (index >= gameObjects.size())
+					return;
+
+				if (inventorySquares[i][j].gameObject == null) {
+					inventorySquares[i][j].gameObject = gameObjects.get(index);
+					gameObjects.get(index).squareGameObjectIsOn = inventorySquares[i][j];
+					index++;
+				}
+			}
+		}
 	}
 
 	public boolean contains(GameObject gameObject) {
@@ -69,7 +106,7 @@ public class Inventory {
 
 	public boolean canShareSquare() {
 		for (GameObject gameObject : gameObjects) {
-			if (!gameObject.canShareSquare)
+			if (gameObject != null && !gameObject.canShareSquare)
 				return false;
 		}
 		return true;
@@ -124,31 +161,33 @@ public class Inventory {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
 
 				inventorySquares[i][j].drawStaticUI();
-				gameObjectIndex = i * inventorySquares[i].length + j;
-				System.out.println("gameObjects.size() = " + gameObjects.size());
-				System.out.println("gameObjectIndex = " + gameObjectIndex);
-				if (gameObjects.size() > gameObjectIndex) {
-
-					System.out.println("gameObjects.get(gameObjectIndex)  = " + gameObjects.get(gameObjectIndex));
-				}
-				if (gameObjects.size() > gameObjectIndex && gameObjects.get(gameObjectIndex) != null) {
-
-					int squarePositionX = inventorySquares[i][j].xInGrid * (int) Game.SQUARE_WIDTH;
-					int squarePositionY = inventorySquares[i][j].yInGrid * (int) Game.SQUARE_HEIGHT;
-					TextureUtils.drawTexture(gameObjects.get(gameObjectIndex).imageTexture, squarePositionX,
-							squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
-
-				}
+				// gameObjectIndex = i * inventorySquares[i].length + j;
+				// System.out.println("gameObjects.size() = " +
+				// gameObjects.size());
+				// System.out.println("gameObjectIndex = " + gameObjectIndex);
+				// if (gameObjects.size() > gameObjectIndex) {
+				//
+				// System.out.println("gameObjects.get(gameObjectIndex) = " +
+				// gameObjects.get(gameObjectIndex));
+				// }
+				// if (gameObjects.size() > gameObjectIndex &&
+				// gameObjects.get(gameObjectIndex) != null) {
+				//
+				// TextureUtils.drawTexture(gameObjects.get(gameObjectIndex).imageTexture,
+				// inventorySquares[i][j].xInPixels,
+				// inventorySquares[i][j].xInPixels + Game.SQUARE_WIDTH,
+				// inventorySquares[i][j].yInPixels,
+				// inventorySquares[i][j].yInPixels + Game.SQUARE_HEIGHT);
+				//
+				// }
 
 			}
 		}
 
-		if (this.inventorySquaresMouseIsOver != null) {
+		if (this.inventorySquareMouseIsOver != null) {
 			System.out.println("inventorySquaresMouseIsOver != null");
-			this.inventorySquaresMouseIsOver.drawCursor();
+			this.inventorySquareMouseIsOver.drawCursor();
 		}
-
-		// }
 	}
 
 	public boolean isOpen() {
@@ -173,39 +212,71 @@ public class Inventory {
 	}
 
 	public void userInput() {
-		// float mouseXInSquares = -1;
-		// float mouseYInSquares = -1;
-		// if (UserInputEditor.mouseXinPixels >= 0)
-		// mouseXInSquares = (int) (UserInputEditor.mouseXinPixels /
-		// Game.SQUARE_WIDTH);
-		// if ((Game.windowHeight - UserInputEditor.mouseYinPixels) >= 0)
-		// mouseYInSquares = (int) ((Game.windowHeight -
-		// UserInputEditor.mouseYinPixels) / Game.SQUARE_HEIGHT);
 
-		this.inventorySquaresMouseIsOver = null;
+		this.inventorySquareMouseIsOver = null;
 		for (int i = 0; i < inventorySquares.length; i++) {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
 				if (inventorySquares[i][j].calculateIfPointInBoundsOfSquare(UserInputEditor.mouseXinPixels,
 						Game.windowHeight - UserInputEditor.mouseYinPixels)) {
-					this.inventorySquaresMouseIsOver = inventorySquares[i][j];
+					this.inventorySquareMouseIsOver = inventorySquares[i][j];
 				}
 			}
 		}
+	}
 
-		// // Get the square that we're hovering over
-		// this.inventorySquaresMouseIsOver = null;
-		// if (mouseXInSquares >= 0 && mouseYInSquares >= 0 && (int)
-		// mouseXInSquares > -1
-		// && (int) mouseXInSquares < inventorySquares.length && (int)
-		// mouseYInSquares > -1
-		// && (int) mouseYInSquares < inventorySquares[0].length) {
-		// this.inventorySquaresMouseIsOver = this.inventorySquares[(int)
-		// mouseXInSquares][(int) mouseYInSquares];
-		// System.out.println("inside if");
-		// }
-		// System.out.println("this.inventorySquaresMouseIsOver = " +
-		// this.inventorySquaresMouseIsOver);
+	public void click() {
+		if (this.inventorySquareMouseIsOver != null) {
+			this.inventorySquareClicked(inventorySquareMouseIsOver);
+		}
+	}
 
+	private void inventorySquareClicked(InventorySquare inventorySquare) {
+		if (inventorySquare.gameObject == null) {
+			// Nothing on the square
+			if (inventoryState == INVENTORY_STATE.DEFAULT || inventoryState == INVENTORY_STATE.SETTINGS_CHANGE) {
+				// selectSquare(square);
+			} else if (inventoryState == INVENTORY_STATE.ADD_OBJECT) {
+				// attemptToAddNewObjectToSquare(square);
+			} else if (inventoryState == INVENTORY_STATE.MOVEABLE_OBJECT_SELECTED) {
+				// swapGameObjects(this.selectedGameObject, gameObjectOnSquare);
+				moveGameObject(this.selectedGameObject, inventorySquare);
+			}
+		} else {
+			// There's an object on the square
+			if (inventoryState == INVENTORY_STATE.DEFAULT || inventoryState == INVENTORY_STATE.SETTINGS_CHANGE) {
+				selectGameObject(inventorySquare.gameObject);
+			} else if (inventoryState == INVENTORY_STATE.MOVEABLE_OBJECT_SELECTED) {
+				swapGameObjects(this.selectedGameObject, inventorySquare.gameObject);
+			}
+		}
+	}
+
+	private void selectGameObject(GameObject gameObject) {
+		selectedGameObject = gameObject;
+		inventoryState = INVENTORY_STATE.MOVEABLE_OBJECT_SELECTED;
+	}
+
+	public void swapGameObjects(GameObject gameObject1, GameObject gameObject2) {
+		InventorySquare square1 = (InventorySquare) gameObject1.squareGameObjectIsOn;
+		InventorySquare square2 = (InventorySquare) gameObject2.squareGameObjectIsOn;
+
+		square1.gameObject = gameObject2;
+		square2.gameObject = gameObject1;
+
+		gameObject1.squareGameObjectIsOn = square2;
+		gameObject2.squareGameObjectIsOn = square1;
+
+	}
+
+	public void moveGameObject(GameObject gameObject1, InventorySquare square2) {
+		InventorySquare square1 = (InventorySquare) gameObject1.squareGameObjectIsOn;
+
+		if (square1 != null)
+			square1.gameObject = null;
+
+		square2.gameObject = gameObject1;
+
+		gameObject1.squareGameObjectIsOn = square2;
 	}
 
 }

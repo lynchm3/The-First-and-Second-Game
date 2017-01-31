@@ -145,8 +145,8 @@ public class UserInputEditor {
 			Game.buttonHoveringOver.click();
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
 				&& Game.inventoryHoveringOver != null) {
-			// click button
-			// Game.inventoryHoveringOver.click();
+			// click inventory
+			Game.inventoryHoveringOver.click();
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
 				&& Game.squareMouseIsOver != null) {
 			// click square/game object if we're on one

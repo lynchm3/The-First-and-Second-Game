@@ -30,10 +30,10 @@ public class Dialog {
 	}
 
 	public void draw() {
-		int positionYInPixels = (int) ((reference.y + 1) * Game.zoom * Game.SQUARE_HEIGHT
+		int positionYInPixels = (int) ((reference.yInGrid + 1) * Game.zoom * Game.SQUARE_HEIGHT
 				- (Game.windowHeight * Game.zoom) / 2 + Game.dragY * Game.zoom + Game.windowHeight / 2);
 
-		int positionXInPixels = (int) ((reference.x + 1) * Game.zoom * Game.SQUARE_WIDTH
+		int positionXInPixels = (int) ((reference.xInGrid + 1) * Game.zoom * Game.SQUARE_WIDTH
 				- (Game.windowWidth * Game.zoom) / 2 + Game.dragX * Game.zoom + Game.windowWidth / 2);
 
 		// background

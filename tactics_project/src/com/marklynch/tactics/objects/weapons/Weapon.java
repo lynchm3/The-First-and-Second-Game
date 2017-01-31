@@ -40,21 +40,21 @@ public class Weapon extends WeaponTemplate {
 		Square currentSquare = null;
 
 		if (direction == Direction.UP) {
-			if (parentSquare.y - 1 >= 0) {
-				currentSquare = squares[parentSquare.x][parentSquare.y - 1];
+			if (parentSquare.yInGrid - 1 >= 0) {
+				currentSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid - 1];
 			}
 		} else if (direction == Direction.RIGHT) {
-			if (parentSquare.x + 1 < squares.length) {
-				currentSquare = squares[parentSquare.x + 1][parentSquare.y];
+			if (parentSquare.xInGrid + 1 < squares.length) {
+				currentSquare = squares[parentSquare.xInGrid + 1][parentSquare.yInGrid];
 			}
 		} else if (direction == Direction.DOWN) {
 
-			if (parentSquare.y + 1 < squares[0].length) {
-				currentSquare = squares[parentSquare.x][parentSquare.y + 1];
+			if (parentSquare.yInGrid + 1 < squares[0].length) {
+				currentSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid + 1];
 			}
 		} else if (direction == Direction.LEFT) {
-			if (parentSquare.x - 1 >= 0) {
-				currentSquare = squares[parentSquare.x - 1][parentSquare.y];
+			if (parentSquare.xInGrid - 1 >= 0) {
+				currentSquare = squares[parentSquare.xInGrid - 1][parentSquare.yInGrid];
 			}
 		}
 

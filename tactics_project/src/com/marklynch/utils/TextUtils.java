@@ -260,7 +260,7 @@ public class TextUtils {
 			} else if (content instanceof Square) {
 
 				Square square = (Square) content;
-				String string = "Square @ " + square.x + " , " + square.y;
+				String string = "Square @ " + square.xInGrid + " , " + square.yInGrid;
 
 				float textWidth = Game.font.getWidth(string);
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);

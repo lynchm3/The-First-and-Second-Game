@@ -93,11 +93,11 @@ public class AttributesDialog {
 		// Title
 		if (object instanceof Actor) {
 			Actor actor = (Actor) object;
-			title = "Actor @ " + actor.squareGameObjectIsOn.x + "," + actor.squareGameObjectIsOn.y;
+			title = "Actor @ " + actor.squareGameObjectIsOn.xInGrid + "," + actor.squareGameObjectIsOn.yInGrid;
 		} else if (object instanceof GameObject) {
 			GameObject gameObject = (GameObject) object;
 			if (gameObject.squareGameObjectIsOn != null) {
-				title = "Object @ " + gameObject.squareGameObjectIsOn.x + "," + gameObject.squareGameObjectIsOn.y;
+				title = "Object @ " + gameObject.squareGameObjectIsOn.xInGrid + "," + gameObject.squareGameObjectIsOn.yInGrid;
 			} else {
 				title = "" + gameObject.name;
 			}
@@ -105,7 +105,7 @@ public class AttributesDialog {
 			title = "Faction " + Game.level.factions.indexOf(object);
 		} else if (object instanceof Square) {
 			Square square = (Square) object;
-			title = "Square @ " + square.x + "," + square.y;
+			title = "Square @ " + square.xInGrid + "," + square.yInGrid;
 		} else if (object instanceof Weapon) {
 			title = "Weapon " + editor.gameObjectTemplates.indexOf(object);
 		} else if (object instanceof Color) {

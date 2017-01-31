@@ -43,8 +43,8 @@ public class GameObjectExploder extends GameObject {
 		float pieceWidth = this.imageTexture.getWidth() / root;
 		float pieceHeight = this.imageTexture.getHeight() / root;
 
-		float positionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
-		float positionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
+		float positionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+		float positionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 		for (float i = 0; i < root; i++) {
 			for (float j = 0; j < root; j++) {

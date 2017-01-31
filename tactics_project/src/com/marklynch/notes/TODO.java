@@ -2,6 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// inventory is limited to 25
+
+	// Make the icon under the mouse when u have something selected bigger
+
+	// Make Terrain square and inventory square share the same incestor, the
+	// current tree is hairy
+
 	// Need some sort of clean window system, its getting gross
 
 	// Need to draw highlight and cursor and move line for inventory

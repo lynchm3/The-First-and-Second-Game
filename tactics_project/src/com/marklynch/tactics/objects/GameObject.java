@@ -123,7 +123,7 @@ public class GameObject {
 	public void postLoad(Faction faction) {
 		this.faction = faction;
 		if (squareGameObjectIsOn != null) {
-			this.squareGameObjectIsOn = Game.level.squares[this.squareGameObjectIsOn.x][this.squareGameObjectIsOn.y];
+			this.squareGameObjectIsOn = Game.level.squares[this.squareGameObjectIsOn.xInGrid][this.squareGameObjectIsOn.yInGrid];
 			this.squareGameObjectIsOn.inventory.add(this);
 		}
 		this.paths = new HashMap<Square, Path>();
@@ -134,8 +134,8 @@ public class GameObject {
 		// Draw object
 
 		if (squareGameObjectIsOn != null) {
-			int actorPositionXInPixels = this.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH;
-			int actorPositionYInPixels = this.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
+			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 			float alpha = 1.0f;
 			if (Game.level.activeActor != null && Game.level.activeActor.showHoverFightPreview == true
@@ -162,8 +162,8 @@ public class GameObject {
 
 		if (squareGameObjectIsOn != null) {
 			if (showPow == true) {
-				int powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.x * (int) Game.SQUARE_WIDTH));
-				int powPositionYInPixels = powTarget.squareGameObjectIsOn.y * (int) Game.SQUARE_HEIGHT;
+				int powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH));
+				int powPositionYInPixels = powTarget.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 				TextureUtils.drawTexture(this.powTexture, powPositionXInPixels,
 						powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels,
@@ -242,21 +242,21 @@ public class GameObject {
 		Square parentSquare = squaresInThisPath.get(squaresInThisPath.size() - 1);
 
 		if (direction == Direction.UP) {
-			if (parentSquare.y - 1 >= 0) {
-				newSquare = squares[parentSquare.x][parentSquare.y - 1];
+			if (parentSquare.yInGrid - 1 >= 0) {
+				newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid - 1];
 			}
 		} else if (direction == Direction.RIGHT) {
-			if (parentSquare.x + 1 < squares.length) {
-				newSquare = squares[parentSquare.x + 1][parentSquare.y];
+			if (parentSquare.xInGrid + 1 < squares.length) {
+				newSquare = squares[parentSquare.xInGrid + 1][parentSquare.yInGrid];
 			}
 		} else if (direction == Direction.DOWN) {
 
-			if (parentSquare.y + 1 < squares[0].length) {
-				newSquare = squares[parentSquare.x][parentSquare.y + 1];
+			if (parentSquare.yInGrid + 1 < squares[0].length) {
+				newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid + 1];
 			}
 		} else if (direction == Direction.LEFT) {
-			if (parentSquare.x - 1 >= 0) {
-				newSquare = squares[parentSquare.x - 1][parentSquare.y];
+			if (parentSquare.xInGrid - 1 >= 0) {
+				newSquare = squares[parentSquare.xInGrid - 1][parentSquare.yInGrid];
 			}
 		}
 
@@ -279,9 +279,9 @@ public class GameObject {
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
 		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-			if (ArrayUtils.inBounds(Game.level.squares, this.squareGameObjectIsOn.x + x,
-					this.squareGameObjectIsOn.y + y)) {
-				squares.add(Game.level.squares[this.squareGameObjectIsOn.x + (int) x][this.squareGameObjectIsOn.y
+			if (ArrayUtils.inBounds(Game.level.squares, this.squareGameObjectIsOn.xInGrid + x,
+					this.squareGameObjectIsOn.yInGrid + y)) {
+				squares.add(Game.level.squares[this.squareGameObjectIsOn.xInGrid + (int) x][this.squareGameObjectIsOn.yInGrid
 						+ (int) y]);
 			}
 

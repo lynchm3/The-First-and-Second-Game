@@ -21,8 +21,8 @@ public class Square {
 	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation", "travelCost" };
 
-	public final int x;
-	public final int y;
+	public final int xInGrid;
+	public final int yInGrid;
 	public final int elevation;
 	public int travelCost;
 	public Inventory inventory;
@@ -44,8 +44,8 @@ public class Square {
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, Inventory inventory) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.xInGrid = x;
+		this.yInGrid = y;
 		this.imageTexturePath = imagePath;
 		this.travelCost = travelCost;
 		this.elevation = elevation;
@@ -69,8 +69,8 @@ public class Square {
 	public void draw() {
 
 		// square texture
-		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 		TextureUtils.drawTexture(imageTexture, squarePositionX, squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
 				squarePositionY + Game.SQUARE_HEIGHT);
 
@@ -137,8 +137,8 @@ public class Square {
 
 	public void drawHighlight() {
 
-		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
@@ -151,8 +151,8 @@ public class Square {
 		// GL11.glScalef(Game.zoom, Game.zoom, 0);
 		// GL11.glTranslatef(Game.dragX, Game.dragY, 0);
 		// GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
-		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 
 		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
 				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
@@ -181,13 +181,13 @@ public class Square {
 
 		if (this.inventory.size() == 0) {
 			// Nothing on the square
-			return new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
+			return new String[] { "" + xInGrid + " , " + yInGrid, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
 					"(Click again to dismiss)" };
 		} else
 
 		{
 
-			String[] details = new String[] { "" + x + " , " + y, "\nTravel Cost = " + travelCost,
+			String[] details = new String[] { "" + xInGrid + " , " + yInGrid, "\nTravel Cost = " + travelCost,
 					"\nElevation = " + elevation };
 
 			for (int i = 0; i < inventory.size(); i++) {
@@ -240,7 +240,7 @@ public class Square {
 
 	@Override
 	public String toString() {
-		return "" + this.x + "," + this.y;
+		return "" + this.xInGrid + "," + this.yInGrid;
 
 	}
 }
