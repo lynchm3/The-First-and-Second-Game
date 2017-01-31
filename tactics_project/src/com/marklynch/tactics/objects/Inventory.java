@@ -54,7 +54,7 @@ public class Inventory {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
 				if (inventorySquares[i][j].gameObject == null) {
 					inventorySquares[i][j].gameObject = gameObject;
-					gameObject.squareGameObjectIsOn = inventorySquares[i][j];
+					gameObject.inventorySquareGameObjectIsOn = inventorySquares[i][j];
 					return;
 				}
 			}
@@ -66,7 +66,7 @@ public class Inventory {
 		for (int i = 0; i < inventorySquares.length; i++) {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
 				if (inventorySquares[i][j].gameObject == gameObject) {
-					inventorySquares[i][j].gameObject.squareGameObjectIsOn = null;
+					inventorySquares[i][j].gameObject.inventorySquareGameObjectIsOn = null;
 					inventorySquares[i][j].gameObject = null;
 					return;
 				}
@@ -93,7 +93,7 @@ public class Inventory {
 
 				if (inventorySquares[i][j].gameObject == null) {
 					inventorySquares[i][j].gameObject = gameObjects.get(index);
-					gameObjects.get(index).squareGameObjectIsOn = inventorySquares[i][j];
+					gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[i][j];
 					index++;
 				}
 			}
@@ -257,26 +257,26 @@ public class Inventory {
 	}
 
 	public void swapGameObjects(GameObject gameObject1, GameObject gameObject2) {
-		InventorySquare square1 = (InventorySquare) gameObject1.squareGameObjectIsOn;
-		InventorySquare square2 = (InventorySquare) gameObject2.squareGameObjectIsOn;
+		InventorySquare square1 = gameObject1.inventorySquareGameObjectIsOn;
+		InventorySquare square2 = gameObject2.inventorySquareGameObjectIsOn;
 
 		square1.gameObject = gameObject2;
 		square2.gameObject = gameObject1;
 
-		gameObject1.squareGameObjectIsOn = square2;
-		gameObject2.squareGameObjectIsOn = square1;
+		gameObject1.inventorySquareGameObjectIsOn = square2;
+		gameObject2.inventorySquareGameObjectIsOn = square1;
 
 	}
 
 	public void moveGameObject(GameObject gameObject1, InventorySquare square2) {
-		InventorySquare square1 = (InventorySquare) gameObject1.squareGameObjectIsOn;
+		InventorySquare square1 = gameObject1.inventorySquareGameObjectIsOn;
 
 		if (square1 != null)
 			square1.gameObject = null;
 
 		square2.gameObject = gameObject1;
 
-		gameObject1.squareGameObjectIsOn = square2;
+		gameObject1.inventorySquareGameObjectIsOn = square2;
 	}
 
 }

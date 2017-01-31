@@ -194,6 +194,8 @@ public class GameObject {
 
 	int highestPathCostSeen = 0;
 
+	public InventorySquare inventorySquareGameObjectIsOn;
+
 	public void calculatePathToAllSquares(Square[][] squares) {
 
 		for (int i = 0; i < squares.length; i++) {
@@ -281,8 +283,8 @@ public class GameObject {
 		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
 			if (ArrayUtils.inBounds(Game.level.squares, this.squareGameObjectIsOn.xInGrid + x,
 					this.squareGameObjectIsOn.yInGrid + y)) {
-				squares.add(Game.level.squares[this.squareGameObjectIsOn.xInGrid + (int) x][this.squareGameObjectIsOn.yInGrid
-						+ (int) y]);
+				squares.add(Game.level.squares[this.squareGameObjectIsOn.xInGrid
+						+ (int) x][this.squareGameObjectIsOn.yInGrid + (int) y]);
 			}
 
 			if (xGoingUp) {
