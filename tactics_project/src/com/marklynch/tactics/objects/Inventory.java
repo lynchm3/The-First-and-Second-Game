@@ -14,8 +14,8 @@ public class Inventory {
 
 	private boolean isOpen = false;
 
-	float x = 0;
-	float y = 0;
+	float x = 500;
+	float y = 100;
 	float width = 5 * Game.SQUARE_WIDTH;
 	float height = 5 * Game.SQUARE_HEIGHT;
 
@@ -133,8 +133,8 @@ public class Inventory {
 				}
 				if (gameObjects.size() > gameObjectIndex && gameObjects.get(gameObjectIndex) != null) {
 
-					int squarePositionX = inventorySquares[i][j].x * (int) Game.SQUARE_WIDTH;
-					int squarePositionY = inventorySquares[i][j].y * (int) Game.SQUARE_HEIGHT;
+					int squarePositionX = inventorySquares[i][j].xInGrid * (int) Game.SQUARE_WIDTH;
+					int squarePositionY = inventorySquares[i][j].yInGrid * (int) Game.SQUARE_HEIGHT;
 					TextureUtils.drawTexture(gameObjects.get(gameObjectIndex).imageTexture, squarePositionX,
 							squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
@@ -173,25 +173,38 @@ public class Inventory {
 	}
 
 	public void userInput() {
-		float mouseXInSquares = -1;
-		float mouseYInSquares = -1;
-		if (UserInputEditor.mouseXinPixels >= 0)
-			mouseXInSquares = (int) (UserInputEditor.mouseXinPixels / Game.SQUARE_WIDTH);
-		if ((Game.windowHeight - UserInputEditor.mouseYinPixels) >= 0)
-			mouseYInSquares = (int) ((Game.windowHeight - UserInputEditor.mouseYinPixels) / Game.SQUARE_HEIGHT);
+		// float mouseXInSquares = -1;
+		// float mouseYInSquares = -1;
+		// if (UserInputEditor.mouseXinPixels >= 0)
+		// mouseXInSquares = (int) (UserInputEditor.mouseXinPixels /
+		// Game.SQUARE_WIDTH);
+		// if ((Game.windowHeight - UserInputEditor.mouseYinPixels) >= 0)
+		// mouseYInSquares = (int) ((Game.windowHeight -
+		// UserInputEditor.mouseYinPixels) / Game.SQUARE_HEIGHT);
 
-		System.out.println("mouseXInSquares = " + mouseXInSquares);
-		System.out.println("mouseYInSquares = " + mouseYInSquares);
-
-		// Get the square that we're hovering over
 		this.inventorySquaresMouseIsOver = null;
-		if (mouseXInSquares >= 0 && mouseYInSquares >= 0 && (int) mouseXInSquares > -1
-				&& (int) mouseXInSquares < inventorySquares.length && (int) mouseYInSquares > -1
-				&& (int) mouseYInSquares < inventorySquares[0].length) {
-			this.inventorySquaresMouseIsOver = this.inventorySquares[(int) mouseXInSquares][(int) mouseYInSquares];
-			System.out.println("inside if");
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+				if (inventorySquares[i][j].calculateIfPointInBoundsOfSquare(UserInputEditor.mouseXinPixels,
+						Game.windowHeight - UserInputEditor.mouseYinPixels)) {
+					this.inventorySquaresMouseIsOver = inventorySquares[i][j];
+				}
+			}
 		}
-		System.out.println("this.inventorySquaresMouseIsOver = " + this.inventorySquaresMouseIsOver);
+
+		// // Get the square that we're hovering over
+		// this.inventorySquaresMouseIsOver = null;
+		// if (mouseXInSquares >= 0 && mouseYInSquares >= 0 && (int)
+		// mouseXInSquares > -1
+		// && (int) mouseXInSquares < inventorySquares.length && (int)
+		// mouseYInSquares > -1
+		// && (int) mouseYInSquares < inventorySquares[0].length) {
+		// this.inventorySquaresMouseIsOver = this.inventorySquares[(int)
+		// mouseXInSquares][(int) mouseYInSquares];
+		// System.out.println("inside if");
+		// }
+		// System.out.println("this.inventorySquaresMouseIsOver = " +
+		// this.inventorySquaresMouseIsOver);
 
 	}
 

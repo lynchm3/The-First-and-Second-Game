@@ -13,10 +13,13 @@ public class InventorySquare {
 
 	public String guid = UUID.randomUUID().toString();
 
-	public final int x;
-	public final int y;
+	public final int xInGrid;
+	public final int yInGrid;
 	public GameObject gameObject;
 	public Inventory inventoryThisBelongsTo;
+
+	public int xInPixels = 0;
+	public int yInPixels = 0;
 
 	// image
 	public String imageTexturePath;
@@ -24,10 +27,13 @@ public class InventorySquare {
 
 	public InventorySquare(int x, int y, String imagePath, Inventory inventoryThisBelongsTo) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.xInGrid = x;
+		this.yInGrid = y;
 		this.imageTexturePath = imagePath;
 		this.inventoryThisBelongsTo = inventoryThisBelongsTo;
+
+		xInPixels = (int) inventoryThisBelongsTo.x + xInGrid * (int) Game.SQUARE_WIDTH;
+		yInPixels = (int) inventoryThisBelongsTo.y + yInGrid * (int) Game.SQUARE_HEIGHT;
 	}
 
 	public void loadImages() {
@@ -42,44 +48,39 @@ public class InventorySquare {
 	public void drawStaticUI() {
 
 		// square texture
-		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(imageTexture, squarePositionX, squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
-				squarePositionY + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(imageTexture, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
+				yInPixels + Game.SQUARE_HEIGHT);
 
 	}
 
 	public void drawHighlight() {
 
-		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, xInPixels, xInPixels + Game.SQUARE_WIDTH,
+				yInPixels, yInPixels + Game.SQUARE_HEIGHT);
 
 	}
 
 	public void drawCursor() {
-		// GL11.glPushMatrix();
 
-		// GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
-		// GL11.glScalef(Game.zoom, Game.zoom, 0);
-		// GL11.glTranslatef(Game.dragX, Game.dragY, 0);
-		// GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
-		int squarePositionX = x * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = y * (int) Game.SQUARE_HEIGHT;
-
-		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
-				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
-		// GL11.glPopMatrix();
+		TextureUtils.drawTexture(Game.level.gameCursor.cursor, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
+				yInPixels + Game.SQUARE_HEIGHT);
 	}
 
 	public String[] getDetails() {
-		return new String[] { "" + x + " , " + y, "(Click again to dismiss)" };
+		return new String[] { "" + xInGrid + " , " + yInGrid, "(Click again to dismiss)" };
 	}
 
 	@Override
 	public String toString() {
-		return "" + this.x + "," + this.y;
+		return "" + this.xInGrid + "," + this.yInGrid;
 
+	}
+
+	public boolean calculateIfPointInBoundsOfSquare(float mouseX, float mouseY) {
+		if (mouseX > xInPixels && mouseX < xInPixels + (int) Game.SQUARE_WIDTH && mouseY > yInPixels
+				&& mouseY < yInPixels + (int) Game.SQUARE_HEIGHT) {
+			return true;
+		}
+		return false;
 	}
 }
