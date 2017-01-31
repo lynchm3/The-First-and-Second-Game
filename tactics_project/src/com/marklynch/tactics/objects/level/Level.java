@@ -413,8 +413,7 @@ public class Level {
 		return null;
 	}
 
-	public Inventory getInventoryFromMousePosition(float mouseX, float mouseY, float alteredMouseX,
-			float alteredMouseY) {
+	public Inventory getInventoryFromMousePosition(float mouseX, float mouseY) {
 
 		for (Inventory inventory : this.openInventories) {
 			if (inventory.calculateIfPointInBoundsOfInventory(mouseX, Game.windowHeight - mouseY))

@@ -101,8 +101,7 @@ public class UserInputLevel {
 		// Getting inventory that the mouse is over, if any
 		Game.inventoryHoveringOver = null;
 		if (dragging == false) {
-			Game.inventoryHoveringOver = Game.level.getInventoryFromMousePosition(Mouse.getX(), Mouse.getY(),
-					mouseXTransformed, mouseYTransformed);
+			Game.inventoryHoveringOver = Game.level.getInventoryFromMousePosition(Mouse.getX(), Mouse.getY());
 
 		}
 

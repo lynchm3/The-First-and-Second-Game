@@ -2,10 +2,9 @@ package com.marklynch.tactics.objects;
 
 import java.util.ArrayList;
 
-import org.lwjgl.input.Mouse;
-
 import com.marklynch.Game;
 import com.marklynch.UserInputEditor;
+import com.marklynch.utils.TextureUtils;
 
 public class Inventory {
 
@@ -17,15 +16,15 @@ public class Inventory {
 
 	float x = 0;
 	float y = 0;
-	float width = 250;
-	float height = 250;
+	float width = 5 * Game.SQUARE_WIDTH;
+	float height = 5 * Game.SQUARE_HEIGHT;
 
 	private InventorySquare inventorySquaresMouseIsOver;
 
 	public Inventory() {
 		for (int i = 0; i < inventorySquares.length; i++) {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
-				inventorySquares[i][j] = new InventorySquare(i, j, "grass.png", this);
+				inventorySquares[i][j] = new InventorySquare(i, j, "dialogbg.png", this);
 			}
 		}
 
@@ -120,14 +119,34 @@ public class Inventory {
 
 	public void drawStaticUI() {
 		// if (isOpen) {
+		int gameObjectIndex = 0;
 		for (int i = 0; i < inventorySquares.length; i++) {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
+
 				inventorySquares[i][j].drawStaticUI();
+				gameObjectIndex = i * inventorySquares[i].length + j;
+				System.out.println("gameObjects.size() = " + gameObjects.size());
+				System.out.println("gameObjectIndex = " + gameObjectIndex);
+				if (gameObjects.size() > gameObjectIndex) {
+
+					System.out.println("gameObjects.get(gameObjectIndex)  = " + gameObjects.get(gameObjectIndex));
+				}
+				if (gameObjects.size() > gameObjectIndex && gameObjects.get(gameObjectIndex) != null) {
+
+					int squarePositionX = inventorySquares[i][j].x * (int) Game.SQUARE_WIDTH;
+					int squarePositionY = inventorySquares[i][j].y * (int) Game.SQUARE_HEIGHT;
+					TextureUtils.drawTexture(gameObjects.get(gameObjectIndex).imageTexture, squarePositionX,
+							squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+
+				}
+
 			}
 		}
 
-		if (this.inventorySquaresMouseIsOver != null)
+		if (this.inventorySquaresMouseIsOver != null) {
+			System.out.println("inventorySquaresMouseIsOver != null");
 			this.inventorySquaresMouseIsOver.drawCursor();
+		}
 
 		// }
 	}
@@ -154,46 +173,25 @@ public class Inventory {
 	}
 
 	public void userInput() {
-		// TODO Auto-generated method stub
-
-		// Getting what square pixel the mouse is on
-		// Editor.mouseXinPixels = Mouse.getX();
-		// float mouseYinPixels = Mouse.getY();
-
-		// Transformed mouse coords
-
-		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX -
-		// (Game.windowWidth / 2) / Game.zoom)
-		// + (mouseXinPixels) / Game.zoom);
-		// float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY -
-		// (Game.windowHeight / 2) / Game.zoom)
-		// + (((Game.windowHeight - mouseYinPixels)) / Game.zoom));
-
-		// Getting what square coordinates the mouse is on (as in squares on the
-		// grid)
 		float mouseXInSquares = -1;
 		float mouseYInSquares = -1;
 		if (UserInputEditor.mouseXinPixels >= 0)
 			mouseXInSquares = (int) (UserInputEditor.mouseXinPixels / Game.SQUARE_WIDTH);
-		if (UserInputEditor.mouseYinPixels >= 0)
-			mouseYInSquares = (int) (UserInputEditor.mouseYinPixels / Game.SQUARE_HEIGHT);
+		if ((Game.windowHeight - UserInputEditor.mouseYinPixels) >= 0)
+			mouseYInSquares = (int) ((Game.windowHeight - UserInputEditor.mouseYinPixels) / Game.SQUARE_HEIGHT);
 
-		// Calculate zoom
-		Game.zoom += 0.001 * Mouse.getDWheel();
-		if (Game.zoom < 0.1)
-			Game.zoom = 0.1f;
-		if (Game.zoom > 2)
-			Game.zoom = 2f;
-
-		// Checking for drag
+		System.out.println("mouseXInSquares = " + mouseXInSquares);
+		System.out.println("mouseYInSquares = " + mouseYInSquares);
 
 		// Get the square that we're hovering over
-		Game.squareMouseIsOver = null;
+		this.inventorySquaresMouseIsOver = null;
 		if (mouseXInSquares >= 0 && mouseYInSquares >= 0 && (int) mouseXInSquares > -1
 				&& (int) mouseXInSquares < inventorySquares.length && (int) mouseYInSquares > -1
 				&& (int) mouseYInSquares < inventorySquares[0].length) {
 			this.inventorySquaresMouseIsOver = this.inventorySquares[(int) mouseXInSquares][(int) mouseYInSquares];
+			System.out.println("inside if");
 		}
+		System.out.println("this.inventorySquaresMouseIsOver = " + this.inventorySquaresMouseIsOver);
 
 	}
 
