@@ -10,4 +10,10 @@ public class Junk extends GameObject {
 				canContainOtherObjects);
 	}
 
+	@Override
+	public GameObject makeCopy(Square square) {
+		return new Junk(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects);
+	}
+
 }

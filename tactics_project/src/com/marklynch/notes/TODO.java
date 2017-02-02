@@ -2,6 +2,15 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// GameObject/GameObject templace needs to be abstract and u have to
+	// overwrite makeCopy
+
+	// U should get better prices when bartering if someone likes you
+
+	// Could have algorithm to work out how much someone likes u (+10 same
+	// faction, -5 wrong race, -5 ur ugly) like in 4x games. Could also display
+	// this info to the user. Maybe a special power.
+
 	// Have to look in to turning some classes of gameobject and actor in to
 	// boolean flags
 

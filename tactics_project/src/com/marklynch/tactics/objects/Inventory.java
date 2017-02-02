@@ -197,7 +197,6 @@ public class Inventory {
 		}
 
 		if (this.inventorySquareMouseIsOver != null) {
-			System.out.println("inventorySquaresMouseIsOver != null");
 			this.inventorySquareMouseIsOver.drawCursor();
 		}
 	}

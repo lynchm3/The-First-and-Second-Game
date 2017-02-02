@@ -820,7 +820,7 @@ public class Editor {
 
 	public void placeObjectInInventory(GameObject gameObjectThatCanHoldOtherObjects) {
 		GameObject gameObjectToPutInInventroy = gameObjectTemplate.makeCopy(null);
-		gameObjectThatCanHoldOtherObjects.inventory.getGameObjects().add(gameObjectToPutInInventroy);
+		gameObjectThatCanHoldOtherObjects.inventory.add(gameObjectToPutInInventroy);
 		this.objectsSettingsWindow.update();
 		this.toast = new Toast("Select a location to add object");
 		// if (gameObject instanceof Actor) {

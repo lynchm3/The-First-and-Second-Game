@@ -43,6 +43,7 @@ public class AIRoutineUtils {
 		// 1. create list of enemies
 		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
+
 				if (clazz == null || clazz.isInstance(actor)) {
 					if (actor.remainingHealth > 0) {
 						Square square = calculateSquareToMoveToToAttackTarget(actor);
