@@ -1027,4 +1027,28 @@ public class Actor extends GameObject implements Owner {
 			this.inventory.add(tempGameObject);
 		}
 	}
+
+	public void sellAllToTarget(GameObject gameObject) {
+
+		ArrayList<GameObject> tempGameObjects = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
+
+		for (GameObject tempGameObject : tempGameObjects) {
+			this.inventory.remove(tempGameObject);
+			gameObject.inventory.add(tempGameObject);
+		}
+
+	}
+
+	public void sellAllToTarget(Class clazz, GameObject gameObject) {
+
+		ArrayList<GameObject> tempGameObjects = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
+
+		for (GameObject tempGameObject : tempGameObjects) {
+			if (clazz == null || clazz.isInstance(gameObject)) {
+				this.inventory.remove(tempGameObject);
+				gameObject.inventory.add(tempGameObject);
+			}
+		}
+
+	}
 }

@@ -10,8 +10,8 @@ public class Weapon extends WeaponTemplate {
 
 	public Owner owner;
 
-	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, Owner owner,
-			float health, Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects) {
+	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, float health,
+			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects) {
 		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
 				canContainOtherObjects);
 

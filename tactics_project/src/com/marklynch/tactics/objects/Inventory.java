@@ -48,27 +48,30 @@ public class Inventory {
 	}
 
 	public void add(GameObject gameObject) {
-		if (!gameObjects.contains(gameObject))
+		if (!gameObjects.contains(gameObject)) {
 			gameObjects.add(gameObject);
-		for (int i = 0; i < inventorySquares.length; i++) {
-			for (int j = 0; j < inventorySquares[i].length; j++) {
-				if (inventorySquares[i][j].gameObject == null) {
-					inventorySquares[i][j].gameObject = gameObject;
-					gameObject.inventorySquareGameObjectIsOn = inventorySquares[i][j];
-					return;
+			for (int i = 0; i < inventorySquares.length; i++) {
+				for (int j = 0; j < inventorySquares[i].length; j++) {
+					if (inventorySquares[i][j].gameObject == null) {
+						inventorySquares[i][j].gameObject = gameObject;
+						gameObject.inventorySquareGameObjectIsOn = inventorySquares[i][j];
+						return;
+					}
 				}
 			}
 		}
 	}
 
 	public void remove(GameObject gameObject) {
-		gameObjects.remove(gameObject);
-		for (int i = 0; i < inventorySquares.length; i++) {
-			for (int j = 0; j < inventorySquares[i].length; j++) {
-				if (inventorySquares[i][j].gameObject == gameObject) {
-					inventorySquares[i][j].gameObject.inventorySquareGameObjectIsOn = null;
-					inventorySquares[i][j].gameObject = null;
-					return;
+		if (gameObjects.contains(gameObject)) {
+			gameObjects.remove(gameObject);
+			for (int i = 0; i < inventorySquares.length; i++) {
+				for (int j = 0; j < inventorySquares[i].length; j++) {
+					if (inventorySquares[i][j].gameObject == gameObject) {
+						inventorySquares[i][j].gameObject.inventorySquareGameObjectIsOn = null;
+						inventorySquares[i][j].gameObject = null;
+						return;
+					}
 				}
 			}
 		}

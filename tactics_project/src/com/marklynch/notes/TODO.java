@@ -2,6 +2,29 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Have to look in to turning some classes of gameobject and actor in to
+	// boolean flags
+
+	// Shopkeeper class has array of templates that u can buy from them. Or
+	// maybe array of objects? ye, guck it, just have an inventory like a normal
+	// person, but a massive one. And make sure they don't give shit away :P
+
+	// AIs need to buy new equipment: make array of squipment available in shop,
+	// shorten to what u can afford, then shorten that down to the best of each
+	// class, then compare to current equipment in each class to decide what to
+	// buy. Maybe take into account the damage difference... etc. Maybe I could
+	// have an algorithm to give each item a rating that'll help decide.
+
+	// Ye, then they go in to sell mode and sell the less the inferior
+	// equipment, then probably keep that bit of money in hand
+
+	// Also, sell unused equipment
+
+	// The actor class will allow looting of live people and selling to dead
+	// people
+
+	// Also... selling method at the moment is really just giving :P
+
 	// if u walk in to an ally they swap squares with you
 
 	// Watch for calls to

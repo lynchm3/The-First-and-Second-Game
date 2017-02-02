@@ -5,6 +5,8 @@ import com.marklynch.tactics.objects.level.Square;
 
 public class ShopKeeper extends Actor {
 
+	// ArrayList<>
+
 	public ShopKeeper(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {

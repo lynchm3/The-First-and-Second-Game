@@ -27,6 +27,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectExploder;
 import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.tactics.objects.Inventory;
+import com.marklynch.tactics.objects.Junk;
 import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
@@ -110,7 +111,7 @@ public class Editor {
 	public ArrayList<GameObjectTemplate> gameObjectTemplates = new ArrayList<GameObjectTemplate>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public AttributeSelectionWindow attributeSelectionWindow;
-	public GameObject gameObjectTemplate;
+	public GameObjectTemplate gameObjectTemplate;
 	public Actor actorTemplate;
 
 	public enum EDITOR_STATE {
@@ -154,6 +155,9 @@ public class Editor {
 		GameObjectTemplate gameObjectTemplate = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png", null,
 				new Inventory(), true, false, false, true);
 		gameObjectTemplates.add(gameObjectTemplate);
+
+		Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, false, true);
+		gameObjectTemplates.add(furTemplate);
 
 		ActorTemplate actorTemplate = new ActorTemplate("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", null, 4,
 				new Inventory(), false, false, true);
@@ -446,10 +450,11 @@ public class Editor {
 		// weapons.add((Weapon) weaponsForActor1.get(i));
 		// // Game.level.inanimateObjects.add(weaponsForActor1.get(i));
 		// }
-		Inventory inventoryForActor2 = new Inventory();
-		ArrayList<GameObject> weaponsForActor2 = new ArrayList<GameObject>();
-		weaponsForActor2.add(gameObjectTemplates.get(0).makeCopy(null));
-		inventoryForActor2.setGameObjects(weaponsForActor2);
+		Inventory inventoryForWildAnimal = new Inventory();
+		inventoryForWildAnimal.add(gameObjectTemplates.get(4).makeCopy(null));
+		// ArrayList<GameObject> weaponsForActor2 = new ArrayList<GameObject>();
+		// weaponsForActor2.add(gameObjectTemplates.get(0).makeCopy(null));
+		// inventoryForWildAnimal.setGameObjects(weaponsForActor2);
 
 		// Add actor
 		Actor player = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 1,
@@ -469,7 +474,7 @@ public class Editor {
 		}
 
 		Actor wildAnimal = new WildAnimal("Wild Animal", "Wild Animal", 1, 10, 0, 0, 0, 0, "wolf.png",
-				Game.level.squares[6][6], 4, inventoryForActor2, true, false, true);
+				Game.level.squares[6][6], 4, inventoryForWildAnimal, true, false, true);
 		wildAnimal.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(wildAnimal);
 

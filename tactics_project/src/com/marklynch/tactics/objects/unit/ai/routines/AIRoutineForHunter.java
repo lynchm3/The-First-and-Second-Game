@@ -1,6 +1,7 @@
 package com.marklynch.tactics.objects.unit.ai.routines;
 
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.Junk;
 import com.marklynch.tactics.objects.unit.ShopKeeper;
 import com.marklynch.tactics.objects.unit.WildAnimal;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
@@ -11,7 +12,7 @@ public class AIRoutineForHunter extends AIRoutine {
 	// Square squareToMoveTo;
 
 	enum HUNT_STATE {
-		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, PICK_SHOP_KEEPER, GO_TO_SHOP_KEEPER_AND_SELL_LOOT, SELL_LOOT, GO_TO_BED, GO_TO_BED_AND_SLEEP
+		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, PICK_SHOP_KEEPER, GO_TO_SHOP_KEEPER_AND_SELL_JUNK, GO_TO_BED_AND_SLEEP
 	};
 
 	public HUNT_STATE huntState = HUNT_STATE.PICK_WILD_ANIMAL;
@@ -65,13 +66,19 @@ public class AIRoutineForHunter extends AIRoutine {
 			if (target == null) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_SLEEP;
 			} else {
-				huntState = HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_LOOT;
+				huntState = HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK;
 			}
 		}
 
-		if (huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_LOOT) {
-			System.out.println("huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_LOOT");
-			AIRoutineUtils.moveTowardsTargetToLoot(target);
+		if (huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK) {
+			System.out.println("huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK");
+
+			boolean soldItems = AIRoutineUtils.sellAllToTarget(Junk.class, target);
+			if (!soldItems)
+				AIRoutineUtils.moveTowardsTargetToLoot(target);
+			else
+				huntState = HUNT_STATE.GO_TO_BED_AND_SLEEP;
+
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_SLEEP) {

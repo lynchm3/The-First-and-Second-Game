@@ -1,11 +1,10 @@
 package com.marklynch.tactics.objects.weapons;
 
 import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.level.Square;
 
-public class WeaponTemplate extends GameObjectTemplate {
+public class WeaponTemplate extends GameObject {
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
 			"totalHealth", "remainingHealth", "owner", "inventory", "showInventory", "fitsInInventory",
 			"canContainOtherObjects" };
@@ -28,7 +27,7 @@ public class WeaponTemplate extends GameObjectTemplate {
 
 	@Override
 	public GameObject makeCopy(Square square) {
-		return new Weapon(new String(name), damage, minRange, maxRange, imageTexturePath, owner, totalHealth, square,
+		return new Weapon(new String(name), damage, minRange, maxRange, imageTexturePath, totalHealth, square,
 				fitsInInventory, canContainOtherObjects);
 	}
 }

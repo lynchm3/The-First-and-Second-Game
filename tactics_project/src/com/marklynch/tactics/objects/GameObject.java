@@ -21,32 +21,18 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class GameObject {
+public class GameObject extends GameObjectTemplate {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
 	public String guid = UUID.randomUUID().toString();
 
-	public String name = "";
-
 	// attributes
-	public float totalHealth = 0;
 	public float remainingHealth = 0;
-	public Owner owner;
-	public Inventory inventory;
-	public boolean showInventory;
-	public boolean canShareSquare;
-	public boolean fitsInInventory;
-	public boolean canContainOtherObjects;
 
 	public transient boolean hasAttackedThisTurn = false;
 
-	// Interaction with the level
-	public Square squareGameObjectIsOn = null;
-
 	// image
-	public transient Texture imageTexture = null;
-	public String imageTexturePath = null;
 
 	// images
 	public static transient Texture powTexture = null;
@@ -76,16 +62,10 @@ public class GameObject {
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects) {
-		super();
-		this.name = name;
-		this.totalHealth = health;
+
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
+				canContainOtherObjects);
 		this.remainingHealth = health;
-		this.imageTexturePath = imagePath;
-		this.inventory = inventory;
-		this.showInventory = showInventory;
-		this.canShareSquare = canShareSquare;
-		this.fitsInInventory = fitsInInventory;
-		this.canContainOtherObjects = canContainOtherObjects;
 
 		System.out.println("squareGameObjectIsOn = " + squareGameObjectIsOn);
 
@@ -103,8 +83,9 @@ public class GameObject {
 		loadImages();
 	}
 
+	@Override
 	public void loadImages() {
-		this.imageTexture = getGlobalImage(imageTexturePath);
+		super.loadImages();
 		this.powTexture = getGlobalImage("pow.png");
 		this.vsTexture = getGlobalImage("vs.png");
 		this.fightTexture = getGlobalImage("fight.png");
@@ -367,6 +348,7 @@ public class GameObject {
 		return null;
 	}
 
+	@Override
 	public GameObject makeCopy(Square square) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects);

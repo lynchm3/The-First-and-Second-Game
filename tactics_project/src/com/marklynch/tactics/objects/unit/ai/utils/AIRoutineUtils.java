@@ -34,8 +34,6 @@ public class AIRoutineUtils {
 	public static GameObject getNearest(Class clazz) {
 
 		GameObject result = null;
-
-		Square squareToMoveTo = null;
 		int costToBest = Integer.MAX_VALUE;
 
 		// Calculate paths to all squares
@@ -45,7 +43,7 @@ public class AIRoutineUtils {
 		// 1. create list of enemies
 		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
-				if (clazz.isInstance(actor)) {
+				if (clazz == null || clazz.isInstance(actor)) {
 					if (actor.remainingHealth > 0) {
 						Square square = calculateSquareToMoveToToAttackTarget(actor);
 						if (square != null && square.distanceToSquare < costToBest) {
@@ -61,7 +59,7 @@ public class AIRoutineUtils {
 
 	}
 
-	public GameObject getNearestEnemy(Class clazz) {
+	public GameObject getNearestEnemy() {
 		GameObject result = null;
 
 		Square squareToMoveTo = null;
@@ -522,6 +520,16 @@ public class AIRoutineUtils {
 		int weaponDistance = Game.level.activeActor.weaponDistanceTo(gameObject.squareGameObjectIsOn);
 		if (weaponDistance <= 1 && gameObject.remainingHealth <= 0) {
 			Game.level.activeActor.lootAll(gameObject);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean sellAllToTarget(Class clazz, GameObject gameObject) {
+		int weaponDistance = Game.level.activeActor.weaponDistanceTo(gameObject.squareGameObjectIsOn);
+		if (weaponDistance <= 1 && gameObject.remainingHealth > 0) {
+			Game.level.activeActor.sellAllToTarget(clazz, gameObject);
 			return true;
 		} else {
 			return false;
