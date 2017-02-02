@@ -1,15 +1,16 @@
 package com.marklynch.tactics.objects.unit.ai.routines;
 
 import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.unit.Actor;
-import com.marklynch.tactics.objects.unit.ai.utils.UtilFind;
+import com.marklynch.tactics.objects.unit.WildAnimal;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
-public class AIRoutineHunt {
+public class AIRoutineHunt extends AIRoutine {
 
-	GameObject Target;
+	GameObject target;
+	// Square squareToMoveTo;
 
 	enum HUNT_STATE {
-		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL, KILL_WILD_ANIMAL, LOOT_WILD_ANIMAL, PICK_SHOP, GO_TO_SHOP, SELL_LOOT, GO_TO_BED, SLEEP
+		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, PICK_SHOP, GO_TO_SHOP, SELL_LOOT, GO_TO_BED, SLEEP
 	};
 
 	public HUNT_STATE huntState = HUNT_STATE.PICK_WILD_ANIMAL;
@@ -18,17 +19,38 @@ public class AIRoutineHunt {
 
 	}
 
+	@Override
 	public void update() {
+		System.out.println("AIRoutineHunt.update()");
 		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL) {
-			UtilFind.findNearest(Actor.class, 100, null);
+			System.out.println("huntState == HUNT_STATE.PICK_WILD_ANIMAL");
+			// if (target == null)
+			target = AIRoutineUtils.getNearest(WildAnimal.class);
+			if (target == null) {
+				huntState = HUNT_STATE.SLEEP;
+			} else {
+				huntState = HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK;
+			}
 		}
-		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL) {
 
+		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
+			System.out.println("huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK");
+			if (target.remainingHealth <= 0 && target.inventory.size() > 0) {
+				huntState = HUNT_STATE.GO_TO_WILD_ANIMAL_AND_LOOT;
+			} else if (target.remainingHealth <= 0 && target.inventory.size() == 0) {
+				huntState = HUNT_STATE.SLEEP;
+			} else {
+				boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
+				if (!attackedAnimal)
+					AIRoutineUtils.moveTowardsTargetToAttack(target);
+			}
 		}
-		if (huntState == HUNT_STATE.KILL_WILD_ANIMAL) {
 
-		}
-		if (huntState == HUNT_STATE.LOOT_WILD_ANIMAL) {
+		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_LOOT) {
+			System.out.println("huntState == HUNT_STATE.LOOT_WILD_ANIMAL");
+			boolean lootedAnimal = AIRoutineUtils.lootTarget(target);
+			if (!lootedAnimal)
+				AIRoutineUtils.moveTowardsTargetToLoot(target);
 
 		}
 		if (huntState == HUNT_STATE.PICK_SHOP) {
@@ -45,6 +67,7 @@ public class AIRoutineHunt {
 
 		}
 		if (huntState == HUNT_STATE.SLEEP) {
+			System.out.println("huntState == HUNT_STATE.SLEEP");
 
 		}
 	}

@@ -445,9 +445,13 @@ public class Editor {
 		// weapons.add((Weapon) weaponsForActor1.get(i));
 		// // Game.level.inanimateObjects.add(weaponsForActor1.get(i));
 		// }
+		Inventory inventoryForActor2 = new Inventory();
+		ArrayList<GameObject> weaponsForActor2 = new ArrayList<GameObject>();
+		weaponsForActor2.add(gameObjectTemplates.get(0).makeCopy(null));
+		inventoryForActor2.setGameObjects(weaponsForActor2);
 
 		// Add actor
-		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 4,
+		Actor actor0 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 1,
 				inventoryForActor0, true, false, true);
 		actor0.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(actor0);
@@ -455,7 +459,7 @@ public class Editor {
 			actor0.inventory.get(i).inventoryThatHoldsThisObject = actor0.inventory;
 		}
 
-		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5], 4,
+		Actor actor1 = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5], 1,
 				inventoryForActor1, true, false, true);
 		actor1.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(actor1);
@@ -464,7 +468,7 @@ public class Editor {
 		}
 
 		Actor actor2 = new WildAnimal("Wild Animal", "Wild Animal", 1, 10, 0, 0, 0, 0, "image.png",
-				Game.level.squares[6][6], 4, new Inventory(), true, false, true);
+				Game.level.squares[6][6], 4, inventoryForActor2, true, false, true);
 		actor2.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(actor2);
 

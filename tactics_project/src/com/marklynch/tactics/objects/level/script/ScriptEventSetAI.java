@@ -3,14 +3,14 @@ package com.marklynch.tactics.objects.level.script;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
-import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 
 public class ScriptEventSetAI extends ScriptEvent {
 
 	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "actor", "ai" };
 
 	public transient Actor actor;
-	public AIRoutineUtils ai;
+	public AIRoutine aiRoutine;
 
 	boolean completed = false;
 
@@ -21,11 +21,11 @@ public class ScriptEventSetAI extends ScriptEvent {
 		name = "ScriptEventSetAI";
 	}
 
-	public ScriptEventSetAI(boolean blockUserInput, ScriptTrigger scriptTrigger, Actor actor, AIRoutineUtils ai) {
+	public ScriptEventSetAI(boolean blockUserInput, ScriptTrigger scriptTrigger, Actor actor, AIRoutine aiRoutine) {
 		super(blockUserInput, scriptTrigger);
 		this.actor = actor;
 		this.actorGUID = actor.guid;
-		this.ai = ai;
+		this.aiRoutine = aiRoutine;
 		this.name = "ScriptEventSetAI";
 	}
 
@@ -33,12 +33,12 @@ public class ScriptEventSetAI extends ScriptEvent {
 	public void postLoad() {
 		scriptTrigger.postLoad();
 		actor = Game.level.findActorFromGUID(actorGUID);
-		ai.postLoad();
+		// aiRoutine.postLoad();
 	}
 
 	@Override
 	public void update(int delta) {
-		actor.ai = ai;
+		actor.aiRoutine = aiRoutine;
 		completed = true;
 	}
 

@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// if u walk in to an ally they swap squares with you
+
 	// Watch for calls to
 	// Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 	// Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);

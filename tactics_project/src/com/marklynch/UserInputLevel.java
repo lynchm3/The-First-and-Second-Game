@@ -105,8 +105,6 @@ public class UserInputLevel {
 
 		}
 
-		System.out.println("Game.inventoryHoveringOver = " + Game.inventoryHoveringOver);
-
 		// Path highlights
 		if (scriptInterceptsClick == false && Game.buttonHoveringOver == null && Game.level.activeActor != null
 				&& Game.squareMouseIsOver != null && Game.squareMouseIsOver.reachableBySelectedCharater

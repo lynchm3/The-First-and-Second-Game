@@ -370,11 +370,6 @@ public class GameObject {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects);
 	}
 
-	public void update(int delta) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public ArrayList<Weapon> getWeaponsInInventory() {
 		ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 		for (GameObject gameObject : inventory.getGameObjects()) {
@@ -383,5 +378,9 @@ public class GameObject {
 			}
 		}
 		return weapons;
+	}
+
+	public void update(int delta) {
+
 	}
 }

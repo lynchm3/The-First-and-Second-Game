@@ -13,7 +13,8 @@ import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
-import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineHunt;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.AttackButton;
@@ -63,7 +64,7 @@ public class Actor extends GameObject implements Owner {
 	public transient GameObject hoverFightPreviewDefender = null;
 	public transient Vector<Fight> hoverFightPreviewFights;
 
-	public transient AIRoutineUtils ai = new AIRoutineUtils();
+	public transient AIRoutine aiRoutine;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Inventory inventory,
@@ -102,6 +103,8 @@ public class Actor extends GameObject implements Owner {
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
+
+		aiRoutine = new AIRoutineHunt();
 	}
 
 	@Override
@@ -130,7 +133,8 @@ public class Actor extends GameObject implements Owner {
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
-		ai = new AIRoutineUtils();
+
+		aiRoutine = new AIRoutineHunt();
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
@@ -172,7 +176,8 @@ public class Actor extends GameObject implements Owner {
 
 	public int weaponDistanceTo(Square square) {
 
-		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid) + Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
+		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid)
+				+ Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
 
 	}
 
@@ -281,7 +286,7 @@ public class Actor extends GameObject implements Owner {
 		if (remainingHealth <= 0) {
 			this.squareGameObjectIsOn.inventory.remove(this);
 			this.faction.actors.remove(this);
-			screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
+			// screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
 			return true;
 		}
 		return false;
@@ -579,8 +584,8 @@ public class Actor extends GameObject implements Owner {
 						- attackerPotentialHealthLossWidth;
 
 				// Attacker Positions of bars
-				float attackerTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
-						- 10;
+				float attackerTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid
+						* (Game.SQUARE_WIDTH) - 10;
 
 				float attackerCurrentHealthX = attackerTotalHealthX;
 
@@ -723,8 +728,8 @@ public class Actor extends GameObject implements Owner {
 								/ this.hoverFightPreviewDefender.totalHealth);
 
 				// Defender Positions of bars
-				float defenderTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH
-						+ Game.SQUARE_WIDTH / 2f;
+				float defenderTotalHealthX = this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid
+						* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2f;
 
 				float defenderCurrentHealthX = defenderTotalHealthX + defenderCurrentMissingHealthWidth;
 
@@ -844,8 +849,8 @@ public class Actor extends GameObject implements Owner {
 				if (hoverFightPreviewFights
 						.get(i).damageTakenByDefender >= hoverFightPreviewFights.get(i).defender.remainingHealth) {
 					TextureUtils.drawTexture(skullTexture, defenderHealthLossAlpha,
-							hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) + (Game.SQUARE_WIDTH)
-									+ 16,
+							hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
+									+ (Game.SQUARE_WIDTH) + 16,
 							this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
 									+ (Game.SQUARE_WIDTH) + 48,
 							previewPositionYs[i] - 2, previewPositionYs[i] + 30);
@@ -870,10 +875,10 @@ public class Actor extends GameObject implements Owner {
 
 			// fight symbol
 			TextureUtils.drawTexture(fightTexture,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) + Game.SQUARE_WIDTH / 2f
-							- 16,
-					this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH) + Game.SQUARE_WIDTH / 2f
-							+ 16,
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
+							+ Game.SQUARE_WIDTH / 2f - 16,
+					this.hoverFightPreviewDefender.squareGameObjectIsOn.xInGrid * (Game.SQUARE_WIDTH)
+							+ Game.SQUARE_WIDTH / 2f + 16,
 					this.hoverFightPreviewDefender.squareGameObjectIsOn.yInGrid * (Game.SQUARE_HEIGHT) - 40,
 					this.hoverFightPreviewDefender.squareGameObjectIsOn.yInGrid * (Game.SQUARE_HEIGHT) - 8);
 
@@ -1000,5 +1005,21 @@ public class Actor extends GameObject implements Owner {
 		return new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
 				imageTexturePath, square, travelDistance, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects);
+	}
+
+	@Override
+	public void update(int delta) {
+		System.out.println("actor.update()");
+		this.aiRoutine.update();
+	}
+
+	public void lootAll(GameObject gameObject) {
+
+		ArrayList<GameObject> tempGameObjects = (ArrayList<GameObject>) gameObject.inventory.getGameObjects().clone();
+
+		for (GameObject tempGameObject : tempGameObjects) {
+			gameObject.inventory.remove(tempGameObject);
+			this.inventory.add(tempGameObject);
+		}
 	}
 }
