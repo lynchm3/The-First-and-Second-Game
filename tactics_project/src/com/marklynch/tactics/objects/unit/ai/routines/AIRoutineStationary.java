@@ -1,6 +1,8 @@
 package com.marklynch.tactics.objects.unit.ai.routines;
 
-public class AIRoutineStationary extends AIRoutine {
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
+
+public class AIRoutineStationary extends AIRoutineUtils {
 	public final static String[] editableAttributes = { "name", };
 
 	public AIRoutineStationary() {

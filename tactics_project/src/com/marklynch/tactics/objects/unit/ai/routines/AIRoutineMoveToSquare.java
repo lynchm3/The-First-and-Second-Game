@@ -2,8 +2,9 @@ package com.marklynch.tactics.objects.unit.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
-public class AIRoutineMoveToSquare extends AIRoutine {
+public class AIRoutineMoveToSquare extends AIRoutineUtils {
 	public final static String[] editableAttributes = { "name", "square" };
 	public transient Square square;
 
@@ -41,7 +42,7 @@ public class AIRoutineMoveToSquare extends AIRoutine {
 	}
 
 	@Override
-	public AIRoutine makeCopy() {
+	public AIRoutineUtils makeCopy() {
 		AIRoutineMoveToSquare ai = new AIRoutineMoveToSquare(square);
 		ai.name = new String(name);
 		return ai;

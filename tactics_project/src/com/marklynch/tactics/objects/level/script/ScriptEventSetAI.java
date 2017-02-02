@@ -3,14 +3,14 @@ package com.marklynch.tactics.objects.level.script;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
 public class ScriptEventSetAI extends ScriptEvent {
 
 	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "actor", "ai" };
 
 	public transient Actor actor;
-	public AIRoutine ai;
+	public AIRoutineUtils ai;
 
 	boolean completed = false;
 
@@ -21,7 +21,7 @@ public class ScriptEventSetAI extends ScriptEvent {
 		name = "ScriptEventSetAI";
 	}
 
-	public ScriptEventSetAI(boolean blockUserInput, ScriptTrigger scriptTrigger, Actor actor, AIRoutine ai) {
+	public ScriptEventSetAI(boolean blockUserInput, ScriptTrigger scriptTrigger, Actor actor, AIRoutineUtils ai) {
 		super(blockUserInput, scriptTrigger);
 		this.actor = actor;
 		this.actorGUID = actor.guid;

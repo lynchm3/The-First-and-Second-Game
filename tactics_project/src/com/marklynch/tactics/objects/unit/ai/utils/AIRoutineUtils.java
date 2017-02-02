@@ -1,4 +1,4 @@
-package com.marklynch.tactics.objects.unit.ai.routines;
+package com.marklynch.tactics.objects.unit.ai.utils;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -12,11 +12,11 @@ import com.marklynch.tactics.objects.unit.Fight;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.weapons.Weapon;
 
-public class AIRoutine {
+public class AIRoutineUtils {
 
 	public String name = "AI";
 
-	public AIRoutine() {
+	public AIRoutineUtils() {
 		name = this.getClass().getSimpleName();
 	}
 
@@ -31,7 +31,71 @@ public class AIRoutine {
 	public void postLoad() {
 	}
 
-	public boolean moveTowardsTargetToAttack(GameObject target) {
+	public static GameObject getNearest(Class clazz) {
+
+		GameObject result = null;
+
+		Square squareToMoveTo = null;
+		int costToBest = Integer.MAX_VALUE;
+
+		// Calculate paths to all squares
+		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+
+		// 1. create list of enemies
+		for (Faction faction : Game.level.factions) {
+			for (Actor actor : faction.actors) {
+				if (clazz.isInstance(actor)) {
+					Square square = calculateSquareToMoveToForTarget(actor);
+					if (square != null && square.distanceToSquare < costToBest) {
+						result = actor;
+						costToBest = square.distanceToSquare;
+					}
+				}
+			}
+		}
+
+		return result;
+
+	}
+
+	public GameObject getNearestEnemy(Class clazz) {
+		GameObject result = null;
+
+		Square squareToMoveTo = null;
+		int costToBest = Integer.MAX_VALUE;
+
+		// TODO
+		// currently if there's no path it crashes
+		// also... stay still fi ur already at the best part :P, issue (need to
+		// know ideal distance for this one though)
+		// is, its not in target's list of paths
+		// ehhhhhhhhhh.... if it's not fully reachable then just go
+		// closest as the crow flies?
+		// also... have ideal distance (for ranged VS melee for e.g.) (this is
+		// weapon distance, not travel distance)
+
+		// Calculate paths to all squares
+		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+
+		// 1. create list of enemies
+		for (Faction faction : Game.level.factions) {
+			if (faction != Game.level.activeActor.faction
+					&& Game.level.activeActor.faction.relationships.get(faction).relationship < 0) {
+				for (Actor actor : faction.actors) {
+					Square square = calculateSquareToMoveToForTarget(actor);
+					if (square != null && square.distanceToSquare < costToBest) {
+						result = actor;
+						costToBest = square.distanceToSquare;
+					}
+				}
+			}
+		}
+
+		return result;
+
+	}
+
+	public static boolean moveTowardsTargetToAttack(GameObject target) {
 
 		// TODO
 		// currently if there's no path it crashes
@@ -72,58 +136,28 @@ public class AIRoutine {
 		}
 	}
 
-	public boolean moveTowardsNearestEnemyToAttack() {
-
-		Square squareToMoveTo = null;
-		int costToBest = Integer.MAX_VALUE;
-
-		// TODO
-		// currently if there's no path it crashes
-		// also... stay still fi ur already at the best part :P, issue (need to
-		// know ideal distance for this one though)
-		// is, its not in target's list of paths
-		// ehhhhhhhhhh.... if it's not fully reachable then just go
-		// closest as the crow flies?
-		// also... have ideal distance (for ranged VS melee for e.g.) (this is
-		// weapon distance, not travel distance)
-
-		// Calculate paths to all squares
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
-
-		// 1. create list of enemies
-		for (Faction faction : Game.level.factions) {
-			if (faction != Game.level.activeActor.faction
-					&& Game.level.activeActor.faction.relationships.get(faction).relationship < 0) {
-				for (Actor actor : faction.actors) {
-					Square square = calculateSquareToMoveToForTarget(actor);
-					if (square != null && square.distanceToSquare < costToBest) {
-						squareToMoveTo = square;
-						costToBest = square.distanceToSquare;
-					}
-				}
-			}
-		}
-
-		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
-		// idealWeaponDistances.add(2);
-
-		// TODO this needs to be calculated based on
-		// weapons available and the taret and their weapons
-		// TODO what if we're stuck being closed than ideal distance, need to
-		// run through this, and there could be a list of ideal distances......
-		// :/
-		// TODO ideal weapon distance could be on the other side of an object...
-		// need to factor this in when choosing a good square :/, when talking
-		// about targets squares I need to make list of attack squares, this
-		// shit is heavy
-
-		if (squareToMoveTo != null) {
-			Game.level.activeActor.moveTo(squareToMoveTo);
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// public boolean moveTowardsNearestEnemyToAttack() {
+	//
+	// // Vector<Integer> idealWeaponDistances = new Vector<Integer>();
+	// // idealWeaponDistances.add(2);
+	//
+	// // TODO this needs to be calculated based on
+	// // weapons available and the taret and their weapons
+	// // TODO what if we're stuck being closed than ideal distance, need to
+	// // run through this, and there could be a list of ideal distances......
+	// // :/
+	// // TODO ideal weapon distance could be on the other side of an object...
+	// // need to factor this in when choosing a good square :/, when talking
+	// // about targets squares I need to make list of attack squares, this
+	// // shit is heavy
+	//
+	// if (squareToMoveTo != null) {
+	// Game.level.activeActor.moveTo(squareToMoveTo);
+	// return true;
+	// } else {
+	// return false;
+	// }
+	// }
 
 	public boolean moveTowardsOptimalEnemyToAttack() {
 
@@ -205,7 +239,7 @@ public class AIRoutine {
 		}
 	}
 
-	public Square calculateSquareToMoveToForTarget(GameObject target) {
+	public static Square calculateSquareToMoveToForTarget(GameObject target) {
 
 		Vector<Float> idealWeaponDistances = Game.level.activeActor.calculateIdealDistanceFrom(target);
 
@@ -305,7 +339,7 @@ public class AIRoutine {
 
 	}
 
-	public boolean moveToRandomSquare() {
+	public static boolean moveToRandomSquare() {
 		// MOVE TO RANDOM SQUARE - maybe for a broken robot or confused
 		// enemy
 		Vector<Square> reachableSquares = new Vector<Square>();
@@ -390,7 +424,7 @@ public class AIRoutine {
 
 	}
 
-	public AIRoutine makeCopy() {
+	public AIRoutineUtils makeCopy() {
 		return null;
 	}
 

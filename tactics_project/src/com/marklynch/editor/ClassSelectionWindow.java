@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
@@ -52,8 +52,8 @@ public class ClassSelectionWindow<T> {
 						} else if (superClass == ScriptTrigger.class) {
 							Game.level.script.scriptTriggers.add((ScriptTrigger) classes.get(index).newInstance());
 							editor.classSelectionWindow = null;
-						} else if (superClass == AIRoutine.class) {
-							Game.level.ais.add((AIRoutine) classes.get(index).newInstance());
+						} else if (superClass == AIRoutineUtils.class) {
+							Game.level.ais.add((AIRoutineUtils) classes.get(index).newInstance());
 							editor.classSelectionWindow = null;
 						}
 

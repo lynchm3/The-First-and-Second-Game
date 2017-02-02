@@ -104,6 +104,15 @@ public class Inventory {
 		return gameObjects.contains(gameObject);
 	}
 
+	public boolean contains(Class clazz) {
+		for (GameObject gameObject : gameObjects) {
+			if (clazz.isInstance(gameObject)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public boolean canShareSquare() {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject != null && !gameObject.canShareSquare)

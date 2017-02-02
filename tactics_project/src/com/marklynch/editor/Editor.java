@@ -33,15 +33,13 @@ import com.marklynch.tactics.objects.level.FactionRelationship;
 import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerTurnStart;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ActorTemplate;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject;
+import com.marklynch.tactics.objects.unit.WildAnimal;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.tactics.objects.weapons.WeaponTemplate;
 import com.marklynch.ui.Toast;
@@ -465,6 +463,11 @@ public class Editor {
 			actor1.inventory.get(i).inventoryThatHoldsThisObject = actor1.inventory;
 		}
 
+		Actor actor2 = new WildAnimal("Wild Animal", "Wild Animal", 1, 10, 0, 0, 0, 0, "image.png",
+				Game.level.squares[6][6], 4, new Inventory(), true, false, true);
+		actor2.faction = Game.level.factions.get(0);
+		Game.level.factions.get(0).actors.add(actor2);
+
 		// Decorations
 		Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");
 		Game.level.decorations.add(cat);
@@ -512,24 +515,27 @@ public class Editor {
 				Game.level.factions.get(0).actors.get(0));
 		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true, speechParts, scriptTriggerActorSelected);
 
-		Game.level.script.scriptTriggers.add(new ScriptTriggerTurnStart(1, 0));
-		Game.level.script.scriptTriggers.add(scriptTriggerActorSelected);
-		Game.level.script.speechParts.add(speechPart1_1);
-		Game.level.script.speechParts.add(speechPart1_2);
-		Game.level.ais.add(new AIRoutineTargetObject(gameObject));
-		Game.level.ais.get(0).name = "attackDumpster";
-		Game.level.ais.add(new AIRoutineTargetObject(actor0));
-		Game.level.ais.get(1).name = "attackPlayer";
-
-		ScriptEventSetAI scriptEventSetAIAttackDumpster = new ScriptEventSetAI(false,
-				Game.level.script.scriptTriggers.get(0).makeCopy(), actor1, Game.level.ais.get(0).makeCopy());
-
-		ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
+		// Game.level.script.scriptTriggers.add(new ScriptTriggerTurnStart(1,
+		// 0));
+		// Game.level.script.scriptTriggers.add(scriptTriggerActorSelected);
+		// Game.level.script.speechParts.add(speechPart1_1);
+		// Game.level.script.speechParts.add(speechPart1_2);
+		// Game.level.ais.add(new AIRoutineTargetObject(gameObject));
+		// Game.level.ais.get(0).name = "attackDumpster";
+		// Game.level.ais.add(new AIRoutineTargetObject(actor0));
+		// Game.level.ais.get(1).name = "attackPlayer";
+		//
+		// ScriptEventSetAI scriptEventSetAIAttackDumpster = new
+		// ScriptEventSetAI(false,
+		// Game.level.script.scriptTriggers.get(0).makeCopy(), actor1,
+		// Game.level.ais.get(0).makeCopy());
+		//
+		// ArrayList<ScriptEvent> scriptEvents = new ArrayList<ScriptEvent>();
+		// // scriptEvents.add(scriptEventSpeech1);
+		// scriptEvents.add(scriptEventSetAIAttackDumpster);
 		// scriptEvents.add(scriptEventSpeech1);
-		scriptEvents.add(scriptEventSetAIAttackDumpster);
-		scriptEvents.add(scriptEventSpeech1);
-
-		Game.level.script.scriptEvents = scriptEvents;
+		//
+		// Game.level.script.scriptEvents = scriptEvents;
 		// script.activateScriptEvent();
 
 	}
@@ -560,7 +566,8 @@ public class Editor {
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
 			float x1 = this.selectedGameObject.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
-			float y1 = this.selectedGameObject.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
+			float y1 = this.selectedGameObject.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT
+					+ Game.SQUARE_HEIGHT / 2;
 			float x2 = Game.squareMouseIsOver.xInGrid * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
 			float y2 = Game.squareMouseIsOver.yInGrid * Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
 
@@ -1057,7 +1064,7 @@ public class Editor {
 			} else if (type.isAssignableFrom(ScriptTrigger.class)) {
 				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.script.scriptTriggers, false, this,
 						objectToEdit, "Select a Script Trigger");
-			} else if (type.isAssignableFrom(AIRoutine.class)) {
+			} else if (type.isAssignableFrom(AIRoutineUtils.class)) {
 				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.ais, false, this, objectToEdit,
 						"Select an AI Routine");
 			} else if (type.isAssignableFrom(boolean.class) || type.isAssignableFrom(Boolean.class)) {

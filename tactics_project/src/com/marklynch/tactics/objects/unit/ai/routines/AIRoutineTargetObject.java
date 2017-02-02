@@ -2,8 +2,9 @@ package com.marklynch.tactics.objects.unit.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
-public class AIRoutineTargetObject extends AIRoutine {
+public class AIRoutineTargetObject extends AIRoutineUtils {
 	public final static String[] editableAttributes = { "name", "object" };
 	public transient GameObject object;
 

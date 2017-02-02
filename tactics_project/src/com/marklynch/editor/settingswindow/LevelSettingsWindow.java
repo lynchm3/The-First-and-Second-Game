@@ -19,7 +19,7 @@ import com.marklynch.tactics.objects.level.Level;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.FileUtils;
@@ -194,7 +194,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 						// new SubClassFriendlyAdapter<Object>())
 						.registerTypeAdapter(ScriptEvent.class, new SubClassFriendlyAdapter<ScriptEvent>())
 						.registerTypeAdapter(ScriptTrigger.class, new SubClassFriendlyAdapter<ScriptTrigger>())
-						.registerTypeAdapter(AIRoutine.class, new SubClassFriendlyAdapter<AIRoutine>()).create();
+						.registerTypeAdapter(AIRoutineUtils.class, new SubClassFriendlyAdapter<AIRoutineUtils>()).create();
 
 				String json = gson.toJson(Game.level);
 				FileUtils.saveFile(json);
@@ -267,7 +267,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 						// new SubClassFriendlyAdapter<>())
 						.registerTypeAdapter(ScriptEvent.class, new SubClassFriendlyAdapter<ScriptEvent>())
 						.registerTypeAdapter(ScriptTrigger.class, new SubClassFriendlyAdapter<ScriptTrigger>())
-						.registerTypeAdapter(AIRoutine.class, new SubClassFriendlyAdapter<AIRoutine>()).create();
+						.registerTypeAdapter(AIRoutineUtils.class, new SubClassFriendlyAdapter<AIRoutineUtils>()).create();
 				String json = FileUtils.openFile();
 				// FileUtils.saveFile(json);
 				if (json != null) {

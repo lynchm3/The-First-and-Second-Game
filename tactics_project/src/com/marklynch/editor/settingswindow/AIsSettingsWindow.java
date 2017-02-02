@@ -6,11 +6,11 @@ import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineFreeze;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineMoveToSquare;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineStationary;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -55,7 +55,7 @@ public class AIsSettingsWindow extends SettingsWindow {
 				classes.add(AIRoutineFreeze.class);
 				classes.add(AIRoutineMoveToSquare.class);
 
-				editor.classSelectionWindow = new ClassSelectionWindow(classes, editor, AIRoutine.class,
+				editor.classSelectionWindow = new ClassSelectionWindow(classes, editor, AIRoutineUtils.class,
 						"Select an AI routine");
 			}
 		};
