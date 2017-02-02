@@ -14,7 +14,7 @@ import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineHunt;
+import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineForHunter;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.AttackButton;
@@ -104,7 +104,7 @@ public class Actor extends GameObject implements Owner {
 
 		hoverFightPreviewFights = new Vector<Fight>();
 
-		aiRoutine = new AIRoutineHunt();
+		aiRoutine = new AIRoutineForHunter();
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class Actor extends GameObject implements Owner {
 
 		hoverFightPreviewFights = new Vector<Fight>();
 
-		aiRoutine = new AIRoutineHunt();
+		aiRoutine = new AIRoutineForHunter();
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
@@ -284,8 +284,9 @@ public class Actor extends GameObject implements Owner {
 	@Override
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
-			this.squareGameObjectIsOn.inventory.remove(this);
-			this.faction.actors.remove(this);
+			// this.squareGameObjectIsOn.inventory.remove(this);
+			this.canShareSquare = true;
+			// this.faction.actors.remove(this);
 			// screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
 			return true;
 		}
@@ -413,12 +414,15 @@ public class Actor extends GameObject implements Owner {
 
 			// Draw weapon
 			if (equippedWeapon != null) {
-				TextureUtils.skipNormals = true;
+				// TextureUtils.skipNormals = true;
+				//
+				// TextureUtils.drawTexture(equippedWeapon.imageTexture, alpha,
+				// equippedWeaponPositionXInPixels,
+				// equippedWeaponPositionXInPixels + Game.SQUARE_WIDTH,
+				// equippedWeaponPositionYInPixels,
+				// equippedWeaponPositionYInPixels + Game.SQUARE_HEIGHT);
+				// TextureUtils.skipNormals = false;
 
-				TextureUtils.drawTexture(equippedWeapon.imageTexture, alpha, equippedWeaponPositionXInPixels,
-						equippedWeaponPositionXInPixels + Game.SQUARE_WIDTH, equippedWeaponPositionYInPixels,
-						equippedWeaponPositionYInPixels + Game.SQUARE_HEIGHT);
-				TextureUtils.skipNormals = false;
 				// TextureUtils.drawTexture(equippedWeapon.imageTexture,
 				// this.squareGameObjectIsOn.x * (Game.SQUARE_WIDTH)
 				// + Game.SQUARE_WIDTH / 2f - 0,
@@ -431,10 +435,11 @@ public class Actor extends GameObject implements Owner {
 			}
 
 			// Draw arm
-			TextureUtils.skipNormals = true;
-			TextureUtils.drawTexture(armTexture, alpha, armPositionXInPixels, armPositionXInPixels + Game.SQUARE_WIDTH,
-					armPositionYInPixels, armPositionYInPixels + Game.SQUARE_HEIGHT);
-			TextureUtils.skipNormals = false;
+			// TextureUtils.skipNormals = true;
+			// TextureUtils.drawTexture(armTexture, alpha, armPositionXInPixels,
+			// armPositionXInPixels + Game.SQUARE_WIDTH,
+			// armPositionYInPixels, armPositionYInPixels + Game.SQUARE_HEIGHT);
+			// TextureUtils.skipNormals = false;
 
 			Game.activeBatch.flush();
 			view.translate(new Vector2f(rotateXInPixels, rotateYInPixels));

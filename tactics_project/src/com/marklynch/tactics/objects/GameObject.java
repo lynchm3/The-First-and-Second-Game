@@ -182,9 +182,11 @@ public class GameObject {
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
 
-			if (squareGameObjectIsOn != null) {
-				this.squareGameObjectIsOn.inventory.remove(this);
-			}
+			this.canShareSquare = true;
+
+			// if (squareGameObjectIsOn != null) {
+			// this.squareGameObjectIsOn.inventory.remove(this);
+			// }
 			// Game.level.inanimateObjects.remove(this);
 
 			return true;
