@@ -10,9 +10,12 @@ import java.util.Vector;
 
 import com.marklynch.CustomizedTypeAdapterFactory;
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
+import com.marklynch.tactics.objects.unit.WildAnimal;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 import com.marklynch.ui.ActivityLog;
 
 import mdesl.graphics.Color;
@@ -118,8 +121,14 @@ public class Faction implements Owner {
 
 				}
 
+				
+				THIS IS ALL SORTS OF FUCKED UP COZ OF MY ORIGINAL PLAN :P
+				
+				GameObject target = AIRoutineUtils.getNearest(WildAnimal.class);
+				AIRoutineUtils.moveTowardsTargetToAttack(target);
+
 				// moveTowardsTarget(level.inanimateObjects.elementAt(0));
-				// moveToRandomSquare();
+				// AIRoutineUtils.moveToRandomSquare();
 				// TODO lure enemy in (like in WOW)
 				// TODO moveTowardsNearestEnemy
 				// TODO moveTowardsNearestObjecy

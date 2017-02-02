@@ -2,6 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Watch for calls to
+	// Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+	// Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+	// Game.level.activeActor.calculateReachableSquares(Game.level.squares);
+	// Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
+
+	//
+
 	// inventory is limited to 25
 
 	// Make the icon under the mouse when u have something selected bigger
