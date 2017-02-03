@@ -54,7 +54,6 @@ public class AttributesDialog {
 
 	public AttributesDialog(float x, float width, float y, final Object object, final Editor editor) {
 		super();
-		System.out.println("" + this.getClass().toString());
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -97,7 +96,8 @@ public class AttributesDialog {
 		} else if (object instanceof GameObject) {
 			GameObject gameObject = (GameObject) object;
 			if (gameObject.squareGameObjectIsOn != null) {
-				title = "Object @ " + gameObject.squareGameObjectIsOn.xInGrid + "," + gameObject.squareGameObjectIsOn.yInGrid;
+				title = "Object @ " + gameObject.squareGameObjectIsOn.xInGrid + ","
+						+ gameObject.squareGameObjectIsOn.yInGrid;
 			} else {
 				title = "" + gameObject.name;
 			}

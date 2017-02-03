@@ -36,16 +36,56 @@ public class AIRoutineUtils {
 		return false;
 	}
 
-	public static GameObject getNearest(Class clazz, float maxDistance, boolean fitsInInventory, boolean checkActors,
-			boolean checkInanimateObjects, boolean mustContainObjects) {
+	public static GameObject getNearestForPurposeOfBeingAdjacent(Class clazz, float maxDistance,
+			boolean fitsInInventory, boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects) {
 
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
 
-		// Calculate paths to all squares
+		// Calculate paths to all square
 
-		System.out.println("Game.level.activeActor = " + Game.level.activeActor);
-		System.out.println("Game.level.squares = " + Game.level.squares);
+		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+
+		if (checkActors) {
+			// 1. check actors
+			for (Faction faction : Game.level.factions) {
+				for (Actor actor : faction.actors) {
+					if (passesChecks(actor, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
+						Square square = calculateSquareToMoveToToLootTarget(actor);
+						if (square != null && square.walkingDistanceToSquare < costToBest) {
+							result = actor;
+							costToBest = square.walkingDistanceToSquare;
+						}
+					}
+
+				}
+			}
+		}
+
+		if (checkInanimateObjects) {
+			// 2. check gameObjects
+			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
+				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
+					Square square = calculateSquareToMoveToToLootTarget(gameObject);
+					if (square != null && square.walkingDistanceToSquare < costToBest) {
+						result = gameObject;
+						costToBest = square.walkingDistanceToSquare;
+					}
+				}
+			}
+		}
+
+		return result;
+
+	}
+
+	public static GameObject getNearestForPurposeOfAttack(Class clazz, float maxDistance, boolean fitsInInventory,
+			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects) {
+
+		GameObject result = null;
+		int costToBest = Integer.MAX_VALUE;
+
+		// Calculate paths to all square
 
 		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
@@ -85,33 +125,23 @@ public class AIRoutineUtils {
 	public static boolean passesChecks(GameObject gameObject, Class clazz, float maxDistance, boolean fitsInInventory,
 			boolean mustContainsObjects) {
 
-		System.out.println("passesChecks a clazz = " + clazz);
-		System.out.println("passesChecks a gameObject.class() = " + gameObject.getClass());
-
 		if (mustContainsObjects && gameObject.inventory.size() <= 0)
 			return false;
-		System.out.println("passesChecks b");
 
 		if (gameObject.remainingHealth <= 0)
 			return false;
-		System.out.println("passesChecks c");
 
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
 
-		System.out.println("passesChecks d");
 		// check class
 		if (clazz != null && !clazz.isInstance(gameObject))
 			return false;
-		System.out.println("passesChecks e");
-
-		System.out.println("gameObject = " + gameObject);
 
 		// check distance
 		if (maxDistance > 0
 				&& Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) > maxDistance)
 			return false;
-		System.out.println("passesChecks f");
 
 		return true;
 

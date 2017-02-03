@@ -461,7 +461,7 @@ public class Editor {
 		// inventoryForWildAnimal.setGameObjects(weaponsForActor2);
 
 		// Add actor
-		Actor player = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 1,
+		Actor player = new Actor("Old lady", "Fighter", 10, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 10,
 				null, inventoryForActor0, true, false, true);
 		player.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(player);
@@ -711,7 +711,6 @@ public class Editor {
 	}
 
 	public void squareClicked(Square square) {
-		System.out.println("squareClicked " + square + ", state = " + EDITOR_STATE.DEFAULT);
 
 		if (square.inventory.size() == 0) {// Nothing on the square
 			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.SETTINGS_CHANGE) {
@@ -853,25 +852,11 @@ public class Editor {
 	}
 
 	public void moveGameObject(GameObject gameObject1, Square square2) {
-		System.out.println("moveGameObject " + gameObject1 + ", " + square2);
 
 		Square square1 = gameObject1.squareGameObjectIsOn;
-		System.out.println("moveGameObject square1 = " + square1);
-
-		for (int i = 0; i < square1.inventory.size(); i++) {
-			System.out.println("moveGameObject preremove square1.inventory " + i + " " + square1.inventory.get(i));
-		}
-
-		System.out.println("moveGameObject removing " + gameObject1);
 
 		if (square1 != null)
 			square1.inventory.remove(gameObject1);
-
-		for (int i = 0; i < square1.inventory.size(); i++) {
-			System.out.println("moveGameObject square1.inventory " + i + " " + square1.inventory.get(i));
-		}
-
-		System.out.println("moveGameObject square1 = " + square1);
 
 		square2.inventory.add(gameObject1);
 

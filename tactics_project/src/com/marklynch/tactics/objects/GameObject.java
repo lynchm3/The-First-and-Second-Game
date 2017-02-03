@@ -67,15 +67,7 @@ public class GameObject extends GameObjectTemplate {
 				canContainOtherObjects);
 		this.remainingHealth = health;
 
-		System.out.println("squareGameObjectIsOn = " + squareGameObjectIsOn);
-
-		// System.out.println("this.squareGameObjectIsOn = " +
-		// this.squareGameObjectIsOn);
-
 		if (squareGameObjectIsOn != null) {
-			System.out.println("squareGameObjectIsOn.inventory = " + squareGameObjectIsOn.inventory);
-			System.out.println(
-					"squareGameObjectIsOn.inventory.gameObjects = " + squareGameObjectIsOn.inventory.getGameObjects());
 			this.squareGameObjectIsOn = squareGameObjectIsOn;
 			this.squareGameObjectIsOn.inventory.add(this);
 		}

@@ -149,7 +149,6 @@ public class UserInputLevel {
 							Game.level.activeActor.unselected();
 						}
 						Game.level.activeActor = clickedActor;
-						System.out.println("Game.level.activeActor F = " + Game.level.activeActor);
 						Actor.highlightSelectedCharactersSquares();
 						selectedNewActor = true;
 					}
@@ -200,7 +199,6 @@ public class UserInputLevel {
 			if (Game.level.activeActor != null) {
 				Game.level.activeActor.unselected();
 				Game.level.activeActor = null;
-				System.out.println("Game.level.activeActor G = " + Game.level.activeActor);
 			} else if (Game.squareMouseIsOver != null) {
 				if (Game.squareMouseIsOver.showingDialogs == false)
 					Game.squareMouseIsOver.showDialogs();

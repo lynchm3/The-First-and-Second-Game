@@ -85,7 +85,6 @@ public class Faction implements Owner {
 	public void update(int delta) {
 		for (Actor actor : actors) {
 			Game.level.activeActor = actor;
-			System.out.println("Game.level.activeActor A = " + Game.level.activeActor);
 			actor.update(delta);
 		}
 		Game.level.endTurn();

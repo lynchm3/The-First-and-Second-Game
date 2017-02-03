@@ -104,7 +104,6 @@ public class Level {
 				if (activeActor != null) {
 					activeActor.unselected();
 					activeActor = null;
-					System.out.println("Game.level.activeActor B = " + Game.level.activeActor);
 				}
 			}
 		});
@@ -151,7 +150,6 @@ public class Level {
 				if (activeActor != null) {
 					activeActor.unselected();
 					activeActor = null;
-					System.out.println("Game.level.activeActor C = " + Game.level.activeActor);
 				}
 			}
 		});
@@ -445,7 +443,6 @@ public class Level {
 		if (activeActor != null)
 			activeActor.unselected();
 		activeActor = null;
-		System.out.println("Game.level.activeActor D = " + Game.level.activeActor);
 		currentFactionMovingIndex++;
 		if (currentFactionMovingIndex >= factions.size()) {
 			currentFactionMovingIndex = 0;
@@ -503,7 +500,6 @@ public class Level {
 			if (activeActor != null)
 				activeActor.unselected();
 			activeActor = move.actor;
-			System.out.println("Game.level.activeActor E = " + Game.level.activeActor);
 			Actor.highlightSelectedCharactersSquares();
 			removeLastLog();
 			if (this.undoList.isEmpty()) {

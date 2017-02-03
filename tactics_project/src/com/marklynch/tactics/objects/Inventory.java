@@ -48,7 +48,6 @@ public class Inventory {
 	}
 
 	public void add(GameObject gameObject) {
-		System.out.println("add " + gameObject);
 		if (!gameObjects.contains(gameObject)) {
 
 			// Remove references with square

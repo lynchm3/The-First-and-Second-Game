@@ -23,7 +23,6 @@ public class ClassSelectionWindow<T> {
 
 	public ClassSelectionWindow(final ArrayList<Class> classes, final Editor editor, final Class superClass,
 			String title) {
-		System.out.println("" + this.getClass().toString());
 		this.editor = editor;
 		this.classes = classes;
 		this.superClass = superClass;

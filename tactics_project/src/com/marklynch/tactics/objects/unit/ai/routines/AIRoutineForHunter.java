@@ -38,8 +38,10 @@ public class AIRoutineForHunter extends AIRoutine {
 		// Interrupts first, could put these in to the
 
 		// 1. loot dead animals
-		System.out.println("LOOT CARCASS");
-		GameObject carcass = AIRoutineUtils.getNearest(Carcass.class, 5f, false, false, true, true);
+		// System.out.println("LOOT CARCASS");
+		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Carcass.class, 5f, false, false, true,
+				true);
+		// System.out.println("carcass = " + carcass);
 		if (carcass != null) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
@@ -52,7 +54,9 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// 1. pick up loot on ground
-		GameObject loot = AIRoutineUtils.getNearest(GameObject.class, 5f, true, false, true, false);
+		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(GameObject.class, 5f, true, false, true,
+				false);
+		System.out.println("loot = " + loot);
 		if (loot != null) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
@@ -65,14 +69,12 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Go about your business
-		System.out.println("AIRoutineHunt.update()");
 		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL)
 
 		{
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-			System.out.println("huntState == HUNT_STATE.PICK_WILD_ANIMAL");
 			// if (target == null)
-			target = AIRoutineUtils.getNearest(WildAnimal.class, 0, false, true, false, false);
+			target = AIRoutineUtils.getNearestForPurposeOfAttack(WildAnimal.class, 0, false, true, false, false);
 			if (target == null) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else {
@@ -83,7 +85,6 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-			System.out.println("huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK");
 			if (target.remainingHealth <= 0 && Game.level.activeActor.inventory.size() > 0) {
 				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
 			} else if (target.remainingHealth <= 0 && target.inventory.size() == 0) {
@@ -111,9 +112,8 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		if (huntState == HUNT_STATE.PICK_SHOP_KEEPER) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
-			System.out.println("huntState == HUNT_STATE.PICK_SHOP_KEEPER");
 			// if (target == null)
-			target = AIRoutineUtils.getNearest(Trader.class, 0, false, true, false, false);
+			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Trader.class, 0, false, true, false, false);
 			if (target == null) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else {
@@ -135,7 +135,6 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
-			System.out.println("huntState == HUNT_STATE.GO_TO_BED_AND_SLEEP");
 			// huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 
 			// CONCEPT OF BED AND SLEEPING NEXT

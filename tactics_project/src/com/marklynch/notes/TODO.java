@@ -2,6 +2,22 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Technical
+	// If game is struggling with running AI for all characters (which it will)
+	// then only run those within X squares. This will involve going through the
+	// squares rather than through gameObject and factions, but I think thats
+	// OK. SO, u set minX and maxX, minY and maxY to go through the squares[][].
+	// Can move the range in and out based on performance try to keep in 59-60
+	// fps. Special factors include when the user is in the corner of the map,
+	// also have some that are excluded from the freeze like active quest
+	// characters and characters are in a fight.
+
+	// Technical
+	// don't have to check all squares for path, only those u can reach in a
+	// straight line :P OR SOMETHING... thought I had something, anyway, the
+	// ppath finding needs to be seriously fucking optimized, potentially some
+	// cheating, but keep going until u get a performance hit
+
 	// Time to make it look prettier
 	// 1. shoot projectile
 	// 2. turn wolf in to carcass

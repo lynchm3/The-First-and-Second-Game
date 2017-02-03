@@ -181,9 +181,6 @@ public class Actor extends GameObject implements Owner {
 
 	public int straightLineDistanceTo(Square square) {
 
-		System.out.println("square = " + square);
-		System.out.println("this.squareGameObjectIsOn = " + this.squareGameObjectIsOn);
-
 		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid)
 				+ Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
 
@@ -302,7 +299,9 @@ public class Actor extends GameObject implements Owner {
 
 			this.giveAllToTarget(null, carcass);
 			this.squareGameObjectIsOn.inventory.add(carcass);
-			Game.level.inanimateObjectsOnGround.add(carcass);
+
+			if (!Game.level.inanimateObjectsOnGround.contains(carcass))
+				Game.level.inanimateObjectsOnGround.add(carcass);
 
 			// screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
 			return true;
@@ -1064,7 +1063,6 @@ public class Actor extends GameObject implements Owner {
 
 	@Override
 	public void update(int delta) {
-		System.out.println("actor.update()");
 		this.aiRoutine.update();
 	}
 

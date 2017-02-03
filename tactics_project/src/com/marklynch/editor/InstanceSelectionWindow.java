@@ -21,7 +21,6 @@ public class InstanceSelectionWindow<T> {
 	public String title;
 
 	public InstanceSelectionWindow(final ArrayList<T> instances, final Editor editor, String title) {
-		System.out.println("" + this.getClass().toString());
 		this.editor = editor;
 		this.instances = instances;
 		this.title = title;
