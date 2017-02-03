@@ -36,8 +36,8 @@ public class ActorTemplate extends GameObjectTemplate {
 	@Override
 	public Actor makeCopy(Square square) {
 		Actor actor = new Actor(new String(name), new String(title), actorLevel, (int) totalHealth, strength, dexterity,
-				intelligence, endurance, imageTexturePath, square, travelDistance, inventory.makeCopy(), showInventory,
-				fitsInInventory, canContainOtherObjects);
+				intelligence, endurance, imageTexturePath, square, travelDistance, null, inventory.makeCopy(),
+				showInventory, fitsInInventory, canContainOtherObjects);
 		actor.faction = Game.level.factions.get(1);
 		return actor;
 

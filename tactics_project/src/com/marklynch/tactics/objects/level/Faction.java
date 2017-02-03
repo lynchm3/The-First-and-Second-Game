@@ -13,7 +13,6 @@ import com.marklynch.Game;
 import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
-import com.marklynch.ui.ActivityLog;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
@@ -221,8 +220,9 @@ public class Faction implements Owner {
 	}
 
 	public void checkIfDestroyed() {
-		if (this.actors.size() == 0)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " have been stopped" }));
+		// if (this.actors.size() == 0)
+		// Game.level.logOnScreen(new ActivityLog(new Object[] { this, " have
+		// been stopped" }));
 
 	}
 

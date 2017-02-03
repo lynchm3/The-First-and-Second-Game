@@ -428,7 +428,8 @@ public class Level {
 
 	public void endTurn() {
 
-		this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving, " ended turn " + this.turn }));
+		// this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
+		// " ended turn " + this.turn }));
 
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {

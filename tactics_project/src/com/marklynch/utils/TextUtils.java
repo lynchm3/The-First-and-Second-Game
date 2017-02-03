@@ -107,7 +107,7 @@ public class TextUtils {
 				}
 
 				// Name
-				Game.activeBatch.setColor(Color.GRAY);
+				Game.activeBatch.setColor(Color.BLACK);
 				if (gameObject instanceof Actor) {
 					Actor actor = (Actor) gameObject;
 					Game.activeBatch.setColor(actor.faction.color);

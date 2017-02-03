@@ -39,7 +39,8 @@ import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ActorTemplate;
-import com.marklynch.tactics.objects.unit.ShopKeeper;
+import com.marklynch.tactics.objects.unit.Hunter;
+import com.marklynch.tactics.objects.unit.Trader;
 import com.marklynch.tactics.objects.unit.WildAnimal;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 import com.marklynch.tactics.objects.weapons.Weapon;
@@ -461,30 +462,30 @@ public class Editor {
 
 		// Add actor
 		Actor player = new Actor("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 1,
-				inventoryForActor0, true, false, true);
+				null, inventoryForActor0, true, false, true);
 		player.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(player);
 		for (int i = 0; i < player.inventory.size(); i++) {
 			player.inventory.get(i).inventoryThatHoldsThisObject = player.inventory;
 		}
 
-		Actor ai = new Actor("AI", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][5], 1,
-				inventoryForActor1, true, false, true);
-		ai.faction = Game.level.factions.get(1);
-		Game.level.factions.get(1).actors.add(ai);
-		for (int i = 0; i < ai.inventory.size(); i++) {
-			ai.inventory.get(i).inventoryThatHoldsThisObject = ai.inventory;
+		Actor hunter = new Hunter("Hunter Paul", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", Game.level.squares[0][5], 1,
+				null, inventoryForActor1, true, false, true);
+		hunter.faction = Game.level.factions.get(1);
+		Game.level.factions.get(1).actors.add(hunter);
+		for (int i = 0; i < hunter.inventory.size(); i++) {
+			hunter.inventory.get(i).inventoryThatHoldsThisObject = hunter.inventory;
 		}
 
 		Actor wildAnimal = new WildAnimal("Wild Animal", "Wild Animal", 1, 10, 0, 0, 0, 0, "wolf.png",
-				Game.level.squares[6][6], 4, inventoryForWildAnimal, true, false, true);
+				Game.level.squares[6][6], 4, null, inventoryForWildAnimal, true, false, true);
 		wildAnimal.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(wildAnimal);
 
-		Actor shopKeeper = new ShopKeeper("Shop Keeper", "Shop Keeper", 1, 10, 0, 0, 0, 0, "shopKeeper.png",
-				Game.level.squares[7][1], 4, new Inventory(), true, false, true);
-		shopKeeper.faction = Game.level.factions.get(0);
-		Game.level.factions.get(0).actors.add(shopKeeper);
+		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
+				4, null, new Inventory(), true, false, true);
+		trader.faction = Game.level.factions.get(1);
+		Game.level.factions.get(1).actors.add(trader);
 
 		// Decorations
 		Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");

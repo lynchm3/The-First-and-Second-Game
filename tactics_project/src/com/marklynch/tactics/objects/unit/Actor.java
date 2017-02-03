@@ -8,6 +8,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.Bed;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Owner;
@@ -66,9 +67,11 @@ public class Actor extends GameObject implements Owner {
 
 	public transient AIRoutine aiRoutine;
 
+	public Bed bed;
+
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Inventory inventory,
-			boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
+			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
 				canContainOtherObjects);
 
@@ -80,6 +83,7 @@ public class Actor extends GameObject implements Owner {
 		this.title = title;
 		this.actorLevel = actorLevel;
 		this.travelDistance = travelDistance;
+		this.bed = bed;
 		buttons = new ArrayList<Button>();
 		weaponButtons = new ArrayList<Button>();
 
@@ -103,8 +107,6 @@ public class Actor extends GameObject implements Owner {
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
-
-		aiRoutine = new AIRoutineForHunter();
 	}
 
 	@Override
@@ -308,7 +310,8 @@ public class Actor extends GameObject implements Owner {
 		this.squareGameObjectIsOn = squareToMoveTo;
 		squareToMoveTo.inventory.add(Game.level.activeActor);
 		Actor.highlightSelectedCharactersSquares();
-		Game.level.logOnScreen(new ActivityLog(new Object[] { this, " moved to " + squareToMoveTo }));
+		// Game.level.logOnScreen(new ActivityLog(new Object[] { this, " moved
+		// to " + squareToMoveTo }));
 
 		if (this.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.push(new Move(this, oldSquare, squareToMoveTo, distanceTraveled));
@@ -327,11 +330,11 @@ public class Actor extends GameObject implements Owner {
 
 			if (Game.level.activeActor != null && Game.level.activeActor.showHoverFightPreview) {
 
-			} else {
+			} else if (remainingHealth != totalHealth) {
 
 				// draw sidebar on square
 				float healthPercentage = (remainingHealth) / (totalHealth);
-				float weaponAreaWidthInPixels = Game.SQUARE_WIDTH / 5;
+				float weaponAreaWidthInPixels = Game.SQUARE_WIDTH / 20;
 				float weaponAreaHeightInPixels = Game.SQUARE_HEIGHT;
 				float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
 				float weaponAreaPositionXInPixels = 0;
@@ -455,65 +458,85 @@ public class Actor extends GameObject implements Owner {
 
 			} else {
 				// draw weapon icons on square
-				float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
-				float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
-				ArrayList<Weapon> weapons = getWeaponsInInventory();
-				for (int i = 0; i < weapons.size(); i++) {
-
-					Weapon weapon = weapons.get(i);
-
-					float weaponIconPositionXInPixels = 0;
-					float weaponIconPositionYInPixels = 0;
-
-					if (this.faction == Game.level.factions.get(0)) {
-						weaponIconPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-						weaponIconPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-								+ (i * weaponHeightInPixels);
-					} else {
-						weaponIconPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-								+ Game.SQUARE_WIDTH - weaponWidthInPixels;
-						weaponIconPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-								+ (i * weaponHeightInPixels);
-
-					}
-					TextureUtils.drawTexture(weapon.imageTexture, weaponIconPositionXInPixels,
-							weaponIconPositionXInPixels + weaponWidthInPixels, weaponIconPositionYInPixels,
-							weaponIconPositionYInPixels + weaponHeightInPixels);
-				}
+				// float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
+				// float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
+				// ArrayList<Weapon> weapons = getWeaponsInInventory();
+				// for (int i = 0; i < weapons.size(); i++) {
+				//
+				// Weapon weapon = weapons.get(i);
+				//
+				// float weaponIconPositionXInPixels = 0;
+				// float weaponIconPositionYInPixels = 0;
+				//
+				// if (this.faction == Game.level.factions.get(0)) {
+				// weaponIconPositionXInPixels =
+				// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+				// weaponIconPositionYInPixels =
+				// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+				// + (i * weaponHeightInPixels);
+				// } else {
+				// weaponIconPositionXInPixels =
+				// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+				// + Game.SQUARE_WIDTH - weaponWidthInPixels;
+				// weaponIconPositionYInPixels =
+				// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+				// + (i * weaponHeightInPixels);
+				//
+				// }
+				// TextureUtils.drawTexture(weapon.imageTexture,
+				// weaponIconPositionXInPixels,
+				// weaponIconPositionXInPixels + weaponWidthInPixels,
+				// weaponIconPositionYInPixels,
+				// weaponIconPositionYInPixels + weaponHeightInPixels);
+				// }
 			}
 
 			// Draw actor level text
-			String actorLevelString = "L" + this.actorLevel;
-			float actorLevelWidthInPixels = Game.font.getWidth(actorLevelString);
-			float actorLevelPositionXInPixels = (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH)
-					+ Game.SQUARE_WIDTH - actorLevelWidthInPixels - Game.SQUARE_WIDTH / 5;
-			float actorLevelPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
-
-			TextUtils.printTextWithImages(new Object[] { actorLevelString }, actorLevelPositionXInPixels,
-					actorLevelPositionYInPixels, Integer.MAX_VALUE, true);
+			// String actorLevelString = "L" + this.actorLevel;
+			// float actorLevelWidthInPixels =
+			// Game.font.getWidth(actorLevelString);
+			// float actorLevelPositionXInPixels =
+			// (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH)
+			// + Game.SQUARE_WIDTH - actorLevelWidthInPixels - Game.SQUARE_WIDTH
+			// / 5;
+			// float actorLevelPositionYInPixels =
+			// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+			//
+			// TextUtils.printTextWithImages(new Object[] { actorLevelString },
+			// actorLevelPositionXInPixels,
+			// actorLevelPositionYInPixels, Integer.MAX_VALUE, true);
 
 			// draw indicators of whether you can move and/or attack
-			float moveAttackStatusWidthInPixels = Game.font.getWidth("MA");// Game.SQUARE_WIDTH
-			float attackStatusWidthInPixels = Game.font.getWidth("A");// Game.SQUARE_WIDTH
+			// float moveAttackStatusWidthInPixels = Game.font.getWidth("MA");//
+			// Game.SQUARE_WIDTH
+			// float attackStatusWidthInPixels = Game.font.getWidth("A");//
+			// Game.SQUARE_WIDTH
 
-			float moveAttackStatusPositionXInPixels = (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH)
-					+ Game.SQUARE_WIDTH - moveAttackStatusWidthInPixels - Game.SQUARE_WIDTH / 5;
-			float attackStatusPositionXInPixels = (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH)
-					+ Game.SQUARE_WIDTH - attackStatusWidthInPixels - Game.SQUARE_WIDTH / 5;
-			float moveAttackStatusPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ Game.SQUARE_HEIGHT - 14;
+			// float moveAttackStatusPositionXInPixels =
+			// (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH)
+			// + Game.SQUARE_WIDTH - moveAttackStatusWidthInPixels -
+			// Game.SQUARE_WIDTH / 5;
+			// float attackStatusPositionXInPixels =
+			// (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH)
+			// + Game.SQUARE_WIDTH - attackStatusWidthInPixels -
+			// Game.SQUARE_WIDTH / 5;
+			// float moveAttackStatusPositionYInPixels =
+			// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			// + Game.SQUARE_HEIGHT - 14;
 
-			if (hasAttackedThisTurn == false) {
-				if (this.distanceMovedThisTurn < this.travelDistance) {
-
-					TextUtils.printTextWithImages(new Object[] { "MA" }, moveAttackStatusPositionXInPixels,
-							moveAttackStatusPositionYInPixels, Integer.MAX_VALUE, true);
-				} else {
-
-					TextUtils.printTextWithImages(new Object[] { "A" }, attackStatusPositionXInPixels,
-							moveAttackStatusPositionYInPixels, Integer.MAX_VALUE, true);
-				}
-			}
+			// if (hasAttackedThisTurn == false) {
+			// if (this.distanceMovedThisTurn < this.travelDistance) {
+			//
+			// TextUtils.printTextWithImages(new Object[] { "MA" },
+			// moveAttackStatusPositionXInPixels,
+			// moveAttackStatusPositionYInPixels, Integer.MAX_VALUE, true);
+			// } else {
+			//
+			// TextUtils.printTextWithImages(new Object[] { "A" },
+			// attackStatusPositionXInPixels,
+			// moveAttackStatusPositionYInPixels, Integer.MAX_VALUE, true);
+			// }
+			// }
 			// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		}
 	}
@@ -1011,7 +1034,7 @@ public class Actor extends GameObject implements Owner {
 	public Actor makeCopy(Square square) {
 
 		return new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
-				imageTexturePath, square, travelDistance, inventory, showInventory, fitsInInventory,
+				imageTexturePath, square, travelDistance, null, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects);
 	}
 
@@ -1022,24 +1045,29 @@ public class Actor extends GameObject implements Owner {
 	}
 
 	public void lootAll(GameObject gameObject) {
-		ArrayList<GameObject> tempGameObjects = (ArrayList<GameObject>) gameObject.inventory.getGameObjects().clone();
-		for (GameObject tempGameObject : tempGameObjects) {
-			gameObject.inventory.remove(tempGameObject);
-			this.inventory.add(tempGameObject);
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) gameObject.inventory.getGameObjects().clone();
+		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { this, " looted ", gameObjectToLoot, " from ", gameObject }));
+			gameObject.inventory.remove(gameObjectToLoot);
+			this.inventory.add(gameObjectToLoot);
 		}
 	}
 
 	public void pickup(GameObject target) {
+		Game.level.logOnScreen(new ActivityLog(new Object[] { this, " picked up ", target }));
 		target.squareGameObjectIsOn.inventory.remove(target);
 		this.inventory.add(target);
 	}
 
 	public void sellAllToTarget(Class clazz, GameObject gameObject) {
-		ArrayList<GameObject> tempGameObjects = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
-		for (GameObject tempGameObject : tempGameObjects) {
-			if (clazz == null || clazz.isInstance(tempGameObject)) {
-				this.inventory.remove(tempGameObject);
-				gameObject.inventory.add(tempGameObject);
+		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
+		for (GameObject gameObjectToSell : gameObjectsToSell) {
+			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { this, " sold ", gameObjectToSell, " to ", gameObject }));
+				this.inventory.remove(gameObjectToSell);
+				gameObject.inventory.add(gameObjectToSell);
 			}
 		}
 

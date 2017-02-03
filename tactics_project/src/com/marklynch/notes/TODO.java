@@ -2,6 +2,31 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// character that has never laughed, and u have to find a way to make it
+	// laugh, make it dark, like he only laughs when u kill someone on front of
+	// him, and he loves it tooo much and starts killing people. maybe u take
+	// him as a companion and are trying to work out how to kill him, and when u
+	// eventually get in a fight when hes around, thats when u work it out. Or
+	// maybe, forget the laughing thing, hes just a regular companion, whos
+	// never been outside his town before, and the murder sets him off and he
+	// snaps. Says he has to go home, then when u go visit his town/home next
+	// time, everyone's been slaughtered by him. Quest is only triggered, only
+	// shows in the quest log when he myteriously leaves after taking part in
+	// his first battle. Something like "Paul, a companion, just ran off
+	// mysteriously in the middle of a fight, I hope he's OK". U can follow him
+	// immediately or go to his town later. ANyway, Paul should go home, sleep,
+	// then in the morning trigger psycho mode AI.
+
+	// In shadow of mordor the bosses have special weaknesses, like fear of
+	// horses... look them up, would be a good ide, more interesting than
+	// regular enviromental weaknesses, the quest giver could let u know, or
+	// provide other ways for the user to find out, maybe the mind reader, could
+	// make one "learn biggest fear", that may be helpful or useless
+
+	// On the character design side of things, look at scribblenauts, the way
+	// they're a few simple pieces pasted together. Plus its ogt that simulation
+	// side to it.
+
 	// GameObject/GameObject templace needs to be abstract and u have to
 	// overwrite makeCopy
 
