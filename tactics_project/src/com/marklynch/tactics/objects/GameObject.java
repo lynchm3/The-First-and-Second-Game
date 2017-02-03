@@ -183,14 +183,14 @@ public class GameObject extends GameObjectTemplate {
 
 		for (int i = 0; i < squares.length; i++) {
 			for (int j = 0; j < squares.length; j++) {
-				squares[i][j].distanceToSquare = Integer.MAX_VALUE;
+				squares[i][j].walkingDistanceToSquare = Integer.MAX_VALUE;
 			}
 		}
 
 		highestPathCostSeen = 0;
 		paths.clear();
 		Square currentSquare = squareGameObjectIsOn;
-		currentSquare.distanceToSquare = 0;
+		currentSquare.walkingDistanceToSquare = 0;
 
 		Vector<Square> startPath = new Vector<Square>();
 		startPath.add(currentSquare);
@@ -250,7 +250,7 @@ public class GameObject extends GameObjectTemplate {
 			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
 			newPathSquares.add(newSquare);
 			int newDistance = pathCost + parentSquare.travelCost;
-			newSquare.distanceToSquare = newDistance;
+			newSquare.walkingDistanceToSquare = newDistance;
 			if (newDistance > highestPathCostSeen)
 				highestPathCostSeen = newDistance;
 			Path newPath = new Path(newPathSquares, newDistance);

@@ -31,32 +31,77 @@ public class AIRoutineUtils {
 	public void postLoad() {
 	}
 
-	public static GameObject getNearest(Class clazz) {
+	public static boolean lootNearby() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public static GameObject getNearest(Class clazz, float maxDistance, boolean fitsInInventory, boolean checkActors,
+			boolean checkInanimateObjects) {
 
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
 
 		// Calculate paths to all squares
 
+		System.out.println("Game.level.activeActor = " + Game.level.activeActor);
+		System.out.println("Game.level.squares = " + Game.level.squares);
+
 		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
-		// 1. create list of enemies
-		for (Faction faction : Game.level.factions) {
-			for (Actor actor : faction.actors) {
-
-				if (clazz == null || clazz.isInstance(actor)) {
-					if (actor.remainingHealth > 0) {
+		if (checkActors) {
+			// 1. check actors
+			for (Faction faction : Game.level.factions) {
+				for (Actor actor : faction.actors) {
+					if (passesChecks(actor, clazz, maxDistance, fitsInInventory)) {
 						Square square = calculateSquareToMoveToToAttackTarget(actor);
-						if (square != null && square.distanceToSquare < costToBest) {
+						if (square != null && square.walkingDistanceToSquare < costToBest) {
 							result = actor;
-							costToBest = square.distanceToSquare;
+							costToBest = square.walkingDistanceToSquare;
 						}
+					}
+
+				}
+			}
+		}
+
+		if (checkInanimateObjects) {
+			// 2. check gameObjects
+			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
+				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory)) {
+					Square square = calculateSquareToMoveToToAttackTarget(gameObject);
+					if (square != null && square.walkingDistanceToSquare < costToBest) {
+						result = gameObject;
+						costToBest = square.walkingDistanceToSquare;
 					}
 				}
 			}
 		}
 
 		return result;
+
+	}
+
+	public static boolean passesChecks(GameObject gameObject, Class clazz, float maxDistance, boolean fitsInInventory) {
+
+		if (gameObject.remainingHealth <= 0)
+			return false;
+
+		if (gameObject.fitsInInventory != fitsInInventory)
+			return false;
+
+		// check class
+		if (clazz != null && !clazz.isInstance(gameObject))
+			return false;
+
+		System.out.println("gameObject = " + gameObject);
+
+		// check distance
+		if (maxDistance > 0
+				&& Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) > maxDistance)
+			return false;
+
+		return true;
 
 	}
 
@@ -85,9 +130,9 @@ public class AIRoutineUtils {
 					&& Game.level.activeActor.faction.relationships.get(faction).relationship < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToToAttackTarget(actor);
-					if (square != null && square.distanceToSquare < costToBest) {
+					if (square != null && square.walkingDistanceToSquare < costToBest) {
 						result = actor;
-						costToBest = square.distanceToSquare;
+						costToBest = square.walkingDistanceToSquare;
 					}
 				}
 			}
@@ -138,7 +183,7 @@ public class AIRoutineUtils {
 		}
 	}
 
-	public static boolean moveTowardsTargetToLoot(GameObject target) {
+	public static boolean moveTowardsTargetToBeAdjacent(GameObject target) {
 
 		// TODO
 		// currently if there's no path it crashes
@@ -227,7 +272,7 @@ public class AIRoutineUtils {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToToAttackTarget(actor);
 					if (square != null) {
-						int turns = square.distanceToSquare / Game.level.activeActor.travelDistance;
+						int turns = square.walkingDistanceToSquare / Game.level.activeActor.travelDistance;
 						if (turns < turnsToBest) {
 							bestTargetsBasedOnTurnsToReach.clear();
 							bestTargetsBasedOnTurnsToReach.add(actor);
@@ -292,7 +337,8 @@ public class AIRoutineUtils {
 		for (int i = 0; i < idealWeaponDistances.size(); i++) {
 
 			// Check if we're already at this distance
-			if (Game.level.activeActor.weaponDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances.get(i))
+			if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
+					.get(i))
 				return Game.level.activeActor.squareGameObjectIsOn;
 
 			targetSquares = target.getAllSquaresAtDistance(idealWeaponDistances.get(i));
@@ -336,7 +382,7 @@ public class AIRoutineUtils {
 		for (int i = 0; i < idealDistances.size(); i++) {
 
 			// Check if we're already at this distance
-			if (Game.level.activeActor.weaponDistanceTo(target.squareGameObjectIsOn) == idealDistances.get(i))
+			if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) == idealDistances.get(i))
 				return Game.level.activeActor.squareGameObjectIsOn;
 
 			targetSquares = target.getAllSquaresAtDistance(idealDistances.get(i));
@@ -459,7 +505,7 @@ public class AIRoutineUtils {
 		Vector<Actor> attackableActors = new Vector<Actor>();
 		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
-				int weaponDistance = Game.level.activeActor.weaponDistanceTo(actor.squareGameObjectIsOn);
+				int weaponDistance = Game.level.activeActor.straightLineDistanceTo(actor.squareGameObjectIsOn);
 
 				if (faction != actor.faction && Game.level.activeActor.hasRange(weaponDistance)) {
 					attackableActors.add(actor);
@@ -485,7 +531,7 @@ public class AIRoutineUtils {
 		Vector<Actor> attackableActors = new Vector<Actor>();
 		for (Faction faction : Game.level.factions) {
 			for (Actor actor : faction.actors) {
-				int weaponDistance = Game.level.activeActor.weaponDistanceTo(actor.squareGameObjectIsOn);
+				int weaponDistance = Game.level.activeActor.straightLineDistanceTo(actor.squareGameObjectIsOn);
 				if (actor != Game.level.activeActor && Game.level.activeActor.hasRange(weaponDistance)) {
 					attackableActors.add(actor);
 				}
@@ -505,7 +551,7 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean attackTarget(GameObject gameObject) {
-		int weaponDistance = Game.level.activeActor.weaponDistanceTo(gameObject.squareGameObjectIsOn);
+		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
 		if (Game.level.activeActor.hasRange(weaponDistance)) {
 			Game.level.activeActor.equipBestWeapon(gameObject);
 			Game.level.activeActor.attack(gameObject, false);
@@ -518,7 +564,7 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean lootTarget(GameObject gameObject) {
-		int weaponDistance = Game.level.activeActor.weaponDistanceTo(gameObject.squareGameObjectIsOn);
+		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
 		if (weaponDistance <= 1 && gameObject.remainingHealth <= 0) {
 			Game.level.activeActor.lootAll(gameObject);
 			return true;
@@ -527,8 +573,18 @@ public class AIRoutineUtils {
 		}
 	}
 
+	public static boolean pickupTarget(GameObject target) {
+		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
+		if (weaponDistance <= 1) {
+			Game.level.activeActor.pickup(target);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public static boolean sellAllToTarget(Class clazz, GameObject gameObject) {
-		int weaponDistance = Game.level.activeActor.weaponDistanceTo(gameObject.squareGameObjectIsOn);
+		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
 		if (weaponDistance <= 1 && gameObject.remainingHealth > 0) {
 			Game.level.activeActor.sellAllToTarget(clazz, gameObject);
 			return true;

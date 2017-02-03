@@ -7,7 +7,7 @@ import java.util.UUID;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.Inventory;
+import com.marklynch.tactics.objects.SquareInventory;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.Dialog;
@@ -25,7 +25,7 @@ public class Square {
 	public final int yInGrid;
 	public final int elevation;
 	public int travelCost;
-	public Inventory inventory;
+	public SquareInventory inventory;
 	public boolean showInventory;
 
 	public transient boolean reachableBySelectedCharater = false;
@@ -38,11 +38,11 @@ public class Square {
 	public transient Vector<Dialog> dialogs;
 
 	public transient boolean showingDialogs = false;
-	public transient int distanceToSquare = Integer.MAX_VALUE;
+	public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
 
 	public transient static PathComparator pathComparator;
 
-	public Square(int x, int y, String imagePath, int travelCost, int elevation, Inventory inventory) {
+	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory) {
 		super();
 		this.xInGrid = x;
 		this.yInGrid = y;
@@ -53,6 +53,8 @@ public class Square {
 		weaponsThatCanAttack = new Vector<Weapon>();
 		dialogs = new Vector<Dialog>();
 		this.inventory = inventory;
+		if (this.inventory != null)
+			this.inventory.square = this;
 		showInventory = true;
 	}
 
@@ -82,7 +84,8 @@ public class Square {
 
 			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
 					&& this.inventory.size() != 0
-					&& Game.level.activeActor.equippedWeapon.hasRange(Game.level.activeActor.weaponDistanceTo(this))
+					&& Game.level.activeActor.equippedWeapon
+							.hasRange(Game.level.activeActor.straightLineDistanceTo(this))
 					&& !Game.level.activeActor.hasAttackedThisTurn) {
 				highlightTexture = Game.level.gameCursor.imageTexture4;
 			} else if (Game.level.currentFactionMovingIndex == 0 && (inPath))// ||
@@ -99,12 +102,12 @@ public class Square {
 		}
 
 		// if (this.reachableBySelectedCharater) {
-		int costTextWidth = Game.font.getWidth("" + distanceToSquare);
+		int costTextWidth = Game.font.getWidth("" + walkingDistanceToSquare);
 		float costPositionX = squarePositionX + (Game.SQUARE_WIDTH - costTextWidth) / 2f;
 		float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) / 2f;
 
-		if (distanceToSquare != Integer.MAX_VALUE && Game.level.activeActor != null) {
-			TextUtils.printTextWithImages(new Object[] { "" + distanceToSquare }, costPositionX, costPositionY,
+		if (walkingDistanceToSquare != Integer.MAX_VALUE && Game.level.activeActor != null) {
+			TextUtils.printTextWithImages(new Object[] { "" + walkingDistanceToSquare }, costPositionX, costPositionY,
 					Integer.MAX_VALUE, true);
 		}
 		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
@@ -181,8 +184,8 @@ public class Square {
 
 		if (this.inventory.size() == 0) {
 			// Nothing on the square
-			return new String[] { "" + xInGrid + " , " + yInGrid, "\nTravel Cost = " + travelCost, "\nElevation = " + elevation,
-					"(Click again to dismiss)" };
+			return new String[] { "" + xInGrid + " , " + yInGrid, "\nTravel Cost = " + travelCost,
+					"\nElevation = " + elevation, "(Click again to dismiss)" };
 		} else
 
 		{

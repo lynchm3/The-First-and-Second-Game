@@ -23,11 +23,28 @@ public class AIRoutineForHunter extends AIRoutine {
 
 	@Override
 	public void update() {
+
+		// Check for special case
+		// 1. loot on ground
+		GameObject loot = AIRoutineUtils.getNearest(GameObject.class, 5f, true, false, true);
+		if (loot != null) {
+			boolean lootedAnimal = AIRoutineUtils.pickupTarget(loot);
+			if (!lootedAnimal) {
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
+			} else {
+
+			}
+			return;
+		}
+
+		// Go about your business
 		System.out.println("AIRoutineHunt.update()");
-		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL) {
+		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL)
+
+		{
 			System.out.println("huntState == HUNT_STATE.PICK_WILD_ANIMAL");
 			// if (target == null)
-			target = AIRoutineUtils.getNearest(WildAnimal.class);
+			target = AIRoutineUtils.getNearest(WildAnimal.class, 0, false, true, false);
 			if (target == null) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_SLEEP;
 			} else {
@@ -52,7 +69,7 @@ public class AIRoutineForHunter extends AIRoutine {
 			System.out.println("huntState == HUNT_STATE.LOOT_WILD_ANIMAL");
 			boolean lootedAnimal = AIRoutineUtils.lootTarget(target);
 			if (!lootedAnimal) {
-				AIRoutineUtils.moveTowardsTargetToLoot(target);
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
 			} else {
 				target = null;
 				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
@@ -62,7 +79,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (huntState == HUNT_STATE.PICK_SHOP_KEEPER) {
 			System.out.println("huntState == HUNT_STATE.PICK_SHOP_KEEPER");
 			// if (target == null)
-			target = AIRoutineUtils.getNearest(ShopKeeper.class);
+			target = AIRoutineUtils.getNearest(ShopKeeper.class, 0, false, true, false);
 			if (target == null) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_SLEEP;
 			} else {
@@ -75,7 +92,7 @@ public class AIRoutineForHunter extends AIRoutine {
 
 			boolean soldItems = AIRoutineUtils.sellAllToTarget(Junk.class, target);
 			if (!soldItems)
-				AIRoutineUtils.moveTowardsTargetToLoot(target);
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
 			else
 				huntState = HUNT_STATE.GO_TO_BED_AND_SLEEP;
 
@@ -83,6 +100,7 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_SLEEP) {
 			System.out.println("huntState == HUNT_STATE.GO_TO_BED_AND_SLEEP");
+			huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 
 		}
 	}

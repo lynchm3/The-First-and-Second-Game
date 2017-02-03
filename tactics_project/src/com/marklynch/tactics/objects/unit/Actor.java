@@ -174,7 +174,10 @@ public class Actor extends GameObject implements Owner {
 		Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
 	}
 
-	public int weaponDistanceTo(Square square) {
+	public int straightLineDistanceTo(Square square) {
+
+		System.out.println("square = " + square);
+		System.out.println("this.squareGameObjectIsOn = " + this.squareGameObjectIsOn);
 
 		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid)
 				+ Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
@@ -234,7 +237,7 @@ public class Actor extends GameObject implements Owner {
 	}
 
 	public void counter(Actor actor) {
-		if (hasRange(this.weaponDistanceTo(actor.squareGameObjectIsOn))) {
+		if (hasRange(this.straightLineDistanceTo(actor.squareGameObjectIsOn))) {
 			this.equipBestWeaponForCounter(actor, actor.equippedWeapon);
 			attack(actor, true);
 		}
@@ -247,7 +250,7 @@ public class Actor extends GameObject implements Owner {
 		// with....
 		// weird...
 
-		int range = this.weaponDistanceTo(target.squareGameObjectIsOn);
+		int range = this.straightLineDistanceTo(target.squareGameObjectIsOn);
 		for (Weapon weapon : getWeaponsInInventory()) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				equippedWeapon = weapon;
@@ -259,7 +262,7 @@ public class Actor extends GameObject implements Owner {
 
 		ArrayList<Weapon> potentialWeaponsToEquip = new ArrayList<Weapon>();
 
-		int range = this.weaponDistanceTo(target.squareGameObjectIsOn);
+		int range = this.straightLineDistanceTo(target.squareGameObjectIsOn);
 		for (Weapon weapon : getWeaponsInInventory()) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				potentialWeaponsToEquip.add(weapon);
@@ -299,9 +302,9 @@ public class Actor extends GameObject implements Owner {
 			return;
 
 		Square oldSquare = this.squareGameObjectIsOn;
-		int distanceTraveled = squareToMoveTo.distanceToSquare;
+		int distanceTraveled = squareToMoveTo.walkingDistanceToSquare;
 		this.squareGameObjectIsOn.inventory.remove(Game.level.activeActor);
-		this.distanceMovedThisTurn += squareToMoveTo.distanceToSquare;
+		this.distanceMovedThisTurn += squareToMoveTo.walkingDistanceToSquare;
 		this.squareGameObjectIsOn = squareToMoveTo;
 		squareToMoveTo.inventory.add(Game.level.activeActor);
 		Actor.highlightSelectedCharactersSquares();
@@ -1024,6 +1027,11 @@ public class Actor extends GameObject implements Owner {
 			gameObject.inventory.remove(tempGameObject);
 			this.inventory.add(tempGameObject);
 		}
+	}
+
+	public void pickup(GameObject target) {
+		target.squareGameObjectIsOn.inventory.remove(target);
+		this.inventory.add(target);
 	}
 
 	public void sellAllToTarget(Class clazz, GameObject gameObject) {

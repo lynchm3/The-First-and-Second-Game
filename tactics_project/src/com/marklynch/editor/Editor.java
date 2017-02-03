@@ -156,7 +156,7 @@ public class Editor {
 				new Inventory(), true, false, false, true);
 		gameObjectTemplates.add(gameObjectTemplate);
 
-		Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, false, true);
+		Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true, false);
 		gameObjectTemplates.add(furTemplate);
 
 		ActorTemplate actorTemplate = new ActorTemplate("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", null, 4,
@@ -413,8 +413,11 @@ public class Editor {
 		// Add a game object
 		GameObject gameObject = new GameObjectExploder("dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
 				new Inventory(), true, false, false, true);
-		Game.level.inanimateObjects.add(gameObject);
 		Game.level.squares[0][3].inventory.add(gameObject);
+
+		GameObject groundFur = new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false,
+				true, true, false);
+		Game.level.squares[0][7].inventory.add(groundFur);
 
 		// Add factions
 		Game.level.factions
@@ -811,7 +814,7 @@ public class Editor {
 		if (gameObject instanceof Actor) {
 			gameObject.faction.actors.add((Actor) gameObject);
 		} else {
-			Game.level.inanimateObjects.add(gameObject);
+			// Game.level.inanimateObjectsOnGround.add(gameObject);
 		}
 		square.inventory.add(gameObject);
 		this.objectsSettingsWindow.update();
@@ -1063,7 +1066,7 @@ public class Editor {
 						gameObjects.add(actor);
 					}
 				}
-				gameObjects.addAll(Game.level.inanimateObjects);
+				gameObjects.addAll(Game.level.inanimateObjectsOnGround);
 				attributeSelectionWindow = new AttributeSelectionWindow(gameObjects, false, this, objectToEdit,
 						"Select an Object");
 			} else if (type.isAssignableFrom(Actor.class)) {

@@ -15,7 +15,7 @@ public class Inventory {
 
 	public InventorySquare[][] inventorySquares = new InventorySquare[5][5];
 
-	private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(25);
+	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(25);
 
 	private boolean isOpen = false;
 
@@ -48,8 +48,26 @@ public class Inventory {
 	}
 
 	public void add(GameObject gameObject) {
+		System.out.println("add " + gameObject);
 		if (!gameObjects.contains(gameObject)) {
+
+			// Remove references with square
+			if (gameObject.squareGameObjectIsOn != null)
+				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+			gameObject.squareGameObjectIsOn = null;
+
+			// Remove from ground squares index
+			Game.level.inanimateObjectsOnGround.remove(gameObject);
+
+			// Remove from another gameObjects inventory
+			if (gameObject.inventoryThatHoldsThisObject != null)
+				gameObject.inventoryThatHoldsThisObject.remove(gameObject);
+
+			// Add to this inventory's list of game objects
 			gameObjects.add(gameObject);
+			gameObject.inventoryThatHoldsThisObject = this;
+
+			// Add to the inventory UI
 			for (int i = 0; i < inventorySquares.length; i++) {
 				for (int j = 0; j < inventorySquares[i].length; j++) {
 					if (inventorySquares[i][j].gameObject == null) {

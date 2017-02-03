@@ -10,6 +10,7 @@ import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Inventory;
+import com.marklynch.tactics.objects.SquareInventory;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
@@ -28,7 +29,7 @@ public class Level {
 	public GameCursor gameCursor;
 	// public Vector<Actor> actors;
 	public transient Actor activeActor;
-	public Vector<GameObject> inanimateObjects;
+	public Vector<GameObject> inanimateObjectsOnGround;
 	public transient Vector<Dialog> dialogs;
 	public Square[][] squares;
 	public Vector<Decoration> decorations;
@@ -71,7 +72,7 @@ public class Level {
 		script = new Script();
 
 		factions = new ArrayList<Faction>();
-		inanimateObjects = new Vector<GameObject>();
+		inanimateObjectsOnGround = new Vector<GameObject>();
 
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f, "end_turn_button.png", "end_turn_button.png",
 				"END TURN", false, false);
@@ -103,6 +104,7 @@ public class Level {
 				if (activeActor != null) {
 					activeActor.unselected();
 					activeActor = null;
+					System.out.println("Game.level.activeActor B = " + Game.level.activeActor);
 				}
 			}
 		});
@@ -149,6 +151,7 @@ public class Level {
 				if (activeActor != null) {
 					activeActor.unselected();
 					activeActor = null;
+					System.out.println("Game.level.activeActor C = " + Game.level.activeActor);
 				}
 			}
 		});
@@ -161,7 +164,7 @@ public class Level {
 			}
 		}
 
-		for (GameObject inanimateObject : inanimateObjects) {
+		for (GameObject inanimateObject : inanimateObjectsOnGround) {
 			inanimateObject.postLoad(null);
 		}
 
@@ -187,7 +190,7 @@ public class Level {
 			}
 		}
 
-		for (GameObject inanimateObject : inanimateObjects) {
+		for (GameObject inanimateObject : inanimateObjectsOnGround) {
 			inanimateObject.loadImages();
 		}
 
@@ -203,7 +206,7 @@ public class Level {
 	private void initGrid(Square[][] squares, int width, int height) {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				squares[i][j] = new Square(i, j, "grass.png", 1, 0, new Inventory());
+				squares[i][j] = new Square(i, j, "grass.png", 1, 0, new SquareInventory());
 			}
 		}
 	}
@@ -244,7 +247,7 @@ public class Level {
 
 		// Objects 1
 
-		for (GameObject gameObject : inanimateObjects) {
+		for (GameObject gameObject : inanimateObjectsOnGround) {
 			gameObject.drawForeground();
 		}
 
@@ -267,7 +270,7 @@ public class Level {
 
 		// Objects 2
 
-		for (GameObject gameObject : inanimateObjects) {
+		for (GameObject gameObject : inanimateObjectsOnGround) {
 			gameObject.drawUI();
 		}
 
@@ -307,7 +310,7 @@ public class Level {
 		Game.activeBatch.updateUniforms();
 
 		// Static UI (not zoomed)
-		for (GameObject gameObject : inanimateObjects) {
+		for (GameObject gameObject : inanimateObjectsOnGround) {
 			gameObject.drawStaticUI();
 		}
 
@@ -375,7 +378,7 @@ public class Level {
 		// if (this.script.activeScriptEvent != null) {
 		script.update(delta);
 
-		for (GameObject inanimateObject : inanimateObjects)
+		for (GameObject inanimateObject : inanimateObjectsOnGround)
 			inanimateObject.update(delta);
 
 		for (Decoration decoration : decorations)
@@ -439,6 +442,7 @@ public class Level {
 		if (activeActor != null)
 			activeActor.unselected();
 		activeActor = null;
+		System.out.println("Game.level.activeActor D = " + Game.level.activeActor);
 		currentFactionMovingIndex++;
 		if (currentFactionMovingIndex >= factions.size()) {
 			currentFactionMovingIndex = 0;
@@ -496,6 +500,7 @@ public class Level {
 			if (activeActor != null)
 				activeActor.unselected();
 			activeActor = move.actor;
+			System.out.println("Game.level.activeActor E = " + Game.level.activeActor);
 			Actor.highlightSelectedCharactersSquares();
 			removeLastLog();
 			if (this.undoList.isEmpty()) {
@@ -531,7 +536,7 @@ public class Level {
 								Actor actor = (Actor) squares[i][j].inventory.get(k);
 								actor.faction.actors.remove(actor);
 							} else {
-								inanimateObjects.remove(squares[i][j].inventory.get(k));
+								inanimateObjectsOnGround.remove(squares[i][j].inventory.get(k));
 							}
 						}
 					}
@@ -556,7 +561,7 @@ public class Level {
 	}
 
 	public GameObject findObjectFromGUID(String guid) {
-		for (GameObject object : inanimateObjects) {
+		for (GameObject object : inanimateObjectsOnGround) {
 			if (object.guid.equals(guid)) {
 				return object;
 			}

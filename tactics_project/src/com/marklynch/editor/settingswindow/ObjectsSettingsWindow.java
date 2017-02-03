@@ -197,7 +197,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 
 		final ArrayList<GameObject> objects = new ArrayList<GameObject>();
 		if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.ALL) {
-			objects.addAll(Game.level.inanimateObjects);
+			objects.addAll(Game.level.inanimateObjectsOnGround);
 			for (Faction faction : Game.level.factions) {
 				objects.addAll(faction.actors);
 			}
@@ -214,7 +214,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			objectsFilterButton.down = false;
 			weaponsFilterButton.down = false;
 		} else if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.OBJECTS) {
-			for (GameObject gameObject : Game.level.inanimateObjects) {
+			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
 				if (!(gameObject instanceof Weapon))
 					objects.add(gameObject);
 			}
@@ -223,7 +223,7 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 			objectsFilterButton.down = true;
 			weaponsFilterButton.down = false;
 		} else if (objectSettingsFilter == OBJECT_SETTINGS_FILTER.WEAPONS) {
-			for (GameObject gameObject : Game.level.inanimateObjects) {
+			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
 				if (gameObject instanceof Weapon)
 					objects.add(gameObject);
 			}
