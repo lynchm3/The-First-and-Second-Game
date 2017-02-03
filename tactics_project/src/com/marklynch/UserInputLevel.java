@@ -119,12 +119,14 @@ public class UserInputLevel {
 		// If we've clicked... where are we putting it?
 		if (scriptInterceptsClick && mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
 			Game.level.script.click();
-		} else if (Game.level.waitingForPlayerClickToBeginTurn == true && mouseButtonStateLeft == true
-				&& !Mouse.isButtonDown(0) && dragging == false) {
-			// This is the "Your turn, click to continue" @ the start of every
-			// level
-			Game.level.waitingForPlayerClickToBeginTurn = false;
-			Game.level.showTurnNotification = false;
+			// } else if (Game.level.waitingForPlayerClickToBeginTurn == true &&
+			// mouseButtonStateLeft == true
+			// && !Mouse.isButtonDown(0) && dragging == false) {
+			// // This is the "Your turn, click to continue" @ the start of
+			// every
+			// // level
+			// Game.level.waitingForPlayerClickToBeginTurn = false;
+			// Game.level.showTurnNotification = false;
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
 				&& Game.buttonHoveringOver != null && Game.level.currentFactionMovingIndex == 0) {
 			// click button if we're on one

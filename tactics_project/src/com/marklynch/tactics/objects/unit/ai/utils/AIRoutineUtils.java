@@ -37,7 +37,7 @@ public class AIRoutineUtils {
 	}
 
 	public static GameObject getNearest(Class clazz, float maxDistance, boolean fitsInInventory, boolean checkActors,
-			boolean checkInanimateObjects) {
+			boolean checkInanimateObjects, boolean mustContainObjects) {
 
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
@@ -53,7 +53,7 @@ public class AIRoutineUtils {
 			// 1. check actors
 			for (Faction faction : Game.level.factions) {
 				for (Actor actor : faction.actors) {
-					if (passesChecks(actor, clazz, maxDistance, fitsInInventory)) {
+					if (passesChecks(actor, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
 						Square square = calculateSquareToMoveToToAttackTarget(actor);
 						if (square != null && square.walkingDistanceToSquare < costToBest) {
 							result = actor;
@@ -68,7 +68,7 @@ public class AIRoutineUtils {
 		if (checkInanimateObjects) {
 			// 2. check gameObjects
 			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
-				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory)) {
+				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
 					Square square = calculateSquareToMoveToToAttackTarget(gameObject);
 					if (square != null && square.walkingDistanceToSquare < costToBest) {
 						result = gameObject;
@@ -82,17 +82,28 @@ public class AIRoutineUtils {
 
 	}
 
-	public static boolean passesChecks(GameObject gameObject, Class clazz, float maxDistance, boolean fitsInInventory) {
+	public static boolean passesChecks(GameObject gameObject, Class clazz, float maxDistance, boolean fitsInInventory,
+			boolean mustContainsObjects) {
+
+		System.out.println("passesChecks a clazz = " + clazz);
+		System.out.println("passesChecks a gameObject.class() = " + gameObject.getClass());
+
+		if (mustContainsObjects && gameObject.inventory.size() <= 0)
+			return false;
+		System.out.println("passesChecks b");
 
 		if (gameObject.remainingHealth <= 0)
 			return false;
+		System.out.println("passesChecks c");
 
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
 
+		System.out.println("passesChecks d");
 		// check class
 		if (clazz != null && !clazz.isInstance(gameObject))
 			return false;
+		System.out.println("passesChecks e");
 
 		System.out.println("gameObject = " + gameObject);
 
@@ -100,6 +111,7 @@ public class AIRoutineUtils {
 		if (maxDistance > 0
 				&& Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) > maxDistance)
 			return false;
+		System.out.println("passesChecks f");
 
 		return true;
 
@@ -565,7 +577,7 @@ public class AIRoutineUtils {
 
 	public static boolean lootTarget(GameObject gameObject) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
-		if (weaponDistance <= 1 && gameObject.remainingHealth <= 0) {
+		if (weaponDistance <= 1) {
 			Game.level.activeActor.lootAll(gameObject);
 			return true;
 		} else {

@@ -9,6 +9,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.Bed;
+import com.marklynch.tactics.objects.Carcass;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Owner;
@@ -66,6 +67,8 @@ public class Actor extends GameObject implements Owner {
 	public transient Vector<Fight> hoverFightPreviewFights;
 
 	public transient AIRoutine aiRoutine;
+
+	public String activityDescription = "";
 
 	public Bed bed;
 
@@ -289,9 +292,18 @@ public class Actor extends GameObject implements Owner {
 	@Override
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
-			// this.squareGameObjectIsOn.inventory.remove(this);
-			this.canShareSquare = true;
-			// this.faction.actors.remove(this);
+			// Remove from draw/update
+			this.squareGameObjectIsOn.inventory.remove(this);
+			this.faction.actors.remove(this);
+
+			// add a carcass
+			GameObject carcass = new Carcass(this.name + " carcass", 5, "carcass.png", this.squareGameObjectIsOn,
+					new Inventory(), false, true, false, true);
+
+			this.giveAllToTarget(null, carcass);
+			this.squareGameObjectIsOn.inventory.add(carcass);
+			Game.level.inanimateObjectsOnGround.add(carcass);
+
 			// screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
 			return true;
 		}
@@ -326,7 +338,7 @@ public class Actor extends GameObject implements Owner {
 				&& Game.level.activeActor.hoverFightPreviewDefender == this) {
 
 		} else {
-			// HEALTH COLORZ HERE YO
+			// Draw health
 
 			if (Game.level.activeActor != null && Game.level.activeActor.showHoverFightPreview) {
 
@@ -363,6 +375,17 @@ public class Actor extends GameObject implements Owner {
 
 			super.drawForeground();
 
+			// Draw activity text
+			if (activityDescription != null && activityDescription.length() > 0) {
+				float activityX1 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+				float activityX2 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+						+ Game.font.getWidth(activityDescription);
+				float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 60;
+				float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 80;
+				QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
+				TextUtils.printTextWithImages(new Object[] { activityDescription }, activityX1, activityY1,
+						Integer.MAX_VALUE, false);
+			}
 			// Draw arm
 
 			// OLD LADY IMAGE
@@ -539,6 +562,7 @@ public class Actor extends GameObject implements Owner {
 			// }
 			// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 		}
+
 	}
 
 	@Override
@@ -1066,6 +1090,19 @@ public class Actor extends GameObject implements Owner {
 			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { this, " sold ", gameObjectToSell, " to ", gameObject }));
+				this.inventory.remove(gameObjectToSell);
+				gameObject.inventory.add(gameObjectToSell);
+			}
+		}
+
+	}
+
+	public void giveAllToTarget(Class clazz, GameObject gameObject) {
+		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
+		for (GameObject gameObjectToSell : gameObjectsToSell) {
+			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { this, " gave ", gameObjectToSell, " to ", gameObject }));
 				this.inventory.remove(gameObjectToSell);
 				gameObject.inventory.add(gameObjectToSell);
 			}

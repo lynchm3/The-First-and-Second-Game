@@ -2,6 +2,18 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Time to make it look prettier
+	// 1. shoot projectile
+	// 2. turn wolf in to carcass
+
+	// HAve an anchor for people like the shopkeeper - a square + a distance
+	// they can venture away from it. Could be one of their interrupts - if(have
+	// anchor AND not close enough to it){go back to rance of anchor}. This
+	// allows them to wander around, but means the player can still find them.
+
+	// look out for calls to this, unnecessary
+	// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+
 	// character that has never laughed, and u have to find a way to make it
 	// laugh, make it dark, like he only laughs when u kill someone on front of
 	// him, and he loves it tooo much and starts killing people. maybe u take

@@ -412,7 +412,7 @@ public class Editor {
 	public void generateTestObjects() {
 
 		// Add a game object
-		GameObject gameObject = new GameObjectExploder("dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
+		GameObject gameObject = new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
 				new Inventory(), true, false, false, true);
 		Game.level.squares[0][3].inventory.add(gameObject);
 
@@ -477,7 +477,7 @@ public class Editor {
 			hunter.inventory.get(i).inventoryThatHoldsThisObject = hunter.inventory;
 		}
 
-		Actor wildAnimal = new WildAnimal("Wild Animal", "Wild Animal", 1, 10, 0, 0, 0, 0, "wolf.png",
+		Actor wildAnimal = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
 				Game.level.squares[6][6], 4, null, inventoryForWildAnimal, true, false, true);
 		wildAnimal.faction = Game.level.factions.get(0);
 		Game.level.factions.get(0).actors.add(wildAnimal);

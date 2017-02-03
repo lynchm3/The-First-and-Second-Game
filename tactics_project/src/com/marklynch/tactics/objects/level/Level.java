@@ -45,8 +45,8 @@ public class Level {
 	public transient LevelButton editorButton;
 	public transient ArrayList<Button> buttons;
 
-	public transient boolean showTurnNotification = true;
-	public transient boolean waitingForPlayerClickToBeginTurn = true;
+	// public transient boolean showTurnNotification = true;
+	// public transient boolean waitingForPlayerClickToBeginTurn = true;
 
 	public transient boolean ended = false;
 
@@ -178,8 +178,8 @@ public class Level {
 			ai.postLoad();
 		}
 
-		showTurnNotification = true;
-		waitingForPlayerClickToBeginTurn = true;
+		// showTurnNotification = true;
+		// waitingForPlayerClickToBeginTurn = true;
 	}
 
 	public void loadImages() {
@@ -357,17 +357,19 @@ public class Level {
 			TextUtils.printTextWithImages(logs.get(i).contents, 150, 100 + i * 20, Integer.MAX_VALUE, true);
 		}
 
-		if (factions.size() > 0 && currentFactionMoving != null) {
-			if (showTurnNotification) {
-				if (currentFactionMoving == factions.get(0)) {
-					TextUtils.printTextWithImages(new Object[] { "Your turn ", this.currentFactionMoving.imageTexture,
-							", click to continue." }, 500, 500, Integer.MAX_VALUE, true);
-				} else {
-					TextUtils.printTextWithImages(new Object[] { this.currentFactionMoving, "'s turn" }, 500, 500,
-							Integer.MAX_VALUE, true);
-				}
-			}
-		}
+		// if (factions.size() > 0 && currentFactionMoving != null) {
+		// if (showTurnNotification) {
+		// if (currentFactionMoving == factions.get(0)) {
+		// TextUtils.printTextWithImages(new Object[] { "Your turn ",
+		// this.currentFactionMoving.imageTexture,
+		// ", click to continue." }, 500, 500, Integer.MAX_VALUE, true);
+		// } else {
+		// TextUtils.printTextWithImages(new Object[] {
+		// this.currentFactionMoving, "'s turn" }, 500, 500,
+		// Integer.MAX_VALUE, true);
+		// }
+		// }
+		// }
 
 		// script
 		script.draw();
@@ -457,10 +459,10 @@ public class Level {
 			}
 		}
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
-		if (currentFactionMovingIndex == 0)
-			waitingForPlayerClickToBeginTurn = true;
+		// if (currentFactionMovingIndex == 0)
+		// waitingForPlayerClickToBeginTurn = true;
 
-		showTurnNotification();
+		// showTurnNotification();
 
 		undoList.clear();
 		undoButton.enabled = false;
@@ -471,25 +473,25 @@ public class Level {
 		logs.add(stringToLog);
 	}
 
-	public void showTurnNotification() {
-		showTurnNotification = true;
-		if (this.currentFactionMoving != factions.get(0))
-			new hideTurnNotificationThread().start();
-	}
+	// public void showTurnNotification() {
+	// showTurnNotification = true;
+	// if (this.currentFactionMoving != factions.get(0))
+	// new hideTurnNotificationThread().start();
+	// }
 
-	public class hideTurnNotificationThread extends Thread {
-
-		@Override
-		public void run() {
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			showTurnNotification = false;
-		}
-	}
+	// public class hideTurnNotificationThread extends Thread {
+	//
+	// @Override
+	// public void run() {
+	// try {
+	// Thread.sleep(2000);
+	// } catch (InterruptedException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// showTurnNotification = false;
+	// }
+	// }
 
 	public void undo() {
 		if (!this.undoList.isEmpty()) {

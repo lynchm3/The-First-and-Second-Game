@@ -1,6 +1,7 @@
 package com.marklynch.tactics.objects.unit.ai.routines;
 
 import com.marklynch.Game;
+import com.marklynch.tactics.objects.Carcass;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Junk;
 import com.marklynch.tactics.objects.unit.Trader;
@@ -16,6 +17,12 @@ public class AIRoutineForHunter extends AIRoutine {
 		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, PICK_SHOP_KEEPER, GO_TO_SHOP_KEEPER_AND_SELL_JUNK, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
 	};
 
+	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting";
+	final String ACTIVITY_DESCRIPTION_HUNTING = "Hunting";
+	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling Loot";
+	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Going to bed";
+	final String ACTIVITY_DESCRIPTION_SLEEPING = "Sleeping";
+
 	public HUNT_STATE huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 
 	int sleepCounter = 0;
@@ -29,11 +36,27 @@ public class AIRoutineForHunter extends AIRoutine {
 	public void update() {
 
 		// Interrupts first, could put these in to the
-		// 1. loot on ground
-		GameObject loot = AIRoutineUtils.getNearest(GameObject.class, 5f, true, false, true);
+
+		// 1. loot dead animals
+		System.out.println("LOOT CARCASS");
+		GameObject carcass = AIRoutineUtils.getNearest(Carcass.class, 5f, false, false, true, true);
+		if (carcass != null) {
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
+			if (!lootedCarcass) {
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
+			} else {
+
+			}
+			return;
+		}
+
+		// 1. pick up loot on ground
+		GameObject loot = AIRoutineUtils.getNearest(GameObject.class, 5f, true, false, true, false);
 		if (loot != null) {
-			boolean lootedAnimal = AIRoutineUtils.pickupTarget(loot);
-			if (!lootedAnimal) {
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
+			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
 			} else {
 
@@ -46,22 +69,25 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL)
 
 		{
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			System.out.println("huntState == HUNT_STATE.PICK_WILD_ANIMAL");
 			// if (target == null)
-			target = AIRoutineUtils.getNearest(WildAnimal.class, 0, false, true, false);
+			target = AIRoutineUtils.getNearest(WildAnimal.class, 0, false, true, false, false);
 			if (target == null) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else {
 				huntState = HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK;
 			}
+
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			System.out.println("huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK");
-			if (target.remainingHealth <= 0 && target.inventory.size() > 0) {
-				huntState = HUNT_STATE.GO_TO_WILD_ANIMAL_AND_LOOT;
+			if (target.remainingHealth <= 0 && Game.level.activeActor.inventory.size() > 0) {
+				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
 			} else if (target.remainingHealth <= 0 && target.inventory.size() == 0) {
-				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+				huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 			} else {
 				boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
 				if (!attackedAnimal)
@@ -69,21 +95,25 @@ public class AIRoutineForHunter extends AIRoutine {
 			}
 		}
 
-		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_LOOT) {
-			System.out.println("huntState == HUNT_STATE.LOOT_WILD_ANIMAL");
-			boolean lootedAnimal = AIRoutineUtils.lootTarget(target);
-			if (!lootedAnimal) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
-			} else {
-				target = null;
-				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
-			}
+		// if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_LOOT) {
+		// Game.level.activeActor.activityDescription =
+		// ACTIVITY_DESCRIPTION_HUNTING;
+		// System.out.println("huntState == HUNT_STATE.LOOT_WILD_ANIMAL");
+		// boolean lootedAnimal = AIRoutineUtils.lootTarget(target);
+		// if (!lootedAnimal) {
+		// AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
+		// } else {
+		// target = null;
+		// huntState = HUNT_STATE.PICK_SHOP_KEEPER;
+		// }
+		//
+		// }
 
-		}
 		if (huntState == HUNT_STATE.PICK_SHOP_KEEPER) {
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 			System.out.println("huntState == HUNT_STATE.PICK_SHOP_KEEPER");
 			// if (target == null)
-			target = AIRoutineUtils.getNearest(Trader.class, 0, false, true, false);
+			target = AIRoutineUtils.getNearest(Trader.class, 0, false, true, false, false);
 			if (target == null) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else {
@@ -92,6 +122,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK) {
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 			System.out.println("huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK");
 
 			boolean soldItems = AIRoutineUtils.sellAllToTarget(Junk.class, target);
@@ -103,6 +134,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
 			System.out.println("huntState == HUNT_STATE.GO_TO_BED_AND_SLEEP");
 			// huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 
@@ -125,6 +157,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.SLEEP) {
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 			// sleep();
 		}
 	}
