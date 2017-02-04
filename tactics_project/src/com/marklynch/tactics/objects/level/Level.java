@@ -15,6 +15,7 @@ import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
+import com.marklynch.tactics.objects.weapons.Projectile;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.Dialog;
 import com.marklynch.ui.button.Button;
@@ -30,6 +31,8 @@ public class Level {
 	// public Vector<Actor> actors;
 	public transient Actor activeActor;
 	public Vector<GameObject> inanimateObjectsOnGround;
+	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	public ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
 	public transient Vector<Dialog> dialogs;
 	public Square[][] squares;
 	public Vector<Decoration> decorations;
@@ -262,6 +265,11 @@ public class Level {
 			decoration.draw2();
 		}
 
+		// draw any projectiles
+		for (Projectile projectile : projectiles) {
+			projectile.drawForeground();
+		}
+
 	}
 
 	public void drawUI() {
@@ -380,6 +388,13 @@ public class Level {
 
 		for (GameObject inanimateObject : inanimateObjectsOnGround)
 			inanimateObject.update(delta);
+
+		// update projectiles
+		for (Projectile projectile : projectiles) {
+			projectile.update(delta);
+		}
+		projectiles.removeAll(projectilesToRemove);
+		projectilesToRemove.clear();
 
 		for (Decoration decoration : decorations)
 			decoration.update(delta);

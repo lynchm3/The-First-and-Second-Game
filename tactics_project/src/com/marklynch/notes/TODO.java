@@ -3,6 +3,10 @@ package com.marklynch.notes;
 public class TODO {
 
 	// Technical
+	// Look out for Math.sqrt!!! Saw it in Cat.java... look at
+	// actor.straightlinedistanceTo...
+
+	// Technical
 	// If game is struggling with running AI for all characters (which it will)
 	// then only run those within X squares. This will involve going through the
 	// squares rather than through gameObject and factions, but I think thats

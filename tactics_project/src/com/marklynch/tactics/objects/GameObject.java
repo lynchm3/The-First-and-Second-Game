@@ -359,4 +359,12 @@ public class GameObject extends GameObjectTemplate {
 	public void update(int delta) {
 
 	}
+
+	public float getCenterX() {
+		return squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
+	}
+
+	public float getCenterY() {
+		return squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
+	}
 }

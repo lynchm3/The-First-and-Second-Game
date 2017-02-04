@@ -17,6 +17,7 @@ import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineForHunter;
+import com.marklynch.tactics.objects.weapons.Projectile;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.AttackButton;
@@ -230,7 +231,12 @@ public class Actor extends GameObject implements Owner {
 		if (!isCounter && gameObject.remainingHealth > 0 && gameObject instanceof Actor)
 			actor.counter(this);
 
-		this.showPow(gameObject);
+		// shoot projectile
+		if (this.straightLineDistanceTo(gameObject.squareGameObjectIsOn) > 1) {
+			Game.level.projectiles.add(new Projectile(this, gameObject, 5f, true, "hunter.png"));
+		} else {
+			this.showPow(gameObject);
+		}
 
 		if (this.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
