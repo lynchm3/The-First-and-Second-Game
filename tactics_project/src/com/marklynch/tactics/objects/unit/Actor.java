@@ -337,7 +337,7 @@ public class Actor extends GameObject implements Owner {
 	}
 
 	@Override
-	public void drawForeground() {
+	public void draw1() {
 
 		if (Game.level.activeActor != null && Game.level.activeActor.showHoverFightPreview
 				&& Game.level.activeActor.hoverFightPreviewDefender == this) {
@@ -378,19 +378,7 @@ public class Actor extends GameObject implements Owner {
 						weaponAreaPositionYInPixels + 1, weaponAreaPositionYInPixels + healthBarHeightInPixels - 1);
 			}
 
-			super.drawForeground();
-
-			// Draw activity text
-			if (activityDescription != null && activityDescription.length() > 0) {
-				float activityX1 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-				float activityX2 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-						+ Game.font.getWidth(activityDescription);
-				float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 60;
-				float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 80;
-				QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
-				TextUtils.printTextWithImages(new Object[] { activityDescription }, activityX1, activityY1,
-						Integer.MAX_VALUE, false);
-			}
+			super.draw1();
 			// Draw arm
 
 			// OLD LADY IMAGE
@@ -566,6 +554,24 @@ public class Actor extends GameObject implements Owner {
 			// }
 			// }
 			// GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		}
+
+	}
+
+	@Override
+	public void draw2() {
+		super.draw2();
+
+		// Draw activity text
+		if (activityDescription != null && activityDescription.length() > 0) {
+			float activityX1 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+			float activityX2 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+					+ Game.font.getWidth(activityDescription);
+			float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 60;
+			float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 80;
+			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
+			TextUtils.printTextWithImages(new Object[] { activityDescription }, activityX1, activityY1,
+					Integer.MAX_VALUE, false);
 		}
 
 	}

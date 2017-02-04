@@ -131,7 +131,7 @@ public class GameObjectExploder extends GameObject {
 	}
 
 	@Override
-	public void drawForeground() {
+	public void draw1() {
 
 		// MAYBE THE U AND V ARE A RATIO (0 to 1)? yup...
 		// TRIED THAT below, didnt work, needs tsome debugging...
@@ -139,7 +139,7 @@ public class GameObjectExploder extends GameObject {
 		// THEYRE INTS, WHOOPS :D:D:D
 
 		if (this.remainingHealth > 0) {
-			super.drawForeground();
+			super.draw1();
 			return;
 		}
 

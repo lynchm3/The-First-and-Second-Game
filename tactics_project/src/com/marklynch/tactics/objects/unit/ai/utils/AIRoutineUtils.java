@@ -47,7 +47,7 @@ public class AIRoutineUtils {
 			for (Faction faction : Game.level.factions) {
 				for (Actor actor : faction.actors) {
 					if (passesChecks(actor, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
-						Square square = calculateSquareToMoveToToLootTarget(actor);
+						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
 						if (square != null && square.walkingDistanceToSquare < costToBest) {
 							result = actor;
 							costToBest = square.walkingDistanceToSquare;
@@ -62,7 +62,7 @@ public class AIRoutineUtils {
 			// 2. check gameObjects
 			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
 				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
-					Square square = calculateSquareToMoveToToLootTarget(gameObject);
+					Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
 					if (square != null && square.walkingDistanceToSquare < costToBest) {
 						result = gameObject;
 						costToBest = square.walkingDistanceToSquare;
@@ -212,6 +212,45 @@ public class AIRoutineUtils {
 		}
 	}
 
+	public static boolean moveTowardsTargetToBeOn(GameObject target) {
+
+		// TODO
+		// currently if there's no path it crashes
+		// also... stay still fi ur already at the best part :P, issue (need to
+		// know ideal distance for this one though)
+		// is, its not in target's list of paths
+		// ehhhhhhhhhh.... if it's not fully reachable then just go
+		// closest as the crow flies?
+		// also... have ideal distance (for ranged VS melee for e.g.) (this is
+		// weapon distance, not travel distance)
+
+		// MOVE TOWARDS A POINT
+		// get as close to the point as possible
+		// with as few moves as possible
+
+		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
+		// idealWeaponDistances.add(2);
+
+		// TODO this needs to be calculated based on
+		// weapons available and the taret and their weapons
+		// TODO what if we're stuck being closed than ideal distance, need to
+		// run through this, and there could be a list of ideal distances......
+		// :/
+		// TODO ideal weapon distance could be on the other side of an object...
+		// need to factor this in when choosing a good square :/, when talking
+		// about targets squares I need to make list of attack squares, this
+		// shit is heavy
+
+		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target, 0f);
+
+		if (squareToMoveTo != null) {
+			Game.level.activeActor.moveTo(squareToMoveTo);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public static boolean moveTowardsTargetToBeAdjacent(GameObject target) {
 
 		// TODO
@@ -241,7 +280,7 @@ public class AIRoutineUtils {
 		// about targets squares I need to make list of attack squares, this
 		// shit is heavy
 
-		Square squareToMoveTo = calculateSquareToMoveToToLootTarget(target);
+		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target, 1f);
 
 		if (squareToMoveTo != null) {
 			Game.level.activeActor.moveTo(squareToMoveTo);
@@ -394,11 +433,13 @@ public class AIRoutineUtils {
 
 	}
 
-	public static Square calculateSquareToMoveToToLootTarget(GameObject target) {
+	public static Square calculateSquareToMoveToToBeWithinXSquaresToTarget(GameObject target, float maxDistance) {
 
 		Vector<Float> idealDistances = new Vector<Float>();
-		idealDistances.add(1f);
-		idealDistances.add(0f);
+		for (int i = 0; i <= maxDistance; i++) {
+			idealDistances.addElement((float) i);
+			System.out.println("idealDistances add " + i);
+		}
 
 		Vector<Square> targetSquares = new Vector<Square>();
 		int bestTravelCostFound = Integer.MAX_VALUE;

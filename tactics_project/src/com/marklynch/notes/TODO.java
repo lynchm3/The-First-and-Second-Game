@@ -3,6 +3,13 @@ package com.marklynch.notes;
 public class TODO {
 
 	// Technical
+	// That get all paths to all squares thing seems ridic
+
+	// If blocked (from bed or something) the character should show that they're
+	// angry, and some might even attack... depending on their aggressiveness
+	// attribute and how much they like u
+
+	// Technical
 	// Actually... i'm pretty sure i'm working out a path to every square for
 	// everyone all the time, maybe multiple times per frame, so there's ur
 	// issue ;)

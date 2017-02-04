@@ -56,7 +56,6 @@ public class AIRoutineForHunter extends AIRoutine {
 		// 1. pick up loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(GameObject.class, 5f, true, false, true,
 				false);
-		System.out.println("loot = " + loot);
 		if (loot != null) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
@@ -140,6 +139,12 @@ public class AIRoutineForHunter extends AIRoutine {
 			// CONCEPT OF BED AND SLEEPING NEXT
 			if (Game.level.activeActor.bed != null) {
 
+				if (Game.level.activeActor.squareGameObjectIsOn == Game.level.activeActor.bed.squareGameObjectIsOn) {
+					huntState = HUNT_STATE.SLEEP;
+				} else {
+					AIRoutineUtils.moveTowardsTargetToBeOn(Game.level.activeActor.bed);
+				}
+
 				// boolean goingToSleep = AIRoutineUtils.sleep();
 				// if (!goingToSleep) {
 				// AIRoutineUtils.moveTowardsTargetToBeOn(Game.level.activeActor.bed);
@@ -156,6 +161,8 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.SLEEP) {
+			// Game.level.activeActor.activityDescription =
+			// ACTIVITY_DESCRIPTION_GOING_TO_BED;
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 			// sleep();
 		}

@@ -102,7 +102,7 @@ public class GameObject extends GameObjectTemplate {
 		this.paths = new HashMap<Square, Path>();
 	}
 
-	public void drawForeground() {
+	public void draw1() {
 
 		// Draw object
 
@@ -127,6 +127,10 @@ public class GameObject extends GameObjectTemplate {
 					actorPositionYInPixels + Game.SQUARE_HEIGHT);
 			TextureUtils.skipNormals = false;
 		}
+	}
+
+	public void draw2() {
+
 	}
 
 	public void drawUI() {
@@ -252,6 +256,10 @@ public class GameObject extends GameObjectTemplate {
 
 	public Vector<Square> getAllSquaresAtDistance(float distance) {
 		Vector<Square> squares = new Vector<Square>();
+		if (distance == 0) {
+			squares.addElement(this.squareGameObjectIsOn);
+			return squares;
+		}
 
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;

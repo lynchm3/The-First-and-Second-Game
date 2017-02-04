@@ -23,6 +23,7 @@ import com.marklynch.editor.settingswindow.SettingsWindow;
 import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
+import com.marklynch.tactics.objects.Bed;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectExploder;
 import com.marklynch.tactics.objects.GameObjectTemplate;
@@ -168,7 +169,7 @@ public class Editor {
 			gameObjectTemplates.get(i).loadImages();
 		}
 
-		Game.level = new Level(100, 100);
+		Game.level = new Level(20, 20);
 
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
@@ -469,16 +470,22 @@ public class Editor {
 			player.inventory.get(i).inventoryThatHoldsThisObject = player.inventory;
 		}
 
+		Bed bedForHunterPaul = new Bed("Hunter Paul's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[0][5],
+				new Inventory(), false, true, false, false);
+
 		Actor hunterPaul = new Hunter("Hunter Paul", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
-				Game.level.squares[0][5], 1, null, inventoryForActor1, true, false, true);
+				Game.level.squares[0][5], 1, bedForHunterPaul, inventoryForActor1, true, false, true);
 		hunterPaul.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(hunterPaul);
 		for (int i = 0; i < hunterPaul.inventory.size(); i++) {
 			hunterPaul.inventory.get(i).inventoryThatHoldsThisObject = hunterPaul.inventory;
 		}
 
+		Bed bedForHunterJohn = new Bed("Hunter John's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[9][9],
+				new Inventory(), false, true, false, false);
+
 		Actor hunterJohn = new Hunter("Hunter John", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
-				Game.level.squares[9][9], 1, null, inventoryForActor1.makeCopy(), true, false, true);
+				Game.level.squares[9][9], 1, bedForHunterJohn, inventoryForActor1.makeCopy(), true, false, true);
 		hunterJohn.faction = Game.level.factions.get(1);
 		Game.level.factions.get(1).actors.add(hunterJohn);
 		for (int i = 0; i < hunterJohn.inventory.size(); i++) {
