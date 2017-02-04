@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.tactics.objects.level.Decoration;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
@@ -14,8 +14,6 @@ import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
-import com.marklynch.tactics.objects.weapons.Weapon;
-import com.marklynch.tactics.objects.weapons.WeaponTemplate;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
@@ -89,9 +87,9 @@ public class TextUtils {
 						posY + offsetY + 20);
 				offsetX += width;
 
-			} else if (content instanceof GameObject) {
+			} else if (content instanceof GameObjectTemplate) {
 
-				GameObject gameObject = (GameObject) content;
+				GameObjectTemplate gameObject = (GameObjectTemplate) content;
 
 				float textWidth = Game.font.getWidth(gameObject.name);
 				float textureWidth = 20;
@@ -122,43 +120,47 @@ public class TextUtils {
 				TextureUtils.drawTexture(gameObject.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 
-			} else if (content instanceof Weapon || content instanceof WeaponTemplate) {
-
-				WeaponTemplate weaponTemplate = (WeaponTemplate) content;
-
-				float textWidth = Game.font.getWidth(weaponTemplate.name);
-				float textureWidth = 20;
-
-				float width = textWidth + textureWidth;
-				if (offsetX + width > maxWidth && offsetX != 0) {
-					if (wrap) {
-						offsetY += 20;
-						offsetX = 0;
-					} else {
-						return;
-					}
-				}
-
-				// Name
-				Game.font.drawText(Game.activeBatch, weaponTemplate.name, posX + offsetX, posY + offsetY);
-				offsetX += textWidth;
-
-				// Image
-				float x = posX + offsetX;
-				TextureUtils.drawTexture(weaponTemplate.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
-				offsetX += textureWidth;
-
-				// } else if (content instanceof Weapons) {
+				// } else if (content instanceof Weapon || content instanceof
+				// WeaponTemplate) {
 				//
-				// Weapons weapons = (Weapons) content;
+				// WeaponTemplate weaponTemplate = (WeaponTemplate) content;
 				//
-				// for (Weapon weapon : weapons.weapons) {
+				// float textWidth = Game.font.getWidth(weaponTemplate.name);
+				// float textureWidth = 20;
+				//
+				// float width = textWidth + textureWidth;
+				// if (offsetX + width > maxWidth && offsetX != 0) {
+				// if (wrap) {
+				// offsetY += 20;
+				// offsetX = 0;
+				// } else {
+				// return;
+				// }
+				// }
+				//
+				// // Name
+				// Game.font.drawText(Game.activeBatch, weaponTemplate.name,
+				// posX + offsetX, posY + offsetY);
+				// offsetX += textWidth;
+				//
 				// // Image
 				// float x = posX + offsetX;
-				// TextureUtils.drawTexture(weapon.imageTexture, x, x + 20, posY
-				// + offsetY, posY + offsetY + 20);
-				// offsetX += 20;
-				// }
+				// TextureUtils.drawTexture(weaponTemplate.imageTexture, x, x +
+				// 20, posY + offsetY, posY + offsetY + 20);
+				// offsetX += textureWidth;
+				//
+				// // } else if (content instanceof Weapons) {
+				// //
+				// // Weapons weapons = (Weapons) content;
+				// //
+				// // for (Weapon weapon : weapons.weapons) {
+				// // // Image
+				// // float x = posX + offsetX;
+				// // TextureUtils.drawTexture(weapon.imageTexture, x, x + 20,
+				// posY
+				// // + offsetY, posY + offsetY + 20);
+				// // offsetX += 20;
+				// // }
 
 			} else if (content instanceof Faction) {
 				Faction faction = (Faction) content;
