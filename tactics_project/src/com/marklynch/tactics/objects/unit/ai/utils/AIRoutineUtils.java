@@ -42,10 +42,6 @@ public class AIRoutineUtils {
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
 
-		// Calculate paths to all square
-
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
-
 		if (checkActors) {
 			// 1. check actors
 			for (Faction faction : Game.level.factions) {
@@ -84,10 +80,6 @@ public class AIRoutineUtils {
 
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
-
-		// Calculate paths to all square
-
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
 		if (checkActors) {
 			// 1. check actors
@@ -163,9 +155,6 @@ public class AIRoutineUtils {
 		// also... have ideal distance (for ranged VS melee for e.g.) (this is
 		// weapon distance, not travel distance)
 
-		// Calculate paths to all squares
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
-
 		// 1. create list of enemies
 		for (Faction faction : Game.level.factions) {
 			if (faction != Game.level.activeActor.faction
@@ -199,8 +188,6 @@ public class AIRoutineUtils {
 		// MOVE TOWARDS A POINT
 		// get as close to the point as possible
 		// with as few moves as possible
-
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
 		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
 		// idealWeaponDistances.add(2);
@@ -240,8 +227,6 @@ public class AIRoutineUtils {
 		// MOVE TOWARDS A POINT
 		// get as close to the point as possible
 		// with as few moves as possible
-
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
 		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
 		// idealWeaponDistances.add(2);
@@ -303,9 +288,6 @@ public class AIRoutineUtils {
 		// closest as the crow flies?
 		// also... have ideal distance (for ranged VS melee for e.g.) (this is
 		// weapon distance, not travel distance)
-
-		// Calculate paths to all squares
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
 		// 1. create list of enemies reachable within lowest possible turns
 		for (Faction faction : Game.level.factions) {
@@ -479,8 +461,6 @@ public class AIRoutineUtils {
 	}
 
 	public boolean moveTowardsTargetSquare(Square square) {
-
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 
 		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
 

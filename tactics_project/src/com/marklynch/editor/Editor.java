@@ -168,7 +168,7 @@ public class Editor {
 			gameObjectTemplates.get(i).loadImages();
 		}
 
-		Game.level = new Level(10, 10);
+		Game.level = new Level(100, 100);
 
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
@@ -469,12 +469,20 @@ public class Editor {
 			player.inventory.get(i).inventoryThatHoldsThisObject = player.inventory;
 		}
 
-		Actor hunter = new Hunter("Hunter Paul", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", Game.level.squares[0][5], 1,
-				null, inventoryForActor1, true, false, true);
-		hunter.faction = Game.level.factions.get(1);
-		Game.level.factions.get(1).actors.add(hunter);
-		for (int i = 0; i < hunter.inventory.size(); i++) {
-			hunter.inventory.get(i).inventoryThatHoldsThisObject = hunter.inventory;
+		Actor hunterPaul = new Hunter("Hunter Paul", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
+				Game.level.squares[0][5], 1, null, inventoryForActor1, true, false, true);
+		hunterPaul.faction = Game.level.factions.get(1);
+		Game.level.factions.get(1).actors.add(hunterPaul);
+		for (int i = 0; i < hunterPaul.inventory.size(); i++) {
+			hunterPaul.inventory.get(i).inventoryThatHoldsThisObject = hunterPaul.inventory;
+		}
+
+		Actor hunterJohn = new Hunter("Hunter John", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
+				Game.level.squares[9][9], 1, null, inventoryForActor1.makeCopy(), true, false, true);
+		hunterJohn.faction = Game.level.factions.get(1);
+		Game.level.factions.get(1).actors.add(hunterJohn);
+		for (int i = 0; i < hunterJohn.inventory.size(); i++) {
+			hunterJohn.inventory.get(i).inventoryThatHoldsThisObject = hunterJohn.inventory;
 		}
 
 		Actor wildAnimal = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",

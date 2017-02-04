@@ -3,8 +3,30 @@ package com.marklynch.notes;
 public class TODO {
 
 	// Technical
+	// Actually... i'm pretty sure i'm working out a path to every square for
+	// everyone all the time, maybe multiple times per frame, so there's ur
+	// issue ;)
+
+	// Technical
+	// In these AI routine getNearest bullshit i should get nearest by straight
+	// line then see if there's a path and settle for that.
+
+	// Technical
+	// In get best path, work towards the target, pick squares that head in the
+	// general direction of the target first
+
+	// Technical
+	// Also use lower res grass the further u zoom
+
+	// Could move one AI per frame :P or like one 60th of the AIs per frame.....
+
+	// Technical
 	// Look out for Math.sqrt!!! Saw it in Cat.java... look at
 	// actor.straightlinedistanceTo...
+
+	// Technical
+	// Also a lot of unnecesary calls to newColor(), pre-calculate, pre-load
+	// everything u can...
 
 	// Technical
 	// If game is struggling with running AI for all characters (which it will)

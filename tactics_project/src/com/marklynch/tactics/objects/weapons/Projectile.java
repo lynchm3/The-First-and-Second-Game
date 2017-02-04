@@ -79,7 +79,7 @@ public class Projectile {
 		float x2 = x + 10;
 		float y1 = y;
 		float y2 = y + 10;
-		QuadUtils.drawQuad(new Color(1.0f, 0.4f, 0.5f, 1f), x1, x2, y1, y2);
+		QuadUtils.drawQuad(Color.BLACK, x1, x2, y1, y2);
 		// }
 
 	}

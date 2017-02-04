@@ -1069,6 +1069,7 @@ public class Actor extends GameObject implements Owner {
 
 	@Override
 	public void update(int delta) {
+		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 		this.aiRoutine.update();
 	}
 
