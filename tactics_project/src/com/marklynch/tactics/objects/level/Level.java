@@ -27,15 +27,18 @@ public class Level {
 
 	public int width;
 	public int height;
-	public GameCursor gameCursor;
+	public transient Square[][] squares;
+	public transient Vector<Decoration> decorations;
+	public transient Script script;
+	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
+	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
+
 	// public Vector<Actor> actors;
 	public transient Actor activeActor;
-	public Vector<GameObject> inanimateObjectsOnGround;
-	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-	public ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
+	public transient Vector<GameObject> inanimateObjectsOnGround;
+	public transient ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	public transient ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
 	public transient Vector<Dialog> dialogs;
-	public Square[][] squares;
-	public Vector<Decoration> decorations;
 	public transient int turn = 1;
 	public ArrayList<Faction> factions;
 	public transient Faction currentFactionMoving;
@@ -48,14 +51,12 @@ public class Level {
 	public transient LevelButton editorButton;
 	public transient ArrayList<Button> buttons;
 
+	public transient GameCursor gameCursor;
+
 	// public transient boolean showTurnNotification = true;
 	// public transient boolean waitingForPlayerClickToBeginTurn = true;
 
 	public transient boolean ended = false;
-
-	public Script script;
-	public ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
-	public ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -166,7 +167,7 @@ public class Level {
 		}
 
 		for (GameObject inanimateObject : inanimateObjectsOnGround) {
-			inanimateObject.postLoad(null);
+			inanimateObject.postLoad();
 		}
 
 		for (Faction faction : factions) {

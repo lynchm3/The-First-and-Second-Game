@@ -827,7 +827,7 @@ public class Editor {
 	public void placeObjectOnSquare(Square square) {
 		GameObject gameObject = gameObjectTemplate.makeCopy(square);
 		if (gameObject instanceof Actor) {
-			gameObject.faction.actors.add((Actor) gameObject);
+			((Actor) gameObject).faction.actors.add((Actor) gameObject);
 		} else {
 			// Game.level.inanimateObjectsOnGround.add(gameObject);
 		}

@@ -1,11 +1,12 @@
 package com.marklynch.tactics.objects.unit;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.GameObjectTemplate;
+import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Inventory;
+import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 
-public class ActorTemplate extends GameObjectTemplate {
+public class ActorTemplate extends GameObject {
 
 	public int strength;
 	public int dexterity;
@@ -14,6 +15,7 @@ public class ActorTemplate extends GameObjectTemplate {
 	public String title = "";
 	public int actorLevel = 1;
 	public int travelDistance = 4;
+	public transient Faction faction;
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory",

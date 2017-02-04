@@ -2,18 +2,14 @@ package com.marklynch.tactics.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.UUID;
-
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.utils.TextureUtils;
 
 public class InventorySquare extends Square {
 
-	public String guid = UUID.randomUUID().toString();
-
-	public GameObject gameObject;
-	public Inventory inventoryThisBelongsTo;
+	public transient GameObject gameObject;
+	public transient Inventory inventoryThisBelongsTo;
 
 	public int xInPixels = 0;
 	public int yInPixels = 0;

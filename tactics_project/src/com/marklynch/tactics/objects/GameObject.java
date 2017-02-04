@@ -10,7 +10,6 @@ import java.util.Vector;
 import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 import com.marklynch.tactics.objects.unit.Path;
@@ -31,9 +30,6 @@ public class GameObject extends GameObjectTemplate {
 	public float remainingHealth = 0;
 
 	public transient boolean hasAttackedThisTurn = false;
-
-	// image
-
 	// images
 	public static transient Texture powTexture = null;
 	public static transient Texture vsTexture = null;
@@ -56,9 +52,11 @@ public class GameObject extends GameObjectTemplate {
 	public transient GameObject powTarget = null;
 	public transient boolean showPow = false;
 
-	public transient Faction faction;
+	private transient int highestPathCostSeen = 0;
 
-	public Inventory inventoryThatHoldsThisObject;
+	// Placement in inventory
+	public transient Inventory inventoryThatHoldsThisObject;
+	public transient InventorySquare inventorySquareGameObjectIsOn;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects) {
@@ -72,6 +70,15 @@ public class GameObject extends GameObjectTemplate {
 			this.squareGameObjectIsOn.inventory.add(this);
 		}
 
+		loadImages();
+	}
+
+	@Override
+	public void postLoad() {
+		super.postLoad();
+		if (squareGameObjectIsOn != null) {
+			this.squareGameObjectIsOn.inventory.add(this);
+		}
 		loadImages();
 	}
 
@@ -93,15 +100,6 @@ public class GameObject extends GameObjectTemplate {
 
 	}
 
-	public void postLoad(Faction faction) {
-		this.faction = faction;
-		if (squareGameObjectIsOn != null) {
-			this.squareGameObjectIsOn = Game.level.squares[this.squareGameObjectIsOn.xInGrid][this.squareGameObjectIsOn.yInGrid];
-			this.squareGameObjectIsOn.inventory.add(this);
-		}
-		this.paths = new HashMap<Square, Path>();
-	}
-
 	public void draw1() {
 
 		// Draw object
@@ -116,10 +114,10 @@ public class GameObject extends GameObjectTemplate {
 				alpha = 0.5f;
 			}
 
-			if (hasAttackedThisTurn == true && this.faction != null
-					&& Game.level.currentFactionMoving == this.faction) {
-				alpha = 0.5f;
-			}
+			// if (hasAttackedThisTurn == true && this.faction != null
+			// && Game.level.currentFactionMoving == this.faction) {
+			// alpha = 0.5f;
+			// }
 
 			TextureUtils.skipNormals = true;
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
@@ -170,10 +168,6 @@ public class GameObject extends GameObjectTemplate {
 		}
 		return false;
 	}
-
-	int highestPathCostSeen = 0;
-
-	public InventorySquare inventorySquareGameObjectIsOn;
 
 	public void calculatePathToAllSquares(Square[][] squares) {
 

@@ -7,30 +7,60 @@ import com.marklynch.UserInputEditor;
 
 public class Inventory {
 
+	public transient InventorySquare[][] inventorySquares = new InventorySquare[5][5];
+	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(25);
+
 	public enum INVENTORY_STATE {
 		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
 	}
 
-	public INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
+	public transient INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
 
-	public InventorySquare[][] inventorySquares = new InventorySquare[5][5];
-
-	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(25);
-
-	private boolean isOpen = false;
-
-	float x = 500;
-	float y = 100;
-	float width = 5 * Game.SQUARE_WIDTH;
-	float height = 5 * Game.SQUARE_HEIGHT;
-
-	private InventorySquare inventorySquareMouseIsOver;
-	private GameObject selectedGameObject;
+	private transient boolean isOpen = false;
+	transient float x = 500;
+	transient float y = 100;
+	transient float width = 5 * Game.SQUARE_WIDTH;
+	transient float height = 5 * Game.SQUARE_HEIGHT;
+	transient private InventorySquare inventorySquareMouseIsOver;
+	transient private GameObject selectedGameObject;
 
 	public Inventory() {
 		for (int i = 0; i < inventorySquares.length; i++) {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
 				inventorySquares[i][j] = new InventorySquare(i, j, "dialogbg.png", this);
+			}
+		}
+	}
+
+	public void postLoad() {
+		inventorySquares = new InventorySquare[5][5];
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+				inventorySquares[i][j] = new InventorySquare(i, j, "dialogbg.png", this);
+				inventorySquares[i][j].inventoryThisBelongsTo = this;
+				inventorySquares[i][j].loadImages();
+			}
+		}
+
+		// Tell objects they're in this inventory
+		for (GameObject gameObject : gameObjects) {
+			gameObject.inventoryThatHoldsThisObject = this;
+		}
+
+		int index = 0;
+
+		// Put objects in inventory
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+
+				if (index >= gameObjects.size())
+					return;
+
+				if (inventorySquares[i][j].gameObject == null) {
+					inventorySquares[i][j].gameObject = gameObjects.get(index);
+					gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[i][j];
+					index++;
+				}
 			}
 		}
 	}

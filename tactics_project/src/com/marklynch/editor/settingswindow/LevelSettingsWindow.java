@@ -194,9 +194,10 @@ public class LevelSettingsWindow extends SettingsWindow {
 						// new SubClassFriendlyAdapter<Object>())
 						.registerTypeAdapter(ScriptEvent.class, new SubClassFriendlyAdapter<ScriptEvent>())
 						.registerTypeAdapter(ScriptTrigger.class, new SubClassFriendlyAdapter<ScriptTrigger>())
-						.registerTypeAdapter(AIRoutineUtils.class, new SubClassFriendlyAdapter<AIRoutineUtils>()).create();
+						.registerTypeAdapter(AIRoutineUtils.class, new SubClassFriendlyAdapter<AIRoutineUtils>())
+						.create();
 
-				String json = gson.toJson(Game.level);
+				String json = gson.toJson(Game.level.factions);
 				FileUtils.saveFile(json);
 
 				// I HAVE REMOVED
@@ -267,7 +268,8 @@ public class LevelSettingsWindow extends SettingsWindow {
 						// new SubClassFriendlyAdapter<>())
 						.registerTypeAdapter(ScriptEvent.class, new SubClassFriendlyAdapter<ScriptEvent>())
 						.registerTypeAdapter(ScriptTrigger.class, new SubClassFriendlyAdapter<ScriptTrigger>())
-						.registerTypeAdapter(AIRoutineUtils.class, new SubClassFriendlyAdapter<AIRoutineUtils>()).create();
+						.registerTypeAdapter(AIRoutineUtils.class, new SubClassFriendlyAdapter<AIRoutineUtils>())
+						.create();
 				String json = FileUtils.openFile();
 				// FileUtils.saveFile(json);
 				if (json != null) {

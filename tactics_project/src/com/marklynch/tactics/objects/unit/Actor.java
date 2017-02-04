@@ -30,7 +30,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 
-public class Actor extends GameObject implements Owner {
+public class Actor extends ActorTemplate implements Owner {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory",
@@ -40,16 +40,8 @@ public class Actor extends GameObject implements Owner {
 		UP, RIGHT, DOWN, LEFT
 	}
 
-	public int strength;
-	public int dexterity;
-	public int intelligence;
-	public int endurance;
-
-	public String title = "";
-	public int actorLevel = 1;
 	public transient int distanceMovedThisTurn = 0;
-	public int travelDistance = 4;
-	public transient Weapon equippedWeapon = null;
+	public Weapon equippedWeapon = null;
 	public transient boolean showWeaponButtons = false;
 
 	// buttons
@@ -71,12 +63,14 @@ public class Actor extends GameObject implements Owner {
 
 	public String activityDescription = "";
 
-	public Bed bed;
+	public transient Bed bed;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {
-		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
+
+		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
+				squareActorIsStandingOn, travelDistance, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects);
 
 		this.strength = strength;
@@ -113,10 +107,9 @@ public class Actor extends GameObject implements Owner {
 		hoverFightPreviewFights = new Vector<Fight>();
 	}
 
-	@Override
 	public void postLoad(Faction faction) {
 
-		super.postLoad(faction);
+		super.postLoad();
 
 		buttons = new ArrayList<Button>();
 		weaponButtons = new ArrayList<Button>();
@@ -803,12 +796,12 @@ public class Actor extends GameObject implements Owner {
 
 				float defenderPotentialHealthLossX = defenderTotalHealthX + defenderCurrentMissingHealthWidth;
 
-				Color color = null;
-				if (this.hoverFightPreviewDefender.faction != null) {
-					color = this.hoverFightPreviewDefender.faction.color;
-				} else {
-					color = new Color(0.25f, 0.25f, 0.25f);
-				}
+				// Color color = null;
+				// if (this.hoverFightPreviewDefender.faction != null) {
+				// color = this.hoverFightPreviewDefender.faction.color;
+				// } else {
+				Color color = new Color(0.25f, 0.25f, 0.25f);
+				// }
 
 				// defender draw total health
 				QuadUtils.drawQuad(new Color(color.r, color.g, color.b, 0.25f), defenderTotalHealthX,

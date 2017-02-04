@@ -35,6 +35,9 @@ public class Bed extends GameObject {
 	@Override
 	public void draw2() {
 
+		super.draw2();
+
+		// Draw bed covers
 		if (squareGameObjectIsOn != null) {
 			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
 			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
