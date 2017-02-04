@@ -40,6 +40,8 @@ public class Game {
 	public static boolean editorMode = true;
 	public static float SQUARE_WIDTH = 128f;
 	public static float SQUARE_HEIGHT = 128f;
+	public static float HALF_SQUARE_WIDTH = SQUARE_WIDTH / 2f;
+	public static float HALF_SQUARE_HEIGHT = SQUARE_HEIGHT / 2f;
 
 	public static float windowWidth = 800;
 	public static float windowHeight = 600;
