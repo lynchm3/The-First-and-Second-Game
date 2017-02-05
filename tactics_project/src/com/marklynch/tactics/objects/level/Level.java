@@ -27,8 +27,8 @@ public class Level {
 
 	public int width;
 	public int height;
-	public transient Square[][] squares;
-	public transient Vector<Decoration> decorations;
+	public Square[][] squares;
+	public Vector<Decoration> decorations;
 	public transient Script script;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
@@ -121,7 +121,6 @@ public class Level {
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
 		dialogs = new Vector<Dialog>();
-		decorations = new Vector<Decoration>();
 		gameCursor = new GameCursor();
 
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f, "end_turn_button.png", "end_turn_button.png",
@@ -160,25 +159,31 @@ public class Level {
 		editorButton.enabled = true;
 		buttons.add(editorButton);
 
+		this.inanimateObjectsOnGround = new Vector<GameObject>();
+		this.projectiles = new ArrayList<Projectile>();
+		this.projectilesToRemove = new ArrayList<Projectile>();
+		this.openInventories = new ArrayList<Inventory>();
+		this.script = new Script();
+
+		for (Faction faction : factions) {
+			faction.postLoad();
+		}
+
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				squares[i][j].postLoad();
 			}
 		}
 
-		for (GameObject inanimateObject : inanimateObjectsOnGround) {
-			inanimateObject.postLoad();
-		}
-
-		for (Faction faction : factions) {
-			faction.postLoad();
-		}
-
-		script.postLoad();
-
-		for (AIRoutineUtils ai : ais) {
-			ai.postLoad();
-		}
+		// for (GameObject inanimateObject : inanimateObjectsOnGround) {
+		// inanimateObject.postLoad();
+		// }
+		//
+		// script.postLoad();
+		//
+		// for (AIRoutineUtils ai : ais) {
+		// ai.postLoad();
+		// }
 
 		// showTurnNotification = true;
 		// waitingForPlayerClickToBeginTurn = true;

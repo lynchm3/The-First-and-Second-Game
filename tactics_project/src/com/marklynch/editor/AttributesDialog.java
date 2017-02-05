@@ -92,11 +92,12 @@ public class AttributesDialog {
 		// Title
 		if (object instanceof Actor) {
 			Actor actor = (Actor) object;
-			title = "Actor @ " + actor.squareGameObjectIsOn.xInGrid + "," + actor.squareGameObjectIsOn.yInGrid;
+			title = actor.getClass().getSimpleName() + " @ " + actor.squareGameObjectIsOn.xInGrid + ","
+					+ actor.squareGameObjectIsOn.yInGrid;
 		} else if (object instanceof GameObject) {
 			GameObject gameObject = (GameObject) object;
 			if (gameObject.squareGameObjectIsOn != null) {
-				title = "Object @ " + gameObject.squareGameObjectIsOn.xInGrid + ","
+				title = gameObject.getClass().getSimpleName() + " @ " + gameObject.squareGameObjectIsOn.xInGrid + ","
 						+ gameObject.squareGameObjectIsOn.yInGrid;
 			} else {
 				title = "" + gameObject.name;

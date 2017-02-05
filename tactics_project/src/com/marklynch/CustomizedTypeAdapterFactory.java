@@ -43,17 +43,7 @@ public abstract class CustomizedTypeAdapterFactory<C> implements TypeAdapterFact
 		};
 	}
 
-	/**
-	 * Override this to muck with {@code toSerialize} before it is written to
-	 * the outgoing JSON stream.
-	 * 
-	 * @return
-	 */
 	protected abstract void beforeWrite(C c);
 
-	/**
-	 * Override this to muck with {@code deserialized} before it parsed into the
-	 * application type.
-	 */
 	protected abstract C afterRead(C c);
 }

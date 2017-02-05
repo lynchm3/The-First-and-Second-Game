@@ -3,7 +3,6 @@ package com.marklynch.tactics.objects.unit;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Inventory;
-import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 
 public class ActorTemplate extends GameObject {
@@ -15,7 +14,6 @@ public class ActorTemplate extends GameObject {
 	public String title = "";
 	public int actorLevel = 1;
 	public int travelDistance = 4;
-	public transient Faction faction;
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory",
@@ -36,11 +34,18 @@ public class ActorTemplate extends GameObject {
 	}
 
 	@Override
+	public void postLoad() {
+		super.postLoad();
+		loadImages();
+	}
+
+	@Override
 	public Actor makeCopy(Square square) {
 		Actor actor = new Actor(new String(name), new String(title), actorLevel, (int) totalHealth, strength, dexterity,
 				intelligence, endurance, imageTexturePath, square, travelDistance, null, inventory.makeCopy(),
 				showInventory, fitsInInventory, canContainOtherObjects);
 		actor.faction = Game.level.factions.get(1);
+		actor.factionGUID = Game.level.factions.get(1).guid;
 		return actor;
 
 	}

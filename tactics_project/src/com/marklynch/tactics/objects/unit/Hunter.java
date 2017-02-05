@@ -13,7 +13,12 @@ public class Hunter extends Actor {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects);
+		aiRoutine = new AIRoutineForHunter();
+	}
 
+	@Override
+	public void postLoad() {
+		super.postLoad();
 		aiRoutine = new AIRoutineForHunter();
 	}
 

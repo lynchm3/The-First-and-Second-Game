@@ -16,7 +16,6 @@ import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineForHunter;
 import com.marklynch.tactics.objects.weapons.Projectile;
 import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
@@ -41,7 +40,6 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	public transient int distanceMovedThisTurn = 0;
-	public Weapon equippedWeapon = null;
 	public transient boolean showWeaponButtons = false;
 
 	// buttons
@@ -64,6 +62,13 @@ public class Actor extends ActorTemplate implements Owner {
 	public String activityDescription = "";
 
 	public transient Bed bed;
+	public String bedGUID = null;
+
+	public transient Faction faction;
+	public String factionGUID = null;
+
+	public Weapon equippedWeapon = null;
+	public String equippedWeaponGUID = null;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
@@ -81,7 +86,11 @@ public class Actor extends ActorTemplate implements Owner {
 		this.title = title;
 		this.actorLevel = actorLevel;
 		this.travelDistance = travelDistance;
+
 		this.bed = bed;
+		if (bed != null)
+			this.bedGUID = bed.guid;
+
 		buttons = new ArrayList<Button>();
 		weaponButtons = new ArrayList<Button>();
 
@@ -102,14 +111,54 @@ public class Actor extends ActorTemplate implements Owner {
 
 		if (weapons.size() > 0 && weapons.get(0) != null) {
 			equippedWeapon = weapons.get(0);
+			equippedWeaponGUID = weapons.get(0).guid;
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
 	}
 
-	public void postLoad(Faction faction) {
+	@Override
+	public void postLoad() {
 
+		System.out.println("actor.postload");
 		super.postLoad();
+
+		// faction
+		System.out.println("START factionGUID = " + factionGUID);
+		if (factionGUID != null) {
+			System.out.println("Game.level.factions.size() = " + Game.level.factions.size());
+			for (Faction faction : Game.level.factions) {
+				System.out.println("faction = " + faction);
+				System.out.println("faction.guid = " + faction.guid);
+				System.out.println("factionGUID = " + factionGUID);
+				if (factionGUID.equals(faction.guid)) {
+					System.out.println("adding... ");
+					this.faction = faction;
+					if (!faction.actors.contains(this)) {
+						System.out.println("added");
+						faction.actors.add(this);
+					}
+				}
+			}
+		}
+
+		// bed
+		if (bedGUID != null) {
+			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
+				if (bedGUID.equals(gameObject.guid)) {
+					this.bed = (Bed) gameObject;
+				}
+			}
+		}
+
+		// equippedWeapon
+		if (equippedWeaponGUID != null) {
+			for (Weapon weapon : this.getWeaponsInInventory()) {
+				if (equippedWeaponGUID.equals(weapon.guid)) {
+					this.equippedWeapon = weapon;
+				}
+			}
+		}
 
 		buttons = new ArrayList<Button>();
 		weaponButtons = new ArrayList<Button>();
@@ -129,11 +178,12 @@ public class Actor extends ActorTemplate implements Owner {
 
 		if (weapons.size() > 0 && weapons.get(0) != null) {
 			equippedWeapon = weapons.get(0);
+			equippedWeaponGUID = weapons.get(0).guid;
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
 
-		aiRoutine = new AIRoutineForHunter();
+		loadImages();
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
@@ -255,6 +305,7 @@ public class Actor extends ActorTemplate implements Owner {
 		for (Weapon weapon : getWeaponsInInventory()) {
 			if (range >= weapon.minRange && range <= weapon.maxRange) {
 				equippedWeapon = weapon;
+				equippedWeaponGUID = weapon.guid;
 			}
 		}
 	}
@@ -272,8 +323,10 @@ public class Actor extends ActorTemplate implements Owner {
 
 		if (potentialWeaponsToEquip.size() == 0) {
 			equippedWeapon = null;
+			equippedWeaponGUID = null;
 		} else if (potentialWeaponsToEquip.size() == 1) {
 			equippedWeapon = potentialWeaponsToEquip.get(0);
+			equippedWeaponGUID = potentialWeaponsToEquip.get(0).guid;
 		} else {
 			ArrayList<Fight> fights = new ArrayList<Fight>();
 			for (Weapon weapon : potentialWeaponsToEquip) {
@@ -282,6 +335,7 @@ public class Actor extends ActorTemplate implements Owner {
 			}
 			fights.sort(new Fight.FightComparator());
 			equippedWeapon = fights.get(0).attackerWeapon;
+			equippedWeaponGUID = fights.get(0).attackerWeapon.guid;
 		}
 	}
 
@@ -1027,6 +1081,7 @@ public class Actor extends ActorTemplate implements Owner {
 		showWeaponButtons = !showWeaponButtons;
 		if (showWeaponButtons == false) {
 			equippedWeapon = null;
+			equippedWeaponGUID = null;
 		}
 	}
 
@@ -1047,6 +1102,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public void unselected() {
 		this.equippedWeapon = null;
+		equippedWeaponGUID = null;
 		buttonsAnimateCurrentTime = 0;
 		this.showWeaponButtons = false;
 		Game.level.removeWalkingHighlight();
@@ -1056,6 +1112,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public void weaponButtonClicked(Weapon weapon) {
 		this.equippedWeapon = weapon;
+		equippedWeaponGUID = null;
 	}
 
 	@Override
@@ -1068,6 +1125,16 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void update(int delta) {
+		System.out.println("aiRoutine = " + this.aiRoutine);
+		// System.out.println("Game.level = " + Game.level);
+		// System.out.println("Game.level.currentFactionMovingIndex = " +
+		// Game.level.currentFactionMovingIndex);
+		// System.out.println("Game.level.currentFactionMoving = " +
+		// Game.level.currentFactionMoving);
+		// System.out.println("Game.level.activeActor = " +
+		// Game.level.activeActor);
+		// System.out.println("Game.level.squares = " + Game.level.squares);
+
 		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 		this.aiRoutine.update();
 	}

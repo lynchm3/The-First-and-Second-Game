@@ -6,7 +6,44 @@ import com.marklynch.tactics.objects.unit.Actor;
 
 public class SquareInventory extends Inventory {
 
-	public Square square;
+	public transient Square square;
+
+	@Override
+	public void postLoad() {
+		inventorySquares = new InventorySquare[5][5];
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+				inventorySquares[i][j] = new InventorySquare(i, j, "dialogbg.png", this);
+				inventorySquares[i][j].inventoryThisBelongsTo = this;
+				inventorySquares[i][j].loadImages();
+			}
+		}
+
+		// Tell objects they're in this inventory
+		for (GameObject gameObject : gameObjects) {
+			gameObject.squareGameObjectIsOn = square;
+			if (!(gameObject instanceof Actor))
+				Game.level.inanimateObjectsOnGround.add(gameObject);
+			gameObject.postLoad();
+		}
+
+		int index = 0;
+
+		// Put objects in inventory
+		for (int i = 0; i < inventorySquares.length; i++) {
+			for (int j = 0; j < inventorySquares[i].length; j++) {
+
+				if (index >= gameObjects.size())
+					return;
+
+				if (inventorySquares[i][j].gameObject == null) {
+					inventorySquares[i][j].gameObject = gameObjects.get(index);
+					gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[i][j];
+					index++;
+				}
+			}
+		}
+	}
 
 	@Override
 	public void add(GameObject gameObject) {

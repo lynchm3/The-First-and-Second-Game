@@ -465,6 +465,8 @@ public class Editor {
 		Actor player = new Actor("Old lady", "Fighter", 10, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 10,
 				null, inventoryForActor0, true, false, true);
 		player.faction = Game.level.factions.get(0);
+		player.factionGUID = Game.level.factions.get(0).guid;
+
 		Game.level.factions.get(0).actors.add(player);
 		for (int i = 0; i < player.inventory.size(); i++) {
 			player.inventory.get(i).inventoryThatHoldsThisObject = player.inventory;
@@ -476,6 +478,7 @@ public class Editor {
 		Actor hunterPaul = new Hunter("Hunter Paul", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
 				Game.level.squares[0][5], 1, bedForHunterPaul, inventoryForActor1, true, false, true);
 		hunterPaul.faction = Game.level.factions.get(1);
+		hunterPaul.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(hunterPaul);
 		for (int i = 0; i < hunterPaul.inventory.size(); i++) {
 			hunterPaul.inventory.get(i).inventoryThatHoldsThisObject = hunterPaul.inventory;
@@ -487,6 +490,7 @@ public class Editor {
 		Actor hunterJohn = new Hunter("Hunter John", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
 				Game.level.squares[9][9], 1, bedForHunterJohn, inventoryForActor1.makeCopy(), true, false, true);
 		hunterJohn.faction = Game.level.factions.get(1);
+		hunterJohn.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(hunterJohn);
 		for (int i = 0; i < hunterJohn.inventory.size(); i++) {
 			hunterJohn.inventory.get(i).inventoryThatHoldsThisObject = hunterJohn.inventory;
@@ -495,11 +499,13 @@ public class Editor {
 		Actor wildAnimal = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
 				Game.level.squares[6][6], 4, null, inventoryForWildAnimal, true, false, true);
 		wildAnimal.faction = Game.level.factions.get(0);
+		wildAnimal.factionGUID = Game.level.factions.get(0).guid;
 		Game.level.factions.get(0).actors.add(wildAnimal);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				4, null, new Inventory(), true, false, true);
 		trader.faction = Game.level.factions.get(1);
+		trader.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(trader);
 
 		// Decorations

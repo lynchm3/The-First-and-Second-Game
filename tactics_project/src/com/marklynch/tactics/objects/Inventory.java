@@ -45,6 +45,7 @@ public class Inventory {
 		// Tell objects they're in this inventory
 		for (GameObject gameObject : gameObjects) {
 			gameObject.inventoryThatHoldsThisObject = this;
+			gameObject.postLoad();
 		}
 
 		int index = 0;

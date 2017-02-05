@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.Vector;
 
-import com.marklynch.CustomizedTypeAdapterFactory;
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.unit.Actor;
@@ -30,7 +29,7 @@ public class Faction implements Owner {
 	 * Map relationships of this faction towards others +-100
 	 */
 	public transient Map<Faction, FactionRelationship> relationships = new HashMap<Faction, FactionRelationship>();
-	public Vector<Actor> actors = new Vector<Actor>();
+	public transient Vector<Actor> actors = new Vector<Actor>();
 
 	public transient Actor currentActor;
 	public transient int currentActorIndex = 0;
@@ -60,17 +59,17 @@ public class Faction implements Owner {
 	}
 
 	public void loadImages() {
+		// actors = new Vector<Actor>();
 		this.imageTexture = getGlobalImage(imageTexturePath);
-		for (Actor actor : actors) {
-			actor.loadImages();
-		}
+		// for (Actor actor : actors) {
+		// actor.loadImages();
+		// }
 	}
 
 	public void postLoad() {
+		this.actors = new Vector<Actor>();
 		this.color = new Color(this.color.r, this.color.g, this.color.b, this.color.a);
-		for (Actor actor : actors) {
-			actor.postLoad(this);
-		}
+
 		currentStage = STAGE.SELECT;
 		relationships = new HashMap<Faction, FactionRelationship>();
 		for (String factionGUID : relationshipGUIDs.keySet()) {
@@ -83,6 +82,7 @@ public class Faction implements Owner {
 	}
 
 	public void update(int delta) {
+		System.out.println("actors.size() = " + actors.size());
 		for (Actor actor : actors) {
 			Game.level.activeActor = actor;
 			actor.update(delta);
@@ -228,23 +228,5 @@ public class Faction implements Owner {
 	@Override
 	public String toString() {
 		return name;
-	}
-
-	public static class FactionTypeAdapterFactory extends CustomizedTypeAdapterFactory<Faction> {
-		public FactionTypeAdapterFactory() {
-			super(Faction.class);
-		}
-
-		@Override
-		protected void beforeWrite(Faction object) {
-			for (Faction faction : object.relationships.keySet()) {
-				object.relationshipGUIDs.put(faction.guid, object.relationships.get(faction));
-			}
-		}
-
-		@Override
-		protected Faction afterRead(Faction object) {
-			return object;
-		}
 	}
 }

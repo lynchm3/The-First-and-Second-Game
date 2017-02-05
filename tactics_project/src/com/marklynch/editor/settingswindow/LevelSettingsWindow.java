@@ -2,8 +2,6 @@ package com.marklynch.editor.settingswindow;
 
 import java.lang.reflect.Type;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -13,16 +11,11 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.marklynch.Game;
+import com.marklynch.SaveAndLoad;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.level.Faction;
-import com.marklynch.tactics.objects.level.Level;
-import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
-import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
-import com.marklynch.utils.FileUtils;
 
 public class LevelSettingsWindow extends SettingsWindow {
 
@@ -185,50 +178,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				Gson gson = new GsonBuilder().setPrettyPrinting()
-						.registerTypeAdapterFactory(new Faction.FactionTypeAdapterFactory())
-						// .registerTypeAdapterFactory(
-						// new
-						// ScriptTriggerActorSelected.ScriptTriggerActorSelectedAdapterFactory())
-						// .registerTypeAdapter(Object.class,
-						// new SubClassFriendlyAdapter<Object>())
-						.registerTypeAdapter(ScriptEvent.class, new SubClassFriendlyAdapter<ScriptEvent>())
-						.registerTypeAdapter(ScriptTrigger.class, new SubClassFriendlyAdapter<ScriptTrigger>())
-						.registerTypeAdapter(AIRoutineUtils.class, new SubClassFriendlyAdapter<AIRoutineUtils>())
-						.create();
-
-				String json = gson.toJson(Game.level.factions);
-				FileUtils.saveFile(json);
-
-				// I HAVE REMOVED
-				// GameObject.level
-				// Faction.level
-				// Square.level
-				// AttackButton.level
-				// WeaponButton.level
-				//
-				// All Textures, so I need to hang on to their URL
-				//
-				// Square.gameObject
-				//
-				// GameObject.faction
-
-				// ISSUES
-				// GAMEOBJECT <-> SQUARE
-				// Faction.relationships
-
-				// Transiented the shit out of
-				// Square.java
-				// GameObject.java
-				// Faction.java
-				// Actor.java
-				// Level.java
-
-				// SO... saving the game..... Like... mid game..... :/
-				// Saving at the start of the turn should be fine... but
-				// mid-turn???
-
-				// Theres also Editor.stuff I want to save too...
+				SaveAndLoad.save();
 
 			}
 		};
@@ -259,24 +209,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 
 			@Override
 			public void click() {
-				Gson gson = new GsonBuilder().setPrettyPrinting()
-						.registerTypeAdapterFactory(new Faction.FactionTypeAdapterFactory())
-						// .registerTypeAdapterFactory(
-						// new
-						// ScriptTriggerActorSelected.ScriptTriggerActorSelectedAdapterFactory())
-						// .registerTypeAdapter(Object.class,
-						// new SubClassFriendlyAdapter<>())
-						.registerTypeAdapter(ScriptEvent.class, new SubClassFriendlyAdapter<ScriptEvent>())
-						.registerTypeAdapter(ScriptTrigger.class, new SubClassFriendlyAdapter<ScriptTrigger>())
-						.registerTypeAdapter(AIRoutineUtils.class, new SubClassFriendlyAdapter<AIRoutineUtils>())
-						.create();
-				String json = FileUtils.openFile();
-				// FileUtils.saveFile(json);
-				if (json != null) {
-					Game.level = gson.fromJson(json, Level.class);
-					Game.level.postLoad();
-					Game.level.loadImages();
-				}
+				SaveAndLoad.load();
 			}
 		};
 		buttons.add(loadLevelButton);

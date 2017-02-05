@@ -18,6 +18,12 @@ public class WildAnimal extends Actor {
 	}
 
 	@Override
+	public void postLoad() {
+		super.postLoad();
+		aiRoutine = new AIRoutineForWildAnimal();
+	}
+
+	@Override
 	public Actor makeCopy(Square square) {
 
 		return new WildAnimal(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,

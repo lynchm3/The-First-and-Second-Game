@@ -93,6 +93,7 @@ public class AttributeSelectionWindow<T> {
 								actor.faction.actors.remove(actor);
 								faction.actors.add(actor);
 								actor.faction = faction;
+								actor.factionGUID = faction.guid;
 							} else {
 								field.set(ownerOfAttribute, faction);
 								try {

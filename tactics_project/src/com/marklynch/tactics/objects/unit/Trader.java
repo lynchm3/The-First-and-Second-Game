@@ -18,6 +18,12 @@ public class Trader extends Actor {
 	}
 
 	@Override
+	public void postLoad() {
+		super.postLoad();
+		aiRoutine = new AIRoutineForTrader();
+	}
+
+	@Override
 	public Actor makeCopy(Square square) {
 
 		return new Trader(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,

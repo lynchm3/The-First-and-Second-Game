@@ -2,6 +2,17 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// on save equipped weapon needs to be saved better
+
+	// the messyness with guids is messy - so far bed, faction and equipped
+	// weapon... If i at least hide them behind getters and setters i can
+	// control it... COULD move them in to adapter like i do for the factions...
+
+	// In the ediotr i should highlight characters with their faction color for
+	// clarity
+
+	// loadImages is being called too many times when loading from a save file
+
 	// Technical
 	// That get all paths to all squares thing seems ridic
 

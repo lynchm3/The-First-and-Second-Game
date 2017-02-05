@@ -58,14 +58,17 @@ public class Square {
 		showInventory = true;
 	}
 
+	public void postLoad() {
+		inventory.square = this;
+		inventory.postLoad();
+		weaponsThatCanAttack = new Vector<Weapon>();
+		dialogs = new Vector<Dialog>();
+		loadImages();
+	}
+
 	public void loadImages() {
 		this.imageTexture = getGlobalImage(imageTexturePath);
 
-	}
-
-	public void postLoad() {
-		weaponsThatCanAttack = new Vector<Weapon>();
-		dialogs = new Vector<Dialog>();
 	}
 
 	public void draw() {
