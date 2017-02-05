@@ -581,7 +581,7 @@ public class AIRoutineUtils {
 			Actor actorToAttack = attackableActors.get(random);
 			Game.level.activeActor.equipBestWeapon(actorToAttack);
 			Game.level.activeActor.attack(actorToAttack, false);
-			Game.level.activeActor.highlightSelectedCharactersSquares();
+			// Game.level.activeActor.highlightSelectedCharactersSquares();
 			return true;
 		} else {
 			return false;
@@ -606,7 +606,7 @@ public class AIRoutineUtils {
 			Actor actorToAttack = attackableActors.get(random);
 			Game.level.activeActor.equipBestWeapon(actorToAttack);
 			Game.level.activeActor.attack(actorToAttack, false);
-			Game.level.activeActor.highlightSelectedCharactersSquares();
+			// Game.level.activeActor.highlightSelectedCharactersSquares();
 			return true;
 		} else {
 			return false;
@@ -618,7 +618,7 @@ public class AIRoutineUtils {
 		if (Game.level.activeActor.hasRange(weaponDistance)) {
 			Game.level.activeActor.equipBestWeapon(gameObject);
 			Game.level.activeActor.attack(gameObject, false);
-			Actor.highlightSelectedCharactersSquares();
+			// Actor.highlightSelectedCharactersSquares();
 			return true;
 		} else {
 			return false;
@@ -658,6 +658,9 @@ public class AIRoutineUtils {
 
 	public static void moveTo(Actor actor, Square squareToMoveTo) {
 
+		if (actor.travelDistance - actor.distanceMovedThisTurn <= 0)
+			return;
+
 		if (squareToMoveTo == actor.squareGameObjectIsOn || !squareToMoveTo.inventory.isPassable())
 			return;
 
@@ -675,11 +678,11 @@ public class AIRoutineUtils {
 		}
 	}
 
-	public static void move(Actor gameObject, Square square) {
-		gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-		gameObject.distanceMovedThisTurn += 1;
-		gameObject.squareGameObjectIsOn = square;
-		square.inventory.add(gameObject);
+	public static void move(Actor actor, Square square) {
+		actor.squareGameObjectIsOn.inventory.remove(actor);
+		actor.distanceMovedThisTurn += 1;
+		actor.squareGameObjectIsOn = square;
+		square.inventory.add(actor);
 		// Actor.highlightSelectedCharactersSquares();
 	}
 

@@ -187,6 +187,11 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
+
+		System.out.println("calculateReachableSquares for " + this.name);
+		System.out.println("this.travelDistance - this.distanceMovedThisTurn = "
+				+ (this.travelDistance - this.distanceMovedThisTurn));
+
 		for (int i = 0; i < squares.length; i++) {
 			for (int j = 0; j < squares.length; j++) {
 
@@ -241,11 +246,12 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	public void attack(GameObject gameObject, boolean isCounter) {
+
 		if (hasAttackedThisTurn == true && !isCounter) {
 			return;
 		}
 		gameObject.remainingHealth -= equippedWeapon.damage;
-		this.distanceMovedThisTurn = Integer.MAX_VALUE;
+		this.distanceMovedThisTurn = this.travelDistance;
 		this.hasAttackedThisTurn = true;
 		String attackTypeString;
 		if (isCounter)
