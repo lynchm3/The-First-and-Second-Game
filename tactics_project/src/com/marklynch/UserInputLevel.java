@@ -7,6 +7,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
+import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
 public class UserInputLevel {
 
@@ -168,7 +169,7 @@ public class UserInputLevel {
 					&& Game.level.activeActor.faction == Game.level.factions.get(0)
 					&& Game.level.currentFactionMoving == Game.level.factions.get(0)
 					&& Game.level.activeActor.squareGameObjectIsOn != Game.squareMouseIsOver) {
-				Game.level.activeActor.moveTo(Game.squareMouseIsOver);
+				AIRoutineUtils.moveTo(Game.level.activeActor, Game.squareMouseIsOver);
 			}
 		}
 

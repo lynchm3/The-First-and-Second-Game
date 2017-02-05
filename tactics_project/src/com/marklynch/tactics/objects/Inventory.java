@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.UserInputEditor;
+import com.marklynch.tactics.objects.unit.Actor;
 
 public class Inventory {
 
@@ -168,6 +169,24 @@ public class Inventory {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject != null && !gameObject.canShareSquare)
 				return false;
+		}
+		return true;
+	}
+
+	public boolean isPassable() {
+		for (GameObject gameObject : gameObjects) {
+
+			if (gameObject instanceof Actor) {
+				return true;
+				// Actor actor = (Actor) gameObject;
+				// if (actor.travelDistance - actor.distanceMovedThisTurn > 0) {
+				// return false;
+				// }
+
+			} else {
+				if (gameObject != null && !gameObject.canShareSquare)
+					return false;
+			}
 		}
 		return true;
 	}

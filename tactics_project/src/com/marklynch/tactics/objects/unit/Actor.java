@@ -362,27 +362,6 @@ public class Actor extends ActorTemplate implements Owner {
 		return false;
 	}
 
-	public void moveTo(Square squareToMoveTo) {
-
-		if (squareToMoveTo == this.squareGameObjectIsOn)
-			return;
-
-		Square oldSquare = this.squareGameObjectIsOn;
-		int distanceTraveled = squareToMoveTo.walkingDistanceToSquare;
-		this.squareGameObjectIsOn.inventory.remove(Game.level.activeActor);
-		this.distanceMovedThisTurn += squareToMoveTo.walkingDistanceToSquare;
-		this.squareGameObjectIsOn = squareToMoveTo;
-		squareToMoveTo.inventory.add(Game.level.activeActor);
-		Actor.highlightSelectedCharactersSquares();
-		// Game.level.logOnScreen(new ActivityLog(new Object[] { this, " moved
-		// to " + squareToMoveTo }));
-
-		if (this.faction == Game.level.factions.get(0)) {
-			Game.level.undoList.push(new Move(this, oldSquare, squareToMoveTo, distanceTraveled));
-			Game.level.undoButton.enabled = true;
-		}
-	}
-
 	@Override
 	public void draw1() {
 

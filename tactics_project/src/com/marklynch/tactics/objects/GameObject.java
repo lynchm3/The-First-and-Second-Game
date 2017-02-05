@@ -240,7 +240,7 @@ public class GameObject extends GameObjectTemplate {
 			}
 		}
 
-		if (newSquare != null && newSquare.inventory.canShareSquare() && !squaresInThisPath.contains(newSquare)
+		if (newSquare != null && newSquare.inventory.isPassable() && !squaresInThisPath.contains(newSquare)
 				&& !paths.containsKey(newSquare)) {
 			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
 			newPathSquares.add(newSquare);
@@ -250,6 +250,9 @@ public class GameObject extends GameObjectTemplate {
 				highestPathCostSeen = newDistance;
 			Path newPath = new Path(newPathSquares, newDistance);
 			paths.put(newSquare, newPath);
+
+			// THEYRE MOCING ON TO THE SAME SQUARE
+
 		}
 	}
 
