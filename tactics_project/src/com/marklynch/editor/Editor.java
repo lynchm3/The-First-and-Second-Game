@@ -544,7 +544,7 @@ public class Editor {
 		Bed bedForHunterJohn = new Bed("Hunter John's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[9][9],
 				new Inventory(), false, true, false, false);
 
-		Actor hunterJohn = new Hunter("Hunter John", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
+		Actor hunterJohn = new Hunter("Hunter John", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
 				Game.level.squares[9][9], 1, bedForHunterJohn, inventoryForActor1.makeCopy(), true, false, true);
 		hunterJohn.faction = Game.level.factions.get(1);
 		hunterJohn.factionGUID = Game.level.factions.get(1).guid;
