@@ -36,6 +36,28 @@ public class AIRoutineUtils {
 		return false;
 	}
 
+	public static Square getRandomSquare(int maxDistance) {
+
+		int attempts = 0;
+		int maxAttempts = 5;
+		Square randomSquare = null;
+		while (attempts < maxAttempts) {
+			int x = (int) (Math.random() * Game.level.width);
+			int y = (int) (Math.random() * Game.level.height);
+			System.out.println("x = " + x);
+			System.out.println("y = " + y);
+			randomSquare = Game.level.squares[x][y];
+			Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(randomSquare);
+			if (currentActorPathToThisSquare != null && currentActorPathToThisSquare.travelCost < maxDistance
+					&& randomSquare.inventory.canShareSquare()) {
+				return randomSquare;
+			}
+			attempts++;
+		}
+
+		return null;
+	}
+
 	public static GameObject getNearestForPurposeOfBeingAdjacent(Class clazz, float maxDistance,
 			boolean fitsInInventory, boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects) {
 
@@ -429,7 +451,7 @@ public class AIRoutineUtils {
 			return null;
 		}
 
-		return moveAlongPath(pathToSquare);
+		return getSquareToMoveAlongPath(pathToSquare);
 
 	}
 
@@ -474,11 +496,11 @@ public class AIRoutineUtils {
 			return null;
 		}
 
-		return moveAlongPath(pathToSquare);
+		return getSquareToMoveAlongPath(pathToSquare);
 
 	}
 
-	public static Square moveAlongPath(Path path) {
+	public static Square getSquareToMoveAlongPath(Path path) {
 
 		// TODO move this to an actor method called moveAlongPath
 		Square squareToMoveTo = null;
@@ -543,6 +565,7 @@ public class AIRoutineUtils {
 	public static boolean moveToRandomSquare() {
 		// MOVE TO RANDOM SQUARE - maybe for a broken robot or confused
 		// enemy
+
 		Vector<Square> reachableSquares = new Vector<Square>();
 		for (int j = 0; j < Game.level.squares.length; j++) {
 			for (int k = 0; k < Game.level.squares[0].length; k++) {
@@ -551,6 +574,7 @@ public class AIRoutineUtils {
 				}
 			}
 		}
+		System.out.println("reacheableSquares.size() = " + reachableSquares.size());
 		if (reachableSquares.size() > 0) {
 			int random = (int) (Math.random() * (reachableSquares.size() - 1));
 			Square squareToMoveTo = reachableSquares.get(random);
