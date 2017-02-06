@@ -2,6 +2,7 @@ package com.marklynch.tactics.objects.level;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -82,11 +83,21 @@ public class Faction implements Owner {
 	}
 
 	public void update(int delta) {
-		System.out.println("actors.size() = " + actors.size());
-		for (Actor actor : actors) {
+
+		for (int i = 0; i < actors.size(); i++) {
+			Actor actor = actors.get(i);
 			Game.level.activeActor = actor;
 			actor.update(delta);
 		}
+
+		ArrayList<Actor> deadActors = new ArrayList<Actor>();
+		for (Actor actor : actors) {
+			if (actor.remainingHealth <= 0)
+				deadActors.add(actor);
+		}
+
+		actors.removeAll(deadActors);
+
 		Game.level.endTurn();
 	}
 

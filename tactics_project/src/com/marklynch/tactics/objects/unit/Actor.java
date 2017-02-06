@@ -120,7 +120,6 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public void postLoad1() {
 
-		System.out.println("actor.postload1");
 		super.postLoad1();
 
 		buttons = new ArrayList<Button>();
@@ -151,23 +150,14 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public void postLoad2() {
 		super.postLoad2();
-
-		System.out.println("actor.postload2");
 		super.postLoad2();
 
 		// faction
-		System.out.println("START factionGUID = " + factionGUID);
 		if (factionGUID != null) {
-			System.out.println("Game.level.factions.size() = " + Game.level.factions.size());
 			for (Faction faction : Game.level.factions) {
-				System.out.println("faction = " + faction);
-				System.out.println("faction.guid = " + faction.guid);
-				System.out.println("factionGUID = " + factionGUID);
 				if (factionGUID.equals(faction.guid)) {
-					System.out.println("adding... ");
 					this.faction = faction;
 					if (!faction.actors.contains(this)) {
-						System.out.println("added");
 						faction.actors.add(this);
 					}
 				}
@@ -175,14 +165,10 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 
 		// bed
-		System.out.println(this.name + " bedGUID = " + bedGUID);
 		if (bedGUID != null) {
-			System.out.println(this.name + "bedGUID = " + bedGUID);
 			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
-				System.out.println(this.name + "gameObject = " + gameObject);
 				if (bedGUID.equals(gameObject.guid)) {
 					this.bed = (Bed) gameObject;
-					System.out.println(this.name + "bed = " + bed);
 				}
 			}
 		}
@@ -198,10 +184,6 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
-
-		System.out.println("calculateReachableSquares for " + this.name);
-		System.out.println("this.travelDistance - this.distanceMovedThisTurn = "
-				+ (this.travelDistance - this.distanceMovedThisTurn));
 
 		for (int i = 0; i < squares.length; i++) {
 			for (int j = 0; j < squares.length; j++) {
@@ -361,7 +343,7 @@ public class Actor extends ActorTemplate implements Owner {
 		if (remainingHealth <= 0) {
 			// Remove from draw/update
 			this.squareGameObjectIsOn.inventory.remove(this);
-			this.faction.actors.remove(this);
+			// this.faction.actors.remove(this);
 
 			// add a carcass
 			GameObject carcass = new Carcass(this.name + " carcass", 5, "carcass.png", this.squareGameObjectIsOn,
@@ -381,6 +363,9 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void draw1() {
+
+		if (this.remainingHealth <= 0)
+			return;
 
 		if (Game.level.activeActor != null && Game.level.activeActor.showHoverFightPreview
 				&& Game.level.activeActor.hoverFightPreviewDefender == this) {
@@ -603,6 +588,10 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void draw2() {
+
+		if (this.remainingHealth <= 0)
+			return;
+
 		super.draw2();
 
 		// Draw activity text
@@ -1121,7 +1110,6 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void update(int delta) {
-		System.out.println("aiRoutine = " + this.aiRoutine);
 		// System.out.println("Game.level = " + Game.level);
 		// System.out.println("Game.level.currentFactionMovingIndex = " +
 		// Game.level.currentFactionMovingIndex);
@@ -1130,9 +1118,10 @@ public class Actor extends ActorTemplate implements Owner {
 		// System.out.println("Game.level.activeActor = " +
 		// Game.level.activeActor);
 		// System.out.println("Game.level.squares = " + Game.level.squares);
-
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
-		this.aiRoutine.update();
+		if (this.remainingHealth > 0) {
+			Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+			this.aiRoutine.update();
+		}
 	}
 
 	public void lootAll(GameObject gameObject) {

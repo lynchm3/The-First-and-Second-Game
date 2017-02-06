@@ -117,10 +117,10 @@ public class AIRoutineUtils {
 	public static boolean passesChecks(GameObject gameObject, Class clazz, float maxDistance, boolean fitsInInventory,
 			boolean mustContainsObjects) {
 
-		if (mustContainsObjects && gameObject.inventory.size() <= 0)
+		if (gameObject.remainingHealth <= 0)
 			return false;
 
-		if (gameObject.remainingHealth <= 0)
+		if (mustContainsObjects && gameObject.inventory.size() <= 0)
 			return false;
 
 		if (gameObject.fitsInInventory != fitsInInventory)
@@ -438,7 +438,6 @@ public class AIRoutineUtils {
 		Vector<Float> idealDistances = new Vector<Float>();
 		for (int i = 0; i <= maxDistance; i++) {
 			idealDistances.addElement((float) i);
-			System.out.println("idealDistances add " + i);
 		}
 
 		Vector<Square> targetSquares = new Vector<Square>();

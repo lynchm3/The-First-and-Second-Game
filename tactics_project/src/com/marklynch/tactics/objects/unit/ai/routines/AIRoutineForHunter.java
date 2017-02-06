@@ -95,20 +95,6 @@ public class AIRoutineForHunter extends AIRoutine {
 			}
 		}
 
-		// if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_LOOT) {
-		// Game.level.activeActor.activityDescription =
-		// ACTIVITY_DESCRIPTION_HUNTING;
-		// System.out.println("huntState == HUNT_STATE.LOOT_WILD_ANIMAL");
-		// boolean lootedAnimal = AIRoutineUtils.lootTarget(target);
-		// if (!lootedAnimal) {
-		// AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
-		// } else {
-		// target = null;
-		// huntState = HUNT_STATE.PICK_SHOP_KEEPER;
-		// }
-		//
-		// }
-
 		if (huntState == HUNT_STATE.PICK_SHOP_KEEPER) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 			// if (target == null)
@@ -122,7 +108,6 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		if (huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
-			System.out.println("huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK");
 
 			boolean soldItems = AIRoutineUtils.sellAllToTarget(Junk.class, target);
 			if (!soldItems)

@@ -35,8 +35,6 @@ public class Projectile {
 
 		this.speedX = (distanceToCoverX / totalDistanceToCover) * 4;
 		this.speedY = (distanceToCoverY / totalDistanceToCover) * 4;
-		System.out.println("speedX = " + speedX);
-		System.out.println("speedY = " + speedY);
 
 		this.onTarget = onTarget;
 		this.imagePath = imagePath;
@@ -54,8 +52,6 @@ public class Projectile {
 
 		distanceCoveredX += distanceX;
 		distanceCoveredY += distanceY;
-
-		System.out.println("distanceCoveredX = " + distanceCoveredX + ", distanceToCoverX = " + distanceToCoverX);
 
 		if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {

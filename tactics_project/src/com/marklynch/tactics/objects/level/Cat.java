@@ -54,16 +54,6 @@ public class Cat extends Decoration {
 			}
 		}
 
-		// System.out.println("closestDistance = " + closestDistance);
-		// System.out.println("System.currentTimeMillis() % 100l = "
-		// + System.currentTimeMillis() % 100l);
-		// System.out.println("System.currentTimeMillis() = "
-		// + System.currentTimeMillis());
-		// System.out.println("delta = " + delta);
-
-		// System.out.println("Math.random() * 1000 = "
-		// + (int) (Math.random() * 1000));
-
 		if (closestDistance < minDistanceFromPeople) {
 			state = CatState.RUNNING;
 			if (closestDistance == 0)

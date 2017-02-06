@@ -51,8 +51,6 @@ public class GameObjectTemplate {
 
 	public void loadImages() {
 
-		System.out.println("loadImages() " + name + ", " + imageTexturePath);
-
 		this.imageTexture = getGlobalImage(imageTexturePath);
 
 	}

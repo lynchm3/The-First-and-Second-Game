@@ -361,10 +361,7 @@ public class Level {
 			}
 		}
 
-		// System.out.println("drawing openInventories");
 		for (Inventory inventory : openInventories) {
-
-			// System.out.println("inventory.drawStaticUI();");
 			inventory.drawStaticUI();
 		}
 

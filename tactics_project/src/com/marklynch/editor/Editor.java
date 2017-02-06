@@ -555,9 +555,9 @@ public class Editor {
 
 		Actor wildAnimal = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
 				Game.level.squares[6][6], 4, null, inventoryForWildAnimal, true, false, true);
-		wildAnimal.faction = Game.level.factions.get(0);
-		wildAnimal.factionGUID = Game.level.factions.get(0).guid;
-		Game.level.factions.get(0).actors.add(wildAnimal);
+		wildAnimal.faction = Game.level.factions.get(1);
+		wildAnimal.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(wildAnimal);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				4, null, new Inventory(), true, false, true);
