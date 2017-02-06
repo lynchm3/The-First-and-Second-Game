@@ -32,8 +32,8 @@ import mdesl.graphics.Color;
 public class Actor extends ActorTemplate implements Owner {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
-			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory",
-			"fitsInInventory", "canContainOtherObjects" };
+			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
+			"showInventory", "fitsInInventory", "canContainOtherObjects" };
 
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT

@@ -16,8 +16,8 @@ public class ActorTemplate extends GameObject {
 	public int travelDistance = 4;
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
-			"intelligence", "endurance", "totalHealth", "remainingHealth", "inventory", "showInventory",
-			"fitsInInventory", "canContainOtherObjects" };
+			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
+			"showInventory", "fitsInInventory", "canContainOtherObjects" };
 
 	public ActorTemplate(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
