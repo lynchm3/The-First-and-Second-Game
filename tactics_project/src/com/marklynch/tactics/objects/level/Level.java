@@ -171,7 +171,13 @@ public class Level {
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				squares[i][j].postLoad();
+				squares[i][j].postLoad1();
+			}
+		}
+
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				squares[i][j].postLoad2();
 			}
 		}
 
@@ -216,6 +222,15 @@ public class Level {
 				squares[i][j] = new Square(i, j, "grass.png", 1, 0, new SquareInventory());
 			}
 		}
+		for (int i = 5; i <= 9; i++) {
+			for (int j = 0; j <= 5; j++) {
+				squares[i][j].imageTexturePath = "stone.png";
+				squares[i][j].loadImages();
+			}
+		}
+
+		// 6,1 to 8,4
+		// for(int i = 6; i<=8; )
 	}
 
 	public void removeWalkingHighlight() {

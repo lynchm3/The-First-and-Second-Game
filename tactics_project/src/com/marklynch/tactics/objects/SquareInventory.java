@@ -9,7 +9,7 @@ public class SquareInventory extends Inventory {
 	public transient Square square;
 
 	@Override
-	public void postLoad() {
+	public void postLoad1() {
 		inventorySquares = new InventorySquare[5][5];
 		for (int i = 0; i < inventorySquares.length; i++) {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
@@ -19,15 +19,18 @@ public class SquareInventory extends Inventory {
 			}
 		}
 
+		int index = 0;
+
 		// Tell objects they're in this inventory
 		for (GameObject gameObject : gameObjects) {
 			gameObject.squareGameObjectIsOn = square;
 			if (!(gameObject instanceof Actor))
 				Game.level.inanimateObjectsOnGround.add(gameObject);
-			gameObject.postLoad();
 		}
 
-		int index = 0;
+		for (GameObject gameObject : gameObjects) {
+			gameObject.postLoad1();
+		}
 
 		// Put objects in inventory
 		for (int i = 0; i < inventorySquares.length; i++) {
@@ -42,6 +45,15 @@ public class SquareInventory extends Inventory {
 					index++;
 				}
 			}
+		}
+	}
+
+	@Override
+	public void postLoad2() {
+
+		super.postLoad2();
+		for (GameObject gameObject : gameObjects) {
+			gameObject.postLoad2();
 		}
 	}
 

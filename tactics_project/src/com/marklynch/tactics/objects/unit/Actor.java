@@ -118,10 +118,42 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	@Override
-	public void postLoad() {
+	public void postLoad1() {
 
-		System.out.println("actor.postload");
-		super.postLoad();
+		System.out.println("actor.postload1");
+		super.postLoad1();
+
+		buttons = new ArrayList<Button>();
+		weaponButtons = new ArrayList<Button>();
+		this.attackButton = new AttackButton(0, 0, 50, 50, "attack.png", "attack.png");
+
+		this.pushButton = new AttackButton(0, 0, 50, 50, "push.png", "push.png");
+
+		buttons.add(attackButton);
+		buttons.add(pushButton);
+		attackButton.enabled = true;
+
+		ArrayList<Weapon> weapons = getWeaponsInInventory();
+
+		for (Weapon weapon : weapons) {
+			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imageTexturePath, weapon.imageTexturePath, weapon));
+		}
+
+		if (weapons.size() > 0 && weapons.get(0) != null) {
+			equippedWeaponGUID = weapons.get(0).guid;
+		}
+
+		hoverFightPreviewFights = new Vector<Fight>();
+
+		loadImages();
+	}
+
+	@Override
+	public void postLoad2() {
+		super.postLoad2();
+
+		System.out.println("actor.postload2");
+		super.postLoad2();
 
 		// faction
 		System.out.println("START factionGUID = " + factionGUID);
@@ -143,10 +175,14 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 
 		// bed
+		System.out.println(this.name + " bedGUID = " + bedGUID);
 		if (bedGUID != null) {
+			System.out.println(this.name + "bedGUID = " + bedGUID);
 			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
+				System.out.println(this.name + "gameObject = " + gameObject);
 				if (bedGUID.equals(gameObject.guid)) {
 					this.bed = (Bed) gameObject;
+					System.out.println(this.name + "bed = " + bed);
 				}
 			}
 		}
@@ -159,31 +195,6 @@ public class Actor extends ActorTemplate implements Owner {
 				}
 			}
 		}
-
-		buttons = new ArrayList<Button>();
-		weaponButtons = new ArrayList<Button>();
-		this.attackButton = new AttackButton(0, 0, 50, 50, "attack.png", "attack.png");
-
-		this.pushButton = new AttackButton(0, 0, 50, 50, "push.png", "push.png");
-
-		buttons.add(attackButton);
-		buttons.add(pushButton);
-		attackButton.enabled = true;
-
-		ArrayList<Weapon> weapons = getWeaponsInInventory();
-
-		for (Weapon weapon : weapons) {
-			weaponButtons.add(new WeaponButton(0, 0, 50, 50, weapon.imageTexturePath, weapon.imageTexturePath, weapon));
-		}
-
-		if (weapons.size() > 0 && weapons.get(0) != null) {
-			equippedWeapon = weapons.get(0);
-			equippedWeaponGUID = weapons.get(0).guid;
-		}
-
-		hoverFightPreviewFights = new Vector<Fight>();
-
-		loadImages();
 	}
 
 	public void calculateReachableSquares(Square[][] squares) {
