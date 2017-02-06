@@ -2,6 +2,15 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// BUG - after loading, Hunter Paul is losing his bed
+
+	// Technical - watch creation of too many string literals
+
+	// So witht e square deisgn, maybe have the image the way it is now, then
+	// have gradients underneath
+	// So the color in the senter is the color of the image and then it blends
+	// out to the foursides and four corners
+
 	// on save equipped weapon needs to be saved better
 
 	// the messyness with guids is messy - so far bed, faction and equipped

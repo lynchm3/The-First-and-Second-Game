@@ -19,7 +19,7 @@ import mdesl.graphics.Texture;
 public class Square {
 
 	public String guid = UUID.randomUUID().toString();
-	public final static String[] editableAttributes = { "elevation", "travelCost" };
+	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
 
 	public final int xInGrid;
 	public final int yInGrid;
@@ -58,12 +58,16 @@ public class Square {
 		showInventory = true;
 	}
 
-	public void postLoad() {
+	public void postLoad1() {
 		inventory.square = this;
-		inventory.postLoad();
+		inventory.postLoad1();
 		weaponsThatCanAttack = new Vector<Weapon>();
 		dialogs = new Vector<Dialog>();
 		loadImages();
+	}
+
+	public void postLoad2() {
+		inventory.postLoad2();
 	}
 
 	public void loadImages() {
@@ -76,6 +80,9 @@ public class Square {
 		// square texture
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		// QuadUtils.drawQuad(new Color(0.2f, 0.4f, 0.1f, 1.0f),
+		// squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
+		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 		TextureUtils.drawTexture(imageTexture, squarePositionX, squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
 				squarePositionY + Game.SQUARE_HEIGHT);
 

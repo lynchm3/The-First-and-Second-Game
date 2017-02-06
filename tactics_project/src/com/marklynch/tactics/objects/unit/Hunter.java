@@ -17,9 +17,14 @@ public class Hunter extends Actor {
 	}
 
 	@Override
-	public void postLoad() {
-		super.postLoad();
+	public void postLoad1() {
+		super.postLoad1();
 		aiRoutine = new AIRoutineForHunter();
+	}
+
+	@Override
+	public void postLoad2() {
+		super.postLoad2();
 	}
 
 	@Override

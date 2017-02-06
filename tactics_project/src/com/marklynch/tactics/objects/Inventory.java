@@ -33,7 +33,7 @@ public class Inventory {
 		}
 	}
 
-	public void postLoad() {
+	public void postLoad1() {
 		inventorySquares = new InventorySquare[5][5];
 		for (int i = 0; i < inventorySquares.length; i++) {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
@@ -46,7 +46,7 @@ public class Inventory {
 		// Tell objects they're in this inventory
 		for (GameObject gameObject : gameObjects) {
 			gameObject.inventoryThatHoldsThisObject = this;
-			gameObject.postLoad();
+			gameObject.postLoad1();
 		}
 
 		int index = 0;
@@ -65,6 +65,15 @@ public class Inventory {
 				}
 			}
 		}
+	}
+
+	public void postLoad2() {
+		// Tell objects they're in this inventory
+		for (GameObject gameObject : gameObjects) {
+			gameObject.inventoryThatHoldsThisObject = this;
+			gameObject.postLoad2();
+		}
+
 	}
 
 	public void loadImages() {

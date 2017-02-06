@@ -31,7 +31,12 @@ public class InventorySquare extends Square {
 	}
 
 	@Override
-	public void postLoad() {
+	public void postLoad1() {
+
+	}
+
+	@Override
+	public void postLoad2() {
 
 	}
 

@@ -74,17 +74,22 @@ public class GameObject extends GameObjectTemplate {
 	}
 
 	@Override
-	public void postLoad() {
+	public void postLoad1() {
 		System.out.println("gameObejcy.postload");
 		System.out.println("gameObejcy.postload name = " + name);
 		System.out.println("gameObejcy.postload class = " + getClass());
-		super.postLoad();
+		super.postLoad1();
 		paths = new HashMap<Square, Path>();
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn.inventory.add(this);
 		}
 
 		loadImages();
+	}
+
+	@Override
+	public void postLoad2() {
+		super.postLoad2();
 	}
 
 	@Override

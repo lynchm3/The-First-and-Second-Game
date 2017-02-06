@@ -40,12 +40,18 @@ public class GameObjectTemplate {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects);
 	}
 
-	public void postLoad() {
-		inventory.postLoad();
+	public void postLoad1() {
+		inventory.postLoad1();
 		loadImages();
 	}
 
+	public void postLoad2() {
+		inventory.postLoad2();
+	}
+
 	public void loadImages() {
+
+		System.out.println("loadImages() " + name + ", " + imageTexturePath);
 
 		this.imageTexture = getGlobalImage(imageTexturePath);
 

@@ -18,9 +18,14 @@ public class WildAnimal extends Actor {
 	}
 
 	@Override
-	public void postLoad() {
-		super.postLoad();
+	public void postLoad1() {
+		super.postLoad1();
 		aiRoutine = new AIRoutineForWildAnimal();
+	}
+
+	@Override
+	public void postLoad2() {
+		super.postLoad2();
 	}
 
 	@Override

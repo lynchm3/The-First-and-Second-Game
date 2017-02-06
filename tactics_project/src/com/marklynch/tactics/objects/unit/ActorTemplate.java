@@ -34,9 +34,14 @@ public class ActorTemplate extends GameObject {
 	}
 
 	@Override
-	public void postLoad() {
-		super.postLoad();
+	public void postLoad1() {
+		super.postLoad1();
 		loadImages();
+	}
+
+	@Override
+	public void postLoad2() {
+		super.postLoad2();
 	}
 
 	@Override
