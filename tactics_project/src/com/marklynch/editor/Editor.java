@@ -24,6 +24,7 @@ import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.tactics.objects.Bed;
+import com.marklynch.tactics.objects.Door;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectExploder;
 import com.marklynch.tactics.objects.GameObjectTemplate;
@@ -433,6 +434,8 @@ public class Editor {
 		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][4], new Inventory(), false, false, false, false);
 		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][2], new Inventory(), false, false, false, false);
 		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][1], new Inventory(), false, false, false, false);
+
+		new Door("Wooden Door", 100, "door.png", Game.level.squares[5][3], new Inventory(), false, true, false, false);
 
 		for (Building building : Game.level.buildings) {
 			for (int i = building.gridX1 + 1; i <= building.gridX2 - 1; i++) {
