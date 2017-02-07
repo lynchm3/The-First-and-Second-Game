@@ -28,6 +28,7 @@ public class Level {
 	public int width;
 	public int height;
 	public Square[][] squares;
+	public ArrayList<Building> buildings;
 	public Vector<Decoration> decorations;
 	public transient Script script;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
@@ -226,6 +227,17 @@ public class Level {
 			for (int j = 0; j <= 5; j++) {
 				squares[i][j].imageTexturePath = "stone.png";
 				squares[i][j].loadImages();
+			}
+		}
+
+		buildings = new ArrayList<Building>();
+		buildings.add(new Building("Trader Joe's Shop", 5, 0, 9, 5));
+
+		for (Building building : buildings) {
+			for (int i = building.gridX1; i <= building.gridX2; i++) {
+				for (int j = building.gridY1; j <= building.gridY2; j++) {
+					squares[i][j].building = building;
+				}
 			}
 		}
 

@@ -42,6 +42,8 @@ public class Square {
 
 	public transient static PathComparator pathComparator;
 
+	public Building building;
+
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory) {
 		super();
 		this.xInGrid = x;

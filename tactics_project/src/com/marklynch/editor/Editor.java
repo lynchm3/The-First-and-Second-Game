@@ -29,7 +29,9 @@ import com.marklynch.tactics.objects.GameObjectExploder;
 import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Junk;
+import com.marklynch.tactics.objects.Roof;
 import com.marklynch.tactics.objects.Wall;
+import com.marklynch.tactics.objects.level.Building;
 import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
@@ -414,69 +416,38 @@ public class Editor {
 	public void generateTestObjects() {
 
 		// Walls
-		Wall wall0 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][0], new Inventory(), false, false,
-				false, false);
-		wall0.squareGameObjectIsOn.inventory.add(wall0);
-		Wall wall1 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[6][0], new Inventory(), false, false,
-				false, false);
-		wall1.squareGameObjectIsOn.inventory.add(wall1);
-		Wall wall2 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[7][0], new Inventory(), false, false,
-				false, false);
-		wall2.squareGameObjectIsOn.inventory.add(wall2);
-		Wall wall3 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[8][0], new Inventory(), false, false,
-				false, false);
-		wall3.squareGameObjectIsOn.inventory.add(wall3);
-		Wall wall4 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][0], new Inventory(), false, false,
-				false, false);
-		wall4.squareGameObjectIsOn.inventory.add(wall4);
-		Wall wall5 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][1], new Inventory(), false, false,
-				false, false);
-		wall5.squareGameObjectIsOn.inventory.add(wall5);
-		Wall wall5s = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][2], new Inventory(), false, false,
-				false, false);
-		wall5s.squareGameObjectIsOn.inventory.add(wall5s);
-		Wall wall6 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][4], new Inventory(), false, false,
-				false, false);
-		wall6.squareGameObjectIsOn.inventory.add(wall6);
-		Wall wall7 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][5], new Inventory(), false, false,
-				false, false);
-		wall7.squareGameObjectIsOn.inventory.add(wall7);
-		Wall wall8 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[8][5], new Inventory(), false, false,
-				false, false);
-		wall8.squareGameObjectIsOn.inventory.add(wall8);
-		Wall wall9 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[7][5], new Inventory(), false, false,
-				false, false);
-		wall9.squareGameObjectIsOn.inventory.add(wall9);
-		Wall wall10 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[6][5], new Inventory(), false, false,
-				false, false);
-		wall10.squareGameObjectIsOn.inventory.add(wall10);
-		Wall wall11 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][5], new Inventory(), false, false,
-				false, false);
-		wall11.squareGameObjectIsOn.inventory.add(wall11);
-		Wall wall12 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][4], new Inventory(), false, false,
-				false, false);
-		wall12.squareGameObjectIsOn.inventory.add(wall12);
-		Wall wall13 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][3], new Inventory(), false, false,
-				false, false);
-		wall13.squareGameObjectIsOn.inventory.add(wall13);
-		Wall wall14 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][2], new Inventory(), false, false,
-				false, false);
-		wall14.squareGameObjectIsOn.inventory.add(wall14);
-		Wall wall15 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][2], new Inventory(), false, false,
-				false, false);
-		wall15.squareGameObjectIsOn.inventory.add(wall15);
-		Wall wall16 = new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][1], new Inventory(), false, false,
-				false, false);
-		wall16.squareGameObjectIsOn.inventory.add(wall16);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][0], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[6][0], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[7][0], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[8][0], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][0], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][1], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][2], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][3], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][4], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][5], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[8][5], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[7][5], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[6][5], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][5], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][4], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][2], new Inventory(), false, false, false, false);
+		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][1], new Inventory(), false, false, false, false);
+
+		for (Building building : Game.level.buildings) {
+			for (int i = building.gridX1 + 1; i <= building.gridX2 - 1; i++) {
+				for (int j = building.gridY1 + 1; j <= building.gridY2 - 1; j++) {
+					new Roof("Roof", 1000, "wall.png", Game.level.squares[i][j], new Inventory(), false, true, false,
+							false);
+				}
+			}
+		}
 
 		// Add a game object
-		GameObject gameObject = new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3],
-				new Inventory(), true, false, false, true);
-		Game.level.squares[0][3].inventory.add(gameObject);
+		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3], new Inventory(), true,
+				false, false, true);
 
-		GameObject groundFur = new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false,
-				true, true, false);
-		Game.level.squares[0][7].inventory.add(groundFur);
+		new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true, true, false);
 
 		// Add factions
 		Game.level.factions
