@@ -116,11 +116,11 @@ public class GameObject extends GameObjectTemplate {
 
 			float alpha = 1.0f;
 
-			TextureUtils.skipNormals = true;
+			// TextureUtils.skipNormals = true;
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
 					actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels,
 					actorPositionYInPixels + Game.SQUARE_HEIGHT);
-			TextureUtils.skipNormals = false;
+			// TextureUtils.skipNormals = false;
 		}
 	}
 

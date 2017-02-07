@@ -9,8 +9,6 @@ public class TODO {
 	// Make the roof go out further (maybe only on spread on to squares that
 	// dont have roof)
 
-	// BUG - after loading, Hunter Paul is losing his bed
-
 	// Technical - watch creation of too many string literals
 
 	// So witht e square deisgn, maybe have the image the way it is now, then
