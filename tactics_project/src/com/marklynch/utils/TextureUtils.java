@@ -3,11 +3,12 @@ package com.marklynch.utils;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE1;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
-import mdesl.graphics.Color;
-import mdesl.graphics.Texture;
 
 import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+
+import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class TextureUtils {
 
@@ -92,9 +93,11 @@ public class TextureUtils {
 		// }
 
 		// GL11.glEnable(GL11.GL_TEXTURE_2D);
+
 		// GL11.glColor4f(1.0f, 1.0f, 1.0f, alpha);
 
-		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(new Color(1f, 1f, 1f, alpha));
+		// Game.activeBatch.setColor(Color.WHITE);
 		// Game.batch.setColor(1f, 1.0f, 1.0f, 0.1f);
 
 		// draw some sprites... they will all be affected by our shaders

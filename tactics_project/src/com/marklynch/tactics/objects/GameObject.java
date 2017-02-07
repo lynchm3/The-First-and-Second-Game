@@ -110,21 +110,11 @@ public class GameObject extends GameObjectTemplate {
 	public void draw1() {
 
 		// Draw object
-
 		if (squareGameObjectIsOn != null) {
 			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
 			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 			float alpha = 1.0f;
-			if (Game.level.activeActor != null && Game.level.activeActor.showHoverFightPreview == true
-					&& Game.level.activeActor.hoverFightPreviewDefender != this) {
-				alpha = 0.5f;
-			}
-
-			// if (hasAttackedThisTurn == true && this.faction != null
-			// && Game.level.currentFactionMoving == this.faction) {
-			// alpha = 0.5f;
-			// }
 
 			TextureUtils.skipNormals = true;
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
