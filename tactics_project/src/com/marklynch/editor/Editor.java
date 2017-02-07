@@ -417,13 +417,10 @@ public class Editor {
 		doorLocations1.add(Game.level.squares[5][3]);
 		Game.level.buildings.add(new Building("Trader Joe's Shop", 5, 0, 9, 5, doorLocations1));
 
-		for (Building building : Game.level.buildings) {
-			for (int i = building.gridX1; i <= building.gridX2; i++) {
-				for (int j = building.gridY1; j <= building.gridY2; j++) {
-					Game.level.squares[i][j].building = building;
-				}
-			}
-		}
+		ArrayList<Square> doorLocations2 = new ArrayList<Square>();
+		doorLocations2.add(Game.level.squares[7][9]);
+		doorLocations2.add(Game.level.squares[11][9]);
+		Game.level.buildings.add(new Building("Hunter John's Home", 7, 7, 11, 11, doorLocations2));
 
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )

@@ -18,7 +18,7 @@ public class Roof extends GameObject {
 	}
 
 	@Override
-	public void draw2() {
+	public void draw3() {
 		if (this.squareGameObjectIsOn.building != Game.level.factions.get(0).actors
 				.get(0).squareGameObjectIsOn.building) {
 			super.draw1();

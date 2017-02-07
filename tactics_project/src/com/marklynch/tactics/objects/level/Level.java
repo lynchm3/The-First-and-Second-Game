@@ -296,17 +296,21 @@ public class Level {
 			decoration.draw2();
 		}
 
-		// Objects 1
+		// Objects 2
 
 		for (GameObject gameObject : inanimateObjectsOnGround) {
 			gameObject.draw2();
 		}
 
-		// Actors 1
+		// Actors 2
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {
 				actor.draw2();
 			}
+		}
+
+		for (GameObject gameObject : inanimateObjectsOnGround) {
+			gameObject.draw3();
 		}
 
 		// draw any projectiles

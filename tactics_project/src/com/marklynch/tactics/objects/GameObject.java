@@ -128,6 +128,10 @@ public class GameObject extends GameObjectTemplate {
 
 	}
 
+	public void draw3() {
+
+	}
+
 	public void drawUI() {
 
 		// Draw POW

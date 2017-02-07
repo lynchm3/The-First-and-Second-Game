@@ -55,6 +55,12 @@ public class Building {
 			}
 		}
 
+		for (int i = gridX1; i <= gridX2; i++) {
+			for (int j = gridY1; j <= gridY2; j++) {
+				Game.level.squares[i][j].building = this;
+			}
+		}
+
 	}
 
 	// Wallsnew Wall("Stone Wall",1000,"wall.png",Game.level.squares[6][0],new
