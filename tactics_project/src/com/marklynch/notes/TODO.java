@@ -2,6 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Wolf only moves once
+	// Hunter seems to get too close when attacking
+	// Make walls thinner, but thicker than door
+	// Make door not retarded, bit thinned then door
+	// Make the roof go out further (maybe only on spread on to squares that
+	// dont have roof)
+
 	// BUG - after loading, Hunter Paul is losing his bed
 
 	// Technical - watch creation of too many string literals

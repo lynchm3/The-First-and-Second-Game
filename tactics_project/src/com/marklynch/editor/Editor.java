@@ -24,14 +24,11 @@ import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.tactics.objects.Bed;
-import com.marklynch.tactics.objects.Door;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.GameObjectExploder;
 import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Junk;
-import com.marklynch.tactics.objects.Roof;
-import com.marklynch.tactics.objects.Wall;
 import com.marklynch.tactics.objects.level.Building;
 import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
@@ -416,35 +413,20 @@ public class Editor {
 
 	public void generateTestObjects() {
 
-		// Walls
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][0], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[6][0], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[7][0], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[8][0], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][0], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][1], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][2], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][3], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][4], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[9][5], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[8][5], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[7][5], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[6][5], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][5], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][4], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][2], new Inventory(), false, false, false, false);
-		new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[5][1], new Inventory(), false, false, false, false);
-
-		new Door("Wooden Door", 100, "door.png", Game.level.squares[5][3], new Inventory(), false, true, false, false);
+		ArrayList<Square> doorLocations1 = new ArrayList<Square>();
+		doorLocations1.add(Game.level.squares[5][3]);
+		Game.level.buildings.add(new Building("Trader Joe's Shop", 5, 0, 9, 5, doorLocations1));
 
 		for (Building building : Game.level.buildings) {
-			for (int i = building.gridX1 + 1; i <= building.gridX2 - 1; i++) {
-				for (int j = building.gridY1 + 1; j <= building.gridY2 - 1; j++) {
-					new Roof("Roof", 1000, "roof.png", Game.level.squares[i][j], new Inventory(), false, true, false,
-							false);
+			for (int i = building.gridX1; i <= building.gridX2; i++) {
+				for (int j = building.gridY1; j <= building.gridY2; j++) {
+					Game.level.squares[i][j].building = building;
 				}
 			}
 		}
+
+		// 6,1 to 8,4
+		// for(int i = 6; i<=8; )
 
 		// Add a game object
 		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3], new Inventory(), true,

@@ -67,7 +67,7 @@ public class SquareInventory extends Inventory {
 			gameObject.squareGameObjectIsOn = null;
 
 			// Remove from ground squares index
-			Game.level.inanimateObjectsOnGround.remove(gameObject);
+			// Game.level.inanimateObjectsOnGround.remove(gameObject);
 
 			// Remove from another gameObjects inventory
 			if (gameObject.inventoryThatHoldsThisObject != null)

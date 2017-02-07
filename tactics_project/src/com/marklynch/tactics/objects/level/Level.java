@@ -66,7 +66,6 @@ public class Level {
 		this.width = width;
 		this.height = height;
 		squares = new Square[width][height];
-		initGrid(this.squares, this.width, this.height);
 
 		logs = new Vector<ActivityLog>();
 		undoList = new Stack<Move>();
@@ -76,8 +75,11 @@ public class Level {
 		gameCursor = new GameCursor();
 		script = new Script();
 
+		buildings = new ArrayList<Building>();
+
 		factions = new ArrayList<Faction>();
 		inanimateObjectsOnGround = new Vector<GameObject>();
+		initGrid(this.squares, this.width, this.height);
 
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f, "end_turn_button.png", "end_turn_button.png",
 				"END TURN", false, false);
@@ -239,20 +241,6 @@ public class Level {
 				squares[i][j].loadImages();
 			}
 		}
-
-		buildings = new ArrayList<Building>();
-		buildings.add(new Building("Trader Joe's Shop", 5, 0, 9, 5));
-
-		for (Building building : buildings) {
-			for (int i = building.gridX1; i <= building.gridX2; i++) {
-				for (int j = building.gridY1; j <= building.gridY2; j++) {
-					squares[i][j].building = building;
-				}
-			}
-		}
-
-		// 6,1 to 8,4
-		// for(int i = 6; i<=8; )
 	}
 
 	public void removeWalkingHighlight() {
