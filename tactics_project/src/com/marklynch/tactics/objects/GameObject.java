@@ -10,7 +10,6 @@ import java.util.Vector;
 import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.Building;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.Actor.Direction;
 import com.marklynch.tactics.objects.unit.Path;
@@ -59,8 +58,6 @@ public class GameObject extends GameObjectTemplate {
 	public transient Inventory inventoryThatHoldsThisObject;
 	public transient InventorySquare inventorySquareGameObjectIsOn;
 
-	public Building building;
-
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects) {
 
@@ -71,7 +68,6 @@ public class GameObject extends GameObjectTemplate {
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn = squareGameObjectIsOn;
 			this.squareGameObjectIsOn.inventory.add(this);
-			this.building = squareGameObjectIsOn.building;
 		}
 
 		loadImages();

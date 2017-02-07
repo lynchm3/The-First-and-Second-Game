@@ -139,7 +139,7 @@ public class UserInputLevel {
 
 			GameObject clickedGameObject = null;
 			if (Game.squareMouseIsOver.inventory.size() != 0)
-				clickedGameObject = Game.squareMouseIsOver.inventory.get(0);
+				clickedGameObject = Game.squareMouseIsOver.inventory.getActor();
 
 			if (clickedGameObject != null) {
 				boolean selectedNewActor = false;

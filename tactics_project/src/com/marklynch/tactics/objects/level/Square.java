@@ -42,7 +42,7 @@ public class Square {
 
 	public transient static PathComparator pathComparator;
 
-	public Building building;
+	public transient Building building;
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory) {
 		super();
@@ -65,6 +65,7 @@ public class Square {
 		inventory.postLoad1();
 		weaponsThatCanAttack = new Vector<Weapon>();
 		dialogs = new Vector<Dialog>();
+
 		loadImages();
 	}
 

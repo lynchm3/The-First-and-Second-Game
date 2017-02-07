@@ -166,6 +166,16 @@ public class Level {
 		this.openInventories = new ArrayList<Inventory>();
 		this.script = new Script();
 
+		// buildings = new ArrayList<Building>();
+
+		for (Building building : buildings) {
+			for (int i = building.gridX1; i <= building.gridX2; i++) {
+				for (int j = building.gridY1; j <= building.gridY2; j++) {
+					squares[i][j].building = building;
+				}
+			}
+		}
+
 		for (Faction faction : factions) {
 			faction.postLoad();
 		}

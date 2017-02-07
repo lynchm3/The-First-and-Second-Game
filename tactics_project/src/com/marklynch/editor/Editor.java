@@ -437,7 +437,7 @@ public class Editor {
 		for (Building building : Game.level.buildings) {
 			for (int i = building.gridX1 + 1; i <= building.gridX2 - 1; i++) {
 				for (int j = building.gridY1 + 1; j <= building.gridY2 - 1; j++) {
-					new Roof("Roof", 1000, "wall.png", Game.level.squares[i][j], new Inventory(), false, true, false,
+					new Roof("Roof", 1000, "roof.png", Game.level.squares[i][j], new Inventory(), false, true, false,
 							false);
 				}
 			}

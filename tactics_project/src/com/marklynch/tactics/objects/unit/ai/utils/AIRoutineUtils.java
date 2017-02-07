@@ -706,7 +706,6 @@ public class AIRoutineUtils {
 		actor.distanceMovedThisTurn += 1;
 		actor.squareGameObjectIsOn = square;
 		square.inventory.add(actor);
-		actor.building = square.building;
 		// Actor.highlightSelectedCharactersSquares();
 	}
 
