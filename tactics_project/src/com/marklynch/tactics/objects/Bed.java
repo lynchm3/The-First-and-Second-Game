@@ -42,11 +42,11 @@ public class Bed extends GameObject {
 			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
 			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
-			TextureUtils.skipNormals = true;
+			// TextureUtils.skipNormals = true;
 			TextureUtils.drawTexture(imageTextureCovers, 1f, actorPositionXInPixels,
 					actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels,
 					actorPositionYInPixels + Game.SQUARE_HEIGHT);
-			TextureUtils.skipNormals = false;
+			// TextureUtils.skipNormals = false;
 		}
 
 	}

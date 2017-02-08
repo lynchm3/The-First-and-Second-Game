@@ -1,7 +1,7 @@
 package com.marklynch.tactics.objects;
 
-import com.marklynch.Game;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.tactics.objects.unit.Actor;
 
 public class Door extends GameObject {
 
@@ -14,7 +14,7 @@ public class Door extends GameObject {
 	@Override
 	public void draw1() {
 
-		if (this.squareGameObjectIsOn != Game.level.factions.get(0).actors.get(0).squareGameObjectIsOn) {
+		if (!this.squareGameObjectIsOn.inventory.contains(Actor.class)) {
 			super.draw1();
 		} else {
 

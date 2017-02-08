@@ -5,26 +5,29 @@ import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
 public class AIRoutineForWildAnimal extends AIRoutine {
-	Square square;
+	Square targetSquare;
 
 	@Override
 	public void update() {
 
 		System.out.println("AIRoutineForWildAnimal.update()");
 
-		if (square == null || Game.level.activeActor.paths.get(square) == null) {
+		if (targetSquare == null || Game.level.activeActor.paths.get(targetSquare) == null) {
 			System.out.println("square == null || Game.level.activeActor.paths.get(square) == null)");
-			square = AIRoutineUtils.getRandomSquare(10);
-			System.out.println("square = " + square);
+			targetSquare = AIRoutineUtils.getRandomSquare(10);
+			System.out.println("square = " + targetSquare);
 		}
 
-		if (square != null) {
+		if (targetSquare != null) {
 			System.out.println("square != null");
-			System.out
-					.println("Game.level.activeActor.paths.get(square) = " + Game.level.activeActor.paths.get(square));
-			Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(Game.level.activeActor.paths.get(square));
+			System.out.println(
+					"Game.level.activeActor.paths.get(square) = " + Game.level.activeActor.paths.get(targetSquare));
+			Square squareToMoveTo = AIRoutineUtils
+					.getSquareToMoveAlongPath(Game.level.activeActor.paths.get(targetSquare));
 			AIRoutineUtils.move(Game.level.activeActor, squareToMoveTo);
 			System.out.println("called move along path");
+			if (Game.level.activeActor.squareGameObjectIsOn == targetSquare)
+				targetSquare = null;
 		}
 
 	}

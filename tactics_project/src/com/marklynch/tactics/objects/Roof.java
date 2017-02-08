@@ -30,11 +30,11 @@ public class Roof extends GameObject {
 
 				float alpha = 0.33f;
 
-				TextureUtils.skipNormals = true;
+				// TextureUtils.skipNormals = true;
 				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
 						actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels,
 						actorPositionYInPixels + Game.SQUARE_HEIGHT);
-				TextureUtils.skipNormals = false;
+				// TextureUtils.skipNormals = false;
 			}
 		}
 	}
