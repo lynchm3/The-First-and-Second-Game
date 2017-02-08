@@ -235,12 +235,6 @@ public class Level {
 				squares[i][j] = new Square(i, j, "grass.png", 1, 0, new SquareInventory());
 			}
 		}
-		for (int i = 5; i <= 9; i++) {
-			for (int j = 0; j <= 5; j++) {
-				squares[i][j].imageTexturePath = "stone.png";
-				squares[i][j].loadImages();
-			}
-		}
 	}
 
 	public void removeWalkingHighlight() {

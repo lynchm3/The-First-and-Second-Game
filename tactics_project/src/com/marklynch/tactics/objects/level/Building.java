@@ -28,26 +28,81 @@ public class Building {
 
 		}
 
-		// create walls where theres no doors
-		for (int x = gridX1; x <= gridX2; x++) {
+		// Top Left corner Wall
+		if (!doorLocations.contains(Game.level.squares[gridX1][gridY1]))
+			new Wall("Stone Wall", 1000, "wall_top_left.png", Game.level.squares[gridX1][gridY1], new Inventory(),
+					false, false, false, false);
+
+		// Top Left corner Roof
+		new Roof("Roof", 1000, "roof_top_left.png", Game.level.squares[gridX1][gridY1], new Inventory(), false, true,
+				false, false);
+
+		// Bottom left corner wall
+		if (!doorLocations.contains(Game.level.squares[gridX1][gridY2]))
+			new Wall("Stone Wall", 1000, "wall_bottom_left.png", Game.level.squares[gridX1][gridY2], new Inventory(),
+					false, false, false, false);
+
+		// Bottom left corner Roof
+		new Roof("Roof", 1000, "roof_bottom_left.png", Game.level.squares[gridX1][gridY2], new Inventory(), false, true,
+				false, false);
+
+		// Top right corner wall
+		if (!doorLocations.contains(Game.level.squares[gridX2][gridY1]))
+			new Wall("Stone Wall", 1000, "wall_top_right.png", Game.level.squares[gridX2][gridY1], new Inventory(),
+					false, false, false, false);
+
+		// Top right corner Roof
+		new Roof("Roof", 1000, "roof_top_right.png", Game.level.squares[gridX2][gridY1], new Inventory(), false, true,
+				false, false);
+
+		// Bottom right corner wall
+		if (!doorLocations.contains(Game.level.squares[gridX2][gridY2]))
+			new Wall("Stone Wall", 1000, "wall_bottom_right.png", Game.level.squares[gridX2][gridY2], new Inventory(),
+					false, false, false, false);
+
+		// Bottom right corner Roof
+		new Roof("Roof", 1000, "roof_bottom_right.png", Game.level.squares[gridX2][gridY2], new Inventory(), false,
+				true, false, false);
+
+		// horizontal wall
+		for (int x = gridX1 + 1; x < gridX2; x++) {
 			if (!doorLocations.contains(Game.level.squares[x][gridY1]))
-				new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[x][gridY1], new Inventory(), false, false,
-						false, false);
+				new Wall("Stone Wall", 1000, "wall_horizontal.png", Game.level.squares[x][gridY1], new Inventory(),
+						false, false, false, false);
 
 			if (!doorLocations.contains(Game.level.squares[x][gridY2]))
-				new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[x][gridY2], new Inventory(), false, false,
-						false, false);
+				new Wall("Stone Wall", 1000, "wall_horizontal.png", Game.level.squares[x][gridY2], new Inventory(),
+						false, false, false, false);
+
+			// top roof
+			new Roof("Roof", 1000, "roof_top.png", Game.level.squares[x][gridY1], new Inventory(), false, true, false,
+					false);
+
+			// bottom roof
+			new Roof("Roof", 1000, "roof_bottom.png", Game.level.squares[x][gridY2], new Inventory(), false, true,
+					false, false);
 		}
-		for (int y = gridY1; y <= gridY2; y++) {
+		// vertical wall
+		for (int y = gridY1 + 1; y < gridY2; y++) {
 			if (!doorLocations.contains(Game.level.squares[gridX1][y]))
-				new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[gridX1][y], new Inventory(), false, false,
-						false, false);
+				new Wall("Stone Wall", 1000, "wall_vertical.png", Game.level.squares[gridX1][y], new Inventory(), false,
+						false, false, false);
 
 			if (!doorLocations.contains(Game.level.squares[gridX2][y]))
-				new Wall("Stone Wall", 1000, "wall.png", Game.level.squares[gridX2][y], new Inventory(), false, false,
-						false, false);
+				new Wall("Stone Wall", 1000, "wall_vertical.png", Game.level.squares[gridX2][y], new Inventory(), false,
+						false, false, false);
+
+			// left roof
+			new Roof("Roof", 1000, "roof_left.png", Game.level.squares[gridX1][y], new Inventory(), false, true, false,
+					false);
+
+			// right roof
+			new Roof("Roof", 1000, "roof_right.png", Game.level.squares[gridX2][y], new Inventory(), false, true, false,
+					false);
+
 		}
 
+		// inner roof parts
 		for (int i = gridX1 + 1; i <= gridX2 - 1; i++) {
 			for (int j = gridY1 + 1; j <= gridY2 - 1; j++) {
 				new Roof("Roof", 1000, "roof.png", Game.level.squares[i][j], new Inventory(), false, true, false,
@@ -55,44 +110,15 @@ public class Building {
 			}
 		}
 
+		// Tell the squares what building they're in and give them a stone
+		// texture for now
 		for (int i = gridX1; i <= gridX2; i++) {
 			for (int j = gridY1; j <= gridY2; j++) {
 				Game.level.squares[i][j].building = this;
+				Game.level.squares[i][j].imageTexturePath = "stone.png";
+				Game.level.squares[i][j].loadImages();
 			}
 		}
 
 	}
-
-	// Wallsnew Wall("Stone Wall",1000,"wall.png",Game.level.squares[6][0],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[7][0],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[8][0],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[9][0],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[9][1],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[9][2],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[9][3],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[9][4],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[9][5],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[8][5],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[7][5],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[6][5],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[5][5],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[5][4],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[5][2],new
-	// Inventory(),false,false,false,false);new Wall("Stone
-	// Wall",1000,"wall.png",Game.level.squares[5][1],new
-	// Inventory(),false,false,false,false);
 }
