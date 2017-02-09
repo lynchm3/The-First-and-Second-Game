@@ -506,11 +506,23 @@ public class Editor {
 			hunterJohn.inventory.get(i).inventoryThatHoldsThisObject = hunterJohn.inventory;
 		}
 
-		Actor wildAnimal = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
+		Actor wildAnimal1 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
 				Game.level.squares[9][6], 1, null, inventoryForWildAnimal, true, false, true);
-		wildAnimal.faction = Game.level.factions.get(1);
-		wildAnimal.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(wildAnimal);
+		wildAnimal1.faction = Game.level.factions.get(1);
+		wildAnimal1.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(wildAnimal1);
+
+		Actor wildAnimal2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
+				Game.level.squares[11][6], 1, null, inventoryForWildAnimal, true, false, true);
+		wildAnimal2.faction = Game.level.factions.get(1);
+		wildAnimal2.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(wildAnimal2);
+
+		Actor wildAnimal3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
+				Game.level.squares[13][9], 1, null, inventoryForWildAnimal, true, false, true);
+		wildAnimal3.faction = Game.level.factions.get(1);
+		wildAnimal3.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(wildAnimal3);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, null, new Inventory(), true, false, true);

@@ -2,7 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// My inSameRoom thing kinda sucks coz they wont shoot if in a doorway
+	// My inSameRoom thing kinda sucks coz they wont shoot if in a doorway.
+	// Doorways could have a list of rooms they belong too (well... 2)
 
 	// Button in game/eidtor draw roofs/don't draw roofs
 
