@@ -507,7 +507,7 @@ public class Editor {
 		}
 
 		Actor wildAnimal = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
-				Game.level.squares[6][6], 1, null, inventoryForWildAnimal, true, false, true);
+				Game.level.squares[9][6], 1, null, inventoryForWildAnimal, true, false, true);
 		wildAnimal.faction = Game.level.factions.get(1);
 		wildAnimal.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(wildAnimal);

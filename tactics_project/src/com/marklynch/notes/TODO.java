@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// My inSameRoom thing kinda sucks coz they wont shoot if in a doorway
+
+	// Button in game/eidtor draw roofs/don't draw roofs
+
 	// Wolf only moves once
 	// Hunter seems to get too close when attacking
 	// Make walls thinner, but thicker than door
