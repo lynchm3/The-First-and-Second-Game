@@ -34,6 +34,7 @@ import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
 import com.marklynch.tactics.objects.level.Level;
+import com.marklynch.tactics.objects.level.Pack;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.script.ScriptEvent;
 import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
@@ -426,7 +427,7 @@ public class Editor {
 		// for(int i = 6; i<=8; )
 
 		// Add a game object
-		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[0][3], new Inventory(), true,
+		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[4][2], new Inventory(), true,
 				false, false, true);
 
 		new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true, true, false);
@@ -506,7 +507,7 @@ public class Editor {
 			hunterJohn.inventory.get(i).inventoryThatHoldsThisObject = hunterJohn.inventory;
 		}
 
-		Actor wildAnimal1 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
+		Actor wildAnimal1 = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
 				Game.level.squares[9][6], 1, null, inventoryForWildAnimal, true, false, true);
 		wildAnimal1.faction = Game.level.factions.get(1);
 		wildAnimal1.factionGUID = Game.level.factions.get(1).guid;
@@ -523,6 +524,12 @@ public class Editor {
 		wildAnimal3.faction = Game.level.factions.get(1);
 		wildAnimal3.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(wildAnimal3);
+
+		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
+		wolfPackMembers.add(wildAnimal1);
+		wolfPackMembers.add(wildAnimal2);
+		wolfPackMembers.add(wildAnimal3);
+		Pack pack = new Pack("Wolf pack", wolfPackMembers, wildAnimal1);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, null, new Inventory(), true, false, true);

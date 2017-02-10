@@ -14,6 +14,7 @@ import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Owner;
 import com.marklynch.tactics.objects.level.Faction;
+import com.marklynch.tactics.objects.level.Pack;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.unit.ai.routines.AIRoutine;
 import com.marklynch.tactics.objects.weapons.Projectile;
@@ -69,6 +70,8 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public Weapon equippedWeapon = null;
 	public String equippedWeaponGUID = null;
+
+	public Pack pack;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,

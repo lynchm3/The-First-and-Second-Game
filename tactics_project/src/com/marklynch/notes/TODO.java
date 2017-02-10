@@ -2,6 +2,12 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// If leader dies, highest level member becomes leader of pack
+
+	// Remove pack from list is members.size() == 0
+
+	// Check that buildings load back up
+
 	// My inSameRoom thing kinda sucks coz they wont shoot if in a doorway.
 	// Doorways could have a list of rooms they belong too (well... 2)
 

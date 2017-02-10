@@ -12,20 +12,20 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 
 		System.out.println("AIRoutineForWildAnimal.update()");
 
+		// SO... Fight or run when attacked
+		if (Game.level.activeActor.pack != null) {
+			Game.level.activeActor.pack.update();
+			return;
+		}
+
 		if (targetSquare == null || Game.level.activeActor.paths.get(targetSquare) == null) {
-			System.out.println("square == null || Game.level.activeActor.paths.get(square) == null)");
 			targetSquare = AIRoutineUtils.getRandomSquare(10, true);
-			System.out.println("square = " + targetSquare);
 		}
 
 		if (targetSquare != null) {
-			System.out.println("square != null");
-			System.out.println(
-					"Game.level.activeActor.paths.get(square) = " + Game.level.activeActor.paths.get(targetSquare));
 			Square squareToMoveTo = AIRoutineUtils
 					.getSquareToMoveAlongPath(Game.level.activeActor.paths.get(targetSquare));
 			AIRoutineUtils.moveTo(Game.level.activeActor, squareToMoveTo);
-			System.out.println("called move along path");
 			if (Game.level.activeActor.squareGameObjectIsOn == targetSquare)
 				targetSquare = null;
 		}
