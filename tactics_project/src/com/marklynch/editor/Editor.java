@@ -468,6 +468,7 @@ public class Editor {
 		// }
 		Inventory inventoryForWildAnimal = new Inventory();
 		inventoryForWildAnimal.add(gameObjectTemplates.get(4).makeCopy(null));
+		inventoryForWildAnimal.add(gameObjectTemplates.get(0).makeCopy(null));
 		// ArrayList<GameObject> weaponsForActor2 = new ArrayList<GameObject>();
 		// weaponsForActor2.add(gameObjectTemplates.get(0).makeCopy(null));
 		// inventoryForWildAnimal.setGameObjects(weaponsForActor2);
@@ -507,20 +508,20 @@ public class Editor {
 			hunterJohn.inventory.get(i).inventoryThatHoldsThisObject = hunterJohn.inventory;
 		}
 
-		Actor wildAnimal1 = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
+		Actor wildAnimal1 = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
 				Game.level.squares[9][6], 1, null, inventoryForWildAnimal, true, false, true);
 		wildAnimal1.faction = Game.level.factions.get(1);
 		wildAnimal1.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(wildAnimal1);
 
-		Actor wildAnimal2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
-				Game.level.squares[11][6], 1, null, inventoryForWildAnimal, true, false, true);
+		Actor wildAnimal2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
+				Game.level.squares[11][6], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
 		wildAnimal2.faction = Game.level.factions.get(1);
 		wildAnimal2.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(wildAnimal2);
 
 		Actor wildAnimal3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
-				Game.level.squares[13][9], 1, null, inventoryForWildAnimal, true, false, true);
+				Game.level.squares[13][9], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
 		wildAnimal3.faction = Game.level.factions.get(1);
 		wildAnimal3.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(wildAnimal3);

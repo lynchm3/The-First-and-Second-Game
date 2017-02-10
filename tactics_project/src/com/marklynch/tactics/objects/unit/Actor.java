@@ -246,6 +246,15 @@ public class Actor extends ActorTemplate implements Owner {
 		if (hasAttackedThisTurn == true && !isCounter) {
 			return;
 		}
+
+		if (gameObject instanceof Actor && ((Actor) gameObject).pack != null) {
+			((Actor) gameObject).pack.addAttacker(this);
+		}
+
+		if (gameObject instanceof Actor && this.pack != null) {
+			this.pack.addAttacker((Actor) gameObject);
+		}
+
 		gameObject.remainingHealth -= equippedWeapon.damage;
 		this.distanceMovedThisTurn = this.travelDistance;
 		this.hasAttackedThisTurn = true;

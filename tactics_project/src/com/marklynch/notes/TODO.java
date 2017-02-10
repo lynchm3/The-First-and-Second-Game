@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Make sure attackers persist through saves, kinda want to call it
+	// beligerenents, or have a fight class... with teams...
+
 	// If leader dies, highest level member becomes leader of pack
 
 	// Remove pack from list is members.size() == 0

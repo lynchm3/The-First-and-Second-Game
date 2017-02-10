@@ -162,6 +162,22 @@ public class AIRoutineUtils {
 
 	}
 
+	public static GameObject getNearestAttacker(ArrayList<Actor> attackers) {
+		GameObject result = null;
+		int costToBest = Integer.MAX_VALUE;
+
+		for (Actor actor : attackers) {
+			Square square = calculateSquareToMoveToToAttackTarget(actor);
+			if (square != null && square.walkingDistanceToSquare < costToBest) {
+				result = actor;
+				costToBest = square.walkingDistanceToSquare;
+			}
+		}
+
+		return result;
+
+	}
+
 	public GameObject getNearestEnemy() {
 		GameObject result = null;
 
