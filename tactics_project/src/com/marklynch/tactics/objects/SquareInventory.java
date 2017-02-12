@@ -113,12 +113,12 @@ public class SquareInventory extends Inventory {
 		}
 	}
 
-	public GameObject getActor() {
-		for (GameObject gameObject : gameObjects) {
-			if (gameObject instanceof Actor) {
-				return gameObject;
-			}
-		}
-		return null;
-	}
+	// public GameObject getAc() {
+	// for (GameObject gameObject : gameObjects) {
+	// if (gameObject instanceof Actor) {
+	// return gameObject;
+	// }
+	// }
+	// return null;
+	// }
 }

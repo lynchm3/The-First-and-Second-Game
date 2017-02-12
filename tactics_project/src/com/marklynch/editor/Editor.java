@@ -31,7 +31,6 @@ import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Junk;
 import com.marklynch.tactics.objects.QuestSmallGame;
 import com.marklynch.tactics.objects.level.Building;
-import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.FactionRelationship;
 import com.marklynch.tactics.objects.level.Level;
@@ -475,7 +474,7 @@ public class Editor {
 		// inventoryForWildAnimal.setGameObjects(weaponsForActor2);
 
 		// Add actor
-		Actor player = new Actor("Old lady", "Fighter", 10, 10, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 10,
+		Actor player = new Actor("Old lady", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 1,
 				null, inventoryForActor0, true, false, true);
 		player.faction = Game.level.factions.get(0);
 		player.factionGUID = Game.level.factions.get(0).guid;
@@ -485,7 +484,7 @@ public class Editor {
 			player.inventory.get(i).inventoryThatHoldsThisObject = player.inventory;
 		}
 
-		Bed bedForHunterBrent = new Bed("Hunter Brent Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[0][5],
+		Bed bedForHunterBrent = new Bed("Hunter Brent's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[0][5],
 				new Inventory(), false, true, false, false);
 
 		Actor hunterBrent = new Hunter("Hunter Brent", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
@@ -550,8 +549,8 @@ public class Editor {
 		Game.level.factions.get(1).actors.add(trader);
 
 		// Decorations
-		Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");
-		Game.level.decorations.add(cat);
+		// Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");
+		// Game.level.decorations.add(cat);
 
 		// Script
 

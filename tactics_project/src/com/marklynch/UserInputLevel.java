@@ -1,11 +1,11 @@
 package com.marklynch;
 
+import java.util.ArrayList;
+
 import org.lwjgl.input.Mouse;
 
-import com.marklynch.config.Config;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Square;
-import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
@@ -117,97 +117,63 @@ public class UserInputLevel {
 			}
 		}
 
-		// If we've clicked... where are we putting it?
-		if (scriptInterceptsClick && mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
-			Game.level.script.click();
-			// } else if (Game.level.waitingForPlayerClickToBeginTurn == true &&
-			// mouseButtonStateLeft == true
-			// && !Mouse.isButtonDown(0) && dragging == false) {
-			// // This is the "Your turn, click to continue" @ the start of
-			// every
-			// // level
-			// Game.level.waitingForPlayerClickToBeginTurn = false;
-			// Game.level.showTurnNotification = false;
-		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
-				&& Game.buttonHoveringOver != null && Game.level.currentFactionMovingIndex == 0) {
-			// click button if we're on one
-			Game.buttonHoveringOver.click();
+		boolean moved = false;
+		boolean attacked = false;
 
-		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
-				&& Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
-			// click square if we're on one
+		// Lifter the mouse to perform click
+		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false)
+			if (scriptInterceptsClick) {
+				// Continue script
+				Game.level.script.click();
+			} else if (Game.buttonHoveringOver != null && Game.level.currentFactionMovingIndex == 0) {
+				// Click button
+				Game.buttonHoveringOver.click();
+			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
+				// Click square / Object / Actor
+				ArrayList<GameObject> clickedGameObjects = null;
+				if (Game.squareMouseIsOver.inventory.size() != 0)
+					clickedGameObjects = Game.squareMouseIsOver.inventory.getGameObjects();
 
-			GameObject clickedGameObject = null;
-			if (Game.squareMouseIsOver.inventory.size() != 0)
-				clickedGameObject = Game.squareMouseIsOver.inventory.getActor();
+				GameObject clickedGameObject = null;
+				if (clickedGameObjects != null && clickedGameObjects.size() == 1) {
+					clickedGameObject = clickedGameObjects.get(0);
+				}
 
-			if (clickedGameObject != null) {
-				boolean selectedNewActor = false;
-				if (clickedGameObject instanceof Actor) {
-					Actor clickedActor = (Actor) clickedGameObject;
-					if (clickedActor.faction == Game.level.currentFactionMoving) {
-						if (Game.level.activeActor != null) {
-							Game.level.activeActor.unselected();
-						}
-						Game.level.activeActor = clickedActor;
-						Actor.highlightSelectedCharactersSquares();
-						selectedNewActor = true;
+				System.out.println("clickedGameObject = " + clickedGameObject);
+
+				if (clickedGameObject != null) {
+					if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
+							&& Game.level.activeActor.equippedWeapon
+									.hasRange(Game.level.activeActor.straightLineDistanceTo(Game.squareMouseIsOver))) {
+						Game.level.activeActor.attack(clickedGameObject, false);
+						attacked = true;
 					}
 				}
 
-				if (Game.level.activeActor != null && selectedNewActor == false
-						&& Game.level.activeActor.equippedWeapon != null && Game.level.activeActor.equippedWeapon
-								.hasRange(Game.level.activeActor.straightLineDistanceTo(Game.squareMouseIsOver))) {
-					Game.level.activeActor.attack(clickedGameObject, false);
-					Actor.highlightSelectedCharactersSquares();
+				// Check if we clicked on an empty reachable square and act
+				// accordingly
+				if (Game.level.activeActor != null && Game.squareMouseIsOver.reachableBySelectedCharater
+						&& Game.level.activeActor.faction == Game.level.factions.get(0)
+						&& Game.level.currentFactionMoving == Game.level.factions.get(0)
+						&& Game.level.activeActor.squareGameObjectIsOn != Game.squareMouseIsOver) {
+					AIRoutineUtils.moveTo(Game.level.activeActor, Game.squareMouseIsOver);
+					moved = true;
 				}
 			}
-
-			// Check if we clicked on an empty reachable square and act
-			// accordingly
-			if (Game.level.activeActor != null && Game.squareMouseIsOver.reachableBySelectedCharater
-					&& Game.level.activeActor.faction == Game.level.factions.get(0)
-					&& Game.level.currentFactionMoving == Game.level.factions.get(0)
-					&& Game.level.activeActor.squareGameObjectIsOn != Game.squareMouseIsOver) {
-				AIRoutineUtils.moveTo(Game.level.activeActor, Game.squareMouseIsOver);
-			}
-		}
 
 		if (!Mouse.isButtonDown(0)) {
 			mouseButtonStateLeft = false;
 			mouseDownX = -1;
 			mouseDownY = -1;
-
-			// Show/hide Hover preview
-			if (Config.SHOW_BATTLE_PREVIEW_ON_HOVER && Game.squareMouseIsOver != null
-					&& Game.squareMouseIsOver.inventory.size() != 0 && Game.squareMouseIsOver.inventory.get(0) != null
-					&& Game.level.activeActor != null
-					&& Game.squareMouseIsOver.inventory.get(0) != Game.level.activeActor
-					&& Game.level.currentFactionMoving == Game.level.factions.get(0)
-					&& Game.buttonHoveringOver == null) {
-				// show hover preview
-				Game.level.activeActor.showHoverFightPreview(Game.squareMouseIsOver.inventory.get(0));
-			} else if (Game.level.activeActor != null) {
-				// hide Hover Preview
-				Game.level.activeActor.hideHoverFightPreview();
-			}
-
 		}
 
 		if (mouseButtonStateRight == false && Mouse.isButtonDown(1) && Game.level.currentFactionMovingIndex == 0) {
 			Game.level.clearDialogs();
-			// right click
-			if (Game.level.activeActor != null) {
-				Game.level.activeActor.unselected();
-				Game.level.activeActor = null;
-			} else if (Game.squareMouseIsOver != null) {
+			if (Game.squareMouseIsOver != null) {
 				if (Game.squareMouseIsOver.showingDialogs == false)
 					Game.squareMouseIsOver.showDialogs();
 				else
 					Game.squareMouseIsOver.clearDialogs();
-
-				// level.dialogs.addElement(new Dialog(Mouse.getX(),
-				// windowHeight-Mouse.getY(),64,64,"marlene.png"));
 			}
 		}
 
@@ -221,16 +187,7 @@ public class UserInputLevel {
 			dragging = false;
 		}
 
-		// keep char on the screen
-		// if (actorPositionX < 0)
-		// actorPositionX = 0;
-		// if (actorPositionX > 9)
-		// actorPositionX = 9;
-		// if (actorPositionY < 0)
-		// actorPositionY = 0;
-		// if (actorPositionY > 9)
-		// actorPositionY = 9;
-
+		if (moved || attacked)
+			Game.level.endTurn();
 	}
-
 }

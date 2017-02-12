@@ -14,6 +14,7 @@ import com.marklynch.Game;
 import com.marklynch.SaveAndLoad;
 import com.marklynch.editor.Editor;
 import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
+import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -145,6 +146,9 @@ public class LevelSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 				Game.level.currentFactionMoving = Game.level.factions.get(Game.level.currentFactionMovingIndex);
+				Game.level.activeActor = Game.level.factions.get(0).actors.get(0);
+				Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
+				Actor.highlightSelectedCharactersSquares();
 				Game.level.turn = 1;
 				Game.level = Game.level;
 				Game.editorMode = false;

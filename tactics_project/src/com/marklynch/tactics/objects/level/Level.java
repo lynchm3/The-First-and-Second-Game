@@ -501,6 +501,9 @@ public class Level {
 		if (currentFactionMovingIndex >= factions.size()) {
 			currentFactionMovingIndex = 0;
 			this.turn++;
+			Game.level.activeActor = factions.get(0).actors.get(0);
+			Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
+			Actor.highlightSelectedCharactersSquares();
 		}
 		while (factions.get(currentFactionMovingIndex).actors.size() == 0) {
 			currentFactionMovingIndex++;

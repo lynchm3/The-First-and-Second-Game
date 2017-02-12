@@ -1214,6 +1214,8 @@ public class Actor extends ActorTemplate implements Owner {
 			for (int i = 0; i < this.pack.size(); i++) {
 				attacker.pack.addAttacker(this.pack.getMember(i));
 			}
+			attacker.addAttacker(this);
+			this.addAttacker(attacker);
 
 		} else if (this.pack != null && attacker.pack == null) {
 
@@ -1222,6 +1224,7 @@ public class Actor extends ActorTemplate implements Owner {
 			}
 
 			this.pack.addAttacker(attacker);
+			this.addAttacker(attacker);
 
 		} else if (this.pack == null && attacker.pack != null) {
 
@@ -1229,6 +1232,7 @@ public class Actor extends ActorTemplate implements Owner {
 				this.addAttacker(attacker.pack.getMember(i));
 			}
 			attacker.pack.addAttacker(this);
+			attacker.addAttacker(this);
 
 		} else if (this.pack == null && attacker.pack == null) {
 			attacker.addAttacker(this);

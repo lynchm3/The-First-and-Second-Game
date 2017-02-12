@@ -8,6 +8,7 @@ import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
 public class Pack {
+	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 
 	final private static int FIGHT_LOWER_LIMIT = 2;
 
@@ -53,12 +54,6 @@ public class Pack {
 
 	public void update(Actor actor) {
 
-		// Defer to quest
-		if (quest != null) {
-			quest.update(actor);
-			return;
-		}
-
 		// Manage attackers list
 		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
 		for (Actor attacker : attackers) {
@@ -82,21 +77,18 @@ public class Pack {
 		// AI attack attackers
 		if (this.attackers.size() != 0) {
 			GameObject target = AIRoutineUtils.getNearestAttacker(attackers);
-			// Game.level.activeActor.activityDescription =
-			// ACTIVITY_DESCRIPTION_HUNTING;
-			// if (target.remainingHealth <= 0 &&
-			// Game.level.activeActor.inventory.size() > 0) {
-			// huntState = HUNT_STATE.PICK_SHOP_KEEPER;
-			// } else if (target.remainingHealth <= 0 && target.inventory.size()
-			// == 0) {
-			// huntState = HUNT_STATE.PICK_WILD_ANIMAL;
-			// } else {
 			boolean attackedTarget = AIRoutineUtils.attackTarget(target);
+			actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 			if (!attackedTarget)
 				AIRoutineUtils.moveTowardsTargetToAttack(target);
-			// }
 			return;
 
+		}
+
+		// Defer to quest
+		if (quest != null) {
+			quest.update(actor);
+			return;
 		}
 
 		// AI move to random square

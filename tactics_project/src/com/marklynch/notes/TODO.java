@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Player controls are mangled
+
 	// Small game - Don't destroy their Easel :P
 	// Small game - there's water arrows beside them, three sets, and a bow, u
 	// can take one set of arrows and a bow without them getting angry. Once u
@@ -21,6 +23,18 @@ public class TODO {
 	// is there though, so u'll know they're there, they'll take their weapons
 	// to bed with them tho.
 	// This is getting over complicated and out of hand :P
+	// The cub could become some sort of guardian spirit for you
+	// The one who helps u is an enviromentalist, teaches u skill "remove
+	// imbuement" and says "This should come in handy
+	// SHopkeeper nearby sells imbue with fire
+	// The hunting board plan says that super wolf is healed by fire
+	// Look up fire wolf legends
+	// Could name firewolf after that wolf in that zelda-like game. konami?
+	// ko... something? Okami! Look up the legend that its based on. Im sure
+	// there was another name for the dog-god
+	// Cub is white with tint of blue
+
+	// Ancient roman town, british town, celtic town
 
 	// To add to save - attackers, building, pack
 

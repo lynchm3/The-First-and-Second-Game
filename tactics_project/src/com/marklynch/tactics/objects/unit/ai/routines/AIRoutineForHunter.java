@@ -36,7 +36,15 @@ public class AIRoutineForHunter extends AIRoutine {
 	@Override
 	public void update() {
 
+		// Defer to pack
+		if (Game.level.activeActor.pack != null) {
+			Game.level.activeActor.pack.update(Game.level.activeActor);
+			return;
+		}
+
 		// 1. Fighting
+		System.out.println(
+				"AIRoutineForHunter Game.level.activeActor.hasAttackers() = " + Game.level.activeActor.hasAttackers());
 		if (Game.level.activeActor.hasAttackers()) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 			GameObject target = AIRoutineUtils.getNearestAttacker(Game.level.activeActor.getAttackers());
@@ -79,12 +87,6 @@ public class AIRoutineForHunter extends AIRoutine {
 		// Defer to quest
 		if (Game.level.activeActor.quest != null) {
 			Game.level.activeActor.quest.update(Game.level.activeActor);
-			return;
-		}
-
-		// Defer to pack
-		if (Game.level.activeActor.pack != null) {
-			Game.level.activeActor.pack.update(Game.level.activeActor);
 			return;
 		}
 
