@@ -13,8 +13,6 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 	@Override
 	public void update() {
 
-		System.out.println("AIRoutineForWildAnimal.update()");
-
 		// Defer to pack
 		if (Game.level.activeActor.pack != null) {
 			Game.level.activeActor.pack.update(Game.level.activeActor);

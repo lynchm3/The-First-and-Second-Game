@@ -11,6 +11,7 @@ import com.marklynch.GameCursor;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.SquareInventory;
+import com.marklynch.tactics.objects.level.popup.Popup;
 import com.marklynch.tactics.objects.level.script.Script;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Move;
@@ -18,6 +19,7 @@ import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 import com.marklynch.tactics.objects.weapons.Projectile;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.Dialog;
+import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -39,18 +41,21 @@ public class Level {
 	public transient Vector<GameObject> inanimateObjectsOnGround;
 	public transient ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public transient ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
+
 	public transient Vector<Dialog> dialogs;
+	public Popup popup;
+	public Toast toast;
+	public transient LevelButton endTurnButton;
+	public transient LevelButton undoButton;
+	public transient LevelButton editorButton;
+	public transient ArrayList<Button> buttons;
+
 	public transient int turn = 1;
 	public ArrayList<Faction> factions;
 	public transient Faction currentFactionMoving;
 	public transient int currentFactionMovingIndex;
 	public transient Vector<ActivityLog> logs;
 	public transient Stack<Move> undoList;
-
-	public transient LevelButton endTurnButton;
-	public transient LevelButton undoButton;
-	public transient LevelButton editorButton;
-	public transient ArrayList<Button> buttons;
 
 	public transient GameCursor gameCursor;
 
@@ -373,6 +378,10 @@ public class Level {
 			inventory.drawStaticUI();
 		}
 
+		if (popup != null) {
+			popup.draw();
+		}
+
 		// if (Game.buttonHoveringOver == null && Game.squareMouseIsOver !=
 		// null)
 		// Game.squareMouseIsOver.drawCursor();
@@ -464,6 +473,13 @@ public class Level {
 				return button;
 		}
 
+		if (Game.level.popup != null) {
+			for (Button button : Game.level.popup.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
+		}
+
 		if (activeActor != null && activeActor.faction == factions.get(0))
 			return this.activeActor.getButtonFromMousePosition(alteredMouseX, alteredMouseY);
 
@@ -498,10 +514,7 @@ public class Level {
 		if (activeActor != null)
 			activeActor.unselected();
 		activeActor = null;
-		System.out.println("activeActor B = " + Game.level.activeActor);
 		currentFactionMovingIndex++;
-		System.out.println("currentFactionMovingIndex = " + currentFactionMovingIndex);
-		System.out.println("factions.size() = " + factions.size());
 		if (currentFactionMovingIndex >= factions.size())
 			currentFactionMovingIndex = 0;
 
@@ -515,7 +528,6 @@ public class Level {
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		if (currentFactionMovingIndex == 0) {
 			Game.level.activeActor = factions.get(0).actors.get(0);
-			System.out.println("activeActor C = " + Game.level.activeActor);
 			Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
 			Actor.highlightSelectedCharactersSquares();
 		}

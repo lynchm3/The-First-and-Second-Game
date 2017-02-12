@@ -43,8 +43,6 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// 1. Fighting
-		System.out.println(
-				"AIRoutineForHunter Game.level.activeActor.hasAttackers() = " + Game.level.activeActor.hasAttackers());
 		if (Game.level.activeActor.hasAttackers()) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 			GameObject target = AIRoutineUtils.getNearestAttacker(Game.level.activeActor.getAttackers());

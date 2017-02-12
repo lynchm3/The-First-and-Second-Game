@@ -44,8 +44,6 @@ public class AIRoutineUtils {
 		while (attempts < maxAttempts) {
 			int x = (int) (Math.random() * Game.level.width);
 			int y = (int) (Math.random() * Game.level.height);
-			System.out.println("x = " + x);
-			System.out.println("y = " + y);
 			randomSquare = Game.level.squares[x][y];
 			Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(randomSquare);
 			if ((!outdoors || outdoors && randomSquare.building == null) && currentActorPathToThisSquare != null
@@ -446,14 +444,9 @@ public class AIRoutineUtils {
 			// DIDNT WORK, AND WAS STUPID COZ DOORWAYS
 			// MAYBE ONLY WHEN DISTANCE > 1
 
-			System.out.println("Game.level.activeActor.squareGameObjectIsOn.building = "
-					+ Game.level.activeActor.squareGameObjectIsOn.building);
-			System.out.println("target.squareGameObjectIsOn.building = " + target.squareGameObjectIsOn.building);
-
 			// Check if we're already at this distance
 			if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
 					.get(i) && inSameBuilding(Game.level.activeActor, target)) {
-				System.out.println("THIS ONE A :" + Game.level.activeActor.squareGameObjectIsOn);
 				return Game.level.activeActor.squareGameObjectIsOn;
 			}
 
@@ -465,12 +458,9 @@ public class AIRoutineUtils {
 			// if There's multiple reachable then safest out of them is best :P
 			// OR somewhere u can attack someone from is the best... i dunno :D
 			for (Square squareAtSpecifiedDistanceToTarget : squaresAtSpecifiedDistanceToTarget) {
-				System.out.println(
-						"squareAtSpecifiedDistanceToTarget.building = " + squareAtSpecifiedDistanceToTarget.building);
 				Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(squareAtSpecifiedDistanceToTarget);
 				if (inSameBuilding(target, squareAtSpecifiedDistanceToTarget) && currentActorPathToThisSquare != null
 						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
-					System.out.println("THIS ONE B :" + squareAtSpecifiedDistanceToTarget);
 					pathToSquare = currentActorPathToThisSquare;
 					bestTravelCostFound = pathToSquare.travelCost;
 				}
@@ -611,7 +601,7 @@ public class AIRoutineUtils {
 				}
 			}
 		}
-		System.out.println("reacheableSquares.size() = " + reachableSquares.size());
+
 		if (reachableSquares.size() > 0) {
 			int random = (int) (Math.random() * (reachableSquares.size() - 1));
 			Square squareToMoveTo = reachableSquares.get(random);

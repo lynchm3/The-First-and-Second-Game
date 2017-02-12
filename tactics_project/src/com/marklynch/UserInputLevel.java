@@ -1,10 +1,13 @@
 package com.marklynch;
 
+import java.util.ArrayList;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.tactics.objects.level.popup.PopupSelectObject;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
@@ -161,7 +164,8 @@ public class UserInputLevel {
 		}
 
 		// Lifter the mouse to perform click
-		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false)
+		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
+			Game.level.popup = null;
 			if (scriptInterceptsClick) {
 				// Continue script
 				Game.level.script.click();
@@ -172,6 +176,7 @@ public class UserInputLevel {
 				if (Game.level.activeActor == Game.level.factions.get(0).actors.get(0))
 					interactWith(Game.squareMouseIsOver);
 			}
+		}
 
 		if (!Mouse.isButtonDown(0)) {
 			mouseButtonStateLeft = false;
@@ -216,9 +221,14 @@ public class UserInputLevel {
 			return;
 
 		// Click square / Object / Actor
-		// ArrayList<GameObject> clickedGameObjects = null;
-		// if (square.inventory.size() != 0)
-		// clickedGameObjects = square.inventory.getGameObjects();
+		ArrayList<GameObject> gameObjectsToInteractWith = null;
+		if (square.inventory.size() != 0)
+			gameObjectsToInteractWith = square.inventory.getGameObjects();
+
+		if (gameObjectsToInteractWith != null && gameObjectsToInteractWith.size() > 1) {
+			Game.level.popup = new PopupSelectObject(100, Game.level, square);
+			return;
+		}
 
 		// GameObject clickedGameObject = null;
 		// if (clickedGameObjects != null && clickedGameObjects.size() == 1) {
@@ -230,12 +240,7 @@ public class UserInputLevel {
 		// System.out.println("clickedGameObject = " + clickedGameObject);
 
 		if (gameObjectToInteractWith != null) {
-			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
-					&& Game.level.activeActor.equippedWeapon
-							.hasRange(Game.level.activeActor.straightLineDistanceTo(square))) {
-				Game.level.activeActor.attack(gameObjectToInteractWith, false);
-				interactedThisTurn = true;
-			}
+			interactWithGameObject(gameObjectToInteractWith);
 		}
 
 		// Check if we clicked on an empty reachable square and act
@@ -244,10 +249,23 @@ public class UserInputLevel {
 				&& Game.level.activeActor.faction == Game.level.factions.get(0)
 				&& Game.level.currentFactionMoving == Game.level.factions.get(0)
 				&& Game.level.activeActor.squareGameObjectIsOn != square) {
-			AIRoutineUtils.moveTo(Game.level.activeActor, square);
-			interactedThisTurn = true;
+			interactWithSquare(square);
 		}
 
+	}
+
+	public static void interactWithGameObject(GameObject gameObjectToInteractWith) {
+		if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
+				&& Game.level.activeActor.equippedWeapon.hasRange(
+						Game.level.activeActor.straightLineDistanceTo(gameObjectToInteractWith.squareGameObjectIsOn))) {
+			Game.level.activeActor.attack(gameObjectToInteractWith, false);
+			interactedThisTurn = true;
+		}
+	}
+
+	public static void interactWithSquare(Square squareToInteractWith) {
+		AIRoutineUtils.moveTo(Game.level.activeActor, squareToInteractWith);
+		interactedThisTurn = true;
 	}
 
 	public static void upTyped() {
@@ -274,9 +292,6 @@ public class UserInputLevel {
 	}
 
 	public static void rightTyped() {
-		System.out.println("Game.level.activeActor = " + Game.level.activeActor);
-		System.out.println(
-				"Game.level.activeActor.squareGameObjectIsOn = " + Game.level.activeActor.squareGameObjectIsOn);
 		int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
 		if (x < Game.level.squares.length) {
 			interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid]);
