@@ -433,9 +433,9 @@ public class Editor {
 		new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true, true, false);
 
 		// Add factions
-		Game.level.factions
-				.add(new Faction("Faction " + Game.level.factions.size(), colors.get(0), "faction_blue.png"));
-		Game.level.factions.add(new Faction("Faction " + Game.level.factions.size(), colors.get(1), "faction_red.png"));
+		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));
+		Game.level.factions.add(new Faction("Townspeople", colors.get(1), "faction_red.png"));
+		Game.level.factions.add(new Faction("Wolves", colors.get(2), "wolf.png"));
 
 		// relationships
 		Game.level.factions.get(0).relationships.put(Game.level.factions.get(1),
@@ -508,23 +508,23 @@ public class Editor {
 			hunterJohn.inventory.get(i).inventoryThatHoldsThisObject = hunterJohn.inventory;
 		}
 
-		Actor wildAnimal1 = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
+		Actor wildAnimal1 = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[9][6], 1, null, inventoryForWildAnimal, true, false, true);
-		wildAnimal1.faction = Game.level.factions.get(1);
-		wildAnimal1.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(wildAnimal1);
+		wildAnimal1.faction = Game.level.factions.get(2);
+		wildAnimal1.factionGUID = Game.level.factions.get(2).guid;
+		Game.level.factions.get(2).actors.add(wildAnimal1);
 
 		Actor wildAnimal2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[11][6], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
-		wildAnimal2.faction = Game.level.factions.get(1);
-		wildAnimal2.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(wildAnimal2);
+		wildAnimal2.faction = Game.level.factions.get(2);
+		wildAnimal2.factionGUID = Game.level.factions.get(2).guid;
+		Game.level.factions.get(2).actors.add(wildAnimal2);
 
 		Actor wildAnimal3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
 				Game.level.squares[13][9], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
-		wildAnimal3.faction = Game.level.factions.get(1);
-		wildAnimal3.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(wildAnimal3);
+		wildAnimal3.faction = Game.level.factions.get(2);
+		wildAnimal3.factionGUID = Game.level.factions.get(2).guid;
+		Game.level.factions.get(2).actors.add(wildAnimal3);
 
 		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
 		wolfPackMembers.add(wildAnimal1);

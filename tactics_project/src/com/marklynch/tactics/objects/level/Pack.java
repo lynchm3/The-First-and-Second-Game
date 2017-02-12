@@ -119,4 +119,12 @@ public class Pack {
 			this.attackers.add(actor);
 		}
 	}
+
+	public Actor getMember(int i) {
+		return this.members.get(i);
+	}
+
+	public int getSize() {
+		return members.size();
+	}
 }

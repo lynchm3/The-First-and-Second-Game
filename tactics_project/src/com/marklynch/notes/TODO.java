@@ -2,6 +2,72 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// To add to save - attackers, building, pack
+
+	// The way it is now, pack members that are far away will still know about
+	// the attackers and come running... need a sight limit, a sound limit, need
+	// to be handled on an individual level... or have a different concept other
+	// than pack and keep pack for animals and bandits.
+
+	// Quest - basic hunting mission
+	// SUPERWOLF
+	// Good to start with but boring, need to embelish it
+	// You with the hunters
+	// They give you a bow
+	// The wolf will prioritise attacking the hunters because it recognises them
+	// "We've had many a tussle with SUPERWOLF, she's the ultimate prize"
+	// The wolves won't attack you unless you attack them
+	// You have to option to kill the hunters instead - need to hint at this
+	// You can also just let the hunt play out without attacking anyone
+	// But then the hunter bros will attack you
+	// If you kill the wolf and go in to her cave you find cubs :'(
+	// And the hunters will go and try to kill the cubs and u can stop them
+	// there too
+	// And if u kill the hunters... I dunno... I haven't worked out how that
+	// will go
+	// PERK - friend of the forest / pack master / member of the pack.
+	// SOmething... wild animals are nicer towards you.
+	// And the wolves get something valuable they were hiding in their cave and
+	// give it to you
+	// Need to make it clear that the hunter bros are dickheads. Make ur blood
+	// boil and make u want to kill them. Look up videos of assholes with tiny
+	// dicks talking about how great hunting is
+	// How do I word it in the quests? Go to SUPERWOLF'S cave. THEN.... i dunno.
+	// just nothing. or... like a pending thing. "finish the fight to continue",
+	// Orphan cub follows you? BUT... that means you miss out on the cub if u
+	// dont kill the mammy.
+	// Maybe u follow the wolves in to the cave, and the baby starts following u
+	// anyway
+	// On the walk to the wolve's cave Brent and Bront shoot cute birds? Stamp
+	// on plants?
+	// Don't make them TOO obvious. THere is a balance. Just sociopaths lack of
+	// empathy.
+	// AI for cub, if it sees its dead mother it runs over...
+	// Cub is white or a weird color. White with light blue eyes. Or yellow
+	// brown eyes like the witcher. Could call him Geralt.
+	// The super wolf is magic. Has fire power. Weak against water. The Hunters
+	// will tell u that. Give u special arrows + bow. Super Wolf is very hard to
+	// kill without them (that should keep her alive ouside of the quest!)
+	// Actually, don't make the superwolf benevolent or anything, everyone needs
+	// to be a grey area, even wolves.
+	// Wolf cub is water powered, immune to water and fire.
+
+	// General - try to make it in such a way that the quest end points are in
+	// harder areas, further out than the quest start points, so that u can, but
+	// rarely stumble across them. Like with the wolf. 1. It's further out than
+	// the village. 2. Super wolf is hard to kill on ur own and without water.
+
+	// Quest - Find out how the shopkeeper is making so much money.
+	// He never sells a thing, but lives like a king
+	// Has a chest beside him with incriminating info
+	// goes and meets a demon @ night
+	// Don't make him shopkeeper class or the hunters will use him for selling
+	// :P
+
+	// So... if an attacker is out of sight, don't remove him from the list,
+	// just... ignoer them. Would be weird if breaking LoS made them forget
+	// about you
+
 	// Make sure attackers persist through saves, kinda want to call it
 	// beligerenents, or have a fight class... with teams...
 

@@ -71,7 +71,8 @@ public class Actor extends ActorTemplate implements Owner {
 	public Weapon equippedWeapon = null;
 	public String equippedWeaponGUID = null;
 
-	public Pack pack;
+	public transient Pack pack;
+	private transient ArrayList<Actor> attackers;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
@@ -118,6 +119,8 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 
 		hoverFightPreviewFights = new Vector<Fight>();
+
+		attackers = new ArrayList<Actor>();
 	}
 
 	@Override
@@ -247,13 +250,9 @@ public class Actor extends ActorTemplate implements Owner {
 			return;
 		}
 
-		if (gameObject instanceof Actor && ((Actor) gameObject).pack != null) {
-			((Actor) gameObject).pack.addAttacker(this);
-		}
-
-		if (gameObject instanceof Actor && this.pack != null) {
-			this.pack.addAttacker((Actor) gameObject);
-		}
+		manageAttackerReferences(gameObject);
+		manageAttackerReferencesForNearbyAllies(gameObject);
+		manageAttackerReferencesForNearbyEnemies(gameObject);
 
 		gameObject.remainingHealth -= equippedWeapon.damage;
 		this.distanceMovedThisTurn = this.travelDistance;
@@ -1130,6 +1129,18 @@ public class Actor extends ActorTemplate implements Owner {
 		// System.out.println("Game.level.activeActor = " +
 		// Game.level.activeActor);
 		// System.out.println("Game.level.squares = " + Game.level.squares);
+
+		// Manage attackers list
+		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
+		for (Actor actor : attackers) {
+			if (actor.remainingHealth <= 0) {
+				attackersToRemoveFromList.add(actor);
+			}
+		}
+
+		for (Actor actor : attackersToRemoveFromList) {
+			attackers.remove(actor);
+		}
 		if (this.remainingHealth > 0) {
 			Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 			this.aiRoutine.update();
@@ -1176,5 +1187,81 @@ public class Actor extends ActorTemplate implements Owner {
 			}
 		}
 
+	}
+
+	public void addAttacker(Actor actor) {
+		if (!this.attackers.contains(actor)) {
+			this.attackers.add(actor);
+		}
+	}
+
+	private void manageAttackerReferences(GameObject gameObject) {
+
+		// Manage attackers
+		if (!(gameObject instanceof Actor))
+			return;
+
+		Actor attacker = (Actor) gameObject;
+
+		if (this.pack != null && attacker.pack != null) {
+
+			for (int i = 0; i < attacker.pack.getSize(); i++) {
+				this.pack.addAttacker(attacker.pack.getMember(i));
+			}
+
+			for (int i = 0; i < this.pack.getSize(); i++) {
+				attacker.pack.addAttacker(this.pack.getMember(i));
+			}
+
+		} else if (this.pack != null && attacker.pack == null) {
+
+			for (int i = 0; i < this.pack.getSize(); i++) {
+				attacker.addAttacker(this.pack.getMember(i));
+			}
+
+			this.pack.addAttacker(attacker);
+
+		} else if (this.pack == null && attacker.pack != null) {
+
+			for (int i = 0; i < attacker.pack.getSize(); i++) {
+				this.addAttacker(attacker.pack.getMember(i));
+			}
+			attacker.pack.addAttacker(this);
+
+		} else if (this.pack == null && attacker.pack == null) {
+			attacker.addAttacker(this);
+			this.addAttacker(attacker);
+
+		}
+
+	}
+
+	private void manageAttackerReferencesForNearbyAllies(GameObject attacker) {
+		for (Actor ally : this.faction.actors) {
+			if (ally != this && (this.straightLineDistanceTo(ally.squareGameObjectIsOn) < 10
+					|| ally.straightLineDistanceTo(attacker.squareGameObjectIsOn) < 10)) {
+				ally.manageAttackerReferences(attacker);
+			}
+		}
+	}
+
+	private void manageAttackerReferencesForNearbyEnemies(GameObject attackerGameObject) {
+		if (attackerGameObject instanceof Actor) {
+			Actor attacker = (Actor) attackerGameObject;
+			for (Actor enemy : attacker.faction.actors) {
+				if (enemy != attacker && (this.straightLineDistanceTo(enemy.squareGameObjectIsOn) < 10
+						|| enemy.straightLineDistanceTo(attacker.squareGameObjectIsOn) < 10)) {
+					enemy.manageAttackerReferences(this);
+				}
+			}
+		}
+	}
+
+	public boolean hasAttackers() {
+		return attackers.size() > 0;
+	}
+
+	public ArrayList<Actor> getAttackers() {
+		return attackers;
 	}
 }

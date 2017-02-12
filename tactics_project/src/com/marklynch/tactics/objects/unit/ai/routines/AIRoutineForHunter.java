@@ -22,6 +22,7 @@ public class AIRoutineForHunter extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
 	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
+	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 
 	public HUNT_STATE huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 
@@ -36,6 +37,16 @@ public class AIRoutineForHunter extends AIRoutine {
 	public void update() {
 
 		// Interrupts first, could put these in to the
+
+		// 1. Fighting
+		if (Game.level.activeActor.hasAttackers()) {
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
+			GameObject target = AIRoutineUtils.getNearestAttacker(Game.level.activeActor.getAttackers());
+			boolean attackedTarget = AIRoutineUtils.attackTarget(target);
+			if (!attackedTarget)
+				AIRoutineUtils.moveTowardsTargetToAttack(target);
+			return;
+		}
 
 		// 1. loot dead animals
 		// System.out.println("LOOT CARCASS");
@@ -75,7 +86,11 @@ public class AIRoutineForHunter extends AIRoutine {
 			// if (target == null)
 			target = AIRoutineUtils.getNearestForPurposeOfAttack(WildAnimal.class, 0, false, true, false, false);
 			if (target == null) {
-				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+				if (Game.level.activeActor.inventory.contains(Junk.class)) {
+					huntState = HUNT_STATE.PICK_SHOP_KEEPER;
+				} else {
+					huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+				}
 			} else {
 				huntState = HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK;
 			}
