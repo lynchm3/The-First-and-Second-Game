@@ -491,20 +491,20 @@ public class Level {
 				actor.hasAttackedThisTurn = false;
 			}
 		}
+
 		removeWalkingHighlight();
 		removeWeaponsThatCanAttackHighlight();
 
 		if (activeActor != null)
 			activeActor.unselected();
 		activeActor = null;
+		System.out.println("activeActor B = " + Game.level.activeActor);
 		currentFactionMovingIndex++;
-		if (currentFactionMovingIndex >= factions.size()) {
+		System.out.println("currentFactionMovingIndex = " + currentFactionMovingIndex);
+		System.out.println("factions.size() = " + factions.size());
+		if (currentFactionMovingIndex >= factions.size())
 			currentFactionMovingIndex = 0;
-			this.turn++;
-			Game.level.activeActor = factions.get(0).actors.get(0);
-			Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
-			Actor.highlightSelectedCharactersSquares();
-		}
+
 		while (factions.get(currentFactionMovingIndex).actors.size() == 0) {
 			currentFactionMovingIndex++;
 			if (currentFactionMovingIndex >= factions.size()) {
@@ -513,10 +513,12 @@ public class Level {
 			}
 		}
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
-		// if (currentFactionMovingIndex == 0)
-		// waitingForPlayerClickToBeginTurn = true;
-
-		// showTurnNotification();
+		if (currentFactionMovingIndex == 0) {
+			Game.level.activeActor = factions.get(0).actors.get(0);
+			System.out.println("activeActor C = " + Game.level.activeActor);
+			Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
+			Actor.highlightSelectedCharactersSquares();
+		}
 
 		undoList.clear();
 		undoButton.enabled = false;

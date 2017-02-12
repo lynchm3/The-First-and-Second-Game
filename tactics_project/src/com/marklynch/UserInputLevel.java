@@ -1,7 +1,5 @@
 package com.marklynch;
 
-import java.util.ArrayList;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -218,22 +216,24 @@ public class UserInputLevel {
 			return;
 
 		// Click square / Object / Actor
-		ArrayList<GameObject> clickedGameObjects = null;
-		if (square.inventory.size() != 0)
-			clickedGameObjects = square.inventory.getGameObjects();
+		// ArrayList<GameObject> clickedGameObjects = null;
+		// if (square.inventory.size() != 0)
+		// clickedGameObjects = square.inventory.getGameObjects();
 
-		GameObject clickedGameObject = null;
-		if (clickedGameObjects != null && clickedGameObjects.size() == 1) {
-			clickedGameObject = clickedGameObjects.get(0);
-		}
+		// GameObject clickedGameObject = null;
+		// if (clickedGameObjects != null && clickedGameObjects.size() == 1) {
+		// clickedGameObject = clickedGameObjects.get(0);
+		// }
 
-		System.out.println("clickedGameObject = " + clickedGameObject);
+		GameObject gameObjectToInteractWith = square.inventory.getGameObjectThatCantShareSquare();
 
-		if (clickedGameObject != null) {
+		// System.out.println("clickedGameObject = " + clickedGameObject);
+
+		if (gameObjectToInteractWith != null) {
 			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
 					&& Game.level.activeActor.equippedWeapon
 							.hasRange(Game.level.activeActor.straightLineDistanceTo(square))) {
-				Game.level.activeActor.attack(clickedGameObject, false);
+				Game.level.activeActor.attack(gameObjectToInteractWith, false);
 				interactedThisTurn = true;
 			}
 		}
@@ -274,6 +274,9 @@ public class UserInputLevel {
 	}
 
 	public static void rightTyped() {
+		System.out.println("Game.level.activeActor = " + Game.level.activeActor);
+		System.out.println(
+				"Game.level.activeActor.squareGameObjectIsOn = " + Game.level.activeActor.squareGameObjectIsOn);
 		int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
 		if (x < Game.level.squares.length) {
 			interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid]);

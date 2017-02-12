@@ -1123,14 +1123,6 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void update(int delta) {
-		// System.out.println("Game.level = " + Game.level);
-		// System.out.println("Game.level.currentFactionMovingIndex = " +
-		// Game.level.currentFactionMovingIndex);
-		// System.out.println("Game.level.currentFactionMoving = " +
-		// Game.level.currentFactionMoving);
-		// System.out.println("Game.level.activeActor = " +
-		// Game.level.activeActor);
-		// System.out.println("Game.level.squares = " + Game.level.squares);
 
 		// Manage attackers list
 		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
