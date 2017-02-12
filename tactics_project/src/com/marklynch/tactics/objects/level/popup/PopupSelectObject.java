@@ -65,6 +65,9 @@ public class PopupSelectObject extends Popup {
 
 		}
 
+		highlightedButton = buttons.get(highlightedButtonIndex);
+		highlightedButton.highlighted = true;
+
 	}
 
 	public void gameObjectSelected(GameObject gameObject) {

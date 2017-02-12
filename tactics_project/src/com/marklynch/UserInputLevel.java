@@ -1,13 +1,12 @@
 package com.marklynch;
 
-import java.util.ArrayList;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.level.Square;
 import com.marklynch.tactics.objects.level.popup.PopupSelectObject;
+import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.Path;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
@@ -220,65 +219,69 @@ public class UserInputLevel {
 		if (interactedThisTurn)
 			return;
 
-		// Click square / Object / Actor
-		ArrayList<GameObject> gameObjectsToInteractWith = null;
-		if (square.inventory.size() != 0)
-			gameObjectsToInteractWith = square.inventory.getGameObjects();
-
-		if (gameObjectsToInteractWith != null && gameObjectsToInteractWith.size() > 1) {
-			Game.level.popup = new PopupSelectObject(100, Game.level, square);
+		if (square == Game.level.activeActor.squareGameObjectIsOn)
 			return;
-		}
 
-		// GameObject clickedGameObject = null;
-		// if (clickedGameObjects != null && clickedGameObjects.size() == 1) {
-		// clickedGameObject = clickedGameObjects.get(0);
-		// }
+		if (Game.level.activeActor != Game.level.factions.get(0).actors.get(0))
+			return;
 
-		GameObject gameObjectToInteractWith = square.inventory.getGameObjectThatCantShareSquare();
+		Actor actorOnSquare = (Actor) square.inventory.getGameObectOfClass(Actor.class);
 
-		// System.out.println("clickedGameObject = " + clickedGameObject);
-
-		if (gameObjectToInteractWith != null) {
-			interactWithGameObject(gameObjectToInteractWith);
-		}
-
-		// Check if we clicked on an empty reachable square and act
-		// accordingly
-		if (Game.level.activeActor != null && square.reachableBySelectedCharater
-				&& Game.level.activeActor.faction == Game.level.factions.get(0)
-				&& Game.level.currentFactionMoving == Game.level.factions.get(0)
-				&& Game.level.activeActor.squareGameObjectIsOn != square) {
+		if (actorOnSquare != null) {
+			interactWithGameObject(actorOnSquare);
+		} else if (square.inventory.isPassable()) {
 			interactWithSquare(square);
+		} else {
+			Game.level.popup = new PopupSelectObject(100, Game.level, square);
 		}
 
 	}
 
 	public static void interactWithGameObject(GameObject gameObjectToInteractWith) {
-		if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
-				&& Game.level.activeActor.equippedWeapon.hasRange(
-						Game.level.activeActor.straightLineDistanceTo(gameObjectToInteractWith.squareGameObjectIsOn))) {
-			Game.level.activeActor.attack(gameObjectToInteractWith, false);
+
+		if (Game.level.activeActor.getAttackers().contains(gameObjectToInteractWith)) {
+			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
+					&& Game.level.activeActor.equippedWeapon.hasRange(Game.level.activeActor
+							.straightLineDistanceTo(gameObjectToInteractWith.squareGameObjectIsOn))) {
+				Game.level.activeActor.attack(gameObjectToInteractWith, false);
+				interactedThisTurn = true;
+				Game.level.popup = null;
+			}
+		} else {
+			// talk to the actor
 			interactedThisTurn = true;
 		}
+		Game.level.popup = null;
+
 	}
 
 	public static void interactWithSquare(Square squareToInteractWith) {
-		AIRoutineUtils.moveTo(Game.level.activeActor, squareToInteractWith);
-		interactedThisTurn = true;
+		if (squareToInteractWith.reachableBySelectedCharater) {
+			AIRoutineUtils.moveTo(Game.level.activeActor, squareToInteractWith);
+			interactedThisTurn = true;
+		}
+		Game.level.popup = null;
 	}
 
 	public static void upTyped() {
-		int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
-		if (y >= 0) {
-			interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y]);
+		if (Game.level.popup != null) {
+			Game.level.popup.moveHighLightUp();
+		} else {
+			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
+			if (y >= 0) {
+				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y]);
+			}
 		}
 	}
 
 	public static void downTyped() {
-		int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
-		if (y < Game.level.squares[0].length) {
-			interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y]);
+		if (Game.level.popup != null) {
+			Game.level.popup.moveHighLightDown();
+		} else {
+			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
+			if (y < Game.level.squares[0].length) {
+				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y]);
+			}
 		}
 
 	}
@@ -308,8 +311,14 @@ public class UserInputLevel {
 	}
 
 	public static void keyTyped(char character) {
-		if (character == ' ')
-			Game.level.endTurn();
+		if (character == ' ') {
+
+			if (Game.level.popup != null) {
+				Game.level.popup.clickHighlightedButton();
+			} else {
+				Game.level.endTurn();
+			}
+		}
 
 	}
 

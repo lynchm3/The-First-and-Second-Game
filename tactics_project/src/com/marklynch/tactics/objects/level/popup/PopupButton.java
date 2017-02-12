@@ -39,8 +39,13 @@ public class PopupButton extends Button {
 				QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
 				TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 			} else {
-				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
-				TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
+				if (highlighted) {
+					QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
+					TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
+				} else {
+					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
+					TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
+				}
 			}
 		} else {
 

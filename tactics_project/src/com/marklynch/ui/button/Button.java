@@ -1,8 +1,8 @@
 package com.marklynch.ui.button;
 
-import mdesl.graphics.Texture;
-
 import com.marklynch.utils.ResourceUtils;
+
+import mdesl.graphics.Texture;
 
 public abstract class Button {
 
@@ -13,6 +13,7 @@ public abstract class Button {
 	public boolean down = false;
 	public ClickListener clickListener;
 	public Object text;
+	public boolean highlighted = false;
 
 	public Button(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
 			Object text) {

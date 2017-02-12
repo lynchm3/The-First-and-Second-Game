@@ -217,6 +217,15 @@ public class Inventory {
 		return false;
 	}
 
+	public GameObject getGameObectOfClass(Class clazz) {
+		for (GameObject gameObject : gameObjects) {
+			if (clazz.isInstance(gameObject)) {
+				return gameObject;
+			}
+		}
+		return null;
+	}
+
 	public ArrayList<GameObject> getGameObjectsThatCanContainOtherObjects() {
 		ArrayList<GameObject> gameObjectsThatCanContainOtherObjects = new ArrayList<GameObject>();
 		for (GameObject gameObject : gameObjects) {

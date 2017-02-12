@@ -16,6 +16,9 @@ public class Popup {
 	public PopupButton selectSquareButton;
 	public float drawPositionX, drawPositionY;
 
+	Button highlightedButton;
+	int highlightedButtonIndex = 0;
+
 	public Popup(float width, Level level, Square square) {
 		this.width = width;
 		this.level = level;
@@ -52,6 +55,29 @@ public class Popup {
 				return button;
 		}
 		return null;
+	}
+
+	public void moveHighLightUp() {
+		highlightedButton.highlighted = false;
+		this.highlightedButtonIndex--;
+		if (highlightedButtonIndex < 0)
+			highlightedButtonIndex = buttons.size() - 1;
+		highlightedButton = buttons.get(highlightedButtonIndex);
+		highlightedButton.highlighted = true;
+	}
+
+	public void moveHighLightDown() {
+		highlightedButton.highlighted = false;
+		this.highlightedButtonIndex++;
+		if (highlightedButtonIndex >= buttons.size())
+			highlightedButtonIndex = 0;
+		highlightedButton = buttons.get(highlightedButtonIndex);
+		highlightedButton.highlighted = true;
+
+	}
+
+	public void clickHighlightedButton() {
+		highlightedButton.click();
 	}
 
 }
