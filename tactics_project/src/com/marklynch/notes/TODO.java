@@ -4,6 +4,9 @@ public class TODO {
 
 	// To add to save - attackers, building, pack
 
+	// Hunter AIT should have interrupt where it attacks animals within 10
+	// squares
+
 	// The way it is now, pack members that are far away will still know about
 	// the attackers and come running... need a sight limit, a sound limit, need
 	// to be handled on an individual level... or have a different concept other

@@ -319,6 +319,10 @@ public class AIRoutineUtils {
 		// about targets squares I need to make list of attack squares, this
 		// shit is heavy
 
+		if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) <= 1) {
+			return true;
+		}
+
 		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target, 1f);
 
 		if (squareToMoveTo != null) {
@@ -552,7 +556,10 @@ public class AIRoutineUtils {
 
 	}
 
-	public boolean moveTowardsTargetSquare(Square square) {
+	public static boolean moveTowardsTargetSquare(Square square) {
+
+		if (Game.level.activeActor.squareGameObjectIsOn == square)
+			return true;
 
 		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
 
@@ -564,7 +571,7 @@ public class AIRoutineUtils {
 		}
 	}
 
-	public Square calculateSquareToMoveToForTargetSquare(Square square) {
+	public static Square calculateSquareToMoveToForTargetSquare(Square square) {
 
 		Path pathToSquare = Game.level.activeActor.paths.get(square);
 

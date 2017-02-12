@@ -29,6 +29,7 @@ import com.marklynch.tactics.objects.GameObjectExploder;
 import com.marklynch.tactics.objects.GameObjectTemplate;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Junk;
+import com.marklynch.tactics.objects.QuestSmallGame;
 import com.marklynch.tactics.objects.level.Building;
 import com.marklynch.tactics.objects.level.Cat;
 import com.marklynch.tactics.objects.level.Faction;
@@ -484,53 +485,60 @@ public class Editor {
 			player.inventory.get(i).inventoryThatHoldsThisObject = player.inventory;
 		}
 
-		Bed bedForHunterPaul = new Bed("Hunter Paul's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[0][5],
+		Bed bedForHunterBrent = new Bed("Hunter Brent Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[0][5],
 				new Inventory(), false, true, false, false);
 
-		Actor hunterPaul = new Hunter("Hunter Paul", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
-				Game.level.squares[0][2], 1, bedForHunterPaul, inventoryForActor1, true, false, true);
-		hunterPaul.faction = Game.level.factions.get(1);
-		hunterPaul.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterPaul);
-		for (int i = 0; i < hunterPaul.inventory.size(); i++) {
-			hunterPaul.inventory.get(i).inventoryThatHoldsThisObject = hunterPaul.inventory;
+		Actor hunterBrent = new Hunter("Hunter Brent", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
+				Game.level.squares[0][2], 1, bedForHunterBrent, inventoryForActor1, true, false, true);
+		hunterBrent.faction = Game.level.factions.get(1);
+		hunterBrent.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(hunterBrent);
+		for (int i = 0; i < hunterBrent.inventory.size(); i++) {
+			hunterBrent.inventory.get(i).inventoryThatHoldsThisObject = hunterBrent.inventory;
 		}
 
-		Bed bedForHunterJohn = new Bed("Hunter John's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[9][9],
+		Bed bedForHunterBront = new Bed("Hunter Bront's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[9][9],
 				new Inventory(), false, true, false, false);
 
-		Actor hunterJohn = new Hunter("Hunter John", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[9][9], 1, bedForHunterJohn, inventoryForActor1.makeCopy(), true, false, true);
-		hunterJohn.faction = Game.level.factions.get(1);
-		hunterJohn.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterJohn);
-		for (int i = 0; i < hunterJohn.inventory.size(); i++) {
-			hunterJohn.inventory.get(i).inventoryThatHoldsThisObject = hunterJohn.inventory;
+		Actor hunterBront = new Hunter("Hunter Bront", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
+				Game.level.squares[9][9], 1, bedForHunterBront, inventoryForActor1.makeCopy(), true, false, true);
+		hunterBront.faction = Game.level.factions.get(1);
+		hunterBront.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(hunterBront);
+		for (int i = 0; i < hunterBront.inventory.size(); i++) {
+			hunterBront.inventory.get(i).inventoryThatHoldsThisObject = hunterBront.inventory;
 		}
 
-		Actor wildAnimal1 = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
+		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();
+		hunterPackMembers.add(hunterBrent);
+		hunterPackMembers.add(hunterBront);
+		Pack hunterPack = new Pack("Hunter pack", hunterPackMembers, hunterBrent);
+
+		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[9][6], 1, null, inventoryForWildAnimal, true, false, true);
-		wildAnimal1.faction = Game.level.factions.get(2);
-		wildAnimal1.factionGUID = Game.level.factions.get(2).guid;
-		Game.level.factions.get(2).actors.add(wildAnimal1);
+		superWolf.faction = Game.level.factions.get(2);
+		superWolf.factionGUID = Game.level.factions.get(2).guid;
+		Game.level.factions.get(2).actors.add(superWolf);
 
-		Actor wildAnimal2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
+		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[11][6], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
-		wildAnimal2.faction = Game.level.factions.get(2);
-		wildAnimal2.factionGUID = Game.level.factions.get(2).guid;
-		Game.level.factions.get(2).actors.add(wildAnimal2);
+		wolf2.faction = Game.level.factions.get(2);
+		wolf2.factionGUID = Game.level.factions.get(2).guid;
+		Game.level.factions.get(2).actors.add(wolf2);
 
-		Actor wildAnimal3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
+		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
 				Game.level.squares[13][9], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
-		wildAnimal3.faction = Game.level.factions.get(2);
-		wildAnimal3.factionGUID = Game.level.factions.get(2).guid;
-		Game.level.factions.get(2).actors.add(wildAnimal3);
+		wolf3.faction = Game.level.factions.get(2);
+		wolf3.factionGUID = Game.level.factions.get(2).guid;
+		Game.level.factions.get(2).actors.add(wolf3);
 
 		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
-		wolfPackMembers.add(wildAnimal1);
-		wolfPackMembers.add(wildAnimal2);
-		wolfPackMembers.add(wildAnimal3);
-		Pack pack = new Pack("Wolf pack", wolfPackMembers, wildAnimal1);
+		wolfPackMembers.add(superWolf);
+		wolfPackMembers.add(wolf2);
+		wolfPackMembers.add(wolf3);
+		Pack wolfPack = new Pack("Wolf pack", wolfPackMembers, superWolf);
+
+		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, superWolf, wolfPack, null);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, null, new Inventory(), true, false, true);

@@ -13,6 +13,7 @@ import com.marklynch.tactics.objects.Carcass;
 import com.marklynch.tactics.objects.GameObject;
 import com.marklynch.tactics.objects.Inventory;
 import com.marklynch.tactics.objects.Owner;
+import com.marklynch.tactics.objects.Quest;
 import com.marklynch.tactics.objects.level.Faction;
 import com.marklynch.tactics.objects.level.Pack;
 import com.marklynch.tactics.objects.level.Square;
@@ -73,6 +74,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public transient Pack pack;
 	private transient ArrayList<Actor> attackers;
+	public transient Quest quest;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
@@ -1205,17 +1207,17 @@ public class Actor extends ActorTemplate implements Owner {
 
 		if (this.pack != null && attacker.pack != null) {
 
-			for (int i = 0; i < attacker.pack.getSize(); i++) {
+			for (int i = 0; i < attacker.pack.size(); i++) {
 				this.pack.addAttacker(attacker.pack.getMember(i));
 			}
 
-			for (int i = 0; i < this.pack.getSize(); i++) {
+			for (int i = 0; i < this.pack.size(); i++) {
 				attacker.pack.addAttacker(this.pack.getMember(i));
 			}
 
 		} else if (this.pack != null && attacker.pack == null) {
 
-			for (int i = 0; i < this.pack.getSize(); i++) {
+			for (int i = 0; i < this.pack.size(); i++) {
 				attacker.addAttacker(this.pack.getMember(i));
 			}
 
@@ -1223,7 +1225,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 		} else if (this.pack == null && attacker.pack != null) {
 
-			for (int i = 0; i < attacker.pack.getSize(); i++) {
+			for (int i = 0; i < attacker.pack.size(); i++) {
 				this.addAttacker(attacker.pack.getMember(i));
 			}
 			attacker.pack.addAttacker(this);

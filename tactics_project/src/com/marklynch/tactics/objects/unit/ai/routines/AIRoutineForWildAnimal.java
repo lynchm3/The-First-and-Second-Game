@@ -14,7 +14,7 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 
 		// SO... Fight or run when attacked
 		if (Game.level.activeActor.pack != null) {
-			Game.level.activeActor.pack.update();
+			Game.level.activeActor.pack.update(Game.level.activeActor);
 			return;
 		}
 

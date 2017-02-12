@@ -2,8 +2,8 @@ package com.marklynch.tactics.objects.level;
 
 import java.util.ArrayList;
 
-import com.marklynch.Game;
 import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.tactics.objects.Quest;
 import com.marklynch.tactics.objects.unit.Actor;
 import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 
@@ -16,6 +16,7 @@ public class Pack {
 	private transient Actor leader;
 	private transient Square targetSquare;
 	private transient ArrayList<Actor> attackers;
+	public transient Quest quest;
 
 	public Pack(String name, ArrayList<Actor> members, Actor leader) {
 		super();
@@ -50,18 +51,24 @@ public class Pack {
 		}
 	}
 
-	public void update() {
+	public void update(Actor actor) {
+
+		// Defer to quest
+		if (quest != null) {
+			quest.update(actor);
+			return;
+		}
 
 		// Manage attackers list
 		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
-		for (Actor actor : attackers) {
-			if (actor.remainingHealth <= 0) {
-				attackersToRemoveFromList.add(actor);
+		for (Actor attacker : attackers) {
+			if (attacker.remainingHealth <= 0) {
+				attackersToRemoveFromList.add(attacker);
 			}
 		}
 
-		for (Actor actor : attackersToRemoveFromList) {
-			attackers.remove(actor);
+		for (Actor attackerToRemoveFromList : attackersToRemoveFromList) {
+			attackers.remove(attackerToRemoveFromList);
 		}
 
 		// Manage leader
@@ -93,17 +100,16 @@ public class Pack {
 		}
 
 		// AI move to random square
-		if (Game.level.activeActor == leader) {
+		if (actor == leader) {
 
-			if (targetSquare == null || Game.level.activeActor.paths.get(targetSquare) == null) {
+			if (targetSquare == null || actor.paths.get(targetSquare) == null) {
 				targetSquare = AIRoutineUtils.getRandomSquare(10, true);
 			}
 
 			if (targetSquare != null) {
-				Square squareToMoveTo = AIRoutineUtils
-						.getSquareToMoveAlongPath(Game.level.activeActor.paths.get(targetSquare));
-				AIRoutineUtils.moveTo(Game.level.activeActor, squareToMoveTo);
-				if (Game.level.activeActor.squareGameObjectIsOn == targetSquare)
+				Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(actor.paths.get(targetSquare));
+				AIRoutineUtils.moveTo(actor, squareToMoveTo);
+				if (actor.squareGameObjectIsOn == targetSquare)
 					targetSquare = null;
 			}
 
@@ -124,7 +130,23 @@ public class Pack {
 		return this.members.get(i);
 	}
 
-	public int getSize() {
+	public int size() {
 		return members.size();
+	}
+
+	public boolean contains(Actor actor) {
+		return members.contains(actor);
+	}
+
+	public boolean hasAttackers() {
+		return attackers.size() > 0;
+	}
+
+	public ArrayList<Actor> getAttackers() {
+		return attackers;
+	}
+
+	public Actor getLeader() {
+		return leader;
 	}
 }

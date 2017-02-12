@@ -36,8 +36,6 @@ public class AIRoutineForHunter extends AIRoutine {
 	@Override
 	public void update() {
 
-		// Interrupts first, could put these in to the
-
 		// 1. Fighting
 		if (Game.level.activeActor.hasAttackers()) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
@@ -75,6 +73,18 @@ public class AIRoutineForHunter extends AIRoutine {
 			} else {
 
 			}
+			return;
+		}
+
+		// Defer to quest
+		if (Game.level.activeActor.quest != null) {
+			Game.level.activeActor.quest.update(Game.level.activeActor);
+			return;
+		}
+
+		// Defer to pack
+		if (Game.level.activeActor.pack != null) {
+			Game.level.activeActor.pack.update(Game.level.activeActor);
 			return;
 		}
 
