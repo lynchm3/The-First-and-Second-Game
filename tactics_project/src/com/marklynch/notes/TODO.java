@@ -2,6 +2,26 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Small game - Don't destroy their Easel :P
+	// Small game - there's water arrows beside them, three sets, and a bow, u
+	// can take one set of arrows and a bow without them getting angry. Once u
+	// accept the mission that is...
+	// Maybe u could mess with the easel to say that the wolf is weak to fire
+	// If u inspect the easel it says hes supceptible to water and immune to
+	// fire
+	// U can re-imbue the hunter's weapons on the ground to do fire damage
+	// OR steal the arrows
+	// OR disenchant the arrows
+	// I dunno
+	// I want someone in the town that's like - don't attack the wolves, u need
+	// to stop these hunters!!! YES!
+	// Could distract hunters by dropping junk near them :P
+	// Could distract hunters by conjuring a wolf familiar
+	// The hunters should still sleep at night when planning the hunt, the board
+	// is there though, so u'll know they're there, they'll take their weapons
+	// to bed with them tho.
+	// This is getting over complicated and out of hand :P
+
 	// To add to save - attackers, building, pack
 
 	// Hunter AIT should have interrupt where it attacks animals within 10

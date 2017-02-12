@@ -514,6 +514,9 @@ public class Editor {
 		hunterPackMembers.add(hunterBront);
 		Pack hunterPack = new Pack("Hunter pack", hunterPackMembers, hunterBrent);
 
+		new GameObject("Hunt Plan", 5, "hunt_plan.png", Game.level.squares[6][8], new Inventory(), true, false, false,
+				true);
+
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[9][6], 1, null, inventoryForWildAnimal, true, false, true);
 		superWolf.faction = Game.level.factions.get(2);
@@ -526,8 +529,8 @@ public class Editor {
 		wolf2.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(wolf2);
 
-		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png",
-				Game.level.squares[13][9], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
+		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png", Game.level.squares[13][9], 1,
+				null, inventoryForWildAnimal.makeCopy(), true, false, true);
 		wolf3.faction = Game.level.factions.get(2);
 		wolf3.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(wolf3);
