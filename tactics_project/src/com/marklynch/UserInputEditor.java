@@ -16,6 +16,10 @@ public class UserInputEditor {
 	public static boolean dragging = false;
 
 	public static boolean capsLock = false;
+	public static boolean keyStateUp = false;
+	public static boolean keyStateDown = false;
+	public static boolean keyStateLeft = false;
+	public static boolean keyStateRight = false;
 	public static boolean keyStateReturn = false;
 	public static boolean keyStateBack = false;
 	public static boolean keyStateLeftShift = false;
@@ -177,6 +181,34 @@ public class UserInputEditor {
 
 		if (!Mouse.isButtonDown(0)) {
 			dragging = false;
+		}
+
+		if (keyStateUp == false && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+			// editor.enterTyped();
+			keyStateUp = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+			keyStateUp = false;
+		}
+
+		if (keyStateDown == false && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+			// editor.enterTyped();
+			keyStateDown = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+			keyStateDown = false;
+		}
+
+		if (keyStateLeft == false && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+			// editor.enterTyped();
+			keyStateLeft = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+			keyStateLeft = false;
+		}
+
+		if (keyStateRight == false && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+			// editor.enterTyped();
+			keyStateRight = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+			keyStateRight = false;
 		}
 
 		if (keyStateReturn == false && Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
