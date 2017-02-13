@@ -68,11 +68,6 @@ public class InventorySquare extends Square {
 	}
 
 	@Override
-	public String[] getDetails() {
-		return new String[] { "" + xInGrid + " , " + yInGrid, "(Click again to dismiss)" };
-	}
-
-	@Override
 	public String toString() {
 		return "" + this.xInGrid + "," + this.yInGrid;
 

@@ -2,6 +2,22 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// TALK :)
+	// Talk can act like the AI, if quest != null, defer to the the quests talk
+	// method :)
+
+	// Don't worry too much about attacking logic yet, will fix it up when I
+	// decide what way to go w/ fights
+
+	// Look @ the wild 8
+
+	// Move calls to Game.level.logOnScreen in to relevant Action classes
+
+	// Skill - counter (lvl 1 counter with equipped weapon if withing range, lvl
+	// 2 counter with weapon any weapon in inventory if within range)
+
+	// Turn on highlights when using mouse as well as arrows
+
 	// Player controls are mangled
 
 	// Small game - Don't destroy their Easel :P

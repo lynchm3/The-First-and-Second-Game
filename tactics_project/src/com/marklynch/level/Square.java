@@ -8,10 +8,12 @@ import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Building;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
-import com.marklynch.ui.Dialog;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -36,7 +38,6 @@ public class Square {
 	// image
 	public String imageTexturePath;
 	public transient Texture imageTexture = null;
-	public transient Vector<Dialog> dialogs;
 
 	public transient boolean showingDialogs = false;
 	public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
@@ -54,7 +55,6 @@ public class Square {
 		this.elevation = elevation;
 		loadImages();
 		weaponsThatCanAttack = new Vector<Weapon>();
-		dialogs = new Vector<Dialog>();
 		this.inventory = inventory;
 		if (this.inventory != null)
 			this.inventory.square = this;
@@ -65,7 +65,6 @@ public class Square {
 		inventory.square = this;
 		inventory.postLoad1();
 		weaponsThatCanAttack = new Vector<Weapon>();
-		dialogs = new Vector<Dialog>();
 
 		loadImages();
 	}
@@ -176,63 +175,6 @@ public class Square {
 		// GL11.glPopMatrix();
 	}
 
-	public void drawDialogs() {
-
-		for (Dialog dialog : dialogs) {
-			dialog.draw();
-		}
-
-	}
-
-	public void showDialogs() {
-		dialogs.add(new Dialog(this, 200, 200, "dialogbg.png", "KeepCalm-Medium.ttf"));
-		showingDialogs = true;
-	}
-
-	public void clearDialogs() {
-		dialogs.clear();
-		showingDialogs = false;
-	}
-
-	public String[] getDetails() {
-
-		if (this.inventory.size() == 0) {
-			// Nothing on the square
-			return new String[] { "" + xInGrid + " , " + yInGrid, "\nTravel Cost = " + travelCost,
-					"\nElevation = " + elevation, "(Click again to dismiss)" };
-		} else
-
-		{
-
-			String[] details = new String[] { "" + xInGrid + " , " + yInGrid, "\nTravel Cost = " + travelCost,
-					"\nElevation = " + elevation };
-
-			for (int i = 0; i < inventory.size(); i++) {
-				if (this.inventory.get(i) instanceof Actor) {
-					// TODO
-					// // Actor on the square
-					// Actor actor = (Actor) this.inventory.gameObjects.get(i);
-					// String[] actorDetails = { "" + actor.name, "lvl" +
-					// actor.actorLevel + " " + actor.title };
-					// String[] both = (String[])ArrayUtils.addAll(first,
-					// second);
-
-				} else {
-					// TODO
-					// Object on the square
-					// return new String[] { "" + x + " , " + y, "\nTravel Cost
-					// = " + travelCost,
-					// "\nElevation = " + elevation, "(Click again to dismiss)"
-					// };
-
-				}
-			}
-
-			// (Click again to dismiss)" };
-			return details;
-		}
-	}
-
 	public class PathComparator implements Comparator<Vector<Square>> {
 
 		@Override
@@ -259,5 +201,23 @@ public class Square {
 	public String toString() {
 		return "" + this.xInGrid + "," + this.yInGrid;
 
+	}
+
+	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
+		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+		if (targetGameObject != null) {
+			return targetGameObject.getDefaultAction(performer);
+		} else {
+			return getDefaultActionForJustTheSquare(performer);
+
+		}
+	}
+
+	public Action getDefaultActionForJustTheSquare(Actor performer) {
+		if (this.reachableBySelectedCharater) {
+			return new ActionMove(performer, this);
+		} else {
+			return null;
+		}
 	}
 }

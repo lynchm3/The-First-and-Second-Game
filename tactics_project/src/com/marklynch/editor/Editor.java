@@ -171,7 +171,7 @@ public class Editor {
 			gameObjectTemplates.get(i).loadImages();
 		}
 
-		Game.level = new Level(20, 20);
+		Game.level = new Level(20, 100);
 
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);

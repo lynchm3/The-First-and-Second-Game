@@ -4,7 +4,7 @@ import com.marklynch.objects.units.Actor;
 
 public class Action {
 
-	String actionName = "Attack";
+	String actionName = "Action???";
 	Actor performer;
 	Object target;
 

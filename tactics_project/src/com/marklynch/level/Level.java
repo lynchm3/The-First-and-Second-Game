@@ -20,7 +20,6 @@ import com.marklynch.objects.units.Move;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.ui.Dialog;
 import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -44,7 +43,6 @@ public class Level {
 	public transient ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public transient ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
 
-	public transient Vector<Dialog> dialogs;
 	public Popup popup;
 	public Toast toast;
 	public transient LevelButton endTurnButton;
@@ -77,7 +75,6 @@ public class Level {
 		logs = new Vector<ActivityLog>();
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
-		dialogs = new Vector<Dialog>();
 		decorations = new Vector<Decoration>();
 		gameCursor = new GameCursor();
 		script = new Script();
@@ -88,8 +85,8 @@ public class Level {
 		inanimateObjectsOnGround = new Vector<GameObject>();
 		initGrid(this.squares, this.width, this.height);
 
-		endTurnButton = new LevelButton(210f, 110f, 200f, 100f, "end_turn_button.png", "end_turn_button.png",
-				"END TURN", false, false);
+		endTurnButton = new LevelButton(210f, 40f, 200f, 30f, "end_turn_button.png", "end_turn_button.png", "END TURN",
+				false, false);
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -97,8 +94,8 @@ public class Level {
 			}
 		});
 		buttons.add(endTurnButton);
-		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "UNDO",
-				false, false);
+		undoButton = new LevelButton(420f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "UNDO", false,
+				false);
 		undoButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -107,13 +104,12 @@ public class Level {
 		});
 		undoButton.enabled = false;
 		buttons.add(undoButton);
-		editorButton = new LevelButton(630f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
+		editorButton = new LevelButton(630f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
 				false, false);
 		editorButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
 				Game.editorMode = true;
-				clearDialogs();
 				// right click
 				if (activeActor != null) {
 					activeActor.unselected();
@@ -130,7 +126,6 @@ public class Level {
 		logs = new Vector<ActivityLog>();
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
-		dialogs = new Vector<Dialog>();
 		gameCursor = new GameCursor();
 
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f, "end_turn_button.png", "end_turn_button.png",
@@ -158,7 +153,6 @@ public class Level {
 			@Override
 			public void click() {
 				Game.editorMode = true;
-				clearDialogs();
 				// right click
 				if (activeActor != null) {
 					activeActor.unselected();
@@ -388,14 +382,6 @@ public class Level {
 		// null)
 		// Game.squareMouseIsOver.drawCursor();
 
-		// Dialogs
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				// is it better to bind once and draw all the same ones?
-				squares[i][j].drawDialogs();
-			}
-		}
-
 		if (!Game.editorMode) {
 			for (Button button : buttons) {
 				button.draw();
@@ -455,17 +441,6 @@ public class Level {
 		// } else if (currentFactionMoving != factions.get(0)) {
 		// currentFactionMoving.update(delta);
 		// }
-	}
-
-	public void clearDialogs() {
-		// Level
-		this.dialogs.clear();
-		// Squares
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				squares[i][j].dialogs.clear();
-			}
-		}
 	}
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {

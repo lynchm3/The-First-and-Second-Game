@@ -8,7 +8,7 @@ import com.marklynch.ui.ActivityLog;
 
 public class ActionAttack extends Action {
 
-	public static final String ACTION_NAME = "ATTACK";
+	public static final String ACTION_NAME = "Attack";
 
 	// Default for hostiles
 	public ActionAttack(Actor performer, GameObject targetGameObject) {

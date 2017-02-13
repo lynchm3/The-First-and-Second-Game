@@ -10,6 +10,7 @@ import org.lwjgl.util.vector.Vector3f;
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Conversation;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Pack;
 import com.marklynch.objects.Bed;
@@ -18,6 +19,9 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Owner;
 import com.marklynch.objects.Quest;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.AttackButton;
@@ -75,6 +79,8 @@ public class Actor extends ActorTemplate implements Owner {
 	private transient ArrayList<Actor> attackers;
 	public transient Quest quest;
 
+	public transient Conversation conversation;
+
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {
@@ -122,6 +128,8 @@ public class Actor extends ActorTemplate implements Owner {
 		hoverFightPreviewFights = new Vector<Fight>();
 
 		attackers = new ArrayList<Actor>();
+
+		conversation = new Conversation(null);
 	}
 
 	@Override
@@ -970,6 +978,13 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 	}
 
+	@Override
+	public void drawStaticUI() {
+
+		conversation.drawStaticUI();
+
+	}
+
 	public Vector<Float> calculateIdealDistanceFrom(GameObject target) {
 
 		Vector<Fight> fights = new Vector<Fight>();
@@ -1192,6 +1207,20 @@ public class Actor extends ActorTemplate implements Owner {
 				}
 			}
 		}
+	}
+
+	@Override
+	public Action getDefaultAction(Actor performer) {
+		if (performer.attackers.contains(this)) {
+			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
+					&& Game.level.activeActor.equippedWeapon
+							.hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn))) {
+				return new ActionAttack(performer, this);
+			}
+		} else {
+			return new ActionTalk(performer, this);
+		}
+		return null;
 	}
 
 	public boolean hasAttackers() {

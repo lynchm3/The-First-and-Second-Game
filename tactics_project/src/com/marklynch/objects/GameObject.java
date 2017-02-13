@@ -11,8 +11,10 @@ import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
-import com.marklynch.objects.units.Path;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
+import com.marklynch.objects.units.Path;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.ResourceUtils;
@@ -372,5 +374,9 @@ public class GameObject extends GameObjectTemplate {
 
 	public float getCenterY() {
 		return squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
+	}
+
+	public Action getDefaultAction(Actor performer) {
+		return null;
 	}
 }

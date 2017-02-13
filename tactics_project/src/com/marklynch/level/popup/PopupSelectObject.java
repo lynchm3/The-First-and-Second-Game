@@ -1,8 +1,8 @@
 package com.marklynch.level.popup;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.Square;
-import com.marklynch.level.UserInputLevel;
 import com.marklynch.objects.GameObject;
 import com.marklynch.ui.button.ClickListener;
 
@@ -71,10 +71,11 @@ public class PopupSelectObject extends Popup {
 	}
 
 	public void gameObjectSelected(GameObject gameObject) {
-		UserInputLevel.interactWithGameObject(gameObject);
+		gameObject.getDefaultAction(Game.level.activeActor);
 	}
 
 	public void squareSelected(Square square) {
-		UserInputLevel.interactWithSquare(square);
+		// UserInputLevel.interactWithSquare(square);
+		square.getDefaultActionForJustTheSquare(Game.level.activeActor);
 	}
 }

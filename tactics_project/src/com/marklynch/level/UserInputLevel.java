@@ -5,10 +5,7 @@ import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
 import com.marklynch.level.popup.PopupSelectObject;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Path;
 
 public class UserInputLevel {
@@ -163,7 +160,7 @@ public class UserInputLevel {
 			}
 		}
 
-		// Lifter the mouse to perform click
+		// Lifted the mouse to perform click
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
 			Game.level.popup = null;
 			if (scriptInterceptsClick) {
@@ -178,20 +175,15 @@ public class UserInputLevel {
 			}
 		}
 
+		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false) {
+			// Right Click
+			Game.level.popup = null;
+		}
+
 		if (!Mouse.isButtonDown(0)) {
 			mouseButtonStateLeft = false;
 			mouseDownX = -1;
 			mouseDownY = -1;
-		}
-
-		if (mouseButtonStateRight == false && Mouse.isButtonDown(1) && Game.level.currentFactionMovingIndex == 0) {
-			Game.level.clearDialogs();
-			if (Game.squareMouseIsOver != null) {
-				if (Game.squareMouseIsOver.showingDialogs == false)
-					Game.squareMouseIsOver.showDialogs();
-				else
-					Game.squareMouseIsOver.clearDialogs();
-			}
 		}
 
 		if (Mouse.isButtonDown(1)) {
@@ -226,47 +218,52 @@ public class UserInputLevel {
 		if (Game.level.activeActor != Game.level.factions.get(0).actors.get(0))
 			return;
 
-		Actor actorOnSquare = (Actor) square.inventory.getGameObectOfClass(Actor.class);
+		Action action = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
 
-		if (actorOnSquare != null) {
-			interactWithGameObject(actorOnSquare);
-		} else if (square.inventory.isPassable()) {
-			interactWithSquare(square);
+		if (action != null) {
+			action.perform();
+			interactedThisTurn = true;
 		} else {
 			Game.level.popup = new PopupSelectObject(100, Game.level, square);
 		}
 
 	}
 
-	public static void interactWithGameObject(GameObject gameObjectToInteractWith) {
+	// public static void interactWithGameObject(GameObject
+	// gameObjectToInteractWith) {
+	//
+	// if
+	// (Game.level.activeActor.getAttackers().contains(gameObjectToInteractWith))
+	// {
+	// if (Game.level.activeActor != null &&
+	// Game.level.activeActor.equippedWeapon != null
+	// && Game.level.activeActor.equippedWeapon.hasRange(Game.level.activeActor
+	// .straightLineDistanceTo(gameObjectToInteractWith.squareGameObjectIsOn)))
+	// {
+	// // Game.level.activeActor.attack(gameObjectToInteractWith,
+	// // false);
+	// new ActionAttack(Game.level.activeActor,
+	// gameObjectToInteractWith).perform();
+	// interactedThisTurn = true;
+	// Game.level.popup = null;
+	// }
+	// } else {
+	// // talk to the actor
+	// interactedThisTurn = true;
+	// }
+	// Game.level.popup = null;
+	//
+	// }
 
-		if (Game.level.activeActor.getAttackers().contains(gameObjectToInteractWith)) {
-			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
-					&& Game.level.activeActor.equippedWeapon.hasRange(Game.level.activeActor
-							.straightLineDistanceTo(gameObjectToInteractWith.squareGameObjectIsOn))) {
-				// Game.level.activeActor.attack(gameObjectToInteractWith,
-				// false);
-				new ActionAttack(Game.level.activeActor, gameObjectToInteractWith).perform();
-				interactedThisTurn = true;
-				Game.level.popup = null;
-			}
-		} else {
-			// talk to the actor
-			interactedThisTurn = true;
-		}
-		Game.level.popup = null;
-
-	}
-
-	public static void interactWithSquare(Square squareToInteractWith) {
-		if (squareToInteractWith.reachableBySelectedCharater) {
-			new ActionMove(Game.level.activeActor, squareToInteractWith).perform();
-			// AIRoutineUtils.moveTo(Game.level.activeActor,
-			// squareToInteractWith);
-			interactedThisTurn = true;
-		}
-		Game.level.popup = null;
-	}
+	// public static void interactWithSquare(Square squareToInteractWith) {
+	// if (squareToInteractWith.reachableBySelectedCharater) {
+	// new ActionMove(Game.level.activeActor, squareToInteractWith).perform();
+	// // AIRoutineUtils.moveTo(Game.level.activeActor,
+	// // squareToInteractWith);
+	// interactedThisTurn = true;
+	// }
+	// Game.level.popup = null;
+	// }
 
 	public static void upTyped() {
 		if (Game.level.popup != null) {
