@@ -6,6 +6,7 @@ import org.lwjgl.input.Mouse;
 import com.marklynch.Game;
 import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Path;
 
 public class UserInputLevel {
@@ -222,7 +223,8 @@ public class UserInputLevel {
 
 		if (action != null) {
 			action.perform();
-			interactedThisTurn = true;
+			if (!(action instanceof ActionTalk))
+				interactedThisTurn = true;
 		} else {
 			Game.level.popup = new PopupSelectObject(100, Game.level, square);
 		}

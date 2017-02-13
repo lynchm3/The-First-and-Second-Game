@@ -17,13 +17,12 @@ public class Conversation {
 	float x2 = width;
 	float y2 = Game.windowHeight - bottomMargin;
 
-	ArrayList<ConversationPart> conversationParts;
+	// ArrayList<ConversationPart> conversationParts;
 	public ConversationPart currentConversationPart;
 
 	public Conversation(ArrayList<ConversationPart> conversationParts) {
 		super();
-		this.conversationParts = new ArrayList<ConversationPart>();
-		ArrayList<ConversationResponse> conversationResponses = new ArrayList<ConversationResponse>();
+		// this.conversationParts = new ArrayList<ConversationPart>();
 
 		float height = 100;
 		float bottomMargin = 50;
@@ -34,12 +33,19 @@ public class Conversation {
 		float y1 = Game.windowHeight - bottomMargin - height - topMargin;
 
 		ConversationResponse end = new ConversationResponse("End", null, x1, y1, width, height);
-		conversationResponses.add(end);
+		ArrayList<ConversationResponse> conversationResponses2 = new ArrayList<ConversationResponse>();
+		conversationResponses2.add(end);
+		ConversationPart conversationPart2 = new ConversationPart("What are you doing here?", conversationResponses2);
 
-		ConversationPart conversationPart1 = new ConversationPart("Hello, How are you?", conversationResponses);
-		this.conversationParts.add(conversationPart1);
+		ConversationResponse next = new ConversationResponse("Next", conversationPart2, x1, y1, width, height);
+		ArrayList<ConversationResponse> conversationResponses1 = new ArrayList<ConversationResponse>();
+		conversationResponses1.add(next);
+		conversationResponses1.add(end);
 
-		currentConversationPart = this.conversationParts.get(0);
+		currentConversationPart = new ConversationPart("Hello, How are you?", conversationResponses1);
+		// this.conversationParts.add(conversationPart1);
+
+		// currentConversationPart = this.conversationParts.get(0);
 	}
 
 	public void drawStaticUI() {

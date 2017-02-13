@@ -38,7 +38,11 @@ public class WindowSelectConversationResponse {
 
 		float height = 100;
 		float bottomMargin = 50;
-		float conversationTop = Game.windowHeight - bottomMargin - height;
+		float conversationTop = 150;
+
+		float buttonHeight = 30;
+
+		float positionOfTopButton = conversationTop + conversationResponses.size() * buttonHeight;
 
 		for (int i = 0; i < conversationResponses.size(); i++) {
 			final int index = i;
@@ -48,8 +52,8 @@ public class WindowSelectConversationResponse {
 
 			// BUT... I dont want the buttons to zoom :P
 
-			final LevelButton responseButton = new LevelButton(0, conversationTop - i * 30, 200, 30, null, null,
-					"" + conversationResponses.get(i).text, true, true);
+			final LevelButton responseButton = new LevelButton(200, positionOfTopButton - i * 30, Game.halfWindowWidth,
+					buttonHeight, null, null, "" + conversationResponses.get(i).text, false, false);
 
 			responseButton.clickListener = new ClickListener() {
 
@@ -63,21 +67,6 @@ public class WindowSelectConversationResponse {
 					} else {
 						Game.level.conversation.currentConversationPart = nextConversationPart;
 					}
-
-					// gameObjectSelected(square.inventory.get(index));
-					// // editor.popupSelectObject = null; MAYYBE?
-					//
-					// // editor.clearSelectedObject();
-					// // editor.depressButtonsSettingsAndDetailsButtons();
-					// // editor.editor.editorState =
-					// // EDITOR_STATE.MOVEABLE_OBJECT_SELECTED;
-					// // editor.selectedGameObject =
-					// // Game.level.inanimateObjects.get(index);
-					// // editor.attributesWindow = new AttributesDialog(200,
-					// 200,
-					// // 200, editor.selectedGameObject, editor);
-					// // // getButton(editor.selectedGameObject).down = true;
-					// // objectButton.down = true;
 				}
 			};
 			buttons.add(responseButton);
