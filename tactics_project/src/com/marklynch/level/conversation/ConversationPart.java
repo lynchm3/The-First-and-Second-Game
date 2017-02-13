@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs;
+package com.marklynch.level.conversation;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,7 @@ public class ConversationPart {
 	public String text;
 	int textWidth;
 	int halfTextWidth;
+	PopupSelectResponse popupSelectResponse;
 
 	public ConversationPart(String text, ArrayList<ConversationResponse> conversationResponses) {
 		super();
@@ -18,6 +19,9 @@ public class ConversationPart {
 		this.text = text;
 		textWidth = Game.font.getWidth(text);
 		halfTextWidth = textWidth / 2;
+
+		popupSelectResponse = new PopupSelectResponse(100, Game.level, conversationResponses);
+
 	}
 
 	public void drawStaticUI() {
@@ -32,11 +36,7 @@ public class ConversationPart {
 
 		TextUtils.printTextWithImages(new Object[] { text }, x1, y1, maxWidth, true);
 
-		// QuadUtils.drawQuad(Color.BLACK, x1, x2, y1, y2);
-
-		for (ConversationResponse conversationResponse : conversationResponses) {
-			conversationResponse.drawStaticUI();
-		}
+		popupSelectResponse.draw();
 
 	}
 

@@ -7,6 +7,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.ui.button.ClickListener;
 
 public class PopupSelectObject extends Popup {
+	public PopupButton selectSquareButton;
 
 	public PopupSelectObject(float width, Level level, Square square) {
 

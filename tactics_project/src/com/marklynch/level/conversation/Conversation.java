@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs;
+package com.marklynch.level.conversation;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,16 @@ public class Conversation {
 		super();
 		this.conversationParts = new ArrayList<ConversationPart>();
 		ArrayList<ConversationResponse> conversationResponses = new ArrayList<ConversationResponse>();
-		ConversationResponse end = new ConversationResponse("End", null);
+
+		float height = 100;
+		float bottomMargin = 50;
+		float topMargin = 25;
+		float width = 100;
+		float halfTextWidth = Game.font.getWidth("End") / 2;
+		float x1 = Game.halfWindowWidth - halfTextWidth;
+		float y1 = Game.windowHeight - bottomMargin - height - topMargin;
+
+		ConversationResponse end = new ConversationResponse("End", null, x1, y1, width, height);
 		conversationResponses.add(end);
 
 		ConversationPart conversationPart1 = new ConversationPart("Hello, How are you?", conversationResponses);
@@ -34,7 +43,6 @@ public class Conversation {
 		float y1 = Game.windowHeight - bottomMargin - height;
 		float x2 = width;
 		float y2 = Game.windowHeight - bottomMargin;
-
 		QuadUtils.drawQuad(Color.BLACK, x1, x2, y1, y2);
 		// TextUtils.printTextWithImages(new Object[] { object }, realX, realY,
 		// Integer.MAX_VALUE, true);
