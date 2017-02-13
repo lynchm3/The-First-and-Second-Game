@@ -13,10 +13,11 @@ public class Popup {
 	public Vector<PopupButton> buttons = new Vector<PopupButton>();
 	public Level level;
 	public Square square;
+	public PopupButton selectSquareButton;
 	public float drawPositionX, drawPositionY;
 
-	protected Button highlightedButton;
-	protected int highlightedButtonIndex = 0;
+	Button highlightedButton;
+	int highlightedButtonIndex = 0;
 
 	public Popup(float width, Level level, Square square) {
 		this.width = width;

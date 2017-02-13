@@ -11,7 +11,7 @@ public class ConversationPart {
 	public String text;
 	int textWidth;
 	int halfTextWidth;
-	PopupSelectResponse popupSelectResponse;
+	public WindowSelectConversationResponse windowSelectConversationResponse;
 
 	public ConversationPart(String text, ArrayList<ConversationResponse> conversationResponses) {
 		super();
@@ -20,7 +20,7 @@ public class ConversationPart {
 		textWidth = Game.font.getWidth(text);
 		halfTextWidth = textWidth / 2;
 
-		popupSelectResponse = new PopupSelectResponse(100, Game.level, conversationResponses);
+		windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level, conversationResponses);
 
 	}
 
@@ -36,7 +36,7 @@ public class ConversationPart {
 
 		TextUtils.printTextWithImages(new Object[] { text }, x1, y1, maxWidth, true);
 
-		popupSelectResponse.draw();
+		windowSelectConversationResponse.draw();
 
 	}
 

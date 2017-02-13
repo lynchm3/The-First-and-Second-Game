@@ -9,8 +9,16 @@ import mdesl.graphics.Color;
 
 public class Conversation {
 
+	final float height = 100;
+	final float bottomMargin = 50;
+	float width = Game.windowWidth;
+	float x1 = 0;
+	float y1 = Game.windowHeight - bottomMargin - height;
+	float x2 = width;
+	float y2 = Game.windowHeight - bottomMargin;
+
 	ArrayList<ConversationPart> conversationParts;
-	ConversationPart currentConversationPart;
+	public ConversationPart currentConversationPart;
 
 	public Conversation(ArrayList<ConversationPart> conversationParts) {
 		super();
@@ -36,13 +44,10 @@ public class Conversation {
 
 	public void drawStaticUI() {
 
-		float height = 100;
-		float bottomMargin = 50;
-		float width = Game.windowWidth;
-		float x1 = 0;
-		float y1 = Game.windowHeight - bottomMargin - height;
-		float x2 = width;
-		float y2 = Game.windowHeight - bottomMargin;
+		width = Game.windowWidth;
+		y1 = Game.windowHeight - bottomMargin - height;
+		x2 = width;
+		y2 = Game.windowHeight - bottomMargin;
 		QuadUtils.drawQuad(Color.BLACK, x1, x2, y1, y2);
 		// TextUtils.printTextWithImages(new Object[] { object }, realX, realY,
 		// Integer.MAX_VALUE, true);

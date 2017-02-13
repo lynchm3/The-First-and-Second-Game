@@ -2,7 +2,6 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.ui.ActivityLog;
 
 public class ActionTalk extends Action {
 
@@ -16,7 +15,9 @@ public class ActionTalk extends Action {
 	@Override
 	public void perform() {
 
-		Game.level.logOnScreen(new ActivityLog(new Object[] { "Talking to ", target }));
+		// Game.level.logOnScreen(new ActivityLog(new Object[] { "Talking to ",
+		// target }));
+		Game.level.conversation = ((Actor) target).conversation;
 
 	}
 

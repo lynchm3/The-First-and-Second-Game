@@ -11,6 +11,7 @@ import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
@@ -45,6 +46,7 @@ public class Level {
 
 	public Popup popup;
 	public Toast toast;
+	public Conversation conversation;
 	public transient LevelButton endTurnButton;
 	public transient LevelButton undoButton;
 	public transient LevelButton editorButton;
@@ -413,6 +415,9 @@ public class Level {
 		// }
 		// }
 
+		if (conversation != null)
+			conversation.drawStaticUI();
+
 		// script
 		script.draw();
 
@@ -444,6 +449,13 @@ public class Level {
 	}
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
+
+		if (conversation != null) {
+			for (Button button : conversation.currentConversationPart.windowSelectConversationResponse.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
+		}
 
 		for (Button button : this.buttons) {
 			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))

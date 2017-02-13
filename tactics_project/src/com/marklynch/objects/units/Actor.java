@@ -981,8 +981,6 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public void drawStaticUI() {
 
-		conversation.drawStaticUI();
-
 	}
 
 	public Vector<Float> calculateIdealDistanceFrom(GameObject target) {
