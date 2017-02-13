@@ -11,46 +11,49 @@ public class ActionAttack extends Action {
 	public static final String ACTION_NAME = "ATTACK";
 
 	// Default for hostiles
-	public ActionAttack(Actor performer, GameObject target) {
-		super(ACTION_NAME, performer, target);
+	public ActionAttack(Actor performer, GameObject targetGameObject) {
+		super(ACTION_NAME, performer, targetGameObject);
 	}
 
+	@Override
 	public void perform() {
-		// performer.attack(target, false);
+		// performer.attack(targetGameObject, false);
 
-		performer.manageAttackerReferences(target);
-		performer.manageAttackerReferencesForNearbyAllies(target);
-		performer.manageAttackerReferencesForNearbyEnemies(target);
+		GameObject targetGameObject = (GameObject) target;
 
-		target.remainingHealth -= performer.equippedWeapon.damage;
+		performer.manageAttackerReferences(targetGameObject);
+		performer.manageAttackerReferencesForNearbyAllies(targetGameObject);
+		performer.manageAttackerReferencesForNearbyEnemies(targetGameObject);
+
+		targetGameObject.remainingHealth -= performer.equippedWeapon.damage;
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 		String attackTypeString;
 		attackTypeString = "attacked ";
 		Game.level.logOnScreen(new ActivityLog(new Object[] {
 
-				this, " " + attackTypeString + " ", target, " with ", performer.equippedWeapon.imageTexture,
+				this, " " + attackTypeString + " ", targetGameObject, " with ", performer.equippedWeapon.imageTexture,
 				" for " + performer.equippedWeapon.damage + " damage" }));
 
 		Actor actor = null;
-		if (target instanceof Actor)
-			actor = (Actor) target;
+		if (targetGameObject instanceof Actor)
+			actor = (Actor) targetGameObject;
 
-		if (target.checkIfDestroyed()) {
-			if (target instanceof Actor) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " killed ", target }));
-				((Actor) target).faction.checkIfDestroyed();
+		if (targetGameObject.checkIfDestroyed()) {
+			if (targetGameObject instanceof Actor) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " killed ", targetGameObject }));
+				((Actor) targetGameObject).faction.checkIfDestroyed();
 			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " destroyed a ", target }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " destroyed a ", targetGameObject }));
 			}
 
 		}
 
 		// shoot projectile
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			Game.level.projectiles.add(new Projectile(performer, target, 5f, true, "hunter.png"));
+		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
+			Game.level.projectiles.add(new Projectile(performer, targetGameObject, 5f, true, "hunter.png"));
 		} else {
-			performer.showPow(target);
+			performer.showPow(targetGameObject);
 		}
 
 		if (performer.faction == Game.level.factions.get(0)) {

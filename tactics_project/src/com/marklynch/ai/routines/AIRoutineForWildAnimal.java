@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionMove;
 
 public class AIRoutineForWildAnimal extends AIRoutine {
 	Square targetSquare;
@@ -43,7 +44,8 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 		if (targetSquare != null) {
 			Square squareToMoveTo = AIRoutineUtils
 					.getSquareToMoveAlongPath(Game.level.activeActor.paths.get(targetSquare));
-			AIRoutineUtils.moveTo(Game.level.activeActor, squareToMoveTo);
+			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
+			// AIRoutineUtils.moveTo(Game.level.activeActor, squareToMoveTo);
 			if (Game.level.activeActor.squareGameObjectIsOn == targetSquare)
 				targetSquare = null;
 		}

@@ -4,10 +4,10 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
-import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Path;
 
@@ -260,7 +260,9 @@ public class UserInputLevel {
 
 	public static void interactWithSquare(Square squareToInteractWith) {
 		if (squareToInteractWith.reachableBySelectedCharater) {
-			AIRoutineUtils.moveTo(Game.level.activeActor, squareToInteractWith);
+			new ActionMove(Game.level.activeActor, squareToInteractWith).perform();
+			// AIRoutineUtils.moveTo(Game.level.activeActor,
+			// squareToInteractWith);
 			interactedThisTurn = true;
 		}
 		Game.level.popup = null;

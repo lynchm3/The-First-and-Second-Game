@@ -8,6 +8,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fight;
 import com.marklynch.objects.units.Path;
@@ -243,7 +244,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToToAttackTarget(target);
 
 		if (squareToMoveTo != null) {
-			moveTo(Game.level.activeActor, squareToMoveTo);
+			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
 			return true;
 		} else {
 			return false;
@@ -282,7 +283,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target, 0f);
 
 		if (squareToMoveTo != null) {
-			moveTo(Game.level.activeActor, squareToMoveTo);
+			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
 			return true;
 		} else {
 			return false;
@@ -325,7 +326,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target, 1f);
 
 		if (squareToMoveTo != null) {
-			moveTo(Game.level.activeActor, squareToMoveTo);
+			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
 			return true;
 		} else {
 			return false;
@@ -425,7 +426,7 @@ public class AIRoutineUtils {
 			squareToMoveTo = calculateSquareToMoveToToAttackTarget(fights.get(0).defender);
 
 		if (squareToMoveTo != null) {
-			moveTo(Game.level.activeActor, squareToMoveTo);
+			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
 			return true;
 		} else {
 			return false;
@@ -555,7 +556,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
 
 		if (squareToMoveTo != null) {
-			moveTo(Game.level.activeActor, squareToMoveTo);
+			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
 			return true;
 		} else {
 			return false;
@@ -606,7 +607,7 @@ public class AIRoutineUtils {
 		if (reachableSquares.size() > 0) {
 			int random = (int) (Math.random() * (reachableSquares.size() - 1));
 			Square squareToMoveTo = reachableSquares.get(random);
-			moveTo(Game.level.activeActor, squareToMoveTo);
+			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
 			return true;
 		} else {
 			return false;
@@ -705,36 +706,6 @@ public class AIRoutineUtils {
 		} else {
 			return false;
 		}
-	}
-
-	public static void moveTo(Actor actor, Square squareToMoveTo) {
-
-		if (actor.travelDistance - actor.distanceMovedThisTurn <= 0)
-			return;
-
-		if (squareToMoveTo == actor.squareGameObjectIsOn || !squareToMoveTo.inventory.isPassable())
-			return;
-
-		Square oldSquare = actor.squareGameObjectIsOn;
-		Actor actorInTheWay = (Actor) squareToMoveTo.inventory.getGameObjectThatCantShareSquare();
-
-		if (actorInTheWay == null) {
-			move(actor, squareToMoveTo);
-		} else if (actorInTheWay != null && (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn > 0)) {
-			move(actorInTheWay, oldSquare);
-			move(actor, squareToMoveTo);
-		} else {
-			// There's someone in the way, but they dont have the movement
-			// points to swap with u, wait till next turn
-		}
-	}
-
-	private static void move(Actor actor, Square square) {
-		actor.squareGameObjectIsOn.inventory.remove(actor);
-		actor.distanceMovedThisTurn += 1;
-		actor.squareGameObjectIsOn = square;
-		square.inventory.add(actor);
-		// Actor.highlightSelectedCharactersSquares();
 	}
 
 	public AIRoutineUtils makeCopy() {

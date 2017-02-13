@@ -6,6 +6,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Quest;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
 
 public class Pack {
@@ -101,7 +102,7 @@ public class Pack {
 
 			if (targetSquare != null) {
 				Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(actor.paths.get(targetSquare));
-				AIRoutineUtils.moveTo(actor, squareToMoveTo);
+				new ActionMove(actor, squareToMoveTo).perform();
 				if (actor.squareGameObjectIsOn == targetSquare)
 					targetSquare = null;
 			}
