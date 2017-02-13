@@ -6,12 +6,12 @@ import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.ScriptEventEndLevel;
-import com.marklynch.tactics.objects.level.script.ScriptEventGroup;
-import com.marklynch.tactics.objects.level.script.ScriptEventInlineSpeech;
-import com.marklynch.tactics.objects.level.script.ScriptEventSetAI;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech;
+import com.marklynch.script.ScriptEvent;
+import com.marklynch.script.ScriptEventEndLevel;
+import com.marklynch.script.ScriptEventGroup;
+import com.marklynch.script.ScriptEventInlineSpeech;
+import com.marklynch.script.ScriptEventSetAI;
+import com.marklynch.script.ScriptEventSpeech;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 

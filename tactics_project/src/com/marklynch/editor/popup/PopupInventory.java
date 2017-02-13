@@ -3,8 +3,8 @@ package com.marklynch.editor.popup;
 import java.util.ArrayList;
 
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.level.Square;
+import com.marklynch.objects.GameObject;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.PopupButton;
 

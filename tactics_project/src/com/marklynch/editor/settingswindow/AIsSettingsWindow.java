@@ -3,14 +3,14 @@ package com.marklynch.editor.settingswindow;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.ai.routines.AIRoutineFreeze;
+import com.marklynch.ai.routines.AIRoutineMoveToSquare;
+import com.marklynch.ai.routines.AIRoutineStationary;
+import com.marklynch.ai.routines.AIRoutineTargetObject;
+import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineFreeze;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineMoveToSquare;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineStationary;
-import com.marklynch.tactics.objects.unit.ai.routines.AIRoutineTargetObject;
-import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 

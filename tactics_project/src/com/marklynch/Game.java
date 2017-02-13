@@ -10,11 +10,13 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import com.marklynch.editor.Editor;
+import com.marklynch.editor.UserInputEditor;
 import com.marklynch.graphics.ShadowLight;
-import com.marklynch.tactics.objects.Inventory;
-import com.marklynch.tactics.objects.InventorySquare;
-import com.marklynch.tactics.objects.level.Level;
-import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.level.Level;
+import com.marklynch.level.Square;
+import com.marklynch.level.UserInputLevel;
+import com.marklynch.objects.Inventory;
+import com.marklynch.objects.InventorySquare;
 import com.marklynch.ui.button.Button;
 
 import mdesl.graphics.SpriteBatch;

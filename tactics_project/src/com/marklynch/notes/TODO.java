@@ -33,6 +33,8 @@ public class TODO {
 	// ko... something? Okami! Look up the legend that its based on. Im sure
 	// there was another name for the dog-god
 	// Cub is white with tint of blue
+	// DOn't make the hunters so bad, they're down on their luck, there's no
+	// winners :) grey area for all
 
 	// Ancient roman town, british town, celtic town
 

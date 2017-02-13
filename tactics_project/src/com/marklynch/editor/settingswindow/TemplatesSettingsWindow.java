@@ -2,7 +2,7 @@ package com.marklynch.editor.settingswindow;
 
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.weapons.WeaponTemplate;
+import com.marklynch.objects.weapons.WeaponTemplate;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 

@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.level.Square;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.PopupButton;
 

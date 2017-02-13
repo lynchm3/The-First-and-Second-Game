@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor.EDITOR_STATE;
-import com.marklynch.tactics.objects.GameObjectTemplate;
+import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;

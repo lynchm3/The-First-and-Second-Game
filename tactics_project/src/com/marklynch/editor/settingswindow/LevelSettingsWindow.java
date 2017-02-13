@@ -13,8 +13,8 @@ import com.google.gson.JsonSerializer;
 import com.marklynch.Game;
 import com.marklynch.SaveAndLoad;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTriggerActorSelected;
-import com.marklynch.tactics.objects.unit.Actor;
+import com.marklynch.objects.units.Actor;
+import com.marklynch.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 

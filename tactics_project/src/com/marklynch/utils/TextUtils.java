@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.GameObjectTemplate;
-import com.marklynch.tactics.objects.level.Decoration;
-import com.marklynch.tactics.objects.level.Faction;
-import com.marklynch.tactics.objects.level.FactionRelationship;
-import com.marklynch.tactics.objects.level.Square;
-import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
-import com.marklynch.tactics.objects.unit.Actor;
-import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
+import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.Decoration;
+import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.FactionRelationship;
+import com.marklynch.objects.GameObjectTemplate;
+import com.marklynch.objects.units.Actor;
+import com.marklynch.script.ScriptEvent;
+import com.marklynch.script.ScriptEventSpeech.SpeechPart;
+import com.marklynch.script.trigger.ScriptTrigger;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;

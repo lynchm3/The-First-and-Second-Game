@@ -3,9 +3,9 @@ package com.marklynch.editor;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.script.ScriptEvent;
-import com.marklynch.tactics.objects.level.script.trigger.ScriptTrigger;
-import com.marklynch.tactics.objects.unit.ai.utils.AIRoutineUtils;
+import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.script.ScriptEvent;
+import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;

@@ -3,8 +3,8 @@ package com.marklynch.editor.settingswindow;
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.level.Faction;
-import com.marklynch.tactics.objects.level.FactionRelationship;
+import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 

@@ -6,7 +6,7 @@ import mdesl.graphics.Texture;
 import org.lwjgl.opengl.GL11;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.level.Square;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.level.script.ScriptEventSpeech.SpeechPart;
+import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 

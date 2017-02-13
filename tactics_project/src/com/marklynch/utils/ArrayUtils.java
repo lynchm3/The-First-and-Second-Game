@@ -1,6 +1,6 @@
 package com.marklynch.utils;
 
-import com.marklynch.tactics.objects.level.Square;
+import com.marklynch.level.Square;
 
 public class ArrayUtils {
 

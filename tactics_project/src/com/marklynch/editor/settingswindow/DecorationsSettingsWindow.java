@@ -3,7 +3,7 @@ package com.marklynch.editor.settingswindow;
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
-import com.marklynch.tactics.objects.level.Decoration;
+import com.marklynch.level.Decoration;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 

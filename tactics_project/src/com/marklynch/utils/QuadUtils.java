@@ -1,9 +1,9 @@
 package com.marklynch.utils;
 
+import com.marklynch.Game;
+
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
-
-import com.marklynch.Game;
 
 public class QuadUtils {
 

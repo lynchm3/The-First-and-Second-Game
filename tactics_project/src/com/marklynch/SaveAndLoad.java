@@ -11,9 +11,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.level.Faction;
-import com.marklynch.tactics.objects.level.Level;
+import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Faction;
+import com.marklynch.objects.GameObject;
 import com.marklynch.utils.FileUtils;
 
 public class SaveAndLoad {

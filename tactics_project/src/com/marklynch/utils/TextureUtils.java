@@ -5,7 +5,7 @@ import static org.lwjgl.opengl.GL13.GL_TEXTURE1;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 import com.marklynch.Game;
-import com.marklynch.tactics.objects.GameObject;
+import com.marklynch.objects.GameObject;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
