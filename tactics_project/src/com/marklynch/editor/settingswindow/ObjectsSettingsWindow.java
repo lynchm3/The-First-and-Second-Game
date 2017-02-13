@@ -6,11 +6,11 @@ import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.Editor.EDITOR_STATE;
+import com.marklynch.level.constructs.Faction;
+import com.marklynch.objects.GameObject;
+import com.marklynch.objects.GameObjectTemplate;
+import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.editor.InstanceSelectionWindow;
-import com.marklynch.tactics.objects.GameObject;
-import com.marklynch.tactics.objects.GameObjectTemplate;
-import com.marklynch.tactics.objects.level.Faction;
-import com.marklynch.tactics.objects.weapons.Weapon;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
