@@ -47,6 +47,8 @@ public class Game {
 
 	public static float windowWidth = 800;
 	public static float windowHeight = 600;
+	public static float halfWindowWidth = windowWidth / 2;
+	public static float halfWindowHeight = windowHeight / 2;
 
 	public static Square squareMouseIsOver;
 	public static float dragY = -100;
@@ -208,6 +210,8 @@ public class Game {
 	public void resize() {
 		windowWidth = Display.getWidth();
 		windowHeight = Display.getHeight();
+		halfWindowWidth = Display.getWidth() / 2;
+		halfWindowHeight = Display.getHeight() / 2;
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
 
 		ShadowLight.resize();
