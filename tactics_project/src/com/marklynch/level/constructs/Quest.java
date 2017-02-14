@@ -1,5 +1,6 @@
-package com.marklynch.objects;
+package com.marklynch.level.constructs;
 
+import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;
 
 public class Quest {
@@ -16,6 +17,10 @@ public class Quest {
 	// Called my members of quest when they dont know what to do
 	public void update(Actor actor) {
 
+	}
+
+	public Conversation getConversation(Actor actor) {
+		return null;
 	}
 
 }

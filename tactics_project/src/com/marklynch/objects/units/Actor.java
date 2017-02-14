@@ -12,13 +12,13 @@ import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Pack;
+import com.marklynch.level.constructs.Quest;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Owner;
-import com.marklynch.objects.Quest;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionTalk;
@@ -128,8 +128,6 @@ public class Actor extends ActorTemplate implements Owner {
 		hoverFightPreviewFights = new Vector<Fight>();
 
 		attackers = new ArrayList<Actor>();
-
-		conversation = new Conversation(null);
 	}
 
 	@Override
@@ -1227,5 +1225,32 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public ArrayList<Actor> getAttackers() {
 		return attackers;
+	}
+
+	public Conversation getConversation() {
+
+		Quest quest;
+		if (pack != null) {
+			quest = pack.quest;
+		} else {
+			quest = this.quest;
+		}
+
+		System.out.println("Actor.getConversation()");
+		if (quest != null) {
+			System.out.println("Actor.getConversation() a");
+			Conversation questConversation = null;
+			questConversation = quest.getConversation(this);
+			System.out.println("Actor.getConversation() b questConversation = " + questConversation);
+
+			if (questConversation != null) {
+				System.out.println("Actor.getConversation() c");
+				return questConversation;
+			}
+
+		}
+
+		System.out.println("Actor.getConversation() d");
+		return this.conversation;
 	}
 }

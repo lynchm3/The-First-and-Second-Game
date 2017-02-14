@@ -1,7 +1,5 @@
 package com.marklynch.level.conversation;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.utils.QuadUtils;
 
@@ -18,9 +16,10 @@ public class Conversation {
 	float y2 = Game.windowHeight - bottomMargin;
 
 	// ArrayList<ConversationPart> conversationParts;
+	public ConversationPart openingConversationPart;
 	public ConversationPart currentConversationPart;
 
-	public Conversation(ArrayList<ConversationPart> conversationParts) {
+	public Conversation(ConversationPart openingConversationPart) {
 		super();
 		// this.conversationParts = new ArrayList<ConversationPart>();
 
@@ -32,20 +31,20 @@ public class Conversation {
 		float x1 = Game.halfWindowWidth - halfTextWidth;
 		float y1 = Game.windowHeight - bottomMargin - height - topMargin;
 
-		ConversationResponse end = new ConversationResponse("End", null, x1, y1, width, height);
-		ArrayList<ConversationResponse> conversationResponses2 = new ArrayList<ConversationResponse>();
-		conversationResponses2.add(end);
-		ConversationPart conversationPart2 = new ConversationPart("What are you doing here?", conversationResponses2);
+		this.openingConversationPart = this.currentConversationPart = openingConversationPart;
 
-		ConversationResponse next = new ConversationResponse("Next", conversationPart2, x1, y1, width, height);
-		ArrayList<ConversationResponse> conversationResponses1 = new ArrayList<ConversationResponse>();
-		conversationResponses1.add(next);
-		conversationResponses1.add(end);
-
-		currentConversationPart = new ConversationPart("Hello, How are you?", conversationResponses1);
-		// this.conversationParts.add(conversationPart1);
-
-		// currentConversationPart = this.conversationParts.get(0);
+		// ConversationResponse end = new ConversationResponse("End", null);
+		// ConversationResponse[] conversationResponses2 = { end };
+		// ConversationPart conversationPart2 = new ConversationPart("What are
+		// you doing here?", conversationResponses2,
+		// talker);
+		//
+		// ConversationResponse next = new ConversationResponse("Next",
+		// conversationPart2);
+		// ConversationResponse[] conversationResponses1 = { next, end };
+		//
+		// currentConversationPart = new ConversationPart("Hello, How are you?",
+		// conversationResponses1, talker);
 	}
 
 	public void drawStaticUI() {
@@ -54,11 +53,12 @@ public class Conversation {
 		y1 = Game.windowHeight - bottomMargin - height;
 		x2 = width;
 		y2 = Game.windowHeight - bottomMargin;
+		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, Game.windowWidth, 0, Game.windowHeight);
 		QuadUtils.drawQuad(Color.BLACK, x1, x2, y1, y2);
+		currentConversationPart.drawStaticUI1();
+		currentConversationPart.drawStaticUI2();
 		// TextUtils.printTextWithImages(new Object[] { object }, realX, realY,
 		// Integer.MAX_VALUE, true);
-
-		currentConversationPart.drawStaticUI();
 
 	}
 }

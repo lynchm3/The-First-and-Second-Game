@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Quest;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
 

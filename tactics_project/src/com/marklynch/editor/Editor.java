@@ -30,13 +30,13 @@ import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.Pack;
+import com.marklynch.level.constructs.QuestSmallGame;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectExploder;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Junk;
-import com.marklynch.objects.QuestSmallGame;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.ActorTemplate;
 import com.marklynch.objects.units.Hunter;
@@ -420,8 +420,8 @@ public class Editor {
 
 		ArrayList<Square> doorLocations2 = new ArrayList<Square>();
 		doorLocations2.add(Game.level.squares[7][9]);
-		doorLocations2.add(Game.level.squares[11][9]);
-		Game.level.buildings.add(new Building("Hunter John's Home", 7, 7, 11, 11, doorLocations2));
+		// doorLocations2.add(Game.level.squares[11][9]);
+		Game.level.buildings.add(new Building("Hunter Brent's Home", 7, 7, 11, 11, doorLocations2));
 
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )
@@ -516,6 +516,16 @@ public class Editor {
 		new GameObject("Hunt Plan", 5, "hunt_plan.png", Game.level.squares[6][8], new Inventory(), true, false, false,
 				true);
 
+		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
+				"environmentalist.png", Game.level.squares[5][12], 1, bedForHunterBront, inventoryForActor1.makeCopy(),
+				true, false, true);
+		environmentalistBill.faction = Game.level.factions.get(1);
+		environmentalistBill.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(environmentalistBill);
+		for (int i = 0; i < environmentalistBill.inventory.size(); i++) {
+			environmentalistBill.inventory.get(i).inventoryThatHoldsThisObject = environmentalistBill.inventory;
+		}
+
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[9][6], 1, null, inventoryForWildAnimal, true, false, true);
 		superWolf.faction = Game.level.factions.get(2);
@@ -540,7 +550,7 @@ public class Editor {
 		wolfPackMembers.add(wolf3);
 		Pack wolfPack = new Pack("Wolf pack", wolfPackMembers, superWolf);
 
-		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, superWolf, wolfPack, null);
+		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, null, new Inventory(), true, false, true);

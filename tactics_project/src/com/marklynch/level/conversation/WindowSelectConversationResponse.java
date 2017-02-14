@@ -1,6 +1,5 @@
 package com.marklynch.level.conversation;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 import com.marklynch.Game;
@@ -22,10 +21,9 @@ public class WindowSelectConversationResponse {
 	Button highlightedButton;
 	int highlightedButtonIndex = 0;
 
-	ArrayList<ConversationResponse> conversationResponses;
+	ConversationResponse[] conversationResponses;
 
-	public WindowSelectConversationResponse(float width, Level level,
-			ArrayList<ConversationResponse> conversationResponses) {
+	public WindowSelectConversationResponse(float width, Level level, ConversationResponse[] conversationResponses) {
 
 		this.conversationResponses = conversationResponses;
 		updateObjectsButtons();
@@ -42,9 +40,9 @@ public class WindowSelectConversationResponse {
 
 		float buttonHeight = 30;
 
-		float positionOfTopButton = conversationTop + conversationResponses.size() * buttonHeight;
+		float positionOfTopButton = conversationTop + conversationResponses.length * buttonHeight;
 
-		for (int i = 0; i < conversationResponses.size(); i++) {
+		for (int i = 0; i < conversationResponses.length; i++) {
 			final int index = i;
 
 			// The line and the highlight are drawn in relation to zoom and
@@ -53,20 +51,14 @@ public class WindowSelectConversationResponse {
 			// BUT... I dont want the buttons to zoom :P
 
 			final LevelButton responseButton = new LevelButton(200, positionOfTopButton - i * 30, Game.halfWindowWidth,
-					buttonHeight, null, null, "" + conversationResponses.get(i).text, false, false);
+					buttonHeight, null, null, "" + conversationResponses[i].text, false, false);
 
 			responseButton.clickListener = new ClickListener() {
 
 				@Override
 				public void click() {
 
-					ConversationResponse conversationResponse = conversationResponses.get(index);
-					ConversationPart nextConversationPart = conversationResponse.nextConversationPart;
-					if (nextConversationPart == null) {
-						Game.level.conversation = null;
-					} else {
-						Game.level.conversation.currentConversationPart = nextConversationPart;
-					}
+					conversationResponses[index].select();
 				}
 			};
 			buttons.add(responseButton);

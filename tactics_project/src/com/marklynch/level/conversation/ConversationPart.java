@@ -1,22 +1,24 @@
 package com.marklynch.level.conversation;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.TextureUtils;
 
 public class ConversationPart {
 
-	public ArrayList<ConversationResponse> conversationResponses;
+	public ConversationResponse[] conversationResponses;
 	public String text;
 	int textWidth;
 	int halfTextWidth;
 	public WindowSelectConversationResponse windowSelectConversationResponse;
+	public Actor talker;
 
-	public ConversationPart(String text, ArrayList<ConversationResponse> conversationResponses) {
+	public ConversationPart(String text, ConversationResponse[] conversationResponses, Actor talker) {
 		super();
 		this.conversationResponses = conversationResponses;
 		this.text = text;
+		this.talker = talker;
 		textWidth = Game.font.getWidth(text);
 		halfTextWidth = textWidth / 2;
 
@@ -24,8 +26,20 @@ public class ConversationPart {
 
 	}
 
-	public void drawStaticUI() {
-		// TODO Auto-generated method stub
+	public void drawStaticUI1() {
+
+		TextureUtils.drawTexture(talker.imageTexture, 1.0f, 0, Game.halfWindowHeight, Game.halfWindowHeight,
+				Game.windowHeight);
+
+		TextureUtils.drawTexture(Game.level.activeActor.imageTexture, 1.0f, Game.windowWidth,
+				Game.windowWidth - Game.halfWindowHeight, Game.halfWindowHeight, Game.windowHeight);
+
+		windowSelectConversationResponse.draw();
+
+	}
+
+	public void drawStaticUI2() {
+		// Text
 
 		float height = 100;
 		float bottomMargin = 50;
@@ -35,8 +49,6 @@ public class ConversationPart {
 		float y1 = Game.windowHeight - bottomMargin - height + topMargin;
 
 		TextUtils.printTextWithImages(new Object[] { text }, x1, y1, maxWidth, true);
-
-		windowSelectConversationResponse.draw();
 
 	}
 

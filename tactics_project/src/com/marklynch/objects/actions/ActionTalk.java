@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;
 
 public class ActionTalk extends Action {
@@ -17,7 +18,15 @@ public class ActionTalk extends Action {
 
 		// Game.level.logOnScreen(new ActivityLog(new Object[] { "Talking to ",
 		// target }));
-		Game.level.conversation = ((Actor) target).conversation;
+
+		System.out.println("ActionTalk.perform");
+
+		Conversation conversation = ((Actor) target).getConversation();
+		if (conversation != null) {
+			conversation.currentConversationPart = conversation.openingConversationPart;
+			Game.level.conversation = conversation;
+
+		}
 
 	}
 

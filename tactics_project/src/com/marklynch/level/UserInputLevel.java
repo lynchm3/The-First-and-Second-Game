@@ -170,6 +170,8 @@ public class UserInputLevel {
 			} else if (Game.buttonHoveringOver != null && Game.level.currentFactionMovingIndex == 0) {
 				// Click button
 				Game.buttonHoveringOver.click();
+			} else if (Game.level.conversation != null) {
+
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
 				if (Game.level.activeActor == Game.level.factions.get(0).actors.get(0))
 					interactWith(Game.squareMouseIsOver);
@@ -197,7 +199,11 @@ public class UserInputLevel {
 			dragging = false;
 		}
 
-		checkButtons();
+		if (Game.level.conversation != null) {
+
+		} else {
+			checkButtons();
+		}
 
 		if (interactedThisTurn)
 			Game.level.endTurn();
