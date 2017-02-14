@@ -15,8 +15,8 @@ public class Quest {
 	}
 
 	// Called my members of quest when they dont know what to do
-	public void update(Actor actor) {
-
+	public boolean update(Actor actor) {
+		return false;
 	}
 
 	public Conversation getConversation(Actor actor) {

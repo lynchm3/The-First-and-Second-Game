@@ -11,7 +11,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.Pack;
+import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Quest;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.Bed;
@@ -75,7 +75,7 @@ public class Actor extends ActorTemplate implements Owner {
 	public Weapon equippedWeapon = null;
 	public String equippedWeaponGUID = null;
 
-	public transient Pack pack;
+	public transient Group group;
 	private transient ArrayList<Actor> attackers;
 
 	public transient Conversation conversation;
@@ -198,7 +198,7 @@ public class Actor extends ActorTemplate implements Owner {
 	public void calculateReachableSquares(Square[][] squares) {
 
 		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares.length; j++) {
+			for (int j = 0; j < squares[0].length; j++) {
 
 				Path pathToSquare = paths.get(squares[i][j]);
 				if (pathToSquare == null
@@ -217,7 +217,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public void calculateAttackableSquares(Square[][] squares) {
 		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares.length; j++) {
+			for (int j = 0; j < squares[0].length; j++) {
 				squares[i][j].weaponsThatCanAttack.clear();
 			}
 		}
@@ -1140,36 +1140,36 @@ public class Actor extends ActorTemplate implements Owner {
 
 		Actor attacker = (Actor) gameObject;
 
-		if (this.pack != null && attacker.pack != null) {
+		if (this.group != null && attacker.group != null) {
 
-			for (int i = 0; i < attacker.pack.size(); i++) {
-				this.pack.addAttacker(attacker.pack.getMember(i));
+			for (int i = 0; i < attacker.group.size(); i++) {
+				this.group.addAttacker(attacker.group.getMember(i));
 			}
 
-			for (int i = 0; i < this.pack.size(); i++) {
-				attacker.pack.addAttacker(this.pack.getMember(i));
+			for (int i = 0; i < this.group.size(); i++) {
+				attacker.group.addAttacker(this.group.getMember(i));
 			}
 			attacker.addAttacker(this);
 			this.addAttacker(attacker);
 
-		} else if (this.pack != null && attacker.pack == null) {
+		} else if (this.group != null && attacker.group == null) {
 
-			for (int i = 0; i < this.pack.size(); i++) {
-				attacker.addAttacker(this.pack.getMember(i));
+			for (int i = 0; i < this.group.size(); i++) {
+				attacker.addAttacker(this.group.getMember(i));
 			}
 
-			this.pack.addAttacker(attacker);
+			this.group.addAttacker(attacker);
 			this.addAttacker(attacker);
 
-		} else if (this.pack == null && attacker.pack != null) {
+		} else if (this.group == null && attacker.group != null) {
 
-			for (int i = 0; i < attacker.pack.size(); i++) {
-				this.addAttacker(attacker.pack.getMember(i));
+			for (int i = 0; i < attacker.group.size(); i++) {
+				this.addAttacker(attacker.group.getMember(i));
 			}
-			attacker.pack.addAttacker(this);
+			attacker.group.addAttacker(this);
 			attacker.addAttacker(this);
 
-		} else if (this.pack == null && attacker.pack == null) {
+		} else if (this.group == null && attacker.group == null) {
 			attacker.addAttacker(this);
 			this.addAttacker(attacker);
 
@@ -1223,8 +1223,8 @@ public class Actor extends ActorTemplate implements Owner {
 	public Conversation getConversation() {
 
 		Quest quest;
-		if (pack != null) {
-			quest = pack.quest;
+		if (group != null) {
+			quest = group.quest;
 		} else {
 			quest = this.quest;
 		}

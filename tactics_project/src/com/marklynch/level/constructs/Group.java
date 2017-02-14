@@ -4,39 +4,37 @@ import java.util.ArrayList;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
-import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
 
-public class Pack {
+public class Group {
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 
 	final private static int FIGHT_LOWER_LIMIT = 2;
 
 	public String name;
-	private transient ArrayList<Actor> members;
-	private transient Actor leader;
-	private transient Square targetSquare;
-	private transient ArrayList<Actor> attackers;
+	protected transient ArrayList<Actor> members;
+	protected transient Actor leader;
+	protected transient Square targetSquare;
+	protected transient ArrayList<Actor> attackers;
 	public transient Quest quest;
 
-	public Pack(String name, ArrayList<Actor> members, Actor leader) {
+	public Group(String name, ArrayList<Actor> members, Actor leader) {
 		super();
 		this.name = name;
 		this.members = members;
 		this.leader = leader;
 		for (Actor member : members) {
-			member.pack = this;
+			member.group = this;
 		}
 		attackers = new ArrayList<Actor>();
 	}
 
 	public void addMember(Actor actor) {
-		if (actor.pack != null) {
-			actor.pack.removeMember(actor);
+		if (actor.group != null) {
+			actor.group.removeMember(actor);
 		}
 		members.add(actor);
-		actor.pack = this;
+		actor.group = this;
 	}
 
 	public void removeMember(Actor actor) {
@@ -47,13 +45,13 @@ public class Pack {
 
 	public void setLeader(Actor actor) {
 		this.leader = actor;
-		actor.pack = this;
+		actor.group = this;
 		if (!members.contains(actor)) {
 			members.add(actor);
 		}
 	}
 
-	public void update(Actor actor) {
+	public boolean update(Actor actor) {
 
 		// Manage attackers list
 		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
@@ -75,42 +73,14 @@ public class Pack {
 			}
 		}
 
-		// AI attack attackers
-		if (this.attackers.size() != 0) {
-			GameObject target = AIRoutineUtils.getNearestAttacker(attackers);
-			boolean attackedTarget = AIRoutineUtils.attackTarget(target);
-			actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
-			if (!attackedTarget)
-				AIRoutineUtils.moveTowardsTargetToAttack(target);
-			return;
-
-		}
-
-		// Defer to quest
-		if (quest != null) {
-			quest.update(actor);
-			return;
-		}
-
 		// AI move to random square
 		if (actor == leader) {
-
-			if (targetSquare == null || actor.paths.get(targetSquare) == null) {
-				targetSquare = AIRoutineUtils.getRandomSquare(10, true);
-			}
-
-			if (targetSquare != null) {
-				Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(actor.paths.get(targetSquare));
-				new ActionMove(actor, squareToMoveTo).perform();
-				if (actor.squareGameObjectIsOn == targetSquare)
-					targetSquare = null;
-			}
-
+			return false;
 		} else {
 			AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);
-
+			actor.activityDescription = leader.activityDescription;
+			return true;
 		}
-
 	}
 
 	public void addAttacker(Actor actor) {

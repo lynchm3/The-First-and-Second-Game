@@ -23,6 +23,7 @@ public class QuestSmallGame extends Quest {
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
 	final String ACTIVITY_SPYING = "Spying";
 	final String ACTIVITY_SAVING_THE_WORLD = "Saving the world";
+	final String ACTIVITY_WAITING_FOR_YOU = "Waiting for you";
 
 	// Flags
 	boolean questAcceptedFromHunters;
@@ -34,9 +35,9 @@ public class QuestSmallGame extends Quest {
 	boolean wolvesDead;
 
 	// Actors
-	Pack hunterPack;
+	Group hunterPack;
 	Actor environmentalist;
-	Pack wolfPack;
+	Group wolfPack;
 	Actor superWolf;
 	Actor cub;
 
@@ -50,7 +51,7 @@ public class QuestSmallGame extends Quest {
 	public static Conversation conversationHuntersJoinTheHunt, conversationEnviromentalistImNotSpying,
 			conversationEnviromentalistSaveTheWolf, conversationHuntersReadyToGo;
 
-	public QuestSmallGame(Pack hunterPack, Actor enviromenmentalist, Actor superWolf, Pack wolfPack, Actor cub,
+	public QuestSmallGame(Group hunterPack, Actor enviromenmentalist, Actor superWolf, Group wolfPack, Actor cub,
 			ArrayList<GameObject> weaponsBehindLodge) {
 		super();
 		this.hunterPack = hunterPack;
@@ -137,15 +138,18 @@ public class QuestSmallGame extends Quest {
 	}
 
 	@Override
-	public void update(Actor actor) {
+	public boolean update(Actor actor) {
 		if (hunterPack.contains(actor)) {
-			updateHunter(actor);
+			return updateHunter(actor);
 		} else if (actor == environmentalist) {
-			updateEnvironmentalist(actor);
+			return updateEnvironmentalist(actor);
+		} else if (wolfPack.contains(actor)) {
+			return true;
 		}
+		return false;
 	}
 
-	private void updateHunter(Actor actor) {
+	private boolean updateHunter(Actor actor) {
 
 		if (!readyToGo) {
 			actor.activityDescription = ACTIVITY_PLANNING_A_HUNT;
@@ -153,31 +157,33 @@ public class QuestSmallGame extends Quest {
 				AIRoutineUtils.moveTowardsTargetSquare(Game.level.squares[5][8]);
 			} else {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(hunterPack.getLeader());
-
 			}
+		} else if (readyToGo) {
 
-		} else if (questAcceptedFromHunters && !wolvesDead) {
+			if (actor == hunterPack.getLeader()) {
+
+				if (actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn) > 5) {
+					// activity is waiting
+					actor.activityDescription = ACTIVITY_WAITING_FOR_YOU;
+				} else {
+					actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
+					if (!AIRoutineUtils.attackTarget(superWolf)) {
+						AIRoutineUtils.moveTowardsTargetToAttack(superWolf);
+					}
+				}
+			} else {
+				actor.activityDescription = hunterPack.getLeader().activityDescription;
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(hunterPack.getLeader());
+			}
 
 			// this.questCurrentObjective =
 			// OBJECTIVE_FOLLOW_THE_HUNTERS_TO_SUPERWOLF;
-			//
-			// Game.level.activeActor.activityDescription =
-			// ACTIVITY_DESCRIPTION_HUNTING;
-			//
-			// if (actor == hunterPack.getLeader()) {
-			// boolean attackedAnimal =
-			// AIRoutineUtils.attackTarget(this.superWolf);
-			// if (!attackedAnimal)
-			// AIRoutineUtils.moveTowardsTargetToAttack(this.superWolf);
-			// } else {
-			// AIRoutineUtils.moveTowardsTargetToBeAdjacent(hunterPack.getLeader());
-			//
-			// }
 		}
+		return true;
 
 	}
 
-	private void updateEnvironmentalist(Actor actor) {
+	private boolean updateEnvironmentalist(Actor actor) {
 		if (!questAcceptedFromHunters) {
 			actor.activityDescription = ACTIVITY_SPYING;
 
@@ -185,21 +191,23 @@ public class QuestSmallGame extends Quest {
 			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
 
 			if (environmentalist.squareGameObjectIsOn != squareBehindLodge) {
+				// Move to weapons behind the lodge
 				AIRoutineUtils.moveTowardsTargetSquare(squareBehindLodge);
-				return;
-			}
-
-			// GameObject weaponToPickUp = null;
-			for (GameObject weaponBehindLodge : weaponsBehindLodge) {
-				if (weaponBehindLodge.squareGameObjectIsOn == squareBehindLodge) {
-					AIRoutineUtils.pickupTarget(weaponBehindLodge);
+			} else {
+				// Pick up weapons behind the lodge
+				for (GameObject weaponBehindLodge : weaponsBehindLodge) {
+					if (weaponBehindLodge.squareGameObjectIsOn == squareBehindLodge) {
+						AIRoutineUtils.pickupTarget(weaponBehindLodge);
+					}
+				}
+				// If the player is near, tell them not to kill the wolf and
+				// give them the weapons
+				if (actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn) < 2) {
+					new ActionTalk(actor, Game.level.player).perform();
 				}
 			}
-
-			if (actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn) < 2) {
-				new ActionTalk(actor, Game.level.player).perform();
-			}
 		}
+		return true;
 	}
 
 	@Override
@@ -259,10 +267,11 @@ public class QuestSmallGame extends Quest {
 	}
 
 	private void setUpConversationImNotSpying() {
-		// TODO Auto-generated method stubConversationResponse
-		// conversationReponseEndAfterAccepting = new
-		// ConversationResponse("Leave",
-		// null) {
+
+		// Environmentalist could have emoticon over his head showing his
+		// feelings
+		// Anime style
+		// try it out
 		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null);
 		ConversationPart conversationPartImNotSpying = new ConversationPart("What? NO! I'm not spying! You're spying!",
 				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalist);

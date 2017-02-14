@@ -179,7 +179,7 @@ public class GameObject extends GameObjectTemplate {
 	public void calculatePathToAllSquares(Square[][] squares) {
 
 		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares.length; j++) {
+			for (int j = 0; j < squares[0].length; j++) {
 				squares[i][j].walkingDistanceToSquare = Integer.MAX_VALUE;
 			}
 		}

@@ -29,7 +29,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
-import com.marklynch.level.constructs.Pack;
+import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.QuestSmallGame;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
@@ -171,7 +171,7 @@ public class Editor {
 			gameObjectTemplates.get(i).loadImages();
 		}
 
-		Game.level = new Level(20, 20);
+		Game.level = new Level(50, 20);
 
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
@@ -511,7 +511,7 @@ public class Editor {
 		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();
 		hunterPackMembers.add(hunterBrent);
 		hunterPackMembers.add(hunterBront);
-		Pack hunterPack = new Pack("Hunter pack", hunterPackMembers, hunterBrent);
+		Group hunterPack = new Group("Hunter pack", hunterPackMembers, hunterBrent);
 
 		new GameObject("Hunt Plan", 5, "hunt_plan.png", Game.level.squares[6][8], new Inventory(), true, false, false,
 				true);
@@ -527,18 +527,18 @@ public class Editor {
 		}
 
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
-				Game.level.squares[15][15], 1, null, inventoryForWildAnimal, true, false, true);
+				Game.level.squares[40][16], 1, null, inventoryForWildAnimal, true, false, true);
 		superWolf.faction = Game.level.factions.get(2);
 		superWolf.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(superWolf);
 
 		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
-				Game.level.squares[15][16], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
+				Game.level.squares[38][15], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
 		wolf2.faction = Game.level.factions.get(2);
 		wolf2.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(wolf2);
 
-		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png", Game.level.squares[16][15],
+		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png", Game.level.squares[38][17],
 				1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
 		wolf3.faction = Game.level.factions.get(2);
 		wolf3.factionGUID = Game.level.factions.get(2).guid;
@@ -548,7 +548,7 @@ public class Editor {
 		wolfPackMembers.add(superWolf);
 		wolfPackMembers.add(wolf2);
 		wolfPackMembers.add(wolf3);
-		Pack wolfPack = new Pack("Wolf pack", wolfPackMembers, superWolf);
+		Group wolfPack = new Group("Wolf pack", wolfPackMembers, superWolf);
 
 		ArrayList<GameObject> weaponsBehindTheLodge = new ArrayList<GameObject>();
 		weaponsBehindTheLodge.add(gameObjectTemplates.get(0).makeCopy(Game.level.squares[12][9]));

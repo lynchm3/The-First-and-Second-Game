@@ -14,13 +14,7 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 	@Override
 	public void update() {
 
-		// Defer to pack
-		if (Game.level.activeActor.pack != null) {
-			Game.level.activeActor.pack.update(Game.level.activeActor);
-			return;
-		}
-
-		// Fighting
+		// 1. Fighting
 		if (Game.level.activeActor.hasAttackers()) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 			GameObject target = AIRoutineUtils.getNearestAttacker(Game.level.activeActor.getAttackers());
@@ -28,6 +22,14 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 			if (!attackedTarget)
 				AIRoutineUtils.moveTowardsTargetToAttack(target);
 			return;
+		}
+
+		// If not leader defer to pack
+		if (Game.level.activeActor.group != null
+				&& Game.level.activeActor != Game.level.activeActor.group.getLeader()) {
+			if (Game.level.activeActor.group.update(Game.level.activeActor)) {
+				return;
+			}
 		}
 
 		// Defer to quest

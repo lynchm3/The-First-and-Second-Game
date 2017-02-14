@@ -243,7 +243,7 @@ public class Level {
 
 	public void removeWalkingHighlight() {
 		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares.length; j++) {
+			for (int j = 0; j < squares[0].length; j++) {
 				squares[i][j].reachableBySelectedCharater = false;
 			}
 		}
@@ -251,7 +251,7 @@ public class Level {
 
 	public void removeWeaponsThatCanAttackHighlight() {
 		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares.length; j++) {
+			for (int j = 0; j < squares[0].length; j++) {
 				squares[i][j].weaponsThatCanAttack.clear();
 			}
 		}

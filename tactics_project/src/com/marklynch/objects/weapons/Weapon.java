@@ -20,7 +20,7 @@ public class Weapon extends WeaponTemplate {
 
 	public void calculateAttackableSquares(Square[][] squares) {
 		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares.length; j++) {
+			for (int j = 0; j < squares[0].length; j++) {
 				if (squares[i][j].reachableBySelectedCharater) {
 					for (float range = minRange; range <= maxRange; range++) {
 						Vector<Square> squaresInThisPath = new Vector<Square>();
