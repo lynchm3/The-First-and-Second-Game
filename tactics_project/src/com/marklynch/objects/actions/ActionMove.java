@@ -6,16 +6,19 @@ import com.marklynch.objects.units.Actor;
 public class ActionMove extends Action {
 
 	public static final String ACTION_NAME = "Move";
+	Actor mover;
+	Square target;
 
-	// Default for hostiles
-	public ActionMove(Actor performer, Square targetSquare) {
-		super(ACTION_NAME, performer, targetSquare);
+	public ActionMove(Actor mover, Square target) {
+		super(ACTION_NAME);
+		this.mover = mover;
+		this.target = target;
 	}
 
 	@Override
 	public void perform() {
-		Square targetSquare = (Square) target;
-		moveTo(performer, targetSquare);
+		Square targetSquare = target;
+		moveTo(mover, targetSquare);
 	}
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {

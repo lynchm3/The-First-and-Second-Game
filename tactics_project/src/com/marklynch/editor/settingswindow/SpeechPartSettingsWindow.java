@@ -43,7 +43,7 @@ public class SpeechPartSettingsWindow extends SettingsWindow {
 			public void click() {
 				ArrayList<String> arrayList1 = new ArrayList<String>();
 				arrayList1.add("TEXT IN SPEECH PART");
-				SpeechPart newSpeechPart = new SpeechPart(Game.level.factions.get(0).actors.get(0), arrayList1);
+				SpeechPart newSpeechPart = new SpeechPart(Game.level.player, arrayList1);
 				Game.level.script.speechParts.add(newSpeechPart);
 				updateSpeechPartsButtons();
 				SpeechPartSettingsWindow.this.editor.clearSelectedObject();

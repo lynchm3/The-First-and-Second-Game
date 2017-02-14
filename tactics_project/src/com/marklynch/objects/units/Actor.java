@@ -1100,12 +1100,6 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 	}
 
-	public void pickup(GameObject target) {
-		Game.level.logOnScreen(new ActivityLog(new Object[] { this, " picked up ", target }));
-		target.squareGameObjectIsOn.inventory.remove(target);
-		this.inventory.add(target);
-	}
-
 	public void sellAllToTarget(Class clazz, GameObject gameObject) {
 		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToSell : gameObjectsToSell) {

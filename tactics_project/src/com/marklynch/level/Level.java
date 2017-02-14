@@ -39,6 +39,7 @@ public class Level {
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 
 	// public Vector<Actor> actors;
+	public transient Actor player;
 	public transient Actor activeActor;
 	public transient Vector<GameObject> inanimateObjectsOnGround;
 	public transient ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
@@ -520,7 +521,7 @@ public class Level {
 		}
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		if (currentFactionMovingIndex == 0) {
-			Game.level.activeActor = factions.get(0).actors.get(0);
+			Game.level.activeActor = player;
 			Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
 			Actor.highlightSelectedCharactersSquares();
 		}

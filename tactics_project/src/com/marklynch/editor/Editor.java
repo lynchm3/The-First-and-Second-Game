@@ -474,8 +474,8 @@ public class Editor {
 		// inventoryForWildAnimal.setGameObjects(weaponsForActor2);
 
 		// Add actor
-		Actor player = new Actor("Old lady", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png", Game.level.squares[0][4], 1,
-				null, inventoryForActor0, true, false, true);
+		Actor player = Game.level.player = new Actor("You", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png",
+				Game.level.squares[0][4], 1, null, inventoryForActor0, true, false, true);
 		player.faction = Game.level.factions.get(0);
 		player.factionGUID = Game.level.factions.get(0).guid;
 
@@ -570,7 +570,7 @@ public class Editor {
 
 		// SpeechPart 1
 		ArrayList<Actor> speechActors1 = new ArrayList<Actor>();
-		speechActors1.add(Game.level.factions.get(0).actors.get(0));
+		speechActors1.add(Game.level.player);
 		speechActors1.add(Game.level.factions.get(1).actors.get(0));
 		ArrayList<Float> speechPositions1 = new ArrayList<Float>();
 		speechPositions1.add(0f);
@@ -583,11 +583,11 @@ public class Editor {
 		arrayList1.add("HI, THIS IS SCRIPTED SPEECH :D");
 
 		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(speechActors1, speechPositions1,
-				speechDirections1, Game.level.factions.get(0).actors.get(0), arrayList1);
+				speechDirections1, Game.level.player, arrayList1);
 
 		// SpeechPart 2
 		ArrayList<Actor> speechActors2 = new ArrayList<Actor>();
-		speechActors2.add(Game.level.factions.get(0).actors.get(0));
+		speechActors2.add(Game.level.player);
 		speechActors2.add(Game.level.factions.get(1).actors.get(0));
 		ArrayList<Float> speechPositions2 = new ArrayList<Float>();
 		speechPositions2.add(0f);
@@ -600,13 +600,12 @@ public class Editor {
 		arrayList2.add("HI, PT2 OF THIS TALK");
 
 		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(speechActors2, speechPositions2,
-				speechDirections2, Game.level.factions.get(0).actors.get(0), arrayList2);
+				speechDirections2, Game.level.player, arrayList2);
 
 		ArrayList<ScriptEventSpeech.SpeechPart> speechParts = new ArrayList<ScriptEventSpeech.SpeechPart>();
 		speechParts.add(speechPart1_1.makeCopy());
 		speechParts.add(speechPart1_2.makeCopy());
-		ScriptTrigger scriptTriggerActorSelected = new ScriptTriggerActorSelected(
-				Game.level.factions.get(0).actors.get(0));
+		ScriptTrigger scriptTriggerActorSelected = new ScriptTriggerActorSelected(Game.level.player);
 		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true, speechParts, scriptTriggerActorSelected);
 
 		// Game.level.script.scriptTriggers.add(new ScriptTriggerTurnStart(1,

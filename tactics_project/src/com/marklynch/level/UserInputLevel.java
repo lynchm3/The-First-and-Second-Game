@@ -173,7 +173,7 @@ public class UserInputLevel {
 			} else if (Game.level.conversation != null) {
 
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
-				if (Game.level.activeActor == Game.level.factions.get(0).actors.get(0))
+				if (Game.level.activeActor == Game.level.player)
 					interactWith(Game.squareMouseIsOver);
 			}
 		}
@@ -222,7 +222,7 @@ public class UserInputLevel {
 		if (square == Game.level.activeActor.squareGameObjectIsOn)
 			return;
 
-		if (Game.level.activeActor != Game.level.factions.get(0).actors.get(0))
+		if (Game.level.activeActor != Game.level.player)
 			return;
 
 		Action action = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);

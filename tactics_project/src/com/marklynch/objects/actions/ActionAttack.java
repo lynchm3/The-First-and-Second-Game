@@ -10,30 +10,35 @@ public class ActionAttack extends Action {
 
 	public static final String ACTION_NAME = "Attack";
 
+	Actor attacker;
+	GameObject target;
+
 	// Default for hostiles
-	public ActionAttack(Actor performer, GameObject targetGameObject) {
-		super(ACTION_NAME, performer, targetGameObject);
+	public ActionAttack(Actor attacker, GameObject target) {
+		super(ACTION_NAME);
+		this.attacker = attacker;
+		this.target = target;
 	}
 
 	@Override
 	public void perform() {
 		// performer.attack(targetGameObject, false);
 
-		GameObject targetGameObject = (GameObject) target;
+		GameObject targetGameObject = target;
 
-		performer.manageAttackerReferences(targetGameObject);
-		performer.manageAttackerReferencesForNearbyAllies(targetGameObject);
-		performer.manageAttackerReferencesForNearbyEnemies(targetGameObject);
+		attacker.manageAttackerReferences(targetGameObject);
+		attacker.manageAttackerReferencesForNearbyAllies(targetGameObject);
+		attacker.manageAttackerReferencesForNearbyEnemies(targetGameObject);
 
-		targetGameObject.remainingHealth -= performer.equippedWeapon.damage;
-		performer.distanceMovedThisTurn = performer.travelDistance;
-		performer.hasAttackedThisTurn = true;
+		targetGameObject.remainingHealth -= attacker.equippedWeapon.damage;
+		attacker.distanceMovedThisTurn = attacker.travelDistance;
+		attacker.hasAttackedThisTurn = true;
 		String attackTypeString;
 		attackTypeString = "attacked ";
 		Game.level.logOnScreen(new ActivityLog(new Object[] {
 
-				this, " " + attackTypeString + " ", targetGameObject, " with ", performer.equippedWeapon.imageTexture,
-				" for " + performer.equippedWeapon.damage + " damage" }));
+				this, " " + attackTypeString + " ", targetGameObject, " with ", attacker.equippedWeapon.imageTexture,
+				" for " + attacker.equippedWeapon.damage + " damage" }));
 
 		Actor actor = null;
 		if (targetGameObject instanceof Actor)
@@ -50,13 +55,13 @@ public class ActionAttack extends Action {
 		}
 
 		// shoot projectile
-		if (performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
-			Game.level.projectiles.add(new Projectile(performer, targetGameObject, 5f, true, "hunter.png"));
+		if (attacker.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) > 1) {
+			Game.level.projectiles.add(new Projectile(attacker, targetGameObject, 5f, true, "hunter.png"));
 		} else {
-			performer.showPow(targetGameObject);
+			attacker.showPow(targetGameObject);
 		}
 
-		if (performer.faction == Game.level.factions.get(0)) {
+		if (attacker.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}

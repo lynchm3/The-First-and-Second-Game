@@ -8,18 +8,23 @@ public class ActionTalk extends Action {
 
 	public static final String ACTION_NAME = "Talk";
 
+	public Actor talker;
+	public Actor target;
+
 	// Default for hostiles
-	public ActionTalk(Actor performer, Actor targetActor) {
-		super(ACTION_NAME, performer, targetActor);
+	public ActionTalk(Actor talker, Actor target) {
+		super(ACTION_NAME);
+		this.talker = talker;
+		this.target = target;
 	}
 
 	@Override
 	public void perform() {
 		Conversation conversation = null;
-		if (target == Game.level.factions.get(0).actors.get(0)) {
-			conversation = performer.getConversation();
+		if (target == Game.level.player) {
+			conversation = talker.getConversation();
 		} else {
-			conversation = ((Actor) target).getConversation();
+			conversation = target.getConversation();
 		}
 
 		if (conversation != null) {

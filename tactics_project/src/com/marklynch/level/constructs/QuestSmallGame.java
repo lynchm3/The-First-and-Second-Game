@@ -9,6 +9,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
 
@@ -104,8 +105,7 @@ public class QuestSmallGame extends Quest {
 		// Player has attacked the wolves
 		if (playerAttackedWolves == false) {
 			for (int i = 0; i < wolfPack.size(); i++) {
-				if (wolfPack.hasAttackers()
-						&& wolfPack.getAttackers().contains(Game.level.factions.get(0).actors.get(0))) {
+				if (wolfPack.hasAttackers() && wolfPack.getAttackers().contains(Game.level.player)) {
 					playerAttackedWolves = true;
 				}
 			}
@@ -125,8 +125,7 @@ public class QuestSmallGame extends Quest {
 		// Player has attacked the hunters
 		if (playerAttackedHunters == false) {
 			for (int i = 0; i < hunterPack.size(); i++) {
-				if (hunterPack.hasAttackers()
-						&& hunterPack.getAttackers().contains(Game.level.factions.get(0).actors.get(0))) {
+				if (hunterPack.hasAttackers() && hunterPack.getAttackers().contains(Game.level.player)) {
 					playerAttackedHunters = true;
 				}
 			}
@@ -194,8 +193,8 @@ public class QuestSmallGame extends Quest {
 				}
 			}
 
-			if (actor.straightLineDistanceTo(Game.level.factions.get(0).actors.get(0).squareGameObjectIsOn) < 2) {
-				new ActionTalk(actor, Game.level.factions.get(0).actors.get(0)).perform();
+			if (actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn) < 2) {
+				new ActionTalk(actor, Game.level.player).perform();
 			}
 		}
 	}
@@ -276,7 +275,18 @@ public class QuestSmallGame extends Quest {
 	}
 
 	private void setUpConversationSaveTheWolf() {
-		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null);
+		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null) {
+			@Override
+			public void select() {
+				super.select();
+				for (GameObject gameObject : weaponsBehindLodge) {
+					if (environmentalist.inventory.contains(gameObject)) {
+						new ActionGive(environmentalist, Game.level.player, gameObject).perform();
+					}
+				}
+			}
+
+		};
 		ConversationPart conversationPartSaveTheWolf = new ConversationPart("Save the wolf!",
 				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalist);
 		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf);

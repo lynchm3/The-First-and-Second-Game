@@ -257,10 +257,10 @@ public class AttributesDialog {
 				@Override
 				public void click() {
 
-					speechPart.actors.add(Game.level.factions.get(0).actors.get(0));
+					speechPart.actors.add(Game.level.player);
 					speechPart.positions.add(100f);
 					speechPart.directions.add(true);
-					speechPart.actorsGUIDs.add(Game.level.factions.get(0).actors.get(0).guid);
+					speechPart.actorsGUIDs.add(Game.level.player.guid);
 
 					Object object = AttributesDialog.this.object;
 
