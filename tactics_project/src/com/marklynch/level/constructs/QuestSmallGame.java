@@ -43,7 +43,7 @@ public class QuestSmallGame extends Quest {
 	Square squareBehindLodge;
 
 	// Conversations
-	public static Conversation conversationHuntersJoinTheHunt, conversationEnviromentalistBeforeQuest,
+	public static Conversation conversationHuntersJoinTheHunt, conversationEnviromentalistImNotSpying,
 			conversationEnviromentalistSaveTheWolf, conversationHuntersAreYouReady;
 
 	public QuestSmallGame(Pack hunterPack, Actor enviromenmentalist, Actor superWolf, Pack wolfPack, Actor cub,
@@ -80,6 +80,7 @@ public class QuestSmallGame extends Quest {
 		squareBehindLodge = Game.level.squares[12][9];
 
 		setUpConversationJoinTheHunt();
+		setUpConversationImNotSpying();
 
 	}
 
@@ -193,6 +194,25 @@ public class QuestSmallGame extends Quest {
 		}
 	}
 
+	@Override
+	public Conversation getConversation(Actor actor) {
+		if (hunterPack.contains(actor)) {
+			// Talking to a hunter
+			if (!questAcceptedFromHunters) {
+				return conversationHuntersJoinTheHunt;
+			}
+
+		}
+
+		if (actor == environmentalist) {
+			// Talking to environmentalist
+			if (!questAcceptedFromHunters) {
+				return conversationEnviromentalistImNotSpying;
+			}
+		}
+		return null;
+	}
+
 	public void setUpConversationJoinTheHunt() {
 		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null) {
 			@Override
@@ -236,24 +256,16 @@ public class QuestSmallGame extends Quest {
 
 	}
 
-	@Override
-	public Conversation getConversation(Actor actor) {
-		System.out.println("quest.getConversation()");
-		if (hunterPack.contains(actor)) {
-			// Talking to a hunter
-			if (!questAcceptedFromHunters) {
-				return conversationHuntersJoinTheHunt;
-			}
-
-		}
-
-		if (actor == environmentalist) {
-			// Talking to environmentalist
-			if (!questAcceptedFromHunters) {
-				return conversationEnviromentalistBeforeQuest;
-			}
-		}
-		return null;
+	private void setUpConversationImNotSpying() {
+		// TODO Auto-generated method stubConversationResponse
+		// conversationReponseEndAfterAccepting = new
+		// ConversationResponse("Leave",
+		// null) {
+		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null);
+		ConversationPart conversationPartImNotSpying = new ConversationPart(
+				"What? NO! I'm not spying! You're spying!!!",
+				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalist);
+		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying);
 	}
 
 }
