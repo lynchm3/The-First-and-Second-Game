@@ -26,6 +26,8 @@ public class QuestSmallGame extends Quest {
 
 	// Flags
 	boolean questAcceptedFromHunters;
+	boolean talkedToEnvironmentalist;
+	boolean readyToGo;
 	boolean playerAttackedHunters;
 	boolean playerAttackedWolves;
 	boolean huntersDead;
@@ -46,7 +48,7 @@ public class QuestSmallGame extends Quest {
 
 	// Conversations
 	public static Conversation conversationHuntersJoinTheHunt, conversationEnviromentalistImNotSpying,
-			conversationEnviromentalistSaveTheWolf, conversationHuntersAreYouReady;
+			conversationEnviromentalistSaveTheWolf, conversationHuntersReadyToGo;
 
 	public QuestSmallGame(Pack hunterPack, Actor enviromenmentalist, Actor superWolf, Pack wolfPack, Actor cub,
 			ArrayList<GameObject> weaponsBehindLodge) {
@@ -84,6 +86,7 @@ public class QuestSmallGame extends Quest {
 		setUpConversationJoinTheHunt();
 		setUpConversationImNotSpying();
 		setUpConversationSaveTheWolf();
+		setUpConversationReadyToGo();
 
 	}
 
@@ -144,7 +147,7 @@ public class QuestSmallGame extends Quest {
 
 	private void updateHunter(Actor actor) {
 
-		if (!questAcceptedFromHunters) {
+		if (!readyToGo) {
 			actor.activityDescription = ACTIVITY_PLANNING_A_HUNT;
 			if (actor == hunterPack.getLeader()) {
 				AIRoutineUtils.moveTowardsTargetSquare(Game.level.squares[5][8]);
@@ -178,7 +181,7 @@ public class QuestSmallGame extends Quest {
 		if (!questAcceptedFromHunters) {
 			actor.activityDescription = ACTIVITY_SPYING;
 
-		} else if (questAcceptedFromHunters) {
+		} else if (questAcceptedFromHunters && !talkedToEnvironmentalist) {
 			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
 
 			if (environmentalist.squareGameObjectIsOn != squareBehindLodge) {
@@ -205,6 +208,8 @@ public class QuestSmallGame extends Quest {
 			// Talking to a hunter
 			if (!questAcceptedFromHunters) {
 				return conversationHuntersJoinTheHunt;
+			} else if (!readyToGo) {
+				return conversationHuntersReadyToGo;
 			}
 
 		}
@@ -213,32 +218,22 @@ public class QuestSmallGame extends Quest {
 			// Talking to environmentalist
 			if (!questAcceptedFromHunters) {
 				return conversationEnviromentalistImNotSpying;
-			} else {
+			} else if (!talkedToEnvironmentalist) {
 				return conversationEnviromentalistSaveTheWolf;
 			}
 		}
 		return null;
 	}
 
-	public void setUpConversationJoinTheHunt() {
-		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null) {
-			@Override
-			public void select() {
-				Game.level.conversation = null;
-				// MAKE THE WEAPONS 'ROUND BACK STEALABLE
-				// TURN ON THE ENVIRONMENTALIST
-				// CHANGE THE HUNTERS CONVERSATION TO "READY TO GO?"
-
-			}
-		};
+	public void setUpConversationReadyToGo() {
+		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
 
 		ConversationPart conversationPartTheresEquipment = new ConversationPart(
 				"There's spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready.",
-				new ConversationResponse[] { conversationReponseEndAfterAccepting }, hunterPack.getLeader());
+				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
 
-		ConversationResponse conversationReponseEndAfterRefusing = new ConversationResponse("Leave", null);
 		ConversationPart conversationPartSuitYourself = new ConversationPart("Suit yourself.",
-				new ConversationResponse[] { conversationReponseEndAfterRefusing }, hunterPack.getLeader());
+				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
 
 		ConversationResponse conversationResponseNoThanks = new ConversationResponse("No thanks",
 				conversationPartSuitYourself);
@@ -246,7 +241,7 @@ public class QuestSmallGame extends Quest {
 				conversationPartTheresEquipment) {
 			@Override
 			public void select() {
-				Game.level.conversation.currentConversationPart = nextConversationPart;
+				super.select();
 				// ADD QUEST TO QUEST LOG IF NO IN HARDCORE MODE
 				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
 				// PACK HUNTERS"
@@ -282,6 +277,7 @@ public class QuestSmallGame extends Quest {
 				for (GameObject gameObject : weaponsBehindLodge) {
 					if (environmentalist.inventory.contains(gameObject)) {
 						new ActionGive(environmentalist, Game.level.player, gameObject).perform();
+						talkedToEnvironmentalist = true;
 					}
 				}
 			}
@@ -290,6 +286,36 @@ public class QuestSmallGame extends Quest {
 		ConversationPart conversationPartSaveTheWolf = new ConversationPart("Save the wolf!",
 				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalist);
 		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf);
+
+	}
+
+	public void setUpConversationJoinTheHunt() {
+		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
+
+		ConversationPart conversationAlrightLetsGo = new ConversationPart("Alright! Let's go bag us a some pelts!",
+				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
+
+		ConversationPart conversationPartWellHurryOn = new ConversationPart("Well hurry on!",
+				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
+
+		ConversationResponse conversationResponseNotYet = new ConversationResponse("Not yet",
+				conversationPartWellHurryOn);
+		ConversationResponse conversationResponseReady = new ConversationResponse("Ready!", conversationAlrightLetsGo) {
+			@Override
+			public void select() {
+				super.select();
+				// Update quest log
+				// Set enviromentalist to come watch
+				// Hunters on the way
+				readyToGo = true;
+			}
+		};
+
+		ConversationPart conversationPartReadyToGo = new ConversationPart("Ready to go, pal?",
+				new ConversationResponse[] { conversationResponseReady, conversationResponseNotYet },
+				hunterPack.getLeader());
+
+		conversationHuntersReadyToGo = new Conversation(conversationPartReadyToGo);
 
 	}
 
