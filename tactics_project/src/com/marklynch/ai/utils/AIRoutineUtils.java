@@ -140,6 +140,9 @@ public class AIRoutineUtils {
 	public static boolean passesChecks(GameObject gameObject, Class clazz, float maxDistance, boolean fitsInInventory,
 			boolean mustContainsObjects) {
 
+		if (gameObject.quest != null)
+			return false;
+
 		if (gameObject.remainingHealth <= 0)
 			return false;
 

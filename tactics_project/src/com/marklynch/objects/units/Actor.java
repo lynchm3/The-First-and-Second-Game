@@ -77,7 +77,6 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public transient Pack pack;
 	private transient ArrayList<Actor> attackers;
-	public transient Quest quest;
 
 	public transient Conversation conversation;
 

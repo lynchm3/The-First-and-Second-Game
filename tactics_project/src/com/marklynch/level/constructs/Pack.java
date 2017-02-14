@@ -142,4 +142,8 @@ public class Pack {
 	public Actor getLeader() {
 		return leader;
 	}
+
+	public ArrayList<Actor> getMembers() {
+		return members;
+	}
 }

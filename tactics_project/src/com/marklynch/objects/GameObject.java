@@ -11,6 +11,7 @@ import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Quest;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
@@ -59,6 +60,9 @@ public class GameObject extends GameObjectTemplate {
 	// Placement in inventory
 	public transient Inventory inventoryThatHoldsThisObject;
 	public transient InventorySquare inventorySquareGameObjectIsOn;
+
+	// Quest
+	public transient Quest quest;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects) {

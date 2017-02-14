@@ -517,7 +517,7 @@ public class Editor {
 				true);
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
-				"environmentalist.png", Game.level.squares[5][12], 1, bedForHunterBront, inventoryForActor1.makeCopy(),
+				"environmentalist.png", Game.level.squares[7][12], 1, bedForHunterBront, inventoryForActor1.makeCopy(),
 				true, false, true);
 		environmentalistBill.faction = Game.level.factions.get(1);
 		environmentalistBill.factionGUID = Game.level.factions.get(1).guid;
@@ -550,7 +550,11 @@ public class Editor {
 		wolfPackMembers.add(wolf3);
 		Pack wolfPack = new Pack("Wolf pack", wolfPackMembers, superWolf);
 
-		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null);
+		ArrayList<GameObject> weaponsBehindTheLodge = new ArrayList<GameObject>();
+		weaponsBehindTheLodge.add(gameObjectTemplates.get(0).makeCopy(Game.level.squares[12][9]));
+		weaponsBehindTheLodge.add(gameObjectTemplates.get(2).makeCopy(Game.level.squares[12][9]));
+		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null,
+				weaponsBehindTheLodge);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, null, new Inventory(), true, false, true);

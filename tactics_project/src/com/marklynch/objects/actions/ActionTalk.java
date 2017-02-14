@@ -16,11 +16,6 @@ public class ActionTalk extends Action {
 	@Override
 	public void perform() {
 
-		// Game.level.logOnScreen(new ActivityLog(new Object[] { "Talking to ",
-		// target }));
-
-		System.out.println("ActionTalk.perform");
-
 		Conversation conversation = ((Actor) target).getConversation();
 		if (conversation != null) {
 			conversation.currentConversationPart = conversation.openingConversationPart;

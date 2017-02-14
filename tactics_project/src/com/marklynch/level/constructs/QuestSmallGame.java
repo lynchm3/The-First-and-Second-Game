@@ -1,10 +1,14 @@
 package com.marklynch.level.constructs;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.Square;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
 public class QuestSmallGame extends Quest {
@@ -15,6 +19,8 @@ public class QuestSmallGame extends Quest {
 	// Activity Strings
 	final String ACTIVITY_PLANNING_A_HUNT = "Planning a hunt";
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
+	final String ACTIVITY_SPYING = "Spying";
+	final String ACTIVITY_SAVING_THE_WORLD = "Saving the world";
 
 	// Flags
 	boolean questAcceptedFromHunters;
@@ -25,26 +31,38 @@ public class QuestSmallGame extends Quest {
 
 	// Actors
 	Pack hunterPack;
-	Actor enviromenmentalist;
+	Actor environmentalist;
 	Pack wolfPack;
 	Actor superWolf;
 	Actor cub;
 
-	public static Conversation conversationHuntersJoinTheHunt, conversationEnviromentalistSaveTheWolf,
-			conversationHuntersAreYouReady;
+	// GameObjects
+	ArrayList<GameObject> weaponsBehindLodge;
 
-	// Items
+	// Squares
+	Square squareBehindLodge;
 
-	public QuestSmallGame(Pack hunterPack, Actor enviromenmentalist, Actor superWolf, Pack wolfPack, Actor cub) {
+	// Conversations
+	public static Conversation conversationHuntersJoinTheHunt, conversationEnviromentalistBeforeQuest,
+			conversationEnviromentalistSaveTheWolf, conversationHuntersAreYouReady;
+
+	public QuestSmallGame(Pack hunterPack, Actor enviromenmentalist, Actor superWolf, Pack wolfPack, Actor cub,
+			ArrayList<GameObject> weaponsBehindLodge) {
 		super();
 		this.hunterPack = hunterPack;
 		this.hunterPack.quest = this;
+		for (GameObject hunter : hunterPack.getMembers()) {
+			hunter.quest = this;
+		}
 
-		this.enviromenmentalist = enviromenmentalist;
+		this.environmentalist = enviromenmentalist;
 		enviromenmentalist.quest = this;
 
 		this.wolfPack = wolfPack;
 		this.wolfPack.quest = this;
+		for (GameObject wolf : wolfPack.getMembers()) {
+			wolf.quest = this;
+		}
 
 		this.superWolf = superWolf;
 		this.superWolf.quest = this;
@@ -53,6 +71,13 @@ public class QuestSmallGame extends Quest {
 			this.cub = cub;
 			cub.quest = this;
 		}
+
+		this.weaponsBehindLodge = weaponsBehindLodge;
+		for (GameObject weaponBehindLodge : weaponsBehindLodge) {
+			weaponBehindLodge.quest = this;
+		}
+
+		squareBehindLodge = Game.level.squares[12][9];
 
 		setUpConversationJoinTheHunt();
 
@@ -110,7 +135,7 @@ public class QuestSmallGame extends Quest {
 	public void update(Actor actor) {
 		if (hunterPack.contains(actor)) {
 			updateHunter(actor);
-		} else if (actor == enviromenmentalist) {
+		} else if (actor == environmentalist) {
 			updateEnvironmentalist(actor);
 		}
 	}
@@ -118,7 +143,7 @@ public class QuestSmallGame extends Quest {
 	private void updateHunter(Actor actor) {
 
 		if (!questAcceptedFromHunters) {
-			Game.level.activeActor.activityDescription = ACTIVITY_PLANNING_A_HUNT;
+			actor.activityDescription = ACTIVITY_PLANNING_A_HUNT;
 			if (actor == hunterPack.getLeader()) {
 				AIRoutineUtils.moveTowardsTargetSquare(Game.level.squares[5][8]);
 			} else {
@@ -149,13 +174,23 @@ public class QuestSmallGame extends Quest {
 
 	private void updateEnvironmentalist(Actor actor) {
 		if (!questAcceptedFromHunters) {
+			actor.activityDescription = ACTIVITY_SPYING;
 
 		} else if (questAcceptedFromHunters) {
-			AIRoutineUtils.moveTowardsTargetSquare(Game.level.squares[12][9]);
-			// HE COULD MAYBE STAND ON THE WEAPONS? OR PICK UP THE WEAPONS!!!!
-			// YUS!!!
-		}
+			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
 
+			if (environmentalist.squareGameObjectIsOn != squareBehindLodge) {
+				AIRoutineUtils.moveTowardsTargetSquare(squareBehindLodge);
+				return;
+			}
+
+			// GameObject weaponToPickUp = null;
+			for (GameObject weaponBehindLodge : weaponsBehindLodge) {
+				if (weaponBehindLodge.squareGameObjectIsOn == squareBehindLodge) {
+					AIRoutineUtils.pickupTarget(weaponBehindLodge);
+				}
+			}
+		}
 	}
 
 	public void setUpConversationJoinTheHunt() {
@@ -171,7 +206,7 @@ public class QuestSmallGame extends Quest {
 		};
 
 		ConversationPart conversationPartTheresEquipment = new ConversationPart(
-				"There's spare equipment 'round back, help yourself! Let us know when you're ready.",
+				"There's spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready.",
 				new ConversationResponse[] { conversationReponseEndAfterAccepting }, hunterPack.getLeader());
 
 		ConversationResponse conversationReponseEndAfterRefusing = new ConversationResponse("Leave", null);
@@ -205,13 +240,18 @@ public class QuestSmallGame extends Quest {
 	public Conversation getConversation(Actor actor) {
 		System.out.println("quest.getConversation()");
 		if (hunterPack.contains(actor)) {
-			System.out.println("quest.getConversation() a");
 			// Talking to a hunter
 			if (!questAcceptedFromHunters) {
-				System.out.println("quest.getConversation() b");
 				return conversationHuntersJoinTheHunt;
 			}
 
+		}
+
+		if (actor == environmentalist) {
+			// Talking to environmentalist
+			if (!questAcceptedFromHunters) {
+				return conversationEnviromentalistBeforeQuest;
+			}
 		}
 		return null;
 	}
