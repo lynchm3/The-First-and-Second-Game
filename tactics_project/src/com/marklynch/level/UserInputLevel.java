@@ -167,7 +167,7 @@ public class UserInputLevel {
 			if (scriptInterceptsClick) {
 				// Continue script
 				Game.level.script.click();
-			} else if (Game.buttonHoveringOver != null && Game.level.currentFactionMovingIndex == 0) {
+			} else if (Game.buttonHoveringOver != null) {
 				// Click button
 				Game.buttonHoveringOver.click();
 			} else if (Game.level.conversation != null) {

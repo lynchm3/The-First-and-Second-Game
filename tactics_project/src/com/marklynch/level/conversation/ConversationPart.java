@@ -31,7 +31,7 @@ public class ConversationPart {
 		TextureUtils.drawTexture(talker.imageTexture, 1.0f, 0, Game.halfWindowHeight, Game.halfWindowHeight,
 				Game.windowHeight);
 
-		TextureUtils.drawTexture(Game.level.activeActor.imageTexture, 1.0f, Game.windowWidth,
+		TextureUtils.drawTexture(Game.level.factions.get(0).actors.get(0).imageTexture, 1.0f, Game.windowWidth,
 				Game.windowWidth - Game.halfWindowHeight, Game.halfWindowHeight, Game.windowHeight);
 
 		windowSelectConversationResponse.draw();

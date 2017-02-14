@@ -9,6 +9,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
 
 public class QuestSmallGame extends Quest {
@@ -81,6 +82,7 @@ public class QuestSmallGame extends Quest {
 
 		setUpConversationJoinTheHunt();
 		setUpConversationImNotSpying();
+		setUpConversationSaveTheWolf();
 
 	}
 
@@ -191,6 +193,10 @@ public class QuestSmallGame extends Quest {
 					AIRoutineUtils.pickupTarget(weaponBehindLodge);
 				}
 			}
+
+			if (actor.straightLineDistanceTo(Game.level.factions.get(0).actors.get(0).squareGameObjectIsOn) < 2) {
+				new ActionTalk(actor, Game.level.factions.get(0).actors.get(0)).perform();
+			}
 		}
 	}
 
@@ -208,6 +214,8 @@ public class QuestSmallGame extends Quest {
 			// Talking to environmentalist
 			if (!questAcceptedFromHunters) {
 				return conversationEnviromentalistImNotSpying;
+			} else {
+				return conversationEnviromentalistSaveTheWolf;
 			}
 		}
 		return null;
@@ -262,10 +270,17 @@ public class QuestSmallGame extends Quest {
 		// ConversationResponse("Leave",
 		// null) {
 		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null);
-		ConversationPart conversationPartImNotSpying = new ConversationPart(
-				"What? NO! I'm not spying! You're spying!!!",
+		ConversationPart conversationPartImNotSpying = new ConversationPart("What? NO! I'm not spying! You're spying!",
 				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalist);
 		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying);
+	}
+
+	private void setUpConversationSaveTheWolf() {
+		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null);
+		ConversationPart conversationPartSaveTheWolf = new ConversationPart("Save the wolf!",
+				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalist);
+		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf);
+
 	}
 
 }
