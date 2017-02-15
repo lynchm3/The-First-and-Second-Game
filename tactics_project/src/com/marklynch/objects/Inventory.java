@@ -185,7 +185,7 @@ public class Inventory {
 	public boolean isPassable() {
 		for (GameObject gameObject : gameObjects) {
 
-			if (gameObject instanceof Actor) {
+			if (gameObject != Game.level.player && gameObject instanceof Actor) {
 				return true;
 				// Actor actor = (Actor) gameObject;
 				// if (actor.travelDistance - actor.distanceMovedThisTurn > 0) {

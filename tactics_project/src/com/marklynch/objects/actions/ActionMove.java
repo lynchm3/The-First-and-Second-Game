@@ -1,5 +1,6 @@
 package com.marklynch.objects.actions;
 
+import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
 
@@ -32,14 +33,24 @@ public class ActionMove extends Action {
 		if (squareToMoveTo == actor.squareGameObjectIsOn || !squareToMoveTo.inventory.isPassable())
 			return;
 
+		if (actor != Game.level.player && actor.swapCooldown > 0) {
+			actor.swapCooldown--;
+			return;
+		}
+
 		Square oldSquare = actor.squareGameObjectIsOn;
 		Actor actorInTheWay = (Actor) squareToMoveTo.inventory.getGameObjectThatCantShareSquare();
+
+		if (actorInTheWay == Game.level.player) {
+			return;
+		}
 
 		if (actorInTheWay == null) {
 			move(actor, squareToMoveTo);
 		} else if (actorInTheWay != null && (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn > 0)) {
 			move(actorInTheWay, oldSquare);
 			move(actor, squareToMoveTo);
+			actor.swapCooldown = 2;
 		} else {
 			// There's someone in the way, but they dont have the movement
 			// points to swap with u, wait till next turn
