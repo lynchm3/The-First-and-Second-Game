@@ -503,28 +503,48 @@ public class Editor {
 			hunterBrent.inventory.get(i).inventoryThatHoldsThisObject = hunterBrent.inventory;
 		}
 
-		Bed bedForHunterBront = new Bed("Hunter Bront's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[9][9],
-				new Inventory(), false, true, false, false);
+		Bed bedForHunterBront1 = new Bed("Hunter Bront 1's Bed", 5, "bed.png", "bed_Covers.png",
+				Game.level.squares[9][9], new Inventory(), false, true, false, false);
 
-		Actor hunterBront = new Hunter("Hunter Bront", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[9][9], 1, bedForHunterBront, inventoryForActor1.makeCopy(), true, false, true);
-		hunterBront.faction = Game.level.factions.get(1);
-		hunterBront.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterBront);
-		for (int i = 0; i < hunterBront.inventory.size(); i++) {
-			hunterBront.inventory.get(i).inventoryThatHoldsThisObject = hunterBront.inventory;
+		Actor hunterBront1 = new Hunter("Hunter Bront 1", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
+				Game.level.squares[9][9], 1, bedForHunterBront1, inventoryForActor1.makeCopy(), true, false, true);
+		hunterBront1.faction = Game.level.factions.get(1);
+		hunterBront1.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(hunterBront1);
+		for (int i = 0; i < hunterBront1.inventory.size(); i++) {
+			hunterBront1.inventory.get(i).inventoryThatHoldsThisObject = hunterBront1.inventory;
+		}
+
+		Actor hunterBront2 = new Hunter("Hunter Bront 2", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
+				Game.level.squares[9][10], 1, null, inventoryForActor1.makeCopy(), true, false, true);
+		hunterBront2.faction = Game.level.factions.get(1);
+		hunterBront2.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(hunterBront2);
+		for (int i = 0; i < hunterBront2.inventory.size(); i++) {
+			hunterBront2.inventory.get(i).inventoryThatHoldsThisObject = hunterBront2.inventory;
+		}
+
+		Actor hunterBront3 = new Hunter("Hunter Bront 3", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
+				Game.level.squares[10][10], 1, null, inventoryForActor1.makeCopy(), true, false, true);
+		hunterBront3.faction = Game.level.factions.get(1);
+		hunterBront3.factionGUID = Game.level.factions.get(1).guid;
+		Game.level.factions.get(1).actors.add(hunterBront3);
+		for (int i = 0; i < hunterBront3.inventory.size(); i++) {
+			hunterBront3.inventory.get(i).inventoryThatHoldsThisObject = hunterBront3.inventory;
 		}
 
 		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();
 		hunterPackMembers.add(hunterBrent);
-		hunterPackMembers.add(hunterBront);
+		hunterPackMembers.add(hunterBront1);
+		hunterPackMembers.add(hunterBront2);
+		hunterPackMembers.add(hunterBront3);
 		Group hunterPack = new Group("Hunter pack", hunterPackMembers, hunterBrent);
 
 		new Sign("Hunt Plan", 5, "sign.png", Game.level.squares[6][8], new Inventory(), true, false, false, true,
 				"Weakness: Water\nStrength: Fire");
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
-				"environmentalist.png", Game.level.squares[7][12], 1, bedForHunterBront, inventoryForActor1.makeCopy(),
+				"environmentalist.png", Game.level.squares[7][12], 1, bedForHunterBront1, inventoryForActor1.makeCopy(),
 				true, false, true);
 		environmentalistBill.faction = Game.level.factions.get(1);
 		environmentalistBill.factionGUID = Game.level.factions.get(1).guid;

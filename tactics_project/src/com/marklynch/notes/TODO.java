@@ -2,6 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Group members can follow their leaders in to buildings :D
+	// If there's multiple followers they get stuck leapfrogging eachother @ the
+	// door.
+	// The group of hunters follow the leader to bed, lol
+
 	// Update the hunter routine to attack any wild animal within 5 squares
 	// if ur gone for more than 20 turns then the hunters should start a camp
 	// fire or go back to the drawing board

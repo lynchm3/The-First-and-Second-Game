@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
@@ -73,11 +74,40 @@ public class Group {
 			}
 		}
 
-		// AI move to random square
+		// AI move towards leader
 		if (actor == leader) {
 			return false;
 		} else {
-			AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);
+			if (actor.straightLineDistanceTo(leader.squareGameObjectIsOn) > 2) {
+				// Pick a random square within 2 squares
+				Vector<Square> possibleSquares = new Vector<Square>();
+				Vector<Square> squaresOneSquareAway = leader.getAllSquaresAtDistance(1);
+				for (Square square : squaresOneSquareAway) {
+					if (square.inventory.canShareSquare() && square.building == leader.squareGameObjectIsOn.building) {
+						possibleSquares.add(square);
+					}
+				}
+				Vector<Square> squaresTwoSquaresAway = leader.getAllSquaresAtDistance(2);
+				for (Square square : squaresTwoSquaresAway) {
+					if (square.inventory.canShareSquare() && square.building == leader.squareGameObjectIsOn.building) {
+						possibleSquares.add(square);
+					}
+				}
+
+				Square targetSquare = null;
+				if (possibleSquares.size() > 0) {
+					int index = (int) (Math.random() * possibleSquares.size());
+					if (index == possibleSquares.size())
+						index--;
+					targetSquare = possibleSquares.get(index);
+				}
+
+				if (targetSquare != null)
+					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+
+				// AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);
+			}
+			// AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);
 			actor.activityDescription = leader.activityDescription;
 			return true;
 		}
