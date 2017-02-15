@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// When someone is sleeping make them impassable
+
 	// Group members can follow their leaders in to buildings :D
 	// If there's multiple followers they get stuck leapfrogging eachother @ the
 	// door.

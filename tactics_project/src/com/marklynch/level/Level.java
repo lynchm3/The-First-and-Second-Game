@@ -499,6 +499,7 @@ public class Level {
 			for (Actor actor : faction.actors) {
 				actor.distanceMovedThisTurn = 0;
 				actor.hasAttackedThisTurn = false;
+				// actor.wasSwappedWithThisTurn = false;
 			}
 		}
 

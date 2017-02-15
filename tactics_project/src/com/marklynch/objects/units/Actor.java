@@ -76,6 +76,8 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public transient Conversation conversation;
 
+	public boolean wasSwappedWithThisTurn = false;
+
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {

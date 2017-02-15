@@ -538,7 +538,7 @@ public class Editor {
 		hunterPackMembers.add(hunterBront1);
 		hunterPackMembers.add(hunterBront2);
 		hunterPackMembers.add(hunterBront3);
-		Group hunterPack = new Group("Hunter pack", hunterPackMembers, hunterBrent);
+		Group hunterPack = new Group("Hunter pack", hunterPackMembers, hunterBront1);
 
 		new Sign("Hunt Plan", 5, "sign.png", Game.level.squares[6][8], new Inventory(), true, false, false, true,
 				"Weakness: Water\nStrength: Fire");

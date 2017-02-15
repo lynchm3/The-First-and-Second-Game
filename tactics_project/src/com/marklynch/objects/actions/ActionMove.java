@@ -23,6 +23,9 @@ public class ActionMove extends Action {
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
 
+		System.out.println("actor.distanceMovedThisTurn = " + actor.distanceMovedThisTurn);
+		System.out.println("actor.travelDistance = " + actor.travelDistance);
+
 		if (actor.travelDistance - actor.distanceMovedThisTurn <= 0)
 			return;
 

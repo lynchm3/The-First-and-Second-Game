@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Vector;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
@@ -18,6 +19,7 @@ public class Group {
 	protected transient Square targetSquare;
 	protected transient ArrayList<Actor> attackers;
 	public transient Quest quest;
+	public HashMap<Actor, Square> targetSquares = new HashMap<Actor, Square>();
 
 	public Group(String name, ArrayList<Actor> members, Actor leader) {
 		super();
@@ -102,10 +104,18 @@ public class Group {
 					targetSquare = possibleSquares.get(index);
 				}
 
+				if (targetSquare != null) {
+					targetSquares.put(actor, targetSquare);
+					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+				}
+
+				// AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);
+			} else {
+
+				Square targetSquare = targetSquares.get(actor);
 				if (targetSquare != null)
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 
-				// AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);
 			}
 			// AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);
 			actor.activityDescription = leader.activityDescription;
