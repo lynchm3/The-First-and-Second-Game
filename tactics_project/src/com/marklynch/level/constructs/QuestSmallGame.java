@@ -96,15 +96,18 @@ public class QuestSmallGame extends Quest {
 		// Set flags
 
 		// The wolves are dead
+		System.out.println("wolvesDead @ start = " + wolvesDead);
 		if (wolvesDead == false) {
 			wolvesDead = true;
 			for (int i = 0; i < wolfPack.size(); i++) {
+				System.out.println("wolfPack.getMember(i).remainingHealth = " + wolfPack.getMember(i).remainingHealth);
 				if (wolfPack.getMember(i).remainingHealth > 0) {
 					wolvesDead = false;
 					break;
 				}
 			}
 		}
+		System.out.println("wolvesDead @ end = " + wolvesDead);
 
 		// Player has attacked the wolves
 		if (playerAttackedWolves == false) {
@@ -139,6 +142,7 @@ public class QuestSmallGame extends Quest {
 
 	@Override
 	public boolean update(Actor actor) {
+		update();
 		if (hunterPack.contains(actor)) {
 			return updateHunter(actor);
 		} else if (actor == environmentalist) {
@@ -155,10 +159,8 @@ public class QuestSmallGame extends Quest {
 			actor.activityDescription = ACTIVITY_PLANNING_A_HUNT;
 			if (actor == hunterPack.getLeader()) {
 				AIRoutineUtils.moveTowardsTargetSquare(Game.level.squares[5][8]);
-			} else {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(hunterPack.getLeader());
 			}
-		} else if (readyToGo) {
+		} else if (readyToGo && !this.wolvesDead) {
 
 			if (actor == hunterPack.getLeader()) {
 
@@ -171,13 +173,9 @@ public class QuestSmallGame extends Quest {
 						AIRoutineUtils.moveTowardsTargetToAttack(superWolf);
 					}
 				}
-			} else {
-				actor.activityDescription = hunterPack.getLeader().activityDescription;
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(hunterPack.getLeader());
 			}
+		} else if (this.wolvesDead) {
 
-			// this.questCurrentObjective =
-			// OBJECTIVE_FOLLOW_THE_HUNTERS_TO_SUPERWOLF;
 		}
 		return true;
 
