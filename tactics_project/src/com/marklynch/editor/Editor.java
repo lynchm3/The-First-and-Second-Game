@@ -150,22 +150,22 @@ public class Editor {
 		colors.add(new Color(Color.CYAN));
 		colors.add(new Color(Color.ORANGE));
 
-		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png", 100, null, true, false);
+		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png", 100, null, true, false, 1, 1);
 		gameObjectTemplates.add(weaponTemplate0);
-		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png", 100, null, true, false);
+		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png", 100, null, true, false, 1, 1);
 		gameObjectTemplates.add(weaponTemplate1);
-		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png", 100, null, true, false);
+		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png", 100, null, true, false, 1, 1);
 		gameObjectTemplates.add(weaponTemplate2);
 
 		GameObjectTemplate gameObjectTemplate = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png", null,
-				new Inventory(), true, false, false, true);
+				new Inventory(), true, false, false, true, 1, 1);
 		gameObjectTemplates.add(gameObjectTemplate);
 
-		Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true, false);
+		Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true, false, 1, 1);
 		gameObjectTemplates.add(furTemplate);
 
 		ActorTemplate actorTemplate = new ActorTemplate("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", null, 4,
-				new Inventory(), false, false, true);
+				new Inventory(), false, false, true, 1, 1);
 		gameObjectTemplates.add(actorTemplate);
 
 		for (int i = 0; i < gameObjectTemplates.size(); i++) {
@@ -429,15 +429,26 @@ public class Editor {
 
 		// Add a game object
 		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[4][2], new Inventory(), true,
-				false, false, true);
+				false, false, true, 1, 1);
 
-		new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true, true, false);
+		new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true, true, false, 1, 1);
 		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[21][9], new
 		// Inventory(), false, true, true, false);
 		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[23][16], new
 		// Inventory(), false, true, true, false);
-		new Junk("Ground fur", 5, "fur.png", Game.level.squares[25][17], new Inventory(), false, true, true, false);
-		new Junk("Ground fur", 5, "fur.png", Game.level.squares[33][19], new Inventory(), false, true, true, false);
+		new Junk("Ground fur", 5, "fur.png", Game.level.squares[25][17], new Inventory(), false, true, true, false, 1,
+				1);
+		new Junk("Ground fur", 5, "fur.png", Game.level.squares[33][19], new Inventory(), false, true, true, false, 1,
+				1);
+
+		new GameObject("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), false, false, false, false,
+				1f, 1.5f);
+		new GameObject("Tree", 100, "tree_1.png", Game.level.squares[21][19], new Inventory(), false, false, false,
+				false, 1f, 1.5f);
+		new GameObject("Tree", 100, "tree_1.png", Game.level.squares[14][8], new Inventory(), false, false, false,
+				false, 1f, 1.5f);
+		new GameObject("Tree", 100, "tree_1.png", Game.level.squares[19][3], new Inventory(), false, false, false,
+				false, 1f, 1.5f);
 
 		// Add factions
 		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));
@@ -482,7 +493,7 @@ public class Editor {
 
 		// Add actor
 		Actor player = Game.level.player = new Actor("You", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png",
-				Game.level.squares[0][4], 1, null, inventoryForActor0, true, false, true);
+				Game.level.squares[0][4], 1, null, inventoryForActor0, true, false, true, 1, 1);
 		player.faction = Game.level.factions.get(0);
 		player.factionGUID = Game.level.factions.get(0).guid;
 
@@ -492,10 +503,10 @@ public class Editor {
 		}
 
 		Bed bedForHunterBrent = new Bed("Hunter Brent's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[0][5],
-				new Inventory(), false, true, false, false);
+				new Inventory(), false, true, false, false, 1, 1);
 
 		Actor hunterBrent = new Hunter("Hunter Brent", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
-				Game.level.squares[0][2], 1, bedForHunterBrent, inventoryForActor1, true, false, true);
+				Game.level.squares[0][2], 1, bedForHunterBrent, inventoryForActor1, true, false, true, 1, 1);
 		hunterBrent.faction = Game.level.factions.get(1);
 		hunterBrent.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(hunterBrent);
@@ -504,10 +515,11 @@ public class Editor {
 		}
 
 		Bed bedForHunterBront1 = new Bed("Hunter Bront 1's Bed", 5, "bed.png", "bed_Covers.png",
-				Game.level.squares[9][9], new Inventory(), false, true, false, false);
+				Game.level.squares[9][9], new Inventory(), false, true, false, false, 1, 1);
 
 		Actor hunterBront1 = new Hunter("Hunter Bront 1", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[9][9], 1, bedForHunterBront1, inventoryForActor1.makeCopy(), true, false, true);
+				Game.level.squares[9][9], 1, bedForHunterBront1, inventoryForActor1.makeCopy(), true, false, true, 1,
+				1);
 		hunterBront1.faction = Game.level.factions.get(1);
 		hunterBront1.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(hunterBront1);
@@ -516,7 +528,7 @@ public class Editor {
 		}
 
 		Actor hunterBront2 = new Hunter("Hunter Bront 2", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[9][10], 1, null, inventoryForActor1.makeCopy(), true, false, true);
+				Game.level.squares[9][10], 1, null, inventoryForActor1.makeCopy(), true, false, true, 1, 1);
 		hunterBront2.faction = Game.level.factions.get(1);
 		hunterBront2.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(hunterBront2);
@@ -525,7 +537,7 @@ public class Editor {
 		}
 
 		Actor hunterBront3 = new Hunter("Hunter Bront 3", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[10][10], 1, null, inventoryForActor1.makeCopy(), true, false, true);
+				Game.level.squares[10][10], 1, null, inventoryForActor1.makeCopy(), true, false, true, 1, 1);
 		hunterBront3.faction = Game.level.factions.get(1);
 		hunterBront3.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(hunterBront3);
@@ -541,11 +553,11 @@ public class Editor {
 		Group hunterPack = new Group("Hunter pack", hunterPackMembers, hunterBront1);
 
 		new Sign("Hunt Plan", 5, "sign.png", Game.level.squares[6][8], new Inventory(), true, false, false, true,
-				"Weakness: Water\nStrength: Fire");
+				"Weakness: Water\nStrength: Fire", 1, 1);
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, bedForHunterBront1, inventoryForActor1.makeCopy(),
-				true, false, true);
+				true, false, true, 1, 1);
 		environmentalistBill.faction = Game.level.factions.get(1);
 		environmentalistBill.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(environmentalistBill);
@@ -554,19 +566,19 @@ public class Editor {
 		}
 
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
-				Game.level.squares[22][16], 1, null, inventoryForWildAnimal, true, false, true);
+				Game.level.squares[22][16], 1, null, inventoryForWildAnimal, true, false, true, 1, 1);
 		superWolf.faction = Game.level.factions.get(2);
 		superWolf.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(superWolf);
 
 		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
-				Game.level.squares[20][15], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
+				Game.level.squares[20][15], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true, 1, 1);
 		wolf2.faction = Game.level.factions.get(2);
 		wolf2.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(wolf2);
 
 		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
-				Game.level.squares[20][17], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
+				Game.level.squares[20][17], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true, 1, 1);
 		wolf3.faction = Game.level.factions.get(2);
 		wolf3.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(wolf3);
@@ -584,7 +596,7 @@ public class Editor {
 				weaponsBehindTheLodge);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
-				1, null, new Inventory(), true, false, true);
+				1, null, new Inventory(), true, false, true, 1, 1);
 		trader.faction = Game.level.factions.get(1);
 		trader.factionGUID = Game.level.factions.get(1).guid;
 		Game.level.factions.get(1).actors.add(trader);

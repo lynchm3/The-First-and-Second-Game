@@ -11,9 +11,9 @@ public class GameObjectExploder extends GameObject {
 
 	public GameObjectExploder(String name, int health, String imagePath, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
-			boolean canContainOtherObjects) {
+			boolean canContainOtherObjects, float widthRatio, float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects);
+				canContainOtherObjects, widthRatio, heightRatio);
 	}
 
 	public SquarePiece[] squarePieces;
@@ -322,5 +322,12 @@ public class GameObjectExploder extends GameObject {
 			this.y2 += velocityY;
 			this.y3 += velocityY;
 		}
+	}
+
+	@Override
+	public GameObjectExploder makeCopy(Square square) {
+		return new GameObjectExploder(new String(name), (int) totalHealth, imageTexturePath, square,
+				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				widthRatio, heightRatio);
 	}
 }

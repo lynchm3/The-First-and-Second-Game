@@ -271,22 +271,34 @@ public class Level {
 
 		// Background decorations
 
+		// Squares
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				// is it better to bind once and draw all the same ones?
+				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
+					gameObject.draw1();
+					gameObject.draw2();
+					gameObject.draw3();
+				}
+			}
+		}
+
 		for (Decoration decoration : decorations) {
 			decoration.draw();
 		}
 
-		// Objects 1
-
-		for (GameObject gameObject : inanimateObjectsOnGround) {
-			gameObject.draw1();
-		}
-
-		// Actors 1
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.draw1();
-			}
-		}
+		// // Objects 1
+		//
+		// for (GameObject gameObject : inanimateObjectsOnGround) {
+		// gameObject.draw1();
+		// }
+		//
+		// // Actors 1
+		// for (Faction faction : factions) {
+		// for (Actor actor : faction.actors) {
+		// actor.draw1();
+		// }
+		// }
 
 		// Foreground decorations
 
@@ -294,22 +306,22 @@ public class Level {
 			decoration.draw2();
 		}
 
-		// Objects 2
-
-		for (GameObject gameObject : inanimateObjectsOnGround) {
-			gameObject.draw2();
-		}
-
-		// Actors 2
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.draw2();
-			}
-		}
-
-		for (GameObject gameObject : inanimateObjectsOnGround) {
-			gameObject.draw3();
-		}
+		// // Objects 2
+		//
+		// for (GameObject gameObject : inanimateObjectsOnGround) {
+		// gameObject.draw2();
+		// }
+		//
+		// // Actors 2
+		// for (Faction faction : factions) {
+		// for (Actor actor : faction.actors) {
+		// actor.draw2();
+		// }
+		// }
+		//
+		// for (GameObject gameObject : inanimateObjectsOnGround) {
+		// gameObject.draw3();
+		// }
 
 		// draw any projectiles
 		for (Projectile projectile : projectiles) {

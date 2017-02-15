@@ -7,9 +7,10 @@ import com.marklynch.utils.TextureUtils;
 public class Roof extends GameObject {
 
 	public Roof(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects) {
+			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
+			float widthRatio, float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects);
+				canContainOtherObjects, widthRatio, heightRatio);
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class Roof extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new Roof(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, widthRatio, heightRatio);
 	}
 
 }

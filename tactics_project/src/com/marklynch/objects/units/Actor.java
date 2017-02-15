@@ -80,11 +80,12 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
-			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {
+			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
+			float widthRatio, float heightRatio) {
 
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects);
+				canContainOtherObjects, widthRatio, heightRatio);
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -273,7 +274,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 			// add a carcass
 			GameObject carcass = new Carcass(this.name + " carcass", 5, "carcass.png", this.squareGameObjectIsOn,
-					new Inventory(), false, true, false, true);
+					new Inventory(), false, true, false, true, 1, 1);
 
 			this.giveAllToTarget(null, carcass);
 			this.squareGameObjectIsOn.inventory.add(carcass);
@@ -437,9 +438,12 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public Actor makeCopy(Square square) {
 
-		return new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
-				imageTexturePath, square, travelDistance, null, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects);
+		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
+				endurance, imageTexturePath, square, travelDistance, null, inventory, showInventory, fitsInInventory,
+				canContainOtherObjects, widthRatio, heightRatio);
+		actor.faction = this.faction;
+		actor.factionGUID = this.faction.guid;
+		return actor;
 	}
 
 	@Override

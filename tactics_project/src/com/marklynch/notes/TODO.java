@@ -2,7 +2,21 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// When someone is sleeping make them impassable
+	// To find a colour pallet (per area, for the whole game / per town / per
+	// faction) maybe have the app randomly cycle through folour filters and see
+	// what works.
+	// BUT each area should definitel have it's own color filter
+
+	// Draw nuts on the tree and if you hit the tree the nuts drop
+	// Tree class draw it's inventory in top half
+	// When u hit the tree it moves it's nuts from it's inventory to the ground
+	// :)
+	// Maybe after T(h)ree hits? Or when health goes below 20%? Or if u hit it
+	// with a blunt weapon?
+
+	// When someone is sleeping make them impassable, need extra special logic
+	// for sleeping. Heal, get up after X amount of time, be impassable, needs a
+	// spcific status/flag for actor.
 
 	// Group members can follow their leaders in to buildings :D
 	// If there's multiple followers they get stuck leapfrogging eachother @ the

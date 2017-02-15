@@ -15,9 +15,9 @@ public class Sign extends GameObject {
 
 	public Sign(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
-			String text) {
+			String text, float widthRatio, float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects);
+				canContainOtherObjects, widthRatio, heightRatio);
 
 		this.text = text;
 		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
@@ -30,7 +30,7 @@ public class Sign extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new Sign(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, text);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, text, widthRatio, heightRatio);
 	}
 
 	@Override

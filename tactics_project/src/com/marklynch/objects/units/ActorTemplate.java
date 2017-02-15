@@ -21,9 +21,10 @@ public class ActorTemplate extends GameObject {
 
 	public ActorTemplate(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
-			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects) {
+			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
+			float widthRatio, float heightRatio) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
-				canContainOtherObjects);
+				canContainOtherObjects, widthRatio, heightRatio);
 		this.strength = strength;
 		this.dexterity = dexterity;
 		this.intelligence = intelligence;
@@ -48,7 +49,7 @@ public class ActorTemplate extends GameObject {
 	public Actor makeCopy(Square square) {
 		Actor actor = new Actor(new String(name), new String(title), actorLevel, (int) totalHealth, strength, dexterity,
 				intelligence, endurance, imageTexturePath, square, travelDistance, null, inventory.makeCopy(),
-				showInventory, fitsInInventory, canContainOtherObjects);
+				showInventory, fitsInInventory, canContainOtherObjects, widthRatio, heightRatio);
 		actor.faction = Game.level.factions.get(1);
 		actor.factionGUID = Game.level.factions.get(1).guid;
 		return actor;

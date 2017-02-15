@@ -47,7 +47,7 @@ public class TemplatesSettingsWindow extends SettingsWindow {
 			public void click() {
 
 				WeaponTemplate newWeapon = new WeaponTemplate("Weapon Template " + editor.gameObjectTemplates.size(), 3,
-						1, 1, "a3r1.png", 100, null, true, false);
+						1, 1, "a3r1.png", 100, null, true, false, 1, 1);
 				editor.gameObjectTemplates.add(newWeapon);
 				updateButtons();
 				editor.clearSelectedObject();

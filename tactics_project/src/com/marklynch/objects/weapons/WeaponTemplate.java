@@ -15,10 +15,10 @@ public class WeaponTemplate extends GameObject {
 	public float maxRange = 0;
 
 	public WeaponTemplate(String name, float damage, float minRange, float maxRange, String imagePath, float health,
-			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects) {
+			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects, float widthRatio, float heightRatio) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
-				canContainOtherObjects);
+				canContainOtherObjects, widthRatio, heightRatio);
 
 		this.damage = damage;
 		this.minRange = minRange;
@@ -28,6 +28,6 @@ public class WeaponTemplate extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new Weapon(new String(name), damage, minRange, maxRange, imageTexturePath, totalHealth, square,
-				fitsInInventory, canContainOtherObjects);
+				fitsInInventory, canContainOtherObjects, widthRatio, heightRatio);
 	}
 }

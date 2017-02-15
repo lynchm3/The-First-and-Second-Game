@@ -24,7 +24,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class GameObject extends GameObjectTemplate {
+public class GameObject extends GameObjectTemplate implements Comparable {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
@@ -65,11 +65,14 @@ public class GameObject extends GameObjectTemplate {
 	// Quest
 	public transient Quest quest;
 
+	final float height, width, drawOffsetX, drawOffsetY;
+
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects) {
+			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
+			float widthRatio, float heightRatio) {
 
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects);
+				canContainOtherObjects, widthRatio, heightRatio);
 		this.remainingHealth = health;
 
 		if (squareGameObjectIsOn != null) {
@@ -78,6 +81,12 @@ public class GameObject extends GameObjectTemplate {
 		}
 
 		loadImages();
+
+		width = Game.SQUARE_WIDTH * widthRatio;
+		height = Game.SQUARE_HEIGHT * heightRatio;
+		drawOffsetX = Game.HALF_SQUARE_WIDTH - width / 2;
+		drawOffsetY = Game.SQUARE_HEIGHT - height;
+
 	}
 
 	@Override
@@ -118,15 +127,17 @@ public class GameObject extends GameObjectTemplate {
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
-			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+					+ drawOffsetX);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+					+ drawOffsetY);
 
 			float alpha = 1.0f;
 
 			// TextureUtils.skipNormals = true;
-			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
-					actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels,
-					actorPositionYInPixels + Game.SQUARE_HEIGHT);
+
+			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + width,
+					actorPositionYInPixels, actorPositionYInPixels + height);
 			// TextureUtils.skipNormals = false;
 		}
 	}
@@ -356,7 +367,7 @@ public class GameObject extends GameObjectTemplate {
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, widthRatio, heightRatio);
 	}
 
 	public ArrayList<Weapon> getWeaponsInInventory() {
@@ -387,5 +398,12 @@ public class GameObject extends GameObjectTemplate {
 
 	public Conversation getConversation() {
 		return null;
+	}
+
+	@Override
+	public int compareTo(Object other) {
+		// GameObject otherGameObject = (GameObject)other;
+		// return this.squareGameObjectIsOn.yInGrid
+		return 0;
 	}
 }

@@ -11,9 +11,9 @@ public class Weapon extends WeaponTemplate {
 	public Owner owner;
 
 	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, float health,
-			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects) {
+			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects, float widthRatio, float heightRatio) {
 		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
-				canContainOtherObjects);
+				canContainOtherObjects, widthRatio, heightRatio);
 
 		this.owner = owner;
 	}

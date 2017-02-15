@@ -17,12 +17,14 @@ public class GameObjectTemplate {
 	public boolean canShareSquare;
 	public boolean fitsInInventory;
 	public boolean canContainOtherObjects;
+	public float widthRatio = 1;
+	public float heightRatio = 1;
 
 	public transient Texture imageTexture = null;
 
 	public GameObjectTemplate(String name, float totalHealth, String imageTexturePath, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
-			boolean canContainOtherObjects) {
+			boolean canContainOtherObjects, float widthRatio, float heightRatio) {
 		super();
 		this.name = name;
 		this.totalHealth = totalHealth;
@@ -33,11 +35,13 @@ public class GameObjectTemplate {
 		this.canShareSquare = canShareSquare;
 		this.fitsInInventory = fitsInInventory;
 		this.canContainOtherObjects = canContainOtherObjects;
+		this.widthRatio = widthRatio;
+		this.heightRatio = heightRatio;
 	}
 
 	public GameObject makeCopy(Square square) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, widthRatio, heightRatio);
 	}
 
 	public void postLoad1() {
