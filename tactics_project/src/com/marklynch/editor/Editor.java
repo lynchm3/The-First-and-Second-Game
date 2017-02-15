@@ -432,6 +432,10 @@ public class Editor {
 				false, false, true);
 
 		new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true, true, false);
+		new Junk("Ground fur", 5, "fur.png", Game.level.squares[21][9], new Inventory(), false, true, true, false);
+		new Junk("Ground fur", 5, "fur.png", Game.level.squares[23][16], new Inventory(), false, true, true, false);
+		new Junk("Ground fur", 5, "fur.png", Game.level.squares[25][17], new Inventory(), false, true, true, false);
+		new Junk("Ground fur", 5, "fur.png", Game.level.squares[33][19], new Inventory(), false, true, true, false);
 
 		// Add factions
 		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));

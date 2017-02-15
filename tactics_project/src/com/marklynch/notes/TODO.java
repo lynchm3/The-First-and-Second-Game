@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Update the hunter routine to attack any wild animal within 5 squares
+	// if ur gone for more than 20 turns then the hunters should start a camp
+	// fire or go back to the drawing board
+
 	// TALK :)
 	// Talk can act like the AI, if quest != null, defer to the the quests talk
 	// method :)
