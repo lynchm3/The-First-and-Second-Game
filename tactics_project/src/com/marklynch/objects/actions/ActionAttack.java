@@ -37,8 +37,8 @@ public class ActionAttack extends Action {
 		attackTypeString = "attacked ";
 		Game.level.logOnScreen(new ActivityLog(new Object[] {
 
-				this, " " + attackTypeString + " ", targetGameObject, " with ", attacker.equippedWeapon.imageTexture,
-				" for " + attacker.equippedWeapon.damage + " damage" }));
+				attacker, " " + attackTypeString + " ", targetGameObject, " with ",
+				attacker.equippedWeapon.imageTexture, " for " + attacker.equippedWeapon.damage + " damage" }));
 
 		Actor actor = null;
 		if (targetGameObject instanceof Actor)

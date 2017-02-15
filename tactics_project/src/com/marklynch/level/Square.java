@@ -91,28 +91,31 @@ public class Square {
 
 		// square highlights
 
-		if (reachableBySelectedCharater || weaponsThatCanAttack.size() > 0) {
-
-			Texture highlightTexture = null;
-
-			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
-					&& this.inventory.size() != 0
-					&& Game.level.activeActor.equippedWeapon
-							.hasRange(Game.level.activeActor.straightLineDistanceTo(this))
-					&& !Game.level.activeActor.hasAttackedThisTurn) {
-				highlightTexture = Game.level.gameCursor.imageTexture4;
-			} else if (Game.level.currentFactionMovingIndex == 0 && (inPath))// ||
-				// this
-				// ==
-				// Game.squareMouseIsOver))
-				highlightTexture = Game.level.gameCursor.imageTexture3;
-			else if (reachableBySelectedCharater)
-				highlightTexture = Game.level.gameCursor.imageTexture;
-			else
-				highlightTexture = Game.level.gameCursor.imageTexture2;
-			TextureUtils.drawTexture(highlightTexture, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
-					squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
-		}
+		// if (reachableBySelectedCharater || weaponsThatCanAttack.size() > 0) {
+		//
+		// Texture highlightTexture = null;
+		//
+		// if (Game.level.activeActor != null &&
+		// Game.level.activeActor.equippedWeapon != null
+		// && this.inventory.size() != 0
+		// && Game.level.activeActor.equippedWeapon
+		// .hasRange(Game.level.activeActor.straightLineDistanceTo(this))
+		// && !Game.level.activeActor.hasAttackedThisTurn) {
+		// highlightTexture = Game.level.gameCursor.imageTexture4;
+		// } else if (Game.level.currentFactionMovingIndex == 0 && (inPath))//
+		// ||
+		// // this
+		// // ==
+		// // Game.squareMouseIsOver))
+		// highlightTexture = Game.level.gameCursor.imageTexture3;
+		// else if (reachableBySelectedCharater)
+		// highlightTexture = Game.level.gameCursor.imageTexture;
+		// else
+		// highlightTexture = Game.level.gameCursor.imageTexture2;
+		// TextureUtils.drawTexture(highlightTexture, squarePositionX,
+		// squarePositionX + Game.SQUARE_WIDTH,
+		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+		// }
 
 		// if (this.reachableBySelectedCharater) {
 		int costTextWidth = Game.font.getWidth("" + walkingDistanceToSquare);

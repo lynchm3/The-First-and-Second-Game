@@ -1,7 +1,7 @@
 package com.marklynch.level.conversation;
 
 import com.marklynch.Game;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -12,9 +12,9 @@ public class ConversationPart {
 	int textWidth;
 	int halfTextWidth;
 	public WindowSelectConversationResponse windowSelectConversationResponse;
-	public Actor talker;
+	public GameObject talker;
 
-	public ConversationPart(String text, ConversationResponse[] conversationResponses, Actor talker) {
+	public ConversationPart(String text, ConversationResponse[] conversationResponses, GameObject talker) {
 		super();
 		this.conversationResponses = conversationResponses;
 		this.text = text;

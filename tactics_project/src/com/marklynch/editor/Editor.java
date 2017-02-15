@@ -37,6 +37,7 @@ import com.marklynch.objects.GameObjectExploder;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Junk;
+import com.marklynch.objects.Sign;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.ActorTemplate;
 import com.marklynch.objects.units.Hunter;
@@ -513,8 +514,8 @@ public class Editor {
 		hunterPackMembers.add(hunterBront);
 		Group hunterPack = new Group("Hunter pack", hunterPackMembers, hunterBrent);
 
-		new GameObject("Hunt Plan", 5, "hunt_plan.png", Game.level.squares[6][8], new Inventory(), true, false, false,
-				true);
+		new Sign("Hunt Plan", 5, "hunt_plan.png", Game.level.squares[6][8], new Inventory(), true, false, false, true,
+				"Weakness: Water\nStrength: Fire");
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, bedForHunterBront, inventoryForActor1.makeCopy(),

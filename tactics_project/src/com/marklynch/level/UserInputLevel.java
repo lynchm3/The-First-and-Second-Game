@@ -6,6 +6,8 @@ import org.lwjgl.input.Mouse;
 import com.marklynch.Game;
 import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionRead;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Path;
 
@@ -174,7 +176,7 @@ public class UserInputLevel {
 
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
 				if (Game.level.activeActor == Game.level.player)
-					interactWith(Game.squareMouseIsOver);
+					interactWith(Game.squareMouseIsOver, -1);
 			}
 		}
 
@@ -214,7 +216,7 @@ public class UserInputLevel {
 
 	static boolean interactedThisTurn = false;
 
-	public static void interactWith(Square square) {
+	public static void interactWith(Square square, int key) {
 
 		if (interactedThisTurn)
 			return;
@@ -229,8 +231,24 @@ public class UserInputLevel {
 
 		if (action != null) {
 			action.perform();
-			if (!(action instanceof ActionTalk))
+			if (!(action instanceof ActionRead) && !(action instanceof ActionTalk))
 				interactedThisTurn = true;
+			if (action instanceof ActionMove) {
+
+				if (key == Keyboard.KEY_UP) {
+					Game.dragY += Game.SQUARE_HEIGHT;
+				} else if (key == Keyboard.KEY_DOWN) {
+					Game.dragY -= Game.SQUARE_HEIGHT;
+
+				} else if (key == Keyboard.KEY_LEFT) {
+					Game.dragX += Game.SQUARE_WIDTH;
+
+				} else if (key == Keyboard.KEY_RIGHT) {
+					Game.dragX -= Game.SQUARE_WIDTH;
+
+				}
+
+			}
 		} else {
 			Game.level.popup = new PopupSelectObject(100, Game.level, square);
 		}
@@ -279,7 +297,8 @@ public class UserInputLevel {
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
 			if (y >= 0) {
-				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y]);
+				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
+						Keyboard.KEY_UP);
 			}
 		}
 	}
@@ -290,24 +309,33 @@ public class UserInputLevel {
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
 			if (y < Game.level.squares[0].length) {
-				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y]);
+				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
+						Keyboard.KEY_DOWN);
 			}
 		}
 
 	}
 
 	public static void leftTyped() {
-		int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
-		if (x >= 0) {
-			interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid]);
+		if (Game.level.popup != null) {
+		} else {
+			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
+			if (x >= 0) {
+				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
+						Keyboard.KEY_LEFT);
+			}
 		}
 
 	}
 
 	public static void rightTyped() {
-		int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
-		if (x < Game.level.squares.length) {
-			interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid]);
+		if (Game.level.popup != null) {
+		} else {
+			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
+			if (x < Game.level.squares.length) {
+				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
+						Keyboard.KEY_RIGHT);
+			}
 		}
 
 	}

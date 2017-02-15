@@ -12,6 +12,7 @@ import org.newdawn.slick.openal.Audio;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Quest;
+import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
@@ -381,6 +382,10 @@ public class GameObject extends GameObjectTemplate {
 	}
 
 	public Action getDefaultAction(Actor performer) {
+		return null;
+	}
+
+	public Conversation getConversation() {
 		return null;
 	}
 }
