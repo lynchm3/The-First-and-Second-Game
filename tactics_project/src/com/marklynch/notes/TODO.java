@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Why dont they move when he goes to bed? I think its coz
+	// getAllSquaresAtDistance(X) doesnt work, could ape findPath where limit =
+	// X
+
 	// getAllSquaresAtDistance method does NOT work
 
 	// Issue - if the world is constantly alive, people are gonna get stuck...

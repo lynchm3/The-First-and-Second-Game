@@ -46,10 +46,10 @@ public class ActionAttack extends Action {
 
 		if (targetGameObject.checkIfDestroyed()) {
 			if (targetGameObject instanceof Actor) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " killed ", targetGameObject }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", targetGameObject }));
 				((Actor) targetGameObject).faction.checkIfDestroyed();
 			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { this, " destroyed a ", targetGameObject }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", targetGameObject }));
 			}
 
 		}
