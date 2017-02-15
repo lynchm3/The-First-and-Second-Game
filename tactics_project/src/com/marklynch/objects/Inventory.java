@@ -182,20 +182,17 @@ public class Inventory {
 		return true;
 	}
 
-	public boolean isPassable() {
+	public boolean isPassable(Actor forActor) {
 		for (GameObject gameObject : gameObjects) {
 
-			if (gameObject != Game.level.player && gameObject instanceof Actor) {
-				return true;
-				// Actor actor = (Actor) gameObject;
-				// if (actor.travelDistance - actor.distanceMovedThisTurn > 0) {
-				// return false;
-				// }
+			if (forActor.group != null && forActor.group.getLeader() == gameObject)
+				return false;
 
-			} else {
-				if (gameObject != null && !gameObject.canShareSquare)
-					return false;
-			}
+			if (gameObject != Game.level.player && gameObject instanceof Actor)
+				return true;
+
+			if (gameObject != null && !gameObject.canShareSquare)
+				return false;
 		}
 		return true;
 	}

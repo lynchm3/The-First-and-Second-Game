@@ -15,7 +15,6 @@ import com.marklynch.level.constructs.Quest;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.objects.units.Path;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
@@ -55,8 +54,6 @@ public class GameObject extends GameObjectTemplate implements Comparable {
 	// POW
 	public transient GameObject powTarget = null;
 	public transient boolean showPow = false;
-
-	private transient int highestPathCostSeen = 0;
 
 	// Placement in inventory
 	public transient Inventory inventoryThatHoldsThisObject;
@@ -201,88 +198,6 @@ public class GameObject extends GameObjectTemplate implements Comparable {
 			return true;
 		}
 		return false;
-	}
-
-	public void calculatePathToAllSquares(Square[][] squares) {
-
-		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares[0].length; j++) {
-				squares[i][j].walkingDistanceToSquare = Integer.MAX_VALUE;
-			}
-		}
-
-		highestPathCostSeen = 0;
-		paths.clear();
-		Square currentSquare = squareGameObjectIsOn;
-		currentSquare.walkingDistanceToSquare = 0;
-
-		Vector<Square> startPath = new Vector<Square>();
-		startPath.add(currentSquare);
-		paths.put(currentSquare, new Path((Vector<Square>) startPath.clone(), 0));
-
-		for (int i = 0; i <= highestPathCostSeen; i++) {
-			// get all paths with that cost
-			Vector<Path> pathsWithCurrentCost = new Vector<Path>();
-			Vector<Path> pathsVector = new Vector<Path>();
-			for (Path path : paths.values()) {
-				pathsVector.add(path);
-			}
-			for (int j = 0; j < pathsVector.size(); j++) {
-				if (pathsVector.get(j).travelCost == i)
-					pathsWithCurrentCost.add(pathsVector.get(j));
-			}
-
-			for (int j = 0; j < pathsWithCurrentCost.size(); j++) {
-				Vector<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
-				calculatePathToAllSquares2(squares, Direction.UP, squaresInThisPath, i);
-				calculatePathToAllSquares2(squares, Direction.RIGHT, squaresInThisPath, i);
-				calculatePathToAllSquares2(squares, Direction.DOWN, squaresInThisPath, i);
-				calculatePathToAllSquares2(squares, Direction.LEFT, squaresInThisPath, i);
-
-			}
-		}
-	}
-
-	public void calculatePathToAllSquares2(Square[][] squares, Direction direction, Vector<Square> squaresInThisPath,
-			int pathCost) {
-
-		Square newSquare = null;
-
-		Square parentSquare = squaresInThisPath.get(squaresInThisPath.size() - 1);
-
-		if (direction == Direction.UP) {
-			if (parentSquare.yInGrid - 1 >= 0) {
-				newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid - 1];
-			}
-		} else if (direction == Direction.RIGHT) {
-			if (parentSquare.xInGrid + 1 < squares.length) {
-				newSquare = squares[parentSquare.xInGrid + 1][parentSquare.yInGrid];
-			}
-		} else if (direction == Direction.DOWN) {
-
-			if (parentSquare.yInGrid + 1 < squares[0].length) {
-				newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid + 1];
-			}
-		} else if (direction == Direction.LEFT) {
-			if (parentSquare.xInGrid - 1 >= 0) {
-				newSquare = squares[parentSquare.xInGrid - 1][parentSquare.yInGrid];
-			}
-		}
-
-		if (newSquare != null && newSquare.inventory.isPassable() && !squaresInThisPath.contains(newSquare)
-				&& !paths.containsKey(newSquare)) {
-			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
-			newPathSquares.add(newSquare);
-			int newDistance = pathCost + parentSquare.travelCost;
-			newSquare.walkingDistanceToSquare = newDistance;
-			if (newDistance > highestPathCostSeen)
-				highestPathCostSeen = newDistance;
-			Path newPath = new Path(newPathSquares, newDistance);
-			paths.put(newSquare, newPath);
-
-			// THEYRE MOCING ON TO THE SAME SQUARE
-
-		}
 	}
 
 	public Vector<Square> getAllSquaresAtDistance(float distance) {

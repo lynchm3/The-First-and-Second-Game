@@ -81,21 +81,24 @@ public class Group {
 		if (actor == leader) {
 			return false;
 		} else {
-			if (actor.straightLineDistanceTo(leader.squareGameObjectIsOn) > members.size() / 2) {
-				// Pick a random square within 2 squares
+
+			float maxDistanceFromLeader = 2;
+			if (members.size() > 6)
+				maxDistanceFromLeader = 3;
+
+			Square currentTarget = targetSquaresMap.get(actor);
+
+			if (currentTarget == leader.squareGameObjectIsOn
+					|| actor.straightLineDistanceTo(leader.squareGameObjectIsOn) > maxDistanceFromLeader) {
+
 				Vector<Square> possibleSquares = new Vector<Square>();
-				Vector<Square> squaresOneSquareAway = leader.getAllSquaresAtDistance(1);
-				for (Square square : squaresOneSquareAway) {
-					if (square.inventory.canShareSquare() && square.building == leader.squareGameObjectIsOn.building
-							&& !targetSquares.contains(square)) {
-						possibleSquares.add(square);
-					}
-				}
-				Vector<Square> squaresTwoSquaresAway = leader.getAllSquaresAtDistance(2);
-				for (Square square : squaresTwoSquaresAway) {
-					if (square.inventory.canShareSquare() && square.building == leader.squareGameObjectIsOn.building
-							&& !targetSquares.contains(square)) {
-						possibleSquares.add(square);
+				for (int i = 1; i <= maxDistanceFromLeader; i++) {
+					Vector<Square> squaresISquareAway = leader.getAllSquaresAtDistance(i);
+					for (Square square : squaresISquareAway) {
+						if (square.inventory.canShareSquare() && square.building == leader.squareGameObjectIsOn.building
+								&& !targetSquares.contains(square)) {
+							possibleSquares.add(square);
+						}
 					}
 				}
 
@@ -120,6 +123,8 @@ public class Group {
 				Square targetSquare = targetSquaresMap.get(actor);
 				if (targetSquare != null)
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+				if (actor.squareGameObjectIsOn == targetSquare)
+					targetSquaresMap.put(actor, null);
 
 			}
 			// AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);

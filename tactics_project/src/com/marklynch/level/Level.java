@@ -271,13 +271,27 @@ public class Level {
 
 		// Background decorations
 
-		// Squares
+		// GameObjects and actors
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.draw1();
+				}
+			}
+		}
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				// is it better to bind once and draw all the same ones?
+				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.draw2();
+				}
+			}
+		}
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				// is it better to bind once and draw all the same ones?
+				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.draw3();
 				}
 			}

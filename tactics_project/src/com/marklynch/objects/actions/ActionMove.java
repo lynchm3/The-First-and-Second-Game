@@ -30,7 +30,7 @@ public class ActionMove extends Action {
 		if (actor.travelDistance - actor.distanceMovedThisTurn <= 0)
 			return;
 
-		if (squareToMoveTo == actor.squareGameObjectIsOn || !squareToMoveTo.inventory.isPassable())
+		if (squareToMoveTo == actor.squareGameObjectIsOn || !squareToMoveTo.inventory.isPassable(actor))
 			return;
 
 		if (actor != Game.level.player && actor.swapCooldown > 0) {
@@ -47,10 +47,18 @@ public class ActionMove extends Action {
 
 		if (actorInTheWay == null) {
 			move(actor, squareToMoveTo);
+
+		} else if (actorInTheWay != null && actor.group != null && actor.group.getLeader() == actorInTheWay) {
+			// don't try to swap with you group leader
 		} else if (actorInTheWay != null && (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn > 0)) {
 			move(actorInTheWay, oldSquare);
 			move(actor, squareToMoveTo);
-			actor.swapCooldown = 2;
+			if (actorInTheWay.group != null && actorInTheWay.group.getLeader() == actor) {
+				// No swap cooldown for group leaders moving a member of their
+				// group
+			} else {
+				actor.swapCooldown = (int) (Math.random() * 3);
+			}
 		} else {
 			// There's someone in the way, but they dont have the movement
 			// points to swap with u, wait till next turn

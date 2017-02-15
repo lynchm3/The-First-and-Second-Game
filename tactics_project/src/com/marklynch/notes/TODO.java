@@ -2,7 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// Mark items as players? so that no1 will steal them? or just mark some as
+	// getAllSquaresAtDistance method does NOT work
+
+	// Issue - if the world is constantly alive, people are gonna get stuck...
+
+	// Test with just one follower
+
+	// Mark items as belonging to player? so that no1 will steal them? or just
+	// mark some as
 	// quest? Remember to release objects from quest also.
 
 	// distance from leader in the group should be based on size, otherwise
@@ -11,7 +18,7 @@ public class TODO {
 	// Theres a serious swap locations issue going on, people are getting stuck,
 	// particularly the huners when the go by the south wall of the lodge
 
-	// Put in 12 followers of the hunter lead, then we'll see
+	// Put in 12 followers of the hunter lead, then we'll see/
 
 	// NEED PENGUINS, can use graphics from club penguin coz its the funniest
 	// thing ever
