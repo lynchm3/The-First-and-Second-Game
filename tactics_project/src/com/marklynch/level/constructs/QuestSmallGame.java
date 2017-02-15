@@ -213,22 +213,29 @@ public class QuestSmallGame extends Quest {
 	@Override
 	public Conversation getConversation(Actor actor) {
 		if (hunterPack.contains(actor)) {
-			// Talking to a hunter
-			if (!questAcceptedFromHunters) {
-				return conversationHuntersJoinTheHunt;
-			} else if (!readyToGo) {
-				return conversationHuntersReadyToGo;
-			}
-
+			return getConversationForHunter(actor);
+		} else if (actor == environmentalist) {
+			return getConversationForEnvironmentalist(actor);
 		}
+		return null;
+	}
 
-		if (actor == environmentalist) {
-			// Talking to environmentalist
-			if (!questAcceptedFromHunters) {
-				return conversationEnviromentalistImNotSpying;
-			} else if (!talkedToEnvironmentalist) {
-				return conversationEnviromentalistSaveTheWolf;
-			}
+	public Conversation getConversationForHunter(Actor actor) {
+		// Talking to a hunter
+		if (!questAcceptedFromHunters) {
+			return conversationHuntersJoinTheHunt;
+		} else if (!readyToGo) {
+			return conversationHuntersReadyToGo;
+		}
+		return null;
+	}
+
+	public Conversation getConversationForEnvironmentalist(Actor actor) {
+		// Talking to environmentalist
+		if (!questAcceptedFromHunters) {
+			return conversationEnviromentalistImNotSpying;
+		} else if (!talkedToEnvironmentalist) {
+			return conversationEnviromentalistSaveTheWolf;
 		}
 		return null;
 	}
@@ -279,6 +286,13 @@ public class QuestSmallGame extends Quest {
 	}
 
 	private void setUpConversationSaveTheWolf() {
+
+		// Should Be
+		// 1. Plead
+		// 2. Here's your hunting equipment
+		// 3. And here, this should help if you choose to do the right thing
+		// (give you remove imbument or imbue with fire.
+
 		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null) {
 			@Override
 			public void select() {
