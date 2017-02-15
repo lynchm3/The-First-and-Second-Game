@@ -86,8 +86,9 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		// Defer to quest
 		if (Game.level.activeActor.quest != null) {
-			Game.level.activeActor.quest.update(Game.level.activeActor);
-			return;
+			if (Game.level.activeActor.quest.update(Game.level.activeActor)) {
+				return;
+			}
 		}
 
 		// Go about your business

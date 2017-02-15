@@ -24,6 +24,7 @@ public class QuestSmallGame extends Quest {
 	final String ACTIVITY_SPYING = "Spying";
 	final String ACTIVITY_SAVING_THE_WORLD = "Saving the world";
 	final String ACTIVITY_WAITING_FOR_YOU = "Waiting for you";
+	final String ACTIVITY_DESCRIPTION_GOING_HOME = "Going home";
 
 	// Flags
 	boolean questAcceptedFromHunters;
@@ -33,6 +34,11 @@ public class QuestSmallGame extends Quest {
 	boolean playerAttackedWolves;
 	boolean huntersDead;
 	boolean wolvesDead;
+
+	// End
+	boolean huntersReleasedFromQuest;
+
+	boolean huntersAndWolvesFought = false;
 
 	// Actors
 	Group hunterPack;
@@ -46,10 +52,14 @@ public class QuestSmallGame extends Quest {
 
 	// Squares
 	Square squareBehindLodge;
+	Square huntPlanningArea;
 
 	// Conversations
-	public static Conversation conversationHuntersJoinTheHunt, conversationEnviromentalistImNotSpying,
-			conversationEnviromentalistSaveTheWolf, conversationHuntersReadyToGo;
+	public static Conversation conversationHuntersJoinTheHunt;
+	public static Conversation conversationEnviromentalistImNotSpying;
+	public static Conversation conversationEnviromentalistSaveTheWolf;
+	public static Conversation conversationHuntersReadyToGo;
+	public static Conversation conversationHuntersOnlyHuntersGetLoot;
 
 	public QuestSmallGame(Group hunterPack, Actor enviromenmentalist, Actor superWolf, Group wolfPack, Actor cub,
 			ArrayList<GameObject> weaponsBehindLodge) {
@@ -83,11 +93,13 @@ public class QuestSmallGame extends Quest {
 		}
 
 		squareBehindLodge = Game.level.squares[12][9];
+		huntPlanningArea = Game.level.squares[5][8];
 
 		setUpConversationJoinTheHunt();
 		setUpConversationImNotSpying();
 		setUpConversationSaveTheWolf();
 		setUpConversationReadyToGo();
+		setUpConversationYouDidntHelp();
 
 	}
 
@@ -110,11 +122,9 @@ public class QuestSmallGame extends Quest {
 		System.out.println("wolvesDead @ end = " + wolvesDead);
 
 		// Player has attacked the wolves
-		if (playerAttackedWolves == false) {
-			for (int i = 0; i < wolfPack.size(); i++) {
-				if (wolfPack.hasAttackers() && wolfPack.getAttackers().contains(Game.level.player)) {
-					playerAttackedWolves = true;
-				}
+		if (playerAttackedWolves == false && wolfPack.hasAttackers()) {
+			if (wolfPack.getAttackers().contains(Game.level.player)) {
+				playerAttackedWolves = true;
 			}
 		}
 
@@ -130,10 +140,18 @@ public class QuestSmallGame extends Quest {
 		}
 
 		// Player has attacked the hunters
-		if (playerAttackedHunters == false) {
-			for (int i = 0; i < hunterPack.size(); i++) {
-				if (hunterPack.hasAttackers() && hunterPack.getAttackers().contains(Game.level.player)) {
-					playerAttackedHunters = true;
+		if (playerAttackedHunters == false && hunterPack.hasAttackers()) {
+			if (hunterPack.getAttackers().contains(Game.level.player)) {
+				playerAttackedHunters = true;
+			}
+		}
+
+		// Hunters and wolves have fought
+		if (huntersAndWolvesFought == false && hunterPack.hasAttackers()) {
+			for (int j = 0; j < wolfPack.size(); j++) {
+				if (hunterPack.getAttackers().contains(wolfPack.getMember(j))) {
+					huntersAndWolvesFought = true;
+					break;
 				}
 			}
 		}
@@ -155,17 +173,24 @@ public class QuestSmallGame extends Quest {
 
 	private boolean updateHunter(Actor actor) {
 
+		if (huntersReleasedFromQuest) {
+			System.out.println("updateHunter returning false");
+			return false;
+		}
+
 		if (!readyToGo) {
 			actor.activityDescription = ACTIVITY_PLANNING_A_HUNT;
 			if (actor == hunterPack.getLeader()) {
-				AIRoutineUtils.moveTowardsTargetSquare(Game.level.squares[5][8]);
+				goToHuntPlanningArea(actor);
 			}
 		} else if (readyToGo && !this.wolvesDead) {
 
 			if (actor == hunterPack.getLeader()) {
 
-				if (actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn) > 5) {
-					// activity is waiting
+				if (actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn) > 5
+						&& actor.straightLineDistanceTo(superWolf.squareGameObjectIsOn) < Game.level.player
+								.straightLineDistanceTo(superWolf.squareGameObjectIsOn)) {
+					// Wait for the player
 					actor.activityDescription = ACTIVITY_WAITING_FOR_YOU;
 				} else {
 					actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
@@ -174,11 +199,41 @@ public class QuestSmallGame extends Quest {
 					}
 				}
 			}
-		} else if (this.wolvesDead) {
-
+		} else if (this.wolvesDead && this.playerAttackedWolves && !questAcceptedFromHunters) {
+			// Wolves were killed by player before accepting the mission
+			goToHuntPlanningArea(actor);
+		} else if (this.wolvesDead && this.playerAttackedWolves && !readyToGo) {
+			// Wolves were killed by player after accepting the mission, but
+			// before he told the hunters he's ready to go
+			goToHuntPlanningArea(actor);
+		} else if (this.wolvesDead && this.playerAttackedWolves) {
+			// Wolves were killed after departing for the hunt, and the player
+			// helped kill them
+			// Talk to them... for some reason
+			if (actor == hunterPack.getLeader()) {
+				if (actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn) < 2) {
+					new ActionTalk(actor, Game.level.player).perform();
+				} else {
+					AIRoutineUtils.moveTowardsTargetToBeAdjacent(Game.level.player);
+				}
+			}
+		} else if (this.wolvesDead && !this.playerAttackedWolves) {
+			// Wolves were killed, but player didnt help
+			if (actor == hunterPack.getLeader()) {
+				if (actor.squareGameObjectIsOn != huntPlanningArea) {
+					actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_HOME;
+					AIRoutineUtils.moveTowardsTargetSquare(huntPlanningArea);
+				} else {
+					huntersReleasedFromQuest = true;
+				}
+			}
 		}
 		return true;
 
+	}
+
+	public void goToHuntPlanningArea(Actor actor) {
+		AIRoutineUtils.moveTowardsTargetSquare(huntPlanningArea);
 	}
 
 	private boolean updateEnvironmentalist(Actor actor) {
@@ -196,6 +251,9 @@ public class QuestSmallGame extends Quest {
 				for (GameObject weaponBehindLodge : weaponsBehindLodge) {
 					if (weaponBehindLodge.squareGameObjectIsOn == squareBehindLodge) {
 						AIRoutineUtils.pickupTarget(weaponBehindLodge);
+
+						// MAYBE put loot in a chest in the lodge
+
 					}
 				}
 				// If the player is near, tell them not to kill the wolf and
@@ -224,6 +282,8 @@ public class QuestSmallGame extends Quest {
 			return conversationHuntersJoinTheHunt;
 		} else if (!readyToGo) {
 			return conversationHuntersReadyToGo;
+		} else if (this.wolvesDead && !this.playerAttackedWolves) {
+			return conversationHuntersOnlyHuntersGetLoot;
 		}
 		return null;
 	}
@@ -338,6 +398,14 @@ public class QuestSmallGame extends Quest {
 
 		conversationHuntersReadyToGo = new Conversation(conversationPartReadyToGo);
 
+	}
+
+	private void setUpConversationYouDidntHelp() {
+		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
+		ConversationPart conversationPartOnlyHuntersGetLoot = new ConversationPart(
+				"Only hunters get loot. Now fuck off!", new ConversationResponse[] { conversationReponseEnd },
+				hunterPack.getLeader());
+		conversationHuntersOnlyHuntersGetLoot = new Conversation(conversationPartOnlyHuntersGetLoot);
 	}
 
 }

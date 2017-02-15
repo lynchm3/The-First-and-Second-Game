@@ -432,8 +432,10 @@ public class Editor {
 				false, false, true);
 
 		new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true, true, false);
-		new Junk("Ground fur", 5, "fur.png", Game.level.squares[21][9], new Inventory(), false, true, true, false);
-		new Junk("Ground fur", 5, "fur.png", Game.level.squares[23][16], new Inventory(), false, true, true, false);
+		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[21][9], new
+		// Inventory(), false, true, true, false);
+		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[23][16], new
+		// Inventory(), false, true, true, false);
 		new Junk("Ground fur", 5, "fur.png", Game.level.squares[25][17], new Inventory(), false, true, true, false);
 		new Junk("Ground fur", 5, "fur.png", Game.level.squares[33][19], new Inventory(), false, true, true, false);
 
@@ -532,19 +534,19 @@ public class Editor {
 		}
 
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
-				Game.level.squares[40][16], 1, null, inventoryForWildAnimal, true, false, true);
+				Game.level.squares[22][16], 1, null, inventoryForWildAnimal, true, false, true);
 		superWolf.faction = Game.level.factions.get(2);
 		superWolf.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(superWolf);
 
 		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
-				Game.level.squares[38][15], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
+				Game.level.squares[20][15], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
 		wolf2.faction = Game.level.factions.get(2);
 		wolf2.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(wolf2);
 
-		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf.png", Game.level.squares[38][17],
-				1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
+		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
+				Game.level.squares[20][17], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true);
 		wolf3.faction = Game.level.factions.get(2);
 		wolf3.factionGUID = Game.level.factions.get(2).guid;
 		Game.level.factions.get(2).actors.add(wolf3);
