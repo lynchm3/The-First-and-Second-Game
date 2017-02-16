@@ -65,6 +65,9 @@ public class ActionAttack extends Action {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
+
+		if (attacker == Game.level.player)
+			Game.level.endTurn();
 	}
 
 }

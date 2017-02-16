@@ -8,6 +8,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.units.Actor;
@@ -685,7 +686,7 @@ public class AIRoutineUtils {
 	public static boolean lootTarget(GameObject gameObject) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
 		if (weaponDistance <= 1) {
-			Game.level.activeActor.lootAll(gameObject);
+			new ActionLootAll(Game.level.activeActor, gameObject);
 			return true;
 		} else {
 			return false;

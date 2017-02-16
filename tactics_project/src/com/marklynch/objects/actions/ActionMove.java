@@ -50,6 +50,7 @@ public class ActionMove extends Action {
 
 		} else if (actorInTheWay != null && actor.group != null && actor.group.getLeader() == actorInTheWay) {
 			// don't try to swap with you group leader
+			return;
 		} else if (actorInTheWay != null && (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn > 0)) {
 			move(actorInTheWay, oldSquare);
 			move(actor, squareToMoveTo);
@@ -63,6 +64,9 @@ public class ActionMove extends Action {
 			// There's someone in the way, but they dont have the movement
 			// points to swap with u, wait till next turn
 		}
+
+		if (mover == Game.level.player)
+			Game.level.endTurn();
 	}
 
 	private void move(Actor actor, Square square) {

@@ -8,8 +8,6 @@ import com.marklynch.level.popup.PopupButton;
 import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.actions.ActionRead;
-import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Path;
 
 public class UserInputLevel {
@@ -216,19 +214,18 @@ public class UserInputLevel {
 			checkButtons();
 		}
 
-		if (interactedThisTurn)
-			Game.level.endTurn();
+		// if (interactedThisTurn)
+		// Game.level.endTurn();
 
-		interactedThisTurn = false;
-		interactedThisTurn = false;
+		// interactedThisTurn = false;
 	}
 
-	static boolean interactedThisTurn = false;
+	// static boolean interactedThisTurn = false;
 
 	public static void interactWith(Square square, int key) {
 
-		if (interactedThisTurn)
-			return;
+		// if (interactedThisTurn)
+		// return;
 
 		if (square == Game.level.activeActor.squareGameObjectIsOn)
 			return;
@@ -240,8 +237,9 @@ public class UserInputLevel {
 
 		if (action != null) {
 			action.perform();
-			if (!(action instanceof ActionRead) && !(action instanceof ActionTalk))
-				interactedThisTurn = true;
+			// if (!(action instanceof ActionRead) && !(action instanceof
+			// ActionTalk))
+			// interactedThisTurn = true;
 			if (action instanceof ActionMove) {
 
 				if (key == Keyboard.KEY_UP) {

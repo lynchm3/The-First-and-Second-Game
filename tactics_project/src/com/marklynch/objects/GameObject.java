@@ -15,6 +15,8 @@ import com.marklynch.level.constructs.Quest;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionLootAll;
+import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.Actionable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Path;
@@ -330,6 +332,19 @@ public class GameObject extends GameObjectTemplate implements Actionable {
 	@Override
 	public ArrayList<Action> getAllActions(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
+
+		// public boolean showInventory;
+		// public boolean canShareSquare;
+		if (fitsInInventory) {
+			actions.add(new ActionPickUp(performer, this));
+		}
+		if (canContainOtherObjects) {
+			if (fitsInInventory && this.inventory.size() > 0) {
+				actions.add(new ActionLootAll(performer, this));
+			}
+
+			// Here put view loot
+		}
 
 		// if (Game.level.activeActor != null &&
 		// Game.level.activeActor.equippedWeapon != null
