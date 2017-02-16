@@ -15,6 +15,62 @@ import com.marklynch.objects.units.Actor;
 
 public class QuestSmallGame extends Quest {
 
+	// Hunting plan could have a crude drawying of the wolf. I think all signs
+	// should have pngs to display instead of text.
+	// "Hello stranger. I'm (creating) the most formidable hunting party this
+	// town has ever seen, would you be interested in joining us? -yes -no
+	// .Living in the craggle cave just south of here is a ferocious beast. She
+	// may look nothing more than an obersizef wolf, but dpnt let her fool you.
+	// Flames spit forth from his eyes and she can kill a man with nary a howl"
+	// -why would u want to kill this beast? -from what u say it soounds like an
+	// impossible task -i love a challenge, im in." I love the ridiculous
+	// description of the beast, make it more ridiculous, theres definitely
+	// dialogue like this in the witcher, look it up. AND THEN make the
+	// ridiculous description true :D. Also new condition where u tell them u
+	// wont be part of it, and they say last chance, u say ur sure, then the
+	// mage runs over to u to tell u to save the beast. Everytging the hunter
+	// says should be over the top, pirate weaving tales in a bar stupid. Look
+	// up some similar adventure time and pirate show dialogs like this.
+	// And the head hunter lost and arm to the beast! :p "-no beast like that
+	// exists, you're ridiculous". "Tis the same beast that claimed my arm! Well
+	// come with us and see with your own eyes". In the cave theres his arm!!!
+	// :'D "rotted arm" With a ring beside it. U could give him the ring if u
+	// want and he goes "nono, that's very kind of you, but keep it laddie, it
+	// just brings back painful memories for me".
+	// On the sign for the hunt plan have even more ridiculous facts about the
+	// beast that are still actually facts.
+
+	// "There should be some spare equipment round the back, help yourself"
+
+	// Need to change ownership of the stuff around the back from master hunter
+	// to you when you accept the quest. 2 guys around the back to stop u
+	// stealing shit beforehand.
+
+	// They're all standing around in a circle with awesome equipment in the
+	// middle
+
+	// For stealing show a dialogue if u'll get caught doing it.
+
+	// O M F G the enviromentalist wants to enslave super wolf. O M F G
+	// O M F G. And he like tried to get the wolves power before but he was
+	// rejected.
+	// And now that the wolf is weakened after the fight he puts him in an evil
+	// restriction
+	// And u can choose to fight the environmentalist or not. If u fight him he
+	// has a skill "entrap" or "restriction" or something, and he has the skill
+	// book for that power on his body. And he has a note on his body,
+	// instructions on how to entrap a wolf spirit god thing. SO u can try
+	// entrap the wolf or let it go. Entrap it to get ++fire resistance and if u
+	// let the wolf go he'll give u something deadly from the cave.
+	// And if u kill the wolf he attacks u.. and hes powerful and it'll take a
+	// bunch of ur new hunter pals to save ur ass. Or something.
+
+	// SO powerwise - hunters == wolfpack > envirnmentalist.
+
+	// special case if u kill enviromentalist early on :P
+
+	// Could lead in to larger overarching story with spirit animals
+
 	// Quest text
 	final String OBJECTIVE_FOLLOW_THE_HUNTERS_TO_SUPERWOLF = "Follow the hunters to Superwolf";
 
