@@ -62,7 +62,8 @@ public class GameObject extends GameObjectTemplate implements Comparable {
 	// Quest
 	public transient Quest quest;
 
-	final float height, width;
+	float height;
+	float width;
 	float drawOffsetX;
 	float drawOffsetY;
 

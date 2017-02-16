@@ -18,17 +18,27 @@ public class Tree extends GameObject {
 			float widthRatio, float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, widthRatio, heightRatio);
-		Food apple = new Food("Apple", 5, "apple.png", null, new Inventory(), false, true, true, false, 0.25f, 0.25f);
+		addApple(0.25f);
+	}
 
-		float appleDrawOffsetXMax = width - apple.width;
+	public void addApple(float maxSize) {
+
+		float appleSize = (float) (Math.random() * maxSize);
+
+		Food apple = new Food("Apple", 5, "apple.png", null, new Inventory(), false, true, true, false, appleSize,
+				appleSize);
+
+		float appleDrawOffsetXMax = width - apple.width - 32f;
+		float appleDrawOffsetXMin = 32f;
 		float appleDrawOffsetYMax = Game.HALF_SQUARE_HEIGHT - apple.height;
 
-		apple.drawOffsetX = (float) (Math.random() * appleDrawOffsetXMax);
+		apple.drawOffsetX = appleDrawOffsetXMin + (float) (Math.random() * (appleDrawOffsetXMax - appleDrawOffsetXMin));
 		apple.drawOffsetY = (float) (Math.random() * appleDrawOffsetYMax);
 		// apple.drawOffsetX = 0;
 		// apple.drawOffsetY = 0;
 
 		inventory.add(apple);
+
 	}
 
 	@Override
@@ -55,17 +65,40 @@ public class Tree extends GameObject {
 	public void update(int delta) {
 		if (remainingHealth < totalHealth && inventory.size() > 0) {
 
-			ArrayList<GameObject> objectsToDrop = new ArrayList<GameObject>();
-			objectsToDrop.addAll(this.inventory.gameObjects);
-			for (GameObject objectToDrop : objectsToDrop) {
+			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();
+			objectsToDropFromHit.addAll(this.inventory.gameObjects);
+			for (GameObject objectToDrop : objectsToDropFromHit) {
 				Level.actionQueue.add(new ActionDrop(this, this.squareGameObjectIsOn, objectToDrop));
-				// float appleDrawOffsetYMax = Game.SQUARE_HEIGHT -
-				// objectToDrop.height;
-				// float appleDrawOffsetYMax = Game.SQUARE_HEIGHT -
-				// objectToDrop.height;
-				objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height - 32;
+				objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height - 16;
 			}
 
+		}
+
+		for (GameObject gameObject : inventory.gameObjects) {
+			if (gameObject instanceof Food) {
+				if (gameObject.widthRatio < 0.25f) {
+					gameObject.widthRatio += 0.01f;
+					gameObject.heightRatio += 0.01f;
+					gameObject.drawOffsetX -= 0.005f * Game.SQUARE_WIDTH;
+
+					gameObject.width = Game.SQUARE_WIDTH * gameObject.widthRatio;
+					gameObject.height = Game.SQUARE_HEIGHT * gameObject.heightRatio;
+				}
+			}
+		}
+
+		if (Math.random() > 0.998d)
+			addApple(0.01f);
+
+		ArrayList<GameObject> objectsToDropRandomly = new ArrayList<GameObject>();
+		for (GameObject gameObject : inventory.gameObjects) {
+			if (gameObject instanceof Food && Math.random() > 0.999d)
+				objectsToDropRandomly.add(gameObject);
+		}
+
+		for (GameObject objectToDrop : objectsToDropRandomly) {
+			Level.actionQueue.add(new ActionDrop(this, this.squareGameObjectIsOn, objectToDrop));
+			objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height - 32;
 		}
 	}
 

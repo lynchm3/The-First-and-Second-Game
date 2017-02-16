@@ -461,14 +461,6 @@ public class Level {
 		// if (this.script.activeScriptEvent != null) {
 		script.update(delta);
 
-		for (GameObject inanimateObject : inanimateObjectsOnGround)
-			inanimateObject.update(delta);
-
-		for (Action action : actionQueue) {
-			action.perform();
-		}
-		actionQueue.clear();
-
 		// update projectiles
 		for (Projectile projectile : projectiles) {
 			projectile.update(delta);
@@ -528,6 +520,15 @@ public class Level {
 
 		// this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
 		// " ended turn " + this.turn }));
+		if (activeActor == player) {
+			for (GameObject inanimateObject : inanimateObjectsOnGround)
+				inanimateObject.update(0);
+
+			for (Action action : actionQueue) {
+				action.perform();
+			}
+			actionQueue.clear();
+		}
 
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {

@@ -453,6 +453,18 @@ public class Editor {
 				1.5f);
 		new Tree("Tree", 100, "tree_1.png", Game.level.squares[19][3], new Inventory(), true, false, false, true, 1f,
 				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[12][3], new Inventory(), true, false, false, true, 1f,
+				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[18][13], new Inventory(), true, false, false, true, 1f,
+				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[9][14], new Inventory(), true, false, false, true, 1f,
+				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[12][8], new Inventory(), true, false, false, true, 1f,
+				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[27][3], new Inventory(), true, false, false, true, 1f,
+				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[23][5], new Inventory(), true, false, false, true, 1f,
+				1.5f);
 
 		// Add factions
 		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));
@@ -506,7 +518,7 @@ public class Editor {
 			player.inventory.get(i).inventoryThatHoldsThisObject = player.inventory;
 		}
 
-		Bed bedForHunterBrent = new Bed("Hunter Brent's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[0][5],
+		Bed bedForHunterBrent = new Bed("Hunter Brent's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[10][9],
 				new Inventory(), false, true, false, false, 1, 1);
 
 		Actor hunterBrent = new Hunter("Hunter Brent", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
