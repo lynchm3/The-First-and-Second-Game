@@ -38,6 +38,7 @@ import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Sign;
+import com.marklynch.objects.Tree;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.ActorTemplate;
 import com.marklynch.objects.units.Hunter;
@@ -444,14 +445,14 @@ public class Editor {
 		new Junk("Ground fur", 5, "fur.png", Game.level.squares[33][19], new Inventory(), false, true, true, false, 1,
 				1);
 
-		new GameObject("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), false, false, false, false,
-				1f, 1.5f);
-		new GameObject("Tree", 100, "tree_1.png", Game.level.squares[21][19], new Inventory(), false, false, false,
-				false, 1f, 1.5f);
-		new GameObject("Tree", 100, "tree_1.png", Game.level.squares[14][8], new Inventory(), false, false, false,
-				false, 1f, 1.5f);
-		new GameObject("Tree", 100, "tree_1.png", Game.level.squares[19][3], new Inventory(), false, false, false,
-				false, 1f, 1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), true, false, false, true, 1f,
+				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[21][19], new Inventory(), true, false, false, true, 1f,
+				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[14][8], new Inventory(), true, false, false, true, 1f,
+				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[19][3], new Inventory(), true, false, false, true, 1f,
+				1.5f);
 
 		// Add factions
 		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));

@@ -16,6 +16,7 @@ import com.marklynch.level.popup.Popup;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.SquareInventory;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Move;
 import com.marklynch.objects.weapons.Projectile;
@@ -450,6 +451,8 @@ public class Level {
 
 	}
 
+	public static ArrayList<Action> actionQueue = new ArrayList<Action>();
+
 	public void update(int delta) {
 
 		if (conversation != null)
@@ -460,6 +463,11 @@ public class Level {
 
 		for (GameObject inanimateObject : inanimateObjectsOnGround)
 			inanimateObject.update(delta);
+
+		for (Action action : actionQueue) {
+			action.perform();
+		}
+		actionQueue.clear();
 
 		// update projectiles
 		for (Projectile projectile : projectiles) {

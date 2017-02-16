@@ -62,7 +62,9 @@ public class GameObject extends GameObjectTemplate implements Comparable {
 	// Quest
 	public transient Quest quest;
 
-	final float height, width, drawOffsetX, drawOffsetY;
+	final float height, width;
+	float drawOffsetX;
+	float drawOffsetY;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -83,15 +85,10 @@ public class GameObject extends GameObjectTemplate implements Comparable {
 		height = Game.SQUARE_HEIGHT * heightRatio;
 
 		if (widthRatio < 1f && heightRatio < 1f) {
-			if (this instanceof Weapon)
-				System.out.println("width < 1f && height < 1f");
 			float drawOffsetXMax = Game.SQUARE_WIDTH - width;
 			float drawOffsetYMax = Game.SQUARE_HEIGHT - height;
 			drawOffsetX = (float) (Math.random() * drawOffsetXMax);
 			drawOffsetY = (float) (Math.random() * drawOffsetYMax);
-
-			if (this instanceof Weapon)
-				System.out.println("drawOffsetX = " + drawOffsetX);
 		} else {
 			if (this instanceof Weapon)
 				System.out.println("NOT width < 1f && height < 1f");
