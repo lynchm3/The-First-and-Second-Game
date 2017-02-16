@@ -401,6 +401,7 @@ public class QuestSmallGame extends Quest {
 	}
 
 	private void setUpConversationYouDidntHelp() {
+		// Really like the "Now fuck off!" bit.
 		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
 		ConversationPart conversationPartOnlyHuntersGetLoot = new ConversationPart(
 				"Only hunters get loot. Now fuck off!", new ConversationResponse[] { conversationReponseEnd },

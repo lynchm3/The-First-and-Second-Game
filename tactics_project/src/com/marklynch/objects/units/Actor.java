@@ -278,7 +278,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 			// add a carcass
 			GameObject carcass = new Carcass(this.name + " carcass", 5, "carcass.png", this.squareGameObjectIsOn,
-					new Inventory(), false, true, false, true, 1, 1);
+					new Inventory(), false, true, false, true, 0.5f, 0.5f);
 
 			this.giveAllToTarget(null, carcass);
 			this.squareGameObjectIsOn.inventory.add(carcass);

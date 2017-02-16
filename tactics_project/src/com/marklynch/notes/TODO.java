@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Have a method "Can sense" or "Can see"... or something for Actors
+
 	// Why dont they move when he goes to bed? I think its coz
 	// getAllSquaresAtDistance(X) doesnt work, could ape findPath where limit =
 	// X
