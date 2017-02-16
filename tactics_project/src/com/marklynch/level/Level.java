@@ -48,7 +48,7 @@ public class Level {
 	public transient ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public transient ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
 
-	public Popup popup;
+	public ArrayList<Popup> popups = new ArrayList<Popup>();
 	public Toast toast;
 	public Conversation conversation;
 	public transient LevelButton endTurnButton;
@@ -406,8 +406,10 @@ public class Level {
 			inventory.drawStaticUI();
 		}
 
-		if (popup != null) {
-			popup.draw();
+		if (!popups.isEmpty()) {
+			for (Popup popup : popups) {
+				popup.draw();
+			}
 		}
 
 		// if (Game.buttonHoveringOver == null && Game.squareMouseIsOver !=
@@ -495,10 +497,12 @@ public class Level {
 				return button;
 		}
 
-		if (Game.level.popup != null) {
-			for (Button button : Game.level.popup.buttons) {
-				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
-					return button;
+		if (!Game.level.popups.isEmpty()) {
+			for (Popup popup : popups) {
+				for (Button button : popup.buttons) {
+					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+						return button;
+				}
 			}
 		}
 

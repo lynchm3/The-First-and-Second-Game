@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Click on location to move there, one turn at a time, stop if u get
+	// attacked / get talked to, probably need to show preview of path they'll
+	// take
+
 	// Issue - the tree will drop fruit immediately when its created, if the
 	// tree has been hit any time in the past.
 

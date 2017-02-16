@@ -592,6 +592,20 @@ public class Actor extends ActorTemplate implements Owner {
 		return null;
 	}
 
+	@Override
+	public ArrayList<Action> getAllActions(Actor performer) {
+
+		ArrayList<Action> actions = new ArrayList<Action>();
+		// Talk
+		actions.add(new ActionTalk(performer, this));
+		// Inherited from object (attack...)
+		actions.addAll(super.getAllActions(performer));
+		// Inherited from squre (move/swap squares)
+		actions.addAll(squareGameObjectIsOn.getAllActions(performer));
+
+		return actions;
+	}
+
 	public boolean hasAttackers() {
 		return attackers.size() > 0;
 	}

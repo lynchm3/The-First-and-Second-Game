@@ -6,7 +6,7 @@ import com.marklynch.objects.units.Actor;
 
 public class ActionMove extends Action {
 
-	public static final String ACTION_NAME = "Move";
+	public static final String ACTION_NAME = "Move here";
 	Actor mover;
 	Square target;
 

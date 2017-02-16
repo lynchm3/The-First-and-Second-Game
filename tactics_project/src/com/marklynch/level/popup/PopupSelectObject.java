@@ -32,34 +32,23 @@ public class PopupSelectObject extends Popup {
 		buttons.add(selectSquareButton);
 
 		for (int i = 0; i < square.inventory.size(); i++) {
-			final int index = i;
+			final GameObject gameObject = square.inventory.get(i);
 
 			// The line and the highlight are drawn in relation to zoom and
 			// position...
+			System.out.println("gameObject a = " + gameObject);
 
 			// BUT... I dont want the buttons to zoom :P
 
-			final PopupButton objectButton = new PopupButton(0, 30 + i * 30, 200, 30, null, null,
-					"" + square.inventory.get(index), true, true, square.inventory.get(index), this);
+			final PopupButton objectButton = new PopupButton(0, 30 + i * 30, 200, 30, null, null, "" + gameObject, true,
+					true, gameObject, this);
 
 			objectButton.clickListener = new ClickListener() {
 
 				@Override
 				public void click() {
-
-					gameObjectSelected(square.inventory.get(index));
-					// editor.popupSelectObject = null; MAYYBE?
-
-					// editor.clearSelectedObject();
-					// editor.depressButtonsSettingsAndDetailsButtons();
-					// editor.editor.editorState =
-					// EDITOR_STATE.MOVEABLE_OBJECT_SELECTED;
-					// editor.selectedGameObject =
-					// Game.level.inanimateObjects.get(index);
-					// editor.attributesWindow = new AttributesDialog(200, 200,
-					// 200, editor.selectedGameObject, editor);
-					// // getButton(editor.selectedGameObject).down = true;
-					// objectButton.down = true;
+					System.out.println("gameObject b = " + gameObject);
+					gameObjectSelected(gameObject);
 				}
 			};
 			buttons.add(objectButton);
@@ -72,11 +61,11 @@ public class PopupSelectObject extends Popup {
 	}
 
 	public void gameObjectSelected(GameObject gameObject) {
-		gameObject.getDefaultAction(Game.level.activeActor);
+		System.out.println("gameObject c = " + gameObject);
+		Game.level.popups.add(new PopupSelectAction(100, level, gameObject.squareGameObjectIsOn, gameObject));
 	}
 
 	public void squareSelected(Square square) {
-		// UserInputLevel.interactWithSquare(square);
-		square.getDefaultActionForJustTheSquare(Game.level.activeActor);
+		Game.level.popups.add(new PopupSelectAction(100, level, square, square));
 	}
 }

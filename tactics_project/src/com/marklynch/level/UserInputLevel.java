@@ -4,6 +4,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
+import com.marklynch.level.popup.PopupButton;
 import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
@@ -152,6 +153,8 @@ public class UserInputLevel {
 
 		}
 
+		boolean hoveringOverPopup = Game.buttonHoveringOver != null && Game.buttonHoveringOver instanceof PopupButton;
+
 		// Path highlights
 		if (scriptInterceptsClick == false && Game.buttonHoveringOver == null && Game.level.activeActor != null
 				&& Game.squareMouseIsOver != null && Game.squareMouseIsOver.reachableBySelectedCharater
@@ -165,7 +168,9 @@ public class UserInputLevel {
 
 		// Lifted the mouse to perform click
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
-			Game.level.popup = null;
+			if (!hoveringOverPopup) {
+				Game.level.popups.clear();
+			}
 			if (scriptInterceptsClick) {
 				// Continue script
 				Game.level.script.click();
@@ -182,7 +187,11 @@ public class UserInputLevel {
 
 		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false) {
 			// Right Click
-			Game.level.popup = null;
+			if (Game.level.popups.isEmpty() && Game.squareMouseIsOver != null) {
+				Game.level.popups.add(new PopupSelectObject(100, Game.level, Game.squareMouseIsOver));
+			} else {
+				Game.level.popups.clear();
+			}
 		}
 
 		if (!Mouse.isButtonDown(0)) {
@@ -250,7 +259,8 @@ public class UserInputLevel {
 
 			}
 		} else {
-			Game.level.popup = new PopupSelectObject(100, Game.level, square);
+			Game.level.popups.clear();
+			Game.level.popups.add(new PopupSelectObject(100, Game.level, square));
 		}
 
 	}
@@ -292,8 +302,8 @@ public class UserInputLevel {
 	// }
 
 	public static void upTyped() {
-		if (Game.level.popup != null) {
-			Game.level.popup.moveHighLightUp();
+		if (Game.level.popups.size() != 0) {
+			Game.level.popups.get(0).moveHighLightUp();
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
 			if (y >= 0) {
@@ -304,8 +314,8 @@ public class UserInputLevel {
 	}
 
 	public static void downTyped() {
-		if (Game.level.popup != null) {
-			Game.level.popup.moveHighLightDown();
+		if (Game.level.popups.size() != 0) {
+			Game.level.popups.get(0).moveHighLightDown();
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
 			if (y < Game.level.squares[0].length) {
@@ -317,7 +327,7 @@ public class UserInputLevel {
 	}
 
 	public static void leftTyped() {
-		if (Game.level.popup != null) {
+		if (Game.level.popups.size() != 0) {
 		} else {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
 			if (x >= 0) {
@@ -329,7 +339,7 @@ public class UserInputLevel {
 	}
 
 	public static void rightTyped() {
-		if (Game.level.popup != null) {
+		if (Game.level.popups.size() != 0) {
 		} else {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
 			if (x < Game.level.squares.length) {
@@ -351,8 +361,8 @@ public class UserInputLevel {
 	public static void keyTyped(char character) {
 		if (character == ' ') {
 
-			if (Game.level.popup != null) {
-				Game.level.popup.clickHighlightedButton();
+			if (Game.level.popups.size() != 0) {
+				Game.level.popups.get(0).clickHighlightedButton();
 			} else {
 				Game.level.endTurn();
 			}

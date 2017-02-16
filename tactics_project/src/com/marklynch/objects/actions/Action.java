@@ -2,7 +2,7 @@ package com.marklynch.objects.actions;
 
 public class Action {
 
-	String actionName;
+	public String actionName;
 
 	public Action(String actionName) {
 		super();

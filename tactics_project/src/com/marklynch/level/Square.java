@@ -2,6 +2,7 @@ package com.marklynch.level;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.UUID;
 import java.util.Vector;
@@ -12,6 +13,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.Actionable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.TextUtils;
@@ -19,7 +21,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class Square {
+public class Square implements Actionable {
 
 	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
@@ -211,16 +213,24 @@ public class Square {
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultAction(performer);
 		} else {
-			return getDefaultActionForJustTheSquare(performer);
+			return getDefaultAction(performer);
 
 		}
 	}
 
-	public Action getDefaultActionForJustTheSquare(Actor performer) {
+	@Override
+	public Action getDefaultAction(Actor performer) {
 		if (this.reachableBySelectedCharater) {
 			return new ActionMove(performer, this);
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public ArrayList<Action> getAllActions(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.add(new ActionMove(performer, this));
+		return actions;
 	}
 }

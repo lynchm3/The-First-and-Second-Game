@@ -14,6 +14,8 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Quest;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.Actionable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Path;
 import com.marklynch.objects.weapons.Weapon;
@@ -23,7 +25,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class GameObject extends GameObjectTemplate implements Comparable {
+public class GameObject extends GameObjectTemplate implements Actionable {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
@@ -320,18 +322,26 @@ public class GameObject extends GameObjectTemplate implements Comparable {
 		return squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
 	}
 
+	@Override
 	public Action getDefaultAction(Actor performer) {
 		return null;
 	}
 
-	public Conversation getConversation() {
-		return null;
+	@Override
+	public ArrayList<Action> getAllActions(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+
+		// if (Game.level.activeActor != null &&
+		// Game.level.activeActor.equippedWeapon != null
+		// && Game.level.activeActor.equippedWeapon
+		// .hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn)))
+		// {
+		actions.add(new ActionAttack(performer, this));
+		// }
+		return actions;
 	}
 
-	@Override
-	public int compareTo(Object other) {
-		// GameObject otherGameObject = (GameObject)other;
-		// return this.squareGameObjectIsOn.yInGrid
-		return 0;
+	public Conversation getConversation() {
+		return null;
 	}
 }

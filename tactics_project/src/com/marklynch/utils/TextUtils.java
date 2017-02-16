@@ -10,6 +10,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.objects.GameObjectTemplate;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
@@ -286,6 +287,15 @@ public class TextUtils {
 					string = string.substring(0, 10) + "...";
 				}
 				string = "\"" + string + "\"";
+
+				float textWidth = Game.font.getWidth(string);
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof Action) {
+
+				Action action = (Action) content;
+				String string = action.actionName;
 
 				float textWidth = Game.font.getWidth(string);
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
