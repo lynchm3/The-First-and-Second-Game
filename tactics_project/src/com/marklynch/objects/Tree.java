@@ -13,20 +13,24 @@ import com.marklynch.utils.TextureUtils;
 
 public class Tree extends GameObject {
 
+	float appleMaxRatioSize = 0.1f;
+	float healthWhenLastDroppedFruit;
+
 	public Tree(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			float widthRatio, float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, widthRatio, heightRatio);
-		addApple(0.25f);
+		addApple(appleMaxRatioSize);
+		healthWhenLastDroppedFruit = this.totalHealth;
 	}
 
 	public void addApple(float maxSize) {
 
 		float appleSize = (float) (Math.random() * maxSize);
 
-		Food apple = new Food("Apple", 5, "apple.png", null, new Inventory(), false, true, true, false, appleSize,
-				appleSize);
+		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), false, true, true, false,
+				appleSize, appleSize);
 
 		float appleDrawOffsetXMax = width - apple.width - 32f;
 		float appleDrawOffsetXMin = 32f;
@@ -63,7 +67,7 @@ public class Tree extends GameObject {
 
 	@Override
 	public void update(int delta) {
-		if (remainingHealth < totalHealth && inventory.size() > 0) {
+		if (remainingHealth < healthWhenLastDroppedFruit && inventory.size() > 0) {
 
 			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();
 			objectsToDropFromHit.addAll(this.inventory.gameObjects);
@@ -71,18 +75,21 @@ public class Tree extends GameObject {
 				Level.actionQueue.add(new ActionDrop(this, this.squareGameObjectIsOn, objectToDrop));
 				objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height - 16;
 			}
+			healthWhenLastDroppedFruit = this.remainingHealth;
 
 		}
 
 		for (GameObject gameObject : inventory.gameObjects) {
 			if (gameObject instanceof Food) {
-				if (gameObject.widthRatio < 0.25f) {
+				if (gameObject.widthRatio < appleMaxRatioSize) {
 					gameObject.widthRatio += 0.01f;
 					gameObject.heightRatio += 0.01f;
 					gameObject.drawOffsetX -= 0.005f * Game.SQUARE_WIDTH;
 
 					gameObject.width = Game.SQUARE_WIDTH * gameObject.widthRatio;
 					gameObject.height = Game.SQUARE_HEIGHT * gameObject.heightRatio;
+				} else {
+					gameObject.name = "Apple";
 				}
 			}
 		}

@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Issue - the tree will drop fruit immediately when its created, if the
+	// tree has been hit any time in the past.
+
 	// Have a method "Can sense" or "Can see"... or something for Actors
 
 	// Why dont they move when he goes to bed? I think its coz

@@ -28,6 +28,8 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.TextUtils;
 
+import mdesl.graphics.Color;
+
 public class Level {
 
 	public int width;
@@ -90,7 +92,7 @@ public class Level {
 		initGrid(this.squares, this.width, this.height);
 
 		endTurnButton = new LevelButton(210f, 40f, 200f, 30f, "end_turn_button.png", "end_turn_button.png", "END TURN",
-				false, false);
+				false, false, Color.BLACK, Color.WHITE);
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -99,7 +101,7 @@ public class Level {
 		});
 		buttons.add(endTurnButton);
 		undoButton = new LevelButton(420f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "UNDO", false,
-				false);
+				false, Color.BLACK, Color.WHITE);
 		undoButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -109,7 +111,7 @@ public class Level {
 		undoButton.enabled = false;
 		buttons.add(undoButton);
 		editorButton = new LevelButton(630f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
-				false, false);
+				false, false, Color.BLACK, Color.WHITE);
 		editorButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -133,7 +135,7 @@ public class Level {
 		gameCursor = new GameCursor();
 
 		endTurnButton = new LevelButton(210f, 110f, 200f, 100f, "end_turn_button.png", "end_turn_button.png",
-				"END TURN", false, false);
+				"END TURN", false, false, Color.BLACK, Color.WHITE);
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -142,7 +144,7 @@ public class Level {
 		});
 		buttons.add(endTurnButton);
 		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "UNDO",
-				false, false);
+				false, false, Color.BLACK, Color.WHITE);
 		undoButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -152,7 +154,7 @@ public class Level {
 		undoButton.enabled = false;
 		buttons.add(undoButton);
 		editorButton = new LevelButton(630f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
-				false, false);
+				false, false, Color.BLACK, Color.WHITE);
 		editorButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -520,15 +522,6 @@ public class Level {
 
 		// this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
 		// " ended turn " + this.turn }));
-		if (activeActor == player) {
-			for (GameObject inanimateObject : inanimateObjectsOnGround)
-				inanimateObject.update(0);
-
-			for (Action action : actionQueue) {
-				action.perform();
-			}
-			actionQueue.clear();
-		}
 
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {
@@ -564,6 +557,16 @@ public class Level {
 
 		undoList.clear();
 		undoButton.enabled = false;
+
+		if (activeActor == player) {
+			for (GameObject inanimateObject : inanimateObjectsOnGround)
+				inanimateObject.update(0);
+
+			for (Action action : actionQueue) {
+				action.perform();
+			}
+			actionQueue.clear();
+		}
 
 	}
 

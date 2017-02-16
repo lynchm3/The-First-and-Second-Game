@@ -28,9 +28,11 @@ public class ConversationPart {
 
 	public void drawStaticUI1() {
 
+		// Speaker image
 		TextureUtils.drawTexture(talker.imageTexture, 1.0f, 0, Game.halfWindowHeight, Game.halfWindowHeight,
 				Game.windowHeight);
 
+		// Speker 2 image (player)
 		TextureUtils.drawTexture(Game.level.player.imageTexture, 1.0f, Game.windowWidth,
 				Game.windowWidth - Game.halfWindowHeight, Game.halfWindowHeight, Game.windowHeight);
 
@@ -39,14 +41,11 @@ public class ConversationPart {
 	}
 
 	public void drawStaticUI2() {
-		// Text
 
-		float height = 100;
-		float bottomMargin = 50;
 		float topMargin = 25;
 		float maxWidth = Game.windowWidth;
 		float x1 = Game.halfWindowWidth - halfTextWidth;
-		float y1 = Game.windowHeight - bottomMargin - height + topMargin;
+		float y1 = Game.windowHeight - Conversation.bottomMargin - Conversation.height + topMargin;
 
 		TextUtils.printTextWithImages(new Object[] { text }, x1, y1, maxWidth, true);
 

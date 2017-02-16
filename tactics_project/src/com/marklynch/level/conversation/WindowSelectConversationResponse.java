@@ -9,6 +9,8 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 
+import mdesl.graphics.Color;
+
 public class WindowSelectConversationResponse {
 
 	public float width;
@@ -17,11 +19,14 @@ public class WindowSelectConversationResponse {
 	public Square square;
 	public LevelButton selectSquareButton;
 	public float drawPositionX, drawPositionY;
+	public float marginBetweenButtons = 30;;
 
 	Button highlightedButton;
 	int highlightedButtonIndex = 0;
 
 	ConversationResponse[] conversationResponses;
+
+	float totalWidth = 0;
 
 	public WindowSelectConversationResponse(float width, Level level, ConversationResponse[] conversationResponses) {
 
@@ -31,16 +36,18 @@ public class WindowSelectConversationResponse {
 	}
 
 	public void updateObjectsButtons() {
+		for (int i = 0; i < conversationResponses.length; i++) {
+			totalWidth += Game.font.getWidth(conversationResponses[i].text);
+			totalWidth += marginBetweenButtons;
+		}
+		totalWidth -= 30;
+
+		float positionX = Game.halfWindowWidth - totalWidth / 2;
+		float widthSoFar = 0;
 
 		buttons.clear();
 
-		float height = 100;
-		float bottomMargin = 50;
-		float conversationTop = 150;
-
 		float buttonHeight = 30;
-
-		float positionOfTopButton = conversationTop + conversationResponses.length * buttonHeight;
 
 		for (int i = 0; i < conversationResponses.length; i++) {
 			final int index = i;
@@ -49,9 +56,11 @@ public class WindowSelectConversationResponse {
 			// position...
 
 			// BUT... I dont want the buttons to zoom :P
+			float buttonWidth = Game.font.getWidth(conversationResponses[i].text);
 
-			final LevelButton responseButton = new LevelButton(200, positionOfTopButton - i * 30, Game.halfWindowWidth,
-					buttonHeight, null, null, "" + conversationResponses[i].text, false, false);
+			final LevelButton responseButton = new LevelButton(positionX + widthSoFar,
+					Conversation.bottomMargin + buttonHeight + 10, buttonWidth, buttonHeight, null, null,
+					"" + conversationResponses[i].text, true, false, Color.WHITE, Color.BLACK);
 
 			responseButton.clickListener = new ClickListener() {
 
@@ -62,6 +71,7 @@ public class WindowSelectConversationResponse {
 				}
 			};
 			buttons.add(responseButton);
+			widthSoFar += buttonWidth + marginBetweenButtons;
 
 		}
 

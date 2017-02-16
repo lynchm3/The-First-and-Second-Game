@@ -7,13 +7,13 @@ import mdesl.graphics.Color;
 
 public class Conversation {
 
-	final float height = 100;
-	final float bottomMargin = 50;
-	float width = Game.windowWidth;
-	float x1 = 0;
-	float y1 = Game.windowHeight - bottomMargin - height;
-	float x2 = width;
-	float y2 = Game.windowHeight - bottomMargin;
+	final static float height = 100;
+	final static float bottomMargin = 100;
+	static float width = Game.windowWidth;
+	static float x1 = 0;
+	static float y1 = Game.windowHeight - bottomMargin - height;
+	static float x2 = width;
+	static float y2 = Game.windowHeight - bottomMargin;
 
 	// ArrayList<ConversationPart> conversationParts;
 	public ConversationPart openingConversationPart;
@@ -23,13 +23,13 @@ public class Conversation {
 		super();
 		// this.conversationParts = new ArrayList<ConversationPart>();
 
-		float height = 100;
-		float bottomMargin = 50;
-		float topMargin = 25;
-		float width = 100;
-		float halfTextWidth = Game.font.getWidth("End") / 2;
-		float x1 = Game.halfWindowWidth - halfTextWidth;
-		float y1 = Game.windowHeight - bottomMargin - height - topMargin;
+		// float height = 100;
+		// float bottomMargin = 300;
+		// float topMargin = 25;
+		// float width = 100;
+		// float halfTextWidth = Game.font.getWidth("End") / 2;
+		// float x1 = Game.halfWindowWidth - halfTextWidth;
+		// float y1 = Game.windowHeight - bottomMargin - height - topMargin;
 
 		this.openingConversationPart = this.currentConversationPart = openingConversationPart;
 

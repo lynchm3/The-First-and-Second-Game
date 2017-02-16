@@ -197,7 +197,8 @@ public class Editor {
 
 		// TABS
 		String tabText = "LEVEL";
-		levelTabButton = new LevelButton(10, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		levelTabButton = new LevelButton(10, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		tabs.add(levelTabButton);
 		levelTabButton.clickListener = new ClickListener() {
 			@Override
@@ -213,7 +214,8 @@ public class Editor {
 		levelTabButton.down = true;
 
 		tabText = "SQUARES";
-		squaresTabButton = new LevelButton(90, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		squaresTabButton = new LevelButton(90, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		squaresTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -228,7 +230,8 @@ public class Editor {
 		tabs.add(squaresTabButton);
 
 		tabText = "ACTORS + OBJECTS";
-		objectsTabButton = new LevelButton(210, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		objectsTabButton = new LevelButton(210, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		objectsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -243,7 +246,8 @@ public class Editor {
 		tabs.add(objectsTabButton);
 
 		tabText = "TEMPLATES";
-		templatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		templatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		templatesTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -258,7 +262,8 @@ public class Editor {
 		tabs.add(templatesTabButton);
 
 		tabText = "FACTIONS";
-		factionsTabButton = new LevelButton(430, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		factionsTabButton = new LevelButton(430, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		factionsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -273,7 +278,8 @@ public class Editor {
 		tabs.add(factionsTabButton);
 
 		tabText = "COLORS";
-		colorsTabButton = new LevelButton(690, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		colorsTabButton = new LevelButton(690, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		colorsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -288,7 +294,8 @@ public class Editor {
 		tabs.add(colorsTabButton);
 
 		tabText = "DECORATIONS";
-		decorationsTabButton = new LevelButton(10, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		decorationsTabButton = new LevelButton(10, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		decorationsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -303,7 +310,8 @@ public class Editor {
 		tabs.add(decorationsTabButton);
 
 		tabText = "SCRIPT EVENTS";
-		scriptEventsTabButton = new LevelButton(180, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		scriptEventsTabButton = new LevelButton(180, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		scriptEventsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -318,8 +326,8 @@ public class Editor {
 		tabs.add(scriptEventsTabButton);
 
 		tabText = "SCRIPT TRIGGERS";
-		scriptTriggersTabButton = new LevelButton(350, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true,
-				true);
+		scriptTriggersTabButton = new LevelButton(350, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		scriptTriggersTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -334,7 +342,8 @@ public class Editor {
 		tabs.add(scriptTriggersTabButton);
 
 		tabText = "AIS";
-		aisTabButton = new LevelButton(520, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		aisTabButton = new LevelButton(520, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		aisTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -349,7 +358,8 @@ public class Editor {
 		tabs.add(aisTabButton);
 
 		tabText = "RELATIONS";
-		relationsTabButton = new LevelButton(590, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		relationsTabButton = new LevelButton(590, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		relationsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -364,7 +374,8 @@ public class Editor {
 		tabs.add(relationsTabButton);
 
 		tabText = "SPEECH PART";
-		speechPartTabButton = new LevelButton(730, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true);
+		speechPartTabButton = new LevelButton(730, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		speechPartTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
