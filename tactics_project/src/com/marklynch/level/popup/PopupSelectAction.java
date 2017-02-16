@@ -39,7 +39,7 @@ public class PopupSelectAction extends Popup {
 
 			// BUT... I dont want the buttons to zoom :P
 
-			final PopupButton actionButton = new PopupButton(0, 30 + i * 30, 200, 30, null, null,
+			final PopupButton actionButton = new PopupButton(200, i * 30, 200, 30, null, null,
 					actions.get(i).actionName, true, true, actions.get(i), this);
 
 			actionButton.clickListener = new ClickListener() {
@@ -48,6 +48,7 @@ public class PopupSelectAction extends Popup {
 				public void click() {
 
 					actions.get(index).perform();
+					Game.level.popups.clear();
 				}
 			};
 			buttons.add(actionButton);
