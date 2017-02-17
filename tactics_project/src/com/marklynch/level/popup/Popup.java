@@ -77,6 +77,7 @@ public class Popup {
 	}
 
 	public void clickHighlightedButton() {
+		highlightedButton.down = true;
 		highlightedButton.click();
 	}
 

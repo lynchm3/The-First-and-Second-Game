@@ -301,7 +301,7 @@ public class UserInputLevel {
 
 	public static void upTyped() {
 		if (Game.level.popups.size() != 0) {
-			Game.level.popups.get(0).moveHighLightUp();
+			Game.level.popups.get(Game.level.popups.size() - 1).moveHighLightUp();
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
 			if (y >= 0) {
@@ -313,7 +313,7 @@ public class UserInputLevel {
 
 	public static void downTyped() {
 		if (Game.level.popups.size() != 0) {
-			Game.level.popups.get(0).moveHighLightDown();
+			Game.level.popups.get(Game.level.popups.size() - 1).moveHighLightDown();
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
 			if (y < Game.level.squares[0].length) {
@@ -326,6 +326,7 @@ public class UserInputLevel {
 
 	public static void leftTyped() {
 		if (Game.level.popups.size() != 0) {
+			Game.level.popups.remove(Game.level.popups.size() - 1);
 		} else {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
 			if (x >= 0) {
@@ -338,6 +339,8 @@ public class UserInputLevel {
 
 	public static void rightTyped() {
 		if (Game.level.popups.size() != 0) {
+			// Game.level.popups.get(Game.level.popups.size() - 1).high
+			Game.level.popups.get(Game.level.popups.size() - 1).clickHighlightedButton();
 		} else {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
 			if (x < Game.level.squares.length) {
@@ -349,18 +352,23 @@ public class UserInputLevel {
 	}
 
 	public static void enterTyped() {
-
+		if (Game.level.popups.size() != 0) {
+			Game.level.popups.get(Game.level.popups.size() - 1).clickHighlightedButton();
+		}
 	}
 
 	public static void backTyped() {
 
+		if (Game.level.popups.size() != 0) {
+			Game.level.popups.remove(Game.level.popups.size() - 1);
+		}
 	}
 
 	public static void keyTyped(char character) {
 		if (character == ' ') {
 
 			if (Game.level.popups.size() != 0) {
-				Game.level.popups.get(0).clickHighlightedButton();
+				Game.level.popups.get(Game.level.popups.size() - 1).clickHighlightedButton();
 			} else {
 				Game.level.endTurn();
 			}
