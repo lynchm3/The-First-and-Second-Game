@@ -684,9 +684,9 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean lootTarget(GameObject gameObject) {
-		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
-		if (weaponDistance <= 1) {
-			new ActionLootAll(Game.level.activeActor, gameObject);
+		int straightLineDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
+		if (straightLineDistance <= 1) {
+			new ActionLootAll(Game.level.activeActor, gameObject).perform();
 			return true;
 		} else {
 			return false;

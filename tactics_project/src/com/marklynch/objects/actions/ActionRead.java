@@ -21,10 +21,8 @@ public class ActionRead extends Action {
 
 	@Override
 	public void perform() {
-		System.out.println("ActionRead.preform");
 		Conversation conversation = null;
 		conversation = target.getConversation();
-		System.out.println("conversation = " + conversation);
 
 		if (conversation != null) {
 			conversation.currentConversationPart = conversation.openingConversationPart;

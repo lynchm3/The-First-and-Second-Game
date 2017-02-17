@@ -96,8 +96,7 @@ public class GameObject extends GameObjectTemplate implements Actionable {
 			drawOffsetY = (float) (Math.random() * drawOffsetYMax);
 		} else {
 			if (this instanceof Weapon)
-				System.out.println("NOT width < 1f && height < 1f");
-			drawOffsetX = Game.HALF_SQUARE_WIDTH - width / 2;
+				drawOffsetX = Game.HALF_SQUARE_WIDTH - width / 2;
 			drawOffsetY = Game.SQUARE_HEIGHT - height;
 		}
 
@@ -338,13 +337,11 @@ public class GameObject extends GameObjectTemplate implements Actionable {
 		if (fitsInInventory) {
 			actions.add(new ActionPickUp(performer, this));
 		}
-		if (canContainOtherObjects) {
-			if (fitsInInventory && this.inventory.size() > 0) {
-				actions.add(new ActionLootAll(performer, this));
-			}
-
-			// Here put view loot
+		if (canContainOtherObjects && this.inventory.size() > 0) {
+			actions.add(new ActionLootAll(performer, this));
 		}
+
+		// Here put view loot
 
 		// if (Game.level.activeActor != null &&
 		// Game.level.activeActor.equippedWeapon != null
@@ -354,6 +351,7 @@ public class GameObject extends GameObjectTemplate implements Actionable {
 		actions.add(new ActionAttack(performer, this));
 		// }
 		return actions;
+
 	}
 
 	public Conversation getConversation() {

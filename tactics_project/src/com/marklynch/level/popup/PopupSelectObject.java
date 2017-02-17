@@ -36,7 +36,6 @@ public class PopupSelectObject extends Popup {
 
 			// The line and the highlight are drawn in relation to zoom and
 			// position...
-			System.out.println("gameObject a = " + gameObject);
 
 			// BUT... I dont want the buttons to zoom :P
 
@@ -47,7 +46,6 @@ public class PopupSelectObject extends Popup {
 
 				@Override
 				public void click() {
-					System.out.println("gameObject b = " + gameObject);
 					gameObjectSelected(gameObject);
 				}
 			};
@@ -61,7 +59,6 @@ public class PopupSelectObject extends Popup {
 	}
 
 	public void gameObjectSelected(GameObject gameObject) {
-		System.out.println("gameObject c = " + gameObject);
 		Game.level.popups.add(new PopupSelectAction(100, level, gameObject.squareGameObjectIsOn, gameObject));
 	}
 

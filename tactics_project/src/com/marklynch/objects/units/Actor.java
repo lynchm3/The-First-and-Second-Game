@@ -614,21 +614,16 @@ public class Actor extends ActorTemplate implements Owner {
 			quest = this.quest;
 		}
 
-		System.out.println("Actor.getConversation()");
 		if (quest != null) {
-			System.out.println("Actor.getConversation() a");
 			Conversation questConversation = null;
 			questConversation = quest.getConversation(this);
-			System.out.println("Actor.getConversation() b questConversation = " + questConversation);
 
 			if (questConversation != null) {
-				System.out.println("Actor.getConversation() c");
 				return questConversation;
 			}
 
 		}
 
-		System.out.println("Actor.getConversation() d");
 		return this.conversation;
 	}
 

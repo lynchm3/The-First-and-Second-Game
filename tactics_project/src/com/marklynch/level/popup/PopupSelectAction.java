@@ -24,11 +24,6 @@ public class PopupSelectAction extends Popup {
 
 		buttons.clear();
 
-		System.out.println("PopupSelectAction updateObjectsButtons()");
-		System.out.println("PopupSelectAction updateObjectsButtons() object = " + object);
-		System.out.println("PopupSelectAction updateObjectsButtons() Game.level = " + Game.level);
-		System.out.println("PopupSelectActionupdateObjectsButtons() Game.level.player = " + Game.level.player);
-
 		final ArrayList<Action> actions = object.getAllActions(Game.level.player);
 
 		for (int i = 0; i < actions.size(); i++) {

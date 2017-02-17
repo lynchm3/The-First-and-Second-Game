@@ -22,16 +22,15 @@ public class ActionLootAll extends Action {
 
 	@Override
 	public void perform() {
-
-		if (performer.straightLineDistanceTo(container.squareGameObjectIsOn) < 2) {
-			ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects()
-					.clone();
-			for (GameObject gameObjectToLoot : gameObjectsToLoot) {
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " looted ", gameObjectToLoot, " from ", container }));
-				container.inventory.remove(gameObjectToLoot);
-				performer.inventory.add(gameObjectToLoot);
-			}
+		if (performer.straightLineDistanceTo(container.squareGameObjectIsOn) > 1) {
+			return;
+		}
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
+		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { performer, " looted ", gameObjectToLoot, " from ", container }));
+			container.inventory.remove(gameObjectToLoot);
+			performer.inventory.add(gameObjectToLoot);
 		}
 
 	}

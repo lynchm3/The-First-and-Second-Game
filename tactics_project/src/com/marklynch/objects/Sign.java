@@ -35,7 +35,6 @@ public class Sign extends GameObject {
 
 	@Override
 	public Action getDefaultAction(Actor performer) {
-		System.out.println("Sign.getDefaultAction");
 		return new ActionRead(performer, this);
 	}
 
