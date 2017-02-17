@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Camera doesn't shift with character if u use keys + menu to move :/
+
 	// CTRL + direction to open menu. CTRL works really well coz u can reach
 	// WASD and the arrows. Make it left and right CTRL do the same function.
 

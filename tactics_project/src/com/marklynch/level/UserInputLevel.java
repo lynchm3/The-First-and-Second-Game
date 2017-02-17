@@ -200,14 +200,16 @@ public class UserInputLevel {
 
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
 				if (Game.level.activeActor == Game.level.player)
-					interactWith(Game.squareMouseIsOver, -1);
+					interactWith(Game.squareMouseIsOver, -1, false);
 			}
 		}
 
 		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false) {
 			// Right Click
 			if (Game.level.popups.isEmpty() && Game.squareMouseIsOver != null) {
-				Game.level.popups.add(new PopupSelectObject(100, Game.level, Game.squareMouseIsOver));
+				interactWith(Game.squareMouseIsOver, -1, true);
+				// Game.level.popups.add(new PopupSelectObject(100, Game.level,
+				// Game.squareMouseIsOver));
 			} else {
 				Game.level.popups.clear();
 			}
@@ -245,7 +247,7 @@ public class UserInputLevel {
 
 	// static boolean interactedThisTurn = false;
 
-	public static void interactWith(Square square, int key) {
+	public static void interactWith(Square square, int key, boolean openMenu) {
 
 		// if (interactedThisTurn)
 		// return;
@@ -255,15 +257,17 @@ public class UserInputLevel {
 
 		if (Game.level.activeActor != Game.level.player)
 			return;
+		Action defaultAction = null;
 
-		Action action = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
+		if (!openMenu)
+			defaultAction = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
 
-		if (action != null) {
-			action.perform();
+		if (defaultAction != null) {
+			defaultAction.perform();
 			// if (!(action instanceof ActionRead) && !(action instanceof
 			// ActionTalk))
 			// interactedThisTurn = true;
-			if (action instanceof ActionMove) {
+			if (defaultAction instanceof ActionMove) {
 
 				if (key == Keyboard.KEY_UP) {
 					Game.dragY += Game.SQUARE_HEIGHT;
@@ -286,50 +290,19 @@ public class UserInputLevel {
 
 	}
 
-	// public static void interactWithGameObject(GameObject
-	// gameObjectToInteractWith) {
-	//
-	// if
-	// (Game.level.activeActor.getAttackers().contains(gameObjectToInteractWith))
-	// {
-	// if (Game.level.activeActor != null &&
-	// Game.level.activeActor.equippedWeapon != null
-	// && Game.level.activeActor.equippedWeapon.hasRange(Game.level.activeActor
-	// .straightLineDistanceTo(gameObjectToInteractWith.squareGameObjectIsOn)))
-	// {
-	// // Game.level.activeActor.attack(gameObjectToInteractWith,
-	// // false);
-	// new ActionAttack(Game.level.activeActor,
-	// gameObjectToInteractWith).perform();
-	// interactedThisTurn = true;
-	// Game.level.popup = null;
-	// }
-	// } else {
-	// // talk to the actor
-	// interactedThisTurn = true;
-	// }
-	// Game.level.popup = null;
-	//
-	// }
-
-	// public static void interactWithSquare(Square squareToInteractWith) {
-	// if (squareToInteractWith.reachableBySelectedCharater) {
-	// new ActionMove(Game.level.activeActor, squareToInteractWith).perform();
-	// // AIRoutineUtils.moveTo(Game.level.activeActor,
-	// // squareToInteractWith);
-	// interactedThisTurn = true;
-	// }
-	// Game.level.popup = null;
-	// }
-
 	public static void upTyped() {
 		if (Game.level.popups.size() != 0) {
 			Game.level.popups.get(Game.level.popups.size() - 1).moveHighLightUp();
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
 			if (y >= 0) {
+
+				boolean openMenu = false;
+				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+					openMenu = true;
+				}
 				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
-						Keyboard.KEY_UP);
+						Keyboard.KEY_UP, openMenu);
 			}
 		}
 	}
@@ -340,8 +313,13 @@ public class UserInputLevel {
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
 			if (y < Game.level.squares[0].length) {
+
+				boolean openMenu = false;
+				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+					openMenu = true;
+				}
 				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
-						Keyboard.KEY_DOWN);
+						Keyboard.KEY_DOWN, openMenu);
 			}
 		}
 
@@ -360,8 +338,13 @@ public class UserInputLevel {
 		} else {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
 			if (x >= 0) {
+
+				boolean openMenu = false;
+				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+					openMenu = true;
+				}
 				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
-						Keyboard.KEY_LEFT);
+						Keyboard.KEY_LEFT, openMenu);
 			}
 		}
 
@@ -372,10 +355,17 @@ public class UserInputLevel {
 			// Game.level.popups.get(Game.level.popups.size() - 1).high
 			Game.level.popups.get(Game.level.popups.size() - 1).clickHighlightedButton();
 		} else {
+
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
 			if (x < Game.level.squares.length) {
+
+				boolean openMenu = false;
+				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+					openMenu = true;
+				}
+
 				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
-						Keyboard.KEY_RIGHT);
+						Keyboard.KEY_RIGHT, openMenu);
 			}
 		}
 
