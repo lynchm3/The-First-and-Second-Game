@@ -1,5 +1,7 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.Square;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
@@ -36,6 +38,14 @@ public class Sign extends GameObject {
 	@Override
 	public Action getDefaultAction(Actor performer) {
 		return new ActionRead(performer, this);
+	}
+
+	@Override
+	public ArrayList<Action> getAllActions(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.addAll(super.getAllActions(performer));
+		actions.add(new ActionRead(performer, this));
+		return actions;
 	}
 
 	@Override

@@ -688,7 +688,7 @@ public class Editor {
 		Group hunterPack = new Group("Hunter pack", hunterPackMembers, hunterBrent);
 
 		new Sign("Hunt Plan", 5, "sign.png", Game.level.squares[6][8], new Inventory(), true, false, false, true,
-				"Weakness: Water\nStrength: Fire", 1, 1);
+				"Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast", 1, 1);
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, bedForHunterBront1, inventoryForActor1.makeCopy(),
