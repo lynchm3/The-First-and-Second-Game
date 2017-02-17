@@ -2,7 +2,19 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// CTRL + direction to open menu. CTRL works really well coz u can reach
+	// WASD and the arrows. Make it left and right CTRL do the same function.
+
+	// When the state of the button is down could change the color of the text
+	// instead of the button (like spotify)
+
 	// Disable/grey out/remove actions that cant be performed.
+
+	// Need arrow in the popup menus like so - [Hunter > ] . Right align the
+	// image. Maybe for popup buttons thats a default param, u pass in an
+	// image.Maybe for the actions have an icon instead. YES. Foot prints for
+	// move, hands for pickup/loot, red hand + text for steal/pickpoket. Sword
+	// for attack, red sword for attack friendly (or always make the sword red?)
 
 	// When u mouse over something, lemme know the default function. Image +
 	// text in white, or red if u'll be attacked for it (stealing, attacking,

@@ -563,7 +563,9 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public Action getDefaultAction(Actor performer) {
-		if (performer.attackers.contains(this)) {
+		if (this == Game.level.player) {
+			return null;
+		} else if (performer.attackers.contains(this)) {
 			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
 					&& Game.level.activeActor.equippedWeapon
 							.hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn))) {
@@ -579,12 +581,14 @@ public class Actor extends ActorTemplate implements Owner {
 	public ArrayList<Action> getAllActions(Actor performer) {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
-		// Talk
-		actions.add(new ActionTalk(performer, this));
-		// Inherited from object (attack...)
-		actions.addAll(super.getAllActions(performer));
-		// Inherited from squre (move/swap squares)
-		actions.addAll(squareGameObjectIsOn.getAllActions(performer));
+		if (this != Game.level.player) {
+			// Talk
+			actions.add(new ActionTalk(performer, this));
+			// Inherited from object (attack...)
+			actions.addAll(super.getAllActions(performer));
+			// Inherited from squre (move/swap squares)
+			actions.addAll(squareGameObjectIsOn.getAllActions(performer));
+		}
 
 		return actions;
 	}

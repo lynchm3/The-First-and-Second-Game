@@ -76,6 +76,7 @@ public class Game {
 
 	public static SpriteBatch normalBatch;
 
+	public static Button oldButtonHoveringOver = null;
 	public static Button buttonHoveringOver = null;
 
 	public static Inventory inventoryHoveringOver = null;

@@ -220,17 +220,23 @@ public class Square implements Actionable {
 
 	@Override
 	public Action getDefaultAction(Actor performer) {
-		if (this.reachableBySelectedCharater) {
+
+		if (this == Game.level.player.squareGameObjectIsOn) {
+			return null;
+		} else if (this.reachableBySelectedCharater) {
 			return new ActionMove(performer, this);
 		} else {
 			return null;
 		}
+
 	}
 
 	@Override
 	public ArrayList<Action> getAllActions(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionMove(performer, this));
+		if (this != Game.level.player.squareGameObjectIsOn) {
+			actions.add(new ActionMove(performer, this));
+		}
 		return actions;
 	}
 }

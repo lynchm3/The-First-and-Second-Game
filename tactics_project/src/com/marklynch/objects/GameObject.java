@@ -337,7 +337,7 @@ public class GameObject extends GameObjectTemplate implements Actionable {
 		if (fitsInInventory) {
 			actions.add(new ActionPickUp(performer, this));
 		}
-		if (canContainOtherObjects && this.inventory.size() > 0) {
+		if (!(this instanceof Actor) && canContainOtherObjects && this.inventory.size() > 0) {
 			actions.add(new ActionLootAll(performer, this));
 		}
 
@@ -348,7 +348,8 @@ public class GameObject extends GameObjectTemplate implements Actionable {
 		// && Game.level.activeActor.equippedWeapon
 		// .hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn)))
 		// {
-		actions.add(new ActionAttack(performer, this));
+		if (this != Game.level.player)
+			actions.add(new ActionAttack(performer, this));
 		// }
 		return actions;
 

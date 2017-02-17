@@ -7,6 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.Actionable;
+import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 
 public class PopupSelectAction extends Popup {
@@ -43,6 +44,10 @@ public class PopupSelectAction extends Popup {
 				@Override
 				public void click() {
 					if (actionButton.enabled) {
+						for (Button button : buttons) {
+							button.down = false;
+						}
+						highlightedButton.down = true;
 						actions.get(index).perform();
 						Game.level.popups.clear();
 					}

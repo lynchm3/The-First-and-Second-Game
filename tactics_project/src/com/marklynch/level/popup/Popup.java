@@ -16,8 +16,8 @@ public class Popup {
 	public PopupButton selectSquareButton;
 	public float drawPositionX, drawPositionY;
 
-	Button highlightedButton;
-	int highlightedButtonIndex = 0;
+	public Button highlightedButton;
+	public int highlightedButtonIndex = 0;
 
 	public Popup(float width, Level level, Square square) {
 		this.width = width;
@@ -77,7 +77,6 @@ public class Popup {
 	}
 
 	public void clickHighlightedButton() {
-		highlightedButton.down = true;
 		highlightedButton.click();
 	}
 

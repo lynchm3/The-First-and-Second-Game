@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 
 public class PopupSelectObject extends Popup {
@@ -19,6 +20,10 @@ public class PopupSelectObject extends Popup {
 
 			@Override
 			public void click() {
+				for (Button button : buttons) {
+					button.down = false;
+				}
+				highlightedButton.down = true;
 				squareSelected(PopupSelectObject.this.square);
 			}
 		};
@@ -46,6 +51,11 @@ public class PopupSelectObject extends Popup {
 
 				@Override
 				public void click() {
+
+					for (Button button : buttons) {
+						button.down = false;
+					}
+					highlightedButton.down = true;
 					gameObjectSelected(gameObject);
 				}
 			};

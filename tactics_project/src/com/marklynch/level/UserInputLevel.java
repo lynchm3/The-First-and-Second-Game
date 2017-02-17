@@ -4,11 +4,13 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
+import com.marklynch.level.popup.Popup;
 import com.marklynch.level.popup.PopupButton;
 import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Path;
+import com.marklynch.ui.button.Button;
 
 public class UserInputLevel {
 
@@ -101,8 +103,6 @@ public class UserInputLevel {
 			if (mouseDownX == -1) {
 				mouseDownX = Mouse.getX();
 				mouseDownY = Mouse.getY();
-				mouseLastX = Mouse.getX();
-				mouseLastY = Mouse.getY();
 				dragging = false;
 			}
 			mouseButtonStateLeft = true;
@@ -113,8 +113,6 @@ public class UserInputLevel {
 				Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;
 				Game.dragY -= (Mouse.getY() - mouseLastY) / Game.zoom;
 			}
-			mouseLastX = Mouse.getX();
-			mouseLastY = Mouse.getY();
 		}
 
 		// Check if a script is hogging the screen and intercepting clicks
@@ -138,10 +136,33 @@ public class UserInputLevel {
 		}
 
 		// Getting button that the mouse is over, if any
+		Game.oldButtonHoveringOver = Game.buttonHoveringOver;
 		Game.buttonHoveringOver = null;
 		if (dragging == false) {
 			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
+		}
+
+		if (mouseLastX != Mouse.getX() || mouseLastY != Mouse.getY()) {
+			if (Game.oldButtonHoveringOver != null) {
+				Game.oldButtonHoveringOver.highlighted = false;
+
+			}
+
+			if (Game.level.popups.size() != 0) {
+				Game.level.popups.get(Game.level.popups.size() - 1).highlightedButton.highlighted = false;
+			}
+
+			if (Game.buttonHoveringOver != null) {
+				for (Popup popUp : Game.level.popups) {
+					if (popUp.buttons.contains(Game.buttonHoveringOver)) {
+						popUp.highlightedButton.highlighted = false;
+						popUp.highlightedButton = Game.buttonHoveringOver;
+						popUp.highlightedButtonIndex = popUp.buttons.indexOf(Game.buttonHoveringOver);
+					}
+				}
+				Game.buttonHoveringOver.highlighted = true;
+			}
 		}
 
 		// Getting inventory that the mouse is over, if any
@@ -214,6 +235,8 @@ public class UserInputLevel {
 			checkButtons();
 		}
 
+		mouseLastX = Mouse.getX();
+		mouseLastY = Mouse.getY();
 		// if (interactedThisTurn)
 		// Game.level.endTurn();
 
@@ -327,6 +350,13 @@ public class UserInputLevel {
 	public static void leftTyped() {
 		if (Game.level.popups.size() != 0) {
 			Game.level.popups.remove(Game.level.popups.size() - 1);
+
+			if (Game.level.popups.size() != 0) {
+				for (Button button : Game.level.popups.get(Game.level.popups.size() - 1).buttons) {
+					button.down = false;
+				}
+			}
+
 		} else {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
 			if (x >= 0) {
