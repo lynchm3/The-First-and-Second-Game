@@ -7,6 +7,7 @@ import com.marklynch.objects.units.Actor;
 public class ActionMove extends Action {
 
 	public static final String ACTION_NAME = "Move here";
+	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor mover;
 	Square target;
 
@@ -14,29 +15,22 @@ public class ActionMove extends Action {
 		super(ACTION_NAME);
 		this.mover = mover;
 		this.target = target;
+		if (!check()) {
+			enabled = false;
+			actionName = ACTION_NAME_DISABLED;
+		}
+
 	}
 
 	@Override
 	public void perform() {
-		Square targetSquare = target;
-		moveTo(mover, targetSquare);
+
+		if (!enabled)
+			return;
+		moveTo(mover, target);
 	}
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
-
-		if (actor.travelDistance - actor.distanceMovedThisTurn <= 0)
-			return;
-
-		if (squareToMoveTo == actor.squareGameObjectIsOn || !squareToMoveTo.inventory.isPassable(actor))
-			return;
-
-		if (squareToMoveTo.walkingDistanceToSquare > actor.travelDistance - actor.distanceMovedThisTurn)
-			return;
-
-		if (actor != Game.level.player && actor.swapCooldown > 0) {
-			actor.swapCooldown--;
-			return;
-		}
 
 		Square oldSquare = actor.squareGameObjectIsOn;
 		Actor actorInTheWay = (Actor) squareToMoveTo.inventory.getGameObjectThatCantShareSquare();
@@ -48,10 +42,7 @@ public class ActionMove extends Action {
 		if (actorInTheWay == null) {
 			move(actor, squareToMoveTo);
 
-		} else if (actorInTheWay != null && actor.group != null && actor.group.getLeader() == actorInTheWay) {
-			// don't try to swap with you group leader
-			return;
-		} else if (actorInTheWay != null && (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn > 0)) {
+		} else {
 			move(actorInTheWay, oldSquare);
 			move(actor, squareToMoveTo);
 			if (actorInTheWay.group != null && actorInTheWay.group.getLeader() == actor) {
@@ -60,9 +51,6 @@ public class ActionMove extends Action {
 			} else {
 				actor.swapCooldown = (int) (Math.random() * 3);
 			}
-		} else {
-			// There's someone in the way, but they dont have the movement
-			// points to swap with u, wait till next turn
 		}
 
 		if (mover == Game.level.player)
@@ -75,5 +63,43 @@ public class ActionMove extends Action {
 		actor.squareGameObjectIsOn = square;
 		square.inventory.add(actor);
 		// Actor.highlightSelectedCharactersSquares();
+	}
+
+	@Override
+	public boolean check() {
+
+		if (mover.travelDistance - mover.distanceMovedThisTurn <= 0)
+			return false;
+
+		if (target == mover.squareGameObjectIsOn || !target.inventory.isPassable(mover))
+			return false;
+
+		if (target.walkingDistanceToSquare > mover.travelDistance - mover.distanceMovedThisTurn)
+			return false;
+
+		if (mover != Game.level.player && mover.swapCooldown > 0) {
+			mover.swapCooldown--;
+			return false;
+		}
+
+		Actor actorInTheWay = (Actor) target.inventory.getGameObjectThatCantShareSquare();
+
+		if (actorInTheWay == Game.level.player) {
+			return false;
+		}
+
+		if (mover.group != null && mover.group.getLeader() == actorInTheWay) {
+			// don't try to swap with you group leader
+			return false;
+		}
+
+		if (mover != Game.level.player && actorInTheWay != null
+				&& (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn <= 0)) {
+			// If actorInTheWay has no moves left, doesn't count when player
+			// tries to move
+			return false;
+		}
+
+		return true;
 	}
 }

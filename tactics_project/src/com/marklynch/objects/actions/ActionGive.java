@@ -8,6 +8,7 @@ import com.marklynch.ui.ActivityLog;
 public class ActionGive extends Action {
 
 	public static final String ACTION_NAME = "Give";
+	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor giver;
 	GameObject receiver;
 	GameObject object;
@@ -17,12 +18,27 @@ public class ActionGive extends Action {
 		this.giver = performer;
 		this.receiver = receiver;
 		this.object = object;
+		if (!check()) {
+			enabled = false;
+			actionName = ACTION_NAME_DISABLED;
+		}
 	}
 
 	@Override
 	public void perform() {
+
+		if (!enabled)
+			return;
 		Game.level.logOnScreen(new ActivityLog(new Object[] { giver, " gave ", object, " to ", receiver }));
 		giver.inventory.remove(object);
 		receiver.inventory.add(object);
+	}
+
+	@Override
+	public boolean check() {
+		if (giver.straightLineDistanceTo(receiver.squareGameObjectIsOn) < 2) {
+			return true;
+		}
+		return false;
 	}
 }

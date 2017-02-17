@@ -59,10 +59,14 @@ public class PopupSelectObject extends Popup {
 	}
 
 	public void gameObjectSelected(GameObject gameObject) {
+		if (Game.level.popups.size() == 2)
+			Game.level.popups.remove(1);
 		Game.level.popups.add(new PopupSelectAction(100, level, gameObject.squareGameObjectIsOn, gameObject));
 	}
 
 	public void squareSelected(Square square) {
+		if (Game.level.popups.size() == 2)
+			Game.level.popups.remove(1);
 		Game.level.popups.add(new PopupSelectAction(100, level, square, square));
 	}
 }

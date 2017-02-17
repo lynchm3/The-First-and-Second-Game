@@ -36,14 +36,16 @@ public class PopupSelectAction extends Popup {
 
 			final PopupButton actionButton = new PopupButton(200, i * 30, 200, 30, null, null,
 					actions.get(i).actionName, true, true, actions.get(i), this);
+			actionButton.enabled = actions.get(index).enabled;
 
 			actionButton.clickListener = new ClickListener() {
 
 				@Override
 				public void click() {
-
-					actions.get(index).perform();
-					Game.level.popups.clear();
+					if (actionButton.enabled) {
+						actions.get(index).perform();
+						Game.level.popups.clear();
+					}
 				}
 			};
 			buttons.add(actionButton);

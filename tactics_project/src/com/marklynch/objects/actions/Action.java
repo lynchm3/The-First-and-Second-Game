@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 public class Action {
 
 	public String actionName;
+	public boolean enabled = true;
 
 	public Action(String actionName) {
 		super();
@@ -11,5 +12,9 @@ public class Action {
 
 	public void perform() {
 
+	}
+
+	public boolean check() {
+		return true;
 	}
 }

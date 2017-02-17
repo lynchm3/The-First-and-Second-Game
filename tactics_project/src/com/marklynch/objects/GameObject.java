@@ -357,4 +357,11 @@ public class GameObject extends GameObjectTemplate implements Actionable {
 	public Conversation getConversation() {
 		return null;
 	}
+
+	public int straightLineDistanceTo(Square square) {
+
+		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid)
+				+ Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
+
+	}
 }

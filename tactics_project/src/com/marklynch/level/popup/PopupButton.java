@@ -40,7 +40,7 @@ public class PopupButton extends Button {
 				TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 			} else {
 				if (highlighted) {
-					QuadUtils.drawQuad(Color.MAGENTA, realX, realX + width, realY, realY + height);
+					QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
 					TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 				} else {
 					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
@@ -49,7 +49,7 @@ public class PopupButton extends Button {
 			}
 		} else {
 
-			QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
+			QuadUtils.drawQuad(Color.LIGHT_GRAY, realX, realX + width, realY, realY + height);
 			TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 		}
 

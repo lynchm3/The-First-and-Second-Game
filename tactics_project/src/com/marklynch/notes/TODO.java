@@ -2,6 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Disable/grey out/remove actions that cant be performed.
+
+	// When u mouse over something, lemme know the default function. Image +
+	// text in white, or red if u'll be attacked for it (stealing, attacking,
+	// tresspassing)
+
+	// Same for the actions in the popups
+
 	// Click on location to move there, one turn at a time, stop if u get
 	// attacked / get talked to, probably need to show preview of path they'll
 	// take

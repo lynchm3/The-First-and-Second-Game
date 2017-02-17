@@ -71,6 +71,13 @@ public class QuestSmallGame extends Quest {
 
 	// Could lead in to larger overarching story with spirit animals
 
+	// U can rob the hunters blind when they leave on the hunt, u can go back
+	// and steal all their shit :P I like this.
+
+	// quest flag on the weapons round back should be enough to stop AIs
+	// stealing shit + guards nearby + put ownership = hunters on it until ur
+	// told to go get them
+
 	// Quest text
 	final String OBJECTIVE_FOLLOW_THE_HUNTERS_TO_SUPERWOLF = "Follow the hunters to Superwolf";
 
@@ -164,18 +171,15 @@ public class QuestSmallGame extends Quest {
 		// Set flags
 
 		// The wolves are dead
-		System.out.println("wolvesDead @ start = " + wolvesDead);
 		if (wolvesDead == false) {
 			wolvesDead = true;
 			for (int i = 0; i < wolfPack.size(); i++) {
-				System.out.println("wolfPack.getMember(i).remainingHealth = " + wolfPack.getMember(i).remainingHealth);
 				if (wolfPack.getMember(i).remainingHealth > 0) {
 					wolvesDead = false;
 					break;
 				}
 			}
 		}
-		System.out.println("wolvesDead @ end = " + wolvesDead);
 
 		// Player has attacked the wolves
 		if (playerAttackedWolves == false && wolfPack.hasAttackers()) {
@@ -230,7 +234,6 @@ public class QuestSmallGame extends Quest {
 	private boolean updateHunter(Actor actor) {
 
 		if (huntersReleasedFromQuest) {
-			System.out.println("updateHunter returning false");
 			return false;
 		}
 

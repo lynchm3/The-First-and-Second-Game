@@ -207,13 +207,6 @@ public class Actor extends ActorTemplate implements Owner {
 		Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
 	}
 
-	public int straightLineDistanceTo(Square square) {
-
-		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid)
-				+ Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
-
-	}
-
 	public boolean hasRange(int weaponDistance) {
 		for (Weapon weapon : getWeaponsInInventory()) {
 			if (weaponDistance >= weapon.minRange && weaponDistance <= weapon.maxRange) {

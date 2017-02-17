@@ -9,6 +9,7 @@ import com.marklynch.ui.ActivityLog;
 public class ActionAttack extends Action {
 
 	public static final String ACTION_NAME = "Attack";
+	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor attacker;
 	GameObject target;
@@ -18,19 +19,20 @@ public class ActionAttack extends Action {
 		super(ACTION_NAME);
 		this.attacker = attacker;
 		this.target = target;
+		if (!check()) {
+			enabled = false;
+			actionName = ACTION_NAME_DISABLED;
+		}
 	}
 
 	@Override
 	public void perform() {
+
+		if (!enabled)
+			return;
 		// performer.attack(targetGameObject, false);
 
 		// GameObject targetGameObject;// = target;
-
-		if (attacker.squareGameObjectIsOn.building != target.squareGameObjectIsOn.building)
-			return;
-
-		if (!attacker.equippedWeapon.hasRange(attacker.straightLineDistanceTo(target.squareGameObjectIsOn)))
-			return;
 
 		attacker.manageAttackerReferences(target);
 		attacker.manageAttackerReferencesForNearbyAllies(target);
@@ -74,6 +76,18 @@ public class ActionAttack extends Action {
 
 		if (attacker == Game.level.player)
 			Game.level.endTurn();
+	}
+
+	@Override
+	public boolean check() {
+
+		if (attacker.squareGameObjectIsOn.building != target.squareGameObjectIsOn.building)
+			return false;
+
+		if (!attacker.equippedWeapon.hasRange(attacker.straightLineDistanceTo(target.squareGameObjectIsOn)))
+			return false;
+
+		return true;
 	}
 
 }

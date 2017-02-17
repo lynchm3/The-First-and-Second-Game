@@ -7,23 +7,39 @@ import com.marklynch.ui.ActivityLog;
 
 public class ActionDrop extends Action {
 
-	public static final String ACTION_NAME = "Give";
+	public static final String ACTION_NAME = "Drop";
+	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	GameObject giver;
-	Square receiver;
+	Square square;
 	GameObject object;
 
-	public ActionDrop(GameObject performer, Square receiver, GameObject object) {
+	public ActionDrop(GameObject performer, Square square, GameObject object) {
 		super(ACTION_NAME);
 		this.giver = performer;
-		this.receiver = receiver;
+		this.square = square;
 		this.object = object;
+		if (!check()) {
+			enabled = false;
+			actionName = ACTION_NAME_DISABLED;
+		}
 	}
 
 	@Override
 	public void perform() {
+
+		if (!enabled)
+			return;
 		Game.level.logOnScreen(new ActivityLog(new Object[] { giver, " dropped ", object }));
 		giver.inventory.remove(object);
 		// receiver.inventory.add(object);
-		receiver.inventory.add(object);
+		square.inventory.add(object);
+	}
+
+	@Override
+	public boolean check() {
+		if (giver.straightLineDistanceTo(square) < 2) {
+			return true;
+		}
+		return false;
 	}
 }

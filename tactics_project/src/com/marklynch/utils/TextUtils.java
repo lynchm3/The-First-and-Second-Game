@@ -106,10 +106,10 @@ public class TextUtils {
 				}
 
 				// Name
-				Game.activeBatch.setColor(Color.BLACK);
+				// Game.activeBatch.setColor(Color.BLACK);
 				if (gameObject instanceof Actor) {
 					Actor actor = (Actor) gameObject;
-					Game.activeBatch.setColor(actor.faction.color);
+					// Game.activeBatch.setColor(actor.faction.color);
 					Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
 				} else {
 					Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
@@ -181,7 +181,7 @@ public class TextUtils {
 
 				// Name
 
-				Game.activeBatch.setColor(faction.color);
+				// Game.activeBatch.setColor(faction.color);
 				Game.font.drawText(Game.activeBatch, faction.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
