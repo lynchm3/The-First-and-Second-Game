@@ -27,6 +27,7 @@ public class UserInputLevel {
 	public static boolean keyStateDown = false;
 	public static boolean keyStateLeft = false;
 	public static boolean keyStateRight = false;
+	public static boolean keyStateTab = false;
 	public static boolean keyStateReturn = false;
 	public static boolean keyStateBack = false;
 	public static boolean keyStateLeftShift = false;
@@ -377,10 +378,19 @@ public class UserInputLevel {
 		}
 	}
 
-	public static void backTyped() {
+	public static void backSpacedTyped() {
 
 		if (Game.level.popups.size() != 0) {
 			Game.level.popups.remove(Game.level.popups.size() - 1);
+		}
+	}
+
+	public static void tabTyped() {
+		System.out.println("tabTyped()");
+		if (Game.level.openInventories.size() > 0) {
+			Game.level.openInventories.clear();
+		} else {
+			Game.level.openInventories.add(Game.level.player.inventory);
 		}
 	}
 
@@ -397,6 +407,13 @@ public class UserInputLevel {
 	}
 
 	private static void checkButtons() {
+
+		if (keyStateTab == false && Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
+			tabTyped();
+			keyStateTab = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
+			keyStateTab = false;
+		}
 
 		if (keyStateUp == false && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
 			upTyped();
@@ -434,7 +451,7 @@ public class UserInputLevel {
 		}
 
 		if (keyStateBack == false && Keyboard.isKeyDown(Keyboard.KEY_BACK)) {
-			backTyped();
+			backSpacedTyped();
 			keyStateBack = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_BACK)) {
 			keyStateBack = false;

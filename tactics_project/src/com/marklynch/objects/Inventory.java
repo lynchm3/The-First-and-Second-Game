@@ -8,8 +8,10 @@ import com.marklynch.objects.units.Actor;
 
 public class Inventory {
 
-	public transient InventorySquare[][] inventorySquares = new InventorySquare[5][5];
-	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(25);
+	public int widthInSquares = 5;
+	public int heightInSquares = 6;
+	public transient InventorySquare[][] inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
+	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(widthInSquares * heightInSquares);
 
 	public enum INVENTORY_STATE {
 		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
@@ -18,28 +20,28 @@ public class Inventory {
 	public transient INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
 
 	private transient boolean isOpen = false;
-	transient float x = 500;
+	transient float x = 1000;
 	transient float y = 100;
-	transient float width = 5 * Game.SQUARE_WIDTH;
-	transient float height = 5 * Game.SQUARE_HEIGHT;
+	transient float width = widthInSquares * Game.SQUARE_WIDTH;
+	transient float height = heightInSquares * Game.SQUARE_HEIGHT;
 	transient private InventorySquare inventorySquareMouseIsOver;
 	transient private GameObject selectedGameObject;
 
 	public Inventory() {
-		for (int i = 0; i < inventorySquares.length; i++) {
-			for (int j = 0; j < inventorySquares[i].length; j++) {
-				inventorySquares[i][j] = new InventorySquare(i, j, "dialogbg.png", this);
+		for (int i = 0; i < inventorySquares[0].length; i++) {
+			for (int j = 0; j < inventorySquares.length; j++) {
+				inventorySquares[j][i] = new InventorySquare(j, i, "dialogbg.png", this);
 			}
 		}
 	}
 
 	public void postLoad1() {
-		inventorySquares = new InventorySquare[5][5];
-		for (int i = 0; i < inventorySquares.length; i++) {
-			for (int j = 0; j < inventorySquares[i].length; j++) {
-				inventorySquares[i][j] = new InventorySquare(i, j, "dialogbg.png", this);
-				inventorySquares[i][j].inventoryThisBelongsTo = this;
-				inventorySquares[i][j].loadImages();
+		inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
+		for (int i = 0; i < inventorySquares[0].length; i++) {
+			for (int j = 0; j < inventorySquares.length; j++) {
+				inventorySquares[j][i] = new InventorySquare(i, j, "dialogbg.png", this);
+				inventorySquares[j][i].inventoryThisBelongsTo = this;
+				inventorySquares[j][i].loadImages();
 			}
 		}
 
@@ -52,15 +54,15 @@ public class Inventory {
 		int index = 0;
 
 		// Put objects in inventory
-		for (int i = 0; i < inventorySquares.length; i++) {
-			for (int j = 0; j < inventorySquares[i].length; j++) {
+		for (int i = 0; i < inventorySquares[0].length; i++) {
+			for (int j = 0; j < inventorySquares.length; j++) {
 
 				if (index >= gameObjects.size())
 					return;
 
-				if (inventorySquares[i][j].gameObject == null) {
-					inventorySquares[i][j].gameObject = gameObjects.get(index);
-					gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[i][j];
+				if (inventorySquares[j][i].gameObject == null) {
+					inventorySquares[j][i].gameObject = gameObjects.get(index);
+					gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[j][i];
 					index++;
 				}
 			}
@@ -77,9 +79,9 @@ public class Inventory {
 	}
 
 	public void loadImages() {
-		for (int i = 0; i < inventorySquares.length; i++) {
-			for (int j = 0; j < inventorySquares[i].length; j++) {
-				inventorySquares[i][j].loadImages();
+		for (int i = 0; i < inventorySquares[0].length; i++) {
+			for (int j = 0; j < inventorySquares.length; j++) {
+				inventorySquares[j][i].loadImages();
 			}
 		}
 	}
@@ -109,11 +111,11 @@ public class Inventory {
 			gameObject.inventoryThatHoldsThisObject = this;
 
 			// Add to the inventory UI
-			for (int i = 0; i < inventorySquares.length; i++) {
-				for (int j = 0; j < inventorySquares[i].length; j++) {
-					if (inventorySquares[i][j].gameObject == null) {
-						inventorySquares[i][j].gameObject = gameObject;
-						gameObject.inventorySquareGameObjectIsOn = inventorySquares[i][j];
+			for (int i = 0; i < inventorySquares[0].length; i++) {
+				for (int j = 0; j < inventorySquares.length; j++) {
+					if (inventorySquares[j][i].gameObject == null) {
+						inventorySquares[j][i].gameObject = gameObject;
+						gameObject.inventorySquareGameObjectIsOn = inventorySquares[j][i];
 						return;
 					}
 				}
@@ -124,11 +126,11 @@ public class Inventory {
 	public void remove(GameObject gameObject) {
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
-			for (int i = 0; i < inventorySquares.length; i++) {
-				for (int j = 0; j < inventorySquares[i].length; j++) {
-					if (inventorySquares[i][j].gameObject == gameObject) {
-						inventorySquares[i][j].gameObject.inventorySquareGameObjectIsOn = null;
-						inventorySquares[i][j].gameObject = null;
+			for (int i = 0; i < inventorySquares[0].length; i++) {
+				for (int j = 0; j < inventorySquares.length; j++) {
+					if (inventorySquares[j][i].gameObject == gameObject) {
+						inventorySquares[j][i].gameObject.inventorySquareGameObjectIsOn = null;
+						inventorySquares[j][i].gameObject = null;
 						return;
 					}
 				}
@@ -147,15 +149,15 @@ public class Inventory {
 	public void setGameObjects(ArrayList<GameObject> gameObjects) {
 		this.gameObjects = gameObjects;
 		int index = 0;
-		for (int i = 0; i < inventorySquares.length; i++) {
-			for (int j = 0; j < inventorySquares[i].length; j++) {
+		for (int i = 0; i < inventorySquares[0].length; i++) {
+			for (int j = 0; j < inventorySquares.length; j++) {
 
 				if (index >= gameObjects.size())
 					return;
 
-				if (inventorySquares[i][j].gameObject == null) {
-					inventorySquares[i][j].gameObject = gameObjects.get(index);
-					gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[i][j];
+				if (inventorySquares[j][i].gameObject == null) {
+					inventorySquares[j][i].gameObject = gameObjects.get(index);
+					gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[j][i];
 					index++;
 				}
 			}
@@ -252,10 +254,10 @@ public class Inventory {
 	public void drawStaticUI() {
 		// if (isOpen) {
 		int gameObjectIndex = 0;
-		for (int i = 0; i < inventorySquares.length; i++) {
-			for (int j = 0; j < inventorySquares[i].length; j++) {
+		for (int i = 0; i < inventorySquares[0].length; i++) {
+			for (int j = 0; j < inventorySquares.length; j++) {
 
-				inventorySquares[i][j].drawStaticUI();
+				inventorySquares[j][i].drawStaticUI();
 				// gameObjectIndex = i * inventorySquares[i].length + j;
 				// System.out.println("gameObjects.size() = " +
 				// gameObjects.size());
@@ -269,10 +271,10 @@ public class Inventory {
 				// gameObjects.get(gameObjectIndex) != null) {
 				//
 				// TextureUtils.drawTexture(gameObjects.get(gameObjectIndex).imageTexture,
-				// inventorySquares[i][j].xInPixels,
-				// inventorySquares[i][j].xInPixels + Game.SQUARE_WIDTH,
-				// inventorySquares[i][j].yInPixels,
-				// inventorySquares[i][j].yInPixels + Game.SQUARE_HEIGHT);
+				// inventorySquares[j][i].xInPixels,
+				// inventorySquares[j][i].xInPixels + Game.SQUARE_WIDTH,
+				// inventorySquares[j][i].yInPixels,
+				// inventorySquares[j][i].yInPixels + Game.SQUARE_HEIGHT);
 				//
 				// }
 
@@ -308,11 +310,11 @@ public class Inventory {
 	public void userInput() {
 
 		this.inventorySquareMouseIsOver = null;
-		for (int i = 0; i < inventorySquares.length; i++) {
-			for (int j = 0; j < inventorySquares[i].length; j++) {
-				if (inventorySquares[i][j].calculateIfPointInBoundsOfSquare(UserInputEditor.mouseXinPixels,
+		for (int i = 0; i < inventorySquares[0].length; i++) {
+			for (int j = 0; j < inventorySquares.length; j++) {
+				if (inventorySquares[j][i].calculateIfPointInBoundsOfSquare(UserInputEditor.mouseXinPixels,
 						Game.windowHeight - UserInputEditor.mouseYinPixels)) {
-					this.inventorySquareMouseIsOver = inventorySquares[i][j];
+					this.inventorySquareMouseIsOver = inventorySquares[j][i];
 				}
 			}
 		}

@@ -2,6 +2,15 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Fill in the rest of the actions, look at list i've set up.
+	// Inventory as well in play, and a way to close it :P
+
+	// INVENTORY
+
+	// View inventory of people and containers also :)
+
+	// drag inventory as well
+
 	// Camera doesn't shift with character if u use keys + menu to move :/
 
 	// CTRL + direction to open menu. CTRL works really well coz u can reach

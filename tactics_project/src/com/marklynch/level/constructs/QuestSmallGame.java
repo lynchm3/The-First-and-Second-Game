@@ -15,6 +15,14 @@ import com.marklynch.objects.units.Actor;
 
 public class QuestSmallGame extends Quest {
 
+	// The hunting party leader says out loud to the pack, in a way that u can
+	// see it "so, use the water imbued weapons on the the beast. No fire, it
+	// feeds off the stuff."
+
+	// Then at the start of the conversation it's him talking to the gorup going
+	// "...and that's how we're going to pull off the greatest hunt of all
+	// time." Then turning to u.... begin explaining quest.
+
 	// Hunting plan could have a crude drawying of the wolf. I think all signs
 	// should have pngs to display instead of text.
 	// "Hello stranger. I'm (creating) the most formidable hunting party this
