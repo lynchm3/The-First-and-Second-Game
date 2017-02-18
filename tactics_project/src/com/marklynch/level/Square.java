@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.Building;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionPickuUpAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.Actionable;
 import com.marklynch.objects.units.Actor;
@@ -237,6 +238,11 @@ public class Square implements Actionable {
 		if (this != Game.level.player.squareGameObjectIsOn) {
 			actions.add(new ActionMove(performer, this));
 		}
+
+		if (this.inventory.size() > 0 && this.inventory.hasGameObjectsThatFitInInventory()) {
+			actions.add(new ActionPickuUpAll(performer, this));
+		}
+
 		return actions;
 	}
 }

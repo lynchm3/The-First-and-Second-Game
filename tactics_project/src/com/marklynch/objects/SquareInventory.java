@@ -1,5 +1,7 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
@@ -111,6 +113,23 @@ public class SquareInventory extends Inventory {
 				}
 			}
 		}
+	}
+
+	public ArrayList<GameObject> getGameObjectsThatFitInInventory() {
+		ArrayList<GameObject> gameObjectsThatFitInInventory = new ArrayList<GameObject>();
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.fitsInInventory)
+				gameObjectsThatFitInInventory.add(gameObject);
+		}
+		return gameObjectsThatFitInInventory;
+	}
+
+	public boolean hasGameObjectsThatFitInInventory() {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.fitsInInventory)
+				return true;
+		}
+		return false;
 	}
 
 	// public GameObject getAc() {
