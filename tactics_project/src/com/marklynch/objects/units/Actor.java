@@ -27,6 +27,7 @@ import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 
@@ -324,6 +325,19 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 
 		super.draw1();
+
+		if (equippedWeapon != null) {
+			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+					+ drawOffsetX + ((int) Game.HALF_SQUARE_WIDTH - equippedWeapon.halfWidth));
+			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+					+ drawOffsetY + ((int) Game.HALF_SQUARE_HEIGHT - equippedWeapon.halfHeight));
+			float alpha = 1.0f;
+			TextureUtils.drawTexture(this.equippedWeapon.imageTexture, alpha, weaponPositionXInPixels,
+					weaponPositionXInPixels + equippedWeapon.width, weaponPositionYInPixels,
+					weaponPositionYInPixels + equippedWeapon.height);
+		}
+
+		// TextureUtils.skipNormals = false;
 
 		int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
 		int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;

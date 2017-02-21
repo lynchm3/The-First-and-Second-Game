@@ -68,10 +68,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	// Quest
 	public transient Quest quest;
 
-	float height;
-	float width;
-	float drawOffsetX;
-	float drawOffsetY;
+	public float height;
+	public float width;
+	public float halfHeight;
+	public float halfWidth;
+	public float drawOffsetX;
+	public float drawOffsetY;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -90,6 +92,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		width = Game.SQUARE_WIDTH * widthRatio;
 		height = Game.SQUARE_HEIGHT * heightRatio;
+		halfWidth = width / 2;
+		halfHeight = height / 2;
 
 		if (widthRatio < 1f && heightRatio < 1f) {
 			float drawOffsetXMax = Game.SQUARE_WIDTH - width;

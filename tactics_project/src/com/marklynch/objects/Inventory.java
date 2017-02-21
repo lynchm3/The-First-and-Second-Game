@@ -8,10 +8,12 @@ import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
 import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 
@@ -35,7 +37,7 @@ public class Inventory {
 	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_MAX_RANGE;
 
 	private transient boolean isOpen = false;
-	transient float x = 1000;
+	transient float x = 100;
 	transient float y = 100;
 	transient float width = widthInSquares * Game.SQUARE_WIDTH;
 	transient float height = heightInSquares * Game.SQUARE_HEIGHT;
@@ -59,7 +61,7 @@ public class Inventory {
 		}
 		buttons = new ArrayList<Button>();
 
-		buttonSortAlphabetically = new LevelButton(400f, 100f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+		buttonSortAlphabetically = new LevelButton(0f, 100f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"SORT A-Z", true, true, Color.BLACK, Color.WHITE);
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
@@ -69,7 +71,7 @@ public class Inventory {
 		});
 		buttons.add(buttonSortAlphabetically);
 
-		buttonSortByNewest = new LevelButton(400f, 150f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+		buttonSortByNewest = new LevelButton(0f, 150f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"NEWEST", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
@@ -79,7 +81,7 @@ public class Inventory {
 		});
 		buttons.add(buttonSortByNewest);
 
-		buttonSortByFavourite = new LevelButton(400f, 200f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+		buttonSortByFavourite = new LevelButton(0f, 200f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"FAVOURITES", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
@@ -89,8 +91,8 @@ public class Inventory {
 		});
 		buttons.add(buttonSortByFavourite);
 
-		buttonSortByValue = new LevelButton(400f, 250f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"VALUE", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByValue = new LevelButton(0f, 250f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "VALUE",
+				true, true, Color.BLACK, Color.WHITE);
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -99,7 +101,7 @@ public class Inventory {
 		});
 		buttons.add(buttonSortByValue);
 
-		buttonSortByTotalDamage = new LevelButton(400f, 300f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+		buttonSortByTotalDamage = new LevelButton(0f, 300f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"DAMAGE", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
@@ -109,7 +111,7 @@ public class Inventory {
 		});
 		buttons.add(buttonSortByTotalDamage);
 
-		buttonSortBySlashDamage = new LevelButton(400f, 350f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+		buttonSortBySlashDamage = new LevelButton(0f, 350f, 10f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"SLASH", true, true, Color.BLACK, Color.WHITE);
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
@@ -351,9 +353,9 @@ public class Inventory {
 	@SuppressWarnings("unchecked")
 	public void drawStaticUI() {
 
-		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 1f), 0, Game.windowWidth, 0, Game.windowHeight);
-		// if (isOpen) {
-		int gameObjectIndex = 0;
+		// Black cover
+		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
+
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
 
@@ -362,13 +364,36 @@ public class Inventory {
 			}
 		}
 
+		// cursor
 		if (this.inventorySquareMouseIsOver != null) {
 			this.inventorySquareMouseIsOver.drawCursor();
 		}
 
+		// buttons
 		for (Button button : buttons) {
 			button.draw();
 		}
+
+		// Actor
+		int actorPositionXInPixels = 600;
+		int actorPositionYInPixels = 100;
+		float alpha = 1.0f;
+		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels,
+				actorPositionXInPixels + Game.level.player.width * 5, actorPositionYInPixels,
+				actorPositionYInPixels + Game.level.player.height * 5);
+
+		Weapon equippedWeapon = Game.level.player.equippedWeapon;
+		// Equipped weapon on actor
+		if (equippedWeapon != null) {
+			int weaponPositionXInPixels = (int) (actorPositionXInPixels
+					+ ((int) Game.HALF_SQUARE_WIDTH - equippedWeapon.halfWidth) * 5);
+			int weaponPositionYInPixels = (int) (actorPositionYInPixels
+					+ ((int) Game.HALF_SQUARE_HEIGHT - equippedWeapon.halfHeight) * 5);
+			TextureUtils.drawTexture(equippedWeapon.imageTexture, alpha, weaponPositionXInPixels,
+					weaponPositionXInPixels + equippedWeapon.width * 5, weaponPositionYInPixels,
+					weaponPositionYInPixels + equippedWeapon.height * 5);
+		}
+
 	}
 
 	public boolean isOpen() {
