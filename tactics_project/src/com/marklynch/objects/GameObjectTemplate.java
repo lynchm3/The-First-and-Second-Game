@@ -2,6 +2,8 @@ package com.marklynch.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.Date;
+
 import com.marklynch.level.Square;
 
 import mdesl.graphics.Texture;
@@ -17,6 +19,8 @@ public class GameObjectTemplate {
 	public boolean canShareSquare;
 	public boolean fitsInInventory;
 	public boolean canContainOtherObjects;
+	public float value = 1;
+	public Date pickUpdateDateTime = new Date();
 	public float widthRatio = 1;
 	public float heightRatio = 1;
 

@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Need to put XP in soon to compel myself :P
+
 	// Fill in the rest of the actions, look at list i've set up.
 	// Inventory as well in play, and a way to close it :P
 

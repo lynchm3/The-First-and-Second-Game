@@ -35,6 +35,7 @@ public class GameObject extends GameObjectTemplate implements Actionable, Compar
 
 	// attributes
 	public float remainingHealth = 0;
+	boolean favourite = false;
 
 	public transient boolean hasAttackedThisTurn = false;
 	// images
@@ -286,7 +287,7 @@ public class GameObject extends GameObjectTemplate implements Actionable, Compar
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			if (gameObject instanceof Weapon) {
 				Weapon weapon = (Weapon) gameObject;
-				if (range >= weapon.minRange && range <= weapon.maxRange) {
+				if (range >= weapon.getEffectiveMinRange() && range <= weapon.getEffectiveMaxRange()) {
 					return weapon;
 				}
 			}
@@ -368,15 +369,13 @@ public class GameObject extends GameObjectTemplate implements Actionable, Compar
 	@Override
 	public int compareTo(Object otherObject) {
 
-		System.out.println("compareTo");
+		System.out.println("compareTo(Object)");
 
-		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_NAME) {
-			System.out.println("INVENTORY_SORT_BY.SORT_BY_NAME");
+		if (otherObject instanceof GameObject) {
+			return compareGameObjectToGameObject((GameObject) otherObject);
+		}
 
-			System.out.println("this.name.compareToIgnoreCase(((GameObject) otherObject).name) = "
-					+ this.name.compareToIgnoreCase(((GameObject) otherObject).name));
-			return this.name.compareToIgnoreCase(((GameObject) otherObject).name);
-		} else if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_ATTACK) {
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE) {
 			if (!(this instanceof Weapon) && !(otherObject instanceof Weapon)) {
 				return 0;
 			} else if (!(this instanceof Weapon)) {
@@ -384,9 +383,65 @@ public class GameObject extends GameObjectTemplate implements Actionable, Compar
 			} else if (!(otherObject instanceof Weapon)) {
 				return -1;
 			} else {
-				return Math.round((((Weapon) otherObject).damage - ((Weapon) this).damage));
+				return Math.round((((Weapon) otherObject).slashDamage - ((Weapon) this).slashDamage));
 			}
 		}
 		return 0;
 	}
+
+	public int compareGameObjectToGameObject(GameObject otherGameObject) {
+		System.out.println("compareGameObjectToGameObject");
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_ALPHABETICALLY) {
+			return this.name.compareToIgnoreCase(otherGameObject.name);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_NEWEST) {
+			return this.pickUpdateDateTime.compareTo(otherGameObject.pickUpdateDateTime);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_FAVOURITE) {
+			return Boolean.compare(this.favourite, otherGameObject.favourite);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_VALUE) {
+			return Float.compare(otherGameObject.value, this.value);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE
+				|| Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE
+				|| Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_BLUNT_DAMAGE
+				|| Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_PIERCE_DAMAGE
+				|| Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_FIRE_DAMAGE
+				|| Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_WATER_DAMAGE
+				|| Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_POISON_DAMAGE
+				|| Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_ELECTRICAL_DAMAGE
+				|| Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_MAX_RANGE
+				|| Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_MIN_RANGE) {
+
+			if (!(this instanceof Weapon) && !(otherGameObject instanceof Weapon)) {
+				return 0;
+			} else if (!(this instanceof Weapon)) {
+				return +1;
+			} else if (!(otherGameObject instanceof Weapon)) {
+				return -1;
+			} else {
+				return ((Weapon) this).compareWeaponToWeapon((Weapon) otherGameObject);
+			}
+
+		}
+
+		return 0;
+
+	}
+
+	// SORT_BY_TOTAL_DAMAGE,
+	// SORT_BY_SLASH_DAMAGE,
+	// SORT_BY_BLUNT_DAMAGE,
+	// SORT_BY_PIERCE_DAMAGE,
+	// SORT_BY_FIRE_DAMAGE,
+	// SORT_BY_WATER_DAMAGE,
+	// SORT_BY_POISON_DAMAGE,
+	// SORT_BY_ELECTRICAL_DAMAGE
+
 }

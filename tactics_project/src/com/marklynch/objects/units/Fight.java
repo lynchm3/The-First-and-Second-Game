@@ -42,7 +42,7 @@ public class Fight {
 		if (defenderWeapon == null) {
 			damageTakenByAttacker = 0;
 		} else {
-			damageTakenByAttacker = defenderWeapon.damage;
+			damageTakenByAttacker = defenderWeapon.getEffectiveSlashDamage();
 			if (damageTakenByAttacker > attacker.remainingHealth)
 				damageTakenByAttacker = attacker.remainingHealth;// maybe dont
 																	// limit
@@ -52,7 +52,7 @@ public class Fight {
 		if (attackerWeapon == null) {
 			damageTakenByDefender = 0;
 		} else {
-			damageTakenByDefender = attackerWeapon.damage;
+			damageTakenByDefender = attackerWeapon.getEffectiveSlashDamage();
 			if (damageTakenByDefender > defender.remainingHealth)
 				damageTakenByDefender = defender.remainingHealth;// maybe dont
 																	// limit

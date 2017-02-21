@@ -402,7 +402,7 @@ public class AIRoutineUtils {
 			for (GameObject gameObject : Game.level.activeActor.inventory.getGameObjects()) {
 				if (gameObject instanceof Weapon) {
 					Weapon weapon = (Weapon) gameObject;
-					for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
+					for (float range = weapon.getEffectiveMinRange(); range <= weapon.getEffectiveMaxRange(); range++) {
 						Fight fight = new Fight(Game.level.activeActor, weapon, actor,
 								actor.bestCounterWeapon(Game.level.activeActor, weapon, range), range);
 						fights.add(fight);

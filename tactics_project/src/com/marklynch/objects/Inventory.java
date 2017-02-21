@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
@@ -21,10 +22,10 @@ public class Inventory {
 	public transient INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
 
 	public enum INVENTORY_SORT_BY {
-		SORT_BY_NAME, SORT_BY_ATTACK
+		SORT_ALPHABETICALLY, SORT_BY_NEWEST, SORT_BY_VALUE, SORT_BY_FAVOURITE, SORT_BY_TOTAL_DAMAGE, SORT_BY_SLASH_DAMAGE, SORT_BY_BLUNT_DAMAGE, SORT_BY_PIERCE_DAMAGE, SORT_BY_FIRE_DAMAGE, SORT_BY_WATER_DAMAGE, SORT_BY_POISON_DAMAGE, SORT_BY_ELECTRICAL_DAMAGE, SORT_BY_MAX_RANGE, SORT_BY_MIN_RANGE
 	}
 
-	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_NAME;
+	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_MAX_RANGE;
 
 	private transient boolean isOpen = false;
 	transient float x = 1000;
@@ -127,6 +128,8 @@ public class Inventory {
 					}
 				}
 			}
+
+			gameObject.pickUpdateDateTime = new Date();
 		}
 	}
 

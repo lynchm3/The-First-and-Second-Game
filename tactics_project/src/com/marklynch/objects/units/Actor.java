@@ -209,7 +209,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public boolean hasRange(int weaponDistance) {
 		for (Weapon weapon : getWeaponsInInventory()) {
-			if (weaponDistance >= weapon.minRange && weaponDistance <= weapon.maxRange) {
+			if (weaponDistance >= weapon.getEffectiveMinRange() && weaponDistance <= weapon.getEffectiveMaxRange()) {
 				// selectedWeapon = weapon;
 				return true;
 			}
@@ -226,7 +226,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 		int range = this.straightLineDistanceTo(target.squareGameObjectIsOn);
 		for (Weapon weapon : getWeaponsInInventory()) {
-			if (range >= weapon.minRange && range <= weapon.maxRange) {
+			if (range >= weapon.getEffectiveMinRange() && range <= weapon.getEffectiveMaxRange()) {
 				equippedWeapon = weapon;
 				equippedWeaponGUID = weapon.guid;
 			}
@@ -239,7 +239,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 		int range = this.straightLineDistanceTo(target.squareGameObjectIsOn);
 		for (Weapon weapon : getWeaponsInInventory()) {
-			if (range >= weapon.minRange && range <= weapon.maxRange) {
+			if (range >= weapon.getEffectiveMinRange() && range <= weapon.getEffectiveMaxRange()) {
 				potentialWeaponsToEquip.add(weapon);
 			}
 		}
@@ -397,7 +397,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 		Vector<Fight> fights = new Vector<Fight>();
 		for (Weapon weapon : getWeaponsInInventory()) {
-			for (float range = weapon.minRange; range <= weapon.maxRange; range++) {
+			for (float range = weapon.getEffectiveMinRange(); range <= weapon.getEffectiveMaxRange(); range++) {
 				Fight fight = new Fight(this, weapon, target, target.bestCounterWeapon(this, weapon, range), range);
 				fights.add(fight);
 			}

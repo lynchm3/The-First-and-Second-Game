@@ -38,7 +38,7 @@ public class ActionAttack extends Action {
 		attacker.manageAttackerReferencesForNearbyAllies(target);
 		attacker.manageAttackerReferencesForNearbyEnemies(target);
 
-		target.remainingHealth -= attacker.equippedWeapon.damage;
+		target.remainingHealth -= attacker.equippedWeapon.getEffectiveSlashDamage();
 		attacker.distanceMovedThisTurn = attacker.travelDistance;
 		attacker.hasAttackedThisTurn = true;
 		String attackTypeString;
@@ -46,7 +46,7 @@ public class ActionAttack extends Action {
 		Game.level.logOnScreen(new ActivityLog(new Object[] {
 
 				attacker, " " + attackTypeString + " ", target, " with ", attacker.equippedWeapon.imageTexture,
-				" for " + attacker.equippedWeapon.damage + " damage" }));
+				" for " + attacker.equippedWeapon.getEffectiveSlashDamage() + " damage" }));
 
 		Actor actor = null;
 		if (target instanceof Actor)
