@@ -7,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.level.popup.PopupButton;
 import com.marklynch.level.popup.PopupSelectObject;
+import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Path;
@@ -124,9 +125,16 @@ public class UserInputLevel {
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
-		if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
-				&& (int) mouseYInSquares > -1 && (int) mouseYInSquares < Game.level.squares[0].length) {
-			Game.squareMouseIsOver = Game.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+		if (Game.level.openInventories.size() > 0) {
+
+			Game.squareMouseIsOver = Game.level.openInventories.get(0).getInventorySquareMouseIsOver(mouseXinPixels,
+					mouseYinPixels);
+
+		} else {
+			if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
+					&& (int) mouseYInSquares > -1 && (int) mouseYInSquares < Game.level.squares[0].length) {
+				Game.squareMouseIsOver = Game.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+			}
 		}
 
 		// Clear path highlights
@@ -286,7 +294,11 @@ public class UserInputLevel {
 			}
 		} else {
 			Game.level.popups.clear();
-			Game.level.popups.add(new PopupSelectObject(100, Game.level, square));
+			if (square instanceof InventorySquare) {
+				// Game.level.popups.add(e);
+			} else {
+				Game.level.popups.add(new PopupSelectObject(100, Game.level, square));
+			}
 		}
 
 	}

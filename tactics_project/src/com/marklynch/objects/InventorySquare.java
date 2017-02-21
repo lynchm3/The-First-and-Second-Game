@@ -2,8 +2,12 @@ package com.marklynch.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
 public class InventorySquare extends Square {
@@ -43,11 +47,12 @@ public class InventorySquare extends Square {
 	public void drawStaticUI() {
 
 		// square texture
-		TextureUtils.drawTexture(imageTexture, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
-				yInPixels + Game.SQUARE_HEIGHT);
+
+		TextureUtils.drawTexture(imageTexture, xInPixels, xInPixels + Game.HALF_SQUARE_WIDTH, yInPixels,
+				yInPixels + Game.HALF_SQUARE_HEIGHT);
 		if (gameObject != null) {
-			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
-					yInPixels + Game.SQUARE_HEIGHT);
+			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, xInPixels + Game.HALF_SQUARE_WIDTH, yInPixels,
+					yInPixels + Game.HALF_SQUARE_HEIGHT);
 		}
 
 	}
@@ -79,5 +84,26 @@ public class InventorySquare extends Square {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
+		GameObject targetGameObject = this.gameObject;
+		if (targetGameObject != null) {
+			return targetGameObject.getDefaultActionInWorld(performer);
+		} else {
+			return getDefaultActionInWorld(performer);
+		}
+	}
+
+	@Override
+	public Action getDefaultActionInWorld(Actor performer) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		return actions;
 	}
 }

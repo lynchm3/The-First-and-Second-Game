@@ -17,7 +17,8 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionPickUp;
-import com.marklynch.objects.actions.Actionable;
+import com.marklynch.objects.actions.ActionableInInventory;
+import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Path;
 import com.marklynch.objects.weapons.Weapon;
@@ -27,7 +28,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class GameObject extends GameObjectTemplate implements Actionable, Comparable {
+public class GameObject extends GameObjectTemplate implements ActionableInWorld, ActionableInInventory, Comparable {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
@@ -323,12 +324,12 @@ public class GameObject extends GameObjectTemplate implements Actionable, Compar
 	}
 
 	@Override
-	public Action getDefaultAction(Actor performer) {
+	public Action getDefaultActionInWorld(Actor performer) {
 		return null;
 	}
 
 	@Override
-	public ArrayList<Action> getAllActions(Actor performer) {
+	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
 		// public boolean showInventory;
@@ -432,6 +433,16 @@ public class GameObject extends GameObjectTemplate implements Actionable, Compar
 
 		return 0;
 
+	}
+
+	@Override
+	public Action getDefaultActionInInventory(Actor performer) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
+		return new ArrayList<Action>();
 	}
 
 }

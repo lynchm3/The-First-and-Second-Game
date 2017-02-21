@@ -562,7 +562,7 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	@Override
-	public Action getDefaultAction(Actor performer) {
+	public Action getDefaultActionInWorld(Actor performer) {
 		if (this == Game.level.player) {
 			return null;
 		} else if (performer.attackers.contains(this)) {
@@ -578,16 +578,16 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActions(Actor performer) {
+	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (this != Game.level.player) {
 			// Talk
 			actions.add(new ActionTalk(performer, this));
 			// Inherited from object (attack...)
-			actions.addAll(super.getAllActions(performer));
+			actions.addAll(super.getAllActionsInWorld(performer));
 			// Inherited from squre (move/swap squares)
-			actions.addAll(squareGameObjectIsOn.getAllActions(performer));
+			actions.addAll(squareGameObjectIsOn.getAllActionsInWorld(performer));
 		}
 
 		return actions;

@@ -6,10 +6,12 @@ import java.util.Date;
 
 import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
+import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.QuadUtils;
 
 import mdesl.graphics.Color;
 
@@ -349,31 +351,13 @@ public class Inventory {
 	@SuppressWarnings("unchecked")
 	public void drawStaticUI() {
 
+		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 1f), 0, Game.windowWidth, 0, Game.windowHeight);
 		// if (isOpen) {
 		int gameObjectIndex = 0;
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
 
 				inventorySquares[j][i].drawStaticUI();
-				// gameObjectIndex = i * inventorySquares[i].length + j;
-				// System.out.println("gameObjects.size() = " +
-				// gameObjects.size());
-				// System.out.println("gameObjectIndex = " + gameObjectIndex);
-				// if (gameObjects.size() > gameObjectIndex) {
-				//
-				// System.out.println("gameObjects.get(gameObjectIndex) = " +
-				// gameObjects.get(gameObjectIndex));
-				// }
-				// if (gameObjects.size() > gameObjectIndex &&
-				// gameObjects.get(gameObjectIndex) != null) {
-				//
-				// TextureUtils.drawTexture(gameObjects.get(gameObjectIndex).imageTexture,
-				// inventorySquares[j][i].xInPixels,
-				// inventorySquares[j][i].xInPixels + Game.SQUARE_WIDTH,
-				// inventorySquares[j][i].yInPixels,
-				// inventorySquares[j][i].yInPixels + Game.SQUARE_HEIGHT);
-				//
-				// }
 
 			}
 		}
@@ -474,6 +458,26 @@ public class Inventory {
 		square2.gameObject = gameObject1;
 
 		gameObject1.inventorySquareGameObjectIsOn = square2;
+	}
+
+	public Square getInventorySquareMouseIsOver(float mouseXInPixels, float mouseYInPixels) {
+
+		float offsetX = x;
+		float offsetY = y;
+		float scroll = 0;
+
+		int mouseXInSquares = (int) ((mouseXInPixels - offsetX) / Game.SQUARE_WIDTH);
+		int mouseYInSquares = (int) ((Game.windowHeight - mouseYInPixels - offsetY - scroll) / Game.SQUARE_HEIGHT);
+
+		if (mouseXInSquares > -1 && mouseXInSquares < inventorySquares.length && mouseYInSquares > -1
+				&& mouseYInSquares < inventorySquares[0].length) {
+
+			System.out.println("getSquareMouseIsOver = " + this.inventorySquares[mouseXInSquares][mouseYInSquares]);
+
+			return this.inventorySquares[mouseXInSquares][mouseYInSquares];
+		}
+
+		return null;
 	}
 
 }

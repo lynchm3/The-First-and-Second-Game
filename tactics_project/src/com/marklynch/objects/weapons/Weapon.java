@@ -1,10 +1,14 @@
 package com.marklynch.objects.weapons;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.marklynch.level.Square;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Owner;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionEquip;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 
 public class Weapon extends WeaponTemplate {
@@ -128,5 +132,15 @@ public class Weapon extends WeaponTemplate {
 
 		return 0;
 
+	}
+
+	@Override
+	public Action getDefaultActionInInventory(Actor performer) {
+		return new ActionEquip(performer, this);
+	}
+
+	@Override
+	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
+		return new ArrayList<Action>();
 	}
 }

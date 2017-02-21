@@ -14,7 +14,7 @@ import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionPickuUpAll;
 import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.actions.Actionable;
+import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.TextUtils;
@@ -22,7 +22,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class Square implements Actionable {
+public class Square implements ActionableInWorld {
 
 	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
@@ -212,15 +212,15 @@ public class Square implements Actionable {
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
 		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
 		if (targetGameObject != null) {
-			return targetGameObject.getDefaultAction(performer);
+			return targetGameObject.getDefaultActionInWorld(performer);
 		} else {
-			return getDefaultAction(performer);
+			return getDefaultActionInWorld(performer);
 
 		}
 	}
 
 	@Override
-	public Action getDefaultAction(Actor performer) {
+	public Action getDefaultActionInWorld(Actor performer) {
 
 		if (this == Game.level.player.squareGameObjectIsOn) {
 			return null;
@@ -233,7 +233,7 @@ public class Square implements Actionable {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActions(Actor performer) {
+	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (this != Game.level.player.squareGameObjectIsOn) {
 			actions.add(new ActionMove(performer, this));

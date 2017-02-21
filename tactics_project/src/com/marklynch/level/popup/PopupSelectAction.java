@@ -6,15 +6,15 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.Actionable;
+import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 
 public class PopupSelectAction extends Popup {
 	public PopupButton selectSquareButton;
-	public Actionable object;
+	public ActionableInWorld object;
 
-	public PopupSelectAction(float width, Level level, Square square, Actionable object) {
+	public PopupSelectAction(float width, Level level, Square square, ActionableInWorld object) {
 
 		super(width, level, square);
 		this.object = object;
@@ -25,7 +25,7 @@ public class PopupSelectAction extends Popup {
 
 		buttons.clear();
 
-		final ArrayList<Action> actions = object.getAllActions(Game.level.player);
+		final ArrayList<Action> actions = object.getAllActionsInWorld(Game.level.player);
 
 		for (int i = 0; i < actions.size(); i++) {
 			final int index = i;
