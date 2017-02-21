@@ -57,7 +57,7 @@ public class Inventory {
 		}
 		buttons = new ArrayList<Button>();
 
-		buttonSortAlphabetically = new LevelButton(100f, 100f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+		buttonSortAlphabetically = new LevelButton(400f, 100f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"SORT A-Z", true, true, Color.BLACK, Color.WHITE);
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
@@ -67,7 +67,7 @@ public class Inventory {
 		});
 		buttons.add(buttonSortAlphabetically);
 
-		buttonSortByNewest = new LevelButton(330f, 100f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+		buttonSortByNewest = new LevelButton(400f, 150f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"NEWEST", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
@@ -77,15 +77,52 @@ public class Inventory {
 		});
 		buttons.add(buttonSortByNewest);
 
+		buttonSortByFavourite = new LevelButton(400f, 200f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"FAVOURITES", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByFavourite.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE);
+			}
+		});
+		buttons.add(buttonSortByFavourite);
+
+		buttonSortByValue = new LevelButton(400f, 250f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"VALUE", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByValue.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				sort(INVENTORY_SORT_BY.SORT_BY_VALUE);
+			}
+		});
+		buttons.add(buttonSortByValue);
+
+		buttonSortByTotalDamage = new LevelButton(400f, 300f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"DAMAGE", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByTotalDamage.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE);
+			}
+		});
+		buttons.add(buttonSortByTotalDamage);
+
+		buttonSortBySlashDamage = new LevelButton(400f, 350f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"SLASH", true, true, Color.BLACK, Color.WHITE);
+		buttonSortBySlashDamage.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE);
+			}
+		});
+		buttons.add(buttonSortBySlashDamage);
+
 	}
 
 	public void sort(INVENTORY_SORT_BY inventorySortBy) {
-
-		System.out.println("SORTING");
 		Inventory.inventorySortBy = inventorySortBy;
 		Collections.sort(gameObjects);
 		this.setGameObjects(this.gameObjects);
-
 	}
 
 	public void postLoad1() {
@@ -144,6 +181,7 @@ public class Inventory {
 	}
 
 	public void add(GameObject gameObject) {
+		System.out.println("add " + gameObject.name);
 		if (!gameObjects.contains(gameObject)) {
 
 			// Remove references with square
@@ -168,14 +206,16 @@ public class Inventory {
 				for (int j = 0; j < inventorySquares.length; j++) {
 					if (inventorySquares[j][i].gameObject == null) {
 						inventorySquares[j][i].gameObject = gameObject;
+						gameObject.pickUpdateDateTime = new Date();
 						gameObject.inventorySquareGameObjectIsOn = inventorySquares[j][i];
+						System.out.println(
+								"Setting pickupdate for " + gameObject.name + " - " + gameObject.pickUpdateDateTime);
 						return;
 					}
 				}
 			}
-
-			gameObject.pickUpdateDateTime = new Date();
 		}
+		System.out.println("add end " + gameObject.name);
 	}
 
 	public void remove(GameObject gameObject) {
@@ -342,8 +382,9 @@ public class Inventory {
 			this.inventorySquareMouseIsOver.drawCursor();
 		}
 
-		buttonSortAlphabetically.draw();
-		buttonSortByNewest.draw();
+		for (Button button : buttons) {
+			button.draw();
+		}
 	}
 
 	public boolean isOpen() {

@@ -396,7 +396,7 @@ public class GameObject extends GameObjectTemplate implements Actionable, Compar
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_NEWEST) {
-			return this.pickUpdateDateTime.compareTo(otherGameObject.pickUpdateDateTime);
+			return otherGameObject.pickUpdateDateTime.compareTo(this.pickUpdateDateTime);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_FAVOURITE) {

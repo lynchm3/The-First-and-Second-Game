@@ -403,7 +403,6 @@ public class Level {
 		}
 
 		for (Inventory inventory : openInventories) {
-			System.out.println("calling inventory.drawStaticUI();");
 			inventory.drawStaticUI();
 		}
 
