@@ -90,10 +90,9 @@ public class InventorySquare extends Square {
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
 		GameObject targetGameObject = this.gameObject;
 		if (targetGameObject != null) {
-			return targetGameObject.getDefaultActionInWorld(performer);
-		} else {
-			return getDefaultActionInWorld(performer);
+			return targetGameObject.getDefaultActionInInventory(performer);
 		}
+		return null;
 	}
 
 	@Override

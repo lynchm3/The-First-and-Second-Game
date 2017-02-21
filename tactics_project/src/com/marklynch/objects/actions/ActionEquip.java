@@ -21,22 +21,29 @@ public class ActionEquip extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		System.out.println("ActionEquip()");
 	}
 
 	@Override
 	public void perform() {
+
+		System.out.println("ActionEquip.perform()");
 
 		if (!enabled)
 			return;
 
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", weapon }));
 		performer.equippedWeapon = weapon;
+		System.out.println("ActionEquip.performED");
 	}
 
 	@Override
 	public boolean check() {
 
 		if (performer.inventory.contains(weapon))
+			return true;
+
+		if (performer.straightLineDistanceTo(weapon.squareGameObjectIsOn) < 2)
 			return true;
 
 		return false;

@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// EquipAction for items on ground
+
 	// Need to put XP in soon to compel myself :P
 
 	// Fill in the rest of the actions, look at list i've set up.

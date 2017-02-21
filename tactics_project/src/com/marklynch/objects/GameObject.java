@@ -361,6 +361,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public int straightLineDistanceTo(Square square) {
 
+		if (square == null)
+			return Integer.MAX_VALUE;
+
+		if (this.squareGameObjectIsOn == null)
+			return Integer.MAX_VALUE;
+
 		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid)
 				+ Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
 
