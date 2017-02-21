@@ -7,6 +7,11 @@ import java.util.Date;
 import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.button.Button;
+import com.marklynch.ui.button.ClickListener;
+import com.marklynch.ui.button.LevelButton;
+
+import mdesl.graphics.Color;
 
 public class Inventory {
 
@@ -35,12 +40,52 @@ public class Inventory {
 	transient private InventorySquare inventorySquareMouseIsOver;
 	transient private GameObject selectedGameObject;
 
+	LevelButton buttonSortAlphabetically;
+	LevelButton buttonSortByNewest;
+	LevelButton buttonSortByFavourite;
+	LevelButton buttonSortByValue;
+	LevelButton buttonSortByTotalDamage;
+	LevelButton buttonSortBySlashDamage;
+
+	public ArrayList<Button> buttons;
+
 	public Inventory() {
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
 				inventorySquares[j][i] = new InventorySquare(j, i, "dialogbg.png", this);
 			}
 		}
+		buttons = new ArrayList<Button>();
+
+		buttonSortAlphabetically = new LevelButton(100f, 100f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"SORT A-Z", true, true, Color.BLACK, Color.WHITE);
+		buttonSortAlphabetically.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY);
+			}
+		});
+		buttons.add(buttonSortAlphabetically);
+
+		buttonSortByNewest = new LevelButton(330f, 100f, 200f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"NEWEST", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByNewest.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST);
+			}
+		});
+		buttons.add(buttonSortByNewest);
+
+	}
+
+	public void sort(INVENTORY_SORT_BY inventorySortBy) {
+
+		System.out.println("SORTING");
+		Inventory.inventorySortBy = inventorySortBy;
+		Collections.sort(gameObjects);
+		this.setGameObjects(this.gameObjects);
+
 	}
 
 	public void postLoad1() {
@@ -264,10 +309,6 @@ public class Inventory {
 	@SuppressWarnings("unchecked")
 	public void drawStaticUI() {
 
-		System.out.println("SORTING");
-		Collections.sort(gameObjects);
-		this.setGameObjects(this.gameObjects);
-
 		// if (isOpen) {
 		int gameObjectIndex = 0;
 		for (int i = 0; i < inventorySquares[0].length; i++) {
@@ -300,6 +341,9 @@ public class Inventory {
 		if (this.inventorySquareMouseIsOver != null) {
 			this.inventorySquareMouseIsOver.drawCursor();
 		}
+
+		buttonSortAlphabetically.draw();
+		buttonSortByNewest.draw();
 	}
 
 	public boolean isOpen() {

@@ -493,6 +493,13 @@ public class Level {
 			}
 		}
 
+		for (Inventory inventory : openInventories) {
+			for (Button button : inventory.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
+		}
+
 		for (Button button : this.buttons) {
 			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;

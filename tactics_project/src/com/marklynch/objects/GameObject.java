@@ -100,7 +100,6 @@ public class GameObject extends GameObjectTemplate implements Actionable, Compar
 				drawOffsetX = Game.HALF_SQUARE_WIDTH - width / 2;
 			drawOffsetY = Game.SQUARE_HEIGHT - height;
 		}
-
 	}
 
 	@Override
@@ -434,14 +433,5 @@ public class GameObject extends GameObjectTemplate implements Actionable, Compar
 		return 0;
 
 	}
-
-	// SORT_BY_TOTAL_DAMAGE,
-	// SORT_BY_SLASH_DAMAGE,
-	// SORT_BY_BLUNT_DAMAGE,
-	// SORT_BY_PIERCE_DAMAGE,
-	// SORT_BY_FIRE_DAMAGE,
-	// SORT_BY_WATER_DAMAGE,
-	// SORT_BY_POISON_DAMAGE,
-	// SORT_BY_ELECTRICAL_DAMAGE
 
 }
