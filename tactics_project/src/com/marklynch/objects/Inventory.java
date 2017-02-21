@@ -1,6 +1,7 @@
 package com.marklynch.objects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
@@ -18,6 +19,12 @@ public class Inventory {
 	}
 
 	public transient INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
+
+	public enum INVENTORY_SORT_BY {
+		SORT_BY_NAME, SORT_BY_ATTACK
+	}
+
+	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_NAME;
 
 	private transient boolean isOpen = false;
 	transient float x = 1000;
@@ -155,11 +162,11 @@ public class Inventory {
 				if (index >= gameObjects.size())
 					return;
 
-				if (inventorySquares[j][i].gameObject == null) {
-					inventorySquares[j][i].gameObject = gameObjects.get(index);
-					gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[j][i];
-					index++;
-				}
+				// if (inventorySquares[j][i].gameObject == null) {
+				inventorySquares[j][i].gameObject = gameObjects.get(index);
+				gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[j][i];
+				index++;
+				// }
 			}
 		}
 	}
@@ -251,7 +258,13 @@ public class Inventory {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void drawStaticUI() {
+
+		System.out.println("SORTING");
+		Collections.sort(gameObjects);
+		this.setGameObjects(this.gameObjects);
+
 		// if (isOpen) {
 		int gameObjectIndex = 0;
 		for (int i = 0; i < inventorySquares[0].length; i++) {

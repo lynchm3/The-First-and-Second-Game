@@ -27,7 +27,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class GameObject extends GameObjectTemplate implements Actionable {
+public class GameObject extends GameObjectTemplate implements Actionable, Comparable {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
@@ -272,7 +272,6 @@ public class GameObject extends GameObjectTemplate implements Actionable {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			showPow = false;
@@ -364,5 +363,30 @@ public class GameObject extends GameObjectTemplate implements Actionable {
 		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid)
 				+ Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
 
+	}
+
+	@Override
+	public int compareTo(Object otherObject) {
+
+		System.out.println("compareTo");
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_NAME) {
+			System.out.println("INVENTORY_SORT_BY.SORT_BY_NAME");
+
+			System.out.println("this.name.compareToIgnoreCase(((GameObject) otherObject).name) = "
+					+ this.name.compareToIgnoreCase(((GameObject) otherObject).name));
+			return this.name.compareToIgnoreCase(((GameObject) otherObject).name);
+		} else if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_ATTACK) {
+			if (!(this instanceof Weapon) && !(otherObject instanceof Weapon)) {
+				return 0;
+			} else if (!(this instanceof Weapon)) {
+				return +1;
+			} else if (!(otherObject instanceof Weapon)) {
+				return -1;
+			} else {
+				return Math.round((((Weapon) otherObject).damage - ((Weapon) this).damage));
+			}
+		}
+		return 0;
 	}
 }

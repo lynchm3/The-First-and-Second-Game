@@ -86,6 +86,10 @@ public class QuestSmallGame extends Quest {
 	// stealing shit + guards nearby + put ownership = hunters on it until ur
 	// told to go get them
 
+	// Make the enviromentalist seem dopey until the end. What do u call an
+	// enviromentalist magic user? Sage? Forest Sage? Woodland sage? Sage is
+	// good, makes him sound benevolent and omniscient.
+
 	// Quest text
 	final String OBJECTIVE_FOLLOW_THE_HUNTERS_TO_SUPERWOLF = "Follow the hunters to Superwolf";
 
