@@ -37,7 +37,7 @@ public class Inventory {
 	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_NEWEST;
 
 	public enum INVENTORY_FILTER_BY {
-		FILTER_BY_ALL, FILTER_BY_WEAPON
+		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_FOOD
 	}
 
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
@@ -61,6 +61,7 @@ public class Inventory {
 	// Filter buttons
 	LevelButton buttonFilterByAll;
 	LevelButton buttonFilterByWeapon;
+	LevelButton buttonFilterByFood;
 
 	public ArrayList<Button> buttons;
 	public ArrayList<Button> buttonsSort;
@@ -158,12 +159,22 @@ public class Inventory {
 		buttonFilterByWeapon.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				System.out.println("buttonFilterByWeapon.click");
 				filter(INVENTORY_FILTER_BY.FILTER_BY_WEAPON);
 			}
 		});
 		buttons.add(buttonFilterByWeapon);
 		buttonsFilter.add(buttonFilterByWeapon);
+
+		buttonFilterByFood = new LevelButton(500f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "FOOD",
+				true, true, Color.BLACK, Color.WHITE);
+		buttonFilterByFood.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				filter(INVENTORY_FILTER_BY.FILTER_BY_FOOD);
+			}
+		});
+		buttons.add(buttonFilterByFood);
+		buttonsFilter.add(buttonFilterByFood);
 
 	}
 
@@ -221,6 +232,13 @@ public class Inventory {
 			buttonFilterByWeapon.down = true;
 			for (GameObject gameObject : gameObjects) {
 				if (gameObject instanceof Weapon) {
+					filteredGameObjects.add(gameObject);
+				}
+			}
+		} else if (Inventory.inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_FOOD) {
+			buttonFilterByFood.down = true;
+			for (GameObject gameObject : gameObjects) {
+				if (gameObject instanceof Food) {
 					filteredGameObjects.add(gameObject);
 				}
 			}
@@ -471,16 +489,26 @@ public class Inventory {
 				actorPositionXInPixels + Game.level.player.width * 3, actorPositionYInPixels,
 				actorPositionYInPixels + Game.level.player.height * 3);
 
-		Weapon equippedWeapon = Game.level.player.equippedWeapon;
+		GameObject gameObjectMouseIsOver = null;
+		GameObject gameObjectToDrawOnPlayer = null;
+		if (Game.squareMouseIsOver != null && Game.squareMouseIsOver instanceof InventorySquare) {
+			// Preview weapon
+			gameObjectMouseIsOver = gameObjectToDrawOnPlayer = ((InventorySquare) Game.squareMouseIsOver).gameObject;
+		}
+
+		if (gameObjectToDrawOnPlayer == null) {
+			gameObjectToDrawOnPlayer = Game.level.player.equippedWeapon;
+		}
+
 		// Equipped weapon on actor
-		if (equippedWeapon != null) {
+		if (gameObjectToDrawOnPlayer != null) {
 			int weaponPositionXInPixels = (int) (actorPositionXInPixels
-					+ ((int) Game.HALF_SQUARE_WIDTH - equippedWeapon.halfWidth) * 3);
+					+ ((int) Game.HALF_SQUARE_WIDTH - gameObjectToDrawOnPlayer.halfWidth) * 3);
 			int weaponPositionYInPixels = (int) (actorPositionYInPixels
-					+ ((int) Game.HALF_SQUARE_HEIGHT - equippedWeapon.halfHeight) * 3);
-			TextureUtils.drawTexture(equippedWeapon.imageTexture, alpha, weaponPositionXInPixels,
-					weaponPositionXInPixels + equippedWeapon.width * 3, weaponPositionYInPixels,
-					weaponPositionYInPixels + equippedWeapon.height * 3);
+					+ ((int) Game.HALF_SQUARE_HEIGHT - gameObjectToDrawOnPlayer.halfHeight) * 3);
+			TextureUtils.drawTexture(gameObjectToDrawOnPlayer.imageTexture, alpha, weaponPositionXInPixels,
+					weaponPositionXInPixels + gameObjectToDrawOnPlayer.width * 3, weaponPositionYInPixels,
+					weaponPositionYInPixels + gameObjectToDrawOnPlayer.height * 3);
 		}
 
 		// Weapon comparison
