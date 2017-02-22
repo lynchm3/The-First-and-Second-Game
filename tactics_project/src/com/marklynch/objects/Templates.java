@@ -14,6 +14,11 @@ public class Templates {
 			new Inventory(), true, false, true, 1, 1, null, 80f, 80f);
 	private static final Actor HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, null,
 			new Inventory(), true, false, true, 1, 1, null, 88, 54);
+
+	// Blades
+	private static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, true, false, 1f, 0.5f,
+			22, 15);
+
 	// Axes
 	// https://en.wikipedia.org/wiki/Axe#Types_of_axes
 	private static final Weapon HATCHET = new Weapon("Hatchet", 3, 1, 1, "a3r1.png", 100, null, true, false, 0.5f, 0.5f,
@@ -44,6 +49,10 @@ public class Templates {
 
 	public static Actor getHunter(Square square, Faction faction) {
 		return HUNTER.makeCopy(square, faction);
+	}
+
+	public static GameObject getKatana(Square square) {
+		return KATANA.makeCopy(square);
 	}
 
 	public static GameObject getHatchet(Square square) {

@@ -463,6 +463,7 @@ public class Editor {
 		// Add actor
 		Actor player = Templates.getOldLady(Game.level.squares[0][4], Game.level.factions.get(0));
 		Game.level.player = player;
+		player.inventory.add(Templates.getKatana(null));
 		player.inventory.add(Templates.getHatchet(null));
 		player.inventory.add(Templates.getHuntingBow(null));
 		player.anchorX = 80;
