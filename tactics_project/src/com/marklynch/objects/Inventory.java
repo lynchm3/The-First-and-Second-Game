@@ -63,6 +63,8 @@ public class Inventory {
 	LevelButton buttonFilterByWeapon;
 
 	public ArrayList<Button> buttons;
+	public ArrayList<Button> buttonsSort;
+	public ArrayList<Button> buttonsFilter;
 
 	public Inventory() {
 		for (int i = 0; i < inventorySquares[0].length; i++) {
@@ -71,6 +73,8 @@ public class Inventory {
 			}
 		}
 		buttons = new ArrayList<Button>();
+		buttonsSort = new ArrayList<Button>();
+		buttonsFilter = new ArrayList<Button>();
 
 		buttonSortAlphabetically = new LevelButton(100f, 100f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"SORT A-Z", true, true, Color.BLACK, Color.WHITE);
@@ -81,6 +85,7 @@ public class Inventory {
 			}
 		});
 		buttons.add(buttonSortAlphabetically);
+		buttonsSort.add(buttonSortAlphabetically);
 
 		buttonSortByNewest = new LevelButton(100f, 150f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"NEWEST", true, true, Color.BLACK, Color.WHITE);
@@ -91,6 +96,7 @@ public class Inventory {
 			}
 		});
 		buttons.add(buttonSortByNewest);
+		buttonsSort.add(buttonSortByNewest);
 
 		buttonSortByFavourite = new LevelButton(100f, 200f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"FAVOURITES", true, true, Color.BLACK, Color.WHITE);
@@ -101,6 +107,7 @@ public class Inventory {
 			}
 		});
 		buttons.add(buttonSortByFavourite);
+		buttonsSort.add(buttonSortByFavourite);
 
 		buttonSortByValue = new LevelButton(100f, 250f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"VALUE", true, true, Color.BLACK, Color.WHITE);
@@ -111,6 +118,7 @@ public class Inventory {
 			}
 		});
 		buttons.add(buttonSortByValue);
+		buttonsSort.add(buttonSortByValue);
 
 		buttonSortByTotalDamage = new LevelButton(100f, 300f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"DAMAGE", true, true, Color.BLACK, Color.WHITE);
@@ -121,6 +129,7 @@ public class Inventory {
 			}
 		});
 		buttons.add(buttonSortByTotalDamage);
+		buttonsSort.add(buttonSortByTotalDamage);
 
 		buttonSortBySlashDamage = new LevelButton(100f, 350f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"SLASH", true, true, Color.BLACK, Color.WHITE);
@@ -131,6 +140,7 @@ public class Inventory {
 			}
 		});
 		buttons.add(buttonSortBySlashDamage);
+		buttonsSort.add(buttonSortBySlashDamage);
 
 		buttonFilterByAll = new LevelButton(300f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "ALL",
 				true, true, Color.BLACK, Color.WHITE);
@@ -141,6 +151,7 @@ public class Inventory {
 			}
 		});
 		buttons.add(buttonFilterByAll);
+		buttonsFilter.add(buttonFilterByAll);
 
 		buttonFilterByWeapon = new LevelButton(400f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"WEAPONS", true, true, Color.BLACK, Color.WHITE);
@@ -152,32 +163,69 @@ public class Inventory {
 			}
 		});
 		buttons.add(buttonFilterByWeapon);
+		buttonsFilter.add(buttonFilterByWeapon);
 
 	}
 
 	public void sort(INVENTORY_SORT_BY inventorySortBy) {
+
+		for (Button button : buttonsSort)
+			button.down = false;
+		if (inventorySortBy == INVENTORY_SORT_BY.SORT_ALPHABETICALLY) {
+			buttonSortAlphabetically.down = true;
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_NEWEST) {
+			buttonSortByNewest.down = true;
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_VALUE) {
+			buttonSortByValue.down = true;
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_FAVOURITE) {
+			buttonSortByFavourite.down = true;
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE) {
+			buttonSortByTotalDamage.down = true;
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE) {
+			buttonSortBySlashDamage.down = true;
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_BLUNT_DAMAGE) {
+
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_PIERCE_DAMAGE) {
+
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_FIRE_DAMAGE) {
+
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_WATER_DAMAGE) {
+
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_POISON_DAMAGE) {
+
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_ELECTRICAL_DAMAGE) {
+
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_MAX_RANGE) {
+
+		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_MIN_RANGE) {
+
+		}
+
 		Inventory.inventorySortBy = inventorySortBy;
 		Collections.sort(filteredGameObjects);
 		matchGameObjectsToSquares();
 	}
 
 	public void filter(INVENTORY_FILTER_BY inventoryFilterBy) {
-		System.out.println("filter()" + inventoryFilterBy);
 		Inventory.inventoryFilterBy = inventoryFilterBy;
+		for (Button button : buttonsFilter)
+			button.down = false;
+		if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
+		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_WEAPON) {
+		}
 		filteredGameObjects.clear();
 		if (Inventory.inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
+			buttonFilterByAll.down = true;
 			filteredGameObjects.addAll(gameObjects);
-			System.out.println("filter() A" + inventoryFilterBy);
 		} else if (Inventory.inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_WEAPON) {
+			buttonFilterByWeapon.down = true;
 			for (GameObject gameObject : gameObjects) {
 				if (gameObject instanceof Weapon) {
 					filteredGameObjects.add(gameObject);
-					System.out.println("filter() B" + inventoryFilterBy);
 				}
 			}
 		}
 
-		System.out.println("filter() C" + inventoryFilterBy);
 		sort(Inventory.inventorySortBy);
 	}
 
