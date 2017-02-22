@@ -304,7 +304,6 @@ public class Inventory {
 	}
 
 	public void add(GameObject gameObject) {
-		System.out.println("add " + gameObject.name);
 		if (!gameObjects.contains(gameObject)) {
 
 			// Remove references with square
@@ -327,7 +326,6 @@ public class Inventory {
 			// pick up date for sorting by newest
 			gameObject.pickUpdateDateTime = new Date();
 		}
-		System.out.println("add end " + gameObject.name);
 	}
 
 	public void remove(GameObject gameObject) {

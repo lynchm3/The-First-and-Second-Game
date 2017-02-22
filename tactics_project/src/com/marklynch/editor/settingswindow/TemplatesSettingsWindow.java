@@ -1,8 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
-import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.Editor;
-import com.marklynch.objects.weapons.WeaponTemplate;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -46,55 +44,59 @@ public class TemplatesSettingsWindow extends SettingsWindow {
 			@Override
 			public void click() {
 
-				WeaponTemplate newWeapon = new WeaponTemplate("Weapon Template " + editor.gameObjectTemplates.size(), 3,
-						1, 1, "a3r1.png", 100, null, true, false, 1, 1);
-				editor.gameObjectTemplates.add(newWeapon);
-				updateButtons();
-				editor.clearSelectedObject();
-				editor.depressButtonsSettingsAndDetailsButtons();
+				// HACKED
+				// WeaponTemplate newWeapon = new WeaponTemplate("Weapon
+				// Template " + editor.gameObjectTemplates.size(), 3,
+				// 1, 1, "a3r1.png", 100, null, true, false, 1, 1);
+				// editor.gameObjectTemplates.add(newWeapon);
+				// updateButtons();
+				// editor.clearSelectedObject();
+				// editor.depressButtonsSettingsAndDetailsButtons();
 			}
 		};
 		buttons.add(addTemplateButton);
-
-		for (int i = 0; i < editor.gameObjectTemplates.size(); i++) {
-			final int index = i;
-
-			final SettingsWindowButton templateButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					editor.gameObjectTemplates.get(i), true, true) {
-
-				@Override
-				public void keyTyped(char character) {
-				}
-
-				@Override
-				public void enterTyped() {
-				}
-
-				@Override
-				public void backTyped() {
-				}
-
-				@Override
-				public void depress() {
-				}
-
-			};
-
-			templateButton.clickListener = new ClickListener() {
-
-				@Override
-				public void click() {
-					editor.clearSelectedObject();
-					editor.depressButtonsSettingsAndDetailsButtons();
-					templateButton.down = true;
-					editor.attributesWindow = new AttributesDialog(200, 200, 200, editor.gameObjectTemplates.get(index),
-							editor);
-
-				}
-			};
-			buttons.add(templateButton);
-
-		}
+		// HACKED
+		// for (int i = 0; i < editor.gameObjectTemplates.size(); i++) {
+		// final int index = i;
+		//
+		// final SettingsWindowButton templateButton = new
+		// SettingsWindowButton(0, 200 + i * 30, 200, 30,
+		// editor.gameObjectTemplates.get(i), true, true) {
+		//
+		// @Override
+		// public void keyTyped(char character) {
+		// }
+		//
+		// @Override
+		// public void enterTyped() {
+		// }
+		//
+		// @Override
+		// public void backTyped() {
+		// }
+		//
+		// @Override
+		// public void depress() {
+		// }
+		//
+		// };
+		//
+		// templateButton.clickListener = new ClickListener() {
+		//
+		// @Override
+		// public void click() {
+		// editor.clearSelectedObject();
+		// editor.depressButtonsSettingsAndDetailsButtons();
+		// templateButton.down = true;
+		// editor.attributesWindow = new AttributesDialog(200, 200, 200,
+		// editor.gameObjectTemplates.get(index),
+		// editor);
+		//
+		// }
+		// };
+		// buttons.add(templateButton);
+		//
+		// }
 
 	}
 

@@ -108,7 +108,8 @@ public class AttributesDialog {
 			Square square = (Square) object;
 			title = "Square @ " + square.xInGrid + "," + square.yInGrid;
 		} else if (object instanceof Weapon) {
-			title = "Weapon " + editor.gameObjectTemplates.indexOf(object);
+			title = "Weapon ";// +
+								// editor.gameObjectTemplates.indexOf(object);//HACKED
 		} else if (object instanceof Color) {
 			title = "Color " + editor.colors.indexOf(object);
 		} else if (object instanceof Decoration) {

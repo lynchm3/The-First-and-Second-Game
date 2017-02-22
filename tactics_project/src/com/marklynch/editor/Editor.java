@@ -38,14 +38,13 @@ import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Sign;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.ActorTemplate;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.units.WildAnimal;
 import com.marklynch.objects.weapons.Weapon;
-import com.marklynch.objects.weapons.WeaponTemplate;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -114,7 +113,6 @@ public class Editor {
 	public SettingsWindowButton settingsButton = null;
 
 	public ArrayList<Texture> textures = new ArrayList<Texture>();
-	public ArrayList<GameObjectTemplate> gameObjectTemplates = new ArrayList<GameObjectTemplate>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public AttributeSelectionWindow attributeSelectionWindow;
 	public GameObjectTemplate gameObjectTemplate;
@@ -150,32 +148,6 @@ public class Editor {
 		colors.add(new Color(Color.MAGENTA));
 		colors.add(new Color(Color.CYAN));
 		colors.add(new Color(Color.ORANGE));
-
-		WeaponTemplate weaponTemplate0 = new WeaponTemplate("a3r1", 3, 1, 1, "a3r1.png", 100, null, true, false, 0.5f,
-				0.5f);
-		gameObjectTemplates.add(weaponTemplate0);
-		WeaponTemplate weaponTemplate1 = new WeaponTemplate("a2r2", 2, 2, 2, "a2r2.png", 100, null, true, false, 0.5f,
-				0.5f);
-		gameObjectTemplates.add(weaponTemplate1);
-		WeaponTemplate weaponTemplate2 = new WeaponTemplate("a5r3", 5, 3, 3, "a2r2.png", 100, null, true, false, 0.5f,
-				0.5f);
-		gameObjectTemplates.add(weaponTemplate2);
-
-		GameObjectTemplate gameObjectTemplate = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png", null,
-				new Inventory(), true, false, false, true, 1, 1);
-		gameObjectTemplates.add(gameObjectTemplate);
-
-		Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true, false, 1, 1);
-		gameObjectTemplates.add(furTemplate);
-
-		ActorTemplate actorTemplate = new ActorTemplate("Old lady", "Fighter", 1, 10, 0, 0, 0, 0, "red1.png", null, 4,
-				new Inventory(), false, false, true, 1, 1);
-		gameObjectTemplates.add(actorTemplate);
-
-		for (int i = 0; i < gameObjectTemplates.size(); i++) {
-			gameObjectTemplates.get(i).loadImages();
-		}
-
 		Game.level = new Level(50, 20);
 
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
@@ -488,188 +460,34 @@ public class Editor {
 		Game.level.factions.get(1).relationships.put(Game.level.factions.get(0),
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
-		// Inventory
-		Inventory inventoryForActor0 = new Inventory();
-		ArrayList<GameObject> weaponsForActor0 = new ArrayList<GameObject>();
-		weaponsForActor0.add(gameObjectTemplates.get(0).makeCopy(null));
-		weaponsForActor0.add(gameObjectTemplates.get(1).makeCopy(null));
-		weaponsForActor0.add(gameObjectTemplates.get(2).makeCopy(null));
-		inventoryForActor0.setGameObjects(weaponsForActor0);
-		// for (int i = 0; i < weaponsForActor0.size(); i++) {
-		// if (weaponsForActor0.get(i) instanceof Weapon)
-		// weapons.add((Weapon) weaponsForActor0.get(i));
-		// // Game.level.inanimateObjects.add(weaponsForActor0.get(i));
-		// }
-		Inventory inventoryForActor1 = new Inventory();
-		ArrayList<GameObject> weaponsForActor1 = new ArrayList<GameObject>();
-		weaponsForActor1.add(gameObjectTemplates.get(0).makeCopy(null));
-		weaponsForActor1.add(gameObjectTemplates.get(1).makeCopy(null));
-		weaponsForActor1.add(gameObjectTemplates.get(2).makeCopy(null));
-		inventoryForActor1.setGameObjects(weaponsForActor1);
-		// for (int i = 0; i < weaponsForActor1.size(); i++) {
-		// if (weaponsForActor1.get(i) instanceof Weapon)
-		// weapons.add((Weapon) weaponsForActor1.get(i));
-		// // Game.level.inanimateObjects.add(weaponsForActor1.get(i));
-		// }
-		Inventory inventoryForWildAnimal = new Inventory();
-		inventoryForWildAnimal.add(gameObjectTemplates.get(4).makeCopy(null));
-		inventoryForWildAnimal.add(gameObjectTemplates.get(0).makeCopy(null));
-		// ArrayList<GameObject> weaponsForActor2 = new ArrayList<GameObject>();
-		// weaponsForActor2.add(gameObjectTemplates.get(0).makeCopy(null));
-		// inventoryForWildAnimal.setGameObjects(weaponsForActor2);
-
 		// Add actor
-		Actor player = Game.level.player = new Actor("You", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png",
-				Game.level.squares[0][4], 1, null, inventoryForActor0, true, false, true, 1, 1);
-		player.faction = Game.level.factions.get(0);
-		player.factionGUID = Game.level.factions.get(0).guid;
+		Actor player = Templates.getOldLady(Game.level.squares[0][4], Game.level.factions.get(0));
+		Game.level.player = player;
+		player.inventory.add(Templates.getHatchet(null));
+		player.inventory.add(Templates.getHuntingBow(null));
 
-		Game.level.factions.get(0).actors.add(player);
-		for (int i = 0; i < player.inventory.size(); i++) {
-			player.inventory.get(i).inventoryThatHoldsThisObject = player.inventory;
-		}
+		// Add lead hunter
+		Actor hunterBrent = Templates.getHunter(Game.level.squares[5][8], Game.level.factions.get(1));
+		hunterBrent.inventory.add(Templates.getHatchet(null));
+		hunterBrent.inventory.add(Templates.getHuntingBow(null));
+		hunterBrent.bed = (Bed) Templates.getBed(Game.level.squares[10][9]);
+		hunterBrent.name = "Hunter Brent";
 
-		Bed bedForHunterBrent = new Bed("Hunter Brent's Bed", 5, "bed.png", "bed_Covers.png", Game.level.squares[10][9],
-				new Inventory(), false, true, false, false, 1, 1);
+		// Add hunters
 
-		Actor hunterBrent = new Hunter("Hunter Brent", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png",
-				Game.level.squares[5][8], 1, bedForHunterBrent, inventoryForActor1, true, false, true, 1, 1);
-		hunterBrent.faction = Game.level.factions.get(1);
-		hunterBrent.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterBrent);
-		for (int i = 0; i < hunterBrent.inventory.size(); i++) {
-			hunterBrent.inventory.get(i).inventoryThatHoldsThisObject = hunterBrent.inventory;
-		}
+		Actor hunterBront1 = Templates.getHunter(Game.level.squares[3][7], Game.level.factions.get(1));
+		hunterBront1.inventory.add(Templates.getHatchet(null));
+		hunterBront1.inventory.add(Templates.getHuntingBow(null));
+		hunterBrent.bed = (Bed) Templates.getBed(Game.level.squares[9][9]);
 
-		Bed bedForHunterBront1 = new Bed("Hunter Bront 1's Bed", 5, "bed.png", "bed_Covers.png",
-				Game.level.squares[9][9], new Inventory(), false, true, false, false, 1, 1);
+		Actor hunterBront2 = Templates.getHunter(Game.level.squares[3][8], Game.level.factions.get(1));
+		hunterBront2.inventory.add(Templates.getHatchet(null));
+		hunterBront2.inventory.add(Templates.getHuntingBow(null));
 
-		Actor hunterBront1 = new Hunter("Hunter Bront 1", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[3][7], 1, bedForHunterBront1, inventoryForActor1.makeCopy(), true, false, true, 1,
-				1);
-		hunterBront1.faction = Game.level.factions.get(1);
-		hunterBront1.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterBront1);
-		for (int i = 0; i < hunterBront1.inventory.size(); i++) {
-			hunterBront1.inventory.get(i).inventoryThatHoldsThisObject = hunterBront1.inventory;
-		}
-
-		Actor hunterBront2 = new Hunter("Hunter Bront 2", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[3][8], 1, null, inventoryForActor1.makeCopy(), true, false, true, 1, 1);
-		hunterBront2.faction = Game.level.factions.get(1);
-		hunterBront2.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterBront2);
-		for (int i = 0; i < hunterBront2.inventory.size(); i++) {
-			hunterBront2.inventory.get(i).inventoryThatHoldsThisObject = hunterBront2.inventory;
-		}
-
-		Actor hunterBront3 = new Hunter("Hunter Bront 3", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[3][9], 1, null, inventoryForActor1.makeCopy(), true, false, true, 1, 1);
-		hunterBront3.faction = Game.level.factions.get(1);
-		hunterBront3.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterBront3);
-		for (int i = 0; i < hunterBront3.inventory.size(); i++) {
-			hunterBront3.inventory.get(i).inventoryThatHoldsThisObject = hunterBront3.inventory;
-		}
-
-		Actor hunterBront4 = new Hunter("Hunter Bront 3", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[2][7], 1, null, inventoryForActor1.makeCopy(), true, false, true, 1, 1);
-		hunterBront4.faction = Game.level.factions.get(1);
-		hunterBront4.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterBront4);
-		for (int i = 0; i < hunterBront4.inventory.size(); i++) {
-			hunterBront4.inventory.get(i).inventoryThatHoldsThisObject = hunterBront4.inventory;
-		}
-
-		Actor hunterBront5 = new Hunter("Hunter Bront 3", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[2][8], 1, null, inventoryForActor1.makeCopy(), true, false, true, 1, 1);
-		hunterBront5.faction = Game.level.factions.get(1);
-		hunterBront5.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterBront5);
-		for (int i = 0; i < hunterBront5.inventory.size(); i++) {
-			hunterBront5.inventory.get(i).inventoryThatHoldsThisObject = hunterBront5.inventory;
-		}
-
-		Actor hunterBront6 = new Hunter("Hunter Bront 3", "Hunter", 1, 10, 0, 0, 0, 0, "hunter_2.png",
-				Game.level.squares[8][8], 1, null, inventoryForActor1.makeCopy(), true, false, true, 1, 1);
-		hunterBront6.faction = Game.level.factions.get(1);
-		hunterBront6.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(hunterBront6);
-		for (int i = 0; i < hunterBront6.inventory.size(); i++) {
-			hunterBront6.inventory.get(i).inventoryThatHoldsThisObject = hunterBront6.inventory;
-		}
-
-		// Actor hunterBront7 = new Hunter("Hunter Bront 3", "Hunter", 1, 10, 0,
-		// 0, 0, 0, "hunter_2.png",
-		// Game.level.squares[0][4], 1, null, inventoryForActor1.makeCopy(),
-		// true, false, true, 1, 1);
-		// hunterBront7.faction = Game.level.factions.get(1);
-		// hunterBront7.factionGUID = Game.level.factions.get(1).guid;
-		// Game.level.factions.get(1).actors.add(hunterBront7);
-		// for (int i = 0; i < hunterBront7.inventory.size(); i++) {
-		// hunterBront7.inventory.get(i).inventoryThatHoldsThisObject =
-		// hunterBront7.inventory;
-		// }
-		//
-		// Actor hunterBront8 = new Hunter("Hunter Bront 3", "Hunter", 1, 10, 0,
-		// 0, 0, 0, "hunter_2.png",
-		// Game.level.squares[10][10], 1, null, inventoryForActor1.makeCopy(),
-		// true, false, true, 1, 1);
-		// hunterBront8.faction = Game.level.factions.get(1);
-		// hunterBront8.factionGUID = Game.level.factions.get(1).guid;
-		// Game.level.factions.get(1).actors.add(hunterBront8);
-		// for (int i = 0; i < hunterBront8.inventory.size(); i++) {
-		// hunterBront8.inventory.get(i).inventoryThatHoldsThisObject =
-		// hunterBront8.inventory;
-		// }
-
-		// Actor hunterBront9 = new Hunter("Hunter Bront 3", "Hunter", 1, 10, 0,
-		// 0, 0, 0, "hunter_2.png",
-		// Game.level.squares[10][10], 1, null, inventoryForActor1.makeCopy(),
-		// true, false, true, 1, 1);
-		// hunterBront9.faction = Game.level.factions.get(1);
-		// hunterBront9.factionGUID = Game.level.factions.get(1).guid;
-		// Game.level.factions.get(1).actors.add(hunterBront9);
-		// for (int i = 0; i < hunterBront9.inventory.size(); i++) {
-		// hunterBront9.inventory.get(i).inventoryThatHoldsThisObject =
-		// hunterBront9.inventory;
-		// }
-		//
-		// Actor hunterBront10 = new Hunter("Hunter Bront 3", "Hunter", 1, 10,
-		// 0, 0, 0, 0, "hunter_2.png",
-		// Game.level.squares[10][10], 1, null, inventoryForActor1.makeCopy(),
-		// true, false, true, 1, 1);
-		// hunterBront10.faction = Game.level.factions.get(1);
-		// hunterBront10.factionGUID = Game.level.factions.get(1).guid;
-		// Game.level.factions.get(1).actors.add(hunterBront10);
-		// for (int i = 0; i < hunterBront10.inventory.size(); i++) {
-		// hunterBront10.inventory.get(i).inventoryThatHoldsThisObject =
-		// hunterBront10.inventory;
-		// }
-		//
-		// Actor hunterBront11 = new Hunter("Hunter Bront 3", "Hunter", 1, 10,
-		// 0, 0, 0, 0, "hunter_2.png",
-		// Game.level.squares[10][10], 1, null, inventoryForActor1.makeCopy(),
-		// true, false, true, 1, 1);
-		// hunterBront11.faction = Game.level.factions.get(1);
-		// hunterBront11.factionGUID = Game.level.factions.get(1).guid;
-		// Game.level.factions.get(1).actors.add(hunterBront11);
-		// for (int i = 0; i < hunterBront11.inventory.size(); i++) {
-		// hunterBront11.inventory.get(i).inventoryThatHoldsThisObject =
-		// hunterBront11.inventory;
-		// }
-		//
-		// Actor hunterBront12 = new Hunter("Hunter Bront 3", "Hunter", 1, 10,
-		// 0, 0, 0, 0, "hunter_2.png",
-		// Game.level.squares[10][10], 1, null, inventoryForActor1.makeCopy(),
-		// true, false, true, 1, 1);
-		// hunterBront12.faction = Game.level.factions.get(1);
-		// hunterBront12.factionGUID = Game.level.factions.get(1).guid;
-		// Game.level.factions.get(1).actors.add(hunterBront12);
-		// for (int i = 0; i < hunterBront12.inventory.size(); i++) {
-		// hunterBront12.inventory.get(i).inventoryThatHoldsThisObject =
-		// hunterBront12.inventory;
-		// }
+		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1));
+		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1));
+		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1));
+		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1));
 
 		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();
 		hunterPackMembers.add(hunterBrent);
@@ -679,44 +497,27 @@ public class Editor {
 		hunterPackMembers.add(hunterBront4);
 		hunterPackMembers.add(hunterBront5);
 		hunterPackMembers.add(hunterBront6);
-		// hunterPackMembers.add(hunterBront7);
-		// hunterPackMembers.add(hunterBront8);
-		// hunterPackMembers.add(hunterBront9);
-		// hunterPackMembers.add(hunterBront10);
-		// hunterPackMembers.add(hunterBront11);
-		// hunterPackMembers.add(hunterBront12);
-		Group hunterPack = new Group("Hunter pack", hunterPackMembers, hunterBrent);
+
+		Group hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
 
 		new Sign("Hunt Plan", 5, "sign.png", Game.level.squares[6][8], new Inventory(), true, false, false, true,
 				"Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast", 1, 1);
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
-				"environmentalist.png", Game.level.squares[7][12], 1, bedForHunterBront1, inventoryForActor1.makeCopy(),
-				true, false, true, 1, 1);
-		environmentalistBill.faction = Game.level.factions.get(1);
-		environmentalistBill.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(environmentalistBill);
-		for (int i = 0; i < environmentalistBill.inventory.size(); i++) {
-			environmentalistBill.inventory.get(i).inventoryThatHoldsThisObject = environmentalistBill.inventory;
-		}
+				"environmentalist.png", Game.level.squares[7][12], 1, null, new Inventory(), true, false, true, 1, 1,
+				Game.level.factions.get(1));
 
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
-				Game.level.squares[22][16], 1, null, inventoryForWildAnimal, true, false, true, 1, 1);
-		superWolf.faction = Game.level.factions.get(2);
-		superWolf.factionGUID = Game.level.factions.get(2).guid;
-		Game.level.factions.get(2).actors.add(superWolf);
+				Game.level.squares[22][16], 1, null, new Inventory(), true, false, true, 1, 1,
+				Game.level.factions.get(2));
 
 		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
-				Game.level.squares[20][15], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true, 1, 1);
-		wolf2.faction = Game.level.factions.get(2);
-		wolf2.factionGUID = Game.level.factions.get(2).guid;
-		Game.level.factions.get(2).actors.add(wolf2);
+				Game.level.squares[20][15], 1, null, new Inventory(), true, false, true, 1, 1,
+				Game.level.factions.get(2));
 
 		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
-				Game.level.squares[20][17], 1, null, inventoryForWildAnimal.makeCopy(), true, false, true, 1, 1);
-		wolf3.faction = Game.level.factions.get(2);
-		wolf3.factionGUID = Game.level.factions.get(2).guid;
-		Game.level.factions.get(2).actors.add(wolf3);
+				Game.level.squares[20][17], 1, null, new Inventory(), true, false, true, 1, 1,
+				Game.level.factions.get(2));
 
 		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
 		wolfPackMembers.add(superWolf);
@@ -725,16 +526,13 @@ public class Editor {
 		Group wolfPack = new Group("Wolf pack", wolfPackMembers, superWolf);
 
 		ArrayList<GameObject> weaponsBehindTheLodge = new ArrayList<GameObject>();
-		weaponsBehindTheLodge.add(gameObjectTemplates.get(0).makeCopy(Game.level.squares[12][9]));
-		weaponsBehindTheLodge.add(gameObjectTemplates.get(2).makeCopy(Game.level.squares[12][9]));
+		weaponsBehindTheLodge.add(Templates.getHatchet(Game.level.squares[12][9]));
+		weaponsBehindTheLodge.add(Templates.getHuntingBow(Game.level.squares[12][9]));
 		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null,
 				weaponsBehindTheLodge);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
-				1, null, new Inventory(), true, false, true, 1, 1);
-		trader.faction = Game.level.factions.get(1);
-		trader.factionGUID = Game.level.factions.get(1).guid;
-		Game.level.factions.get(1).actors.add(trader);
+				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1));
 
 		// Decorations
 		// Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");

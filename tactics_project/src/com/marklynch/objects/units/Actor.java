@@ -86,7 +86,7 @@ public class Actor extends ActorTemplate implements Owner {
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			float widthRatio, float heightRatio) {
+			float widthRatio, float heightRatio, Faction faction) {
 
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, inventory, showInventory, fitsInInventory,
@@ -118,6 +118,14 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 
 		attackers = new ArrayList<Actor>();
+
+		this.faction = faction;
+		if (this.faction != null) {
+			factionGUID = this.faction.guid;
+			this.faction.actors.add(this);
+		}
+
+		System.out.println(name + " at end of constructor. squareGameObjectIsOn = " + this.squareGameObjectIsOn);
 	}
 
 	@Override
@@ -446,14 +454,11 @@ public class Actor extends ActorTemplate implements Owner {
 		equippedWeaponGUID = null;
 	}
 
-	@Override
-	public Actor makeCopy(Square square) {
+	public Actor makeCopy(Square square, Faction faction) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, null, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects, widthRatio, heightRatio);
-		actor.faction = this.faction;
-		actor.factionGUID = this.faction.guid;
+				canContainOtherObjects, widthRatio, heightRatio, faction);
 		return actor;
 	}
 

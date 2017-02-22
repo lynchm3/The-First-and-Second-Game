@@ -8,9 +8,7 @@ import com.marklynch.editor.Editor;
 import com.marklynch.editor.Editor.EDITOR_STATE;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.weapons.Weapon;
-import com.marklynch.editor.InstanceSelectionWindow;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
@@ -60,10 +58,12 @@ public class ObjectsSettingsWindow extends SettingsWindow {
 
 				ObjectsSettingsWindow.this.editor.clearSelectedObject();
 				ObjectsSettingsWindow.this.editor.depressButtonsSettingsAndDetailsButtons();
-
-				ObjectsSettingsWindow.this.editor.instanceSelectionWindow = new InstanceSelectionWindow<GameObjectTemplate>(
-						ObjectsSettingsWindow.this.editor.gameObjectTemplates, ObjectsSettingsWindow.this.editor,
-						"Select a Template");
+				// HACED
+				// ObjectsSettingsWindow.this.editor.instanceSelectionWindow =
+				// new InstanceSelectionWindow<GameObjectTemplate>(
+				// ObjectsSettingsWindow.this.editor.gameObjectTemplates,
+				// ObjectsSettingsWindow.this.editor,
+				// "Select a Template");
 			}
 		};
 
