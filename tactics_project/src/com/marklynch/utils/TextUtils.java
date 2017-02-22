@@ -7,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Decoration;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.objects.GameObjectTemplate;
@@ -217,6 +218,34 @@ public class TextUtils {
 				float x = posX + offsetX;
 				TextureUtils.drawTexture(decoration.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
+
+			} else if (content instanceof Building) {
+				Building building = (Building) content;
+
+				float textWidth = Game.font.getWidth(building.name);
+				float textureWidth = 20;
+
+				float width = textWidth + textureWidth;
+				if (offsetX + width > maxWidth && offsetX != 0) {
+					if (wrap) {
+						offsetY += 20;
+						offsetX = 0;
+					} else {
+						return;
+					}
+				}
+
+				// Name
+
+				Game.font.drawText(Game.activeBatch, building.name, posX + offsetX, posY + offsetY);
+				offsetX += textWidth;
+
+				// Image
+
+				// float x = posX + offsetX;
+				// TextureUtils.drawTexture(building.imageTexture, x, x + 20,
+				// posY + offsetY, posY + offsetY + 20);
+				// offsetX += textureWidth;
 
 			} else if (content instanceof Color) {
 

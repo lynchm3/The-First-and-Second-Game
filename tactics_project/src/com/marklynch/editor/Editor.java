@@ -404,7 +404,8 @@ public class Editor {
 
 		ArrayList<Square> doorLocations1 = new ArrayList<Square>();
 		doorLocations1.add(Game.level.squares[5][3]);
-		Game.level.buildings.add(new Building("Trader Joe's Shop", 5, 0, 9, 5, doorLocations1));
+		Building joesShop = new Building("Trader Joe's Shop", 5, 0, 11, 5, doorLocations1);
+		Game.level.buildings.add(joesShop);
 
 		ArrayList<Square> doorLocations2 = new ArrayList<Square>();
 		doorLocations2.add(Game.level.squares[7][9]);
@@ -505,7 +506,7 @@ public class Editor {
 		Group hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
 
 		Sign huntingPlan = (Sign) Templates.getSign(Game.level.squares[6][8]);
-		huntingPlan.text = "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast";
+		huntingPlan.setText(new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, null, new Inventory(), true, false, true, 1, 1,
@@ -535,8 +536,15 @@ public class Editor {
 		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null,
 				weaponsBehindTheLodge);
 
+		Sign joesShopSign = (Sign) Templates.getSign(Game.level.squares[4][4]);
+		joesShopSign.setText(new Object[] { joesShop.name });
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
-				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1), 0, 0);
+				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1), 0, 0, joesShop,
+				joesShopSign);
+		trader.inventory.add(Templates.getKatana(null));
+		trader.inventory.add(Templates.getHatchet(null));
+		trader.inventory.add(Templates.getHuntingBow(null));
+		Templates.getShopCounter(Game.level.squares[7][1]);
 
 		// Decorations
 		// Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");

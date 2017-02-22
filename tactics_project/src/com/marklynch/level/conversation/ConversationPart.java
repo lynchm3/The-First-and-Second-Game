@@ -8,19 +8,19 @@ import com.marklynch.utils.TextureUtils;
 public class ConversationPart {
 
 	public ConversationResponse[] conversationResponses;
-	public String text;
-	int textWidth;
+	public Object[] text;
+	// int textWidth;
 	int halfTextWidth;
 	public WindowSelectConversationResponse windowSelectConversationResponse;
 	public GameObject talker;
 
-	public ConversationPart(String text, ConversationResponse[] conversationResponses, GameObject talker) {
+	public ConversationPart(Object[] text, ConversationResponse[] conversationResponses, GameObject talker) {
 		super();
 		this.conversationResponses = conversationResponses;
 		this.text = text;
 		this.talker = talker;
-		textWidth = Game.font.getWidth(text);
-		halfTextWidth = textWidth / 2;
+		// textWidth = Game.font.getWidth(text);
+		// halfTextWidth = textWidth / 2;
 
 		windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level, conversationResponses);
 
@@ -47,7 +47,7 @@ public class ConversationPart {
 		float x1 = Game.halfWindowWidth - halfTextWidth;
 		float y1 = Game.windowHeight - Conversation.bottomMargin - Conversation.height + topMargin;
 
-		TextUtils.printTextWithImages(new Object[] { text }, x1, y1, maxWidth, true);
+		TextUtils.printTextWithImages(text, x1, y1, maxWidth, true);
 
 	}
 

@@ -16,6 +16,7 @@ import com.marklynch.level.constructs.Quest;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Carcass;
+import com.marklynch.objects.Corpse;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Owner;
@@ -280,14 +281,19 @@ public class Actor extends ActorTemplate implements Owner {
 			// this.faction.actors.remove(this);
 
 			// add a carcass
-			GameObject carcass = new Carcass(this.name + " carcass", 5, "carcass.png", this.squareGameObjectIsOn,
-					new Inventory(), false, true, false, true, 0.5f, 0.5f);
+			GameObject body;
+			if (this instanceof WildAnimal)
+				body = new Carcass(this.name + " carcass", 5, "carcass.png", this.squareGameObjectIsOn, new Inventory(),
+						false, true, false, true, 0.5f, 0.5f);
+			else
+				body = new Corpse(this.name + " corpse", 5, "carcass.png", this.squareGameObjectIsOn, new Inventory(),
+						false, true, false, true, 0.5f, 0.5f);
 
-			this.giveAllToTarget(null, carcass);
-			this.squareGameObjectIsOn.inventory.add(carcass);
-
-			if (!Game.level.inanimateObjectsOnGround.contains(carcass))
-				Game.level.inanimateObjectsOnGround.add(carcass);
+			this.giveAllToTarget(null, body);
+			// this.squareGameObjectIsOn.inventory.add(body);
+			//
+			// if (!Game.level.inanimateObjectsOnGround.contains(body))
+			// Game.level.inanimateObjectsOnGround.add(body);
 
 			// screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
 			return true;

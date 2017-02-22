@@ -33,7 +33,9 @@ public class Templates {
 	private static final GameObjectTemplate BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(),
 			false, true, false, false, 1, 1);
 	private static final GameObjectTemplate SIGN = new Sign("Hunt Plan", 5, "sign.png", Game.level.squares[6][8],
-			new Inventory(), true, false, false, true, "", 1, 1);
+			new Inventory(), true, false, false, true, new Object[] { "" }, 1, 1);
+	private static final GameObjectTemplate SHOP_COUNTER = new GameObjectTemplate("Shop Counter", 5, "shop_counter.png",
+			null, new Inventory(), false, true, false, true, 1f, 1f);
 
 	// LARGE CONTAINER
 	private static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",
@@ -69,6 +71,10 @@ public class Templates {
 
 	public static GameObject getSign(Square square) {
 		return SIGN.makeCopy(square);
+	}
+
+	public static GameObject getShopCounter(Square square) {
+		return SHOP_COUNTER.makeCopy(square);
 	}
 
 	public static GameObject getDumpster(Square square) {

@@ -12,12 +12,12 @@ import com.marklynch.objects.units.Actor;
 
 public class Sign extends GameObject {
 
-	public String text;
+	private Object[] text;
 	Conversation conversation;
 
 	public Sign(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
-			String text, float widthRatio, float heightRatio) {
+			Object[] text, float widthRatio, float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, widthRatio, heightRatio);
 
@@ -51,6 +51,14 @@ public class Sign extends GameObject {
 	@Override
 	public Conversation getConversation() {
 		return conversation;
+	}
+
+	public void setText(Object[] text) {
+		this.text = text;
+		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
+		ConversationPart conversationPartSaveTheWolf = new ConversationPart(this.text,
+				new ConversationResponse[] { conversationReponseDone }, this);
+		conversation = new Conversation(conversationPartSaveTheWolf);
 	}
 
 }

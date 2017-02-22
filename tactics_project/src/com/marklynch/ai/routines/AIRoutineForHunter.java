@@ -18,6 +18,7 @@ public class AIRoutineForHunter extends AIRoutine {
 	};
 
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
+	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
 	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
@@ -62,7 +63,7 @@ public class AIRoutineForHunter extends AIRoutine {
 				true);
 		// System.out.println("carcass = " + carcass);
 		if (carcass != null) {
-			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
 			if (!lootedCarcass) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);

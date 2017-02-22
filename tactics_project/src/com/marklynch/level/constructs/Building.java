@@ -11,7 +11,7 @@ import com.marklynch.objects.Wall;
 
 public class Building {
 
-	String name;
+	public String name;
 	public int gridX1, gridY1, gridX2, gridY2;
 
 	public Building(String name, int gridX1, int gridY1, int gridX2, int gridY2, ArrayList<Square> doorLocations) {
