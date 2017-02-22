@@ -31,6 +31,8 @@ public class Tree extends GameObject {
 
 		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), false, true, true, false,
 				appleSize, appleSize);
+		apple.anchorX = 6;
+		apple.anchorY = 6;
 
 		float appleDrawOffsetXMax = width - apple.width - 32f;
 		float appleDrawOffsetXMin = 32f;

@@ -11,9 +11,9 @@ public class Templates {
 
 	// People
 	private static final Actor OLD_LADY = new Actor("You", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png", null, 1, null,
-			new Inventory(), true, false, true, 1, 1, null);
+			new Inventory(), true, false, true, 1, 1, null, 80f, 80f);
 	private static final Actor HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, null,
-			new Inventory(), true, false, true, 1, 1, null);
+			new Inventory(), true, false, true, 1, 1, null, 88, 54);
 	// Axes
 	// https://en.wikipedia.org/wiki/Axe#Types_of_axes
 	private static final Weapon HATCHET = new Weapon("Hatchet", 3, 1, 1, "a3r1.png", 100, null, true, false, 0.5f, 0.5f,

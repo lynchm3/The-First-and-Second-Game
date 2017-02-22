@@ -2,6 +2,12 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Could merge the different actors? a lot of them. They only diff is their
+	// AIRoutine :P
+
+	// Make a big sword that spreads over two screens and character holds it
+	// properly
+
 	// Rename "Templates" to Object creator
 	// Rename the methods to "Create X"
 

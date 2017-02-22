@@ -48,7 +48,7 @@ public class ActorTemplate extends GameObject {
 	public Actor makeCopy(Square square, Faction faction) {
 		Actor actor = new Actor(new String(name), new String(title), actorLevel, (int) totalHealth, strength, dexterity,
 				intelligence, endurance, imageTexturePath, square, travelDistance, null, inventory.makeCopy(),
-				showInventory, fitsInInventory, canContainOtherObjects, widthRatio, heightRatio, faction);
+				showInventory, fitsInInventory, canContainOtherObjects, widthRatio, heightRatio, faction, 0, 0);
 		return actor;
 
 	}

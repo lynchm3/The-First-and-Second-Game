@@ -470,20 +470,22 @@ public class Editor {
 
 		// Add lead hunter
 		Actor hunterBrent = Templates.getHunter(Game.level.squares[5][8], Game.level.factions.get(1));
-		hunterBrent.inventory.add(Templates.getHatchet(null));
 		hunterBrent.inventory.add(Templates.getHuntingBow(null));
 		hunterBrent.bed = (Bed) Templates.getBed(Game.level.squares[10][9]);
-		hunterBrent.name = "Hunter Brent";
+		hunterBrent.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
+		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		// Add hunters
 		Actor hunterBront1 = Templates.getHunter(Game.level.squares[3][7], Game.level.factions.get(1));
-		hunterBront1.inventory.add(Templates.getHatchet(null));
 		hunterBront1.inventory.add(Templates.getHuntingBow(null));
-		hunterBrent.bed = (Bed) Templates.getBed(Game.level.squares[9][9]);
+		hunterBront1.bed = (Bed) Templates.getBed(Game.level.squares[9][9]);
+		hunterBront1.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
+		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		Actor hunterBront2 = Templates.getHunter(Game.level.squares[3][8], Game.level.factions.get(1));
 		hunterBront2.inventory.add(Templates.getHatchet(null));
-		hunterBront2.inventory.add(Templates.getHuntingBow(null));
+		hunterBront2.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
+		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1));
 		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1));
@@ -506,19 +508,19 @@ public class Editor {
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, null, new Inventory(), true, false, true, 1, 1,
-				Game.level.factions.get(1));
+				Game.level.factions.get(1), 0, 0);
 
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[22][16], 1, null, new Inventory(), true, false, true, 1, 1,
-				Game.level.factions.get(2));
+				Game.level.factions.get(2), 0, 0);
 
 		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[20][15], 1, null, new Inventory(), true, false, true, 1, 1,
-				Game.level.factions.get(2));
+				Game.level.factions.get(2), 0, 0);
 
 		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
 				Game.level.squares[20][17], 1, null, new Inventory(), true, false, true, 1, 1,
-				Game.level.factions.get(2));
+				Game.level.factions.get(2), 0, 0);
 
 		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
 		wolfPackMembers.add(superWolf);
@@ -533,7 +535,7 @@ public class Editor {
 				weaponsBehindTheLodge);
 
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
-				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1));
+				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1), 0, 0);
 
 		// Decorations
 		// Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");

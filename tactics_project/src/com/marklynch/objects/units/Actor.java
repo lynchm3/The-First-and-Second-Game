@@ -86,7 +86,7 @@ public class Actor extends ActorTemplate implements Owner {
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			float widthRatio, float heightRatio, Faction faction) {
+			float widthRatio, float heightRatio, Faction faction, float anchorX, float anchorY) {
 
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, inventory, showInventory, fitsInInventory,
@@ -125,7 +125,8 @@ public class Actor extends ActorTemplate implements Owner {
 			this.faction.actors.add(this);
 		}
 
-		System.out.println(name + " at end of constructor. squareGameObjectIsOn = " + this.squareGameObjectIsOn);
+		this.anchorX = anchorX;
+		this.anchorY = anchorY;
 	}
 
 	@Override
@@ -362,11 +363,15 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 
 		// draw anchor
-		QuadUtils.drawQuad(Color.WHITE,
-				this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX + anchorX - 5f,
-				this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX + anchorX + 5f,
-				this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY + anchorY - 5f,
-				this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY + anchorY + 5f);
+		// QuadUtils.drawQuad(Color.WHITE,
+		// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH +
+		// drawOffsetX + anchorX - 5f,
+		// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH +
+		// drawOffsetX + anchorX + 5f,
+		// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT +
+		// drawOffsetY + anchorY - 5f,
+		// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT +
+		// drawOffsetY + anchorY + 5f);
 
 		// TextureUtils.skipNormals = false;
 
@@ -481,8 +486,8 @@ public class Actor extends ActorTemplate implements Owner {
 	public Actor makeCopy(Square square, Faction faction) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, null, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects, widthRatio, heightRatio, faction);
+				endurance, imageTexturePath, square, travelDistance, null, inventory.makeCopy(), showInventory,
+				fitsInInventory, canContainOtherObjects, widthRatio, heightRatio, faction, anchorX, anchorY);
 		return actor;
 	}
 
