@@ -498,12 +498,12 @@ public class Inventory {
 			gameObjectToDrawOnPlayer = Game.level.player.equippedWeapon;
 		}
 
-		// Equipped weapon on actor
+		// Object to draw player holding
 		if (gameObjectToDrawOnPlayer != null) {
 			int weaponPositionXInPixels = (int) (actorPositionXInPixels
-					+ ((int) Game.HALF_SQUARE_WIDTH - gameObjectToDrawOnPlayer.halfWidth) * 3);
+					+ (Game.level.player.anchorX - gameObjectToDrawOnPlayer.anchorX) * 3);
 			int weaponPositionYInPixels = (int) (actorPositionYInPixels
-					+ ((int) Game.HALF_SQUARE_HEIGHT - gameObjectToDrawOnPlayer.halfHeight) * 3);
+					+ (Game.level.player.anchorY - gameObjectToDrawOnPlayer.anchorY) * 3);
 			TextureUtils.drawTexture(gameObjectToDrawOnPlayer.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionXInPixels + gameObjectToDrawOnPlayer.width * 3, weaponPositionYInPixels,
 					weaponPositionYInPixels + gameObjectToDrawOnPlayer.height * 3);

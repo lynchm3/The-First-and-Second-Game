@@ -12,7 +12,7 @@ import com.marklynch.objects.units.Actor;
 
 public class Sign extends GameObject {
 
-	String text;
+	public String text;
 	Conversation conversation;
 
 	public Sign(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,

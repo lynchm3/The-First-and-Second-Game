@@ -1,10 +1,11 @@
 package com.marklynch.objects;
 
+import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
-import com.marklynch.objects.weapons.WeaponTemplate;
+import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 
@@ -15,17 +16,19 @@ public class Templates {
 			new Inventory(), true, false, true, 1, 1, null);
 	// Axes
 	// https://en.wikipedia.org/wiki/Axe#Types_of_axes
-	private static final WeaponTemplate HATCHET = new WeaponTemplate("Hatchet", 3, 1, 1, "a3r1.png", 100, null, true,
-			false, 0.5f, 0.5f);
+	private static final Weapon HATCHET = new Weapon("Hatchet", 3, 1, 1, "a3r1.png", 100, null, true, false, 0.5f, 0.5f,
+			24, 40);
 
 	// Bows
 	// https://en.wikipedia.org/wiki/Bow_and_arrow#Types_of_bow
-	private static final WeaponTemplate HUNTING_BOW = new WeaponTemplate("Hunting Bow", 3, 1, 1, "a3r1.png", 100, null,
-			true, false, 0.5f, 0.5f);
+	private static final Weapon HUNTING_BOW = new Weapon("Hunting Bow", 3, 1, 1, "a2r2.png", 100, null, true, false,
+			0.5f, 0.5f, 40, 42);
 
 	// Furniture
 	private static final GameObjectTemplate BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(),
 			false, true, false, false, 1, 1);
+	private static final GameObjectTemplate SIGN = new Sign("Hunt Plan", 5, "sign.png", Game.level.squares[6][8],
+			new Inventory(), true, false, false, true, "", 1, 1);
 
 	// LARGE CONTAINER
 	private static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",
@@ -53,6 +56,10 @@ public class Templates {
 
 	public static GameObject getBed(Square square) {
 		return BED.makeCopy(square);
+	}
+
+	public static GameObject getSign(Square square) {
+		return SIGN.makeCopy(square);
 	}
 
 	public static GameObject getDumpster(Square square) {

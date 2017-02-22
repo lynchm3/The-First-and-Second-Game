@@ -2,6 +2,23 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Rename "Templates" to Object creator
+	// Rename the methods to "Create X"
+
+	// Move the rest of the objects (wolf, tree, superwolf etc) in to Templates
+	// class
+
+	// Have an anchor for actors and gameobject for where they will hold
+	// eachother...
+
+	// Move the common AI bits to another class. Like the fighting routine...
+	// it's used by loads of enemies... defer to it the same way u defer to a
+	// group or quest. Some would use the attack routine, some would use the
+	// run, and maybe have a configurable hybrid where they run is health too
+	// low or group size too low, ALSO... running is super annoying so maybe
+	// dont put that in. Maybe just civies and some weird enemies like the ones
+	// in DS and bloodborne and nioh
+
 	// EquipAction for items on ground
 
 	// Need to put XP in soon to compel myself :P

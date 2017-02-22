@@ -75,6 +75,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public float drawOffsetX;
 	public float drawOffsetY;
 
+	public float anchorX, anchorY;
+
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			float widthRatio, float heightRatio) {

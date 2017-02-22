@@ -17,11 +17,13 @@ public class Weapon extends WeaponTemplate {
 
 	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects, float widthRatio,
-			float heightRatio) {
+			float heightRatio, float anchorX, float anchorY) {
 		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
 				canContainOtherObjects, widthRatio, heightRatio);
 
 		this.owner = owner;
+		this.anchorX = anchorX;
+		this.anchorY = anchorY;
 	}
 
 	public void calculateAttackableSquares(Square[][] squares) {

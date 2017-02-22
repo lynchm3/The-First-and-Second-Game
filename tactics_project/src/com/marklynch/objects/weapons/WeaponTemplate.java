@@ -81,6 +81,6 @@ public class WeaponTemplate extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new Weapon(new String(name), slashDamage, minRange, maxRange, imageTexturePath, totalHealth, square,
-				fitsInInventory, canContainOtherObjects, widthRatio, heightRatio);
+				fitsInInventory, canContainOtherObjects, widthRatio, heightRatio, anchorX, anchorY);
 	}
 }

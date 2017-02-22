@@ -335,15 +335,38 @@ public class Actor extends ActorTemplate implements Owner {
 		super.draw1();
 
 		if (equippedWeapon != null) {
+
 			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX + ((int) Game.HALF_SQUARE_WIDTH - equippedWeapon.halfWidth));
+					+ drawOffsetX + anchorX - equippedWeapon.anchorX);
 			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY + ((int) Game.HALF_SQUARE_HEIGHT - equippedWeapon.halfHeight));
+					+ drawOffsetY + anchorY - equippedWeapon.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.equippedWeapon.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionXInPixels + equippedWeapon.width, weaponPositionYInPixels,
 					weaponPositionYInPixels + equippedWeapon.height);
+
+			// int weaponPositionXInPixels = (int)
+			// (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			// + drawOffsetX + ((int) Game.HALF_SQUARE_WIDTH -
+			// equippedWeapon.halfWidth));
+			// int weaponPositionYInPixels = (int)
+			// (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			// + drawOffsetY + ((int) Game.HALF_SQUARE_HEIGHT -
+			// equippedWeapon.halfHeight));
+			// float alpha = 1.0f;
+			// TextureUtils.drawTexture(this.equippedWeapon.imageTexture, alpha,
+			// weaponPositionXInPixels,
+			// weaponPositionXInPixels + equippedWeapon.width,
+			// weaponPositionYInPixels,
+			// weaponPositionYInPixels + equippedWeapon.height);
 		}
+
+		// draw anchor
+		QuadUtils.drawQuad(Color.WHITE,
+				this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX + anchorX - 5f,
+				this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX + anchorX + 5f,
+				this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY + anchorY - 5f,
+				this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY + anchorY + 5f);
 
 		// TextureUtils.skipNormals = false;
 
@@ -454,6 +477,7 @@ public class Actor extends ActorTemplate implements Owner {
 		equippedWeaponGUID = null;
 	}
 
+	@Override
 	public Actor makeCopy(Square square, Faction faction) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,

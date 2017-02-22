@@ -465,6 +465,8 @@ public class Editor {
 		Game.level.player = player;
 		player.inventory.add(Templates.getHatchet(null));
 		player.inventory.add(Templates.getHuntingBow(null));
+		player.anchorX = 80;
+		player.anchorY = 80;
 
 		// Add lead hunter
 		Actor hunterBrent = Templates.getHunter(Game.level.squares[5][8], Game.level.factions.get(1));
@@ -474,7 +476,6 @@ public class Editor {
 		hunterBrent.name = "Hunter Brent";
 
 		// Add hunters
-
 		Actor hunterBront1 = Templates.getHunter(Game.level.squares[3][7], Game.level.factions.get(1));
 		hunterBront1.inventory.add(Templates.getHatchet(null));
 		hunterBront1.inventory.add(Templates.getHuntingBow(null));
@@ -500,8 +501,8 @@ public class Editor {
 
 		Group hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
 
-		new Sign("Hunt Plan", 5, "sign.png", Game.level.squares[6][8], new Inventory(), true, false, false, true,
-				"Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast", 1, 1);
+		Sign huntingPlan = (Sign) Templates.getSign(Game.level.squares[6][8]);
+		huntingPlan.text = "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast";
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, null, new Inventory(), true, false, true, 1, 1,
