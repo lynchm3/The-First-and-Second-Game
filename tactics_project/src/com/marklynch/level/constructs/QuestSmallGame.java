@@ -373,10 +373,11 @@ public class QuestSmallGame extends Quest {
 		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
 
 		ConversationPart conversationPartTheresEquipment = new ConversationPart(
-				"There's spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready.",
+				new Object[] {
+						"There's spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready." },
 				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
 
-		ConversationPart conversationPartSuitYourself = new ConversationPart("Suit yourself.",
+		ConversationPart conversationPartSuitYourself = new ConversationPart(new Object[] { "Suit yourself." },
 				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
 
 		ConversationResponse conversationResponseNoThanks = new ConversationResponse("No thanks",
@@ -394,7 +395,7 @@ public class QuestSmallGame extends Quest {
 		};
 
 		ConversationPart conversationPartWantToComeHunting = new ConversationPart(
-				"We're just about to head out on the hunt, an extra man wouldn't go amiss.",
+				new Object[] { "We're just about to head out on the hunt, an extra man wouldn't go amiss." },
 				new ConversationResponse[] { conversationResponseYesPlease, conversationResponseNoThanks },
 				hunterPack.getLeader());
 
@@ -409,7 +410,8 @@ public class QuestSmallGame extends Quest {
 		// Anime style
 		// try it out
 		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null);
-		ConversationPart conversationPartImNotSpying = new ConversationPart("What? NO! I'm not spying! You're spying!",
+		ConversationPart conversationPartImNotSpying = new ConversationPart(
+				new Object[] { "What? NO! I'm not spying! You're spying!" },
 				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalist);
 		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying);
 	}
@@ -435,7 +437,7 @@ public class QuestSmallGame extends Quest {
 			}
 
 		};
-		ConversationPart conversationPartSaveTheWolf = new ConversationPart("Save the wolf!",
+		ConversationPart conversationPartSaveTheWolf = new ConversationPart(new Object[] { "Save the wolf!" },
 				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalist);
 		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf);
 
@@ -444,10 +446,11 @@ public class QuestSmallGame extends Quest {
 	public void setUpConversationJoinTheHunt() {
 		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
 
-		ConversationPart conversationAlrightLetsGo = new ConversationPart("Alright! Let's go bag us a some pelts!",
+		ConversationPart conversationAlrightLetsGo = new ConversationPart(
+				new Object[] { "Alright! Let's go bag us a some pelts!" },
 				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
 
-		ConversationPart conversationPartWellHurryOn = new ConversationPart("Well hurry on!",
+		ConversationPart conversationPartWellHurryOn = new ConversationPart(new Object[] { "Well hurry on!" },
 				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
 
 		ConversationResponse conversationResponseNotYet = new ConversationResponse("Not yet",
@@ -463,7 +466,7 @@ public class QuestSmallGame extends Quest {
 			}
 		};
 
-		ConversationPart conversationPartReadyToGo = new ConversationPart("Ready to go, pal?",
+		ConversationPart conversationPartReadyToGo = new ConversationPart(new Object[] { "Ready to go, pal?" },
 				new ConversationResponse[] { conversationResponseReady, conversationResponseNotYet },
 				hunterPack.getLeader());
 
@@ -475,8 +478,8 @@ public class QuestSmallGame extends Quest {
 		// Really like the "Now fuck off!" bit.
 		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
 		ConversationPart conversationPartOnlyHuntersGetLoot = new ConversationPart(
-				"Only hunters get loot. Now fuck off!", new ConversationResponse[] { conversationReponseEnd },
-				hunterPack.getLeader());
+				new Object[] { "Only hunters get loot. Now fuck off!" },
+				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
 		conversationHuntersOnlyHuntersGetLoot = new Conversation(conversationPartOnlyHuntersGetLoot);
 	}
 
