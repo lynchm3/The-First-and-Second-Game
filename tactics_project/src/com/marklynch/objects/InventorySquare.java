@@ -68,8 +68,8 @@ public class InventorySquare extends Square {
 	@Override
 	public void drawCursor() {
 
-		TextureUtils.drawTexture(Game.level.gameCursor.cursor, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
-				yInPixels + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.cursor, xInPixels, xInPixels + Game.HALF_SQUARE_WIDTH, yInPixels,
+				yInPixels + Game.HALF_SQUARE_HEIGHT);
 	}
 
 	@Override

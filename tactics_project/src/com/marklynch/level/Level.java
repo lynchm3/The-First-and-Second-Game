@@ -402,16 +402,6 @@ public class Level {
 			}
 		}
 
-		for (Inventory inventory : openInventories) {
-			inventory.drawStaticUI();
-		}
-
-		if (!popups.isEmpty()) {
-			for (Popup popup : popups) {
-				popup.draw();
-			}
-		}
-
 		// if (Game.buttonHoveringOver == null && Game.squareMouseIsOver !=
 		// null)
 		// Game.squareMouseIsOver.drawCursor();
@@ -452,6 +442,16 @@ public class Level {
 
 		// script
 		script.draw();
+
+		for (Inventory inventory : openInventories) {
+			inventory.drawStaticUI();
+		}
+
+		if (!popups.isEmpty()) {
+			for (Popup popup : popups) {
+				popup.draw();
+			}
+		}
 
 	}
 

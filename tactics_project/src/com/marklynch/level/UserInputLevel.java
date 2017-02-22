@@ -127,8 +127,10 @@ public class UserInputLevel {
 		Game.squareMouseIsOver = null;
 		if (Game.level.openInventories.size() > 0) {
 
-			Game.squareMouseIsOver = Game.level.openInventories.get(0).getInventorySquareMouseIsOver(mouseXinPixels,
-					mouseYinPixels);
+			InventorySquare inventorySquareMouseIsOver = Game.level.openInventories.get(0)
+					.getInventorySquareMouseIsOver(mouseXinPixels, mouseYinPixels);
+			Game.squareMouseIsOver = inventorySquareMouseIsOver;
+			Game.level.openInventories.get(0).setSquareMouseHoveringOver(inventorySquareMouseIsOver);
 
 		} else {
 			if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
