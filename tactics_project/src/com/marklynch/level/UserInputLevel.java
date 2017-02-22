@@ -7,6 +7,7 @@ import com.marklynch.Game;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.level.popup.PopupButton;
 import com.marklynch.level.popup.PopupSelectObject;
+import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
@@ -405,6 +406,8 @@ public class UserInputLevel {
 			Game.level.openInventories.clear();
 		} else {
 			Game.level.openInventories.add(Game.level.player.inventory);
+			Game.level.player.inventory.filter(Inventory.inventoryFilterBy);
+			Game.level.player.inventory.sort(Inventory.inventorySortBy);
 		}
 	}
 

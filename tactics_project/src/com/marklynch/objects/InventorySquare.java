@@ -24,8 +24,8 @@ public class InventorySquare extends Square {
 		this.showInventory = false;
 		this.inventoryThisBelongsTo = inventoryThisBelongsTo;
 
-		xInPixels = (int) inventoryThisBelongsTo.x + xInGrid * (int) Game.SQUARE_WIDTH;
-		yInPixels = (int) inventoryThisBelongsTo.y + yInGrid * (int) Game.SQUARE_HEIGHT;
+		xInPixels = Math.round(inventoryThisBelongsTo.x + xInGrid * Game.SQUARE_WIDTH);
+		yInPixels = Math.round(inventoryThisBelongsTo.y + yInGrid * Game.SQUARE_HEIGHT);
 	}
 
 	@Override
@@ -48,11 +48,11 @@ public class InventorySquare extends Square {
 
 		// square texture
 
-		TextureUtils.drawTexture(imageTexture, xInPixels, xInPixels + Game.HALF_SQUARE_WIDTH, yInPixels,
-				yInPixels + Game.HALF_SQUARE_HEIGHT);
+		TextureUtils.drawTexture(imageTexture, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
+				yInPixels + Game.SQUARE_HEIGHT);
 		if (gameObject != null) {
-			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, xInPixels + Game.HALF_SQUARE_WIDTH, yInPixels,
-					yInPixels + Game.HALF_SQUARE_HEIGHT);
+			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
+					yInPixels + Game.SQUARE_HEIGHT);
 		}
 
 	}
@@ -68,8 +68,8 @@ public class InventorySquare extends Square {
 	@Override
 	public void drawCursor() {
 
-		TextureUtils.drawTexture(Game.level.gameCursor.cursor, xInPixels, xInPixels + Game.HALF_SQUARE_WIDTH, yInPixels,
-				yInPixels + Game.HALF_SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.cursor, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
+				yInPixels + Game.SQUARE_HEIGHT);
 	}
 
 	@Override
