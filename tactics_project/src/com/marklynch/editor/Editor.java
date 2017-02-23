@@ -419,15 +419,19 @@ public class Editor {
 		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[4][2], new Inventory(), true,
 				false, false, true, 1, 1);
 
-		new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true, true, false, 1, 1);
+		Junk groundFur = new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true,
+				true, false, 1, 1);
+		groundFur.value = 10;
 		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[21][9], new
 		// Inventory(), false, true, true, false);
 		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[23][16], new
 		// Inventory(), false, true, true, false);
-		new Junk("Ground fur", 5, "fur.png", Game.level.squares[25][17], new Inventory(), false, true, true, false, 1,
-				1);
-		new Junk("Ground fur", 5, "fur.png", Game.level.squares[33][19], new Inventory(), false, true, true, false, 1,
-				1);
+		groundFur = new Junk("Ground fur", 5, "fur.png", Game.level.squares[25][17], new Inventory(), false, true, true,
+				false, 1, 1);
+		groundFur.value = 10;
+		groundFur = new Junk("Ground fur", 5, "fur.png", Game.level.squares[33][19], new Inventory(), false, true, true,
+				false, 1, 1);
+		groundFur.value = 10;
 
 		new Tree("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), true, false, false, true, 1f,
 				1.5f);

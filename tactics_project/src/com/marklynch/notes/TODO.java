@@ -2,6 +2,12 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// So... seeing this with the shopkeeper - he keeps switching between
+	// looting and shopkeeping. Need a new looting state, stay in that state
+	// until looted the thing, can't reach the thing or whatever
+
+	// Also... the shopkeeper is seeing loot through walls
+
 	// Could merge the different actors? a lot of them. They only diff is their
 	// AIRoutine :P
 

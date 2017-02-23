@@ -84,7 +84,7 @@ public class AIRoutineForTrader extends AIRoutine {
 
 		{
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SHOPKEEPING;
-			if (trader.getTextForSign() != null)
+			if (!trader.isPlayerInTheShop() && trader.getTextForSign() != null)
 				shopkeepState = SHOPKEEP_STATE.UPDATING_SIGN;
 			else {
 				// if not in building move in to the building

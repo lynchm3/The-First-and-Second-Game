@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Building;
@@ -30,6 +31,10 @@ public class Trader extends Actor implements Comparator<GameObject> {
 		this.shopSign = shopSign;
 
 		aiRoutine = new AIRoutineForTrader(this);
+	}
+
+	public boolean isPlayerInTheShop() {
+		return Game.level.player.squareGameObjectIsOn.building == shop;
 	}
 
 	public Object[] getTextForSign() {
