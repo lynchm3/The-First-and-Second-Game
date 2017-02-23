@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
@@ -728,6 +729,16 @@ public class AIRoutineUtils {
 
 	public static boolean inSameBuilding(Square square1, Square square2) {
 		return square1.building == square2.building;
+	}
+
+	public static Square getRandomSquareInBuilding(Building building) {
+		int randomX = (building.gridX1 + 1)
+				+ (int) Math.round((Math.random() * ((building.gridX2 - 1) - (building.gridX1 + 1))));
+		int randomY = (building.gridY1 + 1)
+				+ (int) Math.round((Math.random() * ((building.gridY2 - 1) - (building.gridY1 + 1))));
+
+		System.out.println("rX,rY = " + randomX + "," + randomY);
+		return Game.level.squares[randomX][randomY];
 	}
 
 }

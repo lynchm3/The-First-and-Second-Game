@@ -61,4 +61,8 @@ public class Sign extends GameObject {
 		conversation = new Conversation(conversationPartSaveTheWolf);
 	}
 
+	public Object[] getText() {
+		return text;
+	}
+
 }

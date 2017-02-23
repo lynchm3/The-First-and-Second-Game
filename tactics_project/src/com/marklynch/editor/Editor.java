@@ -507,6 +507,7 @@ public class Editor {
 
 		Sign huntingPlan = (Sign) Templates.getSign(Game.level.squares[6][8]);
 		huntingPlan.setText(new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
+		huntingPlan.name = "Hunt Action Plan";
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, null, new Inventory(), true, false, true, 1, 1,
@@ -538,6 +539,7 @@ public class Editor {
 
 		Sign joesShopSign = (Sign) Templates.getSign(Game.level.squares[4][4]);
 		joesShopSign.setText(new Object[] { joesShop.name });
+		joesShopSign.name = joesShop.name + " sign";
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1), 0, 0, joesShop,
 				joesShopSign);

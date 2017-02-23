@@ -1,14 +1,19 @@
 package com.marklynch.objects.units;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.objects.Bed;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Sign;
 
-public class Trader extends Actor {
+public class Trader extends Actor implements Comparator<GameObject> {
 
 	public Building shop;
 	public Sign shopSign;
@@ -28,7 +33,35 @@ public class Trader extends Actor {
 	}
 
 	public Object[] getTextForSign() {
-		return new Object[] { this.shop, " - FEATURED INVENTORY - ", this.inventory.get(0) };
+
+		ArrayList<GameObject> temp = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
+		Collections.sort(temp, this);
+		if (temp.size() == 0) {
+			if (shopSign.getText().length != 1) {
+				return new Object[] { this.shop };
+			} else {
+				return null;
+			}
+
+		} else if (temp.size() == 1) {
+			if (shopSign.getText().length != 3) {
+				return new Object[] { this.shop, " - FEATURED INVENTORY - ", temp.get(0) };
+			} else if (shopSign.getText()[2] != temp.get(0)) {
+				return new Object[] { this.shop, " - FEATURED INVENTORY - ", temp.get(0) };
+			} else {
+				return null;
+			}
+
+		} else {
+			if (shopSign.getText().length != 5) {
+				return new Object[] { this.shop, " - FEATURED INVENTORY - ", temp.get(0), " - ", temp.get(1) };
+			} else if (shopSign.getText()[2] != temp.get(0) || shopSign.getText()[4] != temp.get(1)) {
+				return new Object[] { this.shop, " - FEATURED INVENTORY - ", temp.get(0), " - ", temp.get(1) };
+			} else {
+				return null;
+			}
+
+		}
 	}
 
 	@Override
@@ -50,6 +83,11 @@ public class Trader extends Actor {
 				fitsInInventory, canContainOtherObjects, widthRatio, heightRatio, faction, anchorX, anchorY, shop,
 				shopSign);
 		return actor;
+	}
+
+	@Override
+	public int compare(GameObject gameObject1, GameObject gameObject2) {
+		return (int) (gameObject2.value - gameObject1.value);
 	}
 
 }
