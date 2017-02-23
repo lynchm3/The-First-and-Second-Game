@@ -476,16 +476,13 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	public void unselected() {
-		this.equippedWeapon = null;
-		equippedWeaponGUID = null;
-		this.showWeaponButtons = false;
 		Game.level.removeWalkingHighlight();
 		Game.level.removeWeaponsThatCanAttackHighlight();
 	}
 
 	public void weaponButtonClicked(Weapon weapon) {
 		this.equippedWeapon = weapon;
-		equippedWeaponGUID = null;
+		equippedWeaponGUID = this.equippedWeapon.guid;
 	}
 
 	@Override

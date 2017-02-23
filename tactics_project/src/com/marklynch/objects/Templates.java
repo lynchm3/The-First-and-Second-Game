@@ -14,8 +14,8 @@ public class Templates {
 			new Inventory(), true, false, true, 1, 1, null, 88, 54);
 
 	// Tools
-	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, 1f, 1f, 22,
-			15);
+	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, 1f, 1f, 59,
+			63);
 	public static final Weapon PICKAXE = new Weapon("Pickaxe", 3, 1, 1, "pickaxe.png", 100, null, true, false, 1f, 1f,
 			22, 15);
 	public static final Weapon HOE = new Weapon("Hoe", 2, 1, 1, "hoe.png", 100, null, true, false, 1f, 1f, 22, 15);

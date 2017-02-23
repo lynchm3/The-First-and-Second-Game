@@ -562,7 +562,8 @@ public class Level {
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		if (currentFactionMovingIndex == 0) {
 			Game.level.activeActor = player;
-			Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
+			// Game.level.activeActor.equippedWeapon =
+			// Game.level.activeActor.getWeaponsInInventory().get(0);
 			Actor.highlightSelectedCharactersSquares();
 		}
 

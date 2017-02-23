@@ -544,9 +544,11 @@ public class Editor {
 		Sign joesShopSign = (Sign) Templates.SIGN.makeCopy(Game.level.squares[4][4]);
 		joesShopSign.setText(new Object[] { joesShop.name });
 		joesShopSign.name = joesShop.name + " sign";
+		Weapon broom = (Weapon) Templates.BROOM.makeCopy(null);
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
-				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1), 0, 0, joesShop,
-				joesShopSign);
+				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1), 40, 96, joesShop,
+				joesShopSign, broom);
+		trader.inventory.add(broom);
 		trader.inventory.add(Templates.KATANA.makeCopy(null));
 		trader.inventory.add(Templates.HATCHET.makeCopy(null));
 		trader.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
