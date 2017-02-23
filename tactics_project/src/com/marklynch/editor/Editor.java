@@ -466,30 +466,30 @@ public class Editor {
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
 		// Add actor
-		Actor player = Templates.getOldLady(Game.level.squares[0][4], Game.level.factions.get(0));
+		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[0][4], Game.level.factions.get(0));
 		Game.level.player = player;
-		player.inventory.add(Templates.getKatana(null));
-		player.inventory.add(Templates.getHatchet(null));
-		player.inventory.add(Templates.getHuntingBow(null));
+		player.inventory.add(Templates.KATANA.makeCopy(null));
+		player.inventory.add(Templates.HATCHET.makeCopy(null));
+		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
 		player.anchorX = 80;
 		player.anchorY = 80;
 
 		// Add lead hunter
-		Actor hunterBrent = Templates.getHunter(Game.level.squares[5][8], Game.level.factions.get(1));
-		hunterBrent.inventory.add(Templates.getHuntingBow(null));
-		hunterBrent.bed = (Bed) Templates.getBed(Game.level.squares[10][9]);
+		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1));
+		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
+		hunterBrent.bed = (Bed) Templates.BED.makeCopy(Game.level.squares[10][9]);
 		hunterBrent.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		// Add hunters
-		Actor hunterBront1 = Templates.getHunter(Game.level.squares[3][7], Game.level.factions.get(1));
-		hunterBront1.inventory.add(Templates.getHuntingBow(null));
-		hunterBront1.bed = (Bed) Templates.getBed(Game.level.squares[9][9]);
+		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1));
+		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
+		hunterBront1.bed = (Bed) Templates.BED.makeCopy(Game.level.squares[9][9]);
 		hunterBront1.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
-		Actor hunterBront2 = Templates.getHunter(Game.level.squares[3][8], Game.level.factions.get(1));
-		hunterBront2.inventory.add(Templates.getHatchet(null));
+		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1));
+		hunterBront2.inventory.add(Templates.HATCHET.makeCopy(null));
 		hunterBront2.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
@@ -509,7 +509,7 @@ public class Editor {
 
 		Group hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
 
-		Sign huntingPlan = (Sign) Templates.getSign(Game.level.squares[6][8]);
+		Sign huntingPlan = (Sign) Templates.SIGN.makeCopy(Game.level.squares[6][8]);
 		huntingPlan.setText(new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
 		huntingPlan.name = "Hunt Action Plan";
 
@@ -536,21 +536,21 @@ public class Editor {
 		Group wolfPack = new Group("Wolf pack", wolfPackMembers, superWolf);
 
 		ArrayList<GameObject> weaponsBehindTheLodge = new ArrayList<GameObject>();
-		weaponsBehindTheLodge.add(Templates.getHatchet(Game.level.squares[12][9]));
-		weaponsBehindTheLodge.add(Templates.getHuntingBow(Game.level.squares[12][9]));
+		weaponsBehindTheLodge.add(Templates.HATCHET.makeCopy(Game.level.squares[12][9]));
+		weaponsBehindTheLodge.add(Templates.HUNTING_BOW.makeCopy(Game.level.squares[12][9]));
 		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null,
 				weaponsBehindTheLodge);
 
-		Sign joesShopSign = (Sign) Templates.getSign(Game.level.squares[4][4]);
+		Sign joesShopSign = (Sign) Templates.SIGN.makeCopy(Game.level.squares[4][4]);
 		joesShopSign.setText(new Object[] { joesShop.name });
 		joesShopSign.name = joesShop.name + " sign";
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1), 0, 0, joesShop,
 				joesShopSign);
-		trader.inventory.add(Templates.getKatana(null));
-		trader.inventory.add(Templates.getHatchet(null));
-		trader.inventory.add(Templates.getHuntingBow(null));
-		Templates.getShopCounter(Game.level.squares[7][1]);
+		trader.inventory.add(Templates.KATANA.makeCopy(null));
+		trader.inventory.add(Templates.HATCHET.makeCopy(null));
+		trader.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
+		Templates.SHOP_COUNTER.makeCopy(Game.level.squares[7][1]);
 
 		// Decorations
 		// Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");

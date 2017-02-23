@@ -2,6 +2,12 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Merge GameObjectTemplate w/ GameObject
+	// Merge WeaponTemplate w/ Weapon
+
+	// If the traders two most valuable objects are the same he'll put it up
+	// twice :/
+
 	// So... seeing this with the shopkeeper - he keeps switching between
 	// looting and shopkeeping. Need a new looting state, stay in that state
 	// until looted the thing, can't reach the thing or whatever
