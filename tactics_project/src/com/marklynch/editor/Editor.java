@@ -419,7 +419,7 @@ public class Editor {
 		ArrayList<CaveSection> shopSections = new ArrayList<CaveSection>();
 		shopSections.add(new CaveSection("Super Wolf's Den", 5, 0, 17, 5));
 		Cave joesShop = new Cave("Trader Joe's Shop", shopSections, shopAtriums, new ArrayList<CavePath>(),
-				shopFeatures);
+				shopFeatures, "building.png");
 		Game.level.structures.add(joesShop);
 
 		// Hunting lodge
@@ -428,7 +428,8 @@ public class Editor {
 		lodgeAtriums.add(new CaveAtrium("Super Wolf's Den", 8, 8, 10, 10));
 		ArrayList<CaveSection> lodgeSections = new ArrayList<CaveSection>();
 		lodgeSections.add(new CaveSection("Super Wolf's Den", 7, 7, 11, 11));
-		Cave lodge = new Cave("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<CavePath>(), lodgeFeatures);
+		Cave lodge = new Cave("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<CavePath>(), lodgeFeatures,
+				null);
 		Game.level.structures.add(lodge);
 
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
@@ -451,7 +452,8 @@ public class Editor {
 		ArrayList<CaveSection> caveSections = new ArrayList<CaveSection>();
 		caveSections.add(new CaveSection("Super Wolf's Den", 24, 12, 40, 19));
 		caveSections.add(new CaveSection("Super Wolf's Den", 41, 5, 49, 16));
-		Game.level.structures.add(new Cave("Super Wolf's Cave", caveSections, caveAtriums, cavePaths, caveFeatures));
+		Game.level.structures
+				.add(new Cave("Super Wolf's Cave", caveSections, caveAtriums, cavePaths, caveFeatures, null));
 
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )

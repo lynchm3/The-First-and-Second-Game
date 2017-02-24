@@ -8,19 +8,25 @@ import com.marklynch.level.constructs.Structure;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Wall;
+import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextureUtils;
+
+import mdesl.graphics.Texture;
 
 public class Cave extends Structure {
 
 	ArrayList<CaveSection> caveSections;
 	ArrayList<CaveAtrium> caveAtriums;
+	Texture imageTexture;
 
 	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<CaveAtrium> caveAtriums,
-			ArrayList<CavePath> paths, ArrayList<GameObject> features) {
+			ArrayList<CavePath> paths, ArrayList<GameObject> features, String imageTexturePath) {
 		super();
 
 		this.name = name;
 		this.caveSections = caveSections;
 		this.caveAtriums = caveAtriums;
+		this.imageTexture = ResourceUtils.getGlobalImage(imageTexturePath);
 		ArrayList<Square> noWallSquares = new ArrayList<Square>();
 		ArrayList<Square> wallSquares = new ArrayList<Square>();
 		ArrayList<Square> featureSquares = new ArrayList<Square>();
@@ -121,6 +127,28 @@ public class Cave extends Structure {
 			} else if (wall.connectedTop && wall.connectedLeft) {
 				wall.connectedTopLeft = true;
 			}
+		}
+
+	}
+
+	float roofAlpha = 1f;
+
+	@Override
+	public void draw2() {
+		if (imageTexture != null) {
+
+			if (Game.level.player.squareGameObjectIsOn.structureSquareIsIn == this) {
+				if (roofAlpha != 0f) {
+					roofAlpha -= 0.01f;
+					if (roofAlpha < 0f)
+						roofAlpha = 0f;
+				}
+			} else if (roofAlpha != 1f) {
+				roofAlpha += 0.01f;
+				if (roofAlpha > 1f)
+					roofAlpha = 1f;
+			}
+			TextureUtils.drawTexture(imageTexture, roofAlpha, 640, 640 + 1664, -32, -32 + 800);
 		}
 
 	}

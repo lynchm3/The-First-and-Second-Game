@@ -345,6 +345,10 @@ public class Level {
 			projectile.drawForeground();
 		}
 
+		for (Structure structure : structures) {
+			structure.draw2();
+		}
+
 	}
 
 	public void drawUI() {
