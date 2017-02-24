@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// building roof that fades out when u enter, just a big png :)
+
 	// Don't show certain objects, like rooves, in the action popup
 
 	// Merge GameObjectTemplate w/ GameObject

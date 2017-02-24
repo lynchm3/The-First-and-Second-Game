@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Structure;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Wall;
 
@@ -13,18 +14,30 @@ public class Cave extends Structure {
 	ArrayList<CaveSection> caveSections;
 	ArrayList<CaveAtrium> caveAtriums;
 
-	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<CaveAtrium> caveAtriums) {
+	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<CaveAtrium> caveAtriums,
+			ArrayList<CavePath> paths, ArrayList<GameObject> features) {
 		super();
 
 		this.name = name;
 		this.caveSections = caveSections;
 		this.caveAtriums = caveAtriums;
-		ArrayList<Square> emptySquares = new ArrayList<Square>();
+		ArrayList<Square> noWallSquares = new ArrayList<Square>();
+		ArrayList<Square> wallSquares = new ArrayList<Square>();
+		ArrayList<Square> featureSquares = new ArrayList<Square>();
+
+		for (GameObject feature : features) {
+			noWallSquares.add(feature.squareGameObjectIsOn);
+			featureSquares.add(feature.squareGameObjectIsOn);
+		}
+
+		for (CavePath path : paths) {
+			noWallSquares.addAll(path.squares);
+		}
 
 		for (CaveAtrium caveAtrium : caveAtriums) {
 			for (int i = caveAtrium.gridX1; i <= caveAtrium.gridX2; i++) {
 				for (int j = caveAtrium.gridY1; j <= caveAtrium.gridY2; j++) {
-					emptySquares.add(Game.level.squares[i][j]);
+					noWallSquares.add(Game.level.squares[i][j]);
 				}
 			}
 		}
@@ -33,10 +46,11 @@ public class Cave extends Structure {
 		for (CaveSection caveSection : caveSections) {
 			for (int i = caveSection.gridX1; i <= caveSection.gridX2; i++) {
 				for (int j = caveSection.gridY1; j <= caveSection.gridY2; j++) {
-					if (!emptySquares.contains(Game.level.squares[i][j])
+					if (!noWallSquares.contains(Game.level.squares[i][j])
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
 						wallsInCave.add(new Wall("Cave Wall", 1000, "wall.png", Game.level.squares[i][j],
 								new Inventory(), false, false, false, false, 1, 1));
+						wallSquares.add(Game.level.squares[i][j]);
 					}
 					Game.level.squares[i][j].structureSquareIsIn = this;
 					Game.level.squares[i][j].imageTexturePath = "stone.png";
@@ -48,9 +62,11 @@ public class Cave extends Structure {
 		// Do bits, each bit represents a possibility
 		for (Wall wall : wallsInCave) {
 			// Top
-			if (wall.squareGameObjectIsOn.yInGrid > 0
-					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid
-							- 1].inventory.contains(Wall.class)) {
+			if (wall.squareGameObjectIsOn.yInGrid > 0 && (wallSquares.contains(
+					Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid - 1])
+					|| featureSquares.contains(
+							Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid
+									- 1]))) {
 				wall.connectedTop = true;
 			}
 			// Right
