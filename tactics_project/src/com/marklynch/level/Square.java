@@ -8,12 +8,12 @@ import java.util.UUID;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Building;
+import com.marklynch.level.constructs.Structure;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionPickuUpAll;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionPickuUpAll;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -47,7 +47,7 @@ public class Square implements ActionableInWorld {
 
 	public transient static PathComparator pathComparator;
 
-	public transient Building building;
+	public transient Structure structureSquareIsIn;
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory) {
 		super();

@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Don't show certain objects, like rooves, in the action popup
+
 	// Merge GameObjectTemplate w/ GameObject
 	// Merge WeaponTemplate w/ Weapon
 

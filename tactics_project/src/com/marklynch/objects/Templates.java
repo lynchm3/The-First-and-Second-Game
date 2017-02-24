@@ -59,4 +59,9 @@ public class Templates {
 	public static final Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true,
 			false, 1, 1);
 
+	// NATURE
+	// BURROW
+	// TREE
+	//
+
 }

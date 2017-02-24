@@ -28,6 +28,15 @@ import mdesl.test.Util;
 
 public class Game {
 
+	public static float dragX = -3000;
+	public static float dragY = -1500;
+	public static float zoom = 0.25f;
+
+	// public static float windowWidth = 800;
+	// public static float windowHeight = 600;
+	public static float windowWidth = 1500;
+	public static float windowHeight = 900;
+
 	/** time at last frame */
 	static long lastFrame;
 
@@ -45,15 +54,10 @@ public class Game {
 	public static float HALF_SQUARE_WIDTH = SQUARE_WIDTH / 2f;
 	public static float HALF_SQUARE_HEIGHT = SQUARE_HEIGHT / 2f;
 
-	public static float windowWidth = 800;
-	public static float windowHeight = 600;
 	public static float halfWindowWidth = windowWidth / 2;
 	public static float halfWindowHeight = windowHeight / 2;
 
 	public static Square squareMouseIsOver;
-	public static float dragY = -100;
-	public static float dragX = 300;
-	public static float zoom = 0.5f;
 
 	public static int delta = 0;
 

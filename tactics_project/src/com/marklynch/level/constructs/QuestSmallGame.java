@@ -90,6 +90,10 @@ public class QuestSmallGame extends Quest {
 	// enviromentalist magic user? Sage? Forest Sage? Woodland sage? Sage is
 	// good, makes him sound benevolent and omniscient.
 
+	// Some sort of reaction from the wolves if u see them before accepting the
+	// hunt.Walk over and have a look at u? Nothing agressive. Maybe
+	// unintentionally intimidating?
+
 	// Quest text
 	final String OBJECTIVE_FOLLOW_THE_HUNTERS_TO_SUPERWOLF = "Follow the hunters to Superwolf";
 

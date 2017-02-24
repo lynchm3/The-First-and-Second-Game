@@ -51,8 +51,8 @@ public class AIRoutineUtils {
 			int y = (int) (Math.random() * Game.level.height);
 			randomSquare = Game.level.squares[x][y];
 			Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(randomSquare);
-			if ((!outdoors || outdoors && randomSquare.building == null) && currentActorPathToThisSquare != null
-					&& currentActorPathToThisSquare.travelCost < maxDistance
+			if ((!outdoors || outdoors && randomSquare.structureSquareIsIn == null)
+					&& currentActorPathToThisSquare != null && currentActorPathToThisSquare.travelCost < maxDistance
 					&& randomSquare.inventory.canShareSquare()) {
 				return randomSquare;
 			}
@@ -728,17 +728,19 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean inSameBuilding(Square square1, Square square2) {
-		return square1.building == square2.building;
+		return square1.structureSquareIsIn == square2.structureSquareIsIn;
 	}
 
 	public static Square getRandomSquareInBuilding(Building building) {
-		int randomX = (building.gridX1 + 1)
-				+ (int) Math.round((Math.random() * ((building.gridX2 - 1) - (building.gridX1 + 1))));
-		int randomY = (building.gridY1 + 1)
-				+ (int) Math.round((Math.random() * ((building.gridY2 - 1) - (building.gridY1 + 1))));
+		// int randomX = (building.gridX1 + 1)
+		// + (int) Math.round((Math.random() * ((building.gridX2 - 1) -
+		// (building.gridX1 + 1))));
+		// int randomY = (building.gridY1 + 1)
+		// + (int) Math.round((Math.random() * ((building.gridY2 - 1) -
+		// (building.gridY1 + 1))));
 
-		System.out.println("rX,rY = " + randomX + "," + randomY);
-		return Game.level.squares[randomX][randomY];
+		System.out.println("rX,rY = " + 0 + "," + 0);
+		return Game.level.squares[0][0];
 	}
 
 }

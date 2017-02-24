@@ -95,7 +95,7 @@ public class Group {
 				for (int i = 1; i <= maxDistanceFromLeader; i++) {
 					Vector<Square> squaresISquareAway = leader.getAllSquaresAtDistance(i);
 					for (Square square : squaresISquareAway) {
-						if (square.inventory.canShareSquare() && square.building == leader.squareGameObjectIsOn.building
+						if (square.inventory.canShareSquare() && square.structureSquareIsIn == leader.squareGameObjectIsOn.structureSquareIsIn
 								&& !targetSquares.contains(square)) {
 							possibleSquares.add(square);
 						}

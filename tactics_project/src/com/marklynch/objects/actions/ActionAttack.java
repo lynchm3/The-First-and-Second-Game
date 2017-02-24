@@ -81,7 +81,7 @@ public class ActionAttack extends Action {
 	@Override
 	public boolean check() {
 
-		if (attacker.squareGameObjectIsOn.building != target.squareGameObjectIsOn.building)
+		if (attacker.squareGameObjectIsOn.structureSquareIsIn != target.squareGameObjectIsOn.structureSquareIsIn)
 			return false;
 
 		if (!attacker.equippedWeapon.hasRange(attacker.straightLineDistanceTo(target.squareGameObjectIsOn)))

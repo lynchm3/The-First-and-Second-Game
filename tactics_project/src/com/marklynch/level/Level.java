@@ -9,8 +9,8 @@ import org.lwjgl.util.vector.Matrix4f;
 import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.Structure;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.objects.GameObject;
@@ -35,7 +35,7 @@ public class Level {
 	public int width;
 	public int height;
 	public Square[][] squares;
-	public ArrayList<Building> buildings;
+	public ArrayList<Structure> structures;
 	public Vector<Decoration> decorations;
 	public transient Script script;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
@@ -85,7 +85,7 @@ public class Level {
 		gameCursor = new GameCursor();
 		script = new Script();
 
-		buildings = new ArrayList<Building>();
+		structures = new ArrayList<Structure>();
 
 		factions = new ArrayList<Faction>();
 		inanimateObjectsOnGround = new Vector<GameObject>();
@@ -177,13 +177,13 @@ public class Level {
 
 		// buildings = new ArrayList<Building>();
 
-		for (Building building : buildings) {
-			for (int i = building.gridX1; i <= building.gridX2; i++) {
-				for (int j = building.gridY1; j <= building.gridY2; j++) {
-					squares[i][j].building = building;
-				}
-			}
-		}
+		// for (Structure building : structures) {
+		// for (int i = building.gridX1; i <= building.gridX2; i++) {
+		// for (int j = building.gridY1; j <= building.gridY2; j++) {
+		// squares[i][j].structureSquareIsIn = building;
+		// }
+		// }
+		// }
 
 		for (Faction faction : factions) {
 			faction.postLoad();

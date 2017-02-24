@@ -37,7 +37,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 	}
 
 	public boolean isPlayerInTheShop() {
-		return Game.level.player.squareGameObjectIsOn.building == shop;
+		return Game.level.player.squareGameObjectIsOn.structureSquareIsIn == shop;
 	}
 
 	public Object[] getTextForSign() {
