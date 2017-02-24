@@ -1,8 +1,9 @@
-package com.marklynch.level.constructs;
+package com.marklynch.level.constructs.building;
 
 import java.util.ArrayList;
 
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Structure;
 
 public class Building extends Structure {
 

@@ -7,8 +7,8 @@ import java.util.Comparator;
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.Square;
-import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.Structure;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
@@ -17,14 +17,14 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Trader extends Actor implements Comparator<GameObject> {
 
-	public Building shop;
+	public Structure shop;
 	public Sign shopSign;
 	public Weapon broom;
 
 	public Trader(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			float widthRatio, float heightRatio, Faction faction, float anchorX, float anchorY, Building shop,
+			float widthRatio, float heightRatio, Faction faction, float anchorX, float anchorY, Structure shop,
 			Sign shopSign, Weapon broom) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, bed, inventory, showInventory, fitsInInventory,

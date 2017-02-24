@@ -10,11 +10,16 @@ import com.marklynch.objects.Wall;
 
 public class Cave extends Structure {
 
-	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<CaveAtrium> caveAtriums,
-			ArrayList<Square> emptySquares) {
+	ArrayList<CaveSection> caveSections;
+	ArrayList<CaveAtrium> caveAtriums;
+
+	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<CaveAtrium> caveAtriums) {
 		super();
 
 		this.name = name;
+		this.caveSections = caveSections;
+		this.caveAtriums = caveAtriums;
+		ArrayList<Square> emptySquares = new ArrayList<Square>();
 
 		for (CaveAtrium caveAtrium : caveAtriums) {
 			for (int i = caveAtrium.gridX1; i <= caveAtrium.gridX2; i++) {
@@ -43,43 +48,61 @@ public class Cave extends Structure {
 		// Do bits, each bit represents a possibility
 		for (Wall wall : wallsInCave) {
 			// Top
-			if (Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid - 1].inventory
-					.contains(Wall.class)) {
+			if (wall.squareGameObjectIsOn.yInGrid > 0
+					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid
+							- 1].inventory.contains(Wall.class)) {
 				wall.connectedTop = true;
 			}
-			// Top Right
-			if (Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid
-					- 1].inventory.contains(Wall.class)) {
-				wall.connectedTopRight = true;
-			}
 			// Right
-			if (Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid].inventory
-					.contains(Wall.class)) {
+			if (wall.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1
+					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid
+							+ 1][wall.squareGameObjectIsOn.yInGrid].inventory.contains(Wall.class)) {
 				wall.connectedRight = true;
 			}
-			// Bottom Right
-			if (Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid
-					+ 1].inventory.contains(Wall.class)) {
-				wall.connectedBottomRight = true;
-			}
 			// Bottom
-			if (Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid + 1].inventory
-					.contains(Wall.class)) {
+			if (wall.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1
+					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid
+							+ 1].inventory.contains(Wall.class)) {
 				wall.connectedBottom = true;
 			}
-			// BOttom left
-			if (Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid
-					+ 1].inventory.contains(Wall.class)) {
-				wall.connectedBottomLeft = true;
-			}
 			// LEft
-			if (Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid].inventory
-					.contains(Wall.class)) {
+			if (wall.squareGameObjectIsOn.xInGrid > 0 && Game.level.squares[wall.squareGameObjectIsOn.xInGrid
+					- 1][wall.squareGameObjectIsOn.yInGrid].inventory.contains(Wall.class)) {
 				wall.connectedLeft = true;
 			}
+			// Top Right
+			if (wall.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1
+					&& wall.squareGameObjectIsOn.yInGrid > 0
+					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid
+							- 1].inventory.contains(Wall.class)) {
+				wall.connectedTopRight = true;
+			} else if (wall.connectedTop && wall.connectedRight) {
+				wall.connectedTopRight = true;
+			}
+			// Bottom Right
+			if (wall.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1
+					&& wall.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1
+					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid
+							+ 1].inventory.contains(Wall.class)) {
+				wall.connectedBottomRight = true;
+			} else if (wall.connectedBottom && wall.connectedRight) {
+				wall.connectedBottomRight = true;
+			}
+			// BOttom left
+			if (wall.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1
+					&& wall.squareGameObjectIsOn.xInGrid > 0
+					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid
+							+ 1].inventory.contains(Wall.class)) {
+				wall.connectedBottomLeft = true;
+			} else if (wall.connectedBottom && wall.connectedLeft) {
+				wall.connectedBottomLeft = true;
+			}
 			// Top left
-			if (Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid
-					- 1].inventory.contains(Wall.class)) {
+			if (wall.squareGameObjectIsOn.xInGrid > 0 && wall.squareGameObjectIsOn.yInGrid > 0
+					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid
+							- 1].inventory.contains(Wall.class)) {
+				wall.connectedTopLeft = true;
+			} else if (wall.connectedTop && wall.connectedLeft) {
 				wall.connectedTopLeft = true;
 			}
 		}

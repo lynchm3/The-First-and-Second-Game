@@ -26,11 +26,11 @@ import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.level.Level;
 import com.marklynch.level.Square;
-import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.QuestSmallGame;
+import com.marklynch.level.constructs.building.Building;
 import com.marklynch.level.constructs.cave.Cave;
 import com.marklynch.level.constructs.cave.CaveAtrium;
 import com.marklynch.level.constructs.cave.CaveSection;
@@ -408,7 +408,12 @@ public class Editor {
 		// Joe's shop
 		ArrayList<Square> doorLocations1 = new ArrayList<Square>();
 		doorLocations1.add(Game.level.squares[5][3]);
-		Building joesShop = new Building("Trader Joe's Shop", 5, 0, 11, 5, doorLocations1);
+
+		ArrayList<CaveAtrium> shopAtriums = new ArrayList<CaveAtrium>();
+		shopAtriums.add(new CaveAtrium("Super Wolf's Den", 6, 1, 10, 4));
+		ArrayList<CaveSection> shopSections = new ArrayList<CaveSection>();
+		shopSections.add(new CaveSection("Super Wolf's Den", 5, 0, 11, 5));
+		Cave joesShop = new Cave("Trader Joe's Shop", shopSections, shopAtriums);
 		Game.level.structures.add(joesShop);
 
 		// Hunting lodge
@@ -418,27 +423,30 @@ public class Editor {
 		Game.level.structures.add(new Building("Hunting Lodge", 7, 7, 11, 11, doorLocations2));
 
 		// Super wolf cave, this is part of the cub quest
-		ArrayList<Square> emptySquaresForSuperWolfsCave = new ArrayList<Square>();
-
-		// West entrance
-		emptySquaresForSuperWolfsCave.add(Game.level.squares[24][17]);
-		emptySquaresForSuperWolfsCave.add(Game.level.squares[25][17]);
-
-		// Wolfs den to middle
-		emptySquaresForSuperWolfsCave.add(Game.level.squares[38][14]);
-		emptySquaresForSuperWolfsCave.add(Game.level.squares[39][14]);
-		emptySquaresForSuperWolfsCave.add(Game.level.squares[40][14]);
-		emptySquaresForSuperWolfsCave.add(Game.level.squares[41][14]);
-		emptySquaresForSuperWolfsCave.add(Game.level.squares[42][14]);
+		// ArrayList<Square> emptySquaresForSuperWolfsCave = new
+		// ArrayList<Square>();
+		//
+		// // West entrance
+		// emptySquaresForSuperWolfsCave.add(Game.level.squares[24][17]);
+		// emptySquaresForSuperWolfsCave.add(Game.level.squares[25][17]);
+		//
+		// // Wolfs den path middle
+		// emptySquaresForSuperWolfsCave.add(Game.level.squares[38][14]);
+		// emptySquaresForSuperWolfsCave.add(Game.level.squares[39][14]);
+		// emptySquaresForSuperWolfsCave.add(Game.level.squares[40][14]);
+		// emptySquaresForSuperWolfsCave.add(Game.level.squares[41][14]);
+		// // emptySquaresForSuperWolfsCave.add(Game.level.squares[42][14]);
 
 		ArrayList<CaveAtrium> caveAtriums = new ArrayList<CaveAtrium>();
 		caveAtriums.add(new CaveAtrium("Super Wolf's Den", 26, 14, 37, 17));
 		caveAtriums.add(new CaveAtrium("Super Wolf's Den", 43, 7, 47, 14));
+		caveAtriums.add(new CaveAtrium("Super Wolf's Den", 24, 14, 27, 14));
+		caveAtriums.add(new CaveAtrium("Super Wolf's Den", 43, 7, 47, 14));
+		caveAtriums.add(new CaveAtrium("Super Wolf's Den", 38, 14, 41, 14));
 		ArrayList<CaveSection> caveSections = new ArrayList<CaveSection>();
-		caveSections.add(new CaveSection("Super Wolf's Den", 24, 12, 40, 18));
-		caveSections.add(new CaveSection("Super Wolf's Den", 41, 5, 48, 16));
-		Game.level.structures
-				.add(new Cave("Super Wolf's Cave", caveSections, caveAtriums, emptySquaresForSuperWolfsCave));
+		caveSections.add(new CaveSection("Super Wolf's Den", 24, 12, 40, 19));
+		caveSections.add(new CaveSection("Super Wolf's Den", 41, 5, 49, 16));
+		Game.level.structures.add(new Cave("Super Wolf's Cave", caveSections, caveAtriums));
 
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )

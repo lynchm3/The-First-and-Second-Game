@@ -5,8 +5,8 @@ import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
-import com.marklynch.level.constructs.Building;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.Structure;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionLootAll;
@@ -731,7 +731,7 @@ public class AIRoutineUtils {
 		return square1.structureSquareIsIn == square2.structureSquareIsIn;
 	}
 
-	public static Square getRandomSquareInBuilding(Building building) {
+	public static Square getRandomSquareInBuilding(Structure building) {
 		// int randomX = (building.gridX1 + 1)
 		// + (int) Math.round((Math.random() * ((building.gridX2 - 1) -
 		// (building.gridX1 + 1))));
