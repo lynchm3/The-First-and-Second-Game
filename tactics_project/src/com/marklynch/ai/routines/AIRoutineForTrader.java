@@ -96,11 +96,11 @@ public class AIRoutineForTrader extends AIRoutine {
 					if (trader.squareGameObjectIsOn == targetSquare || !targetSquare.reachableBySelectedCharater)
 						targetSquare = null;
 				} else if (trader.squareGameObjectIsOn.structureSquareIsIn != trader.shop) {
-					targetSquare = AIRoutineUtils.getRandomSquareInBuilding(trader.shop);
+					targetSquare = AIRoutineUtils.getRandomSquareInRoom(trader.room);
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				} else {
-					if (Math.random() < 0.5) {
-						targetSquare = AIRoutineUtils.getRandomSquareInBuilding(trader.shop);
+					if (Math.random() < 0.05) {
+						targetSquare = AIRoutineUtils.getRandomSquareInRoom(trader.room);
 						AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 
 					}

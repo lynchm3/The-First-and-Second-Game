@@ -2,6 +2,24 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Have a global random generator, replace calls to Math.random();
+
+	// Make sure to do Garbage Collection after (i.e. as part of, but at the
+	// end) saving and loading
+
+	// Building need to have entrance squares. They're on the outside BUT the
+	// match the floor of the building and when u step on them it hides the roof
+	// overlay
+
+	// House overlay in 2 parts - roof and wall. wall doesn't fade out, could
+	// make the bottom wall in the ouse take up 2 or 3 squares.
+	// Could also move the overlay up to where the wall starts on the bottom
+	// square, but i dunno
+
+	// square ourtside the door should be a doormat
+
+	// The trader is putting the brrom on his sign :/
+
 	// building roof that fades out when u enter, just a big png :)
 
 	// Don't show certain objects, like rooves, in the action popup

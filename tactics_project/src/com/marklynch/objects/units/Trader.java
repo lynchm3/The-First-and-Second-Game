@@ -9,6 +9,7 @@ import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Structure;
+import com.marklynch.level.constructs.cave.Room;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
@@ -17,6 +18,7 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Trader extends Actor implements Comparator<GameObject> {
 
+	public Room room;
 	public Structure shop;
 	public Sign shopSign;
 	public Weapon broom;
@@ -25,11 +27,12 @@ public class Trader extends Actor implements Comparator<GameObject> {
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			float widthRatio, float heightRatio, Faction faction, float anchorX, float anchorY, Structure shop,
-			Sign shopSign, Weapon broom) {
+			Room room, Sign shopSign, Weapon broom) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, widthRatio, heightRatio, faction, anchorX, anchorY);
 		this.shop = shop;
+		this.room = room;
 		this.shopSign = shopSign;
 
 		aiRoutine = new AIRoutineForTrader(this);
@@ -90,7 +93,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 
 		Trader actor = new Trader(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, null, inventory.makeCopy(), showInventory,
-				fitsInInventory, canContainOtherObjects, widthRatio, heightRatio, faction, anchorX, anchorY, shop,
+				fitsInInventory, canContainOtherObjects, widthRatio, heightRatio, faction, anchorX, anchorY, shop, room,
 				shopSign, broom);
 		return actor;
 	}

@@ -1,12 +1,14 @@
 package com.marklynch.ai.utils;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Structure;
+import com.marklynch.level.constructs.cave.Room;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionLootAll;
@@ -732,15 +734,25 @@ public class AIRoutineUtils {
 	}
 
 	public static Square getRandomSquareInBuilding(Structure building) {
-		// int randomX = (building.gridX1 + 1)
-		// + (int) Math.round((Math.random() * ((building.gridX2 - 1) -
-		// (building.gridX1 + 1))));
-		// int randomY = (building.gridY1 + 1)
-		// + (int) Math.round((Math.random() * ((building.gridY2 - 1) -
-		// (building.gridY1 + 1))));
 
-		System.out.println("rX,rY = " + 0 + "," + 0);
-		return Game.level.squares[0][0];
+		ArrayList<Square> randomSquares = new ArrayList<Square>();
+		for (Room room : building.rooms) {
+
+			int randomX = (room.gridX1 + 1)
+					+ (int) Math.round((Math.random() * ((room.gridX2 - 1) - (room.gridX1 + 1))));
+			int randomY = (room.gridY1 + 1)
+					+ (int) Math.round((Math.random() * ((room.gridY2 - 1) - (room.gridY1 + 1))));
+			randomSquares.add(Game.level.squares[randomX][randomY]);
+		}
+
+		Random random = new Random();
+		return randomSquares.get(random.nextInt(randomSquares.size()));
+	}
+
+	public static Square getRandomSquareInRoom(Room room) {
+		int randomX = (room.gridX1 + 1) + (int) Math.round((Math.random() * ((room.gridX2 - 1) - (room.gridX1 + 1))));
+		int randomY = (room.gridY1 + 1) + (int) Math.round((Math.random() * ((room.gridY2 - 1) - (room.gridY1 + 1))));
+		return Game.level.squares[randomX][randomY];
 	}
 
 }

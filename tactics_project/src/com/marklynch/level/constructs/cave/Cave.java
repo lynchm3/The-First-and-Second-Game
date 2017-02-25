@@ -16,43 +16,56 @@ import mdesl.graphics.Texture;
 public class Cave extends Structure {
 
 	ArrayList<CaveSection> caveSections;
-	ArrayList<CaveAtrium> caveAtriums;
+	ArrayList<Square> entranceSquares;
 	Texture imageTexture;
 
-	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<CaveAtrium> caveAtriums,
-			ArrayList<CavePath> paths, ArrayList<GameObject> features, String imageTexturePath) {
+	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<Room> rooms, ArrayList<CavePath> paths,
+			ArrayList<GameObject> features, ArrayList<Square> entrances, String imageTexturePath) {
 		super();
 
 		this.name = name;
 		this.caveSections = caveSections;
-		this.caveAtriums = caveAtriums;
+		this.rooms = rooms;
 		this.imageTexture = ResourceUtils.getGlobalImage(imageTexturePath);
-		ArrayList<Square> noWallSquares = new ArrayList<Square>();
+		this.entranceSquares = entrances;
+		ArrayList<Square> floorSquares = new ArrayList<Square>();
 		ArrayList<Square> wallSquares = new ArrayList<Square>();
 		ArrayList<Square> featureSquares = new ArrayList<Square>();
 
+		// Entrance squares
+		for (Square entranceSquare : entranceSquares) {
+			entranceSquare.imageTexturePath = "stone.png";
+			entranceSquare.loadImages();
+		}
+
+		// Feature squares
 		for (GameObject feature : features) {
-			noWallSquares.add(feature.squareGameObjectIsOn);
+			floorSquares.add(feature.squareGameObjectIsOn);
 			featureSquares.add(feature.squareGameObjectIsOn);
 		}
 
+		// Floor squares
 		for (CavePath path : paths) {
-			noWallSquares.addAll(path.squares);
+			floorSquares.addAll(path.squares);
 		}
 
-		for (CaveAtrium caveAtrium : caveAtriums) {
+		// Entrance Squares
+
+		// Floor squares
+		for (Room caveAtrium : rooms) {
 			for (int i = caveAtrium.gridX1; i <= caveAtrium.gridX2; i++) {
 				for (int j = caveAtrium.gridY1; j <= caveAtrium.gridY2; j++) {
-					noWallSquares.add(Game.level.squares[i][j]);
+					floorSquares.add(Game.level.squares[i][j]);
 				}
 			}
 		}
 
+		// Walls
 		ArrayList<Wall> wallsInCave = new ArrayList<Wall>();
 		for (CaveSection caveSection : caveSections) {
 			for (int i = caveSection.gridX1; i <= caveSection.gridX2; i++) {
 				for (int j = caveSection.gridY1; j <= caveSection.gridY2; j++) {
-					if (!noWallSquares.contains(Game.level.squares[i][j])
+					if (!floorSquares.contains(Game.level.squares[i][j])
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
 						wallsInCave.add(new Wall("Cave Wall", 1000, "wall.png", Game.level.squares[i][j],
 								new Inventory(), false, false, false, false, 1, 1));
@@ -137,7 +150,8 @@ public class Cave extends Structure {
 	public void draw2() {
 		if (imageTexture != null) {
 
-			if (Game.level.player.squareGameObjectIsOn.structureSquareIsIn == this) {
+			if (Game.level.player.squareGameObjectIsOn.structureSquareIsIn == this
+					|| entranceSquares.contains(Game.level.player.squareGameObjectIsOn)) {
 				if (roofAlpha != 0f) {
 					roofAlpha -= 0.01f;
 					if (roofAlpha < 0f)

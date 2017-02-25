@@ -3,6 +3,7 @@ package com.marklynch.editor;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.lwjgl.input.Mouse;
 
@@ -31,9 +32,9 @@ import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.QuestSmallGame;
 import com.marklynch.level.constructs.cave.Cave;
-import com.marklynch.level.constructs.cave.CaveAtrium;
 import com.marklynch.level.constructs.cave.CavePath;
 import com.marklynch.level.constructs.cave.CaveSection;
+import com.marklynch.level.constructs.cave.Room;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -407,29 +408,34 @@ public class Editor {
 	public void generateTestObjects() {
 
 		// Joe's shop
+		ArrayList<Square> entranceSquares = new ArrayList<Square>(
+				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
+
 		ArrayList<GameObject> shopFeatures = new ArrayList<GameObject>();
 		shopFeatures.add(new Door("Wooden Door", 100, "door.png", Game.level.squares[5][4], new Inventory(), false,
 				true, false, false, 1, 1));
 		shopFeatures.add(new Door("Wooden Door", 100, "door.png", Game.level.squares[11][4], new Inventory(), false,
 				true, false, false, 1, 1));
+		Game.level.squares[4][4].imageTexturePath = "stone.png";
+		Game.level.squares[4][4].loadImages();
 
-		ArrayList<CaveAtrium> shopAtriums = new ArrayList<CaveAtrium>();
-		shopAtriums.add(new CaveAtrium("Super Wolf's Den", 6, 1, 10, 4));
-		shopAtriums.add(new CaveAtrium("Super Wolf's Den", 12, 1, 16, 4));
+		ArrayList<Room> shopAtriums = new ArrayList<Room>();
+		shopAtriums.add(new Room("Super Wolf's Den", 6, 1, 10, 4));
+		shopAtriums.add(new Room("Super Wolf's Den", 12, 1, 16, 4));
 		ArrayList<CaveSection> shopSections = new ArrayList<CaveSection>();
 		shopSections.add(new CaveSection("Super Wolf's Den", 5, 0, 17, 5));
 		Cave joesShop = new Cave("Trader Joe's Shop", shopSections, shopAtriums, new ArrayList<CavePath>(),
-				shopFeatures, "building.png");
+				shopFeatures, entranceSquares, "building.png");
 		Game.level.structures.add(joesShop);
 
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
-		ArrayList<CaveAtrium> lodgeAtriums = new ArrayList<CaveAtrium>();
-		lodgeAtriums.add(new CaveAtrium("Super Wolf's Den", 8, 8, 10, 10));
+		ArrayList<Room> lodgeAtriums = new ArrayList<Room>();
+		lodgeAtriums.add(new Room("Super Wolf's Den", 8, 8, 10, 10));
 		ArrayList<CaveSection> lodgeSections = new ArrayList<CaveSection>();
 		lodgeSections.add(new CaveSection("Super Wolf's Den", 7, 7, 11, 11));
 		Cave lodge = new Cave("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<CavePath>(), lodgeFeatures,
-				null);
+				new ArrayList<Square>(), null);
 		Game.level.structures.add(lodge);
 
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
@@ -446,14 +452,14 @@ public class Editor {
 		cavePathSquares.add(Game.level.squares[25][14]);
 		cavePaths.add(new CavePath("Path", cavePathSquares));
 
-		ArrayList<CaveAtrium> caveAtriums = new ArrayList<CaveAtrium>();
-		caveAtriums.add(new CaveAtrium("Super Wolf's Den", 25, 13, 37, 18));
-		caveAtriums.add(new CaveAtrium("Super Wolf's Den", 43, 7, 47, 14));
+		ArrayList<Room> caveAtriums = new ArrayList<Room>();
+		caveAtriums.add(new Room("Super Wolf's Den", 25, 13, 37, 18));
+		caveAtriums.add(new Room("Super Wolf's Den", 43, 7, 47, 14));
 		ArrayList<CaveSection> caveSections = new ArrayList<CaveSection>();
 		caveSections.add(new CaveSection("Super Wolf's Den", 24, 12, 40, 19));
 		caveSections.add(new CaveSection("Super Wolf's Den", 41, 5, 49, 16));
-		Game.level.structures
-				.add(new Cave("Super Wolf's Cave", caveSections, caveAtriums, cavePaths, caveFeatures, null));
+		Game.level.structures.add(new Cave("Super Wolf's Cave", caveSections, caveAtriums, cavePaths, caveFeatures,
+				new ArrayList<Square>(), null));
 
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )
@@ -587,7 +593,7 @@ public class Editor {
 		Weapon broom = (Weapon) Templates.BROOM.makeCopy(null);
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1), 40, 96, joesShop,
-				joesShopSign, broom);
+				shopAtriums.get(0), joesShopSign, broom);
 		trader.inventory.add(broom);
 		trader.inventory.add(Templates.KATANA.makeCopy(null));
 		trader.inventory.add(Templates.HATCHET.makeCopy(null));
