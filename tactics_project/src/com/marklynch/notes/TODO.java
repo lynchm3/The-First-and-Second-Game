@@ -2,6 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Do sight and windows i think
+
+	// Maybe put in logic so that guards/shop keepers etc wont stand beside
+	// fecking doors (the more static AIs).
+
+	// Trader is writing sign twice :P
+
 	// Have a global random generator, replace calls to Math.random();
 
 	// Make sure to do Garbage Collection after (i.e. as part of, but at the

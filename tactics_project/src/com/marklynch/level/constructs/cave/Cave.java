@@ -18,15 +18,21 @@ public class Cave extends Structure {
 	ArrayList<CaveSection> caveSections;
 	ArrayList<Square> entranceSquares;
 	Texture imageTexture;
+	float overlayX1, overlayX2, overlayY1, overlayY2;
 
 	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<Room> rooms, ArrayList<CavePath> paths,
-			ArrayList<GameObject> features, ArrayList<Square> entrances, String imageTexturePath) {
+			ArrayList<GameObject> features, ArrayList<Square> entrances, String imageTexturePath, float overlayX1,
+			float overlayX2, float overlayY1, float overlayY2) {
 		super();
 
 		this.name = name;
 		this.caveSections = caveSections;
 		this.rooms = rooms;
 		this.imageTexture = ResourceUtils.getGlobalImage(imageTexturePath);
+		this.overlayX1 = overlayX1;
+		this.overlayY1 = overlayY1;
+		this.overlayX2 = overlayX2;
+		this.overlayY2 = overlayY2;
 		this.entranceSquares = entrances;
 		ArrayList<Square> floorSquares = new ArrayList<Square>();
 		ArrayList<Square> wallSquares = new ArrayList<Square>();
@@ -162,7 +168,8 @@ public class Cave extends Structure {
 				if (roofAlpha > 1f)
 					roofAlpha = 1f;
 			}
-			TextureUtils.drawTexture(imageTexture, roofAlpha, 640, 640 + 1664, -32, -32 + 800);
+			TextureUtils.drawTexture(imageTexture, roofAlpha, this.overlayX1, this.overlayX2, this.overlayY1,
+					this.overlayY2);
 		}
 
 	}
