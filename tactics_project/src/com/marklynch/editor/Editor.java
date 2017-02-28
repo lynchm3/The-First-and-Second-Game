@@ -559,19 +559,19 @@ public class Editor {
 		huntingPlan.name = "Hunt Action Plan";
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
-				"environmentalist.png", Game.level.squares[7][12], 1, null, new Inventory(), true, false, true, 1, 1,
-				Game.level.factions.get(1), 0, 0);
+				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,
+				false, 1, 1, Game.level.factions.get(1), 0, 0);
 
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
-				Game.level.squares[22][16], 1, null, new Inventory(), true, false, true, 1, 1,
+				Game.level.squares[22][16], 1, 10, null, new Inventory(), true, false, true, false, 1, 1,
 				Game.level.factions.get(2), 0, 0);
 
 		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
-				Game.level.squares[20][15], 1, null, new Inventory(), true, false, true, 1, 1,
+				Game.level.squares[20][15], 1, 10, null, new Inventory(), true, false, true, false, 1, 1,
 				Game.level.factions.get(2), 0, 0);
 
 		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
-				Game.level.squares[20][17], 1, null, new Inventory(), true, false, true, 1, 1,
+				Game.level.squares[20][17], 1, 10, null, new Inventory(), true, false, true, false, 1, 1,
 				Game.level.factions.get(2), 0, 0);
 
 		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
@@ -591,8 +591,8 @@ public class Editor {
 		joesShopSign.name = joesShop.name + " sign";
 		Weapon broom = (Weapon) Templates.BROOM.makeCopy(null);
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
-				1, null, new Inventory(), true, false, true, 1, 1, Game.level.factions.get(1), 40, 96, joesShop,
-				shopAtriums.get(0), joesShopSign, broom);
+				1, 10, null, new Inventory(), true, false, true, false, 1, 1, Game.level.factions.get(1), 40, 96,
+				joesShop, shopAtriums.get(0), joesShopSign, broom);
 		trader.inventory.add(broom);
 		trader.inventory.add(Templates.KATANA.makeCopy(null));
 		trader.inventory.add(Templates.HATCHET.makeCopy(null));

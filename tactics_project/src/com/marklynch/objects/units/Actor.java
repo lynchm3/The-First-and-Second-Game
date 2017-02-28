@@ -342,7 +342,7 @@ public class Actor extends ActorTemplate implements Owner {
 		if (Game.level.squares[x][y] == squareGameObjectIsOn)
 			return false;
 
-		return !Game.level.squares[x][y].inventory.blocksLineOfSight();
+		return Game.level.squares[x][y].inventory.blocksLineOfSight();
 	}
 
 	public boolean hasRange(int weaponDistance) {
