@@ -38,6 +38,9 @@ public class Bed extends GameObject {
 
 		super.draw2();
 
+		if (this.squareGameObjectIsOn.visibleToPlayer == false)
+			return;
+
 		// Draw bed covers
 		if (squareGameObjectIsOn != null) {
 			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;

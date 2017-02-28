@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.Vector;
 
+import org.lwjgl.util.Point;
 import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
@@ -145,6 +146,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public void draw1() {
 
+		if (this.squareGameObjectIsOn.visibleToPlayer == false)
+			return;
+
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
@@ -258,6 +262,54 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		}
 		return squares;
+	}
+
+	public ArrayList<Point> getAllCoordinatesAtDistance(int distance) {
+		ArrayList<Point> coordinates = new ArrayList<Point>();
+		if (distance == 0) {
+			coordinates.add(new Point(this.squareGameObjectIsOn.xInGrid, this.squareGameObjectIsOn.yInGrid));
+			return coordinates;
+		}
+
+		boolean xGoingUp = true;
+		boolean yGoingUp = true;
+		for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+			coordinates.add(new Point(this.squareGameObjectIsOn.xInGrid + x, this.squareGameObjectIsOn.yInGrid + y));
+
+			if (xGoingUp) {
+				if (x == distance) {
+					xGoingUp = false;
+					x--;
+				} else {
+					x++;
+				}
+			} else {
+				if (x == -distance) {
+					xGoingUp = true;
+					x++;
+				} else {
+					x--;
+				}
+			}
+
+			if (yGoingUp) {
+				if (y == distance) {
+					yGoingUp = false;
+					y--;
+				} else {
+					y++;
+				}
+			} else {
+				if (y == -distance) {
+					yGoingUp = true;
+					y++;
+				} else {
+					y--;
+				}
+			}
+
+		}
+		return coordinates;
 	}
 
 	public void showPow(GameObject target) {

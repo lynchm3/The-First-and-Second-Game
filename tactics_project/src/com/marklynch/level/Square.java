@@ -17,9 +17,10 @@ import com.marklynch.objects.actions.ActionPickuUpAll;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
-import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextureUtils;
 
+import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Square implements ActionableInWorld {
@@ -35,6 +36,9 @@ public class Square implements ActionableInWorld {
 	public boolean showInventory;
 
 	public transient boolean reachableBySelectedCharater = false;
+	public transient boolean visibleToSelectedCharacter = false;
+	public transient boolean visibleToPlayer = false;
+	public transient boolean seenByPlayer = false;
 	public transient boolean inPath = false;
 	public transient Vector<Weapon> weaponsThatCanAttack;
 
@@ -83,6 +87,12 @@ public class Square implements ActionableInWorld {
 
 	public void draw() {
 
+		// if (!this.visibleToPlayer)
+		// return;
+
+		if (!this.seenByPlayer)
+			return;
+
 		// square texture
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
@@ -91,6 +101,10 @@ public class Square implements ActionableInWorld {
 		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 		TextureUtils.drawTexture(imageTexture, squarePositionX, squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
 				squarePositionY + Game.SQUARE_HEIGHT);
+
+		if (!this.visibleToPlayer)
+			QuadUtils.drawQuad(new Color(0.5f, 0.5f, 0.5f, 0.75f), squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
+					squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
 		// square highlights
 
@@ -121,14 +135,18 @@ public class Square implements ActionableInWorld {
 		// }
 
 		// if (this.reachableBySelectedCharater) {
-		int costTextWidth = Game.font.getWidth("" + walkingDistanceToSquare);
-		float costPositionX = squarePositionX + (Game.SQUARE_WIDTH - costTextWidth) / 2f;
-		float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) / 2f;
+		// int costTextWidth = Game.font.getWidth("" + walkingDistanceToSquare);
+		// float costPositionX = squarePositionX + (Game.SQUARE_WIDTH -
+		// costTextWidth) / 2f;
+		// float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) /
+		// 2f;
 
-		if (walkingDistanceToSquare != Integer.MAX_VALUE && Game.level.activeActor != null) {
-			TextUtils.printTextWithImages(new Object[] { "" + walkingDistanceToSquare }, costPositionX, costPositionY,
-					Integer.MAX_VALUE, true);
-		}
+		// if (walkingDistanceToSquare != Integer.MAX_VALUE &&
+		// Game.level.activeActor != null) {
+		// TextUtils.printTextWithImages(new Object[] { "" +
+		// walkingDistanceToSquare }, costPositionX, costPositionY,
+		// Integer.MAX_VALUE, true);
+		// }
 		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
 
 		// }

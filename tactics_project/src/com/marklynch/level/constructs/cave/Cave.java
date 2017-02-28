@@ -154,6 +154,9 @@ public class Cave extends Structure {
 
 	@Override
 	public void draw2() {
+		if (!seenByPlayer)
+			return;
+
 		if (imageTexture != null) {
 
 			if (Game.level.player.squareGameObjectIsOn.structureSquareIsIn == this

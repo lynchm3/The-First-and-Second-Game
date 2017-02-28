@@ -3,6 +3,7 @@ package com.marklynch.objects.units;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -83,6 +84,10 @@ public class Actor extends ActorTemplate implements Owner {
 	public int swapCooldown = 0;
 
 	protected transient int highestPathCostSeen = 0;
+
+	public ArrayList<Square> squaresVisibleToThisCharacter = new ArrayList<Square>();
+
+	public int sight = 10;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
@@ -212,10 +217,132 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 	}
 
-	public static void highlightSelectedCharactersSquares() {
+	public static void calculateReachableSquares() {
 		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 		Game.level.activeActor.calculateReachableSquares(Game.level.squares);
 		Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
+	}
+
+	public void calculateVisibleSquares() {
+
+		// Clear squares from last time
+		squaresVisibleToThisCharacter.clear();
+
+		for (Square square : Game.level.squaresVisibleToSelectedCharacter) {
+			square.visibleToSelectedCharacter = false;
+			if (this == Game.level.player) {
+				square.visibleToPlayer = false;
+			}
+		}
+
+		Game.level.squaresVisibleToSelectedCharacter.clear();
+
+		double lightLineCount = 8d;// Math.pow(4d, sight);
+		double angleIncrement = 360d / lightLineCount;
+		double x1 = this.squareGameObjectIsOn.xInGrid + 0.5d;
+		double y1 = this.squareGameObjectIsOn.yInGrid + 0.5d;
+		// for (double angle = 0; angle < 360; angle += angleIncrement) {
+		//
+		// double slope = Math.tan(Math.toRadians(angle));
+
+		// for (int i = sight; i > 0; i--) {
+		Vector<Square> furthestVisibleSquares = this.getAllSquaresAtDistance(sight);
+		ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistance(sight);
+		for (Point point : furthestVisiblePoints) {
+			// x2 = square.xInGrid;
+			// if (!square.visibleToPlayer)
+			markVisibleSquaresInLineToo(x1, y1, point.getX() + 0.5d, point.getY() + 0.5d);
+			// markVisibleSquaresInLineToo(x1, y1, square.xInGrid + 0.5d,
+			// square.yInGrid + 0.5d);
+
+		}
+		// }
+	}
+
+	// SUPERCOVER algorithm
+	public void markVisibleSquaresInLineToo(double x0, double y0, double x1, double y1) {
+		double vx = x1 - x0;
+		double vy = y1 - y0;
+		double dx = Math.sqrt(1 + Math.pow((vy / vx), 2));
+		double dy = Math.sqrt(1 + Math.pow((vx / vy), 2));
+		double ix = Math.floor(x0);
+		double iy = Math.floor(y0);
+		double sx, ex;
+
+		if (vx < 0) {
+			sx = -1;
+			ex = (x0 - ix) * dx;
+		} else {
+			sx = 1;
+			ex = (ix + 1 - x0) * dx;
+		}
+
+		double sy, ey;
+		if (vy < 0) {
+			sy = -1;
+			ey = (y0 - iy) * dy;
+		} else {
+			sy = 1;
+			ey = (iy + 1 - y0) * dy;
+		}
+
+		boolean done = false;
+		double len = Math.sqrt(vx * vx + vy * vy);
+
+		while (done == false) {
+			if (Math.min(ex, ey) <= len) {
+				double rx = ix;
+				double ry = iy;
+				if (ex < ey) {
+					ex = ex + dx;
+					ix = ix + sx;
+				} else {
+					ey = ey + dy;
+					iy = iy + sy;
+				}
+				done = markSquareAsVisibleToActiveCharacter((int) rx, (int) ry);
+			} else if (!done) {
+				done = true;
+				markSquareAsVisibleToActiveCharacter((int) ix, (int) iy);
+			}
+		}
+
+	}
+
+	public boolean markSquareAsVisibleToActiveCharacter(int x, int y) {
+
+		if (x < 0)
+			return true;
+		if (y < 0)
+			return true;
+		if (x >= Game.level.squares.length)
+			return true;
+		if (y >= Game.level.squares[0].length)
+			return true;
+
+		Game.level.squares[x][y].visibleToSelectedCharacter = true;
+		squaresVisibleToThisCharacter.add(Game.level.squares[x][y]);
+		Game.level.squaresVisibleToSelectedCharacter.add(Game.level.squares[x][y]);
+		if (this == Game.level.player) {
+			Game.level.squares[x][y].visibleToPlayer = true;
+			Game.level.squares[x][y].seenByPlayer = true;
+			// Seen Building
+			if (Game.level.squares[x][y].structureSquareIsIn != null) {
+				if (Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
+					Game.level.squares[x][y].structureSquareIsIn.seenByPlayer = true;
+					// for (Square square :
+					// Game.level.squares[i][j].structureSquareIsIn.squares)
+					// {
+					// square.seenByPlayer = true;
+					// }
+				}
+			}
+		}
+
+		if (Game.level.squares[x][y] == squareGameObjectIsOn)
+			return false;
+
+		return !Game.level.squares[x][y].inventory.canShareSquare();
 	}
 
 	public boolean hasRange(int weaponDistance) {
@@ -303,6 +430,9 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void draw1() {
+
+		if (this.squareGameObjectIsOn.visibleToPlayer == false)
+			return;
 
 		if (this.remainingHealth <= 0)
 			return;
@@ -420,6 +550,9 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public void draw2() {
 
+		if (this.squareGameObjectIsOn.visibleToPlayer == false)
+			return;
+
 		if (this.remainingHealth <= 0)
 			return;
 
@@ -441,11 +574,17 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void drawUI() {
+
+		if (this.squareGameObjectIsOn.visibleToPlayer == false)
+			return;
 		super.drawUI();
 	}
 
 	@Override
 	public void drawStaticUI() {
+
+		if (this.squareGameObjectIsOn.visibleToPlayer == false)
+			return;
 
 	}
 

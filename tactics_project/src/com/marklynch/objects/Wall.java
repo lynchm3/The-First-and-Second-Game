@@ -52,6 +52,9 @@ public class Wall extends GameObject {
 	@Override
 	public void draw1() {
 
+		if (!this.squareGameObjectIsOn.seenByPlayer)
+			return;
+
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH

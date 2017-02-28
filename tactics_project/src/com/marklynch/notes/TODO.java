@@ -2,7 +2,14 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// need flag for blockLineOfSight
+
+	// For AIs more than X squares away, use quicker version of path finding,
+	// vision calc, etc...
+
 	// Do sight and windows i think
+
+	// Need to run calculateVisibleSquares on all characters on startup/load
 
 	// Maybe put in logic so that guards/shop keepers etc wont stand beside
 	// fecking doors (the more static AIs).

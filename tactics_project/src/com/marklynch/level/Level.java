@@ -69,6 +69,7 @@ public class Level {
 	// public transient boolean waitingForPlayerClickToBeginTurn = true;
 
 	public transient boolean ended = false;
+	public ArrayList<Square> squaresVisibleToSelectedCharacter = new ArrayList<Square>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -568,7 +569,8 @@ public class Level {
 			Game.level.activeActor = player;
 			// Game.level.activeActor.equippedWeapon =
 			// Game.level.activeActor.getWeaponsInInventory().get(0);
-			Actor.highlightSelectedCharactersSquares();
+			Actor.calculateReachableSquares();
+			Game.level.activeActor.calculateVisibleSquares();
 		}
 
 		undoList.clear();
@@ -620,7 +622,7 @@ public class Level {
 			if (activeActor != null)
 				activeActor.unselected();
 			activeActor = move.actor;
-			Actor.highlightSelectedCharactersSquares();
+			Actor.calculateReachableSquares();
 			removeLastLog();
 			if (this.undoList.isEmpty()) {
 				undoButton.enabled = false;

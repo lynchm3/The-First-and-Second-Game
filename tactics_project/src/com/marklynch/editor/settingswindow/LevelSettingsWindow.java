@@ -148,7 +148,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 				Game.level.currentFactionMoving = Game.level.factions.get(Game.level.currentFactionMovingIndex);
 				Game.level.activeActor = Game.level.player;
 				Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
-				Actor.highlightSelectedCharactersSquares();
+				Actor.calculateReachableSquares();
 				Game.level.turn = 1;
 				Game.level = Game.level;
 				Game.editorMode = false;

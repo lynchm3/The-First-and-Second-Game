@@ -511,7 +511,7 @@ public class Editor {
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
 		// Add actor
-		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[0][4], Game.level.factions.get(0));
+		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[26][14], Game.level.factions.get(0));
 		Game.level.player = player;
 		player.inventory.add(Templates.KATANA.makeCopy(null));
 		player.inventory.add(Templates.HATCHET.makeCopy(null));
