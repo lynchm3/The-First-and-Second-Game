@@ -266,7 +266,7 @@ public class Level {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				// is it better to bind once and draw all the same ones?
-				squares[i][j].draw();
+				squares[i][j].draw1();
 			}
 		}
 	}
@@ -344,6 +344,13 @@ public class Level {
 		// draw any projectiles
 		for (Projectile projectile : projectiles) {
 			projectile.drawForeground();
+		}
+		// Squares
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				// is it better to bind once and draw all the same ones?
+				squares[i][j].draw2();
+			}
 		}
 
 		for (Structure structure : structures) {

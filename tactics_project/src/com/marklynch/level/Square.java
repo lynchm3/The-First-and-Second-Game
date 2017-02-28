@@ -85,7 +85,7 @@ public class Square implements ActionableInWorld {
 
 	}
 
-	public void draw() {
+	public void draw1() {
 
 		// if (!this.visibleToPlayer)
 		// return;
@@ -101,10 +101,6 @@ public class Square implements ActionableInWorld {
 		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 		TextureUtils.drawTexture(imageTexture, squarePositionX, squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
 				squarePositionY + Game.SQUARE_HEIGHT);
-
-		if (!this.visibleToPlayer)
-			QuadUtils.drawQuad(new Color(0.5f, 0.5f, 0.5f, 0.75f), squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
-					squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
 		// square highlights
 
@@ -172,6 +168,19 @@ public class Square implements ActionableInWorld {
 		// weaponPositionYInPixels + weaponHeightInPixels);
 		// }
 		// }
+
+	}
+
+	public void draw2() {
+
+		if (!this.seenByPlayer)
+			return;
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+
+		if (!this.visibleToPlayer)
+			QuadUtils.drawQuad(new Color(0.5f, 0.5f, 0.5f, 0.75f), squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
+					squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
 
