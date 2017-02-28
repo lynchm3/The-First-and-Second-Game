@@ -2,6 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// if u go beside door, but opposite side to ur attackers they wont go in
+	// and attack
+
+	// Are ranged weapons working?
+
 	// inSameBuilding METHODS being used, but shouldnt be needed.
 	// if
 	// (!attacker.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn))

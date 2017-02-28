@@ -42,7 +42,7 @@ public class Templates {
 
 	// Bows
 	// https://en.wikipedia.org/wiki/Bow_and_arrow#Types_of_bow
-	public static final Weapon HUNTING_BOW = new Weapon("Hunting Bow", 3, 1, 1, "a2r2.png", 100, null, true, false,
+	public static final Weapon HUNTING_BOW = new Weapon("Hunting Bow", 3, 1, 3, "a2r2.png", 100, null, true, false,
 			false, false, 0.5f, 0.5f, 40, 42);
 
 	// Furniture
