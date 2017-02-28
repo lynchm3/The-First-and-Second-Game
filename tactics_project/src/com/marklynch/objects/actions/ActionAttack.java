@@ -85,6 +85,10 @@ public class ActionAttack extends Action {
 	@Override
 	public boolean check() {
 
+		// System.out.println("!attacker.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn)
+		// = "
+		// +
+		// !attacker.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn));
 		if (!attacker.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn))
 			return false;
 

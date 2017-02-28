@@ -418,35 +418,35 @@ public class Editor {
 				false, false, true, true, 1, 1));
 
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[6][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+				true, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[6][5],
 				new Inventory(), false, false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[7][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+				true, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[7][5],
 				new Inventory(), false, false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[9][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+				true, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[9][5],
 				new Inventory(), false, false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[10][5], new Inventory(),
-				false, false, false, false, false, true, 1, 1));
+				false, true, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[10][5],
 				new Inventory(), false, false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[12][5], new Inventory(),
-				false, false, false, false, false, true, 1, 1));
+				false, true, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[12][5],
 				new Inventory(), false, false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[13][5], new Inventory(),
-				false, false, false, false, false, true, 1, 1));
+				false, true, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[13][5],
 				new Inventory(), false, false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[15][5], new Inventory(),
-				false, false, false, false, false, true, 1, 1));
+				false, true, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[15][5],
 				new Inventory(), false, false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[16][5], new Inventory(),
-				false, false, false, false, false, true, 1, 1));
+				false, true, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[16][5],
 				new Inventory(), false, false, false, false, false, true, 1, 1));
 

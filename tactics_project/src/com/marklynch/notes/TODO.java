@@ -2,6 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Should be able to smash window and climb through, want to make overlay
+	// image nice so that i can
+
+	// Setting bow to 20 range seems to have frozen the game...
+
 	// if u go beside door, but opposite side to ur attackers they wont go in
 	// and attack
 
