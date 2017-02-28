@@ -41,11 +41,16 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (Game.level.activeActor.hasAttackers()) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 			GameObject target = AIRoutineUtils.getNearestAttacker(Game.level.activeActor.getAttackers());
+
+			System.out.println("FROM AIRoutineUtils.getNearestAttacker = " + target);
+
+			// GET NEAREST ATTACKER FAILING??
 			boolean attackedTarget = false;
-			if (target != null)
+			if (target != null) {
 				attackedTarget = AIRoutineUtils.attackTarget(target);
-			if (!attackedTarget)
-				AIRoutineUtils.moveTowardsTargetToAttack(target);
+				if (!attackedTarget)
+					AIRoutineUtils.moveTowardsTargetToAttack(target);
+			}
 			return;
 		}
 

@@ -224,37 +224,24 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public void calculateVisibleSquares() {
 
-		// Clear squares from last time
-		squaresVisibleToThisCharacter.clear();
-
-		for (Square square : Game.level.squaresVisibleToSelectedCharacter) {
-			square.visibleToSelectedCharacter = false;
-			if (this == Game.level.player) {
-				square.visibleToPlayer = false;
+		for (int x = 0; x < Game.level.squares.length; x++) {
+			for (int y = 0; y < Game.level.squares[0].length; y++) {
+				Game.level.squares[x][y].visibleToSelectedCharacter = false;
+				if (this == Game.level.player) {
+					Game.level.squares[x][y].visibleToPlayer = false;
+				}
 			}
 		}
 
-		Game.level.squaresVisibleToSelectedCharacter.clear();
+		squaresVisibleToThisCharacter.clear();
 
-		double lightLineCount = 8d;// Math.pow(4d, sight);
-		double angleIncrement = 360d / lightLineCount;
 		double x1 = this.squareGameObjectIsOn.xInGrid + 0.5d;
 		double y1 = this.squareGameObjectIsOn.yInGrid + 0.5d;
-		// for (double angle = 0; angle < 360; angle += angleIncrement) {
-		//
-		// double slope = Math.tan(Math.toRadians(angle));
 
 		for (int i = sight; i > 0; i--) {
-			// Vector<Square> furthestVisibleSquares =
-			// this.getAllSquaresAtDistance(sight);
 			ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistance(i);
 			for (Point point : furthestVisiblePoints) {
-				// x2 = square.xInGrid;
-				// if (!square.visibleToPlayer)
 				markVisibleSquaresInLineToo(x1, y1, point.getX() + 0.5d, point.getY() + 0.5d);
-				// markVisibleSquaresInLineToo(x1, y1, square.xInGrid + 0.5d,
-				// square.yInGrid + 0.5d);
-
 			}
 		}
 	}
@@ -320,15 +307,16 @@ public class Actor extends ActorTemplate implements Owner {
 		if (y >= Game.level.squares[0].length)
 			return true;
 
-		Game.level.squares[x][y].visibleToSelectedCharacter = true;
-		squaresVisibleToThisCharacter.add(Game.level.squares[x][y]);
-		Game.level.squaresVisibleToSelectedCharacter.add(Game.level.squares[x][y]);
-		if (this == Game.level.player) {
-			Game.level.squares[x][y].visibleToPlayer = true;
-			Game.level.squares[x][y].seenByPlayer = true;
-			// Seen Building
-			if (Game.level.squares[x][y].structureSquareIsIn != null) {
-				Game.level.squares[x][y].structureSquareIsIn.seenByPlayer = true;
+		if (!squaresVisibleToThisCharacter.contains(Game.level.squares[x][y])) {
+			Game.level.squares[x][y].visibleToSelectedCharacter = true;
+			squaresVisibleToThisCharacter.add(Game.level.squares[x][y]);
+			if (this == Game.level.player) {
+				Game.level.squares[x][y].visibleToPlayer = true;
+				Game.level.squares[x][y].seenByPlayer = true;
+				// Seen Building
+				if (Game.level.squares[x][y].structureSquareIsIn != null) {
+					Game.level.squares[x][y].structureSquareIsIn.seenByPlayer = true;
+				}
 			}
 		}
 
@@ -589,6 +577,7 @@ public class Actor extends ActorTemplate implements Owner {
 		Vector<Fight> fights = new Vector<Fight>();
 		for (Weapon weapon : getWeaponsInInventory()) {
 			for (float range = weapon.getEffectiveMinRange(); range <= weapon.getEffectiveMaxRange(); range++) {
+				System.out.println("target = " + target);
 				Fight fight = new Fight(this, weapon, target, target.bestCounterWeapon(this, weapon, range), range);
 				fights.add(fight);
 			}
@@ -632,6 +621,8 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void update(int delta) {
+
+		calculateVisibleSquares();
 
 		// Manage attackers list
 		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();

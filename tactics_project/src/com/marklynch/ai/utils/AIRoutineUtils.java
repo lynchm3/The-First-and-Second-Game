@@ -175,8 +175,10 @@ public class AIRoutineUtils {
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
 
+		System.out.println("getNearestAttacker attackers.size() = " + attackers.size());
 		for (Actor actor : attackers) {
 			Square square = calculateSquareToMoveToToAttackTarget(actor);
+			System.out.println("getNearestAttacker square = " + square);
 			if (square != null && square.walkingDistanceToSquare < costToBest) {
 				result = actor;
 				costToBest = square.walkingDistanceToSquare;
@@ -444,33 +446,52 @@ public class AIRoutineUtils {
 
 	public static Square calculateSquareToMoveToToAttackTarget(GameObject target) {
 
+		System.out.println("calculateSquareToMoveToToAttackTarget()" + target.name);
 		Vector<Float> idealWeaponDistances = Game.level.activeActor.calculateIdealDistanceFrom(target);
 
 		Vector<Square> squaresAtSpecifiedDistanceToTarget = new Vector<Square>();
 		int bestTravelCostFound = Integer.MAX_VALUE;
 		Path pathToSquare = null;
+		System.out.println("Game.level.activeActor.squaresVisibleToThisCharacter.size() = "
+				+ Game.level.activeActor.squaresVisibleToThisCharacter.size());
 		for (int i = 0; i < idealWeaponDistances.size(); i++) {
 
 			// WAS TRYING TO STOP THEM ATTACKING PEOPLE IN DIFFERENT BUILDINGS,
 			// DIDNT WORK, AND WAS STUPID COZ DOORWAYS
 			// MAYBE ONLY WHEN DISTANCE > 1
+			System.out.println("idealWeaponDistances.get(i) = " + idealWeaponDistances.get(i));
+
+			System.out.println(
+					"Game.level.activeActor.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn) = "
+							+ Game.level.activeActor.squaresVisibleToThisCharacter
+									.contains(target.squareGameObjectIsOn));
+
+			System.out.println("Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) = "
+					+ Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn));
 
 			// Check if we're already at this distance
 			if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
-					.get(i) && inSameBuilding(Game.level.activeActor, target)) {
+					.get(i)
+					&& Game.level.activeActor.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn)) {
+				System.out.println("a");
 				return Game.level.activeActor.squareGameObjectIsOn;
 			}
 
 			squaresAtSpecifiedDistanceToTarget = target.getAllSquaresAtDistance(idealWeaponDistances.get(i));
+
+			// squaresAtSpecifiedDistanceToTarget
 
 			// TODO picking which of these squares is the best is an interesting
 			// issue.
 			// Reachable is best.
 			// if There's multiple reachable then safest out of them is best :P
 			// OR somewhere u can attack someone from is the best... i dunno :D
+
 			for (Square squareAtSpecifiedDistanceToTarget : squaresAtSpecifiedDistanceToTarget) {
+				System.out.println("target.visibleFrom(squareAtSpecifiedDistanceToTarget) = "
+						+ target.visibleFrom(squareAtSpecifiedDistanceToTarget));
 				Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(squareAtSpecifiedDistanceToTarget);
-				if (inSameBuilding(target, squareAtSpecifiedDistanceToTarget) && currentActorPathToThisSquare != null
+				if (target.visibleFrom(squareAtSpecifiedDistanceToTarget) && currentActorPathToThisSquare != null
 						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
 					pathToSquare = currentActorPathToThisSquare;
 					bestTravelCostFound = pathToSquare.travelCost;
@@ -676,7 +697,8 @@ public class AIRoutineUtils {
 
 	public static boolean attackTarget(GameObject gameObject) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
-		if (inSameBuilding(gameObject, Game.level.activeActor) && Game.level.activeActor.hasRange(weaponDistance)) {
+		if (Game.level.activeActor.squaresVisibleToThisCharacter.contains(gameObject.squareGameObjectIsOn)
+				&& Game.level.activeActor.hasRange(weaponDistance)) {
 			Game.level.activeActor.equipBestWeapon(gameObject);
 			new ActionAttack(Game.level.activeActor, gameObject).perform();
 			// Actor.highlightSelectedCharactersSquares();
@@ -721,18 +743,21 @@ public class AIRoutineUtils {
 		return null;
 	}
 
-	public static boolean inSameBuilding(GameObject gameObject1, GameObject gameObject2) {
-		return inSameBuilding(gameObject1.squareGameObjectIsOn, gameObject2.squareGameObjectIsOn);
-	}
-
-	public static boolean inSameBuilding(GameObject gameObject1, Square square2) {
-		return inSameBuilding(gameObject1.squareGameObjectIsOn, square2);
-
-	}
-
-	public static boolean inSameBuilding(Square square1, Square square2) {
-		return square1.structureSquareIsIn == square2.structureSquareIsIn;
-	}
+	// public static boolean inSameBuilding(GameObject gameObject1, GameObject
+	// gameObject2) {
+	// return inSameBuilding(gameObject1.squareGameObjectIsOn,
+	// gameObject2.squareGameObjectIsOn);
+	// }
+	//
+	// public static boolean inSameBuilding(GameObject gameObject1, Square
+	// square2) {
+	// return inSameBuilding(gameObject1.squareGameObjectIsOn, square2);
+	//
+	// }
+	//
+	// public static boolean inSameBuilding(Square square1, Square square2) {
+	// return square1.structureSquareIsIn == square2.structureSquareIsIn;
+	// }
 
 	public static Square getRandomSquareInBuilding(Structure building) {
 

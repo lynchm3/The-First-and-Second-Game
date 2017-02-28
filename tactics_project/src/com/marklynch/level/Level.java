@@ -69,7 +69,6 @@ public class Level {
 	// public transient boolean waitingForPlayerClickToBeginTurn = true;
 
 	public transient boolean ended = false;
-	public ArrayList<Square> squaresVisibleToSelectedCharacter = new ArrayList<Square>();
 
 	// java representation of a grid??
 	// 2d array?

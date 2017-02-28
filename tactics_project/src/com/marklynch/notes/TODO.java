@@ -2,6 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// inSameBuilding METHODS being used, but shouldnt be needed.
+	// if
+	// (!attacker.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn))
+	// return false;
+
 	// Crash coz u can try to move two buttons @ once.
 
 	// Search for the action logging, put it all into the action classes, only

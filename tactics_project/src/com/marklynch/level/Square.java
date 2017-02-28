@@ -175,6 +175,7 @@ public class Square implements ActionableInWorld {
 
 		if (!this.seenByPlayer)
 			return;
+
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 

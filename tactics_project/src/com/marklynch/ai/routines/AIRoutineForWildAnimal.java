@@ -19,10 +19,11 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 			GameObject target = AIRoutineUtils.getNearestAttacker(Game.level.activeActor.getAttackers());
 			boolean attackedTarget = false;
-			if (target != null)
+			if (target != null) {
 				attackedTarget = AIRoutineUtils.attackTarget(target);
-			if (!attackedTarget)
-				AIRoutineUtils.moveTowardsTargetToAttack(target);
+				if (!attackedTarget)
+					AIRoutineUtils.moveTowardsTargetToAttack(target);
+			}
 			return;
 		}
 

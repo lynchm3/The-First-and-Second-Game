@@ -43,10 +43,11 @@ public class AIRoutineForTrader extends AIRoutine {
 			trader.activityDescription = ACTIVITY_DESCRIPTION_RUNNING_AWAY;
 			GameObject target = AIRoutineUtils.getNearestAttacker(trader.getAttackers());
 			boolean attackedTarget = false;
-			if (target != null)
+			if (target != null) {
 				attackedTarget = AIRoutineUtils.attackTarget(target);
-			if (!attackedTarget)
-				AIRoutineUtils.moveTowardsTargetToAttack(target);
+				if (!attackedTarget)
+					AIRoutineUtils.moveTowardsTargetToAttack(target);
+			}
 			return;
 		}
 

@@ -513,4 +513,66 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		return new ArrayList<Action>();
 	}
 
+	public boolean visibleFrom(Square square) {
+		return checkVisibilityBetweenTwoPoints(square.xInGrid + 0.5d, square.yInGrid + 0.5d, squareGameObjectIsOn.xInGrid + 0.5d,
+				squareGameObjectIsOn.yInGrid + 0.5d);
+	}
+
+	// SUPERCOVER algorithm
+	public boolean checkVisibilityBetweenTwoPoints(double x0, double y0, double x1, double y1) {
+		double vx = x1 - x0;
+		double vy = y1 - y0;
+		double dx = Math.sqrt(1 + Math.pow((vy / vx), 2));
+		double dy = Math.sqrt(1 + Math.pow((vx / vy), 2));
+		double ix = Math.floor(x0);
+		double iy = Math.floor(y0);
+		double sx, ex;
+
+		if (vx < 0) {
+			sx = -1;
+			ex = (x0 - ix) * dx;
+		} else {
+			sx = 1;
+			ex = (ix + 1 - x0) * dx;
+		}
+
+		double sy, ey;
+		if (vy < 0) {
+			sy = -1;
+			ey = (y0 - iy) * dy;
+		} else {
+			sy = 1;
+			ey = (iy + 1 - y0) * dy;
+		}
+
+		boolean done = false;
+		double len = Math.sqrt(vx * vx + vy * vy);
+
+		while (done == false) {
+			if (Math.min(ex, ey) <= len) {
+				double rx = ix;
+				double ry = iy;
+				if (ex < ey) {
+					ex = ex + dx;
+					ix = ix + sx;
+				} else {
+					ey = ey + dy;
+					iy = iy + sy;
+				}
+
+				if (Game.level.squares[(int) rx][(int) ry] != squareGameObjectIsOn) {
+					if (Game.level.squares[(int) rx][(int) ry].inventory.blocksLineOfSight()) {
+						return false;
+					}
+				}
+				// done = markSquareAsVisibleToActiveCharacter((int) rx, (int)
+				// ry);
+			} else if (!done) {
+				done = true;
+				return true;
+				// markSquareAsVisibleToActiveCharacter((int) ix, (int) iy);
+			}
+		}
+		return true;
+	}
 }
