@@ -18,9 +18,9 @@ public class Tree extends GameObject {
 
 	public Tree(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, float widthRatio, float heightRatio) {
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
 		addApple(appleMaxRatioSize);
 		healthWhenLastDroppedFruit = this.totalHealth;
 	}
@@ -30,7 +30,7 @@ public class Tree extends GameObject {
 		float appleSize = (float) (Math.random() * maxSize);
 
 		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), false, true, true, false, false,
-				appleSize, appleSize);
+				false, appleSize, appleSize);
 		apple.anchorX = 6;
 		apple.anchorY = 6;
 
@@ -49,6 +49,13 @@ public class Tree extends GameObject {
 
 	@Override
 	public void draw1() {
+
+		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+			return;
+
+		if (!this.squareGameObjectIsOn.seenByPlayer)
+			return;
+
 		super.draw1();
 		// DRAW INVENTORY
 		for (GameObject fruit : inventory.gameObjects) {
@@ -124,8 +131,8 @@ public class Tree extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, widthRatio,
-				heightRatio);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio);
 	}
 
 }

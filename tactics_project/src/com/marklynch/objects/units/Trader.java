@@ -26,11 +26,11 @@ public class Trader extends Actor implements Comparator<GameObject> {
 	public Trader(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, float widthRatio, float heightRatio, Faction faction, float anchorX,
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio, Faction faction, float anchorX,
 			float anchorY, Structure shop, Room room, Sign shopSign, Weapon broom) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio, faction, anchorX, anchorY);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, faction, anchorX, anchorY);
 		this.shop = shop;
 		this.room = room;
 		this.shopSign = shopSign;
@@ -93,7 +93,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 
 		Trader actor = new Trader(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(), showInventory,
-				fitsInInventory, canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio, faction, anchorX,
+				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, faction, anchorX,
 				anchorY, shop, room, shopSign, broom);
 		return actor;
 	}

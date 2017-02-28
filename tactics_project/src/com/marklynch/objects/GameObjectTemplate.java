@@ -20,6 +20,7 @@ public class GameObjectTemplate {
 	public boolean fitsInInventory;
 	public boolean canContainOtherObjects;
 	public boolean blocksLineOfSight;
+	public boolean persistsWhenCantBeSeen;
 	public float value = 1;
 	public Date pickUpdateDateTime = new Date();
 	public float widthRatio = 1;
@@ -29,7 +30,8 @@ public class GameObjectTemplate {
 
 	public GameObjectTemplate(String name, float totalHealth, String imageTexturePath, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
-			boolean canContainOtherObjects, boolean blockLineOfSight, float widthRatio, float heightRatio) {
+			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
+			float heightRatio) {
 		super();
 		this.name = name;
 		this.totalHealth = totalHealth;
@@ -42,13 +44,14 @@ public class GameObjectTemplate {
 		this.canContainOtherObjects = canContainOtherObjects;
 		this.widthRatio = widthRatio;
 		this.heightRatio = heightRatio;
-		this.blocksLineOfSight = blockLineOfSight;
+		this.blocksLineOfSight = blocksLineOfSight;
+		this.persistsWhenCantBeSeen = persistsWhenCantBeSeen;
 	}
 
 	public GameObject makeCopy(Square square) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, widthRatio,
-				heightRatio);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio);
 	}
 
 	public void postLoad1() {

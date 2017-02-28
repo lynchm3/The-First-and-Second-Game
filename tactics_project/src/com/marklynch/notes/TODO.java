@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// u[date for the exploding objet is attached to the turns for some reason
+
+	// Stop the shop keeper from blocking the door :/
+
 	// The vision algorithm is just too harsh.
 
 	// The vision algorithm could do some work, it iterates through every point

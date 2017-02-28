@@ -17,9 +17,9 @@ public class Weapon extends WeaponTemplate {
 
 	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, float widthRatio, float heightRatio, float anchorX, float anchorY) {
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio, float anchorX, float anchorY) {
 		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
 
 		this.owner = owner;
 		this.anchorX = anchorX;

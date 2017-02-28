@@ -80,10 +80,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, float widthRatio, float heightRatio) {
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio) {
 
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
 		this.remainingHealth = health;
 
 		if (squareGameObjectIsOn != null) {
@@ -146,7 +146,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public void draw1() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false)
+		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+			return;
+
+		if (!this.squareGameObjectIsOn.seenByPlayer)
 			return;
 
 		// Draw object
@@ -356,8 +359,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, widthRatio,
-				heightRatio);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio);
 	}
 
 	public ArrayList<Weapon> getWeaponsInInventory() {

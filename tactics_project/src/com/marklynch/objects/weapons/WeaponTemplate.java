@@ -22,10 +22,10 @@ public class WeaponTemplate extends GameObject {
 
 	public WeaponTemplate(String name, float damage, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, float widthRatio, float heightRatio) {
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
 
 		this.slashDamage = damage;
 		this.minRange = minRange;
@@ -81,6 +81,6 @@ public class WeaponTemplate extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new Weapon(new String(name), slashDamage, minRange, maxRange, imageTexturePath, totalHealth, square,
-				fitsInInventory, canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio, anchorX, anchorY);
+				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, anchorX, anchorY);
 	}
 }

@@ -76,7 +76,7 @@ public class Cave extends Structure {
 					if (!floorSquares.contains(Game.level.squares[i][j])
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
 						wallsInCave.add(new Wall("Cave Wall", 1000, "wall.png", Game.level.squares[i][j],
-								new Inventory(), false, false, false, false, blocksLineOfSight, 1, 1));
+								new Inventory(), false, false, false, false, blocksLineOfSight, true, 1, 1));
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					Game.level.squares[i][j].structureSquareIsIn = this;

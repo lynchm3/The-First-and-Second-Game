@@ -11,9 +11,10 @@ public class GameObjectExploder extends GameObject {
 
 	public GameObjectExploder(String name, int health, String imagePath, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
-			boolean canContainOtherObjects, boolean blocksLineOfSight, float widthRatio, float heightRatio) {
+			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
+			float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
 	}
 
 	public SquarePiece[] squarePieces;
@@ -132,6 +133,12 @@ public class GameObjectExploder extends GameObject {
 
 	@Override
 	public void draw1() {
+
+		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+			return;
+
+		if (!this.squareGameObjectIsOn.seenByPlayer)
+			return;
 
 		// MAYBE THE U AND V ARE A RATIO (0 to 1)? yup...
 		// TRIED THAT below, didnt work, needs tsome debugging...
@@ -328,6 +335,6 @@ public class GameObjectExploder extends GameObject {
 	public GameObjectExploder makeCopy(Square square) {
 		return new GameObjectExploder(new String(name), (int) totalHealth, imageTexturePath, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, widthRatio, heightRatio);
+				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
 	}
 }
