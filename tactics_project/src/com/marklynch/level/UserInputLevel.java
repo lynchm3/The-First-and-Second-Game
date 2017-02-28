@@ -78,6 +78,9 @@ public class UserInputLevel {
 
 	public static void userInput(int delta2) {
 
+		if (Game.level.activeActor != Game.level.player)
+			return;
+
 		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();

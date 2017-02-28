@@ -412,10 +412,28 @@ public class Editor {
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
 
 		ArrayList<GameObject> shopFeatures = new ArrayList<GameObject>();
-		shopFeatures.add(new Door("Wooden Door", 100, "door.png", Game.level.squares[5][4], new Inventory(), false,
-				true, false, false, true, 1, 1));
-		shopFeatures.add(new Door("Wooden Door", 100, "door.png", Game.level.squares[11][4], new Inventory(), false,
-				true, false, false, true, 1, 1));
+		shopFeatures.add(new Door("Shop Door", 100, "door.png", Game.level.squares[5][4], new Inventory(), false, true,
+				false, false, true, 1, 1));
+		shopFeatures.add(new Door("Shop Door", 100, "door.png", Game.level.squares[11][4], new Inventory(), false, true,
+				false, false, true, 1, 1));
+
+		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[6][5],
+				new Inventory(), false, false, false, false, false, 1, 1));
+		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[7][5],
+				new Inventory(), false, false, false, false, false, 1, 1));
+		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[9][5],
+				new Inventory(), false, false, false, false, false, 1, 1));
+		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[10][5],
+				new Inventory(), false, false, false, false, false, 1, 1));
+		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[12][5],
+				new Inventory(), false, false, false, false, false, 1, 1));
+		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[13][5],
+				new Inventory(), false, false, false, false, false, 1, 1));
+		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[15][5],
+				new Inventory(), false, false, false, false, false, 1, 1));
+		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[16][5],
+				new Inventory(), false, false, false, false, false, 1, 1));
+
 		Game.level.squares[4][4].imageTexturePath = "stone.png";
 		Game.level.squares[4][4].loadImages();
 
@@ -425,7 +443,7 @@ public class Editor {
 		ArrayList<CaveSection> shopSections = new ArrayList<CaveSection>();
 		shopSections.add(new CaveSection("Super Wolf's Den", 5, 0, 17, 5));
 		Cave joesShop = new Cave("Trader Joe's Shop", shopSections, shopAtriums, new ArrayList<CavePath>(),
-				shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -32, -32 + 800, false);
+				shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -32, -32 + 800, true);
 		Game.level.structures.add(joesShop);
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();

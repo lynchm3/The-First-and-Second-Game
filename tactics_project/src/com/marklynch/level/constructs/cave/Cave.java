@@ -88,7 +88,7 @@ public class Cave extends Structure {
 
 		// Do bits, each bit represents a possibility
 		for (Wall wall : wallsInCave) {
-			// Top
+			// Top 0, -1
 			if (wall.squareGameObjectIsOn.yInGrid > 0 && (wallSquares.contains(
 					Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid - 1])
 					|| featureSquares.contains(
@@ -96,21 +96,26 @@ public class Cave extends Structure {
 									- 1]))) {
 				wall.connectedTop = true;
 			}
-			// Right
-			if (wall.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1
-					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid
-							+ 1][wall.squareGameObjectIsOn.yInGrid].inventory.contains(Wall.class)) {
+			// Right +1,0
+			if (wall.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1 && (wallSquares.contains(
+					Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid])
+					|| featureSquares.contains(Game.level.squares[wall.squareGameObjectIsOn.xInGrid
+							+ 1][wall.squareGameObjectIsOn.yInGrid]))) {
 				wall.connectedRight = true;
 			}
-			// Bottom
-			if (wall.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1
-					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid
-							+ 1].inventory.contains(Wall.class)) {
+			// Bottom 0, +1
+			if (wall.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1 && (wallSquares.contains(
+					Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid + 1])
+					|| featureSquares.contains(
+							Game.level.squares[wall.squareGameObjectIsOn.xInGrid][wall.squareGameObjectIsOn.yInGrid
+									+ 1]))) {
 				wall.connectedBottom = true;
 			}
-			// LEft
-			if (wall.squareGameObjectIsOn.xInGrid > 0 && Game.level.squares[wall.squareGameObjectIsOn.xInGrid
-					- 1][wall.squareGameObjectIsOn.yInGrid].inventory.contains(Wall.class)) {
+			// LEft -1, 0
+			if (wall.squareGameObjectIsOn.xInGrid > 0 && (wallSquares.contains(
+					Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid])
+					|| featureSquares.contains(Game.level.squares[wall.squareGameObjectIsOn.xInGrid
+							- 1][wall.squareGameObjectIsOn.yInGrid]))) {
 				wall.connectedLeft = true;
 			}
 			// Top Right
