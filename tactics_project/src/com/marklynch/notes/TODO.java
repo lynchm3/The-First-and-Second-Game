@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Crash coz u can try to move two buttons @ once.
+
 	// Search for the action logging, put it all into the action classes, only
 	// log if square is visible to player
 

@@ -328,14 +328,7 @@ public class Actor extends ActorTemplate implements Owner {
 			Game.level.squares[x][y].seenByPlayer = true;
 			// Seen Building
 			if (Game.level.squares[x][y].structureSquareIsIn != null) {
-				if (Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
-					Game.level.squares[x][y].structureSquareIsIn.seenByPlayer = true;
-					// for (Square square :
-					// Game.level.squares[i][j].structureSquareIsIn.squares)
-					// {
-					// square.seenByPlayer = true;
-					// }
-				}
+				Game.level.squares[x][y].structureSquareIsIn.seenByPlayer = true;
 			}
 		}
 
