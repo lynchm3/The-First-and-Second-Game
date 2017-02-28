@@ -18,9 +18,9 @@ public class Tree extends GameObject {
 
 	public Tree(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
-			float widthRatio, float heightRatio) {
+			boolean blocksLineOfSight, float widthRatio, float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio);
 		addApple(appleMaxRatioSize);
 		healthWhenLastDroppedFruit = this.totalHealth;
 	}
@@ -29,7 +29,7 @@ public class Tree extends GameObject {
 
 		float appleSize = (float) (Math.random() * maxSize);
 
-		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), false, true, true, false,
+		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), false, true, true, false, false,
 				appleSize, appleSize);
 		apple.anchorX = 6;
 		apple.anchorY = 6;
@@ -124,7 +124,8 @@ public class Tree extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square) {
 		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, widthRatio, heightRatio);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, widthRatio,
+				heightRatio);
 	}
 
 }

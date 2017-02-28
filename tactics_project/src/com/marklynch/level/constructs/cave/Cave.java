@@ -19,10 +19,11 @@ public class Cave extends Structure {
 	ArrayList<Square> entranceSquares;
 	Texture imageTexture;
 	float overlayX1, overlayX2, overlayY1, overlayY2;
+	boolean blocksLineOfSight;
 
 	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<Room> rooms, ArrayList<CavePath> paths,
 			ArrayList<GameObject> features, ArrayList<Square> entrances, String imageTexturePath, float overlayX1,
-			float overlayX2, float overlayY1, float overlayY2) {
+			float overlayX2, float overlayY1, float overlayY2, boolean blocksLineOfSight) {
 		super();
 
 		this.name = name;
@@ -34,6 +35,7 @@ public class Cave extends Structure {
 		this.overlayX2 = overlayX2;
 		this.overlayY2 = overlayY2;
 		this.entranceSquares = entrances;
+		this.blocksLineOfSight = blocksLineOfSight;
 		ArrayList<Square> floorSquares = new ArrayList<Square>();
 		ArrayList<Square> wallSquares = new ArrayList<Square>();
 		ArrayList<Square> featureSquares = new ArrayList<Square>();
@@ -74,7 +76,7 @@ public class Cave extends Structure {
 					if (!floorSquares.contains(Game.level.squares[i][j])
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
 						wallsInCave.add(new Wall("Cave Wall", 1000, "wall.png", Game.level.squares[i][j],
-								new Inventory(), false, false, false, false, 1, 1));
+								new Inventory(), false, false, false, false, blocksLineOfSight, 1, 1));
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					Game.level.squares[i][j].structureSquareIsIn = this;

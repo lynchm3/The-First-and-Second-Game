@@ -132,6 +132,14 @@ public class SquareInventory extends Inventory {
 		return false;
 	}
 
+	public boolean blocksLineOfSight() {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.blocksLineOfSight)
+				return true;
+		}
+		return false;
+	}
+
 	// public GameObject getAc() {
 	// for (GameObject gameObject : gameObjects) {
 	// if (gameObject instanceof Actor) {

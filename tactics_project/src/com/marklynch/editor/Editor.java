@@ -413,9 +413,9 @@ public class Editor {
 
 		ArrayList<GameObject> shopFeatures = new ArrayList<GameObject>();
 		shopFeatures.add(new Door("Wooden Door", 100, "door.png", Game.level.squares[5][4], new Inventory(), false,
-				true, false, false, 1, 1));
+				true, false, false, true, 1, 1));
 		shopFeatures.add(new Door("Wooden Door", 100, "door.png", Game.level.squares[11][4], new Inventory(), false,
-				true, false, false, 1, 1));
+				true, false, false, true, 1, 1));
 		Game.level.squares[4][4].imageTexturePath = "stone.png";
 		Game.level.squares[4][4].loadImages();
 
@@ -425,7 +425,7 @@ public class Editor {
 		ArrayList<CaveSection> shopSections = new ArrayList<CaveSection>();
 		shopSections.add(new CaveSection("Super Wolf's Den", 5, 0, 17, 5));
 		Cave joesShop = new Cave("Trader Joe's Shop", shopSections, shopAtriums, new ArrayList<CavePath>(),
-				shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -32, -32 + 800);
+				shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -32, -32 + 800, false);
 		Game.level.structures.add(joesShop);
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
@@ -434,7 +434,7 @@ public class Editor {
 		ArrayList<CaveSection> lodgeSections = new ArrayList<CaveSection>();
 		lodgeSections.add(new CaveSection("Super Wolf's Den", 7, 7, 11, 11));
 		Cave lodge = new Cave("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<CavePath>(), lodgeFeatures,
-				new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640);
+				new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true);
 		Game.level.structures.add(lodge);
 
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
@@ -458,17 +458,17 @@ public class Editor {
 		caveSections.add(new CaveSection("Super Wolf's Den", 24, 12, 40, 19));
 		caveSections.add(new CaveSection("Super Wolf's Den", 41, 5, 49, 16));
 		Game.level.structures.add(new Cave("Super Wolf's Cave", caveSections, caveAtriums, cavePaths, caveFeatures,
-				new ArrayList<Square>(), null, 0, 0, 0, 0));
+				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
 
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )
 
 		// Add a game object
 		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[4][2], new Inventory(), true,
-				false, false, true, 1, 1);
+				false, false, true, false, 1, 1);
 
 		Junk groundFur = new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true,
-				true, false, 1, 1);
+				true, false, false, 1, 1);
 		groundFur.value = 10;
 		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[21][9], new
 		// Inventory(), false, true, true, false);
@@ -480,24 +480,24 @@ public class Editor {
 		// false, 1, 1);
 		// groundFur.value = 10;
 
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), true, false, false, true, 1f,
-				1.5f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[21][19], new Inventory(), true, false, false, true, 1f,
-				1.5f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[14][8], new Inventory(), true, false, false, true, 1f,
-				1.5f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[19][3], new Inventory(), true, false, false, true, 1f,
-				1.5f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[18][13], new Inventory(), true, false, false, true, 1f,
-				1.5f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[9][14], new Inventory(), true, false, false, true, 1f,
-				1.5f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[12][8], new Inventory(), true, false, false, true, 1f,
-				1.5f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[27][3], new Inventory(), true, false, false, true, 1f,
-				1.5f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[23][5], new Inventory(), true, false, false, true, 1f,
-				1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), true, false, false, true, false,
+				1f, 1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[21][19], new Inventory(), true, false, false, true,
+				false, 1f, 1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[14][8], new Inventory(), true, false, false, true, false,
+				1f, 1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[19][3], new Inventory(), true, false, false, true, false,
+				1f, 1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[18][13], new Inventory(), true, false, false, true,
+				false, 1f, 1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[9][14], new Inventory(), true, false, false, true, false,
+				1f, 1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[12][8], new Inventory(), true, false, false, true, false,
+				1f, 1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[27][3], new Inventory(), true, false, false, true, false,
+				1f, 1.5f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[23][5], new Inventory(), true, false, false, true, false,
+				1f, 1.5f);
 
 		// Add factions
 		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));

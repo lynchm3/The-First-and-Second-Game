@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// The vision algorithm is just too harsh.
+
 	// The vision algorithm could do some work, it iterates through every point
 	// withing X squares, its probably a bit much... BUT... see how it goes.
 

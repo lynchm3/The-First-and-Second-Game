@@ -87,16 +87,15 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public ArrayList<Square> squaresVisibleToThisCharacter = new ArrayList<Square>();
 
-	public int sight = 10;
-
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, Bed bed,
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			float widthRatio, float heightRatio, Faction faction, float anchorX, float anchorY) {
+			boolean blocksLineOfSight, float widthRatio, float heightRatio, Faction faction, float anchorX,
+			float anchorY) {
 
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects, widthRatio, heightRatio);
+				squareActorIsStandingOn, travelDistance, sight, inventory, showInventory, fitsInInventory,
+				canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio);
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -343,7 +342,7 @@ public class Actor extends ActorTemplate implements Owner {
 		if (Game.level.squares[x][y] == squareGameObjectIsOn)
 			return false;
 
-		return !Game.level.squares[x][y].inventory.canShareSquare();
+		return !Game.level.squares[x][y].inventory.blocksLineOfSight();
 	}
 
 	public boolean hasRange(int weaponDistance) {
@@ -412,10 +411,10 @@ public class Actor extends ActorTemplate implements Owner {
 			GameObject body;
 			if (this instanceof WildAnimal)
 				body = new Carcass(this.name + " carcass", 5, "carcass.png", this.squareGameObjectIsOn, new Inventory(),
-						false, true, false, true, 0.5f, 0.5f);
+						false, true, false, true, false, 0.5f, 0.5f);
 			else
 				body = new Corpse(this.name + " corpse", 5, "carcass.png", this.squareGameObjectIsOn, new Inventory(),
-						false, true, false, true, 0.5f, 0.5f);
+						false, true, false, true, false, 0.5f, 0.5f);
 
 			this.giveAllToTarget(null, body);
 			// this.squareGameObjectIsOn.inventory.add(body);
@@ -629,8 +628,9 @@ public class Actor extends ActorTemplate implements Owner {
 	public Actor makeCopy(Square square, Faction faction) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, null, inventory.makeCopy(), showInventory,
-				fitsInInventory, canContainOtherObjects, widthRatio, heightRatio, faction, anchorX, anchorY);
+				endurance, imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(), showInventory,
+				fitsInInventory, canContainOtherObjects, blocksLineOfSight, widthRatio, heightRatio, faction, anchorX,
+				anchorY);
 		return actor;
 	}
 
