@@ -245,18 +245,19 @@ public class Actor extends ActorTemplate implements Owner {
 		//
 		// double slope = Math.tan(Math.toRadians(angle));
 
-		// for (int i = sight; i > 0; i--) {
-		Vector<Square> furthestVisibleSquares = this.getAllSquaresAtDistance(sight);
-		ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistance(sight);
-		for (Point point : furthestVisiblePoints) {
-			// x2 = square.xInGrid;
-			// if (!square.visibleToPlayer)
-			markVisibleSquaresInLineToo(x1, y1, point.getX() + 0.5d, point.getY() + 0.5d);
-			// markVisibleSquaresInLineToo(x1, y1, square.xInGrid + 0.5d,
-			// square.yInGrid + 0.5d);
+		for (int i = sight; i > 0; i--) {
+			// Vector<Square> furthestVisibleSquares =
+			// this.getAllSquaresAtDistance(sight);
+			ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistance(i);
+			for (Point point : furthestVisiblePoints) {
+				// x2 = square.xInGrid;
+				// if (!square.visibleToPlayer)
+				markVisibleSquaresInLineToo(x1, y1, point.getX() + 0.5d, point.getY() + 0.5d);
+				// markVisibleSquaresInLineToo(x1, y1, square.xInGrid + 0.5d,
+				// square.yInGrid + 0.5d);
 
+			}
 		}
-		// }
 	}
 
 	// SUPERCOVER algorithm
