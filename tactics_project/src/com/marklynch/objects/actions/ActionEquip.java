@@ -32,7 +32,8 @@ public class ActionEquip extends Action {
 		if (!enabled)
 			return;
 
-		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", weapon }));
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", weapon }));
 		performer.equippedWeapon = weapon;
 		System.out.println("ActionEquip.performED");
 	}

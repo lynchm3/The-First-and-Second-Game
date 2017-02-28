@@ -2,6 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Search for the action logging, put it all into the action classes, only
+	// log if square is visible to player
+
 	// u[date for the exploding objet is attached to the turns for some reason
 
 	// Stop the shop keeper from blocking the door :/

@@ -34,7 +34,8 @@ public class ActionWrite extends Action {
 
 		System.out.println("ActionWrite setting text");
 		sign.setText(text);
-		Game.level.logOnScreen(new ActivityLog(new Object[] { writer, " wrote on ", sign }));
+		if (writer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { writer, " wrote on ", sign }));
 	}
 
 	@Override

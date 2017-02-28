@@ -29,7 +29,8 @@ public class ActionDrop extends Action {
 
 		if (!enabled)
 			return;
-		Game.level.logOnScreen(new ActivityLog(new Object[] { giver, " dropped ", object }));
+		if (giver.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { giver, " dropped ", object }));
 		giver.inventory.remove(object);
 		// receiver.inventory.add(object);
 		square.inventory.add(object);

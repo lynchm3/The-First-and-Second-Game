@@ -43,10 +43,12 @@ public class ActionAttack extends Action {
 		attacker.hasAttackedThisTurn = true;
 		String attackTypeString;
 		attackTypeString = "attacked ";
-		Game.level.logOnScreen(new ActivityLog(new Object[] {
 
-				attacker, " " + attackTypeString + " ", target, " with ", attacker.equippedWeapon.imageTexture,
-				" for " + attacker.equippedWeapon.getEffectiveSlashDamage() + " damage" }));
+		if (attacker.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] {
+
+					attacker, " " + attackTypeString + " ", target, " with ", attacker.equippedWeapon.imageTexture,
+					" for " + attacker.equippedWeapon.getEffectiveSlashDamage() + " damage" }));
 
 		Actor actor = null;
 		if (target instanceof Actor)
@@ -54,10 +56,12 @@ public class ActionAttack extends Action {
 
 		if (target.checkIfDestroyed()) {
 			if (target instanceof Actor) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", target }));
+				if (attacker.squareGameObjectIsOn.visibleToPlayer)
+					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", target }));
 				((Actor) target).faction.checkIfDestroyed();
 			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", target }));
+				if (attacker.squareGameObjectIsOn.visibleToPlayer)
+					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", target }));
 			}
 
 		}

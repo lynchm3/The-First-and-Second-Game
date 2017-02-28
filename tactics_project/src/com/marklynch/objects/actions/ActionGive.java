@@ -29,7 +29,8 @@ public class ActionGive extends Action {
 
 		if (!enabled)
 			return;
-		Game.level.logOnScreen(new ActivityLog(new Object[] { giver, " gave ", object, " to ", receiver }));
+		if (giver.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { giver, " gave ", object, " to ", receiver }));
 		giver.inventory.remove(object);
 		receiver.inventory.add(object);
 	}

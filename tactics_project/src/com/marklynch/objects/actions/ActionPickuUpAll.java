@@ -35,7 +35,8 @@ public class ActionPickuUpAll extends Action {
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) square.inventory
 				.getGameObjectsThatFitInInventory().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", gameObjectToLoot }));
+			if (performer.squareGameObjectIsOn.visibleToPlayer)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", gameObjectToLoot }));
 			square.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 		}

@@ -661,8 +661,9 @@ public class Actor extends ActorTemplate implements Owner {
 		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToSell : gameObjectsToSell) {
 			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { this, " sold ", gameObjectToSell, " to ", gameObject }));
+				if (squareGameObjectIsOn.visibleToPlayer)
+					Game.level.logOnScreen(
+							new ActivityLog(new Object[] { this, " sold ", gameObjectToSell, " to ", gameObject }));
 				this.inventory.remove(gameObjectToSell);
 				gameObject.inventory.add(gameObjectToSell);
 			}
@@ -674,8 +675,9 @@ public class Actor extends ActorTemplate implements Owner {
 		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToSell : gameObjectsToSell) {
 			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { this, " gave ", gameObjectToSell, " to ", gameObject }));
+				if (squareGameObjectIsOn.visibleToPlayer)
+					Game.level.logOnScreen(
+							new ActivityLog(new Object[] { this, " gave ", gameObjectToSell, " to ", gameObject }));
 				this.inventory.remove(gameObjectToSell);
 				gameObject.inventory.add(gameObjectToSell);
 			}

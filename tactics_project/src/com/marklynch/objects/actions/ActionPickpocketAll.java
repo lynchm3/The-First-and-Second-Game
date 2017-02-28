@@ -33,8 +33,9 @@ public class ActionPickpocketAll extends Action {
 
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
-			Game.level.logOnScreen(
-					new ActivityLog(new Object[] { performer, " looted ", gameObjectToLoot, " from ", container }));
+			if (performer.squareGameObjectIsOn.visibleToPlayer)
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " looted ", gameObjectToLoot, " from ", container }));
 			container.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 		}
