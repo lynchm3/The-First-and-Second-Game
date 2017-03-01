@@ -175,10 +175,8 @@ public class AIRoutineUtils {
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
 
-		System.out.println("getNearestAttacker attackers.size() = " + attackers.size());
 		for (Actor actor : attackers) {
 			Square square = calculateSquareToMoveToToAttackTarget(actor);
-			System.out.println("getNearestAttacker square = " + square);
 			if (square != null && square.walkingDistanceToSquare < costToBest) {
 				result = actor;
 				costToBest = square.walkingDistanceToSquare;
@@ -446,34 +444,21 @@ public class AIRoutineUtils {
 
 	public static Square calculateSquareToMoveToToAttackTarget(GameObject target) {
 
-		System.out.println("calculateSquareToMoveToToAttackTarget()" + target.name);
 		Vector<Float> idealWeaponDistances = Game.level.activeActor.calculateIdealDistanceFrom(target);
 
 		Vector<Square> squaresAtSpecifiedDistanceToTarget = new Vector<Square>();
 		int bestTravelCostFound = Integer.MAX_VALUE;
 		Path pathToSquare = null;
-		System.out.println("Game.level.activeActor.squaresVisibleToThisCharacter.size() = "
-				+ Game.level.activeActor.squaresVisibleToThisCharacter.size());
 		for (int i = 0; i < idealWeaponDistances.size(); i++) {
 
 			// WAS TRYING TO STOP THEM ATTACKING PEOPLE IN DIFFERENT BUILDINGS,
 			// DIDNT WORK, AND WAS STUPID COZ DOORWAYS
 			// MAYBE ONLY WHEN DISTANCE > 1
-			System.out.println("idealWeaponDistances.get(i) = " + idealWeaponDistances.get(i));
-
-			System.out.println(
-					"Game.level.activeActor.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn) = "
-							+ Game.level.activeActor.squaresVisibleToThisCharacter
-									.contains(target.squareGameObjectIsOn));
-
-			System.out.println("Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) = "
-					+ Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn));
 
 			// Check if we're already at this distance
 			if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
 					.get(i)
 					&& Game.level.activeActor.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn)) {
-				System.out.println("a");
 				return Game.level.activeActor.squareGameObjectIsOn;
 			}
 
@@ -488,8 +473,6 @@ public class AIRoutineUtils {
 			// OR somewhere u can attack someone from is the best... i dunno :D
 
 			for (Square squareAtSpecifiedDistanceToTarget : squaresAtSpecifiedDistanceToTarget) {
-				System.out.println("target.visibleFrom(squareAtSpecifiedDistanceToTarget) = "
-						+ target.visibleFrom(squareAtSpecifiedDistanceToTarget));
 				Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(squareAtSpecifiedDistanceToTarget);
 				if (target.visibleFrom(squareAtSpecifiedDistanceToTarget) && currentActorPathToThisSquare != null
 						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {

@@ -34,9 +34,9 @@ public class ActionAttack extends Action {
 
 		// GameObject targetGameObject;// = target;
 
-		attacker.manageAttackerReferences(target);
-		attacker.manageAttackerReferencesForNearbyAllies(target);
-		attacker.manageAttackerReferencesForNearbyEnemies(target);
+		attacker.addAttackerAndManageAttackerReferences(target);
+		attacker.addAttackerAndmanageAttackerReferencesForNearbyAllies(target);
+		attacker.addAttackerAndmanageAttackerReferencesForNearbyEnemies(target);
 
 		target.remainingHealth -= attacker.equippedWeapon.getEffectiveSlashDamage();
 		attacker.distanceMovedThisTurn = attacker.travelDistance;
@@ -84,11 +84,6 @@ public class ActionAttack extends Action {
 
 	@Override
 	public boolean check() {
-
-		// System.out.println("!attacker.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn)
-		// = "
-		// +
-		// !attacker.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn));
 		if (!attacker.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn))
 			return false;
 

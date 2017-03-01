@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Only add to list of attackers if they see the shit going down, only
+	// attack if u can see the dude. Group IS a special case, but should be able
+	// to test this out on the shopkeeper and the nerd. (nerd has no weapon)
+
 	// Should be able to smash window and climb through, want to make overlay
 	// image nice so that i can
 

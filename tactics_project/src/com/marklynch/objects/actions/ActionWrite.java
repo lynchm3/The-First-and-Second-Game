@@ -20,7 +20,6 @@ public class ActionWrite extends Action {
 		this.sign = sign;
 		this.text = text;
 		if (!check()) {
-			System.out.println("ActionWrite uh oh");
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
@@ -32,7 +31,6 @@ public class ActionWrite extends Action {
 		if (!enabled)
 			return;
 
-		System.out.println("ActionWrite setting text");
 		sign.setText(text);
 		if (writer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { writer, " wrote on ", sign }));

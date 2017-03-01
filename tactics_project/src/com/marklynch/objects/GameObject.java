@@ -437,8 +437,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	@Override
 	public int compareTo(Object otherObject) {
 
-		System.out.println("compareTo(Object)");
-
 		if (otherObject instanceof GameObject) {
 			return compareGameObjectToGameObject((GameObject) otherObject);
 		}
@@ -458,7 +456,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public int compareGameObjectToGameObject(GameObject otherGameObject) {
-		System.out.println("compareGameObjectToGameObject");
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_ALPHABETICALLY) {
 			return this.name.compareToIgnoreCase(otherGameObject.name);
@@ -514,8 +511,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public boolean visibleFrom(Square square) {
-		return checkVisibilityBetweenTwoPoints(square.xInGrid + 0.5d, square.yInGrid + 0.5d, squareGameObjectIsOn.xInGrid + 0.5d,
-				squareGameObjectIsOn.yInGrid + 0.5d);
+		return checkVisibilityBetweenTwoPoints(square.xInGrid + 0.5d, square.yInGrid + 0.5d,
+				squareGameObjectIsOn.xInGrid + 0.5d, squareGameObjectIsOn.yInGrid + 0.5d);
 	}
 
 	// SUPERCOVER algorithm

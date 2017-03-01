@@ -122,7 +122,6 @@ public class AIRoutineForTrader extends AIRoutine {
 
 			AIRoutineUtils.moveTowardsTargetToBeAdjacent(trader.shopSign);
 			if (trader.straightLineDistanceTo(trader.shopSign.squareGameObjectIsOn) < 2) {
-				System.out.println("creating ActionWrite");
 				new ActionWrite(trader, trader.shopSign, trader.getTextForSign()).perform();
 				shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
 			}

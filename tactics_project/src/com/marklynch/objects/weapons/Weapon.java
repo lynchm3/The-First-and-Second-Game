@@ -17,7 +17,8 @@ public class Weapon extends WeaponTemplate {
 
 	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio, float anchorX, float anchorY) {
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
+			float anchorX, float anchorY) {
 		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
 
@@ -91,7 +92,6 @@ public class Weapon extends WeaponTemplate {
 
 	public int compareWeaponToWeapon(Weapon otherGameObject) {
 
-		System.out.println("compareWeaponToWeapon");
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE) {
 			return Math.round(otherGameObject.getTotalDamage() - this.getTotalDamage());
 		}

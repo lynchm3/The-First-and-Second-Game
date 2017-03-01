@@ -577,7 +577,6 @@ public class Actor extends ActorTemplate implements Owner {
 		Vector<Fight> fights = new Vector<Fight>();
 		for (Weapon weapon : getWeaponsInInventory()) {
 			for (float range = weapon.getEffectiveMinRange(); range <= weapon.getEffectiveMaxRange(); range++) {
-				System.out.println("target = " + target);
 				Fight fight = new Fight(this, weapon, target, target.bestCounterWeapon(this, weapon, range), range);
 				fights.add(fight);
 			}
@@ -624,17 +623,17 @@ public class Actor extends ActorTemplate implements Owner {
 
 		calculateVisibleSquares();
 
-		// Manage attackers list
+		// Remove dead attackers from attackers list
 		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
 		for (Actor actor : attackers) {
 			if (actor.remainingHealth <= 0) {
 				attackersToRemoveFromList.add(actor);
 			}
 		}
-
 		for (Actor actor : attackersToRemoveFromList) {
 			attackers.remove(actor);
 		}
+
 		if (this.remainingHealth > 0) {
 			Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 			this.aiRoutine.update();
@@ -669,13 +668,26 @@ public class Actor extends ActorTemplate implements Owner {
 
 	}
 
-	public void addAttacker(Actor actor) {
-		if (!this.attackers.contains(actor)) {
-			this.attackers.add(actor);
+	public void addAttackerIfVisible(Actor potentialAttacker) {
+
+		System.out.println("addAttackerIfVisible");
+		System.out.println("addAttackerIfVisible" + (squareGameObjectIsOn.xInGrid + 0.5d) + ","
+				+ (squareGameObjectIsOn.yInGrid + 0.5d) + " and "
+				+ (potentialAttacker.squareGameObjectIsOn.xInGrid + 0.5d) + ","
+				+ (potentialAttacker.squareGameObjectIsOn.yInGrid + 0.5d));
+		System.out.println("visible =  " + this.checkVisibilityBetweenTwoPoints(squareGameObjectIsOn.xInGrid + 0.5d,
+				squareGameObjectIsOn.yInGrid + 0.5d, potentialAttacker.squareGameObjectIsOn.xInGrid + 0.5d,
+				potentialAttacker.squareGameObjectIsOn.yInGrid + 0.5d));
+
+		if (!this.attackers.contains(potentialAttacker)
+				&& this.checkVisibilityBetweenTwoPoints(squareGameObjectIsOn.xInGrid + 0.5d,
+						squareGameObjectIsOn.yInGrid + 0.5d, potentialAttacker.squareGameObjectIsOn.xInGrid + 0.5d,
+						potentialAttacker.squareGameObjectIsOn.yInGrid + 0.5d)) {
+			this.attackers.add(potentialAttacker);
 		}
 	}
 
-	public void manageAttackerReferences(GameObject gameObject) {
+	public void addAttackerAndManageAttackerReferences(GameObject gameObject) {
 
 		// Manage attackers
 		if (!(gameObject instanceof Actor))
@@ -692,50 +704,50 @@ public class Actor extends ActorTemplate implements Owner {
 			for (int i = 0; i < this.group.size(); i++) {
 				attacker.group.addAttacker(this.group.getMember(i));
 			}
-			attacker.addAttacker(this);
-			this.addAttacker(attacker);
+			attacker.addAttackerIfVisible(this);
+			this.addAttackerIfVisible(attacker);
 
 		} else if (this.group != null && attacker.group == null) {
 
 			for (int i = 0; i < this.group.size(); i++) {
-				attacker.addAttacker(this.group.getMember(i));
+				attacker.addAttackerIfVisible(this.group.getMember(i));
 			}
 
 			this.group.addAttacker(attacker);
-			this.addAttacker(attacker);
+			this.addAttackerIfVisible(attacker);
 
 		} else if (this.group == null && attacker.group != null) {
 
 			for (int i = 0; i < attacker.group.size(); i++) {
-				this.addAttacker(attacker.group.getMember(i));
+				this.addAttackerIfVisible(attacker.group.getMember(i));
 			}
 			attacker.group.addAttacker(this);
-			attacker.addAttacker(this);
+			attacker.addAttackerIfVisible(this);
 
 		} else if (this.group == null && attacker.group == null) {
-			attacker.addAttacker(this);
-			this.addAttacker(attacker);
+			attacker.addAttackerIfVisible(this);
+			this.addAttackerIfVisible(attacker);
 
 		}
 
 	}
 
-	public void manageAttackerReferencesForNearbyAllies(GameObject attacker) {
+	public void addAttackerAndmanageAttackerReferencesForNearbyAllies(GameObject attacker) {
 		for (Actor ally : this.faction.actors) {
 			if (ally != this && (this.straightLineDistanceTo(ally.squareGameObjectIsOn) < 10
 					|| ally.straightLineDistanceTo(attacker.squareGameObjectIsOn) < 10)) {
-				ally.manageAttackerReferences(attacker);
+				ally.addAttackerAndManageAttackerReferences(attacker);
 			}
 		}
 	}
 
-	public void manageAttackerReferencesForNearbyEnemies(GameObject attackerGameObject) {
+	public void addAttackerAndmanageAttackerReferencesForNearbyEnemies(GameObject attackerGameObject) {
 		if (attackerGameObject instanceof Actor) {
 			Actor attacker = (Actor) attackerGameObject;
 			for (Actor enemy : attacker.faction.actors) {
 				if (enemy != attacker && (this.straightLineDistanceTo(enemy.squareGameObjectIsOn) < 10
 						|| enemy.straightLineDistanceTo(attacker.squareGameObjectIsOn) < 10)) {
-					enemy.manageAttackerReferences(this);
+					enemy.addAttackerAndManageAttackerReferences(this);
 				}
 			}
 		}

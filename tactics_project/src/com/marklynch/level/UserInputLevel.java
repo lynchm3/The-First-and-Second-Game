@@ -404,7 +404,6 @@ public class UserInputLevel {
 	}
 
 	public static void tabTyped() {
-		System.out.println("tabTyped()");
 		if (Game.level.openInventories.size() > 0) {
 			Game.level.openInventories.clear();
 		} else {

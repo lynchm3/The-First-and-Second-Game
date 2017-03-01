@@ -42,8 +42,6 @@ public class AIRoutineForHunter extends AIRoutine {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 			GameObject target = AIRoutineUtils.getNearestAttacker(Game.level.activeActor.getAttackers());
 
-			System.out.println("FROM AIRoutineUtils.getNearestAttacker = " + target);
-
 			// GET NEAREST ATTACKER FAILING??
 			boolean attackedTarget = false;
 			if (target != null) {
@@ -63,10 +61,8 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// 1. loot dead animals
-		// System.out.println("LOOT CARCASS");
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Carcass.class, 5f, false, false, true,
 				true);
-		// System.out.println("carcass = " + carcass);
 		if (carcass != null) {
 			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
