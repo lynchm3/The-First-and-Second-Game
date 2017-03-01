@@ -10,7 +10,7 @@ import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.Structure;
+import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.objects.GameObject;

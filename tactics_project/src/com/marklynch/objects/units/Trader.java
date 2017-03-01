@@ -8,8 +8,8 @@ import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.Structure;
-import com.marklynch.level.constructs.cave.Room;
+import com.marklynch.level.constructs.structure.Structure;
+import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
@@ -18,7 +18,7 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Trader extends Actor implements Comparator<GameObject> {
 
-	public Room room;
+	public StructureRoom room;
 	public Structure shop;
 	public Sign shopSign;
 	public Weapon broom;
@@ -27,7 +27,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio, Faction faction, float anchorX,
-			float anchorY, Structure shop, Room room, Sign shopSign, Weapon broom) {
+			float anchorY, Structure shop, StructureRoom room, Sign shopSign, Weapon broom) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, faction, anchorX, anchorY);

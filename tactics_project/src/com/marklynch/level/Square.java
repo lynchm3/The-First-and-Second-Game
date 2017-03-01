@@ -8,7 +8,7 @@ import java.util.UUID;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Structure;
+import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;

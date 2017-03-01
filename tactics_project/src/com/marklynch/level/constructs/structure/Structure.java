@@ -1,10 +1,9 @@
-package com.marklynch.level.constructs.cave;
+package com.marklynch.level.constructs.structure;
 
 import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
-import com.marklynch.level.constructs.Structure;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Wall;
@@ -13,15 +12,18 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class Cave extends Structure {
+public class Structure {
 
-	ArrayList<CaveSection> caveSections;
+	public String name;
+	public ArrayList<StructureRoom> rooms;
+	public boolean seenByPlayer = false;
+	ArrayList<StructureSection> caveSections;
 	ArrayList<Square> entranceSquares;
 	Texture imageTexture;
 	float overlayX1, overlayX2, overlayY1, overlayY2;
 	boolean blocksLineOfSight;
 
-	public Cave(String name, ArrayList<CaveSection> caveSections, ArrayList<Room> rooms, ArrayList<CavePath> paths,
+	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms, ArrayList<StructureHall> paths,
 			ArrayList<GameObject> features, ArrayList<Square> entrances, String imageTexturePath, float overlayX1,
 			float overlayX2, float overlayY1, float overlayY2, boolean blocksLineOfSight) {
 		super();
@@ -53,14 +55,14 @@ public class Cave extends Structure {
 		}
 
 		// Floor squares
-		for (CavePath path : paths) {
+		for (StructureHall path : paths) {
 			floorSquares.addAll(path.squares);
 		}
 
 		// Entrance Squares
 
 		// Floor squares
-		for (Room caveAtrium : rooms) {
+		for (StructureRoom caveAtrium : rooms) {
 			for (int i = caveAtrium.gridX1; i <= caveAtrium.gridX2; i++) {
 				for (int j = caveAtrium.gridY1; j <= caveAtrium.gridY2; j++) {
 					floorSquares.add(Game.level.squares[i][j]);
@@ -70,7 +72,7 @@ public class Cave extends Structure {
 
 		// Walls
 		ArrayList<Wall> wallsInCave = new ArrayList<Wall>();
-		for (CaveSection caveSection : caveSections) {
+		for (StructureSection caveSection : caveSections) {
 			for (int i = caveSection.gridX1; i <= caveSection.gridX2; i++) {
 				for (int j = caveSection.gridY1; j <= caveSection.gridY2; j++) {
 					if (!floorSquares.contains(Game.level.squares[i][j])
@@ -159,7 +161,6 @@ public class Cave extends Structure {
 
 	float roofAlpha = 1f;
 
-	@Override
 	public void draw2() {
 		if (!seenByPlayer)
 			return;

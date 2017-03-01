@@ -9,7 +9,7 @@ import com.marklynch.level.Decoration;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
-import com.marklynch.level.constructs.building.Building;
+import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
@@ -220,10 +220,10 @@ public class TextUtils {
 				TextureUtils.drawTexture(decoration.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
 
-			} else if (content instanceof Building) {
-				Building building = (Building) content;
+			} else if (content instanceof Structure) {
+				Structure structure = (Structure) content;
 
-				float textWidth = Game.font.getWidth(building.name);
+				float textWidth = Game.font.getWidth(structure.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -238,7 +238,7 @@ public class TextUtils {
 
 				// Name
 
-				Game.font.drawText(Game.activeBatch, building.name, posX + offsetX, posY + offsetY);
+				Game.font.drawText(Game.activeBatch, structure.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image

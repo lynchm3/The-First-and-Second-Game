@@ -7,8 +7,8 @@ import java.util.Vector;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.Structure;
-import com.marklynch.level.constructs.cave.Room;
+import com.marklynch.level.constructs.structure.Structure;
+import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
@@ -745,7 +745,7 @@ public class AIRoutineUtils {
 	public static Square getRandomSquareInBuilding(Structure building) {
 
 		ArrayList<Square> randomSquares = new ArrayList<Square>();
-		for (Room room : building.rooms) {
+		for (StructureRoom room : building.rooms) {
 			randomSquares.add(getRandomSquareInRoom(room));
 		}
 
@@ -753,7 +753,7 @@ public class AIRoutineUtils {
 		return randomSquares.get(random.nextInt(randomSquares.size()));
 	}
 
-	public static Square getRandomSquareInRoom(Room room) {
+	public static Square getRandomSquareInRoom(StructureRoom room) {
 		int randomX = (room.gridX1 + 1) + (int) Math.round((Math.random() * ((room.gridX2 - 1) - (room.gridX1 + 1))));
 		int randomY = (room.gridY1 + 1) + (int) Math.round((Math.random() * ((room.gridY2 - 1) - (room.gridY1 + 1))));
 

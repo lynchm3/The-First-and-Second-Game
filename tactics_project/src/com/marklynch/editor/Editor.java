@@ -31,10 +31,10 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.QuestSmallGame;
-import com.marklynch.level.constructs.cave.Cave;
-import com.marklynch.level.constructs.cave.CavePath;
-import com.marklynch.level.constructs.cave.CaveSection;
-import com.marklynch.level.constructs.cave.Room;
+import com.marklynch.level.constructs.structure.Structure;
+import com.marklynch.level.constructs.structure.StructureHall;
+import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -454,21 +454,21 @@ public class Editor {
 		Game.level.squares[4][4].imageTexturePath = "stone.png";
 		Game.level.squares[4][4].loadImages();
 
-		ArrayList<Room> shopAtriums = new ArrayList<Room>();
-		shopAtriums.add(new Room("Super Wolf's Den", 6, 1, 10, 4));
-		shopAtriums.add(new Room("Super Wolf's Den", 12, 1, 16, 4));
-		ArrayList<CaveSection> shopSections = new ArrayList<CaveSection>();
-		shopSections.add(new CaveSection("Super Wolf's Den", 5, 0, 17, 5));
-		Cave joesShop = new Cave("Trader Joe's Shop", shopSections, shopAtriums, new ArrayList<CavePath>(),
+		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
+		shopAtriums.add(new StructureRoom("Super Wolf's Den", 6, 1, 10, 4));
+		shopAtriums.add(new StructureRoom("Super Wolf's Den", 12, 1, 16, 4));
+		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
+		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5));
+		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums, new ArrayList<StructureHall>(),
 				shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -32, -32 + 800, true);
 		Game.level.structures.add(joesShop);
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
-		ArrayList<Room> lodgeAtriums = new ArrayList<Room>();
-		lodgeAtriums.add(new Room("Super Wolf's Den", 8, 8, 10, 10));
-		ArrayList<CaveSection> lodgeSections = new ArrayList<CaveSection>();
-		lodgeSections.add(new CaveSection("Super Wolf's Den", 7, 7, 11, 11));
-		Cave lodge = new Cave("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<CavePath>(), lodgeFeatures,
+		ArrayList<StructureRoom> lodgeAtriums = new ArrayList<StructureRoom>();
+		lodgeAtriums.add(new StructureRoom("Super Wolf's Den", 8, 8, 10, 10));
+		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
+		lodgeSections.add(new StructureSection("Super Wolf's Den", 7, 7, 11, 11));
+		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructureHall>(), lodgeFeatures,
 				new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true);
 		Game.level.structures.add(lodge);
 
@@ -480,19 +480,19 @@ public class Editor {
 
 		// Cave
 		ArrayList<GameObject> caveFeatures = new ArrayList<GameObject>();
-		ArrayList<CavePath> cavePaths = new ArrayList<CavePath>();
+		ArrayList<StructureHall> cavePaths = new ArrayList<StructureHall>();
 		ArrayList<Square> cavePathSquares = new ArrayList<Square>();
 		cavePathSquares.add(Game.level.squares[24][14]);
 		cavePathSquares.add(Game.level.squares[25][14]);
-		cavePaths.add(new CavePath("Path", cavePathSquares));
+		cavePaths.add(new StructureHall("Path", cavePathSquares));
 
-		ArrayList<Room> caveAtriums = new ArrayList<Room>();
-		caveAtriums.add(new Room("Super Wolf's Den", 25, 13, 37, 18));
-		caveAtriums.add(new Room("Super Wolf's Den", 43, 7, 47, 14));
-		ArrayList<CaveSection> caveSections = new ArrayList<CaveSection>();
-		caveSections.add(new CaveSection("Super Wolf's Den", 24, 12, 40, 19));
-		caveSections.add(new CaveSection("Super Wolf's Den", 41, 5, 49, 16));
-		Game.level.structures.add(new Cave("Super Wolf's Cave", caveSections, caveAtriums, cavePaths, caveFeatures,
+		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
+		caveAtriums.add(new StructureRoom("Super Wolf's Den", 25, 13, 37, 18));
+		caveAtriums.add(new StructureRoom("Super Wolf's Den", 43, 7, 47, 14));
+		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
+		caveSections.add(new StructureSection("Super Wolf's Den", 24, 12, 40, 19));
+		caveSections.add(new StructureSection("Super Wolf's Den", 41, 5, 49, 16));
+		Game.level.structures.add(new Structure("Super Wolf's Cave", caveSections, caveAtriums, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
 
 		// 6,1 to 8,4

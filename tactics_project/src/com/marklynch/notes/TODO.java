@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Enviromentalist needs to stop spying if u murder all the hunters :P or he
+	// follows them around everywhere so he'll see the slaughter and have a go @
+	// u
+
 	// Go through all the actions and see which the AI doesnt perform
 
 	// Samsh window action
