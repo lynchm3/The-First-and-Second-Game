@@ -3,6 +3,7 @@ package com.marklynch.objects.weapons;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
+import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.QuadUtils;
 
@@ -60,6 +61,9 @@ public class Projectile {
 		} else {
 			x += distanceX;
 			y += distanceY;
+			Square square = Game.level.squares[(int) Math.floor(x / Game.SQUARE_WIDTH)][(int) Math
+					.floor(y / Game.SQUARE_HEIGHT)];
+			square.inventory.smashWindows(this);
 
 		}
 

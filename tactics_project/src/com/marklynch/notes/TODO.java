@@ -2,6 +2,12 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Samsh window action
+
+	// SmashWindows() method smashes any gameobjectelpoder
+
+	// TextUtils for Projectile
+
 	// Only add to list of attackers if they see the shit going down, only
 	// attack if u can see the dude. Group IS a special case, but should be able
 	// to test this out on the shopkeeper and the nerd. (nerd has no weapon)
