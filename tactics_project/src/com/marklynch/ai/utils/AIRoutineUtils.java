@@ -53,7 +53,7 @@ public class AIRoutineUtils {
 			int x = (int) (Math.random() * Game.level.width);
 			int y = (int) (Math.random() * Game.level.height);
 			randomSquare = Game.level.squares[x][y];
-			Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(randomSquare);
+			Path currentActorPathToThisSquare = Game.level.activeActor.getPathTo(randomSquare);
 			if ((!outdoors || outdoors && randomSquare.structureSquareIsIn == null)
 					&& currentActorPathToThisSquare != null && currentActorPathToThisSquare.travelCost < maxDistance
 					&& randomSquare.inventory.canShareSquare()) {
@@ -77,9 +77,11 @@ public class AIRoutineUtils {
 				for (Actor actor : faction.actors) {
 					if (passesChecks(actor, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
 						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
-						if (square != null && square.walkingDistanceToSquare < costToBest) {
+
+						Path path = Game.level.activeActor.getPathTo(square);
+						if (path != null && path.travelCost < costToBest) {
 							result = actor;
-							costToBest = square.walkingDistanceToSquare;
+							costToBest = path.travelCost;
 						}
 					}
 
@@ -92,9 +94,10 @@ public class AIRoutineUtils {
 			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
 				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
 					Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
-					if (square != null && square.walkingDistanceToSquare < costToBest) {
+					Path path = Game.level.activeActor.getPathTo(square);
+					if (path != null && path.travelCost < costToBest) {
 						result = gameObject;
-						costToBest = square.walkingDistanceToSquare;
+						costToBest = path.travelCost;
 					}
 				}
 			}
@@ -116,9 +119,10 @@ public class AIRoutineUtils {
 				for (Actor actor : faction.actors) {
 					if (passesChecks(actor, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
 						Square square = calculateSquareToMoveToToAttackTarget(actor);
-						if (square != null && square.walkingDistanceToSquare < costToBest) {
+						Path path = Game.level.activeActor.getPathTo(square);
+						if (path != null && path.travelCost < costToBest) {
 							result = actor;
-							costToBest = square.walkingDistanceToSquare;
+							costToBest = path.travelCost;
 						}
 					}
 
@@ -131,9 +135,10 @@ public class AIRoutineUtils {
 			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
 				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
 					Square square = calculateSquareToMoveToToAttackTarget(gameObject);
-					if (square != null && square.walkingDistanceToSquare < costToBest) {
+					Path path = Game.level.activeActor.getPathTo(square);
+					if (path != null && path.travelCost < costToBest) {
 						result = gameObject;
-						costToBest = square.walkingDistanceToSquare;
+						costToBest = path.travelCost;
 					}
 				}
 			}
@@ -177,9 +182,10 @@ public class AIRoutineUtils {
 
 		for (Actor actor : attackers) {
 			Square square = calculateSquareToMoveToToAttackTarget(actor);
-			if (square != null && square.walkingDistanceToSquare < costToBest) {
+			Path path = Game.level.activeActor.getPathTo(square);
+			if (path != null && path.travelCost < costToBest) {
 				result = actor;
-				costToBest = square.walkingDistanceToSquare;
+				costToBest = path.travelCost;
 			}
 		}
 
@@ -209,9 +215,10 @@ public class AIRoutineUtils {
 					&& Game.level.activeActor.faction.relationships.get(faction).relationship < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToToAttackTarget(actor);
-					if (square != null && square.walkingDistanceToSquare < costToBest) {
+					Path path = Game.level.activeActor.getPathTo(square);
+					if (path != null && path.travelCost < costToBest) {
 						result = actor;
-						costToBest = square.walkingDistanceToSquare;
+						costToBest = path.travelCost;
 					}
 				}
 			}
@@ -386,8 +393,10 @@ public class AIRoutineUtils {
 					&& Game.level.activeActor.faction.relationships.get(faction).relationship < 0) {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToToAttackTarget(actor);
-					if (square != null) {
-						int turns = square.walkingDistanceToSquare / Game.level.activeActor.travelDistance;
+					Path path = Game.level.activeActor.getPathTo(square);
+
+					if (path != null) {
+						int turns = path.travelCost / Game.level.activeActor.travelDistance;
 						if (turns < turnsToBest) {
 							bestTargetsBasedOnTurnsToReach.clear();
 							bestTargetsBasedOnTurnsToReach.add(actor);
@@ -473,7 +482,7 @@ public class AIRoutineUtils {
 			// OR somewhere u can attack someone from is the best... i dunno :D
 
 			for (Square squareAtSpecifiedDistanceToTarget : squaresAtSpecifiedDistanceToTarget) {
-				Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(squareAtSpecifiedDistanceToTarget);
+				Path currentActorPathToThisSquare = Game.level.activeActor.getPathTo(squareAtSpecifiedDistanceToTarget);
 				if (target.visibleFrom(squareAtSpecifiedDistanceToTarget) && currentActorPathToThisSquare != null
 						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
 					pathToSquare = currentActorPathToThisSquare;
@@ -518,7 +527,7 @@ public class AIRoutineUtils {
 			// if There's multiple reachable then safest out of them is best :P
 			// OR somewhere u can attack someone from is the best... i dunno :D
 			for (Square targetSquare : targetSquares) {
-				Path currentActorPathToThisSquare = Game.level.activeActor.paths.get(targetSquare);
+				Path currentActorPathToThisSquare = Game.level.activeActor.getPathTo(targetSquare);
 				if (currentActorPathToThisSquare != null
 						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
 					pathToSquare = currentActorPathToThisSquare;
@@ -549,8 +558,8 @@ public class AIRoutineUtils {
 			squareToMoveTo = path.squares.lastElement();
 		} else {
 			for (int i = path.squares.size() - 1; i >= 0; i--) {
-				if (Game.level.activeActor.paths
-						.get(path.squares.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
+				if (Game.level.activeActor
+						.getPathTo(path.squares.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
 					squareToMoveTo = path.squares.get(i);
 					break;
 				}
@@ -578,7 +587,7 @@ public class AIRoutineUtils {
 
 	public static Square calculateSquareToMoveToForTargetSquare(Square square) {
 
-		Path pathToSquare = Game.level.activeActor.paths.get(square);
+		Path pathToSquare = Game.level.activeActor.getPathTo(square);
 
 		if (pathToSquare == null) {
 			return null;
@@ -592,8 +601,8 @@ public class AIRoutineUtils {
 			squareToMoveTo = pathToSquare.squares.lastElement();
 		} else {
 			for (int i = pathToSquare.squares.size() - 1; i >= 0; i--) {
-				if (Game.level.activeActor.paths
-						.get(pathToSquare.squares.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
+				if (Game.level.activeActor
+						.getPathTo(pathToSquare.squares.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
 					squareToMoveTo = pathToSquare.squares.get(i);
 					break;
 				}
@@ -611,7 +620,7 @@ public class AIRoutineUtils {
 		Vector<Square> reachableSquares = new Vector<Square>();
 		for (int j = 0; j < Game.level.squares.length; j++) {
 			for (int k = 0; k < Game.level.squares[0].length; k++) {
-				if (Game.level.squares[j][k].reachableBySelectedCharater) {
+				if (Game.level.activeActor.getPathIfCanReachInOneTurn(Game.level.squares[j][k]) != null) {
 					reachableSquares.add(Game.level.squares[j][k]);
 				}
 			}

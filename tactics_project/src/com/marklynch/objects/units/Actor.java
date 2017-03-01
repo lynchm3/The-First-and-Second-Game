@@ -1,6 +1,7 @@
 package com.marklynch.objects.units;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Vector;
 
 import org.lwjgl.util.Point;
@@ -10,6 +11,8 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
+import com.marklynch.ai.routines.AStarNode;
+import com.marklynch.ai.routines.AStarSearch;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Group;
@@ -184,43 +187,80 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 	}
 
-	public void calculateReachableSquares(Square[][] squares) {
+	public Path getPathTo(Square target) {
 
-		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares[0].length; j++) {
+		System.out.println("getPathTo start " + System.currentTimeMillis());
 
-				Path pathToSquare = paths.get(squares[i][j]);
-				if (pathToSquare == null
-						|| pathToSquare.travelCost > (this.travelDistance - this.distanceMovedThisTurn)) {
-					squares[i][j].reachableBySelectedCharater = false;
-					// squares[i][j].distanceToSquare = Integer.MAX_VALUE;
+		if (target == null) {
+			System.out.println("getPathTo end A " + System.currentTimeMillis());
+			return null;
+		}
 
-				} else {
-					squares[i][j].reachableBySelectedCharater = true;
-					// squares[i][j].distanceToSquare = pathToSquare.travelCost;
-				}
+		LinkedList<AStarNode> aStarNodesPath = (LinkedList<AStarNode>) new AStarSearch()
+				.findPath(this.squareGameObjectIsOn, target);
 
+		if (aStarNodesPath != null) {
+			Vector<Square> squarePath = new Vector<Square>();
+
+			for (AStarNode aStarNode : aStarNodesPath) {
+				squarePath.add((Square) aStarNode);
 			}
-		}
-	}
 
-	public void calculateAttackableSquares(Square[][] squares) {
-		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares[0].length; j++) {
-				squares[i][j].weaponsThatCanAttack.clear();
-			}
+			Path path = new Path(squarePath, squarePath.size());
+			System.out.println("getPathTo end B " + System.currentTimeMillis());
+			return path;
 		}
 
-		for (Weapon weapon : getWeaponsInInventory()) {
-			weapon.calculateAttackableSquares(squares);
-		}
+		System.out.println("getPathTo end C " + System.currentTimeMillis());
+		return null;
+
 	}
 
-	public static void calculateReachableSquares() {
-		Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
-		Game.level.activeActor.calculateReachableSquares(Game.level.squares);
-		Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
+	public Path getPathIfCanReachInOneTurn(Square target) {
+
+		if (this.straightLineDistanceTo(target) > this.travelDistance)
+			return null;
+
+		Path path = getPathTo(target);
+		if (path != null && this.travelDistance >= path.travelCost) {
+			return path;
+		}
+
+		return null;
 	}
+
+	// public void calculateReachableSquares(Square[][] squares) {
+	//
+	// for (int i = 0; i < squares.length; i++) {
+	// for (int j = 0; j < squares[0].length; j++) {
+	//
+	// Path pathToSquare = paths.get(squares[i][j]);
+	// if (pathToSquare == null
+	// || pathToSquare.travelCost > (this.travelDistance -
+	// this.distanceMovedThisTurn)) {
+	// squares[i][j].reachableBySelectedCharater = false;
+	// // squares[i][j].distanceToSquare = Integer.MAX_VALUE;
+	//
+	// } else {
+	// squares[i][j].reachableBySelectedCharater = true;
+	// // squares[i][j].distanceToSquare = pathToSquare.travelCost;
+	// }
+	//
+	// }
+	// }
+	// }
+
+	// public void calculateAttackableSquares(Square[][] squares) {
+	// for (int i = 0; i < squares.length; i++) {
+	// for (int j = 0; j < squares[0].length; j++) {
+	// squares[i][j].weaponsThatCanAttack.clear();
+	// }
+	// }
+	//
+	// for (Weapon weapon : getWeaponsInInventory()) {
+	// weapon.calculateAttackableSquares(squares);
+	// }
+	// }
 
 	public void calculateVisibleSquares() {
 
@@ -413,11 +453,12 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public void draw1() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-			return;
-
-		if (!this.squareGameObjectIsOn.seenByPlayer)
-			return;
+		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
+		// persistsWhenCantBeSeen == false)
+		// return;
+		//
+		// if (!this.squareGameObjectIsOn.seenByPlayer)
+		// return;
 
 		if (this.remainingHealth <= 0)
 			return;
@@ -600,8 +641,8 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	public void unselected() {
-		Game.level.removeWalkingHighlight();
-		Game.level.removeWeaponsThatCanAttackHighlight();
+		// Game.level.removeWalkingHighlight();
+		// Game.level.removeWeaponsThatCanAttackHighlight();
 	}
 
 	public void weaponButtonClicked(Weapon weapon) {
@@ -636,7 +677,7 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 
 		if (this.remainingHealth > 0) {
-			Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+			// Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 			this.aiRoutine.update();
 		}
 	}
@@ -808,85 +849,98 @@ public class Actor extends ActorTemplate implements Owner {
 		return this.conversation;
 	}
 
-	public void calculatePathToAllSquares(Square[][] squares) {
+	// public static void calculateReachableSquares() {
+	// // Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
+	//// Game.level.activeActor.calculateReachableSquares(Game.level.squares);
+	// // Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
+	// }
 
-		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares[0].length; j++) {
-				squares[i][j].walkingDistanceToSquare = Integer.MAX_VALUE;
-			}
-		}
-
-		highestPathCostSeen = 0;
-		paths.clear();
-		Square currentSquare = squareGameObjectIsOn;
-		currentSquare.walkingDistanceToSquare = 0;
-
-		Vector<Square> startPath = new Vector<Square>();
-		startPath.add(currentSquare);
-		paths.put(currentSquare, new Path((Vector<Square>) startPath.clone(), 0));
-
-		for (int i = 0; i <= highestPathCostSeen; i++) {
-			// get all paths with that cost
-			Vector<Path> pathsWithCurrentCost = new Vector<Path>();
-			Vector<Path> pathsVector = new Vector<Path>();
-			for (Path path : paths.values()) {
-				pathsVector.add(path);
-			}
-			for (int j = 0; j < pathsVector.size(); j++) {
-				if (pathsVector.get(j).travelCost == i)
-					pathsWithCurrentCost.add(pathsVector.get(j));
-			}
-
-			for (int j = 0; j < pathsWithCurrentCost.size(); j++) {
-				Vector<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
-				calculatePathToAllSquares2(squares, Direction.UP, squaresInThisPath, i);
-				calculatePathToAllSquares2(squares, Direction.RIGHT, squaresInThisPath, i);
-				calculatePathToAllSquares2(squares, Direction.DOWN, squaresInThisPath, i);
-				calculatePathToAllSquares2(squares, Direction.LEFT, squaresInThisPath, i);
-
-			}
-		}
-	}
-
-	public void calculatePathToAllSquares2(Square[][] squares, Direction direction, Vector<Square> squaresInThisPath,
-			int pathCost) {
-
-		Square newSquare = null;
-
-		Square parentSquare = squaresInThisPath.get(squaresInThisPath.size() - 1);
-
-		if (direction == Direction.UP) {
-			if (parentSquare.yInGrid - 1 >= 0) {
-				newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid - 1];
-			}
-		} else if (direction == Direction.RIGHT) {
-			if (parentSquare.xInGrid + 1 < squares.length) {
-				newSquare = squares[parentSquare.xInGrid + 1][parentSquare.yInGrid];
-			}
-		} else if (direction == Direction.DOWN) {
-
-			if (parentSquare.yInGrid + 1 < squares[0].length) {
-				newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid + 1];
-			}
-		} else if (direction == Direction.LEFT) {
-			if (parentSquare.xInGrid - 1 >= 0) {
-				newSquare = squares[parentSquare.xInGrid - 1][parentSquare.yInGrid];
-			}
-		}
-
-		if (newSquare != null && newSquare.inventory.isPassable(this) && !squaresInThisPath.contains(newSquare)
-				&& !paths.containsKey(newSquare)) {
-			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
-			newPathSquares.add(newSquare);
-			int newDistance = pathCost + parentSquare.travelCost;
-			newSquare.walkingDistanceToSquare = newDistance;
-			if (newDistance > highestPathCostSeen)
-				highestPathCostSeen = newDistance;
-			Path newPath = new Path(newPathSquares, newDistance);
-			paths.put(newSquare, newPath);
-
-			// THEYRE MOCING ON TO THE SAME SQUARE
-
-		}
-	}
+	// public void calculatePathToSquare(Square[][] squares) {
+	//
+	// for (int i = 0; i < squares.length; i++) {
+	// for (int j = 0; j < squares[0].length; j++) {
+	// squares[i][j].walkingDistanceToSquare = Integer.MAX_VALUE;
+	// }
+	// }
+	// // paths
+	// // public transient HashMap<Square, Path> paths = new HashMap<Square,
+	// // Path>();
+	//
+	// highestPathCostSeen = 0;
+	// Square currentSquare = squareGameObjectIsOn;
+	// currentSquare.walkingDistanceToSquare = 0;
+	//
+	// Vector<Square> startPath = new Vector<Square>();
+	// startPath.add(currentSquare);
+	// Path bestPath = new Path((Vector<Square>) startPath.clone(), 0);
+	//
+	// for (int i = 0; i <= highestPathCostSeen; i++) {
+	// // get all paths with that cost
+	// Vector<Path> pathsWithCurrentCost = new Vector<Path>();
+	// Vector<Path> pathsVector = new Vector<Path>();
+	// pathsVector.add(bestPath);
+	// for (int j = 0; j < pathsVector.size(); j++) {
+	// if (pathsVector.get(j).travelCost == i)
+	// pathsWithCurrentCost.add(pathsVector.get(j));
+	// }
+	//
+	// for (int j = 0; j < pathsWithCurrentCost.size(); j++) {
+	// Vector<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
+	// calculatePathToAllSquares2(squares, Direction.UP, squaresInThisPath, i);
+	// calculatePathToAllSquares2(squares, Direction.RIGHT, squaresInThisPath,
+	// i);
+	// calculatePathToAllSquares2(squares, Direction.DOWN, squaresInThisPath,
+	// i);
+	// calculatePathToAllSquares2(squares, Direction.LEFT, squaresInThisPath,
+	// i);
+	//
+	// }
+	// }
+	// }
+	//
+	// public void calculatePathToAllSquares2(Square[][] squares, Direction
+	// direction, Vector<Square> squaresInThisPath,
+	// int pathCost) {
+	//
+	// Square newSquare = null;
+	//
+	// Square parentSquare = squaresInThisPath.get(squaresInThisPath.size() -
+	// 1);
+	//
+	// if (direction == Direction.UP) {
+	// if (parentSquare.yInGrid - 1 >= 0) {
+	// newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid - 1];
+	// }
+	// } else if (direction == Direction.RIGHT) {
+	// if (parentSquare.xInGrid + 1 < squares.length) {
+	// newSquare = squares[parentSquare.xInGrid + 1][parentSquare.yInGrid];
+	// }
+	// } else if (direction == Direction.DOWN) {
+	//
+	// if (parentSquare.yInGrid + 1 < squares[0].length) {
+	// newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid + 1];
+	// }
+	// } else if (direction == Direction.LEFT) {
+	// if (parentSquare.xInGrid - 1 >= 0) {
+	// newSquare = squares[parentSquare.xInGrid - 1][parentSquare.yInGrid];
+	// }
+	// }
+	//
+	// if (newSquare != null && newSquare.inventory.isPassable(this) &&
+	// !squaresInThisPath.contains(newSquare)
+	// && !paths.containsKey(newSquare)) {
+	// Vector<Square> newPathSquares = (Vector<Square>)
+	// squaresInThisPath.clone();
+	// newPathSquares.add(newSquare);
+	// int newDistance = pathCost + parentSquare.travelCost;
+	// newSquare.walkingDistanceToSquare = newDistance;
+	// if (newDistance > highestPathCostSeen)
+	// highestPathCostSeen = newDistance;
+	// Path newPath = new Path(newPathSquares, newDistance);
+	// paths.put(newSquare, newPath);
+	//
+	// // THEYRE MOCING ON TO THE SAME SQUARE
+	//
+	// }
+	// }
 }

@@ -42,13 +42,13 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 		}
 
 		// Go about ur business...
-		if (targetSquare == null || Game.level.activeActor.paths.get(targetSquare) == null) {
+		if (targetSquare == null || Game.level.activeActor.getPathTo(targetSquare) == null) {
 			targetSquare = AIRoutineUtils.getRandomSquare(10, true);
 		}
 
 		if (targetSquare != null) {
 			Square squareToMoveTo = AIRoutineUtils
-					.getSquareToMoveAlongPath(Game.level.activeActor.paths.get(targetSquare));
+					.getSquareToMoveAlongPath(Game.level.activeActor.getPathTo(targetSquare));
 			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
 			// AIRoutineUtils.moveTo(Game.level.activeActor, squareToMoveTo);
 			if (Game.level.activeActor.squareGameObjectIsOn == targetSquare)

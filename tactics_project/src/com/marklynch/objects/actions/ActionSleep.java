@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Path;
 
 public class ActionSleep extends Action {
 
@@ -74,7 +75,8 @@ public class ActionSleep extends Action {
 		if (target == mover.squareGameObjectIsOn || !target.inventory.isPassable(mover))
 			return false;
 
-		if (target.walkingDistanceToSquare > mover.travelDistance - mover.distanceMovedThisTurn)
+		Path path = mover.getPathTo(target);
+		if (path.travelCost > mover.travelDistance - mover.distanceMovedThisTurn)
 			return false;
 
 		if (mover != Game.level.player && mover.swapCooldown > 0) {

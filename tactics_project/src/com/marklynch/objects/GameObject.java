@@ -3,7 +3,6 @@ package com.marklynch.objects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -21,7 +20,6 @@ import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Path;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.ResourceUtils;
@@ -54,9 +52,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	// sounds
 	public static transient Audio screamAudio = null;
-
-	// paths
-	public transient HashMap<Square, Path> paths = new HashMap<Square, Path>();
 
 	// POW
 	public transient GameObject powTarget = null;
@@ -113,7 +108,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	@Override
 	public void postLoad1() {
 		super.postLoad1();
-		paths = new HashMap<Square, Path>();
+		// paths = new HashMap<Square, Path>();
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn.inventory.add(this);
 		}
@@ -146,11 +141,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public void draw1() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-			return;
-
-		if (!this.squareGameObjectIsOn.seenByPlayer)
-			return;
+		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
+		// persistsWhenCantBeSeen == false)
+		// return;
+		//
+		// if (!this.squareGameObjectIsOn.seenByPlayer)
+		// return;
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {

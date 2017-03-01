@@ -187,15 +187,17 @@ public class UserInputLevel {
 		boolean hoveringOverPopup = Game.buttonHoveringOver != null && Game.buttonHoveringOver instanceof PopupButton;
 
 		// Path highlights
-		if (scriptInterceptsClick == false && Game.buttonHoveringOver == null && Game.level.activeActor != null
-				&& Game.squareMouseIsOver != null && Game.squareMouseIsOver.reachableBySelectedCharater
-				&& Game.level.activeActor.faction == Game.level.factions.get(0)
-				&& Game.level.currentFactionMoving == Game.level.factions.get(0)) {
-			path = Game.level.activeActor.paths.get(Game.squareMouseIsOver);
-			for (Square square : path.squares) {
-				square.inPath = true;
-			}
-		}
+		// if (scriptInterceptsClick == false && Game.buttonHoveringOver == null
+		// && Game.level.activeActor != null
+		// && Game.squareMouseIsOver != null &&
+		// Game.squareMouseIsOver.reachableBySelectedCharater
+		// && Game.level.activeActor.faction == Game.level.factions.get(0)
+		// && Game.level.currentFactionMoving == Game.level.factions.get(0)) {
+		//// path = Game.level.activeActor.paths.get(Game.squareMouseIsOver);
+		// for (Square square : path.squares) {
+		// square.inPath = true;
+		// }
+		// }
 
 		// Lifted the mouse to perform click
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {

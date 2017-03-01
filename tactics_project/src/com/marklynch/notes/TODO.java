@@ -2,6 +2,13 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// AIRoutineUtils.moveToRandomSquare is fucking diabolical
+
+	// In Square.getDefaultActionInWorld the move action is returned if straight
+	// line distance is ok :/
+
+	// A monster in the cave. rar.
+
 	// No roof squares @ entrance to cave will look good, like... inside the
 	// cave, near the entrance
 

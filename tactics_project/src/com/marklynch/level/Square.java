@@ -4,10 +4,12 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
 
 import com.marklynch.Game;
+import com.marklynch.ai.routines.AStarNode;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
@@ -17,11 +19,12 @@ import com.marklynch.objects.actions.ActionPickuUpAll;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class Square implements ActionableInWorld {
+public class Square extends AStarNode implements ActionableInWorld {
 
 	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
@@ -33,7 +36,7 @@ public class Square implements ActionableInWorld {
 	public SquareInventory inventory;
 	public boolean showInventory;
 
-	public transient boolean reachableBySelectedCharater = false;
+	// public transient boolean reachableBySelectedCharater = false;
 	public transient boolean visibleToSelectedCharacter = false;
 	public transient boolean visibleToPlayer = false;
 	public transient boolean seenByPlayer = false;
@@ -45,7 +48,7 @@ public class Square implements ActionableInWorld {
 	public transient Texture imageTexture = null;
 
 	public transient boolean showingDialogs = false;
-	public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
+	// public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
 
 	public transient static PathComparator pathComparator;
 
@@ -85,11 +88,8 @@ public class Square implements ActionableInWorld {
 
 	public void draw1() {
 
-		// if (!this.visibleToPlayer)
+		// if (!this.seenByPlayer)
 		// return;
-
-		if (!this.seenByPlayer)
-			return;
 
 		// square texture
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
@@ -251,7 +251,7 @@ public class Square implements ActionableInWorld {
 
 		if (this == Game.level.player.squareGameObjectIsOn) {
 			return null;
-		} else if (this.reachableBySelectedCharater) {
+		} else if (performer.travelDistance >= performer.straightLineDistanceTo(this)) {
 			return new ActionMove(performer, this);
 		} else {
 			return null;
@@ -271,5 +271,78 @@ public class Square implements ActionableInWorld {
 		}
 
 		return actions;
+	}
+
+	public int straightLineDistanceTo(Square otherSquare) {
+		return Math.abs(otherSquare.xInGrid - this.xInGrid) + Math.abs(otherSquare.yInGrid - this.yInGrid);
+
+	}
+
+	public Vector<Square> getAllSharableSquaresAtDistance(float distance) {
+		Vector<Square> squares = new Vector<Square>();
+		if (distance == 0) {
+			squares.addElement(this);
+			return squares;
+		}
+
+		boolean xGoingUp = true;
+		boolean yGoingUp = true;
+		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+			if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + x, this.yInGrid + y)) {
+				if (Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y].inventory.canShareSquare())
+					squares.add(Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y]);
+			}
+
+			if (xGoingUp) {
+				if (x == distance) {
+					xGoingUp = false;
+					x--;
+				} else {
+					x++;
+				}
+			} else {
+				if (x == -distance) {
+					xGoingUp = true;
+					x++;
+				} else {
+					x--;
+				}
+			}
+
+			if (yGoingUp) {
+				if (y == distance) {
+					yGoingUp = false;
+					y--;
+				} else {
+					y++;
+				}
+			} else {
+				if (y == -distance) {
+					yGoingUp = true;
+					y++;
+				} else {
+					y--;
+				}
+			}
+
+		}
+		return squares;
+	}
+
+	@Override
+	public float getCost(AStarNode node) {
+		Square otherSquare = (Square) node;
+		return this.straightLineDistanceTo(otherSquare);
+	}
+
+	@Override
+	public float getEstimatedCost(AStarNode node) {
+		Square otherSquare = (Square) node;
+		return this.straightLineDistanceTo(otherSquare);
+	}
+
+	@Override
+	public List getNeighbors() {
+		return getAllSharableSquaresAtDistance(1f);
 	}
 }

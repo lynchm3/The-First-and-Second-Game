@@ -13,7 +13,6 @@ import com.google.gson.JsonSerializer;
 import com.marklynch.Game;
 import com.marklynch.SaveAndLoad;
 import com.marklynch.editor.Editor;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.script.trigger.ScriptTriggerActorSelected;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
@@ -148,7 +147,6 @@ public class LevelSettingsWindow extends SettingsWindow {
 				Game.level.currentFactionMoving = Game.level.factions.get(Game.level.currentFactionMovingIndex);
 				Game.level.activeActor = Game.level.player;
 				Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
-				Actor.calculateReachableSquares();
 				Game.level.turn = 1;
 				Game.level = Game.level;
 				Game.editorMode = false;

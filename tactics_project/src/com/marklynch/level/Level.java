@@ -244,21 +244,21 @@ public class Level {
 		}
 	}
 
-	public void removeWalkingHighlight() {
-		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares[0].length; j++) {
-				squares[i][j].reachableBySelectedCharater = false;
-			}
-		}
-	}
+	// public void removeWalkingHighlight() {
+	// for (int i = 0; i < squares.length; i++) {
+	// for (int j = 0; j < squares[0].length; j++) {
+	// squares[i][j].reachableBySelectedCharater = false;
+	// }
+	// }
+	// }
 
-	public void removeWeaponsThatCanAttackHighlight() {
-		for (int i = 0; i < squares.length; i++) {
-			for (int j = 0; j < squares[0].length; j++) {
-				squares[i][j].weaponsThatCanAttack.clear();
-			}
-		}
-	}
+//	public void removeWeaponsThatCanAttackHighlight() {
+//		for (int i = 0; i < squares.length; i++) {
+//			for (int j = 0; j < squares[0].length; j++) {
+//				squares[i][j].weaponsThatCanAttack.clear();
+//			}
+//		}
+//	}
 
 	public void drawBackground() {
 		// Squares
@@ -556,8 +556,8 @@ public class Level {
 			}
 		}
 
-		removeWalkingHighlight();
-		removeWeaponsThatCanAttackHighlight();
+		// removeWalkingHighlight();
+		// removeWeaponsThatCanAttackHighlight();
 
 		if (activeActor != null)
 			activeActor.unselected();
@@ -578,7 +578,7 @@ public class Level {
 			Game.level.activeActor = player;
 			// Game.level.activeActor.equippedWeapon =
 			// Game.level.activeActor.getWeaponsInInventory().get(0);
-			Actor.calculateReachableSquares();
+			// Actor.calculateReachableSquares();
 			Game.level.activeActor.calculateVisibleSquares();
 		}
 
@@ -631,7 +631,7 @@ public class Level {
 			if (activeActor != null)
 				activeActor.unselected();
 			activeActor = move.actor;
-			Actor.calculateReachableSquares();
+			// Actor.calculateReachableSquares();
 			removeLastLog();
 			if (this.undoList.isEmpty()) {
 				undoButton.enabled = false;
