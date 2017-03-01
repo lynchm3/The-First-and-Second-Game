@@ -144,7 +144,7 @@ public class SquareInventory extends Inventory {
 
 	public void smashWindows(Projectile projectile) {
 		for (GameObject gameObject : gameObjects) {
-			if (gameObject.remainingHealth > 0 && gameObject instanceof GameObjectExploder) {
+			if (gameObject.remainingHealth > 0 && gameObject instanceof Window) {
 				gameObject.remainingHealth = 0;
 				gameObject.checkIfDestroyed();
 				Game.level.logOnScreen(new ActivityLog(new Object[] {

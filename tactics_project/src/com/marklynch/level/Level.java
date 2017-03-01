@@ -483,6 +483,9 @@ public class Level {
 		projectiles.removeAll(projectilesToRemove);
 		projectilesToRemove.clear();
 
+		for (GameObject inanimateObject : inanimateObjectsOnGround)
+			inanimateObject.updateRealtime(0);
+
 		for (Decoration decoration : decorations)
 			decoration.update(delta);
 

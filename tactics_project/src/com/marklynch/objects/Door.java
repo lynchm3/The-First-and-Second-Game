@@ -30,7 +30,7 @@ public class Door extends GameObject {
 	}
 
 	@Override
-	public GameObject makeCopy(Square square) {
+	public Door makeCopy(Square square) {
 		return new Door(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio);

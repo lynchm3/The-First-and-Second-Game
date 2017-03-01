@@ -377,6 +377,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	}
 
+	public void updateRealtime(int delta) {
+
+	}
+
 	public float getCenterX() {
 		return squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
 	}

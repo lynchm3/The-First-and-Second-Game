@@ -12,10 +12,10 @@ public class Corpse extends GameObject {
 	}
 
 	@Override
-	public GameObject makeCopy(Square square) {
+	public Corpse makeCopy(Square square) {
 		return new Corpse(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
-				heightRatio);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio);
 	}
 
 }

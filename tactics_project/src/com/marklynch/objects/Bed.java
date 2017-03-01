@@ -15,7 +15,8 @@ public class Bed extends GameObject {
 
 	public Bed(String name, int health, String imagePath, String imagePathCovers, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
-			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio) {
+			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
+			float heightRatio) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
 		this.imagePathCovers = imagePathCovers;
@@ -27,7 +28,7 @@ public class Bed extends GameObject {
 	}
 
 	@Override
-	public GameObject makeCopy(Square square) {
+	public Bed makeCopy(Square square) {
 		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);

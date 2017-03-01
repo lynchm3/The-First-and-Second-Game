@@ -95,7 +95,7 @@ public class Wall extends GameObject {
 	}
 
 	@Override
-	public GameObject makeCopy(Square square) {
+	public Wall makeCopy(Square square) {
 		return new Wall(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio);

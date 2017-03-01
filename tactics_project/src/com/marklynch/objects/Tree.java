@@ -129,7 +129,7 @@ public class Tree extends GameObject {
 	}
 
 	@Override
-	public GameObject makeCopy(Square square) {
+	public Tree makeCopy(Square square) {
 		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio);

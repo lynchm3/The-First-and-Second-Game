@@ -12,10 +12,10 @@ public class Food extends GameObject {
 	}
 
 	@Override
-	public GameObject makeCopy(Square square) {
+	public Food makeCopy(Square square) {
 		return new Food(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
-				heightRatio);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio);
 	}
 
 }

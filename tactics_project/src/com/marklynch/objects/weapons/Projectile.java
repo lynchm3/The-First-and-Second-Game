@@ -34,8 +34,8 @@ public class Projectile {
 		distanceToCoverY = this.targetY - this.originY;
 		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
 
-		this.speedX = (distanceToCoverX / totalDistanceToCover) * 4;
-		this.speedY = (distanceToCoverY / totalDistanceToCover) * 4;
+		this.speedX = (distanceToCoverX / totalDistanceToCover) * 3;
+		this.speedY = (distanceToCoverY / totalDistanceToCover) * 3;
 
 		this.onTarget = onTarget;
 		this.imagePath = imagePath;

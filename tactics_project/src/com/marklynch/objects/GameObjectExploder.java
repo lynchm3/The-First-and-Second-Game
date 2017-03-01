@@ -70,9 +70,9 @@ public class GameObjectExploder extends GameObject {
 
 				squarePiece.centreX = squarePiece.x1 + pieceWidth / 2f;
 				squarePiece.centreY = squarePiece.y1 + pieceHeight / 2f;
-				squarePiece.velocityX = (float) Math.random() * 50 - 25;
-				squarePiece.velocityY = (float) Math.random() * 50 - 25;
-				squarePiece.rotationVelocity = (float) Math.random() * 50 - 25;
+				squarePiece.velocityX = (float) Math.random() * 10f - 5f;
+				squarePiece.velocityY = (float) Math.random() * 10f - 5f;
+				squarePiece.rotationVelocity = (float) Math.random() * 10f - 5f;
 			}
 		}
 
@@ -167,7 +167,7 @@ public class GameObjectExploder extends GameObject {
 	}
 
 	@Override
-	public void update(int delta) {
+	public void updateRealtime(int delta) {
 		super.update(delta);
 
 		for (int i = 0; trianglePieces != null && i < trianglePieces.length; i++) {

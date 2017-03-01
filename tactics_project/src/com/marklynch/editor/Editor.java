@@ -45,6 +45,7 @@ import com.marklynch.objects.Junk;
 import com.marklynch.objects.Sign;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
+import com.marklynch.objects.Window;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Trader;
@@ -419,36 +420,36 @@ public class Editor {
 
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[6][5], new Inventory(), false,
 				true, false, false, false, true, 1, 1));
-		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[6][5],
-				new Inventory(), false, false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[6][5], new Inventory(), false,
+				false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[7][5], new Inventory(), false,
 				true, false, false, false, true, 1, 1));
-		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[7][5],
-				new Inventory(), false, false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[7][5], new Inventory(), false,
+				false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[9][5], new Inventory(), false,
 				true, false, false, false, true, 1, 1));
-		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[9][5],
-				new Inventory(), false, false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[9][5], new Inventory(), false,
+				false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[10][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[10][5],
-				new Inventory(), false, false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[10][5], new Inventory(), false,
+				false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[12][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[12][5],
-				new Inventory(), false, false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[12][5], new Inventory(), false,
+				false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[13][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[13][5],
-				new Inventory(), false, false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[13][5], new Inventory(), false,
+				false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[15][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[15][5],
-				new Inventory(), false, false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[15][5], new Inventory(), false,
+				false, false, false, false, true, 1, 1));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[16][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new GameObjectExploder("Shop Window", 10, "window.png", Game.level.squares[16][5],
-				new Inventory(), false, false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[16][5], new Inventory(), false,
+				false, false, false, false, true, 1, 1));
 
 		Game.level.squares[4][4].imageTexturePath = "stone.png";
 		Game.level.squares[4][4].loadImages();
@@ -623,7 +624,7 @@ public class Editor {
 		Sign joesShopSign = (Sign) Templates.SIGN.makeCopy(Game.level.squares[4][5]);
 		joesShopSign.setText(new Object[] { joesShop.name });
 		joesShopSign.name = joesShop.name + " sign";
-		Weapon broom = (Weapon) Templates.BROOM.makeCopy(null);
+		Weapon broom = Templates.BROOM.makeCopy(null);
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, Game.level.factions.get(1), 40, 96,
 				joesShop, shopAtriums.get(0), joesShopSign, broom);

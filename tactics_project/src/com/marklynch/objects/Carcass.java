@@ -12,10 +12,10 @@ public class Carcass extends GameObject {
 	}
 
 	@Override
-	public GameObject makeCopy(Square square) {
+	public Carcass makeCopy(Square square) {
 		return new Carcass(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
-				heightRatio);
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio);
 	}
 
 }
