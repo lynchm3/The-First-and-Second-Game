@@ -17,15 +17,16 @@ public class Structure {
 	public String name;
 	public ArrayList<StructureRoom> rooms;
 	public boolean seenByPlayer = false;
-	ArrayList<StructureSection> caveSections;
-	ArrayList<Square> entranceSquares;
-	Texture imageTexture;
+	public ArrayList<StructureSection> caveSections;
+	public ArrayList<Square> entranceSquares;
+	public Texture imageTexture;
 	float overlayX1, overlayX2, overlayY1, overlayY2;
 	boolean blocksLineOfSight;
 
-	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms, ArrayList<StructureHall> paths,
-			ArrayList<GameObject> features, ArrayList<Square> entrances, String imageTexturePath, float overlayX1,
-			float overlayX2, float overlayY1, float overlayY2, boolean blocksLineOfSight) {
+	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
+			ArrayList<StructureHall> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
+			String imageTexturePath, float overlayX1, float overlayX2, float overlayY1, float overlayY2,
+			boolean blocksLineOfSight) {
 		super();
 
 		this.name = name;

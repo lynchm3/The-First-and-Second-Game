@@ -242,11 +242,11 @@ public class TextUtils {
 				offsetX += textWidth;
 
 				// Image
-
-				// float x = posX + offsetX;
-				// TextureUtils.drawTexture(building.imageTexture, x, x + 20,
-				// posY + offsetY, posY + offsetY + 20);
-				// offsetX += textureWidth;
+				if (structure.imageTexture != null) {
+					float x = posX + offsetX;
+					TextureUtils.drawTexture(structure.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
+					offsetX += textureWidth;
+				}
 
 			} else if (content instanceof Color) {
 

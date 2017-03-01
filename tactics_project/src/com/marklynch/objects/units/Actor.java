@@ -23,6 +23,7 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Owner;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
@@ -314,8 +315,10 @@ public class Actor extends ActorTemplate implements Owner {
 				Game.level.squares[x][y].visibleToPlayer = true;
 				Game.level.squares[x][y].seenByPlayer = true;
 				// Seen Building
-				if (Game.level.squares[x][y].structureSquareIsIn != null) {
+				if (Game.level.squares[x][y].structureSquareIsIn != null
+						&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
 					Game.level.squares[x][y].structureSquareIsIn.seenByPlayer = true;
+					new ActionSpot(this, Game.level.squares[x][y].structureSquareIsIn).perform();
 				}
 			}
 		}

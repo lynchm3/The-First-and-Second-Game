@@ -2,6 +2,12 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// No roof squares @ entrance to cave will look good, like... inside the
+	// cave, near the entrance
+
+	// Use ActionEquip for AI. That's a good one, want to see what they're
+	// equipping
+
 	// Enviromentalist needs to stop spying if u murder all the hunters :P or he
 	// follows them around everywhere so he'll see the slaughter and have a go @
 	// u
