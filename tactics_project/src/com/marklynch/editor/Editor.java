@@ -420,36 +420,36 @@ public class Editor {
 
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[6][5], new Inventory(), false,
 				true, false, false, false, true, 1, 1));
-		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[6][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[6][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[7][5], new Inventory(), false,
 				true, false, false, false, true, 1, 1));
-		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[7][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[7][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[9][5], new Inventory(), false,
 				true, false, false, false, true, 1, 1));
-		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[9][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[9][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[10][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[10][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[10][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[12][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[12][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[12][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[13][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[13][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[13][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[15][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[15][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[15][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5));
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[16][5], new Inventory(),
 				false, true, false, false, false, true, 1, 1));
-		shopFeatures.add(new Window("Shop Window", 10, "window.png", Game.level.squares[16][5], new Inventory(), false,
-				false, false, false, false, true, 1, 1));
+		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[16][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5));
 
 		Game.level.squares[4][4].imageTexturePath = "stone.png";
 		Game.level.squares[4][4].loadImages();
@@ -459,8 +459,9 @@ public class Editor {
 		shopAtriums.add(new StructureRoom("Super Wolf's Den", 12, 1, 16, 4));
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5));
-		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums, new ArrayList<StructureHall>(),
-				shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -32, -32 + 800, true);
+		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
+				new ArrayList<StructureHall>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, 0,
+				0 + 768, true);
 		Game.level.structures.add(joesShop);
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
@@ -468,8 +469,8 @@ public class Editor {
 		lodgeAtriums.add(new StructureRoom("Super Wolf's Den", 8, 8, 10, 10));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
 		lodgeSections.add(new StructureSection("Super Wolf's Den", 7, 7, 11, 11));
-		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructureHall>(), lodgeFeatures,
-				new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true);
+		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructureHall>(),
+				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true);
 		Game.level.structures.add(lodge);
 
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
@@ -546,7 +547,7 @@ public class Editor {
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
 		// Add actor
-		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[26][14], Game.level.factions.get(0));
+		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[3][3], Game.level.factions.get(0));
 		Game.level.player = player;
 		player.inventory.add(Templates.KATANA.makeCopy(null));
 		player.inventory.add(Templates.HATCHET.makeCopy(null));

@@ -7,6 +7,7 @@ import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -21,6 +22,9 @@ public class Structure {
 	public ArrayList<Square> entranceSquares;
 	public Texture imageTexture;
 	float overlayX1, overlayX2, overlayY1, overlayY2;
+	ArrayList<Square> floorSquares;
+	ArrayList<Square> wallSquares;
+	ArrayList<Square> featureSquares;
 	boolean blocksLineOfSight;
 
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
@@ -39,9 +43,9 @@ public class Structure {
 		this.overlayY2 = overlayY2;
 		this.entranceSquares = entrances;
 		this.blocksLineOfSight = blocksLineOfSight;
-		ArrayList<Square> floorSquares = new ArrayList<Square>();
-		ArrayList<Square> wallSquares = new ArrayList<Square>();
-		ArrayList<Square> featureSquares = new ArrayList<Square>();
+		floorSquares = new ArrayList<Square>();
+		wallSquares = new ArrayList<Square>();
+		featureSquares = new ArrayList<Square>();
 
 		// Entrance squares
 		for (Square entranceSquare : entranceSquares) {
@@ -160,7 +164,7 @@ public class Structure {
 
 	}
 
-	float roofAlpha = 1f;
+	public float roofAlpha = 1f;
 
 	public void draw2() {
 		if (!seenByPlayer)
@@ -184,5 +188,22 @@ public class Structure {
 					this.overlayY2);
 		}
 
+	}
+
+	public void hasBeenSeenByPlayer() {
+		this.seenByPlayer = true;
+		new ActionSpot(Game.level.player, this).perform();
+		for (Square square : this.entranceSquares) {
+			square.seenByPlayer = true;
+		}
+		// for (Square square : floorSquares) {
+		// square.seenByPlayer = true;
+		// }
+		// for (Square square : wallSquares) {
+		// square.seenByPlayer = true;
+		// }
+		for (Square square : featureSquares) {
+			square.seenByPlayer = true;
+		}
 	}
 }

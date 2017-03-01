@@ -17,10 +17,8 @@ import com.marklynch.objects.actions.ActionPickuUpAll;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
-import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Square implements ActionableInWorld {
@@ -99,8 +97,11 @@ public class Square implements ActionableInWorld {
 		// QuadUtils.drawQuad(new Color(0.2f, 0.4f, 0.1f, 1.0f),
 		// squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
 		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
-		TextureUtils.drawTexture(imageTexture, squarePositionX, squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
-				squarePositionY + Game.SQUARE_HEIGHT);
+		float alpha = 1f;
+		if (!this.visibleToPlayer)
+			alpha = 0.25f;
+		TextureUtils.drawTexture(imageTexture, alpha, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
+				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
 		// square highlights
 
@@ -173,15 +174,13 @@ public class Square implements ActionableInWorld {
 
 	public void draw2() {
 
-		if (!this.seenByPlayer)
-			return;
-
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-
-		if (!this.visibleToPlayer)
-			QuadUtils.drawQuad(new Color(0.5f, 0.5f, 0.5f, 0.75f), squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
-					squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+		// int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		// int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		//
+		// if (!this.visibleToPlayer)
+		// QuadUtils.drawQuad(new Color(0.5f, 0.5f, 0.5f, 0.75f),
+		// squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
+		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
 

@@ -163,6 +163,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 			// TextureUtils.skipNormals = true;
 
+			if (!this.squareGameObjectIsOn.visibleToPlayer)
+				alpha = 0.5f;
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + width,
 					actorPositionYInPixels, actorPositionYInPixels + height);
 			// TextureUtils.skipNormals = false;
