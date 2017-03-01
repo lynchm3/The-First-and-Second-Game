@@ -191,7 +191,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 		System.out.println("getPathTo start " + System.currentTimeMillis());
 
-		if (target == null) {
+		if (target == null || target.inventory.canShareSquare() == false) {
 			System.out.println("getPathTo end A " + System.currentTimeMillis());
 			return null;
 		}
