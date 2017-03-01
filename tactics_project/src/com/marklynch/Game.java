@@ -268,7 +268,7 @@ public class Game {
 	 */
 	public void updateFPS() {
 		if (getTime() - lastFPS > 1000) {
-			Display.setTitle("FPS: " + fps);
+			Display.setTitle("Eclipse");
 			fps = 0;
 			lastFPS += 1000;
 		}

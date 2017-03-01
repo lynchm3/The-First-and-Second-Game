@@ -2,11 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	// GameExploders need seperate update calls for the debris
+	// Go through all the actions and see which the AI doesnt perform
 
 	// Samsh window action
-
-	// SmashWindows() method smashes any gameobjectelpoder
 
 	// TextUtils for Projectile
 

@@ -398,6 +398,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
+		if (this.remainingHealth < 0)
+			return actions;
+
 		// public boolean showInventory;
 		// public boolean canShareSquare;
 		if (fitsInInventory) {

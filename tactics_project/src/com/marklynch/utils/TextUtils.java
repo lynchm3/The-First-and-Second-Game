@@ -13,6 +13,7 @@ import com.marklynch.level.constructs.building.Building;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -325,6 +326,15 @@ public class TextUtils {
 
 				Action action = (Action) content;
 				String string = action.actionName;
+
+				float textWidth = Game.font.getWidth(string);
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof Projectile) {
+
+				Projectile projectile = (Projectile) content;
+				String string = projectile.name;
 
 				float textWidth = Game.font.getWidth(string);
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);

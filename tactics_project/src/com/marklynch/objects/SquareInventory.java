@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
-import com.marklynch.ui.ActivityLog;
 
 public class SquareInventory extends Inventory {
 
@@ -145,11 +145,7 @@ public class SquareInventory extends Inventory {
 	public void smashWindows(Projectile projectile) {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.remainingHealth > 0 && gameObject instanceof Window) {
-				gameObject.remainingHealth = 0;
-				gameObject.checkIfDestroyed();
-				Game.level.logOnScreen(new ActivityLog(new Object[] {
-
-						projectile, " smashed ", gameObject }));
+				new ActionSmash(projectile, gameObject).perform();
 
 			}
 		}

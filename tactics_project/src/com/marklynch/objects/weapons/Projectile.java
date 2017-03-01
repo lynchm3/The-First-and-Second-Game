@@ -12,16 +12,26 @@ import mdesl.graphics.Texture;
 
 public class Projectile {
 
-	GameObject shooter, target;
+	public String name;
+	public GameObject shooter;
+	public GameObject target;
 	float x, y, originX, originY, targetX, targetY, speedX, speedY;
 	boolean onTarget;
 	String imagePath;
 	Texture imageTexture;
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 
-	public Projectile(GameObject shooter, GameObject target, float speed, boolean onTarget, String imagePath) {
+	public Projectile(String name, GameObject shooter, GameObject target, float speed, boolean onTarget,
+			String imagePath) {
 		super();
 
+		if (shooter == Game.level.player) {
+			name = "Your " + name;
+		} else {
+			name = shooter.name + "'s " + name;
+		}
+
+		this.name = name;
 		this.shooter = shooter;
 		this.target = target;
 

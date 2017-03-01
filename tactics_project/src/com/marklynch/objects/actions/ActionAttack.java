@@ -68,7 +68,7 @@ public class ActionAttack extends Action {
 
 		// shoot projectile
 		if (attacker.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			Game.level.projectiles.add(new Projectile(attacker, target, 5f, true, "hunter.png"));
+			Game.level.projectiles.add(new Projectile("Arrow", attacker, target, 5f, true, "hunter.png"));
 		} else {
 			attacker.showPow(target);
 		}

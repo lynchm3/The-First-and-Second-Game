@@ -78,9 +78,6 @@ public class UserInputLevel {
 
 	public static void userInput(int delta2) {
 
-		if (Game.level.activeActor != Game.level.player)
-			return;
-
 		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
@@ -310,6 +307,8 @@ public class UserInputLevel {
 	}
 
 	public static void upTyped() {
+		if (Game.level.activeActor != Game.level.player)
+			return;
 		if (Game.level.popups.size() != 0) {
 			Game.level.popups.get(Game.level.popups.size() - 1).moveHighLightUp();
 		} else {
@@ -327,6 +326,9 @@ public class UserInputLevel {
 	}
 
 	public static void downTyped() {
+		if (Game.level.activeActor != Game.level.player)
+			return;
+
 		if (Game.level.popups.size() != 0) {
 			Game.level.popups.get(Game.level.popups.size() - 1).moveHighLightDown();
 		} else {
@@ -345,6 +347,8 @@ public class UserInputLevel {
 	}
 
 	public static void leftTyped() {
+		if (Game.level.activeActor != Game.level.player)
+			return;
 		if (Game.level.popups.size() != 0) {
 			Game.level.popups.remove(Game.level.popups.size() - 1);
 
@@ -370,6 +374,8 @@ public class UserInputLevel {
 	}
 
 	public static void rightTyped() {
+		if (Game.level.activeActor != Game.level.player)
+			return;
 		if (Game.level.popups.size() != 0) {
 			// Game.level.popups.get(Game.level.popups.size() - 1).high
 			Game.level.popups.get(Game.level.popups.size() - 1).clickHighlightedButton();
@@ -391,12 +397,16 @@ public class UserInputLevel {
 	}
 
 	public static void enterTyped() {
+		if (Game.level.activeActor != Game.level.player)
+			return;
 		if (Game.level.popups.size() != 0) {
 			Game.level.popups.get(Game.level.popups.size() - 1).clickHighlightedButton();
 		}
 	}
 
 	public static void backSpacedTyped() {
+		if (Game.level.activeActor != Game.level.player)
+			return;
 
 		if (Game.level.popups.size() != 0) {
 			Game.level.popups.remove(Game.level.popups.size() - 1);
@@ -414,6 +424,8 @@ public class UserInputLevel {
 	}
 
 	public static void keyTyped(char character) {
+		if (Game.level.activeActor != Game.level.player)
+			return;
 		if (character == ' ') {
 
 			if (Game.level.popups.size() != 0) {

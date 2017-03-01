@@ -72,7 +72,7 @@ public abstract class Game {
 	// Start our game
 	public void start() throws LWJGLException {
 		// Set up our display
-		Display.setTitle("Game");
+		Display.setTitle("Eclipse");
 		Display.setResizable(true);
 		Display.setVSyncEnabled(true);
 
