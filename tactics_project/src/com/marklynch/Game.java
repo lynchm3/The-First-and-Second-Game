@@ -28,6 +28,8 @@ import mdesl.test.Util;
 
 public class Game {
 
+	// public static float dragX = 0;
+	// public static float dragY = 0;
 	public static float dragX = -3000;
 	public static float dragY = -1500;
 	public static float zoom = 0.25f;

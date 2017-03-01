@@ -460,8 +460,8 @@ public class Editor {
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
-				new ArrayList<StructureHall>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, 0,
-				0 + 768, true);
+				new ArrayList<StructureHall>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -100,
+				-100 + 868, true);
 		Game.level.structures.add(joesShop);
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
@@ -486,6 +486,15 @@ public class Editor {
 		cavePathSquares.add(Game.level.squares[24][14]);
 		cavePathSquares.add(Game.level.squares[25][14]);
 		cavePaths.add(new StructureHall("Path", cavePathSquares));
+		ArrayList<Square> cavePathSquares2 = new ArrayList<Square>();
+		cavePathSquares.add(Game.level.squares[38][16]);
+		cavePathSquares.add(Game.level.squares[39][16]);
+		cavePathSquares.add(Game.level.squares[39][15]);
+		cavePathSquares.add(Game.level.squares[39][14]);
+		cavePathSquares.add(Game.level.squares[40][14]);
+		cavePathSquares.add(Game.level.squares[41][14]);
+		cavePathSquares.add(Game.level.squares[42][14]);
+		cavePaths.add(new StructureHall("Path", cavePathSquares2));
 
 		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
 		caveAtriums.add(new StructureRoom("Super Wolf's Den", 25, 13, 37, 18));
@@ -547,7 +556,7 @@ public class Editor {
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
 		// Add actor
-		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[3][3], Game.level.factions.get(0));
+		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[28][14], Game.level.factions.get(0));
 		Game.level.player = player;
 		player.inventory.add(Templates.KATANA.makeCopy(null));
 		player.inventory.add(Templates.HATCHET.makeCopy(null));
