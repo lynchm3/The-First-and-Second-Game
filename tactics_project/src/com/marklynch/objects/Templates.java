@@ -1,6 +1,5 @@
 package com.marklynch.objects;
 
-import com.marklynch.Game;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.weapons.Weapon;
@@ -46,12 +45,14 @@ public class Templates {
 			false, false, 0.5f, 0.5f, 40, 42);
 
 	// Furniture
-	public static final GameObjectTemplate BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(),
-			false, true, false, false, false, false, 1, 1);
-	public static final GameObjectTemplate SIGN = new Sign("Sign", 5, "sign.png", Game.level.squares[6][8],
-			new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1);
+	public static final Bed BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), false, true,
+			false, false, false, false, 1, 1);
+	public static final Sign SIGN = new Sign("Sign", 5, "sign.png", null, new Inventory(), true, false, false, true,
+			false, true, new Object[] { "" }, 1, 1);
 	public static final GameObjectTemplate SHOP_COUNTER = new GameObjectTemplate("Shop Counter", 5, "shop_counter.png",
 			null, new Inventory(), false, true, false, true, false, false, 1f, 1f);
+	public static final Sign ROCK_WITH_ETCHING = new Sign("Rock with Etching", 5, "rock_with_etching.png", null,
+			new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1);
 
 	// LARGE CONTAINER
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",

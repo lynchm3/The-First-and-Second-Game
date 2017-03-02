@@ -2,6 +2,21 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Need thumbnails image for everything. For the logs.
+
+	// Ability to mark skills as favourite so that it appears in the 1st level
+	// of the drop down. Otherwise theyre in the second lvl under skills.
+	// (skyrim did this)
+
+	// Need to put in functionality to click anywhere and the player will walk
+	// there over X turns. Stop when attacked.
+
+	// In settings - turn on/of stop when spot enemy, stop when spot building,
+	// stop when spot chest.....
+
+	// Definitely a way to be smarter with the paths. Only calculate path when
+	// stuck? or target changes.
+
 	// AM I overusing check for visible SQuares?
 
 	// Limit path finding to X iterations. If reach X then just return best

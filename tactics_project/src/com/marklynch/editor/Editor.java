@@ -35,7 +35,6 @@ import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureHall;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
-import com.marklynch.objects.Bed;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectExploder;
@@ -497,13 +496,16 @@ public class Editor {
 		cavePaths.add(new StructureHall("Path", cavePathSquares2));
 
 		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
-		caveAtriums.add(new StructureRoom("Super Wolf's Den", 25, 13, 37, 18));
-		caveAtriums.add(new StructureRoom("Super Wolf's Den", 43, 7, 47, 14));
+		caveAtriums.add(new StructureRoom("Wolf's Den", 25, 13, 37, 18));
+		caveAtriums.add(new StructureRoom("Entrance to the Blind", 43, 7, 47, 14));
 		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
-		caveSections.add(new StructureSection("Super Wolf's Den", 24, 12, 40, 19));
-		caveSections.add(new StructureSection("Super Wolf's Den", 41, 5, 49, 16));
-		Game.level.structures.add(new Structure("Super Wolf's Cave", caveSections, caveAtriums, cavePaths, caveFeatures,
+		caveSections.add(new StructureSection("Cave of the Blind", 24, 12, 40, 19));
+		caveSections.add(new StructureSection("Cave of the Blind", 41, 5, 49, 16));
+		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
+
+		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14]);
+		rockWithEtching.setText(new Object[] { "SHHHHHhhhhhhhh..." });
 
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )
@@ -567,14 +569,14 @@ public class Editor {
 		// Add lead hunter
 		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1));
 		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
-		hunterBrent.bed = (Bed) Templates.BED.makeCopy(Game.level.squares[10][9]);
+		hunterBrent.bed = Templates.BED.makeCopy(Game.level.squares[10][9]);
 		hunterBrent.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		// Add hunters
 		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1));
 		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
-		hunterBront1.bed = (Bed) Templates.BED.makeCopy(Game.level.squares[9][9]);
+		hunterBront1.bed = Templates.BED.makeCopy(Game.level.squares[9][9]);
 		hunterBront1.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
@@ -599,7 +601,7 @@ public class Editor {
 
 		Group hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
 
-		Sign huntingPlan = (Sign) Templates.SIGN.makeCopy(Game.level.squares[6][8]);
+		Sign huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8]);
 		huntingPlan.setText(new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
 		huntingPlan.name = "Hunt Action Plan";
 
@@ -631,7 +633,7 @@ public class Editor {
 		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null,
 				weaponsBehindTheLodge);
 
-		Sign joesShopSign = (Sign) Templates.SIGN.makeCopy(Game.level.squares[4][5]);
+		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5]);
 		joesShopSign.setText(new Object[] { joesShop.name });
 		joesShopSign.name = joesShop.name + " sign";
 		Weapon broom = Templates.BROOM.makeCopy(null);

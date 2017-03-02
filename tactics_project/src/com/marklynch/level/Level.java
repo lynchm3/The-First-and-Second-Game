@@ -429,14 +429,6 @@ public class Level {
 			TextUtils.printTextWithImages(new Object[] { currentFactionMoving.name + " turn " + turn },
 					Game.windowWidth - 150, 20, Integer.MAX_VALUE, true);
 		}
-
-		QuadUtils.drawQuad(Color.BLACK, 0, 420, 0, Game.windowHeight);
-
-		// Log text
-		for (int i = logs.size() - 1; i > -1; i--) {
-			TextUtils.printTextWithImages(logs.get(i).contents, 20, 20 + i * 20, Integer.MAX_VALUE, true);
-		}
-
 		// if (factions.size() > 0 && currentFactionMoving != null) {
 		// if (showTurnNotification) {
 		// if (currentFactionMoving == factions.get(0)) {
@@ -452,7 +444,17 @@ public class Level {
 		// }
 
 		if (conversation != null)
+
 			conversation.drawStaticUI();
+		else {
+			// Log
+			QuadUtils.drawQuad(Color.BLACK, 0, 420, 0, Game.windowHeight);
+
+			// Log text
+			for (int i = logs.size() - 1; i > -1; i--) {
+				TextUtils.printTextWithImages(logs.get(i).contents, 20, 20 + i * 20, Integer.MAX_VALUE, true);
+			}
+		}
 
 		// script
 		script.draw();
