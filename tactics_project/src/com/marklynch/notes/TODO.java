@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Definitely calling getPath too often
+
 	// Check which routines are being run the most and optimize them. For
 	// inventory could keep track of canShareFlag and actorFlag. Then wont have
 	// to run their methods so much.

@@ -80,6 +80,9 @@ public class ActionMove extends Action {
 		System.out.println("check() c");
 
 		Path path = mover.getPathTo(target);
+		System.out.println("path = " + path);
+		if (path != null)
+			System.out.println("path.travelCost = " + path.travelCost);
 		if (path == null || path.travelCost > mover.travelDistance - mover.distanceMovedThisTurn)
 			return false;
 		System.out.println("check() d");

@@ -389,6 +389,16 @@ public class Inventory {
 		return true;
 	}
 
+	public boolean canBeMovedTo() {
+		if (canShareSquare()) {
+			return true;
+		} else {
+			if (contains(Actor.class))
+				return true;
+		}
+		return false;
+	}
+
 	public boolean isPassable(Actor forActor) {
 		for (GameObject gameObject : gameObjects) {
 
