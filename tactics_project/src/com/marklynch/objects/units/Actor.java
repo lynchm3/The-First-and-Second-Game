@@ -663,8 +663,6 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public void update(int delta) {
 
-		calculateVisibleSquares();
-
 		// Remove dead attackers from attackers list
 		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
 		for (Actor actor : attackers) {

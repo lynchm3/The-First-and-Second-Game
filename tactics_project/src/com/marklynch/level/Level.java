@@ -26,6 +26,7 @@ import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
@@ -252,13 +253,13 @@ public class Level {
 	// }
 	// }
 
-//	public void removeWeaponsThatCanAttackHighlight() {
-//		for (int i = 0; i < squares.length; i++) {
-//			for (int j = 0; j < squares[0].length; j++) {
-//				squares[i][j].weaponsThatCanAttack.clear();
-//			}
-//		}
-//	}
+	// public void removeWeaponsThatCanAttackHighlight() {
+	// for (int i = 0; i < squares.length; i++) {
+	// for (int j = 0; j < squares[0].length; j++) {
+	// squares[i][j].weaponsThatCanAttack.clear();
+	// }
+	// }
+	// }
 
 	public void drawBackground() {
 		// Squares
@@ -429,9 +430,11 @@ public class Level {
 					Game.windowWidth - 150, 20, Integer.MAX_VALUE, true);
 		}
 
+		QuadUtils.drawQuad(Color.BLACK, 0, 420, 0, Game.windowHeight);
+
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
-			TextUtils.printTextWithImages(logs.get(i).contents, 150, 100 + i * 20, Integer.MAX_VALUE, true);
+			TextUtils.printTextWithImages(logs.get(i).contents, 20, 20 + i * 20, Integer.MAX_VALUE, true);
 		}
 
 		// if (factions.size() > 0 && currentFactionMoving != null) {

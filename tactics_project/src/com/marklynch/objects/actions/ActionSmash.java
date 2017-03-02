@@ -50,7 +50,7 @@ public class ActionSmash extends Action {
 			Actor actor = (Actor) attacker;
 			if (!actor.equippedWeapon.hasRange(actor.straightLineDistanceTo(target.squareGameObjectIsOn)))
 				return false;
-			if (!actor.squaresVisibleToThisCharacter.contains(target.squareGameObjectIsOn))
+			if (!actor.visibleFrom(target.squareGameObjectIsOn))
 				return false;
 		}
 

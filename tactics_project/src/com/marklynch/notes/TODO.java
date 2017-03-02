@@ -2,6 +2,12 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// AM I overusing check for visible SQuares?
+
+	// Limit path finding to X iterations. If reach X then just return best
+	// guess or null. X gets smaller for Actors that are far away from the
+	// player (dumb down NPCs that are far away).
+
 	// Definitely calling getPath too often
 
 	// Check which routines are being run the most and optimize them. For
