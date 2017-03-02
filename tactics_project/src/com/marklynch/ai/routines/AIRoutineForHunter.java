@@ -60,6 +60,15 @@ public class AIRoutineForHunter extends AIRoutine {
 			}
 		}
 
+		// if group leader wait for group
+		if (Game.level.activeActor.group != null
+				&& Game.level.activeActor == Game.level.activeActor.group.getLeader()) {
+			if (Game.level.activeActor.group.leaderNeedsToWait()) {
+				Game.level.activeActor.activityDescription = "Waiting for " + Game.level.activeActor.group.name;
+				return;
+			}
+		}
+
 		// 1. loot dead animals
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Carcass.class, 5f, false, false, true,
 				true);

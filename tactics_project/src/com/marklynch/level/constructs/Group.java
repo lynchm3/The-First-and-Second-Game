@@ -95,7 +95,8 @@ public class Group {
 				for (int i = 1; i <= maxDistanceFromLeader; i++) {
 					Vector<Square> squaresISquareAway = leader.getAllSquaresAtDistance(i);
 					for (Square square : squaresISquareAway) {
-						if (square.inventory.canShareSquare() && square.structureSquareIsIn == leader.squareGameObjectIsOn.structureSquareIsIn
+						if (square.inventory.canShareSquare()
+								&& square.structureSquareIsIn == leader.squareGameObjectIsOn.structureSquareIsIn
 								&& !targetSquares.contains(square)) {
 							possibleSquares.add(square);
 						}
@@ -165,5 +166,18 @@ public class Group {
 
 	public ArrayList<Actor> getMembers() {
 		return members;
+	}
+
+	public boolean leaderNeedsToWait() {
+		int maxDistance = members.size();
+		if (maxDistance < 6)
+			maxDistance = 6;
+		for (Actor actor : members) {
+
+			if (leader.straightLineDistanceTo(actor.squareGameObjectIsOn) > maxDistance)
+				return true;
+		}
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

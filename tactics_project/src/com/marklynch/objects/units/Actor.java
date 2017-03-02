@@ -713,9 +713,8 @@ public class Actor extends ActorTemplate implements Owner {
 	public void addAttackerIfVisible(Actor potentialAttacker) {
 
 		if (!this.attackers.contains(potentialAttacker)
-				&& this.checkVisibilityBetweenTwoPoints(squareGameObjectIsOn.xInGrid + 0.5d,
-						squareGameObjectIsOn.yInGrid + 0.5d, potentialAttacker.squareGameObjectIsOn.xInGrid + 0.5d,
-						potentialAttacker.squareGameObjectIsOn.yInGrid + 0.5d)) {
+				&& straightLineDistanceTo(potentialAttacker.squareGameObjectIsOn) < sight
+				&& visibleFrom(potentialAttacker.squareGameObjectIsOn)) {
 			this.attackers.add(potentialAttacker);
 		}
 	}
