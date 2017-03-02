@@ -278,62 +278,52 @@ public class Square extends AStarNode implements ActionableInWorld {
 
 	}
 
-	public Vector<Square> getAllSharableSquaresAtDistance(float distance) {
+	public Vector<Square> getAllNeighbourSquaresThatCanBeMovedTo() {
 		Vector<Square> squares = new Vector<Square>();
-		if (distance == 0) {
-			squares.addElement(this);
-			return squares;
+		Square square;
+		// +1,0
+		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + 1, this.yInGrid)) {
+			square = Game.level.squares[this.xInGrid + 1][this.yInGrid];
+			if (square.inventory.canShareSquare()) {
+				squares.add(square);
+
+			} else {
+				if (square.inventory.contains(Actor.class))
+					squares.add(square);
+			}
 		}
+		// -1,0
+		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid - 1, this.yInGrid)) {
+			square = Game.level.squares[this.xInGrid - 1][this.yInGrid];
+			if (square.inventory.canShareSquare()) {
+				squares.add(square);
 
-		boolean xGoingUp = true;
-		boolean yGoingUp = true;
-		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-			if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + x, this.yInGrid + y)) {
-
-				if (Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y].inventory.canShareSquare()) {
-					squares.add(Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y]);
-
-				} else {
-					GameObject gameObjectThatCantSharSquare = Game.level.squares[this.xInGrid + (int) x][this.yInGrid
-							+ (int) y].inventory.getGameObjectThatCantShareSquare();
-					if (gameObjectThatCantSharSquare instanceof Actor) {
-						squares.add(Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y]);
-					}
-				}
-			}
-
-			if (xGoingUp) {
-				if (x == distance) {
-					xGoingUp = false;
-					x--;
-				} else {
-					x++;
-				}
 			} else {
-				if (x == -distance) {
-					xGoingUp = true;
-					x++;
-				} else {
-					x--;
-				}
+				if (square.inventory.contains(Actor.class))
+					squares.add(square);
 			}
+		}
+		// 0,+1
+		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid + 1)) {
+			square = Game.level.squares[this.xInGrid][this.yInGrid + 1];
+			if (square.inventory.canShareSquare()) {
+				squares.add(square);
 
-			if (yGoingUp) {
-				if (y == distance) {
-					yGoingUp = false;
-					y--;
-				} else {
-					y++;
-				}
 			} else {
-				if (y == -distance) {
-					yGoingUp = true;
-					y++;
-				} else {
-					y--;
-				}
+				if (square.inventory.contains(Actor.class))
+					squares.add(square);
 			}
+		}
+		// 0,-1
+		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid - 1)) {
+			square = Game.level.squares[this.xInGrid][this.yInGrid - 1];
+			if (square.inventory.canShareSquare()) {
+				squares.add(square);
 
+			} else {
+				if (square.inventory.contains(Actor.class))
+					squares.add(square);
+			}
 		}
 		return squares;
 	}
@@ -341,7 +331,9 @@ public class Square extends AStarNode implements ActionableInWorld {
 	@Override
 	public float getCost(AStarNode node) {
 		Square otherSquare = (Square) node;
-		return this.straightLineDistanceTo(otherSquare);
+		if (otherSquare.inventory.contains(Actor.class))
+			return 4;
+		return 1;
 	}
 
 	@Override
@@ -352,6 +344,6 @@ public class Square extends AStarNode implements ActionableInWorld {
 
 	@Override
 	public List getNeighbors() {
-		return getAllSharableSquaresAtDistance(1f);
+		return getAllNeighbourSquaresThatCanBeMovedTo();
 	}
 }

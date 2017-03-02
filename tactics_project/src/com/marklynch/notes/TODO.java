@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Check which routines are being run the most and optimize them. For
+	// inventory could keep track of canShareFlag and actorFlag. Then wont have
+	// to run their methods so much.
+
 	// Need to build back in swapping of ssquares, no swapping w/ group member,
 	// no swapping w/ player
 
