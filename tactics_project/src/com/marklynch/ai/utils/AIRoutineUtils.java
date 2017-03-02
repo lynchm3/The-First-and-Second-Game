@@ -557,9 +557,13 @@ public class AIRoutineUtils {
 		if (path.travelCost <= Game.level.activeActor.travelDistance) {
 			squareToMoveTo = path.squares.lastElement();
 		} else {
+
+			System.out.println("getSquareToMoveAlongPath Game.level.activeActor = " + Game.level.activeActor);
+
 			for (int i = path.squares.size() - 1; i >= 0; i--) {
-				if (Game.level.activeActor
-						.getPathTo(path.squares.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
+
+				Path subPath = Game.level.activeActor.getPathTo(path.squares.get(i));
+				if (subPath != null && subPath.travelCost <= Game.level.activeActor.travelDistance) {
 					squareToMoveTo = path.squares.get(i);
 					break;
 				}
@@ -601,8 +605,8 @@ public class AIRoutineUtils {
 			squareToMoveTo = pathToSquare.squares.lastElement();
 		} else {
 			for (int i = pathToSquare.squares.size() - 1; i >= 0; i--) {
-				if (Game.level.activeActor
-						.getPathTo(pathToSquare.squares.get(i)).travelCost <= Game.level.activeActor.travelDistance) {
+				Path subPath = Game.level.activeActor.getPathTo(pathToSquare.squares.get(i));
+				if (subPath != null && subPath.travelCost <= Game.level.activeActor.travelDistance) {
 					squareToMoveTo = pathToSquare.squares.get(i);
 					break;
 				}

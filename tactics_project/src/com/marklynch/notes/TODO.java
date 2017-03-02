@@ -2,6 +2,11 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Need to build back in swapping of ssquares, no swapping w/ group member,
+	// no swapping w/ player
+
+	// Put the thing @ 100x100 sqrs
+
 	// AIRoutineUtils.moveToRandomSquare is fucking diabolical
 
 	// In Square.getDefaultActionInWorld the move action is returned if straight

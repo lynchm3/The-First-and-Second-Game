@@ -101,7 +101,10 @@ public class ActionMove extends Action {
 			// don't try to swap with you group leader
 			return false;
 		}
-		System.out.println("check() g");
+
+		// if (actor.group != Game.level.activeActor.group) {
+		//
+		// }
 
 		if (mover != Game.level.player && actorInTheWay != null
 				&& (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn <= 0)) {

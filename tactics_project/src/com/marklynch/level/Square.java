@@ -289,8 +289,17 @@ public class Square extends AStarNode implements ActionableInWorld {
 		boolean yGoingUp = true;
 		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
 			if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + x, this.yInGrid + y)) {
-				if (Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y].inventory.canShareSquare())
+
+				if (Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y].inventory.canShareSquare()) {
 					squares.add(Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y]);
+
+				} else {
+					GameObject gameObjectThatCantSharSquare = Game.level.squares[this.xInGrid + (int) x][this.yInGrid
+							+ (int) y].inventory.getGameObjectThatCantShareSquare();
+					if (gameObjectThatCantSharSquare instanceof Actor) {
+						squares.add(Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y]);
+					}
+				}
 			}
 
 			if (xGoingUp) {
