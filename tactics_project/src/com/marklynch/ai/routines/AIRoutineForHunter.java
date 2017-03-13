@@ -1,5 +1,7 @@
 package com.marklynch.ai.routines;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.objects.Carcass;
@@ -8,6 +10,7 @@ import com.marklynch.objects.Junk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.utils.MapUtil;
 
 public class AIRoutineForHunter extends AIRoutine {
 
@@ -25,6 +28,7 @@ public class AIRoutineForHunter extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
+	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
 
 	public HUNT_STATE huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 
@@ -41,7 +45,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		// 1. Fighting
 		if (Game.level.activeActor.hasAttackers()) {
 
-			Game.level.activeActor.getAttackers().sort(AIRoutineUtils.sortTargets);
+			Game.level.activeActor.getAttackers().sort(AIRoutineUtils.sortAttackers);
 
 			for (Actor attacker : Game.level.activeActor.getAttackers()) {
 
@@ -57,15 +61,66 @@ public class AIRoutineForHunter extends AIRoutine {
 						attackedTarget = AIRoutineUtils.attackTarget(target);
 						if (!attackedTarget)
 							AIRoutineUtils.moveTowardsTargetToAttack(target);
+						Game.level.activeActor.locationsToSearch.put(attacker, target.squareGameObjectIsOn);
 					}
 					return;
 				}
 			}
 		}
 
+		// Searching
+		if (Game.level.activeActor.locationsToSearch.size() > 0) {
+
+			MapUtil.sortByValue(Game.level.activeActor.locationsToSearch);
+
+			// Game.level.activeActor.locationsToSearch.sort(AIRoutineUtils.sortLocationsToSearch);
+			ArrayList<Actor> toRemove = new ArrayList<Actor>();
+			ArrayList<Actor> toAdd = new ArrayList<Actor>();
+			boolean moved = false;
+
+			for (Actor actorsToSearchFor : Game.level.activeActor.locationsToSearch.keySet()) {
+
+				if (Game.level.activeActor.squareGameObjectIsOn != Game.level.activeActor.locationsToSearch
+						.get(actorsToSearchFor)
+						&& Game.level.activeActor
+								.getPathTo(Game.level.activeActor.locationsToSearch.get(actorsToSearchFor)) != null) {
+					Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
+					AIRoutineUtils
+							.moveTowardsTargetSquare(Game.level.activeActor.locationsToSearch.get(actorsToSearchFor));
+					moved = true;
+
+					for (Actor attacker : Game.level.activeActor.getAttackers()) {
+
+						if (Game.level.activeActor
+								.straightLineDistanceTo(attacker.squareGameObjectIsOn) <= Game.level.activeActor.sight
+								&& Game.level.activeActor.visibleFrom(attacker.squareGameObjectIsOn)) {
+							Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
+							toAdd.add(attacker);
+						}
+					}
+
+				} else {
+					toRemove.add(actorsToSearchFor);
+				}
+			}
+
+			for (Actor actorsToSearchFor : toRemove) {
+				Game.level.activeActor.locationsToSearch.remove(actorsToSearchFor);
+			}
+
+			for (Actor actorsToSearchFor : toAdd) {
+				Game.level.activeActor.locationsToSearch.put(actorsToSearchFor, actorsToSearchFor.squareGameObjectIsOn);
+			}
+
+			if (moved)
+				return;
+
+		}
+
 		// If not leader defer to pack
-		if (Game.level.activeActor.group != null
-				&& Game.level.activeActor != Game.level.activeActor.group.getLeader()) {
+		if (Game.level.activeActor.group != null && Game.level.activeActor != Game.level.activeActor.group.getLeader())
+
+		{
 			if (Game.level.activeActor.group.update(Game.level.activeActor)) {
 				return;
 			}

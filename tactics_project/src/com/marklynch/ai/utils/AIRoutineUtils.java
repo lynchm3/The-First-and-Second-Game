@@ -454,6 +454,22 @@ public class AIRoutineUtils {
 
 	public static Square calculateSquareToMoveToToAttackTarget(GameObject target) {
 
+		Path pathToSquare = getBestPathToAttackTarget(target);
+
+		if (pathToSquare == null) {
+			return null;
+		}
+
+		if (pathToSquare.travelCost == 0) {
+			return Game.level.activeActor.squareGameObjectIsOn;
+		}
+
+		return getSquareToMoveAlongPath(pathToSquare);
+
+	}
+
+	public static Path getBestPathToAttackTarget(GameObject target) {
+
 		Vector<Float> idealWeaponDistances = Game.level.activeActor.calculateIdealDistanceFrom(target);
 
 		Vector<Square> squaresAtSpecifiedDistanceToTarget = new Vector<Square>();
@@ -468,7 +484,7 @@ public class AIRoutineUtils {
 			// Check if we're already at this distance
 			if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
 					.get(i) && Game.level.activeActor.visibleFrom(target.squareGameObjectIsOn)) {
-				return Game.level.activeActor.squareGameObjectIsOn;
+				return new Path();
 			}
 
 			squaresAtSpecifiedDistanceToTarget = target.getAllSquaresAtDistance(idealWeaponDistances.get(i));
@@ -495,11 +511,7 @@ public class AIRoutineUtils {
 
 		}
 
-		if (pathToSquare == null) {
-			return null;
-		}
-
-		return getSquareToMoveAlongPath(pathToSquare);
+		return pathToSquare;
 
 	}
 
@@ -799,17 +811,30 @@ public class AIRoutineUtils {
 		return Game.level.squares[randomX][randomY];
 	}
 
-	public static Comparator<Actor> sortTargets = new Comparator<Actor>() {
+	public static Comparator<Actor> sortAttackers = new Comparator<Actor>() {
 
 		@Override
 		public int compare(Actor a, Actor b) {
 
-			Square squareA = calculateSquareToMoveToToAttackTarget(a);
-			Path pathA = Game.level.activeActor.getPathTo(squareA);
+			Path pathA = getBestPathToAttackTarget(a);
 			int travelCostA = pathA.travelCost;
 
-			Square squareB = calculateSquareToMoveToToAttackTarget(b);
-			Path pathB = Game.level.activeActor.getPathTo(squareB);
+			Path pathB = getBestPathToAttackTarget(b);
+			int travelCostB = pathB.travelCost;
+
+			return travelCostB - travelCostA;
+		}
+	};
+
+	public static Comparator<Square> sortLocationsToSearch = new Comparator<Square>() {
+
+		@Override
+		public int compare(Square a, Square b) {
+
+			Path pathA = Game.level.activeActor.getPathTo(a);
+			int travelCostA = pathA.travelCost;
+
+			Path pathB = Game.level.activeActor.getPathTo(b);
 			int travelCostB = pathB.travelCost;
 
 			return travelCostB - travelCostA;

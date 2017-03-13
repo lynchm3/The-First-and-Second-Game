@@ -1,6 +1,7 @@
 package com.marklynch.objects.units;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -89,6 +90,7 @@ public class Actor extends ActorTemplate implements Owner {
 	protected transient int highestPathCostSeen = 0;
 
 	public ArrayList<Square> squaresVisibleToThisCharacter = new ArrayList<Square>();
+	public HashMap<Actor, Square> locationsToSearch = new HashMap<Actor, Square>();
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
