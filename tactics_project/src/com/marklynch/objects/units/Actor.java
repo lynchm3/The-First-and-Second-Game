@@ -712,78 +712,59 @@ public class Actor extends ActorTemplate implements Owner {
 
 	}
 
-	public void addAttackerIfVisible(Actor potentialAttacker) {
+	private void addAttackerIfVisible(Actor potentialAttacker) {
 
 		if (!this.attackers.contains(potentialAttacker)
 				&& straightLineDistanceTo(potentialAttacker.squareGameObjectIsOn) < sight
 				&& visibleFrom(potentialAttacker.squareGameObjectIsOn)) {
 			this.attackers.add(potentialAttacker);
+			potentialAttacker.addAttackerForThisAndGroupMembers(this);
 		}
 	}
 
-	public void addAttackerAndManageAttackerReferences(GameObject gameObject) {
+	public void addAttackerForThisAndGroupMembers(Actor attacker) {
 
-		// Manage attackers
-		if (!(gameObject instanceof Actor))
-			return;
-
-		Actor attacker = (Actor) gameObject;
-
-		if (this.group != null && attacker.group != null) {
-
-			for (int i = 0; i < attacker.group.size(); i++) {
-				this.group.addAttacker(attacker.group.getMember(i));
-			}
-
-			for (int i = 0; i < this.group.size(); i++) {
-				attacker.group.addAttacker(this.group.getMember(i));
-			}
-			attacker.addAttackerIfVisible(this);
-			this.addAttackerIfVisible(attacker);
-
-		} else if (this.group != null && attacker.group == null) {
-
-			for (int i = 0; i < this.group.size(); i++) {
-				attacker.addAttackerIfVisible(this.group.getMember(i));
-			}
-
-			this.group.addAttacker(attacker);
-			this.addAttackerIfVisible(attacker);
-
-		} else if (this.group == null && attacker.group != null) {
-
-			for (int i = 0; i < attacker.group.size(); i++) {
-				this.addAttackerIfVisible(attacker.group.getMember(i));
-			}
-			attacker.group.addAttacker(this);
-			attacker.addAttackerIfVisible(this);
-
-		} else if (this.group == null && attacker.group == null) {
-			attacker.addAttackerIfVisible(this);
-			this.addAttackerIfVisible(attacker);
-
+		if (!attacker.attackers.contains(this)) {
+			attacker.attackers.add(this);
 		}
 
-	}
-
-	public void addAttackerAndmanageAttackerReferencesForNearbyAllies(GameObject attacker) {
-		for (Actor ally : this.faction.actors) {
-			if (ally != this && (this.straightLineDistanceTo(ally.squareGameObjectIsOn) < 10
-					|| ally.straightLineDistanceTo(attacker.squareGameObjectIsOn) < 10)) {
-				ally.addAttackerAndManageAttackerReferences(attacker);
-			}
+		if (!this.attackers.contains(attacker)) {
+			this.attackers.add(attacker);
 		}
-	}
 
-	public void addAttackerAndmanageAttackerReferencesForNearbyEnemies(GameObject attackerGameObject) {
-		if (attackerGameObject instanceof Actor) {
-			Actor attacker = (Actor) attackerGameObject;
-			for (Actor enemy : attacker.faction.actors) {
-				if (enemy != attacker && (this.straightLineDistanceTo(enemy.squareGameObjectIsOn) < 10
-						|| enemy.straightLineDistanceTo(attacker.squareGameObjectIsOn) < 10)) {
-					enemy.addAttackerAndManageAttackerReferences(this);
+		if (this.group != null) {
+			if (!this.group.getAttackers().contains(attacker)) {
+				this.group.addAttacker(attacker);
+			}
+			for (Actor groupMember : this.group.getMembers()) {
+				if (!groupMember.attackers.contains(attacker)) {
+					groupMember.attackers.add(attacker);
+				}
+				if (!attacker.attackers.contains(groupMember)) {
+					attacker.attackers.add(groupMember);
 				}
 			}
+		}
+
+		if (attacker.group != null) {
+			if (!attacker.group.getAttackers().contains(this)) {
+				attacker.group.addAttacker(this);
+			}
+			for (Actor groupMember : attacker.group.getMembers()) {
+				if (!groupMember.attackers.contains(this)) {
+					groupMember.attackers.add(this);
+				}
+				if (!this.attackers.contains(groupMember)) {
+					this.attackers.add(groupMember);
+				}
+			}
+		}
+
+	}
+
+	public void addAttackerForNearbyFactionMembersIfVisible(Actor attacker) {
+		for (Actor ally : this.faction.actors) {
+			ally.addAttackerIfVisible(attacker);
 		}
 	}
 

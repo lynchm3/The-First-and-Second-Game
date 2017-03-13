@@ -34,10 +34,11 @@ public class ActionAttack extends Action {
 
 		// GameObject targetGameObject;// = target;
 
-		attacker.addAttackerAndManageAttackerReferences(target);
-		attacker.addAttackerAndmanageAttackerReferencesForNearbyAllies(target);
-		attacker.addAttackerAndmanageAttackerReferencesForNearbyEnemies(target);
-
+		if (target instanceof Actor) {
+			attacker.addAttackerForThisAndGroupMembers((Actor) target);
+			attacker.addAttackerForNearbyFactionMembersIfVisible((Actor) target);
+			((Actor) target).addAttackerForNearbyFactionMembersIfVisible(attacker);
+		}
 		target.remainingHealth -= attacker.equippedWeapon.getEffectiveSlashDamage();
 		attacker.distanceMovedThisTurn = attacker.travelDistance;
 		attacker.hasAttackedThisTurn = true;

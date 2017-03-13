@@ -413,6 +413,16 @@ public class Editor {
 		Game.level.factions.add(new Faction("Wolves", colors.get(2), "wolf.png"));
 		Game.level.factions.add(new Faction("Blind", colors.get(3), "blind.png"));
 
+		// Add player
+		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[46][10], Game.level.factions.get(0));
+		Game.level.player = player;
+		player.inventory.add(Templates.KATANA.makeCopy(null));
+		player.inventory.add(Templates.HATCHET.makeCopy(null));
+		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
+		player.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		player.anchorX = 80;
+		player.anchorY = 80;
+
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
@@ -515,6 +525,8 @@ public class Editor {
 
 		// Add blind
 		Actor blind1 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3));
+		blind1.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind1.addAttackerForThisAndGroupMembers(player);
 
 		// Add spoons
 		Weapon serratedSpoon1 = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[44][11]);
@@ -563,16 +575,6 @@ public class Editor {
 				new FactionRelationship(-100, Game.level.factions.get(0), Game.level.factions.get(1)));
 		Game.level.factions.get(1).relationships.put(Game.level.factions.get(0),
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
-
-		// Add actor
-		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[28][14], Game.level.factions.get(0));
-		Game.level.player = player;
-		player.inventory.add(Templates.KATANA.makeCopy(null));
-		player.inventory.add(Templates.HATCHET.makeCopy(null));
-		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
-		player.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
-		player.anchorX = 80;
-		player.anchorY = 80;
 
 		// Add lead hunter
 		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1));
