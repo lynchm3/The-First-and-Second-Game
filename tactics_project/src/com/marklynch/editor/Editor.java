@@ -407,6 +407,12 @@ public class Editor {
 
 	public void generateTestObjects() {
 
+		// Add factions
+		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));
+		Game.level.factions.add(new Faction("Townspeople", colors.get(1), "faction_red.png"));
+		Game.level.factions.add(new Faction("Wolves", colors.get(2), "wolf.png"));
+		Game.level.factions.add(new Faction("Blind", colors.get(3), "blind.png"));
+
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
@@ -507,6 +513,9 @@ public class Editor {
 		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14]);
 		rockWithEtching.setText(new Object[] { "SHHHHHhhhhhhhh..." });
 
+		// Add blind
+		Actor blind1 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3));
+
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )
 
@@ -545,11 +554,6 @@ public class Editor {
 				true, 1f, 1.5f);
 		new Tree("Tree", 100, "tree_1.png", Game.level.squares[23][5], new Inventory(), true, false, false, true, false,
 				true, 1f, 1.5f);
-
-		// Add factions
-		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));
-		Game.level.factions.add(new Faction("Townspeople", colors.get(1), "faction_red.png"));
-		Game.level.factions.add(new Faction("Wolves", colors.get(2), "wolf.png"));
 
 		// relationships
 		Game.level.factions.get(0).relationships.put(Game.level.factions.get(1),

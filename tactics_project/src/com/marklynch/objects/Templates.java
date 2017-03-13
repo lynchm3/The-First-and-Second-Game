@@ -11,6 +11,8 @@ public class Templates {
 			new Inventory(), true, false, true, false, false, 1, 1, null, 80f, 80f);
 	public static final Actor HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
 			null, new Inventory(), true, false, true, false, false, 1, 1, null, 88, 54);
+	public static final Actor BLIND = new Hunter("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
+			new Inventory(), true, false, true, false, false, 1, 1, null, 88, 54);
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
