@@ -1,6 +1,7 @@
 package com.marklynch.ai.utils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.Vector;
 
@@ -797,5 +798,22 @@ public class AIRoutineUtils {
 
 		return Game.level.squares[randomX][randomY];
 	}
+
+	public static Comparator<Actor> sortTargets = new Comparator<Actor>() {
+
+		@Override
+		public int compare(Actor a, Actor b) {
+
+			Square squareA = calculateSquareToMoveToToAttackTarget(a);
+			Path pathA = Game.level.activeActor.getPathTo(squareA);
+			int travelCostA = pathA.travelCost;
+
+			Square squareB = calculateSquareToMoveToToAttackTarget(b);
+			Path pathB = Game.level.activeActor.getPathTo(squareB);
+			int travelCostB = pathB.travelCost;
+
+			return travelCostB - travelCostA;
+		}
+	};
 
 }

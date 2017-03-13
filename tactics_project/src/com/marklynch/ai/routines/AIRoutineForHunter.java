@@ -5,6 +5,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.units.WildAnimal;
 
@@ -39,17 +40,27 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		// 1. Fighting
 		if (Game.level.activeActor.hasAttackers()) {
-			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
-			GameObject target = AIRoutineUtils.getNearestAttacker(Game.level.activeActor.getAttackers());
 
-			// GET NEAREST ATTACKER FAILING??
-			boolean attackedTarget = false;
-			if (target != null) {
-				attackedTarget = AIRoutineUtils.attackTarget(target);
-				if (!attackedTarget)
-					AIRoutineUtils.moveTowardsTargetToAttack(target);
+			Game.level.activeActor.getAttackers().sort(AIRoutineUtils.sortTargets);
+
+			for (Actor attacker : Game.level.activeActor.getAttackers()) {
+
+				if (Game.level.activeActor
+						.straightLineDistanceTo(attacker.squareGameObjectIsOn) <= Game.level.activeActor.sight
+						&& Game.level.activeActor.visibleFrom(attacker.squareGameObjectIsOn)) {
+					target = attacker;
+					Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
+
+					// GET NEAREST ATTACKER FAILING??
+					boolean attackedTarget = false;
+					if (target != null) {
+						attackedTarget = AIRoutineUtils.attackTarget(target);
+						if (!attackedTarget)
+							AIRoutineUtils.moveTowardsTargetToAttack(target);
+					}
+					return;
+				}
 			}
-			return;
 		}
 
 		// If not leader defer to pack
