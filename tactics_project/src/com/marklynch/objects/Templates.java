@@ -31,6 +31,8 @@ public class Templates {
 			false, 1f, 1f, 22, 15);
 	public static final Weapon WHIP = new Weapon("Whip", 3, 1, 1, "whip.png", 100, null, true, false, false, false, 1f,
 			1f, 22, 15);
+	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 1, 1, "serrated_spoon.png", 100, null,
+			true, false, false, false, 0.25f, 0.25f, 8, 12);
 
 	// Blades
 	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, true, false, false,

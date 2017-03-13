@@ -516,6 +516,9 @@ public class Editor {
 		// Add blind
 		Actor blind1 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3));
 
+		// Add spoons
+		Weapon serratedSpoon1 = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[44][11]);
+
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )
 
@@ -567,6 +570,7 @@ public class Editor {
 		player.inventory.add(Templates.KATANA.makeCopy(null));
 		player.inventory.add(Templates.HATCHET.makeCopy(null));
 		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
+		player.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
 		player.anchorX = 80;
 		player.anchorY = 80;
 

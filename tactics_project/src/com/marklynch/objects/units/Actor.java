@@ -508,6 +508,10 @@ public class Actor extends ActorTemplate implements Owner {
 					weaponPositionXInPixels + equippedWeapon.width, weaponPositionYInPixels,
 					weaponPositionYInPixels + equippedWeapon.height);
 
+			// TextureUtils.drawTexture(imageTexture, alpha,
+			// actorPositionXInPixels, actorPositionXInPixels + width,
+			// actorPositionYInPixels, actorPositionYInPixels + height);
+
 			// int weaponPositionXInPixels = (int)
 			// (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
 			// + drawOffsetX + ((int) Game.HALF_SQUARE_WIDTH -
