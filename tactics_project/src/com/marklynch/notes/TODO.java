@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Merge gameObject and gamObjec template at some stage.
+
 	// Need thumbnails image for everything. For the logs.
 
 	// Ability to mark skills as favourite so that it appears in the 1st level

@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.utils.TextureUtils;
 
+import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Bed extends GameObject {
@@ -16,9 +17,13 @@ public class Bed extends GameObject {
 	public Bed(String name, int health, String imagePath, String imagePathCovers, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
-			float heightRatio) {
+			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float iceResistance, float electricResistance, float poisonResistance) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance, poisonResistance);
 		this.imagePathCovers = imagePathCovers;
 		loadCoverImage();
 	}
@@ -31,7 +36,9 @@ public class Bed extends GameObject {
 	public Bed makeCopy(Square square) {
 		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
+				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY,
+				soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance,
+				iceResistance, electricResistance, poisonResistance);
 	}
 
 	@Override

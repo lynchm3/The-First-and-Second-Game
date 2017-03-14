@@ -96,11 +96,15 @@ public class Actor extends ActorTemplate implements Owner {
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			Faction faction, float anchorX, float anchorY) {
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
+			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
+			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY) {
 
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance, poisonResistance);
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -435,10 +439,12 @@ public class Actor extends ActorTemplate implements Owner {
 			GameObject body;
 			if (this instanceof WildAnimal)
 				body = new Carcass(this.name + " carcass", 5, "carcass.png", this.squareGameObjectIsOn, new Inventory(),
-						false, true, false, true, false, false, 0.5f, 0.5f);
+						false, true, false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
+						0f, 0f, 0f, 0f);
 			else
 				body = new Corpse(this.name + " corpse", 5, "carcass.png", this.squareGameObjectIsOn, new Inventory(),
-						false, true, false, true, false, false, 0.5f, 0.5f);
+						false, true, false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
+						0f, 0f, 0f, 0f);
 
 			this.giveAllToTarget(null, body);
 			// this.squareGameObjectIsOn.inventory.add(body);
@@ -662,7 +668,10 @@ public class Actor extends ActorTemplate implements Owner {
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
-				heightRatio, faction, anchorX, anchorY);
+				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance
+
+				, faction, anchorX, anchorY);
 		return actor;
 	}
 

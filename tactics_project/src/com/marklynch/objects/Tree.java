@@ -11,6 +11,8 @@ import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
+import mdesl.graphics.Color;
+
 public class Tree extends GameObject {
 
 	float appleMaxRatioSize = 0.1f;
@@ -18,9 +20,14 @@ public class Tree extends GameObject {
 
 	public Tree(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio) {
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
+			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
+			float electricResistance, float poisonResistance) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance, poisonResistance);
 		addApple(appleMaxRatioSize);
 		healthWhenLastDroppedFruit = this.totalHealth;
 	}
@@ -30,7 +37,7 @@ public class Tree extends GameObject {
 		float appleSize = (float) (Math.random() * maxSize);
 
 		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), false, true, true, false, false,
-				false, appleSize, appleSize);
+				false, appleSize, appleSize, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 		apple.anchorX = 6;
 		apple.anchorY = 6;
 
@@ -132,7 +139,9 @@ public class Tree extends GameObject {
 	public Tree makeCopy(Square square) {
 		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, widthRatio, heightRatio);
+				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance);
 	}
 
 }

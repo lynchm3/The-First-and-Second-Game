@@ -16,6 +16,8 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Sign;
 import com.marklynch.objects.weapons.Weapon;
 
+import mdesl.graphics.Color;
+
 public class Trader extends Actor implements Comparator<GameObject> {
 
 	public StructureRoom room;
@@ -26,11 +28,16 @@ public class Trader extends Actor implements Comparator<GameObject> {
 	public Trader(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio, Faction faction, float anchorX,
-			float anchorY, Structure shop, StructureRoom room, Sign shopSign, Weapon broom) {
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
+			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
+			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY,
+			Structure shop, StructureRoom room, Sign shopSign, Weapon broom) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, faction, anchorX, anchorY);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance, poisonResistance, faction, anchorX, anchorY);
 		this.shop = shop;
 		this.room = room;
 		this.shopSign = shopSign;
@@ -93,8 +100,10 @@ public class Trader extends Actor implements Comparator<GameObject> {
 
 		Trader actor = new Trader(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(), showInventory,
-				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, faction, anchorX,
-				anchorY, shop, room, shopSign, broom);
+				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
+				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, faction,
+				anchorX, anchorY, shop, room, shopSign, broom);
 		return actor;
 	}
 

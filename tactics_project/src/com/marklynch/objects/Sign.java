@@ -10,6 +10,8 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionRead;
 import com.marklynch.objects.units.Actor;
 
+import mdesl.graphics.Color;
+
 public class Sign extends GameObject {
 
 	private Object[] text;
@@ -18,9 +20,13 @@ public class Sign extends GameObject {
 	public Sign(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, Object[] text, float widthRatio,
-			float heightRatio) {
+			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float iceResistance, float electricResistance, float poisonResistance) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance, poisonResistance);
 
 		this.text = text;
 		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
@@ -34,7 +40,9 @@ public class Sign extends GameObject {
 	public Sign makeCopy(Square square) {
 		return new Sign(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, text, widthRatio, heightRatio);
+				persistsWhenCantBeSeen, text, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance);
 	}
 
 	@Override

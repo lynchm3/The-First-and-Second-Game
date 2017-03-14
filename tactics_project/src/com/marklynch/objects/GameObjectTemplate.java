@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.marklynch.level.Square;
 
+import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class GameObjectTemplate {
@@ -26,12 +27,27 @@ public class GameObjectTemplate {
 	public float widthRatio = 1;
 	public float heightRatio = 1;
 
+	public float soundHandleX;
+	public float soundHandleY;
+	public float soundWhenHit;
+	public float soundWhenHitting;
+	public Color light;
+	public float lightHandleX;
+	public float lightHandlY;
+	public boolean stackable;
+	public float fireResistance;
+	public float iceResistance;
+	public float electricResistance;
+	public float poisonResistance;
+
 	public transient Texture imageTexture = null;
 
 	public GameObjectTemplate(String name, float totalHealth, String imageTexturePath, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
-			float heightRatio) {
+			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float iceResistance, float electricResistance, float poisonResistance) {
 		super();
 		this.name = name;
 		this.totalHealth = totalHealth;
@@ -46,12 +62,27 @@ public class GameObjectTemplate {
 		this.heightRatio = heightRatio;
 		this.blocksLineOfSight = blocksLineOfSight;
 		this.persistsWhenCantBeSeen = persistsWhenCantBeSeen;
+
+		this.soundHandleX = soundHandleX;
+		this.soundHandleY = soundHandleY;
+		this.soundWhenHit = soundWhenHit;
+		this.soundWhenHitting = soundWhenHitting;
+		this.light = light;
+		this.lightHandleX = lightHandleX;
+		this.lightHandlY = lightHandlY;
+		this.stackable = stackable;
+		this.fireResistance = fireResistance;
+		this.iceResistance = iceResistance;
+		this.electricResistance = electricResistance;
+		this.poisonResistance = poisonResistance;
 	}
 
 	public GameObject makeCopy(Square square) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, widthRatio, heightRatio);
+				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance);
 	}
 
 	public void postLoad1() {
