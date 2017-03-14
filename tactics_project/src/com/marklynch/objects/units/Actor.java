@@ -92,13 +92,15 @@ public class Actor extends ActorTemplate implements Owner {
 	public ArrayList<Square> squaresVisibleToThisCharacter = new ArrayList<Square>();
 	public HashMap<Actor, Square> locationsToSearch = new HashMap<Actor, Square>();
 
+	public float hearing = 0;
+
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY) {
+			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY, float hearing) {
 
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, inventory, showInventory, fitsInInventory,
@@ -141,6 +143,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 		this.anchorX = anchorX;
 		this.anchorY = anchorY;
+		this.hearing = hearing;
 	}
 
 	@Override
@@ -671,7 +674,7 @@ public class Actor extends ActorTemplate implements Owner {
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance
 
-				, faction, anchorX, anchorY);
+				, faction, anchorX, anchorY, hearing);
 		return actor;
 	}
 

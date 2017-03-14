@@ -2,6 +2,10 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// Take walls in to a/c for hearing
+
+	// Only clear sounds when the source updates?
+
 	// Merge gameObject and gamObjec template at some stage.
 
 	// Need thumbnails image for everything. For the logs.

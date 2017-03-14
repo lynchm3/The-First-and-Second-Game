@@ -17,12 +17,12 @@ public class WildAnimal extends Actor {
 			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
 			float iceResistance, float electricResistance, float poisonResistance, Faction faction, float anchorX,
-			float anchorY) {
+			float anchorY, float hearing) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, faction, anchorX, anchorY);
+				fireResistance, iceResistance, electricResistance, poisonResistance, faction, anchorX, anchorY, hearing);
 		aiRoutine = new AIRoutineForWildAnimal();
 	}
 
@@ -45,7 +45,7 @@ public class WildAnimal extends Actor {
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, faction,
-				anchorX, anchorY);
+				anchorX, anchorY, hearing);
 		return actor;
 	}
 

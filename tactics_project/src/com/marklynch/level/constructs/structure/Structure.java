@@ -84,7 +84,7 @@ public class Structure {
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
 						wallsInCave.add(new Wall("Cave Wall", 1000, "wall.png", Game.level.squares[i][j],
 								new Inventory(), false, false, false, false, blocksLineOfSight, true, 1, 1, 0.5f, 0.5f,
-								1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+								20f, 0f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					Game.level.squares[i][j].structureSquareIsIn = this;
