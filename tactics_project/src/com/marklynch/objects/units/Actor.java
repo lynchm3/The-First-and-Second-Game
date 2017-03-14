@@ -18,6 +18,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Quest;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Carcass;
@@ -92,7 +93,7 @@ public class Actor extends ActorTemplate implements Owner {
 	public ArrayList<Square> squaresVisibleToThisCharacter = new ArrayList<Square>();
 	public HashMap<Actor, Square> locationsToSearch = new HashMap<Actor, Square>();
 
-	public float hearing = 0;
+	public ArrayList<Sound> sounds = new ArrayList<Sound>();
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
@@ -100,7 +101,8 @@ public class Actor extends ActorTemplate implements Owner {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY, float hearing) {
+			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY,
+			float hearing) {
 
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, inventory, showInventory, fitsInInventory,
@@ -143,7 +145,6 @@ public class Actor extends ActorTemplate implements Owner {
 
 		this.anchorX = anchorX;
 		this.anchorY = anchorY;
-		this.hearing = hearing;
 	}
 
 	@Override
@@ -681,20 +682,30 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public void update(int delta) {
 
-		// Remove dead attackers from attackers list
-		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
-		for (Actor actor : attackers) {
-			if (actor.remainingHealth <= 0) {
-				attackersToRemoveFromList.add(actor);
-			}
-		}
-		for (Actor actor : attackersToRemoveFromList) {
-			attackers.remove(actor);
-		}
-
 		if (this.remainingHealth > 0) {
+
+			// Remove dead attackers from attackers list
+			ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
+			for (Actor actor : attackers) {
+				if (actor.remainingHealth <= 0) {
+					attackersToRemoveFromList.add(actor);
+				}
+			}
+
+			for (Actor actor : attackersToRemoveFromList) {
+				attackers.remove(actor);
+			}
+
+			for (Sound sound : sounds) {
+				for (Square destinationSquare : sound.destinationSquares) {
+					destinationSquare.sounds.remove(sound);
+				}
+			}
+			sounds.clear();
+
 			// Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
-			this.aiRoutine.update();
+			if (aiRoutine != null)
+				this.aiRoutine.update();
 		}
 	}
 

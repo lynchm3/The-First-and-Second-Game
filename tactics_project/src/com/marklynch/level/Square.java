@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AStarNode;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
@@ -53,6 +54,8 @@ public class Square extends AStarNode implements ActionableInWorld {
 	public transient static PathComparator pathComparator;
 
 	public transient Structure structureSquareIsIn;
+
+	public ArrayList<Sound> sounds = new ArrayList<Sound>();
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory) {
 		super();

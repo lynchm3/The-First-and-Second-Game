@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.MapUtil;
 
 public class AIRoutineForHunter extends AIRoutine {
@@ -42,6 +45,29 @@ public class AIRoutineForHunter extends AIRoutine {
 	@Override
 	public void update() {
 
+		// Check for enemies last seen locations to search
+		if (Game.level.activeActor.hasAttackers()) {
+			for (Actor attacker : Game.level.activeActor.getAttackers()) {
+				if (Game.level.activeActor
+						.straightLineDistanceTo(attacker.squareGameObjectIsOn) <= Game.level.activeActor.sight
+						&& Game.level.activeActor.visibleFrom(attacker.squareGameObjectIsOn)) {
+					Game.level.activeActor.locationsToSearch.put(attacker, attacker.squareGameObjectIsOn);
+				}
+			}
+		}
+
+		// Check for sounds to investigate
+		ArrayList<Square> squaresThisCanHear = Game.level.activeActor
+				.getAllSquaresWithinDistance(Game.level.activeActor.hearing);
+		for (Square squareThisCanHear : squaresThisCanHear) {
+			for (Sound sound : squareThisCanHear.sounds) {
+				if (!Game.level.activeActor.locationsToSearch.containsValue(sound.sourceSquare)
+						&& sound.sourceObject instanceof Weapon) {
+					Game.level.activeActor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
+				}
+			}
+		}
+
 		// 1. Fighting
 		if (Game.level.activeActor.hasAttackers()) {
 
@@ -61,7 +87,6 @@ public class AIRoutineForHunter extends AIRoutine {
 						attackedTarget = AIRoutineUtils.attackTarget(target);
 						if (!attackedTarget)
 							AIRoutineUtils.moveTowardsTargetToAttack(target);
-						Game.level.activeActor.locationsToSearch.put(attacker, target.squareGameObjectIsOn);
 					}
 					return;
 				}
@@ -78,29 +103,29 @@ public class AIRoutineForHunter extends AIRoutine {
 			ArrayList<Actor> toAdd = new ArrayList<Actor>();
 			boolean moved = false;
 
-			for (Actor actorsToSearchFor : Game.level.activeActor.locationsToSearch.keySet()) {
+			for (Actor actorToSearchFor : Game.level.activeActor.locationsToSearch.keySet()) {
 
-				if (Game.level.activeActor.squareGameObjectIsOn != Game.level.activeActor.locationsToSearch
-						.get(actorsToSearchFor)
+				if (actorToSearchFor.remainingHealth > 0
+						&& Game.level.activeActor.squareGameObjectIsOn.straightLineDistanceTo(
+								Game.level.activeActor.locationsToSearch.get(actorToSearchFor)) > 1
 						&& Game.level.activeActor
-								.getPathTo(Game.level.activeActor.locationsToSearch.get(actorsToSearchFor)) != null) {
+								.getPathTo(Game.level.activeActor.locationsToSearch.get(actorToSearchFor)) != null) {
 					Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					AIRoutineUtils
-							.moveTowardsTargetSquare(Game.level.activeActor.locationsToSearch.get(actorsToSearchFor));
+							.moveTowardsTargetSquare(Game.level.activeActor.locationsToSearch.get(actorToSearchFor));
 					moved = true;
 
 					for (Actor attacker : Game.level.activeActor.getAttackers()) {
-
 						if (Game.level.activeActor
 								.straightLineDistanceTo(attacker.squareGameObjectIsOn) <= Game.level.activeActor.sight
 								&& Game.level.activeActor.visibleFrom(attacker.squareGameObjectIsOn)) {
+							// Change status to fighting if u spot an enemy
 							Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
-							toAdd.add(attacker);
 						}
 					}
 
 				} else {
-					toRemove.add(actorsToSearchFor);
+					toRemove.add(actorToSearchFor);
 				}
 			}
 

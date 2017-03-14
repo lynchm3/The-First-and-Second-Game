@@ -2,6 +2,20 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	// The blind walks right through the sign i hit to get to the other side...
+
+	// The blind dudes are looting spoons they cant see... i think...
+
+	// I cant attack walls for some reason
+
+	// Switch to arraylists instead of vestors for speed?
+
+	// need to call update on user actor
+
+	// noises louder if detroyed
+
+	// noises louder if exploding object
+
 	// Take walls in to a/c for hearing
 
 	// Only clear sounds when the source updates?

@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
@@ -73,6 +74,10 @@ public class ActionAttack extends Action {
 		} else {
 			attacker.showPow(target);
 		}
+
+		// Sound
+		float loudness = target.soundWhenHit * attacker.equippedWeapon.soundWhenHitting;
+		attacker.sounds.add(new Sound(attacker, attacker.equippedWeapon, attacker.squareGameObjectIsOn, loudness));
 
 		if (attacker.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

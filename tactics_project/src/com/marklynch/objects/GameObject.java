@@ -271,6 +271,65 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		return squares;
 	}
 
+	public ArrayList<Square> getAllSquaresWithinDistance(float maxDistance) {
+		ArrayList<Square> squares = new ArrayList<Square>();
+
+		for (int distance = 0; distance <= maxDistance; distance++) {
+
+			if (distance == 0)
+
+			{
+				squares.add(this.squareGameObjectIsOn);
+				continue;
+			}
+
+			boolean xGoingUp = true;
+			boolean yGoingUp = true;
+			for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+				if (ArrayUtils.inBounds(Game.level.squares, this.squareGameObjectIsOn.xInGrid + x,
+						this.squareGameObjectIsOn.yInGrid + y)) {
+					squares.add(Game.level.squares[this.squareGameObjectIsOn.xInGrid
+							+ (int) x][this.squareGameObjectIsOn.yInGrid + (int) y]);
+				}
+
+				if (xGoingUp) {
+					if (x == distance) {
+						xGoingUp = false;
+						x--;
+					} else {
+						x++;
+					}
+				} else {
+					if (x == -distance) {
+						xGoingUp = true;
+						x++;
+					} else {
+						x--;
+					}
+				}
+
+				if (yGoingUp) {
+					if (y == distance) {
+						yGoingUp = false;
+						y--;
+					} else {
+						y++;
+					}
+				} else {
+					if (y == -distance) {
+						yGoingUp = true;
+						y++;
+					} else {
+						y--;
+					}
+				}
+
+			}
+		}
+
+		return squares;
+	}
+
 	public ArrayList<Point> getAllCoordinatesAtDistance(int distance) {
 		ArrayList<Point> coordinates = new ArrayList<Point>();
 		if (distance == 0) {

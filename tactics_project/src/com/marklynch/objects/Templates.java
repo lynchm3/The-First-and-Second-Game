@@ -61,8 +61,8 @@ public class Templates {
 			null, new Inventory(), false, true, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f);
 	public static final Sign ROCK_WITH_ETCHING = new Sign("Rock with Etching", 5, "rock_with_etching.png", null,
-			new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1, 0.5f, 0.5f, 1f, 1f, null,
-			0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+			new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1, 0.5f, 0.5f, 20f, 1f,
+			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
 	// LARGE CONTAINER
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",

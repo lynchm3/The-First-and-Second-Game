@@ -10,6 +10,7 @@ import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
@@ -584,7 +585,25 @@ public class Level {
 			// Game.level.activeActor.equippedWeapon =
 			// Game.level.activeActor.getWeaponsInInventory().get(0);
 			// Actor.calculateReachableSquares();
-			Game.level.activeActor.calculateVisibleSquares();
+			player.calculateVisibleSquares();
+
+			ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
+			for (Actor actor : player.getAttackers()) {
+				if (actor.remainingHealth <= 0) {
+					attackersToRemoveFromList.add(actor);
+				}
+			}
+
+			for (Actor actor : attackersToRemoveFromList) {
+				player.getAttackers().remove(actor);
+			}
+
+			for (Sound sound : player.sounds) {
+				for (Square destinationSquare : sound.destinationSquares) {
+					destinationSquare.sounds.remove(sound);
+				}
+			}
+			player.sounds.clear();
 		}
 
 		undoList.clear();
