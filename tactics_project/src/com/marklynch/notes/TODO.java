@@ -2,7 +2,9 @@ package com.marklynch.notes;
 
 public class TODO {
 
-	//
+	// Currently, if they go searching for a noise, and arent hostile towards u,
+	// and u dont move, they'll jsut stand there with a question mark. SHould
+	// they question you? Move? Give up? Attack?
 
 	// The blind walks right through the sign i hit to get to the other side...
 

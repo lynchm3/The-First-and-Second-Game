@@ -879,6 +879,15 @@ public class Actor extends ActorTemplate implements Owner {
 		return this.conversation;
 	}
 
+	public boolean canSee(Square square) {
+		if (this.straightLineDistanceTo(square) > sight)
+			return false;
+		if (!this.visibleFrom(square))
+			return false;
+
+		return true;
+	}
+
 	// public static void calculateReachableSquares() {
 	// // Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 	//// Game.level.activeActor.calculateReachableSquares(Game.level.squares);

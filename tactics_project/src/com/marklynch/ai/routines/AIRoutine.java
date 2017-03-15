@@ -47,7 +47,8 @@ public class AIRoutine {
 		for (Square squareThisCanHear : squaresThisCanHear) {
 			for (Sound sound : squareThisCanHear.sounds) {
 				if (!this.actor.locationsToSearch.containsValue(sound.sourceSquare)
-						&& sound.sourceObject instanceof Weapon) {
+
+						&& sound.sourceObject instanceof Weapon && !this.actor.canSee(sound.sourceSquare)) {
 					this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
 				}
 			}
