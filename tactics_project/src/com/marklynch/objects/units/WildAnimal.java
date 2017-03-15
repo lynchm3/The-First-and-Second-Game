@@ -22,14 +22,15 @@ public class WildAnimal extends Actor {
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, faction, anchorX, anchorY, hearing);
-		aiRoutine = new AIRoutineForWildAnimal();
+				fireResistance, iceResistance, electricResistance, poisonResistance, faction, anchorX, anchorY,
+				hearing);
+		aiRoutine = new AIRoutineForWildAnimal(this);
 	}
 
 	@Override
 	public void postLoad1() {
 		super.postLoad1();
-		aiRoutine = new AIRoutineForWildAnimal();
+		aiRoutine = new AIRoutineForWildAnimal(this);
 	}
 
 	@Override

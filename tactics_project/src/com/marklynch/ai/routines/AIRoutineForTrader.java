@@ -1,6 +1,5 @@
 package com.marklynch.ai.routines;
 
-import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
@@ -31,12 +30,22 @@ public class AIRoutineForTrader extends AIRoutine {
 	Trader trader;
 	Square targetSquare = null;
 
-	public AIRoutineForTrader(Trader trader) {
-		this.trader = trader;
+	public AIRoutineForTrader(Trader actor) {
+		super(actor);
+		this.trader = actor;
 	}
 
 	@Override
 	public void update() {
+
+		this.actor.activityDescription = null;
+		this.actor.expressionImageTexture = null;
+		// createSearchLocationsBasedOnSounds();
+		// createSearchLocationsBasedOnVisibleAttackers();
+		// if (runFightRoutine())
+		// return;
+		// if (runSearchRoutine())
+		// return;
 
 		// 1. Run away from fights
 		if (trader.hasAttackers()) {
@@ -52,9 +61,8 @@ public class AIRoutineForTrader extends AIRoutine {
 		}
 
 		// If not leader defer to pack
-		if (Game.level.activeActor.group != null
-				&& Game.level.activeActor != Game.level.activeActor.group.getLeader()) {
-			if (Game.level.activeActor.group.update(Game.level.activeActor)) {
+		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
+			if (this.actor.group.update(this.actor)) {
 				return;
 			}
 		}
@@ -63,7 +71,7 @@ public class AIRoutineForTrader extends AIRoutine {
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(GameObject.class, 5f, true, false, true,
 				false);
 		if (loot != null) {
-			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
@@ -74,8 +82,8 @@ public class AIRoutineForTrader extends AIRoutine {
 		}
 
 		// Defer to quest
-		if (Game.level.activeActor.quest != null) {
-			if (Game.level.activeActor.quest.update(Game.level.activeActor)) {
+		if (this.actor.quest != null) {
+			if (this.actor.quest.update(this.actor)) {
 				return;
 			}
 		}
@@ -84,7 +92,7 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (shopkeepState == SHOPKEEP_STATE.SHOPKEEPING)
 
 		{
-			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SHOPKEEPING;
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOPKEEPING;
 			if (!trader.isPlayerInTheShop() && trader.getTextForSign() != null)
 				shopkeepState = SHOPKEEP_STATE.UPDATING_SIGN;
 			else {
@@ -115,7 +123,7 @@ public class AIRoutineForTrader extends AIRoutine {
 		}
 
 		if (shopkeepState == SHOPKEEP_STATE.UPDATING_SIGN) {
-			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_UPDATING_SIGN;
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_UPDATING_SIGN;
 			// Go to the sign
 			// New action to set text of the sign
 			// Donezo

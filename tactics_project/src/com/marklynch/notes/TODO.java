@@ -2,6 +2,8 @@ package com.marklynch.notes;
 
 public class TODO {
 
+	//
+
 	// The blind walks right through the sign i hit to get to the other side...
 
 	// The blind dudes are looting spoons they cant see... i think...

@@ -36,6 +36,7 @@ import com.marklynch.level.constructs.structure.StructureHall;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.objects.Door;
+import com.marklynch.objects.Expressions;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectExploder;
 import com.marklynch.objects.GameObjectTemplate;
@@ -406,6 +407,9 @@ public class Editor {
 	}
 
 	public void generateTestObjects() {
+
+		// Expressions
+		Expressions.loadExpressions();
 
 		// Add factions
 		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));

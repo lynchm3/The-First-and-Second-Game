@@ -1,6 +1,7 @@
 package com.marklynch.objects;
 
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Blind;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -13,7 +14,7 @@ public class Templates {
 	public static final Actor HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
 			null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, null, 88, 54, 10f);
-	public static final Actor BLIND = new Hunter("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
+	public static final Actor BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
 			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
 			0f, 0f, null, 88, 54, 20f);
 
@@ -35,8 +36,7 @@ public class Templates {
 	public static final Weapon WHIP = new Weapon("Whip", 3, 1, 1, "whip.png", 100, null, true, false, false, false, 1f,
 			1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 22, 15);
 	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 1, 1, "serrated_spoon.png", 100, null,
-			true, false, false, false, 0.25f, 0.25f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 8,
-			12);
+			true, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 16, 24);
 
 	// Blades
 	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, true, false, false,
@@ -60,7 +60,7 @@ public class Templates {
 	public static final GameObjectTemplate SHOP_COUNTER = new GameObjectTemplate("Shop Counter", 5, "shop_counter.png",
 			null, new Inventory(), false, true, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f);
-	public static final Sign ROCK_WITH_ETCHING = new Sign("Rock with Etching", 5, "rock_with_etching.png", null,
+	public static final Sign ROCK_WITH_ETCHING = new Sign("Rock with Etching", 1000, "rock_with_etching.png", null,
 			new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1, 0.5f, 0.5f, 20f, 1f,
 			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 

@@ -37,6 +37,7 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class Actor extends ActorTemplate implements Owner {
 
@@ -94,6 +95,8 @@ public class Actor extends ActorTemplate implements Owner {
 	public HashMap<Actor, Square> locationsToSearch = new HashMap<Actor, Square>();
 
 	public ArrayList<Sound> sounds = new ArrayList<Sound>();
+
+	public Texture expressionImageTexture = null;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
@@ -610,6 +613,26 @@ public class Actor extends ActorTemplate implements Owner {
 			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
 			TextUtils.printTextWithImages(new Object[] { activityDescription }, activityX1, activityY1,
 					Integer.MAX_VALUE, false);
+		}
+
+		if (expressionImageTexture != null) {
+			int expressionPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+					+ drawOffsetX);
+			int expressionPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+					+ drawOffsetY);
+			expressionPositionYInPixels -= 128;
+			int expressionWidth = 128;
+			int expressionHeight = 128;
+			float alpha = 1.0f;
+
+			// TextureUtils.skipNormals = true;
+
+			if (!this.squareGameObjectIsOn.visibleToPlayer)
+				alpha = 0.5f;
+			TextureUtils.drawTexture(expressionImageTexture, alpha, expressionPositionXInPixels,
+					expressionPositionXInPixels + expressionWidth, expressionPositionYInPixels,
+					expressionPositionYInPixels + expressionHeight);
+			// TextureUtils.skipNormals = false;
 		}
 
 	}

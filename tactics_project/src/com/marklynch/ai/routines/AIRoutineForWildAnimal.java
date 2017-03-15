@@ -1,57 +1,54 @@
 package com.marklynch.ai.routines;
 
-import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.units.Actor;
 
 public class AIRoutineForWildAnimal extends AIRoutine {
 	Square targetSquare;
 
 	final static String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 
+	public AIRoutineForWildAnimal(Actor actor) {
+		super(actor);
+	}
+
 	@Override
 	public void update() {
 
-		// 1. Fighting
-		if (Game.level.activeActor.hasAttackers()) {
-			Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
-			GameObject target = AIRoutineUtils.getNearestAttacker(Game.level.activeActor.getAttackers());
-			boolean attackedTarget = false;
-			if (target != null) {
-				attackedTarget = AIRoutineUtils.attackTarget(target);
-				if (!attackedTarget)
-					AIRoutineUtils.moveTowardsTargetToAttack(target);
-			}
+		this.actor.activityDescription = null;
+		this.actor.expressionImageTexture = null;
+		createSearchLocationsBasedOnSounds();
+		createSearchLocationsBasedOnVisibleAttackers();
+		if (runFightRoutine())
 			return;
-		}
+		if (runSearchRoutine())
+			return;
 
 		// If not leader defer to pack
-		if (Game.level.activeActor.group != null
-				&& Game.level.activeActor != Game.level.activeActor.group.getLeader()) {
-			if (Game.level.activeActor.group.update(Game.level.activeActor)) {
+		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
+			if (this.actor.group.update(this.actor)) {
 				return;
 			}
 		}
 
 		// Defer to quest
-		if (Game.level.activeActor.quest != null) {
-			Game.level.activeActor.quest.update(Game.level.activeActor);
+		if (this.actor.quest != null) {
+			this.actor.quest.update(this.actor);
 			return;
 		}
 
 		// Go about ur business...
-		if (targetSquare == null || Game.level.activeActor.getPathTo(targetSquare) == null) {
+		if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {
 			targetSquare = AIRoutineUtils.getRandomSquare(10, true);
 		}
 
 		if (targetSquare != null) {
-			Square squareToMoveTo = AIRoutineUtils
-					.getSquareToMoveAlongPath(Game.level.activeActor.getPathTo(targetSquare));
-			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
-			// AIRoutineUtils.moveTo(Game.level.activeActor, squareToMoveTo);
-			if (Game.level.activeActor.squareGameObjectIsOn == targetSquare)
+			Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(this.actor.getPathTo(targetSquare));
+			new ActionMove(this.actor, squareToMoveTo).perform();
+			// AIRoutineUtils.moveTo(this.actor, squareToMoveTo);
+			if (this.actor.squareGameObjectIsOn == targetSquare)
 				targetSquare = null;
 		}
 
