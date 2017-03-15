@@ -147,6 +147,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public void draw1() {
 
+		if (this.remainingHealth <= 0)
+			return;
+
 		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
 		// persistsWhenCantBeSeen == false)
 		// return;
