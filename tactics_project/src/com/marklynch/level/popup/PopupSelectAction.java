@@ -25,7 +25,7 @@ public class PopupSelectAction extends Popup {
 
 		buttons.clear();
 
-		final ArrayList<Action> actions = object.getAllActionsInWorld(Game.level.player);
+		final ArrayList<Action> actions = object.getAllActionsPerformedOnThisInWorld(Game.level.player);
 
 		for (int i = 0; i < actions.size(); i++) {
 			final int index = i;

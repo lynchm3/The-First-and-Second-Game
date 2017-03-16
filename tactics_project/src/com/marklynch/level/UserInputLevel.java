@@ -266,11 +266,12 @@ public class UserInputLevel {
 		// if (interactedThisTurn)
 		// return;
 
-		if (square == Game.level.activeActor.squareGameObjectIsOn)
-			return;
+		// if (square == Game.level.activeActor.squareGameObjectIsOn)
+		// return;
 
 		if (Game.level.activeActor != Game.level.player)
 			return;
+
 		Action defaultAction = null;
 
 		if (!openMenu)

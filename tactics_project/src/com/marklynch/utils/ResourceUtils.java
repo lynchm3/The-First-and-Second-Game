@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-import mdesl.graphics.Texture;
-import mdesl.test.Util;
-
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.util.ResourceLoader;
+
+import mdesl.graphics.Texture;
+import mdesl.test.Util;
 
 public class ResourceUtils {
 
@@ -64,7 +64,6 @@ public class ResourceUtils {
 				globalSounds.put(path, sound);
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.err.println("path = " + path);
 			}
 		}
 

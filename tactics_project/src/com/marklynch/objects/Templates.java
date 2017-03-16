@@ -4,6 +4,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Blind;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Mort;
+import com.marklynch.objects.weapons.Bell;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
@@ -45,6 +46,8 @@ public class Templates {
 			1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 22, 15);
 	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 1, 1, "serrated_spoon.png", 100, null,
 			true, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 16, 24);
+	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 1, 1, 1, "bell.png", 100, null, true, false, false,
+			false, 0.5f, 0.5f, 0.5f, 0.5f, 25f, 25f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 21, 32);
 
 	// Blades
 	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, true, false, false,

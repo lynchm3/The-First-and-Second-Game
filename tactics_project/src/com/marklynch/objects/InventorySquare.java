@@ -96,12 +96,12 @@ public class InventorySquare extends Square {
 	}
 
 	@Override
-	public Action getDefaultActionInWorld(Actor performer) {
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 		return null;
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		return actions;
 	}

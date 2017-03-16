@@ -126,7 +126,7 @@ public class Tree extends GameObject {
 	}
 
 	@Override
-	public Action getDefaultActionInWorld(Actor performer) {
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 		if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
 				&& Game.level.activeActor.equippedWeapon
 						.hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn))) {

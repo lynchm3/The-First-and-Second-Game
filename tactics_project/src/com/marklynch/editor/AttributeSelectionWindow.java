@@ -208,7 +208,6 @@ public class AttributeSelectionWindow<T> {
 
 					} catch (Exception e) {
 						e.printStackTrace();
-						System.err.println("AGHHHH");
 					}
 
 					editor.settingsWindow.update();

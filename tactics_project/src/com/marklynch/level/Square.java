@@ -242,15 +242,15 @@ public class Square extends AStarNode implements ActionableInWorld {
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
 		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
 		if (targetGameObject != null) {
-			return targetGameObject.getDefaultActionInWorld(performer);
+			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
 		} else {
-			return getDefaultActionInWorld(performer);
+			return getDefaultActionPerformedOnThisInWorld(performer);
 
 		}
 	}
 
 	@Override
-	public Action getDefaultActionInWorld(Actor performer) {
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 
 		if (this == Game.level.player.squareGameObjectIsOn) {
 			return null;
@@ -263,7 +263,7 @@ public class Square extends AStarNode implements ActionableInWorld {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (this != Game.level.player.squareGameObjectIsOn) {
 			actions.add(new ActionMove(performer, this));

@@ -87,7 +87,7 @@ public class Window extends GameObjectExploder {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
 		if (this.remainingHealth < 0)

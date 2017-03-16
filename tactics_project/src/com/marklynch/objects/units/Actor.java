@@ -29,6 +29,7 @@ import com.marklynch.objects.Owner;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionTalk;
+import com.marklynch.objects.weapons.Bell;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
@@ -202,10 +203,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public Path getPathTo(Square target) {
 
-		System.out.println("getPathTo start " + System.currentTimeMillis());
-
 		if (target == null || (target.inventory.canBeMovedTo() == false)) {
-			System.out.println("getPathTo end A " + System.currentTimeMillis());
 			return null;
 		}
 
@@ -220,11 +218,9 @@ public class Actor extends ActorTemplate implements Owner {
 			}
 
 			Path path = new Path(squarePath, squarePath.size());
-			System.out.println("getPathTo end B " + System.currentTimeMillis());
 			return path;
 		}
 
-		System.out.println("getPathTo end C " + System.currentTimeMillis());
 		return null;
 
 	}
@@ -817,7 +813,8 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	@Override
-	public Action getDefaultActionInWorld(Actor performer) {
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+		System.out.println("ACTOR.getDefaultActionPerformedOnThisInWorld");
 		if (this == Game.level.player) {
 			return null;
 		} else if (performer.attackers.contains(this)) {
@@ -833,16 +830,30 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+
+		System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld");
 
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (this != Game.level.player) {
 			// Talk
 			actions.add(new ActionTalk(performer, this));
 			// Inherited from object (attack...)
-			actions.addAll(super.getAllActionsInWorld(performer));
+			actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 			// Inherited from squre (move/swap squares)
-			actions.addAll(squareGameObjectIsOn.getAllActionsInWorld(performer));
+			actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
+		}
+
+		if (this == Game.level.player) {
+			// self action
+			System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld 1");
+			System.out.println(" performer.equippedWeapon = " + performer.equippedWeapon);
+			System.out.println(" performer.equippedWeapon.name = " + performer.equippedWeapon.name);
+			Action utilityAction = ((Bell) performer.equippedWeapon).getUtilityAction(performer);
+			if (utilityAction != null) {
+				System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld 2");
+				actions.add(utilityAction);
+			}
 		}
 
 		return actions;

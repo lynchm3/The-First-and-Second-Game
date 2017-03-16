@@ -569,9 +569,6 @@ public class AIRoutineUtils {
 		if (path.travelCost <= Game.level.activeActor.travelDistance) {
 			squareToMoveTo = path.squares.lastElement();
 		} else {
-
-			System.out.println("getSquareToMoveAlongPath Game.level.activeActor = " + Game.level.activeActor);
-
 			for (int i = path.squares.size() - 1; i >= 0; i--) {
 
 				Path subPath = Game.level.activeActor.getPathTo(path.squares.get(i));

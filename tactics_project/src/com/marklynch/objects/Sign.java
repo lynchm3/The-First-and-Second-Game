@@ -46,14 +46,14 @@ public class Sign extends GameObject {
 	}
 
 	@Override
-	public Action getDefaultActionInWorld(Actor performer) {
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 		return new ActionRead(performer, this);
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsInWorld(Actor performer) {
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.addAll(super.getAllActionsInWorld(performer));
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		actions.add(new ActionRead(performer, this));
 		return actions;
 	}

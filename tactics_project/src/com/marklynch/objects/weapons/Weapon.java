@@ -160,4 +160,18 @@ public class Weapon extends WeaponTemplate {
 	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
 		return new ArrayList<Action>();
 	}
+
+	public Action getUtilityAction(Actor performer) {
+		return null;
+	}
+
+	@Override
+	public Weapon makeCopy(Square square) {
+		return new Weapon(new String(name), slashDamage, minRange, maxRange, imageTexturePath, totalHealth, square,
+				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
+				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance
+
+				, anchorX, anchorY);
+	}
 }

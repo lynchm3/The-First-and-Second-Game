@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import com.marklynch.objects.units.Actor;
 
 public interface ActionableInWorld {
-	public Action getDefaultActionInWorld(Actor performer);
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer);
 
-	public ArrayList<Action> getAllActionsInWorld(Actor performer);
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer);
 
 }
