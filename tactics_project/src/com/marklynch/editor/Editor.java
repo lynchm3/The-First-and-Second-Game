@@ -418,7 +418,7 @@ public class Editor {
 		Game.level.factions.add(new Faction("Blind", colors.get(3), "blind.png"));
 
 		// Add player
-		Actor player = Templates.OLD_LADY.makeCopy(Game.level.squares[46][10], Game.level.factions.get(0));
+		Actor player = Templates.Player.makeCopy(Game.level.squares[46][23], Game.level.factions.get(0));
 		Game.level.player = player;
 		player.inventory.add(Templates.KATANA.makeCopy(null));
 		player.inventory.add(Templates.HATCHET.makeCopy(null));
@@ -513,6 +513,10 @@ public class Editor {
 
 		// Cave
 		ArrayList<GameObject> caveFeatures = new ArrayList<GameObject>();
+		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[53][17]));
+		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[41][21]));
+		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[31][21]));
+
 		ArrayList<StructureHall> cavePaths = new ArrayList<StructureHall>();
 		ArrayList<Square> cavePathSquares = new ArrayList<Square>();
 		cavePathSquares.add(Game.level.squares[24][14]);
@@ -527,18 +531,41 @@ public class Editor {
 		cavePathSquares.add(Game.level.squares[41][14]);
 		cavePathSquares.add(Game.level.squares[42][14]);
 		cavePaths.add(new StructureHall("Path", cavePathSquares2));
+		ArrayList<Square> cavePathSquares3 = new ArrayList<Square>();
+		cavePathSquares.add(Game.level.squares[48][7]);
+		cavePathSquares.add(Game.level.squares[49][7]);
+		cavePathSquares.add(Game.level.squares[50][7]);
+		cavePathSquares.add(Game.level.squares[51][7]);
+		cavePaths.add(new StructureHall("Path", cavePathSquares3));
 
 		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
 		caveAtriums.add(new StructureRoom("Wolf's Den", 25, 13, 37, 18));
-		caveAtriums.add(new StructureRoom("Entrance to the Blind", 43, 7, 47, 14));
+		caveAtriums.add(new StructureRoom("Entrance of the Blind", 43, 7, 47, 14));
+		caveAtriums.add(new StructureRoom("Atrium of the Blind", 52, 4, 56, 9));
+		caveAtriums.add(new StructureRoom("Atrium of the Blind", 54, 10, 60, 17));
+		caveAtriums.add(new StructureRoom("Morty's Mine", 49, 17, 52, 25));
+		caveAtriums.add(new StructureRoom("Morty's Mine", 42, 19, 50, 26));
+		caveAtriums.add(new StructureRoom("Morty's Mine", 44, 23, 51, 32));
+		caveAtriums.add(new StructureRoom("Morty's Room", 32, 21, 40, 24));
+		caveAtriums.add(new StructureRoom("Morty's Stash", 24, 21, 30, 24));
+
 		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
-		caveSections.add(new StructureSection("Cave of the Blind", 24, 12, 40, 19));
-		caveSections.add(new StructureSection("Cave of the Blind", 41, 5, 49, 16));
+		caveSections.add(new StructureSection("Cave of the Blind", 24, 12, 40, 19)); // Wolf
+																						// den
+		caveSections.add(new StructureSection("Cave of the Blind", 41, 5, 49, 16)); // Entrance
+		caveSections.add(new StructureSection("Cave of the Blind", 49, 2, 62, 18)); // Atrium
+		caveSections.add(new StructureSection("Cave of the Blind", 41, 17, 53, 33)); // Morty's
+		// Mine
+		caveSections.add(new StructureSection("Cave of the Blind", 20, 20, 40, 27)); // Morty's
+		// Rooms
 		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
 
 		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14]);
 		rockWithEtching.setText(new Object[] { "SHHHHHhhhhhhhh..." });
+
+		// Add Mort 47 24
+		Actor Mort = Templates.MORT.makeCopy(Game.level.squares[47][24], Game.level.factions.get(1));
 
 		// Add blind
 		Actor blind1 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3));

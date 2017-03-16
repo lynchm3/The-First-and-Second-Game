@@ -3,18 +3,26 @@ package com.marklynch.objects;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Blind;
 import com.marklynch.objects.units.Hunter;
+import com.marklynch.objects.units.Mort;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 
-	// People
-	public static final Actor OLD_LADY = new Actor("You", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png", null, 1, 10, null,
+	// Player
+	public static final Actor Player = new Actor("You", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png", null, 1, 10, null,
 			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
 			0f, 0f, null, 80f, 80f, 10f);
+
+	// General People
 	public static final Actor HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
 			null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, null, 88, 54, 10f);
 	public static final Actor BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
+			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
+			0f, 0f, null, 88, 54, 20f);
+
+	// Special People
+	public static final Actor MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "mort.png", null, 1, 1, null,
 			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
 			0f, 0f, null, 88, 54, 20f);
 
@@ -63,6 +71,8 @@ public class Templates {
 	public static final Sign ROCK_WITH_ETCHING = new Sign("Rock with Etching", 1000, "rock_with_etching.png", null,
 			new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1, 0.5f, 0.5f, 20f, 1f,
 			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+	public static final Door DOOR = new Door("Door", 100, "door.png", null, new Inventory(), false, true, false, false,
+			true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
 	// LARGE CONTAINER
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",
