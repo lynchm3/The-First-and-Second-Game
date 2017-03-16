@@ -34,7 +34,8 @@ public class PopupSelectObject extends Popup {
 
 		buttons.clear();
 
-		buttons.add(selectSquareButton);
+		if (PopupSelectObject.this.square.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0)
+			buttons.add(selectSquareButton);
 
 		for (int i = 0; i < square.inventory.size(); i++) {
 			final GameObject gameObject = square.inventory.get(i);
@@ -44,27 +45,31 @@ public class PopupSelectObject extends Popup {
 
 			// BUT... I dont want the buttons to zoom :P
 
-			final PopupButton objectButton = new PopupButton(0, 30 + i * 30, 200, 30, null, null, "" + gameObject, true,
-					true, gameObject, this);
+			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
+				final PopupButton objectButton = new PopupButton(0, 30 + i * 30, 200, 30, null, null, "" + gameObject,
+						true, true, gameObject, this);
 
-			objectButton.clickListener = new ClickListener() {
+				objectButton.clickListener = new ClickListener() {
 
-				@Override
-				public void click() {
+					@Override
+					public void click() {
 
-					for (Button button : buttons) {
-						button.down = false;
+						for (Button button : buttons) {
+							button.down = false;
+						}
+						highlightedButton.down = true;
+						gameObjectSelected(gameObject);
 					}
-					highlightedButton.down = true;
-					gameObjectSelected(gameObject);
-				}
-			};
-			buttons.add(objectButton);
+				};
+				buttons.add(objectButton);
+			}
 
 		}
 
-		highlightedButton = buttons.get(highlightedButtonIndex);
-		highlightedButton.highlighted = true;
+		if (buttons.size() > 0) {
+			highlightedButton = buttons.get(highlightedButtonIndex);
+			highlightedButton.highlighted = true;
+		}
 
 	}
 

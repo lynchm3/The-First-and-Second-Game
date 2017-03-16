@@ -29,7 +29,6 @@ import com.marklynch.objects.Owner;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionTalk;
-import com.marklynch.objects.weapons.Bell;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
@@ -849,7 +848,7 @@ public class Actor extends ActorTemplate implements Owner {
 			System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld 1");
 			System.out.println(" performer.equippedWeapon = " + performer.equippedWeapon);
 			System.out.println(" performer.equippedWeapon.name = " + performer.equippedWeapon.name);
-			Action utilityAction = ((Bell) performer.equippedWeapon).getUtilityAction(performer);
+			Action utilityAction = performer.equippedWeapon.getUtilityAction(performer);
 			if (utilityAction != null) {
 				System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld 2");
 				actions.add(utilityAction);

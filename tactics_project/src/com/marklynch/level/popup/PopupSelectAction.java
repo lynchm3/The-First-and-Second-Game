@@ -18,10 +18,10 @@ public class PopupSelectAction extends Popup {
 
 		super(width, level, square);
 		this.object = object;
-		updateObjectsButtons();
+		updateActionsButtons();
 	}
 
-	public void updateObjectsButtons() {
+	public void updateActionsButtons() {
 
 		buttons.clear();
 
@@ -29,11 +29,6 @@ public class PopupSelectAction extends Popup {
 
 		for (int i = 0; i < actions.size(); i++) {
 			final int index = i;
-
-			// The line and the highlight are drawn in relation to zoom and
-			// position...
-
-			// BUT... I dont want the buttons to zoom :P
 
 			final PopupButton actionButton = new PopupButton(200, i * 30, 200, 30, null, null,
 					actions.get(i).actionName, true, true, actions.get(i), this);

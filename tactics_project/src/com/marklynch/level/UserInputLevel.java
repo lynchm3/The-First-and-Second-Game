@@ -303,7 +303,9 @@ public class UserInputLevel {
 			if (square instanceof InventorySquare) {
 				// Game.level.popups.add(e);
 			} else {
-				Game.level.popups.add(new PopupSelectObject(100, Game.level, square));
+				PopupSelectObject popupSelectObject = new PopupSelectObject(100, Game.level, square);
+				if (popupSelectObject.buttons.size() > 0)
+					Game.level.popups.add(popupSelectObject);
 			}
 		}
 
