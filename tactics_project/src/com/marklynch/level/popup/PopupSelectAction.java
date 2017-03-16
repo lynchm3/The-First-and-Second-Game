@@ -30,7 +30,7 @@ public class PopupSelectAction extends Popup {
 		for (int i = 0; i < actions.size(); i++) {
 			final int index = i;
 
-			final PopupButton actionButton = new PopupButton(200, i * 30, 200, 30, null, null,
+			final PopupButton actionButton = new PopupButton(200, buttons.size() * 30, 200, 30, null, null,
 					actions.get(i).actionName, true, true, actions.get(i), this);
 			actionButton.enabled = actions.get(index).enabled;
 

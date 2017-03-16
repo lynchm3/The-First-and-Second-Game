@@ -46,8 +46,8 @@ public class PopupSelectObject extends Popup {
 			// BUT... I dont want the buttons to zoom :P
 
 			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
-				final PopupButton objectButton = new PopupButton(0, 30 + i * 30, 200, 30, null, null, "" + gameObject,
-						true, true, gameObject, this);
+				final PopupButton objectButton = new PopupButton(0, buttons.size() * 30, 200, 30, null, null,
+						"" + gameObject, true, true, gameObject, this);
 
 				objectButton.clickListener = new ClickListener() {
 
