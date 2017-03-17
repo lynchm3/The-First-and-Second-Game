@@ -81,6 +81,10 @@ public class Templates {
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",
 			null, new Inventory(), true, false, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f);
+	public static final Carcass CARCASS = new Carcass("Carcass", 5, "carcass.png", null, new Inventory(), false, true,
+			false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+	public static final Corpse CORPSE = new Corpse("Carcass", 5, "carcass.png", null, new Inventory(), false, true,
+			false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
 	// JUNK
 	public static final Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true,

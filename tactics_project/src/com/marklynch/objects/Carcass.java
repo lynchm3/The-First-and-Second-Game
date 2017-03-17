@@ -18,8 +18,7 @@ public class Carcass extends GameObject {
 				fireResistance, iceResistance, electricResistance, poisonResistance);
 	}
 
-	@Override
-	public Carcass makeCopy(Square square) {
+	public Carcass makeCopy(String name, Square square) {
 		return new Carcass(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,

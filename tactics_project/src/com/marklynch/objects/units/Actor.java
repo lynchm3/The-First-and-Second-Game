@@ -21,11 +21,10 @@ import com.marklynch.level.constructs.Quest;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.Carcass;
-import com.marklynch.objects.Corpse;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Owner;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionTalk;
@@ -440,13 +439,14 @@ public class Actor extends ActorTemplate implements Owner {
 			// add a carcass
 			GameObject body;
 			if (this instanceof WildAnimal)
-				body = new Carcass(this.name + " carcass", 5, "carcass.png", this.squareGameObjectIsOn, new Inventory(),
-						false, true, false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
-						0f, 0f, 0f, 0f);
+				body = Templates.CARCASS.makeCopy(this.name + " carcass", this.squareGameObjectIsOn);
 			else
-				body = new Corpse(this.name + " corpse", 5, "carcass.png", this.squareGameObjectIsOn, new Inventory(),
-						false, true, false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
-						0f, 0f, 0f, 0f);
+				body = Templates.CORPSE.makeCopy(this.name + " corpse", this.squareGameObjectIsOn);
+			// body = new Corpse(this.name + " corpse", 5, "carcass.png",
+			// this.squareGameObjectIsOn, new Inventory(),
+			// false, true, false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f,
+			// 1f, 1f, null, 0.5f, 0.5f, false,
+			// 0f, 0f, 0f, 0f);
 
 			this.giveAllToTarget(null, body);
 			// this.squareGameObjectIsOn.inventory.add(body);

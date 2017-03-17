@@ -18,8 +18,7 @@ public class Corpse extends GameObject {
 				fireResistance, iceResistance, electricResistance, poisonResistance);
 	}
 
-	@Override
-	public Corpse makeCopy(Square square) {
+	public Corpse makeCopy(String name, Square square) {
 		return new Corpse(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,

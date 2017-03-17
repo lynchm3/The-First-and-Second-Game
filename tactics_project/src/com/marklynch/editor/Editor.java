@@ -35,6 +35,7 @@ import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureHall;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Expressions;
 import com.marklynch.objects.GameObject;
@@ -564,6 +565,15 @@ public class Editor {
 
 		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14]);
 		rockWithEtching.setText(new Object[] { "SHHHHHhhhhhhhh..." });
+
+		Corpse carcass1 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
+		Corpse carcass2 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
+		Corpse carcass3 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
+		Corpse carcass4 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[25][21]);
+		Corpse carcass5 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[25][21]);
+		Corpse carcass6 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][22]);
+		Corpse carcass7 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][24]);
+		// 24,21
 
 		// Add Mort 47 24
 		Actor Mort = Templates.MORT.makeCopy(Game.level.squares[47][24], Game.level.factions.get(1));
