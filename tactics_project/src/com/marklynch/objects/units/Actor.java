@@ -684,11 +684,10 @@ public class Actor extends ActorTemplate implements Owner {
 		equippedWeaponGUID = this.equippedWeapon.guid;
 	}
 
-	@Override
-	public Actor makeCopy(Square square, Faction faction) {
+	public Actor makeCopy(Square square, Faction faction, Bed bed) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(), showInventory,
+				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance

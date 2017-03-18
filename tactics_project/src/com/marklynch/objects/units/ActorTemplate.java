@@ -1,7 +1,6 @@
 package com.marklynch.objects.units;
 
 import com.marklynch.level.Square;
-import com.marklynch.level.constructs.Faction;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 
@@ -55,17 +54,6 @@ public class ActorTemplate extends GameObject {
 	@Override
 	public void postLoad2() {
 		super.postLoad2();
-	}
-
-	public Actor makeCopy(Square square, Faction faction) {
-		Actor actor = new Actor(new String(name), new String(title), actorLevel, (int) totalHealth, strength, dexterity,
-				intelligence, endurance, imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(),
-				showInventory, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen,
-				widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance,
-				poisonResistance, faction, anchorX, anchorY, hearing);
-		return actor;
-
 	}
 
 }

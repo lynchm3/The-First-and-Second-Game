@@ -39,10 +39,10 @@ public class Mort extends Actor {
 	}
 
 	@Override
-	public Mort makeCopy(Square square, Faction faction) {
+	public Mort makeCopy(Square square, Faction faction, Bed bed) {
 
 		Mort actor = new Mort(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
-				imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(), showInventory,
+				imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, faction,

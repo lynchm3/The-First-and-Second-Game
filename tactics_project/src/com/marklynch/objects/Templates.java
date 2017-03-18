@@ -5,6 +5,7 @@ import com.marklynch.objects.units.Blind;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Mort;
 import com.marklynch.objects.weapons.Bell;
+import com.marklynch.objects.weapons.Lantern;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
@@ -15,10 +16,10 @@ public class Templates {
 			0f, 0f, null, 80f, 80f, 10f);
 
 	// General People
-	public static final Actor HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
+	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
 			null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, null, 88, 54, 10f);
-	public static final Actor BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
+	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
 			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
 			0f, 0f, null, 88, 54, 20f);
 
@@ -48,6 +49,8 @@ public class Templates {
 			true, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 16, 24);
 	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 1, 1, 1, "bell.png", 100, null, true, false, false,
 			false, 0.5f, 0.5f, 0.5f, 0.5f, 25f, 25f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 21, 32);
+	public static final Lantern LANTERN = new Lantern("Lantern", 1, 1, 1, "lantern.png", 100, null, true, false, false,
+			false, 0.25f, 0.25f, 0.5f, 0.5f, 25f, 25f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 16, 4);
 
 	// Blades
 	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, true, false, false,
@@ -56,6 +59,8 @@ public class Templates {
 	// Axes
 	// https://en.wikipedia.org/wiki/Axe#Types_of_axes
 	public static final Weapon HATCHET = new Weapon("Hatchet", 3, 1, 1, "a3r1.png", 100, null, true, false, false,
+			false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 24, 40);
+	public static final Weapon CLEAVER = new Weapon("Cleaver", 5, 1, 1, "cleaver.png", 100, null, true, false, false,
 			false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 24, 40);
 
 	// Bows
@@ -70,6 +75,9 @@ public class Templates {
 			false, true, new Object[] { "" }, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 	public static final GameObjectTemplate SHOP_COUNTER = new GameObjectTemplate("Shop Counter", 5, "shop_counter.png",
 			null, new Inventory(), false, true, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
+			false, 0f, 0f, 0f, 0f);
+	public static final GameObjectTemplate TABLE = new GameObjectTemplate("Table", 5, "table.png", null,
+			new Inventory(), false, true, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f);
 	public static final Sign ROCK_WITH_ETCHING = new Sign("Rock with Etching", 1000, "rock_with_etching.png", null,
 			new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1, 0.5f, 0.5f, 20f, 1f,
@@ -89,6 +97,10 @@ public class Templates {
 	// JUNK
 	public static final Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true,
 			false, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+	public static final Junk ORE = new Junk("Ore", 5, "ore.png", null, new Inventory(), false, true, true, false, false,
+			false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+	public static final Junk BLOOD = new Junk("Blood", 5, "blood.png", null, new Inventory(), false, true, false, false,
+			false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
 	// NATURE
 	// BURROW

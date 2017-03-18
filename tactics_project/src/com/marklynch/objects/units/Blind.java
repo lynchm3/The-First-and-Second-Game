@@ -38,7 +38,6 @@ public class Blind extends Actor {
 		super.postLoad2();
 	}
 
-	@Override
 	public Blind makeCopy(Square square, Faction faction) {
 
 		Blind actor = new Blind(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,

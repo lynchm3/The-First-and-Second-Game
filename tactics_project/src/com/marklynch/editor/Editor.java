@@ -35,6 +35,7 @@ import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureHall;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.objects.Bed;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Expressions;
@@ -419,13 +420,15 @@ public class Editor {
 		Game.level.factions.add(new Faction("Blind", colors.get(3), "blind.png"));
 
 		// Add player
-		Actor player = Templates.Player.makeCopy(Game.level.squares[46][23], Game.level.factions.get(0));
+		Actor player = Templates.Player.makeCopy(Game.level.squares[46][23], Game.level.factions.get(0), null);
 		Game.level.player = player;
 		player.inventory.add(Templates.KATANA.makeCopy(null));
 		player.inventory.add(Templates.HATCHET.makeCopy(null));
 		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
 		player.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
 		player.inventory.add(Templates.DINNER_BELL.makeCopy(null));
+		player.inventory.add(Templates.CLEAVER.makeCopy(null));
+		player.inventory.add(Templates.LANTERN.makeCopy(null));
 		player.anchorX = 80;
 		player.anchorY = 80;
 
@@ -566,6 +569,9 @@ public class Editor {
 		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14]);
 		rockWithEtching.setText(new Object[] { "SHHHHHhhhhhhhh..." });
 
+		Bed mortsBed = Templates.BED.makeCopy(Game.level.squares[35][24]);
+
+		Templates.BLOOD.makeCopy(Game.level.squares[24][21]);
 		Corpse carcass1 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
 		Corpse carcass2 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
 		Corpse carcass3 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
@@ -573,10 +579,16 @@ public class Editor {
 		Corpse carcass5 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[25][21]);
 		Corpse carcass6 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][22]);
 		Corpse carcass7 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][24]);
+		Templates.ORE.makeCopy(Game.level.squares[24][24]);
+		Templates.LANTERN.makeCopy(Game.level.squares[26][24]);
+		Templates.TABLE.makeCopy(Game.level.squares[27][24]);
 		// 24,21
 
 		// Add Mort 47 24
-		Actor Mort = Templates.MORT.makeCopy(Game.level.squares[47][24], Game.level.factions.get(1));
+		Actor mort = Templates.MORT.makeCopy(Game.level.squares[47][24], Game.level.factions.get(1), mortsBed);
+		mort.inventory.add(Templates.CLEAVER.makeCopy(null));
+		mort.inventory.add(Templates.LANTERN.makeCopy(null));
+		mort.inventory.add(Templates.DINNER_BELL.makeCopy(null));
 
 		// Add blind
 		Actor blind1 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3));
@@ -632,28 +644,28 @@ public class Editor {
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
 		// Add lead hunter
-		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1));
+		Bed brentsBed = Templates.BED.makeCopy(Game.level.squares[10][9]);
+		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1), brentsBed);
 		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
-		hunterBrent.bed = Templates.BED.makeCopy(Game.level.squares[10][9]);
 		hunterBrent.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		// Add hunters
-		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1));
+		Bed brontsBed = Templates.BED.makeCopy(Game.level.squares[9][9]);
+		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1), brontsBed);
 		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
-		hunterBront1.bed = Templates.BED.makeCopy(Game.level.squares[9][9]);
 		hunterBront1.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
-		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1));
+		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null);
 		hunterBront2.inventory.add(Templates.HATCHET.makeCopy(null));
 		hunterBront2.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
-		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1));
-		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1));
-		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1));
-		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1));
+		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null);
+		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1), null);
+		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1), null);
+		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1), null);
 
 		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();
 		hunterPackMembers.add(hunterBrent);

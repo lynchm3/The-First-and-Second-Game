@@ -97,10 +97,10 @@ public class Trader extends Actor implements Comparator<GameObject> {
 	}
 
 	@Override
-	public Trader makeCopy(Square square, Faction factione) {
+	public Trader makeCopy(Square square, Faction faction, Bed bed) {
 
 		Trader actor = new Trader(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(), showInventory,
+				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, faction,
