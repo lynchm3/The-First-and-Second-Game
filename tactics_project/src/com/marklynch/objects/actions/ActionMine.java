@@ -3,6 +3,8 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Junk;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Pickaxe;
@@ -38,16 +40,22 @@ public class ActionMine extends Action {
 		miner.distanceMovedThisTurn = miner.travelDistance;
 		miner.hasAttackedThisTurn = true;
 
-		if (miner.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] {
+		Junk ore = Templates.ORE.makeCopy(null);
+		miner.inventory.add(ore);
 
-					miner, " mined ", target, " with ", miner.inventory.getGameObectOfClass(Pickaxe.class),
-					" for " + damage + " damage" }));
+		if (miner.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { miner, " mined ", target, " with ",
+					miner.inventory.getGameObectOfClass(Pickaxe.class) }));
+
+		if (miner.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { miner, " received ", ore }));
 
 		if (target.checkIfDestroyed()) {
 			if (miner.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { miner, " depleted a ", target }));
 		}
+
+		miner.showPow(target);
 
 		// Sound
 		float loudness = target.soundWhenHit * miner.equippedWeapon.soundWhenHitting;

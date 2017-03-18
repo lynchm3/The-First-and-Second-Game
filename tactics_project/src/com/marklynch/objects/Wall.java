@@ -58,6 +58,9 @@ public class Wall extends GameObject {
 	@Override
 	public void draw1() {
 
+		if (this.remainingHealth <= 0)
+			return;
+
 		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
 			return;
 

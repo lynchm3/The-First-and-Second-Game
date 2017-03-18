@@ -17,14 +17,14 @@ import mdesl.graphics.Texture;
 
 public class Vein extends Wall {
 
-	public boolean connectedTop;
-	public boolean connectedTopRight;
-	public boolean connectedRight;
-	public boolean connectedBottomRight;
-	public boolean connectedBottom;
-	public boolean connectedBottomLeft;
-	public boolean connectedLeft;
-	public boolean connectedTopLeft;
+	public boolean connectedTop = true;
+	public boolean connectedTopRight = true;
+	public boolean connectedRight = true;
+	public boolean connectedBottomRight = true;
+	public boolean connectedBottom = true;
+	public boolean connectedBottomLeft = true;
+	public boolean connectedLeft = true;
+	public boolean connectedTopLeft = true;
 
 	public Texture textureTop;
 	public Texture textureTopRight;
@@ -63,6 +63,8 @@ public class Vein extends Wall {
 
 	@Override
 	public void draw1() {
+		if (this.remainingHealth <= 0)
+			return;
 
 		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
 			return;

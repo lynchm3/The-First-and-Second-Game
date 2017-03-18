@@ -33,9 +33,9 @@ public class Templates {
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
 			1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 59, 63);
 	public static final Pickaxe PICKAXE = new Pickaxe("Pickaxe", 3, 1, 1, "pickaxe.png", 100, null, true, false, false,
-			false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 22, 15);
+			false, 0.34f, 0.34f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 24, 32);
 	public static final Weapon HOE = new Weapon("Hoe", 2, 1, 1, "hoe.png", 100, null, true, false, false, false, 1f, 1f,
-			0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 22, 15);
+			0.5f, 0.5f, 15f, 15f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 22, 15);
 	public static final Weapon SICKLE = new Weapon("Sickle", 3, 1, 1, "sickle.png", 100, null, true, false, false,
 			false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 22, 15);
 	public static final Weapon HAMMER = new Weapon("Hammer", 4, 1, 1, "hammer.png", 100, null, true, false, false,
@@ -87,9 +87,9 @@ public class Templates {
 			true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
 	public static final Wall WALL = new Wall("Wall", 1000, "wall.png", null, new Inventory(), false, false, false,
-			false, true, true, 1, 1, 0.5f, 0.5f, 20f, 0f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+			false, true, true, 1, 1, 0.5f, 0.5f, 10f, 0f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 	public static final Vein VEIN = new Vein("Vein", 1000, "wall.png", null, new Inventory(), false, false, false,
-			false, true, true, 1, 1, 0.5f, 0.5f, 20f, 0f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+			false, true, true, 1, 1, 0.5f, 0.5f, 15f, 0f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
 	// LARGE CONTAINER
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",
@@ -104,7 +104,7 @@ public class Templates {
 	public static final Junk furTemplate = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true,
 			false, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 	public static final Junk ORE = new Junk("Ore", 5, "ore.png", null, new Inventory(), false, true, true, false, false,
-			false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+			false, 0.25f, 0.25f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 	public static final Junk BLOOD = new Junk("Blood", 5, "blood.png", null, new Inventory(), false, true, false, false,
 			false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
