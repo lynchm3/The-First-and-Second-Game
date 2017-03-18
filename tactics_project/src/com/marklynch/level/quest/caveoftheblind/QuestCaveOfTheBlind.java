@@ -67,6 +67,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		mort.inventory.add(Templates.CLEAVER.makeCopy(null));
 		mort.inventory.add(Templates.LANTERN.makeCopy(null));
 		mort.inventory.add(Templates.DINNER_BELL.makeCopy(null));
+		mort.inventory.add(Templates.PICKAXE.makeCopy(null));
 		for (GameObject gameObject : mort.inventory.getGameObjects()) {
 			gameObject.quest = this;
 		}
@@ -156,6 +157,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public void makeCave() {
 		ArrayList<GameObject> caveFeatures = new ArrayList<GameObject>();
+		caveFeatures.add(Templates.VEIN.makeCopy(Game.level.squares[42][23]));
 		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[41][21]));
 		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[31][21]));
 

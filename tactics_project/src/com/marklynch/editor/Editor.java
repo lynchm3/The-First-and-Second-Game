@@ -429,6 +429,7 @@ public class Editor {
 		player.inventory.add(Templates.DINNER_BELL.makeCopy(null));
 		player.inventory.add(Templates.CLEAVER.makeCopy(null));
 		player.inventory.add(Templates.LANTERN.makeCopy(null));
+		player.inventory.add(Templates.PICKAXE.makeCopy(null));
 		player.anchorX = 80;
 		player.anchorY = 80;
 

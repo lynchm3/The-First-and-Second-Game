@@ -6,6 +6,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.weapons.Bell;
 import com.marklynch.objects.weapons.Lantern;
+import com.marklynch.objects.weapons.Pickaxe;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
@@ -31,7 +32,7 @@ public class Templates {
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
 			1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 59, 63);
-	public static final Weapon PICKAXE = new Weapon("Pickaxe", 3, 1, 1, "pickaxe.png", 100, null, true, false, false,
+	public static final Pickaxe PICKAXE = new Pickaxe("Pickaxe", 3, 1, 1, "pickaxe.png", 100, null, true, false, false,
 			false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 22, 15);
 	public static final Weapon HOE = new Weapon("Hoe", 2, 1, 1, "hoe.png", 100, null, true, false, false, false, 1f, 1f,
 			0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 22, 15);
@@ -84,6 +85,11 @@ public class Templates {
 			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 	public static final Door DOOR = new Door("Door", 100, "door.png", null, new Inventory(), false, true, false, false,
 			true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+
+	public static final Wall WALL = new Wall("Wall", 1000, "wall.png", null, new Inventory(), false, false, false,
+			false, true, true, 1, 1, 0.5f, 0.5f, 20f, 0f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+	public static final Vein VEIN = new Vein("Vein", 1000, "wall.png", null, new Inventory(), false, false, false,
+			false, true, true, 1, 1, 0.5f, 0.5f, 20f, 0f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
 	// LARGE CONTAINER
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("dumpster", 5, "skip_with_shadow.png",

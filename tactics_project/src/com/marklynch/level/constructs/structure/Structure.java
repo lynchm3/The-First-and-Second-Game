@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Inventory;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.utils.ResourceUtils;
@@ -83,9 +83,8 @@ public class Structure {
 				for (int j = caveSection.gridY1; j <= caveSection.gridY2; j++) {
 					if (!floorSquares.contains(Game.level.squares[i][j])
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
-						wallsInCave.add(new Wall("Cave Wall", 1000, "wall.png", Game.level.squares[i][j],
-								new Inventory(), false, false, false, false, blocksLineOfSight, true, 1, 1, 0.5f, 0.5f,
-								20f, 0f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+
+						wallsInCave.add(Templates.WALL.makeCopy(Game.level.squares[i][j]));
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					Game.level.squares[i][j].structureSquareIsIn = this;
