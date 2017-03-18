@@ -1,10 +1,10 @@
-package com.marklynch.objects.units;
+package com.marklynch.level.quest.caveoftheblind;
 
-import com.marklynch.ai.routines.AIRoutineForBlind;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
+import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
 

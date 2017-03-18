@@ -11,8 +11,8 @@ import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
-import com.marklynch.level.constructs.Quest;
 import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionLootAll;
@@ -636,7 +636,13 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 				if (Game.level.squares[(int) rx][(int) ry] != squareGameObjectIsOn) {
 					if (Game.level.squares[(int) rx][(int) ry].inventory.blocksLineOfSight()) {
-						return false;
+
+						if ((int) x0 == (int) rx && (int) y0 == (int) ry) {
+							return true;
+						} else {
+							return false;
+
+						}
 					}
 				}
 				// done = markSquareAsVisibleToActiveCharacter((int) rx, (int)

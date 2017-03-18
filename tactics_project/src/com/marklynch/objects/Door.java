@@ -31,7 +31,6 @@ public class Door extends GameObject {
 		if (!this.squareGameObjectIsOn.inventory.contains(Actor.class)) {
 			super.draw1();
 		} else {
-
 		}
 
 	}

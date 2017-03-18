@@ -12,6 +12,8 @@ import com.marklynch.Game;
 import com.marklynch.ai.routines.AStarNode;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.Structure;
+import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
@@ -54,6 +56,8 @@ public class Square extends AStarNode implements ActionableInWorld {
 	public transient static PathComparator pathComparator;
 
 	public transient Structure structureSquareIsIn;
+	public transient StructureSection structureSectionSquareIsIn;
+	public transient StructureRoom structureRoomSquareIsIn;
 
 	public ArrayList<Sound> sounds = new ArrayList<Sound>();
 

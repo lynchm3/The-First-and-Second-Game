@@ -17,9 +17,9 @@ import com.marklynch.ai.routines.AStarSearch;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Group;
-import com.marklynch.level.constructs.Quest;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
@@ -590,8 +590,8 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public void draw2() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false)
-			return;
+		// if (this.squareGameObjectIsOn.visibleToPlayer == false)
+		// return;
 
 		if (this.remainingHealth <= 0)
 			return;

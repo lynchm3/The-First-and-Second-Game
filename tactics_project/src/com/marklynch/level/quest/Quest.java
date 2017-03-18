@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs;
+package com.marklynch.level.quest;
 
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;

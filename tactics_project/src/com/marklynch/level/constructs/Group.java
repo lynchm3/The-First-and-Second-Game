@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.units.Actor;
 
 public class Group {

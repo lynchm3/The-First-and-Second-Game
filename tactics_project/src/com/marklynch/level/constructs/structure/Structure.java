@@ -18,7 +18,7 @@ public class Structure {
 	public String name;
 	public ArrayList<StructureRoom> rooms;
 	public boolean seenByPlayer = false;
-	public ArrayList<StructureSection> caveSections;
+	public ArrayList<StructureSection> structureSections;
 	public ArrayList<Square> entranceSquares;
 	public Texture imageTexture;
 	float overlayX1, overlayX2, overlayY1, overlayY2;
@@ -34,7 +34,7 @@ public class Structure {
 		super();
 
 		this.name = name;
-		this.caveSections = caveSections;
+		this.structureSections = caveSections;
 		this.rooms = rooms;
 		this.imageTexture = ResourceUtils.getGlobalImage(imageTexturePath);
 		this.overlayX1 = overlayX1;
@@ -71,6 +71,7 @@ public class Structure {
 			for (int i = caveAtrium.gridX1; i <= caveAtrium.gridX2; i++) {
 				for (int j = caveAtrium.gridY1; j <= caveAtrium.gridY2; j++) {
 					floorSquares.add(Game.level.squares[i][j]);
+					Game.level.squares[i][j].structureRoomSquareIsIn = caveAtrium;
 				}
 			}
 		}
@@ -88,6 +89,7 @@ public class Structure {
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					Game.level.squares[i][j].structureSquareIsIn = this;
+					Game.level.squares[i][j].structureSectionSquareIsIn = caveSection;
 					Game.level.squares[i][j].imageTexturePath = "stone.png";
 					Game.level.squares[i][j].loadImages();
 				}

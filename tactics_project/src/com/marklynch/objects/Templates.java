@@ -1,9 +1,9 @@
 package com.marklynch.objects;
 
+import com.marklynch.level.quest.caveoftheblind.Blind;
+import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Blind;
 import com.marklynch.objects.units.Hunter;
-import com.marklynch.objects.units.Mort;
 import com.marklynch.objects.weapons.Bell;
 import com.marklynch.objects.weapons.Lantern;
 import com.marklynch.objects.weapons.Weapon;
@@ -24,7 +24,7 @@ public class Templates {
 			0f, 0f, null, 88, 54, 20f);
 
 	// Special People
-	public static final Actor MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "mort.png", null, 1, 1, null,
+	public static final Mort MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "mort.png", null, 1, 10, null,
 			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
 			0f, 0f, null, 88, 54, 20f);
 

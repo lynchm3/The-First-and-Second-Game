@@ -35,8 +35,8 @@ import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureHall;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Expressions;
 import com.marklynch.objects.GameObject;
@@ -516,87 +516,7 @@ public class Editor {
 		// Game.level.structures.add(new Building("Hunting Lodge", 7, 7, 11, 11,
 		// doorLocations2));
 
-		// Cave
-		ArrayList<GameObject> caveFeatures = new ArrayList<GameObject>();
-		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[53][17]));
-		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[41][21]));
-		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[31][21]));
-
-		ArrayList<StructureHall> cavePaths = new ArrayList<StructureHall>();
-		ArrayList<Square> cavePathSquares = new ArrayList<Square>();
-		cavePathSquares.add(Game.level.squares[24][14]);
-		cavePathSquares.add(Game.level.squares[25][14]);
-		cavePaths.add(new StructureHall("Path", cavePathSquares));
-		ArrayList<Square> cavePathSquares2 = new ArrayList<Square>();
-		cavePathSquares.add(Game.level.squares[38][16]);
-		cavePathSquares.add(Game.level.squares[39][16]);
-		cavePathSquares.add(Game.level.squares[39][15]);
-		cavePathSquares.add(Game.level.squares[39][14]);
-		cavePathSquares.add(Game.level.squares[40][14]);
-		cavePathSquares.add(Game.level.squares[41][14]);
-		cavePathSquares.add(Game.level.squares[42][14]);
-		cavePaths.add(new StructureHall("Path", cavePathSquares2));
-		ArrayList<Square> cavePathSquares3 = new ArrayList<Square>();
-		cavePathSquares.add(Game.level.squares[48][7]);
-		cavePathSquares.add(Game.level.squares[49][7]);
-		cavePathSquares.add(Game.level.squares[50][7]);
-		cavePathSquares.add(Game.level.squares[51][7]);
-		cavePaths.add(new StructureHall("Path", cavePathSquares3));
-
-		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
-		caveAtriums.add(new StructureRoom("Wolf's Den", 25, 13, 37, 18));
-		caveAtriums.add(new StructureRoom("Entrance of the Blind", 43, 7, 47, 14));
-		caveAtriums.add(new StructureRoom("Atrium of the Blind", 52, 4, 56, 9));
-		caveAtriums.add(new StructureRoom("Atrium of the Blind", 54, 10, 60, 17));
-		caveAtriums.add(new StructureRoom("Morty's Mine", 49, 17, 52, 25));
-		caveAtriums.add(new StructureRoom("Morty's Mine", 42, 19, 50, 26));
-		caveAtriums.add(new StructureRoom("Morty's Mine", 44, 23, 51, 32));
-		caveAtriums.add(new StructureRoom("Morty's Room", 32, 21, 40, 24));
-		caveAtriums.add(new StructureRoom("Morty's Stash", 24, 21, 30, 24));
-
-		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
-		caveSections.add(new StructureSection("Cave of the Blind", 24, 12, 40, 19)); // Wolf
-																						// den
-		caveSections.add(new StructureSection("Cave of the Blind", 41, 5, 49, 16)); // Entrance
-		caveSections.add(new StructureSection("Cave of the Blind", 49, 2, 62, 18)); // Atrium
-		caveSections.add(new StructureSection("Cave of the Blind", 41, 17, 53, 33)); // Morty's
-		// Mine
-		caveSections.add(new StructureSection("Cave of the Blind", 20, 20, 40, 27)); // Morty's
-		// Rooms
-		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
-				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
-
-		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14]);
-		rockWithEtching.setText(new Object[] { "SHHHHHhhhhhhhh..." });
-
-		Bed mortsBed = Templates.BED.makeCopy(Game.level.squares[35][24]);
-
-		Templates.BLOOD.makeCopy(Game.level.squares[24][21]);
-		Corpse carcass1 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
-		Corpse carcass2 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
-		Corpse carcass3 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
-		Corpse carcass4 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[25][21]);
-		Corpse carcass5 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[25][21]);
-		Corpse carcass6 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][22]);
-		Corpse carcass7 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][24]);
-		Templates.ORE.makeCopy(Game.level.squares[24][24]);
-		Templates.LANTERN.makeCopy(Game.level.squares[26][24]);
-		Templates.TABLE.makeCopy(Game.level.squares[27][24]);
-		// 24,21
-
-		// Add Mort 47 24
-		Actor mort = Templates.MORT.makeCopy(Game.level.squares[47][24], Game.level.factions.get(1), mortsBed);
-		mort.inventory.add(Templates.CLEAVER.makeCopy(null));
-		mort.inventory.add(Templates.LANTERN.makeCopy(null));
-		mort.inventory.add(Templates.DINNER_BELL.makeCopy(null));
-
-		// Add blind
-		Actor blind1 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3));
-		blind1.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
-		blind1.addAttackerForThisAndGroupMembers(player);
-
-		// Add spoons
-		Weapon serratedSpoon1 = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[44][11]);
+		QuestCaveOfTheBlind questCaveOfTheBlind = new QuestCaveOfTheBlind();
 
 		// 6,1 to 8,4
 		// for(int i = 6; i<=8; )
