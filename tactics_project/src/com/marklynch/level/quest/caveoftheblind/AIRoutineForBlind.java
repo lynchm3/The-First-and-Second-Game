@@ -1,7 +1,8 @@
 package com.marklynch.level.quest.caveoftheblind;
 
 import com.marklynch.ai.routines.AIRoutine;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.Square;
 
 public class AIRoutineForBlind extends AIRoutine {
 
@@ -15,8 +16,12 @@ public class AIRoutineForBlind extends AIRoutine {
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
 
-	public AIRoutineForBlind(Actor actor) {
-		super(actor);
+	Blind blind;
+	Square targetSquare = null;
+
+	public AIRoutineForBlind(Blind blind) {
+		super(blind);
+		this.blind = blind;
 	}
 
 	@Override
@@ -50,6 +55,22 @@ public class AIRoutineForBlind extends AIRoutine {
 		if (this.actor.quest != null) {
 			if (this.actor.quest.update(this.actor)) {
 				return;
+			}
+		}
+
+		// Move around room
+		if (targetSquare != null) {
+			AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+			if (blind.squareGameObjectIsOn == targetSquare || blind.getPathTo(targetSquare) == null)
+				targetSquare = null;
+		} else if (blind.squareGameObjectIsOn.structureSectionSquareIsIn != blind.structureSection) {
+			targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSection);
+			AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+		} else {
+			if (Math.random() < 0.05) {
+				targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSection);
+				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+
 			}
 		}
 	}

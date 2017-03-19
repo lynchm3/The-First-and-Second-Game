@@ -10,6 +10,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -788,6 +789,41 @@ public class AIRoutineUtils {
 	public static Square getRandomSquareInRoom(StructureRoom room) {
 		int randomX = (room.gridX1 + 1) + (int) Math.round((Math.random() * ((room.gridX2 - 1) - (room.gridX1 + 1))));
 		int randomY = (room.gridY1 + 1) + (int) Math.round((Math.random() * ((room.gridY2 - 1) - (room.gridY1 + 1))));
+
+		if (randomX > 0) {
+			if (Game.level.squares[randomX - 1][randomY].inventory.contains(Door.class)) {
+				return null;
+			}
+		}
+
+		if (randomX < Game.level.squares.length - 1) {
+			if (Game.level.squares[randomX + 1][randomY].inventory.contains(Door.class)) {
+				return null;
+			}
+
+		}
+
+		if (randomY > 0) {
+			if (Game.level.squares[randomX][randomY - 1].inventory.contains(Door.class)) {
+				return null;
+			}
+		}
+
+		if (randomY < Game.level.squares[0].length - 1) {
+			if (Game.level.squares[randomX][randomY + 1].inventory.contains(Door.class)) {
+				return null;
+			}
+
+		}
+
+		return Game.level.squares[randomX][randomY];
+	}
+
+	public static Square getRandomSquareInStructureSection(StructureSection structureSection) {
+		int randomX = (structureSection.gridX1 + 1)
+				+ (int) Math.round((Math.random() * ((structureSection.gridX2 - 1) - (structureSection.gridX1 + 1))));
+		int randomY = (structureSection.gridY1 + 1)
+				+ (int) Math.round((Math.random() * ((structureSection.gridY2 - 1) - (structureSection.gridY1 + 1))));
 
 		if (randomX > 0) {
 			if (Game.level.squares[randomX - 1][randomY].inventory.contains(Door.class)) {

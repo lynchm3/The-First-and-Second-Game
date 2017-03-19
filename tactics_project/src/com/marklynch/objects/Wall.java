@@ -61,11 +61,12 @@ public class Wall extends GameObject {
 		if (this.remainingHealth <= 0)
 			return;
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-			return;
+		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
+		// persistsWhenCantBeSeen == false)
+		// return;
 
-		if (!this.squareGameObjectIsOn.seenByPlayer)
-			return;
+		// if (!this.squareGameObjectIsOn.seenByPlayer)
+		// return;
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {

@@ -550,7 +550,6 @@ public class Level {
 	}
 
 	public void endTurn() {
-
 		// this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
 		// " ended turn " + this.turn }));
 

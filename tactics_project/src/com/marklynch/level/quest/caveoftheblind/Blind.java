@@ -2,6 +2,7 @@ package com.marklynch.level.quest.caveoftheblind;
 
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.units.Actor;
@@ -10,6 +11,8 @@ import mdesl.graphics.Color;
 
 public class Blind extends Actor {
 
+	public StructureSection structureSection;
+
 	public Blind(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -17,7 +20,7 @@ public class Blind extends Actor {
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
 			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY,
-			float hearing) {
+			float hearing, StructureSection structureSection) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
@@ -25,6 +28,7 @@ public class Blind extends Actor {
 				fireResistance, iceResistance, electricResistance, poisonResistance, faction, anchorX, anchorY,
 				hearing);
 		aiRoutine = new AIRoutineForBlind(this);
+		this.structureSection = structureSection;
 	}
 
 	@Override
@@ -38,14 +42,14 @@ public class Blind extends Actor {
 		super.postLoad2();
 	}
 
-	public Blind makeCopy(Square square, Faction faction) {
+	public Blind makeCopy(Square square, Faction faction, StructureSection structureSection) {
 
 		Blind actor = new Blind(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, faction,
-				anchorX, anchorY, hearing);
+				anchorX, anchorY, hearing, structureSection);
 		return actor;
 	}
 

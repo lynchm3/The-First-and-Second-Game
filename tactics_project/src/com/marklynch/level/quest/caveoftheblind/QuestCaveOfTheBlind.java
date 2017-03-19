@@ -38,6 +38,15 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	boolean huntersAndWolvesFought = false;
 
+	// Structure sections
+	StructureSection wolfDen;
+	StructureSection entrance1;
+	StructureSection entrance2;
+	StructureSection atrium1;
+	StructureSection atrium2;
+	StructureSection mortsMine;
+	StructureSection mortsRooms;
+
 	// Actors
 	Mort mort;
 	Blind blind;
@@ -82,16 +91,11 @@ public class QuestCaveOfTheBlind extends Quest {
 		makeMortsMine();
 		makeMortsRoom();
 		makeMortsStorage();
+		makeBlind();
 
 		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14]);
 		rockWithEtching.setText(new Object[] { "SHHHHHhhhhhhhh..." });
 		rockWithEtching.quest = this;
-
-		// Add blind
-		blind = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3));
-		blind.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
-		blind.addAttackerForThisAndGroupMembers(Game.level.player);
-		blind.quest = this;
 
 		// Add spoons
 		serratedSpoon = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[44][11]);
@@ -189,6 +193,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		cavePathSquares.add(Game.level.squares[50][7]);
 		cavePathSquares.add(Game.level.squares[51][7]);
 		cavePathSquares.add(Game.level.squares[53][17]);
+		cavePathSquares.add(Game.level.squares[57][18]);
+		cavePathSquares.add(Game.level.squares[57][19]);
+		cavePathSquares.add(Game.level.squares[57][20]);
+		cavePathSquares.add(Game.level.squares[57][21]);
 		cavePaths.add(new StructureHall("Path", cavePathSquares3));
 
 		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
@@ -196,6 +204,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveAtriums.add(new StructureRoom("Entrance of the Blind", 43, 7, 47, 14));
 		caveAtriums.add(new StructureRoom("Atrium of the Blind", 52, 4, 56, 9));
 		caveAtriums.add(new StructureRoom("Atrium of the Blind", 54, 10, 60, 17));
+		caveAtriums.add(new StructureRoom("Atrium 2 of the Blind", 54, 22, 60, 25));
+		caveAtriums.add(new StructureRoom("Atrium 2 of the Blind", 57, 26, 60, 30));
 		caveAtriums.add(new StructureRoom("Morty's Mine", 49, 17, 52, 25));
 		caveAtriums.add(new StructureRoom("Morty's Mine", 42, 19, 50, 26));
 		caveAtriums.add(new StructureRoom("Morty's Mine", 44, 23, 51, 32));
@@ -203,15 +213,21 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveAtriums.add(new StructureRoom("Morty's Stash", 24, 21, 30, 24));
 
 		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
-		caveSections.add(new StructureSection("Cave of the Blind", 24, 12, 40, 19)); // Wolf
-																						// den
-		caveSections.add(new StructureSection("Cave of the Blind", 41, 5, 49, 16)); // Entrance
-		caveSections.add(new StructureSection("Cave of the Blind", 49, 2, 62, 18)); // Atrium
-		mort.mortsMine = new StructureSection("Cave of the Blind", 41, 17, 53, 33);
-		caveSections.add(mort.mortsMine); // Morty's
+		wolfDen = new StructureSection("Cave of the Blind", 24, 12, 40, 19);
+		caveSections.add(wolfDen);
+		entrance1 = new StructureSection("Cave of the Blind", 41, 14, 49, 16);
+		caveSections.add(entrance1);
+		entrance2 = new StructureSection("Cave of the Blind", 41, 5, 49, 13);
+		caveSections.add(entrance2);
+		atrium1 = new StructureSection("Cave of the Blind", 49, 2, 62, 18);
+		caveSections.add(atrium1);
+		atrium2 = new StructureSection("Cave of the Blind", 54, 19, 61, 31);
+		caveSections.add(atrium2);
+		mortsMine = mort.mortsMine = new StructureSection("Cave of the Blind", 41, 17, 53, 33);
+		caveSections.add(mortsMine); // Morty's
 		// Mine
-		mort.mortsRooms = new StructureSection("Cave of the Blind", 20, 20, 40, 27);
-		caveSections.add(mort.mortsRooms); // Morty's
+		mortsRooms = mort.mortsRooms = new StructureSection("Cave of the Blind", 20, 20, 40, 27);
+		caveSections.add(mortsRooms); // Morty's
 		// Rooms
 		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
@@ -249,6 +265,67 @@ public class QuestCaveOfTheBlind extends Quest {
 		ore.quest = this;
 		lantern.quest = this;
 		table.quest = this;
+	}
+
+	public void makeBlind() {
+
+		// Entrance 2
+		blind = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3), entrance2);
+		blind.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind.quest = this;
+
+		// Atrium 1
+		Blind blind1 = Templates.BLIND.makeCopy(Game.level.squares[60][12], Game.level.factions.get(3), atrium1);
+		blind1.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind1.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind1.quest = this;
+
+		Blind blind2 = Templates.BLIND.makeCopy(Game.level.squares[60][15], Game.level.factions.get(3), atrium1);
+		blind2.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind2.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind2.quest = this;
+
+		// Atrium 2
+		Blind blind3 = Templates.BLIND.makeCopy(Game.level.squares[55][23], Game.level.factions.get(3), atrium2);
+		blind3.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind3.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind3.quest = this;
+
+		Blind blind4 = Templates.BLIND.makeCopy(Game.level.squares[60][25], Game.level.factions.get(3), atrium2);
+		blind4.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind4.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind4.quest = this;
+
+		Blind blind5 = Templates.BLIND.makeCopy(Game.level.squares[55][24], Game.level.factions.get(3), atrium2);
+		blind5.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind5.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind5.quest = this;
+
+		Blind blind6 = Templates.BLIND.makeCopy(Game.level.squares[59][25], Game.level.factions.get(3), atrium2);
+		blind6.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind6.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind6.quest = this;
+
+		Blind blind7 = Templates.BLIND.makeCopy(Game.level.squares[60][26], Game.level.factions.get(3), atrium2);
+		blind7.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind7.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind7.quest = this;
+
+		Blind blind8 = Templates.BLIND.makeCopy(Game.level.squares[57][24], Game.level.factions.get(3), atrium2);
+		blind8.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind8.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind8.quest = this;
+
+		Blind blind9 = Templates.BLIND.makeCopy(Game.level.squares[56][25], Game.level.factions.get(3), atrium2);
+		blind9.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind9.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind9.quest = this;
+
+		Blind blind10 = Templates.BLIND.makeCopy(Game.level.squares[57][27], Game.level.factions.get(3), atrium2);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind10.addAttackerForThisAndGroupMembers(Game.level.player);
+		blind10.quest = this;
 	}
 
 }

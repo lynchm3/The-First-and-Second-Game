@@ -17,11 +17,11 @@ import mdesl.graphics.Texture;
 
 public class Vein extends Wall {
 
-	public boolean connectedTop = true;
-	public boolean connectedTopRight = true;
-	public boolean connectedRight = true;
-	public boolean connectedBottomRight = true;
-	public boolean connectedBottom = true;
+	public boolean connectedTop = false;
+	public boolean connectedTopRight = false;
+	public boolean connectedRight = false;
+	public boolean connectedBottomRight = false;
+	public boolean connectedBottom = false;
 	public boolean connectedBottomLeft = true;
 	public boolean connectedLeft = true;
 	public boolean connectedTopLeft = true;
@@ -51,13 +51,13 @@ public class Vein extends Wall {
 	@Override
 	public void loadImages() {
 		super.loadImages();
-		textureTop = getGlobalImage("wall_top.png");
+		textureTop = getGlobalImage("vein_top.png");
 		textureTopRight = getGlobalImage("wall_top_right.png");
-		textureRight = getGlobalImage("wall_right.png");
+		textureRight = getGlobalImage("vein_right.png");
 		textureBottomRight = getGlobalImage("wall_bottom_right.png");
-		textureBottom = getGlobalImage("wall_bottom.png");
+		textureBottom = getGlobalImage("vein_bottom.png");
 		textureBottomLeft = getGlobalImage("wall_bottom_left.png");
-		textureLeft = getGlobalImage("wall_left.png");
+		textureLeft = getGlobalImage("vein_left.png");
 		textureTopLeft = getGlobalImage("wall_top_left.png");
 	}
 
