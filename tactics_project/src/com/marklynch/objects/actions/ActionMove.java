@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.Door;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Path;
 
@@ -97,7 +98,12 @@ public class ActionMove extends Action {
 		}
 		System.out.println("check 5");
 
-		Actor actorInTheWay = (Actor) target.inventory.getGameObjectThatCantShareSquare();
+		GameObject objectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
+
+		Actor actorInTheWay = null;
+		if (objectInTheWay instanceof Actor) {
+			actorInTheWay = (Actor) objectInTheWay;
+		}
 
 		if (actorInTheWay == Game.level.player) {
 			return false;
