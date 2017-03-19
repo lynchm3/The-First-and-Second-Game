@@ -32,7 +32,7 @@ public class ActionLock extends Action {
 
 		Key key = locker.getKeyFor(door);
 
-		if (door.open)
+		if (door.isOpen())
 			new ActionClose(locker, door).perform();
 
 		door.locked = true;

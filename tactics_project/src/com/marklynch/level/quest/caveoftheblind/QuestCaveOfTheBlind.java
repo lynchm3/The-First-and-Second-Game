@@ -66,8 +66,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		mortsKey = Templates.KEY.makeCopy(null);
 		mortsKey.quest = this;
 
-		mort = Templates.MORT.makeCopy(Game.level.squares[47][21],
-				Game.level.factions.get(1), mortsBed);
+		mort = Templates.MORT.makeCopy(Game.level.squares[47][21], Game.level.factions.get(1), mortsBed);
 		mort.quest = this;
 		mort.inventory.add(Templates.CLEAVER.makeCopy(null));
 		mort.inventory.add(Templates.LANTERN.makeCopy(null));
@@ -84,21 +83,18 @@ public class QuestCaveOfTheBlind extends Quest {
 		makeMortsRoom();
 		makeMortsStorage();
 
-		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING
-				.makeCopy(Game.level.squares[45][14]);
+		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14]);
 		rockWithEtching.setText(new Object[] { "SHHHHHhhhhhhhh..." });
 		rockWithEtching.quest = this;
 
 		// Add blind
-		blind = Templates.BLIND.makeCopy(Game.level.squares[46][7],
-				Game.level.factions.get(3));
+		blind = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3));
 		blind.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
 		blind.addAttackerForThisAndGroupMembers(Game.level.player);
 		blind.quest = this;
 
 		// Add spoons
-		serratedSpoon = Templates.SERRATED_SPOON
-				.makeCopy(Game.level.squares[44][11]);
+		serratedSpoon = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[44][11]);
 		serratedSpoon.quest = this;
 	}
 
@@ -168,11 +164,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		ArrayList<GameObject> caveFeatures = new ArrayList<GameObject>();
 		ArrayList<Key> keys = new ArrayList();
 		keys.add(mortsKey);
+		keys.add((Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
 		caveFeatures.add(Templates.VEIN.makeCopy(Game.level.squares[42][23]));
-		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[41][21],
-				keys, true));
-		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[31][21],
-				keys, true));
+		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[41][21], keys, true));
+		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[31][21], keys, true));
 
 		ArrayList<StructureHall> cavePaths = new ArrayList<StructureHall>();
 		ArrayList<Square> cavePathSquares = new ArrayList<Square>();
@@ -198,11 +193,9 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
 		caveAtriums.add(new StructureRoom("Wolf's Den", 25, 13, 37, 18));
-		caveAtriums.add(new StructureRoom("Entrance of the Blind", 43, 7, 47,
-				14));
+		caveAtriums.add(new StructureRoom("Entrance of the Blind", 43, 7, 47, 14));
 		caveAtriums.add(new StructureRoom("Atrium of the Blind", 52, 4, 56, 9));
-		caveAtriums
-				.add(new StructureRoom("Atrium of the Blind", 54, 10, 60, 17));
+		caveAtriums.add(new StructureRoom("Atrium of the Blind", 54, 10, 60, 17));
 		caveAtriums.add(new StructureRoom("Morty's Mine", 49, 17, 52, 25));
 		caveAtriums.add(new StructureRoom("Morty's Mine", 42, 19, 50, 26));
 		caveAtriums.add(new StructureRoom("Morty's Mine", 44, 23, 51, 32));
@@ -210,23 +203,17 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveAtriums.add(new StructureRoom("Morty's Stash", 24, 21, 30, 24));
 
 		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
-		caveSections.add(new StructureSection("Cave of the Blind", 24, 12, 40,
-				19)); // Wolf
-						// den
-		caveSections.add(new StructureSection("Cave of the Blind", 41, 5, 49,
-				16)); // Entrance
-		caveSections.add(new StructureSection("Cave of the Blind", 49, 2, 62,
-				18)); // Atrium
-		mort.mortsMine = new StructureSection("Cave of the Blind", 41, 17, 53,
-				33);
+		caveSections.add(new StructureSection("Cave of the Blind", 24, 12, 40, 19)); // Wolf
+																						// den
+		caveSections.add(new StructureSection("Cave of the Blind", 41, 5, 49, 16)); // Entrance
+		caveSections.add(new StructureSection("Cave of the Blind", 49, 2, 62, 18)); // Atrium
+		mort.mortsMine = new StructureSection("Cave of the Blind", 41, 17, 53, 33);
 		caveSections.add(mort.mortsMine); // Morty's
 		// Mine
-		mort.mortsRooms = new StructureSection("Cave of the Blind", 20, 20, 40,
-				27);
+		mort.mortsRooms = new StructureSection("Cave of the Blind", 20, 20, 40, 27);
 		caveSections.add(mort.mortsRooms); // Morty's
 		// Rooms
-		Game.level.structures.add(new Structure("Cave of the Blind",
-				caveSections, caveAtriums, cavePaths, caveFeatures,
+		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
 	}
 
@@ -239,20 +226,13 @@ public class QuestCaveOfTheBlind extends Quest {
 	public void makeMortsStorage() {
 
 		GameObject blood = Templates.BLOOD.makeCopy(Game.level.squares[24][21]);
-		Corpse carcass1 = Templates.CORPSE.makeCopy("Corpse",
-				Game.level.squares[24][21]);
-		Corpse carcass2 = Templates.CORPSE.makeCopy("Corpse",
-				Game.level.squares[24][21]);
-		Corpse carcass3 = Templates.CORPSE.makeCopy("Corpse",
-				Game.level.squares[24][21]);
-		Corpse carcass4 = Templates.CORPSE.makeCopy("Corpse",
-				Game.level.squares[25][21]);
-		Corpse carcass5 = Templates.CORPSE.makeCopy("Corpse",
-				Game.level.squares[25][21]);
-		Corpse carcass6 = Templates.CORPSE.makeCopy("Corpse",
-				Game.level.squares[24][22]);
-		Corpse carcass7 = Templates.CORPSE.makeCopy("Corpse",
-				Game.level.squares[24][24]);
+		Corpse carcass1 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
+		Corpse carcass2 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
+		Corpse carcass3 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
+		Corpse carcass4 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[25][21]);
+		Corpse carcass5 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[25][21]);
+		Corpse carcass6 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][22]);
+		Corpse carcass7 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][24]);
 		ore = Templates.ORE.makeCopy(Game.level.squares[24][24]);
 		lantern = Templates.LANTERN.makeCopy(Game.level.squares[26][24]);
 		GameObject table = Templates.TABLE.makeCopy(Game.level.squares[27][24]);

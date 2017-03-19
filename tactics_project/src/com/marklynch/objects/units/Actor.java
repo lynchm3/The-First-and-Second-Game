@@ -20,6 +20,7 @@ import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -204,11 +205,21 @@ public class Actor extends ActorTemplate implements Owner {
 	public Path getPathTo(Square target) {
 
 		if (target == null || (target.inventory.canBeMovedTo() == false)) {
+
+			if (Game.level.activeActor instanceof Mort)
+				System.out.println("getPathTo() a");
+
 			return null;
 		}
 
 		LinkedList<AStarNode> aStarNodesPath = (LinkedList<AStarNode>) new AStarSearch()
 				.findPath(this.squareGameObjectIsOn, target);
+
+		if (Game.level.activeActor instanceof Mort)
+			System.out.println("aStarNodesPath = " + aStarNodesPath);
+		// if (Game.level.activeActor instanceof Mort)
+		// System.out.println("aStarNodesPath.size() = " +
+		// aStarNodesPath.size());
 
 		if (aStarNodesPath != null) {
 			Vector<Square> squarePath = new Vector<Square>();

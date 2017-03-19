@@ -594,6 +594,9 @@ public class AIRoutineUtils {
 
 		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
 
+		if (Game.level.activeActor instanceof Mort)
+			System.out.println("squareToMoveTo = " + squareToMoveTo);
+
 		if (squareToMoveTo != null) {
 			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
 			return true;
@@ -605,6 +608,9 @@ public class AIRoutineUtils {
 	public static Square calculateSquareToMoveToForTargetSquare(Square square) {
 
 		Path pathToSquare = Game.level.activeActor.getPathTo(square);
+
+		if (Game.level.activeActor instanceof Mort)
+			System.out.println("pathToSquare = " + pathToSquare);
 
 		if (pathToSquare == null) {
 			return null;

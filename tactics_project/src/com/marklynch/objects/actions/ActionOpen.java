@@ -34,7 +34,7 @@ public class ActionOpen extends Action {
 		if (door.locked)
 			new ActionUnlock(opener, door).perform();
 
-		door.open = true;
+		door.open();
 
 		if (opener.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { opener, " opened ", door }));

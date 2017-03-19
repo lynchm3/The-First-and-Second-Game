@@ -36,7 +36,7 @@ public class ActionMove extends Action {
 	public void moveTo(Actor actor, Square squareToMoveTo) {
 
 		Door door = (Door) squareToMoveTo.inventory.getGameObectOfClass(Door.class);
-		if (door != null && door.open == false) {
+		if (door != null && door.isOpen() == false) {
 			new ActionOpen(actor, door).perform();
 		}
 

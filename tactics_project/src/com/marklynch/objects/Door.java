@@ -15,7 +15,7 @@ import mdesl.graphics.Color;
 
 public class Door extends GameObject {
 
-	public boolean open = false;
+	private boolean open = false;
 	public ArrayList<Key> keys;
 	public boolean locked;
 
@@ -80,6 +80,20 @@ public class Door extends GameObject {
 
 		return actions;
 
+	}
+
+	public boolean isOpen() {
+		return open;
+	}
+
+	public void open() {
+		open = true;
+		blocksLineOfSight = false;
+	}
+
+	public void close() {
+		open = false;
+		blocksLineOfSight = true;
 	}
 
 	public Door makeCopy(Square square, ArrayList<Key> keys, boolean locked) {

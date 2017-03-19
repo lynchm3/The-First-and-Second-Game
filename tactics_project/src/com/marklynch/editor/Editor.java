@@ -5,9 +5,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import mdesl.graphics.Color;
-import mdesl.graphics.Texture;
-
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
@@ -69,6 +66,9 @@ import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
+
+import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class Editor {
 
@@ -166,8 +166,7 @@ public class Editor {
 		colorsSettingsWindow = new ColorSettingsWindow(200, this);
 		decorationsSettingsWindow = new DecorationsSettingsWindow(200, this);
 		scriptsEventsSettingsWindow = new ScriptEventsSettingsWindow(200, this);
-		scriptsTriggersSettingsWindow = new ScriptTriggersSettingsWindow(200,
-				this);
+		scriptsTriggersSettingsWindow = new ScriptTriggersSettingsWindow(200, this);
 		aisSettingsWindow = new AIsSettingsWindow(200, this);
 		relationsSettingsWindow = new RelationsSettingsWindow(200, this);
 		speechPartSettingsWindow = new SpeechPartSettingsWindow(200, this);
@@ -178,8 +177,8 @@ public class Editor {
 
 		// TABS
 		String tabText = "LEVEL";
-		levelTabButton = new LevelButton(10, 10, Game.font.getWidth(tabText),
-				30, "", "", tabText, true, true, Color.BLACK, Color.WHITE);
+		levelTabButton = new LevelButton(10, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		tabs.add(levelTabButton);
 		levelTabButton.clickListener = new ClickListener() {
 			@Override
@@ -195,8 +194,8 @@ public class Editor {
 		levelTabButton.down = true;
 
 		tabText = "SQUARES";
-		squaresTabButton = new LevelButton(90, 10, Game.font.getWidth(tabText),
-				30, "", "", tabText, true, true, Color.BLACK, Color.WHITE);
+		squaresTabButton = new LevelButton(90, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		squaresTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -211,8 +210,7 @@ public class Editor {
 		tabs.add(squaresTabButton);
 
 		tabText = "ACTORS + OBJECTS";
-		objectsTabButton = new LevelButton(210, 10,
-				Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+		objectsTabButton = new LevelButton(210, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
 				Color.BLACK, Color.WHITE);
 		objectsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -228,8 +226,7 @@ public class Editor {
 		tabs.add(objectsTabButton);
 
 		tabText = "TEMPLATES";
-		templatesTabButton = new LevelButton(560, 10,
-				Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+		templatesTabButton = new LevelButton(560, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
 				Color.BLACK, Color.WHITE);
 		templatesTabButton.clickListener = new ClickListener() {
 			@Override
@@ -245,8 +242,7 @@ public class Editor {
 		tabs.add(templatesTabButton);
 
 		tabText = "FACTIONS";
-		factionsTabButton = new LevelButton(430, 10,
-				Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+		factionsTabButton = new LevelButton(430, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
 				Color.BLACK, Color.WHITE);
 		factionsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -262,8 +258,8 @@ public class Editor {
 		tabs.add(factionsTabButton);
 
 		tabText = "COLORS";
-		colorsTabButton = new LevelButton(690, 10, Game.font.getWidth(tabText),
-				30, "", "", tabText, true, true, Color.BLACK, Color.WHITE);
+		colorsTabButton = new LevelButton(690, 10, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		colorsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -278,8 +274,7 @@ public class Editor {
 		tabs.add(colorsTabButton);
 
 		tabText = "DECORATIONS";
-		decorationsTabButton = new LevelButton(10, 50,
-				Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+		decorationsTabButton = new LevelButton(10, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
 				Color.BLACK, Color.WHITE);
 		decorationsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -295,8 +290,7 @@ public class Editor {
 		tabs.add(decorationsTabButton);
 
 		tabText = "SCRIPT EVENTS";
-		scriptEventsTabButton = new LevelButton(180, 50,
-				Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+		scriptEventsTabButton = new LevelButton(180, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
 				Color.BLACK, Color.WHITE);
 		scriptEventsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -312,8 +306,7 @@ public class Editor {
 		tabs.add(scriptEventsTabButton);
 
 		tabText = "SCRIPT TRIGGERS";
-		scriptTriggersTabButton = new LevelButton(350, 50,
-				Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+		scriptTriggersTabButton = new LevelButton(350, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
 				Color.BLACK, Color.WHITE);
 		scriptTriggersTabButton.clickListener = new ClickListener() {
 			@Override
@@ -329,8 +322,8 @@ public class Editor {
 		tabs.add(scriptTriggersTabButton);
 
 		tabText = "AIS";
-		aisTabButton = new LevelButton(520, 50, Game.font.getWidth(tabText),
-				30, "", "", tabText, true, true, Color.BLACK, Color.WHITE);
+		aisTabButton = new LevelButton(520, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+				Color.BLACK, Color.WHITE);
 		aisTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -345,8 +338,7 @@ public class Editor {
 		tabs.add(aisTabButton);
 
 		tabText = "RELATIONS";
-		relationsTabButton = new LevelButton(590, 50,
-				Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+		relationsTabButton = new LevelButton(590, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
 				Color.BLACK, Color.WHITE);
 		relationsTabButton.clickListener = new ClickListener() {
 			@Override
@@ -362,8 +354,7 @@ public class Editor {
 		tabs.add(relationsTabButton);
 
 		tabText = "SPEECH PART";
-		speechPartTabButton = new LevelButton(730, 50,
-				Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
+		speechPartTabButton = new LevelButton(730, 50, Game.font.getWidth(tabText), 30, "", "", tabText, true, true,
 				Color.BLACK, Color.WHITE);
 		speechPartTabButton.clickListener = new ClickListener() {
 			@Override
@@ -423,18 +414,13 @@ public class Editor {
 		Expressions.loadExpressions();
 
 		// Add factions
-		Game.level.factions.add(new Faction("Player", colors.get(0),
-				"faction_blue.png"));
-		Game.level.factions.add(new Faction("Townspeople", colors.get(1),
-				"faction_red.png"));
-		Game.level.factions
-				.add(new Faction("Wolves", colors.get(2), "wolf.png"));
-		Game.level.factions
-				.add(new Faction("Blind", colors.get(3), "blind.png"));
+		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));
+		Game.level.factions.add(new Faction("Townspeople", colors.get(1), "faction_red.png"));
+		Game.level.factions.add(new Faction("Wolves", colors.get(2), "wolf.png"));
+		Game.level.factions.add(new Faction("Blind", colors.get(3), "blind.png"));
 
 		// Add player
-		Actor player = Templates.Player.makeCopy(Game.level.squares[46][23],
-				Game.level.factions.get(0), null);
+		Actor player = Templates.Player.makeCopy(Game.level.squares[46][23], Game.level.factions.get(0), null);
 		Game.level.player = player;
 		player.inventory.add(Templates.KATANA.makeCopy(null));
 		player.inventory.add(Templates.HATCHET.makeCopy(null));
@@ -443,6 +429,7 @@ public class Editor {
 		player.inventory.add(Templates.DINNER_BELL.makeCopy(null));
 		player.inventory.add(Templates.CLEAVER.makeCopy(null));
 		player.inventory.add(Templates.LANTERN.makeCopy(null));
+		player.inventory.add(Templates.KEY.makeCopy(null));
 		// player.inventory.add(Templates.PICKAXE.makeCopy(null));
 		player.anchorX = 80;
 		player.anchorY = 80;
@@ -452,79 +439,58 @@ public class Editor {
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
 
 		ArrayList<GameObject> shopFeatures = new ArrayList<GameObject>();
-		shopFeatures.add(new Door("Shop Door", 100, "door.png",
-				Game.level.squares[5][4], new Inventory(), false, true, false,
-				false, true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, null, false));
-		shopFeatures.add(new Door("Shop Door", 100, "door.png",
-				Game.level.squares[11][4], new Inventory(), false, true, false,
-				false, true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, null, false));
+		shopFeatures.add(new Door("Shop Door", 100, "door.png", Game.level.squares[5][4], new Inventory(), false, true,
+				false, false, true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null,
+				false));
+		shopFeatures.add(new Door("Shop Door", 100, "door.png", Game.level.squares[11][4], new Inventory(), false, true,
+				false, false, true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null,
+				false));
 
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png",
-				Game.level.squares[6][5], new Inventory(), false, true, false,
-				false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
-				Game.level.squares[6][5], new Inventory(), false, false, false,
-				false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png",
-				Game.level.squares[7][5], new Inventory(), false, true, false,
-				false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
-				Game.level.squares[7][5], new Inventory(), false, false, false,
-				false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png",
-				Game.level.squares[9][5], new Inventory(), false, true, false,
-				false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
-				Game.level.squares[9][5], new Inventory(), false, false, false,
-				false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png",
-				Game.level.squares[10][5], new Inventory(), false, true, false,
-				false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
-				Game.level.squares[10][5], new Inventory(), false, false,
-				false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png",
-				Game.level.squares[12][5], new Inventory(), false, true, false,
-				false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
-				Game.level.squares[12][5], new Inventory(), false, false,
-				false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png",
-				Game.level.squares[13][5], new Inventory(), false, true, false,
-				false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
-				Game.level.squares[13][5], new Inventory(), false, false,
-				false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png",
-				Game.level.squares[15][5], new Inventory(), false, true, false,
-				false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
-				Game.level.squares[15][5], new Inventory(), false, false,
-				false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png",
-				Game.level.squares[16][5], new Inventory(), false, true, false,
-				false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f));
-		shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
-				Game.level.squares[16][5], new Inventory(), false, false,
-				false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[6][5], new Inventory(), false,
+				true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[6][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+				0f));
+		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[7][5], new Inventory(), false,
+				true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[7][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+				0f));
+		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[9][5], new Inventory(), false,
+				true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[9][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+				0f));
+		shopFeatures.add(
+				new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[10][5], new Inventory(), false, true,
+						false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[10][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+				0f));
+		shopFeatures.add(
+				new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[12][5], new Inventory(), false, true,
+						false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[12][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+				0f));
+		shopFeatures.add(
+				new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[13][5], new Inventory(), false, true,
+						false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[13][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+				0f));
+		shopFeatures.add(
+				new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[15][5], new Inventory(), false, true,
+						false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[15][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+				0f));
+		shopFeatures.add(
+				new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[16][5], new Inventory(), false, true,
+						false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f));
+		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[16][5], new Inventory(),
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+				0f));
 
 		Game.level.squares[4][4].imageTexturePath = "stone.png";
 		Game.level.squares[4][4].loadImages();
@@ -534,9 +500,8 @@ public class Editor {
 		shopAtriums.add(new StructureRoom("Super Wolf's Den", 12, 1, 16, 4));
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5));
-		Structure joesShop = new Structure("Trader Joe's Shop", shopSections,
-				shopAtriums, new ArrayList<StructureHall>(), shopFeatures,
-				entranceSquares, "building2.png", 640, 640 + 1664, -100,
+		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
+				new ArrayList<StructureHall>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -100,
 				-100 + 868, true);
 		Game.level.structures.add(joesShop);
 		// Hunting lodge
@@ -544,12 +509,9 @@ public class Editor {
 		ArrayList<StructureRoom> lodgeAtriums = new ArrayList<StructureRoom>();
 		lodgeAtriums.add(new StructureRoom("Super Wolf's Den", 8, 8, 10, 10));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
-		lodgeSections
-				.add(new StructureSection("Super Wolf's Den", 7, 7, 11, 11));
-		Structure lodge = new Structure("Hunting Lodge", lodgeSections,
-				lodgeAtriums, new ArrayList<StructureHall>(), lodgeFeatures,
-				new ArrayList<Square>(), "building.png", 896, 896 + 640, 896,
-				896 + 640, true);
+		lodgeSections.add(new StructureSection("Super Wolf's Den", 7, 7, 11, 11));
+		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructureHall>(),
+				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true);
 		Game.level.structures.add(lodge);
 
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
@@ -564,15 +526,11 @@ public class Editor {
 		// for(int i = 6; i<=8; )
 
 		// Add a game object
-		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png",
-				Game.level.squares[4][2], new Inventory(), true, false, false,
-				true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f);
+		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[4][2], new Inventory(), true,
+				false, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
-		Junk groundFur = new Junk("Ground fur", 5, "fur.png",
-				Game.level.squares[0][7], new Inventory(), false, true, true,
-				false, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f);
+		Junk groundFur = new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true,
+				true, false, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 		groundFur.value = 10;
 		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[21][9], new
 		// Inventory(), false, true, true, false);
@@ -584,82 +542,54 @@ public class Editor {
 		// false, 1, 1);
 		// groundFur.value = 10;
 
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[1][2],
-				new Inventory(), true, false, false, true, false, true, 1f,
-				1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[21][19],
-				new Inventory(), true, false, false, true, false, true, 1f,
-				1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[14][8],
-				new Inventory(), true, false, false, true, false, true, 1f,
-				1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[19][3],
-				new Inventory(), true, false, false, true, false, true, 1f,
-				1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[18][13],
-				new Inventory(), true, false, false, true, false, true, 1f,
-				1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[9][14],
-				new Inventory(), true, false, false, true, false, true, 1f,
-				1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[12][8],
-				new Inventory(), true, false, false, true, false, true, 1f,
-				1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[27][3],
-				new Inventory(), true, false, false, true, false, true, 1f,
-				1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[23][5],
-				new Inventory(), true, false, false, true, false, true, 1f,
-				1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), true, false, false, true, false,
+				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[21][19], new Inventory(), true, false, false, true,
+				false, true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[14][8], new Inventory(), true, false, false, true, false,
+				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[19][3], new Inventory(), true, false, false, true, false,
+				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[18][13], new Inventory(), true, false, false, true,
+				false, true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[9][14], new Inventory(), true, false, false, true, false,
+				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[12][8], new Inventory(), true, false, false, true, false,
+				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[27][3], new Inventory(), true, false, false, true, false,
+				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+		new Tree("Tree", 100, "tree_1.png", Game.level.squares[23][5], new Inventory(), true, false, false, true, false,
+				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
 
 		// relationships
-		Game.level.factions.get(0).relationships
-				.put(Game.level.factions.get(1), new FactionRelationship(-100,
-						Game.level.factions.get(0), Game.level.factions.get(1)));
-		Game.level.factions.get(1).relationships
-				.put(Game.level.factions.get(0), new FactionRelationship(-100,
-						Game.level.factions.get(1), Game.level.factions.get(0)));
+		Game.level.factions.get(0).relationships.put(Game.level.factions.get(1),
+				new FactionRelationship(-100, Game.level.factions.get(0), Game.level.factions.get(1)));
+		Game.level.factions.get(1).relationships.put(Game.level.factions.get(0),
+				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
 		// Add lead hunter
 		Bed brentsBed = Templates.BED.makeCopy(Game.level.squares[10][9]);
-		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8],
-				Game.level.factions.get(1), brentsBed);
+		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1), brentsBed);
 		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
 		hunterBrent.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		// Add hunters
 		Bed brontsBed = Templates.BED.makeCopy(Game.level.squares[9][9]);
-		Actor hunterBront1 = Templates.HUNTER
-				.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1),
-						brontsBed);
+		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1), brontsBed);
 		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null));
 		hunterBront1.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
-		Actor hunterBront2 = Templates.HUNTER.makeCopy(
-				Game.level.squares[3][8], Game.level.factions.get(1), null);
+		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null);
 		hunterBront2.inventory.add(Templates.HATCHET.makeCopy(null));
 		hunterBront2.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
 		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
-		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9],
-				Game.level.factions.get(1), null);
-		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7],
-				Game.level.factions.get(1), null);
-		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8],
-				Game.level.factions.get(1), null);
-		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9],
-				Game.level.factions.get(1), null);
+		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null);
+		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1), null);
+		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1), null);
+		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1), null);
 
 		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();
 		hunterPackMembers.add(hunterBrent);
@@ -670,38 +600,28 @@ public class Editor {
 		hunterPackMembers.add(hunterBront5);
 		hunterPackMembers.add(hunterBront6);
 
-		Group hunterPack = new Group("Hunting party", hunterPackMembers,
-				hunterBrent);
+		Group hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
 
 		Sign huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8]);
-		huntingPlan
-				.setText(new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
+		huntingPlan.setText(new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
 		huntingPlan.name = "Hunt Action Plan";
 
-		Actor environmentalistBill = new Hunter("Environmentalist Bill",
-				"Environmentalist", 1, 10, 0, 0, 0, 0, "environmentalist.png",
-				Game.level.squares[7][12], 1, 10, null, new Inventory(), true,
-				false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, Game.level.factions.get(1),
-				0, 0, 10f);
+		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
+				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,
+				false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+				Game.level.factions.get(1), 0, 0, 10f);
 
-		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0,
-				0, 0, 0, "fire_wolf.png", Game.level.squares[22][16], 1, 10,
-				null, new Inventory(), true, false, true, false, false, 1, 1,
-				0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-				Game.level.factions.get(2), 0, 0, 15f);
+		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
+				Game.level.squares[22][16], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
+				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, Game.level.factions.get(2), 0, 0, 15f);
 
-		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0,
-				"wolf_green.png", Game.level.squares[20][15], 1, 10, null,
-				new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-				Game.level.factions.get(2), 0, 0, 15f);
+		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
+				Game.level.squares[20][15], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
+				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, Game.level.factions.get(2), 0, 0, 15f);
 
-		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0,
-				"wolf_pink.png", Game.level.squares[20][17], 1, 10, null,
-				new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-				Game.level.factions.get(2), 0, 0, 15f);
+		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
+				Game.level.squares[20][17], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
+				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, Game.level.factions.get(2), 0, 0, 15f);
 
 		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
 		wolfPackMembers.add(superWolf);
@@ -710,24 +630,19 @@ public class Editor {
 		Group wolfPack = new Group("Wolf pack", wolfPackMembers, superWolf);
 
 		ArrayList<GameObject> weaponsBehindTheLodge = new ArrayList<GameObject>();
-		weaponsBehindTheLodge.add(Templates.HATCHET
-				.makeCopy(Game.level.squares[12][9]));
-		weaponsBehindTheLodge.add(Templates.HUNTING_BOW
-				.makeCopy(Game.level.squares[12][9]));
-		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack,
-				environmentalistBill, superWolf, wolfPack, null,
+		weaponsBehindTheLodge.add(Templates.HATCHET.makeCopy(Game.level.squares[12][9]));
+		weaponsBehindTheLodge.add(Templates.HUNTING_BOW.makeCopy(Game.level.squares[12][9]));
+		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null,
 				weaponsBehindTheLodge);
 
 		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5]);
 		joesShopSign.setText(new Object[] { joesShop.name });
 		joesShopSign.name = joesShop.name + " sign";
 		Weapon broom = Templates.BROOM.makeCopy(null);
-		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0,
-				"shopKeeper.png", Game.level.squares[7][1], 1, 10, null,
-				new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-				Game.level.factions.get(1), 40, 96, 10f, joesShop,
-				shopAtriums.get(0), joesShopSign, broom);
+		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
+				1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f,
+				0.5f, false, 0f, 0f, 0f, 0f, Game.level.factions.get(1), 40, 96, 10f, joesShop, shopAtriums.get(0),
+				joesShopSign, broom);
 		trader.inventory.add(broom);
 		trader.inventory.add(Templates.KATANA.makeCopy(null));
 		trader.inventory.add(Templates.HATCHET.makeCopy(null));
@@ -754,9 +669,8 @@ public class Editor {
 		ArrayList<String> arrayList1 = new ArrayList();
 		arrayList1.add("HI, THIS IS SCRIPTED SPEECH :D");
 
-		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(
-				speechActors1, speechPositions1, speechDirections1,
-				Game.level.player, arrayList1);
+		ScriptEventSpeech.SpeechPart speechPart1_1 = new ScriptEventSpeech.SpeechPart(speechActors1, speechPositions1,
+				speechDirections1, Game.level.player, arrayList1);
 
 		// SpeechPart 2
 		ArrayList<Actor> speechActors2 = new ArrayList<Actor>();
@@ -772,17 +686,14 @@ public class Editor {
 		ArrayList<String> arrayList2 = new ArrayList();
 		arrayList2.add("HI, PT2 OF THIS TALK");
 
-		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(
-				speechActors2, speechPositions2, speechDirections2,
-				Game.level.player, arrayList2);
+		ScriptEventSpeech.SpeechPart speechPart1_2 = new ScriptEventSpeech.SpeechPart(speechActors2, speechPositions2,
+				speechDirections2, Game.level.player, arrayList2);
 
 		ArrayList<ScriptEventSpeech.SpeechPart> speechParts = new ArrayList<ScriptEventSpeech.SpeechPart>();
 		speechParts.add(speechPart1_1.makeCopy());
 		speechParts.add(speechPart1_2.makeCopy());
-		ScriptTrigger scriptTriggerActorSelected = new ScriptTriggerActorSelected(
-				Game.level.player);
-		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true,
-				speechParts, scriptTriggerActorSelected);
+		ScriptTrigger scriptTriggerActorSelected = new ScriptTriggerActorSelected(Game.level.player);
+		ScriptEventSpeech scriptEventSpeech1 = new ScriptEventSpeech(true, speechParts, scriptTriggerActorSelected);
 
 		// Game.level.script.scriptTriggers.add(new ScriptTriggerTurnStart(1,
 		// 0));
@@ -817,43 +728,33 @@ public class Editor {
 
 		// draw highlight on selected object
 
-		if (Game.inventoryHoveringOver == null
-				&& Game.inventorySquareMouseIsOver != null) {
+		if (Game.inventoryHoveringOver == null && Game.inventorySquareMouseIsOver != null) {
 			Game.inventorySquareMouseIsOver.drawCursor();
-		} else if (Game.inventoryHoveringOver == null
-				&& Game.buttonHoveringOver == null
+		} else if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null
 				&& Game.squareMouseIsOver != null) {
 			Game.squareMouseIsOver.drawCursor();
 		}
 
-		if (selectedGameObject != null
-				&& selectedGameObject.squareGameObjectIsOn != null) {
+		if (selectedGameObject != null && selectedGameObject.squareGameObjectIsOn != null) {
 			selectedGameObject.squareGameObjectIsOn.drawHighlight();
 		}
 
 		// Draw a move line if click will result in move
-		if (selectedGameObject != null
-				&& selectedGameObject.squareGameObjectIsOn != null
-				&& Game.buttonHoveringOver == null
-				&& editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED
+		if (selectedGameObject != null && selectedGameObject.squareGameObjectIsOn != null
+				&& Game.buttonHoveringOver == null && editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED
 				&& Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
-			float x1 = this.selectedGameObject.squareGameObjectIsOn.xInGrid
-					* Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
-			float y1 = this.selectedGameObject.squareGameObjectIsOn.yInGrid
-					* Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
-			float x2 = Game.squareMouseIsOver.xInGrid * Game.SQUARE_WIDTH
-					+ Game.SQUARE_WIDTH / 2;
-			float y2 = Game.squareMouseIsOver.yInGrid * Game.SQUARE_HEIGHT
+			float x1 = this.selectedGameObject.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
+			float y1 = this.selectedGameObject.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT
 					+ Game.SQUARE_HEIGHT / 2;
+			float x2 = Game.squareMouseIsOver.xInGrid * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
+			float y2 = Game.squareMouseIsOver.yInGrid * Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
 
 			// CircleUtils.drawCircle(Color.white, 10d, x1, y1);
-			TextureUtils.drawTexture(Game.level.gameCursor.circle, x1 - 10,
-					x1 + 10, y1 - 10, y1 + 10);
+			TextureUtils.drawTexture(Game.level.gameCursor.circle, x1 - 10, x1 + 10, y1 - 10, y1 + 10);
 			LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 10f);
-			TextureUtils.drawTexture(Game.level.gameCursor.circle, x2 - 10,
-					x2 + 10, y2 - 10, y2 + 10);
+			TextureUtils.drawTexture(Game.level.gameCursor.circle, x2 - 10, x2 + 10, y2 - 10, y2 + 10);
 
 		}
 	}
@@ -917,64 +818,53 @@ public class Editor {
 		}
 
 		if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
-			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
-					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
-							- Mouse.getY() + 20,
-					Game.windowHeight - Mouse.getY() + 40);
-			TextureUtils.drawTexture(selectedGameObject.imageTexture,
-					Mouse.getX() + 10, Mouse.getX() + 30, Game.windowHeight
-							- Mouse.getY() + 20,
-					Game.windowHeight - Mouse.getY() + 40);
+			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, Mouse.getX() + 10, Mouse.getX() + 30,
+					Game.windowHeight - Mouse.getY() + 20, Game.windowHeight - Mouse.getY() + 40);
+			TextureUtils.drawTexture(selectedGameObject.imageTexture, Mouse.getX() + 10, Mouse.getX() + 30,
+					Game.windowHeight - Mouse.getY() + 20, Game.windowHeight - Mouse.getY() + 40);
 		}
 	}
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY) {
 
 		if (attributeSelectionWindow != null) {
-			return attributeSelectionWindow.getButtonFromMousePosition(mouseX,
-					mouseY);
+			return attributeSelectionWindow.getButtonFromMousePosition(mouseX, mouseY);
 
 		}
 
 		if (classSelectionWindow != null) {
 			// faction, color, texture
-			return classSelectionWindow.getButtonFromMousePosition(mouseX,
-					mouseY);
+			return classSelectionWindow.getButtonFromMousePosition(mouseX, mouseY);
 
 		}
 
 		if (instanceSelectionWindow != null) {
 			// used for new weapon selection right now
-			return instanceSelectionWindow.getButtonFromMousePosition(mouseX,
-					mouseY);
+			return instanceSelectionWindow.getButtonFromMousePosition(mouseX, mouseY);
 
 		}
 
 		for (Button button : this.tabs) {
-			if (button.calculateIfPointInBoundsOfButton(mouseX,
-					Game.windowHeight - mouseY))
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}
 
 		if (popup != null) {
 			for (Button button : popup.buttons) {
-				if (button.calculateIfPointInBoundsOfButton(mouseX,
-						Game.windowHeight - mouseY))
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
 		}
 
 		if (attributesWindow != null) {
 			for (AtributesWindowButton button : attributesWindow.buttons) {
-				if (button.calculateIfPointInBoundsOfButton(mouseX,
-						Game.windowHeight - mouseY))
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
 		}
 
 		for (Button button : settingsWindow.buttons) {
-			if (button.calculateIfPointInBoundsOfButton(mouseX,
-					Game.windowHeight - mouseY))
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}
 
@@ -984,26 +874,22 @@ public class Editor {
 	public void squareClicked(Square square) {
 
 		if (square.inventory.size() == 0) {// Nothing on the square
-			if (editorState == EDITOR_STATE.DEFAULT
-					|| editorState == EDITOR_STATE.SETTINGS_CHANGE) {
+			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.SETTINGS_CHANGE) {
 				selectSquare(square);
 			} else if (editorState == EDITOR_STATE.ADD_OBJECT) {
 				attemptToAddNewObjectToSquare(square);
 				// } else if (editorState == EDITOR_STATE.ADD_ACTOR) {
 				// addNewActorToSquare(square);
 			} else if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
-				if (!this.selectedGameObject.canShareSquare
-						&& !square.inventory.canShareSquare()) {
-					swapGameObjects(this.selectedGameObject,
-							square.inventory.getGameObjectThatCantShareSquare());
+				if (!this.selectedGameObject.canShareSquare && !square.inventory.canShareSquare()) {
+					swapGameObjects(this.selectedGameObject, square.inventory.getGameObjectThatCantShareSquare());
 				} else {
 					moveGameObject(this.selectedGameObject, square);
 				}
 			}
 		} else if (square.inventory.canShareSquare()) {
 			// Something on the square, but can share the space
-			if (editorState == EDITOR_STATE.DEFAULT
-					|| editorState == EDITOR_STATE.SETTINGS_CHANGE) {
+			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.SETTINGS_CHANGE) {
 				this.clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
 				popup = new PopupSelectObject(100, this, square);
@@ -1016,8 +902,7 @@ public class Editor {
 			}
 		} else {
 			// Something on the square, but cant share the space
-			if (editorState == EDITOR_STATE.DEFAULT
-					|| editorState == EDITOR_STATE.SETTINGS_CHANGE) {
+			if (editorState == EDITOR_STATE.DEFAULT || editorState == EDITOR_STATE.SETTINGS_CHANGE) {
 				this.clearSelectedObject();
 				depressButtonsSettingsAndDetailsButtons();
 				popup = new PopupSelectObject(100, this, square);
@@ -1027,8 +912,7 @@ public class Editor {
 				if (this.selectedGameObject.canShareSquare) {
 					moveGameObject(this.selectedGameObject, square);
 				} else {
-					swapGameObjects(this.selectedGameObject,
-							square.inventory.getGameObjectThatCantShareSquare());
+					swapGameObjects(this.selectedGameObject, square.inventory.getGameObjectThatCantShareSquare());
 				}
 			}
 		}
@@ -1066,10 +950,8 @@ public class Editor {
 
 	public void attemptToAddNewObjectToSquare(Square square) {
 
-		boolean canBePlaceOnGround = gameObjectTemplate.canShareSquare
-				|| square.inventory.canShareSquare();
-		boolean canBePlacedInAnInventory = square.inventory
-				.hasGameObjectsThatCanContainOtherObjects();
+		boolean canBePlaceOnGround = gameObjectTemplate.canShareSquare || square.inventory.canShareSquare();
+		boolean canBePlacedInAnInventory = square.inventory.hasGameObjectsThatCanContainOtherObjects();
 
 		if (!canBePlacedInAnInventory && canBePlaceOnGround) {
 			// Only option is to place the gameObject on the ground
@@ -1084,8 +966,7 @@ public class Editor {
 			// Give to Actor X
 			// Put in Object Y
 		} else {
-			this.toast = new Toast(
-					"No space for the object here! Please pick a different square. :)");
+			this.toast = new Toast("No space for the object here! Please pick a different square. :)");
 		}
 	}
 
@@ -1101,12 +982,9 @@ public class Editor {
 		this.toast = new Toast("Select a location to add object");
 	}
 
-	public void placeObjectInInventory(
-			GameObject gameObjectThatCanHoldOtherObjects) {
-		GameObject gameObjectToPutInInventroy = gameObjectTemplate
-				.makeCopy(null);
-		gameObjectThatCanHoldOtherObjects.inventory
-				.add(gameObjectToPutInInventroy);
+	public void placeObjectInInventory(GameObject gameObjectThatCanHoldOtherObjects) {
+		GameObject gameObjectToPutInInventroy = gameObjectTemplate.makeCopy(null);
+		gameObjectThatCanHoldOtherObjects.inventory.add(gameObjectToPutInInventroy);
 		this.objectsSettingsWindow.update();
 		this.toast = new Toast("Select a location to add object");
 		// if (gameObject instanceof Actor) {
@@ -1148,91 +1026,62 @@ public class Editor {
 
 	public void keyTyped(char character) {
 
-		if (editorState == EDITOR_STATE.SETTINGS_CHANGE
-				&& settingsButton != null) {
+		if (editorState == EDITOR_STATE.SETTINGS_CHANGE && settingsButton != null) {
 			settingsButton.keyTyped(character);
 		} else if (objectToEdit != null) {
 			if (attributeToEditName != null && this.textEntered != null) {
 
 				try {
-					Class<? extends Object> objectClass = objectToEdit
-							.getClass();
+					Class<? extends Object> objectClass = objectToEdit.getClass();
 					Field field = objectClass.getField(attributeToEditName);
 					if (field.getType().isAssignableFrom(ArrayList.class)) {
 
-						ArrayList arrayList = (ArrayList) field
-								.get(objectToEdit);
-						Class attributeClass = arrayList.get(
-								attributeToEditIndex).getClass();
+						ArrayList arrayList = (ArrayList) field.get(objectToEdit);
+						Class attributeClass = arrayList.get(attributeToEditIndex).getClass();
 						if (attributeClass.isAssignableFrom(Integer.class)) { // int
-							if (48 <= character && character <= 57
-									&& textEntered.length() < 8) {
+							if (48 <= character && character <= 57 && textEntered.length() < 8) {
 								this.textEntered += character;
-								arrayList.set(this.attributeToEditIndex,
-										Integer.valueOf(this.textEntered)
-												.intValue());
-							} else if (character == '-'
-									&& textEntered.length() == 0) {
+								arrayList.set(this.attributeToEditIndex, Integer.valueOf(this.textEntered).intValue());
+							} else if (character == '-' && textEntered.length() == 0) {
 								this.textEntered += character;
 							}
 						} else if (attributeClass.isAssignableFrom(Float.class)) {
 							// float
-							if (48 <= character && character <= 57
-									&& textEntered.length() < 8) {
+							if (48 <= character && character <= 57 && textEntered.length() < 8) {
 								this.textEntered += character;
-								arrayList
-										.set(this.attributeToEditIndex, Float
-												.valueOf(this.textEntered)
-												.floatValue());
-							} else if (character == '-'
-									&& textEntered.length() == 0) {
+								arrayList.set(this.attributeToEditIndex, Float.valueOf(this.textEntered).floatValue());
+							} else if (character == '-' && textEntered.length() == 0) {
 								this.textEntered += character;
-							} else if (character == '.'
-									&& !textEntered.contains(".")
-									&& textEntered.length() > 0
+							} else if (character == '.' && !textEntered.contains(".") && textEntered.length() > 0
 									&& textEntered.length() < 8) {
 								this.textEntered += character;
 							}
-						} else if (attributeClass
-								.isAssignableFrom(String.class)) { // string
+						} else if (attributeClass.isAssignableFrom(String.class)) { // string
 							this.textEntered += character;
-							arrayList.set(this.attributeToEditIndex,
-									textEntered);
+							arrayList.set(this.attributeToEditIndex, textEntered);
 
 						}
 
 					} else {
 						if (field.getType().isAssignableFrom(int.class)) { // int
-							if (48 <= character && character <= 57
-									&& textEntered.length() < 8) {
+							if (48 <= character && character <= 57 && textEntered.length() < 8) {
 								this.textEntered += character;
-								field.set(objectToEdit,
-										Integer.valueOf(this.textEntered)
-												.intValue());
-							} else if (character == '-'
-									&& textEntered.length() == 0) {
+								field.set(objectToEdit, Integer.valueOf(this.textEntered).intValue());
+							} else if (character == '-' && textEntered.length() == 0) {
 								this.textEntered += character;
 							}
-						} else if (field.getType()
-								.isAssignableFrom(float.class)) {
+						} else if (field.getType().isAssignableFrom(float.class)) {
 							// float
-							if (48 <= character && character <= 57
-									&& textEntered.length() < 8) {
+							if (48 <= character && character <= 57 && textEntered.length() < 8) {
 								this.textEntered += character;
-								field.set(objectToEdit,
-										Float.valueOf(this.textEntered)
-												.floatValue());
-							} else if (character == '-'
-									&& textEntered.length() == 0) {
+								field.set(objectToEdit, Float.valueOf(this.textEntered).floatValue());
+							} else if (character == '-' && textEntered.length() == 0) {
 								this.textEntered += character;
-							} else if (character == '.'
-									&& !textEntered.contains(".")
-									&& textEntered.length() > 0
+							} else if (character == '.' && !textEntered.contains(".") && textEntered.length() > 0
 									&& textEntered.length() < 8) {
 								this.textEntered += character;
 							}
-						} else if (field.getType().isAssignableFrom(
-								String.class)) { // string
+						} else if (field.getType().isAssignableFrom(String.class)) { // string
 							this.textEntered += character;
 							field.set(objectToEdit, textEntered);
 						}
@@ -1248,8 +1097,7 @@ public class Editor {
 	}
 
 	public void enterTyped() {
-		if (editorState == EDITOR_STATE.SETTINGS_CHANGE
-				&& settingsButton != null) {
+		if (editorState == EDITOR_STATE.SETTINGS_CHANGE && settingsButton != null) {
 			settingsButton.enterTyped();
 		} else if (objectToEdit != null && attributeToEditName != null) {
 			stopEditingAttribute();
@@ -1257,20 +1105,17 @@ public class Editor {
 	}
 
 	public void backTyped() {
-		if (editorState == EDITOR_STATE.SETTINGS_CHANGE
-				&& settingsButton != null) {
+		if (editorState == EDITOR_STATE.SETTINGS_CHANGE && settingsButton != null) {
 			settingsButton.backTyped();
 			return;
 		}
 
-		if (objectToEdit != null && attributeToEditName != null
-				&& this.textEntered != null && textEntered.length() > 0) {
-			this.textEntered = this.textEntered.substring(0,
-					this.textEntered.length() - 1);
+		if (objectToEdit != null && attributeToEditName != null && this.textEntered != null
+				&& textEntered.length() > 0) {
+			this.textEntered = this.textEntered.substring(0, this.textEntered.length() - 1);
 		}
 
-		if (objectToEdit != null && attributeToEditName != null
-				&& this.textEntered != null) {
+		if (objectToEdit != null && attributeToEditName != null && this.textEntered != null) {
 
 			Class<? extends Object> objectClass = objectToEdit.getClass();
 			try {
@@ -1280,16 +1125,14 @@ public class Editor {
 					if (textEntered.length() == 0) {
 						field.set(objectToEdit, 0);
 					} else {
-						field.set(objectToEdit,
-								Integer.valueOf(this.textEntered).intValue());
+						field.set(objectToEdit, Integer.valueOf(this.textEntered).intValue());
 					}
 				} else if (field.getType().isAssignableFrom(float.class)) {
 					// float
 					if (textEntered.length() == 0) {
 						field.set(objectToEdit, 0);
 					} else {
-						field.set(objectToEdit, Float.valueOf(this.textEntered)
-								.floatValue());
+						field.set(objectToEdit, Float.valueOf(this.textEntered).floatValue());
 					}
 				} else if (field.getType().isAssignableFrom(String.class)) { // string
 					field.set(objectToEdit, textEntered);
@@ -1301,8 +1144,7 @@ public class Editor {
 		}
 	}
 
-	public void editAttribute(Object object, String attribute,
-			AtributesWindowButton attributeButton, int index) {
+	public void editAttribute(Object object, String attribute, AtributesWindowButton attributeButton, int index) {
 		objectToEdit = object;
 		attributeToEditName = attribute;
 		attributeToEditIndex = index;
@@ -1326,13 +1168,12 @@ public class Editor {
 				((GameObject) objectToEdit).inventory.open();
 			} else if (type.isAssignableFrom(Faction.class)) {
 				// faction
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						Game.level.factions, false, this, objectToEdit,
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.factions, false, this, objectToEdit,
 						"Select a Faction");
 			} else if (type.isAssignableFrom(Color.class)) {
 				// color
-				attributeSelectionWindow = new AttributeSelectionWindow(colors,
-						false, this, objectToEdit, "Select a Color");
+				attributeSelectionWindow = new AttributeSelectionWindow(colors, false, this, objectToEdit,
+						"Select a Color");
 			} else if (type.isAssignableFrom(Square.class)) {
 				// square
 				ArrayList<Square> squares = new ArrayList<Square>();
@@ -1341,17 +1182,16 @@ public class Editor {
 						squares.add(square);
 					}
 				}
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						squares, false, this, objectToEdit, "Select a Square");
+				attributeSelectionWindow = new AttributeSelectionWindow(squares, false, this, objectToEdit,
+						"Select a Square");
 			} else if (type.isAssignableFrom(ScriptEvent.class)) {
 				// scriptEvent
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						Game.level.script.scriptEvents, false, this,
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.script.scriptEvents, false, this,
 						objectToEdit, "Select a Script Event");
 			} else if (type.isAssignableFrom(Texture.class)) {
 				// texture
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						textures, false, this, objectToEdit, "Select a Texture");
+				attributeSelectionWindow = new AttributeSelectionWindow(textures, false, this, objectToEdit,
+						"Select a Texture");
 				// } else if (type.isAssignableFrom(Weapons.class)) { HERE IS
 				// THE ISSUE
 				// // weapons
@@ -1374,8 +1214,7 @@ public class Editor {
 					}
 				}
 				gameObjects.addAll(Game.level.inanimateObjectsOnGround);
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						gameObjects, false, this, objectToEdit,
+				attributeSelectionWindow = new AttributeSelectionWindow(gameObjects, false, this, objectToEdit,
 						"Select an Object");
 			} else if (type.isAssignableFrom(Actor.class)) {
 				// actor
@@ -1385,22 +1224,18 @@ public class Editor {
 						actors.add(actor);
 					}
 				}
-				attributeSelectionWindow = new AttributeSelectionWindow(actors,
-						false, this, objectToEdit, "Select an Actor");
+				attributeSelectionWindow = new AttributeSelectionWindow(actors, false, this, objectToEdit,
+						"Select an Actor");
 			} else if (type.isAssignableFrom(ScriptTrigger.class)) {
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						Game.level.script.scriptTriggers, false, this,
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.script.scriptTriggers, false, this,
 						objectToEdit, "Select a Script Trigger");
 			} else if (type.isAssignableFrom(AIRoutineUtils.class)) {
-				attributeSelectionWindow = new AttributeSelectionWindow(
-						Game.level.ais, false, this, objectToEdit,
+				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.ais, false, this, objectToEdit,
 						"Select an AI Routine");
-			} else if (type.isAssignableFrom(boolean.class)
-					|| type.isAssignableFrom(Boolean.class)) {
+			} else if (type.isAssignableFrom(boolean.class) || type.isAssignableFrom(Boolean.class)) {
 
 				if (arrayList != null) {
-					arrayList.set(attributeToEditIndex,
-							!(boolean) arrayList.get(attributeToEditIndex));
+					arrayList.set(attributeToEditIndex, !(boolean) arrayList.get(attributeToEditIndex));
 
 				} else {
 					boolean b = (boolean) field.get(objectToEdit);

@@ -32,7 +32,7 @@ public class ActionClose extends Action {
 
 		Key key = closer.getKeyFor(door);
 
-		door.open = false;
+		door.close();
 
 		if (closer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { closer, " closed ", door }));
