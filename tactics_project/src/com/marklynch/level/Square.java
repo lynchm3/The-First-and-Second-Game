@@ -286,106 +286,59 @@ public class Square extends AStarNode implements ActionableInWorld {
 
 	}
 
+	public boolean includableInPath() {
+		if (inventory.canShareSquare()) {
+
+			GameObject gameObjectDoor = inventory.getGameObectOfClass(Door.class);
+			if (gameObjectDoor instanceof Door) {
+				Door door = (Door) gameObjectDoor;
+				if (door.locked && !Game.level.activeActor.hasKeyForDoor(door)) {
+				} else {
+					return true;
+
+				}
+			} else {
+				return true;
+			}
+		} else {
+
+			GameObject gameObjectThatCantShareSquare = inventory.getGameObjectThatCantShareSquare();
+
+			if (gameObjectThatCantShareSquare instanceof Actor)
+				return true;
+		}
+		return false;
+	}
+
 	public Vector<Square> getAllNeighbourSquaresThatCanBeMovedTo() {
 		Vector<Square> squares = new Vector<Square>();
 		Square square;
 		// +1,0
 		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + 1, this.yInGrid)) {
 			square = Game.level.squares[this.xInGrid + 1][this.yInGrid];
-			if (square.inventory.canShareSquare()) {
-
-				GameObject gameObjectDoor = square.inventory.getGameObectOfClass(Door.class);
-				if (gameObjectDoor instanceof Door) {
-					Door door = (Door) gameObjectDoor;
-					if (door.locked && !Game.level.activeActor.hasKeyForDoor(door)) {
-					} else {
-						squares.add(square);
-
-					}
-				} else {
-					squares.add(square);
-				}
-			} else {
-
-				GameObject gameObjectThatCantShareSquare = square.inventory.getGameObjectThatCantShareSquare();
-
-				if (gameObjectThatCantShareSquare instanceof Actor)
-					squares.add(square);
+			if (square.includableInPath()) {
+				squares.add(square);
 			}
 		}
 		// -1,0
 		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid - 1, this.yInGrid)) {
 			square = Game.level.squares[this.xInGrid - 1][this.yInGrid];
-
-			if (square.inventory.canShareSquare()) {
-
-				GameObject gameObjectDoor = square.inventory.getGameObectOfClass(Door.class);
-				if (gameObjectDoor instanceof Door) {
-					Door door = (Door) gameObjectDoor;
-					if (door.locked && !Game.level.activeActor.hasKeyForDoor(door)) {
-					} else {
-						squares.add(square);
-
-					}
-				} else {
-					squares.add(square);
-				}
-			} else {
-
-				GameObject gameObjectThatCantShareSquare = square.inventory.getGameObjectThatCantShareSquare();
-
-				if (gameObjectThatCantShareSquare instanceof Actor)
-					squares.add(square);
+			if (square.includableInPath()) {
+				squares.add(square);
 			}
 		}
 		// 0,+1
 		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid + 1)) {
 			square = Game.level.squares[this.xInGrid][this.yInGrid + 1];
-
-			if (square.inventory.canShareSquare()) {
-
-				GameObject gameObjectDoor = square.inventory.getGameObectOfClass(Door.class);
-				if (gameObjectDoor instanceof Door) {
-					Door door = (Door) gameObjectDoor;
-					if (door.locked && !Game.level.activeActor.hasKeyForDoor(door)) {
-					} else {
-						squares.add(square);
-
-					}
-				} else {
-					squares.add(square);
-				}
-			} else {
-
-				GameObject gameObjectThatCantShareSquare = square.inventory.getGameObjectThatCantShareSquare();
-
-				if (gameObjectThatCantShareSquare instanceof Actor)
-					squares.add(square);
+			if (square.includableInPath()) {
+				squares.add(square);
 			}
 		}
 		// 0,-1
 		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid - 1)) {
 			square = Game.level.squares[this.xInGrid][this.yInGrid - 1];
-
-			if (square.inventory.canShareSquare()) {
-
-				GameObject gameObjectDoor = square.inventory.getGameObectOfClass(Door.class);
-				if (gameObjectDoor instanceof Door) {
-					Door door = (Door) gameObjectDoor;
-					if (door.locked && !Game.level.activeActor.hasKeyForDoor(door)) {
-					} else {
-						squares.add(square);
-
-					}
-				} else {
-					squares.add(square);
-				}
-			} else {
-
-				GameObject gameObjectThatCantShareSquare = square.inventory.getGameObjectThatCantShareSquare();
-
-				if (gameObjectThatCantShareSquare instanceof Actor)
-					squares.add(square);
+			if (square.includableInPath()) {
+				squares.add(square);
 			}
 		}
 		return squares;
