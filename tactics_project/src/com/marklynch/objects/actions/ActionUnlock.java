@@ -33,7 +33,7 @@ public class ActionUnlock extends Action {
 
 		door.locked = false;
 		if (unlocker.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { unlocker, " locked ", door, " with ", key }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { unlocker, " unlocked ", door, " with ", key }));
 
 		unlocker.showPow(door);
 

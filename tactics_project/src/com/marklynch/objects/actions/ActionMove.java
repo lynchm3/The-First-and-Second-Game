@@ -2,14 +2,14 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Path;
 
 public class ActionMove extends Action {
 
 	public static final String ACTION_NAME = "Move here";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME
-			+ " (can't reach)";
+	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor mover;
 	Square target;
 
@@ -34,9 +34,13 @@ public class ActionMove extends Action {
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
 
+		Door door = (Door) squareToMoveTo.inventory.getGameObectOfClass(Door.class);
+		if (door != null && door.open == false) {
+			new ActionOpen(actor, door).perform();
+		}
+
 		Square oldSquare = actor.squareGameObjectIsOn;
-		Actor actorInTheWay = (Actor) squareToMoveTo.inventory
-				.getGameObjectThatCantShareSquare();
+		Actor actorInTheWay = (Actor) squareToMoveTo.inventory.getGameObjectThatCantShareSquare();
 
 		if (actorInTheWay == Game.level.player) {
 			return;
@@ -48,8 +52,7 @@ public class ActionMove extends Action {
 		} else {
 			move(actorInTheWay, oldSquare);
 			move(actor, squareToMoveTo);
-			if (actorInTheWay.group != null
-					&& actorInTheWay.group.getLeader() == actor) {
+			if (actorInTheWay.group != null && actorInTheWay.group.getLeader() == actor) {
 				// No swap cooldown for group leaders moving a member of their
 				// group
 			} else {
@@ -78,16 +81,13 @@ public class ActionMove extends Action {
 			return false;
 		System.out.println("check 2");
 
-		if (target == mover.squareGameObjectIsOn
-				|| !target.inventory.isPassable(mover))
+		if (target == mover.squareGameObjectIsOn || !target.inventory.isPassable(mover))
 			return false;
 		System.out.println("check 3");
 
 		Path path = mover.getPathTo(target);
 		if (path != null)
-			if (path == null
-					|| path.travelCost > mover.travelDistance
-							- mover.distanceMovedThisTurn)
+			if (path == null || path.travelCost > mover.travelDistance - mover.distanceMovedThisTurn)
 				return false;
 		System.out.println("check 4");
 
@@ -97,8 +97,7 @@ public class ActionMove extends Action {
 		}
 		System.out.println("check 5");
 
-		Actor actorInTheWay = (Actor) target.inventory
-				.getGameObjectThatCantShareSquare();
+		Actor actorInTheWay = (Actor) target.inventory.getGameObjectThatCantShareSquare();
 
 		if (actorInTheWay == Game.level.player) {
 			return false;
@@ -115,10 +114,8 @@ public class ActionMove extends Action {
 		//
 		// }
 
-		if (mover != Game.level.player
-				&& actorInTheWay != null
-				&& (actorInTheWay.travelDistance
-						- actorInTheWay.distanceMovedThisTurn <= 0)) {
+		if (mover != Game.level.player && actorInTheWay != null
+				&& (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn <= 0)) {
 			// If actorInTheWay has no moves left, doesn't count when player
 			// tries to move
 			return false;

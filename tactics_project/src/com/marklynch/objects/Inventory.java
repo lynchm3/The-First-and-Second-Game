@@ -414,9 +414,7 @@ public class Inventory {
 
 			if (gameObject instanceof Door) {
 				Door door = (Door) gameObject;
-				if (door.locked && forActor.hasKeyForDoor(door)) {
-					// door locked but have key
-				} else {
+				if (door.locked && !forActor.hasKeyForDoor(door)) {
 					return false;
 				}
 			}

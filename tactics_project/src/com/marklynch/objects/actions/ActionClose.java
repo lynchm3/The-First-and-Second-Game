@@ -7,19 +7,20 @@ import com.marklynch.objects.Key;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionOpen extends Action {
+public class ActionClose extends Action {
 
-	public static final String ACTION_NAME = "Open";
+	public static final String ACTION_NAME = "Close";
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
 	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
+	public static final String ACTION_NAME_BLOCKED = ACTION_NAME + " (blocked)";
 
-	Actor opener;
+	Actor closer;
 	Door door;
 
 	// Default for hostiles
-	public ActionOpen(Actor opener, Door door) {
+	public ActionClose(Actor opener, Door door) {
 		super(ACTION_NAME);
-		this.opener = opener;
+		this.closer = opener;
 		this.door = door;
 		if (!check()) {
 			enabled = false;
@@ -29,44 +30,46 @@ public class ActionOpen extends Action {
 	@Override
 	public void perform() {
 
-		Key key = opener.getKeyFor(door);
+		Key key = closer.getKeyFor(door);
 
-		if (door.locked)
-			new ActionUnlock(opener, door).perform();
+		door.open = false;
 
-		door.open = true;
+		if (closer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { closer, " closed ", door }));
 
-		if (opener.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { opener, " opened ", door }));
-
-		opener.showPow(door);
+		closer.showPow(door);
 
 		// Sound
 		float loudness = 1;
-		opener.sounds.add(new Sound(opener, key, opener.squareGameObjectIsOn, loudness));
+		closer.sounds.add(new Sound(closer, key, closer.squareGameObjectIsOn, loudness));
 
-		if (opener.faction == Game.level.factions.get(0)) {
+		if (closer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (opener == Game.level.player)
+		if (closer == Game.level.player)
 			Game.level.endTurn();
 	}
 
 	@Override
 	public boolean check() {
-		if (!opener.visibleFrom(door.squareGameObjectIsOn)) {
+		if (!closer.visibleFrom(door.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
-		if (opener.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
+		if (closer.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
-		if (door.locked && !opener.hasKeyForDoor(door)) {
+		if (door.locked && !closer.hasKeyForDoor(door)) {
 			actionName = ACTION_NAME_NEED_KEY;
+			return false;
+		}
+
+		if (door.squareGameObjectIsOn.inventory.canShareSquare() == false) {
+			actionName = ACTION_NAME_BLOCKED;
 			return false;
 		}
 

@@ -12,14 +12,15 @@ public class ActionLock extends Action {
 	public static final String ACTION_NAME = "Lock";
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
 	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
+	public static final String ACTION_NAME_BLOCKED = ACTION_NAME + " (blocked)";
 
-	Actor unlocker;
+	Actor locker;
 	Door door;
 
 	// Default for hostiles
 	public ActionLock(Actor unlocker, Door door) {
 		super(ACTION_NAME);
-		this.unlocker = unlocker;
+		this.locker = unlocker;
 		this.door = door;
 		if (!check()) {
 			enabled = false;
@@ -29,41 +30,49 @@ public class ActionLock extends Action {
 	@Override
 	public void perform() {
 
-		Key key = unlocker.getKeyFor(door);
+		Key key = locker.getKeyFor(door);
+
+		if (door.open)
+			new ActionClose(locker, door).perform();
 
 		door.locked = true;
 
-		if (unlocker.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { unlocker, " unlocked ", door, " with ", key }));
+		if (locker.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { locker, " locked ", door, " with ", key }));
 
-		unlocker.showPow(door);
+		locker.showPow(door);
 
 		// Sound
 		float loudness = 1;
-		unlocker.sounds.add(new Sound(unlocker, key, unlocker.squareGameObjectIsOn, loudness));
+		locker.sounds.add(new Sound(locker, key, locker.squareGameObjectIsOn, loudness));
 
-		if (unlocker.faction == Game.level.factions.get(0)) {
+		if (locker.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (unlocker == Game.level.player)
+		if (locker == Game.level.player)
 			Game.level.endTurn();
 	}
 
 	@Override
 	public boolean check() {
-		if (!unlocker.visibleFrom(door.squareGameObjectIsOn)) {
+		if (!locker.visibleFrom(door.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
-		if (unlocker.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
+		if (locker.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
-		if (!unlocker.hasKeyForDoor(door)) {
+		if (!locker.hasKeyForDoor(door)) {
 			actionName = ACTION_NAME_NEED_KEY;
+			return false;
+		}
+
+		if (door.squareGameObjectIsOn.inventory.canShareSquare() == false) {
+			actionName = ACTION_NAME_BLOCKED;
 			return false;
 		}
 

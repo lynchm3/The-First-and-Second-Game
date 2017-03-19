@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionLock;
+import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
 
@@ -13,6 +15,7 @@ import mdesl.graphics.Color;
 
 public class Door extends GameObject {
 
+	public boolean open = false;
 	public ArrayList<Key> keys;
 	public boolean locked;
 
@@ -40,10 +43,16 @@ public class Door extends GameObject {
 		if (!this.squareGameObjectIsOn.seenByPlayer)
 			return;
 
-		if (!this.squareGameObjectIsOn.inventory.contains(Actor.class)) {
-			super.draw1();
+		if (open) {
+
 		} else {
+			super.draw1();
 		}
+
+		// if (!this.squareGameObjectIsOn.inventory.contains(Actor.class)) {
+		// super.draw1();
+		// } else {
+		// }
 
 	}
 
@@ -54,6 +63,12 @@ public class Door extends GameObject {
 
 		if (this.remainingHealth < 0)
 			return actions;
+
+		if (!open)
+			actions.add(new ActionOpen(performer, this));
+
+		if (open)
+			actions.add(new ActionClose(performer, this));
 
 		if (locked)
 			actions.add(new ActionUnlock(performer, this));
