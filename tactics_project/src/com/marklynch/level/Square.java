@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
 
+import mdesl.graphics.Texture;
+
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AStarNode;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
@@ -25,12 +28,11 @@ import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Texture;
-
 public class Square extends AStarNode implements ActionableInWorld {
 
 	public String guid = UUID.randomUUID().toString();
-	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
+	public final static String[] editableAttributes = { "elevation",
+			"travelCost", "imageTexture" };
 
 	public final int xInGrid;
 	public final int yInGrid;
@@ -61,7 +63,8 @@ public class Square extends AStarNode implements ActionableInWorld {
 
 	public ArrayList<Sound> sounds = new ArrayList<Sound>();
 
-	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory) {
+	public Square(int x, int y, String imagePath, int travelCost,
+			int elevation, SquareInventory inventory) {
 		super();
 		this.xInGrid = x;
 		this.yInGrid = y;
@@ -107,8 +110,9 @@ public class Square extends AStarNode implements ActionableInWorld {
 		float alpha = 1f;
 		if (!this.visibleToPlayer)
 			alpha = 0.25f;
-		TextureUtils.drawTexture(imageTexture, alpha, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
-				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(imageTexture, alpha, squarePositionX,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
+				squarePositionY + Game.SQUARE_HEIGHT);
 
 		// square highlights
 
@@ -195,8 +199,9 @@ public class Square extends AStarNode implements ActionableInWorld {
 
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2,
+				squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
+				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
 
@@ -210,8 +215,9 @@ public class Square extends AStarNode implements ActionableInWorld {
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 
-		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
-				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY,
+				squarePositionY + Game.SQUARE_HEIGHT);
 		// GL11.glPopMatrix();
 	}
 
@@ -244,9 +250,11 @@ public class Square extends AStarNode implements ActionableInWorld {
 	}
 
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
-		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+		GameObject targetGameObject = this.inventory
+				.getGameObjectThatCantShareSquare();
 		if (targetGameObject != null) {
-			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
+			return targetGameObject
+					.getDefaultActionPerformedOnThisInWorld(performer);
 		} else {
 			return getDefaultActionPerformedOnThisInWorld(performer);
 
@@ -258,7 +266,8 @@ public class Square extends AStarNode implements ActionableInWorld {
 
 		if (this == Game.level.player.squareGameObjectIsOn) {
 			return null;
-		} else if (performer.travelDistance >= performer.straightLineDistanceTo(this)) {
+		} else if (performer.travelDistance >= performer
+				.straightLineDistanceTo(this)) {
 			return new ActionMove(performer, this);
 		} else {
 			return null;
@@ -273,7 +282,8 @@ public class Square extends AStarNode implements ActionableInWorld {
 			actions.add(new ActionMove(performer, this));
 		}
 
-		if (this.inventory.size() > 0 && this.inventory.hasGameObjectsThatFitInInventory()) {
+		if (this.inventory.size() > 0
+				&& this.inventory.hasGameObjectsThatFitInInventory()) {
 			actions.add(new ActionPickuUpAll(performer, this));
 		}
 
@@ -281,7 +291,8 @@ public class Square extends AStarNode implements ActionableInWorld {
 	}
 
 	public int straightLineDistanceTo(Square otherSquare) {
-		return Math.abs(otherSquare.xInGrid - this.xInGrid) + Math.abs(otherSquare.yInGrid - this.yInGrid);
+		return Math.abs(otherSquare.xInGrid - this.xInGrid)
+				+ Math.abs(otherSquare.yInGrid - this.yInGrid);
 
 	}
 
@@ -289,42 +300,109 @@ public class Square extends AStarNode implements ActionableInWorld {
 		Vector<Square> squares = new Vector<Square>();
 		Square square;
 		// +1,0
-		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + 1, this.yInGrid)) {
+		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + 1,
+				this.yInGrid)) {
 			square = Game.level.squares[this.xInGrid + 1][this.yInGrid];
 			if (square.inventory.canShareSquare()) {
-				squares.add(square);
 
+				GameObject gameObjectDoor = square.inventory
+						.getGameObectOfClass(Door.class);
+				if (gameObjectDoor instanceof Door) {
+					Door door = (Door) gameObjectDoor;
+					if (door.locked
+							&& Game.level.activeActor.hasKeyForDoor(door)) {
+						squares.add(square);
+					}
+				} else {
+					squares.add(square);
+				}
 			} else {
-				if (square.inventory.contains(Actor.class))
+
+				GameObject gameObjectThatCantShareSquare = square.inventory
+						.getGameObjectThatCantShareSquare();
+
+				if (gameObjectThatCantShareSquare instanceof Actor)
 					squares.add(square);
 			}
 		}
 		// -1,0
-		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid - 1, this.yInGrid)) {
+		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid - 1,
+				this.yInGrid)) {
 			square = Game.level.squares[this.xInGrid - 1][this.yInGrid];
-			if (square.inventory.canShareSquare()) {
-				squares.add(square);
 
+			if (square.inventory.canShareSquare()) {
+
+				GameObject gameObjectDoor = square.inventory
+						.getGameObectOfClass(Door.class);
+				if (gameObjectDoor instanceof Door) {
+					Door door = (Door) gameObjectDoor;
+					if (door.locked
+							&& Game.level.activeActor.hasKeyForDoor(door)) {
+						squares.add(square);
+					}
+				} else {
+					squares.add(square);
+				}
 			} else {
-				if (square.inventory.contains(Actor.class))
+
+				GameObject gameObjectThatCantShareSquare = square.inventory
+						.getGameObjectThatCantShareSquare();
+
+				if (gameObjectThatCantShareSquare instanceof Actor)
 					squares.add(square);
 			}
 		}
 		// 0,+1
-		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid + 1)) {
+		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid,
+				this.yInGrid + 1)) {
 			square = Game.level.squares[this.xInGrid][this.yInGrid + 1];
-			if (square.inventory.canBeMovedTo()) {
-				squares.add(square);
+
+			if (square.inventory.canShareSquare()) {
+
+				GameObject gameObjectDoor = square.inventory
+						.getGameObectOfClass(Door.class);
+				if (gameObjectDoor instanceof Door) {
+					Door door = (Door) gameObjectDoor;
+					if (door.locked
+							&& Game.level.activeActor.hasKeyForDoor(door)) {
+						squares.add(square);
+					}
+				} else {
+					squares.add(square);
+				}
+			} else {
+
+				GameObject gameObjectThatCantShareSquare = square.inventory
+						.getGameObjectThatCantShareSquare();
+
+				if (gameObjectThatCantShareSquare instanceof Actor)
+					squares.add(square);
 			}
 		}
 		// 0,-1
-		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid - 1)) {
+		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid,
+				this.yInGrid - 1)) {
 			square = Game.level.squares[this.xInGrid][this.yInGrid - 1];
-			if (square.inventory.canShareSquare()) {
-				squares.add(square);
 
+			if (square.inventory.canShareSquare()) {
+
+				GameObject gameObjectDoor = square.inventory
+						.getGameObectOfClass(Door.class);
+				if (gameObjectDoor instanceof Door) {
+					Door door = (Door) gameObjectDoor;
+					if (door.locked
+							&& Game.level.activeActor.hasKeyForDoor(door)) {
+						squares.add(square);
+					}
+				} else {
+					squares.add(square);
+				}
 			} else {
-				if (square.inventory.contains(Actor.class))
+
+				GameObject gameObjectThatCantShareSquare = square.inventory
+						.getGameObjectThatCantShareSquare();
+
+				if (gameObjectThatCantShareSquare instanceof Actor)
 					squares.add(square);
 			}
 		}

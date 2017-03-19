@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import mdesl.graphics.Color;
+
 import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
 import com.marklynch.objects.units.Actor;
@@ -14,15 +16,15 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
-
 public class Inventory {
 
 	public int widthInSquares = 5;
 	public int heightInSquares = 6;
 	public transient InventorySquare[][] inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
-	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(widthInSquares * heightInSquares);
-	protected ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>(widthInSquares * heightInSquares);
+	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(
+			widthInSquares * heightInSquares);
+	protected ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>(
+			widthInSquares * heightInSquares);
 
 	public enum INVENTORY_STATE {
 		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
@@ -31,7 +33,20 @@ public class Inventory {
 	public transient INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
 
 	public enum INVENTORY_SORT_BY {
-		SORT_ALPHABETICALLY, SORT_BY_NEWEST, SORT_BY_VALUE, SORT_BY_FAVOURITE, SORT_BY_TOTAL_DAMAGE, SORT_BY_SLASH_DAMAGE, SORT_BY_BLUNT_DAMAGE, SORT_BY_PIERCE_DAMAGE, SORT_BY_FIRE_DAMAGE, SORT_BY_WATER_DAMAGE, SORT_BY_POISON_DAMAGE, SORT_BY_ELECTRICAL_DAMAGE, SORT_BY_MAX_RANGE, SORT_BY_MIN_RANGE
+		SORT_ALPHABETICALLY,
+		SORT_BY_NEWEST,
+		SORT_BY_VALUE,
+		SORT_BY_FAVOURITE,
+		SORT_BY_TOTAL_DAMAGE,
+		SORT_BY_SLASH_DAMAGE,
+		SORT_BY_BLUNT_DAMAGE,
+		SORT_BY_PIERCE_DAMAGE,
+		SORT_BY_FIRE_DAMAGE,
+		SORT_BY_WATER_DAMAGE,
+		SORT_BY_POISON_DAMAGE,
+		SORT_BY_ELECTRICAL_DAMAGE,
+		SORT_BY_MAX_RANGE,
+		SORT_BY_MIN_RANGE
 	}
 
 	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_NEWEST;
@@ -70,15 +85,17 @@ public class Inventory {
 	public Inventory() {
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
-				inventorySquares[j][i] = new InventorySquare(j, i, "dialogbg.png", this);
+				inventorySquares[j][i] = new InventorySquare(j, i,
+						"dialogbg.png", this);
 			}
 		}
 		buttons = new ArrayList<Button>();
 		buttonsSort = new ArrayList<Button>();
 		buttonsFilter = new ArrayList<Button>();
 
-		buttonSortAlphabetically = new LevelButton(100f, 100f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"SORT A-Z", true, true, Color.BLACK, Color.WHITE);
+		buttonSortAlphabetically = new LevelButton(100f, 100f, 100f, 30f,
+				"end_turn_button.png", "end_turn_button.png", "SORT A-Z", true,
+				true, Color.BLACK, Color.WHITE);
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -88,8 +105,9 @@ public class Inventory {
 		buttons.add(buttonSortAlphabetically);
 		buttonsSort.add(buttonSortAlphabetically);
 
-		buttonSortByNewest = new LevelButton(100f, 150f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"NEWEST", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByNewest = new LevelButton(100f, 150f, 100f, 30f,
+				"end_turn_button.png", "end_turn_button.png", "NEWEST", true,
+				true, Color.BLACK, Color.WHITE);
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -99,8 +117,9 @@ public class Inventory {
 		buttons.add(buttonSortByNewest);
 		buttonsSort.add(buttonSortByNewest);
 
-		buttonSortByFavourite = new LevelButton(100f, 200f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"FAVOURITES", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByFavourite = new LevelButton(100f, 200f, 100f, 30f,
+				"end_turn_button.png", "end_turn_button.png", "FAVOURITES",
+				true, true, Color.BLACK, Color.WHITE);
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -110,8 +129,9 @@ public class Inventory {
 		buttons.add(buttonSortByFavourite);
 		buttonsSort.add(buttonSortByFavourite);
 
-		buttonSortByValue = new LevelButton(100f, 250f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"VALUE", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByValue = new LevelButton(100f, 250f, 100f, 30f,
+				"end_turn_button.png", "end_turn_button.png", "VALUE", true,
+				true, Color.BLACK, Color.WHITE);
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -121,8 +141,9 @@ public class Inventory {
 		buttons.add(buttonSortByValue);
 		buttonsSort.add(buttonSortByValue);
 
-		buttonSortByTotalDamage = new LevelButton(100f, 300f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"DAMAGE", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByTotalDamage = new LevelButton(100f, 300f, 100f, 30f,
+				"end_turn_button.png", "end_turn_button.png", "DAMAGE", true,
+				true, Color.BLACK, Color.WHITE);
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -132,8 +153,9 @@ public class Inventory {
 		buttons.add(buttonSortByTotalDamage);
 		buttonsSort.add(buttonSortByTotalDamage);
 
-		buttonSortBySlashDamage = new LevelButton(100f, 350f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"SLASH", true, true, Color.BLACK, Color.WHITE);
+		buttonSortBySlashDamage = new LevelButton(100f, 350f, 100f, 30f,
+				"end_turn_button.png", "end_turn_button.png", "SLASH", true,
+				true, Color.BLACK, Color.WHITE);
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -143,8 +165,9 @@ public class Inventory {
 		buttons.add(buttonSortBySlashDamage);
 		buttonsSort.add(buttonSortBySlashDamage);
 
-		buttonFilterByAll = new LevelButton(300f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "ALL",
-				true, true, Color.BLACK, Color.WHITE);
+		buttonFilterByAll = new LevelButton(300f, 50f, 100f, 30f,
+				"end_turn_button.png", "end_turn_button.png", "ALL", true,
+				true, Color.BLACK, Color.WHITE);
 		buttonFilterByAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -154,8 +177,9 @@ public class Inventory {
 		buttons.add(buttonFilterByAll);
 		buttonsFilter.add(buttonFilterByAll);
 
-		buttonFilterByWeapon = new LevelButton(400f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"WEAPONS", true, true, Color.BLACK, Color.WHITE);
+		buttonFilterByWeapon = new LevelButton(400f, 50f, 100f, 30f,
+				"end_turn_button.png", "end_turn_button.png", "WEAPONS", true,
+				true, Color.BLACK, Color.WHITE);
 		buttonFilterByWeapon.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -165,8 +189,9 @@ public class Inventory {
 		buttons.add(buttonFilterByWeapon);
 		buttonsFilter.add(buttonFilterByWeapon);
 
-		buttonFilterByFood = new LevelButton(500f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "FOOD",
-				true, true, Color.BLACK, Color.WHITE);
+		buttonFilterByFood = new LevelButton(500f, 50f, 100f, 30f,
+				"end_turn_button.png", "end_turn_button.png", "FOOD", true,
+				true, Color.BLACK, Color.WHITE);
 		buttonFilterByFood.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -251,7 +276,8 @@ public class Inventory {
 		inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
-				inventorySquares[j][i] = new InventorySquare(i, j, "dialogbg.png", this);
+				inventorySquares[j][i] = new InventorySquare(i, j,
+						"dialogbg.png", this);
 				inventorySquares[j][i].inventoryThisBelongsTo = this;
 				inventorySquares[j][i].loadImages();
 			}
@@ -359,7 +385,8 @@ public class Inventory {
 			for (int j = 0; j < inventorySquares.length; j++) {
 				inventorySquares[j][i].gameObject = null;
 				if (index < filteredGameObjects.size()) {
-					inventorySquares[j][i].gameObject = filteredGameObjects.get(index);
+					inventorySquares[j][i].gameObject = filteredGameObjects
+							.get(index);
 					filteredGameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[j][i];
 					index++;
 				}
@@ -401,15 +428,27 @@ public class Inventory {
 
 	public boolean isPassable(Actor forActor) {
 		for (GameObject gameObject : gameObjects) {
+			System.out.println("isPassable 1");
 
-			if (forActor.group != null && forActor.group.getLeader() == gameObject)
+			if (forActor.group != null
+					&& forActor.group.getLeader() == gameObject)
 				return false;
 
+			System.out.println("isPassable 2");
 			if (gameObject != Game.level.player && gameObject instanceof Actor)
 				return true;
 
-			if (gameObject != null && !gameObject.canShareSquare)
-				return false;
+			System.out.println("isPassable 3");
+
+			if (gameObject instanceof Door) {
+				Door door = (Door) gameObject;
+				if (door.locked && forActor.hasKeyForDoor(door)) {
+					// door locked but have key
+				} else {
+					return false;
+				}
+			}
+			System.out.println("isPassable 4");
 		}
 		return true;
 	}
@@ -469,7 +508,8 @@ public class Inventory {
 	public void drawStaticUI() {
 
 		// Black cover
-		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
+		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0,
+				Game.windowHeight);
 
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
@@ -493,13 +533,15 @@ public class Inventory {
 		int actorPositionXInPixels = 1150;
 		int actorPositionYInPixels = 250;
 		float alpha = 1.0f;
-		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels,
-				actorPositionXInPixels + Game.level.player.width * 3, actorPositionYInPixels,
+		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha,
+				actorPositionXInPixels, actorPositionXInPixels
+						+ Game.level.player.width * 3, actorPositionYInPixels,
 				actorPositionYInPixels + Game.level.player.height * 3);
 
 		GameObject gameObjectMouseIsOver = null;
 		GameObject gameObjectToDrawOnPlayer = null;
-		if (Game.squareMouseIsOver != null && Game.squareMouseIsOver instanceof InventorySquare) {
+		if (Game.squareMouseIsOver != null
+				&& Game.squareMouseIsOver instanceof InventorySquare) {
 			// Preview weapon
 			gameObjectMouseIsOver = gameObjectToDrawOnPlayer = ((InventorySquare) Game.squareMouseIsOver).gameObject;
 		}
@@ -510,17 +552,18 @@ public class Inventory {
 
 		// Object to draw player holding
 		if (gameObjectToDrawOnPlayer != null) {
-			int weaponPositionXInPixels = (int) (actorPositionXInPixels
-					+ (Game.level.player.anchorX - gameObjectToDrawOnPlayer.anchorX) * 3);
-			int weaponPositionYInPixels = (int) (actorPositionYInPixels
-					+ (Game.level.player.anchorY - gameObjectToDrawOnPlayer.anchorY) * 3);
-			TextureUtils.drawTexture(gameObjectToDrawOnPlayer.imageTexture, alpha, weaponPositionXInPixels,
-					weaponPositionXInPixels + gameObjectToDrawOnPlayer.width * 3, weaponPositionYInPixels,
-					weaponPositionYInPixels + gameObjectToDrawOnPlayer.height * 3);
+			int weaponPositionXInPixels = (int) (actorPositionXInPixels + (Game.level.player.anchorX - gameObjectToDrawOnPlayer.anchorX) * 3);
+			int weaponPositionYInPixels = (int) (actorPositionYInPixels + (Game.level.player.anchorY - gameObjectToDrawOnPlayer.anchorY) * 3);
+			TextureUtils.drawTexture(gameObjectToDrawOnPlayer.imageTexture,
+					alpha, weaponPositionXInPixels, weaponPositionXInPixels
+							+ gameObjectToDrawOnPlayer.width * 3,
+					weaponPositionYInPixels, weaponPositionYInPixels
+							+ gameObjectToDrawOnPlayer.height * 3);
 		}
 
 		// Weapon comparison
-		if (this.inventorySquareMouseIsOver != null && this.inventorySquareMouseIsOver.gameObject instanceof Weapon) {
+		if (this.inventorySquareMouseIsOver != null
+				&& this.inventorySquareMouseIsOver.gameObject instanceof Weapon) {
 
 			int comparisonPositionXInPixels = 1150;
 			int comparisonPositionYInPixels = 250;
@@ -542,8 +585,10 @@ public class Inventory {
 		Game.level.openInventories.remove(this);
 	}
 
-	public boolean calculateIfPointInBoundsOfInventory(float mouseX, float mouseY) {
-		if (mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height) {
+	public boolean calculateIfPointInBoundsOfInventory(float mouseX,
+			float mouseY) {
+		if (mouseX > x && mouseX < x + width && mouseY > y
+				&& mouseY < y + height) {
 			return true;
 		}
 		return false;
@@ -554,8 +599,9 @@ public class Inventory {
 		this.inventorySquareMouseIsOver = null;
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
-				if (inventorySquares[j][i].calculateIfPointInBoundsOfSquare(UserInputEditor.mouseXinPixels,
-						Game.windowHeight - UserInputEditor.mouseYinPixels)) {
+				if (inventorySquares[j][i].calculateIfPointInBoundsOfSquare(
+						UserInputEditor.mouseXinPixels, Game.windowHeight
+								- UserInputEditor.mouseYinPixels)) {
 					this.inventorySquareMouseIsOver = inventorySquares[j][i];
 				}
 			}
@@ -571,7 +617,8 @@ public class Inventory {
 	private void inventorySquareClicked(InventorySquare inventorySquare) {
 		if (inventorySquare.gameObject == null) {
 			// Nothing on the square
-			if (inventoryState == INVENTORY_STATE.DEFAULT || inventoryState == INVENTORY_STATE.SETTINGS_CHANGE) {
+			if (inventoryState == INVENTORY_STATE.DEFAULT
+					|| inventoryState == INVENTORY_STATE.SETTINGS_CHANGE) {
 				// selectSquare(square);
 			} else if (inventoryState == INVENTORY_STATE.ADD_OBJECT) {
 				// attemptToAddNewObjectToSquare(square);
@@ -581,10 +628,12 @@ public class Inventory {
 			}
 		} else {
 			// There's an object on the square
-			if (inventoryState == INVENTORY_STATE.DEFAULT || inventoryState == INVENTORY_STATE.SETTINGS_CHANGE) {
+			if (inventoryState == INVENTORY_STATE.DEFAULT
+					|| inventoryState == INVENTORY_STATE.SETTINGS_CHANGE) {
 				selectGameObject(inventorySquare.gameObject);
 			} else if (inventoryState == INVENTORY_STATE.MOVEABLE_OBJECT_SELECTED) {
-				swapGameObjects(this.selectedGameObject, inventorySquare.gameObject);
+				swapGameObjects(this.selectedGameObject,
+						inventorySquare.gameObject);
 			}
 		}
 	}
@@ -617,7 +666,8 @@ public class Inventory {
 		gameObject1.inventorySquareGameObjectIsOn = square2;
 	}
 
-	public InventorySquare getInventorySquareMouseIsOver(float mouseXInPixels, float mouseYInPixels) {
+	public InventorySquare getInventorySquareMouseIsOver(float mouseXInPixels,
+			float mouseYInPixels) {
 
 		float offsetX = x;
 		float offsetY = y;
@@ -626,7 +676,8 @@ public class Inventory {
 		float mouseXInSquares = (((mouseXInPixels - offsetX) / Game.SQUARE_WIDTH));
 		float mouseYInSquares = ((Game.windowHeight - mouseYInPixels - offsetY - scroll) / Game.SQUARE_HEIGHT);
 
-		if (mouseXInSquares >= 0 && mouseXInSquares < inventorySquares.length && mouseYInSquares >= 0
+		if (mouseXInSquares >= 0 && mouseXInSquares < inventorySquares.length
+				&& mouseYInSquares >= 0
 				&& mouseYInSquares < inventorySquares[0].length) {
 
 			return this.inventorySquares[(int) mouseXInSquares][(int) mouseYInSquares];

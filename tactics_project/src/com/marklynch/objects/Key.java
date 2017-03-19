@@ -1,18 +1,15 @@
 package com.marklynch.objects;
 
-import java.util.ArrayList;
-
 import mdesl.graphics.Color;
 
 import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
 
-public class Door extends GameObject {
+public class Key extends GameObject {
 
-	public ArrayList<Key> keys;
-	public boolean locked;
+	Key key;
 
-	public Door(String name, int health, String imagePath,
+	public Key(String name, int health, String imagePath,
 			Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare,
 			boolean fitsInInventory, boolean canContainOtherObjects,
@@ -21,8 +18,7 @@ public class Door extends GameObject {
 			float soundHandleY, float soundWhenHit, float soundWhenHitting,
 			Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance,
-			ArrayList<Key> keys, boolean locked) {
+			float electricResistance, float poisonResistance) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory,
 				showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight,
@@ -30,9 +26,6 @@ public class Door extends GameObject {
 				soundHandleY, soundWhenHit, soundWhenHitting, light,
 				lightHandleX, lightHandlY, stackable, fireResistance,
 				iceResistance, electricResistance, poisonResistance);
-		this.keys = keys;
-		this.locked = locked;
-
 	}
 
 	@Override
@@ -52,15 +45,15 @@ public class Door extends GameObject {
 
 	}
 
-	public Door makeCopy(Square square, ArrayList<Key> keys, boolean locked) {
-		return new Door(new String(name), (int) totalHealth, imageTexturePath,
+	@Override
+	public Key makeCopy(Square square) {
+		return new Key(new String(name), (int) totalHealth, imageTexturePath,
 				square, inventory.makeCopy(), showInventory, canShareSquare,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX,
 				soundHandleY, soundWhenHit, soundWhenHitting, light,
 				lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, keys,
-				locked);
+				iceResistance, electricResistance, poisonResistance);
 	}
 
 }

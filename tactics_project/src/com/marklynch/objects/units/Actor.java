@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
+
 import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -21,6 +24,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.Bed;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Owner;
@@ -35,13 +39,11 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
-import mdesl.graphics.Texture;
-
 public class Actor extends ActorTemplate implements Owner {
 
-	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
-			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
+	public final static String[] editableAttributes = { "name", "imageTexture",
+			"faction", "strength", "dexterity", "intelligence", "endurance",
+			"totalHealth", "remainingHealth", "travelDistance", "inventory",
 			"showInventory", "fitsInInventory", "canContainOtherObjects" };
 
 	public enum Direction {
@@ -97,20 +99,28 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public Texture expressionImageTexture = null;
 
-	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
-			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
-			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY,
-			float hearing) {
+	public Actor(String name, String title, int actorLevel, int health,
+			int strength, int dexterity, int intelligence, int endurance,
+			String imagePath, Square squareActorIsStandingOn,
+			int travelDistance, int sight, Bed bed, Inventory inventory,
+			boolean showInventory, boolean fitsInInventory,
+			boolean canContainOtherObjects, boolean blocksLineOfSight,
+			boolean persistsWhenCantBeSeen, float widthRatio,
+			float heightRatio, float soundHandleX, float soundHandleY,
+			float soundWhenHit, float soundWhenHitting, Color light,
+			float lightHandleX, float lightHandlY, boolean stackable,
+			float fireResistance, float iceResistance,
+			float electricResistance, float poisonResistance, Faction faction,
+			float anchorX, float anchorY, float hearing) {
 
-		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance);
+		super(name, title, actorLevel, health, strength, dexterity,
+				intelligence, endurance, imagePath, squareActorIsStandingOn,
+				travelDistance, sight, inventory, showInventory,
+				fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX,
+				soundHandleY, soundWhenHit, soundWhenHitting, light,
+				lightHandleX, lightHandlY, stackable, fireResistance,
+				iceResistance, electricResistance, poisonResistance);
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -286,15 +296,18 @@ public class Actor extends ActorTemplate implements Owner {
 		double y1 = this.squareGameObjectIsOn.yInGrid + 0.5d;
 
 		for (int i = sight; i > 0; i--) {
-			ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistance(i);
+			ArrayList<Point> furthestVisiblePoints = this
+					.getAllCoordinatesAtDistance(i);
 			for (Point point : furthestVisiblePoints) {
-				markVisibleSquaresInLineToo(x1, y1, point.getX() + 0.5d, point.getY() + 0.5d);
+				markVisibleSquaresInLineToo(x1, y1, point.getX() + 0.5d,
+						point.getY() + 0.5d);
 			}
 		}
 	}
 
 	// SUPERCOVER algorithm
-	public void markVisibleSquaresInLineToo(double x0, double y0, double x1, double y1) {
+	public void markVisibleSquaresInLineToo(double x0, double y0, double x1,
+			double y1) {
 		double vx = x1 - x0;
 		double vy = y1 - y0;
 		double dx = Math.sqrt(1 + Math.pow((vy / vx), 2));
@@ -363,7 +376,8 @@ public class Actor extends ActorTemplate implements Owner {
 				// Seen Building
 				if (Game.level.squares[x][y].structureSquareIsIn != null
 						&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
-					Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer();
+					Game.level.squares[x][y].structureSquareIsIn
+							.hasBeenSeenByPlayer();
 				}
 			}
 		}
@@ -376,7 +390,8 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public boolean hasRange(int weaponDistance) {
 		for (Weapon weapon : getWeaponsInInventory()) {
-			if (weaponDistance >= weapon.getEffectiveMinRange() && weaponDistance <= weapon.getEffectiveMaxRange()) {
+			if (weaponDistance >= weapon.getEffectiveMinRange()
+					&& weaponDistance <= weapon.getEffectiveMaxRange()) {
 				// selectedWeapon = weapon;
 				return true;
 			}
@@ -393,20 +408,23 @@ public class Actor extends ActorTemplate implements Owner {
 
 		int range = this.straightLineDistanceTo(target.squareGameObjectIsOn);
 		for (Weapon weapon : getWeaponsInInventory()) {
-			if (range >= weapon.getEffectiveMinRange() && range <= weapon.getEffectiveMaxRange()) {
+			if (range >= weapon.getEffectiveMinRange()
+					&& range <= weapon.getEffectiveMaxRange()) {
 				equippedWeapon = weapon;
 				equippedWeaponGUID = weapon.guid;
 			}
 		}
 	}
 
-	public void equipBestWeaponForCounter(GameObject target, Weapon targetsWeapon) {
+	public void equipBestWeaponForCounter(GameObject target,
+			Weapon targetsWeapon) {
 
 		ArrayList<Weapon> potentialWeaponsToEquip = new ArrayList<Weapon>();
 
 		int range = this.straightLineDistanceTo(target.squareGameObjectIsOn);
 		for (Weapon weapon : getWeaponsInInventory()) {
-			if (range >= weapon.getEffectiveMinRange() && range <= weapon.getEffectiveMaxRange()) {
+			if (range >= weapon.getEffectiveMinRange()
+					&& range <= weapon.getEffectiveMaxRange()) {
 				potentialWeaponsToEquip.add(weapon);
 			}
 		}
@@ -420,7 +438,8 @@ public class Actor extends ActorTemplate implements Owner {
 		} else {
 			ArrayList<Fight> fights = new ArrayList<Fight>();
 			for (Weapon weapon : potentialWeaponsToEquip) {
-				Fight fight = new Fight(this, weapon, target, targetsWeapon, range);
+				Fight fight = new Fight(this, weapon, target, targetsWeapon,
+						range);
 				fights.add(fight);
 			}
 			fights.sort(new Fight.FightComparator());
@@ -439,9 +458,11 @@ public class Actor extends ActorTemplate implements Owner {
 			// add a carcass
 			GameObject body;
 			if (this instanceof WildAnimal)
-				body = Templates.CARCASS.makeCopy(this.name + " carcass", this.squareGameObjectIsOn);
+				body = Templates.CARCASS.makeCopy(this.name + " carcass",
+						this.squareGameObjectIsOn);
 			else
-				body = Templates.CORPSE.makeCopy(this.name + " corpse", this.squareGameObjectIsOn);
+				body = Templates.CORPSE.makeCopy(this.name + " corpse",
+						this.squareGameObjectIsOn);
 			// body = new Corpse(this.name + " corpse", 5, "carcass.png",
 			// this.squareGameObjectIsOn, new Inventory(),
 			// false, true, false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f,
@@ -480,42 +501,53 @@ public class Actor extends ActorTemplate implements Owner {
 			float healthPercentage = (remainingHealth) / (totalHealth);
 			float weaponAreaWidthInPixels = Game.SQUARE_WIDTH / 20;
 			float weaponAreaHeightInPixels = Game.SQUARE_HEIGHT;
-			float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
+			float healthBarHeightInPixels = Game.SQUARE_HEIGHT
+					* healthPercentage;
 			float weaponAreaPositionXInPixels = 0;
 			float weaponAreaPositionYInPixels = 0;
 
 			if (this.faction == Game.level.factions.get(0)) {
-				weaponAreaPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-				weaponAreaPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+				weaponAreaPositionXInPixels = this.squareGameObjectIsOn.xInGrid
+						* (int) Game.SQUARE_WIDTH;
+				weaponAreaPositionYInPixels = this.squareGameObjectIsOn.yInGrid
+						* (int) Game.SQUARE_HEIGHT;
 			} else {
-				weaponAreaPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-						+ Game.SQUARE_WIDTH - weaponAreaWidthInPixels;
-				weaponAreaPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+				weaponAreaPositionXInPixels = this.squareGameObjectIsOn.xInGrid
+						* (int) Game.SQUARE_WIDTH + Game.SQUARE_WIDTH
+						- weaponAreaWidthInPixels;
+				weaponAreaPositionYInPixels = this.squareGameObjectIsOn.yInGrid
+						* (int) Game.SQUARE_HEIGHT;
 
 			}
 
 			// White bit under health bar
-			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), weaponAreaPositionXInPixels + 1,
-					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1, weaponAreaPositionYInPixels + 1,
+			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f),
+					weaponAreaPositionXInPixels + 1,
+					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
+					weaponAreaPositionYInPixels + 1,
 					weaponAreaPositionYInPixels + weaponAreaHeightInPixels - 1);
 
 			// Colored health bar
-			QuadUtils.drawQuad(new Color(this.faction.color.r, this.faction.color.g, this.faction.color.b),
-					weaponAreaPositionXInPixels + 1, weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
-					weaponAreaPositionYInPixels + 1, weaponAreaPositionYInPixels + healthBarHeightInPixels - 1);
+			QuadUtils.drawQuad(new Color(this.faction.color.r,
+					this.faction.color.g, this.faction.color.b),
+					weaponAreaPositionXInPixels + 1,
+					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
+					weaponAreaPositionYInPixels + 1,
+					weaponAreaPositionYInPixels + healthBarHeightInPixels - 1);
 		}
 
 		super.draw1();
 
 		if (equippedWeapon != null) {
 
-			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX + anchorX - equippedWeapon.anchorX);
-			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY + anchorY - equippedWeapon.anchorY);
+			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid
+					* (int) Game.SQUARE_WIDTH + drawOffsetX + anchorX - equippedWeapon.anchorX);
+			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid
+					* (int) Game.SQUARE_HEIGHT + drawOffsetY + anchorY - equippedWeapon.anchorY);
 			float alpha = 1.0f;
-			TextureUtils.drawTexture(this.equippedWeapon.imageTexture, alpha, weaponPositionXInPixels,
-					weaponPositionXInPixels + equippedWeapon.width, weaponPositionYInPixels,
+			TextureUtils.drawTexture(this.equippedWeapon.imageTexture, alpha,
+					weaponPositionXInPixels, weaponPositionXInPixels
+							+ equippedWeapon.width, weaponPositionYInPixels,
 					weaponPositionYInPixels + equippedWeapon.height);
 
 			// TextureUtils.drawTexture(imageTexture, alpha,
@@ -551,8 +583,10 @@ public class Actor extends ActorTemplate implements Owner {
 
 		// TextureUtils.skipNormals = false;
 
-		int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-		int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+		int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid
+				* (int) Game.SQUARE_WIDTH;
+		int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid
+				* (int) Game.SQUARE_HEIGHT;
 
 		// body shoulder coords, arm shoulder coords
 		int armPositionXInPixels = actorPositionXInPixels + 65 - 11;
@@ -566,7 +600,8 @@ public class Actor extends ActorTemplate implements Owner {
 
 		float alpha = 1.0f;
 
-		if (hasAttackedThisTurn == true && this.faction != null && Game.level.currentFactionMoving == this.faction) {
+		if (hasAttackedThisTurn == true && this.faction != null
+				&& Game.level.currentFactionMoving == this.faction) {
 			alpha = 0.5f;
 		}
 
@@ -600,21 +635,26 @@ public class Actor extends ActorTemplate implements Owner {
 
 		// Draw activity text
 		if (activityDescription != null && activityDescription.length() > 0) {
-			float activityX1 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-			float activityX2 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			float activityX1 = this.squareGameObjectIsOn.xInGrid
+					* (int) Game.SQUARE_WIDTH;
+			float activityX2 = this.squareGameObjectIsOn.xInGrid
+					* (int) Game.SQUARE_WIDTH
 					+ Game.font.getWidth(activityDescription);
-			float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 60;
-			float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 80;
-			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
-			TextUtils.printTextWithImages(new Object[] { activityDescription }, activityX1, activityY1,
-					Integer.MAX_VALUE, false);
+			float activityY1 = this.squareGameObjectIsOn.yInGrid
+					* (int) Game.SQUARE_WIDTH + 60;
+			float activityY2 = this.squareGameObjectIsOn.yInGrid
+					* (int) Game.SQUARE_WIDTH + 80;
+			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1,
+					activityX2, activityY1, activityY2);
+			TextUtils.printTextWithImages(new Object[] { activityDescription },
+					activityX1, activityY1, Integer.MAX_VALUE, false);
 		}
 
 		if (expressionImageTexture != null) {
-			int expressionPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX);
-			int expressionPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY);
+			int expressionPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid
+					* (int) Game.SQUARE_WIDTH + drawOffsetX);
+			int expressionPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid
+					* (int) Game.SQUARE_HEIGHT + drawOffsetY);
 			expressionPositionYInPixels -= 128;
 			int expressionWidth = 128;
 			int expressionHeight = 128;
@@ -624,8 +664,9 @@ public class Actor extends ActorTemplate implements Owner {
 
 			if (!this.squareGameObjectIsOn.visibleToPlayer)
 				alpha = 0.5f;
-			TextureUtils.drawTexture(expressionImageTexture, alpha, expressionPositionXInPixels,
-					expressionPositionXInPixels + expressionWidth, expressionPositionYInPixels,
+			TextureUtils.drawTexture(expressionImageTexture, alpha,
+					expressionPositionXInPixels, expressionPositionXInPixels
+							+ expressionWidth, expressionPositionYInPixels,
 					expressionPositionYInPixels + expressionHeight);
 			// TextureUtils.skipNormals = false;
 		}
@@ -652,8 +693,10 @@ public class Actor extends ActorTemplate implements Owner {
 
 		Vector<Fight> fights = new Vector<Fight>();
 		for (Weapon weapon : getWeaponsInInventory()) {
-			for (float range = weapon.getEffectiveMinRange(); range <= weapon.getEffectiveMaxRange(); range++) {
-				Fight fight = new Fight(this, weapon, target, target.bestCounterWeapon(this, weapon, range), range);
+			for (float range = weapon.getEffectiveMinRange(); range <= weapon
+					.getEffectiveMaxRange(); range++) {
+				Fight fight = new Fight(this, weapon, target,
+						target.bestCounterWeapon(this, weapon, range), range);
 				fights.add(fight);
 			}
 		}
@@ -669,7 +712,8 @@ public class Actor extends ActorTemplate implements Owner {
 		return idealDistances;
 	}
 
-	public Button getButtonFromMousePosition(float alteredMouseX, float alteredMouseY) {
+	public Button getButtonFromMousePosition(float alteredMouseX,
+			float alteredMouseY) {
 
 		return null;
 	}
@@ -686,11 +730,15 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public Actor makeCopy(Square square, Faction faction, Bed bed) {
 
-		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
-				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance
+		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth,
+				strength, dexterity, intelligence, endurance, imageTexturePath,
+				square, travelDistance, sight, bed, inventory.makeCopy(),
+				showInventory, fitsInInventory, canContainOtherObjects,
+				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
+				heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance,
+				poisonResistance
 
 				, faction, anchorX, anchorY, hearing);
 		return actor;
@@ -727,12 +775,13 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	public void sellAllToTarget(Class clazz, GameObject gameObject) {
-		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
+		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory
+				.getGameObjects().clone();
 		for (GameObject gameObjectToSell : gameObjectsToSell) {
 			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
 				if (squareGameObjectIsOn.visibleToPlayer)
-					Game.level.logOnScreen(
-							new ActivityLog(new Object[] { this, " sold ", gameObjectToSell, " to ", gameObject }));
+					Game.level.logOnScreen(new ActivityLog(new Object[] { this,
+							" sold ", gameObjectToSell, " to ", gameObject }));
 				this.inventory.remove(gameObjectToSell);
 				gameObject.inventory.add(gameObjectToSell);
 			}
@@ -741,12 +790,13 @@ public class Actor extends ActorTemplate implements Owner {
 	}
 
 	public void giveAllToTarget(Class clazz, GameObject gameObject) {
-		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
+		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory
+				.getGameObjects().clone();
 		for (GameObject gameObjectToSell : gameObjectsToSell) {
 			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
 				if (squareGameObjectIsOn.visibleToPlayer)
-					Game.level.logOnScreen(
-							new ActivityLog(new Object[] { this, " gave ", gameObjectToSell, " to ", gameObject }));
+					Game.level.logOnScreen(new ActivityLog(new Object[] { this,
+							" gave ", gameObjectToSell, " to ", gameObject }));
 				this.inventory.remove(gameObjectToSell);
 				gameObject.inventory.add(gameObjectToSell);
 			}
@@ -816,9 +866,11 @@ public class Actor extends ActorTemplate implements Owner {
 		if (this == Game.level.player) {
 			return null;
 		} else if (performer.attackers.contains(this)) {
-			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
+			if (Game.level.activeActor != null
+					&& Game.level.activeActor.equippedWeapon != null
 					&& Game.level.activeActor.equippedWeapon
-							.hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn))) {
+							.hasRange(Game.level.activeActor
+									.straightLineDistanceTo(this.squareGameObjectIsOn))) {
 				return new ActionAttack(performer, this);
 			}
 		} else {
@@ -839,17 +891,22 @@ public class Actor extends ActorTemplate implements Owner {
 			// Inherited from object (attack...)
 			actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 			// Inherited from squre (move/swap squares)
-			actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
+			actions.addAll(squareGameObjectIsOn
+					.getAllActionsPerformedOnThisInWorld(performer));
 		}
 
 		if (this == Game.level.player) {
 			// self action
 			System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld 1");
-			System.out.println(" performer.equippedWeapon = " + performer.equippedWeapon);
-			System.out.println(" performer.equippedWeapon.name = " + performer.equippedWeapon.name);
-			Action utilityAction = performer.equippedWeapon.getUtilityAction(performer);
+			System.out.println(" performer.equippedWeapon = "
+					+ performer.equippedWeapon);
+			System.out.println(" performer.equippedWeapon.name = "
+					+ performer.equippedWeapon.name);
+			Action utilityAction = performer.equippedWeapon
+					.getUtilityAction(performer);
 			if (utilityAction != null) {
-				System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld 2");
+				System.out
+						.println("ACTOR.getAllActionsPerformedOnThisInWorld 2");
 				actions.add(utilityAction);
 			}
 		}
@@ -897,9 +954,22 @@ public class Actor extends ActorTemplate implements Owner {
 		return true;
 	}
 
+	public boolean hasKeyForDoor(Door door) {
+		if (door.keys == null)
+			return false;
+
+		for (GameObject gameObject : inventory.getGameObjects()) {
+			if (door.keys.contains(gameObject)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	// public static void calculateReachableSquares() {
 	// // Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
-	//// Game.level.activeActor.calculateReachableSquares(Game.level.squares);
+	// // Game.level.activeActor.calculateReachableSquares(Game.level.squares);
 	// // Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
 	// }
 
