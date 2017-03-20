@@ -9,6 +9,8 @@ import com.marklynch.level.constructs.structure.StructureHall;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Corpse;
@@ -31,7 +33,8 @@ public class QuestCaveOfTheBlind extends Quest {
 	final String ACTIVITY_PLANNING_A_HUNT = "Planning a hunt";
 
 	// Flags
-	boolean questAcceptedFromHunters;
+	boolean talkedToMort = false;
+	int playerMinedOres = 0;
 
 	// End
 	boolean huntersReleasedFromQuest;
@@ -64,7 +67,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	// Structure Areas
 
 	// Conversations
-	public static Conversation conversationHuntersJoinTheHunt;
+	public static Conversation conversationForMort;
 
 	public QuestCaveOfTheBlind() {
 		super();
@@ -114,6 +117,11 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	@Override
 	public Conversation getConversation(Actor actor) {
+		if (actor == mort) {
+			Conversation conversation = getConversationForMort();
+			talkedToMort = true;
+			return conversation;
+		}
 		return null;
 	}
 
@@ -330,6 +338,69 @@ public class QuestCaveOfTheBlind extends Quest {
 		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
 		blind10.addAttackerForThisAndGroupMembers(Game.level.player);
 		blind10.quest = this;
+	}
+
+	public Conversation getConversationForMort() {
+
+		// Opening
+		ConversationPart conversationPartopening = null;
+		if (talkedToMort && playerMinedOres > 0) {
+			// You mined his ore
+			conversationPartopening = new ConversationPart(new Object[] { "Hands off my ore!" },
+					new ConversationResponse[] {}, mort);
+		} else if (talkedToMort) {
+			conversationPartopening = new ConversationPart(new Object[] { "Yes?" }, // annoyed
+					new ConversationResponse[] {}, mort);
+		} else {
+			// Havent talked yet, annoyed by your mere presence
+			conversationPartopening = new ConversationPart(
+					new Object[] {
+							"What are you doing here? Hands off my ore! You should leave, would be terrible if the blind got you!" },
+					new ConversationResponse[] {}, mort);
+		}
+
+		// Opening response
+		ConversationResponse conversationResponseTellMeAboutTheBlind = new ConversationResponse(
+				"Tell me about the blind.", null);
+		ConversationResponse conversationResponseWhereAmI = new ConversationResponse("Where am I?", null);
+		ConversationResponse conversationResponseWhoAreYou = new ConversationResponse("Who are you?", null);
+
+		ConversationPart conversationPartTheBlind = new ConversationPart(
+				new Object[] { "They can be pretty vicious, but as long as I feed them they keep to themselves." },
+				new ConversationResponse[] {}, mort);
+
+		ConversationPart conversationPartYoureInTheCaveOfTheBlind = new ConversationPart(
+				new Object[] { "You're in my mine, don't touch my ore" }, new ConversationResponse[] {}, mort);
+
+		ConversationPart conversationPartImMort = new ConversationPart(
+				new Object[] { "I'm Mort, this is my mine, don't touch my ore." }, new ConversationResponse[] {}, mort);
+
+		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
+
+		// fill in pointers
+		// opening
+		conversationPartopening.setConversationResponses(new ConversationResponse[] { conversationResponseWhoAreYou,
+				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+
+		// opening responses
+		conversationResponseWhoAreYou.nextConversationPart = conversationPartImMort;
+		conversationResponseWhereAmI.nextConversationPart = conversationPartYoureInTheCaveOfTheBlind;
+		conversationResponseTellMeAboutTheBlind.nextConversationPart = conversationPartTheBlind;
+		// I'm Mort
+		conversationPartImMort.setConversationResponses(new ConversationResponse[] { conversationResponseWhereAmI,
+				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+
+		// You're in my mine
+		conversationPartYoureInTheCaveOfTheBlind.setConversationResponses(
+				new ConversationResponse[] { conversationResponseWhoAreYou, conversationResponseWhereAmI,
+						conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+
+		// The blind
+		conversationPartTheBlind.setConversationResponses(new ConversationResponse[] {
+				/* conversationResponseYouFeedThem, */ conversationResponseWhoAreYou, conversationResponseWhereAmI,
+				conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+
+		return new Conversation(conversationPartopening);
 	}
 
 }

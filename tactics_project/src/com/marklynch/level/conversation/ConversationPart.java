@@ -7,7 +7,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class ConversationPart {
 
-	public ConversationResponse[] conversationResponses;
+	protected ConversationResponse[] conversationResponses;
 	public Object[] text;
 	// int textWidth;
 	int halfTextWidth;
@@ -22,7 +22,9 @@ public class ConversationPart {
 		// textWidth = Game.font.getWidth(text);
 		// halfTextWidth = textWidth / 2;
 
-		windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level, conversationResponses);
+		if (conversationResponses.length > 0)
+			windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level,
+					conversationResponses);
 
 	}
 
@@ -49,6 +51,11 @@ public class ConversationPart {
 
 		TextUtils.printTextWithImages(text, x1, y1, maxWidth, true);
 
+	}
+
+	public void setConversationResponses(ConversationResponse[] conversationResponses) {
+		this.conversationResponses = conversationResponses;
+		windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level, conversationResponses);
 	}
 
 }

@@ -5,7 +5,7 @@ import com.marklynch.Game;
 public class ConversationResponse {
 
 	public String text;
-	protected ConversationPart nextConversationPart;
+	public ConversationPart nextConversationPart;
 
 	public ConversationResponse(String text, ConversationPart nextConversationPart) {
 		this.text = text;
