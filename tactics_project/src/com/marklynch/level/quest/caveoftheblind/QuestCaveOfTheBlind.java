@@ -405,7 +405,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Question - What do you feed them?
 		// PUNS -
-		// Blind/sight/vision/glasses/contacts/crnea/pupil/iris/eye/division/see
+		// Blind/sight/vision/glasses/contacts/crnea/pupil/iris/eye/division/see/lens/cornea/
 		// "O... just bits and pieces"
 		// "You should have SEEN that one coming!"
 		// "It's dark in there, but that could be for the best, they're not the
