@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.ActivityLog;
 
 public class ActionRing extends Action {
 
@@ -32,6 +33,11 @@ public class ActionRing extends Action {
 
 		// Sound
 		ringer.sounds.add(new Sound(ringer, object, ringer.squareGameObjectIsOn, object.soundWhenHitting));
+
+		if (ringer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] {
+
+					ringer, " rang ", object }));
 
 		if (ringer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

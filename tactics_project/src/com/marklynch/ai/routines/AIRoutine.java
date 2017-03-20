@@ -113,9 +113,8 @@ public class AIRoutine {
 
 			for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
 
-				if (actorToSearchFor.remainingHealth > 0
-						&& this.actor.squareGameObjectIsOn
-								.straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor)) > 0
+				if (this.actor.squareGameObjectIsOn
+						.straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor)) > 0
 						&& this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor)) != null) {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.expressionImageTexture = Expressions.questionMark;

@@ -38,7 +38,6 @@ public class AIRoutineForHunter extends AIRoutine {
 
 	@Override
 	public void update() {
-
 		this.actor.activityDescription = null;
 		this.actor.expressionImageTexture = null;
 		createSearchLocationsBasedOnSounds();

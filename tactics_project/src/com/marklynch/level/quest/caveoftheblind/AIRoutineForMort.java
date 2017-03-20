@@ -5,12 +5,15 @@ import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionRing;
+import com.marklynch.objects.weapons.Bell;
 
 public class AIRoutineForMort extends AIRoutine {
 
 	Mort mort;
 	GameObject target;
 	Square lastLocationSeenPlayer;
+	boolean rangBell;
 	// Square squareToMoveTo;
 
 	enum HUNT_STATE {
@@ -45,6 +48,15 @@ public class AIRoutineForMort extends AIRoutine {
 		this.actor.expressionImageTexture = null;
 		createSearchLocationsBasedOnSounds();
 		createSearchLocationsBasedOnVisibleAttackers();
+		if (!rangBell && mort.remainingHealth < mort.totalHealth / 2) {
+			Bell bell = (Bell) mort.inventory.getGameObectOfClass(Bell.class);
+			if (bell != null) {
+				new ActionRing(mort, bell).perform();
+				rangBell = true;
+				return;
+			}
+		}
+
 		if (runFightRoutine())
 			return;
 		if (runSearchRoutine()) {
