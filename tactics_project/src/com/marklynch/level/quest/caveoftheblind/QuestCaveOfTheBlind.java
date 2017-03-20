@@ -92,10 +92,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		}
 
 		// Cave
+		makeMortsStorage();
 		makeCave();
 		makeMortsMine();
 		makeMortsRoom();
-		makeMortsStorage();
 		makeBlind();
 
 		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14], "Rock with etching",
@@ -255,6 +255,13 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public void makeMortsStorage() {
 
+		GameObject outsideBlood1 = Templates.BLOOD.makeCopy(Game.level.squares[17][21]);
+		GameObject outsideBlood2 = Templates.BLOOD.makeCopy(Game.level.squares[18][21]);
+		GameObject outsideBlood3 = Templates.BLOOD.makeCopy(Game.level.squares[19][21]);
+		GameObject outsideBlood4 = Templates.BLOOD.makeCopy(Game.level.squares[20][21]);
+		GameObject outsideBlood5 = Templates.BLOOD.makeCopy(Game.level.squares[21][21]);
+		GameObject outsideBlood6 = Templates.BLOOD.makeCopy(Game.level.squares[22][21]);
+		GameObject outsideBlood7 = Templates.BLOOD.makeCopy(Game.level.squares[23][21]);
 		GameObject blood = Templates.BLOOD.makeCopy(Game.level.squares[24][21]);
 		Corpse carcass1 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
 		Corpse carcass2 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[24][21]);
@@ -369,7 +376,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// First level
 		ConversationPart conversationPartTheBlind = new ConversationPart(
-				new Object[] { "They can be pretty vicious, but as long as I feed them they keep to themselves." },
+				new Object[] {
+						"They can be pretty vicious. But as long as I feed them they keep to themselves. O... and... eh... they're blind." },
 				new ConversationResponse[] {}, mort);
 
 		ConversationPart conversationPartYoureInTheCaveOfTheBlind = new ConversationPart(
@@ -395,19 +403,46 @@ public class QuestCaveOfTheBlind extends Quest {
 		ConversationResponse conversationResponseWhatDoYouFeedThem = new ConversationResponse("What do you feed them?",
 				null);
 
+		// Question - What do you feed them?
+		// PUNS -
+		// Blind/sight/vision/glasses/contacts/crnea/pupil/iris/eye/division/see
+		// "O... just bits and pieces"
+		// "You should have SEEN that one coming!"
+		// "It's dark in there, but that could be for the best, they're not the
+		// best LOOKING guys"
+		// "They're pretty grotesque, but LOOKS aren't everything!"
+		// "How many are there?" - "I'd say there's about 20, 20 odd"
+		// "They tend to wander, you should keep an EYE on them"
+		// "It's good that someone is keeping an EYE on them"
+		// "You must be BATTY if you think you'll make your way to the other
+		// side"
+		// "I've got this weird MOLE" :P
+		// "Some people have just been DYING to meet them!"
+		// "IRISk a lot if I by telling you"
+		// "EYE couldn't possibly say"
+
+		// You -
+		// "Wait, you've been feeding them people?"
+		// "...","...","...yes". And then he attacks you? or the conversation
+		// just ends...
+
+		// Need a better pun one for the end of the pun line tho. like in
+		// simsons treehouse of horror.
+
 		// Pun 1
-		ConversationPart conversationPartPun1 = new ConversationPart(new Object[] { "Pun 1" },
+		ConversationPart conversationPartPun1 = new ConversationPart(new Object[] { "EYE couldn't possibly say" },
 				new ConversationResponse[] {}, mort);
 
 		// ... 1
-		ConversationResponse conversationResponseDotDotDot1 = new ConversationResponse("...", null);
+		ConversationResponse conversationResponseDotDotDot1 = new ConversationResponse("...What?", null);
 
 		// Pun 2
-		ConversationPart conversationPartPun2 = new ConversationPart(new Object[] { "Pun 2" },
+		ConversationPart conversationPartPun2 = new ConversationPart(new Object[] { "IRISk a lot if I by telling you" },
 				new ConversationResponse[] {}, mort);
 
 		// ... 2
-		ConversationResponse conversationResponseDotDotDot2 = new ConversationResponse("...", null);
+		ConversationResponse conversationResponseDotDotDot2 = new ConversationResponse("Why are you talking like that?",
+				null);
 
 		// Pun 3
 		ConversationPart conversationPartPun3 = new ConversationPart(new Object[] { "Pun 3" },
@@ -417,7 +452,9 @@ public class QuestCaveOfTheBlind extends Quest {
 		ConversationResponse conversationResponseDotDotDot3 = new ConversationResponse("...", null);
 
 		// Pun 4
-		ConversationPart conversationPartPun4 = new ConversationPart(new Object[] { "Pun 4" },
+		ConversationPart conversationPartPun4 = new ConversationPart(
+				new Object[] {
+						"It's eyeballs, I feed them human eyeballs! ...it's all they'll eat. I've found though,  if I bury the eyes inside the corpse they'll at least eat through a lot of the evidence to get to their prize." },
 				new ConversationResponse[] {}, mort);
 
 		// ...4
@@ -486,19 +523,22 @@ public class QuestCaveOfTheBlind extends Quest {
 		conversationResponseWhatDoYouFeedThem.nextConversationPart = conversationPartPun1;
 
 		// Pun 1
-		conversationPartPun1.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot1 });
+		conversationPartPun1.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot1,
+				conversationResponseShowMe, conversationReponseEnd });
 
 		// ... 1
 		conversationResponseDotDotDot1.nextConversationPart = conversationPartPun2;
 
 		// Pun 2
-		conversationPartPun2.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot2 });
+		conversationPartPun2.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot2,
+				conversationResponseShowMe, conversationReponseEnd });
 
 		// ... 2
 		conversationResponseDotDotDot2.nextConversationPart = conversationPartPun3;
 
 		// Pun 3
-		conversationPartPun3.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot3 });
+		conversationPartPun3.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot3,
+				conversationResponseShowMe, conversationReponseEnd });
 
 		// ... 3
 		conversationResponseDotDotDot3.nextConversationPart = conversationPartPun4;
