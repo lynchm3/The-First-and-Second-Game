@@ -17,6 +17,7 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 	@Override
 	public void update() {
 
+		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.expressionImageTexture = null;
 		createSearchLocationsBasedOnSounds();

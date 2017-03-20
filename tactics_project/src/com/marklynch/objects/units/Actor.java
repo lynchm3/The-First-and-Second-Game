@@ -72,6 +72,7 @@ public class Actor extends ActorTemplate implements Owner {
 	public transient AIRoutine aiRoutine;
 
 	public String activityDescription = "";
+	public String miniDialogue = "";
 
 	public transient Bed bed;
 	public String bedGUID = null;
@@ -620,6 +621,19 @@ public class Actor extends ActorTemplate implements Owner {
 			float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 80;
 			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
 			TextUtils.printTextWithImages(new Object[] { activityDescription }, activityX1, activityY1,
+					Integer.MAX_VALUE, false);
+		}
+
+		// Draw mini dialogue
+		if (miniDialogue != null && miniDialogue.length() > 0) {
+			float miniDialogueX1 = (this.squareGameObjectIsOn.xInGrid + 1) * (int) Game.SQUARE_WIDTH;
+			float miniDialogueX2 = (this.squareGameObjectIsOn.xInGrid + 1) * (int) Game.SQUARE_WIDTH
+					+ Game.font.getWidth(miniDialogue);
+			float miniDialogueY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH;
+			float miniDialogueY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 20;
+			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), miniDialogueX1, miniDialogueX2, miniDialogueY1,
+					miniDialogueY2);
+			TextUtils.printTextWithImages(new Object[] { miniDialogue }, miniDialogueX1, miniDialogueY1,
 					Integer.MAX_VALUE, false);
 		}
 

@@ -29,6 +29,7 @@ public class AIRoutineForMort extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
 	final String ACTIVITY_DESCRIPTION_FOLLOWING = "Following";
+	final String ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL = "Ringing Dinner Bell";
 
 	public HUNT_STATE huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 
@@ -44,7 +45,9 @@ public class AIRoutineForMort extends AIRoutine {
 	@Override
 	public void update() {
 
+		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
+		this.actor.miniDialogue = null;
 		this.actor.expressionImageTexture = null;
 		createSearchLocationsBasedOnSounds();
 		createSearchLocationsBasedOnVisibleAttackers();
@@ -52,6 +55,8 @@ public class AIRoutineForMort extends AIRoutine {
 			Bell bell = (Bell) mort.inventory.getGameObectOfClass(Bell.class);
 			if (bell != null) {
 				new ActionRing(mort, bell).perform();
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
+				this.actor.miniDialogue = "You won't get out of here alive";
 				rangBell = true;
 				return;
 			}
