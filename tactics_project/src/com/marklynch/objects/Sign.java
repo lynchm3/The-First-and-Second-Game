@@ -36,8 +36,7 @@ public class Sign extends GameObject {
 
 	}
 
-	@Override
-	public Sign makeCopy(Square square) {
+	public Sign makeCopy(Square square, String name, Object[] text) {
 		return new Sign(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, text, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,

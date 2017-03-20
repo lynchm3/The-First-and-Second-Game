@@ -93,8 +93,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		makeMortsStorage();
 		makeBlind();
 
-		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14]);
-		rockWithEtching.setText(new Object[] { "SHHHHHhhhhhhhh..." });
+		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14], "Rock with etching",
+				new Object[] { "SHHHHHhhhhhhhh..." });
 		rockWithEtching.quest = this;
 
 		// Add spoons
@@ -234,6 +234,10 @@ public class QuestCaveOfTheBlind extends Quest {
 	}
 
 	public void makeMortsMine() {
+
+		Sign noEntry = Templates.SIGN.makeCopy(Game.level.squares[42][20], "Sign", new Object[] { "PRIVATE! - Mort" });
+		noEntry.quest = this;
+
 	}
 
 	public void makeMortsRoom() {

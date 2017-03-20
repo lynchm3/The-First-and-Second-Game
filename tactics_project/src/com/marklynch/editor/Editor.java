@@ -602,9 +602,8 @@ public class Editor {
 
 		Group hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
 
-		Sign huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8]);
-		huntingPlan.setText(new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
-		huntingPlan.name = "Hunt Action Plan";
+		Sign huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan",
+				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,
@@ -635,9 +634,8 @@ public class Editor {
 		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null,
 				weaponsBehindTheLodge);
 
-		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5]);
-		joesShopSign.setText(new Object[] { joesShop.name });
-		joesShopSign.name = joesShop.name + " sign";
+		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
+				new Object[] { joesShop.name });
 		Weapon broom = Templates.BROOM.makeCopy(null);
 		Actor trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png", Game.level.squares[7][1],
 				1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f,
