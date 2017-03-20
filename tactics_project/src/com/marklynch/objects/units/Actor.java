@@ -711,6 +711,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void update(int delta) {
+		clearSounds();
 
 		if (this.remainingHealth > 0) {
 
@@ -934,6 +935,15 @@ public class Actor extends ActorTemplate implements Owner {
 		}
 
 		return null;
+	}
+
+	public void clearSounds() {
+		for (Sound sound : sounds) {
+			for (Square destinationSquare : sound.destinationSquares) {
+				destinationSquare.sounds.remove(sound);
+			}
+		}
+		sounds.clear();
 	}
 
 	// public static void calculateReachableSquares() {
