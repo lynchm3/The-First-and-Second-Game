@@ -401,16 +401,12 @@ public class Inventory {
 
 	public boolean isPassable(Actor forActor) {
 		for (GameObject gameObject : gameObjects) {
-			System.out.println("isPassable 1");
 
 			if (forActor.group != null && forActor.group.getLeader() == gameObject)
 				return false;
 
-			System.out.println("isPassable 2");
 			if (gameObject != Game.level.player && gameObject instanceof Actor)
 				return true;
-
-			System.out.println("isPassable 3");
 
 			if (gameObject instanceof Door) {
 				Door door = (Door) gameObject;
@@ -418,7 +414,6 @@ public class Inventory {
 					return false;
 				}
 			}
-			System.out.println("isPassable 4");
 		}
 		return true;
 	}

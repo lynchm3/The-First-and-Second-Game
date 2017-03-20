@@ -459,13 +459,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		System.out.println("GAMEOBJECT.getDefaultActionPerformedOnThisInWorld");
 		return null;
 	}
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		System.out.println("GAMEOBJECT.getAllActionsPerformedOnThisInWorld");
 		ArrayList<Action> actions = new ArrayList<Action>();
 
 		if (this.remainingHealth < 0)

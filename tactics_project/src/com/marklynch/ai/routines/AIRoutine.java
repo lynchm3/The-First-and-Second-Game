@@ -55,6 +55,20 @@ public class AIRoutine {
 		}
 	}
 
+	public Sound getSoundFromSourceType(Class clazz) {
+
+		// Check for sounds to investigate
+		ArrayList<Square> squaresThisCanHear = this.actor.getAllSquaresWithinDistance(this.actor.hearing);
+		for (Square squareThisCanHear : squaresThisCanHear) {
+			for (Sound sound : squareThisCanHear.sounds) {
+				if (clazz.isInstance(sound.sourceObject)) {
+					return sound;
+				}
+			}
+		}
+		return null;
+	}
+
 	public boolean runFightRoutine() {
 
 		// 1. Fighting

@@ -20,7 +20,6 @@ import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
-import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -207,20 +206,11 @@ public class Actor extends ActorTemplate implements Owner {
 
 		if (target == null || (target.inventory.canBeMovedTo() == false)) {
 
-			if (Game.level.activeActor instanceof Mort)
-				System.out.println("getPathTo() a");
-
 			return null;
 		}
 
 		LinkedList<AStarNode> aStarNodesPath = (LinkedList<AStarNode>) new AStarSearch()
 				.findPath(this.squareGameObjectIsOn, target);
-
-		if (Game.level.activeActor instanceof Mort)
-			System.out.println("aStarNodesPath = " + aStarNodesPath);
-		// if (Game.level.activeActor instanceof Mort)
-		// System.out.println("aStarNodesPath.size() = " +
-		// aStarNodesPath.size());
 
 		if (aStarNodesPath != null) {
 			Vector<Square> squarePath = new Vector<Square>();
@@ -840,7 +830,6 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		System.out.println("ACTOR.getDefaultActionPerformedOnThisInWorld");
 		if (this == Game.level.player) {
 			return null;
 		} else if (performer.attackers.contains(this)) {
@@ -858,8 +847,6 @@ public class Actor extends ActorTemplate implements Owner {
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 
-		System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld");
-
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (this != Game.level.player) {
 			// Talk
@@ -872,12 +859,8 @@ public class Actor extends ActorTemplate implements Owner {
 
 		if (this == Game.level.player) {
 			// self action
-			System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld 1");
-			System.out.println(" performer.equippedWeapon = " + performer.equippedWeapon);
-			System.out.println(" performer.equippedWeapon.name = " + performer.equippedWeapon.name);
 			Action utilityAction = performer.equippedWeapon.getUtilityAction(performer);
 			if (utilityAction != null) {
-				System.out.println("ACTOR.getAllActionsPerformedOnThisInWorld 2");
 				actions.add(utilityAction);
 			}
 		}

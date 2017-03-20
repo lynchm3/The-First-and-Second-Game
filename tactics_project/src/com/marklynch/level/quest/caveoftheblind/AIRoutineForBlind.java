@@ -3,6 +3,8 @@ package com.marklynch.level.quest.caveoftheblind;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.weapons.Bell;
 
 public class AIRoutineForBlind extends AIRoutine {
 
@@ -18,6 +20,9 @@ public class AIRoutineForBlind extends AIRoutine {
 
 	Blind blind;
 	Square targetSquare = null;
+	Sound bellSound = null;
+
+	boolean hangry = false;
 
 	public AIRoutineForBlind(Blind blind) {
 		super(blind);
@@ -30,8 +35,29 @@ public class AIRoutineForBlind extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.expressionImageTexture = null;
+		Sound tempBellSound = getSoundFromSourceType(Bell.class);
+		if (tempBellSound != null)
+			bellSound = tempBellSound;
 		createSearchLocationsBasedOnSounds();
 		createSearchLocationsBasedOnVisibleAttackers();
+
+		System.out.println("bellSound = " + bellSound);
+
+		if (bellSound != null) {
+			this.blind.activityDescription = "Dinner time!";
+			AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare);
+			if (blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
+				this.blind.structureSection = this.blind.squareGameObjectIsOn.structureSectionSquareIsIn;
+				bellSound = null;
+				targetSquare = null;
+
+				this.blind.activityDescription = "Hangry";
+				hangry = true;
+
+			}
+			return;
+		}
+
 		if (runFightRoutine())
 			return;
 		if (runSearchRoutine())
@@ -65,14 +91,27 @@ public class AIRoutineForBlind extends AIRoutine {
 			if (blind.squareGameObjectIsOn == targetSquare || blind.getPathTo(targetSquare) == null)
 				targetSquare = null;
 		} else if (blind.squareGameObjectIsOn.structureSectionSquareIsIn != blind.structureSection) {
-			targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSection);
-			AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-		} else {
-			if (Math.random() < 0.05) {
+			if (blind.structureSection == null) {
+				targetSquare = AIRoutineUtils.getRandomSquare(5, true);
+				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+			} else {
 				targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSection);
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+			}
+		} else {
+			if (Math.random() < 0.05) {
+				if (blind.structureSection == null) {
+					targetSquare = AIRoutineUtils.getRandomSquare(5, true);
+					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+				} else {
+					targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSection);
+					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+				}
 
 			}
 		}
+
+		if (hangry)
+			this.blind.activityDescription = "Hangry";
 	}
 }

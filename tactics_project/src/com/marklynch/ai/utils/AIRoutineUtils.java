@@ -11,7 +11,6 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
-import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
@@ -648,16 +647,10 @@ public class AIRoutineUtils {
 
 	public static boolean moveTowardsTargetSquare(Square square) {
 
-		if (Game.level.activeActor instanceof Mort)
-			System.out.println("moveTowardsTargetSquare square x,y = " + square.xInGrid + "," + square.yInGrid);
-
 		if (Game.level.activeActor.squareGameObjectIsOn == square)
 			return true;
 
 		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
-
-		if (Game.level.activeActor instanceof Mort)
-			System.out.println("squareToMoveTo = " + squareToMoveTo);
 
 		if (squareToMoveTo != null) {
 			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
@@ -670,9 +663,6 @@ public class AIRoutineUtils {
 	public static Square calculateSquareToMoveToForTargetSquare(Square square) {
 
 		Path pathToSquare = Game.level.activeActor.getPathTo(square);
-
-		if (Game.level.activeActor instanceof Mort)
-			System.out.println("pathToSquare = " + pathToSquare);
 
 		if (pathToSquare == null) {
 			return null;

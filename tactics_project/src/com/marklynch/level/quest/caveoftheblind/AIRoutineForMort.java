@@ -124,32 +124,20 @@ public class AIRoutineForMort extends AIRoutine {
 		}
 
 		Square squareWherePlayerVisibleInTerritory = createSearchLocationForPlayerIfVisibleAndInTerritory();
-		// System.out.println("squareWherePlayerVisibleInTerritory x,y = " +
-		// squareWherePlayerVisibleInTerritory.xInGrid
-		// + "," + squareWherePlayerVisibleInTerritory.yInGrid);
 		if (squareWherePlayerVisibleInTerritory == null) {
 
 			if (lastLocationSeenPlayer != null) {
-
-				System.out.println("lastLocationSeenPlayer x,y = " + lastLocationSeenPlayer.xInGrid + ","
-						+ lastLocationSeenPlayer.yInGrid);
-
-				System.out.println("Calling moveTowardsTargetSquare");
 				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenPlayer);
 
 				// refuses to walk through door
 
 				if (mort.squareGameObjectIsOn == lastLocationSeenPlayer) {
-					System.out.println("calling lastLocationSeenPlayer = null");
 					lastLocationSeenPlayer = null;
 				}
 				return;
 			}
 		} else {
 			lastLocationSeenPlayer = squareWherePlayerVisibleInTerritory;
-
-			System.out.println("lastLocationSeenPlayer x,y = " + lastLocationSeenPlayer.xInGrid + ","
-					+ lastLocationSeenPlayer.yInGrid);
 
 		}
 

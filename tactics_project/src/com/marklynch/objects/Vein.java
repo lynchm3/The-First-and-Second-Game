@@ -115,7 +115,6 @@ public class Vein extends Wall {
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		System.out.println("GAMEOBJECT.getAllActionsPerformedOnThisInWorld");
 		ArrayList<Action> actions = new ArrayList<Action>();
 
 		if (this.remainingHealth < 0)

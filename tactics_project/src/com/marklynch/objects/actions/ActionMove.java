@@ -76,27 +76,21 @@ public class ActionMove extends Action {
 	@Override
 	public boolean check() {
 
-		System.out.println("check 1");
-
 		if (mover.travelDistance - mover.distanceMovedThisTurn <= 0)
 			return false;
-		System.out.println("check 2");
 
 		if (target == mover.squareGameObjectIsOn || !target.inventory.isPassable(mover))
 			return false;
-		System.out.println("check 3");
 
 		Path path = mover.getPathTo(target);
 		if (path != null)
 			if (path == null || path.travelCost > mover.travelDistance - mover.distanceMovedThisTurn)
 				return false;
-		System.out.println("check 4");
 
 		if (mover != Game.level.player && mover.swapCooldown > 0) {
 			mover.swapCooldown--;
 			return false;
 		}
-		System.out.println("check 5");
 
 		GameObject objectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
 
@@ -108,13 +102,11 @@ public class ActionMove extends Action {
 		if (actorInTheWay == Game.level.player) {
 			return false;
 		}
-		System.out.println("check 6");
 
 		if (mover.group != null && mover.group.getLeader() == actorInTheWay) {
 			// don't try to swap with you group leader
 			return false;
 		}
-		System.out.println("check 7");
 
 		// if (actor.group != Game.level.activeActor.group) {
 		//
@@ -126,7 +118,6 @@ public class ActionMove extends Action {
 			// tries to move
 			return false;
 		}
-		System.out.println("check 8");
 
 		return true;
 	}
