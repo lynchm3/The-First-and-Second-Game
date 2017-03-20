@@ -4,8 +4,10 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.objects.Bed;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.Bell;
 
 import mdesl.graphics.Color;
 
@@ -13,6 +15,10 @@ public class Mort extends Actor {
 
 	public StructureSection mortsMine;
 	public StructureSection mortsRooms;
+	public GameObject mortsMeatChunk;
+	public Bell mortsBell;
+	public boolean performingFeedingDemo = false;
+	public QuestCaveOfTheBlind questCaveOfTheBlind;
 
 	public Mort(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,

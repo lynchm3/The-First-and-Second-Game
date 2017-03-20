@@ -362,4 +362,54 @@ public class Square extends AStarNode implements ActionableInWorld {
 	public List getNeighbors() {
 		return getAllNeighbourSquaresThatCanBeMovedTo();
 	}
+
+	public Vector<Square> getAllSquaresAtDistance(float distance) {
+		Vector<Square> squares = new Vector<Square>();
+		if (distance == 0) {
+			squares.addElement(this);
+			return squares;
+		}
+
+		boolean xGoingUp = true;
+		boolean yGoingUp = true;
+		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+			if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + x, this.yInGrid + y)) {
+				squares.add(Game.level.squares[this.xInGrid + (int) x][this.yInGrid + (int) y]);
+			}
+
+			if (xGoingUp) {
+				if (x == distance) {
+					xGoingUp = false;
+					x--;
+				} else {
+					x++;
+				}
+			} else {
+				if (x == -distance) {
+					xGoingUp = true;
+					x++;
+				} else {
+					x--;
+				}
+			}
+
+			if (yGoingUp) {
+				if (y == distance) {
+					yGoingUp = false;
+					y--;
+				} else {
+					y++;
+				}
+			} else {
+				if (y == -distance) {
+					yGoingUp = true;
+					y++;
+				} else {
+					y--;
+				}
+			}
+
+		}
+		return squares;
+	}
 }

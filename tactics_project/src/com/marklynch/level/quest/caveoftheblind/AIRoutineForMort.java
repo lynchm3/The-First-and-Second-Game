@@ -5,6 +5,7 @@ import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.weapons.Bell;
 
@@ -14,11 +15,12 @@ public class AIRoutineForMort extends AIRoutine {
 	GameObject target;
 	Square lastLocationSeenPlayer;
 	boolean rangBell;
-	// Square squareToMoveTo;
 
-	enum HUNT_STATE {
-		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, PICK_SHOP_KEEPER, GO_TO_SHOP_KEEPER_AND_SELL_JUNK, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
+	enum FEEDING_DEMO_STATE {
+		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY
 	};
+
+	public FEEDING_DEMO_STATE feedingDemoState = FEEDING_DEMO_STATE.WALK_TO_TROUGH;
 
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
 	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
@@ -30,8 +32,6 @@ public class AIRoutineForMort extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
 	final String ACTIVITY_DESCRIPTION_FOLLOWING = "Following";
 	final String ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL = "Ringing Dinner Bell";
-
-	public HUNT_STATE huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
@@ -51,9 +51,17 @@ public class AIRoutineForMort extends AIRoutine {
 		this.actor.expressionImageTexture = null;
 		createSearchLocationsBasedOnSounds();
 		createSearchLocationsBasedOnVisibleAttackers();
+
+		if (runFightRoutine())
+			return;
+
+		if (runSearchRoutine()) {
+			return;
+		}
+
 		if (!rangBell && mort.remainingHealth < mort.totalHealth / 2) {
 			Bell bell = (Bell) mort.inventory.getGameObectOfClass(Bell.class);
-			if (bell != null) {
+			if (bell != null && mort.getAttackers().contains(Game.level.player)) {
 				new ActionRing(mort, bell).perform();
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
 				this.actor.miniDialogue = "You won't get out of here alive";
@@ -62,10 +70,57 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
-		if (runFightRoutine())
-			return;
-		if (runSearchRoutine()) {
-			return;
+		if (mort.performingFeedingDemo) {
+
+			if (feedingDemoState == FEEDING_DEMO_STATE.WALK_TO_TROUGH) {
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.troughSquare);
+
+				if (mort.straightLineDistanceTo(mort.questCaveOfTheBlind.troughSquare) <= 1)
+					feedingDemoState = FEEDING_DEMO_STATE.PLACE_MEAT;
+				return;
+			}
+
+			if (feedingDemoState == FEEDING_DEMO_STATE.PLACE_MEAT) {
+
+				if (!mort.inventory.contains(mort.mortsMeatChunk)) {
+					mort.addAttackerForThisAndGroupMembers(Game.level.player);
+					this.actor.activityDescription = "FEELING BETRAYED";
+					this.actor.miniDialogue = "You! You robbed me!";
+					mort.performingFeedingDemo = false;
+					return;
+				}
+
+				new ActionDrop(mort, mort.questCaveOfTheBlind.troughSquare, mort.mortsMeatChunk).perform();
+
+				feedingDemoState = FEEDING_DEMO_STATE.RING_BELL;
+
+				return;
+			}
+
+			if (feedingDemoState == FEEDING_DEMO_STATE.RING_BELL) {
+
+				if (!mort.inventory.contains(mort.mortsBell)) {
+					mort.addAttackerForThisAndGroupMembers(Game.level.player);
+					this.actor.activityDescription = "FEELING BETRAYED";
+					this.actor.miniDialogue = "You! You robbed me!";
+					mort.performingFeedingDemo = false;
+					return;
+				}
+
+				new ActionRing(mort, mort.mortsBell).perform();
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
+				this.actor.miniDialogue = "Dinner time!!!";
+
+				feedingDemoState = FEEDING_DEMO_STATE.WALK_AWAY;
+				return;
+			}
+
+			if (feedingDemoState == FEEDING_DEMO_STATE.WALK_AWAY) {
+
+				// MOVE BACK
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
+				return;
+			}
 		}
 
 		Square squareWherePlayerVisibleInTerritory = createSearchLocationForPlayerIfVisibleAndInTerritory();

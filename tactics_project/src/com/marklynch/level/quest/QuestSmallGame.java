@@ -1,20 +1,31 @@
-package com.marklynch.level.constructs;
+package com.marklynch.level.quest;
 
 import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Group;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
-import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
 
 public class QuestSmallGame extends Quest {
+
+	// Needs to be a large forest w/ animals near te lodge for the hunters after
+	// the quest, if they survive.... it just makes sense. Another village could
+	// be a fishing village and another one could be a farming village or
+	// another could be a big trading hub and they trade to get food, and a
+	// foraging village, and mix and match some..... make it clear in
+	// conversations that this is a farming/fishing/hunting/trading village.
+	// There could be two farming villages, one of them does only veg and
+	// foraging, and theyre all hippy vegans. Another could be deep in the
+	// woods, and the houses are made out of giant trees and they forage and
+	// hunt.
 
 	// The hunting party leader says out loud to the pack, in a way that u can
 	// see it "so, use the water imbued weapons on the the beast. No fire, it

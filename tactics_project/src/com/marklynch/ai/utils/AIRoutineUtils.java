@@ -352,6 +352,22 @@ public class AIRoutineUtils {
 		}
 	}
 
+	public static boolean moveTowardsSquareToBeAdjacent(Square square) {
+
+		if (Game.level.activeActor.straightLineDistanceTo(square) <= 1) {
+			return true;
+		}
+
+		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(square, 1f);
+
+		if (squareToMoveTo != null) {
+			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	// public boolean moveTowardsNearestEnemyToAttack() {
 	//
 	// // Vector<Integer> idealWeaponDistances = new Vector<Integer>();
@@ -534,6 +550,51 @@ public class AIRoutineUtils {
 				return Game.level.activeActor.squareGameObjectIsOn;
 
 			targetSquares = target.getAllSquaresAtDistance(idealDistances.get(i));
+
+			// TODO picking which of these squares is the best is an interesting
+			// issue.
+			// Reachable is best.
+			// if There's multiple reachable then safest out of them is best :P
+			// OR somewhere u can attack someone from is the best... i dunno :D
+			for (Square targetSquare : targetSquares) {
+				Path currentActorPathToThisSquare = Game.level.activeActor.getPathTo(targetSquare);
+				if (currentActorPathToThisSquare != null
+						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
+					pathToSquare = currentActorPathToThisSquare;
+					bestTravelCostFound = pathToSquare.travelCost;
+				}
+			}
+
+			if (pathToSquare != null)
+				break;
+
+		}
+
+		if (pathToSquare == null) {
+			return null;
+		}
+
+		return getSquareToMoveAlongPath(pathToSquare);
+
+	}
+
+	public static Square calculateSquareToMoveToToBeWithinXSquaresToTarget(Square square, float maxDistance) {
+
+		Vector<Float> idealDistances = new Vector<Float>();
+		for (int i = 0; i <= maxDistance; i++) {
+			idealDistances.addElement((float) i);
+		}
+
+		Vector<Square> targetSquares = new Vector<Square>();
+		int bestTravelCostFound = Integer.MAX_VALUE;
+		Path pathToSquare = null;
+		for (int i = 0; i < idealDistances.size(); i++) {
+
+			// Check if we're already at this distance
+			if (Game.level.activeActor.straightLineDistanceTo(square) == idealDistances.get(i))
+				return Game.level.activeActor.squareGameObjectIsOn;
+
+			targetSquares = square.getAllSquaresAtDistance(idealDistances.get(i));
 
 			// TODO picking which of these squares is the best is an interesting
 			// issue.

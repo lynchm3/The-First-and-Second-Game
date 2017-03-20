@@ -34,8 +34,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	// Flags
 	boolean talkedToMort = false;
-	boolean feedingDemo = false;
-	boolean seenFeedingDemo = false;
+	boolean feedingDemoAvailable = false;
 	int playerMinedOres = 0;
 
 	// End
@@ -64,7 +63,8 @@ public class QuestCaveOfTheBlind extends Quest {
 	Key mortsKey;
 
 	// Squares
-	Square squareBehindLodge;
+	Square troughSquare;
+	Square safeSquare;
 
 	// Structure Areas
 
@@ -82,11 +82,16 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		mort = Templates.MORT.makeCopy(Game.level.squares[47][21], Game.level.factions.get(1), mortsBed);
 		mort.quest = this;
+		mort.mortsBell = Templates.DINNER_BELL.makeCopy(null);
+		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy(null);
 		mort.inventory.add(Templates.CLEAVER.makeCopy(null));
 		mort.inventory.add(Templates.LANTERN.makeCopy(null));
-		mort.inventory.add(Templates.DINNER_BELL.makeCopy(null));
 		mort.inventory.add(Templates.PICKAXE.makeCopy(null));
 		mort.inventory.add(mortsKey);
+		mort.inventory.add(mort.mortsBell);
+		mort.inventory.add(mort.mortsMeatChunk);
+		mort.questCaveOfTheBlind = this;
+
 		for (GameObject gameObject : mort.inventory.getGameObjects()) {
 			gameObject.quest = this;
 		}
@@ -247,6 +252,10 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		Sign noEntry = Templates.SIGN.makeCopy(Game.level.squares[42][20], "Sign", new Object[] { "PRIVATE! - Mort" });
 		noEntry.quest = this;
+
+		GameObject trough = Templates.TROUGH.makeCopy(Game.level.squares[50][25]);
+		troughSquare = Game.level.squares[50][25];
+		safeSquare = Game.level.squares[44][25];
 
 	}
 
@@ -445,8 +454,8 @@ public class QuestCaveOfTheBlind extends Quest {
 				null);
 
 		// Pun 3
-		ConversationPart conversationPartPun3 = new ConversationPart(new Object[] { "Pun 3" },
-				new ConversationResponse[] {}, mort);
+		ConversationPart conversationPartPun3 = new ConversationPart(
+				new Object[] { "These will just keep getting Cornea!" }, new ConversationResponse[] {}, mort);
 
 		// ... 3
 		ConversationResponse conversationResponseDotDotDot3 = new ConversationResponse("...", null);
@@ -469,7 +478,8 @@ public class QuestCaveOfTheBlind extends Quest {
 				// Update quest log
 				// Set enviromentalist to come watch
 				// Hunters on the way
-				feedingDemo = true;
+				feedingDemoAvailable = false;
+				mort.performingFeedingDemo = true;
 			}
 		};
 
@@ -502,7 +512,7 @@ public class QuestCaveOfTheBlind extends Quest {
 				conversationReponseEnd });
 
 		// You Feed them?
-		if (seenFeedingDemo) {
+		if (feedingDemoAvailable) {
 			conversationResponseYouFeedThem.nextConversationPart = conversationPartIAlreadyShowedYou;
 		} else {
 			conversationResponseYouFeedThem.nextConversationPart = conversationPartYupWannaSee;
@@ -544,24 +554,16 @@ public class QuestCaveOfTheBlind extends Quest {
 		conversationResponseDotDotDot3.nextConversationPart = conversationPartPun4;
 
 		// Pun 4 // You Feed them?
-		if (seenFeedingDemo) {
+		if (feedingDemoAvailable) {
 			conversationPartPun4.setConversationResponses(new ConversationResponse[] {
 					conversationResponseWhatDoYouFeedThem, conversationResponseWhoAreYou, conversationResponseWhereAmI,
 					conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
-			// conversationResponseYouFeedThem.nextConversationPart =
-			// conversationPartIAlreadyShowedYou;
 		} else {
 			conversationPartPun4.setConversationResponses(new ConversationResponse[] {
 					conversationResponseWhatDoYouFeedThem, conversationResponseShowMe, conversationResponseWhoAreYou,
 					conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
-			// conversationResponseYouFeedThem.nextConversationPart =
-			// conversationPartYupWannaSee;
 
 		}
-
-		// ...4
-		// conversationResponseDotDotDot4.nextConversationPart =
-		// conversationPartPun1;
 
 		// Show me
 		conversationResponseShowMe.nextConversationPart = illShowYou;
