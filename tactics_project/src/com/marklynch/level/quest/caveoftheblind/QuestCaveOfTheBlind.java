@@ -34,6 +34,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	// Flags
 	boolean talkedToMort = false;
+	boolean feedingDemo = false;
+	boolean seenFeedingDemo = false;
 	int playerMinedOres = 0;
 
 	// End
@@ -359,12 +361,13 @@ public class QuestCaveOfTheBlind extends Quest {
 					new ConversationResponse[] {}, mort);
 		}
 
-		// Opening response
+		// General responses
 		ConversationResponse conversationResponseTellMeAboutTheBlind = new ConversationResponse(
 				"Tell me about the blind.", null);
 		ConversationResponse conversationResponseWhereAmI = new ConversationResponse("Where am I?", null);
 		ConversationResponse conversationResponseWhoAreYou = new ConversationResponse("Who are you?", null);
 
+		// First level
 		ConversationPart conversationPartTheBlind = new ConversationPart(
 				new Object[] { "They can be pretty vicious, but as long as I feed them they keep to themselves." },
 				new ConversationResponse[] {}, mort);
@@ -377,7 +380,67 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
 
-		// fill in pointers
+		// You feed them?
+		ConversationResponse conversationResponseYouFeedThem = new ConversationResponse("You feed them?", null);
+
+		// Yup, wanna see?
+		ConversationPart conversationPartYupWannaSee = new ConversationPart(new Object[] { "Yup! ...you wanna see?" },
+				new ConversationResponse[] {}, mort); // pride? shifty?
+
+		// I already showed you
+		ConversationPart conversationPartIAlreadyShowedYou = new ConversationPart(
+				new Object[] { "I already showed you!" }, new ConversationResponse[] {}, mort);
+
+		// What do you feed them?
+		ConversationResponse conversationResponseWhatDoYouFeedThem = new ConversationResponse("What do you feed them?",
+				null);
+
+		// Pun 1
+		ConversationPart conversationPartPun1 = new ConversationPart(new Object[] { "Pun 1" },
+				new ConversationResponse[] {}, mort);
+
+		// ... 1
+		ConversationResponse conversationResponseDotDotDot1 = new ConversationResponse("...", null);
+
+		// Pun 2
+		ConversationPart conversationPartPun2 = new ConversationPart(new Object[] { "Pun 2" },
+				new ConversationResponse[] {}, mort);
+
+		// ... 2
+		ConversationResponse conversationResponseDotDotDot2 = new ConversationResponse("...", null);
+
+		// Pun 3
+		ConversationPart conversationPartPun3 = new ConversationPart(new Object[] { "Pun 3" },
+				new ConversationResponse[] {}, mort);
+
+		// ... 3
+		ConversationResponse conversationResponseDotDotDot3 = new ConversationResponse("...", null);
+
+		// Pun 4
+		ConversationPart conversationPartPun4 = new ConversationPart(new Object[] { "Pun 4" },
+				new ConversationResponse[] {}, mort);
+
+		// ...4
+		// ConversationResponse conversationResponseDotDotDot4 = new
+		// ConversationResponse("...", null);
+
+		// Show me
+		ConversationResponse conversationResponseShowMe = new ConversationResponse("Show me", null) {
+			@Override
+			public void select() {
+				super.select();
+				// Update quest log
+				// Set enviromentalist to come watch
+				// Hunters on the way
+				feedingDemo = true;
+			}
+		};
+
+		// I'll show you
+		ConversationPart illShowYou = new ConversationPart(new Object[] { "I'll show you, wait here..." },
+				new ConversationResponse[] {}, mort); // Thin grin
+
+		// FILL IN POINTERS
 		// opening
 		conversationPartopening.setConversationResponses(new ConversationResponse[] { conversationResponseWhoAreYou,
 				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
@@ -386,6 +449,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		conversationResponseWhoAreYou.nextConversationPart = conversationPartImMort;
 		conversationResponseWhereAmI.nextConversationPart = conversationPartYoureInTheCaveOfTheBlind;
 		conversationResponseTellMeAboutTheBlind.nextConversationPart = conversationPartTheBlind;
+
 		// I'm Mort
 		conversationPartImMort.setConversationResponses(new ConversationResponse[] { conversationResponseWhereAmI,
 				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
@@ -396,9 +460,74 @@ public class QuestCaveOfTheBlind extends Quest {
 						conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
 
 		// The blind
-		conversationPartTheBlind.setConversationResponses(new ConversationResponse[] {
-				/* conversationResponseYouFeedThem, */ conversationResponseWhoAreYou, conversationResponseWhereAmI,
+		conversationPartTheBlind.setConversationResponses(new ConversationResponse[] { conversationResponseYouFeedThem,
+				conversationResponseWhoAreYou, conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind,
+				conversationReponseEnd });
+
+		// You Feed them?
+		if (seenFeedingDemo) {
+			conversationResponseYouFeedThem.nextConversationPart = conversationPartIAlreadyShowedYou;
+		} else {
+			conversationResponseYouFeedThem.nextConversationPart = conversationPartYupWannaSee;
+
+		}
+
+		// Yup, wanna see?
+		conversationPartYupWannaSee.setConversationResponses(new ConversationResponse[] {
+				conversationResponseWhatDoYouFeedThem, conversationResponseShowMe, conversationResponseWhoAreYou,
+				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+
+		// I already showed you!
+		conversationPartIAlreadyShowedYou.setConversationResponses(new ConversationResponse[] {
+				conversationResponseWhatDoYouFeedThem, conversationResponseWhoAreYou, conversationResponseWhereAmI,
 				conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+
+		// What do you feed them?
+		conversationResponseWhatDoYouFeedThem.nextConversationPart = conversationPartPun1;
+
+		// Pun 1
+		conversationPartPun1.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot1 });
+
+		// ... 1
+		conversationResponseDotDotDot1.nextConversationPart = conversationPartPun2;
+
+		// Pun 2
+		conversationPartPun2.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot2 });
+
+		// ... 2
+		conversationResponseDotDotDot2.nextConversationPart = conversationPartPun3;
+
+		// Pun 3
+		conversationPartPun3.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot3 });
+
+		// ... 3
+		conversationResponseDotDotDot3.nextConversationPart = conversationPartPun4;
+
+		// Pun 4 // You Feed them?
+		if (seenFeedingDemo) {
+			conversationPartPun4.setConversationResponses(new ConversationResponse[] {
+					conversationResponseWhatDoYouFeedThem, conversationResponseWhoAreYou, conversationResponseWhereAmI,
+					conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+			// conversationResponseYouFeedThem.nextConversationPart =
+			// conversationPartIAlreadyShowedYou;
+		} else {
+			conversationPartPun4.setConversationResponses(new ConversationResponse[] {
+					conversationResponseWhatDoYouFeedThem, conversationResponseShowMe, conversationResponseWhoAreYou,
+					conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+			// conversationResponseYouFeedThem.nextConversationPart =
+			// conversationPartYupWannaSee;
+
+		}
+
+		// ...4
+		// conversationResponseDotDotDot4.nextConversationPart =
+		// conversationPartPun1;
+
+		// Show me
+		conversationResponseShowMe.nextConversationPart = illShowYou;
+
+		// I'll show you
+		illShowYou.setConversationResponses(new ConversationResponse[] { conversationReponseEnd });
 
 		return new Conversation(conversationPartopening);
 	}
