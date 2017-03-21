@@ -91,6 +91,7 @@ public class AIRoutineForMort extends AIRoutine {
 				}
 
 				new ActionDrop(mort, mort.questCaveOfTheBlind.troughSquare, mort.mortsMeatChunk).perform();
+				mort.mortsMeatChunk.quest = null;
 
 				feedingDemoState = FEEDING_DEMO_STATE.RING_BELL;
 

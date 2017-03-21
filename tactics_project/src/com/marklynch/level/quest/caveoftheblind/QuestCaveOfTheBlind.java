@@ -92,9 +92,9 @@ public class QuestCaveOfTheBlind extends Quest {
 		mort.inventory.add(mort.mortsMeatChunk);
 		mort.questCaveOfTheBlind = this;
 
-		// for (GameObject gameObject : mort.inventory.getGameObjects()) {
-		// gameObject.quest = this;
-		// }
+		for (GameObject gameObject : mort.inventory.getGameObjects()) {
+			gameObject.quest = this;
+		}
 
 		// Cave
 		makeMortsStorage();
