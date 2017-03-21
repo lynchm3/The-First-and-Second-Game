@@ -93,7 +93,11 @@ public class AIRoutineUtils {
 
 		if (checkInanimateObjects) {
 			// 2. check gameObjects
-			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
+			System.out.println("clazz = " + clazz);
+			System.out.println("Game.level.inanimateObjectsOnGround.get(clazz).size() = "
+					+ Game.level.inanimateObjectsOnGround.get(clazz).size());
+
+			for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
 				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
 					Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
 					Path path = Game.level.activeActor.getPathTo(square);
@@ -153,26 +157,35 @@ public class AIRoutineUtils {
 	public static boolean passesChecks(GameObject gameObject, Class clazz, float maxDistance, boolean fitsInInventory,
 			boolean mustContainsObjects) {
 
+		System.out.println("passesChecks a");
 		if (gameObject.quest != null)
 			return false;
 
+		System.out.println("passesChecks b");
 		if (gameObject.remainingHealth <= 0)
 			return false;
+		System.out.println("passesChecks c");
 
 		if (mustContainsObjects && gameObject.inventory.size() <= 0)
 			return false;
+		System.out.println("passesChecks d");
 
+		System.out.println("passesChecks gameObject = " + gameObject);
+		System.out.println("passesChecks gameObject.fitsInInventory = " + gameObject.fitsInInventory);
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
+		System.out.println("passesChecks e");
 
 		// check class
 		if (clazz != null && !clazz.isInstance(gameObject))
 			return false;
+		System.out.println("passesChecks f");
 
 		// check distance
 		if (maxDistance > 0
 				&& Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) > maxDistance)
 			return false;
+		System.out.println("passesChecks g");
 
 		return true;
 

@@ -4,6 +4,8 @@ import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.actions.ActionTakeBite;
 import com.marklynch.objects.weapons.Bell;
 
 public class AIRoutineForBlind extends AIRoutine {
@@ -21,6 +23,7 @@ public class AIRoutineForBlind extends AIRoutine {
 	Blind blind;
 	Square targetSquare = null;
 	Sound bellSound = null;
+	MeatChunk meatChunk = null;
 
 	boolean hangry = false;
 
@@ -35,13 +38,36 @@ public class AIRoutineForBlind extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.expressionImageTexture = null;
-		Sound tempBellSound = getSoundFromSourceType(Bell.class);
-		if (tempBellSound != null)
-			bellSound = tempBellSound;
-		createSearchLocationsBasedOnSounds();
-		createSearchLocationsBasedOnVisibleAttackers();
+		MeatChunk tempMeatChunk = (MeatChunk) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(MeatChunk.class, 3,
+				true, false, true, false);
+		if (tempMeatChunk != null) {
+			this.meatChunk = tempMeatChunk;
+			bellSound = null;
+			blind.locationsToSearch.clear();
+			targetSquare = null;
+		}
 
-		System.out.println("bellSound = " + bellSound);
+		System.out.println("meatChunk = " + meatChunk);
+
+		if (meatChunk != null) {
+			this.blind.activityDescription = "Eating!";
+			AIRoutineUtils.moveTowardsSquareToBeAdjacent(meatChunk.squareGameObjectIsOn);
+			if (blind.straightLineDistanceTo(meatChunk.squareGameObjectIsOn) <= 1) {
+				new ActionTakeBite(blind, meatChunk).perform();
+				hangry = false;
+
+			}
+			return;
+		}
+
+		if (meatChunk == null) {
+			Sound tempBellSound = getSoundFromSourceType(Bell.class);
+			if (tempBellSound != null) {
+				bellSound = tempBellSound;
+				blind.locationsToSearch.clear();
+				targetSquare = null;
+			}
+		}
 
 		if (bellSound != null) {
 			this.blind.activityDescription = "Dinner time!";
@@ -49,14 +75,15 @@ public class AIRoutineForBlind extends AIRoutine {
 			if (blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
 				this.blind.structureSection = this.blind.squareGameObjectIsOn.structureSectionSquareIsIn;
 				bellSound = null;
-				targetSquare = null;
-
 				this.blind.activityDescription = "Hangry";
 				hangry = true;
 
 			}
 			return;
 		}
+
+		createSearchLocationsBasedOnSounds();
+		createSearchLocationsBasedOnVisibleAttackers();
 
 		if (runFightRoutine())
 			return;

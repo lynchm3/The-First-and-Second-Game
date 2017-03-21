@@ -83,7 +83,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		mort = Templates.MORT.makeCopy(Game.level.squares[47][21], Game.level.factions.get(1), mortsBed);
 		mort.quest = this;
 		mort.mortsBell = Templates.DINNER_BELL.makeCopy(null);
-		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy(null);
+		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy("Meat Chunk", null);
 		mort.inventory.add(Templates.CLEAVER.makeCopy(null));
 		mort.inventory.add(Templates.LANTERN.makeCopy(null));
 		mort.inventory.add(Templates.PICKAXE.makeCopy(null));
@@ -104,7 +104,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		makeBlind();
 
 		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14], "Rock with etching",
-				new Object[] { "SHHHHHhhhhhhhh..." });
+				new Object[] { "SHHHHHhhhhhhhh!!! -Mort" });
 		rockWithEtching.quest = this;
 
 		// Add spoons
@@ -356,6 +356,13 @@ public class QuestCaveOfTheBlind extends Quest {
 		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
 		blind10.addAttackerForThisAndGroupMembers(Game.level.player);
 		blind10.quest = this;
+
+		Templates.MEAT_CHUNK.makeCopy("Meat Chunk", Game.level.squares[57][28]);
+		Templates.MEAT_CHUNK.makeCopy("Meat Chunk", Game.level.squares[57][25]);
+		Templates.MEAT_CHUNK.makeCopy("Meat Chunk", Game.level.squares[58][24]);
+		Templates.MEAT_CHUNK.makeCopy("Meat Chunk", Game.level.squares[59][28]);
+		Templates.MEAT_CHUNK.makeCopy("Meat Chunk", Game.level.squares[52][28]);
+		Templates.MEAT_CHUNK.makeCopy("Meat Chunk", Game.level.squares[51][28]);
 	}
 
 	public Conversation getConversationForMort() {

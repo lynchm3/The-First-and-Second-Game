@@ -46,7 +46,7 @@ public class Level {
 	// public Vector<Actor> actors;
 	public transient Actor player;
 	public transient Actor activeActor;
-	public transient Vector<GameObject> inanimateObjectsOnGround;
+	public transient ArrayListMappedInanimateObjects<GameObject> inanimateObjectsOnGround;
 	public transient ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public transient ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
 
@@ -90,7 +90,7 @@ public class Level {
 		structures = new ArrayList<Structure>();
 
 		factions = new ArrayList<Faction>();
-		inanimateObjectsOnGround = new Vector<GameObject>();
+		inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 		initGrid(this.squares, this.width, this.height);
 
 		endTurnButton = new LevelButton(210f, 40f, 200f, 30f, "end_turn_button.png", "end_turn_button.png", "END TURN",
@@ -171,7 +171,7 @@ public class Level {
 		editorButton.enabled = true;
 		buttons.add(editorButton);
 
-		this.inanimateObjectsOnGround = new Vector<GameObject>();
+		this.inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 		this.projectiles = new ArrayList<Projectile>();
 		this.projectilesToRemove = new ArrayList<Projectile>();
 		this.openInventories = new ArrayList<Inventory>();
