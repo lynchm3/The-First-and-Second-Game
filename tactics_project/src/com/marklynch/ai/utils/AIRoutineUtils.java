@@ -152,36 +152,28 @@ public class AIRoutineUtils {
 
 	public static boolean passesChecks(GameObject gameObject, Class clazz, float maxDistance, boolean fitsInInventory,
 			boolean mustContainsObjects) {
-		System.out.println("passesChecks a");
-		System.out.println("passesChecks gameObject.class == " + gameObject.getClass());
-		System.out.println("passesChecks gameObject.quest == " + gameObject.quest);
+
 		if (gameObject.quest != null)
 			return false;
 
-		System.out.println("passesChecks b");
 		if (gameObject.remainingHealth <= 0)
 			return false;
-		System.out.println("passesChecks c");
 
 		if (mustContainsObjects && gameObject.inventory.size() <= 0)
 			return false;
 
-		System.out.println("passesChecks d");
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
 
-		System.out.println("passesChecks e");
 		// check class
 		if (clazz != null && !clazz.isInstance(gameObject))
 			return false;
 
-		System.out.println("passesChecks f");
 		// check distance
 		if (maxDistance > 0
 				&& Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) > maxDistance)
 			return false;
 
-		System.out.println("passesChecks g");
 		return true;
 
 	}

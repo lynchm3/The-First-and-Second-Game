@@ -53,7 +53,6 @@ public class AIRoutineForBlind extends AIRoutine {
 			if (blind.straightLineDistanceTo(meatChunk.squareGameObjectIsOn) <= 1) {
 				new ActionTakeBite(blind, meatChunk).perform();
 				hangry = false;
-
 			}
 			return;
 		}

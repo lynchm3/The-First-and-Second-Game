@@ -3,8 +3,6 @@ package com.marklynch.level;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.marklynch.objects.MeatChunk;
-
 @SuppressWarnings("serial")
 public class ArrayListMappedInanimateObjects<GameObject> extends ArrayList<GameObject> {
 
@@ -15,9 +13,6 @@ public class ArrayListMappedInanimateObjects<GameObject> extends ArrayList<GameO
 		if (gameObjects == null) {
 			gameObjects = new ArrayList<GameObject>();
 			hashMap.put(clazz, gameObjects);
-		}
-		if (clazz.equals(MeatChunk.class)) {
-			System.out.println("get gameObjects.size() = " + gameObjects.size());
 		}
 		return gameObjects;
 	}
