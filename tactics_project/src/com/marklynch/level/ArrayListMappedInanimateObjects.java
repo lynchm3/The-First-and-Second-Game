@@ -3,6 +3,8 @@ package com.marklynch.level;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.marklynch.objects.MeatChunk;
+
 @SuppressWarnings("serial")
 public class ArrayListMappedInanimateObjects<GameObject> extends ArrayList<GameObject> {
 
@@ -14,13 +16,14 @@ public class ArrayListMappedInanimateObjects<GameObject> extends ArrayList<GameO
 			gameObjects = new ArrayList<GameObject>();
 			hashMap.put(clazz, gameObjects);
 		}
+		if (clazz.equals(MeatChunk.class)) {
+			System.out.println("get gameObjects.size() = " + gameObjects.size());
+		}
 		return gameObjects;
 	}
 
 	@Override
 	public boolean add(GameObject gameObject) {
-		System.out.println("add gameObject.getClass() = " + gameObject.getClass());
-
 		if (!this.contains(gameObject)) {
 			ArrayList<GameObject> arrayList = hashMap.get(gameObject.getClass());
 			if (arrayList == null) {
@@ -30,11 +33,6 @@ public class ArrayListMappedInanimateObjects<GameObject> extends ArrayList<GameO
 			} else {
 				arrayList.add(gameObject);
 			}
-			for (Class clazz : hashMap.keySet()) {
-				System.out.println("add iterating keys clazz = " + clazz);
-			}
-			System.out.println(
-					"add hashMap.get(gameObject.getClass()).size() = " + hashMap.get(gameObject.getClass()).size());
 			hashMap.get(gameObject.getClass()).size();
 			return super.add(gameObject);
 		}

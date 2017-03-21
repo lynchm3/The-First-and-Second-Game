@@ -47,8 +47,6 @@ public class AIRoutineForBlind extends AIRoutine {
 			targetSquare = null;
 		}
 
-		System.out.println("meatChunk = " + meatChunk);
-
 		if (meatChunk != null) {
 			this.blind.activityDescription = "Eating!";
 			AIRoutineUtils.moveTowardsSquareToBeAdjacent(meatChunk.squareGameObjectIsOn);
