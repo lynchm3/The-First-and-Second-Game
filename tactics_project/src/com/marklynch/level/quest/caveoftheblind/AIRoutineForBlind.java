@@ -1,11 +1,14 @@
 package com.marklynch.level.quest.caveoftheblind;
 
+import java.util.ArrayList;
+
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.actions.ActionTakeBite;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Bell;
 
 public class AIRoutineForBlind extends AIRoutine {
@@ -26,6 +29,7 @@ public class AIRoutineForBlind extends AIRoutine {
 	MeatChunk meatChunk = null;
 
 	boolean hangry = false;
+	int timeSinceEating = Integer.MAX_VALUE;
 
 	public AIRoutineForBlind(Blind blind) {
 		super(blind);
@@ -38,47 +42,55 @@ public class AIRoutineForBlind extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.expressionImageTexture = null;
-		MeatChunk tempMeatChunk = (MeatChunk) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(MeatChunk.class, 3,
-				true, false, true, false);
-		if (tempMeatChunk != null) {
-			this.meatChunk = tempMeatChunk;
-			bellSound = null;
-			blind.locationsToSearch.clear();
-			targetSquare = null;
-		}
 
-		if (meatChunk != null) {
-			this.blind.activityDescription = "Eating!";
-			AIRoutineUtils.moveTowardsSquareToBeAdjacent(meatChunk.squareGameObjectIsOn);
-			if (blind.straightLineDistanceTo(meatChunk.squareGameObjectIsOn) <= 1) {
-				new ActionTakeBite(blind, meatChunk).perform();
-				hangry = false;
-			}
-			return;
-		}
-
-		if (meatChunk == null) {
-			Sound tempBellSound = getSoundFromSourceType(Bell.class);
-			if (tempBellSound != null) {
-				bellSound = tempBellSound;
+		if (timeSinceEating > 50) {
+			MeatChunk tempMeatChunk = (MeatChunk) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(MeatChunk.class, 3,
+					true, false, true, false);
+			if (tempMeatChunk != null) {
+				this.meatChunk = tempMeatChunk;
+				bellSound = null;
 				blind.locationsToSearch.clear();
 				targetSquare = null;
 			}
-		}
 
-		if (bellSound != null) {
-			this.blind.activityDescription = "Dinner time!";
-			AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare);
-			if (blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
-				this.blind.structureSection = this.blind.squareGameObjectIsOn.structureSectionSquareIsIn;
-				bellSound = null;
-				this.blind.activityDescription = "Hangry";
-				hangry = true;
-
+			if (meatChunk != null) {
+				this.blind.activityDescription = "Eating!";
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(meatChunk.squareGameObjectIsOn);
+				if (blind.straightLineDistanceTo(meatChunk.squareGameObjectIsOn) <= 1) {
+					new ActionTakeBite(blind, meatChunk).perform();
+					timeSinceEating = 0;
+					hangry = false;
+				}
+				return;
 			}
-			return;
+
+			if (meatChunk == null) {
+				Sound tempBellSound = getSoundFromSourceType(Bell.class);
+				if (tempBellSound != null) {
+					bellSound = tempBellSound;
+					blind.locationsToSearch.clear();
+					targetSquare = null;
+				}
+			}
+
+			if (bellSound != null) {
+				this.blind.activityDescription = "Dinner time!";
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare);
+				if (blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
+					this.blind.structureSection = this.blind.squareGameObjectIsOn.structureSectionSquareIsIn;
+					bellSound = null;
+					this.blind.activityDescription = "Hangry";
+					hangry = true;
+
+				}
+				return;
+			}
+		} else {
+			meatChunk = null;
+			timeSinceEating++;
 		}
 
+		addNonBlindToAttackersList();
 		createSearchLocationsBasedOnSounds();
 		createSearchLocationsBasedOnVisibleAttackers();
 
@@ -137,5 +149,24 @@ public class AIRoutineForBlind extends AIRoutine {
 
 		if (hangry)
 			this.blind.activityDescription = "Hangry";
+	}
+
+	public void addNonBlindToAttackersList() {
+		// System.out.println(
+		// "this.actor.squaresVisibleToThisCharacter.size() = " +
+		// this.actor.squaresVisibleToThisCharacter.);
+		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(this.actor.sight);
+		System.out.println("squares.size() = " + squares.size());
+		for (Square square : squares) {
+			if (this.actor.visibleFrom(square)) {
+				Actor actorOnSquare = (Actor) square.inventory.getGameObectOfClass(Actor.class);
+				// System.out.println("actorOnSquare.class = " +
+				// actorOnSquare.getClass());
+
+				if (actorOnSquare != null && !(actorOnSquare instanceof Blind)) {
+					this.actor.addAttackerForThisAndGroupMembers(actorOnSquare);
+				}
+			}
+		}
 	}
 }

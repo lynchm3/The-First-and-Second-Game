@@ -49,14 +49,10 @@ public class ActionTakeBite extends Action {
 
 	@Override
 	public boolean check() {
-		System.out.println("check( a");
 		if (!biter.visibleFrom(target.squareGameObjectIsOn))
 			return false;
-		System.out.println("check( b biter.straightLineDistanceTo(target.squareGameObjectIsOn) = "
-				+ biter.straightLineDistanceTo(target.squareGameObjectIsOn));
 		if (biter.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
 			return false;
-		System.out.println("check( c");
 
 		return true;
 	}

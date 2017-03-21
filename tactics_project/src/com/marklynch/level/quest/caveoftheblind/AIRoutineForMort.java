@@ -17,7 +17,7 @@ public class AIRoutineForMort extends AIRoutine {
 	boolean rangBell;
 
 	enum FEEDING_DEMO_STATE {
-		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY
+		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY, WAIT_FOR_BLIND_TO_ENTER, WAIT_FOR_BLIND_TO_LEAVE
 	};
 
 	public FEEDING_DEMO_STATE feedingDemoState = FEEDING_DEMO_STATE.WALK_TO_TROUGH;
@@ -44,6 +44,9 @@ public class AIRoutineForMort extends AIRoutine {
 
 	@Override
 	public void update() {
+		AIRoutineUtils.moveTowardsSquareToBeAdjacent(Game.level.squares[60][26]);
+		if (1 == 1)
+			return;
 
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
@@ -112,15 +115,25 @@ public class AIRoutineForMort extends AIRoutine {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
 				this.actor.miniDialogue = "Dinner time!!!";
 
-				feedingDemoState = FEEDING_DEMO_STATE.WALK_AWAY;
+				for (Blind blind : mort.questCaveOfTheBlind.blind) {
+					if (blind.squareGameObjectIsOn.structureSectionSquareIsIn == mort.mortsMine) {
+						feedingDemoState = FEEDING_DEMO_STATE.WAIT_FOR_BLIND_TO_LEAVE;
+					}
+				}
 				return;
 			}
 
-			if (feedingDemoState == FEEDING_DEMO_STATE.WALK_AWAY) {
+			if (feedingDemoState == FEEDING_DEMO_STATE.WAIT_FOR_BLIND_TO_LEAVE) {
 
 				// MOVE BACK
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
-				return;
+				for (Blind blind : mort.questCaveOfTheBlind.blind) {
+					if (blind.remainingHealth > 1
+							&& blind.squareGameObjectIsOn.structureSectionSquareIsIn == mort.mortsMine) {
+						return;
+					}
+				}
+				mort.performingFeedingDemo = false;
 			}
 		}
 

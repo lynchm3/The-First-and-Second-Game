@@ -93,7 +93,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	protected transient int highestPathCostSeen = 0;
 
-	public ArrayList<Square> squaresVisibleToThisCharacter = new ArrayList<Square>();
+	public ArrayList<Square> squaresVisibleToPlayerOnlyPlayer = new ArrayList<Square>();
 	public HashMap<Actor, Square> locationsToSearch = new HashMap<Actor, Square>();
 
 	public ArrayList<Sound> sounds = new ArrayList<Sound>();
@@ -284,7 +284,7 @@ public class Actor extends ActorTemplate implements Owner {
 			}
 		}
 
-		squaresVisibleToThisCharacter.clear();
+		squaresVisibleToPlayerOnlyPlayer.clear();
 
 		double x1 = this.squareGameObjectIsOn.xInGrid + 0.5d;
 		double y1 = this.squareGameObjectIsOn.yInGrid + 0.5d;
@@ -358,9 +358,9 @@ public class Actor extends ActorTemplate implements Owner {
 		if (y >= Game.level.squares[0].length)
 			return true;
 
-		if (!squaresVisibleToThisCharacter.contains(Game.level.squares[x][y])) {
+		if (!squaresVisibleToPlayerOnlyPlayer.contains(Game.level.squares[x][y])) {
 			Game.level.squares[x][y].visibleToSelectedCharacter = true;
-			squaresVisibleToThisCharacter.add(Game.level.squares[x][y]);
+			squaresVisibleToPlayerOnlyPlayer.add(Game.level.squares[x][y]);
 			if (this == Game.level.player) {
 				Game.level.squares[x][y].visibleToPlayer = true;
 				Game.level.squares[x][y].seenByPlayer = true;
