@@ -2,6 +2,8 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -59,6 +61,11 @@ public class ActionMove extends Action {
 			} else {
 				actor.swapCooldown = (int) (Math.random() * 3);
 			}
+		}
+
+		// Sound of glass
+		if (target.inventory.getGameObectOfClass(BrokenGlass.class) != null) {
+			mover.sounds.add(new Sound(mover, mover.equippedWeapon, mover.squareGameObjectIsOn, 10));
 		}
 
 		if (mover == Game.level.player)

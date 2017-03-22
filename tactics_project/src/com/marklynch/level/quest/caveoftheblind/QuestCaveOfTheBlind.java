@@ -215,9 +215,14 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Smashed Glass
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[43][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][11]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][11]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][13]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[46][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][10]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][11]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][12]);
 	}
 

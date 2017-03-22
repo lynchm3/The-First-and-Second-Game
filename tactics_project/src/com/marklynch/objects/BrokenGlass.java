@@ -24,7 +24,7 @@ public class BrokenGlass extends GameObject {
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, iceResistance, electricResistance, poisonResistance);
 
-		glassShardsCount = (int) (20d + Math.random() * 20d);
+		glassShardsCount = 30;// (int) (1d + Math.random() * 20d);
 		glassShards = new GlassShard[glassShardsCount];
 		for (int i = 0; i < glassShardsCount; i++) {
 			int randomShardNumber = (int) (Math.random() * 10d);
