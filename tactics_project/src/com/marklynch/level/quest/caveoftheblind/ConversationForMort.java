@@ -192,7 +192,8 @@ public class ConversationForMort extends Conversation {
 		};
 
 		// I'll show you
-		illShowYou = new ConversationPart(new Object[] { "I'll show you, just keep your distance from them..." },
+		illShowYou = new ConversationPart(
+				new Object[] { "I'll show you, just keep your distance from them, they'll attack ON SIGHT. Heh heh." },
 				new ConversationResponse[] {}, questCaveOfTheBlind.mort); // Thin
 																			// grin
 
