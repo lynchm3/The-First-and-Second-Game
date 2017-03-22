@@ -421,7 +421,7 @@ public class Editor {
 		Game.level.factions.add(new Faction("Blind", colors.get(3), "blind.png"));
 
 		// Add player
-		Actor player = Templates.Player.makeCopy(Game.level.squares[46][23], Game.level.factions.get(0), null);
+		Actor player = Templates.Player.makeCopy(Game.level.squares[43][14], Game.level.factions.get(0), null);
 		Game.level.player = player;
 		player.inventory.add(Templates.KATANA.makeCopy(null));
 		player.inventory.add(Templates.HATCHET.makeCopy(null));

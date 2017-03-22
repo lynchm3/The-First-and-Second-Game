@@ -212,6 +212,13 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
+
+		// Smashed Glass
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[43][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[46][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][12]);
 	}
 
 	public void makeMortsMine() {
