@@ -56,6 +56,8 @@ public class Structure {
 
 		// Feature squares
 		for (GameObject feature : features) {
+			System.out.println("feature = " + feature);
+			System.out.println("Square  = " + feature.squareGameObjectIsOn);
 			floorSquares.add(feature.squareGameObjectIsOn);
 			featureSquares.add(feature.squareGameObjectIsOn);
 		}
