@@ -6,6 +6,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.weapons.Bell;
 
@@ -44,9 +45,6 @@ public class AIRoutineForMort extends AIRoutine {
 
 	@Override
 	public void update() {
-		AIRoutineUtils.moveTowardsSquareToBeAdjacent(Game.level.squares[60][26]);
-		if (1 == 1)
-			return;
 
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
@@ -60,6 +58,38 @@ public class AIRoutineForMort extends AIRoutine {
 
 		if (runSearchRoutine()) {
 			return;
+		}
+
+		// Blind living in morts mine?
+		for (Blind blind : mort.questCaveOfTheBlind.blind) {
+			if (blind.remainingHealth > 0 && blind.structureSectionLivingIn == mort.mortsMine) {
+
+				System.out.println("PANIC");
+
+				mort.performingFeedingDemo = false;
+				mort.miniDialogue = "No, no, no, no!";
+				mort.activityDescription = "Running away";
+				Square doorSquare = mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
+				Square targetSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
+				if (mort.squareGameObjectIsOn == targetSquare) {
+					new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
+				} else {
+					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+				}
+				return;
+
+			}
+		}
+
+		// Blind in morts mine?
+		for (Blind blind : mort.questCaveOfTheBlind.blind) {
+			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureSectionSquareIsIn == mort.mortsMine) {
+				System.out.println("BACK_UP");
+				mort.performingFeedingDemo = false;
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
+				return;
+
+			}
 		}
 
 		if (!rangBell && mort.remainingHealth < mort.totalHealth / 2) {
@@ -116,7 +146,8 @@ public class AIRoutineForMort extends AIRoutine {
 				this.actor.miniDialogue = "Dinner time!!!";
 
 				for (Blind blind : mort.questCaveOfTheBlind.blind) {
-					if (blind.squareGameObjectIsOn.structureSectionSquareIsIn == mort.mortsMine) {
+					if (blind.remainingHealth > 0
+							&& blind.squareGameObjectIsOn.structureSectionSquareIsIn == mort.mortsMine) {
 						feedingDemoState = FEEDING_DEMO_STATE.WAIT_FOR_BLIND_TO_LEAVE;
 					}
 				}
@@ -128,7 +159,7 @@ public class AIRoutineForMort extends AIRoutine {
 				// MOVE BACK
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
 				for (Blind blind : mort.questCaveOfTheBlind.blind) {
-					if (blind.remainingHealth > 1
+					if (blind.remainingHealth > 0
 							&& blind.squareGameObjectIsOn.structureSectionSquareIsIn == mort.mortsMine) {
 						return;
 					}

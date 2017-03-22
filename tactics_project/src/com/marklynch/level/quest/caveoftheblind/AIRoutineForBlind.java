@@ -27,6 +27,7 @@ public class AIRoutineForBlind extends AIRoutine {
 	Square targetSquare = null;
 	Sound bellSound = null;
 	MeatChunk meatChunk = null;
+	Square originalMeatChunkSquare = null;
 
 	boolean hangry = false;
 	int timeSinceEating = Integer.MAX_VALUE;
@@ -43,14 +44,28 @@ public class AIRoutineForBlind extends AIRoutine {
 		this.actor.activityDescription = null;
 		this.actor.expressionImageTexture = null;
 
+		// hungry?
 		if (timeSinceEating > 50) {
+			// find a meatchunk
 			MeatChunk tempMeatChunk = (MeatChunk) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(MeatChunk.class, 3,
 					true, false, true, false);
 			if (tempMeatChunk != null) {
 				this.meatChunk = tempMeatChunk;
+				this.originalMeatChunkSquare = this.meatChunk.squareGameObjectIsOn;
 				bellSound = null;
 				blind.locationsToSearch.clear();
 				targetSquare = null;
+				this.actor.expressionImageTexture = this.meatChunk.imageTexture;
+			} else if (this.meatChunk != null) { // smelt a meatchunk but
+													// nooooope
+				if (this.meatChunk.squareGameObjectIsOn != this.originalMeatChunkSquare) {
+					this.blind.structureSectionLivingIn = this.originalMeatChunkSquare.structureSectionSquareIsIn;
+					bellSound = null;
+					this.blind.activityDescription = "Hangry";
+					hangry = true;
+					this.meatChunk = null;
+					this.originalMeatChunkSquare = null;
+				}
 			}
 
 			if (meatChunk != null) {
@@ -64,6 +79,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				return;
 			}
 
+			// If there's no meatchunk maybe there's a dinner bell sound?
 			if (meatChunk == null) {
 				Sound tempBellSound = getSoundFromSourceType(Bell.class);
 				if (tempBellSound != null) {
@@ -77,7 +93,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				this.blind.activityDescription = "Dinner time!";
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare);
 				if (blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
-					this.blind.structureSection = this.blind.squareGameObjectIsOn.structureSectionSquareIsIn;
+					this.blind.structureSectionLivingIn = this.blind.squareGameObjectIsOn.structureSectionSquareIsIn;
 					bellSound = null;
 					this.blind.activityDescription = "Hangry";
 					hangry = true;
@@ -87,7 +103,9 @@ public class AIRoutineForBlind extends AIRoutine {
 			}
 		} else {
 			meatChunk = null;
+			hangry = false;
 			timeSinceEating++;
+			this.actor.expressionImageTexture = null;
 		}
 
 		addNonBlindToAttackersList();
@@ -126,21 +144,21 @@ public class AIRoutineForBlind extends AIRoutine {
 			AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			if (blind.squareGameObjectIsOn == targetSquare || blind.getPathTo(targetSquare) == null)
 				targetSquare = null;
-		} else if (blind.squareGameObjectIsOn.structureSectionSquareIsIn != blind.structureSection) {
-			if (blind.structureSection == null) {
+		} else if (blind.squareGameObjectIsOn.structureSectionSquareIsIn != blind.structureSectionLivingIn) {
+			if (blind.structureSectionLivingIn == null) {
 				targetSquare = AIRoutineUtils.getRandomSquare(5, true);
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			} else {
-				targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSection);
+				targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSectionLivingIn);
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			}
 		} else {
 			if (Math.random() < 0.05) {
-				if (blind.structureSection == null) {
+				if (blind.structureSectionLivingIn == null) {
 					targetSquare = AIRoutineUtils.getRandomSquare(5, true);
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				} else {
-					targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSection);
+					targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSectionLivingIn);
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				}
 
@@ -156,7 +174,6 @@ public class AIRoutineForBlind extends AIRoutine {
 		// "this.actor.squaresVisibleToThisCharacter.size() = " +
 		// this.actor.squaresVisibleToThisCharacter.);
 		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(this.actor.sight);
-		System.out.println("squares.size() = " + squares.size());
 		for (Square square : squares) {
 			if (this.actor.visibleFrom(square)) {
 				Actor actorOnSquare = (Actor) square.inventory.getGameObectOfClass(Actor.class);

@@ -12,6 +12,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Corpse;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Key;
@@ -61,6 +62,8 @@ public class QuestCaveOfTheBlind extends Quest {
 	Lantern lantern;
 	Wall oreWall;
 	Key mortsKey;
+	Door mortsBedroomDoor;
+	Door mortsStoreroomDoor;
 
 	// Squares
 	Square troughSquare;
@@ -136,12 +139,14 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public void makeCave() {
 		ArrayList<GameObject> caveFeatures = new ArrayList<GameObject>();
-		ArrayList<Key> keys = new ArrayList();
-		keys.add(mortsKey);
-		keys.add((Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
+		ArrayList<Key> mortsKeys = new ArrayList();
+		mortsKeys.add(mortsKey);
+		mortsKeys.add((Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
 		caveFeatures.add(Templates.VEIN.makeCopy(Game.level.squares[42][23]));
-		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[41][21], keys, true));
-		caveFeatures.add(Templates.DOOR.makeCopy(Game.level.squares[31][21], keys, true));
+		mortsBedroomDoor = Templates.DOOR.makeCopy(Game.level.squares[41][21], mortsKeys, true);
+		caveFeatures.add(mortsBedroomDoor);
+		mortsStoreroomDoor = Templates.DOOR.makeCopy(Game.level.squares[31][21], mortsKeys, true);
+		caveFeatures.add(mortsStoreroomDoor);
 
 		ArrayList<StructureHall> cavePaths = new ArrayList<StructureHall>();
 		ArrayList<Square> cavePathSquares = new ArrayList<Square>();

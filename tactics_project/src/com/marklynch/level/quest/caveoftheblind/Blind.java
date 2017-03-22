@@ -11,7 +11,7 @@ import mdesl.graphics.Color;
 
 public class Blind extends Actor {
 
-	public StructureSection structureSection;
+	public StructureSection structureSectionLivingIn;
 
 	public Blind(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
@@ -28,7 +28,7 @@ public class Blind extends Actor {
 				fireResistance, iceResistance, electricResistance, poisonResistance, faction, anchorX, anchorY,
 				hearing);
 		aiRoutine = new AIRoutineForBlind(this);
-		this.structureSection = structureSection;
+		this.structureSectionLivingIn = structureSection;
 	}
 
 	@Override
