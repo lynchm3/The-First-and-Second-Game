@@ -7,6 +7,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureHall;
 import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
@@ -42,13 +43,12 @@ public class QuestCaveOfTheBlind extends Quest {
 	boolean huntersAndWolvesFought = false;
 
 	// Structure sections
-	StructureSection wolfDen;
-	StructureSection entrance1;
-	StructureSection entrance2;
-	StructureSection atrium1;
-	StructureSection atrium2;
-	StructureSection mortsMine;
-	StructureSection mortsRooms;
+	StructureRoom wolfDen;
+	StructureRoom entrance;
+	StructureRoom atrium1;
+	StructureRoom atrium2;
+	// StructureSection mortsMine;
+	// StructureSection mortsRoom;
 
 	// Actors
 	Mort mort;
@@ -175,34 +175,33 @@ public class QuestCaveOfTheBlind extends Quest {
 		cavePaths.add(new StructureHall("Path", cavePathSquares3));
 
 		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
-		caveAtriums.add(new StructureRoom("Wolf's Den", 25, 13, 37, 18));
-		caveAtriums.add(new StructureRoom("Entrance of the Blind", 43, 7, 47, 14));
-		caveAtriums.add(new StructureRoom("Atrium of the Blind", 52, 4, 56, 9));
-		caveAtriums.add(new StructureRoom("Atrium of the Blind", 54, 10, 60, 17));
-		caveAtriums.add(new StructureRoom("Atrium 2 of the Blind", 54, 22, 60, 25));
-		caveAtriums.add(new StructureRoom("Atrium 2 of the Blind", 57, 26, 60, 30));
-		caveAtriums.add(new StructureRoom("Morty's Mine", 49, 17, 52, 25));
-		caveAtriums.add(new StructureRoom("Morty's Mine", 42, 19, 50, 26));
-		caveAtriums.add(new StructureRoom("Morty's Mine", 44, 23, 51, 32));
-		caveAtriums.add(new StructureRoom("Morty's Room", 32, 21, 40, 24));
-		caveAtriums.add(new StructureRoom("Morty's Stash", 24, 21, 30, 24));
+		wolfDen = new StructureRoom("Wolf's Den", new RoomPart(25, 13, 37, 18));
+		caveAtriums.add(wolfDen);
+		entrance = new StructureRoom("Entrance of the Blind", new RoomPart(43, 7, 47, 14));
+		caveAtriums.add(entrance);
+
+		atrium1 = new StructureRoom("Atrium of the Blind", new RoomPart(52, 4, 56, 9), new RoomPart(54, 10, 60, 17));
+		caveAtriums.add(atrium1);
+		atrium2 = new StructureRoom("Atrium 2 of the Blind", new RoomPart(54, 22, 60, 25),
+				new RoomPart(57, 26, 60, 30));
+		caveAtriums.add(atrium2);
+		mort.mortsMine = new StructureRoom("Morty's Mine", new RoomPart(49, 17, 52, 25), new RoomPart(42, 19, 50, 26),
+				new RoomPart(44, 23, 51, 32));
+		caveAtriums.add(mort.mortsMine);
+		mort.mortsRoom = new StructureRoom("Morty's Room", new RoomPart(32, 21, 40, 24));
+		caveAtriums.add(mort.mortsRoom);
+		caveAtriums.add(new StructureRoom("Morty's Stash", new RoomPart(24, 21, 30, 24)));
 
 		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
-		wolfDen = new StructureSection("Cave of the Blind", 24, 12, 40, 19);
-		caveSections.add(wolfDen);
-		entrance1 = new StructureSection("Cave of the Blind", 41, 14, 49, 16);
-		caveSections.add(entrance1);
-		entrance2 = new StructureSection("Cave of the Blind", 41, 5, 49, 13);
-		caveSections.add(entrance2);
-		atrium1 = new StructureSection("Cave of the Blind", 49, 2, 62, 18);
-		caveSections.add(atrium1);
-		atrium2 = new StructureSection("Cave of the Blind", 54, 19, 61, 31);
-		caveSections.add(atrium2);
-		mortsMine = mort.mortsMine = new StructureSection("Cave of the Blind", 41, 17, 53, 33);
-		caveSections.add(mortsMine); // Morty's
+		caveSections.add(new StructureSection("Cave of the Blind", 24, 12, 40, 19));
+		caveSections.add(new StructureSection("Cave of the Blind", 41, 14, 49, 16));
+
+		caveSections.add(new StructureSection("Cave of the Blind", 41, 5, 49, 13));
+		caveSections.add(new StructureSection("Cave of the Blind", 44, 2, 62, 18));
+		caveSections.add(new StructureSection("Cave of the Blind", 54, 19, 61, 31));
+		caveSections.add(new StructureSection("Cave of the Blind", 41, 17, 53, 33)); // Morty's
 		// Mine
-		mortsRooms = mort.mortsRooms = new StructureSection("Cave of the Blind", 20, 20, 40, 27);
-		caveSections.add(mortsRooms); // Morty's
+		caveSections.add(new StructureSection("Cave of the Blind", 20, 20, 40, 27)); // Morty's
 		// Rooms
 		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
@@ -260,7 +259,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	public void makeBlind() {
 
 		// Entrance 2
-		Blind blind11 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3), entrance2);
+		Blind blind11 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3), entrance);
 		blind11.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
 		blind11.quest = this;
 		blind.add(blind11);

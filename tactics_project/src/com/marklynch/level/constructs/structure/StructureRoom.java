@@ -1,15 +1,37 @@
 package com.marklynch.level.constructs.structure;
 
+import java.util.ArrayList;
+
+import com.marklynch.Game;
+import com.marklynch.level.Square;
+
 public class StructureRoom {
 	public String name;
-	public int gridX1, gridY1, gridX2, gridY2;
+	public RoomPart[] roomParts;
+	public ArrayList<Square> squares = new ArrayList<Square>();
 
-	public StructureRoom(String name, int gridX1, int gridY1, int gridX2, int gridY2) {
+	public StructureRoom(String name, RoomPart... roomParts) {
 		super();
 		this.name = name;
-		this.gridX1 = gridX1;
-		this.gridY1 = gridY1;
-		this.gridX2 = gridX2;
-		this.gridY2 = gridY2;
+		this.roomParts = roomParts;// Floor squares
+		for (RoomPart roomPart : this.roomParts) {
+			for (int i = roomPart.gridX1; i <= roomPart.gridX2; i++) {
+				for (int j = roomPart.gridY1; j <= roomPart.gridY2; j++) {
+					squares.add(Game.level.squares[i][j]);
+				}
+			}
+		}
+	}
+
+	public static class RoomPart {
+		public int gridX1, gridY1, gridX2, gridY2;
+
+		public RoomPart(int gridX1, int gridY1, int gridX2, int gridY2) {
+			this.gridX1 = gridX1;
+			this.gridY1 = gridY1;
+			this.gridX2 = gridX2;
+			this.gridY2 = gridY2;
+
+		}
 	}
 }

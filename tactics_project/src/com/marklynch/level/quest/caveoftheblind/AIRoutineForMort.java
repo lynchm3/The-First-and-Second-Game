@@ -62,7 +62,7 @@ public class AIRoutineForMort extends AIRoutine {
 
 		// Blind living in morts mine?
 		for (Blind blind : mort.questCaveOfTheBlind.blind) {
-			if (blind.remainingHealth > 0 && blind.structureSectionLivingIn == mort.mortsMine) {
+			if (blind.remainingHealth > 0 && blind.roomLivingIn == mort.mortsMine) {
 
 				System.out.println("PANIC");
 
@@ -83,7 +83,7 @@ public class AIRoutineForMort extends AIRoutine {
 
 		// Blind in morts mine?
 		for (Blind blind : mort.questCaveOfTheBlind.blind) {
-			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureSectionSquareIsIn == mort.mortsMine) {
+			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
 				System.out.println("BACK_UP");
 				mort.performingFeedingDemo = false;
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
@@ -147,7 +147,7 @@ public class AIRoutineForMort extends AIRoutine {
 
 				for (Blind blind : mort.questCaveOfTheBlind.blind) {
 					if (blind.remainingHealth > 0
-							&& blind.squareGameObjectIsOn.structureSectionSquareIsIn == mort.mortsMine) {
+							&& blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
 						feedingDemoState = FEEDING_DEMO_STATE.WAIT_FOR_BLIND_TO_LEAVE;
 					}
 				}
@@ -160,7 +160,7 @@ public class AIRoutineForMort extends AIRoutine {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
 				for (Blind blind : mort.questCaveOfTheBlind.blind) {
 					if (blind.remainingHealth > 0
-							&& blind.squareGameObjectIsOn.structureSectionSquareIsIn == mort.mortsMine) {
+							&& blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
 						return;
 					}
 				}
@@ -211,8 +211,8 @@ public class AIRoutineForMort extends AIRoutine {
 
 	public Square createSearchLocationForPlayerIfVisibleAndInTerritory() {
 
-		if (Game.level.player.squareGameObjectIsOn.structureSectionSquareIsIn != mort.mortsMine
-				&& Game.level.player.squareGameObjectIsOn.structureSectionSquareIsIn != mort.mortsRooms)
+		if (Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsMine
+				&& Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsRoom)
 			return null;
 
 		float distanceToPlayer = this.actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn);

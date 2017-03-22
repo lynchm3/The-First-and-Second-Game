@@ -33,6 +33,7 @@ import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureHall;
 import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.quest.QuestSmallGame;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
@@ -496,20 +497,21 @@ public class Editor {
 		Game.level.squares[4][4].loadImages();
 
 		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
-		shopAtriums.add(new StructureRoom("Super Wolf's Den", 6, 1, 10, 4));
-		shopAtriums.add(new StructureRoom("Super Wolf's Den", 12, 1, 16, 4));
+		shopAtriums.add(new StructureRoom("Trader Joe's Shop", new RoomPart(6, 1, 10, 4)));
+		shopAtriums.add(new StructureRoom("Trader Joe's Shop", new RoomPart(12, 1, 16, 4)));
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructureHall>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -100,
 				-100 + 868, true);
 		Game.level.structures.add(joesShop);
+
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
 		ArrayList<StructureRoom> lodgeAtriums = new ArrayList<StructureRoom>();
-		lodgeAtriums.add(new StructureRoom("Super Wolf's Den", 8, 8, 10, 10));
+		lodgeAtriums.add(new StructureRoom("Hunting Lodge", new RoomPart(8, 8, 10, 10)));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
-		lodgeSections.add(new StructureSection("Super Wolf's Den", 7, 7, 11, 11));
+		lodgeSections.add(new StructureSection("Hunting Lodge", 7, 7, 11, 11));
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructureHall>(),
 				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true);
 		Game.level.structures.add(lodge);

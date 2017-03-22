@@ -59,7 +59,7 @@ public class AIRoutineForBlind extends AIRoutine {
 			} else if (this.meatChunk != null) { // smelt a meatchunk but
 													// nooooope
 				if (this.meatChunk.squareGameObjectIsOn != this.originalMeatChunkSquare) {
-					this.blind.structureSectionLivingIn = this.originalMeatChunkSquare.structureSectionSquareIsIn;
+					this.blind.roomLivingIn = this.originalMeatChunkSquare.structureRoomSquareIsIn;
 					bellSound = null;
 					this.blind.activityDescription = "Hangry";
 					hangry = true;
@@ -93,7 +93,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				this.blind.activityDescription = "Dinner time!";
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare);
 				if (blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
-					this.blind.structureSectionLivingIn = this.blind.squareGameObjectIsOn.structureSectionSquareIsIn;
+					this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
 					bellSound = null;
 					this.blind.activityDescription = "Hangry";
 					hangry = true;
@@ -144,21 +144,21 @@ public class AIRoutineForBlind extends AIRoutine {
 			AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			if (blind.squareGameObjectIsOn == targetSquare || blind.getPathTo(targetSquare) == null)
 				targetSquare = null;
-		} else if (blind.squareGameObjectIsOn.structureSectionSquareIsIn != blind.structureSectionLivingIn) {
-			if (blind.structureSectionLivingIn == null) {
+		} else if (blind.squareGameObjectIsOn.structureRoomSquareIsIn != blind.roomLivingIn) {
+			if (blind.roomLivingIn == null) {
 				targetSquare = AIRoutineUtils.getRandomSquare(5, true);
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			} else {
-				targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSectionLivingIn);
+				targetSquare = AIRoutineUtils.getRandomSquareInRoom(blind.roomLivingIn);
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			}
 		} else {
 			if (Math.random() < 0.05) {
-				if (blind.structureSectionLivingIn == null) {
+				if (blind.roomLivingIn == null) {
 					targetSquare = AIRoutineUtils.getRandomSquare(5, true);
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				} else {
-					targetSquare = AIRoutineUtils.getRandomSquareInStructureSection(blind.structureSectionLivingIn);
+					targetSquare = AIRoutineUtils.getRandomSquareInRoom(blind.roomLivingIn);
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				}
 

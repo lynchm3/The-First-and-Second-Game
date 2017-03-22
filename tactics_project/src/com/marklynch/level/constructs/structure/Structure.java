@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
@@ -67,11 +68,13 @@ public class Structure {
 		// Entrance Squares
 
 		// Floor squares
-		for (StructureRoom caveAtrium : rooms) {
-			for (int i = caveAtrium.gridX1; i <= caveAtrium.gridX2; i++) {
-				for (int j = caveAtrium.gridY1; j <= caveAtrium.gridY2; j++) {
-					floorSquares.add(Game.level.squares[i][j]);
-					Game.level.squares[i][j].structureRoomSquareIsIn = caveAtrium;
+		for (StructureRoom room : rooms) {
+			for (RoomPart roomPart : room.roomParts) {
+				for (int i = roomPart.gridX1; i <= roomPart.gridX2; i++) {
+					for (int j = roomPart.gridY1; j <= roomPart.gridY2; j++) {
+						floorSquares.add(Game.level.squares[i][j]);
+						Game.level.squares[i][j].structureRoomSquareIsIn = room;
+					}
 				}
 			}
 		}
