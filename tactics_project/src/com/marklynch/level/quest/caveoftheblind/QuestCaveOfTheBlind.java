@@ -213,6 +213,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
 
+		// Dirty Sheet
+		// Templates.DIRTY_SHEET.makeCopy(Game.level.squares[47][11]);
+		// Templates.DIRTY_SHEET_2.makeCopy(Game.level.squares[47][10]);
+		Templates.DIRTY_SHEET_3.makeCopy(Game.level.squares[47][9]);
 		// Smashed Glass
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[43][12]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][11]);
@@ -221,9 +225,11 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][12]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][13]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[46][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][9]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][10]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][11]);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][12]);
+
 	}
 
 	public void makeMortsMine() {
