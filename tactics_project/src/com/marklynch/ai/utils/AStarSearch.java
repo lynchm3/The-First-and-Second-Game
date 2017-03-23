@@ -1,4 +1,4 @@
-package com.marklynch.ai.routines;
+package com.marklynch.ai.utils;
 
 import java.util.LinkedList;
 import java.util.List;

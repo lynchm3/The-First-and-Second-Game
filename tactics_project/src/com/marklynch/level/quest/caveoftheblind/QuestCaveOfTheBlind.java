@@ -44,7 +44,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	// Structure sections
 	StructureRoom wolfDen;
-	StructureRoom entrance;
+	StructureRoom entrancePart1;
+	StructureRoom entrancePart2;
 	StructureRoom atrium1;
 	StructureRoom atrium2;
 	// StructureSection mortsMine;
@@ -106,7 +107,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		makeMortsRoom();
 		makeBlind();
 
-		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[45][14], "Rock with etching",
+		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[43][15], "Rock with etching",
 				new Object[] { "SHHHHHhhhhhhhh!!! -Mort" });
 
 		// Add spoons
@@ -153,6 +154,9 @@ public class QuestCaveOfTheBlind extends Quest {
 		cavePathSquares.add(Game.level.squares[40][14]);
 		cavePathSquares.add(Game.level.squares[41][14]);
 		cavePathSquares.add(Game.level.squares[42][14]);
+		cavePathSquares.add(Game.level.squares[40][15]);
+		cavePathSquares.add(Game.level.squares[41][15]);
+		cavePathSquares.add(Game.level.squares[42][15]);
 		cavePaths.add(new StructureHall("Path", cavePathSquares2));
 		ArrayList<Square> cavePathSquares3 = new ArrayList<Square>();
 		cavePathSquares.add(Game.level.squares[48][7]);
@@ -168,8 +172,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
 		wolfDen = new StructureRoom("Wolf's Den", new RoomPart(25, 13, 37, 18));
 		caveAtriums.add(wolfDen);
-		entrance = new StructureRoom("Entrance of the Blind", new RoomPart(43, 7, 47, 14));
-		caveAtriums.add(entrance);
+		entrancePart1 = new StructureRoom("Entrance of the Blind", new RoomPart(43, 9, 47, 15));
+		caveAtriums.add(entrancePart1);
+		entrancePart2 = new StructureRoom("Entrance of the Blind", new RoomPart(43, 7, 47, 8));
+		caveAtriums.add(entrancePart2);
 
 		atrium1 = new StructureRoom("Atrium of the Blind", new RoomPart(52, 4, 56, 9), new RoomPart(54, 10, 60, 17));
 		caveAtriums.add(atrium1);
@@ -284,7 +290,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	public void makeBlind() {
 
 		// Entrance 2
-		Blind blind11 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3), entrance);
+		Blind blind11 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3), entrancePart2);
 		blind11.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
 		blind11.quest = this;
 		blind.add(blind11);

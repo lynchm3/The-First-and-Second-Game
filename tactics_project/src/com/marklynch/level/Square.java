@@ -9,11 +9,12 @@ import java.util.UUID;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.ai.routines.AStarNode;
+import com.marklynch.ai.utils.AStarNode;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
@@ -347,8 +348,10 @@ public class Square extends AStarNode implements ActionableInWorld {
 	@Override
 	public float getCost(AStarNode node) {
 		Square otherSquare = (Square) node;
+		if (otherSquare.inventory.contains(BrokenGlass.class))
+			return 8;
 		if (otherSquare.inventory.contains(Actor.class))
-			return 4;
+			return 8;
 		return 1;
 	}
 

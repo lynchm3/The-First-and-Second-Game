@@ -12,8 +12,8 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
-import com.marklynch.ai.routines.AStarNode;
-import com.marklynch.ai.routines.AStarSearch;
+import com.marklynch.ai.utils.AStarNode;
+import com.marklynch.ai.utils.AStarSearch;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Group;
