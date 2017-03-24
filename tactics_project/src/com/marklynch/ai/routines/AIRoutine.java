@@ -1,14 +1,15 @@
 package com.marklynch.ai.routines;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Expressions;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.MapUtil;
 
 public class AIRoutine {
@@ -40,15 +41,24 @@ public class AIRoutine {
 
 	}
 
-	public void createSearchLocationsBasedOnSounds() {
+	public void createSearchLocationsBasedOnSounds(Class... classes) {
+
+		System.out.println("createSearchLocationsBasedOnSounds");
+		ArrayList<Class> classesArrayList = new ArrayList<Class>(Arrays.asList(classes));
+		System.out.println(
+				"classesArrayList.contains(BrokenGlass.class) = " + classesArrayList.contains(BrokenGlass.class));
 
 		// Check for sounds to investigate
 		ArrayList<Square> squaresThisCanHear = this.actor.getAllSquaresWithinDistance(this.actor.hearing);
 		for (Square squareThisCanHear : squaresThisCanHear) {
 			for (Sound sound : squareThisCanHear.sounds) {
-				if (!this.actor.locationsToSearch.containsValue(sound.sourceSquare)
+				System.out.println("sound.sourceObject.getClass() = " + sound.sourceObject.getClass());
+				System.out.println("classesArrayList.contains(sound.sourceObject.getClass()) = "
+						+ classesArrayList.contains(sound.sourceObject.getClass()));
 
-						&& sound.sourceObject instanceof Weapon && !this.actor.canSee(sound.sourceSquare)) {
+				if (classesArrayList.contains(sound.sourceObject.getClass())
+						&& !this.actor.locationsToSearch.containsValue(sound.sourceSquare)
+						&& !this.actor.canSee(sound.sourceSquare)) {
 					this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
 				}
 			}
@@ -101,8 +111,6 @@ public class AIRoutine {
 									this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 								}
 							}
-							createSearchLocationsBasedOnSounds();
-							createSearchLocationsBasedOnVisibleAttackers();
 						}
 					}
 					return true;
@@ -161,8 +169,6 @@ public class AIRoutine {
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 					}
 				}
-				createSearchLocationsBasedOnSounds();
-				createSearchLocationsBasedOnVisibleAttackers();
 
 				return true;
 			}

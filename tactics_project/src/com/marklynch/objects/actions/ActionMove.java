@@ -64,8 +64,9 @@ public class ActionMove extends Action {
 		}
 
 		// Sound of glass
-		if (target.inventory.getGameObectOfClass(BrokenGlass.class) != null) {
-			mover.sounds.add(new Sound(mover, mover.equippedWeapon, mover.squareGameObjectIsOn, 10));
+		BrokenGlass brokenGlass = (BrokenGlass) target.inventory.getGameObectOfClass(BrokenGlass.class);
+		if (brokenGlass != null) {
+			mover.sounds.add(new Sound(mover, brokenGlass, mover.squareGameObjectIsOn, 10));
 		}
 
 		if (mover == Game.level.player)

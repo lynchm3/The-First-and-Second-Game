@@ -4,6 +4,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForWildAnimal extends AIRoutine {
 	Square targetSquare;
@@ -20,12 +21,18 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.expressionImageTexture = null;
-		createSearchLocationsBasedOnSounds();
+		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();
-		if (runFightRoutine())
+		if (runFightRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
-		if (runSearchRoutine())
+		}
+		if (runSearchRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
+		}
 
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {

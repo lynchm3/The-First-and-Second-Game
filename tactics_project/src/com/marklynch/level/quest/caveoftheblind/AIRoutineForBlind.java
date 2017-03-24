@@ -6,10 +6,12 @@ import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.actions.ActionTakeBite;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Bell;
+import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForBlind extends AIRoutine {
 
@@ -109,13 +111,19 @@ public class AIRoutineForBlind extends AIRoutine {
 		}
 
 		addNonBlindToAttackersList();
-		createSearchLocationsBasedOnSounds();
+		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class);
 		createSearchLocationsBasedOnVisibleAttackers();
 
-		if (runFightRoutine())
+		if (runFightRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
-		if (runSearchRoutine())
+		}
+		if (runSearchRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
+		}
 
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
@@ -170,16 +178,10 @@ public class AIRoutineForBlind extends AIRoutine {
 	}
 
 	public void addNonBlindToAttackersList() {
-		// System.out.println(
-		// "this.actor.squaresVisibleToThisCharacter.size() = " +
-		// this.actor.squaresVisibleToThisCharacter.);
 		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(this.actor.sight);
 		for (Square square : squares) {
 			if (this.actor.visibleFrom(square)) {
 				Actor actorOnSquare = (Actor) square.inventory.getGameObectOfClass(Actor.class);
-				// System.out.println("actorOnSquare.class = " +
-				// actorOnSquare.getClass());
-
 				if (actorOnSquare != null && !(actorOnSquare instanceof Blind)) {
 					this.actor.addAttackerForThisAndGroupMembers(actorOnSquare);
 				}

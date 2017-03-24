@@ -9,6 +9,7 @@ import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.weapons.Bell;
+import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForMort extends AIRoutine {
 
@@ -50,21 +51,23 @@ public class AIRoutineForMort extends AIRoutine {
 		this.actor.activityDescription = null;
 		this.actor.miniDialogue = null;
 		this.actor.expressionImageTexture = null;
-		createSearchLocationsBasedOnSounds();
+		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();
 
-		if (runFightRoutine())
+		if (runFightRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
-
+		}
 		if (runSearchRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 
 		// Blind living in morts mine?
 		for (Blind blind : mort.questCaveOfTheBlind.blind) {
 			if (blind.remainingHealth > 0 && blind.roomLivingIn == mort.mortsMine) {
-
-				System.out.println("PANIC");
 
 				mort.performingFeedingDemo = false;
 				mort.miniDialogue = "No, no, no, no!";
@@ -84,7 +87,6 @@ public class AIRoutineForMort extends AIRoutine {
 		// Blind in morts mine?
 		for (Blind blind : mort.questCaveOfTheBlind.blind) {
 			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
-				System.out.println("BACK_UP");
 				mort.performingFeedingDemo = false;
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
 				return;

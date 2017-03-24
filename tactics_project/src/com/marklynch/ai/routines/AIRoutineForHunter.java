@@ -7,6 +7,7 @@ import com.marklynch.objects.Junk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForHunter extends AIRoutine {
 
@@ -41,12 +42,18 @@ public class AIRoutineForHunter extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.expressionImageTexture = null;
-		createSearchLocationsBasedOnSounds();
+		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();
-		if (runFightRoutine())
+		if (runFightRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
-		if (runSearchRoutine())
+		}
+		if (runSearchRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
+		}
 
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader())

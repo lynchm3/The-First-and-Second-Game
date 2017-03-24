@@ -27,9 +27,9 @@ public class Templates {
 			0f, 0f, null, 88, 54, 20f, null);
 
 	// Special People
-	public static final Mort MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "mort.png", null, 1, 10, null,
-			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
-			0f, 0f, null, 88, 54, 20f);
+	public static final Mort MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
+			new Inventory(), true, false, true, false, false, 0.25f, 0.75f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
+			0f, 0f, 0f, 0f, null, 88, 54, 20f);
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
