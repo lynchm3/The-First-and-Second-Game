@@ -8,7 +8,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionPickuUpAll extends Action {
+public class ActionPickUpAll extends Action {
 
 	public static final String ACTION_NAME = "Pick Up All";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -16,7 +16,7 @@ public class ActionPickuUpAll extends Action {
 	Actor performer;
 	Square square;
 
-	public ActionPickuUpAll(Actor performer, Square square) {
+	public ActionPickUpAll(Actor performer, Square square) {
 		super(ACTION_NAME);
 		this.performer = performer;
 		this.square = square;
@@ -24,6 +24,7 @@ public class ActionPickuUpAll extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -39,7 +40,10 @@ public class ActionPickuUpAll extends Action {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", gameObjectToLoot }));
 			square.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
+			if (gameObjectToLoot.owner == null)
+				gameObjectToLoot.owner = performer;
 		}
+		performer.actions.add(this);
 
 	}
 
@@ -49,6 +53,16 @@ public class ActionPickuUpAll extends Action {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) square.inventory.getGameObjects().clone();
+		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
+			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer)
+				return false;
+		}
+		return true;
 	}
 
 }

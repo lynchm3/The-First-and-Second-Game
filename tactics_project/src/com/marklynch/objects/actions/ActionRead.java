@@ -9,14 +9,15 @@ public class ActionRead extends Action {
 
 	public static final String ACTION_NAME = "Read";
 
-	public Actor reader;
+	public Actor performer;
 	public GameObject target;
 
 	// Default for hostiles
 	public ActionRead(Actor reader, GameObject target) {
 		super(ACTION_NAME);
-		this.reader = reader;
+		this.performer = reader;
 		this.target = target;
+		legal = checkLegality();
 	}
 
 	@Override
@@ -29,6 +30,19 @@ public class ActionRead extends Action {
 			Game.level.conversation = conversation;
 		}
 
+		performer.actions.add(this);
+	}
+
+	@Override
+	public boolean check() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

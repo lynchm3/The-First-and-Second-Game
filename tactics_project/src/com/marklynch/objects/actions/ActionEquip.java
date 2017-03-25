@@ -21,6 +21,7 @@ public class ActionEquip extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -32,6 +33,7 @@ public class ActionEquip extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", weapon }));
 		performer.equippedWeapon = weapon;
+		performer.actions.add(this);
 	}
 
 	@Override
@@ -44,6 +46,11 @@ public class ActionEquip extends Action {
 			return true;
 
 		return false;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		return true;
 	}
 
 }

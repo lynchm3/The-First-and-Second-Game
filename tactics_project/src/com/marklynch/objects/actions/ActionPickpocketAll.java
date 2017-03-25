@@ -23,6 +23,7 @@ public class ActionPickpocketAll extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -38,7 +39,11 @@ public class ActionPickpocketAll extends Action {
 						new ActivityLog(new Object[] { performer, " looted ", gameObjectToLoot, " from ", container }));
 			container.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
+			if (gameObjectToLoot.owner == null)
+				gameObjectToLoot.owner = performer;
+
 		}
+		performer.actions.add(this);
 
 	}
 
@@ -47,6 +52,11 @@ public class ActionPickpocketAll extends Action {
 		if (performer.straightLineDistanceTo(container.squareGameObjectIsOn) < 2) {
 			return true;
 		}
+		return false;
+	}
+
+	@Override
+	public boolean checkLegality() {
 		return false;
 	}
 

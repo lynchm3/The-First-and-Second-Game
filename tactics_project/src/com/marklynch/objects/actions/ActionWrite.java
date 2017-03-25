@@ -10,19 +10,20 @@ public class ActionWrite extends Action {
 	public static final String ACTION_NAME = "Pick Up";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
-	Actor writer;
+	Actor performer;
 	Sign sign;
 	Object[] text;
 
 	public ActionWrite(Actor writer, Sign sign, Object[] text) {
 		super(ACTION_NAME);
-		this.writer = writer;
+		this.performer = writer;
 		this.sign = sign;
 		this.text = text;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -32,16 +33,23 @@ public class ActionWrite extends Action {
 			return;
 
 		sign.setText(text);
-		if (writer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { writer, " wrote on ", sign }));
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " wrote on ", sign }));
+		performer.actions.add(this);
 	}
 
 	@Override
 	public boolean check() {
-		if (writer.straightLineDistanceTo(sign.squareGameObjectIsOn) < 2) {
+		if (performer.straightLineDistanceTo(sign.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

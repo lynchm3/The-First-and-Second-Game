@@ -13,17 +13,18 @@ public class ActionMove extends Action {
 
 	public static final String ACTION_NAME = "Move here";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	Actor mover;
+	Actor performer;
 	Square target;
 
 	public ActionMove(Actor mover, Square target) {
 		super(ACTION_NAME);
-		this.mover = mover;
+		this.performer = mover;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 
 	}
 
@@ -32,14 +33,10 @@ public class ActionMove extends Action {
 
 		if (!enabled)
 			return;
-		moveTo(mover, target);
+		moveTo(performer, target);
 	}
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
-
-		boolean illegal = false;
-		if (illegal)
-			actor.performingIllegalAction = true;
 
 		Door door = (Door) squareToMoveTo.inventory.getGameObectOfClass(Door.class);
 		if (door != null && door.isOpen() == false) {
@@ -70,11 +67,13 @@ public class ActionMove extends Action {
 		// Sound of glass
 		BrokenGlass brokenGlass = (BrokenGlass) target.inventory.getGameObectOfClass(BrokenGlass.class);
 		if (brokenGlass != null) {
-			mover.sounds.add(new Sound(mover, brokenGlass, mover.squareGameObjectIsOn, 10, illegal, this.getClass()));
+			sound = new Sound(performer, brokenGlass, performer.squareGameObjectIsOn, 10, legal, this.getClass());
 		}
 
-		if (mover == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
+
+		performer.actions.add(this);
 	}
 
 	private void move(Actor actor, Square square) {
@@ -88,19 +87,19 @@ public class ActionMove extends Action {
 	@Override
 	public boolean check() {
 
-		if (mover.travelDistance - mover.distanceMovedThisTurn <= 0)
+		if (performer.travelDistance - performer.distanceMovedThisTurn <= 0)
 			return false;
 
-		if (target == mover.squareGameObjectIsOn || !target.inventory.isPassable(mover))
+		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))
 			return false;
 
-		Path path = mover.getPathTo(target);
+		Path path = performer.getPathTo(target);
 		if (path != null)
-			if (path == null || path.travelCost > mover.travelDistance - mover.distanceMovedThisTurn)
+			if (path == null || path.travelCost > performer.travelDistance - performer.distanceMovedThisTurn)
 				return false;
 
-		if (mover != Game.level.player && mover.swapCooldown > 0) {
-			mover.swapCooldown--;
+		if (performer != Game.level.player && performer.swapCooldown > 0) {
+			performer.swapCooldown--;
 			return false;
 		}
 
@@ -115,7 +114,7 @@ public class ActionMove extends Action {
 			return false;
 		}
 
-		if (mover.group != null && mover.group.getLeader() == actorInTheWay) {
+		if (performer.group != null && performer.group.getLeader() == actorInTheWay) {
 			// don't try to swap with you group leader
 			return false;
 		}
@@ -124,13 +123,18 @@ public class ActionMove extends Action {
 		//
 		// }
 
-		if (mover != Game.level.player && actorInTheWay != null
+		if (performer != Game.level.player && actorInTheWay != null
 				&& (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn <= 0)) {
 			// If actorInTheWay has no moves left, doesn't count when player
 			// tries to move
 			return false;
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
 		return true;
 	}
 }

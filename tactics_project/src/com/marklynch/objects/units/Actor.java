@@ -17,7 +17,6 @@ import com.marklynch.ai.utils.AStarSearch;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Group;
-import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.Bed;
@@ -96,8 +95,7 @@ public class Actor extends ActorTemplate implements Owner {
 	public ArrayList<Square> squaresVisibleToPlayerOnlyPlayer = new ArrayList<Square>();
 	public HashMap<Actor, Square> locationsToSearch = new HashMap<Actor, Square>();
 
-	public ArrayList<Sound> sounds = new ArrayList<Sound>();
-	public boolean performingIllegalAction = false;
+	public ArrayList<Action> actions = new ArrayList<Action>();
 
 	public Texture expressionImageTexture = null;
 
@@ -719,8 +717,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void update(int delta) {
-		performingIllegalAction = false;
-		clearSounds();
+		clearActions();
 
 		if (this.remainingHealth > 0) {
 
@@ -735,13 +732,6 @@ public class Actor extends ActorTemplate implements Owner {
 			for (Actor actor : attackersToRemoveFromList) {
 				attackers.remove(actor);
 			}
-
-			for (Sound sound : sounds) {
-				for (Square destinationSquare : sound.destinationSquares) {
-					destinationSquare.sounds.remove(sound);
-				}
-			}
-			sounds.clear();
 
 			// Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 			if (aiRoutine != null)
@@ -939,13 +929,13 @@ public class Actor extends ActorTemplate implements Owner {
 		return null;
 	}
 
-	public void clearSounds() {
-		for (Sound sound : sounds) {
-			for (Square destinationSquare : sound.destinationSquares) {
-				destinationSquare.sounds.remove(sound);
+	public void clearActions() {
+		for (Action action : actions) {
+			for (Square destinationSquare : action.sound.destinationSquares) {
+				destinationSquare.sounds.remove(action.sound);
 			}
 		}
-		sounds.clear();
+		actions.clear();
 	}
 
 	// public static void calculateReachableSquares() {

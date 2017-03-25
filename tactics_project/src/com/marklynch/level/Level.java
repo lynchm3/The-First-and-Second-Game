@@ -10,7 +10,6 @@ import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
@@ -598,12 +597,7 @@ public class Level {
 				player.getAttackers().remove(actor);
 			}
 
-			for (Sound sound : player.sounds) {
-				for (Square destinationSquare : sound.destinationSquares) {
-					destinationSquare.sounds.remove(sound);
-				}
-			}
-			player.sounds.clear();
+			player.clearActions();
 		}
 
 		undoList.clear();

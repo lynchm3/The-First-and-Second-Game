@@ -65,6 +65,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	// Quest
 	public transient Quest quest;
 
+	// Owner
+	public transient Actor owner;
+
 	public float height;
 	public float width;
 	public float halfHeight;

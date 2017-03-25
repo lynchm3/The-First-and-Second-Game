@@ -10,18 +10,19 @@ public class ActionSmash extends Action {
 	public static final String ACTION_NAME = "Smash";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
-	Object attacker;
+	Object performer;
 	GameObject target;
 
 	// Default for hostiles
 	public ActionSmash(Object attacker, GameObject target) {
 		super(ACTION_NAME);
-		this.attacker = attacker;
+		this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -37,23 +38,33 @@ public class ActionSmash extends Action {
 		target.checkIfDestroyed();
 
 		if (target.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " smashed ", target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", target }));
 
-		if (attacker == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
+
+		if (performer instanceof Actor)
+			((Actor) performer).actions.add(this);
 	}
 
 	@Override
 	public boolean check() {
 
-		if (attacker instanceof Actor) {
-			Actor actor = (Actor) attacker;
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
 			if (!actor.equippedWeapon.hasRange(actor.straightLineDistanceTo(target.squareGameObjectIsOn)))
 				return false;
 			if (!actor.visibleFrom(target.squareGameObjectIsOn))
 				return false;
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		if (target.owner != null && target.owner != performer)
+			return false;
 		return true;
 	}
 

@@ -21,6 +21,7 @@ public class ActionPickUp extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -33,6 +34,9 @@ public class ActionPickUp extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", object }));
 		object.squareGameObjectIsOn.inventory.remove(object);
 		performer.inventory.add(object);
+		if (object.owner == null)
+			object.owner = performer;
+		performer.actions.add(this);
 	}
 
 	@Override
@@ -41,6 +45,13 @@ public class ActionPickUp extends Action {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		if (object.owner != null && object.owner != performer)
+			return false;
+		return true;
 	}
 
 }

@@ -11,18 +11,19 @@ public class ActionRing extends Action {
 	public static final String ACTION_NAME = "Ring Bell";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
-	Actor ringer;
+	Actor performer;
 	GameObject object;
 
 	// Default for hostiles
 	public ActionRing(Actor ringer, GameObject object) {
 		super(ACTION_NAME);
-		this.ringer = ringer;
+		this.performer = ringer;
 		this.object = object;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -31,30 +32,33 @@ public class ActionRing extends Action {
 		if (!enabled)
 			return;
 
-		boolean illegal = false;
-		if (illegal)
-			ringer.performingIllegalAction = true;
-
 		// Sound
-		ringer.sounds.add(new Sound(ringer, object, ringer.squareGameObjectIsOn, object.soundWhenHitting, illegal,
-				this.getClass()));
+		sound = new Sound(performer, object, performer.squareGameObjectIsOn, object.soundWhenHitting, legal,
+				this.getClass());
 
-		if (ringer.squareGameObjectIsOn.visibleToPlayer)
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] {
 
-					ringer, " rang ", object }));
+					performer, " rang ", object }));
 
-		if (ringer.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (ringer == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
+		performer.actions.add(this);
 	}
 
 	@Override
 	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 

@@ -11,18 +11,19 @@ public class ActionTakeBite extends Action {
 	public static final String ACTION_NAME = "Take bite";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
-	Actor biter;
+	Actor performer;
 	GameObject target;
 
 	// Default for hostiles
 	public ActionTakeBite(Actor attacker, GameObject target) {
 		super(ACTION_NAME);
-		this.biter = attacker;
+		this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -31,33 +32,37 @@ public class ActionTakeBite extends Action {
 		if (!enabled)
 			return;
 
-		boolean illegal = false;
-		if (illegal)
-			biter.performingIllegalAction = true;
-
-		if (biter.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { biter, " took a bite of ", target }));
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took a bite of ", target }));
 
 		// Sound
 		float loudness = 1;
-		biter.sounds.add(new Sound(biter, biter, biter.squareGameObjectIsOn, loudness, illegal, this.getClass()));
+		sound = new Sound(performer, performer, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 
-		if (biter.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (biter == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
+
+		performer.actions.add(this);
 	}
 
 	@Override
 	public boolean check() {
-		if (!biter.visibleFrom(target.squareGameObjectIsOn))
+		if (!performer.visibleFrom(target.squareGameObjectIsOn))
 			return false;
-		if (biter.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
 			return false;
+		return true;
+	}
 
+	@Override
+	public boolean checkLegality() {
+		if (target.owner != null && target.owner != performer)
+			return false;
 		return true;
 	}
 

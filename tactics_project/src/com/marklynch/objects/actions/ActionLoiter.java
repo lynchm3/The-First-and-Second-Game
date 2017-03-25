@@ -8,17 +8,18 @@ public class ActionLoiter extends Action {
 
 	public static final String ACTION_NAME = "Loiter here";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	Actor loiterer;
+	Actor performer;
 	Square target;
 
 	public ActionLoiter(Actor loiterer, Square target) {
 		super(ACTION_NAME);
-		this.loiterer = loiterer;
+		this.performer = loiterer;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 
 	}
 
@@ -26,19 +27,12 @@ public class ActionLoiter extends Action {
 	public void perform() {
 		if (!enabled)
 			return;
-		loiter(loiterer, target);
+		loiter(performer, target);
+		performer.actions.add(this);
 	}
 
 	public void loiter(Actor actor, Square squareToLoiterOn) {
-
-		boolean illegal = false;
-		if (illegal)
-			actor.performingIllegalAction = true;
-
-		if (illegal)
-			actor.performingIllegalAction = true;
-
-		if (loiterer == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
 	}
 
@@ -52,6 +46,11 @@ public class ActionLoiter extends Action {
 
 	@Override
 	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
 		return true;
 	}
 }

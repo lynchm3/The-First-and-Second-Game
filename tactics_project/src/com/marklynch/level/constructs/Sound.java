@@ -14,7 +14,7 @@ public class Sound {
 	public Square sourceSquare;
 	public ArrayList<Square> destinationSquares;
 	public float loudness;
-	public boolean illegal;
+	public boolean legal;
 	public Class action;
 
 	public Sound(Actor sourceActor, GameObject sourceObject, Square sourceSquare, float loudness, boolean illegal,

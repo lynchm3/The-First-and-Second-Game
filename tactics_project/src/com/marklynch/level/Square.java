@@ -20,7 +20,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.actions.ActionPickuUpAll;
+import com.marklynch.objects.actions.ActionPickUpAll;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -276,7 +276,7 @@ public class Square extends AStarNode implements ActionableInWorld {
 		}
 
 		if (this.inventory.size() > 0 && this.inventory.hasGameObjectsThatFitInInventory()) {
-			actions.add(new ActionPickuUpAll(performer, this));
+			actions.add(new ActionPickUpAll(performer, this));
 		}
 
 		return actions;

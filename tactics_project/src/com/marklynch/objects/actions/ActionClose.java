@@ -13,60 +13,58 @@ public class ActionClose extends Action {
 	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
 	public static final String ACTION_NAME_BLOCKED = ACTION_NAME + " (blocked)";
 
-	Actor closer;
+	Actor performer;
 	Door door;
 
 	// Default for hostiles
 	public ActionClose(Actor opener, Door door) {
 		super(ACTION_NAME);
-		this.closer = opener;
+		this.performer = opener;
 		this.door = door;
 		if (!check()) {
 			enabled = false;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
 	public void perform() {
 
-		boolean illegal = false;
-		if (illegal)
-			closer.performingIllegalAction = true;
-
 		// Key key = closer.getKeyFor(door);
 
 		door.close();
 
-		if (closer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { closer, " closed ", door }));
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " closed ", door }));
 
-		closer.showPow(door);
+		performer.showPow(door);
 
 		// Sound
 		float loudness = 1;
-		closer.sounds.add(new Sound(closer, door, closer.squareGameObjectIsOn, loudness, illegal, this.getClass()));
+		sound = new Sound(performer, door, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 
-		if (closer.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (closer == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
+		performer.actions.add(this);
 	}
 
 	@Override
 	public boolean check() {
-		if (!closer.visibleFrom(door.squareGameObjectIsOn)) {
+		if (!performer.visibleFrom(door.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
-		if (closer.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
+		if (performer.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
-		if (door.locked && !closer.hasKeyForDoor(door)) {
+		if (door.locked && !performer.hasKeyForDoor(door)) {
 			actionName = ACTION_NAME_NEED_KEY;
 			return false;
 		}
@@ -76,6 +74,11 @@ public class ActionClose extends Action {
 			return false;
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
 		return true;
 	}
 

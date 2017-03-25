@@ -23,6 +23,7 @@ public class ActionLootAll extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -38,8 +39,10 @@ public class ActionLootAll extends Action {
 						new ActivityLog(new Object[] { performer, " looted ", gameObjectToLoot, " from ", container }));
 			container.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
+			if (gameObjectToLoot.owner == null)
+				gameObjectToLoot.owner = performer;
 		}
-
+		performer.actions.add(this);
 	}
 
 	@Override
@@ -48,6 +51,16 @@ public class ActionLootAll extends Action {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
+		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
+			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer)
+				return false;
+		}
+		return true;
 	}
 
 }

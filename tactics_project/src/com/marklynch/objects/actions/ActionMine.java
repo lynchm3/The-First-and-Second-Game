@@ -15,17 +15,18 @@ public class ActionMine extends Action {
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
 	public static final String ACTION_NAME_NEED_PICKAXE = ACTION_NAME + " (need pickaxe)";
 
-	Actor miner;
+	Actor performer;
 	Vein vein;
 
 	// Default for hostiles
 	public ActionMine(Actor attacker, Vein vein) {
 		super(ACTION_NAME);
-		this.miner = attacker;
+		this.performer = attacker;
 		this.vein = vein;
 		if (!check()) {
 			enabled = false;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -34,63 +35,67 @@ public class ActionMine extends Action {
 		if (!enabled)
 			return;
 
-		boolean illegal = false;
-		if (illegal)
-			miner.performingIllegalAction = true;
-
-		Pickaxe pickaxe = (Pickaxe) miner.inventory.getGameObectOfClass(Pickaxe.class);
+		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObectOfClass(Pickaxe.class);
 
 		float damage = vein.totalHealth / 4f;
 		vein.remainingHealth -= damage;
-		miner.distanceMovedThisTurn = miner.travelDistance;
-		miner.hasAttackedThisTurn = true;
+		performer.distanceMovedThisTurn = performer.travelDistance;
+		performer.hasAttackedThisTurn = true;
 
 		Junk ore = Templates.ORE.makeCopy(null);
-		miner.inventory.add(ore);
+		performer.inventory.add(ore);
 
-		if (miner.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { miner, " mined ", vein, " with ", pickaxe }));
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", vein, " with ", pickaxe }));
 
-		if (miner.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { miner, " received ", ore }));
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
 
 		if (vein.checkIfDestroyed()) {
-			if (miner.squareGameObjectIsOn.visibleToPlayer)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { miner, " depleted a ", vein }));
+			if (performer.squareGameObjectIsOn.visibleToPlayer)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted a ", vein }));
 		}
 
-		miner.showPow(vein);
+		performer.showPow(vein);
 
 		// Sound
 		float loudness = vein.soundWhenHit * pickaxe.soundWhenHitting;
-		miner.sounds.add(new Sound(miner, pickaxe, miner.squareGameObjectIsOn, loudness, illegal, this.getClass()));
+		sound = new Sound(performer, pickaxe, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 
-		if (miner.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (miner == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
+		performer.actions.add(this);
 	}
 
 	@Override
 	public boolean check() {
-		if (!miner.visibleFrom(vein.squareGameObjectIsOn)) {
+		if (!performer.visibleFrom(vein.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
-		if (miner.straightLineDistanceTo(vein.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(vein.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
-		if (!miner.inventory.contains(Pickaxe.class)) {
+		if (!performer.inventory.contains(Pickaxe.class)) {
 			actionName = ACTION_NAME_NEED_PICKAXE;
 			return false;
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		if (vein.owner != null && vein.owner != performer)
+			return false;
 		return true;
 	}
 

@@ -12,18 +12,19 @@ public class ActionAttack extends Action {
 	public static final String ACTION_NAME = "Attack";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
-	Actor attacker;
+	Actor performer;
 	GameObject target;
 
 	// Default for hostiles
 	public ActionAttack(Actor attacker, GameObject target) {
 		super(ACTION_NAME);
-		this.attacker = attacker;
+		this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
@@ -31,30 +32,26 @@ public class ActionAttack extends Action {
 
 		if (!enabled)
 			return;
-
-		boolean illegal = false;
-		if (illegal)
-			attacker.performingIllegalAction = true;
 		// performer.attack(targetGameObject, false);
 
 		// GameObject targetGameObject;// = target;
 
 		if (target instanceof Actor) {
-			attacker.addAttackerForThisAndGroupMembers((Actor) target);
-			attacker.addAttackerForNearbyFactionMembersIfVisible((Actor) target);
-			((Actor) target).addAttackerForNearbyFactionMembersIfVisible(attacker);
+			performer.addAttackerForThisAndGroupMembers((Actor) target);
+			performer.addAttackerForNearbyFactionMembersIfVisible((Actor) target);
+			((Actor) target).addAttackerForNearbyFactionMembersIfVisible(performer);
 		}
-		target.remainingHealth -= attacker.equippedWeapon.getEffectiveSlashDamage();
-		attacker.distanceMovedThisTurn = attacker.travelDistance;
-		attacker.hasAttackedThisTurn = true;
+		target.remainingHealth -= performer.equippedWeapon.getEffectiveSlashDamage();
+		performer.distanceMovedThisTurn = performer.travelDistance;
+		performer.hasAttackedThisTurn = true;
 		String attackTypeString;
 		attackTypeString = "attacked ";
 
-		if (attacker.squareGameObjectIsOn.visibleToPlayer)
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] {
 
-					attacker, " " + attackTypeString + " ", target, " with ", attacker.equippedWeapon.imageTexture,
-					" for " + attacker.equippedWeapon.getEffectiveSlashDamage() + " damage" }));
+					performer, " " + attackTypeString + " ", target, " with ", performer.equippedWeapon.imageTexture,
+					" for " + performer.equippedWeapon.getEffectiveSlashDamage() + " damage" }));
 
 		Actor actor = null;
 		if (target instanceof Actor)
@@ -62,46 +59,53 @@ public class ActionAttack extends Action {
 
 		if (target.checkIfDestroyed()) {
 			if (target instanceof Actor) {
-				if (attacker.squareGameObjectIsOn.visibleToPlayer)
-					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", target }));
+				if (performer.squareGameObjectIsOn.visibleToPlayer)
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " killed ", target }));
 				((Actor) target).faction.checkIfDestroyed();
 			} else {
-				if (attacker.squareGameObjectIsOn.visibleToPlayer)
-					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", target }));
+				if (performer.squareGameObjectIsOn.visibleToPlayer)
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " destroyed a ", target }));
 			}
 
 		}
 
 		// shoot projectile
-		if (attacker.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			Game.level.projectiles.add(new Projectile("Arrow", attacker, target, 5f, true, "hunter.png"));
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+			Game.level.projectiles.add(new Projectile("Arrow", performer, target, 5f, true, "hunter.png"));
 		} else {
-			attacker.showPow(target);
+			performer.showPow(target);
 		}
 
 		// Sound
-		float loudness = target.soundWhenHit * attacker.equippedWeapon.soundWhenHitting;
-		if (attacker.equippedWeapon != null)
-			attacker.sounds.add(new Sound(attacker, attacker.equippedWeapon, attacker.squareGameObjectIsOn, loudness,
-					illegal, this.getClass()));
+		float loudness = target.soundWhenHit * performer.equippedWeapon.soundWhenHitting;
+		if (performer.equippedWeapon != null)
+			sound = new Sound(performer, performer.equippedWeapon, performer.squareGameObjectIsOn, loudness, legal,
+					this.getClass());
 
-		if (attacker.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (attacker == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
+
+		performer.actions.add(this);
 	}
 
 	@Override
 	public boolean check() {
-		if (!attacker.visibleFrom(target.squareGameObjectIsOn))
+		if (!performer.visibleFrom(target.squareGameObjectIsOn))
 			return false;
 
-		if (!attacker.equippedWeapon.hasRange(attacker.straightLineDistanceTo(target.squareGameObjectIsOn)))
+		if (!performer.equippedWeapon.hasRange(performer.straightLineDistanceTo(target.squareGameObjectIsOn)))
 			return false;
 
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
 		return true;
 	}
 

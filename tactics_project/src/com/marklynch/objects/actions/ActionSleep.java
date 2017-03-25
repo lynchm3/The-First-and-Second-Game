@@ -9,17 +9,18 @@ public class ActionSleep extends Action {
 
 	public static final String ACTION_NAME = "Sleep here";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	Actor mover;
+	Actor performer;
 	Square target;
 
 	public ActionSleep(Actor mover, Square target) {
 		super(ACTION_NAME);
-		this.mover = mover;
+		this.performer = mover;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		legal = checkLegality();
 
 	}
 
@@ -28,7 +29,9 @@ public class ActionSleep extends Action {
 
 		if (!enabled)
 			return;
-		moveTo(mover, target);
+		moveTo(performer, target);
+
+		performer.actions.add(this);
 	}
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
@@ -54,7 +57,7 @@ public class ActionSleep extends Action {
 			}
 		}
 
-		if (mover == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
 	}
 
@@ -69,18 +72,18 @@ public class ActionSleep extends Action {
 	@Override
 	public boolean check() {
 
-		if (mover.travelDistance - mover.distanceMovedThisTurn <= 0)
+		if (performer.travelDistance - performer.distanceMovedThisTurn <= 0)
 			return false;
 
-		if (target == mover.squareGameObjectIsOn || !target.inventory.isPassable(mover))
+		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))
 			return false;
 
-		Path path = mover.getPathTo(target);
-		if (path.travelCost > mover.travelDistance - mover.distanceMovedThisTurn)
+		Path path = performer.getPathTo(target);
+		if (path.travelCost > performer.travelDistance - performer.distanceMovedThisTurn)
 			return false;
 
-		if (mover != Game.level.player && mover.swapCooldown > 0) {
-			mover.swapCooldown--;
+		if (performer != Game.level.player && performer.swapCooldown > 0) {
+			performer.swapCooldown--;
 			return false;
 		}
 
@@ -90,18 +93,23 @@ public class ActionSleep extends Action {
 			return false;
 		}
 
-		if (mover.group != null && mover.group.getLeader() == actorInTheWay) {
+		if (performer.group != null && performer.group.getLeader() == actorInTheWay) {
 			// don't try to swap with you group leader
 			return false;
 		}
 
-		if (mover != Game.level.player && actorInTheWay != null
+		if (performer != Game.level.player && actorInTheWay != null
 				&& (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn <= 0)) {
 			// If actorInTheWay has no moves left, doesn't count when player
 			// tries to move
 			return false;
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
 		return true;
 	}
 }

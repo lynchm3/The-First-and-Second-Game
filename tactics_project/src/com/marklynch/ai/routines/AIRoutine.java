@@ -63,7 +63,7 @@ public class AIRoutine {
 				if (!this.actor.locationsToSearch.containsValue(sound.sourceSquare)
 						&& !this.actor.canSee(sound.sourceSquare)) {
 
-					if (sound.illegal || classesArrayList.contains(sound.sourceObject.getClass())) {
+					if (!sound.legal || classesArrayList.contains(sound.sourceObject.getClass())) {
 						this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
 					}
 				}

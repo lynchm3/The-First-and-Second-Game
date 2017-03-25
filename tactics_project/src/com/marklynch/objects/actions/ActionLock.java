@@ -14,63 +14,61 @@ public class ActionLock extends Action {
 	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
 	public static final String ACTION_NAME_BLOCKED = ACTION_NAME + " (blocked)";
 
-	Actor locker;
+	Actor performer;
 	Door door;
 
 	// Default for hostiles
 	public ActionLock(Actor unlocker, Door door) {
 		super(ACTION_NAME);
-		this.locker = unlocker;
+		this.performer = unlocker;
 		this.door = door;
 		if (!check()) {
 			enabled = false;
 		}
+		legal = checkLegality();
 	}
 
 	@Override
 	public void perform() {
 
-		boolean illegal = false;
-		if (illegal)
-			locker.performingIllegalAction = true;
-
-		Key key = locker.getKeyFor(door);
+		Key key = performer.getKeyFor(door);
 
 		if (door.isOpen())
-			new ActionClose(locker, door).perform();
+			new ActionClose(performer, door).perform();
 
 		door.locked = true;
 
-		if (locker.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { locker, " locked ", door, " with ", key }));
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " locked ", door, " with ", key }));
 
-		locker.showPow(door);
+		performer.showPow(door);
 
 		// Sound
 		float loudness = 1;
-		locker.sounds.add(new Sound(locker, key, locker.squareGameObjectIsOn, loudness, illegal, this.getClass()));
+		sound = new Sound(performer, key, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 
-		if (locker.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (locker == Game.level.player)
+		if (performer == Game.level.player)
 			Game.level.endTurn();
+		performer.actions.add(this);
 	}
 
 	@Override
 	public boolean check() {
-		if (!locker.visibleFrom(door.squareGameObjectIsOn)) {
+		if (!performer.visibleFrom(door.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
-		if (locker.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
+		if (performer.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
-		if (!locker.hasKeyForDoor(door)) {
+		if (!performer.hasKeyForDoor(door)) {
 			actionName = ACTION_NAME_NEED_KEY;
 			return false;
 		}
@@ -80,6 +78,11 @@ public class ActionLock extends Action {
 			return false;
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
 		return true;
 	}
 

@@ -8,19 +8,34 @@ public class ActionSpot extends Action {
 
 	public static final String ACTION_NAME = "Spot";
 
-	public Actor spotter;
+	public Actor performer;
 	public Object spotted;
 
 	public ActionSpot(Actor spotter, Object spotted) {
 		super(ACTION_NAME);
-		this.spotter = spotter;
+		this.performer = spotter;
 		this.spotted = spotted;
+		legal = checkLegality();
 	}
 
 	@Override
 	public void perform() {
-		if (spotter.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { spotter, " spotted ", spotted }));
+		if (performer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " spotted ", spotted }));
+
+		performer.actions.add(this);
+	}
+
+	@Override
+	public boolean check() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }
