@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -18,11 +19,11 @@ public class BrokenGlass extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance) {
+			float electricResistance, float poisonResistance, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance);
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 
 		glassShardsCount = 30;// (int) (1d + Math.random() * 20d);
 		glassShards = new GlassShard[glassShardsCount];
@@ -35,12 +36,12 @@ public class BrokenGlass extends GameObject {
 	}
 
 	@Override
-	public BrokenGlass makeCopy(Square square) {
+	public BrokenGlass makeCopy(Square square, Actor owner) {
 		return new BrokenGlass(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance);
+				electricResistance, poisonResistance, owner);
 	}
 
 	@Override

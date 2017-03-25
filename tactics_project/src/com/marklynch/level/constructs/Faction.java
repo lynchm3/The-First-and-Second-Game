@@ -10,14 +10,13 @@ import java.util.UUID;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.objects.Owner;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Path;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class Faction implements Owner {
+public class Faction {
 	public final static String[] editableAttributes = { "name", "color" };
 
 	enum AI_MODE {

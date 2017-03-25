@@ -456,7 +456,7 @@ public class Inventory {
 	public Inventory makeCopy() {
 		Inventory copy = new Inventory();
 		for (GameObject gameObject : gameObjects) {
-			copy.add(gameObject.makeCopy(null));
+			copy.add(gameObject.makeCopy(null, null));
 		}
 		return copy;
 	}

@@ -42,7 +42,7 @@ public class ActionMine extends Action {
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		Junk ore = Templates.ORE.makeCopy(null);
+		Junk ore = Templates.ORE.makeCopy(null, performer);
 		performer.inventory.add(ore);
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)

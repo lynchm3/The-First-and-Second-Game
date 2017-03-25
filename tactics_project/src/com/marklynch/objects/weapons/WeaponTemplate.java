@@ -3,6 +3,7 @@ package com.marklynch.objects.weapons;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
+import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
 
@@ -27,12 +28,12 @@ public class WeaponTemplate extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance) {
+			float electricResistance, float poisonResistance, Actor owner) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance);
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 
 		this.slashDamage = damage;
 		this.minRange = minRange;
@@ -86,11 +87,11 @@ public class WeaponTemplate extends GameObject {
 	}
 
 	@Override
-	public Weapon makeCopy(Square square) {
+	public Weapon makeCopy(Square square, Actor owner) {
 		return new Weapon(new String(name), slashDamage, minRange, maxRange, imageTexturePath, totalHealth, square,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner
 
 				, anchorX, anchorY);
 	}

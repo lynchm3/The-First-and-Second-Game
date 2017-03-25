@@ -9,6 +9,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -27,11 +28,12 @@ public class Structure {
 	ArrayList<Square> wallSquares;
 	ArrayList<Square> featureSquares;
 	boolean blocksLineOfSight;
+	Actor owner;
 
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
 			ArrayList<StructureHall> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
 			String imageTexturePath, float overlayX1, float overlayX2, float overlayY1, float overlayY2,
-			boolean blocksLineOfSight) {
+			boolean blocksLineOfSight, Actor owner) {
 		super();
 
 		this.name = name;
@@ -87,7 +89,7 @@ public class Structure {
 					if (!floorSquares.contains(Game.level.squares[i][j])
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
 
-						wallsInCave.add(Templates.WALL.makeCopy(Game.level.squares[i][j]));
+						wallsInCave.add(Templates.WALL.makeCopy(Game.level.squares[i][j], this.owner));
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					Game.level.squares[i][j].structureSquareIsIn = this;

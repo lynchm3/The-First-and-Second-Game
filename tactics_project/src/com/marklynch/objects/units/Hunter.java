@@ -16,13 +16,13 @@ public class Hunter extends Actor {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY,
+			float electricResistance, float poisonResistance, Actor owner, Faction faction, float anchorX, float anchorY,
 			float hearing) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, faction, anchorX, anchorY,
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner, faction, anchorX, anchorY,
 				hearing);
 		aiRoutine = new AIRoutineForHunter(this);
 	}
@@ -45,7 +45,7 @@ public class Hunter extends Actor {
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, faction,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner, faction,
 				anchorX, anchorY, hearing);
 		return actor;
 	}

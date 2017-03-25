@@ -81,16 +81,16 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Mort and his bed
 		Bed mortsBed = Templates.BED.makeCopy(Game.level.squares[135][24]);
 		mortsBed.quest = this;
-		mortsKey = Templates.KEY.makeCopy(null);
+		mortsKey = Templates.KEY.makeCopy(null, mort);
 		mortsKey.quest = this;
 		// [147][21]
 		mort = Templates.MORT.makeCopy(Game.level.squares[44][14], Game.level.factions.get(1), mortsBed);
 		mort.quest = this;
-		mort.mortsBell = Templates.DINNER_BELL.makeCopy(null);
-		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy("Meat Chunk", null);
-		mort.inventory.add(Templates.CLEAVER.makeCopy(null));
-		mort.inventory.add(Templates.LANTERN.makeCopy(null));
-		mort.inventory.add(Templates.PICKAXE.makeCopy(null));
+		mort.mortsBell = Templates.DINNER_BELL.makeCopy(null, mort);
+		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy("Meat Chunk", null, null);
+		mort.inventory.add(Templates.CLEAVER.makeCopy(null, mort));
+		mort.inventory.add(Templates.LANTERN.makeCopy(null, mort));
+		mort.inventory.add(Templates.PICKAXE.makeCopy(null, mort));
 		mort.inventory.add(mortsKey);
 		mort.inventory.add(mort.mortsBell);
 		mort.inventory.add(mort.mortsMeatChunk);
@@ -111,7 +111,7 @@ public class QuestCaveOfTheBlind extends Quest {
 				new Object[] { "SHHHHHhhhhhhhh!!! -Mort" });
 
 		// Add spoons
-		serratedSpoon = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[44][11]);
+		serratedSpoon = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[44][11], null);
 		serratedSpoon.quest = this;
 
 		// Conversations
@@ -210,31 +210,31 @@ public class QuestCaveOfTheBlind extends Quest {
 		ArrayList<Key> mortsKeys = new ArrayList();
 		mortsKeys.add(mortsKey);
 		mortsKeys.add((Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
-		caveFeatures.add(Templates.VEIN.makeCopy(Game.level.squares[142][23]));
-		mortsBedroomDoor = Templates.DOOR.makeCopy(Game.level.squares[141][21], mortsKeys, true);
+		caveFeatures.add(Templates.VEIN.makeCopy(Game.level.squares[142][23], mort));
+		mortsBedroomDoor = Templates.DOOR.makeCopy(Game.level.squares[141][21], mortsKeys, true, mort);
 		caveFeatures.add(mortsBedroomDoor);
-		mortsStoreroomDoor = Templates.DOOR.makeCopy(Game.level.squares[131][21], mortsKeys, true);
+		mortsStoreroomDoor = Templates.DOOR.makeCopy(Game.level.squares[131][21], mortsKeys, true, mort);
 		caveFeatures.add(mortsStoreroomDoor);
 
 		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
-				new ArrayList<Square>(), null, 0, 0, 0, 0, true));
+				new ArrayList<Square>(), null, 0, 0, 0, 0, true, mort));
 
 		// Dirty Sheet
 		// Templates.DIRTY_SHEET.makeCopy(Game.level.squares[47][11]);
 		// Templates.DIRTY_SHEET_2.makeCopy(Game.level.squares[47][10]);
-		Templates.DIRTY_SHEET_3.makeCopy(Game.level.squares[47][9]);
+		Templates.DIRTY_SHEET_3.makeCopy(Game.level.squares[47][9], null);
 		// Smashed Glass
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[43][12]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][11]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][12]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][11]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][12]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][13]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[46][12]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][9]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][10]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][11]);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][12]);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[43][12], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][11], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][12], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][11], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][12], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][13], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[46][12], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][9], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][10], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][11], null);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][12], null);
 
 	}
 
@@ -243,7 +243,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		Sign noEntry = Templates.SIGN.makeCopy(Game.level.squares[142][20], "Sign", new Object[] { "PRIVATE! - Mort" });
 		noEntry.quest = this;
 
-		GameObject trough = Templates.TROUGH.makeCopy(Game.level.squares[150][25]);
+		GameObject trough = Templates.TROUGH.makeCopy(Game.level.squares[150][25], mort);
 		troughSquare = Game.level.squares[150][25];
 		safeSquare = Game.level.squares[144][25];
 
@@ -254,24 +254,24 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public void makeMortsStorage() {
 
-		GameObject outsideBlood1 = Templates.BLOOD.makeCopy(Game.level.squares[117][21]);
-		GameObject outsideBlood2 = Templates.BLOOD.makeCopy(Game.level.squares[118][21]);
-		GameObject outsideBlood3 = Templates.BLOOD.makeCopy(Game.level.squares[119][21]);
-		GameObject outsideBlood4 = Templates.BLOOD.makeCopy(Game.level.squares[120][21]);
-		GameObject outsideBlood5 = Templates.BLOOD.makeCopy(Game.level.squares[121][21]);
-		GameObject outsideBlood6 = Templates.BLOOD.makeCopy(Game.level.squares[122][21]);
-		GameObject outsideBlood7 = Templates.BLOOD.makeCopy(Game.level.squares[123][21]);
-		GameObject blood = Templates.BLOOD.makeCopy(Game.level.squares[24][21]);
-		Corpse carcass1 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][21]);
-		Corpse carcass2 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][21]);
-		Corpse carcass3 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][21]);
-		Corpse carcass4 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[125][21]);
-		Corpse carcass5 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[125][21]);
-		Corpse carcass6 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][22]);
-		Corpse carcass7 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][24]);
-		ore = Templates.ORE.makeCopy(Game.level.squares[124][24]);
-		lantern = Templates.LANTERN.makeCopy(Game.level.squares[126][24]);
-		GameObject table = Templates.TABLE.makeCopy(Game.level.squares[127][24]);
+		GameObject outsideBlood1 = Templates.BLOOD.makeCopy(Game.level.squares[117][21], null);
+		GameObject outsideBlood2 = Templates.BLOOD.makeCopy(Game.level.squares[118][21], null);
+		GameObject outsideBlood3 = Templates.BLOOD.makeCopy(Game.level.squares[119][21], null);
+		GameObject outsideBlood4 = Templates.BLOOD.makeCopy(Game.level.squares[120][21], null);
+		GameObject outsideBlood5 = Templates.BLOOD.makeCopy(Game.level.squares[121][21], null);
+		GameObject outsideBlood6 = Templates.BLOOD.makeCopy(Game.level.squares[122][21], null);
+		GameObject outsideBlood7 = Templates.BLOOD.makeCopy(Game.level.squares[123][21], null);
+		GameObject blood = Templates.BLOOD.makeCopy(Game.level.squares[24][21], null);
+		Corpse carcass1 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][21], null);
+		Corpse carcass2 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][21], null);
+		Corpse carcass3 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][21], null);
+		Corpse carcass4 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[125][21], null);
+		Corpse carcass5 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[125][21], null);
+		Corpse carcass6 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][22], null);
+		Corpse carcass7 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[124][24], null);
+		ore = Templates.ORE.makeCopy(Game.level.squares[124][24], mort);
+		lantern = Templates.LANTERN.makeCopy(Game.level.squares[126][24], mort);
+		GameObject table = Templates.TABLE.makeCopy(Game.level.squares[127][24], mort);
 
 		// Link to the quest to keep them safe
 		blood.quest = this;
@@ -291,59 +291,59 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Entrance 2
 		Blind blind11 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3), entrancePart2);
-		blind11.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind11.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind11.quest = this;
 		blind.add(blind11);
 
 		// Atrium 1
 		Blind blind1 = Templates.BLIND.makeCopy(Game.level.squares[60][12], Game.level.factions.get(3), atrium1);
-		blind1.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind1.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind1.quest = this;
 		blind.add(blind1);
 
 		Blind blind2 = Templates.BLIND.makeCopy(Game.level.squares[60][15], Game.level.factions.get(3), atrium1);
-		blind2.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind2.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind2.quest = this;
 		blind.add(blind2);
 
 		// Atrium 2
 		Blind blind3 = Templates.BLIND.makeCopy(Game.level.squares[55][23], Game.level.factions.get(3), atrium2);
-		blind3.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind3.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind3.quest = this;
 		blind.add(blind3);
 
 		Blind blind4 = Templates.BLIND.makeCopy(Game.level.squares[60][25], Game.level.factions.get(3), atrium2);
-		blind4.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind4.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind4.quest = this;
 		blind.add(blind4);
 
 		Blind blind5 = Templates.BLIND.makeCopy(Game.level.squares[55][24], Game.level.factions.get(3), atrium2);
-		blind5.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind5.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind5.quest = this;
 		blind.add(blind5);
 
 		Blind blind6 = Templates.BLIND.makeCopy(Game.level.squares[59][25], Game.level.factions.get(3), atrium2);
-		blind6.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind6.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind6.quest = this;
 		blind.add(blind6);
 
 		Blind blind7 = Templates.BLIND.makeCopy(Game.level.squares[60][26], Game.level.factions.get(3), atrium2);
-		blind7.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind7.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind7.quest = this;
 		blind.add(blind7);
 
 		Blind blind8 = Templates.BLIND.makeCopy(Game.level.squares[57][24], Game.level.factions.get(3), atrium2);
-		blind8.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind8.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind8.quest = this;
 		blind.add(blind8);
 
 		Blind blind9 = Templates.BLIND.makeCopy(Game.level.squares[56][25], Game.level.factions.get(3), atrium2);
-		blind9.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind9.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind9.quest = this;
 		blind.add(blind9);
 
 		Blind blind10 = Templates.BLIND.makeCopy(Game.level.squares[57][27], Game.level.factions.get(3), atrium2);
-		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null));
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind10.quest = this;
 		blind.add(blind10);
 

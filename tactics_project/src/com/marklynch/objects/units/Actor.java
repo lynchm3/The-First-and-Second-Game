@@ -24,7 +24,6 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Key;
-import com.marklynch.objects.Owner;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
@@ -39,7 +38,7 @@ import com.marklynch.utils.TextureUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class Actor extends ActorTemplate implements Owner {
+public class Actor extends ActorTemplate {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
@@ -105,14 +104,14 @@ public class Actor extends ActorTemplate implements Owner {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Faction faction, float anchorX, float anchorY,
-			float hearing) {
+			float electricResistance, float poisonResistance, Actor owner, Faction faction, float anchorX,
+			float anchorY, float hearing) {
 
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance);
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -126,6 +125,8 @@ public class Actor extends ActorTemplate implements Owner {
 		this.bed = bed;
 		if (bed != null)
 			this.bedGUID = bed.guid;
+		if (bed != null)
+			bed.owner = this;
 
 		ArrayList<Weapon> weapons = getWeaponsInInventory();
 		//
@@ -152,6 +153,10 @@ public class Actor extends ActorTemplate implements Owner {
 
 		drawOffsetX = -32;
 		drawOffsetY = -64;
+
+		for (GameObject gameObject : inventory.getGameObjects()) {
+			gameObject.owner = this;
+		}
 	}
 
 	@Override
@@ -445,9 +450,9 @@ public class Actor extends ActorTemplate implements Owner {
 			// add a carcass
 			GameObject body;
 			if (this instanceof WildAnimal)
-				body = Templates.CARCASS.makeCopy(this.name + " carcass", this.squareGameObjectIsOn);
+				body = Templates.CARCASS.makeCopy(this.name + " carcass", this.squareGameObjectIsOn, null);
 			else
-				body = Templates.CORPSE.makeCopy(this.name + " corpse", this.squareGameObjectIsOn);
+				body = Templates.CORPSE.makeCopy(this.name + " corpse", this.squareGameObjectIsOn, null);
 			// body = new Corpse(this.name + " corpse", 5, "carcass.png",
 			// this.squareGameObjectIsOn, new Inventory(),
 			// false, true, false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f,
@@ -709,7 +714,7 @@ public class Actor extends ActorTemplate implements Owner {
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner
 
 				, faction, anchorX, anchorY, hearing);
 		return actor;
@@ -931,8 +936,10 @@ public class Actor extends ActorTemplate implements Owner {
 
 	public void clearActions() {
 		for (Action action : actions) {
-			for (Square destinationSquare : action.sound.destinationSquares) {
-				destinationSquare.sounds.remove(action.sound);
+			if (action.sound != null) {
+				for (Square destinationSquare : action.sound.destinationSquares) {
+					destinationSquare.sounds.remove(action.sound);
+				}
 			}
 		}
 		actions.clear();

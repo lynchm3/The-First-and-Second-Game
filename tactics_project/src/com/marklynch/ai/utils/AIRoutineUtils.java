@@ -882,10 +882,14 @@ public class AIRoutineUtils {
 		public int compare(Actor a, Actor b) {
 
 			Path pathA = getBestPathToAttackTarget(a);
-			int travelCostA = pathA.travelCost;
+			int travelCostA = Integer.MAX_VALUE;
+			if (pathA != null)
+				travelCostA = pathA.travelCost;
 
 			Path pathB = getBestPathToAttackTarget(b);
-			int travelCostB = pathB.travelCost;
+			int travelCostB = Integer.MAX_VALUE;
+			if (pathB != null)
+				travelCostB = pathB.travelCost;
 
 			return travelCostB - travelCostA;
 		}

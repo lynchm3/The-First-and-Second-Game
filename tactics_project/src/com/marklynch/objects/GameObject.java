@@ -82,12 +82,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance) {
+			float electricResistance, float poisonResistance, Actor owner) {
 
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance);
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 		this.remainingHealth = health;
 
 		if (squareGameObjectIsOn != null) {
@@ -426,12 +426,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	@Override
-	public GameObject makeCopy(Square square) {
+	public GameObject makeCopy(Square square, Actor owner) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance);
+				electricResistance, poisonResistance, owner);
 	}
 
 	public ArrayList<Weapon> getWeaponsInInventory() {

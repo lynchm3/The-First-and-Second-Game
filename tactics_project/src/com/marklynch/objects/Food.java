@@ -1,6 +1,7 @@
 package com.marklynch.objects;
 
 import com.marklynch.level.Square;
+import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
 
@@ -11,20 +12,20 @@ public class Food extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance) {
+			float electricResistance, float poisonResistance, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance);
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 	}
 
 	@Override
-	public Food makeCopy(Square square) {
+	public Food makeCopy(Square square, Actor owner) {
 		return new Food(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance);
+				electricResistance, poisonResistance, owner);
 	}
 
 }

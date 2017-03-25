@@ -23,11 +23,11 @@ public class Tree extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance) {
+			float electricResistance, float poisonResistance, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance);
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 		addApple(appleMaxRatioSize);
 		healthWhenLastDroppedFruit = this.totalHealth;
 	}
@@ -37,7 +37,7 @@ public class Tree extends GameObject {
 		float appleSize = (float) (Math.random() * maxSize);
 
 		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), false, true, true, false, false,
-				false, appleSize, appleSize, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f);
+				false, appleSize, appleSize, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
 		apple.anchorX = 6;
 		apple.anchorY = 6;
 
@@ -136,12 +136,12 @@ public class Tree extends GameObject {
 	}
 
 	@Override
-	public Tree makeCopy(Square square) {
+	public Tree makeCopy(Square square, Actor owner) {
 		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance);
+				electricResistance, poisonResistance, owner);
 	}
 
 }

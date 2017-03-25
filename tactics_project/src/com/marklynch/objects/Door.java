@@ -24,11 +24,11 @@ public class Door extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, ArrayList<Key> keys, boolean locked) {
+			float electricResistance, float poisonResistance, Actor owner, ArrayList<Key> keys, boolean locked) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance);
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 		this.keys = keys;
 		this.locked = locked;
 
@@ -95,12 +95,12 @@ public class Door extends GameObject {
 		blocksLineOfSight = true;
 	}
 
-	public Door makeCopy(Square square, ArrayList<Key> keys, boolean locked) {
+	public Door makeCopy(Square square, ArrayList<Key> keys, boolean locked, Actor owner) {
 		return new Door(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance, keys, locked);
+				electricResistance, poisonResistance, owner, keys, locked);
 	}
 
 }
