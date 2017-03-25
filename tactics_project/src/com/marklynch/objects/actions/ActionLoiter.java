@@ -36,14 +36,6 @@ public class ActionLoiter extends Action {
 			Game.level.endTurn();
 	}
 
-	private void move(Actor actor, Square square) {
-		actor.squareGameObjectIsOn.inventory.remove(actor);
-		actor.distanceMovedThisTurn += 1;
-		actor.squareGameObjectIsOn = square;
-		square.inventory.add(actor);
-		// Actor.highlightSelectedCharactersSquares();
-	}
-
 	@Override
 	public boolean check() {
 		return true;

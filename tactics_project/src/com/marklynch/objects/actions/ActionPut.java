@@ -5,7 +5,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionGive extends Action {
+public class ActionPut extends Action {
 
 	public static final String ACTION_NAME = "Give";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -13,7 +13,7 @@ public class ActionGive extends Action {
 	GameObject receiver;
 	GameObject object;
 
-	public ActionGive(Actor performer, Actor receiver, GameObject object) {
+	public ActionPut(Actor performer, GameObject receiver, GameObject object) {
 		super(ACTION_NAME);
 		this.performer = performer;
 		this.receiver = receiver;
@@ -31,7 +31,7 @@ public class ActionGive extends Action {
 		if (!enabled)
 			return;
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " gave ", object, " to ", receiver }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " put ", object, " in ", receiver }));
 		performer.inventory.remove(object);
 		receiver.inventory.add(object);
 		if (receiver instanceof Actor) {

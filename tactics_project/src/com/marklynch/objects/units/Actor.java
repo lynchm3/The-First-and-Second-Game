@@ -24,9 +24,9 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Key;
-import com.marklynch.objects.Templates;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.weapons.Weapon;
@@ -444,29 +444,8 @@ public class Actor extends ActorTemplate {
 	@Override
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
-			// Remove from draw/update
-			this.squareGameObjectIsOn.inventory.remove(this);
-			// this.faction.actors.remove(this);
 
-			// add a carcass
-			GameObject body;
-			if (this instanceof WildAnimal)
-				body = Templates.CARCASS.makeCopy(this.name + " carcass", this.squareGameObjectIsOn, null);
-			else
-				body = Templates.CORPSE.makeCopy(this.name + " corpse", this.squareGameObjectIsOn, null);
-			// body = new Corpse(this.name + " corpse", 5, "carcass.png",
-			// this.squareGameObjectIsOn, new Inventory(),
-			// false, true, false, true, false, false, 0.5f, 0.5f, 0.5f, 0.5f,
-			// 1f, 1f, null, 0.5f, 0.5f, false,
-			// 0f, 0f, 0f, 0f);
-
-			this.giveAllToTarget(null, body);
-			// this.squareGameObjectIsOn.inventory.add(body);
-			//
-			// if (!Game.level.inanimateObjectsOnGround.contains(body))
-			// Game.level.inanimateObjectsOnGround.add(body);
-
-			// screamAudio.playAsSoundEffect(1.0f, 1.0f, false);
+			new ActionDie(this, squareGameObjectIsOn).perform();
 			return true;
 		}
 		return false;
@@ -752,20 +731,6 @@ public class Actor extends ActorTemplate {
 				if (squareGameObjectIsOn.visibleToPlayer)
 					Game.level.logOnScreen(
 							new ActivityLog(new Object[] { this, " sold ", gameObjectToSell, " to ", gameObject }));
-				this.inventory.remove(gameObjectToSell);
-				gameObject.inventory.add(gameObjectToSell);
-			}
-		}
-
-	}
-
-	public void giveAllToTarget(Class clazz, GameObject gameObject) {
-		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
-		for (GameObject gameObjectToSell : gameObjectsToSell) {
-			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
-				if (squareGameObjectIsOn.visibleToPlayer)
-					Game.level.logOnScreen(
-							new ActivityLog(new Object[] { this, " gave ", gameObjectToSell, " to ", gameObject }));
 				this.inventory.remove(gameObjectToSell);
 				gameObject.inventory.add(gameObjectToSell);
 			}
