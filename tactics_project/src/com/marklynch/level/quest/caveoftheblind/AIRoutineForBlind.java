@@ -2,6 +2,8 @@ package com.marklynch.level.quest.caveoftheblind;
 
 import java.util.ArrayList;
 
+import javax.tools.Tool;
+
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
@@ -9,8 +11,8 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.actions.ActionTakeBite;
+import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Bell;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForBlind extends AIRoutine {
@@ -111,7 +113,7 @@ public class AIRoutineForBlind extends AIRoutine {
 		}
 
 		addNonBlindToAttackersList();
-		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class);
+		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class, Tool.class);
 		createSearchLocationsBasedOnVisibleAttackers();
 
 		if (runFightRoutine()) {

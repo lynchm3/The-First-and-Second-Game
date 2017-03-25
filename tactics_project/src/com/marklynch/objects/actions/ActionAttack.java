@@ -5,6 +5,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
+import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionAttack extends Action {
@@ -32,6 +33,9 @@ public class ActionAttack extends Action {
 
 		if (!enabled)
 			return;
+
+		Weapon weapon = (Weapon) performer.equipped;
+
 		// performer.attack(targetGameObject, false);
 
 		// GameObject targetGameObject;// = target;
@@ -41,7 +45,7 @@ public class ActionAttack extends Action {
 			performer.addAttackerForNearbyFactionMembersIfVisible((Actor) target);
 			((Actor) target).addAttackerForNearbyFactionMembersIfVisible(performer);
 		}
-		target.remainingHealth -= performer.equippedWeapon.getEffectiveSlashDamage();
+		target.remainingHealth -= weapon.getEffectiveSlashDamage();
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 		String attackTypeString;
@@ -50,8 +54,8 @@ public class ActionAttack extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] {
 
-					performer, " " + attackTypeString + " ", target, " with ", performer.equippedWeapon.imageTexture,
-					" for " + performer.equippedWeapon.getEffectiveSlashDamage() + " damage" }));
+					performer, " " + attackTypeString + " ", target, " with ", performer.equipped.imageTexture,
+					" for " + weapon.getEffectiveSlashDamage() + " damage" }));
 
 		Actor actor = null;
 		if (target instanceof Actor)
@@ -77,9 +81,9 @@ public class ActionAttack extends Action {
 		}
 
 		// Sound
-		float loudness = target.soundWhenHit * performer.equippedWeapon.soundWhenHitting;
-		if (performer.equippedWeapon != null)
-			sound = new Sound(performer, performer.equippedWeapon, performer.squareGameObjectIsOn, loudness, legal,
+		float loudness = target.soundWhenHit * performer.equipped.soundWhenHitting;
+		if (performer.equipped != null)
+			sound = new Sound(performer, performer.equipped, performer.squareGameObjectIsOn, loudness, legal,
 					this.getClass());
 
 		if (performer.faction == Game.level.factions.get(0)) {
@@ -98,7 +102,14 @@ public class ActionAttack extends Action {
 		if (!performer.visibleFrom(target.squareGameObjectIsOn))
 			return false;
 
-		if (!performer.equippedWeapon.hasRange(performer.straightLineDistanceTo(target.squareGameObjectIsOn)))
+		Weapon weapon = null;
+		if (performer.equipped instanceof Weapon) {
+			weapon = (Weapon) performer.equipped;
+		} else {
+			return false;
+		}
+
+		if (!weapon.hasRange(performer.straightLineDistanceTo(target.squareGameObjectIsOn)))
 			return false;
 
 		return true;

@@ -5,8 +5,8 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Vein;
+import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Pickaxe;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionMine extends Action {

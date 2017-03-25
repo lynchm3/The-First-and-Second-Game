@@ -20,8 +20,8 @@ import com.marklynch.objects.Key;
 import com.marklynch.objects.Sign;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Lantern;
 import com.marklynch.objects.weapons.Weapon;
 
 public class QuestCaveOfTheBlind extends Quest {
@@ -107,8 +107,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		makeMortsRoom();
 		makeBlind();
 
-		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[43][15], "Rock with etching",
-				new Object[] { "SHHHHHhhhhhhhh!!! -Mort" });
+		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[43][15], "Rock with message",
+				new Object[] { "Stay out or The Blind will get you! -Mort" });
 
 		// Add spoons
 		serratedSpoon = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[44][11], null);

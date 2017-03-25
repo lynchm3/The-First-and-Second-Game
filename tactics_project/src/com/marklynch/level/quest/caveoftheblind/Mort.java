@@ -6,8 +6,8 @@ import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
+import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Bell;
 
 import mdesl.graphics.Color;
 

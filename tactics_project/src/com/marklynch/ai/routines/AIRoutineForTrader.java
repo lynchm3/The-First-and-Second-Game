@@ -98,8 +98,8 @@ public class AIRoutineForTrader extends AIRoutine {
 				shopkeepState = SHOPKEEP_STATE.UPDATING_SIGN;
 			else {
 				// Equip ur broom!!!
-				if (trader.equippedWeapon != trader.broom)
-					trader.equippedWeapon = trader.broom;
+				if (trader.equipped != trader.broom)
+					trader.equipped = trader.broom;
 				// if not in building move in to the building
 				if (targetSquare != null) {
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);

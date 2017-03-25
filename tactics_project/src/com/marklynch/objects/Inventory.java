@@ -509,7 +509,7 @@ public class Inventory {
 		}
 
 		if (gameObjectToDrawOnPlayer == null) {
-			gameObjectToDrawOnPlayer = Game.level.player.equippedWeapon;
+			gameObjectToDrawOnPlayer = Game.level.player.equipped;
 		}
 
 		// Object to draw player holding

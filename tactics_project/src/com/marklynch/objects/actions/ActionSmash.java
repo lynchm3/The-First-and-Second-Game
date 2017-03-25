@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionSmash extends Action {
@@ -52,7 +53,14 @@ public class ActionSmash extends Action {
 
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
-			if (!actor.equippedWeapon.hasRange(actor.straightLineDistanceTo(target.squareGameObjectIsOn)))
+
+			Weapon weapon = null;
+			if (actor.equipped instanceof Weapon) {
+				weapon = (Weapon) actor.equipped;
+			} else {
+				return false;
+			}
+			if (weapon.hasRange(actor.straightLineDistanceTo(target.squareGameObjectIsOn)))
 				return false;
 			if (!actor.visibleFrom(target.squareGameObjectIsOn))
 				return false;

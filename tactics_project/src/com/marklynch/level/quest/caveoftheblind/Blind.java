@@ -11,6 +11,7 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;
 
@@ -53,10 +54,11 @@ public class Blind extends Actor {
 			return null;
 		}
 
-		if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
-				&& Game.level.activeActor.equippedWeapon
-						.hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn))) {
-			return new ActionAttack(performer, this);
+		if (performer.equipped instanceof Weapon) {
+			Weapon weapon = (Weapon) performer.equipped;
+			if (weapon.hasRange(performer.straightLineDistanceTo(this.squareGameObjectIsOn))) {
+				return new ActionAttack(performer, this);
+			}
 		}
 
 		return null;
@@ -65,10 +67,11 @@ public class Blind extends Actor {
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
-				&& Game.level.activeActor.equippedWeapon
-						.hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn))) {
-			actions.add(new ActionAttack(performer, this));
+		if (performer.equipped instanceof Weapon) {
+			Weapon weapon = (Weapon) performer.equipped;
+			if (weapon.hasRange(performer.straightLineDistanceTo(this.squareGameObjectIsOn))) {
+				actions.add(new ActionAttack(performer, this));
+			}
 		}
 
 		// ArrayList<Action> actions = new ArrayList<Action>();

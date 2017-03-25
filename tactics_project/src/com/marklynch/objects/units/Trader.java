@@ -41,7 +41,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 				hearing);
 
 		aiRoutine = new AIRoutineForTrader(this);
-		equippedWeapon = broom;
+		equipped = broom;
 	}
 
 	public boolean isPlayerInTheShop() {
@@ -51,7 +51,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 	public Object[] getTextForSign() {
 
 		ArrayList<GameObject> temp = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
-		temp.remove(equippedWeapon);
+		temp.remove(equipped);
 		temp.remove(broom);
 		Collections.sort(temp, this);
 		if (temp.size() == 0) {

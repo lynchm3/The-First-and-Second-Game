@@ -2,11 +2,11 @@ package com.marklynch.objects;
 
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
+import com.marklynch.objects.tools.Bell;
+import com.marklynch.objects.tools.Lantern;
+import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
-import com.marklynch.objects.weapons.Bell;
-import com.marklynch.objects.weapons.Lantern;
-import com.marklynch.objects.weapons.Pickaxe;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
@@ -34,7 +34,7 @@ public class Templates {
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
 			1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, 59, 63);
-	public static final Pickaxe PICKAXE = new Pickaxe("Pickaxe", 3, 1, 1, "pickaxe.png", 100, null, true, false, false,
+	public static final Pickaxe PICKAXE = new Pickaxe("Pickaxe", 1, 1, "pickaxe.png", 100, null, true, false, false,
 			false, 0.34f, 0.34f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, 24, 32);
 	public static final Weapon HOE = new Weapon("Hoe", 2, 1, 1, "hoe.png", 100, null, true, false, false, false, 1f, 1f,
 			0.5f, 0.5f, 15f, 15f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, 22, 15);
@@ -51,9 +51,9 @@ public class Templates {
 	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 1, 1, "serrated_spoon.png", 100, null,
 			true, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null,
 			16, 24);
-	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 1, 1, 1, "bell.png", 100, null, true, false, false,
+	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 1, 1, "bell.png", 100, null, true, false, false,
 			false, 0.5f, 0.5f, 0.5f, 0.5f, 25f, 25f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, 21, 32);
-	public static final Lantern LANTERN = new Lantern("Lantern", 1, 1, 1, "lantern.png", 100, null, true, false, false,
+	public static final Lantern LANTERN = new Lantern("Lantern", 1, 1, "lantern.png", 100, null, true, false, false,
 			false, 0.25f, 0.25f, 0.5f, 0.5f, 25f, 25f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, 16, 4);
 
 	// Blades

@@ -533,7 +533,7 @@ public class Editor {
 		Bed brentsBed = Templates.BED.makeCopy(Game.level.squares[10][9]);
 		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1), brentsBed);
 		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBrent));
-		hunterBrent.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
+		hunterBrent.equipped = (Weapon) hunterBrent.inventory.get(0);
 		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		// Hunting lodge
@@ -606,12 +606,12 @@ public class Editor {
 		Bed brontsBed = Templates.BED.makeCopy(Game.level.squares[9][9]);
 		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1), brontsBed);
 		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBront1));
-		hunterBront1.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
+		hunterBront1.equipped = (Weapon) hunterBrent.inventory.get(0);
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null);
 		hunterBront2.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront2));
-		hunterBront2.equippedWeapon = (Weapon) hunterBrent.inventory.get(0);
+		hunterBront2.equipped = (Weapon) hunterBrent.inventory.get(0);
 		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null);

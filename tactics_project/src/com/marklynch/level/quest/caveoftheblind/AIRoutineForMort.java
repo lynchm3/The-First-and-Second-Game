@@ -8,7 +8,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionRing;
-import com.marklynch.objects.weapons.Bell;
+import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForMort extends AIRoutine {

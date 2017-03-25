@@ -28,6 +28,7 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionTalk;
+import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
@@ -77,7 +78,7 @@ public class Actor extends ActorTemplate {
 	public transient Faction faction;
 	public String factionGUID = null;
 
-	public Weapon equippedWeapon = null;
+	public GameObject equipped = null;
 	public String equippedWeaponGUID = null;
 
 	public transient Group group;
@@ -136,7 +137,7 @@ public class Actor extends ActorTemplate {
 		// }
 
 		if (weapons.size() > 0 && weapons.get(0) != null) {
-			equippedWeapon = weapons.get(0);
+			equipped = weapons.get(0);
 			equippedWeaponGUID = weapons.get(0).guid;
 		}
 
@@ -203,7 +204,7 @@ public class Actor extends ActorTemplate {
 		if (equippedWeaponGUID != null) {
 			for (Weapon weapon : this.getWeaponsInInventory()) {
 				if (equippedWeaponGUID.equals(weapon.guid)) {
-					this.equippedWeapon = weapon;
+					this.equipped = weapon;
 				}
 			}
 		}
@@ -405,7 +406,7 @@ public class Actor extends ActorTemplate {
 		int range = this.straightLineDistanceTo(target.squareGameObjectIsOn);
 		for (Weapon weapon : getWeaponsInInventory()) {
 			if (range >= weapon.getEffectiveMinRange() && range <= weapon.getEffectiveMaxRange()) {
-				equippedWeapon = weapon;
+				equipped = weapon;
 				equippedWeaponGUID = weapon.guid;
 			}
 		}
@@ -423,10 +424,10 @@ public class Actor extends ActorTemplate {
 		}
 
 		if (potentialWeaponsToEquip.size() == 0) {
-			equippedWeapon = null;
+			equipped = null;
 			equippedWeaponGUID = null;
 		} else if (potentialWeaponsToEquip.size() == 1) {
-			equippedWeapon = potentialWeaponsToEquip.get(0);
+			equipped = potentialWeaponsToEquip.get(0);
 			equippedWeaponGUID = potentialWeaponsToEquip.get(0).guid;
 		} else {
 			ArrayList<Fight> fights = new ArrayList<Fight>();
@@ -435,7 +436,7 @@ public class Actor extends ActorTemplate {
 				fights.add(fight);
 			}
 			fights.sort(new Fight.FightComparator());
-			equippedWeapon = fights.get(0).attackerWeapon;
+			equipped = fights.get(0).attackerWeapon;
 			equippedWeaponGUID = fights.get(0).attackerWeapon.guid;
 		}
 	}
@@ -518,16 +519,16 @@ public class Actor extends ActorTemplate {
 
 		super.draw1();
 
-		if (equippedWeapon != null) {
+		if (equipped != null) {
 
 			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX + anchorX - equippedWeapon.anchorX);
+					+ drawOffsetX + anchorX - equipped.anchorX);
 			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY + anchorY - equippedWeapon.anchorY);
+					+ drawOffsetY + anchorY - equipped.anchorY);
 			float alpha = 1.0f;
-			TextureUtils.drawTexture(this.equippedWeapon.imageTexture, alpha, weaponPositionXInPixels,
-					weaponPositionXInPixels + equippedWeapon.width, weaponPositionYInPixels,
-					weaponPositionYInPixels + equippedWeapon.height);
+			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, weaponPositionXInPixels,
+					weaponPositionXInPixels + equipped.width, weaponPositionYInPixels,
+					weaponPositionYInPixels + equipped.height);
 
 			// TextureUtils.drawTexture(imageTexture, alpha,
 			// actorPositionXInPixels, actorPositionXInPixels + width,
@@ -704,8 +705,8 @@ public class Actor extends ActorTemplate {
 	}
 
 	public void weaponButtonClicked(Weapon weapon) {
-		this.equippedWeapon = weapon;
-		equippedWeaponGUID = this.equippedWeapon.guid;
+		this.equipped = weapon;
+		equippedWeaponGUID = this.equipped.guid;
 	}
 
 	public Actor makeCopy(Square square, Faction faction, Bed bed) {
@@ -833,10 +834,11 @@ public class Actor extends ActorTemplate {
 		if (this == Game.level.player) {
 			return null;
 		} else if (performer.attackers.contains(this)) {
-			if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
-					&& Game.level.activeActor.equippedWeapon
-							.hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn))) {
-				return new ActionAttack(performer, this);
+			if (performer.equipped instanceof Weapon) {
+				Weapon weapon = (Weapon) performer.equipped;
+				if (weapon.hasRange(performer.straightLineDistanceTo(this.squareGameObjectIsOn))) {
+					return new ActionAttack(performer, this);
+				}
 			}
 		} else {
 			return new ActionTalk(performer, this);
@@ -859,9 +861,12 @@ public class Actor extends ActorTemplate {
 
 		if (this == Game.level.player) {
 			// self action
-			Action utilityAction = performer.equippedWeapon.getUtilityAction(performer);
-			if (utilityAction != null) {
-				actions.add(utilityAction);
+			if (equipped instanceof Tool) {
+				Tool tool = (Tool) equipped;
+				Action utilityAction = tool.getUtilityAction(performer);
+				if (utilityAction != null) {
+					actions.add(utilityAction);
+				}
 			}
 		}
 

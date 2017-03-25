@@ -146,7 +146,7 @@ public class LevelSettingsWindow extends SettingsWindow {
 			public void click() {
 				Game.level.currentFactionMoving = Game.level.factions.get(Game.level.currentFactionMovingIndex);
 				Game.level.activeActor = Game.level.player;
-				Game.level.activeActor.equippedWeapon = Game.level.activeActor.getWeaponsInInventory().get(0);
+				Game.level.activeActor.equipped = Game.level.activeActor.getWeaponsInInventory().get(0);
 				Game.level.activeActor.calculateVisibleSquares();
 				Game.level.turn = 1;
 				Game.level = Game.level;
