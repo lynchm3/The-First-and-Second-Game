@@ -1,10 +1,15 @@
 package com.marklynch.level.quest.caveoftheblind;
 
+import java.util.ArrayList;
+
+import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -40,6 +45,52 @@ public class Blind extends Actor {
 	@Override
 	public void postLoad2() {
 		super.postLoad2();
+	}
+
+	@Override
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+		if (this == Game.level.player) {
+			return null;
+		}
+
+		if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
+				&& Game.level.activeActor.equippedWeapon
+						.hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn))) {
+			return new ActionAttack(performer, this);
+		}
+
+		return null;
+	}
+
+	@Override
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		if (Game.level.activeActor != null && Game.level.activeActor.equippedWeapon != null
+				&& Game.level.activeActor.equippedWeapon
+						.hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn))) {
+			actions.add(new ActionAttack(performer, this));
+		}
+
+		// ArrayList<Action> actions = new ArrayList<Action>();
+		// if (this != Game.level.player) {
+		// // Talk
+		// actions.add(new ActionTalk(performer, this));
+		// // Inherited from object (attack...)
+		// actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
+		// // Inherited from squre (move/swap squares)
+		// actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
+		// }
+
+		// if (this == Game.level.player) {
+		// // self action
+		// Action utilityAction =
+		// performer.equippedWeapon.getUtilityAction(performer);
+		// if (utilityAction != null) {
+		// actions.add(utilityAction);
+		// }
+		// }
+
+		return actions;
 	}
 
 	public Blind makeCopy(Square square, Faction faction, StructureRoom roomLivingIn) {

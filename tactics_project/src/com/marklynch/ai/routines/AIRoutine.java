@@ -52,6 +52,10 @@ public class AIRoutine {
 		ArrayList<Square> squaresThisCanHear = this.actor.getAllSquaresWithinDistance(this.actor.hearing);
 		for (Square squareThisCanHear : squaresThisCanHear) {
 			for (Sound sound : squareThisCanHear.sounds) {
+				System.out.println("sound.sourceObject.sourceActor = " + sound.sourceActor);
+				System.out.println("sound.sourceObject.sourceObject = " + sound.sourceObject);
+				System.out.println("sound.sourceObject.sourceSquare x y = " + sound.sourceSquare.xInGrid
+						+ sound.sourceSquare.yInGrid);
 				System.out.println("sound.sourceObject.getClass() = " + sound.sourceObject.getClass());
 				System.out.println("classesArrayList.contains(sound.sourceObject.getClass()) = "
 						+ classesArrayList.contains(sound.sourceObject.getClass()));

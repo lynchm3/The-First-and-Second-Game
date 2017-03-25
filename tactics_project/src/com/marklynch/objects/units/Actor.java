@@ -150,6 +150,9 @@ public class Actor extends ActorTemplate implements Owner {
 
 		this.anchorX = anchorX;
 		this.anchorY = anchorY;
+
+		drawOffsetX = -32;
+		drawOffsetY = -64;
 	}
 
 	@Override

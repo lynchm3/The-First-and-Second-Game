@@ -36,7 +36,7 @@ public class ActionTakeBite extends Action {
 
 		// Sound
 		float loudness = 1;
-		biter.sounds.add(new Sound(biter, biter.equippedWeapon, biter.squareGameObjectIsOn, loudness));
+		biter.sounds.add(new Sound(biter, biter, biter.squareGameObjectIsOn, loudness));
 
 		if (biter.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

@@ -77,7 +77,8 @@ public class ActionAttack extends Action {
 
 		// Sound
 		float loudness = target.soundWhenHit * attacker.equippedWeapon.soundWhenHitting;
-		attacker.sounds.add(new Sound(attacker, attacker.equippedWeapon, attacker.squareGameObjectIsOn, loudness));
+		if (attacker.equippedWeapon != null)
+			attacker.sounds.add(new Sound(attacker, attacker.equippedWeapon, attacker.squareGameObjectIsOn, loudness));
 
 		if (attacker.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

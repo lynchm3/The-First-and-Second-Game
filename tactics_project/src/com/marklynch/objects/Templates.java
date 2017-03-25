@@ -13,23 +13,23 @@ public class Templates {
 
 	// Player
 	public static final Actor Player = new Actor("You", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png", null, 1, 10, null,
-			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
+			new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
 			0f, 0f, null, 80f, 80f, 10f);
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
-			null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
+			null, new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, null, 88, 54, 10f);
 
 	// Monsters
 	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
-			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
+			new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
 			0f, 0f, null, 88, 54, 20f, null);
 
 	// Special People
 	public static final Mort MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
-			new Inventory(), true, false, true, false, false, 0.25f, 0.75f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, null, 88, 54, 20f);
+			new Inventory(), true, false, true, false, false, 2f, 2f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
+			0f, 0f, 0f, null, 88, 54, 20f);
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
