@@ -60,10 +60,12 @@ public class AIRoutine {
 				System.out.println("classesArrayList.contains(sound.sourceObject.getClass()) = "
 						+ classesArrayList.contains(sound.sourceObject.getClass()));
 
-				if (classesArrayList.contains(sound.sourceObject.getClass())
-						&& !this.actor.locationsToSearch.containsValue(sound.sourceSquare)
+				if (!this.actor.locationsToSearch.containsValue(sound.sourceSquare)
 						&& !this.actor.canSee(sound.sourceSquare)) {
-					this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
+
+					if (sound.illegal || classesArrayList.contains(sound.sourceObject.getClass())) {
+						this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
+					}
 				}
 			}
 		}

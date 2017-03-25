@@ -31,6 +31,10 @@ public class ActionAttack extends Action {
 
 		if (!enabled)
 			return;
+
+		boolean illegal = false;
+		if (illegal)
+			attacker.performingIllegalAction = true;
 		// performer.attack(targetGameObject, false);
 
 		// GameObject targetGameObject;// = target;
@@ -78,7 +82,8 @@ public class ActionAttack extends Action {
 		// Sound
 		float loudness = target.soundWhenHit * attacker.equippedWeapon.soundWhenHitting;
 		if (attacker.equippedWeapon != null)
-			attacker.sounds.add(new Sound(attacker, attacker.equippedWeapon, attacker.squareGameObjectIsOn, loudness));
+			attacker.sounds.add(new Sound(attacker, attacker.equippedWeapon, attacker.squareGameObjectIsOn, loudness,
+					illegal, this.getClass()));
 
 		if (attacker.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

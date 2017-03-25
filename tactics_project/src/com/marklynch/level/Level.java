@@ -18,6 +18,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Move;
 import com.marklynch.objects.weapons.Projectile;
@@ -98,7 +99,7 @@ public class Level {
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Level.this.endTurn();
+				new ActionLoiter(player, player.squareGameObjectIsOn).perform();
 			}
 		});
 		buttons.add(endTurnButton);
@@ -141,7 +142,7 @@ public class Level {
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Level.this.endTurn();
+				new ActionLoiter(player, player.squareGameObjectIsOn).perform();
 			}
 		});
 		buttons.add(endTurnButton);

@@ -3,7 +3,6 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.Door;
-import com.marklynch.objects.Key;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -29,7 +28,11 @@ public class ActionOpen extends Action {
 	@Override
 	public void perform() {
 
-		Key key = opener.getKeyFor(door);
+		// Key key = opener.getKeyFor(door);
+
+		boolean illegal = false;
+		if (illegal)
+			opener.performingIllegalAction = true;
 
 		if (door.locked)
 			new ActionUnlock(opener, door).perform();
@@ -43,7 +46,7 @@ public class ActionOpen extends Action {
 
 		// Sound
 		float loudness = 1;
-		opener.sounds.add(new Sound(opener, key, opener.squareGameObjectIsOn, loudness));
+		opener.sounds.add(new Sound(opener, door, opener.squareGameObjectIsOn, loudness, illegal, this.getClass()));
 
 		if (opener.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

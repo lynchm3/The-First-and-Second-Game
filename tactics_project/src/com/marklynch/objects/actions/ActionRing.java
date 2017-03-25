@@ -31,8 +31,13 @@ public class ActionRing extends Action {
 		if (!enabled)
 			return;
 
+		boolean illegal = false;
+		if (illegal)
+			ringer.performingIllegalAction = true;
+
 		// Sound
-		ringer.sounds.add(new Sound(ringer, object, ringer.squareGameObjectIsOn, object.soundWhenHitting));
+		ringer.sounds.add(new Sound(ringer, object, ringer.squareGameObjectIsOn, object.soundWhenHitting, illegal,
+				this.getClass()));
 
 		if (ringer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] {

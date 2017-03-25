@@ -31,12 +31,16 @@ public class ActionTakeBite extends Action {
 		if (!enabled)
 			return;
 
+		boolean illegal = false;
+		if (illegal)
+			biter.performingIllegalAction = true;
+
 		if (biter.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { biter, " took a bite of ", target }));
 
 		// Sound
 		float loudness = 1;
-		biter.sounds.add(new Sound(biter, biter, biter.squareGameObjectIsOn, loudness));
+		biter.sounds.add(new Sound(biter, biter, biter.squareGameObjectIsOn, loudness, illegal, this.getClass()));
 
 		if (biter.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

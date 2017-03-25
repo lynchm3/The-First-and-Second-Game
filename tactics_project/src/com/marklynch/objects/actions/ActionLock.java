@@ -30,6 +30,10 @@ public class ActionLock extends Action {
 	@Override
 	public void perform() {
 
+		boolean illegal = false;
+		if (illegal)
+			locker.performingIllegalAction = true;
+
 		Key key = locker.getKeyFor(door);
 
 		if (door.isOpen())
@@ -44,7 +48,7 @@ public class ActionLock extends Action {
 
 		// Sound
 		float loudness = 1;
-		locker.sounds.add(new Sound(locker, key, locker.squareGameObjectIsOn, loudness));
+		locker.sounds.add(new Sound(locker, key, locker.squareGameObjectIsOn, loudness, illegal, this.getClass()));
 
 		if (locker.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

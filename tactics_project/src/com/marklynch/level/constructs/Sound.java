@@ -14,8 +14,11 @@ public class Sound {
 	public Square sourceSquare;
 	public ArrayList<Square> destinationSquares;
 	public float loudness;
+	public boolean illegal;
+	public Class action;
 
-	public Sound(Actor sourceActor, GameObject sourceObject, Square sourceSquare, float loudness) {
+	public Sound(Actor sourceActor, GameObject sourceObject, Square sourceSquare, float loudness, boolean illegal,
+			Class action) {
 		super();
 		this.sourceActor = sourceActor;
 		this.sourceObject = sourceObject;

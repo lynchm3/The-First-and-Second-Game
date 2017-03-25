@@ -37,6 +37,10 @@ public class ActionMove extends Action {
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
 
+		boolean illegal = false;
+		if (illegal)
+			actor.performingIllegalAction = true;
+
 		Door door = (Door) squareToMoveTo.inventory.getGameObectOfClass(Door.class);
 		if (door != null && door.isOpen() == false) {
 			new ActionOpen(actor, door).perform();
@@ -66,7 +70,7 @@ public class ActionMove extends Action {
 		// Sound of glass
 		BrokenGlass brokenGlass = (BrokenGlass) target.inventory.getGameObectOfClass(BrokenGlass.class);
 		if (brokenGlass != null) {
-			mover.sounds.add(new Sound(mover, brokenGlass, mover.squareGameObjectIsOn, 10));
+			mover.sounds.add(new Sound(mover, brokenGlass, mover.squareGameObjectIsOn, 10, illegal, this.getClass()));
 		}
 
 		if (mover == Game.level.player)

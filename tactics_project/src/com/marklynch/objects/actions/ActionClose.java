@@ -3,7 +3,6 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.Door;
-import com.marklynch.objects.Key;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -30,7 +29,11 @@ public class ActionClose extends Action {
 	@Override
 	public void perform() {
 
-		Key key = closer.getKeyFor(door);
+		boolean illegal = false;
+		if (illegal)
+			closer.performingIllegalAction = true;
+
+		// Key key = closer.getKeyFor(door);
 
 		door.close();
 
@@ -41,7 +44,7 @@ public class ActionClose extends Action {
 
 		// Sound
 		float loudness = 1;
-		closer.sounds.add(new Sound(closer, key, closer.squareGameObjectIsOn, loudness));
+		closer.sounds.add(new Sound(closer, door, closer.squareGameObjectIsOn, loudness, illegal, this.getClass()));
 
 		if (closer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

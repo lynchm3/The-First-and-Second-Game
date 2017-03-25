@@ -34,6 +34,10 @@ public class ActionMine extends Action {
 		if (!enabled)
 			return;
 
+		boolean illegal = false;
+		if (illegal)
+			miner.performingIllegalAction = true;
+
 		Pickaxe pickaxe = (Pickaxe) miner.inventory.getGameObectOfClass(Pickaxe.class);
 
 		float damage = vein.totalHealth / 4f;
@@ -59,7 +63,7 @@ public class ActionMine extends Action {
 
 		// Sound
 		float loudness = vein.soundWhenHit * pickaxe.soundWhenHitting;
-		miner.sounds.add(new Sound(miner, pickaxe, miner.squareGameObjectIsOn, loudness));
+		miner.sounds.add(new Sound(miner, pickaxe, miner.squareGameObjectIsOn, loudness, illegal, this.getClass()));
 
 		if (miner.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

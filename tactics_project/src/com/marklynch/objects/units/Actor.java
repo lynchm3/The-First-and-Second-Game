@@ -97,6 +97,7 @@ public class Actor extends ActorTemplate implements Owner {
 	public HashMap<Actor, Square> locationsToSearch = new HashMap<Actor, Square>();
 
 	public ArrayList<Sound> sounds = new ArrayList<Sound>();
+	public boolean performingIllegalAction = false;
 
 	public Texture expressionImageTexture = null;
 
@@ -718,6 +719,7 @@ public class Actor extends ActorTemplate implements Owner {
 
 	@Override
 	public void update(int delta) {
+		performingIllegalAction = false;
 		clearSounds();
 
 		if (this.remainingHealth > 0) {
