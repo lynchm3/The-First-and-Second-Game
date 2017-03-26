@@ -9,10 +9,14 @@ public class StructureRoom {
 	public String name;
 	public RoomPart[] roomParts;
 	public ArrayList<Square> squares = new ArrayList<Square>();
+	public float x;
+	public float y;
 
-	public StructureRoom(String name, RoomPart... roomParts) {
+	public StructureRoom(String name, float x, float y, RoomPart... roomParts) {
 		super();
 		this.name = name;
+		this.x = x;
+		this.y = y;
 		this.roomParts = roomParts;// Floor squares
 		for (RoomPart roomPart : this.roomParts) {
 			for (int i = roomPart.gridX1; i <= roomPart.gridX2; i++) {

@@ -11,6 +11,7 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
@@ -176,6 +177,12 @@ public class Structure {
 	public void draw2() {
 		if (!seenByPlayer)
 			return;
+
+		for (StructureRoom room : rooms) {
+			TextUtils.printTextWithImages(new Object[] { room.name }, room.x * Game.SQUARE_WIDTH,
+					room.y * Game.SQUARE_HEIGHT, 100, true);
+
+		}
 
 		if (imageTexture != null) {
 

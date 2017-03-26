@@ -504,8 +504,8 @@ public class Editor {
 		Game.level.squares[4][4].loadImages();
 
 		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
-		shopAtriums.add(new StructureRoom("Trader Joe's Shop", new RoomPart(6, 1, 10, 4)));
-		shopAtriums.add(new StructureRoom("Trader Joe's Shop", new RoomPart(12, 1, 16, 4)));
+		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 6, 1, new RoomPart(6, 1, 10, 4)));
+		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 12, 1, new RoomPart(12, 1, 16, 4)));
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
@@ -533,13 +533,13 @@ public class Editor {
 		Bed brentsBed = Templates.BED.makeCopy(Game.level.squares[10][9]);
 		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1), brentsBed);
 		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBrent));
-		hunterBrent.equipped = (Weapon) hunterBrent.inventory.get(0);
+		hunterBrent.equipped = hunterBrent.inventory.get(0);
 		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
 		ArrayList<StructureRoom> lodgeAtriums = new ArrayList<StructureRoom>();
-		lodgeAtriums.add(new StructureRoom("Hunting Lodge", new RoomPart(8, 8, 10, 10)));
+		lodgeAtriums.add(new StructureRoom("Hunting Lodge", 8, 8, new RoomPart(8, 8, 10, 10)));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
 		lodgeSections.add(new StructureSection("Hunting Lodge", 7, 7, 11, 11));
 
@@ -606,12 +606,12 @@ public class Editor {
 		Bed brontsBed = Templates.BED.makeCopy(Game.level.squares[9][9]);
 		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1), brontsBed);
 		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBront1));
-		hunterBront1.equipped = (Weapon) hunterBrent.inventory.get(0);
+		hunterBront1.equipped = hunterBrent.inventory.get(0);
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null);
 		hunterBront2.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront2));
-		hunterBront2.equipped = (Weapon) hunterBrent.inventory.get(0);
+		hunterBront2.equipped = hunterBrent.inventory.get(0);
 		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null);

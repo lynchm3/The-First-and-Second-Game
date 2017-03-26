@@ -43,11 +43,11 @@ public class QuestCaveOfTheBlind extends Quest {
 	boolean huntersAndWolvesFought = false;
 
 	// Structure sections
-	StructureRoom wolfDen;
-	StructureRoom entrancePart1;
-	StructureRoom entrancePart2;
-	StructureRoom atrium1;
-	StructureRoom atrium2;
+	StructureRoom westEntrance;
+	StructureRoom westAtriumPart1;
+	StructureRoom westAtriumPart2;
+	StructureRoom westSecurity1;
+	StructureRoom westSecurity2;
 	// StructureSection mortsMine;
 	// StructureSection mortsRoom;
 
@@ -169,36 +169,49 @@ public class QuestCaveOfTheBlind extends Quest {
 		cavePathSquares.add(Game.level.squares[57][21]);
 		cavePaths.add(new StructureHall("Path", cavePathSquares3));
 
-		ArrayList<StructureRoom> caveAtriums = new ArrayList<StructureRoom>();
-		wolfDen = new StructureRoom("Wolf's Den", new RoomPart(25, 13, 37, 18));
-		caveAtriums.add(wolfDen);
-		entrancePart1 = new StructureRoom("Entrance of the Blind", new RoomPart(43, 9, 47, 15));
-		caveAtriums.add(entrancePart1);
-		entrancePart2 = new StructureRoom("Entrance of the Blind", new RoomPart(43, 7, 47, 8));
-		caveAtriums.add(entrancePart2);
+		ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>();
 
-		atrium1 = new StructureRoom("Atrium of the Blind", new RoomPart(52, 4, 56, 9), new RoomPart(54, 10, 60, 17));
-		caveAtriums.add(atrium1);
-		atrium2 = new StructureRoom("Atrium 2 of the Blind", new RoomPart(55, 22, 60, 25),
-				new RoomPart(57, 26, 60, 30));
-		caveAtriums.add(atrium2);
+		// West entrance
+		westEntrance = new StructureRoom("Western Entrance", 25, 13, new RoomPart(25, 13, 37, 18));
+		rooms.add(westEntrance);
+
+		// West Atrium
+		westAtriumPart1 = new StructureRoom("West Atrium", 43, 9, new RoomPart(43, 9, 47, 15));
+		rooms.add(westAtriumPart1);
+		westAtriumPart2 = new StructureRoom("West Atrium", 43, 7, new RoomPart(43, 7, 47, 8));
+		rooms.add(westAtriumPart2);
+
+		// West Security
+		westSecurity1 = new StructureRoom("West Security", 52, 4, new RoomPart(52, 4, 59, 9),
+				new RoomPart(54, 10, 60, 17));
+		rooms.add(westSecurity1);
+
+		// Outer Mine
+		westSecurity2 = new StructureRoom("Outer Mine", 55, 22, new RoomPart(55, 22, 69, 25),
+				new RoomPart(57, 26, 66, 30));
+		rooms.add(westSecurity2);
 
 		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
 		caveSections.add(new StructureSection("Cave of the Blind", 24, 12, 40, 19));
 		caveSections.add(new StructureSection("Cave of the Blind", 41, 14, 49, 16));
 		caveSections.add(new StructureSection("Cave of the Blind", 41, 5, 49, 13));
 		caveSections.add(new StructureSection("Cave of the Blind", 44, 2, 62, 18));
+
+		// Outer mine
+		caveSections.add(new StructureSection("Cave of the Blind", 54, 19, 70, 31));
+
+		// Outer mine
 		caveSections.add(new StructureSection("Cave of the Blind", 54, 19, 61, 31));
 
 		// Morts Mine Room
-		mort.mortsMine = new StructureRoom("Morty's Mine", new RoomPart(149, 18, 152, 25),
+		mort.mortsMine = new StructureRoom("Mort's Mine", 142, 19, new RoomPart(149, 18, 152, 25),
 				new RoomPart(142, 19, 150, 26), new RoomPart(144, 23, 151, 32));
-		caveAtriums.add(mort.mortsMine);
+		rooms.add(mort.mortsMine);
 		// Morts Room
-		mort.mortsRoom = new StructureRoom("Morty's Room", new RoomPart(132, 21, 140, 24));
-		caveAtriums.add(mort.mortsRoom);
+		mort.mortsRoom = new StructureRoom("Mort's Room", 132, 21, new RoomPart(132, 21, 140, 24));
+		rooms.add(mort.mortsRoom);
 		// Morts stash
-		caveAtriums.add(new StructureRoom("Morty's Stash", new RoomPart(124, 21, 130, 24)));
+		rooms.add(new StructureRoom("Mort's Stash", 124, 21, new RoomPart(124, 21, 130, 24)));
 
 		// Morts Mine Section
 		caveSections.add(new StructureSection("Cave of the Blind", 141, 17, 153, 33));
@@ -216,7 +229,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		mortsStoreroomDoor = Templates.DOOR.makeCopy(Game.level.squares[131][21], mortsKeys, true, mort);
 		caveFeatures.add(mortsStoreroomDoor);
 
-		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, caveAtriums, cavePaths, caveFeatures,
+		Game.level.structures.add(new Structure("Cave of the Blind", caveSections, rooms, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true, mort));
 
 		// Dirty Sheet
@@ -290,59 +303,60 @@ public class QuestCaveOfTheBlind extends Quest {
 	public void makeBlind() {
 
 		// Entrance 2
-		Blind blind11 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3), entrancePart2);
+		Blind blind11 = Templates.BLIND.makeCopy(Game.level.squares[46][7], Game.level.factions.get(3),
+				westAtriumPart2);
 		blind11.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind11.quest = this;
 		blind.add(blind11);
 
 		// Atrium 1
-		Blind blind1 = Templates.BLIND.makeCopy(Game.level.squares[60][12], Game.level.factions.get(3), atrium1);
+		Blind blind1 = Templates.BLIND.makeCopy(Game.level.squares[60][12], Game.level.factions.get(3), westSecurity1);
 		blind1.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind1.quest = this;
 		blind.add(blind1);
 
-		Blind blind2 = Templates.BLIND.makeCopy(Game.level.squares[60][15], Game.level.factions.get(3), atrium1);
+		Blind blind2 = Templates.BLIND.makeCopy(Game.level.squares[60][15], Game.level.factions.get(3), westSecurity1);
 		blind2.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind2.quest = this;
 		blind.add(blind2);
 
 		// Atrium 2
-		Blind blind3 = Templates.BLIND.makeCopy(Game.level.squares[55][23], Game.level.factions.get(3), atrium2);
+		Blind blind3 = Templates.BLIND.makeCopy(Game.level.squares[55][23], Game.level.factions.get(3), westSecurity2);
 		blind3.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind3.quest = this;
 		blind.add(blind3);
 
-		Blind blind4 = Templates.BLIND.makeCopy(Game.level.squares[60][25], Game.level.factions.get(3), atrium2);
+		Blind blind4 = Templates.BLIND.makeCopy(Game.level.squares[60][25], Game.level.factions.get(3), westSecurity2);
 		blind4.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind4.quest = this;
 		blind.add(blind4);
 
-		Blind blind5 = Templates.BLIND.makeCopy(Game.level.squares[55][24], Game.level.factions.get(3), atrium2);
+		Blind blind5 = Templates.BLIND.makeCopy(Game.level.squares[55][24], Game.level.factions.get(3), westSecurity2);
 		blind5.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind5.quest = this;
 		blind.add(blind5);
 
-		Blind blind6 = Templates.BLIND.makeCopy(Game.level.squares[59][25], Game.level.factions.get(3), atrium2);
+		Blind blind6 = Templates.BLIND.makeCopy(Game.level.squares[59][25], Game.level.factions.get(3), westSecurity2);
 		blind6.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind6.quest = this;
 		blind.add(blind6);
 
-		Blind blind7 = Templates.BLIND.makeCopy(Game.level.squares[60][26], Game.level.factions.get(3), atrium2);
+		Blind blind7 = Templates.BLIND.makeCopy(Game.level.squares[60][26], Game.level.factions.get(3), westSecurity2);
 		blind7.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind7.quest = this;
 		blind.add(blind7);
 
-		Blind blind8 = Templates.BLIND.makeCopy(Game.level.squares[57][24], Game.level.factions.get(3), atrium2);
+		Blind blind8 = Templates.BLIND.makeCopy(Game.level.squares[57][24], Game.level.factions.get(3), westSecurity2);
 		blind8.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind8.quest = this;
 		blind.add(blind8);
 
-		Blind blind9 = Templates.BLIND.makeCopy(Game.level.squares[56][25], Game.level.factions.get(3), atrium2);
+		Blind blind9 = Templates.BLIND.makeCopy(Game.level.squares[56][25], Game.level.factions.get(3), westSecurity2);
 		blind9.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind9.quest = this;
 		blind.add(blind9);
 
-		Blind blind10 = Templates.BLIND.makeCopy(Game.level.squares[57][27], Game.level.factions.get(3), atrium2);
+		Blind blind10 = Templates.BLIND.makeCopy(Game.level.squares[57][27], Game.level.factions.get(3), westSecurity2);
 		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind10.quest = this;
 		blind.add(blind10);
