@@ -12,7 +12,6 @@ import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
@@ -30,11 +29,12 @@ public class Structure {
 	ArrayList<Square> featureSquares;
 	boolean blocksLineOfSight;
 	Actor owner;
+	ArrayList<Square> squaresToRemove;
 
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
-			ArrayList<StructureHall> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
+			ArrayList<StructurePath> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
 			String imageTexturePath, float overlayX1, float overlayX2, float overlayY1, float overlayY2,
-			boolean blocksLineOfSight, Actor owner) {
+			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove) {
 		super();
 
 		this.name = name;
@@ -51,6 +51,9 @@ public class Structure {
 		wallSquares = new ArrayList<Square>();
 		featureSquares = new ArrayList<Square>();
 
+		// SquaresToRemove
+		floorSquares.addAll(squaresToRemove);
+
 		// Entrance squares
 		for (Square entranceSquare : entranceSquares) {
 			entranceSquare.imageTexturePath = "stone.png";
@@ -64,8 +67,9 @@ public class Structure {
 		}
 
 		// Floor squares
-		for (StructureHall path : paths) {
-			floorSquares.addAll(path.squares);
+		for (StructurePath path : paths) {
+			for (Square square : path.squares)
+				floorSquares.add(square);
 		}
 
 		// Entrance Squares
@@ -175,8 +179,8 @@ public class Structure {
 	public float roofAlpha = 1f;
 
 	public void draw2() {
-		if (!seenByPlayer)
-			return;
+		// if (!seenByPlayer)
+		// return;
 
 		for (StructureRoom room : rooms) {
 			TextUtils.printTextWithImages(new Object[] { room.name }, room.x * Game.SQUARE_WIDTH,
@@ -184,23 +188,26 @@ public class Structure {
 
 		}
 
-		if (imageTexture != null) {
-
-			if (Game.level.player.squareGameObjectIsOn.structureSquareIsIn == this
-					|| entranceSquares.contains(Game.level.player.squareGameObjectIsOn)) {
-				if (roofAlpha != 0f) {
-					roofAlpha -= 0.01f;
-					if (roofAlpha < 0f)
-						roofAlpha = 0f;
-				}
-			} else if (roofAlpha != 1f) {
-				roofAlpha += 0.01f;
-				if (roofAlpha > 1f)
-					roofAlpha = 1f;
-			}
-			TextureUtils.drawTexture(imageTexture, roofAlpha, this.overlayX1, this.overlayX2, this.overlayY1,
-					this.overlayY2);
-		}
+		// if (imageTexture != null) {
+		//
+		// if (Game.level.player.squareGameObjectIsOn.structureSquareIsIn ==
+		// this
+		// || entranceSquares.contains(Game.level.player.squareGameObjectIsOn))
+		// {
+		// if (roofAlpha != 0f) {
+		// roofAlpha -= 0.01f;
+		// if (roofAlpha < 0f)
+		// roofAlpha = 0f;
+		// }
+		// } else if (roofAlpha != 1f) {
+		// roofAlpha += 0.01f;
+		// if (roofAlpha > 1f)
+		// roofAlpha = 1f;
+		// }
+		// TextureUtils.drawTexture(imageTexture, roofAlpha, this.overlayX1,
+		// this.overlayX2, this.overlayY1,
+		// this.overlayY2);
+		// }
 
 	}
 

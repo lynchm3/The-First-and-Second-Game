@@ -1,15 +1,13 @@
 package com.marklynch.level.constructs.structure;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.Square;
 
-public class StructureHall {
+public class StructurePath {
 
 	String name;
-	ArrayList<Square> squares;
+	Square[] squares;
 
-	public StructureHall(String name, ArrayList<Square> squares) {
+	public StructurePath(String name, Square... squares) {
 		super();
 		this.name = name;
 		this.squares = squares;
