@@ -263,8 +263,28 @@ public class Level {
 
 	public void drawBackground() {
 		// Squares
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
+		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2) / Game.zoom)
+				/ Game.SQUARE_WIDTH);
+		if (gridX1Bounds < 0)
+			gridX1Bounds = 0;
+
+		// + (mouseXinPixels) / Game.zoom);
+
+		int gridX2Bounds = (int) (gridX1Bounds + ((Game.windowWidth / Game.SQUARE_WIDTH)) / Game.zoom) + 2;
+		if (gridX2Bounds >= width)
+			gridX2Bounds = width - 1;
+
+		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.dragY - (Game.windowHeight / 2) / Game.zoom)
+				/ Game.SQUARE_HEIGHT);
+		if (gridY1Bounds < 0)
+			gridY1Bounds = 0;
+
+		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 1;
+		if (gridY2Bounds >= height)
+			gridY2Bounds = height - 1;
+
+		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 				// is it better to bind once and draw all the same ones?
 				squares[i][j].draw1();
 			}
@@ -280,21 +300,27 @@ public class Level {
 		// + (mouseXinPixels) / Game.zoom);
 
 		// GameObjects and actors
-		int gridX1Bounds = -(int) (Game.dragX / Game.SQUARE_WIDTH) + 1;
+		// int gridX1Bounds = -(int) (Game.dragX / Game.SQUARE_WIDTH) + 1;
+		// if (gridX1Bounds < 0)
+		// gridX1Bounds = 0;
+
+		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2) / Game.zoom)
+				/ Game.SQUARE_WIDTH);
 		if (gridX1Bounds < 0)
 			gridX1Bounds = 0;
 
 		// + (mouseXinPixels) / Game.zoom);
 
-		int gridX2Bounds = (int) (gridX1Bounds + (Game.windowWidth / Game.SQUARE_WIDTH)) - 1;
+		int gridX2Bounds = (int) (gridX1Bounds + ((Game.windowWidth / Game.SQUARE_WIDTH)) / Game.zoom) + 2;
 		if (gridX2Bounds >= width)
 			gridX2Bounds = width - 1;
 
-		int gridY1Bounds = -(int) (Game.dragY / Game.SQUARE_HEIGHT) + 1;
+		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.dragY - (Game.windowHeight / 2) / Game.zoom)
+				/ Game.SQUARE_HEIGHT);
 		if (gridY1Bounds < 0)
 			gridY1Bounds = 0;
 
-		int gridY2Bounds = (int) (gridY1Bounds + (Game.windowHeight / Game.SQUARE_HEIGHT)) - 1;
+		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 1;
 		if (gridY2Bounds >= height)
 			gridY2Bounds = height - 1;
 
@@ -370,8 +396,8 @@ public class Level {
 			projectile.drawForeground();
 		}
 		// Squares
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
+		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 				// is it better to bind once and draw all the same ones?
 				squares[i][j].draw2();
 			}
