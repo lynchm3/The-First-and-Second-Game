@@ -389,6 +389,10 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
 		squaresToRemove.add(Game.level.squares[24][6]);
+		squaresToRemove.add(Game.level.squares[24][7]);
+		squaresToRemove.add(Game.level.squares[24][8]);
+		squaresToRemove.add(Game.level.squares[24][9]);
+		squaresToRemove.add(Game.level.squares[24][10]);
 
 		Game.level.structures.add(new Structure("Mort & Mort Mining", caveSections, rooms, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true, mort, squaresToRemove));

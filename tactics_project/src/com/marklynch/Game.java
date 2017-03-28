@@ -32,7 +32,7 @@ public class Game {
 	// public static float dragY = 0;
 	public static float dragX = -3000;
 	public static float dragY = -1500;
-	public static float zoom = 0.25f;
+	public static float zoom = 1f; // 0.25f
 
 	// public static float windowWidth = 800;
 	// public static float windowHeight = 600;
