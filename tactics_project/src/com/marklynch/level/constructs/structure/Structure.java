@@ -97,10 +97,12 @@ public class Structure {
 						wallsInCave.add(Templates.WALL.makeCopy(Game.level.squares[i][j], this.owner));
 						wallSquares.add(Game.level.squares[i][j]);
 					}
-					Game.level.squares[i][j].structureSquareIsIn = this;
-					Game.level.squares[i][j].structureSectionSquareIsIn = caveSection;
-					Game.level.squares[i][j].imageTexturePath = "stone.png";
-					Game.level.squares[i][j].loadImages();
+					if (!squaresToRemove.contains(Game.level.squares[i][j])) {
+						Game.level.squares[i][j].structureSquareIsIn = this;
+						Game.level.squares[i][j].structureSectionSquareIsIn = caveSection;
+						Game.level.squares[i][j].imageTexturePath = "stone.png";
+						Game.level.squares[i][j].loadImages();
+					}
 				}
 			}
 		}

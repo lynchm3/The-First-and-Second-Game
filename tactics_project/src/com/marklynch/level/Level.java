@@ -27,7 +27,6 @@ import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
@@ -276,25 +275,49 @@ public class Level {
 
 		// Background decorations
 
+		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX -
+		// (Game.windowWidth / 2) / Game.zoom)
+		// + (mouseXinPixels) / Game.zoom);
+
 		// GameObjects and actors
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
+		int gridX1Bounds = -(int) (Game.dragX / Game.SQUARE_WIDTH) + 1;
+		if (gridX1Bounds < 0)
+			gridX1Bounds = 0;
+
+		// + (mouseXinPixels) / Game.zoom);
+
+		int gridX2Bounds = (int) (gridX1Bounds + (Game.windowWidth / Game.SQUARE_WIDTH)) - 1;
+		if (gridX2Bounds >= width)
+			gridX2Bounds = width - 1;
+
+		int gridY1Bounds = -(int) (Game.dragY / Game.SQUARE_HEIGHT) + 1;
+		if (gridY1Bounds < 0)
+			gridY1Bounds = 0;
+
+		int gridY2Bounds = (int) (gridY1Bounds + (Game.windowHeight / Game.SQUARE_HEIGHT)) - 1;
+		if (gridY2Bounds >= height)
+			gridY2Bounds = height - 1;
+
+		ArrayList<Square> squaresInWindow = new ArrayList<Square>();
+
+		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.draw1();
 				}
 			}
 		}
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
+		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.draw2();
 				}
 			}
 		}
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
+		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.draw3();
@@ -430,6 +453,15 @@ public class Level {
 			TextUtils.printTextWithImages(new Object[] { currentFactionMoving.name + " turn " + turn },
 					Game.windowWidth - 150, 20, Integer.MAX_VALUE, true);
 		}
+
+		// Zoom
+		TextUtils.printTextWithImages(new Object[] { "Zoom " + Game.zoom }, Game.windowWidth - 150, 40,
+				Integer.MAX_VALUE, true);
+
+		// FPS
+		TextUtils.printTextWithImages(new Object[] { "FPS " + Game.displayFPS }, Game.windowWidth - 150, 60,
+				Integer.MAX_VALUE, true);
+
 		// if (factions.size() > 0 && currentFactionMoving != null) {
 		// if (showTurnNotification) {
 		// if (currentFactionMoving == factions.get(0)) {
@@ -447,14 +479,17 @@ public class Level {
 		if (conversation != null)
 
 			conversation.drawStaticUI();
-		else {
-			// Log
-			QuadUtils.drawQuad(Color.BLACK, 0, 420, 0, Game.windowHeight);
+		else
 
-			// Log text
-			for (int i = logs.size() - 1; i > -1; i--) {
-				TextUtils.printTextWithImages(logs.get(i).contents, 20, 20 + i * 20, Integer.MAX_VALUE, true);
-			}
+		{
+			//// Log
+			// QuadUtils.drawQuad(Color.BLACK, 0, 420, 0, Game.windowHeight);
+			//
+			// // Log text
+			// for (int i = logs.size() - 1; i > -1; i--) {
+			// TextUtils.printTextWithImages(logs.get(i).contents, 20, 20 + i *
+			// 20, Integer.MAX_VALUE, true);
+			// }
 		}
 
 		// script

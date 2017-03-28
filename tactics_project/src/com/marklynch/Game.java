@@ -43,9 +43,10 @@ public class Game {
 	static long lastFrame;
 
 	/** frames per second */
-	int fps;
+	public static int fps;
+	public static int displayFPS;
 	/** last fps time */
-	long lastFPS;
+	public static long lastFPS;
 
 	long timeBetweenMoveCommands = 1l;
 	public static Level level;
@@ -271,6 +272,7 @@ public class Game {
 	public void updateFPS() {
 		if (getTime() - lastFPS > 1000) {
 			Display.setTitle("Eclipse");
+			displayFPS = fps;
 			fps = 0;
 			lastFPS += 1000;
 		}
