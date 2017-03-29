@@ -7,7 +7,6 @@ import static org.lwjgl.opengl.GL13.glActiveTexture;
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class TextureUtils {
@@ -19,15 +18,9 @@ public class TextureUtils {
 			boolean inBounds, float boundsX1, float boundsX2, float boundsY1, float boundsY2, boolean backwards,
 			boolean upsideDown) {
 
-		float imageWidth = Math.abs(x2 - x1);
-		float imageHeight = Math.abs(y2 - y1);
-		float textureX1 = 0f;
 		float vertexX1 = x1;
-		float textureX2 = imageWidth;
 		float vertexX2 = x2;
-		float textureY1 = 0f;
 		float vertexY1 = y1;
-		float textureY2 = imageHeight;
 		float vertexY2 = y2;
 
 		inBounds = false;
@@ -96,7 +89,7 @@ public class TextureUtils {
 
 		// GL11.glColor4f(1.0f, 1.0f, 1.0f, alpha);
 
-		Game.activeBatch.setColor(new Color(1f, 1f, 1f, alpha));
+		// Game.activeBatch.setColor(new Color(1f, 1f, 1f, alpha));
 		// Game.activeBatch.setColor(Color.WHITE);
 		// Game.batch.setColor(1f, 1.0f, 1.0f, 0.1f);
 
