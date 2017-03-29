@@ -13,6 +13,10 @@ import mdesl.graphics.Texture;
 public class Wall extends GameObject {
 
 	public boolean fullWall;
+	public boolean fullRightWall;
+	public boolean fullLeftWall;
+	public boolean fullTopWall;
+	public boolean fullBottomWall;
 	public boolean connectedTop;
 	public boolean connectedTopRight;
 	public boolean connectedRight;
@@ -23,6 +27,10 @@ public class Wall extends GameObject {
 	public boolean connectedTopLeft;
 
 	public Texture textureFullWall;
+	public Texture textureFullTopWall;
+	public Texture textureFullRightWall;
+	public Texture textureFullBottomWall;
+	public Texture textureFullLeftWall;
 	public Texture textureTop;
 	public Texture textureTopRight;
 	public Texture textureRight;
@@ -33,6 +41,11 @@ public class Wall extends GameObject {
 	public Texture textureTopLeft;
 
 	public float drawX1, drawX2, drawY1, drawY2;
+
+	public float fullLeftDrawX1, fullLeftDrawX2, fullLeftDrawY1, fullLeftDrawY2;
+	public float fullRightDrawX1, fullRightDrawX2, fullRightDrawY1, fullRightDrawY2;
+	public float fullTopDrawX1, fullTopDrawX2, fullTopDrawY1, fullTopDrawY2;
+	public float fullBottomDrawX1, fullBottomDrawX2, fullBottomDrawY1, fullBottomDrawY2;
 
 	public float topLeftDrawX1, topLeftDrawX2, topLeftDrawY1, topLeftDrawY2;
 	public float topDrawX1, topDrawX2, topDrawY1, topDrawY2;
@@ -64,6 +77,26 @@ public class Wall extends GameObject {
 			drawX2 = (int) (drawX1 + width);
 			drawY1 = (int) (squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY);
 			drawY2 = (int) (drawY1 + height);
+
+			fullLeftDrawX1 = drawX1;
+			fullLeftDrawX2 = drawX2 - quarterWidth;
+			fullLeftDrawY1 = drawY1;
+			fullLeftDrawY2 = drawY2;
+
+			fullRightDrawX1 = drawX1 + quarterWidth;
+			fullRightDrawX2 = drawX2;
+			fullRightDrawY1 = drawY1;
+			fullRightDrawY2 = drawY2;
+
+			fullTopDrawX1 = drawX1;
+			fullTopDrawX2 = drawX2;
+			fullTopDrawY1 = drawY1;
+			fullTopDrawY2 = drawY2 - quarterHeight;
+
+			fullBottomDrawX1 = drawX1;
+			fullBottomDrawX2 = drawX2;
+			fullBottomDrawY1 = drawY1 + quarterHeight;
+			fullBottomDrawY2 = drawY2;
 
 			topLeftDrawX1 = drawX1;
 			topLeftDrawX2 = drawX1 + quarterWidth;
@@ -112,6 +145,10 @@ public class Wall extends GameObject {
 	public void loadImages() {
 		super.loadImages();
 		textureFullWall = getGlobalImage("wall.png");
+		textureFullTopWall = getGlobalImage("wall_full_top.png");
+		textureFullRightWall = getGlobalImage("wall_full_right.png");
+		textureFullBottomWall = getGlobalImage("wall_full_bottom.png");
+		textureFullLeftWall = getGlobalImage("wall_full_left.png");
 		textureTop = getGlobalImage("wall_top.png");
 		textureTopRight = getGlobalImage("wall_top_right.png");
 		textureRight = getGlobalImage("wall_right.png");
@@ -142,6 +179,30 @@ public class Wall extends GameObject {
 
 			if (fullWall) {
 				TextureUtils.drawTexture(textureFullWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
+			}
+
+			if (fullLeftWall) {
+				TextureUtils.drawTexture(textureFullLeftWall, alpha, fullLeftDrawX1, fullLeftDrawX2, fullLeftDrawY1,
+						fullLeftDrawY2);
+				return;
+			}
+
+			if (fullRightWall) {
+				TextureUtils.drawTexture(textureFullRightWall, alpha, fullRightDrawX1, fullRightDrawX2, fullRightDrawY1,
+						fullRightDrawY2);
+				return;
+			}
+
+			if (fullTopWall) {
+				TextureUtils.drawTexture(textureFullTopWall, alpha, fullTopDrawX1, fullTopDrawX2, fullTopDrawY1,
+						fullTopDrawY2);
+				return;
+			}
+
+			if (fullBottomWall) {
+				TextureUtils.drawTexture(textureFullBottomWall, alpha, fullBottomDrawX1, fullBottomDrawX2,
+						fullBottomDrawY1, fullBottomDrawY2);
 				return;
 			}
 
@@ -180,6 +241,15 @@ public class Wall extends GameObject {
 	public void checkIfFullWall() {
 		fullWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom
 				&& connectedBottomLeft && connectedLeft && connectedTopLeft;
+
+		fullLeftWall = connectedTop && connectedBottom && connectedBottomLeft && connectedLeft && connectedTopLeft;
+
+		fullRightWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom;
+
+		fullTopWall = connectedTop && connectedTopRight && connectedRight && connectedLeft && connectedTopLeft;
+
+		fullBottomWall = connectedRight && connectedBottomRight && connectedBottom && connectedBottomLeft
+				&& connectedLeft;
 
 	}
 
