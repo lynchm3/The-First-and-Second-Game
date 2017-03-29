@@ -174,6 +174,7 @@ public class Structure {
 			} else if (wall.connectedTop && wall.connectedLeft) {
 				wall.connectedTopLeft = true;
 			}
+			wall.checkIfFullWall();
 		}
 
 	}
