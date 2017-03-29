@@ -287,9 +287,9 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Section Quarters
 		caveSections.add(new StructureSection("Mort & Mort Mining", 75, 11, 93, 24));
 		// Room Quarters
-		recRoom = new StructureRoom("Quarters", 76, 12, new RoomPart(76, 12, 88, 21), new RoomPart(79, 13, 92, 22),
+		quarters = new StructureRoom("Quarters", 76, 12, new RoomPart(76, 12, 88, 21), new RoomPart(79, 13, 92, 22),
 				new RoomPart(81, 13, 92, 23));
-		rooms.add(recRoom);
+		rooms.add(quarters);
 
 		// Path rec room to quarters
 		cavePaths.add(
@@ -525,6 +525,69 @@ public class QuestCaveOfTheBlind extends Quest {
 		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
 		blind10.quest = this;
 		blind.add(blind10);
+
+		// Rec Room Blind
+		Blind blindRecRoom1 = Templates.BLIND.makeCopy(Game.level.squares[78][28], Game.level.factions.get(3), recRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindRecRoom1);
+
+		Blind blindRecRoom2 = Templates.BLIND.makeCopy(Game.level.squares[78][30], Game.level.factions.get(3), recRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindRecRoom2);
+
+		Blind blindRecRoom3 = Templates.BLIND.makeCopy(Game.level.squares[79][30], Game.level.factions.get(3), recRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindRecRoom3);
+
+		Blind blindRecRoom4 = Templates.BLIND.makeCopy(Game.level.squares[80][31], Game.level.factions.get(3), recRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindRecRoom4);
+
+		Blind blindRecRoom5 = Templates.BLIND.makeCopy(Game.level.squares[81][29], Game.level.factions.get(3), recRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindRecRoom5);
+
+		// Dining Room Blind
+		Blind blindDiningRoom1 = Templates.BLIND.makeCopy(Game.level.squares[91][42], Game.level.factions.get(3),
+				diningRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindDiningRoom1);
+
+		Blind blindDiningRoom2 = Templates.BLIND.makeCopy(Game.level.squares[92][49], Game.level.factions.get(3),
+				diningRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindDiningRoom2);
+
+		Blind blindDiningRoom3 = Templates.BLIND.makeCopy(Game.level.squares[93][46], Game.level.factions.get(3),
+				diningRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindDiningRoom3);
+
+		Blind blindDiningRoom4 = Templates.BLIND.makeCopy(Game.level.squares[94][43], Game.level.factions.get(3),
+				diningRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindDiningRoom4);
+
+		Blind blindDiningRoom5 = Templates.BLIND.makeCopy(Game.level.squares[95][45], Game.level.factions.get(3),
+				diningRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindDiningRoom5);
+
+		Blind blindDiningRoom6 = Templates.BLIND.makeCopy(Game.level.squares[93][44], Game.level.factions.get(3),
+				diningRoom);
+		blind10.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind10.quest = this;
+		blind.add(blindDiningRoom6);
 
 		// Templates.MEAT_CHUNK.makeCopy("Meat Chunk",
 		// Game.level.squares[57][28]);

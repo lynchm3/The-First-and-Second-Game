@@ -7,6 +7,7 @@ import static org.lwjgl.opengl.GL13.glActiveTexture;
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 
+import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class TextureUtils {
@@ -89,7 +90,7 @@ public class TextureUtils {
 
 		// GL11.glColor4f(1.0f, 1.0f, 1.0f, alpha);
 
-		// Game.activeBatch.setColor(new Color(1f, 1f, 1f, alpha));
+		Game.activeBatch.setColor(new Color(1f, 1f, 1f, alpha));
 		// Game.activeBatch.setColor(Color.WHITE);
 		// Game.batch.setColor(1f, 1.0f, 1.0f, 0.1f);
 

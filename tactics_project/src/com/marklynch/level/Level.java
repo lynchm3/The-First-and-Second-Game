@@ -279,7 +279,7 @@ public class Level {
 		if (gridY1Bounds < 0)
 			gridY1Bounds = 0;
 
-		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 1;
+		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 2;
 		if (gridY2Bounds >= height)
 			gridY2Bounds = height - 1;
 
@@ -320,7 +320,7 @@ public class Level {
 		if (gridY1Bounds < 0)
 			gridY1Bounds = 0;
 
-		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 1;
+		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 2;
 		if (gridY2Bounds >= height)
 			gridY2Bounds = height - 1;
 

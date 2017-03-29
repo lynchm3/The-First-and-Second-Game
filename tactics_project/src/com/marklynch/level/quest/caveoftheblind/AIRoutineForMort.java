@@ -66,27 +66,61 @@ public class AIRoutineForMort extends AIRoutine {
 		}
 
 		// Blind living in morts mine?
-		for (Blind blind : mort.questCaveOfTheBlind.blind) {
-			if (blind.remainingHealth > 0 && blind.roomLivingIn == mort.mortsMine) {
+		// for (Blind blind : mort.questCaveOfTheBlind.blind) {
+		// if (blind.remainingHealth > 0 && blind.roomLivingIn ==
+		// mort.mortsMine) {
+		//
+		// mort.performingFeedingDemo = false;
+		// mort.miniDialogue = "No, no, no, no!";
+		// mort.activityDescription = "Running away";
+		// Square doorSquare =
+		// mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
+		// Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid -
+		// 1][doorSquare.yInGrid];
+		// if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
+		// new ActionLock(mort,
+		// mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
+		// } else {
+		// AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
+		// }
+		// return;
+		//
+		// }
+		// }
 
-				mort.performingFeedingDemo = false;
-				mort.miniDialogue = "No, no, no, no!";
-				mort.activityDescription = "Running away";
-				Square doorSquare = mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
-				Square targetSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
-				if (mort.squareGameObjectIsOn == targetSquare) {
-					new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
-				} else {
-					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+		float mortsDistanceFromBedroomDoor = mort
+				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
+
+		System.out.println("===================================");
+		System.out.println("mortsDistanceFromBedroomDoor = " + mortsDistanceFromBedroomDoor);
+
+		// Blind too close to door? move towrds room.
+		for (Blind blind : mort.questCaveOfTheBlind.blind) {
+			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
+				float blindDistanceFromMortsRoom = blind
+						.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
+				System.out.println("blindDistanceFromMortsRoom = " + blindDistanceFromMortsRoom);
+				System.out.println("blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor "
+						+ (blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor));
+				if (blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor < 3) {
+					Square doorSquare = mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
+					Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
+					mort.performingFeedingDemo = false;
+					if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
+						new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
+					} else {
+						AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
+					}
+					return;
 				}
-				return;
 
 			}
 		}
 
-		// Blind in morts mine?
+		// Blind in mine? move back.
 		for (Blind blind : mort.questCaveOfTheBlind.blind) {
 			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
+
 				mort.performingFeedingDemo = false;
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
 				return;

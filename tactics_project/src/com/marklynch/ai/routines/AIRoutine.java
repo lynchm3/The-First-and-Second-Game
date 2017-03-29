@@ -6,7 +6,6 @@ import java.util.Arrays;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Expressions;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -43,23 +42,12 @@ public class AIRoutine {
 
 	public void createSearchLocationsBasedOnSounds(Class... classes) {
 
-		System.out.println("createSearchLocationsBasedOnSounds");
 		ArrayList<Class> classesArrayList = new ArrayList<Class>(Arrays.asList(classes));
-		System.out.println(
-				"classesArrayList.contains(BrokenGlass.class) = " + classesArrayList.contains(BrokenGlass.class));
 
 		// Check for sounds to investigate
 		ArrayList<Square> squaresThisCanHear = this.actor.getAllSquaresWithinDistance(this.actor.hearing);
 		for (Square squareThisCanHear : squaresThisCanHear) {
 			for (Sound sound : squareThisCanHear.sounds) {
-				System.out.println("sound.sourceObject.sourceActor = " + sound.sourceActor);
-				System.out.println("sound.sourceObject.sourceObject = " + sound.sourceObject);
-				System.out.println("sound.sourceObject.sourceSquare x y = " + sound.sourceSquare.xInGrid
-						+ sound.sourceSquare.yInGrid);
-				System.out.println("sound.sourceObject.getClass() = " + sound.sourceObject.getClass());
-				System.out.println("classesArrayList.contains(sound.sourceObject.getClass()) = "
-						+ classesArrayList.contains(sound.sourceObject.getClass()));
-
 				if (!this.actor.locationsToSearch.containsValue(sound.sourceSquare)
 						&& !this.actor.canSee(sound.sourceSquare)) {
 
