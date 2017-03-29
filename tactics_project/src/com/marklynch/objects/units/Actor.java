@@ -217,6 +217,8 @@ public class Actor extends ActorTemplate {
 			return null;
 		}
 
+		// ASTARSEACH.FINDPATH
+
 		LinkedList<AStarNode> aStarNodesPath = (LinkedList<AStarNode>) new AStarSearch()
 				.findPath(this.squareGameObjectIsOn, target);
 

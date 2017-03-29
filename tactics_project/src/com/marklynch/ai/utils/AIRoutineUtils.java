@@ -592,14 +592,7 @@ public class AIRoutineUtils {
 			// Check if we're already at this distance
 			if (Game.level.activeActor.straightLineDistanceTo(square) == idealDistances.get(i))
 				return Game.level.activeActor.squareGameObjectIsOn;
-
 			targetSquares = square.getAllSquaresAtDistance(idealDistances.get(i));
-
-			// TODO picking which of these squares is the best is an interesting
-			// issue.
-			// Reachable is best.
-			// if There's multiple reachable then safest out of them is best :P
-			// OR somewhere u can attack someone from is the best... i dunno :D
 			for (Square targetSquare : targetSquares) {
 				Path currentActorPathToThisSquare = Game.level.activeActor.getPathTo(targetSquare);
 				if (currentActorPathToThisSquare != null

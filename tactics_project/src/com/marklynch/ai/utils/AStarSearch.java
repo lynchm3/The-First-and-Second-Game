@@ -54,7 +54,8 @@ public class AStarSearch {
 		startNode.pathParent = null;
 		openList.add(startNode);
 
-		while (!openList.isEmpty()) {
+		int count = 0;
+		while (!openList.isEmpty() && count < 100) {
 			AStarNode node = (AStarNode) openList.removeFirst();
 			if (node == goalNode) {
 				// construct the path from start to goal
@@ -84,6 +85,10 @@ public class AStarSearch {
 				}
 			}
 			closedList.add(node);
+			count++;
+			if (count == 100) {
+				return constructPath(node);
+			}
 		}
 
 		// no path found
