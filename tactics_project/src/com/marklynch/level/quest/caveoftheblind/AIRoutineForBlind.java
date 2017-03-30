@@ -9,6 +9,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.BrokenGlass;
+import com.marklynch.objects.Expressions;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.actions.ActionTakeBite;
 import com.marklynch.objects.tools.Bell;
@@ -66,7 +67,8 @@ public class AIRoutineForBlind extends AIRoutine {
 			} else if (this.meatChunk != null) { // smelt a meatchunk but
 													// nooooope
 				if (this.meatChunk.squareGameObjectIsOn != this.originalMeatChunkSquare) {
-					this.blind.roomLivingIn = this.originalMeatChunkSquare.structureRoomSquareIsIn;
+					if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)
+						this.blind.roomLivingIn = this.originalMeatChunkSquare.structureRoomSquareIsIn;
 					bellSound = null;
 					this.blind.activityDescription = "Hangry";
 					hangry = true;
@@ -82,9 +84,11 @@ public class AIRoutineForBlind extends AIRoutine {
 					failedToGetPathToFoodCount = 0;
 				} else {
 					failedToGetPathToFoodCount++;
+					blind.expressionImageTexture = Expressions.questionMark;
 					if (failedToGetPathToFoodCount == 10) {
 						failedToGetPathToFoodCount = 0;
-						this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
+						if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)
+							this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
 						bellSound = null;
 						meatChunk = null;
 						this.blind.activityDescription = "Hangry";
@@ -120,9 +124,11 @@ public class AIRoutineForBlind extends AIRoutine {
 					failedToGetPathToBellCount = 0;
 				} else {
 					failedToGetPathToBellCount++;
+					blind.expressionImageTexture = Expressions.questionMark;
 					if (failedToGetPathToBellCount == 10) {
 						failedToGetPathToBellCount = 0;
-						this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
+						if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)
+							this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
 						bellSound = null;
 						this.blind.activityDescription = "Hangry";
 						hangry = true;
@@ -130,7 +136,8 @@ public class AIRoutineForBlind extends AIRoutine {
 				}
 				if (bellSound != null && blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
 					failedToGetPathToBellCount = 0;
-					this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
+					if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)
+						this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
 					bellSound = null;
 					this.blind.activityDescription = "Hangry";
 					hangry = true;
