@@ -16,7 +16,8 @@ public class AIRoutineForMort extends AIRoutine {
 	Mort mort;
 	GameObject target;
 	Square lastLocationSeenPlayer;
-	boolean rangBell;
+	boolean rangBellAsLastResort;
+	boolean lockedInRoom = false;
 
 	enum FEEDING_DEMO_STATE {
 		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY, WAIT_FOR_BLIND_TO_ENTER, WAIT_FOR_BLIND_TO_LEAVE
@@ -46,7 +47,6 @@ public class AIRoutineForMort extends AIRoutine {
 
 	@Override
 	public void update() {
-
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.miniDialogue = null;
@@ -62,6 +62,10 @@ public class AIRoutineForMort extends AIRoutine {
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
+
+		if (lockedInRoom) {
 			return;
 		}
 
@@ -91,23 +95,18 @@ public class AIRoutineForMort extends AIRoutine {
 		float mortsDistanceFromBedroomDoor = mort
 				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
 
-		System.out.println("===================================");
-		System.out.println("mortsDistanceFromBedroomDoor = " + mortsDistanceFromBedroomDoor);
-
 		// Blind too close to door? move towrds room.
 		for (Blind blind : mort.questCaveOfTheBlind.blind) {
 			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
 				float blindDistanceFromMortsRoom = blind
 						.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
-				System.out.println("blindDistanceFromMortsRoom = " + blindDistanceFromMortsRoom);
-				System.out.println("blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor "
-						+ (blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor));
-				if (blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor < 3) {
+				if (blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor < 4) {
 					Square doorSquare = mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
 					Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
 					mort.performingFeedingDemo = false;
 					if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
 						new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
+						lockedInRoom = true;
 					} else {
 						AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
 					}
@@ -118,23 +117,25 @@ public class AIRoutineForMort extends AIRoutine {
 		}
 
 		// Blind in mine? move back.
-		for (Blind blind : mort.questCaveOfTheBlind.blind) {
-			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
+		// for (Blind blind : mort.questCaveOfTheBlind.blind) {
+		// if (blind.remainingHealth > 0 &&
+		// blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine)
+		// {
+		//
+		// mort.performingFeedingDemo = false;
+		// AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
+		// return;
+		//
+		// }
+		// }
 
-				mort.performingFeedingDemo = false;
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
-				return;
-
-			}
-		}
-
-		if (!rangBell && mort.remainingHealth < mort.totalHealth / 2) {
+		if (!rangBellAsLastResort && mort.remainingHealth < mort.totalHealth / 2) {
 			Bell bell = (Bell) mort.inventory.getGameObectOfClass(Bell.class);
 			if (bell != null && mort.getAttackers().contains(Game.level.player)) {
 				new ActionRing(mort, bell).perform();
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
 				this.actor.miniDialogue = "You won't get out of here alive";
-				rangBell = true;
+				rangBellAsLastResort = true;
 				return;
 			}
 		}

@@ -27,6 +27,7 @@ import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
@@ -508,14 +509,13 @@ public class Level {
 		else
 
 		{
-			//// Log
-			// QuadUtils.drawQuad(Color.BLACK, 0, 420, 0, Game.windowHeight);
-			//
-			// // Log text
-			// for (int i = logs.size() - 1; i > -1; i--) {
-			// TextUtils.printTextWithImages(logs.get(i).contents, 20, 20 + i *
-			// 20, Integer.MAX_VALUE, true);
-			// }
+			// Log
+			QuadUtils.drawQuad(Color.BLACK, 0, 420, 0, Game.windowHeight);
+
+			// Log text
+			for (int i = logs.size() - 1; i > -1; i--) {
+				TextUtils.printTextWithImages(logs.get(i).contents, 20, 20 + i * 20, Integer.MAX_VALUE, true);
+			}
 		}
 
 		// script

@@ -36,6 +36,9 @@ public class AIRoutineForBlind extends AIRoutine {
 	boolean hangry = false;
 	int timeSinceEating = Integer.MAX_VALUE;
 
+	int failedToGetPathToBellCount = 0;
+	int failedToGetPathToFoodCount = 0;
+
 	public AIRoutineForBlind(Blind blind) {
 		super(blind);
 		this.blind = blind;
@@ -74,11 +77,29 @@ public class AIRoutineForBlind extends AIRoutine {
 
 			if (meatChunk != null) {
 				this.blind.activityDescription = "Eating!";
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(meatChunk.squareGameObjectIsOn);
-				if (blind.straightLineDistanceTo(meatChunk.squareGameObjectIsOn) <= 1) {
+
+				if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(meatChunk.squareGameObjectIsOn)) {
+					failedToGetPathToFoodCount = 0;
+				} else {
+					failedToGetPathToFoodCount++;
+					if (failedToGetPathToFoodCount == 10) {
+						failedToGetPathToFoodCount = 0;
+						this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
+						bellSound = null;
+						meatChunk = null;
+						this.blind.activityDescription = "Hangry";
+						hangry = true;
+					}
+				}
+
+				if (meatChunk != null && blind.straightLineDistanceTo(meatChunk.squareGameObjectIsOn) <= 1) {
+					failedToGetPathToBellCount = 0;
+					failedToGetPathToFoodCount = 0;
 					new ActionTakeBite(blind, meatChunk).perform();
 					timeSinceEating = 0;
 					hangry = false;
+					bellSound = null;
+					meatChunk = null;
 				}
 				return;
 			}
@@ -95,13 +116,24 @@ public class AIRoutineForBlind extends AIRoutine {
 
 			if (bellSound != null) {
 				this.blind.activityDescription = "Dinner time!";
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare);
-				if (blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
+				if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare)) {
+					failedToGetPathToBellCount = 0;
+				} else {
+					failedToGetPathToBellCount++;
+					if (failedToGetPathToBellCount == 10) {
+						failedToGetPathToBellCount = 0;
+						this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
+						bellSound = null;
+						this.blind.activityDescription = "Hangry";
+						hangry = true;
+					}
+				}
+				if (bellSound != null && blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
+					failedToGetPathToBellCount = 0;
 					this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
 					bellSound = null;
 					this.blind.activityDescription = "Hangry";
 					hangry = true;
-
 				}
 				return;
 			}
