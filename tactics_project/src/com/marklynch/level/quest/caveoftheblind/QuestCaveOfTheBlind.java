@@ -186,6 +186,14 @@ public class QuestCaveOfTheBlind extends Quest {
 				new RoomPart(54, 10, 60, 17));
 		rooms.add(westSecurity1);
 
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[54][10], mort));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[55][10], mort));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[56][10], mort));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[57][10], mort));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[58][10], mort));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[59][10], mort));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[60][10], mort));
+
 		// West Security to outer mine y 17 -> 21 55+56x
 		cavePaths.add(new StructurePath("West Security <-> Outer Mine", Game.level.squares[55][17],
 				Game.level.squares[55][18], Game.level.squares[55][19], Game.level.squares[55][20],

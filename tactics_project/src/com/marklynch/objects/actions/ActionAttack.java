@@ -117,6 +117,8 @@ public class ActionAttack extends Action {
 
 	@Override
 	public boolean checkLegality() {
+		if (target.owner != null && target.owner != Game.level.player)
+			return false;
 		return true;
 	}
 

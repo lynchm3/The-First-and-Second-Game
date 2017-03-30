@@ -202,7 +202,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			}
 		} else {
-			if (Math.random() < 0.05) {
+			if (Math.random() < 0.1) {
 				if (blind.roomLivingIn == null) {
 					targetSquare = AIRoutineUtils.getRandomSquare(5, true);
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
