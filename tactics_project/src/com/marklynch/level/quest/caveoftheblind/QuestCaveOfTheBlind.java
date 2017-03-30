@@ -186,13 +186,16 @@ public class QuestCaveOfTheBlind extends Quest {
 				new RoomPart(54, 10, 60, 17));
 		rooms.add(westSecurity1);
 
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[54][10], mort));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[55][10], mort));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[56][10], mort));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[57][10], mort));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[58][10], mort));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[59][10], mort));
-		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[60][10], mort));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[54][10], null));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[55][10], null));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[56][10], null));
+		ArrayList<Key> keysForMortsDoor = new ArrayList<Key>();
+		keysForMortsDoor.add(mortsKey);
+		keysForMortsDoor.add((Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
+		caveFeatures.add(Templates.WEAK_WOODEN_DOOR.makeCopy(Game.level.squares[57][10], keysForMortsDoor, true, null));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[58][10], null));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[59][10], null));
+		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[60][10], null));
 
 		// West Security to outer mine y 17 -> 21 55+56x
 		cavePaths.add(new StructurePath("West Security <-> Outer Mine", Game.level.squares[55][17],
@@ -323,9 +326,6 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Cave featues for Mort
 		caveFeatures.add(Templates.VEIN.makeCopy(Game.level.squares[76][45], mort));
 		caveFeatures.add(Templates.VEIN.makeCopy(Game.level.squares[76][46], mort));
-		ArrayList<Key> keysForMortsDoor = new ArrayList<Key>();
-		keysForMortsDoor.add(mortsKey);
-		keysForMortsDoor.add((Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
 		mortsBedroomDoor = Templates.DOOR.makeCopy(Game.level.squares[75][40], keysForMortsDoor, true, mort);
 		caveFeatures.add(mortsBedroomDoor);
 		mortsStoreroomDoor = Templates.DOOR.makeCopy(Game.level.squares[64][40], keysForMortsDoor, true, mort);
@@ -482,16 +482,30 @@ public class QuestCaveOfTheBlind extends Quest {
 		blind11.quest = this;
 		blind.add(blind11);
 
-		// Atrium 1
-		Blind blind1 = Templates.BLIND.makeCopy(Game.level.squares[60][12], Game.level.factions.get(3), westSecurity1);
-		blind1.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
-		blind1.quest = this;
-		blind.add(blind1);
+		// East security
+		Blind blindEastSecurity1 = Templates.BLIND.makeCopy(Game.level.squares[60][12], Game.level.factions.get(3),
+				westSecurity1);
+		blindEastSecurity1.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blindEastSecurity1.quest = this;
+		blind.add(blindEastSecurity1);
 
-		Blind blind2 = Templates.BLIND.makeCopy(Game.level.squares[60][15], Game.level.factions.get(3), westSecurity1);
-		blind2.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
-		blind2.quest = this;
-		blind.add(blind2);
+		Blind blindEastSecurity2 = Templates.BLIND.makeCopy(Game.level.squares[60][15], Game.level.factions.get(3),
+				westSecurity1);
+		blindEastSecurity2.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blindEastSecurity2.quest = this;
+		blind.add(blindEastSecurity2);
+
+		Blind blindEastSecurity3 = Templates.BLIND.makeCopy(Game.level.squares[54][6], Game.level.factions.get(3),
+				westSecurity1);
+		blindEastSecurity3.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blindEastSecurity3.quest = this;
+		blind.add(blindEastSecurity3);
+
+		Blind blindEastSecurity4 = Templates.BLIND.makeCopy(Game.level.squares[57][5], Game.level.factions.get(3),
+				westSecurity1);
+		blindEastSecurity4.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blindEastSecurity4.quest = this;
+		blind.add(blindEastSecurity4);
 
 		// Atrium 2
 		Blind blind3 = Templates.BLIND.makeCopy(Game.level.squares[55][23], Game.level.factions.get(3), outerMine);

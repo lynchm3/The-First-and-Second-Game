@@ -89,6 +89,9 @@ public class Templates {
 	public static final Sign ROCK_WITH_ETCHING = new Sign("Rock with Etching", 1000, "rock_with_etching.png", null,
 			new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1, 0.5f, 0.5f, 20f, 1f,
 			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
+	public static final Door WEAK_WOODEN_DOOR = new Door("Weak Wooden Door", 25, "door.png", null, new Inventory(),
+			false, true, false, false, true, true, 1, 1, 0.5f, 0.5f, 10f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+			null, null, true);
 	public static final Door DOOR = new Door("Door", 100, "door.png", null, new Inventory(), false, true, false, false,
 			true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, null, true);
 	public static final Key KEY = new Key("Key", 100, "key.png", null, new Inventory(), false, true, false, false, true,
