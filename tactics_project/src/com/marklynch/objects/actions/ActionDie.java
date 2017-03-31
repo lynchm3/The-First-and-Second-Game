@@ -10,7 +10,7 @@ import com.marklynch.objects.units.WildAnimal;
 
 public class ActionDie extends Action {
 
-	public static final String ACTION_NAME = "Loiter here";
+	public static final String ACTION_NAME = "Die";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	Square target;

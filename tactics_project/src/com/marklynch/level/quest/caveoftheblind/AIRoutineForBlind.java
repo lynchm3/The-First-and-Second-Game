@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Expressions;
 import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.actions.ActionScream;
 import com.marklynch.objects.actions.ActionTakeBite;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
@@ -153,20 +154,23 @@ public class AIRoutineForBlind extends AIRoutine {
 
 		addNonBlindToAttackersList();
 		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class, Tool.class);
-		ArrayList<Actor> toRemoveFromSearchLocations = new ArrayList<Actor>();
-		for (Actor actor : blind.locationsToSearch.keySet()) {
-			if (actor instanceof Blind) {
-				toRemoveFromSearchLocations.add(actor);
-			}
-		}
-		for (Actor actor : toRemoveFromSearchLocations) {
-			blind.locationsToSearch.remove(actor);
-		}
+		// ArrayList<Actor> toRemoveFromSearchLocations = new
+		// ArrayList<Actor>();
+		// for (Actor actor : blind.locationsToSearch.keySet()) {
+		//
+		// if (actor instanceof Blind) {
+		// toRemoveFromSearchLocations.add(actor);
+		// }
+		// }
+		// for (Actor actor : toRemoveFromSearchLocations) {
+		// blind.locationsToSearch.remove(actor);
+		// }
 
 		createSearchLocationsBasedOnVisibleAttackers();
 
 		if (runFightRoutine()) {
 			// createSearchLocationsBasedOnSounds();
+			new ActionScream(blind).perform();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}

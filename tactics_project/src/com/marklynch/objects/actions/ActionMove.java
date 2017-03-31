@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -66,7 +67,7 @@ public class ActionMove extends Action {
 
 		// Sound of glass
 		BrokenGlass brokenGlass = (BrokenGlass) target.inventory.getGameObectOfClass(BrokenGlass.class);
-		if (brokenGlass != null) {
+		if (!(performer instanceof Blind) && brokenGlass != null) {
 			sound = new Sound(performer, brokenGlass, performer.squareGameObjectIsOn, 10, legal, this.getClass());
 		}
 
