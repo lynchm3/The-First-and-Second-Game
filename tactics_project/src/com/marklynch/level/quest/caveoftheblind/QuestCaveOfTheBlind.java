@@ -17,7 +17,7 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Key;
-import com.marklynch.objects.Sign;
+import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.tools.Lantern;
@@ -118,8 +118,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		makeMortsRoom();
 		makeBlind();
 
-		Sign rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[44][15], "Rock with message",
-				new Object[] { "Stay out or The Blind will get you! -Mort" });
+		Readable rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[44][15], "Rock with message",
+				new Object[] { "Stay out or The Blind will get you! -Mort" }, null);
 
 		// Add spoons
 		serratedSpoon = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[44][11], null);
@@ -200,6 +200,15 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[58][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[59][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[60][10], null));
+
+		GameObject securityTable = Templates.TABLE.makeCopy(Game.level.squares[58][9], null);
+		Readable securityDocuments = Templates.DOCUMENTS.makeCopy(Game.level.squares[58][9], "Ingoing/Outgoing",
+				new Object[] {
+						"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter" },
+				null);
+		// securityTable.inventory.add(glassForTable);
+		caveFeatures.add(securityDocuments);
+		caveFeatures.add(securityTable);
 
 		// West Security to outer mine y 17 -> 21 55+56x
 		cavePaths.add(new StructurePath("West Security <-> Outer Mine", Game.level.squares[55][17],
@@ -430,7 +439,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public void makeMortsMine() {
 
-		Sign noEntry = Templates.SIGN.makeCopy(Game.level.squares[76][39], "Sign", new Object[] { "PRIVATE! - Mort" });
+		Readable noEntry = Templates.SIGN.makeCopy(Game.level.squares[76][39], "Sign",
+				new Object[] { "PRIVATE! - Mort" }, mort);
 		noEntry.quest = this;
 
 		GameObject trough = Templates.TROUGH.makeCopy(Game.level.squares[86][43], mort);

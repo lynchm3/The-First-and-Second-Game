@@ -42,6 +42,15 @@ public class Bed extends GameObject {
 	}
 
 	@Override
+	public Bed makeCopy(Square square, Actor owner) {
+		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
+				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY,
+				soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance,
+				iceResistance, electricResistance, poisonResistance, owner);
+	}
+
+	@Override
 	public void draw2() {
 
 		super.draw2();

@@ -27,4 +27,13 @@ public class MeatChunk extends GameObject {
 				electricResistance, poisonResistance, owner);
 	}
 
+	@Override
+	public MeatChunk makeCopy(Square square, Actor owner) {
+		return new MeatChunk(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance, owner);
+	}
+
 }

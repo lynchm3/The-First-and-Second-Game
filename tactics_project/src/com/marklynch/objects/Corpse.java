@@ -27,4 +27,13 @@ public class Corpse extends GameObject {
 				electricResistance, poisonResistance, owner);
 	}
 
+	@Override
+	public Corpse makeCopy(Square square, Actor owner) {
+		return new Corpse(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance, owner);
+	}
+
 }

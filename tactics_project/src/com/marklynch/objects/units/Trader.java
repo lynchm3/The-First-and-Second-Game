@@ -13,7 +13,7 @@ import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
-import com.marklynch.objects.Sign;
+import com.marklynch.objects.Readable;
 import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;
@@ -22,7 +22,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 
 	public StructureRoom room;
 	public Structure shop;
-	public Sign shopSign;
+	public Readable shopSign;
 	public Weapon broom;
 
 	public Trader(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,

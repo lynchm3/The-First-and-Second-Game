@@ -45,7 +45,7 @@ import com.marklynch.objects.GameObjectExploder;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Junk;
-import com.marklynch.objects.Sign;
+import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Wall;
@@ -518,8 +518,8 @@ public class Editor {
 				-100 + 868, true, trader, new ArrayList<Square>(), new ArrayList<Wall>());
 		Game.level.structures.add(joesShop);
 
-		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
-				new Object[] { joesShop.name });
+		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
+				new Object[] { joesShop.name }, trader);
 		Weapon broom = Templates.BROOM.makeCopy(null, null);
 		trader.inventory.add(broom);
 		trader.inventory.add(Templates.KATANA.makeCopy(null, null));
@@ -635,8 +635,8 @@ public class Editor {
 
 		Group hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
 
-		Sign huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan",
-				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" });
+		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan",
+				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,

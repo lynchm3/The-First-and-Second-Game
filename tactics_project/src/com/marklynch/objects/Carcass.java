@@ -27,4 +27,13 @@ public class Carcass extends GameObject {
 				electricResistance, poisonResistance, owner);
 	}
 
+	@Override
+	public Carcass makeCopy(Square square, Actor owner) {
+		return new Carcass(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance, owner);
+	}
+
 }

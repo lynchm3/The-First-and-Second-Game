@@ -103,4 +103,13 @@ public class Door extends GameObject {
 				electricResistance, poisonResistance, owner, keys, locked);
 	}
 
+	@Override
+	public Door makeCopy(Square square, Actor owner) {
+		return new Door(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance, owner, keys, locked);
+	}
+
 }

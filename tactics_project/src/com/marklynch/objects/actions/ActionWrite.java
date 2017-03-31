@@ -1,7 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
-import com.marklynch.objects.Sign;
+import com.marklynch.objects.Readable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -11,10 +11,10 @@ public class ActionWrite extends Action {
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
-	Sign sign;
+	Readable sign;
 	Object[] text;
 
-	public ActionWrite(Actor writer, Sign sign, Object[] text) {
+	public ActionWrite(Actor writer, Readable sign, Object[] text) {
 		super(ACTION_NAME);
 		this.performer = writer;
 		this.sign = sign;

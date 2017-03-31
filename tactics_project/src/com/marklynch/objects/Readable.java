@@ -12,12 +12,12 @@ import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
 
-public class Sign extends GameObject {
+public class Readable extends GameObject {
 
 	private Object[] text;
 	Conversation conversation;
 
-	public Sign(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
+	public Readable(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, Object[] text, float widthRatio,
 			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
@@ -36,8 +36,17 @@ public class Sign extends GameObject {
 
 	}
 
-	public Sign makeCopy(Square square, String name, Object[] text) {
-		return new Sign(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+	public Readable makeCopy(Square square, String name, Object[] text, Actor owner) {
+		return new Readable(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, text, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance, owner);
+	}
+
+	@Override
+	public Readable makeCopy(Square square, Actor owner) {
+		return new Readable(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, text, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
