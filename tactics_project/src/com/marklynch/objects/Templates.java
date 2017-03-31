@@ -77,13 +77,13 @@ public class Templates {
 			false, false, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
 	public static final GameObjectTemplate SHOP_COUNTER = new GameObjectTemplate("Shop Counter", 5, "shop_counter.png",
 			null, new Inventory(), false, true, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, null);
+			false, 0f, 0f, 0f, 0f);
 	public static final GameObjectTemplate TABLE = new GameObjectTemplate("Table", 5, "table.png", null,
 			new Inventory(), true, true, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, null);
+			0f, 0f, 0f, 0f);
 	public static final GameObjectTemplate BARRICADE = new GameObjectTemplate("BARRICADE", 25, "barricade.png", null,
 			new Inventory(), false, false, false, false, false, true, 1f, 1f, 0.5f, 0.5f, 10f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, null);
+			false, 0f, 0f, 0f, 0f);
 	public static final Readable ROCK_WITH_ETCHING = new Readable("Rock with Etching", 1000, "rock_with_etching.png",
 			null, new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1, 0.5f, 0.5f, 20f,
 			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
@@ -111,10 +111,10 @@ public class Templates {
 	// LARGE CONTAINER
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("Dumpster", 5, "skip_with_shadow.png",
 			null, new Inventory(), true, false, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, null);
+			false, 0f, 0f, 0f, 0f);
 	public static final GameObjectTemplate TROUGH = new GameObjectTemplate("Trough", 5, "trough.png", null,
 			new Inventory(), true, false, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, null);
+			0f, 0f, 0f, 0f);
 
 	// Food?
 	public static final Carcass CARCASS = new Carcass("Carcass", 5, "carcass.png", null, new Inventory(), false, true,

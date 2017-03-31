@@ -87,8 +87,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
+				fireResistance, iceResistance, electricResistance, poisonResistance);
 		this.remainingHealth = health;
+		this.owner = owner;
 
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn = squareGameObjectIsOn;

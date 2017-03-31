@@ -327,6 +327,15 @@ public class TextUtils {
 				Action action = (Action) content;
 				String string = action.actionName;
 
+				Color color = Color.WHITE;
+				System.out.println("TextUtils action.legal = " + action.legal);
+				if (!action.legal) {
+					System.out.println("setting red");
+					color = color.RED;
+				}
+
+				Game.activeBatch.setColor(color);
+
 				float textWidth = Game.font.getWidth(string);
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;

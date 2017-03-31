@@ -48,7 +48,7 @@ public class GameObjectTemplate {
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
 			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, Actor owner) {
+			float iceResistance, float electricResistance, float poisonResistance) {
 		super();
 		this.name = name;
 		this.totalHealth = totalHealth;
