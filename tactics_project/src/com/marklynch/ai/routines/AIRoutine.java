@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.Expressions;
 import com.marklynch.objects.GameObject;
@@ -45,15 +44,12 @@ public class AIRoutine {
 		ArrayList<Class> classesArrayList = new ArrayList<Class>(Arrays.asList(classes));
 
 		// Check for sounds to investigate
-		ArrayList<Square> squaresThisCanHear = this.actor.getAllSquaresWithinDistance(this.actor.hearing);
-		for (Square squareThisCanHear : squaresThisCanHear) {
-			for (Sound sound : squareThisCanHear.sounds) {
-				if (!this.actor.locationsToSearch.containsValue(sound.sourceSquare)
-						&& !this.actor.canSee(sound.sourceSquare)) {
+		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
+			if (!this.actor.locationsToSearch.containsValue(sound.sourceSquare)
+					&& !this.actor.canSee(sound.sourceSquare)) {
 
-					if (!sound.legal || classesArrayList.contains(sound.sourceObject.getClass())) {
-						this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
-					}
+				if (!sound.legal || classesArrayList.contains(sound.sourceObject.getClass())) {
+					this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
 				}
 			}
 		}
@@ -62,12 +58,9 @@ public class AIRoutine {
 	public Sound getSoundFromSourceType(Class clazz) {
 
 		// Check for sounds to investigate
-		ArrayList<Square> squaresThisCanHear = this.actor.getAllSquaresWithinDistance(this.actor.hearing);
-		for (Square squareThisCanHear : squaresThisCanHear) {
-			for (Sound sound : squareThisCanHear.sounds) {
-				if (clazz.isInstance(sound.sourceObject)) {
-					return sound;
-				}
+		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
+			if (clazz.isInstance(sound.sourceObject)) {
+				return sound;
 			}
 		}
 		return null;

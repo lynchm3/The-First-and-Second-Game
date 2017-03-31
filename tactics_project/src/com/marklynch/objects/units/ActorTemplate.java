@@ -16,7 +16,6 @@ public class ActorTemplate extends GameObject {
 	public int actorLevel = 1;
 	public int travelDistance = 4;
 	public int sight = 4;
-	public float hearing = 1;
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
@@ -41,7 +40,6 @@ public class ActorTemplate extends GameObject {
 		this.actorLevel = actorLevel;
 		this.travelDistance = travelDistance;
 		this.sight = sight;
-		this.hearing = hearing;
 
 	}
 

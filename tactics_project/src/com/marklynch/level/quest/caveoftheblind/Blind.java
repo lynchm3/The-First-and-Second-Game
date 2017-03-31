@@ -26,13 +26,12 @@ public class Blind extends Actor {
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
 			float electricResistance, float poisonResistance, Actor owner, Faction faction, float anchorX,
-			float anchorY, float hearing, StructureRoom roomLivingIn) {
+			float anchorY, StructureRoom roomLivingIn) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner, faction, anchorX, anchorY,
-				hearing);
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner, faction, anchorX, anchorY);
 		aiRoutine = new AIRoutineForBlind(this);
 		this.roomLivingIn = roomLivingIn;
 	}
@@ -103,7 +102,7 @@ public class Blind extends Actor {
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner,
-				faction, anchorX, anchorY, hearing, roomLivingIn);
+				faction, anchorX, anchorY, roomLivingIn);
 		return actor;
 	}
 
