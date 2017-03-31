@@ -435,7 +435,7 @@ public class Editor {
 		player.inventory.add(Templates.DINNER_BELL.makeCopy(null, player));
 		player.inventory.add(Templates.CLEAVER.makeCopy(null, player));
 		player.inventory.add(Templates.LANTERN.makeCopy(null, player));
-		player.inventory.add(Templates.KEY.makeCopy(null, player));
+		player.inventory.add(Templates.KEY.makeCopy("Player test key", null, player));
 		player.inventory.add(Templates.PICKAXE.makeCopy(null, player));
 		// player.inventory.add(Templates.PICKAXE.makeCopy(null));
 		player.anchorX = 80;
@@ -452,10 +452,10 @@ public class Editor {
 		ArrayList<GameObject> shopFeatures = new ArrayList<GameObject>();
 		shopFeatures.add(new Door("Shop Door", 100, "door.png", Game.level.squares[5][4], new Inventory(), false, true,
 				false, false, true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, trader,
-				null, false));
+				false, null));
 		shopFeatures.add(new Door("Shop Door", 100, "door.png", Game.level.squares[11][4], new Inventory(), false, true,
 				false, false, true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, trader,
-				null, false));
+				false, null));
 
 		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[6][5], new Inventory(), false,
 				true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,

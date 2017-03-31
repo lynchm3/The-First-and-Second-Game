@@ -885,8 +885,10 @@ public class Actor extends ActorTemplate {
 			return false;
 
 		for (GameObject gameObject : inventory.getGameObjects()) {
-			if (door.keys.contains(gameObject)) {
-				return true;
+			for (Key key : door.keys) {
+				if (key == gameObject) {
+					return true;
+				}
 			}
 		}
 
@@ -898,8 +900,10 @@ public class Actor extends ActorTemplate {
 			return null;
 
 		for (GameObject gameObject : inventory.getGameObjects()) {
-			if (door.keys.contains(gameObject)) {
-				return (Key) gameObject;
+			for (Key key : door.keys) {
+				if (key == gameObject) {
+					return key;
+				}
 			}
 		}
 

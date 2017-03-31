@@ -1,7 +1,5 @@
 package com.marklynch.objects;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
 
@@ -14,11 +12,11 @@ public class Door extends Openable {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Actor owner, ArrayList<Key> keys, boolean locked) {
+			float electricResistance, float poisonResistance, Actor owner, boolean locked, Key... keys) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner, keys, locked);
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner, locked, keys);
 
 	}
 
@@ -61,12 +59,12 @@ public class Door extends Openable {
 		blocksLineOfSight = true;
 	}
 
-	public Door makeCopy(Square square, ArrayList<Key> keys, boolean locked, Actor owner) {
+	public Door makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
 		return new Door(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance, owner, keys, locked);
+				electricResistance, poisonResistance, owner, locked, keys);
 	}
 
 	@Override
@@ -75,7 +73,7 @@ public class Door extends Openable {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance, owner, keys, locked);
+				electricResistance, poisonResistance, owner, locked, keys);
 	}
 
 }

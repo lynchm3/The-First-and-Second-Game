@@ -87,13 +87,18 @@ public class QuestCaveOfTheBlind extends Quest {
 	// Conversations
 	ConversationForMort conversationForMort;
 
+	Key alsKey;
+	Key joesKey;
+	Key seansKey;
+	Key paulsKey;
+
 	public QuestCaveOfTheBlind() {
 		super();
 
 		// Mort and his bed
 		Bed mortsBed = Templates.BED.makeCopy(Game.level.squares[67][42]);
 		mortsBed.quest = this;
-		mortsKey = Templates.KEY.makeCopy(null, mort);
+		mortsKey = Templates.KEY.makeCopy("Mort's Key", null, mort);
 		mortsKey.quest = this;
 		// [147][21]
 		mort = Templates.MORT.makeCopy(Game.level.squares[81][41], Game.level.factions.get(1), mortsBed);
@@ -107,6 +112,16 @@ public class QuestCaveOfTheBlind extends Quest {
 		mort.inventory.add(mort.mortsBell);
 		mort.inventory.add(mort.mortsMeatChunk);
 		mort.questCaveOfTheBlind = this;
+
+		// Hide Quarters keys
+		// Als Key - in management confiscated desk
+		alsKey = Templates.KEY.makeCopy("Al's Key", null, mort);
+		// On blind3 in outer mine
+		joesKey = Templates.KEY.makeCopy("Joe's Key", null, null);
+		// On blind3 in dining room
+		seansKey = Templates.KEY.makeCopy("Sean's Key", null, null);
+		// In lavatory
+		paulsKey = Templates.KEY.makeCopy("Paul's Key", Game.level.squares[99][31], null);
 
 		for (GameObject gameObject : mort.inventory.getGameObjects()) {
 			gameObject.quest = this;
@@ -198,10 +213,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[54][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[55][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[56][10], null));
-		ArrayList<Key> keysForMortsDoor = new ArrayList<Key>();
-		keysForMortsDoor.add(mortsKey);
-		keysForMortsDoor.add((Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
-		caveFeatures.add(Templates.WEAK_WOODEN_DOOR.makeCopy(Game.level.squares[57][10], keysForMortsDoor, true, null));
+		caveFeatures.add(Templates.WEAK_WOODEN_DOOR.makeCopy("Security Door", Game.level.squares[57][10], true, null,
+				mortsKey, (Key) Game.level.player.inventory.getGameObectOfClass(Key.class)));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[58][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[59][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[60][10], null));
@@ -213,7 +226,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		// securityTable.inventory.add(glassForTable);
 		caveFeatures.add(securityDocuments);
 		caveFeatures.add(securityTable);
-		Chest securityChest = Templates.CHEST.makeCopy(Game.level.squares[59][9], new ArrayList<Key>(), false, null);
+		Chest securityChest = Templates.CHEST.makeCopy("Security Chest", Game.level.squares[59][9], false, null);
 		securityChest.inventory.add(Templates.PICKAXE.makeCopy(null, null));
 		caveFeatures.add(securityChest);
 
@@ -376,11 +389,12 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[79][19]));
 		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[87][19]));
 		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[89][19]));
-		caveFeatures.add(Templates.CHEST.makeCopy(Game.level.squares[87][23], new ArrayList<Key>(), false, null));
-		caveFeatures.add(Templates.CHEST.makeCopy(Game.level.squares[88][23], new ArrayList<Key>(), false, null));
-		caveFeatures.add(Templates.CHEST.makeCopy(Game.level.squares[89][23], new ArrayList<Key>(), false, null));
-		caveFeatures.add(Templates.CHEST.makeCopy(Game.level.squares[90][23], new ArrayList<Key>(), true, null));
-		caveFeatures.add(Templates.CHEST.makeCopy(Game.level.squares[91][23], new ArrayList<Key>(), true, null));
+
+		caveFeatures.add(Templates.CHEST.makeCopy("Al's Gear", Game.level.squares[87][23], true, null, alsKey));
+		caveFeatures.add(Templates.CHEST.makeCopy("Joe's Gear", Game.level.squares[88][23], true, null, joesKey));
+		caveFeatures.add(Templates.CHEST.makeCopy("Sean's Gear", Game.level.squares[89][23], true, null, seansKey));
+		caveFeatures.add(Templates.CHEST.makeCopy("Steve's Gear", Game.level.squares[90][23], false, null));
+		caveFeatures.add(Templates.CHEST.makeCopy("Paul's Gear", Game.level.squares[91][23], true, null, paulsKey));
 
 		// Path rec room to quarters
 		cavePaths.add(
@@ -411,6 +425,9 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Morts Quarters
 		mort.mortsRoom = new StructureRoom("Management", 65, 39, new RoomPart(65, 39, 74, 42));
 		rooms.add(mort.mortsRoom);
+		Chest confiscatedChest = Templates.CHEST.makeCopy("Confiscated", Game.level.squares[69][42], false, mort,
+				mortsKey);
+		confiscatedChest.inventory.add(alsKey);
 
 		// Morts Vault Room
 		mort.mortsVault = new StructureRoom("Vault", 49, 39, new RoomPart(49, 39, 63, 42));
@@ -419,9 +436,11 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Cave featues for Mort
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[76][45], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[76][46], mort));
-		mortsBedroomDoor = Templates.DOOR.makeCopy(Game.level.squares[75][40], keysForMortsDoor, true, mort);
+		mortsBedroomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[75][40], true, mort, mortsKey,
+				(Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
 		caveFeatures.add(mortsBedroomDoor);
-		mortsStoreroomDoor = Templates.DOOR.makeCopy(Game.level.squares[64][40], keysForMortsDoor, true, mort);
+		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[64][40], true, mort, mortsKey,
+				(Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
 		caveFeatures.add(mortsStoreroomDoor);
 
 		// Path Dining room to equipment room
@@ -616,6 +635,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Atrium 2
 		Blind blind3 = Templates.BLIND.makeCopy(Game.level.squares[55][23], Game.level.factions.get(3), outerMine);
 		blind3.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blind3.inventory.add(joesKey);
 		blind3.quest = this;
 		blind.add(blind3);
 
@@ -696,6 +716,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		Blind blindDiningRoom3 = Templates.BLIND.makeCopy(Game.level.squares[93][46], Game.level.factions.get(3),
 				diningRoom);
 		blindDiningRoom3.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		blindDiningRoom3.inventory.add(seansKey);
 		blindDiningRoom3.quest = this;
 		blind.add(blindDiningRoom3);
 

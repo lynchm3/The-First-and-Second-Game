@@ -37,6 +37,14 @@ public class Key extends GameObject {
 
 	}
 
+	public Key makeCopy(String name, Square square, Actor owner) {
+		return new Key(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance, owner);
+	}
+
 	@Override
 	public Key makeCopy(Square square, Actor owner) {
 		return new Key(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
