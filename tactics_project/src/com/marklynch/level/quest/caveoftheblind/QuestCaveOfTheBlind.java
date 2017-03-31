@@ -90,7 +90,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		super();
 
 		// Mort and his bed
-		Bed mortsBed = Templates.BED.makeCopy(Game.level.squares[135][24]);
+		Bed mortsBed = Templates.BED.makeCopy(Game.level.squares[67][42]);
 		mortsBed.quest = this;
 		mortsKey = Templates.KEY.makeCopy(null, mort);
 		mortsKey.quest = this;
@@ -344,10 +344,36 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Quarters extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[92][13], null));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[82][17], null));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[82][18], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[83][17], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[83][18], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[84][17], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[84][18], null));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[77][13]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[79][13]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[81][13]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[83][13]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[85][13]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[87][13]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[77][15]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[79][15]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[81][15]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[83][15]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[85][15]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[87][15]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[89][15]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[91][15]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[77][17]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[79][17]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[87][17]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[89][17]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[91][17]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[77][19]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[79][19]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[87][19]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[89][19]));
+		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[91][19]));
 
 		// Path rec room to quarters
 		cavePaths.add(
@@ -366,6 +392,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[86][39], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[86][47], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[80][43], mort));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[80][44], mort));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[81][43], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[81][44], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[83][38], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[86][37], mort));
