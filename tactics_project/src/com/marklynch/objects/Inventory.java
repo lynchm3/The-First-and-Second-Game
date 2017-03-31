@@ -67,7 +67,7 @@ public class Inventory {
 	public ArrayList<Button> buttonsSort;
 	public ArrayList<Button> buttonsFilter;
 
-	public Inventory() {
+	public Inventory(GameObject... gameObjects) {
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
 				inventorySquares[j][i] = new InventorySquare(j, i, "dialogbg.png", this);
@@ -175,6 +175,10 @@ public class Inventory {
 		});
 		buttons.add(buttonFilterByFood);
 		buttonsFilter.add(buttonFilterByFood);
+
+		for (GameObject gameObject : gameObjects) {
+			add(gameObject);
+		}
 
 	}
 

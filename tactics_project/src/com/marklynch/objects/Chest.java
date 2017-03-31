@@ -4,10 +4,15 @@ import java.util.ArrayList;
 
 import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.ResourceUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class Chest extends Openable {
+
+	Texture chestOpenTexture;
+	Texture chestClosedTexture;
 
 	public Chest(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -23,6 +28,12 @@ public class Chest extends Openable {
 	}
 
 	@Override
+	public void loadImages() {
+		chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png");
+		chestClosedTexture = ResourceUtils.getGlobalImage("chest.png");
+	}
+
+	@Override
 	public void draw1() {
 
 		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
@@ -30,6 +41,11 @@ public class Chest extends Openable {
 
 		if (!this.squareGameObjectIsOn.seenByPlayer)
 			return;
+
+		if (open)
+			imageTexture = chestOpenTexture;
+		else
+			imageTexture = chestClosedTexture;
 
 		super.draw1();
 
