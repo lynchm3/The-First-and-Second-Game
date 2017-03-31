@@ -150,6 +150,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	}
 
 	public void makeCave() {
+		ArrayList<Wall> extraWalls = new ArrayList<Wall>();
 		ArrayList<GameObject> caveFeatures = new ArrayList<GameObject>();
 		ArrayList<StructurePath> cavePaths = new ArrayList<StructurePath>();
 		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
@@ -186,6 +187,9 @@ public class QuestCaveOfTheBlind extends Quest {
 				new RoomPart(54, 10, 60, 17));
 		rooms.add(westSecurity1);
 
+		// West security extras
+		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[52][9], null));
+		caveFeatures.add(Templates.BROKEN_LAMP.makeCopy(Game.level.squares[53][9], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[54][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[55][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[56][10], null));
@@ -403,24 +407,24 @@ public class QuestCaveOfTheBlind extends Quest {
 		squaresToRemove.add(Game.level.squares[24][10]);
 
 		Game.level.structures.add(new Structure("Mort & Mort Mining", caveSections, rooms, cavePaths, caveFeatures,
-				new ArrayList<Square>(), null, 0, 0, 0, 0, true, mort, squaresToRemove));
+				new ArrayList<Square>(), null, 0, 0, 0, 0, true, mort, squaresToRemove, extraWalls));
 
 		// Dirty Sheet
 		// Templates.DIRTY_SHEET.makeCopy(Game.level.squares[47][11]);
 		// Templates.DIRTY_SHEET_2.makeCopy(Game.level.squares[47][10]);
 		Templates.DIRTY_SHEET_3.makeCopy(Game.level.squares[47][9], null);
 		// Smashed Glass
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[43][12], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][11], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[44][12], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][11], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][12], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[45][13], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[46][12], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][9], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][10], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][11], null);
-		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[47][12], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[43][12], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[44][11], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[44][12], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[45][11], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[45][12], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[45][13], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[46][12], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[47][9], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[47][10], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[47][11], null);
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[47][12], null);
 
 	}
 

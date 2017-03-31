@@ -137,7 +137,7 @@ public class Templates {
 			false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
 
 	// TRAPS
-	public static final BrokenGlass BROKEN_GLASS = new BrokenGlass("Broken Glass", 5, "smashed_glass.png", null,
+	public static final BrokenGlass BROKEN_LAMP = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
 			new Inventory(), false, true, true, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f, null);
 

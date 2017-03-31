@@ -48,6 +48,7 @@ import com.marklynch.objects.Junk;
 import com.marklynch.objects.Sign;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
@@ -421,7 +422,11 @@ public class Editor {
 		Game.level.factions.add(new Faction("Blind", colors.get(3), "blind.png"));
 
 		// Add player
-		Actor player = Templates.Player.makeCopy(Game.level.squares[80][39], Game.level.factions.get(0), null);
+		// West Security
+		Actor player = Templates.Player.makeCopy(Game.level.squares[56][8], Game.level.factions.get(0), null);
+		// Morts Mine
+		// Actor player = Templates.Player.makeCopy(Game.level.squares[80][39],
+		// Game.level.factions.get(0), null);
 		Game.level.player = player;
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));
 		player.inventory.add(Templates.HATCHET.makeCopy(null, player));
@@ -510,7 +515,7 @@ public class Editor {
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructurePath>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -100,
-				-100 + 868, true, trader, new ArrayList<Square>());
+				-100 + 868, true, trader, new ArrayList<Square>(), new ArrayList<Wall>());
 		Game.level.structures.add(joesShop);
 
 		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
@@ -545,7 +550,7 @@ public class Editor {
 
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructurePath>(),
 				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true,
-				hunterBrent, new ArrayList<Square>());
+				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>());
 		Game.level.structures.add(lodge);
 
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();

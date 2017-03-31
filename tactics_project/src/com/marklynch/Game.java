@@ -30,8 +30,15 @@ public class Game {
 
 	// public static float dragX = 0;
 	// public static float dragY = 0;
-	public static float dragX = -4500;
-	public static float dragY = -2000;
+
+	// West Security + Dungeon
+	public static float dragX = -3072;
+	public static float dragY = -192;
+
+	// Morts Mine
+	// public static float dragX = -4500;
+	// public static float dragY = -2000;
+
 	public static float zoom = 0.5f; // 0.25f
 
 	// public static float windowWidth = 800;

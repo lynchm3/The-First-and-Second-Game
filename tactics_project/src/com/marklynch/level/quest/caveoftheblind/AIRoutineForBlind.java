@@ -153,6 +153,16 @@ public class AIRoutineForBlind extends AIRoutine {
 
 		addNonBlindToAttackersList();
 		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class, Tool.class);
+		ArrayList<Actor> toRemoveFromSearchLocations = new ArrayList<Actor>();
+		for (Actor actor : blind.locationsToSearch.keySet()) {
+			if (actor instanceof Blind) {
+				toRemoveFromSearchLocations.add(actor);
+			}
+		}
+		for (Actor actor : toRemoveFromSearchLocations) {
+			blind.locationsToSearch.remove(actor);
+		}
+
 		createSearchLocationsBasedOnVisibleAttackers();
 
 		if (runFightRoutine()) {

@@ -34,7 +34,7 @@ public class Structure {
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
 			ArrayList<StructurePath> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
 			String imageTexturePath, float overlayX1, float overlayX2, float overlayY1, float overlayY2,
-			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove) {
+			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls) {
 		super();
 
 		this.name = name;
@@ -88,6 +88,12 @@ public class Structure {
 
 		// Walls
 		ArrayList<Wall> wallsInCave = new ArrayList<Wall>();
+		wallsInCave.addAll(extraWalls);
+
+		for (Wall wallInCave : wallsInCave) {
+			wallSquares.add(wallInCave.squareGameObjectIsOn);
+		}
+
 		for (StructureSection caveSection : caveSections) {
 			for (int i = caveSection.gridX1; i <= caveSection.gridX2; i++) {
 				for (int j = caveSection.gridY1; j <= caveSection.gridY2; j++) {
