@@ -65,7 +65,7 @@ public class ActionClose extends Action {
 			return false;
 		}
 
-		if (openable.locked && !performer.hasKeyForDoor(openable)) {
+		if (openable.isLocked() && !performer.hasKeyForDoor(openable)) {
 			actionName = ACTION_NAME_NEED_KEY;
 			return false;
 		}

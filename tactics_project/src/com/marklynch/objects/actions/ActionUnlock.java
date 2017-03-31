@@ -32,7 +32,7 @@ public class ActionUnlock extends Action {
 
 		Key key = performer.getKeyFor(openable);
 
-		openable.locked = false;
+		openable.unlock();
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unlocked ", openable, " with ", key }));
 

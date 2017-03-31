@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.Bed;
+import com.marklynch.objects.Chest;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -204,7 +205,6 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[58][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[59][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[60][10], null));
-
 		GameObject securityTable = Templates.TABLE.makeCopy(Game.level.squares[58][9], null);
 		Readable securityDocuments = Templates.DOCUMENTS.makeCopy(Game.level.squares[58][9], "Ingoing/Outgoing",
 				new Object[] {
@@ -213,6 +213,9 @@ public class QuestCaveOfTheBlind extends Quest {
 		// securityTable.inventory.add(glassForTable);
 		caveFeatures.add(securityDocuments);
 		caveFeatures.add(securityTable);
+		Chest securityChest = Templates.CHEST.makeCopy(Game.level.squares[59][9], new ArrayList<Key>(), false, null);
+		securityChest.inventory.add(Templates.PICKAXE.makeCopy(null, null));
+		caveFeatures.add(securityChest);
 
 		// West Security to outer mine y 17 -> 21 55+56x
 		cavePaths.add(new StructurePath("West Security <-> Outer Mine", Game.level.squares[55][17],

@@ -29,7 +29,7 @@ public class ActionOpen extends Action {
 	@Override
 	public void perform() {
 
-		if (openable.locked)
+		if (openable.isLocked())
 			new ActionUnlock(performer, openable).perform();
 
 		openable.open();
@@ -65,7 +65,7 @@ public class ActionOpen extends Action {
 			return false;
 		}
 
-		if (openable.locked && !performer.hasKeyForDoor(openable)) {
+		if (openable.isLocked() && !performer.hasKeyForDoor(openable)) {
 			actionName = ACTION_NAME_NEED_KEY;
 			return false;
 		}

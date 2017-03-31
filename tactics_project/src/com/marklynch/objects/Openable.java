@@ -17,7 +17,8 @@ public abstract class Openable extends GameObject {
 
 	protected boolean open = false;
 	public ArrayList<Key> keys;
-	public boolean locked;
+	protected boolean locked;
+	protected String baseName;
 
 	public Openable(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -31,6 +32,9 @@ public abstract class Openable extends GameObject {
 				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 		this.keys = keys;
 		this.locked = locked;
+		baseName = new String(name);
+		if (locked)
+			this.name = baseName + " (locked)";
 
 	}
 
@@ -66,5 +70,19 @@ public abstract class Openable extends GameObject {
 	public abstract void open();
 
 	public abstract void close();
+
+	public void lock() {
+		this.name = baseName + " (locked)";
+		locked = true;
+	}
+
+	public void unlock() {
+		this.name = baseName;
+		locked = false;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
 
 }

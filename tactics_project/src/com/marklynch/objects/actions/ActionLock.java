@@ -36,7 +36,7 @@ public class ActionLock extends Action {
 		if (openable.isOpen())
 			new ActionClose(performer, openable).perform();
 
-		openable.locked = true;
+		openable.lock();
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " locked ", openable, " with ", key }));

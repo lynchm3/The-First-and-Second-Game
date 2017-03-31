@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -31,6 +32,13 @@ public class ActionLootAll extends Action {
 
 		if (!enabled)
 			return;
+
+		if (container instanceof Openable) {
+			Openable openable = (Openable) container;
+			if (!openable.isOpen()) {
+				openable.open();
+			}
+		}
 
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
