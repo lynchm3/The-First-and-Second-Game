@@ -1,5 +1,6 @@
 package com.marklynch.level.quest.caveoftheblind;
 
+import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.structure.StructureRoom;
@@ -15,6 +16,8 @@ public class Mort extends Actor {
 
 	public StructureRoom mortsMine;
 	public StructureRoom mortsRoom;
+	public StructureRoom mortsVault;
+	public Square mortsStandingSpot = Game.level.squares[80][42];
 	public GameObject mortsMeatChunk;
 	public Bell mortsBell;
 	public boolean performingFeedingDemo = false;

@@ -413,7 +413,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		rooms.add(mort.mortsRoom);
 
 		// Morts Vault Room
-		rooms.add(new StructureRoom("Vault", 49, 39, new RoomPart(49, 39, 63, 42)));
+		mort.mortsVault = new StructureRoom("Vault", 49, 39, new RoomPart(49, 39, 63, 42));
+		rooms.add(mort.mortsVault);
 
 		// Cave featues for Mort
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[76][45], mort));

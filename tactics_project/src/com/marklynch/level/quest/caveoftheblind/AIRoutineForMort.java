@@ -9,13 +9,14 @@ import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.tools.Bell;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForMort extends AIRoutine {
 
 	Mort mort;
 	GameObject target;
-	Square lastLocationSeenPlayer;
+	Square lastLocationSeenPlayerInTerritory;
 	boolean rangBellAsLastResort;
 	boolean lockedInRoom = false;
 
@@ -52,6 +53,14 @@ public class AIRoutineForMort extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.expressionImageTexture = null;
 		createSearchLocationsBasedOnSounds(Weapon.class);
+		for (Actor actor : mort.locationsToSearch.keySet()) {
+			Square squareToSearch = mort.locationsToSearch.get(actor);
+			if (squareToSearch.structureRoomSquareIsIn != mort.mortsMine
+					&& squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
+					&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault) {
+				mort.locationsToSearch.remove(actor);
+			}
+		}
 		createSearchLocationsBasedOnVisibleAttackers();
 
 		if (runFightRoutine()) {
@@ -205,21 +214,24 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
-		Square squareWherePlayerVisibleInTerritory = createSearchLocationForPlayerIfVisibleAndInTerritory();
-		if (squareWherePlayerVisibleInTerritory == null) {
+		boolean canSeePlayerInTerritory = canSeePlayerInTerritory();
+		Square squareWherePlayerCurrentlyVisibleInTerritory = null;
+		if (canSeePlayerInTerritory)
+			squareWherePlayerCurrentlyVisibleInTerritory = Game.level.player.squareGameObjectIsOn;
+		if (squareWherePlayerCurrentlyVisibleInTerritory == null) {
 
-			if (lastLocationSeenPlayer != null) {
-				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenPlayer);
+			if (lastLocationSeenPlayerInTerritory != null) {
+				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenPlayerInTerritory);
 
 				// refuses to walk through door
 
-				if (mort.squareGameObjectIsOn == lastLocationSeenPlayer) {
-					lastLocationSeenPlayer = null;
+				if (mort.squareGameObjectIsOn == lastLocationSeenPlayerInTerritory) {
+					lastLocationSeenPlayerInTerritory = null;
 				}
 				return;
 			}
 		} else {
-			lastLocationSeenPlayer = squareWherePlayerVisibleInTerritory;
+			lastLocationSeenPlayerInTerritory = squareWherePlayerCurrentlyVisibleInTerritory;
 
 		}
 
@@ -244,25 +256,29 @@ public class AIRoutineForMort extends AIRoutine {
 				return;
 			}
 		}
+
+		if (canSeePlayerInTerritory) {
+
+		} else {
+			AIRoutineUtils.moveTowardsTargetSquare(mort.mortsStandingSpot);
+		}
 	}
 
-	public Square createSearchLocationForPlayerIfVisibleAndInTerritory() {
+	public boolean canSeePlayerInTerritory() {
 
 		if (Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsMine
 				&& Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsRoom)
-			return null;
+			return false;
 
 		float distanceToPlayer = this.actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn);
 
 		if (distanceToPlayer > this.actor.sight)
-			return null;
+			return false;
 
 		if (!this.actor.visibleFrom(Game.level.player.squareGameObjectIsOn))
-			return null;
+			return false;
 
-		// this.actor.locationsToSearch.put(Game.level.player,
-		// Game.level.player.squareGameObjectIsOn);
-		return Game.level.player.squareGameObjectIsOn;
+		return true;
 
 	}
 }
