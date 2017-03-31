@@ -242,6 +242,10 @@ public class Wall extends GameObject {
 		fullWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom
 				&& connectedBottomLeft && connectedLeft && connectedTopLeft;
 
+		if (fullWall == false)
+			fullWall = !connectedTop && !connectedTopRight && !connectedRight && !connectedBottomRight
+					&& !connectedBottom && !connectedBottomLeft && !connectedLeft && !connectedTopLeft;
+
 		fullLeftWall = connectedTop && connectedBottom && connectedBottomLeft && connectedLeft && connectedTopLeft;
 
 		fullRightWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom;

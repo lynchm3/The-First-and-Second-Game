@@ -171,11 +171,13 @@ public class AIRoutineForBlind extends AIRoutine {
 		if (runFightRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			new ActionScream(blind).perform();
+			addNonBlindToAttackersList();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
+			addNonBlindToAttackersList();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
@@ -227,6 +229,8 @@ public class AIRoutineForBlind extends AIRoutine {
 
 			}
 		}
+		addNonBlindToAttackersList();
+		createSearchLocationsBasedOnVisibleAttackers();
 
 		if (hangry)
 			this.blind.activityDescription = "Hangry";

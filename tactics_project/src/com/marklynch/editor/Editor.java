@@ -436,6 +436,7 @@ public class Editor {
 		player.inventory.add(Templates.CLEAVER.makeCopy(null, player));
 		player.inventory.add(Templates.LANTERN.makeCopy(null, player));
 		player.inventory.add(Templates.KEY.makeCopy(null, player));
+		player.inventory.add(Templates.PICKAXE.makeCopy(null, player));
 		// player.inventory.add(Templates.PICKAXE.makeCopy(null));
 		player.anchorX = 80;
 		player.anchorY = 80;
