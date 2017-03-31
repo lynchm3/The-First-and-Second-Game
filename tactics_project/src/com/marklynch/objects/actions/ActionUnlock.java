@@ -2,8 +2,8 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.Door;
 import com.marklynch.objects.Key;
+import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -14,13 +14,13 @@ public class ActionUnlock extends Action {
 	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
 
 	Actor performer;
-	Door door;
+	Openable openable;
 
 	// Default for hostiles
-	public ActionUnlock(Actor unlocker, Door door) {
+	public ActionUnlock(Actor unlocker, Openable openable) {
 		super(ACTION_NAME);
 		this.performer = unlocker;
-		this.door = door;
+		this.openable = openable;
 		if (!check()) {
 			enabled = false;
 		}
@@ -30,13 +30,13 @@ public class ActionUnlock extends Action {
 	@Override
 	public void perform() {
 
-		Key key = performer.getKeyFor(door);
+		Key key = performer.getKeyFor(openable);
 
-		door.locked = false;
+		openable.locked = false;
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unlocked ", door, " with ", key }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unlocked ", openable, " with ", key }));
 
-		performer.showPow(door);
+		performer.showPow(openable);
 
 		// Sound
 		float loudness = 1;
@@ -55,16 +55,16 @@ public class ActionUnlock extends Action {
 
 	@Override
 	public boolean check() {
-		if (!performer.visibleFrom(door.squareGameObjectIsOn)) {
+		if (!performer.visibleFrom(openable.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
-		if (performer.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
+		if (performer.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
-		if (!performer.hasKeyForDoor(door)) {
+		if (!performer.hasKeyForDoor(openable)) {
 			actionName = ACTION_NAME_NEED_KEY;
 			return false;
 		}
@@ -74,7 +74,7 @@ public class ActionUnlock extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (door.owner != null && door.owner != performer)
+		if (openable.owner != null && openable.owner != performer)
 			return false;
 		return true;
 	}

@@ -20,10 +20,10 @@ import com.marklynch.level.constructs.Group;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Key;
+import com.marklynch.objects.Openable;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDie;
@@ -880,7 +880,7 @@ public class Actor extends ActorTemplate {
 		return true;
 	}
 
-	public boolean hasKeyForDoor(Door door) {
+	public boolean hasKeyForDoor(Openable door) {
 		if (door.keys == null)
 			return false;
 
@@ -893,7 +893,7 @@ public class Actor extends ActorTemplate {
 		return false;
 	}
 
-	public Key getKeyFor(Door door) {
+	public Key getKeyFor(Openable door) {
 		if (door.keys == null)
 			return null;
 

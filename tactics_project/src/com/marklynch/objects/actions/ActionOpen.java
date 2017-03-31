@@ -2,7 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.Door;
+import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -13,13 +13,13 @@ public class ActionOpen extends Action {
 	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
 
 	Actor performer;
-	Door door;
+	Openable openable;
 
 	// Default for hostiles
-	public ActionOpen(Actor opener, Door door) {
+	public ActionOpen(Actor opener, Openable openable) {
 		super(ACTION_NAME);
 		this.performer = opener;
-		this.door = door;
+		this.openable = openable;
 		if (!check()) {
 			enabled = false;
 		}
@@ -29,19 +29,19 @@ public class ActionOpen extends Action {
 	@Override
 	public void perform() {
 
-		if (door.locked)
-			new ActionUnlock(performer, door).perform();
+		if (openable.locked)
+			new ActionUnlock(performer, openable).perform();
 
-		door.open();
+		openable.open();
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " opened ", door }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " opened ", openable }));
 
-		performer.showPow(door);
+		performer.showPow(openable);
 
 		// Sound
 		float loudness = 1;
-		sound = new Sound(performer, door, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
+		sound = new Sound(performer, openable, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
@@ -56,16 +56,16 @@ public class ActionOpen extends Action {
 
 	@Override
 	public boolean check() {
-		if (!performer.visibleFrom(door.squareGameObjectIsOn)) {
+		if (!performer.visibleFrom(openable.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
-		if (performer.straightLineDistanceTo(door.squareGameObjectIsOn) != 1) {
+		if (performer.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
-		if (door.locked && !performer.hasKeyForDoor(door)) {
+		if (openable.locked && !performer.hasKeyForDoor(openable)) {
 			actionName = ACTION_NAME_NEED_KEY;
 			return false;
 		}
