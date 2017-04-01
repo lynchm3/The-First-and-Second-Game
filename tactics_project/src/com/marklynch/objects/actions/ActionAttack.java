@@ -26,6 +26,7 @@ public class ActionAttack extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -80,12 +81,6 @@ public class ActionAttack extends Action {
 			performer.showPow(target);
 		}
 
-		// Sound
-		float loudness = target.soundWhenHit * performer.equipped.soundWhenHitting;
-		if (performer.equipped != null)
-			sound = new Sound(performer, performer.equipped, performer.squareGameObjectIsOn, loudness, legal,
-					this.getClass());
-
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
@@ -120,6 +115,17 @@ public class ActionAttack extends Action {
 		if (target.owner != null && target.owner != Game.level.player)
 			return false;
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+
+		// Sound
+		float loudness = target.soundWhenHit * performer.equipped.soundWhenHitting;
+		if (performer.equipped != null)
+			return new Sound(performer, performer.equipped, performer.squareGameObjectIsOn, loudness, legal,
+					this.getClass());
+		return null;
 	}
 
 }

@@ -26,6 +26,7 @@ public class ActionClose extends Action {
 			enabled = false;
 		}
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -39,10 +40,6 @@ public class ActionClose extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " closed ", openable }));
 
 		performer.showPow(openable);
-
-		// Sound
-		float loudness = 1;
-		sound = new Sound(performer, openable, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
@@ -81,6 +78,11 @@ public class ActionClose extends Action {
 	@Override
 	public boolean checkLegality() {
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return new Sound(performer, openable, performer.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

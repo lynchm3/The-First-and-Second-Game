@@ -26,6 +26,7 @@ public class ActionMove extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		sound = createSound();
 
 	}
 
@@ -63,12 +64,6 @@ public class ActionMove extends Action {
 			} else {
 				actor.swapCooldown = (int) (Math.random() * 3);
 			}
-		}
-
-		// Sound of glass
-		BrokenGlass brokenGlass = (BrokenGlass) target.inventory.getGameObectOfClass(BrokenGlass.class);
-		if (!(performer instanceof Blind) && brokenGlass != null) {
-			sound = new Sound(performer, brokenGlass, performer.squareGameObjectIsOn, 10, legal, this.getClass());
 		}
 
 		if (performer == Game.level.player)
@@ -137,5 +132,16 @@ public class ActionMove extends Action {
 	@Override
 	public boolean checkLegality() {
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+
+		// Sound of glass
+		BrokenGlass brokenGlass = (BrokenGlass) target.inventory.getGameObectOfClass(BrokenGlass.class);
+		if (!(performer instanceof Blind) && brokenGlass != null) {
+			return new Sound(performer, brokenGlass, performer.squareGameObjectIsOn, 10, legal, this.getClass());
+		}
+		return null;
 	}
 }

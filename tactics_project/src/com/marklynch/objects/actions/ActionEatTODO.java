@@ -1,6 +1,6 @@
 package com.marklynch.objects.actions;
 
-public class ActionEat {
+public class ActionEatTODO {
 	
 	//Default for food
 

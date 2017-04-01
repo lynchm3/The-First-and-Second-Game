@@ -27,6 +27,7 @@ public class ActionMine extends Action {
 			enabled = false;
 		}
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -57,10 +58,6 @@ public class ActionMine extends Action {
 		}
 
 		performer.showPow(vein);
-
-		// Sound
-		float loudness = vein.soundWhenHit * pickaxe.soundWhenHitting;
-		sound = new Sound(performer, pickaxe, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
@@ -97,6 +94,16 @@ public class ActionMine extends Action {
 		if (vein.owner != null && vein.owner != performer)
 			return false;
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObectOfClass(Pickaxe.class);
+		if (pickaxe != null) {
+			float loudness = vein.soundWhenHit * pickaxe.soundWhenHitting;
+			return new Sound(performer, pickaxe, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
+		}
+		return null;
 	}
 
 }

@@ -21,6 +21,7 @@ public class ActionScream extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -31,11 +32,6 @@ public class ActionScream extends Action {
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "screamed" }));
-
-		// Sound
-		float loudness = 10;
-		if (performer.equipped != null)
-			sound = new Sound(performer, performer, performer.squareGameObjectIsOn, 20, legal, this.getClass());
 
 		performer.actions.add(this);
 	}
@@ -48,6 +44,11 @@ public class ActionScream extends Action {
 	@Override
 	public boolean checkLegality() {
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return new Sound(performer, performer, performer.squareGameObjectIsOn, 20, legal, this.getClass());
 	}
 
 }

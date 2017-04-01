@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;
 
@@ -17,6 +18,7 @@ public class ActionTalk extends Action {
 		this.performer = talker;
 		this.target = target;
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -47,6 +49,11 @@ public class ActionTalk extends Action {
 	public boolean checkLegality() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return new Sound(performer, target, performer.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

@@ -19,4 +19,6 @@ public abstract class Action {
 	public abstract boolean check();
 
 	public abstract boolean checkLegality();
+
+	public abstract Sound createSound();
 }

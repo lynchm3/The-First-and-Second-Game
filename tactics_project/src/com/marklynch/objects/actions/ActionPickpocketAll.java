@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -24,6 +25,7 @@ public class ActionPickpocketAll extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -58,6 +60,12 @@ public class ActionPickpocketAll extends Action {
 	@Override
 	public boolean checkLegality() {
 		return false;
+	}
+
+	@Override
+	public Sound createSound() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

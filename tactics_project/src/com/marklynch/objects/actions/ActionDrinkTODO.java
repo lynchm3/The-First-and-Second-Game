@@ -1,6 +1,6 @@
 package com.marklynch.objects.actions;
 
-public class ActionDrink {
+public class ActionDrinkTODO {
 	
 	//Default for water / water sources
 

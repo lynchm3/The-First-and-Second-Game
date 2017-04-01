@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -11,11 +12,11 @@ public class ActionSmash extends Action {
 	public static final String ACTION_NAME = "Smash";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
-	Object performer;
+	GameObject performer;
 	GameObject target;
 
 	// Default for hostiles
-	public ActionSmash(Object attacker, GameObject target) {
+	public ActionSmash(GameObject attacker, GameObject target) {
 		super(ACTION_NAME);
 		this.performer = attacker;
 		this.target = target;
@@ -24,6 +25,7 @@ public class ActionSmash extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class ActionSmash extends Action {
 	public boolean check() {
 
 		if (performer instanceof Actor) {
-			Actor actor = (Actor) performer;
+			Actor actor = ((Actor) performer);
 
 			Weapon weapon = null;
 			if (actor.equipped instanceof Weapon) {
@@ -74,6 +76,16 @@ public class ActionSmash extends Action {
 		if (target.owner != null && target.owner != performer)
 			return false;
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+
+		if (performer instanceof Actor)
+			return new Sound((Actor) performer, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
+		else
+			return new Sound(null, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
+
 	}
 
 }

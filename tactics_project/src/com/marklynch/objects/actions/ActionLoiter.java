@@ -2,6 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.units.Actor;
 
 public class ActionLoiter extends Action {
@@ -20,6 +21,7 @@ public class ActionLoiter extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		sound = createSound();
 
 	}
 
@@ -44,5 +46,10 @@ public class ActionLoiter extends Action {
 	@Override
 	public boolean checkLegality() {
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return null;
 	}
 }

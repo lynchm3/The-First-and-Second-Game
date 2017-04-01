@@ -14,7 +14,6 @@ public class ActionRing extends Action {
 	Actor performer;
 	GameObject object;
 
-	// Default for hostiles
 	public ActionRing(Actor ringer, GameObject object) {
 		super(ACTION_NAME);
 		this.performer = ringer;
@@ -23,7 +22,8 @@ public class ActionRing extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
-		legal = checkLegality();
+		legal = checkLegality(); sound = createSound();
+		sound = createSound();
 	}
 
 	@Override
@@ -31,10 +31,6 @@ public class ActionRing extends Action {
 
 		if (!enabled)
 			return;
-
-		// Sound
-		sound = new Sound(performer, object, performer.squareGameObjectIsOn, object.soundWhenHitting, legal,
-				this.getClass());
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] {
@@ -60,6 +56,14 @@ public class ActionRing extends Action {
 	public boolean checkLegality() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+
+		// Sound
+		return new Sound(performer, object, performer.squareGameObjectIsOn, object.soundWhenHitting, legal,
+				this.getClass());
 	}
 
 }

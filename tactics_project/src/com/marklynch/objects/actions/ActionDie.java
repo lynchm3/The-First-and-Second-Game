@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
@@ -24,6 +25,7 @@ public class ActionDie extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		sound = createSound();
 
 	}
 
@@ -62,5 +64,10 @@ public class ActionDie extends Action {
 	@Override
 	public boolean checkLegality() {
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return null;
 	}
 }

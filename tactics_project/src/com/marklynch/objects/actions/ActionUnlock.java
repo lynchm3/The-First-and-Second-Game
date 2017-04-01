@@ -25,6 +25,7 @@ public class ActionUnlock extends Action {
 			enabled = false;
 		}
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -37,10 +38,6 @@ public class ActionUnlock extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unlocked ", openable, " with ", key }));
 
 		performer.showPow(openable);
-
-		// Sound
-		float loudness = 1;
-		sound = new Sound(performer, key, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
@@ -81,6 +78,11 @@ public class ActionUnlock extends Action {
 		}
 		System.out.println("checkLegality = true");
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return new Sound(performer, openable, performer.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

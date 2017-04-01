@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -16,6 +17,7 @@ public class ActionSpot extends Action {
 		this.performer = spotter;
 		this.spotted = spotted;
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -36,6 +38,11 @@ public class ActionSpot extends Action {
 	public boolean checkLegality() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return null;
 	}
 
 }

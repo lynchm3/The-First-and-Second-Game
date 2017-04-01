@@ -1,13 +1,14 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionPut extends Action {
 
-	public static final String ACTION_NAME = "Give";
+	public static final String ACTION_NAME = "Put";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	GameObject receiver;
@@ -23,6 +24,7 @@ public class ActionPut extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -51,5 +53,10 @@ public class ActionPut extends Action {
 	@Override
 	public boolean checkLegality() {
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return null;
 	}
 }

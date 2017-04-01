@@ -24,6 +24,7 @@ public class ActionTakeBite extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		sound = createSound();
 	}
 
 	@Override
@@ -64,6 +65,11 @@ public class ActionTakeBite extends Action {
 		if (target.owner != null && target.owner != performer)
 			return false;
 		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return new Sound(performer, target, performer.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }
