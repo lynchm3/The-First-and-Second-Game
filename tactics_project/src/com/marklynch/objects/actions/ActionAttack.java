@@ -123,7 +123,7 @@ public class ActionAttack extends Action {
 		// Sound
 		float loudness = target.soundWhenHit * performer.equipped.soundWhenHitting;
 		if (performer.equipped != null)
-			return new Sound(performer, performer.equipped, performer.squareGameObjectIsOn, loudness, legal,
+			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
 					this.getClass());
 		return null;
 	}

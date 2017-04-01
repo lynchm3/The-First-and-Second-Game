@@ -36,10 +36,6 @@ public class ActionTakeBite extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took a bite of ", target }));
 
-		// Sound
-		float loudness = 1;
-		sound = new Sound(performer, performer, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
-
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
@@ -69,7 +65,7 @@ public class ActionTakeBite extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, target, performer.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(performer, target, target.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

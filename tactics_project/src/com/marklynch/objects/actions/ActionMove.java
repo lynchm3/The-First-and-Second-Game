@@ -145,7 +145,7 @@ public class ActionMove extends Action {
 		// Sound of glass
 		BrokenGlass brokenGlass = (BrokenGlass) target.inventory.getGameObectOfClass(BrokenGlass.class);
 		if (!(performer instanceof Blind) && brokenGlass != null) {
-			return new Sound(performer, brokenGlass, performer.squareGameObjectIsOn, 10, legal, this.getClass());
+			return new Sound(performer, brokenGlass, target, 10, legal, this.getClass());
 		}
 		return null;
 	}

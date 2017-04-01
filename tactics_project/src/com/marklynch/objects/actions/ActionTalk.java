@@ -53,7 +53,7 @@ public class ActionTalk extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, target, performer.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(performer, target, target.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

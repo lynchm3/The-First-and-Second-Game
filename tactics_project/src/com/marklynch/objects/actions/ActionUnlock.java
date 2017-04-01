@@ -82,7 +82,7 @@ public class ActionUnlock extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, openable, performer.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(performer, openable, openable.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

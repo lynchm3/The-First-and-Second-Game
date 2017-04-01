@@ -16,13 +16,13 @@ public class ActionMine extends Action {
 	public static final String ACTION_NAME_NEED_PICKAXE = ACTION_NAME + " (need pickaxe)";
 
 	Actor performer;
-	Vein vein;
+	Vein target;
 
 	// Default for hostiles
 	public ActionMine(Actor attacker, Vein vein) {
 		super(ACTION_NAME);
 		this.performer = attacker;
-		this.vein = vein;
+		this.target = vein;
 		if (!check()) {
 			enabled = false;
 		}
@@ -38,8 +38,8 @@ public class ActionMine extends Action {
 
 		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObectOfClass(Pickaxe.class);
 
-		float damage = vein.totalHealth / 4f;
-		vein.remainingHealth -= damage;
+		float damage = target.totalHealth / 4f;
+		target.remainingHealth -= damage;
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
@@ -47,17 +47,17 @@ public class ActionMine extends Action {
 		performer.inventory.add(ore);
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", vein, " with ", pickaxe }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
 
-		if (vein.checkIfDestroyed()) {
+		if (target.checkIfDestroyed()) {
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted a ", vein }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted a ", target }));
 		}
 
-		performer.showPow(vein);
+		performer.showPow(target);
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
@@ -71,12 +71,12 @@ public class ActionMine extends Action {
 
 	@Override
 	public boolean check() {
-		if (!performer.visibleFrom(vein.squareGameObjectIsOn)) {
+		if (!performer.visibleFrom(target.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
 
-		if (performer.straightLineDistanceTo(vein.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}
@@ -91,7 +91,7 @@ public class ActionMine extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (vein.owner != null && vein.owner != performer)
+		if (target.owner != null && target.owner != performer)
 			return false;
 		return true;
 	}
@@ -100,8 +100,8 @@ public class ActionMine extends Action {
 	public Sound createSound() {
 		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObectOfClass(Pickaxe.class);
 		if (pickaxe != null) {
-			float loudness = vein.soundWhenHit * pickaxe.soundWhenHitting;
-			return new Sound(performer, pickaxe, performer.squareGameObjectIsOn, loudness, legal, this.getClass());
+			float loudness = target.soundWhenHit * pickaxe.soundWhenHitting;
+			return new Sound(performer, pickaxe, target.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;
 	}
