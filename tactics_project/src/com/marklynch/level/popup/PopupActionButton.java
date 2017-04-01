@@ -16,12 +16,9 @@ public class PopupActionButton extends PopupButton {
 	@Override
 	public void highlight() {
 		super.highlight();
-		System.out.println("PopupActionButton.highlight()");
 		if (action.sound != null) {
-			System.out.println("PopupActionButton.highlight() action.sound != null");
 			for (Square square : action.sound.destinationSquares) {
 				square.highlight = true;
-				System.out.println("PopupActionButton.highlight() highlighting square");
 			}
 		}
 
@@ -30,11 +27,8 @@ public class PopupActionButton extends PopupButton {
 	@Override
 	public void removeHighlight() {
 		super.removeHighlight();
-		System.out.println("PopupActionButton.removeHighlight()");
 		if (action.sound != null) {
-			System.out.println("PopupActionButton.removeHighlight() action.sound != null");
 			for (Square square : action.sound.destinationSquares) {
-				System.out.println("PopupActionButton.removeHighlight() removing highlight on square");
 				square.highlight = false;
 			}
 		}

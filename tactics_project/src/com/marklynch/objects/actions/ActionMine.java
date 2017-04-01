@@ -71,6 +71,12 @@ public class ActionMine extends Action {
 
 	@Override
 	public boolean check() {
+
+		if (!performer.inventory.contains(Pickaxe.class)) {
+			actionName = ACTION_NAME_NEED_PICKAXE;
+			return false;
+		}
+
 		if (!performer.visibleFrom(target.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
@@ -78,11 +84,6 @@ public class ActionMine extends Action {
 
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME_CANT_REACH;
-			return false;
-		}
-
-		if (!performer.inventory.contains(Pickaxe.class)) {
-			actionName = ACTION_NAME_NEED_PICKAXE;
 			return false;
 		}
 

@@ -71,12 +71,9 @@ public class ActionUnlock extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		System.out.println("openable.owner = " + openable.owner);
 		if (openable.owner != null && openable.owner != performer) {
-			System.out.println("checkLegality = false");
 			return false;
 		}
-		System.out.println("checkLegality = true");
 		return true;
 	}
 

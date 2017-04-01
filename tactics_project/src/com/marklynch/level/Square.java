@@ -181,7 +181,6 @@ public class Square extends AStarNode implements ActionableInWorld {
 		// }
 		// }
 		if (highlight) {
-			System.out.println("Square.highlight = true");
 			drawHighlight();
 		}
 
