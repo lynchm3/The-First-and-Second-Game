@@ -58,21 +58,21 @@ public class Popup {
 	}
 
 	public void moveHighLightUp() {
-		highlightedButton.highlighted = false;
+		highlightedButton.removeHighlight();
 		this.highlightedButtonIndex--;
 		if (highlightedButtonIndex < 0)
 			highlightedButtonIndex = buttons.size() - 1;
 		highlightedButton = buttons.get(highlightedButtonIndex);
-		highlightedButton.highlighted = true;
+		highlightedButton.highlight();
 	}
 
 	public void moveHighLightDown() {
-		highlightedButton.highlighted = false;
+		highlightedButton.removeHighlight();
 		this.highlightedButtonIndex++;
 		if (highlightedButtonIndex >= buttons.size())
 			highlightedButtonIndex = 0;
 		highlightedButton = buttons.get(highlightedButtonIndex);
-		highlightedButton.highlighted = true;
+		highlightedButton.highlight();
 
 	}
 

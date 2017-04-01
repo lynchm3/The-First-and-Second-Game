@@ -13,7 +13,7 @@ public abstract class Button {
 	public boolean down = false;
 	public ClickListener clickListener;
 	public Object text;
-	public boolean highlighted = false;
+	protected boolean highlighted = false;
 
 	public Button(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
 			Object text) {
@@ -46,5 +46,17 @@ public abstract class Button {
 	public abstract void draw();
 
 	public abstract void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2);
+
+	public void highlight() {
+		System.out.println("Button.highlight()");
+		highlighted = true;
+
+	}
+
+	public void removeHighlight() {
+		System.out.println("Button.removeHighlight()");
+		highlighted = false;
+
+	}
 
 }

@@ -30,7 +30,7 @@ public class PopupSelectAction extends Popup {
 		for (int i = 0; i < actions.size(); i++) {
 			final int index = i;
 
-			final PopupButton actionButton = new PopupButton(200, buttons.size() * 30, 200, 30, null, null,
+			final PopupActionButton actionButton = new PopupActionButton(200, buttons.size() * 30, 200, 30, null, null,
 					actions.get(i).actionName, true, true, actions.get(i), this);
 			actionButton.enabled = actions.get(index).enabled;
 
@@ -44,6 +44,11 @@ public class PopupSelectAction extends Popup {
 						}
 						highlightedButton.down = true;
 						actions.get(index).perform();
+						for (Popup popup : Game.level.popups) {
+							for (Button button : popup.buttons) {
+								button.removeHighlight();
+							}
+						}
 						Game.level.popups.clear();
 					}
 				}
@@ -53,7 +58,8 @@ public class PopupSelectAction extends Popup {
 		}
 
 		highlightedButton = buttons.get(highlightedButtonIndex);
-		highlightedButton.highlighted = true;
+		highlightedButton.highlight();
 
 	}
+
 }

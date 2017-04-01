@@ -68,7 +68,7 @@ public class PopupMiniDialogue extends Popup {
 
 		if (buttons.size() > 0) {
 			highlightedButton = buttons.get(highlightedButtonIndex);
-			highlightedButton.highlighted = true;
+			highlightedButton.highlight();
 		}
 
 	}

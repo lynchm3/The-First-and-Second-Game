@@ -328,9 +328,7 @@ public class TextUtils {
 				String string = action.actionName;
 
 				Color color = Color.WHITE;
-				System.out.println("TextUtils action.legal = " + action.legal);
 				if (!action.legal) {
-					System.out.println("setting red");
 					color = color.RED;
 				}
 

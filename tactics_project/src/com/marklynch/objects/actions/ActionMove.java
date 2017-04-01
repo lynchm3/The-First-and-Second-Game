@@ -46,7 +46,12 @@ public class ActionMove extends Action {
 		}
 
 		Square oldSquare = actor.squareGameObjectIsOn;
-		Actor actorInTheWay = (Actor) squareToMoveTo.inventory.getGameObjectThatCantShareSquare();
+		GameObject gameObjectInTheWay = squareToMoveTo.inventory.getGameObjectThatCantShareSquare();
+
+		Actor actorInTheWay = null;
+
+		if (gameObjectInTheWay instanceof Actor)
+			actorInTheWay = (Actor) squareToMoveTo.inventory.getGameObjectThatCantShareSquare();
 
 		if (actorInTheWay == Game.level.player) {
 			return;

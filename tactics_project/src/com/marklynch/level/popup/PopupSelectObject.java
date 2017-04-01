@@ -68,20 +68,30 @@ public class PopupSelectObject extends Popup {
 
 		if (buttons.size() > 0) {
 			highlightedButton = buttons.get(highlightedButtonIndex);
-			highlightedButton.highlighted = true;
+			highlightedButton.highlight();
 		}
 
 	}
 
 	public void gameObjectSelected(GameObject gameObject) {
-		if (Game.level.popups.size() == 2)
-			Game.level.popups.remove(1);
+		if (Game.level.popups.size() == 2) {
+			int popupToRemoveIndex = 1;
+			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
+				button.removeHighlight();
+			}
+			Game.level.popups.remove(popupToRemoveIndex);
+		}
 		Game.level.popups.add(new PopupSelectAction(100, level, gameObject.squareGameObjectIsOn, gameObject));
 	}
 
 	public void squareSelected(Square square) {
-		if (Game.level.popups.size() == 2)
-			Game.level.popups.remove(1);
+		if (Game.level.popups.size() == 2) {
+			int popupToRemoveIndex = 1;
+			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
+				button.removeHighlight();
+			}
+			Game.level.popups.remove(popupToRemoveIndex);
+		}
 		Game.level.popups.add(new PopupSelectAction(100, level, square, square));
 	}
 }

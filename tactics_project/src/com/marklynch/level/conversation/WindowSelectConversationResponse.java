@@ -76,7 +76,7 @@ public class WindowSelectConversationResponse {
 		}
 
 		highlightedButton = buttons.get(highlightedButtonIndex);
-		highlightedButton.highlighted = true;
+		highlightedButton.highlight();
 
 	}
 

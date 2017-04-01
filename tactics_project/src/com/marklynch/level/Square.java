@@ -63,6 +63,8 @@ public class Square extends AStarNode implements ActionableInWorld {
 
 	public ArrayList<Sound> sounds = new ArrayList<Sound>();
 
+	public boolean highlight = false;
+
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory) {
 		super();
 		this.xInGrid = x;
@@ -178,6 +180,10 @@ public class Square extends AStarNode implements ActionableInWorld {
 		// weaponPositionYInPixels + weaponHeightInPixels);
 		// }
 		// }
+		if (highlight) {
+			System.out.println("Square.highlight = true");
+			drawHighlight();
+		}
 
 	}
 

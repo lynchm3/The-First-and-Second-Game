@@ -158,23 +158,30 @@ public class UserInputLevel {
 
 		if (mouseLastX != Mouse.getX() || mouseLastY != Mouse.getY()) {
 			if (Game.oldButtonHoveringOver != null) {
-				Game.oldButtonHoveringOver.highlighted = false;
+				Game.oldButtonHoveringOver.removeHighlight();
 
 			}
 
 			if (Game.level.popups.size() != 0) {
-				Game.level.popups.get(Game.level.popups.size() - 1).highlightedButton.highlighted = false;
+				Game.level.popups.get(Game.level.popups.size() - 1).highlightedButton.removeHighlight();
 			}
 
 			if (Game.buttonHoveringOver != null) {
 				for (Popup popUp : Game.level.popups) {
 					if (popUp.buttons.contains(Game.buttonHoveringOver)) {
-						popUp.highlightedButton.highlighted = false;
+						popUp.highlightedButton.removeHighlight();
 						popUp.highlightedButton = Game.buttonHoveringOver;
 						popUp.highlightedButtonIndex = popUp.buttons.indexOf(Game.buttonHoveringOver);
 					}
 				}
-				Game.buttonHoveringOver.highlighted = true;
+
+				// System.out.println("Game.buttonHoveringOver.getClass() = " +
+				// Game.buttonHoveringOver.getClass());
+				// if (Game.buttonHoveringOver instanceof PopupActionButton)
+				// ((PopupActionButton) Game.buttonHoveringOver).highlight();
+				// else
+				Game.buttonHoveringOver.highlight();
+
 			}
 		}
 
@@ -203,6 +210,11 @@ public class UserInputLevel {
 		// Lifted the mouse to perform click
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
 			if (!hoveringOverPopup) {
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
 				Game.level.popups.clear();
 			}
 			if (scriptInterceptsClick) {
@@ -226,6 +238,11 @@ public class UserInputLevel {
 				// Game.level.popups.add(new PopupSelectObject(100, Game.level,
 				// Game.squareMouseIsOver));
 			} else {
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
 				Game.level.popups.clear();
 			}
 		}
@@ -300,6 +317,11 @@ public class UserInputLevel {
 
 			}
 		} else {
+			for (Popup popup : Game.level.popups) {
+				for (Button button : popup.buttons) {
+					button.removeHighlight();
+				}
+			}
 			Game.level.popups.clear();
 			if (square instanceof InventorySquare) {
 				// Game.level.popups.add(e);
@@ -356,7 +378,12 @@ public class UserInputLevel {
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (Game.level.popups.size() != 0) {
-			Game.level.popups.remove(Game.level.popups.size() - 1);
+
+			int popupToRemoveIndex = Game.level.popups.size() - 1;
+			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
+				button.removeHighlight();
+			}
+			Game.level.popups.remove(popupToRemoveIndex);
 
 			if (Game.level.popups.size() != 0) {
 				for (Button button : Game.level.popups.get(Game.level.popups.size() - 1).buttons) {
@@ -415,7 +442,13 @@ public class UserInputLevel {
 			return;
 
 		if (Game.level.popups.size() != 0) {
-			Game.level.popups.remove(Game.level.popups.size() - 1);
+
+			int popupToRemoveIndex = Game.level.popups.size() - 1;
+			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
+				button.removeHighlight();
+			}
+			Game.level.popups.remove(popupToRemoveIndex);
+
 		}
 	}
 
