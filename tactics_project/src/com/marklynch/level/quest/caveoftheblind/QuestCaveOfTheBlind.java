@@ -215,7 +215,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[55][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[56][10], null));
 		caveFeatures.add(Templates.WEAK_WOODEN_DOOR.makeCopy("Security Door", Game.level.squares[57][10], true, null,
-				mortsKey, (Key) Game.level.player.inventory.getGameObectOfClass(Key.class)));
+				mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class)));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[58][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[59][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[60][10], null));
@@ -327,6 +327,16 @@ public class QuestCaveOfTheBlind extends Quest {
 				new RoomPart(91, 36, 95, 36));
 		rooms.add(caveIn);
 
+		// Cave in features
+		Templates.BOULDER.makeCopy(Game.level.squares[90][34], null);
+		Templates.BOULDER.makeCopy(Game.level.squares[91][34], null);
+		Templates.BOULDER.makeCopy(Game.level.squares[93][34], null);
+		Templates.BOULDER.makeCopy(Game.level.squares[91][35], null);
+		Templates.CHEST.makeCopy("Chest", Game.level.squares[91][36], false, null);
+		Templates.BOULDER.makeCopy(Game.level.squares[93][35], null);
+		Templates.BOULDER.makeCopy(Game.level.squares[92][36], null);
+		Templates.BOULDER.makeCopy(Game.level.squares[92][35], null);
+
 		// Path Caved In Corridor to dining room
 		cavePaths.add(new StructurePath("Caved In Corridor", Game.level.squares[95][37], Game.level.squares[95][38]));
 
@@ -345,6 +355,17 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[97][39], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[97][40], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[89][49], null));
+		// Floor stuff
+		Templates.PLATE.makeCopy(Game.level.squares[96][44], null);
+		Templates.PLATE.makeCopy(Game.level.squares[97][54], null);
+		Templates.BROKEN_PLATE.makeCopy(Game.level.squares[90][53], null);
+		Templates.BROKEN_PLATE.makeCopy(Game.level.squares[90][40], null, true);
+		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[93][39], null);
+		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[96][52], null, false);
+		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[91][51], null, true);
+		Templates.DINNER_FORK.makeCopy(Game.level.squares[93][46], null, true);
+		Templates.DINNER_FORK.makeCopy(Game.level.squares[94][52], null, false);
+		Templates.DINNER_FORK.makeCopy(Game.level.squares[93][52], null, true);
 		// Chairs 1
 		Templates.CHAIR.makeCopy(Game.level.squares[90][42], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[91][43], null);
@@ -406,17 +427,13 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.DINNER_FORK.makeCopy(Game.level.squares[94][50], null, true);
 		Templates.PLATE.makeCopy(Game.level.squares[94][50], null);
 		Templates.TABLE.makeCopy(Game.level.squares[94][51], null);
-		// Floor stuff
-		Templates.PLATE.makeCopy(Game.level.squares[96][44], null);
-		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[96][52], null, false);
-		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[91][51], null, true);
-		Templates.DINNER_FORK.makeCopy(Game.level.squares[93][46], null, true);
-		Templates.DINNER_FORK.makeCopy(Game.level.squares[94][52], null, false);
-		Templates.DINNER_FORK.makeCopy(Game.level.squares[93][52], null, true);
 
 		// Path rec room to quarters
 		cavePaths.add(
 				new StructurePath("Rec Room <-> Quarters", Game.level.squares[83][25], Game.level.squares[83][25]));
+
+		cavePaths.add(
+				new StructurePath("Rec Room <-> Quarters", Game.level.squares[83][24], Game.level.squares[83][25]));
 
 		// Section Quarters
 		caveSections.add(new StructureSection("Mort & Mort Mining", 75, 11, 93, 24));
@@ -504,10 +521,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[76][45], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[76][46], mort));
 		mortsBedroomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[75][40], true, mort, mortsKey,
-				(Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
+				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		caveFeatures.add(mortsBedroomDoor);
 		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[64][40], true, mort, mortsKey,
-				(Key) Game.level.player.inventory.getGameObectOfClass(Key.class));
+				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		caveFeatures.add(mortsStoreroomDoor);
 
 		// Path Dining room to equipment room

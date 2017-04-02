@@ -1,12 +1,14 @@
 package com.marklynch.objects.actions;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.quest.caveoftheblind.Blind;
-import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Path;
 
@@ -40,7 +42,7 @@ public class ActionMove extends Action {
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
 
-		Door door = (Door) squareToMoveTo.inventory.getGameObectOfClass(Door.class);
+		Door door = (Door) squareToMoveTo.inventory.getGameObjectOfClass(Door.class);
 		if (door != null && door.isOpen() == false) {
 			new ActionOpen(actor, door).perform();
 		}
@@ -143,9 +145,14 @@ public class ActionMove extends Action {
 	public Sound createSound() {
 
 		// Sound of glass
-		BrokenGlass brokenGlass = (BrokenGlass) target.inventory.getGameObectOfClass(BrokenGlass.class);
-		if (!(performer instanceof Blind) && brokenGlass != null) {
-			return new Sound(performer, brokenGlass, target, 10, legal, this.getClass());
+		ArrayList<GameObject> stampables = target.inventory.getGameObjectsOfClass(Stampable.class);
+		System.out.println("stampables.size() = " + stampables.size());
+		if (!(performer instanceof Blind) && stampables.size() > 0) {
+			for (GameObject stampable : stampables) {
+				System.out.println("performer = " + performer);
+				System.out.println("MAKING SOUND");
+				return new Sound(performer, stampable, target, 10, legal, this.getClass());
+			}
 		}
 		return null;
 	}

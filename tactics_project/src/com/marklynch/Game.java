@@ -85,6 +85,7 @@ public class Game {
 	}
 
 	public boolean paused = false;
+	public boolean displayActive = true;
 
 	public static TextureRegion quadTexture;
 
@@ -116,10 +117,13 @@ public class Game {
 
 		while (!Display.isCloseRequested()) {
 
-			if (!Display.isActive())
+			if (!Display.isActive()) {
 				paused = true;
-			else
+				displayActive = false;
+			} else {
 				paused = false;
+				displayActive = true;
+			}
 
 			delta = getDelta();
 
@@ -129,9 +133,11 @@ public class Game {
 			}
 
 			if (!paused)
+
 				update(delta);
 
-			render();
+			if (displayActive)
+				render();
 
 			Display.update();
 			Display.sync(60); // cap fps to 60fps

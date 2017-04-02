@@ -109,10 +109,10 @@ public class Templates {
 			false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, false);
 	public static final Key KEY = new Key("Key", 10, "key.png", null, new Inventory(), false, true, true, false, false,
 			true, 0.3f, 0.3f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-	public static final GameObject PLATE = new GameObject("Plate", 10, "plate.png", null, new Inventory(), false, true,
+	public static final GameObject PLATE = new Stampable("Plate", 10, "plate.png", null, new Inventory(), false, true,
 			true, false, false, true, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
 			null);
-	public static final GameObject BROKEN_PLATE = new GameObject("Broken Plate", 10, "broken_plate.png", null,
+	public static final GameObject BROKEN_PLATE = new Stampable("Broken Plate", 10, "broken_plate.png", null,
 			new Inventory(), false, true, false, false, false, true, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, null);
 	public static final GameObject DINNER_KNIFE = new GameObject("Dinner Knife", 10, "knife.png", null, new Inventory(),
@@ -126,6 +126,9 @@ public class Templates {
 			false, true, true, 1, 1, 0.5f, 0.5f, 10f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
 	public static final Vein VEIN = new Vein("Vein", 1000, "wall.png", null, new Inventory(), false, false, false,
 			false, true, true, 1, 1, 0.5f, 0.5f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
+	public static final GameObject BOULDER = new GameObject("Boulder", 1000, "boulder.png", null, new Inventory(),
+			false, false, false, false, true, true, 1, 1, 0.5f, 0.5f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+			0f, null);
 
 	// LARGE CONTAINER
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("Dumpster", 5, "skip_with_shadow.png",
@@ -165,6 +168,9 @@ public class Templates {
 
 	// TRAPS
 	public static final BrokenGlass BROKEN_LAMP = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
+			new Inventory(), false, true, true, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f,
+			0.5f, false, 0f, 0f, 0f, 0f, null);
+	public static final BrokenGlass BROKEN_GLASS = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
 			new Inventory(), false, true, true, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, null);
 

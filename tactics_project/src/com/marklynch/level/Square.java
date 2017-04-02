@@ -298,7 +298,7 @@ public class Square extends AStarNode implements ActionableInWorld {
 	public boolean includableInPath() {
 		if (inventory.canShareSquare()) {
 
-			GameObject gameObjectDoor = inventory.getGameObectOfClass(Door.class);
+			GameObject gameObjectDoor = inventory.getGameObjectOfClass(Door.class);
 			if (gameObjectDoor instanceof Door) {
 				Door door = (Door) gameObjectDoor;
 				if (door.isLocked() && !Game.level.activeActor.hasKeyForDoor(door)) {

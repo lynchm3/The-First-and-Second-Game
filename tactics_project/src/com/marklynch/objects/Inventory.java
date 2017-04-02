@@ -439,13 +439,23 @@ public class Inventory {
 		return false;
 	}
 
-	public GameObject getGameObectOfClass(Class clazz) {
+	public GameObject getGameObjectOfClass(Class clazz) {
 		for (GameObject gameObject : gameObjects) {
 			if (clazz.isInstance(gameObject)) {
 				return gameObject;
 			}
 		}
 		return null;
+	}
+
+	public ArrayList<GameObject> getGameObjectsOfClass(Class clazz) {
+		ArrayList<GameObject> gameObjectsToReturn = new ArrayList<GameObject>();
+		for (GameObject gameObject : this.gameObjects) {
+			if (clazz.isInstance(gameObject)) {
+				gameObjectsToReturn.add(gameObject);
+			}
+		}
+		return gameObjectsToReturn;
 	}
 
 	public ArrayList<GameObject> getGameObjectsThatCanContainOtherObjects() {

@@ -9,7 +9,7 @@ import com.marklynch.utils.TextureUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class BrokenGlass extends GameObject {
+public class BrokenGlass extends Stampable {
 
 	GlassShard[] glassShards;
 	int glassShardsCount;
@@ -25,7 +25,7 @@ public class BrokenGlass extends GameObject {
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 
-		glassShardsCount = 30;// (int) (1d + Math.random() * 20d);
+		glassShardsCount = 10;// (int) (1d + Math.random() * 20d);
 		glassShards = new GlassShard[glassShardsCount];
 		for (int i = 0; i < glassShardsCount; i++) {
 			int randomShardNumber = (int) (Math.random() * 10d);

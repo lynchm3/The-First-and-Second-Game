@@ -139,7 +139,7 @@ public class AIRoutineForMort extends AIRoutine {
 		// }
 
 		if (!rangBellAsLastResort && mort.remainingHealth < mort.totalHealth / 2) {
-			Bell bell = (Bell) mort.inventory.getGameObectOfClass(Bell.class);
+			Bell bell = (Bell) mort.inventory.getGameObjectOfClass(Bell.class);
 			if (bell != null && mort.getAttackers().contains(Game.level.player)) {
 				new ActionRing(mort, bell).perform();
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;

@@ -36,7 +36,7 @@ public class ActionMine extends Action {
 		if (!enabled)
 			return;
 
-		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObectOfClass(Pickaxe.class);
+		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
 
 		float damage = target.totalHealth / 4f;
 		target.remainingHealth -= damage;
@@ -99,7 +99,7 @@ public class ActionMine extends Action {
 
 	@Override
 	public Sound createSound() {
-		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObectOfClass(Pickaxe.class);
+		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
 		if (pickaxe != null) {
 			float loudness = target.soundWhenHit * pickaxe.soundWhenHitting;
 			return new Sound(performer, pickaxe, target.squareGameObjectIsOn, loudness, legal, this.getClass());
