@@ -28,6 +28,14 @@ import mdesl.test.Util;
 
 public class Game {
 
+	// Player start pos
+	// Dining room
+	public static int playerStartPosX = 93;
+	public static int playerStartPosY = 52;
+
+	// Camera positions
+
+	// 0,0
 	// public static float dragX = 0;
 	// public static float dragY = 0;
 
@@ -35,7 +43,7 @@ public class Game {
 	// public static float dragX = -3072;
 	// public static float dragY = -192;
 
-	// Morts Mine
+	// Morts Mine + dining room
 	public static float dragX = -4500;
 	public static float dragY = -2000;
 
