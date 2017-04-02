@@ -38,16 +38,12 @@ import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.quest.QuestSmallGame;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.Door;
 import com.marklynch.objects.Expressions;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObjectExploder;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Inventory;
-import com.marklynch.objects.Junk;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
-import com.marklynch.objects.Tree;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.units.Actor;
@@ -444,67 +440,53 @@ public class Editor {
 		// Trader Joe
 		Trader trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png",
 				Game.level.squares[7][1], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(1), 40, 96);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(1), 40, 96);
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
 
 		ArrayList<GameObject> shopFeatures = new ArrayList<GameObject>();
-		shopFeatures.add(new Door("Shop Door", 100, "door.png", Game.level.squares[5][4], new Inventory(), false, true,
-				false, false, true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, trader,
-				false, null));
-		shopFeatures.add(new Door("Shop Door", 100, "door.png", Game.level.squares[11][4], new Inventory(), false, true,
-				false, false, true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, trader,
-				false, null));
+		shopFeatures.add(Templates.DOOR.makeCopy("Shop Door", Game.level.squares[5][4], false, trader));
+		shopFeatures.add(Templates.DOOR.makeCopy("Private Quarters Door", Game.level.squares[11][4], false, trader));
 
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[6][5], new Inventory(), false,
-				true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-				trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[7][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[9][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[10][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[12][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[13][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[15][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[16][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
+		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[6][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[7][5], new Inventory(), false,
-				true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-				trader));
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+				0f, 0f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[7][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[9][5], new Inventory(), false,
-				true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-				trader));
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+				0f, 0f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[9][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[10][5], new Inventory(),
-				false, true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+				0f, 0f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[10][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[12][5], new Inventory(),
-				false, true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+				0f, 0f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[12][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[13][5], new Inventory(),
-				false, true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+				0f, 0f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[13][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[15][5], new Inventory(),
-				false, true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+				0f, 0f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[15][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
-		shopFeatures.add(new GameObject("Shop Wall", 1000, "wall.png", Game.level.squares[16][5], new Inventory(),
-				false, true, false, false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+				0f, 0f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[16][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-				0f, trader));
+				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+				0f, 0f, trader));
 
 		Game.level.squares[4][4].imageTexturePath = "stone.png";
 		Game.level.squares[4][4].loadImages();
@@ -562,45 +544,18 @@ public class Editor {
 
 		QuestCaveOfTheBlind questCaveOfTheBlind = new QuestCaveOfTheBlind();
 
-		// 6,1 to 8,4
-		// for(int i = 6; i<=8; )
-
 		// Add a game object
-		new GameObjectExploder("Dumpster", 5, "skip_with_shadow.png", Game.level.squares[4][2], new Inventory(), true,
-				false, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-				null);
-
-		Junk groundFur = new Junk("Ground fur", 5, "fur.png", Game.level.squares[0][7], new Inventory(), false, true,
-				true, false, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-		groundFur.value = 10;
-		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[21][9], new
-		// Inventory(), false, true, true, false);
-		// new Junk("Ground fur", 5, "fur.png", Game.level.squares[23][16], new
-		// Inventory(), false, true, true, false);
-		// groundFur.value = 10;
-		// groundFur = new Junk("Ground fur", 5, "fur.png",
-		// Game.level.squares[33][19], new Inventory(), false, true, true,
-		// false, 1, 1);
-		// groundFur.value = 10;
-
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), true, false, false, true, false,
-				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[21][19], new Inventory(), true, false, false, true,
-				false, true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[14][8], new Inventory(), true, false, false, true, false,
-				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[19][3], new Inventory(), true, false, false, true, false,
-				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[18][13], new Inventory(), true, false, false, true,
-				false, true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[9][14], new Inventory(), true, false, false, true, false,
-				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[12][8], new Inventory(), true, false, false, true, false,
-				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[27][3], new Inventory(), true, false, false, true, false,
-				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
-		new Tree("Tree", 100, "tree_1.png", Game.level.squares[23][5], new Inventory(), true, false, false, true, false,
-				true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
+		Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);
+		Templates.FUR.makeCopy(Game.level.squares[0][7], null);
+		Templates.TREE.makeCopy(Game.level.squares[1][2], null);
+		Templates.TREE.makeCopy(Game.level.squares[21][19], null);
+		Templates.TREE.makeCopy(Game.level.squares[14][8], null);
+		Templates.TREE.makeCopy(Game.level.squares[19][3], null);
+		Templates.TREE.makeCopy(Game.level.squares[18][13], null);
+		Templates.TREE.makeCopy(Game.level.squares[9][14], null);
+		Templates.TREE.makeCopy(Game.level.squares[12][8], null);
+		Templates.TREE.makeCopy(Game.level.squares[27][3], null);
+		Templates.TREE.makeCopy(Game.level.squares[23][5], null);
 
 		// relationships
 		Game.level.factions.get(0).relationships.put(Game.level.factions.get(1),
@@ -641,20 +596,20 @@ public class Editor {
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,
-				false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null,
+				false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null,
 				Game.level.factions.get(1), 0, 0);
 
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[22][16], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0);
 
 		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[20][15], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0);
 
 		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
 				Game.level.squares[20][17], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0);
 
 		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
 		wolfPackMembers.add(superWolf);

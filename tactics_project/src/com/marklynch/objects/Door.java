@@ -6,17 +6,21 @@ import com.marklynch.objects.units.Actor;
 import mdesl.graphics.Color;
 
 public class Door extends Openable {
+	float soundDampeningWhenClosed;
 
 	public Door(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
-			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Actor owner, boolean locked, Key... keys) {
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float iceResistance, float electricResistance, float poisonResistance, Actor owner, boolean locked,
+			Key... keys) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner, locked, keys);
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner,
+				locked, keys);
+		soundDampeningWhenClosed = soundDampening;
 
 	}
 
@@ -51,20 +55,22 @@ public class Door extends Openable {
 	public void open() {
 		open = true;
 		blocksLineOfSight = false;
+		soundDampening = 1f;
 	}
 
 	@Override
 	public void close() {
 		open = false;
 		blocksLineOfSight = true;
+		soundDampening = soundDampeningWhenClosed;
 	}
 
 	public Door makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
 		return new Door(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
-				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance, owner, locked, keys);
+				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
+				iceResistance, electricResistance, poisonResistance, owner, locked, keys);
 	}
 
 	@Override
@@ -72,8 +78,8 @@ public class Door extends Openable {
 		return new Door(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
-				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance, owner, locked, keys);
+				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
+				iceResistance, electricResistance, poisonResistance, owner, locked, keys);
 	}
 
 }

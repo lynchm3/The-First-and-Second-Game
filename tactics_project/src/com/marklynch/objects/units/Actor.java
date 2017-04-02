@@ -103,7 +103,7 @@ public class Actor extends ActorTemplate {
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
 			float electricResistance, float poisonResistance, Actor owner, Faction faction, float anchorX,
 			float anchorY) {
@@ -111,7 +111,7 @@ public class Actor extends ActorTemplate {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 
 		this.strength = strength;
@@ -695,7 +695,7 @@ public class Actor extends ActorTemplate {
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
+				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner
 
 				, faction, anchorX, anchorY);

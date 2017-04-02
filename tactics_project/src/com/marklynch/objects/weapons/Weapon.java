@@ -15,12 +15,12 @@ public class Weapon extends WeaponTemplate {
 	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
 			float electricResistance, float poisonResistance, Actor owner, float anchorX, float anchorY) {
 		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 
 		this.owner = owner;
@@ -166,7 +166,7 @@ public class Weapon extends WeaponTemplate {
 	public Weapon makeCopy(Square square, Actor owner) {
 		return new Weapon(new String(name), slashDamage, minRange, maxRange, imageTexturePath, totalHealth, square,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX,
+				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner,
 				anchorX, anchorY);
 	}

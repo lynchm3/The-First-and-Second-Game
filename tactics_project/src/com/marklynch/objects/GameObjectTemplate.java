@@ -32,6 +32,7 @@ public class GameObjectTemplate {
 	public float soundHandleY;
 	public float soundWhenHit;
 	public float soundWhenHitting;
+	public float soundDampening = 1;
 	public Color light;
 	public float lightHandleX;
 	public float lightHandlY;
@@ -47,8 +48,8 @@ public class GameObjectTemplate {
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
 			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance) {
+			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
+			float fireResistance, float iceResistance, float electricResistance, float poisonResistance) {
 		super();
 		this.name = name;
 		this.totalHealth = totalHealth;
@@ -68,6 +69,7 @@ public class GameObjectTemplate {
 		this.soundHandleY = soundHandleY;
 		this.soundWhenHit = soundWhenHit;
 		this.soundWhenHitting = soundWhenHitting;
+		this.soundDampening = soundDampening;
 		this.light = light;
 		this.lightHandleX = lightHandleX;
 		this.lightHandlY = lightHandlY;
@@ -82,8 +84,8 @@ public class GameObjectTemplate {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
-				soundWhenHitting, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance, owner);
+				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
+				iceResistance, electricResistance, poisonResistance, owner);
 	}
 
 	public void postLoad1() {

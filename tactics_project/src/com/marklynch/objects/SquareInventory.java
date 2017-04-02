@@ -152,6 +152,17 @@ public class SquareInventory extends Inventory {
 
 	}
 
+	public float getSoundDampening() {
+		float soundDampening = 1;
+
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.remainingHealth > 0 && gameObject.soundDampening > soundDampening) {
+				soundDampening = gameObject.soundDampening;
+			}
+		}
+		return soundDampening;
+	}
+
 	// public GameObject getAc() {
 	// for (GameObject gameObject : gameObjects) {
 	// if (gameObject instanceof Actor) {

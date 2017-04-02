@@ -19,13 +19,13 @@ public class Tool extends GameObject {
 	public Tool(String name, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, Color light,
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
 			float electricResistance, float poisonResistance, Actor owner, float anchorX, float anchorY) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 
 		this.minRange = minRange;
@@ -149,7 +149,7 @@ public class Tool extends GameObject {
 	public Tool makeCopy(Square square, Actor owner) {
 		return new Tool(new String(name), minRange, maxRange, imageTexturePath, totalHealth, square, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, light, lightHandleX, lightHandlY, stackable,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, iceResistance, electricResistance, poisonResistance, owner, anchorX, anchorY);
 	}
 }
