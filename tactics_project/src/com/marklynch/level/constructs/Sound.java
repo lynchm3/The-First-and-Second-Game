@@ -1,11 +1,15 @@
 package com.marklynch.level.constructs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Actor.Direction;
+import com.marklynch.objects.units.Path;
 import com.marklynch.utils.ArrayUtils;
 
 public class Sound {
@@ -25,10 +29,11 @@ public class Sound {
 		this.sourceSquare = sourceSquare;
 		this.loudness = loudness;
 
-		destinationSquares = getAllSquaresWithinDistance(loudness);
-		for (Square destinationSquare : destinationSquares) {
-			destinationSquare.sounds.add(this);
-		}
+		calculateAllPaths();
+		// destinationSquares = getAllSquaresWithinDistance(loudness);
+		// for (Square destinationSquare : destinationSquares) {
+		// destinationSquare.sounds.add(this);
+		// }
 
 	}
 
@@ -89,5 +94,88 @@ public class Sound {
 		}
 
 		return squares;
+	}
+
+	HashMap<Square, Path> squareToPath = new HashMap<Square, Path>();
+	int highestPathCostSeen;
+
+	public void calculateAllPaths() {
+
+		highestPathCostSeen = 0;
+		squareToPath.clear();
+		destinationSquares = new ArrayList<Square>();
+		// destinationSquares.clear();
+
+		Square currentSquare = this.sourceSquare;
+		this.destinationSquares.add(currentSquare);
+
+		Vector<Square> startPath = new Vector<Square>();
+		startPath.add(currentSquare);
+		squareToPath.put(currentSquare, new Path((Vector<Square>) startPath.clone(), 0));
+
+		for (int i = 0; i <= highestPathCostSeen; i++) {
+			// get all paths with that cost
+			Vector<Path> pathsWithCurrentCost = new Vector<Path>();
+			Vector<Path> pathsVector = new Vector<Path>();
+			for (Path path : squareToPath.values()) {
+				pathsVector.add(path);
+			}
+			for (int j = 0; j < pathsVector.size(); j++) {
+				if (pathsVector.get(j).travelCost == i)
+					pathsWithCurrentCost.add(pathsVector.get(j));
+			}
+
+			for (int j = 0; j < pathsWithCurrentCost.size(); j++) {
+				Vector<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
+				calculatePathToAllSquares2(Direction.UP, squaresInThisPath, i);
+				calculatePathToAllSquares2(Direction.RIGHT, squaresInThisPath, i);
+				calculatePathToAllSquares2(Direction.DOWN, squaresInThisPath, i);
+				calculatePathToAllSquares2(Direction.LEFT, squaresInThisPath, i);
+			}
+		}
+	}
+
+	public void calculatePathToAllSquares2(Direction direction, Vector<Square> squaresInThisPath, int pathCost) {
+
+		if (pathCost > loudness)
+			return;
+
+		Square newSquare = null;
+
+		Square parentSquare = squaresInThisPath.get(squaresInThisPath.size() - 1);
+
+		if (direction == Direction.UP) {
+			if (parentSquare.yInGrid - 1 >= 0) {
+				newSquare = Game.level.squares[parentSquare.xInGrid][parentSquare.yInGrid - 1];
+			}
+		} else if (direction == Direction.RIGHT) {
+			if (parentSquare.xInGrid + 1 < Game.level.squares.length) {
+				newSquare = Game.level.squares[parentSquare.xInGrid + 1][parentSquare.yInGrid];
+			}
+		} else if (direction == Direction.DOWN) {
+
+			if (parentSquare.yInGrid + 1 < Game.level.squares[0].length) {
+				newSquare = Game.level.squares[parentSquare.xInGrid][parentSquare.yInGrid + 1];
+			}
+		} else if (direction == Direction.LEFT) {
+			if (parentSquare.xInGrid - 1 >= 0) {
+				newSquare = Game.level.squares[parentSquare.xInGrid - 1][parentSquare.yInGrid];
+			}
+		}
+
+		if (newSquare != null && newSquare.inventory.canShareSquare() && !squaresInThisPath.contains(newSquare)
+				&& !squareToPath.containsKey(newSquare)) {
+			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
+			newPathSquares.add(newSquare);
+			int newDistance = pathCost + parentSquare.travelCost;
+			if (newDistance > highestPathCostSeen)
+				highestPathCostSeen = newDistance;
+			Path newPath = new Path(newPathSquares, newDistance);
+			squareToPath.put(newSquare, newPath);
+			this.destinationSquares.add(newSquare);
+
+			// THEYRE MOCING ON TO THE SAME SQUARE
+
+		}
 	}
 }
