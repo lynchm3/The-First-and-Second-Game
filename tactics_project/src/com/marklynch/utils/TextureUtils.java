@@ -112,7 +112,14 @@ public class TextureUtils {
 		texture.bind();
 
 		// draw the texture unit 0 with our shader effect applied
-		Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
+
+		if (backwards) {
+			Game.activeBatch.draw(texture, vertexX2, vertexY2, -(vertexX2 - vertexX1), -(vertexY2 - vertexY1));
+
+		} else {
+			Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
+
+		}
 
 	}
 
@@ -122,6 +129,11 @@ public class TextureUtils {
 
 	public static void drawTexture(Texture texture, float alpha, float x1, float x2, float y1, float y2) {
 		drawTexture(texture, alpha, x1, x2, y1, y2, false, 0, 0, 0, 0, false, false);
+	}
+
+	public static void drawTexture(Texture texture, float alpha, float x1, float x2, float y1, float y2,
+			boolean backwards) {
+		drawTexture(texture, alpha, x1, x2, y1, y2, false, 0, 0, 0, 0, backwards, false);
 	}
 
 	public static void drawTextureBackwards(Texture texture, float alpha, float x1, float x2, float y1, float y2) {

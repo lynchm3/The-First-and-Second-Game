@@ -77,6 +77,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public float anchorX, anchorY;
 
+	public boolean backwards = false;
+
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
@@ -176,7 +178,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			if (!this.squareGameObjectIsOn.visibleToPlayer)
 				alpha = 0.5f;
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + width,
-					actorPositionYInPixels, actorPositionYInPixels + height);
+					actorPositionYInPixels, actorPositionYInPixels + height, backwards);
 			// TextureUtils.skipNormals = false;
 		}
 	}

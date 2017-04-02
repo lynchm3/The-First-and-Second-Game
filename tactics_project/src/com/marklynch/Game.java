@@ -32,12 +32,12 @@ public class Game {
 	// public static float dragY = 0;
 
 	// West Security + Dungeon
-	public static float dragX = -3072;
-	public static float dragY = -192;
+	// public static float dragX = -3072;
+	// public static float dragY = -192;
 
 	// Morts Mine
-	// public static float dragX = -4500;
-	// public static float dragY = -2000;
+	public static float dragX = -4500;
+	public static float dragY = -2000;
 
 	public static float zoom = 0.5f; // 0.25f
 
@@ -97,7 +97,7 @@ public class Game {
 	public static InventorySquare inventorySquareMouseIsOver = null;
 
 	// DEBUG
-	public static boolean fullVisiblity = false;
+	public static boolean fullVisiblity = true;
 
 	public void start() {
 

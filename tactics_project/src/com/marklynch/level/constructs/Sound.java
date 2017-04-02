@@ -10,7 +10,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 import com.marklynch.objects.units.Path;
-import com.marklynch.utils.ArrayUtils;
 
 public class Sound {
 	public Actor sourceActor;
@@ -29,77 +28,78 @@ public class Sound {
 		this.sourceSquare = sourceSquare;
 		this.loudness = loudness;
 
-		calculateAllPaths();
-		// destinationSquares = getAllSquaresWithinDistance(loudness);
-		// for (Square destinationSquare : destinationSquares) {
-		// destinationSquare.sounds.add(this);
-		// }
-
-	}
-
-	ArrayList<Square> getAllSquaresWithinDistance(float maxDistance) {
-		ArrayList<Square> squares = new ArrayList<Square>();
-
-		for (int distance = 0; distance <= maxDistance; distance++) {
-
-			if (distance == 0)
-
-			{
-				squares.add(this.sourceSquare);
-				continue;
-			}
-
-			boolean xGoingUp = true;
-			boolean yGoingUp = true;
-			for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-				if (ArrayUtils.inBounds(Game.level.squares, this.sourceSquare.xInGrid + x,
-						this.sourceSquare.yInGrid + y)) {
-					squares.add(Game.level.squares[this.sourceSquare.xInGrid + (int) x][this.sourceSquare.yInGrid
-							+ (int) y]);
-				}
-
-				if (xGoingUp) {
-					if (x == distance) {
-						xGoingUp = false;
-						x--;
-					} else {
-						x++;
-					}
-				} else {
-					if (x == -distance) {
-						xGoingUp = true;
-						x++;
-					} else {
-						x--;
-					}
-				}
-
-				if (yGoingUp) {
-					if (y == distance) {
-						yGoingUp = false;
-						y--;
-					} else {
-						y++;
-					}
-				} else {
-					if (y == -distance) {
-						yGoingUp = true;
-						y++;
-					} else {
-						y--;
-					}
-				}
-
-			}
+		createDestinationSounds();
+		for (Square destinationSquare : destinationSquares) {
+			destinationSquare.sounds.add(this);
 		}
 
-		return squares;
 	}
+
+	// ArrayList<Square> getAllSquaresWithinDistance(float maxDistance) {
+	// ArrayList<Square> squares = new ArrayList<Square>();
+	//
+	// for (int distance = 0; distance <= maxDistance; distance++) {
+	//
+	// if (distance == 0)
+	//
+	// {
+	// squares.add(this.sourceSquare);
+	// continue;
+	// }
+	//
+	// boolean xGoingUp = true;
+	// boolean yGoingUp = true;
+	// for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+	// if (ArrayUtils.inBounds(Game.level.squares, this.sourceSquare.xInGrid +
+	// x,
+	// this.sourceSquare.yInGrid + y)) {
+	// squares.add(Game.level.squares[this.sourceSquare.xInGrid + (int)
+	// x][this.sourceSquare.yInGrid
+	// + (int) y]);
+	// }
+	//
+	// if (xGoingUp) {
+	// if (x == distance) {
+	// xGoingUp = false;
+	// x--;
+	// } else {
+	// x++;
+	// }
+	// } else {
+	// if (x == -distance) {
+	// xGoingUp = true;
+	// x++;
+	// } else {
+	// x--;
+	// }
+	// }
+	//
+	// if (yGoingUp) {
+	// if (y == distance) {
+	// yGoingUp = false;
+	// y--;
+	// } else {
+	// y++;
+	// }
+	// } else {
+	// if (y == -distance) {
+	// yGoingUp = true;
+	// y++;
+	// } else {
+	// y--;
+	// }
+	// }
+	//
+	// }
+	// }
+	//
+	// return squares;
+	// }
 
 	HashMap<Square, Path> squareToPath = new HashMap<Square, Path>();
 	int highestPathCostSeen;
 
-	public void calculateAllPaths() {
+	public void createDestinationSounds() {
 
 		highestPathCostSeen = 0;
 		squareToPath.clear();
@@ -127,15 +127,15 @@ public class Sound {
 
 			for (int j = 0; j < pathsWithCurrentCost.size(); j++) {
 				Vector<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
-				calculatePathToAllSquares2(Direction.UP, squaresInThisPath, i);
-				calculatePathToAllSquares2(Direction.RIGHT, squaresInThisPath, i);
-				calculatePathToAllSquares2(Direction.DOWN, squaresInThisPath, i);
-				calculatePathToAllSquares2(Direction.LEFT, squaresInThisPath, i);
+				createDestinationSounds2(Direction.UP, squaresInThisPath, i);
+				createDestinationSounds2(Direction.RIGHT, squaresInThisPath, i);
+				createDestinationSounds2(Direction.DOWN, squaresInThisPath, i);
+				createDestinationSounds2(Direction.LEFT, squaresInThisPath, i);
 			}
 		}
 	}
 
-	public void calculatePathToAllSquares2(Direction direction, Vector<Square> squaresInThisPath, int pathCost) {
+	public void createDestinationSounds2(Direction direction, Vector<Square> squaresInThisPath, int pathCost) {
 
 		if (pathCost > loudness)
 			return;
@@ -173,10 +173,8 @@ public class Sound {
 				highestPathCostSeen = newDistance;
 			Path newPath = new Path(newPathSquares, newDistance);
 			squareToPath.put(newSquare, newPath);
-			this.destinationSquares.add(newSquare);
-
-			// THEYRE MOCING ON TO THE SAME SQUARE
-
+			if (!destinationSquares.contains(newSquare))
+				this.destinationSquares.add(newSquare);
 		}
 	}
 }

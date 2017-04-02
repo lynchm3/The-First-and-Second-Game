@@ -80,7 +80,10 @@ public class Templates {
 			null, new Inventory(), false, true, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f);
 	public static final GameObjectTemplate TABLE = new GameObjectTemplate("Table", 5, "table.png", null,
-			new Inventory(), true, true, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+			new Inventory(), true, false, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+			false, 0f, 0f, 0f, 0f);
+	public static final GameObjectTemplate CHAIR = new GameObjectTemplate("Chair", 5, "chair.png", null,
+			new Inventory(), true, false, false, true, false, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f);
 	public static final GameObjectTemplate BARRICADE = new GameObjectTemplate("BARRICADE", 25, "barricade.png", null,
 			new Inventory(), false, false, false, false, false, true, 1f, 1f, 0.5f, 0.5f, 10f, 1f, 1f, null, 0.5f, 0.5f,

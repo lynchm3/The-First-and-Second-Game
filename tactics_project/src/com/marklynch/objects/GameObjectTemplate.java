@@ -88,6 +88,16 @@ public class GameObjectTemplate {
 				iceResistance, electricResistance, poisonResistance, owner);
 	}
 
+	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
+		GameObject copy = new GameObject(new String(name), (int) totalHealth, imageTexturePath, square,
+				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY,
+				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
+		copy.backwards = backwards;
+		return copy;
+	}
+
 	public void postLoad1() {
 		inventory.postLoad1();
 		loadImages();
