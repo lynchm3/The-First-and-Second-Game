@@ -50,6 +50,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech;
@@ -435,13 +436,16 @@ public class Editor {
 		player.inventory.add(Templates.KEY.makeCopy("Player test key", null, player));
 		player.inventory.add(Templates.PICKAXE.makeCopy(null, player));
 		// player.inventory.add(Templates.PICKAXE.makeCopy(null));
-		player.anchorX = 80;
-		player.anchorY = 80;
+		Helmet playersHardHat = Templates.HARD_HAT.makeCopy(null, player);
+		player.inventory.add(playersHardHat);
+		player.helmet = playersHardHat;
+		player.inventory.add(Templates.PINK_HARD_HAT.makeCopy(null, player));
 
 		// Trader Joe
 		Trader trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png",
 				Game.level.squares[7][1], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(1), 40, 96);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(1), 40, 96, 40,
+				96, 40, 96, 40, 96);
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
@@ -598,19 +602,22 @@ public class Editor {
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,
 				false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null,
-				Game.level.factions.get(1), 0, 0);
+				Game.level.factions.get(1), 0, 0, 0, 0, 0, 0, 0, 0);
 
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[22][16], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0, 0, 0,
+				0, 0, 0, 0);
 
 		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[20][15], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0, 0, 0,
+				0, 0, 0, 0);
 
 		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
 				Game.level.squares[20][17], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0, 0, 0,
+				0, 0, 0, 0);
 
 		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
 		wolfPackMembers.add(superWolf);

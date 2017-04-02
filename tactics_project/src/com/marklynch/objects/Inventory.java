@@ -7,6 +7,9 @@ import java.util.Date;
 import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.BodyArmor;
+import com.marklynch.objects.weapons.Helmet;
+import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -516,25 +519,74 @@ public class Inventory {
 				actorPositionYInPixels + Game.level.player.height * 3);
 
 		GameObject gameObjectMouseIsOver = null;
-		GameObject gameObjectToDrawOnPlayer = null;
+
+		GameObject gameObjectToDrawInPlayersHand = null;
+		GameObject gameObjectToDrawOnPlayersHead = Game.level.player.helmet;
+		GameObject gameObjectToDrawOnPlayersBody = Game.level.player.bodyArmor;
+		GameObject gameObjectToDrawOnPlayersLegs = Game.level.player.legArmor;
+
 		if (Game.squareMouseIsOver != null && Game.squareMouseIsOver instanceof InventorySquare) {
 			// Preview weapon
-			gameObjectMouseIsOver = gameObjectToDrawOnPlayer = ((InventorySquare) Game.squareMouseIsOver).gameObject;
+			gameObjectMouseIsOver = ((InventorySquare) Game.squareMouseIsOver).gameObject;
+
+			if (gameObjectMouseIsOver instanceof Helmet) {
+				gameObjectToDrawOnPlayersHead = gameObjectMouseIsOver;
+			} else if (gameObjectMouseIsOver instanceof BodyArmor) {
+				gameObjectToDrawOnPlayersBody = gameObjectMouseIsOver;
+			} else if (gameObjectMouseIsOver instanceof LegArmor) {
+				gameObjectToDrawOnPlayersLegs = gameObjectMouseIsOver;
+			} else {
+				gameObjectToDrawInPlayersHand = gameObjectMouseIsOver;
+			}
+
 		}
 
-		if (gameObjectToDrawOnPlayer == null) {
-			gameObjectToDrawOnPlayer = Game.level.player.equipped;
+		if (gameObjectToDrawInPlayersHand == null) {
+			gameObjectToDrawInPlayersHand = Game.level.player.equipped;
 		}
 
 		// Object to draw player holding
-		if (gameObjectToDrawOnPlayer != null) {
+		if (gameObjectToDrawInPlayersHand != null) {
 			int weaponPositionXInPixels = (int) (actorPositionXInPixels
-					+ (Game.level.player.anchorX - gameObjectToDrawOnPlayer.anchorX) * 3);
+					+ (Game.level.player.handAnchorX - gameObjectToDrawInPlayersHand.anchorX) * 3);
 			int weaponPositionYInPixels = (int) (actorPositionYInPixels
-					+ (Game.level.player.anchorY - gameObjectToDrawOnPlayer.anchorY) * 3);
-			TextureUtils.drawTexture(gameObjectToDrawOnPlayer.imageTexture, alpha, weaponPositionXInPixels,
-					weaponPositionXInPixels + gameObjectToDrawOnPlayer.width * 3, weaponPositionYInPixels,
-					weaponPositionYInPixels + gameObjectToDrawOnPlayer.height * 3);
+					+ (Game.level.player.handAnchorY - gameObjectToDrawInPlayersHand.anchorY) * 3);
+			TextureUtils.drawTexture(gameObjectToDrawInPlayersHand.imageTexture, alpha, weaponPositionXInPixels,
+					weaponPositionXInPixels + gameObjectToDrawInPlayersHand.width * 3, weaponPositionYInPixels,
+					weaponPositionYInPixels + gameObjectToDrawInPlayersHand.height * 3);
+		}
+
+		// Helmet
+		if (gameObjectToDrawOnPlayersHead != null) {
+			int helmetPositionXInPixels = (int) (actorPositionXInPixels
+					+ (Game.level.player.headAnchorX - gameObjectToDrawOnPlayersHead.anchorX) * 3);
+			int helmetPositionYInPixels = (int) (actorPositionYInPixels
+					+ (Game.level.player.headAnchorY - gameObjectToDrawOnPlayersHead.anchorY) * 3);
+			TextureUtils.drawTexture(gameObjectToDrawOnPlayersHead.imageTexture, alpha, helmetPositionXInPixels,
+					helmetPositionXInPixels + gameObjectToDrawOnPlayersHead.width * 3, helmetPositionYInPixels,
+					helmetPositionYInPixels + gameObjectToDrawOnPlayersHead.height * 3);
+		}
+
+		// Body Armor
+		if (gameObjectToDrawOnPlayersBody != null) {
+			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels
+					+ (Game.level.player.bodyAnchorX - gameObjectToDrawOnPlayersBody.anchorX) * 3);
+			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels
+					+ (Game.level.player.bodyAnchorY - gameObjectToDrawOnPlayersBody.anchorY) * 3);
+			TextureUtils.drawTexture(gameObjectToDrawOnPlayersBody.imageTexture, alpha, bodyArmorPositionXInPixels,
+					bodyArmorPositionXInPixels + gameObjectToDrawOnPlayersBody.width * 3, bodyArmorPositionYInPixels,
+					bodyArmorPositionYInPixels + gameObjectToDrawOnPlayersBody.height * 3);
+		}
+
+		// Leg Armor
+		if (gameObjectToDrawOnPlayersLegs != null) {
+			int legArmorPositionXInPixels = (int) (actorPositionXInPixels
+					+ (Game.level.player.legsAnchorX - gameObjectToDrawOnPlayersLegs.anchorX) * 3);
+			int legArmorPositionYInPixels = (int) (actorPositionYInPixels
+					+ (Game.level.player.legsAnchorY - gameObjectToDrawOnPlayersLegs.anchorY) * 3);
+			TextureUtils.drawTexture(gameObjectToDrawOnPlayersLegs.imageTexture, alpha, legArmorPositionXInPixels,
+					legArmorPositionXInPixels + gameObjectToDrawOnPlayersLegs.width * 3, legArmorPositionYInPixels,
+					legArmorPositionYInPixels + gameObjectToDrawOnPlayersLegs.height * 3);
 		}
 
 		// Weapon comparison

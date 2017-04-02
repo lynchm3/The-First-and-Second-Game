@@ -29,6 +29,9 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.tools.Tool;
+import com.marklynch.objects.weapons.BodyArmor;
+import com.marklynch.objects.weapons.Helmet;
+import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
@@ -39,7 +42,7 @@ import com.marklynch.utils.TextureUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class Actor extends ActorTemplate {
+public class Actor extends GameObject {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
@@ -48,6 +51,15 @@ public class Actor extends ActorTemplate {
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT
 	}
+
+	public int strength;
+	public int dexterity;
+	public int intelligence;
+	public int endurance;
+	public String title = "";
+	public int actorLevel = 1;
+	public int travelDistance = 4;
+	public int sight = 4;
 
 	public transient int distanceMovedThisTurn = 0;
 	public transient boolean showWeaponButtons = false;
@@ -81,6 +93,18 @@ public class Actor extends ActorTemplate {
 	public GameObject equipped = null;
 	public String equippedWeaponGUID = null;
 
+	public Helmet helmet;
+	public BodyArmor bodyArmor;
+	public LegArmor legArmor;
+	public float handAnchorX;
+	public float handAnchorY;
+	public float headAnchorX;
+	public float headAnchorY;
+	public float bodyAnchorX;
+	public float bodyAnchorY;
+	public float legsAnchorX;
+	public float legsAnchorY;
+
 	public transient Group group;
 	private transient ArrayList<Actor> attackers;
 
@@ -103,16 +127,23 @@ public class Actor extends ActorTemplate {
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
-			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Actor owner, Faction faction, float anchorX,
-			float anchorY) {
-
-		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, inventory, showInventory, fitsInInventory,
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float iceResistance, float electricResistance, float poisonResistance, Actor owner, Faction faction,
+			float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY, float bodyAnchorX,
+			float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
+		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner);
+		this.strength = strength;
+		this.dexterity = dexterity;
+		this.intelligence = intelligence;
+		this.endurance = endurance;
+		this.title = title;
+		this.actorLevel = actorLevel;
+		this.travelDistance = travelDistance;
+		this.sight = sight;
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -149,8 +180,14 @@ public class Actor extends ActorTemplate {
 			this.faction.actors.add(this);
 		}
 
-		this.anchorX = anchorX;
-		this.anchorY = anchorY;
+		this.handAnchorX = handAnchorX;
+		this.handAnchorY = handAnchorY;
+		this.headAnchorX = headAnchorX;
+		this.headAnchorY = headAnchorY;
+		this.bodyAnchorX = bodyAnchorX;
+		this.bodyAnchorY = bodyAnchorY;
+		this.legsAnchorX = legsAnchorX;
+		this.legsAnchorY = legsAnchorY;
 
 		drawOffsetX = -32;
 		drawOffsetY = -64;
@@ -503,44 +540,40 @@ public class Actor extends ActorTemplate {
 		if (equipped != null) {
 
 			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX + anchorX - equipped.anchorX);
+					+ drawOffsetX + handAnchorX - equipped.anchorX);
 			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY + anchorY - equipped.anchorY);
+					+ drawOffsetY + handAnchorY - equipped.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionXInPixels + equipped.width, weaponPositionYInPixels,
 					weaponPositionYInPixels + equipped.height);
-
-			// TextureUtils.drawTexture(imageTexture, alpha,
-			// actorPositionXInPixels, actorPositionXInPixels + width,
-			// actorPositionYInPixels, actorPositionYInPixels + height);
-
-			// int weaponPositionXInPixels = (int)
-			// (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-			// + drawOffsetX + ((int) Game.HALF_SQUARE_WIDTH -
-			// equippedWeapon.halfWidth));
-			// int weaponPositionYInPixels = (int)
-			// (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-			// + drawOffsetY + ((int) Game.HALF_SQUARE_HEIGHT -
-			// equippedWeapon.halfHeight));
-			// float alpha = 1.0f;
-			// TextureUtils.drawTexture(this.equippedWeapon.imageTexture, alpha,
-			// weaponPositionXInPixels,
-			// weaponPositionXInPixels + equippedWeapon.width,
-			// weaponPositionYInPixels,
-			// weaponPositionYInPixels + equippedWeapon.height);
 		}
+
+		if (helmet != null) {
+
+			int helmetPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+					+ drawOffsetX + headAnchorX - helmet.anchorX);
+			int helmetPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+					+ drawOffsetY + headAnchorY - helmet.anchorY);
+			float alpha = 1.0f;
+			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
+					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels,
+					helmetPositionYInPixels + helmet.height);
+		}
+
+		if (this.name.equalsIgnoreCase("you"))
+			System.out.println("headAnchorX = " + headAnchorX);
 
 		// draw anchor
 		// QuadUtils.drawQuad(Color.WHITE,
 		// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH +
-		// drawOffsetX + anchorX - 5f,
+		// drawOffsetX + headAnchorX - 5f,
 		// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH +
-		// drawOffsetX + anchorX + 5f,
+		// drawOffsetX + headAnchorX + 5f,
 		// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT +
-		// drawOffsetY + anchorY - 5f,
+		// drawOffsetY + headAnchorY - 5f,
 		// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT +
-		// drawOffsetY + anchorY + 5f);
+		// drawOffsetY + headAnchorY + 5f);
 
 		// TextureUtils.skipNormals = false;
 
@@ -695,10 +728,12 @@ public class Actor extends ActorTemplate {
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner
+				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
+				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance,
+				poisonResistance, owner
 
-				, faction, anchorX, anchorY);
+				, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX,
+				legsAnchorY);
 		return actor;
 	}
 

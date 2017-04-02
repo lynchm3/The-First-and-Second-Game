@@ -8,6 +8,7 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
+import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
@@ -15,22 +16,22 @@ public class Templates {
 	// Player
 	public static final Actor Player = new Actor("You", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png", null, 1, 10, null,
 			new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
-			0f, 0f, 0f, null, null, 80f, 80f);
+			0f, 0f, 0f, null, null, 80f, 80f, 73f, 22f, 80f, 80f, 80f, 80f);
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
 			null, new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, null, null, 88, 54);
+			false, 0f, 0f, 0f, 0f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
 	// Monsters
 	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
 			new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
-			0f, 0f, 0f, null, null, 88, 54, null);
+			0f, 0f, 0f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null);
 
 	// Special People
 	public static final Mort MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
 			new Inventory(), true, false, true, false, false, 2f, 2f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, null, null, 88, 54);
+			0f, 0f, 0f, 0f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
@@ -72,6 +73,13 @@ public class Templates {
 	// https://en.wikipedia.org/wiki/Bow_and_arrow#Types_of_bow
 	public static final Weapon HUNTING_BOW = new Weapon("Hunting Bow", 1, 1, 4, "a2r2.png", 100, null, true, false,
 			false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, 40, 42);
+
+	// ARMOUR
+	// Helmets
+	public static final Helmet HARD_HAT = new Helmet("Hard Hat", "hard_hat.png", 100, null, true, false, false, false,
+			0.5f, 0.25f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, 16, 24);
+	public static final Helmet PINK_HARD_HAT = new Helmet("Hard Hat", "pink_hard_hat.png", 100, null, true, false,
+			false, false, 0.5f, 0.25f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, 16, 24);
 
 	// Furniture
 	public static final Bed BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), false, true,

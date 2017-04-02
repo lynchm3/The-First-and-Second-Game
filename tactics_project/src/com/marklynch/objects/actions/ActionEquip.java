@@ -4,6 +4,9 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.BodyArmor;
+import com.marklynch.objects.weapons.Helmet;
+import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionEquip extends Action {
@@ -34,7 +37,17 @@ public class ActionEquip extends Action {
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", gameObject }));
-		performer.equipped = gameObject;
+
+		if (gameObject instanceof Helmet) {
+			performer.helmet = (Helmet) gameObject;
+		} else if (gameObject instanceof BodyArmor) {
+			performer.bodyArmor = (BodyArmor) gameObject;
+		} else if (gameObject instanceof LegArmor) {
+			performer.legArmor = (LegArmor) gameObject;
+		} else {
+			performer.equipped = gameObject;
+		}
+
 		performer.actions.add(this);
 	}
 
