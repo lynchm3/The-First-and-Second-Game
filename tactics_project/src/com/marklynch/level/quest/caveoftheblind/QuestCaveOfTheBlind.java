@@ -116,8 +116,6 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Hide Quarters keys
 		// Als Key - in management confiscated desk
 		alsKey = Templates.KEY.makeCopy("Al's Key", null, mort);
-		// On blind3 in outer mine
-		joesKey = Templates.KEY.makeCopy("Joe's Key", null, null);
 		// On blind3 in dining room
 		seansKey = Templates.KEY.makeCopy("Sean's Key", null, null);
 		// In lavatory
@@ -133,6 +131,9 @@ public class QuestCaveOfTheBlind extends Quest {
 		makeMortsMine();
 		makeMortsRoom();
 		makeBlind();
+
+		// Key on dining table
+		joesKey = Templates.KEY.makeCopy("Joe's Key", Game.level.squares[94][45], null);
 
 		Readable rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[44][15], "Rock with message",
 				new Object[] { "Stay out or The Blind will get you! -Mort" }, null);
@@ -209,7 +210,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		// West security extras
 		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[52][9], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[59][5], null));
-		caveFeatures.add(Templates.BROKEN_LAMP.makeCopy(Game.level.squares[53][9], null));
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[53][9], null);
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[54][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[55][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[56][10], null));
@@ -218,17 +219,13 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[58][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[59][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[60][10], null));
-		GameObject securityTable = Templates.TABLE.makeCopy(Game.level.squares[58][9], null);
-		Readable securityDocuments = Templates.DOCUMENTS.makeCopy(Game.level.squares[58][9], "Ingoing/Outgoing",
+		Templates.TABLE.makeCopy(Game.level.squares[58][9], null);
+		Templates.DOCUMENTS.makeCopy(Game.level.squares[58][9], "Ingoing/Outgoing",
 				new Object[] {
 						"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter" },
 				null);
-		// securityTable.inventory.add(glassForTable);
-		caveFeatures.add(securityDocuments);
-		caveFeatures.add(securityTable);
 		Chest securityChest = Templates.CHEST.makeCopy("Security Chest", Game.level.squares[59][9], false, null);
 		securityChest.inventory.add(Templates.PICKAXE.makeCopy(null, null));
-		caveFeatures.add(securityChest);
 
 		// West Security to outer mine y 17 -> 21 55+56x
 		cavePaths.add(new StructurePath("West Security <-> Outer Mine", Game.level.squares[55][17],
@@ -247,7 +244,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[60][29], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[60][30], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[66][33], null));
-		caveFeatures.add(Templates.BROKEN_LAMP.makeCopy(Game.level.squares[56][20], null));
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[56][20], null);
 
 		// Path outer mine to rec room
 		cavePaths.add(
@@ -317,7 +314,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// toilet extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[103][31], null));
-		caveFeatures.add(Templates.BROKEN_LAMP.makeCopy(Game.level.squares[92][28], null));
+		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[92][28], null);
 
 		// Path rec room to Caved In Corridor
 		cavePaths.add(new StructurePath("Caved In Corridor", Game.level.squares[89][33]));
@@ -349,49 +346,49 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[97][40], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[89][49], null));
 		// Chairs 1
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][42], null));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][43], null));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][44], null));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][45], null));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][46], null));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][47], null));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][48], null));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][49], null));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][50], null));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[91][51], null));
+		Templates.CHAIR.makeCopy(Game.level.squares[91][42], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[91][43], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[91][44], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[91][45], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[91][46], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[91][47], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[91][48], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[91][49], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[91][50], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[91][51], null);
 		// Chairs 2
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][42], null, true));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][43], null, true));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][44], null, true));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][45], null, true));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][46], null, true));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][47], null, true));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][48], null, true));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][49], null, true));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][50], null, true));
-		caveFeatures.add(Templates.CHAIR.makeCopy(Game.level.squares[95][51], null, true));
+		Templates.CHAIR.makeCopy(Game.level.squares[95][42], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[95][43], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[96][44], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[95][45], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[95][46], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[95][47], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[95][48], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[95][49], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[95][50], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[95][51], null, true);
 		// Table 1
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][42], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][43], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][44], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][45], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][46], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][47], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][48], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][49], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][50], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[92][51], null));
+		Templates.TABLE.makeCopy(Game.level.squares[92][42], null);
+		Templates.TABLE.makeCopy(Game.level.squares[92][43], null);
+		Templates.TABLE.makeCopy(Game.level.squares[92][44], null);
+		Templates.TABLE.makeCopy(Game.level.squares[92][45], null);
+		Templates.TABLE.makeCopy(Game.level.squares[92][46], null);
+		Templates.TABLE.makeCopy(Game.level.squares[92][47], null);
+		Templates.TABLE.makeCopy(Game.level.squares[92][48], null);
+		Templates.TABLE.makeCopy(Game.level.squares[92][49], null);
+		Templates.TABLE.makeCopy(Game.level.squares[92][50], null);
+		Templates.TABLE.makeCopy(Game.level.squares[92][51], null);
 		// Table 2
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][42], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][43], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][44], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][45], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][46], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][47], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][48], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][49], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][50], null));
-		caveFeatures.add(Templates.TABLE.makeCopy(Game.level.squares[94][51], null));
+		Templates.TABLE.makeCopy(Game.level.squares[94][42], null);
+		Templates.TABLE.makeCopy(Game.level.squares[94][43], null);
+		Templates.TABLE.makeCopy(Game.level.squares[94][44], null);
+		Templates.TABLE.makeCopy(Game.level.squares[94][45], null);
+		Templates.TABLE.makeCopy(Game.level.squares[94][46], null);
+		Templates.TABLE.makeCopy(Game.level.squares[94][47], null);
+		Templates.TABLE.makeCopy(Game.level.squares[94][48], null);
+		Templates.TABLE.makeCopy(Game.level.squares[94][49], null);
+		Templates.TABLE.makeCopy(Game.level.squares[94][50], null);
+		Templates.TABLE.makeCopy(Game.level.squares[94][51], null);
 
 		// Path rec room to quarters
 		cavePaths.add(
@@ -412,35 +409,35 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[83][18], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[84][17], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[84][18], null));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[77][13]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[79][13]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[81][13]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[83][13]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[85][13]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[87][13]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[77][15]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[79][15]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[81][15]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[83][15]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[85][15]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[87][15]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[89][15]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[91][15]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[77][17]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[79][17]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[87][17]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[89][17]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[91][17]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[77][19]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[79][19]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[87][19]));
-		caveFeatures.add(Templates.BED.makeCopy(Game.level.squares[89][19]));
+		Templates.BED.makeCopy(Game.level.squares[77][13]);
+		Templates.BED.makeCopy(Game.level.squares[79][13]);
+		Templates.BED.makeCopy(Game.level.squares[81][13]);
+		Templates.BED.makeCopy(Game.level.squares[83][13]);
+		Templates.BED.makeCopy(Game.level.squares[85][13]);
+		Templates.BED.makeCopy(Game.level.squares[87][13]);
+		Templates.BED.makeCopy(Game.level.squares[77][15]);
+		Templates.BED.makeCopy(Game.level.squares[79][15]);
+		Templates.BED.makeCopy(Game.level.squares[81][15]);
+		Templates.BED.makeCopy(Game.level.squares[83][15]);
+		Templates.BED.makeCopy(Game.level.squares[85][15]);
+		Templates.BED.makeCopy(Game.level.squares[87][15]);
+		Templates.BED.makeCopy(Game.level.squares[89][15]);
+		Templates.BED.makeCopy(Game.level.squares[91][15]);
+		Templates.BED.makeCopy(Game.level.squares[77][17]);
+		Templates.BED.makeCopy(Game.level.squares[79][17]);
+		Templates.BED.makeCopy(Game.level.squares[87][17]);
+		Templates.BED.makeCopy(Game.level.squares[89][17]);
+		Templates.BED.makeCopy(Game.level.squares[91][17]);
+		Templates.BED.makeCopy(Game.level.squares[77][19]);
+		Templates.BED.makeCopy(Game.level.squares[79][19]);
+		Templates.BED.makeCopy(Game.level.squares[87][19]);
+		Templates.BED.makeCopy(Game.level.squares[89][19]);
 
-		caveFeatures.add(Templates.CHEST.makeCopy("Al's Gear", Game.level.squares[87][23], true, null, alsKey));
-		caveFeatures.add(Templates.CHEST.makeCopy("Joe's Gear", Game.level.squares[88][23], true, null, joesKey));
-		caveFeatures.add(Templates.CHEST.makeCopy("Sean's Gear", Game.level.squares[89][23], true, null, seansKey));
-		caveFeatures.add(Templates.CHEST.makeCopy("Steve's Gear", Game.level.squares[90][23], false, null));
-		caveFeatures.add(Templates.CHEST.makeCopy("Paul's Gear", Game.level.squares[91][23], true, null, paulsKey));
+		Templates.CHEST.makeCopy("Al's Gear", Game.level.squares[87][23], true, null, alsKey);
+		Templates.CHEST.makeCopy("Joe's Gear", Game.level.squares[88][23], true, null, joesKey);
+		Templates.CHEST.makeCopy("Sean's Gear", Game.level.squares[89][23], true, null, seansKey);
+		Templates.CHEST.makeCopy("Steve's Gear", Game.level.squares[90][23], false, null);
+		Templates.CHEST.makeCopy("Paul's Gear", Game.level.squares[91][23], true, null, paulsKey);
 
 		// Path rec room to quarters
 		cavePaths.add(
@@ -681,7 +678,6 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Atrium 2
 		Blind blind3 = Templates.BLIND.makeCopy(Game.level.squares[55][23], Game.level.factions.get(3), outerMine);
 		blind3.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
-		blind3.inventory.add(joesKey);
 		blind3.quest = this;
 		blind.add(blind3);
 
