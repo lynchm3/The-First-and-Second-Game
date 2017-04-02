@@ -1,5 +1,6 @@
 package com.marklynch.objects;
 
+import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
 
@@ -27,11 +28,13 @@ public class Door extends Openable {
 	@Override
 	public void draw1() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-			return;
+		if (!Game.fullVisiblity) {
+			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+				return;
 
-		if (!this.squareGameObjectIsOn.seenByPlayer)
-			return;
+			if (!this.squareGameObjectIsOn.seenByPlayer)
+				return;
+		}
 
 		if (open) {
 

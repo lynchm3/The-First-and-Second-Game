@@ -58,11 +58,13 @@ public class Tree extends GameObject {
 	@Override
 	public void draw1() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-			return;
+		if (!Game.fullVisiblity) {
+			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+				return;
 
-		if (!this.squareGameObjectIsOn.seenByPlayer)
-			return;
+			if (!this.squareGameObjectIsOn.seenByPlayer)
+				return;
+		}
 
 		super.draw1();
 		// DRAW INVENTORY

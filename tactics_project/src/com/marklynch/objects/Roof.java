@@ -12,23 +12,25 @@ public class Roof extends GameObject {
 	public Roof(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
-			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Actor owner) {
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float iceResistance, float electricResistance, float poisonResistance, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 	}
 
 	@Override
 	public void draw1() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-			return;
+		if (!Game.fullVisiblity) {
+			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+				return;
 
-		if (!this.squareGameObjectIsOn.seenByPlayer)
-			return;
+			if (!this.squareGameObjectIsOn.seenByPlayer)
+				return;
+		}
 	}
 
 	@Override
@@ -59,8 +61,8 @@ public class Roof extends GameObject {
 		return new Roof(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
-				electricResistance, poisonResistance, owner);
+				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
+				iceResistance, electricResistance, poisonResistance, owner);
 	}
 
 }

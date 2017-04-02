@@ -15,13 +15,13 @@ public class GameObjectExploder extends GameObject {
 	public GameObjectExploder(String name, int health, String imagePath, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
-			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, Actor owner) {
+			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
+			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
+			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 	}
 
 	public SquarePiece[] squarePieces;
@@ -141,11 +141,13 @@ public class GameObjectExploder extends GameObject {
 	@Override
 	public void draw1() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
-			return;
+		if (!Game.fullVisiblity) {
+			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+				return;
 
-		if (!this.squareGameObjectIsOn.seenByPlayer)
-			return;
+			if (!this.squareGameObjectIsOn.seenByPlayer)
+				return;
+		}
 
 		// MAYBE THE U AND V ARE A RATIO (0 to 1)? yup...
 		// TRIED THAT below, didnt work, needs tsome debugging...
@@ -343,7 +345,7 @@ public class GameObjectExploder extends GameObject {
 		return new GameObjectExploder(new String(name), (int) totalHealth, imageTexturePath, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY,
-				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, owner);
+				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 	}
 }

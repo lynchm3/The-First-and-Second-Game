@@ -96,6 +96,9 @@ public class Game {
 	public static Inventory inventoryHoveringOver = null;
 	public static InventorySquare inventorySquareMouseIsOver = null;
 
+	// DEBUG
+	public static boolean fullVisiblity = false;
+
 	public void start() {
 
 		initGL(windowWidth, windowHeight); // init OpenGL

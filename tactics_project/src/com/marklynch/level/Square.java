@@ -99,8 +99,11 @@ public class Square extends AStarNode implements ActionableInWorld {
 
 	public void draw1() {
 
-		// if (!this.seenByPlayer)
-		// return;
+		if (!Game.fullVisiblity) {
+
+			if (!this.seenByPlayer)
+				return;
+		}
 
 		// square texture
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
