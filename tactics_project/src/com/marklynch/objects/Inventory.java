@@ -409,12 +409,19 @@ public class Inventory {
 	public boolean isPassable(Actor forActor) {
 		for (GameObject gameObject : gameObjects) {
 
+			// Can't go through group leader
 			if (forActor.group != null && forActor.group.getLeader() == gameObject)
 				return false;
 
-			if (gameObject != Game.level.player && gameObject instanceof Actor)
-				return true;
+			// Can't go through player
+			if (gameObject == Game.level.player)
+				return false;
 
+			// Can't got through impassable objects
+			if (!gameObject.canShareSquare && !(gameObject instanceof Door) && !(gameObject instanceof Actor))
+				return false;
+
+			// Can't go through locked doors u dont have the key for
 			if (gameObject instanceof Door) {
 				Door door = (Door) gameObject;
 				if (door.locked && !forActor.hasKeyForDoor(door)) {

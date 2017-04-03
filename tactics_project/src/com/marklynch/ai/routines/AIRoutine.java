@@ -114,59 +114,66 @@ public class AIRoutine {
 	public boolean runSearchRoutine() {
 
 		// Searching
-		if (this.actor.locationsToSearch.size() > 0) {
+		if (this.actor.locationsToSearch.size() == 0)
+			return false;
 
-			MapUtil.sortByValue(this.actor.locationsToSearch);
+		MapUtil.sortByValue(this.actor.locationsToSearch);
 
-			// this.actor.locationsToSearch.sort(AIRoutineUtils.sortLocationsToSearch);
-			ArrayList<Actor> toRemove = new ArrayList<Actor>();
-			ArrayList<Actor> toAdd = new ArrayList<Actor>(); // WTF IS THIS FOR
-			boolean moved = false;
+		// this.actor.locationsToSearch.sort(AIRoutineUtils.sortLocationsToSearch);
+		ArrayList<Actor> toRemove = new ArrayList<Actor>();
+		boolean moved = false;
 
-			for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
+		for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
 
-				if (this.actor.squareGameObjectIsOn
-						.straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor)) > 0
-						&& this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor)) != null) {
+			// System.out.println(
+			// "this.actor.squareGameObjectIsOn.straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor))
+			// > 0"
+			// + (this.actor.squareGameObjectIsOn
+			// .straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor))
+			// > 0));
+			//
+			// System.out.println("this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor))
+			// != null"
+			// +
+			// (this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor))
+			// != null));
 
-					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-					this.actor.expressionImageTexture = Expressions.questionMark;
-					AIRoutineUtils.moveTowardsTargetSquare(this.actor.locationsToSearch.get(actorToSearchFor));
-					moved = true;
+			if (this.actor.squareGameObjectIsOn
+					.straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor)) > 0
+					&& this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor)) != null) {
 
-					break;
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
+				this.actor.expressionImageTexture = Expressions.questionMark;
+				AIRoutineUtils.moveTowardsTargetSquare(this.actor.locationsToSearch.get(actorToSearchFor));
+				moved = true;
 
-				} else {
-					toRemove.add(actorToSearchFor);
+				break;
+
+			} else {
+				toRemove.add(actorToSearchFor);
+			}
+		}
+
+		for (Actor actorsToSearchFor : toRemove) {
+			this.actor.locationsToSearch.remove(actorsToSearchFor);
+		}
+
+		if (moved) {
+
+			for (Actor attacker : this.actor.getAttackers()) {
+				if (this.actor.straightLineDistanceTo(attacker.squareGameObjectIsOn) <= this.actor.sight
+						&& this.actor.visibleFrom(attacker.squareGameObjectIsOn)) {
+					// Change status to fighting if u can see an enemy from
+					// new location
+					this.actor.expressionImageTexture = null;
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 				}
 			}
 
-			for (Actor actorsToSearchFor : toRemove) {
-				this.actor.locationsToSearch.remove(actorsToSearchFor);
-			}
-
-			// WTF IS THIS MEANT TO BE FOR?
-			for (Actor actorsToSearchFor : toAdd) {
-				this.actor.locationsToSearch.put(actorsToSearchFor, actorsToSearchFor.squareGameObjectIsOn);
-			}
-
-			if (moved) {
-
-				for (Actor attacker : this.actor.getAttackers()) {
-					if (this.actor.straightLineDistanceTo(attacker.squareGameObjectIsOn) <= this.actor.sight
-							&& this.actor.visibleFrom(attacker.squareGameObjectIsOn)) {
-						// Change status to fighting if u can see an enemy from
-						// new location
-						this.actor.expressionImageTexture = null;
-						this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
-					}
-				}
-
-				return true;
-			}
-
+			return true;
 		}
 		return false;
+
 	}
 
 	public boolean runSearchCooldown() {

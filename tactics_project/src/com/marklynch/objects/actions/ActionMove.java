@@ -92,21 +92,40 @@ public class ActionMove extends Action {
 	@Override
 	public boolean check() {
 
+		System.out.println("ActionMove.check() a - performer.travelDistance - performer.distanceMovedThisTurn = "
+				+ (performer.travelDistance - performer.distanceMovedThisTurn));
+
 		if (performer.travelDistance - performer.distanceMovedThisTurn <= 0)
 			return false;
+		System.out.println("ActionMove.check() b - target.inventory.isPassable(performer) = "
+				+ target.inventory.isPassable(performer));
 
-		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))
+		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))// PASSABLE
+																								// CAN
+																								// BE
+																								// CHANGED
+																								// TO
+																								// INCLUDE
+																								// FUCKING
+																								// IMPASSABLE
+																								// SHIT
 			return false;
+		System.out.println("ActionMove.check() c");
 
 		Path path = performer.getPathTo(target);
-		if (path != null)
-			if (path == null || path.travelCost > performer.travelDistance - performer.distanceMovedThisTurn)
-				return false;
+		System.out.println("ActionMove.check() c - path = " + path);
+		if (path == null)
+			return false;
+
+		if (path.travelCost > performer.travelDistance - performer.distanceMovedThisTurn)
+			return false;
+		System.out.println("ActionMove.check() d");
 
 		if (performer != Game.level.player && performer.swapCooldown > 0) {
 			performer.swapCooldown--;
 			return false;
 		}
+		System.out.println("ActionMove.check() e");
 
 		GameObject objectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
 
@@ -118,12 +137,14 @@ public class ActionMove extends Action {
 		if (actorInTheWay == Game.level.player) {
 			return false;
 		}
+		System.out.println("ActionMove.check() f");
 
 		if (performer.group != null && performer.group.getLeader() == actorInTheWay) {
 			// don't try to swap with you group leader
 			return false;
 		}
 
+		System.out.println("ActionMove.check() g");
 		// if (actor.group != Game.level.activeActor.group) {
 		//
 		// }
@@ -134,6 +155,7 @@ public class ActionMove extends Action {
 			// tries to move
 			return false;
 		}
+		System.out.println("ActionMove.check() h");
 
 		return true;
 	}
