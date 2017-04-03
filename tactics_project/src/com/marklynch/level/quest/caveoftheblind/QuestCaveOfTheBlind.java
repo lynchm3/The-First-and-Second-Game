@@ -15,6 +15,7 @@ import com.marklynch.objects.Bed;
 import com.marklynch.objects.Chest;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Door;
+import com.marklynch.objects.DropHole;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Key;
@@ -77,6 +78,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	Key mortsKey;
 	Door mortsBedroomDoor;
 	Door mortsStoreroomDoor;
+	DropHole dropHole;
 
 	// Squares
 	Square troughSquare;
@@ -118,8 +120,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		alsKey = Templates.KEY.makeCopy("Al's Key", null, mort);
 		// On blind3 in dining room
 		seansKey = Templates.KEY.makeCopy("Sean's Key", null, null);
-		// In lavatory
-		paulsKey = Templates.KEY.makeCopy("Paul's Key", Game.level.squares[99][31], null);
+		// In latrine drop hole
+		paulsKey = Templates.KEY.makeCopy("Paul's Key", null, null);
+		// Key on dining table
+		joesKey = Templates.KEY.makeCopy("Joe's Key", null, null);
 
 		for (GameObject gameObject : mort.inventory.getGameObjects()) {
 			gameObject.quest = this;
@@ -132,8 +136,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		makeMortsRoom();
 		makeBlind();
 
-		// Key on dining table
-		joesKey = Templates.KEY.makeCopy("Joe's Key", Game.level.squares[94][45], null);
+		Game.level.squares[94][45].inventory.add(joesKey);
+		dropHole.inventory.add(paulsKey);
 
 		Readable rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[44][15], "Rock with message",
 				new Object[] { "Stay out or The Blind will get you! -Mort" }, null);
@@ -300,21 +304,23 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[69][7], null));
 
 		// Path rec room to toilet
-		cavePaths.add(new StructurePath("Rec Room <-> Lavatory", Game.level.squares[91][28], Game.level.squares[92][28],
+		cavePaths.add(new StructurePath("Rec Room <-> Latrine", Game.level.squares[91][28], Game.level.squares[92][28],
 				Game.level.squares[93][28], Game.level.squares[94][28], Game.level.squares[95][28],
 				Game.level.squares[96][28]));
 
 		// Toilet section
-		caveSections.add(new StructureSection("Lavatory", 92, 20, 105, 33));
+		caveSections.add(new StructureSection("Latrine", 92, 20, 105, 33));
 
 		// toilet room
-		toilet = new StructureRoom("Lavatory", 96, 29, new RoomPart(96, 29, 98, 30), new RoomPart(99, 29, 103, 31),
+		toilet = new StructureRoom("Latrine", 96, 29, new RoomPart(96, 29, 98, 30), new RoomPart(99, 29, 103, 31),
 				new RoomPart(68, 10, 72, 16));
 		rooms.add(toilet);
 
 		// toilet extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[103][31], null));
 		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[92][28], null);
+		dropHole = Templates.DROP_HOLE.makeCopy(Game.level.squares[102][30], null);
+		// DROP_HOLE
 
 		// Path rec room to Caved In Corridor
 		cavePaths.add(new StructurePath("Caved In Corridor", Game.level.squares[89][33]));

@@ -176,11 +176,14 @@ public class Templates {
 
 	// TRAPS
 	public static final BrokenGlass BROKEN_LAMP = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
-			new Inventory(), false, true, true, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f,
+			new Inventory(), false, true, false, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, null);
 	public static final BrokenGlass BROKEN_GLASS = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
-			new Inventory(), false, true, true, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f,
+			new Inventory(), false, true, false, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, null);
+	public static final DropHole DROP_HOLE = new DropHole("Drop Hole", 5, "drop_hole.png", null, new Inventory(), false,
+			false, false, false, false, true, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+			null);
 
 	// NATURE
 	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), true,
