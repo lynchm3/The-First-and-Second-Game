@@ -204,16 +204,19 @@ public class AIRoutineForMort extends AIRoutine {
 				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenPlayerInTerritory);
 
 				if (mort.squareGameObjectIsOn == lastLocationSeenPlayerInTerritory) {
+					mort.locationsToSearch.put(Game.level.player, lastLocationSeenPlayerInTerritory);
 					lastLocationSeenPlayerInTerritory = null;
 				}
 
 				if (canSeePlayerInTerritory()) {
+					mort.locationsToSearch.remove(Game.level.player);
 					lastLocationSeenPlayerInTerritory = Game.level.player.squareGameObjectIsOn;
 				}
 
 				return;
 			}
 		} else {
+			mort.locationsToSearch.remove(Game.level.player);
 			lastLocationSeenPlayerInTerritory = Game.level.player.squareGameObjectIsOn;
 		}
 
