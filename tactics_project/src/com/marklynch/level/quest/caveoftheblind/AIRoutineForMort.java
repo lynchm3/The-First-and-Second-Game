@@ -53,21 +53,38 @@ public class AIRoutineForMort extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.expressionImageTexture = null;
 		createSearchLocationsBasedOnSounds(Weapon.class);
+
+		// Remove search locations if outside jurisdiction
 		for (Actor actor : mort.locationsToSearch.keySet()) {
 			Square squareToSearch = mort.locationsToSearch.get(actor);
 			if (squareToSearch.structureRoomSquareIsIn != mort.mortsMine
 					&& squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
 					&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault) {
+				System.out.println("Removing " + actor.name + " from locationsToSearch");
 				mort.locationsToSearch.remove(actor);
 			}
 		}
+
 		createSearchLocationsBasedOnVisibleAttackers();
+
+		// Player attacker and under half health - ring bell
+		if (!rangBellAsLastResort && mort.remainingHealth < mort.totalHealth / 2) {
+			Bell bell = (Bell) mort.inventory.getGameObjectOfClass(Bell.class);
+			if (bell != null && mort.getAttackers().contains(Game.level.player)) {
+				new ActionRing(mort, bell).perform();
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
+				this.actor.miniDialogue = "You won't get out of here alive";
+				rangBellAsLastResort = true;
+				return;
+			}
+		}
 
 		if (runFightRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
+
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
@@ -78,33 +95,9 @@ public class AIRoutineForMort extends AIRoutine {
 			return;
 		}
 
-		// Blind living in morts mine?
-		// for (Blind blind : mort.questCaveOfTheBlind.blind) {
-		// if (blind.remainingHealth > 0 && blind.roomLivingIn ==
-		// mort.mortsMine) {
-		//
-		// mort.performingFeedingDemo = false;
-		// mort.miniDialogue = "No, no, no, no!";
-		// mort.activityDescription = "Running away";
-		// Square doorSquare =
-		// mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
-		// Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid -
-		// 1][doorSquare.yInGrid];
-		// if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
-		// new ActionLock(mort,
-		// mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
-		// } else {
-		// AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
-		// }
-		// return;
-		//
-		// }
-		// }
-
+		// If blind are in mine and getting too close to mgmt door, move to it
 		float mortsDistanceFromBedroomDoor = mort
 				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
-
-		// Blind too close to door? move towrds room.
 		for (Blind blind : mort.questCaveOfTheBlind.blind) {
 			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
 				float blindDistanceFromMortsRoom = blind
@@ -125,30 +118,7 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
-		// Blind in mine? move back.
-		// for (Blind blind : mort.questCaveOfTheBlind.blind) {
-		// if (blind.remainingHealth > 0 &&
-		// blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine)
-		// {
-		//
-		// mort.performingFeedingDemo = false;
-		// AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
-		// return;
-		//
-		// }
-		// }
-
-		if (!rangBellAsLastResort && mort.remainingHealth < mort.totalHealth / 2) {
-			Bell bell = (Bell) mort.inventory.getGameObjectOfClass(Bell.class);
-			if (bell != null && mort.getAttackers().contains(Game.level.player)) {
-				new ActionRing(mort, bell).perform();
-				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
-				this.actor.miniDialogue = "You won't get out of here alive";
-				rangBellAsLastResort = true;
-				return;
-			}
-		}
-
+		// Feeding demo
 		if (mort.performingFeedingDemo) {
 
 			if (feedingDemoState == FEEDING_DEMO_STATE.WALK_TO_TROUGH) {
@@ -214,25 +184,37 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
-		boolean canSeePlayerInTerritory = canSeePlayerInTerritory();
-		Square squareWherePlayerCurrentlyVisibleInTerritory = null;
-		if (canSeePlayerInTerritory)
-			squareWherePlayerCurrentlyVisibleInTerritory = Game.level.player.squareGameObjectIsOn;
-		if (squareWherePlayerCurrentlyVisibleInTerritory == null) {
+		// Can mort see the Player in his territory? If so record it. If not,
+		// follow.
+		if (!canSeePlayerInTerritory()) {
+
+			System.out.println("Cant see player in territory");
 
 			if (lastLocationSeenPlayerInTerritory != null) {
+				System.out.println("Moving towards last seen location " + lastLocationSeenPlayerInTerritory.xInGrid
+						+ ", " + lastLocationSeenPlayerInTerritory.yInGrid);
 				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenPlayerInTerritory);
 
-				// refuses to walk through door
-
 				if (mort.squareGameObjectIsOn == lastLocationSeenPlayerInTerritory) {
+
+					System.out.println("Setting lastLocationSeenPlayerInTerritory to null");
 					lastLocationSeenPlayerInTerritory = null;
 				}
+
+				if (canSeePlayerInTerritory()) {
+					lastLocationSeenPlayerInTerritory = Game.level.player.squareGameObjectIsOn;
+					System.out.println("Setting lastLocationSeenPlayerInTerritory to new location"
+							+ lastLocationSeenPlayerInTerritory.xInGrid + ", "
+							+ lastLocationSeenPlayerInTerritory.yInGrid);
+				}
+
 				return;
 			}
 		} else {
-			lastLocationSeenPlayerInTerritory = squareWherePlayerCurrentlyVisibleInTerritory;
-
+			lastLocationSeenPlayerInTerritory = Game.level.player.squareGameObjectIsOn;
+			System.out.println("Can see player in territory");
+			System.out.println("Setting lastLocationSeenPlayerInTerritory to new location"
+					+ lastLocationSeenPlayerInTerritory.xInGrid + ", " + lastLocationSeenPlayerInTerritory.yInGrid);
 		}
 
 		// if (followingPlayer)
@@ -257,7 +239,7 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
-		if (canSeePlayerInTerritory) {
+		if (canSeePlayerInTerritory()) {
 
 		} else {
 			AIRoutineUtils.moveTowardsTargetSquare(mort.mortsStandingSpot);
@@ -267,7 +249,10 @@ public class AIRoutineForMort extends AIRoutine {
 	public boolean canSeePlayerInTerritory() {
 
 		if (Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsMine
-				&& Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsRoom)
+				&& Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsRoom
+				&& Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsVault
+				&& Game.level.player.squareGameObjectIsOn != mort.mortsRoomDoorway
+				&& Game.level.player.squareGameObjectIsOn != mort.mortsVaultDoorway)
 			return false;
 
 		float distanceToPlayer = this.actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn);

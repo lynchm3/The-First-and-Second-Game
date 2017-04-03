@@ -117,7 +117,7 @@ public class AIRoutine {
 
 			// this.actor.locationsToSearch.sort(AIRoutineUtils.sortLocationsToSearch);
 			ArrayList<Actor> toRemove = new ArrayList<Actor>();
-			ArrayList<Actor> toAdd = new ArrayList<Actor>();
+			ArrayList<Actor> toAdd = new ArrayList<Actor>(); // WTF IS THIS FOR
 			boolean moved = false;
 
 			for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
@@ -125,6 +125,7 @@ public class AIRoutine {
 				if (this.actor.squareGameObjectIsOn
 						.straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor)) > 0
 						&& this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor)) != null) {
+
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.expressionImageTexture = Expressions.questionMark;
 					AIRoutineUtils.moveTowardsTargetSquare(this.actor.locationsToSearch.get(actorToSearchFor));
@@ -138,9 +139,11 @@ public class AIRoutine {
 			}
 
 			for (Actor actorsToSearchFor : toRemove) {
+				System.out.println("Removing " + actor.name + " from locationsToSearch");
 				this.actor.locationsToSearch.remove(actorsToSearchFor);
 			}
 
+			// WTF IS THIS MEANT TO BE FOR?
 			for (Actor actorsToSearchFor : toAdd) {
 				this.actor.locationsToSearch.put(actorsToSearchFor, actorsToSearchFor.squareGameObjectIsOn);
 			}

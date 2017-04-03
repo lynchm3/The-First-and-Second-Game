@@ -510,7 +510,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[86][37], mort));
 
 		// Morts Rooms Section
-		caveSections.add(new StructureSection("Mort & Mort Mining", 43, 36, 75, 49));
+		mort.mortsRooms = new StructureSection("Mort & Mort Mining", 43, 36, 75, 49);
+		caveSections.add(mort.mortsRooms);
 
 		// Morts Quarters
 		mort.mortsRoom = new StructureRoom("Management", 65, 39, new RoomPart(65, 39, 74, 42));
@@ -528,9 +529,11 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[76][46], mort));
 		mortsBedroomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[75][40], true, mort, mortsKey,
 				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
+		mort.mortsRoomDoorway = mortsBedroomDoor.squareGameObjectIsOn;
 		caveFeatures.add(mortsBedroomDoor);
 		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[64][40], true, mort, mortsKey,
 				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
+		mort.mortsVaultDoorway = mortsStoreroomDoor.squareGameObjectIsOn;
 		caveFeatures.add(mortsStoreroomDoor);
 
 		// Path Dining room to equipment room

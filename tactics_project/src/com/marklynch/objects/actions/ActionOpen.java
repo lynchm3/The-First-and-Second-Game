@@ -45,7 +45,7 @@ public class ActionOpen extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (performer == Game.level.player)
+		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 
 		performer.actions.add(this);

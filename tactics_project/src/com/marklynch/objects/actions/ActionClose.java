@@ -46,8 +46,6 @@ public class ActionClose extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (performer == Game.level.player)
-			Game.level.endTurn();
 		performer.actions.add(this);
 	}
 

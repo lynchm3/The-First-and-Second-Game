@@ -43,7 +43,7 @@ public class ActionSmash extends Action {
 		if (target.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", target }));
 
-		if (performer == Game.level.player)
+		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 
 		if (performer instanceof Actor)

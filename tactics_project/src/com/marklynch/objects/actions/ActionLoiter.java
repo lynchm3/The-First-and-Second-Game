@@ -34,7 +34,8 @@ public class ActionLoiter extends Action {
 	}
 
 	public void loiter(Actor actor, Square squareToLoiterOn) {
-		if (performer == Game.level.player)
+
+		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 	}
 

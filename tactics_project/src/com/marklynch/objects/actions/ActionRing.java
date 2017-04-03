@@ -22,7 +22,8 @@ public class ActionRing extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
-		legal = checkLegality(); sound = createSound();
+		legal = checkLegality();
+		sound = createSound();
 		sound = createSound();
 	}
 
@@ -42,7 +43,7 @@ public class ActionRing extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (performer == Game.level.player)
+		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 		performer.actions.add(this);
 	}
