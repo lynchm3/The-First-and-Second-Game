@@ -423,4 +423,36 @@ public class Square extends AStarNode implements ActionableInWorld {
 		}
 		return squares;
 	}
+
+	public Square getSquareToLeftOf() {
+		if (this.xInGrid == 0) {
+			return null;
+		} else {
+			return Game.level.squares[this.xInGrid - 1][this.yInGrid];
+		}
+	}
+
+	public Square getSquareToRightOf() {
+		if (this.xInGrid == Game.level.width - 1) {
+			return null;
+		} else {
+			return Game.level.squares[this.xInGrid + 1][this.yInGrid];
+		}
+	}
+
+	public Square getSquareAbove() {
+		if (this.yInGrid == 0) {
+			return null;
+		} else {
+			return Game.level.squares[this.xInGrid][this.yInGrid - 1];
+		}
+	}
+
+	public Square getSquareBelow() {
+		if (this.yInGrid == Game.level.height - 1) {
+			return null;
+		} else {
+			return Game.level.squares[this.xInGrid][this.yInGrid + 1];
+		}
+	}
 }

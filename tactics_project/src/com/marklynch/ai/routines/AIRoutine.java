@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.objects.Expressions;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -164,6 +165,41 @@ public class AIRoutine {
 			}
 
 		}
+		return false;
+	}
+
+	public boolean runSearchCooldown() {
+
+		// DOORWAYS are my biggest issue here.
+
+		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
+		this.actor.expressionImageTexture = Expressions.questionMark;
+		StructureRoom room = actor.squareGameObjectIsOn.structureRoomSquareIsIn;
+
+		// if (room != null) {
+		// AIRoutineUtils.moveTowardsTargetSquare(AIRoutineUtils.getRandomSquareInRoom(room));
+		// return true;
+		// } else {
+
+		// Move Away From Last Square;
+		boolean moved = false;
+		if (actor.squareGameObjectIsOn.xInGrid > actor.lastSquare.xInGrid) {
+			moved = AIRoutineUtils.moveTowardsTargetSquare(actor.squareGameObjectIsOn.getSquareToRightOf());
+		} else if (actor.squareGameObjectIsOn.xInGrid < actor.lastSquare.xInGrid) {
+			moved = AIRoutineUtils.moveTowardsTargetSquare(actor.squareGameObjectIsOn.getSquareToLeftOf());
+		} else {
+			if (actor.squareGameObjectIsOn.yInGrid > actor.lastSquare.yInGrid) {
+				moved = AIRoutineUtils.moveTowardsTargetSquare(actor.squareGameObjectIsOn.getSquareBelow());
+			} else if (actor.squareGameObjectIsOn.yInGrid < actor.lastSquare.yInGrid) {
+				moved = AIRoutineUtils.moveTowardsTargetSquare(actor.squareGameObjectIsOn.getSquareAbove());
+			} else {
+
+			}
+		}
+
+		if (!moved)
+			AIRoutineUtils.moveTowardsTargetSquare(AIRoutineUtils.getRandomSquare(1, false));
+		// }
 		return false;
 	}
 

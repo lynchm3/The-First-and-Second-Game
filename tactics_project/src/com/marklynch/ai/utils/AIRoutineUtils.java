@@ -46,7 +46,7 @@ public class AIRoutineUtils {
 		return false;
 	}
 
-	public static Square getRandomSquare(int maxDistance, boolean outdoors) {
+	public static Square getRandomSquare(int maxDistance, boolean mustBeOutdoors) {
 
 		int attempts = 0;
 		int maxAttempts = 5;
@@ -56,7 +56,7 @@ public class AIRoutineUtils {
 			int y = (int) (Math.random() * Game.level.height);
 			randomSquare = Game.level.squares[x][y];
 			Path currentActorPathToThisSquare = Game.level.activeActor.getPathTo(randomSquare);
-			if ((!outdoors || outdoors && randomSquare.structureSquareIsIn == null)
+			if ((!mustBeOutdoors || mustBeOutdoors && randomSquare.structureSquareIsIn == null)
 					&& currentActorPathToThisSquare != null && currentActorPathToThisSquare.travelCost < maxDistance
 					&& randomSquare.inventory.canShareSquare()) {
 				return randomSquare;

@@ -80,10 +80,12 @@ public class ActionMove extends Action {
 	}
 
 	private void move(Actor actor, Square square) {
+		actor.lastSquare = actor.squareGameObjectIsOn;
 		actor.squareGameObjectIsOn.inventory.remove(actor);
 		actor.distanceMovedThisTurn += 1;
 		actor.squareGameObjectIsOn = square;
 		square.inventory.add(actor);
+
 		// Actor.highlightSelectedCharactersSquares();
 	}
 

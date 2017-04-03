@@ -19,6 +19,7 @@ public class AIRoutineForMort extends AIRoutine {
 	Square lastLocationSeenPlayerInTerritory;
 	boolean rangBellAsLastResort;
 	boolean lockedInRoom = false;
+	int searchCooldown = 0;
 
 	enum FEEDING_DEMO_STATE {
 		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY, WAIT_FOR_BLIND_TO_ENTER, WAIT_FOR_BLIND_TO_LEAVE
@@ -87,7 +88,14 @@ public class AIRoutineForMort extends AIRoutine {
 
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
+			searchCooldown = 10;
 			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
+
+		if (searchCooldown > 0) {
+			runSearchCooldown();
+			searchCooldown--;
 			return;
 		}
 

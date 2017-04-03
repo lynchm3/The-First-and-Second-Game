@@ -122,6 +122,7 @@ public class Actor extends GameObject {
 	public ArrayList<Action> actions = new ArrayList<Action>();
 
 	public Texture expressionImageTexture = null;
+	public Square lastSquare = null;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
@@ -191,6 +192,8 @@ public class Actor extends GameObject {
 
 		drawOffsetX = -32;
 		drawOffsetY = -64;
+
+		this.lastSquare = this.squareGameObjectIsOn;
 
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			gameObject.owner = this;
