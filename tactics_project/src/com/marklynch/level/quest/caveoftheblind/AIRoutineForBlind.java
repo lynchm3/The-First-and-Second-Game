@@ -154,17 +154,6 @@ public class AIRoutineForBlind extends AIRoutine {
 
 		addNonBlindToAttackersList();
 		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class, Tool.class);
-		// ArrayList<Actor> toRemoveFromSearchLocations = new
-		// ArrayList<Actor>();
-		// for (Actor actor : blind.locationsToSearch.keySet()) {
-		//
-		// if (actor instanceof Blind) {
-		// toRemoveFromSearchLocations.add(actor);
-		// }
-		// }
-		// for (Actor actor : toRemoveFromSearchLocations) {
-		// blind.locationsToSearch.remove(actor);
-		// }
 
 		createSearchLocationsBasedOnVisibleAttackers();
 
@@ -175,10 +164,20 @@ public class AIRoutineForBlind extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
+
 		if (runSearchRoutine()) {
+			System.out.println("Run search routine");
 			// createSearchLocationsBasedOnSounds();
+			searchCooldown = 10;
 			addNonBlindToAttackersList();
 			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
+
+		if (searchCooldown > 0) {
+			System.out.println("Run search cooldown");
+			runSearchCooldown();
+			searchCooldown--;
 			return;
 		}
 

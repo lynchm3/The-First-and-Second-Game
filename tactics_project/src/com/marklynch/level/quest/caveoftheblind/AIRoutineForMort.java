@@ -19,7 +19,6 @@ public class AIRoutineForMort extends AIRoutine {
 	Square lastLocationSeenPlayerInTerritory;
 	boolean rangBellAsLastResort;
 	boolean lockedInRoom = false;
-	int searchCooldown = 0;
 
 	enum FEEDING_DEMO_STATE {
 		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY, WAIT_FOR_BLIND_TO_ENTER, WAIT_FOR_BLIND_TO_LEAVE
@@ -196,33 +195,21 @@ public class AIRoutineForMort extends AIRoutine {
 		// follow.
 		if (!canSeePlayerInTerritory()) {
 
-			System.out.println("Cant see player in territory");
-
 			if (lastLocationSeenPlayerInTerritory != null) {
-				System.out.println("Moving towards last seen location " + lastLocationSeenPlayerInTerritory.xInGrid
-						+ ", " + lastLocationSeenPlayerInTerritory.yInGrid);
 				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenPlayerInTerritory);
 
 				if (mort.squareGameObjectIsOn == lastLocationSeenPlayerInTerritory) {
-
-					System.out.println("Setting lastLocationSeenPlayerInTerritory to null");
 					lastLocationSeenPlayerInTerritory = null;
 				}
 
 				if (canSeePlayerInTerritory()) {
 					lastLocationSeenPlayerInTerritory = Game.level.player.squareGameObjectIsOn;
-					System.out.println("Setting lastLocationSeenPlayerInTerritory to new location"
-							+ lastLocationSeenPlayerInTerritory.xInGrid + ", "
-							+ lastLocationSeenPlayerInTerritory.yInGrid);
 				}
 
 				return;
 			}
 		} else {
 			lastLocationSeenPlayerInTerritory = Game.level.player.squareGameObjectIsOn;
-			System.out.println("Can see player in territory");
-			System.out.println("Setting lastLocationSeenPlayerInTerritory to new location"
-					+ lastLocationSeenPlayerInTerritory.xInGrid + ", " + lastLocationSeenPlayerInTerritory.yInGrid);
 		}
 
 		// if (followingPlayer)

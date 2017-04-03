@@ -28,9 +28,17 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
+
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
+			searchCooldown = 10;
 			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
+
+		if (searchCooldown > 0) {
+			runSearchCooldown();
+			searchCooldown--;
 			return;
 		}
 

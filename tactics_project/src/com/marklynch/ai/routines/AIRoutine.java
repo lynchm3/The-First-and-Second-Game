@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.objects.Expressions;
@@ -17,7 +18,8 @@ public class AIRoutine {
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
 
 	public Actor actor;
-	GameObject target;
+	public GameObject target;
+	public int searchCooldown = 0;
 
 	public AIRoutine(Actor actor) {
 		this.actor = actor;
@@ -140,7 +142,6 @@ public class AIRoutine {
 			}
 
 			for (Actor actorsToSearchFor : toRemove) {
-				System.out.println("Removing " + actor.name + " from locationsToSearch");
 				this.actor.locationsToSearch.remove(actorsToSearchFor);
 			}
 
@@ -197,8 +198,14 @@ public class AIRoutine {
 			}
 		}
 
-		if (!moved)
-			AIRoutineUtils.moveTowardsTargetSquare(AIRoutineUtils.getRandomSquare(1, false));
+		System.out.println("runSearchCooldown() moved 1 = " + moved);
+
+		if (!moved) {
+			Square randomSquare = AIRoutineUtils.getRandomAdjacentSquare(actor.squareGameObjectIsOn);
+			moved = AIRoutineUtils.moveTowardsTargetSquare(randomSquare);
+			System.out.println("runSearchCooldown() randomSquare = " + randomSquare);
+			System.out.println("runSearchCooldown() moved 2 = " + moved);
+		}
 		// }
 		return false;
 	}

@@ -48,6 +48,8 @@ public class AIRoutineUtils {
 
 	public static Square getRandomSquare(int maxDistance, boolean mustBeOutdoors) {
 
+		// THIS IS ENTIRELY FUCKED
+
 		int attempts = 0;
 		int maxAttempts = 5;
 		Square randomSquare = null;
@@ -65,6 +67,20 @@ public class AIRoutineUtils {
 		}
 
 		return null;
+	}
+
+	public static Square getRandomAdjacentSquare(Square startingSquare) {
+
+		int random = new Random().nextInt(4);
+		if (random == 0) {
+			return startingSquare.getSquareToLeftOf();
+		} else if (random == 1) {
+			return startingSquare.getSquareToRightOf();
+		} else if (random == 2) {
+			return startingSquare.getSquareAbove();
+		} else {
+			return startingSquare.getSquareBelow();
+		}
 	}
 
 	public static GameObject getNearestForPurposeOfBeingAdjacent(Class clazz, float maxDistance,
