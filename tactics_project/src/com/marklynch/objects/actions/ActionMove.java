@@ -146,11 +146,8 @@ public class ActionMove extends Action {
 
 		// Sound of glass
 		ArrayList<GameObject> stampables = target.inventory.getGameObjectsOfClass(Stampable.class);
-		System.out.println("stampables.size() = " + stampables.size());
 		if (!(performer instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
-				System.out.println("performer = " + performer);
-				System.out.println("MAKING SOUND");
 				return new Sound(performer, stampable, target, 10, legal, this.getClass());
 			}
 		}

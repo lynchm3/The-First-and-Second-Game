@@ -561,9 +561,6 @@ public class Actor extends GameObject {
 					helmetPositionYInPixels + helmet.height);
 		}
 
-		if (this.name.equalsIgnoreCase("you"))
-			System.out.println("headAnchorX = " + headAnchorX);
-
 		// draw anchor
 		// QuadUtils.drawQuad(Color.WHITE,
 		// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH +

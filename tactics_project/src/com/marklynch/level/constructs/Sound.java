@@ -167,8 +167,6 @@ public class Sound {
 			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
 			newPathSquares.add(newSquare);
 			int newDistance = (int) (pathCost + newSquare.inventory.getSoundDampening());
-			System.out.println(
-					"parentSquare.inventory.getSoundDampening() = " + parentSquare.inventory.getSoundDampening());
 			if (newDistance > highestPathCostSeen)
 				highestPathCostSeen = newDistance;
 			Path newPath = new Path(newPathSquares, newDistance);

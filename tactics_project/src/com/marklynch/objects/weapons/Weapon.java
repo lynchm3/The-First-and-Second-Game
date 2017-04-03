@@ -43,6 +43,9 @@ public class Weapon extends GameObject {
 		this.owner = owner;
 		this.anchorX = anchorX;
 		this.anchorY = anchorY;
+		this.slashDamage = damage;
+		this.minRange = minRange;
+		this.maxRange = maxRange;
 
 	}
 

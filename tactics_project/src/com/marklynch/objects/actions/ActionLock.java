@@ -2,6 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
@@ -70,7 +71,7 @@ public class ActionLock extends Action {
 			return false;
 		}
 
-		if (openable.squareGameObjectIsOn.inventory.canShareSquare() == false) {
+		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare() == false) {
 			actionName = ACTION_NAME_BLOCKED;
 			return false;
 		}
