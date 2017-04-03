@@ -1,5 +1,7 @@
 package com.marklynch.level.quest.caveoftheblind;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
@@ -55,14 +57,17 @@ public class AIRoutineForMort extends AIRoutine {
 		createSearchLocationsBasedOnSounds(Weapon.class);
 
 		// Remove search locations if outside jurisdiction
+		ArrayList<Actor> toRemove = new ArrayList<Actor>();
 		for (Actor actor : mort.locationsToSearch.keySet()) {
 			Square squareToSearch = mort.locationsToSearch.get(actor);
 			if (squareToSearch.structureRoomSquareIsIn != mort.mortsMine
 					&& squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
 					&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault) {
-				System.out.println("Removing " + actor.name + " from locationsToSearch");
-				mort.locationsToSearch.remove(actor);
+				toRemove.add(actor);
 			}
+		}
+		for (Actor actor : toRemove) {
+			mort.locationsToSearch.remove(actor);
 		}
 
 		createSearchLocationsBasedOnVisibleAttackers();
