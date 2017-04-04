@@ -30,7 +30,7 @@ public class ActionLoiter extends Action {
 		if (!enabled)
 			return;
 		loiter(performer, target);
-		performer.actions.add(this);
+		performer.actions.add(this);if (sound != null)sound.play();
 	}
 
 	public void loiter(Actor actor, Square squareToLoiterOn) {

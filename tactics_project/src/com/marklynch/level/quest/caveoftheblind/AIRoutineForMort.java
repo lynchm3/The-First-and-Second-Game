@@ -53,7 +53,7 @@ public class AIRoutineForMort extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.miniDialogue = null;
-		this.actor.expressionImageTexture = null;
+		this.actor.thoughtBubbleImageTexture = null;
 		createSearchLocationsBasedOnSounds(Weapon.class);
 
 		// Remove search locations if outside jurisdiction

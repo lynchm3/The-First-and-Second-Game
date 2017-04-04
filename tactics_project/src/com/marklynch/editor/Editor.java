@@ -38,7 +38,7 @@ import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.level.quest.smallgame.QuestSmallGame;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.Expressions;
+import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Inventory;
@@ -410,7 +410,7 @@ public class Editor {
 	public void generateTestObjects() {
 
 		// Expressions
-		Expressions.loadExpressions();
+		ThoughtBubbles.loadExpressions();
 
 		// Add factions
 		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));

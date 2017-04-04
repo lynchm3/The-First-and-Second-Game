@@ -45,7 +45,7 @@ public class ActionPickUpAll extends Action {
 			if (gameObjectToLoot.owner == null)
 				gameObjectToLoot.owner = performer;
 		}
-		performer.actions.add(this);
+		performer.actions.add(this);if (sound != null)sound.play();
 
 	}
 

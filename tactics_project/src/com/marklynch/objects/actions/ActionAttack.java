@@ -90,6 +90,10 @@ public class ActionAttack extends Action {
 			Game.level.endTurn();
 
 		performer.actions.add(this);
+		if (sound != null)
+			sound.play();
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

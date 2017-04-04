@@ -45,7 +45,7 @@ public class ActionPickpocketAll extends Action {
 				gameObjectToLoot.owner = performer;
 
 		}
-		performer.actions.add(this);
+		performer.actions.add(this);if (sound != null)sound.play();
 
 	}
 

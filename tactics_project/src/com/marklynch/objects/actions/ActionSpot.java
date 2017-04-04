@@ -25,7 +25,7 @@ public class ActionSpot extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " spotted ", spotted }));
 
-		performer.actions.add(this);
+		performer.actions.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

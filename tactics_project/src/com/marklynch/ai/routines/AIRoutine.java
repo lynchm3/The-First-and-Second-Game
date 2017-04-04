@@ -7,8 +7,8 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.StructureRoom;
-import com.marklynch.objects.Expressions;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.MapUtil;
 
@@ -97,7 +97,7 @@ public class AIRoutine {
 									// Change status to fighting if u can see an
 									// enemy from
 									// new location
-									this.actor.expressionImageTexture = null;
+									this.actor.thoughtBubbleImageTexture = null;
 									this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 								}
 							}
@@ -143,7 +143,7 @@ public class AIRoutine {
 					&& this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor)) != null) {
 
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-				this.actor.expressionImageTexture = Expressions.questionMark;
+				this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 				AIRoutineUtils.moveTowardsTargetSquare(this.actor.locationsToSearch.get(actorToSearchFor));
 				moved = true;
 
@@ -165,7 +165,7 @@ public class AIRoutine {
 						&& this.actor.visibleFrom(attacker.squareGameObjectIsOn)) {
 					// Change status to fighting if u can see an enemy from
 					// new location
-					this.actor.expressionImageTexture = null;
+					this.actor.thoughtBubbleImageTexture = null;
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 				}
 			}
@@ -181,7 +181,7 @@ public class AIRoutine {
 		// DOORWAYS are my biggest issue here.
 
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-		this.actor.expressionImageTexture = Expressions.questionMark;
+		this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 		StructureRoom room = actor.squareGameObjectIsOn.structureRoomSquareIsIn;
 
 		// if (room != null) {
@@ -205,13 +205,9 @@ public class AIRoutine {
 			}
 		}
 
-		System.out.println("runSearchCooldown() moved 1 = " + moved);
-
 		if (!moved) {
 			Square randomSquare = AIRoutineUtils.getRandomAdjacentSquare(actor.squareGameObjectIsOn);
 			moved = AIRoutineUtils.moveTowardsTargetSquare(randomSquare);
-			System.out.println("runSearchCooldown() randomSquare = " + randomSquare);
-			System.out.println("runSearchCooldown() moved 2 = " + moved);
 		}
 		// }
 		return false;

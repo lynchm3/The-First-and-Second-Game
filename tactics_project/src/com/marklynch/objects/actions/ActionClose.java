@@ -46,7 +46,7 @@ public class ActionClose extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
-		performer.actions.add(this);
+		performer.actions.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

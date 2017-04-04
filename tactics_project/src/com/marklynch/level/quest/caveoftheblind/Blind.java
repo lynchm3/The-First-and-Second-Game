@@ -55,12 +55,8 @@ public class Blind extends Actor {
 		if (this == Game.level.player) {
 			return null;
 		}
-
-		System.out.println("performer.equipped = " + performer.equipped);
 		if (performer.equipped instanceof Weapon) {
 			Weapon weapon = (Weapon) performer.equipped;
-			System.out.println("weapon = " + weapon);
-			System.out.println("weapon.range = " + weapon.minRange + ", " + weapon.maxRange);
 			if (weapon.hasRange(performer.straightLineDistanceTo(this.squareGameObjectIsOn))) {
 				return new ActionAttack(performer, this);
 			}

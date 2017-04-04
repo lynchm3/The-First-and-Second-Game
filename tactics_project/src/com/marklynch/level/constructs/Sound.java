@@ -29,10 +29,13 @@ public class Sound {
 		this.loudness = loudness;
 
 		createDestinationSounds();
+
+	}
+
+	public void play() {
 		for (Square destinationSquare : destinationSquares) {
 			destinationSquare.sounds.add(this);
 		}
-
 	}
 
 	// ArrayList<Square> getAllSquaresWithinDistance(float maxDistance) {

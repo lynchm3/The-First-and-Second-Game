@@ -121,7 +121,7 @@ public class Actor extends GameObject {
 
 	public ArrayList<Action> actions = new ArrayList<Action>();
 
-	public Texture expressionImageTexture = null;
+	public Texture thoughtBubbleImageTexture = null;
 	public Square lastSquare = null;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
@@ -649,7 +649,7 @@ public class Actor extends GameObject {
 					Integer.MAX_VALUE, false);
 		}
 
-		if (expressionImageTexture != null) {
+		if (thoughtBubbleImageTexture != null) {
 			int expressionPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
 					+ drawOffsetX);
 			int expressionPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
@@ -663,7 +663,7 @@ public class Actor extends GameObject {
 
 			if (!this.squareGameObjectIsOn.visibleToPlayer)
 				alpha = 0.5f;
-			TextureUtils.drawTexture(expressionImageTexture, alpha, expressionPositionXInPixels,
+			TextureUtils.drawTexture(thoughtBubbleImageTexture, alpha, expressionPositionXInPixels,
 					expressionPositionXInPixels + expressionWidth, expressionPositionYInPixels,
 					expressionPositionYInPixels + expressionHeight);
 			// TextureUtils.skipNormals = false;

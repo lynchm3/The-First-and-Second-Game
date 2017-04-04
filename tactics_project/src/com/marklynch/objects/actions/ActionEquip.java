@@ -48,7 +48,7 @@ public class ActionEquip extends Action {
 			performer.equipped = gameObject;
 		}
 
-		performer.actions.add(this);
+		performer.actions.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

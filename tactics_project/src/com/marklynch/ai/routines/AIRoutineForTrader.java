@@ -40,7 +40,7 @@ public class AIRoutineForTrader extends AIRoutine {
 
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
-		this.actor.expressionImageTexture = null;
+		this.actor.thoughtBubbleImageTexture = null;
 		// createSearchLocationsBasedOnSounds();
 		// createSearchLocationsBasedOnVisibleAttackers();
 		// if (runFightRoutine())

@@ -53,7 +53,7 @@ public class ActionDie extends Action {
 			gameObjectInInventory.owner = null;
 		}
 
-		performer.actions.add(this);
+		performer.actions.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

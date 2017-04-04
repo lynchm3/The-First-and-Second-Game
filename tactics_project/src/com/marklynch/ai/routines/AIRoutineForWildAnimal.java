@@ -20,7 +20,7 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
-		this.actor.expressionImageTexture = null;
+		this.actor.thoughtBubbleImageTexture = null;
 		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();
 		if (runFightRoutine()) {

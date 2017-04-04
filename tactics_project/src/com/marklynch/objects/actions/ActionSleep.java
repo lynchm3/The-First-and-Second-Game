@@ -33,7 +33,7 @@ public class ActionSleep extends Action {
 			return;
 		moveTo(performer, target);
 
-		performer.actions.add(this);
+		performer.actions.add(this);if (sound != null)sound.play();
 	}
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {

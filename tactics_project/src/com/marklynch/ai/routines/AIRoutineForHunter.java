@@ -41,7 +41,7 @@ public class AIRoutineForHunter extends AIRoutine {
 	public void update() {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
-		this.actor.expressionImageTexture = null;
+		this.actor.thoughtBubbleImageTexture = null;
 		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();
 		if (runFightRoutine()) {

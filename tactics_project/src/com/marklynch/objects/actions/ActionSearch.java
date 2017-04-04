@@ -37,7 +37,7 @@ public class ActionSearch extends Action {
 
 		object.search();
 
-		performer.actions.add(this);
+		performer.actions.add(this);if (sound != null)sound.play();
 	}
 
 	@Override
