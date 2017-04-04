@@ -37,7 +37,7 @@ public abstract class Searchable extends GameObject {
 
 	}
 
-	public abstract void search();
+	public abstract boolean search();
 
 	// @Override
 	// public Searchable makeCopy(Square square, Actor owner) {

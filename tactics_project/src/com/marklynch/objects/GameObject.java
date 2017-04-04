@@ -660,11 +660,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public void attacked(Actor attacker) {
 		if (checkIfDestroyed()) {
 			if (this instanceof Actor) {
-				if (attacker.squareGameObjectIsOn.visibleToPlayer)
+				if (this.squareGameObjectIsOn.visibleToPlayer)
 					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", this }));
 				((Actor) this).faction.checkIfDestroyed();
 			} else {
-				if (attacker.squareGameObjectIsOn.visibleToPlayer)
+				if (this.squareGameObjectIsOn.visibleToPlayer)
 					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
 			}
 

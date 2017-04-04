@@ -40,8 +40,13 @@ public class DropHole extends Searchable {
 	}
 
 	@Override
-	public void search() {
-		new ActionLootAll(Game.level.player, this).perform();
+	public boolean search() {
+		if (inventory.size() == 0) {
+			return false;
+		} else {
+			new ActionLootAll(Game.level.player, this).perform();
+			return true;
+		}
 	}
 
 	@Override

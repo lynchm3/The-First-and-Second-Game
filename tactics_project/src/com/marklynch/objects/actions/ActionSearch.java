@@ -35,9 +35,15 @@ public class ActionSearch extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", object }));
 
-		object.search();
+		boolean foundSomething = object.search();
 
-		performer.actions.add(this);if (sound != null)sound.play();
+		if (foundSomething == false)
+			if (performer.squareGameObjectIsOn.visibleToPlayer)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " found nothing" }));
+
+		performer.actions.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override
