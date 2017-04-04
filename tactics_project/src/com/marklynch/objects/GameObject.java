@@ -217,14 +217,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
-
 			this.canShareSquare = true;
-
-			// if (squareGameObjectIsOn != null) {
-			// this.squareGameObjectIsOn.inventory.remove(this);
-			// }
-			// Game.level.inanimateObjects.remove(this);
-
+			this.blocksLineOfSight = false;
+			persistsWhenCantBeSeen = false;
 			return true;
 		}
 		return false;
