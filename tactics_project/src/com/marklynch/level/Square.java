@@ -17,6 +17,7 @@ import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.InventoryParent;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
@@ -29,7 +30,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class Square extends AStarNode implements ActionableInWorld {
+public class Square extends AStarNode implements ActionableInWorld, InventoryParent {
 
 	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
@@ -75,8 +76,10 @@ public class Square extends AStarNode implements ActionableInWorld {
 		loadImages();
 		weaponsThatCanAttack = new Vector<Weapon>();
 		this.inventory = inventory;
-		if (this.inventory != null)
+		if (this.inventory != null) {
+			this.inventory.parent = this;
 			this.inventory.square = this;
+		}
 		showInventory = true;
 	}
 
@@ -454,5 +457,10 @@ public class Square extends AStarNode implements ActionableInWorld {
 		} else {
 			return Game.level.squares[this.xInGrid][this.yInGrid + 1];
 		}
+	}
+
+	@Override
+	public void inventoryChanged() {
+
 	}
 }

@@ -52,7 +52,10 @@ public class ActionLootAll extends Action {
 			if (gameObjectToLoot.owner == null)
 				gameObjectToLoot.owner = performer;
 		}
-		performer.actions.add(this);if (sound != null)sound.play();
+		container.looted();
+		performer.actions.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

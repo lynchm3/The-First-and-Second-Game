@@ -658,7 +658,6 @@ public class Level {
 				player.getAttackers().remove(actor);
 			}
 
-			System.out.println("player.clearActions()");
 			player.clearActions();
 		}
 

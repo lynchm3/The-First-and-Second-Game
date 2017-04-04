@@ -10,7 +10,7 @@ import com.marklynch.objects.units.Actor;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class GameObjectTemplate {
+public class GameObjectTemplate implements InventoryParent {
 
 	public String name = "";
 	public float totalHealth = 0;
@@ -56,6 +56,7 @@ public class GameObjectTemplate {
 		this.imageTexturePath = imageTexturePath;
 		this.squareGameObjectIsOn = squareGameObjectIsOn;
 		this.inventory = inventory;
+		this.inventory.parent = this;
 		this.showInventory = showInventory;
 		this.canShareSquare = canShareSquare;
 		this.fitsInInventory = fitsInInventory;
@@ -111,5 +112,9 @@ public class GameObjectTemplate {
 
 		this.imageTexture = getGlobalImage(imageTexturePath);
 
+	}
+
+	@Override
+	public void inventoryChanged() {
 	}
 }

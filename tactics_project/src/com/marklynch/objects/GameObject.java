@@ -670,4 +670,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		}
 	}
+
+	public void looted() {
+
+	}
 }

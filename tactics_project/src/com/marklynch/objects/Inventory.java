@@ -70,6 +70,8 @@ public class Inventory {
 	public ArrayList<Button> buttonsSort;
 	public ArrayList<Button> buttonsFilter;
 
+	public InventoryParent parent;
+
 	public Inventory(GameObject... gameObjects) {
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
@@ -332,6 +334,9 @@ public class Inventory {
 
 			// pick up date for sorting by newest
 			gameObject.pickUpdateDateTime = new Date();
+
+			if (parent != null)
+				parent.inventoryChanged();
 		}
 	}
 
@@ -339,6 +344,8 @@ public class Inventory {
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
 			gameObject.inventorySquareGameObjectIsOn = null;
+			if (parent != null)
+				parent.inventoryChanged();
 		}
 	}
 

@@ -29,6 +29,10 @@ public class Chest extends Openable {
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner,
 				locked, keys);
+		if (locked)
+			this.name = baseName + " (locked)";
+		else if (this.inventory.size() == 0)
+			this.name = baseName + " (empty)";
 
 	}
 
@@ -86,6 +90,35 @@ public class Chest extends Openable {
 	@Override
 	public void close() {
 		open = false;
+	}
+
+	@Override
+	public void lock() {
+		this.name = baseName + " (locked)";
+		locked = true;
+	}
+
+	@Override
+	public void unlock() {
+		if (this.inventory.size() == 0)
+			this.name = baseName + " (empty)";
+		else
+			this.name = baseName;
+		locked = false;
+	}
+
+	@Override
+	public void looted() {
+	}
+
+	@Override
+	public void inventoryChanged() {
+		if (locked)
+			this.name = baseName + " (locked)";
+		else if (this.inventory.size() == 0)
+			this.name = baseName + " (empty)";
+		else
+			this.name = baseName;
 	}
 
 	public Chest makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
