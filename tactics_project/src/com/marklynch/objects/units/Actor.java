@@ -956,6 +956,14 @@ public class Actor extends GameObject {
 		actions.clear();
 	}
 
+	@Override
+	public void attacked(Actor attacker) {
+		super.attacked(attacker);
+		attacker.addAttackerForThisAndGroupMembers(this);
+		attacker.addAttackerForNearbyFactionMembersIfVisible(this);
+		this.addAttackerForNearbyFactionMembersIfVisible(attacker);
+	}
+
 	// public static void calculateReachableSquares() {
 	// // Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 	// // Game.level.activeActor.calculateReachableSquares(Game.level.squares);

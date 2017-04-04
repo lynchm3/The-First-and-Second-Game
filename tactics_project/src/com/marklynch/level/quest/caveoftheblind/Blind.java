@@ -10,6 +10,7 @@ import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionScream;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -95,6 +96,12 @@ public class Blind extends Actor {
 		// }
 
 		return actions;
+	}
+
+	@Override
+	public void attacked(Actor attacker) {
+		super.attacked(attacker);
+		new ActionScream(this).perform();
 	}
 
 	public Blind makeCopy(Square square, Faction faction, StructureRoom roomLivingIn) {

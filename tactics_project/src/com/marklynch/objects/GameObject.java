@@ -21,6 +21,7 @@ import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
@@ -659,5 +660,19 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			}
 		}
 		return true;
+	}
+
+	public void attacked(Actor attacker) {
+		if (checkIfDestroyed()) {
+			if (this instanceof Actor) {
+				if (attacker.squareGameObjectIsOn.visibleToPlayer)
+					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", this }));
+				((Actor) this).faction.checkIfDestroyed();
+			} else {
+				if (attacker.squareGameObjectIsOn.visibleToPlayer)
+					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
+			}
+
+		}
 	}
 }

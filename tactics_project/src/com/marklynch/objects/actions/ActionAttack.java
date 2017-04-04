@@ -36,17 +36,9 @@ public class ActionAttack extends Action {
 			return;
 
 		Weapon weapon = (Weapon) performer.equipped;
-
-		// performer.attack(targetGameObject, false);
-
-		// GameObject targetGameObject;// = target;
-
-		if (target instanceof Actor) {
-			performer.addAttackerForThisAndGroupMembers((Actor) target);
-			performer.addAttackerForNearbyFactionMembersIfVisible((Actor) target);
-			((Actor) target).addAttackerForNearbyFactionMembersIfVisible(performer);
-		}
 		target.remainingHealth -= weapon.getEffectiveSlashDamage();
+		target.attacked(performer);
+
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 		String attackTypeString;
@@ -57,22 +49,6 @@ public class ActionAttack extends Action {
 
 					performer, " " + attackTypeString + " ", target, " with ", performer.equipped.imageTexture,
 					" for " + weapon.getEffectiveSlashDamage() + " damage" }));
-
-		Actor actor = null;
-		if (target instanceof Actor)
-			actor = (Actor) target;
-
-		if (target.checkIfDestroyed()) {
-			if (target instanceof Actor) {
-				if (performer.squareGameObjectIsOn.visibleToPlayer)
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " killed ", target }));
-				((Actor) target).faction.checkIfDestroyed();
-			} else {
-				if (performer.squareGameObjectIsOn.visibleToPlayer)
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " destroyed a ", target }));
-			}
-
-		}
 
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
@@ -90,8 +66,6 @@ public class ActionAttack extends Action {
 			Game.level.endTurn();
 
 		performer.actions.add(this);
-		if (sound != null)
-			sound.play();
 		if (sound != null)
 			sound.play();
 	}
