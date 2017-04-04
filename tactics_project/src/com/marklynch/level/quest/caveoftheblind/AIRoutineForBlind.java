@@ -9,8 +9,8 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.BrokenGlass;
-import com.marklynch.objects.Expressions;
 import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.ActionScream;
 import com.marklynch.objects.actions.ActionTakeBite;
 import com.marklynch.objects.tools.Bell;
@@ -51,11 +51,12 @@ public class AIRoutineForBlind extends AIRoutine {
 
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
-		this.actor.expressionImageTexture = null;
+		this.actor.thoughtBubbleImageTexture = null;
 
 		// hungry?
 		if (timeSinceEating > 50) {
-			// find a meatchunk
+
+			// find a meatchunk within smelling distance
 			MeatChunk tempMeatChunk = (MeatChunk) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(MeatChunk.class, 3,
 					true, false, true, false);
 			if (tempMeatChunk != null) {
@@ -64,7 +65,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				bellSound = null;
 				blind.locationsToSearch.clear();
 				targetSquare = null;
-				this.actor.expressionImageTexture = this.meatChunk.imageTexture;
+				this.actor.thoughtBubbleImageTexture = this.meatChunk.imageTexture;
 			} else if (this.meatChunk != null) { // smelt a meatchunk but
 													// nooooope
 				if (this.meatChunk.squareGameObjectIsOn != this.originalMeatChunkSquare) {
@@ -78,6 +79,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				}
 			}
 
+			// There's a meatchunk within smelling distance
 			if (meatChunk != null) {
 				this.blind.activityDescription = "Eating!";
 
@@ -85,7 +87,7 @@ public class AIRoutineForBlind extends AIRoutine {
 					failedToGetPathToFoodCount = 0;
 				} else {
 					failedToGetPathToFoodCount++;
-					blind.expressionImageTexture = Expressions.questionMark;
+					blind.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 					if (failedToGetPathToFoodCount == 10) {
 						failedToGetPathToFoodCount = 0;
 						if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)
@@ -113,19 +115,22 @@ public class AIRoutineForBlind extends AIRoutine {
 			if (meatChunk == null) {
 				Sound tempBellSound = getSoundFromSourceType(Bell.class);
 				if (tempBellSound != null) {
+					System.out.println("FOUND A BELL SOUND");
 					bellSound = tempBellSound;
 					blind.locationsToSearch.clear();
 					targetSquare = null;
 				}
 			}
 
+			// There's a bell sound
 			if (bellSound != null) {
 				this.blind.activityDescription = "Dinner time!";
+				this.actor.thoughtBubbleImageTexture = ThoughtBubbles.MEAT_CHUNK;
 				if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare)) {
 					failedToGetPathToBellCount = 0;
 				} else {
 					failedToGetPathToBellCount++;
-					blind.expressionImageTexture = Expressions.questionMark;
+					blind.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 					if (failedToGetPathToBellCount == 10) {
 						failedToGetPathToBellCount = 0;
 						if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)
@@ -136,11 +141,12 @@ public class AIRoutineForBlind extends AIRoutine {
 					}
 				}
 				if (bellSound != null && blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
+					System.out.println("DISSAPOINTMENT");
+					this.blind.activityDescription = "Hangry";
 					failedToGetPathToBellCount = 0;
 					if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)
 						this.blind.roomLivingIn = this.blind.squareGameObjectIsOn.structureRoomSquareIsIn;
 					bellSound = null;
-					this.blind.activityDescription = "Hangry";
 					hangry = true;
 				}
 				return;
@@ -149,7 +155,7 @@ public class AIRoutineForBlind extends AIRoutine {
 			meatChunk = null;
 			hangry = false;
 			timeSinceEating++;
-			this.actor.expressionImageTexture = null;
+			this.actor.thoughtBubbleImageTexture = null;
 		}
 
 		addNonBlindToAttackersList();
@@ -166,7 +172,6 @@ public class AIRoutineForBlind extends AIRoutine {
 		}
 
 		if (runSearchRoutine()) {
-			System.out.println("Run search routine");
 			// createSearchLocationsBasedOnSounds();
 			searchCooldown = 10;
 			addNonBlindToAttackersList();
@@ -175,7 +180,6 @@ public class AIRoutineForBlind extends AIRoutine {
 		}
 
 		if (searchCooldown > 0) {
-			System.out.println("Run search cooldown");
 			runSearchCooldown();
 			searchCooldown--;
 			return;
