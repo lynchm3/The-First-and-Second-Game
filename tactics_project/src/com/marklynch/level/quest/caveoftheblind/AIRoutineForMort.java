@@ -8,10 +8,12 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionRing;
+import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -307,7 +309,7 @@ public class AIRoutineForMort extends AIRoutine {
 				return true;
 			} else if (unresolvedIllegalMining.size() > 0) {
 				actor.miniDialogue = "MY ORES!";
-				// new ActionThrow(actor, rock, criminal);
+				new ActionThrow(actor, criminal, Templates.BOULDER.makeCopy(null, null)).perform();
 				// System.out.println("stolenItems.size = " +
 				// stolenItems.size());
 				for (GameObject stolenItem : stolenItems) {

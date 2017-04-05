@@ -53,7 +53,7 @@ public class Projectile {
 	}
 
 	public void loadImages() {
-		imageTexture = getGlobalImage("imagePath");
+		imageTexture = getGlobalImage(imagePath);
 	}
 
 	public void update(float delta) {

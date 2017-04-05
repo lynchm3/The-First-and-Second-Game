@@ -5,22 +5,23 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
-import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionAttack extends Action {
+public class ActionThrow extends Action {
 
 	public static final String ACTION_NAME = "Attack";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
+	GameObject object;
 
 	// Default for hostiles
-	public ActionAttack(Actor attacker, GameObject target) {
+	public ActionThrow(Actor performer, GameObject target, GameObject object) {
 		super(ACTION_NAME);
-		this.performer = attacker;
+		this.performer = performer;
 		this.target = target;
+		this.object = object;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -35,9 +36,9 @@ public class ActionAttack extends Action {
 		if (!enabled)
 			return;
 
-		Weapon weapon = (Weapon) performer.equipped;
-		target.remainingHealth -= weapon.getEffectiveSlashDamage();
-		target.attacked(performer);
+		float damage = 5;
+		target.remainingHealth -= damage;
+		// target.attacked(performer);
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
@@ -45,17 +46,11 @@ public class ActionAttack extends Action {
 		attackTypeString = "attacked ";
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] {
-
-					performer, " " + attackTypeString + " ", target, " with ", performer.equipped.imageTexture,
-					" for " + weapon.getEffectiveSlashDamage() + " damage" }));
+			Game.level.logOnScreen(new ActivityLog(
+					new Object[] { performer, " threw a ", object, " at ", target, " for " + damage + " damage" }));
 
 		// shoot projectile
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			Game.level.projectiles.add(new Projectile("Arrow", performer, target, 5f, true, "hunter.png"));
-		} else {
-			performer.showPow(target);
-		}
+		Game.level.projectiles.add(new Projectile(object.name, performer, target, 5f, true, "hunter.png"));
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
@@ -73,17 +68,10 @@ public class ActionAttack extends Action {
 	@Override
 	public boolean check() {
 
+		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 10)
+			return false;
+
 		if (!performer.visibleFrom(target.squareGameObjectIsOn))
-			return false;
-
-		Weapon weapon = null;
-		if (performer.equipped instanceof Weapon) {
-			weapon = (Weapon) performer.equipped;
-		} else {
-			return false;
-		}
-
-		if (!weapon.hasRange(performer.straightLineDistanceTo(target.squareGameObjectIsOn)))
 			return false;
 
 		return true;
@@ -101,10 +89,12 @@ public class ActionAttack extends Action {
 	public Sound createSound() {
 
 		// Sound
-		float loudness = target.soundWhenHit * performer.equipped.soundWhenHitting;
-		if (performer.equipped != null)
-			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
-					this.getClass());
+		// float loudness = target.soundWhenHit *
+		// performer.equipped.soundWhenHitting;
+		// if (performer.equipped != null)
+		// return new Sound(performer, performer.equipped,
+		// target.squareGameObjectIsOn, loudness, legal,
+		// this.getClass());
 		return null;
 	}
 
