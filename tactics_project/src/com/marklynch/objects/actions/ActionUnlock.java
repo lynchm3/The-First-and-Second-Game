@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
@@ -44,7 +45,16 @@ public class ActionUnlock extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
+
+		if (!legal) {
+			Crime crime = new Crime(this, this.performer, openable.owner, 2);
+			this.performer.crimesPerformedThisTurn.add(crime);
+			this.performer.crimesPerformedInLifetime.add(crime);
+			notifyWitnessesOfCrime(crime);
+		}
 	}
 
 	@Override

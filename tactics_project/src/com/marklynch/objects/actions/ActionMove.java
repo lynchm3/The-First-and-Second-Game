@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.objects.Door;
@@ -76,7 +77,26 @@ public class ActionMove extends Action {
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
+
+		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
+			Game.level.endTurn();
+
+		if (!legal) {
+
+			// Actor victim;
+			// if (object instanceof Actor)
+			// victim = (Actor) object;
+			// else
+			// victim = target.owner;
+
+			Crime crime = new Crime(this, this.performer, null, 1);
+			this.performer.crimesPerformedThisTurn.add(crime);
+			this.performer.crimesPerformedInLifetime.add(crime);
+			notifyWitnessesOfCrime(crime);
+		}
 	}
 
 	private void move(Actor actor, Square square) {

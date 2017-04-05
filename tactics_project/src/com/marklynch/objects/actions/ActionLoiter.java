@@ -2,6 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.units.Actor;
 
@@ -30,13 +31,29 @@ public class ActionLoiter extends Action {
 		if (!enabled)
 			return;
 		loiter(performer, target);
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
-	}
-
-	public void loiter(Actor actor, Square squareToLoiterOn) {
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
+
+		if (!legal) {
+
+			// Actor victim;
+			// if (object instanceof Actor)
+			// victim = (Actor) object;
+			// else
+			// victim = target.owner;
+
+			Crime crime = new Crime(this, this.performer, null, 1);
+			this.performer.crimesPerformedThisTurn.add(crime);
+			this.performer.crimesPerformedInLifetime.add(crime);
+			notifyWitnessesOfCrime(crime);
+		}
+	}
+
+	public void loiter(Actor actor, Square squareToLoiterOn) {
 	}
 
 	@Override

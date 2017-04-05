@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -12,11 +13,11 @@ public class ActionSmash extends Action {
 	public static final String ACTION_NAME = "Smash";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
-	GameObject performer;
+	Actor performer;
 	GameObject target;
 
 	// Default for hostiles
-	public ActionSmash(GameObject attacker, GameObject target) {
+	public ActionSmash(Actor attacker, GameObject target) {
 		super(ACTION_NAME);
 		this.performer = attacker;
 		this.target = target;
@@ -46,15 +47,19 @@ public class ActionSmash extends Action {
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 
-		if (performer instanceof Actor)
-			((Actor) performer).actionsPerformedThisTurn.add(this);
+		if (!legal) {
+			Crime crime = new Crime(this, this.performer, target.owner, 1);
+			this.performer.crimesPerformedThisTurn.add(crime);
+			this.performer.crimesPerformedInLifetime.add(crime);
+			notifyWitnessesOfCrime(crime);
+		}
 	}
 
 	@Override
 	public boolean check() {
 
 		if (performer instanceof Actor) {
-			Actor actor = ((Actor) performer);
+			Actor actor = (performer);
 
 			Weapon weapon = null;
 			if (actor.equipped instanceof Weapon) {
@@ -82,7 +87,7 @@ public class ActionSmash extends Action {
 	public Sound createSound() {
 
 		if (performer instanceof Actor)
-			return new Sound((Actor) performer, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
+			return new Sound(performer, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
 		else
 			return new Sound(null, target, target.squareGameObjectIsOn, 20, legal, this.getClass());
 

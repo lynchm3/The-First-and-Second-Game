@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
@@ -70,6 +71,20 @@ public class ActionAttack extends Action {
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
+
+		if (!legal) {
+
+			Actor victim;
+			if (target instanceof Actor)
+				victim = (Actor) target;
+			else
+				victim = target.owner;
+
+			Crime crime = new Crime(this, this.performer, victim, 3);
+			this.performer.crimesPerformedThisTurn.add(crime);
+			this.performer.crimesPerformedInLifetime.add(crime);
+			notifyWitnessesOfCrime(crime);
+		}
 	}
 
 	@Override

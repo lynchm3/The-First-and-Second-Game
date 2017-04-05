@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
@@ -11,7 +12,7 @@ import mdesl.graphics.Texture;
 public class Projectile {
 
 	public String name;
-	public GameObject shooter;
+	public Actor shooter;
 	public GameObject target;
 	float x, y, originX, originY, targetX, targetY, speedX, speedY;
 	boolean onTarget;
@@ -20,7 +21,7 @@ public class Projectile {
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
 
-	public Projectile(String name, GameObject shooter, GameObject target, GameObject projectileObject, float speed,
+	public Projectile(String name, Actor shooter, GameObject target, GameObject projectileObject, float speed,
 			boolean onTarget) {
 		super();
 
