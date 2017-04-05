@@ -1,5 +1,7 @@
 package com.marklynch.objects.actions;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
@@ -58,7 +60,14 @@ public abstract class Action {
 							.straightLineDistanceTo(crime.performer.squareGameObjectIsOn) <= potentialWitness.sight
 							&& potentialWitness.visibleFrom(crime.performer.squareGameObjectIsOn)) {
 						crime.witnesses.add(potentialWitness);
-						potentialWitness.crimesWitnessed.add(crime);
+						ArrayList<Crime> crimes = potentialWitness.crimesWitnessed.get(crime.performer);
+						if (crimes != null) {
+							crimes.add(crime);
+						} else {
+							crimes = new ArrayList<Crime>();
+							crimes.add(crime);
+							potentialWitness.crimesWitnessed.put(crime.performer, crimes);
+						}
 					}
 				}
 			}

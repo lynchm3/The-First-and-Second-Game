@@ -39,7 +39,7 @@ public class ActionDrop extends Action {
 		// receiver.inventory.add(object);
 		square.inventory.add(object);
 		if (performer instanceof Actor)
-			((Actor) performer).actions.add(this);
+			((Actor) performer).actionsPerformedThisTurn.add(this);
 	}
 
 	@Override

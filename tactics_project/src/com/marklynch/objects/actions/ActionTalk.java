@@ -36,7 +36,7 @@ public class ActionTalk extends Action {
 
 		}
 
-		performer.actions.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

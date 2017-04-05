@@ -53,7 +53,7 @@ public class ActionLootAll extends Action {
 				gameObjectToLoot.owner = performer;
 		}
 		container.looted();
-		performer.actions.add(this);
+		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

@@ -39,7 +39,7 @@ public class ActionGive extends Action {
 		if (receiver instanceof Actor) {
 			object.owner = (Actor) receiver;
 		}
-		performer.actions.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

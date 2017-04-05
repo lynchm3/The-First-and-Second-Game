@@ -32,7 +32,7 @@ public class ActionRead extends Action {
 			Game.level.conversation = conversation;
 		}
 
-		performer.actions.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

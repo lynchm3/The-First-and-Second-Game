@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLock;
@@ -92,11 +93,11 @@ public class AIRoutineForMort extends AIRoutine {
 			return;
 		}
 
-		// if (runCrimeReactionRoutine()) {
-		// // createSearchLocationsBasedOnSounds();
-		// createSearchLocationsBasedOnVisibleAttackers();
-		// return;
-		// }
+		if (runCrimeReactionRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
 
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
@@ -276,5 +277,21 @@ public class AIRoutineForMort extends AIRoutine {
 
 		return true;
 
+	}
+
+	private boolean runCrimeReactionRoutine() {
+		for (Actor criminal : actor.crimesWitnessed.keySet()) {
+			int accumulatedSeverity = 0;
+			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
+				accumulatedSeverity += crime.severity;
+				if (accumulatedSeverity >= 5) {
+					actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+					actor.addAttackerForThisAndGroupMembers(criminal);
+				} else if (accumulatedSeverity > 0) {
+					// DUNNO
+				}
+			}
+		}
+		return false;
 	}
 }

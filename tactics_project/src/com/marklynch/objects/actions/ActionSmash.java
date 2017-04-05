@@ -47,7 +47,7 @@ public class ActionSmash extends Action {
 			Game.level.endTurn();
 
 		if (performer instanceof Actor)
-			((Actor) performer).actions.add(this);
+			((Actor) performer).actionsPerformedThisTurn.add(this);
 	}
 
 	@Override

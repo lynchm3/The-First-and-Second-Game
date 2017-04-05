@@ -45,7 +45,7 @@ public class ActionRing extends Action {
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
-		performer.actions.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

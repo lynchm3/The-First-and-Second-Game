@@ -50,7 +50,7 @@ public class ActionLock extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
-		performer.actions.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

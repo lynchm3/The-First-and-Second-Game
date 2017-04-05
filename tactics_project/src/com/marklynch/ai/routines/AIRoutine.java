@@ -253,4 +253,9 @@ public class AIRoutine {
 		return false;
 	}
 
+	private boolean runCrimeReactionRoutine() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -38,7 +38,7 @@ public class ActionPickUp extends Action {
 		performer.inventory.add(object);
 		if (object.owner == null)
 			object.owner = performer;
-		performer.actions.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
 	}
 
 	@Override

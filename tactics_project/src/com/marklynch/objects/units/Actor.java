@@ -3,6 +3,7 @@ package com.marklynch.objects.units;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Vector;
 
 import org.lwjgl.util.Point;
@@ -120,12 +121,14 @@ public class Actor extends GameObject {
 	public ArrayList<Square> squaresVisibleToPlayerOnlyPlayer = new ArrayList<Square>();
 	public HashMap<Actor, Square> locationsToSearch = new HashMap<Actor, Square>();
 
-	public ArrayList<Action> actions = new ArrayList<Action>();
+	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
+	public ArrayList<Crime> crimesPerformedThisTurn = new ArrayList<Crime>();
 
 	public Texture thoughtBubbleImageTexture = null;
 	public Square lastSquare = null;
 
-	public ArrayList<Crime> crimesWitnessed;
+	// public ArrayList<Crime> crimesWitnessed;
+	public Map<Actor, ArrayList<Crime>> crimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
@@ -949,14 +952,15 @@ public class Actor extends GameObject {
 	}
 
 	public void clearActions() {
-		for (Action action : actions) {
+		for (Action action : actionsPerformedThisTurn) {
 			if (action.sound != null) {
 				for (Square destinationSquare : action.sound.destinationSquares) {
 					destinationSquare.sounds.remove(action.sound);
 				}
 			}
 		}
-		actions.clear();
+		actionsPerformedThisTurn.clear();
+		crimesPerformedThisTurn.clear();
 	}
 
 	@Override

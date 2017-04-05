@@ -65,7 +65,7 @@ public class ActionAttack extends Action {
 		if (performer == Game.level.player)
 			Game.level.endTurn();
 
-		performer.actions.add(this);
+		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

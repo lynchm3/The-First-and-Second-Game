@@ -67,12 +67,14 @@ public class ActionMine extends Action {
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
-		performer.actions.add(this);
+		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 
 		if (!legal) {
-			notifyWitnessesOfCrime(new Crime(this, this.performer, this.target.owner, 1));
+			Crime crime = new Crime(this, this.performer, this.target.owner, 2, ore);
+			this.performer.crimesPerformedThisTurn.add(crime);
+			notifyWitnessesOfCrime(crime);
 		}
 	}
 
