@@ -42,6 +42,46 @@ public class AIRoutine {
 
 	}
 
+	// public void witnessCrimes() {
+	//
+	// }
+	//
+	// public void updateListOfCrimesWitnessed() {
+	// int searchBoxX1 = actor.squareGameObjectIsOn.xInGrid - actor.sight;
+	// if (searchBoxX1 < 0)
+	// searchBoxX1 = 0;
+	//
+	// int searchBoxX2 = actor.squareGameObjectIsOn.xInGrid + actor.sight;
+	// if (searchBoxX2 > Game.level.width - 1)
+	// searchBoxX2 = Game.level.width - 1;
+	//
+	// int searchBoxY1 = actor.squareGameObjectIsOn.yInGrid - actor.sight;
+	// if (searchBoxY1 < 0)
+	// searchBoxY1 = 0;
+	//
+	// int searchBoxY2 = actor.squareGameObjectIsOn.yInGrid + actor.sight;
+	// if (searchBoxY2 > Game.level.height - 1)
+	// searchBoxY2 = Game.level.height - 1;
+	//
+	// for (int i = searchBoxX1; i <= searchBoxX2; i++) {
+	// for (int j = searchBoxY1; j <= searchBoxY2; j++) {
+	// Actor actor = (Actor)
+	// Game.level.squares[i][j].inventory.getGameObjectOfClass(Actor.class);
+	// if (actor != null) {
+	// for (Action action : actor.actions) {
+	// if (action.legal == false) {
+	// if (this.actor.straightLineDistanceTo(actor.squareGameObjectIsOn) <=
+	// this.actor.sight
+	// && this.actor.visibleFrom(actor.squareGameObjectIsOn)) {
+	//
+	// }
+	// }
+	// }
+	// }
+	// }
+	// }
+	// }
+
 	public void createSearchLocationsBasedOnSounds(Class... classes) {
 
 		ArrayList<Class> classesArrayList = new ArrayList<Class>(Arrays.asList(classes));

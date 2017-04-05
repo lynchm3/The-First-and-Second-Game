@@ -15,6 +15,7 @@ import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AStarNode;
 import com.marklynch.ai.utils.AStarSearch;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.conversation.Conversation;
@@ -123,6 +124,8 @@ public class Actor extends GameObject {
 
 	public Texture thoughtBubbleImageTexture = null;
 	public Square lastSquare = null;
+
+	public ArrayList<Crime> crimesWitnessed;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,

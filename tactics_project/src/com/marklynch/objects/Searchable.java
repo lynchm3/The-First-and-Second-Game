@@ -11,6 +11,8 @@ import mdesl.graphics.Color;
 
 public abstract class Searchable extends GameObject {
 
+	ArrayList<Object> EFFECTS;
+
 	public Searchable(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,

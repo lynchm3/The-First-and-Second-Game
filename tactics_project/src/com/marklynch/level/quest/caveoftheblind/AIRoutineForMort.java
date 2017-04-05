@@ -54,6 +54,7 @@ public class AIRoutineForMort extends AIRoutine {
 		this.actor.activityDescription = null;
 		this.actor.miniDialogue = null;
 		this.actor.thoughtBubbleImageTexture = null;
+
 		createSearchLocationsBasedOnSounds(Weapon.class);
 
 		// Remove search locations if outside jurisdiction
@@ -70,6 +71,7 @@ public class AIRoutineForMort extends AIRoutine {
 			mort.locationsToSearch.remove(actor);
 		}
 
+		// updateListOfCrimesWitnessed();
 		createSearchLocationsBasedOnVisibleAttackers();
 
 		// Player attacker and under half health - ring bell
@@ -89,6 +91,12 @@ public class AIRoutineForMort extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
+
+		// if (runCrimeReactionRoutine()) {
+		// // createSearchLocationsBasedOnSounds();
+		// createSearchLocationsBasedOnVisibleAttackers();
+		// return;
+		// }
 
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();

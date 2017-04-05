@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Templates;
@@ -66,7 +67,13 @@ public class ActionMine extends Action {
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
-		performer.actions.add(this);if (sound != null)sound.play();
+		performer.actions.add(this);
+		if (sound != null)
+			sound.play();
+
+		if (!legal) {
+			notifyWitnessesOfCrime(new Crime(this, this.performer, this.target.owner, 1));
+		}
 	}
 
 	@Override
