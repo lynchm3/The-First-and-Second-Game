@@ -44,10 +44,13 @@ public class ActionDrop extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.straightLineDistanceTo(square) < 2) {
-			return true;
+		if (performer.straightLineDistanceTo(square) > 1) {
+			return false;
 		}
-		return false;
+		if (!performer.inventory.contains(object)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

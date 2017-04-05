@@ -44,7 +44,11 @@ public class ActionMine extends Action {
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
-		Junk ore = Templates.ORE.makeCopy(null, performer);
+		Actor oreOwner = performer;
+		if (target.owner != null)
+			oreOwner = target.owner;
+
+		Junk ore = Templates.ORE.makeCopy(null, oreOwner);
 		performer.inventory.add(ore);
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
@@ -74,6 +78,7 @@ public class ActionMine extends Action {
 		if (!legal) {
 			Crime crime = new Crime(this, this.performer, this.target.owner, 2, ore);
 			this.performer.crimesPerformedThisTurn.add(crime);
+			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
 		}
 	}

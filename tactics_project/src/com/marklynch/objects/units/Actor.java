@@ -123,6 +123,7 @@ public class Actor extends GameObject {
 
 	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
 	public ArrayList<Crime> crimesPerformedThisTurn = new ArrayList<Crime>();
+	public ArrayList<Crime> crimesPerformedInLifetime = new ArrayList<Crime>();
 
 	public Texture thoughtBubbleImageTexture = null;
 	public Square lastSquare = null;
@@ -492,8 +493,13 @@ public class Actor extends GameObject {
 	@Override
 	public boolean checkIfDestroyed() {
 		if (remainingHealth <= 0) {
-
+			super.checkIfDestroyed();
 			new ActionDie(this, squareGameObjectIsOn).perform();
+			for (Crime crime : crimesPerformedInLifetime) {
+				for (Actor witness : crime.witnesses) {
+					witness.crimesWitnessed.remove(this);
+				}
+			}
 			return true;
 		}
 		return false;
