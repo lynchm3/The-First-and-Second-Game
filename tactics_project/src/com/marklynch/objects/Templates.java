@@ -137,6 +137,11 @@ public class Templates {
 	public static final GameObject BOULDER = new GameObject("Boulder", 1000, "boulder.png", null, new Inventory(),
 			false, false, false, false, true, true, 1, 1, 0.5f, 0.5f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
 			0f, null);
+	public static final Arrow ARROW = new Arrow("Arrow", 1000, "arrow.png", null, new Inventory(), false, true, true,
+			false, false, false, 0.32f, 0.16f, 0.5f, 0.5f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
+	public static final GameObject ROCK = new GameObject("Stone", 1000, "rock.png", null, new Inventory(), false, true,
+			true, false, false, false, 0.32f, 0.32f, 0.5f, 0.5f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+			null);
 
 	// LARGE CONTAINER
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("Dumpster", 5, "skip_with_shadow.png",

@@ -1,13 +1,11 @@
 package com.marklynch.objects.weapons;
 
-import static com.marklynch.utils.ResourceUtils.getGlobalImage;
-
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
-import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Projectile {
@@ -20,9 +18,10 @@ public class Projectile {
 	String imagePath;
 	Texture imageTexture;
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
+	GameObject projectileObject;
 
-	public Projectile(String name, GameObject shooter, GameObject target, float speed, boolean onTarget,
-			String imagePath) {
+	public Projectile(String name, GameObject shooter, GameObject target, GameObject projectileObject, float speed,
+			boolean onTarget) {
 		super();
 
 		if (shooter == Game.level.player) {
@@ -34,6 +33,7 @@ public class Projectile {
 		this.name = name;
 		this.shooter = shooter;
 		this.target = target;
+		this.projectileObject = projectileObject;
 
 		this.x = this.originX = shooter.getCenterX();
 		this.y = this.originY = shooter.getCenterY();
@@ -47,13 +47,11 @@ public class Projectile {
 		this.speedX = (distanceToCoverX / totalDistanceToCover) * 3;
 		this.speedY = (distanceToCoverY / totalDistanceToCover) * 3;
 
-		this.onTarget = onTarget;
-		this.imagePath = imagePath;
-		loadImages();
-	}
+		if (distanceToCoverX < 0) {
+			projectileObject.backwards = true;
+		}
 
-	public void loadImages() {
-		imageTexture = getGlobalImage(imagePath);
+		this.onTarget = onTarget;
 	}
 
 	public void update(float delta) {
@@ -68,6 +66,8 @@ public class Projectile {
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
 			Game.level.projectilesToRemove.add(this);
 			shooter.showPow(target);
+			if (!(projectileObject instanceof Arrow))
+				target.squareGameObjectIsOn.inventory.add(projectileObject);
 		} else {
 			x += distanceX;
 			y += distanceY;
@@ -82,14 +82,42 @@ public class Projectile {
 	}
 
 	public void drawForeground() {
+		// float x1 = x;
+		// float x2 = x + 10;
+		// float y1 = y;
+		// float y2 = y + 10;
+		// QuadUtils.drawQuad(Color.BLACK, x1, x2, y1, y2);
 
-		// if (activityDescription != null && activityDescription.length() > 0)
-		// {
-		float x1 = x;
-		float x2 = x + 10;
-		float y1 = y;
-		float y2 = y + 10;
-		QuadUtils.drawQuad(Color.BLACK, x1, x2, y1, y2);
+		// if (this.remainingHealth <= 0)
+		// return;
+
+		// if (!Game.fullVisiblity) {
+		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
+		// persistsWhenCantBeSeen == false)
+		// return;
+		//
+		// if (!this.squareGameObjectIsOn.seenByPlayer)
+		// return;
+		// }
+
+		// Draw object
+		// if (squareGameObjectIsOn != null) {
+		// int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid
+		// * (int) Game.SQUARE_WIDTH
+		// + drawOffsetX);
+		// int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid
+		// * (int) Game.SQUARE_HEIGHT
+		// + drawOffsetY);
+
+		float alpha = 1.0f;
+
+		// TextureUtils.skipNormals = true;
+
+		// if (!this.squareGameObjectIsOn.visibleToPlayer)
+		// alpha = 0.5f;
+		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, x, x + projectileObject.width, y,
+				y + projectileObject.height, projectileObject.backwards);
+		// TextureUtils.skipNormals = false;
 		// }
 
 	}

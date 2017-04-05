@@ -309,7 +309,7 @@ public class AIRoutineForMort extends AIRoutine {
 				return true;
 			} else if (unresolvedIllegalMining.size() > 0) {
 				actor.miniDialogue = "MY ORES!";
-				new ActionThrow(actor, criminal, Templates.BOULDER.makeCopy(null, null)).perform();
+				new ActionThrow(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
 				// System.out.println("stolenItems.size = " +
 				// stolenItems.size());
 				for (GameObject stolenItem : stolenItems) {

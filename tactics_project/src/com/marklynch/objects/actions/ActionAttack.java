@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
@@ -52,7 +53,8 @@ public class ActionAttack extends Action {
 
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			Game.level.projectiles.add(new Projectile("Arrow", performer, target, 5f, true, "hunter.png"));
+			Game.level.projectiles
+					.add(new Projectile("Arrow", performer, target, Templates.ARROW.makeCopy(null, null), 1f, true));
 		} else {
 			performer.showPow(target);
 		}

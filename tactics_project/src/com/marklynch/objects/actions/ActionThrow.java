@@ -50,7 +50,7 @@ public class ActionThrow extends Action {
 					new Object[] { performer, " threw a ", object, " at ", target, " for " + damage + " damage" }));
 
 		// shoot projectile
-		Game.level.projectiles.add(new Projectile(object.name, performer, target, 5f, true, "hunter.png"));
+		Game.level.projectiles.add(new Projectile(object.name, performer, target, object, 1f, true));
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
