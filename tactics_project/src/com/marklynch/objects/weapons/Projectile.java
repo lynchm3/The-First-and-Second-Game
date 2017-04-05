@@ -44,8 +44,8 @@ public class Projectile {
 		distanceToCoverY = this.targetY - this.originY;
 		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
 
-		this.speedX = (distanceToCoverX / totalDistanceToCover) * 3;
-		this.speedY = (distanceToCoverY / totalDistanceToCover) * 3;
+		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
+		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
 
 		if (distanceToCoverX < 0) {
 			projectileObject.backwards = true;

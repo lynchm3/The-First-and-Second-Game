@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -45,7 +46,21 @@ public class ActionPickUpAll extends Action {
 			if (gameObjectToLoot.owner == null)
 				gameObjectToLoot.owner = performer;
 		}
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
+
+		if (!legal) {
+
+			for (GameObject gameObjectToLoot : gameObjectsToLoot) {
+				if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
+					Crime crime = new Crime(this, this.performer, gameObjectToLoot.owner, 2, gameObjectToLoot);
+					this.performer.crimesPerformedThisTurn.add(crime);
+					this.performer.crimesPerformedInLifetime.add(crime);
+					notifyWitnessesOfCrime(crime);
+				}
+			}
+		}
 
 	}
 

@@ -54,7 +54,7 @@ public class ActionAttack extends Action {
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			Game.level.projectiles
-					.add(new Projectile("Arrow", performer, target, Templates.ARROW.makeCopy(null, null), 1f, true));
+					.add(new Projectile("Arrow", performer, target, Templates.ARROW.makeCopy(null, null), 2f, true));
 		} else {
 			performer.showPow(target);
 		}

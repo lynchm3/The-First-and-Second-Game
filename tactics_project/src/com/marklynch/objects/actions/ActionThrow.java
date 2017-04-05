@@ -50,7 +50,7 @@ public class ActionThrow extends Action {
 					new Object[] { performer, " threw a ", object, " at ", target, " for " + damage + " damage" }));
 
 		// shoot projectile
-		Game.level.projectiles.add(new Projectile(object.name, performer, target, object, 1f, true));
+		Game.level.projectiles.add(new Projectile(object.name, performer, target, object, 2f, true));
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
@@ -89,12 +89,9 @@ public class ActionThrow extends Action {
 	public Sound createSound() {
 
 		// Sound
-		// float loudness = target.soundWhenHit *
-		// performer.equipped.soundWhenHitting;
-		// if (performer.equipped != null)
-		// return new Sound(performer, performer.equipped,
-		// target.squareGameObjectIsOn, loudness, legal,
-		// this.getClass());
+		float loudness = target.soundWhenHit * object.soundWhenHitting;
+		if (performer.equipped != null)
+			return new Sound(performer, object, target.squareGameObjectIsOn, loudness, legal, this.getClass());
 		return null;
 	}
 

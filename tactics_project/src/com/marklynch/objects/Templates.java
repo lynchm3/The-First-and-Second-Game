@@ -71,7 +71,7 @@ public class Templates {
 
 	// Bows
 	// https://en.wikipedia.org/wiki/Bow_and_arrow#Types_of_bow
-	public static final Weapon HUNTING_BOW = new Weapon("Hunting Bow", 1, 1, 4, "a2r2.png", 100, null, true, false,
+	public static final Weapon HUNTING_BOW = new Weapon("Hunting Bow", 1, 1, 10, "a2r2.png", 100, null, true, false,
 			false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, 40, 42);
 
 	// ARMOUR
@@ -137,7 +137,7 @@ public class Templates {
 	public static final GameObject BOULDER = new GameObject("Boulder", 1000, "boulder.png", null, new Inventory(),
 			false, false, false, false, true, true, 1, 1, 0.5f, 0.5f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
 			0f, null);
-	public static final Arrow ARROW = new Arrow("Arrow", 1000, "arrow.png", null, new Inventory(), false, true, true,
+	public static final Arrow ARROW = new Arrow("Arrow", 5, "arrow.png", null, new Inventory(), false, true, true,
 			false, false, false, 0.32f, 0.16f, 0.5f, 0.5f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null);
 	public static final GameObject ROCK = new GameObject("Stone", 1000, "rock.png", null, new Inventory(), false, true,
 			true, false, false, false, 0.32f, 0.32f, 0.5f, 0.5f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
