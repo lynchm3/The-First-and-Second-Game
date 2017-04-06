@@ -55,7 +55,7 @@ public abstract class Action {
 		for (int i = searchBoxX1; i <= searchBoxX2; i++) {
 			for (int j = searchBoxY1; j <= searchBoxY2; j++) {
 				Actor potentialWitness = (Actor) Game.level.squares[i][j].inventory.getGameObjectOfClass(Actor.class);
-				if (potentialWitness != null) {
+				if (potentialWitness != null && potentialWitness != crime.performer) {
 					if (potentialWitness
 							.straightLineDistanceTo(crime.performer.squareGameObjectIsOn) <= potentialWitness.sight
 							&& potentialWitness.visibleFrom(crime.performer.squareGameObjectIsOn)) {

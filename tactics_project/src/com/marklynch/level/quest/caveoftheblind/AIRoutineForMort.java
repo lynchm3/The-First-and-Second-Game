@@ -67,11 +67,14 @@ public class AIRoutineForMort extends AIRoutine {
 			Square squareToSearch = mort.locationsToSearch.get(actor);
 			if (squareToSearch.structureRoomSquareIsIn != mort.mortsMine
 					&& squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
-					&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault) {
+					&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault
+					&& squareToSearch != mort.mortsRoomDoorway) {
 				toRemove.add(actor);
 			}
 		}
 		for (Actor actor : toRemove) {
+			System.out.println("removing actor out of jurisdiction " + actor.squareGameObjectIsOn.xInGrid + ", "
+					+ actor.squareGameObjectIsOn.xInGrid);
 			mort.locationsToSearch.remove(actor);
 		}
 
@@ -90,18 +93,25 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
+		System.out.println("runFightRoutine()");
 		if (runFightRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
+		// When u go behind the door it does this:
+		// runFightRoutine()
+		// runCrimeReactionRoutine()
+		// x infinity
 
+		System.out.println("runCrimeReactionRoutine()");
 		if (runCrimeReactionRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 
+		System.out.println("runSearchRoutine()");
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			searchCooldown = 10;
@@ -306,12 +316,10 @@ public class AIRoutineForMort extends AIRoutine {
 				for (Crime unresolvedCrime : unresolvedCrimes) {
 					unresolvedCrime.resolved = true;
 				}
-				return true;
+				return runFightRoutine();
 			} else if (unresolvedIllegalMining.size() > 0) {
 				actor.miniDialogue = "MY ORES!";
 				new ActionThrow(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
-				// System.out.println("stolenItems.size = " +
-				// stolenItems.size());
 				for (GameObject stolenItem : stolenItems) {
 					System.out.println("stolenItem = " + stolenItem);
 					if (criminal.inventory.contains(stolenItem)) {
