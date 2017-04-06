@@ -5,6 +5,7 @@ import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionWrite;
 import com.marklynch.objects.units.Trader;
+import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForTrader extends AIRoutine {
 
@@ -37,27 +38,26 @@ public class AIRoutineForTrader extends AIRoutine {
 
 	@Override
 	public void update() {
-
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.thoughtBubbleImageTexture = null;
-		// createSearchLocationsBasedOnSounds();
-		// createSearchLocationsBasedOnVisibleAttackers();
-		// if (runFightRoutine())
-		// return;
-		// if (runSearchRoutine())
-		// return;
+		createSearchLocationsBasedOnSounds(Weapon.class);
+		createSearchLocationsBasedOnVisibleAttackers();
+		if (runFightRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
 
-		// 1. Run away from fights
-		if (trader.hasAttackers()) {
-			trader.activityDescription = ACTIVITY_DESCRIPTION_RUNNING_AWAY;
-			GameObject target = AIRoutineUtils.getNearestAttacker(trader.getAttackers());
-			boolean attackedTarget = false;
-			if (target != null) {
-				attackedTarget = AIRoutineUtils.attackTarget(target);
-				if (!attackedTarget)
-					AIRoutineUtils.moveTowardsTargetToAttack(target);
-			}
+		if (runSearchRoutine()) {
+			// createSearchLocationsBasedOnSounds();
+			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
+
+		if (searchCooldown > 0) {
+			runSearchCooldown();
+			searchCooldown--;
 			return;
 		}
 

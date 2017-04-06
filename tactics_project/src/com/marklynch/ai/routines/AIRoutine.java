@@ -5,10 +5,12 @@ import java.util.Arrays;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.ThoughtBubbles;
+import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.MapUtil;
 
@@ -273,8 +275,38 @@ public class AIRoutine {
 		return false;
 	}
 
-	private boolean runCrimeReactionRoutine() {
-		// TODO Auto-generated method stub
+	protected boolean runCrimeReactionRoutine() {
+		for (Actor criminal : actor.crimesWitnessed.keySet()) {
+			int accumulatedSeverity = 0;
+			ArrayList<Crime> unresolvedIllegalMining = new ArrayList<Crime>();
+			ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>();
+			ArrayList<GameObject> stolenItems = new ArrayList<GameObject>();
+			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
+				accumulatedSeverity += crime.severity;
+				if (crime.resolved == false) {
+					unresolvedCrimes.add(crime);
+					if (crime.action instanceof ActionMine) {
+						unresolvedIllegalMining.add(crime);
+					}
+					for (GameObject stolenItem : crime.stolenItems)
+						stolenItems.add(stolenItem);
+				}
+			}
+
+			if (accumulatedSeverity >= 5) {
+				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+				actor.addAttackerForThisAndGroupMembers(criminal);
+				for (Crime unresolvedCrime : unresolvedCrimes) {
+					unresolvedCrime.resolved = true;
+				}
+				return runFightRoutine();
+			} else if (unresolvedCrimes.size() > 0) {
+				for (Crime unresolvedCrime : unresolvedCrimes) {
+					unresolvedCrime.resolved = true;
+				}
+				return true;
+			}
+		}
 		return false;
 	}
 

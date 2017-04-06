@@ -52,7 +52,6 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
-			searchCooldown = 10;
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}

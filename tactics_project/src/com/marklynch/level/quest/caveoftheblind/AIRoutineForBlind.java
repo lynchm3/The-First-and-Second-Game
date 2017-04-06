@@ -171,9 +171,13 @@ public class AIRoutineForBlind extends AIRoutine {
 			return;
 		}
 
+		if (runCrimeReactionRoutine()) {
+			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
+
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
-			searchCooldown = 10;
 			addNonBlindToAttackersList();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;

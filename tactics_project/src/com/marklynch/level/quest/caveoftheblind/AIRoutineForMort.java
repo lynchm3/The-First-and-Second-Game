@@ -93,28 +93,17 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
-		System.out.println("runFightRoutine()");
 		if (runFightRoutine()) {
-			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
-		// When u go behind the door it does this:
-		// runFightRoutine()
-		// runCrimeReactionRoutine()
-		// x infinity
 
-		System.out.println("runCrimeReactionRoutine()");
 		if (runCrimeReactionRoutine()) {
-			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 
-		System.out.println("runSearchRoutine()");
 		if (runSearchRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			searchCooldown = 10;
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
@@ -292,7 +281,8 @@ public class AIRoutineForMort extends AIRoutine {
 
 	}
 
-	private boolean runCrimeReactionRoutine() {
+	@Override
+	protected boolean runCrimeReactionRoutine() {
 		for (Actor criminal : actor.crimesWitnessed.keySet()) {
 			int accumulatedSeverity = 0;
 			ArrayList<Crime> unresolvedIllegalMining = new ArrayList<Crime>();
