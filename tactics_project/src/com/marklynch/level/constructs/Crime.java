@@ -13,6 +13,8 @@ public class Crime {
 	public Actor performer;
 	public Actor visctim;
 	public int severity;
+	// Trespassing = 1, Vandalism = 2,
+	// Theft = 2, Attack = 3
 	public boolean resolved;
 	public GameObject stolenItems[];
 
@@ -25,6 +27,10 @@ public class Crime {
 		this.severity = severity;
 		this.resolved = false;
 		this.stolenItems = stolenItems;
+	}
+
+	public Crime(Action action, Actor performer, Actor visctim, int severity, ArrayList<GameObject> stolenItems) {
+		this(action, performer, visctim, severity, (GameObject[]) stolenItems.toArray());
 	}
 
 }

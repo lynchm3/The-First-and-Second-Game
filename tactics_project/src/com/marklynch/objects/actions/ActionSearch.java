@@ -1,8 +1,11 @@
 package com.marklynch.objects.actions;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -36,9 +39,18 @@ public class ActionSearch extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", object }));
 
-		boolean foundSomething = object.search();
+		ArrayList<GameObject> gameObjectsToLoot = object.search();
+		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
+			if (performer.squareGameObjectIsOn.visibleToPlayer)
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " found ", gameObjectToLoot, " in ", object }));
+			object.inventory.remove(gameObjectToLoot);
+			performer.inventory.add(gameObjectToLoot);
+			if (gameObjectToLoot.owner == null)
+				gameObjectToLoot.owner = performer;
+		}
 
-		if (foundSomething == false)
+		if (gameObjectsToLoot.size() == 0)
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " found nothing" }));
 
@@ -47,10 +59,19 @@ public class ActionSearch extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, object.owner, 1);
-			this.performer.crimesPerformedThisTurn.add(crime);
-			this.performer.crimesPerformedInLifetime.add(crime);
-			notifyWitnessesOfCrime(crime);
+
+			ArrayList<GameObject> stolenObjects = new ArrayList<GameObject>();
+			for (GameObject gameObjectToLoot : gameObjectsToLoot) {
+				if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
+					stolenObjects.add(gameObjectToLoot);
+				}
+			}
+			if (stolenObjects.size() > 0) {
+				Crime crime = new Crime(this, this.performer, stolenObjects.get(0).owner, 2, stolenObjects);
+				this.performer.crimesPerformedThisTurn.add(crime);
+				this.performer.crimesPerformedInLifetime.add(crime);
+				notifyWitnessesOfCrime(crime);
+			}
 		}
 	}
 

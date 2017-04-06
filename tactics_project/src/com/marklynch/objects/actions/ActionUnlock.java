@@ -50,7 +50,7 @@ public class ActionUnlock extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, openable.owner, 2);
+			Crime crime = new Crime(this, this.performer, openable.owner, 2, key);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

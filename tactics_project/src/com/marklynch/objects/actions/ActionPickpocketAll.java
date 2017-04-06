@@ -49,15 +49,20 @@ public class ActionPickpocketAll extends Action {
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
+
 		if (!legal) {
 
+			ArrayList<GameObject> stolenObjects = new ArrayList<GameObject>();
 			for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 				if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer) {
-					Crime crime = new Crime(this, this.performer, gameObjectToLoot.owner, 2, gameObjectToLoot);
-					this.performer.crimesPerformedThisTurn.add(crime);
-					this.performer.crimesPerformedInLifetime.add(crime);
-					notifyWitnessesOfCrime(crime);
+					stolenObjects.add(gameObjectToLoot);
 				}
+			}
+			if (stolenObjects.size() > 0) {
+				Crime crime = new Crime(this, this.performer, stolenObjects.get(0).owner, 2, stolenObjects);
+				this.performer.crimesPerformedThisTurn.add(crime);
+				this.performer.crimesPerformedInLifetime.add(crime);
+				notifyWitnessesOfCrime(crime);
 			}
 		}
 

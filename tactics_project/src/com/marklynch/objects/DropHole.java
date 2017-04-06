@@ -2,10 +2,8 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
-import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionSearch;
 import com.marklynch.objects.units.Actor;
 
@@ -40,13 +38,14 @@ public class DropHole extends Searchable {
 	}
 
 	@Override
-	public boolean search() {
-		if (inventory.size() == 0) {
-			return false;
-		} else {
-			new ActionLootAll(Game.level.player, this).perform();
-			return true;
-		}
+	public ArrayList<GameObject> search() {
+		return (ArrayList<GameObject>) inventory.gameObjects.clone();
+		// if (inventory.size() == 0) {
+		// return false;
+		// } else {
+		// new ActionLootAll(Game.level.player, this).perform();
+		// return true;
+		// }
 	}
 
 	@Override
