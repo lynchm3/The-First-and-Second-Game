@@ -170,6 +170,7 @@ public class AIRoutine {
 
 			Square searchSquare = this.actor.locationsToSearch.get(actorToSearchFor);
 			searchCooldown = 10;
+			boolean done = false;
 
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 0
 					&& this.actor.getPathTo(searchSquare) != null) {
@@ -178,40 +179,64 @@ public class AIRoutine {
 				this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 				AIRoutineUtils.moveTowardsTargetSquare(searchSquare);
 				moved = true;
+				System.out.println("runSearchRoutine 0");
 
+				done = true;
 				break;
 
 			}
 
+			if (done)
+				break;
+
+			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) <= 1) {
+				toRemove.add(actorToSearchFor);
+				break;
+			}
+
 			// distance 1
 			for (Square searchSquareAtDistanceOne : searchSquare.getAllSquaresAtDistance(1)) {
-				if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquareAtDistanceOne) > 0
+				if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 						&& this.actor.getPathTo(searchSquareAtDistanceOne) != null) {
 
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 					AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceOne);
 					moved = true;
+					System.out.println("runSearchRoutine 1");
 
+					done = true;
 					break;
 
 				}
 			}
 
+			if (done)
+				break;
+
+			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) <= 2) {
+				toRemove.add(actorToSearchFor);
+				break;
+			}
+
 			// distance 2
 			for (Square searchSquareAtDistanceTwo : searchSquare.getAllSquaresAtDistance(2)) {
-				if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquareAtDistanceTwo) > 0
-						&& this.actor.getPathTo(searchSquareAtDistanceTwo) != null) {
+				if (this.actor.getPathTo(searchSquareAtDistanceTwo) != null) {
 
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 					AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceTwo);
 					moved = true;
+					System.out.println("runSearchRoutine 2");
 
+					done = true;
 					break;
 
 				}
 			}
+
+			if (done)
+				break;
 
 			toRemove.add(actorToSearchFor);
 		}
