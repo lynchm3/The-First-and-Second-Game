@@ -77,6 +77,8 @@ public class ActionThrow extends Action {
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
+		} else {
+			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
 	}
 

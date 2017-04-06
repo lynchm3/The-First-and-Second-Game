@@ -4,18 +4,21 @@ import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.ActivityLog;
 
-public class ActionLoiter extends Action {
+public class ActionTrespass extends Action {
 
-	public static final String ACTION_NAME = "Loiter here";
+	public static final String ACTION_NAME = "Trespass here";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	Square target;
+	float loudness;
 
-	public ActionLoiter(Actor loiterer, Square target) {
+	public ActionTrespass(Actor mover, Square target, float loudness) {
 		super(ACTION_NAME);
-		this.performer = loiterer;
+		this.performer = mover;
 		this.target = target;
+		this.loudness = loudness;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -27,21 +30,14 @@ public class ActionLoiter extends Action {
 
 	@Override
 	public void perform() {
+
 		if (!enabled)
 			return;
-		loiter(performer, target);
+
 		performer.actionsPerformedThisTurn.add(this);
+		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " trespassed" }));
 		if (sound != null)
 			sound.play();
-
-		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
-			Game.level.endTurn();
-
-		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
-
-	}
-
-	public void loiter(Actor actor, Square squareToLoiterOn) {
 	}
 
 	@Override
@@ -51,14 +47,11 @@ public class ActionLoiter extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.restricted == true && !target.owners.contains(performer)) {
-			return false;
-		}
-		return true;
+		return false;
 	}
 
 	@Override
 	public Sound createSound() {
-		return null;
+		return new Sound(performer, performer, target, loudness, legal, this.getClass());
 	}
 }

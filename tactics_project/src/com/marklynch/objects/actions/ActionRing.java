@@ -43,9 +43,13 @@ public class ActionRing extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
+		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

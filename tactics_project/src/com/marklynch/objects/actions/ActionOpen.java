@@ -45,10 +45,11 @@ public class ActionOpen extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
-			Game.level.endTurn();
+		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

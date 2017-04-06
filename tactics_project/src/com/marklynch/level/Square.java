@@ -66,7 +66,11 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public boolean highlight = false;
 
-	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory) {
+	public ArrayList<Actor> owners;
+	public boolean restricted;
+
+	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory,
+			boolean restricted, Actor... owners) {
 		super();
 		this.xInGrid = x;
 		this.yInGrid = y;
@@ -81,6 +85,13 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			this.inventory.square = this;
 		}
 		showInventory = true;
+
+		this.owners = new ArrayList<Actor>();
+		for (Actor owner : owners) {
+			this.owners.add(owner);
+		}
+		this.restricted = restricted;
+
 	}
 
 	public void postLoad1() {

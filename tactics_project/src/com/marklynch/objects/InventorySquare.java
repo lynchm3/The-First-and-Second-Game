@@ -19,7 +19,7 @@ public class InventorySquare extends Square {
 	public int yInPixels = 0;
 
 	public InventorySquare(int x, int y, String imagePath, Inventory inventoryThisBelongsTo) {
-		super(x, y, imagePath, 1, 1, null);
+		super(x, y, imagePath, 1, 1, null, false);
 
 		this.showInventory = false;
 		this.inventoryThisBelongsTo = inventoryThisBelongsTo;

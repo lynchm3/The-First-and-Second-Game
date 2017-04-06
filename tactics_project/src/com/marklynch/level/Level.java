@@ -241,7 +241,7 @@ public class Level {
 	private void initGrid(Square[][] squares, int width, int height) {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				squares[i][j] = new Square(i, j, "grass.png", 1, 0, new SquareInventory());
+				squares[i][j] = new Square(i, j, "grass.png", 1, 0, new SquareInventory(), false);
 			}
 		}
 	}

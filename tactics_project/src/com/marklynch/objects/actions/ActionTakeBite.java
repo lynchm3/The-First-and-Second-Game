@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -44,7 +45,18 @@ public class ActionTakeBite extends Action {
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
+
+		if (!legal) {
+			Crime crime = new Crime(this, this.performer, target.owner, 2);
+			this.performer.crimesPerformedThisTurn.add(crime);
+			this.performer.crimesPerformedInLifetime.add(crime);
+			notifyWitnessesOfCrime(crime);
+		} else {
+			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+		}
 	}
 
 	@Override

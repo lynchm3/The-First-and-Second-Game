@@ -33,7 +33,9 @@ public class ActionSleep extends Action {
 			return;
 		moveTo(performer, target);
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
@@ -58,6 +60,8 @@ public class ActionSleep extends Action {
 				actor.swapCooldown = (int) (Math.random() * 3);
 			}
 		}
+
+		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();

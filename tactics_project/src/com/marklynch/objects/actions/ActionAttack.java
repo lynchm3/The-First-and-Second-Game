@@ -65,9 +65,6 @@ public class ActionAttack extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
-		if (performer == Game.level.player)
-			Game.level.endTurn();
-
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
@@ -84,7 +81,12 @@ public class ActionAttack extends Action {
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
+		} else {
+			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
+
+		if (performer == Game.level.player)
+			Game.level.endTurn();
 	}
 
 	@Override

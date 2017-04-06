@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.units.Actor;
@@ -74,6 +75,17 @@ public abstract class Action {
 		}
 		// public ArrayList<Actor> witnesses;
 		// public boolean resolved;
+
+	}
+
+	public void trespassingCheck(Action action, Actor performer, Square square) {
+		if (square.restricted == true && !square.owners.contains(performer)) {
+			ActionTrespass actionTrespass = new ActionTrespass(performer, square, action.sound.loudness);
+			Crime crime = new Crime(actionTrespass, performer, square.owners.get(0), 1);
+			performer.crimesPerformedThisTurn.add(crime);
+			performer.crimesPerformedInLifetime.add(crime);
+			notifyWitnessesOfCrime(crime);
+		}
 
 	}
 
