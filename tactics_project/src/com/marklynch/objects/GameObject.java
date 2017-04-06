@@ -220,6 +220,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			this.canShareSquare = true;
 			this.blocksLineOfSight = false;
 			persistsWhenCantBeSeen = false;
+			soundDampening = 1;
 			return true;
 		}
 		return false;

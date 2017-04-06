@@ -164,34 +164,54 @@ public class AIRoutine {
 		boolean moved = false;
 
 		for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
+			// distance 0
 
-			// System.out.println(
-			// "this.actor.squareGameObjectIsOn.straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor))
-			// > 0"
-			// + (this.actor.squareGameObjectIsOn
-			// .straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor))
-			// > 0));
-			//
-			// System.out.println("this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor))
-			// != null"
-			// +
-			// (this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor))
-			// != null));
+			Square searchSquare = this.actor.locationsToSearch.get(actorToSearchFor);
+			searchCooldown = 10;
 
-			if (this.actor.squareGameObjectIsOn
-					.straightLineDistanceTo(this.actor.locationsToSearch.get(actorToSearchFor)) > 0
-					&& this.actor.getPathTo(this.actor.locationsToSearch.get(actorToSearchFor)) != null) {
+			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 0
+					&& this.actor.getPathTo(searchSquare) != null) {
 
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 				this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
-				AIRoutineUtils.moveTowardsTargetSquare(this.actor.locationsToSearch.get(actorToSearchFor));
+				AIRoutineUtils.moveTowardsTargetSquare(searchSquare);
 				moved = true;
 
 				break;
 
-			} else {
-				toRemove.add(actorToSearchFor);
 			}
+
+			// distance 1
+			for (Square searchSquareAtDistanceOne : searchSquare.getAllSquaresAtDistance(1)) {
+				if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquareAtDistanceOne) > 0
+						&& this.actor.getPathTo(searchSquareAtDistanceOne) != null) {
+
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
+					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
+					AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceOne);
+					moved = true;
+
+					break;
+
+				}
+			}
+
+			// distance 2
+			for (Square searchSquareAtDistanceTwo : searchSquare.getAllSquaresAtDistance(2)) {
+				if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquareAtDistanceTwo) > 0
+						&& this.actor.getPathTo(searchSquareAtDistanceTwo) != null) {
+
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
+					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
+					AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceTwo);
+					moved = true;
+
+					break;
+
+				}
+			}
+
+			toRemove.add(actorToSearchFor);
 		}
 
 		for (Actor actorsToSearchFor : toRemove) {
