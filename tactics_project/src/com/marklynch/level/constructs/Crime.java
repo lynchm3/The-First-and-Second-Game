@@ -30,7 +30,9 @@ public class Crime {
 	}
 
 	public Crime(Action action, Actor performer, Actor visctim, int severity, ArrayList<GameObject> stolenItems) {
-		this(action, performer, visctim, severity, (GameObject[]) stolenItems.toArray());
+		this(action, performer, visctim, severity, stolenItems.toArray(new GameObject[stolenItems.size()]));
+
+		;
 	}
 
 }

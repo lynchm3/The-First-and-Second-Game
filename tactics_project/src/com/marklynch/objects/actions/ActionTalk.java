@@ -11,20 +11,28 @@ public class ActionTalk extends Action {
 
 	public Actor performer;
 	public Actor target;
+	public Conversation conversation;
 
 	// Default for hostiles
 	public ActionTalk(Actor talker, Actor target) {
+		this(talker, target, null);
+	}
+
+	// Default for hostiles
+	public ActionTalk(Actor talker, Actor target, Conversation conversation) {
 		super(ACTION_NAME);
 		this.performer = talker;
 		this.target = target;
+		this.conversation = conversation;
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
 	public void perform() {
-		Conversation conversation = null;
-		if (target == Game.level.player) {
+		if (conversation != null) {
+
+		} else if (target == Game.level.player) {
 			conversation = performer.getConversation();
 		} else {
 			conversation = target.getConversation();
@@ -36,7 +44,9 @@ public class ActionTalk extends Action {
 
 		}
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

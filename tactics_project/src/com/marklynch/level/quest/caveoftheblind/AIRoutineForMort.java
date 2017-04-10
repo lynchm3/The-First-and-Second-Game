@@ -7,12 +7,16 @@ import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
+import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionRing;
+import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
@@ -291,12 +295,17 @@ public class AIRoutineForMort extends AIRoutine {
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				accumulatedSeverity += crime.severity;
 				if (crime.resolved == false) {
-					unresolvedCrimes.add(crime);
-					if (crime.action instanceof ActionMine) {
-						unresolvedIllegalMining.add(crime);
+					if (crime.stolenItems.length > 0) {
+						unresolvedCrimes.add(crime);
+						if (crime.action instanceof ActionMine) {
+							unresolvedIllegalMining.add(crime);
+						}
+						for (GameObject stolenItem : crime.stolenItems) {
+							stolenItems.add(stolenItem);
+						}
+					} else {
+						crime.resolved = true;
 					}
-					for (GameObject stolenItem : crime.stolenItems)
-						stolenItems.add(stolenItem);
 				}
 			}
 
@@ -321,10 +330,50 @@ public class AIRoutineForMort extends AIRoutine {
 				}
 				return true;
 			} else if (unresolvedCrimes.size() > 0) {
+
+				System.out.println("unresolvedCrimes.size() > 0");
+
 				for (Crime unresolvedCrime : unresolvedCrimes) {
-					unresolvedCrime.resolved = true;
+					System.out.println("unresolvedCrime.action = " + unresolvedCrime.action);
+					System.out.println("unresolvedCrime.stolenItems[0] = " + unresolvedCrime.stolenItems[0]);
+
+					if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
+						// CONVERSATION
+						System.out.println("unresolvedCrimes a");
+
+						ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave",
+								null) {
+							@Override
+							public void select() {
+								super.select();
+
+							}
+
+						};
+						ConversationPart conversationPartSaveTheWolf = new ConversationPart(
+								new Object[] { "Save the wolf!" },
+								new ConversationResponse[] { conversationReponseEndAfterAccepting }, this.actor);
+						new ActionTalk(this.actor, criminal, new Conversation(conversationPartSaveTheWolf)).perform();
+						return true;
+					}
+
+					if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
+							&& actor.visibleFrom(criminal.squareGameObjectIsOn)) {
+						System.out.println("unresolvedCrimes b");
+						return AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal);
+					}
+					// unresolvedCrime.resolved = true;
 				}
-				return true;
+				// for (Crime unresolvedCrime : unresolvedCrimes) {
+				// for (GameObject stolenItem : stolenItems) {
+				// System.out.println("stolenItem = " + stolenItem);
+				// if (criminal.inventory.contains(stolenItem)) {
+				// new ActionDrop(criminal, criminal.squareGameObjectIsOn,
+				// stolenItem).perform();
+				// }
+				// }
+				// }
+				// return true;
 			}
 		}
 		return false;
