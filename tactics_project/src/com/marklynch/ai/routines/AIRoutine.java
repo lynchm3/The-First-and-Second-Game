@@ -22,6 +22,7 @@ public class AIRoutine {
 	public Actor actor;
 	public GameObject target;
 	public int searchCooldown = 0;
+	public Actor searchCooldownActor = null;
 
 	public AIRoutine(Actor actor) {
 		this.actor = actor;
@@ -35,9 +36,26 @@ public class AIRoutine {
 		// Check for enemies last seen locations to search
 		if (this.actor.hasAttackers()) {
 			for (Actor attacker : this.actor.getAttackers()) {
-				if (this.actor.straightLineDistanceTo(attacker.squareGameObjectIsOn) <= this.actor.sight
-						&& this.actor.visibleFrom(attacker.squareGameObjectIsOn)) {
+				if (this.actor.canSee(attacker.squareGameObjectIsOn)) {
 					this.actor.locationsToSearch.put(attacker, attacker.squareGameObjectIsOn);
+				}
+			}
+		}
+
+	}
+
+	public void createSearchLocationsBasedOnVisibleCriminals() {
+
+		// Check for enemies last seen locations to search
+		for (Actor criminal : this.actor.crimesWitnessed.keySet()) {
+
+			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
+				if (!crime.resolved) {
+					if (this.actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) <= this.actor.sight
+							&& this.actor.visibleFrom(criminal.squareGameObjectIsOn)) {
+						System.out.println("Adding criminal");
+						this.actor.locationsToSearch.put(criminal, criminal.squareGameObjectIsOn);
+					}
 				}
 			}
 		}
@@ -169,10 +187,11 @@ public class AIRoutine {
 			// distance 0
 
 			Square searchSquare = this.actor.locationsToSearch.get(actorToSearchFor);
+			searchCooldownActor = actorToSearchFor;
 			searchCooldown = 10;
 			boolean done = false;
 
-			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 0
+			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 					&& this.actor.getPathTo(searchSquare) != null) {
 
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
@@ -275,6 +294,12 @@ public class AIRoutine {
 		// AIRoutineUtils.moveTowardsTargetSquare(AIRoutineUtils.getRandomSquareInRoom(room));
 		// return true;
 		// } else {
+		if (this.searchCooldownActor != null) {
+			if (this.actor.canSee(searchCooldownActor.squareGameObjectIsOn)) {
+				searchCooldown = 0;
+				return false;
+			}
+		}
 
 		// Move Away From Last Square;
 		boolean moved = false;
