@@ -724,4 +724,14 @@ public class Inventory {
 
 	}
 
+	public boolean containsAll(GameObject[] gameObjectsToCheck) {
+
+		for (GameObject gameObjectToCheck : gameObjectsToCheck) {
+			if (!gameObjects.contains(gameObjectToCheck)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }

@@ -15,6 +15,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionableInInventory;
@@ -581,7 +582,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public Action getDefaultActionInInventory(Actor performer) {
-		return null;
+		return new ActionDrop(performer, performer.squareGameObjectIsOn, this);
 	}
 
 	@Override

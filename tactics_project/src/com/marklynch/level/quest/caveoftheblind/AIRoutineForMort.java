@@ -16,6 +16,7 @@ import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
+import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrow;
@@ -277,22 +278,47 @@ public class AIRoutineForMort extends AIRoutine {
 			ArrayList<Crime> unresolvedIllegalMining = new ArrayList<Crime>();
 			final ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>();
 			final ArrayList<GameObject> stolenItemsOnCriminal = new ArrayList<GameObject>();
+			final ArrayList<GameObject> stolenItemsOnGround = new ArrayList<GameObject>();
+			// final ArrayList<GameObject> stolenItemsOnInContainer = new
+			// ArrayList<GameObject>();
+
+			// Mark issues as resolved
+			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
+				if (crime.resolved == false) {
+					if (crime.stolenItems.length == 0) {
+						crime.resolved = true;
+						continue;
+					}
+					boolean itemsToBeRetaken = false;
+					for (GameObject stolenItem : crime.stolenItems) {
+						if (criminal.inventory.contains(stolenItem) || stolenItem.squareGameObjectIsOn != null) {
+							itemsToBeRetaken = true;
+						}
+					}
+					if (itemsToBeRetaken)
+						crime.resolved = false;
+					else
+						crime.resolved = true;
+				}
+			}
+
+			// Create list of unresolved crimes, stolenItems
+			// Also calculate accumulated severity of crimes
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				accumulatedSeverity += crime.severity;
 				if (crime.resolved == false) {
-					if (crime.stolenItems.length > 0) {
-						unresolvedCrimes.add(crime);
-						if (crime.action instanceof ActionMine) {
-							unresolvedIllegalMining.add(crime);
-						}
-						for (GameObject stolenItem : crime.stolenItems) {
-							if (criminal.inventory.contains(stolenItem)) {
-								stolenItemsOnCriminal.add(stolenItem);
-							}
-						}
-					} else {
-						crime.resolved = true;
+					unresolvedCrimes.add(crime);
+					if (crime.action instanceof ActionMine) {
+						unresolvedIllegalMining.add(crime);
 					}
+					for (GameObject stolenItem : crime.stolenItems) {
+						if (criminal.inventory.contains(stolenItem)) {
+							stolenItemsOnCriminal.add(stolenItem);
+						} else if (stolenItem.squareGameObjectIsOn != null) {
+							stolenItemsOnGround.add(stolenItem);
+						}
+					}
+
 				}
 			}
 
@@ -316,65 +342,52 @@ public class AIRoutineForMort extends AIRoutine {
 					unresolvedCrime.resolved = true;
 				}
 				return true;
-			} else if (unresolvedCrimes.size() > 0) {
-
-				System.out.println("unresolvedCrimes.size() > 0");
-
-				for (Crime unresolvedCrime : unresolvedCrimes) {
-					System.out.println("unresolvedCrime.action = " + unresolvedCrime.action);
-					System.out.println("unresolvedCrime.stolenItems[0] = " + unresolvedCrime.stolenItems[0]);
-
-					if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
-						// CONVERSATION
-						System.out.println("unresolvedCrimes a");
-
-						ConversationResponse accept = new ConversationResponse("Accept", null) {
-							@Override
-							public void select() {
-								super.select();
-								for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-									new ActionGive(criminal, actor, stolenItemOnCriminal).perform();
-								}
-								for (Crime unresolvedCrime : unresolvedCrimes) {
-									unresolvedCrime.resolved = true;
-								}
+			} else if (stolenItemsOnCriminal.size() > 0) {
+				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
+					ConversationResponse accept = new ConversationResponse("Accept", null) {
+						@Override
+						public void select() {
+							super.select();
+							for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
+								new ActionGive(criminal, actor, stolenItemOnCriminal).perform();
 							}
-						};
-						ConversationResponse refuse = new ConversationResponse("Refuse", null) {
-							@Override
-							public void select() {
-								super.select();
-								actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
-								actor.addAttackerForThisAndGroupMembers(criminal);
-								for (Crime unresolvedCrime : unresolvedCrimes) {
-									unresolvedCrime.resolved = true;
-								}
-							}
-						};
-						ConversationPart conversationPartSaveTheWolf = new ConversationPart(
-								new Object[] { "Give me that!" }, new ConversationResponse[] { accept, refuse },
-								this.actor);
-						new ActionTalk(this.actor, criminal, new Conversation(conversationPartSaveTheWolf)).perform();
+						}
+					};
+					ConversationResponse refuse = new ConversationResponse("Refuse", null) {
+						@Override
+						public void select() {
+							super.select();
+							actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+							actor.addAttackerForThisAndGroupMembers(criminal);
+						}
+					};
+					ConversationPart conversationPartSaveTheWolf = new ConversationPart(
+							new Object[] { "Give me that!" }, new ConversationResponse[] { accept, refuse },
+							this.actor);
+					new ActionTalk(this.actor, criminal, new Conversation(conversationPartSaveTheWolf)).perform();
+					return true;
+				}
+
+				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
+						&& actor.visibleFrom(criminal.squareGameObjectIsOn)) {
+					System.out.println("unresolvedCrimes b");
+					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
+						return true;
+					}
+				}
+			} else if (stolenItemsOnGround.size() > 0) {
+				for (GameObject stolenItemOnGround : stolenItemsOnGround) {
+					if (actor.straightLineDistanceTo(stolenItemOnGround.squareGameObjectIsOn) == 1) {
+						new ActionPickUp(this.actor, stolenItemOnGround).perform();
 						return true;
 					}
 
-					if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
-							&& actor.visibleFrom(criminal.squareGameObjectIsOn)) {
-						System.out.println("unresolvedCrimes b");
-						return AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal);
+					if (actor.canSee(stolenItemOnGround.squareGameObjectIsOn)) {
+						if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(stolenItemOnGround)) {
+							return true;
+						}
 					}
-					// unresolvedCrime.resolved = true;
 				}
-				// for (Crime unresolvedCrime : unresolvedCrimes) {
-				// for (GameObject stolenItem : stolenItems) {
-				// System.out.println("stolenItem = " + stolenItem);
-				// if (criminal.inventory.contains(stolenItem)) {
-				// new ActionDrop(criminal, criminal.squareGameObjectIsOn,
-				// stolenItem).perform();
-				// }
-				// }
-				// }
-				// return true;
 			}
 		}
 		return false;
