@@ -13,6 +13,7 @@ import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionRing;
@@ -287,11 +288,11 @@ public class AIRoutineForMort extends AIRoutine {
 
 	@Override
 	protected boolean runCrimeReactionRoutine() {
-		for (Actor criminal : actor.crimesWitnessed.keySet()) {
+		for (final Actor criminal : actor.crimesWitnessed.keySet()) {
 			int accumulatedSeverity = 0;
 			ArrayList<Crime> unresolvedIllegalMining = new ArrayList<Crime>();
-			ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>();
-			ArrayList<GameObject> stolenItems = new ArrayList<GameObject>();
+			final ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>();
+			final ArrayList<GameObject> stolenItemsOnCriminal = new ArrayList<GameObject>();
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				accumulatedSeverity += crime.severity;
 				if (crime.resolved == false) {
@@ -301,7 +302,9 @@ public class AIRoutineForMort extends AIRoutine {
 							unresolvedIllegalMining.add(crime);
 						}
 						for (GameObject stolenItem : crime.stolenItems) {
-							stolenItems.add(stolenItem);
+							if (criminal.inventory.contains(stolenItem)) {
+								stolenItemsOnCriminal.add(stolenItem);
+							}
 						}
 					} else {
 						crime.resolved = true;
@@ -319,7 +322,7 @@ public class AIRoutineForMort extends AIRoutine {
 			} else if (unresolvedIllegalMining.size() > 0) {
 				actor.miniDialogue = "MY ORES!";
 				new ActionThrow(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
-				for (GameObject stolenItem : stolenItems) {
+				for (GameObject stolenItem : stolenItemsOnCriminal) {
 					System.out.println("stolenItem = " + stolenItem);
 					if (criminal.inventory.contains(stolenItem)) {
 						new ActionDrop(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();
@@ -341,18 +344,32 @@ public class AIRoutineForMort extends AIRoutine {
 						// CONVERSATION
 						System.out.println("unresolvedCrimes a");
 
-						ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave",
-								null) {
+						ConversationResponse accept = new ConversationResponse("Accept", null) {
 							@Override
 							public void select() {
 								super.select();
-
+								for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
+									new ActionGive(criminal, actor, stolenItemOnCriminal).perform();
+								}
+								for (Crime unresolvedCrime : unresolvedCrimes) {
+									unresolvedCrime.resolved = true;
+								}
 							}
-
+						};
+						ConversationResponse refuse = new ConversationResponse("Refuse", null) {
+							@Override
+							public void select() {
+								super.select();
+								actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+								actor.addAttackerForThisAndGroupMembers(criminal);
+								for (Crime unresolvedCrime : unresolvedCrimes) {
+									unresolvedCrime.resolved = true;
+								}
+							}
 						};
 						ConversationPart conversationPartSaveTheWolf = new ConversationPart(
-								new Object[] { "Save the wolf!" },
-								new ConversationResponse[] { conversationReponseEndAfterAccepting }, this.actor);
+								new Object[] { "Give me that!" }, new ConversationResponse[] { accept, refuse },
+								this.actor);
 						new ActionTalk(this.actor, criminal, new Conversation(conversationPartSaveTheWolf)).perform();
 						return true;
 					}
