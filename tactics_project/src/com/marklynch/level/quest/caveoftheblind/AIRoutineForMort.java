@@ -27,7 +27,6 @@ public class AIRoutineForMort extends AIRoutine {
 
 	Mort mort;
 	GameObject target;
-	Square lastLocationSeenPlayerInTerritory;
 	boolean rangBellAsLastResort;
 	boolean lockedInRoom = false;
 
@@ -215,32 +214,15 @@ public class AIRoutineForMort extends AIRoutine {
 
 		// Can mort see the Player in his territory? If so record it. If not,
 		// follow.
-		if (!canSeePlayerInTerritory()) {
-
-			if (lastLocationSeenPlayerInTerritory != null) {
-				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenPlayerInTerritory);
-
-				if (mort.squareGameObjectIsOn == lastLocationSeenPlayerInTerritory) {
-					mort.locationsToSearch.put(Game.level.player, lastLocationSeenPlayerInTerritory);
-					lastLocationSeenPlayerInTerritory = null;
-				}
-
-				if (canSeePlayerInTerritory()) {
-					mort.locationsToSearch.remove(Game.level.player);
-					lastLocationSeenPlayerInTerritory = Game.level.player.squareGameObjectIsOn;
-				}
-
-				return;
-			}
-		} else {
-			mort.locationsToSearch.remove(Game.level.player);
-			lastLocationSeenPlayerInTerritory = Game.level.player.squareGameObjectIsOn;
+		if (actor.canSee(Game.level.player.squareGameObjectIsOn) && targetInTerritory(Game.level.player)) {
+			keepTrackOf(Game.level.player);
+		} else if (lastLocationSeenActorToKeepTrackOf != null
+				&& squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
+			keepTrackOf(Game.level.player);
+		} else if (lastLocationSeenActorToKeepTrackOf != null
+				&& !squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
+			lastLocationSeenActorToKeepTrackOf = null;
 		}
-
-		// if (followingPlayer)
-		// this.actor.activityDescription = ACTIVITY_DESCRIPTION_FOLLOWING;
-		// Do some mining (He needs a pickaxe)
-		// Maybe his pickaxe broke, but hhe cant go get it coz someone will try
 
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader())
@@ -259,28 +241,29 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
-		if (canSeePlayerInTerritory()) {
+		if (squareInTerritory(Game.level.player.squareGameObjectIsOn)) {
 
 		} else {
 			AIRoutineUtils.moveTowardsTargetSquare(mort.mortsStandingSpot);
 		}
 	}
 
-	public boolean canSeePlayerInTerritory() {
-
-		if (Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsMine
-				&& Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsRoom
-				&& Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsVault
-				&& Game.level.player.squareGameObjectIsOn != mort.mortsRoomDoorway
-				&& Game.level.player.squareGameObjectIsOn != mort.mortsVaultDoorway)
+	public boolean targetInTerritory(Actor target) {
+		if (target.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsMine
+				&& target.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsRoom
+				&& target.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsVault
+				&& target.squareGameObjectIsOn != mort.mortsRoomDoorway
+				&& target.squareGameObjectIsOn != mort.mortsVaultDoorway)
 			return false;
 
-		float distanceToPlayer = this.actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn);
+		return true;
 
-		if (distanceToPlayer > this.actor.sight)
-			return false;
+	}
 
-		if (!this.actor.visibleFrom(Game.level.player.squareGameObjectIsOn))
+	public boolean squareInTerritory(Square square) {
+		if (square.structureRoomSquareIsIn != mort.mortsMine && square.structureRoomSquareIsIn != mort.mortsRoom
+				&& square.structureRoomSquareIsIn != mort.mortsVault && square != mort.mortsRoomDoorway
+				&& square != mort.mortsVaultDoorway)
 			return false;
 
 		return true;

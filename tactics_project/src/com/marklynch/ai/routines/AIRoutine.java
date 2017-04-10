@@ -360,4 +360,39 @@ public class AIRoutine {
 		return false;
 	}
 
+	public Actor actorToKeepTrackOf = null;
+	public Square lastLocationSeenActorToKeepTrackOf = null;
+
+	// public
+	public void keepTrackOf(Actor target) {
+		// Can mort see the Player in his territory? If so record it. If not,
+		// follow.
+		if (target != actorToKeepTrackOf) {
+			actorToKeepTrackOf = target;
+			lastLocationSeenActorToKeepTrackOf = null;
+		}
+
+		if (!actor.canSee(target.squareGameObjectIsOn)) {
+
+			if (lastLocationSeenActorToKeepTrackOf != null) {
+				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenActorToKeepTrackOf);
+
+				if (actor.squareGameObjectIsOn == lastLocationSeenActorToKeepTrackOf) {
+					actor.locationsToSearch.put(target, lastLocationSeenActorToKeepTrackOf);
+					lastLocationSeenActorToKeepTrackOf = null;
+				}
+
+				if (actor.canSee(target.squareGameObjectIsOn)) {
+					actor.locationsToSearch.remove(target);
+					lastLocationSeenActorToKeepTrackOf = target.squareGameObjectIsOn;
+				}
+
+				return;
+			}
+		} else {
+			actor.locationsToSearch.remove(target);
+			lastLocationSeenActorToKeepTrackOf = target.squareGameObjectIsOn;
+		}
+	}
+
 }
