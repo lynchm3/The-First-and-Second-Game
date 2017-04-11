@@ -35,6 +35,7 @@ public class AIRoutineForHunter extends AIRoutine {
 	public AIRoutineForHunter(Actor actor) {
 
 		super(actor);
+		aiType = AI_TYPE.FIGHTER;
 	}
 
 	@Override

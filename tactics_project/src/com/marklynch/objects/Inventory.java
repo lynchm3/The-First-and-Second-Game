@@ -316,8 +316,10 @@ public class Inventory {
 		if (!gameObjects.contains(gameObject)) {
 
 			// Remove references with square
-			if (gameObject.squareGameObjectIsOn != null)
+			if (gameObject.squareGameObjectIsOn != null) {
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+				gameObject.squareGameObjectIsOn.inventory.matchGameObjectsToSquares();
+			}
 			gameObject.squareGameObjectIsOn = null;
 
 			// Remove from ground squares index
@@ -325,27 +327,39 @@ public class Inventory {
 				Game.level.inanimateObjectsOnGround.remove(gameObject);
 
 			// Remove from another gameObjects inventory
-			if (gameObject.inventoryThatHoldsThisObject != null)
+			if (gameObject.inventoryThatHoldsThisObject != null) {
 				gameObject.inventoryThatHoldsThisObject.remove(gameObject);
+				gameObject.inventoryThatHoldsThisObject.matchGameObjectsToSquares();
+			}
 
 			// Add to this inventory's list of game objects
 			gameObjects.add(gameObject);
 			gameObject.inventoryThatHoldsThisObject = this;
+			// this.sort(inventorySortBy);
 
 			// pick up date for sorting by newest
 			gameObject.pickUpdateDateTime = new Date();
 
 			if (parent != null)
 				parent.inventoryChanged();
+
 		}
 	}
 
 	public void remove(GameObject gameObject) {
+		System.out.println("remove");
 		if (gameObjects.contains(gameObject)) {
+			System.out.println("remove b");
 			gameObjects.remove(gameObject);
 			gameObject.inventorySquareGameObjectIsOn = null;
 			if (parent != null)
 				parent.inventoryChanged();
+			System.out.println("remove - matchGameObjectsToSquares");
+			// this.sort(inventorySortBy);
+			if (filteredGameObjects.contains(gameObject)) {
+				filteredGameObjects.set(filteredGameObjects.indexOf(gameObject), null);
+			}
+			this.matchGameObjectsToSquares();
 		}
 	}
 
@@ -359,6 +373,7 @@ public class Inventory {
 
 	public void setGameObjects(ArrayList<GameObject> gameObjects) {
 		this.gameObjects = gameObjects;
+		this.sort(inventorySortBy);
 		matchGameObjectsToSquares();
 	}
 
@@ -374,7 +389,8 @@ public class Inventory {
 				inventorySquares[j][i].gameObject = null;
 				if (index < filteredGameObjects.size()) {
 					inventorySquares[j][i].gameObject = filteredGameObjects.get(index);
-					filteredGameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[j][i];
+					if (inventorySquares[j][i].gameObject != null)
+						inventorySquares[j][i].gameObject.inventorySquareGameObjectIsOn = inventorySquares[j][i];
 					index++;
 				}
 				// }
