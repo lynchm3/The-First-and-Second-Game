@@ -12,6 +12,7 @@ import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
+import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionLock;
@@ -342,6 +343,7 @@ public class AIRoutineForMort extends AIRoutine {
 				for (Crime unresolvedCrime : unresolvedCrimes) {
 					unresolvedCrime.resolved = true;
 				}
+				actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 				return true;
 			} else if (stolenItemsOnCriminal.size() > 0) {
 				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
@@ -366,6 +368,7 @@ public class AIRoutineForMort extends AIRoutine {
 							new Object[] { "Give me that!" }, new ConversationResponse[] { accept, refuse },
 							this.actor);
 					new ActionTalk(this.actor, criminal, new Conversation(conversationPartSaveTheWolf)).perform();
+					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 					return true;
 				}
 
@@ -373,6 +376,7 @@ public class AIRoutineForMort extends AIRoutine {
 						&& actor.visibleFrom(criminal.squareGameObjectIsOn)) {
 					System.out.println("unresolvedCrimes b");
 					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
+						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						return true;
 					}
 				}
@@ -380,11 +384,13 @@ public class AIRoutineForMort extends AIRoutine {
 				for (GameObject stolenItemOnGround : stolenItemsOnGround) {
 					if (actor.straightLineDistanceTo(stolenItemOnGround.squareGameObjectIsOn) == 1) {
 						new ActionPickUp(this.actor, stolenItemOnGround).perform();
+						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						return true;
 					}
 
 					if (actor.canSee(stolenItemOnGround.squareGameObjectIsOn)) {
 						if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(stolenItemOnGround)) {
+							actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 							return true;
 						}
 					}

@@ -8,11 +8,14 @@ public class ThoughtBubbles {
 
 	public static Texture QUESTION_MARK;
 	public static Texture MEAT_CHUNK;
+	public static Texture JUSTICE;
 
 	public static void loadExpressions() {
 
 		QUESTION_MARK = ResourceUtils.getGlobalImage("question_mark.png");
 		MEAT_CHUNK = ResourceUtils.getGlobalImage("meat_chunk.png");
+		JUSTICE = ResourceUtils.getGlobalImage("expression_justice.png");
+
 	}
 
 }
