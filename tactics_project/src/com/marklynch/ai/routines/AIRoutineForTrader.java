@@ -34,6 +34,7 @@ public class AIRoutineForTrader extends AIRoutine {
 	public AIRoutineForTrader(Trader actor) {
 		super(actor);
 		this.trader = actor;
+		aiType = AI_TYPE.RUNNER;
 	}
 
 	@Override

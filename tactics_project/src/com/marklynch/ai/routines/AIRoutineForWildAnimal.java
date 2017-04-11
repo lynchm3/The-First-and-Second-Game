@@ -13,6 +13,7 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 
 	public AIRoutineForWildAnimal(Actor actor) {
 		super(actor);
+		aiType = AI_TYPE.ANIMAL;
 	}
 
 	@Override

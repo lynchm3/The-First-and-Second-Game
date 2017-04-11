@@ -44,6 +44,7 @@ public class AIRoutineForBlind extends AIRoutine {
 	public AIRoutineForBlind(Blind blind) {
 		super(blind);
 		this.blind = blind;
+		aiType = AI_TYPE.FIGHTER;
 	}
 
 	@Override

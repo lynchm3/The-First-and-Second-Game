@@ -24,6 +24,12 @@ public class AIRoutine {
 	public int searchCooldown = 0;
 	public Actor searchCooldownActor = null;
 
+	public static enum AI_TYPE {
+		FIGHTER, RUNNER, GUARD, HOSTILE, ANIMAL
+	};
+
+	public AI_TYPE aiType = AI_TYPE.FIGHTER;
+
 	public AIRoutine(Actor actor) {
 		this.actor = actor;
 	}

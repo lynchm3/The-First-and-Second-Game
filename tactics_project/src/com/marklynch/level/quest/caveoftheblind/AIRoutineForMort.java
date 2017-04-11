@@ -55,6 +55,7 @@ public class AIRoutineForMort extends AIRoutine {
 
 		super(mort);
 		this.mort = mort;
+		aiType = AI_TYPE.FIGHTER;
 	}
 
 	@Override
