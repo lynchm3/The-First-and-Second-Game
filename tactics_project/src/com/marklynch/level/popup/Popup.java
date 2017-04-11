@@ -5,6 +5,7 @@ import java.util.Vector;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.Square;
+import com.marklynch.objects.InventorySquare;
 import com.marklynch.ui.button.Button;
 
 public class Popup {
@@ -27,12 +28,17 @@ public class Popup {
 	}
 
 	public void draw() {
-
-		int squarePositionX = square.xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = square.yInGrid * (int) Game.SQUARE_HEIGHT;
-
-		drawPositionX = (Game.windowWidth / 2) + (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.dragX));
-		drawPositionY = (Game.windowHeight / 2) + (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.dragY));
+		if (square instanceof InventorySquare) {
+			drawPositionX = ((InventorySquare) square).xInPixels;
+			drawPositionY = ((InventorySquare) square).yInPixels;
+		} else {
+			int squarePositionX = square.xInGrid * (int) Game.SQUARE_WIDTH;
+			int squarePositionY = square.yInGrid * (int) Game.SQUARE_HEIGHT;
+			drawPositionX = (Game.windowWidth / 2)
+					+ (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.dragX));
+			drawPositionY = (Game.windowHeight / 2)
+					+ (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.dragY));
+		}
 
 		// QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width,
 		// drawPositionY, Game.windowHeight);

@@ -587,7 +587,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
-		return new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.add(new ActionDrop(performer, performer.squareGameObjectIsOn, this));
+		return actions;
 	}
 
 	public boolean visibleFrom(Square square) {

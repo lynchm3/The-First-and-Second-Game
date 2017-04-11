@@ -76,12 +76,14 @@ public class PopupMiniDialogue extends Popup {
 	public void gameObjectSelected(GameObject gameObject) {
 		if (Game.level.popups.size() == 2)
 			Game.level.popups.remove(1);
-		Game.level.popups.add(new PopupSelectAction(100, level, gameObject.squareGameObjectIsOn, gameObject));
+		Game.level.popups.add(new PopupSelectAction(200, 100, level, gameObject.squareGameObjectIsOn,
+				gameObject.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 
 	public void squareSelected(Square square) {
 		if (Game.level.popups.size() == 2)
 			Game.level.popups.remove(1);
-		Game.level.popups.add(new PopupSelectAction(100, level, square, square));
+		Game.level.popups.add(new PopupSelectAction(200, 100, level, square,
+				square.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 }

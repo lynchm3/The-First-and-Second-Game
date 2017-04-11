@@ -6,6 +6,7 @@ import org.lwjgl.input.Mouse;
 import com.marklynch.Game;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.level.popup.PopupButton;
+import com.marklynch.level.popup.PopupSelectAction;
 import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
@@ -317,19 +318,38 @@ public class UserInputLevel {
 
 			}
 		} else {
+			System.out.println("interactWith wants to show popup");
 			for (Popup popup : Game.level.popups) {
 				for (Button button : popup.buttons) {
 					button.removeHighlight();
 				}
 			}
 			Game.level.popups.clear();
-			if (square instanceof InventorySquare) {
+			if (square instanceof InventorySquare && ((InventorySquare) square).gameObject != null) {
+				PopupSelectAction popupSelectAction = new PopupSelectAction(0, 200, Game.level, square,
+						((InventorySquare) square).gameObject.getAllActionsInInventory(Game.level.player));
+				if (popupSelectAction.buttons.size() > 0)
+					Game.level.popups.add(popupSelectAction);
 				// Game.level.popups.add(e);
-			} else {
+			} else if (!(square instanceof InventorySquare)) {
 				PopupSelectObject popupSelectObject = new PopupSelectObject(100, Game.level, square);
 				if (popupSelectObject.buttons.size() > 0)
 					Game.level.popups.add(popupSelectObject);
 			}
+		}
+
+	}
+
+	public static void closeAllPopups() {
+
+		if (Game.level.popups.size() != 0) {
+
+			int popupToRemoveIndex = Game.level.popups.size() - 1;
+			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
+				button.removeHighlight();
+			}
+			Game.level.popups.remove(popupToRemoveIndex);
+
 		}
 
 	}
@@ -440,16 +460,7 @@ public class UserInputLevel {
 	public static void backSpacedTyped() {
 		if (Game.level.activeActor != Game.level.player)
 			return;
-
-		if (Game.level.popups.size() != 0) {
-
-			int popupToRemoveIndex = Game.level.popups.size() - 1;
-			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
-				button.removeHighlight();
-			}
-			Game.level.popups.remove(popupToRemoveIndex);
-
-		}
+		closeAllPopups();
 	}
 
 	public static void tabTyped() {
@@ -460,6 +471,7 @@ public class UserInputLevel {
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy);
 		}
+		closeAllPopups();
 	}
 
 	public static void keyTyped(char character) {

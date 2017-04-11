@@ -95,6 +95,14 @@ public class InventorySquare extends Square {
 		return null;
 	}
 
+	public ArrayList<Action> getAllActionsForTheSquareOrObject(Actor performer) {
+		GameObject targetGameObject = this.gameObject;
+		if (targetGameObject != null) {
+			return targetGameObject.getAllActionsInInventory(performer);
+		}
+		return new ArrayList<Action>();
+	}
+
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 		return null;

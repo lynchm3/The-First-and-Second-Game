@@ -6,6 +6,7 @@ import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.units.Actor;
 
@@ -176,7 +177,10 @@ public class Weapon extends GameObject {
 
 	@Override
 	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
-		return new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.add(new ActionEquip(performer, this));
+		actions.add(new ActionDrop(performer, performer.squareGameObjectIsOn, this));
+		return actions;
 	}
 
 	public Action getUtilityAction(Actor performer) {

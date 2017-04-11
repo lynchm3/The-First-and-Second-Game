@@ -6,6 +6,7 @@ import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.units.Actor;
 
@@ -19,14 +20,15 @@ public class Tool extends GameObject {
 	public Tool(String name, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
-			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float iceResistance,
-			float electricResistance, float poisonResistance, Actor owner, float anchorX, float anchorY) {
+			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float iceResistance, float electricResistance, float poisonResistance, Actor owner, float anchorX,
+			float anchorY) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner);
 
 		this.minRange = minRange;
 		this.maxRange = maxRange;
@@ -138,7 +140,10 @@ public class Tool extends GameObject {
 
 	@Override
 	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
-		return new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.add(new ActionEquip(performer, this));
+		actions.add(new ActionDrop(performer, performer.squareGameObjectIsOn, this));
+		return actions;
 	}
 
 	public Action getUtilityAction(Actor performer) {
@@ -149,7 +154,8 @@ public class Tool extends GameObject {
 	public Tool makeCopy(Square square, Actor owner) {
 		return new Tool(new String(name), minRange, maxRange, imageTexturePath, totalHealth, square, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner, anchorX, anchorY);
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner,
+				anchorX, anchorY);
 	}
 }

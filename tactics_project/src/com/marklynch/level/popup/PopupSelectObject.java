@@ -81,7 +81,8 @@ public class PopupSelectObject extends Popup {
 			}
 			Game.level.popups.remove(popupToRemoveIndex);
 		}
-		Game.level.popups.add(new PopupSelectAction(100, level, gameObject.squareGameObjectIsOn, gameObject));
+		Game.level.popups.add(new PopupSelectAction(200, 100, level, gameObject.squareGameObjectIsOn,
+				gameObject.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 
 	public void squareSelected(Square square) {
@@ -92,6 +93,7 @@ public class PopupSelectObject extends Popup {
 			}
 			Game.level.popups.remove(popupToRemoveIndex);
 		}
-		Game.level.popups.add(new PopupSelectAction(100, level, square, square));
+		Game.level.popups.add(new PopupSelectAction(200, 100, level, square,
+				square.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 }
