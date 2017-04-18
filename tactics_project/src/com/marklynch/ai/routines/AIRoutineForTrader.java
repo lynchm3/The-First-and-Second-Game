@@ -74,6 +74,7 @@ public class AIRoutineForTrader extends AIRoutine {
 				false);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
@@ -126,6 +127,7 @@ public class AIRoutineForTrader extends AIRoutine {
 
 		if (shopkeepState == SHOPKEEP_STATE.UPDATING_SIGN) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_UPDATING_SIGN;
+			this.actor.thoughtBubbleImageTexture = trader.shopSign.imageTexture;
 			// Go to the sign
 			// New action to set text of the sign
 			// Donezo

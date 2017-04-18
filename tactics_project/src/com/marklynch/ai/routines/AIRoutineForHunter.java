@@ -84,6 +84,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Carcass.class, 5f, false, false, true,
 				true);
 		if (carcass != null) {
+			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
 			if (!lootedCarcass) {
@@ -99,6 +100,7 @@ public class AIRoutineForHunter extends AIRoutine {
 				false);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);

@@ -177,7 +177,6 @@ public class AIRoutine {
 	}
 
 	public boolean runSearchRoutine() {
-		System.out.println("runSearchRoutine()");
 
 		// Searching
 		if (this.actor.locationsToSearch.size() == 0)

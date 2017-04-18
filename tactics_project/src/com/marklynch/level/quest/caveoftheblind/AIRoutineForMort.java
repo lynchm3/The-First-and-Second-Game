@@ -335,12 +335,13 @@ public class AIRoutineForMort extends AIRoutine {
 				for (GameObject stolenItem : stolenItemsOnCriminal) {
 					if (criminal.inventory.contains(stolenItem)) {
 						new ActionDrop(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();
+						this.actor.thoughtBubbleImageTexture = stolenItem.imageTexture;
 					}
 				}
 				for (Crime unresolvedCrime : unresolvedCrimes) {
 					unresolvedCrime.resolved = true;
 				}
-				actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+				// actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 				return true;
 			} else if (stolenItemsOnCriminal.size() > 0) {
 				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
