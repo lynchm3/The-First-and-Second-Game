@@ -511,7 +511,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid)
 				+ Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
-
 	}
 
 	@Override

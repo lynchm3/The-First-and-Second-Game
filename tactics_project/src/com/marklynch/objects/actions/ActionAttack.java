@@ -91,7 +91,6 @@ public class ActionAttack extends Action {
 
 	@Override
 	public boolean check() {
-
 		if (!performer.visibleFrom(target.squareGameObjectIsOn))
 			return false;
 

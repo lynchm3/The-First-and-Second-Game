@@ -36,8 +36,8 @@ public class Blind extends Actor {
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner,
 				faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX,
 				legsAnchorY);
-		aiRoutine = new AIRoutineForBlind(this);
 		this.roomLivingIn = roomLivingIn;
+		aiRoutine = new AIRoutineForBlind(this);
 	}
 
 	@Override

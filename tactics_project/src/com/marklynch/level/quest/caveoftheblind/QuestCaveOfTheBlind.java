@@ -24,6 +24,7 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.weapons.Weapon;
 
 public class QuestCaveOfTheBlind extends Quest {
@@ -345,11 +346,16 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.BOULDER.makeCopy(Game.level.squares[90][34], null);
 		Templates.BOULDER.makeCopy(Game.level.squares[91][34], null);
 		Templates.BOULDER.makeCopy(Game.level.squares[93][34], null);
-		Templates.BOULDER.makeCopy(Game.level.squares[91][35], null);
 		Templates.CHEST.makeCopy("Chest", Game.level.squares[91][36], false, null);
 		Templates.BOULDER.makeCopy(Game.level.squares[93][35], null);
 		Templates.BOULDER.makeCopy(Game.level.squares[92][36], null);
 		Templates.BOULDER.makeCopy(Game.level.squares[92][35], null);
+
+		// Rock Golem
+		RockGolem rockGolem = Templates.ROCK_GOLEM.makeCopy(Game.level.squares[91][35], Game.level.factions.get(3),
+				caveIn, false);
+		rockGolem.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, null));
+		rockGolem.equipped = rockGolem.inventory.get(0);
 
 		// Path Caved In Corridor to dining room
 		cavePaths.add(new StructurePath("Caved In Corridor", false, new ArrayList<Actor>(), Game.level.squares[95][37],

@@ -282,7 +282,6 @@ public class AIRoutine {
 	}
 
 	public boolean runSearchCooldown() {
-		System.out.println("runSearchCooldown()");
 
 		// DOORWAYS are my biggest issue here.
 

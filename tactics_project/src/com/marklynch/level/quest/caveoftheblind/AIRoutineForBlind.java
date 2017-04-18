@@ -15,6 +15,7 @@ import com.marklynch.objects.actions.ActionScream;
 import com.marklynch.objects.actions.ActionTakeBite;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForBlind extends AIRoutine {
@@ -157,7 +158,7 @@ public class AIRoutineForBlind extends AIRoutine {
 			this.actor.thoughtBubbleImageTexture = null;
 		}
 
-		addNonBlindToAttackersList();
+		addNonBlindNonGolemToAttackersList();
 		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class, Tool.class);
 
 		createSearchLocationsBasedOnVisibleAttackers();
@@ -165,7 +166,7 @@ public class AIRoutineForBlind extends AIRoutine {
 		if (runFightRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			new ActionScream(blind).perform();
-			addNonBlindToAttackersList();
+			addNonBlindNonGolemToAttackersList();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
@@ -178,7 +179,7 @@ public class AIRoutineForBlind extends AIRoutine {
 
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();
-			addNonBlindToAttackersList();
+			addNonBlindNonGolemToAttackersList();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
@@ -236,19 +237,20 @@ public class AIRoutineForBlind extends AIRoutine {
 
 			}
 		}
-		addNonBlindToAttackersList();
+		addNonBlindNonGolemToAttackersList();
 		createSearchLocationsBasedOnVisibleAttackers();
 
 		if (hangry)
 			this.blind.activityDescription = "Hangry";
 	}
 
-	public void addNonBlindToAttackersList() {
+	public void addNonBlindNonGolemToAttackersList() {
 		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(this.actor.sight);
 		for (Square square : squares) {
 			if (this.actor.visibleFrom(square)) {
 				Actor actorOnSquare = (Actor) square.inventory.getGameObjectOfClass(Actor.class);
-				if (actorOnSquare != null && !(actorOnSquare instanceof Blind)) {
+				if (actorOnSquare != null && !(actorOnSquare instanceof Blind)
+						&& !(actorOnSquare instanceof RockGolem)) {
 					this.actor.addAttackerForThisAndGroupMembers(actorOnSquare);
 				}
 			}

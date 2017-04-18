@@ -1,0 +1,120 @@
+package com.marklynch.objects.units;
+
+import com.marklynch.Game;
+import com.marklynch.ai.routines.AIRoutineForRockGolem;
+import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.objects.Bed;
+import com.marklynch.objects.Inventory;
+import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextureUtils;
+
+import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
+
+public class RockGolem extends Actor {
+
+	public StructureRoom roomLivingIn;
+	public boolean awake = false;
+	public Texture sleepingTexture;
+
+	public RockGolem(String name, String title, int actorLevel, int health, int strength, int dexterity,
+			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
+			int sight, Bed bed, Inventory inventory, boolean showInventory, boolean fitsInInventory,
+			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
+			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
+			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
+			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, Actor owner,
+			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, StructureRoom roomLivingIn,
+			boolean awake) {
+		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
+				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner,
+				faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX,
+				legsAnchorY);
+		this.awake = awake;
+		this.roomLivingIn = roomLivingIn;
+		aiRoutine = new AIRoutineForRockGolem(this);
+		sleepingTexture = ResourceUtils.getGlobalImage("rock_golem_sleeping.png");
+
+		drawOffsetX = 0;
+		drawOffsetY = -32;
+	}
+
+	@Override
+	public void draw1() {
+
+		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
+		// persistsWhenCantBeSeen == false)
+		// return;
+		//
+		// if (!this.squareGameObjectIsOn.seenByPlayer)
+		// return;
+		if (awake) {
+			super.draw1();
+			return;
+		}
+
+		if (this.remainingHealth <= 0)
+			return;
+
+		if (!Game.fullVisiblity) {
+			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+				return;
+
+			if (!this.squareGameObjectIsOn.seenByPlayer)
+				return;
+		}
+
+		// Draw object
+		if (squareGameObjectIsOn != null) {
+			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+
+			float alpha = 1.0f;
+
+			// TextureUtils.skipNormals = true;
+
+			if (!this.squareGameObjectIsOn.visibleToPlayer)
+				alpha = 0.5f;
+			TextureUtils.drawTexture(sleepingTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + 64,
+					actorPositionYInPixels, actorPositionYInPixels + 64, backwards);
+			// TextureUtils.skipNormals = false;
+		}
+
+	}
+
+	@Override
+	public void attacked(Actor attacker) {
+		super.attacked(attacker);
+		awake = true;
+	}
+
+	@Override
+	public void postLoad1() {
+		super.postLoad1();
+		aiRoutine = new AIRoutineForRockGolem(this);
+	}
+
+	@Override
+	public void postLoad2() {
+		super.postLoad2();
+	}
+
+	public RockGolem makeCopy(Square square, Faction faction, StructureRoom roomLivingIn, boolean awake) {
+
+		RockGolem actor = new RockGolem(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
+				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
+				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
+				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
+				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance,
+				poisonResistance, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX,
+				bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn, awake);
+		return actor;
+	}
+
+}

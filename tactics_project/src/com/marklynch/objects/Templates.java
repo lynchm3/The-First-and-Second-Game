@@ -8,6 +8,7 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
+import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -27,6 +28,11 @@ public class Templates {
 	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
 			new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
 			0f, 0f, 0f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null);
+
+	public static final RockGolem ROCK_GOLEM = new RockGolem("Rock Golem", "Rock Golem", 1, 100, 0, 0, 0, 0,
+			"rock_golem.png", null, 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1.5f, 0.5f, 0.5f,
+			1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null,
+			false);
 
 	// Special People
 	public static final Mort MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
