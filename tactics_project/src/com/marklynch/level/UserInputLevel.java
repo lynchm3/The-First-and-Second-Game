@@ -301,7 +301,7 @@ public class UserInputLevel {
 			// if (!(action instanceof ActionRead) && !(action instanceof
 			// ActionTalk))
 			// interactedThisTurn = true;
-			if (defaultAction instanceof ActionMove) {
+			if (defaultAction instanceof ActionMove && defaultAction.enabled) {
 
 				if (key == Keyboard.KEY_UP) {
 					Game.dragY += Game.SQUARE_HEIGHT;

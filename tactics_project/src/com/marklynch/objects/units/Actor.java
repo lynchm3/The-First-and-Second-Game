@@ -848,11 +848,9 @@ public class Actor extends GameObject {
 		if (this == Game.level.player) {
 			return null;
 		} else if (performer.attackers.contains(this)) {
-			if (performer.equipped instanceof Weapon) {
-				Weapon weapon = (Weapon) performer.equipped;
-				if (weapon.hasRange(performer.straightLineDistanceTo(this.squareGameObjectIsOn))) {
-					return new ActionAttack(performer, this);
-				}
+			ActionAttack actionAttack = new ActionAttack(performer, this);
+			if (actionAttack.enabled && actionAttack.legal) {
+				return actionAttack;
 			}
 		} else {
 			return new ActionTalk(performer, this);

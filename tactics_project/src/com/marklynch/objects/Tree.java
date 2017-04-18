@@ -9,7 +9,6 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
@@ -130,12 +129,9 @@ public class Tree extends GameObject {
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-
-		if (performer.equipped instanceof Weapon) {
-			Weapon weapon = (Weapon) performer.equipped;
-			if (weapon.hasRange(performer.straightLineDistanceTo(this.squareGameObjectIsOn))) {
-				return new ActionAttack(performer, this);
-			}
+		ActionAttack actionAttack = new ActionAttack(performer, this);
+		if (actionAttack.enabled && actionAttack.legal) {
+			return actionAttack;
 		}
 		return null;
 	}
