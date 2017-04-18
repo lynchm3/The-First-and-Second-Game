@@ -85,6 +85,29 @@ public class AIRoutineForMort extends AIRoutine {
 			mort.locationsToSearch.remove(actor);
 		}
 
+		// If blind are in mine and getting too close to mgmt door, move to it
+		float mortsDistanceFromBedroomDoor = mort
+				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
+		for (Blind blind : mort.questCaveOfTheBlind.blind) {
+			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
+				float blindDistanceFromMortsRoom = blind
+						.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
+				if (blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor < 4) {
+					Square doorSquare = mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
+					Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
+					mort.performingFeedingDemo = false;
+					if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
+						new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
+						lockedInRoom = true;
+					} else {
+						AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
+					}
+					return;
+				}
+
+			}
+		}
+
 		// updateListOfCrimesWitnessed();
 
 		// Player attacker and under half health - ring bell
@@ -122,29 +145,6 @@ public class AIRoutineForMort extends AIRoutine {
 
 		if (lockedInRoom) {
 			return;
-		}
-
-		// If blind are in mine and getting too close to mgmt door, move to it
-		float mortsDistanceFromBedroomDoor = mort
-				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
-		for (Blind blind : mort.questCaveOfTheBlind.blind) {
-			if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
-				float blindDistanceFromMortsRoom = blind
-						.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
-				if (blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor < 4) {
-					Square doorSquare = mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
-					Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
-					mort.performingFeedingDemo = false;
-					if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
-						new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
-						lockedInRoom = true;
-					} else {
-						AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
-					}
-					return;
-				}
-
-			}
 		}
 
 		// Feeding demo
