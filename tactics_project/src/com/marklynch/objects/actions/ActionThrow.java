@@ -73,7 +73,7 @@ public class ActionThrow extends Action {
 			else
 				victim = target.owner;
 
-			Crime crime = new Crime(this, this.performer, victim, 3);
+			Crime crime = new Crime(this, this.performer, victim, 6);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

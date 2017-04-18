@@ -44,7 +44,7 @@ public class ActionPickUp extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, object.owner, 2, object);
+			Crime crime = new Crime(this, this.performer, object.owner, 4, object);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

@@ -324,7 +324,7 @@ public class AIRoutineForMort extends AIRoutine {
 				}
 			}
 
-			if (accumulatedSeverity >= 5) {
+			if (accumulatedSeverity >= 10) {
 				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
 				actor.addAttackerForThisAndGroupMembers(criminal);
 				for (Crime unresolvedCrime : unresolvedCrimes) {
@@ -347,27 +347,8 @@ public class AIRoutineForMort extends AIRoutine {
 				return true;
 			} else if (stolenItemsOnCriminal.size() > 0) {
 				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
-					ConversationResponse accept = new ConversationResponse("Accept", null) {
-						@Override
-						public void select() {
-							super.select();
-							for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-								new ActionGive(criminal, actor, stolenItemOnCriminal).perform();
-							}
-						}
-					};
-					ConversationResponse refuse = new ConversationResponse("Refuse", null) {
-						@Override
-						public void select() {
-							super.select();
-							actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
-							actor.addAttackerForThisAndGroupMembers(criminal);
-						}
-					};
-					ConversationPart conversationPartSaveTheWolf = new ConversationPart(
-							new Object[] { "Give me that!" }, new ConversationResponse[] { accept, refuse },
-							this.actor);
-					new ActionTalk(this.actor, criminal, new Conversation(conversationPartSaveTheWolf)).perform();
+					new ActionTalk(this.actor, criminal, createJusticeConversation(criminal, stolenItemsOnCriminal))
+							.perform();
 					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 					return true;
 				}
@@ -398,5 +379,57 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 		return false;
+	}
+
+	public Conversation createJusticeConversation(final Actor criminal,
+			final ArrayList<GameObject> stolenItemsOnCriminal) {
+		ConversationResponse accept = new ConversationResponse("Accept", null) {
+			@Override
+			public void select() {
+				super.select();
+				for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
+					new ActionGive(criminal, actor, stolenItemOnCriminal).perform();
+				}
+			}
+		};
+		ConversationResponse refuse = new ConversationResponse("Refuse", null) {
+			@Override
+			public void select() {
+				super.select();
+				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+				actor.addAttackerForThisAndGroupMembers(criminal);
+			}
+		};
+
+		Object[] demand = new Object[] {};
+		if (stolenItemsOnCriminal.size() == 1) {
+			demand = new Object[] { "Give me that ", stolenItemsOnCriminal.get(0), "!" };
+		} else {
+			ArrayList<Object> demandArrayList = new ArrayList<Object>();
+			for (int i = 0; i < stolenItemsOnCriminal.size(); i++) {
+				if (i == 0) {
+					// first item
+					demandArrayList.add("Give me that ");
+					demandArrayList.add(stolenItemsOnCriminal.get(i));
+				} else if (i == stolenItemsOnCriminal.size() - 1) {
+					// last item
+					demandArrayList.add(" and ");
+					demandArrayList.add(stolenItemsOnCriminal.get(i));
+					demandArrayList.add("!");
+				} else {
+					// middle items
+					demandArrayList.add(", ");
+					demandArrayList.add(stolenItemsOnCriminal.get(i));
+				}
+			}
+
+			demand = demandArrayList.toArray();
+		}
+
+		ConversationPart conversationPartJustice = new ConversationPart(demand,
+				new ConversationResponse[] { accept, refuse }, this.actor);
+
+		return new Conversation(conversationPartJustice);
+
 	}
 }
