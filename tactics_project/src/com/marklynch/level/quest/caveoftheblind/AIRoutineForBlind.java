@@ -116,7 +116,6 @@ public class AIRoutineForBlind extends AIRoutine {
 			if (meatChunk == null) {
 				Sound tempBellSound = getSoundFromSourceType(Bell.class);
 				if (tempBellSound != null) {
-					System.out.println("FOUND A BELL SOUND");
 					bellSound = tempBellSound;
 					blind.locationsToSearch.clear();
 					targetSquare = null;
@@ -142,7 +141,6 @@ public class AIRoutineForBlind extends AIRoutine {
 					}
 				}
 				if (bellSound != null && blind.straightLineDistanceTo(bellSound.sourceSquare) <= 1) {
-					System.out.println("DISSAPOINTMENT");
 					this.blind.activityDescription = "Hangry";
 					failedToGetPathToBellCount = 0;
 					if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)

@@ -79,16 +79,12 @@ public abstract class Action {
 	}
 
 	public void trespassingCheck(Action action, Actor performer, Square square) {
-		if (performer == Game.level.player)
-			System.out.println("trespassingCheck()");
 		if (square.restricted == true && !square.owners.contains(performer)) {
-			if (performer == Game.level.player)
-				System.out.println("We're trespassing! :O");
 			float loudness = 0;
 			if (action.sound != null)
 				loudness = action.sound.loudness;
 			ActionTrespass actionTrespass = new ActionTrespass(performer, square, loudness);
-			Crime crime = new Crime(actionTrespass, performer, square.owners.get(0), 1);
+			Crime crime = new Crime(actionTrespass, performer, square.owners.get(0), 0);
 			performer.crimesPerformedThisTurn.add(crime);
 			performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

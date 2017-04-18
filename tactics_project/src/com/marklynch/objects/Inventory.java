@@ -347,14 +347,11 @@ public class Inventory {
 	}
 
 	public void remove(GameObject gameObject) {
-		System.out.println("remove");
 		if (gameObjects.contains(gameObject)) {
-			System.out.println("remove b");
 			gameObjects.remove(gameObject);
 			gameObject.inventorySquareGameObjectIsOn = null;
 			if (parent != null)
 				parent.inventoryChanged();
-			System.out.println("remove - matchGameObjectsToSquares");
 			// this.sort(inventorySortBy);
 			if (filteredGameObjects.contains(gameObject)) {
 				filteredGameObjects.set(filteredGameObjects.indexOf(gameObject), null);

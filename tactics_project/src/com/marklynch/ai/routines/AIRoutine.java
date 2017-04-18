@@ -59,7 +59,6 @@ public class AIRoutine {
 				if (!crime.resolved) {
 					if (this.actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) <= this.actor.sight
 							&& this.actor.visibleFrom(criminal.squareGameObjectIsOn)) {
-						System.out.println("Adding criminal");
 						this.actor.locationsToSearch.put(criminal, criminal.squareGameObjectIsOn);
 					}
 				}
@@ -178,6 +177,7 @@ public class AIRoutine {
 	}
 
 	public boolean runSearchRoutine() {
+		System.out.println("runSearchRoutine()");
 
 		// Searching
 		if (this.actor.locationsToSearch.size() == 0)
@@ -190,28 +190,29 @@ public class AIRoutine {
 		boolean moved = false;
 
 		for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
-			// distance 0
+			if (this.actor.straightLineDistanceTo(actorToSearchFor.squareGameObjectIsOn) <= 2
+					&& this.actor.canSee(actorToSearchFor.squareGameObjectIsOn)) {
+				searchCooldown = 0;
+				toRemove.add(actorToSearchFor);
+				continue;
+			}
 
 			Square searchSquare = this.actor.locationsToSearch.get(actorToSearchFor);
 			searchCooldownActor = actorToSearchFor;
 			searchCooldown = 10;
-			boolean done = false;
 
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 					&& this.actor.getPathTo(searchSquare) != null) {
 
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 				this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
-				AIRoutineUtils.moveTowardsTargetSquare(searchSquare);
-				moved = true;
-				System.out.println("runSearchRoutine 0");
+				moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquare);
 
-				done = true;
 				break;
 
 			}
 
-			if (done)
+			if (moved)
 				break;
 
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) <= 1) {
@@ -226,17 +227,14 @@ public class AIRoutine {
 
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
-					AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceOne);
-					moved = true;
-					System.out.println("runSearchRoutine 1");
+					moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceOne);
 
-					done = true;
 					break;
 
 				}
 			}
 
-			if (done)
+			if (moved)
 				break;
 
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) <= 2) {
@@ -250,17 +248,13 @@ public class AIRoutine {
 
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
-					AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceTwo);
-					moved = true;
-					System.out.println("runSearchRoutine 2");
-
-					done = true;
+					moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceTwo);
 					break;
 
 				}
 			}
 
-			if (done)
+			if (moved)
 				break;
 
 			toRemove.add(actorToSearchFor);
@@ -289,6 +283,7 @@ public class AIRoutine {
 	}
 
 	public boolean runSearchCooldown() {
+		System.out.println("runSearchCooldown()");
 
 		// DOORWAYS are my biggest issue here.
 

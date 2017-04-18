@@ -318,7 +318,6 @@ public class UserInputLevel {
 
 			}
 		} else {
-			System.out.println("interactWith wants to show popup");
 			for (Popup popup : Game.level.popups) {
 				for (Button button : popup.buttons) {
 					button.removeHighlight();

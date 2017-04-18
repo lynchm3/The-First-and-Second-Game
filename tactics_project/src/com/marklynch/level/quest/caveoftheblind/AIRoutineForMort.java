@@ -82,8 +82,6 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 		for (Actor actor : toRemove) {
-			System.out.println("removing actor out of jurisdiction " + actor.squareGameObjectIsOn.xInGrid + ", "
-					+ actor.squareGameObjectIsOn.xInGrid);
 			mort.locationsToSearch.remove(actor);
 		}
 
@@ -335,7 +333,6 @@ public class AIRoutineForMort extends AIRoutine {
 				actor.miniDialogue = "MY ORES!";
 				new ActionThrow(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
 				for (GameObject stolenItem : stolenItemsOnCriminal) {
-					System.out.println("stolenItem = " + stolenItem);
 					if (criminal.inventory.contains(stolenItem)) {
 						new ActionDrop(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();
 					}
@@ -355,7 +352,6 @@ public class AIRoutineForMort extends AIRoutine {
 
 				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
 						&& actor.visibleFrom(criminal.squareGameObjectIsOn)) {
-					System.out.println("unresolvedCrimes b");
 					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						return true;
