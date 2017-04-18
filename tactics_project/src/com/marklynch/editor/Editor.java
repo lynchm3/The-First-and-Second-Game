@@ -38,12 +38,12 @@ import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.level.quest.smallgame.QuestSmallGame;
 import com.marklynch.objects.Bed;
-import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
+import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.units.Actor;
@@ -497,10 +497,12 @@ public class Editor {
 		Game.level.squares[4][4].loadImages();
 
 		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
-		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 6, 1, new RoomPart(6, 1, 10, 4)));
-		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 12, 1, new RoomPart(12, 1, 16, 4)));
+		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 6, 1, false,
+				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })), new RoomPart(6, 1, 10, 4)));
+		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 12, 1, true, new ArrayList<Actor>(),
+				new RoomPart(12, 1, 16, 4)));
 		ArrayList<StructureSection> shopSections = new ArrayList<StructureSection>();
-		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5));
+		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5, false));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructurePath>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -100,
 				-100 + 868, true, trader, new ArrayList<Square>(), new ArrayList<Wall>());
@@ -532,9 +534,10 @@ public class Editor {
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
 		ArrayList<StructureRoom> lodgeAtriums = new ArrayList<StructureRoom>();
-		lodgeAtriums.add(new StructureRoom("Hunting Lodge", 8, 8, new RoomPart(8, 8, 10, 10)));
+		lodgeAtriums.add(
+				new StructureRoom("Hunting Lodge", 8, 8, false, new ArrayList<Actor>(), new RoomPart(8, 8, 10, 10)));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
-		lodgeSections.add(new StructureSection("Hunting Lodge", 7, 7, 11, 11));
+		lodgeSections.add(new StructureSection("Hunting Lodge", 7, 7, 11, 11, false));
 
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructurePath>(),
 				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true,

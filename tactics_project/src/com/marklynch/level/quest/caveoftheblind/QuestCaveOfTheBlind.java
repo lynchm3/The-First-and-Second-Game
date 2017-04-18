@@ -178,37 +178,41 @@ public class QuestCaveOfTheBlind extends Quest {
 		ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>();
 
 		// West Entrance section
-		caveSections.add(new StructureSection("Mort & Mort Mining", 24, 6, 40, 20));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 24, 6, 40, 20, false));
 		// West entrance room
-		westEntrance = new StructureRoom("West Entrance", 25, 13, new RoomPart(24, 13, 37, 18));
+		westEntrance = new StructureRoom("West Entrance", 25, 13, false, new ArrayList<Actor>(),
+				new RoomPart(24, 13, 37, 18));
 		rooms.add(westEntrance);
 
 		// Path west entrance to west atrium
-		cavePaths.add(new StructurePath("West Entrance <-> West Atrium", Game.level.squares[38][15],
-				Game.level.squares[39][15], Game.level.squares[40][15], Game.level.squares[41][15],
-				Game.level.squares[42][15]));
+		cavePaths.add(new StructurePath("West Entrance <-> West Atrium", false, new ArrayList<Actor>(),
+				Game.level.squares[38][15], Game.level.squares[39][15], Game.level.squares[40][15],
+				Game.level.squares[41][15], Game.level.squares[42][15]));
 
 		// West atrium section
-		caveSections.add(new StructureSection("Mort & Mort Mining", 41, 14, 49, 19));
-		caveSections.add(new StructureSection("Mort & Mort Mining", 41, 5, 49, 13));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 41, 14, 49, 19, false));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 41, 5, 49, 13, false));
 		// West Atrium room
-		westAtriumPart1 = new StructureRoom("West Atrium", 43, 9, new RoomPart(43, 9, 47, 15));
+		westAtriumPart1 = new StructureRoom("West Atrium", 43, 9, false, new ArrayList<Actor>(),
+				new RoomPart(43, 9, 47, 1));
 		rooms.add(westAtriumPart1);
-		westAtriumPart2 = new StructureRoom("West Atrium", 43, 7, new RoomPart(43, 7, 47, 8));
+		westAtriumPart2 = new StructureRoom("West Atrium", 43, 7, false, new ArrayList<Actor>(),
+				new RoomPart(43, 7, 47, 8));
 		rooms.add(westAtriumPart2);
 
 		// West Atrium extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[43][7], null));
 
 		// Path West Atrium to West Security
-		cavePaths.add(new StructurePath("West Atrium <-> West Security", Game.level.squares[48][7],
-				Game.level.squares[49][7], Game.level.squares[50][7], Game.level.squares[51][7]));
+		cavePaths.add(new StructurePath("West Atrium <-> West Security", false, new ArrayList<Actor>(),
+				Game.level.squares[48][7], Game.level.squares[49][7], Game.level.squares[50][7],
+				Game.level.squares[51][7]));
 
 		// West Security section
-		caveSections.add(new StructureSection("Mort & Mort Mining", 44, 0, 62, 18));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 44, 0, 62, 18, false));
 		// West Security room
-		westSecurity1 = new StructureRoom("West Security", 52, 4, new RoomPart(52, 4, 59, 9),
-				new RoomPart(54, 10, 60, 17));
+		westSecurity1 = new StructureRoom("West Security", 52, 4, false, new ArrayList<Actor>(),
+				new RoomPart(52, 4, 59, 9), new RoomPart(54, 10, 60, 17));
 		rooms.add(westSecurity1);
 
 		// West security extras
@@ -232,15 +236,17 @@ public class QuestCaveOfTheBlind extends Quest {
 		securityChest.inventory.add(Templates.PICKAXE.makeCopy(null, null));
 
 		// West Security to outer mine y 17 -> 21 55+56x
-		cavePaths.add(new StructurePath("West Security <-> Outer Mine", Game.level.squares[55][17],
-				Game.level.squares[55][18], Game.level.squares[55][19], Game.level.squares[55][20],
-				Game.level.squares[55][21], Game.level.squares[56][17], Game.level.squares[56][18],
-				Game.level.squares[56][19], Game.level.squares[56][20], Game.level.squares[56][21]));
+		cavePaths.add(new StructurePath("West Security <-> Outer Mine", false, new ArrayList<Actor>(),
+				Game.level.squares[55][17], Game.level.squares[55][18], Game.level.squares[55][19],
+				Game.level.squares[55][20], Game.level.squares[55][21], Game.level.squares[56][17],
+				Game.level.squares[56][18], Game.level.squares[56][19], Game.level.squares[56][20],
+				Game.level.squares[56][21]));
 
 		// Outer mine section
-		caveSections.add(new StructureSection("Mort & Mort Mining", 45, 19, 74, 37));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 45, 19, 74, 37, false));
 		// Outer Mine room
-		outerMine = new StructureRoom("Outer Mine", 55, 22, new RoomPart(55, 22, 73, 23), new RoomPart(55, 24, 66, 36));
+		outerMine = new StructureRoom("Outer Mine", 55, 22, false, new ArrayList<Actor>(), new RoomPart(55, 22, 73, 23),
+				new RoomPart(55, 24, 66, 36));
 		rooms.add(outerMine);
 
 		// Outer Mine extra
@@ -251,50 +257,51 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[56][20], null);
 
 		// Path outer mine to rec room
-		cavePaths.add(
-				new StructurePath("Outer Mine <-> Rec Room", Game.level.squares[67][36], Game.level.squares[68][36],
-						Game.level.squares[69][36], Game.level.squares[70][36], Game.level.squares[70][35],
-						Game.level.squares[70][34], Game.level.squares[70][33], Game.level.squares[70][32],
-						Game.level.squares[70][31], Game.level.squares[71][31], Game.level.squares[72][31],
-						Game.level.squares[73][31], Game.level.squares[74][31], Game.level.squares[75][31]));
+		cavePaths.add(new StructurePath("Outer Mine <-> Rec Room", false, new ArrayList<Actor>(),
+				Game.level.squares[67][36], Game.level.squares[68][36], Game.level.squares[69][36],
+				Game.level.squares[70][36], Game.level.squares[70][35], Game.level.squares[70][34],
+				Game.level.squares[70][33], Game.level.squares[70][32], Game.level.squares[70][31],
+				Game.level.squares[71][31], Game.level.squares[72][31], Game.level.squares[73][31],
+				Game.level.squares[74][31], Game.level.squares[75][31]));
 
 		// Rec room section
-		caveSections.add(new StructureSection("Mort & Mort Mining", 75, 25, 91, 33));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 75, 25, 91, 33, false));
 		// Rec room room
-		recRoom = new StructureRoom("Rec Room", 76, 26, new RoomPart(76, 26, 90, 32));
+		recRoom = new StructureRoom("Rec Room", 76, 26, false, new ArrayList<Actor>(), new RoomPart(76, 26, 90, 32));
 		rooms.add(recRoom);
 
 		// REc room extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[85][26], null));
 
 		// Tunnel section rec room to dungeon
-		caveSections.add(new StructureSection("Mort & Mort Mining", 92, 25, 98, 27));
-		caveSections.add(new StructureSection("Mort & Mort Mining", 94, 7, 105, 24));
-		caveSections.add(new StructureSection("Mort & Mort Mining", 75, 2, 93, 10));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 92, 25, 98, 27, false));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 94, 7, 105, 24, false));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 75, 2, 93, 10, false));
 
 		// Path rec room to dungeon
-		cavePaths.add(new StructurePath("Rec Room <-> Dungeon", Game.level.squares[91][26], Game.level.squares[92][26],
-				Game.level.squares[93][26], Game.level.squares[94][26], Game.level.squares[95][26],
-				Game.level.squares[95][25], Game.level.squares[95][24], Game.level.squares[95][23],
-				Game.level.squares[95][22], Game.level.squares[95][21], Game.level.squares[95][20],
-				Game.level.squares[95][19], Game.level.squares[95][18], Game.level.squares[95][17],
-				Game.level.squares[95][16], Game.level.squares[95][15], Game.level.squares[95][14],
-				Game.level.squares[95][13], Game.level.squares[95][12], Game.level.squares[95][11],
-				Game.level.squares[95][10], Game.level.squares[95][9], Game.level.squares[94][9],
-				Game.level.squares[93][9], Game.level.squares[92][9], Game.level.squares[91][9],
-				Game.level.squares[90][9], Game.level.squares[89][9], Game.level.squares[88][9],
-				Game.level.squares[87][9], Game.level.squares[86][9], Game.level.squares[85][9],
-				Game.level.squares[84][9], Game.level.squares[83][9], Game.level.squares[82][9],
-				Game.level.squares[81][9], Game.level.squares[80][9], Game.level.squares[79][9],
-				Game.level.squares[78][9], Game.level.squares[77][9], Game.level.squares[76][9],
-				Game.level.squares[75][9], Game.level.squares[74][9]));
+		cavePaths.add(
+				new StructurePath("Rec Room <-> Dungeon", false, new ArrayList<Actor>(), Game.level.squares[91][26],
+						Game.level.squares[92][26], Game.level.squares[93][26], Game.level.squares[94][26],
+						Game.level.squares[95][26], Game.level.squares[95][25], Game.level.squares[95][24],
+						Game.level.squares[95][23], Game.level.squares[95][22], Game.level.squares[95][21],
+						Game.level.squares[95][20], Game.level.squares[95][19], Game.level.squares[95][18],
+						Game.level.squares[95][17], Game.level.squares[95][16], Game.level.squares[95][15],
+						Game.level.squares[95][14], Game.level.squares[95][13], Game.level.squares[95][12],
+						Game.level.squares[95][11], Game.level.squares[95][10], Game.level.squares[95][9],
+						Game.level.squares[94][9], Game.level.squares[93][9], Game.level.squares[92][9],
+						Game.level.squares[91][9], Game.level.squares[90][9], Game.level.squares[89][9],
+						Game.level.squares[88][9], Game.level.squares[87][9], Game.level.squares[86][9],
+						Game.level.squares[85][9], Game.level.squares[84][9], Game.level.squares[83][9],
+						Game.level.squares[82][9], Game.level.squares[81][9], Game.level.squares[80][9],
+						Game.level.squares[79][9], Game.level.squares[78][9], Game.level.squares[77][9],
+						Game.level.squares[76][9], Game.level.squares[75][9], Game.level.squares[74][9]));
 
 		// Dungeon section
-		caveSections.add(new StructureSection("Mort & Mort Mining", 63, 2, 74, 18));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 63, 2, 74, 18, false));
 
 		// Dungeon room
-		dungeon = new StructureRoom("Dungeon", 66, 7, new RoomPart(65, 9, 71, 12), new RoomPart(66, 7, 73, 15),
-				new RoomPart(68, 10, 72, 16));
+		dungeon = new StructureRoom("Dungeon", 66, 7, false, new ArrayList<Actor>(), new RoomPart(65, 9, 71, 12),
+				new RoomPart(66, 7, 73, 15), new RoomPart(68, 10, 72, 16));
 		rooms.add(dungeon);
 
 		// Dungeon extras
@@ -304,16 +311,16 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[69][7], null));
 
 		// Path rec room to toilet
-		cavePaths.add(new StructurePath("Rec Room <-> Latrine", Game.level.squares[91][28], Game.level.squares[92][28],
-				Game.level.squares[93][28], Game.level.squares[94][28], Game.level.squares[95][28],
-				Game.level.squares[96][28]));
+		cavePaths.add(new StructurePath("Rec Room <-> Latrine", false, new ArrayList<Actor>(),
+				Game.level.squares[91][28], Game.level.squares[92][28], Game.level.squares[93][28],
+				Game.level.squares[94][28], Game.level.squares[95][28], Game.level.squares[96][28]));
 
 		// Toilet section
-		caveSections.add(new StructureSection("Latrine", 92, 20, 105, 33));
+		caveSections.add(new StructureSection("Latrine", 92, 20, 105, 33, false));
 
 		// toilet room
-		toilet = new StructureRoom("Latrine", 96, 29, new RoomPart(96, 29, 98, 30), new RoomPart(99, 29, 103, 31),
-				new RoomPart(68, 10, 72, 16));
+		toilet = new StructureRoom("Latrine", 96, 29, false, new ArrayList<Actor>(), new RoomPart(96, 29, 98, 30),
+				new RoomPart(99, 29, 103, 31), new RoomPart(68, 10, 72, 16));
 		rooms.add(toilet);
 
 		// toilet extras
@@ -323,14 +330,15 @@ public class QuestCaveOfTheBlind extends Quest {
 		// DROP_HOLE
 
 		// Path rec room to Caved In Corridor
-		cavePaths.add(new StructurePath("Caved In Corridor", Game.level.squares[89][33]));
+		cavePaths
+				.add(new StructurePath("Caved In Corridor", false, new ArrayList<Actor>(), Game.level.squares[89][33]));
 
 		// Caved In Corridor section
-		caveSections.add(new StructureSection("Mort & Mort Mining", 88, 33, 97, 37));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 88, 33, 97, 37, false));
 
 		// Caved In Corridor room
-		caveIn = new StructureRoom("Caved In Corridor", 89, 35, new RoomPart(89, 34, 94, 35),
-				new RoomPart(91, 36, 95, 36));
+		caveIn = new StructureRoom("Caved In Corridor", 89, 35, false, new ArrayList<Actor>(),
+				new RoomPart(89, 34, 94, 35), new RoomPart(91, 36, 95, 36));
 		rooms.add(caveIn);
 
 		// Cave in features
@@ -344,17 +352,19 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.BOULDER.makeCopy(Game.level.squares[92][35], null);
 
 		// Path Caved In Corridor to dining room
-		cavePaths.add(new StructurePath("Caved In Corridor", Game.level.squares[95][37], Game.level.squares[95][38]));
+		cavePaths.add(new StructurePath("Caved In Corridor", false, new ArrayList<Actor>(), Game.level.squares[95][37],
+				Game.level.squares[95][38]));
 
 		// Path inner mine to dining room
-		cavePaths.add(new StructurePath("Inner Mine <-> Dining Room", Game.level.squares[87][46],
-				Game.level.squares[88][46]));
+		cavePaths.add(new StructurePath("Inner Mine <-> Dining Room", false, new ArrayList<Actor>(),
+				Game.level.squares[87][46], Game.level.squares[88][46]));
 
 		// Dining room section
-		caveSections.add(new StructureSection("Dining Room", 88, 38, 99, 55));
+		caveSections.add(new StructureSection("Dining Room", 88, 38, 99, 55, false));
 
 		// Dining room
-		diningRoom = new StructureRoom("Dining Room", 89, 39, new RoomPart(89, 39, 97, 54));
+		diningRoom = new StructureRoom("Dining Room", 89, 39, false, new ArrayList<Actor>(),
+				new RoomPart(89, 39, 97, 54));
 		rooms.add(diningRoom);
 
 		// Dining room extras
@@ -435,17 +445,17 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.TABLE.makeCopy(Game.level.squares[94][51], null);
 
 		// Path rec room to quarters
-		cavePaths.add(
-				new StructurePath("Rec Room <-> Quarters", Game.level.squares[83][25], Game.level.squares[83][25]));
+		cavePaths.add(new StructurePath("Rec Room <-> Quarters", false, new ArrayList<Actor>(),
+				Game.level.squares[83][25], Game.level.squares[83][25]));
 
-		cavePaths.add(
-				new StructurePath("Rec Room <-> Quarters", Game.level.squares[83][24], Game.level.squares[83][25]));
+		cavePaths.add(new StructurePath("Rec Room <-> Quarters", false, new ArrayList<Actor>(),
+				Game.level.squares[83][24], Game.level.squares[83][25]));
 
 		// Section Quarters
-		caveSections.add(new StructureSection("Mort & Mort Mining", 75, 11, 93, 24));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 75, 11, 93, 24, false));
 		// Room Quarters
-		quarters = new StructureRoom("Quarters", 76, 12, new RoomPart(76, 12, 88, 21), new RoomPart(79, 13, 92, 22),
-				new RoomPart(81, 13, 92, 23));
+		quarters = new StructureRoom("Quarters", 76, 12, false, new ArrayList<Actor>(), new RoomPart(76, 12, 88, 21),
+				new RoomPart(79, 13, 92, 22), new RoomPart(81, 13, 92, 23));
 		rooms.add(quarters);
 
 		// Quarters extras
@@ -487,14 +497,14 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.CHEST.makeCopy("Paul's Gear", Game.level.squares[91][23], true, null, paulsKey);
 
 		// Path rec room to quarters
-		cavePaths.add(
-				new StructurePath("Rec Room <-> Inner Mine", Game.level.squares[85][33], Game.level.squares[85][34]));
+		cavePaths.add(new StructurePath("Rec Room <-> Inner Mine", false, new ArrayList<Actor>(),
+				Game.level.squares[85][33], Game.level.squares[85][34]));
 
 		// Morts Mine Section
-		caveSections.add(new StructureSection("Mort & Mort Mining", 73, 34, 87, 50));
+		caveSections.add(new StructureSection("Mort & Mort Mining", 73, 34, 87, 50, false));
 		// Morts Mine Room
-		mort.mortsMine = new StructureRoom("Inner Mine", 76, 36, new RoomPart(78, 35, 86, 47),
-				new RoomPart(76, 36, 86, 46), new RoomPart(77, 41, 84, 48));
+		mort.mortsMine = new StructureRoom("Inner Mine", 76, 36, false, new ArrayList<Actor>(),
+				new RoomPart(78, 35, 86, 47), new RoomPart(76, 36, 86, 46), new RoomPart(77, 41, 84, 48));
 		rooms.add(mort.mortsMine);
 
 		// Inner mine extras
@@ -510,18 +520,20 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[86][37], mort));
 
 		// Morts Rooms Section
-		mort.mortsRooms = new StructureSection("Mort & Mort Mining", 43, 36, 75, 49);
+		mort.mortsRooms = new StructureSection("Mort & Mort Mining", 43, 38, 75, 49, true, mort);
 		caveSections.add(mort.mortsRooms);
 
 		// Morts Quarters
-		mort.mortsRoom = new StructureRoom("Management", 65, 39, new RoomPart(65, 39, 74, 42));
+		mort.mortsRoom = new StructureRoom("Management", 65, 39, false, new ArrayList<Actor>(),
+				new RoomPart(65, 39, 74, 42));
 		rooms.add(mort.mortsRoom);
 		Chest confiscatedChest = Templates.CHEST.makeCopy("Confiscated", Game.level.squares[69][42], false, mort,
 				mortsKey);
 		confiscatedChest.inventory.add(alsKey);
 
 		// Morts Vault Room
-		mort.mortsVault = new StructureRoom("Vault", 49, 39, new RoomPart(49, 39, 63, 42));
+		mort.mortsVault = new StructureRoom("Vault", 49, 39, false, new ArrayList<Actor>(),
+				new RoomPart(49, 39, 63, 42));
 		rooms.add(mort.mortsVault);
 
 		// Cave featues for Mort
@@ -537,79 +549,81 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(mortsStoreroomDoor);
 
 		// Path Dining room to equipment room
-		cavePaths.add(new StructurePath("Dining Room <-> Equipment", Game.level.squares[86][51],
-				Game.level.squares[87][51], Game.level.squares[88][51]));
+		cavePaths.add(new StructurePath("Dining Room <-> Equipment", false, new ArrayList<Actor>(),
+				Game.level.squares[86][51], Game.level.squares[87][51], Game.level.squares[88][51]));
 
 		// Path Inner Mine to Equipment room
-		cavePaths.add(
-				new StructurePath("Inner Mine <-> Equipment", Game.level.squares[85][50], Game.level.squares[85][51],
-						Game.level.squares[84][51], Game.level.squares[84][50], Game.level.squares[84][49]));
+		cavePaths.add(new StructurePath("Inner Mine <-> Equipment", false, new ArrayList<Actor>(),
+				Game.level.squares[85][50], Game.level.squares[85][51], Game.level.squares[84][51],
+				Game.level.squares[84][50], Game.level.squares[84][49]));
 
 		// Equipment section
-		caveSections.add(new StructureSection("Equipment", 74, 51, 87, 58));
+		caveSections.add(new StructureSection("Equipment", 74, 51, 87, 58, false));
 
 		// Equipment room
-		equipment = new StructureRoom("Equipment", 76, 52, new RoomPart(76, 52, 85, 55));
+		equipment = new StructureRoom("Equipment", 76, 52, false, new ArrayList<Actor>(), new RoomPart(76, 52, 85, 55));
 		rooms.add(equipment);
 
 		// Equipment extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[76][55], null));
 
 		// Path Dining Room <-> Kitchen
-		cavePaths.add(new StructurePath("Dining Room <-> Kitchen", Game.level.squares[93][55],
-				Game.level.squares[93][56], Game.level.squares[93][57]));
+		cavePaths.add(new StructurePath("Dining Room <-> Kitchen", false, new ArrayList<Actor>(),
+				Game.level.squares[93][55], Game.level.squares[93][56], Game.level.squares[93][57]));
 
 		// Kitchen section
-		caveSections.add(new StructureSection("Kitchen", 80, 56, 110, 75));
+		caveSections.add(new StructureSection("Kitchen", 80, 56, 110, 75, false));
 
 		// Kitchen room
-		kitchen = new StructureRoom("Kitchen", 92, 58, new RoomPart(92, 58, 97, 69), new RoomPart(93, 59, 99, 72));
+		kitchen = new StructureRoom("Kitchen", 92, 58, false, new ArrayList<Actor>(), new RoomPart(92, 58, 97, 69),
+				new RoomPart(93, 59, 99, 72));
 		rooms.add(kitchen);
 
 		// Kitchen extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[99][59], null));
 
 		// Path Dining Room <-> East Security
-		cavePaths.add(new StructurePath("Dining Room <-> East Security", Game.level.squares[98][51],
-				Game.level.squares[99][51], Game.level.squares[99][52], Game.level.squares[99][53],
-				Game.level.squares[100][53], Game.level.squares[101][53]));
+		cavePaths.add(new StructurePath("Dining Room <-> East Security", false, new ArrayList<Actor>(),
+				Game.level.squares[98][51], Game.level.squares[99][51], Game.level.squares[99][52],
+				Game.level.squares[99][53], Game.level.squares[100][53], Game.level.squares[101][53]));
 
 		// East Security section
-		caveSections.add(new StructureSection("East Security", 99, 43, 115, 56));
+		caveSections.add(new StructureSection("East Security", 99, 43, 115, 56, false));
 
 		// East Security room
-		eastSecurity = new StructureRoom("East Security", 101, 45, new RoomPart(101, 45, 106, 50),
-				new RoomPart(102, 46, 105, 54));
+		eastSecurity = new StructureRoom("East Security", 101, 45, false, new ArrayList<Actor>(),
+				new RoomPart(101, 45, 106, 50), new RoomPart(102, 46, 105, 54));
 		rooms.add(eastSecurity);
 
 		// East security extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[102][46], null));
 
 		// East Security <-> East Atrium
-		cavePaths.add(new StructurePath("East Security <-> East Atrium", Game.level.squares[107][45],
-				Game.level.squares[108][45], Game.level.squares[109][45], Game.level.squares[110][45]));
+		cavePaths.add(new StructurePath("East Security <-> East Atrium", false, new ArrayList<Actor>(),
+				Game.level.squares[107][45], Game.level.squares[108][45], Game.level.squares[109][45],
+				Game.level.squares[110][45]));
 
 		// East Atrium Section
-		caveSections.add(new StructureSection("East Atrium", 108, 36, 117, 46));
+		caveSections.add(new StructureSection("East Atrium", 108, 36, 117, 46, false));
 
 		// East Atrium Room
-		eastAtrium = new StructureRoom("East Atrium", 110, 40, new RoomPart(113, 37, 115, 40),
-				new RoomPart(110, 40, 114, 44));
+		eastAtrium = new StructureRoom("East Atrium", 110, 40, false, new ArrayList<Actor>(),
+				new RoomPart(113, 37, 115, 40), new RoomPart(110, 40, 114, 44));
 		rooms.add(eastAtrium);
 
 		// East Atrium Extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[112][42], null));
 
 		// East Atrium <-> East Entrance
-		cavePaths.add(new StructurePath("East Atrium <-> East Entrance", Game.level.squares[115][34],
-				Game.level.squares[115][35], Game.level.squares[115][36]));
+		cavePaths.add(new StructurePath("East Atrium <-> East Entrance", false, new ArrayList<Actor>(),
+				Game.level.squares[115][34], Game.level.squares[115][35], Game.level.squares[115][36]));
 
 		// East Entrance
-		caveSections.add(new StructureSection("East Entrance", 107, 20, 121, 35));
+		caveSections.add(new StructureSection("East Entrance", 107, 20, 121, 35, false));
 
 		// East Entrance
-		eastEntrance = new StructureRoom("East Entrance", 109, 30, new RoomPart(109, 30, 117, 33),
-				new RoomPart(110, 30, 121, 30));
+		eastEntrance = new StructureRoom("East Entrance", 109, 30, false, new ArrayList<Actor>(),
+				new RoomPart(109, 30, 117, 33), new RoomPart(110, 30, 121, 30));
 		rooms.add(eastEntrance);
 
 		ArrayList<Square> squaresToRemove = new ArrayList<Square>();

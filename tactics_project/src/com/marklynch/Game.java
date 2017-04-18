@@ -28,6 +28,10 @@ import mdesl.test.Util;
 
 public class Game {
 
+	// DEBUG
+	public static boolean fullVisiblity = true;
+	public static boolean redHighlightOnRestrictedSquares = true;
+
 	// Player start pos
 	// Dining room
 	public static int playerStartPosX = 93;
@@ -104,9 +108,6 @@ public class Game {
 
 	public static Inventory inventoryHoveringOver = null;
 	public static InventorySquare inventorySquareMouseIsOver = null;
-
-	// DEBUG
-	public static boolean fullVisiblity = true;
 
 	public void start() {
 

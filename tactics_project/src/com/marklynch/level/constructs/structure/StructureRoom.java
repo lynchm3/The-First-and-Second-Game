@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.objects.units.Actor;
 
 public class StructureRoom {
 	public String name;
@@ -12,7 +13,8 @@ public class StructureRoom {
 	public float x;
 	public float y;
 
-	public StructureRoom(String name, float x, float y, RoomPart... roomParts) {
+	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList,
+			RoomPart... roomParts) {
 		super();
 		this.name = name;
 		this.x = x;
@@ -25,6 +27,19 @@ public class StructureRoom {
 				}
 			}
 		}
+
+		if (restricted) {
+			for (Square square : squares) {
+				square.restricted = true;
+			}
+		}
+
+		if (ownersArrayList.size() > 0) {
+			for (Square square : squares) {
+				square.owners = ownersArrayList;
+			}
+		}
+
 	}
 
 	public static class RoomPart {

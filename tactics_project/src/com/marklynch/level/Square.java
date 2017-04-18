@@ -131,6 +131,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		TextureUtils.drawTexture(imageTexture, alpha, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
 				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
+		if (restricted && Game.redHighlightOnRestrictedSquares) {
+			drawRedHighlight();
+		}
+
 		// square highlights
 
 		// if (reachableBySelectedCharater || weaponsThatCanAttack.size() > 0) {
@@ -203,6 +207,24 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	}
 
+	public void drawHighlight() {
+
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+
+	}
+
+	public void drawRedHighlight() {
+
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture4, squarePositionX,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
+
+	}
+
 	public void draw2() {
 
 		// int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
@@ -212,15 +234,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// QuadUtils.drawQuad(new Color(0.5f, 0.5f, 0.5f, 0.75f),
 		// squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
 		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
-
-	}
-
-	public void drawHighlight() {
-
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
 
