@@ -11,6 +11,7 @@ import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -138,7 +139,10 @@ public class RockGolem extends Actor {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (this != Game.level.player) {
-			// Talk
+			// Pick up
+			if (!awake)
+				actions.add(new ActionPickUp(performer, this));
+			// Attack
 			actions.add(new ActionAttack(performer, this));
 			// Inherited from squre (move/swap squares)
 			if (awake)

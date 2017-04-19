@@ -17,7 +17,9 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLootAll;
+import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionTake;
+import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
@@ -474,6 +476,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (this.remainingHealth < 0)
 			return actions;
 
+		actions.add(new ActionPickUp(performer, this));
 		// public boolean showInventory;
 		// public boolean canShareSquare;
 		if (fitsInInventory) {
@@ -493,6 +496,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (this != Game.level.player)
 			actions.add(new ActionAttack(performer, this));
 		// }
+
+		if (performer.equipped != null) {
+			actions.add(new ActionThrow(performer, this, performer.equipped));
+		}
+
 		return actions;
 
 	}

@@ -22,6 +22,7 @@ import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTakeAll;
+import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -297,6 +298,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			return null;
 		} else if (performer.travelDistance >= performer.straightLineDistanceTo(this)) {
 			return new ActionMove(performer, this);
+
 		} else {
 			return null;
 		}
@@ -314,12 +316,24 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			actions.add(new ActionTakeAll(performer, this));
 		}
 
+		if (performer.equipped != null) {
+			actions.add(new ActionThrow(performer, this, performer.equipped));
+		}
+
 		return actions;
 	}
 
 	public int straightLineDistanceTo(Square otherSquare) {
 		return Math.abs(otherSquare.xInGrid - this.xInGrid) + Math.abs(otherSquare.yInGrid - this.yInGrid);
 
+	}
+
+	public float getCenterX() {
+		return xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
+	}
+
+	public float getCenterY() {
+		return yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
 	}
 
 	public boolean includableInPath() {

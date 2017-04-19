@@ -54,8 +54,8 @@ public class ActionAttack extends Action {
 
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			Game.level.projectiles
-					.add(new Projectile("Arrow", performer, target, Templates.ARROW.makeCopy(null, null), 2f, true));
+			Game.level.projectiles.add(new Projectile("Arrow", performer, target, target.squareGameObjectIsOn,
+					Templates.ARROW.makeCopy(null, null), 2f, true));
 		} else {
 			performer.showPow(target);
 		}
@@ -91,6 +91,10 @@ public class ActionAttack extends Action {
 
 	@Override
 	public boolean check() {
+
+		if (performer.equipped == null)
+			return false;
+
 		if (!performer.visibleFrom(target.squareGameObjectIsOn))
 			return false;
 
@@ -119,6 +123,10 @@ public class ActionAttack extends Action {
 	public Sound createSound() {
 
 		// Sound
+
+		if (performer.equipped == null)
+			return null;
+
 		float loudness = target.soundWhenHit * performer.equipped.soundWhenHitting;
 		if (performer.equipped != null)
 			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,

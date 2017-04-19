@@ -13,7 +13,8 @@ public class Projectile {
 
 	public String name;
 	public Actor shooter;
-	public GameObject target;
+	public GameObject targetGameObject;
+	public Square targetSquare;
 	float x, y, originX, originY, targetX, targetY, speedX, speedY;
 	boolean onTarget;
 	String imagePath;
@@ -21,8 +22,8 @@ public class Projectile {
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
 
-	public Projectile(String name, Actor shooter, GameObject target, GameObject projectileObject, float speed,
-			boolean onTarget) {
+	public Projectile(String name, Actor shooter, GameObject targetGameObject, Square targetSquare,
+			GameObject projectileObject, float speed, boolean onTarget) {
 		super();
 
 		if (shooter == Game.level.player) {
@@ -33,13 +34,14 @@ public class Projectile {
 
 		this.name = name;
 		this.shooter = shooter;
-		this.target = target;
+		this.targetGameObject = targetGameObject;
+		this.targetSquare = targetSquare;
 		this.projectileObject = projectileObject;
 
 		this.x = this.originX = shooter.getCenterX();
 		this.y = this.originY = shooter.getCenterY();
-		this.targetX = target.getCenterX();
-		this.targetY = target.getCenterY();
+		this.targetX = targetSquare.getCenterX();
+		this.targetY = targetSquare.getCenterY();
 
 		distanceToCoverX = this.targetX - this.originX;
 		distanceToCoverY = this.targetY - this.originY;
@@ -66,9 +68,10 @@ public class Projectile {
 		if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
 			Game.level.projectilesToRemove.add(this);
-			shooter.showPow(target);
+			if (targetGameObject != null)
+				shooter.showPow(targetGameObject);
 			if (!(projectileObject instanceof Arrow))
-				target.squareGameObjectIsOn.inventory.add(projectileObject);
+				targetSquare.inventory.add(projectileObject);
 		} else {
 			x += distanceX;
 			y += distanceY;

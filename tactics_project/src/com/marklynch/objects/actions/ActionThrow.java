@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
@@ -10,22 +11,30 @@ import com.marklynch.ui.ActivityLog;
 
 public class ActionThrow extends Action {
 
-	public static final String ACTION_NAME = "Attack";
+	public static final String ACTION_NAME = "Throw";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
-	GameObject target;
-	GameObject object;
+	Square targetSquare;
+	GameObject targetGameObject;
+	GameObject projectile;
 
 	// Default for hostiles
-	public ActionThrow(Actor performer, GameObject target, GameObject object) {
+	public ActionThrow(Actor performer, Object target, GameObject object) {
 		super(ACTION_NAME);
 		this.performer = performer;
-		this.target = target;
-		this.object = object;
+		if (target instanceof Square) {
+			targetSquare = (Square) target;
+		} else if (target instanceof GameObject) {
+			targetGameObject = (GameObject) target;
+			targetSquare = targetGameObject.squareGameObjectIsOn;
+		}
+		this.projectile = object;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
+			actionName = ACTION_NAME + " " + object.name + " (can't reach)";
+		} else {
+			actionName = ACTION_NAME + " " + object.name;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -38,7 +47,8 @@ public class ActionThrow extends Action {
 			return;
 
 		float damage = 5;
-		target.remainingHealth -= damage;
+		if (targetGameObject != null)
+			targetGameObject.remainingHealth -= damage;
 		// target.attacked(performer);
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
@@ -46,14 +56,29 @@ public class ActionThrow extends Action {
 		String attackTypeString;
 		attackTypeString = "attacked ";
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(
-					new Object[] { performer, " threw a ", object, " at ", target, " for " + damage + " damage" }));
+		if (performer.squareGameObjectIsOn.visibleToPlayer) {
+			if (targetGameObject != null) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile, " at ",
+						targetGameObject, " for " + damage + " damage" }));
+			} else {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile }));
+
+			}
+		}
 
 		// shoot projectile
-		Game.level.projectiles.add(new Projectile(object.name, performer, target, object, 2f, true));
+		Game.level.projectiles
+				.add(new Projectile(projectile.name, performer, targetGameObject, targetSquare, projectile, 2f, true));
 
-		if (performer.faction == Game.level.factions.get(0)) {
+		if (performer.equipped == projectile)
+			performer.equipped = null;
+
+		if (performer.inventory.contains(projectile))
+			performer.inventory.remove(projectile);
+
+		if (performer.faction == Game.level.factions.get(0))
+
+		{
 			Game.level.undoList.clear();
 			Game.level.undoButton.enabled = false;
 		}
@@ -67,16 +92,17 @@ public class ActionThrow extends Action {
 
 		if (!legal) {
 
-			Actor victim;
-			if (object instanceof Actor)
-				victim = (Actor) object;
-			else
-				victim = target.owner;
-
-			Crime crime = new Crime(this, this.performer, victim, 6);
-			this.performer.crimesPerformedThisTurn.add(crime);
-			this.performer.crimesPerformedInLifetime.add(crime);
-			notifyWitnessesOfCrime(crime);
+			Actor victim = null;
+			if (projectile instanceof Actor)
+				victim = (Actor) projectile;
+			else if (targetGameObject != null)
+				victim = targetGameObject.owner;
+			if (victim != null) {
+				Crime crime = new Crime(this, this.performer, victim, 6);
+				this.performer.crimesPerformedThisTurn.add(crime);
+				this.performer.crimesPerformedInLifetime.add(crime);
+				notifyWitnessesOfCrime(crime);
+			}
 		} else {
 			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 		}
@@ -85,10 +111,10 @@ public class ActionThrow extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 10)
+		if (performer.straightLineDistanceTo(targetSquare) > 10)
 			return false;
 
-		if (!performer.visibleFrom(target.squareGameObjectIsOn))
+		if (!performer.visibleFrom(targetSquare))
 			return false;
 
 		return true;
@@ -97,7 +123,7 @@ public class ActionThrow extends Action {
 	@Override
 	public boolean checkLegality() {
 		// Something that belongs to some one else
-		if (target.owner != null && target.owner != Game.level.player)
+		if (targetGameObject != null && targetGameObject.owner != null && targetGameObject.owner != performer)
 			return false;
 		return true;
 	}
@@ -106,9 +132,16 @@ public class ActionThrow extends Action {
 	public Sound createSound() {
 
 		// Sound
-		float loudness = target.soundWhenHit * object.soundWhenHitting;
-		if (performer.equipped != null)
-			return new Sound(performer, object, target.squareGameObjectIsOn, loudness, legal, this.getClass());
+		if (targetGameObject != null) {
+			float loudness = targetGameObject.soundWhenHit * projectile.soundWhenHitting;
+			if (performer.equipped != null)
+				return new Sound(performer, projectile, targetSquare, loudness, legal, this.getClass());
+		} else {
+			float loudness = projectile.soundWhenHitting;
+			if (performer.equipped != null)
+				return new Sound(performer, projectile, targetSquare, loudness, legal, this.getClass());
+
+		}
 		return null;
 	}
 
