@@ -17,7 +17,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLootAll;
-import com.marklynch.objects.actions.ActionPickUp;
+import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
@@ -477,7 +477,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// public boolean showInventory;
 		// public boolean canShareSquare;
 		if (fitsInInventory) {
-			actions.add(new ActionPickUp(performer, this));
+			actions.add(new ActionTake(performer, this));
 		}
 		if (!(this instanceof Actor) && canContainOtherObjects && this.inventory.size() > 0) {
 			actions.add(new ActionLootAll(performer, this));

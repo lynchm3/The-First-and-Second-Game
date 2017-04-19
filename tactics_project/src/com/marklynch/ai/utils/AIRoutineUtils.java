@@ -16,7 +16,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.actions.ActionPickUp;
+import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fight;
 import com.marklynch.objects.units.Path;
@@ -798,7 +798,7 @@ public class AIRoutineUtils {
 	public static boolean pickupTarget(GameObject target) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
 		if (weaponDistance <= 1) {
-			new ActionPickUp(Game.level.activeActor, target).perform();
+			new ActionTake(Game.level.activeActor, target).perform();
 			return true;
 		} else {
 			return false;

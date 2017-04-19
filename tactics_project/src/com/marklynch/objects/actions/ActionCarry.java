@@ -7,7 +7,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionPickUp extends Action {
+public class ActionCarry extends Action {
 
 	public static final String ACTION_NAME = "Pick Up";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -15,7 +15,7 @@ public class ActionPickUp extends Action {
 	Actor performer;
 	GameObject object;
 
-	public ActionPickUp(Actor performer, GameObject object) {
+	public ActionCarry(Actor performer, GameObject object) {
 		super(ACTION_NAME);
 		this.performer = performer;
 		this.object = object;

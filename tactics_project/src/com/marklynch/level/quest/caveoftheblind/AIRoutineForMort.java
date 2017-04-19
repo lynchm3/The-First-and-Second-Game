@@ -17,7 +17,7 @@ import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
-import com.marklynch.objects.actions.ActionPickUp;
+import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrow;
@@ -361,7 +361,7 @@ public class AIRoutineForMort extends AIRoutine {
 			} else if (stolenItemsOnGround.size() > 0) {
 				for (GameObject stolenItemOnGround : stolenItemsOnGround) {
 					if (actor.straightLineDistanceTo(stolenItemOnGround.squareGameObjectIsOn) == 1) {
-						new ActionPickUp(this.actor, stolenItemOnGround).perform();
+						new ActionTake(this.actor, stolenItemOnGround).perform();
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						return true;
 					}

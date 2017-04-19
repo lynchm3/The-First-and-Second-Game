@@ -10,15 +10,15 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionPickUpAll extends Action {
+public class ActionTakeAll extends Action {
 
-	public static final String ACTION_NAME = "Pick Up All";
+	public static final String ACTION_NAME = "Take All";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	Square square;
 
-	public ActionPickUpAll(Actor performer, Square square) {
+	public ActionTakeAll(Actor performer, Square square) {
 		super(ACTION_NAME);
 		this.performer = performer;
 		this.square = square;
@@ -40,7 +40,7 @@ public class ActionPickUpAll extends Action {
 				.getGameObjectsThatFitInInventory().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", gameObjectToLoot }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", gameObjectToLoot }));
 			square.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 			if (gameObjectToLoot.owner == null)
