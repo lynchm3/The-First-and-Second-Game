@@ -11,6 +11,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Path;
+import com.marklynch.objects.units.RockGolem;
 
 public class ActionMove extends Action {
 
@@ -128,26 +129,27 @@ public class ActionMove extends Action {
 		Actor actorInTheWay = null;
 		if (objectInTheWay instanceof Actor) {
 			actorInTheWay = (Actor) objectInTheWay;
-		}
 
-		if (actorInTheWay == Game.level.player) {
-			return false;
-		}
+			if (actorInTheWay == Game.level.player) {
+				return false;
+			}
 
-		if (performer.group != null && performer.group.getLeader() == actorInTheWay) {
-			// don't try to swap with you group leader
-			return false;
-		}
+			if (actorInTheWay instanceof RockGolem) {
+				if (((RockGolem) actorInTheWay).awake == false)
+					return false;
+			}
 
-		// if (actor.group != Game.level.activeActor.group) {
-		//
-		// }
+			if (performer.group != null && performer.group.getLeader() == actorInTheWay) {
+				// don't try to swap with you group leader
+				return false;
+			}
 
-		if (performer != Game.level.player && actorInTheWay != null
-				&& (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn <= 0)) {
-			// If actorInTheWay has no moves left, doesn't count when player
-			// tries to move
-			return false;
+			if (performer != Game.level.player && actorInTheWay != null
+					&& (actorInTheWay.travelDistance - actorInTheWay.distanceMovedThisTurn <= 0)) {
+				// If actorInTheWay has no moves left, doesn't count when player
+				// tries to move
+				return false;
+			}
 		}
 
 		return true;

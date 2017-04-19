@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.units.WildAnimal;
 
 public class ActionDie extends Action {
@@ -42,6 +43,8 @@ public class ActionDie extends Action {
 		GameObject body;
 		if (performer instanceof WildAnimal)
 			body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null);
+		else if (performer instanceof RockGolem)
+			body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null);
 		else
 			body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null);
 
@@ -53,7 +56,9 @@ public class ActionDie extends Action {
 			gameObjectInInventory.owner = null;
 		}
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

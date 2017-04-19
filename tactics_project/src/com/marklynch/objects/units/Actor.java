@@ -108,7 +108,7 @@ public class Actor extends GameObject {
 	public float legsAnchorY;
 
 	public transient Group group;
-	private transient ArrayList<Actor> attackers;
+	protected transient ArrayList<Actor> attackers;
 
 	public transient Conversation conversation;
 
