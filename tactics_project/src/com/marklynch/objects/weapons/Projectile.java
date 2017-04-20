@@ -3,6 +3,7 @@ package com.marklynch.objects.weapons;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.Arrow;
+import com.marklynch.objects.DropHole;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
@@ -70,8 +71,13 @@ public class Projectile {
 			Game.level.projectilesToRemove.add(this);
 			if (targetGameObject != null)
 				shooter.showPow(targetGameObject);
-			if (!(projectileObject instanceof Arrow))
-				targetSquare.inventory.add(projectileObject);
+			if (!(projectileObject instanceof Arrow)) {
+				if (targetGameObject instanceof DropHole && projectileObject.canShareSquare) {
+					targetGameObject.inventory.add(projectileObject);
+				} else {
+					targetSquare.inventory.add(projectileObject);
+				}
+			}
 		} else {
 			x += distanceX;
 			y += distanceY;

@@ -23,6 +23,8 @@ public class GameObjectTemplate implements InventoryParent {
 	public boolean canContainOtherObjects;
 	public boolean blocksLineOfSight;
 	public boolean persistsWhenCantBeSeen;
+	public boolean attackable;
+
 	public float value = 1;
 	public Date pickUpdateDateTime = new Date();
 	public float widthRatio = 1;
@@ -42,14 +44,17 @@ public class GameObjectTemplate implements InventoryParent {
 	public float electricResistance;
 	public float poisonResistance;
 
+	public float weight;
+
 	public transient Texture imageTexture = null;
 
 	public GameObjectTemplate(String name, float totalHealth, String imageTexturePath, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
-			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
-			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
-			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float iceResistance, float electricResistance, float poisonResistance) {
+			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen,
+			boolean attackable, float widthRatio, float heightRatio, float soundHandleX, float soundHandleY,
+			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
+			float lightHandlY, boolean stackable, float fireResistance, float iceResistance, float electricResistance,
+			float poisonResistance, float weight) {
 		super();
 		this.name = name;
 		this.totalHealth = totalHealth;
@@ -65,6 +70,7 @@ public class GameObjectTemplate implements InventoryParent {
 		this.heightRatio = heightRatio;
 		this.blocksLineOfSight = blocksLineOfSight;
 		this.persistsWhenCantBeSeen = persistsWhenCantBeSeen;
+		this.attackable = attackable;
 
 		this.soundHandleX = soundHandleX;
 		this.soundHandleY = soundHandleY;
@@ -79,22 +85,23 @@ public class GameObjectTemplate implements InventoryParent {
 		this.iceResistance = iceResistance;
 		this.electricResistance = electricResistance;
 		this.poisonResistance = poisonResistance;
+		this.weight = weight;
 	}
 
 	public GameObject makeCopy(Square square, Actor owner) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, owner);
+				persistsWhenCantBeSeen, true, widthRatio, heightRatio, soundHandleX, soundHandleY,
+				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance, poisonResistance, 1, owner);
 	}
 
 	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
 		GameObject copy = new GameObject(new String(name), (int) totalHealth, imageTexturePath, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY,
-				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, owner);
+				blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio, soundHandleX,
+				soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, iceResistance, electricResistance, poisonResistance, 1, owner);
 		copy.backwards = backwards;
 		return copy;
 	}

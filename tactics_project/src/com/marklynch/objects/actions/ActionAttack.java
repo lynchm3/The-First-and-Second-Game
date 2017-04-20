@@ -38,7 +38,8 @@ public class ActionAttack extends Action {
 			return;
 
 		Weapon weapon = (Weapon) performer.equipped;
-		target.remainingHealth -= weapon.getEffectiveSlashDamage();
+		if (target.attackable)
+			target.remainingHealth -= weapon.getEffectiveSlashDamage();
 		target.attacked(performer);
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
@@ -106,6 +107,9 @@ public class ActionAttack extends Action {
 		}
 
 		if (!weapon.hasRange(performer.straightLineDistanceTo(target.squareGameObjectIsOn)))
+			return false;
+
+		if (!target.attackable)
 			return false;
 
 		return true;

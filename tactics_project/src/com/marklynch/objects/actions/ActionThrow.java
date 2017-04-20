@@ -48,7 +48,7 @@ public class ActionThrow extends Action {
 			return;
 
 		float damage = 5;
-		if (targetGameObject != null) {
+		if (targetGameObject != null && targetGameObject.attackable) {
 			targetGameObject.remainingHealth -= damage;
 			targetGameObject.attacked(performer);
 		}

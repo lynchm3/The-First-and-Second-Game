@@ -41,8 +41,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	// attributes
 	public float remainingHealth = 0;
 	boolean favourite = false;
-
 	public transient boolean hasAttackedThisTurn = false;
+
 	// images
 	public static transient Texture powTexture = null;
 	public static transient Texture vsTexture = null;
@@ -85,15 +85,16 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, Actor owner) {
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean attackable, float widthRatio,
+			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
+			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
+			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight,
+			Actor owner) {
 
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance);
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight);
 		this.remainingHealth = health;
 		this.owner = owner;
 
@@ -433,9 +434,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public GameObject makeCopy(Square square, Actor owner) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
+				persistsWhenCantBeSeen, true, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, owner);
+				iceResistance, electricResistance, poisonResistance, 1, owner);
 	}
 
 	public ArrayList<Weapon> getWeaponsInInventory() {
