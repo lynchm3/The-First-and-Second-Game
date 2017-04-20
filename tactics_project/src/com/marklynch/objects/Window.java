@@ -96,6 +96,7 @@ public class Window extends GameObjectExploder {
 			return actions;
 
 		actions.add(new ActionSmash(performer, this));
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;
 
 	}

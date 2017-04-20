@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.units.Actor;
 
@@ -141,7 +140,7 @@ public class Vein extends Wall {
 
 		actions.add(new ActionMine(performer, this));
 
-		actions.add(new ActionAttack(performer, this));
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 
 		return actions;
 

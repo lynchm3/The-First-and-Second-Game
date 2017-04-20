@@ -11,6 +11,7 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionScream;
+import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -73,6 +74,10 @@ public class Blind extends Actor {
 			Weapon weapon = (Weapon) performer.equipped;
 			if (weapon.hasRange(performer.straightLineDistanceTo(this.squareGameObjectIsOn))) {
 				actions.add(new ActionAttack(performer, this));
+			}
+
+			if (performer.equipped != null) {
+				actions.add(new ActionThrow(performer, this, performer.equipped));
 			}
 		}
 

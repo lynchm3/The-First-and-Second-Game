@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionSearch;
+import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -32,6 +33,10 @@ public class DropHole extends Searchable {
 			return actions;
 
 		actions.add(new ActionSearch(performer, this));
+
+		if (performer.equipped != null) {
+			actions.add(new ActionThrow(performer, this, performer.equipped));
+		}
 
 		return actions;
 

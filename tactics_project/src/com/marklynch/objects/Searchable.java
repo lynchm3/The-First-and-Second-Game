@@ -34,6 +34,7 @@ public abstract class Searchable extends GameObject {
 			return actions;
 
 		actions.add(new ActionSearch(performer, this));
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 
 		return actions;
 

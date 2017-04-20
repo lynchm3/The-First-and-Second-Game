@@ -25,6 +25,7 @@ public class ActionThrow extends Action {
 		this.performer = performer;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;
+			targetGameObject = targetSquare.inventory.getGameObjectThatCantShareSquare();
 		} else if (target instanceof GameObject) {
 			targetGameObject = (GameObject) target;
 			targetSquare = targetGameObject.squareGameObjectIsOn;
