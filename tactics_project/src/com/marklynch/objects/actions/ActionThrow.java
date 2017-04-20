@@ -33,7 +33,6 @@ public class ActionThrow extends Action {
 		this.projectile = object;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME + " " + object.name + " (can't reach)";
 		} else {
 			actionName = ACTION_NAME + " " + object.name;
 		}
@@ -113,11 +112,21 @@ public class ActionThrow extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer.straightLineDistanceTo(targetSquare) > 10)
-			return false;
+		float maxDistance = (performer.getEffectiveStrength() * 100) / projectile.weight;
+		if (maxDistance > 10)
+			maxDistance = 10;
 
-		if (!performer.visibleFrom(targetSquare))
+		if (performer.straightLineDistanceTo(targetSquare) > maxDistance) {
+
+			actionName = ACTION_NAME + " " + projectile.name + " (too heavy)";
 			return false;
+		}
+
+		if (!performer.visibleFrom(targetSquare)) {
+
+			actionName = ACTION_NAME + " " + projectile.name + " (can't reach)";
+			return false;
+		}
 
 		return true;
 	}

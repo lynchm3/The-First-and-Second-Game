@@ -15,7 +15,7 @@ import com.marklynch.objects.weapons.Weapon;
 public class Templates {
 
 	// Player
-	public static final Actor Player = new Actor("You", "Fighter", 10, 100, 0, 0, 0, 0, "red1.png", null, 1, 10, null,
+	public static final Actor Player = new Actor("You", "Fighter", 10, 100, 10, 0, 0, 0, "red1.png", null, 1, 10, null,
 			new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
 			0f, 0f, 0f, 90f, null, null, 80f, 80f, 73f, 22f, 80f, 80f, 80f, 80f);
 
@@ -31,7 +31,7 @@ public class Templates {
 
 	public static final RockGolem ROCK_GOLEM = new RockGolem("Rock Golem", "Rock Golem", 1, 100, 0, 0, 0, 0,
 			"rock_golem.png", null, 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1.5f, 0.5f, 0.5f,
-			1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 200f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null,
+			1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 150f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null,
 			false);
 
 	// Special People

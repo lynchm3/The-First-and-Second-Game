@@ -54,10 +54,10 @@ public class Actor extends GameObject {
 		UP, RIGHT, DOWN, LEFT
 	}
 
-	public int strength;
-	public int dexterity;
-	public int intelligence;
-	public int endurance;
+	protected int strength;
+	protected int dexterity;
+	protected int intelligence;
+	protected int endurance;
 	public String title = "";
 	public int actorLevel = 1;
 	public int travelDistance = 4;
@@ -137,13 +137,14 @@ public class Actor extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner, Faction faction,
-			float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY, float bodyAnchorX,
-			float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
+			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
+			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				owner);
 		this.strength = strength;
 		this.dexterity = dexterity;
 		this.intelligence = intelligence;
@@ -974,6 +975,22 @@ public class Actor extends GameObject {
 		attacker.addAttackerForNearbyFactionMembersIfVisible(this);
 		this.addAttackerForNearbyFactionMembersIfVisible(attacker);
 		this.locationsToSearch.put(attacker, attacker.squareGameObjectIsOn);
+	}
+
+	public int getEffectiveStrength() {
+		return strength;
+	}
+
+	public int getEffectiveDexterity() {
+		return dexterity;
+	}
+
+	public int getEffectiveIntelligence() {
+		return intelligence;
+	}
+
+	public int getEffectiveEndurance() {
+		return endurance;
 	}
 
 	// public static void calculateReachableSquares() {

@@ -21,7 +21,6 @@ public class ActionPickUp extends Action {
 		this.object = object;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -53,10 +52,19 @@ public class ActionPickUp extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) < 2) {
-			return true;
+		float maxWeightForPerformer = 50f + performer.getEffectiveStrength() * 10f;
+		System.out.println("maxWeightForPerformer = " + maxWeightForPerformer);
+		System.out.println("object.weight = " + object.weight);
+		if (object.weight > maxWeightForPerformer) {
+			actionName = ACTION_NAME + " (too heavy)";
+			return false;
 		}
-		return false;
+
+		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
+			actionName = ACTION_NAME_DISABLED;
+			return false;
+		}
+		return true;
 	}
 
 	@Override
