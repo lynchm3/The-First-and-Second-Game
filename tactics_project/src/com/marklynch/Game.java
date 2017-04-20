@@ -34,8 +34,12 @@ public class Game {
 
 	// Player start pos
 	// Dining room
-	public static int playerStartPosX = 93;
-	public static int playerStartPosY = 52;
+	// public static int playerStartPosX = 93;
+	// public static int playerStartPosY = 52;
+
+	// Beside rock golem
+	public static int playerStartPosX = 90;
+	public static int playerStartPosY = 35;
 
 	// Camera positions
 

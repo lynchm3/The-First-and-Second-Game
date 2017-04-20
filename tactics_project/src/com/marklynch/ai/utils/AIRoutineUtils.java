@@ -900,7 +900,7 @@ public class AIRoutineUtils {
 			if (pathB != null)
 				travelCostB = pathB.travelCost;
 
-			return travelCostB - travelCostA;
+			return travelCostA - travelCostB;
 		}
 	};
 
