@@ -12,6 +12,7 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionPickUp;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -117,11 +118,9 @@ public class RockGolem extends Actor {
 
 	@Override
 	public void attacked(Actor attacker) {
+		if (!awake)
+			wakeUp();
 		super.attacked(attacker);
-		awake = true;
-		this.blocksLineOfSight = false;
-		this.name = "Rock Golem";
-		imageTexture = awakeTexture;
 	}
 
 	@Override
@@ -164,6 +163,23 @@ public class RockGolem extends Actor {
 				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn, awake);
 		return actor;
+	}
+
+	@Override
+	public void landed() {
+		if (!awake)
+			wakeUp();
+	}
+
+	public void wakeUp() {
+
+		awake = true;
+		this.blocksLineOfSight = false;
+		this.name = "Rock Golem";
+		imageTexture = awakeTexture;
+		if (this.squareGameObjectIsOn.visibleToPlayer) {
+			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " woke up" }));
+		}
 	}
 
 }

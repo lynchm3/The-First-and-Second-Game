@@ -84,6 +84,8 @@ public class ActionThrow extends Action {
 		if (performer.inventory.contains(projectile))
 			performer.inventory.remove(projectile);
 
+		projectile.thrown();
+
 		if (performer.faction == Game.level.factions.get(0))
 
 		{
