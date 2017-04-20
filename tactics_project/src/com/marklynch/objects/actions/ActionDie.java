@@ -42,11 +42,14 @@ public class ActionDie extends Action {
 		// add a carcass
 		GameObject body;
 		if (performer instanceof WildAnimal)
-			body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null);
+			body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
+					performer.weight);
 		else if (performer instanceof RockGolem)
-			body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null);
+			body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
+					performer.weight);
 		else
-			body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null);
+			body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
+					performer.weight);
 
 		ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>) performer.inventory.getGameObjects()
 				.clone();

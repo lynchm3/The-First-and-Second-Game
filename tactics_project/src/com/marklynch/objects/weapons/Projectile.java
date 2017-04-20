@@ -51,7 +51,7 @@ public class Projectile {
 		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
 		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
 
-		if (distanceToCoverX < 0) {
+		if (projectileObject instanceof Arrow && distanceToCoverX < 0) {
 			projectileObject.backwards = true;
 		}
 
