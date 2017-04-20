@@ -48,14 +48,15 @@ public class ActionThrow extends Action {
 			return;
 
 		float damage = 5;
-		if (targetGameObject != null)
+		if (targetGameObject != null) {
 			targetGameObject.remainingHealth -= damage;
+			targetGameObject.attacked(performer);
+		}
 		// target.attacked(performer);
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 		String attackTypeString;
-		attackTypeString = "attacked ";
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer) {
 			if (targetGameObject != null) {

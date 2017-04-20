@@ -678,7 +678,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 				if (this.squareGameObjectIsOn.visibleToPlayer)
 					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
 			}
-
 		}
 	}
 

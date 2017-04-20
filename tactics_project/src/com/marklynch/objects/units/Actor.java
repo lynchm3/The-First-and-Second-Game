@@ -973,6 +973,7 @@ public class Actor extends GameObject {
 		attacker.addAttackerForThisAndGroupMembers(this);
 		attacker.addAttackerForNearbyFactionMembersIfVisible(this);
 		this.addAttackerForNearbyFactionMembersIfVisible(attacker);
+		this.locationsToSearch.put(attacker, attacker.squareGameObjectIsOn);
 	}
 
 	// public static void calculateReachableSquares() {
