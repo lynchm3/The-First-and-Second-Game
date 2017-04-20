@@ -39,24 +39,31 @@ public class ActionDie extends Action {
 		performer.squareGameObjectIsOn.inventory.remove(performer);
 		// this.faction.actors.remove(this);
 
-		// add a carcass
-		GameObject body;
-		if (performer instanceof WildAnimal)
-			body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
-					performer.weight);
-		else if (performer instanceof RockGolem)
-			body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
-					performer.weight);
-		else
-			body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
-					performer.weight);
+		if (performer instanceof RockGolem)
 
-		ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>) performer.inventory.getGameObjects()
-				.clone();
-		for (GameObject gameObjectInInventory : gameObjectsInInventory) {
-			performer.inventory.remove(gameObjectInInventory);
-			body.inventory.add(gameObjectInInventory);
-			gameObjectInInventory.owner = null;
+		{
+			Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
+			Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
+			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
+			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
+			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
+		} else {
+			// add a carcass
+			GameObject body;
+			if (performer instanceof WildAnimal) {
+				body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
+						performer.weight);
+			} else {
+				body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
+						performer.weight);
+			}
+			ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>) performer.inventory.getGameObjects()
+					.clone();
+			for (GameObject gameObjectInInventory : gameObjectsInInventory) {
+				performer.inventory.remove(gameObjectInInventory);
+				body.inventory.add(gameObjectInInventory);
+				gameObjectInInventory.owner = null;
+			}
 		}
 
 		performer.actionsPerformedThisTurn.add(this);
