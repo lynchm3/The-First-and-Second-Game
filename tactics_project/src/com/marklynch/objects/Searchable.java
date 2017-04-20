@@ -18,11 +18,11 @@ public abstract class Searchable extends GameObject {
 			boolean blocksLineOfSight, boolean attackable, boolean persistsWhenCantBeSeen, float widthRatio,
 			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, Actor owner) {
+			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, 1, owner);
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
 
 	}
 
@@ -52,7 +52,7 @@ public abstract class Searchable extends GameObject {
 	// soundHandleY, soundWhenHit,
 	// soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 	// stackable, fireResistance,
-	// iceResistance, electricResistance, poisonResistance, owner);
+	// iceResistance, electricResistance, poisonResistance, weight, owner);
 	// }
 
 }

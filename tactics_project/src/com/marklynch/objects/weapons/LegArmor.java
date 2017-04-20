@@ -21,13 +21,13 @@ public class LegArmor extends GameObject {
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
 			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, Actor owner,
+			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
 			float anchorX, float anchorY) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, 1, owner);
+				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
 
 		this.owner = owner;
 		this.anchorX = anchorX;
@@ -57,7 +57,7 @@ public class LegArmor extends GameObject {
 		return new LegArmor(new String(name), imageTexturePath, totalHealth, square, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner,
 				anchorX, anchorY);
 	}
 }

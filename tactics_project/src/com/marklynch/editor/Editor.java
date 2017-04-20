@@ -444,8 +444,8 @@ public class Editor {
 		// Trader Joe
 		Trader trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png",
 				Game.level.squares[7][1], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(1), 40, 96, 40,
-				96, 40, 96, 40, 96);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 90f, null, Game.level.factions.get(1), 40,
+				96, 40, 96, 40, 96, 40, 96);
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
@@ -470,28 +470,28 @@ public class Editor {
 		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[6][5], new Inventory(),
 				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, trader));
+				0f, 0f, 100f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[7][5], new Inventory(),
 				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, trader));
+				0f, 0f, 100f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[9][5], new Inventory(),
 				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, trader));
+				0f, 0f, 100f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[10][5], new Inventory(),
 				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, trader));
+				0f, 0f, 100f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[12][5], new Inventory(),
 				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, trader));
+				0f, 0f, 100f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[13][5], new Inventory(),
 				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, trader));
+				0f, 0f, 100f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[15][5], new Inventory(),
 				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, trader));
+				0f, 0f, 100f, trader));
 		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[16][5], new Inventory(),
 				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, trader));
+				0f, 0f, 100f, trader));
 
 		Game.level.squares[4][4].imageTexturePath = "stone.png";
 		Game.level.squares[4][4].loadImages();
@@ -604,23 +604,23 @@ public class Editor {
 
 		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,
-				false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null,
+				false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 110f, null,
 				Game.level.factions.get(1), 0, 0, 0, 0, 0, 0, 0, 0);
 
 		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[22][16], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0, 0, 0,
-				0, 0, 0, 0);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.get(2), 0, 0,
+				0, 0, 0, 0, 0, 0);
 
 		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[20][15], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0, 0, 0,
-				0, 0, 0, 0);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0,
+				0, 0, 0, 0, 0, 0);
 
 		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
 				Game.level.squares[20][17], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0.5f,
-				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, null, Game.level.factions.get(2), 0, 0, 0, 0,
-				0, 0, 0, 0);
+				0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0,
+				0, 0, 0, 0, 0, 0);
 
 		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
 		wolfPackMembers.add(superWolf);

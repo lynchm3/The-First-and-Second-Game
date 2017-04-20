@@ -13,22 +13,23 @@ public class Carcass extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, Actor owner) {
+			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, 1, owner);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				owner);
 		baseName = new String(name);
 		if (this.inventory.size() == 0)
 			this.name = baseName + " (empty)";
 	}
 
-	public Carcass makeCopy(String name, Square square, Actor owner) {
+	public Carcass makeCopy(String name, Square square, Actor owner, float weight) {
 		return new Carcass(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, owner);
+				iceResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class Carcass extends GameObject {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, owner);
+				iceResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 	@Override

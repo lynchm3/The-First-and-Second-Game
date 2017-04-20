@@ -31,7 +31,7 @@ public class RockGolem extends Actor {
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
 			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, Actor owner,
+			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, StructureRoom roomLivingIn,
 			boolean awake) {
@@ -39,7 +39,7 @@ public class RockGolem extends Actor {
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner,
 				faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX,
 				legsAnchorY);
 		this.awake = awake;
@@ -158,7 +158,7 @@ public class RockGolem extends Actor {
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance,
-				poisonResistance, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX,
+				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX,
 				bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn, awake);
 		return actor;
 	}

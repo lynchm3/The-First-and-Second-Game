@@ -436,7 +436,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, true, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, 1, owner);
+				iceResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 	public ArrayList<Weapon> getWeaponsInInventory() {

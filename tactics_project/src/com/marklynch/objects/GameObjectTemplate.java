@@ -93,7 +93,7 @@ public class GameObjectTemplate implements InventoryParent {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, true, widthRatio, heightRatio, soundHandleX, soundHandleY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, 1, owner);
+				fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
@@ -101,7 +101,7 @@ public class GameObjectTemplate implements InventoryParent {
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio, soundHandleX,
 				soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, iceResistance, electricResistance, poisonResistance, 1, owner);
+				stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
 		copy.backwards = backwards;
 		return copy;
 	}

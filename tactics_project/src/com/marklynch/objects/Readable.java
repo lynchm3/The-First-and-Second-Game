@@ -22,11 +22,11 @@ public class Readable extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, Object[] text, float widthRatio,
 			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, Actor owner) {
+			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, 1, owner);
+				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
 
 		this.text = text;
 		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
@@ -41,7 +41,7 @@ public class Readable extends GameObject {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, text, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, owner);
+				iceResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class Readable extends GameObject {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, text, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, owner);
+				iceResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 	@Override

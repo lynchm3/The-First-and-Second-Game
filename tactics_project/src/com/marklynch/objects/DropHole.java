@@ -17,11 +17,11 @@ public class DropHole extends Searchable {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, Actor owner) {
+			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, false, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, owner);
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
 
 	}
 
@@ -59,7 +59,7 @@ public class DropHole extends Searchable {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, owner);
+				iceResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 }
