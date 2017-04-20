@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
+import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionThrow extends Action {
@@ -46,26 +47,32 @@ public class ActionThrow extends Action {
 		if (!enabled)
 			return;
 
-		float damage = 5;
+		float damage = 0;
+
+		if (projectile instanceof Weapon) {
+			damage = performer.getEffectiveStrength() + projectile.weight / 10f
+					+ ((Weapon) projectile).getTotalEffectiveDamage();
+		} else {
+			damage = performer.getEffectiveStrength() + projectile.weight / 10f;
+
+		}
 		if (targetGameObject != null && targetGameObject.attackable) {
 			targetGameObject.remainingHealth -= damage;
+			if (performer.squareGameObjectIsOn.visibleToPlayer) {
+				if (targetGameObject != null) {
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile, " at ",
+							targetGameObject, " for " + damage + " damage" }));
+				} else {
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile }));
+
+				}
+			}
 			targetGameObject.attacked(performer);
 		}
 		// target.attacked(performer);
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
-		String attackTypeString;
-
-		if (performer.squareGameObjectIsOn.visibleToPlayer) {
-			if (targetGameObject != null) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile, " at ",
-						targetGameObject, " for " + damage + " damage" }));
-			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile }));
-
-			}
-		}
 
 		// shoot projectile
 		Game.level.projectiles
@@ -117,13 +124,11 @@ public class ActionThrow extends Action {
 			maxDistance = 10;
 
 		if (performer.straightLineDistanceTo(targetSquare) > maxDistance) {
-
 			actionName = ACTION_NAME + " " + projectile.name + " (too heavy)";
 			return false;
 		}
 
 		if (!performer.visibleFrom(targetSquare)) {
-
 			actionName = ACTION_NAME + " " + projectile.name + " (can't reach)";
 			return false;
 		}

@@ -27,16 +27,16 @@ public class Blind extends Actor {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner, Faction faction,
-			float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY, float bodyAnchorX,
-			float bodyAnchorY, float legsAnchorX, float legsAnchorY, StructureRoom roomLivingIn) {
+			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
+			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, StructureRoom roomLivingIn) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner,
-				faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX,
-				legsAnchorY);
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
+				legsAnchorX, legsAnchorY);
 		this.roomLivingIn = roomLivingIn;
 		aiRoutine = new AIRoutineForBlind(this);
 	}
@@ -105,8 +105,8 @@ public class Blind extends Actor {
 
 	@Override
 	public void attacked(Actor attacker) {
-		super.attacked(attacker);
 		new ActionScream(this).perform();
+		super.attacked(attacker);
 	}
 
 	public Blind makeCopy(Square square, Faction faction, StructureRoom roomLivingIn) {
@@ -116,8 +116,8 @@ public class Blind extends Actor {
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance,
-				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX,
-				bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn);
+				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn);
 		return actor;
 	}
 

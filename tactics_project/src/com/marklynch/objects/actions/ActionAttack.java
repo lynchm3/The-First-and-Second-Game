@@ -38,20 +38,22 @@ public class ActionAttack extends Action {
 			return;
 
 		Weapon weapon = (Weapon) performer.equipped;
-		if (target.attackable)
-			target.remainingHealth -= weapon.getEffectiveSlashDamage();
-		target.attacked(performer);
+		if (target.attackable) {
+			target.remainingHealth -= weapon.getTotalEffectiveDamage();
+			String attackTypeString;
+			attackTypeString = "attacked ";
+
+			if (performer.squareGameObjectIsOn.visibleToPlayer) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] {
+
+						performer, " " + attackTypeString + " ", target, " with ", performer.equipped.imageTexture,
+						" for " + weapon.getEffectiveSlashDamage() + " damage" }));
+			}
+			target.attacked(performer);
+		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
-		String attackTypeString;
-		attackTypeString = "attacked ";
-
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] {
-
-					performer, " " + attackTypeString + " ", target, " with ", performer.equipped.imageTexture,
-					" for " + weapon.getEffectiveSlashDamage() + " damage" }));
 
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
