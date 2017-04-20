@@ -35,7 +35,16 @@ public class ActionDrop extends Action {
 			return;
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dropped ", object }));
-		performer.inventory.remove(object);
+		if (!performer.inventory.contains(object)) {
+			performer.inventory.remove(object);
+		}
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
+			if (actor.equipped == object) {
+				actor.equipped = null;
+			}
+		}
+
 		// receiver.inventory.add(object);
 		square.inventory.add(object);
 		if (performer instanceof Actor)
@@ -47,9 +56,21 @@ public class ActionDrop extends Action {
 		if (performer.straightLineDistanceTo(square) > 1) {
 			return false;
 		}
-		if (!performer.inventory.contains(object)) {
-			return false;
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
+			if (!actor.inventory.contains(object) && actor.equipped != object) {
+				return false;
+			}
+		} else {
+			if (!performer.inventory.contains(object)) {
+				return false;
+			}
+
 		}
+
+		if (!square.inventory.canShareSquare() && !object.canShareSquare)
+			return false;
+
 		return true;
 	}
 
