@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionSearch;
 import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.units.Actor;
@@ -21,7 +22,8 @@ public class DropHole extends Searchable {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, false, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				owner);
 
 	}
 
@@ -35,6 +37,9 @@ public class DropHole extends Searchable {
 		actions.add(new ActionSearch(performer, this));
 
 		if (performer.equipped != null) {
+			if (performer.straightLineDistanceTo(this.squareGameObjectIsOn) < 2) {
+				actions.add(new ActionDrop(performer, this.squareGameObjectIsOn, performer.equipped));
+			}
 			actions.add(new ActionThrow(performer, this, performer.equipped));
 		}
 
