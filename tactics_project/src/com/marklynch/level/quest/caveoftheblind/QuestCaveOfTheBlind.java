@@ -195,7 +195,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveSections.add(new StructureSection("Mort & Mort Mining", 41, 5, 49, 13, false));
 		// West Atrium room
 		westAtriumPart1 = new StructureRoom("West Atrium", 43, 9, false, new ArrayList<Actor>(),
-				new RoomPart(43, 9, 47, 1));
+				new RoomPart(43, 9, 47, 15));
 		rooms.add(westAtriumPart1);
 		westAtriumPart2 = new StructureRoom("West Atrium", 43, 7, false, new ArrayList<Actor>(),
 				new RoomPart(43, 7, 47, 8));

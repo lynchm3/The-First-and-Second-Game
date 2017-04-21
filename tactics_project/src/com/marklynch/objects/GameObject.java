@@ -686,11 +686,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	}
 
-	public void thrown() {
+	public void thrown(Actor shooter) {
 
 	}
 
-	public void landed() {
+	public void landed(Actor shooter) {
 
 	}
 }

@@ -166,9 +166,11 @@ public class RockGolem extends Actor {
 	}
 
 	@Override
-	public void landed() {
+	public void landed(Actor shooter) {
 		if (!awake)
 			wakeUp();
+		this.remainingHealth -= 10;
+		this.attacked(shooter);
 	}
 
 	public void wakeUp() {

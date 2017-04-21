@@ -58,15 +58,19 @@ public class ActionThrow extends Action {
 		}
 		if (targetGameObject != null && targetGameObject.attackable) {
 			targetGameObject.remainingHealth -= damage;
-			if (performer.squareGameObjectIsOn.visibleToPlayer) {
-				if (targetGameObject != null) {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile, " at ",
-							targetGameObject, " for " + damage + " damage" }));
-				} else {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile }));
+		}
 
-				}
+		if (performer.squareGameObjectIsOn.visibleToPlayer) {
+			if (targetGameObject != null) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile, " at ",
+						targetGameObject, " for " + damage + " damage" }));
+			} else {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile }));
+
 			}
+		}
+
+		if (targetGameObject != null && targetGameObject.attackable) {
 			targetGameObject.attacked(performer);
 		}
 		// target.attacked(performer);
@@ -78,13 +82,19 @@ public class ActionThrow extends Action {
 		Game.level.projectiles
 				.add(new Projectile(projectile.name, performer, targetGameObject, targetSquare, projectile, 2f, true));
 
-		if (performer.equipped == projectile)
-			performer.equipped = null;
+		if (performer.equipped == projectile) {
+			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
+				performer.equipped = performer.equippedBeforePickingUpObject;
+			} else {
+				performer.equipped = null;
+			}
+			performer.equippedBeforePickingUpObject = null;
+		}
 
 		if (performer.inventory.contains(projectile))
 			performer.inventory.remove(projectile);
 
-		projectile.thrown();
+		projectile.thrown(performer);
 
 		if (performer.faction == Game.level.factions.get(0))
 

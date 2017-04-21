@@ -77,7 +77,7 @@ public class Projectile {
 				} else {
 					targetSquare.inventory.add(projectileObject);
 				}
-				projectileObject.landed();
+				projectileObject.landed(shooter);
 			}
 
 		} else {

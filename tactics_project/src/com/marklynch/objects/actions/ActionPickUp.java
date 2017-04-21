@@ -34,6 +34,8 @@ public class ActionPickUp extends Action {
 
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", object }));
+		if (performer.inventory.contains(performer.equipped))
+			performer.equippedBeforePickingUpObject = performer.equipped;
 		object.squareGameObjectIsOn.inventory.remove(object);
 		performer.equipped = object;
 		if (object.owner == null)

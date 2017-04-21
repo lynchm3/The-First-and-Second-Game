@@ -93,6 +93,7 @@ public class Actor extends GameObject {
 	public String factionGUID = null;
 
 	public GameObject equipped = null;
+	public GameObject equippedBeforePickingUpObject = null;
 	public String equippedWeaponGUID = null;
 
 	public Helmet helmet;
