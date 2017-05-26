@@ -1,6 +1,5 @@
 package com.marklynch.objects;
 
-import com.marklynch.Game;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.tools.Bell;
@@ -202,9 +201,12 @@ public class Templates {
 			0f, null);
 
 	// NATURE
-	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", Game.level.squares[1][2], new Inventory(), true,
-			false, false, true, false, true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), true, true, false, true,
+			false, true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
+	public static final GameObject BUSH = new GameObject("Bush", 100, "bush.png", null, new Inventory(), true, true,
+			false, false, false, false, true, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
 			100f, null);
+
 	// BURROW
 	// TREE
 	//

@@ -564,6 +564,7 @@ public class Editor {
 		Templates.TREE.makeCopy(Game.level.squares[12][8], null);
 		Templates.TREE.makeCopy(Game.level.squares[27][3], null);
 		Templates.TREE.makeCopy(Game.level.squares[23][5], null);
+		Templates.BUSH.makeCopy(Game.level.squares[17][19], null);
 
 		// relationships
 		Game.level.factions.get(0).relationships.put(Game.level.factions.get(1),
