@@ -15,11 +15,11 @@ import com.marklynch.objects.Bed;
 import com.marklynch.objects.Chest;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Door;
-import com.marklynch.objects.DropHole;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Readable;
+import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.tools.Lantern;
@@ -79,7 +79,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	Key mortsKey;
 	Door mortsBedroomDoor;
 	Door mortsStoreroomDoor;
-	DropHole dropHole;
+	Searchable dropHole;
 
 	// Squares
 	Square troughSquare;

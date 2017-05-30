@@ -1,5 +1,8 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.tools.Bell;
@@ -196,9 +199,9 @@ public class Templates {
 	public static final BrokenGlass BROKEN_GLASS = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
 			new Inventory(), false, true, false, false, false, false, 0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, 3f, null);
-	public static final DropHole DROP_HOLE = new DropHole("Drop Hole", 5, "drop_hole.png", null, new Inventory(), false,
-			false, false, false, false, true, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-			0f, null);
+	public static final Searchable DROP_HOLE = new Searchable("Drop Hole", 5, "drop_hole.png", null, new Inventory(),
+			false, false, false, false, false, true, false, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
+			0f, 0f, 0f, 0f, null, new ArrayList<Effect>());
 
 	// NATURE
 	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), true, true, false, true,

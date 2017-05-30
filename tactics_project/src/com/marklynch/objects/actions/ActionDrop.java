@@ -3,8 +3,8 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.DropHole;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Searchable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -53,8 +53,8 @@ public class ActionDrop extends Action {
 		}
 
 		// receiver.inventory.add(object);
-		if (square.inventory.contains(DropHole.class)) {
-			DropHole dropHole = (DropHole) square.inventory.getGameObjectOfClass(DropHole.class);
+		if (square.inventory.contains(Searchable.class)) {
+			Searchable dropHole = (Searchable) square.inventory.getGameObjectOfClass(Searchable.class);
 			dropHole.inventory.add(object);
 		} else {
 			square.inventory.add(object);
