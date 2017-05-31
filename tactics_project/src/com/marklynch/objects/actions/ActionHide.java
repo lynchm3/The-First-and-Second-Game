@@ -5,21 +5,20 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Searchable;
+import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionSearch extends Action {
+public class ActionHide extends Action {
 
 	public static final String ACTION_NAME = "Search";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
-	Searchable object;
+	HidingPlace object;
 
-	public ActionSearch(Actor performer, Searchable object) {
+	public ActionHide(Actor performer, HidingPlace object) {
 		super(ACTION_NAME);
 		this.performer = performer;
 		this.object = object;
@@ -54,10 +53,6 @@ public class ActionSearch extends Action {
 		if (gameObjectsToLoot.size() == 0)
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " found nothing" }));
-
-		for (Effect effect : object.effectsFromSearching) {
-			performer.addEffect(effect.makeCopy(object, performer));
-		}
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

@@ -2,23 +2,14 @@ package com.marklynch.level.constructs.effect;
 
 import com.marklynch.objects.GameObject;
 
-public class Effect {
+public abstract class Effect {
 
-	GameObject source;
-	GameObject target;
-	int totalTurns;
-	int turnsRemaining;
+	public GameObject source;
+	public GameObject target;
+	public int totalTurns;
+	public int turnsRemaining;
 
-	public Effect(GameObject source, GameObject target, int totalTurns, int turnsRemaining) {
-		super();
-		this.source = source;
-		this.target = target;
-		this.totalTurns = totalTurns;
-		this.turnsRemaining = turnsRemaining;
-	}
+	public abstract void update();
 
-	public void update() {
-
-	}
-
+	public abstract Effect makeCopy(GameObject source, GameObject target);
 }

@@ -11,6 +11,7 @@ import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.actions.Action;
@@ -82,6 +83,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public float anchorX, anchorY;
 
 	public boolean backwards = false;
+	private ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -688,6 +690,31 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 				if (this.squareGameObjectIsOn.visibleToPlayer)
 					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
 			}
+		}
+	}
+
+	public void addEffect(Effect effect) {
+		for (Effect existingEffect : this.activeEffectsOnGameObject) {
+			if (existingEffect.getClass() == effect.getClass()) {
+				if (effect.turnsRemaining > existingEffect.turnsRemaining) {
+					this.activeEffectsOnGameObject.remove(existingEffect);
+					this.activeEffectsOnGameObject.add(effect);
+				}
+				return;
+			}
+		}
+		this.activeEffectsOnGameObject.add(effect);
+	}
+
+	public void removeEffect(Effect effect) {
+		this.activeEffectsOnGameObject.remove(effect);
+	}
+
+	public void activateEffects() {
+		for (Effect effect : this.activeEffectsOnGameObject) {
+			effect.update();
+			if (effect.turnsRemaining == 0)
+				this.removeEffect(effect);
 		}
 	}
 
