@@ -57,7 +57,7 @@ public class Searchable extends GameObject {
 	}
 
 	@Override
-	public Searchable makeCopy(Square square, Actor owner) {
+	public Searchable makeCopy(Square squareGameObjectIsOn, Actor owner) {
 		return new Searchable(new String(name), (int) totalHealth, imageTexturePath, squareGameObjectIsOn, inventory,
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, attackable, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,

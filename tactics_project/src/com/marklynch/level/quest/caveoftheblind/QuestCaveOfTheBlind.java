@@ -327,6 +327,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		// toilet extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[103][31], null));
 		Templates.BROKEN_LAMP.makeCopy(Game.level.squares[92][28], null);
+
 		dropHole = Templates.DROP_HOLE.makeCopy(Game.level.squares[102][30], null);
 		// DROP_HOLE
 

@@ -55,8 +55,6 @@ public class ActionPickUp extends Action {
 	@Override
 	public boolean check() {
 		float maxWeightForPerformer = 50f + performer.getEffectiveStrength() * 10f;
-		System.out.println("maxWeightForPerformer = " + maxWeightForPerformer);
-		System.out.println("object.weight = " + object.weight);
 		if (object.weight > maxWeightForPerformer) {
 			actionName = ACTION_NAME + " (too heavy)";
 			return false;

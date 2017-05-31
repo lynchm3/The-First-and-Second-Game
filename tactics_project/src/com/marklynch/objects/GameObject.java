@@ -98,9 +98,17 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		this.remainingHealth = health;
 		this.owner = owner;
 
+		if (this instanceof Searchable) {
+			System.out.println("Searchable constructor");
+		}
+
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn = squareGameObjectIsOn;
 			this.squareGameObjectIsOn.inventory.add(this);
+		}
+
+		if (this instanceof Searchable) {
+			System.out.println("this.squareGameObjectIsOn = " + this.squareGameObjectIsOn);
 		}
 
 		loadImages();
@@ -171,6 +179,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
+
 			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
 					+ drawOffsetX);
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
