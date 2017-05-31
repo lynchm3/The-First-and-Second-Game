@@ -87,6 +87,7 @@ public class Tree extends GameObject {
 
 	@Override
 	public void update(int delta) {
+		super.update(delta);
 		if (remainingHealth < healthWhenLastDroppedFruit && inventory.size() > 0) {
 
 			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();

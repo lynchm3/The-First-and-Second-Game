@@ -1,10 +1,14 @@
 package com.marklynch.level.constructs.effect;
 
+import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
+import com.marklynch.ui.ActivityLog;
 
 public class EffectPoison extends Effect {
 
 	public EffectPoison(GameObject source, GameObject target, int totalTurns) {
+		this.logString = " has been poisoned.";
+		this.effectName = "Posion";
 		this.source = source;
 		this.target = target;
 		this.totalTurns = totalTurns;
@@ -16,8 +20,11 @@ public class EffectPoison extends Effect {
 	}
 
 	@Override
-	public void update() {
-		target.remainingHealth--;
+	public void activate() {
+		float damage = 52;
+		target.remainingHealth -= damage;
+		Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
+		target.attacked(this);
 		turnsRemaining--;
 	}
 

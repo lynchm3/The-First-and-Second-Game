@@ -614,6 +614,11 @@ public class Level {
 		// this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
 		// " ended turn " + this.turn }));
 
+		// Pre end turn
+		if (currentFactionMovingIndex == 0) {
+			player.activateEffects();
+		}
+
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {
 				actor.distanceMovedThisTurn = 0;

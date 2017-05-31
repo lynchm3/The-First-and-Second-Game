@@ -773,6 +773,7 @@ public class Actor extends GameObject {
 			if (aiRoutine != null)
 				this.aiRoutine.update();
 		}
+		activateEffects();
 	}
 
 	public void sellAllToTarget(Class clazz, GameObject gameObject) {
@@ -970,12 +971,15 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public void attacked(Actor attacker) {
+	public void attacked(Object attacker) {
 		super.attacked(attacker);
-		attacker.addAttackerForThisAndGroupMembers(this);
-		attacker.addAttackerForNearbyFactionMembersIfVisible(this);
-		this.addAttackerForNearbyFactionMembersIfVisible(attacker);
-		this.locationsToSearch.put(attacker, attacker.squareGameObjectIsOn);
+		if (attacker instanceof Actor) {
+			Actor actor = (Actor) attacker;
+			actor.addAttackerForThisAndGroupMembers(this);
+			actor.addAttackerForNearbyFactionMembersIfVisible(this);
+			this.addAttackerForNearbyFactionMembersIfVisible(actor);
+			this.locationsToSearch.put(actor, actor.squareGameObjectIsOn);
+		}
 	}
 
 	public int getEffectiveStrength() {

@@ -104,7 +104,7 @@ public class Blind extends Actor {
 	}
 
 	@Override
-	public void attacked(Actor attacker) {
+	public void attacked(Object attacker) {
 		new ActionScream(this).perform();
 		super.attacked(attacker);
 	}

@@ -680,7 +680,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		return true;
 	}
 
-	public void attacked(Actor attacker) {
+	public void attacked(Object attacker) {
 		if (checkIfDestroyed()) {
 			if (this instanceof Actor) {
 				if (this.squareGameObjectIsOn.visibleToPlayer)
@@ -699,11 +699,13 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 				if (effect.turnsRemaining > existingEffect.turnsRemaining) {
 					this.activeEffectsOnGameObject.remove(existingEffect);
 					this.activeEffectsOnGameObject.add(effect);
+					Game.level.logOnScreen(new ActivityLog(new Object[] { this, effect.logString }));
 				}
 				return;
 			}
 		}
 		this.activeEffectsOnGameObject.add(effect);
+		Game.level.logOnScreen(new ActivityLog(new Object[] { this, effect.logString }));
 	}
 
 	public void removeEffect(Effect effect) {
@@ -711,10 +713,15 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public void activateEffects() {
+		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>();
 		for (Effect effect : this.activeEffectsOnGameObject) {
-			effect.update();
+			effect.activate();
 			if (effect.turnsRemaining == 0)
-				this.removeEffect(effect);
+				effectsToRemove.add(effect);
+		}
+
+		for (Effect effect : effectsToRemove) {
+			this.removeEffect(effect);
 		}
 	}
 

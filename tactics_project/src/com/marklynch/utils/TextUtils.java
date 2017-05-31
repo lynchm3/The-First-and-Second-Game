@@ -9,6 +9,7 @@ import com.marklynch.level.Decoration;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.actions.Action;
@@ -342,6 +343,15 @@ public class TextUtils {
 
 				Projectile projectile = (Projectile) content;
 				String string = projectile.name;
+
+				float textWidth = Game.font.getWidth(string);
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof Effect) {
+
+				Effect effect = (Effect) content;
+				String string = effect.effectName;
 
 				float textWidth = Game.font.getWidth(string);
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);

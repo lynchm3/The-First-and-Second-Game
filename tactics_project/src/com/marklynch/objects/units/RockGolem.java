@@ -117,7 +117,7 @@ public class RockGolem extends Actor {
 	}
 
 	@Override
-	public void attacked(Actor attacker) {
+	public void attacked(Object attacker) {
 		if (!awake)
 			wakeUp();
 		super.attacked(attacker);
