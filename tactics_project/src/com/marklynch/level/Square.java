@@ -24,6 +24,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.actions.ActionableInWorld;
@@ -303,10 +304,14 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 			HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
 			if (hidingPlace != null) {
-				return new ActionHide(performer, hidingPlace);
-			} else {
-				return new ActionMove(performer, this);
+				if (performer.hiding && performer.squareGameObjectIsOn == this) {
+					return new ActionStopHiding(performer, hidingPlace);
+				} else {
+					return new ActionHide(performer, hidingPlace);
+				}
 			}
+
+			return new ActionMove(performer, this);
 
 		} else {
 			return null;
@@ -327,7 +332,12 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
 		if (hidingPlace != null) {
-			actions.add(new ActionHide(performer, hidingPlace));
+
+			if (performer.hiding && performer.squareGameObjectIsOn == this) {
+				actions.add(new ActionStopHiding(performer, hidingPlace));
+			} else {
+				actions.add(new ActionHide(performer, hidingPlace));
+			}
 		}
 
 		if (performer.equipped != null) {

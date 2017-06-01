@@ -6,29 +6,21 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionHide extends Action {
+public class ActionStopHiding extends Action {
 
-	public static final String ACTION_NAME = "Hide";
+	public static final String ACTION_NAME = "Stop Hiding";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	HidingPlace object;
 
-	public ActionMove actionMove;
-
-	public ActionHide(Actor performer, HidingPlace object) {
+	public ActionStopHiding(Actor performer, HidingPlace object) {
 		super(ACTION_NAME);
 		this.performer = performer;
 		this.object = object;
 		if (!check()) {
 			enabled = false;
-			if (this.actionMove != null)
-				actionName = this.actionMove.actionName;
 		}
-
-		if (actionMove != null)
-			movement = true;
-
 		legal = checkLegality();
 		sound = createSound();
 	}
@@ -39,37 +31,29 @@ public class ActionHide extends Action {
 		if (!enabled)
 			return;
 
-		if (actionMove != null)
-			actionMove.perform();
-
-		if (performer.hiding == false) {
-			performer.hiding = true;
+		if (performer.hiding == true) {
+			performer.hiding = false;
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", object }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", object }));
 		}
 
 		performer.actionsPerformedThisTurn.add(this);
+
 		if (sound != null)
 			sound.play();
 	}
 
 	@Override
 	public boolean check() {
-		if (performer.squareGameObjectIsOn != object.squareGameObjectIsOn) {
-			this.actionMove = new ActionMove(performer, object.squareGameObjectIsOn);
-			return this.actionMove.enabled;
-		}
 		return true;
 	}
 
 	@Override
 	public boolean checkLegality() {
-		if (actionMove != null)
-			return true;
-
-		if (object.squareGameObjectIsOn.restricted == true && !object.squareGameObjectIsOn.owners.contains(performer)) {
-			return false;
-		}
+		// if (object.squareGameObjectIsOn.restricted == true &&
+		// !object.squareGameObjectIsOn.owners.contains(performer)) {
+		// return false;
+		// }
 		return true;
 	}
 

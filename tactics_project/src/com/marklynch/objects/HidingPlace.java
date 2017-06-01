@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionHide;
+import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.units.Actor;
 
@@ -39,7 +40,11 @@ public class HidingPlace extends GameObject {
 		if (this.remainingHealth < 0)
 			return actions;
 
-		actions.add(new ActionHide(performer, this));
+		if (performer.hiding && performer.squareGameObjectIsOn == this.squareGameObjectIsOn) {
+			actions.add(new ActionStopHiding(performer, this));
+		} else {
+			actions.add(new ActionHide(performer, this));
+		}
 
 		if (performer.equipped != null) {
 			if (performer.straightLineDistanceTo(this.squareGameObjectIsOn) < 2) {
