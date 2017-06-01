@@ -12,7 +12,6 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLoiter;
-import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Path;
 import com.marklynch.ui.button.Button;
 
@@ -301,7 +300,7 @@ public class UserInputLevel {
 			// if (!(action instanceof ActionRead) && !(action instanceof
 			// ActionTalk))
 			// interactedThisTurn = true;
-			if (defaultAction instanceof ActionMove && defaultAction.enabled) {
+			if (defaultAction.movement && defaultAction.enabled) {
 
 				if (key == Keyboard.KEY_UP) {
 					Game.dragY += Game.SQUARE_HEIGHT;

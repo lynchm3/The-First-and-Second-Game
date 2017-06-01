@@ -25,6 +25,10 @@ public class ActionHide extends Action {
 			if (this.actionMove != null)
 				actionName = this.actionMove.actionName;
 		}
+
+		if (actionMove != null)
+			movement = true;
+
 		legal = checkLegality();
 		sound = createSound();
 	}

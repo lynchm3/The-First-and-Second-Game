@@ -14,6 +14,7 @@ public abstract class Action {
 	public boolean enabled = true;
 	public boolean legal = true;
 	public Sound sound;
+	public boolean movement = false;
 
 	public Action(String actionName) {
 		super();

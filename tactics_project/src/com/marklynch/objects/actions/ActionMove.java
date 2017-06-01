@@ -31,6 +31,7 @@ public class ActionMove extends Action {
 		}
 		legal = checkLegality();
 		sound = createSound();
+		movement = true;
 
 	}
 
