@@ -14,7 +14,7 @@ import mdesl.graphics.Color;
 
 public class HidingPlace extends GameObject {
 
-	ArrayList<Effect> effects;
+	Effect[] effects;
 
 	public HidingPlace(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -22,7 +22,7 @@ public class HidingPlace extends GameObject {
 			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
 			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight,
-			Actor owner, ArrayList<Effect> effects) {
+			Actor owner, Effect[] effects) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
@@ -52,8 +52,22 @@ public class HidingPlace extends GameObject {
 
 	}
 
+	@Override
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+		return new ActionHide(performer, this);
+	}
+
 	public ArrayList<GameObject> search() {
 		return (ArrayList<GameObject>) inventory.gameObjects.clone();
+	}
+
+	@Override
+	public void draw1() {
+	}
+
+	@Override
+	public void draw2() {
+		super.draw1();
 	}
 
 	@Override

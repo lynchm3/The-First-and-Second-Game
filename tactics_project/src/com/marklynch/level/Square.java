@@ -17,10 +17,12 @@ import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.InventoryParent;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionThrow;
@@ -298,7 +300,13 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (this == Game.level.player.squareGameObjectIsOn) {
 			return null;
 		} else if (performer.travelDistance >= performer.straightLineDistanceTo(this)) {
-			return new ActionMove(performer, this);
+
+			HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
+			if (hidingPlace != null) {
+				return new ActionHide(performer, hidingPlace);
+			} else {
+				return new ActionMove(performer, this);
+			}
 
 		} else {
 			return null;
@@ -315,6 +323,11 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		if (this.inventory.size() > 0 && this.inventory.hasGameObjectsThatFitInInventory()) {
 			actions.add(new ActionTakeAll(performer, this));
+		}
+
+		HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
+		if (hidingPlace != null) {
+			actions.add(new ActionHide(performer, hidingPlace));
 		}
 
 		if (performer.equipped != null) {
