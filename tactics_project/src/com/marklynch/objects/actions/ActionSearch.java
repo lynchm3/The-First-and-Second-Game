@@ -55,7 +55,7 @@ public class ActionSearch extends Action {
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " found nothing" }));
 
-		for (Effect effect : object.effectsFromSearching) {
+		for (Effect effect : object.effectsFromInteracting) {
 			performer.addEffect(effect.makeCopy(object, performer));
 		}
 

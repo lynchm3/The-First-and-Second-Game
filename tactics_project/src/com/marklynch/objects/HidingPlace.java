@@ -5,17 +5,13 @@ import java.util.ArrayList;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionStopHiding;
-import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
 
-public class HidingPlace extends GameObject {
-
-	Effect[] effects;
+public class HidingPlace extends Searchable {
 
 	public HidingPlace(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -28,8 +24,7 @@ public class HidingPlace extends GameObject {
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
-				owner);
-		this.effects = effects;
+				owner, effects);
 
 	}
 
@@ -46,12 +41,16 @@ public class HidingPlace extends GameObject {
 			actions.add(new ActionHide(performer, this));
 		}
 
-		if (performer.equipped != null) {
-			if (performer.straightLineDistanceTo(this.squareGameObjectIsOn) < 2) {
-				actions.add(new ActionDrop(performer, this.squareGameObjectIsOn, performer.equipped));
-			}
-			actions.add(new ActionThrow(performer, this, performer.equipped));
-		}
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
+
+		// if (performer.equipped != null) {
+		// if (performer.straightLineDistanceTo(this.squareGameObjectIsOn) < 2)
+		// {
+		// actions.add(new ActionDrop(performer, this.squareGameObjectIsOn,
+		// performer.equipped));
+		// }
+		// actions.add(new ActionThrow(performer, this, performer.equipped));
+		// }
 
 		return actions;
 
@@ -62,6 +61,7 @@ public class HidingPlace extends GameObject {
 		return new ActionHide(performer, this);
 	}
 
+	@Override
 	public ArrayList<GameObject> search() {
 		return (ArrayList<GameObject>) inventory.gameObjects.clone();
 	}
@@ -81,7 +81,7 @@ public class HidingPlace extends GameObject {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, attackable, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, weight, owner, effects);
+				iceResistance, electricResistance, poisonResistance, weight, owner, effectsFromInteracting);
 	}
 
 }

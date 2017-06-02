@@ -4,7 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -57,9 +56,6 @@ public class ActionDrop extends Action {
 		if (square.inventory.contains(Searchable.class)) {
 			Searchable searchable = (Searchable) square.inventory.getGameObjectOfClass(Searchable.class);
 			searchable.inventory.add(object);
-		} else if (square.inventory.contains(HidingPlace.class)) {
-			HidingPlace hidingPlace = (HidingPlace) square.inventory.getGameObjectOfClass(HidingPlace.class);
-			hidingPlace.inventory.add(object);
 		} else {
 			square.inventory.add(object);
 		}

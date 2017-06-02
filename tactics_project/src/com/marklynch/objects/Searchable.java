@@ -14,7 +14,7 @@ import mdesl.graphics.Color;
 
 public class Searchable extends GameObject {
 
-	public Effect[] effectsFromSearching;
+	public Effect[] effectsFromInteracting;
 
 	public Searchable(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -28,7 +28,7 @@ public class Searchable extends GameObject {
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
 				owner);
-		this.effectsFromSearching = effectsFromSearching;
+		this.effectsFromInteracting = effectsFromSearching;
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class Searchable extends GameObject {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, attackable, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, weight, owner, effectsFromSearching);
+				iceResistance, electricResistance, poisonResistance, weight, owner, effectsFromInteracting);
 	}
 
 }
