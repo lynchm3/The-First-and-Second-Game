@@ -7,7 +7,7 @@ import com.marklynch.ui.ActivityLog;
 public class EffectPoison extends Effect {
 
 	public EffectPoison(GameObject source, GameObject target, int totalTurns) {
-		this.logString = " has been poisoned by ";
+		this.logString = " poisoned by ";
 		this.effectName = "Posion";
 		this.source = source;
 		this.target = target;
@@ -21,7 +21,7 @@ public class EffectPoison extends Effect {
 
 	@Override
 	public void activate() {
-		float damage = 52;
+		float damage = 10;
 		target.remainingHealth -= damage;
 		Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
 		target.attacked(this);
