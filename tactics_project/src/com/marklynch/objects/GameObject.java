@@ -705,7 +705,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			}
 		}
 		this.activeEffectsOnGameObject.add(effect);
-		Game.level.logOnScreen(new ActivityLog(new Object[] { this, effect.logString }));
+		Game.level.logOnScreen(new ActivityLog(new Object[] { this, effect.logString, effect.source }));
 	}
 
 	public void removeEffect(Effect effect) {
