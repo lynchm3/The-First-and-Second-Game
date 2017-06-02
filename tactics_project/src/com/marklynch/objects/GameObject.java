@@ -699,7 +699,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 				if (effect.turnsRemaining > existingEffect.turnsRemaining) {
 					this.activeEffectsOnGameObject.remove(existingEffect);
 					this.activeEffectsOnGameObject.add(effect);
-					Game.level.logOnScreen(new ActivityLog(new Object[] { this, effect.logString }));
+					Game.level.logOnScreen(new ActivityLog(new Object[] { this, effect.logString, effect.source }));
 				}
 				return;
 			}
