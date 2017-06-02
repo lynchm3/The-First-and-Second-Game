@@ -45,6 +45,7 @@ public class ActionHide extends Action {
 
 		if (performer.hiding == false) {
 			performer.hiding = true;
+			performer.hidingPlace = object;
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", object }));
 		}
@@ -56,12 +57,15 @@ public class ActionHide extends Action {
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
+
+		if (actionMove != null && performer == Game.level.player && Game.level.activeActor == Game.level.player)
+			Game.level.endTurn();
 	}
 
 	@Override
 	public boolean check() {
 		if (performer.squareGameObjectIsOn != object.squareGameObjectIsOn) {
-			this.actionMove = new ActionMove(performer, object.squareGameObjectIsOn);
+			this.actionMove = new ActionMove(performer, object.squareGameObjectIsOn, false);
 			return this.actionMove.enabled;
 		}
 		return true;

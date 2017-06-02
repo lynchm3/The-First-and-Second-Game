@@ -311,7 +311,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 				}
 			}
 
-			return new ActionMove(performer, this);
+			return new ActionMove(performer, this, true);
 
 		} else {
 			return null;
@@ -323,7 +323,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (this != Game.level.player.squareGameObjectIsOn) {
-			actions.add(new ActionMove(performer, this));
+			actions.add(new ActionMove(performer, this, true));
 		}
 
 		if (this.inventory.size() > 0 && this.inventory.hasGameObjectsThatFitInInventory()) {

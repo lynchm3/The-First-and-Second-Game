@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.units.Actor;
 
 public class ActionLoiter extends Action {
@@ -22,15 +23,21 @@ public class ActionLoiter extends Action {
 		}
 		legal = checkLegality();
 		sound = createSound();
-
 	}
 
 	@Override
 	public void perform() {
 		if (!enabled)
 			return;
-		loiter(performer, target);
+
+		if (performer.hidingPlace != null) {
+			for (Effect effect : performer.hidingPlace.effectsFromInteracting) {
+				performer.addEffect(effect.makeCopy(performer.hidingPlace, performer));
+			}
+		}
+
 		performer.actionsPerformedThisTurn.add(this);
+
 		if (sound != null)
 			sound.play();
 
@@ -39,9 +46,6 @@ public class ActionLoiter extends Action {
 
 		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
 
-	}
-
-	public void loiter(Actor actor, Square squareToLoiterOn) {
 	}
 
 	@Override

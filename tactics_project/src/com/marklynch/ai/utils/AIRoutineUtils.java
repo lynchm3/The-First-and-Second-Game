@@ -278,7 +278,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToToAttackTarget(target);
 
 		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
+			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
 			return true;
 		} else {
 			return false;
@@ -317,7 +317,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target, 0f);
 
 		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
+			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
 			return true;
 		} else {
 			return false;
@@ -360,7 +360,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target, 1f);
 
 		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
+			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
 			return true;
 		} else {
 			return false;
@@ -376,7 +376,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(square, 1f);
 
 		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
+			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
 			return true;
 		} else {
 			return false;
@@ -478,7 +478,7 @@ public class AIRoutineUtils {
 			squareToMoveTo = calculateSquareToMoveToToAttackTarget(fights.get(0).defender);
 
 		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
+			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
 			return true;
 		} else {
 			return false;
@@ -662,7 +662,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
 
 		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
+			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
 			return true;
 		} else {
 			return false;
@@ -713,7 +713,7 @@ public class AIRoutineUtils {
 		if (reachableSquares.size() > 0) {
 			int random = (int) (Math.random() * (reachableSquares.size() - 1));
 			Square squareToMoveTo = reachableSquares.get(random);
-			new ActionMove(Game.level.activeActor, squareToMoveTo).perform();
+			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
 			return true;
 		} else {
 			return false;

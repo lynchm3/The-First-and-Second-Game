@@ -20,11 +20,13 @@ public class ActionMove extends Action {
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	Square target;
+	boolean endTurn;
 
-	public ActionMove(Actor mover, Square target) {
+	public ActionMove(Actor mover, Square target, boolean endTurn) {
 		super(ACTION_NAME);
 		this.performer = mover;
 		this.target = target;
+		this.endTurn = endTurn;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -81,11 +83,15 @@ public class ActionMove extends Action {
 			sound.play();
 
 		if (performer.hiding) {
-			if (!target.inventory.contains(HidingPlace.class))
+			if (!target.inventory.contains(HidingPlace.class)) {
 				performer.hiding = false;
+				performer.hidingPlace = null;
+			} else {
+				performer.hidingPlace = (HidingPlace) target.inventory.getGameObjectOfClass(HidingPlace.class);
+			}
 		}
 
-		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
+		if (endTurn && performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 
 		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
