@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionSearch;
 import com.marklynch.objects.actions.ActionThrow;
@@ -35,10 +36,13 @@ public class Searchable extends GameObject {
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
-		if (this.remainingHealth < 0)
+		if (this.remainingHealth <= 0)
 			return actions;
 
 		actions.add(new ActionSearch(performer, this));
+
+		if (attackable)
+			actions.add(new ActionAttack(performer, this));
 
 		if (performer.equipped != null) {
 			if (performer.straightLineDistanceTo(this.squareGameObjectIsOn) < 2) {

@@ -485,7 +485,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
-		if (this.remainingHealth < 0)
+		if (this.remainingHealth <= 0)
 			return actions;
 
 		actions.add(new ActionPickUp(performer, this));
@@ -505,7 +505,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// && Game.level.activeActor.equippedWeapon
 		// .hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn)))
 		// {
-		if (this != Game.level.player)
+		if (this != Game.level.player && attackable)
 			actions.add(new ActionAttack(performer, this));
 		// }
 

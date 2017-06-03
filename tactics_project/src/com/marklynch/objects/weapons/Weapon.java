@@ -33,13 +33,14 @@ public class Weapon extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner, float anchorX,
-			float anchorY) {
+			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
+			float anchorX, float anchorY) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				owner);
 
 		this.owner = owner;
 		this.anchorX = anchorX;
@@ -118,6 +119,9 @@ public class Weapon extends GameObject {
 	// }
 
 	public boolean hasRange(int weaponDistanceTo) {
+		if (getEffectiveMinRange() == 1 && weaponDistanceTo == 0)
+			return true;
+
 		if (weaponDistanceTo >= getEffectiveMinRange() && weaponDistanceTo <= getEffectiveMaxRange()) {
 			return true;
 		}

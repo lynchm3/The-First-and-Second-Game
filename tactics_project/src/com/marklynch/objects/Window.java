@@ -22,7 +22,8 @@ public class Window extends GameObjectExploder {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				owner);
 	}
 
 	@Override
@@ -92,7 +93,7 @@ public class Window extends GameObjectExploder {
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
-		if (this.remainingHealth < 0)
+		if (this.remainingHealth <= 0)
 			return actions;
 
 		actions.add(new ActionSmash(performer, this));

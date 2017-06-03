@@ -33,6 +33,7 @@ public class ActionStopHiding extends Action {
 
 		if (performer.hiding == true) {
 			performer.hiding = false;
+			performer.hidingPlace.actorsHidingHere.remove(performer);
 			performer.hidingPlace = null;
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", object }));

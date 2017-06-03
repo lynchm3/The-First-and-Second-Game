@@ -40,7 +40,8 @@ public class Vein extends Wall {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				owner);
 		loadImages();
 	}
 
@@ -135,7 +136,7 @@ public class Vein extends Wall {
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
-		if (this.remainingHealth < 0)
+		if (this.remainingHealth <= 0)
 			return actions;
 
 		actions.add(new ActionMine(performer, this));

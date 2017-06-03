@@ -206,8 +206,8 @@ public class Templates {
 	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), true, true, false, true,
 			false, true, 1f, 1.5f, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
 
-	public static final HidingPlace BUSH = new HidingPlace("Bush", 100, "bush.png", null, new Inventory(), true, true,
-			false, false, false, false, true, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+	public static final HidingPlace BUSH = new HidingPlace("Bush", 15, "bush.png", null, new Inventory(), true, true,
+			false, false, false, true, true, 1f, 1f, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
 			100f, null, new Effect[] { new EffectPoison(3) });
 
 	// BURROW

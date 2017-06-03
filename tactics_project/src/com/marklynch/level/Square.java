@@ -303,7 +303,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		} else if (performer.travelDistance >= performer.straightLineDistanceTo(this)) {
 
 			HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
-			if (hidingPlace != null) {
+			if (hidingPlace != null && hidingPlace.remainingHealth > 0) {
 				if (performer.hiding && performer.squareGameObjectIsOn == this) {
 					return new ActionStopHiding(performer, hidingPlace);
 				} else {
@@ -331,7 +331,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 
 		HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
-		if (hidingPlace != null) {
+		if (hidingPlace != null && hidingPlace.remainingHealth > 0) {
 
 			if (performer.hiding && performer.squareGameObjectIsOn == this) {
 				actions.add(new ActionStopHiding(performer, hidingPlace));

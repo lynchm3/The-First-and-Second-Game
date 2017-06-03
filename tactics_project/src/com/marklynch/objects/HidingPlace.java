@@ -13,6 +13,8 @@ import mdesl.graphics.Color;
 
 public class HidingPlace extends Searchable {
 
+	public ArrayList<Actor> actorsHidingHere = new ArrayList<Actor>();
+
 	public HidingPlace(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean attackable, boolean persistsWhenCantBeSeen, float widthRatio,
@@ -32,7 +34,7 @@ public class HidingPlace extends Searchable {
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
-		if (this.remainingHealth < 0)
+		if (this.remainingHealth <= 0)
 			return actions;
 
 		if (performer.hiding && performer.squareGameObjectIsOn == this.squareGameObjectIsOn) {
@@ -58,7 +60,11 @@ public class HidingPlace extends Searchable {
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionHide(performer, this);
+
+		if (this.remainingHealth <= 0)
+			return null;
+		else
+			return new ActionHide(performer, this);
 	}
 
 	@Override
@@ -82,6 +88,20 @@ public class HidingPlace extends Searchable {
 				persistsWhenCantBeSeen, attackable, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
 				iceResistance, electricResistance, poisonResistance, weight, owner, effectsFromInteracting);
+	}
+
+	@Override
+	public boolean checkIfDestroyed() {
+		boolean destroyed = super.checkIfDestroyed();
+		if (destroyed) {
+			for (Actor gameObjectHidingHere : actorsHidingHere) {
+				gameObjectHidingHere.hiding = false;
+				gameObjectHidingHere.hidingPlace = null;
+			}
+			actorsHidingHere.clear();
+		}
+		return destroyed;
+
 	}
 
 }

@@ -83,11 +83,18 @@ public class ActionMove extends Action {
 			sound.play();
 
 		if (performer.hiding) {
-			if (!target.inventory.contains(HidingPlace.class)) {
+
+			HidingPlace hidingPlaceAtDestination = (HidingPlace) target.inventory
+					.getGameObjectOfClass(HidingPlace.class);
+
+			if (hidingPlaceAtDestination == null || hidingPlaceAtDestination.remainingHealth <= 0) {
 				performer.hiding = false;
+				performer.hidingPlace.actorsHidingHere.remove(performer);
 				performer.hidingPlace = null;
 			} else {
+				performer.hidingPlace.actorsHidingHere.remove(performer);
 				performer.hidingPlace = (HidingPlace) target.inventory.getGameObjectOfClass(HidingPlace.class);
+				performer.hidingPlace.actorsHidingHere.add(performer);
 			}
 		}
 
