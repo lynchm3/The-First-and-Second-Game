@@ -55,7 +55,7 @@ public class ActivityLogger {
 	public void drag(float dragY) {
 		int totalLogsHeight = logs.size() * 20;
 		this.offsetY -= dragY;
-		if (offsetY > 0) {
+		if (offsetY >= 0) {
 			offsetY = 0;
 		} else if (offsetY < Game.windowHeight - totalLogsHeight) {
 			offsetY = Game.windowHeight - totalLogsHeight;

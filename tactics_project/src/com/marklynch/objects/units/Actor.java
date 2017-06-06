@@ -31,6 +31,8 @@ import com.marklynch.objects.Openable;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDie;
+import com.marklynch.objects.actions.ActionHide;
+import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.weapons.BodyArmor;
@@ -891,6 +893,7 @@ public class Actor extends GameObject {
 		}
 
 		if (this == Game.level.player) {
+
 			// self action
 			if (equipped instanceof Tool) {
 				Tool tool = (Tool) equipped;
@@ -898,6 +901,15 @@ public class Actor extends GameObject {
 				if (utilityAction != null) {
 					actions.add(utilityAction);
 				}
+			}
+
+			if (hiding) {
+				actions.add(new ActionStopHiding(this, this.hidingPlace));
+			} else {
+				HidingPlace hidingPlaceStandingOn = (HidingPlace) this.squareGameObjectIsOn.inventory
+						.getGameObjectOfClass(HidingPlace.class);
+				if (hidingPlaceStandingOn != null)
+					actions.add(new ActionHide(this, hidingPlaceStandingOn));
 			}
 		}
 
