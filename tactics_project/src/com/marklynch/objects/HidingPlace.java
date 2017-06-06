@@ -94,9 +94,13 @@ public class HidingPlace extends Searchable {
 	public boolean checkIfDestroyed() {
 		boolean destroyed = super.checkIfDestroyed();
 		if (destroyed) {
-			for (Actor gameObjectHidingHere : actorsHidingHere) {
-				gameObjectHidingHere.hiding = false;
-				gameObjectHidingHere.hidingPlace = null;
+
+			ArrayList<Actor> actorsToRemove = (ArrayList<Actor>) actorsHidingHere.clone();
+
+			for (Actor gameObjectHidingHere : actorsToRemove) {
+				new ActionStopHiding(gameObjectHidingHere, this).perform();
+				// gameObjectHidingHere.hiding = false;
+				// gameObjectHidingHere.hidingPlace = null;
 			}
 			actorsHidingHere.clear();
 		}

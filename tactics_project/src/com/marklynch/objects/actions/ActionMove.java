@@ -88,9 +88,10 @@ public class ActionMove extends Action {
 					.getGameObjectOfClass(HidingPlace.class);
 
 			if (hidingPlaceAtDestination == null || hidingPlaceAtDestination.remainingHealth <= 0) {
-				performer.hiding = false;
-				performer.hidingPlace.actorsHidingHere.remove(performer);
-				performer.hidingPlace = null;
+				new ActionStopHiding(performer, performer.hidingPlace).perform();
+				// performer.hiding = false;
+				// performer.hidingPlace.actorsHidingHere.remove(performer);
+				// performer.hidingPlace = null;
 			} else {
 				performer.hidingPlace.actorsHidingHere.remove(performer);
 				performer.hidingPlace = (HidingPlace) target.inventory.getGameObjectOfClass(HidingPlace.class);
