@@ -81,6 +81,9 @@ public class Level {
 		squares = new Square[width][height];
 
 		activityLogger = new ActivityLogger();
+		for (int i = 0; i < 200; i++) {
+			activityLogger.addActivityLog(new ActivityLog(new Object[] { i + " LOG TEST " + i }));
+		}
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
 		decorations = new Vector<Decoration>();
@@ -691,7 +694,7 @@ public class Level {
 	}
 
 	public void logOnScreen(ActivityLog stringToLog) {
-		activityLogger.logs.add(stringToLog);
+		activityLogger.addActivityLog(stringToLog);
 	}
 
 	// public void showTurnNotification() {
@@ -734,7 +737,7 @@ public class Level {
 
 	private void removeLastLog() {
 
-		activityLogger.logs.remove(activityLogger.logs.lastElement());
+		activityLogger.removeLastActivityLog();
 	}
 
 	public void end() {

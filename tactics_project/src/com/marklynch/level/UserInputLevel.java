@@ -102,6 +102,8 @@ public class UserInputLevel {
 		if (Game.zoom > 2)
 			Game.zoom = 2f;
 
+		boolean mouseOverLog = Game.level.activityLogger.isMouseOver(Mouse.getX(), Mouse.getY());
+
 		// Checking for drag
 		if (Mouse.isButtonDown(0)) {
 			if (mouseDownX == -1) {
@@ -114,8 +116,13 @@ public class UserInputLevel {
 			if (Mouse.getX() - mouseDownX > 20 || Mouse.getX() - mouseDownX < -20 || Mouse.getY() - mouseDownY > 20
 					|| Mouse.getY() - mouseDownY < -20) {
 				dragging = true;
-				Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;
-				Game.dragY -= (Mouse.getY() - mouseLastY) / Game.zoom;
+
+				if (mouseOverLog) {
+					Game.level.activityLogger.drag(Mouse.getY() - mouseLastY);
+				} else {
+					Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;
+					Game.dragY -= (Mouse.getY() - mouseLastY) / Game.zoom;
+				}
 			}
 		}
 
@@ -124,8 +131,6 @@ public class UserInputLevel {
 		if (Game.level.script.checkIfBlocking()) {
 			scriptInterceptsClick = true;
 		}
-
-		boolean mouseOverLog = Game.level.activityLogger.isMouseOver(Mouse.getX(), Mouse.getY());
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
