@@ -2,7 +2,6 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -49,10 +48,6 @@ public class ActionHide extends Action {
 			object.actorsHidingHere.add(performer);
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", object }));
-		}
-
-		for (Effect effect : object.effectsFromInteracting) {
-			performer.addEffect(effect.makeCopy(object, performer));
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

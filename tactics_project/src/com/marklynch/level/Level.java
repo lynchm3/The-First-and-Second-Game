@@ -10,6 +10,7 @@ import com.marklynch.Game;
 import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
@@ -625,6 +626,14 @@ public class Level {
 
 		// Pre end turn
 		if (currentFactionMovingIndex == 0) {
+
+			// If hiding in a place, add it's effects
+			if (player.hidingPlace != null) {
+				for (Effect effect : player.hidingPlace.effectsFromInteracting) {
+					player.addEffect(effect.makeCopy(player.hidingPlace, player));
+				}
+			}
+
 			player.activateEffects();
 		}
 

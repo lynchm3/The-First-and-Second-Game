@@ -3,7 +3,6 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.units.Actor;
 
 public class ActionLoiter extends Action {
@@ -29,12 +28,6 @@ public class ActionLoiter extends Action {
 	public void perform() {
 		if (!enabled)
 			return;
-
-		if (performer.hidingPlace != null) {
-			for (Effect effect : performer.hidingPlace.effectsFromInteracting) {
-				performer.addEffect(effect.makeCopy(performer.hidingPlace, performer));
-			}
-		}
 
 		performer.actionsPerformedThisTurn.add(this);
 

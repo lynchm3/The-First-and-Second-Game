@@ -19,6 +19,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.Bed;
@@ -777,6 +778,13 @@ public class Actor extends GameObject {
 			// Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 			if (aiRoutine != null)
 				this.aiRoutine.update();
+		}
+
+		// If hifing in a place get the effects
+		if (hidingPlace != null) {
+			for (Effect effect : hidingPlace.effectsFromInteracting) {
+				addEffect(effect.makeCopy(hidingPlace, this));
+			}
 		}
 		activateEffects();
 	}
