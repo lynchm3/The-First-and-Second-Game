@@ -82,6 +82,7 @@ public class UserInputLevel {
 		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
+		boolean mouseOverLog = Game.level.activityLogger.isMouseOver(Mouse.getX(), Mouse.getY());
 
 		// Transformed mouse coords
 
@@ -95,14 +96,19 @@ public class UserInputLevel {
 		float mouseXInSquares = (int) (mouseXTransformed / Game.SQUARE_WIDTH);
 		float mouseYInSquares = (int) (mouseYTransformed / Game.SQUARE_HEIGHT);
 
-		// Calculate zoom
-		Game.zoom += 0.001 * Mouse.getDWheel();
-		if (Game.zoom < 0.1)
-			Game.zoom = 0.1f;
-		if (Game.zoom > 2)
-			Game.zoom = 2f;
-
-		boolean mouseOverLog = Game.level.activityLogger.isMouseOver(Mouse.getX(), Mouse.getY());
+		int wheel = Mouse.getDWheel();
+		if (mouseOverLog) {
+			if (wheel != 0) {
+				Game.level.activityLogger.drag(wheel * -50);
+			}
+		} else {
+			// Calculate zoom
+			Game.zoom += 0.001 * wheel;
+			if (Game.zoom < 0.1)
+				Game.zoom = 0.1f;
+			if (Game.zoom > 2)
+				Game.zoom = 2f;
+		}
 
 		// Checking for drag
 		if (Mouse.isButtonDown(0)) {
