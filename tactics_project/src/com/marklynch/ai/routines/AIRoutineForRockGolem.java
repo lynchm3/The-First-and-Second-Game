@@ -45,12 +45,9 @@ public class AIRoutineForRockGolem extends AIRoutine {
 
 	@Override
 	public void update() {
-		System.out.println("RG AI - a");
 
 		if (!rockGolem.awake)
 			return;
-
-		System.out.println("RG AI - b");
 
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
@@ -65,21 +62,18 @@ public class AIRoutineForRockGolem extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
-		System.out.println("RG AI - c");
 
 		if (runSearchRoutine()) {
 			addAllToAttackersList();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
-		System.out.println("RG AI - d");
 
 		if (searchCooldown > 0) {
 			runSearchCooldown();
 			searchCooldown--;
 			return;
 		}
-		System.out.println("RG AI - e");
 
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
@@ -87,7 +81,6 @@ public class AIRoutineForRockGolem extends AIRoutine {
 				return;
 			}
 		}
-		System.out.println("RG AI - f");
 
 		// if group leader wait for group
 		if (this.actor.group != null && this.actor == this.actor.group.getLeader()) {
@@ -96,7 +89,6 @@ public class AIRoutineForRockGolem extends AIRoutine {
 				return;
 			}
 		}
-		System.out.println("RG AI - g");
 
 		// Defer to quest
 		if (this.actor.quest != null) {
@@ -104,7 +96,6 @@ public class AIRoutineForRockGolem extends AIRoutine {
 				return;
 			}
 		}
-		System.out.println("RG AI - h");
 
 		// Move around room
 		if (targetSquare != null) {
@@ -120,20 +111,21 @@ public class AIRoutineForRockGolem extends AIRoutine {
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			}
 		} else {
-			if (Math.random() < 0.1) {
-				if (rockGolem.roomLivingIn == null) {
-					targetSquare = AIRoutineUtils.getRandomSquare(5, true);
-					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-				} else {
-					targetSquare = AIRoutineUtils.getRandomSquareInRoom(rockGolem.roomLivingIn);
-					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
-				}
-
-			}
+			rockGolem.sleep();
+			// if (Math.random() < 0.1) {
+			// if (rockGolem.roomLivingIn == null) {
+			// targetSquare = AIRoutineUtils.getRandomSquare(5, true);
+			// AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+			// } else {
+			// targetSquare =
+			// AIRoutineUtils.getRandomSquareInRoom(rockGolem.roomLivingIn);
+			// AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+			// }
+			//
+			// }
 		}
 		addAllToAttackersList();
 		createSearchLocationsBasedOnVisibleAttackers();
-		System.out.println("RG AI - i");
 	}
 
 	public void addAllToAttackersList() {

@@ -184,4 +184,16 @@ public class RockGolem extends Actor {
 		}
 	}
 
+	public void sleep() {
+
+		awake = false;
+		this.blocksLineOfSight = true;
+		this.name = "Suspicious Boulder";
+		imageTexture = sleepingTexture;
+		if (this.squareGameObjectIsOn.visibleToPlayer) {
+			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " went to sleep" }));
+		}
+
+	}
+
 }
