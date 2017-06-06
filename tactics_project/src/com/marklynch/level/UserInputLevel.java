@@ -125,9 +125,13 @@ public class UserInputLevel {
 			scriptInterceptsClick = true;
 		}
 
+		boolean mouseOverLog = Game.level.activityLogger.isMouseOver(Mouse.getX(), Mouse.getY());
+
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
-		if (Game.level.openInventories.size() > 0) {
+		if (mouseOverLog) {
+
+		} else if (Game.level.openInventories.size() > 0) {
 
 			InventorySquare inventorySquareMouseIsOver = Game.level.openInventories.get(0)
 					.getInventorySquareMouseIsOver(mouseXinPixels, mouseYinPixels);

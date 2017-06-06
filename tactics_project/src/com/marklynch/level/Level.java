@@ -23,11 +23,11 @@ import com.marklynch.objects.units.Move;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
@@ -62,8 +62,8 @@ public class Level {
 	public ArrayList<Faction> factions;
 	public transient Faction currentFactionMoving;
 	public transient int currentFactionMovingIndex;
-	public transient Vector<ActivityLog> logs;
 	public transient Stack<Move> undoList;
+	public ActivityLogger activityLogger;
 
 	public transient GameCursor gameCursor;
 
@@ -80,7 +80,7 @@ public class Level {
 		this.height = height;
 		squares = new Square[width][height];
 
-		logs = new Vector<ActivityLog>();
+		activityLogger = new ActivityLogger();
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
 		decorations = new Vector<Decoration>();
@@ -131,7 +131,7 @@ public class Level {
 	}
 
 	public void postLoad() {
-		logs = new Vector<ActivityLog>();
+		activityLogger = new ActivityLogger();
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
 		gameCursor = new GameCursor();
@@ -523,13 +523,8 @@ public class Level {
 		else
 
 		{
-			// Log
-			QuadUtils.drawQuad(Color.BLACK, 0, 420, 0, Game.windowHeight);
 
-			// Log text
-			for (int i = logs.size() - 1; i > -1; i--) {
-				TextUtils.printTextWithImages(logs.get(i).contents, 20, 20 + i * 20, Integer.MAX_VALUE, true);
-			}
+			activityLogger.drawStaticUI();
 		}
 
 		// script
@@ -696,7 +691,7 @@ public class Level {
 	}
 
 	public void logOnScreen(ActivityLog stringToLog) {
-		logs.add(stringToLog);
+		activityLogger.logs.add(stringToLog);
 	}
 
 	// public void showTurnNotification() {
@@ -738,7 +733,8 @@ public class Level {
 	}
 
 	private void removeLastLog() {
-		logs.remove(logs.lastElement());
+
+		activityLogger.logs.remove(activityLogger.logs.lastElement());
 	}
 
 	public void end() {

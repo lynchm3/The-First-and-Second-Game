@@ -8,5 +8,4 @@ public class ActivityLog {
 		super();
 		this.contents = contents;
 	}
-
 }
