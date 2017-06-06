@@ -82,6 +82,7 @@ public class UserInputLevel {
 		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
+		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
 		boolean mouseOverLog = Game.level.activityLogger.isMouseOver(Mouse.getX(), Mouse.getY());
 
 		// Transformed mouse coords
@@ -96,8 +97,11 @@ public class UserInputLevel {
 		float mouseXInSquares = (int) (mouseXTransformed / Game.SQUARE_WIDTH);
 		float mouseYInSquares = (int) (mouseYTransformed / Game.SQUARE_HEIGHT);
 
+		// MOUSE WHEEL
 		int wheel = Mouse.getDWheel();
-		if (mouseOverLog) {
+		if (inventoriesOpen) {
+
+		} else if (mouseOverLog) {
 			if (wheel != 0) {
 				Game.level.activityLogger.drag(-wheel);
 			}
@@ -110,7 +114,7 @@ public class UserInputLevel {
 				Game.zoom = 2f;
 		}
 
-		// Checking for drag
+		// DRAG
 		if (Mouse.isButtonDown(0)) {
 			if (mouseDownX == -1) {
 				mouseDownX = Mouse.getX();
@@ -123,7 +127,9 @@ public class UserInputLevel {
 					|| Mouse.getY() - mouseDownY < -20) {
 				dragging = true;
 
-				if (mouseOverLog) {
+				if (inventoriesOpen) {
+
+				} else if (mouseOverLog) {
 					Game.level.activityLogger.drag(Mouse.getY() - mouseLastY);
 				} else {
 					Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;
@@ -140,14 +146,12 @@ public class UserInputLevel {
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
-		if (mouseOverLog) {
-
-		} else if (Game.level.openInventories.size() > 0) {
-
+		if (Game.level.openInventories.size() > 0) {
 			InventorySquare inventorySquareMouseIsOver = Game.level.openInventories.get(0)
 					.getInventorySquareMouseIsOver(mouseXinPixels, mouseYinPixels);
 			Game.squareMouseIsOver = inventorySquareMouseIsOver;
 			Game.level.openInventories.get(0).setSquareMouseHoveringOver(inventorySquareMouseIsOver);
+		} else if (mouseOverLog) {
 
 		} else {
 			if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
