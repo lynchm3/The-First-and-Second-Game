@@ -99,7 +99,7 @@ public class UserInputLevel {
 		int wheel = Mouse.getDWheel();
 		if (mouseOverLog) {
 			if (wheel != 0) {
-				Game.level.activityLogger.drag(wheel * -50);
+				Game.level.activityLogger.drag(-wheel);
 			}
 		} else {
 			// Calculate zoom
@@ -190,8 +190,6 @@ public class UserInputLevel {
 					}
 				}
 
-				// System.out.println("Game.buttonHoveringOver.getClass() = " +
-				// Game.buttonHoveringOver.getClass());
 				// if (Game.buttonHoveringOver instanceof PopupActionButton)
 				// ((PopupActionButton) Game.buttonHoveringOver).highlight();
 				// else

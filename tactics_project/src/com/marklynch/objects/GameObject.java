@@ -100,17 +100,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		this.remainingHealth = health;
 		this.owner = owner;
 
-		if (this instanceof Searchable) {
-			System.out.println("Searchable constructor");
-		}
-
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn = squareGameObjectIsOn;
 			this.squareGameObjectIsOn.inventory.add(this);
-		}
-
-		if (this instanceof Searchable) {
-			System.out.println("this.squareGameObjectIsOn = " + this.squareGameObjectIsOn);
 		}
 
 		loadImages();

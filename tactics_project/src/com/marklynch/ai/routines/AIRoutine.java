@@ -12,6 +12,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.RockGolem;
 import com.marklynch.utils.MapUtil;
 
 public class AIRoutine {
@@ -136,12 +137,20 @@ public class AIRoutine {
 
 	public boolean runFightRoutine() {
 
+		if (this.actor instanceof RockGolem)
+			System.out.println("RG runFightRoutine");
+
 		// 1. Fighting
 		if (this.actor.hasAttackers()) {
 
 			this.actor.getAttackers().sort(AIRoutineUtils.sortAttackers);
 
 			for (Actor attacker1 : this.actor.getAttackers()) {
+
+				if (this.actor instanceof RockGolem) {
+					System.out.println("RG runFightRoutine - attacker1 = " + attacker1);
+					System.out.println("RG runFightRoutine - attacker1.health = " + attacker1.remainingHealth);
+				}
 
 				if (this.actor.straightLineDistanceTo(attacker1.squareGameObjectIsOn) <= this.actor.sight
 						&& this.actor.visibleFrom(attacker1.squareGameObjectIsOn)) {
@@ -178,6 +187,9 @@ public class AIRoutine {
 
 	public boolean runSearchRoutine() {
 
+		if (this.actor instanceof RockGolem)
+			System.out.println("RG runSearchRoutine");
+
 		// Searching
 		if (this.actor.locationsToSearch.size() == 0)
 			return false;
@@ -189,6 +201,8 @@ public class AIRoutine {
 		boolean moved = false;
 
 		for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
+			if (this.actor instanceof RockGolem)
+				System.out.println("RG actorToSearchFor = " + actorToSearchFor);
 			if (this.actor.straightLineDistanceTo(actorToSearchFor.squareGameObjectIsOn) <= 2
 					&& this.actor.canSee(actorToSearchFor.squareGameObjectIsOn)) {
 				searchCooldown = 0;
@@ -271,6 +285,9 @@ public class AIRoutine {
 					// Change status to fighting if u can see an enemy from
 					// new location
 					this.actor.thoughtBubbleImageTexture = null;
+
+					if (this.actor instanceof RockGolem)
+						System.out.println("RG setting activity description to fighting in search routine");
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 				}
 			}

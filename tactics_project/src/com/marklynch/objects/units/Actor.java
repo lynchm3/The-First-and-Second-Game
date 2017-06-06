@@ -799,13 +799,16 @@ public class Actor extends GameObject {
 
 		if (!this.attackers.contains(potentialAttacker)
 				&& straightLineDistanceTo(potentialAttacker.squareGameObjectIsOn) < sight
-				&& visibleFrom(potentialAttacker.squareGameObjectIsOn)) {
+				&& visibleFrom(potentialAttacker.squareGameObjectIsOn) && potentialAttacker != this) {
 			this.attackers.add(potentialAttacker);
 			potentialAttacker.addAttackerForThisAndGroupMembers(this);
 		}
 	}
 
 	public void addAttackerForThisAndGroupMembers(Actor attacker) {
+
+		if (this == attacker)
+			return;
 
 		if (!attacker.attackers.contains(this)) {
 			attacker.attackers.add(this);

@@ -417,6 +417,7 @@ public class Editor {
 		Game.level.factions.add(new Faction("Townspeople", colors.get(1), "faction_red.png"));
 		Game.level.factions.add(new Faction("Wolves", colors.get(2), "wolf.png"));
 		Game.level.factions.add(new Faction("Blind", colors.get(3), "blind.png"));
+		Game.level.factions.add(new Faction("Rock Golem", colors.get(4), "blind.png"));
 
 		// Add player
 		// West Security

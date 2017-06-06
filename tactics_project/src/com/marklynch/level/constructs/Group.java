@@ -137,6 +137,7 @@ public class Group {
 
 	public void addAttacker(Actor actor) {
 		if (!this.attackers.contains(actor)) {
+
 			this.attackers.add(actor);
 		}
 	}

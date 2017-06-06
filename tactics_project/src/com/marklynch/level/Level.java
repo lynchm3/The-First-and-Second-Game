@@ -81,9 +81,6 @@ public class Level {
 		squares = new Square[width][height];
 
 		activityLogger = new ActivityLogger();
-		for (int i = 0; i < 200; i++) {
-			activityLogger.addActivityLog(new ActivityLog(new Object[] { i + " LOG TEST " + i }));
-		}
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
 		decorations = new Vector<Decoration>();
