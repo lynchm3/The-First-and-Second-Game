@@ -41,6 +41,10 @@ public class ActionSmash extends Action {
 		target.remainingHealth = 0;
 		target.checkIfDestroyed(performer);
 
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
+
 		if (target.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", target }));
 

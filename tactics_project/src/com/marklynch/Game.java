@@ -38,8 +38,8 @@ public class Game {
 	// public static int playerStartPosY = 52;
 
 	// Beside rock golem
-	public static int playerStartPosX = 90;
-	public static int playerStartPosY = 35;
+	public static int playerStartPosX = 82;
+	public static int playerStartPosY = 46;
 
 	// Camera positions
 
