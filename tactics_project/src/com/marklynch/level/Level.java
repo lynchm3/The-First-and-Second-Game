@@ -670,14 +670,14 @@ public class Level {
 			// Actor.calculateReachableSquares();
 			player.calculateVisibleSquares();
 
-			ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
-			for (Actor actor : player.getAttackers()) {
-				if (actor.remainingHealth <= 0) {
-					attackersToRemoveFromList.add(actor);
+			ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>();
+			for (GameObject gameObject : player.getAttackers()) {
+				if (gameObject.remainingHealth <= 0) {
+					attackersToRemoveFromList.add(gameObject);
 				}
 			}
 
-			for (Actor actor : attackersToRemoveFromList) {
+			for (GameObject actor : attackersToRemoveFromList) {
 				player.getAttackers().remove(actor);
 			}
 

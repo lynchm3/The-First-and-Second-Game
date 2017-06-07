@@ -71,8 +71,8 @@ public class AIRoutineForMort extends AIRoutine {
 		createSearchLocationsBasedOnSounds(Weapon.class);
 
 		// Remove search locations if outside jurisdiction
-		ArrayList<Actor> toRemove = new ArrayList<Actor>();
-		for (Actor actor : mort.investigationsMap.keySet()) {
+		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+		for (GameObject actor : mort.investigationsMap.keySet()) {
 			Square squareToSearch = mort.investigationsMap.get(actor).square;
 			if (squareToSearch.structureRoomSquareIsIn != mort.mortsMine
 					&& squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
@@ -81,7 +81,7 @@ public class AIRoutineForMort extends AIRoutine {
 				toRemove.add(actor);
 			}
 		}
-		for (Actor actor : toRemove) {
+		for (GameObject actor : toRemove) {
 			mort.investigationsMap.remove(actor);
 		}
 

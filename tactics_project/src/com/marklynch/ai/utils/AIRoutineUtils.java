@@ -885,10 +885,29 @@ public class AIRoutineUtils {
 		return Game.level.squares[randomX][randomY];
 	}
 
-	public static Comparator<Actor> sortAttackers = new Comparator<Actor>() {
+	// public static Comparator<Actor> sortAttackers = new Comparator<Actor>() {
+	//
+	// @Override
+	// public int compare(Actor a, Actor b) {
+	//
+	// Path pathA = getBestPathToAttackTarget(a);
+	// int travelCostA = Integer.MAX_VALUE;
+	// if (pathA != null)
+	// travelCostA = pathA.travelCost;
+	//
+	// Path pathB = getBestPathToAttackTarget(b);
+	// int travelCostB = Integer.MAX_VALUE;
+	// if (pathB != null)
+	// travelCostB = pathB.travelCost;
+	//
+	// return travelCostA - travelCostB;
+	// }
+	// };
+
+	public static Comparator<GameObject> sortAttackers = new Comparator<GameObject>() {
 
 		@Override
-		public int compare(Actor a, Actor b) {
+		public int compare(GameObject a, GameObject b) {
 
 			Path pathA = getBestPathToAttackTarget(a);
 			int travelCostA = Integer.MAX_VALUE;

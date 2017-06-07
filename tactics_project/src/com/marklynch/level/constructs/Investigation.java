@@ -1,7 +1,7 @@
 package com.marklynch.level.constructs;
 
 import com.marklynch.level.Square;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.GameObject;
 
 public class Investigation implements Comparable {
 
@@ -12,11 +12,11 @@ public class Investigation implements Comparable {
 	public static final int INVESTIGATION_PRIORITY_ATTACK_SEEN = 5;
 	public static final int INVESTIGATION_PRIORITY_ATTACKED = 6;
 
-	public Actor actor;
+	public GameObject actor;
 	public Square square;
 	public int priority;
 
-	public Investigation(Actor actor, Square square, int priority) {
+	public Investigation(GameObject actor, Square square, int priority) {
 		super();
 		this.actor = actor;
 		this.square = square;

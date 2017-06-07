@@ -401,7 +401,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.BLOOD.makeCopy(Game.level.squares[91][47], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[91][47], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[91][48], null);
-		Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[90][49], null);
+		// Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[90][49], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[91][50], null);
 		// Chairs 2
 		Templates.CHAIR.makeCopy(Game.level.squares[97][42], null, true);

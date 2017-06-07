@@ -24,7 +24,7 @@ public class AIRoutine {
 	public Actor actor;
 	public GameObject target;
 	public int searchCooldown = 0;
-	public Actor searchCooldownActor = null;
+	public GameObject searchCooldownActor = null;
 
 	public static enum AI_TYPE {
 		FIGHTER, RUNNER, GUARD, HOSTILE, ANIMAL
@@ -43,7 +43,7 @@ public class AIRoutine {
 
 		// Check for enemies last seen locations to search
 		if (this.actor.hasAttackers()) {
-			for (Actor attacker : this.actor.getAttackers()) {
+			for (GameObject attacker : this.actor.getAttackers()) {
 				if (this.actor.canSeeGameObject(attacker)) {
 					System.out.println("locationsToSearch.put a");
 					this.actor.addInvestigation(attacker, attacker.squareGameObjectIsOn,
@@ -148,7 +148,7 @@ public class AIRoutine {
 
 			this.actor.getAttackers().sort(AIRoutineUtils.sortAttackers);
 
-			for (Actor attacker1 : this.actor.getAttackers()) {
+			for (GameObject attacker1 : this.actor.getAttackers()) {
 
 				if (this.actor.canSeeGameObject(attacker1)) {
 					target = attacker1;
@@ -161,7 +161,7 @@ public class AIRoutine {
 						if (!attackedTarget) {
 							AIRoutineUtils.moveTowardsTargetToAttack(target);
 
-							for (Actor attacker2 : this.actor.getAttackers()) {
+							for (GameObject attacker2 : this.actor.getAttackers()) {
 								if (this.actor.canSeeGameObject(attacker2)) {
 									// Change status to fighting if u can see an
 									// enemy from
@@ -195,13 +195,13 @@ public class AIRoutine {
 		MapUtil.sortByValue(this.actor.investigationsMap);
 
 		// this.actor.locationsToSearch.sort(AIRoutineUtils.sortLocationsToSearch);
-		ArrayList<Actor> toRemove = new ArrayList<Actor>();
+		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 		boolean moved = false;
 
 		if (actor instanceof Mort)
 			System.out.println("runSearchRoutine b");
 
-		for (Actor actorToSearchFor : this.actor.investigationsMap.keySet()) {
+		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
 
 			if (actor instanceof Mort) {
 				System.out.println("runSearchRoutine c");
@@ -313,13 +313,13 @@ public class AIRoutine {
 			System.out.println("toRemove.size() = " + toRemove.size());
 		}
 
-		for (Actor actorsToSearchFor : toRemove) {
+		for (GameObject actorsToSearchFor : toRemove) {
 			this.actor.investigationsMap.remove(actorsToSearchFor);
 		}
 
 		if (moved) {
 
-			for (Actor attacker : this.actor.getAttackers()) {
+			for (GameObject attacker : this.actor.getAttackers()) {
 				if (this.actor.canSeeGameObject(attacker)) {
 					// Change status to fighting if u can see an enemy from
 					// new location

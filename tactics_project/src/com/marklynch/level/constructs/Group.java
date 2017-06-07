@@ -7,6 +7,7 @@ import java.util.Vector;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
 public class Group {
@@ -18,7 +19,7 @@ public class Group {
 	protected transient ArrayList<Actor> members;
 	protected transient Actor leader;
 	protected transient Square targetSquare;
-	protected transient ArrayList<Actor> attackers;
+	protected transient ArrayList<GameObject> attackers;
 	public transient Quest quest;
 	public HashMap<Actor, Square> targetSquaresMap = new HashMap<Actor, Square>();
 	public ArrayList<Square> targetSquares = new ArrayList<Square>();
@@ -31,7 +32,7 @@ public class Group {
 		for (Actor member : members) {
 			member.group = this;
 		}
-		attackers = new ArrayList<Actor>();
+		attackers = new ArrayList<GameObject>();
 	}
 
 	public void addMember(Actor actor) {
@@ -59,14 +60,14 @@ public class Group {
 	public boolean update(Actor actor) {
 
 		// Manage attackers list
-		ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
-		for (Actor attacker : attackers) {
+		ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>();
+		for (GameObject attacker : attackers) {
 			if (attacker.remainingHealth <= 0) {
 				attackersToRemoveFromList.add(attacker);
 			}
 		}
 
-		for (Actor attackerToRemoveFromList : attackersToRemoveFromList) {
+		for (GameObject attackerToRemoveFromList : attackersToRemoveFromList) {
 			attackers.remove(attackerToRemoveFromList);
 		}
 
@@ -135,7 +136,7 @@ public class Group {
 		}
 	}
 
-	public void addAttacker(Actor actor) {
+	public void addAttacker(GameObject actor) {
 		if (!this.attackers.contains(actor)) {
 
 			this.attackers.add(actor);
@@ -158,7 +159,7 @@ public class Group {
 		return attackers.size() > 0;
 	}
 
-	public ArrayList<Actor> getAttackers() {
+	public ArrayList<GameObject> getAttackers() {
 		return attackers;
 	}
 

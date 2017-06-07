@@ -18,12 +18,10 @@ import com.marklynch.ai.utils.AStarSearch;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
-import com.marklynch.objects.Arrow;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -114,9 +112,6 @@ public class Actor extends GameObject {
 	public float legsAnchorX;
 	public float legsAnchorY;
 
-	public transient Group group;
-	protected transient ArrayList<Actor> attackers;
-
 	public transient Conversation conversation;
 
 	public boolean wasSwappedWithThisTurn = false;
@@ -126,7 +121,7 @@ public class Actor extends GameObject {
 	protected transient int highestPathCostSeen = 0;
 
 	public ArrayList<Square> squaresVisibleToPlayerOnlyPlayer = new ArrayList<Square>();
-	public HashMap<Actor, Investigation> investigationsMap = new HashMap<Actor, Investigation>();
+	public HashMap<GameObject, Investigation> investigationsMap = new HashMap<GameObject, Investigation>();
 
 	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
 	public ArrayList<Crime> crimesPerformedThisTurn = new ArrayList<Crime>();
@@ -188,7 +183,7 @@ public class Actor extends GameObject {
 			equippedWeaponGUID = weapons.get(0).guid;
 		}
 
-		attackers = new ArrayList<Actor>();
+		attackers = new ArrayList<GameObject>();
 
 		this.faction = faction;
 		if (this.faction != null) {
@@ -766,15 +761,15 @@ public class Actor extends GameObject {
 		if (this.remainingHealth > 0) {
 
 			// Remove dead attackers from attackers list
-			ArrayList<Actor> attackersToRemoveFromList = new ArrayList<Actor>();
-			for (Actor actor : attackers) {
-				if (actor.remainingHealth <= 0) {
-					attackersToRemoveFromList.add(actor);
+			ArrayList<GameObject> gameObjectsToRemoveFromList = new ArrayList<GameObject>();
+			for (GameObject gameObject : attackers) {
+				if (gameObject.remainingHealth <= 0) {
+					gameObjectsToRemoveFromList.add(gameObject);
 				}
 			}
 
-			for (Actor actor : attackersToRemoveFromList) {
-				attackers.remove(actor);
+			for (GameObject gameObject : gameObjectsToRemoveFromList) {
+				attackers.remove(gameObject);
 			}
 
 			// Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
@@ -805,7 +800,7 @@ public class Actor extends GameObject {
 
 	}
 
-	private void addAttackerIfVisible(Actor potentialAttacker) {
+	private void addAttackerIfVisible(GameObject potentialAttacker) {
 
 		if (!this.attackers.contains(potentialAttacker)
 				&& straightLineDistanceTo(potentialAttacker.squareGameObjectIsOn) < sight
@@ -815,50 +810,7 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public void addAttackerForThisAndGroupMembers(Actor attacker) {
-
-		if (this == attacker)
-			return;
-
-		if (!attacker.attackers.contains(this)) {
-			attacker.attackers.add(this);
-		}
-
-		if (!this.attackers.contains(attacker)) {
-			this.attackers.add(attacker);
-		}
-
-		if (this.group != null) {
-			if (!this.group.getAttackers().contains(attacker)) {
-				this.group.addAttacker(attacker);
-			}
-			for (Actor groupMember : this.group.getMembers()) {
-				if (!groupMember.attackers.contains(attacker)) {
-					groupMember.attackers.add(attacker);
-				}
-				if (!attacker.attackers.contains(groupMember)) {
-					attacker.attackers.add(groupMember);
-				}
-			}
-		}
-
-		if (attacker.group != null) {
-			if (!attacker.group.getAttackers().contains(this)) {
-				attacker.group.addAttacker(this);
-			}
-			for (Actor groupMember : attacker.group.getMembers()) {
-				if (!groupMember.attackers.contains(this)) {
-					groupMember.attackers.add(this);
-				}
-				if (!this.attackers.contains(groupMember)) {
-					this.attackers.add(groupMember);
-				}
-			}
-		}
-
-	}
-
-	public void addAttackerForNearbyFactionMembersIfVisible(Actor attacker) {
+	public void addAttackerForNearbyFactionMembersIfVisible(GameObject attacker) {
 		for (Actor ally : this.faction.actors) {
 			ally.addAttackerIfVisible(attacker);
 		}
@@ -920,7 +872,7 @@ public class Actor extends GameObject {
 		return attackers.size() > 0;
 	}
 
-	public ArrayList<Actor> getAttackers() {
+	public ArrayList<GameObject> getAttackers() {
 		return attackers;
 	}
 
@@ -1019,24 +971,26 @@ public class Actor extends GameObject {
 	@Override
 	public void attacked(Object attacker) {
 		super.attacked(attacker);
-		if (attacker instanceof Actor) {
-			System.out.println("this = " + this);
-			System.out.println("attacker = " + attacker);
-			Actor actor = (Actor) attacker;
-			System.out.println("attacker.name = " + actor.name);
-			actor.addAttackerForThisAndGroupMembers(this);
-			actor.addAttackerForNearbyFactionMembersIfVisible(this);
-			this.addAttackerForNearbyFactionMembersIfVisible(actor);
-			System.out.println("actor.squareGameObjectIsOn = " + actor.squareGameObjectIsOn);
-			System.out.println("locationsToSearch.put e");
-			this.addInvestigation(actor, actor.squareGameObjectIsOn, Investigation.INVESTIGATION_PRIORITY_ATTACKED);
-		}
-		if (attacker instanceof Arrow) {
 
+		if (attacker instanceof Actor) {
+			Actor actor = (Actor) attacker;
+			if (canSeeGameObject(actor)) {
+				actor.addAttackerForThisAndGroupMembers(this);
+				actor.addAttackerForNearbyFactionMembersIfVisible(this);
+				this.addAttackerForNearbyFactionMembersIfVisible(actor);
+			}
+			HidingPlace hidingPlace = (HidingPlace) actor.squareGameObjectIsOn.inventory
+					.getGameObjectOfClass(HidingPlace.class);
+			if (hidingPlace != null) {
+				// actor.addAttackerForThisAndGroupMembers(this);
+				// actor.addAttackerForNearbyFactionMembersIfVisible(this);
+				this.addAttackerForNearbyFactionMembersIfVisible(hidingPlace);
+			}
+			this.addInvestigation(actor, actor.squareGameObjectIsOn, Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 		}
 	}
 
-	public void addInvestigation(Actor actor, Square square, int priority) {
+	public void addInvestigation(GameObject actor, Square square, int priority) {
 		// TODO Auto-generated method stub
 
 		Investigation existingInvestigation = this.investigationsMap.get(actor);

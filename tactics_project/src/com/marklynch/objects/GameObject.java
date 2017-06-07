@@ -11,6 +11,7 @@ import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
@@ -87,6 +88,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public boolean hiding = false;
 	public HidingPlace hidingPlace = null;
+
+	public transient ArrayList<GameObject> attackers = new ArrayList<GameObject>();
+
+	public transient Group group;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -741,6 +746,49 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public void landed(Actor shooter) {
+
+	}
+
+	public void addAttackerForThisAndGroupMembers(GameObject attacker) {
+
+		if (this == attacker)
+			return;
+
+		if (!attacker.attackers.contains(this)) {
+			attacker.attackers.add(this);
+		}
+
+		if (!this.attackers.contains(attacker)) {
+			this.attackers.add(attacker);
+		}
+
+		if (this.group != null) {
+			if (!this.group.getAttackers().contains(attacker)) {
+				this.group.addAttacker(attacker);
+			}
+			for (Actor groupMember : this.group.getMembers()) {
+				if (!groupMember.attackers.contains(attacker)) {
+					groupMember.attackers.add(attacker);
+				}
+				if (!attacker.attackers.contains(groupMember)) {
+					attacker.attackers.add(groupMember);
+				}
+			}
+		}
+
+		if (attacker.group != null) {
+			if (!attacker.group.getAttackers().contains(this)) {
+				attacker.group.addAttacker(this);
+			}
+			for (Actor groupMember : attacker.group.getMembers()) {
+				if (!groupMember.attackers.contains(this)) {
+					groupMember.attackers.add(this);
+				}
+				if (!this.attackers.contains(groupMember)) {
+					this.attackers.add(groupMember);
+				}
+			}
+		}
 
 	}
 }
