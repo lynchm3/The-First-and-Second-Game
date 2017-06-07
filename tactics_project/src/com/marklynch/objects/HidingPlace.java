@@ -95,17 +95,29 @@ public class HidingPlace extends Searchable {
 		boolean destroyed = super.checkIfDestroyed(attacker);
 		if (destroyed) {
 
-			ArrayList<Actor> actorsToRemove = (ArrayList<Actor>) actorsHidingHere.clone();
+			if (actorsHidingHere.size() > 0) {
+				ArrayList<Actor> actorsToRemove = (ArrayList<Actor>) actorsHidingHere.clone();
 
-			for (Actor gameObjectHidingHere : actorsToRemove) {
-				if (attacker != null) {
-					attacker.addAttackerForThisAndGroupMembers(gameObjectHidingHere);
+				for (Actor gameObjectHidingHere : actorsToRemove) {
+					if (attacker != null) {
+						attacker.addAttackerForThisAndGroupMembers(gameObjectHidingHere);
+					}
+					new ActionStopHiding(gameObjectHidingHere, this).perform();
+					// gameObjectHidingHere.hiding = false;
+					// gameObjectHidingHere.hidingPlace = null;
 				}
-				new ActionStopHiding(gameObjectHidingHere, this).perform();
-				// gameObjectHidingHere.hiding = false;
-				// gameObjectHidingHere.hidingPlace = null;
+				actorsHidingHere.clear();
+			} else {
+				if (attacker != null) {
+					ArrayList<Square> adjacentSquares = this.getAllSquaresWithinDistance(1);
+					for (Square adjacentSquare : adjacentSquares) {
+						HidingPlace hidingPlace = (HidingPlace) adjacentSquare.inventory
+								.getGameObjectOfClass(HidingPlace.class);
+						if (hidingPlace != null)
+							attacker.addAttackerForThisAndGroupMembers(hidingPlace);
+					}
+				}
 			}
-			actorsHidingHere.clear();
 		}
 		return destroyed;
 
