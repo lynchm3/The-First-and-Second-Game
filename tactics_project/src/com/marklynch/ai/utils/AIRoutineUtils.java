@@ -516,7 +516,7 @@ public class AIRoutineUtils {
 
 			// Check if we're already at this distance
 			if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) == idealWeaponDistances
-					.get(i) && Game.level.activeActor.visibleFrom(target.squareGameObjectIsOn)) {
+					.get(i) && Game.level.activeActor.canSeeGameObject(target)) {
 				return new Path();
 			}
 
@@ -532,7 +532,8 @@ public class AIRoutineUtils {
 
 			for (Square squareAtSpecifiedDistanceToTarget : squaresAtSpecifiedDistanceToTarget) {
 				Path currentActorPathToThisSquare = Game.level.activeActor.getPathTo(squareAtSpecifiedDistanceToTarget);
-				if (target.visibleFrom(squareAtSpecifiedDistanceToTarget) && currentActorPathToThisSquare != null
+				if (Game.level.activeActor.canSeeGameObjectFromSpecificSquare(squareAtSpecifiedDistanceToTarget, target)
+						&& currentActorPathToThisSquare != null
 						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
 					pathToSquare = currentActorPathToThisSquare;
 					bestTravelCostFound = pathToSquare.travelCost;
@@ -773,8 +774,7 @@ public class AIRoutineUtils {
 
 	public static boolean attackTarget(GameObject gameObject) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
-		if (Game.level.activeActor.hasRange(weaponDistance)
-				&& Game.level.activeActor.visibleFrom(gameObject.squareGameObjectIsOn)) {
+		if (Game.level.activeActor.hasRange(weaponDistance) && Game.level.activeActor.canSeeGameObject(gameObject)) {
 			Game.level.activeActor.equipBestWeapon(gameObject);
 			new ActionAttack(Game.level.activeActor, gameObject).perform();
 			// Actor.highlightSelectedCharactersSquares();

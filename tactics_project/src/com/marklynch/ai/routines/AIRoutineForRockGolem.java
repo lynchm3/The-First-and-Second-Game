@@ -131,7 +131,7 @@ public class AIRoutineForRockGolem extends AIRoutine {
 	public void addAllToAttackersList() {
 		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(this.actor.sight);
 		for (Square square : squares) {
-			if (this.actor.visibleFrom(square)) {
+			if (this.actor.canSeeSquare(square)) {
 				Actor actorOnSquare = (Actor) square.inventory.getGameObjectOfClass(Actor.class);
 				if (actorOnSquare != this.actor && actorOnSquare != null) {
 					this.actor.addAttackerForThisAndGroupMembers(actorOnSquare);

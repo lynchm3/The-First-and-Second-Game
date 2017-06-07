@@ -530,6 +530,23 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[83][38], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[86][37], mort));
 
+		Templates.BUSH.makeCopy(Game.level.squares[78][46], null);
+		Templates.BUSH.makeCopy(Game.level.squares[79][46], null);
+		Templates.BUSH.makeCopy(Game.level.squares[80][46], null);
+		Templates.BUSH.makeCopy(Game.level.squares[81][46], null);
+		Templates.BUSH.makeCopy(Game.level.squares[82][46], null);
+		Templates.BUSH.makeCopy(Game.level.squares[78][47], null);
+		Templates.BUSH.makeCopy(Game.level.squares[79][47], null);
+		Templates.BUSH.makeCopy(Game.level.squares[80][47], null);
+		Templates.BUSH.makeCopy(Game.level.squares[81][47], null);
+		Templates.BUSH.makeCopy(Game.level.squares[82][47], null);
+		Templates.BUSH.makeCopy(Game.level.squares[78][48], null);
+		Templates.BUSH.makeCopy(Game.level.squares[79][48], null);
+		Templates.BUSH.makeCopy(Game.level.squares[80][48], null);
+		Templates.BUSH.makeCopy(Game.level.squares[81][48], null);
+		Templates.BUSH.makeCopy(Game.level.squares[82][48], null);
+		Templates.BUSH.makeCopy(Game.level.squares[79][37], null);
+
 		// Morts Rooms Section
 		mort.mortsRooms = new StructureSection("Mort & Mort Mining", 43, 38, 75, 49, true, mort);
 		caveSections.add(mort.mortsRooms);

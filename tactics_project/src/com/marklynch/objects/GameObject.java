@@ -85,6 +85,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public boolean backwards = false;
 	private ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
 
+	public boolean hiding = false;
+	public HidingPlace hidingPlace = null;
+
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean attackable, float widthRatio,
@@ -185,6 +188,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 			if (!this.squareGameObjectIsOn.visibleToPlayer)
 				alpha = 0.5f;
+			if (hiding)
+				alpha = 0.5f;
+
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + width,
 					actorPositionYInPixels, actorPositionYInPixels + height, backwards);
 			// TextureUtils.skipNormals = false;
@@ -513,16 +519,21 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		return null;
 	}
 
+	public int straightLineDistanceBetween(Square sourceSquare, Square targetSquare) {
+
+		if (sourceSquare == null)
+			return Integer.MAX_VALUE;
+
+		if (targetSquare == null)
+			return Integer.MAX_VALUE;
+
+		return Math.abs(targetSquare.xInGrid - targetSquare.xInGrid)
+				+ Math.abs(targetSquare.yInGrid - targetSquare.yInGrid);
+	}
+
 	public int straightLineDistanceTo(Square square) {
 
-		if (square == null)
-			return Integer.MAX_VALUE;
-
-		if (this.squareGameObjectIsOn == null)
-			return Integer.MAX_VALUE;
-
-		return Math.abs(square.xInGrid - this.squareGameObjectIsOn.xInGrid)
-				+ Math.abs(square.yInGrid - this.squareGameObjectIsOn.yInGrid);
+		return straightLineDistanceBetween(this.squareGameObjectIsOn, square);
 	}
 
 	@Override
@@ -604,8 +615,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public boolean visibleFrom(Square square) {
-		return checkVisibilityBetweenTwoPoints(square.xInGrid + 0.5d, square.yInGrid + 0.5d,
-				squareGameObjectIsOn.xInGrid + 0.5d, squareGameObjectIsOn.yInGrid + 0.5d);
+		return visibilityBetween(squareGameObjectIsOn, square);
+	}
+
+	public boolean visibilityBetween(Square sourceSquare, Square targetSquare) {
+		return checkVisibilityBetweenTwoPoints(targetSquare.xInGrid + 0.5d, targetSquare.yInGrid + 0.5d,
+				sourceSquare.xInGrid + 0.5d, sourceSquare.yInGrid + 0.5d);
 	}
 
 	// SUPERCOVER algorithm

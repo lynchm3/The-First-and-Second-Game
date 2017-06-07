@@ -17,8 +17,8 @@ import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
-import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionRing;
+import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.tools.Bell;
@@ -215,7 +215,7 @@ public class AIRoutineForMort extends AIRoutine {
 
 		// Can mort see the Player in his territory? If so record it. If not,
 		// follow.
-		if (actor.canSee(Game.level.player.squareGameObjectIsOn) && targetInTerritory(Game.level.player)) {
+		if (actor.canSeeGameObject(Game.level.player) && targetInTerritory(Game.level.player)) {
 			keepTrackOf(Game.level.player);
 		} else if (lastLocationSeenActorToKeepTrackOf != null
 				&& squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
@@ -352,7 +352,7 @@ public class AIRoutineForMort extends AIRoutine {
 				}
 
 				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
-						&& actor.visibleFrom(criminal.squareGameObjectIsOn)) {
+						&& actor.canSeeGameObject(criminal)) {
 					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						return true;
@@ -366,7 +366,7 @@ public class AIRoutineForMort extends AIRoutine {
 						return true;
 					}
 
-					if (actor.canSee(stolenItemOnGround.squareGameObjectIsOn)) {
+					if (actor.canSeeSquare(stolenItemOnGround.squareGameObjectIsOn)) {
 						if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(stolenItemOnGround)) {
 							actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 							return true;

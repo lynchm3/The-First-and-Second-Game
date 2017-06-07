@@ -247,7 +247,7 @@ public class AIRoutineForBlind extends AIRoutine {
 	public void addNonBlindNonGolemToAttackersList() {
 		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(this.actor.sight);
 		for (Square square : squares) {
-			if (this.actor.visibleFrom(square)) {
+			if (this.actor.canSeeSquare(square)) {
 				Actor actorOnSquare = (Actor) square.inventory.getGameObjectOfClass(Actor.class);
 				if (actorOnSquare != null && !(actorOnSquare instanceof Blind)
 						&& !(actorOnSquare instanceof RockGolem)) {

@@ -42,7 +42,7 @@ public class AIRoutine {
 		// Check for enemies last seen locations to search
 		if (this.actor.hasAttackers()) {
 			for (Actor attacker : this.actor.getAttackers()) {
-				if (this.actor.canSee(attacker.squareGameObjectIsOn)) {
+				if (this.actor.canSeeGameObject(attacker)) {
 					this.actor.locationsToSearch.put(attacker, attacker.squareGameObjectIsOn);
 				}
 			}
@@ -57,8 +57,7 @@ public class AIRoutine {
 
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				if (!crime.resolved) {
-					if (this.actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) <= this.actor.sight
-							&& this.actor.visibleFrom(criminal.squareGameObjectIsOn)) {
+					if (this.actor.canSeeGameObject(criminal)) {
 						this.actor.locationsToSearch.put(criminal, criminal.squareGameObjectIsOn);
 					}
 				}
@@ -114,7 +113,7 @@ public class AIRoutine {
 		// Check for sounds to investigate
 		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
 			if (!this.actor.locationsToSearch.containsValue(sound.sourceSquare)
-					&& !this.actor.canSee(sound.sourceSquare)) {
+					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
 
 				if (!sound.legal || classesArrayList.contains(sound.sourceObject.getClass())) {
 					this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
@@ -143,8 +142,7 @@ public class AIRoutine {
 
 			for (Actor attacker1 : this.actor.getAttackers()) {
 
-				if (this.actor.straightLineDistanceTo(attacker1.squareGameObjectIsOn) <= this.actor.sight
-						&& this.actor.visibleFrom(attacker1.squareGameObjectIsOn)) {
+				if (this.actor.canSeeGameObject(attacker1)) {
 					target = attacker1;
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 
@@ -156,9 +154,7 @@ public class AIRoutine {
 							AIRoutineUtils.moveTowardsTargetToAttack(target);
 
 							for (Actor attacker2 : this.actor.getAttackers()) {
-								if (this.actor
-										.straightLineDistanceTo(attacker2.squareGameObjectIsOn) <= this.actor.sight
-										&& this.actor.visibleFrom(attacker2.squareGameObjectIsOn)) {
+								if (this.actor.canSeeGameObject(attacker2)) {
 									// Change status to fighting if u can see an
 									// enemy from
 									// new location
@@ -190,7 +186,7 @@ public class AIRoutine {
 
 		for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
 			if (this.actor.straightLineDistanceTo(actorToSearchFor.squareGameObjectIsOn) <= 2
-					&& this.actor.canSee(actorToSearchFor.squareGameObjectIsOn)) {
+					&& this.actor.canSeeGameObject(actorToSearchFor)) {
 				searchCooldown = 0;
 				toRemove.add(actorToSearchFor);
 				continue;
@@ -266,8 +262,7 @@ public class AIRoutine {
 		if (moved) {
 
 			for (Actor attacker : this.actor.getAttackers()) {
-				if (this.actor.straightLineDistanceTo(attacker.squareGameObjectIsOn) <= this.actor.sight
-						&& this.actor.visibleFrom(attacker.squareGameObjectIsOn)) {
+				if (this.actor.canSeeGameObject(attacker)) {
 					// Change status to fighting if u can see an enemy from
 					// new location
 					this.actor.thoughtBubbleImageTexture = null;
@@ -294,7 +289,7 @@ public class AIRoutine {
 		// return true;
 		// } else {
 		if (this.searchCooldownActor != null) {
-			if (this.actor.canSee(searchCooldownActor.squareGameObjectIsOn)) {
+			if (this.actor.canSeeGameObject(searchCooldownActor)) {
 				searchCooldown = 0;
 				return false;
 			}
@@ -371,7 +366,7 @@ public class AIRoutine {
 			lastLocationSeenActorToKeepTrackOf = null;
 		}
 
-		if (!actor.canSee(target.squareGameObjectIsOn)) {
+		if (!actor.canSeeGameObject(target)) {
 
 			if (lastLocationSeenActorToKeepTrackOf != null) {
 				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenActorToKeepTrackOf);
@@ -381,7 +376,7 @@ public class AIRoutine {
 					lastLocationSeenActorToKeepTrackOf = null;
 				}
 
-				if (actor.canSee(target.squareGameObjectIsOn)) {
+				if (actor.canSeeGameObject(target)) {
 					actor.locationsToSearch.remove(target);
 					lastLocationSeenActorToKeepTrackOf = target.squareGameObjectIsOn;
 				}
