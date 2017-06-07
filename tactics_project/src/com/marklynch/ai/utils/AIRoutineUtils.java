@@ -909,6 +909,13 @@ public class AIRoutineUtils {
 		@Override
 		public int compare(GameObject a, GameObject b) {
 
+			if (a instanceof Actor && !(b instanceof Actor)) {
+				return -1;
+			}
+			if (b instanceof Actor && !(a instanceof Actor)) {
+				return 1;
+			}
+
 			Path pathA = getBestPathToAttackTarget(a);
 			int travelCostA = Integer.MAX_VALUE;
 			if (pathA != null)

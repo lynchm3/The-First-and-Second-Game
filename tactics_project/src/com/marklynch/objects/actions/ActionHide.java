@@ -2,6 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -43,6 +44,17 @@ public class ActionHide extends Action {
 			actionMove.perform();
 
 		if (performer.hiding == false) {
+
+			for (GameObject attacker : performer.attackers) {
+				if (attacker instanceof Actor) {
+					Actor attackerActor = (Actor) attacker;
+					if (attackerActor.canSeeGameObject(performer)) {
+						attackerActor.addAttackerForThisAndGroupMembers(object);
+						attackerActor.addAttackerForNearbyFactionMembersIfVisible(object);
+					}
+				}
+			}
+
 			performer.hiding = true;
 			performer.hidingPlace = object;
 			object.actorsHidingHere.add(performer);

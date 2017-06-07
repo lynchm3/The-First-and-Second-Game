@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.units.Actor;
@@ -152,7 +153,11 @@ public class AIRoutine {
 
 				if (this.actor.canSeeGameObject(attacker1)) {
 					target = attacker1;
-					this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
+
+					if (target instanceof HidingPlace)
+						this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
+					else
+						this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 
 					// GET NEAREST ATTACKER FAILING??
 					boolean attackedTarget = false;
@@ -167,7 +172,10 @@ public class AIRoutine {
 									// enemy from
 									// new location
 									this.actor.thoughtBubbleImageTexture = null;
-									this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
+									if (target instanceof HidingPlace)
+										this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
+									else
+										this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 								}
 							}
 						}
@@ -324,7 +332,11 @@ public class AIRoutine {
 					// Change status to fighting if u can see an enemy from
 					// new location
 					this.actor.thoughtBubbleImageTexture = null;
-					this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
+					if (target instanceof HidingPlace)
+						this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
+					else
+						this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
+					break;
 				}
 			}
 
