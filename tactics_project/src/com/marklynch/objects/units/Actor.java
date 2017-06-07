@@ -19,6 +19,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
@@ -125,7 +126,7 @@ public class Actor extends GameObject {
 	protected transient int highestPathCostSeen = 0;
 
 	public ArrayList<Square> squaresVisibleToPlayerOnlyPlayer = new ArrayList<Square>();
-	public HashMap<Actor, Square> locationsToSearch = new HashMap<Actor, Square>();
+	public HashMap<Actor, Investigation> investigationsMap = new HashMap<Actor, Investigation>();
 
 	public ArrayList<Action> actionsPerformedThisTurn = new ArrayList<Action>();
 	public ArrayList<Crime> crimesPerformedThisTurn = new ArrayList<Crime>();
@@ -1028,10 +1029,21 @@ public class Actor extends GameObject {
 			this.addAttackerForNearbyFactionMembersIfVisible(actor);
 			System.out.println("actor.squareGameObjectIsOn = " + actor.squareGameObjectIsOn);
 			System.out.println("locationsToSearch.put e");
-			this.locationsToSearch.put(actor, actor.squareGameObjectIsOn);
+			this.addInvestigation(actor, actor.squareGameObjectIsOn, Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 		}
 		if (attacker instanceof Arrow) {
 
+		}
+	}
+
+	public void addInvestigation(Actor actor, Square square, int priority) {
+		// TODO Auto-generated method stub
+
+		Investigation existingInvestigation = this.investigationsMap.get(actor);
+		if (existingInvestigation == null) {
+			this.investigationsMap.put(actor, new Investigation(actor, square, priority));
+		} else if (existingInvestigation.priority <= priority) {
+			this.investigationsMap.put(actor, new Investigation(actor, square, priority));
 		}
 	}
 

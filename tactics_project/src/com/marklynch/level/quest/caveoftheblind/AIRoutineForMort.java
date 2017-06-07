@@ -72,8 +72,8 @@ public class AIRoutineForMort extends AIRoutine {
 
 		// Remove search locations if outside jurisdiction
 		ArrayList<Actor> toRemove = new ArrayList<Actor>();
-		for (Actor actor : mort.locationsToSearch.keySet()) {
-			Square squareToSearch = mort.locationsToSearch.get(actor);
+		for (Actor actor : mort.investigationsMap.keySet()) {
+			Square squareToSearch = mort.investigationsMap.get(actor).square;
 			if (squareToSearch.structureRoomSquareIsIn != mort.mortsMine
 					&& squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
 					&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault
@@ -82,7 +82,7 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 		for (Actor actor : toRemove) {
-			mort.locationsToSearch.remove(actor);
+			mort.investigationsMap.remove(actor);
 		}
 
 		// If blind are in mine and getting too close to mgmt door, move to it

@@ -65,7 +65,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				this.meatChunk = tempMeatChunk;
 				this.originalMeatChunkSquare = this.meatChunk.squareGameObjectIsOn;
 				bellSound = null;
-				blind.locationsToSearch.clear();
+				blind.investigationsMap.clear();
 				targetSquare = null;
 				this.actor.thoughtBubbleImageTexture = this.meatChunk.imageTexture;
 			} else if (this.meatChunk != null) { // smelt a meatchunk but
@@ -118,7 +118,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				Sound tempBellSound = getSoundFromSourceType(Bell.class);
 				if (tempBellSound != null) {
 					bellSound = tempBellSound;
-					blind.locationsToSearch.clear();
+					blind.investigationsMap.clear();
 					targetSquare = null;
 				}
 			}

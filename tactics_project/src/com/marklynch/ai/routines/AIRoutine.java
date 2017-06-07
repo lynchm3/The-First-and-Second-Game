@@ -6,6 +6,7 @@ import java.util.Arrays;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
+import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.quest.caveoftheblind.Mort;
@@ -45,7 +46,8 @@ public class AIRoutine {
 			for (Actor attacker : this.actor.getAttackers()) {
 				if (this.actor.canSeeGameObject(attacker)) {
 					System.out.println("locationsToSearch.put a");
-					this.actor.locationsToSearch.put(attacker, attacker.squareGameObjectIsOn);
+					this.actor.addInvestigation(attacker, attacker.squareGameObjectIsOn,
+							Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 				}
 			}
 		}
@@ -61,7 +63,8 @@ public class AIRoutine {
 				if (!crime.resolved) {
 					if (this.actor.canSeeGameObject(criminal)) {
 						System.out.println("locationsToSearch.put b");
-						this.actor.locationsToSearch.put(criminal, criminal.squareGameObjectIsOn);
+						this.actor.addInvestigation(criminal, criminal.squareGameObjectIsOn,
+								Investigation.INVESTIGATION_PRIORITY_CRIME_SEEN);
 					}
 				}
 			}
@@ -115,12 +118,13 @@ public class AIRoutine {
 
 		// Check for sounds to investigate
 		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
-			if (!this.actor.locationsToSearch.containsValue(sound.sourceSquare)
+			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
 					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
 
 				if (!sound.legal || classesArrayList.contains(sound.sourceObject.getClass())) {
 					System.out.println("locationsToSearch.put c");
-					this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
+					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
+							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 				}
 			}
 		}
@@ -182,13 +186,13 @@ public class AIRoutine {
 			System.out.println("runSearchRoutine");
 
 		// Searching
-		if (this.actor.locationsToSearch.size() == 0)
+		if (this.actor.investigationsMap.size() == 0)
 			return false;
 
 		if (actor instanceof Mort)
 			System.out.println("runSearchRoutine a");
 
-		MapUtil.sortByValue(this.actor.locationsToSearch);
+		MapUtil.sortByValue(this.actor.investigationsMap);
 
 		// this.actor.locationsToSearch.sort(AIRoutineUtils.sortLocationsToSearch);
 		ArrayList<Actor> toRemove = new ArrayList<Actor>();
@@ -197,7 +201,7 @@ public class AIRoutine {
 		if (actor instanceof Mort)
 			System.out.println("runSearchRoutine b");
 
-		for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
+		for (Actor actorToSearchFor : this.actor.investigationsMap.keySet()) {
 
 			if (actor instanceof Mort) {
 				System.out.println("runSearchRoutine c");
@@ -213,7 +217,7 @@ public class AIRoutine {
 				continue;
 			}
 
-			Square searchSquare = this.actor.locationsToSearch.get(actorToSearchFor);
+			Square searchSquare = this.actor.investigationsMap.get(actorToSearchFor).square;
 			searchCooldownActor = actorToSearchFor;
 			searchCooldown = 10;
 
@@ -310,7 +314,7 @@ public class AIRoutine {
 		}
 
 		for (Actor actorsToSearchFor : toRemove) {
-			this.actor.locationsToSearch.remove(actorsToSearchFor);
+			this.actor.investigationsMap.remove(actorsToSearchFor);
 		}
 
 		if (moved) {
@@ -427,19 +431,20 @@ public class AIRoutine {
 
 				if (actor.squareGameObjectIsOn == lastLocationSeenActorToKeepTrackOf) {
 					System.out.println("locationsToSearch.put d");
-					actor.locationsToSearch.put(target, lastLocationSeenActorToKeepTrackOf);
+					this.actor.addInvestigation(target, lastLocationSeenActorToKeepTrackOf,
+							Investigation.INVESTIGATION_PRIORITY_KEEP_TRACK);
 					lastLocationSeenActorToKeepTrackOf = null;
 				}
 
 				if (actor.canSeeGameObject(target)) {
-					actor.locationsToSearch.remove(target);
+					actor.investigationsMap.remove(target);
 					lastLocationSeenActorToKeepTrackOf = target.squareGameObjectIsOn;
 				}
 
 				return;
 			}
 		} else {
-			actor.locationsToSearch.remove(target);
+			actor.investigationsMap.remove(target);
 			lastLocationSeenActorToKeepTrackOf = target.squareGameObjectIsOn;
 		}
 	}
