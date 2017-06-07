@@ -71,7 +71,7 @@ public class ActionSmash extends Action {
 			}
 			if (weapon.hasRange(actor.straightLineDistanceTo(target.squareGameObjectIsOn)))
 				return false;
-			if (!actor.visibleFrom(target.squareGameObjectIsOn))
+			if (!actor.canSeeGameObject(target))
 				return false;
 		}
 

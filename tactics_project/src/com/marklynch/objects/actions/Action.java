@@ -60,7 +60,7 @@ public abstract class Action {
 				if (potentialWitness != null && potentialWitness != crime.performer) {
 					if (potentialWitness
 							.straightLineDistanceTo(crime.performer.squareGameObjectIsOn) <= potentialWitness.sight
-							&& potentialWitness.visibleFrom(crime.performer.squareGameObjectIsOn)) {
+							&& potentialWitness.canSeeGameObject(crime.performer)) {
 						crime.witnesses.add(potentialWitness);
 						ArrayList<Crime> crimes = potentialWitness.crimesWitnessed.get(crime.performer);
 						if (crimes != null) {

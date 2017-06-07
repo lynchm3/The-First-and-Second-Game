@@ -61,7 +61,7 @@ public class ActionTakeBite extends Action {
 
 	@Override
 	public boolean check() {
-		if (!performer.visibleFrom(target.squareGameObjectIsOn))
+		if (!performer.canSeeGameObject(target))
 			return false;
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
 			return false;

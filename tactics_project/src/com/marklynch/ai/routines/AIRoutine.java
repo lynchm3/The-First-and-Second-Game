@@ -8,6 +8,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.ActionMine;
@@ -43,6 +44,7 @@ public class AIRoutine {
 		if (this.actor.hasAttackers()) {
 			for (Actor attacker : this.actor.getAttackers()) {
 				if (this.actor.canSeeGameObject(attacker)) {
+					System.out.println("locationsToSearch.put a");
 					this.actor.locationsToSearch.put(attacker, attacker.squareGameObjectIsOn);
 				}
 			}
@@ -58,6 +60,7 @@ public class AIRoutine {
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				if (!crime.resolved) {
 					if (this.actor.canSeeGameObject(criminal)) {
+						System.out.println("locationsToSearch.put b");
 						this.actor.locationsToSearch.put(criminal, criminal.squareGameObjectIsOn);
 					}
 				}
@@ -116,6 +119,7 @@ public class AIRoutine {
 					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
 
 				if (!sound.legal || classesArrayList.contains(sound.sourceObject.getClass())) {
+					System.out.println("locationsToSearch.put c");
 					this.actor.locationsToSearch.put(sound.sourceActor, sound.sourceSquare);
 				}
 			}
@@ -174,9 +178,15 @@ public class AIRoutine {
 
 	public boolean runSearchRoutine() {
 
+		if (actor instanceof Mort)
+			System.out.println("runSearchRoutine");
+
 		// Searching
 		if (this.actor.locationsToSearch.size() == 0)
 			return false;
+
+		if (actor instanceof Mort)
+			System.out.println("runSearchRoutine a");
 
 		MapUtil.sortByValue(this.actor.locationsToSearch);
 
@@ -184,7 +194,18 @@ public class AIRoutine {
 		ArrayList<Actor> toRemove = new ArrayList<Actor>();
 		boolean moved = false;
 
+		if (actor instanceof Mort)
+			System.out.println("runSearchRoutine b");
+
 		for (Actor actorToSearchFor : this.actor.locationsToSearch.keySet()) {
+
+			if (actor instanceof Mort) {
+				System.out.println("runSearchRoutine c");
+				System.out.println("actorToSearchFor =  " + actorToSearchFor);
+			}
+
+			// If you're within 2 squares and can see the target actor, remove
+			// from search list
 			if (this.actor.straightLineDistanceTo(actorToSearchFor.squareGameObjectIsOn) <= 2
 					&& this.actor.canSeeGameObject(actorToSearchFor)) {
 				searchCooldown = 0;
@@ -196,6 +217,7 @@ public class AIRoutine {
 			searchCooldownActor = actorToSearchFor;
 			searchCooldown = 10;
 
+			// moce towards search square
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 					&& this.actor.getPathTo(searchSquare) != null) {
 
@@ -207,15 +229,26 @@ public class AIRoutine {
 
 			}
 
+			if (actor instanceof Mort) {
+				System.out.println("runSearchRoutine d");
+				System.out.println("searchSquare =  " + searchSquare);
+			}
+
 			if (moved)
 				break;
+
+			if (actor instanceof Mort)
+				System.out.println("runSearchRoutine e");
 
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) <= 1) {
 				toRemove.add(actorToSearchFor);
 				break;
 			}
 
-			// distance 1
+			if (actor instanceof Mort)
+				System.out.println("runSearchRoutine f");
+
+			// distance 1 to search square
 			for (Square searchSquareAtDistanceOne : searchSquare.getAllSquaresAtDistance(1)) {
 				if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 						&& this.actor.getPathTo(searchSquareAtDistanceOne) != null) {
@@ -229,13 +262,22 @@ public class AIRoutine {
 				}
 			}
 
+			if (actor instanceof Mort)
+				System.out.println("runSearchRoutine g");
+
 			if (moved)
 				break;
+
+			if (actor instanceof Mort)
+				System.out.println("runSearchRoutine h");
 
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) <= 2) {
 				toRemove.add(actorToSearchFor);
 				break;
 			}
+
+			if (actor instanceof Mort)
+				System.out.println("runSearchRoutine i");
 
 			// distance 2
 			for (Square searchSquareAtDistanceTwo : searchSquare.getAllSquaresAtDistance(2)) {
@@ -249,10 +291,22 @@ public class AIRoutine {
 				}
 			}
 
+			if (actor instanceof Mort)
+				System.out.println("runSearchRoutine j");
+
 			if (moved)
 				break;
 
+			if (actor instanceof Mort) {
+				System.out.println("runSearchRoutine k");
+			}
+
 			toRemove.add(actorToSearchFor);
+		}
+
+		if (actor instanceof Mort) {
+			System.out.println("runSearchRoutine l");
+			System.out.println("toRemove.size() = " + toRemove.size());
 		}
 
 		for (Actor actorsToSearchFor : toRemove) {
@@ -372,6 +426,7 @@ public class AIRoutine {
 				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenActorToKeepTrackOf);
 
 				if (actor.squareGameObjectIsOn == lastLocationSeenActorToKeepTrackOf) {
+					System.out.println("locationsToSearch.put d");
 					actor.locationsToSearch.put(target, lastLocationSeenActorToKeepTrackOf);
 					lastLocationSeenActorToKeepTrackOf = null;
 				}

@@ -46,12 +46,14 @@ public class ActionClose extends Action {
 			Game.level.undoButton.enabled = false;
 		}
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override
 	public boolean check() {
-		if (!performer.visibleFrom(openable.squareGameObjectIsOn)) {
+		if (!performer.canSeeGameObject(openable)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}

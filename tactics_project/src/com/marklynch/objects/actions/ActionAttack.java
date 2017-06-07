@@ -98,7 +98,7 @@ public class ActionAttack extends Action {
 		if (performer.equipped == null)
 			return false;
 
-		if (!performer.visibleFrom(target.squareGameObjectIsOn))
+		if (!performer.canSeeGameObject(target))
 			return false;
 
 		Weapon weapon = null;

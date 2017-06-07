@@ -140,7 +140,7 @@ public class ActionThrow extends Action {
 			return false;
 		}
 
-		if (!performer.visibleFrom(targetSquare)) {
+		if (!performer.canSeeSquare(targetSquare)) {
 			actionName = ACTION_NAME + " " + projectile.name + " (can't reach)";
 			return false;
 		}

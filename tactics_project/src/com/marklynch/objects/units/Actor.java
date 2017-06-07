@@ -22,6 +22,7 @@ import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.objects.Arrow;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -135,8 +136,6 @@ public class Actor extends GameObject {
 
 	// public ArrayList<Crime> crimesWitnessed;
 	public Map<Actor, ArrayList<Crime>> crimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
-	public boolean hiding = false;
-	public HidingPlace hidingPlace = null;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
@@ -526,7 +525,7 @@ public class Actor extends GameObject {
 		if (this.remainingHealth <= 0)
 			return;
 		// Draw health
-		if (hiding)
+		if (hiding && this != Game.level.player)
 			return;
 
 		if (remainingHealth != totalHealth) {
@@ -809,7 +808,7 @@ public class Actor extends GameObject {
 
 		if (!this.attackers.contains(potentialAttacker)
 				&& straightLineDistanceTo(potentialAttacker.squareGameObjectIsOn) < sight
-				&& visibleFrom(potentialAttacker.squareGameObjectIsOn) && potentialAttacker != this) {
+				&& canSeeGameObject(potentialAttacker) && potentialAttacker != this) {
 			this.attackers.add(potentialAttacker);
 			potentialAttacker.addAttackerForThisAndGroupMembers(this);
 		}
@@ -947,13 +946,31 @@ public class Actor extends GameObject {
 		return this.conversation;
 	}
 
-	public boolean canSee(Square square) {
-		if (this.straightLineDistanceTo(square) > sight)
+	public boolean canSeeGameObjectFromSpecificSquare(Square sourceSquare, GameObject gameObject) {
+
+		if (this.straightLineDistanceTo(gameObject.squareGameObjectIsOn) > 1 && gameObject.hiding)
 			return false;
-		if (!this.visibleFrom(square))
+
+		return canSeeSquareFromSpecificSquare(sourceSquare, gameObject.squareGameObjectIsOn);
+	}
+
+	public boolean canSeeSquareFromSpecificSquare(Square sourceSquare, Square targetSquare) {
+
+		if (this.straightLineDistanceBetween(sourceSquare, targetSquare) > sight)
+			return false;
+
+		if (!this.visibilityBetween(sourceSquare, targetSquare))
 			return false;
 
 		return true;
+	}
+
+	public boolean canSeeGameObject(GameObject gameObject) {
+		return canSeeGameObjectFromSpecificSquare(this.squareGameObjectIsOn, gameObject);
+	}
+
+	public boolean canSeeSquare(Square square) {
+		return canSeeSquareFromSpecificSquare(this.squareGameObjectIsOn, square);
 	}
 
 	public boolean hasKeyForDoor(Openable door) {
@@ -1002,11 +1019,19 @@ public class Actor extends GameObject {
 	public void attacked(Object attacker) {
 		super.attacked(attacker);
 		if (attacker instanceof Actor) {
+			System.out.println("this = " + this);
+			System.out.println("attacker = " + attacker);
 			Actor actor = (Actor) attacker;
+			System.out.println("attacker.name = " + actor.name);
 			actor.addAttackerForThisAndGroupMembers(this);
 			actor.addAttackerForNearbyFactionMembersIfVisible(this);
 			this.addAttackerForNearbyFactionMembersIfVisible(actor);
+			System.out.println("actor.squareGameObjectIsOn = " + actor.squareGameObjectIsOn);
+			System.out.println("locationsToSearch.put e");
 			this.locationsToSearch.put(actor, actor.squareGameObjectIsOn);
+		}
+		if (attacker instanceof Arrow) {
+
 		}
 	}
 

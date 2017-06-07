@@ -93,7 +93,7 @@ public class ActionMine extends Action {
 			return false;
 		}
 
-		if (!performer.visibleFrom(target.squareGameObjectIsOn)) {
+		if (!performer.canSeeGameObject(target)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}

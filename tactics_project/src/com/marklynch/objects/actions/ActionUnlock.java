@@ -59,7 +59,7 @@ public class ActionUnlock extends Action {
 
 	@Override
 	public boolean check() {
-		if (!performer.visibleFrom(openable.squareGameObjectIsOn)) {
+		if (!performer.canSeeGameObject(openable)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
 		}

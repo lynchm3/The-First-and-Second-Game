@@ -527,8 +527,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (targetSquare == null)
 			return Integer.MAX_VALUE;
 
-		return Math.abs(targetSquare.xInGrid - targetSquare.xInGrid)
-				+ Math.abs(targetSquare.yInGrid - targetSquare.yInGrid);
+		return Math.abs(sourceSquare.xInGrid - targetSquare.xInGrid)
+				+ Math.abs(sourceSquare.yInGrid - targetSquare.yInGrid);
 	}
 
 	public int straightLineDistanceTo(Square square) {
