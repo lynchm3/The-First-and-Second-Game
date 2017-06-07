@@ -494,9 +494,9 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public boolean checkIfDestroyed() {
+	public boolean checkIfDestroyed(GameObject attacker) {
 		if (remainingHealth <= 0) {
-			super.checkIfDestroyed();
+			super.checkIfDestroyed(attacker);
 			new ActionDie(this, squareGameObjectIsOn).perform();
 			for (Crime crime : crimesPerformedInLifetime) {
 				for (Actor witness : crime.witnesses) {

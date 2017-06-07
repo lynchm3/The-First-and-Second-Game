@@ -233,7 +233,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	}
 
-	public boolean checkIfDestroyed() {
+	public boolean checkIfDestroyed(GameObject attacker) {
 		if (remainingHealth <= 0) {
 			this.canShareSquare = true;
 			this.blocksLineOfSight = false;
@@ -693,7 +693,13 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public void attacked(Object attacker) {
-		if (checkIfDestroyed()) {
+
+		GameObject gameObjectAttacker = null;
+		if (attacker instanceof GameObject) {
+			gameObjectAttacker = (GameObject) attacker;
+		}
+
+		if (checkIfDestroyed(gameObjectAttacker)) {
 			if (this instanceof Actor) {
 				if (this.squareGameObjectIsOn.visibleToPlayer)
 					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", this }));

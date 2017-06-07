@@ -39,7 +39,7 @@ public class ActionSmash extends Action {
 		// GameObject targetGameObject;// = target;
 
 		target.remainingHealth = 0;
-		target.checkIfDestroyed();
+		target.checkIfDestroyed(performer);
 
 		if (target.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", target }));

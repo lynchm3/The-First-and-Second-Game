@@ -29,9 +29,9 @@ public class GameObjectExploder extends GameObject {
 	public TrianglePiece[] trianglePieces;
 
 	@Override
-	public boolean checkIfDestroyed() {
+	public boolean checkIfDestroyed(GameObject attacker) {
 
-		boolean destroyed = super.checkIfDestroyed();
+		boolean destroyed = super.checkIfDestroyed(attacker);
 
 		if (destroyed) {
 			explode();
