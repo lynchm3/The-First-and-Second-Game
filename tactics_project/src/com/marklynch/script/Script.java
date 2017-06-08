@@ -24,7 +24,8 @@ public class Script {
 		// for (ScriptEvent scriptEvent : this.scriptEvents) {
 		// scriptTriggers.add(scriptEvent.scriptTrigger.makeCopy());
 		// if (scriptEvent instanceof ScriptEventSpeech) {
-		// System.out.println("scriptEvent instanceof ScriptEventSpeech");
+		// System.out
+		// .println("scriptEvent instanceof ScriptEventSpeech");
 		// System.out
 		// .println("((ScriptEventSpeech) scriptEvent).speechParts.size() = "
 		// + ((ScriptEventSpeech) scriptEvent).speechParts

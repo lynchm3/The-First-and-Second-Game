@@ -46,7 +46,6 @@ public class AIRoutine {
 		if (this.actor.hasAttackers()) {
 			for (GameObject attacker : this.actor.getAttackers()) {
 				if (this.actor.canSeeGameObject(attacker)) {
-					System.out.println("locationsToSearch.put a");
 					this.actor.addInvestigation(attacker, attacker.squareGameObjectIsOn,
 							Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 				}
@@ -63,7 +62,6 @@ public class AIRoutine {
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				if (!crime.resolved) {
 					if (this.actor.canSeeGameObject(criminal)) {
-						System.out.println("locationsToSearch.put b");
 						this.actor.addInvestigation(criminal, criminal.squareGameObjectIsOn,
 								Investigation.INVESTIGATION_PRIORITY_CRIME_SEEN);
 					}
@@ -123,7 +121,6 @@ public class AIRoutine {
 					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
 
 				if (!sound.legal || classesArrayList.contains(sound.sourceObject.getClass())) {
-					System.out.println("locationsToSearch.put c");
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 				}
@@ -154,10 +151,15 @@ public class AIRoutine {
 				if (this.actor.canSeeGameObject(attacker1)) {
 					target = attacker1;
 
-					if (target instanceof HidingPlace)
+					if (target instanceof HidingPlace) {
+
+						if (actor instanceof Mort)
+							System.out.println("BS 1");
+
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-					else
+					} else {
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
+					}
 
 					// GET NEAREST ATTACKER FAILING??
 					boolean attackedTarget = false;
@@ -172,10 +174,14 @@ public class AIRoutine {
 									// enemy from
 									// new location
 									this.actor.thoughtBubbleImageTexture = null;
-									if (target instanceof HidingPlace)
+									if (target instanceof HidingPlace) {
+
+										if (actor instanceof Mort)
+											System.out.println("BS 2");
 										this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-									else
+									} else {
 										this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
+									}
 								}
 							}
 						}
@@ -190,15 +196,9 @@ public class AIRoutine {
 
 	public boolean runSearchRoutine() {
 
-		if (actor instanceof Mort)
-			System.out.println("runSearchRoutine");
-
 		// Searching
 		if (this.actor.investigationsMap.size() == 0)
 			return false;
-
-		if (actor instanceof Mort)
-			System.out.println("runSearchRoutine a");
 
 		MapUtil.sortByValue(this.actor.investigationsMap);
 
@@ -206,15 +206,7 @@ public class AIRoutine {
 		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 		boolean moved = false;
 
-		if (actor instanceof Mort)
-			System.out.println("runSearchRoutine b");
-
 		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
-
-			if (actor instanceof Mort) {
-				System.out.println("runSearchRoutine c");
-				System.out.println("actorToSearchFor =  " + actorToSearchFor);
-			}
 
 			// If you're within 2 squares and can see the target actor, remove
 			// from search list
@@ -233,6 +225,8 @@ public class AIRoutine {
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 					&& this.actor.getPathTo(searchSquare) != null) {
 
+				if (actor instanceof Mort)
+					System.out.println("BS 3");
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 				this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 				moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquare);
@@ -241,30 +235,21 @@ public class AIRoutine {
 
 			}
 
-			if (actor instanceof Mort) {
-				System.out.println("runSearchRoutine d");
-				System.out.println("searchSquare =  " + searchSquare);
-			}
-
 			if (moved)
 				break;
-
-			if (actor instanceof Mort)
-				System.out.println("runSearchRoutine e");
 
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) <= 1) {
 				toRemove.add(actorToSearchFor);
 				break;
 			}
 
-			if (actor instanceof Mort)
-				System.out.println("runSearchRoutine f");
-
 			// distance 1 to search square
 			for (Square searchSquareAtDistanceOne : searchSquare.getAllSquaresAtDistance(1)) {
 				if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 						&& this.actor.getPathTo(searchSquareAtDistanceOne) != null) {
 
+					if (actor instanceof Mort)
+						System.out.println("BS 4");
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 					moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceOne);
@@ -274,27 +259,20 @@ public class AIRoutine {
 				}
 			}
 
-			if (actor instanceof Mort)
-				System.out.println("runSearchRoutine g");
-
 			if (moved)
 				break;
-
-			if (actor instanceof Mort)
-				System.out.println("runSearchRoutine h");
 
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) <= 2) {
 				toRemove.add(actorToSearchFor);
 				break;
 			}
 
-			if (actor instanceof Mort)
-				System.out.println("runSearchRoutine i");
-
 			// distance 2
 			for (Square searchSquareAtDistanceTwo : searchSquare.getAllSquaresAtDistance(2)) {
 				if (this.actor.getPathTo(searchSquareAtDistanceTwo) != null) {
 
+					if (actor instanceof Mort)
+						System.out.println("BS 5");
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 					moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceTwo);
@@ -303,22 +281,10 @@ public class AIRoutine {
 				}
 			}
 
-			if (actor instanceof Mort)
-				System.out.println("runSearchRoutine j");
-
 			if (moved)
 				break;
 
-			if (actor instanceof Mort) {
-				System.out.println("runSearchRoutine k");
-			}
-
 			toRemove.add(actorToSearchFor);
-		}
-
-		if (actor instanceof Mort) {
-			System.out.println("runSearchRoutine l");
-			System.out.println("toRemove.size() = " + toRemove.size());
 		}
 
 		for (GameObject actorsToSearchFor : toRemove) {
@@ -332,9 +298,12 @@ public class AIRoutine {
 					// Change status to fighting if u can see an enemy from
 					// new location
 					this.actor.thoughtBubbleImageTexture = null;
-					if (target instanceof HidingPlace)
+					if (target instanceof HidingPlace) {
+
+						if (actor instanceof Mort)
+							System.out.println("BS 6");
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-					else
+					} else
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 					break;
 				}
@@ -350,6 +319,8 @@ public class AIRoutine {
 
 		// DOORWAYS are my biggest issue here.
 
+		if (actor instanceof Mort)
+			System.out.println("BS 7");
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 		this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 		StructureRoom room = actor.squareGameObjectIsOn.structureRoomSquareIsIn;
@@ -442,7 +413,6 @@ public class AIRoutine {
 				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenActorToKeepTrackOf);
 
 				if (actor.squareGameObjectIsOn == lastLocationSeenActorToKeepTrackOf) {
-					System.out.println("locationsToSearch.put d");
 					this.actor.addInvestigation(target, lastLocationSeenActorToKeepTrackOf,
 							Investigation.INVESTIGATION_PRIORITY_KEEP_TRACK);
 					lastLocationSeenActorToKeepTrackOf = null;

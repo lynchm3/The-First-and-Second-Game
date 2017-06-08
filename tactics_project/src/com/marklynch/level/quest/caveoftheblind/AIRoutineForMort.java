@@ -30,7 +30,7 @@ public class AIRoutineForMort extends AIRoutine {
 	Mort mort;
 	GameObject target;
 	boolean rangBellAsLastResort;
-	boolean lockedInRoom = false;
+	boolean retreatedToRoom = false;
 
 	enum FEEDING_DEMO_STATE {
 		WALK_TO_TROUGH, PLACE_MEAT, RING_BELL, WALK_AWAY, WAIT_FOR_BLIND_TO_ENTER, WAIT_FOR_BLIND_TO_LEAVE
@@ -47,6 +47,8 @@ public class AIRoutineForMort extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
 	final String ACTIVITY_DESCRIPTION_FOLLOWING = "Following";
+	final String ACTIVITY_DESCRIPTION_RETREATING = "Retreating";
+	final String ACTIVITY_DESCRIPTION_HIDING = "Hiding";
 	final String ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL = "Ringing Dinner Bell";
 
 	int sleepCounter = 0;
@@ -61,6 +63,14 @@ public class AIRoutineForMort extends AIRoutine {
 
 	@Override
 	public void update() {
+
+		System.out.println("AIRoutineForMort - mort.attackers.size() = " + mort.attackers.size());
+		System.out.println("AIRoutineForMort - mort.investigations().size() = " + mort.investigationsMap.size());
+		for (GameObject gameObject : mort.investigationsMap.keySet()) {
+			System.out.println("AIRoutineForMort - gameObject = " + gameObject);
+			System.out.println("AIRoutineForMort - gameObject = " + mort.investigationsMap.get(gameObject).priority);
+		}
+
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.miniDialogue = null;
@@ -74,11 +84,21 @@ public class AIRoutineForMort extends AIRoutine {
 		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 		for (GameObject actor : mort.investigationsMap.keySet()) {
 			Square squareToSearch = mort.investigationsMap.get(actor).square;
-			if (squareToSearch.structureRoomSquareIsIn != mort.mortsMine
-					&& squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
-					&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault
-					&& squareToSearch != mort.mortsRoomDoorway) {
-				toRemove.add(actor);
+			if (retreatedToRoom) {
+				if (squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
+						&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault
+						&& squareToSearch != mort.mortsRoomDoorway) {
+					toRemove.add(actor);
+				}
+
+			} else {
+				if (squareToSearch.structureRoomSquareIsIn != mort.mortsMine
+						&& squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
+						&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault
+						&& squareToSearch != mort.mortsRoomDoorway) {
+					toRemove.add(actor);
+				}
+
 			}
 		}
 		for (GameObject actor : toRemove) {
@@ -97,9 +117,13 @@ public class AIRoutineForMort extends AIRoutine {
 					Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
 					mort.performingFeedingDemo = false;
 					if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
+						mort.activityDescription = ACTIVITY_DESCRIPTION_HIDING;
 						new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
-						lockedInRoom = true;
+						mort.investigationsMap.clear();
+						searchCooldown = 0;
+						retreatedToRoom = true;
 					} else {
+						mort.activityDescription = ACTIVITY_DESCRIPTION_RETREATING;
 						AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
 					}
 					return;
@@ -108,9 +132,7 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
-		// updateListOfCrimesWitnessed();
-
-		// Player attacker and under half health - ring bell
+		// Player attacker mort and mort is under half health - ring bell
 		if (!rangBellAsLastResort && mort.remainingHealth < mort.totalHealth / 2) {
 			Bell bell = (Bell) mort.inventory.getGameObjectOfClass(Bell.class);
 			if (bell != null && mort.getAttackers().contains(Game.level.player)) {
@@ -143,7 +165,23 @@ public class AIRoutineForMort extends AIRoutine {
 			return;
 		}
 
-		if (lockedInRoom) {
+		// if already retreated to room and not in it now
+		if (retreatedToRoom && mort.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsRoom
+				&& mort.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsVault) {
+			Square doorSquare = mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
+			Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
+			mort.performingFeedingDemo = false;
+			if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
+				mort.activityDescription = ACTIVITY_DESCRIPTION_HIDING;
+				new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
+				mort.investigationsMap.clear();
+				searchCooldown = 0;
+				retreatedToRoom = true;
+			} else {
+				mort.activityDescription = ACTIVITY_DESCRIPTION_RETREATING;
+				AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
+			}
+			mort.activityDescription = ACTIVITY_DESCRIPTION_HIDING;
 			return;
 		}
 
