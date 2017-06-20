@@ -399,7 +399,7 @@ public class AIRoutine {
 	public Square lastLocationSeenActorToKeepTrackOf = null;
 
 	// public
-	public void keepTrackOf(Actor target) {
+	public boolean keepTrackOf(Actor target) {
 		// Can mort see the Player in his territory? If so record it. If not,
 		// follow.
 		if (target != actorToKeepTrackOf) {
@@ -423,12 +423,13 @@ public class AIRoutine {
 					lastLocationSeenActorToKeepTrackOf = target.squareGameObjectIsOn;
 				}
 
-				return;
+				return true;
 			}
 		} else {
 			actor.investigationsMap.remove(target);
 			lastLocationSeenActorToKeepTrackOf = target.squareGameObjectIsOn;
 		}
+		return false;
 	}
 
 }

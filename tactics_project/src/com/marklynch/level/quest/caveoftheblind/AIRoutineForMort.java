@@ -64,13 +64,6 @@ public class AIRoutineForMort extends AIRoutine {
 	@Override
 	public void update() {
 
-		System.out.println("AIRoutineForMort - mort.attackers.size() = " + mort.attackers.size());
-		System.out.println("AIRoutineForMort - mort.investigations().size() = " + mort.investigationsMap.size());
-		for (GameObject gameObject : mort.investigationsMap.keySet()) {
-			System.out.println("AIRoutineForMort - gameObject = " + gameObject);
-			System.out.println("AIRoutineForMort - gameObject = " + mort.investigationsMap.get(gameObject).priority);
-		}
-
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.miniDialogue = null;
@@ -101,6 +94,7 @@ public class AIRoutineForMort extends AIRoutine {
 
 			}
 		}
+
 		for (GameObject actor : toRemove) {
 			mort.investigationsMap.remove(actor);
 		}
@@ -253,36 +247,24 @@ public class AIRoutineForMort extends AIRoutine {
 
 		// Can mort see the Player in his territory? If so record it. If not,
 		// follow.
-		if (actor.canSeeGameObject(Game.level.player) && targetInTerritory(Game.level.player)) {
-			keepTrackOf(Game.level.player);
-		} else if (lastLocationSeenActorToKeepTrackOf != null
-				&& squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
-			keepTrackOf(Game.level.player);
-		} else if (lastLocationSeenActorToKeepTrackOf != null
-				&& !squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
-			lastLocationSeenActorToKeepTrackOf = null;
-		}
-
-		// If not leader defer to pack
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader())
-
-		{
-			if (this.actor.group.update(this.actor)) {
-				return;
-			}
-		}
-
-		// if group leader wait for group
-		if (this.actor.group != null && this.actor == this.actor.group.getLeader()) {
-			if (this.actor.group.leaderNeedsToWait()) {
-				this.actor.activityDescription = "Waiting for " + this.actor.group.name;
-				return;
+		if (!retreatedToRoom) {
+			if (actor.canSeeGameObject(Game.level.player) && targetInTerritory(Game.level.player)) {
+				if (keepTrackOf(Game.level.player)) {
+					return;
+				}
+			} else if (lastLocationSeenActorToKeepTrackOf != null
+					&& squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
+				if (keepTrackOf(Game.level.player)) {
+					return;
+				}
+			} else if (lastLocationSeenActorToKeepTrackOf != null
+					&& !squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
+				lastLocationSeenActorToKeepTrackOf = null;
 			}
 		}
 
 		if (squareInTerritory(Game.level.player.squareGameObjectIsOn)) {
-
-		} else {
+		} else if (!retreatedToRoom) {
 			AIRoutineUtils.moveTowardsTargetSquare(mort.mortsStandingSpot);
 		}
 	}
