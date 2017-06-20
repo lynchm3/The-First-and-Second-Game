@@ -179,6 +179,9 @@ public class AIRoutineForMort extends AIRoutine {
 			return;
 		}
 
+		if (retreatedToRoom)
+			return;
+
 		// Feeding demo
 		if (mort.performingFeedingDemo) {
 
@@ -247,24 +250,22 @@ public class AIRoutineForMort extends AIRoutine {
 
 		// Can mort see the Player in his territory? If so record it. If not,
 		// follow.
-		if (!retreatedToRoom) {
-			if (actor.canSeeGameObject(Game.level.player) && targetInTerritory(Game.level.player)) {
-				if (keepTrackOf(Game.level.player)) {
-					return;
-				}
-			} else if (lastLocationSeenActorToKeepTrackOf != null
-					&& squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
-				if (keepTrackOf(Game.level.player)) {
-					return;
-				}
-			} else if (lastLocationSeenActorToKeepTrackOf != null
-					&& !squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
-				lastLocationSeenActorToKeepTrackOf = null;
+		if (actor.canSeeGameObject(Game.level.player) && targetInTerritory(Game.level.player)) {
+			if (keepTrackOf(Game.level.player)) {
+				return;
 			}
+		} else if (lastLocationSeenActorToKeepTrackOf != null
+				&& squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
+			if (keepTrackOf(Game.level.player)) {
+				return;
+			}
+		} else if (lastLocationSeenActorToKeepTrackOf != null
+				&& !squareInTerritory(lastLocationSeenActorToKeepTrackOf)) {
+			lastLocationSeenActorToKeepTrackOf = null;
 		}
 
 		if (squareInTerritory(Game.level.player.squareGameObjectIsOn)) {
-		} else if (!retreatedToRoom) {
+		} else {
 			AIRoutineUtils.moveTowardsTargetSquare(mort.mortsStandingSpot);
 		}
 	}
