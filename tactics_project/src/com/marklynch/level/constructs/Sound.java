@@ -20,13 +20,15 @@ public class Sound {
 	public boolean legal;
 	public Class action;
 
-	public Sound(Actor sourceActor, GameObject sourceObject, Square sourceSquare, float loudness, boolean illegal,
+	public Sound(Actor sourceActor, GameObject sourceObject, Square sourceSquare, float loudness, boolean legal,
 			Class action) {
 		super();
 		this.sourceActor = sourceActor;
 		this.sourceObject = sourceObject;
 		this.sourceSquare = sourceSquare;
 		this.loudness = loudness;
+		this.legal = legal;
+		this.action = action;
 
 		createDestinationSounds();
 

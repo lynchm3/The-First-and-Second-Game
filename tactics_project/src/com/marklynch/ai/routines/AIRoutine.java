@@ -120,9 +120,28 @@ public class AIRoutine {
 			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
 					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
 
-				if (!sound.legal || classesArrayList.contains(sound.sourceObject.getClass())) {
+				if (!sound.legal) {
+					System.out.println("adding sound = " + sound);
+					System.out.println("sound.sourceActo = r" + sound.sourceActor);
+					System.out.println("sound.sourceObject = " + sound.sourceObject);
+					System.out.println("sound.sourceSquare = " + sound.sourceSquare);
+					System.out.println("sound.legal = " + sound.legal);
+					System.out.println("sound.action = " + sound.action);
+					// System.out.println("sound.action.getName() = " +
+					// sound.action.getName());
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
+				} else if (!classesArrayList.contains(sound.sourceObject.getClass())) {
+					System.out.println("adding sound = " + sound);
+					System.out.println("sound.sourceActo = r" + sound.sourceActor);
+					System.out.println("sound.sourceObject = " + sound.sourceObject);
+					System.out.println("sound.sourceSquare = " + sound.sourceSquare);
+					System.out.println("sound.legal = " + sound.legal);
+					System.out.println("sound.action = " + sound.action);
+					// System.out.println("sound.action.getName() = " +
+					// sound.action.getName());
+					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
+							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 				}
 			}
 		}

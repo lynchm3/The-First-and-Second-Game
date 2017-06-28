@@ -64,6 +64,10 @@ public class AIRoutineForMort extends AIRoutine {
 	@Override
 	public void update() {
 
+		for (Crime crime : mort.crimesPerformedThisTurn) {
+			System.out.println("Mort Crime.action = " + crime.action);
+		}
+
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.miniDialogue = null;

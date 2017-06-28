@@ -659,11 +659,13 @@ public class Level {
 			currentFactionMovingIndex++;
 			if (currentFactionMovingIndex >= factions.size()) {
 				currentFactionMovingIndex = 0;
-				this.turn++;
 			}
 		}
+
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		if (currentFactionMovingIndex == 0) {
+			this.turn++;
+			System.out.println("\nTurn " + turn + "\n");
 			Game.level.activeActor = player;
 			// Game.level.activeActor.equippedWeapon =
 			// Game.level.activeActor.getWeaponsInInventory().get(0);

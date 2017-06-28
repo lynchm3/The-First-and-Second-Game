@@ -9,6 +9,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.BrokenGlass;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.ActionScream;
@@ -177,7 +178,46 @@ public class AIRoutineForBlind extends AIRoutine {
 		// return;
 		// }
 
+		// CANT SEE ANY CRIMES MORT COMMITED..
+
+		// blind.runSearchRoutine() = true
+		// blind.runSearchRoutine() gameObject =
+		// com.marklynch.level.quest.caveoftheblind.Mort@24273305
+		// blind.runSearchRoutine() priority = 2
+		// blind.runSearchRoutine() square = 75,40
+		// searchCooldown = 10
+		//
+		// blind.runSearchRoutine() = true
+		// blind.runSearchRoutine() gameObject =
+		// com.marklynch.level.quest.caveoftheblind.Mort@24273305
+		// blind.runSearchRoutine() priority = 2
+		// blind.runSearchRoutine() square = 75,40
+		//
+		// searchCooldown = 10
+		//
+		// searchCooldown = 10
+		//
+		// searchCooldown = 10
+		//
+		// searchCooldown = 10
+		//
+		// blind.runSearchRoutine() = true
+		// blind.runSearchRoutine() gameObject =
+		// com.marklynch.level.quest.caveoftheblind.Mort@24273305
+		// blind.runSearchRoutine() priority = 2
+		// blind.runSearchRoutine() square = 75,40
+
 		if (runSearchRoutine()) {
+
+			System.out.println("blind.runSearchRoutine() = true");
+			for (GameObject gameObject : blind.investigationsMap.keySet()) {
+				System.out.println("blind.runSearchRoutine() gameObject = " + gameObject);
+				System.out.println(
+						"blind.runSearchRoutine() priority = " + blind.investigationsMap.get(gameObject).priority);
+				System.out
+						.println("blind.runSearchRoutine() square = " + blind.investigationsMap.get(gameObject).square);
+			}
+
 			// createSearchLocationsBasedOnSounds();
 			addNonBlindNonGolemToAttackersList();
 			createSearchLocationsBasedOnVisibleAttackers();
@@ -185,6 +225,7 @@ public class AIRoutineForBlind extends AIRoutine {
 		}
 
 		if (searchCooldown > 0) {
+			System.out.println("searchCooldown = " + searchCooldown);
 			runSearchCooldown();
 			searchCooldown--;
 			return;

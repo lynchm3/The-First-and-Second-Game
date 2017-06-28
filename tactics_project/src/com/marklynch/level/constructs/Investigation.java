@@ -6,11 +6,12 @@ import com.marklynch.objects.GameObject;
 public class Investigation implements Comparable {
 
 	public static final int INVESTIGATION_PRIORITY_KEEP_TRACK = 1;
-	public static final int INVESTIGATION_PRIORITY_CRIME_HEARD = 2;
-	public static final int INVESTIGATION_PRIORITY_ATTACK_HEARD = 3;
-	public static final int INVESTIGATION_PRIORITY_CRIME_SEEN = 4;
-	public static final int INVESTIGATION_PRIORITY_ATTACK_SEEN = 5;
-	public static final int INVESTIGATION_PRIORITY_ATTACKED = 6;
+	public static final int INVESTIGATION_PRIORITY_SOUND_HEARD = 2;
+	public static final int INVESTIGATION_PRIORITY_CRIME_HEARD = 3;
+	public static final int INVESTIGATION_PRIORITY_ATTACK_HEARD = 4;
+	public static final int INVESTIGATION_PRIORITY_CRIME_SEEN = 5;
+	public static final int INVESTIGATION_PRIORITY_ATTACK_SEEN = 6;
+	public static final int INVESTIGATION_PRIORITY_ATTACKED = 7;
 
 	public GameObject actor;
 	public Square square;
