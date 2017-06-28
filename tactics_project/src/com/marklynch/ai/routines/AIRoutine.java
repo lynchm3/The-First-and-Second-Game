@@ -122,9 +122,23 @@ public class AIRoutine {
 				if (!sound.legal) {
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
+					System.out.println("sound = " + sound);
+					System.out.println("sound.loudness = " + sound.loudness);
+					System.out.println("sound.action = " + sound.action);
+					System.out.println("sound.legal = " + sound.legal);
+					System.out.println("sound.sourceActor = " + sound.sourceActor);
+					System.out.println("sound.sourceObject = " + sound.sourceObject);
+					System.out.println("sound.sourceSquare = " + sound.sourceSquare);
 				} else if (!classesArrayList.contains(sound.sourceObject.getClass())) {
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
+					System.out.println("sound = " + sound);
+					System.out.println("sound.loudness = " + sound.loudness);
+					System.out.println("sound.action = " + sound.action);
+					System.out.println("sound.legal = " + sound.legal);
+					System.out.println("sound.sourceActor = " + sound.sourceActor);
+					System.out.println("sound.sourceObject = " + sound.sourceObject);
+					System.out.println("sound.sourceSquare = " + sound.sourceSquare);
 				}
 			}
 		}
