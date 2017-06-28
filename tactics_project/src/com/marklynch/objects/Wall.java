@@ -2,8 +2,12 @@ package com.marklynch.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
@@ -68,9 +72,10 @@ public class Wall extends GameObject {
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
 			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
+				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				owner);
 		loadImages();
 		if (squareGameObjectIsOn != null) {
 			drawX1 = (int) (squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX);
@@ -255,6 +260,22 @@ public class Wall extends GameObject {
 
 		fullBottomWall = connectedRight && connectedBottomRight && connectedBottom && connectedBottomLeft
 				&& connectedLeft;
+
+	}
+
+	@Override
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+
+		ArrayList<Action> actions = super.getAllActionsPerformedOnThisInWorld(performer);
+		Action pickupAction = null;
+		for (Action action : actions) {
+			if (action instanceof ActionPickUp) {
+				pickupAction = action;
+			}
+		}
+		actions.remove(pickupAction);
+
+		return actions;
 
 	}
 
