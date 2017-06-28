@@ -310,7 +310,8 @@ public class AIRoutineForMort extends AIRoutine {
 			ArrayList<Crime> unresolvedIllegalMining = new ArrayList<Crime>();
 			final ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>();
 			final ArrayList<GameObject> stolenItemsOnCriminal = new ArrayList<GameObject>();
-			final ArrayList<GameObject> stolenItemsOnGround = new ArrayList<GameObject>();
+			final ArrayList<GameObject> stolenItemsEquippedByCriminal = new ArrayList<GameObject>();
+			final ArrayList<GameObject> stolenItemsOnGroundToPickUp = new ArrayList<GameObject>();
 			// final ArrayList<GameObject> stolenItemsOnInContainer = new
 			// ArrayList<GameObject>();
 
@@ -346,8 +347,10 @@ public class AIRoutineForMort extends AIRoutine {
 					for (GameObject stolenItem : crime.stolenItems) {
 						if (criminal.inventory.contains(stolenItem)) {
 							stolenItemsOnCriminal.add(stolenItem);
-						} else if (stolenItem.squareGameObjectIsOn != null) {
-							stolenItemsOnGround.add(stolenItem);
+						} else if (criminal.equipped == stolenItem) {
+							stolenItemsEquippedByCriminal.add(stolenItem);
+						} else if (stolenItem.squareGameObjectIsOn != null && stolenItem.fitsInInventory) {
+							stolenItemsOnGroundToPickUp.add(stolenItem);
 						}
 					}
 
@@ -377,7 +380,7 @@ public class AIRoutineForMort extends AIRoutine {
 				return true;
 			} else if (stolenItemsOnCriminal.size() > 0) {
 				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
-					new ActionTalk(this.actor, criminal, createJusticeConversation(criminal, stolenItemsOnCriminal))
+					new ActionTalk(this.actor, criminal, createJusticeTakeConversation(criminal, stolenItemsOnCriminal))
 							.perform();
 					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 					return true;
@@ -390,8 +393,24 @@ public class AIRoutineForMort extends AIRoutine {
 						return true;
 					}
 				}
-			} else if (stolenItemsOnGround.size() > 0) {
-				for (GameObject stolenItemOnGround : stolenItemsOnGround) {
+			} else if (stolenItemsEquippedByCriminal.size() > 0) {
+				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
+					new ActionTalk(this.actor, criminal,
+							createJusticeDropConversation(criminal, stolenItemsEquippedByCriminal)).perform();
+					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+					return true;
+				}
+
+				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
+						&& actor.canSeeGameObject(criminal)) {
+					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
+						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+						return true;
+					}
+				}
+			} else if (stolenItemsOnGroundToPickUp.size() > 0) {
+				for (GameObject stolenItemOnGround : stolenItemsOnGroundToPickUp) {
+
 					if (actor.straightLineDistanceTo(stolenItemOnGround.squareGameObjectIsOn) == 1) {
 						new ActionTake(this.actor, stolenItemOnGround).perform();
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
@@ -410,9 +429,9 @@ public class AIRoutineForMort extends AIRoutine {
 		return false;
 	}
 
-	public Conversation createJusticeConversation(final Actor criminal,
+	public Conversation createJusticeTakeConversation(final Actor criminal,
 			final ArrayList<GameObject> stolenItemsOnCriminal) {
-		ConversationResponse accept = new ConversationResponse("Accept", null) {
+		ConversationResponse accept = new ConversationResponse("Comply", null) {
 			@Override
 			public void select() {
 				super.select();
@@ -454,6 +473,36 @@ public class AIRoutineForMort extends AIRoutine {
 
 			demand = demandArrayList.toArray();
 		}
+
+		ConversationPart conversationPartJustice = new ConversationPart(demand,
+				new ConversationResponse[] { accept, refuse }, this.actor);
+
+		return new Conversation(conversationPartJustice);
+
+	}
+
+	public Conversation createJusticeDropConversation(final Actor criminal,
+			final ArrayList<GameObject> stolenItemsEquippedByCriminal) {
+		ConversationResponse accept = new ConversationResponse("Comply", null) {
+			@Override
+			public void select() {
+				super.select();
+				for (GameObject stolenItemOnCriminal : stolenItemsEquippedByCriminal) {
+					new ActionDrop(criminal, criminal.squareGameObjectIsOn, stolenItemOnCriminal).perform();
+				}
+			}
+		};
+		ConversationResponse refuse = new ConversationResponse("Refuse", null) {
+			@Override
+			public void select() {
+				super.select();
+				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+				actor.addAttackerForThisAndGroupMembers(criminal);
+			}
+		};
+
+		Object[] demand = new Object[] {};
+		demand = new Object[] { "Drop that ", stolenItemsEquippedByCriminal.get(0), "!" };
 
 		ConversationPart conversationPartJustice = new ConversationPart(demand,
 				new ConversationResponse[] { accept, refuse }, this.actor);
