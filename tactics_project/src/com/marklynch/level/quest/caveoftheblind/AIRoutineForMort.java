@@ -64,10 +64,6 @@ public class AIRoutineForMort extends AIRoutine {
 	@Override
 	public void update() {
 
-		for (Crime crime : mort.crimesPerformedThisTurn) {
-			System.out.println("Mort Crime.action = " + crime.action);
-		}
-
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.miniDialogue = null;
@@ -134,9 +130,11 @@ public class AIRoutineForMort extends AIRoutine {
 		if (!rangBellAsLastResort && mort.remainingHealth < mort.totalHealth / 2) {
 			Bell bell = (Bell) mort.inventory.getGameObjectOfClass(Bell.class);
 			if (bell != null && mort.getAttackers().contains(Game.level.player)) {
+				new ActionTalk(actor, Game.level.player, this.getConversationLastResort()).perform();
 				new ActionRing(mort, bell).perform();
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
-				this.actor.miniDialogue = "You won't get out of here alive";
+				// this.actor.miniDialogue = "You won't get out of here alive";
+				// HERE
 				rangBellAsLastResort = true;
 				return;
 			}
@@ -452,6 +450,17 @@ public class AIRoutineForMort extends AIRoutine {
 				new ConversationResponse[] { accept, refuse }, this.actor);
 
 		return new Conversation(conversationPartJustice);
+
+	}
+
+	private Conversation getConversationLastResort() {
+
+		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
+		ConversationPart conversationPartYouWontGetOut = new ConversationPart(
+				new Object[] { "You won't get out of here alive [Mort rings his bell]" },
+				new ConversationResponse[] { conversationReponseDone }, mort);
+
+		return new Conversation(conversationPartYouWontGetOut);
 
 	}
 }

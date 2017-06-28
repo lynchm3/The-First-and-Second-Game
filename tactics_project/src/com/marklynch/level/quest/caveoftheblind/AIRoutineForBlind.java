@@ -9,7 +9,6 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.BrokenGlass;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.ActionScream;
@@ -209,15 +208,6 @@ public class AIRoutineForBlind extends AIRoutine {
 
 		if (runSearchRoutine()) {
 
-			System.out.println("blind.runSearchRoutine() = true");
-			for (GameObject gameObject : blind.investigationsMap.keySet()) {
-				System.out.println("blind.runSearchRoutine() gameObject = " + gameObject);
-				System.out.println(
-						"blind.runSearchRoutine() priority = " + blind.investigationsMap.get(gameObject).priority);
-				System.out
-						.println("blind.runSearchRoutine() square = " + blind.investigationsMap.get(gameObject).square);
-			}
-
 			// createSearchLocationsBasedOnSounds();
 			addNonBlindNonGolemToAttackersList();
 			createSearchLocationsBasedOnVisibleAttackers();
@@ -225,7 +215,6 @@ public class AIRoutineForBlind extends AIRoutine {
 		}
 
 		if (searchCooldown > 0) {
-			System.out.println("searchCooldown = " + searchCooldown);
 			runSearchCooldown();
 			searchCooldown--;
 			return;

@@ -9,7 +9,6 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.StructureRoom;
-import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
@@ -121,25 +120,9 @@ public class AIRoutine {
 					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
 
 				if (!sound.legal) {
-					System.out.println("adding sound = " + sound);
-					System.out.println("sound.sourceActo = r" + sound.sourceActor);
-					System.out.println("sound.sourceObject = " + sound.sourceObject);
-					System.out.println("sound.sourceSquare = " + sound.sourceSquare);
-					System.out.println("sound.legal = " + sound.legal);
-					System.out.println("sound.action = " + sound.action);
-					// System.out.println("sound.action.getName() = " +
-					// sound.action.getName());
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 				} else if (!classesArrayList.contains(sound.sourceObject.getClass())) {
-					System.out.println("adding sound = " + sound);
-					System.out.println("sound.sourceActo = r" + sound.sourceActor);
-					System.out.println("sound.sourceObject = " + sound.sourceObject);
-					System.out.println("sound.sourceSquare = " + sound.sourceSquare);
-					System.out.println("sound.legal = " + sound.legal);
-					System.out.println("sound.action = " + sound.action);
-					// System.out.println("sound.action.getName() = " +
-					// sound.action.getName());
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 				}
@@ -172,9 +155,6 @@ public class AIRoutine {
 
 					if (target instanceof HidingPlace) {
 
-						if (actor instanceof Mort)
-							System.out.println("BS 1");
-
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					} else {
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
@@ -194,9 +174,6 @@ public class AIRoutine {
 									// new location
 									this.actor.thoughtBubbleImageTexture = null;
 									if (target instanceof HidingPlace) {
-
-										if (actor instanceof Mort)
-											System.out.println("BS 2");
 										this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 									} else {
 										this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
@@ -243,9 +220,6 @@ public class AIRoutine {
 			// moce towards search square
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 					&& this.actor.getPathTo(searchSquare) != null) {
-
-				if (actor instanceof Mort)
-					System.out.println("BS 3");
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 				this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 				moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquare);
@@ -266,9 +240,6 @@ public class AIRoutine {
 			for (Square searchSquareAtDistanceOne : searchSquare.getAllSquaresAtDistance(1)) {
 				if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 						&& this.actor.getPathTo(searchSquareAtDistanceOne) != null) {
-
-					if (actor instanceof Mort)
-						System.out.println("BS 4");
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 					moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceOne);
@@ -289,9 +260,6 @@ public class AIRoutine {
 			// distance 2
 			for (Square searchSquareAtDistanceTwo : searchSquare.getAllSquaresAtDistance(2)) {
 				if (this.actor.getPathTo(searchSquareAtDistanceTwo) != null) {
-
-					if (actor instanceof Mort)
-						System.out.println("BS 5");
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 					moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceTwo);
@@ -318,9 +286,6 @@ public class AIRoutine {
 					// new location
 					this.actor.thoughtBubbleImageTexture = null;
 					if (target instanceof HidingPlace) {
-
-						if (actor instanceof Mort)
-							System.out.println("BS 6");
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					} else
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
@@ -337,9 +302,6 @@ public class AIRoutine {
 	public boolean runSearchCooldown() {
 
 		// DOORWAYS are my biggest issue here.
-
-		if (actor instanceof Mort)
-			System.out.println("BS 7");
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 		this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
 		StructureRoom room = actor.squareGameObjectIsOn.structureRoomSquareIsIn;

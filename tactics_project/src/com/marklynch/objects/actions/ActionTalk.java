@@ -13,12 +13,10 @@ public class ActionTalk extends Action {
 	public Actor target;
 	public Conversation conversation;
 
-	// Default for hostiles
 	public ActionTalk(Actor talker, Actor target) {
 		this(talker, target, null);
 	}
 
-	// Default for hostiles
 	public ActionTalk(Actor talker, Actor target, Conversation conversation) {
 		super(ACTION_NAME);
 		this.performer = talker;
