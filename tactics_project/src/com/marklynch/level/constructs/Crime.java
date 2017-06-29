@@ -13,8 +13,11 @@ public class Crime {
 	public Actor performer;
 	public Actor visctim;
 	public int severity;
-	// Trespassing = 1, Vandalism = 4,
-	// Theft = 4, Attack = 6
+	// Trespassing = 1,
+	// Having to be asked to drop something = 1
+	// Vandalism = 4,
+	// Theft = 4
+	// Attack = 6
 	public boolean resolved;
 	public GameObject stolenItems[];
 

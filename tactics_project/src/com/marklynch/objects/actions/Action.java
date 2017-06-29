@@ -37,7 +37,7 @@ public abstract class Action {
 	//
 	// }
 
-	public void notifyWitnessesOfCrime(Crime crime) {
+	public static void notifyWitnessesOfCrime(Crime crime) {
 		int searchBoxX1 = crime.performer.squareGameObjectIsOn.xInGrid - 10;
 		if (searchBoxX1 < 0)
 			searchBoxX1 = 0;

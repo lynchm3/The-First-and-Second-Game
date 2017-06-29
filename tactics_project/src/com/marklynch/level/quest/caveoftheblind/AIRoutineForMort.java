@@ -13,6 +13,7 @@ import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionLock;
@@ -397,6 +398,10 @@ public class AIRoutineForMort extends AIRoutine {
 				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
 					new ActionTalk(this.actor, criminal,
 							createJusticeDropConversation(criminal, stolenItemsEquippedByCriminal)).perform();
+					Crime crime = new Crime(null, criminal, this.actor, 1);
+					criminal.crimesPerformedThisTurn.add(crime);
+					criminal.crimesPerformedInLifetime.add(crime);
+					Action.notifyWitnessesOfCrime(crime);
 					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 					return true;
 				}
@@ -431,7 +436,7 @@ public class AIRoutineForMort extends AIRoutine {
 
 	public Conversation createJusticeTakeConversation(final Actor criminal,
 			final ArrayList<GameObject> stolenItemsOnCriminal) {
-		ConversationResponse accept = new ConversationResponse("Comply", null) {
+		ConversationResponse accept = new ConversationResponse("Comply [Give items]", null) {
 			@Override
 			public void select() {
 				super.select();
