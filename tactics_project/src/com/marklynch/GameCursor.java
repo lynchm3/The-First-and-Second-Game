@@ -13,6 +13,7 @@ public class GameCursor {
 	public transient Texture cursor = null;
 	public transient Texture circle = null;
 	public transient Texture redArrow = null;
+	public transient Texture yellowArrow = null;
 
 	public GameCursor() {
 		this.imageTexture = getGlobalImage("highlight.png");
@@ -22,5 +23,6 @@ public class GameCursor {
 		this.cursor = getGlobalImage("cursor.png");
 		this.circle = getGlobalImage("circle.png");
 		this.redArrow = getGlobalImage("red_arrow.png");
+		this.yellowArrow = getGlobalImage("yellow_arrow.png");
 	}
 }

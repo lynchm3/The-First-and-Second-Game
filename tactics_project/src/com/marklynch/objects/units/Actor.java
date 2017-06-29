@@ -23,7 +23,6 @@ import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
-import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -690,9 +689,6 @@ public class Actor extends GameObject {
 			// TextureUtils.skipNormals = false;
 		}
 
-		if (this instanceof Mort) {
-			aiLine = new AILine(mdesl.graphics.Color.RED, this, Game.level.player);
-		}
 		if (aiLine != null) {
 			aiLine.draw2();
 		}

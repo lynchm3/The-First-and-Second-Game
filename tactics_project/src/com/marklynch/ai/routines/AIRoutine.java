@@ -206,7 +206,7 @@ public class AIRoutine {
 					}
 
 					System.out.println("MAKING FIGHT LINE");
-					actor.aiLine = new AILine(mdesl.graphics.Color.RED, actor, target);
+					actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ATTACK, actor, target);
 
 					return true;
 				}
@@ -320,7 +320,7 @@ public class AIRoutine {
 			}
 
 			System.out.println("MAKING SEARCH LINE");
-			actor.aiLine = new AILine(mdesl.graphics.Color.YELLOW, actor, target);
+			actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SEARCH, actor, target);
 			return true;
 		}
 		return false;
