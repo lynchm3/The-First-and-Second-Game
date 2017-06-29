@@ -23,6 +23,7 @@ import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.tools.Lantern;
+import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.weapons.Weapon;
@@ -689,7 +690,12 @@ public class QuestCaveOfTheBlind extends Quest {
 				new Object[] { "PRIVATE! - Mort" }, mort);
 		noEntry.quest = this;
 
+		Pickaxe pickaxe = Templates.PICKAXE.makeCopy(Game.level.squares[76][38], mort);
+		pickaxe.quest = this;
+
 		GameObject trough = Templates.TROUGH.makeCopy(Game.level.squares[86][43], mort);
+		trough.quest = this;
+
 		troughSquare = Game.level.squares[86][43];
 		safeSquare = Game.level.squares[76][42];
 

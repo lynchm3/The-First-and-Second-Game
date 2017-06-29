@@ -35,11 +35,15 @@ public class ActionGive extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " gave ", object, " to ", receiver }));
 		performer.inventory.remove(object);
+		if (performer.equipped == object)
+			performer.equipped = null;
 		receiver.inventory.add(object);
 		if (receiver instanceof Actor) {
 			object.owner = (Actor) receiver;
 		}
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override
