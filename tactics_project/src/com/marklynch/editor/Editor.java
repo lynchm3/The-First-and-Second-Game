@@ -427,9 +427,9 @@ public class Editor {
 		// Actor player = Templates.Player.makeCopy(Game.level.squares[80][39],
 		// Game.level.factions.get(0), null);
 		Game.level.player = player;
+		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null, player));
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));
 		player.inventory.add(Templates.HATCHET.makeCopy(null, player));
-		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null, player));
 		player.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, player));
 		player.inventory.add(Templates.DINNER_BELL.makeCopy(null, player));
 		player.inventory.add(Templates.CLEAVER.makeCopy(null, player));

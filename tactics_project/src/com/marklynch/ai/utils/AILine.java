@@ -5,21 +5,21 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
-import com.marklynch.objects.GameObject;
+import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
 public class AILine {
 
 	public static enum AILineType {
-		AI_LINE_TYPE_ATTACK, AI_LINE_TYPE_SEARCH
+		AI_LINE_TYPE_ATTACK, AI_LINE_TYPE_SEARCH, AI_LINE_TYPE_CRIME, AI_LINE_TYPE_FOLLOW
 	};
 
 	AILineType aiLineType;
 	Actor source;
-	GameObject target;
+	Square target;
 
-	public AILine(AILineType aiLineType, Actor source, GameObject target) {
+	public AILine(AILineType aiLineType, Actor source, Square target) {
 		super();
 		this.aiLineType = aiLineType;
 		this.source = source;
@@ -30,8 +30,11 @@ public class AILine {
 		// TODO Auto-generated method stub
 		float x1 = this.source.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
 		float y1 = this.source.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
-		float x2 = this.target.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
-		float y2 = this.target.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
+		// System.out.println("target = " + target);
+		// System.out.println("target.squareGameObjectIsOn = " +
+		// target.squareGameObjectIsOn);
+		float x2 = this.target.xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
+		float y2 = this.target.yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
 
 		float deltaX = x2 - x1;
 		float deltaY = y2 - y1;
@@ -52,8 +55,12 @@ public class AILine {
 		// Draw
 		if (aiLineType == AILineType.AI_LINE_TYPE_ATTACK) {
 			TextureUtils.drawTexture(Game.level.gameCursor.redArrow, 0, 0 + distance, 0 - 16, 0 + 16);
-		} else if (aiLineType == AILineType.AI_LINE_TYPE_ATTACK) {
+		} else if (aiLineType == AILineType.AI_LINE_TYPE_SEARCH) {
 			TextureUtils.drawTexture(Game.level.gameCursor.yellowArrow, 0, 0 + distance, 0 - 16, 0 + 16);
+		} else if (aiLineType == AILineType.AI_LINE_TYPE_CRIME) {
+			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0, 0 + distance, 0 - 16, 0 + 16);
+		} else if (aiLineType == AILineType.AI_LINE_TYPE_FOLLOW) {
+			TextureUtils.drawTexture(Game.level.gameCursor.greenArrow, 0, 0 + distance, 0 - 16, 0 + 16);
 		}
 
 		Game.activeBatch.flush();
