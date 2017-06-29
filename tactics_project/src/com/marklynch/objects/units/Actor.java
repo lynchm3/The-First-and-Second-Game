@@ -13,6 +13,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
+import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AStarNode;
 import com.marklynch.ai.utils.AStarSearch;
 import com.marklynch.level.Square;
@@ -132,6 +133,8 @@ public class Actor extends GameObject {
 
 	// public ArrayList<Crime> crimesWitnessed;
 	public Map<Actor, ArrayList<Crime>> crimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
+
+	public AILine aiLine;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
@@ -684,6 +687,11 @@ public class Actor extends GameObject {
 					expressionPositionXInPixels + expressionWidth, expressionPositionYInPixels,
 					expressionPositionYInPixels + expressionHeight);
 			// TextureUtils.skipNormals = false;
+		}
+
+		if (aiLine != null) {
+			System.out.println("DRAWING FIGHT LINE");
+			aiLine.draw2();
 		}
 
 	}

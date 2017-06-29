@@ -39,6 +39,7 @@ public class AIRoutineForTrader extends AIRoutine {
 
 	@Override
 	public void update() {
+		this.actor.aiLine = null;
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.thoughtBubbleImageTexture = null;

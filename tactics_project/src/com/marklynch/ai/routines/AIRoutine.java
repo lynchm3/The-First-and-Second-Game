@@ -3,6 +3,7 @@ package com.marklynch.ai.routines;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
@@ -203,6 +204,10 @@ public class AIRoutine {
 							}
 						}
 					}
+
+					System.out.println("MAKING FIGHT LINE");
+					actor.aiLine = new AILine(mdesl.graphics.Color.RED, actor, target);
+
 					return true;
 				}
 			}
@@ -314,6 +319,8 @@ public class AIRoutine {
 				}
 			}
 
+			System.out.println("MAKING SEARCH LINE");
+			actor.aiLine = new AILine(mdesl.graphics.Color.YELLOW, actor, target);
 			return true;
 		}
 		return false;

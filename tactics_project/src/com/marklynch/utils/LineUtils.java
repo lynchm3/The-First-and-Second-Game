@@ -1,10 +1,10 @@
 package com.marklynch.utils;
 
-import mdesl.graphics.Color;
-
 import org.lwjgl.opengl.GL11;
 
 import com.marklynch.Game;
+
+import mdesl.graphics.Color;
 
 public class LineUtils {
 

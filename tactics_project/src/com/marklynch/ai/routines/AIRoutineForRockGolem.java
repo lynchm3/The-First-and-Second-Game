@@ -49,6 +49,7 @@ public class AIRoutineForRockGolem extends AIRoutine {
 		if (!rockGolem.awake)
 			return;
 
+		this.actor.aiLine = null;
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.thoughtBubbleImageTexture = null;
