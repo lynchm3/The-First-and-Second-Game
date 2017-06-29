@@ -1,6 +1,7 @@
 package com.marklynch;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import mdesl.graphics.Texture;
 
 public class GameCursor {
@@ -11,6 +12,7 @@ public class GameCursor {
 	public transient Texture imageTexture4 = null;
 	public transient Texture cursor = null;
 	public transient Texture circle = null;
+	public transient Texture redArrow = null;
 
 	public GameCursor() {
 		this.imageTexture = getGlobalImage("highlight.png");
@@ -19,5 +21,6 @@ public class GameCursor {
 		this.imageTexture4 = getGlobalImage("highlight4.png");
 		this.cursor = getGlobalImage("cursor.png");
 		this.circle = getGlobalImage("circle.png");
+		this.redArrow = getGlobalImage("red_arrow.png");
 	}
 }
