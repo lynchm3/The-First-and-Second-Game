@@ -15,7 +15,6 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDrop;
-import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionRing;
@@ -432,88 +431,6 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 		return false;
-	}
-
-	public Conversation createJusticeTakeConversation(final Actor criminal,
-			final ArrayList<GameObject> stolenItemsOnCriminal) {
-		ConversationResponse accept = new ConversationResponse("Comply [Give items]", null) {
-			@Override
-			public void select() {
-				super.select();
-				for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-					new ActionGive(criminal, actor, stolenItemOnCriminal).perform();
-				}
-			}
-		};
-		ConversationResponse refuse = new ConversationResponse("Refuse", null) {
-			@Override
-			public void select() {
-				super.select();
-				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
-				actor.addAttackerForThisAndGroupMembers(criminal);
-			}
-		};
-
-		Object[] demand = new Object[] {};
-		if (stolenItemsOnCriminal.size() == 1) {
-			demand = new Object[] { "Give me that ", stolenItemsOnCriminal.get(0), "!" };
-		} else {
-			ArrayList<Object> demandArrayList = new ArrayList<Object>();
-			for (int i = 0; i < stolenItemsOnCriminal.size(); i++) {
-				if (i == 0) {
-					// first item
-					demandArrayList.add("Give me that ");
-					demandArrayList.add(stolenItemsOnCriminal.get(i));
-				} else if (i == stolenItemsOnCriminal.size() - 1) {
-					// last item
-					demandArrayList.add(" and ");
-					demandArrayList.add(stolenItemsOnCriminal.get(i));
-					demandArrayList.add("!");
-				} else {
-					// middle items
-					demandArrayList.add(", ");
-					demandArrayList.add(stolenItemsOnCriminal.get(i));
-				}
-			}
-
-			demand = demandArrayList.toArray();
-		}
-
-		ConversationPart conversationPartJustice = new ConversationPart(demand,
-				new ConversationResponse[] { accept, refuse }, this.actor);
-
-		return new Conversation(conversationPartJustice);
-
-	}
-
-	public Conversation createJusticeDropConversation(final Actor criminal,
-			final ArrayList<GameObject> stolenItemsEquippedByCriminal) {
-		ConversationResponse accept = new ConversationResponse("Comply", null) {
-			@Override
-			public void select() {
-				super.select();
-				for (GameObject stolenItemOnCriminal : stolenItemsEquippedByCriminal) {
-					new ActionDrop(criminal, criminal.squareGameObjectIsOn, stolenItemOnCriminal).perform();
-				}
-			}
-		};
-		ConversationResponse refuse = new ConversationResponse("Refuse", null) {
-			@Override
-			public void select() {
-				super.select();
-				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
-				actor.addAttackerForThisAndGroupMembers(criminal);
-			}
-		};
-
-		Object[] demand = new Object[] {};
-		demand = new Object[] { "Drop that ", stolenItemsEquippedByCriminal.get(0), "!" };
-
-		ConversationPart conversationPartJustice = new ConversationPart(demand,
-				new ConversationResponse[] { accept, refuse }, this.actor);
-
-		return new Conversation(conversationPartJustice);
-
 	}
 
 	private Conversation getConversationLastResort() {

@@ -9,10 +9,17 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
-import com.marklynch.objects.actions.ActionMine;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionGive;
+import com.marklynch.objects.actions.ActionTake;
+import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.MapUtil;
 
@@ -356,38 +363,218 @@ public class AIRoutine {
 	}
 
 	protected boolean runCrimeReactionRoutine() {
-		for (Actor criminal : actor.crimesWitnessed.keySet()) {
+		for (final Actor criminal : actor.crimesWitnessed.keySet()) {
 			int accumulatedSeverity = 0;
-			ArrayList<Crime> unresolvedIllegalMining = new ArrayList<Crime>();
-			ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>();
-			ArrayList<GameObject> stolenItems = new ArrayList<GameObject>();
+			// ArrayList<Crime> unresolvedIllegalMining = new
+			// ArrayList<Crime>();
+			final ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>();
+			final ArrayList<GameObject> stolenItemsOnCriminal = new ArrayList<GameObject>();
+			final ArrayList<GameObject> stolenItemsEquippedByCriminal = new ArrayList<GameObject>();
+			final ArrayList<GameObject> stolenItemsOnGroundToPickUp = new ArrayList<GameObject>();
+			// final ArrayList<GameObject> stolenItemsOnInContainer = new
+			// ArrayList<GameObject>();
+
+			// Mark issues as resolved
+			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
+				if (crime.resolved == false) {
+					if (crime.stolenItems.length == 0) {
+						crime.resolved = true;
+						continue;
+					}
+					boolean itemsToBeRetaken = false;
+					for (GameObject stolenItem : crime.stolenItems) {
+						if (criminal.inventory.contains(stolenItem) || stolenItem.squareGameObjectIsOn != null) {
+							itemsToBeRetaken = true;
+						}
+					}
+					if (itemsToBeRetaken)
+						crime.resolved = false;
+					else
+						crime.resolved = true;
+				}
+			}
+
+			// Create list of unresolved crimes, stolenItems
+			// Also calculate accumulated severity of crimes
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				accumulatedSeverity += crime.severity;
 				if (crime.resolved == false) {
 					unresolvedCrimes.add(crime);
-					if (crime.action instanceof ActionMine) {
-						unresolvedIllegalMining.add(crime);
+					// if (crime.action instanceof ActionMine) {
+					// unresolvedIllegalMining.add(crime);
+					// }
+					for (GameObject stolenItem : crime.stolenItems) {
+						if (criminal.inventory.contains(stolenItem)) {
+							stolenItemsOnCriminal.add(stolenItem);
+						} else if (criminal.equipped == stolenItem) {
+							stolenItemsEquippedByCriminal.add(stolenItem);
+						} else if (stolenItem.squareGameObjectIsOn != null && stolenItem.fitsInInventory) {
+							stolenItemsOnGroundToPickUp.add(stolenItem);
+						}
 					}
-					for (GameObject stolenItem : crime.stolenItems)
-						stolenItems.add(stolenItem);
+
 				}
 			}
 
-			if (accumulatedSeverity >= 5) {
+			if (accumulatedSeverity >= 10) {
 				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
 				actor.addAttackerForThisAndGroupMembers(criminal);
 				for (Crime unresolvedCrime : unresolvedCrimes) {
 					unresolvedCrime.resolved = true;
 				}
 				return runFightRoutine();
-			} else if (unresolvedCrimes.size() > 0) {
-				for (Crime unresolvedCrime : unresolvedCrimes) {
-					unresolvedCrime.resolved = true;
+				// } else if (unresolvedIllegalMining.size() > 0) {
+				// actor.miniDialogue = "MY ORES!";
+				// new ActionThrow(actor, criminal,
+				// Templates.ROCK.makeCopy(null, null)).perform();
+				// for (GameObject stolenItem : stolenItemsOnCriminal) {
+				// if (criminal.inventory.contains(stolenItem)) {
+				// new ActionDrop(criminal, criminal.squareGameObjectIsOn,
+				// stolenItem).perform();
+				// this.actor.thoughtBubbleImageTexture =
+				// stolenItem.imageTexture;
+				// }
+				// }
+				// for (Crime unresolvedCrime : unresolvedCrimes) {
+				// unresolvedCrime.resolved = true;
+				// }
+				// // actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+				// return true;
+			} else if (stolenItemsOnCriminal.size() > 0) {
+				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
+					new ActionTalk(this.actor, criminal, createJusticeTakeConversation(criminal, stolenItemsOnCriminal))
+							.perform();
+					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+					return true;
 				}
-				return true;
+
+				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
+						&& actor.canSeeGameObject(criminal)) {
+					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
+						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+						return true;
+					}
+				}
+			} else if (stolenItemsEquippedByCriminal.size() > 0) {
+				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
+					new ActionTalk(this.actor, criminal,
+							createJusticeDropConversation(criminal, stolenItemsEquippedByCriminal)).perform();
+					Crime crime = new Crime(null, criminal, this.actor, 1);
+					criminal.crimesPerformedThisTurn.add(crime);
+					criminal.crimesPerformedInLifetime.add(crime);
+					Action.notifyWitnessesOfCrime(crime);
+					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+					return true;
+				}
+
+				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
+						&& actor.canSeeGameObject(criminal)) {
+					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
+						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+						return true;
+					}
+				}
+			} else if (stolenItemsOnGroundToPickUp.size() > 0) {
+				for (GameObject stolenItemOnGround : stolenItemsOnGroundToPickUp) {
+
+					if (actor.straightLineDistanceTo(stolenItemOnGround.squareGameObjectIsOn) == 1) {
+						new ActionTake(this.actor, stolenItemOnGround).perform();
+						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+						return true;
+					}
+
+					if (actor.canSeeSquare(stolenItemOnGround.squareGameObjectIsOn)) {
+						if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(stolenItemOnGround)) {
+							actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+							return true;
+						}
+					}
+				}
 			}
 		}
 		return false;
+	}
+
+	public Conversation createJusticeTakeConversation(final Actor criminal,
+			final ArrayList<GameObject> stolenItemsOnCriminal) {
+		ConversationResponse accept = new ConversationResponse("Comply [Give items]", null) {
+			@Override
+			public void select() {
+				super.select();
+				for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
+					new ActionGive(criminal, actor, stolenItemOnCriminal).perform();
+				}
+			}
+		};
+		ConversationResponse refuse = new ConversationResponse("Refuse", null) {
+			@Override
+			public void select() {
+				super.select();
+				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+				actor.addAttackerForThisAndGroupMembers(criminal);
+			}
+		};
+
+		Object[] demand = new Object[] {};
+		if (stolenItemsOnCriminal.size() == 1) {
+			demand = new Object[] { "Give me that ", stolenItemsOnCriminal.get(0), "!" };
+		} else {
+			ArrayList<Object> demandArrayList = new ArrayList<Object>();
+			for (int i = 0; i < stolenItemsOnCriminal.size(); i++) {
+				if (i == 0) {
+					// first item
+					demandArrayList.add("Give me that ");
+					demandArrayList.add(stolenItemsOnCriminal.get(i));
+				} else if (i == stolenItemsOnCriminal.size() - 1) {
+					// last item
+					demandArrayList.add(" and ");
+					demandArrayList.add(stolenItemsOnCriminal.get(i));
+					demandArrayList.add("!");
+				} else {
+					// middle items
+					demandArrayList.add(", ");
+					demandArrayList.add(stolenItemsOnCriminal.get(i));
+				}
+			}
+
+			demand = demandArrayList.toArray();
+		}
+
+		ConversationPart conversationPartJustice = new ConversationPart(demand,
+				new ConversationResponse[] { accept, refuse }, this.actor);
+
+		return new Conversation(conversationPartJustice);
+
+	}
+
+	public Conversation createJusticeDropConversation(final Actor criminal,
+			final ArrayList<GameObject> stolenItemsEquippedByCriminal) {
+		ConversationResponse accept = new ConversationResponse("Comply", null) {
+			@Override
+			public void select() {
+				super.select();
+				for (GameObject stolenItemOnCriminal : stolenItemsEquippedByCriminal) {
+					new ActionDrop(criminal, criminal.squareGameObjectIsOn, stolenItemOnCriminal).perform();
+				}
+			}
+		};
+		ConversationResponse refuse = new ConversationResponse("Refuse", null) {
+			@Override
+			public void select() {
+				super.select();
+				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+				actor.addAttackerForThisAndGroupMembers(criminal);
+			}
+		};
+
+		Object[] demand = new Object[] {};
+		demand = new Object[] { "Drop that ", stolenItemsEquippedByCriminal.get(0), "!" };
+
+		ConversationPart conversationPartJustice = new ConversationPart(demand,
+				new ConversationResponse[] { accept, refuse }, this.actor);
+
+		return new Conversation(conversationPartJustice);
+
 	}
 
 	public Actor actorToKeepTrackOf = null;
