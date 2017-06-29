@@ -206,7 +206,8 @@ public class AIRoutine {
 					}
 
 					System.out.println("MAKING FIGHT LINE");
-					actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ATTACK, actor, target);
+					actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ATTACK, actor,
+							target.squareGameObjectIsOn);
 
 					return true;
 				}
@@ -228,6 +229,8 @@ public class AIRoutine {
 		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 		boolean moved = false;
 
+		Square searchSquare = null;
+
 		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
 
 			// If you're within 2 squares and can see the target actor, remove
@@ -239,7 +242,7 @@ public class AIRoutine {
 				continue;
 			}
 
-			Square searchSquare = this.actor.investigationsMap.get(actorToSearchFor).square;
+			searchSquare = this.actor.investigationsMap.get(actorToSearchFor).square;
 			searchCooldownActor = actorToSearchFor;
 			searchCooldown = 10;
 
@@ -320,7 +323,7 @@ public class AIRoutine {
 			}
 
 			System.out.println("MAKING SEARCH LINE");
-			actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SEARCH, actor, target);
+			actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SEARCH, actor, searchSquare);
 			return true;
 		}
 		return false;
