@@ -103,5 +103,6 @@ public abstract class Action {
 
 	public static void loadActionImages() {
 		getGlobalImage("action_attack.png");
+		getGlobalImage("action_move.png");
 	}
 }

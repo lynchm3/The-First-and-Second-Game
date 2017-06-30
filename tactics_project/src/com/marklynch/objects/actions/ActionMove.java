@@ -23,7 +23,7 @@ public class ActionMove extends Action {
 	boolean endTurn;
 
 	public ActionMove(Actor mover, Square target, boolean endTurn) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_move.png");
 		this.performer = mover;
 		this.target = target;
 		this.endTurn = endTurn;

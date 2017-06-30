@@ -449,6 +449,7 @@ public class Level {
 		//
 		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 			Game.squareMouseIsOver.drawCursor();
+			Game.squareMouseIsOver.drawDefaultAction();
 		}
 
 		// GL11.glColor4f;

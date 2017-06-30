@@ -257,6 +257,17 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// GL11.glPopMatrix();
 	}
 
+	public void drawDefaultAction() {
+		Action defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player);
+		if (defaultAction != null && defaultAction.image != null) {
+			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+			TextureUtils.drawTexture(defaultAction.image, squarePositionX + Game.SQUARE_WIDTH - 32,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT - 32,
+					squarePositionY + Game.SQUARE_HEIGHT);
+		}
+	}
+
 	public class PathComparator implements Comparator<Vector<Square>> {
 
 		@Override
