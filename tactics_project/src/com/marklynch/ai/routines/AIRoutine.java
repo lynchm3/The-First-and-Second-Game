@@ -130,23 +130,9 @@ public class AIRoutine {
 				if (!sound.legal) {
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
-					System.out.println("sound = " + sound);
-					System.out.println("sound.loudness = " + sound.loudness);
-					System.out.println("sound.action = " + sound.action);
-					System.out.println("sound.legal = " + sound.legal);
-					System.out.println("sound.sourceActor = " + sound.sourceActor);
-					System.out.println("sound.sourceObject = " + sound.sourceObject);
-					System.out.println("sound.sourceSquare = " + sound.sourceSquare);
 				} else if (!classesArrayList.contains(sound.sourceObject.getClass())) {
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
-					System.out.println("sound = " + sound);
-					System.out.println("sound.loudness = " + sound.loudness);
-					System.out.println("sound.action = " + sound.action);
-					System.out.println("sound.legal = " + sound.legal);
-					System.out.println("sound.sourceActor = " + sound.sourceActor);
-					System.out.println("sound.sourceObject = " + sound.sourceObject);
-					System.out.println("sound.sourceSquare = " + sound.sourceSquare);
 				}
 			}
 		}
@@ -164,57 +150,77 @@ public class AIRoutine {
 	}
 
 	public boolean runFightRoutine() {
+		boolean attacked = false;
+		boolean moved = false;
 
 		// 1. Fighting
 		if (this.actor.hasAttackers()) {
 
+			// sort by best attack option (walk distance, dmg you can do)
 			this.actor.getAttackers().sort(AIRoutineUtils.sortAttackers);
 
-			for (GameObject attacker1 : this.actor.getAttackers()) {
+			// Go through attackers list
+			for (GameObject victimToAttackAttemptPreMove : this.actor.getAttackers()) {
 
-				if (this.actor.canSeeGameObject(attacker1)) {
-					target = attacker1;
+				// If we can see the attacker go for them
+				if (this.actor.canSeeGameObject(victimToAttackAttemptPreMove)) {
+					target = victimToAttackAttemptPreMove;
 
+					// If it's a hiding place we're planning on attacking,
+					// we're searching
 					if (target instanceof HidingPlace) {
-
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					} else {
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
 					}
 
-					// GET NEAREST ATTACKER FAILING??
-					boolean attackedTarget = false;
+					// Try to attack the preference 1 target
 					if (target != null) {
-						attackedTarget = AIRoutineUtils.attackTarget(target);
-						if (!attackedTarget) {
-							AIRoutineUtils.moveTowardsTargetToAttack(target);
+						attacked = AIRoutineUtils.attackTarget(target);
+						// If you can't attack preference 1 target, move towards
+						// them
+						if (!attacked) {
+							moved = AIRoutineUtils.moveTowardsTargetToAttack(target);
 
-							for (GameObject attacker2 : this.actor.getAttackers()) {
-								if (this.actor.canSeeGameObject(attacker2)) {
-									// Change status to fighting if u can see an
-									// enemy from
-									// new location
-									this.actor.thoughtBubbleImageTexture = null;
-									if (target instanceof HidingPlace) {
-										this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-									} else {
-										this.actor.activityDescription = ACTIVITY_DESCRIPTION_FIGHTING;
-									}
+							// After moving, see if you can get a shot off
+							// Not neccesarily the same target you're moving
+							// towards
+							for (GameObject victimToAttackAttemptPostMove : this.actor.getAttackers()) {
+								if (this.actor.canSeeGameObject(victimToAttackAttemptPostMove)) {
+									attacked = AIRoutineUtils.attackTarget(victimToAttackAttemptPostMove);
+									if (attacked)
+										break;
+
 								}
 							}
 						}
 					}
 
-					System.out.println("MAKING FIGHT LINE");
 					actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ATTACK, actor,
 							target.squareGameObjectIsOn);
 
-					return true;
 				}
+				if (moved || attacked)
+					break;
 			}
 		}
 
-		return false;
+		// If not targeting a hiding place, hiding places from list
+		if (!(target instanceof HidingPlace)) {
+			ArrayList<GameObject> hidingPlacesToRemove = new ArrayList<GameObject>();
+			for (GameObject attacker : this.actor.getAttackers()) {
+				if (attacker instanceof HidingPlace) {
+					hidingPlacesToRemove.add(attacker);
+				}
+			}
+			actor.attackers.removeAll(hidingPlacesToRemove);
+		}
+
+		// Return whether we did anything or not
+		if (moved || attacked)
+			return true;
+		else
+			return false;
 	}
 
 	public boolean runSearchRoutine() {
@@ -322,7 +328,6 @@ public class AIRoutine {
 				}
 			}
 
-			System.out.println("MAKING SEARCH LINE");
 			actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SEARCH, actor, searchSquare);
 			return true;
 		}

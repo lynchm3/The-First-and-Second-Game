@@ -112,7 +112,6 @@ public class AIRoutineForMort extends AIRoutine {
 						Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
 						mort.performingFeedingDemo = false;
 						if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
-							System.out.println("mort is locking the door");
 							mort.activityDescription = ACTIVITY_DESCRIPTION_HIDING;
 							new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
 							mort.investigationsMap.clear();

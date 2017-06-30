@@ -42,10 +42,6 @@ public class AILine {
 		float degrees = (float) Math.toDegrees(radians);
 		float distance = (float) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
-		System.out.println("radians = " + radians);
-		System.out.println("Math.toRadians(60) = " + Math.toRadians(60));
-		System.out.println("Math.toRadians(-60) = " + Math.toRadians(-60));
-
 		Game.activeBatch.flush();
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.translate(new Vector2f(x1, y1));
