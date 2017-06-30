@@ -237,7 +237,10 @@ public class AIRoutine {
 		// and remove out of bounds squares from investigation list
 		ArrayList<GameObject> gameObjectsCanSee = new ArrayList<GameObject>();
 		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
-			if (this.actor.canSeeGameObject(actorToSearchFor)) {
+			if (actorToSearchFor.remainingHealth <= 0) {
+				gameObjectsCanSee.add(actorToSearchFor);
+
+			} else if (this.actor.canSeeGameObject(actorToSearchFor)) {
 				gameObjectsCanSee.add(actorToSearchFor);
 			} else if (!squareInBounds(actorToSearchFor.squareGameObjectIsOn)) {
 				gameObjectsCanSee.add(actorToSearchFor);
