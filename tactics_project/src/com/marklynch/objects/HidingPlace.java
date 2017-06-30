@@ -90,6 +90,14 @@ public class HidingPlace extends Searchable {
 				iceResistance, electricResistance, poisonResistance, weight, owner, effectsFromInteracting);
 	}
 
+	// @Override
+	// public void attacked(Object attacker) {
+	// super.attacked(attacker);
+	// for (Actor actor : actorsHidingHere) {
+	// rr
+	// }
+	// }
+
 	@Override
 	public boolean checkIfDestroyed(GameObject attacker) {
 		boolean destroyed = super.checkIfDestroyed(attacker);

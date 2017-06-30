@@ -979,7 +979,10 @@ public class Actor extends GameObject {
 	public void attacked(Object attacker) {
 		super.attacked(attacker);
 
+		removeHidingPlacesFromAttackers();
+
 		if (attacker instanceof Actor) {
+
 			Actor actor = (Actor) attacker;
 			if (canSeeGameObject(actor)) {
 				actor.addAttackerForThisAndGroupMembers(this);
@@ -995,6 +998,17 @@ public class Actor extends GameObject {
 			}
 			this.addInvestigation(actor, actor.squareGameObjectIsOn, Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 		}
+	}
+
+	public void removeHidingPlacesFromAttackers() {
+
+		ArrayList<GameObject> hidingPlacesToRemove = new ArrayList<GameObject>();
+		for (GameObject attacker : this.getAttackers()) {
+			if (attacker instanceof HidingPlace) {
+				hidingPlacesToRemove.add(attacker);
+			}
+		}
+		this.attackers.removeAll(hidingPlacesToRemove);
 	}
 
 	public void addInvestigation(GameObject actor, Square square, int priority) {

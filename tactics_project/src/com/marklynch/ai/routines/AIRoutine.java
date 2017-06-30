@@ -207,13 +207,7 @@ public class AIRoutine {
 
 		// If not targeting a hiding place, hiding places from list
 		if (!(target instanceof HidingPlace)) {
-			ArrayList<GameObject> hidingPlacesToRemove = new ArrayList<GameObject>();
-			for (GameObject attacker : this.actor.getAttackers()) {
-				if (attacker instanceof HidingPlace) {
-					hidingPlacesToRemove.add(attacker);
-				}
-			}
-			actor.attackers.removeAll(hidingPlacesToRemove);
+			actor.removeHidingPlacesFromAttackers();
 		}
 
 		// Return whether we did anything or not
