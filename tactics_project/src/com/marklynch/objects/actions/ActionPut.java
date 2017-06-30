@@ -15,7 +15,7 @@ public class ActionPut extends Action {
 	GameObject object;
 
 	public ActionPut(Actor performer, GameObject receiver, GameObject object) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_put.png");
 		this.performer = performer;
 		this.receiver = receiver;
 		this.object = object;
@@ -39,7 +39,9 @@ public class ActionPut extends Action {
 		if (receiver instanceof Actor) {
 			object.owner = (Actor) receiver;
 		}
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

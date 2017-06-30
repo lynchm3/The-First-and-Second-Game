@@ -18,7 +18,7 @@ public class ActionPickpocketAll extends Action {
 	GameObject container;
 
 	public ActionPickpocketAll(Actor performer, GameObject container) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_pickpocket_all.png");
 		this.performer = performer;
 		this.container = container;
 		if (!check()) {

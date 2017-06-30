@@ -15,7 +15,7 @@ public class ActionRead extends Action {
 
 	// Default for hostiles
 	public ActionRead(Actor reader, GameObject target) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_read.png");
 		this.performer = reader;
 		this.target = target;
 		legal = checkLegality();
@@ -32,7 +32,9 @@ public class ActionRead extends Action {
 			Game.level.conversation = conversation;
 		}
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

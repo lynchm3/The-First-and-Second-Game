@@ -17,7 +17,7 @@ public class ActionOpen extends Action {
 
 	// Default for hostiles
 	public ActionOpen(Actor opener, Openable openable) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_open.png");
 		this.performer = opener;
 		this.openable = openable;
 		if (!check()) {

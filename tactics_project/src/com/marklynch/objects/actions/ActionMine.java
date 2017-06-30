@@ -21,7 +21,7 @@ public class ActionMine extends Action {
 
 	// Default for hostiles
 	public ActionMine(Actor attacker, Vein vein) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_mine.png");
 		this.performer = attacker;
 		this.target = vein;
 		if (!check()) {

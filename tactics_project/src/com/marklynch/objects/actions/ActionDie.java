@@ -18,7 +18,7 @@ public class ActionDie extends Action {
 	Square target;
 
 	public ActionDie(Actor performer, Square target) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_die.png");
 		this.performer = performer;
 		this.target = target;
 		if (!check()) {

@@ -302,7 +302,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
 		} else {
 			return getDefaultActionPerformedOnThisInWorld(performer);
-
 		}
 	}
 

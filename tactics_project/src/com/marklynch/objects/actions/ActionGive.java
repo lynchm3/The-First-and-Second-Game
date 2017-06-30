@@ -15,7 +15,7 @@ public class ActionGive extends Action {
 	GameObject object;
 
 	public ActionGive(Actor performer, Actor receiver, GameObject object) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_give.png");
 		this.performer = performer;
 		this.receiver = receiver;
 		this.object = object;

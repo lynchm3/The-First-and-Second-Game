@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
@@ -180,22 +179,24 @@ public class ShadowLight {
 		// glClearColor(0.5f, 0.5f, 0.5f, 1f);
 		// glClear(GL_COLOR_BUFFER_BIT);
 
-		float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2) / Game.zoom)
-				+ (Mouse.getX()) / Game.zoom);
-		float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY - (Game.windowHeight / 2) / Game.zoom)
-				+ (((Game.windowHeight - Mouse.getY())) / Game.zoom));
-		float x = mouseXTransformed;
-		float y = mouseYTransformed;
-		lights.get(0).x = x;
-		lights.get(0).y = y;
-		lightPos.x = Mouse.getX() / (float) Display.getWidth();
-		lightPos.y = Mouse.getY() / (float) Display.getHeight();
+		// code for mouse light, spot light, spotlight, mouselight
+		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX -
+		// (Game.windowWidth / 2) / Game.zoom)
+		// + (Mouse.getX()) / Game.zoom);
+		// float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY -
+		// (Game.windowHeight / 2) / Game.zoom)
+		// + (((Game.windowHeight - Mouse.getY())) / Game.zoom));
+		// float x = mouseXTransformed;
+		// float y = mouseYTransformed;
+		// lights.get(0).x = x;
+		// lights.get(0).y = y;
+		// lightPos.x = Mouse.getX() / (float) Display.getWidth();
+		// lightPos.y = Mouse.getY() / (float) Display.getHeight();
 
 		// Bump map shader
 		Game.activeBatch.setShader(lightShader);
-		lightShader.setUniformf("LightPos", lightPos);
+		// lightShader.setUniformf("LightPos", lightPos);
 		lightShader.setUniformf("Resolution", Display.getWidth(), Display.getHeight());
-		// GL11.glEnable(GL_DEPTH_TEST);
 
 		// Draw level BG
 		Game.activeBatch.setColor(Color.WHITE);

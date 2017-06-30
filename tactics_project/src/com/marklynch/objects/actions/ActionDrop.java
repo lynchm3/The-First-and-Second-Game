@@ -16,7 +16,7 @@ public class ActionDrop extends Action {
 	GameObject object;
 
 	public ActionDrop(GameObject performer, Square square, GameObject object) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_drop.png");
 		this.performer = performer;
 		this.square = square;
 		this.object = object;

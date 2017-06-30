@@ -18,7 +18,7 @@ public class ActionTalk extends Action {
 	}
 
 	public ActionTalk(Actor talker, Actor target, Conversation conversation) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_talk.png");
 		this.performer = talker;
 		this.target = target;
 		this.conversation = conversation;

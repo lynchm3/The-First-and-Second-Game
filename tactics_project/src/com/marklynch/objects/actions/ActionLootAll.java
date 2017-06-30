@@ -19,7 +19,7 @@ public class ActionLootAll extends Action {
 	GameObject container;
 
 	public ActionLootAll(Actor performer, GameObject container) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_loot_all.png");
 		this.performer = performer;
 		this.container = container;
 		if (!check()) {

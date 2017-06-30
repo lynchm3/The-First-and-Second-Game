@@ -18,7 +18,7 @@ public class ActionEquip extends Action {
 	GameObject gameObject;
 
 	public ActionEquip(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_equip.png");
 		this.performer = performer;
 		this.gameObject = gameObject;
 		if (!check()) {
@@ -48,7 +48,9 @@ public class ActionEquip extends Action {
 			performer.equipped = gameObject;
 		}
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

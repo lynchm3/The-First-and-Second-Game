@@ -14,7 +14,7 @@ public class ActionScream extends Action {
 
 	// Default for hostiles
 	public ActionScream(Actor attacker) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_scream.png");
 		this.performer = attacker;
 		if (!check()) {
 			enabled = false;
@@ -33,7 +33,9 @@ public class ActionScream extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "screamed" }));
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

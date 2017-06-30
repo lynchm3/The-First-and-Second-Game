@@ -19,7 +19,7 @@ public class ActionClose extends Action {
 
 	// Default for hostiles
 	public ActionClose(Actor opener, Openable openable) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_close.png");
 		this.performer = opener;
 		this.openable = openable;
 		if (!check()) {

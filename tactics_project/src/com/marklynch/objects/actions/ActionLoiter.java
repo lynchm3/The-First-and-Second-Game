@@ -13,7 +13,7 @@ public class ActionLoiter extends Action {
 	Square target;
 
 	public ActionLoiter(Actor loiterer, Square target) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_loter.png");
 		this.performer = loiterer;
 		this.target = target;
 		if (!check()) {

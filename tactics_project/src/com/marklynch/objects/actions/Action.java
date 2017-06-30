@@ -103,6 +103,36 @@ public abstract class Action {
 
 	public static void loadActionImages() {
 		getGlobalImage("action_attack.png");
+		getGlobalImage("action_close.png");
+		getGlobalImage("action_die.png");// untested
+		getGlobalImage("action_drop.png");
+		getGlobalImage("action_equip.png");
+		getGlobalImage("action_give.png");
+		getGlobalImage("action_hide.png");
+		getGlobalImage("action_lock.png");
+		getGlobalImage("action_loiter.png");// untested
+		getGlobalImage("action_loot_all.png");
+		getGlobalImage("action_mine.png");
 		getGlobalImage("action_move.png");
+		getGlobalImage("action_open.png");
+		getGlobalImage("action_pickpocket_all.png");// untested
+		getGlobalImage("action_pick_up.png");
+		getGlobalImage("action_put.png");// untested
+		getGlobalImage("action_read.png");
+		getGlobalImage("action_ring.png");
+		getGlobalImage("action_scream.png");// untested
+		getGlobalImage("action_search.png");// not working
+		getGlobalImage("action_sleep.png");
+		getGlobalImage("action_smash.png");
+		getGlobalImage("action_spot.png");
+		getGlobalImage("action_stopHiding.png");
+		getGlobalImage("action_take.png");
+		getGlobalImage("action_take_all.png");
+		getGlobalImage("action_takeBite.png");
+		getGlobalImage("action_talk.png");
+		getGlobalImage("action_throw.png");
+		getGlobalImage("action_trespass.png");
+		getGlobalImage("action_unlock.png");
+		getGlobalImage("action_write.png");
 	}
 }

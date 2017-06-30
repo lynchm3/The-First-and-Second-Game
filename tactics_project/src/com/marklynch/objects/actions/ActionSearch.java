@@ -20,7 +20,7 @@ public class ActionSearch extends Action {
 	Searchable object;
 
 	public ActionSearch(Actor performer, Searchable object) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_search.png");
 		this.performer = performer;
 		this.object = object;
 		if (!check()) {

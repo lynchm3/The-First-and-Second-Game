@@ -16,7 +16,7 @@ public class ActionPickUp extends Action {
 	GameObject object;
 
 	public ActionPickUp(Actor performer, GameObject object) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_pick_up.png");
 		this.performer = performer;
 		this.object = object;
 		if (!check()) {
