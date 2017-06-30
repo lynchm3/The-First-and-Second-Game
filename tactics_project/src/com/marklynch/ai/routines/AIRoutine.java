@@ -9,6 +9,8 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
@@ -39,6 +41,11 @@ public class AIRoutine {
 	};
 
 	public AI_TYPE aiType = AI_TYPE.FIGHTER;
+
+	public boolean keepInBounds = false;
+	public ArrayList<StructureSection> sectionBounds = new ArrayList<StructureSection>();
+	public ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>();
+	public ArrayList<Square> squareBounds = new ArrayList<Square>();
 
 	public AIRoutine(Actor actor) {
 		this.actor = actor;
@@ -227,12 +234,14 @@ public class AIRoutine {
 			return false;
 
 		// Remove gameObjects you can see from investigation list
+		// and remove out of bounds squares from investigation list
 		ArrayList<GameObject> gameObjectsCanSee = new ArrayList<GameObject>();
 		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
 			if (this.actor.canSeeGameObject(actorToSearchFor)) {
 				gameObjectsCanSee.add(actorToSearchFor);
+			} else if (!squareInBounds(actorToSearchFor.squareGameObjectIsOn)) {
+				gameObjectsCanSee.add(actorToSearchFor);
 			}
-
 		}
 		for (GameObject gameObjectToRemove : gameObjectsCanSee) {
 			this.actor.investigationsMap.remove(gameObjectToRemove);
@@ -382,22 +391,31 @@ public class AIRoutine {
 		// Move Away From Last Square;
 		boolean moved = false;
 		if (actor.squareGameObjectIsOn.xInGrid > actor.lastSquare.xInGrid) {
-			moved = AIRoutineUtils.moveTowardsTargetSquare(actor.squareGameObjectIsOn.getSquareToRightOf());
+			Square squareToMoveTo = actor.squareGameObjectIsOn.getSquareToRightOf();
+			if (squareInBounds(squareToMoveTo))
+				moved = AIRoutineUtils.moveTowardsTargetSquare(squareToMoveTo);
 		} else if (actor.squareGameObjectIsOn.xInGrid < actor.lastSquare.xInGrid) {
-			moved = AIRoutineUtils.moveTowardsTargetSquare(actor.squareGameObjectIsOn.getSquareToLeftOf());
+			Square squareToMoveTo = actor.squareGameObjectIsOn.getSquareToLeftOf();
+			if (squareInBounds(squareToMoveTo))
+				moved = AIRoutineUtils.moveTowardsTargetSquare(squareToMoveTo);
 		} else {
 			if (actor.squareGameObjectIsOn.yInGrid > actor.lastSquare.yInGrid) {
-				moved = AIRoutineUtils.moveTowardsTargetSquare(actor.squareGameObjectIsOn.getSquareBelow());
+				Square squareToMoveTo = actor.squareGameObjectIsOn.getSquareBelow();
+				if (squareInBounds(squareToMoveTo))
+					moved = AIRoutineUtils.moveTowardsTargetSquare(squareToMoveTo);
 			} else if (actor.squareGameObjectIsOn.yInGrid < actor.lastSquare.yInGrid) {
-				moved = AIRoutineUtils.moveTowardsTargetSquare(actor.squareGameObjectIsOn.getSquareAbove());
+				Square squareToMoveTo = actor.squareGameObjectIsOn.getSquareAbove();
+				if (squareInBounds(squareToMoveTo))
+					moved = AIRoutineUtils.moveTowardsTargetSquare(squareToMoveTo);
 			} else {
 
 			}
 		}
 
 		if (!moved) {
-			Square randomSquare = AIRoutineUtils.getRandomAdjacentSquare(actor.squareGameObjectIsOn);
-			moved = AIRoutineUtils.moveTowardsTargetSquare(randomSquare);
+			Square randomSquareToMoveTo = AIRoutineUtils.getRandomAdjacentSquare(actor.squareGameObjectIsOn);
+			if (squareInBounds(randomSquareToMoveTo))
+				moved = AIRoutineUtils.moveTowardsTargetSquare(randomSquareToMoveTo);
 		}
 		// }
 		return false;
@@ -661,6 +679,32 @@ public class AIRoutine {
 			lastLocationSeenActorToKeepTrackOf = target.squareGameObjectIsOn;
 		}
 		return false;
+	}
+
+	public boolean squareInBounds(Square square) {
+		// Return true if there are no bounds
+		if (keepInBounds == false)
+			return true;
+
+		for (StructureSection section : sectionBounds) {
+			if (square.structureSectionSquareIsIn == section) {
+				return true;
+			}
+		}
+
+		for (StructureRoom room : roomBounds) {
+			if (square.structureRoomSquareIsIn == room) {
+				return true;
+			}
+		}
+
+		for (Square legitSquare : squareBounds) {
+			if (square == legitSquare) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 
 }
