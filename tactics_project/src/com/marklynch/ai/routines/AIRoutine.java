@@ -9,10 +9,10 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
@@ -53,6 +53,7 @@ public class AIRoutine {
 		if (this.actor.hasAttackers()) {
 			for (GameObject attacker : this.actor.getAttackers()) {
 				if (this.actor.canSeeGameObject(attacker)) {
+					System.out.println("Adding search for visible attacker");
 					this.actor.addInvestigation(attacker, attacker.squareGameObjectIsOn,
 							Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 				}
@@ -69,6 +70,7 @@ public class AIRoutine {
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				if (!crime.resolved) {
 					if (this.actor.canSeeGameObject(criminal)) {
+						System.out.println("Adding search for visible criminal");
 						this.actor.addInvestigation(criminal, criminal.squareGameObjectIsOn,
 								Investigation.INVESTIGATION_PRIORITY_CRIME_SEEN);
 					}
@@ -128,9 +130,11 @@ public class AIRoutine {
 					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
 
 				if (!sound.legal) {
+					System.out.println("Adding search for illegal sound");
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 				} else if (!classesArrayList.contains(sound.sourceObject.getClass())) {
+					System.out.println("Adding search for legal sound");
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 				}
@@ -218,11 +222,34 @@ public class AIRoutine {
 	}
 
 	public boolean runSearchRoutine() {
-
 		// Searching
 		if (this.actor.investigationsMap.size() == 0)
 			return false;
 
+		// Remove gameObjects you can see from investigation list
+		ArrayList<GameObject> gameObjectsCanSee = new ArrayList<GameObject>();
+		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
+			if (this.actor.canSeeGameObject(actorToSearchFor)) {
+				gameObjectsCanSee.add(actorToSearchFor);
+			}
+
+		}
+		for (GameObject gameObjectToRemove : gameObjectsCanSee) {
+			this.actor.investigationsMap.remove(gameObjectToRemove);
+		}
+
+		// Some logging...
+		if (actor instanceof Mort) {
+			System.out.println("RunSearchRoutine()");
+
+			for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
+				System.out.println("In search list - " + actorToSearchFor + " @ "
+						+ this.actor.investigationsMap.get(actorToSearchFor).square.xInGrid + ","
+						+ this.actor.investigationsMap.get(actorToSearchFor).square.yInGrid);
+			}
+		}
+
+		// Sort list by priority
 		MapUtil.sortByValue(this.actor.investigationsMap);
 
 		// this.actor.locationsToSearch.sort(AIRoutineUtils.sortLocationsToSearch);
@@ -235,12 +262,14 @@ public class AIRoutine {
 
 			// If you're within 2 squares and can see the target actor, remove
 			// from search list
-			if (this.actor.straightLineDistanceTo(actorToSearchFor.squareGameObjectIsOn) <= 2
-					&& this.actor.canSeeGameObject(actorToSearchFor)) {
-				searchCooldown = 0;
-				toRemove.add(actorToSearchFor);
-				continue;
-			}
+			// if
+			// (this.actor.straightLineDistanceTo(actorToSearchFor.squareGameObjectIsOn)
+			// <= 2
+			// && this.actor.canSeeGameObject(actorToSearchFor)) {
+			// searchCooldown = 0;
+			// toRemove.add(actorToSearchFor);
+			// continue;
+			// }
 
 			searchSquare = this.actor.investigationsMap.get(actorToSearchFor).square;
 			searchCooldownActor = actorToSearchFor;
@@ -303,8 +332,8 @@ public class AIRoutine {
 			toRemove.add(actorToSearchFor);
 		}
 
-		for (GameObject actorsToSearchFor : toRemove) {
-			this.actor.investigationsMap.remove(actorsToSearchFor);
+		for (GameObject actorsToRemoveFromList : toRemove) {
+			this.actor.investigationsMap.remove(actorsToRemoveFromList);
 		}
 
 		if (moved) {
@@ -331,10 +360,13 @@ public class AIRoutine {
 
 	public boolean runSearchCooldown() {
 
+		if (actor instanceof Mort) {
+			System.out.println("runSearchCooldown()");
+		}
+
 		// DOORWAYS are my biggest issue here.
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 		this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
-		StructureRoom room = actor.squareGameObjectIsOn.structureRoomSquareIsIn;
 
 		// if (room != null) {
 		// AIRoutineUtils.moveTowardsTargetSquare(AIRoutineUtils.getRandomSquareInRoom(room));
@@ -591,8 +623,14 @@ public class AIRoutine {
 
 	// public
 	public boolean keepTrackOf(Actor target) {
+
+		// If the actor is in the attackers list they will be handled by
+		// fightRoutine/searchRoutine
+		if (actor.attackers.contains(target))
+			return false;
 		// Can mort see the Player in his territory? If so record it. If not,
 		// follow.
+
 		if (target != actorToKeepTrackOf) {
 			actorToKeepTrackOf = target;
 			lastLocationSeenActorToKeepTrackOf = null;
@@ -604,6 +642,8 @@ public class AIRoutine {
 				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenActorToKeepTrackOf);
 
 				if (actor.squareGameObjectIsOn == lastLocationSeenActorToKeepTrackOf) {
+
+					System.out.println("Adding search for keep track of");
 					this.actor.addInvestigation(target, lastLocationSeenActorToKeepTrackOf,
 							Investigation.INVESTIGATION_PRIORITY_KEEP_TRACK);
 					lastLocationSeenActorToKeepTrackOf = null;

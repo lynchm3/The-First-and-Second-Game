@@ -996,6 +996,8 @@ public class Actor extends GameObject {
 				// actor.addAttackerForNearbyFactionMembersIfVisible(this);
 				this.addAttackerForNearbyFactionMembersIfVisible(hidingPlace);
 			}
+
+			System.out.println("Adding search for someone we've attacked");
 			this.addInvestigation(actor, actor.squareGameObjectIsOn, Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 		}
 	}
