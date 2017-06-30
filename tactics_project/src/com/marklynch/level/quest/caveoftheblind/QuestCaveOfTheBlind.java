@@ -518,6 +518,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		mort.mortsMine = new StructureRoom("Inner Mine", 76, 36, false, new ArrayList<Actor>(),
 				new RoomPart(78, 35, 86, 47), new RoomPart(76, 36, 86, 46), new RoomPart(77, 41, 84, 48));
 		rooms.add(mort.mortsMine);
+		if (!((AIRoutineForMort) mort.aiRoutine).retreatedToRoom)
+			mort.aiRoutine.roomBounds.add(mort.mortsMine);
 
 		// Inner mine extras
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[80][35], mort));
@@ -559,11 +561,13 @@ public class QuestCaveOfTheBlind extends Quest {
 		Chest confiscatedChest = Templates.CHEST.makeCopy("Confiscated", Game.level.squares[69][42], false, mort,
 				mortsKey);
 		confiscatedChest.inventory.add(alsKey);
+		mort.aiRoutine.roomBounds.add(mort.mortsRoom);
 
 		// Morts Vault Room
 		mort.mortsVault = new StructureRoom("Vault", 49, 39, false, new ArrayList<Actor>(),
 				new RoomPart(49, 39, 63, 42));
 		rooms.add(mort.mortsVault);
+		mort.aiRoutine.roomBounds.add(mort.mortsVault);
 
 		// Cave featues for Mort
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[76][45], mort));
@@ -572,6 +576,7 @@ public class QuestCaveOfTheBlind extends Quest {
 				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		mort.mortsRoomDoorway = mortsBedroomDoor.squareGameObjectIsOn;
 		caveFeatures.add(mortsBedroomDoor);
+		mort.aiRoutine.squareBounds.add(mort.mortsRoomDoorway);
 		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[64][40], true, mort, mortsKey,
 				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		mort.mortsVaultDoorway = mortsStoreroomDoor.squareGameObjectIsOn;

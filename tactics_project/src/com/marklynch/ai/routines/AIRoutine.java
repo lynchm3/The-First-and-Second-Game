@@ -233,20 +233,20 @@ public class AIRoutine {
 		if (this.actor.investigationsMap.size() == 0)
 			return false;
 
-		// Remove gameObjects you can see from investigation list
+		// Remove dead objects
+		// and remove gameObjects you can see from investigation list
 		// and remove out of bounds squares from investigation list
-		ArrayList<GameObject> gameObjectsCanSee = new ArrayList<GameObject>();
+		ArrayList<GameObject> gameObjectsToStopSearchingFor = new ArrayList<GameObject>();
 		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
 			if (actorToSearchFor.remainingHealth <= 0) {
-				gameObjectsCanSee.add(actorToSearchFor);
-
+				gameObjectsToStopSearchingFor.add(actorToSearchFor);
 			} else if (this.actor.canSeeGameObject(actorToSearchFor)) {
-				gameObjectsCanSee.add(actorToSearchFor);
+				gameObjectsToStopSearchingFor.add(actorToSearchFor);
 			} else if (!squareInBounds(actorToSearchFor.squareGameObjectIsOn)) {
-				gameObjectsCanSee.add(actorToSearchFor);
+				gameObjectsToStopSearchingFor.add(actorToSearchFor);
 			}
 		}
-		for (GameObject gameObjectToRemove : gameObjectsCanSee) {
+		for (GameObject gameObjectToRemove : gameObjectsToStopSearchingFor) {
 			this.actor.investigationsMap.remove(gameObjectToRemove);
 		}
 
@@ -689,18 +689,25 @@ public class AIRoutine {
 		if (keepInBounds == false)
 			return true;
 
+		System.out.println("square.structureSectionSquareIsIn = " + square.structureSectionSquareIsIn);
+
 		for (StructureSection section : sectionBounds) {
+			System.out.println("section = " + section);
 			if (square.structureSectionSquareIsIn == section) {
 				return true;
 			}
 		}
 
+		System.out.println("square.structureRoomSquareIsIn = " + square.structureRoomSquareIsIn);
 		for (StructureRoom room : roomBounds) {
+			System.out.println("room = " + room);
 			if (square.structureRoomSquareIsIn == room) {
 				return true;
 			}
 		}
 
+		// System.out.println("square.structureSectionSquareIsIn = "
+		// +square.structureSectionSquareIsIn);
 		for (Square legitSquare : squareBounds) {
 			if (square == legitSquare) {
 				return true;

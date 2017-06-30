@@ -61,11 +61,6 @@ public class AIRoutineForMort extends AIRoutine {
 		aiType = AI_TYPE.FIGHTER;
 
 		keepInBounds = true;
-		roomBounds.add(mort.mortsRoom);
-		roomBounds.add(mort.mortsVault);
-		squareBounds.add(mort.mortsRoomDoorway);
-		if (!retreatedToRoom)
-			roomBounds.add(mort.mortsMine);
 	}
 
 	@Override

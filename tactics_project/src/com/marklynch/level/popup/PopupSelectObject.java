@@ -14,7 +14,7 @@ public class PopupSelectObject extends Popup {
 
 		super(width, level, square);
 
-		selectSquareButton = new PopupButton(0, 0, 200, 30, null, null, "" + square, true, true, square, this);
+		selectSquareButton = new PopupButton(0, 0, 200, 30, null, null, true, true, square, this, "" + square);
 
 		selectSquareButton.clickListener = new ClickListener() {
 
@@ -47,7 +47,7 @@ public class PopupSelectObject extends Popup {
 
 			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
 				final PopupButton objectButton = new PopupButton(0, buttons.size() * 30, 200, 30, null, null,
-						"" + gameObject, true, true, gameObject, this);
+						true, true, gameObject, this, "" + gameObject);
 
 				objectButton.clickListener = new ClickListener() {
 

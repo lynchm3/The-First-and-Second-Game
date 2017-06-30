@@ -327,6 +327,7 @@ public class TextUtils {
 
 				Action action = (Action) content;
 				String string = action.actionName;
+				float textureWidth = 20;
 
 				Color color = Color.WHITE;
 				if (!action.legal) {
@@ -338,6 +339,13 @@ public class TextUtils {
 				float textWidth = Game.font.getWidth(string);
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
+
+				// Image
+				if (action.image != null) {
+					float x = posX + offsetX + textureWidth;
+					TextureUtils.drawTexture(action.image, x, x + 20, posY + offsetY, posY + offsetY + 20);
+					offsetX += textureWidth * 2;
+				}
 
 			} else if (content instanceof Projectile) {
 

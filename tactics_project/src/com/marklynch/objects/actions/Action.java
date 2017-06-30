@@ -1,5 +1,7 @@
 package com.marklynch.objects.actions;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import java.util.ArrayList;
 
 import com.marklynch.Game;
@@ -8,6 +10,8 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.units.Actor;
 
+import mdesl.graphics.Texture;
+
 public abstract class Action {
 
 	public String actionName;
@@ -15,10 +19,17 @@ public abstract class Action {
 	public boolean legal = true;
 	public Sound sound;
 	public boolean movement = false;
+	public Texture image;
 
 	public Action(String actionName) {
 		super();
 		this.actionName = actionName;
+	}
+
+	public Action(String actionName, String imageName) {
+		super();
+		this.actionName = actionName;
+		this.image = getGlobalImage(imageName);
 	}
 
 	public abstract void perform();
@@ -88,5 +99,9 @@ public abstract class Action {
 			performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
 		}
+	}
+
+	public static void loadActionImages() {
+		getGlobalImage("action_attack.png");
 	}
 }

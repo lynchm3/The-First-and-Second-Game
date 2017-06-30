@@ -20,7 +20,7 @@ public class ActionAttack extends Action {
 
 	// Default for hostiles
 	public ActionAttack(Actor attacker, GameObject target) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_attack.png");
 		this.performer = attacker;
 		this.target = target;
 		if (!check()) {

@@ -88,6 +88,8 @@ public class Level {
 		gameCursor = new GameCursor();
 		script = new Script();
 
+		Action.loadActionImages();
+
 		structures = new ArrayList<Structure>();
 
 		factions = new ArrayList<Faction>();
