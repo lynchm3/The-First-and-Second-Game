@@ -59,6 +59,13 @@ public class AIRoutineForMort extends AIRoutine {
 		super(mort);
 		this.mort = mort;
 		aiType = AI_TYPE.FIGHTER;
+
+		keepInBounds = true;
+		roomBounds.add(mort.mortsRoom);
+		roomBounds.add(mort.mortsVault);
+		squareBounds.add(mort.mortsRoomDoorway);
+		if (!retreatedToRoom)
+			roomBounds.add(mort.mortsMine);
 	}
 
 	@Override
@@ -73,31 +80,20 @@ public class AIRoutineForMort extends AIRoutine {
 		createSearchLocationsBasedOnVisibleCriminals();
 		createSearchLocationsBasedOnSounds(Weapon.class);
 
-		// Remove search locations if outside jurisdiction
-		ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
-		for (GameObject actor : mort.investigationsMap.keySet()) {
-			Square squareToSearch = mort.investigationsMap.get(actor).square;
-			if (retreatedToRoom) {
-				if (squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
-						&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault
-						&& squareToSearch != mort.mortsRoomDoorway) {
-					toRemove.add(actor);
-				}
-
-			} else {
-				if (squareToSearch.structureRoomSquareIsIn != mort.mortsMine
-						&& squareToSearch.structureRoomSquareIsIn != mort.mortsRoom
-						&& squareToSearch.structureRoomSquareIsIn != mort.mortsVault
-						&& squareToSearch != mort.mortsRoomDoorway) {
-					toRemove.add(actor);
-				}
-
-			}
-		}
-
-		for (GameObject actor : toRemove) {
-			mort.investigationsMap.remove(actor);
-		}
+		// The below is commented coz its handled in the search and search
+		// cooldown routines
+		// Remove search locations if outside bounds
+		// ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+		// for (GameObject actor : mort.investigationsMap.keySet()) {
+		// Square squareToSearch = mort.investigationsMap.get(actor).square;
+		// if (!squareInBounds(squareToSearch)) {
+		// toRemove.add(actor);
+		// }
+		// }
+		//
+		// for (GameObject actor : toRemove) {
+		// mort.investigationsMap.remove(actor);
+		// }
 
 		// If blind are in mine and getting too close to mgmt door, move to it
 		float mortsDistanceFromBedroomDoor = mort
@@ -117,6 +113,7 @@ public class AIRoutineForMort extends AIRoutine {
 							mort.investigationsMap.clear();
 							searchCooldown = 0;
 							retreatedToRoom = true;
+							roomBounds.remove(mort.mortsMine);
 						} else {
 							mort.activityDescription = ACTIVITY_DESCRIPTION_RETREATING;
 							AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
