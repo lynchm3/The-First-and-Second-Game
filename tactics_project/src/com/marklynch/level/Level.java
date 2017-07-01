@@ -450,6 +450,12 @@ public class Level {
 		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 			Game.squareMouseIsOver.drawCursor();
 			Game.squareMouseIsOver.drawDefaultAction();
+			player.squareGameObjectIsOn.drawDefaultAction();
+			player.squareGameObjectIsOn.getSquareToLeftOf().drawDefaultAction();
+			player.squareGameObjectIsOn.getSquareToRightOf().drawDefaultAction();
+			player.squareGameObjectIsOn.getSquareAbove().drawDefaultAction();
+			player.squareGameObjectIsOn.getSquareBelow().drawDefaultAction();
+
 		}
 
 		// GL11.glColor4f;

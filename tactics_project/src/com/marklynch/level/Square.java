@@ -379,7 +379,9 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			GameObject gameObjectDoor = inventory.getGameObjectOfClass(Door.class);
 			if (gameObjectDoor instanceof Door) {
 				Door door = (Door) gameObjectDoor;
-				if (door.isLocked() && !Game.level.activeActor.hasKeyForDoor(door)) {
+				if (door.isLocked() &&
+
+						!Game.level.activeActor.hasKeyForDoor(door)) {
 				} else {
 					return true;
 

@@ -33,6 +33,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionHide;
+import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.tools.Tool;
@@ -826,7 +827,7 @@ public class Actor extends GameObject {
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 		if (this == Game.level.player) {
-			return null;
+			return new ActionLoiter(performer, performer.squareGameObjectIsOn);
 		} else if (performer.attackers.contains(this)) {
 			ActionAttack actionAttack = new ActionAttack(performer, this);
 			if (actionAttack.enabled && actionAttack.legal) {
@@ -852,6 +853,8 @@ public class Actor extends GameObject {
 		}
 
 		if (this == Game.level.player) {
+
+			actions.add(new ActionLoiter(performer, performer.squareGameObjectIsOn));
 
 			// self action
 			if (equipped instanceof Tool) {

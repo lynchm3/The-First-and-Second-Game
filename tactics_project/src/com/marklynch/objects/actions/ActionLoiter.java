@@ -7,7 +7,7 @@ import com.marklynch.objects.units.Actor;
 
 public class ActionLoiter extends Action {
 
-	public static final String ACTION_NAME = "Loiter here";
+	public static final String ACTION_NAME = "Wait";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
 	Square target;
