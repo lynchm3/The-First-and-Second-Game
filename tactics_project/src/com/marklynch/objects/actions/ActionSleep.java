@@ -14,7 +14,7 @@ public class ActionSleep extends Action {
 	Square target;
 
 	public ActionSleep(Actor mover, Square target) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_sleep.png");
 		this.performer = mover;
 		this.target = target;
 		if (!check()) {

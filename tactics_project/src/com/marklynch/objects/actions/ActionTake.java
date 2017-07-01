@@ -16,7 +16,7 @@ public class ActionTake extends Action {
 	GameObject object;
 
 	public ActionTake(Actor performer, GameObject object) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_take.png");
 		this.performer = performer;
 		this.object = object;
 		if (!check()) {

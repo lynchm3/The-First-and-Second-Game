@@ -122,13 +122,13 @@ public abstract class Action {
 		getGlobalImage("action_ring.png");
 		getGlobalImage("action_scream.png");// untested
 		getGlobalImage("action_search.png");// not working
-		getGlobalImage("action_sleep.png");
+		getGlobalImage("action_sleep.png");// untested
 		getGlobalImage("action_smash.png");
-		getGlobalImage("action_spot.png");
-		getGlobalImage("action_stopHiding.png");
+		getGlobalImage("action_spot.png");// untested
+		getGlobalImage("action_stop_hiding.png");
 		getGlobalImage("action_take.png");
 		getGlobalImage("action_take_all.png");
-		getGlobalImage("action_takeBite.png");
+		getGlobalImage("action_take_bite.png");// untested
 		getGlobalImage("action_talk.png");
 		getGlobalImage("action_throw.png");
 		getGlobalImage("action_trespass.png");

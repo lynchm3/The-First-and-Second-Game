@@ -18,7 +18,7 @@ public class ActionSmash extends Action {
 
 	// Default for hostiles
 	public ActionSmash(Actor attacker, GameObject target) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_smash.png");
 		this.performer = attacker;
 		this.target = target;
 		if (!check()) {

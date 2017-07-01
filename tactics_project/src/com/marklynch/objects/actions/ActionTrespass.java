@@ -15,7 +15,7 @@ public class ActionTrespass extends Action {
 	float loudness;
 
 	public ActionTrespass(Actor mover, Square target, float loudness) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_trespass.png");
 		this.performer = mover;
 		this.target = target;
 		this.loudness = loudness;

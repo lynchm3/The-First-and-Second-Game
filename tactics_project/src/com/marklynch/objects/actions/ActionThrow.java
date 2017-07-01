@@ -22,7 +22,7 @@ public class ActionThrow extends Action {
 
 	// Default for hostiles
 	public ActionThrow(Actor performer, Object target, GameObject object) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_throw.png");
 		this.performer = performer;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;

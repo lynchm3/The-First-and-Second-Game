@@ -16,7 +16,7 @@ public class ActionWrite extends Action {
 	Object[] text;
 
 	public ActionWrite(Actor writer, Readable sign, Object[] text) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_write.png");
 		this.performer = writer;
 		this.sign = sign;
 		this.text = text;
@@ -37,7 +37,9 @@ public class ActionWrite extends Action {
 		sign.setText(text);
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " wrote on ", sign }));
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

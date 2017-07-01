@@ -19,7 +19,7 @@ public class ActionTakeAll extends Action {
 	Square square;
 
 	public ActionTakeAll(Actor performer, Square square) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_take_all.png");
 		this.performer = performer;
 		this.square = square;
 		if (!check()) {

@@ -13,7 +13,7 @@ public class ActionSpot extends Action {
 	public Object spotted;
 
 	public ActionSpot(Actor spotter, Object spotted) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_spot.png");
 		this.performer = spotter;
 		this.spotted = spotted;
 		legal = checkLegality();
@@ -25,7 +25,9 @@ public class ActionSpot extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " spotted ", spotted }));
 
-		performer.actionsPerformedThisTurn.add(this);if (sound != null)sound.play();
+		performer.actionsPerformedThisTurn.add(this);
+		if (sound != null)
+			sound.play();
 	}
 
 	@Override

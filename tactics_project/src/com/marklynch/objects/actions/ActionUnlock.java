@@ -19,7 +19,7 @@ public class ActionUnlock extends Action {
 
 	// Default for hostiles
 	public ActionUnlock(Actor unlocker, Openable openable) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_unlock.png");
 		this.performer = unlocker;
 		this.openable = openable;
 		if (!check()) {

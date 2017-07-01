@@ -15,7 +15,7 @@ public class ActionStopHiding extends Action {
 	HidingPlace object;
 
 	public ActionStopHiding(Actor performer, HidingPlace object) {
-		super(ACTION_NAME);
+		super(ACTION_NAME, "action_stop_hiding.png");
 		this.performer = performer;
 		this.object = object;
 		if (!check()) {
