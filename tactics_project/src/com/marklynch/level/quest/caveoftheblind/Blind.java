@@ -2,7 +2,6 @@ package com.marklynch.level.quest.caveoftheblind;
 
 import java.util.ArrayList;
 
-import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.structure.StructureRoom;
@@ -13,11 +12,11 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionScream;
 import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.objects.units.Monster;
 
 import mdesl.graphics.Color;
 
-public class Blind extends Actor {
+public class Blind extends Monster {
 
 	public StructureRoom roomLivingIn;
 
@@ -54,32 +53,14 @@ public class Blind extends Actor {
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		if (this == Game.level.player) {
-			return null;
-		}
-		if (performer.equipped instanceof Weapon) {
-			Weapon weapon = (Weapon) performer.equipped;
-			if (weapon.hasRange(performer.straightLineDistanceTo(this.squareGameObjectIsOn))) {
-				return new ActionAttack(performer, this);
-			}
-		}
-
-		return null;
+		return new ActionAttack(performer, this);
 	}
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		if (performer.equipped instanceof Weapon) {
-			Weapon weapon = (Weapon) performer.equipped;
-			if (weapon.hasRange(performer.straightLineDistanceTo(this.squareGameObjectIsOn))) {
-				actions.add(new ActionAttack(performer, this));
-			}
-
-			if (performer.equipped != null) {
-				actions.add(new ActionThrow(performer, this, performer.equipped));
-			}
-		}
+		actions.add(new ActionAttack(performer, this));
+		actions.add(new ActionThrow(performer, this, performer.equipped));
 
 		// ArrayList<Action> actions = new ArrayList<Action>();
 		// if (this != Game.level.player) {

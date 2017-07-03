@@ -6,6 +6,8 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Monster;
+import com.marklynch.objects.units.WildAnimal;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
@@ -117,11 +119,35 @@ public class ActionAttack extends Action {
 		return true;
 	}
 
+	// @Override
+	// public boolean checkLegality() {
+	// // Something that belongs to some one else
+	// if (target.owner != null && target.owner != Game.level.player)
+	// return false;
+	// return true;
+	// }
+
 	@Override
 	public boolean checkLegality() {
 		// Something that belongs to some one else
-		if (target.owner != null && target.owner != Game.level.player)
+		System.out.println("checkLegality() a");
+		System.out.println("checkLegality() target.owner = " + target.owner);
+
+		if (target.owner != null && target.owner != performer)
 			return false;
+		// Is human
+
+		System.out.println("checkLegality() b");
+		System.out.println("checkLegality() !(target instanceof Monster) = " + !(target instanceof Monster));
+		System.out.println("checkLegality() !(target instanceof WildAnimal) = " + !(target instanceof WildAnimal));
+		System.out.println("checkLegality() (!(target instanceof Monster) && !(target instanceof WildAnimal)) =  "
+				+ (!(target instanceof Monster) && !(target instanceof WildAnimal)));
+
+		if (!(target instanceof Monster) && !(target instanceof WildAnimal))
+			return false;
+
+		System.out.println("checkLegality() c");
+
 		return true;
 	}
 

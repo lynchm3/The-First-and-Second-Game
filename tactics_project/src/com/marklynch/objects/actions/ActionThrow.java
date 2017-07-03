@@ -6,6 +6,8 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Monster;
+import com.marklynch.objects.units.WildAnimal;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
@@ -150,9 +152,17 @@ public class ActionThrow extends Action {
 
 	@Override
 	public boolean checkLegality() {
+		// Empty square, it's fine
+		if (targetGameObject == null)
+			return true;
+
 		// Something that belongs to some one else
-		if (targetGameObject != null && targetGameObject.owner != null && targetGameObject.owner != performer)
+		if (targetGameObject.owner != null && targetGameObject.owner != performer)
 			return false;
+		// Is human
+		if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof WildAnimal))
+			return false;
+
 		return true;
 	}
 

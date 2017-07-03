@@ -849,7 +849,7 @@ public class Actor extends GameObject {
 			// Inherited from object (attack...)
 			actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 			// Inherited from squre (move/swap squares)
-			actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
+			// actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
 		}
 
 		if (this == Game.level.player) {

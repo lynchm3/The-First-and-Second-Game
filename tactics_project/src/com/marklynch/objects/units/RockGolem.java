@@ -12,6 +12,7 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionPickUp;
+import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
@@ -19,7 +20,7 @@ import com.marklynch.utils.TextureUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class RockGolem extends Actor {
+public class RockGolem extends Monster {
 
 	public StructureRoom roomLivingIn;
 	public boolean awake = false;
@@ -129,27 +130,19 @@ public class RockGolem extends Actor {
 			return null;
 		} else {
 			ActionAttack actionAttack = new ActionAttack(performer, this);
-			if (actionAttack.enabled && actionAttack.legal) {
-				return actionAttack;
-			}
+			return actionAttack;
 		}
-		return null;
 	}
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-
 		ArrayList<Action> actions = new ArrayList<Action>();
-		if (this != Game.level.player) {
-			// Pick up
-			if (!awake)
-				actions.add(new ActionPickUp(performer, this));
-			// Attack
-			actions.add(new ActionAttack(performer, this));
-			// Inherited from squre (move/swap squares)
-			if (awake)
-				actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
-		}
+		// Pick up
+		if (!awake)
+			actions.add(new ActionPickUp(performer, this));
+		// Attack
+		actions.add(new ActionAttack(performer, this));
+		actions.add(new ActionThrow(performer, this, performer.equipped));
 		return actions;
 	}
 

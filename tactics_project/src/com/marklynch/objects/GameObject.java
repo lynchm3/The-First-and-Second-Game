@@ -491,7 +491,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (this.remainingHealth <= 0)
 			return actions;
 
-		actions.add(new ActionPickUp(performer, this));
+		if (!(this instanceof Actor))
+			actions.add(new ActionPickUp(performer, this));
 		// public boolean showInventory;
 		// public boolean canShareSquare;
 		if (fitsInInventory) {
