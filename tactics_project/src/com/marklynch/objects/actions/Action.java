@@ -110,7 +110,7 @@ public abstract class Action {
 		getGlobalImage("action_give.png");
 		getGlobalImage("action_hide.png");
 		getGlobalImage("action_lock.png");
-		getGlobalImage("action_loiter.png");// not working
+		getGlobalImage("action_loiter.png");
 		getGlobalImage("action_loot_all.png");
 		getGlobalImage("action_mine.png");
 		getGlobalImage("action_move.png");
@@ -130,7 +130,7 @@ public abstract class Action {
 		getGlobalImage("action_take_all.png");
 		getGlobalImage("action_take_bite.png");// untested
 		getGlobalImage("action_talk.png");
-		getGlobalImage("action_throw.png"); // not working
+		getGlobalImage("action_throw.png");
 		getGlobalImage("action_trespass.png"); // untested
 		getGlobalImage("action_unlock.png");
 		getGlobalImage("action_write.png"); // untested

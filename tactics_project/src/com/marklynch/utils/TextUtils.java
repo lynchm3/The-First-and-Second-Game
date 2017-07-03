@@ -343,7 +343,7 @@ public class TextUtils {
 				// Image
 				if (action.image != null) {
 					float x = posX + offsetX + textureWidth;
-					TextureUtils.drawTexture(action.image, x, x + 20, posY + offsetY, posY + offsetY + 20);
+					TextureUtils.drawTexture(action.image, x, x + 20, posY + offsetY, posY + offsetY + 20, color);
 					offsetX += textureWidth * 2;
 				}
 

@@ -18,6 +18,15 @@ public class TextureUtils {
 	public static void drawTexture(Texture texture, float alpha, float x1, float x2, float y1, float y2,
 			boolean inBounds, float boundsX1, float boundsX2, float boundsY1, float boundsY2, boolean backwards,
 			boolean upsideDown) {
+		drawTexture(texture, alpha, x1, x2, y1, y2, inBounds, boundsX1, boundsX2, boundsY1, boundsY2, backwards,
+				upsideDown, Color.WHITE);
+
+	}
+
+	// master drawTexture method
+	public static void drawTexture(Texture texture, float alpha, float x1, float x2, float y1, float y2,
+			boolean inBounds, float boundsX1, float boundsX2, float boundsY1, float boundsY2, boolean backwards,
+			boolean upsideDown, Color color) {
 
 		float vertexX1 = x1;
 		float vertexX2 = x2;
@@ -90,8 +99,8 @@ public class TextureUtils {
 
 		// GL11.glColor4f(1.0f, 1.0f, 1.0f, alpha);
 
-		Game.activeBatch.setColor(new Color(1f, 1f, 1f, alpha));
-		// Game.activeBatch.setColor(Color.WHITE);
+		color.a = alpha;
+		Game.activeBatch.setColor(color);
 		// Game.batch.setColor(1f, 1.0f, 1.0f, 0.1f);
 
 		// draw some sprites... they will all be affected by our shaders
@@ -120,11 +129,16 @@ public class TextureUtils {
 			Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
 
 		}
+		Game.activeBatch.setColor(Color.WHITE);
 
 	}
 
 	public static void drawTexture(Texture texture, float x1, float x2, float y1, float y2) {
-		drawTexture(texture, 1.0f, x1, x2, y1, y2, false, 0, 0, 0, 0, false, false);
+		drawTexture(texture, 1.0f, x1, x2, y1, y2, false, 0, 0, 0, 0, false, false, Color.WHITE);
+	}
+
+	public static void drawTexture(Texture texture, float x1, float x2, float y1, float y2, Color color) {
+		drawTexture(texture, 1.0f, x1, x2, y1, y2, false, 0, 0, 0, 0, false, false, color);
 	}
 
 	public static void drawTexture(Texture texture, float alpha, float x1, float x2, float y1, float y2) {
