@@ -159,9 +159,11 @@ public class ActionThrow extends Action {
 		// Something that belongs to some one else
 		if (targetGameObject.owner != null && targetGameObject.owner != performer)
 			return false;
+
 		// Is human
-		if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof WildAnimal))
-			return false;
+		if (targetGameObject instanceof Actor)
+			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof WildAnimal))
+				return false;
 
 		return true;
 	}

@@ -143,8 +143,9 @@ public class ActionAttack extends Action {
 		System.out.println("checkLegality() (!(target instanceof Monster) && !(target instanceof WildAnimal)) =  "
 				+ (!(target instanceof Monster) && !(target instanceof WildAnimal)));
 
-		if (!(target instanceof Monster) && !(target instanceof WildAnimal))
-			return false;
+		if (target instanceof Actor)
+			if (!(target instanceof Monster) && !(target instanceof WildAnimal))
+				return false;
 
 		System.out.println("checkLegality() c");
 
