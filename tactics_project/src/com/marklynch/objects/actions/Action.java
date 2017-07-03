@@ -20,6 +20,7 @@ public abstract class Action {
 	public Sound sound;
 	public boolean movement = false;
 	public Texture image;
+	public static Texture x;
 
 	public Action(String actionName) {
 		super();
@@ -121,7 +122,7 @@ public abstract class Action {
 		getGlobalImage("action_read.png");
 		getGlobalImage("action_ring.png");
 		getGlobalImage("action_scream.png");// untested
-		getGlobalImage("action_search.png");// not working
+		getGlobalImage("action_search.png");
 		getGlobalImage("action_sleep.png");// untested
 		getGlobalImage("action_smash.png");
 		getGlobalImage("action_spot.png");// untested
@@ -134,5 +135,7 @@ public abstract class Action {
 		getGlobalImage("action_trespass.png"); // untested
 		getGlobalImage("action_unlock.png");
 		getGlobalImage("action_write.png"); // untested
+		x = getGlobalImage("x.png");
+
 	}
 }

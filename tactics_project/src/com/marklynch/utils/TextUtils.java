@@ -345,6 +345,18 @@ public class TextUtils {
 					float x = posX + offsetX + textureWidth;
 					TextureUtils.drawTexture(action.image, x, x + 20, posY + offsetY, posY + offsetY + 20, color);
 					offsetX += textureWidth * 2;
+
+					if (!action.enabled) {
+						if (action.legal) {
+							TextureUtils.drawTexture(Action.x, x + 10, x + 20, posY + offsetY + 10, posY + offsetY + 20,
+									Color.RED);
+						} else {
+							TextureUtils.drawTexture(Action.x, x + 10, x + 20, posY + offsetY + 10, posY + offsetY + 20,
+									Color.WHITE);
+
+						}
+					}
+
 				}
 
 			} else if (content instanceof Projectile) {
