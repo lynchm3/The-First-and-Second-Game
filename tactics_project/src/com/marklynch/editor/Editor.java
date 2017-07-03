@@ -1,6 +1,5 @@
 package com.marklynch.editor;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,7 +62,6 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
-import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
@@ -139,14 +137,14 @@ public class Editor {
 	public Editor() {
 
 		// LOAD THE TEXTURES
-		File file = new File("res/images/");
-		File[] listOfFiles = file.listFiles();
-		for (File imageFile : listOfFiles) {
-			Texture texture = ResourceUtils.getGlobalImage(imageFile.getName());
-			if (texture != null) {
-				textures.add(texture);
-			}
-		}
+		// File file = new File("res/images/");
+		// File[] listOfFiles = file.listFiles();
+		// for (File imageFile : listOfFiles) {
+		// Texture texture = ResourceUtils.getGlobalImage(imageFile.getName());
+		// if (texture != null) {
+		// textures.add(texture);
+		// }
+		// }
 
 		// LOAD COLORS
 		colors.add(new Color(Color.BLUE));

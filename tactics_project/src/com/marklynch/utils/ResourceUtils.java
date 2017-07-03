@@ -24,6 +24,9 @@ public class ResourceUtils {
 
 	public static Texture getGlobalImage(String path) {
 
+		if (path == null || path.length() == 0)
+			return null;
+
 		Texture texture = null;
 		for (String key : globalImages.keySet()) {
 			if (key.equals(path)) {
@@ -39,6 +42,7 @@ public class ResourceUtils {
 						mdesl.graphics.Texture.LINEAR);
 				globalImages.put(path, texture);
 			} catch (Exception e) {
+
 				// e.printStackTrace();
 				// System.err.println("path = " + path);
 			}
