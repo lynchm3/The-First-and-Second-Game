@@ -34,6 +34,7 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLoiter;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.tools.Tool;
@@ -843,9 +844,14 @@ public class Actor extends GameObject {
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
+
+		if (this.remainingHealth <= 0)
+			return actions;
+
 		if (this != Game.level.player) {
 			// Talk
-			actions.add(new ActionTalk(performer, this));
+			if (this.getConversation() != null)
+				actions.add(new ActionTalk(performer, this));
 			// Inherited from object (attack...)
 			actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 			// Inherited from squre (move/swap squares)
@@ -874,6 +880,8 @@ public class Actor extends GameObject {
 					actions.add(new ActionHide(this, hidingPlaceStandingOn));
 			}
 		}
+
+		actions.add(new ActionMove(performer, this.squareGameObjectIsOn, true));
 
 		return actions;
 	}

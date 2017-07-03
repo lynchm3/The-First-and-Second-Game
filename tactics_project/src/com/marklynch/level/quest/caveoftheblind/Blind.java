@@ -1,7 +1,5 @@
 package com.marklynch.level.quest.caveoftheblind;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.structure.StructureRoom;
@@ -10,7 +8,6 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionScream;
-import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
 
@@ -56,33 +53,35 @@ public class Blind extends Monster {
 		return new ActionAttack(performer, this);
 	}
 
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionAttack(performer, this));
-		actions.add(new ActionThrow(performer, this, performer.equipped));
-
-		// ArrayList<Action> actions = new ArrayList<Action>();
-		// if (this != Game.level.player) {
-		// // Talk
-		// actions.add(new ActionTalk(performer, this));
-		// // Inherited from object (attack...)
-		// actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-		// // Inherited from squre (move/swap squares)
-		// actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
-		// }
-
-		// if (this == Game.level.player) {
-		// // self action
-		// Action utilityAction =
-		// performer.equippedWeapon.getUtilityAction(performer);
-		// if (utilityAction != null) {
-		// actions.add(utilityAction);
-		// }
-		// }
-
-		return actions;
-	}
+	// @Override
+	// public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor
+	// performer) {
+	// ArrayList<Action> actions = new ArrayList<Action>();
+	// actions.add(new ActionAttack(performer, this));
+	// actions.add(new ActionThrow(performer, this, performer.equipped));
+	//
+	// // ArrayList<Action> actions = new ArrayList<Action>();
+	// // if (this != Game.level.player) {
+	// // // Talk
+	// // actions.add(new ActionTalk(performer, this));
+	// // // Inherited from object (attack...)
+	// // actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
+	// // // Inherited from squre (move/swap squares)
+	// //
+	// actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
+	// // }
+	//
+	// // if (this == Game.level.player) {
+	// // // self action
+	// // Action utilityAction =
+	// // performer.equippedWeapon.getUtilityAction(performer);
+	// // if (utilityAction != null) {
+	// // actions.add(utilityAction);
+	// // }
+	// // }
+	//
+	// return actions;
+	// }
 
 	@Override
 	public void attacked(Object attacker) {

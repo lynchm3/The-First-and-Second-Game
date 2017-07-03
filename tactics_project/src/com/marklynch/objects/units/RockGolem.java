@@ -12,7 +12,6 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionPickUp;
-import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
@@ -140,9 +139,12 @@ public class RockGolem extends Monster {
 		// Pick up
 		if (!awake)
 			actions.add(new ActionPickUp(performer, this));
+
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
+
 		// Attack
-		actions.add(new ActionAttack(performer, this));
-		actions.add(new ActionThrow(performer, this, performer.equipped));
+		// actions.add(new ActionAttack(performer, this));
+		// actions.add(new ActionThrow(performer, this, performer.equipped));
 		return actions;
 	}
 
