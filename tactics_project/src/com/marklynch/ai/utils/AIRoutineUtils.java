@@ -49,16 +49,19 @@ public class AIRoutineUtils {
 
 	public static Square getRandomSquare(int maxDistance, boolean mustBeOutdoors) {
 
-		// THIS IS ENTIRELY FUCKED
-
 		int attempts = 0;
 		int maxAttempts = 5;
 		Square randomSquare = null;
+		ArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(maxDistance);
+		if (squaresInRange.size() == 0)
+			return null;
+
 		while (attempts < maxAttempts) {
-			int x = (int) (Math.random() * Game.level.width);
-			int y = (int) (Math.random() * Game.level.height);
-			randomSquare = Game.level.squares[x][y];
+
+			randomSquare = squaresInRange.get((int) (Math.random() * (squaresInRange.size() - 1)));
+
 			Path currentActorPathToThisSquare = Game.level.activeActor.getPathTo(randomSquare);
+
 			if ((!mustBeOutdoors || mustBeOutdoors && randomSquare.structureSquareIsIn == null)
 					&& currentActorPathToThisSquare != null && currentActorPathToThisSquare.travelCost < maxDistance
 					&& randomSquare.inventory.canShareSquare()) {
@@ -187,37 +190,21 @@ public class AIRoutineUtils {
 	public static boolean passesChecks(GameObject gameObject, Class clazz, boolean fitsInInventory,
 			boolean mustContainsObjects) {
 
-		System.out.println("PIG AI gameObject.name = " + gameObject.name);
-
-		System.out.println("PIG AI passesChecks a");
 		if (gameObject.quest != null)
 			return false;
 
-		System.out.println("PIG AI passesChecks b");
 		if (gameObject.remainingHealth <= 0)
 			return false;
-		System.out.println("PIG AI passesChecks c");
 
 		if (mustContainsObjects && gameObject.inventory.size() <= 0)
 			return false;
-		System.out.println("PIG AI passesChecks d");
 
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
-		System.out.println("PIG AI passesChecks e");
 
 		// check class
 		if (clazz != null && !clazz.isInstance(gameObject))
 			return false;
-		System.out.println("PIG AI passesChecks f");
-
-		// check distance
-		// if (maxDistance > 0
-		// &&
-		// Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn)
-		// > maxDistance)
-		// return false;
-		// System.out.println("PIG AI passesChecks g");
 
 		return true;
 
