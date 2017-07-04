@@ -87,16 +87,19 @@ public class AIRoutineUtils {
 	public static GameObject getNearestForPurposeOfBeingAdjacent(Class clazz, float maxDistance,
 			boolean fitsInInventory, boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects) {
 
+		// GameObject.class, 5f, true, false, true, false
+
+		ArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(maxDistance);
+
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
 
 		if (checkActors) {
-			// 1. check actors
-			for (Faction faction : Game.level.factions) {
-				for (Actor actor : faction.actors) {
-					if (passesChecks(actor, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
+			for (Square squareActorIsOn : squaresInRange) {
+				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
+				if (actor != null) {
+					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects)) {
 						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
-
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {
 							result = actor;
@@ -108,15 +111,20 @@ public class AIRoutineUtils {
 			}
 		}
 
-		if (checkInanimateObjects) {
-			// 2. check gameObjects
-			for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
-				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
-					Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
-					Path path = Game.level.activeActor.getPathTo(square);
-					if (path != null && path.travelCost < costToBest) {
-						result = gameObject;
-						costToBest = path.travelCost;
+		if (checkInanimateObjects)
+
+		{
+			for (Square squareGameObjectIsOn : squaresInRange) {
+				ArrayList<GameObject> gameObjectsOnSquare = squareGameObjectIsOn.inventory.getGameObjects();
+				for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
+					if (!(gameObjectOnSquare instanceof Actor)
+							&& passesChecks(gameObjectOnSquare, clazz, fitsInInventory, mustContainObjects)) {
+						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObjectOnSquare, 1f);
+						Path path = Game.level.activeActor.getPathTo(square);
+						if (path != null && path.travelCost < costToBest) {
+							result = gameObjectOnSquare;
+							costToBest = path.travelCost;
+						}
 					}
 				}
 			}
@@ -129,14 +137,18 @@ public class AIRoutineUtils {
 	public static GameObject getNearestForPurposeOfAttack(Class clazz, float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects) {
 
+		// GameObject.class, 5f, true, false, true, false
+
+		ArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(maxDistance);
+
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
 
 		if (checkActors) {
-			// 1. check actors
-			for (Faction faction : Game.level.factions) {
-				for (Actor actor : faction.actors) {
-					if (passesChecks(actor, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
+			for (Square squareActorIsOn : squaresInRange) {
+				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
+				if (actor != null) {
+					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects)) {
 						Square square = calculateSquareToMoveToToAttackTarget(actor);
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {
@@ -149,15 +161,20 @@ public class AIRoutineUtils {
 			}
 		}
 
-		if (checkInanimateObjects) {
-			// 2. check gameObjects
-			for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
-				if (passesChecks(gameObject, clazz, maxDistance, fitsInInventory, mustContainObjects)) {
-					Square square = calculateSquareToMoveToToAttackTarget(gameObject);
-					Path path = Game.level.activeActor.getPathTo(square);
-					if (path != null && path.travelCost < costToBest) {
-						result = gameObject;
-						costToBest = path.travelCost;
+		if (checkInanimateObjects)
+
+		{
+			for (Square squareGameObjectIsOn : squaresInRange) {
+				ArrayList<GameObject> gameObjectsOnSquare = squareGameObjectIsOn.inventory.getGameObjects();
+				for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
+					if (!(gameObjectOnSquare instanceof Actor)
+							&& passesChecks(gameObjectOnSquare, clazz, fitsInInventory, mustContainObjects)) {
+						Square square = calculateSquareToMoveToToAttackTarget(gameObjectOnSquare);
+						Path path = Game.level.activeActor.getPathTo(square);
+						if (path != null && path.travelCost < costToBest) {
+							result = gameObjectOnSquare;
+							costToBest = path.travelCost;
+						}
 					}
 				}
 			}
@@ -167,29 +184,40 @@ public class AIRoutineUtils {
 
 	}
 
-	public static boolean passesChecks(GameObject gameObject, Class clazz, float maxDistance, boolean fitsInInventory,
+	public static boolean passesChecks(GameObject gameObject, Class clazz, boolean fitsInInventory,
 			boolean mustContainsObjects) {
 
+		System.out.println("PIG AI gameObject.name = " + gameObject.name);
+
+		System.out.println("PIG AI passesChecks a");
 		if (gameObject.quest != null)
 			return false;
 
+		System.out.println("PIG AI passesChecks b");
 		if (gameObject.remainingHealth <= 0)
 			return false;
+		System.out.println("PIG AI passesChecks c");
 
 		if (mustContainsObjects && gameObject.inventory.size() <= 0)
 			return false;
+		System.out.println("PIG AI passesChecks d");
 
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
+		System.out.println("PIG AI passesChecks e");
 
 		// check class
 		if (clazz != null && !clazz.isInstance(gameObject))
 			return false;
+		System.out.println("PIG AI passesChecks f");
 
 		// check distance
-		if (maxDistance > 0
-				&& Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) > maxDistance)
-			return false;
+		// if (maxDistance > 0
+		// &&
+		// Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn)
+		// > maxDistance)
+		// return false;
+		// System.out.println("PIG AI passesChecks g");
 
 		return true;
 

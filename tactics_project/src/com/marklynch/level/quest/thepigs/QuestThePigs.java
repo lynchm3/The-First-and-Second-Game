@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
@@ -42,12 +43,22 @@ public class QuestThePigs extends Quest {
 		super();
 
 		// Pigs
-		larry = Templates.PIG.makeCopy(Game.level.squares[30][74], Game.level.factions.get(1), null);
+		larry = Templates.PIG.makeCopy("Larry", Game.level.squares[30][74], Game.level.factions.get(1), null);
+		wendy = Templates.PIG.makeCopy("Wendy", Game.level.squares[39][74], Game.level.factions.get(1), null);
+		jane = Templates.PIG.makeCopy("Jane", Game.level.squares[34][78], Game.level.factions.get(1), null);
+		steve = Templates.PIG.makeCopy("Steve", Game.level.squares[35][74], Game.level.factions.get(1), null);
+		prescilla = Templates.PIG.makeCopy("Prescilla", Game.level.squares[31][80], Game.level.factions.get(1), null);
 
-		// tree
+		// trees
 		// cute, larry owns the tree
-		tree = Templates.TREE.makeCopy(Game.level.squares[30][75], larry);
+		Templates.TREE.makeCopy(Game.level.squares[30][75], larry);
+		Templates.TREE.makeCopy(Game.level.squares[32][79], larry);
+		Templates.TREE.makeCopy(Game.level.squares[38][74], larry);
 
+		// Bow on the ground
+		Templates.HUNTING_BOW.makeCopy(Game.level.squares[33][73], null);
+
+		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[34][73], null);
 		// Bed farmersBed = Templates.BED.makeCopy(Game.level.squares[3][3]);
 		// farmersBed.quest = this;
 		// farmer = Templates.FARMER.makeCopy(Game.level.squares[2][2],
@@ -64,6 +75,10 @@ public class QuestThePigs extends Quest {
 		ArrayList<StructureSection> farmSections = new ArrayList<StructureSection>();
 		ArrayList<StructureRoom> farmRooms = new ArrayList<StructureRoom>();
 		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
+
+		// gate
+		Door gate = Templates.DOOR.makeCopy("Door", Game.level.squares[32][72], false, larry);
+		farmFeatures.add(gate);
 
 		penSection = new StructureSection("Pen", 28, 72, 46, 82, false, larry);
 		penRoom = new StructureRoom("Pen", 29, 73, false, new ArrayList<Actor>(), new RoomPart(29, 73, 45, 81));

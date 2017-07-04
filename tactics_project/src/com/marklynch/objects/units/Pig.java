@@ -37,6 +37,8 @@ public class Pig extends Actor {
 				legsAnchorX, legsAnchorY);
 
 		aiRoutine = new AIRoutineForPig(this);
+		drawOffsetX = 0;
+		drawOffsetY = 0;
 	}
 
 	@Override
@@ -50,8 +52,7 @@ public class Pig extends Actor {
 		super.postLoad2();
 	}
 
-	@Override
-	public Pig makeCopy(Square square, Faction faction, Bed bed) {
+	public Pig makeCopy(String name, Square square, Faction faction, Bed bed) {
 
 		Pig actor = new Pig(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
 				imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
