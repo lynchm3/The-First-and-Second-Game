@@ -9,6 +9,7 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
+import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.Weapon;
@@ -24,6 +25,11 @@ public class Templates {
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
 			null, new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
+
+	// Pig
+	public static final Pig PIG = new Pig("Pig", "Pig", 1, 10, 0, 0, 0, 0, "pig.png", null, 1, 10, null,
+			new Inventory(), true, false, true, false, false, 1, 1, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
+			0f, 0f, 0f, 90f, null, null, 40, 96, 40, 96, 40, 96, 40, 96);
 
 	// Monsters
 	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,

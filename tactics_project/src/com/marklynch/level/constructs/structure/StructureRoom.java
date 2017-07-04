@@ -10,7 +10,7 @@ public class StructureRoom {
 	public String name;
 	public RoomPart[] roomParts;
 	public ArrayList<Square> squares = new ArrayList<Square>();
-	public float x;
+	public float x;// where to draw name of room
 	public float y;
 
 	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList,

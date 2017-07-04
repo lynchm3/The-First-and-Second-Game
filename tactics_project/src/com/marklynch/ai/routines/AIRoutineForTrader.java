@@ -60,6 +60,7 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (searchCooldown > 0) {
 			runSearchCooldown();
 			searchCooldown--;
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 

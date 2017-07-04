@@ -152,6 +152,7 @@ public class AIRoutineForMort extends AIRoutine {
 		if (searchCooldown > 0) {
 			runSearchCooldown();
 			searchCooldown--;
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 

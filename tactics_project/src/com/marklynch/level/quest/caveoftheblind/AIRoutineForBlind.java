@@ -218,6 +218,7 @@ public class AIRoutineForBlind extends AIRoutine {
 		if (searchCooldown > 0) {
 			runSearchCooldown();
 			searchCooldown--;
+			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 

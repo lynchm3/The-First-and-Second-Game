@@ -37,9 +37,13 @@ public class Game {
 	// public static int playerStartPosX = 93;
 	// public static int playerStartPosY = 52;
 
-	// Beside rock golem
-	public static int playerStartPosX = 82;
-	public static int playerStartPosY = 46;
+	// Morts Mine
+	// public static int playerStartPosX = 82;
+	// public static int playerStartPosY = 46;
+
+	// Farm
+	public static int playerStartPosX = 30;
+	public static int playerStartPosY = 70;
 
 	// Camera positions
 
@@ -52,8 +56,12 @@ public class Game {
 	// public static float dragY = -192;
 
 	// Morts Mine + dining room
-	public static float dragX = -4500;
-	public static float dragY = -2000;
+	// public static float dragX = -4500;
+	// public static float dragY = -2000;
+
+	// Farm
+	public static float dragX = -1000;
+	public static float dragY = -4000;
 
 	public static float zoom = 0.5f; // 0.25f
 
