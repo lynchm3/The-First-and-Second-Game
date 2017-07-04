@@ -29,8 +29,8 @@ public class Tree extends GameObject {
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
 				owner);
-		addApple(appleMaxRatioSize);
 		healthWhenLastDroppedFruit = this.totalHealth;
+		// addApple(appleMaxRatioSize);
 	}
 
 	public void addApple(float maxSize) {
@@ -88,13 +88,16 @@ public class Tree extends GameObject {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
+
+		System.out.println("tree.update()");
+
 		if (remainingHealth < healthWhenLastDroppedFruit && inventory.size() > 0) {
 
 			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();
 			objectsToDropFromHit.addAll(this.inventory.gameObjects);
 			for (GameObject objectToDrop : objectsToDropFromHit) {
-				Level.actionQueue.add(new ActionDrop(this, this.squareGameObjectIsOn, objectToDrop));
-				objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height - 16;
+				Level.actionQueueForInanimateObjects.add(new ActionDrop(this, this.squareGameObjectIsOn, objectToDrop));
+				objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
 			}
 			healthWhenLastDroppedFruit = this.remainingHealth;
 
@@ -115,18 +118,21 @@ public class Tree extends GameObject {
 			}
 		}
 
-		if (Math.random() > 0.998d)
+		// Start new apple?
+		if (Math.random() > 0.990d)
 			addApple(0.01f);
 
+		// Drop apples?
 		ArrayList<GameObject> objectsToDropRandomly = new ArrayList<GameObject>();
 		for (GameObject gameObject : inventory.gameObjects) {
-			if (gameObject instanceof Food && Math.random() > 0.999d)
+			if (gameObject instanceof Food && Math.random() > 0.990d)
 				objectsToDropRandomly.add(gameObject);
 		}
 
 		for (GameObject objectToDrop : objectsToDropRandomly) {
-			Level.actionQueue.add(new ActionDrop(this, this.squareGameObjectIsOn, objectToDrop));
-			objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height - 32;
+			Level.actionQueueForInanimateObjects.add(new ActionDrop(this, this.squareGameObjectIsOn, objectToDrop));
+			objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
+			// - 32;
 		}
 	}
 

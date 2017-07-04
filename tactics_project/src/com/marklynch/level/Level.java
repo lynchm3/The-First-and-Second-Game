@@ -552,7 +552,9 @@ public class Level {
 
 	}
 
-	public static ArrayList<Action> actionQueue = new ArrayList<Action>();
+	// To stop java.util.ConcurrentModificationException in inanimate object
+	// loop
+	public static ArrayList<Action> actionQueueForInanimateObjects = new ArrayList<Action>();
 
 	public void update(int delta) {
 
@@ -702,10 +704,10 @@ public class Level {
 			for (GameObject inanimateObject : inanimateObjectsOnGround)
 				inanimateObject.update(0);
 
-			for (Action action : actionQueue) {
+			for (Action action : actionQueueForInanimateObjects) {
 				action.perform();
 			}
-			actionQueue.clear();
+			actionQueueForInanimateObjects.clear();
 		}
 
 	}
