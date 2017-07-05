@@ -43,7 +43,7 @@ public class QuestThePigs extends Quest {
 		super();
 
 		// Pigs
-		larry = Templates.PIG.makeCopy("Larry", Game.level.squares[30][74], Game.level.factions.get(1), null);
+		larry = Templates.PIG.makeCopy("Larry", Game.level.squares[30][76], Game.level.factions.get(1), null);
 		wendy = Templates.PIG.makeCopy("Wendy", Game.level.squares[39][74], Game.level.factions.get(1), null);
 		jane = Templates.PIG.makeCopy("Jane", Game.level.squares[34][78], Game.level.factions.get(1), null);
 		steve = Templates.PIG.makeCopy("Steve", Game.level.squares[35][74], Game.level.factions.get(1), null);
@@ -77,7 +77,7 @@ public class QuestThePigs extends Quest {
 		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
 
 		// gate
-		Door gate = Templates.DOOR.makeCopy("Door", Game.level.squares[32][72], false, larry);
+		Door gate = Templates.GATE.makeCopy("Gate", Game.level.squares[32][72], false, larry);
 		farmFeatures.add(gate);
 
 		penSection = new StructureSection("Pen", 28, 72, 46, 82, false, larry);
@@ -86,8 +86,9 @@ public class QuestThePigs extends Quest {
 		farmSections.add(penSection);
 		farmRooms.add(penRoom);
 
-		Game.level.structures.add(new Structure("Farm", farmSections, farmRooms, farmPaths, farmFeatures,
-				new ArrayList<Square>(), null, 0, 0, 0, 0, true, larry, squaresToRemove, farmWalls));
+		Game.level.structures
+				.add(new Structure("Pen", farmSections, farmRooms, farmPaths, farmFeatures, new ArrayList<Square>(),
+						null, 0, 0, 0, 0, true, larry, squaresToRemove, farmWalls, Templates.FENCE, "mud.png"));
 	}
 
 	@Override

@@ -129,6 +129,8 @@ public class Templates {
 			0f, 40f, null, true);
 	public static final Door DOOR = new Door("Door", 500, "door.png", null, new Inventory(), false, true, false, false,
 			true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 40f, null, false);
+	public static final Door GATE = new Door("Gate", 100, "door.png", null, new Inventory(), false, true, false, false,
+			false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 40f, null, false);
 	public static final Chest CHEST = new Chest("Chest", 200, "chest.png", null, new Inventory(), false, false, false,
 			false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 25f, null,
 			false);
@@ -149,6 +151,8 @@ public class Templates {
 
 	public static final Wall WALL = new Wall("Wall", 1000, "wall.png", null, new Inventory(), false, false, false,
 			false, true, true, 1, 1, 0.5f, 0.5f, 10f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 200f, null);
+	public static final Wall FENCE = new Wall("Fence", 100, "wall.png", null, new Inventory(), false, false, false,
+			false, false, true, 1, 1, 0.5f, 0.5f, 10f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 200f, null);
 	public static final Vein VEIN = new Vein("Vein", 1000, "wall.png", null, new Inventory(), false, false, false,
 			false, true, true, 1, 1, 0.5f, 0.5f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 200f, null);
 	public static final GameObject BOULDER = new GameObject("Boulder", 1000, "boulder.png", null, new Inventory(),

@@ -6,7 +6,6 @@ import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
@@ -34,7 +33,8 @@ public class Structure {
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
 			ArrayList<StructurePath> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
 			String imageTexturePath, float overlayX1, float overlayX2, float overlayY1, float overlayY2,
-			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls) {
+			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls,
+			Wall wallTemplate, String textureName) {
 		super();
 
 		this.name = name;
@@ -56,7 +56,7 @@ public class Structure {
 
 		// Entrance squares
 		for (Square entranceSquare : entranceSquares) {
-			entranceSquare.imageTexturePath = "stone.png";
+			entranceSquare.imageTexturePath = textureName;
 			entranceSquare.loadImages();
 		}
 
@@ -100,13 +100,13 @@ public class Structure {
 					if (!floorSquares.contains(Game.level.squares[i][j])
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
 
-						wallsInCave.add(Templates.WALL.makeCopy(Game.level.squares[i][j], this.owner));
+						wallsInCave.add(wallTemplate.makeCopy(Game.level.squares[i][j], this.owner));
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					if (!squaresToRemove.contains(Game.level.squares[i][j])) {
 						Game.level.squares[i][j].structureSquareIsIn = this;
 						Game.level.squares[i][j].structureSectionSquareIsIn = caveSection;
-						Game.level.squares[i][j].imageTexturePath = "stone.png";
+						Game.level.squares[i][j].imageTexturePath = textureName;
 						Game.level.squares[i][j].loadImages();
 					}
 				}

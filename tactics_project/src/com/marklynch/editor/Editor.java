@@ -505,7 +505,7 @@ public class Editor {
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5, false));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructurePath>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -100,
-				-100 + 868, true, trader, new ArrayList<Square>(), new ArrayList<Wall>());
+				-100 + 868, true, trader, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, "stone.png");
 		Game.level.structures.add(joesShop);
 
 		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
@@ -541,7 +541,7 @@ public class Editor {
 
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructurePath>(),
 				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true,
-				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>());
+				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, "stone.png");
 		Game.level.structures.add(lodge);
 
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();

@@ -36,7 +36,6 @@ public class AIRoutineForPig extends AIRoutine {
 
 	@Override
 	public void update() {
-		System.out.println("PIG AI A");
 		this.actor.aiLine = null;
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
@@ -61,7 +60,6 @@ public class AIRoutineForPig extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
-		System.out.println("PIG AI B");
 
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
@@ -73,9 +71,7 @@ public class AIRoutineForPig extends AIRoutine {
 		// 1. eat loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(GameObject.class, 5f, true, false, true,
 				false);
-		System.out.println("PIG AI loot = " + loot);
 		if (loot != null) {
-			System.out.println("PIG AI LOOT");
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_PIGGING_OUT;
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.eatTarget(loot);
@@ -96,17 +92,18 @@ public class AIRoutineForPig extends AIRoutine {
 
 		// Move about a bit
 		if (targetSquare != null) {
-			AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+			boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			if (pig.squareGameObjectIsOn == targetSquare || pig.getPathTo(targetSquare) == null)
 				targetSquare = null;
+			if (moved)
+				return;
 		} else {
 			if (Math.random() < 0.05) {
-				targetSquare = AIRoutineUtils.getRandomSquare(5, true);
-				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
+				targetSquare = AIRoutineUtils.getRandomSquare(5, false);
+				if (AIRoutineUtils.moveTowardsTargetSquare(targetSquare))
+					return;
 			}
 		}
-
-		System.out.println("PIG AI X");
 	}
 
 }
