@@ -27,6 +27,8 @@ public class WildAnimal extends Actor {
 				owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
 				legsAnchorX, legsAnchorY);
 		aiRoutine = new AIRoutineForWildAnimal(this);
+		drawOffsetX = 0;
+		drawOffsetY = 0;
 	}
 
 	@Override

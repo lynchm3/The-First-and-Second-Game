@@ -7,19 +7,18 @@ import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Pig;
+import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
-
 	// Player
-	public static final Actor Player = new Actor("You", "Fighter", 10, 100, 10, 0, 0, 0, "red1.png", null, 1, 10, null,
-			new Inventory(), true, false, true, false, false, true, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, 90f, null, null, 80f, 80f, 73f, 22f, 80f, 80f, 80f, 80f);
+	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "red1.png", null, 1, 10,
+			null, new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+			false, 0f, 0f, 0f, 0f, 90f, null, null, 80f, 80f, 73f, 22f, 80f, 80f, 80f, 80f);
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,

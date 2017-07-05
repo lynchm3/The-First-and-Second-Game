@@ -44,6 +44,8 @@ public class Mort extends Actor {
 				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
 		aiRoutine = new AIRoutineForMort(this);
+		drawOffsetX = -32;
+		drawOffsetY = -64;
 	}
 
 	@Override

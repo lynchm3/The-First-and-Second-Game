@@ -35,6 +35,8 @@ public class Blind extends Monster {
 				legsAnchorX, legsAnchorY);
 		this.roomLivingIn = roomLivingIn;
 		aiRoutine = new AIRoutineForBlind(this);
+		drawOffsetX = -32;
+		drawOffsetY = -64;
 	}
 
 	@Override

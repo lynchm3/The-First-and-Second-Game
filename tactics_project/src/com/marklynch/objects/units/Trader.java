@@ -44,6 +44,8 @@ public class Trader extends Actor implements Comparator<GameObject> {
 
 		aiRoutine = new AIRoutineForTrader(this);
 		equipped = broom;
+		drawOffsetX = 0;
+		drawOffsetY = 0;
 	}
 
 	public boolean isPlayerInTheShop() {

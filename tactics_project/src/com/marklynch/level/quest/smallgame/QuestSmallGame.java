@@ -282,8 +282,10 @@ public class QuestSmallGame extends Quest {
 					actor.activityDescription = ACTIVITY_WAITING_FOR_YOU;
 				} else {
 					actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-					if (!AIRoutineUtils.attackTarget(superWolf)) {
-						AIRoutineUtils.moveTowardsTargetToAttack(superWolf);
+					if (superWolf.remainingHealth > 0) {
+						if (!AIRoutineUtils.attackTarget(superWolf)) {
+							AIRoutineUtils.moveTowardsTargetToAttack(superWolf);
+						}
 					}
 				}
 			}

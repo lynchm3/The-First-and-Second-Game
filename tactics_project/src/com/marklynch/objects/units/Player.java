@@ -8,9 +8,9 @@ import com.marklynch.objects.Inventory;
 
 import mdesl.graphics.Color;
 
-public class Hunter extends Actor {
+public class Player extends Actor {
 
-	public Hunter(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
+	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
@@ -26,7 +26,6 @@ public class Hunter extends Actor {
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
 				owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
 				legsAnchorX, legsAnchorY);
-		aiRoutine = new AIRoutineForHunter(this);
 		drawOffsetX = -32;
 		drawOffsetY = -64;
 	}
@@ -43,9 +42,9 @@ public class Hunter extends Actor {
 	}
 
 	@Override
-	public Hunter makeCopy(Square square, Faction faction, Bed bed) {
+	public Player makeCopy(Square square, Faction faction, Bed bed) {
 
-		Hunter actor = new Hunter(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
+		Player actor = new Player(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,

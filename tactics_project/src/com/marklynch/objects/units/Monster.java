@@ -25,6 +25,8 @@ public class Monster extends Actor {
 				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance,
 				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+		drawOffsetX = -32;
+		drawOffsetY = -64;
 	}
 
 }
