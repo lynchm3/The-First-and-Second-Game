@@ -24,12 +24,15 @@ import com.marklynch.objects.actions.ActionGive;
 import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Pig;
 import com.marklynch.utils.MapUtil;
 
 public class AIRoutine {
 
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
+	final String ACTIVITY_DESCRIPTION_BEING_A_CHICKEN = "Being a chicken";
+	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Being a chicken";
 
 	public Actor actor;
 	public GameObject target;
@@ -192,18 +195,8 @@ public class AIRoutine {
 						// them
 						if (!attacked) {
 							moved = AIRoutineUtils.moveTowardsTargetToAttack(target);
-
-							// After moving, see if you can get a shot off
-							// Not neccesarily the same target you're moving
-							// towards
-							for (GameObject victimToAttackAttemptPostMove : this.actor.getAttackers()) {
-								if (this.actor.canSeeGameObject(victimToAttackAttemptPostMove)) {
-									attacked = AIRoutineUtils.attackTarget(victimToAttackAttemptPostMove);
-									if (attacked)
-										break;
-
-								}
-							}
+							if (moved)
+								break;
 						}
 					}
 
@@ -211,6 +204,7 @@ public class AIRoutine {
 							target.squareGameObjectIsOn);
 
 				}
+
 				if (moved || attacked)
 					break;
 			}
@@ -226,6 +220,51 @@ public class AIRoutine {
 			return true;
 		else
 			return false;
+	}
+
+	public boolean runEscapeRoutine() {
+		boolean canSeeAttacker = false;
+
+		actor.removeHidingPlacesFromAttackers();
+
+		// 1. Fighting
+		if (this.actor.hasAttackers()) {
+
+			// sort by best attack option (walk distance, dmg you can do)
+			this.actor.getAttackers().sort(AIRoutineUtils.sortAttackers);
+
+			// Go through attackers list
+			for (GameObject attackerToRunFrom : this.actor.getAttackers()) {
+
+				// If we can see the attacker go for them
+				if (this.actor.canSeeGameObject(attackerToRunFrom)) {
+
+					// Try to attack the preference 1 target
+					if (attackerToRunFrom != null) {
+						AIRoutineUtils.escapeFromAttacker(attackerToRunFrom);
+					}
+
+					actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ESCAPE, actor,
+							attackerToRunFrom.squareGameObjectIsOn);
+				}
+
+				if (canSeeAttacker)
+					break;
+			}
+		}
+
+		// Return whether we did anything or not
+		if (canSeeAttacker) {
+			if (actor instanceof Pig) {
+				actor.activityDescription = ACTIVITY_DESCRIPTION_BEING_A_CHICKEN;
+			} else {
+				actor.activityDescription = ACTIVITY_DESCRIPTION_RUNNING_AWAY;
+			}
+
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean runSearchRoutine() {

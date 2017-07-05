@@ -340,34 +340,50 @@ public class AIRoutineUtils {
 		}
 	}
 
+	public static boolean escapeFromAttacker(GameObject target) {
+
+		boolean moved = false;
+		Square squareActorOn = Game.level.activeActor.squareGameObjectIsOn;
+
+		if (squareActorOn.xInGrid > target.squareGameObjectIsOn.xInGrid
+				&& squareActorOn.xInGrid < Game.level.squares.length - 1) {
+			ActionMove actionMove = new ActionMove(Game.level.activeActor,
+					Game.level.squares[squareActorOn.xInGrid + 1][squareActorOn.yInGrid], false);
+			if (actionMove.check()) {
+				actionMove.perform();
+				return true;
+			}
+
+		} else if (squareActorOn.xInGrid < target.squareGameObjectIsOn.xInGrid && squareActorOn.xInGrid > 0) {
+			ActionMove actionMove = new ActionMove(Game.level.activeActor,
+					Game.level.squares[squareActorOn.xInGrid - 1][squareActorOn.yInGrid], false);
+			if (actionMove.check()) {
+				actionMove.perform();
+				return true;
+			}
+		}
+
+		if (squareActorOn.yInGrid > target.squareGameObjectIsOn.yInGrid
+				&& squareActorOn.yInGrid < Game.level.squares[0].length - 1) {
+			ActionMove actionMove = new ActionMove(Game.level.activeActor,
+					Game.level.squares[squareActorOn.xInGrid][squareActorOn.yInGrid + 1], false);
+			if (actionMove.check()) {
+				actionMove.perform();
+				return true;
+			}
+		} else if (squareActorOn.yInGrid < target.squareGameObjectIsOn.yInGrid && squareActorOn.yInGrid > 0) {
+			ActionMove actionMove = new ActionMove(Game.level.activeActor,
+					Game.level.squares[squareActorOn.xInGrid + 1][squareActorOn.yInGrid - 1], false);
+			if (actionMove.check()) {
+				actionMove.perform();
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public static boolean moveTowardsTargetToBeAdjacent(GameObject target) {
-
-		// TODO
-		// currently if there's no path it crashes
-		// also... stay still fi ur already at the best part :P, issue (need to
-		// know ideal distance for this one though)
-		// is, its not in target's list of paths
-		// ehhhhhhhhhh.... if it's not fully reachable then just go
-		// closest as the crow flies?
-		// also... have ideal distance (for ranged VS melee for e.g.) (this is
-		// weapon distance, not travel distance)
-
-		// MOVE TOWARDS A POINT
-		// get as close to the point as possible
-		// with as few moves as possible
-
-		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
-		// idealWeaponDistances.add(2);
-
-		// TODO this needs to be calculated based on
-		// weapons available and the taret and their weapons
-		// TODO what if we're stuck being closed than ideal distance, need to
-		// run through this, and there could be a list of ideal distances......
-		// :/
-		// TODO ideal weapon distance could be on the other side of an object...
-		// need to factor this in when choosing a good square :/, when talking
-		// about targets squares I need to make list of attack squares, this
-		// shit is heavy
 
 		if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) <= 1) {
 			return true;

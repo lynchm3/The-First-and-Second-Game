@@ -17,6 +17,7 @@ public class AIRoutineForPig extends AIRoutine {
 
 	final String ACTIVITY_DESCRIPTION_PIGGING_OUT = "Pigging out!";
 	final String ACTIVITY_DESCRIPTION_BEING_A_PIG = "Being a pig";
+	final String ACTIVITY_DESCRIPTION_BEING_A_CHICKEN = "Being a chicken";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_DISGRUNTLED = "Disgruntled";
 
@@ -42,24 +43,25 @@ public class AIRoutineForPig extends AIRoutine {
 		this.actor.thoughtBubbleImageTexture = null;
 		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();
-		if (runFightRoutine()) {
+
+		if (runEscapeRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 
-		if (runSearchRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			createSearchLocationsBasedOnVisibleAttackers();
-			return;
-		}
+		// if (runSearchRoutine()) {
+		// // createSearchLocationsBasedOnSounds();
+		// createSearchLocationsBasedOnVisibleAttackers();
+		// return;
+		// }
 
-		if (searchCooldown > 0) {
-			runSearchCooldown();
-			searchCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
-			return;
-		}
+		// if (searchCooldown > 0) {
+		// runSearchCooldown();
+		// searchCooldown--;
+		// createSearchLocationsBasedOnVisibleAttackers();
+		// return;
+		// }
 
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
@@ -90,6 +92,7 @@ public class AIRoutineForPig extends AIRoutine {
 			}
 		}
 
+		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BEING_A_PIG;
 		// Move about a bit
 		if (targetSquare != null) {
 			boolean moved = AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
