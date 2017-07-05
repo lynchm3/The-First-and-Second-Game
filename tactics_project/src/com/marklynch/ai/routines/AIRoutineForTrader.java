@@ -103,7 +103,7 @@ public class AIRoutineForTrader extends AIRoutine {
 			else {
 				// Equip ur broom!!!
 				if (trader.equipped != trader.broom)
-					trader.equipped = trader.broom;
+					trader.equip(trader.broom);
 				// if not in building move in to the building
 				if (targetSquare != null) {
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);

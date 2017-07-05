@@ -519,7 +519,7 @@ public class AIRoutineUtils {
 
 	public static Path getBestPathToAttackTarget(GameObject target) {
 
-		Vector<Float> idealWeaponDistances = Game.level.activeActor.calculateIdealDistanceFrom(target);
+		Vector<Float> idealWeaponDistances = Game.level.activeActor.calculateIdealDistanceFromTargetToAttack(target);
 
 		Vector<Square> squaresAtSpecifiedDistanceToTarget = new Vector<Square>();
 		int bestTravelCostFound = Integer.MAX_VALUE;

@@ -30,11 +30,11 @@ public class Pig extends Actor {
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, false, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
-				owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
-				legsAnchorX, legsAnchorY);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, false, false, widthRatio,
+				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
+				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance,
+				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
 
 		aiRoutine = new AIRoutineForPig(this);
 		drawOffsetX = 0;

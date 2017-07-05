@@ -116,6 +116,7 @@ public class Actor extends GameObject {
 	public float legsAnchorY;
 
 	public boolean canOpenDoors;
+	public boolean canEquipWeapons;
 
 	public transient Conversation conversation;
 
@@ -143,12 +144,13 @@ public class Actor extends GameObject {
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean canOpenDoors, float widthRatio,
-			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
-			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight,
-			Actor owner, Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean canOpenDoors, boolean canEquipWeapons,
+			float widthRatio, float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit,
+			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
+			boolean stackable, float fireResistance, float iceResistance, float electricResistance,
+			float poisonResistance, float weight, Actor owner, Faction faction, float handAnchorX, float handAnchorY,
+			float headAnchorX, float headAnchorY, float bodyAnchorX, float bodyAnchorY, float legsAnchorX,
+			float legsAnchorY) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
@@ -217,6 +219,7 @@ public class Actor extends GameObject {
 		}
 
 		this.canOpenDoors = canOpenDoors;
+		this.canEquipWeapons = canEquipWeapons;
 	}
 
 	@Override
@@ -263,7 +266,7 @@ public class Actor extends GameObject {
 		if (equippedWeaponGUID != null) {
 			for (Weapon weapon : this.getWeaponsInInventory()) {
 				if (equippedWeaponGUID.equals(weapon.guid)) {
-					this.equipped = weapon;
+					this.equip(weapon);
 				}
 			}
 		}
@@ -448,6 +451,12 @@ public class Actor extends GameObject {
 	}
 
 	public boolean hasRange(int weaponDistance) {
+		if (!canEquipWeapons) {
+			if (weaponDistance > 1)
+				return false;
+			return true;
+		}
+
 		for (Weapon weapon : getWeaponsInInventory()) {
 			if (weaponDistance >= weapon.getEffectiveMinRange() && weaponDistance <= weapon.getEffectiveMaxRange()) {
 				// selectedWeapon = weapon;
@@ -464,16 +473,22 @@ public class Actor extends GameObject {
 		// with....
 		// weird...
 
+		if (!canEquipWeapons)
+			return;
+
 		int range = this.straightLineDistanceTo(target.squareGameObjectIsOn);
 		for (Weapon weapon : getWeaponsInInventory()) {
 			if (range >= weapon.getEffectiveMinRange() && range <= weapon.getEffectiveMaxRange()) {
-				equipped = weapon;
+				equip(weapon);
 				equippedWeaponGUID = weapon.guid;
 			}
 		}
 	}
 
 	public void equipBestWeaponForCounter(GameObject target, Weapon targetsWeapon) {
+
+		if (!canEquipWeapons)
+			return;
 
 		ArrayList<Weapon> potentialWeaponsToEquip = new ArrayList<Weapon>();
 
@@ -485,10 +500,10 @@ public class Actor extends GameObject {
 		}
 
 		if (potentialWeaponsToEquip.size() == 0) {
-			equipped = null;
+			equip(null);
 			equippedWeaponGUID = null;
 		} else if (potentialWeaponsToEquip.size() == 1) {
-			equipped = potentialWeaponsToEquip.get(0);
+			equip(potentialWeaponsToEquip.get(0));
 			equippedWeaponGUID = potentialWeaponsToEquip.get(0).guid;
 		} else {
 			ArrayList<Fight> fights = new ArrayList<Fight>();
@@ -725,7 +740,13 @@ public class Actor extends GameObject {
 
 	}
 
-	public Vector<Float> calculateIdealDistanceFrom(GameObject target) {
+	public Vector<Float> calculateIdealDistanceFromTargetToAttack(GameObject target) {
+
+		Vector<Float> idealDistances = new Vector<Float>();
+		if (!canEquipWeapons) {
+			idealDistances.add(1f);
+			return idealDistances;
+		}
 
 		Vector<Fight> fights = new Vector<Fight>();
 		for (Weapon weapon : getWeaponsInInventory()) {
@@ -736,8 +757,6 @@ public class Actor extends GameObject {
 		}
 
 		fights.sort(new Fight.FightComparator());
-
-		Vector<Float> idealDistances = new Vector<Float>();
 
 		for (Fight fight : fights) {
 			idealDistances.add(fight.range);
@@ -757,7 +776,7 @@ public class Actor extends GameObject {
 	}
 
 	public void weaponButtonClicked(Weapon weapon) {
-		this.equipped = weapon;
+		this.equip(weapon);
 		equippedWeaponGUID = this.equipped.guid;
 	}
 
@@ -765,10 +784,10 @@ public class Actor extends GameObject {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
-				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance,
-				poisonResistance, weight
+				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, canOpenDoors,
+				canEquipWeapons, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting,
+				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				electricResistance, poisonResistance, weight
 
 				, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
 				legsAnchorX, legsAnchorY);
@@ -1061,6 +1080,11 @@ public class Actor extends GameObject {
 
 	public int getEffectiveEndurance() {
 		return endurance;
+	}
+
+	public void equip(GameObject gameObject) {
+		if (canEquipWeapons)
+			this.equipped = gameObject;
 	}
 
 	// public static void calculateReachableSquares() {

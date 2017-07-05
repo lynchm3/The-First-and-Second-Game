@@ -86,9 +86,9 @@ public class ActionThrow extends Action {
 
 		if (performer.equipped == projectile) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
-				performer.equipped = performer.equippedBeforePickingUpObject;
+				performer.equip(performer.equippedBeforePickingUpObject);
 			} else {
-				performer.equipped = null;
+				performer.equip(null);
 			}
 			performer.equippedBeforePickingUpObject = null;
 		}

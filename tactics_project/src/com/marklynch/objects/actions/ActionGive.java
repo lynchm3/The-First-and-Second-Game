@@ -36,7 +36,7 @@ public class ActionGive extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " gave ", object, " to ", receiver }));
 		performer.inventory.remove(object);
 		if (performer.equipped == object)
-			performer.equipped = null;
+			performer.equip(null);
 		receiver.inventory.add(object);
 		if (receiver instanceof Actor) {
 			object.owner = (Actor) receiver;

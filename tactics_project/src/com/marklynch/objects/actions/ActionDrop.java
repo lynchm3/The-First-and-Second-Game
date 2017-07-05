@@ -44,9 +44,9 @@ public class ActionDrop extends Action {
 			Actor actor = (Actor) performer;
 			if (actor.equipped == object) {
 				if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
-					actor.equipped = actor.equippedBeforePickingUpObject;
+					actor.equip(actor.equippedBeforePickingUpObject);
 				} else {
-					actor.equipped = null;
+					actor.equip(null);
 				}
 				actor.equippedBeforePickingUpObject = null;
 			}

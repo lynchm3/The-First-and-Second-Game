@@ -45,7 +45,7 @@ public class ActionEquip extends Action {
 		} else if (gameObject instanceof LegArmor) {
 			performer.legArmor = (LegArmor) gameObject;
 		} else {
-			performer.equipped = gameObject;
+			performer.equip(gameObject);
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

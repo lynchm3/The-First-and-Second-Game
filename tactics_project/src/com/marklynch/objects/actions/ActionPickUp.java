@@ -39,7 +39,7 @@ public class ActionPickUp extends Action {
 		object.squareGameObjectIsOn.inventory.remove(object);
 		if (object.fitsInInventory)
 			performer.inventory.add(object);
-		performer.equipped = object;
+		performer.equip(object);
 		if (object.owner == null)
 			object.owner = performer;
 		performer.actionsPerformedThisTurn.add(this);

@@ -39,17 +39,28 @@ public class ActionAttack extends Action {
 		if (!enabled)
 			return;
 
-		Weapon weapon = (Weapon) performer.equipped;
+		float damage = 1;
+		Weapon weapon = null;
+		if (performer.equipped != null && performer.equipped instanceof Weapon) {
+			weapon = (Weapon) performer.equipped;
+			damage = weapon.getTotalEffectiveDamage();
+		}
+
 		if (target.attackable) {
-			target.remainingHealth -= weapon.getTotalEffectiveDamage();
+			target.remainingHealth -= damage;
 			String attackTypeString;
 			attackTypeString = "attacked ";
 
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] {
 
-						performer, " " + attackTypeString + " ", target, " with ", performer.equipped.imageTexture,
-						" for " + weapon.getEffectiveSlashDamage() + " damage" }));
+				if (weapon != null) {
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+							target, " with ", weapon, " for " + damage + " damage" }));
+				} else {
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+							target, " for " + damage + " damage" }));
+
+				}
 			}
 			target.attacked(performer);
 		}
@@ -97,20 +108,16 @@ public class ActionAttack extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer.equipped == null)
-			return false;
-
-		if (!performer.canSeeGameObject(target))
-			return false;
-
-		Weapon weapon = null;
-		if (performer.equipped instanceof Weapon) {
-			weapon = (Weapon) performer.equipped;
+		if (performer.equipped == null || !(performer.equipped instanceof Weapon)) {
+			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
+				return false;
 		} else {
-			return false;
+			Weapon weapon = (Weapon) performer.equipped;
+			if (!weapon.hasRange(performer.straightLineDistanceTo(target.squareGameObjectIsOn)))
+				return false;
 		}
 
-		if (!weapon.hasRange(performer.straightLineDistanceTo(target.squareGameObjectIsOn)))
+		if (!performer.canSeeGameObject(target))
 			return false;
 
 		if (!target.attackable)

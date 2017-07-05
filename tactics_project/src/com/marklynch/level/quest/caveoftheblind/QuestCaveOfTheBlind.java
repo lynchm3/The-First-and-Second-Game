@@ -360,8 +360,6 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Rock Golem
 		RockGolem rockGolem = Templates.ROCK_GOLEM.makeCopy(Game.level.squares[91][35], Game.level.factions.get(4),
 				caveIn, false);
-		rockGolem.inventory.add(Templates.KATANA.makeCopy(null, null));
-		rockGolem.equipped = rockGolem.inventory.get(0);
 
 		// Path Caved In Corridor to dining room
 		cavePaths.add(new StructurePath("Caved In Corridor", false, new ArrayList<Actor>(), Game.level.squares[95][37],
