@@ -462,6 +462,7 @@ public class Level {
 		//
 		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 			Game.squareMouseIsOver.drawCursor();
+
 			Game.squareMouseIsOver.drawDefaultAction();
 			player.squareGameObjectIsOn.drawDefaultAction();
 			player.squareGameObjectIsOn.getSquareToLeftOf().drawDefaultAction();

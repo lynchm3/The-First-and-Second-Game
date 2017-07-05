@@ -2,6 +2,8 @@ package com.marklynch.ai.utils;
 
 import java.util.List;
 
+import com.marklynch.objects.units.Actor;
+
 /**
  * The AStarNode class, along with the AStarSearch class, implements a generic
  * A* search algorithm. The AStarNode class should be subclassed to provide
@@ -42,5 +44,5 @@ public abstract class AStarNode implements Comparable {
 	/**
 	 * Gets the children (AKA "neighbors" or "adjacent nodes") of this node.
 	 */
-	public abstract List getNeighbors();
+	public abstract List getNeighbors(Actor actor);
 }

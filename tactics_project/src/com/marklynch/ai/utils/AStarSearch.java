@@ -3,6 +3,8 @@ package com.marklynch.ai.utils;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.marklynch.objects.units.Actor;
+
 /**
  * The AStarSearch class, along with the AStarNode class, implements a generic
  * A* search algorithm. The AStarNode class should be subclassed to provide
@@ -44,7 +46,7 @@ public class AStarSearch {
 	 * Find the path from the start node to the end node. A list of AStarNodes
 	 * is returned, or null if the path is not found.
 	 */
-	public List findPath(AStarNode startNode, AStarNode goalNode) {
+	public List findPath(Actor actor, AStarNode startNode, AStarNode goalNode) {
 
 		PriorityList openList = new PriorityList();
 		LinkedList closedList = new LinkedList();
@@ -62,7 +64,7 @@ public class AStarSearch {
 				return constructPath(goalNode);
 			}
 
-			List neighbors = node.getNeighbors();
+			List neighbors = node.getNeighbors(actor);
 			for (int i = 0; i < neighbors.size(); i++) {
 				AStarNode neighborNode = (AStarNode) neighbors.get(i);
 				boolean isOpen = openList.contains(neighborNode);

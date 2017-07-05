@@ -278,8 +278,8 @@ public class Actor extends GameObject {
 
 		// ASTARSEACH.FINDPATH
 
-		LinkedList<AStarNode> aStarNodesPath = (LinkedList<AStarNode>) new AStarSearch()
-				.findPath(this.squareGameObjectIsOn, target);
+		LinkedList<AStarNode> aStarNodesPath = (LinkedList<AStarNode>) new AStarSearch().findPath(this,
+				this.squareGameObjectIsOn, target);
 
 		if (aStarNodesPath != null) {
 			Vector<Square> squarePath = new Vector<Square>();

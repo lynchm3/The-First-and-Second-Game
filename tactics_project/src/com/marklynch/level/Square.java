@@ -377,15 +377,15 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		return yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
 	}
 
-	public boolean includableInPath() {
+	public boolean includableInPath(Actor actor) {
 		if (inventory.canShareSquare()) {
 
 			GameObject gameObjectDoor = inventory.getGameObjectOfClass(Door.class);
 			if (gameObjectDoor instanceof Door) {
 				Door door = (Door) gameObjectDoor;
-				if (!Game.level.activeActor.canOpenDoors) {
+				if (!actor.canOpenDoors) {
 					return false;
-				} else if (door.isLocked() && !Game.level.activeActor.hasKeyForDoor(door)) {
+				} else if (door.isLocked() && !actor.hasKeyForDoor(door)) {
 				} else {
 					return true;
 				}
@@ -402,34 +402,34 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		return false;
 	}
 
-	public Vector<Square> getAllNeighbourSquaresThatCanBeMovedTo() {
+	public Vector<Square> getAllNeighbourSquaresThatCanBeMovedTo(Actor actor) {
 		Vector<Square> squares = new Vector<Square>();
 		Square square;
 		// +1,0
 		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + 1, this.yInGrid)) {
 			square = Game.level.squares[this.xInGrid + 1][this.yInGrid];
-			if (square.includableInPath()) {
+			if (square.includableInPath(actor)) {
 				squares.add(square);
 			}
 		}
 		// -1,0
 		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid - 1, this.yInGrid)) {
 			square = Game.level.squares[this.xInGrid - 1][this.yInGrid];
-			if (square.includableInPath()) {
+			if (square.includableInPath(actor)) {
 				squares.add(square);
 			}
 		}
 		// 0,+1
 		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid + 1)) {
 			square = Game.level.squares[this.xInGrid][this.yInGrid + 1];
-			if (square.includableInPath()) {
+			if (square.includableInPath(actor)) {
 				squares.add(square);
 			}
 		}
 		// 0,-1
 		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid - 1)) {
 			square = Game.level.squares[this.xInGrid][this.yInGrid - 1];
-			if (square.includableInPath()) {
+			if (square.includableInPath(actor)) {
 				squares.add(square);
 			}
 		}
@@ -453,8 +453,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	@Override
-	public List getNeighbors() {
-		return getAllNeighbourSquaresThatCanBeMovedTo();
+	public List getNeighbors(Actor actor) {
+		return getAllNeighbourSquaresThatCanBeMovedTo(actor);
 	}
 
 	public Vector<Square> getAllSquaresAtDistance(float distance) {

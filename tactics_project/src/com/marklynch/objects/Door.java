@@ -8,20 +8,22 @@ import mdesl.graphics.Color;
 
 public class Door extends Openable {
 	float soundDampeningWhenClosed;
+	boolean blocksLineOfSightWhenClosed;
 
 	public Door(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner, boolean locked,
-			Key... keys) {
+			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
+			boolean locked, Key... keys) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner,
-				locked, keys);
+				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				owner, locked, keys);
 		soundDampeningWhenClosed = soundDampening;
+		blocksLineOfSightWhenClosed = blocksLineOfSight;
 
 	}
 
@@ -64,7 +66,7 @@ public class Door extends Openable {
 	@Override
 	public void close() {
 		open = false;
-		blocksLineOfSight = true;
+		blocksLineOfSight = blocksLineOfSightWhenClosed;
 		soundDampening = soundDampeningWhenClosed;
 	}
 
