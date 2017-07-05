@@ -45,24 +45,37 @@ public class AIRoutineForTrader extends AIRoutine {
 		this.actor.thoughtBubbleImageTexture = null;
 		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();
-		if (runFightRoutine()) {
+
+		if (runGetHelpRoutine()) {
+			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
+
+		if (runEscapeRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 
-		if (runSearchRoutine()) {
-			// createSearchLocationsBasedOnSounds();
+		if (escapeCooldown > 0) {
+			runEscapeCooldown();
+			escapeCooldown--;
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
 
-		if (searchCooldown > 0) {
-			runSearchCooldown();
-			searchCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
-			return;
-		}
+		// if (runSearchRoutine()) {
+		// // createSearchLocationsBasedOnSounds();
+		// createSearchLocationsBasedOnVisibleAttackers();
+		// return;
+		// }
+
+		// if (searchCooldown > 0) {
+		// runSearchCooldown();
+		// searchCooldown--;
+		// createSearchLocationsBasedOnVisibleAttackers();
+		// return;
+		// }
 
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {

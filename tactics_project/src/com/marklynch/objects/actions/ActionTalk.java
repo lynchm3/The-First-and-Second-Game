@@ -22,12 +22,18 @@ public class ActionTalk extends Action {
 		this.performer = talker;
 		this.target = target;
 		this.conversation = conversation;
+		if (!check()) {
+			enabled = false;
+		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
 	public void perform() {
+		if (!enabled)
+			return;
+
 		if (conversation != null) {
 
 		} else if (target == Game.level.player) {
@@ -50,6 +56,10 @@ public class ActionTalk extends Action {
 	@Override
 	public boolean check() {
 		// TODO Auto-generated method stub
+		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
+			return false;
+		}
+
 		return true;
 	}
 

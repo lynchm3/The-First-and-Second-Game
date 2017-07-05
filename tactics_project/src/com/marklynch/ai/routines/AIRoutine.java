@@ -21,9 +21,11 @@ import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionGive;
+import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.utils.MapUtil;
 
@@ -221,6 +223,54 @@ public class AIRoutine {
 			return true;
 		else
 			return false;
+	}
+
+	public boolean runGetHelpRoutine() {
+		boolean shouted = false;
+		boolean moved = false;
+
+		actor.removeHidingPlacesFromAttackers();
+		if (this.actor.hasAttackers()) {
+
+			// sort by best attack option (walk distance, dmg you can do)
+			this.actor.getAttackers().sort(AIRoutineUtils.sortAttackers);
+
+			// Go through attackers list
+			for (GameObject victimToAttackAttemptPreMove : this.actor.getAttackers()) {
+
+				// If we can see the attacker go for them
+				if (this.actor.canSeeGameObject(victimToAttackAttemptPreMove)) {
+
+					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Hunter.class, 20,
+							false, true, false, false);
+
+					if (actorNearby != null) {
+						if (this.actor.canSeeGameObject(actorNearby)) {
+							new ActionShoutForHelp(actor).perform();
+							shouted = true;
+						} else {
+							AIRoutineUtils.moveTowardsSquareToBeAdjacent(actorNearby.squareGameObjectIsOn);
+							moved = true;
+						}
+
+						actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ESCAPE, actor,
+								actorNearby.squareGameObjectIsOn);
+					}
+
+				}
+
+				if (moved || shouted)
+					break;
+			}
+		}
+
+		// Return whether we did anything or not
+		if (moved || shouted) {
+			shoutForHelpCooldown = 10;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean runEscapeRoutine() {
