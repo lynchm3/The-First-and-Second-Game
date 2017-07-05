@@ -18,8 +18,8 @@ public class Templates {
 
 	// Player
 	public static final Actor Player = new Actor("You", "Fighter", 10, 100, 10, 0, 0, 0, "red1.png", null, 1, 10, null,
-			new Inventory(), true, false, true, false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
-			0f, 0f, 0f, 90f, null, null, 80f, 80f, 73f, 22f, 80f, 80f, 80f, 80f);
+			new Inventory(), true, false, true, false, false, true, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
+			0f, 0f, 0f, 0f, 90f, null, null, 80f, 80f, 73f, 22f, 80f, 80f, 80f, 80f);
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
@@ -43,8 +43,8 @@ public class Templates {
 
 	// Special People
 	public static final Mort MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
-			new Inventory(), true, false, true, false, false, 2f, 2f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
+			new Inventory(), true, false, true, false, false, true, 2f, 2f, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+			false, 0f, 0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
@@ -129,7 +129,7 @@ public class Templates {
 			0f, 40f, null, true);
 	public static final Door DOOR = new Door("Door", 500, "door.png", null, new Inventory(), false, true, false, false,
 			true, true, 1, 1, 0.5f, 0.5f, 1f, 1f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 40f, null, false);
-	public static final Door GATE = new Door("Gate", 100, "door.png", null, new Inventory(), false, true, false, false,
+	public static final Door GATE = new Door("Gate", 100, "gate.png", null, new Inventory(), false, true, false, false,
 			false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 40f, null, false);
 	public static final Chest CHEST = new Chest("Chest", 200, "chest.png", null, new Inventory(), false, false, false,
 			false, false, true, 1, 1, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 25f, null,

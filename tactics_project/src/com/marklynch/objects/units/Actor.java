@@ -115,6 +115,8 @@ public class Actor extends GameObject {
 	public float legsAnchorX;
 	public float legsAnchorY;
 
+	public boolean canOpenDoors;
+
 	public transient Conversation conversation;
 
 	public boolean wasSwappedWithThisTurn = false;
@@ -141,11 +143,11 @@ public class Actor extends GameObject {
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
-			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean canOpenDoors, float widthRatio,
+			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
+			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
+			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight,
+			Actor owner, Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
@@ -213,6 +215,8 @@ public class Actor extends GameObject {
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			gameObject.owner = this;
 		}
+
+		this.canOpenDoors = canOpenDoors;
 	}
 
 	@Override
@@ -753,13 +757,13 @@ public class Actor extends GameObject {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
-				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
+				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
 				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance,
-				poisonResistance, weight, owner
+				poisonResistance, weight
 
-				, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX,
-				legsAnchorY);
+				, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
+				legsAnchorX, legsAnchorY);
 		return actor;
 	}
 

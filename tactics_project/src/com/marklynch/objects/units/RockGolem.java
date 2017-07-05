@@ -38,7 +38,7 @@ public class RockGolem extends Monster {
 			boolean awake) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, false, widthRatio, heightRatio,
 				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
 				owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
