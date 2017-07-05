@@ -105,7 +105,20 @@ public class Level {
 			}
 		});
 		buttons.add(endTurnButton);
-		undoButton = new LevelButton(420f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "UNDO", false,
+
+		Button centerOnPlayerButton = new LevelButton(420f, 40f, 200f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "CENTER", false, false, Color.BLACK, Color.WHITE);
+		centerOnPlayerButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.dragX = -Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + 800;
+				Game.dragY = -Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + 400;
+			}
+		});
+		centerOnPlayerButton.enabled = true;
+		buttons.add(centerOnPlayerButton);
+
+		undoButton = new LevelButton(630f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "UNDO", false,
 				false, Color.BLACK, Color.WHITE);
 		undoButton.setClickListener(new ClickListener() {
 			@Override
@@ -115,7 +128,7 @@ public class Level {
 		});
 		undoButton.enabled = false;
 		buttons.add(undoButton);
-		editorButton = new LevelButton(630f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
+		editorButton = new LevelButton(840f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
 				false, false, Color.BLACK, Color.WHITE);
 		editorButton.setClickListener(new ClickListener() {
 			@Override
