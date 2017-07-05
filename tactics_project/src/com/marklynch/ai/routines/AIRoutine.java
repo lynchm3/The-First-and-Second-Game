@@ -38,6 +38,7 @@ public class AIRoutine {
 	public GameObject target;
 	public int searchCooldown = 0;
 	public GameObject searchCooldownActor = null;
+	public int escapeCooldown = 0;
 
 	public static enum AI_TYPE {
 		FIGHTER, RUNNER, GUARD, HOSTILE, ANIMAL
@@ -238,6 +239,7 @@ public class AIRoutine {
 
 				// If we can see the attacker go for them
 				if (this.actor.canSeeGameObject(attackerToRunFrom)) {
+					canSeeAttacker = true;
 
 					// Try to attack the preference 1 target
 					if (attackerToRunFrom != null) {
@@ -260,11 +262,44 @@ public class AIRoutine {
 			} else {
 				actor.activityDescription = ACTIVITY_DESCRIPTION_RUNNING_AWAY;
 			}
+			escapeCooldown = 10;
 
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	public boolean runEscapeCooldown() {
+
+		// DOORWAYS are my biggest issue here.
+		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BEING_A_CHICKEN;
+
+		// Move Away From Last Square;
+		boolean moved = false;
+		if (actor.squareGameObjectIsOn.xInGrid > actor.lastSquare.xInGrid) {
+			Square squareToMoveTo = actor.squareGameObjectIsOn.getSquareToRightOf();
+			if (squareInBounds(squareToMoveTo))
+				moved = AIRoutineUtils.moveTowardsTargetSquare(squareToMoveTo);
+		} else if (actor.squareGameObjectIsOn.xInGrid < actor.lastSquare.xInGrid) {
+			Square squareToMoveTo = actor.squareGameObjectIsOn.getSquareToLeftOf();
+			if (squareInBounds(squareToMoveTo))
+				moved = AIRoutineUtils.moveTowardsTargetSquare(squareToMoveTo);
+		} else {
+			if (actor.squareGameObjectIsOn.yInGrid > actor.lastSquare.yInGrid) {
+				Square squareToMoveTo = actor.squareGameObjectIsOn.getSquareBelow();
+				if (squareInBounds(squareToMoveTo))
+					moved = AIRoutineUtils.moveTowardsTargetSquare(squareToMoveTo);
+			} else if (actor.squareGameObjectIsOn.yInGrid < actor.lastSquare.yInGrid) {
+				Square squareToMoveTo = actor.squareGameObjectIsOn.getSquareAbove();
+				if (squareInBounds(squareToMoveTo))
+					moved = AIRoutineUtils.moveTowardsTargetSquare(squareToMoveTo);
+			} else {
+
+			}
+		}
+
+		return false;
 	}
 
 	public boolean runSearchRoutine() {

@@ -373,7 +373,7 @@ public class AIRoutineUtils {
 			}
 		} else if (squareActorOn.yInGrid < target.squareGameObjectIsOn.yInGrid && squareActorOn.yInGrid > 0) {
 			ActionMove actionMove = new ActionMove(Game.level.activeActor,
-					Game.level.squares[squareActorOn.xInGrid + 1][squareActorOn.yInGrid - 1], false);
+					Game.level.squares[squareActorOn.xInGrid][squareActorOn.yInGrid - 1], false);
 			if (actionMove.check()) {
 				actionMove.perform();
 				return true;
