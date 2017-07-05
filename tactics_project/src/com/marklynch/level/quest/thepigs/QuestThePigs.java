@@ -57,7 +57,6 @@ public class QuestThePigs extends Quest {
 
 		// Bow on the ground
 		Templates.HUNTING_BOW.makeCopy(Game.level.squares[33][73], null);
-
 		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[34][73], null);
 		// Bed farmersBed = Templates.BED.makeCopy(Game.level.squares[3][3]);
 		// farmersBed.quest = this;

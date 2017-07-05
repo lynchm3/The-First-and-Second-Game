@@ -676,13 +676,21 @@ public class Actor extends GameObject {
 		}
 
 		if (thoughtBubbleImageTexture != null) {
-			int expressionPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX);
+
+			int expressionWidth = 32;
+			int expressionHeight = 32;
+			int realTextureWidth = thoughtBubbleImageTexture.getWidth();
+			int realTextureHeight = thoughtBubbleImageTexture.getHeight();
+			if (realTextureWidth >= realTextureHeight) {// knife
+				expressionHeight = 32 * realTextureHeight / realTextureWidth;
+			} else {
+				expressionWidth = 32 * realTextureWidth / realTextureHeight;
+			}
+
+			int expressionPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+					+ (32 - expressionWidth / 2);
 			int expressionPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY);
-			expressionPositionYInPixels -= 128;
-			int expressionWidth = 128;
-			int expressionHeight = 128;
+					+ drawOffsetY - expressionHeight);
 			float alpha = 1.0f;
 
 			// TextureUtils.skipNormals = true;
