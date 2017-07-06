@@ -30,9 +30,6 @@ public class AILine {
 		// TODO Auto-generated method stub
 		float x1 = this.source.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
 		float y1 = this.source.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
-		// System.out.println("target = " + target);
-		// System.out.println("target.squareGameObjectIsOn = " +
-		// target.squareGameObjectIsOn);
 		float x2 = this.target.xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
 		float y2 = this.target.yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
 

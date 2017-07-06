@@ -97,16 +97,11 @@ public class AIRoutineUtils {
 		GameObject result = null;
 		int costToBest = Integer.MAX_VALUE;
 
-		// System.out.println("A");
 		if (checkActors) {
-			// System.out.println("B");
 			for (Square squareActorIsOn : squaresInRange) {
-				// System.out.println("C");
 				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
 				if (actor != null) {
-					// System.out.println("D");
 					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, false)) {
-						// System.out.println("E");
 						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {

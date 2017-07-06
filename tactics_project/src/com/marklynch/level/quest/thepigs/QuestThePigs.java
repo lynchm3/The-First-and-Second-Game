@@ -17,7 +17,9 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Farmer;
 import com.marklynch.objects.units.Pig;
+import com.marklynch.objects.weapons.Weapon;
 
 public class QuestThePigs extends Quest {
 
@@ -27,7 +29,8 @@ public class QuestThePigs extends Quest {
 
 	// Actors
 	Pig larry, wendy, jane, steve, prescilla;
-	// Farmer farmer;
+	Farmer farmer;
+	Weapon hoe;
 
 	// GameObjects
 	// Mud mud;
@@ -53,6 +56,13 @@ public class QuestThePigs extends Quest {
 		steve.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		prescilla = Templates.PIG.makeCopy("Prescilla", Game.level.squares[31][80], Game.level.factions.get(1), null);
 		prescilla.inventory.add(Templates.CLEAVER.makeCopy(null, null));
+
+		// Farmer
+		farmer = Templates.FARMER.makeCopy(Game.level.squares[28][70], Game.level.factions.get(1), null);
+		farmer.quest = this;
+		hoe = Templates.HOE.makeCopy(null, farmer);
+		farmer.inventory.add(hoe);
+		conversationForFarmer = new ConversationForFarmer(this, farmer);
 
 		// trees
 		// cute, larry owns the tree
@@ -107,10 +117,15 @@ public class QuestThePigs extends Quest {
 
 	@Override
 	public Conversation getConversation(Actor actor) {
-		// if (actor == farmer) {
-		// conversationForFarmer.setup();
-		// return conversationForFarmer;
-		// }
+		System.out.println("QuestThePigs.getConversation");
+		System.out.println("actor = " + actor);
+		System.out.println("farmer = " + farmer);
+		if (actor == farmer) {
+			conversationForFarmer.setup();
+			System.out.println("returning conversation");
+			return conversationForFarmer;
+		}
+		System.out.println("returning null");
 		return null;
 	}
 }

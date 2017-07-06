@@ -14,7 +14,6 @@ import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
-import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
@@ -69,7 +68,6 @@ public class AIRoutine {
 		if (this.actor.hasAttackers()) {
 			for (GameObject attacker : this.actor.getAttackers()) {
 				if (this.actor.canSeeGameObject(attacker)) {
-					System.out.println("Adding search for visible attacker");
 					this.actor.addInvestigation(attacker, attacker.squareGameObjectIsOn,
 							Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 				}
@@ -86,7 +84,6 @@ public class AIRoutine {
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				if (!crime.resolved) {
 					if (this.actor.canSeeGameObject(criminal)) {
-						System.out.println("Adding search for visible criminal");
 						this.actor.addInvestigation(criminal, criminal.squareGameObjectIsOn,
 								Investigation.INVESTIGATION_PRIORITY_CRIME_SEEN);
 					}
@@ -145,22 +142,14 @@ public class AIRoutine {
 			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
 					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
 
-				// if (sound.actionType == ActionShoutForHelp.class) {
-				// System.out.println("Adding search for shout for help");
-				// this.actor.addInvestigation(sound.sourceActor,
-				// sound.sourceSquare,
-				// Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
-				// } else
 				if (sound.actionType == ActionShoutForHelp.class) {
 					this.actor.addInvestigation(sound.sourceObject, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 					this.actor.attackers.add(sound.sourceObject);
 				} else if (!sound.legal) {
-					System.out.println("Adding search for illegal sound");
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 				} else if (!classesArrayList.contains(sound.sourceObject.getClass())) {
-					System.out.println("Adding search for legal sound");
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 				}
@@ -395,17 +384,6 @@ public class AIRoutine {
 			this.actor.investigationsMap.remove(gameObjectToRemove);
 		}
 
-		// Some logging...
-		if (actor instanceof Mort) {
-			System.out.println("RunSearchRoutine()");
-
-			for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
-				System.out.println("In search list - " + actorToSearchFor + " @ "
-						+ this.actor.investigationsMap.get(actorToSearchFor).square.xInGrid + ","
-						+ this.actor.investigationsMap.get(actorToSearchFor).square.yInGrid);
-			}
-		}
-
 		// Sort list by priority
 		MapUtil.sortByValue(this.actor.investigationsMap);
 
@@ -516,10 +494,6 @@ public class AIRoutine {
 	}
 
 	public boolean runSearchCooldown() {
-
-		if (actor instanceof Mort) {
-			System.out.println("runSearchCooldown()");
-		}
 
 		// DOORWAYS are my biggest issue here.
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
@@ -808,8 +782,6 @@ public class AIRoutine {
 				AIRoutineUtils.moveTowardsTargetSquare(lastLocationSeenActorToKeepTrackOf);
 
 				if (actor.squareGameObjectIsOn == lastLocationSeenActorToKeepTrackOf) {
-
-					System.out.println("Adding search for keep track of");
 					this.actor.addInvestigation(target, lastLocationSeenActorToKeepTrackOf,
 							Investigation.INVESTIGATION_PRIORITY_KEEP_TRACK);
 					lastLocationSeenActorToKeepTrackOf = null;
@@ -834,25 +806,18 @@ public class AIRoutine {
 		if (keepInBounds == false)
 			return true;
 
-		System.out.println("square.structureSectionSquareIsIn = " + square.structureSectionSquareIsIn);
-
 		for (StructureSection section : sectionBounds) {
-			System.out.println("section = " + section);
 			if (square.structureSectionSquareIsIn == section) {
 				return true;
 			}
 		}
 
-		System.out.println("square.structureRoomSquareIsIn = " + square.structureRoomSquareIsIn);
 		for (StructureRoom room : roomBounds) {
-			System.out.println("room = " + room);
 			if (square.structureRoomSquareIsIn == room) {
 				return true;
 			}
 		}
 
-		// System.out.println("square.structureSectionSquareIsIn = "
-		// +square.structureSectionSquareIsIn);
 		for (Square legitSquare : squareBounds) {
 			if (square == legitSquare) {
 				return true;

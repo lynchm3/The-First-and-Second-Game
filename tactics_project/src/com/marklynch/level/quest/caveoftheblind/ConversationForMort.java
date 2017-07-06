@@ -284,6 +284,8 @@ public class ConversationForMort extends Conversation {
 
 		// I'll show you
 		illShowYou.setConversationResponses(new ConversationResponse[] { conversationReponseEnd });
+
+		this.currentConversationPart = this.openingConversationPart;
 	}
 
 }

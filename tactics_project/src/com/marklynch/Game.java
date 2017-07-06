@@ -32,11 +32,12 @@ public class Game {
 	public static boolean fullVisiblity = true;
 	public static boolean redHighlightOnRestrictedSquares = true;
 
-	// Shop
-	public static int playerStartPosX = 3;
-	public static int playerStartPosY = 3;
+	// PLAYER START POSITION
 
-	// Player start pos
+	// Shop
+	// public static int playerStartPosX = 3;
+	// public static int playerStartPosY = 3;
+
 	// Dining room
 	// public static int playerStartPosX = 93;
 	// public static int playerStartPosY = 52;
@@ -46,10 +47,10 @@ public class Game {
 	// public static int playerStartPosY = 46;
 
 	// Farm
-	// public static int playerStartPosX = 30;
-	// public static int playerStartPosY = 70;
+	public static int playerStartPosX = 30;
+	public static int playerStartPosY = 70;
 
-	// Camera positions
+	// CAMERA START POSITION
 
 	// 0,0
 	// public static float dragX = 0;
