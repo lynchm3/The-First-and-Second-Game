@@ -105,7 +105,7 @@ public class AIRoutineUtils {
 				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
 				if (actor != null) {
 					// System.out.println("D");
-					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects)) {
+					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, false)) {
 						// System.out.println("E");
 						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
 						Path path = Game.level.activeActor.getPathTo(square);
@@ -126,7 +126,7 @@ public class AIRoutineUtils {
 				ArrayList<GameObject> gameObjectsOnSquare = squareGameObjectIsOn.inventory.getGameObjects();
 				for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
 					if (!(gameObjectOnSquare instanceof Actor)
-							&& passesChecks(gameObjectOnSquare, clazz, fitsInInventory, mustContainObjects)) {
+							&& passesChecks(gameObjectOnSquare, clazz, fitsInInventory, mustContainObjects, false)) {
 						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObjectOnSquare, 1f);
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {
@@ -156,7 +156,7 @@ public class AIRoutineUtils {
 			for (Square squareActorIsOn : squaresInRange) {
 				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
 				if (actor != null) {
-					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects)) {
+					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, false)) {
 						Square square = calculateSquareToMoveToToAttackTarget(actor);
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {
@@ -176,7 +176,7 @@ public class AIRoutineUtils {
 				ArrayList<GameObject> gameObjectsOnSquare = squareGameObjectIsOn.inventory.getGameObjects();
 				for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
 					if (!(gameObjectOnSquare instanceof Actor)
-							&& passesChecks(gameObjectOnSquare, clazz, fitsInInventory, mustContainObjects)) {
+							&& passesChecks(gameObjectOnSquare, clazz, fitsInInventory, mustContainObjects, false)) {
 						Square square = calculateSquareToMoveToToAttackTarget(gameObjectOnSquare);
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {
@@ -193,10 +193,10 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean passesChecks(GameObject gameObject, Class clazz, boolean fitsInInventory,
-			boolean mustContainsObjects) {
+			boolean mustContainsObjects, boolean ignoreQuestObjects) {
 
-		// if (gameObject.quest != null)
-		// return false;
+		if (ignoreQuestObjects && gameObject.quest != null)
+			return false;
 
 		if (gameObject.remainingHealth <= 0)
 			return false;
