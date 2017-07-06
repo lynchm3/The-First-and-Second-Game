@@ -2,6 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -11,11 +12,13 @@ public class ActionShoutForHelp extends Action {
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
+	GameObject attacker;
 
 	// Default for hostiles
-	public ActionShoutForHelp(Actor attacker) {
+	public ActionShoutForHelp(Actor performer, GameObject attacker) {
 		super(ACTION_NAME, "action_scream.png");
-		this.performer = attacker;
+		this.performer = performer;
+		this.attacker = attacker;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -50,7 +53,8 @@ public class ActionShoutForHelp extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, performer, performer.squareGameObjectIsOn, 20, legal, this.getClass());
+		return new Sound(performer, attacker, performer.investigationsMap.get(attacker).square, 20, legal,
+				this.getClass());
 	}
 
 }

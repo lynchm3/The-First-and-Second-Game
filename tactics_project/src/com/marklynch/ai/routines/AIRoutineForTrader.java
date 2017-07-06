@@ -51,6 +51,13 @@ public class AIRoutineForTrader extends AIRoutine {
 			return;
 		}
 
+		if (shoutForHelpCooldown > 0) {
+			runEscapeCooldown(true);
+			shoutForHelpCooldown--;
+			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
+
 		if (runEscapeRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
@@ -58,7 +65,7 @@ public class AIRoutineForTrader extends AIRoutine {
 		}
 
 		if (escapeCooldown > 0) {
-			runEscapeCooldown();
+			runEscapeCooldown(false);
 			escapeCooldown--;
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;

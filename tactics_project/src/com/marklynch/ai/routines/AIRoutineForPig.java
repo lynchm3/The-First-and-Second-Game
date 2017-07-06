@@ -51,7 +51,7 @@ public class AIRoutineForPig extends AIRoutine {
 		}
 
 		if (escapeCooldown > 0) {
-			runEscapeCooldown();
+			runEscapeCooldown(false);
 			escapeCooldown--;
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;

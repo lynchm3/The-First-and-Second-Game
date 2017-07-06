@@ -95,7 +95,12 @@ public abstract class Action {
 			if (action.sound != null)
 				loudness = action.sound.loudness;
 			ActionTrespass actionTrespass = new ActionTrespass(performer, square, loudness);
-			Crime crime = new Crime(actionTrespass, performer, square.owners.get(0), 0);
+			Crime crime = null;
+			if (square.owners.size() > 0)
+				crime = new Crime(actionTrespass, performer, square.owners.get(0), 0);
+			else
+				crime = new Crime(actionTrespass, performer, null, 0);
+
 			performer.crimesPerformedThisTurn.add(crime);
 			performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

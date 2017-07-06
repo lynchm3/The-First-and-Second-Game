@@ -18,7 +18,7 @@ public class Sound {
 	public ArrayList<Square> destinationSquares;
 	public float loudness;
 	public boolean legal;
-	public Class action;
+	public Class actionType;
 
 	public Sound(Actor sourceActor, GameObject sourceObject, Square sourceSquare, float loudness, boolean legal,
 			Class action) {
@@ -28,7 +28,7 @@ public class Sound {
 		this.sourceSquare = sourceSquare;
 		this.loudness = loudness;
 		this.legal = legal;
-		this.action = action;
+		this.actionType = action;
 
 		createDestinationSounds();
 

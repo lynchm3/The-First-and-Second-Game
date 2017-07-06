@@ -34,13 +34,16 @@ public class AIRoutine {
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
 	final String ACTIVITY_DESCRIPTION_BEING_A_CHICKEN = "Being a chicken";
-	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Being a chicken";
+	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
+	final String ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP = "Shouting for help";
 
 	public Actor actor;
 	public GameObject target;
 	public int searchCooldown = 0;
 	public GameObject searchCooldownActor = null;
 	public int escapeCooldown = 0;
+	public int shoutForHelpCooldown = 0;
+	public GameObject escapeCooldownAttacker = null;
 
 	public static enum AI_TYPE {
 		FIGHTER, RUNNER, GUARD, HOSTILE, ANIMAL
@@ -142,7 +145,17 @@ public class AIRoutine {
 			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
 					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
 
-				if (!sound.legal) {
+				// if (sound.actionType == ActionShoutForHelp.class) {
+				// System.out.println("Adding search for shout for help");
+				// this.actor.addInvestigation(sound.sourceActor,
+				// sound.sourceSquare,
+				// Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
+				// } else
+				if (sound.actionType == ActionShoutForHelp.class) {
+					this.actor.addInvestigation(sound.sourceObject, sound.sourceSquare,
+							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
+					this.actor.attackers.add(sound.sourceObject);
+				} else if (!sound.legal) {
 					System.out.println("Adding search for illegal sound");
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
@@ -151,6 +164,7 @@ public class AIRoutine {
 					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 				}
+
 			}
 		}
 	}
@@ -226,7 +240,6 @@ public class AIRoutine {
 	}
 
 	public boolean runGetHelpRoutine() {
-		boolean shouted = false;
 		boolean moved = false;
 
 		actor.removeHidingPlacesFromAttackers();
@@ -236,36 +249,40 @@ public class AIRoutine {
 			this.actor.getAttackers().sort(AIRoutineUtils.sortAttackers);
 
 			// Go through attackers list
-			for (GameObject victimToAttackAttemptPreMove : this.actor.getAttackers()) {
+			for (GameObject attacker : this.actor.getAttackers()) {
 
 				// If we can see the attacker go for them
-				if (this.actor.canSeeGameObject(victimToAttackAttemptPreMove)) {
+				if (this.actor.canSeeGameObject(attacker)) {
+					new ActionShoutForHelp(actor, attacker).perform();
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
 
 					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Hunter.class, 20,
 							false, true, false, false);
 
+					// if (this.actor.canSeeGameObject(actorNearby)) {
+					// } else {
 					if (actorNearby != null) {
-						if (this.actor.canSeeGameObject(actorNearby)) {
-							new ActionShoutForHelp(actor).perform();
-							shouted = true;
-						} else {
-							AIRoutineUtils.moveTowardsSquareToBeAdjacent(actorNearby.squareGameObjectIsOn);
-							moved = true;
-						}
-
-						actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ESCAPE, actor,
-								actorNearby.squareGameObjectIsOn);
+						AIRoutineUtils.moveTowardsSquareToBeAdjacent(actorNearby.squareGameObjectIsOn);
+						moved = true;
+						this.escapeCooldownAttacker = attacker;
 					}
+					// }
 
+					actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ESCAPE, actor,
+							actorNearby.squareGameObjectIsOn);
 				}
 
-				if (moved || shouted)
+				if (moved)
 					break;
+
 			}
 		}
 
 		// Return whether we did anything or not
-		if (moved || shouted) {
+		if (moved)
+
+		{
+			// shoutForHelpCooldown = 10;
 			shoutForHelpCooldown = 10;
 			return true;
 		} else {
@@ -320,10 +337,14 @@ public class AIRoutine {
 		}
 	}
 
-	public boolean runEscapeCooldown() {
+	public boolean runEscapeCooldown(boolean shout) {
 
 		// DOORWAYS are my biggest issue here.
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BEING_A_CHICKEN;
+		if (shout) {
+			new ActionShoutForHelp(actor, escapeCooldownAttacker).perform();
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
+		}
 
 		// Move Away From Last Square;
 		boolean moved = false;

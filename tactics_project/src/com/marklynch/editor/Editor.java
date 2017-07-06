@@ -45,7 +45,6 @@ import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
-import com.marklynch.objects.Window;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Trader;
@@ -454,44 +453,62 @@ public class Editor {
 		shopFeatures.add(Templates.DOOR.makeCopy("Shop Door", Game.level.squares[5][4], false, trader));
 		shopFeatures.add(Templates.DOOR.makeCopy("Private Quarters Door", Game.level.squares[11][4], false, trader));
 
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[7][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[9][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[10][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[12][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[13][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[15][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[16][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
-		shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5], trader));
-		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[6][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, 100f, trader));
-		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[7][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, 100f, trader));
-		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[9][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, 100f, trader));
-		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[10][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, 100f, trader));
-		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[12][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, 100f, trader));
-		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[13][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, 100f, trader));
-		shopFeatures.add(new Window("Shop Window", 10, "window_left.png", Game.level.squares[15][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, 100f, trader));
-		shopFeatures.add(new Window("Shop Window", 10, "window_right.png", Game.level.squares[16][5], new Inventory(),
-				false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, 100f, trader));
+		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5],
+		// trader));
+		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[7][5],
+		// trader));
+		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[9][5],
+		// trader));
+		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[10][5],
+		// trader));
+		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[12][5],
+		// trader));
+		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[13][5],
+		// trader));
+		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[15][5],
+		// trader));
+		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[16][5],
+		// trader));
+		// shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
+		// Game.level.squares[6][5], new Inventory(),
+		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
+		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+		// 0f, 0f, 100f, trader));
+		// shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
+		// Game.level.squares[7][5], new Inventory(),
+		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
+		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+		// 0f, 0f, 100f, trader));
+		// shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
+		// Game.level.squares[9][5], new Inventory(),
+		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
+		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+		// 0f, 0f, 100f, trader));
+		// shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
+		// Game.level.squares[10][5], new Inventory(),
+		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
+		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+		// 0f, 0f, 100f, trader));
+		// shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
+		// Game.level.squares[12][5], new Inventory(),
+		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
+		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+		// 0f, 0f, 100f, trader));
+		// shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
+		// Game.level.squares[13][5], new Inventory(),
+		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
+		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+		// 0f, 0f, 100f, trader));
+		// shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
+		// Game.level.squares[15][5], new Inventory(),
+		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
+		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+		// 0f, 0f, 100f, trader));
+		// shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
+		// Game.level.squares[16][5], new Inventory(),
+		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
+		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
+		// 0f, 0f, 100f, trader));
 
 		Game.level.squares[4][4].imageTexturePath = "stone.png";
 		Game.level.squares[4][4].loadImages();
