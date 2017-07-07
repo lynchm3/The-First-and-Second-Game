@@ -465,10 +465,18 @@ public class Level {
 
 			Game.squareMouseIsOver.drawDefaultAction();
 			player.squareGameObjectIsOn.drawDefaultAction();
-			player.squareGameObjectIsOn.getSquareToLeftOf().drawDefaultAction();
-			player.squareGameObjectIsOn.getSquareToRightOf().drawDefaultAction();
-			player.squareGameObjectIsOn.getSquareAbove().drawDefaultAction();
-			player.squareGameObjectIsOn.getSquareBelow().drawDefaultAction();
+
+			if (player.squareGameObjectIsOn.getSquareToLeftOf() != null)
+				player.squareGameObjectIsOn.getSquareToLeftOf().drawDefaultAction();
+
+			if (player.squareGameObjectIsOn.getSquareToRightOf() != null)
+				player.squareGameObjectIsOn.getSquareToRightOf().drawDefaultAction();
+
+			if (player.squareGameObjectIsOn.getSquareAbove() != null)
+				player.squareGameObjectIsOn.getSquareAbove().drawDefaultAction();
+
+			if (player.squareGameObjectIsOn.getSquareBelow() != null)
+				player.squareGameObjectIsOn.getSquareBelow().drawDefaultAction();
 
 		}
 
