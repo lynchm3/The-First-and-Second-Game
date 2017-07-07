@@ -93,7 +93,7 @@ public class AIRoutineForTrader extends AIRoutine {
 
 		// 1. pick up loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(GameObject.class, 5f, true, false, true,
-				false);
+				false, true, true);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;

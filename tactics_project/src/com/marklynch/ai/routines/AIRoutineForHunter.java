@@ -84,7 +84,7 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		// 1. loot dead animals
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Carcass.class, 5f, false, false, true,
-				true);
+				true, true, true);
 		if (carcass != null) {
 			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
@@ -99,7 +99,7 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		// 1. pick up loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(GameObject.class, 5f, true, false, true,
-				false);
+				false, true, true);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
@@ -125,7 +125,8 @@ public class AIRoutineForHunter extends AIRoutine {
 		{
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfAttack(WildAnimal.class, 0, false, true, false, false);
+			target = AIRoutineUtils.getNearestForPurposeOfAttack(WildAnimal.class, 0, false, true, false, false, false,
+					true);
 			if (target == null) {
 				if (this.actor.inventory.contains(Junk.class)) {
 					huntState = HUNT_STATE.PICK_SHOP_KEEPER;
@@ -154,7 +155,8 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (huntState == HUNT_STATE.PICK_SHOP_KEEPER) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Trader.class, 0, false, true, false, false);
+			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Trader.class, 0, false, true, false, false,
+					false, false);
 			if (target == null) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else {

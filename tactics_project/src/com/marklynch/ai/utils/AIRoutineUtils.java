@@ -88,7 +88,8 @@ public class AIRoutineUtils {
 	}
 
 	public static GameObject getNearestForPurposeOfBeingAdjacent(Class clazz, float maxDistance,
-			boolean fitsInInventory, boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects) {
+			boolean fitsInInventory, boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects,
+			boolean mustBeUnowned, boolean ignoreQuestObjects) {
 
 		// GameObject.class, 5f, true, false, true, false
 
@@ -101,7 +102,8 @@ public class AIRoutineUtils {
 			for (Square squareActorIsOn : squaresInRange) {
 				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
 				if (actor != null) {
-					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, false)) {
+					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
+							ignoreQuestObjects)) {
 						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {
@@ -120,8 +122,8 @@ public class AIRoutineUtils {
 			for (Square squareGameObjectIsOn : squaresInRange) {
 				ArrayList<GameObject> gameObjectsOnSquare = squareGameObjectIsOn.inventory.getGameObjects();
 				for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
-					if (!(gameObjectOnSquare instanceof Actor)
-							&& passesChecks(gameObjectOnSquare, clazz, fitsInInventory, mustContainObjects, false)) {
+					if (!(gameObjectOnSquare instanceof Actor) && passesChecks(gameObjectOnSquare, clazz,
+							fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
 						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObjectOnSquare, 1f);
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {
@@ -138,7 +140,8 @@ public class AIRoutineUtils {
 	}
 
 	public static GameObject getNearestForPurposeOfAttack(Class clazz, float maxDistance, boolean fitsInInventory,
-			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects) {
+			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
+			boolean ignoreQuestObjects) {
 
 		// GameObject.class, 5f, true, false, true, false
 
@@ -151,7 +154,8 @@ public class AIRoutineUtils {
 			for (Square squareActorIsOn : squaresInRange) {
 				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
 				if (actor != null) {
-					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, false)) {
+					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
+							ignoreQuestObjects)) {
 						Square square = calculateSquareToMoveToToAttackTarget(actor);
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {
@@ -170,8 +174,8 @@ public class AIRoutineUtils {
 			for (Square squareGameObjectIsOn : squaresInRange) {
 				ArrayList<GameObject> gameObjectsOnSquare = squareGameObjectIsOn.inventory.getGameObjects();
 				for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
-					if (!(gameObjectOnSquare instanceof Actor)
-							&& passesChecks(gameObjectOnSquare, clazz, fitsInInventory, mustContainObjects, false)) {
+					if (!(gameObjectOnSquare instanceof Actor) && passesChecks(gameObjectOnSquare, clazz,
+							fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
 						Square square = calculateSquareToMoveToToAttackTarget(gameObjectOnSquare);
 						Path path = Game.level.activeActor.getPathTo(square);
 						if (path != null && path.travelCost < costToBest) {
@@ -188,9 +192,12 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean passesChecks(GameObject gameObject, Class clazz, boolean fitsInInventory,
-			boolean mustContainsObjects, boolean ignoreQuestObjects) {
+			boolean mustContainsObjects, boolean mustBeUnowned, boolean ignoreQuestObjects) {
 
 		if (ignoreQuestObjects && gameObject.quest != null)
+			return false;
+
+		if (mustBeUnowned && gameObject.owner != null)
 			return false;
 
 		if (gameObject.remainingHealth <= 0)
