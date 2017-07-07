@@ -51,8 +51,19 @@ public class InventorySquare extends Square {
 		TextureUtils.drawTexture(imageTexture, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
 				yInPixels + Game.SQUARE_HEIGHT);
 		if (gameObject != null) {
-			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
-					yInPixels + Game.SQUARE_HEIGHT);
+
+			float drawWidth = Game.SQUARE_WIDTH;
+			float drawHeight = Game.SQUARE_HEIGHT;
+			float realTextureWidth = gameObject.imageTexture.getWidth();
+			float realTextureHeight = gameObject.imageTexture.getHeight();
+			if (realTextureWidth >= realTextureHeight) {// knife
+				drawHeight = 64 * realTextureHeight / realTextureWidth;
+			} else {
+				drawWidth = 64 * realTextureWidth / realTextureHeight;
+			}
+			// TextureUtils.skipNormals = false;
+			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, xInPixels + drawWidth, yInPixels,
+					yInPixels + drawHeight);
 		}
 
 	}

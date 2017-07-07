@@ -254,11 +254,12 @@ public class AIRoutine {
 						AIRoutineUtils.moveTowardsSquareToBeAdjacent(actorNearby.squareGameObjectIsOn);
 						moved = true;
 						this.escapeCooldownAttacker = attacker;
+
+						actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ESCAPE, actor,
+								actorNearby.squareGameObjectIsOn);
 					}
 					// }
 
-					actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ESCAPE, actor,
-							actorNearby.squareGameObjectIsOn);
 				}
 
 				if (moved)
