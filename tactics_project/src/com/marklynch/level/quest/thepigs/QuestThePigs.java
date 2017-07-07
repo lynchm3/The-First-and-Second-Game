@@ -23,9 +23,17 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class QuestThePigs extends Quest {
 
-	// Structure sections
+	// Pen
 	StructureSection penSection;
 	StructureRoom penRoom;
+
+	// Farmhouse
+	StructureSection farmHouseFrontSection;
+	StructureSection farmHouseBackSection;
+	StructureRoom farmHouseFrontRoom;
+	StructureRoom farmHouseStorageRoom;
+	StructureRoom farmHouseBedroom;
+	StructureRoom farmHouseHallRoom;
 
 	// Actors
 	Pig larry, wendy, jane, steve, prescilla;
@@ -82,27 +90,76 @@ public class QuestThePigs extends Quest {
 		// // Conversations
 		// conversationForFarmer = new ConversationForFarmer(this);
 
-		// Structure
-		ArrayList<Wall> farmWalls = new ArrayList<Wall>();
-		ArrayList<GameObject> farmFeatures = new ArrayList<GameObject>();
-		ArrayList<StructurePath> farmPaths = new ArrayList<StructurePath>();
-		ArrayList<StructureSection> farmSections = new ArrayList<StructureSection>();
-		ArrayList<StructureRoom> farmRooms = new ArrayList<StructureRoom>();
-		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
+		// Pig pen
+		ArrayList<Wall> pigPenWalls = new ArrayList<Wall>();
+		ArrayList<GameObject> pigPenFeatures = new ArrayList<GameObject>();
+		ArrayList<StructurePath> pigPenPaths = new ArrayList<StructurePath>();
+		ArrayList<StructureSection> pigPenSections = new ArrayList<StructureSection>();
+		ArrayList<StructureRoom> pigPenRooms = new ArrayList<StructureRoom>();
+		ArrayList<Square> pigPenSquaresToRemove = new ArrayList<Square>();
 
 		// gate
 		Door gate = Templates.GATE.makeCopy("Gate", Game.level.squares[32][72], false, larry);
-		farmFeatures.add(gate);
+		pigPenFeatures.add(gate);
 
 		penSection = new StructureSection("Pen", 28, 72, 46, 82, false, larry);
 		penRoom = new StructureRoom("Pen", 29, 73, false, new ArrayList<Actor>(), new RoomPart(29, 73, 45, 81));
 
-		farmSections.add(penSection);
-		farmRooms.add(penRoom);
+		pigPenSections.add(penSection);
+		pigPenRooms.add(penRoom);
 
-		Game.level.structures
-				.add(new Structure("Pen", farmSections, farmRooms, farmPaths, farmFeatures, new ArrayList<Square>(),
-						null, 0, 0, 0, 0, true, larry, squaresToRemove, farmWalls, Templates.FENCE, "mud.png"));
+		Game.level.structures.add(
+				new Structure("Pen", pigPenSections, pigPenRooms, pigPenPaths, pigPenFeatures, new ArrayList<Square>(),
+						null, 0, 0, 0, 0, true, larry, pigPenSquaresToRemove, pigPenWalls, Templates.FENCE, "mud.png"));
+
+		// Farm house 2,69 -> 24,85
+		ArrayList<Wall> farmHouseWalls = new ArrayList<Wall>();
+		ArrayList<GameObject> farmHouseFeatures = new ArrayList<GameObject>();
+		ArrayList<StructurePath> farmHousePaths = new ArrayList<StructurePath>();
+		ArrayList<StructureSection> farmHouseSections = new ArrayList<StructureSection>();
+		ArrayList<StructureRoom> farmHouseRooms = new ArrayList<StructureRoom>();
+		ArrayList<Square> farmHouseSquaresToRemove = new ArrayList<Square>();
+
+		// Farm house door
+		Door farmHouseFrontDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[18][69], false, farmer);
+		farmHouseFeatures.add(farmHouseFrontDoor);
+		Door farmHouseHallDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[18][75], false, farmer);
+		farmHouseFeatures.add(farmHouseHallDoor);
+		Door farmHouseStorageDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][78], false, farmer);
+		farmHouseFeatures.add(farmHouseStorageDoor);
+		Door farmHouseBedroomDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[17][78], false, farmer);
+		farmHouseFeatures.add(farmHouseBedroomDoor);
+		Door farmHouseBackDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][85], false, farmer);
+		farmHouseFeatures.add(farmHouseBackDoor);
+
+		farmHouseFrontSection = new StructureSection("Farm House", 12, 69, 24, 74, false, farmer);
+		farmHouseBackSection = new StructureSection("Farm House", 2, 75, 24, 85, false, farmer);
+		farmHouseFrontRoom = new StructureRoom("Kitchen", 12, 70, false, new ArrayList<Actor>(),
+				new RoomPart(13, 70, 23, 74));
+		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, new ArrayList<Actor>(),
+				new RoomPart(3, 76, 23, 77));
+		farmHouseBedroom = new StructureRoom("Bedroom", 3, 79, false, new ArrayList<Actor>(),
+				new RoomPart(3, 79, 17, 84));
+		farmHouseStorageRoom = new StructureRoom("Storage", 19, 79, false, new ArrayList<Actor>(),
+				new RoomPart(19, 79, 23, 84));
+
+		farmHouseSections.add(farmHouseFrontSection);
+		farmHouseSections.add(farmHouseBackSection);
+		farmHouseRooms.add(farmHouseFrontRoom);
+		farmHouseRooms.add(farmHouseHallRoom);
+		farmHouseRooms.add(farmHouseBedroom);
+		farmHouseRooms.add(farmHouseStorageRoom);
+
+		Game.level.structures.add(new Structure("Farm House", farmHouseSections, farmHouseRooms, farmHousePaths,
+				farmHouseFeatures, new ArrayList<Square>(), null, 0, 0, 0, 0, true, farmer, farmHouseSquaresToRemove,
+				farmHouseWalls, Templates.WALL, "stone.png"));
+
+		Templates.SHELF.makeCopy(Game.level.squares[14][69], farmer);
+		Templates.SHELF.makeCopy(Game.level.squares[15][69], farmer);
+		Templates.FURNACE.makeCopy(Game.level.squares[13][72], farmer);
+		GameObject pigSign = Templates.PIG_SIGN.makeCopy(Game.level.squares[25][70], farmer);
+		pigSign.drawOffsetX = -16;
+
 	}
 
 	@Override
