@@ -145,7 +145,7 @@ public class Actor extends GameObject {
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean canOpenDoors, boolean canEquipWeapons,
-			float widthRatio, float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit,
+			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float iceResistance, float electricResistance,
 			float poisonResistance, float weight, Actor owner, Faction faction, float handAnchorX, float handAnchorY,
@@ -153,7 +153,7 @@ public class Actor extends GameObject {
 			float legsAnchorY) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
-				soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
 				owner);
 		this.strength = strength;
@@ -208,9 +208,6 @@ public class Actor extends GameObject {
 		this.bodyAnchorY = bodyAnchorY;
 		this.legsAnchorX = legsAnchorX;
 		this.legsAnchorY = legsAnchorY;
-
-		drawOffsetX = -32;
-		drawOffsetY = -64;
 
 		this.lastSquare = this.squareGameObjectIsOn;
 
@@ -785,7 +782,7 @@ public class Actor extends GameObject {
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, canOpenDoors,
-				canEquipWeapons, widthRatio, heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting,
+				canEquipWeapons, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
 				electricResistance, poisonResistance, weight
 

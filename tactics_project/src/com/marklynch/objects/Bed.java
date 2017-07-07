@@ -18,12 +18,12 @@ public class Bed extends GameObject {
 	public Bed(String name, int health, String imagePath, String imagePathCovers, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
-			float heightRatio, float soundHandleX, float soundHandleY, float soundWhenHit, float soundWhenHitting,
+			float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting,
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
 			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
-				heightRatio, soundHandleX, soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light,
+				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
 		this.imagePathCovers = imagePathCovers;
 		loadCoverImage();
@@ -36,7 +36,7 @@ public class Bed extends GameObject {
 	public Bed makeCopy(Square square) {
 		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY,
+				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, iceResistance, electricResistance, poisonResistance, weight, null);
 	}
@@ -45,7 +45,7 @@ public class Bed extends GameObject {
 	public Bed makeCopy(Square square, Actor owner) {
 		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, soundHandleX, soundHandleY,
+				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
 	}

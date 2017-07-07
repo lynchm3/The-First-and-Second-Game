@@ -30,8 +30,8 @@ public class GameObjectTemplate implements InventoryParent {
 	public float widthRatio = 1;
 	public float heightRatio = 1;
 
-	public float soundHandleX;
-	public float soundHandleY;
+	public float drawOffsetX;
+	public float drawOffsetY;
 	public float soundWhenHit;
 	public float soundWhenHitting;
 	public float soundDampening = 1;
@@ -51,7 +51,7 @@ public class GameObjectTemplate implements InventoryParent {
 	public GameObjectTemplate(String name, float totalHealth, String imageTexturePath, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen,
-			boolean attackable, float widthRatio, float heightRatio, float soundHandleX, float soundHandleY,
+			boolean attackable, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float iceResistance, float electricResistance,
 			float poisonResistance, float weight) {
@@ -72,8 +72,9 @@ public class GameObjectTemplate implements InventoryParent {
 		this.persistsWhenCantBeSeen = persistsWhenCantBeSeen;
 		this.attackable = attackable;
 
-		this.soundHandleX = soundHandleX;
-		this.soundHandleY = soundHandleY;
+		this.drawOffsetX = drawOffsetX;
+		this.drawOffsetY = drawOffsetY;
+
 		this.soundWhenHit = soundWhenHit;
 		this.soundWhenHitting = soundWhenHitting;
 		this.soundDampening = soundDampening;
@@ -91,17 +92,17 @@ public class GameObjectTemplate implements InventoryParent {
 	public GameObject makeCopy(Square square, Actor owner) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, true, widthRatio, heightRatio, soundHandleX, soundHandleY,
-				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
+				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
+				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
+				iceResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
 		GameObject copy = new GameObject(new String(name), (int) totalHealth, imageTexturePath, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio, soundHandleX,
-				soundHandleY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
+				blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
+				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
 		copy.backwards = backwards;
 		return copy;
 	}

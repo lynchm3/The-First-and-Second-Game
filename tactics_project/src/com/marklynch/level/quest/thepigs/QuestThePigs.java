@@ -158,7 +158,6 @@ public class QuestThePigs extends Quest {
 		Templates.SHELF.makeCopy(Game.level.squares[15][69], farmer);
 		Templates.FURNACE.makeCopy(Game.level.squares[13][72], farmer);
 		GameObject pigSign = Templates.PIG_SIGN.makeCopy(Game.level.squares[25][70], farmer);
-		pigSign.drawOffsetX = -16;
 
 	}
 
