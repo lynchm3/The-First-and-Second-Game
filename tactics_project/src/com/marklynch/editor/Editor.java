@@ -439,6 +439,7 @@ public class Editor {
 		player.inventory.add(playersHardHat);
 		player.helmet = playersHardHat;
 		player.inventory.add(Templates.PINK_HARD_HAT.makeCopy(null, player));
+		player.inventory.add(Templates.COWBOY_HAT.makeCopy(null, player));
 
 		// Trader Joe
 		Trader trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png",

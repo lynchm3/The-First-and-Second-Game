@@ -134,7 +134,7 @@ public class QuestThePigs extends Quest {
 
 		farmHouseFrontSection = new StructureSection("Farm House", 12, 69, 24, 74, false, farmer);
 		farmHouseBackSection = new StructureSection("Farm House", 2, 75, 24, 85, false, farmer);
-		farmHouseFrontRoom = new StructureRoom("Kitchen", 12, 70, false, new ArrayList<Actor>(),
+		farmHouseFrontRoom = new StructureRoom("Kitchen", 13, 70, false, new ArrayList<Actor>(),
 				new RoomPart(13, 70, 23, 74));
 		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, new ArrayList<Actor>(),
 				new RoomPart(3, 76, 23, 77));

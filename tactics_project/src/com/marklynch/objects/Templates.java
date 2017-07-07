@@ -97,6 +97,8 @@ public class Templates {
 			0.5f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 16, 24);
 	public static final Helmet PINK_HARD_HAT = new Helmet("Hard Hat", "pink_hard_hat.png", 100, null, true, false,
 			false, false, 0.5f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 16, 24);
+	public static final Helmet COWBOY_HAT = new Helmet("Cowby Hat", "cowboy_hat.png", 100, null, true, false, false,
+			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 34, 68);
 
 	// Furniture
 	public static final Bed BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), false, true,
