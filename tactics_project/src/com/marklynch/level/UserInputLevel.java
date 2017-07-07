@@ -11,7 +11,6 @@ import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.units.Path;
 import com.marklynch.ui.button.Button;
 
@@ -496,8 +495,11 @@ public class UserInputLevel {
 
 			if (Game.level.popups.size() != 0) {
 				Game.level.popups.get(Game.level.popups.size() - 1).clickHighlightedButton();
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, true);
 			} else {
-				new ActionLoiter(Game.level.player, Game.level.player.squareGameObjectIsOn).perform();
+				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, false);
+
 			}
 		}
 
