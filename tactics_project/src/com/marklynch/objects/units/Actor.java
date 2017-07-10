@@ -924,23 +924,18 @@ public class Actor extends GameObject {
 	@Override
 	public Conversation getConversation() {
 
-		System.out.println("Actor.getConversation");
-
 		Quest quest;
 		if (group != null) {
 			quest = group.quest;
 		} else {
 			quest = this.quest;
 		}
-		System.out.println("Actor.getConversation quest = " + quest);
 
 		if (quest != null) {
 			Conversation questConversation = null;
 			questConversation = quest.getConversation(this);
-			System.out.println("Actor.getConversation questConversation = " + questConversation);
 
 			if (questConversation != null) {
-				System.out.println("Actor.getConversation returning conversation");
 				return questConversation;
 			}
 

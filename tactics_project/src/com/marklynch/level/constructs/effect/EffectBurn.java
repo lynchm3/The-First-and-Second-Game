@@ -33,18 +33,14 @@ public class EffectBurn extends Effect {
 		Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
 		target.attackedBy(this);
 
-		System.out.println("target = " + target);
-
 		// Spread fire if not turn 1
 		if (totalTurns != turnsRemaining) {
 			Vector<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
 			for (Square adjacentSquare : adjacentSquares) {
-				System.out.println("adjacentSquare = " + adjacentSquare);
 				for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
 
 					if (Math.random() * 100 > gameObject.fireResistance) {
 						gameObject.addEffect(this.makeCopy(source, gameObject));
-						System.out.println("gameObject = " + gameObject);
 						Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
 					}
 				}

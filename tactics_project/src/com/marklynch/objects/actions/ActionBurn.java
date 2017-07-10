@@ -28,6 +28,8 @@ public class ActionBurn extends Action {
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
+		} else {
+			actionName = ACTION_NAME + " (" + (100 - target.fireResistance) + "%)";
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -40,7 +42,14 @@ public class ActionBurn extends Action {
 			return;
 
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
-		target.addEffect(new EffectBurn(performer, target, 5));
+		if (Math.random() * 100 > target.fireResistance) {
+			target.addEffect(new EffectBurn(performer, target, 5));
+
+		} else {
+			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " resisted burn cast by ", performer }));
+
+		}
+
 		target.attackedBy(performer);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
@@ -48,7 +57,7 @@ public class ActionBurn extends Action {
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			Game.level.projectiles.add(new Projectile("Arrow", performer, target, target.squareGameObjectIsOn,
-					Templates.ARROW.makeCopy(null, null), 2f, true));
+					Templates.FIRE_BALL.makeCopy(null, null), 1f, true));
 		}
 		// else {
 		// performer.showPow(target);

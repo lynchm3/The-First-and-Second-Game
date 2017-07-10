@@ -25,11 +25,6 @@ public class ActionTake extends Action {
 		}
 		legal = checkLegality();
 		sound = createSound();
-
-		System.out.println("ActionTake");
-		System.out.println("performer = " + performer);
-		System.out.println("object = " + object);
-		System.out.println("legal = " + legal);
 	}
 
 	@Override

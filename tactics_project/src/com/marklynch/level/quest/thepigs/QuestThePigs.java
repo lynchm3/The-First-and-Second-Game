@@ -194,15 +194,10 @@ public class QuestThePigs extends Quest {
 
 	@Override
 	public Conversation getConversation(Actor actor) {
-		System.out.println("QuestThePigs.getConversation");
-		System.out.println("actor = " + actor);
-		System.out.println("farmer = " + farmer);
 		if (actor == farmer) {
 			conversationForFarmer.setup();
-			System.out.println("returning conversation");
 			return conversationForFarmer;
 		}
-		System.out.println("returning null");
 		return null;
 	}
 }

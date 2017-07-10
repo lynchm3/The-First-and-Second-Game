@@ -748,8 +748,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public void activateEffects() {
+
+		if (activeEffectsOnGameObject.size() == 0)
+			return;
+
 		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>();
-		System.out.println("this = " + this);
 		for (Effect effect : (ArrayList<Effect>) this.activeEffectsOnGameObject.clone()) {
 			effect.activate();
 			if (effect.turnsRemaining == 0)
