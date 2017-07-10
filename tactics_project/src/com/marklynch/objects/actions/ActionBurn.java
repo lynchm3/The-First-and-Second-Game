@@ -40,7 +40,7 @@ public class ActionBurn extends Action {
 			return;
 
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
-		target.addEffect(new EffectBurn(performer, target, 3));
+		target.addEffect(new EffectBurn(performer, target, 5));
 		target.attackedBy(performer);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;

@@ -41,9 +41,12 @@ public class EffectBurn extends Effect {
 			for (Square adjacentSquare : adjacentSquares) {
 				System.out.println("adjacentSquare = " + adjacentSquare);
 				for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
-					gameObject.addEffect(this.makeCopy(source, gameObject));
-					System.out.println("gameObject = " + gameObject);
-					Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
+
+					if (Math.random() * 100 > gameObject.fireResistance) {
+						gameObject.addEffect(this.makeCopy(source, gameObject));
+						System.out.println("gameObject = " + gameObject);
+						Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
+					}
 				}
 			}
 		}

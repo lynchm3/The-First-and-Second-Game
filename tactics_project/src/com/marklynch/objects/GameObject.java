@@ -723,6 +723,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public void addEffect(Effect effectToAdd) {
+
+		if (remainingHealth <= 0)
+			return;
+
 		Effect effectToRemove = null;
 		for (Effect existingEffect : this.activeEffectsOnGameObject) {
 			if (existingEffect.getClass() == effectToAdd.getClass()) {

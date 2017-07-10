@@ -42,7 +42,7 @@ public class Templates {
 
 	public static final RockGolem ROCK_GOLEM = new RockGolem("Rock Golem", "Rock Golem", 1, 100, 0, 0, 0, 0,
 			"rock_golem.png", null, 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1.5f, 0, -32, 1f,
-			1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 150f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null,
+			1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 150f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null,
 			false);
 
 	// Special People
@@ -68,16 +68,16 @@ public class Templates {
 	public static final Weapon WHIP = new Weapon("Whip", 3, 1, 1, "whip.png", 100, null, true, false, false, false, 1f,
 			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 22, 15);
 	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 1, 1, "serrated_spoon.png", 100, null,
-			true, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 1f,
+			true, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 1f,
 			null, 16, 24);
 	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 1, 1, "bell.png", 100, null, true, false, false,
-			false, 0.5f, 0.5f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 1f, null, 21, 32);
+			false, 0.5f, 0.5f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 1f, null, 21, 32);
 	public static final Lantern LANTERN = new Lantern("Lantern", 1, 1, "lantern.png", 100, null, true, false, false,
 			false, 0.25f, 0.25f, 0f, 0f, 15f, 15f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 16, 4);
 
 	// Blades
 	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, true, false, false,
-			false, 1f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 22, 15);
+			false, 1f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 3f, null, 22, 15);
 
 	// Axes
 	// https://en.wikipedia.org/wiki/Axe#Types_of_axes
@@ -94,9 +94,9 @@ public class Templates {
 	// ARMOUR
 	// Helmets
 	public static final Helmet HARD_HAT = new Helmet("Hard Hat", "hard_hat.png", 100, null, true, false, false, false,
-			0.5f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 16, 24);
+			0.5f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 16, 24);
 	public static final Helmet PINK_HARD_HAT = new Helmet("Hard Hat", "pink_hard_hat.png", 100, null, true, false,
-			false, false, 0.5f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 16, 24);
+			false, false, 0.5f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 16, 24);
 	public static final Helmet COWBOY_HAT = new Helmet("Cowby Hat", "cowboy_hat.png", 100, null, true, false, false,
 			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 34, 68);
 
@@ -123,7 +123,7 @@ public class Templates {
 			0.5f, false, 0f, 0f, 0f, 0f, 25f);
 	public static final Readable ROCK_WITH_ETCHING = new Readable("Rock with Etching", 1000, "rock_with_etching.png",
 			null, new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1, 0f, 0f, 20f, 1f,
-			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
+			1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, null);
 	public static final Readable SIGN = new Readable("Sign", 5, "sign.png", null, new Inventory(), true, false, false,
 			true, false, true, new Object[] { "" }, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
 			15f, null);
@@ -140,40 +140,40 @@ public class Templates {
 	public static final Chest CHEST = new Chest("Chest", 200, "chest.png", null, new Inventory(), false, false, false,
 			false, false, true, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 25f, null, false);
 	public static final Key KEY = new Key("Key", 10, "key.png", null, new Inventory(), false, true, true, false, false,
-			true, 0.3f, 0.3f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0.5f, null);
+			true, 0.3f, 0.3f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 0.5f, null);
 	public static final GameObject PLATE = new Stampable("Plate", 10, "plate.png", null, new Inventory(), false, true,
-			true, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0.5f,
+			true, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 0.5f,
 			null);
 	public static final GameObject BROKEN_PLATE = new Stampable("Broken Plate", 10, "broken_plate.png", null,
 			new Inventory(), false, true, false, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, 0.5f, null);
+			false, 40f, 0f, 0f, 0f, 0.5f, null);
 	public static final GameObject DINNER_KNIFE = new GameObject("Dinner Knife", 10, "knife.png", null, new Inventory(),
-			false, true, true, false, false, true, true, 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
+			false, true, true, false, false, true, true, 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f,
 			0f, 0f, 0f, 0.5f, null);
 	public static final GameObject DINNER_FORK = new GameObject("Dinner Fork", 10, "fork.png", null, new Inventory(),
-			false, true, true, false, false, true, true, 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
+			false, true, true, false, false, true, true, 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f,
 			0f, 0f, 0f, 0.5f, null);
 
 	public static final Wall WALL = new Wall("Wall", 1000, "wall.png", null, new Inventory(), false, false, false,
-			false, true, true, 1, 1, 0f, 0f, 10f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 200f, null);
-	public static final Wall FENCE = new Wall("Fence", 100, "wall.png", null, new Inventory(), false, false, false,
-			false, false, true, 1, 1, 0f, 0f, 10f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 200f, null);
+			false, true, true, 1, 1, 0f, 0f, 10f, 0f, 10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 200f, null);
+	public static final Wall FENCE = new Wall("Fence", 50, "wall.png", null, new Inventory(), false, false, false,
+			false, false, true, 1, 1, 0f, 0f, 10f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
 	public static final Vein VEIN = new Vein("Vein", 1000, "wall.png", null, new Inventory(), false, false, false,
-			false, true, true, 1, 1, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 200f, null);
+			false, true, true, 1, 1, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 200f, null);
 	public static final GameObject BOULDER = new GameObject("Boulder", 1000, "boulder.png", null, new Inventory(),
-			false, false, false, false, true, true, true, 1, 1, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f,
+			false, false, false, false, true, true, true, 1, 1, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 90f, 0f,
 			0f, 0f, 200f, null);
 	public static final Arrow ARROW = new Arrow("Arrow", 5, "arrow.png", null, new Inventory(), false, true, true,
 			false, false, false, 0.32f, 0.16f, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0.1f,
 			null);
 	public static final GameObject ROCK = new GameObject("Stone", 1000, "rock.png", null, new Inventory(), false, true,
-			true, false, false, false, true, 0.32f, 0.32f, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+			true, false, false, false, true, 0.32f, 0.32f, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f,
 			0f, 100f, null);
 
 	// LARGE CONTAINER
 	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("Dumpster", 5, "skip_with_shadow.png",
 			null, new Inventory(), true, false, false, true, false, false, true, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
-			0.5f, false, 0f, 0f, 0f, 0f, 10f);
+			0.5f, false, 90f, 0f, 0f, 0f, 10f);
 	public static final GameObjectTemplate TROUGH = new GameObjectTemplate("Trough", 5, "trough.png", null,
 			new Inventory(), false, false, false, true, false, false, true, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f, 10f);
@@ -184,14 +184,14 @@ public class Templates {
 	// 0.5f, false, 0f, 0f, 0f, 0f, 10f);
 
 	public static final Furnace FURNACE = new Furnace("Furnace", 200, "furnace.png", null, new Inventory(), false,
-			false, false, false, false, true, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 25f,
-			null, false);
+			false, false, false, false, true, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f,
+			150f, null, false);
 	public static final GameObjectTemplate SHELF = new GameObjectTemplate("Shelf", 5, "shelf.png", null,
 			new Inventory(), true, false, false, true, false, false, true, 1, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, 10f);
 	public static final GameObjectTemplate PIG_SIGN = new GameObjectTemplate("Piggy Farm", 5, "pig_sign.png", null,
 			new Inventory(), false, false, false, false, false, true, false, 1f, 1f, -16f, 0f, 1f, 1f, 1f, null, 0.5f,
-			0.5f, false, 0f, 0f, 0f, 0f, 10f);
+			0.5f, false, 80f, 0f, 0f, 0f, 10f);
 
 	// Food?
 	public static final Carcass CARCASS = new Carcass("Carcass", 5, "carcass.png", null, new Inventory(), false, true,
@@ -217,27 +217,27 @@ public class Templates {
 			false, true, true, false, false, false, 0.88f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
 			0f, 1f, null);
 	public static final Junk ORE = new Junk("Ore", 5, "ore.png", null, new Inventory(), false, true, true, false, false,
-			false, 0.25f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 5f, null);
+			false, 0.25f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 5f, null);
 	public static final Inspectable DRIED_BLOOD = new Inspectable("Dried Blood", 5, "blood.png", null, new Inventory(),
-			false, true, false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+			false, true, false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f,
 			0.1f, null);
 	public static final Inspectable GIANT_FOOTPRINT = new Inspectable("Giant Footprint", 5, "footprint.png", null,
 			new Inventory(), false, true, false, false, false, false, 2, 1.5f, -32f, -16f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, 0.1f, null);
+			false, 100f, 0f, 0f, 0f, 0.1f, null);
 	public static final Inspectable GIANT_FOOTPRINT_LEFT = new Inspectable("Giant Footprint", 5, "footprint_left.png",
 			null, new Inventory(), false, true, false, false, false, false, 2, 1.5f, -32f, -16f, 1f, 1f, 1f, null, 0.5f,
-			0.5f, false, 0f, 0f, 0f, 0f, 0.1f, null);
+			0.5f, false, 100f, 0f, 0f, 0f, 0.1f, null);
 
 	// TRAPS
 	public static final BrokenGlass BROKEN_LAMP = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
 			new Inventory(), false, true, false, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, 3f, null);
+			false, 90f, 0f, 0f, 0f, 3f, null);
 	public static final BrokenGlass BROKEN_GLASS = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
 			new Inventory(), false, true, false, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, 3f, null);
+			false, 90f, 0f, 0f, 0f, 3f, null);
 	public static final Searchable DROP_HOLE = new Searchable("Drop Hole", 5, "drop_hole.png", null, new Inventory(),
-			false, false, false, false, false, true, false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
-			0f, 0f, 0f, null, new Effect[] { new EffectPoison(3) });
+			false, false, false, false, false, true, false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f,
+			0f, 0f, 0f, 0f, null, new Effect[] { new EffectPoison(3) });
 
 	// NATURE
 	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), true, true, false, true,
