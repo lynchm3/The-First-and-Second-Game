@@ -112,6 +112,9 @@ public class Templates {
 	public static final GameObjectTemplate CHAIR = new GameObjectTemplate("Chair", 5, "chair.png", null,
 			new Inventory(), true, false, false, true, false, false, true, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f, 10f);
+	public static final GameObjectTemplate BENCH = new GameObjectTemplate("Bench", 5, "bench.png", null,
+			new Inventory(), true, false, false, true, false, false, true, 2f, 1f, -32f, 0f, 1f, 1f, 1f, null, 0.5f,
+			0.5f, false, 0f, 0f, 0f, 0f, 30f);
 	public static final GameObjectTemplate CHAIR_FALLEN = new GameObjectTemplate("Chair", 5, "chair_fallen.png", null,
 			new Inventory(), true, false, false, true, false, false, true, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f, 10f);
@@ -219,10 +222,10 @@ public class Templates {
 			false, true, false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
 			0.1f, null);
 	public static final Inspectable GIANT_FOOTPRINT = new Inspectable("Giant Footprint", 5, "footprint.png", null,
-			new Inventory(), false, true, false, false, false, false, 2, 1.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+			new Inventory(), false, true, false, false, false, false, 2, 1.5f, -32f, -16f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f, 0.1f, null);
 	public static final Inspectable GIANT_FOOTPRINT_LEFT = new Inspectable("Giant Footprint", 5, "footprint_left.png",
-			null, new Inventory(), false, true, false, false, false, false, 2, 1.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
+			null, new Inventory(), false, true, false, false, false, false, 2, 1.5f, -32f, -16f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, 0.1f, null);
 
 	// TRAPS

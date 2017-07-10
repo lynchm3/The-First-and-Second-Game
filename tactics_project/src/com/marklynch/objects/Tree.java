@@ -57,7 +57,7 @@ public class Tree extends GameObject {
 	}
 
 	@Override
-	public void draw1() {
+	public void draw2() {
 
 		if (!Game.fullVisiblity) {
 			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)

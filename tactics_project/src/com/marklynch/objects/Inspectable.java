@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -26,7 +27,7 @@ public class Inspectable extends GameObject {
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		// actions.add(new ActionPickUp(performer, this));
+		actions.add(new ActionInspect(performer, this));
 		return actions;
 
 	}

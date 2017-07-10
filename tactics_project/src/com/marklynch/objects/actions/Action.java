@@ -136,6 +136,7 @@ public abstract class Action {
 		getGlobalImage("action_take_all.png");
 		getGlobalImage("action_take_bite.png");// untested
 		getGlobalImage("action_talk.png");
+		getGlobalImage("action_teleport.png");
 		getGlobalImage("action_throw.png");
 		getGlobalImage("action_trespass.png"); // untested
 		getGlobalImage("action_unlock.png");
