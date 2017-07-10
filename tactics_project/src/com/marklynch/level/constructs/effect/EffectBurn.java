@@ -35,6 +35,16 @@ public class EffectBurn extends Effect {
 
 		// Spread fire if not turn 1
 		if (totalTurns != turnsRemaining) {
+
+			Square squareTargetIsOn = target.squareGameObjectIsOn;
+			for (GameObject gameObject : squareTargetIsOn.inventory.getGameObjects()) {
+
+				if (gameObject != target && Math.random() * 100 > gameObject.fireResistance) {
+					gameObject.addEffect(this.makeCopy(source, gameObject));
+					Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
+				}
+			}
+
 			Vector<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
 			for (Square adjacentSquare : adjacentSquares) {
 				for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {

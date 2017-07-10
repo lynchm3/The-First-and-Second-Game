@@ -68,6 +68,8 @@ public class Tree extends GameObject {
 		}
 
 		super.draw1();
+		super.draw2();
+
 		// DRAW INVENTORY
 		for (GameObject fruit : inventory.gameObjects) {
 			int fruitPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH

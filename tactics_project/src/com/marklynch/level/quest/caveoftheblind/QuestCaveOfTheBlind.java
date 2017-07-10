@@ -354,8 +354,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.BOULDER.makeCopy(Game.level.squares[92][35], null);
 
 		// A bush in cave in
-		Templates.BUSH.makeCopy(Game.level.squares[89][35], null);
-		Templates.BUSH.makeCopy(Game.level.squares[89][34], null);
+		Templates.POISON_BUSH.makeCopy(Game.level.squares[89][35], null);
+		Templates.POISON_BUSH.makeCopy(Game.level.squares[89][34], null);
 
 		// Rock Golem
 		RockGolem rockGolem = Templates.ROCK_GOLEM.makeCopy(Game.level.squares[91][35], Game.level.factions.get(4),

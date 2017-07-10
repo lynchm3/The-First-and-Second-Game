@@ -818,4 +818,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 	}
+
+	public ArrayList<Effect> getActiveEffectsOnGameObject() {
+		return activeEffectsOnGameObject;
+	}
 }

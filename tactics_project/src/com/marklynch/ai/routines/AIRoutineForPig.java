@@ -57,6 +57,8 @@ public class AIRoutineForPig extends AIRoutine {
 			return;
 		}
 
+		createListOfVisibleHazards();
+
 		// if (runSearchRoutine()) {
 		// // createSearchLocationsBasedOnSounds();
 		// createSearchLocationsBasedOnVisibleAttackers();

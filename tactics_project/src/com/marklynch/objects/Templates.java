@@ -193,7 +193,7 @@ public class Templates {
 			new Inventory(), true, false, false, true, false, false, true, 1, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, 10f);
 	public static final GameObjectTemplate PIG_SIGN = new GameObjectTemplate("Piggy Farm", 5, "pig_sign.png", null,
-			new Inventory(), false, false, false, false, false, true, false, 1f, 1f, -16f, 0f, 1f, 1f, 1f, null, 0.5f,
+			new Inventory(), false, true, false, false, false, true, false, 1f, 1f, -16f, 0f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 80f, 0f, 0f, 0f, 10f);
 
 	// Food?
