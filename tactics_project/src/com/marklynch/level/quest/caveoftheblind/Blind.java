@@ -84,9 +84,9 @@ public class Blind extends Monster {
 	// }
 
 	@Override
-	public void attacked(Object attacker) {
+	public void attackedBy(Object attacker) {
 		new ActionScream(this).perform();
-		super.attacked(attacker);
+		super.attackedBy(attacker);
 	}
 
 	public Blind makeCopy(Square square, Faction faction, StructureRoom roomLivingIn) {

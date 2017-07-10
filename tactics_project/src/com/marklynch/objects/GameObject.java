@@ -17,6 +17,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionBurn;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionPickUp;
@@ -205,7 +206,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public void draw2() {
-
+		for (Effect effect : activeEffectsOnGameObject) {
+			effect.draw2();
+		}
 	}
 
 	public void draw3() {
@@ -241,6 +244,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			this.blocksLineOfSight = false;
 			persistsWhenCantBeSeen = false;
 			soundDampening = 1;
+			this.activeEffectsOnGameObject.clear();
 			return true;
 		}
 		return false;
@@ -466,7 +470,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public void update(int delta) {
-
+		if (this.remainingHealth > 0) {
+			activateEffects();
+		}
 	}
 
 	public void updateRealtime(int delta) {
@@ -518,6 +524,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (performer.equipped != null) {
 			actions.add(new ActionThrow(performer, this, performer.equipped));
 		}
+
+		actions.add(new ActionBurn(performer, this));
 
 		return actions;
 
@@ -695,7 +703,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		return true;
 	}
 
-	public void attacked(Object attacker) {
+	public void attackedBy(Object attacker) {
 
 		GameObject gameObjectAttacker = null;
 		if (attacker instanceof GameObject) {
@@ -714,19 +722,21 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 	}
 
-	public void addEffect(Effect effect) {
+	public void addEffect(Effect effectToAdd) {
+		Effect effectToRemove = null;
 		for (Effect existingEffect : this.activeEffectsOnGameObject) {
-			if (existingEffect.getClass() == effect.getClass()) {
-				if (effect.turnsRemaining >= existingEffect.turnsRemaining) {
-					this.activeEffectsOnGameObject.remove(existingEffect);
-					this.activeEffectsOnGameObject.add(effect);
-					Game.level.logOnScreen(new ActivityLog(new Object[] { this, effect.logString, effect.source }));
+			if (existingEffect.getClass() == effectToAdd.getClass()) {
+				if (effectToAdd.turnsRemaining >= existingEffect.turnsRemaining) {
+					effectToRemove = existingEffect;
+				} else {
+					return;
 				}
-				return;
 			}
 		}
-		this.activeEffectsOnGameObject.add(effect);
-		Game.level.logOnScreen(new ActivityLog(new Object[] { this, effect.logString, effect.source }));
+
+		this.activeEffectsOnGameObject.remove(effectToRemove);
+		this.activeEffectsOnGameObject.add(effectToAdd);
+		Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
 	}
 
 	public void removeEffect(Effect effect) {
@@ -735,7 +745,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public void activateEffects() {
 		ArrayList<Effect> effectsToRemove = new ArrayList<Effect>();
-		for (Effect effect : this.activeEffectsOnGameObject) {
+		System.out.println("this = " + this);
+		for (Effect effect : (ArrayList<Effect>) this.activeEffectsOnGameObject.clone()) {
 			effect.activate();
 			if (effect.turnsRemaining == 0)
 				effectsToRemove.add(effect);

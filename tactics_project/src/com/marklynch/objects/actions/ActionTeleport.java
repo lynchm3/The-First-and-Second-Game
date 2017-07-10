@@ -11,6 +11,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.ActivityLog;
 
 public class ActionTeleport extends Action {
 
@@ -71,6 +72,8 @@ public class ActionTeleport extends Action {
 				performer.swapCooldown = (int) (Math.random() * 3);
 			}
 		}
+
+		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

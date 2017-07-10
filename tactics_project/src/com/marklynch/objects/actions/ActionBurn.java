@@ -3,26 +3,26 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.effect.EffectBurn;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.units.WildAnimal;
 import com.marklynch.objects.weapons.Projectile;
-import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionAttack extends Action {
+public class ActionBurn extends Action {
 
-	public static final String ACTION_NAME = "Attack";
+	public static final String ACTION_NAME = "Burn";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
 
 	// Default for hostiles
-	public ActionAttack(Actor attacker, GameObject target) {
-		super(ACTION_NAME, "action_attack.png");
+	public ActionBurn(Actor attacker, GameObject target) {
+		super(ACTION_NAME, "action_burn.png");
 		this.performer = attacker;
 		this.target = target;
 		if (!check()) {
@@ -39,32 +39,9 @@ public class ActionAttack extends Action {
 		if (!enabled)
 			return;
 
-		float damage = 1;
-		Weapon weapon = null;
-		if (performer.equipped != null && performer.equipped instanceof Weapon) {
-			weapon = (Weapon) performer.equipped;
-			damage = weapon.getTotalEffectiveDamage();
-		}
-
-		if (target.attackable) {
-			target.remainingHealth -= damage;
-			String attackTypeString;
-			attackTypeString = "attacked ";
-
-			if (performer.squareGameObjectIsOn.visibleToPlayer) {
-
-				if (weapon != null) {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-							target, " with ", weapon, " for " + damage + " damage" }));
-				} else {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-							target, " for " + damage + " damage" }));
-
-				}
-			}
-			target.attackedBy(performer);
-		}
-
+		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
+		target.addEffect(new EffectBurn(performer, target, 3));
+		target.attackedBy(performer);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
@@ -72,9 +49,10 @@ public class ActionAttack extends Action {
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			Game.level.projectiles.add(new Projectile("Arrow", performer, target, target.squareGameObjectIsOn,
 					Templates.ARROW.makeCopy(null, null), 2f, true));
-		} else {
-			performer.showPow(target);
 		}
+		// else {
+		// performer.showPow(target);
+		// }
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
@@ -108,17 +86,8 @@ public class ActionAttack extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer.equipped == null || !(performer.equipped instanceof Weapon)) {
-			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
-				return false;
-		} else {
-			Weapon weapon = (Weapon) performer.equipped;
-			if (!weapon.hasRange(performer.straightLineDistanceTo(target.squareGameObjectIsOn)))
-				return false;
-		}
-
-		if (!performer.canSeeGameObject(target))
-			return false;
+		// if (!performer.canSeeGameObject(target))
+		// return false;
 
 		if (!target.attackable)
 			return false;

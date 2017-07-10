@@ -73,7 +73,7 @@ public class ActionThrow extends Action {
 		}
 
 		if (targetGameObject != null && targetGameObject.attackable) {
-			targetGameObject.attacked(performer);
+			targetGameObject.attackedBy(performer);
 		}
 		// target.attacked(performer);
 

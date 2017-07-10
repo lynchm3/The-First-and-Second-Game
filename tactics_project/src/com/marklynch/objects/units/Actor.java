@@ -820,7 +820,7 @@ public class Actor extends GameObject {
 				addEffect(effect.makeCopy(hidingPlace, this));
 			}
 		}
-		activateEffects();
+		super.update(delta);
 	}
 
 	public void sellAllToTarget(Class clazz, GameObject gameObject) {
@@ -1019,8 +1019,8 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public void attacked(Object attacker) {
-		super.attacked(attacker);
+	public void attackedBy(Object attacker) {
+		super.attackedBy(attacker);
 
 		removeHidingPlacesFromAttackers();
 

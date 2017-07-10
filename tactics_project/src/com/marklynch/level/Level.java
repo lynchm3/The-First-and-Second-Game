@@ -89,6 +89,7 @@ public class Level {
 		script = new Script();
 
 		Action.loadActionImages();
+		Effect.loadEffectImages();
 
 		structures = new ArrayList<Structure>();
 
@@ -699,6 +700,7 @@ public class Level {
 		if (currentFactionMovingIndex == 0) {
 			this.turn++;
 			System.out.println("\nTurn " + turn + "\n");
+			Game.level.logOnScreen(new ActivityLog(new Object[] { "-----TURN " + turn + "-----" }));
 			Game.level.activeActor = player;
 			// Game.level.activeActor.equippedWeapon =
 			// Game.level.activeActor.getWeaponsInInventory().get(0);

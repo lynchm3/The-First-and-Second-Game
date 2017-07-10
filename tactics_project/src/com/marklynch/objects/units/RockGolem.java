@@ -114,10 +114,10 @@ public class RockGolem extends Monster {
 	}
 
 	@Override
-	public void attacked(Object attacker) {
+	public void attackedBy(Object attacker) {
 		if (!awake)
 			wakeUp();
-		super.attacked(attacker);
+		super.attackedBy(attacker);
 	}
 
 	@Override
@@ -162,7 +162,7 @@ public class RockGolem extends Monster {
 		if (!awake)
 			wakeUp();
 		this.remainingHealth -= 10;
-		this.attacked(shooter);
+		this.attackedBy(shooter);
 	}
 
 	public void wakeUp() {
