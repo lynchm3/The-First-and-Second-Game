@@ -158,6 +158,24 @@ public class QuestThePigs extends Quest {
 		Templates.SHELF.makeCopy(Game.level.squares[15][69], farmer);
 		Templates.FURNACE.makeCopy(Game.level.squares[13][72], farmer);
 		GameObject pigSign = Templates.PIG_SIGN.makeCopy(Game.level.squares[25][70], farmer);
+		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[1][93], null);
+		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[3][91], null);
+		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[5][93], null);
+		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[7][91], null);
+		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[9][93], null);
+		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[11][91], null);
+		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[13][93], null);
+		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[15][91], null);
+		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[17][93], null);
+		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[19][91], null);
+		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[21][93], null);
+		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[23][91], null);
+		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[25][93], null);
+		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[27][91], null);
+		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[29][93], null);
+		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[31][91], null);
+		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[33][93], null);
+		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[35][91], null);
 
 	}
 

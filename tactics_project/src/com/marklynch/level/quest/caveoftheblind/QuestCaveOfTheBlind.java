@@ -397,7 +397,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.CHAIR.makeCopy(Game.level.squares[91][43], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[91][44], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[89][45], null);
-		Templates.BLOOD.makeCopy(Game.level.squares[91][47], null);
+		Templates.DRIED_BLOOD.makeCopy(Game.level.squares[91][47], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[91][47], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[91][48], null);
 		// Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[90][49], null);
@@ -710,14 +710,14 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public void makeMortsStorage() {
 
-		GameObject outsideBlood1 = Templates.BLOOD.makeCopy(Game.level.squares[49][39], null);
-		GameObject outsideBlood2 = Templates.BLOOD.makeCopy(Game.level.squares[48][39], null);
-		GameObject outsideBlood3 = Templates.BLOOD.makeCopy(Game.level.squares[47][39], null);
-		GameObject outsideBlood4 = Templates.BLOOD.makeCopy(Game.level.squares[46][39], null);
-		GameObject outsideBlood5 = Templates.BLOOD.makeCopy(Game.level.squares[45][39], null);
-		GameObject outsideBlood6 = Templates.BLOOD.makeCopy(Game.level.squares[44][39], null);
-		GameObject outsideBlood7 = Templates.BLOOD.makeCopy(Game.level.squares[43][39], null);
-		GameObject blood = Templates.BLOOD.makeCopy(Game.level.squares[24][21], null);
+		GameObject outsideBlood1 = Templates.DRIED_BLOOD.makeCopy(Game.level.squares[49][39], null);
+		GameObject outsideBlood2 = Templates.DRIED_BLOOD.makeCopy(Game.level.squares[48][39], null);
+		GameObject outsideBlood3 = Templates.DRIED_BLOOD.makeCopy(Game.level.squares[47][39], null);
+		GameObject outsideBlood4 = Templates.DRIED_BLOOD.makeCopy(Game.level.squares[46][39], null);
+		GameObject outsideBlood5 = Templates.DRIED_BLOOD.makeCopy(Game.level.squares[45][39], null);
+		GameObject outsideBlood6 = Templates.DRIED_BLOOD.makeCopy(Game.level.squares[44][39], null);
+		GameObject outsideBlood7 = Templates.DRIED_BLOOD.makeCopy(Game.level.squares[43][39], null);
+		GameObject blood = Templates.DRIED_BLOOD.makeCopy(Game.level.squares[24][21], null);
 		Corpse carcass1 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[49][39], null, 25f);
 		Corpse carcass2 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[49][39], null, 25f);
 		Corpse carcass3 = Templates.CORPSE.makeCopy("Corpse", Game.level.squares[49][39], null, 25f);

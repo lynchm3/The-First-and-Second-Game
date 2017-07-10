@@ -215,8 +215,15 @@ public class Templates {
 			0f, 1f, null);
 	public static final Junk ORE = new Junk("Ore", 5, "ore.png", null, new Inventory(), false, true, true, false, false,
 			false, 0.25f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 5f, null);
-	public static final Junk BLOOD = new Junk("Blood", 5, "blood.png", null, new Inventory(), false, true, false, false,
-			false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0.1f, null);
+	public static final Inspectable DRIED_BLOOD = new Inspectable("Dried Blood", 5, "blood.png", null, new Inventory(),
+			false, true, false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+			0.1f, null);
+	public static final Inspectable GIANT_FOOTPRINT = new Inspectable("Giant Footprint", 5, "footprint.png", null,
+			new Inventory(), false, true, false, false, false, false, 2, 1.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+			false, 0f, 0f, 0f, 0f, 0.1f, null);
+	public static final Inspectable GIANT_FOOTPRINT_LEFT = new Inspectable("Giant Footprint", 5, "footprint_left.png",
+			null, new Inventory(), false, true, false, false, false, false, 2, 1.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
+			0.5f, false, 0f, 0f, 0f, 0f, 0.1f, null);
 
 	// TRAPS
 	public static final BrokenGlass BROKEN_LAMP = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
