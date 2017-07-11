@@ -5,11 +5,9 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.units.WildAnimal;
-import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionDouse extends Action {
@@ -56,10 +54,12 @@ public class ActionDouse extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			Game.level.projectiles.add(new Projectile("Arrow", performer, target, target.squareGameObjectIsOn,
-					Templates.WATER_BALL.makeCopy(null, null), 1f, true));
-		}
+		// if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) >
+		// 1) {
+		// Game.level.projectiles.add(new Projectile("Arrow", performer, target,
+		// target.squareGameObjectIsOn,
+		// Templates.WATER_BALL.makeCopy(null, null), 1f, true));
+		// }
 		// else {
 		// performer.showPow(target);
 		// }

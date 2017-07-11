@@ -111,7 +111,10 @@ public class ContainerForLiquids extends GameObject {
 
 		{
 			for (GameObject gameObject : this.squareGameObjectIsOn.inventory.getGameObjects()) {
-				new ActionDouse(shooter, gameObject).perform();
+				if (gameObject != this) {
+					System.out.println("Dousing " + gameObject);
+					new ActionDouse(shooter, gameObject).perform();
+				}
 			}
 		}
 
