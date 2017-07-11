@@ -20,11 +20,13 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionBurn;
 import com.marklynch.objects.actions.ActionDouse;
 import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionThrow;
+import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
@@ -626,13 +628,21 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			return new ActionFillSpecificContainer(performer, Inventory.waterSouce, (ContainerForLiquids) this);
 		}
 
-		return new ActionDrop(performer, performer.squareGameObjectIsOn, this);
+		if (performer.equipped == this)
+			return new ActionUnequip(performer, this);
+		else
+			return new ActionEquip(performer, this);
 
 	}
 
 	@Override
 	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
+		if (performer.equipped == this)
+			actions.add(new ActionUnequip(performer, this));
+		else
+			actions.add(new ActionEquip(performer, this));
+
 		actions.add(new ActionDrop(performer, performer.squareGameObjectIsOn, this));
 		return actions;
 	}

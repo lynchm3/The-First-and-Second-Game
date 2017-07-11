@@ -213,8 +213,8 @@ public class Templates {
 			false, true, true, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
 			0f, 5f, null);
 	public static final ContainerForLiquids JAR = new ContainerForLiquids("Jar", 5, "jar.png", null, new Inventory(),
-			true, true, true, true, false, false, 0.25f, 0.5f, 24f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-			0f, 0f, null, 1f, "water_jar.png");
+			true, true, true, true, false, false, 0.12f, 0.25f, 24f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
+			0f, 0f, 0f, null, 1f, "water_jar.png");
 	public static final Liquid WATER = new Liquid("Water", 5, "water.png", null, new Inventory(), true, true, true,
 			true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, null, 0f);
 

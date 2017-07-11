@@ -1,6 +1,8 @@
 package com.marklynch.objects;
 
+import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.objects.actions.ActionDouse;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 
@@ -39,6 +41,9 @@ public class ContainerForLiquids extends GameObject {
 			this.imageTexture = imageWhenFull;
 		}
 
+		this.anchorX = 22;
+		this.anchorY = 24;
+
 	}
 
 	@Override
@@ -60,6 +65,56 @@ public class ContainerForLiquids extends GameObject {
 			this.name = baseName + " of " + inventory.get(0);
 			this.imageTexture = imageWhenFull;
 		}
+	}
+
+	@Override
+	public void landed(Actor shooter) {
+		this.remainingHealth = 0;
+		this.canShareSquare = true;
+		this.blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		soundDampening = 1;
+		this.activeEffectsOnGameObject.clear();
+
+		Square squareForGlass = null;
+		if (this.squareGameObjectIsOn.inventory.contains(Wall.class)) {
+			squareForGlass = this.squareGameObjectIsOn;
+		} else {
+
+			if (this.squareGameObjectIsOn.xInGrid > shooter.squareGameObjectIsOn.xInGrid
+					&& this.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1) {
+				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid
+						- 1][this.squareGameObjectIsOn.yInGrid];
+
+			} else if (this.squareGameObjectIsOn.xInGrid < shooter.squareGameObjectIsOn.xInGrid
+					&& this.squareGameObjectIsOn.xInGrid > 0) {
+
+				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid
+						+ 1][this.squareGameObjectIsOn.yInGrid];
+
+			} else if (this.squareGameObjectIsOn.yInGrid > shooter.squareGameObjectIsOn.yInGrid
+					&& this.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1) {
+
+				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid][this.squareGameObjectIsOn.yInGrid
+						- 1];
+			} else if (this.squareGameObjectIsOn.yInGrid < shooter.squareGameObjectIsOn.yInGrid
+					&& this.squareGameObjectIsOn.yInGrid > 0) {
+				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid][this.squareGameObjectIsOn.yInGrid
+						+ 1];
+			}
+		}
+
+		if (squareForGlass != null)
+			Templates.BROKEN_GLASS.makeCopy(squareForGlass, this.owner);
+
+		if (this.inventory.size() > 0 && this.inventory.get(0) instanceof Liquid)
+
+		{
+			for (GameObject gameObject : this.squareGameObjectIsOn.inventory.getGameObjects()) {
+				new ActionDouse(shooter, gameObject).perform();
+			}
+		}
+
 	}
 
 }
