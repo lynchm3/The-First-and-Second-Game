@@ -3,7 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
@@ -12,24 +12,22 @@ import com.marklynch.objects.units.WildAnimal;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionBurn extends Action {
+public class ActionDouse extends Action {
 
-	public static final String ACTION_NAME = "Burn";
+	public static final String ACTION_NAME = "Douse";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
 
 	// Default for hostiles
-	public ActionBurn(Actor attacker, GameObject target) {
-		super(ACTION_NAME, "action_burn.png");
+	public ActionDouse(Actor attacker, GameObject target) {
+		super(ACTION_NAME, "action_douse.png");
 		this.performer = attacker;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
-		} else {
-			actionName = ACTION_NAME + " (" + (100 - target.getEffectiveFireResistance()) + "%)";
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -41,24 +39,26 @@ public class ActionBurn extends Action {
 		if (!enabled)
 			return;
 
-		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
-		if (Math.random() * 100 > target.getEffectiveFireResistance()) {
-			target.removeWetEffect();
-			target.addEffect(new EffectBurning(performer, target, 5));
+		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast douse on ", target }));
+		target.removeBurningEffect();
+		target.addEffect(new EffectWet(performer, target, 5));
+		// if (Math.random() * 100 > target.fireResistance) {
+		// target.addEffect(new EffectBurn(performer, target, 5));
+		//
+		// } else {
+		// Game.level.logOnScreen(new ActivityLog(new Object[] { target, "
+		// resisted burn cast by ", performer }));
+		//
+		// }
 
-		} else {
-			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " resisted burn cast by ", performer }));
-
-		}
-
-		target.attackedBy(performer);
+		// target.attackedBy(performer);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			Game.level.projectiles.add(new Projectile("Arrow", performer, target, target.squareGameObjectIsOn,
-					Templates.FIRE_BALL.makeCopy(null, null), 1f, true));
+					Templates.WATER_BALL.makeCopy(null, null), 1f, true));
 		}
 		// else {
 		// performer.showPow(target);

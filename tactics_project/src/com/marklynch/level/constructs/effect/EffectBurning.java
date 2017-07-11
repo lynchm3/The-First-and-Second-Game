@@ -10,9 +10,9 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.TextureUtils;
 
-public class EffectBurn extends Effect {
+public class EffectBurning extends Effect {
 
-	public EffectBurn(GameObject source, GameObject target, int totalTurns) {
+	public EffectBurning(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " burned by ";
 		this.effectName = "Burn";
 		this.source = source;
@@ -22,7 +22,7 @@ public class EffectBurn extends Effect {
 		this.image = getGlobalImage("effect_burn.png");
 	}
 
-	public EffectBurn(int totalTurns) {
+	public EffectBurning(int totalTurns) {
 		this(null, null, totalTurns);
 	}
 
@@ -39,7 +39,8 @@ public class EffectBurn extends Effect {
 			Square squareTargetIsOn = target.squareGameObjectIsOn;
 			for (GameObject gameObject : squareTargetIsOn.inventory.getGameObjects()) {
 
-				if (gameObject != target && Math.random() * 100 > gameObject.fireResistance) {
+				if (gameObject != target && Math.random() * 100 > gameObject.getEffectiveFireResistance()) {
+					gameObject.removeWetEffect();
 					gameObject.addEffect(this.makeCopy(source, gameObject));
 					Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
 				}
@@ -48,8 +49,8 @@ public class EffectBurn extends Effect {
 			Vector<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
 			for (Square adjacentSquare : adjacentSquares) {
 				for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
-
-					if (Math.random() * 100 > gameObject.fireResistance) {
+					if (Math.random() * 100 > gameObject.getEffectiveFireResistance()) {
+						gameObject.removeWetEffect();
 						gameObject.addEffect(this.makeCopy(source, gameObject));
 						Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
 					}
@@ -62,8 +63,8 @@ public class EffectBurn extends Effect {
 	}
 
 	@Override
-	public EffectBurn makeCopy(GameObject source, GameObject target) {
-		return new EffectBurn(source, target, totalTurns);
+	public EffectBurning makeCopy(GameObject source, GameObject target) {
+		return new EffectBurning(source, target, totalTurns);
 	}
 
 	@Override

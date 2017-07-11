@@ -18,6 +18,7 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionBurn;
+import com.marklynch.objects.actions.ActionDouse;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionPickUp;
@@ -85,7 +86,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public float anchorX, anchorY;
 
 	public boolean backwards = false;
-	private ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
 
 	public boolean hiding = false;
 	public HidingPlace hidingPlace = null;
@@ -99,13 +99,13 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean attackable, float widthRatio,
 			float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting,
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float iceResistance, float electricResistance, float poisonResistance, float weight,
+			float fireResistance, float waterResistance, float electricResistance, float poisonResistance, float weight,
 			Actor owner) {
 
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight);
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight);
 		this.remainingHealth = health;
 		this.owner = owner;
 		this.drawOffsetX = drawOffsetX;
@@ -456,7 +456,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, weight, owner);
+				waterResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 	public ArrayList<Weapon> getWeaponsInInventory() {
@@ -526,6 +526,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		actions.add(new ActionBurn(performer, this));
+		actions.add(new ActionDouse(performer, this));
 
 		return actions;
 
@@ -741,10 +742,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		this.activeEffectsOnGameObject.remove(effectToRemove);
 		this.activeEffectsOnGameObject.add(effectToAdd);
 		Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
-	}
-
-	public void removeEffect(Effect effect) {
-		this.activeEffectsOnGameObject.remove(effect);
 	}
 
 	public void activateEffects() {

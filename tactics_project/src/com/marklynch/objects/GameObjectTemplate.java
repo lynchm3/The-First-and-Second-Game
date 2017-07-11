@@ -2,9 +2,13 @@ package com.marklynch.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -39,21 +43,22 @@ public class GameObjectTemplate implements InventoryParent {
 	public float lightHandleX;
 	public float lightHandlY;
 	public boolean stackable;
-	public float fireResistance;
-	public float iceResistance;
-	public float electricResistance;
-	public float poisonResistance;
+	protected float fireResistance;
+	protected float waterResistance;
+	protected float electricResistance;
+	protected float poisonResistance;
 
 	public float weight;
 
 	public transient Texture imageTexture = null;
+	protected ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
 
 	public GameObjectTemplate(String name, float totalHealth, String imageTexturePath, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen,
 			boolean attackable, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
-			float lightHandlY, boolean stackable, float fireResistance, float iceResistance, float electricResistance,
+			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float weight) {
 		super();
 		this.name = name;
@@ -83,7 +88,7 @@ public class GameObjectTemplate implements InventoryParent {
 		this.lightHandlY = lightHandlY;
 		this.stackable = stackable;
 		this.fireResistance = fireResistance;
-		this.iceResistance = iceResistance;
+		this.waterResistance = waterResistance;
 		this.electricResistance = electricResistance;
 		this.poisonResistance = poisonResistance;
 		this.weight = weight;
@@ -94,7 +99,7 @@ public class GameObjectTemplate implements InventoryParent {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				iceResistance, electricResistance, poisonResistance, weight, owner);
+				waterResistance, electricResistance, poisonResistance, weight, owner);
 	}
 
 	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
@@ -102,7 +107,7 @@ public class GameObjectTemplate implements InventoryParent {
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, iceResistance, electricResistance, poisonResistance, weight, owner);
+				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner);
 		copy.backwards = backwards;
 		return copy;
 	}
@@ -124,5 +129,64 @@ public class GameObjectTemplate implements InventoryParent {
 
 	@Override
 	public void inventoryChanged() {
+	}
+
+	public void removeEffect(Effect effect) {
+		this.activeEffectsOnGameObject.remove(effect);
+	}
+
+	public float getEffectiveFireResistance() {
+		float res = fireResistance;
+		if (isWet()) {
+			res += 50;
+		}
+
+		if (res > 100)
+			res = 100;
+
+		return res;
+	}
+
+	public float getEffectiveWaterResistance() {
+		return waterResistance;
+	}
+
+	public float getEffectivePosionResistance() {
+		return poisonResistance;
+	}
+
+	public float getEffectiveelectricResistance() {
+		return electricResistance;
+	}
+
+	public boolean isWet() {
+		for (Effect effect : activeEffectsOnGameObject) {
+			if (effect instanceof EffectWet) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void removeWetEffect() {
+		Effect effectWet = null;
+		for (Effect effect : activeEffectsOnGameObject) {
+			if (effect instanceof EffectWet) {
+				effectWet = effect;
+			}
+		}
+		if (effectWet != null)
+			removeEffect(effectWet);
+	}
+
+	public void removeBurningEffect() {
+		Effect effectBurning = null;
+		for (Effect effect : activeEffectsOnGameObject) {
+			if (effect instanceof EffectBurning) {
+				effectBurning = effect;
+			}
+		}
+		if (effectBurning != null)
+			removeEffect(effectBurning);
 	}
 }

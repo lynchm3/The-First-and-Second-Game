@@ -25,5 +25,6 @@ public abstract class Effect {
 	public static void loadEffectImages() {
 		getGlobalImage("effect_burn.png");
 		getGlobalImage("effect_poison.png");
+		getGlobalImage("effect_wet.png");
 	}
 }

@@ -147,14 +147,14 @@ public class Actor extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean canOpenDoors, boolean canEquipWeapons,
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
-			boolean stackable, float fireResistance, float iceResistance, float electricResistance,
+			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float weight, Actor owner, Faction faction, float handAnchorX, float handAnchorY,
 			float headAnchorX, float headAnchorY, float bodyAnchorX, float bodyAnchorY, float legsAnchorX,
 			float legsAnchorY) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, iceResistance, electricResistance, poisonResistance, weight,
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
 				owner);
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -783,7 +783,7 @@ public class Actor extends GameObject {
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, canOpenDoors,
 				canEquipWeapons, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
-				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, iceResistance,
+				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, weight
 
 				, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,

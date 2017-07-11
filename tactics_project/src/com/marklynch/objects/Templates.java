@@ -169,6 +169,9 @@ public class Templates {
 	public static final Arrow FIRE_BALL = new Arrow("Fireball", 5, "effect_burn.png", null, new Inventory(), false,
 			true, true, false, false, false, 0.32f, 0.32f, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
 			0f, 0.1f, null);
+	public static final Arrow WATER_BALL = new Arrow("Waterball", 5, "effect_wet.png", null, new Inventory(), false,
+			true, true, false, false, false, 0.32f, 0.32f, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+			0f, 0.1f, null);
 	public static final GameObject ROCK = new GameObject("Stone", 1000, "rock.png", null, new Inventory(), false, true,
 			true, false, false, false, true, 0.32f, 0.32f, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f,
 			0f, 100f, null);
