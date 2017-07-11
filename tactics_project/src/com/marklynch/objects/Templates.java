@@ -17,9 +17,9 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 	// Player
-	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "red1.png", null, 1, 10,
-			null, new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, 90f, null, null, 80f, 80f, 73f, 22f, 80f, 80f, 80f, 80f);
+	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "hero.png", null, 1, 10,
+			null, new Inventory(), true, false, true, false, false, 1f, 2f, 0f, -64f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+			false, 0f, 0f, 0f, 0f, 90f, null, null, 57f, 104f, 35f, 23f, 80f, 80f, 80f, 80f);
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,

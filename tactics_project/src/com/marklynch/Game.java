@@ -35,8 +35,8 @@ public class Game {
 	// PLAYER START POSITION
 
 	// Shop
-	public static int playerStartPosX = 3;
-	public static int playerStartPosY = 3;
+	// public static int playerStartPosX = 3;
+	// public static int playerStartPosY = 3;
 
 	// Dining room
 	// public static int playerStartPosX = 93;
@@ -47,8 +47,8 @@ public class Game {
 	// public static int playerStartPosY = 46;
 
 	// Farm
-	// public static int playerStartPosX = 30;
-	// public static int playerStartPosY = 70;
+	public static int playerStartPosX = 30;
+	public static int playerStartPosY = 70;
 
 	// CAMERA START POSITION
 
@@ -72,8 +72,8 @@ public class Game {
 
 	// public static float windowWidth = 800;
 	// public static float windowHeight = 600;
-	public static float windowWidth = 1500;
-	public static float windowHeight = 900;
+	public static float windowWidth = 900;
+	public static float windowHeight = 1000;
 
 	/** time at last frame */
 	static long lastFrame;
@@ -211,6 +211,7 @@ public class Game {
 		try {
 			Display.setDisplayMode(new DisplayMode((int) width, (int) height));
 			Display.setResizable(true);
+			Display.setLocation(960, 0);
 			Display.create();
 			Display.setVSyncEnabled(true);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
