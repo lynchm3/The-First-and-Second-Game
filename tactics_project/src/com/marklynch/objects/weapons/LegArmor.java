@@ -8,6 +8,7 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionEquip;
+import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -21,13 +22,14 @@ public class LegArmor extends GameObject {
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
 			float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting,
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float waterResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
-			float anchorX, float anchorY) {
+			float fireResistance, float waterResistance, float electricResistance, float poisonResistance, float weight,
+			Actor owner, float anchorX, float anchorY) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio,
-				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
+				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
+				owner);
 
 		this.owner = owner;
 		this.anchorX = anchorX;
@@ -37,13 +39,21 @@ public class LegArmor extends GameObject {
 
 	@Override
 	public Action getDefaultActionInInventory(Actor performer) {
-		return new ActionEquip(performer, this);
+
+		if (performer.legArmor == this)
+			return new ActionUnequip(performer, this);
+		else
+			return new ActionEquip(performer, this);
 	}
 
 	@Override
 	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionEquip(performer, this));
+
+		if (performer.legArmor == this)
+			actions.add(new ActionUnequip(performer, this));
+		else
+			actions.add(new ActionEquip(performer, this));
 		actions.add(new ActionDrop(performer, performer.squareGameObjectIsOn, this));
 		return actions;
 	}
@@ -55,9 +65,9 @@ public class LegArmor extends GameObject {
 	@Override
 	public LegArmor makeCopy(Square square, Actor owner) {
 		return new LegArmor(new String(name), imageTexturePath, totalHealth, square, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,
 				anchorX, anchorY);
 	}
 }

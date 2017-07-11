@@ -8,6 +8,7 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionEquip;
+import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -176,13 +177,20 @@ public class Weapon extends GameObject {
 
 	@Override
 	public Action getDefaultActionInInventory(Actor performer) {
-		return new ActionEquip(performer, this);
+
+		if (performer.equipped == this)
+			return new ActionUnequip(performer, this);
+		else
+			return new ActionEquip(performer, this);
 	}
 
 	@Override
 	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionEquip(performer, this));
+		if (performer.equipped == this)
+			actions.add(new ActionUnequip(performer, this));
+		else
+			actions.add(new ActionEquip(performer, this));
 		actions.add(new ActionDrop(performer, performer.squareGameObjectIsOn, this));
 		return actions;
 	}

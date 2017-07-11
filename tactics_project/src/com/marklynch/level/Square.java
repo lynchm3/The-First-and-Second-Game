@@ -264,9 +264,9 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (defaultAction != null && defaultAction.image != null) {
 			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-			TextureUtils.drawTexture(defaultAction.image, squarePositionX + Game.SQUARE_WIDTH - 16,
-					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT - 16,
-					squarePositionY + Game.SQUARE_HEIGHT);
+			TextureUtils.drawTexture(defaultAction.image, squarePositionX + Game.SQUARE_WIDTH - 24,
+					squarePositionX + Game.SQUARE_WIDTH - 16, squarePositionY + Game.SQUARE_HEIGHT - 24,
+					squarePositionY + Game.SQUARE_HEIGHT - 16);
 		}
 	}
 
