@@ -192,6 +192,9 @@ public class Templates {
 	public static final Furnace FURNACE = new Furnace("Furnace", 200, "furnace.png", null, new Inventory(), false,
 			false, false, false, false, true, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f,
 			150f, null, false);
+	public static final WaterSource WELL = new WaterSource("Well", 5, "well.png", null, new Inventory(), false, false,
+			false, false, false, true, false, 2f, 2f, -32f, -32f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f,
+			0f, null, new Effect[] {});
 	public static final GameObjectTemplate SHELF = new GameObjectTemplate("Shelf", 5, "shelf.png", null,
 			new Inventory(), true, false, false, true, false, false, true, 1, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, 10f);
