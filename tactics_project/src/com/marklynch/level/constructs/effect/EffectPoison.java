@@ -25,7 +25,7 @@ public class EffectPoison extends Effect {
 
 	@Override
 	public void activate() {
-		float damage = 10;
+		float damage = 10 - (10 * (target.getEffectivePosionResistance() / 100f));
 		target.remainingHealth -= damage;
 		Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
 		target.attackedBy(this);
