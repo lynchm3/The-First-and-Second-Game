@@ -9,8 +9,6 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
@@ -64,24 +62,6 @@ public class AIRoutine {
 	}
 
 	public void update() {
-	}
-
-	public void createListOfVisibleHazards() {
-
-		ArrayList<Square> nearbySquares = actor.getAllSquaresWithinDistance(actor.sight);
-
-		for (Square square : nearbySquares) {
-			for (GameObject gameObject : square.inventory.getGameObjects()) {
-				for (Effect effect : gameObject.getActiveEffectsOnGameObject()) {
-					if (effect instanceof EffectBurning) {
-						if (actor.canSeeGameObject(gameObject)) {
-							visibleHazards.add(gameObject);
-						}
-					}
-				}
-			}
-		}
-
 	}
 
 	public void createSearchLocationsBasedOnVisibleAttackers() {

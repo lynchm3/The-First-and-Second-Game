@@ -481,9 +481,10 @@ public class UserInputLevel {
 		if (Game.level.openInventories.size() > 0) {
 			Game.level.openInventories.clear();
 		} else {
-			Game.level.openInventories.add(Game.level.player.inventory);
-			Game.level.player.inventory.filter(Inventory.inventoryFilterBy);
+			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, false);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy);
+			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_NORMAL);
+			Game.level.openInventories.add(Game.level.player.inventory);
 		}
 		closeAllPopups();
 	}

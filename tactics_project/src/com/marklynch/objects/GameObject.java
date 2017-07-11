@@ -20,6 +20,7 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionBurn;
 import com.marklynch.objects.actions.ActionDouse;
 import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionFillSpecificContainer;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionTake;
@@ -621,7 +622,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public Action getDefaultActionInInventory(Actor performer) {
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL) {
+			return new ActionFillSpecificContainer(performer, Inventory.waterSouce, (ContainerForLiquids) this);
+		}
+
 		return new ActionDrop(performer, performer.squareGameObjectIsOn, this);
+
 	}
 
 	@Override

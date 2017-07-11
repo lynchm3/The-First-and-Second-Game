@@ -15,6 +15,8 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.StringWithColor;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
@@ -40,10 +42,18 @@ public class Inventory {
 	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_NEWEST;
 
 	public enum INVENTORY_FILTER_BY {
-		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_FOOD
+		FILTER_BY_ALL, FILTER_BY_WEAPON, FILTER_BY_FOOD, FILTER_BY_CONTAINER_FOR_LIQUIDS
 	}
 
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
+
+	public enum INVENTORY_MODE {
+		MODE_NORMAL, MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL
+	}
+
+	public static transient INVENTORY_MODE inventoryMode = INVENTORY_MODE.MODE_NORMAL;
+
+	public static WaterSource waterSouce;
 
 	private transient boolean isOpen = false;
 	transient float x = 300;
@@ -153,7 +163,7 @@ public class Inventory {
 		buttonFilterByAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				filter(INVENTORY_FILTER_BY.FILTER_BY_ALL);
+				filter(INVENTORY_FILTER_BY.FILTER_BY_ALL, false);
 			}
 		});
 		buttons.add(buttonFilterByAll);
@@ -164,7 +174,7 @@ public class Inventory {
 		buttonFilterByWeapon.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				filter(INVENTORY_FILTER_BY.FILTER_BY_WEAPON);
+				filter(INVENTORY_FILTER_BY.FILTER_BY_WEAPON, false);
 			}
 		});
 		buttons.add(buttonFilterByWeapon);
@@ -175,7 +185,7 @@ public class Inventory {
 		buttonFilterByFood.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				filter(INVENTORY_FILTER_BY.FILTER_BY_FOOD);
+				filter(INVENTORY_FILTER_BY.FILTER_BY_FOOD, false);
 			}
 		});
 		buttons.add(buttonFilterByFood);
@@ -226,28 +236,36 @@ public class Inventory {
 		matchGameObjectsToSquares();
 	}
 
-	public void filter(INVENTORY_FILTER_BY inventoryFilterBy) {
-		Inventory.inventoryFilterBy = inventoryFilterBy;
+	public void filter(INVENTORY_FILTER_BY inventoryFilterBy, boolean temporary) {
+		if (!temporary)
+			Inventory.inventoryFilterBy = inventoryFilterBy;
 		for (Button button : buttonsFilter)
 			button.down = false;
 		if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
 		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_WEAPON) {
 		}
 		filteredGameObjects.clear();
-		if (Inventory.inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
+		if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
 			buttonFilterByAll.down = true;
 			filteredGameObjects.addAll(gameObjects);
-		} else if (Inventory.inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_WEAPON) {
+		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_WEAPON) {
 			buttonFilterByWeapon.down = true;
 			for (GameObject gameObject : gameObjects) {
 				if (gameObject instanceof Weapon) {
 					filteredGameObjects.add(gameObject);
 				}
 			}
-		} else if (Inventory.inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_FOOD) {
+		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_FOOD) {
 			buttonFilterByFood.down = true;
 			for (GameObject gameObject : gameObjects) {
 				if (gameObject instanceof Food) {
+					filteredGameObjects.add(gameObject);
+				}
+			}
+		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS) {
+			buttonFilterByFood.down = true;
+			for (GameObject gameObject : gameObjects) {
+				if (gameObject instanceof ContainerForLiquids) {
 					filteredGameObjects.add(gameObject);
 				}
 			}
@@ -534,7 +552,17 @@ public class Inventory {
 		}
 
 		// buttons
-		for (Button button : buttons) {
+		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
+			for (Button button : buttonsFilter) {
+				button.draw();
+			}
+		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL) {
+			TextUtils.printTextWithImages(
+					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) }, 300f, 50f,
+					300f, true);
+		}
+
+		for (Button button : buttonsSort) {
 			button.draw();
 		}
 
@@ -746,6 +774,10 @@ public class Inventory {
 			}
 		}
 		return true;
+	}
+
+	public void setMode(INVENTORY_MODE mode) {
+		inventoryMode = mode;
 	}
 
 }

@@ -114,6 +114,7 @@ public abstract class Action {
 		getGlobalImage("action_die.png");// untested
 		getGlobalImage("action_drop.png");
 		getGlobalImage("action_equip.png");
+		getGlobalImage("action_fill_container.png");
 		getGlobalImage("action_give.png");
 		getGlobalImage("action_hide.png");
 		getGlobalImage("action_lock.png");
@@ -128,6 +129,7 @@ public abstract class Action {
 		getGlobalImage("action_read.png");
 		getGlobalImage("action_ring.png");
 		getGlobalImage("action_scream.png");// untested
+		getGlobalImage("action_select_object.png");
 		getGlobalImage("action_search.png");
 		getGlobalImage("action_sleep.png");// untested
 		getGlobalImage("action_smash.png");
