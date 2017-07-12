@@ -19,7 +19,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionCastBurn;
 import com.marklynch.objects.actions.ActionCastDouse;
-import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
 import com.marklynch.objects.actions.ActionLootAll;
@@ -625,7 +625,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	@Override
 	public Action getDefaultActionInInventory(Actor performer) {
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL) {
-			return new ActionFillSpecificContainer(performer, Inventory.waterSouce, (ContainerForLiquids) this);
+			return new ActionFillSpecificContainer(performer, Inventory.waterSource, (ContainerForLiquids) this);
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
+			return new ActionDropSpecificItem(performer, Inventory.square, this);
 		}
 
 		if (performer.equipped == this)
@@ -643,7 +647,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		else
 			actions.add(new ActionEquip(performer, this));
 
-		actions.add(new ActionDrop(performer, performer.squareGameObjectIsOn, this));
+		actions.add(new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this));
 
 		// actions.add(new ActionThrow(performer, this, performer.equipped));
 		actions.add(new ActionCastBurn(performer, this));

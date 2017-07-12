@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
+import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -48,12 +49,10 @@ public class Inventory {
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
 
 	public enum INVENTORY_MODE {
-		MODE_NORMAL, MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL
+		MODE_NORMAL, MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL, MODE_SELECT_ITEM_TO_DROP
 	}
 
 	public static transient INVENTORY_MODE inventoryMode = INVENTORY_MODE.MODE_NORMAL;
-
-	public static WaterSource waterSouce;
 
 	private transient boolean isOpen = false;
 	transient float x = 300;
@@ -81,6 +80,9 @@ public class Inventory {
 	public ArrayList<Button> buttonsFilter;
 
 	public InventoryParent parent;
+
+	public static WaterSource waterSource;
+	public static Square square;
 
 	public Inventory(GameObject... gameObjects) {
 		for (int i = 0; i < inventorySquares[0].length; i++) {
@@ -558,8 +560,15 @@ public class Inventory {
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL) {
 			TextUtils.printTextWithImages(
-					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) }, 300f, 50f,
+					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) }, 300f, 25f,
 					300f, true);
+		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
+			TextUtils.printTextWithImages(
+					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) }, 300f, 25f, 300f,
+					true);
+			for (Button button : buttonsFilter) {
+				button.draw();
+			}
 		}
 
 		for (Button button : buttonsSort) {
@@ -567,7 +576,7 @@ public class Inventory {
 		}
 
 		// Actor
-		int actorPositionXInPixels = 1150;
+		int actorPositionXInPixels = 550;
 		int actorPositionYInPixels = 250;
 		float alpha = 1.0f;
 		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels,

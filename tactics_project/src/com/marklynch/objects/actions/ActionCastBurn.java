@@ -56,7 +56,7 @@ public class ActionCastBurn extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
+		if (target.squareGameObjectIsOn != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			Game.level.projectiles.add(new Projectile("Arrow", performer, target, target.squareGameObjectIsOn,
 					Templates.FIRE_BALL.makeCopy(null, null), 1f, true));
 		}

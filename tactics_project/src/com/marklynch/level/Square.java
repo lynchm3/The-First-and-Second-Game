@@ -21,7 +21,8 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.InventoryParent;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionDropItemsInInventory;
+import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionMove;
@@ -356,9 +357,11 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			}
 		}
 
+		actions.add(new ActionDropItemsInInventory(performer, this));
+
 		if (performer.equipped != null) {
 			if (performer.straightLineDistanceTo(this) < 2) {
-				actions.add(new ActionDrop(performer, this, performer.equipped));
+				actions.add(new ActionDropSpecificItem(performer, this, performer.equipped));
 			}
 			actions.add(new ActionThrow(performer, this, performer.equipped));
 		}

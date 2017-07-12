@@ -8,14 +8,14 @@ import com.marklynch.objects.Searchable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionDrop extends Action {
+public class ActionDropSpecificItem extends Action {
 
 	public static final String ACTION_NAME = "Drop";
 	GameObject performer;
 	Square square;
 	GameObject object;
 
-	public ActionDrop(GameObject performer, Square square, GameObject object) {
+	public ActionDropSpecificItem(GameObject performer, Square square, GameObject object) {
 		super(ACTION_NAME, "action_drop.png");
 		this.performer = performer;
 		this.square = square;
@@ -50,6 +50,12 @@ public class ActionDrop extends Action {
 				}
 				actor.equippedBeforePickingUpObject = null;
 			}
+			if (actor.helmet == object)
+				actor.helmet = null;
+			if (actor.bodyArmor == object)
+				actor.bodyArmor = null;
+			if (actor.legArmor == object)
+				actor.legArmor = null;
 		}
 
 		// receiver.inventory.add(object);

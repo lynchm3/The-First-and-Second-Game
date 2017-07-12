@@ -1,24 +1,24 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Square;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.Inventory;
-import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.units.Actor;
 
-public class ActionFillContainer extends Action {
+public class ActionDropItemsInInventory extends Action {
 
-	public static final String ACTION_NAME = "Fill Container(s)";
+	public static final String ACTION_NAME = "Drop";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
-	WaterSource waterSource;
+	Square target;
 
-	public ActionFillContainer(Actor performer, WaterSource waterSource) {
+	public ActionDropItemsInInventory(Actor performer, Square target) {
 		super(ACTION_NAME, "action_select_object.png");
 		this.performer = performer;
-		this.waterSource = waterSource;
+		this.target = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -35,10 +35,10 @@ public class ActionFillContainer extends Action {
 		if (Game.level.openInventories.size() > 0) {
 			Game.level.openInventories.clear();
 		} else {
-			Inventory.waterSouce = this.waterSource;
-			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
+			Inventory.square = this.target;
+			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_ALL, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy);
-			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL);
+			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP);
 			Game.level.openInventories.add(Game.level.player.inventory);
 
 			// Game.level.player.inventory.setActionOnSelect(new
@@ -72,7 +72,7 @@ public class ActionFillContainer extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.straightLineDistanceTo(waterSource.squareGameObjectIsOn) > 1) {
+		if (performer.straightLineDistanceTo(target) > 1) {
 			actionName = ACTION_NAME_DISABLED;
 			return false;
 		}

@@ -14,7 +14,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionRing;
@@ -206,7 +206,7 @@ public class AIRoutineForMort extends AIRoutine {
 					return;
 				}
 
-				new ActionDrop(mort, mort.questCaveOfTheBlind.troughSquare, mort.mortsMeatChunk).perform();
+				new ActionDropSpecificItem(mort, mort.questCaveOfTheBlind.troughSquare, mort.mortsMeatChunk).perform();
 				mort.mortsMeatChunk.quest = null;
 
 				feedingDemoState = FEEDING_DEMO_STATE.RING_BELL;
@@ -361,7 +361,7 @@ public class AIRoutineForMort extends AIRoutine {
 				new ActionThrow(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
 				for (GameObject stolenItem : stolenItemsOnCriminal) {
 					if (criminal.inventory.contains(stolenItem)) {
-						new ActionDrop(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();
+						new ActionDropSpecificItem(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();
 						this.actor.thoughtBubbleImageTexture = stolenItem.imageTexture;
 					}
 				}

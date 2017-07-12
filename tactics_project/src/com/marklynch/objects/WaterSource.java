@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionFillContainer;
+import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -36,7 +36,7 @@ public class WaterSource extends GameObject {
 		if (this.remainingHealth <= 0)
 			return actions;
 
-		actions.add(new ActionFillContainer(performer, this));
+		actions.add(new ActionFillContainersInInventory(performer, this));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;
 	}

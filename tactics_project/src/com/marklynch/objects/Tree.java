@@ -7,7 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
@@ -96,7 +96,7 @@ public class Tree extends GameObject {
 			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();
 			objectsToDropFromHit.addAll(this.inventory.gameObjects);
 			for (GameObject objectToDrop : objectsToDropFromHit) {
-				Level.actionQueueForInanimateObjects.add(new ActionDrop(this, this.squareGameObjectIsOn, objectToDrop));
+				Level.actionQueueForInanimateObjects.add(new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop));
 				objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
 			}
 			healthWhenLastDroppedFruit = this.remainingHealth;
@@ -130,7 +130,7 @@ public class Tree extends GameObject {
 		}
 
 		for (GameObject objectToDrop : objectsToDropRandomly) {
-			Level.actionQueueForInanimateObjects.add(new ActionDrop(this, this.squareGameObjectIsOn, objectToDrop));
+			Level.actionQueueForInanimateObjects.add(new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop));
 			objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
 			// - 32;
 		}

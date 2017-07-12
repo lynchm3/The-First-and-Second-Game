@@ -6,7 +6,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionSearch;
 import com.marklynch.objects.actions.ActionThrow;
 import com.marklynch.objects.units.Actor;
@@ -46,7 +46,7 @@ public class Searchable extends GameObject {
 
 		if (performer.equipped != null) {
 			if (performer.straightLineDistanceTo(this.squareGameObjectIsOn) < 2) {
-				actions.add(new ActionDrop(performer, this.squareGameObjectIsOn, performer.equipped));
+				actions.add(new ActionDropSpecificItem(performer, this.squareGameObjectIsOn, performer.equipped));
 			}
 			actions.add(new ActionThrow(performer, this, performer.equipped));
 		}

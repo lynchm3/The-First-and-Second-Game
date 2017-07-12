@@ -6,7 +6,7 @@ import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionDrop;
+import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.units.Actor;
@@ -38,15 +38,6 @@ public class LegArmor extends GameObject {
 	}
 
 	@Override
-	public Action getDefaultActionInInventory(Actor performer) {
-
-		if (performer.legArmor == this)
-			return new ActionUnequip(performer, this);
-		else
-			return new ActionEquip(performer, this);
-	}
-
-	@Override
 	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
@@ -54,7 +45,7 @@ public class LegArmor extends GameObject {
 			actions.add(new ActionUnequip(performer, this));
 		else
 			actions.add(new ActionEquip(performer, this));
-		actions.add(new ActionDrop(performer, performer.squareGameObjectIsOn, this));
+		actions.add(new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this));
 		return actions;
 	}
 
