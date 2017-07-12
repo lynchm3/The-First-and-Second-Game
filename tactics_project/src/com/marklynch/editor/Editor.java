@@ -38,6 +38,7 @@ import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.level.quest.smallgame.QuestSmallGame;
 import com.marklynch.level.quest.thepigs.QuestThePigs;
 import com.marklynch.objects.Bed;
+import com.marklynch.objects.ContainerForLiquids;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Inventory;
@@ -441,6 +442,15 @@ public class Editor {
 		player.inventory.add(Templates.PINK_HARD_HAT.makeCopy(null, player));
 		player.inventory.add(Templates.COWBOY_HAT.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
+		ContainerForLiquids jar1 = Templates.JAR.makeCopy(null, player);
+		jar1.inventory.add(Templates.WATER.makeCopy(null, player, jar1.volume));
+		player.inventory.add(jar1);
+		ContainerForLiquids jar2 = Templates.JAR.makeCopy(null, player);
+		jar2.inventory.add(Templates.WATER.makeCopy(null, player, jar2.volume));
+		player.inventory.add(jar2);
+		ContainerForLiquids jar3 = Templates.JAR.makeCopy(null, player);
+		jar3.inventory.add(Templates.WATER.makeCopy(null, player, jar3.volume));
+		player.inventory.add(jar3);
 
 		// Trader Joe
 		Trader trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png",

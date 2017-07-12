@@ -34,7 +34,7 @@ public class Corpse extends GameObject {
 
 	@Override
 	public Corpse makeCopy(Square square, Actor owner) {
-		return new Corpse(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Corpse(new String(baseName), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

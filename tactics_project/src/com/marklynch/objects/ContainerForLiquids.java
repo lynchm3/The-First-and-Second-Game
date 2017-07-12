@@ -2,8 +2,9 @@ package com.marklynch.objects;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
-import com.marklynch.objects.actions.ActionDouse;
+import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ResourceUtils;
 
 import mdesl.graphics.Color;
@@ -37,7 +38,7 @@ public class ContainerForLiquids extends GameObject {
 			this.name = baseName + " (empty)";
 			this.imageTexture = baseImage;
 		} else {
-			this.name = baseName + " of " + inventory.get(0);
+			this.name = baseName + " of " + inventory.get(0).name;
 			this.imageTexture = imageWhenFull;
 		}
 
@@ -48,7 +49,7 @@ public class ContainerForLiquids extends GameObject {
 
 	@Override
 	public ContainerForLiquids makeCopy(Square square, Actor owner) {
-		return new ContainerForLiquids(new String(name), (int) totalHealth, imageTexturePath, square,
+		return new ContainerForLiquids(new String(baseName), (int) totalHealth, imageTexturePath, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
@@ -62,13 +63,14 @@ public class ContainerForLiquids extends GameObject {
 			this.name = baseName + " (empty)";
 			this.imageTexture = baseImage;
 		} else {
-			this.name = baseName + " of " + inventory.get(0);
+			this.name = baseName + " of " + inventory.get(0).name;
 			this.imageTexture = imageWhenFull;
 		}
 	}
 
 	@Override
 	public void landed(Actor shooter) {
+
 		this.remainingHealth = 0;
 		this.canShareSquare = true;
 		this.blocksLineOfSight = false;
@@ -76,44 +78,56 @@ public class ContainerForLiquids extends GameObject {
 		soundDampening = 1;
 		this.activeEffectsOnGameObject.clear();
 
+		// Find a square for broken glass and put it there
 		Square squareForGlass = null;
-		if (this.squareGameObjectIsOn.inventory.contains(Wall.class)) {
+		if (this.squareGameObjectIsOn.inventory.canShareSquare()) {
 			squareForGlass = this.squareGameObjectIsOn;
 		} else {
-
-			if (this.squareGameObjectIsOn.xInGrid > shooter.squareGameObjectIsOn.xInGrid
+			if (squareForGlass == null && this.squareGameObjectIsOn.xInGrid > shooter.squareGameObjectIsOn.xInGrid
 					&& this.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1) {
 				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid
 						- 1][this.squareGameObjectIsOn.yInGrid];
-
-			} else if (this.squareGameObjectIsOn.xInGrid < shooter.squareGameObjectIsOn.xInGrid
+				if (!squareForGlass.inventory.canShareSquare()) {
+					squareForGlass = null;
+				}
+			}
+			if (squareForGlass == null && this.squareGameObjectIsOn.xInGrid < shooter.squareGameObjectIsOn.xInGrid
 					&& this.squareGameObjectIsOn.xInGrid > 0) {
-
 				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid
 						+ 1][this.squareGameObjectIsOn.yInGrid];
-
-			} else if (this.squareGameObjectIsOn.yInGrid > shooter.squareGameObjectIsOn.yInGrid
+				if (!squareForGlass.inventory.canShareSquare()) {
+					squareForGlass = null;
+				}
+			}
+			if (squareForGlass == null && this.squareGameObjectIsOn.yInGrid > shooter.squareGameObjectIsOn.yInGrid
 					&& this.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1) {
-
 				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid][this.squareGameObjectIsOn.yInGrid
 						- 1];
-			} else if (this.squareGameObjectIsOn.yInGrid < shooter.squareGameObjectIsOn.yInGrid
+				if (!squareForGlass.inventory.canShareSquare()) {
+					squareForGlass = null;
+				}
+			}
+			if (squareForGlass == null && this.squareGameObjectIsOn.yInGrid < shooter.squareGameObjectIsOn.yInGrid
 					&& this.squareGameObjectIsOn.yInGrid > 0) {
 				squareForGlass = Game.level.squares[this.squareGameObjectIsOn.xInGrid][this.squareGameObjectIsOn.yInGrid
 						+ 1];
+				if (!squareForGlass.inventory.canShareSquare()) {
+					squareForGlass = null;
+				}
 			}
 		}
 
 		if (squareForGlass != null)
 			Templates.BROKEN_GLASS.makeCopy(squareForGlass, this.owner);
 
-		if (this.inventory.size() > 0 && this.inventory.get(0) instanceof Liquid)
+		Game.level.logOnScreen(new ActivityLog(new Object[] { this, " smashed" }));
 
-		{
+		if (this.inventory.size() > 0 && this.inventory.get(0) instanceof Liquid) {
 			for (GameObject gameObject : this.squareGameObjectIsOn.inventory.getGameObjects()) {
 				if (gameObject != this) {
-					System.out.println("Dousing " + gameObject);
-					new ActionDouse(shooter, gameObject).perform();
+					// new ActionDouse(shooter, gameObject).perform();
+					gameObject.removeBurningEffect();
+					gameObject.addEffect(new EffectWet(shooter, gameObject, 5));
 				}
 			}
 		}

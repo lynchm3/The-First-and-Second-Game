@@ -246,7 +246,7 @@ public class Templates {
 	public static final BrokenGlass BROKEN_LAMP = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
 			new Inventory(), false, true, false, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 90f, 0f, 0f, 0f, 3f, null);
-	public static final BrokenGlass BROKEN_GLASS = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null,
+	public static final BrokenGlass BROKEN_GLASS = new BrokenGlass("Broken Glass", 5, "smashed_glass.png", null,
 			new Inventory(), false, true, false, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 90f, 0f, 0f, 0f, 3f, null);
 	public static final Searchable DROP_HOLE = new Searchable("Drop Hole", 5, "drop_hole.png", null, new Inventory(),

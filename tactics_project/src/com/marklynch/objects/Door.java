@@ -18,10 +18,10 @@ public class Door extends Openable {
 			float waterResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
 			boolean locked, Key... keys) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
-				owner, locked, keys);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner, locked,
+				keys);
 		soundDampeningWhenClosed = soundDampening;
 		blocksLineOfSightWhenClosed = blocksLineOfSight;
 
@@ -80,7 +80,7 @@ public class Door extends Openable {
 
 	@Override
 	public Door makeCopy(Square square, Actor owner) {
-		return new Door(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Door(new String(baseName), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

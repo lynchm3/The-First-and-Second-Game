@@ -34,7 +34,7 @@ public class Carcass extends GameObject {
 
 	@Override
 	public Carcass makeCopy(Square square, Actor owner) {
-		return new Carcass(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Carcass(new String(baseName), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

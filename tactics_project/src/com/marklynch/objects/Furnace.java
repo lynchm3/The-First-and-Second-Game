@@ -23,10 +23,10 @@ public class Furnace extends Openable {
 			float waterResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
 			boolean locked, Key... keys) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
-				owner, locked, keys);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner, locked,
+				keys);
 		if (locked)
 			this.name = baseName + " (locked)";
 		else if (this.inventory.size() == 0)
@@ -130,7 +130,7 @@ public class Furnace extends Openable {
 
 	@Override
 	public Furnace makeCopy(Square square, Actor owner) {
-		return new Furnace(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Furnace(new String(baseName), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
