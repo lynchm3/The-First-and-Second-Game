@@ -37,7 +37,7 @@ public class ActionFillContainersInInventory extends Action {
 		} else {
 			Inventory.waterSource = this.waterSource;
 			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
-			Game.level.player.inventory.sort(Inventory.inventorySortBy);
+			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL);
 			Game.level.openInventories.add(Game.level.player.inventory);
 

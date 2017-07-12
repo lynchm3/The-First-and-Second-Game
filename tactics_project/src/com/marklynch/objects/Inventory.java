@@ -97,7 +97,7 @@ public class Inventory {
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY);
+				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY, true);
 			}
 		});
 		buttons.add(buttonSortAlphabetically);
@@ -108,7 +108,7 @@ public class Inventory {
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST);
+				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST, true);
 			}
 		});
 		buttons.add(buttonSortByNewest);
@@ -119,7 +119,7 @@ public class Inventory {
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE);
+				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE, true);
 			}
 		});
 		buttons.add(buttonSortByFavourite);
@@ -130,7 +130,7 @@ public class Inventory {
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_VALUE);
+				sort(INVENTORY_SORT_BY.SORT_BY_VALUE, true);
 			}
 		});
 		buttons.add(buttonSortByValue);
@@ -141,7 +141,7 @@ public class Inventory {
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE);
+				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE, true);
 			}
 		});
 		buttons.add(buttonSortByTotalDamage);
@@ -152,7 +152,7 @@ public class Inventory {
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE);
+				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE, true);
 			}
 		});
 		buttons.add(buttonSortBySlashDamage);
@@ -197,10 +197,12 @@ public class Inventory {
 
 	}
 
-	public void sort(INVENTORY_SORT_BY inventorySortBy) {
+	public void sort(INVENTORY_SORT_BY inventorySortBy, boolean filterFirst) {
 
-		for (Button button : buttonsSort)
+		for (Button button : buttonsSort) {
 			button.down = false;
+		}
+
 		if (inventorySortBy == INVENTORY_SORT_BY.SORT_ALPHABETICALLY) {
 			buttonSortAlphabetically.down = true;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_NEWEST) {
@@ -232,6 +234,12 @@ public class Inventory {
 		}
 
 		Inventory.inventorySortBy = inventorySortBy;
+
+		if (filterFirst) {
+			filter(this.inventoryFilterBy, false);
+			return;
+		}
+
 		Collections.sort(filteredGameObjects);
 		matchGameObjectsToSquares();
 	}
@@ -271,7 +279,7 @@ public class Inventory {
 			}
 		}
 
-		sort(Inventory.inventorySortBy);
+		sort(Inventory.inventorySortBy, false);
 	}
 
 	public void postLoad1() {
@@ -388,7 +396,7 @@ public class Inventory {
 
 	public void setGameObjects(ArrayList<GameObject> gameObjects) {
 		this.gameObjects = gameObjects;
-		this.sort(inventorySortBy);
+		this.sort(inventorySortBy, true);
 		matchGameObjectsToSquares();
 	}
 

@@ -669,9 +669,17 @@ public class Level {
 			}
 
 			player.activateEffects();
+			ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 			for (GameObject gameObjectInInventory : player.inventory.getGameObjects()) {
 				gameObjectInInventory.update(0);
+				if (gameObjectInInventory.remainingHealth <= 0) {
+					toRemove.add(gameObjectInInventory);
+				}
 			}
+			for (GameObject gameObject : toRemove) {
+				player.inventory.remove(gameObject);
+			}
+
 		}
 
 		for (Faction faction : factions) {

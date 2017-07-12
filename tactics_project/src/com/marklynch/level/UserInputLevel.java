@@ -482,7 +482,7 @@ public class UserInputLevel {
 			Game.level.openInventories.clear();
 		} else {
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, false);
-			Game.level.player.inventory.sort(Inventory.inventorySortBy);
+			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_NORMAL);
 			Game.level.openInventories.add(Game.level.player.inventory);
 		}

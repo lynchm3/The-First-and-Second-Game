@@ -92,6 +92,12 @@ public class ActionThrowSpecificItem extends Action {
 			}
 			performer.equippedBeforePickingUpObject = null;
 		}
+		if (performer.helmet == projectile)
+			performer.helmet = null;
+		if (performer.bodyArmor == projectile)
+			performer.bodyArmor = null;
+		if (performer.legArmor == projectile)
+			performer.legArmor = null;
 
 		if (performer.inventory.contains(projectile))
 			performer.inventory.remove(projectile);

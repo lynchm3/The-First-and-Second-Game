@@ -249,6 +249,31 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			persistsWhenCantBeSeen = false;
 			soundDampening = 1;
 			this.activeEffectsOnGameObject.clear();
+
+			if (inventorySquareGameObjectIsOn != null) {
+
+				GameObject holder = (GameObject) inventorySquareGameObjectIsOn.inventoryThisBelongsTo.parent;
+				if (holder instanceof Actor) {
+
+					Actor actor = (Actor) holder;
+					if (actor.equipped == this) {
+						if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
+							actor.equip(actor.equippedBeforePickingUpObject);
+						} else {
+							actor.equip(null);
+						}
+						actor.equippedBeforePickingUpObject = null;
+					}
+					if (actor.helmet == this)
+						actor.helmet = null;
+					if (actor.bodyArmor == this)
+						actor.bodyArmor = null;
+					if (actor.legArmor == this)
+						actor.legArmor = null;
+
+				}
+			}
+
 			return true;
 		}
 		return false;
