@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.ContainerForLiquids;
+import com.marklynch.objects.Liquid;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.units.Actor;
@@ -35,12 +36,12 @@ public class ActionFillSpecificContainer extends Action {
 
 		if (!enabled)
 			return;
-		containerForLiquids.inventory
-				.add(Templates.WATER.makeCopy(null, containerForLiquids.owner, containerForLiquids.volume));
 
+		Liquid water = Templates.WATER.makeCopy(null, performer, containerForLiquids.volume);
+		containerForLiquids.inventory.add(water);
 		if (performer.squareGameObjectIsOn.visibleToPlayer) {
 			Game.level.logOnScreen(
-					new ActivityLog(new Object[] { performer, " filled up ", containerForLiquids, " with ", "water" }));
+					new ActivityLog(new Object[] { performer, " filled ", containerForLiquids, " with ", water }));
 		}
 
 		// if (Game.level.openInventories.size() > 0) {

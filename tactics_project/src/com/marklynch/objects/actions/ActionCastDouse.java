@@ -4,7 +4,10 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.EffectWet;
+import com.marklynch.objects.ContainerForLiquids;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Liquid;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.units.WildAnimal;
@@ -39,7 +42,16 @@ public class ActionCastDouse extends Action {
 
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast douse on ", target }));
 		target.removeBurningEffect();
-		target.addEffect(new EffectWet(performer, target, 5));
+		if (target instanceof ContainerForLiquids) {
+			if (target.inventory.size() == 0) {
+				Liquid water = Templates.WATER.makeCopy(null, performer, ((ContainerForLiquids) target).volume);
+				target.inventory.add(water);
+				Game.level
+						.logOnScreen(new ActivityLog(new Object[] { performer, " filled ", target, " with ", water }));
+			}
+		} else {
+			target.addEffect(new EffectWet(performer, target, 5));
+		}
 		// if (Math.random() * 100 > target.fireResistance) {
 		// target.addEffect(new EffectBurn(performer, target, 5));
 		//
