@@ -125,6 +125,7 @@ public abstract class Action {
 		getGlobalImage("action_open.png");
 		getGlobalImage("action_pickpocket_all.png");// untested
 		getGlobalImage("action_pick_up.png");
+		getGlobalImage("action_posion.png");
 		getGlobalImage("action_put.png");// untested
 		getGlobalImage("action_read.png");
 		getGlobalImage("action_ring.png");

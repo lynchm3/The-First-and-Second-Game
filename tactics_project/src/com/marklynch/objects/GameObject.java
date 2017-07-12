@@ -19,6 +19,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionCastBurn;
 import com.marklynch.objects.actions.ActionCastDouse;
+import com.marklynch.objects.actions.ActionCastPoison;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
@@ -250,28 +251,29 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			soundDampening = 1;
 			this.activeEffectsOnGameObject.clear();
 
-			if (inventorySquareGameObjectIsOn != null) {
+			// Unequip destroyed item
+			if (inventorySquareGameObjectIsOn != null
+					&& inventorySquareGameObjectIsOn.inventoryThisBelongsTo.parent instanceof Actor) {
 
-				GameObject holder = (GameObject) inventorySquareGameObjectIsOn.inventoryThisBelongsTo.parent;
-				if (holder instanceof Actor) {
+				// GameObject holder = (GameObject)
+				// inventorySquareGameObjectIsOn.inventoryThisBelongsTo.parent;
 
-					Actor actor = (Actor) holder;
-					if (actor.equipped == this) {
-						if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
-							actor.equip(actor.equippedBeforePickingUpObject);
-						} else {
-							actor.equip(null);
-						}
-						actor.equippedBeforePickingUpObject = null;
+				Actor actor = (Actor) inventorySquareGameObjectIsOn.inventoryThisBelongsTo.parent;
+				if (actor.equipped == this) {
+					if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
+						actor.equip(actor.equippedBeforePickingUpObject);
+					} else {
+						actor.equip(null);
 					}
-					if (actor.helmet == this)
-						actor.helmet = null;
-					if (actor.bodyArmor == this)
-						actor.bodyArmor = null;
-					if (actor.legArmor == this)
-						actor.legArmor = null;
-
+					actor.equippedBeforePickingUpObject = null;
 				}
+				if (actor.helmet == this)
+					actor.helmet = null;
+				if (actor.bodyArmor == this)
+					actor.bodyArmor = null;
+				if (actor.legArmor == this)
+					actor.legArmor = null;
+
 			}
 
 			return true;
@@ -562,6 +564,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		actions.add(new ActionCastBurn(performer, this));
 		actions.add(new ActionCastDouse(performer, this));
+		actions.add(new ActionCastPoison(performer, this));
 
 		return actions;
 
@@ -688,6 +691,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// actions.add(new ActionThrow(performer, this, performer.equipped));
 		actions.add(new ActionCastBurn(performer, this));
 		actions.add(new ActionCastDouse(performer, this));
+		actions.add(new ActionCastPoison(performer, this));
 
 		return actions;
 	}

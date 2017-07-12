@@ -8,6 +8,7 @@ import java.util.Date;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.units.Actor;
 
@@ -183,6 +184,17 @@ public class GameObjectTemplate implements InventoryParent {
 		Effect effectBurning = null;
 		for (Effect effect : activeEffectsOnGameObject) {
 			if (effect instanceof EffectBurning) {
+				effectBurning = effect;
+			}
+		}
+		if (effectBurning != null)
+			removeEffect(effectBurning);
+	}
+
+	public void removePosionEffect() {
+		Effect effectBurning = null;
+		for (Effect effect : activeEffectsOnGameObject) {
+			if (effect instanceof EffectPoison) {
 				effectBurning = effect;
 			}
 		}
