@@ -17,8 +17,8 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionBurn;
-import com.marklynch.objects.actions.ActionDouse;
+import com.marklynch.objects.actions.ActionCastBurn;
+import com.marklynch.objects.actions.ActionCastDouse;
 import com.marklynch.objects.actions.ActionDrop;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
@@ -528,8 +528,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			actions.add(new ActionThrow(performer, this, performer.equipped));
 		}
 
-		actions.add(new ActionBurn(performer, this));
-		actions.add(new ActionDouse(performer, this));
+		actions.add(new ActionCastBurn(performer, this));
+		actions.add(new ActionCastDouse(performer, this));
 
 		return actions;
 
@@ -644,6 +644,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			actions.add(new ActionEquip(performer, this));
 
 		actions.add(new ActionDrop(performer, performer.squareGameObjectIsOn, this));
+
+		// actions.add(new ActionThrow(performer, this, performer.equipped));
+		actions.add(new ActionCastBurn(performer, this));
+		actions.add(new ActionCastDouse(performer, this));
+
 		return actions;
 	}
 

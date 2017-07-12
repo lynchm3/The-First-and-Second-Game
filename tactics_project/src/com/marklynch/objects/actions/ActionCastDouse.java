@@ -10,16 +10,16 @@ import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.units.WildAnimal;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionDouse extends Action {
+public class ActionCastDouse extends Action {
 
-	public static final String ACTION_NAME = "Douse";
+	public static final String ACTION_NAME = "Cast Douse";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
 
 	// Default for hostiles
-	public ActionDouse(Actor attacker, GameObject target) {
+	public ActionCastDouse(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_douse.png");
 		this.performer = attacker;
 		this.target = target;
@@ -129,6 +129,9 @@ public class ActionDouse extends Action {
 
 	@Override
 	public Sound createSound() {
+
+		if (target.squareGameObjectIsOn == null)
+			return null;
 
 		// Sound
 

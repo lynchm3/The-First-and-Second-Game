@@ -12,16 +12,16 @@ import com.marklynch.objects.units.WildAnimal;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionBurn extends Action {
+public class ActionCastBurn extends Action {
 
-	public static final String ACTION_NAME = "Burn";
+	public static final String ACTION_NAME = "Cast Burn";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
 
 	// Default for hostiles
-	public ActionBurn(Actor attacker, GameObject target) {
+	public ActionCastBurn(Actor attacker, GameObject target) {
 		super(ACTION_NAME, "action_burn.png");
 		this.performer = attacker;
 		this.target = target;
@@ -129,6 +129,9 @@ public class ActionBurn extends Action {
 
 	@Override
 	public Sound createSound() {
+
+		if (target.squareGameObjectIsOn == null)
+			return null;
 
 		// Sound
 
