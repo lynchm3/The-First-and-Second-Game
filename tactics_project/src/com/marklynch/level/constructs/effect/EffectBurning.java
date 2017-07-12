@@ -7,6 +7,7 @@ import java.util.Vector;
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.InventorySquare;
 import com.marklynch.ui.ActivityLog;
 
 public class EffectBurning extends Effect {
@@ -36,24 +37,47 @@ public class EffectBurning extends Effect {
 		// Spread fire if not turn 1
 		if (totalTurns != turnsRemaining) {
 
+			// If in world (not in inventory)
 			Square squareTargetIsOn = target.squareGameObjectIsOn;
-			for (GameObject gameObject : squareTargetIsOn.inventory.getGameObjects()) {
+			if (squareTargetIsOn != null) {
+				for (GameObject gameObject : squareTargetIsOn.inventory.getGameObjects()) {
 
-				if (gameObject != target && Math.random() * 100 > gameObject.getEffectiveFireResistance()) {
-					gameObject.removeWetEffect();
-					gameObject.addEffect(this.makeCopy(source, gameObject));
-					Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
-				}
-			}
-
-			Vector<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
-			for (Square adjacentSquare : adjacentSquares) {
-				for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
-					if (Math.random() * 100 > gameObject.getEffectiveFireResistance()) {
+					if (gameObject != target && Math.random() * 100 > gameObject.getEffectiveFireResistance()) {
 						gameObject.removeWetEffect();
 						gameObject.addEffect(this.makeCopy(source, gameObject));
 						Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
 					}
+				}
+
+				Vector<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
+				for (Square adjacentSquare : adjacentSquares) {
+					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
+						if (Math.random() * 100 > gameObject.getEffectiveFireResistance()) {
+							gameObject.removeWetEffect();
+							gameObject.addEffect(this.makeCopy(source, gameObject));
+							if (gameObject.squareGameObjectIsOn.visibleToPlayer)
+								Game.level
+										.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
+						}
+					}
+				}
+			}
+
+			// If in inventory
+			InventorySquare inventorySquareTargetIsOn = target.inventorySquareGameObjectIsOn;
+			if (inventorySquareTargetIsOn != null) {
+
+				Vector<InventorySquare> adjacentSquares = inventorySquareTargetIsOn.getAllInventorySquaresAtDistance(1);
+				for (InventorySquare adjacentSquare : adjacentSquares) {
+					if (adjacentSquare.gameObject != null
+							&& Math.random() * 100 > adjacentSquare.gameObject.getEffectiveFireResistance()) {
+						adjacentSquare.gameObject.removeWetEffect();
+						adjacentSquare.gameObject.addEffect(this.makeCopy(source, adjacentSquare.gameObject));
+						if (inventorySquareTargetIsOn.inventoryThisBelongsTo.parent == Game.level.player)
+							Game.level.logOnScreen(
+									new ActivityLog(new Object[] { this, " spread to ", adjacentSquare.gameObject }));
+					}
+
 				}
 			}
 		}

@@ -3,12 +3,14 @@ package com.marklynch.objects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class InventorySquare extends Square {
@@ -138,5 +140,55 @@ public class InventorySquare extends Square {
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		return actions;
+	}
+
+	public Vector<InventorySquare> getAllInventorySquaresAtDistance(float distance) {
+		Vector<InventorySquare> squares = new Vector<InventorySquare>();
+		if (distance == 0) {
+			squares.addElement(this);
+			return squares;
+		}
+
+		boolean xGoingUp = true;
+		boolean yGoingUp = true;
+		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
+			if (ArrayUtils.inBounds(inventoryThisBelongsTo.inventorySquares, this.xInGrid + x, this.yInGrid + y)) {
+				squares.add(inventoryThisBelongsTo.inventorySquares[this.xInGrid + (int) x][this.yInGrid + (int) y]);
+			}
+
+			if (xGoingUp) {
+				if (x == distance) {
+					xGoingUp = false;
+					x--;
+				} else {
+					x++;
+				}
+			} else {
+				if (x == -distance) {
+					xGoingUp = true;
+					x++;
+				} else {
+					x--;
+				}
+			}
+
+			if (yGoingUp) {
+				if (y == distance) {
+					yGoingUp = false;
+					y--;
+				} else {
+					y++;
+				}
+			} else {
+				if (y == -distance) {
+					yGoingUp = true;
+					y++;
+				} else {
+					y--;
+				}
+			}
+
+		}
+		return squares;
 	}
 }
