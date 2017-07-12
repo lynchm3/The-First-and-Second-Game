@@ -6,6 +6,8 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.ContainerForLiquids;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Liquid;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.units.WildAnimal;
@@ -39,16 +41,17 @@ public class ActionCastPoison extends Action {
 			return;
 
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast poison on ", target }));
-		if (target instanceof ContainerForLiquids) {
-			// if (target.inventory.size() != 0 && target.inventory.get(0)
-			// instanceof WATER FUCK) {
-			// Liquid water = Templates.WATER.makeCopy(null, performer,
-			// ((ContainerForLiquids) target).volume);
-			// target.inventory.add(water);
-			// Game.level
-			// .logOnScreen(new ActivityLog(new Object[] { performer, " filled
-			// ", target, " with ", water }));
-			// }
+		if (target instanceof ContainerForLiquids && target.inventory.size() != 0) {
+			ContainerForLiquids containerForLiquids = (ContainerForLiquids) target;
+			target.inventory.remove(target.inventory.get(0));
+			Liquid poison = Templates.POISON.makeCopy(null, containerForLiquids.owner, containerForLiquids.volume);
+			target.inventory.add(poison);
+
+			if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
+					|| (target.inventorySquareGameObjectIsOn != null
+							&& target.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory)) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " made ", poison, " in ", target }));
+			}
 		} else {
 			if (Math.random() * 100 > target.getEffectivePosionResistance()) {
 				target.addEffect(new EffectPoison(performer, target, 5));

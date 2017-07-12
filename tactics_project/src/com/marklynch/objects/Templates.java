@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
+import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.tools.Bell;
@@ -215,8 +216,12 @@ public class Templates {
 	public static final ContainerForLiquids JAR = new ContainerForLiquids("Jar", 5, "jar.png", null, new Inventory(),
 			true, true, true, true, false, false, 0.12f, 0.25f, 24f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
 			0f, 0f, 0f, null, 1f, "water_jar.png");
-	public static final Liquid WATER = new Liquid("Water", 5, "water.png", null, new Inventory(), true, true, true,
-			true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, null, 0f);
+	public static final Liquid WATER = new Liquid("Water", 5, "effect_wet.png", null, new Inventory(), true, true, true,
+			true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, null, 0f,
+			new Effect[] { new EffectWet(5) }, new Effect[] {});
+	public static final Liquid POISON = new Liquid("Poison", 5, "effect_poison.png", null, new Inventory(), true, true,
+			true, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, null,
+			0f, new Effect[] { new EffectPoison(5) }, new Effect[] { new EffectPoison(5) });
 
 	// JUNK
 	public static final Junk FUR = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true, false, false,

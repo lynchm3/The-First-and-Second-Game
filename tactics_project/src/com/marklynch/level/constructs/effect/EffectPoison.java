@@ -16,7 +16,7 @@ public class EffectPoison extends Effect {
 		this.target = target;
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
-		this.imageTexture = getGlobalImage("effect_posion.png");
+		this.imageTexture = getGlobalImage("effect_poison.png");
 	}
 
 	public EffectPoison(int totalTurns) {

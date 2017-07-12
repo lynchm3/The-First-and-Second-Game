@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -123,11 +124,15 @@ public class ContainerForLiquids extends GameObject {
 		Game.level.logOnScreen(new ActivityLog(new Object[] { this, " smashed" }));
 
 		if (this.inventory.size() > 0 && this.inventory.get(0) instanceof Liquid) {
+			Liquid liquid = (Liquid) this.inventory.get(0);
 			for (GameObject gameObject : this.squareGameObjectIsOn.inventory.getGameObjects()) {
 				if (gameObject != this) {
 					// new ActionDouse(shooter, gameObject).perform();
-					gameObject.removeBurningEffect();
-					gameObject.addEffect(new EffectWet(shooter, gameObject, 5));
+					for (Effect effect : liquid.touchEffects) {
+						gameObject.addEffect(effect.makeCopy(shooter, gameObject));
+						if (effect instanceof EffectWet)
+							gameObject.removeBurningEffect();
+					}
 				}
 			}
 		}
