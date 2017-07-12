@@ -8,9 +8,6 @@ import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
 import com.marklynch.level.Square;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.BodyArmor;
-import com.marklynch.objects.weapons.Helmet;
-import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -560,11 +557,11 @@ public class Inventory {
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL) {
 			TextUtils.printTextWithImages(
-					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) }, 300f, 25f,
+					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) }, 100f, 8f,
 					300f, true);
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
 			TextUtils.printTextWithImages(
-					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) }, 300f, 25f, 300f,
+					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) }, 100f, 8f, 300f,
 					true);
 			for (Button button : buttonsFilter) {
 				button.draw();
@@ -590,21 +587,23 @@ public class Inventory {
 		GameObject gameObjectToDrawOnPlayersBody = Game.level.player.bodyArmor;
 		GameObject gameObjectToDrawOnPlayersLegs = Game.level.player.legArmor;
 
-		if (Game.squareMouseIsOver != null && Game.squareMouseIsOver instanceof InventorySquare) {
-			// Preview weapon
-			gameObjectMouseIsOver = ((InventorySquare) Game.squareMouseIsOver).gameObject;
-
-			if (gameObjectMouseIsOver instanceof Helmet) {
-				gameObjectToDrawOnPlayersHead = gameObjectMouseIsOver;
-			} else if (gameObjectMouseIsOver instanceof BodyArmor) {
-				gameObjectToDrawOnPlayersBody = gameObjectMouseIsOver;
-			} else if (gameObjectMouseIsOver instanceof LegArmor) {
-				gameObjectToDrawOnPlayersLegs = gameObjectMouseIsOver;
-			} else {
-				gameObjectToDrawInPlayersHand = gameObjectMouseIsOver;
-			}
-
-		}
+		// if (Game.squareMouseIsOver != null && Game.squareMouseIsOver
+		// instanceof InventorySquare) {
+		// // Preview weapon
+		// gameObjectMouseIsOver = ((InventorySquare)
+		// Game.squareMouseIsOver).gameObject;
+		//
+		// if (gameObjectMouseIsOver instanceof Helmet) {
+		// gameObjectToDrawOnPlayersHead = gameObjectMouseIsOver;
+		// } else if (gameObjectMouseIsOver instanceof BodyArmor) {
+		// gameObjectToDrawOnPlayersBody = gameObjectMouseIsOver;
+		// } else if (gameObjectMouseIsOver instanceof LegArmor) {
+		// gameObjectToDrawOnPlayersLegs = gameObjectMouseIsOver;
+		// } else {
+		// gameObjectToDrawInPlayersHand = gameObjectMouseIsOver;
+		// }
+		//
+		// }
 
 		if (gameObjectToDrawInPlayersHand == null) {
 			gameObjectToDrawInPlayersHand = Game.level.player.equipped;

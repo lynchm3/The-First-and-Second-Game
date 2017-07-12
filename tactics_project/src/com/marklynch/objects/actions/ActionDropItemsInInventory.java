@@ -36,7 +36,7 @@ public class ActionDropItemsInInventory extends Action {
 			Game.level.openInventories.clear();
 		} else {
 			Inventory.square = this.target;
-			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_ALL, true);
+			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy);
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP);
 			Game.level.openInventories.add(Game.level.player.inventory);
