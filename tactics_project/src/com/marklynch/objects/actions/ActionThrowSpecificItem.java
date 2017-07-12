@@ -12,7 +12,7 @@ import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionThrow extends Action {
+public class ActionThrowSpecificItem extends Action {
 
 	public static final String ACTION_NAME = "Throw";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -23,7 +23,7 @@ public class ActionThrow extends Action {
 	GameObject projectile;
 
 	// Default for hostiles
-	public ActionThrow(Actor performer, Object target, GameObject object) {
+	public ActionThrowSpecificItem(Actor performer, Object target, GameObject object) {
 		super(ACTION_NAME, "action_throw.png");
 		this.performer = performer;
 		if (target instanceof Square) {

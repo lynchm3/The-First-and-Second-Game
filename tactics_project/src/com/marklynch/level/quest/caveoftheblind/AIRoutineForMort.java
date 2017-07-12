@@ -20,7 +20,7 @@ import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionTalk;
-import com.marklynch.objects.actions.ActionThrow;
+import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -358,7 +358,7 @@ public class AIRoutineForMort extends AIRoutine {
 				return runFightRoutine();
 			} else if (unresolvedIllegalMining.size() > 0) {
 				actor.miniDialogue = "MY ORES!";
-				new ActionThrow(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
+				new ActionThrowSpecificItem(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
 				for (GameObject stolenItem : stolenItemsOnCriminal) {
 					if (criminal.inventory.contains(stolenItem)) {
 						new ActionDropSpecificItem(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();

@@ -46,7 +46,7 @@ public class Inventory {
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
 
 	public enum INVENTORY_MODE {
-		MODE_NORMAL, MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL, MODE_SELECT_ITEM_TO_DROP
+		MODE_NORMAL, MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL, MODE_SELECT_ITEM_TO_DROP, MODE_SELECT_ITEM_TO_THROW
 	}
 
 	public static transient INVENTORY_MODE inventoryMode = INVENTORY_MODE.MODE_NORMAL;
@@ -80,6 +80,7 @@ public class Inventory {
 
 	public static WaterSource waterSource;
 	public static Square square;
+	public static Object target;
 
 	public Inventory(GameObject... gameObjects) {
 		for (int i = 0; i < inventorySquares[0].length; i++) {
@@ -562,6 +563,13 @@ public class Inventory {
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
 			TextUtils.printTextWithImages(
 					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) }, 100f, 8f, 300f,
+					true);
+			for (Button button : buttonsFilter) {
+				button.draw();
+			}
+		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
+			TextUtils.printTextWithImages(
+					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) }, 100f, 8f, 300f,
 					true);
 			for (Button button : buttonsFilter) {
 				button.draw();

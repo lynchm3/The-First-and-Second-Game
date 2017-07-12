@@ -29,7 +29,8 @@ import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionTeleport;
-import com.marklynch.objects.actions.ActionThrow;
+import com.marklynch.objects.actions.ActionThrowItemsInInventory;
+import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -335,18 +336,20 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
+		// Move, teleport, loiter
 		if (this != Game.level.player.squareGameObjectIsOn) {
 			actions.add(new ActionMove(performer, this, true));
 			actions.add(new ActionTeleport(performer, this, true));
 		} else {
-
 			actions.add(new ActionLoiter(performer, performer.squareGameObjectIsOn));
 		}
 
+		// Take all
 		if (this.inventory.size() > 0 && this.inventory.hasGameObjectsThatFitInInventory()) {
 			actions.add(new ActionTakeAll(performer, this));
 		}
 
+		// hide
 		HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
 		if (hidingPlace != null && hidingPlace.remainingHealth > 0) {
 
@@ -357,14 +360,23 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			}
 		}
 
-		actions.add(new ActionDropItemsInInventory(performer, this));
-
+		// drop equipped
 		if (performer.equipped != null) {
 			if (performer.straightLineDistanceTo(this) < 2) {
 				actions.add(new ActionDropSpecificItem(performer, this, performer.equipped));
 			}
-			actions.add(new ActionThrow(performer, this, performer.equipped));
 		}
+
+		// drop from inventory
+		actions.add(new ActionDropItemsInInventory(performer, this));
+
+		// Throw equipped
+		if (performer.equipped != null) {
+			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
+		}
+
+		// Throw from inventory
+		actions.add(new ActionThrowItemsInInventory(performer, this));
 
 		return actions;
 	}

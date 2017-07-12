@@ -8,7 +8,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionSearch;
-import com.marklynch.objects.actions.ActionThrow;
+import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -48,7 +48,7 @@ public class Searchable extends GameObject {
 			if (performer.straightLineDistanceTo(this.squareGameObjectIsOn) < 2) {
 				actions.add(new ActionDropSpecificItem(performer, this.squareGameObjectIsOn, performer.equipped));
 			}
-			actions.add(new ActionThrow(performer, this, performer.equipped));
+			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
 		}
 
 		return actions;
