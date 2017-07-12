@@ -18,7 +18,7 @@ public class EffectBurning extends Effect {
 		this.target = target;
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
-		this.image = getGlobalImage("effect_burn.png");
+		this.imageTexture = getGlobalImage("effect_burn.png");
 	}
 
 	public EffectBurning(int totalTurns) {

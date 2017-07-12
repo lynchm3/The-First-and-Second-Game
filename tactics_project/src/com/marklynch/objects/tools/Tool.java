@@ -1,14 +1,9 @@
 package com.marklynch.objects.tools;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionDropSpecificItem;
-import com.marklynch.objects.actions.ActionEquip;
-import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -133,18 +128,6 @@ public class Tool extends GameObject {
 
 		return 0;
 
-	}
-
-	@Override
-	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-
-		if (performer.equipped == this)
-			actions.add(new ActionUnequip(performer, this));
-		else
-			actions.add(new ActionEquip(performer, this));
-		actions.add(new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this));
-		return actions;
 	}
 
 	public Action getUtilityAction(Actor performer) {

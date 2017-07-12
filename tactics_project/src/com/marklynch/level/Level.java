@@ -669,6 +669,9 @@ public class Level {
 			}
 
 			player.activateEffects();
+			for (GameObject gameObjectInInventory : player.inventory.getGameObjects()) {
+				gameObjectInInventory.update(0);
+			}
 		}
 
 		for (Faction faction : factions) {

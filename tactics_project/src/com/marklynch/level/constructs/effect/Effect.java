@@ -16,7 +16,7 @@ public abstract class Effect {
 	public GameObject target;
 	public int totalTurns;
 	public int turnsRemaining;
-	public Texture image;
+	public Texture imageTexture;
 
 	public abstract void activate();
 
@@ -40,7 +40,7 @@ public abstract class Effect {
 			// if (target.hiding)
 			alpha = 0.75f;
 
-			TextureUtils.drawTexture(image, alpha, actorPositionXInPixels, actorPositionXInPixels + target.width,
+			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + target.width,
 					actorPositionYInPixels, actorPositionYInPixels + target.height, target.backwards);
 			// TextureUtils.skipNormals = false;
 		}

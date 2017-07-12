@@ -13,7 +13,7 @@ public class EffectWet extends Effect {
 		this.target = target;
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
-		this.image = getGlobalImage("effect_wet.png");
+		this.imageTexture = getGlobalImage("effect_wet.png");
 	}
 
 	public EffectWet(int totalTurns) {

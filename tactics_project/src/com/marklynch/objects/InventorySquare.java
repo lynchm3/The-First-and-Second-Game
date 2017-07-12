@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Square;
+import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
@@ -64,6 +65,12 @@ public class InventorySquare extends Square {
 			// TextureUtils.skipNormals = false;
 			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, xInPixels + drawWidth, yInPixels,
 					yInPixels + drawHeight);
+
+			for (Effect effect : gameObject.activeEffectsOnGameObject) {
+				TextureUtils.drawTexture(effect.imageTexture, 0.75f, xInPixels, xInPixels + Game.SQUARE_WIDTH,
+						yInPixels, yInPixels + Game.SQUARE_HEIGHT);
+			}
+
 		}
 
 	}

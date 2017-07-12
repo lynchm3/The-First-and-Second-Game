@@ -477,6 +477,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (this.remainingHealth > 0) {
 			activateEffects();
 		}
+		for (GameObject gameObjectInInventory : this.inventory.getGameObjects()) {
+			gameObjectInInventory.update(delta);
+		}
 	}
 
 	public void updateRealtime(int delta) {

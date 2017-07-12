@@ -16,7 +16,7 @@ public class EffectPoison extends Effect {
 		this.target = target;
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
-		this.image = getGlobalImage("effect_posion.png");
+		this.imageTexture = getGlobalImage("effect_posion.png");
 	}
 
 	public EffectPoison(int totalTurns) {
@@ -56,7 +56,7 @@ public class EffectPoison extends Effect {
 			if (target.hiding)
 				alpha = 0.5f;
 
-			TextureUtils.drawTexture(image, alpha, actorPositionXInPixels, actorPositionXInPixels + target.width,
+			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + target.width,
 					actorPositionYInPixels, actorPositionYInPixels + target.height, target.backwards);
 			// TextureUtils.skipNormals = false;
 		}
