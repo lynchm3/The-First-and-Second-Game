@@ -29,9 +29,9 @@ public class Templates {
 			null, new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
-	public static final Farmer FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "farmer.png", null, 1, 10,
-			null, new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
+	public static final Farmer FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "hero.png", null, 1, 10, null,
+			new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
+			0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
 	// Pig
 	public static final Pig PIG = new Pig("Pig", "Pig", 1, 10, 0, 0, 0, 0, "pig.png", null, 1, 10, null,
