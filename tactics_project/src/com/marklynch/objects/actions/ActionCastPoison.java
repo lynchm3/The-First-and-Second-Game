@@ -56,8 +56,13 @@ public class ActionCastPoison extends Action {
 			if (Math.random() * 100 > target.getEffectivePosionResistance()) {
 				target.addEffect(new EffectPoison(performer, target, 5));
 			} else {
-				Game.level
-						.logOnScreen(new ActivityLog(new Object[] { target, " resisted poison cast by ", performer }));
+
+				if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
+						|| (target.inventorySquareGameObjectIsOn != null
+								&& target.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory)) {
+					Game.level.logOnScreen(
+							new ActivityLog(new Object[] { target, " resisted poison cast by ", performer }));
+				}
 			}
 		}
 

@@ -671,7 +671,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			return new ActionThrowSpecificItem(performer, Inventory.target, this);
 		}
 
-		if (performer.equipped == this)
+		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
+				|| performer.legArmor == this)
 			return new ActionUnequip(performer, this);
 		else
 			return new ActionEquip(performer, this);
@@ -681,7 +682,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	@Override
 	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		if (performer.equipped == this)
+		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
+				|| performer.legArmor == this)
 			actions.add(new ActionUnequip(performer, this));
 		else
 			actions.add(new ActionEquip(performer, this));

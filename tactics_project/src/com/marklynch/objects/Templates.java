@@ -13,14 +13,16 @@ import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.RockGolem;
+import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
+import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 	// Player
 	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "hero.png", null, 1, 10,
 			null, new Inventory(), true, false, true, false, false, 1f, 2f, 0f, -64f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, 90f, null, null, 57f, 104f, 35f, 23f, 80f, 80f, 80f, 80f);
+			false, 0f, 0f, 0f, 0f, 90f, null, null, 57f, 104f, 35f, 23f, 0f, 0f, 0f, 0f);
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
@@ -95,11 +97,18 @@ public class Templates {
 	// ARMOUR
 	// Helmets
 	public static final Helmet HARD_HAT = new Helmet("Hard Hat", "hard_hat.png", 100, null, true, false, false, false,
-			0.25f, 0.12f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 9, 12);
+			0.25f, 0.12f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 10, 12);
 	public static final Helmet PINK_HARD_HAT = new Helmet("Hard Hat", "pink_hard_hat.png", 100, null, true, false,
-			false, false, 0.25f, 0.12f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 9, 12);
+			false, false, 0.25f, 0.12f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 10, 12);
 	public static final Helmet COWBOY_HAT = new Helmet("Cowby Hat", "cowboy_hat.png", 100, null, true, false, false,
 			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 34, 68);
+	// Body Armor
+	public static final BodyArmor JUMPER = new BodyArmor("Jumper", "jumper.png", 100, null, true, false, false, false,
+			1f, 2f, 0f, -64f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 0, 0);
+
+	// Leg Armor
+	public static final LegArmor PANTS = new LegArmor("Pants", "pants.png", 100, null, true, false, false, false, 1f,
+			2f, 0f, -64f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 0, 0);
 
 	// Furniture
 	public static final Bed BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), false, true,

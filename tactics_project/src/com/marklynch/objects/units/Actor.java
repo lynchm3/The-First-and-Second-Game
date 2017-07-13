@@ -602,6 +602,30 @@ public class Actor extends GameObject {
 					helmetPositionYInPixels + helmet.height);
 		}
 
+		if (bodyArmor != null) {
+
+			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+					+ drawOffsetX + bodyAnchorX - bodyArmor.anchorX);
+			int bodyArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+					+ drawOffsetY + bodyAnchorY - bodyArmor.anchorY);
+			float alpha = 1.0f;
+			TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
+					bodyArmorPositionXInPixels + bodyArmor.width, bodyArmorPositionYInPixels,
+					bodyArmorPositionYInPixels + bodyArmor.height);
+		}
+
+		if (legArmor != null) {
+
+			int legArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+					+ drawOffsetX + legsAnchorX - legArmor.anchorX);
+			int legArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+					+ drawOffsetY + legsAnchorY - legArmor.anchorY);
+			float alpha = 1.0f;
+			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
+					legArmorPositionXInPixels + legArmor.width, legArmorPositionYInPixels,
+					legArmorPositionYInPixels + legArmor.height);
+		}
+
 		// draw anchor
 		// QuadUtils.drawQuad(Color.WHITE,
 		// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH +
