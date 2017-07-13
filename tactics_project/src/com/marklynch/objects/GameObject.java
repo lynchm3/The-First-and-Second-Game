@@ -99,6 +99,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public transient Group group;
 
+	public Object destroyedBy = null;
+
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean attackable, float widthRatio,
@@ -243,8 +245,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	}
 
-	public boolean checkIfDestroyed(GameObject attacker) {
+	public boolean checkIfDestroyed(Object attacker) {
 		if (remainingHealth <= 0) {
+			destroyedBy = attacker;
 			this.canShareSquare = true;
 			this.blocksLineOfSight = false;
 			persistsWhenCantBeSeen = false;
@@ -773,22 +776,20 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public void attackedBy(Object attacker) {
 
-		GameObject gameObjectAttacker = null;
-		if (attacker instanceof GameObject) {
-			gameObjectAttacker = (GameObject) attacker;
-		}
-
-		if (checkIfDestroyed(gameObjectAttacker)) {
+		if (checkIfDestroyed(attacker)) {
 			if (this instanceof Actor) {
 				if (this.squareGameObjectIsOn.visibleToPlayer)
 					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", this }));
 				((Actor) this).faction.checkIfDestroyed();
 			} else {
-				if (this.squareGameObjectIsOn != null && this.squareGameObjectIsOn.visibleToPlayer)
-					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
-				else if (this.inventorySquareGameObjectIsOn != null
-						&& this.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory)
-					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
+				if (this.squareGameObjectIsOn != null) {
+					if (this.squareGameObjectIsOn.visibleToPlayer) {
+						Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
+					}
+				} else if (this.inventorySquareGameObjectIsOn != null)
+					if (this.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory) {
+						Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
+					}
 
 			}
 		}

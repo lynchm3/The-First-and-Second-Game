@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
@@ -49,13 +50,20 @@ public class ActionDie extends Action {
 			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
 		} else {
 			// add a carcass
+
 			GameObject body;
 			if (performer instanceof WildAnimal) {
-				body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
-						performer.weight);
+				if (performer.destroyedBy instanceof EffectBurning)
+					body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
+				else
+					body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
+							performer.weight);
 			} else {
-				body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
-						performer.weight);
+				if (performer.destroyedBy instanceof EffectBurning)
+					body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
+				else
+					body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
+							performer.weight);
 			}
 			ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>) performer.inventory.getGameObjects()
 					.clone();

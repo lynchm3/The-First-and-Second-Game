@@ -29,9 +29,9 @@ public class Templates {
 			null, new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
-	public static final Farmer FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "hero.png", null, 1, 10, null,
-			new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
-			0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
+	public static final Farmer FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "farmer.png", null, 1, 10,
+			null, new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
+			0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
 	// Pig
 	public static final Pig PIG = new Pig("Pig", "Pig", 1, 10, 0, 0, 0, 0, "pig.png", null, 1, 10, null,
@@ -249,6 +249,8 @@ public class Templates {
 	public static final Inspectable DRIED_BLOOD = new Inspectable("Dried Blood", 5, "blood.png", null, new Inventory(),
 			false, true, false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f,
 			0.1f, null);
+	public static final Inspectable ASH = new Inspectable("Ash", 5, "ash.png", null, new Inventory(), false, true,
+			false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 0.1f, null);
 	public static final Inspectable GIANT_FOOTPRINT = new Inspectable("Giant Footprint", 5, "footprint.png", null,
 			new Inventory(), false, true, false, false, false, false, 2, 1.5f, -32f, -16f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 100f, 0f, 0f, 0f, 0.1f, null);

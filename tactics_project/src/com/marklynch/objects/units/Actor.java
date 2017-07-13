@@ -516,7 +516,7 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public boolean checkIfDestroyed(GameObject attacker) {
+	public boolean checkIfDestroyed(Object attacker) {
 		if (remainingHealth <= 0) {
 			super.checkIfDestroyed(attacker);
 			new ActionDie(this, squareGameObjectIsOn).perform();
@@ -1049,6 +1049,9 @@ public class Actor extends GameObject {
 
 	@Override
 	public void attackedBy(Object attacker) {
+
+		System.out.println("Actor attacker = " + attacker);
+
 		super.attackedBy(attacker);
 
 		removeHidingPlacesFromAttackers();

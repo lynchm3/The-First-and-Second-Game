@@ -11,12 +11,14 @@ import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.SquareInventory;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.units.Actor;
@@ -669,6 +671,8 @@ public class Level {
 			}
 
 			player.activateEffects();
+
+			// Update player inventory
 			ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 			for (GameObject gameObjectInInventory : player.inventory.getGameObjects()) {
 				gameObjectInInventory.update(0);
@@ -678,6 +682,7 @@ public class Level {
 			}
 			for (GameObject gameObject : toRemove) {
 				player.inventory.remove(gameObject);
+				player.inventory.add(Templates.ASH.makeCopy(null, player));
 			}
 
 		}
@@ -736,13 +741,26 @@ public class Level {
 		undoButton.enabled = false;
 
 		if (activeActor == player) {
-			for (GameObject inanimateObject : inanimateObjectsOnGround)
+			for (GameObject inanimateObject : inanimateObjectsOnGround) {
 				inanimateObject.update(0);
-
+			}
 			for (Action action : actionQueueForInanimateObjects) {
 				action.perform();
 			}
 			actionQueueForInanimateObjects.clear();
+
+			ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+			for (GameObject inanimateObject : inanimateObjectsOnGround) {
+				if (inanimateObject.remainingHealth <= 0)
+					toRemove.add(inanimateObject);
+			}
+			for (GameObject gameObject : toRemove) {
+				inanimateObjectsOnGround.remove(gameObject);
+				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+				if (gameObject.destroyedBy instanceof EffectBurning)
+					Templates.ASH.makeCopy(gameObject.squareGameObjectIsOn, null);
+			}
+
 		}
 
 	}

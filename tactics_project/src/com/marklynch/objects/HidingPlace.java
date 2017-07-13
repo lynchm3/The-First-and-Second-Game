@@ -99,7 +99,7 @@ public class HidingPlace extends Searchable {
 	// }
 
 	@Override
-	public boolean checkIfDestroyed(GameObject attacker) {
+	public boolean checkIfDestroyed(Object attacker) {
 		boolean destroyed = super.checkIfDestroyed(attacker);
 		if (destroyed) {
 
@@ -107,8 +107,8 @@ public class HidingPlace extends Searchable {
 				ArrayList<Actor> actorsToRemove = (ArrayList<Actor>) actorsHidingHere.clone();
 
 				for (Actor gameObjectHidingHere : actorsToRemove) {
-					if (attacker != null) {
-						attacker.addAttackerForThisAndGroupMembers(gameObjectHidingHere);
+					if (attacker instanceof GameObject) {
+						((GameObject) attacker).addAttackerForThisAndGroupMembers(gameObjectHidingHere);
 					}
 					new ActionStopHiding(gameObjectHidingHere, this).perform();
 					// gameObjectHidingHere.hiding = false;
@@ -121,8 +121,8 @@ public class HidingPlace extends Searchable {
 					for (Square adjacentSquare : adjacentSquares) {
 						HidingPlace hidingPlace = (HidingPlace) adjacentSquare.inventory
 								.getGameObjectOfClass(HidingPlace.class);
-						if (hidingPlace != null)
-							attacker.addAttackerForThisAndGroupMembers(hidingPlace);
+						if (hidingPlace != null && attacker instanceof GameObject)
+							((GameObject) attacker).addAttackerForThisAndGroupMembers(hidingPlace);
 					}
 				}
 			}
