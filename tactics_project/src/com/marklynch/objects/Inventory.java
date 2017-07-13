@@ -645,6 +645,14 @@ public class Inventory {
 			TextureUtils.drawTexture(gameObjectToDrawOnPlayersHead.imageTexture, alpha, helmetPositionXInPixels,
 					helmetPositionXInPixels + gameObjectToDrawOnPlayersHead.width * 3, helmetPositionYInPixels,
 					helmetPositionYInPixels + gameObjectToDrawOnPlayersHead.height * 3);
+		} else if (Game.level.player.hairImageTexture != null) {
+			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels
+					+ (Game.level.player.bodyAnchorX - gameObjectToDrawOnPlayersBody.anchorX) * 3);
+			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels
+					+ (Game.level.player.bodyAnchorY - gameObjectToDrawOnPlayersBody.anchorY) * 3);
+			TextureUtils.drawTexture(Game.level.player.hairImageTexture, alpha, bodyArmorPositionXInPixels,
+					bodyArmorPositionXInPixels + gameObjectToDrawOnPlayersBody.width * 3, bodyArmorPositionYInPixels,
+					bodyArmorPositionYInPixels + gameObjectToDrawOnPlayersBody.height * 3);
 		}
 
 		// Body Armor

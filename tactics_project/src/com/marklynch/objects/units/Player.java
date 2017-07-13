@@ -5,6 +5,7 @@ import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
+import com.marklynch.utils.ResourceUtils;
 
 import mdesl.graphics.Color;
 
@@ -26,6 +27,7 @@ public class Player extends Actor {
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
 				owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
 				legsAnchorX, legsAnchorY);
+		hairImageTexture = ResourceUtils.getGlobalImage("hair.png");
 	}
 
 	@Override
