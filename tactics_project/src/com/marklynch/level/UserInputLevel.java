@@ -107,10 +107,10 @@ public class UserInputLevel {
 		} else {
 			// Calculate zoom
 			Game.zoom += 0.001 * wheel;
-			if (Game.zoom < 0.1)
-				Game.zoom = 0.1f;
-			if (Game.zoom > 2)
-				Game.zoom = 2f;
+			if (Game.zoom < 0.01)
+				Game.zoom = 0.01f;
+			if (Game.zoom > 1)
+				Game.zoom = 1f;
 		}
 
 		// DRAG
