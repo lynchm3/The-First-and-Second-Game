@@ -85,9 +85,7 @@ public class Level {
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
-		System.out.println("L1= " + System.currentTimeMillis());
 		squares = new Square[width][height];
-		System.out.println("L2= " + System.currentTimeMillis());
 
 		activityLogger = new ActivityLogger();
 		undoList = new Stack<Move>();
@@ -104,10 +102,7 @@ public class Level {
 		factions = new ArrayList<Faction>();
 		inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 
-		System.out.println("L3= " + System.currentTimeMillis());
 		initGrid(this.squares, this.width, this.height);
-
-		System.out.println("L4= " + System.currentTimeMillis());
 
 		endTurnButton = new LevelButton(210f, 40f, 200f, 30f, "end_turn_button.png", "end_turn_button.png", "END TURN",
 				false, false, Color.BLACK, Color.WHITE);
@@ -156,7 +151,6 @@ public class Level {
 		});
 		editorButton.enabled = true;
 		buttons.add(editorButton);
-		System.out.println("L5= " + System.currentTimeMillis());
 
 	}
 
@@ -790,8 +784,11 @@ public class Level {
 				}
 			}
 			for (GameObject gameObject : toRemove) {
-				player.inventory.remove(gameObject);
-				player.inventory.add(Templates.ASH.makeCopy(null, player));
+				if (gameObject.destroyedBy instanceof EffectBurning) {
+					player.inventory.replace(gameObject, Templates.ASH.makeCopy(null, player));
+				} else {
+					player.inventory.remove(gameObject);
+				}
 			}
 
 		}
@@ -865,9 +862,15 @@ public class Level {
 			}
 			for (GameObject gameObject : toRemove) {
 				inanimateObjectsOnGround.remove(gameObject);
-				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-				if (gameObject.destroyedBy instanceof EffectBurning)
-					Templates.ASH.makeCopy(gameObject.squareGameObjectIsOn, null);
+				// gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+				// if (gameObject.destroyedBy instanceof EffectBurning)
+				// Templates.ASH.makeCopy(gameObject.squareGameObjectIsOn,
+				// null);
+				if (gameObject.destroyedBy instanceof EffectBurning) {
+					gameObject.squareGameObjectIsOn.inventory.replace(gameObject, Templates.ASH.makeCopy(null, player));
+				} else {
+					gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+				}
 			}
 
 		}

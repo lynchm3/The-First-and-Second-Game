@@ -350,6 +350,10 @@ public class Inventory {
 	}
 
 	public void add(GameObject gameObject) {
+		add(gameObject, -1);
+	}
+
+	public void add(GameObject gameObject, int index) {
 		if (!gameObjects.contains(gameObject)) {
 
 			// Remove references with square
@@ -380,21 +384,40 @@ public class Inventory {
 			if (parent != null)
 				parent.inventoryChanged();
 
+			if (index != -1) {
+				filteredGameObjects.remove(index);
+				filteredGameObjects.add(index, gameObject);
+			}
+			matchGameObjectsToSquares();
+
 		}
 	}
 
-	public void remove(GameObject gameObject) {
+	public int remove(GameObject gameObject) {
+		int index = -1;
 		if (gameObjects.contains(gameObject)) {
+
 			gameObjects.remove(gameObject);
 			gameObject.inventoryThatHoldsThisObject = null;
 			if (parent != null)
 				parent.inventoryChanged();
 			// this.sort(inventorySortBy);
 			if (filteredGameObjects.contains(gameObject)) {
+				index = filteredGameObjects.indexOf(gameObject);
 				filteredGameObjects.set(filteredGameObjects.indexOf(gameObject), null);
 			}
 			this.matchGameObjectsToSquares();
 		}
+		return index;
+	}
+
+	public void replace(GameObject out, GameObject in) {
+		System.out.println("replace");
+		int index = this.remove(out);
+		System.out.println("replace index = " + index);
+		this.add(in, index);
+		System.out.println("replace done ");
+
 	}
 
 	public int size() {

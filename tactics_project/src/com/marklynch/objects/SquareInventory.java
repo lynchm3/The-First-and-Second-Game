@@ -101,7 +101,7 @@ public class SquareInventory extends Inventory {
 	}
 
 	@Override
-	public void remove(GameObject gameObject) {
+	public int remove(GameObject gameObject) {
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
 			// gameObject.inventorySquareGameObjectIsOn = null;
@@ -114,6 +114,7 @@ public class SquareInventory extends Inventory {
 			// }
 			// }
 		}
+		return -1;
 	}
 
 	public ArrayList<GameObject> getGameObjectsThatFitInInventory() {

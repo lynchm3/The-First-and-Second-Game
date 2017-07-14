@@ -101,12 +101,8 @@ public class Game {
 	public static int delta = 0;
 
 	public static void main(String[] argv) {
-
-		System.out.println("1 = " + System.currentTimeMillis());
 		Game game = new Game();
-		System.out.println("2 = " + System.currentTimeMillis());
 		game.start();
-		System.out.println("3 = " + System.currentTimeMillis());
 	}
 
 	public boolean paused = false;
@@ -132,15 +128,10 @@ public class Game {
 
 	public void start() {
 
-		System.out.println("a = " + System.currentTimeMillis());
 		initGL(windowWidth, windowHeight); // init OpenGL
-		System.out.println("b = " + System.currentTimeMillis());
 		init();
-		System.out.println("c = " + System.currentTimeMillis());
 		getDelta(); // call once before loop to initialise lastFrame
-		System.out.println("d = " + System.currentTimeMillis());
 		lastFPS = getTime(); // call before loop to initialise fps timer
-		System.out.println("e = " + System.currentTimeMillis());
 
 		while (!Display.isCloseRequested()) {
 

@@ -1050,8 +1050,6 @@ public class Actor extends GameObject {
 	@Override
 	public void attackedBy(Object attacker) {
 
-		System.out.println("Actor attacker = " + attacker);
-
 		super.attackedBy(attacker);
 
 		removeHidingPlacesFromAttackers();
@@ -1072,7 +1070,6 @@ public class Actor extends GameObject {
 				this.addAttackerForNearbyFactionMembersIfVisible(hidingPlace);
 			}
 
-			System.out.println("Adding search for someone we've attacked");
 			this.addInvestigation(actor, actor.squareGameObjectIsOn, Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 		}
 	}
