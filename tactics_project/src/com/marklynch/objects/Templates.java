@@ -212,13 +212,17 @@ public class Templates {
 			new Inventory(), false, true, false, false, false, true, false, 1f, 1f, -16f, 0f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 80f, 0f, 0f, 0f, 10f);
 
-	// Food?
-	public static final Carcass CARCASS = new Carcass("Carcass", 5, "carcass.png", null, new Inventory(), false, true,
+	// Corpses
+	public static final Corpse CARCASS = new Corpse("Carcass", 5, "carcass.png", null, new Inventory(), false, true,
 			false, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f,
 			null);
 	public static final Corpse CORPSE = new Corpse("Carcass", 5, "carcass.png", null, new Inventory(), false, true,
 			false, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f,
 			null);
+	public static final Corpse ASH = new Corpse("Ash", 5, "ash.png", null, new Inventory(), false, true, false, true,
+			false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, null);
+
+	// Food?
 	public static final MeatChunk MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(),
 			false, true, true, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
 			0f, 5f, null);
@@ -249,8 +253,6 @@ public class Templates {
 	public static final Inspectable DRIED_BLOOD = new Inspectable("Dried Blood", 5, "blood.png", null, new Inventory(),
 			false, true, false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f,
 			0.1f, null);
-	public static final Inspectable ASH = new Inspectable("Ash", 5, "ash.png", null, new Inventory(), false, true,
-			false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 0.1f, null);
 	public static final Inspectable GIANT_FOOTPRINT = new Inspectable("Giant Footprint", 5, "footprint.png", null,
 			new Inventory(), false, true, false, false, false, false, 2, 1.5f, -32f, -16f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 100f, 0f, 0f, 0f, 0.1f, null);
