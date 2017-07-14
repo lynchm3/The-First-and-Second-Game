@@ -47,7 +47,8 @@ public class ActionFillSpecificContainer extends Action {
 		// if (Game.level.openInventories.size() > 0) {
 		// Game.level.openInventories.clear();
 		// } else {
-		// Game.level.openInventories.add(Game.level.player.inventory);
+		//
+		// Game.level.player.inventory.open();
 		// Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS,
 		// true);
 		// Game.level.player.inventory.sort(Inventory.inventorySortBy);

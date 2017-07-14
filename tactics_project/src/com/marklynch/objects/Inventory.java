@@ -60,21 +60,21 @@ public class Inventory {
 	transient private GameObject selectedGameObject;
 
 	// Sort buttons
-	LevelButton buttonSortAlphabetically;
-	LevelButton buttonSortByNewest;
-	LevelButton buttonSortByFavourite;
-	LevelButton buttonSortByValue;
-	LevelButton buttonSortByTotalDamage;
-	LevelButton buttonSortBySlashDamage;
+	static LevelButton buttonSortAlphabetically;
+	static LevelButton buttonSortByNewest;
+	static LevelButton buttonSortByFavourite;
+	static LevelButton buttonSortByValue;
+	static LevelButton buttonSortByTotalDamage;
+	static LevelButton buttonSortBySlashDamage;
 
 	// Filter buttons
-	LevelButton buttonFilterByAll;
-	LevelButton buttonFilterByWeapon;
-	LevelButton buttonFilterByFood;
+	static LevelButton buttonFilterByAll;
+	static LevelButton buttonFilterByWeapon;
+	static LevelButton buttonFilterByFood;
 
-	public ArrayList<Button> buttons;
-	public ArrayList<Button> buttonsSort;
-	public ArrayList<Button> buttonsFilter;
+	public static ArrayList<Button> buttons;
+	public static ArrayList<Button> buttonsSort;
+	public static ArrayList<Button> buttonsFilter;
 
 	public InventoryParent parent;
 
@@ -83,9 +83,16 @@ public class Inventory {
 	public static Object target;
 
 	public Inventory(GameObject... gameObjects) {
+		for (GameObject gameObject : gameObjects) {
+			add(gameObject);
+		}
+
+	}
+
+	public void open() {
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
-				inventorySquares[j][i] = new InventorySquare(j, i, "dialogbg.png", this);
+				inventorySquares[j][i] = new InventorySquare(j, i, null, this);
 			}
 		}
 		buttons = new ArrayList<Button>();
@@ -190,11 +197,15 @@ public class Inventory {
 		});
 		buttons.add(buttonFilterByFood);
 		buttonsFilter.add(buttonFilterByFood);
+		this.isOpen = true;
+		if (!Game.level.openInventories.contains(this))
+			Game.level.openInventories.add(this);
+	}
 
-		for (GameObject gameObject : gameObjects) {
-			add(gameObject);
-		}
-
+	public void close() {
+		this.isOpen = false;
+		if (Game.level.openInventories.contains(this))
+			Game.level.openInventories.remove(this);
 	}
 
 	public void sort(INVENTORY_SORT_BY inventorySortBy, boolean filterFirst) {
@@ -286,7 +297,7 @@ public class Inventory {
 		inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
-				inventorySquares[j][i] = new InventorySquare(i, j, "dialogbg.png", this);
+				inventorySquares[j][i] = new InventorySquare(i, j, null, this);
 				inventorySquares[j][i].inventoryThisBelongsTo = this;
 				inventorySquares[j][i].loadImages();
 			}
@@ -327,11 +338,11 @@ public class Inventory {
 	}
 
 	public void loadImages() {
-		for (int i = 0; i < inventorySquares[0].length; i++) {
-			for (int j = 0; j < inventorySquares.length; j++) {
-				inventorySquares[j][i].loadImages();
-			}
-		}
+		// for (int i = 0; i < inventorySquares[0].length; i++) {
+		// for (int j = 0; j < inventorySquares.length; j++) {
+		// inventorySquares[j][i].loadImages();
+		// }
+		// }
 	}
 
 	public GameObject get(int i) {
@@ -375,7 +386,7 @@ public class Inventory {
 	public void remove(GameObject gameObject) {
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
-			gameObject.inventorySquareGameObjectIsOn = null;
+			gameObject.inventoryThatHoldsThisObject = null;
 			if (parent != null)
 				parent.inventoryChanged();
 			// this.sort(inventorySortBy);
@@ -401,10 +412,8 @@ public class Inventory {
 	}
 
 	public void matchGameObjectsToSquares() {
-
-		for (GameObject gameObject : gameObjects) {
-			gameObject.inventorySquareGameObjectIsOn = null;
-		}
+		if (!isOpen)
+			return;
 
 		int index = 0;
 		for (int i = 0; i < inventorySquares[0].length; i++) {
@@ -412,8 +421,6 @@ public class Inventory {
 				inventorySquares[j][i].gameObject = null;
 				if (index < filteredGameObjects.size()) {
 					inventorySquares[j][i].gameObject = filteredGameObjects.get(index);
-					if (inventorySquares[j][i].gameObject != null)
-						inventorySquares[j][i].gameObject.inventorySquareGameObjectIsOn = inventorySquares[j][i];
 					index++;
 				}
 				// }
@@ -689,16 +696,6 @@ public class Inventory {
 		return isOpen;
 	}
 
-	public void open() {
-		this.isOpen = true;
-		Game.level.openInventories.add(this);
-	}
-
-	public void close() {
-		this.isOpen = false;
-		Game.level.openInventories.remove(this);
-	}
-
 	public boolean calculateIfPointInBoundsOfInventory(float mouseX, float mouseY) {
 		if (mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height) {
 			return true;
@@ -720,58 +717,11 @@ public class Inventory {
 	}
 
 	public void click() {
-		if (this.inventorySquareMouseIsOver != null) {
-			this.inventorySquareClicked(inventorySquareMouseIsOver);
-		}
-	}
-
-	private void inventorySquareClicked(InventorySquare inventorySquare) {
-		if (inventorySquare.gameObject == null) {
-			// Nothing on the square
-			if (inventoryState == INVENTORY_STATE.DEFAULT || inventoryState == INVENTORY_STATE.SETTINGS_CHANGE) {
-				// selectSquare(square);
-			} else if (inventoryState == INVENTORY_STATE.ADD_OBJECT) {
-				// attemptToAddNewObjectToSquare(square);
-			} else if (inventoryState == INVENTORY_STATE.MOVEABLE_OBJECT_SELECTED) {
-				// swapGameObjects(this.selectedGameObject, gameObjectOnSquare);
-				moveGameObject(this.selectedGameObject, inventorySquare);
-			}
-		} else {
-			// There's an object on the square
-			if (inventoryState == INVENTORY_STATE.DEFAULT || inventoryState == INVENTORY_STATE.SETTINGS_CHANGE) {
-				selectGameObject(inventorySquare.gameObject);
-			} else if (inventoryState == INVENTORY_STATE.MOVEABLE_OBJECT_SELECTED) {
-				swapGameObjects(this.selectedGameObject, inventorySquare.gameObject);
-			}
-		}
 	}
 
 	private void selectGameObject(GameObject gameObject) {
 		selectedGameObject = gameObject;
 		inventoryState = INVENTORY_STATE.MOVEABLE_OBJECT_SELECTED;
-	}
-
-	public void swapGameObjects(GameObject gameObject1, GameObject gameObject2) {
-		InventorySquare square1 = gameObject1.inventorySquareGameObjectIsOn;
-		InventorySquare square2 = gameObject2.inventorySquareGameObjectIsOn;
-
-		square1.gameObject = gameObject2;
-		square2.gameObject = gameObject1;
-
-		gameObject1.inventorySquareGameObjectIsOn = square2;
-		gameObject2.inventorySquareGameObjectIsOn = square1;
-
-	}
-
-	public void moveGameObject(GameObject gameObject1, InventorySquare square2) {
-		InventorySquare square1 = gameObject1.inventorySquareGameObjectIsOn;
-
-		if (square1 != null)
-			square1.gameObject = null;
-
-		square2.gameObject = gameObject1;
-
-		gameObject1.inventorySquareGameObjectIsOn = square2;
 	}
 
 	public InventorySquare getInventorySquareMouseIsOver(float mouseXInPixels, float mouseYInPixels) {

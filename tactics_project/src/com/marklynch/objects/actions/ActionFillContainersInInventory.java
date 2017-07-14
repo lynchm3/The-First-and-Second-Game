@@ -1,5 +1,7 @@
 package com.marklynch.objects.actions;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Sound;
@@ -33,13 +35,17 @@ public class ActionFillContainersInInventory extends Action {
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
-			Game.level.openInventories.clear();
+
+			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+				inventory.close();
+			}
 		} else {
+			Game.level.player.inventory.open();
 			Inventory.waterSource = this.waterSource;
 			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL);
-			Game.level.openInventories.add(Game.level.player.inventory);
+			// Game.level.openInventories.add(Game.level.player.inventory);
 
 			// Game.level.player.inventory.setActionOnSelect(new
 			// ActionFillEquippedContainer());

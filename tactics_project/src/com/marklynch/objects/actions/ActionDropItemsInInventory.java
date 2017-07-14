@@ -1,5 +1,7 @@
 package com.marklynch.objects.actions;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.Square;
 import com.marklynch.level.UserInputLevel;
@@ -33,13 +35,17 @@ public class ActionDropItemsInInventory extends Action {
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
-			Game.level.openInventories.clear();
+
+			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+				inventory.close();
+			}
 		} else {
+			Game.level.player.inventory.open();
 			Inventory.square = this.target;
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP);
-			Game.level.openInventories.add(Game.level.player.inventory);
+			// Game.level.openInventories.add(Game.level.player.inventory);
 
 			// Game.level.player.inventory.setActionOnSelect(new
 			// ActionFillEquippedContainer());

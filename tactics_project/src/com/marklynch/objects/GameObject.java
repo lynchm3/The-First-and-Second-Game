@@ -73,7 +73,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	// Placement in inventory
 	public transient Inventory inventoryThatHoldsThisObject;
-	public transient InventorySquare inventorySquareGameObjectIsOn;
 
 	// Quest
 	public transient Quest quest;
@@ -255,13 +254,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			this.activeEffectsOnGameObject.clear();
 
 			// Unequip destroyed item
-			if (inventorySquareGameObjectIsOn != null
-					&& inventorySquareGameObjectIsOn.inventoryThisBelongsTo.parent instanceof Actor) {
+			if (inventoryThatHoldsThisObject != null && inventoryThatHoldsThisObject.parent instanceof Actor) {
 
 				// GameObject holder = (GameObject)
 				// inventorySquareGameObjectIsOn.inventoryThisBelongsTo.parent;
 
-				Actor actor = (Actor) inventorySquareGameObjectIsOn.inventoryThisBelongsTo.parent;
+				Actor actor = (Actor) inventoryThatHoldsThisObject.parent;
 				if (actor.equipped == this) {
 					if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
 						actor.equip(actor.equippedBeforePickingUpObject);
@@ -786,8 +784,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 					if (this.squareGameObjectIsOn.visibleToPlayer) {
 						Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
 					}
-				} else if (this.inventorySquareGameObjectIsOn != null)
-					if (this.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory) {
+				} else if (this.inventoryThatHoldsThisObject != null)
+					if (this.inventoryThatHoldsThisObject == Game.level.player.inventory) {
 						Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
 					}
 

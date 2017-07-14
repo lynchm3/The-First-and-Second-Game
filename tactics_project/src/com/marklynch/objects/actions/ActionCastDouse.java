@@ -47,8 +47,8 @@ public class ActionCastDouse extends Action {
 				Liquid water = Templates.WATER.makeCopy(null, performer, ((ContainerForLiquids) target).volume);
 				target.inventory.add(water);
 				if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-						|| (target.inventorySquareGameObjectIsOn != null
-								&& target.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory)) {
+						|| (target.inventoryThatHoldsThisObject != null
+								&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
 					Game.level.logOnScreen(
 							new ActivityLog(new Object[] { performer, " filled ", target, " with ", water }));
 				}

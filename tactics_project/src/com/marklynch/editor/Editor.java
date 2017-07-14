@@ -149,6 +149,7 @@ public class Editor {
 		// }
 		// }
 
+		System.out.println("b1= " + System.currentTimeMillis());
 		// LOAD COLORS
 		colors.add(new Color(Color.BLUE));
 		colors.add(new Color(Color.RED));
@@ -156,8 +157,10 @@ public class Editor {
 		colors.add(new Color(Color.MAGENTA));
 		colors.add(new Color(Color.CYAN));
 		colors.add(new Color(Color.ORANGE));
+		System.out.println("b2= " + System.currentTimeMillis());
 		Game.level = new Level(160, 100);
 
+		System.out.println("b3= " + System.currentTimeMillis());
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
 		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);
@@ -171,9 +174,12 @@ public class Editor {
 		relationsSettingsWindow = new RelationsSettingsWindow(200, this);
 		speechPartSettingsWindow = new SpeechPartSettingsWindow(200, this);
 
+		System.out.println("b4= " + System.currentTimeMillis());
 		settingsWindow = levelSettingsWindow;
 
+		System.out.println("b5= " + System.currentTimeMillis());
 		generateTestObjects();
+		System.out.println("b6= " + System.currentTimeMillis());
 
 		// TABS
 		String tabText = "LEVEL";
@@ -371,6 +377,7 @@ public class Editor {
 
 		// Place the tabs
 		placeTabs();
+		System.out.println("b7= " + System.currentTimeMillis());
 
 	}
 

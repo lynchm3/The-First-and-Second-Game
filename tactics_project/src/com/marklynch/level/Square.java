@@ -60,7 +60,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	// image
 	public String imageTexturePath;
-	public transient Texture imageTexture = null;
+	private transient Texture imageTexture = null;
 
 	public transient boolean showingDialogs = false;
 	// public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
@@ -80,13 +80,24 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory,
 			boolean restricted, Actor... owners) {
+		this(x, y, imagePath, null, travelCost, elevation, inventory, restricted, owners);
+
+	}
+
+	public Square(int x, int y, String imagePath, Texture imageTexture, int travelCost, int elevation,
+			SquareInventory inventory, boolean restricted, Actor... owners) {
 		super();
 		this.xInGrid = x;
 		this.yInGrid = y;
 		this.imageTexturePath = imagePath;
 		this.travelCost = travelCost;
 		this.elevation = elevation;
-		loadImages();
+
+		if (imageTexture == null)
+			loadImages();
+		else
+			this.imageTexture = imageTexture;
+
 		weaponsThatCanAttack = new Vector<Weapon>();
 		this.inventory = inventory;
 		if (this.inventory != null) {

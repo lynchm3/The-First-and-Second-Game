@@ -1,5 +1,7 @@
 package com.marklynch.level;
 
+import java.util.ArrayList;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -479,12 +481,15 @@ public class UserInputLevel {
 
 	public static void tabTyped() {
 		if (Game.level.openInventories.size() > 0) {
-			Game.level.openInventories.clear();
+			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+				inventory.close();
+			}
 		} else {
+			Game.level.player.inventory.open();
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, false);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_NORMAL);
-			Game.level.openInventories.add(Game.level.player.inventory);
+			// Game.level.openInventories.add(Game.level.player.inventory);
 		}
 		closeAllPopups();
 	}

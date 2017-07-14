@@ -17,7 +17,7 @@ public class SquareInventory extends Inventory {
 		inventorySquares = new InventorySquare[5][5];
 		for (int i = 0; i < inventorySquares.length; i++) {
 			for (int j = 0; j < inventorySquares[i].length; j++) {
-				inventorySquares[i][j] = new InventorySquare(i, j, "dialogbg.png", this);
+				inventorySquares[i][j] = new InventorySquare(i, j, null, this);
 				inventorySquares[i][j].inventoryThisBelongsTo = this;
 				inventorySquares[i][j].loadImages();
 			}
@@ -45,7 +45,8 @@ public class SquareInventory extends Inventory {
 
 				if (inventorySquares[i][j].gameObject == null) {
 					inventorySquares[i][j].gameObject = gameObjects.get(index);
-					gameObjects.get(index).inventorySquareGameObjectIsOn = inventorySquares[i][j];
+					// gameObjects.get(index).inventorySquareGameObjectIsOn =
+					// inventorySquares[i][j];
 					index++;
 				}
 			}
@@ -86,17 +87,16 @@ public class SquareInventory extends Inventory {
 			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
-			for (int i = 0; i < inventorySquares.length; i++) {
-				for (int j = 0; j < inventorySquares[i].length; j++) {
-					if (inventorySquares[i][j].gameObject == null) {
-
-						// Inventory Square
-						inventorySquares[i][j].gameObject = gameObject;
-						gameObject.inventorySquareGameObjectIsOn = inventorySquares[i][j];
-						return;
-					}
-				}
-			}
+			// for (int i = 0; i < inventorySquares.length; i++) {
+			// for (int j = 0; j < inventorySquares[i].length; j++) {
+			// if (inventorySquares[i][j].gameObject == null) {
+			//
+			// // Inventory Square
+			// inventorySquares[i][j].gameObject = gameObject;
+			// return;
+			// }
+			// }
+			// }
 		}
 	}
 
@@ -104,16 +104,15 @@ public class SquareInventory extends Inventory {
 	public void remove(GameObject gameObject) {
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
-			gameObject.inventorySquareGameObjectIsOn = null;
-			for (int i = 0; i < inventorySquares.length; i++) {
-				for (int j = 0; j < inventorySquares[i].length; j++) {
-					if (inventorySquares[i][j].gameObject == gameObject) {
-						inventorySquares[i][j].gameObject.inventorySquareGameObjectIsOn = null;
-						inventorySquares[i][j].gameObject = null;
-						return;
-					}
-				}
-			}
+			// gameObject.inventorySquareGameObjectIsOn = null;
+			// for (int i = 0; i < inventorySquares.length; i++) {
+			// for (int j = 0; j < inventorySquares[i].length; j++) {
+			// if (inventorySquares[i][j].gameObject == gameObject) {
+			// inventorySquares[i][j].gameObject = null;
+			// return;
+			// }
+			// }
+			// }
 		}
 	}
 

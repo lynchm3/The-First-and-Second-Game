@@ -48,8 +48,8 @@ public class ActionCastPoison extends Action {
 			target.inventory.add(poison);
 
 			if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-					|| (target.inventorySquareGameObjectIsOn != null
-							&& target.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory)) {
+					|| (target.inventoryThatHoldsThisObject != null
+							&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " made ", poison, " in ", target }));
 			}
 		} else {
@@ -58,8 +58,8 @@ public class ActionCastPoison extends Action {
 			} else {
 
 				if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-						|| (target.inventorySquareGameObjectIsOn != null
-								&& target.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory)) {
+						|| (target.inventoryThatHoldsThisObject != null
+								&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
 					Game.level.logOnScreen(
 							new ActivityLog(new Object[] { target, " resisted poison cast by ", performer }));
 				}

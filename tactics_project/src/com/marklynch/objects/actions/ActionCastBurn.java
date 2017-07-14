@@ -42,8 +42,8 @@ public class ActionCastBurn extends Action {
 			return;
 
 		if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-				|| (target.inventorySquareGameObjectIsOn != null
-						&& target.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory)) {
+				|| (target.inventoryThatHoldsThisObject != null
+						&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
 		}
 		if (Math.random() * 100 > target.getEffectiveFireResistance()) {
@@ -53,8 +53,8 @@ public class ActionCastBurn extends Action {
 		} else {
 
 			if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-					|| (target.inventorySquareGameObjectIsOn != null
-							&& target.inventorySquareGameObjectIsOn.inventoryThisBelongsTo == Game.level.player.inventory)) {
+					|| (target.inventoryThatHoldsThisObject != null
+							&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " resisted burn cast by ", performer }));
 			}
 

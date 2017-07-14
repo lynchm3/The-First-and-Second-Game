@@ -1,7 +1,5 @@
 package com.marklynch.objects;
 
-import static com.marklynch.utils.ResourceUtils.getGlobalImage;
-
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -13,6 +11,8 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.TextureUtils;
 
+import mdesl.graphics.Texture;
+
 public class InventorySquare extends Square {
 
 	public transient GameObject gameObject;
@@ -20,6 +20,8 @@ public class InventorySquare extends Square {
 
 	public int xInPixels = 0;
 	public int yInPixels = 0;
+
+	public static Texture imageTexture;
 
 	public InventorySquare(int x, int y, String imagePath, Inventory inventoryThisBelongsTo) {
 		super(x, y, imagePath, 1, 1, null, false);
@@ -33,7 +35,7 @@ public class InventorySquare extends Square {
 
 	@Override
 	public void loadImages() {
-		this.imageTexture = getGlobalImage(imageTexturePath);
+		// this.imageTexture = getGlobalImage(imageTexturePath);
 
 	}
 

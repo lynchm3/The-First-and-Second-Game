@@ -1,7 +1,7 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.objects.Carcass;
+import com.marklynch.objects.Corpse;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.units.Actor;
@@ -82,8 +82,8 @@ public class AIRoutineForHunter extends AIRoutine {
 			}
 		}
 
-		// 1. loot dead animals
-		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Carcass.class, 5f, false, false, true,
+		// 1. loot corpses
+		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Corpse.class, 5f, false, false, true,
 				true, true, true);
 		if (carcass != null) {
 			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
