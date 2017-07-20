@@ -34,6 +34,7 @@ import com.marklynch.level.constructs.structure.StructurePath;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.level.quest.caveoftheblind.QuestBetweenTheWalls;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.level.quest.smallgame.QuestSmallGame;
 import com.marklynch.level.quest.thepigs.QuestThePigs;
@@ -589,6 +590,7 @@ public class Editor {
 
 		QuestCaveOfTheBlind questCaveOfTheBlind = new QuestCaveOfTheBlind();
 		QuestThePigs questThePigs = new QuestThePigs();
+		QuestBetweenTheWalls questBetweenTheWalls = new QuestBetweenTheWalls();
 
 		// Add a game object
 		Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);

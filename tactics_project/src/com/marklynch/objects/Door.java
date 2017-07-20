@@ -78,13 +78,18 @@ public class Door extends Openable {
 				waterResistance, electricResistance, poisonResistance, weight, owner, locked, keys);
 	}
 
-	@Override
-	public Door makeCopy(Square square, Actor owner) {
-		return new Door(new String(baseName), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, weight, owner, locked, keys);
-	}
+	// @Override
+	// public Door makeCopy(Square square, Actor owner) {
+	// return new Door(new String(baseName), (int) totalHealth,
+	// imageTexturePath, square, inventory.makeCopy(),
+	// showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+	// blocksLineOfSight,
+	// persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
+	// drawOffsetY, soundWhenHit,
+	// soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+	// stackable, fireResistance,
+	// waterResistance, electricResistance, poisonResistance, weight, owner,
+	// locked, keys);
+	// }
 
 }
