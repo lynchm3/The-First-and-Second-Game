@@ -156,7 +156,7 @@ public class Editor {
 		colors.add(new Color(Color.MAGENTA));
 		colors.add(new Color(Color.CYAN));
 		colors.add(new Color(Color.ORANGE));
-		Game.level = new Level(160, 100);
+		Game.level = new Level(360, 100);
 
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
