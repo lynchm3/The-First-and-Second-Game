@@ -1,4 +1,4 @@
-package com.marklynch.level;
+package com.marklynch.level.squares;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
@@ -35,6 +35,7 @@ import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
@@ -60,7 +61,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	// image
 	public String imageTexturePath;
-	private transient Texture imageTexture = null;
+	public transient Texture imageTexture = null;
+	public static Texture GRASS_TEXTURE;
+	public static Texture STONE_TEXTURE;
+	public static Texture MUD_TEXTURE;
 
 	public transient boolean showingDialogs = false;
 	// public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
@@ -112,6 +116,12 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 		this.restricted = restricted;
 
+	}
+
+	public static void loadStaticImages() {
+		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png");
+		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png");
+		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png");
 	}
 
 	public void postLoad1() {

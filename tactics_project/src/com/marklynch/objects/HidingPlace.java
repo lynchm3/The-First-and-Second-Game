@@ -2,8 +2,8 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionStopHiding;

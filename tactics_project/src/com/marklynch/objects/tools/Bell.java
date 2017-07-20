@@ -1,6 +1,6 @@
 package com.marklynch.objects.tools;
 
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.units.Actor;

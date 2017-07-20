@@ -3,9 +3,9 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.units.Actor;

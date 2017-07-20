@@ -1,7 +1,7 @@
 package com.marklynch.ai.utils;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
 public class UtilFind {

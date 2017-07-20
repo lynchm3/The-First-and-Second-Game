@@ -1,6 +1,6 @@
 package com.marklynch.level.popup;
 
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 
 public class PopupActionButton extends PopupButton {

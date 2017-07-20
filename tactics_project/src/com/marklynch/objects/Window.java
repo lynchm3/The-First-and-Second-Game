@@ -3,7 +3,7 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;

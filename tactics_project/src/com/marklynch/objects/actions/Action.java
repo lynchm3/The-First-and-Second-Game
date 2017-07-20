@@ -5,9 +5,9 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Texture;

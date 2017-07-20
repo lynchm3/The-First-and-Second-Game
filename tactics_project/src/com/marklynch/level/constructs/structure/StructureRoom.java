@@ -3,7 +3,7 @@ package com.marklynch.level.constructs.structure;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 public class StructureRoom {

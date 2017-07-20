@@ -3,7 +3,6 @@ package com.marklynch.level.quest.caveoftheblind;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructurePath;
 import com.marklynch.level.constructs.structure.StructureRoom;
@@ -11,6 +10,7 @@ import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Chest;
 import com.marklynch.objects.Corpse;
@@ -668,7 +668,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		Game.level.structures.add(new Structure("Mort & Mort Mining", caveSections, rooms, cavePaths, caveFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true, mort, squaresToRemove, extraWalls, Templates.WALL,
-				"stone.png"));
+				Square.STONE_TEXTURE));
 
 		// Dirty Sheet
 		// Templates.DIRTY_SHEET.makeCopy(Game.level.squares[247][11]);

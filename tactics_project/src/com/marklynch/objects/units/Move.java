@@ -1,6 +1,6 @@
 package com.marklynch.objects.units;
 
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 
 public class Move {
 

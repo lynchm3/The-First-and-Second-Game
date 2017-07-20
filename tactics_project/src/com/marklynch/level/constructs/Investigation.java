@@ -1,6 +1,6 @@
 package com.marklynch.level.constructs;
 
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
 public class Investigation implements Comparable {

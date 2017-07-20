@@ -10,6 +10,7 @@ import com.marklynch.level.popup.Popup;
 import com.marklynch.level.popup.PopupButton;
 import com.marklynch.level.popup.PopupSelectAction;
 import com.marklynch.level.popup.PopupSelectObject;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;

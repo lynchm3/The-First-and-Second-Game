@@ -1,14 +1,14 @@
-package com.marklynch.level.quest.caveoftheblind;
+package com.marklynch.level.quest.betweenthewalls;
 
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructurePath;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Templates;
@@ -31,7 +31,7 @@ public class QuestBetweenTheWalls {
 		structureSections.add(new StructureSection("A Lovely House", 41, 19, 56, 28, false));
 
 		// Front door
-		structureFeatures.add(Templates.DOOR.makeCopy("Front Door", Game.level.squares[42][19], false, null));
+		structureFeatures.add(Templates.DOOR.makeCopy("Front Door", Game.level.squares[41][21], false, null));
 
 		// Front room
 		StructureRoom frontRoom = new StructureRoom("Front Room", 42, 20, false, new ArrayList<Actor>(),
@@ -81,7 +81,7 @@ public class QuestBetweenTheWalls {
 		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.get(2), null);
 
 		// Hidden room
-		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 30, false, new ArrayList<Actor>(),
+		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 36, false, new ArrayList<Actor>(),
 				new RoomPart(42, 36, 55, 37));
 		structureRooms.add(hiddenRoom);
 
@@ -94,11 +94,10 @@ public class QuestBetweenTheWalls {
 		// West Atrium extras
 		// structureExtraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[243][7],
 		// null));
-		structureFeatures.add(Templates.DOOR.makeCopy("Front Door", Game.level.squares[42][19], false, null));
 
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
 				structureFeatures, structureEntranceSquares, null, 0, 0, 0, 0, true, null, structureSquaresToRemove,
-				structureExtraWalls, Templates.WALL, "stone.png"));
+				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE));
 
 	}
 

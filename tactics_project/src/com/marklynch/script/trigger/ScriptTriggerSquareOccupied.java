@@ -1,7 +1,7 @@
 package com.marklynch.script.trigger;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 
 public class ScriptTriggerSquareOccupied extends ScriptTrigger {
 

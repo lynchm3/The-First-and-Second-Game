@@ -1,6 +1,6 @@
 package com.marklynch.objects.tools;
 
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;

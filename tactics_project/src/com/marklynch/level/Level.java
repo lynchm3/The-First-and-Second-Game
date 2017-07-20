@@ -17,6 +17,7 @@ import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
@@ -37,7 +38,6 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
-import mdesl.graphics.Texture;
 
 public class Level {
 
@@ -264,11 +264,13 @@ public class Level {
 
 	private void initGrid(final Square[][] squares, final int width, final int height) {
 
+		Square.loadStaticImages();
+
 		InventorySquare.imageTexture = getGlobalImage("dialogbg.png");
-		final Texture grassTexture = getGlobalImage("grass.png");
+
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				squares[i][j] = new Square(i, j, "grass.png", grassTexture, 1, 0, new SquareInventory(), false);
+				squares[i][j] = new Square(i, j, "grass.png", Square.GRASS_TEXTURE, 1, 0, new SquareInventory(), false);
 			}
 		}
 

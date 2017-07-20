@@ -6,8 +6,8 @@ import javax.tools.Tool;
 
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.ThoughtBubbles;

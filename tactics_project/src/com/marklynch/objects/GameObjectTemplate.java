@@ -5,11 +5,11 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;

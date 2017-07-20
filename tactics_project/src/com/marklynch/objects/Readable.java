@@ -2,10 +2,10 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
-import com.marklynch.level.Square;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionRead;
 import com.marklynch.objects.units.Actor;

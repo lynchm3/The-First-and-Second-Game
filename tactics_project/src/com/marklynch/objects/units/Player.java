@@ -1,8 +1,8 @@
 package com.marklynch.objects.units;
 
 import com.marklynch.ai.routines.AIRoutineForHunter;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
 import com.marklynch.utils.ResourceUtils;

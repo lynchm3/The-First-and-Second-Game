@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.ui.button.Button;
 

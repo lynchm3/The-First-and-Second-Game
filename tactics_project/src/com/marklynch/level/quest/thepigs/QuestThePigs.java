@@ -3,7 +3,6 @@ package com.marklynch.level.quest.thepigs;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructurePath;
 import com.marklynch.level.constructs.structure.StructureRoom;
@@ -11,6 +10,7 @@ import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
@@ -108,9 +108,9 @@ public class QuestThePigs extends Quest {
 		pigPenSections.add(penSection);
 		pigPenRooms.add(penRoom);
 
-		Game.level.structures.add(
-				new Structure("Pen", pigPenSections, pigPenRooms, pigPenPaths, pigPenFeatures, new ArrayList<Square>(),
-						null, 0, 0, 0, 0, true, larry, pigPenSquaresToRemove, pigPenWalls, Templates.FENCE, "mud.png"));
+		Game.level.structures.add(new Structure("Pen", pigPenSections, pigPenRooms, pigPenPaths, pigPenFeatures,
+				new ArrayList<Square>(), null, 0, 0, 0, 0, true, larry, pigPenSquaresToRemove, pigPenWalls,
+				Templates.FENCE, Square.MUD_TEXTURE));
 
 		// Farm house 2,69 -> 24,85
 		ArrayList<Wall> farmHouseWalls = new ArrayList<Wall>();
@@ -152,7 +152,7 @@ public class QuestThePigs extends Quest {
 
 		Game.level.structures.add(new Structure("Farm House", farmHouseSections, farmHouseRooms, farmHousePaths,
 				farmHouseFeatures, new ArrayList<Square>(), null, 0, 0, 0, 0, true, farmer, farmHouseSquaresToRemove,
-				farmHouseWalls, Templates.WALL, "stone.png"));
+				farmHouseWalls, Templates.WALL, Square.STONE_TEXTURE));
 
 		Templates.SHELF.makeCopy(Game.level.squares[14][69], farmer);
 		Templates.SHELF.makeCopy(Game.level.squares[15][69], farmer);

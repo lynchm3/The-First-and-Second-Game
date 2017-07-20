@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;

@@ -2,7 +2,7 @@ package com.marklynch.objects.units;
 
 import java.util.Vector;
 
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 
 public class Path {
 	public Vector<Square> squares;

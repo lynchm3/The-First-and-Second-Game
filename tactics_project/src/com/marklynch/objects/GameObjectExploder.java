@@ -3,7 +3,7 @@ package com.marklynch.objects;
 import java.awt.geom.AffineTransform;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TriangleUtils;

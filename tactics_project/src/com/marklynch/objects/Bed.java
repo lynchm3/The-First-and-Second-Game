@@ -3,7 +3,7 @@ package com.marklynch.objects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ArrayUtils;

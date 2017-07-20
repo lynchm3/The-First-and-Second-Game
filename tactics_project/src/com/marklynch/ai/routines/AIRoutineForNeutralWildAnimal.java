@@ -1,7 +1,7 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.NeutralWildAnimal;

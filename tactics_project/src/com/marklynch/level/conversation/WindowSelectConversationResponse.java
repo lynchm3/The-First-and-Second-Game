@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;

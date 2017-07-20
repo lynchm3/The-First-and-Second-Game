@@ -25,7 +25,6 @@ import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.level.Level;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.Group;
@@ -34,10 +33,12 @@ import com.marklynch.level.constructs.structure.StructurePath;
 import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.structure.StructureSection;
-import com.marklynch.level.quest.caveoftheblind.QuestBetweenTheWalls;
+import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.level.quest.smallgame.QuestSmallGame;
 import com.marklynch.level.quest.thepigs.QuestThePigs;
+import com.marklynch.level.quest.thesecretroom.QuestTheSecretRoom;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.ContainerForLiquids;
 import com.marklynch.objects.GameObject;
@@ -48,9 +49,9 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Trader;
-import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
@@ -531,8 +532,8 @@ public class Editor {
 		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
 		// 0f, 0f, 100f, trader));
 
-		Game.level.squares[4][4].imageTexturePath = "stone.png";
-		Game.level.squares[4][4].loadImages();
+		// Game.level.squares[4][4].imageTexturePath = "stone.png";
+		// Game.level.squares[4][4].loadImages();
 
 		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
 		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 6, 1, false,
@@ -543,7 +544,8 @@ public class Editor {
 		shopSections.add(new StructureSection("Super Wolf's Den", 5, 0, 17, 5, false));
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructurePath>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -100,
-				-100 + 868, true, trader, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, "stone.png");
+				-100 + 868, true, trader, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL,
+				Square.STONE_TEXTURE);
 		Game.level.structures.add(joesShop);
 
 		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
@@ -579,7 +581,7 @@ public class Editor {
 
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructurePath>(),
 				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true,
-				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, "stone.png");
+				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, Square.STONE_TEXTURE);
 		Game.level.structures.add(lodge);
 
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
@@ -591,6 +593,7 @@ public class Editor {
 		QuestCaveOfTheBlind questCaveOfTheBlind = new QuestCaveOfTheBlind();
 		QuestThePigs questThePigs = new QuestThePigs();
 		QuestBetweenTheWalls questBetweenTheWalls = new QuestBetweenTheWalls();
+		QuestTheSecretRoom questSecretRoom = new QuestTheSecretRoom();
 
 		// Add a game object
 		Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);

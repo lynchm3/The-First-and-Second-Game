@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
@@ -14,6 +13,7 @@ import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.ThoughtBubbles;

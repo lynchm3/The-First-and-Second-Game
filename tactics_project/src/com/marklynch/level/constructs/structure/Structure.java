@@ -3,8 +3,8 @@ package com.marklynch.level.constructs.structure;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Square;
 import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionSpot;
@@ -34,7 +34,7 @@ public class Structure {
 			ArrayList<StructurePath> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
 			String imageTexturePath, float overlayX1, float overlayX2, float overlayY1, float overlayY2,
 			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls,
-			Wall wallTemplate, String textureName) {
+			Wall wallTemplate, Texture imageTexture) {
 		super();
 
 		this.name = name;
@@ -56,8 +56,7 @@ public class Structure {
 
 		// Entrance squares
 		for (Square entranceSquare : entranceSquares) {
-			entranceSquare.imageTexturePath = textureName;
-			entranceSquare.loadImages();
+			entranceSquare.imageTexture = imageTexture;
 		}
 
 		// Feature squares
@@ -106,8 +105,7 @@ public class Structure {
 					if (!squaresToRemove.contains(Game.level.squares[i][j])) {
 						Game.level.squares[i][j].structureSquareIsIn = this;
 						Game.level.squares[i][j].structureSectionSquareIsIn = caveSection;
-						Game.level.squares[i][j].imageTexturePath = textureName;
-						Game.level.squares[i][j].loadImages();
+						Game.level.squares[i][j].imageTexture = imageTexture;
 					}
 				}
 			}

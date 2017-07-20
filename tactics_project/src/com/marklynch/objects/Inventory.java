@@ -6,7 +6,7 @@ import java.util.Date;
 
 import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
-import com.marklynch.level.Square;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
