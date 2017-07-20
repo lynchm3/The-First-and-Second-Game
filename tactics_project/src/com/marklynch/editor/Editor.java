@@ -50,7 +50,7 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Trader;
-import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
@@ -648,17 +648,17 @@ public class Editor {
 				false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 110f, null,
 				Game.level.factions.get(1), 0, 0, 0, 0, 0, 0, 0, 0);
 
-		Actor superWolf = new WildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
+		Actor superWolf = new AggressiveWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[22][16], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0f, 0f,
 				1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.get(2), 0, 0, 0, 0,
 				0, 0, 0, 0);
 
-		Actor wolf2 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
+		Actor wolf2 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[20][15], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0f, 0f,
 				1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0, 0,
 				0, 0, 0, 0);
 
-		Actor wolf3 = new WildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
+		Actor wolf3 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
 				Game.level.squares[20][17], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0f, 0f,
 				1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0, 0,
 				0, 0, 0, 0);

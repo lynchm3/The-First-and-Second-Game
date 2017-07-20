@@ -10,7 +10,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
-import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.objects.units.AggressiveWildAnimal;
 
 public class ActionThrowItemsInInventory extends Action {
 
@@ -123,7 +123,7 @@ public class ActionThrowItemsInInventory extends Action {
 
 		// Is human
 		if (targetGameObject instanceof Actor)
-			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof WildAnimal))
+			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal))
 				return false;
 
 		return true;

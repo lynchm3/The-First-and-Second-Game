@@ -10,7 +10,7 @@ import com.marklynch.objects.Liquid;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
-import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionCastPoison extends Action {
@@ -139,7 +139,7 @@ public class ActionCastPoison extends Action {
 		// Is human
 
 		if (target instanceof Actor)
-			if (!(target instanceof Monster) && !(target instanceof WildAnimal))
+			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal))
 				return false;
 		return true;
 	}

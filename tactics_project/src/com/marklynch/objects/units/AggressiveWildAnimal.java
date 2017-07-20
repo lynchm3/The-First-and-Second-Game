@@ -8,9 +8,9 @@ import com.marklynch.objects.Inventory;
 
 import mdesl.graphics.Color;
 
-public class WildAnimal extends Actor {
+public class AggressiveWildAnimal extends Actor {
 
-	public WildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
+	public AggressiveWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
 			int sight, Bed bed, Inventory inventory, boolean showInventory, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
@@ -41,9 +41,9 @@ public class WildAnimal extends Actor {
 	}
 
 	@Override
-	public WildAnimal makeCopy(Square square, Faction faction, Bed bed) {
+	public AggressiveWildAnimal makeCopy(Square square, Faction faction, Bed bed) {
 
-		WildAnimal actor = new WildAnimal(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
+		AggressiveWildAnimal actor = new AggressiveWildAnimal(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,

@@ -9,7 +9,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.RockGolem;
-import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.objects.units.AggressiveWildAnimal;
 
 public class ActionDie extends Action {
 
@@ -52,7 +52,7 @@ public class ActionDie extends Action {
 			// add a carcass
 
 			GameObject body;
-			if (performer instanceof WildAnimal) {
+			if (performer instanceof AggressiveWildAnimal) {
 				if (performer.destroyedBy instanceof EffectBurning)
 					body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
 				else

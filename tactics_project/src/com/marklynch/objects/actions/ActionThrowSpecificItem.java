@@ -7,7 +7,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
-import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
@@ -168,7 +168,7 @@ public class ActionThrowSpecificItem extends Action {
 
 		// Is human
 		if (targetGameObject instanceof Actor)
-			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof WildAnimal))
+			if (!(targetGameObject instanceof Monster) && !(targetGameObject instanceof AggressiveWildAnimal))
 				return false;
 
 		return true;

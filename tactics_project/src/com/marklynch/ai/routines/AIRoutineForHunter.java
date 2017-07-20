@@ -6,7 +6,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Trader;
-import com.marklynch.objects.units.WildAnimal;
+import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForHunter extends AIRoutine {
@@ -125,7 +125,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		{
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfAttack(WildAnimal.class, 0, false, true, false, false, false,
+			target = AIRoutineUtils.getNearestForPurposeOfAttack(AggressiveWildAnimal.class, 0, false, true, false, false, false,
 					true);
 			if (target == null) {
 				if (this.actor.inventory.contains(Junk.class)) {
