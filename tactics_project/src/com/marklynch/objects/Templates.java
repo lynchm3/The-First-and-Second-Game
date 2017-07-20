@@ -9,8 +9,8 @@ import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Farmer;
-import com.marklynch.objects.units.NeutralWildAnimal;
 import com.marklynch.objects.units.Hunter;
+import com.marklynch.objects.units.NeutralWildAnimal;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.RockGolem;
@@ -146,6 +146,8 @@ public class Templates {
 	public static final Readable DOCUMENTS = new Readable("Documents", 5, "documents.png", null, new Inventory(), false,
 			true, true, false, false, false, new Object[] { "" }, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f, 0.1f, null);
+
+	// Openables
 	public static final Door WEAK_WOODEN_DOOR = new Door("Weak Wooden Door", 25, "door.png", null, new Inventory(),
 			false, true, false, false, true, true, 1, 1, 0f, 0f, 10f, 1f, 5f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
 			40f, null, true);
@@ -155,8 +157,14 @@ public class Templates {
 			false, true, 1, 1, 0f, 0f, 1f, 1f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 40f, null, false);
 	public static final Chest CHEST = new Chest("Chest", 200, "chest.png", null, new Inventory(), false, false, false,
 			false, false, true, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 25f, null, false);
+	public static final RemoteDoor FALSE_WALL = new RemoteDoor("Wall", 500, "wall.png", null, new Inventory(), false,
+			true, false, false, true, true, 1, 1, 0f, 0f, 1f, 1f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 40f,
+			null, false);
+
 	public static final Key KEY = new Key("Key", 10, "key.png", null, new Inventory(), false, true, true, false, false,
 			true, 0.3f, 0.3f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 0.5f, null);
+
+	// Kitchenware
 	public static final GameObject PLATE = new Stampable("Plate", 10, "plate.png", null, new Inventory(), false, true,
 			true, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 0.5f,
 			null);

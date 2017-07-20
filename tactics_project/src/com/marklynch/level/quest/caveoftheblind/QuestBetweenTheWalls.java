@@ -10,6 +10,7 @@ import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.units.Actor;
@@ -71,6 +72,10 @@ public class QuestBetweenTheWalls {
 				Game.level.squares[55][32], Game.level.squares[55][33], Game.level.squares[55][34],
 				Game.level.squares[55][35]);
 		structurePaths.add(pathBetweenTheWalls);
+
+		// False wall
+		RemoteDoor falseWall = Templates.FALSE_WALL.makeCopy("Wall", Game.level.squares[49][27], false, null);
+		structureFeatures.add(falseWall);
 
 		// Rat
 		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.get(2), null);
