@@ -10,8 +10,8 @@ import java.util.UUID;
 import java.util.Vector;
 
 import com.marklynch.Game;
+import com.marklynch.ai.utils.AIPath;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Path;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
@@ -221,9 +221,9 @@ public class Faction {
 	// }
 	// }
 
-	class PathComparator implements Comparator<Path> {
+	class PathComparator implements Comparator<AIPath> {
 		@Override
-		public int compare(Path a, Path b) {
+		public int compare(AIPath a, AIPath b) {
 			return a.travelCost < b.travelCost ? -1 : a.travelCost == b.travelCost ? 0 : 1;
 		}
 	}

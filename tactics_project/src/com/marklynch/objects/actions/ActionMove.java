@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
@@ -11,7 +12,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Path;
 import com.marklynch.objects.units.RockGolem;
 
 public class ActionMove extends Action {
@@ -133,7 +133,7 @@ public class ActionMove extends Action {
 																								// SHIT
 			return false;
 
-		Path path = performer.getPathTo(target);
+		AIPath path = performer.getPathTo(target);
 		if (path == null)
 			return false;
 

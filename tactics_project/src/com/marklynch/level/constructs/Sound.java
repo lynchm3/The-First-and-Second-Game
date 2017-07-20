@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import com.marklynch.Game;
+import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
-import com.marklynch.objects.units.Path;
 
 public class Sound {
 	public Actor sourceActor;
@@ -101,7 +101,7 @@ public class Sound {
 	// return squares;
 	// }
 
-	HashMap<Square, Path> squareToPath = new HashMap<Square, Path>();
+	HashMap<Square, AIPath> squareToPath = new HashMap<Square, AIPath>();
 	int highestPathCostSeen;
 
 	public void createDestinationSounds() {
@@ -116,13 +116,13 @@ public class Sound {
 
 		Vector<Square> startPath = new Vector<Square>();
 		startPath.add(currentSquare);
-		squareToPath.put(currentSquare, new Path((Vector<Square>) startPath.clone(), 0));
+		squareToPath.put(currentSquare, new AIPath((Vector<Square>) startPath.clone(), 0));
 
 		for (int i = 0; i <= highestPathCostSeen; i++) {
 			// get all paths with that cost
-			Vector<Path> pathsWithCurrentCost = new Vector<Path>();
-			Vector<Path> pathsVector = new Vector<Path>();
-			for (Path path : squareToPath.values()) {
+			Vector<AIPath> pathsWithCurrentCost = new Vector<AIPath>();
+			Vector<AIPath> pathsVector = new Vector<AIPath>();
+			for (AIPath path : squareToPath.values()) {
 				pathsVector.add(path);
 			}
 			for (int j = 0; j < pathsVector.size(); j++) {
@@ -174,7 +174,7 @@ public class Sound {
 			int newDistance = (int) (pathCost + newSquare.inventory.getSoundDampening());
 			if (newDistance > highestPathCostSeen)
 				highestPathCostSeen = newDistance;
-			Path newPath = new Path(newPathSquares, newDistance);
+			AIPath newPath = new AIPath(newPathSquares, newDistance);
 			squareToPath.put(newSquare, newPath);
 			if (!destinationSquares.contains(newSquare))
 				this.destinationSquares.add(newSquare);

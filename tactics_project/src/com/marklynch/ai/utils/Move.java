@@ -1,6 +1,7 @@
-package com.marklynch.objects.units;
+package com.marklynch.ai.utils;
 
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.units.Actor;
 
 public class Move {
 

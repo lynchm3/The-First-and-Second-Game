@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
+import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.level.popup.PopupButton;
 import com.marklynch.level.popup.PopupSelectAction;
@@ -14,7 +15,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Path;
 import com.marklynch.ui.button.Button;
 
 public class UserInputLevel {
@@ -77,7 +77,7 @@ public class UserInputLevel {
 	public static boolean keyStateMinus = false;
 	public static boolean keyStatePeriod = false;
 
-	public static Path path;
+	public static AIPath path;
 
 	public static void userInput(int delta2) {
 

@@ -4,7 +4,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
-import com.marklynch.objects.units.Path;
+import com.marklynch.ai.utils.AIPath;
 
 public class UserInputEditor {
 	public static float mouseXinPixels;
@@ -67,7 +67,7 @@ public class UserInputEditor {
 	public static boolean mouseButtonStateLeft = false;
 	public static boolean mouseButtonStateRight = false;
 
-	public static Path path;
+	public static AIPath path;
 
 	public static void userInput(int delta2, Editor editor) {
 

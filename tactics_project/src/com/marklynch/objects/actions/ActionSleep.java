@@ -1,10 +1,10 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Path;
 
 public class ActionSleep extends Action {
 
@@ -84,7 +84,7 @@ public class ActionSleep extends Action {
 		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))
 			return false;
 
-		Path path = performer.getPathTo(target);
+		AIPath path = performer.getPathTo(target);
 		if (path.travelCost > performer.travelDistance - performer.distanceMovedThisTurn)
 			return false;
 

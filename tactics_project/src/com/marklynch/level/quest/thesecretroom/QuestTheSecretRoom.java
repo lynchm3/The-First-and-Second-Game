@@ -3,6 +3,7 @@ package com.marklynch.level.quest.thesecretroom;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Path;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructurePath;
 import com.marklynch.level.constructs.structure.StructureRoom;
@@ -13,6 +14,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.units.Actor;
 
 public class QuestTheSecretRoom {
@@ -74,6 +76,22 @@ public class QuestTheSecretRoom {
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
 				structureFeatures, structureEntranceSquares, null, 0, 0, 0, 0, true, null, structureSquaresToRemove,
 				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE));
+
+		// Path to town 24,21 -> 24,29
+		Path pathToTown = new Path(Game.level.squares[24][21], Game.level.squares[24][22], Game.level.squares[24][23],
+				Game.level.squares[24][24], Game.level.squares[24][25], Game.level.squares[24][26],
+				Game.level.squares[24][27], Game.level.squares[24][28], Game.level.squares[24][29]);
+
+		// Well 24,21
+		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[24][21], null);
+
+		Path townSquare = new Path(Game.level.squares[23][19], Game.level.squares[24][19], Game.level.squares[25][19],
+				Game.level.squares[22][20], Game.level.squares[23][20], Game.level.squares[24][20],
+				Game.level.squares[25][20], Game.level.squares[26][20], Game.level.squares[22][21],
+				Game.level.squares[23][21], Game.level.squares[24][21], Game.level.squares[25][21],
+				Game.level.squares[26][21], Game.level.squares[22][22], Game.level.squares[23][22],
+				Game.level.squares[24][22], Game.level.squares[25][22], Game.level.squares[26][22],
+				Game.level.squares[23][23], Game.level.squares[24][23], Game.level.squares[25][23]);
 
 	}
 

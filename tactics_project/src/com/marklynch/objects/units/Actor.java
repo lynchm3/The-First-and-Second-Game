@@ -14,6 +14,7 @@ import org.lwjgl.util.vector.Vector3f;
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AILine;
+import com.marklynch.ai.utils.AIPath;
 import com.marklynch.ai.utils.AStarNode;
 import com.marklynch.ai.utils.AStarSearch;
 import com.marklynch.level.constructs.Crime;
@@ -270,7 +271,7 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public Path getPathTo(Square target) {
+	public AIPath getPathTo(Square target) {
 
 		if (target == null || (target.inventory.canBeMovedTo() == false)) {
 
@@ -289,7 +290,7 @@ public class Actor extends GameObject {
 				squarePath.add((Square) aStarNode);
 			}
 
-			Path path = new Path(squarePath, squarePath.size());
+			AIPath path = new AIPath(squarePath, squarePath.size());
 			return path;
 		}
 
@@ -297,12 +298,12 @@ public class Actor extends GameObject {
 
 	}
 
-	public Path getPathIfCanReachInOneTurn(Square target) {
+	public AIPath getPathIfCanReachInOneTurn(Square target) {
 
 		if (this.straightLineDistanceTo(target) > this.travelDistance)
 			return null;
 
-		Path path = getPathTo(target);
+		AIPath path = getPathTo(target);
 		if (path != null && this.travelDistance >= path.travelCost) {
 			return path;
 		}
