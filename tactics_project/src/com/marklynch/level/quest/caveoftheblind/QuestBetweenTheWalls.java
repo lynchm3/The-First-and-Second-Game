@@ -61,6 +61,7 @@ public class QuestBetweenTheWalls {
 		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[53][34], null));
 		structureExtraWalls.add(Templates.WALL.makeCopy(Game.level.squares[42][34], null));
 
+		// Path between the walls
 		StructurePath pathBetweenTheWalls = new StructurePath("Between the walls", false, new ArrayList(),
 				Game.level.squares[44][28], Game.level.squares[45][28], Game.level.squares[46][28],
 				Game.level.squares[47][28], Game.level.squares[48][28], Game.level.squares[49][28],
@@ -70,6 +71,9 @@ public class QuestBetweenTheWalls {
 				Game.level.squares[55][32], Game.level.squares[55][33], Game.level.squares[55][34],
 				Game.level.squares[55][35]);
 		structurePaths.add(pathBetweenTheWalls);
+
+		// Rat
+		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.get(2), null);
 
 		// Hidden room
 		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 30, false, new ArrayList<Actor>(),

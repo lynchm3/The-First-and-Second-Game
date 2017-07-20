@@ -33,10 +33,15 @@ public class Templates {
 			null, new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
-	// Pig
+	// Domestic animals
 	public static final Pig PIG = new Pig("Pig", "Pig", 1, 10, 0, 0, 0, 0, "pig.png", null, 1, 10, null,
 			new Inventory(), true, false, true, false, false, 1f, 0.65625f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, 90f, null, null, 40, 96, 40, 96, 40, 96, 40, 96);
+
+	// Wild animals
+	public static final Pig RAT = new Pig("Rat", "Rat", 1, 1, 0, 0, 0, 0, "rat.png", null, 1, 10, null, new Inventory(),
+			false, false, true, false, false, 1, 0.25f, 0f, 48f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+			60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0);
 
 	// Monsters
 	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
