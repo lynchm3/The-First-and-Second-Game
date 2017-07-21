@@ -1,5 +1,6 @@
 package com.marklynch.objects;
 
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
@@ -43,8 +44,10 @@ public class SwitchForOpenables extends Switch {
 	@Override
 	public void draw2() {
 		super.draw2();
-		aiLine.target = this.openable.squareGameObjectIsOn;
-		aiLine.draw2();
+		if (Game.showTriggerLines) {
+			aiLine.target = this.openable.squareGameObjectIsOn;
+			aiLine.draw2();
+		}
 	}
 
 	@Override

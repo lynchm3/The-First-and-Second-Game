@@ -39,7 +39,6 @@ public class ActionTakeBite extends Action {
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
-			Game.level.undoButton.enabled = false;
 		}
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)

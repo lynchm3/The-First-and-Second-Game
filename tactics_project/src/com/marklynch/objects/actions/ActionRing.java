@@ -40,7 +40,6 @@ public class ActionRing extends Action {
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
-			Game.level.undoButton.enabled = false;
 		}
 
 		trespassingCheck(this, performer, performer.squareGameObjectIsOn);

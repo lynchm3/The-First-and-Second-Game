@@ -50,7 +50,6 @@ public class ActionLock extends Action {
 
 			if (actor.faction == Game.level.factions.get(0)) {
 				Game.level.undoList.clear();
-				Game.level.undoButton.enabled = false;
 			}
 
 			actor.actionsPerformedThisTurn.add(this);

@@ -9,8 +9,8 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.Monster;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionCastDouse extends Action {
@@ -82,7 +82,6 @@ public class ActionCastDouse extends Action {
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();
-			Game.level.undoButton.enabled = false;
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

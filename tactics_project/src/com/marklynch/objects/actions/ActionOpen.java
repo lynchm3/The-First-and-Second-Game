@@ -45,7 +45,6 @@ public class ActionOpen extends Action {
 			Actor actor = (Actor) performer;
 			if (actor.faction == Game.level.factions.get(0)) {
 				Game.level.undoList.clear();
-				Game.level.undoButton.enabled = false;
 			}
 
 			trespassingCheck(this, actor, actor.squareGameObjectIsOn);

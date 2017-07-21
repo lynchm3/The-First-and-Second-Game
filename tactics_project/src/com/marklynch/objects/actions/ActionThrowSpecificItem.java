@@ -6,8 +6,8 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
@@ -108,7 +108,6 @@ public class ActionThrowSpecificItem extends Action {
 
 		{
 			Game.level.undoList.clear();
-			Game.level.undoButton.enabled = false;
 		}
 
 		if (performer == Game.level.player)

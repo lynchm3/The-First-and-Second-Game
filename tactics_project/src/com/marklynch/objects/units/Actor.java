@@ -750,8 +750,10 @@ public class Actor extends GameObject {
 			// TextureUtils.skipNormals = false;
 		}
 
-		if (aiLine != null) {
-			aiLine.draw2();
+		if (Game.showAILines) {
+			if (aiLine != null) {
+				aiLine.draw2();
+			}
 		}
 
 	}
