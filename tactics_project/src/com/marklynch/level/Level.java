@@ -61,7 +61,6 @@ public class Level {
 	public Toast toast;
 	public Conversation conversation;
 	public transient LevelButton endTurnButton;
-	public transient LevelButton undoButton;
 	public transient LevelButton editorButton;
 	public transient ArrayList<Button> buttons;
 
@@ -104,7 +103,7 @@ public class Level {
 
 		initGrid(this.squares, this.width, this.height);
 
-		endTurnButton = new LevelButton(210f, 40f, 200f, 30f, "end_turn_button.png", "end_turn_button.png", "END TURN",
+		endTurnButton = new LevelButton(110f, 40f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "END TURN",
 				false, false, Color.BLACK, Color.WHITE);
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
@@ -114,7 +113,7 @@ public class Level {
 		});
 		buttons.add(endTurnButton);
 
-		Button centerOnPlayerButton = new LevelButton(420f, 40f, 200f, 30f, "undo_button.png",
+		Button centerOnPlayerButton = new LevelButton(220f, 40f, 100f, 30f, "undo_button.png",
 				"undo_button_disabled.png", "CENTER", false, false, Color.BLACK, Color.WHITE);
 		centerOnPlayerButton.setClickListener(new ClickListener() {
 			@Override
@@ -126,32 +125,49 @@ public class Level {
 		centerOnPlayerButton.enabled = true;
 		buttons.add(centerOnPlayerButton);
 
-		undoButton = new LevelButton(630f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "UNDO", false,
-				false, Color.BLACK, Color.WHITE);
-		undoButton.setClickListener(new ClickListener() {
+		Button seeAllButton = new LevelButton(330f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"FULL VIS", false, false, Color.BLACK, Color.WHITE);
+		seeAllButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Level.this.undo();
+				Game.fullVisiblity = !Game.fullVisiblity;
 			}
 		});
-		undoButton.enabled = false;
-		buttons.add(undoButton);
-		editorButton = new LevelButton(840f, 40f, 200f, 30f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
-				false, false, Color.BLACK, Color.WHITE);
-		editorButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.editorMode = true;
-				// right click
-				if (activeActor != null) {
-					activeActor.unselected();
-					activeActor = null;
-				}
-			}
-		});
-		editorButton.enabled = true;
-		buttons.add(editorButton);
+		seeAllButton.enabled = true;
+		buttons.add(seeAllButton);
 
+		Button showAILinesButton = new LevelButton(440f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"AI LINES", false, false, Color.BLACK, Color.WHITE);
+		showAILinesButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.showAILines = !Game.showAILines;
+			}
+		});
+		showAILinesButton.enabled = true;
+		buttons.add(showAILinesButton);
+
+		Button showTriggerLinesButton = new LevelButton(550f, 40f, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "TRGR LINES", false, false, Color.BLACK, Color.WHITE);
+		showTriggerLinesButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.showTriggerLines = !Game.showTriggerLines;
+			}
+		});
+		showTriggerLinesButton.enabled = true;
+		buttons.add(showTriggerLinesButton);
+
+		Button highlightRestrictedButton = new LevelButton(660f, 40f, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "HILITE SQRS", false, false, Color.BLACK, Color.WHITE);
+		highlightRestrictedButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.redHighlightOnRestrictedSquares = !Game.redHighlightOnRestrictedSquares;
+			}
+		});
+		highlightRestrictedButton.enabled = true;
+		buttons.add(highlightRestrictedButton);
 	}
 
 	public void postLoad() {
@@ -169,31 +185,6 @@ public class Level {
 			}
 		});
 		buttons.add(endTurnButton);
-		undoButton = new LevelButton(420f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "UNDO",
-				false, false, Color.BLACK, Color.WHITE);
-		undoButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Level.this.undo();
-			}
-		});
-		undoButton.enabled = false;
-		buttons.add(undoButton);
-		editorButton = new LevelButton(630f, 110f, 200f, 100f, "undo_button.png", "undo_button_disabled.png", "EDITOR",
-				false, false, Color.BLACK, Color.WHITE);
-		editorButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				Game.editorMode = true;
-				// right click
-				if (activeActor != null) {
-					activeActor.unselected();
-					activeActor = null;
-				}
-			}
-		});
-		editorButton.enabled = true;
-		buttons.add(editorButton);
 
 		this.inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 		this.projectiles = new ArrayList<Projectile>();
@@ -846,7 +837,6 @@ public class Level {
 		}
 
 		undoList.clear();
-		undoButton.enabled = false;
 
 		if (activeActor == player) {
 			for (GameObject inanimateObject : inanimateObjectsOnGround) {
@@ -902,24 +892,6 @@ public class Level {
 	// showTurnNotification = false;
 	// }
 	// }
-
-	public void undo() {
-		if (!this.undoList.isEmpty()) {
-			Move move = undoList.pop();
-			move.actor.distanceMovedThisTurn -= move.travelCost;
-			move.actor.squareGameObjectIsOn = move.squareMovedFrom;
-			move.squareMovedFrom.inventory.add(move.actor);
-			move.squareMovedTo.inventory.remove(move.actor);
-			if (activeActor != null)
-				activeActor.unselected();
-			activeActor = move.actor;
-			// Actor.calculateReachableSquares();
-			removeLastLog();
-			if (this.undoList.isEmpty()) {
-				undoButton.enabled = false;
-			}
-		}
-	}
 
 	private void removeLastLog() {
 
