@@ -109,7 +109,7 @@ public class QuestBetweenTheWalls {
 				Game.level.squares[39][21], Game.level.squares[40][21]);
 
 		// Antler switch
-		Templates.antlersSwitchForOpenables.makeCopy(Game.level.squares[53][19], null, falseWall,
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.makeCopy(Game.level.squares[53][19], null, falseWall,
 				SwitchForOpenables.SWITCH_TYPE.OPEN_CLOSE);
 
 	}

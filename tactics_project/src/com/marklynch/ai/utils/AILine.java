@@ -6,20 +6,20 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextureUtils;
 
 public class AILine {
 
 	public static enum AILineType {
-		AI_LINE_TYPE_ATTACK, AI_LINE_TYPE_SEARCH, AI_LINE_TYPE_CRIME, AI_LINE_TYPE_FOLLOW, AI_LINE_TYPE_ESCAPE
+		AI_LINE_TYPE_ATTACK, AI_LINE_TYPE_SEARCH, AI_LINE_TYPE_CRIME, AI_LINE_TYPE_FOLLOW, AI_LINE_TYPE_ESCAPE, AI_LINE_TYPE_SWITCH
 	};
 
 	AILineType aiLineType;
-	Actor source;
-	Square target;
+	public GameObject source;
+	public Square target;
 
-	public AILine(AILineType aiLineType, Actor source, Square target) {
+	public AILine(AILineType aiLineType, GameObject source, Square target) {
 		super();
 		this.aiLineType = aiLineType;
 		this.source = source;
@@ -47,15 +47,17 @@ public class AILine {
 
 		// Draw
 		if (aiLineType == AILineType.AI_LINE_TYPE_ATTACK) {
-			TextureUtils.drawTexture(Game.level.gameCursor.redArrow, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.redArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
 		} else if (aiLineType == AILineType.AI_LINE_TYPE_SEARCH) {
-			TextureUtils.drawTexture(Game.level.gameCursor.yellowArrow, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.yellowArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
 		} else if (aiLineType == AILineType.AI_LINE_TYPE_CRIME) {
-			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
 		} else if (aiLineType == AILineType.AI_LINE_TYPE_FOLLOW) {
-			TextureUtils.drawTexture(Game.level.gameCursor.greenArrow, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.greenArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
 		} else if (aiLineType == AILineType.AI_LINE_TYPE_ESCAPE) {
 			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0, 0 + distance, 0 - 16, 0 + 16);
+		} else if (aiLineType == AILineType.AI_LINE_TYPE_SWITCH) {
+			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
 		}
 
 		Game.activeBatch.flush();

@@ -1,5 +1,6 @@
 package com.marklynch.objects;
 
+import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionLock;
@@ -13,6 +14,7 @@ public class SwitchForOpenables extends Switch {
 
 	Openable openable;
 	SWITCH_TYPE switchType;
+	AILine aiLine;
 
 	public enum SWITCH_TYPE {
 		OPEN_CLOSE, LOCK_UNLOCK
@@ -24,8 +26,8 @@ public class SwitchForOpenables extends Switch {
 			boolean attackable, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float weight, Actor owner, String actionName, String actionVerb,
-			Openable openable, SWITCH_TYPE switchType) {
+			float poisonResistance, float weight, Actor owner, String actionName, String actionVerb, Openable openable,
+			SWITCH_TYPE switchType) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
@@ -33,6 +35,15 @@ public class SwitchForOpenables extends Switch {
 				owner, actionName, actionVerb);
 		this.openable = openable;
 		this.switchType = switchType;
+		if (openable != null)
+			this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, this, openable.squareGameObjectIsOn);
+	}
+
+	@Override
+	public void draw2() {
+		super.draw2();
+		aiLine.target = this.openable.squareGameObjectIsOn;
+		aiLine.draw2();
 	}
 
 	@Override

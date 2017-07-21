@@ -163,9 +163,9 @@ public class Templates {
 
 	public static final Key KEY = new Key("Key", 10, "key.png", null, new Inventory(), false, true, true, false, false,
 			true, 0.3f, 0.3f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 0.5f, null);
-	public static final SwitchForOpenables antlersSwitchForOpenables = new SwitchForOpenables("Obvious Antlers", 5,
-			"antlers.png", null, new Inventory(), false, true, true, false, false, false, true, 0.5f, 0.5f, 16f, 16f,
-			1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0.5f, null, "Touch", "touched", null, null);
+	public static final SwitchForOpenables ANTLERS_SWITCH_FOR_OPENABLES = new SwitchForOpenables("Obvious Antlers", 5,
+			"antlers.png", null, new Inventory(), false, true, true, false, false, false, true, 1f, 1f, 0f, 0f, 1f, 1f,
+			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0.5f, null, "Touch", "touched", null, null);
 
 	// Kitchenware
 	public static final GameObject PLATE = new Stampable("Plate", 10, "plate.png", null, new Inventory(), false, true,
