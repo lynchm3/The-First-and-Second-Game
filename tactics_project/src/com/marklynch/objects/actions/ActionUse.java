@@ -2,6 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Switch;
 import com.marklynch.objects.units.Actor;
@@ -17,15 +18,24 @@ public class ActionUse extends Action {
 	GameObject performer;
 	Switch switchToUse;
 	String verb;
+	RequirementToMeet[] requirementsToMeet;
 
 	// Default for hostiles
-	public ActionUse(GameObject performer, Switch switchToUse, String actionName, String verb) {
-		super(actionName, "action_open.png");
+	public ActionUse(GameObject performer, Switch switchToUse, String actionName, String verb,
+			RequirementToMeet[] requirementsToMeet) {
+		super(actionName, "action_use.png");
 		ACTION_NAME = actionName;
+		System.out.println("requirementsToMeet.length = " + requirementsToMeet.length);
+		for (RequirementToMeet requirementToMeet : requirementsToMeet) {
+			System.out.println("requirementToMeet.getText() = " + requirementToMeet.getText());
+			ACTION_NAME += " " + requirementToMeet.getText();
+		}
+		this.actionName = ACTION_NAME;
 		ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
 		this.performer = performer;
 		this.switchToUse = switchToUse;
 		this.verb = verb;
+		this.requirementsToMeet = requirementsToMeet;
 		if (!check()) {
 			enabled = false;
 		}
@@ -70,6 +80,12 @@ public class ActionUse extends Action {
 			if (performer.straightLineDistanceTo(switchToUse.squareGameObjectIsOn) != 1) {
 				actionName = ACTION_NAME_CANT_REACH;
 				return false;
+			}
+
+			for (RequirementToMeet requirementToMeet : requirementsToMeet) {
+				if (!requirementToMeet.isRequirementMet(actor)) {
+					return false;
+				}
 			}
 		}
 

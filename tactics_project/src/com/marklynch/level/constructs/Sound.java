@@ -148,7 +148,9 @@ public class Sound {
 
 		Square parentSquare = squaresInThisPath.get(squaresInThisPath.size() - 1);
 
-		if (direction == Direction.UP) {
+		if (parentSquare == null) {
+
+		} else if (direction == Direction.UP) {
 			if (parentSquare.yInGrid - 1 >= 0) {
 				newSquare = Game.level.squares[parentSquare.xInGrid][parentSquare.yInGrid - 1];
 			}

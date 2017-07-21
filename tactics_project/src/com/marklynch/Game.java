@@ -47,8 +47,12 @@ public class Game {
 	// public static int playerStartPosY = 46;
 
 	// Farm
-	public static int playerStartPosX = 30;
-	public static int playerStartPosY = 70;
+	// public static int playerStartPosX = 30;
+	// public static int playerStartPosY = 70;
+
+	// Between the walls
+	public static int playerStartPosX = 53;
+	public static int playerStartPosY = 21;
 
 	// CAMERA START POSITION
 

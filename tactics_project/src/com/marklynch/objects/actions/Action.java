@@ -144,6 +144,7 @@ public abstract class Action {
 		getGlobalImage("action_throw.png");
 		getGlobalImage("action_trespass.png"); // untested
 		getGlobalImage("action_unlock.png");
+		getGlobalImage("action_use.png");
 		getGlobalImage("action_write.png"); // untested
 		x = getGlobalImage("x.png");
 

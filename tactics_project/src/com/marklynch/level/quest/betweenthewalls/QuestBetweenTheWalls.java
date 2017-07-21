@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Path;
+import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
+import com.marklynch.level.constructs.requirementtomeet.StatRequirementToMeet;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructurePath;
 import com.marklynch.level.constructs.structure.StructureRoom;
@@ -110,7 +112,8 @@ public class QuestBetweenTheWalls {
 
 		// Antler switch
 		Templates.ANTLERS_SWITCH_FOR_OPENABLES.makeCopy(Game.level.squares[53][19], null, falseWall,
-				SwitchForOpenables.SWITCH_TYPE.OPEN_CLOSE);
+				SwitchForOpenables.SWITCH_TYPE.OPEN_CLOSE,
+				new RequirementToMeet[] { new StatRequirementToMeet(StatRequirementToMeet.Stat.STAT_STRENGTH, 1) });
 
 	}
 

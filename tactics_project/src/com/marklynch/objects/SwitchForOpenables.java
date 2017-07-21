@@ -1,6 +1,7 @@
 package com.marklynch.objects;
 
 import com.marklynch.ai.utils.AILine;
+import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionLock;
@@ -27,12 +28,12 @@ public class SwitchForOpenables extends Switch {
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float weight, Actor owner, String actionName, String actionVerb, Openable openable,
-			SWITCH_TYPE switchType) {
+			SWITCH_TYPE switchType, RequirementToMeet[] requirementsToMeet) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
-				owner, actionName, actionVerb);
+				owner, actionName, actionVerb, requirementsToMeet);
 		this.openable = openable;
 		this.switchType = switchType;
 		if (openable != null)
@@ -64,13 +65,14 @@ public class SwitchForOpenables extends Switch {
 
 	}
 
-	public SwitchForOpenables makeCopy(Square square, Actor owner, Openable openable, SWITCH_TYPE switchType) {
+	public SwitchForOpenables makeCopy(Square square, Actor owner, Openable openable, SWITCH_TYPE switchType,
+			RequirementToMeet[] requirementsToMeet) {
 		return new SwitchForOpenables(new String(name), (int) totalHealth, imageTexturePath, square,
 				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,
-				actionName, actionVerb, openable, switchType);
+				actionName, actionVerb, openable, switchType, requirementsToMeet);
 	}
 
 }
