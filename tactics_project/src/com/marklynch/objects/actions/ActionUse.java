@@ -3,24 +3,29 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Openable;
+import com.marklynch.objects.Switch;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionOpen extends Action {
+public class ActionUse extends Action {
 
-	public static final String ACTION_NAME = "Open";
-	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
+	public static String ACTION_NAME = "Use";
+	public static String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
+	// SPECIAL CASE HERE IF UR ADDING NEW ITEMS, THE ACTION NAME GETS SET IN THE
+	// CONSTRUCTOR
 
 	GameObject performer;
-	Openable openable;
+	Switch switchToUse;
+	String verb;
 
 	// Default for hostiles
-	public ActionOpen(GameObject opener, Openable openable) {
-		super(ACTION_NAME, "action_open.png");
-		this.performer = opener;
-		this.openable = openable;
+	public ActionUse(GameObject performer, Switch switchToUse, String actionName, String verb) {
+		super(actionName, "action_open.png");
+		ACTION_NAME = actionName;
+		ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
+		this.performer = performer;
+		this.switchToUse = switchToUse;
+		this.verb = verb;
 		if (!check()) {
 			enabled = false;
 		}
@@ -31,15 +36,12 @@ public class ActionOpen extends Action {
 	@Override
 	public void perform() {
 
-		if (openable.isLocked())
-			new ActionUnlock(performer, openable).perform();
-
-		openable.open();
-
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " opened ", openable }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ", verb, " ", switchToUse }));
 
-		performer.showPow(openable);
+		switchToUse.use();
+
+		performer.showPow(switchToUse);
 
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
@@ -60,17 +62,12 @@ public class ActionOpen extends Action {
 	public boolean check() {
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
-			if (!actor.canSeeGameObject(openable)) {
+			if (!actor.canSeeGameObject(switchToUse)) {
 				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 
-			if (openable.isLocked() && !actor.hasKeyForDoor(openable)) {
-				actionName = ACTION_NAME_NEED_KEY;
-				return false;
-			}
-
-			if (performer.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
+			if (performer.straightLineDistanceTo(switchToUse.squareGameObjectIsOn) != 1) {
 				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
@@ -86,7 +83,7 @@ public class ActionOpen extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, openable, openable.squareGameObjectIsOn, 1, legal, this.getClass());
+		return new Sound(performer, switchToUse, switchToUse.squareGameObjectIsOn, 1, legal, this.getClass());
 	}
 
 }

@@ -142,17 +142,17 @@ public class AIRoutine {
 		// Check for sounds to investigate
 		for (Sound sound : this.actor.squareGameObjectIsOn.sounds) {
 			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
-					&& !this.actor.canSeeGameObject(sound.sourceActor)) {
+					&& !this.actor.canSeeGameObject(sound.sourcePerformer)) {
 
 				if (sound.actionType == ActionShoutForHelp.class) {
 					this.actor.addInvestigation(sound.sourceObject, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 					this.actor.attackers.add(sound.sourceObject);
 				} else if (!sound.legal) {
-					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
+					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 				} else if (!classesArrayList.contains(sound.sourceObject.getClass())) {
-					this.actor.addInvestigation(sound.sourceActor, sound.sourceSquare,
+					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 				}
 

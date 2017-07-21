@@ -8,11 +8,10 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Actor.Direction;
 
 public class Sound {
-	public Actor sourceActor;
+	public GameObject sourcePerformer;
 	public GameObject sourceObject;
 	public Square sourceSquare;
 	public ArrayList<Square> destinationSquares;
@@ -20,10 +19,10 @@ public class Sound {
 	public boolean legal;
 	public Class actionType;
 
-	public Sound(Actor sourceActor, GameObject sourceObject, Square sourceSquare, float loudness, boolean legal,
+	public Sound(GameObject sourceActor, GameObject sourceObject, Square sourceSquare, float loudness, boolean legal,
 			Class action) {
 		super();
-		this.sourceActor = sourceActor;
+		this.sourcePerformer = sourceActor;
 		this.sourceObject = sourceObject;
 		this.sourceSquare = sourceSquare;
 		this.loudness = loudness;

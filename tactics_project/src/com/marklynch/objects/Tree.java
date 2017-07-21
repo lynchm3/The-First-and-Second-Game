@@ -96,7 +96,8 @@ public class Tree extends GameObject {
 			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();
 			objectsToDropFromHit.addAll(this.inventory.gameObjects);
 			for (GameObject objectToDrop : objectsToDropFromHit) {
-				Level.actionQueueForInanimateObjects.add(new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop));
+				Level.actionQueueForInanimateObjects
+						.add(new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop));
 				objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
 			}
 			healthWhenLastDroppedFruit = this.remainingHealth;
@@ -130,7 +131,8 @@ public class Tree extends GameObject {
 		}
 
 		for (GameObject objectToDrop : objectsToDropRandomly) {
-			Level.actionQueueForInanimateObjects.add(new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop));
+			Level.actionQueueForInanimateObjects
+					.add(new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop));
 			objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
 			// - 32;
 		}

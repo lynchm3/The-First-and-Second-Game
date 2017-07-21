@@ -2,7 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.Door;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
@@ -15,11 +15,11 @@ public class ActionLock extends Action {
 	public static final String ACTION_NAME_NEED_KEY = ACTION_NAME + " (need key)";
 	public static final String ACTION_NAME_BLOCKED = ACTION_NAME + " (blocked)";
 
-	Actor performer;
+	GameObject performer;
 	Openable openable;
 
 	// Default for hostiles
-	public ActionLock(Actor unlocker, Openable openable) {
+	public ActionLock(GameObject unlocker, Openable openable) {
 		super(ACTION_NAME, "action_lock.png");
 		this.performer = unlocker;
 		this.openable = openable;
@@ -33,47 +33,60 @@ public class ActionLock extends Action {
 	@Override
 	public void perform() {
 
-		Key key = performer.getKeyFor(openable);
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
+			Key key = actor.getKeyFor(openable);
 
-		if (openable.isOpen())
-			new ActionClose(performer, openable).perform();
+			if (openable.isOpen())
+				new ActionClose(performer, openable).perform();
 
-		openable.lock();
+			openable.lock();
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " locked ", openable, " with ", key }));
+			if (performer.squareGameObjectIsOn.visibleToPlayer)
+				Game.level
+						.logOnScreen(new ActivityLog(new Object[] { performer, " locked ", openable, " with ", key }));
 
-		performer.showPow(openable);
+			performer.showPow(openable);
 
-		if (performer.faction == Game.level.factions.get(0)) {
-			Game.level.undoList.clear();
-			Game.level.undoButton.enabled = false;
+			if (actor.faction == Game.level.factions.get(0)) {
+				Game.level.undoList.clear();
+				Game.level.undoButton.enabled = false;
+			}
+
+			actor.actionsPerformedThisTurn.add(this);
+		} else {
+
+			if (openable.isOpen())
+				new ActionClose(performer, openable).perform();
+
+			openable.lock();
+
+			if (performer.squareGameObjectIsOn.visibleToPlayer)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " locked ", openable }));
+
+			performer.showPow(openable);
 		}
-
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}
 
 	@Override
 	public boolean check() {
-		if (!performer.canSeeGameObject(openable)) {
-			actionName = ACTION_NAME_CANT_REACH;
-			return false;
-		}
-		if (performer.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
-			actionName = ACTION_NAME_CANT_REACH;
-			return false;
-		}
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
+			if (!actor.canSeeGameObject(openable)) {
+				actionName = ACTION_NAME_CANT_REACH;
+				return false;
+			}
+			if (actor.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
+				actionName = ACTION_NAME_CANT_REACH;
+				return false;
+			}
 
-		if (!performer.hasKeyForDoor(openable)) {
-			actionName = ACTION_NAME_NEED_KEY;
-			return false;
-		}
-
-		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare() == false) {
-			actionName = ACTION_NAME_BLOCKED;
-			return false;
+			if (!actor.hasKeyForDoor(openable)) {
+				actionName = ACTION_NAME_NEED_KEY;
+				return false;
+			}
 		}
 
 		return true;

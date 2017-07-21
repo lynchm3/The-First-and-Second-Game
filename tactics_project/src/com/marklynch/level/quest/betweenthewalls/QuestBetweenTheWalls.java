@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
+import com.marklynch.objects.SwitchForOpenables;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.units.Actor;
@@ -75,7 +76,7 @@ public class QuestBetweenTheWalls {
 		structurePaths.add(pathBetweenTheWalls);
 
 		// False wall
-		RemoteDoor falseWall = Templates.FALSE_WALL.makeCopy("Wall", Game.level.squares[49][27], false, null);
+		RemoteDoor falseWall = Templates.FALSE_WALL.makeCopy("Wall", Game.level.squares[52][27], false, null);
 		structureFeatures.add(falseWall);
 
 		// Rat
@@ -106,6 +107,10 @@ public class QuestBetweenTheWalls {
 				Game.level.squares[33][21], Game.level.squares[34][21], Game.level.squares[35][21],
 				Game.level.squares[36][21], Game.level.squares[37][21], Game.level.squares[38][21],
 				Game.level.squares[39][21], Game.level.squares[40][21]);
+
+		// Antler switch
+		Templates.antlersSwitchForOpenables.makeCopy(Game.level.squares[53][19], null, falseWall,
+				SwitchForOpenables.SWITCH_TYPE.OPEN_CLOSE);
 
 	}
 
