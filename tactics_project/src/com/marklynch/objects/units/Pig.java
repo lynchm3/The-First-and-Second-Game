@@ -1,5 +1,7 @@
 package com.marklynch.objects.units;
 
+import java.util.ArrayList;
+
 import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.structure.Structure;
@@ -8,6 +10,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;
@@ -48,6 +52,19 @@ public class Pig extends Actor {
 	@Override
 	public void postLoad2() {
 		super.postLoad2();
+	}
+
+	@Override
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+		return new ActionPet(performer, this);
+	}
+
+	@Override
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.add(new ActionPet(performer, this));
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
+		return actions;
 	}
 
 	public Pig makeCopy(String name, Square square, Faction faction, Bed bed) {

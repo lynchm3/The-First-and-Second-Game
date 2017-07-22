@@ -123,6 +123,7 @@ public abstract class Action {
 		getGlobalImage("action_mine.png");
 		getGlobalImage("action_move.png");
 		getGlobalImage("action_open.png");
+		getGlobalImage("action_pet.png");
 		getGlobalImage("action_pickpocket_all.png");// untested
 		getGlobalImage("action_pick_up.png");
 		getGlobalImage("action_posion.png");
