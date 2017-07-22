@@ -2,22 +2,13 @@ package com.marklynch.objects.units;
 
 import com.marklynch.ai.routines.AIRoutineForNeutralWildAnimal;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.structure.Structure;
-import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
-import com.marklynch.objects.Readable;
-import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;
 
 public class NeutralWildAnimal extends Actor {
-
-	public StructureRoom room;
-	public Structure shop;
-	public Readable shopSign;
-	public Weapon broom;
 
 	public NeutralWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
@@ -52,13 +43,13 @@ public class NeutralWildAnimal extends Actor {
 
 	public NeutralWildAnimal makeCopy(String name, Square square, Faction faction, Bed bed) {
 
-		NeutralWildAnimal actor = new NeutralWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
-				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
-				inventory.makeCopy(), showInventory, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, weight, owner, faction, handAnchorX, handAnchorY,
-				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+		NeutralWildAnimal actor = new NeutralWildAnimal(name, title, actorLevel, (int) totalHealth, strength, dexterity,
+				intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(),
+				showInventory, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen,
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
 		return actor;
 	}
 
