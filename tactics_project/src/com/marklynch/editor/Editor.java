@@ -599,7 +599,6 @@ public class Editor {
 		Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);
 		Templates.FUR.makeCopy(Game.level.squares[0][7], null);
 		Templates.TREE.makeCopy(Game.level.squares[1][2], null);
-		Templates.TREE.makeCopy(Game.level.squares[21][19], null);
 		Templates.TREE.makeCopy(Game.level.squares[14][8], null);
 		Templates.TREE.makeCopy(Game.level.squares[19][3], null);
 		Templates.TREE.makeCopy(Game.level.squares[18][13], null);
