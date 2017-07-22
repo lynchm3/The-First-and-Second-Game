@@ -11,6 +11,7 @@ import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSquash;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -41,6 +42,11 @@ public class SmallNeutralWildAnimal extends NeutralWildAnimal {
 				legsAnchorY);
 
 		aiRoutine = new AIRoutineForNeutralWildAnimal(this);
+	}
+
+	@Override
+	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+		return new ActionMove(performer, this.squareGameObjectIsOn, true);
 	}
 
 	@Override
