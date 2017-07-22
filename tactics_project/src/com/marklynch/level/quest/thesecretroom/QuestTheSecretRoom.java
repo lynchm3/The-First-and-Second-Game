@@ -82,9 +82,18 @@ public class QuestTheSecretRoom {
 				Game.level.squares[24][24], Game.level.squares[24][25], Game.level.squares[24][26],
 				Game.level.squares[24][27], Game.level.squares[24][28], Game.level.squares[24][29]);
 
-		// Well 24,21
+		// Bushed along path to town
+		Templates.BUSH.makeCopy(Game.level.squares[23][25], null);
+		Templates.BUSH.makeCopy(Game.level.squares[25][25], null);
+		Templates.BUSH.makeCopy(Game.level.squares[23][27], null);
+		Templates.BUSH.makeCopy(Game.level.squares[25][27], null);
+		Templates.BUSH.makeCopy(Game.level.squares[23][29], null);
+		Templates.BUSH.makeCopy(Game.level.squares[25][29], null);
+
+		// TownSquare Well 24,21
 		WaterSource well = Templates.WELL.makeCopy(Game.level.squares[24][21], null);
 
+		// Town square pavement
 		Path townSquare = new Path(Game.level.squares[23][19], Game.level.squares[24][19], Game.level.squares[25][19],
 				Game.level.squares[22][20], Game.level.squares[23][20], Game.level.squares[24][20],
 				Game.level.squares[25][20], Game.level.squares[26][20], Game.level.squares[22][21],
@@ -92,6 +101,12 @@ public class QuestTheSecretRoom {
 				Game.level.squares[26][21], Game.level.squares[22][22], Game.level.squares[23][22],
 				Game.level.squares[24][22], Game.level.squares[25][22], Game.level.squares[26][22],
 				Game.level.squares[23][23], Game.level.squares[24][23], Game.level.squares[25][23]);
+
+		// Trees around town square
+		Templates.TREE.makeCopy(Game.level.squares[22][19], null);
+		Templates.TREE.makeCopy(Game.level.squares[22][23], null);
+		Templates.TREE.makeCopy(Game.level.squares[26][19], null);
+		Templates.TREE.makeCopy(Game.level.squares[26][23], null);
 
 	}
 

@@ -102,6 +102,11 @@ public class QuestBetweenTheWalls {
 				structureFeatures, structureEntranceSquares, null, 0, 0, 0, 0, true, null, structureSquaresToRemove,
 				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE));
 
+		// Antler switch
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.makeCopy(Game.level.squares[53][19], null, falseWall,
+				SwitchForOpenables.SWITCH_TYPE.OPEN_CLOSE,
+				new RequirementToMeet[] { new StatRequirementToMeet(StatRequirementToMeet.Stat.STAT_STRENGTH, 1) });
+
 		// Path to town 24,21 -> 40,21
 		Path pathToTown = new Path(Game.level.squares[24][21], Game.level.squares[25][21], Game.level.squares[26][21],
 				Game.level.squares[27][21], Game.level.squares[28][21], Game.level.squares[29][21],
@@ -110,10 +115,21 @@ public class QuestBetweenTheWalls {
 				Game.level.squares[36][21], Game.level.squares[37][21], Game.level.squares[38][21],
 				Game.level.squares[39][21], Game.level.squares[40][21]);
 
-		// Antler switch
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.makeCopy(Game.level.squares[53][19], null, falseWall,
-				SwitchForOpenables.SWITCH_TYPE.OPEN_CLOSE,
-				new RequirementToMeet[] { new StatRequirementToMeet(StatRequirementToMeet.Stat.STAT_STRENGTH, 1) });
+		// Bushed along path
+		Templates.BUSH.makeCopy(Game.level.squares[28][20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[28][22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[30][20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[30][22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[32][20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[32][22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[34][20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[34][22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[36][20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[36][22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[38][20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[38][22], null);
+		Templates.BUSH.makeCopy(Game.level.squares[40][20], null);
+		Templates.BUSH.makeCopy(Game.level.squares[40][22], null);
 
 	}
 
