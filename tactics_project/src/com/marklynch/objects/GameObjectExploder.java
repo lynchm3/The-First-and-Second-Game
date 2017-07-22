@@ -4,6 +4,7 @@ import java.awt.geom.AffineTransform;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TriangleUtils;
@@ -31,9 +32,9 @@ public class GameObjectExploder extends GameObject {
 	public TrianglePiece[] trianglePieces;
 
 	@Override
-	public boolean checkIfDestroyed(Object attacker) {
+	public boolean checkIfDestroyed(Object attacker, Action action) {
 
-		boolean destroyed = super.checkIfDestroyed(attacker);
+		boolean destroyed = super.checkIfDestroyed(attacker, action);
 
 		if (destroyed) {
 			explode();

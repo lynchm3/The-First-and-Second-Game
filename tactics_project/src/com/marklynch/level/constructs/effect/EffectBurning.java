@@ -31,7 +31,7 @@ public class EffectBurning extends Effect {
 		float damage = 10 - (10 * (target.getEffectiveFireResistance() / 100f));
 		target.remainingHealth -= damage;
 		Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
-		target.attackedBy(this);
+		target.attackedBy(this, null);
 
 		// Spread fire if not turn 1
 		if (totalTurns != turnsRemaining) {

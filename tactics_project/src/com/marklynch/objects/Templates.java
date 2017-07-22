@@ -240,6 +240,10 @@ public class Templates {
 	public static final Corpse ASH = new Corpse("Ash", 5, "ash.png", null, new Inventory(), false, true, false, true,
 			false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, null);
 
+	public static final Corpse BLOODY_PULP = new Corpse("Bloody Pulp", 5, "blood.png", null, new Inventory(), false,
+			true, false, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+			0f, null);
+
 	// Food?
 	public static final MeatChunk MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(),
 			false, true, true, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,

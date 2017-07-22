@@ -8,8 +8,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.RockGolem;
 
 public class ActionDie extends Action {
 
@@ -51,19 +51,19 @@ public class ActionDie extends Action {
 		} else {
 			// add a carcass
 
+			// Death by fire
 			GameObject body;
-			if (performer instanceof AggressiveWildAnimal) {
-				if (performer.destroyedBy instanceof EffectBurning)
-					body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
-				else
-					body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
-							performer.weight);
+			if (performer.destroyedBy instanceof EffectBurning) {
+				body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
+			} else if (performer.destroyedByAction instanceof ActionSquash) {
+				body = Templates.BLOODY_PULP.makeCopy("Former " + performer.name, performer.squareGameObjectIsOn, null,
+						performer.weight);
+			} else if (performer instanceof AggressiveWildAnimal) {
+				body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
+						performer.weight);
 			} else {
-				if (performer.destroyedBy instanceof EffectBurning)
-					body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
-				else
-					body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
-							performer.weight);
+				body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
+						performer.weight);
 			}
 			ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>) performer.inventory.getGameObjects()
 					.clone();

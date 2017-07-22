@@ -62,7 +62,7 @@ public class ActionAttack extends Action {
 
 				}
 			}
-			target.attackedBy(performer);
+			target.attackedBy(performer, this);
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;

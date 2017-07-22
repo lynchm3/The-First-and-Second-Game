@@ -99,6 +99,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public transient Group group;
 
 	public Object destroyedBy = null;
+	public Action destroyedByAction = null;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -244,9 +245,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	}
 
-	public boolean checkIfDestroyed(Object attacker) {
+	public boolean checkIfDestroyed(Object attacker, Action action) {
 		if (remainingHealth <= 0) {
 			destroyedBy = attacker;
+			destroyedByAction = action;
 			this.canShareSquare = true;
 			this.blocksLineOfSight = false;
 			persistsWhenCantBeSeen = false;
@@ -775,9 +777,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		return true;
 	}
 
-	public void attackedBy(Object attacker) {
+	public void attackedBy(Object attacker, Action action) {
 
-		if (checkIfDestroyed(attacker)) {
+		if (checkIfDestroyed(attacker, action)) {
 			if (this instanceof Actor) {
 				if (this.squareGameObjectIsOn.visibleToPlayer)
 					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", this }));
@@ -842,7 +844,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	}
 
-	public void landed(Actor shooter) {
+	public void landed(Actor shooter, Action action) {
 
 	}
 

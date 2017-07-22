@@ -99,8 +99,8 @@ public class HidingPlace extends Searchable {
 	// }
 
 	@Override
-	public boolean checkIfDestroyed(Object attacker) {
-		boolean destroyed = super.checkIfDestroyed(attacker);
+	public boolean checkIfDestroyed(Object attacker, Action action) {
+		boolean destroyed = super.checkIfDestroyed(attacker, action);
 		if (destroyed) {
 
 			if (actorsHidingHere.size() > 0) {

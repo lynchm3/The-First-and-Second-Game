@@ -49,7 +49,7 @@ public class ActionSquash extends Action {
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " squashed", target }));
 				}
 			}
-			target.attackedBy(performer);
+			target.attackedBy(performer, this);
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;

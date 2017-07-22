@@ -517,9 +517,9 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public boolean checkIfDestroyed(Object attacker) {
+	public boolean checkIfDestroyed(Object attacker, Action action) {
 		if (remainingHealth <= 0) {
-			super.checkIfDestroyed(attacker);
+			super.checkIfDestroyed(attacker, action);
 			new ActionDie(this, squareGameObjectIsOn).perform();
 			for (Crime crime : crimesPerformedInLifetime) {
 				for (Actor witness : crime.witnesses) {
@@ -1051,9 +1051,9 @@ public class Actor extends GameObject {
 	}
 
 	@Override
-	public void attackedBy(Object attacker) {
+	public void attackedBy(Object attacker, Action action) {
 
-		super.attackedBy(attacker);
+		super.attackedBy(attacker, action);
 
 		removeHidingPlacesFromAttackers();
 

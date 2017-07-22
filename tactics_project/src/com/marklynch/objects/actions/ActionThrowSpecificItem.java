@@ -73,7 +73,7 @@ public class ActionThrowSpecificItem extends Action {
 		}
 
 		if (targetGameObject != null && targetGameObject.attackable) {
-			targetGameObject.attackedBy(performer);
+			targetGameObject.attackedBy(performer, this);
 		}
 		// target.attacked(performer);
 
@@ -81,8 +81,8 @@ public class ActionThrowSpecificItem extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		Game.level.projectiles
-				.add(new Projectile(projectile.name, performer, targetGameObject, targetSquare, projectile, 2f, true));
+		Game.level.projectiles.add(
+				new Projectile(projectile.name, performer, this, targetGameObject, targetSquare, projectile, 2f, true));
 
 		if (performer.equipped == projectile) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {

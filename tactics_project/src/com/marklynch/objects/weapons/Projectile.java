@@ -5,6 +5,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Searchable;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
@@ -14,6 +15,7 @@ public class Projectile {
 
 	public String name;
 	public Actor shooter;
+	public Action action;
 	public GameObject targetGameObject;
 	public Square targetSquare;
 	float x, y, originX, originY, targetX, targetY, speedX, speedY;
@@ -23,7 +25,7 @@ public class Projectile {
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
 
-	public Projectile(String name, Actor shooter, GameObject targetGameObject, Square targetSquare,
+	public Projectile(String name, Actor shooter, Action action, GameObject targetGameObject, Square targetSquare,
 			GameObject projectileObject, float speed, boolean onTarget) {
 		super();
 
@@ -35,6 +37,7 @@ public class Projectile {
 
 		this.name = name;
 		this.shooter = shooter;
+		this.action = action;
 		this.targetGameObject = targetGameObject;
 		this.targetSquare = targetSquare;
 		this.projectileObject = projectileObject;
@@ -77,7 +80,7 @@ public class Projectile {
 				} else {
 					targetSquare.inventory.add(projectileObject);
 				}
-				projectileObject.landed(shooter);
+				projectileObject.landed(shooter, action);
 			}
 
 		} else {

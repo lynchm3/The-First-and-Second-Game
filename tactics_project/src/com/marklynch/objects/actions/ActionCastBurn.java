@@ -60,7 +60,7 @@ public class ActionCastBurn extends Action {
 
 		}
 
-		target.attackedBy(performer);
+		target.attackedBy(performer, this);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 

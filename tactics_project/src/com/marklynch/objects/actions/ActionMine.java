@@ -57,7 +57,7 @@ public class ActionMine extends Action {
 		if (performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
 
-		if (target.checkIfDestroyed(null)) {
+		if (target.checkIfDestroyed(null, this)) {
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted a ", target }));
 		}

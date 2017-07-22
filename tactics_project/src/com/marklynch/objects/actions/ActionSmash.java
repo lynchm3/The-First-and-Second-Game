@@ -39,7 +39,7 @@ public class ActionSmash extends Action {
 		// GameObject targetGameObject;// = target;
 
 		target.remainingHealth = 0;
-		target.checkIfDestroyed(performer);
+		target.checkIfDestroyed(performer, this);
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
