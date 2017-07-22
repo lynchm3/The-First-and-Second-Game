@@ -181,6 +181,45 @@ public class QuestThePigs extends Quest {
 		Templates.GIANT_FOOTPRINT.makeCopy(Game.level.squares[33][93], null);
 		Templates.GIANT_FOOTPRINT_LEFT.makeCopy(Game.level.squares[35][91], null);
 
+		// Grass to east of pigs
+		Templates.WHEAT.makeCopy(Game.level.squares[53][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[54][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[55][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[55][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[57][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[58][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[59][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[60][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[61][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[62][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[63][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[64][70], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[53][71], null);
+		Templates.LONG_GRASS.makeCopy(Game.level.squares[54][71], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[56][71], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[57][71], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[58][71], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[59][71], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[60][71], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[63][71], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[64][71], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[54][72], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[56][72], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[57][72], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[58][72], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[60][72], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[62][72], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[53][73], null);
+		Templates.LONG_GRASS.makeCopy(Game.level.squares[54][73], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[55][73], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[56][73], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[57][73], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[58][73], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[59][73], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[62][73], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[63][73], null);
+		Templates.WHEAT.makeCopy(Game.level.squares[64][73], null);
+
 	}
 
 	@Override
