@@ -4,6 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.TextureUtils;
 
@@ -25,10 +26,12 @@ public class EffectPoison extends Effect {
 
 	@Override
 	public void activate() {
-		float damage = 10 - (10 * (target.getEffectivePosionResistance() / 100f));
-		target.remainingHealth -= damage;
-		Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
-		target.attackedBy(this, null);
+		if (target instanceof Actor) {
+			float damage = 10 - (10 * (target.getEffectivePosionResistance() / 100f));
+			target.remainingHealth -= damage;
+			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
+			target.attackedBy(this, null);
+		}
 		turnsRemaining--;
 	}
 
