@@ -11,7 +11,7 @@ import com.marklynch.ui.ActivityLog;
 
 public class ActionSquash extends Action {
 
-	public static final String ACTION_NAME = "Squashed";
+	public static final String ACTION_NAME = "Squash";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
@@ -20,7 +20,7 @@ public class ActionSquash extends Action {
 
 	// Default for hostiles
 	public ActionSquash(Actor attacker, GameObject target, boolean accidental) {
-		super(ACTION_NAME, "action_attack.png");
+		super(ACTION_NAME, "action_squash.png");
 		this.performer = attacker;
 		this.target = target;
 		this.accidental = accidental;
@@ -43,8 +43,8 @@ public class ActionSquash extends Action {
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
 
 				if (accidental) {
-					Game.level
-							.logOnScreen(new ActivityLog(new Object[] { performer, "accidentally squashed ", target }));
+					Game.level.logOnScreen(new ActivityLog(
+							new Object[] { performer, "accidentally squashed ", target, " ...whoops" }));
 				} else {
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " squashed", target }));
 				}

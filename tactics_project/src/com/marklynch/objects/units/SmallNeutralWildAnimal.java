@@ -1,5 +1,7 @@
 package com.marklynch.objects.units;
 
+import java.util.ArrayList;
+
 import com.marklynch.ai.routines.AIRoutineForNeutralWildAnimal;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.structure.Structure;
@@ -8,6 +10,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionSquash;
 import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;
@@ -37,6 +41,14 @@ public class SmallNeutralWildAnimal extends NeutralWildAnimal {
 				legsAnchorY);
 
 		aiRoutine = new AIRoutineForNeutralWildAnimal(this);
+	}
+
+	@Override
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.add(new ActionSquash(performer, this, true));
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
+		return actions;
 	}
 
 	@Override
