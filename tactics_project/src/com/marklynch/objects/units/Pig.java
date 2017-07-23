@@ -11,6 +11,8 @@ import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -56,7 +58,17 @@ public class Pig extends Actor {
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionPet(performer, this);
+		return new ActionMove(performer, this.squareGameObjectIsOn, true);
+
+	}
+
+	@Override
+	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+		if (performer.attackers.contains(this)) {
+			return new ActionAttack(performer, this);
+		} else {
+			return new ActionPet(performer, this);
+		}
 	}
 
 	@Override

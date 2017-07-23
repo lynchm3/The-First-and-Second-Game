@@ -570,20 +570,20 @@ public class Level {
 		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 			Game.squareMouseIsOver.drawCursor();
 
-			Game.squareMouseIsOver.drawDefaultAction();
-			player.squareGameObjectIsOn.drawDefaultAction();
+			Game.squareMouseIsOver.drawDefaultOrSecondaryAction();
+			player.squareGameObjectIsOn.drawDefaultOrSecondaryAction();
 
 			if (player.squareGameObjectIsOn.getSquareToLeftOf() != null)
-				player.squareGameObjectIsOn.getSquareToLeftOf().drawDefaultAction();
+				player.squareGameObjectIsOn.getSquareToLeftOf().drawDefaultOrSecondaryAction();
 
 			if (player.squareGameObjectIsOn.getSquareToRightOf() != null)
-				player.squareGameObjectIsOn.getSquareToRightOf().drawDefaultAction();
+				player.squareGameObjectIsOn.getSquareToRightOf().drawDefaultOrSecondaryAction();
 
 			if (player.squareGameObjectIsOn.getSquareAbove() != null)
-				player.squareGameObjectIsOn.getSquareAbove().drawDefaultAction();
+				player.squareGameObjectIsOn.getSquareAbove().drawDefaultOrSecondaryAction();
 
 			if (player.squareGameObjectIsOn.getSquareBelow() != null)
-				player.squareGameObjectIsOn.getSquareBelow().drawDefaultAction();
+				player.squareGameObjectIsOn.getSquareBelow().drawDefaultOrSecondaryAction();
 
 		}
 

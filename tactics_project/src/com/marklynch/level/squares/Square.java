@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
 
+import org.lwjgl.input.Keyboard;
+
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AStarNode;
 import com.marklynch.level.constructs.Sound;
@@ -282,12 +284,19 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// GL11.glPopMatrix();
 	}
 
-	public void drawDefaultAction() {
-		Action defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player);
-		if (defaultAction != null && defaultAction.image != null) {
+	public void drawDefaultOrSecondaryAction() {
+
+		Action action = null;
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+			action = this.getSecondaryActionForTheSquareOrObject(Game.level.player);
+		} else {
+			action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
+		}
+
+		if (action != null && action.image != null) {
 			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-			TextureUtils.drawTexture(defaultAction.image, squarePositionX + Game.SQUARE_WIDTH - 24,
+			TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 24,
 					squarePositionX + Game.SQUARE_WIDTH - 16, squarePositionY + Game.SQUARE_HEIGHT - 24,
 					squarePositionY + Game.SQUARE_HEIGHT - 16);
 		}

@@ -190,11 +190,12 @@ public class Vein extends Wall {
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		ActionMine actionMine = new ActionMine(performer, this);
-		if (actionMine.enabled && actionMine.legal) {
-			return actionMine;
-		}
-		return null;
+		return new ActionMine(performer, this);
+	}
+
+	@Override
+	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+		return new ActionMine(performer, this);
 	}
 
 	@Override

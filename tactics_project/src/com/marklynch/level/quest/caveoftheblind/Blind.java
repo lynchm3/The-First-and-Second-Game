@@ -53,6 +53,11 @@ public class Blind extends Monster {
 		return new ActionAttack(performer, this);
 	}
 
+	@Override
+	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+		return new ActionAttack(performer, this);
+	}
+
 	// @Override
 	// public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor
 	// performer) {

@@ -908,6 +908,20 @@ public class Actor extends GameObject {
 			return actionAttack;
 			// }
 		} else {
+			return new ActionMove(performer, this.squareGameObjectIsOn, true);
+		}
+	}
+
+	@Override
+	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+		if (this == Game.level.player) {
+			return new ActionLoiter(performer, performer.squareGameObjectIsOn);
+		} else if (performer.attackers.contains(this)) {
+			ActionAttack actionAttack = new ActionAttack(performer, this);
+			// if (actionAttack.enabled && actionAttack.legal) {
+			return actionAttack;
+			// }
+		} else {
 			return new ActionTalk(performer, this);
 		}
 	}

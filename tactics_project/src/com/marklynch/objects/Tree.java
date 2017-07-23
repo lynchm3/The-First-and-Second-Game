@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
@@ -136,15 +134,6 @@ public class Tree extends GameObject {
 			objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
 			// - 32;
 		}
-	}
-
-	@Override
-	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		ActionAttack actionAttack = new ActionAttack(performer, this);
-		if (actionAttack.enabled && actionAttack.legal) {
-			return actionAttack;
-		}
-		return null;
 	}
 
 	@Override

@@ -533,6 +533,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	@Override
+	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+		return null;
+	}
+
+	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 
