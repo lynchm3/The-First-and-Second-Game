@@ -36,10 +36,6 @@ public class ActionDie extends Action {
 		if (!enabled)
 			return;
 
-		// Remove from draw/update
-		performer.squareGameObjectIsOn.inventory.remove(performer);
-		// this.faction.actors.remove(this);
-
 		if (performer instanceof RockGolem)
 
 		{
@@ -54,6 +50,7 @@ public class ActionDie extends Action {
 			// Death by fire
 			GameObject body;
 			if (performer.destroyedBy instanceof EffectBurning) {
+				System.out.println("Creating ash, performer.squareGameObjectIsOn = " + performer.squareGameObjectIsOn);
 				body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
 			} else if (performer.destroyedByAction instanceof ActionSquash) {
 				body = Templates.BLOODY_PULP.makeCopy("Former " + performer.name, performer.squareGameObjectIsOn, null,
@@ -74,6 +71,9 @@ public class ActionDie extends Action {
 			}
 		}
 
+		// Remove from draw/update
+		performer.squareGameObjectIsOn.inventory.remove(performer);
+		// this.faction.actors.remove(this);
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();

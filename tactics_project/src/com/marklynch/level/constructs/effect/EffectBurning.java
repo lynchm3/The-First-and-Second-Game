@@ -28,7 +28,7 @@ public class EffectBurning extends Effect {
 	@Override
 	public void activate() {
 
-		float damage = 10 - (10 * (target.getEffectiveFireResistance() / 100f));
+		float damage = 5 - (10 * (target.getEffectiveFireResistance() / 100f));
 		target.remainingHealth -= damage;
 		Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
 		target.attackedBy(this, null);
@@ -54,6 +54,10 @@ public class EffectBurning extends Effect {
 						if (Math.random() * 100 > gameObject.getEffectiveFireResistance()) {
 							gameObject.removeWetEffect();
 							gameObject.addEffect(this.makeCopy(source, gameObject));
+
+							System.out.println("adjacent square = " + adjacentSquare);
+							System.out.println("gameObject = " + gameObject.name);
+
 							if (gameObject.squareGameObjectIsOn.visibleToPlayer)
 								Game.level
 										.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));

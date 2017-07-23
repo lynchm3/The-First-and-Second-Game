@@ -180,8 +180,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (this.remainingHealth <= 0)
 			return;
+		if (squareGameObjectIsOn == null)
+			return;
 
 		if (!Game.fullVisiblity) {
+
 			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
 				return;
 

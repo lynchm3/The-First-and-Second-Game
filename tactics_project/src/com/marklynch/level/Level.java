@@ -866,11 +866,7 @@ public class Level {
 				// if (gameObject.destroyedBy instanceof EffectBurning)
 				// Templates.ASH.makeCopy(gameObject.squareGameObjectIsOn,
 				// null);
-				if (gameObject.destroyedBy instanceof EffectBurning) {
-					gameObject.squareGameObjectIsOn.inventory.replace(gameObject, Templates.ASH.makeCopy(null, player));
-				} else {
-					gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-				}
+				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
 			}
 
 		}

@@ -304,11 +304,11 @@ public class Templates {
 			true, true, false, false, false, true, true, 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f,
 			0f, 0f, 100f, null, new Effect[] { new EffectPoison(3) });
 
-	public static final HidingPlace LONG_GRASS = new HidingPlace("Long Grass", 1, "long_grass.png", null,
+	public static final HidingPlace LONG_GRASS = new HidingPlace("Long Grass", 10, "long_grass.png", null,
 			new Inventory(), true, true, false, false, false, true, true, 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f, 100f, null, new Effect[] {});
 
-	public static final HidingPlace WHEAT = new HidingPlace("Wheat", 1, "wheat.png", null, new Inventory(), true, true,
+	public static final HidingPlace WHEAT = new HidingPlace("Wheat", 10, "wheat.png", null, new Inventory(), true, true,
 			false, false, false, true, true, 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
 			null, new Effect[] {});
 
