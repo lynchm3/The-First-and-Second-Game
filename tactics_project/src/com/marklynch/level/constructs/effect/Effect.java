@@ -24,6 +24,10 @@ public abstract class Effect {
 
 	public void draw2() {
 		// Draw object
+
+		if (!target.squareGameObjectIsOn.visibleToPlayer)
+			return;
+
 		if (target.squareGameObjectIsOn != null) {
 
 			int actorPositionXInPixels = (int) (target.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH

@@ -157,7 +157,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 		float alpha = 1f;
 		if (!this.visibleToPlayer)
-			alpha = 0.25f;
+			alpha = 0.5f;
 		TextureUtils.drawTexture(imageTexture, alpha, squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
 				squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
 
