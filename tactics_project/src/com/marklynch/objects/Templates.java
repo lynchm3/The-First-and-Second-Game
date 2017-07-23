@@ -170,17 +170,17 @@ public class Templates {
 
 	// Kitchenware
 	public static final GameObject PLATE = new Stampable("Plate", 10, "plate.png", null, new Inventory(), false, true,
-			true, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 0.5f,
+			true, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 0.5f,
 			null);
 	public static final GameObject BROKEN_PLATE = new Stampable("Broken Plate", 10, "broken_plate.png", null,
-			new Inventory(), false, true, false, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+			new Inventory(), false, true, false, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 40f, 0f, 0f, 0f, 0.5f, null);
 	public static final GameObject DINNER_KNIFE = new GameObject("Dinner Knife", 10, "knife.png", null, new Inventory(),
-			false, true, true, false, false, true, true, 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f,
-			0f, 0f, 0f, 0.5f, null);
+			false, true, true, false, false, false, false, 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
+			90f, 0f, 0f, 0f, 0.5f, null);
 	public static final GameObject DINNER_FORK = new GameObject("Dinner Fork", 10, "fork.png", null, new Inventory(),
-			false, true, true, false, false, true, true, 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f,
-			0f, 0f, 0f, 0.5f, null);
+			false, true, true, false, false, false, false, 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
+			90f, 0f, 0f, 0f, 0.5f, null);
 
 	public static final Wall WALL = new Wall("Wall", 1000, "wall.png", null, new Inventory(), false, false, false,
 			false, true, true, 1, 1, 0f, 0f, 10f, 0f, 10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 200f, null);

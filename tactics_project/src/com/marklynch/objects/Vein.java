@@ -4,33 +4,34 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMine;
+import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Vein extends Wall {
 
-	// public boolean connectedTop = false;
-	// public boolean connectedTopRight = false;
-	// public boolean connectedRight = false;
-	// public boolean connectedBottomRight = false;
-	// public boolean connectedBottom = false;
-	// public boolean connectedBottomLeft = true;
-	// public boolean connectedLeft = true;
-	// public boolean connectedTopLeft = true;
-
-	// public Texture textureTop;
-	// public Texture textureTopRight;
-	// public Texture textureRight;
-	// public Texture textureBottomRight;
-	// public Texture textureBottom;
-	// public Texture textureBottomLeft;
-	// public Texture textureLeft;
-	// public Texture textureTopLeft;
+	public boolean fullWall;
+	public boolean fullRightWall;
+	public boolean fullLeftWall;
+	public boolean fullTopWall;
+	public boolean fullBottomWall;
+	public boolean horizontalWall;
+	public boolean verticalWall;
+	public boolean connectedTop;
+	public boolean connectedTopRight;
+	public boolean connectedRight;
+	public boolean connectedBottomRight;
+	public boolean connectedBottom;
+	public boolean connectedBottomLeft;
+	public boolean connectedLeft;
+	public boolean connectedTopLeft;
 
 	public static Texture textureFullWall;
 	public static Texture textureFullTopWall;
@@ -47,15 +48,22 @@ public class Vein extends Wall {
 	public static Texture textureBottomLeft;
 	public static Texture textureLeft;
 	public static Texture textureTopLeft;
-	public static Texture textureCross;
-	public static Texture textureTopLeftOuterCorner;
-	public static Texture textureTopRightOuterCorner;
-	public static Texture textureBottomRightOuterCorner;
-	public static Texture textureBottomLeftOuterCorner;
-	public static Texture textureTopLeftInnerCorner;
-	public static Texture textureTopRightInnerCorner;
-	public static Texture textureBottomRightInnerCorner;
-	public static Texture textureBottomLeftInnerCorner;
+
+	public float drawX1, drawX2, drawY1, drawY2;
+
+	public float topLeftDrawX1, topLeftDrawX2, topLeftDrawY1, topLeftDrawY2;
+	public float topDrawX1, topDrawX2, topDrawY1, topDrawY2;
+	public float topRightDrawX1, topRightDrawX2, topRightDrawY1, topRightDrawY2;
+	public float rightDrawX1, rightDrawX2, rightDrawY1, rightDrawY2;
+	public float bottomRightDrawX1, bottomRightDrawX2, bottomRightDrawY1, bottomRightDrawY2;
+	public float bottomDrawX1, bottomDrawX2, bottomDrawY1, bottomDrawY2;
+	public float bottomLeftDrawX1, bottomLeftDrawX2, bottomLeftDrawY1, bottomLeftDrawY2;
+	public float leftDrawX1, leftDrawX2, leftDrawY1, leftDrawY2;
+
+	public float halfWidth = Game.HALF_SQUARE_WIDTH;
+	public float halfHeight = Game.HALF_SQUARE_HEIGHT;
+	public float quarterWidth = Game.SQUARE_WIDTH / 4;
+	public float quarterHeight = Game.SQUARE_HEIGHT / 4;
 
 	public Vein(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -67,12 +75,16 @@ public class Vein extends Wall {
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner);
-		loadImages();
+		if (squareGameObjectIsOn != null) {
+			drawX1 = (int) (squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX);
+			drawX2 = (int) (drawX1 + width);
+			drawY1 = (int) (squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY);
+			drawY2 = (int) (drawY1 + height);
+
+		}
 	}
 
-	@Override
-	public void loadImages() {
-		super.loadImages();
+	public static void loadStaticImages() {
 		textureFullWall = getGlobalImage("vein.png");
 		textureFullTopWall = getGlobalImage("vein_full_top.png");
 		textureFullRightWall = getGlobalImage("vein_full_right.png");
@@ -88,65 +100,93 @@ public class Vein extends Wall {
 		textureTopLeft = getGlobalImage("vein_top_left.png");
 	}
 
-	// @Override
-	// public void draw1() {
-	// if (this.remainingHealth <= 0)
-	// return;
-	//
-	// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
-	// persistsWhenCantBeSeen == false)
-	// return;
-	//
-	// if (!this.squareGameObjectIsOn.seenByPlayer)
-	// return;
-	//
-	// // Draw object
-	// if (squareGameObjectIsOn != null) {
-	// int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid *
-	// (int) Game.SQUARE_WIDTH
-	// + drawOffsetX);
-	// int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid *
-	// (int) Game.SQUARE_HEIGHT
-	// + drawOffsetY);
-	//
-	// float alpha = 1.0f;
-	//
-	// if (connectedTop)
-	// TextureUtils.drawTexture(textureTop, alpha, actorPositionXInPixels,
-	// actorPositionXInPixels + width,
-	// actorPositionYInPixels, actorPositionYInPixels + height);
-	// if (connectedTopRight)
-	// TextureUtils.drawTexture(textureTopRight, alpha, actorPositionXInPixels,
-	// actorPositionXInPixels + width,
-	// actorPositionYInPixels, actorPositionYInPixels + height);
-	// if (connectedRight)
-	// TextureUtils.drawTexture(textureRight, alpha, actorPositionXInPixels,
-	// actorPositionXInPixels + width,
-	// actorPositionYInPixels, actorPositionYInPixels + height);
-	// if (connectedBottomRight)
-	// TextureUtils.drawTexture(textureBottomRight, alpha,
-	// actorPositionXInPixels,
-	// actorPositionXInPixels + width, actorPositionYInPixels,
-	// actorPositionYInPixels + height);
-	// if (connectedBottom)
-	// TextureUtils.drawTexture(textureBottom, alpha, actorPositionXInPixels,
-	// actorPositionXInPixels + width,
-	// actorPositionYInPixels, actorPositionYInPixels + height);
-	// if (connectedBottomLeft)
-	// TextureUtils.drawTexture(textureBottomLeft, alpha,
-	// actorPositionXInPixels,
-	// actorPositionXInPixels + width, actorPositionYInPixels,
-	// actorPositionYInPixels + height);
-	// if (connectedLeft)
-	// TextureUtils.drawTexture(textureLeft, alpha, actorPositionXInPixels,
-	// actorPositionXInPixels + width,
-	// actorPositionYInPixels, actorPositionYInPixels + height);
-	// if (connectedTopLeft)
-	// TextureUtils.drawTexture(textureTopLeft, alpha, actorPositionXInPixels,
-	// actorPositionXInPixels + width,
-	// actorPositionYInPixels, actorPositionYInPixels + height);
-	// }
-	// }
+	@Override
+	public void draw1() {
+
+		if (this.remainingHealth <= 0)
+			return;
+
+		if (!Game.fullVisiblity) {
+			if (!this.squareGameObjectIsOn.seenByPlayer)
+				return;
+
+			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+				return;
+		}
+
+		// Draw object
+		if (squareGameObjectIsOn != null) {
+
+			float alpha = 1.0f;
+
+			// 8
+			if (fullWall) {
+				TextureUtils.drawTexture(textureFullWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
+			}
+
+			// 5
+			if (fullLeftWall) {
+				TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
+			}
+
+			if (fullRightWall) {
+				TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
+			}
+
+			if (fullTopWall) {
+				TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
+			}
+
+			if (fullBottomWall) {
+				TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
+			}
+
+			// 2
+			if (horizontalWall) {
+				TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
+			}
+
+			if (verticalWall) {
+				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
+			}
+
+			// if (connectedTop)
+			// TextureUtils.drawTexture(textureTop, alpha, topDrawX1, topDrawX2,
+			// topDrawY1, topDrawY2);
+			// if (connectedTopRight)
+			// TextureUtils.drawTexture(textureTopRight, alpha, topRightDrawX1,
+			// topRightDrawX2, topRightDrawY1,
+			// topRightDrawY2);
+			// if (connectedRight)
+			// TextureUtils.drawTexture(textureRight, alpha, rightDrawX1,
+			// rightDrawX2, rightDrawY1, rightDrawY2);
+			// if (connectedBottomRight)
+			// TextureUtils.drawTexture(textureBottomRight, alpha,
+			// bottomRightDrawX1, bottomRightDrawX2,
+			// bottomRightDrawY1, bottomRightDrawY2);
+			// if (connectedBottom)
+			// TextureUtils.drawTexture(textureBottom, alpha, bottomDrawX1,
+			// bottomDrawX2, bottomDrawY1, bottomDrawY2);
+			// if (connectedBottomLeft)
+			// TextureUtils.drawTexture(textureBottomLeft, alpha,
+			// bottomLeftDrawX1, bottomLeftDrawX2, bottomLeftDrawY1,
+			// bottomLeftDrawY2);
+			// if (connectedLeft)
+			// TextureUtils.drawTexture(textureLeft, alpha, leftDrawX1,
+			// leftDrawX2, leftDrawY1, leftDrawY2);
+			// if (connectedTopLeft)
+			// TextureUtils.drawTexture(textureTopLeft, alpha, topLeftDrawX1,
+			// topLeftDrawX2, topLeftDrawY1,
+			// topLeftDrawY2);
+		}
+	}
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
@@ -168,6 +208,14 @@ public class Vein extends Wall {
 
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 
+		Action pickupAction = null;
+		for (Action action : actions) {
+			if (action instanceof ActionPickUp) {
+				pickupAction = action;
+			}
+		}
+		actions.remove(pickupAction);
+
 		return actions;
 
 	}
@@ -179,6 +227,52 @@ public class Vein extends Wall {
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
 				waterResistance, electricResistance, poisonResistance, weight, owner);
+	}
+
+	@Override
+	public void checkIfFullWall() {
+
+		fullWall = true;
+		if (fullWall)
+			return;
+
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() a");
+		// 8
+		if (fullWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom
+				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() b");
+
+		// 5
+		if (fullLeftWall = connectedTop && connectedBottom && connectedBottomLeft && connectedLeft && connectedTopLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() g");
+
+		if (fullRightWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
+				&& connectedBottom)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() h");
+
+		if (fullTopWall = connectedTop && connectedTopRight && connectedRight && connectedLeft && connectedTopLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() i");
+
+		if (fullBottomWall = connectedRight && connectedBottomRight && connectedBottom && connectedBottomLeft
+				&& connectedLeft)
+			return;
+
+		// 2
+		if (horizontalWall = connectedRight && connectedLeft)
+			return;
+
+		if (verticalWall = connectedTop && connectedBottom)
+			return;
+
 	}
 
 }

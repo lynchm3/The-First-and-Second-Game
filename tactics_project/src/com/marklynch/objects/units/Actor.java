@@ -534,18 +534,22 @@ public class Actor extends GameObject {
 	@Override
 	public void draw1() {
 
-		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
-		// persistsWhenCantBeSeen == false)
-		// return;
-		//
-		// if (!this.squareGameObjectIsOn.seenByPlayer)
-		// return;
-
+		// Don't draw if dead
 		if (this.remainingHealth <= 0)
 			return;
-		// Draw health
+
+		// Don't draw if hiding
 		if (hiding && this != Game.level.player)
 			return;
+
+		if (!Game.fullVisiblity) {
+			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+				return;
+
+			if (!this.squareGameObjectIsOn.seenByPlayer)
+				return;
+		}
+		// Draw health
 
 		if (remainingHealth != totalHealth) {
 

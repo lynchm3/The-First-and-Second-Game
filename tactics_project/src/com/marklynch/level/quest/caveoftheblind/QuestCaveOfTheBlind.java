@@ -381,6 +381,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[297][39], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[297][40], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[289][49], null));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[298][37], null));
+
 		// Floor stuff
 		Templates.PLATE.makeCopy(Game.level.squares[296][44], null);
 		Templates.PLATE.makeCopy(Game.level.squares[297][54], null);
@@ -560,6 +562,8 @@ public class QuestCaveOfTheBlind extends Quest {
 				mortsKey);
 		confiscatedChest.inventory.add(alsKey);
 		mort.aiRoutine.roomBounds.add(mort.mortsRoom);
+		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[274][39], mort));
+		extraWalls.add(Templates.WALL.makeCopy(Game.level.squares[274][42], mort));
 
 		// Morts Vault Room
 		mort.mortsVault = new StructureRoom("Vault", 249, 39, false, new ArrayList<Actor>(),
