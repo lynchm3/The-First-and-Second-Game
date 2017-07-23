@@ -30,6 +30,10 @@ public class Door extends Openable {
 	@Override
 	public void draw1() {
 
+		// Don't draw if dead
+		if (this.remainingHealth <= 0)
+			return;
+
 		if (!Game.fullVisiblity) {
 			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
 				return;

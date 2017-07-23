@@ -22,8 +22,9 @@ public class ActionSpot extends Action {
 
 	@Override
 	public void perform() {
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (performer.squareGameObjectIsOn.visibleToPlayer) {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " spotted ", spotted }));
+		}
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

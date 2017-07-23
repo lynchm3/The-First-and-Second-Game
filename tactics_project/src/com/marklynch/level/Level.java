@@ -40,6 +40,7 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class Level {
 
@@ -79,6 +80,7 @@ public class Level {
 	// public transient boolean waitingForPlayerClickToBeginTurn = true;
 
 	public transient boolean ended = false;
+	public Texture textureUndiscovered;
 
 	// java representation of a grid??
 	// 2d array?
@@ -95,6 +97,8 @@ public class Level {
 		gameCursor = new GameCursor();
 		script = new Script();
 
+		// textureUndiscovered =
+		// ResourceUtils.getGlobalImage("undiscovered_small.png");
 		Action.loadActionImages();
 		Effect.loadEffectImages();
 		Wall.loadStaticImages();

@@ -75,6 +75,7 @@ public class Structure {
 
 		// Floor squares
 		for (StructureRoom room : rooms) {
+			room.structure = this;
 			for (RoomPart roomPart : room.roomParts) {
 				for (int i = roomPart.gridX1; i <= roomPart.gridX2; i++) {
 					for (int j = roomPart.gridY1; j <= roomPart.gridY2; j++) {
@@ -182,8 +183,9 @@ public class Structure {
 		// return;
 
 		for (StructureRoom room : rooms) {
-			TextUtils.printTextWithImages(new Object[] { room.name }, room.x * Game.SQUARE_WIDTH,
-					room.y * Game.SQUARE_HEIGHT, 100, true);
+			if (room.seenByPlayer)
+				TextUtils.printTextWithImages(new Object[] { room.name }, room.x * Game.SQUARE_WIDTH,
+						room.y * Game.SQUARE_HEIGHT, 100, true);
 
 		}
 
@@ -213,17 +215,17 @@ public class Structure {
 	public void hasBeenSeenByPlayer() {
 		this.seenByPlayer = true;
 		new ActionSpot(Game.level.player, this).perform();
-		for (Square square : this.entranceSquares) {
-			square.seenByPlayer = true;
-		}
+		// for (Square square : this.entranceSquares) {
+		// square.seenByPlayer = true;
+		// }
 		// for (Square square : floorSquares) {
 		// square.seenByPlayer = true;
 		// }
 		// for (Square square : wallSquares) {
 		// square.seenByPlayer = true;
 		// }
-		for (Square square : featureSquares) {
-			square.seenByPlayer = true;
-		}
+		// for (Square square : featureSquares) {
+		// square.seenByPlayer = true;
+		// }
 	}
 }

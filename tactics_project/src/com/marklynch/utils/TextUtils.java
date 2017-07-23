@@ -10,6 +10,7 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.structure.Structure;
+import com.marklynch.level.constructs.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.actions.Action;
@@ -248,6 +249,28 @@ public class TextUtils {
 					TextureUtils.drawTexture(structure.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 					offsetX += textureWidth;
 				}
+
+			} else if (content instanceof StructureRoom) {
+				StructureRoom structureRoom = (StructureRoom) content;
+
+				String string = structureRoom.name + " (" + structureRoom.structure.name + ")";
+				float textWidth = Game.font.getWidth(string);
+				float textureWidth = 20;
+
+				float width = textWidth + textureWidth;
+				if (offsetX + width > maxWidth && offsetX != 0) {
+					if (wrap) {
+						offsetY += 20;
+						offsetX = 0;
+					} else {
+						return;
+					}
+				}
+
+				// Name
+
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				offsetX += textWidth;
 
 			} else if (content instanceof Color) {
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
 
 public class StructureRoom {
@@ -12,6 +13,8 @@ public class StructureRoom {
 	public ArrayList<Square> squares = new ArrayList<Square>();
 	public float x;// where to draw name of room
 	public float y;
+	public boolean seenByPlayer = false;
+	public Structure structure;
 
 	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList,
 			RoomPart... roomParts) {
@@ -52,5 +55,22 @@ public class StructureRoom {
 			this.gridY2 = gridY2;
 
 		}
+	}
+
+	public void hasBeenSeenByPlayer() {
+		this.seenByPlayer = true;
+		new ActionSpot(Game.level.player, this).perform();
+		// for (Square square : this.entranceSquares) {
+		// square.seenByPlayer = true;
+		// }
+		// for (Square square : floorSquares) {
+		// square.seenByPlayer = true;
+		// }
+		// for (Square square : wallSquares) {
+		// square.seenByPlayer = true;
+		// }
+		// for (Square square : featureSquares) {
+		// square.seenByPlayer = true;
+		// }
 	}
 }

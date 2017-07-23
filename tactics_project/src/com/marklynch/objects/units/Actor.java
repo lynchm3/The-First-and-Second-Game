@@ -440,6 +440,10 @@ public class Actor extends GameObject {
 						&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
 					Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer();
 				}
+				if (Game.level.squares[x][y].structureRoomSquareIsIn != null
+						&& Game.level.squares[x][y].structureRoomSquareIsIn.seenByPlayer == false) {
+					Game.level.squares[x][y].structureRoomSquareIsIn.hasBeenSeenByPlayer();
+				}
 			}
 		}
 
