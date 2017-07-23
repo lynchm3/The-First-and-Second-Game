@@ -79,6 +79,7 @@ public class HidingPlace extends Searchable {
 	@Override
 	public void draw2() {
 		super.draw1();
+		super.draw2();
 	}
 
 	@Override

@@ -68,7 +68,6 @@ public class Tree extends GameObject {
 		}
 
 		super.draw1();
-		super.draw2();
 
 		// DRAW INVENTORY
 		for (GameObject fruit : inventory.gameObjects) {
@@ -85,6 +84,7 @@ public class Tree extends GameObject {
 					fruitPositionXInPixels + fruit.width, fruitPositionYInPixels,
 					fruitPositionYInPixels + fruit.height);
 		}
+		super.draw2();
 	}
 
 	@Override
