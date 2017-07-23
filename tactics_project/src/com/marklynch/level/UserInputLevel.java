@@ -245,15 +245,22 @@ public class UserInputLevel {
 			} else if (Game.level.conversation != null) {
 
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
-				if (Game.level.activeActor == Game.level.player)
-					interactWith(Game.squareMouseIsOver, -1, false);
+				if (Game.level.activeActor == Game.level.player) {
+					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+						interactWith(Game.squareMouseIsOver, -1, false, true);
+					} else {
+						interactWith(Game.squareMouseIsOver, -1, false, false);
+					}
+				}
 			}
 		}
 
-		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false) {
+		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false)
+
+		{
 			// Right Click
 			if (Game.level.popups.isEmpty() && Game.squareMouseIsOver != null) {
-				interactWith(Game.squareMouseIsOver, -1, true);
+				interactWith(Game.squareMouseIsOver, -1, true, false);
 				// Game.level.popups.add(new PopupSelectObject(100, Game.level,
 				// Game.squareMouseIsOver));
 			} else {
@@ -298,7 +305,7 @@ public class UserInputLevel {
 
 	// static boolean interactedThisTurn = false;
 
-	public static void interactWith(Square square, int key, boolean openMenu) {
+	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary) {
 
 		// if (interactedThisTurn)
 		// return;
@@ -311,8 +318,13 @@ public class UserInputLevel {
 
 		Action defaultAction = null;
 
-		if (!openMenu)
-			defaultAction = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
+		if (!openMenu) {
+			if (secondary) {
+				defaultAction = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor);
+			} else {
+				defaultAction = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
+			}
+		}
 
 		if (defaultAction != null) {
 			defaultAction.perform();
@@ -381,11 +393,14 @@ public class UserInputLevel {
 			if (y >= 0) {
 
 				boolean openMenu = false;
+				boolean secondary = false;
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 					openMenu = true;
+				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+					secondary = true;
 				}
 				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
-						Keyboard.KEY_UP, openMenu);
+						Keyboard.KEY_UP, openMenu, secondary);
 			}
 		}
 	}
@@ -401,11 +416,14 @@ public class UserInputLevel {
 			if (y < Game.level.squares[0].length) {
 
 				boolean openMenu = false;
+				boolean secondary = false;
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 					openMenu = true;
+				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+					secondary = true;
 				}
 				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
-						Keyboard.KEY_DOWN, openMenu);
+						Keyboard.KEY_DOWN, openMenu, secondary);
 			}
 		}
 
@@ -433,11 +451,14 @@ public class UserInputLevel {
 			if (x >= 0) {
 
 				boolean openMenu = false;
+				boolean secondary = false;
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 					openMenu = true;
+				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+					secondary = true;
 				}
 				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
-						Keyboard.KEY_LEFT, openMenu);
+						Keyboard.KEY_LEFT, openMenu, secondary);
 			}
 		}
 
@@ -455,12 +476,15 @@ public class UserInputLevel {
 			if (x < Game.level.squares.length) {
 
 				boolean openMenu = false;
+				boolean secondary = false;
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 					openMenu = true;
+				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+					secondary = true;
 				}
 
 				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
-						Keyboard.KEY_RIGHT, openMenu);
+						Keyboard.KEY_RIGHT, openMenu, secondary);
 			}
 		}
 
@@ -503,10 +527,11 @@ public class UserInputLevel {
 			if (Game.level.popups.size() != 0) {
 				Game.level.popups.get(Game.level.popups.size() - 1).clickHighlightedButton();
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, true);
+				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, true, false);
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, false, true);
 			} else {
-				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, false);
-
+				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, false, false);
 			}
 		}
 

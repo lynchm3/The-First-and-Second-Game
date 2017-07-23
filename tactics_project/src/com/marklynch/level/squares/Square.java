@@ -330,8 +330,41 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 	}
 
+	public Action getSecondaryActionForTheSquareOrObject(Actor performer) {
+		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+		if (targetGameObject != null) {
+			return targetGameObject.getSecondaryActionPerformedOnThisInWorld(performer);
+		} else {
+			return getSecondaryActionPerformedOnThisInWorld(performer);
+		}
+	}
+
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+
+		if (this == Game.level.player.squareGameObjectIsOn) {
+			return null;
+		} else if (performer.travelDistance >= performer.straightLineDistanceTo(this)) {
+
+			HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
+			if (hidingPlace != null && hidingPlace.remainingHealth > 0) {
+				if (performer.hiding && performer.squareGameObjectIsOn == this) {
+					return new ActionStopHiding(performer, hidingPlace);
+				} else {
+					return new ActionHide(performer, hidingPlace);
+				}
+			}
+
+			return new ActionMove(performer, this, true);
+
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 
 		if (this == Game.level.player.squareGameObjectIsOn) {
 			return null;

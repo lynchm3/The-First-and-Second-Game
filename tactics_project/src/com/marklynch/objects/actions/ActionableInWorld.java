@@ -7,6 +7,8 @@ import com.marklynch.objects.units.Actor;
 public interface ActionableInWorld {
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer);
 
+	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer);
+
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer);
 
 }
