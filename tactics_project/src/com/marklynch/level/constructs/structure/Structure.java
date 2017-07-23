@@ -149,16 +149,12 @@ public class Structure {
 					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid
 							- 1].inventory.contains(Wall.class)) {
 				wall.connectedTopRight = true;
-			} else if (wall.connectedTop && wall.connectedRight) {
-				wall.connectedTopRight = true;
 			}
 			// Bottom Right
 			if (wall.squareGameObjectIsOn.xInGrid < Game.level.squares.length - 1
 					&& wall.squareGameObjectIsOn.yInGrid < Game.level.squares[0].length - 1
 					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid + 1][wall.squareGameObjectIsOn.yInGrid
 							+ 1].inventory.contains(Wall.class)) {
-				wall.connectedBottomRight = true;
-			} else if (wall.connectedBottom && wall.connectedRight) {
 				wall.connectedBottomRight = true;
 			}
 			// BOttom left
@@ -167,15 +163,11 @@ public class Structure {
 					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid
 							+ 1].inventory.contains(Wall.class)) {
 				wall.connectedBottomLeft = true;
-			} else if (wall.connectedBottom && wall.connectedLeft) {
-				wall.connectedBottomLeft = true;
 			}
 			// Top left
 			if (wall.squareGameObjectIsOn.xInGrid > 0 && wall.squareGameObjectIsOn.yInGrid > 0
 					&& Game.level.squares[wall.squareGameObjectIsOn.xInGrid - 1][wall.squareGameObjectIsOn.yInGrid
 							- 1].inventory.contains(Wall.class)) {
-				wall.connectedTopLeft = true;
-			} else if (wall.connectedTop && wall.connectedLeft) {
 				wall.connectedTopLeft = true;
 			}
 			wall.checkIfFullWall();

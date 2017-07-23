@@ -10,6 +10,7 @@ import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class Vein extends Wall {
 
@@ -31,6 +32,31 @@ public class Vein extends Wall {
 	// public Texture textureLeft;
 	// public Texture textureTopLeft;
 
+	public static Texture textureFullWall;
+	public static Texture textureFullTopWall;
+	public static Texture textureFullRightWall;
+	public static Texture textureFullBottomWall;
+	public static Texture textureFullLeftWall;
+	public static Texture textureHorizontalWall;
+	public static Texture textureVerticalWall;
+	public static Texture textureTop;
+	public static Texture textureTopRight;
+	public static Texture textureRight;
+	public static Texture textureBottomRight;
+	public static Texture textureBottom;
+	public static Texture textureBottomLeft;
+	public static Texture textureLeft;
+	public static Texture textureTopLeft;
+	public static Texture textureCross;
+	public static Texture textureTopLeftOuterCorner;
+	public static Texture textureTopRightOuterCorner;
+	public static Texture textureBottomRightOuterCorner;
+	public static Texture textureBottomLeftOuterCorner;
+	public static Texture textureTopLeftInnerCorner;
+	public static Texture textureTopRightInnerCorner;
+	public static Texture textureBottomRightInnerCorner;
+	public static Texture textureBottomLeftInnerCorner;
+
 	public Vein(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
@@ -38,10 +64,9 @@ public class Vein extends Wall {
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
 			float waterResistance, float electricResistance, float poisonResistance, float weight, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
-				owner);
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner);
 		loadImages();
 	}
 

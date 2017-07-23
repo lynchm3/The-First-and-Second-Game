@@ -36,6 +36,10 @@ public class Wall extends GameObject {
 	public boolean topRightOuterCorner;
 	public boolean bottomRightOuterCorner;
 	public boolean bottomLeftOuterCorner;
+	public boolean topLeftInnerCorner;
+	public boolean topRightInnerCorner;
+	public boolean bottomRightInnerCorner;
+	public boolean bottomLeftInnerCorner;
 
 	public static Texture textureFullWall;
 	public static Texture textureFullTopWall;
@@ -57,13 +61,12 @@ public class Wall extends GameObject {
 	public static Texture textureTopRightOuterCorner;
 	public static Texture textureBottomRightOuterCorner;
 	public static Texture textureBottomLeftOuterCorner;
+	public static Texture textureTopLeftInnerCorner;
+	public static Texture textureTopRightInnerCorner;
+	public static Texture textureBottomRightInnerCorner;
+	public static Texture textureBottomLeftInnerCorner;
 
 	public float drawX1, drawX2, drawY1, drawY2;
-
-	public float fullLeftDrawX1, fullLeftDrawX2, fullLeftDrawY1, fullLeftDrawY2;
-	public float fullRightDrawX1, fullRightDrawX2, fullRightDrawY1, fullRightDrawY2;
-	public float fullTopDrawX1, fullTopDrawX2, fullTopDrawY1, fullTopDrawY2;
-	public float fullBottomDrawX1, fullBottomDrawX2, fullBottomDrawY1, fullBottomDrawY2;
 
 	public float topLeftDrawX1, topLeftDrawX2, topLeftDrawY1, topLeftDrawY2;
 	public float topDrawX1, topDrawX2, topDrawY1, topDrawY2;
@@ -96,66 +99,6 @@ public class Wall extends GameObject {
 			drawY1 = (int) (squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY);
 			drawY2 = (int) (drawY1 + height);
 
-			fullLeftDrawX1 = drawX1;
-			fullLeftDrawX2 = drawX2;
-			fullLeftDrawY1 = drawY1;
-			fullLeftDrawY2 = drawY2;
-
-			fullRightDrawX1 = drawX1;
-			fullRightDrawX2 = drawX2;
-			fullRightDrawY1 = drawY1;
-			fullRightDrawY2 = drawY2;
-
-			fullTopDrawX1 = drawX1;
-			fullTopDrawX2 = drawX2;
-			fullTopDrawY1 = drawY1;
-			fullTopDrawY2 = drawY2;
-
-			fullBottomDrawX1 = drawX1;
-			fullBottomDrawX2 = drawX2;
-			fullBottomDrawY1 = drawY1;
-			fullBottomDrawY2 = drawY2;
-
-			topLeftDrawX1 = drawX1;
-			topLeftDrawX2 = drawX1 + quarterWidth;
-			topLeftDrawY1 = drawY1;
-			topLeftDrawY2 = drawY1 + quarterHeight;
-
-			topDrawX1 = drawX1 + quarterWidth;
-			topDrawX2 = drawX2 - quarterWidth;
-			topDrawY1 = drawY1;
-			topDrawY2 = drawY1 + halfHeight;
-
-			topRightDrawX1 = drawX2 - quarterWidth;
-			topRightDrawX2 = drawX2;
-			topRightDrawY1 = drawY1;
-			topRightDrawY2 = drawY1 + quarterHeight;
-
-			rightDrawX1 = drawX1 + halfWidth;
-			rightDrawX2 = drawX2;
-			rightDrawY1 = drawY1 + quarterHeight;
-			rightDrawY2 = drawY2 - quarterHeight;
-
-			bottomRightDrawX1 = drawX2 - quarterWidth;
-			bottomRightDrawX2 = drawX2;
-			bottomRightDrawY1 = drawY2 - quarterHeight;
-			bottomRightDrawY2 = drawY2;
-
-			bottomDrawX1 = drawX1 + quarterWidth;
-			bottomDrawX2 = drawX2 - quarterWidth;
-			bottomDrawY1 = drawY2 - halfHeight;
-			bottomDrawY2 = drawY2;
-
-			bottomLeftDrawX1 = drawX1;
-			bottomLeftDrawX2 = drawX1 + quarterWidth;
-			bottomLeftDrawY1 = drawY2 - quarterHeight;
-			bottomLeftDrawY2 = drawY2;
-
-			leftDrawX1 = drawX1;
-			leftDrawX2 = drawX1 + halfWidth;
-			leftDrawY1 = drawY1 + quarterHeight;
-			leftDrawY2 = drawY2 - quarterHeight;
-
 		}
 	}
 
@@ -180,6 +123,10 @@ public class Wall extends GameObject {
 		textureTopRightOuterCorner = getGlobalImage("wall_top_right_corner_outer.png");
 		textureBottomRightOuterCorner = getGlobalImage("wall_bottom_right_corner_outer.png");
 		textureBottomLeftOuterCorner = getGlobalImage("wall_bottom_left_corner_outer.png");
+		textureTopLeftInnerCorner = getGlobalImage("wall_top_left_corner_inner.png");
+		textureTopRightInnerCorner = getGlobalImage("wall_top_right_corner_inner.png");
+		textureBottomRightInnerCorner = getGlobalImage("wall_bottom_right_corner_inner.png");
+		textureBottomLeftInnerCorner = getGlobalImage("wall_bottom_left_corner_inner.png");
 	}
 
 	@Override
@@ -207,74 +154,88 @@ public class Wall extends GameObject {
 				return;
 			}
 
+			// 7
+			if (topLeftInnerCorner) {
+				TextureUtils.drawTexture(textureTopLeftInnerCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+
+			}
+
+			if (topRightInnerCorner) {
+				TextureUtils.drawTexture(textureTopRightInnerCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+
+			}
+
+			if (bottomRightInnerCorner) {
+				TextureUtils.drawTexture(textureBottomRightInnerCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+
+			}
+
+			if (bottomLeftInnerCorner) {
+				TextureUtils.drawTexture(textureBottomLeftInnerCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+
+			}
+
 			// 5
 			if (fullLeftWall) {
-				TextureUtils.drawTexture(textureFullLeftWall, alpha, fullLeftDrawX1, fullLeftDrawX2, fullLeftDrawY1,
-						fullLeftDrawY2);
+				TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawX2, drawY1, drawY2);
 				return;
 			}
 
 			if (fullRightWall) {
-				TextureUtils.drawTexture(textureFullRightWall, alpha, fullRightDrawX1, fullRightDrawX2, fullRightDrawY1,
-						fullRightDrawY2);
+				TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawX2, drawY1, drawY2);
 				return;
 			}
 
 			if (fullTopWall) {
-				TextureUtils.drawTexture(textureFullTopWall, alpha, fullTopDrawX1, fullTopDrawX2, fullTopDrawY1,
-						fullTopDrawY2);
+				TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawX2, drawY1, drawY2);
 				return;
 			}
 
 			if (fullBottomWall) {
-				TextureUtils.drawTexture(textureFullBottomWall, alpha, fullBottomDrawX1, fullBottomDrawX2,
-						fullBottomDrawY1, fullBottomDrawY2);
+				TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawX2, drawY1, drawY2);
 				return;
 			}
 
 			// 4
 			if (cross) {
-				TextureUtils.drawTexture(textureCross, alpha, fullBottomDrawX1, fullBottomDrawX2, fullBottomDrawY1,
-						fullBottomDrawY2);
+				TextureUtils.drawTexture(textureCross, alpha, drawX1, drawX2, drawY1, drawY2);
 				return;
 
 			}
 
 			// 3
 			if (topLeftOuterCorner) {
-				TextureUtils.drawTexture(textureTopLeftOuterCorner, alpha, fullBottomDrawX1, fullBottomDrawX2,
-						fullBottomDrawY1, fullBottomDrawY2);
+				TextureUtils.drawTexture(textureTopLeftOuterCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
 
 			}
 
 			if (topRightOuterCorner) {
-				TextureUtils.drawTexture(textureTopRightOuterCorner, alpha, fullBottomDrawX1, fullBottomDrawX2,
-						fullBottomDrawY1, fullBottomDrawY2);
+				TextureUtils.drawTexture(textureTopRightOuterCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
 
 			}
 
 			if (bottomRightOuterCorner) {
-				TextureUtils.drawTexture(textureBottomRightOuterCorner, alpha, fullBottomDrawX1, fullBottomDrawX2,
-						fullBottomDrawY1, fullBottomDrawY2);
+				TextureUtils.drawTexture(textureBottomRightOuterCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
 
 			}
 
 			if (bottomLeftOuterCorner) {
-				TextureUtils.drawTexture(textureBottomLeftOuterCorner, alpha, fullBottomDrawX1, fullBottomDrawX2,
-						fullBottomDrawY1, fullBottomDrawY2);
+				TextureUtils.drawTexture(textureBottomLeftOuterCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				return;
 
 			}
 
 			// 2
 			if (horizontalWall) {
-				TextureUtils.drawTexture(textureHorizontalWall, alpha, fullBottomDrawX1, fullBottomDrawX2,
-						fullBottomDrawY1, fullBottomDrawY2);
+				TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawX2, drawY1, drawY2);
 				return;
 			}
 
 			if (verticalWall) {
-				TextureUtils.drawTexture(textureVerticalWall, alpha, fullBottomDrawX1, fullBottomDrawX2,
-						fullBottomDrawY1, fullBottomDrawY2);
+				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawX2, drawY1, drawY2);
 				return;
 			}
 
@@ -319,36 +280,85 @@ public class Wall extends GameObject {
 	}
 
 	public void checkIfFullWall() {
+
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() a");
 		// 8
-		fullWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom
-				&& connectedBottomLeft && connectedLeft && connectedTopLeft;
+		if (fullWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom
+				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() b");
+
+		// 7
+		if (topLeftInnerCorner = connectedTop && connectedTopRight && connectedRight && connectedBottom
+				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() c");
+
+		if (topRightInnerCorner = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
+				&& connectedBottom && connectedLeft && connectedTopLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() d");
+
+		if (bottomRightInnerCorner = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
+				&& connectedBottom && connectedBottomLeft && connectedLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() e");
+
+		if (bottomLeftInnerCorner = connectedTop && connectedRight && connectedBottomRight && connectedBottom
+				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() f");
 
 		// 5
-		fullLeftWall = connectedTop && connectedBottom && connectedBottomLeft && connectedLeft && connectedTopLeft;
+		if (fullLeftWall = connectedTop && connectedBottom && connectedBottomLeft && connectedLeft && connectedTopLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() g");
 
-		fullRightWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom;
+		if (fullRightWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
+				&& connectedBottom)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() h");
 
-		fullTopWall = connectedTop && connectedTopRight && connectedRight && connectedLeft && connectedTopLeft;
+		if (fullTopWall = connectedTop && connectedTopRight && connectedRight && connectedLeft && connectedTopLeft)
+			return;
+		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
+			System.out.println("checkIfFullWall() i");
 
-		fullBottomWall = connectedRight && connectedBottomRight && connectedBottom && connectedBottomLeft
-				&& connectedLeft;
+		if (fullBottomWall = connectedRight && connectedBottomRight && connectedBottom && connectedBottomLeft
+				&& connectedLeft)
+			return;
 
 		// 4
-		cross = connectedTop && connectedBottom && connectedLeft && connectedRight;
+		if (cross = connectedTop && connectedBottom && connectedLeft && connectedRight)
+			return;
 
 		// 3
-		topLeftOuterCorner = connectedRight && connectedBottom && connectedBottomRight;
+		if (topLeftOuterCorner = connectedRight && connectedBottom && connectedBottomRight)
+			return;
 
-		topRightOuterCorner = connectedLeft && connectedBottom && connectedBottomLeft;
+		if (topRightOuterCorner = connectedLeft && connectedBottom && connectedBottomLeft)
+			return;
 
-		bottomRightOuterCorner = connectedLeft && connectedTop && connectedTopLeft;
+		if (bottomRightOuterCorner = connectedLeft && connectedTop && connectedTopLeft)
+			return;
 
-		bottomLeftOuterCorner = connectedRight && connectedTop && connectedTopRight;
+		if (bottomLeftOuterCorner = connectedRight && connectedTop && connectedTopRight)
+			return;
 
 		// 2
-		horizontalWall = connectedRight && connectedLeft;
+		if (horizontalWall = connectedRight && connectedLeft)
+			return;
 
-		verticalWall = connectedTop && connectedBottom;
+		if (verticalWall = connectedTop && connectedBottom)
+			return;
 
 	}
 

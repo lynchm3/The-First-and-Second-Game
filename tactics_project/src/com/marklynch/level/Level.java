@@ -24,6 +24,8 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.Templates;
+import com.marklynch.objects.Wall;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.units.Actor;
@@ -95,6 +97,7 @@ public class Level {
 
 		Action.loadActionImages();
 		Effect.loadEffectImages();
+		Wall.loadStaticImages();
 
 		structures = new ArrayList<Structure>();
 
