@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionSearch;
-import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -41,15 +38,7 @@ public class Searchable extends GameObject {
 
 		actions.add(new ActionSearch(performer, this));
 
-		if (attackable)
-			actions.add(new ActionAttack(performer, this));
-
-		if (performer.equipped != null) {
-			if (performer.straightLineDistanceTo(this.squareGameObjectIsOn) < 2) {
-				actions.add(new ActionDropSpecificItem(performer, this.squareGameObjectIsOn, performer.equipped));
-			}
-			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
-		}
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 
 		return actions;
 
