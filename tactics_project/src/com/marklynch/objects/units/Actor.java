@@ -360,19 +360,53 @@ public class Actor extends GameObject {
 
 		squaresVisibleToPlayerOnlyPlayer.clear();
 
-		double x1 = square.xInGrid + 0.5d;
-		double y1 = square.yInGrid + 0.5d;
+		double x1 = square.xInGrid;
+		double y1 = square.yInGrid;
 
-		for (int i = sight; i > 0; i--) {
-			ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistance(i);
-			for (Point point : furthestVisiblePoints) {
-				markVisibleSquaresInLineToo(x1, y1, point.getX() + 0.5d, point.getY() + 0.5d);
-			}
+		// for (int i = sight; i > 0; i--) {
+		ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistance(sight);
+		for (Point point : furthestVisiblePoints) {
+			markVisibleSquaresInLineTo(x1 + 0.5d, y1 + 0.5d, point.getX() + 0.5d, point.getY() + 0.5d);
+		}
+		// }
+
+		// Awkward corner squares (the inner corner ones that u cant tecnically
+		// see)
+		ArrayList<Square> awkwardSquaresToMakeVisible = new ArrayList<Square>();
+		for (Square potentiallyVIsibleSquare : this.getAllSquaresWithinDistance(sight, square)) {
+
+			if (potentiallyVIsibleSquare.visibleToPlayer)
+				continue;
+
+			int visibleNeighbors = 0;
+
+			Square squareAbove = potentiallyVIsibleSquare.getSquareAbove();
+			if (squareAbove != null && squareAbove.visibleToPlayer)
+				visibleNeighbors++;
+
+			Square squareBelow = potentiallyVIsibleSquare.getSquareBelow();
+			if (squareBelow != null && squareBelow.visibleToPlayer)
+				visibleNeighbors++;
+
+			Square squareToLeftOf = potentiallyVIsibleSquare.getSquareToLeftOf();
+			if (squareToLeftOf != null && squareToLeftOf.visibleToPlayer)
+				visibleNeighbors++;
+
+			Square squareToRightOf = potentiallyVIsibleSquare.getSquareToRightOf();
+			if (squareToRightOf != null && squareToRightOf.visibleToPlayer)
+				visibleNeighbors++;
+
+			if (visibleNeighbors > 1)
+				awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+		}
+		for (Square awkwardSquareToMakeVisible : awkwardSquaresToMakeVisible) {
+			markSquareAsVisibleToActiveCharacter(awkwardSquareToMakeVisible.xInGrid,
+					awkwardSquareToMakeVisible.yInGrid);
 		}
 	}
 
 	// SUPERCOVER algorithm
-	public void markVisibleSquaresInLineToo(double x0, double y0, double x1, double y1) {
+	public void markVisibleSquaresInLineTo(double x0, double y0, double x1, double y1) {
 		double vx = x1 - x0;
 		double vy = y1 - y0;
 		double dx = Math.sqrt(1 + Math.pow((vy / vx), 2));

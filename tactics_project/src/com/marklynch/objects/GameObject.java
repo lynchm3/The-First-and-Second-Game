@@ -342,6 +342,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public ArrayList<Square> getAllSquaresWithinDistance(float maxDistance) {
+		return getAllSquaresWithinDistance(maxDistance, this.squareGameObjectIsOn);
+	}
+
+	public ArrayList<Square> getAllSquaresWithinDistance(float maxDistance, Square squareFrom) {
 		ArrayList<Square> squares = new ArrayList<Square>();
 
 		for (int distance = 0; distance <= maxDistance; distance++) {
@@ -349,17 +353,15 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			if (distance == 0)
 
 			{
-				squares.add(this.squareGameObjectIsOn);
+				squares.add(squareFrom);
 				continue;
 			}
 
 			boolean xGoingUp = true;
 			boolean yGoingUp = true;
 			for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-				if (ArrayUtils.inBounds(Game.level.squares, this.squareGameObjectIsOn.xInGrid + x,
-						this.squareGameObjectIsOn.yInGrid + y)) {
-					squares.add(Game.level.squares[this.squareGameObjectIsOn.xInGrid
-							+ (int) x][this.squareGameObjectIsOn.yInGrid + (int) y]);
+				if (ArrayUtils.inBounds(Game.level.squares, squareFrom.xInGrid + x, squareFrom.yInGrid + y)) {
+					squares.add(Game.level.squares[squareFrom.xInGrid + (int) x][squareFrom.yInGrid + (int) y]);
 				}
 
 				if (xGoingUp) {
