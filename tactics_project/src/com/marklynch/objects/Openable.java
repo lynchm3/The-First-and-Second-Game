@@ -7,6 +7,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionOpen;
+import com.marklynch.objects.actions.ActionPeek;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
 
@@ -46,8 +47,10 @@ public abstract class Openable extends GameObject {
 		if (this.remainingHealth <= 0)
 			return actions;
 
-		if (!open)
+		if (!open) {
 			actions.add(new ActionOpen(performer, this));
+			actions.add(new ActionPeek(performer, this));
+		}
 
 		if (open)
 			actions.add(new ActionClose(performer, this));

@@ -137,6 +137,7 @@ public class Actor extends GameObject {
 	public Texture hairImageTexture = null;
 	public Texture thoughtBubbleImageTexture = null;
 	public Square lastSquare = null;
+	public Square peekSquare = null;
 
 	// public ArrayList<Crime> crimesWitnessed;
 	public Map<Actor, ArrayList<Crime>> crimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
@@ -344,7 +345,7 @@ public class Actor extends GameObject {
 	// }
 	// }
 
-	public void calculateVisibleSquares() {
+	public void calculateVisibleSquares(Square square) {
 
 		for (int x = 0; x < Game.level.squares.length; x++) {
 			for (int y = 0; y < Game.level.squares[0].length; y++) {
@@ -357,8 +358,8 @@ public class Actor extends GameObject {
 
 		squaresVisibleToPlayerOnlyPlayer.clear();
 
-		double x1 = this.squareGameObjectIsOn.xInGrid + 0.5d;
-		double y1 = this.squareGameObjectIsOn.yInGrid + 0.5d;
+		double x1 = square.xInGrid + 0.5d;
+		double y1 = square.yInGrid + 0.5d;
 
 		for (int i = sight; i > 0; i--) {
 			ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistance(i);
@@ -546,7 +547,7 @@ public class Actor extends GameObject {
 		if (hiding && this != Game.level.player)
 			return;
 
-		if (!Game.fullVisiblity) {
+		if (!Game.fullVisiblity && this != Game.level.player) {
 			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
 				return;
 

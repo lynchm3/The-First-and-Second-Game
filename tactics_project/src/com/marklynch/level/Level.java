@@ -828,7 +828,11 @@ public class Level {
 			// Game.level.activeActor.equippedWeapon =
 			// Game.level.activeActor.getWeaponsInInventory().get(0);
 			// Actor.calculateReachableSquares();
-			player.calculateVisibleSquares();
+			if (player.peekSquare != null) {
+				player.calculateVisibleSquares(player.peekSquare);
+			} else {
+				player.calculateVisibleSquares(Game.level.activeActor.squareGameObjectIsOn);
+			}
 
 			ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>();
 			for (GameObject gameObject : player.getAttackers()) {

@@ -182,8 +182,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			return;
 		if (squareGameObjectIsOn == null)
 			return;
+		if (hiding && this != Game.level.player)
+			return;
 
-		if (!Game.fullVisiblity) {
+		if (!Game.fullVisiblity && this != Game.level.player) {
 
 			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
 				return;
@@ -204,7 +206,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 			// TextureUtils.skipNormals = true;
 
-			if (!this.squareGameObjectIsOn.visibleToPlayer)
+			if (!this.squareGameObjectIsOn.visibleToPlayer && this != Game.level.player)
 				alpha = 0.5f;
 			if (hiding)
 				alpha = 0.5f;
