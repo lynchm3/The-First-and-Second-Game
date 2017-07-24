@@ -828,6 +828,10 @@ public class Level {
 			// Game.level.activeActor.equippedWeapon =
 			// Game.level.activeActor.getWeaponsInInventory().get(0);
 			// Actor.calculateReachableSquares();
+
+			System.out.println("end turn player = " + player);
+			System.out.println("end turn peekSquare = " + player.peekSquare);
+			System.out.println("end turn peekingThrough = " + player.peekingThrough);
 			if (player.peekSquare != null) {
 				player.calculateVisibleSquares(player.peekSquare);
 			} else {

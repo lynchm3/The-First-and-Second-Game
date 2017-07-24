@@ -84,6 +84,13 @@ public class ActionMove extends Action {
 			}
 		}
 
+		if (performer.peekingThrough != null) {
+			performer.peekingThrough = null;
+			performer.peekSquare = null;
+			if (performer == Game.level.player)
+				Game.level.player.calculateVisibleSquares(Game.level.player.squareGameObjectIsOn);
+		}
+
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();

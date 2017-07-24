@@ -16,7 +16,7 @@ public class ActionPeek extends Action {
 	GameObject object;
 
 	public ActionPeek(Actor performer, GameObject object) {
-		super(ACTION_NAME, "action_spot.png");
+		super(ACTION_NAME, "action_stop_hiding.png");
 		this.performer = performer;
 		this.object = object;
 
@@ -37,6 +37,10 @@ public class ActionPeek extends Action {
 		if (performer == Game.level.player) {
 			System.out.println("ActionPeek a");
 
+			performer.peekingThrough = object;
+			Game.level.player.peekingThrough = object;
+
+			System.out.println("ActionPeek nulling peekSquare");
 			Square peekSquare = null;
 			if (object.squareGameObjectIsOn.xInGrid < performer.squareGameObjectIsOn.xInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid
@@ -57,6 +61,9 @@ public class ActionPeek extends Action {
 			}
 			System.out.println("ActionPeek f peekSquare = " + peekSquare);
 			performer.peekSquare = peekSquare;
+			Game.level.player.peekSquare = peekSquare;
+			System.out.println("ActionPeek g Game.level.player.peekSquare= " + Game.level.player.peekSquare);
+			System.out.println("ActionPeek h player = " + Game.level.player);
 			if (peekSquare != null)
 				performer.calculateVisibleSquares(peekSquare);
 		}

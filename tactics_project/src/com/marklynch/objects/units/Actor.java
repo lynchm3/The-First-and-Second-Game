@@ -137,6 +137,7 @@ public class Actor extends GameObject {
 	public Texture hairImageTexture = null;
 	public Texture thoughtBubbleImageTexture = null;
 	public Square lastSquare = null;
+	public GameObject peekingThrough = null;
 	public Square peekSquare = null;
 
 	// public ArrayList<Crime> crimesWitnessed;
