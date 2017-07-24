@@ -2,12 +2,14 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionPeek;
+import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
 
@@ -49,7 +51,6 @@ public abstract class Openable extends GameObject {
 
 		if (!open) {
 			actions.add(new ActionOpen(performer, this));
-			actions.add(new ActionPeek(performer, this));
 		}
 
 		if (open)
@@ -60,6 +61,13 @@ public abstract class Openable extends GameObject {
 
 		if (!locked)
 			actions.add(new ActionLock(performer, this));
+
+		if (!open) {
+			if (Game.level.player.peekingThrough == this)
+				actions.add(new ActionStopPeeking(performer));
+			else
+				actions.add(new ActionPeek(performer, this));
+		}
 
 		// actions.add(new ActionAttack(performer, this));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));

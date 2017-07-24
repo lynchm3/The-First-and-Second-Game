@@ -42,6 +42,10 @@ public class ActionTeleport extends Action {
 		if (!enabled)
 			return;
 
+		if (performer.peekingThrough != null) {
+			new ActionStopPeeking(performer).perform();
+		}
+
 		Door door = (Door) target.inventory.getGameObjectOfClass(Door.class);
 		if (door != null && door.isOpen() == false) {
 			new ActionOpen(performer, door).perform();
@@ -74,13 +78,6 @@ public class ActionTeleport extends Action {
 		}
 
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
-
-		if (performer.peekingThrough != null) {
-			performer.peekingThrough = null;
-			performer.peekSquare = null;
-			if (performer == Game.level.player)
-				Game.level.player.calculateVisibleSquares(Game.level.player.squareGameObjectIsOn);
-		}
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

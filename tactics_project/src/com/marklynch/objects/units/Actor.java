@@ -37,6 +37,7 @@ import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionStopHiding;
+import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.weapons.BodyArmor;
@@ -917,7 +918,11 @@ public class Actor extends GameObject {
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 		if (this == Game.level.player) {
-			return new ActionLoiter(performer, performer.squareGameObjectIsOn);
+			if (Game.level.player.peekingThrough != null) {
+				return new ActionStopPeeking(performer);
+			} else {
+				return new ActionLoiter(performer, performer.squareGameObjectIsOn);
+			}
 		} else if (performer.attackers.contains(this)) {
 			ActionAttack actionAttack = new ActionAttack(performer, this);
 			// if (actionAttack.enabled && actionAttack.legal) {
@@ -947,6 +952,9 @@ public class Actor extends GameObject {
 		}
 
 		if (this == Game.level.player) {
+			if (Game.level.player.peekingThrough != null) {
+				actions.add(new ActionStopPeeking(performer));
+			}
 
 			actions.add(new ActionLoiter(performer, performer.squareGameObjectIsOn));
 

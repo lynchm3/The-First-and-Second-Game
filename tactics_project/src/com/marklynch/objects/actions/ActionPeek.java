@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -67,7 +68,12 @@ public class ActionPeek extends Action {
 			if (peekSquare != null)
 				performer.calculateVisibleSquares(peekSquare);
 		}
-
+		if (!legal) {
+			Crime crime = new Crime(this, this.performer, object.owner, 4);
+			this.performer.crimesPerformedThisTurn.add(crime);
+			this.performer.crimesPerformedInLifetime.add(crime);
+			notifyWitnessesOfCrime(crime);
+		}
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();

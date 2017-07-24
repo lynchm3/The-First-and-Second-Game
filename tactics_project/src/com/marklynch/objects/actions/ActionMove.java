@@ -48,6 +48,10 @@ public class ActionMove extends Action {
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
 
+		if (performer.peekingThrough != null) {
+			new ActionStopPeeking(performer).perform();
+		}
+
 		Door door = (Door) squareToMoveTo.inventory.getGameObjectOfClass(Door.class);
 		if (door != null && door.isOpen() == false) {
 			new ActionOpen(actor, door).perform();
@@ -82,13 +86,6 @@ public class ActionMove extends Action {
 			} else {
 				actor.swapCooldown = (int) (Math.random() * 3);
 			}
-		}
-
-		if (performer.peekingThrough != null) {
-			performer.peekingThrough = null;
-			performer.peekSquare = null;
-			if (performer == Game.level.player)
-				Game.level.player.calculateVisibleSquares(Game.level.player.squareGameObjectIsOn);
 		}
 
 		performer.actionsPerformedThisTurn.add(this);
