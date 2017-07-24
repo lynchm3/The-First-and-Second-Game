@@ -27,7 +27,6 @@ import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
-import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructurePath;
 import com.marklynch.level.constructs.structure.StructureRoom;
@@ -39,7 +38,6 @@ import com.marklynch.level.quest.smallgame.QuestSmallGame;
 import com.marklynch.level.quest.thepigs.QuestThePigs;
 import com.marklynch.level.quest.thesecretroom.QuestTheSecretRoom;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Bed;
 import com.marklynch.objects.ContainerForLiquids;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectTemplate;
@@ -49,8 +47,6 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -475,66 +471,6 @@ public class Editor {
 		shopFeatures.add(Templates.DOOR.makeCopy("Shop Door", Game.level.squares[5][4], false, trader));
 		shopFeatures.add(Templates.DOOR.makeCopy("Private Quarters Door", Game.level.squares[11][4], false, trader));
 
-		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[6][5],
-		// trader));
-		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[7][5],
-		// trader));
-		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[9][5],
-		// trader));
-		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[10][5],
-		// trader));
-		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[12][5],
-		// trader));
-		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[13][5],
-		// trader));
-		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[15][5],
-		// trader));
-		// shopFeatures.add(Templates.WALL.makeCopy(Game.level.squares[16][5],
-		// trader));
-		// shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
-		// Game.level.squares[6][5], new Inventory(),
-		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
-		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-		// 0f, 0f, 100f, trader));
-		// shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
-		// Game.level.squares[7][5], new Inventory(),
-		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
-		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-		// 0f, 0f, 100f, trader));
-		// shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
-		// Game.level.squares[9][5], new Inventory(),
-		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
-		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-		// 0f, 0f, 100f, trader));
-		// shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
-		// Game.level.squares[10][5], new Inventory(),
-		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
-		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-		// 0f, 0f, 100f, trader));
-		// shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
-		// Game.level.squares[12][5], new Inventory(),
-		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
-		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-		// 0f, 0f, 100f, trader));
-		// shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
-		// Game.level.squares[13][5], new Inventory(),
-		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
-		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-		// 0f, 0f, 100f, trader));
-		// shopFeatures.add(new Window("Shop Window", 10, "window_left.png",
-		// Game.level.squares[15][5], new Inventory(),
-		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
-		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-		// 0f, 0f, 100f, trader));
-		// shopFeatures.add(new Window("Shop Window", 10, "window_right.png",
-		// Game.level.squares[16][5], new Inventory(),
-		// false, false, false, false, false, true, 1, 5, 0.5f, 0.5f, 1f, 1f,
-		// 2f, null, 0.5f, 0.5f, false, 0f, 0f,
-		// 0f, 0f, 100f, trader));
-
-		// Game.level.squares[4][4].imageTexturePath = "stone.png";
-		// Game.level.squares[4][4].loadImages();
-
 		ArrayList<StructureRoom> shopAtriums = new ArrayList<StructureRoom>();
 		shopAtriums.add(new StructureRoom("Trader Joe's Shop", 6, 1, false,
 				new ArrayList<Actor>(Arrays.asList(new Actor[] { trader })), new RoomPart(6, 1, 10, 4)));
@@ -561,29 +497,6 @@ public class Editor {
 		trader.shop = joesShop;
 		trader.room = shopAtriums.get(0);
 		trader.shopSign = joesShopSign;
-
-		// BRENT
-
-		// Add lead hunter
-		Bed brentsBed = Templates.BED.makeCopy(Game.level.squares[10][9]);
-		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1), brentsBed);
-		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBrent));
-		hunterBrent.equip(hunterBrent.inventory.get(0));
-		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
-
-		// Hunting lodge
-		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
-		ArrayList<StructureRoom> lodgeAtriums = new ArrayList<StructureRoom>();
-		lodgeAtriums.add(
-				new StructureRoom("Hunting Lodge", 8, 8, false, new ArrayList<Actor>(), new RoomPart(8, 8, 10, 10)));
-		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
-		lodgeSections.add(new StructureSection("Hunting Lodge", 7, 7, 11, 11, false));
-
-		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructurePath>(),
-				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true,
-				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, Square.STONE_TEXTURE);
-		Game.level.structures.add(lodge);
-
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
 		// doorLocations2.add(Game.level.squares[7][9]);
 		// // doorLocations2.add(Game.level.squares[11][9]);
@@ -614,68 +527,7 @@ public class Editor {
 		Game.level.factions.get(1).relationships.put(Game.level.factions.get(0),
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
 
-		// Add hunters
-		Bed brontsBed = Templates.BED.makeCopy(Game.level.squares[9][9]);
-		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1), brontsBed);
-		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBront1));
-		hunterBront1.equip(hunterBrent.inventory.get(0));
-		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
-
-		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null);
-		hunterBront2.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront2));
-		hunterBront2.equip(hunterBrent.inventory.get(0));
-		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
-
-		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null);
-		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1), null);
-		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1), null);
-		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1), null);
-
-		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();
-		hunterPackMembers.add(hunterBrent);
-		hunterPackMembers.add(hunterBront1);
-		hunterPackMembers.add(hunterBront2);
-		hunterPackMembers.add(hunterBront3);
-		hunterPackMembers.add(hunterBront4);
-		hunterPackMembers.add(hunterBront5);
-		hunterPackMembers.add(hunterBront6);
-
-		Group hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
-
-		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan",
-				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);
-
-		Actor environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
-				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,
-				false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 110f, null,
-				Game.level.factions.get(1), 0, 0, 0, 0, 0, 0, 0, 0);
-
-		Actor superWolf = new AggressiveWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
-				Game.level.squares[207][16], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0f,
-				0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.get(2), 0, 0,
-				0, 0, 0, 0, 0, 0);
-
-		Actor wolf2 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
-				Game.level.squares[208][15], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0f,
-				0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0,
-				0, 0, 0, 0, 0);
-
-		Actor wolf3 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
-				Game.level.squares[208][17], 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1, 0f,
-				0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0,
-				0, 0, 0, 0, 0);
-
-		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
-		wolfPackMembers.add(superWolf);
-		wolfPackMembers.add(wolf2);
-		wolfPackMembers.add(wolf3);
-		Group wolfPack = new Group("Wolf pack", wolfPackMembers, superWolf);
-
-		ArrayList<GameObject> weaponsBehindTheLodge = new ArrayList<GameObject>();
-		weaponsBehindTheLodge.add(Templates.HATCHET.makeCopy(Game.level.squares[12][9], hunterBrent));
-		weaponsBehindTheLodge.add(Templates.HUNTING_BOW.makeCopy(Game.level.squares[12][9], hunterBrent));
-		QuestSmallGame questSmallGame = new QuestSmallGame(hunterPack, environmentalistBill, superWolf, wolfPack, null,
-				weaponsBehindTheLodge);
+		QuestSmallGame questSmallGame = new QuestSmallGame();
 
 		// Decorations
 		// Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");

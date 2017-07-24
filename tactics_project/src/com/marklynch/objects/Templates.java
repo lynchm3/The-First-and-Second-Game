@@ -295,7 +295,7 @@ public class Templates {
 
 	// NATURE
 	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), true, true, false, true,
-			false, true, 1f, 1.5f, 0f, -32f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
+			false, true, 1f, 2f, 0f, -64f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
 
 	public static final HidingPlace BUSH = new HidingPlace("Bush", 10, "bush.png", null, new Inventory(), true, true,
 			false, false, false, true, true, 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
@@ -311,6 +311,14 @@ public class Templates {
 	public static final HidingPlace WHEAT = new HidingPlace("Wheat", 10, "wheat.png", null, new Inventory(), true, true,
 			false, false, false, true, true, 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
 			null, new Effect[] {});
+
+	public static final Food MUSHROOM = new Food("Mushroom", 5, "mushroom.png", null, new Inventory(), false, true,
+			true, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0.5f,
+			null);
+
+	public static final Searchable BURROW = new Searchable("Burrow", 5, "burrow.png", null, new Inventory(), false,
+			false, false, false, false, true, false, 0.5f, 0.5f, 16f, 16f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f,
+			0f, 0f, 0f, 0f, null, new Effect[] {});
 
 	// BURROW
 	// TREE
