@@ -30,6 +30,7 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDie;
@@ -376,6 +377,9 @@ public class Actor extends GameObject {
 		for (Square potentiallyVIsibleSquare : this.getAllSquaresWithinDistance(sight, square)) {
 
 			if (potentiallyVIsibleSquare.visibleToPlayer)
+				continue;
+
+			if (!potentiallyVIsibleSquare.inventory.contains(Wall.class))
 				continue;
 
 			int visibleNeighbors = 0;
