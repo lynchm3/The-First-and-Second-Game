@@ -12,6 +12,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AStarNode;
+import com.marklynch.level.constructs.Area;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.structure.Structure;
 import com.marklynch.level.constructs.structure.StructureRoom;
@@ -73,6 +74,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public transient static PathComparator pathComparator;
 
+	public transient Area areaSquareIsIn;
 	public transient Structure structureSquareIsIn;
 	public transient StructureSection structureSectionSquareIsIn;
 	public transient StructureRoom structureRoomSquareIsIn;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.constructs.Area;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
@@ -225,6 +226,8 @@ public class QuestSmallGame extends Quest {
 		// Templates.TREE.makeCopy(Game.level.squares[randomX][randomY], null);
 		//
 		// }
+
+		Area area = new Area("Town Forest", 121, 11, 199, 90);
 		Templates.TREE.makeCopy(Game.level.squares[112][24], null);
 		Templates.TREE.makeCopy(Game.level.squares[112][32], null);
 		Templates.TREE.makeCopy(Game.level.squares[112][70], null);

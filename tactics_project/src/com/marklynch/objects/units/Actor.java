@@ -438,11 +438,17 @@ public class Actor extends GameObject {
 			if (this == Game.level.player) {
 				Game.level.squares[x][y].visibleToPlayer = true;
 				Game.level.squares[x][y].seenByPlayer = true;
-				// Seen Building
+				// Seen area for first time?
+				if (Game.level.squares[x][y].areaSquareIsIn != null
+						&& Game.level.squares[x][y].areaSquareIsIn.seenByPlayer == false) {
+					Game.level.squares[x][y].areaSquareIsIn.hasBeenSeenByPlayer();
+				}
+				// Seen structure for first time?
 				if (Game.level.squares[x][y].structureSquareIsIn != null
 						&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
 					Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer();
 				}
+				// Seen room for first time?
 				if (Game.level.squares[x][y].structureRoomSquareIsIn != null
 						&& Game.level.squares[x][y].structureRoomSquareIsIn.seenByPlayer == false) {
 					Game.level.squares[x][y].structureRoomSquareIsIn.hasBeenSeenByPlayer();

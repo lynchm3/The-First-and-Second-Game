@@ -6,6 +6,7 @@ import java.util.Arrays;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Decoration;
+import com.marklynch.level.constructs.Area;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.effect.Effect;
@@ -221,6 +222,28 @@ public class TextUtils {
 				float x = posX + offsetX;
 				TextureUtils.drawTexture(decoration.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
 				offsetX += textureWidth;
+
+			} else if (content instanceof Area) {
+				Area area = (Area) content;
+
+				String string = area.name;
+				float textWidth = Game.font.getWidth(string);
+				float textureWidth = 20;
+
+				float width = textWidth + textureWidth;
+				if (offsetX + width > maxWidth && offsetX != 0) {
+					if (wrap) {
+						offsetY += 20;
+						offsetX = 0;
+					} else {
+						return;
+					}
+				}
+
+				// Name
+
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				offsetX += textWidth;
 
 			} else if (content instanceof Structure) {
 				Structure structure = (Structure) content;
