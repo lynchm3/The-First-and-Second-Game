@@ -1,6 +1,7 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
@@ -29,8 +30,12 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 	NeutralWildAnimal friendlyWildAnimal;
 	Square targetSquare = null;
 
-	public AIRoutineForNeutralWildAnimal(NeutralWildAnimal actor) {
+	public AIRoutineForNeutralWildAnimal(NeutralWildAnimal actor, Area area) {
 		super(actor);
+		if (area != null) {
+			keepInBounds = true;
+			this.areaBounds.add(area);
+		}
 		this.friendlyWildAnimal = actor;
 		aiType = AI_TYPE.RUNNER;
 	}

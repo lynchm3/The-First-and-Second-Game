@@ -2,6 +2,7 @@ package com.marklynch.objects.units;
 
 import com.marklynch.ai.routines.AIRoutineForNeutralWildAnimal;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
@@ -9,6 +10,8 @@ import com.marklynch.objects.Inventory;
 import mdesl.graphics.Color;
 
 public class NeutralWildAnimal extends Actor {
+
+	public Area area;
 
 	public NeutralWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
@@ -18,7 +21,7 @@ public class NeutralWildAnimal extends Actor {
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
 			float fireResistance, float waterResistance, float electricResistance, float poisonResistance, float weight,
 			Actor owner, Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, Area area) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, false, false, widthRatio,
@@ -27,13 +30,14 @@ public class NeutralWildAnimal extends Actor {
 				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
 
-		aiRoutine = new AIRoutineForNeutralWildAnimal(this);
+		this.area = area;
+		aiRoutine = new AIRoutineForNeutralWildAnimal(this, area);
 	}
 
 	@Override
 	public void postLoad1() {
 		super.postLoad1();
-		aiRoutine = new AIRoutineForNeutralWildAnimal(this);
+		aiRoutine = new AIRoutineForNeutralWildAnimal(this, area);
 	}
 
 	@Override
@@ -41,7 +45,7 @@ public class NeutralWildAnimal extends Actor {
 		super.postLoad2();
 	}
 
-	public NeutralWildAnimal makeCopy(String name, Square square, Faction faction, Bed bed) {
+	public NeutralWildAnimal makeCopy(String name, Square square, Faction faction, Bed bed, Area area) {
 
 		NeutralWildAnimal actor = new NeutralWildAnimal(name, title, actorLevel, (int) totalHealth, strength, dexterity,
 				intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(),
@@ -49,7 +53,7 @@ public class NeutralWildAnimal extends Actor {
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
 				poisonResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, area);
 		return actor;
 	}
 

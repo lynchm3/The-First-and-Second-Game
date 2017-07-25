@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Path;
+import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructurePath;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.constructs.requirementtomeet.StatRequirementToMeet;
-import com.marklynch.level.constructs.structure.Structure;
-import com.marklynch.level.constructs.structure.StructurePath;
-import com.marklynch.level.constructs.structure.StructureRoom;
-import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
-import com.marklynch.level.constructs.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
@@ -82,7 +82,7 @@ public class QuestBetweenTheWalls {
 		structureFeatures.add(falseWall);
 
 		// Rat
-		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.get(2), null);
+		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.get(2), null, null);
 
 		// Hidden room
 		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 36, false, new ArrayList<Actor>(),

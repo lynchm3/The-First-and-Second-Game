@@ -12,11 +12,11 @@ import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AStarNode;
-import com.marklynch.level.constructs.Area;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.structure.Structure;
-import com.marklynch.level.constructs.structure.StructureRoom;
-import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;

@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs.structure;
+package com.marklynch.level.constructs.bounds.structure;
 
 import java.util.ArrayList;
 

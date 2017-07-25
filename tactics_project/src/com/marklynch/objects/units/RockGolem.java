@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;

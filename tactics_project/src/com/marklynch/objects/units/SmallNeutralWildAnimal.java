@@ -2,28 +2,19 @@ package com.marklynch.objects.units;
 
 import java.util.ArrayList;
 
-import com.marklynch.ai.routines.AIRoutineForNeutralWildAnimal;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.structure.Structure;
-import com.marklynch.level.constructs.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.Inventory;
-import com.marklynch.objects.Readable;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSquash;
-import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;
 
 public class SmallNeutralWildAnimal extends NeutralWildAnimal {
-
-	public StructureRoom room;
-	public Structure shop;
-	public Readable shopSign;
-	public Weapon broom;
 
 	public SmallNeutralWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
@@ -33,16 +24,14 @@ public class SmallNeutralWildAnimal extends NeutralWildAnimal {
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
 			float fireResistance, float waterResistance, float electricResistance, float poisonResistance, float weight,
 			Actor owner, Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, Area area) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, showInventory, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,
 				faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX,
-				legsAnchorY);
-
-		aiRoutine = new AIRoutineForNeutralWildAnimal(this);
+				legsAnchorY, area);
 	}
 
 	@Override
@@ -66,7 +55,6 @@ public class SmallNeutralWildAnimal extends NeutralWildAnimal {
 	@Override
 	public void postLoad1() {
 		super.postLoad1();
-		aiRoutine = new AIRoutineForNeutralWildAnimal(this);
 	}
 
 	@Override
@@ -75,7 +63,7 @@ public class SmallNeutralWildAnimal extends NeutralWildAnimal {
 	}
 
 	@Override
-	public SmallNeutralWildAnimal makeCopy(String name, Square square, Faction faction, Bed bed) {
+	public SmallNeutralWildAnimal makeCopy(String name, Square square, Faction faction, Bed bed, Area area) {
 
 		SmallNeutralWildAnimal actor = new SmallNeutralWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
 				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
@@ -83,7 +71,7 @@ public class SmallNeutralWildAnimal extends NeutralWildAnimal {
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
 				waterResistance, electricResistance, poisonResistance, weight, owner, faction, handAnchorX, handAnchorY,
-				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, area);
 		return actor;
 	}
 

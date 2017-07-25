@@ -7,9 +7,9 @@ import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.structure.Structure;
-import com.marklynch.level.constructs.structure.StructureRoom;
-import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -63,7 +63,9 @@ public class AIRoutineUtils {
 
 			if ((!mustBeOutdoors || mustBeOutdoors && randomSquare.structureSquareIsIn == null)
 					&& currentActorPathToThisSquare != null && currentActorPathToThisSquare.travelCost < maxDistance
-					&& randomSquare.inventory.canShareSquare()) {
+					&& randomSquare.inventory.canShareSquare()
+					&& Game.level.activeActor.aiRoutine.squareInBounds(randomSquare)) {
+
 				return randomSquare;
 			}
 			attempts++;
@@ -569,7 +571,8 @@ public class AIRoutineUtils {
 			// OR somewhere u can attack someone from is the best... i dunno :D
 
 			for (Square squareAtSpecifiedDistanceToTarget : squaresAtSpecifiedDistanceToTarget) {
-				AIPath currentActorPathToThisSquare = Game.level.activeActor.getPathTo(squareAtSpecifiedDistanceToTarget);
+				AIPath currentActorPathToThisSquare = Game.level.activeActor
+						.getPathTo(squareAtSpecifiedDistanceToTarget);
 				if (Game.level.activeActor.canSeeGameObjectFromSpecificSquare(squareAtSpecifiedDistanceToTarget, target)
 						&& currentActorPathToThisSquare != null
 						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {

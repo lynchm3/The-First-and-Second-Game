@@ -3,11 +3,11 @@ package com.marklynch.level.quest.caveoftheblind;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.structure.Structure;
-import com.marklynch.level.constructs.structure.StructurePath;
-import com.marklynch.level.constructs.structure.StructureRoom;
-import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
-import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructurePath;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;

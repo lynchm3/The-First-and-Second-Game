@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Path;
-import com.marklynch.level.constructs.structure.Structure;
-import com.marklynch.level.constructs.structure.StructurePath;
-import com.marklynch.level.constructs.structure.StructureRoom;
-import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
-import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructurePath;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
@@ -71,7 +71,7 @@ public class QuestTheSecretRoom {
 		// null));
 
 		// Rat
-		Templates.RAT.makeCopy("Rat", Game.level.squares[25][39], Game.level.factions.get(2), null);
+		Templates.RAT.makeCopy("Rat", Game.level.squares[25][39], Game.level.factions.get(2), null, null);
 
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
 				structureFeatures, structureEntranceSquares, null, 0, 0, 0, 0, true, null, structureSquaresToRemove,

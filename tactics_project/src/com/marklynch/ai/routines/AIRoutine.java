@@ -8,8 +8,9 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.structure.StructureRoom;
-import com.marklynch.level.constructs.structure.StructureSection;
+import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
@@ -53,6 +54,7 @@ public class AIRoutine {
 	public AI_TYPE aiType = AI_TYPE.FIGHTER;
 
 	public boolean keepInBounds = false;
+	public ArrayList<Area> areaBounds = new ArrayList<Area>();
 	public ArrayList<StructureSection> sectionBounds = new ArrayList<StructureSection>();
 	public ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>();
 	public ArrayList<Square> squareBounds = new ArrayList<Square>();
@@ -808,6 +810,12 @@ public class AIRoutine {
 		// Return true if there are no bounds
 		if (keepInBounds == false)
 			return true;
+
+		for (Area area : areaBounds) {
+			if (square.areaSquareIsIn == area) {
+				return true;
+			}
+		}
 
 		for (StructureSection section : sectionBounds) {
 			if (square.structureSectionSquareIsIn == section) {

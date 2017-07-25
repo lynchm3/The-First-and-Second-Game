@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs;
+package com.marklynch.level.constructs.bounds;
 
 import com.marklynch.Game;
 import com.marklynch.objects.actions.ActionSpot;

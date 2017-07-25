@@ -1,9 +1,9 @@
-package com.marklynch.level.constructs.structure;
+package com.marklynch.level.constructs.bounds.structure;
 
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.structure.StructureRoom.RoomPart;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
