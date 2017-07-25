@@ -31,7 +31,7 @@ import com.marklynch.utils.MapUtil;
 
 public class AIRoutine {
 
-	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
+	String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
 	final String ACTIVITY_DESCRIPTION_BEING_A_CHICKEN = "Being a chicken";
 	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";

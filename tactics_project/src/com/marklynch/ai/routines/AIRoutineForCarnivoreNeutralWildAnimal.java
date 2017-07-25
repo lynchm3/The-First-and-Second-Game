@@ -39,7 +39,8 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 			this.areaBounds.add(area);
 		}
 		this.wildAnimal = actor;
-		aiType = AI_TYPE.RUNNER;
+		aiType = AI_TYPE.FIGHTER;
+		ACTIVITY_DESCRIPTION_FIGHTING = "Attacking";
 	}
 
 	@Override
@@ -76,19 +77,21 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 		}
 
 		// THIS IS TEMPORARY
-		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 100f, true, false,
-				true, false, false, false);
-		if (food != null) {
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
-			this.actor.thoughtBubbleImageTexture = food.imageTexture;
-			boolean pickedUpLoot = AIRoutineUtils.eatTarget(food);
-			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(food);
-			} else {
-
-			}
-			return;
-		}
+		// GameObject food = target =
+		// AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 100f,
+		// true, false,
+		// true, false, false, false);
+		// if (food != null) {
+		// this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
+		// this.actor.thoughtBubbleImageTexture = food.imageTexture;
+		// boolean pickedUpLoot = AIRoutineUtils.eatTarget(food);
+		// if (!pickedUpLoot) {
+		// AIRoutineUtils.moveTowardsTargetToBeAdjacent(food);
+		// } else {
+		//
+		// }
+		// return;
+		// }
 
 		// 1. attack small animal
 		GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfAttacking(HerbivoreWildAnimal.class,
