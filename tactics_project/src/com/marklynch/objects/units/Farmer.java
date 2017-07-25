@@ -3,7 +3,7 @@ package com.marklynch.objects.units;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Bed;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 
 import mdesl.graphics.Color;
@@ -11,7 +11,7 @@ import mdesl.graphics.Color;
 public class Farmer extends Actor {
 
 	public Farmer(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, GameObject bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
@@ -41,7 +41,7 @@ public class Farmer extends Actor {
 	}
 
 	@Override
-	public Farmer makeCopy(Square square, Faction faction, Bed bed) {
+	public Farmer makeCopy(Square square, Faction faction, GameObject bed) {
 
 		Farmer actor = new Farmer(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,

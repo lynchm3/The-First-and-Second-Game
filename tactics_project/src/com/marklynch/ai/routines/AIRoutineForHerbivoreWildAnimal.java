@@ -49,6 +49,44 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();
 
+		// In bed
+		if (actor.squareGameObjectIsOn == null)
+			return;
+
+		// Go to bed
+		if (this.actor.bed != null) {
+			if (actor.name.equals("Female Rabbit"))
+				System.out.println("bed != null a");
+			if (actor.straightLineDistanceTo(actor.bed.squareGameObjectIsOn) <= 1) {
+				actor.bed.inventory.add(actor);
+			}
+
+			if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(this.actor.bed))
+				return;
+
+			// boolean goingToSleep = AIRoutineUtils.sleep();
+			// if (!goingToSleep) {
+			// AIRoutineUtils.moveTowardsTargetToBeOn(this.actor.bed);
+			// } else {
+			//
+			// }
+
+		}
+		// if (actor.bed != null) {
+		// if (actor.name.equals("Male Rabbit"))
+		// System.out.println("bed != null a");
+		// if (actor.straightLineDistanceTo(actor.bed.squareGameObjectIsOn) < 1)
+		// return;
+		// if (actor.name.equals("Male Rabbit"))
+		// System.out.println("bed != null b");
+		//
+		// if
+		// (AIRoutineUtils.moveTowardsTargetSquare(this.actor.bed.squareGameObjectIsOn))
+		// return;
+		// if (actor.name.equals("Male Rabbit"))
+		// System.out.println("bed != null c");
+		// }
+
 		if (runEscapeRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();

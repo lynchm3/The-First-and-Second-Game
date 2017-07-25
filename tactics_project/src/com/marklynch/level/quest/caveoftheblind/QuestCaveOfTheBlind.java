@@ -11,7 +11,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Bed;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Chest;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Door;
@@ -78,7 +78,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	Lantern lantern;
 	Wall oreWall;
 	Key mortsKey;
-	Door mortsBedroomDoor;
+	Door mortsGameObjectroomDoor;
 	Door mortsStoreroomDoor;
 	Searchable dropHole;
 
@@ -100,12 +100,12 @@ public class QuestCaveOfTheBlind extends Quest {
 		super();
 
 		// Mort and his bed
-		Bed mortsBed = Templates.BED.makeCopy(Game.level.squares[267][42]);
-		mortsBed.quest = this;
+		GameObject mortsGameObject = Templates.BED.makeCopy(Game.level.squares[267][42]);
+		mortsGameObject.quest = this;
 		mortsKey = Templates.KEY.makeCopy("Mort's Key", null, mort);
 		mortsKey.quest = this;
 		// [147][21]
-		mort = Templates.MORT.makeCopy(Game.level.squares[281][41], Game.level.factions.get(1), mortsBed);
+		mort = Templates.MORT.makeCopy(Game.level.squares[281][41], Game.level.factions.get(1), mortsGameObject);
 		mort.quest = this;
 		mort.mortsBell = Templates.DINNER_BELL.makeCopy(null, mort);
 		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy("Meat Chunk", null, null);
@@ -574,10 +574,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Cave featues for Mort
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][45], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][46], mort));
-		mortsBedroomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, mort, mortsKey,
+		mortsGameObjectroomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, mort, mortsKey,
 				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
-		mort.mortsRoomDoorway = mortsBedroomDoor.squareGameObjectIsOn;
-		caveFeatures.add(mortsBedroomDoor);
+		mort.mortsRoomDoorway = mortsGameObjectroomDoor.squareGameObjectIsOn;
+		caveFeatures.add(mortsGameObjectroomDoor);
 		mort.aiRoutine.squareBounds.add(mort.mortsRoomDoorway);
 		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[264][40], true, mort, mortsKey,
 				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));

@@ -42,7 +42,7 @@ public class AIRoutineForMort extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
+	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "GameObject time";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
@@ -91,20 +91,20 @@ public class AIRoutineForMort extends AIRoutine {
 		// }
 
 		// If blind are in mine and getting too close to mgmt door, move to it
-		float mortsDistanceFromBedroomDoor = mort
-				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
+		float mortsDistanceFromGameObjectroomDoor = mort
+				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn);
 		if (!retreatedToRoom) {
 			for (Blind blind : mort.questCaveOfTheBlind.blind) {
 				if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
 					float blindDistanceFromMortsRoom = blind
-							.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn);
-					if (blindDistanceFromMortsRoom - mortsDistanceFromBedroomDoor < 4) {
-						Square doorSquare = mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
+							.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn);
+					if (blindDistanceFromMortsRoom - mortsDistanceFromGameObjectroomDoor < 4) {
+						Square doorSquare = mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn;
 						Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
 						mort.performingFeedingDemo = false;
 						if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
 							mort.activityDescription = ACTIVITY_DESCRIPTION_HIDING;
-							new ActionLock(mort, mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
+							new ActionLock(mort, mort.questCaveOfTheBlind.mortsGameObjectroomDoor).perform();
 							mort.investigationsMap.clear();
 							searchCooldown = 0;
 							retreatedToRoom = true;
@@ -162,7 +162,7 @@ public class AIRoutineForMort extends AIRoutine {
 		// && mort.squareGameObjectIsOn.structureRoomSquareIsIn !=
 		// mort.mortsVault) {
 		// Square doorSquare =
-		// mort.questCaveOfTheBlind.mortsBedroomDoor.squareGameObjectIsOn;
+		// mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn;
 		// Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid -
 		// 1][doorSquare.yInGrid];
 		// mort.performingFeedingDemo = false;
@@ -170,7 +170,7 @@ public class AIRoutineForMort extends AIRoutine {
 		// mort.activityDescription = ACTIVITY_DESCRIPTION_HIDING;
 		// System.out.println("mort is locking the door");
 		// new ActionLock(mort,
-		// mort.questCaveOfTheBlind.mortsBedroomDoor).perform();
+		// mort.questCaveOfTheBlind.mortsGameObjectroomDoor).perform();
 		// mort.investigationsMap.clear();
 		// searchCooldown = 0;
 		// retreatedToRoom = true;

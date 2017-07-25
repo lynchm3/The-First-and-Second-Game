@@ -15,7 +15,7 @@ import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Bed;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
@@ -176,8 +176,8 @@ public class QuestSmallGame extends Quest {
 		// BRENT
 
 		// Add lead hunter
-		Bed brentsBed = Templates.BED.makeCopy(Game.level.squares[10][9]);
-		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1), brentsBed);
+		GameObject brentsGameObject = Templates.BED.makeCopy(Game.level.squares[10][9]);
+		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1), brentsGameObject);
 		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBrent));
 		hunterBrent.equip(hunterBrent.inventory.get(0));
 		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
@@ -196,8 +196,8 @@ public class QuestSmallGame extends Quest {
 		Game.level.structures.add(lodge);
 
 		// Add hunters
-		Bed brontsBed = Templates.BED.makeCopy(Game.level.squares[9][9]);
-		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1), brontsBed);
+		GameObject brontsGameObject = Templates.BED.makeCopy(Game.level.squares[9][9]);
+		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1), brontsGameObject);
 		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBront1));
 		hunterBront1.equip(hunterBrent.inventory.get(0));
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;

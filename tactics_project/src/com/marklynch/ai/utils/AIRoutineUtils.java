@@ -771,14 +771,20 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean moveTowardsTargetSquare(Square square) {
+		if (Game.level.activeActor.name.equals("Female Rabbit"))
+			System.out.println("moveTowardsTargetSquare a");
 
 		if (Game.level.activeActor.squareGameObjectIsOn == square)
 			return true;
 
 		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
 
+		if (Game.level.activeActor.name.equals("Female Rabbit"))
+			System.out.println("moveTowardsTargetSquare b, squareToMoveTo = " + squareToMoveTo);
 		if (squareToMoveTo != null) {
 			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
+			if (Game.level.activeActor.name.equals("Female Rabbit"))
+				System.out.println("moveTowardsTargetSquare c");
 			return true;
 		} else {
 			return false;

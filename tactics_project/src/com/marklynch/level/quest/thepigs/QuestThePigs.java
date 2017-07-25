@@ -32,7 +32,7 @@ public class QuestThePigs extends Quest {
 	StructureSection farmHouseBackSection;
 	StructureRoom farmHouseFrontRoom;
 	StructureRoom farmHouseStorageRoom;
-	StructureRoom farmHouseBedroom;
+	StructureRoom farmHouseGameObjectroom;
 	StructureRoom farmHouseHallRoom;
 
 	// Actors
@@ -81,10 +81,10 @@ public class QuestThePigs extends Quest {
 		// Bow on the ground
 		Templates.HUNTING_BOW.makeCopy(Game.level.squares[33][73], null);
 		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[34][73], null);
-		// Bed farmersBed = Templates.BED.makeCopy(Game.level.squares[3][3]);
-		// farmersBed.quest = this;
+		// GameObject farmersGameObject = Templates.BED.makeCopy(Game.level.squares[3][3]);
+		// farmersGameObject.quest = this;
 		// farmer = Templates.FARMER.makeCopy(Game.level.squares[2][2],
-		// Game.level.factions.get(1), farmersBed);
+		// Game.level.factions.get(1), farmersGameObject);
 		// farmer.quest = this;}
 		//
 		// // Conversations
@@ -127,8 +127,8 @@ public class QuestThePigs extends Quest {
 		farmHouseFeatures.add(farmHouseHallDoor);
 		Door farmHouseStorageDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][78], false, farmer);
 		farmHouseFeatures.add(farmHouseStorageDoor);
-		Door farmHouseBedroomDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[17][78], false, farmer);
-		farmHouseFeatures.add(farmHouseBedroomDoor);
+		Door farmHouseGameObjectroomDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[17][78], false, farmer);
+		farmHouseFeatures.add(farmHouseGameObjectroomDoor);
 		Door farmHouseBackDoor = Templates.DOOR.makeCopy("Door", Game.level.squares[21][85], false, farmer);
 		farmHouseFeatures.add(farmHouseBackDoor);
 
@@ -138,7 +138,7 @@ public class QuestThePigs extends Quest {
 				new RoomPart(13, 70, 23, 74));
 		farmHouseHallRoom = new StructureRoom("Hall", 3, 76, false, new ArrayList<Actor>(),
 				new RoomPart(3, 76, 23, 77));
-		farmHouseBedroom = new StructureRoom("Bedroom", 3, 79, false, new ArrayList<Actor>(),
+		farmHouseGameObjectroom = new StructureRoom("GameObjectroom", 3, 79, false, new ArrayList<Actor>(),
 				new RoomPart(3, 79, 17, 84));
 		farmHouseStorageRoom = new StructureRoom("Storage", 19, 79, false, new ArrayList<Actor>(),
 				new RoomPart(19, 79, 23, 84));
@@ -147,7 +147,7 @@ public class QuestThePigs extends Quest {
 		farmHouseSections.add(farmHouseBackSection);
 		farmHouseRooms.add(farmHouseFrontRoom);
 		farmHouseRooms.add(farmHouseHallRoom);
-		farmHouseRooms.add(farmHouseBedroom);
+		farmHouseRooms.add(farmHouseGameObjectroom);
 		farmHouseRooms.add(farmHouseStorageRoom);
 
 		Game.level.structures.add(new Structure("Farm House", farmHouseSections, farmHouseRooms, farmHousePaths,

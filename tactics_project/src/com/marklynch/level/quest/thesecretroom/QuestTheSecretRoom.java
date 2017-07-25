@@ -58,7 +58,7 @@ public class QuestTheSecretRoom {
 		structureFeatures.add(falseWall);
 
 		// Back room
-		StructureRoom backRoom = new StructureRoom("Bedroom", 20, 37, false, new ArrayList<Actor>(),
+		StructureRoom backRoom = new StructureRoom("GameObjectroom", 20, 37, false, new ArrayList<Actor>(),
 				new RoomPart(20, 37, 35, 45));
 		structureRooms.add(backRoom);
 

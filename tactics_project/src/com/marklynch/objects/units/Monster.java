@@ -2,7 +2,7 @@ package com.marklynch.objects.units;
 
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Bed;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 
 import mdesl.graphics.Color;
@@ -10,7 +10,7 @@ import mdesl.graphics.Color;
 public class Monster extends Actor {
 
 	public Monster(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, GameObject bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean canOpenDoors, boolean canEquipWeapons,
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,

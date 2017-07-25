@@ -3,7 +3,7 @@ package com.marklynch.level.quest.caveoftheblind;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Bed;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
@@ -18,7 +18,7 @@ public class Blind extends Monster {
 	public StructureRoom roomLivingIn;
 
 	public Blind(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, GameObject bed,
 			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,

@@ -24,7 +24,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Bed;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Inventory;
@@ -96,7 +96,7 @@ public class Actor extends GameObject {
 	public String activityDescription = "";
 	public String miniDialogue = "";
 
-	public transient Bed bed;
+	public transient GameObject bed;
 	public String bedGUID = null;
 
 	public transient Faction faction;
@@ -148,15 +148,15 @@ public class Actor extends GameObject {
 	public AILine aiLine;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, Bed bed,
-			Inventory inventory, boolean showInventory, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, boolean canOpenDoors, boolean canEquipWeapons,
-			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
-			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
-			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float weight, Actor owner, Faction faction, float handAnchorX, float handAnchorY,
-			float headAnchorX, float headAnchorY, float bodyAnchorX, float bodyAnchorY, float legsAnchorX,
-			float legsAnchorY) {
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
+			GameObject bed, Inventory inventory, boolean showInventory, boolean fitsInInventory,
+			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen,
+			boolean canOpenDoors, boolean canEquipWeapons, float widthRatio, float heightRatio, float drawOffsetX,
+			float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
+			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
+			float electricResistance, float poisonResistance, float weight, Actor owner, Faction faction,
+			float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY, float bodyAnchorX,
+			float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
@@ -260,7 +260,7 @@ public class Actor extends GameObject {
 		if (bedGUID != null) {
 			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
 				if (bedGUID.equals(gameObject.guid)) {
-					this.bed = (Bed) gameObject;
+					this.bed = (GameObject) gameObject;
 				}
 			}
 		}
@@ -869,7 +869,7 @@ public class Actor extends GameObject {
 		equippedWeaponGUID = this.equipped.guid;
 	}
 
-	public Actor makeCopy(Square square, Faction faction, Bed bed) {
+	public Actor makeCopy(Square square, Faction faction, GameObject bed) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
