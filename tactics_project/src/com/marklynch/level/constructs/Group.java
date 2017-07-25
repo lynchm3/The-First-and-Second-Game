@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -24,11 +25,11 @@ public class Group {
 	public HashMap<Actor, Square> targetSquaresMap = new HashMap<Actor, Square>();
 	public ArrayList<Square> targetSquares = new ArrayList<Square>();
 
-	public Group(String name, ArrayList<Actor> members, Actor leader) {
+	public Group(String name, Actor... members) {
 		super();
 		this.name = name;
-		this.members = members;
-		this.leader = leader;
+		this.members = new ArrayList<Actor>(Arrays.asList(members));
+		this.leader = this.members.get(0);
 		for (Actor member : members) {
 			member.group = this;
 		}

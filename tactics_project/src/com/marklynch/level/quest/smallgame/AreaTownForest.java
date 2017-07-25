@@ -2,6 +2,7 @@ package com.marklynch.level.quest.smallgame;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Area;
+import com.marklynch.level.constructs.Group;
 import com.marklynch.objects.Templates;
 
 public class AreaTownForest {
@@ -1451,9 +1452,18 @@ public class AreaTownForest {
 		Templates.TREE.makeCopy(Game.level.squares[200][48], null);
 		Templates.TREE.makeCopy(Game.level.squares[200][68], null);
 		Templates.TREE.makeCopy(Game.level.squares[200][73], null);
-		Templates.RABBIT.makeCopy("Rabbit", Game.level.squares[200][73], Game.level.factions.get(2), null);
-		Templates.RABBIT.makeCopy("Rabbit", Game.level.squares[200][74], Game.level.factions.get(2), null);
-		Templates.RABBIT.makeCopy("Rabbit", Game.level.squares[200][75], Game.level.factions.get(2), null);
+
+		Group rabbitGroup1 = new Group("Rabbits",
+				Templates.RABBIT.makeCopy("Male Rabbit", Game.level.squares[200][73], Game.level.factions.get(2), null),
+				Templates.RABBIT.makeCopy("Female Rabbit", Game.level.squares[200][74], Game.level.factions.get(2),
+						null),
+				Templates.BABY_RABBIT.makeCopy("Rabbit", Game.level.squares[200][75], Game.level.factions.get(2), null),
+				Templates.BABY_RABBIT.makeCopy("Baby Rabbit", Game.level.squares[200][76], Game.level.factions.get(2),
+						null),
+				Templates.BABY_RABBIT.makeCopy("Baby Rabbit", Game.level.squares[200][77], Game.level.factions.get(2),
+						null),
+				Templates.BABY_RABBIT.makeCopy("Baby Rabbit", Game.level.squares[200][78], Game.level.factions.get(2),
+						null));
 		Templates.TREE.makeCopy(Game.level.squares[201][14], null);
 		Templates.TREE.makeCopy(Game.level.squares[201][20], null);
 		Templates.TREE.makeCopy(Game.level.squares[201][21], null);

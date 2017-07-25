@@ -45,9 +45,13 @@ public class Templates {
 			null, 1, 10, null, new Inventory(), false, false, true, false, false, 1, 0.25f, 0f, 48f, 1f, 1f, 1f, null,
 			0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0);
 
-	public static final NeutralWildAnimal RABBIT = new NeutralWildAnimal("Rabbit", "Rabbit", 1, 10, 0, 0, 0, 0,
+	public static final NeutralWildAnimal RABBIT = new NeutralWildAnimal("Rabbit", "Rabbit", 1, 4, 0, 0, 0, 0,
 			"rabbit.png", null, 1, 10, null, new Inventory(), false, false, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f,
 			1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0);
+	public static final NeutralWildAnimal BABY_RABBIT = new SmallNeutralWildAnimal("Baby Rabbit", "Baby Rabbit", 1, 10,
+			0, 0, 0, 0, "baby_rabbit.png", null, 1, 10, null, new Inventory(), false, false, true, false, false, 0.25f,
+			0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0,
+			0);
 
 	// Monsters
 	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,

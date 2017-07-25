@@ -221,7 +221,9 @@ public class QuestSmallGame extends Quest {
 		hunterPackMembers.add(hunterBront5);
 		hunterPackMembers.add(hunterBront6);
 
-		hunterPack = new Group("Hunting party", hunterPackMembers, hunterBrent);
+		hunterPack = new Group("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3, hunterBront4,
+				hunterBront5, hunterBront6);
+
 		this.hunterPack.quest = this;
 		for (GameObject hunter : hunterPack.getMembers()) {
 			hunter.quest = this;
@@ -252,11 +254,7 @@ public class QuestSmallGame extends Quest {
 				0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0,
 				0, 0, 0, 0, 0);
 
-		ArrayList<Actor> wolfPackMembers = new ArrayList<Actor>();
-		wolfPackMembers.add(superWolf);
-		wolfPackMembers.add(wolf2);
-		wolfPackMembers.add(wolf3);
-		wolfPack = new Group("Wolf pack", wolfPackMembers, superWolf);
+		wolfPack = new Group("Wolf pack", superWolf, wolf2, wolf3);
 
 		this.wolfPack.quest = this;
 		for (GameObject wolf : wolfPack.getMembers()) {
