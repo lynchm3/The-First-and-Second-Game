@@ -885,6 +885,11 @@ public class Actor extends GameObject {
 
 	@Override
 	public void update(int delta) {
+
+		if (this instanceof NeutralWildAnimal) {
+			System.out.println("Actor.update() " + this);
+		}
+
 		clearActions();
 
 		if (this.remainingHealth > 0) {
@@ -1194,6 +1199,11 @@ public class Actor extends GameObject {
 	public void equip(GameObject gameObject) {
 		if (canEquipWeapons)
 			this.equipped = gameObject;
+	}
+
+	@Override
+	public String toString() {
+		return name + " @ " + squareGameObjectIsOn;
 	}
 
 	// public static void calculateReachableSquares() {

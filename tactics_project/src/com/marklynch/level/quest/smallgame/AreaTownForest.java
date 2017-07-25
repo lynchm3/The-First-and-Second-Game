@@ -1451,6 +1451,9 @@ public class AreaTownForest {
 		Templates.TREE.makeCopy(Game.level.squares[200][48], null);
 		Templates.TREE.makeCopy(Game.level.squares[200][68], null);
 		Templates.TREE.makeCopy(Game.level.squares[200][73], null);
+		Templates.RABBIT.makeCopy("Rabbit", Game.level.squares[200][73], Game.level.factions.get(2), null);
+		Templates.RABBIT.makeCopy("Rabbit", Game.level.squares[200][74], Game.level.factions.get(2), null);
+		Templates.RABBIT.makeCopy("Rabbit", Game.level.squares[200][75], Game.level.factions.get(2), null);
 		Templates.TREE.makeCopy(Game.level.squares[201][14], null);
 		Templates.TREE.makeCopy(Game.level.squares[201][20], null);
 		Templates.TREE.makeCopy(Game.level.squares[201][21], null);

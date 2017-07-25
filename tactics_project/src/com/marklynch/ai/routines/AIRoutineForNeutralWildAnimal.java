@@ -37,6 +37,7 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 
 	@Override
 	public void update() {
+		System.out.println("AIRoutineForNeutralWildAnimal a friendlyWildAnimal = " + friendlyWildAnimal);
 		this.actor.aiLine = null;
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
@@ -49,6 +50,7 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
+		System.out.println("AIRoutineForNeutralWildAnimal b");
 
 		if (escapeCooldown > 0) {
 			runEscapeCooldown(false);
@@ -56,6 +58,7 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
+		System.out.println("AIRoutineForNeutralWildAnimal c");
 
 		// if (runSearchRoutine()) {
 		// // createSearchLocationsBasedOnSounds();
@@ -76,6 +79,7 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 				return;
 			}
 		}
+		System.out.println("AIRoutineForNeutralWildAnimal d");
 
 		// 1. eat loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 5f, true, false, true, false,
@@ -91,6 +95,7 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 			}
 			return;
 		}
+		System.out.println("AIRoutineForNeutralWildAnimal e");
 
 		// Defer to quest
 		if (this.actor.quest != null) {
@@ -98,6 +103,7 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 				return;
 			}
 		}
+		System.out.println("AIRoutineForNeutralWildAnimal f");
 
 		// Move about a bit
 		if (targetSquare != null) {
@@ -114,6 +120,7 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 					return;
 			}
 		}
+		System.out.println("AIRoutineForNeutralWildAnimal g");
 	}
 
 }
