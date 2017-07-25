@@ -74,6 +74,22 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 				return;
 			}
 		}
+
+		// THIS IS TEMPORARY
+		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 100f, true, false,
+				true, false, false, false);
+		if (food != null) {
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
+			this.actor.thoughtBubbleImageTexture = food.imageTexture;
+			boolean pickedUpLoot = AIRoutineUtils.eatTarget(food);
+			if (!pickedUpLoot) {
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(food);
+			} else {
+
+			}
+			return;
+		}
+
 		// 1. attack small animal
 		GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfAttacking(HerbivoreWildAnimal.class,
 				100f, false, true, false, false, true, true);
@@ -109,7 +125,6 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 				return;
 			}
 		}
-		System.out.println("AIRoutineForNeutralWildAnimal f");
 
 		// Move about a bit
 		if (targetSquare != null) {
@@ -125,7 +140,6 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 					return;
 			}
 		}
-		System.out.println("AIRoutineForNeutralWildAnimal g");
 	}
 
 }

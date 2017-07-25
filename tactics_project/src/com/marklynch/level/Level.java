@@ -822,16 +822,11 @@ public class Level {
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		if (currentFactionMovingIndex == 0) {
 			this.turn++;
-			System.out.println("\nTurn " + turn + "\n");
 			Game.level.logOnScreen(new ActivityLog(new Object[] { "-----TURN " + turn + "-----" }));
 			Game.level.activeActor = player;
 			// Game.level.activeActor.equippedWeapon =
 			// Game.level.activeActor.getWeaponsInInventory().get(0);
 			// Actor.calculateReachableSquares();
-
-			System.out.println("end turn player = " + player);
-			System.out.println("end turn peekSquare = " + player.peekSquare);
-			System.out.println("end turn peekingThrough = " + player.peekingThrough);
 			if (player.peekSquare != null) {
 				player.calculateVisibleSquares(player.peekSquare);
 			} else {

@@ -36,35 +36,26 @@ public class ActionPeek extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " peeked through ", object }));
 
 		if (performer == Game.level.player) {
-			System.out.println("ActionPeek a");
 
 			performer.peekingThrough = object;
 			Game.level.player.peekingThrough = object;
 
-			System.out.println("ActionPeek nulling peekSquare");
 			Square peekSquare = null;
 			if (object.squareGameObjectIsOn.xInGrid < performer.squareGameObjectIsOn.xInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid
 						- 2][performer.squareGameObjectIsOn.yInGrid];
-				System.out.println("ActionPeek b");
 			} else if (object.squareGameObjectIsOn.xInGrid > performer.squareGameObjectIsOn.xInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid
 						+ 2][performer.squareGameObjectIsOn.yInGrid];
-				System.out.println("ActionPeek c");
 			} else if (object.squareGameObjectIsOn.yInGrid < performer.squareGameObjectIsOn.yInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid][performer.squareGameObjectIsOn.yInGrid
 						- 2];
-				System.out.println("ActionPeek d");
 			} else if (object.squareGameObjectIsOn.yInGrid > performer.squareGameObjectIsOn.yInGrid) {
 				peekSquare = Game.level.squares[performer.squareGameObjectIsOn.xInGrid][performer.squareGameObjectIsOn.yInGrid
 						+ 2];
-				System.out.println("ActionPeek e");
 			}
-			System.out.println("ActionPeek f peekSquare = " + peekSquare);
 			performer.peekSquare = peekSquare;
 			Game.level.player.peekSquare = peekSquare;
-			System.out.println("ActionPeek g Game.level.player.peekSquare= " + Game.level.player.peekSquare);
-			System.out.println("ActionPeek h player = " + Game.level.player);
 			if (peekSquare != null)
 				performer.calculateVisibleSquares(peekSquare);
 		}

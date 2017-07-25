@@ -42,7 +42,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
 	@Override
 	public void update() {
-		System.out.println("AIRoutineForNeutralWildAnimal a friendlyWildAnimal = " + friendlyWildAnimal);
 		this.actor.aiLine = null;
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
@@ -55,7 +54,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
-		System.out.println("AIRoutineForNeutralWildAnimal b");
 
 		if (escapeCooldown > 0) {
 			runEscapeCooldown(false);
@@ -63,7 +61,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
-		System.out.println("AIRoutineForNeutralWildAnimal c");
 
 		// if (runSearchRoutine()) {
 		// // createSearchLocationsBasedOnSounds();
@@ -84,23 +81,21 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 				return;
 			}
 		}
-		System.out.println("AIRoutineForNeutralWildAnimal d");
 
 		// 1. eat loot on ground
-		GameObject loot = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 5f, true, false, true,
+		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 5f, true, false, true,
 				false, false, false);
-		if (loot != null) {
+		if (food != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
-			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
-			boolean pickedUpLoot = AIRoutineUtils.eatTarget(loot);
+			this.actor.thoughtBubbleImageTexture = food.imageTexture;
+			boolean pickedUpLoot = AIRoutineUtils.eatTarget(food);
 			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(food);
 			} else {
 
 			}
 			return;
 		}
-		System.out.println("AIRoutineForNeutralWildAnimal e");
 
 		// Defer to quest
 		if (this.actor.quest != null) {
@@ -108,7 +103,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 				return;
 			}
 		}
-		System.out.println("AIRoutineForNeutralWildAnimal f");
 
 		// Move about a bit
 		if (targetSquare != null) {
@@ -125,7 +119,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 					return;
 			}
 		}
-		System.out.println("AIRoutineForNeutralWildAnimal g");
 	}
 
 }

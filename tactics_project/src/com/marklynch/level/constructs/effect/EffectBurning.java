@@ -55,9 +55,6 @@ public class EffectBurning extends Effect {
 							gameObject.removeWetEffect();
 							gameObject.addEffect(this.makeCopy(source, gameObject));
 
-							System.out.println("adjacent square = " + adjacentSquare);
-							System.out.println("gameObject = " + gameObject.name);
-
 							if (gameObject.squareGameObjectIsOn.visibleToPlayer)
 								Game.level
 										.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));

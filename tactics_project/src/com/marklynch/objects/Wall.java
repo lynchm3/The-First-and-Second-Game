@@ -280,57 +280,38 @@ public class Wall extends GameObject {
 	}
 
 	public void checkIfFullWall() {
-
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() a");
 		// 8
 		if (fullWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom
 				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() b");
 
 		// 7
 		if (topLeftInnerCorner = connectedTop && connectedTopRight && connectedRight && connectedBottom
 				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() c");
 
 		if (topRightInnerCorner = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
 				&& connectedBottom && connectedLeft && connectedTopLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() d");
 
 		if (bottomRightInnerCorner = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
 				&& connectedBottom && connectedBottomLeft && connectedLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() e");
 
 		if (bottomLeftInnerCorner = connectedTop && connectedRight && connectedBottomRight && connectedBottom
 				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() f");
 
 		// 5
 		if (fullLeftWall = connectedTop && connectedBottom && connectedBottomLeft && connectedLeft && connectedTopLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() g");
 
 		if (fullRightWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
 				&& connectedBottom)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() h");
 
 		if (fullTopWall = connectedTop && connectedTopRight && connectedRight && connectedLeft && connectedTopLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() i");
 
 		if (fullBottomWall = connectedRight && connectedBottomRight && connectedBottom && connectedBottomLeft
 				&& connectedLeft)

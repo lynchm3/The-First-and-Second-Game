@@ -19,6 +19,7 @@ import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.Fight;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -117,19 +118,92 @@ public class AIRoutineUtils {
 			}
 		}
 
-		if (checkInanimateObjects)
+		// ATTEMPT A
+		// THIS WAS REPLACE BY THE BELOW DUE TO SPEED, BUT CHECKING DISTANCES
+		// OVER 10 INCREMENTALLY IS THE REAL WAY TO GO.
+		// costToBest = Integer.MAX_VALUE;
+		// if (checkInanimateObjects) {
+		// long start = System.nanoTime();
+		// for (Square squareGameObjectIsOn : squaresInRange) {
+		// ArrayList<GameObject> gameObjectsOnSquare =
+		// squareGameObjectIsOn.inventory.getGameObjects();
+		// for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
+		// if (!(gameObjectOnSquare instanceof Actor) &&
+		// passesChecks(gameObjectOnSquare, clazz,
+		// fitsInInventory, mustContainObjects, mustBeUnowned,
+		// ignoreQuestObjects)) {
+		// Square square =
+		// calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObjectOnSquare,
+		// 1f);
+		// AIPath path = Game.level.activeActor.getPathTo(square);
+		// if (path != null && path.travelCost < costToBest) {
+		// result = gameObjectOnSquare;
+		// costToBest = path.travelCost;
+		// }
+		// }
+		// }
+		// }
+		// if (Game.level.activeActor instanceof CarnivoreNeutralWildAnimal)
+		// System.out.println("A Time = " + (System.nanoTime() - start));
+		//
 
-		{
-			for (Square squareGameObjectIsOn : squaresInRange) {
-				ArrayList<GameObject> gameObjectsOnSquare = squareGameObjectIsOn.inventory.getGameObjects();
-				for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
-					if (!(gameObjectOnSquare instanceof Actor) && passesChecks(gameObjectOnSquare, clazz,
-							fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
-						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObjectOnSquare, 1f);
-						AIPath path = Game.level.activeActor.getPathTo(square);
-						if (path != null && path.travelCost < costToBest) {
-							result = gameObjectOnSquare;
-							costToBest = path.travelCost;
+		// ATTEMPT B
+		// REMOVE BECAUSE IT WAS TOO SLOW, IT CHECK SO MANY PATHS AT SUCH HIGH
+		// DISTANCES
+		// if (checkInanimateObjects) {
+		// long start = System.nanoTime();
+		// for (GameObject gameObject :
+		// Game.level.inanimateObjectsOnGround.get(clazz)) {
+		//
+		// if
+		// (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn)
+		// <= maxDistance) {
+		// if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz,
+		// fitsInInventory,
+		// mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
+		// Square square =
+		// calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
+		// AIPath path = Game.level.activeActor.getPathTo(square);
+		// if (path != null && path.travelCost < costToBest) {
+		// result = gameObject;
+		// costToBest = path.travelCost;
+		// }
+		// }
+		// }
+		// }
+		// if (Game.level.activeActor instanceof CarnivoreNeutralWildAnimal)
+		// System.out.println("B Time = " + (System.nanoTime() - start));
+		// }
+
+		// Attempt C
+		// Checks objs @ 10,20 30.... etc. range
+		// Takes first one that returns a path
+		if (checkInanimateObjects) {
+			ArrayList<Integer> ranges = new ArrayList<Integer>();
+			for (int i = 0; i < maxDistance; i += 10) {
+				ranges.add(i);
+			}
+			ranges.add((int) maxDistance);
+
+			for (int i = 1; i < ranges.size(); i++) {
+				int minRange = ranges.get(i - 1);
+				int maxRange = ranges.get(i);
+				long start = System.nanoTime();
+				for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
+
+					if (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) >= minRange
+							&& Game.level.activeActor
+									.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
+						if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
+								mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
+							Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
+							AIPath path = Game.level.activeActor.getPathTo(square);
+							if (path != null) {
+								if (Game.level.activeActor instanceof CarnivoreNeutralWildAnimal)
+									System.out.println("C Time = " + (System.nanoTime() - start));
+								return gameObject;
+
+							}
 						}
 					}
 				}

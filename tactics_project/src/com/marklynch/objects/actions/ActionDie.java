@@ -50,7 +50,6 @@ public class ActionDie extends Action {
 			// Death by fire
 			GameObject body;
 			if (performer.destroyedBy instanceof EffectBurning) {
-				System.out.println("Creating ash, performer.squareGameObjectIsOn = " + performer.squareGameObjectIsOn);
 				body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
 			} else if (performer.destroyedByAction instanceof ActionSquash) {
 				body = Templates.BLOODY_PULP.makeCopy("Former " + performer.name, performer.squareGameObjectIsOn, null,

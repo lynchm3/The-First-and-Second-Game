@@ -412,11 +412,8 @@ public class Inventory {
 	}
 
 	public void replace(GameObject out, GameObject in) {
-		System.out.println("replace");
 		int index = this.remove(out);
-		System.out.println("replace index = " + index);
 		this.add(in, index);
-		System.out.println("replace done ");
 
 	}
 

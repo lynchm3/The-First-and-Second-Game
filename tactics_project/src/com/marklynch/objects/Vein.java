@@ -237,31 +237,21 @@ public class Vein extends Wall {
 		if (fullWall)
 			return;
 
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() a");
 		// 8
 		if (fullWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight && connectedBottom
 				&& connectedBottomLeft && connectedLeft && connectedTopLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() b");
 
 		// 5
 		if (fullLeftWall = connectedTop && connectedBottom && connectedBottomLeft && connectedLeft && connectedTopLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() g");
 
 		if (fullRightWall = connectedTop && connectedTopRight && connectedRight && connectedBottomRight
 				&& connectedBottom)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() h");
 
 		if (fullTopWall = connectedTop && connectedTopRight && connectedRight && connectedLeft && connectedTopLeft)
 			return;
-		if (this.squareGameObjectIsOn == Game.level.squares[281][34])
-			System.out.println("checkIfFullWall() i");
 
 		if (fullBottomWall = connectedRight && connectedBottomRight && connectedBottom && connectedBottomLeft
 				&& connectedLeft)

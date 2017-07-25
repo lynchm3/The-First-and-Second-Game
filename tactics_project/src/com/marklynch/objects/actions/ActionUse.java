@@ -25,9 +25,7 @@ public class ActionUse extends Action {
 			RequirementToMeet[] requirementsToMeet) {
 		super(actionName, "action_use.png");
 		ACTION_NAME = actionName;
-		System.out.println("requirementsToMeet.length = " + requirementsToMeet.length);
 		for (RequirementToMeet requirementToMeet : requirementsToMeet) {
-			System.out.println("requirementToMeet.getText() = " + requirementToMeet.getText());
 			ACTION_NAME += " " + requirementToMeet.getText();
 		}
 		this.actionName = ACTION_NAME;

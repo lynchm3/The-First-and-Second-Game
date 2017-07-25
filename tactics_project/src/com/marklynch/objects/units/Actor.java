@@ -886,10 +886,6 @@ public class Actor extends GameObject {
 	@Override
 	public void update(int delta) {
 
-		if (this instanceof HerbivoreWildAnimal) {
-			System.out.println("Actor.update() " + this);
-		}
-
 		clearActions();
 
 		if (this.remainingHealth > 0) {
