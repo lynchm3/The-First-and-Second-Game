@@ -13,7 +13,7 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.RockGolem;
-import com.marklynch.objects.units.SmallNeutralWildAnimal;
+import com.marklynch.objects.units.TinyNeutralWildAnimal;
 
 public class ActionMove extends Action {
 
@@ -72,7 +72,7 @@ public class ActionMove extends Action {
 		if (actorInTheWay == null) {
 			move(actor, squareToMoveTo);
 
-		} else if (performer == Game.level.player && actorInTheWay instanceof SmallNeutralWildAnimal) {
+		} else if (performer == Game.level.player && actorInTheWay instanceof TinyNeutralWildAnimal) {
 
 			move(actor, squareToMoveTo);
 			new ActionSquash(performer, actorInTheWay, true).perform();

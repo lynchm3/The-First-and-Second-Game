@@ -45,8 +45,12 @@ public class Game {
 	// public static int playerStartPosY = 52;
 
 	// Morts Mine
-	public static int playerStartPosX = 282;
-	public static int playerStartPosY = 46;
+	// public static int playerStartPosX = 282;
+	// public static int playerStartPosY = 46;
+
+	// Beside the fox
+	public static int playerStartPosX = 231;
+	public static int playerStartPosY = 81;
 
 	// Farm
 	// public static int playerStartPosX = 30;

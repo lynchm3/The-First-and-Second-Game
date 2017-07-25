@@ -1,6 +1,6 @@
 package com.marklynch.objects.units;
 
-import com.marklynch.ai.routines.AIRoutineForNeutralWildAnimal;
+import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
@@ -9,11 +9,11 @@ import com.marklynch.objects.Inventory;
 
 import mdesl.graphics.Color;
 
-public class NeutralWildAnimal extends Actor {
+public class HerbivoreWildAnimal extends Actor {
 
 	public Area area;
 
-	public NeutralWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
+	public HerbivoreWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
 			int sight, Bed bed, Inventory inventory, boolean showInventory, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
@@ -31,13 +31,13 @@ public class NeutralWildAnimal extends Actor {
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
 
 		this.area = area;
-		aiRoutine = new AIRoutineForNeutralWildAnimal(this, area);
+		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this, area);
 	}
 
 	@Override
 	public void postLoad1() {
 		super.postLoad1();
-		aiRoutine = new AIRoutineForNeutralWildAnimal(this, area);
+		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this, area);
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public class NeutralWildAnimal extends Actor {
 		super.postLoad2();
 	}
 
-	public NeutralWildAnimal makeCopy(String name, Square square, Faction faction, Bed bed, Area area) {
+	public HerbivoreWildAnimal makeCopy(String name, Square square, Faction faction, Bed bed, Area area) {
 
-		NeutralWildAnimal actor = new NeutralWildAnimal(name, title, actorLevel, (int) totalHealth, strength, dexterity,
+		HerbivoreWildAnimal actor = new HerbivoreWildAnimal(name, title, actorLevel, (int) totalHealth, strength, dexterity,
 				intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(),
 				showInventory, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen,
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,

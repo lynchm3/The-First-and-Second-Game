@@ -8,13 +8,14 @@ import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
+import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.Farmer;
+import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.Hunter;
-import com.marklynch.objects.units.NeutralWildAnimal;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.RockGolem;
-import com.marklynch.objects.units.SmallNeutralWildAnimal;
+import com.marklynch.objects.units.TinyNeutralWildAnimal;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
@@ -41,17 +42,22 @@ public class Templates {
 			0f, 0f, 0f, 0f, 90f, null, null, 40, 96, 40, 96, 40, 96, 40, 96);
 
 	// Friendly Wild animals
-	public static final SmallNeutralWildAnimal RAT = new SmallNeutralWildAnimal("Rat", "Rat", 1, 1, 0, 0, 0, 0,
-			"rat.png", null, 1, 10, null, new Inventory(), false, false, true, false, false, 1, 0.25f, 0f, 48f, 1f, 1f,
-			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
+	public static final TinyNeutralWildAnimal RAT = new TinyNeutralWildAnimal("Rat", "Rat", 1, 1, 0, 0, 0, 0, "rat.png",
+			null, 1, 10, null, new Inventory(), false, false, true, false, false, 1, 0.25f, 0f, 48f, 1f, 1f, 1f, null,
+			0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
 
-	public static final NeutralWildAnimal RABBIT = new NeutralWildAnimal("Rabbit", "Rabbit", 1, 4, 0, 0, 0, 0,
+	public static final HerbivoreWildAnimal RABBIT = new HerbivoreWildAnimal("Rabbit", "Rabbit", 1, 4, 0, 0, 0, 0,
 			"rabbit.png", null, 1, 10, null, new Inventory(), false, false, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f,
 			1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
-	public static final SmallNeutralWildAnimal BABY_RABBIT = new SmallNeutralWildAnimal("Baby Rabbit", "Baby Rabbit", 1,
+
+	public static final TinyNeutralWildAnimal BABY_RABBIT = new TinyNeutralWildAnimal("Baby Rabbit", "Baby Rabbit", 1,
 			10, 0, 0, 0, 0, "baby_rabbit.png", null, 1, 10, null, new Inventory(), false, false, true, false, false,
 			0.25f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0,
 			0, 0, 0, null);
+
+	public static final CarnivoreNeutralWildAnimal FOX = new CarnivoreNeutralWildAnimal("Fox", "Fox", 1, 10, 0, 0, 0, 0,
+			"fox.png", null, 1, 10, null, new Inventory(), false, false, true, false, false, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
+			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
 
 	// Monsters
 	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,

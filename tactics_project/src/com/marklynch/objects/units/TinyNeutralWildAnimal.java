@@ -14,9 +14,9 @@ import com.marklynch.objects.actions.ActionSquash;
 
 import mdesl.graphics.Color;
 
-public class SmallNeutralWildAnimal extends NeutralWildAnimal {
+public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 
-	public SmallNeutralWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
+	public TinyNeutralWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
 			int sight, Bed bed, Inventory inventory, boolean showInventory, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
@@ -63,9 +63,9 @@ public class SmallNeutralWildAnimal extends NeutralWildAnimal {
 	}
 
 	@Override
-	public SmallNeutralWildAnimal makeCopy(String name, Square square, Faction faction, Bed bed, Area area) {
+	public TinyNeutralWildAnimal makeCopy(String name, Square square, Faction faction, Bed bed, Area area) {
 
-		SmallNeutralWildAnimal actor = new SmallNeutralWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
+		TinyNeutralWildAnimal actor = new TinyNeutralWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
 				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
 				inventory.makeCopy(), showInventory, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,

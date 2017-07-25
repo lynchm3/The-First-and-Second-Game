@@ -125,7 +125,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		{
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfAttack(AggressiveWildAnimal.class, 0, false, true, false, false, false,
+			target = AIRoutineUtils.getNearestForPurposeOfAttacking(AggressiveWildAnimal.class, 0, false, true, false, false, false,
 					true);
 			if (target == null) {
 				if (this.actor.inventory.contains(Junk.class)) {

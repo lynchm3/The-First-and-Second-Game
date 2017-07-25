@@ -5,10 +5,10 @@ import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.NeutralWildAnimal;
+import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.weapons.Weapon;
 
-public class AIRoutineForNeutralWildAnimal extends AIRoutine {
+public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
 	GameObject target;
 	// Square squareToMoveTo;
@@ -27,10 +27,10 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
 
-	NeutralWildAnimal friendlyWildAnimal;
+	HerbivoreWildAnimal friendlyWildAnimal;
 	Square targetSquare = null;
 
-	public AIRoutineForNeutralWildAnimal(NeutralWildAnimal actor, Area area) {
+	public AIRoutineForHerbivoreWildAnimal(HerbivoreWildAnimal actor, Area area) {
 		super(actor);
 		if (area != null) {
 			keepInBounds = true;
@@ -87,8 +87,8 @@ public class AIRoutineForNeutralWildAnimal extends AIRoutine {
 		System.out.println("AIRoutineForNeutralWildAnimal d");
 
 		// 1. eat loot on ground
-		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 5f, true, false, true, false,
-				false, false);
+		GameObject loot = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 5f, true, false, true,
+				false, false, false);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;

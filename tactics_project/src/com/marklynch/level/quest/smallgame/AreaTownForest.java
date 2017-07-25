@@ -52,6 +52,8 @@ public class AreaTownForest {
 				Templates.BABY_RABBIT.makeCopy("Baby Rabbit", Game.level.squares[200][78], Game.level.factions.get(2),
 						null, area));
 
+		Templates.FOX.makeCopy("Fox", Game.level.squares[230][78], Game.level.factions.get(2), null, area);
+
 		Templates.TREE.makeCopy(Game.level.squares[112][24], null);
 		Templates.TREE.makeCopy(Game.level.squares[112][32], null);
 		Templates.TREE.makeCopy(Game.level.squares[112][70], null);

@@ -140,7 +140,7 @@ public class AIRoutineUtils {
 
 	}
 
-	public static GameObject getNearestForPurposeOfAttack(Class clazz, float maxDistance, boolean fitsInInventory,
+	public static GameObject getNearestForPurposeOfAttacking(Class clazz, float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
 			boolean ignoreQuestObjects) {
 
