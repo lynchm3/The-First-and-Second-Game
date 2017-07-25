@@ -133,8 +133,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (widthRatio < 1f && heightRatio < 1f) {
 			float drawOffsetXMax = Game.SQUARE_WIDTH - width;
 			float drawOffsetYMax = Game.SQUARE_HEIGHT - height;
-			drawOffsetX = (float) (Math.random() * drawOffsetXMax);
-			drawOffsetY = (float) (Math.random() * drawOffsetYMax);
+			this.drawOffsetX = (float) (Math.random() * drawOffsetXMax);
+			this.drawOffsetY = (float) (Math.random() * drawOffsetYMax);
 		} else {
 			if (this instanceof Weapon)
 				drawOffsetX = Game.HALF_SQUARE_WIDTH - width / 2;
