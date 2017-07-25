@@ -72,7 +72,7 @@ public class ActionMove extends Action {
 		if (actorInTheWay == null) {
 			move(actor, squareToMoveTo);
 
-		} else if (actorInTheWay instanceof SmallNeutralWildAnimal) {
+		} else if (performer == Game.level.player && actorInTheWay instanceof SmallNeutralWildAnimal) {
 
 			move(actor, squareToMoveTo);
 			new ActionSquash(performer, actorInTheWay, true).perform();
