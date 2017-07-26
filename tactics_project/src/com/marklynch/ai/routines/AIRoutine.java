@@ -3,6 +3,7 @@ package com.marklynch.ai.routines;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Crime;
@@ -340,10 +341,13 @@ public class AIRoutine {
 	public boolean runEscapeCooldown(boolean shout) {
 
 		// DOORWAYS are my biggest issue here.
-		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BEING_A_CHICKEN;
-		if (shout) {
+		if (Game.level.activeActor instanceof Pig)
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_BEING_A_CHICKEN;
+		else if (shout) {
 			new ActionShoutForHelp(actor, escapeCooldownAttacker).perform();
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
+		} else {
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_RUNNING_AWAY;
 		}
 
 		// Move Away From Last Square;
