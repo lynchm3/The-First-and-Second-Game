@@ -46,32 +46,16 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.thoughtBubbleImageTexture = null;
-		createSearchLocationsBasedOnSounds(Weapon.class);
-		createSearchLocationsBasedOnVisibleAttackers();
 
 		// In bed
+		System.out.println("actor.squareGameObjectIsOn = " + actor.squareGameObjectIsOn);
+		// System.out.println("actor.in = " + actor.invento);
 		if (actor.squareGameObjectIsOn == null)
 			return;
 
-		// Go to bed
-		if (this.actor.bed != null) {
-			if (actor.name.equals("Female Rabbit"))
-				System.out.println("bed != null a");
-			if (actor.straightLineDistanceTo(actor.bed.squareGameObjectIsOn) <= 1) {
-				actor.bed.inventory.add(actor);
-			}
+		createSearchLocationsBasedOnSounds(Weapon.class);
+		createSearchLocationsBasedOnVisibleAttackers();
 
-			if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(this.actor.bed))
-				return;
-
-			// boolean goingToSleep = AIRoutineUtils.sleep();
-			// if (!goingToSleep) {
-			// AIRoutineUtils.moveTowardsTargetToBeOn(this.actor.bed);
-			// } else {
-			//
-			// }
-
-		}
 		// if (actor.bed != null) {
 		// if (actor.name.equals("Male Rabbit"))
 		// System.out.println("bed != null a");

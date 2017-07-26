@@ -25,7 +25,6 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Key;
@@ -260,7 +259,7 @@ public class Actor extends GameObject {
 		if (bedGUID != null) {
 			for (GameObject gameObject : Game.level.inanimateObjectsOnGround) {
 				if (bedGUID.equals(gameObject.guid)) {
-					this.bed = (GameObject) gameObject;
+					this.bed = gameObject;
 				}
 			}
 		}
@@ -816,7 +815,7 @@ public class Actor extends GameObject {
 	@Override
 	public void drawUI() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false)
+		if (this.squareGameObjectIsOn == null || this.squareGameObjectIsOn.visibleToPlayer == false)
 			return;
 		super.drawUI();
 	}
@@ -824,7 +823,7 @@ public class Actor extends GameObject {
 	@Override
 	public void drawStaticUI() {
 
-		if (this.squareGameObjectIsOn.visibleToPlayer == false)
+		if (this.squareGameObjectIsOn == null || this.squareGameObjectIsOn.visibleToPlayer == false)
 			return;
 
 	}
@@ -1132,7 +1131,7 @@ public class Actor extends GameObject {
 
 		super.attackedBy(attacker, action);
 
-		removeHidingPlacesFromAttackers();
+		removeHidingPlacesFromAttackersList();
 
 		if (attacker instanceof Actor) {
 
@@ -1154,7 +1153,7 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public void removeHidingPlacesFromAttackers() {
+	public void removeHidingPlacesFromAttackersList() {
 
 		ArrayList<GameObject> hidingPlacesToRemove = new ArrayList<GameObject>();
 		for (GameObject attacker : this.getAttackers()) {

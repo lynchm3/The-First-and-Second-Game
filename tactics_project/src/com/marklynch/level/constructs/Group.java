@@ -83,7 +83,7 @@ public class Group {
 		// AI move towards leader
 		if (actor == leader) {
 			return false;
-		} else {
+		} else if (leader.squareGameObjectIsOn != null) {
 
 			float maxDistanceFromLeader = 2;
 			if (members.size() > 6)
@@ -135,6 +135,7 @@ public class Group {
 			actor.activityDescription = leader.activityDescription;
 			return true;
 		}
+		return false;
 	}
 
 	public void addAttacker(GameObject actor) {

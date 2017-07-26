@@ -25,6 +25,7 @@ import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.utils.MapUtil;
@@ -222,7 +223,7 @@ public class AIRoutine {
 
 		// If not targeting a hiding place, hiding places from list
 		if (!(target instanceof HidingPlace)) {
-			actor.removeHidingPlacesFromAttackers();
+			actor.removeHidingPlacesFromAttackersList();
 		}
 
 		// Return whether we did anything or not
@@ -235,7 +236,7 @@ public class AIRoutine {
 	public boolean runGetHelpRoutine() {
 		boolean moved = false;
 
-		actor.removeHidingPlacesFromAttackers();
+		actor.removeHidingPlacesFromAttackersList();
 		if (this.actor.hasAttackers()) {
 
 			// sort by best attack option (walk distance, dmg you can do)
@@ -287,7 +288,7 @@ public class AIRoutine {
 	public boolean runEscapeRoutine() {
 		boolean canSeeAttacker = false;
 
-		actor.removeHidingPlacesFromAttackers();
+		actor.removeHidingPlacesFromAttackersList();
 
 		// 1. Fighting
 		if (this.actor.hasAttackers()) {
@@ -304,7 +305,12 @@ public class AIRoutine {
 
 					// Try to attack the preference 1 target
 					if (attackerToRunFrom != null) {
-						AIRoutineUtils.escapeFromAttacker(attackerToRunFrom);
+						if (actor instanceof HerbivoreWildAnimal && actor.bed != null) {
+							AIRoutineUtils.escapeFromAttackerToBurrow(attackerToRunFrom);
+
+						} else {
+							AIRoutineUtils.escapeFromAttacker(attackerToRunFrom);
+						}
 					}
 
 					actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_ESCAPE, actor,
@@ -378,6 +384,8 @@ public class AIRoutine {
 		ArrayList<GameObject> gameObjectsToStopSearchingFor = new ArrayList<GameObject>();
 		for (GameObject actorToSearchFor : this.actor.investigationsMap.keySet()) {
 			if (actorToSearchFor.remainingHealth <= 0) {
+				gameObjectsToStopSearchingFor.add(actorToSearchFor);
+			} else if (actorToSearchFor.squareGameObjectIsOn == null) {
 				gameObjectsToStopSearchingFor.add(actorToSearchFor);
 			} else if (this.actor.canSeeGameObject(actorToSearchFor)) {
 				gameObjectsToStopSearchingFor.add(actorToSearchFor);
@@ -807,6 +815,7 @@ public class AIRoutine {
 	}
 
 	public boolean squareInBounds(Square square) {
+
 		// Return true if there are no bounds
 		if (keepInBounds == false)
 			return true;

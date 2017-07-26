@@ -422,6 +422,23 @@ public class AIRoutineUtils {
 		}
 	}
 
+	public static boolean escapeFromAttackerToBurrow(GameObject target) {
+
+		// Go to bed
+		if (Game.level.activeActor.bed != null) {
+			if (Game.level.activeActor.straightLineDistanceTo(Game.level.activeActor.bed.squareGameObjectIsOn) <= 1) {
+				Game.level.activeActor.squareGameObjectIsOn.inventory.remove(Game.level.activeActor);
+				Game.level.activeActor.bed.inventory.add(Game.level.activeActor);
+				return true;
+			}
+
+			if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(Game.level.activeActor.bed))
+				return true;
+		}
+
+		return false;
+	}
+
 	public static boolean escapeFromAttacker(GameObject target) {
 
 		boolean moved = false;
@@ -616,6 +633,9 @@ public class AIRoutineUtils {
 	}
 
 	public static AIPath getBestPathToAttackTarget(GameObject target) {
+
+		if (target.squareGameObjectIsOn == null)
+			return null;
 
 		Vector<Float> idealWeaponDistances = Game.level.activeActor.calculateIdealDistanceFromTargetToAttack(target);
 
