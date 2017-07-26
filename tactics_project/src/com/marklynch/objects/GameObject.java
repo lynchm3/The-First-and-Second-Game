@@ -285,7 +285,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 			}
 
-			new ActionDie(this, squareGameObjectIsOn).perform();
+			if (this instanceof Actor)
+				new ActionDie(this, squareGameObjectIsOn).perform();
+			else
+				Game.level.actionQueueForInanimateObjects.add(new ActionDie(this, squareGameObjectIsOn));
 
 			return true;
 		}

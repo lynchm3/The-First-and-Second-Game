@@ -10,6 +10,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.RockGolem;
 import com.marklynch.ui.ActivityLog;
 
@@ -114,18 +115,20 @@ public class ActionDie extends Action {
 			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
 			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
 			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
-		} else {
+		} else if (performer instanceof Actor) {
 			// add a carcass
 
-			// Death by fire
 			GameObject body;
 			if (performer.destroyedBy instanceof EffectBurning) {
+				// Death by fire
 				body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
 			} else if (performer.destroyedByAction instanceof ActionSquash) {
+				// Deat by squashing
 				body = Templates.BLOODY_PULP.makeCopy(performer.squareGameObjectIsOn, null);
 				body.name = "Former " + performer.name;
 				body.weight = performer.weight;
-			} else if (performer instanceof AggressiveWildAnimal) {
+			} else if (performer instanceof AggressiveWildAnimal || performer instanceof HerbivoreWildAnimal) {
+				// Dead animal
 				Templates.BLOOD.makeCopy(performer.squareGameObjectIsOn, null);
 				body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
 						performer.weight);
@@ -141,6 +144,13 @@ public class ActionDie extends Action {
 				body.inventory.add(gameObjectInInventory);
 				gameObjectInInventory.owner = null;
 			}
+		} else {
+			// GameObjects
+			if (performer.destroyedBy instanceof EffectBurning) {
+				// Death by fire
+				Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
+			}
+
 		}
 	}
 
