@@ -52,8 +52,9 @@ public class ActionDie extends Action {
 			if (performer.destroyedBy instanceof EffectBurning) {
 				body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
 			} else if (performer.destroyedByAction instanceof ActionSquash) {
-				body = Templates.BLOODY_PULP.makeCopy("Former " + performer.name, performer.squareGameObjectIsOn, null,
-						performer.weight);
+				body = Templates.BLOODY_PULP.makeCopy(performer.squareGameObjectIsOn, null);
+				body.name = "Former " + performer.name;
+				body.weight = performer.weight;
 			} else if (performer instanceof AggressiveWildAnimal) {
 				body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
 						performer.weight);

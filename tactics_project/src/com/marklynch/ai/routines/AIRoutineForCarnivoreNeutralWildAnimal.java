@@ -3,6 +3,7 @@ package com.marklynch.ai.routines;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
@@ -95,7 +96,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 		// 1. attack small animal
 		GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfAttacking(HerbivoreWildAnimal.class,
-				100f, false, true, false, false, true, true);
+				50f, false, true, false, false, true, true);
 		if (smallWildAnimal != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			this.actor.thoughtBubbleImageTexture = smallWildAnimal.imageTexture;
@@ -107,15 +108,30 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 			return;
 		}
 
-		// 2. eat food on ground
-		GameObject loot = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 5f, true, false, true,
-				false, false, false);
-		if (loot != null) {
+		// 2. eat corpse on ground
+		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Corpse.class, 5f, true, false,
+				true, false, false, false);
+		if (corpse != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
-			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
-			boolean pickedUpLoot = AIRoutineUtils.eatTarget(loot);
-			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
+			this.actor.thoughtBubbleImageTexture = corpse.imageTexture;
+			boolean ateCorpse = AIRoutineUtils.eatTarget(corpse);
+			if (!ateCorpse) {
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(corpse);
+			} else {
+
+			}
+			return;
+		}
+
+		// 3. eat food on ground
+		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 5f, true, false, true,
+				false, false, false);
+		if (food != null) {
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
+			this.actor.thoughtBubbleImageTexture = food.imageTexture;
+			boolean ateFood = AIRoutineUtils.eatTarget(food);
+			if (!ateFood) {
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(food);
 			} else {
 
 			}

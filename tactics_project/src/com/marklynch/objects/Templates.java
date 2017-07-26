@@ -245,18 +245,19 @@ public class Templates {
 			0.5f, false, 80f, 0f, 0f, 0f, 10f);
 
 	// Corpses
-	public static final Corpse CARCASS = new Corpse("Carcass", 5, "carcass.png", null, new Inventory(), false, true,
+	public static final Corpse CARCASS = new Corpse("Carcass", 50, "carcass.png", null, new Inventory(), false, true,
 			false, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f,
 			null);
-	public static final Corpse CORPSE = new Corpse("Carcass", 5, "carcass.png", null, new Inventory(), false, true,
+	public static final Corpse CORPSE = new Corpse("Carcass", 50, "carcass.png", null, new Inventory(), false, true,
 			false, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f,
 			null);
-	public static final Corpse ASH = new Corpse("Ash", 5, "ash.png", null, new Inventory(), false, true, false, true,
-			false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, null);
+	public static final GameObject ASH = new GameObject("Ash", 50, "ash.png", null, new Inventory(), false, true, false,
+			true, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 0f,
+			null);
 
-	public static final Corpse BLOODY_PULP = new Corpse("Bloody Pulp", 5, "blood.png", null, new Inventory(), false,
-			true, false, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-			0f, null);
+	public static final GameObject BLOODY_PULP = new GameObject("Bloody Pulp", 50, "blood.png", null, new Inventory(),
+			false, true, false, true, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
+			0f, 0f, 0f, 0f, null);
 
 	// Food?
 	public static final MeatChunk MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(),
