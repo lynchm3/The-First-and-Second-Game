@@ -42,11 +42,18 @@ public class ActionDie extends Action {
 		createCorpse();
 
 		// Remove from draw/update
-		performer.squareGameObjectIsOn.inventory.remove(performer);
+		if (performer instanceof Actor) {
+			if (performer.squareGameObjectIsOn != null)
+				performer.squareGameObjectIsOn.inventory.remove(performer);
+			else if (performer.inventoryThatHoldsThisObject != null)
+				performer.inventoryThatHoldsThisObject.remove(performer);
+		}
+
 		// this.faction.actors.remove(this);
 		if (performer instanceof Actor) {
 			((Actor) performer).actionsPerformedThisTurn.add(this);
 		}
+
 		if (sound != null)
 			sound.play();
 	}
@@ -71,22 +78,28 @@ public class ActionDie extends Action {
 		if (performer instanceof RockGolem) {
 
 			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer.destroyedBy, " broke ", performer }));
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer.destroyedBy, " broke ", performer, this.image }));
 
 		} else if (performer instanceof Actor && performer.destroyedBy instanceof EffectBurning) {
 
 			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "burned to death" }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "burned to death", this.image }));
+		} else if (performer.destroyedBy instanceof EffectBurning) {
+
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "burned down", this.image }));
 		} else if (performer instanceof Actor) {
 
 			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer.destroyedBy, " killed ", performer }));
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer.destroyedBy, " killed ", performer, this.image }));
 
 		} else {
 
 			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer.destroyedBy, " destroyed a ", performer }));
+				Game.level.logOnScreen(new ActivityLog(
+						new Object[] { performer.destroyedBy, " destroyed a ", performer, this.image }));
 
 		}
 	}
