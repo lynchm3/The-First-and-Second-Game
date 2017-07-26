@@ -13,7 +13,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEat;
 import com.marklynch.objects.actions.ActionHideInside;
@@ -424,23 +424,21 @@ public class AIRoutineUtils {
 		}
 	}
 
-	public static boolean escapeFromAttackerToBurrow(GameObject target) {
+	public static boolean escapeFromAttackerToBurrow(GameObject attacker) {
 
-		// Go to bed
-		if (Game.level.activeActor.bed != null) {
-			if (Game.level.activeActor.straightLineDistanceTo(Game.level.activeActor.bed.squareGameObjectIsOn) <= 1) {
+		// Go to burrow and hide if can
+		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(
+				SmallHidingPlace.class, 20f, false, false, true, false, false, false);
+		if (smallHidingPlace != null) {
 
-				Action action = new ActionHideInside(Game.level.activeActor, Game.level.activeActor.bed);
-				System.out.println("action = " + action);
-				System.out.println("action.enabled = " + action.enabled);
-				action.perform();
-				return true;
+			if (Game.level.activeActor.straightLineDistanceTo(smallHidingPlace.squareGameObjectIsOn) < 2) {
+				new ActionHideInside(Game.level.activeActor, smallHidingPlace).perform();
+			} else {
+
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(smallHidingPlace);
 			}
-
-			if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(Game.level.activeActor.bed))
-				return true;
+			return true;
 		}
-
 		return false;
 	}
 

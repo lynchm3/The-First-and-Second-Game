@@ -335,9 +335,9 @@ public class Templates {
 			true, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0.5f,
 			null);
 
-	public static final Searchable BURROW = new Searchable("Burrow", 5, "burrow.png", null, new Inventory(), false,
-			false, false, false, false, true, false, 0.5f, 0.5f, 16f, 16f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f,
-			0f, 0f, 0f, 0f, null, new Effect[] {});
+	public static final SmallHidingPlace BURROW = new SmallHidingPlace("Burrow", 5, "burrow.png", null, new Inventory(),
+			false, false, false, false, false, true, false, 0.5f, 0.5f, 16f, 16f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
+			100f, 0f, 0f, 0f, 0f, null, new Effect[] {});
 
 	// BURROW
 	// TREE

@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -16,7 +17,7 @@ public class ActionHideInside extends Action {
 
 	// public ActionMove actionMove;
 
-	public ActionHideInside(Actor performer, GameObject object) {
+	public ActionHideInside(Actor performer, SmallHidingPlace object) {
 		super(ACTION_NAME, "action_hide.png");
 		this.performer = performer;
 		this.object = object;

@@ -305,9 +305,9 @@ public class AIRoutine {
 
 					// Try to attack the preference 1 target
 					if (attackerToRunFrom != null) {
-						if (actor instanceof HerbivoreWildAnimal && actor.bed != null) {
-							AIRoutineUtils.escapeFromAttackerToBurrow(attackerToRunFrom);
-
+						if (actor instanceof HerbivoreWildAnimal
+								&& AIRoutineUtils.escapeFromAttackerToBurrow(attackerToRunFrom)) {
+							// Successfully ran towards burrow
 						} else {
 							AIRoutineUtils.escapeFromAttacker(attackerToRunFrom);
 						}
