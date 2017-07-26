@@ -37,9 +37,14 @@ public class ActionHideInside extends Action {
 
 		// if (Game.level.shouldLog(performer))
 		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", "" + object }));
+		System.out.println("IN ACTION object = " + object);
+		System.out.println("IN ACTION object.inventory = " + object.inventory);
+		System.out.println("IN ACTION object.inventory.parent = " + object.inventory.parent);
 
 		performer.squareGameObjectIsOn.inventory.remove(performer);
 		object.inventory.add(performer);
+		System.out.println("IN ACTION actor.inventoryThatHoldsThisObject.parent = "
+				+ performer.inventoryThatHoldsThisObject.parent);
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

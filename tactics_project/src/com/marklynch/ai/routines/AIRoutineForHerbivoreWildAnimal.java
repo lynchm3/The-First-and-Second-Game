@@ -52,16 +52,15 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		this.actor.thoughtBubbleImageTexture = null;
 
 		// In bed
-		System.out.println("actor.squareGameObjectIsOn = " + actor.squareGameObjectIsOn);
+		// System.out.println("actor.squareGameObjectIsOn = " +
+		// actor.squareGameObjectIsOn);
 		// System.out.println("actor.in = " + actor.invento);
 		if (actor.squareGameObjectIsOn == null) {
-			System.out.println("actor = " + actor);
-			System.out.println("actor.inventoryThatHoldsThisObject= " + actor.inventoryThatHoldsThisObject);
 			System.out.println(
 					"actor.inventoryThatHoldsThisObject.parent = " + actor.inventoryThatHoldsThisObject.parent);
 			if (actor.inventoryThatHoldsThisObject.parent instanceof SmallHidingPlace) {
 				hidingCount++;
-				if (hidingCount >= 10) {
+				if (hidingCount >= 50) {
 					new ActionStopHidingInside(actor, (SmallHidingPlace) actor.inventoryThatHoldsThisObject.parent)
 							.perform();
 					hidingCount = 0;

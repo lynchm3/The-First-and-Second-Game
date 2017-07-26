@@ -8,6 +8,7 @@ import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -356,6 +357,9 @@ public class Inventory {
 	public void add(GameObject gameObject, int index) {
 		if (!gameObjects.contains(gameObject)) {
 
+			if (gameObject instanceof HerbivoreWildAnimal)
+				System.out.println("ADD this.parent = " + this.parent + ", gameObject = " + gameObject);
+
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null) {
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
@@ -376,6 +380,10 @@ public class Inventory {
 			// Add to this inventory's list of game objects
 			gameObjects.add(gameObject);
 			gameObject.inventoryThatHoldsThisObject = this;
+
+			if (gameObject instanceof HerbivoreWildAnimal)
+				System.out.println("ADD this.parent = " + this.parent + ", gameObject.inventoryThatHoldsThisObject = "
+						+ gameObject.inventoryThatHoldsThisObject);
 			// this.sort(inventorySortBy);
 
 			// pick up date for sorting by newest
