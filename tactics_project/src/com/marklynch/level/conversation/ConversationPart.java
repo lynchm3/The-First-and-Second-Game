@@ -2,6 +2,7 @@ package com.marklynch.level.conversation;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -29,6 +30,20 @@ public class ConversationPart {
 	}
 
 	public void drawStaticUI1() {
+
+		if (talker.group != null) {
+			for (Actor actor : talker.group.getMembers()) {
+
+				float offsetX = -(System.identityHashCode(actor) % Game.halfWindowHeight);// -
+																							// 128f;//
+																							// -64;
+				System.out.println("offsetX = " + offsetX);
+				float offsetY = 0;
+				TextureUtils.drawTexture(actor.imageTexture, 1.0f, 0 + offsetX, Game.halfWindowHeight + offsetX,
+						Game.halfWindowHeight + offsetY, Game.windowHeight + offsetY);
+
+			}
+		}
 
 		// Speaker image
 		TextureUtils.drawTexture(talker.imageTexture, 1.0f, 0, Game.halfWindowHeight, Game.halfWindowHeight,
