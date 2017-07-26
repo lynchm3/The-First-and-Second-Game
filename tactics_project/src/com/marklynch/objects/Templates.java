@@ -259,6 +259,10 @@ public class Templates {
 			false, true, false, true, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
 			0f, 0f, 0f, 0f, null);
 
+	public static final GameObject BLOOD = new GameObject("Bloody", 50, "blood.png", null, new Inventory(), false, true,
+			false, true, false, false, true, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
+			0f, null);
+
 	// Food?
 	public static final MeatChunk MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(),
 			false, true, true, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,

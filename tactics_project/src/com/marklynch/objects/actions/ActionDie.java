@@ -56,9 +56,11 @@ public class ActionDie extends Action {
 				body.name = "Former " + performer.name;
 				body.weight = performer.weight;
 			} else if (performer instanceof AggressiveWildAnimal) {
+				Templates.BLOOD.makeCopy(performer.squareGameObjectIsOn, null);
 				body = Templates.CARCASS.makeCopy(performer.name + " carcass", performer.squareGameObjectIsOn, null,
 						performer.weight);
 			} else {
+				Templates.BLOOD.makeCopy(performer.squareGameObjectIsOn, null);
 				body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
 						performer.weight);
 			}
