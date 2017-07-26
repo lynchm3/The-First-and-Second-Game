@@ -3,7 +3,6 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.units.Actor;
@@ -94,8 +93,7 @@ public class Tree extends GameObject {
 			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();
 			objectsToDropFromHit.addAll(this.inventory.gameObjects);
 			for (GameObject objectToDrop : objectsToDropFromHit) {
-				Level.actionQueueForInanimateObjects
-						.add(new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop));
+				new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop).perform();
 				objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
 			}
 			healthWhenLastDroppedFruit = this.remainingHealth;
@@ -129,8 +127,7 @@ public class Tree extends GameObject {
 		}
 
 		for (GameObject objectToDrop : objectsToDropRandomly) {
-			Level.actionQueueForInanimateObjects
-					.add(new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop));
+			new ActionDropSpecificItem(this, this.squareGameObjectIsOn, objectToDrop);
 			objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
 			// - 32;
 		}

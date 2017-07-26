@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -64,7 +65,10 @@ public class ActionDropSpecificItem extends Action {
 			Searchable searchable = (Searchable) square.inventory.getGameObjectOfClass(Searchable.class);
 			searchable.inventory.add(object);
 		} else {
-			square.inventory.add(object);
+			if (performer instanceof Actor)
+				square.inventory.add(object);
+			else
+				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, square));
 		}
 
 		if (performer instanceof Actor)

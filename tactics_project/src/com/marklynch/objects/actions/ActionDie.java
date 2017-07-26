@@ -7,6 +7,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
@@ -148,7 +149,8 @@ public class ActionDie extends Action {
 			// GameObjects
 			if (performer.destroyedBy instanceof EffectBurning) {
 				// Death by fire
-				Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
+				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
+						Templates.ASH.makeCopy(null, null), performer.squareGameObjectIsOn));
 			}
 
 		}

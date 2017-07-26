@@ -20,6 +20,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.SquareInventory;
@@ -81,6 +82,7 @@ public class Level {
 
 	public transient boolean ended = false;
 	public Texture textureUndiscovered;
+	public ArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new ArrayList<InanimateObjectToAddOrRemove>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -683,7 +685,8 @@ public class Level {
 
 	// To stop java.util.ConcurrentModificationException in inanimate object
 	// loop
-	public static ArrayList<Action> actionQueueForInanimateObjects = new ArrayList<Action>();
+	// public static ArrayList<Action> actionQueueForInanimateObjects = new
+	// ArrayList<Action>();
 
 	public void update(int delta) {
 
@@ -853,10 +856,14 @@ public class Level {
 			for (GameObject inanimateObject : inanimateObjectsOnGround) {
 				inanimateObject.update(0);
 			}
-			for (Action action : actionQueueForInanimateObjects) {
-				action.perform();
+
+			for (InanimateObjectToAddOrRemove inanimateObjectToAdd : inanimateObjectsToAdd) {
+
+				GameObject gameObject = inanimateObjectToAdd.gameObject;
+				inanimateObjectToAdd.square.inventory.add(gameObject);
+				inanimateObjectsOnGround.add(gameObject);
 			}
-			actionQueueForInanimateObjects.clear();
+			inanimateObjectsToAdd.clear();
 
 			ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 			for (GameObject inanimateObject : inanimateObjectsOnGround) {
