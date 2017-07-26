@@ -32,7 +32,6 @@ import com.marklynch.objects.Openable;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionMove;
@@ -570,7 +569,7 @@ public class Actor extends GameObject {
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 		if (remainingHealth <= 0) {
 			super.checkIfDestroyed(attacker, action);
-			new ActionDie(this, squareGameObjectIsOn).perform();
+			this.faction.checkIfDestroyed();
 			for (Crime crime : crimesPerformedInLifetime) {
 				for (Actor witness : crime.witnesses) {
 					witness.crimesWitnessed.remove(this);
@@ -919,7 +918,7 @@ public class Actor extends GameObject {
 		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToSell : gameObjectsToSell) {
 			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
-				if (squareGameObjectIsOn.visibleToPlayer)
+				if (Game.level.shouldLog(Game.level.activeActor))
 					Game.level.logOnScreen(
 							new ActivityLog(new Object[] { this, " sold ", gameObjectToSell, " to ", gameObject }));
 				this.inventory.remove(gameObjectToSell);
@@ -1131,8 +1130,9 @@ public class Actor extends GameObject {
 
 		super.attackedBy(attacker, action);
 
-		removeHidingPlacesFromAttackersList();
+		removeHidingPlacesFromAttackersList();// prioritize actors
 
+		// update attackers list
 		if (attacker instanceof Actor) {
 
 			Actor actor = (Actor) attacker;
@@ -1149,6 +1149,8 @@ public class Actor extends GameObject {
 				this.addAttackerForNearbyFactionMembersIfVisible(hidingPlace);
 			}
 
+			// Add investigation of where you were attacked from in case we lose
+			// sight
 			this.addInvestigation(actor, actor.squareGameObjectIsOn, Investigation.INVESTIGATION_PRIORITY_ATTACKED);
 		}
 	}

@@ -37,7 +37,7 @@ public class ActionClose extends Action {
 
 		openable.close();
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(openable, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " closed ", openable }));
 
 		performer.showPow(openable);

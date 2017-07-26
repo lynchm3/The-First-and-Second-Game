@@ -41,22 +41,16 @@ public class ActionCastBurn extends Action {
 		if (!enabled)
 			return;
 
-		if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-				|| (target.inventoryThatHoldsThisObject != null
-						&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
+		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
-		}
 		if (Math.random() * 100 > target.getEffectiveFireResistance()) {
 			target.removeWetEffect();
 			target.addEffect(new EffectBurning(performer, target, 5));
 
 		} else {
 
-			if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-					|| (target.inventoryThatHoldsThisObject != null
-							&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
+			if (Game.level.shouldLog(target, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " resisted burn cast by ", performer }));
-			}
 
 		}
 

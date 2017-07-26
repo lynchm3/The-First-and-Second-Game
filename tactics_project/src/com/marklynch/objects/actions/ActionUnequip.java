@@ -32,7 +32,7 @@ public class ActionUnequip extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unequipped ", gameObject }));
 
 		if (performer.equipped == gameObject)

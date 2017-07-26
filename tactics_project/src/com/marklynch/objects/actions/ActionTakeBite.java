@@ -34,7 +34,7 @@ public class ActionTakeBite extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took a bite of ", target }));
 
 		if (performer.faction == Game.level.factions.get(0)) {

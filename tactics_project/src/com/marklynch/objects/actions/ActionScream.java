@@ -30,7 +30,7 @@ public class ActionScream extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "screamed" }));
 
 		performer.actionsPerformedThisTurn.add(this);

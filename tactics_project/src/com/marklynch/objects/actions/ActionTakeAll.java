@@ -39,7 +39,7 @@ public class ActionTakeAll extends Action {
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) square.inventory
 				.getGameObjectsThatFitInInventory().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
-			if (performer.squareGameObjectIsOn.visibleToPlayer)
+			if (Game.level.shouldLog(gameObjectToLoot, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", gameObjectToLoot }));
 			square.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);

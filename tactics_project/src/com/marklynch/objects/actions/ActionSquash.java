@@ -43,10 +43,14 @@ public class ActionSquash extends Action {
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
 
 				if (accidental) {
-					Game.level.logOnScreen(new ActivityLog(
-							new Object[] { performer, "accidentally squashed ", target, " ...whoops" }));
+
+					if (Game.level.shouldLog(target, performer))
+						Game.level.logOnScreen(new ActivityLog(
+								new Object[] { performer, "accidentally squashed ", target, " ...whoops" }));
 				} else {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " squashed", target }));
+
+					if (Game.level.shouldLog(target, performer))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " squashed", target }));
 				}
 			}
 			target.attackedBy(performer, this);

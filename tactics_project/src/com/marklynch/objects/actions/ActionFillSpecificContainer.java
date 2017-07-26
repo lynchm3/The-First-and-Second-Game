@@ -39,10 +39,10 @@ public class ActionFillSpecificContainer extends Action {
 
 		Liquid water = Templates.WATER.makeCopy(null, performer, containerForLiquids.volume);
 		containerForLiquids.inventory.add(water);
-		if (performer.squareGameObjectIsOn.visibleToPlayer) {
+
+		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(
 					new ActivityLog(new Object[] { performer, " filled ", containerForLiquids, " with ", water }));
-		}
 
 		// if (Game.level.openInventories.size() > 0) {
 		// Game.level.openInventories.clear();

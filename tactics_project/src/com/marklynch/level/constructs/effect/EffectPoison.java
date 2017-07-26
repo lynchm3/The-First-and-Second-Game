@@ -29,7 +29,8 @@ public class EffectPoison extends Effect {
 		if (target instanceof Actor) {
 			float damage = 10 - (10 * (target.getEffectivePosionResistance() / 100f));
 			target.remainingHealth -= damage;
-			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
+			if (Game.level.shouldLog(target))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
 			target.attackedBy(this, null);
 		}
 		turnsRemaining--;

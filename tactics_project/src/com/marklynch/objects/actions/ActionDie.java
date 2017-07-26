@@ -2,6 +2,7 @@ package com.marklynch.objects.actions;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.squares.Square;
@@ -10,15 +11,16 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.RockGolem;
+import com.marklynch.ui.ActivityLog;
 
 public class ActionDie extends Action {
 
 	public static final String ACTION_NAME = "Die";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	Actor performer;
+	GameObject performer;
 	Square target;
 
-	public ActionDie(Actor performer, Square target) {
+	public ActionDie(GameObject performer, Square target) {
 		super(ACTION_NAME, "action_die.png");
 		this.performer = performer;
 		this.target = target;
@@ -35,6 +37,61 @@ public class ActionDie extends Action {
 	public void perform() {
 		if (!enabled)
 			return;
+
+		logDeath();
+		createCorpse();
+
+		// Remove from draw/update
+		performer.squareGameObjectIsOn.inventory.remove(performer);
+		// this.faction.actors.remove(this);
+		if (performer instanceof Actor) {
+			((Actor) performer).actionsPerformedThisTurn.add(this);
+		}
+		if (sound != null)
+			sound.play();
+	}
+
+	@Override
+	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return null;
+	}
+
+	public void logDeath() {
+
+		if (performer instanceof RockGolem) {
+
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer.destroyedBy, " broke ", performer }));
+
+		} else if (performer instanceof Actor && performer.destroyedBy instanceof EffectBurning) {
+
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "burned to death" }));
+		} else if (performer instanceof Actor) {
+
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer.destroyedBy, " killed ", performer }));
+
+		} else {
+
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer.destroyedBy, " destroyed a ", performer }));
+
+		}
+	}
+
+	public void createCorpse() {
 
 		if (performer instanceof RockGolem)
 
@@ -72,27 +129,6 @@ public class ActionDie extends Action {
 				gameObjectInInventory.owner = null;
 			}
 		}
-
-		// Remove from draw/update
-		performer.squareGameObjectIsOn.inventory.remove(performer);
-		// this.faction.actors.remove(this);
-		performer.actionsPerformedThisTurn.add(this);
-		if (sound != null)
-			sound.play();
 	}
 
-	@Override
-	public boolean check() {
-		return true;
-	}
-
-	@Override
-	public boolean checkLegality() {
-		return true;
-	}
-
-	@Override
-	public Sound createSound() {
-		return null;
-	}
 }

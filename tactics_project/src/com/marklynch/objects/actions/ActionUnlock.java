@@ -38,7 +38,7 @@ public class ActionUnlock extends Action {
 			Key key = actor.getKeyFor(openable);
 
 			openable.unlock();
-			if (performer.squareGameObjectIsOn.visibleToPlayer)
+			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { performer, " unlocked ", openable, " with ", key }));
 
@@ -59,7 +59,7 @@ public class ActionUnlock extends Action {
 		} else {
 
 			openable.unlock();
-			if (performer.squareGameObjectIsOn.visibleToPlayer)
+			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unlocked ", openable }));
 
 			performer.showPow(openable);

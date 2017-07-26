@@ -35,7 +35,7 @@ public class ActionWrite extends Action {
 			return;
 
 		sign.setText(text);
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " wrote on ", sign }));
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

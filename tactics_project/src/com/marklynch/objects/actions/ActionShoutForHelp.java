@@ -33,7 +33,7 @@ public class ActionShoutForHelp extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "shouted for help" }));
 
 		performer.actionsPerformedThisTurn.add(this);

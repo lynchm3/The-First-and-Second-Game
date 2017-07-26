@@ -30,7 +30,8 @@ public class EffectBurning extends Effect {
 
 		float damage = 5 - (10 * (target.getEffectiveFireResistance() / 100f));
 		target.remainingHealth -= damage;
-		Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
+		if (Game.level.shouldLog(target))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
 		target.attackedBy(this, null);
 
 		// Spread fire if not turn 1
@@ -44,7 +45,8 @@ public class EffectBurning extends Effect {
 					if (gameObject != target && Math.random() * 100 > gameObject.getEffectiveFireResistance()) {
 						gameObject.removeWetEffect();
 						gameObject.addEffect(this.makeCopy(source, gameObject));
-						Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
+						if (Game.level.shouldLog(gameObject))
+							Game.level.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
 					}
 				}
 
@@ -55,7 +57,7 @@ public class EffectBurning extends Effect {
 							gameObject.removeWetEffect();
 							gameObject.addEffect(this.makeCopy(source, gameObject));
 
-							if (gameObject.squareGameObjectIsOn.visibleToPlayer)
+							if (Game.level.shouldLog(gameObject))
 								Game.level
 										.logOnScreen(new ActivityLog(new Object[] { this, " spread to ", gameObject }));
 						}

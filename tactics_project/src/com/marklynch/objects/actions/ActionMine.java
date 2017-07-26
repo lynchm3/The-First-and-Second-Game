@@ -51,15 +51,16 @@ public class ActionMine extends Action {
 		Junk ore = Templates.ORE.makeCopy(null, oreOwner);
 		performer.inventory.add(ore);
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
 
 		if (target.checkIfDestroyed(null, this)) {
-			if (performer.squareGameObjectIsOn.visibleToPlayer)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted a ", target }));
+
+			if (Game.level.shouldLog(target, performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted ", target }));
 		}
 
 		performer.showPow(target);

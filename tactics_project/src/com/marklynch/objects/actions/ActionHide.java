@@ -58,7 +58,8 @@ public class ActionHide extends Action {
 			performer.hiding = true;
 			performer.hidingPlace = object;
 			object.actorsHidingHere.add(performer);
-			if (performer.squareGameObjectIsOn.visibleToPlayer)
+
+			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", object }));
 		}
 

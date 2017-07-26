@@ -45,7 +45,7 @@ public class ActionSmash extends Action {
 		if (sound != null)
 			sound.play();
 
-		if (target.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", target }));
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)

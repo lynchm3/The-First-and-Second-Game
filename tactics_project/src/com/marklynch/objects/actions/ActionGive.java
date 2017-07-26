@@ -32,7 +32,8 @@ public class ActionGive extends Action {
 
 		if (!enabled)
 			return;
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+
+		if (Game.level.shouldLog(receiver, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " gave ", object, " to ", receiver }));
 		performer.inventory.remove(object);
 		if (performer.equipped == object)

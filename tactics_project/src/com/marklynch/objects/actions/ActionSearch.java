@@ -37,12 +37,13 @@ public class ActionSearch extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(object, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", object }));
 
 		ArrayList<GameObject> gameObjectsToLoot = object.search();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
-			if (performer.squareGameObjectIsOn.visibleToPlayer)
+
+			if (Game.level.shouldLog(gameObjectToLoot, performer))
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { performer, " found ", gameObjectToLoot, " in ", object }));
 			object.inventory.remove(gameObjectToLoot);

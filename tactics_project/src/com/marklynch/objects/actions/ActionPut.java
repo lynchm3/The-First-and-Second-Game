@@ -32,7 +32,8 @@ public class ActionPut extends Action {
 
 		if (!enabled)
 			return;
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+
+		if (Game.level.shouldLog(object, performer, receiver))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " put ", object, " in ", receiver }));
 		performer.inventory.remove(object);
 		receiver.inventory.add(object);

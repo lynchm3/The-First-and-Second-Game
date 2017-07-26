@@ -40,29 +40,24 @@ public class ActionCastPoison extends Action {
 		if (!enabled)
 			return;
 
-		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast poison on ", target }));
+		if (Game.level.shouldLog(target, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast poison on ", target }));
 		if (target instanceof ContainerForLiquids && target.inventory.size() != 0) {
 			ContainerForLiquids containerForLiquids = (ContainerForLiquids) target;
 			target.inventory.remove(target.inventory.get(0));
 			Liquid poison = Templates.POISON.makeCopy(null, containerForLiquids.owner, containerForLiquids.volume);
 			target.inventory.add(poison);
 
-			if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-					|| (target.inventoryThatHoldsThisObject != null
-							&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
+			if (Game.level.shouldLog(target, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " made ", poison, " in ", target }));
-			}
 		} else {
 			if (Math.random() * 100 > target.getEffectivePosionResistance()) {
 				target.addEffect(new EffectPoison(performer, target, 5));
 			} else {
 
-				if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-						|| (target.inventoryThatHoldsThisObject != null
-								&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
+				if (Game.level.shouldLog(target, performer))
 					Game.level.logOnScreen(
 							new ActivityLog(new Object[] { target, " resisted poison cast by ", performer }));
-				}
 			}
 		}
 

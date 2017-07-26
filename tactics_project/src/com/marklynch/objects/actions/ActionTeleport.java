@@ -77,7 +77,8 @@ public class ActionTeleport extends Action {
 			}
 		}
 
-		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
+		if (Game.level.shouldLog(performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

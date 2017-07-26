@@ -20,6 +20,7 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionCastBurn;
 import com.marklynch.objects.actions.ActionCastDouse;
 import com.marklynch.objects.actions.ActionCastPoison;
+import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
@@ -283,6 +284,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 					actor.legArmor = null;
 
 			}
+
+			new ActionDie(this, squareGameObjectIsOn).perform();
 
 			return true;
 		}
@@ -790,24 +793,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public void attackedBy(Object attacker, Action action) {
-
-		if (checkIfDestroyed(attacker, action)) {
-			if (this instanceof Actor) {
-				if (this.squareGameObjectIsOn.visibleToPlayer)
-					Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " killed ", this }));
-				((Actor) this).faction.checkIfDestroyed();
-			} else {
-				if (this.squareGameObjectIsOn != null) {
-					if (this.squareGameObjectIsOn.visibleToPlayer) {
-						Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
-					}
-				} else if (this.inventoryThatHoldsThisObject != null)
-					if (this.inventoryThatHoldsThisObject == Game.level.player.inventory) {
-						Game.level.logOnScreen(new ActivityLog(new Object[] { attacker, " destroyed a ", this }));
-					}
-
-			}
-		}
+		checkIfDestroyed(attacker, action);
 	}
 
 	public void addEffect(Effect effectToAdd) {
@@ -828,7 +814,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		this.activeEffectsOnGameObject.remove(effectToRemove);
 		this.activeEffectsOnGameObject.add(effectToAdd);
-		Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
+		if (Game.level.shouldLog(this))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { this, effectToAdd.logString, effectToAdd.source }));
 	}
 
 	public void activateEffects() {

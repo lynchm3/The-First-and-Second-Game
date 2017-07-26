@@ -62,7 +62,7 @@ public class ActionThrowSpecificItem extends Action {
 			targetGameObject.remainingHealth -= damage;
 		}
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer) {
+		if (Game.level.shouldLog(targetGameObject, performer)) {
 			if (targetGameObject != null) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile, " at ",
 						targetGameObject, " for " + damage + " damage" }));
@@ -72,7 +72,9 @@ public class ActionThrowSpecificItem extends Action {
 			}
 		}
 
-		if (targetGameObject != null && targetGameObject.attackable) {
+		if (targetGameObject != null && targetGameObject.attackable)
+
+		{
 			targetGameObject.attackedBy(performer, this);
 		}
 		// target.attacked(performer);

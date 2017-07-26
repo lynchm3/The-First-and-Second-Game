@@ -36,7 +36,7 @@ public class ActionOpen extends Action {
 
 		openable.open();
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(openable, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " opened ", openable }));
 
 		performer.showPow(openable);

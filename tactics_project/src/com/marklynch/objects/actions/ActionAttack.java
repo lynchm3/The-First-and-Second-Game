@@ -54,11 +54,13 @@ public class ActionAttack extends Action {
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
 
 				if (weapon != null) {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-							target, " with ", weapon, " for " + damage + " damage" }));
+					if (Game.level.shouldLog(target, performer))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " with ", weapon, " for " + damage + " damage" }));
 				} else {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
-							target, " for " + damage + " damage" }));
+					if (Game.level.shouldLog(target, performer))
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
+								target, " for " + damage + " damage" }));
 
 				}
 			}

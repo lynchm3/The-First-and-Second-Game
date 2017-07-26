@@ -45,7 +45,8 @@ public class ActionLootAll extends Action {
 
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
-			if (performer.squareGameObjectIsOn.visibleToPlayer)
+
+			if (Game.level.shouldLog(gameObjectToLoot, performer))
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { performer, " looted ", gameObjectToLoot, " from ", container }));
 			container.inventory.remove(gameObjectToLoot);

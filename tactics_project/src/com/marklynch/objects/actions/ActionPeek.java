@@ -32,7 +32,8 @@ public class ActionPeek extends Action {
 			return;
 
 		// object.actorsHidingHere.add(performer);
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+
+		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " peeked through ", object }));
 
 		if (performer == Game.level.player) {

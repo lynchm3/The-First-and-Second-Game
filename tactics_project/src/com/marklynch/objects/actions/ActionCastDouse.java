@@ -40,18 +40,17 @@ public class ActionCastDouse extends Action {
 		if (!enabled)
 			return;
 
-		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast douse on ", target }));
+		if (Game.level.shouldLog(target, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast douse on ", target }));
 		target.removeBurningEffect();
 		if (target instanceof ContainerForLiquids) {
 			if (target.inventory.size() == 0) {
 				Liquid water = Templates.WATER.makeCopy(null, performer, ((ContainerForLiquids) target).volume);
 				target.inventory.add(water);
-				if ((target.squareGameObjectIsOn != null && target.squareGameObjectIsOn.visibleToPlayer)
-						|| (target.inventoryThatHoldsThisObject != null
-								&& target.inventoryThatHoldsThisObject == Game.level.player.inventory)) {
+
+				if (Game.level.shouldLog(target, performer))
 					Game.level.logOnScreen(
 							new ActivityLog(new Object[] { performer, " filled ", target, " with ", water }));
-				}
 			}
 		} else {
 			target.addEffect(new EffectWet(performer, target, 5));

@@ -33,7 +33,7 @@ public class ActionTake extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(object, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", object }));
 		object.squareGameObjectIsOn.inventory.remove(object);
 		performer.inventory.add(object);

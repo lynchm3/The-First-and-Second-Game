@@ -122,7 +122,8 @@ public class ContainerForLiquids extends GameObject {
 		if (squareForGlass != null)
 			Templates.BROKEN_GLASS.makeCopy(squareForGlass, this.owner);
 
-		Game.level.logOnScreen(new ActivityLog(new Object[] { this, " smashed" }));
+		if (Game.level.shouldLog(this))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " smashed" }));
 
 		if (this.inventory.size() > 0 && this.inventory.get(0) instanceof Liquid) {
 			Liquid liquid = (Liquid) this.inventory.get(0);

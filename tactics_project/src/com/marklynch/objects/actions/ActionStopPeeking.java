@@ -28,7 +28,7 @@ public class ActionStopPeeking extends Action {
 			return;
 
 		// object.actorsHidingHere.add(performer);
-		if (performer.squareGameObjectIsOn.visibleToPlayer || performer == Game.level.player)
+		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(
 					new ActivityLog(new Object[] { performer, " stopped peeking through ", performer.peekingThrough }));
 

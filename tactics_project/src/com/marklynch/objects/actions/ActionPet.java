@@ -32,10 +32,11 @@ public class ActionPet extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(object, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " petted ", object }));
-		if (Math.random() > 0.9d) {
-			Game.level.logOnScreen(new ActivityLog(new Object[] { object, " wonders what your deal is" }));
+		if (performer == Game.level.player && Math.random() > 0.9d) {
+			if (Game.level.shouldLog(object, performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { object, " wonders what your deal is" }));
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

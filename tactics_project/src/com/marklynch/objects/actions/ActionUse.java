@@ -44,7 +44,7 @@ public class ActionUse extends Action {
 	@Override
 	public void perform() {
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ", verb, " ", switchToUse }));
 
 		switchToUse.use();

@@ -880,6 +880,29 @@ public class Level {
 		activityLogger.addActivityLog(stringToLog);
 	}
 
+	public boolean shouldLog(GameObject... gameObjects) {
+
+		for (GameObject gameObject : gameObjects) {
+
+			if (gameObject == null)
+				continue;
+
+			if (gameObject == Game.level.player)
+				return true;
+
+			if (gameObject.squareGameObjectIsOn != null && gameObject.squareGameObjectIsOn.visibleToPlayer) {
+				return true;
+			}
+
+			if (gameObject.inventoryThatHoldsThisObject != null
+					&& gameObject.inventoryThatHoldsThisObject == Game.level.player.inventory) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	// public void showTurnNotification() {
 	// showTurnNotification = true;
 	// if (this.currentFactionMoving != factions.get(0))

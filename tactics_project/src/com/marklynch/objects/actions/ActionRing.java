@@ -33,10 +33,8 @@ public class ActionRing extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.logOnScreen(new ActivityLog(new Object[] {
-
-					performer, " rang ", object }));
+		if (Game.level.shouldLog(performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " rang ", object }));
 
 		if (performer.faction == Game.level.factions.get(0)) {
 			Game.level.undoList.clear();

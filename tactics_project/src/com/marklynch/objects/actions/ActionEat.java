@@ -33,7 +33,7 @@ public class ActionEat extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ate ", object }));
 		object.squareGameObjectIsOn.inventory.remove(object);
 		performer.inventory.add(object);
