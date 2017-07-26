@@ -13,8 +13,10 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEat;
+import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTake;
@@ -427,8 +429,11 @@ public class AIRoutineUtils {
 		// Go to bed
 		if (Game.level.activeActor.bed != null) {
 			if (Game.level.activeActor.straightLineDistanceTo(Game.level.activeActor.bed.squareGameObjectIsOn) <= 1) {
-				Game.level.activeActor.squareGameObjectIsOn.inventory.remove(Game.level.activeActor);
-				Game.level.activeActor.bed.inventory.add(Game.level.activeActor);
+
+				Action action = new ActionHideInside(Game.level.activeActor, Game.level.activeActor.bed);
+				System.out.println("action = " + action);
+				System.out.println("action.enabled = " + action.enabled);
+				action.perform();
 				return true;
 			}
 
