@@ -5,6 +5,8 @@ import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.SmallHidingPlace;
+import com.marklynch.objects.actions.ActionStopHidingInside;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -30,6 +32,8 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 	HerbivoreWildAnimal friendlyWildAnimal;
 	Square targetSquare = null;
 
+	int hidingCount = 0;
+
 	public AIRoutineForHerbivoreWildAnimal(HerbivoreWildAnimal actor, Area area) {
 		super(actor);
 		if (area != null) {
@@ -50,8 +54,23 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		// In bed
 		System.out.println("actor.squareGameObjectIsOn = " + actor.squareGameObjectIsOn);
 		// System.out.println("actor.in = " + actor.invento);
-		if (actor.squareGameObjectIsOn == null)
+		if (actor.squareGameObjectIsOn == null) {
+			System.out.println("actor = " + actor);
+			System.out.println("actor.inventoryThatHoldsThisObject= " + actor.inventoryThatHoldsThisObject);
+			System.out.println(
+					"actor.inventoryThatHoldsThisObject.parent = " + actor.inventoryThatHoldsThisObject.parent);
+			if (actor.inventoryThatHoldsThisObject.parent instanceof SmallHidingPlace) {
+				hidingCount++;
+				if (hidingCount >= 10) {
+					new ActionStopHidingInside(actor, (SmallHidingPlace) actor.inventoryThatHoldsThisObject.parent)
+							.perform();
+					hidingCount = 0;
+					escapeCooldown = 0;
+					searchCooldown = 0;
+				}
+			}
 			return;
+		}
 
 		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();

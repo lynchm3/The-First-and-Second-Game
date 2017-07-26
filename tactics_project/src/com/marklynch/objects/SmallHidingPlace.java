@@ -6,6 +6,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionStopHidingInside;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -112,8 +113,7 @@ public class SmallHidingPlace extends Searchable {
 					if (attacker instanceof GameObject) {
 						((GameObject) attacker).addAttackerForThisAndGroupMembers(gameObjectHidingHere);
 					}
-					// new ActionStopHiding(gameObjectHidingHere,
-					// this).perform();
+					new ActionStopHidingInside(gameObjectHidingHere, this).perform();
 					// gameObjectHidingHere.hiding = false;
 					// gameObjectHidingHere.hidingPlace = null;
 				}

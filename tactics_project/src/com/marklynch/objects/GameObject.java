@@ -518,7 +518,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			activateEffects();
 		}
 		for (GameObject gameObjectInInventory : this.inventory.getGameObjects()) {
-			gameObjectInInventory.update(delta);
+			if (!(gameObjectInInventory instanceof Actor))
+				gameObjectInInventory.update(delta);
 		}
 	}
 
@@ -892,5 +893,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public ArrayList<Effect> getActiveEffectsOnGameObject() {
 		return activeEffectsOnGameObject;
+	}
+
+	@Override
+	public String toString() {
+		return name + " @ " + squareGameObjectIsOn;
 	}
 }

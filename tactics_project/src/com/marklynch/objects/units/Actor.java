@@ -1198,11 +1198,6 @@ public class Actor extends GameObject {
 			this.equipped = gameObject;
 	}
 
-	@Override
-	public String toString() {
-		return name + " @ " + squareGameObjectIsOn;
-	}
-
 	// public static void calculateReachableSquares() {
 	// // Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
 	// // Game.level.activeActor.calculateReachableSquares(Game.level.squares);

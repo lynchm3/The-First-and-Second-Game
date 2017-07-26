@@ -424,7 +424,7 @@ public class AIRoutineUtils {
 		}
 	}
 
-	public static boolean escapeFromAttackerToBurrow(GameObject attacker) {
+	public static boolean escapeFromAttackerToSmallHidingPlace(GameObject attacker) {
 
 		// Go to burrow and hide if can
 		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(

@@ -7,9 +7,9 @@ import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionHideInside extends Action {
+public class ActionStopHidingInside extends Action {
 
-	public static final String ACTION_NAME = "Hide";
+	public static final String ACTION_NAME = "Stop Hiding";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
@@ -17,8 +17,8 @@ public class ActionHideInside extends Action {
 
 	// public ActionMove actionMove;
 
-	public ActionHideInside(Actor performer, SmallHidingPlace object) {
-		super(ACTION_NAME, "action_hide.png");
+	public ActionStopHidingInside(Actor performer, SmallHidingPlace object) {
+		super(ACTION_NAME, "action_stop_hiding.png");
 		this.performer = performer;
 		this.object = object;
 		if (!check()) {
@@ -36,10 +36,15 @@ public class ActionHideInside extends Action {
 			return;
 
 		// if (Game.level.shouldLog(performer))
-		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", "" + object }));
+		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", "" + object }));
 
-		performer.squareGameObjectIsOn.inventory.remove(performer);
-		object.inventory.add(performer);
+		// object.inventory.remove(performer);
+		// object.squareGameObjectIsOn.inventory.remove(performer);
+		// performer.squareGameObjectIsOn = object.squareGameObjectIsOn;
+		// performer.inventoryThatHoldsThisObject =
+		// object.squareGameObjectIsOn.inventory;
+		object.inventory.remove(performer);
+		object.squareGameObjectIsOn.inventory.add(performer);
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
@@ -52,10 +57,11 @@ public class ActionHideInside extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
+
+		if (object.inventory.contains(performer))
+			return true;
+		else
 			return false;
-		}
-		return true;
 	}
 
 	@Override
