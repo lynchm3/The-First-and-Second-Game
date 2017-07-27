@@ -317,6 +317,16 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 	}
 
+	public void drawX() {
+
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		TextureUtils.drawTexture(Action.x, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
+				squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
+				squarePositionY + Game.QUARTER_SQUARE_WIDTH,
+				squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
+	}
+
 	public class PathComparator implements Comparator<Vector<Square>> {
 
 		@Override

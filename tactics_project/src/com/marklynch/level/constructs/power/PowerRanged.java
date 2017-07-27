@@ -17,8 +17,8 @@ public class PowerRanged extends Power {
 	Point[] areaOfEffect;
 
 	public PowerRanged(String name, Texture image, GameObject source, GameObject target, Effect[] effects, int range,
-			Point[] areaOfEffect) {
-		super(name, image, source, target, effects);
+			Point[] areaOfEffect, int loudness) {
+		super(name, image, source, target, effects, loudness);
 		this.range = range;
 		this.areaOfEffect = areaOfEffect;
 	}
@@ -50,6 +50,24 @@ public class PowerRanged extends Power {
 		}
 
 		return affectedSquares;
+	}
+
+	@Override
+	public boolean hasRange(int weaponDistanceTo) {
+
+		if (range >= weaponDistanceTo)
+			return true;
+
+		return false;
+
+		// if (getEffectiveMinRange() == 1 && weaponDistanceTo == 0)
+		// return true;
+		//
+		// if (weaponDistanceTo >= getEffectiveMinRange() && weaponDistanceTo <=
+		// getEffectiveMaxRange()) {
+		// return true;
+		// }
+		// return false;
 	}
 
 }

@@ -16,6 +16,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.ui.button.Button;
 
 public class UserInputLevel {
@@ -321,7 +322,8 @@ public class UserInputLevel {
 			if (openMenu)
 				Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			else {
-				Game.level.selectedPower.cast(Game.level.player, square);
+				new ActionUsePower(Game.level.player, Game.squareMouseIsOver, Game.level.selectedPower).perform();
+				// Game.level.selectedPower.cast(Game.level.player, square);
 				Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			}
 			return;

@@ -31,6 +31,7 @@ import com.marklynch.objects.Vein;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLoiter;
+import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.Script;
@@ -599,17 +600,21 @@ public class Level {
 		//
 		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 
+			Game.squareMouseIsOver.drawCursor();
 			if (levelMode == LevelMode.LEVEL_MODE_CAST) {
 
-				ArrayList<Square> affectedSquares = selectedPower.getAffectedSquares(Game.squareMouseIsOver);
-				Game.squareMouseIsOver.drawCursor();
-				for (Square affectedSquare : affectedSquares) {
-					affectedSquare.drawPower(selectedPower);
+				ActionUsePower actionUsePower = new ActionUsePower(this.player, Game.squareMouseIsOver, selectedPower);
+
+				if (actionUsePower.enabled) {
+					ArrayList<Square> affectedSquares = selectedPower.getAffectedSquares(Game.squareMouseIsOver);
+					for (Square affectedSquare : affectedSquares) {
+						affectedSquare.drawPower(selectedPower);
+					}
+				} else {
+					Game.squareMouseIsOver.drawX();
 				}
 
 			} else {
-
-				Game.squareMouseIsOver.drawCursor();
 
 				Game.squareMouseIsOver.drawDefaultOrSecondaryAction();
 				player.squareGameObjectIsOn.drawDefaultOrSecondaryAction();
