@@ -402,8 +402,46 @@ public class Actor extends GameObject {
 			if (squareToRightOf != null && squareToRightOf.visibleToPlayer)
 				visibleNeighbors++;
 
-			if (visibleNeighbors > 1)
-				awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+			if (visibleNeighbors > 1) {
+				boolean playerToLeftOfAwkwardWall = false;
+				boolean playerToRightOfAwkwardWall = false;
+				boolean playerAboveAwkwardWall = false;
+				boolean playerBelowAwkwardWall = false;
+
+				if (this.squareGameObjectIsOn.xInGrid < potentiallyVIsibleSquare.xInGrid) {
+					playerToLeftOfAwkwardWall = true;
+				} else if (this.squareGameObjectIsOn.xInGrid > potentiallyVIsibleSquare.xInGrid) {
+					playerToRightOfAwkwardWall = true;
+				}
+				if (this.squareGameObjectIsOn.yInGrid < potentiallyVIsibleSquare.yInGrid) {
+					playerAboveAwkwardWall = true;
+				} else if (this.squareGameObjectIsOn.yInGrid > potentiallyVIsibleSquare.yInGrid) {
+					playerBelowAwkwardWall = true;
+				}
+
+				if (playerToLeftOfAwkwardWall && playerAboveAwkwardWall) {
+					if (!Game.level.squares[potentiallyVIsibleSquare.xInGrid - 1][potentiallyVIsibleSquare.yInGrid
+							- 1].inventory.blocksLineOfSight()) {
+						awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+					}
+				} else if (playerToLeftOfAwkwardWall && playerBelowAwkwardWall) {
+					if (!Game.level.squares[potentiallyVIsibleSquare.xInGrid - 1][potentiallyVIsibleSquare.yInGrid
+							+ 1].inventory.blocksLineOfSight()) {
+						awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+					}
+				} else if (playerToRightOfAwkwardWall && playerAboveAwkwardWall) {
+					if (!Game.level.squares[potentiallyVIsibleSquare.xInGrid + 1][potentiallyVIsibleSquare.yInGrid
+							- 1].inventory.blocksLineOfSight()) {
+						awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+					}
+				} else if (playerToRightOfAwkwardWall && playerBelowAwkwardWall) {
+					if (!Game.level.squares[potentiallyVIsibleSquare.xInGrid + 1][potentiallyVIsibleSquare.yInGrid
+							+ 1].inventory.blocksLineOfSight()) {
+						awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+					}
+				}
+
+			}
 		}
 		for (Square awkwardSquareToMakeVisible : awkwardSquaresToMakeVisible) {
 			markSquareAsVisibleToActiveCharacter(awkwardSquareToMakeVisible.xInGrid,
