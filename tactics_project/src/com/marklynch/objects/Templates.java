@@ -132,7 +132,7 @@ public class Templates {
 			2f, 0f, -64f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 0, 0);
 
 	// Furniture
-	public static final Bed1 BED = new Bed1("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), false, true,
+	public static final Bed BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), false, true,
 			false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 75f, null);
 	public static final GameObjectTemplate SHOP_COUNTER = new GameObjectTemplate("Shop Counter", 5, "shop_counter.png",
 			null, new Inventory(), false, true, false, true, false, false, true, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,

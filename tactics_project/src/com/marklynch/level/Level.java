@@ -83,6 +83,7 @@ public class Level {
 	public transient boolean ended = false;
 	public Texture textureUndiscovered;
 	public ArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new ArrayList<InanimateObjectToAddOrRemove>();
+	public ArrayList<GameObject> inanimateObjectsToRemove = new ArrayList<GameObject>();
 
 	// java representation of a grid??
 	// 2d array?
@@ -858,27 +859,15 @@ public class Level {
 			}
 
 			for (InanimateObjectToAddOrRemove inanimateObjectToAdd : inanimateObjectsToAdd) {
-
 				GameObject gameObject = inanimateObjectToAdd.gameObject;
 				inanimateObjectToAdd.square.inventory.add(gameObject);
-				inanimateObjectsOnGround.add(gameObject);
 			}
 			inanimateObjectsToAdd.clear();
 
-			ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
-			for (GameObject inanimateObject : inanimateObjectsOnGround) {
-				if (inanimateObject.remainingHealth <= 0)
-					toRemove.add(inanimateObject);
-			}
-			for (GameObject gameObject : toRemove) {
+			for (GameObject gameObject : inanimateObjectsToRemove) {
 				inanimateObjectsOnGround.remove(gameObject);
-				// gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-				// if (gameObject.destroyedBy instanceof EffectBurning)
-				// Templates.ASH.makeCopy(gameObject.squareGameObjectIsOn,
-				// null);
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
 			}
-
 		}
 
 	}

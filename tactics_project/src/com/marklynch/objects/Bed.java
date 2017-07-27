@@ -10,12 +10,12 @@ import com.marklynch.utils.TextureUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class Bed1 extends GameObject {
+public class Bed extends GameObject {
 
 	String imagePathCovers;
 	Texture imageTextureCovers;
 
-	public Bed1(String name, int health, String imagePath, String imagePathCovers, Square squareGameObjectIsOn,
+	public Bed(String name, int health, String imagePath, String imagePathCovers, Square squareGameObjectIsOn,
 			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
 			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
 			float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting,
@@ -36,7 +36,7 @@ public class Bed1 extends GameObject {
 	}
 
 	public GameObject makeCopy(Square square) {
-		return new Bed1(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
+		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
 				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
@@ -45,7 +45,7 @@ public class Bed1 extends GameObject {
 
 	@Override
 	public GameObject makeCopy(Square square, Actor owner) {
-		return new Bed1(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
+		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
 				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,

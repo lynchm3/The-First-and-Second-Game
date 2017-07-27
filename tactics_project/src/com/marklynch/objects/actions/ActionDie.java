@@ -49,6 +49,8 @@ public class ActionDie extends Action {
 				performer.squareGameObjectIsOn.inventory.remove(performer);
 			else if (performer.inventoryThatHoldsThisObject != null)
 				performer.inventoryThatHoldsThisObject.remove(performer);
+		} else {
+			Game.level.inanimateObjectsToRemove.add(performer);
 		}
 
 		// this.faction.actors.remove(this);
