@@ -18,6 +18,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerInferno;
+import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.level.squares.Square;
@@ -190,7 +191,7 @@ public class Level {
 		highlightRestrictedButton.enabled = true;
 		buttons.add(highlightRestrictedButton);
 
-		Button infernoButton = new LevelButton(770f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+		Button infernoButton = new LevelButton(110f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
 				"INFERNO", false, false, Color.BLACK, Color.WHITE);
 		infernoButton.setClickListener(new ClickListener() {
 			@Override
@@ -207,6 +208,24 @@ public class Level {
 		});
 		infernoButton.enabled = true;
 		buttons.add(infernoButton);
+
+		Button superPeekButton = new LevelButton(220f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"SUPERPEEK", false, false, Color.BLACK, Color.WHITE);
+		superPeekButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+				Level.this.selectedPower = new PowerSuperPeek(Game.level.player, null);
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
+				Game.level.popups.clear();
+			}
+		});
+		superPeekButton.enabled = true;
+		buttons.add(superPeekButton);
 	}
 
 	public void postLoad() {
@@ -620,15 +639,17 @@ public class Level {
 			if (levelMode == LevelMode.LEVEL_MODE_CAST) {
 
 				// Highlight sqrs you can cast on
-				for (int i = 0; i < 10; i++) {
-					if (selectedPower.hasRange(i)) {
-						Vector<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
-						for (Square squareToHighlight : squaresToHighlight) {
-							if (squareToHighlight.visibleToPlayer) {
-								squareToHighlight.drawHighlight();
+				if (!selectedPower.hasRange(Integer.MAX_VALUE)) {
+					for (int i = 0; i < 10; i++) {
+						if (selectedPower.hasRange(i)) {
+							Vector<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
+							for (Square squareToHighlight : squaresToHighlight) {
+								if (squareToHighlight.visibleToPlayer) {
+									squareToHighlight.drawHighlight();
+								}
 							}
-						}
 
+						}
 					}
 				}
 

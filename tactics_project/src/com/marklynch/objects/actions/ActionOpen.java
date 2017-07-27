@@ -49,7 +49,7 @@ public class ActionOpen extends Action {
 
 			trespassingCheck(this, actor, actor.squareGameObjectIsOn);
 
-			if (Game.level.player.peekingThrough != null) {
+			if (Game.level.player.peekSquare != null) {
 				new ActionStopPeeking(Game.level.player).perform();
 			}
 

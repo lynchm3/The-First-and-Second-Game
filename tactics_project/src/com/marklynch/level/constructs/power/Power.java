@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Texture;
 
@@ -34,7 +35,7 @@ public abstract class Power {
 		this.potentialyCriminal = potentiallyCriminal;
 	}
 
-	public abstract void cast(GameObject souce, Square target);
+	public abstract void cast(Actor souce, Square target);
 
 	public abstract ArrayList<Square> getAffectedSquares(Square target);
 

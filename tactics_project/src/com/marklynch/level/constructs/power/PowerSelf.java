@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Texture;
 
@@ -17,7 +18,7 @@ public abstract class PowerSelf extends Power {
 	}
 
 	@Override
-	public abstract void cast(GameObject souce, Square square);
+	public abstract void cast(Actor souce, Square square);
 
 	@Override
 	public abstract ArrayList<Square> getAffectedSquares(Square target);

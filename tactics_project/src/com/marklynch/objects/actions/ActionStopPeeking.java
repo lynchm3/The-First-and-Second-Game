@@ -1,7 +1,6 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -28,15 +27,14 @@ public class ActionStopPeeking extends Action {
 			return;
 
 		// object.actorsHidingHere.add(performer);
-		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(
-					new ActivityLog(new Object[] { performer, " stopped peeking through ", performer.peekingThrough }));
+		if (performer.peekingThrough != null) {
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(new ActivityLog(
+						new Object[] { performer, " stopped peeking through ", performer.peekingThrough }));
+		} else {
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped peeking" }));
 
-		if (!legal) {
-			Crime crime = new Crime(this, this.performer, Game.level.player.peekingThrough.owner, 4);
-			this.performer.crimesPerformedThisTurn.add(crime);
-			this.performer.crimesPerformedInLifetime.add(crime);
-			notifyWitnessesOfCrime(crime);
 		}
 
 		if (performer == Game.level.player) {
@@ -52,7 +50,7 @@ public class ActionStopPeeking extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.peekingThrough != null) {
+		if (performer.peekSquare != null) {
 			return false;
 		}
 		return true;

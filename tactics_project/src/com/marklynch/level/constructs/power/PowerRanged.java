@@ -8,6 +8,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Texture;
 
@@ -24,7 +25,7 @@ public class PowerRanged extends Power {
 	}
 
 	@Override
-	public void cast(GameObject source, Square targetSquare) {
+	public void cast(Actor source, Square targetSquare) {
 
 		ArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
 

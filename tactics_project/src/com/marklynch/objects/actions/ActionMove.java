@@ -48,7 +48,7 @@ public class ActionMove extends Action {
 
 	public void moveTo(Actor actor, Square squareToMoveTo) {
 
-		if (performer.peekingThrough != null) {
+		if (performer.peekSquare != null) {
 			new ActionStopPeeking(performer).perform();
 		}
 

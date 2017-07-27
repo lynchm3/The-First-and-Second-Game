@@ -155,7 +155,7 @@ public class AIRoutine {
 				} else if (!sound.legal) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
-				} else if (!classesArrayList.contains(sound.sourceObject.getClass())) {
+				} else if (sound.sourceObject != null && !classesArrayList.contains(sound.sourceObject.getClass())) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 				}

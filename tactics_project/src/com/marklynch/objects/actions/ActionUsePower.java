@@ -88,7 +88,7 @@ public class ActionUsePower extends Action {
 	@Override
 	public boolean check() {
 
-		if (!target.visibleToPlayer)
+		if (!target.visibleToPlayer && !power.hasRange(Integer.MAX_VALUE))
 			return false;
 
 		if (!power.hasRange(performer.straightLineDistanceTo(target)))

@@ -42,7 +42,7 @@ public class ActionTeleport extends Action {
 		if (!enabled)
 			return;
 
-		if (performer.peekingThrough != null) {
+		if (performer.peekSquare != null) {
 			new ActionStopPeeking(performer).perform();
 		}
 
