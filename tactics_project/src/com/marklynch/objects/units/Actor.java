@@ -367,7 +367,7 @@ public class Actor extends GameObject {
 		double y1 = square.yInGrid;
 
 		// for (int i = sight; i > 0; i--) {
-		ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistance(sight);
+		ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistanceFromSquare(sight, square);
 		for (Point point : furthestVisiblePoints) {
 			markVisibleSquaresInLineTo(x1 + 0.5d, y1 + 0.5d, point.getX() + 0.5d, point.getY() + 0.5d);
 		}

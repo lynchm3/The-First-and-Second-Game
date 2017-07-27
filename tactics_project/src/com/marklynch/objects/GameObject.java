@@ -348,7 +348,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		return getAllSquaresWithinDistance(maxDistance, this.squareGameObjectIsOn);
 	}
 
-	public ArrayList<Square> getAllSquaresWithinDistance(float maxDistance, Square squareFrom) {
+	public static ArrayList<Square> getAllSquaresWithinDistance(float maxDistance, Square squareFrom) {
 		ArrayList<Square> squares = new ArrayList<Square>();
 
 		for (int distance = 0; distance <= maxDistance; distance++) {
@@ -405,17 +405,21 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		return squares;
 	}
 
-	public ArrayList<Point> getAllCoordinatesAtDistance(int distance) {
+	public ArrayList<Point> getAllCoordinatesAtDistanceFromSquare(int distance) {
+		return getAllCoordinatesAtDistanceFromSquare(distance, this.squareGameObjectIsOn);
+	}
+
+	public ArrayList<Point> getAllCoordinatesAtDistanceFromSquare(int distance, Square square) {
 		ArrayList<Point> coordinates = new ArrayList<Point>();
 		if (distance == 0) {
-			coordinates.add(new Point(this.squareGameObjectIsOn.xInGrid, this.squareGameObjectIsOn.yInGrid));
+			coordinates.add(new Point(square.xInGrid, square.yInGrid));
 			return coordinates;
 		}
 
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
 		for (int i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-			coordinates.add(new Point(this.squareGameObjectIsOn.xInGrid + x, this.squareGameObjectIsOn.yInGrid + y));
+			coordinates.add(new Point(square.xInGrid + x, square.yInGrid + y));
 
 			if (xGoingUp) {
 				if (x == distance) {
