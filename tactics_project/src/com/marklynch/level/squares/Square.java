@@ -17,6 +17,7 @@ import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -301,6 +302,18 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 24,
 					squarePositionX + Game.SQUARE_WIDTH - 16, squarePositionY + Game.SQUARE_HEIGHT - 24,
 					squarePositionY + Game.SQUARE_HEIGHT - 16);
+		}
+	}
+
+	public void drawPower(Power power) {
+
+		if (power != null && power.image != null) {
+			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+			TextureUtils.drawTexture(power.image, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
+					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
+					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
+					squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
 		}
 	}
 

@@ -602,8 +602,9 @@ public class Level {
 			if (levelMode == LevelMode.LEVEL_MODE_CAST) {
 
 				ArrayList<Square> affectedSquares = selectedPower.getAffectedSquares(Game.squareMouseIsOver);
+				Game.squareMouseIsOver.drawCursor();
 				for (Square affectedSquare : affectedSquares) {
-					affectedSquare.drawCursor();
+					affectedSquare.drawPower(selectedPower);
 				}
 
 			} else {

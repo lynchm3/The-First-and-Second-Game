@@ -6,10 +6,12 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
+import mdesl.graphics.Texture;
+
 public abstract class PowerTouch extends Power {
 
-	public PowerTouch(String name, GameObject source, GameObject target, Effect[] effects) {
-		super(name, source, target, effects);
+	public PowerTouch(String name, Texture image, GameObject source, GameObject target, Effect[] effects) {
+		super(name, image, source, target, effects);
 		// TODO Auto-generated constructor stub
 	}
 

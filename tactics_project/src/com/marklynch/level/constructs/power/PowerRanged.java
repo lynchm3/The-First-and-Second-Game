@@ -9,14 +9,16 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
+import mdesl.graphics.Texture;
+
 public class PowerRanged extends Power {
 
 	int range;
 	Point[] areaOfEffect;
 
-	public PowerRanged(String name, GameObject source, GameObject target, Effect[] effects, int range,
+	public PowerRanged(String name, Texture image, GameObject source, GameObject target, Effect[] effects, int range,
 			Point[] areaOfEffect) {
-		super(name, source, target, effects);
+		super(name, image, source, target, effects);
 		this.range = range;
 		this.areaOfEffect = areaOfEffect;
 	}
@@ -35,6 +37,7 @@ public class PowerRanged extends Power {
 		}
 	}
 
+	@Override
 	public ArrayList<Square> getAffectedSquares(Square targetSquare) {
 		ArrayList<Square> affectedSquares = new ArrayList<Square>();
 		for (Point point : areaOfEffect) {

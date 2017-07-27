@@ -104,6 +104,8 @@ public class Game {
 	public static float SQUARE_HEIGHT = 64f;
 	public static float HALF_SQUARE_WIDTH = SQUARE_WIDTH / 2f;
 	public static float HALF_SQUARE_HEIGHT = SQUARE_HEIGHT / 2f;
+	public static float QUARTER_SQUARE_WIDTH = SQUARE_WIDTH / 4f;
+	public static float QUARTER_SQUARE_HEIGHT = SQUARE_HEIGHT / 4f;
 
 	public static float halfWindowWidth = windowWidth / 2;
 	public static float halfWindowHeight = windowHeight / 2;
