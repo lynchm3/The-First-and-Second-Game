@@ -444,6 +444,23 @@ public class Level {
 				squares[i][j].draw1();
 			}
 		}
+
+		// if (levelMode == LevelMode.LEVEL_MODE_CAST) {
+		// for (int i = 0; i < 10; i++) {
+		// if (selectedPower.hasRange(i)) {
+		// ArrayList<Square> squaresToHighlight =
+		// Game.level.player.getAllSquaresWithinDistance(i,
+		// Game.level.player.squareGameObjectIsOn);
+		// for (Square squareToHighlight : squaresToHighlight) {
+		// if (squareToHighlight.visibleToPlayer) {
+		// squareToHighlight.drawHighlight();
+		// }
+		// }
+		//
+		// }
+		// }
+		// }
+
 	}
 
 	public void drawForeground() {
@@ -600,11 +617,23 @@ public class Level {
 		//
 		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 
-			Game.squareMouseIsOver.drawCursor();
 			if (levelMode == LevelMode.LEVEL_MODE_CAST) {
 
-				ActionUsePower actionUsePower = new ActionUsePower(this.player, Game.squareMouseIsOver, selectedPower);
+				// Highlight sqrs you can cast on
+				for (int i = 0; i < 10; i++) {
+					if (selectedPower.hasRange(i)) {
+						Vector<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
+						for (Square squareToHighlight : squaresToHighlight) {
+							if (squareToHighlight.visibleToPlayer) {
+								squareToHighlight.drawHighlight();
+							}
+						}
 
+					}
+				}
+
+				// Draw power icon on sqrs / or x if out of range
+				ActionUsePower actionUsePower = new ActionUsePower(this.player, Game.squareMouseIsOver, selectedPower);
 				if (actionUsePower.enabled) {
 					ArrayList<Square> affectedSquares = selectedPower.getAffectedSquares(Game.squareMouseIsOver);
 					for (Square affectedSquare : affectedSquares) {
@@ -613,9 +642,10 @@ public class Level {
 				} else {
 					Game.squareMouseIsOver.drawX();
 				}
-
+				Game.squareMouseIsOver.drawCursor();
 			} else {
 
+				Game.squareMouseIsOver.drawCursor();
 				Game.squareMouseIsOver.drawDefaultOrSecondaryAction();
 				player.squareGameObjectIsOn.drawDefaultOrSecondaryAction();
 
