@@ -17,8 +17,8 @@ public class PowerRanged extends Power {
 	Point[] areaOfEffect;
 
 	public PowerRanged(String name, Texture image, GameObject source, GameObject target, Effect[] effects, int range,
-			Point[] areaOfEffect, int loudness) {
-		super(name, image, source, target, effects, loudness);
+			Point[] areaOfEffect, int loudness, boolean hostile, boolean potentiallyCriminal) {
+		super(name, image, source, target, effects, loudness, hostile, potentiallyCriminal);
 		this.range = range;
 		this.areaOfEffect = areaOfEffect;
 	}

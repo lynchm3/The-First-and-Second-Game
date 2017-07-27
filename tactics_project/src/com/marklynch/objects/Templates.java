@@ -70,7 +70,7 @@ public class Templates {
 			false);
 
 	// Special People
-	public static final Mort MORT = new Mort("Mort", "Miner", 1, 10, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
+	public static final Mort MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
 			new Inventory(), true, false, true, false, false, 2f, 2f, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
 			0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 

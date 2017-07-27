@@ -14,12 +14,15 @@ public abstract class Power {
 
 	public Texture image;
 	public String name;
-	GameObject source;
-	GameObject target;
-	Effect[] effects;
+	public GameObject source;
+	public GameObject target;
+	public Effect[] effects;
 	public int loudness;
+	public boolean hostile;
+	public boolean potentialyCriminal;
 
-	public Power(String name, Texture image, GameObject source, GameObject target, Effect[] effects, int loudness) {
+	public Power(String name, Texture image, GameObject source, GameObject target, Effect[] effects, int loudness,
+			boolean hostile, boolean potentiallyCriminal) {
 		super();
 		this.name = name;
 		this.image = image;
@@ -27,6 +30,8 @@ public abstract class Power {
 		this.target = target;
 		this.effects = effects;
 		this.loudness = loudness;
+		this.hostile = hostile;
+		this.potentialyCriminal = potentiallyCriminal;
 	}
 
 	public abstract void cast(GameObject souce, Square target);

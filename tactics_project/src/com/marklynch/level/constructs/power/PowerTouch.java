@@ -10,9 +10,9 @@ import mdesl.graphics.Texture;
 
 public abstract class PowerTouch extends Power {
 
-	public PowerTouch(String name, Texture image, GameObject source, GameObject target, Effect[] effects,
-			int loudness) {
-		super(name, image, source, target, effects, loudness);
+	public PowerTouch(String name, Texture image, GameObject source, GameObject target, Effect[] effects, int loudness,
+			boolean hostile, boolean potentiallyCriminal) {
+		super(name, image, source, target, effects, loudness, hostile, potentiallyCriminal);
 		// TODO Auto-generated constructor stub
 	}
 

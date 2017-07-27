@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.squares.Square;
@@ -47,19 +48,38 @@ public class ActionUsePower extends Action {
 
 		// if (!legal) {
 		//
-		// Actor victim;
-		// if (target instanceof Actor)
-		// victim = (Actor) target;
-		// else
-		// victim = target.owner;
-		//
-		// Crime crime = new Crime(this, this.performer, victim, 6);
-		// this.performer.crimesPerformedThisTurn.add(crime);
-		// this.performer.crimesPerformedInLifetime.add(crime);
-		// notifyWitnessesOfCrime(crime);
-		// } else {
-		// trespassingCheck(this, performer, performer.squareGameObjectIsOn);
-		// }
+
+		// Something that belongs to some one else
+
+		if (power.hostile) {
+			for (Square square : power.getAffectedSquares(target)) {
+				for (GameObject gameObject : square.inventory.getGameObjects()) {
+					gameObject.attackedBy(this.performer, this);
+				}
+			}
+		}
+
+		if (!legal) {
+			for (Square square : power.getAffectedSquares(target)) {
+				for (GameObject gameObject : square.inventory.getGameObjects()) {
+					Actor victim;
+					if (gameObject instanceof Actor)
+						victim = (Actor) gameObject;
+					else
+						victim = gameObject.owner;
+
+					if (victim != performer && victim != null) {
+						Crime crime = new Crime(this, this.performer, victim, 6);
+						this.performer.crimesPerformedThisTurn.add(crime);
+						this.performer.crimesPerformedInLifetime.add(crime);
+						notifyWitnessesOfCrime(crime);
+					}
+				}
+			}
+
+		} else {
+			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+		}
 
 		if (performer == Game.level.player)
 			Game.level.endTurn();
@@ -88,6 +108,8 @@ public class ActionUsePower extends Action {
 	@Override
 	public boolean checkLegality() {
 		// Something that belongs to some one else
+		if (!power.potentialyCriminal)
+			return true;
 
 		for (Square square : power.getAffectedSquares(target)) {
 
