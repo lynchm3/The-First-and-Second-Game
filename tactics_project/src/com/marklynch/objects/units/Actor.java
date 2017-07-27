@@ -348,13 +348,17 @@ public class Actor extends GameObject {
 
 	public void calculateVisibleSquares(Square square) {
 
-		for (int x = 0; x < Game.level.squares.length; x++) {
-			for (int y = 0; y < Game.level.squares[0].length; y++) {
-				Game.level.squares[x][y].visibleToSelectedCharacter = false;
-				if (this == Game.level.player) {
-					Game.level.squares[x][y].visibleToPlayer = false;
-				}
-			}
+		// for (int x = 0; x < Game.level.squares.length; x++) {
+		// for (int y = 0; y < Game.level.squares[0].length; y++) {
+		// Game.level.squares[x][y].visibleToSelectedCharacter = false;
+		// if (this == Game.level.player) {
+		// Game.level.squares[x][y].visibleToPlayer = false;
+		// }
+		// }
+		// }
+
+		for (Square squarePreviouslyVisibleToPlayer : squaresVisibleToPlayerOnlyPlayer) {
+			squarePreviouslyVisibleToPlayer.visibleToPlayer = false;
 		}
 
 		squaresVisibleToPlayerOnlyPlayer.clear();
