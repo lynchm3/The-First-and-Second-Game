@@ -598,22 +598,33 @@ public class Level {
 		// } else
 		//
 		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
-			Game.squareMouseIsOver.drawCursor();
 
-			Game.squareMouseIsOver.drawDefaultOrSecondaryAction();
-			player.squareGameObjectIsOn.drawDefaultOrSecondaryAction();
+			if (levelMode == LevelMode.LEVEL_MODE_CAST) {
 
-			if (player.squareGameObjectIsOn.getSquareToLeftOf() != null)
-				player.squareGameObjectIsOn.getSquareToLeftOf().drawDefaultOrSecondaryAction();
+				ArrayList<Square> affectedSquares = selectedPower.getAffectedSquares(Game.squareMouseIsOver);
+				for (Square affectedSquare : affectedSquares) {
+					affectedSquare.drawCursor();
+				}
 
-			if (player.squareGameObjectIsOn.getSquareToRightOf() != null)
-				player.squareGameObjectIsOn.getSquareToRightOf().drawDefaultOrSecondaryAction();
+			} else {
 
-			if (player.squareGameObjectIsOn.getSquareAbove() != null)
-				player.squareGameObjectIsOn.getSquareAbove().drawDefaultOrSecondaryAction();
+				Game.squareMouseIsOver.drawCursor();
 
-			if (player.squareGameObjectIsOn.getSquareBelow() != null)
-				player.squareGameObjectIsOn.getSquareBelow().drawDefaultOrSecondaryAction();
+				Game.squareMouseIsOver.drawDefaultOrSecondaryAction();
+				player.squareGameObjectIsOn.drawDefaultOrSecondaryAction();
+
+				if (player.squareGameObjectIsOn.getSquareToLeftOf() != null)
+					player.squareGameObjectIsOn.getSquareToLeftOf().drawDefaultOrSecondaryAction();
+
+				if (player.squareGameObjectIsOn.getSquareToRightOf() != null)
+					player.squareGameObjectIsOn.getSquareToRightOf().drawDefaultOrSecondaryAction();
+
+				if (player.squareGameObjectIsOn.getSquareAbove() != null)
+					player.squareGameObjectIsOn.getSquareAbove().drawDefaultOrSecondaryAction();
+
+				if (player.squareGameObjectIsOn.getSquareBelow() != null)
+					player.squareGameObjectIsOn.getSquareBelow().drawDefaultOrSecondaryAction();
+			}
 
 		}
 

@@ -1,5 +1,7 @@
 package com.marklynch.level.constructs.power;
 
+import java.util.ArrayList;
+
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
@@ -20,21 +22,31 @@ public class PowerRanged extends Power {
 	}
 
 	@Override
-	public void cast(GameObject source, Square targtSquare) {
-		for (Point point : areaOfEffect) {
-			int squareX = targtSquare.xInGrid + point.getX();
-			int squareY = targtSquare.yInGrid + point.getY();
+	public void cast(GameObject source, Square targetSquare) {
 
-			if (Square.inRange(squareX, squareY)) {
-				Square square = Game.level.squares[squareX][squareY];
-				for (GameObject gameObject : square.inventory.getGameObjects()) {
-					for (Effect effect : effects) {
-						gameObject.addEffect(effect.makeCopy(source, gameObject));
-					}
+		ArrayList<Square> affectedSquares = getAffectedSquares(targetSquare);
+
+		for (Square square : affectedSquares) {
+			for (GameObject gameObject : square.inventory.getGameObjects()) {
+				for (Effect effect : effects) {
+					gameObject.addEffect(effect.makeCopy(source, gameObject));
 				}
 			}
 		}
+	}
 
+	public ArrayList<Square> getAffectedSquares(Square targetSquare) {
+		ArrayList<Square> affectedSquares = new ArrayList<Square>();
+		for (Point point : areaOfEffect) {
+			int squareX = targetSquare.xInGrid + point.getX();
+			int squareY = targetSquare.yInGrid + point.getY();
+
+			if (Square.inRange(squareX, squareY)) {
+				affectedSquares.add(Game.level.squares[squareX][squareY]);
+			}
+		}
+
+		return affectedSquares;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.marklynch.level.constructs.power;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -19,6 +21,8 @@ public abstract class Power {
 		this.effects = effects;
 	}
 
-	public abstract void cast(GameObject souce, Square square);
+	public abstract void cast(GameObject souce, Square target);
+
+	public abstract ArrayList<Square> getAffectedSquares(Square target);
 
 }
