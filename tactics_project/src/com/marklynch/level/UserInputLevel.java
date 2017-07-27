@@ -7,6 +7,7 @@ import org.lwjgl.input.Mouse;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
+import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.level.popup.PopupButton;
 import com.marklynch.level.popup.PopupSelectAction;
@@ -315,6 +316,16 @@ public class UserInputLevel {
 
 		if (Game.level.activeActor != Game.level.player)
 			return;
+
+		if (Game.level.levelMode == LevelMode.LEVEL_MODE_CAST) {
+			if (openMenu)
+				Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+			else {
+				Game.level.selectedPower.cast(Game.level.player, square);
+				Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+			}
+			return;
+		}
 
 		Action defaultAction = null;
 

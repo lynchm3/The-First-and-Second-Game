@@ -625,4 +625,16 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public void inventoryChanged() {
 
 	}
+
+	public static boolean inRange(int x, int y) {
+		if (x < 0)
+			return false;
+		if (x >= Game.level.squares.length)
+			return false;
+		if (y < 0)
+			return false;
+		if (y >= Game.level.squares[0].length)
+			return false;
+		return true;
+	}
 }

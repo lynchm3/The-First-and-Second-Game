@@ -16,6 +16,8 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.level.squares.Square;
@@ -84,6 +86,13 @@ public class Level {
 	public Texture textureUndiscovered;
 	public ArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new ArrayList<InanimateObjectToAddOrRemove>();
 	public ArrayList<GameObject> inanimateObjectsToRemove = new ArrayList<GameObject>();
+
+	public enum LevelMode {
+		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST
+	}
+
+	public LevelMode levelMode = LevelMode.LEVEL_MODE_NORMAL;
+	public Power selectedPower = null;
 
 	// java representation of a grid??
 	// 2d array?
@@ -179,6 +188,24 @@ public class Level {
 		});
 		highlightRestrictedButton.enabled = true;
 		buttons.add(highlightRestrictedButton);
+
+		Button infernoButton = new LevelButton(770f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"INFERNO", false, false, Color.BLACK, Color.WHITE);
+		infernoButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+				Level.this.selectedPower = new PowerInferno(Game.level.player, null);
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
+				Game.level.popups.clear();
+			}
+		});
+		infernoButton.enabled = true;
+		buttons.add(infernoButton);
 	}
 
 	public void postLoad() {
