@@ -49,7 +49,7 @@ public class CarnivoreNeutralWildAnimal extends Actor {
 
 		CarnivoreNeutralWildAnimal actor = new CarnivoreNeutralWildAnimal(name, title, actorLevel, (int) totalHealth,
 				strength, dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
-				inventory.makeCopy(), showInventory, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				new Inventory(), showInventory, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
 				waterResistance, electricResistance, poisonResistance, weight, owner, faction, handAnchorX, handAnchorY,

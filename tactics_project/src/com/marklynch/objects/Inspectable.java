@@ -34,7 +34,7 @@ public class Inspectable extends GameObject {
 
 	@Override
 	public Inspectable makeCopy(Square square, Actor owner) {
-		return new Inspectable(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Inspectable(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

@@ -870,7 +870,7 @@ public class Actor extends GameObject {
 	public Actor makeCopy(Square square, Faction faction, GameObject bed) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
+				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, canOpenDoors,
 				canEquipWeapons, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,

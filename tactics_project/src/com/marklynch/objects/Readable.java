@@ -40,7 +40,7 @@ public class Readable extends GameObject {
 	}
 
 	public Readable makeCopy(Square square, String name, Object[] text, Actor owner) {
-		return new Readable(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Readable(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, text, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
@@ -49,7 +49,7 @@ public class Readable extends GameObject {
 
 	@Override
 	public Readable makeCopy(Square square, Actor owner) {
-		return new Readable(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Readable(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, text, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

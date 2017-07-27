@@ -21,7 +21,7 @@ public class Junk extends GameObject {
 
 	@Override
 	public Junk makeCopy(Square square, Actor owner) {
-		return new Junk(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Junk(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,

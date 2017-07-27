@@ -58,7 +58,7 @@ public class Roof extends GameObject {
 
 	@Override
 	public GameObject makeCopy(Square square, Actor owner) {
-		return new Roof(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Roof(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

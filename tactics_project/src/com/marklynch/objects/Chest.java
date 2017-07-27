@@ -122,7 +122,7 @@ public class Chest extends Openable {
 	}
 
 	public Chest makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
-		return new Chest(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Chest(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
@@ -131,7 +131,7 @@ public class Chest extends Openable {
 
 	@Override
 	public Chest makeCopy(Square square, Actor owner) {
-		return new Chest(new String(baseName), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Chest(new String(baseName), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

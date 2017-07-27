@@ -87,7 +87,7 @@ public class SmallHidingPlace extends Searchable {
 	@Override
 	public SmallHidingPlace makeCopy(Square squareGameObjectIsOn, Actor owner) {
 		return new SmallHidingPlace(new String(name), (int) totalHealth, imageTexturePath, squareGameObjectIsOn,
-				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,

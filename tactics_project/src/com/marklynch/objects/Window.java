@@ -104,7 +104,7 @@ public class Window extends GameObjectExploder {
 
 	@Override
 	public Window makeCopy(Square square, Actor owner) {
-		return new Window(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Window(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

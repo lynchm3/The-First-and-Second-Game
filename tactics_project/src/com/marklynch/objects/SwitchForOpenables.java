@@ -71,7 +71,7 @@ public class SwitchForOpenables extends Switch {
 	public SwitchForOpenables makeCopy(Square square, Actor owner, Openable openable, SWITCH_TYPE switchType,
 			RequirementToMeet[] requirementsToMeet) {
 		return new SwitchForOpenables(new String(name), (int) totalHealth, imageTexturePath, square,
-				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,

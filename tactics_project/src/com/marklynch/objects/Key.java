@@ -22,7 +22,7 @@ public class Key extends GameObject {
 	}
 
 	public Key makeCopy(String name, Square square, Actor owner) {
-		return new Key(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Key(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
@@ -31,7 +31,7 @@ public class Key extends GameObject {
 
 	@Override
 	public Key makeCopy(Square square, Actor owner) {
-		return new Key(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Key(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

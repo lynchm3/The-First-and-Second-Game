@@ -346,7 +346,7 @@ public class GameObjectExploder extends GameObject {
 	@Override
 	public GameObjectExploder makeCopy(Square square, Actor owner) {
 		return new GameObjectExploder(new String(name), (int) totalHealth, imageTexturePath, square,
-				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner);

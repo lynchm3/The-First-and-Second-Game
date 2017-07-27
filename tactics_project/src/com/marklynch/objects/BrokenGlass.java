@@ -37,7 +37,7 @@ public class BrokenGlass extends Stampable {
 
 	@Override
 	public BrokenGlass makeCopy(Square square, Actor owner) {
-		return new BrokenGlass(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new BrokenGlass(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

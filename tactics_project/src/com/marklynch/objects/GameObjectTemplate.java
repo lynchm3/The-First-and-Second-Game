@@ -96,7 +96,7 @@ public class GameObjectTemplate implements InventoryParent {
 	}
 
 	public GameObject makeCopy(Square square, Actor owner) {
-		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
@@ -105,7 +105,7 @@ public class GameObjectTemplate implements InventoryParent {
 
 	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
 		GameObject copy = new GameObject(new String(name), (int) totalHealth, imageTexturePath, square,
-				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner);

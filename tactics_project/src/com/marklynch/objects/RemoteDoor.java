@@ -106,7 +106,7 @@ public class RemoteDoor extends Openable {
 	}
 
 	public RemoteDoor makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
-		return new RemoteDoor(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new RemoteDoor(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
@@ -116,7 +116,7 @@ public class RemoteDoor extends Openable {
 	// @Override
 	// public Door makeCopy(Square square, Actor owner) {
 	// return new Door(new String(baseName), (int) totalHealth,
-	// imageTexturePath, square, inventory.makeCopy(),
+	// imageTexturePath, square, new Inventory(),
 	// showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 	// blocksLineOfSight,
 	// persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,

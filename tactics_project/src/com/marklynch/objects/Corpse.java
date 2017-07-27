@@ -25,7 +25,7 @@ public class Corpse extends GameObject {
 	}
 
 	public Corpse makeCopy(String name, Square square, Actor owner, float weight) {
-		return new Corpse(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Corpse(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
@@ -33,7 +33,7 @@ public class Corpse extends GameObject {
 	}
 
 	public Corpse makeCopy(Square square, Actor owner, float weight) {
-		return new Corpse(new String(baseName), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Corpse(new String(baseName), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

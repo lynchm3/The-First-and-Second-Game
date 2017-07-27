@@ -158,7 +158,7 @@ public class RockGolem extends Monster {
 	public RockGolem makeCopy(Square square, Faction faction, StructureRoom roomLivingIn, boolean awake) {
 
 		RockGolem actor = new RockGolem(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
+				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,

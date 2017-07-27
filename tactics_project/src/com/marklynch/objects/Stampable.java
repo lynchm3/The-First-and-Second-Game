@@ -22,7 +22,7 @@ public class Stampable extends GameObject {
 
 	@Override
 	public Stampable makeCopy(Square square, Actor owner) {
-		return new Stampable(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Stampable(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
@@ -32,7 +32,7 @@ public class Stampable extends GameObject {
 	@Override
 	public Stampable makeCopy(Square square, Actor owner, boolean backwards) {
 		Stampable copy = new Stampable(new String(name), (int) totalHealth, imageTexturePath, square,
-				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner);

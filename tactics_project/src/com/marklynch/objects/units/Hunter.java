@@ -44,7 +44,7 @@ public class Hunter extends Actor {
 	public Hunter makeCopy(Square square, Faction faction, GameObject bed) {
 
 		Hunter actor = new Hunter(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
+				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,

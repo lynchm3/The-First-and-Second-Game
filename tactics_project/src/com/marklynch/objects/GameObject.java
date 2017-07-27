@@ -496,7 +496,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public GameObject makeCopy(Square square, Actor owner) {
-		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

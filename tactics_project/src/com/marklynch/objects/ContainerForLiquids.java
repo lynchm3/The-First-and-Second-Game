@@ -52,7 +52,7 @@ public class ContainerForLiquids extends GameObject {
 	@Override
 	public ContainerForLiquids makeCopy(Square square, Actor owner) {
 		return new ContainerForLiquids(new String(baseName), (int) totalHealth, imageTexturePath, square,
-				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner, volume,

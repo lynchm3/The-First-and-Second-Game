@@ -21,7 +21,7 @@ public class Food extends GameObject {
 
 	@Override
 	public Food makeCopy(Square square, Actor owner) {
-		return new Food(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Food(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,

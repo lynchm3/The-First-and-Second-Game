@@ -121,7 +121,7 @@ public class Furnace extends Openable {
 	}
 
 	public Furnace makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
-		return new Furnace(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Furnace(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
@@ -130,7 +130,7 @@ public class Furnace extends Openable {
 
 	@Override
 	public Furnace makeCopy(Square square, Actor owner) {
-		return new Furnace(new String(baseName), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new Furnace(new String(baseName), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,

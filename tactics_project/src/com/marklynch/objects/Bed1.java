@@ -37,7 +37,7 @@ public class Bed1 extends GameObject {
 
 	public GameObject makeCopy(Square square) {
 		return new Bed1(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
-				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, waterResistance, electricResistance, poisonResistance, weight, null);
@@ -46,7 +46,7 @@ public class Bed1 extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square, Actor owner) {
 		return new Bed1(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
-				inventory.makeCopy(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
+				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
 				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
 				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner);

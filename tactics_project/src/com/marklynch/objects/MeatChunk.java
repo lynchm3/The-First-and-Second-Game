@@ -20,7 +20,7 @@ public class MeatChunk extends GameObject {
 	}
 
 	public MeatChunk makeCopy(String name, Square square, Actor owner) {
-		return new MeatChunk(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new MeatChunk(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
@@ -29,7 +29,7 @@ public class MeatChunk extends GameObject {
 
 	@Override
 	public MeatChunk makeCopy(Square square, Actor owner) {
-		return new MeatChunk(new String(name), (int) totalHealth, imageTexturePath, square, inventory.makeCopy(),
+		return new MeatChunk(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,

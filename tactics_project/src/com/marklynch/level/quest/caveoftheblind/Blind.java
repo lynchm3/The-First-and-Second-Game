@@ -97,7 +97,7 @@ public class Blind extends Monster {
 	public Blind makeCopy(Square square, Faction faction, StructureRoom roomLivingIn) {
 
 		Blind actor = new Blind(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, null, inventory.makeCopy(), showInventory,
+				endurance, imageTexturePath, square, travelDistance, sight, null, new Inventory(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,

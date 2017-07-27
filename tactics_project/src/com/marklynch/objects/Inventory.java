@@ -558,14 +558,6 @@ public class Inventory {
 		return gameObjectsThatCanContainOtherObjects;
 	}
 
-	public Inventory makeCopy() {
-		Inventory copy = new Inventory();
-		for (GameObject gameObject : gameObjects) {
-			copy.add(gameObject.makeCopy(null, null));
-		}
-		return copy;
-	}
-
 	public void drawBackground() {
 
 	}

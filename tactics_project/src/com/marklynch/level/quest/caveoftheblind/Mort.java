@@ -61,7 +61,7 @@ public class Mort extends Actor {
 	public Mort makeCopy(Square square, Faction faction, GameObject bed) {
 
 		Mort actor = new Mort(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
-				imageTexturePath, square, travelDistance, sight, bed, inventory.makeCopy(), showInventory,
+				imageTexturePath, square, travelDistance, sight, bed, new Inventory(), showInventory,
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
