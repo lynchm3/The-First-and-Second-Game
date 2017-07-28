@@ -742,21 +742,23 @@ public class Level {
 				Game.squareMouseIsOver.drawCursor();
 			} else {
 
+				// NORMAL MODE
+
 				Game.squareMouseIsOver.drawCursor();
-				Game.squareMouseIsOver.drawDefaultOrSecondaryAction();
-				player.squareGameObjectIsOn.drawDefaultOrSecondaryAction();
+				Game.squareMouseIsOver.drawAction();
+				player.squareGameObjectIsOn.drawAction();
 
 				if (player.squareGameObjectIsOn.getSquareToLeftOf() != null)
-					player.squareGameObjectIsOn.getSquareToLeftOf().drawDefaultOrSecondaryAction();
+					player.squareGameObjectIsOn.getSquareToLeftOf().drawAction();
 
 				if (player.squareGameObjectIsOn.getSquareToRightOf() != null)
-					player.squareGameObjectIsOn.getSquareToRightOf().drawDefaultOrSecondaryAction();
+					player.squareGameObjectIsOn.getSquareToRightOf().drawAction();
 
 				if (player.squareGameObjectIsOn.getSquareAbove() != null)
-					player.squareGameObjectIsOn.getSquareAbove().drawDefaultOrSecondaryAction();
+					player.squareGameObjectIsOn.getSquareAbove().drawAction();
 
 				if (player.squareGameObjectIsOn.getSquareBelow() != null)
-					player.squareGameObjectIsOn.getSquareBelow().drawDefaultOrSecondaryAction();
+					player.squareGameObjectIsOn.getSquareBelow().drawAction();
 			}
 
 		}

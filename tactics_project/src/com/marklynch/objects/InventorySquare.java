@@ -94,7 +94,7 @@ public class InventorySquare extends Square {
 	}
 
 	@Override
-	public void drawDefaultOrSecondaryAction() {
+	public void drawAction() {
 		Action defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player);
 		if (defaultAction != null && defaultAction.image != null) {
 			TextureUtils.drawTexture(defaultAction.image, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,

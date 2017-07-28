@@ -583,7 +583,7 @@ public class Inventory {
 		// cursor
 		if (this.inventorySquareMouseIsOver != null) {
 			this.inventorySquareMouseIsOver.drawCursor();
-			this.inventorySquareMouseIsOver.drawDefaultOrSecondaryAction();
+			this.inventorySquareMouseIsOver.drawAction();
 		}
 
 		// buttons

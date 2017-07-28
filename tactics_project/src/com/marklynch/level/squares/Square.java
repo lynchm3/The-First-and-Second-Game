@@ -288,7 +288,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// GL11.glPopMatrix();
 	}
 
-	public void drawDefaultOrSecondaryAction() {
+	public void drawAction() {
 
 		Action action = null;
 		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
