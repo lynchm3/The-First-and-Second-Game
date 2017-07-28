@@ -7,7 +7,7 @@ import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.ResourceUtils;
 
-public class PowerInferno extends PowerRanged {
+public class PowerInferno extends Power {
 
 	private static String NAME = "Inferno";
 

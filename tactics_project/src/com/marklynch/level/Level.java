@@ -17,6 +17,7 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.conversation.Conversation;
@@ -226,6 +227,24 @@ public class Level {
 		});
 		superPeekButton.enabled = true;
 		buttons.add(superPeekButton);
+
+		Button healSelfButton = new LevelButton(330f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"HEAL SELF", false, false, Color.BLACK, Color.WHITE);
+		healSelfButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
+						new PowerHealSelf(Game.level.player, Game.level.player)).perform();
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
+				Game.level.popups.clear();
+			}
+		});
+		healSelfButton.enabled = true;
+		buttons.add(healSelfButton);
 	}
 
 	public void postLoad() {

@@ -55,4 +55,33 @@ public abstract class Effect {
 		getGlobalImage("effect_poison.png");
 		getGlobalImage("effect_wet.png");
 	}
+
+	// @Override
+	// public void draw2() {
+	// // Draw object
+	// if (target.squareGameObjectIsOn != null) {
+	//
+	// int actorPositionXInPixels = (int) (target.squareGameObjectIsOn.xInGrid *
+	// (int) Game.SQUARE_WIDTH
+	// + target.drawOffsetX);
+	// int actorPositionYInPixels = (int) (target.squareGameObjectIsOn.yInGrid *
+	// (int) Game.SQUARE_HEIGHT
+	// + target.drawOffsetY);
+	//
+	// float alpha = 1.0f;
+	//
+	// // TextureUtils.skipNormals = true;
+	//
+	// if (!target.squareGameObjectIsOn.visibleToPlayer)
+	// alpha = 0.5f;
+	// if (target.hiding)
+	// alpha = 0.5f;
+	//
+	// TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
+	// actorPositionXInPixels + target.width,
+	// actorPositionYInPixels, actorPositionYInPixels + target.height,
+	// target.backwards);
+	// // TextureUtils.skipNormals = false;
+	// }
+	// }
 }

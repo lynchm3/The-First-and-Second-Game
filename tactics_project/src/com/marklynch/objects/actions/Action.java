@@ -116,6 +116,7 @@ public abstract class Action {
 		getGlobalImage("action_equip.png");
 		getGlobalImage("action_fill_container.png");
 		getGlobalImage("action_give.png");
+		getGlobalImage("action_heal.png");
 		getGlobalImage("action_hide.png");
 		getGlobalImage("action_lock.png");
 		getGlobalImage("action_loiter.png");

@@ -10,7 +10,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 
-public class PowerSuperPeek extends PowerRanged {
+public class PowerSuperPeek extends Power {
 
 	private static String NAME = "SUPER PEEK";
 
