@@ -90,6 +90,8 @@ public abstract class Power {
 		getGlobalImage("action_burn.png");
 		getGlobalImage("action_stop_hiding.png");
 		getGlobalImage("action_heal.png");
+		getGlobalImage("action_unlock.png");
+
 	}
 
 }

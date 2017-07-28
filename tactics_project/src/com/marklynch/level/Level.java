@@ -17,9 +17,12 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
+import com.marklynch.level.constructs.power.PowerHealTouch;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
+import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
 import com.marklynch.level.squares.Square;
@@ -245,6 +248,60 @@ public class Level {
 		});
 		healSelfButton.enabled = true;
 		buttons.add(healSelfButton);
+
+		Button healTouchButton = new LevelButton(440f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"HEAL TOUCH", false, false, Color.BLACK, Color.WHITE);
+		healTouchButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+				Level.this.selectedPower = new PowerHealTouch(Game.level.player, null);
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
+				Game.level.popups.clear();
+			}
+		});
+		healTouchButton.enabled = true;
+		buttons.add(healTouchButton);
+
+		Button healRangedButton = new LevelButton(550f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"HEAL RANGED", false, false, Color.BLACK, Color.WHITE);
+		healRangedButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+				Level.this.selectedPower = new PowerHealRanged(Game.level.player, null);
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
+				Game.level.popups.clear();
+			}
+		});
+		healRangedButton.enabled = true;
+		buttons.add(healRangedButton);
+
+		Button unlockButton = new LevelButton(110f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"UNLOCK", false, false, Color.BLACK, Color.WHITE);
+		unlockButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+				Level.this.selectedPower = new PowerUnlock(Game.level.player, null);
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
+				Game.level.popups.clear();
+			}
+		});
+		unlockButton.enabled = true;
+		buttons.add(unlockButton);
 	}
 
 	public void postLoad() {

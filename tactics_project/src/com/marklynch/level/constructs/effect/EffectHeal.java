@@ -27,6 +27,10 @@ public class EffectHeal extends Effect {
 	public void activate() {
 		if (target instanceof Actor) {
 			float healing = 10;
+			if (target.remainingHealth + healing > target.totalHealth) {
+				healing = target.totalHealth - target.remainingHealth;
+			}
+
 			// if (target instanceof Undead) {
 			// target.remainingHealth -= healing;
 			// if (Game.level.shouldLog(target))
