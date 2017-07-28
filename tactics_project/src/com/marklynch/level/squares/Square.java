@@ -25,6 +25,7 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.InventoryParent;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropItemsInInventory;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
@@ -290,7 +291,9 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public void drawDefaultOrSecondaryAction() {
 
 		Action action = null;
-		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
+			action = this.getAttackActionForTheSquareOrObject(Game.level.player);
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 			action = this.getSecondaryActionForTheSquareOrObject(Game.level.player);
 		} else {
 			action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
@@ -370,6 +373,15 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			return targetGameObject.getSecondaryActionPerformedOnThisInWorld(performer);
 		} else {
 			return getSecondaryActionPerformedOnThisInWorld(performer);
+		}
+	}
+
+	public Action getAttackActionForTheSquareOrObject(Actor performer) {
+		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+		if (targetGameObject != null) {
+			return new ActionAttack(performer, targetGameObject);
+		} else {
+			return null;
 		}
 	}
 

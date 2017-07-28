@@ -248,11 +248,9 @@ public class UserInputLevel {
 
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
 				if (Game.level.activeActor == Game.level.player) {
-					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-						interactWith(Game.squareMouseIsOver, -1, false, true);
-					} else {
-						interactWith(Game.squareMouseIsOver, -1, false, false);
-					}
+					interactWith(Game.squareMouseIsOver, -1, false,
+							Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
+							Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 				}
 			}
 		}
@@ -262,7 +260,7 @@ public class UserInputLevel {
 		{
 			// Right Click
 			if (Game.level.popups.isEmpty() && Game.squareMouseIsOver != null) {
-				interactWith(Game.squareMouseIsOver, -1, true, false);
+				interactWith(Game.squareMouseIsOver, -1, true, false, false);
 				// Game.level.popups.add(new PopupSelectObject(100, Game.level,
 				// Game.squareMouseIsOver));
 			} else {
@@ -307,7 +305,7 @@ public class UserInputLevel {
 
 	// static boolean interactedThisTurn = false;
 
-	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary) {
+	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
 		// if (interactedThisTurn)
 		// return;
@@ -332,7 +330,9 @@ public class UserInputLevel {
 		Action defaultAction = null;
 
 		if (!openMenu) {
-			if (secondary) {
+			if (attack) {
+				defaultAction = square.getAttackActionForTheSquareOrObject(Game.level.activeActor);
+			} else if (secondary) {
 				defaultAction = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor);
 			} else {
 				defaultAction = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
@@ -404,16 +404,12 @@ public class UserInputLevel {
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
 			if (y >= 0) {
-
-				boolean openMenu = false;
-				boolean secondary = false;
-				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-					openMenu = true;
-				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-					secondary = true;
-				}
 				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
-						Keyboard.KEY_UP, openMenu, secondary);
+						Keyboard.KEY_UP,
+						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
+						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
+						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
+
 			}
 		}
 	}
@@ -427,16 +423,11 @@ public class UserInputLevel {
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
 			if (y < Game.level.squares[0].length) {
-
-				boolean openMenu = false;
-				boolean secondary = false;
-				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-					openMenu = true;
-				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-					secondary = true;
-				}
 				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
-						Keyboard.KEY_DOWN, openMenu, secondary);
+						Keyboard.KEY_DOWN,
+						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
+						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
+						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 			}
 		}
 
@@ -462,16 +453,11 @@ public class UserInputLevel {
 		} else {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
 			if (x >= 0) {
-
-				boolean openMenu = false;
-				boolean secondary = false;
-				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-					openMenu = true;
-				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-					secondary = true;
-				}
 				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
-						Keyboard.KEY_LEFT, openMenu, secondary);
+						Keyboard.KEY_LEFT,
+						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
+						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
+						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 			}
 		}
 
@@ -488,16 +474,11 @@ public class UserInputLevel {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
 			if (x < Game.level.squares.length) {
 
-				boolean openMenu = false;
-				boolean secondary = false;
-				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-					openMenu = true;
-				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-					secondary = true;
-				}
-
 				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
-						Keyboard.KEY_RIGHT, openMenu, secondary);
+						Keyboard.KEY_RIGHT,
+						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
+						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
+						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 			}
 		}
 
@@ -539,12 +520,11 @@ public class UserInputLevel {
 
 			if (Game.level.popups.size() != 0) {
 				Game.level.popups.get(Game.level.popups.size() - 1).clickHighlightedButton();
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, true, false);
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, false, true);
 			} else {
-				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE, false, false);
+				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE,
+						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
+						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
+						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 			}
 		}
 
