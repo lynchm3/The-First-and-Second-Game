@@ -11,9 +11,8 @@ public class PowerHealSelf extends Power {
 
 	private static String NAME = "Heal Self";
 
-	public PowerHealSelf(GameObject source, GameObject target) {
-		super(NAME, ResourceUtils.getGlobalImage("action_heal.png"), source, target,
-				new Effect[] { new EffectHeal(source, target, 1) }, 0, new Point[] { new Point(0, 0) }, 5, false,
-				false);
+	public PowerHealSelf(GameObject source) {
+		super(NAME, ResourceUtils.getGlobalImage("action_heal.png"), source,
+				new Effect[] { new EffectHeal(source, null, 1) }, 0, new Point[] { new Point(0, 0) }, 5, false, false);
 	}
 }

@@ -201,7 +201,7 @@ public class Level {
 			@Override
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerInferno(Game.level.player, null);
+				Level.this.selectedPower = new PowerInferno(Game.level.player);
 				for (Popup popup : Game.level.popups) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
@@ -219,7 +219,7 @@ public class Level {
 			@Override
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerSuperPeek(Game.level.player, null);
+				Level.this.selectedPower = new PowerSuperPeek(Game.level.player);
 				for (Popup popup : Game.level.popups) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
@@ -237,7 +237,7 @@ public class Level {
 			@Override
 			public void click() {
 				new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
-						new PowerHealSelf(Game.level.player, Game.level.player)).perform();
+						new PowerHealSelf(Game.level.player)).perform();
 				for (Popup popup : Game.level.popups) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
@@ -255,7 +255,7 @@ public class Level {
 			@Override
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerHealTouch(Game.level.player, null);
+				Level.this.selectedPower = new PowerHealTouch(Game.level.player);
 				for (Popup popup : Game.level.popups) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
@@ -273,7 +273,7 @@ public class Level {
 			@Override
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerHealRanged(Game.level.player, null);
+				Level.this.selectedPower = new PowerHealRanged(Game.level.player);
 				for (Popup popup : Game.level.popups) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
@@ -291,7 +291,7 @@ public class Level {
 			@Override
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
-				Level.this.selectedPower = new PowerUnlock(Game.level.player, null);
+				Level.this.selectedPower = new PowerUnlock(Game.level.player);
 				for (Popup popup : Game.level.popups) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();

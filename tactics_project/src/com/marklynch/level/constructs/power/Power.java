@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.ActivityLog;
 
 import mdesl.graphics.Texture;
 
@@ -28,12 +29,11 @@ public abstract class Power {
 	int range;
 	Point[] areaOfEffect;
 
-	public Power(String name, Texture image, GameObject source, GameObject target, Effect[] effects, int range,
-			Point[] areaOfEffect, int loudness, boolean hostile, boolean potentiallyCriminal) {
+	public Power(String name, Texture image, GameObject source, Effect[] effects, int range, Point[] areaOfEffect,
+			int loudness, boolean hostile, boolean potentiallyCriminal) {
 		this.name = name;
 		this.image = image;
 		this.source = source;
-		this.target = target;
 		this.effects = effects;
 		this.loudness = loudness;
 		this.hostile = hostile;
@@ -92,6 +92,14 @@ public abstract class Power {
 		getGlobalImage("action_heal.png");
 		getGlobalImage("action_unlock.png");
 
+	}
+
+	public boolean check(Actor source, Square targetSquare) {
+		return true;
+	}
+
+	public void log(Actor performer, Square target2) {
+		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " used ", name }));
 	}
 
 }

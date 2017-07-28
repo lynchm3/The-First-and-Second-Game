@@ -40,6 +40,7 @@ public class ActionUsePower extends Action {
 		if (!enabled)
 			return;
 
+		power.log(performer, target);
 		power.cast(performer, target);
 
 		performer.actionsPerformedThisTurn.add(this);
@@ -94,7 +95,7 @@ public class ActionUsePower extends Action {
 		if (!power.hasRange(performer.straightLineDistanceTo(target)))
 			return false;
 
-		return true;
+		return power.check(performer, target);
 	}
 
 	// @Override

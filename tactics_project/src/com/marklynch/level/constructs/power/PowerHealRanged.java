@@ -4,17 +4,24 @@ import org.lwjgl.util.Point;
 
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectHeal;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 
 public class PowerHealRanged extends Power {
 
 	private static String NAME = "Heal Self";
 
-	public PowerHealRanged(GameObject source, GameObject target) {
-		super(NAME, ResourceUtils.getGlobalImage("action_heal.png"), source, target,
-				new Effect[] { new EffectHeal(source, target, 1) }, 5,
+	public PowerHealRanged(GameObject source) {
+		super(NAME, ResourceUtils.getGlobalImage("action_heal.png"), source,
+				new Effect[] { new EffectHeal(source, null, 1) }, 5,
 				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
 				5, false, false);
+	}
+
+	@Override
+	public boolean check(Actor source, Square targetSquare) {
+		return true;
 	}
 }
