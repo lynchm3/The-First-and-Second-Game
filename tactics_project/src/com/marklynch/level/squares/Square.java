@@ -377,6 +377,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public Action getAttackActionForTheSquareOrObject(Actor performer) {
+
+		if (this == Game.level.player.squareGameObjectIsOn)
+			return null;
+
 		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
 		if (targetGameObject != null) {
 			return new ActionAttack(performer, targetGameObject);

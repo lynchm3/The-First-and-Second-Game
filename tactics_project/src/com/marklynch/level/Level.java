@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Matrix4f;
 
 import com.marklynch.Game;
@@ -39,6 +40,7 @@ import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
+import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.ActivityLogger;
@@ -759,6 +761,32 @@ public class Level {
 
 				if (player.squareGameObjectIsOn.getSquareBelow() != null)
 					player.squareGameObjectIsOn.getSquareBelow().drawAction();
+
+				// In attack mode, draw attackable sqrs.
+				if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
+					System.out.println("A");
+					ArrayList<Square> attackableSquares = new ArrayList<Square>();
+
+					if (Game.level.player == null || !(Game.level.player.equipped instanceof Weapon)) {
+						System.out.println("B");
+						attackableSquares.addAll(Game.level.player.getAllSquaresAtDistance(1));
+					} else {
+						System.out.println("C");
+						Weapon weapon = (Weapon) Game.level.player.equipped;
+						for (int i = (int) weapon.getEffectiveMinRange(); i <= weapon.getEffectiveMaxRange(); i++) {
+							System.out.println("D");
+							attackableSquares.addAll(Game.level.player.getAllSquaresAtDistance(i));
+
+						}
+					}
+
+					for (Square attackableSquare : attackableSquares) {
+						System.out.println("E");
+						if (attackableSquare.visibleToPlayer) {
+							attackableSquare.drawHighlight();
+						}
+					}
+				}
 			}
 
 		}
