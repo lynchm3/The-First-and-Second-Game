@@ -121,13 +121,34 @@ public class UserInputLevel {
 			else if (mouseWheelDelta < 0)
 				Game.zoomLevelIndex++;
 
+			// halfWindowWidth = Display.getWidth() / 2;
+			// halfWindowHeight
+
 			// Game.zoom += 0.001 * mouseWheelDelta;
 			if (Game.zoomLevelIndex < 0)
 				Game.zoomLevelIndex = 0;
 			else if (Game.zoomLevelIndex >= Game.zoomLevels.length)
 				Game.zoomLevelIndex = Game.zoomLevels.length - 1;
 
-			Game.zoom = Game.zoomLevels[Game.zoomLevelIndex];
+			// Drag to mouse
+			if (Game.lastZoomLevelIndex != Game.zoomLevelIndex) {
+				if (mouseWheelDelta != 0) {
+					System.out.println("dragging");
+				}
+				// Game.lastZoomLevelIndex = Game.zoomLevelIndex;
+			}
+
+			// Change in zoom
+			if (Game.lastZoomLevelIndex != Game.zoomLevelIndex) {
+				float oldZoom = Game.zoom;
+				Game.zoom = Game.zoomLevels[Game.zoomLevelIndex];
+				Game.dragX += ((Mouse.getX() - Game.halfWindowWidth) / Game.zoom)
+						- ((Mouse.getX() - Game.halfWindowWidth) / oldZoom);
+				Game.dragY -= ((Mouse.getY() - Game.halfWindowHeight) / Game.zoom)
+						- ((Mouse.getY() - Game.halfWindowHeight) / oldZoom);
+				Game.lastZoomLevelIndex = Game.zoomLevelIndex;
+			}
+
 		}
 
 		// DRAG
