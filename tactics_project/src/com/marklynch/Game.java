@@ -81,6 +81,8 @@ public class Game {
 	// public static float dragY = -4000;
 
 	public static float zoom = 0.5f; // 0.25f
+	public static float[] zoomLevels = { 1, 0.75f, 0.5f, 0.25f, 0.15f, 0.1f, 0.05f };
+	public static int zoomLevelIndex = 3;
 
 	// public static float windowWidth = 800;
 	// public static float windowHeight = 600;

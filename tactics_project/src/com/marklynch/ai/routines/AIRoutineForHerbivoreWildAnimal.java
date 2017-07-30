@@ -56,8 +56,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		// actor.squareGameObjectIsOn);
 		// System.out.println("actor.in = " + actor.invento);
 		if (actor.squareGameObjectIsOn == null) {
-			System.out.println(
-					"actor.inventoryThatHoldsThisObject.parent = " + actor.inventoryThatHoldsThisObject.parent);
 			if (actor.inventoryThatHoldsThisObject.parent instanceof SmallHidingPlace) {
 				hidingCount++;
 				if (hidingCount >= 50) {

@@ -21,7 +21,6 @@ import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.Fight;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -201,8 +200,6 @@ public class AIRoutineUtils {
 							Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
 							AIPath path = Game.level.activeActor.getPathTo(square);
 							if (path != null) {
-								if (Game.level.activeActor instanceof CarnivoreNeutralWildAnimal)
-									System.out.println("C Time = " + (System.nanoTime() - start));
 								return gameObject;
 
 							}
@@ -794,20 +791,14 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean moveTowardsTargetSquare(Square square) {
-		if (Game.level.activeActor.name.equals("Female Rabbit"))
-			System.out.println("moveTowardsTargetSquare a");
 
 		if (Game.level.activeActor.squareGameObjectIsOn == square)
 			return true;
 
 		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
 
-		if (Game.level.activeActor.name.equals("Female Rabbit"))
-			System.out.println("moveTowardsTargetSquare b, squareToMoveTo = " + squareToMoveTo);
 		if (squareToMoveTo != null) {
 			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
-			if (Game.level.activeActor.name.equals("Female Rabbit"))
-				System.out.println("moveTowardsTargetSquare c");
 			return true;
 		} else {
 			return false;

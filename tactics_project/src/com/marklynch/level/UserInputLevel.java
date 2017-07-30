@@ -102,20 +102,32 @@ public class UserInputLevel {
 		float mouseYInSquares = (int) (mouseYTransformed / Game.SQUARE_HEIGHT);
 
 		// MOUSE WHEEL
-		int wheel = Mouse.getDWheel();
+		int mouseWheelDelta = Mouse.getDWheel();
+
 		if (inventoriesOpen) {
 
 		} else if (mouseOverLog) {
-			if (wheel != 0) {
-				Game.level.activityLogger.drag(-wheel);
-			}
+			if (mouseWheelDelta > 0)
+				Game.level.activityLogger.drag(-100);
+			else if (mouseWheelDelta < 0)
+				Game.level.activityLogger.drag(100);
+			// if (mouseWheelDelta != 0) {
+			// Game.level.activityLogger.drag(-mouseWheelDelta);
+			// }
 		} else {
 			// Calculate zoom
-			Game.zoom += 0.001 * wheel;
-			if (Game.zoom < 0.01)
-				Game.zoom = 0.01f;
-			if (Game.zoom > 1)
-				Game.zoom = 1f;
+			if (mouseWheelDelta > 0)
+				Game.zoomLevelIndex--;
+			else if (mouseWheelDelta < 0)
+				Game.zoomLevelIndex++;
+
+			// Game.zoom += 0.001 * mouseWheelDelta;
+			if (Game.zoomLevelIndex < 0)
+				Game.zoomLevelIndex = 0;
+			else if (Game.zoomLevelIndex >= Game.zoomLevels.length)
+				Game.zoomLevelIndex = Game.zoomLevels.length - 1;
+
+			Game.zoom = Game.zoomLevels[Game.zoomLevelIndex];
 		}
 
 		// DRAG

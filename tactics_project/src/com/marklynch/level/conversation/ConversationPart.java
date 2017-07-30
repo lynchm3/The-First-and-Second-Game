@@ -37,7 +37,6 @@ public class ConversationPart {
 				float offsetX = -(System.identityHashCode(actor) % Game.halfWindowHeight);// -
 																							// 128f;//
 																							// -64;
-				System.out.println("offsetX = " + offsetX);
 				float offsetY = 0;
 				TextureUtils.drawTexture(actor.imageTexture, 1.0f, 0 + offsetX, Game.halfWindowHeight + offsetX,
 						Game.halfWindowHeight + offsetY, Game.windowHeight + offsetY);
