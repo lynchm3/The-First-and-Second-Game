@@ -300,7 +300,13 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
 		}
 
-		if (action != null && action.image != null) {
+		if (action == null || Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("action_select_object.png"),
+					squarePositionX + Game.SQUARE_WIDTH - 24, squarePositionX + Game.SQUARE_WIDTH - 16,
+					squarePositionY + Game.SQUARE_HEIGHT - 24, squarePositionY + Game.SQUARE_HEIGHT - 16);
+		} else if (action != null && action.image != null) {
 			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 			TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 24,
