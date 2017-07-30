@@ -22,7 +22,7 @@ public class ActionChop extends Action {
 
 	// Default for hostiles
 	public ActionChop(Actor attacker, GameObject vein) {
-		super(ACTION_NAME, "action_mine.png");
+		super(ACTION_NAME, "action_chop.png");
 		this.performer = attacker;
 		this.target = vein;
 		if (!check()) {
@@ -54,7 +54,6 @@ public class ActionChop extends Action {
 		// received ", ore }));
 		Junk wood = null;
 		if (target.checkIfDestroyed(performer, this)) {
-
 			if (Game.level.shouldLog(target, performer))
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { performer, " chopped down ", target, " with ", axe }));
