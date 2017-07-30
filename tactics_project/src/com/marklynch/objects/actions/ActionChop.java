@@ -6,13 +6,14 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Templates;
+import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionMine extends Action {
+public class ActionChop extends Action {
 
-	public static final String ACTION_NAME = "Mine";
+	public static final String ACTION_NAME = "Chop";
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
 	public static final String ACTION_NAME_NEED_PICKAXE = ACTION_NAME + " (need pickaxe)";
 
@@ -20,7 +21,7 @@ public class ActionMine extends Action {
 	GameObject target;
 
 	// Default for hostiles
-	public ActionMine(Actor attacker, GameObject vein) {
+	public ActionChop(Actor attacker, GameObject vein) {
 		super(ACTION_NAME, "action_mine.png");
 		this.performer = attacker;
 		this.target = vein;
@@ -37,7 +38,7 @@ public class ActionMine extends Action {
 		if (!enabled)
 			return;
 
-		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
+		Axe axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
 
 		float damage = target.totalHealth / 4f;
 		target.remainingHealth -= damage;
@@ -48,19 +49,22 @@ public class ActionMine extends Action {
 		if (target.owner != null)
 			oreOwner = target.owner;
 
-		Junk ore = Templates.ORE.makeCopy(null, oreOwner);
-		performer.inventory.add(ore);
-
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
-
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
-
+		// if (Game.level.shouldLog(target, performer))
+		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "
+		// received ", ore }));
+		Junk wood = null;
 		if (target.checkIfDestroyed(performer, this)) {
 
 			if (Game.level.shouldLog(target, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted ", target }));
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " chopped down ", target, " with ", axe }));
+			wood = Templates.WOOD.makeCopy(null, oreOwner);
+			performer.inventory.add(wood);
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", wood }));
+		} else {
+			if (Game.level.shouldLog(target, performer))
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " chopped at ", target, " with ", axe }));
 		}
 
 		performer.showPow(target);
@@ -76,7 +80,7 @@ public class ActionMine extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, this.target.owner, 4, ore);
+			Crime crime = new Crime(this, this.performer, this.target.owner, 4, wood);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

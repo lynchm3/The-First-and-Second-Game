@@ -188,10 +188,10 @@ public class Vein extends Wall {
 		}
 	}
 
-	@Override
-	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionMine(performer, this);
-	}
+	// @Override
+	// public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+	// return new ActionMine(performer, this);
+	// }
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
@@ -223,11 +223,11 @@ public class Vein extends Wall {
 
 	@Override
 	public Vein makeCopy(Square square, Actor owner) {
-		return new Vein(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, weight, owner);
+		return new Vein(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(), showInventory,
+				canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen,
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, weight, owner);
 	}
 
 	@Override

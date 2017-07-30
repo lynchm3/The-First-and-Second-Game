@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
+import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
@@ -134,12 +137,40 @@ public class Tree extends GameObject {
 	}
 
 	@Override
+	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+
+		if (this.remainingHealth <= 0)
+			return actions;
+
+		actions.add(new ActionChop(performer, this));
+
+		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
+
+		Action pickupAction = null;
+		for (Action action : actions) {
+			if (action instanceof ActionPickUp) {
+				pickupAction = action;
+			}
+		}
+		actions.remove(pickupAction);
+
+		return actions;
+
+	}
+
+	@Override
+	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+		return new ActionChop(performer, this);
+	}
+
+	@Override
 	public Tree makeCopy(Square square, Actor owner) {
-		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, weight, owner);
+		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(), showInventory,
+				canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen,
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, weight, owner);
 	}
 
 }

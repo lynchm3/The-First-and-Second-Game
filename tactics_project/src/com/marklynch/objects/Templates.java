@@ -5,6 +5,7 @@ import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
+import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
@@ -79,6 +80,8 @@ public class Templates {
 			1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 59, 63);
 	public static final Pickaxe PICKAXE = new Pickaxe("Pickaxe", 1, 1, "pickaxe.png", 100, null, true, false, false,
 			false, 0.34f, 0.34f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 5f, null, 24, 32);
+	public static final Axe HATCHET = new Axe("Hatchet", 1, 1, "a3r1.png", 100, null, true, false, false, false, 0.34f,
+			0.34f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 5f, null, 24, 46);
 	public static final Weapon HOE = new Weapon("Hoe", 2, 1, 1, "hoe.png", 100, null, true, false, false, false, 1f, 1f,
 			0f, 0f, 15f, 15f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 5f, null, 22, 15);
 	public static final Weapon SICKLE = new Weapon("Sickle", 3, 1, 1, "sickle.png", 100, null, true, false, false,
@@ -105,8 +108,6 @@ public class Templates {
 
 	// Axes
 	// https://en.wikipedia.org/wiki/Axe#Types_of_axes
-	public static final Weapon HATCHET = new Weapon("Hatchet", 3, 1, 1, "a3r1.png", 100, null, true, false, false,
-			false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 24, 46);
 	public static final Weapon CLEAVER = new Weapon("Cleaver", 5, 1, 1, "cleaver.png", 100, null, true, false, false,
 			false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 24, 41);
 
@@ -291,6 +292,8 @@ public class Templates {
 			0f, 1f, null);
 	public static final Junk ORE = new Junk("Ore", 5, "ore.png", null, new Inventory(), false, true, true, false, false,
 			false, 0.25f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 5f, null);
+	public static final Junk WOOD = new Junk("Wood", 5, "wood.png", null, new Inventory(), false, true, true, false,
+			false, false, 0.5f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 5f, null);
 	public static final Inspectable DRIED_BLOOD = new Inspectable("Dried Blood", 5, "blood.png", null, new Inventory(),
 			false, true, false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f,
 			0.1f, null);
@@ -315,6 +318,9 @@ public class Templates {
 	// NATURE
 	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), true, true, false, true,
 			false, true, 1f, 2f, 0f, -64f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
+	public static final Tree BIG_TREE = new Tree("Big Tree", 200, "tree_1.png", null, new Inventory(), true, false,
+			false, true, true, true, 1.5f, 2f, -16f, -64f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
+			null);
 
 	public static final HidingPlace BUSH = new HidingPlace("Bush", 10, "bush.png", null, new Inventory(), true, true,
 			false, false, false, true, true, 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
