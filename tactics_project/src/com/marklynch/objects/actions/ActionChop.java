@@ -52,18 +52,16 @@ public class ActionChop extends Action {
 		// if (Game.level.shouldLog(target, performer))
 		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "
 		// received ", ore }));
+
+		if (Game.level.shouldLog(target, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " chopped at ", target, " with ", axe }));
+
 		Junk wood = null;
 		if (target.checkIfDestroyed(performer, this)) {
-			if (Game.level.shouldLog(target, performer))
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " chopped down ", target, " with ", axe }));
 			wood = Templates.WOOD.makeCopy(null, oreOwner);
 			performer.inventory.add(wood);
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", wood }));
-		} else {
 			if (Game.level.shouldLog(target, performer))
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " chopped at ", target, " with ", axe }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", wood }));
 		}
 
 		performer.showPow(target);

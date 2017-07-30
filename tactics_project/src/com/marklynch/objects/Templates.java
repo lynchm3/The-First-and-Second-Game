@@ -322,6 +322,11 @@ public class Templates {
 			false, true, true, true, 1.5f, 2f, -16f, -64f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
 			null);
 
+	public static final Stump STUMP = new Stump("Stump", 100, "stump.png", null, new Inventory(), true, true, false,
+			true, false, true, 0.5f, 1f, 16f, 0f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
+	public static final Stump BIG_STUMP = new Stump("Big Stump", 200, "stump.png", null, new Inventory(), true, false,
+			false, true, true, true, 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
+
 	public static final HidingPlace BUSH = new HidingPlace("Bush", 10, "bush.png", null, new Inventory(), true, true,
 			false, false, false, true, true, 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
 			null, new Effect[] {});

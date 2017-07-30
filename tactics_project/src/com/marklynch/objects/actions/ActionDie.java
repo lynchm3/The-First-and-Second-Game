@@ -9,6 +9,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Templates;
+import com.marklynch.objects.Tree;
+import com.marklynch.objects.Vein;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
@@ -88,11 +90,19 @@ public class ActionDie extends Action {
 		} else if (performer instanceof Actor && performer.destroyedBy instanceof EffectBurning) {
 
 			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "burned to death", this.image }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " burned to death ", this.image }));
+		} else if (performer instanceof Vein) {
+
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " was depleted ", this.image }));
+		} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChop) {
+
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " was chopped down ", this.image }));
 		} else if (performer.destroyedBy instanceof EffectBurning) {
 
 			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "burned down", this.image }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " burned down ", this.image }));
 		} else if (performer instanceof Actor) {
 
 			if (Game.level.shouldLog(performer))
@@ -110,19 +120,24 @@ public class ActionDie extends Action {
 
 	public void createCorpse() {
 
-		if (performer instanceof RockGolem)
+		System.out.println("createCorpse()");
+		System.out.println("createCorpse() performer = " + performer);
+		System.out.println("createCorpse() performer.destroyedBy = " + performer.destroyedBy);
+		System.out.println("createCorpse() performer.destroyedByAction = " + performer.destroyedByAction);
 
-		{
-			Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
-			Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
-			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
-			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
-			Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
-		} else if (performer instanceof Actor) {
+		if (performer instanceof Actor) {
 			// add a carcass
 
-			GameObject body;
-			if (performer.destroyedBy instanceof EffectBurning) {
+			GameObject body = null;
+			if (performer instanceof RockGolem)
+
+			{
+				Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
+				Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
+				Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
+				Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
+				Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
+			} else if (performer.destroyedBy instanceof EffectBurning) {
 				// Death by fire
 				body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
 			} else if (performer.destroyedByAction instanceof ActionSquash) {
@@ -140,12 +155,14 @@ public class ActionDie extends Action {
 				body = Templates.CORPSE.makeCopy(performer.name + " corpse", performer.squareGameObjectIsOn, null,
 						performer.weight);
 			}
-			ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>) performer.inventory.getGameObjects()
-					.clone();
-			for (GameObject gameObjectInInventory : gameObjectsInInventory) {
-				performer.inventory.remove(gameObjectInInventory);
-				body.inventory.add(gameObjectInInventory);
-				gameObjectInInventory.owner = null;
+			if (body != null) {
+				ArrayList<GameObject> gameObjectsInInventory = (ArrayList<GameObject>) performer.inventory
+						.getGameObjects().clone();
+				for (GameObject gameObjectInInventory : gameObjectsInInventory) {
+					performer.inventory.remove(gameObjectInInventory);
+					body.inventory.add(gameObjectInInventory);
+					gameObjectInInventory.owner = null;
+				}
 			}
 		} else {
 			// GameObjects
@@ -153,6 +170,22 @@ public class ActionDie extends Action {
 				// Death by fire
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
 						Templates.ASH.makeCopy(null, null), performer.squareGameObjectIsOn));
+			} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChop) {
+
+				if (!performer.name.contains("Big")) {
+
+					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
+							Templates.STUMP.makeCopy(null, null), performer.squareGameObjectIsOn));
+
+				} else {
+
+					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
+							Templates.BIG_STUMP.makeCopy(null, null), performer.squareGameObjectIsOn));
+				}
+
+				// Dead animal
+				// Templates.BLOOD.makeCopy(performer.squareGameObjectIsOn,
+				// null);
 			}
 
 		}
