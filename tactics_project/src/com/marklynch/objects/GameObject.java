@@ -546,6 +546,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+		if (this.fitsInInventory)
+			return new ActionTake(performer, this);
 		return null;
 	}
 

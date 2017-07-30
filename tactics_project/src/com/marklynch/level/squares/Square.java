@@ -43,6 +43,7 @@ import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
+import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Square extends AStarNode implements ActionableInWorld, InventoryParent {
@@ -305,6 +306,12 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 24,
 					squarePositionX + Game.SQUARE_WIDTH - 16, squarePositionY + Game.SQUARE_HEIGHT - 24,
 					squarePositionY + Game.SQUARE_HEIGHT - 16);
+			if (action.enabled == false) {
+				TextureUtils.drawTexture(Action.x, squarePositionX + Game.SQUARE_WIDTH - 24,
+						squarePositionX + Game.SQUARE_WIDTH - 16, squarePositionY + Game.SQUARE_HEIGHT - 24,
+						squarePositionY + Game.SQUARE_HEIGHT - 16, Color.RED);
+
+			}
 		}
 	}
 
@@ -369,33 +376,39 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public Action getSecondaryActionForTheSquareOrObject(Actor performer) {
 
-		if (this.inventory.size() == 1) {
-			return this.inventory.get(0).getSecondaryActionPerformedOnThisInWorld(performer);
+		if (this.inventory.size() == 0) {
+			return null;
 		}
 
 		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
 		if (targetGameObject != null) {
 			return targetGameObject.getSecondaryActionPerformedOnThisInWorld(performer);
-		} else {
-			return getSecondaryActionPerformedOnThisInWorld(performer);
 		}
+
+		if (this.inventory.size() == 1) {
+			return this.inventory.get(0).getSecondaryActionPerformedOnThisInWorld(performer);
+		}
+
+		return null;
+
 	}
 
 	public Action getAttackActionForTheSquareOrObject(Actor performer) {
 
-		if (this == Game.level.player.squareGameObjectIsOn)
+		if (this.inventory.size() == 0) {
 			return null;
-
-		if (this.inventory.size() == 1) {
-			return new ActionAttack(performer, this.inventory.get(0));
 		}
 
 		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
 		if (targetGameObject != null) {
 			return new ActionAttack(performer, targetGameObject);
-		} else {
-			return null;
 		}
+
+		if (this.inventory.size() == 1) {
+			return new ActionAttack(performer, this.inventory.get(0));
+		}
+
+		return null;
 	}
 
 	@Override

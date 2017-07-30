@@ -15,7 +15,7 @@ public class ActionChop extends Action {
 
 	public static final String ACTION_NAME = "Chop";
 	public static final String ACTION_NAME_CANT_REACH = ACTION_NAME + " (can't reach)";
-	public static final String ACTION_NAME_NEED_PICKAXE = ACTION_NAME + " (need pickaxe)";
+	public static final String ACTION_NAME_NEED_AXE = ACTION_NAME + " (need axe)";
 
 	Actor performer;
 	GameObject target;
@@ -91,8 +91,8 @@ public class ActionChop extends Action {
 	@Override
 	public boolean check() {
 
-		if (!performer.inventory.contains(Pickaxe.class)) {
-			actionName = ACTION_NAME_NEED_PICKAXE;
+		if (!performer.inventory.contains(Axe.class)) {
+			actionName = ACTION_NAME_NEED_AXE;
 			return false;
 		}
 
