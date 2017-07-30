@@ -35,6 +35,7 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTalk;
@@ -1009,13 +1010,14 @@ public class Actor extends GameObject {
 				return new ActionLoiter(performer, performer.squareGameObjectIsOn);
 			}
 		} else if (performer.attackers.contains(this)) {
-			ActionAttack actionAttack = new ActionAttack(performer, this);
-			// if (actionAttack.enabled && actionAttack.legal) {
-			return actionAttack;
-			// }
-		} else {
+			return new ActionAttack(performer, this);
+		} else if (this instanceof AggressiveWildAnimal || this instanceof CarnivoreNeutralWildAnimal
+				|| this instanceof HerbivoreWildAnimal || this instanceof Pig) {
+			return new ActionPet(performer, this);
+		} else if (this.getConversation() != null) {
 			return new ActionTalk(performer, this);
 		}
+		return null;
 	}
 
 	@Override
@@ -1030,13 +1032,15 @@ public class Actor extends GameObject {
 			// Talk
 			if (this.getConversation() != null)
 				actions.add(new ActionTalk(performer, this));
+			if (this instanceof AggressiveWildAnimal || this instanceof CarnivoreNeutralWildAnimal
+					|| this instanceof HerbivoreWildAnimal || this instanceof Pig) {
+				actions.add(new ActionPet(performer, this));
+			}
 			// Inherited from object (attack...)
 			actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 			// Inherited from squre (move/swap squares)
 			// actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
-		}
-
-		if (this == Game.level.player) {
+		} else {
 			if (Game.level.player.peekingThrough != null) {
 				actions.add(new ActionStopPeeking(performer));
 			}
