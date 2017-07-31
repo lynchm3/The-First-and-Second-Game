@@ -323,28 +323,52 @@ public class ShadowLight {
 			////////// END SKY
 		}
 
-		/// START MAP
+		// Game.activeBatch.flush();
 		// Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
-		// view.translate(new Vector2f(Game.windowWidth / 2,
-		// Game.windowHeight / 2));
-		// view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		// // view.scale(
-		// // new Vector3f(Game.mapZoomLevels[Game.zoomLevelIndex],
-		// // Game.mapZoomLevels[Game.zoomLevelIndex], 1f));
-		// view.translate(new Vector2f(-Game.windowWidth / 2,
-		// -Game.windowHeight / 2));
-		// view.translate(new Vector2f(Game.dragX, Game.dragY));
-
-		float x1 = Game.halfWindowWidth + 14400f * Game.zoom + Game.dragX * Game.zoom;
-		float y1 = Game.halfWindowHeight + 384f * Game.zoom + Game.dragY * Game.zoom;
-		float x2 = Game.halfWindowWidth + 14400f * Game.zoom + Game.dragX * Game.zoom + 128f;
-		float y2 = Game.halfWindowHeight + 384f * Game.zoom + Game.dragY * Game.zoom + 128f;
-
 		Game.activeBatch.updateUniforms();
-		System.out.println("Map draw x1 = " + x1 + ", y1 = " + y1 + ", x2 = " + x2 + ", y2 = " + y2);
-		TextureUtils.drawTexture(ResourceUtils.getGlobalImage("map_cave.png"), x1, y1, x2, y2);
+		try {
+			Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+		} catch (LWJGLException e) {
+			e.printStackTrace();
+		}
+		Game.activeBatch.setColor(Color.WHITE);
+
+		int squarePositionX = Game.level.squares[225][6].xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = Game.level.squares[225][6].yInGrid * (int) Game.SQUARE_HEIGHT;
+		float drawPositionX = (Game.windowWidth / 2)
+				+ (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.dragX));
+		float drawPositionY = (Game.windowHeight / 2)
+				+ (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.dragY));
+
+		float realX = drawPositionX;
+		float realY = drawPositionY;
+
+		TextureUtils.drawTexture(ResourceUtils.getGlobalImage("map_cave.png"), drawPositionX, drawPositionY,
+				drawPositionX + 128, drawPositionY + 128);
 		Game.activeBatch.flush();
+
+		// RAR
+		// float x1 = Game.windowWidth * Game.zoom * Game.zoom + 14400f *
+		// Game.zoom
+		// + Game.dragX * Game.zoom;
+		// float y1 = Game.windowHeight * Game.zoom * Game.zoom + 384f *
+		// Game.zoom +
+		// Game.dragY * Game.zoom;
+		// float x2 = Game.windowWidth * Game.zoom * Game.zoom + 14400f *
+		// Game.zoom
+		// + Game.dragX * Game.zoom + 128f;
+		// float y2 = Game.windowHeight * Game.zoom * Game.zoom + 384f *
+		// Game.zoom +
+		// Game.dragY * Game.zoom + 128f;
+		//
+		// Game.activeBatch.updateUniforms();
+		// System.out.println("Map draw x1 = " + x1 + ", y1 = " + y1 + ", x2 = "
+		// +
+		// x2 + ", y2 = " + y2);
+		// TextureUtils.drawTexture(ResourceUtils.getGlobalImage("map_cave.png"),
+		// x1, y1, x2, y2);
+		// Game.activeBatch.flush();
 		////////// END MAP
 		// lightsFBO.end();
 
