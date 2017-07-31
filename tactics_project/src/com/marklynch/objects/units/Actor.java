@@ -47,6 +47,7 @@ import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -695,9 +696,8 @@ public class Actor extends GameObject {
 			int helmetPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
 					+ drawOffsetY + headAnchorY - helmet.anchorY);
 			float alpha = 1.0f;
-			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
-					helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
-					helmetPositionYInPixels + helmet.height);
+			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels, helmetPositionYInPixels,
+					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels + helmet.height);
 		} else if (hairImageTexture != null) {
 			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
 					+ drawOffsetX + bodyAnchorX - 0);
@@ -791,6 +791,15 @@ public class Actor extends GameObject {
 		if (this.remainingHealth <= 0)
 			return;
 
+		if (!Game.fullVisiblity && this != Game.level.player) {
+
+			if (this.squareGameObjectIsOn.visibleToPlayer == false && persistsWhenCantBeSeen == false)
+				return;
+
+			if (!this.squareGameObjectIsOn.seenByPlayer)
+				return;
+		}
+
 		super.draw2();
 
 		// Draw activity text
@@ -819,6 +828,23 @@ public class Actor extends GameObject {
 		}
 
 		if (thoughtBubbleImageTexture != null) {
+
+			int expressionBubbleWidth = 64;
+			int expressionBubbleHeight = 64;
+
+			int expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+			int expressionBubblePositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+					+ drawOffsetY - 64);
+			float alphaBubble = 1.0f;
+
+			// TextureUtils.skipNormals = true;
+
+			// if (!this.squareGameObjectIsOn.visibleToPlayer)
+			alphaBubble = 0.5f;
+			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("thought_bubble.png"), alphaBubble,
+					expressionBubblePositionXInPixels, expressionBubblePositionYInPixels,
+					expressionBubblePositionXInPixels + expressionBubbleWidth,
+					expressionBubblePositionYInPixels + expressionBubbleHeight);
 
 			int expressionWidth = 32;
 			int expressionHeight = 32;

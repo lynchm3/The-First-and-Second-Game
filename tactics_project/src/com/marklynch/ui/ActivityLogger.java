@@ -11,18 +11,18 @@ import mdesl.graphics.Color;
 public class ActivityLogger {
 	private transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
 	public float width = 420;
-	public float offsetX = 0;
-	public float offsetY = 0;
+	public float x = 0;
+	public float textOffsetY = 0;
 	// public float
 
 	public void drawStaticUI() {
 
 		// Log
-		QuadUtils.drawQuad(Color.BLACK, offsetX, offsetX + width, offsetY, offsetY + Game.windowHeight);
+		QuadUtils.drawQuad(Color.BLACK, x, x + width, 0, Game.windowHeight);
 
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
-			TextUtils.printTextWithImages(logs.get(i).contents, offsetX + 20, offsetY + i * 20, Integer.MAX_VALUE,
+			TextUtils.printTextWithImages(logs.get(i).contents, x + 20, textOffsetY + i * 20, Integer.MAX_VALUE,
 					true);
 		}
 
@@ -32,7 +32,7 @@ public class ActivityLogger {
 		if (Game.level.showLog == false)
 			return false;
 
-		if (mouseX > offsetX && mouseX < offsetX + width && mouseY > 0 && mouseY < 0 + Game.windowHeight) {
+		if (mouseX > x && mouseX < x + width && mouseY > 0 && mouseY < 0 + Game.windowHeight) {
 			return true;
 		}
 		return false;
@@ -45,11 +45,11 @@ public class ActivityLogger {
 
 	public void scrollToBottom() {
 
-		offsetY = 0;
+		textOffsetY = 0;
 		int totalLogsHeight = logs.size() * 20;
-		offsetY = Game.windowHeight - totalLogsHeight;
-		if (offsetY > 0)
-			offsetY = 0;
+		textOffsetY = Game.windowHeight - totalLogsHeight;
+		if (textOffsetY > 0)
+			textOffsetY = 0;
 
 	}
 
@@ -59,11 +59,11 @@ public class ActivityLogger {
 
 	public void drag(float dragY) {
 		int totalLogsHeight = logs.size() * 20;
-		this.offsetY -= dragY;
-		if (offsetY >= 0) {
-			offsetY = 0;
-		} else if (offsetY < Game.windowHeight - totalLogsHeight) {
-			offsetY = Game.windowHeight - totalLogsHeight;
+		this.textOffsetY -= dragY;
+		if (textOffsetY >= 0) {
+			textOffsetY = 0;
+		} else if (textOffsetY < Game.windowHeight - totalLogsHeight) {
+			textOffsetY = Game.windowHeight - totalLogsHeight;
 		}
 	}
 

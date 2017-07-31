@@ -323,8 +323,8 @@ public class Level {
 					public void run() {
 						super.run();
 						if (showLog == true) {
-							while (activityLogger.offsetX < 0) {
-								activityLogger.offsetX += 2;
+							while (activityLogger.x < 0) {
+								activityLogger.x += 2;
 								showHideLogButton.x += 2;
 								try {
 									Thread.sleep(1);
@@ -333,11 +333,11 @@ public class Level {
 									e.printStackTrace();
 								}
 							}
-							activityLogger.offsetX = 0;
+							activityLogger.x = 0;
 							showHideLogButton.x = activityLogger.width;
 						} else {
-							while (activityLogger.offsetX > -activityLogger.width) {
-								activityLogger.offsetX -= 2;
+							while (activityLogger.x > -activityLogger.width) {
+								activityLogger.x -= 2;
 								showHideLogButton.x -= 2;
 								try {
 									Thread.sleep(1);
@@ -346,7 +346,7 @@ public class Level {
 									e.printStackTrace();
 								}
 							}
-							activityLogger.offsetX = -activityLogger.width;
+							activityLogger.x = -activityLogger.width;
 							showHideLogButton.x = 0;
 						}
 					}
