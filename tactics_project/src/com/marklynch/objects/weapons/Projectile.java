@@ -130,7 +130,7 @@ public class Projectile {
 
 		// if (!this.squareGameObjectIsOn.visibleToPlayer)
 		// alpha = 0.5f;
-		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, x, x + projectileObject.width, y,
+		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, x, y, x + projectileObject.width,
 				y + projectileObject.height, projectileObject.backwards);
 		// TextureUtils.skipNormals = false;
 		// }

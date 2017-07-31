@@ -150,92 +150,92 @@ public class Wall extends GameObject {
 
 			// 8
 			if (fullWall) {
-				TextureUtils.drawTexture(textureFullWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			// 7
 			if (topLeftInnerCorner) {
-				TextureUtils.drawTexture(textureTopLeftInnerCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureTopLeftInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 
 			}
 
 			if (topRightInnerCorner) {
-				TextureUtils.drawTexture(textureTopRightInnerCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureTopRightInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 
 			}
 
 			if (bottomRightInnerCorner) {
-				TextureUtils.drawTexture(textureBottomRightInnerCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureBottomRightInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 
 			}
 
 			if (bottomLeftInnerCorner) {
-				TextureUtils.drawTexture(textureBottomLeftInnerCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureBottomLeftInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 
 			}
 
 			// 5
 			if (fullLeftWall) {
-				TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			if (fullRightWall) {
-				TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			if (fullTopWall) {
-				TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			if (fullBottomWall) {
-				TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			// 4
 			if (cross) {
-				TextureUtils.drawTexture(textureCross, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureCross, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 
 			}
 
 			// 3
 			if (topLeftOuterCorner) {
-				TextureUtils.drawTexture(textureTopLeftOuterCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureTopLeftOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 
 			}
 
 			if (topRightOuterCorner) {
-				TextureUtils.drawTexture(textureTopRightOuterCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureTopRightOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 
 			}
 
 			if (bottomRightOuterCorner) {
-				TextureUtils.drawTexture(textureBottomRightOuterCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureBottomRightOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 
 			}
 
 			if (bottomLeftOuterCorner) {
-				TextureUtils.drawTexture(textureBottomLeftOuterCorner, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureBottomLeftOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 
 			}
 
 			// 2
 			if (horizontalWall) {
-				TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			if (verticalWall) {
-				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 

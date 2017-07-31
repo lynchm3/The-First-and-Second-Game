@@ -51,13 +51,13 @@ public class Window extends GameObjectExploder {
 						+ drawOffsetX);
 				int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
 						+ drawOffsetY);
-				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + width,
-						actorPositionYInPixels, actorPositionYInPixels + height);
+				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+						actorPositionXInPixels + width, actorPositionYInPixels + height);
 				// stub
 				actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
 				actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 				TextureUtils.drawTexture(imageTexture, 1 - alpha, actorPositionXInPixels,
-						actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels,
+						actorPositionYInPixels, actorPositionXInPixels + Game.SQUARE_WIDTH,
 						actorPositionYInPixels + Game.SQUARE_HEIGHT);
 			}
 

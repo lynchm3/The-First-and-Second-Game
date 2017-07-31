@@ -44,8 +44,8 @@ public abstract class Effect {
 			// if (target.hiding)
 			alpha = 0.75f;
 
-			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + target.width,
-					actorPositionYInPixels, actorPositionYInPixels + target.height, target.backwards);
+			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + target.width, actorPositionYInPixels + target.height, target.backwards);
 			// TextureUtils.skipNormals = false;
 		}
 	}

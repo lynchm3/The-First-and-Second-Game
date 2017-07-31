@@ -106,8 +106,8 @@ public class BrokenGlass extends Stampable {
 
 			if (!this.parent.squareGameObjectIsOn.visibleToPlayer)
 				alpha = 0.5f;
-			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + width,
-					actorPositionYInPixels, actorPositionYInPixels + height);
+			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + width, actorPositionYInPixels + height);
 			// TextureUtils.skipNormals = false;
 		}
 	}

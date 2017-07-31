@@ -15,16 +15,16 @@ public class TextureUtils {
 	public static boolean skipNormals = false;
 
 	// master drawTexture method
-	public static void drawTexture(Texture texture, float alpha, float x1, float x2, float y1, float y2,
+	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2,
 			boolean inBounds, float boundsX1, float boundsX2, float boundsY1, float boundsY2, boolean backwards,
 			boolean upsideDown) {
-		drawTexture(texture, alpha, x1, x2, y1, y2, inBounds, boundsX1, boundsX2, boundsY1, boundsY2, backwards,
+		drawTexture(texture, alpha, x1, y1, x2, y2, inBounds, boundsX1, boundsX2, boundsY1, boundsY2, backwards,
 				upsideDown, Color.WHITE);
 
 	}
 
 	// master drawTexture method
-	public static void drawTexture(Texture texture, float alpha, float x1, float x2, float y1, float y2,
+	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2,
 			boolean inBounds, float boundsX1, float boundsX2, float boundsY1, float boundsY2, boolean backwards,
 			boolean upsideDown, Color color) {
 
@@ -133,33 +133,33 @@ public class TextureUtils {
 
 	}
 
-	public static void drawTexture(Texture texture, float x1, float x2, float y1, float y2) {
-		drawTexture(texture, 1.0f, x1, x2, y1, y2, false, 0, 0, 0, 0, false, false, Color.WHITE);
+	public static void drawTexture(Texture texture, float x1, float y1, float x2, float y2) {
+		drawTexture(texture, 1.0f, x1, y1, x2, y2, false, 0, 0, 0, 0, false, false, Color.WHITE);
 	}
 
-	public static void drawTexture(Texture texture, float x1, float x2, float y1, float y2, Color color) {
-		drawTexture(texture, 1.0f, x1, x2, y1, y2, false, 0, 0, 0, 0, false, false, color);
+	public static void drawTexture(Texture texture, float x1, float y1, float x2, float y2, Color color) {
+		drawTexture(texture, 1.0f, x1, y1, x2, y2, false, 0, 0, 0, 0, false, false, color);
 	}
 
-	public static void drawTexture(Texture texture, float alpha, float x1, float x2, float y1, float y2) {
-		drawTexture(texture, alpha, x1, x2, y1, y2, false, 0, 0, 0, 0, false, false);
+	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2) {
+		drawTexture(texture, alpha, x1, y1, x2, y2, false, 0, 0, 0, 0, false, false);
 	}
 
-	public static void drawTexture(Texture texture, float alpha, float x1, float x2, float y1, float y2,
+	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2,
 			boolean backwards) {
-		drawTexture(texture, alpha, x1, x2, y1, y2, false, 0, 0, 0, 0, backwards, false);
+		drawTexture(texture, alpha, x1, y1, x2, y2, false, 0, 0, 0, 0, backwards, false);
 	}
 
-	public static void drawTextureBackwards(Texture texture, float alpha, float x1, float x2, float y1, float y2) {
-		drawTexture(texture, alpha, x1, x2, y1, y2, false, 0, 0, 0, 0, true, false);
+	public static void drawTextureBackwards(Texture texture, float alpha, float x1, float y1, float x2, float y2) {
+		drawTexture(texture, alpha, x1, y1, x2, y2, false, 0, 0, 0, 0, true, false);
 	}
 
-	public static void drawTextureupsideDown(Texture texture, float alpha, float x1, float x2, float y1, float y2) {
-		drawTexture(texture, alpha, x1, x2, y1, y2, false, 0, 0, 0, 0, false, true);
+	public static void drawTextureupsideDown(Texture texture, float alpha, float x1, float y1, float x2, float y2) {
+		drawTexture(texture, alpha, x1, y1, x2, y2, false, 0, 0, 0, 0, false, true);
 	}
 
-	public static void drawTextureWithinBounds(Texture texture, float alpha, float x1, float x2, float y1, float y2,
+	public static void drawTextureWithinBounds(Texture texture, float alpha, float x1, float y1, float x2, float y2,
 			float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
-		drawTexture(texture, alpha, x1, x2, y1, y2, true, boundsX1, boundsX2, boundsY1, boundsY2, false, false);
+		drawTexture(texture, alpha, x1, y1, x2, y2, true, boundsX1, boundsX2, boundsY1, boundsY2, false, false);
 	}
 }

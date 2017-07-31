@@ -154,10 +154,10 @@ public class ScriptEventSpeech extends ScriptEvent {
 					}
 					if (directions.get(i).equals(true)) {
 						TextureUtils.drawTexture(actors.get(i).imageTexture, alpha, positions.get(i),
-								positions.get(i) + 256, posY, posY + 256);
+								posY, positions.get(i) + 256, posY + 256);
 					} else {
 						TextureUtils.drawTextureBackwards(actors.get(i).imageTexture, alpha,
-								Game.windowWidth - positions.get(i) - 256, Game.windowWidth - positions.get(i), posY,
+								Game.windowWidth - positions.get(i) - 256, posY, Game.windowWidth - positions.get(i),
 								posY + 256);
 					}
 				}

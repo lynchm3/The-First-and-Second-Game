@@ -38,8 +38,8 @@ public class ConversationPart {
 																							// 128f;//
 																							// -64;
 				float offsetY = 0;
-				TextureUtils.drawTexture(actor.imageTexture, 1.0f, 0 + offsetX, Game.halfWindowHeight + offsetX,
-						Game.halfWindowHeight + offsetY, Game.windowHeight + offsetY);
+				TextureUtils.drawTexture(actor.imageTexture, 1.0f, 0 + offsetX, Game.halfWindowHeight + offsetY,
+						Game.halfWindowHeight + offsetX, Game.windowHeight + offsetY);
 
 			}
 		}
@@ -50,7 +50,7 @@ public class ConversationPart {
 
 		// Speker 2 image (player)
 		TextureUtils.drawTexture(Game.level.player.imageTexture, 1.0f, Game.windowWidth,
-				Game.windowWidth - Game.halfWindowHeight, Game.halfWindowHeight, Game.windowHeight);
+				Game.halfWindowHeight, Game.windowWidth - Game.halfWindowHeight, Game.windowHeight);
 
 		windowSelectConversationResponse.draw();
 

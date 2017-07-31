@@ -35,8 +35,8 @@ public class ActionStopHidingInside extends Action {
 		if (!enabled)
 			return;
 
-		// if (Game.level.shouldLog(performer))
-		Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", "" + object }));
+		if (Game.level.shouldLog(performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stopped hiding in ", "" + object }));
 
 		// object.inventory.remove(performer);
 		// object.squareGameObjectIsOn.inventory.remove(performer);

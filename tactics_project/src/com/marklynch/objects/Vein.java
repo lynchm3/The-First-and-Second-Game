@@ -121,39 +121,39 @@ public class Vein extends Wall {
 
 			// 8
 			if (fullWall) {
-				TextureUtils.drawTexture(textureFullWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			// 5
 			if (fullLeftWall) {
-				TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			if (fullRightWall) {
-				TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			if (fullTopWall) {
-				TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			if (fullBottomWall) {
-				TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			// 2
 			if (horizontalWall) {
-				TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 
 			if (verticalWall) {
-				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawX2, drawY1, drawY2);
+				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawY1, drawX2, drawY2);
 				return;
 			}
 

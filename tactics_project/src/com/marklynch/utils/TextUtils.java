@@ -89,7 +89,7 @@ public class TextUtils {
 						return;
 					}
 				}
-				TextureUtils.drawTexture((Texture) content, posX + offsetX, posX + offsetX + 20, posY + offsetY,
+				TextureUtils.drawTexture((Texture) content, posX + offsetX, posY + offsetY, posX + offsetX + 20,
 						posY + offsetY + 20);
 				offsetX += width;
 
@@ -123,7 +123,7 @@ public class TextUtils {
 
 				// Image
 				float x = posX + offsetX;
-				TextureUtils.drawTexture(gameObject.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
+				TextureUtils.drawTexture(gameObject.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
 				offsetX += textureWidth;
 
 				// } else if (content instanceof Weapon || content instanceof
@@ -193,7 +193,7 @@ public class TextUtils {
 				// Image
 
 				float x = posX + offsetX;
-				TextureUtils.drawTexture(faction.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
+				TextureUtils.drawTexture(faction.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
 				offsetX += textureWidth;
 
 			} else if (content instanceof Decoration) {
@@ -220,7 +220,7 @@ public class TextUtils {
 				// Image
 
 				float x = posX + offsetX;
-				TextureUtils.drawTexture(decoration.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
+				TextureUtils.drawTexture(decoration.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
 				offsetX += textureWidth;
 
 			} else if (content instanceof Area) {
@@ -269,7 +269,7 @@ public class TextUtils {
 				// Image
 				if (structure.imageTexture != null) {
 					float x = posX + offsetX;
-					TextureUtils.drawTexture(structure.imageTexture, x, x + 20, posY + offsetY, posY + offsetY + 20);
+					TextureUtils.drawTexture(structure.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
 					offsetX += textureWidth;
 				}
 
@@ -389,15 +389,15 @@ public class TextUtils {
 				// Image
 				if (action.image != null) {
 					float x = posX + offsetX + textureWidth;
-					TextureUtils.drawTexture(action.image, x, x + 20, posY + offsetY, posY + offsetY + 20, color);
+					TextureUtils.drawTexture(action.image, x, posY + offsetY, x + 20, posY + offsetY + 20, color);
 					offsetX += textureWidth * 2;
 
 					if (!action.enabled) {
 						if (action.legal) {
-							TextureUtils.drawTexture(Action.x, x + 10, x + 20, posY + offsetY + 10, posY + offsetY + 20,
+							TextureUtils.drawTexture(Action.x, x + 10, posY + offsetY + 10, x + 20, posY + offsetY + 20,
 									Color.RED);
 						} else {
-							TextureUtils.drawTexture(Action.x, x + 10, x + 20, posY + offsetY + 10, posY + offsetY + 20,
+							TextureUtils.drawTexture(Action.x, x + 10, posY + offsetY + 10, x + 20, posY + offsetY + 20,
 									Color.WHITE);
 
 						}

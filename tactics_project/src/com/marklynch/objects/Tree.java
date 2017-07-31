@@ -81,7 +81,7 @@ public class Tree extends GameObject {
 			// TextureUtils.skipNormals = true;
 
 			TextureUtils.drawTexture(fruit.imageTexture, alpha, fruitPositionXInPixels,
-					fruitPositionXInPixels + fruit.width, fruitPositionYInPixels,
+					fruitPositionYInPixels, fruitPositionXInPixels + fruit.width,
 					fruitPositionYInPixels + fruit.height);
 		}
 		super.draw2();

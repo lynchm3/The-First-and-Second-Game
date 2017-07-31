@@ -38,12 +38,12 @@ public class Decoration {
 	public void draw() {
 		// Draw object
 		if (background)
-			TextureUtils.drawTexture(imageTexture, x, x + width, y, y + height);
+			TextureUtils.drawTexture(imageTexture, x, y, x + width, y + height);
 	}
 
 	public void draw2() {
 		// Draw object
 		if (!background)
-			TextureUtils.drawTexture(imageTexture, x, x + width, y, y + height);
+			TextureUtils.drawTexture(imageTexture, x, y, x + width, y + height);
 	}
 }

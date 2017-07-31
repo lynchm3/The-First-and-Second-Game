@@ -49,7 +49,7 @@ public class Roof extends GameObject {
 
 			// TextureUtils.skipNormals = true;
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels,
-					actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels,
+					actorPositionYInPixels, actorPositionXInPixels + Game.SQUARE_WIDTH,
 					actorPositionYInPixels + Game.SQUARE_HEIGHT);
 			// TextureUtils.skipNormals = false;
 		}

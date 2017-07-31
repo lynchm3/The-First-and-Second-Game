@@ -684,7 +684,7 @@ public class Actor extends GameObject {
 					+ drawOffsetY + handAnchorY - equipped.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, weaponPositionXInPixels,
-					weaponPositionXInPixels + equipped.width, weaponPositionYInPixels,
+					weaponPositionYInPixels, weaponPositionXInPixels + equipped.width,
 					weaponPositionYInPixels + equipped.height);
 		}
 
@@ -696,7 +696,7 @@ public class Actor extends GameObject {
 					+ drawOffsetY + headAnchorY - helmet.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels,
-					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels,
+					helmetPositionYInPixels, helmetPositionXInPixels + helmet.width,
 					helmetPositionYInPixels + helmet.height);
 		} else if (hairImageTexture != null) {
 			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
@@ -705,7 +705,7 @@ public class Actor extends GameObject {
 					+ drawOffsetY + bodyAnchorY - 0);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
-					bodyArmorPositionXInPixels + hairImageTexture.getWidth(), bodyArmorPositionYInPixels,
+					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
 					bodyArmorPositionYInPixels + hairImageTexture.getHeight());
 		}
 
@@ -717,7 +717,7 @@ public class Actor extends GameObject {
 					+ drawOffsetY + bodyAnchorY - bodyArmor.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
-					bodyArmorPositionXInPixels + bodyArmor.width, bodyArmorPositionYInPixels,
+					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
 					bodyArmorPositionYInPixels + bodyArmor.height);
 		}
 
@@ -729,7 +729,7 @@ public class Actor extends GameObject {
 					+ drawOffsetY + legsAnchorY - legArmor.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
-					legArmorPositionXInPixels + legArmor.width, legArmorPositionYInPixels,
+					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
 					legArmorPositionYInPixels + legArmor.height);
 		}
 
@@ -841,7 +841,7 @@ public class Actor extends GameObject {
 			if (!this.squareGameObjectIsOn.visibleToPlayer)
 				alpha = 0.5f;
 			TextureUtils.drawTexture(thoughtBubbleImageTexture, alpha, expressionPositionXInPixels,
-					expressionPositionXInPixels + expressionWidth, expressionPositionYInPixels,
+					expressionPositionYInPixels, expressionPositionXInPixels + expressionWidth,
 					expressionPositionYInPixels + expressionHeight);
 			// TextureUtils.skipNormals = false;
 		}

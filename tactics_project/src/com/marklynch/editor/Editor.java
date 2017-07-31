@@ -631,9 +631,9 @@ public class Editor {
 			float y2 = Game.squareMouseIsOver.yInGrid * Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
 
 			// CircleUtils.drawCircle(Color.white, 10d, x1, y1);
-			TextureUtils.drawTexture(Game.level.gameCursor.circle, x1 - 10, x1 + 10, y1 - 10, y1 + 10);
+			TextureUtils.drawTexture(Game.level.gameCursor.circle, x1 - 10, y1 - 10, x1 + 10, y1 + 10);
 			LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 10f);
-			TextureUtils.drawTexture(Game.level.gameCursor.circle, x2 - 10, x2 + 10, y2 - 10, y2 + 10);
+			TextureUtils.drawTexture(Game.level.gameCursor.circle, x2 - 10, y2 - 10, x2 + 10, y2 + 10);
 
 		}
 	}
@@ -697,10 +697,10 @@ public class Editor {
 		}
 
 		if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
-			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, Mouse.getX() + 10, Mouse.getX() + 30,
-					Game.windowHeight - Mouse.getY() + 20, Game.windowHeight - Mouse.getY() + 40);
-			TextureUtils.drawTexture(selectedGameObject.imageTexture, Mouse.getX() + 10, Mouse.getX() + 30,
-					Game.windowHeight - Mouse.getY() + 20, Game.windowHeight - Mouse.getY() + 40);
+			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, Mouse.getX() + 10, Game.windowHeight - Mouse.getY() + 20,
+					Mouse.getX() + 30, Game.windowHeight - Mouse.getY() + 40);
+			TextureUtils.drawTexture(selectedGameObject.imageTexture, Mouse.getX() + 10, Game.windowHeight - Mouse.getY() + 20,
+					Mouse.getX() + 30, Game.windowHeight - Mouse.getY() + 40);
 		}
 	}
 

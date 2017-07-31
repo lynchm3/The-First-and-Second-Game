@@ -47,17 +47,17 @@ public class AILine {
 
 		// Draw
 		if (aiLineType == AILineType.AI_LINE_TYPE_ATTACK) {
-			TextureUtils.drawTexture(Game.level.gameCursor.redArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.redArrow, 0.5f, 0, 0 - 16, 0 + distance, 0 + 16);
 		} else if (aiLineType == AILineType.AI_LINE_TYPE_SEARCH) {
-			TextureUtils.drawTexture(Game.level.gameCursor.yellowArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.yellowArrow, 0.5f, 0, 0 - 16, 0 + distance, 0 + 16);
 		} else if (aiLineType == AILineType.AI_LINE_TYPE_CRIME) {
-			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0.5f, 0, 0 - 16, 0 + distance, 0 + 16);
 		} else if (aiLineType == AILineType.AI_LINE_TYPE_FOLLOW) {
-			TextureUtils.drawTexture(Game.level.gameCursor.greenArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.greenArrow, 0.5f, 0, 0 - 16, 0 + distance, 0 + 16);
 		} else if (aiLineType == AILineType.AI_LINE_TYPE_ESCAPE) {
-			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0, 0 - 16, 0 + distance, 0 + 16);
 		} else if (aiLineType == AILineType.AI_LINE_TYPE_SWITCH) {
-			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0.5f, 0, 0 + distance, 0 - 16, 0 + 16);
+			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0.5f, 0, 0 - 16, 0 + distance, 0 + 16);
 		}
 
 		Game.activeBatch.flush();

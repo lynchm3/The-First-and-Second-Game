@@ -13,9 +13,9 @@ public abstract class ActorButton extends Button {
 	public void draw() {
 
 		if (enabled)
-			TextureUtils.drawTexture(enabledTexture, x, x + width, y, y + height);
+			TextureUtils.drawTexture(enabledTexture, x, y, x + width, y + height);
 		else
-			TextureUtils.drawTexture(disabledTexture, x, x + width, y, y + height);
+			TextureUtils.drawTexture(disabledTexture, x, y, x + width, y + height);
 
 	}
 
@@ -23,10 +23,10 @@ public abstract class ActorButton extends Button {
 	public void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
 
 		if (enabled)
-			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, x, x + width, y, y + height, boundsX1, boundsX2,
+			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, x, y, x + width, y + height, boundsX1, boundsX2,
 					boundsY1, boundsY2);
 		else
-			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, x, x + width, y, y + height, boundsX1, boundsX2,
+			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, x, y, x + width, y + height, boundsX1, boundsX2,
 					boundsY1, boundsY2);
 
 	}

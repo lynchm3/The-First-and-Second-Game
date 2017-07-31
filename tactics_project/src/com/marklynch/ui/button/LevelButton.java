@@ -66,10 +66,10 @@ public class LevelButton extends Button {
 			realY = Game.windowHeight - y;
 
 		if (enabled) {
-			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, realX, realX + width, realY, realY + height,
+			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, realX, realY, realX + width, realY + height,
 					boundsX1, boundsX2, boundsY1, boundsY2);
 		} else {
-			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, realX, realX + width, realY, realY + height,
+			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, realX, realY, realX + width, realY + height,
 					boundsX1, boundsX2, boundsY1, boundsY2);
 		}
 

@@ -53,7 +53,7 @@ public class InventorySquare extends Square {
 
 		// square texture
 
-		TextureUtils.drawTexture(imageTexture, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
+		TextureUtils.drawTexture(imageTexture, xInPixels, yInPixels, xInPixels + Game.SQUARE_WIDTH,
 				yInPixels + Game.SQUARE_HEIGHT);
 		if (gameObject != null) {
 
@@ -67,12 +67,12 @@ public class InventorySquare extends Square {
 				drawWidth = 64 * realTextureWidth / realTextureHeight;
 			}
 			// TextureUtils.skipNormals = false;
-			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, xInPixels + drawWidth, yInPixels,
+			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, yInPixels, xInPixels + drawWidth,
 					yInPixels + drawHeight);
 
 			for (Effect effect : gameObject.activeEffectsOnGameObject) {
-				TextureUtils.drawTexture(effect.imageTexture, 0.75f, xInPixels, xInPixels + Game.SQUARE_WIDTH,
-						yInPixels, yInPixels + Game.SQUARE_HEIGHT);
+				TextureUtils.drawTexture(effect.imageTexture, 0.75f, xInPixels, yInPixels,
+						xInPixels + Game.SQUARE_WIDTH, yInPixels + Game.SQUARE_HEIGHT);
 			}
 
 		}
@@ -82,14 +82,14 @@ public class InventorySquare extends Square {
 	@Override
 	public void drawHighlight() {
 
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, xInPixels, xInPixels + Game.SQUARE_WIDTH,
-				yInPixels, yInPixels + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, xInPixels, yInPixels,
+				xInPixels + Game.SQUARE_WIDTH, yInPixels + Game.SQUARE_HEIGHT);
 
 	}
 
 	@Override
 	public void drawCursor() {
-		TextureUtils.drawTexture(Game.level.gameCursor.cursor, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
+		TextureUtils.drawTexture(Game.level.gameCursor.cursor, xInPixels, yInPixels, xInPixels + Game.SQUARE_WIDTH,
 				yInPixels + Game.SQUARE_HEIGHT);
 	}
 
@@ -97,7 +97,7 @@ public class InventorySquare extends Square {
 	public void drawAction() {
 		Action defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player);
 		if (defaultAction != null && defaultAction.image != null) {
-			TextureUtils.drawTexture(defaultAction.image, xInPixels, xInPixels + Game.SQUARE_WIDTH, yInPixels,
+			TextureUtils.drawTexture(defaultAction.image, xInPixels, yInPixels, xInPixels + Game.SQUARE_WIDTH,
 					yInPixels + Game.SQUARE_HEIGHT);
 		}
 	}

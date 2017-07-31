@@ -212,8 +212,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			if (hiding)
 				alpha = 0.5f;
 
-			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionXInPixels + width,
-					actorPositionYInPixels, actorPositionYInPixels + height, backwards);
+			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
 			// TextureUtils.skipNormals = false;
 		}
 	}
@@ -238,7 +238,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 				int powPositionYInPixels = powTarget.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 				TextureUtils.drawTexture(this.powTexture, powPositionXInPixels,
-						powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels,
+						powPositionYInPixels, powPositionXInPixels + Game.SQUARE_WIDTH,
 						powPositionYInPixels + Game.SQUARE_HEIGHT);
 
 			}
