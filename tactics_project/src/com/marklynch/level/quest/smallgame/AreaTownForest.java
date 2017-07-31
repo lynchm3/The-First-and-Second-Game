@@ -24,6 +24,9 @@ public class AreaTownForest {
 			int randomX = (int) (103 + (113 * Math.random()));
 			int randomY = (int) (3 + (95 * Math.random()));
 
+			if (randomX > 152 && randomX < 167 && randomY > 47 && randomY < 63)
+				continue;
+
 			if (Math.random() * maxDiffFromCenterX < Math.abs(randomX - centerX))
 				continue;
 			if (Math.random() * maxDiffFromCenterY < Math.abs(randomY - centerY))
@@ -45,6 +48,59 @@ public class AreaTownForest {
 			}
 
 		}
+
+		for (int i = 152; i < 167; i++) {
+			if (Game.level.squares[i][47].inventory.getGameObjectOfClass(Tree.class) == null) {
+				Templates.BIG_TREE.makeCopy(Game.level.squares[i][47], null);
+			}
+
+			if (Game.level.squares[i][48].inventory.getGameObjectOfClass(Tree.class) == null) {
+				Templates.BIG_TREE.makeCopy(Game.level.squares[i][48], null);
+			}
+
+			if (Game.level.squares[i][62].inventory.getGameObjectOfClass(Tree.class) == null) {
+				Templates.BIG_TREE.makeCopy(Game.level.squares[i][62], null);
+			}
+
+			if (Game.level.squares[i][63].inventory.getGameObjectOfClass(Tree.class) == null) {
+				Templates.BIG_TREE.makeCopy(Game.level.squares[i][63], null);
+			}
+
+		}
+
+		for (int j = 47; j < 63; j++) {
+			if (Game.level.squares[151][j].inventory.getGameObjectOfClass(Tree.class) == null) {
+				Templates.BIG_TREE.makeCopy(Game.level.squares[151][j], null);
+			}
+
+			if (Game.level.squares[152][j].inventory.getGameObjectOfClass(Tree.class) == null) {
+				Templates.BIG_TREE.makeCopy(Game.level.squares[152][j], null);
+			}
+
+			if (Game.level.squares[167][j].inventory.getGameObjectOfClass(Tree.class) == null) {
+				Templates.BIG_TREE.makeCopy(Game.level.squares[167][j], null);
+			}
+
+			if (Game.level.squares[168][j].inventory.getGameObjectOfClass(Tree.class) == null) {
+				Templates.BIG_TREE.makeCopy(Game.level.squares[168][j], null);
+			}
+
+		}
+
+		Templates.BIG_TREE.makeCopy(Game.level.squares[153][49], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[153][52], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[153][55], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[153][55], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[153][61], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[166][49], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[166][52], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[166][55], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[166][58], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[166][55], null);
+		Templates.BIG_TREE.makeCopy(Game.level.squares[166][61], null);
+		// Templates.BIG_TREE.makeCopy(Game.level.squares[166][49], null);
+		// Templates.BIG_TREE.makeCopy(Game.level.squares[166][62], null);
+
 		Area areaTownForest = new Area("Town Forest", "map_forest.png", Square.DARK_GRASS_TEXTURE, 121, 11, 199, 90);
 		Game.level.areas.add(areaTownForest);
 		Area areaInnerTownForest = new Area("Inner Town Forest", null, Square.DARK_GRASS_TEXTURE, 146, 33, 180, 63);

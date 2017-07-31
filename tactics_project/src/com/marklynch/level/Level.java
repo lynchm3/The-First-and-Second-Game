@@ -763,6 +763,44 @@ public class Level {
 		// Game.inventorySquareMouseIsOver.drawCursor();
 		// } else
 		//
+
+		// Draw actions on sqrs.
+
+		player.squareGameObjectIsOn.drawAction();
+
+		if (player.squareGameObjectIsOn.getSquareToLeftOf() != null)
+			player.squareGameObjectIsOn.getSquareToLeftOf().drawAction();
+
+		if (player.squareGameObjectIsOn.getSquareToRightOf() != null)
+			player.squareGameObjectIsOn.getSquareToRightOf().drawAction();
+
+		if (player.squareGameObjectIsOn.getSquareAbove() != null)
+			player.squareGameObjectIsOn.getSquareAbove().drawAction();
+
+		if (player.squareGameObjectIsOn.getSquareBelow() != null)
+			player.squareGameObjectIsOn.getSquareBelow().drawAction();
+
+		// In attack mode, draw attackable sqrs.
+		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
+			ArrayList<Square> attackableSquares = new ArrayList<Square>();
+
+			if (Game.level.player == null || !(Game.level.player.equipped instanceof Weapon)) {
+				attackableSquares.addAll(Game.level.player.getAllSquaresAtDistance(1));
+			} else {
+				Weapon weapon = (Weapon) Game.level.player.equipped;
+				for (int i = (int) weapon.getEffectiveMinRange(); i <= weapon.getEffectiveMaxRange(); i++) {
+					attackableSquares.addAll(Game.level.player.getAllSquaresAtDistance(i));
+
+				}
+			}
+
+			for (Square attackableSquare : attackableSquares) {
+				if (attackableSquare.visibleToPlayer) {
+					attackableSquare.drawHighlight();
+				}
+			}
+		}
+
 		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 
 			if (levelMode == LevelMode.LEVEL_MODE_CAST) {
@@ -799,40 +837,6 @@ public class Level {
 
 				Game.squareMouseIsOver.drawCursor();
 				Game.squareMouseIsOver.drawAction();
-				player.squareGameObjectIsOn.drawAction();
-
-				if (player.squareGameObjectIsOn.getSquareToLeftOf() != null)
-					player.squareGameObjectIsOn.getSquareToLeftOf().drawAction();
-
-				if (player.squareGameObjectIsOn.getSquareToRightOf() != null)
-					player.squareGameObjectIsOn.getSquareToRightOf().drawAction();
-
-				if (player.squareGameObjectIsOn.getSquareAbove() != null)
-					player.squareGameObjectIsOn.getSquareAbove().drawAction();
-
-				if (player.squareGameObjectIsOn.getSquareBelow() != null)
-					player.squareGameObjectIsOn.getSquareBelow().drawAction();
-
-				// In attack mode, draw attackable sqrs.
-				if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
-					ArrayList<Square> attackableSquares = new ArrayList<Square>();
-
-					if (Game.level.player == null || !(Game.level.player.equipped instanceof Weapon)) {
-						attackableSquares.addAll(Game.level.player.getAllSquaresAtDistance(1));
-					} else {
-						Weapon weapon = (Weapon) Game.level.player.equipped;
-						for (int i = (int) weapon.getEffectiveMinRange(); i <= weapon.getEffectiveMaxRange(); i++) {
-							attackableSquares.addAll(Game.level.player.getAllSquaresAtDistance(i));
-
-						}
-					}
-
-					for (Square attackableSquare : attackableSquares) {
-						if (attackableSquare.visibleToPlayer) {
-							attackableSquare.drawHighlight();
-						}
-					}
-				}
 			}
 
 		}
