@@ -21,7 +21,7 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
-import com.marklynch.objects.actions.ActionGive;
+import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionTalk;
@@ -700,7 +700,7 @@ public class AIRoutine {
 			public void select() {
 				super.select();
 				for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-					new ActionGive(criminal, actor, stolenItemOnCriminal).perform();
+					new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal).perform();
 				}
 			}
 		};

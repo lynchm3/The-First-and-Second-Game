@@ -6,7 +6,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionGive extends Action {
+public class ActionGiveSpecificItem extends Action {
 
 	public static final String ACTION_NAME = "Give";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -14,7 +14,7 @@ public class ActionGive extends Action {
 	GameObject receiver;
 	GameObject object;
 
-	public ActionGive(Actor performer, Actor receiver, GameObject object) {
+	public ActionGiveSpecificItem(Actor performer, GameObject receiver, GameObject object) {
 		super(ACTION_NAME, "action_give.png");
 		this.performer = performer;
 		this.receiver = receiver;
@@ -22,6 +22,8 @@ public class ActionGive extends Action {
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
+		} else {
+			actionName = ACTION_NAME + " " + object.name;
 		}
 		legal = checkLegality();
 		sound = createSound();

@@ -21,7 +21,7 @@ import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
-import com.marklynch.objects.actions.ActionGive;
+import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
@@ -535,7 +535,7 @@ public class QuestSmallGame extends Quest {
 				super.select();
 				for (GameObject gameObject : weaponsBehindLodge) {
 					if (environmentalistBill.inventory.contains(gameObject)) {
-						new ActionGive(environmentalistBill, Game.level.player, gameObject).perform();
+						new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject).perform();
 						talkedToEnvironmentalist = true;
 					}
 				}

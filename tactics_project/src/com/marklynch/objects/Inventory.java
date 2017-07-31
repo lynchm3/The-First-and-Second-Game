@@ -46,7 +46,7 @@ public class Inventory {
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
 
 	public enum INVENTORY_MODE {
-		MODE_NORMAL, MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL, MODE_SELECT_ITEM_TO_DROP, MODE_SELECT_ITEM_TO_THROW
+		MODE_NORMAL, MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL, MODE_SELECT_ITEM_TO_DROP, MODE_SELECT_ITEM_TO_THROW, MODE_SELECT_ITEM_TO_GIVE
 	}
 
 	public static transient INVENTORY_MODE inventoryMode = INVENTORY_MODE.MODE_NORMAL;
@@ -612,8 +612,8 @@ public class Inventory {
 		int actorPositionXInPixels = 650;
 		int actorPositionYInPixels = 250;
 		float alpha = 1.0f;
-		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels,
-				actorPositionYInPixels, actorPositionXInPixels + Game.level.player.width * 2,
+		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+				actorPositionXInPixels + Game.level.player.width * 2,
 				actorPositionYInPixels + Game.level.player.height * 2);
 
 		GameObject gameObjectMouseIsOver = null;

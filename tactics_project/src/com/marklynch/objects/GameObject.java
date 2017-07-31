@@ -24,6 +24,8 @@ import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
+import com.marklynch.objects.actions.ActionGiveItemsInInventory;
+import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionTake;
@@ -237,9 +239,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 				int powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH));
 				int powPositionYInPixels = powTarget.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
-				TextureUtils.drawTexture(this.powTexture, powPositionXInPixels,
-						powPositionYInPixels, powPositionXInPixels + Game.SQUARE_WIDTH,
-						powPositionYInPixels + Game.SQUARE_HEIGHT);
+				TextureUtils.drawTexture(this.powTexture, powPositionXInPixels, powPositionYInPixels,
+						powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
 
 			}
 		}
@@ -580,6 +581,15 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			actions.add(new ActionAttack(performer, this));
 		// }
 
+		if (performer.equipped != null && this.canContainOtherObjects) {
+			actions.add(new ActionGiveSpecificItem(performer, this, performer.equipped));
+		}
+
+		// Throw from inventory
+		if (this.canContainOtherObjects) {
+			actions.add(new ActionGiveItemsInInventory(performer, this));
+		}
+
 		if (performer.equipped != null) {
 			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
 		}
@@ -693,6 +703,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
 			return new ActionDropSpecificItem(performer, Inventory.square, this);
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
+			return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
