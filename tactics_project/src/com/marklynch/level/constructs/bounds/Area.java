@@ -13,6 +13,7 @@ public class Area {
 	public Texture image;
 	public int gridX1, gridY1, gridX2, gridY2;
 	public boolean seenByPlayer = false;
+	boolean showOnMap = false;
 
 	public Area(String name, String imageString, Texture squareTexture, int gridX1, int gridY1, int gridX2,
 			int gridY2) {
@@ -35,10 +36,14 @@ public class Area {
 
 	public void hasBeenSeenByPlayer() {
 		this.seenByPlayer = true;
+		this.showOnMap = true;
 		new ActionSpot(Game.level.player, this).perform();
 	}
 
 	public void drawUI() {
+
+		if (!showOnMap)
+			return;
 
 		// 40sqrs is ideal
 

@@ -30,6 +30,7 @@ public class Structure {
 	boolean blocksLineOfSight;
 	Actor owner;
 	ArrayList<Square> squaresToRemove;
+	boolean showOnMap = false;
 
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
 			ArrayList<StructurePath> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
@@ -192,6 +193,9 @@ public class Structure {
 
 	public void drawUI() {
 
+		if (!showOnMap)
+			return;
+
 		// 40sqrs is ideal
 
 		if (this.image == null)
@@ -217,5 +221,6 @@ public class Structure {
 	public void hasBeenSeenByPlayer() {
 		this.seenByPlayer = true;
 		new ActionSpot(Game.level.player, this).perform();
+		this.showOnMap = true;
 	}
 }
