@@ -11,6 +11,7 @@ import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
@@ -21,8 +22,8 @@ public class Structure {
 	public boolean seenByPlayer = false;
 	public ArrayList<StructureSection> structureSections;
 	public ArrayList<Square> entranceSquares;
-	public Texture imageTexture;
-	float overlayX1, overlayX2, overlayY1, overlayY2;
+	public Texture image;
+	int gridX1, gridX2, gridY1, gridY2;
 	ArrayList<Square> floorSquares;
 	ArrayList<Square> wallSquares;
 	ArrayList<Square> featureSquares;
@@ -32,7 +33,7 @@ public class Structure {
 
 	public Structure(String name, ArrayList<StructureSection> caveSections, ArrayList<StructureRoom> rooms,
 			ArrayList<StructurePath> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
-			String imageTexturePath, float overlayX1, float overlayX2, float overlayY1, float overlayY2,
+			String imageTexturePath, int overlayX1, int overlayY1, int overlayX2, int overlayY2,
 			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls,
 			Wall wallTemplate, Texture imageTexture) {
 		super();
@@ -40,11 +41,12 @@ public class Structure {
 		this.name = name;
 		this.structureSections = caveSections;
 		this.rooms = rooms;
-		this.imageTexture = ResourceUtils.getGlobalImage(imageTexturePath);
-		this.overlayX1 = overlayX1;
-		this.overlayY1 = overlayY1;
-		this.overlayX2 = overlayX2;
-		this.overlayY2 = overlayY2;
+		if (imageTexturePath != null)
+			this.image = ResourceUtils.getGlobalImage(imageTexturePath);
+		this.gridX1 = overlayX1;
+		this.gridY1 = overlayY1;
+		this.gridX2 = overlayX2;
+		this.gridY2 = overlayY2;
 		this.entranceSquares = entrances;
 		this.blocksLineOfSight = blocksLineOfSight;
 		floorSquares = new ArrayList<Square>();
@@ -190,45 +192,28 @@ public class Structure {
 
 	public void drawUI() {
 
-		// if (this.image == null)
-		// return;
-		//
-		// int squarePositionX1 = gridX1 * (int) Game.SQUARE_WIDTH;
-		// int squarePositionY1 = gridY1 * (int) Game.SQUARE_HEIGHT;
-		// int squarePositionX2 = gridX2 * (int) Game.SQUARE_WIDTH;
-		// int squarePositionY2 = gridY2 * (int) Game.SQUARE_HEIGHT;
-		// float drawPositionX1 = (Game.windowWidth / 2)
-		// + (Game.zoom * (squarePositionX1 - Game.windowWidth / 2 +
-		// Game.dragX));
-		// float drawPositionY1 = (Game.windowHeight / 2)
-		// + (Game.zoom * (squarePositionY1 - Game.windowHeight / 2 +
-		// Game.dragY));
-		// float drawPositionX2 = (Game.windowWidth / 2)
-		// + (Game.zoom * (squarePositionX2 - Game.windowWidth / 2 +
-		// Game.dragX));
-		// float drawPositionY2 = (Game.windowHeight / 2)
-		// + (Game.zoom * (squarePositionY2 - Game.windowHeight / 2 +
-		// Game.dragY));
-		// TextureUtils.drawTexture(image, drawPositionX1, drawPositionY1,
-		// drawPositionX2, drawPositionY2);
-		// Game.activeBatch.flush();
+		if (this.image == null)
+			return;
+
+		int squarePositionX1 = gridX1 * (int) Game.SQUARE_WIDTH;
+		int squarePositionY1 = gridY1 * (int) Game.SQUARE_HEIGHT;
+		int squarePositionX2 = gridX2 * (int) Game.SQUARE_WIDTH;
+		int squarePositionY2 = gridY2 * (int) Game.SQUARE_HEIGHT;
+		float drawPositionX1 = (Game.windowWidth / 2)
+				+ (Game.zoom * (squarePositionX1 - Game.windowWidth / 2 + Game.dragX));
+		float drawPositionY1 = (Game.windowHeight / 2)
+				+ (Game.zoom * (squarePositionY1 - Game.windowHeight / 2 + Game.dragY));
+		float drawPositionX2 = (Game.windowWidth / 2)
+				+ (Game.zoom * (squarePositionX2 - Game.windowWidth / 2 + Game.dragX));
+		float drawPositionY2 = (Game.windowHeight / 2)
+				+ (Game.zoom * (squarePositionY2 - Game.windowHeight / 2 + Game.dragY));
+		TextureUtils.drawTexture(image, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
+		Game.activeBatch.flush();
 
 	}
 
 	public void hasBeenSeenByPlayer() {
 		this.seenByPlayer = true;
 		new ActionSpot(Game.level.player, this).perform();
-		// for (Square square : this.entranceSquares) {
-		// square.seenByPlayer = true;
-		// }
-		// for (Square square : floorSquares) {
-		// square.seenByPlayer = true;
-		// }
-		// for (Square square : wallSquares) {
-		// square.seenByPlayer = true;
-		// }
-		// for (Square square : featureSquares) {
-		// square.seenByPlayer = true;
-		// }
 	}
 }

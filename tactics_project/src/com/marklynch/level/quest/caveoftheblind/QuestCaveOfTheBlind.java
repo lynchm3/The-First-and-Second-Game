@@ -6,12 +6,11 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
-import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Chest;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Door;
@@ -574,8 +573,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Cave featues for Mort
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][45], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][46], mort));
-		mortsGameObjectroomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, mort, mortsKey,
-				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
+		mortsGameObjectroomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, mort,
+				mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		mort.mortsRoomDoorway = mortsGameObjectroomDoor.squareGameObjectIsOn;
 		caveFeatures.add(mortsGameObjectroomDoor);
 		mort.aiRoutine.squareBounds.add(mort.mortsRoomDoorway);
@@ -671,8 +670,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		squaresToRemove.add(Game.level.squares[224][10]);
 
 		Game.level.structures.add(new Structure("Mort & Mort Mining", caveSections, rooms, cavePaths, caveFeatures,
-				new ArrayList<Square>(), null, 0, 0, 0, 0, true, mort, squaresToRemove, extraWalls, Templates.WALL,
-				Square.STONE_TEXTURE));
+				new ArrayList<Square>(), "map_cave.png", 223, 0, 321, 74, true, mort, squaresToRemove, extraWalls,
+				Templates.WALL, Square.STONE_TEXTURE));
 
 		// Dirty Sheet
 		// Templates.DIRTY_SHEET.makeCopy(Game.level.squares[247][11]);

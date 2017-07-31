@@ -267,9 +267,9 @@ public class TextUtils {
 				offsetX += textWidth;
 
 				// Image
-				if (structure.imageTexture != null) {
+				if (structure.image != null) {
 					float x = posX + offsetX;
-					TextureUtils.drawTexture(structure.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
+					TextureUtils.drawTexture(structure.image, x, posY + offsetY, x + 20, posY + offsetY + 20);
 					offsetX += textureWidth;
 				}
 
