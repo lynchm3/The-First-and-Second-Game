@@ -17,6 +17,7 @@ import org.lwjgl.util.vector.Vector4f;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -203,45 +204,44 @@ public class ShadowLight {
 
 		Game.activeBatch.setColor(Color.WHITE);
 		Matrix4f view = Game.activeBatch.getViewMatrix();
-		if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
 
-		} else {
+		// Draw level BG
 
-			// Draw level BG
+		// TextureUtils.drawTexture(Game.level.textureUndiscovered, 1f, 0,
+		// 1920,
+		// 0, 1080);
+		// Game.activeBatch.flush();
 
-			// TextureUtils.drawTexture(Game.level.textureUndiscovered, 1f, 0,
-			// 1920,
-			// 0, 1080);
-			// Game.activeBatch.flush();
+		view.setIdentity();
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
+		Game.activeBatch.updateUniforms();
+		if (Game.editorMode)
+			Game.level.drawBackground();
+		else
+			Game.level.drawBackground();
+		Game.activeBatch.flush();
+		// lightsFBO.end();
+		// GL11.glDisable(GL_DEPTH_TEST);
 
-			view.setIdentity();
-			view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
-			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-			view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-			view.translate(new Vector2f(Game.dragX, Game.dragY));
-			Game.activeBatch.updateUniforms();
-			if (Game.editorMode)
-				Game.level.drawBackground();
-			else
-				Game.level.drawBackground();
-			Game.activeBatch.flush();
-			// lightsFBO.end();
-			// GL11.glDisable(GL_DEPTH_TEST);
+		// Draw lights
+		// Game.activeBatch.setColor(Color.WHITE);
+		// Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
+		// Game.activeBatch.getViewMatrix().setIdentity();
+		// Game.activeBatch.updateUniforms();
+		// for (int i = 0; i < lights.size(); i++) {
+		// renderLight(lights.get(i), null);
+		// }
+		// Game.activeBatch.flush();
 
-			// Draw lights
-			// Game.activeBatch.setColor(Color.WHITE);
-			// Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
-			// Game.activeBatch.getViewMatrix().setIdentity();
-			// Game.activeBatch.updateUniforms();
-			// for (int i = 0; i < lights.size(); i++) {
-			// renderLight(lights.get(i), null);
-			// }
-			// Game.activeBatch.flush();
+		// lightsFBO.begin();
 
-			// lightsFBO.begin();
+		// draw lvl foreground
+		// GL11.glEnable(GL_DEPTH_TEST);
 
-			// draw lvl foreground
-			// GL11.glEnable(GL_DEPTH_TEST);
+		if (Game.zoomLevelIndex < Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
 			Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
 			Game.activeBatch.getViewMatrix().setIdentity();
 			Game.activeBatch.updateUniforms();
@@ -258,75 +258,15 @@ public class ShadowLight {
 			else
 				Game.level.drawForeground();
 			Game.activeBatch.flush();
-			// GL11.glDisable(GL_DEPTH_TEST);
-
-			// Draw level UI
-			view.setIdentity();
-			view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
-			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-			view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-			view.translate(new Vector2f(Game.dragX, Game.dragY));
-			Game.activeBatch.updateUniforms();
-			try {
-				Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
-			} catch (LWJGLException e) {
-				e.printStackTrace();
-			}
-			Game.activeBatch.setColor(Color.WHITE);
-			Game.level.drawUI();
-			Game.activeBatch.flush();
-
-			if (Game.editorMode) {
-				// Draw editor overlay
-				try {
-					Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
-				} catch (LWJGLException e) {
-					e.printStackTrace();
-				}
-				view.setIdentity();
-				view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
-				view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-				view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-				view.translate(new Vector2f(Game.dragX, Game.dragY));
-				Game.activeBatch.updateUniforms();
-				Game.editor.drawOverlay();
-				Game.activeBatch.flush();
-
-				// Draw Editor UI
-				try {
-					Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
-				} catch (LWJGLException e) {
-					e.printStackTrace();
-				}
-				view.setIdentity();
-				Game.activeBatch.updateUniforms();
-				Game.activeBatch.setColor(Color.WHITE);
-				Game.editor.drawUI();
-				Game.activeBatch.flush();
-			}
-
-			/// START SKY
-			// Matrix4f view = Game.activeBatch.getViewMatrix();
-			if (Game.zoomLevelIndex > 3) {
-				view.setIdentity();
-				view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
-				view.scale(new Vector3f(Game.zoomLevels[Game.zoomLevelIndex - 1],
-						Game.zoomLevels[Game.zoomLevelIndex - 1], 1f));
-				view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-				view.translate(new Vector2f(Game.dragX, Game.dragY));
-
-				Game.activeBatch.updateUniforms();
-				// System.out.println("Map draw Game.dragX = " + Game.dragX + ",
-				// Game.dragY = " + Game.dragY);
-				TextureUtils.drawTexture(ResourceUtils.getGlobalImage("bird.png"), 3000, 1000, 3000 + 128, 1000 + 128);
-				Game.activeBatch.flush();
-			}
-			////////// END SKY
 		}
+		// GL11.glDisable(GL_DEPTH_TEST);
 
-		// Game.activeBatch.flush();
-		// Matrix4f view = Game.activeBatch.getViewMatrix();
+		// Draw level UI
 		view.setIdentity();
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
+		view.translate(new Vector2f(Game.dragX, Game.dragY));
 		Game.activeBatch.updateUniforms();
 		try {
 			Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
@@ -334,40 +274,75 @@ public class ShadowLight {
 			e.printStackTrace();
 		}
 		Game.activeBatch.setColor(Color.WHITE);
+		Game.level.drawUI();
+		Game.activeBatch.flush();
 
-		for (Area area : Game.level.areas) {
-			area.draw();
+		if (Game.editorMode) {
+			// Draw editor overlay
+			try {
+				Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+			} catch (LWJGLException e) {
+				e.printStackTrace();
+			}
+			view.setIdentity();
+			view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
+			view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
+			view.translate(new Vector2f(Game.dragX, Game.dragY));
+			Game.activeBatch.updateUniforms();
+			Game.editor.drawOverlay();
+			Game.activeBatch.flush();
+
+			// Draw Editor UI
+			try {
+				Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+			} catch (LWJGLException e) {
+				e.printStackTrace();
+			}
+			view.setIdentity();
+			Game.activeBatch.updateUniforms();
+			Game.activeBatch.setColor(Color.WHITE);
+			Game.editor.drawUI();
+			Game.activeBatch.flush();
 		}
 
-		// RAR
-		// float x1 = Game.windowWidth * Game.zoom * Game.zoom + 14400f *
-		// Game.zoom
-		// + Game.dragX * Game.zoom;
-		// float y1 = Game.windowHeight * Game.zoom * Game.zoom + 384f *
-		// Game.zoom +
-		// Game.dragY * Game.zoom;
-		// float x2 = Game.windowWidth * Game.zoom * Game.zoom + 14400f *
-		// Game.zoom
-		// + Game.dragX * Game.zoom + 128f;
-		// float y2 = Game.windowHeight * Game.zoom * Game.zoom + 384f *
-		// Game.zoom +
-		// Game.dragY * Game.zoom + 128f;
-		//
-		// Game.activeBatch.updateUniforms();
-		// System.out.println("Map draw x1 = " + x1 + ", y1 = " + y1 + ", x2 = "
-		// +
-		// x2 + ", y2 = " + y2);
-		// TextureUtils.drawTexture(ResourceUtils.getGlobalImage("map_cave.png"),
-		// x1, y1, x2, y2);
-		// Game.activeBatch.flush();
-		////////// END MAP
-		// lightsFBO.end();
+		// MAP ICONS
+		if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
 
-		// renderBlur();
-		// Game.activeBatch.draw(blur3FBO, 0, 0, blur3FBO.getWidth(),
-		// blur3FBO.getHeight());
-		// Game.activeBatch.draw(lightsFBO, 0, 0, lightsFBO.getWidth(),
-		// lightsFBO.getHeight());
+			view.setIdentity();
+			Game.activeBatch.updateUniforms();
+			try {
+				Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+			} catch (LWJGLException e) {
+				e.printStackTrace();
+			}
+			Game.activeBatch.setColor(Color.WHITE);
+
+			for (Area area : Game.level.areas) {
+				area.drawUI();
+			}
+			for (Structure structure : Game.level.structures) {
+				structure.drawUI();
+			}
+		}
+
+		/// START SKY
+		// Matrix4f view = Game.activeBatch.getViewMatrix();
+		if (Game.zoomLevelIndex > 3) {
+			view.setIdentity();
+			view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+			view.scale(new Vector3f(Game.zoomLevels[Game.zoomLevelIndex - 1], Game.zoomLevels[Game.zoomLevelIndex - 1],
+					1f));
+			view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
+			view.translate(new Vector2f(Game.dragX, Game.dragY));
+
+			Game.activeBatch.updateUniforms();
+			// System.out.println("Map draw Game.dragX = " + Game.dragX + ",
+			// Game.dragY = " + Game.dragY);
+			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("bird.png"), 3000, 1000, 3000 + 128, 1000 + 128);
+			Game.activeBatch.flush();
+		}
+		////////// END SKY
 
 		Game.activeBatch.end();
 	}

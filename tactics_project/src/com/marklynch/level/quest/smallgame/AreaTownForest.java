@@ -3,6 +3,7 @@ package com.marklynch.level.quest.smallgame;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
 
@@ -44,9 +45,9 @@ public class AreaTownForest {
 			}
 
 		}
-		Area areaTownForest = new Area("Town Forest", 121, 11, 199, 90);
+		Area areaTownForest = new Area("Town Forest", "map_forest.png", Square.DARK_GRASS_TEXTURE, 121, 11, 199, 90);
 		Game.level.areas.add(areaTownForest);
-		Area areaInnerTownForest = new Area("Inner Town Forest", 146, 33, 180, 63);
+		Area areaInnerTownForest = new Area("Inner Town Forest", null, Square.DARK_GRASS_TEXTURE, 146, 33, 180, 63);
 		Game.level.areas.add(areaInnerTownForest);
 
 		// How to give them an area?

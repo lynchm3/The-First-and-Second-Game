@@ -69,6 +69,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public String imageTexturePath;
 	public transient Texture imageTexture = null;
 	public static Texture GRASS_TEXTURE;
+	public static Texture DARK_GRASS_TEXTURE;
 	public static Texture STONE_TEXTURE;
 	public static Texture MUD_TEXTURE;
 
@@ -127,6 +128,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public static void loadStaticImages() {
 		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png");
+		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png");
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png");
 		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png");
 	}
@@ -248,8 +250,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX,
-				squarePositionY, squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
 
@@ -257,8 +259,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture4, squarePositionX,
-				squarePositionY, squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture4, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
 	}
 

@@ -179,36 +179,39 @@ public class Structure {
 	public float roofAlpha = 1f;
 
 	public void draw2() {
-		// if (!seenByPlayer)
-		// return;
 
 		for (StructureRoom room : rooms) {
 			if (room.seenByPlayer)
 				TextUtils.printTextWithImages(new Object[] { room.name }, room.x * Game.SQUARE_WIDTH,
 						room.y * Game.SQUARE_HEIGHT, 100, true);
-
 		}
 
-		// if (imageTexture != null) {
+	}
+
+	public void drawUI() {
+
+		// if (this.image == null)
+		// return;
 		//
-		// if (Game.level.player.squareGameObjectIsOn.structureSquareIsIn ==
-		// this
-		// || entranceSquares.contains(Game.level.player.squareGameObjectIsOn))
-		// {
-		// if (roofAlpha != 0f) {
-		// roofAlpha -= 0.01f;
-		// if (roofAlpha < 0f)
-		// roofAlpha = 0f;
-		// }
-		// } else if (roofAlpha != 1f) {
-		// roofAlpha += 0.01f;
-		// if (roofAlpha > 1f)
-		// roofAlpha = 1f;
-		// }
-		// TextureUtils.drawTexture(imageTexture, roofAlpha, this.overlayX1,
-		// this.overlayX2, this.overlayY1,
-		// this.overlayY2);
-		// }
+		// int squarePositionX1 = gridX1 * (int) Game.SQUARE_WIDTH;
+		// int squarePositionY1 = gridY1 * (int) Game.SQUARE_HEIGHT;
+		// int squarePositionX2 = gridX2 * (int) Game.SQUARE_WIDTH;
+		// int squarePositionY2 = gridY2 * (int) Game.SQUARE_HEIGHT;
+		// float drawPositionX1 = (Game.windowWidth / 2)
+		// + (Game.zoom * (squarePositionX1 - Game.windowWidth / 2 +
+		// Game.dragX));
+		// float drawPositionY1 = (Game.windowHeight / 2)
+		// + (Game.zoom * (squarePositionY1 - Game.windowHeight / 2 +
+		// Game.dragY));
+		// float drawPositionX2 = (Game.windowWidth / 2)
+		// + (Game.zoom * (squarePositionX2 - Game.windowWidth / 2 +
+		// Game.dragX));
+		// float drawPositionY2 = (Game.windowHeight / 2)
+		// + (Game.zoom * (squarePositionY2 - Game.windowHeight / 2 +
+		// Game.dragY));
+		// TextureUtils.drawTexture(image, drawPositionX1, drawPositionY1,
+		// drawPositionX2, drawPositionY2);
+		// Game.activeBatch.flush();
 
 	}
 
