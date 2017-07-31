@@ -77,8 +77,11 @@ public class Level {
 	public Toast toast;
 	public Conversation conversation;
 	public transient LevelButton endTurnButton;
+	public transient LevelButton showHideLogButton;
 	public transient LevelButton editorButton;
 	public transient ArrayList<Button> buttons;
+
+	public boolean showLog = true;
 
 	public transient int turn = 1;
 	public ArrayList<Faction> factions;
@@ -306,6 +309,52 @@ public class Level {
 		});
 		unlockButton.enabled = true;
 		buttons.add(unlockButton);
+
+		showHideLogButton = new LevelButton(activityLogger.width, 40f, 50f, 30f, "undo_button.png",
+				"undo_button_disabled.png", " LOG", true, true, Color.BLACK, Color.WHITE);
+		showHideLogButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+
+				showLog = !showLog;
+
+				new Thread() {
+					@Override
+					public void run() {
+						super.run();
+						if (showLog == true) {
+							while (activityLogger.offsetX < 0) {
+								activityLogger.offsetX += 2;
+								showHideLogButton.x += 2;
+								try {
+									Thread.sleep(1);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							activityLogger.offsetX = 0;
+							showHideLogButton.x = activityLogger.width;
+						} else {
+							while (activityLogger.offsetX > -activityLogger.width) {
+								activityLogger.offsetX -= 2;
+								showHideLogButton.x -= 2;
+								try {
+									Thread.sleep(1);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							activityLogger.offsetX = -activityLogger.width;
+							showHideLogButton.x = 0;
+						}
+					}
+				}.start();
+			}
+		});
+		showHideLogButton.enabled = true;
+		buttons.add(showHideLogButton);
 	}
 
 	public void postLoad() {
@@ -860,7 +909,7 @@ public class Level {
 		if (conversation != null)
 
 			conversation.drawStaticUI();
-		else
+		else // if (showLog)
 
 		{
 

@@ -11,23 +11,28 @@ import mdesl.graphics.Color;
 public class ActivityLogger {
 	private transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
 	public float width = 420;
+	public float offsetX = 0;
 	public float offsetY = 0;
 	// public float
 
 	public void drawStaticUI() {
 
 		// Log
-		QuadUtils.drawQuad(Color.BLACK, 0, width, 0, Game.windowHeight);
+		QuadUtils.drawQuad(Color.BLACK, offsetX, offsetX + width, offsetY, offsetY + Game.windowHeight);
 
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
-			TextUtils.printTextWithImages(logs.get(i).contents, 20, offsetY + i * 20, Integer.MAX_VALUE, true);
+			TextUtils.printTextWithImages(logs.get(i).contents, offsetX + 20, offsetY + i * 20, Integer.MAX_VALUE,
+					true);
 		}
 
 	}
 
 	public boolean isMouseOver(int mouseX, int mouseY) {
-		if (mouseX > 0 && mouseX < 0 + width && mouseY > 0 && mouseY < 0 + Game.windowHeight) {
+		if (Game.level.showLog == false)
+			return false;
+
+		if (mouseX > offsetX && mouseX < offsetX + width && mouseY > 0 && mouseY < 0 + Game.windowHeight) {
 			return true;
 		}
 		return false;
