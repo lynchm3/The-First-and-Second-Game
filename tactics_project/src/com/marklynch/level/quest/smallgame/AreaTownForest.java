@@ -87,6 +87,8 @@ public class AreaTownForest {
 
 		}
 
+		Templates.SCROLL.makeCopy(Game.level.squares[160][55], null);
+
 		Templates.BIG_TREE.makeCopy(Game.level.squares[153][49], null);
 		Templates.BIG_TREE.makeCopy(Game.level.squares[153][52], null);
 		Templates.BIG_TREE.makeCopy(Game.level.squares[153][55], null);
