@@ -192,13 +192,15 @@ public class Structure {
 
 	public void drawUI() {
 
+		// 40sqrs is ideal
+
 		if (this.image == null)
 			return;
 
-		int squarePositionX1 = gridX1 * (int) Game.SQUARE_WIDTH;
-		int squarePositionY1 = gridY1 * (int) Game.SQUARE_HEIGHT;
-		int squarePositionX2 = gridX2 * (int) Game.SQUARE_WIDTH;
-		int squarePositionY2 = gridY2 * (int) Game.SQUARE_HEIGHT;
+		int squarePositionX1 = (gridX1 + ((gridX2 - gridX1 - 40) / 2)) * (int) Game.SQUARE_WIDTH;
+		int squarePositionY1 = (gridY1 + ((gridY2 - gridY1 - 40) / 2)) * (int) Game.SQUARE_HEIGHT;
+		int squarePositionX2 = (40 + gridX1 + ((gridX2 - gridX1 - 40) / 2)) * (int) Game.SQUARE_WIDTH;
+		int squarePositionY2 = (40 + gridY1 + ((gridY2 - gridY1 - 40) / 2)) * (int) Game.SQUARE_HEIGHT;
 		float drawPositionX1 = (Game.windowWidth / 2)
 				+ (Game.zoom * (squarePositionX1 - Game.windowWidth / 2 + Game.dragX));
 		float drawPositionY1 = (Game.windowHeight / 2)
