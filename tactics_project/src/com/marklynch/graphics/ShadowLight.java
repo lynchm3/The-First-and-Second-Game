@@ -16,6 +16,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -334,19 +335,9 @@ public class ShadowLight {
 		}
 		Game.activeBatch.setColor(Color.WHITE);
 
-		int squarePositionX = Game.level.squares[225][6].xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = Game.level.squares[225][6].yInGrid * (int) Game.SQUARE_HEIGHT;
-		float drawPositionX = (Game.windowWidth / 2)
-				+ (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.dragX));
-		float drawPositionY = (Game.windowHeight / 2)
-				+ (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.dragY));
-
-		float realX = drawPositionX;
-		float realY = drawPositionY;
-
-		TextureUtils.drawTexture(ResourceUtils.getGlobalImage("map_cave.png"), drawPositionX, drawPositionY,
-				drawPositionX + 128, drawPositionY + 128);
-		Game.activeBatch.flush();
+		for (Area area : Game.level.areas) {
+			area.draw();
+		}
 
 		// RAR
 		// float x1 = Game.windowWidth * Game.zoom * Game.zoom + 14400f *

@@ -14,6 +14,7 @@ import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.ai.utils.Move;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -58,6 +59,7 @@ public class Level {
 	public int width;
 	public int height;
 	public Square[][] squares;
+	public ArrayList<Area> areas = new ArrayList<Area>();
 	public ArrayList<Structure> structures;
 	public Vector<Decoration> decorations;
 	public transient Script script;

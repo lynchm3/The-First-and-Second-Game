@@ -44,9 +44,10 @@ public class AreaTownForest {
 			}
 
 		}
-
 		Area areaTownForest = new Area("Town Forest", 121, 11, 199, 90);
-		Area areaInnerTownForest = new Area("Inner Town Forest", 121, 11, 199, 90);
+		Game.level.areas.add(areaTownForest);
+		Area areaInnerTownForest = new Area("Inner Town Forest", 146, 33, 180, 63);
+		Game.level.areas.add(areaInnerTownForest);
 
 		// How to give them an area?
 		// Lets have a look @ Mort.
