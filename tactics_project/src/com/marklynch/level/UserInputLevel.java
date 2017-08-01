@@ -1,5 +1,12 @@
 package com.marklynch.level;
 
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
@@ -546,7 +553,10 @@ public class UserInputLevel {
 		closeAllPopups();
 	}
 
+	public static long lastCopy = 0;
+
 	public static void keyTyped(char character) {
+		System.out.println("keyTyped = " + character);
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (character == ' ') {
@@ -558,6 +568,36 @@ public class UserInputLevel {
 						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
 						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
 						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
+			}
+		} else if (character == 'c') {
+
+			if (Game.squareMouseIsOver != null) {
+
+				long now = System.currentTimeMillis();
+				String stringToCopy = "";
+				if (now - lastCopy < 10000) {
+					try {
+						stringToCopy += (String) Toolkit.getDefaultToolkit().getSystemClipboard()
+								.getData(DataFlavor.stringFlavor);
+					} catch (HeadlessException e) {
+						e.printStackTrace();
+					} catch (UnsupportedFlavorException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+				stringToCopy += ("Game.level.square[" + Game.squareMouseIsOver.xInGrid + "]["
+						+ Game.squareMouseIsOver.yInGrid + "];\n");
+
+				System.out.println("stringToCopy = " + stringToCopy);
+
+				StringSelection stringSelection = new StringSelection(stringToCopy);
+				Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+				clpbrd.setContents(stringSelection, null);
+
+				lastCopy = now;
 			}
 		}
 
