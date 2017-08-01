@@ -891,9 +891,6 @@ public class Actor extends GameObject {
 	@Override
 	public void drawStaticUI() {
 
-		if (this.squareGameObjectIsOn == null || this.squareGameObjectIsOn.visibleToPlayer == false)
-			return;
-
 	}
 
 	public Vector<Float> calculateIdealDistanceFromTargetToAttack(GameObject target) {

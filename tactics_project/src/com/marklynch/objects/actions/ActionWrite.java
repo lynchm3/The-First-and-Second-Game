@@ -38,7 +38,7 @@ public class ActionWrite extends Action {
 			return;
 
 		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
-		ConversationPart conversationPart = new ConversationPart(new Object[] { text },
+		ConversationPart conversationPart = new ConversationPart(text,
 				new ConversationResponse[] { conversationReponseDone }, null);
 		Conversation conversation = new Conversation(conversationPart);
 		sign.setConversation(conversation);

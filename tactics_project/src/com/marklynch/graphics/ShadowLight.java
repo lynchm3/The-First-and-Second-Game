@@ -16,8 +16,6 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.bounds.Area;
-import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -304,26 +302,6 @@ public class ShadowLight {
 			Game.activeBatch.setColor(Color.WHITE);
 			Game.editor.drawUI();
 			Game.activeBatch.flush();
-		}
-
-		// MAP ICONS
-		if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
-
-			view.setIdentity();
-			Game.activeBatch.updateUniforms();
-			try {
-				Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
-			} catch (LWJGLException e) {
-				e.printStackTrace();
-			}
-			Game.activeBatch.setColor(Color.WHITE);
-
-			for (Area area : Game.level.areas) {
-				area.drawUI();
-			}
-			for (Structure structure : Game.level.structures) {
-				structure.drawUI();
-			}
 		}
 
 		/// START SKY

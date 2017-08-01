@@ -55,6 +55,11 @@ public class Trader extends Actor implements Comparator<GameObject> {
 		temp.remove(equipped);
 		temp.remove(broom);
 		Collections.sort(temp, this);
+
+		System.out.println("temp.size() = " + temp.size());
+		System.out.println("shopSign.getConversation().openingConversationPart.text.length = "
+				+ shopSign.getConversation().openingConversationPart.text.length);
+
 		if (temp.size() == 0) {
 			if (shopSign.getConversation().openingConversationPart.text.length != 1) {
 				return new Object[] { this.shop };

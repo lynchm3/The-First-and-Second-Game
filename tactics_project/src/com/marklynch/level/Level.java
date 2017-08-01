@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Vector;
 
+import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Matrix4f;
 
@@ -53,6 +54,7 @@ import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 
 public class Level {
@@ -888,6 +890,26 @@ public class Level {
 		for (Faction faction : factions) {
 			for (Actor actor : faction.actors) {
 				actor.drawStaticUI();
+			}
+		}
+
+		// MAP ICONS
+		if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
+
+			view.setIdentity();
+			Game.activeBatch.updateUniforms();
+			try {
+				Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+			} catch (LWJGLException e) {
+				e.printStackTrace();
+			}
+			Game.activeBatch.setColor(Color.WHITE);
+
+			for (Area area : Game.level.areas) {
+				area.drawUI();
+			}
+			for (Structure structure : Game.level.structures) {
+				structure.drawUI();
 			}
 		}
 
