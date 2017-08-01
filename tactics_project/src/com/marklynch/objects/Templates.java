@@ -25,16 +25,16 @@ import com.marklynch.objects.weapons.Weapon;
 public class Templates {
 	// Player
 	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "hero.png", null, 1, 10,
-			null, new Inventory(), true, false, true, false, false, 1f, 2f, 0f, -64f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+			null, new Inventory(), true, false, true, false, false, 1f, 1.5f, 0f, -32f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 			false, 0f, 0f, 0f, 0f, 90f, null, null, 57f, 104f, 35f, 23f, 0f, 0f, 0f, 0f);
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
-			null, new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
+			null, new Inventory(), true, false, true, false, false, 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
 	public static final Farmer FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "farmer.png", null, 1, 10,
-			null, new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
+			null, new Inventory(), true, false, true, false, false, 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
 	// Domestic animals
@@ -62,8 +62,8 @@ public class Templates {
 
 	// Monsters
 	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
-			new Inventory(), true, false, true, false, false, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
-			0f, 0f, 0f, 50f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null);
+			new Inventory(), true, false, true, false, false, 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
+			0f, 0f, 50f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null);
 
 	public static final RockGolem ROCK_GOLEM = new RockGolem("Rock Golem", "Rock Golem", 1, 100, 0, 0, 0, 0,
 			"rock_golem.png", null, 1, 10, null, new Inventory(), true, false, true, false, false, 1, 1.5f, 0, -32, 1f,
@@ -72,8 +72,8 @@ public class Templates {
 
 	// Special People
 	public static final Mort MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
-			new Inventory(), true, false, true, false, false, 2f, 2f, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f,
-			0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
+			new Inventory(), true, false, true, false, false, 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
+			0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
@@ -126,11 +126,11 @@ public class Templates {
 			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 3f, null, 34, 68);
 	// Body Armor
 	public static final BodyArmor JUMPER = new BodyArmor("Jumper", "jumper.png", 100, null, true, false, false, false,
-			1f, 2f, 0f, -64f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 0, 0);
+			1f, 1.5f, 0f, -32f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 0, 0);
 
 	// Leg Armor
 	public static final LegArmor PANTS = new LegArmor("Pants", "pants.png", 100, null, true, false, false, false, 1f,
-			2f, 0f, -64f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 0, 0);
+			1.5f, 0f, -32f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 3f, null, 0, 0);
 
 	// Furniture
 	public static final Bed BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), false, true,
@@ -238,8 +238,8 @@ public class Templates {
 			false, false, false, false, true, 2, 2, -32, -64, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f,
 			150f, null, false);
 	public static final WaterSource WELL = new WaterSource("Well", 5, "well.png", null, new Inventory(), false, false,
-			false, false, false, true, false, 2f, 2f, -32f, -32f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f,
-			0f, null, new Effect[] {});
+			false, false, false, true, false, 1.5f, 1.5f, -16f, -16f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f,
+			0f, 0f, null, new Effect[] {});
 	public static final GameObjectTemplate SHELF = new GameObjectTemplate("Shelf", 5, "shelf.png", null,
 			new Inventory(), true, false, false, true, false, false, true, 1, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, 10f);
@@ -319,9 +319,9 @@ public class Templates {
 
 	// NATURE
 	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), true, true, false, true,
-			false, true, 1f, 2f, 0f, -64f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
+			false, true, 1f, 1.5f, 0f, -32f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, null);
 	public static final Tree BIG_TREE = new Tree("Big Tree", 200, "tree_1.png", null, new Inventory(), true, false,
-			false, true, true, true, 1.5f, 2f, -16f, -64f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
+			false, true, true, true, 1.5f, 1.5f, -16f, -32f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
 			null);
 
 	public static final Stump STUMP = new Stump("Stump", 100, "stump.png", null, new Inventory(), true, true, false,
