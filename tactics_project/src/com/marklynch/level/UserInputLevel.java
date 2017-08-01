@@ -599,6 +599,14 @@ public class UserInputLevel {
 
 				lastCopy = now;
 			}
+		} else if (character == 'w' || character == 'W') {
+			upTyped();
+		} else if (character == 'a' || character == 'A') {
+			leftTyped();
+		} else if (character == 's' || character == 'S') {
+			downTyped();
+		} else if (character == 'd' || character == 'D') {
+			rightTyped();
 		}
 
 	}
