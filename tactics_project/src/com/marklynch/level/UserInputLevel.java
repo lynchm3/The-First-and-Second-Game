@@ -588,8 +588,8 @@ public class UserInputLevel {
 					}
 				}
 
-				stringToCopy += ("Game.level.square[" + Game.squareMouseIsOver.xInGrid + "]["
-						+ Game.squareMouseIsOver.yInGrid + "];\n");
+				stringToCopy += ("Templates.BIG_TREE.makeCopy(Game.level.squares[" + Game.squareMouseIsOver.xInGrid
+						+ "][" + Game.squareMouseIsOver.yInGrid + "],null);\n");
 
 				System.out.println("stringToCopy = " + stringToCopy);
 
