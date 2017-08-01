@@ -154,14 +154,16 @@ public class Templates {
 			new Inventory(), false, false, false, false, false, true, true, 1f, 1f, 0f, 0f, 10f, 1f, 1f, null, 0.5f,
 			0.5f, false, 0f, 0f, 0f, 0f, 25f);
 	public static final Readable ROCK_WITH_ETCHING = new Readable("Rock with Etching", 1000, "rock_with_etching.png",
-			null, new Inventory(), true, false, false, true, false, true, new Object[] { "" }, 1, 1, 0f, 0f, 20f, 1f,
-			1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, null);
+			null, new Inventory(), true, false, false, true, false, true, null, 1, 1, 0f, 0f, 20f, 1f, 1f, null, 0.5f,
+			0.5f, false, 90f, 0f, 0f, 0f, 100f, null);
+	public static final Readable SCROLL = new Readable("Scroll", 1000, "scroll.png", null, new Inventory(), true, false,
+			false, true, false, true, null, 1, 1, 0f, 0f, 20f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f,
+			null);
 	public static final Readable SIGN = new Readable("Sign", 5, "sign.png", null, new Inventory(), true, false, false,
-			true, false, true, new Object[] { "" }, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
-			15f, null);
+			true, false, true, null, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 15f, null);
 	public static final Readable DOCUMENTS = new Readable("Documents", 5, "documents.png", null, new Inventory(), false,
-			true, true, false, false, false, new Object[] { "" }, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, 0.1f, null);
+			true, true, false, false, false, null, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
+			0f, 0.1f, null);
 
 	// Openables
 	public static final Door WEAK_WOODEN_DOOR = new Door("Weak Wooden Door", 25, "door.png", null, new Inventory(),
@@ -281,8 +283,6 @@ public class Templates {
 	// JUNK
 	public static final Junk FUR = new Junk("Fur", 5, "fur.png", null, new Inventory(), false, true, true, false, false,
 			false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 5f, null);
-	public static final Junk SCROLL = new Junk("Scroll", 5, "scroll.png", null, new Inventory(), false, true, true,
-			false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 5f, null);
 	public static final Junk DIRTY_SHEET = new Junk("Dirty Sheet", 5, "dirty_sheet.png", null, new Inventory(), false,
 			true, true, false, false, false, 0.75f, 0.56f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f,
 			1f, null);

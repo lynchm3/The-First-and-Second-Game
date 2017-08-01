@@ -23,6 +23,7 @@ import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
 import com.marklynch.level.constructs.power.PowerInferno;
+import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
@@ -80,6 +81,7 @@ public class Level {
 	public transient LevelButton showHideLogButton;
 	public transient LevelButton editorButton;
 	public transient ArrayList<Button> buttons;
+	public transient Button poisonBlastButton;
 
 	public boolean showLog = true;
 
@@ -309,6 +311,23 @@ public class Level {
 		});
 		unlockButton.enabled = true;
 		buttons.add(unlockButton);
+
+		poisonBlastButton = new LevelButton(220f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"POISON", false, false, Color.BLACK, Color.WHITE);
+		poisonBlastButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+				Level.this.selectedPower = new PowerPoisonBlast(Game.level.player);
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
+				Game.level.popups.clear();
+			}
+		});
+		poisonBlastButton.enabled = true;
 
 		showHideLogButton = new LevelButton(activityLogger.width, 40f, 50f, 30f, "undo_button.png",
 				"undo_button_disabled.png", " LOG", true, true, Color.BLACK, Color.WHITE);

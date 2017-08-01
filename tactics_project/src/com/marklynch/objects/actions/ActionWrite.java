@@ -2,6 +2,9 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -34,7 +37,11 @@ public class ActionWrite extends Action {
 		if (!enabled)
 			return;
 
-		sign.setText(text);
+		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
+		ConversationPart conversationPart = new ConversationPart(new Object[] { text },
+				new ConversationResponse[] { conversationReponseDone }, null);
+		Conversation conversation = new Conversation(conversationPart);
+		sign.setConversation(conversation);
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " wrote on ", sign }));
 		performer.actionsPerformedThisTurn.add(this);

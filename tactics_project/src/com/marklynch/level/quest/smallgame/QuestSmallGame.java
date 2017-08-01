@@ -8,14 +8,13 @@ import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
-import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
@@ -177,7 +176,8 @@ public class QuestSmallGame extends Quest {
 
 		// Add lead hunter
 		GameObject brentsGameObject = Templates.BED.makeCopy(Game.level.squares[10][9]);
-		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1), brentsGameObject);
+		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1),
+				brentsGameObject);
 		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBrent));
 		hunterBrent.equip(hunterBrent.inventory.get(0));
 		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
@@ -197,7 +197,8 @@ public class QuestSmallGame extends Quest {
 
 		// Add hunters
 		GameObject brontsGameObject = Templates.BED.makeCopy(Game.level.squares[9][9]);
-		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1), brontsGameObject);
+		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1),
+				brontsGameObject);
 		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBront1));
 		hunterBront1.equip(hunterBrent.inventory.get(0));
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
@@ -229,8 +230,13 @@ public class QuestSmallGame extends Quest {
 			hunter.quest = this;
 		}
 
-		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan",
-				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);
+		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
+		ConversationPart conversationPart = new ConversationPart(
+				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" },
+				new ConversationResponse[] { conversationReponseDone }, null);
+		Conversation conversation = new Conversation(conversationPart);
+		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan", conversation,
+				hunterBrent);
 
 		environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,

@@ -30,8 +30,11 @@ import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
-import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.level.quest.smallgame.QuestSmallGame;
@@ -484,8 +487,13 @@ public class Editor {
 				Square.STONE_TEXTURE);
 		Game.level.structures.add(joesShop);
 
-		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
-				new Object[] { joesShop.name }, trader);
+		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
+		ConversationPart conversationPart = new ConversationPart(new Object[] { joesShop.name },
+				new ConversationResponse[] { conversationReponseDone }, trader);
+		Conversation conversation = new Conversation(conversationPart);
+
+		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign", conversation,
+				trader);
 		Weapon broom = Templates.BROOM.makeCopy(null, null);
 		trader.inventory.add(broom);
 		trader.inventory.add(Templates.KATANA.makeCopy(null, null));
@@ -697,10 +705,10 @@ public class Editor {
 		}
 
 		if (editorState == EDITOR_STATE.MOVEABLE_OBJECT_SELECTED) {
-			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, Mouse.getX() + 10, Game.windowHeight - Mouse.getY() + 20,
-					Mouse.getX() + 30, Game.windowHeight - Mouse.getY() + 40);
-			TextureUtils.drawTexture(selectedGameObject.imageTexture, Mouse.getX() + 10, Game.windowHeight - Mouse.getY() + 20,
-					Mouse.getX() + 30, Game.windowHeight - Mouse.getY() + 40);
+			TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, Mouse.getX() + 10,
+					Game.windowHeight - Mouse.getY() + 20, Mouse.getX() + 30, Game.windowHeight - Mouse.getY() + 40);
+			TextureUtils.drawTexture(selectedGameObject.imageTexture, Mouse.getX() + 10,
+					Game.windowHeight - Mouse.getY() + 20, Mouse.getX() + 30, Game.windowHeight - Mouse.getY() + 40);
 		}
 	}
 
