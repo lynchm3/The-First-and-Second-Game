@@ -51,6 +51,7 @@ import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
@@ -332,7 +333,7 @@ public class Level {
 		poisonBlastButton.enabled = true;
 
 		showHideLogButton = new LevelButton(activityLogger.width, 40f, 50f, 30f, "undo_button.png",
-				"undo_button_disabled.png", " LOG", true, true, Color.BLACK, Color.WHITE);
+				"undo_button_disabled.png", " LOG <", true, true, Color.BLACK, Color.WHITE);
 		showHideLogButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -356,6 +357,7 @@ public class Level {
 							}
 							activityLogger.x = 0;
 							showHideLogButton.x = activityLogger.width;
+							showHideLogButton.textParts = new Object[] { new StringWithColor("LOG <", Color.WHITE) };
 						} else {
 							while (activityLogger.x > -activityLogger.width) {
 								activityLogger.x -= 2;
@@ -369,6 +371,7 @@ public class Level {
 							}
 							activityLogger.x = -activityLogger.width;
 							showHideLogButton.x = 0;
+							showHideLogButton.textParts = new Object[] { new StringWithColor("LOG >", Color.WHITE) };
 						}
 					}
 				}.start();

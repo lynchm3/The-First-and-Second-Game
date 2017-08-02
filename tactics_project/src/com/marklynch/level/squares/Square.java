@@ -507,12 +507,13 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		actions.add(new ActionDropItemsInInventory(performer, this));
 
 		// Throw equipped
-		if (performer.equipped != null) {
+		if (this != Game.level.player.squareGameObjectIsOn && performer.equipped != null) {
 			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
 		}
 
 		// Throw from inventory
-		actions.add(new ActionThrowItemInInventory(performer, this));
+		if (this != Game.level.player.squareGameObjectIsOn)
+			actions.add(new ActionThrowItemInInventory(performer, this));
 
 		// Pour from inventory
 		actions.add(new ActionPourContainerInInventory(performer, this));

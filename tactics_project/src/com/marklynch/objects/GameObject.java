@@ -595,12 +595,13 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			actions.add(new ActionGiveItemsInInventory(performer, this));
 		}
 
-		if (performer.equipped != null) {
+		if (this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn && performer.equipped != null) {
 			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
 		}
 
 		// Throw from inventory
-		actions.add(new ActionThrowItemInInventory(performer, this));
+		if (this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn)
+			actions.add(new ActionThrowItemInInventory(performer, this));
 
 		// Pour from inventory
 		actions.add(new ActionPourContainerInInventory(performer, this));

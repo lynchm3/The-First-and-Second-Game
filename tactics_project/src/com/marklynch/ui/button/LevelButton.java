@@ -14,7 +14,7 @@ public class LevelButton extends Button {
 	boolean yFromTop;
 	Color buttonColor;
 	Color textColor;
-	Object[] textParts;
+	public Object[] textParts;
 
 	public LevelButton(float x, float y, float width, float height, String enabledTexturePath,
 			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Color buttonColor,

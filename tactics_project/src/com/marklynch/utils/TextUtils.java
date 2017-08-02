@@ -245,6 +245,13 @@ public class TextUtils {
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
+				// Image
+				if (area.image != null) {
+					float x = posX + offsetX;
+					TextureUtils.drawTexture(area.image, x, posY + offsetY, x + 20, posY + offsetY + 20);
+					offsetX += textureWidth;
+				}
+
 			} else if (content instanceof Structure) {
 				Structure structure = (Structure) content;
 
