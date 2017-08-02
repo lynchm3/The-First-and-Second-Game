@@ -13,6 +13,7 @@ public class Crime {
 	public Actor performer;
 	public Actor visctim;
 	public int severity;
+	public boolean hasBeenToldToStop;
 	// Trespassing = 1,
 	// Having to be asked to drop something = 1
 	// Vandalism = 4,

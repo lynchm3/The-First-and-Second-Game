@@ -1,26 +1,17 @@
 package com.marklynch.level.quest.caveoftheblind;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Templates;
-import com.marklynch.objects.ThoughtBubbles;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionLock;
-import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionRing;
-import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionTalk;
-import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -96,8 +87,8 @@ public class AIRoutineForMort extends AIRoutine {
 		if (!retreatedToRoom) {
 			for (Blind blind : mort.questCaveOfTheBlind.blind) {
 				if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
-					float blindDistanceFromMortsRoom = blind
-							.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn);
+					float blindDistanceFromMortsRoom = blind.straightLineDistanceTo(
+							mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn);
 					if (blindDistanceFromMortsRoom - mortsDistanceFromGameObjectroomDoor < 4) {
 						Square doorSquare = mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn;
 						Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
@@ -293,136 +284,6 @@ public class AIRoutineForMort extends AIRoutine {
 
 		return true;
 
-	}
-
-	@Override
-	protected boolean runCrimeReactionRoutine() {
-		for (final Actor criminal : actor.crimesWitnessed.keySet()) {
-			int accumulatedSeverity = 0;
-			ArrayList<Crime> unresolvedIllegalMining = new ArrayList<Crime>();
-			final ArrayList<Crime> unresolvedCrimes = new ArrayList<Crime>();
-			final ArrayList<GameObject> stolenItemsOnCriminal = new ArrayList<GameObject>();
-			final ArrayList<GameObject> stolenItemsEquippedByCriminal = new ArrayList<GameObject>();
-			final ArrayList<GameObject> stolenItemsOnGroundToPickUp = new ArrayList<GameObject>();
-			// final ArrayList<GameObject> stolenItemsOnInContainer = new
-			// ArrayList<GameObject>();
-
-			// Mark issues as resolved
-			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
-				if (crime.resolved == false) {
-					if (crime.stolenItems.length == 0) {
-						crime.resolved = true;
-						continue;
-					}
-					boolean itemsToBeRetaken = false;
-					for (GameObject stolenItem : crime.stolenItems) {
-						if (criminal.inventory.contains(stolenItem) || stolenItem.squareGameObjectIsOn != null) {
-							itemsToBeRetaken = true;
-						}
-					}
-					if (itemsToBeRetaken)
-						crime.resolved = false;
-					else
-						crime.resolved = true;
-				}
-			}
-
-			// Create list of unresolved crimes, stolenItems
-			// Also calculate accumulated severity of crimes
-			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
-				accumulatedSeverity += crime.severity;
-				if (crime.resolved == false) {
-					unresolvedCrimes.add(crime);
-					if (crime.action instanceof ActionMine) {
-						unresolvedIllegalMining.add(crime);
-					}
-					for (GameObject stolenItem : crime.stolenItems) {
-						if (criminal.inventory.contains(stolenItem)) {
-							stolenItemsOnCriminal.add(stolenItem);
-						} else if (criminal.equipped == stolenItem) {
-							stolenItemsEquippedByCriminal.add(stolenItem);
-						} else if (stolenItem.squareGameObjectIsOn != null && stolenItem.fitsInInventory) {
-							stolenItemsOnGroundToPickUp.add(stolenItem);
-						}
-					}
-
-				}
-			}
-
-			if (accumulatedSeverity >= 10) {
-				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
-				actor.addAttackerForThisAndGroupMembers(criminal);
-				for (Crime unresolvedCrime : unresolvedCrimes) {
-					unresolvedCrime.resolved = true;
-				}
-				return runFightRoutine();
-			} else if (unresolvedIllegalMining.size() > 0) {
-				actor.miniDialogue = "MY ORES!";
-				new ActionThrowSpecificItem(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
-				for (GameObject stolenItem : stolenItemsOnCriminal) {
-					if (criminal.inventory.contains(stolenItem)) {
-						new ActionDropSpecificItem(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();
-						this.actor.thoughtBubbleImageTexture = stolenItem.imageTexture;
-					}
-				}
-				for (Crime unresolvedCrime : unresolvedCrimes) {
-					unresolvedCrime.resolved = true;
-				}
-				// actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
-				return true;
-			} else if (stolenItemsOnCriminal.size() > 0) {
-				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
-					new ActionTalk(this.actor, criminal, createJusticeTakeConversation(criminal, stolenItemsOnCriminal))
-							.perform();
-					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
-					return true;
-				}
-
-				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
-						&& actor.canSeeGameObject(criminal)) {
-					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
-						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
-						return true;
-					}
-				}
-			} else if (stolenItemsEquippedByCriminal.size() > 0) {
-				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
-					new ActionTalk(this.actor, criminal,
-							createJusticeDropConversation(criminal, stolenItemsEquippedByCriminal)).perform();
-					Crime crime = new Crime(null, criminal, this.actor, 1);
-					criminal.crimesPerformedThisTurn.add(crime);
-					criminal.crimesPerformedInLifetime.add(crime);
-					Action.notifyWitnessesOfCrime(crime);
-					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
-					return true;
-				}
-
-				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
-						&& actor.canSeeGameObject(criminal)) {
-					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
-						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
-						return true;
-					}
-				}
-			} else if (stolenItemsOnGroundToPickUp.size() > 0) {
-				for (GameObject stolenItemOnGround : stolenItemsOnGroundToPickUp) {
-
-					if (actor.straightLineDistanceTo(stolenItemOnGround.squareGameObjectIsOn) == 1) {
-						new ActionTake(this.actor, stolenItemOnGround).perform();
-						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
-						return true;
-					}
-
-					if (actor.canSeeSquare(stolenItemOnGround.squareGameObjectIsOn)) {
-						if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(stolenItemOnGround)) {
-							actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
 	}
 
 	private Conversation getConversationLastResort() {
