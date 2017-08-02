@@ -105,6 +105,7 @@ public class ActionThrowSpecificItem extends Action {
 			performer.inventory.remove(projectile);
 
 		projectile.thrown(performer);
+		Game.level.openInventories.clear();
 
 		if (performer.faction == Game.level.factions.get(0))
 

@@ -25,7 +25,7 @@ public class ActionPourSpecificItem extends Action {
 
 	// Default for hostiles
 	public ActionPourSpecificItem(Actor performer, Object target, GameObject object) {
-		super(ACTION_NAME, "action_throw.png");
+		super(ACTION_NAME, "action_pour.png");
 		this.performer = performer;
 		if (target instanceof Square) {
 			targetSquare = (Square) target;
@@ -55,7 +55,7 @@ public class ActionPourSpecificItem extends Action {
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { performer, " poured ", container, " on ", targetGameObject }));
 			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " poured ", container }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " poured out ", container }));
 
 			}
 		}
@@ -72,6 +72,8 @@ public class ActionPourSpecificItem extends Action {
 			}
 			container.inventory.remove(container.inventory.get(0));
 		}
+
+		Game.level.openInventories.clear();
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 

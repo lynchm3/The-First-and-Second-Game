@@ -36,6 +36,7 @@ import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPet;
+import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTalk;
@@ -1078,6 +1079,8 @@ public class Actor extends GameObject {
 					actions.add(utilityAction);
 				}
 			}
+
+			actions.add(new ActionPourContainerInInventory(performer, performer));
 
 			if (hiding) {
 				actions.add(new ActionStopHiding(this, this.hidingPlace));
