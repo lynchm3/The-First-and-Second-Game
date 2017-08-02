@@ -82,6 +82,11 @@ public class ActionFillContainersInInventory extends Action {
 			actionName = ACTION_NAME_DISABLED;
 			return false;
 		}
+
+		if (!performer.canSeeSquare(waterSource.squareGameObjectIsOn)) {
+			actionName = ACTION_NAME + " (can't reach)";
+			return false;
+		}
 		return true;
 	}
 

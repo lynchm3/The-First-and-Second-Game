@@ -28,8 +28,10 @@ import com.marklynch.objects.actions.ActionGiveItemsInInventory;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionPickUp;
+import com.marklynch.objects.actions.ActionPourContainerInInventory;
+import com.marklynch.objects.actions.ActionPourSpecificItem;
 import com.marklynch.objects.actions.ActionTake;
-import com.marklynch.objects.actions.ActionThrowItemsInInventory;
+import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionableInInventory;
@@ -598,7 +600,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		// Throw from inventory
-		actions.add(new ActionThrowItemsInInventory(performer, this));
+		actions.add(new ActionThrowItemInInventory(performer, this));
+
+		// Pour from inventory
+		actions.add(new ActionPourContainerInInventory(performer, this));
 
 		actions.add(new ActionCastBurn(performer, this));
 		actions.add(new ActionCastDouse(performer, this));
@@ -714,6 +719,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
 			return new ActionThrowSpecificItem(performer, Inventory.target, this);
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
+			return new ActionPourSpecificItem(performer, Inventory.target, this);
 		}
 
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this

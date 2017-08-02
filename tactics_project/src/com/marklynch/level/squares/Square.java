@@ -32,10 +32,11 @@ import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionTeleport;
-import com.marklynch.objects.actions.ActionThrowItemsInInventory;
+import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
@@ -511,7 +512,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 
 		// Throw from inventory
-		actions.add(new ActionThrowItemsInInventory(performer, this));
+		actions.add(new ActionThrowItemInInventory(performer, this));
+
+		// Pour from inventory
+		actions.add(new ActionPourContainerInInventory(performer, this));
 
 		actions.add(new ActionAddMapMarker(this));
 
