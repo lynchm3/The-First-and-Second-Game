@@ -703,7 +703,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public Action getDefaultActionInInventory(Actor performer) {
-		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL) {
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			if (this instanceof ContainerForLiquids)
 				return new ActionFillSpecificContainer(performer, Inventory.waterSource, (ContainerForLiquids) this);
 			else

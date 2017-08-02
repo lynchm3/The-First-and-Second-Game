@@ -123,8 +123,8 @@ public class ActionThrowSpecificItem extends Action {
 		if (!legal) {
 
 			Actor victim = null;
-			if (projectile instanceof Actor)
-				victim = (Actor) projectile;
+			if (targetGameObject instanceof Actor)
+				victim = (Actor) targetGameObject;
 			else if (targetGameObject != null)
 				victim = targetGameObject.owner;
 			if (victim != null) {
