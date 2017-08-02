@@ -25,21 +25,23 @@ public abstract class Power {
 	public int loudness;
 	public boolean hostile;
 	public boolean potentialyCriminal;
+	public int crimeSeverity;
 
 	int range;
 	Point[] areaOfEffect;
 
 	public Power(String name, Texture image, GameObject source, Effect[] effects, int range, Point[] areaOfEffect,
-			int loudness, boolean hostile, boolean potentiallyCriminal) {
+			int loudness, boolean hostile, boolean potentiallyCriminal, int crimeSeverity) {
 		this.name = name;
 		this.image = image;
 		this.source = source;
 		this.effects = effects;
+		this.range = range;
+		this.areaOfEffect = areaOfEffect;
 		this.loudness = loudness;
 		this.hostile = hostile;
 		this.potentialyCriminal = potentiallyCriminal;
-		this.range = range;
-		this.areaOfEffect = areaOfEffect;
+		this.crimeSeverity = crimeSeverity;
 	}
 
 	public void cast(Actor source, Square targetSquare) {

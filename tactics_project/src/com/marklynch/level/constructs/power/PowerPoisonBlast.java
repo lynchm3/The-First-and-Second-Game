@@ -15,6 +15,6 @@ public class PowerPoisonBlast extends Power {
 		super(NAME, ResourceUtils.getGlobalImage("action_poison.png"), source,
 				new Effect[] { new EffectPoison(source, null, 3) }, 10,
 				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
-				10, true, true);
+				10, true, true, 6);
 	}
 }

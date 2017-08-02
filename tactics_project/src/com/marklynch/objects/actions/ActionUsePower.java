@@ -70,7 +70,7 @@ public class ActionUsePower extends Action {
 						victim = gameObject.owner;
 
 					if (victim != performer && victim != null) {
-						Crime crime = new Crime(this, this.performer, victim, 6);
+						Crime crime = new Crime(this, this.performer, victim, power.crimeSeverity);
 						this.performer.crimesPerformedThisTurn.add(crime);
 						this.performer.crimesPerformedInLifetime.add(crime);
 						notifyWitnessesOfCrime(crime);

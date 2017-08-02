@@ -15,6 +15,6 @@ public class PowerInferno extends Power {
 		super(NAME, ResourceUtils.getGlobalImage("action_burn.png"), source,
 				new Effect[] { new EffectBurning(source, null, 3) }, 5,
 				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
-				10, true, true);
+				10, true, true, 6);
 	}
 }
