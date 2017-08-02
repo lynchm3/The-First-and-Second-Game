@@ -881,7 +881,6 @@ public class Level {
 		view.setIdentity();
 		Game.activeBatch.updateUniforms();
 
-		// Static UI (not zoomed)
 		for (GameObject gameObject : inanimateObjectsOnGround) {
 			gameObject.drawStaticUI();
 		}
@@ -892,6 +891,7 @@ public class Level {
 				actor.drawStaticUI();
 			}
 		}
+		Game.activeBatch.flush();
 
 		// MAP ICONS
 		if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
@@ -912,6 +912,7 @@ public class Level {
 				structure.drawUI();
 			}
 		}
+		Game.activeBatch.flush();
 
 		// if (Game.buttonHoveringOver == null && Game.squareMouseIsOver !=
 		// null)

@@ -214,7 +214,6 @@ public class Structure {
 		float drawPositionY2 = (Game.windowHeight / 2)
 				+ (Game.zoom * (squarePositionY2 - Game.windowHeight / 2 + Game.dragY));
 		TextureUtils.drawTexture(image, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
-		Game.activeBatch.flush();
 
 	}
 
