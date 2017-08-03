@@ -169,17 +169,17 @@ public class AreaTownForest {
 						null, areaTownForest));
 
 		new Group("Buns",
-				Templates.RABBIT.makeCopy("Female Bun", Game.level.squares[50][51], Game.level.factions.get(2), null,
+				Templates.RABBIT.makeCopy("Female Bun", Game.level.squares[40][41], Game.level.factions.get(2), null,
 						areaTownForest),
-				Templates.RABBIT.makeCopy("Male Bun", Game.level.squares[52][54], Game.level.factions.get(2), null,
+				Templates.RABBIT.makeCopy("Male Bun", Game.level.squares[42][44], Game.level.factions.get(2), null,
 						areaTownForest),
-				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[53][52], Game.level.factions.get(2), null,
+				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[43][42], Game.level.factions.get(2), null,
 						areaTownForest),
-				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[52][53], Game.level.factions.get(2), null,
+				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[42][43], Game.level.factions.get(2), null,
 						areaTownForest),
-				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[51][54], Game.level.factions.get(2), null,
+				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[41][44], Game.level.factions.get(2), null,
 						areaTownForest),
-				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[50][55], Game.level.factions.get(2), null,
+				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[40][45], Game.level.factions.get(2), null,
 						areaTownForest));
 
 		Templates.FOX.makeCopy("Fox", Game.level.squares[200][78], Game.level.factions.get(2), null, areaTownForest);

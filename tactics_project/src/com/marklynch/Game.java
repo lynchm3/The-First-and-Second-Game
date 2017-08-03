@@ -37,8 +37,8 @@ public class Game {
 	// PLAYER START POSITION
 
 	// Shop
-	// public static int playerStartPosX = 3;
-	// public static int playerStartPosY = 3;
+	public static int playerStartPosX = 3;
+	public static int playerStartPosY = 3;
 
 	// Dining room
 	// public static int playerStartPosX = 93;
@@ -49,8 +49,8 @@ public class Game {
 	// public static int playerStartPosY = 46;
 
 	// Burrow in forest
-	public static int playerStartPosX = 186;
-	public static int playerStartPosY = 63;
+	// public static int playerStartPosX = 186;
+	// public static int playerStartPosY = 63;
 
 	//
 
@@ -65,16 +65,16 @@ public class Game {
 	// CAMERA START POSITION
 
 	// 0,0
-	// public static float dragX = 0;
-	// public static float dragY = 0;
+	public static float dragX = 0;
+	public static float dragY = 0;
 
 	// West Security + Dungeon
 	// public static float dragX = -3072;
 	// public static float dragY = -192;
 
 	// Morts Mine + dining room
-	public static float dragX = -17500;
-	public static float dragY = -2000;
+	// public static float dragX = -17500;
+	// public static float dragY = -2000;
 
 	// Farm
 	// public static float dragX = -1000;

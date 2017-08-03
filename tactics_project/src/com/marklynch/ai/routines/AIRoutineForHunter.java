@@ -72,7 +72,6 @@ public class AIRoutineForHunter extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
-
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader())
 
@@ -121,11 +120,11 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Defer to quest
-		// if (this.actor.quest != null) {
-		// if (this.actor.quest.update(this.actor)) {
-		// return;
-		// }
-		// }
+		if (this.actor.quest != null) {
+			if (this.actor.quest.update(this.actor)) {
+				return;
+			}
+		}
 
 		// Go about your business
 		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL)
@@ -136,6 +135,9 @@ public class AIRoutineForHunter extends AIRoutine {
 			target = AIRoutineUtils.getNearestForPurposeOfAttacking(100, false, true, false, false, false, true,
 					AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 					TinyNeutralWildAnimal.class);
+
+			System.out.println("PICK_WILD_ANIMAL target = " + target);
+
 			if (target == null) {
 				if (this.actor.inventory.contains(Junk.class)) {
 					huntState = HUNT_STATE.PICK_SHOP_KEEPER;
@@ -149,6 +151,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
+			System.out.println("GO_TO_WILD_ANIMAL_AND_ATTACK target = " + target);
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			if (target.remainingHealth <= 0 && this.actor.inventory.size() > 0) {
 				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
@@ -156,8 +159,10 @@ public class AIRoutineForHunter extends AIRoutine {
 				huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 			} else {
 				boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
-				if (!attackedAnimal)
+				if (!attackedAnimal) {
+					System.out.println("GO_TO_WILD_ANIMAL_AND_ATTACK !attackedAnimal " + target);
 					AIRoutineUtils.moveTowardsTargetToAttack(target);
+				}
 			}
 		}
 
