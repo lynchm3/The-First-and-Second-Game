@@ -59,13 +59,19 @@ public class AIRoutineForThief extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.thoughtBubbleImageTexture = null;
-		createSearchLocationsBasedOnSounds(Weapon.class);
+
 		createSearchLocationsBasedOnVisibleAttackers();
+		createSearchLocationsBasedOnVisibleCriminals();
+		createSearchLocationsBasedOnSounds(Weapon.class);
+
 		if (runFightRoutine()) {
 			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
+
+		// No crime reaction routine coz hes a thief.... altho wat about crims
+		// against him? :P
 
 		if (runSearchRoutine()) {
 			// createSearchLocationsBasedOnSounds();

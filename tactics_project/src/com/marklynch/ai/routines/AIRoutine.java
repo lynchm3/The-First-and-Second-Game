@@ -253,8 +253,8 @@ public class AIRoutine {
 					new ActionShoutForHelp(actor, attacker).perform();
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
 
-					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false,
-							true, false, false, false, false, Hunter.class);
+					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false, true,
+							false, false, false, false, Hunter.class);
 
 					// if (this.actor.canSeeGameObject(actorNearby)) {
 					// } else {
@@ -620,11 +620,12 @@ public class AIRoutine {
 				}
 			}
 
-			// STOP THAT!
+			// "STOP THAT!"
 			boolean saidStop = false;
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				if (!crime.hasBeenToldToStop) {
 					new ActionTalk(this.actor, criminal, createJusticeStopConversation()).perform();
+					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 
 					saidStop = true;
 					break;

@@ -216,6 +216,8 @@ public class QuestSmallGame extends Quest {
 		Actor thief = Templates.THIEF.makeCopy(Game.level.squares[2][13], Game.level.factions.get(2), null);
 
 		Templates.HATCHET.makeCopy(Game.level.squares[3][6], Game.level.player);
+		Templates.HATCHET.makeCopy(Game.level.squares[5][6], Game.level.player);
+		Templates.HATCHET.makeCopy(Game.level.squares[1][6], Game.level.player);
 
 		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();
 		hunterPackMembers.add(hunterBrent);

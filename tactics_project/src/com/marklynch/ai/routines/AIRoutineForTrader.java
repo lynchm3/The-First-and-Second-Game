@@ -43,8 +43,10 @@ public class AIRoutineForTrader extends AIRoutine {
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
 		this.actor.thoughtBubbleImageTexture = null;
-		createSearchLocationsBasedOnSounds(Weapon.class);
+
 		createSearchLocationsBasedOnVisibleAttackers();
+		createSearchLocationsBasedOnVisibleCriminals();
+		createSearchLocationsBasedOnSounds(Weapon.class);
 
 		if (runGetHelpRoutine()) {
 			createSearchLocationsBasedOnVisibleAttackers();
@@ -54,6 +56,11 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (shoutForHelpCooldown > 0) {
 			runEscapeCooldown(true);
 			shoutForHelpCooldown--;
+			createSearchLocationsBasedOnVisibleAttackers();
+			return;
+		}
+
+		if (runCrimeReactionRoutine()) {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
@@ -92,8 +99,8 @@ public class AIRoutineForTrader extends AIRoutine {
 		}
 
 		// 1. pick up loot on ground
-		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				true, true, GameObject.class);
+		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false, true, true,
+				GameObject.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
