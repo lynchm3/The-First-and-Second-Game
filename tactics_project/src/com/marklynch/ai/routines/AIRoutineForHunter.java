@@ -6,6 +6,9 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.units.HerbivoreWildAnimal;
+import com.marklynch.objects.units.TinyNeutralWildAnimal;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -118,11 +121,11 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Defer to quest
-		if (this.actor.quest != null) {
-			if (this.actor.quest.update(this.actor)) {
-				return;
-			}
-		}
+		// if (this.actor.quest != null) {
+		// if (this.actor.quest.update(this.actor)) {
+		// return;
+		// }
+		// }
 
 		// Go about your business
 		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL)
@@ -130,8 +133,9 @@ public class AIRoutineForHunter extends AIRoutine {
 		{
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfAttacking(AggressiveWildAnimal.class, 100, false, true, false,
-					false, false, true);
+			target = AIRoutineUtils.getNearestForPurposeOfAttacking(100, false, true, false, false, false, true,
+					AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
+					TinyNeutralWildAnimal.class);
 			if (target == null) {
 				if (this.actor.inventory.contains(Junk.class)) {
 					huntState = HUNT_STATE.PICK_SHOP_KEEPER;

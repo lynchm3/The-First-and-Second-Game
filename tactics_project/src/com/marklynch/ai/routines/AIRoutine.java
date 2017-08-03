@@ -28,6 +28,7 @@ import com.marklynch.objects.actions.ActionTake;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Farmer;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Pig;
@@ -254,7 +255,7 @@ public class AIRoutine {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
 
 					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false, true,
-							false, false, false, false, Hunter.class);
+							false, false, false, false, Hunter.class, Farmer.class);
 
 					// if (this.actor.canSeeGameObject(actorNearby)) {
 					// } else {

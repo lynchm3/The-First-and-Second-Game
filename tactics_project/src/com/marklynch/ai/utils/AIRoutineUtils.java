@@ -96,113 +96,47 @@ public class AIRoutineUtils {
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
 			boolean ignoreQuestObjects, Class... classes) {
 
-		// class GameObject.class,
-		// distance 50f,
-		// fits in invnetory true,
-		// check actors false,
-		// check inanimate objs true,
-		// must contain objs false
-		// must be unowned false
-		// ignore quest objs true
-
-		// GameObject.class, 5f, true, false, true, false
-
-		ArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(maxDistance);
-
-		GameObject result = null;
-		int costToBest = Integer.MAX_VALUE;
-
 		if (checkActors) {
-			for (Square squareActorIsOn : squaresInRange) {
-				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
-				if (actor != null) {
-					for (Class clazz : classes) {
-						if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
-								ignoreQuestObjects)) {
-							Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
-							AIPath path = Game.level.activeActor.getPathTo(square);
-							if (path != null && path.travelCost < costToBest) {
-								result = actor;
-								costToBest = path.travelCost;
-							}
-						}
-					}
-
-				}
-			}
-		}
-
-		// ATTEMPT A
-		// THIS WAS REPLACE BY THE BELOW DUE TO SPEED, BUT CHECKING DISTANCES
-		// OVER 10 INCREMENTALLY IS THE REAL WAY TO GO.
-		// costToBest = Integer.MAX_VALUE;
-		// if (checkInanimateObjects) {
-		// long start = System.nanoTime();
-		// for (Square squareGameObjectIsOn : squaresInRange) {
-		// ArrayList<GameObject> gameObjectsOnSquare =
-		// squareGameObjectIsOn.inventory.getGameObjects();
-		// for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
-		// if (!(gameObjectOnSquare instanceof Actor) &&
-		// passesChecks(gameObjectOnSquare, clazz,
-		// fitsInInventory, mustContainObjects, mustBeUnowned,
-		// ignoreQuestObjects)) {
-		// Square square =
-		// calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObjectOnSquare,
-		// 1f);
-		// AIPath path = Game.level.activeActor.getPathTo(square);
-		// if (path != null && path.travelCost < costToBest) {
-		// result = gameObjectOnSquare;
-		// costToBest = path.travelCost;
-		// }
-		// }
-		// }
-		// }
-		// if (Game.level.activeActor instanceof CarnivoreNeutralWildAnimal)
-		// System.out.println("A Time = " + (System.nanoTime() - start));
-		//
-
-		// ATTEMPT B
-		// REMOVE BECAUSE IT WAS TOO SLOW, IT CHECK SO MANY PATHS AT SUCH HIGH
-		// DISTANCES
-		// if (checkInanimateObjects) {
-		// long start = System.nanoTime();
-		// for (GameObject gameObject :
-		// Game.level.inanimateObjectsOnGround.get(clazz)) {
-		//
-		// if
-		// (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn)
-		// <= maxDistance) {
-		// if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz,
-		// fitsInInventory,
-		// mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
-		// Square square =
-		// calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
-		// AIPath path = Game.level.activeActor.getPathTo(square);
-		// if (path != null && path.travelCost < costToBest) {
-		// result = gameObject;
-		// costToBest = path.travelCost;
-		// }
-		// }
-		// }
-		// }
-		// if (Game.level.activeActor instanceof CarnivoreNeutralWildAnimal)
-		// System.out.println("B Time = " + (System.nanoTime() - start));
-		// }
-
-		// Attempt C
-		// Checks objs @ 10,20 30.... etc. range
-		// Takes first one that returns a path
-		if (checkInanimateObjects) {
-			if (Game.level.activeActor instanceof Thief)
-				System.out.println("a");
 
 			ArrayList<Integer> ranges = new ArrayList<Integer>();
 			for (int i = 0; i < maxDistance; i += 10) {
 				ranges.add(i);
 			}
 			ranges.add((int) maxDistance);
-			if (Game.level.activeActor instanceof Thief)
-				System.out.println("b");
+
+			for (int i = 1; i < ranges.size(); i++) {
+				int minRange = ranges.get(i - 1);
+				int maxRange = ranges.get(i);
+
+				for (Class clazz : classes) {
+					for (Faction faction : Game.level.factions) {
+						for (Actor actor : faction.actors) {
+							if (Game.level.activeActor.straightLineDistanceTo(actor.squareGameObjectIsOn) >= minRange
+									&& Game.level.activeActor
+											.straightLineDistanceTo(actor.squareGameObjectIsOn) <= maxRange) {
+								if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
+										ignoreQuestObjects)) {
+									Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
+									AIPath path = Game.level.activeActor.getPathTo(square);
+									if (path != null) {
+										return actor;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// Takes first one that returns a path
+		if (checkInanimateObjects) {
+
+			ArrayList<Integer> ranges = new ArrayList<Integer>();
+			for (int i = 0; i < maxDistance; i += 10) {
+				ranges.add(i);
+			}
+			ranges.add((int) maxDistance);
 
 			for (int i = 1; i < ranges.size(); i++) {
 				int minRange = ranges.get(i - 1);
@@ -210,21 +144,13 @@ public class AIRoutineUtils {
 				long start = System.nanoTime();
 
 				for (Class clazz : classes) {
-					if (Game.level.activeActor instanceof Thief)
-						System.out.println("c");
 					for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
-						if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-							System.out.println("d gameObject = " + gameObject);
 
 						if (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) >= minRange
 								&& Game.level.activeActor
 										.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
-							if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-								System.out.println("d");
 							if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
 									mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
-								if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-									System.out.println("e");
 								Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
 								AIPath path = Game.level.activeActor.getPathTo(square);
 								if (path != null) {
@@ -238,59 +164,83 @@ public class AIRoutineUtils {
 			}
 		}
 
-		return result;
+		return null;
 
 	}
 
-	public static GameObject getNearestForPurposeOfAttacking(Class clazz, float maxDistance, boolean fitsInInventory,
+	public static GameObject getNearestForPurposeOfAttacking(float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
-			boolean ignoreQuestObjects) {
-
-		// GameObject.class, 5f, true, false, true, false
-
-		ArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(maxDistance);
-
-		GameObject result = null;
-		int costToBest = Integer.MAX_VALUE;
+			boolean ignoreQuestObjects, Class... classes) {
 
 		if (checkActors) {
-			for (Square squareActorIsOn : squaresInRange) {
-				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
-				if (actor != null) {
-					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
-							ignoreQuestObjects)) {
-						Square square = calculateSquareToMoveToToAttackTarget(actor);
-						AIPath path = Game.level.activeActor.getPathTo(square);
-						if (path != null && path.travelCost < costToBest) {
-							result = actor;
-							costToBest = path.travelCost;
-						}
-					}
 
-				}
+			ArrayList<Integer> ranges = new ArrayList<Integer>();
+			for (int i = 0; i < maxDistance; i += 10) {
+				ranges.add(i);
 			}
-		}
+			ranges.add((int) maxDistance);
 
-		if (checkInanimateObjects)
+			for (int i = 1; i < ranges.size(); i++) {
+				int minRange = ranges.get(i - 1);
+				int maxRange = ranges.get(i);
 
-		{
-			for (Square squareGameObjectIsOn : squaresInRange) {
-				ArrayList<GameObject> gameObjectsOnSquare = squareGameObjectIsOn.inventory.getGameObjects();
-				for (GameObject gameObjectOnSquare : gameObjectsOnSquare) {
-					if (!(gameObjectOnSquare instanceof Actor) && passesChecks(gameObjectOnSquare, clazz,
-							fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
-						Square square = calculateSquareToMoveToToAttackTarget(gameObjectOnSquare);
-						AIPath path = Game.level.activeActor.getPathTo(square);
-						if (path != null && path.travelCost < costToBest) {
-							result = gameObjectOnSquare;
-							costToBest = path.travelCost;
+				for (Class clazz : classes) {
+					for (Faction faction : Game.level.factions) {
+						for (Actor actor : faction.actors) {
+							if (Game.level.activeActor.straightLineDistanceTo(actor.squareGameObjectIsOn) >= minRange
+									&& Game.level.activeActor
+											.straightLineDistanceTo(actor.squareGameObjectIsOn) <= maxRange) {
+								if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
+										ignoreQuestObjects)) {
+									Square square = calculateSquareToMoveToToAttackTarget(actor);
+									AIPath path = Game.level.activeActor.getPathTo(square);
+									if (path != null) {
+										return actor;
+									}
+								}
+							}
 						}
 					}
 				}
 			}
 		}
 
-		return result;
+		// Takes first one that returns a path
+		if (checkInanimateObjects) {
+
+			ArrayList<Integer> ranges = new ArrayList<Integer>();
+			for (int i = 0; i < maxDistance; i += 10) {
+				ranges.add(i);
+			}
+			ranges.add((int) maxDistance);
+
+			for (int i = 1; i < ranges.size(); i++) {
+				int minRange = ranges.get(i - 1);
+				int maxRange = ranges.get(i);
+				long start = System.nanoTime();
+
+				for (Class clazz : classes) {
+					for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
+
+						if (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) >= minRange
+								&& Game.level.activeActor
+										.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
+							if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
+									mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
+								Square square = calculateSquareToMoveToToAttackTarget(gameObject);
+								AIPath path = Game.level.activeActor.getPathTo(square);
+								if (path != null) {
+									return gameObject;
+
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return null;
 
 	}
 
