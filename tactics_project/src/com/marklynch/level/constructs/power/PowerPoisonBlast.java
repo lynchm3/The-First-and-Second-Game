@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.power;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.objects.GameObject;
@@ -15,6 +16,6 @@ public class PowerPoisonBlast extends Power {
 		super(NAME, ResourceUtils.getGlobalImage("action_poison.png"), source,
 				new Effect[] { new EffectPoison(source, null, 3) }, 10,
 				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
-				10, true, true, 6);
+				10, true, true, Crime.CRIME_SEVERITY_ATTACK);
 	}
 }

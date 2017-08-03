@@ -128,7 +128,7 @@ public class ActionThrowSpecificItem extends Action {
 			else if (targetGameObject != null)
 				victim = targetGameObject.owner;
 			if (victim != null) {
-				Crime crime = new Crime(this, this.performer, victim, 6);
+				Crime crime = new Crime(this, this.performer, victim, Crime.CRIME_SEVERITY_ATTACK);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
@@ -162,6 +162,9 @@ public class ActionThrowSpecificItem extends Action {
 	public boolean checkLegality() {
 		// Empty square, it's fine
 		if (targetGameObject == null)
+			return true;
+
+		if (performer.attackers.contains(targetGameObject))
 			return true;
 
 		// Something that belongs to some one else

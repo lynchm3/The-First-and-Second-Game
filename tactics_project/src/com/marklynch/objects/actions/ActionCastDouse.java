@@ -95,7 +95,7 @@ public class ActionCastDouse extends Action {
 			else
 				victim = target.owner;
 
-			Crime crime = new Crime(this, this.performer, victim, 6);
+			Crime crime = new Crime(this, this.performer, victim, Crime.CRIME_SEVERITY_DOUSE);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

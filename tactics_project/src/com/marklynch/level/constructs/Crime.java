@@ -14,11 +14,16 @@ public class Crime {
 	public Actor visctim;
 	public int severity;
 	public boolean hasBeenToldToStop;
-	// Trespassing = 1,
-	// Having to be asked to drop something = 1
-	// Vandalism = 4,
-	// Theft = 4
-	// Attack = 6
+
+	final public static int CRIME_SEVERITY_TRESPASSING = 1;
+	final public static int CRIME_SEVERITY_REFUSE_TO_DROP = 1;
+	final public static int CRIME_SEVERITY_DOUSE = 1;
+	final public static int CRIME_SEVERITY_SPY = 2;
+	final public static int CRIME_SEVERITY_VANDALISM = 4;
+	final public static int CRIME_SEVERITY_THEFT = 4;
+	final public static int CRIME_SEVERITY_MANSLAUGHTER = 5;
+	final public static int CRIME_SEVERITY_ATTACK = 6;
+
 	public boolean resolved;
 	public GameObject stolenItems[];
 

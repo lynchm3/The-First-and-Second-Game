@@ -83,7 +83,7 @@ public class ActionCastBurn extends Action {
 			else
 				victim = target.owner;
 
-			Crime crime = new Crime(this, this.performer, victim, 6);
+			Crime crime = new Crime(this, this.performer, victim, Crime.CRIME_SEVERITY_ATTACK);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);
@@ -118,6 +118,8 @@ public class ActionCastBurn extends Action {
 	@Override
 	public boolean checkLegality() {
 		// Something that belongs to some one else
+		if (performer.attackers.contains(target))
+			return true;
 
 		if (target.owner != null && target.owner != performer)
 			return false;

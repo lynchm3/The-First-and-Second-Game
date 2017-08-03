@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.power;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectHeal;
 import com.marklynch.level.squares.Square;
@@ -17,7 +18,7 @@ public class PowerHealRanged extends Power {
 		super(NAME, ResourceUtils.getGlobalImage("action_heal.png"), source,
 				new Effect[] { new EffectHeal(source, null, 1) }, 5,
 				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
-				5, false, false, 6);
+				5, false, false, Crime.CRIME_SEVERITY_ATTACK);
 	}
 
 	@Override

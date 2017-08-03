@@ -49,7 +49,7 @@ public class ActionTakeBite extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, target.owner, 4);
+			Crime crime = new Crime(this, this.performer, target.owner, Crime.CRIME_SEVERITY_THEFT);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

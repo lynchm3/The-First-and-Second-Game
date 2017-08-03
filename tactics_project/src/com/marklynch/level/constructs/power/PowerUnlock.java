@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -19,7 +20,7 @@ public class PowerUnlock extends Power {
 
 	public PowerUnlock(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_unlock.png"), source, new Effect[] {}, 1,
-				new Point[] { new Point(0, 0) }, 5, false, true, 4);
+				new Point[] { new Point(0, 0) }, 5, false, true, Crime.CRIME_SEVERITY_THEFT);
 	}
 
 	@Override

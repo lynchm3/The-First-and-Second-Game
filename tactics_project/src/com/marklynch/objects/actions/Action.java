@@ -97,7 +97,7 @@ public abstract class Action {
 			ActionTrespass actionTrespass = new ActionTrespass(performer, square, loudness);
 			Crime crime = null;
 			if (square.owners.size() > 0)
-				crime = new Crime(actionTrespass, performer, square.owners.get(0), 0);
+				crime = new Crime(actionTrespass, performer, square.owners.get(0), Crime.CRIME_SEVERITY_TRESPASSING);
 			else
 				crime = new Crime(actionTrespass, performer, null, 0);
 

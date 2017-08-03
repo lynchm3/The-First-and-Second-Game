@@ -51,7 +51,7 @@ public class ActionUnlock extends Action {
 			actor.actionsPerformedThisTurn.add(this);
 
 			if (!legal) {
-				Crime crime = new Crime(this, actor, openable.owner, 4, key);
+				Crime crime = new Crime(this, actor, openable.owner, Crime.CRIME_SEVERITY_THEFT, key);
 				actor.crimesPerformedThisTurn.add(crime);
 				actor.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);

@@ -97,7 +97,7 @@ public class ActionPourSpecificItem extends Action {
 			else if (targetGameObject != null)
 				victim = targetGameObject.owner;
 			if (victim != null) {
-				Crime crime = new Crime(this, this.performer, victim, 1);
+				Crime crime = new Crime(this, this.performer, victim, Crime.CRIME_SEVERITY_DOUSE);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);
