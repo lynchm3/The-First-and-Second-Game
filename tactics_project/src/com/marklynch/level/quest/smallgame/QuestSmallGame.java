@@ -200,21 +200,31 @@ public class QuestSmallGame extends Quest {
 		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1),
 				brontsGameObject);
 		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBront1));
-		hunterBront1.equip(hunterBrent.inventory.get(0));
+		hunterBront1.equip(hunterBront1.inventory.get(0));
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null);
 		hunterBront2.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront2));
-		hunterBront2.equip(hunterBrent.inventory.get(0));
+		hunterBront2.equip(hunterBront2.inventory.get(0));
 		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
 		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null);
+		hunterBront3.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront3));
+		hunterBront3.equip(hunterBront3.inventory.get(0));
 		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1), null);
+		hunterBront4.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront4));
+		hunterBront4.equip(hunterBront4.inventory.get(0));
 		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1), null);
+		hunterBront5.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront5));
+		hunterBront5.equip(hunterBront5.inventory.get(0));
 		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1), null);
+		hunterBront6.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront6));
+		hunterBront6.equip(hunterBront6.inventory.get(0));
 
 		Actor thief = Templates.THIEF.makeCopy(Game.level.squares[2][13], Game.level.factions.get(2), null);
+		thief.inventory.add(Templates.HATCHET.makeCopy(null, thief));
 
+		// Some ground hatchets
 		Templates.HATCHET.makeCopy(Game.level.squares[3][6], Game.level.player);
 		Templates.HATCHET.makeCopy(Game.level.squares[5][6], Game.level.player);
 		Templates.HATCHET.makeCopy(Game.level.squares[1][6], Game.level.player);
@@ -248,6 +258,7 @@ public class QuestSmallGame extends Quest {
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,
 				false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 110f, null,
 				Game.level.factions.get(1), 0, 0, 0, 0, 0, 0, 0, 0);
+		environmentalistBill.inventory.add(Templates.HATCHET.makeCopy(null, environmentalistBill));
 
 		environmentalistBill.quest = this;
 
@@ -547,7 +558,8 @@ public class QuestSmallGame extends Quest {
 				super.select();
 				for (GameObject gameObject : weaponsBehindLodge) {
 					if (environmentalistBill.inventory.contains(gameObject)) {
-						new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject, false).perform();
+						new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject, false)
+								.perform();
 						talkedToEnvironmentalist = true;
 					}
 				}

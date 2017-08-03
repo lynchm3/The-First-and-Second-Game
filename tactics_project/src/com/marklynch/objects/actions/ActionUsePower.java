@@ -112,8 +112,11 @@ public class ActionUsePower extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		// Something that belongs to some one else
+
 		if (!power.potentialyCriminal)
+			return true;
+
+		if (performer.attackers.contains(target))
 			return true;
 
 		for (Square square : power.getAffectedSquares(target)) {

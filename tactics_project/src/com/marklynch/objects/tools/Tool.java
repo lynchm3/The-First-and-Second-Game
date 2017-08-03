@@ -1,17 +1,14 @@
 package com.marklynch.objects.tools;
 
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;
 
-public class Tool extends GameObject {
-
-	public float minRange = 0;
-	public float maxRange = 0;
+public class Tool extends Weapon {
 
 	public Tool(String name, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -19,13 +16,13 @@ public class Tool extends GameObject {
 			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
 			float waterResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
-			float anchorX, float anchorY) {
+			float anchorX, float anchorY, float damage) {
 
-		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), false, true, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
-				owner);
+		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,
+				anchorX, anchorY);
 
 		this.minRange = minRange;
 		this.maxRange = maxRange;
@@ -101,6 +98,7 @@ public class Tool extends GameObject {
 	//
 	// }
 
+	@Override
 	public boolean hasRange(int weaponDistanceTo) {
 		if (weaponDistanceTo >= getEffectiveMinRange() && weaponDistanceTo <= getEffectiveMaxRange()) {
 			return true;
@@ -108,10 +106,12 @@ public class Tool extends GameObject {
 		return false;
 	}
 
+	@Override
 	public float getEffectiveMinRange() {
 		return minRange;
 	}
 
+	@Override
 	public float getEffectiveMaxRange() {
 		return maxRange;
 	}
@@ -130,6 +130,7 @@ public class Tool extends GameObject {
 
 	}
 
+	@Override
 	public Action getUtilityAction(Actor performer) {
 		return null;
 	}
@@ -140,6 +141,6 @@ public class Tool extends GameObject {
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,
-				anchorX, anchorY);
+				anchorX, anchorY, 5);
 	}
 }
