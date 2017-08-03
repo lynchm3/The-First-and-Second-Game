@@ -16,7 +16,7 @@ public class Axe extends Tool {
 		super(name, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner, anchorX, anchorY);
+				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner, anchorX, anchorY, 5);
 	}
 
 	@Override
