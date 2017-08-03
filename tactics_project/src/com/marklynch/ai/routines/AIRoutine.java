@@ -624,8 +624,12 @@ public class AIRoutine {
 			boolean saidStop = false;
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				if (!crime.hasBeenToldToStop) {
-					new ActionTalk(this.actor, criminal, createJusticeStopConversation()).perform();
+					if (criminal == Game.level.player)
+						new ActionTalk(this.actor, criminal, createJusticeStopConversation()).perform();
+					else
+						actor.miniDialogue = "Stop that!";
 					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+					// actor.activityDescription = "Dispensing Justice";
 
 					saidStop = true;
 					break;
@@ -664,9 +668,17 @@ public class AIRoutine {
 				// Stolen items in criminal inventory
 			} else if (stolenItemsOnCriminal.size() > 0) {
 				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
-					new ActionTalk(this.actor, criminal,
-							createJusticeReclaimConversation(criminal, stolenItemsOnCriminal)).perform();
+					if (criminal == Game.level.player) {
+						new ActionTalk(this.actor, criminal,
+								createJusticeReclaimConversation(criminal, stolenItemsOnCriminal)).perform();
+					} else {
+						actor.miniDialogue = "Give me that!";
+						for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
+							new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal, true).perform();
+						}
+					}
 					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+					actor.activityDescription = "Confiscating";
 					return true;
 				}
 
@@ -674,6 +686,7 @@ public class AIRoutine {
 						&& actor.canSeeGameObject(criminal)) {
 					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+						actor.activityDescription = "Confiscating";
 						return true;
 					}
 				}
@@ -734,7 +747,7 @@ public class AIRoutine {
 			public void select() {
 				super.select();
 				for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-					new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal).perform();
+					new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal, true).perform();
 				}
 			}
 		};

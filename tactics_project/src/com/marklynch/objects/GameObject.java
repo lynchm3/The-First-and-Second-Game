@@ -587,7 +587,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// }
 
 		if (performer.equipped != null && this.canContainOtherObjects) {
-			actions.add(new ActionGiveSpecificItem(performer, this, performer.equipped));
+			actions.add(new ActionGiveSpecificItem(performer, this, performer.equipped, false));
 		}
 
 		// Throw from inventory
@@ -715,7 +715,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
-			return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this);
+			return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {

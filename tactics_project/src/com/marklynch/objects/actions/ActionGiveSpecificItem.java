@@ -13,12 +13,14 @@ public class ActionGiveSpecificItem extends Action {
 	Actor performer;
 	GameObject receiver;
 	GameObject object;
+	boolean logAsTake;
 
-	public ActionGiveSpecificItem(Actor performer, GameObject receiver, GameObject object) {
+	public ActionGiveSpecificItem(Actor performer, GameObject receiver, GameObject object, boolean logAsTake) {
 		super(ACTION_NAME, "action_give.png");
 		this.performer = performer;
 		this.receiver = receiver;
 		this.object = object;
+		this.logAsTake = logAsTake;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -36,7 +38,11 @@ public class ActionGiveSpecificItem extends Action {
 			return;
 
 		if (Game.level.shouldLog(receiver, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " gave ", object, " to ", receiver }));
+			if (logAsTake)
+				Game.level
+						.logOnScreen(new ActivityLog(new Object[] { receiver, " took ", object, " from ", performer }));
+			else
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " gave ", object, " to ", receiver }));
 		performer.inventory.remove(object);
 		if (performer.equipped == object)
 			performer.equip(null);
