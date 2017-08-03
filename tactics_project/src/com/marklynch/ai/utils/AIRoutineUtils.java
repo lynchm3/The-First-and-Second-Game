@@ -92,9 +92,9 @@ public class AIRoutineUtils {
 		}
 	}
 
-	public static GameObject getNearestForPurposeOfBeingAdjacent(Class clazz, float maxDistance,
-			boolean fitsInInventory, boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects,
-			boolean mustBeUnowned, boolean ignoreQuestObjects) {
+	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
+			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
+			boolean ignoreQuestObjects, Class... classes) {
 
 		// class GameObject.class,
 		// distance 50f,
@@ -116,13 +116,15 @@ public class AIRoutineUtils {
 			for (Square squareActorIsOn : squaresInRange) {
 				Actor actor = (Actor) squareActorIsOn.inventory.getGameObjectOfClass(Actor.class);
 				if (actor != null) {
-					if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
-							ignoreQuestObjects)) {
-						Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
-						AIPath path = Game.level.activeActor.getPathTo(square);
-						if (path != null && path.travelCost < costToBest) {
-							result = actor;
-							costToBest = path.travelCost;
+					for (Class clazz : classes) {
+						if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
+								ignoreQuestObjects)) {
+							Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
+							AIPath path = Game.level.activeActor.getPathTo(square);
+							if (path != null && path.travelCost < costToBest) {
+								result = actor;
+								costToBest = path.travelCost;
+							}
 						}
 					}
 
@@ -206,26 +208,29 @@ public class AIRoutineUtils {
 				int minRange = ranges.get(i - 1);
 				int maxRange = ranges.get(i);
 				long start = System.nanoTime();
-				if (Game.level.activeActor instanceof Thief)
-					System.out.println("c");
-				for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
-					if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-						System.out.println("d gameObject = " + gameObject);
 
-					if (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) >= minRange
-							&& Game.level.activeActor
-									.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
+				for (Class clazz : classes) {
+					if (Game.level.activeActor instanceof Thief)
+						System.out.println("c");
+					for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
 						if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-							System.out.println("d");
-						if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
-								mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
-							if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-								System.out.println("e");
-							Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
-							AIPath path = Game.level.activeActor.getPathTo(square);
-							if (path != null) {
-								return gameObject;
+							System.out.println("d gameObject = " + gameObject);
 
+						if (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) >= minRange
+								&& Game.level.activeActor
+										.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
+							if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+								System.out.println("d");
+							if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
+									mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
+								if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+									System.out.println("e");
+								Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
+								AIPath path = Game.level.activeActor.getPathTo(square);
+								if (path != null) {
+									return gameObject;
+
+								}
 							}
 						}
 					}
@@ -462,8 +467,8 @@ public class AIRoutineUtils {
 	public static boolean escapeFromAttackerToSmallHidingPlace(GameObject attacker) {
 
 		// Go to burrow and hide if can
-		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(
-				SmallHidingPlace.class, 20f, false, false, true, false, false, false);
+		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20f,
+				false, false, true, false, false, false, SmallHidingPlace.class);
 		if (smallHidingPlace != null) {
 
 			if (Game.level.activeActor.straightLineDistanceTo(smallHidingPlace.squareGameObjectIsOn) < 2) {

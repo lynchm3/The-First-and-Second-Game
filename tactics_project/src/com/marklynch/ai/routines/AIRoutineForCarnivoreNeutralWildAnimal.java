@@ -109,8 +109,8 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 		}
 
 		// 2. eat corpse on ground
-		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Corpse.class, 5f, true, false,
-				true, false, false, false);
+		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true,
+				false, false, false, Corpse.class);
 		if (corpse != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTexture = corpse.imageTexture;
@@ -124,8 +124,8 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 		}
 
 		// 3. eat food on ground
-		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 5f, true, false, true,
-				false, false, false);
+		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
+				false, false, Food.class);
 		if (food != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTexture = food.imageTexture;

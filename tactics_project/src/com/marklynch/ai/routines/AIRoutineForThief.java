@@ -2,11 +2,23 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Chest;
+import com.marklynch.objects.ContainerForLiquids;
 import com.marklynch.objects.Corpse;
+import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Junk;
+import com.marklynch.objects.Key;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.tools.Axe;
+import com.marklynch.objects.tools.Bell;
+import com.marklynch.objects.tools.Lantern;
+import com.marklynch.objects.tools.Pickaxe;
+import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.weapons.BodyArmor;
+import com.marklynch.objects.weapons.Helmet;
+import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForThief extends AIRoutine {
@@ -22,6 +34,7 @@ public class AIRoutineForThief extends AIRoutine {
 	// };
 
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
+	final String ACTIVITY_DESCRIPTION_THIEVING = "Thieving!";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
 	final String ACTIVITY_WANDERING = "Wandering";
 	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
@@ -85,14 +98,17 @@ public class AIRoutineForThief extends AIRoutine {
 		}
 
 		// 1. loot corpses, even if owned
-		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Corpse.class, 50f, false, false, true,
-				true, false, true);
-		if (carcass != null) {
-			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
-			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
+		GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(50f, false, false, true, true, false,
+				true, Corpse.class, Chest.class);
+		if (container != null) {
+			if (container.owner != null && container.owner != actor)
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
+			else
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			this.actor.thoughtBubbleImageTexture = container.imageTexture;
+			boolean lootedCarcass = AIRoutineUtils.lootTarget(container);
 			if (!lootedCarcass) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(container);
 			} else {
 
 			}
@@ -100,10 +116,14 @@ public class AIRoutineForThief extends AIRoutine {
 		}
 
 		// 1. pick up loot on ground, even if owned
-		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Axe.class, 50f, true, false, true, false,
-				false, true);
+		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(50f, true, false, true, false, false, true,
+				Axe.class, Bell.class, Lantern.class, Pickaxe.class, Tool.class, BodyArmor.class, Helmet.class,
+				LegArmor.class, Weapon.class, ContainerForLiquids.class, Food.class, Junk.class, Key.class);
 		if (loot != null) {
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			if (loot.owner != null && loot.owner != actor)
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
+			else
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
