@@ -154,7 +154,8 @@ public class AIRoutine {
 				if (sound.actionType == ActionShoutForHelp.class) {
 					this.actor.addInvestigation(sound.sourceObject, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
-					this.actor.attackers.add(sound.sourceObject);
+					if (sound.sourceObject != null && sound.sourceObject.remainingHealth > 0)
+						this.actor.addAttackerForThisAndGroupMembers(sound.sourceObject);
 				} else if (!sound.legal) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);

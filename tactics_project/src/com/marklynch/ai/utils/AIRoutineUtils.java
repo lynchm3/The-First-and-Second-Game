@@ -20,10 +20,8 @@ import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTake;
-import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fight;
-import com.marklynch.objects.units.Thief;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineUtils {
@@ -247,38 +245,24 @@ public class AIRoutineUtils {
 	public static boolean passesChecks(GameObject gameObject, Class clazz, boolean fitsInInventory,
 			boolean mustContainsObjects, boolean mustBeUnowned, boolean ignoreQuestObjects) {
 
-		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-			System.out.println("passesChecks a");
 		if (ignoreQuestObjects && gameObject.quest != null)
 			return false;
-		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-			System.out.println("passesChecks b");
 
 		if (mustBeUnowned && gameObject.owner != null)
 			return false;
-		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-			System.out.println("passesChecks c");
 
 		if (gameObject.remainingHealth <= 0)
 			return false;
-		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-			System.out.println("passesChecks d");
 
 		if (mustContainsObjects && gameObject.inventory.size() <= 0)
 			return false;
-		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-			System.out.println("passesChecks e");
 
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
-		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-			System.out.println("passesChecks f");
 
 		// check class
 		if (clazz != null && !clazz.isInstance(gameObject))
 			return false;
-		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
-			System.out.println("passesChecks g");
 
 		return true;
 

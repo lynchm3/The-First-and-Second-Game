@@ -881,18 +881,23 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	}
 
+	public void addAttacker(GameObject potentialAttacker) {
+
+		if (potentialAttacker != null && potentialAttacker.remainingHealth > 0
+				&& !this.attackers.contains(potentialAttacker) && potentialAttacker != this) {
+			this.attackers.add(potentialAttacker);
+			// potentialAttacker.addAttackerForThisAndGroupMembers(this);
+		}
+	}
+
 	public void addAttackerForThisAndGroupMembers(GameObject attacker) {
 
-		if (this == attacker)
+		if (this == attacker || attacker == null || attacker.remainingHealth <= 0)
 			return;
 
-		if (!attacker.attackers.contains(this)) {
-			attacker.attackers.add(this);
-		}
+		attacker.addAttacker(this);
 
-		if (!this.attackers.contains(attacker)) {
-			this.attackers.add(attacker);
-		}
+		this.addAttacker(attacker);
 
 		if (this.group != null) {
 			if (!this.group.getAttackers().contains(attacker)) {
@@ -900,10 +905,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			}
 			for (Actor groupMember : this.group.getMembers()) {
 				if (!groupMember.attackers.contains(attacker)) {
-					groupMember.attackers.add(attacker);
+					groupMember.addAttacker(attacker);
 				}
 				if (!attacker.attackers.contains(groupMember)) {
-					attacker.attackers.add(groupMember);
+					attacker.addAttacker(groupMember);
 				}
 			}
 		}
@@ -914,10 +919,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			}
 			for (Actor groupMember : attacker.group.getMembers()) {
 				if (!groupMember.attackers.contains(this)) {
-					groupMember.attackers.add(this);
+					groupMember.addAttacker(this);
 				}
 				if (!this.attackers.contains(groupMember)) {
-					this.attackers.add(groupMember);
+					this.addAttacker(groupMember);
 				}
 			}
 		}

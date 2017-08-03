@@ -68,9 +68,7 @@ public class Group {
 			}
 		}
 
-		for (GameObject attackerToRemoveFromList : attackersToRemoveFromList) {
-			attackers.remove(attackerToRemoveFromList);
-		}
+		attackers.removeAll(attackersToRemoveFromList);
 
 		// Manage leader
 		if (leader.remainingHealth <= 0) {
@@ -139,8 +137,7 @@ public class Group {
 	}
 
 	public void addAttacker(GameObject actor) {
-		if (!this.attackers.contains(actor)) {
-
+		if (actor != null && actor.remainingHealth > 0 && !this.attackers.contains(actor)) {
 			this.attackers.add(actor);
 		}
 	}
