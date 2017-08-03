@@ -51,10 +51,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		this.actor.activityDescription = null;
 		this.actor.thoughtBubbleImageTexture = null;
 
-		// In bed
-		// System.out.println("actor.squareGameObjectIsOn = " +
-		// actor.squareGameObjectIsOn);
-		// System.out.println("actor.in = " + actor.invento);
 		if (actor.squareGameObjectIsOn == null) {
 			if (actor.inventoryThatHoldsThisObject.parent instanceof SmallHidingPlace) {
 				hidingCount++;
@@ -72,23 +68,7 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		createSearchLocationsBasedOnSounds(Weapon.class);
 		createSearchLocationsBasedOnVisibleAttackers();
 
-		// if (actor.bed != null) {
-		// if (actor.name.equals("Male Rabbit"))
-		// System.out.println("bed != null a");
-		// if (actor.straightLineDistanceTo(actor.bed.squareGameObjectIsOn) < 1)
-		// return;
-		// if (actor.name.equals("Male Rabbit"))
-		// System.out.println("bed != null b");
-		//
-		// if
-		// (AIRoutineUtils.moveTowardsTargetSquare(this.actor.bed.squareGameObjectIsOn))
-		// return;
-		// if (actor.name.equals("Male Rabbit"))
-		// System.out.println("bed != null c");
-		// }
-
 		if (runEscapeRoutine()) {
-			// createSearchLocationsBasedOnSounds();
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
@@ -99,19 +79,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 			createSearchLocationsBasedOnVisibleAttackers();
 			return;
 		}
-
-		// if (runSearchRoutine()) {
-		// // createSearchLocationsBasedOnSounds();
-		// createSearchLocationsBasedOnVisibleAttackers();
-		// return;
-		// }
-
-		// if (searchCooldown > 0) {
-		// runSearchCooldown();
-		// searchCooldown--;
-		// createSearchLocationsBasedOnVisibleAttackers();
-		// return;
-		// }
 
 		// If not leader defer to pack
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {

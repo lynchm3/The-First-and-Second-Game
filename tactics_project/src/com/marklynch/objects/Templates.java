@@ -16,6 +16,7 @@ import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.RockGolem;
+import com.marklynch.objects.units.Thief;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -31,6 +32,10 @@ public class Templates {
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
 			null, new Inventory(), true, false, true, false, false, 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
+			0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
+
+	public static final Thief THIEF = new Thief("Thief", "Thief", 1, 10, 0, 0, 0, 0, "thief.png", null, 1, 10, null,
+			new Inventory(), true, false, true, false, false, 1.5f, 1.5f, -16, -32, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
 			0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88, 54, 88, 54);
 
 	public static final Farmer FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "farmer.png", null, 1, 10,

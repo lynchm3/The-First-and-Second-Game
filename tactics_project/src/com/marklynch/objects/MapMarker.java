@@ -57,8 +57,6 @@ public class MapMarker extends GameObject {
 	@Override
 	public void drawStaticUI() {
 
-		System.out.println("MapMarker.drawStaticUI");
-
 		float alpha = 1;
 		if (Game.zoomLevelIndex < Game.MAP_MODE_ZOOM_LEVEL_INDEX)
 			alpha = 0.5f;

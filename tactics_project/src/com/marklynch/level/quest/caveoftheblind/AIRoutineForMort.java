@@ -33,7 +33,7 @@ public class AIRoutineForMort extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "GameObject time";
+	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";

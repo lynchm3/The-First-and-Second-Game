@@ -137,14 +137,6 @@ public class UserInputLevel {
 			else if (Game.zoomLevelIndex >= Game.zoomLevels.length)
 				Game.zoomLevelIndex = Game.zoomLevels.length - 1;
 
-			// Drag to mouse
-			if (Game.lastZoomLevelIndex != Game.zoomLevelIndex) {
-				if (mouseWheelDelta != 0) {
-					System.out.println("dragging");
-				}
-				// Game.lastZoomLevelIndex = Game.zoomLevelIndex;
-			}
-
 			// Change in zoom
 			if (Game.lastZoomLevelIndex != Game.zoomLevelIndex) {
 				float oldZoom = Game.zoom;
@@ -556,7 +548,6 @@ public class UserInputLevel {
 	public static long lastCopy = 0;
 
 	public static void keyTyped(char character) {
-		System.out.println("keyTyped = " + character);
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (character == ' ') {
@@ -590,8 +581,6 @@ public class UserInputLevel {
 
 				stringToCopy += ("Templates.BIG_TREE.makeCopy(Game.level.squares[" + Game.squareMouseIsOver.xInGrid
 						+ "][" + Game.squareMouseIsOver.yInGrid + "],null);\n");
-
-				System.out.println("stringToCopy = " + stringToCopy);
 
 				StringSelection stringSelection = new StringSelection(stringToCopy);
 				Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();

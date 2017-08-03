@@ -20,8 +20,10 @@ import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTake;
+import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fight;
+import com.marklynch.objects.units.Thief;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineUtils {
@@ -93,6 +95,15 @@ public class AIRoutineUtils {
 	public static GameObject getNearestForPurposeOfBeingAdjacent(Class clazz, float maxDistance,
 			boolean fitsInInventory, boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects,
 			boolean mustBeUnowned, boolean ignoreQuestObjects) {
+
+		// class GameObject.class,
+		// distance 50f,
+		// fits in invnetory true,
+		// check actors false,
+		// check inanimate objs true,
+		// must contain objs false
+		// must be unowned false
+		// ignore quest objs true
 
 		// GameObject.class, 5f, true, false, true, false
 
@@ -180,23 +191,36 @@ public class AIRoutineUtils {
 		// Checks objs @ 10,20 30.... etc. range
 		// Takes first one that returns a path
 		if (checkInanimateObjects) {
+			if (Game.level.activeActor instanceof Thief)
+				System.out.println("a");
+
 			ArrayList<Integer> ranges = new ArrayList<Integer>();
 			for (int i = 0; i < maxDistance; i += 10) {
 				ranges.add(i);
 			}
 			ranges.add((int) maxDistance);
+			if (Game.level.activeActor instanceof Thief)
+				System.out.println("b");
 
 			for (int i = 1; i < ranges.size(); i++) {
 				int minRange = ranges.get(i - 1);
 				int maxRange = ranges.get(i);
 				long start = System.nanoTime();
+				if (Game.level.activeActor instanceof Thief)
+					System.out.println("c");
 				for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
+					if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+						System.out.println("d gameObject = " + gameObject);
 
 					if (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) >= minRange
 							&& Game.level.activeActor
 									.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
+						if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+							System.out.println("d");
 						if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
 								mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
+							if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+								System.out.println("e");
 							Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
 							AIPath path = Game.level.activeActor.getPathTo(square);
 							if (path != null) {
@@ -268,24 +292,38 @@ public class AIRoutineUtils {
 	public static boolean passesChecks(GameObject gameObject, Class clazz, boolean fitsInInventory,
 			boolean mustContainsObjects, boolean mustBeUnowned, boolean ignoreQuestObjects) {
 
+		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+			System.out.println("passesChecks a");
 		if (ignoreQuestObjects && gameObject.quest != null)
 			return false;
+		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+			System.out.println("passesChecks b");
 
 		if (mustBeUnowned && gameObject.owner != null)
 			return false;
+		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+			System.out.println("passesChecks c");
 
 		if (gameObject.remainingHealth <= 0)
 			return false;
+		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+			System.out.println("passesChecks d");
 
 		if (mustContainsObjects && gameObject.inventory.size() <= 0)
 			return false;
+		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+			System.out.println("passesChecks e");
 
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
+		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+			System.out.println("passesChecks f");
 
 		// check class
 		if (clazz != null && !clazz.isInstance(gameObject))
 			return false;
+		if (Game.level.activeActor instanceof Thief && gameObject instanceof Axe)
+			System.out.println("passesChecks g");
 
 		return true;
 

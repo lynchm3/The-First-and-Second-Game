@@ -88,9 +88,6 @@ public class ActionPourSpecificItem extends Action {
 		if (sound != null)
 			sound.play();
 
-		System.out.println("pour... legal = " + legal);
-		System.out.println("targetGameObject = " + targetGameObject);
-
 		if (!legal) {
 
 			Actor victim = null;
@@ -99,7 +96,6 @@ public class ActionPourSpecificItem extends Action {
 				victim = (Actor) targetGameObject;
 			else if (targetGameObject != null)
 				victim = targetGameObject.owner;
-			System.out.println("victim = " + victim);
 			if (victim != null) {
 				Crime crime = new Crime(this, this.performer, victim, 1);
 				this.performer.crimesPerformedThisTurn.add(crime);

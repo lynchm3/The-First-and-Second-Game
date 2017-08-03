@@ -19,7 +19,7 @@ public class AIRoutineForTrader extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
 	final String ACTIVITY_DESCRIPTION_SHOPKEEPING = "Shopkeeping";
 	final String ACTIVITY_DESCRIPTION_UPDATING_SIGN = "Updating sign";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "GameObject time";
+	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
 

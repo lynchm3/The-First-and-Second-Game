@@ -19,7 +19,7 @@ public class AIRoutineForRockGolem extends AIRoutine {
 	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "GameObject time";
+	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 
 	int sleepCounter = 0;

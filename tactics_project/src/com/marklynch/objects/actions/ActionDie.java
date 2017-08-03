@@ -120,11 +120,6 @@ public class ActionDie extends Action {
 
 	public void createCorpse() {
 
-		System.out.println("createCorpse()");
-		System.out.println("createCorpse() performer = " + performer);
-		System.out.println("createCorpse() performer.destroyedBy = " + performer.destroyedBy);
-		System.out.println("createCorpse() performer.destroyedByAction = " + performer.destroyedByAction);
-
 		if (performer instanceof Actor) {
 			// add a carcass
 

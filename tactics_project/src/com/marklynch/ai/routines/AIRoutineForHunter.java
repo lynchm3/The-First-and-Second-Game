@@ -5,8 +5,8 @@ import com.marklynch.objects.Corpse;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForHunter extends AIRoutine {
@@ -19,10 +19,10 @@ public class AIRoutineForHunter extends AIRoutine {
 	};
 
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
-	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
+	// final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
-	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "GameObject time";
+	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
@@ -87,7 +87,7 @@ public class AIRoutineForHunter extends AIRoutine {
 				true, true, true);
 		if (carcass != null) {
 			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
 			if (!lootedCarcass) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
@@ -125,8 +125,8 @@ public class AIRoutineForHunter extends AIRoutine {
 		{
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfAttacking(AggressiveWildAnimal.class, 0, false, true, false, false, false,
-					true);
+			target = AIRoutineUtils.getNearestForPurposeOfAttacking(AggressiveWildAnimal.class, 100, false, true, false,
+					false, false, true);
 			if (target == null) {
 				if (this.actor.inventory.contains(Junk.class)) {
 					huntState = HUNT_STATE.PICK_SHOP_KEEPER;
