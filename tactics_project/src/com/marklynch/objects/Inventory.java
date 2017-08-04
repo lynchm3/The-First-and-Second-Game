@@ -369,8 +369,9 @@ public class Inventory {
 
 			// Remove from another gameObjects inventory
 			if (gameObject.inventoryThatHoldsThisObject != null) {
-				gameObject.inventoryThatHoldsThisObject.remove(gameObject);
-				gameObject.inventoryThatHoldsThisObject.matchGameObjectsToSquares();
+				Inventory oldInventory = gameObject.inventoryThatHoldsThisObject;
+				oldInventory.remove(gameObject);
+				oldInventory.matchGameObjectsToSquares();
 			}
 
 			// Add to this inventory's list of game objects

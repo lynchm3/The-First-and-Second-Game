@@ -8,11 +8,21 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionRemoveMapMarker;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class MapMarker extends GameObject {
+
+	public static Texture RED_MAP_MARKER_TEXTURE;
+	public static Texture TREASURE_MAP_MARKER_TEXTURE;
+	public static Texture SKULL_MAP_MARKER_TEXTURE;
+	public static Texture GREEN_MAP_MARKER_TEXTURE;
+	public static Texture BLUE_MAP_MARKER_TEXTURE;
+
+	public static ArrayList<Texture> MAP_MARKER_TEXTURES = new ArrayList<Texture>();
 
 	public MapMarker(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -84,6 +94,22 @@ public class MapMarker extends GameObject {
 				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
 				waterResistance, electricResistance, poisonResistance, weight, owner);
+	}
+
+	public static void loadStaticImages() {
+
+		RED_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_red.png");
+		TREASURE_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_treasure.png");
+		SKULL_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_skull.png");
+		GREEN_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_green.png");
+		BLUE_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_blue.png");
+
+		MAP_MARKER_TEXTURES.add(RED_MAP_MARKER_TEXTURE);
+		MAP_MARKER_TEXTURES.add(TREASURE_MAP_MARKER_TEXTURE);
+		MAP_MARKER_TEXTURES.add(SKULL_MAP_MARKER_TEXTURE);
+		MAP_MARKER_TEXTURES.add(GREEN_MAP_MARKER_TEXTURE);
+		MAP_MARKER_TEXTURES.add(BLUE_MAP_MARKER_TEXTURE);
+
 	}
 
 }

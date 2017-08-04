@@ -34,6 +34,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
+import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Vein;
@@ -129,10 +130,12 @@ public class Level {
 
 		// textureUndiscovered =
 		// ResourceUtils.getGlobalImage("undiscovered_small.png");
+		Square.loadStaticImages();
 		Action.loadActionImages();
 		Effect.loadEffectImages();
 		Wall.loadStaticImages();
 		Vein.loadStaticImages();
+		MapMarker.loadStaticImages();
 
 		structures = new ArrayList<Structure>();
 
@@ -465,8 +468,6 @@ public class Level {
 	}
 
 	private void initGrid(final Square[][] squares, final int width, final int height) {
-
-		Square.loadStaticImages();
 
 		InventorySquare.imageTexture = getGlobalImage("dialogbg.png");
 
