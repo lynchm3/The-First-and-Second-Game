@@ -2,18 +2,17 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Templates;
-import com.marklynch.ui.ActivityLog;
+import com.marklynch.level.popup.PopupTextBox;
+import com.marklynch.objects.GameObject;
 
-public class ActionAddMapMarker extends Action {
+public class ActionRename extends Action {
 
-	public static final String ACTION_NAME = "Add Map Marker";
+	public static final String ACTION_NAME = "Rename";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	Square target;
+	GameObject target;
 
-	public ActionAddMapMarker(Square target) {
-		super(ACTION_NAME, "action_add_map_marker.png");
+	public ActionRename(GameObject target) {
+		super(ACTION_NAME, "action_write.png");
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -30,10 +29,12 @@ public class ActionAddMapMarker extends Action {
 		if (!enabled)
 			return;
 
-		Templates.MAP_MARKER.makeCopy(target, null);
-
-		if (Game.level.shouldLog(Game.level.player))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { "Added map marker to ", target }));
+		Game.level.popupTextBoxes.add(new PopupTextBox(target));
+		// Templates.MAP_MARKER.makeCopy(target, null);
+		//
+		// if (Game.level.shouldLog(Game.level.player))
+		// Game.level.logOnScreen(new ActivityLog(new Object[] { "Added map
+		// marker to ", target }));
 
 	}
 

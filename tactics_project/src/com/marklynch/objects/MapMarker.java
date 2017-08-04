@@ -7,6 +7,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionRemoveMapMarker;
+import com.marklynch.objects.actions.ActionRename;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
@@ -16,6 +17,7 @@ import mdesl.graphics.Texture;
 
 public class MapMarker extends GameObject {
 
+	public static final String NO_DESCRIPTION = "No Description";;
 	public static Texture RED_MAP_MARKER_TEXTURE;
 	public static Texture TREASURE_MAP_MARKER_TEXTURE;
 	public static Texture SKULL_MAP_MARKER_TEXTURE;
@@ -41,6 +43,7 @@ public class MapMarker extends GameObject {
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		actions.add(new ActionInspect(performer, this));
+		actions.add(new ActionRename(this));
 		actions.add(new ActionRemoveMapMarker(this));
 		return actions;
 

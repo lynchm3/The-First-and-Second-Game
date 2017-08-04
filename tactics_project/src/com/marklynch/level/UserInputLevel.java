@@ -46,6 +46,7 @@ public class UserInputLevel {
 	public static boolean keyStateBack = false;
 	public static boolean keyStateLeftShift = false;
 	public static boolean keyStateRightShift = false;
+	public static boolean keyStateEscape = false;
 	public static boolean keyStateSpace = false;
 	public static boolean keyStateA = false;
 	public static boolean keyStateB = false;
@@ -517,6 +518,10 @@ public class UserInputLevel {
 	}
 
 	public static void enterTyped() {
+		if (Game.level.popupTextBoxes.size() != 0) {
+			Game.level.popupTextBoxes.get(0).enterTyped();
+			return;
+		}
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (Game.level.popups.size() != 0) {
@@ -525,12 +530,31 @@ public class UserInputLevel {
 	}
 
 	public static void backSpacedTyped() {
+
+		if (Game.level.popupTextBoxes.size() != 0) {
+			Game.level.popupTextBoxes.get(0).backSpacedTyped();
+			return;
+		}
+		if (Game.level.activeActor != Game.level.player)
+			return;
+		closeAllPopups();
+	}
+
+	public static void escapeTyped() {
+
+		if (Game.level.popupTextBoxes.size() != 0) {
+			Game.level.popupTextBoxes.clear();
+			return;
+		}
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		closeAllPopups();
 	}
 
 	public static void tabTyped() {
+		if (Game.level.popupTextBoxes.size() != 0) {
+			return;
+		}
 		if (Game.level.openInventories.size() > 0) {
 			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
 				inventory.close();
@@ -548,6 +572,12 @@ public class UserInputLevel {
 	public static long lastCopy = 0;
 
 	public static void keyTyped(char character) {
+
+		if (Game.level.popupTextBoxes.size() != 0) {
+			Game.level.popupTextBoxes.get(0).keyTyped(character);
+			return;
+		}
+
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (character == ' ') {
@@ -661,6 +691,13 @@ public class UserInputLevel {
 			keyStateRightShift = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 			keyStateRightShift = false;
+		}
+
+		if (keyStateRightShift == false && Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+			keyStateEscape = true;
+			escapeTyped();
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+			keyStateEscape = false;
 		}
 
 		if (keyStateSpace == false && Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {

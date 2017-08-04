@@ -29,6 +29,7 @@ import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.Popup;
+import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
@@ -79,6 +80,7 @@ public class Level {
 	public transient ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
 
 	public ArrayList<Popup> popups = new ArrayList<Popup>();
+	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
 	public Toast toast;
 	public Conversation conversation;
 	public transient LevelButton endTurnButton;
@@ -976,6 +978,12 @@ public class Level {
 		if (!popups.isEmpty()) {
 			for (Popup popup : popups) {
 				popup.draw();
+			}
+		}
+
+		if (!popupTextBoxes.isEmpty()) {
+			for (PopupTextBox popupTextBox : popupTextBoxes) {
+				popupTextBox.draw();
 			}
 		}
 
