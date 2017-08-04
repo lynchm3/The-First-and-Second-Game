@@ -13,6 +13,7 @@ public class PopupSelectAction extends Popup {
 	public PopupButton selectSquareButton;
 	public ArrayList<Action> actions;
 	public float offsetX;
+	public float height = 40f;
 
 	public PopupSelectAction(float offsetX, float width, Level level, Square square, ArrayList<Action> actions) {
 
@@ -29,8 +30,8 @@ public class PopupSelectAction extends Popup {
 		for (int i = 0; i < actions.size(); i++) {
 			final int index = i;
 
-			final PopupActionButton actionButton = new PopupActionButton(offsetX, buttons.size() * 30, 200, 30, null,
-					null, actions.get(i).actionName, true, true, actions.get(i), this);
+			final PopupActionButton actionButton = new PopupActionButton(offsetX, buttons.size() * height - 10, width,
+					height, null, null, actions.get(i).actionName, true, true, actions.get(i), this);
 			actionButton.enabled = actions.get(index).enabled;
 
 			actionButton.clickListener = new ClickListener() {

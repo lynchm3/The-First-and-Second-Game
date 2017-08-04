@@ -1036,12 +1036,17 @@ public class Level {
 		}
 
 		if (!Game.level.popups.isEmpty()) {
-			for (Popup popup : popups) {
-				for (Button button : popup.buttons) {
+
+			for (int i = popups.size() - 1; i >= 0; i--) {
+				for (Button button : popups.get(i).buttons) {
 					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 						return button;
 				}
+
 			}
+
+			// for (Popup popup : popups) {
+			// }
 		}
 
 		if (activeActor != null && activeActor.faction == factions.get(0))

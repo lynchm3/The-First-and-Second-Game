@@ -2,19 +2,18 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Templates;
+import com.marklynch.objects.GameObject;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionAddMapMarker extends Action {
+public class ActionRemoveMapMarker extends Action {
 
-	public static final String ACTION_NAME = "Add Map Marker";
+	public static final String ACTION_NAME = "Remove Map Marker";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	Square target;
+	GameObject target;
 
-	public ActionAddMapMarker(Square target) {
-		super(ACTION_NAME, "action_add_map_marker.png");
-		this.target = target;
+	public ActionRemoveMapMarker(GameObject gameObject) {
+		super(ACTION_NAME, "x.png");
+		this.target = gameObject;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -30,10 +29,11 @@ public class ActionAddMapMarker extends Action {
 		if (!enabled)
 			return;
 
-		Templates.MAP_MARKER.makeCopy(target, null);
+		Game.level.inanimateObjectsOnGround.remove(target);
+		target.squareGameObjectIsOn.inventory.remove(target);
 
 		if (Game.level.shouldLog(Game.level.player))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { "Added map marker to ", target }));
+			Game.level.logOnScreen(new ActivityLog(new Object[] { "Removed map marker" }));
 
 	}
 

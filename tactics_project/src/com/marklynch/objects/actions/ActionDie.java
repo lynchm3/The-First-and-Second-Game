@@ -47,9 +47,10 @@ public class ActionDie extends Action {
 
 		// Remove from draw/update
 		if (performer instanceof Actor) {
-			if (performer.squareGameObjectIsOn != null)
+			if (performer.squareGameObjectIsOn != null) {
+				Game.level.inanimateObjectsOnGround.remove(performer);
 				performer.squareGameObjectIsOn.inventory.remove(performer);
-			else if (performer.inventoryThatHoldsThisObject != null)
+			} else if (performer.inventoryThatHoldsThisObject != null)
 				performer.inventoryThatHoldsThisObject.remove(performer);
 		} else {
 			Game.level.inanimateObjectsToRemove.add(performer);

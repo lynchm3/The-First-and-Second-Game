@@ -46,8 +46,8 @@ public class PopupSelectObject extends Popup {
 			// BUT... I dont want the buttons to zoom :P
 
 			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
-				final PopupButton objectButton = new PopupButton(0, buttons.size() * 30, 200, 30, null, null,
-						true, true, gameObject, this, "" + gameObject);
+				final PopupButton objectButton = new PopupButton(0, buttons.size() * 30, 200, 30, null, null, true,
+						true, gameObject, this, "" + gameObject);
 
 				objectButton.clickListener = new ClickListener() {
 
@@ -81,7 +81,7 @@ public class PopupSelectObject extends Popup {
 			}
 			Game.level.popups.remove(popupToRemoveIndex);
 		}
-		Game.level.popups.add(new PopupSelectAction(200, 100, level, gameObject.squareGameObjectIsOn,
+		Game.level.popups.add(new PopupSelectAction(100, 200, level, gameObject.squareGameObjectIsOn,
 				gameObject.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 
@@ -93,7 +93,7 @@ public class PopupSelectObject extends Popup {
 			}
 			Game.level.popups.remove(popupToRemoveIndex);
 		}
-		Game.level.popups.add(new PopupSelectAction(200, 100, level, square,
+		Game.level.popups.add(new PopupSelectAction(100, 200, level, square,
 				square.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 }

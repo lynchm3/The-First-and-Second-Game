@@ -4,7 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 
 public class PopupMiniDialogue extends Popup {
@@ -20,11 +19,6 @@ public class PopupMiniDialogue extends Popup {
 
 			@Override
 			public void click() {
-				for (Button button : buttons) {
-					button.down = false;
-				}
-				highlightedButton.down = true;
-				squareSelected(PopupMiniDialogue.this.square);
 			}
 		};
 		updateObjectsButtons();
@@ -46,19 +40,13 @@ public class PopupMiniDialogue extends Popup {
 			// BUT... I dont want the buttons to zoom :P
 
 			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
-				final PopupButton objectButton = new PopupButton(0, buttons.size() * 30, 200, 30, null, null,
-						true, true, gameObject, this, "" + gameObject);
+				final PopupButton objectButton = new PopupButton(0, buttons.size() * 30, 200, 30, null, null, true,
+						true, gameObject, this, "" + gameObject);
 
 				objectButton.clickListener = new ClickListener() {
 
 					@Override
 					public void click() {
-
-						for (Button button : buttons) {
-							button.down = false;
-						}
-						highlightedButton.down = true;
-						gameObjectSelected(gameObject);
 					}
 				};
 				buttons.add(objectButton);
@@ -71,19 +59,5 @@ public class PopupMiniDialogue extends Popup {
 			highlightedButton.highlight();
 		}
 
-	}
-
-	public void gameObjectSelected(GameObject gameObject) {
-		if (Game.level.popups.size() == 2)
-			Game.level.popups.remove(1);
-		Game.level.popups.add(new PopupSelectAction(200, 100, level, gameObject.squareGameObjectIsOn,
-				gameObject.getAllActionsPerformedOnThisInWorld(Game.level.player)));
-	}
-
-	public void squareSelected(Square square) {
-		if (Game.level.popups.size() == 2)
-			Game.level.popups.remove(1);
-		Game.level.popups.add(new PopupSelectAction(200, 100, level, square,
-				square.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 }

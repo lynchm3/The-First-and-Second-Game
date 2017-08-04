@@ -74,6 +74,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public static Texture DARK_GRASS_TEXTURE;
 	public static Texture STONE_TEXTURE;
 	public static Texture MUD_TEXTURE;
+	public static Texture BLANK_TEXTURE;
 
 	public transient boolean showingDialogs = false;
 	// public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
@@ -133,6 +134,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png");
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png");
 		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png");
+		BLANK_TEXTURE = ResourceUtils.getGlobalImage("square.png");
 	}
 
 	public void postLoad1() {
@@ -154,10 +156,13 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public void draw1() {
 
+		Texture textureToDraw = this.imageTexture;
+
 		if (!Game.fullVisiblity) {
 
-			if (!this.seenByPlayer)
-				return;
+			if (!this.seenByPlayer) {
+				textureToDraw = BLANK_TEXTURE;
+			}
 		}
 
 		// square texture
@@ -169,7 +174,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		float alpha = 1f;
 		if (!this.visibleToPlayer)
 			alpha = 0.5f;
-		TextureUtils.drawTexture(imageTexture, alpha, squarePositionX, squarePositionY,
+		TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
 		if (restricted && Game.redHighlightOnRestrictedSquares) {
