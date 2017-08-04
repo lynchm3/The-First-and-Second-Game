@@ -40,7 +40,10 @@ public class ActionTakeAll extends Action {
 				.getGameObjectsThatFitInInventory().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (Game.level.shouldLog(gameObjectToLoot, performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", gameObjectToLoot }));
+				if (legal)
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", gameObjectToLoot }));
+				else
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", gameObjectToLoot }));
 			square.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 			if (gameObjectToLoot.owner == null)

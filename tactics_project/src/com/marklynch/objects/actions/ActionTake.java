@@ -32,9 +32,11 @@ public class ActionTake extends Action {
 
 		if (!enabled)
 			return;
-
 		if (Game.level.shouldLog(object, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", object }));
+			if (legal)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", object }));
+			else
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", object }));
 		object.squareGameObjectIsOn.inventory.remove(object);
 		performer.inventory.add(object);
 		if (object.owner == null)

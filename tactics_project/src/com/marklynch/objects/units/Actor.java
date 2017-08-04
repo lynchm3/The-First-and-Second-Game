@@ -1148,7 +1148,22 @@ public class Actor extends GameObject {
 	}
 
 	public boolean canSeeGameObject(GameObject gameObject) {
-		return canSeeGameObjectFromSpecificSquare(this.squareGameObjectIsOn, gameObject);
+
+		if (canSeeGameObjectFromSpecificSquare(this.squareGameObjectIsOn, gameObject))
+			return true;
+
+		if (group != null) {
+			for (Actor actor : group.getMembers()) {
+				if (actor == this)
+					continue;
+				if (actor.canSeeGameObjectFromSpecificSquare(this.squareGameObjectIsOn, gameObject)) {
+					return true;
+				}
+
+			}
+		}
+
+		return false;
 	}
 
 	public boolean canSeeSquare(Square square) {

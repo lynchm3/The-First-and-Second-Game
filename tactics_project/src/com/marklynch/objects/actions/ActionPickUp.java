@@ -33,7 +33,11 @@ public class ActionPickUp extends Action {
 			return;
 
 		if (Game.level.shouldLog(object, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", object }));
+			if (legal)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", object }));
+			else
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", object }));
+
 		if (performer.inventory.contains(performer.equipped))
 			performer.equippedBeforePickingUpObject = performer.equipped;
 		object.squareGameObjectIsOn.inventory.remove(object);
