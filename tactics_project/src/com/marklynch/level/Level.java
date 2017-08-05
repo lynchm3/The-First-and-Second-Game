@@ -20,6 +20,7 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerHealRanged;
 import com.marklynch.level.constructs.power.PowerHealSelf;
 import com.marklynch.level.constructs.power.PowerHealTouch;
@@ -336,6 +337,24 @@ public class Level {
 			}
 		});
 		poisonBlastButton.enabled = true;
+
+		Button bleedButton = new LevelButton(330f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"BLEED", false, false, Color.BLACK, Color.WHITE);
+		bleedButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
+				Level.this.selectedPower = new PowerBleed(Game.level.player);
+				for (Popup popup : Game.level.popups) {
+					for (Button button : popup.buttons) {
+						button.removeHighlight();
+					}
+				}
+				Game.level.popups.clear();
+			}
+		});
+		bleedButton.enabled = true;
+		buttons.add(bleedButton);
 
 		showHideLogButton = new LevelButton(activityLogger.width, 40f, 50f, 30f, "undo_button.png",
 				"undo_button_disabled.png", " LOG <", true, true, Color.BLACK, Color.WHITE);

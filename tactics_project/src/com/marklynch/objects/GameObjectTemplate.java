@@ -104,11 +104,11 @@ public class GameObjectTemplate implements InventoryParent {
 	}
 
 	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
-		GameObject copy = new GameObject(new String(name), (int) totalHealth, imageTexturePath, square,
-				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
-				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner);
+		GameObject copy = new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
+				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
+				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
+				waterResistance, electricResistance, poisonResistance, weight, owner);
 		copy.backwards = backwards;
 		return copy;
 	}
@@ -134,6 +134,10 @@ public class GameObjectTemplate implements InventoryParent {
 
 	public void removeEffect(Effect effect) {
 		this.activeEffectsOnGameObject.remove(effect);
+	}
+
+	public float getEffectiveSlashResistance() {
+		return 10;
 	}
 
 	public float getEffectiveFireResistance() {

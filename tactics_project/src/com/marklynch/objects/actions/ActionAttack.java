@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectBleeding;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -203,8 +204,16 @@ public class ActionAttack extends Action {
 						if (effect instanceof EffectWet)
 							gameObject.removeBurningEffect();
 					}
+					if (gameObject instanceof Actor)
+						gameObject.addEffect(new EffectBleeding(performer, target, 5));
 				}
+
 			}
+		}
+		for (GameObject gameObject : container.squareGameObjectIsOn.inventory.getGameObjects()) {
+			if (gameObject instanceof Actor)
+				gameObject.addEffect(new EffectBleeding(performer, target, 5));
+
 		}
 
 	}
