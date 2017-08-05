@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionRemoveMapMarker;
 import com.marklynch.objects.actions.ActionRename;
@@ -44,8 +45,23 @@ public class MapMarker extends GameObject {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		actions.add(new ActionInspect(performer, this));
 		actions.add(new ActionRename(this));
+		actions.add(new ActionChangeAppearance(this));
 		actions.add(new ActionRemoveMapMarker(this));
 		return actions;
+
+	}
+
+	@Override
+	public ArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.add(new ActionChangeAppearance(this));
+		return actions;
+
+	}
+
+	@Override
+	public Action getDefaultActionPerformedOnThisInInventory(Actor performer) {
+		return new ActionChangeAppearance(this);
 
 	}
 

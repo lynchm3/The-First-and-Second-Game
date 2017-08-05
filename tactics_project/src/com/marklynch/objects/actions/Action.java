@@ -108,6 +108,7 @@ public abstract class Action {
 	}
 
 	public static void loadActionImages() {
+		getGlobalImage("action_add_map_marker.png");
 		getGlobalImage("action_attack.png");
 		getGlobalImage("action_burn.png");
 		getGlobalImage("action_chop.png");

@@ -120,7 +120,7 @@ public class InventorySquare extends Square {
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
 		GameObject targetGameObject = this.gameObject;
 		if (targetGameObject != null) {
-			return targetGameObject.getDefaultActionInInventory(performer);
+			return targetGameObject.getDefaultActionPerformedOnThisInInventory(performer);
 		}
 		return null;
 	}
@@ -128,7 +128,7 @@ public class InventorySquare extends Square {
 	public ArrayList<Action> getAllActionsForTheSquareOrObject(Actor performer) {
 		GameObject targetGameObject = this.gameObject;
 		if (targetGameObject != null) {
-			return targetGameObject.getAllActionsInInventory(performer);
+			return targetGameObject.getAllActionsPerformedOnThisInInventory(performer);
 		}
 		return new ArrayList<Action>();
 	}

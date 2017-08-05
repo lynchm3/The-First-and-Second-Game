@@ -702,7 +702,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	@Override
-	public Action getDefaultActionInInventory(Actor performer) {
+	public Action getDefaultActionPerformedOnThisInInventory(Actor performer) {
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			if (this instanceof ContainerForLiquids)
 				return new ActionFillSpecificContainer(performer, Inventory.waterSource, (ContainerForLiquids) this);
@@ -735,7 +735,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsInInventory(Actor performer) {
+	public ArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
 				|| performer.legArmor == this)

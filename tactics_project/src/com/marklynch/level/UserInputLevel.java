@@ -402,7 +402,7 @@ public class UserInputLevel {
 			Game.level.popups.clear();
 			if (square instanceof InventorySquare && ((InventorySquare) square).gameObject != null) {
 				PopupSelectAction popupSelectAction = new PopupSelectAction(0, 200, Game.level, square,
-						((InventorySquare) square).gameObject.getAllActionsInInventory(Game.level.player));
+						((InventorySquare) square).gameObject.getAllActionsPerformedOnThisInInventory(Game.level.player));
 				if (popupSelectAction.buttons.size() > 0)
 					Game.level.popups.add(popupSelectAction);
 				// Game.level.popups.add(e);

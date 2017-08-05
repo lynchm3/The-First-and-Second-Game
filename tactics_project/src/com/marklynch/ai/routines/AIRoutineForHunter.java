@@ -136,8 +136,6 @@ public class AIRoutineForHunter extends AIRoutine {
 					AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 					TinyNeutralWildAnimal.class);
 
-			System.out.println("PICK_WILD_ANIMAL target = " + target);
-
 			if (target == null) {
 				if (this.actor.inventory.contains(Junk.class)) {
 					huntState = HUNT_STATE.PICK_SHOP_KEEPER;
@@ -151,7 +149,6 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
-			System.out.println("GO_TO_WILD_ANIMAL_AND_ATTACK target = " + target);
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			if (target.remainingHealth <= 0 && this.actor.inventory.size() > 0) {
 				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
@@ -160,7 +157,6 @@ public class AIRoutineForHunter extends AIRoutine {
 			} else {
 				boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
 				if (!attackedAnimal) {
-					System.out.println("GO_TO_WILD_ANIMAL_AND_ATTACK !attackedAnimal " + target);
 					AIRoutineUtils.moveTowardsTargetToAttack(target);
 				}
 			}
