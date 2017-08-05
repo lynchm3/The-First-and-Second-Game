@@ -14,7 +14,7 @@ public class ActionChangeAppearance extends Action {
 	GameObject target;
 
 	public ActionChangeAppearance(GameObject target) {
-		super(ACTION_NAME, "action_add_map_marker.png");
+		super(ACTION_NAME, "action_select_object.png");
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -35,7 +35,7 @@ public class ActionChangeAppearance extends Action {
 			target.inventory.open();
 			target.inventory.filter(Inventory.inventoryFilterBy, true);
 			target.inventory.sort(Inventory.inventorySortBy, true);
-			target.inventory.setMode(Inventory.INVENTORY_MODE.MODE_NORMAL);
+			target.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_MAP_MARKER);
 		} else {
 			((GameObject) target.inventoryThatHoldsThisObject.parent).imageTexture = target.imageTexture;
 			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {

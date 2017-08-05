@@ -42,10 +42,10 @@ public class ActionPlaceMapMarker extends Action {
 		if (Game.level.shouldLog(Game.level.player))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { "Added map marker to ", target }));
 
-		target.inventory.open();
-		target.inventory.filter(Inventory.inventoryFilterBy, true);
-		target.inventory.sort(Inventory.inventorySortBy, true);
-		target.inventory.setMode(Inventory.INVENTORY_MODE.MODE_NORMAL);
+		mapMarker.inventory.open();
+		mapMarker.inventory.filter(Inventory.inventoryFilterBy, true);
+		mapMarker.inventory.sort(Inventory.inventorySortBy, true);
+		mapMarker.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_MAP_MARKER);
 
 	}
 
