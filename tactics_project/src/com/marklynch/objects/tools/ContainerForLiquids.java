@@ -1,9 +1,12 @@
-package com.marklynch.objects;
+package com.marklynch.objects.tools;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Liquid;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -12,25 +15,26 @@ import com.marklynch.utils.ResourceUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class ContainerForLiquids extends GameObject {
+public class ContainerForLiquids extends Tool {
 	protected String baseName;
 	public float volume;
 	public Texture baseImage;
 	public Texture imageWhenFull;
 	public String imageWhenFullPath;
 
-	public ContainerForLiquids(String name, int health, String imagePath, Square squareGameObjectIsOn,
-			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
-			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
-			float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting,
-			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float waterResistance, float electricResistance, float poisonResistance, float weight,
-			Actor owner, float volume, String imageWhenFullPath) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
-				owner);
+	public ContainerForLiquids(String name, float minRange, float maxRange, String imagePath, float health,
+			Square squareGameObjectIsOn, boolean fitsInInventory, boolean canContainOtherObjects,
+			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
+			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float waterResistance, float electricResistance, float poisonResistance, float weight, Actor owner,
+			float anchorX, float anchorY, float volume, String imageWhenFullPath) {
+
+		super(name, minRange, maxRange, imagePath, health, squareGameObjectIsOn, fitsInInventory,
+				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,
+				anchorX, anchorY, 5);
 		this.volume = volume;
 		this.imageWhenFullPath = imageWhenFullPath;
 		baseName = new String(name);
@@ -51,11 +55,12 @@ public class ContainerForLiquids extends GameObject {
 
 	@Override
 	public ContainerForLiquids makeCopy(Square square, Actor owner) {
-		return new ContainerForLiquids(new String(baseName), (int) totalHealth, imageTexturePath, square,
-				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
-				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner, volume,
+
+		return new ContainerForLiquids(new String(baseName), minRange, maxRange, imageTexturePath, (int) totalHealth,
+				squareGameObjectIsOn, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
+				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
+				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
+				waterResistance, electricResistance, poisonResistance, weight, owner, anchorX, anchorY, volume,
 				imageWhenFullPath);
 	}
 

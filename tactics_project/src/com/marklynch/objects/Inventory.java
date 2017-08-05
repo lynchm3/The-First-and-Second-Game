@@ -7,6 +7,7 @@ import java.util.Date;
 import com.marklynch.Game;
 import com.marklynch.editor.UserInputEditor;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
@@ -398,6 +399,12 @@ public class Inventory {
 	public int remove(GameObject gameObject) {
 		int index = -1;
 		if (gameObjects.contains(gameObject)) {
+
+			if (this.parent instanceof Actor) {
+				Actor actor = (Actor) parent;
+				if (actor.equipped == gameObject)
+					actor.equipped = null;
+			}
 
 			gameObjects.remove(gameObject);
 			gameObject.inventoryThatHoldsThisObject = null;

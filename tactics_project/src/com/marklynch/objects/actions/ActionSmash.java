@@ -5,7 +5,6 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionSmash extends Action {
@@ -34,9 +33,6 @@ public class ActionSmash extends Action {
 
 		if (!enabled)
 			return;
-		// performer.attack(targetGameObject, false);
-
-		// GameObject targetGameObject;// = target;
 
 		target.remainingHealth = 0;
 		target.checkIfDestroyed(performer, this);
@@ -64,20 +60,24 @@ public class ActionSmash extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer instanceof Actor) {
-			Actor actor = (performer);
+		// if (performer.equipped == target)
+		// return true;
 
-			Weapon weapon = null;
-			if (actor.equipped instanceof Weapon) {
-				weapon = (Weapon) actor.equipped;
-			} else {
-				return false;
-			}
-			if (weapon.hasRange(actor.straightLineDistanceTo(target.squareGameObjectIsOn)))
-				return false;
-			if (!actor.canSeeGameObject(target))
-				return false;
-		}
+		// if (performer instanceof Actor) {
+		// Actor actor = (performer);
+		//
+		// Weapon weapon = null;
+		// if (actor.equipped instanceof Weapon) {
+		// weapon = (Weapon) actor.equipped;
+		// } else {
+		// return false;
+		// }
+		// if
+		// (weapon.hasRange(actor.straightLineDistanceTo(target.squareGameObjectIsOn)))
+		// return false;
+		// if (!actor.canSeeGameObject(target))
+		// return false;
+		// }
 
 		return true;
 	}

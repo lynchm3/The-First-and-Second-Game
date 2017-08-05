@@ -5,6 +5,7 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Templates;
+import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Monster;
@@ -64,6 +65,12 @@ public class ActionAttack extends Action {
 
 				}
 			}
+
+			if (weapon != null && weapon instanceof ContainerForLiquids) {
+				target.squareGameObjectIsOn.inventory.add(weapon);
+				new ActionSmash(performer, weapon).perform();
+			}
+
 			target.attackedBy(performer, this);
 		}
 

@@ -23,7 +23,7 @@ public class Crime {
 	final public static int CRIME_SEVERITY_THEFT = 4;
 	final public static int CRIME_SEVERITY_ARSON = 5;
 	final public static int CRIME_SEVERITY_MANSLAUGHTER = 5;
-	final public static int CRIME_SEVERITY_ATTACK = 6;
+	final public static int CRIME_SEVERITY_ATTACK = 10;
 
 	public boolean resolved;
 	public GameObject stolenItems[];

@@ -7,6 +7,7 @@ import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
+import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
@@ -275,9 +276,9 @@ public class Templates {
 	public static final MeatChunk MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(),
 			false, true, true, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
 			0f, 5f, null);
-	public static final ContainerForLiquids JAR = new ContainerForLiquids("Jar", 5, "jar.png", null, new Inventory(),
-			true, true, true, true, false, false, 0.12f, 0.25f, 24f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
-			0f, 0f, 0f, null, 1f, "water_jar.png");
+	public static final ContainerForLiquids JAR = new ContainerForLiquids("Jar", 1, 1, "jar.png", 100, null, true, true,
+			false, false, 0.5f, 0.5f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 1f, null, 21, 32,
+			1f, "water_jar.png");
 	public static final Liquid WATER = new Liquid("Water", 5, "effect_wet.png", null, new Inventory(), true, true, true,
 			true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, null, 0f,
 			new Effect[] { new EffectWet(5) }, new Effect[] {});
