@@ -89,8 +89,9 @@ public class AStarSearch {
 			closedList.add(node);
 			count++;
 			if (count == 100) {
+				return constructPath(node);
 				// return constructPath(node);
-				return null;
+				// return null;
 			}
 		}
 

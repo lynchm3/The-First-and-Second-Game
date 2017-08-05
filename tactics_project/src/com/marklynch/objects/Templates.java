@@ -304,7 +304,7 @@ public class Templates {
 	public static final Inspectable DRIED_BLOOD = new Inspectable("Dried Blood", 5, "blood.png", null, new Inventory(),
 			false, true, false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f,
 			0.1f, null);
-	public static final MapMarker MAP_MARKER = new MapMarker(MapMarker.NO_DESCRIPTION, 5, "map_marker_red.png", null,
+	public static final MapMarker MAP_MARKER = new MapMarker(MapMarker.NO_DESCRIPTION, 5, "map_marker_skull.png", null,
 			new Inventory(), false, true, false, false, false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
 			40f, 0f, 0f, 0f, 0.1f, null);
 	public static final Inspectable GIANT_FOOTPRINT = new Inspectable("Giant Footprint", 5, "footprint.png", null,

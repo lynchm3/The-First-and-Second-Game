@@ -390,9 +390,14 @@ public class QuestSmallGame extends Quest {
 					// Wait for the player
 					actor.activityDescription = ACTIVITY_WAITING_FOR_YOU;
 				} else {
+					System.out.println("a");
+
+					System.out.println("a superwolf = " + superWolf);
 					actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 					if (superWolf.remainingHealth > 0) {
+						System.out.println("b");
 						if (!AIRoutineUtils.attackTarget(superWolf)) {
+							System.out.println("c");
 							AIRoutineUtils.moveTowardsTargetToAttack(superWolf);
 						}
 					}
