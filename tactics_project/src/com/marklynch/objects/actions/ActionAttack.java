@@ -3,8 +3,13 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectWet;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Liquid;
 import com.marklynch.objects.Templates;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
@@ -67,8 +72,7 @@ public class ActionAttack extends Action {
 			}
 
 			if (weapon != null && weapon instanceof ContainerForLiquids) {
-				target.squareGameObjectIsOn.inventory.add(weapon);
-				new ActionSmash(performer, weapon).perform();
+				smashContainer((ContainerForLiquids) weapon);
 			}
 
 			target.attackedBy(performer, this);
@@ -174,6 +178,35 @@ public class ActionAttack extends Action {
 			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
 					this.getClass());
 		return null;
+	}
+
+	public void smashContainer(ContainerForLiquids container) {
+		target.squareGameObjectIsOn.inventory.add(container);
+		new ActionSmash(performer, container).perform();
+
+		// Find a square for broken glass and put it there
+		Square squareForGlass = null;
+		if (!container.squareGameObjectIsOn.inventory.contains(Wall.class)) {
+			squareForGlass = container.squareGameObjectIsOn;
+		}
+
+		if (squareForGlass != null)
+			Templates.BROKEN_GLASS.makeCopy(squareForGlass, container.owner);
+
+		if (container.inventory.size() > 0 && container.inventory.get(0) instanceof Liquid) {
+			Liquid liquid = (Liquid) container.inventory.get(0);
+			for (GameObject gameObject : container.squareGameObjectIsOn.inventory.getGameObjects()) {
+				if (gameObject != container) {
+					// new ActionDouse(shooter, gameObject).perform();
+					for (Effect effect : liquid.touchEffects) {
+						gameObject.addEffect(effect.makeCopy(performer, gameObject));
+						if (effect instanceof EffectWet)
+							gameObject.removeBurningEffect();
+					}
+				}
+			}
+		}
+
 	}
 
 }

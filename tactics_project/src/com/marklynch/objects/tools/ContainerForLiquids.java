@@ -7,6 +7,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
 import com.marklynch.objects.Templates;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -87,7 +88,7 @@ public class ContainerForLiquids extends Tool {
 
 		// Find a square for broken glass and put it there
 		Square squareForGlass = null;
-		if (this.squareGameObjectIsOn.inventory.canShareSquare()) {
+		if (!this.squareGameObjectIsOn.inventory.contains(Wall.class)) {
 			squareForGlass = this.squareGameObjectIsOn;
 		} else {
 			if (squareForGlass == null && this.squareGameObjectIsOn.xInGrid > shooter.squareGameObjectIsOn.xInGrid

@@ -96,6 +96,10 @@ public class ActionDie extends Action {
 
 			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " was depleted ", this.image }));
+		} else if (performer.destroyedByAction instanceof ActionSmash) {
+
+			if (Game.level.shouldLog(performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", this.image }));
 		} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChop) {
 
 			if (Game.level.shouldLog(performer))

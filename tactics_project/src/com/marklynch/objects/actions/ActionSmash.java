@@ -5,7 +5,6 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.ui.ActivityLog;
 
 public class ActionSmash extends Action {
 
@@ -40,9 +39,6 @@ public class ActionSmash extends Action {
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
-
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " smashed ", target }));
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
