@@ -12,6 +12,7 @@ import org.newdawn.slick.openal.Audio;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectBleeding;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
@@ -835,6 +836,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public void addEffect(Effect effectToAdd) {
 
 		if (remainingHealth <= 0)
+			return;
+
+		if (effectToAdd instanceof EffectBleeding && !(this instanceof Actor))
 			return;
 
 		Effect effectToRemove = null;

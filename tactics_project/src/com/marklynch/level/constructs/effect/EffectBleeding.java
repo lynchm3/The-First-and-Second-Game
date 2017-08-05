@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Templates;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class EffectBleeding extends Effect {
@@ -26,6 +27,9 @@ public class EffectBleeding extends Effect {
 
 	@Override
 	public void activate() {
+
+		if (!(target instanceof Actor))
+			return;
 
 		float damage = 5 - (10 * (target.getEffectiveSlashResistance() / 100f));
 		target.remainingHealth -= damage;
