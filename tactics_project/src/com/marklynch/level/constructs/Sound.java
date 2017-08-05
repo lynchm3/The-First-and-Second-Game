@@ -29,6 +29,7 @@ public class Sound {
 		this.legal = legal;
 		this.actionType = action;
 
+		// destinationSquares = new ArrayList<Square>();
 		createDestinationSounds();
 
 	}
@@ -38,67 +39,6 @@ public class Sound {
 			destinationSquare.sounds.add(this);
 		}
 	}
-
-	// ArrayList<Square> getAllSquaresWithinDistance(float maxDistance) {
-	// ArrayList<Square> squares = new ArrayList<Square>();
-	//
-	// for (int distance = 0; distance <= maxDistance; distance++) {
-	//
-	// if (distance == 0)
-	//
-	// {
-	// squares.add(this.sourceSquare);
-	// continue;
-	// }
-	//
-	// boolean xGoingUp = true;
-	// boolean yGoingUp = true;
-	// for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-	// if (ArrayUtils.inBounds(Game.level.squares, this.sourceSquare.xInGrid +
-	// x,
-	// this.sourceSquare.yInGrid + y)) {
-	// squares.add(Game.level.squares[this.sourceSquare.xInGrid + (int)
-	// x][this.sourceSquare.yInGrid
-	// + (int) y]);
-	// }
-	//
-	// if (xGoingUp) {
-	// if (x == distance) {
-	// xGoingUp = false;
-	// x--;
-	// } else {
-	// x++;
-	// }
-	// } else {
-	// if (x == -distance) {
-	// xGoingUp = true;
-	// x++;
-	// } else {
-	// x--;
-	// }
-	// }
-	//
-	// if (yGoingUp) {
-	// if (y == distance) {
-	// yGoingUp = false;
-	// y--;
-	// } else {
-	// y++;
-	// }
-	// } else {
-	// if (y == -distance) {
-	// yGoingUp = true;
-	// y++;
-	// } else {
-	// y--;
-	// }
-	// }
-	//
-	// }
-	// }
-	//
-	// return squares;
-	// }
 
 	HashMap<Square, AIPath> squareToPath = new HashMap<Square, AIPath>();
 	int highestPathCostSeen;

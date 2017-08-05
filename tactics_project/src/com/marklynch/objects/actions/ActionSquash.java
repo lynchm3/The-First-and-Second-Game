@@ -132,7 +132,7 @@ public class ActionSquash extends Action {
 		if (performer.equipped == null)
 			return null;
 
-		float loudness = target.soundWhenHit * performer.equipped.soundWhenHitting;
+		float loudness = 10f;
 		if (performer.equipped != null)
 			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
 					this.getClass());

@@ -118,7 +118,7 @@ public class ActionChop extends Action {
 	public Sound createSound() {
 		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
 		if (pickaxe != null) {
-			float loudness = target.soundWhenHit * pickaxe.soundWhenHitting;
+			float loudness = Math.max(target.soundWhenHit, pickaxe.soundWhenHitting);
 			return new Sound(performer, pickaxe, target.squareGameObjectIsOn, loudness, legal, this.getClass());
 		}
 		return null;

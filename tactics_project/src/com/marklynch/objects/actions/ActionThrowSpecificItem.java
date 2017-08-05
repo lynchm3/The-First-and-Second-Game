@@ -187,7 +187,9 @@ public class ActionThrowSpecificItem extends Action {
 
 		// Sound
 		if (targetGameObject != null) {
-			float loudness = targetGameObject.soundWhenHit * projectile.soundWhenHitting;
+			float loudness = Math.max(targetGameObject.soundWhenHit, projectile.soundWhenHitting);
+			// float loudness = targetGameObject.soundWhenHit *
+			// projectile.soundWhenHitting;
 			if (performer.equipped != null)
 				return new Sound(performer, projectile, targetSquare, loudness, legal, this.getClass());
 		} else {

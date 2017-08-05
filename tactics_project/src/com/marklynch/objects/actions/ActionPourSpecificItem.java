@@ -148,17 +148,8 @@ public class ActionPourSpecificItem extends Action {
 	public Sound createSound() {
 
 		// Sound
-		if (targetGameObject != null) {
-			float loudness = targetGameObject.soundWhenHit * container.soundWhenHitting;
-			if (performer.equipped != null)
-				return new Sound(performer, container, targetSquare, loudness, legal, this.getClass());
-		} else {
-			float loudness = container.soundWhenHitting;
-			if (performer.equipped != null)
-				return new Sound(performer, container, targetSquare, loudness, legal, this.getClass());
-
-		}
-		return null;
+		float loudness = 3;
+		return new Sound(performer, container, targetSquare, loudness, legal, this.getClass());
 	}
 
 }
