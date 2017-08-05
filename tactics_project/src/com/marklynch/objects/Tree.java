@@ -23,12 +23,13 @@ public class Tree extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float waterResistance, float electricResistance, float poisonResistance, float weight, Actor owner) {
+			float waterResistance, float electricResistance, float poisonResistance, float slashResistance,
+			float weight, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
-				owner);
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
+				slashResistance, weight, owner);
 		healthWhenLastDroppedFruit = this.totalHealth;
 		// addApple(appleMaxRatioSize);
 	}
@@ -38,8 +39,8 @@ public class Tree extends GameObject {
 		float appleSize = (float) (Math.random() * maxSize);
 
 		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), false, true, true, false, false,
-				false, appleSize, appleSize, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0.5f,
-				null);
+				false, appleSize, appleSize, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
+				0.5f, null);
 		apple.anchorX = 6;
 		apple.anchorY = 6;
 
@@ -80,9 +81,8 @@ public class Tree extends GameObject {
 
 			// TextureUtils.skipNormals = true;
 
-			TextureUtils.drawTexture(fruit.imageTexture, alpha, fruitPositionXInPixels,
-					fruitPositionYInPixels, fruitPositionXInPixels + fruit.width,
-					fruitPositionYInPixels + fruit.height);
+			TextureUtils.drawTexture(fruit.imageTexture, alpha, fruitPositionXInPixels, fruitPositionYInPixels,
+					fruitPositionXInPixels + fruit.width, fruitPositionYInPixels + fruit.height);
 		}
 		super.draw2();
 	}
@@ -170,7 +170,7 @@ public class Tree extends GameObject {
 				canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen,
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, weight, owner);
+				poisonResistance, slashResistance, weight, owner);
 	}
 
 }

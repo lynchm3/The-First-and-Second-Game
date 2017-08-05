@@ -20,13 +20,13 @@ public class Readable extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, Conversation conversation, float widthRatio,
 			float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting,
 			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float waterResistance, float electricResistance, float poisonResistance, float weight,
+			float fireResistance, float waterResistance, float electricResistance, float poisonResistance, float slashResistance, float weight,
 			Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
-				owner);
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, 
+				weight, owner);
 
 		if (conversation != null) {
 			this.conversation = conversation;
@@ -40,7 +40,7 @@ public class Readable extends GameObject {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, conversation, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, weight, owner);
+				waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner);
 	}
 
 	@Override

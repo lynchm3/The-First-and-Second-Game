@@ -155,14 +155,14 @@ public class Actor extends GameObject {
 			boolean canOpenDoors, boolean canEquipWeapons, float widthRatio, float heightRatio, float drawOffsetX,
 			float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
-			float electricResistance, float poisonResistance, float weight, Actor owner, Faction faction,
-			float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY, float bodyAnchorX,
-			float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
+			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
+			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, showInventory, false, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
-				owner);
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
+				slashResistance, weight, owner);
 		this.strength = strength;
 		this.dexterity = dexterity;
 		this.intelligence = intelligence;
@@ -941,10 +941,8 @@ public class Actor extends GameObject {
 				fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, canOpenDoors,
 				canEquipWeapons, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
-				electricResistance, poisonResistance, weight
-
-				, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
-				legsAnchorX, legsAnchorY);
+				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
+				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
 		return actor;
 	}
 

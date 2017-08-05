@@ -28,12 +28,12 @@ public class SwitchForOpenables extends Switch {
 			boolean attackable, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float weight, Actor owner, String actionName, String actionVerb, Openable openable,
+			float poisonResistance, float slashResistance, float weight, Actor owner, String actionName, String actionVerb, Openable openable,
 			SWITCH_TYPE switchType, RequirementToMeet[] requirementsToMeet) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight,
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight,
 				owner, actionName, actionVerb, requirementsToMeet);
 		this.openable = openable;
 		this.switchType = switchType;
@@ -74,7 +74,7 @@ public class SwitchForOpenables extends Switch {
 				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
 				blocksLineOfSight, persistsWhenCantBeSeen, attackable, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, weight, owner,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner,
 				actionName, actionVerb, openable, switchType, requirementsToMeet);
 	}
 

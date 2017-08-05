@@ -48,6 +48,7 @@ public class GameObjectTemplate implements InventoryParent {
 	protected float waterResistance;
 	protected float electricResistance;
 	protected float poisonResistance;
+	protected float slashResistance;
 
 	public float weight;
 
@@ -60,7 +61,7 @@ public class GameObjectTemplate implements InventoryParent {
 			boolean attackable, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float weight) {
+			float poisonResistance, float slashResistance, float weight) {
 		super();
 		this.name = name;
 		this.totalHealth = totalHealth;
@@ -100,7 +101,7 @@ public class GameObjectTemplate implements InventoryParent {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, weight, owner);
+				waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner);
 	}
 
 	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
@@ -108,7 +109,7 @@ public class GameObjectTemplate implements InventoryParent {
 				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
 				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
 				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, weight, owner);
+				waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner);
 		copy.backwards = backwards;
 		return copy;
 	}
@@ -137,7 +138,7 @@ public class GameObjectTemplate implements InventoryParent {
 	}
 
 	public float getEffectiveSlashResistance() {
-		return 10;
+		return slashResistance;
 	}
 
 	public float getEffectiveFireResistance() {
