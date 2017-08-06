@@ -681,9 +681,9 @@ public class Actor extends GameObject {
 		if (equipped != null) {
 
 			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX + handAnchorX - equipped.anchorX);
+					+ drawOffsetX * Game.SQUARE_WIDTH + handAnchorX - equipped.anchorX);
 			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY + handAnchorY - equipped.anchorY);
+					+ drawOffsetY * Game.SQUARE_HEIGHT + handAnchorY - equipped.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionYInPixels, weaponPositionXInPixels + equipped.width,
@@ -693,17 +693,17 @@ public class Actor extends GameObject {
 		if (helmet != null) {
 
 			int helmetPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX + headAnchorX - helmet.anchorX);
+					+ drawOffsetX * Game.SQUARE_WIDTH + headAnchorX - helmet.anchorX);
 			int helmetPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY + headAnchorY - helmet.anchorY);
+					+ drawOffsetY * Game.SQUARE_HEIGHT + headAnchorY - helmet.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels, helmetPositionYInPixels,
 					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels + helmet.height);
 		} else if (hairImageTexture != null) {
 			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX + bodyAnchorX - 0);
+					+ drawOffsetX * Game.SQUARE_WIDTH + bodyAnchorX - 0);
 			int bodyArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY + bodyAnchorY - 0);
+					+ drawOffsetY * Game.SQUARE_HEIGHT + bodyAnchorY - 0);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + hairImageTexture.getWidth(),
@@ -713,9 +713,9 @@ public class Actor extends GameObject {
 		if (bodyArmor != null) {
 
 			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX + bodyAnchorX - bodyArmor.anchorX);
+					+ drawOffsetX * Game.SQUARE_WIDTH + bodyAnchorX - bodyArmor.anchorX);
 			int bodyArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY + bodyAnchorY - bodyArmor.anchorY);
+					+ drawOffsetY * Game.SQUARE_HEIGHT + bodyAnchorY - bodyArmor.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + bodyArmor.width,
@@ -725,9 +725,9 @@ public class Actor extends GameObject {
 		if (legArmor != null) {
 
 			int legArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX + legsAnchorX - legArmor.anchorX);
+					+ drawOffsetX * Game.SQUARE_WIDTH + legsAnchorX - legArmor.anchorX);
 			int legArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY + legsAnchorY - legArmor.anchorY);
+					+ drawOffsetY * Game.SQUARE_WIDTH + legsAnchorY - legArmor.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,

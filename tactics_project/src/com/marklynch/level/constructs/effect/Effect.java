@@ -31,9 +31,9 @@ public abstract class Effect {
 		if (target.squareGameObjectIsOn != null) {
 
 			int actorPositionXInPixels = (int) (target.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ target.drawOffsetX);
+					+ Game.SQUARE_WIDTH * target.drawOffsetX);
 			int actorPositionYInPixels = (int) (target.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ target.drawOffsetY);
+					+ Game.SQUARE_HEIGHT * target.drawOffsetY);
 
 			float alpha = 1.0f;
 

@@ -139,18 +139,19 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		halfHeight = height / 2;
 
 		if (widthRatio < 1f && heightRatio < 1f) {
-			float drawOffsetXMax = Game.SQUARE_WIDTH - width;
-			float drawOffsetYMax = Game.HALF_SQUARE_HEIGHT - height;
+			float drawOffsetXMax = 1 - width / Game.SQUARE_WIDTH;
+			float drawOffsetYMax = 0.5f - height / Game.SQUARE_HEIGHT;
 			if (drawOffsetYMax < 0) {
 				drawOffsetYMax = 0;
 			}
 			this.drawOffsetX = (float) (Math.random() * drawOffsetXMax);
 			this.drawOffsetY = (float) (Math.random() * drawOffsetYMax);
-		} else {
-			if (this instanceof Weapon)
-				drawOffsetX = Game.HALF_SQUARE_WIDTH - width / 2;
-			drawOffsetY = Game.SQUARE_HEIGHT - height;
 		}
+		// else {
+		// if (this instanceof Weapon)
+		// this.drawOffsetX = Game.HALF_SQUARE_WIDTH - width / 2;
+		// this.drawOffsetY = Game.SQUARE_HEIGHT - height;
+		// }
 	}
 
 	@Override
@@ -209,9 +210,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (squareGameObjectIsOn != null) {
 
 			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ drawOffsetX);
+					+ Game.SQUARE_WIDTH * drawOffsetX);
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY);
+					+ Game.SQUARE_HEIGHT * drawOffsetY);
 
 			float alpha = 1.0f;
 

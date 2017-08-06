@@ -44,9 +44,9 @@ public class Tree extends GameObject {
 		apple.anchorX = 6;
 		apple.anchorY = 6;
 
-		float appleDrawOffsetXMax = width - apple.width - 32f;
-		float appleDrawOffsetXMin = 32f;
-		float appleDrawOffsetYMax = Game.HALF_SQUARE_HEIGHT - apple.height;
+		float appleDrawOffsetXMax = 0.5f - apple.width / Game.SQUARE_WIDTH;
+		float appleDrawOffsetXMin = 0.5f;
+		float appleDrawOffsetYMax = 1 - apple.height / Game.SQUARE_HEIGHT;
 
 		apple.drawOffsetX = appleDrawOffsetXMin + (float) (Math.random() * (appleDrawOffsetXMax - appleDrawOffsetXMin));
 		apple.drawOffsetY = (float) (Math.random() * appleDrawOffsetYMax);
@@ -73,9 +73,9 @@ public class Tree extends GameObject {
 		// DRAW INVENTORY
 		for (GameObject fruit : inventory.gameObjects) {
 			int fruitPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ fruit.drawOffsetX);
+					+ fruit.drawOffsetX * Game.SQUARE_WIDTH);
 			int fruitPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ fruit.drawOffsetY);
+					+ fruit.drawOffsetY * Game.SQUARE_HEIGHT);
 
 			float alpha = 1.0f;
 

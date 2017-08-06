@@ -107,8 +107,8 @@ public class Game {
 	public static Level level;
 	public static Editor editor;
 	public static boolean editorMode = true;
-	public static float SQUARE_WIDTH = 64f;
-	public static float SQUARE_HEIGHT = 64f;
+	public static float SQUARE_WIDTH = 128f;
+	public static float SQUARE_HEIGHT = 128f;
 	public static float HALF_SQUARE_WIDTH = SQUARE_WIDTH / 2f;
 	public static float HALF_SQUARE_HEIGHT = SQUARE_HEIGHT / 2f;
 	public static float QUARTER_SQUARE_WIDTH = SQUARE_WIDTH / 4f;
