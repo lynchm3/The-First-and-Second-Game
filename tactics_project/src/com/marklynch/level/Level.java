@@ -403,6 +403,47 @@ public class Level {
 		});
 		showHideLogButton.enabled = true;
 		buttons.add(showHideLogButton);
+
+		// UI buttons
+		Button inventoryButton = new LevelButton(110f, 400f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"[I]NVENTORY", false, false, Color.BLACK, Color.WHITE);
+		inventoryButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseInventory();
+			}
+		});
+		inventoryButton.enabled = true;
+		buttons.add(inventoryButton);
+	}
+
+	public void openCloseInventory() {
+		if (Game.level.openInventories.size() > 0) {
+			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
+				inventory.close();
+			}
+		} else {
+			Game.level.player.inventory.open();
+			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, false);
+			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
+			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_NORMAL);
+			// Game.level.openInventories.add(Game.level.player.inventory);
+		}
+		closeAllPopups();
+	}
+
+	public static void closeAllPopups() {
+
+		if (Game.level.popups.size() != 0) {
+
+			int popupToRemoveIndex = Game.level.popups.size() - 1;
+			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
+				button.removeHighlight();
+			}
+			Game.level.popups.remove(popupToRemoveIndex);
+
+		}
+
 	}
 
 	public void postLoad() {

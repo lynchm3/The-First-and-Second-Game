@@ -73,6 +73,9 @@ public class Inventory {
 	static LevelButton buttonFilterByWeapon;
 	static LevelButton buttonFilterByFood;
 
+	// Close button
+	static LevelButton buttonClose;
+
 	public static ArrayList<Button> buttons;
 	public static ArrayList<Button> buttonsSort;
 	public static ArrayList<Button> buttonsFilter;
@@ -198,6 +201,17 @@ public class Inventory {
 		});
 		buttons.add(buttonFilterByFood);
 		buttonsFilter.add(buttonFilterByFood);
+
+		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, 100f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "CLOSE [I]", true, false, Color.BLACK, Color.WHITE);
+		buttonClose.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.openCloseInventory();
+			}
+		});
+		buttons.add(buttonClose);
+
 		this.isOpen = true;
 		if (!Game.level.openInventories.contains(this))
 			Game.level.openInventories.add(this);
@@ -650,6 +664,8 @@ public class Inventory {
 				button.draw();
 			}
 		}
+
+		buttonClose.draw();
 
 		// Actor
 		int actorPositionXInPixels = 650;

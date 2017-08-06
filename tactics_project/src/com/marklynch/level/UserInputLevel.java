@@ -7,7 +7,6 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -20,7 +19,6 @@ import com.marklynch.level.popup.PopupButton;
 import com.marklynch.level.popup.PopupSelectAction;
 import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionUsePower;
@@ -418,20 +416,6 @@ public class UserInputLevel {
 
 	}
 
-	public static void closeAllPopups() {
-
-		if (Game.level.popups.size() != 0) {
-
-			int popupToRemoveIndex = Game.level.popups.size() - 1;
-			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
-				button.removeHighlight();
-			}
-			Game.level.popups.remove(popupToRemoveIndex);
-
-		}
-
-	}
-
 	public static void upTyped() {
 		if (Game.level.activeActor != Game.level.player)
 			return;
@@ -540,49 +524,47 @@ public class UserInputLevel {
 		}
 		if (Game.level.activeActor != Game.level.player)
 			return;
-		closeAllPopups();
+		Level.closeAllPopups();
 	}
 
 	public static void escapeTyped() {
+
+		if (Game.level.activeActor != Game.level.player)
+			return;
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.clear();
 			return;
 		}
-		if (Game.level.activeActor != Game.level.player)
+		if (Game.level.openInventories.size() != 0) {
+			Game.level.openCloseInventory();
 			return;
-		closeAllPopups();
+		}
+
+		Level.closeAllPopups();
+		return;
 	}
 
 	public static void tabTyped() {
-		if (Game.level.popupTextBoxes.size() != 0) {
-			return;
-		}
-		if (Game.level.openInventories.size() > 0) {
-			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
-				inventory.close();
-			}
-		} else {
-			Game.level.player.inventory.open();
-			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, false);
-			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
-			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_NORMAL);
-			// Game.level.openInventories.add(Game.level.player.inventory);
-		}
-		closeAllPopups();
 	}
 
 	public static long lastCopy = 0;
 
 	public static void keyTyped(char character) {
 
+		if (Game.level.activeActor != Game.level.player)
+			return;
+
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.get(0).keyTyped(character);
 			return;
 		}
 
-		if (Game.level.activeActor != Game.level.player)
+		if (character == 'i' || character == 'I') {
+			Game.level.openCloseInventory();
 			return;
+		}
+
 		if (character == ' ') {
 
 			if (Game.level.popups.size() != 0) {

@@ -3,7 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.UserInputLevel;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Inventory;
@@ -52,7 +52,7 @@ public class ActionGiveItemsInInventory extends Action {
 			// Game.level.player.inventory.setActionOnSelect(new
 			// ActionFillEquippedContainer());
 		}
-		UserInputLevel.closeAllPopups();
+		Level.closeAllPopups();
 
 		// if (performer.squareGameObjectIsOn.visibleToPlayer)
 		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "

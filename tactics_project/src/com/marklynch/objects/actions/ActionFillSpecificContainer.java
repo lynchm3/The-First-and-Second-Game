@@ -56,7 +56,7 @@ public class ActionFillSpecificContainer extends Action {
 		// // Game.level.player.inventory.setActionOnSelect(new
 		// // ActionFillEquippedContainer());
 		// }
-		// UserInputLevel.closeAllPopups();
+		// Level.closeAllPopups();
 
 		// if (performer.squareGameObjectIsOn.visibleToPlayer)
 		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "

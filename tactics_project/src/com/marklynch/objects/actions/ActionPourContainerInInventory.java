@@ -3,7 +3,7 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.UserInputLevel;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -59,7 +59,7 @@ public class ActionPourContainerInInventory extends Action {
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR);
 		}
-		UserInputLevel.closeAllPopups();
+		Level.closeAllPopups();
 	}
 
 	@Override
