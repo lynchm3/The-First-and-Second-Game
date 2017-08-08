@@ -604,12 +604,16 @@ public class UserInputLevel {
 				lastCopy = now;
 			}
 		} else if (character == 'w' || character == 'W') {
+			Level.wHasBeenPressed = true;
 			upTyped();
 		} else if (character == 'a' || character == 'A') {
+			Level.aHasBeenPressed = true;
 			leftTyped();
 		} else if (character == 's' || character == 'S') {
+			Level.sHasBeenPressed = true;
 			downTyped();
 		} else if (character == 'd' || character == 'D') {
+			Level.dHasBeenPressed = true;
 			rightTyped();
 		}
 

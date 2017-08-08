@@ -74,6 +74,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public static Texture STONE_TEXTURE;
 	public static Texture MUD_TEXTURE;
 	public static Texture BLANK_TEXTURE;
+	public static Texture W_TEXTURE;
+	public static Texture A_TEXTURE;
+	public static Texture S_TEXTURE;
+	public static Texture D_TEXTURE;
 
 	public transient boolean showingDialogs = false;
 	// public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
@@ -134,6 +138,11 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png");
 		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png");
 		BLANK_TEXTURE = ResourceUtils.getGlobalImage("square.png");
+
+		W_TEXTURE = ResourceUtils.getGlobalImage("w.png");
+		A_TEXTURE = ResourceUtils.getGlobalImage("a.png");
+		S_TEXTURE = ResourceUtils.getGlobalImage("s.png");
+		D_TEXTURE = ResourceUtils.getGlobalImage("d.png");
 	}
 
 	public void postLoad1() {
@@ -336,6 +345,14 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			//
 			// }
 		}
+	}
+
+	public void drawKey(Texture texture) {
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		TextureUtils.drawTexture(texture, squarePositionX, squarePositionY, squarePositionX + Game.SQUARE_WIDTH,
+				squarePositionY + Game.SQUARE_HEIGHT);
+
 	}
 
 	public void drawPower(Power power) {

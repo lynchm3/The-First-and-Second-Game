@@ -63,6 +63,11 @@ import mdesl.graphics.Texture;
 
 public class Level {
 
+	public static boolean wHasBeenPressed = false;
+	public static boolean aHasBeenPressed = false;
+	public static boolean sHasBeenPressed = false;
+	public static boolean dHasBeenPressed = false;
+
 	public int width;
 	public int height;
 	public Square[][] squares;
@@ -855,17 +860,29 @@ public class Level {
 
 		player.squareGameObjectIsOn.drawAction();
 
-		if (player.squareGameObjectIsOn.getSquareToLeftOf() != null)
+		if (player.squareGameObjectIsOn.getSquareToLeftOf() != null) {
 			player.squareGameObjectIsOn.getSquareToLeftOf().drawAction();
+			if (!aHasBeenPressed)
+				player.squareGameObjectIsOn.getSquareToLeftOf().drawKey(Square.A_TEXTURE);
+		}
 
-		if (player.squareGameObjectIsOn.getSquareToRightOf() != null)
+		if (player.squareGameObjectIsOn.getSquareToRightOf() != null) {
 			player.squareGameObjectIsOn.getSquareToRightOf().drawAction();
+			if (!dHasBeenPressed)
+				player.squareGameObjectIsOn.getSquareToRightOf().drawKey(Square.D_TEXTURE);
+		}
 
-		if (player.squareGameObjectIsOn.getSquareAbove() != null)
+		if (player.squareGameObjectIsOn.getSquareAbove() != null) {
 			player.squareGameObjectIsOn.getSquareAbove().drawAction();
+			if (!wHasBeenPressed)
+				player.squareGameObjectIsOn.getSquareAbove().drawKey(Square.W_TEXTURE);
+		}
 
-		if (player.squareGameObjectIsOn.getSquareBelow() != null)
+		if (player.squareGameObjectIsOn.getSquareBelow() != null) {
 			player.squareGameObjectIsOn.getSquareBelow().drawAction();
+			if (!sHasBeenPressed)
+				player.squareGameObjectIsOn.getSquareBelow().drawKey(Square.S_TEXTURE);
+		}
 
 		// In attack mode, draw attackable sqrs.
 		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
