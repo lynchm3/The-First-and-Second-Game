@@ -678,6 +678,18 @@ public class Actor extends GameObject {
 
 		super.draw1();
 
+		// hand anchor
+		QuadUtils.drawQuad(Color.BLACK,
+				this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX * Game.SQUARE_WIDTH
+						+ handAnchorX - 3,
+				this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX * Game.SQUARE_WIDTH
+						+ handAnchorX + 3,
+				this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY * Game.SQUARE_HEIGHT
+						+ handAnchorY - 3,
+				this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY * Game.SQUARE_HEIGHT
+						+ handAnchorY + 3);
+
+		// weapon
 		if (equipped != null) {
 
 			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH

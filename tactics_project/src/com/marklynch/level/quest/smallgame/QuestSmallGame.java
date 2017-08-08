@@ -256,7 +256,7 @@ public class QuestSmallGame extends Quest {
 
 		environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), true, false, true,
-				false, false, 2, 2, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 110f, null,
+				false, false, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 110f, null,
 				Game.level.factions.get(1), 0, 0, 0, 0, 0, 0, 0, 0);
 		environmentalistBill.inventory.add(Templates.HATCHET.makeCopy(null, environmentalistBill));
 

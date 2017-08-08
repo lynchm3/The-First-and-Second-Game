@@ -28,7 +28,7 @@ public class Templates {
 	// Player
 	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "hero.png", null, 1, 10,
 			null, new Inventory(), true, false, true, false, false, 1f, 1.5f, 0f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 0f, 0f, 0f, 0f, 0f, 90f, null, null, 57f, 104f, 70f, 23f, 0f, 0f, 0f, 0f);
+			false, 0f, 0f, 0f, 0f, 0f, 90f, null, null, 75f, 127f, 70f, 23f, 0f, 0f, 0f, 0f);
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
@@ -83,45 +83,40 @@ public class Templates {
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
-			1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 59, 63);
+			1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 55, 65);
 	public static final Pickaxe PICKAXE = new Pickaxe("Pickaxe", 1, 1, "pickaxe.png", 100, null, true, false, false,
-			false, 0.34f, 0.34f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 24, 32);
-	public static final Axe HATCHET = new Axe("Hatchet", 1, 1, "a3r1.png", 100, null, true, false, false, false, 0.34f,
-			0.34f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 24, 46);
+			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 32, 94);
+	public static final Axe HATCHET = new Axe("Hatchet", 1, 1, "hatchet.png", 100, null, true, false, false, false, 1f,
+			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 21, 99);
 	public static final Weapon HOE = new Weapon("Hoe", 2, 1, 1, "hoe.png", 100, null, true, false, false, false, 1f, 1f,
-			0f, 0f, 15f, 15f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 22, 15);
+			1f, 1f, 0f, 0f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 61, 90);
 	public static final Weapon SICKLE = new Weapon("Sickle", 3, 1, 1, "sickle.png", 100, null, true, false, false,
-			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 22, 15);
+			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 20, 29);
 	public static final Weapon HAMMER = new Weapon("Hammer", 4, 1, 1, "hammer.png", 100, null, true, false, false,
-			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 4f, null, 22, 15);
+			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 4f, null, 31, 98);
 	public static final Weapon BASKET = new Weapon("Basket", 1, 1, 1, "basket.png", 100, null, true, false, false,
-			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 1f, null, 22, 15);
-	public static final Weapon BUCKET = new Weapon("Bucket", 1, 1, 1, "bucket.png", 100, null, true, false, false,
-			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 2f, null, 22, 15);
+			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 1f, null, 65, 11);
 	public static final Weapon WHIP = new Weapon("Whip", 3, 1, 1, "whip.png", 100, null, true, false, false, false, 1f,
-			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 22, 15);
+			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 18, 80);
 	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 1, 1, "serrated_spoon.png", 100, null,
-			true, false, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f,
-			1f, null, 16, 24);
+			true, false, false, false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f,
+			null, 54, 64);
 	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 1, 1, "bell.png", 100, null, true, false, false,
-			false, 0.5f, 0.5f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 21, 32);
+			false, 1f, 1f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 52, 63);
 	public static final Lantern LANTERN = new Lantern("Lantern", 1, 1, "lantern.png", 100, null, true, false, false,
-			false, 0.25f, 0.25f, 0f, 0f, 15f, 15f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 16, 4);
+			false, 1f, 1f, 0f, 0f, 15f, 15f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 63, 6);
 
 	// Blades
 	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, true, false, false,
-			false, 1f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, null, 24, 25);
+			false, 1f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, null, 17, 46);
 
-	// Axes
-	// https://en.wikipedia.org/wiki/Axe#Types_of_axes
 	public static final Weapon CLEAVER = new Weapon("Cleaver", 5, 1, 1, "cleaver.png", 100, null, true, false, false,
-			false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 24, 41);
+			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 34, 77);
 
 	// Bows
 	// https://en.wikipedia.org/wiki/Bow_and_arrow#Types_of_bow
 	public static final Weapon HUNTING_BOW = new Weapon("Hunting Bow", 1, 1, 10, "a2r2.png", 100, null, true, false,
-			false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 40,
-			42);
+			false, false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 86, 86);
 
 	// ARMOUR
 	// Helmets
