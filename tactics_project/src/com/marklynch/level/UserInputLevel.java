@@ -604,16 +604,48 @@ public class UserInputLevel {
 				lastCopy = now;
 			}
 		} else if (character == 'w' || character == 'W') {
-			Level.wHasBeenPressed = true;
+			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+				Level.ctrlActionHasBeenPressed = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
+				Level.altActionHasBeenPressed = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+				Level.shiftActionHasBeenPressed = true;
+			} else {
+				Level.wHasBeenPressed = true;
+			}
 			upTyped();
 		} else if (character == 'a' || character == 'A') {
-			Level.aHasBeenPressed = true;
+			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+				Level.ctrlActionHasBeenPressed = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
+				Level.altActionHasBeenPressed = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+				Level.shiftActionHasBeenPressed = true;
+			} else {
+				Level.aHasBeenPressed = true;
+			}
 			leftTyped();
 		} else if (character == 's' || character == 'S') {
-			Level.sHasBeenPressed = true;
+			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+				Level.ctrlActionHasBeenPressed = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
+				Level.altActionHasBeenPressed = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+				Level.shiftActionHasBeenPressed = true;
+			} else {
+				Level.sHasBeenPressed = true;
+			}
 			downTyped();
 		} else if (character == 'd' || character == 'D') {
-			Level.dHasBeenPressed = true;
+			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+				Level.ctrlActionHasBeenPressed = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
+				Level.altActionHasBeenPressed = true;
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+				Level.shiftActionHasBeenPressed = true;
+			} else {
+				Level.dHasBeenPressed = true;
+			}
 			rightTyped();
 		}
 

@@ -45,6 +45,7 @@ import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
+import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Square extends AStarNode implements ActionableInWorld, InventoryParent {
@@ -78,6 +79,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public static Texture A_TEXTURE;
 	public static Texture S_TEXTURE;
 	public static Texture D_TEXTURE;
+	public static Texture SHIFT_W_TEXTURE;
+	public static Texture SHIFT_A_TEXTURE;
+	public static Texture SHIFT_S_TEXTURE;
+	public static Texture SHIFT_D_TEXTURE;
 
 	public transient boolean showingDialogs = false;
 	// public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
@@ -143,6 +148,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		A_TEXTURE = ResourceUtils.getGlobalImage("a.png");
 		S_TEXTURE = ResourceUtils.getGlobalImage("s.png");
 		D_TEXTURE = ResourceUtils.getGlobalImage("d.png");
+		SHIFT_W_TEXTURE = ResourceUtils.getGlobalImage("shiftw.png");
+		SHIFT_A_TEXTURE = ResourceUtils.getGlobalImage("shifta.png");
+		SHIFT_S_TEXTURE = ResourceUtils.getGlobalImage("shifts.png");
+		SHIFT_D_TEXTURE = ResourceUtils.getGlobalImage("shiftd.png");
 	}
 
 	public void postLoad1() {
@@ -325,13 +334,24 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 					squarePositionX + Game.SQUARE_WIDTH - 48, squarePositionY + Game.SQUARE_HEIGHT - 48,
 					squarePositionX + Game.SQUARE_WIDTH - 16, squarePositionY + Game.SQUARE_HEIGHT - 16);
 			// specific action
-		} else if (action != null && action.image != null && !(action instanceof ActionMove)
-				&& !(action instanceof ActionLoiter)) {
+		} else if (action != null && action.image != null) {
+
+			if (action instanceof ActionMove && action.legal)
+				return;
+
+			if (action instanceof ActionLoiter && action.legal)
+				return;
+
+			Color color = Color.WHITE;
+			if (!action.legal) {
+				color = Color.RED;
+			}
+
 			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 			TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 48,
 					squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX + Game.SQUARE_WIDTH - 16,
-					squarePositionY + Game.SQUARE_HEIGHT - 16);
+					squarePositionY + Game.SQUARE_HEIGHT - 16, color);
 			// TextUtils.printTextWithImages(new Object[] { action },
 			// squarePositionX + 16/* Game.SQUARE_WIDTH - 48 */, squarePositionY
 			// + Game.SQUARE_HEIGHT - 48, 128,

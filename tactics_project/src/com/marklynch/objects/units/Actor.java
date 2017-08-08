@@ -820,8 +820,8 @@ public class Actor extends GameObject {
 			float activityX1 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
 			float activityX2 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
 					+ Game.font.getWidth(activityDescription);
-			float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 60;
-			float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 80;
+			float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT - 20;
+			float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
 			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
 			TextUtils.printTextWithImages(new Object[] { activityDescription }, activityX1, activityY1,
 					Integer.MAX_VALUE, false);

@@ -63,10 +63,26 @@ import mdesl.graphics.Texture;
 
 public class Level {
 
+	// Controls for tutorial buttons
 	public static boolean wHasBeenPressed = false;
+	public static boolean ctrlActionHasBeenPressed = false;
+	public static boolean altActionHasBeenPressed = false;
+	public static boolean shiftActionHasBeenPressed = false;
+	// public static boolean ctrlWHasBeenPressed = false;
+	// public static boolean altWHasBeenPressed = false;
+	// public static boolean shiftWHasBeenPressed = false;
 	public static boolean aHasBeenPressed = false;
+	// public static boolean ctrlAasBeenPressed = false;
+	// public static boolean altAHasBeenPressed = false;
+	// public static boolean shiftAHasBeenPressed = false;
 	public static boolean sHasBeenPressed = false;
+	// public static boolean ctrlSHasBeenPressed = false;
+	// public static boolean altSHasBeenPressed = false;
+	// public static boolean shiftSHasBeenPressed = false;
 	public static boolean dHasBeenPressed = false;
+	// public static boolean ctrlDHasBeenPressed = false;
+	// public static boolean altDHasBeenPressed = false;
+	// public static boolean shiftDHasBeenPressed = false;
 
 	public int width;
 	public int height;
@@ -862,26 +878,50 @@ public class Level {
 
 		if (player.squareGameObjectIsOn.getSquareToLeftOf() != null) {
 			player.squareGameObjectIsOn.getSquareToLeftOf().drawAction();
-			if (!aHasBeenPressed)
+			if (!aHasBeenPressed) {
 				player.squareGameObjectIsOn.getSquareToLeftOf().drawKey(Square.A_TEXTURE);
+			} else if (!shiftActionHasBeenPressed) {
+				Action secondaryAction = player.squareGameObjectIsOn.getSquareToLeftOf()
+						.getSecondaryActionForTheSquareOrObject(Game.level.player);
+				if (secondaryAction != null && secondaryAction.enabled && secondaryAction.legal)
+					player.squareGameObjectIsOn.getSquareToLeftOf().drawKey(Square.SHIFT_A_TEXTURE);
+			}
 		}
 
 		if (player.squareGameObjectIsOn.getSquareToRightOf() != null) {
 			player.squareGameObjectIsOn.getSquareToRightOf().drawAction();
-			if (!dHasBeenPressed)
+			if (!dHasBeenPressed) {
 				player.squareGameObjectIsOn.getSquareToRightOf().drawKey(Square.D_TEXTURE);
+			} else if (!shiftActionHasBeenPressed) {
+				Action secondaryAction = player.squareGameObjectIsOn.getSquareToRightOf()
+						.getSecondaryActionForTheSquareOrObject(Game.level.player);
+				if (secondaryAction != null && secondaryAction.enabled && secondaryAction.legal)
+					player.squareGameObjectIsOn.getSquareToRightOf().drawKey(Square.SHIFT_D_TEXTURE);
+			}
 		}
 
 		if (player.squareGameObjectIsOn.getSquareAbove() != null) {
 			player.squareGameObjectIsOn.getSquareAbove().drawAction();
-			if (!wHasBeenPressed)
+			if (!wHasBeenPressed) {
 				player.squareGameObjectIsOn.getSquareAbove().drawKey(Square.W_TEXTURE);
+			} else if (!shiftActionHasBeenPressed) {
+				Action secondaryAction = player.squareGameObjectIsOn.getSquareAbove()
+						.getSecondaryActionForTheSquareOrObject(Game.level.player);
+				if (secondaryAction != null && secondaryAction.enabled && secondaryAction.legal)
+					player.squareGameObjectIsOn.getSquareAbove().drawKey(Square.SHIFT_W_TEXTURE);
+			}
 		}
 
 		if (player.squareGameObjectIsOn.getSquareBelow() != null) {
 			player.squareGameObjectIsOn.getSquareBelow().drawAction();
-			if (!sHasBeenPressed)
+			if (!sHasBeenPressed) {
 				player.squareGameObjectIsOn.getSquareBelow().drawKey(Square.S_TEXTURE);
+			} else if (!shiftActionHasBeenPressed) {
+				Action secondaryAction = player.squareGameObjectIsOn.getSquareBelow()
+						.getSecondaryActionForTheSquareOrObject(Game.level.player);
+				if (secondaryAction != null && secondaryAction.enabled && secondaryAction.legal)
+					player.squareGameObjectIsOn.getSquareBelow().drawKey(Square.SHIFT_S_TEXTURE);
+			}
 		}
 
 		// In attack mode, draw attackable sqrs.
