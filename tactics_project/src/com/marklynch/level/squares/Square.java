@@ -25,13 +25,13 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.InventoryParent;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionPlaceMapMarker;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropItemsInInventory;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionPlaceMapMarker;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTakeAll;
@@ -45,7 +45,6 @@ import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Square extends AStarNode implements ActionableInWorld, InventoryParent {
@@ -309,24 +308,33 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
 		}
 
+		// ...
 		if (action == null || Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("action_select_object.png"),
-					squarePositionX + Game.SQUARE_WIDTH - 24, squarePositionY + Game.SQUARE_HEIGHT - 24,
+					squarePositionX + Game.SQUARE_WIDTH - 48, squarePositionY + Game.SQUARE_HEIGHT - 48,
 					squarePositionX + Game.SQUARE_WIDTH - 16, squarePositionY + Game.SQUARE_HEIGHT - 16);
-		} else if (action != null && action.image != null) {
+			// specific action
+		} else if (action != null && action.image != null && !(action instanceof ActionMove)
+				&& !(action instanceof ActionLoiter)) {
 			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-			TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 24,
-					squarePositionY + Game.SQUARE_HEIGHT - 24, squarePositionX + Game.SQUARE_WIDTH - 16,
+			TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 48,
+					squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX + Game.SQUARE_WIDTH - 16,
 					squarePositionY + Game.SQUARE_HEIGHT - 16);
-			if (action.enabled == false) {
-				TextureUtils.drawTexture(Action.x, squarePositionX + Game.SQUARE_WIDTH - 24,
-						squarePositionY + Game.SQUARE_HEIGHT - 24, squarePositionX + Game.SQUARE_WIDTH - 16,
-						squarePositionY + Game.SQUARE_HEIGHT - 16, Color.RED);
-
-			}
+			// TextUtils.printTextWithImages(new Object[] { action },
+			// squarePositionX + 16/* Game.SQUARE_WIDTH - 48 */, squarePositionY
+			// + Game.SQUARE_HEIGHT - 48, 128,
+			// false);
+			// if (action.enabled == false) {
+			// TextureUtils.drawTexture(Action.x, squarePositionX +
+			// Game.SQUARE_WIDTH - 48,
+			// squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX +
+			// Game.SQUARE_WIDTH - 16,
+			// squarePositionY + Game.SQUARE_HEIGHT - 16, Color.RED);
+			//
+			// }
 		}
 	}
 
