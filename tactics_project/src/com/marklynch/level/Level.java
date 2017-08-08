@@ -45,6 +45,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.script.Script;
@@ -95,7 +96,7 @@ public class Level {
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 
 	// public Vector<Actor> actors;
-	public transient Actor player;
+	public transient Player player;
 	public transient Actor activeActor;
 	public transient ArrayListMappedInanimateObjects<GameObject> inanimateObjectsOnGround;
 	public transient ArrayList<Projectile> projectiles = new ArrayList<Projectile>();

@@ -50,6 +50,7 @@ import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -423,7 +424,7 @@ public class Editor {
 
 		// Add player
 		// West Security
-		Actor player = Templates.Player.makeCopy(Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
+		Player player = Templates.Player.makeCopy(Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
 				Game.level.factions.get(0), null);
 		// Morts Mine
 		// Actor player = Templates.Player.makeCopy(Game.level.squares[80][39],

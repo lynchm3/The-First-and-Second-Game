@@ -21,6 +21,7 @@ import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.ui.button.Button;
 
@@ -345,6 +346,25 @@ public class UserInputLevel {
 
 		// if (square == Game.level.activeActor.squareGameObjectIsOn)
 		// return;
+
+		Game.level.player.playerPath = Game.level.player.getPathTo(square);
+		if (Game.level.player.playerPath == null)
+			return;
+		Game.level.player.playerPathIndex = 0;
+		Action moveAction = new ActionMove(Game.level.player,
+				Game.level.player.playerPath.squares.get(Game.level.player.playerPathIndex), true);
+		if (moveAction.enabled) {
+			moveAction.perform();
+			Game.level.player.playerPathIndex++;
+		} else {
+			Game.level.player.playerPath = null;
+			Game.level.player.playerPathIndex = 0;
+		}
+		if (1 == 1)
+			return;
+
+		// PATH TO
+		// CREATE QUEUE FROM PATH
 
 		if (Game.level.activeActor != Game.level.player)
 			return;
