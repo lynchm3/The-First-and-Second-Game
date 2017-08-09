@@ -29,7 +29,8 @@ import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
-import com.marklynch.level.popup.Popup;
+import com.marklynch.level.popup.PopupMenu;
+import com.marklynch.level.popup.PopupMenuActionButton;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -103,7 +104,7 @@ public class Level {
 	public transient ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	public transient ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
 
-	public ArrayList<Popup> popups = new ArrayList<Popup>();
+	public ArrayList<PopupMenu> popupMenus = new ArrayList<PopupMenu>();
 	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
 	public Toast toast;
 	public Conversation conversation;
@@ -261,12 +262,12 @@ public class Level {
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerInferno(Game.level.player);
-				for (Popup popup : Game.level.popups) {
+				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
 					}
 				}
-				Game.level.popups.clear();
+				Game.level.popupMenus.clear();
 			}
 		});
 		infernoButton.enabled = true;
@@ -279,12 +280,12 @@ public class Level {
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerSuperPeek(Game.level.player);
-				for (Popup popup : Game.level.popups) {
+				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
 					}
 				}
-				Game.level.popups.clear();
+				Game.level.popupMenus.clear();
 			}
 		});
 		superPeekButton.enabled = true;
@@ -297,12 +298,12 @@ public class Level {
 			public void click() {
 				new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
 						new PowerHealSelf(Game.level.player)).perform();
-				for (Popup popup : Game.level.popups) {
+				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
 					}
 				}
-				Game.level.popups.clear();
+				Game.level.popupMenus.clear();
 			}
 		});
 		healSelfButton.enabled = true;
@@ -315,12 +316,12 @@ public class Level {
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerHealTouch(Game.level.player);
-				for (Popup popup : Game.level.popups) {
+				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
 					}
 				}
-				Game.level.popups.clear();
+				Game.level.popupMenus.clear();
 			}
 		});
 		healTouchButton.enabled = true;
@@ -333,12 +334,12 @@ public class Level {
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerHealRanged(Game.level.player);
-				for (Popup popup : Game.level.popups) {
+				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
 					}
 				}
-				Game.level.popups.clear();
+				Game.level.popupMenus.clear();
 			}
 		});
 		healRangedButton.enabled = true;
@@ -351,12 +352,12 @@ public class Level {
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerUnlock(Game.level.player);
-				for (Popup popup : Game.level.popups) {
+				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
 					}
 				}
-				Game.level.popups.clear();
+				Game.level.popupMenus.clear();
 			}
 		});
 		unlockButton.enabled = true;
@@ -369,12 +370,12 @@ public class Level {
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerPoisonBlast(Game.level.player);
-				for (Popup popup : Game.level.popups) {
+				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
 					}
 				}
-				Game.level.popups.clear();
+				Game.level.popupMenus.clear();
 			}
 		});
 		poisonBlastButton.enabled = true;
@@ -386,12 +387,12 @@ public class Level {
 			public void click() {
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerBleed(Game.level.player);
-				for (Popup popup : Game.level.popups) {
+				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
 						button.removeHighlight();
 					}
 				}
-				Game.level.popups.clear();
+				Game.level.popupMenus.clear();
 			}
 		});
 		bleedButton.enabled = true;
@@ -475,13 +476,13 @@ public class Level {
 
 	public static void closeAllPopups() {
 
-		if (Game.level.popups.size() != 0) {
+		if (Game.level.popupMenus.size() != 0) {
 
-			int popupToRemoveIndex = Game.level.popups.size() - 1;
-			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
+			int popupToRemoveIndex = Game.level.popupMenus.size() - 1;
+			for (Button button : Game.level.popupMenus.get(popupToRemoveIndex).buttons) {
 				button.removeHighlight();
 			}
-			Game.level.popups.remove(popupToRemoveIndex);
+			Game.level.popupMenus.remove(popupToRemoveIndex);
 
 		}
 
@@ -1005,6 +1006,13 @@ public class Level {
 
 		}
 
+		if (popupMenus.size() == 2) {
+			if (popupMenus.get(1).highlightedButton instanceof PopupMenuActionButton) {
+				((PopupMenuActionButton) popupMenus.get(1).highlightedButton).drawSound();
+			}
+
+		}
+
 		// GL11.glColor4f;
 		// font60.drawString(0, 0, "YOUR", new Color(1.0f, 0.5f, 0.5f, 0.75f));
 		// font60.drawString(0, Game.SQUARE_HEIGHT, "TURN ", new Color(1.0f,
@@ -1112,8 +1120,8 @@ public class Level {
 			inventory.drawStaticUI();
 		}
 
-		if (!popups.isEmpty()) {
-			for (Popup popup : popups) {
+		if (!popupMenus.isEmpty()) {
+			for (PopupMenu popup : popupMenus) {
 				popup.draw();
 			}
 		}
@@ -1196,10 +1204,10 @@ public class Level {
 				return button;
 		}
 
-		if (!Game.level.popups.isEmpty()) {
+		if (!Game.level.popupMenus.isEmpty()) {
 
-			for (int i = popups.size() - 1; i >= 0; i--) {
-				for (Button button : popups.get(i).buttons) {
+			for (int i = popupMenus.size() - 1; i >= 0; i--) {
+				for (Button button : popupMenus.get(i).buttons) {
 					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 						return button;
 				}

@@ -9,13 +9,13 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 
-public class PopupSelectAction extends Popup {
-	public PopupButton selectSquareButton;
+public class PopupMenuSelectAction extends PopupMenu {
+	public PopupMenuButton selectSquareButton;
 	public ArrayList<Action> actions;
 	public float offsetX;
 	public float height = 40f;
 
-	public PopupSelectAction(float offsetX, float width, Level level, Square square, ArrayList<Action> actions) {
+	public PopupMenuSelectAction(float offsetX, float width, Level level, Square square, ArrayList<Action> actions) {
 
 		super(width, level, square);
 		this.actions = actions;
@@ -30,7 +30,7 @@ public class PopupSelectAction extends Popup {
 		for (int i = 0; i < actions.size(); i++) {
 			final int index = i;
 
-			final PopupActionButton actionButton = new PopupActionButton(offsetX, buttons.size() * height - 10, width,
+			final PopupMenuActionButton actionButton = new PopupMenuActionButton(offsetX, buttons.size() * height - 10, width,
 					height, null, null, actions.get(i).actionName, true, true, actions.get(i), this);
 			actionButton.enabled = actions.get(index).enabled;
 
@@ -44,12 +44,12 @@ public class PopupSelectAction extends Popup {
 						}
 						highlightedButton.down = true;
 						actions.get(index).perform();
-						for (Popup popup : Game.level.popups) {
+						for (PopupMenu popup : Game.level.popupMenus) {
 							for (Button button : popup.buttons) {
 								button.removeHighlight();
 							}
 						}
-						Game.level.popups.clear();
+						Game.level.popupMenus.clear();
 					}
 				}
 			};

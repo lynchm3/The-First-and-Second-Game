@@ -6,15 +6,15 @@ import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
 
-public class PopupButton extends Button {
+public class PopupMenuButton extends Button {
 
 	boolean xFromLeft;
 	boolean yFromTop;
 	public Object object;
-	public Popup popup;
+	public PopupMenu popup;
 
-	public PopupButton(float x, float y, float width, float height, String enabledTexturePath,
-			String disabledTexturePath, boolean xFromLeft, boolean yFromTop, Object object, Popup popup, String text) {
+	public PopupMenuButton(float x, float y, float width, float height, String enabledTexturePath,
+			String disabledTexturePath, boolean xFromLeft, boolean yFromTop, Object object, PopupMenu popup, String text) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;

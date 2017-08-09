@@ -8,19 +8,19 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.ui.button.Button;
 
-public class Popup {
+public class PopupMenu {
 
 	public float width;
-	public Vector<PopupButton> buttons = new Vector<PopupButton>();
+	public Vector<PopupMenuButton> buttons = new Vector<PopupMenuButton>();
 	public Level level;
 	public Square square;
-	public PopupButton selectSquareButton;
+	public PopupMenuButton selectSquareButton;
 	public float drawPositionX, drawPositionY;
 
 	public Button highlightedButton;
 	public int highlightedButtonIndex = 0;
 
-	public Popup(float width, Level level, Square square) {
+	public PopupMenu(float width, Level level, Square square) {
 		this.width = width;
 		this.level = level;
 		this.square = square;
@@ -48,15 +48,15 @@ public class Popup {
 	}
 
 	public void depressButtons() {
-		for (PopupButton button : buttons) {
+		for (PopupMenuButton button : buttons) {
 			button.down = false;
 			// button.depress();
 		}
 
 	}
 
-	public PopupButton getButton(Object object) {
-		for (PopupButton button : buttons) {
+	public PopupMenuButton getButton(Object object) {
+		for (PopupMenuButton button : buttons) {
 			if (button.object == object)
 				return button;
 		}

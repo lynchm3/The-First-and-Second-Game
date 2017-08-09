@@ -7,14 +7,14 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 
-public class PopupSelectObject extends Popup {
-	public PopupButton selectSquareButton;
+public class PopupMenuSelectObject extends PopupMenu {
+	public PopupMenuButton selectSquareButton;
 
-	public PopupSelectObject(float width, Level level, Square square) {
+	public PopupMenuSelectObject(float width, Level level, Square square) {
 
 		super(width, level, square);
 
-		selectSquareButton = new PopupButton(0, 0, 200, 30, null, null, true, true, square, this, "" + square);
+		selectSquareButton = new PopupMenuButton(0, 0, 200, 30, null, null, true, true, square, this, "" + square);
 
 		selectSquareButton.clickListener = new ClickListener() {
 
@@ -24,7 +24,7 @@ public class PopupSelectObject extends Popup {
 					button.down = false;
 				}
 				highlightedButton.down = true;
-				squareSelected(PopupSelectObject.this.square);
+				squareSelected(PopupMenuSelectObject.this.square);
 			}
 		};
 		updateObjectsButtons();
@@ -34,7 +34,7 @@ public class PopupSelectObject extends Popup {
 
 		buttons.clear();
 
-		if (PopupSelectObject.this.square.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0)
+		if (PopupMenuSelectObject.this.square.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0)
 			buttons.add(selectSquareButton);
 
 		for (int i = 0; i < square.inventory.size(); i++) {
@@ -46,7 +46,7 @@ public class PopupSelectObject extends Popup {
 			// BUT... I dont want the buttons to zoom :P
 
 			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
-				final PopupButton objectButton = new PopupButton(0, buttons.size() * 30, 200, 30, null, null, true,
+				final PopupMenuButton objectButton = new PopupMenuButton(0, buttons.size() * 30, 200, 30, null, null, true,
 						true, gameObject, this, "" + gameObject);
 
 				objectButton.clickListener = new ClickListener() {
@@ -74,26 +74,26 @@ public class PopupSelectObject extends Popup {
 	}
 
 	public void gameObjectSelected(GameObject gameObject) {
-		if (Game.level.popups.size() == 2) {
+		if (Game.level.popupMenus.size() == 2) {
 			int popupToRemoveIndex = 1;
-			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
+			for (Button button : Game.level.popupMenus.get(popupToRemoveIndex).buttons) {
 				button.removeHighlight();
 			}
-			Game.level.popups.remove(popupToRemoveIndex);
+			Game.level.popupMenus.remove(popupToRemoveIndex);
 		}
-		Game.level.popups.add(new PopupSelectAction(100, 200, level, gameObject.squareGameObjectIsOn,
+		Game.level.popupMenus.add(new PopupMenuSelectAction(100, 200, level, gameObject.squareGameObjectIsOn,
 				gameObject.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 
 	public void squareSelected(Square square) {
-		if (Game.level.popups.size() == 2) {
+		if (Game.level.popupMenus.size() == 2) {
 			int popupToRemoveIndex = 1;
-			for (Button button : Game.level.popups.get(popupToRemoveIndex).buttons) {
+			for (Button button : Game.level.popupMenus.get(popupToRemoveIndex).buttons) {
 				button.removeHighlight();
 			}
-			Game.level.popups.remove(popupToRemoveIndex);
+			Game.level.popupMenus.remove(popupToRemoveIndex);
 		}
-		Game.level.popups.add(new PopupSelectAction(100, 200, level, square,
+		Game.level.popupMenus.add(new PopupMenuSelectAction(100, 200, level, square,
 				square.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 }
