@@ -279,6 +279,24 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	}
 
+	public void drawAttackHighlight() {
+
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+
+	}
+
+	public void drawSoundHighlight() {
+
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+
+	}
+
 	public void drawRedHighlight() {
 
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;

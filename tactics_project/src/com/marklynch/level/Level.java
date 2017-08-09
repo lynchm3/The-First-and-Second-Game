@@ -960,7 +960,7 @@ public class Level {
 
 			for (Square attackableSquare : attackableSquares) {
 				if (attackableSquare.visibleToPlayer) {
-					attackableSquare.drawHighlight();
+					attackableSquare.drawAttackHighlight();
 				}
 			}
 		}

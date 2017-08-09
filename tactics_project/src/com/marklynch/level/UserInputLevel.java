@@ -22,6 +22,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionUsePower;
+import com.marklynch.objects.units.Player;
 import com.marklynch.ui.button.Button;
 
 public class UserInputLevel {
@@ -367,25 +368,14 @@ public class UserInputLevel {
 		// if (square == Game.level.activeActor.squareGameObjectIsOn)
 		// return;
 
-		if (square.seenByPlayer) {
-			Game.level.player.playerPathToMove = Game.level.player.getPathTo(square);
-			if (Game.level.player.playerPathToMove == null)
+		// Click to move
+		if (key == -1 && openMenu == false && secondary == false && attack == false && square.seenByPlayer) {
+			Player.playerPathToMove = Game.level.player.getPathTo(square);
+			if (Player.playerPathToMove == null)
 				return;
-			Game.level.player.playerPathIndex = 0;
-		}
-		// Action moveAction = new ActionMove(Game.level.player,
-		// Game.level.player.playerPath.squares.get(Game.level.player.playerPathIndex),
-		// true);
-		// if (moveAction.enabled) {
-		// moveAction.perform();
-		// Game.level.player.playerPathIndex++;
-		// } else {
-		// Game.level.player.playerPath = null;
-		// Game.level.player.playerPathIndex = 0;
-		// }
-
-		if (1 == 1)
+			Player.playerPathIndex = 0;
 			return;
+		}
 
 		// PATH TO
 		// CREATE QUEUE FROM PATH
