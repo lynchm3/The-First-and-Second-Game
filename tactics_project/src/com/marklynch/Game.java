@@ -29,10 +29,11 @@ import mdesl.test.Util;
 public class Game {
 
 	// DEBUG
-	public static boolean fullVisiblity = true;
-	public static boolean redHighlightOnRestrictedSquares = true;
-	public static boolean showAILines = true;
-	public static boolean showTriggerLines = true;
+	public static boolean fullVisiblity = false;
+	public static boolean redHighlightOnRestrictedSquares = false;
+	public static boolean showAILines = false;
+	public static boolean showTriggerLines = false;
+	public static boolean highlightPath = false;;
 
 	// PLAYER START POSITION
 

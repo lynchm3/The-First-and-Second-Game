@@ -195,19 +195,21 @@ public class UserInputLevel {
 			}
 		}
 
-		// remove path highlight
-		if (Game.level.player.playerPathToDraw != null) {
-			for (Square square : Game.level.player.playerPathToDraw.squares) {
-				square.highlight = false;
-			}
-		}
-
-		// Add path highlight
-		if (Game.squareMouseIsOver != null) {
-			Game.level.player.playerPathToDraw = Game.level.player.getPathTo(Game.squareMouseIsOver);
+		if (Game.highlightPath) {
+			// remove path highlight
 			if (Game.level.player.playerPathToDraw != null) {
 				for (Square square : Game.level.player.playerPathToDraw.squares) {
-					square.highlight = true;
+					square.highlight = false;
+				}
+			}
+
+			// Add path highlight
+			if (Game.squareMouseIsOver != null) {
+				Game.level.player.playerPathToDraw = Game.level.player.getPathTo(Game.squareMouseIsOver);
+				if (Game.level.player.playerPathToDraw != null) {
+					for (Square square : Game.level.player.playerPathToDraw.squares) {
+						square.highlight = true;
+					}
 				}
 			}
 		}
@@ -365,10 +367,12 @@ public class UserInputLevel {
 		// if (square == Game.level.activeActor.squareGameObjectIsOn)
 		// return;
 
-		Game.level.player.playerPathToMove = Game.level.player.getPathTo(square);
-		if (Game.level.player.playerPathToMove == null)
-			return;
-		Game.level.player.playerPathIndex = 0;
+		if (square.seenByPlayer) {
+			Game.level.player.playerPathToMove = Game.level.player.getPathTo(square);
+			if (Game.level.player.playerPathToMove == null)
+				return;
+			Game.level.player.playerPathIndex = 0;
+		}
 		// Action moveAction = new ActionMove(Game.level.player,
 		// Game.level.player.playerPath.squares.get(Game.level.player.playerPathIndex),
 		// true);

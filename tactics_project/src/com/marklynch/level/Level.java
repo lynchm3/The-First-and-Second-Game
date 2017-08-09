@@ -226,7 +226,7 @@ public class Level {
 		buttons.add(showTriggerLinesButton);
 
 		Button highlightRestrictedButton = new LevelButton(660f, 40f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "HILITE SQRS", false, false, Color.BLACK, Color.WHITE);
+				"undo_button_disabled.png", "RSTRCTD SQRS", false, false, Color.BLACK, Color.WHITE);
 		highlightRestrictedButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -235,6 +235,24 @@ public class Level {
 		});
 		highlightRestrictedButton.enabled = true;
 		buttons.add(highlightRestrictedButton);
+
+		Button highlightOPathButton = new LevelButton(770f, 40f, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "PATH SQRS", false, false, Color.BLACK, Color.WHITE);
+		highlightOPathButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.highlightPath = !Game.highlightPath;
+				if (Game.highlightPath == false) {
+					if (Game.level.player.playerPathToDraw != null) {
+						for (Square square : Game.level.player.playerPathToDraw.squares) {
+							square.highlight = false;
+						}
+					}
+				}
+			}
+		});
+		highlightOPathButton.enabled = true;
+		buttons.add(highlightOPathButton);
 
 		Button infernoButton = new LevelButton(110f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
 				"INFERNO", false, false, Color.BLACK, Color.WHITE);
@@ -1136,7 +1154,8 @@ public class Level {
 
 		if (!this.script.checkIfBlocking() && currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);
-		} else if (Player.playerPathToMove != null && Player.playerPathIndex != Player.playerPathToMove.squares.size()) {
+		} else if (Player.playerPathToMove != null
+				&& Player.playerPathIndex != Player.playerPathToMove.squares.size()) {
 			Action moveAction = new ActionMove(Game.level.player,
 					Game.level.player.playerPathToMove.squares.get(Player.playerPathIndex), true);
 			if (moveAction.enabled) {
