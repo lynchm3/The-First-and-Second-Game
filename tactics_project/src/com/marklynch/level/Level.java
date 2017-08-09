@@ -43,6 +43,7 @@ import com.marklynch.objects.Vein;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLoiter;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
@@ -1135,6 +1136,20 @@ public class Level {
 
 		if (!this.script.checkIfBlocking() && currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);
+		} else if (Player.playerPathToMove != null && Player.playerPathIndex != Player.playerPathToMove.squares.size()) {
+			Action moveAction = new ActionMove(Game.level.player,
+					Game.level.player.playerPathToMove.squares.get(Player.playerPathIndex), true);
+			if (moveAction.enabled) {
+				moveAction.perform();
+				Game.level.player.playerPathIndex++;
+				if (Player.playerPathIndex == Game.level.player.playerPathToMove.squares.size()) {
+					Player.playerPathToMove = null;
+					Player.playerPathIndex = 0;
+				}
+			} else {
+				Game.level.player.playerPathToMove = null;
+				Game.level.player.playerPathIndex = 0;
+			}
 		}
 		// } else if (currentFactionMoving != factions.get(0)) {
 		// currentFactionMoving.update(delta);

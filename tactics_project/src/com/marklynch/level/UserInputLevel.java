@@ -21,7 +21,6 @@ import com.marklynch.level.popup.PopupSelectObject;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.ui.button.Button;
 
@@ -196,6 +195,23 @@ public class UserInputLevel {
 			}
 		}
 
+		// remove path highlight
+		if (Game.level.player.playerPathToDraw != null) {
+			for (Square square : Game.level.player.playerPathToDraw.squares) {
+				square.highlight = false;
+			}
+		}
+
+		// Add path highlight
+		if (Game.squareMouseIsOver != null) {
+			Game.level.player.playerPathToDraw = Game.level.player.getPathTo(Game.squareMouseIsOver);
+			if (Game.level.player.playerPathToDraw != null) {
+				for (Square square : Game.level.player.playerPathToDraw.squares) {
+					square.highlight = true;
+				}
+			}
+		}
+
 		// Clear path highlights
 		for (int i = 0; i < Game.level.width; i++) {
 			for (int j = 0; j < Game.level.height; j++) {
@@ -341,33 +357,34 @@ public class UserInputLevel {
 
 	public static void interactWith(Square square, int key, boolean openMenu, boolean secondary, boolean attack) {
 
+		if (Game.level.activeActor != Game.level.player)
+			return;
 		// if (interactedThisTurn)
 		// return;
 
 		// if (square == Game.level.activeActor.squareGameObjectIsOn)
 		// return;
 
-		Game.level.player.playerPath = Game.level.player.getPathTo(square);
-		if (Game.level.player.playerPath == null)
+		Game.level.player.playerPathToMove = Game.level.player.getPathTo(square);
+		if (Game.level.player.playerPathToMove == null)
 			return;
 		Game.level.player.playerPathIndex = 0;
-		Action moveAction = new ActionMove(Game.level.player,
-				Game.level.player.playerPath.squares.get(Game.level.player.playerPathIndex), true);
-		if (moveAction.enabled) {
-			moveAction.perform();
-			Game.level.player.playerPathIndex++;
-		} else {
-			Game.level.player.playerPath = null;
-			Game.level.player.playerPathIndex = 0;
-		}
+		// Action moveAction = new ActionMove(Game.level.player,
+		// Game.level.player.playerPath.squares.get(Game.level.player.playerPathIndex),
+		// true);
+		// if (moveAction.enabled) {
+		// moveAction.perform();
+		// Game.level.player.playerPathIndex++;
+		// } else {
+		// Game.level.player.playerPath = null;
+		// Game.level.player.playerPathIndex = 0;
+		// }
+
 		if (1 == 1)
 			return;
 
 		// PATH TO
 		// CREATE QUEUE FROM PATH
-
-		if (Game.level.activeActor != Game.level.player)
-			return;
 
 		if (Game.level.levelMode == LevelMode.LEVEL_MODE_CAST) {
 			if (openMenu)
