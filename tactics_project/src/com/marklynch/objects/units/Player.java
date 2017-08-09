@@ -12,7 +12,8 @@ import mdesl.graphics.Color;
 
 public class Player extends Actor {
 
-	public static AIPath playerPath = null;
+	public static AIPath playerPathToDraw = null;
+	public static AIPath playerPathToMove = null;
 	public static int playerPathIndex = 0;
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
