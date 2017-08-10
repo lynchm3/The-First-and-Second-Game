@@ -32,6 +32,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuActionButton;
 import com.marklynch.level.popup.PopupTextBox;
+import com.marklynch.level.popup.PopupToast;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -109,6 +110,8 @@ public class Level {
 
 	public ArrayList<PopupMenu> popupMenus = new ArrayList<PopupMenu>();
 	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
+	public ArrayList<PopupToast> popupToasts = new ArrayList<PopupToast>();
+
 	public Toast toast;
 	public Conversation conversation;
 	public transient LevelButton endTurnButton;
@@ -1134,6 +1137,11 @@ public class Level {
 				popupTextBox.draw();
 			}
 		}
+		if (!popupToasts.isEmpty()) {
+			for (PopupToast popupToast : popupToasts) {
+				popupToast.draw();
+			}
+		}
 
 	}
 
@@ -1172,10 +1180,15 @@ public class Level {
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
 			if (Player.playerPathToMove == null) {
 				if (!player.playerTargetSquare.inventory.canShareSquare()) {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { "Theres a "
-							+ player.playerTargetSquare.inventory.getGameObjectThatCantShareSquare() + " there!" }));
+
+					Object[] objects = new Object[] { "Theres a ",
+							player.playerTargetSquare.inventory.getGameObjectThatCantShareSquare(), " there!" };
+					popupToasts.add(new PopupToast(objects));
+					Game.level.logOnScreen(new ActivityLog(objects));
 				} else {
-					Game.level.logOnScreen(new ActivityLog(new Object[] { "There's no available path" }));
+					Object[] objects = new Object[] { "There's no available path" };
+					popupToasts.add(new PopupToast(objects));
+					Game.level.logOnScreen(new ActivityLog(objects));
 
 				}
 				Player.playerTargetSquare = null;
@@ -1198,12 +1211,16 @@ public class Level {
 			}
 
 			if (!action.enabled) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] {
-						"Path blocked by " + squareToMoveTo.inventory.getGameObjectThatCantShareSquare() + "!" }));
+				Object[] objects = new Object[] { "Path blocked by ",
+						squareToMoveTo.inventory.getGameObjectThatCantShareSquare(), "!" };
+				popupToasts.add(new PopupToast(objects));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
 				Player.playerPathToMove = null;
 				Player.playerTargetSquare = null;
 			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { "Stopped before restricted area!" }));
+				Object[] objects = new Object[] { "Stopped before restricted area!" };
+				popupToasts.add(new PopupToast(objects));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
 				Player.playerPathToMove = null;
 				Player.playerTargetSquare = null;
 			} else {
@@ -1302,6 +1319,8 @@ public class Level {
 					player.inventory.remove(gameObject);
 				}
 			}
+
+			popupToasts.clear();
 
 		}
 
