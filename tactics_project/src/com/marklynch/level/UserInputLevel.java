@@ -408,21 +408,25 @@ public class UserInputLevel {
 		}
 
 		if (defaultAction != null) {
+
 			defaultAction.perform();
+
 			// if (!(action instanceof ActionRead) && !(action instanceof
 			// ActionTalk))
 			// interactedThisTurn = true;
 			if (defaultAction.movement && defaultAction.enabled) {
 
 				if (key == Keyboard.KEY_UP) {
+					Level.wHasBeenPressed = true;
 					Game.dragY += Game.SQUARE_HEIGHT;
 				} else if (key == Keyboard.KEY_DOWN) {
+					Level.sHasBeenPressed = true;
 					Game.dragY -= Game.SQUARE_HEIGHT;
-
 				} else if (key == Keyboard.KEY_LEFT) {
+					Level.aHasBeenPressed = true;
 					Game.dragX += Game.SQUARE_WIDTH;
-
 				} else if (key == Keyboard.KEY_RIGHT) {
+					Level.dHasBeenPressed = true;
 					Game.dragX -= Game.SQUARE_WIDTH;
 
 				}
@@ -647,8 +651,6 @@ public class UserInputLevel {
 				Level.altActionHasBeenPressed = true;
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
-			} else {
-				Level.wHasBeenPressed = true;
 			}
 			upTyped();
 		} else if (character == 'a' || character == 'A') {
@@ -658,8 +660,6 @@ public class UserInputLevel {
 				Level.altActionHasBeenPressed = true;
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
-			} else {
-				Level.aHasBeenPressed = true;
 			}
 			leftTyped();
 		} else if (character == 's' || character == 'S') {
@@ -669,8 +669,6 @@ public class UserInputLevel {
 				Level.altActionHasBeenPressed = true;
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
-			} else {
-				Level.sHasBeenPressed = true;
 			}
 			downTyped();
 		} else if (character == 'd' || character == 'D') {
@@ -680,8 +678,6 @@ public class UserInputLevel {
 				Level.altActionHasBeenPressed = true;
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
-			} else {
-				Level.dHasBeenPressed = true;
 			}
 			rightTyped();
 		}

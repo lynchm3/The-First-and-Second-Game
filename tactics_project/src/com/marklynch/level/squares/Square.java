@@ -333,7 +333,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// GL11.glPopMatrix();
 	}
 
-	public void drawAction() {
+	public Action drawAction() {
 
 		Action action = null;
 		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
@@ -355,10 +355,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		} else if (action != null && action.image != null) {
 
 			if (action instanceof ActionMove && action.legal)
-				return;
+				return action;
 
 			if (action instanceof ActionLoiter && action.legal)
-				return;
+				return action;
 
 			Color color = Color.WHITE;
 			if (!action.legal) {
@@ -383,6 +383,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			//
 			// }
 		}
+		return action;
 	}
 
 	public void drawKey(Texture texture) {
