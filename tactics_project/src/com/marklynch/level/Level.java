@@ -1229,6 +1229,10 @@ public class Level {
 				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
 					Player.playerPathToMove = null;
 					Player.playerTargetSquare = null;
+				} else {
+
+					Object[] objects = new Object[] { "Press anything to stop moving" };
+					popupToasts.add(new PopupToast(objects));
 				}
 			}
 		}
