@@ -345,7 +345,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 
 		// ...
-		if (action == null || Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("action_select_object.png"),
@@ -444,12 +444,15 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
-		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
-		if (targetGameObject != null) {
-			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
-		} else {
-			return getDefaultActionPerformedOnThisInWorld(performer);
-		}
+		// GameObject targetGameObject =
+		// this.inventory.getGameObjectThatCantShareSquare();
+		// if (targetGameObject != null) {
+		// return
+		// targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
+		// } else {
+		return getDefaultActionPerformedOnThisInWorld(performer);
+		// }
+		// return
 	}
 
 	public Action getSecondaryActionForTheSquareOrObject(Actor performer) {
@@ -493,7 +496,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 
 		if (this == Game.level.player.squareGameObjectIsOn) {
-			return null;
+			return new ActionLoiter(performer, this);
 		} else if (performer.travelDistance >= performer.straightLineDistanceTo(this)) {
 
 			HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);

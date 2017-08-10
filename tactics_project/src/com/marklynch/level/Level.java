@@ -34,6 +34,7 @@ import com.marklynch.level.popup.PopupMenuActionButton;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
@@ -43,8 +44,10 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
@@ -1164,10 +1167,25 @@ public class Level {
 			currentFactionMoving.update(delta);
 		} else if (Player.playerPathToMove != null
 				&& Player.playerPathIndex != Player.playerPathToMove.squares.size()) {
-			Action moveAction = new ActionMove(Game.level.player,
-					Game.level.player.playerPathToMove.squares.get(Player.playerPathIndex), true);
-			if (moveAction.enabled) {
-				moveAction.perform();
+
+			Square nextSquareInPath = Game.level.player.playerPathToMove.squares.get(Player.playerPathIndex);
+			Action action;
+
+			HidingPlace hidingPlace = (HidingPlace) nextSquareInPath.inventory.getGameObjectOfClass(HidingPlace.class);
+			if (hidingPlace != null && hidingPlace.remainingHealth > 0) {
+				if (player.hiding && player.squareGameObjectIsOn == nextSquareInPath) {
+					action = new ActionStopHiding(player, hidingPlace);
+				} else {
+					action = new ActionHide(player, hidingPlace);
+				}
+			} else {
+				action = new ActionMove(Game.level.player,
+						Game.level.player.playerPathToMove.squares.get(Player.playerPathIndex), true);
+
+			}
+
+			if (action.enabled) {
+				action.perform();
 				Game.level.player.playerPathIndex++;
 				if (Player.playerPathIndex == Game.level.player.playerPathToMove.squares.size()) {
 					Player.playerPathToMove = null;
