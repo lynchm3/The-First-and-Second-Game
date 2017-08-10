@@ -1165,8 +1165,9 @@ public class Level {
 
 		if (!this.script.checkIfBlocking() && currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);
-		} else if (Player.playerPathToMove != null
-				&& Player.playerPathIndex != Player.playerPathToMove.squares.size()) {
+		}
+		// Auto move player
+		else if (Player.playerPathToMove != null && Player.playerPathIndex != Player.playerPathToMove.squares.size()) {
 
 			Square nextSquareInPath = Game.level.player.playerPathToMove.squares.get(Player.playerPathIndex);
 			Action action;
@@ -1184,16 +1185,24 @@ public class Level {
 
 			}
 
-			if (action.enabled) {
+			if (!action.enabled) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { "Path blocked!" }));
+
+				Game.level.player.playerPathToMove = null;
+				Game.level.player.playerPathIndex = 0;
+			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && player.playerPathIndex != 0) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { "Path is trespassing!" }));
+
+				Game.level.player.playerPathToMove = null;
+				Game.level.player.playerPathIndex = 0;
+
+			} else {
 				action.perform();
 				Game.level.player.playerPathIndex++;
 				if (Player.playerPathIndex == Game.level.player.playerPathToMove.squares.size()) {
 					Player.playerPathToMove = null;
 					Player.playerPathIndex = 0;
 				}
-			} else {
-				Game.level.player.playerPathToMove = null;
-				Game.level.player.playerPathIndex = 0;
 			}
 		}
 		// } else if (currentFactionMoving != factions.get(0)) {
