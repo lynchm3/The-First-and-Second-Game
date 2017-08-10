@@ -278,8 +278,13 @@ public class Actor extends GameObject {
 
 	public AIPath getPathTo(Square target) {
 
-		if (target == null || (target.inventory.canBeMovedTo() == false)) {
+		if (target == null) {
+			return null;
+		}
 
+		if (this instanceof Player && !target.seenByPlayer) {
+
+		} else if (target.inventory.canBeMovedTo() == false) {
 			return null;
 		}
 

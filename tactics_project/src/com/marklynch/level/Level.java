@@ -1171,27 +1171,35 @@ public class Level {
 
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
 			if (Player.playerPathToMove == null) {
+				if (!player.playerTargetSquare.inventory.canShareSquare()) {
+					Game.level.logOnScreen(new ActivityLog(new Object[] { "Theres a "
+							+ player.playerTargetSquare.inventory.getGameObjectThatCantShareSquare() + " there!" }));
+				} else {
+					Game.level.logOnScreen(new ActivityLog(new Object[] { "There's no available path" }));
+
+				}
 				Player.playerTargetSquare = null;
 				return;
 			}
 
-			Square nextSquareInPath = Game.level.player.playerPathToMove.squares.get(0);
+			Square squareToMoveTo = Game.level.player.playerPathToMove.squares.get(0);
 			Action action;
 
-			HidingPlace hidingPlace = (HidingPlace) nextSquareInPath.inventory.getGameObjectOfClass(HidingPlace.class);
+			HidingPlace hidingPlace = (HidingPlace) squareToMoveTo.inventory.getGameObjectOfClass(HidingPlace.class);
 			if (hidingPlace != null && hidingPlace.remainingHealth > 0) {
-				if (player.hiding && player.squareGameObjectIsOn == nextSquareInPath) {
+				if (player.hiding && player.squareGameObjectIsOn == squareToMoveTo) {
 					action = new ActionStopHiding(player, hidingPlace);
 				} else {
 					action = new ActionHide(player, hidingPlace);
 				}
 			} else {
-				action = new ActionMove(Game.level.player, nextSquareInPath, true);
+				action = new ActionMove(Game.level.player, squareToMoveTo, true);
 
 			}
 
 			if (!action.enabled) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { "Path blocked!" }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] {
+						"Path blocked by " + squareToMoveTo.inventory.getGameObjectThatCantShareSquare() + "!" }));
 				Player.playerPathToMove = null;
 				Player.playerTargetSquare = null;
 			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
