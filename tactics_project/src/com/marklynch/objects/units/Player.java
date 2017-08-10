@@ -14,7 +14,9 @@ public class Player extends Actor {
 
 	public static AIPath playerPathToDraw = null;
 	public static AIPath playerPathToMove = null;
-	public static int playerPathIndex = 0;
+	public static Square playerTargetSquare = null;
+
+	public static boolean playerFirstMove = false;
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,

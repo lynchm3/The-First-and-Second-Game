@@ -46,7 +46,7 @@ public class AStarSearch {
 	 * Find the path from the start node to the end node. A list of AStarNodes
 	 * is returned, or null if the path is not found.
 	 */
-	public List findPath(Actor actor, AStarNode startNode, AStarNode goalNode) {
+	public List findPath(Actor actor, AStarNode startNode, AStarNode goalNode, int maxCount) {
 
 		PriorityList openList = new PriorityList();
 		LinkedList closedList = new LinkedList();
@@ -57,7 +57,7 @@ public class AStarSearch {
 		openList.add(startNode);
 
 		int count = 0;
-		while (!openList.isEmpty() && count < 100) {
+		while (!openList.isEmpty() && count < maxCount) {
 			AStarNode node = (AStarNode) openList.removeFirst();
 			if (node == goalNode) {
 				// construct the path from start to goal
@@ -88,7 +88,7 @@ public class AStarSearch {
 			}
 			closedList.add(node);
 			count++;
-			if (count == 100) {
+			if (count == maxCount) {
 				return constructPath(node);
 				// return constructPath(node);
 				// return null;

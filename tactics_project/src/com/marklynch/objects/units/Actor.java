@@ -284,9 +284,13 @@ public class Actor extends GameObject {
 		}
 
 		// ASTARSEACH.FINDPATH
+		int maxPathSize = 100;
+		if (this instanceof Player) {
+			maxPathSize = 1000;
+		}
 
 		LinkedList<AStarNode> aStarNodesPath = (LinkedList<AStarNode>) new AStarSearch().findPath(this,
-				this.squareGameObjectIsOn, target);
+				this.squareGameObjectIsOn, target, maxPathSize);
 
 		if (aStarNodesPath != null) {
 			Vector<Square> squarePath = new Vector<Square>();

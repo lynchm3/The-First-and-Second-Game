@@ -1167,9 +1167,15 @@ public class Level {
 			currentFactionMoving.update(delta);
 		}
 		// Auto move player
-		else if (Player.playerPathToMove != null && Player.playerPathIndex != Player.playerPathToMove.squares.size()) {
+		else if (Player.playerTargetSquare != null) {
 
-			Square nextSquareInPath = Game.level.player.playerPathToMove.squares.get(Player.playerPathIndex);
+			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
+			if (Player.playerPathToMove == null) {
+				Player.playerTargetSquare = null;
+				return;
+			}
+
+			Square nextSquareInPath = Game.level.player.playerPathToMove.squares.get(0);
 			Action action;
 
 			HidingPlace hidingPlace = (HidingPlace) nextSquareInPath.inventory.getGameObjectOfClass(HidingPlace.class);
@@ -1180,34 +1186,24 @@ public class Level {
 					action = new ActionHide(player, hidingPlace);
 				}
 			} else {
-				action = new ActionMove(Game.level.player,
-						Game.level.player.playerPathToMove.squares.get(Player.playerPathIndex), true);
+				action = new ActionMove(Game.level.player, nextSquareInPath, true);
 
 			}
 
 			if (!action.enabled) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { "Path blocked!" }));
-
-				Game.level.player.playerPathToMove = null;
-				Game.level.player.playerPathIndex = 0;
-			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && player.playerPathIndex != 0) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { "Stopped before tresspassing!" }));
-
-				Game.level.player.playerPathToMove = null;
-				Game.level.player.playerPathIndex = 0;
-
-			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && player.playerPathIndex != 0) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { "Stopped before tresspassing!" }));
-
-				Game.level.player.playerPathToMove = null;
-				Game.level.player.playerPathIndex = 0;
-
+				Player.playerPathToMove = null;
+				Player.playerTargetSquare = null;
+			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { "Stopped before restricted area!" }));
+				Player.playerPathToMove = null;
+				Player.playerTargetSquare = null;
 			} else {
 				action.perform();
-				Game.level.player.playerPathIndex++;
-				if (Player.playerPathIndex == Game.level.player.playerPathToMove.squares.size()) {
+				Player.playerFirstMove = false;
+				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
 					Player.playerPathToMove = null;
-					Player.playerPathIndex = 0;
+					Player.playerTargetSquare = null;
 				}
 			}
 		}

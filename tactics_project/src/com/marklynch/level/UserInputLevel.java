@@ -373,11 +373,8 @@ public class UserInputLevel {
 
 		if (key == -1 && openMenu == false && secondary == false && attack == false
 				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1) {
-
-			Player.playerPathToMove = Game.level.player.getPathTo(square);
-			if (Player.playerPathToMove == null)
-				return;
-			Player.playerPathIndex = 0;
+			Player.playerTargetSquare = square;
+			Player.playerFirstMove = true;
 			return;
 		}
 
