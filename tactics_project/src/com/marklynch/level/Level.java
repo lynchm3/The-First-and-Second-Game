@@ -1191,7 +1191,13 @@ public class Level {
 				Game.level.player.playerPathToMove = null;
 				Game.level.player.playerPathIndex = 0;
 			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && player.playerPathIndex != 0) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { "Path is trespassing!" }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { "Stopped before tresspassing!" }));
+
+				Game.level.player.playerPathToMove = null;
+				Game.level.player.playerPathIndex = 0;
+
+			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && player.playerPathIndex != 0) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { "Stopped before tresspassing!" }));
 
 				Game.level.player.playerPathToMove = null;
 				Game.level.player.playerPathIndex = 0;

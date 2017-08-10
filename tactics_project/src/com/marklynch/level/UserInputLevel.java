@@ -370,8 +370,10 @@ public class UserInputLevel {
 		// return;
 
 		// Click to move
-		if (key == -1 && openMenu == false && secondary == false && attack == false && square.seenByPlayer
+
+		if (key == -1 && openMenu == false && secondary == false && attack == false
 				&& Game.level.player.straightLineDistanceTo(square) > 1) {
+
 			Player.playerPathToMove = Game.level.player.getPathTo(square);
 			if (Player.playerPathToMove == null)
 				return;
