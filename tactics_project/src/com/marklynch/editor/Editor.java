@@ -433,6 +433,7 @@ public class Editor {
 		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null, player));
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));
 		player.inventory.add(Templates.HATCHET.makeCopy(null, player));
+		player.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, player));
 		player.inventory.add(Templates.SERRATED_SPOON.makeCopy(null, player));
 		player.inventory.add(Templates.DINNER_BELL.makeCopy(null, player));
 		player.inventory.add(Templates.CLEAVER.makeCopy(null, player));
