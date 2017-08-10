@@ -8,6 +8,7 @@ import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
@@ -88,6 +89,9 @@ public class Templates {
 			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 32, 94);
 	public static final Axe HATCHET = new Axe("Hatchet", 1, 1, "hatchet.png", 100, null, true, false, false, false, 1f,
 			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 21, 99);
+	public static final Knife HUNTING_KNIFE = new Knife("Hunting Knife", 1, 1, "hunting_knife.png", 100, null, true,
+			false, false, false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null,
+			47, 58);
 	public static final Weapon HOE = new Weapon("Hoe", 2, 1, 1, "hoe.png", 100, null, true, false, false, false, 1f, 1f,
 			1f, 1f, 0f, 0f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 61, 90);
 	public static final Weapon SICKLE = new Weapon("Sickle", 3, 1, 1, "sickle.png", 100, null, true, false, false,
