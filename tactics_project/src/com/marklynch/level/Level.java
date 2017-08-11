@@ -70,6 +70,8 @@ import mdesl.graphics.Texture;
 
 public class Level {
 
+	public static boolean loggedThisTurn = false;
+
 	// Controls for tutorial buttons
 	public static boolean wHasBeenPressed = false;
 	public static boolean ctrlActionHasBeenPressed = false;
@@ -122,7 +124,7 @@ public class Level {
 
 	public boolean showLog = true;
 
-	public transient int turn = 1;
+	public transient static int turn = 1;
 	public ArrayList<Faction> factions;
 	public transient Faction currentFactionMoving;
 	public transient int currentFactionMovingIndex;
@@ -1356,7 +1358,8 @@ public class Level {
 		currentFactionMoving = factions.get(currentFactionMovingIndex);
 		if (currentFactionMovingIndex == 0) {
 			this.turn++;
-			Game.level.logOnScreen(new ActivityLog(new Object[] { "-----TURN " + turn + "-----" }));
+			loggedThisTurn = false;
+
 			Game.level.activeActor = player;
 			// Game.level.activeActor.equippedWeapon =
 			// Game.level.activeActor.getWeaponsInInventory().get(0);
@@ -1403,6 +1406,10 @@ public class Level {
 	}
 
 	public void logOnScreen(ActivityLog stringToLog) {
+		if (!Level.loggedThisTurn) {
+			Level.loggedThisTurn = true;
+			Game.level.logOnScreen(new ActivityLog(new Object[] { "-----TURN " + Level.turn + "-----" }));
+		}
 		activityLogger.addActivityLog(stringToLog);
 	}
 

@@ -230,7 +230,8 @@ public class Game {
 		try {
 			Display.setDisplayMode(new DisplayMode((int) width, (int) height));
 			Display.setResizable(true);
-			Display.setLocation(960, 0);
+			// Display.setLocation(960, 0);
+			Display.setLocation(0, 0);
 			Display.create();
 			Display.setVSyncEnabled(true);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
