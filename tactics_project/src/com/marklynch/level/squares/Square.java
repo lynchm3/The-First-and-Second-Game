@@ -293,22 +293,26 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 
-		if (this.getSquareAbove() != null && !attackableSquares.contains(this.getSquareAbove())) {
+		if (this.getSquareAbove() != null && !attackableSquares.contains(this.getSquareAbove())
+				&& this.getSquareAbove() != Game.level.player.squareGameObjectIsOn) {
 			TextureUtils.drawTexture(ATTACK_TOP_BORDER_TEXTURE, squarePositionX, squarePositionY,
 					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 		}
 
-		if (this.getSquareBelow() != null && !attackableSquares.contains(this.getSquareBelow())) {
+		if (this.getSquareBelow() != null && !attackableSquares.contains(this.getSquareBelow())
+				&& this.getSquareBelow() != Game.level.player.squareGameObjectIsOn) {
 			TextureUtils.drawTexture(ATTACK_BOTTOM_BORDER_TEXTURE, squarePositionX, squarePositionY,
 					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 		}
 
-		if (this.getSquareToLeftOf() != null && !attackableSquares.contains(this.getSquareToLeftOf())) {
+		if (this.getSquareToLeftOf() != null && !attackableSquares.contains(this.getSquareToLeftOf())
+				&& this.getSquareToLeftOf() != Game.level.player.squareGameObjectIsOn) {
 			TextureUtils.drawTexture(ATTACK_LEFT_BORDER_TEXTURE, squarePositionX, squarePositionY,
 					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 		}
 
-		if (this.getSquareToRightOf() != null && !attackableSquares.contains(this.getSquareToRightOf())) {
+		if (this.getSquareToRightOf() != null && !attackableSquares.contains(this.getSquareToRightOf())
+				&& this.getSquareToRightOf() != Game.level.player.squareGameObjectIsOn) {
 			TextureUtils.drawTexture(ATTACK_RIGHT_BORDER_TEXTURE, squarePositionX, squarePositionY,
 					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 		}
