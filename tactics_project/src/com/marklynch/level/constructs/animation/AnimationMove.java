@@ -32,19 +32,11 @@ public class AnimationMove extends Animation {
 
 	public void update(double delta) {
 
-		if (Game.level.activeActor == Game.level.player)
-			System.out.println("animation.update delta = " + delta);
-
 		if (completed)
 			return;
 
 		durationSoFar += delta;
-
-		if (Game.level.activeActor == Game.level.player)
-			System.out.println("durationSoFar = " + durationSoFar);
 		double progress = durationSoFar / durationToReach;
-		if (Game.level.activeActor == Game.level.player)
-			System.out.println("progress = " + progress);
 		if (progress >= 1) {
 			completed = true;
 			offsetX = 0;
@@ -52,10 +44,6 @@ public class AnimationMove extends Animation {
 		} else {
 			offsetX = (int) (startOffsetX * (1 - progress));
 			offsetY = (int) (startOffsetY * (1 - progress));
-			if (Game.level.activeActor == Game.level.player)
-				System.out.println("offsetX = " + offsetX);
-			if (Game.level.activeActor == Game.level.player)
-				System.out.println("offsetY = " + offsetY);
 		}
 
 	}
