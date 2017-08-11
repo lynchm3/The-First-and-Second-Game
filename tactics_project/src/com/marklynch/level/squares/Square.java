@@ -83,6 +83,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public static Texture SHIFT_A_TEXTURE;
 	public static Texture SHIFT_S_TEXTURE;
 	public static Texture SHIFT_D_TEXTURE;
+	public static Texture ATTACK_LEFT_BORDER_TEXTURE;
+	public static Texture ATTACK_RIGHT_BORDER_TEXTURE;
+	public static Texture ATTACK_TOP_BORDER_TEXTURE;
+	public static Texture ATTACK_BOTTOM_BORDER_TEXTURE;
 
 	public transient boolean showingDialogs = false;
 	// public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
@@ -152,6 +156,11 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		SHIFT_A_TEXTURE = ResourceUtils.getGlobalImage("shifta.png");
 		SHIFT_S_TEXTURE = ResourceUtils.getGlobalImage("shifts.png");
 		SHIFT_D_TEXTURE = ResourceUtils.getGlobalImage("shiftd.png");
+
+		ATTACK_LEFT_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_left_border.png");
+		ATTACK_RIGHT_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_right_border.png");
+		ATTACK_TOP_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_top_border.png");
+		ATTACK_BOTTOM_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_bottom_border.png");
 	}
 
 	public void postLoad1() {
@@ -279,12 +288,30 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	}
 
-	public void drawAttackHighlight() {
+	public void drawAttackHighlight(ArrayList<Square> attackableSquares) {
 
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+
+		if (this.getSquareAbove() != null && !attackableSquares.contains(this.getSquareAbove())) {
+			TextureUtils.drawTexture(ATTACK_TOP_BORDER_TEXTURE, squarePositionX, squarePositionY,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		}
+
+		if (this.getSquareBelow() != null && !attackableSquares.contains(this.getSquareBelow())) {
+			TextureUtils.drawTexture(ATTACK_BOTTOM_BORDER_TEXTURE, squarePositionX, squarePositionY,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		}
+
+		if (this.getSquareToLeftOf() != null && !attackableSquares.contains(this.getSquareToLeftOf())) {
+			TextureUtils.drawTexture(ATTACK_LEFT_BORDER_TEXTURE, squarePositionX, squarePositionY,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		}
+
+		if (this.getSquareToRightOf() != null && !attackableSquares.contains(this.getSquareToRightOf())) {
+			TextureUtils.drawTexture(ATTACK_RIGHT_BORDER_TEXTURE, squarePositionX, squarePositionY,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		}
 
 	}
 

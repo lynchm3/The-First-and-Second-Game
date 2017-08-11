@@ -976,7 +976,7 @@ public class Level {
 
 			for (Square attackableSquare : attackableSquares) {
 				if (attackableSquare.visibleToPlayer) {
-					attackableSquare.drawAttackHighlight();
+					attackableSquare.drawAttackHighlight(attackableSquares);
 				}
 			}
 		}
