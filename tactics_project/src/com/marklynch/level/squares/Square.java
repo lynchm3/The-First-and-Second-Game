@@ -87,6 +87,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public static Texture ATTACK_RIGHT_BORDER_TEXTURE;
 	public static Texture ATTACK_TOP_BORDER_TEXTURE;
 	public static Texture ATTACK_BOTTOM_BORDER_TEXTURE;
+	public static Texture SOUND_TEXTURE;
 
 	public transient boolean showingDialogs = false;
 	// public transient int walkingDistanceToSquare = Integer.MAX_VALUE;
@@ -161,6 +162,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		ATTACK_RIGHT_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_right_border.png");
 		ATTACK_TOP_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_top_border.png");
 		ATTACK_BOTTOM_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_bottom_border.png");
+
+		SOUND_TEXTURE = ResourceUtils.getGlobalImage("sound.png");
 	}
 
 	public void postLoad1() {
@@ -319,13 +322,66 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	}
 
+	public void drawSoundHighlight2() {
+
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+
+		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+
+		float distanceX = Math.abs(this.xInGrid - Game.level.player.squareGameObjectIsOn.xInGrid);
+		float u1 = (distanceX + 10) * 0.09f;
+		float u2 = (distanceX + 10) * 0.09f + 0.09f;
+
+		float distanceY = Math.abs(this.yInGrid - Game.level.player.squareGameObjectIsOn.yInGrid);
+		float v1 = (distanceY + 10) * 0.09f;
+		float v2 = (distanceY + 10) * 0.09f + 0.09f;
+
+		// if (this.xInGrid > Game.level.player.squareGameObjectIsOn.xInGrid) {
+		// float temp = u1;
+		// u1 = u2;
+		// u2 = temp;
+		// }
+		//
+		// if (this.yInGrid > Game.level.player.squareGameObjectIsOn.yInGrid) {
+		// float temp = v1;
+		// v1 = v2;
+		// v2 = temp;
+		// }
+
+		TextureUtils.drawTexture(Square.SOUND_TEXTURE, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT, u1, v1, u2, v2);
+	}
+
 	public void drawSoundHighlight() {
 
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
+		float distanceX = this.xInGrid - Game.level.player.squareGameObjectIsOn.xInGrid;
+		float u1 = (distanceX + 11) * 0.09f;
+		float u2 = (distanceX + 11) * 0.09f + 0.09f;
+
+		float distanceY = this.yInGrid - Game.level.player.squareGameObjectIsOn.yInGrid;
+		float v1 = (distanceY + 11) * 0.09f;
+		float v2 = (distanceY + 11) * 0.09f + 0.09f;
+
+		if (this.xInGrid > Game.level.player.squareGameObjectIsOn.xInGrid) {
+			u1 = 1 - u1;
+			u2 = 1 - u2;
+		}
+
+		if (this.yInGrid > Game.level.player.squareGameObjectIsOn.yInGrid) {
+			v1 = 1 - v1;
+			v2 = 1 - v2;
+		}
+
+		TextureUtils.drawTexture(Square.SOUND_TEXTURE, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT, u1, v1, u2, v2);
 	}
 
 	public void drawRedHighlight() {

@@ -18,22 +18,20 @@ public class TextureUtils {
 	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2,
 			boolean inBounds, float boundsX1, float boundsX2, float boundsY1, float boundsY2, boolean backwards,
 			boolean upsideDown) {
-		drawTexture(texture, alpha, x1, y1, x2, y2, inBounds, boundsX1, boundsX2, boundsY1, boundsY2, backwards,
-				upsideDown, Color.WHITE);
+		drawTexture(texture, alpha, x1, y1, x2, y2, backwards, Color.WHITE);
 
 	}
 
 	// master drawTexture method
 	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2,
-			boolean inBounds, float boundsX1, float boundsX2, float boundsY1, float boundsY2, boolean backwards,
-			boolean upsideDown, Color color) {
+			boolean backwards, Color color) {
 
 		float vertexX1 = x1;
 		float vertexX2 = x2;
 		float vertexY1 = y1;
 		float vertexY2 = y2;
 
-		inBounds = false;
+		// inBounds = false;
 		// if (inBounds == true) {
 		//
 		// // x1
@@ -133,12 +131,48 @@ public class TextureUtils {
 
 	}
 
+	// master drawTexture method
+	public static void drawTexture(Texture texture, float x1, float y1, float x2, float y2, float u1, float v1,
+			float u2, float v2) {
+
+		float vertexX1 = x1;
+		float vertexX2 = x2;
+		float vertexY1 = y1;
+		float vertexY2 = y2;
+
+		Game.activeBatch.setColor(Color.WHITE);
+		// Game.batch.setColor(1f, 1.0f, 1.0f, 0.1f);
+
+		// draw some sprites... they will all be affected by our shaders
+		// batch.draw(tex, 10, 10);
+		// Game.batch.drawRegion(texture, textureX1, textureY1, textureX2,
+		// textureY2, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2
+		// - vertexY1);
+
+		// bind normal map to texture unit 1
+		glActiveTexture(GL_TEXTURE1);
+		if (!skipNormals) {
+			GameObject.grassNormalTexture.bind();
+		} else {
+			GameObject.skipNormalTexture.bind();
+		}
+		// bind diffuse color to texture unit 0
+		glActiveTexture(GL_TEXTURE0);
+		texture.bind();
+
+		// draw the texture unit 0 with our shader effect applied
+
+		Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1, u1, v1, u2, v2);
+		Game.activeBatch.setColor(Color.WHITE);
+
+	}
+
 	public static void drawTexture(Texture texture, float x1, float y1, float x2, float y2) {
-		drawTexture(texture, 1.0f, x1, y1, x2, y2, false, 0, 0, 0, 0, false, false, Color.WHITE);
+		drawTexture(texture, 1.0f, x1, y1, x2, y2, false, Color.WHITE);
 	}
 
 	public static void drawTexture(Texture texture, float x1, float y1, float x2, float y2, Color color) {
-		drawTexture(texture, 1.0f, x1, y1, x2, y2, false, 0, 0, 0, 0, false, false, color);
+		drawTexture(texture, 1.0f, x1, y1, x2, y2, false, color);
 	}
 
 	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2) {
