@@ -69,6 +69,20 @@ public class Game {
 	public static float dragX = 0;
 	public static float dragY = 0;
 
+	public static float getDragXWithOffset() {
+		if (level.player.playerTargetSquare == null)
+			return dragX - Game.level.player.animationMove.offsetX;
+		else
+			return dragX;
+	}
+
+	public static float getDragYWithOffset() {
+		if (level.player.playerTargetSquare == null)
+			return dragY - Game.level.player.animationMove.offsetY;
+		else
+			return dragY;
+	}
+
 	// West Security + Dungeon
 	// public static float dragX = -3072;
 	// public static float dragY = -192;

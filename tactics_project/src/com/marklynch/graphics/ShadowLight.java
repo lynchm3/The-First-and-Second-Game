@@ -182,10 +182,10 @@ public class ShadowLight {
 		// glClear(GL_COLOR_BUFFER_BIT);
 
 		// code for mouse light, spot light, spotlight, mouselight
-		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX -
+		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.getDragX() -
 		// (Game.windowWidth / 2) / Game.zoom)
 		// + (Mouse.getX()) / Game.zoom);
-		// float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY -
+		// float mouseYTransformed = ((Game.windowHeight / 2 - Game.getDragY() -
 		// (Game.windowHeight / 2) / Game.zoom)
 		// + (((Game.windowHeight - Mouse.getY())) / Game.zoom));
 		// float x = mouseXTransformed;
@@ -214,7 +214,7 @@ public class ShadowLight {
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
 		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-		view.translate(new Vector2f(Game.dragX, Game.dragY));
+		view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 		Game.activeBatch.updateUniforms();
 		if (Game.editorMode)
 			Game.level.drawBackground();
@@ -249,7 +249,7 @@ public class ShadowLight {
 			view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
 			view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-			view.translate(new Vector2f(Game.dragX, Game.dragY));
+			view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 			Game.activeBatch.updateUniforms();
 			if (Game.editorMode)
 				Game.level.drawForeground();
@@ -264,7 +264,7 @@ public class ShadowLight {
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
 		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-		view.translate(new Vector2f(Game.dragX, Game.dragY));
+		view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 		Game.activeBatch.updateUniforms();
 		try {
 			Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
@@ -286,7 +286,7 @@ public class ShadowLight {
 			view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
 			view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-			view.translate(new Vector2f(Game.dragX, Game.dragY));
+			view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 			Game.activeBatch.updateUniforms();
 			Game.editor.drawOverlay();
 			Game.activeBatch.flush();
@@ -312,11 +312,11 @@ public class ShadowLight {
 			view.scale(new Vector3f(Game.zoomLevels[Game.zoomLevelIndex - 1], Game.zoomLevels[Game.zoomLevelIndex - 1],
 					1f));
 			view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-			view.translate(new Vector2f(Game.dragX, Game.dragY));
+			view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 
 			Game.activeBatch.updateUniforms();
-			// System.out.println("Map draw Game.dragX = " + Game.dragX + ",
-			// Game.dragY = " + Game.dragY);
+			// System.out.println("Map draw Game.getDragX() = " + Game.getDragX() + ",
+			// Game.getDragY() = " + Game.getDragY());
 			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("bird.png"), 3000, 1000, 3000 + 128, 1000 + 128);
 			Game.activeBatch.flush();
 		}
@@ -406,7 +406,7 @@ public class ShadowLight {
 		view.translate(new Vector2f(Display.getWidth() / 2, Display.getHeight() / 2));
 		view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
 		view.translate(new Vector2f(-Display.getWidth() / 2, -Display.getHeight() / 2));
-		view.translate(new Vector2f(Game.dragX, Game.dragY));
+		view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 		// batch.begin();
 		// view.translate(new Vector2f(-(light.x - lightSize / 2f),
 		// -(light.y - lightSize / 2f)));

@@ -29,8 +29,8 @@ public class Popup {
 		int squarePositionX = square.xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = square.yInGrid * (int) Game.SQUARE_HEIGHT;
 
-		drawPositionX = (Game.windowWidth / 2) + (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.dragX));
-		drawPositionY = (Game.windowHeight / 2) + (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.dragY));
+		drawPositionX = (Game.windowWidth / 2) + (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.getDragXWithOffset()));
+		drawPositionY = (Game.windowHeight / 2) + (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.getDragYWithOffset()));
 
 		// QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width,
 		// drawPositionY, Game.windowHeight);

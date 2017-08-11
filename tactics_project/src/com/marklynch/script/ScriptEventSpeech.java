@@ -121,7 +121,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 				view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 				view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
 				view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
-				view.translate(new Vector2f(Game.dragX, Game.dragY));
+				view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 
 				// update the new view matrix
 				Game.activeBatch.updateUniforms();

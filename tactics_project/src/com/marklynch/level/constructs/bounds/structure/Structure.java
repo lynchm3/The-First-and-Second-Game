@@ -206,13 +206,13 @@ public class Structure {
 		int squarePositionX2 = (40 + gridX1 + ((gridX2 - gridX1 - 40) / 2)) * (int) Game.SQUARE_WIDTH;
 		int squarePositionY2 = (40 + gridY1 + ((gridY2 - gridY1 - 40) / 2)) * (int) Game.SQUARE_HEIGHT;
 		float drawPositionX1 = (Game.windowWidth / 2)
-				+ (Game.zoom * (squarePositionX1 - Game.windowWidth / 2 + Game.dragX));
+				+ (Game.zoom * (squarePositionX1 - Game.windowWidth / 2 + Game.getDragXWithOffset()));
 		float drawPositionY1 = (Game.windowHeight / 2)
-				+ (Game.zoom * (squarePositionY1 - Game.windowHeight / 2 + Game.dragY));
+				+ (Game.zoom * (squarePositionY1 - Game.windowHeight / 2 + Game.getDragYWithOffset()));
 		float drawPositionX2 = (Game.windowWidth / 2)
-				+ (Game.zoom * (squarePositionX2 - Game.windowWidth / 2 + Game.dragX));
+				+ (Game.zoom * (squarePositionX2 - Game.windowWidth / 2 + Game.getDragXWithOffset()));
 		float drawPositionY2 = (Game.windowHeight / 2)
-				+ (Game.zoom * (squarePositionY2 - Game.windowHeight / 2 + Game.dragY));
+				+ (Game.zoom * (squarePositionY2 - Game.windowHeight / 2 + Game.getDragYWithOffset()));
 		TextureUtils.drawTexture(image, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
 
 	}

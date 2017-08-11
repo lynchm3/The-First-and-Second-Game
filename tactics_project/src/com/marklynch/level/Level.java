@@ -194,8 +194,8 @@ public class Level {
 		centerOnPlayerButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.dragX = -Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + 800;
-				Game.dragY = -Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + 400;
+				Game.dragX = (-Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + 800);
+				Game.dragY = (-Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + 400);
 			}
 		});
 		centerOnPlayerButton.enabled = true;
@@ -703,8 +703,8 @@ public class Level {
 
 	public void drawBackground() {
 		// Squares
-		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2) / Game.zoom)
-				/ Game.SQUARE_WIDTH);
+		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.getDragXWithOffset()
+				- (Game.windowWidth / 2) / Game.zoom) / Game.SQUARE_WIDTH);
 		if (gridX1Bounds < 0)
 			gridX1Bounds = 0;
 
@@ -714,8 +714,8 @@ public class Level {
 		if (gridX2Bounds >= width)
 			gridX2Bounds = width - 1;
 
-		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.dragY - (Game.windowHeight / 2) / Game.zoom)
-				/ Game.SQUARE_HEIGHT);
+		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.getDragYWithOffset()
+				- (Game.windowHeight / 2) / Game.zoom) / Game.SQUARE_HEIGHT);
 		if (gridY1Bounds < 0)
 			gridY1Bounds = 0;
 
@@ -752,17 +752,18 @@ public class Level {
 
 		// Background decorations
 
-		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX -
+		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.getDragX()
+		// -
 		// (Game.windowWidth / 2) / Game.zoom)
 		// + (mouseXinPixels) / Game.zoom);
 
 		// GameObjects and actors
-		// int gridX1Bounds = -(int) (Game.dragX / Game.SQUARE_WIDTH) + 1;
+		// int gridX1Bounds = -(int) (Game.getDragX() / Game.SQUARE_WIDTH) + 1;
 		// if (gridX1Bounds < 0)
 		// gridX1Bounds = 0;
 
-		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2) / Game.zoom)
-				/ Game.SQUARE_WIDTH);
+		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.getDragXWithOffset()
+				- (Game.windowWidth / 2) / Game.zoom) / Game.SQUARE_WIDTH);
 		if (gridX1Bounds < 0)
 			gridX1Bounds = 0;
 
@@ -772,8 +773,8 @@ public class Level {
 		if (gridX2Bounds >= width)
 			gridX2Bounds = width - 1;
 
-		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.dragY - (Game.windowHeight / 2) / Game.zoom)
-				/ Game.SQUARE_HEIGHT);
+		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.getDragYWithOffset()
+				- (Game.windowHeight / 2) / Game.zoom) / Game.SQUARE_HEIGHT);
 		if (gridY1Bounds < 0)
 			gridY1Bounds = 0;
 

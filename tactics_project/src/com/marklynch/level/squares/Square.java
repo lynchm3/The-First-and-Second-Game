@@ -410,7 +410,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		// GL11.glTranslatef(Game.windowWidth / 2, Game.windowHeight / 2, 0);
 		// GL11.glScalef(Game.zoom, Game.zoom, 0);
-		// GL11.glTranslatef(Game.dragX, Game.dragY, 0);
+		// GL11.glTranslatef(Game.getDragX(), Game.getDragY(), 0);
 		// GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
 		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;

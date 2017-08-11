@@ -98,10 +98,10 @@ public class UserInputLevel {
 
 		// Transformed mouse coords
 
-		float mouseXTransformed = (((Game.windowWidth / 2) - Game.dragX - (Game.windowWidth / 2) / Game.zoom)
-				+ (mouseXinPixels) / Game.zoom);
-		float mouseYTransformed = ((Game.windowHeight / 2 - Game.dragY - (Game.windowHeight / 2) / Game.zoom)
-				+ (((Game.windowHeight - mouseYinPixels)) / Game.zoom));
+		float mouseXTransformed = (((Game.windowWidth / 2) - Game.getDragXWithOffset()
+				- (Game.windowWidth / 2) / Game.zoom) + (mouseXinPixels) / Game.zoom);
+		float mouseYTransformed = ((Game.windowHeight / 2 - Game.getDragYWithOffset()
+				- (Game.windowHeight / 2) / Game.zoom) + (((Game.windowHeight - mouseYinPixels)) / Game.zoom));
 
 		// Getting what square coordinates the mouse is on (as in squares on the
 		// grid)
