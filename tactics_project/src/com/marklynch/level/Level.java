@@ -1186,6 +1186,14 @@ public class Level {
 		for (Decoration decoration : decorations)
 			decoration.update(delta);
 
+		if (Player.playerTargetActor != null) {
+			Player.playerTargetSquare = Player.playerTargetActor.squareGameObjectIsOn;
+			if (player.straightLineDistanceTo(Player.playerTargetSquare) <= 1) {
+				Player.playerTargetSquare = null;
+				Player.playerTargetActor = null;
+			}
+		}
+
 		if (!this.script.checkIfBlocking() && currentFactionMoving != factions.get(0)) {
 			currentFactionMoving.update(delta);
 		}

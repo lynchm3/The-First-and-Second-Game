@@ -284,6 +284,7 @@ public class UserInputLevel {
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
 			// Left Click
 			Player.playerTargetSquare = null;
+			Player.playerTargetActor = null;
 			if (!hoveringOverPopup) {
 				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
@@ -316,6 +317,7 @@ public class UserInputLevel {
 		{
 			// Right Click
 			Player.playerTargetSquare = null;
+			Player.playerTargetActor = null;
 			if (Game.level.popupMenus.isEmpty() && Game.squareMouseIsOver != null) {
 				interactWith(Game.squareMouseIsOver, -1, true, false, false);
 				// Game.level.popups.add(new PopupSelectObject(100, Game.level,
@@ -591,6 +593,7 @@ public class UserInputLevel {
 
 	public static void keyTyped(char character) {
 
+		Player.playerTargetActor = null;
 		Player.playerTargetSquare = null;
 
 		if (Game.level.activeActor != Game.level.player)

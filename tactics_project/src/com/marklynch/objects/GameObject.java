@@ -26,6 +26,7 @@ import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
+import com.marklynch.objects.actions.ActionFollow;
 import com.marklynch.objects.actions.ActionGiveItemsInInventory;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionLootAll;
@@ -602,6 +603,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (this != Game.level.player && attackable)
 			actions.add(new ActionAttack(performer, this));
 		// }
+		if (this != Game.level.player && this instanceof Actor)
+			actions.add(new ActionFollow(Game.level.player, (Actor) this));
 
 		if (performer.equipped != null && this.canContainOtherObjects) {
 			actions.add(new ActionGiveSpecificItem(performer, this, performer.equipped, false));
