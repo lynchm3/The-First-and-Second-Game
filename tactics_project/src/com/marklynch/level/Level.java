@@ -1170,6 +1170,12 @@ public class Level {
 		for (GameObject inanimateObject : inanimateObjectsOnGround)
 			inanimateObject.updateRealtime(0);
 
+		for (Faction faction : factions) {
+			for (Actor actor : faction.actors) {
+				actor.updateRealtime(delta);
+			}
+		}
+
 		for (Decoration decoration : decorations)
 			decoration.update(delta);
 
@@ -1177,7 +1183,7 @@ public class Level {
 			currentFactionMoving.update(delta);
 		}
 		// Auto move player
-		else if (Player.playerTargetSquare != null) {
+		else if (Game.level.player.animationMove.completed && Player.playerTargetSquare != null) {
 
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
 			if (Player.playerPathToMove == null) {

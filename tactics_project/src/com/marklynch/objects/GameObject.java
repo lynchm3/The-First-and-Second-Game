@@ -11,6 +11,7 @@ import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.animation.AnimationMove;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleeding;
 import com.marklynch.level.conversation.Conversation;
@@ -107,6 +108,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public Object destroyedBy = null;
 	public Action destroyedByAction = null;
+
+	public AnimationMove animationMove = new AnimationMove();
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -210,9 +213,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (squareGameObjectIsOn != null) {
 
 			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ Game.SQUARE_WIDTH * drawOffsetX);
+					+ Game.SQUARE_WIDTH * drawOffsetX);// +
+														// animationMove.offsetX);
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ Game.SQUARE_HEIGHT * drawOffsetY);
+					+ Game.SQUARE_HEIGHT * drawOffsetY);// +
+														// animationMove.offsetY);
 
 			float alpha = 1.0f;
 
@@ -226,6 +231,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
 			// TextureUtils.skipNormals = false;
+
+			if (!(this instanceof Actor)) {
+
+				Game.activeBatch.flush();
+			}
 		}
 	}
 
@@ -538,6 +548,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public void updateRealtime(int delta) {
+
+		if (this instanceof Actor)
+			animationMove.update(delta);
 
 	}
 

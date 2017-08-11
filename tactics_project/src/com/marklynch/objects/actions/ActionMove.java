@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationMove;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
@@ -68,6 +69,8 @@ public class ActionMove extends Action {
 		if (actorInTheWay == Game.level.player) {
 			return;
 		}
+
+		performer.animationMove = new AnimationMove(actor.squareGameObjectIsOn, squareToMoveTo);
 
 		if (actorInTheWay == null) {
 			move(actor, squareToMoveTo);

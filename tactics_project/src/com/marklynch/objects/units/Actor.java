@@ -9,7 +9,6 @@ import java.util.Vector;
 import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
@@ -654,6 +653,10 @@ public class Actor extends GameObject {
 		}
 		// Draw health
 
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.translate(new Vector2f(animationMove.offsetX, animationMove.offsetY));
+		Game.activeBatch.updateUniforms();
+
 		if (remainingHealth != totalHealth) {
 
 			// draw sidebar on square
@@ -788,18 +791,7 @@ public class Actor extends GameObject {
 		}
 
 		Game.activeBatch.flush();
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.translate(new Vector2f(rotateXInPixels, rotateYInPixels));
-		view.rotate((float) Math.toRadians(60), new Vector3f(0f, 0f, 1f));
-		// view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		view.translate(new Vector2f(-rotateXInPixels, -rotateYInPixels));
-		Game.activeBatch.updateUniforms();
-
-		Game.activeBatch.flush();
-		view.translate(new Vector2f(rotateXInPixels, rotateYInPixels));
-		view.rotate((float) Math.toRadians(-60), new Vector3f(0f, 0f, 1f));
-		// view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
-		view.translate(new Vector2f(-rotateXInPixels, -rotateYInPixels));
+		view.translate(new Vector2f(-animationMove.offsetX, -animationMove.offsetY));
 		Game.activeBatch.updateUniforms();
 
 	}
