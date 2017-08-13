@@ -630,8 +630,7 @@ public class UserInputLevel {
 
 	public static void keyTyped(char character) {
 
-		if (Game.level.activeActor != Game.level.player)
-			return;
+		
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.get(0).keyTyped(character);
@@ -650,6 +649,9 @@ public class UserInputLevel {
 				Player.playerTargetActor = null;
 				return;
 			}
+			
+			if (Game.level.activeActor != Game.level.player)
+				return;
 
 			if (Game.level.popupMenus.size() != 0) {
 				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
