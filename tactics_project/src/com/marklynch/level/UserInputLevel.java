@@ -629,7 +629,7 @@ public class UserInputLevel {
 						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
 						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 			}
-		} else if (character == 'c') {
+		} else if (character == 'c' || character == 'C') {
 			System.out.println("zoom = " + Game.zoom + ", dragX = " + Game.dragX + ", dragY = " + Game.dragY);
 
 			if (Game.squareMouseIsOver != null) {
@@ -658,6 +658,8 @@ public class UserInputLevel {
 
 				lastCopy = now;
 			}
+		} else if (character == 'q' || character == 'Q') {
+			Game.level.centerButton.click();
 		} else if (character == 'w' || character == 'W') {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;

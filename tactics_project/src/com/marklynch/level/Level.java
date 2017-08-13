@@ -117,6 +117,7 @@ public class Level {
 	public Toast toast;
 	public Conversation conversation;
 	public transient LevelButton endTurnButton;
+	public transient LevelButton centerButton;
 	public transient LevelButton showHideLogButton;
 	public transient LevelButton editorButton;
 	public transient ArrayList<Button> buttons;
@@ -189,19 +190,16 @@ public class Level {
 		});
 		buttons.add(endTurnButton);
 
-		Button centerOnPlayerButton = new LevelButton(220f, 40f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "CENTER", false, false, Color.BLACK, Color.WHITE);
-		centerOnPlayerButton.setClickListener(new ClickListener() {
+		Button nothingButton = new LevelButton(220f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"nothing", false, false, Color.BLACK, Color.WHITE);
+		nothingButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.dragX = (-Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH)
-						+ Game.halfWindowWidth - Game.HALF_SQUARE_WIDTH;
-				Game.dragY = (-Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT)
-						+ Game.halfWindowHeight - Game.HALF_SQUARE_HEIGHT;
+
 			}
 		});
-		centerOnPlayerButton.enabled = true;
-		buttons.add(centerOnPlayerButton);
+		nothingButton.enabled = true;
+		buttons.add(nothingButton);
 
 		Button seeAllButton = new LevelButton(330f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
 				"FULL VIS", false, false, Color.BLACK, Color.WHITE);
@@ -467,6 +465,20 @@ public class Level {
 		});
 		inventoryButton.enabled = true;
 		buttons.add(inventoryButton);
+
+		centerButton = new LevelButton(110f, 440f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"CENTER [Q]", false, false, Color.BLACK, Color.WHITE);
+		centerButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.dragX = (-Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH)
+						+ Game.halfWindowWidth - Game.HALF_SQUARE_WIDTH;
+				Game.dragY = (-Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT)
+						+ Game.halfWindowHeight - Game.HALF_SQUARE_HEIGHT;
+			}
+		});
+		centerButton.enabled = true;
+		buttons.add(centerButton);
 	}
 
 	public void openCloseInventory() {
