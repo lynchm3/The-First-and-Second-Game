@@ -927,6 +927,9 @@ public class Level {
 
 		player.squareGameObjectIsOn.drawAction();
 
+		if (Player.playerTargetSquare != null)
+			Player.playerTargetSquare.drawX();
+
 		if (player.squareGameObjectIsOn.getSquareToLeftOf() != null) {
 			Action action = player.squareGameObjectIsOn.getSquareToLeftOf().drawAction();
 			if (!aHasBeenPressed && action != null && action instanceof ActionMove && action.legal && action.enabled) {
