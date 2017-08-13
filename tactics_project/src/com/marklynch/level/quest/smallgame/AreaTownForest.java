@@ -146,8 +146,27 @@ public class AreaTownForest {
 
 		Area areaTownForest = new Area("Town Forest", "map_forest.png", Square.DARK_GRASS_TEXTURE, 121, 11, 199, 90);
 		Game.level.areas.add(areaTownForest);
+
 		Area areaInnerTownForest = new Area("Inner Town Forest", null, Square.DARK_GRASS_TEXTURE, 146, 33, 180, 63);
 		Game.level.areas.add(areaInnerTownForest);
+
+		// Make the edges blend
+		for (int i = 121; i < 200; i++) {
+			for (int j = 11; j < 91; j++) {
+				float distanceFromCenter = Math.abs(i - centerX) + Math.abs(j - centerY);
+				if (Math.random() * 50 > distanceFromCenter)
+					continue;
+
+				// if (Math.random() * maxDiffFromCenterX > Math.abs(i -
+				// centerX) * 2)
+				// continue;
+				// if (Math.random() * maxDiffFromCenterY > Math.abs(j -
+				// centerY) * 2)
+				// continue;
+
+				Game.level.squares[i][j].imageTexture = Square.GRASS_TEXTURE;
+			}
+		}
 
 		// How to give them an area?
 		// Lets have a look @ Mort.
