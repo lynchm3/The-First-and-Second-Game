@@ -550,8 +550,29 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public void updateRealtime(int delta) {
 
-		if (this instanceof Actor)
-			animationMove.update(delta);
+		if (this instanceof Actor) {
+			Actor actor = (Actor) this;
+			if (!animationMove.completed) {
+				animationMove.update(delta);
+				// System.out.println(arg0);
+				actor.thisStepTime += delta;
+				if (actor.thisStepTime > 200 && actor.stepLeftTexture != null) {
+					if (actor.currentStepTexture == actor.stepLeftTexture) {
+						actor.imageTexture = actor.currentStepTexture = actor.stepRightTexture;
+						actor.thisStepTime = 0;
+					} else {
+						actor.imageTexture = actor.currentStepTexture = actor.stepLeftTexture;
+						actor.thisStepTime = 0;
+					}
+
+				} else if (actor.thisStepTime > actor.timePerStep && actor.stepLeftTexture != null) {
+					actor.imageTexture = actor.standingTexture;
+				}
+			} else {
+				actor.imageTexture = actor.standingTexture;
+				actor.thisStepTime = actor.timePerStep;
+			}
+		}
 
 	}
 

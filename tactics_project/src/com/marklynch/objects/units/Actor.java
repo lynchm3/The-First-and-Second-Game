@@ -136,11 +136,18 @@ public class Actor extends GameObject {
 	public ArrayList<Crime> crimesPerformedThisTurn = new ArrayList<Crime>();
 	public ArrayList<Crime> crimesPerformedInLifetime = new ArrayList<Crime>();
 
+	public Texture standingTexture = null;
+	public Texture stepLeftTexture = null;
+	public Texture stepRightTexture = null;
+	public Texture currentStepTexture = null;
 	public Texture hairImageTexture = null;
 	public Texture thoughtBubbleImageTexture = null;
 	public Square lastSquare = null;
 	public GameObject peekingThrough = null;
 	public Square peekSquare = null;
+
+	public int timePerStep = 100;
+	public int thisStepTime = timePerStep;
 
 	// public ArrayList<Crime> crimesWitnessed;
 	public Map<Actor, ArrayList<Crime>> crimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
@@ -162,6 +169,8 @@ public class Actor extends GameObject {
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner);
+		standingTexture = imageTexture;
+
 		this.strength = strength;
 		this.dexterity = dexterity;
 		this.intelligence = intelligence;

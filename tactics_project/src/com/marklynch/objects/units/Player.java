@@ -36,6 +36,8 @@ public class Player extends Actor {
 				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
 		hairImageTexture = ResourceUtils.getGlobalImage("hair.png");
+		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png");
+		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png");
 	}
 
 	@Override
