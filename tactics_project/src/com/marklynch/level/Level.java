@@ -1249,7 +1249,6 @@ public class Level {
 				Player.playerTargetSquare = null;
 			} else {
 				action.perform();
-				dragToFollowPlayer();
 				Player.playerFirstMove = false;
 				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
 					Player.playerPathToMove = null;

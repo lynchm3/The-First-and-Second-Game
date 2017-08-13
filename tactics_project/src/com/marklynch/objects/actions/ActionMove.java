@@ -91,6 +91,9 @@ public class ActionMove extends Action {
 			}
 		}
 
+		if (performer == Game.level.player)
+			Game.level.dragToFollowPlayer();
+
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();

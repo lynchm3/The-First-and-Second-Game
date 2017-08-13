@@ -415,7 +415,6 @@ public class UserInputLevel {
 			defaultAction.perform();
 
 			if (defaultAction.movement && defaultAction.enabled) {
-				Game.level.dragToFollowPlayer();
 
 				if (key == Keyboard.KEY_UP) {
 					Level.wHasBeenPressed = true;
