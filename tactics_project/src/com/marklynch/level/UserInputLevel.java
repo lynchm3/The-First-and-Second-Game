@@ -374,23 +374,6 @@ public class UserInputLevel {
 
 		if (Game.level.activeActor != Game.level.player)
 			return;
-		// if (interactedThisTurn)
-		// return;
-
-		// if (square == Game.level.activeActor.squareGameObjectIsOn)
-		// return;
-
-		// Click to move
-
-		if (key == -1 && openMenu == false && secondary == false && attack == false
-				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1) {
-			Player.playerTargetSquare = square;
-			Player.playerFirstMove = true;
-			return;
-		}
-
-		// PATH TO
-		// CREATE QUEUE FROM PATH
 
 		if (Game.level.levelMode == LevelMode.LEVEL_MODE_CAST) {
 			if (openMenu)
@@ -400,6 +383,13 @@ public class UserInputLevel {
 				// Game.level.selectedPower.cast(Game.level.player, square);
 				Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			}
+			return;
+		}
+
+		if (key == -1 && openMenu == false && secondary == false && attack == false
+				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1) {
+			Player.playerTargetSquare = square;
+			Player.playerFirstMove = true;
 			return;
 		}
 
@@ -630,8 +620,6 @@ public class UserInputLevel {
 
 	public static void keyTyped(char character) {
 
-		
-
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.get(0).keyTyped(character);
 			return;
@@ -649,7 +637,7 @@ public class UserInputLevel {
 				Player.playerTargetActor = null;
 				return;
 			}
-			
+
 			if (Game.level.activeActor != Game.level.player)
 				return;
 
