@@ -630,6 +630,7 @@ public class UserInputLevel {
 						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 			}
 		} else if (character == 'c') {
+			System.out.println("zoom = " + Game.zoom + ", dragX = " + Game.dragX + ", dragY = " + Game.dragY);
 
 			if (Game.squareMouseIsOver != null) {
 
