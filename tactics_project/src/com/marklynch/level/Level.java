@@ -268,6 +268,8 @@ public class Level {
 		infernoButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				player.playerTargetSquare = null;
+				player.playerTargetActor = null;
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerInferno(Game.level.player);
 				for (PopupMenu popup : Game.level.popupMenus) {
@@ -286,6 +288,8 @@ public class Level {
 		superPeekButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				player.playerTargetSquare = null;
+				player.playerTargetActor = null;
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerSuperPeek(Game.level.player);
 				for (PopupMenu popup : Game.level.popupMenus) {
@@ -304,6 +308,8 @@ public class Level {
 		healSelfButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				player.playerTargetSquare = null;
+				player.playerTargetActor = null;
 				new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
 						new PowerHealSelf(Game.level.player)).perform();
 				for (PopupMenu popup : Game.level.popupMenus) {
@@ -322,6 +328,8 @@ public class Level {
 		healTouchButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				player.playerTargetSquare = null;
+				player.playerTargetActor = null;
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerHealTouch(Game.level.player);
 				for (PopupMenu popup : Game.level.popupMenus) {
@@ -340,6 +348,8 @@ public class Level {
 		healRangedButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				player.playerTargetSquare = null;
+				player.playerTargetActor = null;
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerHealRanged(Game.level.player);
 				for (PopupMenu popup : Game.level.popupMenus) {
@@ -358,6 +368,8 @@ public class Level {
 		unlockButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				player.playerTargetSquare = null;
+				player.playerTargetActor = null;
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerUnlock(Game.level.player);
 				for (PopupMenu popup : Game.level.popupMenus) {
@@ -376,6 +388,8 @@ public class Level {
 		poisonBlastButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				player.playerTargetSquare = null;
+				player.playerTargetActor = null;
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerPoisonBlast(Game.level.player);
 				for (PopupMenu popup : Game.level.popupMenus) {
@@ -393,6 +407,8 @@ public class Level {
 		bleedButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				player.playerTargetSquare = null;
+				player.playerTargetActor = null;
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerBleed(Game.level.player);
 				for (PopupMenu popup : Game.level.popupMenus) {
