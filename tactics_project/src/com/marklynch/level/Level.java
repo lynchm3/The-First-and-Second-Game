@@ -194,30 +194,10 @@ public class Level {
 		centerOnPlayerButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				// Game.dragX += ((Mouse.getX() - Game.halfWindowWidth) /
-				// Game.zoom)
-				// - ((Mouse.getX() - Game.halfWindowWidth) / oldZoom);
-
-				Game.dragX = 0;// -Game.level.player.squareGameObjectIsOn.xInGrid
-								// * Game.SQUARE_WIDTH;// /
-								// Game.zoom);
-				Game.dragY = 0;// -Game.level.player.squareGameObjectIsOn.yInGrid
-								// * Game.SQUARE_HEIGHT;// /
-								// Game.zoom);
-
 				Game.dragX = (-Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH)
-						+ Game.halfWindowWidth - Game.halfWindowWidth / Game.zoom;
+						+ Game.halfWindowWidth - Game.HALF_SQUARE_WIDTH;
 				Game.dragY = (-Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT)
-						+ Game.halfWindowHeight - Game.halfWindowHeight / Game.zoom;
-				// Game.zoom);
-				// Game.dragY = -Game.level.player.squareGameObjectIsOn.yInGrid
-				// * Game.SQUARE_HEIGHT;// /
-				// Game.zoom);
-
-				// System.out.println("dragX = " + Game.dragX);
-
-				// Set the drag to 0,0, then drag to sqr?
-				// Theres a fucking offset somewhere thats fucking me.
+						+ Game.halfWindowHeight - Game.HALF_SQUARE_HEIGHT;
 			}
 		});
 		centerOnPlayerButton.enabled = true;
