@@ -1033,8 +1033,10 @@ public class Level {
 
 				// NORMAL MODE
 
-				Game.squareMouseIsOver.drawCursor();
-				Game.squareMouseIsOver.drawAction();
+				if (Player.playerTargetSquare == null) {
+					Game.squareMouseIsOver.drawCursor();
+					Game.squareMouseIsOver.drawAction();
+				}
 			}
 
 		}
