@@ -1269,7 +1269,7 @@ public class Level {
 					Player.playerTargetSquare = null;
 				} else {
 
-					Object[] objects = new Object[] { "Press anything to stop moving" };
+					Object[] objects = new Object[] { "WASD, SPACE or CLICK to stop" };
 					popupToasts.add(new PopupToast(objects));
 				}
 			}

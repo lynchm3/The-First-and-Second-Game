@@ -1,5 +1,6 @@
 package com.marklynch.level.popup;
 
+import com.marklynch.Game;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
@@ -16,7 +17,9 @@ public class PopupToast {
 		this.objects = objects;
 		drawPositionX = 500;
 		drawPositionY = 10;
-		this.width = 800;
+
+		if (objects.length == 1)
+			this.width = Game.font.getWidth((CharSequence) objects[0]) + 10;
 		this.height = 40;
 	}
 

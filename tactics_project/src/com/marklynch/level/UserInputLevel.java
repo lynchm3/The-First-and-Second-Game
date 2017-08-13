@@ -283,9 +283,8 @@ public class UserInputLevel {
 
 		// Lifted the mouse to perform click
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
+
 			// Left Click
-			Player.playerTargetSquare = null;
-			Player.playerTargetActor = null;
 			if (!hoveringOverPopup) {
 				for (PopupMenu popup : Game.level.popupMenus) {
 					for (Button button : popup.buttons) {
@@ -304,6 +303,9 @@ public class UserInputLevel {
 
 			} else if (Game.level.popupTextBoxes.size() != 0) {
 
+			} else if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
+				Player.playerTargetSquare = null;
+				Player.playerTargetActor = null;
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
 				if (Game.level.activeActor == Game.level.player) {
 					interactWith(Game.squareMouseIsOver, -1, false,
@@ -316,10 +318,13 @@ public class UserInputLevel {
 		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false)
 
 		{
+
 			// Right Click
-			Player.playerTargetSquare = null;
-			Player.playerTargetActor = null;
-			if (Game.level.popupMenus.isEmpty() && Game.squareMouseIsOver != null) {
+
+			if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
+				Player.playerTargetSquare = null;
+				Player.playerTargetActor = null;
+			} else if (Game.level.popupMenus.isEmpty() && Game.squareMouseIsOver != null) {
 				interactWith(Game.squareMouseIsOver, -1, true, false, false);
 				// Game.level.popups.add(new PopupSelectObject(100, Game.level,
 				// Game.squareMouseIsOver));
@@ -451,6 +456,12 @@ public class UserInputLevel {
 	}
 
 	public static void upPressed(boolean allowMenuControl, boolean held) {
+
+		if (Player.playerTargetSquare != null) {
+			Player.playerTargetSquare = null;
+			Player.playerTargetActor = null;
+			return;
+		}
 		if (!held)
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
@@ -474,6 +485,12 @@ public class UserInputLevel {
 	}
 
 	public static void downPressed(boolean allowMenuControl, boolean held) {
+
+		if (Player.playerTargetSquare != null) {
+			Player.playerTargetSquare = null;
+			Player.playerTargetActor = null;
+			return;
+		}
 		if (!held)
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
@@ -497,6 +514,11 @@ public class UserInputLevel {
 	}
 
 	public static void leftPressed(boolean allowMenuControl, boolean held) {
+		if (Player.playerTargetSquare != null) {
+			Player.playerTargetSquare = null;
+			Player.playerTargetActor = null;
+			return;
+		}
 		if (!held)
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
@@ -531,6 +553,11 @@ public class UserInputLevel {
 	}
 
 	public static void rightPressed(boolean allowMenuControl, boolean held) {
+		if (Player.playerTargetSquare != null) {
+			Player.playerTargetSquare = null;
+			Player.playerTargetActor = null;
+			return;
+		}
 		if (!held)
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
@@ -603,9 +630,6 @@ public class UserInputLevel {
 
 	public static void keyTyped(char character) {
 
-		Player.playerTargetActor = null;
-		Player.playerTargetSquare = null;
-
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
@@ -620,6 +644,12 @@ public class UserInputLevel {
 		}
 
 		if (character == ' ') {
+
+			if (Player.playerTargetSquare != null) {
+				Player.playerTargetSquare = null;
+				Player.playerTargetActor = null;
+				return;
+			}
 
 			if (Game.level.popupMenus.size() != 0) {
 				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
