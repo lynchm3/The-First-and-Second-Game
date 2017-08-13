@@ -14,8 +14,8 @@ public class PopupToast {
 
 	public PopupToast(Object[] objects) {
 		this.objects = objects;
-		drawPositionX = 300;
-		drawPositionY = 300;
+		drawPositionX = 500;
+		drawPositionY = 10;
 		this.width = 800;
 		this.height = 40;
 	}
