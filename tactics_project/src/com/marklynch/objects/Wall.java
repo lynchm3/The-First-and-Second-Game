@@ -87,12 +87,13 @@ public class Wall extends GameObject {
 			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
 			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
 			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float waterResistance, float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner) {
+			float waterResistance, float electricResistance, float poisonResistance, float slashResistance,
+			float weight, Actor owner) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
 				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, 
-				weight, owner);
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
+				slashResistance, weight, owner);
 		if (squareGameObjectIsOn != null) {
 			drawX1 = (int) (squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX);
 			drawX2 = (int) (drawX1 + width);
@@ -155,88 +156,77 @@ public class Wall extends GameObject {
 			}
 
 			// 7
-			if (topLeftInnerCorner) {
+			else if (topLeftInnerCorner) {
 				TextureUtils.drawTexture(textureTopLeftInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 
 			}
 
-			if (topRightInnerCorner) {
+			else if (topRightInnerCorner) {
 				TextureUtils.drawTexture(textureTopRightInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 
 			}
 
-			if (bottomRightInnerCorner) {
+			else if (bottomRightInnerCorner) {
 				TextureUtils.drawTexture(textureBottomRightInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 
 			}
 
-			if (bottomLeftInnerCorner) {
+			else if (bottomLeftInnerCorner) {
 				TextureUtils.drawTexture(textureBottomLeftInnerCorner, alpha, drawX1, drawY1, drawX2, drawY2);
 
 			}
 
 			// 5
-			if (fullLeftWall) {
+			else if (fullLeftWall) {
 				TextureUtils.drawTexture(textureFullLeftWall, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 			}
 
-			if (fullRightWall) {
+			else if (fullRightWall) {
 				TextureUtils.drawTexture(textureFullRightWall, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 			}
 
-			if (fullTopWall) {
+			else if (fullTopWall) {
 				TextureUtils.drawTexture(textureFullTopWall, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 			}
 
-			if (fullBottomWall) {
+			else if (fullBottomWall) {
 				TextureUtils.drawTexture(textureFullBottomWall, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 			}
 
 			// 4
-			if (cross) {
+			else if (cross) {
 				TextureUtils.drawTexture(textureCross, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 
 			}
 
 			// 3
-			if (topLeftOuterCorner) {
+			else if (topLeftOuterCorner) {
 				TextureUtils.drawTexture(textureTopLeftOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 
 			}
 
-			if (topRightOuterCorner) {
+			else if (topRightOuterCorner) {
 				TextureUtils.drawTexture(textureTopRightOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 
 			}
 
-			if (bottomRightOuterCorner) {
+			else if (bottomRightOuterCorner) {
 				TextureUtils.drawTexture(textureBottomRightOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 
 			}
 
-			if (bottomLeftOuterCorner) {
+			else if (bottomLeftOuterCorner) {
 				TextureUtils.drawTexture(textureBottomLeftOuterCorner, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 
 			}
 
 			// 2
-			if (horizontalWall) {
+			else if (horizontalWall) {
 				TextureUtils.drawTexture(textureHorizontalWall, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 			}
 
-			if (verticalWall) {
+			else if (verticalWall) {
 				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawY1, drawX2, drawY2);
-				return;
 			}
 
 			// if (connectedTop)
@@ -267,16 +257,18 @@ public class Wall extends GameObject {
 			// TextureUtils.drawTexture(textureTopLeft, alpha, topLeftDrawX1,
 			// topLeftDrawX2, topLeftDrawY1,
 			// topLeftDrawY2);
+
+			Game.activeBatch.flush();
 		}
 	}
 
 	@Override
 	public Wall makeCopy(Square square, Actor owner) {
-		return new Wall(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner);
+		return new Wall(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(), showInventory,
+				canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen,
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, slashResistance, weight, owner);
 	}
 
 	public void checkIfFullWall() {
