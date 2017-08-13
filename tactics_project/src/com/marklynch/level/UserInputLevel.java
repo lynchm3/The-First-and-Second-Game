@@ -87,6 +87,7 @@ public class UserInputLevel {
 	public static boolean keyStatePeriod = false;
 
 	public static AIPath path;
+	static boolean controllingMenu = false;
 
 	public static void userInput(int delta2) {
 
@@ -450,13 +451,17 @@ public class UserInputLevel {
 
 	}
 
-	public static void upTyped(boolean menuControl) {
+	public static void upPressed(boolean allowMenuControl, boolean held) {
+		if (!held)
+			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (Game.level.popupMenus.size() != 0) {
-			if (menuControl)
+			if (allowMenuControl) {
+				controllingMenu = true;
 				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).moveHighLightUp();
-		} else {
+			}
+		} else if (!controllingMenu) {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
 			if (y >= 0) {
 				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
@@ -469,14 +474,17 @@ public class UserInputLevel {
 		}
 	}
 
-	public static void downTyped(boolean menuControl) {
+	public static void downPressed(boolean allowMenuControl, boolean held) {
+		if (!held)
+			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
 			return;
-
 		if (Game.level.popupMenus.size() != 0) {
-			if (menuControl)
+			if (allowMenuControl) {
+				controllingMenu = true;
 				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).moveHighLightDown();
-		} else {
+			}
+		} else if (!controllingMenu) {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
 			if (y < Game.level.squares[0].length) {
 				interactWith(Game.level.squares[Game.level.activeActor.squareGameObjectIsOn.xInGrid][y],
@@ -489,11 +497,14 @@ public class UserInputLevel {
 
 	}
 
-	public static void leftTyped(boolean menuControl) {
+	public static void leftPressed(boolean allowMenuControl, boolean held) {
+		if (!held)
+			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (Game.level.popupMenus.size() != 0) {
-			if (menuControl) {
+			if (allowMenuControl) {
+				controllingMenu = true;
 				int popupToRemoveIndex = Game.level.popupMenus.size() - 1;
 				for (Button button : Game.level.popupMenus.get(popupToRemoveIndex).buttons) {
 					button.removeHighlight();
@@ -507,7 +518,7 @@ public class UserInputLevel {
 				}
 			}
 
-		} else {
+		} else if (!controllingMenu) {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
 			if (x >= 0) {
 				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
@@ -520,13 +531,17 @@ public class UserInputLevel {
 
 	}
 
-	public static void rightTyped(boolean menuControl) {
+	public static void rightPressed(boolean allowMenuControl, boolean held) {
+		if (!held)
+			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (Game.level.popupMenus.size() != 0) {
-			if (menuControl)
+			if (allowMenuControl) {
+				controllingMenu = true;
 				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
-		} else {
+			}
+		} else if (!controllingMenu) {
 
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
 			if (x < Game.level.squares.length) {
@@ -651,7 +666,7 @@ public class UserInputLevel {
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
 			}
-			upTyped(true);
+			upPressed(true, false);
 		} else if (character == 'a' || character == 'A') {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
@@ -660,7 +675,7 @@ public class UserInputLevel {
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
 			}
-			leftTyped(true);
+			leftPressed(true, false);
 		} else if (character == 's' || character == 'S') {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
@@ -669,7 +684,7 @@ public class UserInputLevel {
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
 			}
-			downTyped(true);
+			downPressed(true, false);
 		} else if (character == 'd' || character == 'D') {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
@@ -678,7 +693,7 @@ public class UserInputLevel {
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
 			}
-			rightTyped(true);
+			rightPressed(true, false);
 		}
 
 	}
@@ -693,28 +708,28 @@ public class UserInputLevel {
 		}
 
 		if (keyStateUp == false && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-			upTyped(true);
+			upPressed(true, false);
 			keyStateUp = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_UP)) {
 			keyStateUp = false;
 		}
 
 		if (keyStateDown == false && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-			downTyped(true);
+			downPressed(true, false);
 			keyStateDown = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
 			keyStateDown = false;
 		}
 
 		if (keyStateLeft == false && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-			leftTyped(true);
+			leftPressed(true, false);
 			keyStateLeft = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 			keyStateLeft = false;
 		}
 
 		if (keyStateRight == false && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-			rightTyped(true);
+			rightPressed(true, false);
 			keyStateRight = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
 			keyStateRight = false;

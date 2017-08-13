@@ -1262,16 +1262,16 @@ public class Level {
 			}
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_UP) == true || Keyboard.isKeyDown(Keyboard.KEY_W) == true)
 				&& Game.level.player.animationMove.completed) {
-			UserInputLevel.upTyped(false);
+			UserInputLevel.upPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_DOWN) == true || Keyboard.isKeyDown(Keyboard.KEY_S) == true)
 				&& Game.level.player.animationMove.completed) {
-			UserInputLevel.downTyped(false);
+			UserInputLevel.downPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)
 				&& Game.level.player.animationMove.completed) {
-			UserInputLevel.leftTyped(false);
+			UserInputLevel.leftPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)
 				&& Game.level.player.animationMove.completed) {
-			UserInputLevel.rightTyped(false);
+			UserInputLevel.rightPressed(false, true);
 		}
 	}
 
