@@ -413,24 +413,17 @@ public class UserInputLevel {
 
 			defaultAction.perform();
 
-			// if (!(action instanceof ActionRead) && !(action instanceof
-			// ActionTalk))
-			// interactedThisTurn = true;
 			if (defaultAction.movement && defaultAction.enabled) {
+				Game.level.dragToFollowPlayer();
 
 				if (key == Keyboard.KEY_UP) {
 					Level.wHasBeenPressed = true;
-					Game.dragY += Game.SQUARE_HEIGHT;
 				} else if (key == Keyboard.KEY_DOWN) {
 					Level.sHasBeenPressed = true;
-					Game.dragY -= Game.SQUARE_HEIGHT;
 				} else if (key == Keyboard.KEY_LEFT) {
 					Level.aHasBeenPressed = true;
-					Game.dragX += Game.SQUARE_WIDTH;
 				} else if (key == Keyboard.KEY_RIGHT) {
 					Level.dHasBeenPressed = true;
-					Game.dragX -= Game.SQUARE_WIDTH;
-
 				}
 
 			}
@@ -457,11 +450,12 @@ public class UserInputLevel {
 
 	}
 
-	public static void upTyped() {
+	public static void upTyped(boolean menuControl) {
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (Game.level.popupMenus.size() != 0) {
-			Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).moveHighLightUp();
+			if (menuControl)
+				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).moveHighLightUp();
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
 			if (y >= 0) {
@@ -475,12 +469,13 @@ public class UserInputLevel {
 		}
 	}
 
-	public static void downTyped() {
+	public static void downTyped(boolean menuControl) {
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
 		if (Game.level.popupMenus.size() != 0) {
-			Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).moveHighLightDown();
+			if (menuControl)
+				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).moveHighLightDown();
 		} else {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
 			if (y < Game.level.squares[0].length) {
@@ -494,20 +489,21 @@ public class UserInputLevel {
 
 	}
 
-	public static void leftTyped() {
+	public static void leftTyped(boolean menuControl) {
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (Game.level.popupMenus.size() != 0) {
+			if (menuControl) {
+				int popupToRemoveIndex = Game.level.popupMenus.size() - 1;
+				for (Button button : Game.level.popupMenus.get(popupToRemoveIndex).buttons) {
+					button.removeHighlight();
+				}
+				Game.level.popupMenus.remove(popupToRemoveIndex);
 
-			int popupToRemoveIndex = Game.level.popupMenus.size() - 1;
-			for (Button button : Game.level.popupMenus.get(popupToRemoveIndex).buttons) {
-				button.removeHighlight();
-			}
-			Game.level.popupMenus.remove(popupToRemoveIndex);
-
-			if (Game.level.popupMenus.size() != 0) {
-				for (Button button : Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).buttons) {
-					button.down = false;
+				if (Game.level.popupMenus.size() != 0) {
+					for (Button button : Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).buttons) {
+						button.down = false;
+					}
 				}
 			}
 
@@ -524,12 +520,12 @@ public class UserInputLevel {
 
 	}
 
-	public static void rightTyped() {
+	public static void rightTyped(boolean menuControl) {
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (Game.level.popupMenus.size() != 0) {
-			// Game.level.popups.get(Game.level.popups.size() - 1).high
-			Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
+			if (menuControl)
+				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
 		} else {
 
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid + 1;
@@ -655,7 +651,7 @@ public class UserInputLevel {
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
 			}
-			upTyped();
+			upTyped(true);
 		} else if (character == 'a' || character == 'A') {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
@@ -664,7 +660,7 @@ public class UserInputLevel {
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
 			}
-			leftTyped();
+			leftTyped(true);
 		} else if (character == 's' || character == 'S') {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
@@ -673,7 +669,7 @@ public class UserInputLevel {
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
 			}
-			downTyped();
+			downTyped(true);
 		} else if (character == 'd' || character == 'D') {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
@@ -682,7 +678,7 @@ public class UserInputLevel {
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				Level.shiftActionHasBeenPressed = true;
 			}
-			rightTyped();
+			rightTyped(true);
 		}
 
 	}
@@ -697,28 +693,28 @@ public class UserInputLevel {
 		}
 
 		if (keyStateUp == false && Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-			upTyped();
+			upTyped(true);
 			keyStateUp = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_UP)) {
 			keyStateUp = false;
 		}
 
 		if (keyStateDown == false && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-			downTyped();
+			downTyped(true);
 			keyStateDown = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
 			keyStateDown = false;
 		}
 
 		if (keyStateLeft == false && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-			leftTyped();
+			leftTyped(true);
 			keyStateLeft = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 			keyStateLeft = false;
 		}
 
 		if (keyStateRight == false && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-			rightTyped();
+			rightTyped(true);
 			keyStateRight = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
 			keyStateRight = false;

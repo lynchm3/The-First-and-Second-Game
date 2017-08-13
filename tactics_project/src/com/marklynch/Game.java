@@ -70,17 +70,17 @@ public class Game {
 	public static float dragY = 0;
 
 	public static float getDragXWithOffset() {
-		if (level.player.playerTargetSquare == null)
-			return dragX - Game.level.player.animationMove.offsetX;
-		else
-			return dragX;
+		// if (Player.playerTargetSquare == null)
+		return dragX - Game.level.player.animationMove.offsetX;
+		// else
+		// return dragX;
 	}
 
 	public static float getDragYWithOffset() {
-		if (level.player.playerTargetSquare == null)
-			return dragY - Game.level.player.animationMove.offsetY;
-		else
-			return dragY;
+		// if (Player.playerTargetSquare == null)
+		return dragY - Game.level.player.animationMove.offsetY;
+		// else
+		// return dragY;
 	}
 
 	// West Security + Dungeon

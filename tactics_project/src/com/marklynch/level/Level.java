@@ -73,22 +73,22 @@ public class Level {
 	public static boolean loggedThisTurn = false;
 
 	// Controls for tutorial buttons
-	public static boolean wHasBeenPressed = false;
-	public static boolean ctrlActionHasBeenPressed = false;
-	public static boolean altActionHasBeenPressed = false;
-	public static boolean shiftActionHasBeenPressed = false;
+	public static boolean wHasBeenPressed = true;
+	public static boolean ctrlActionHasBeenPressed = true;
+	public static boolean altActionHasBeenPressed = true;
+	public static boolean shiftActionHasBeenPressed = true;
 	// public static boolean ctrlWHasBeenPressed = false;
 	// public static boolean altWHasBeenPressed = false;
 	// public static boolean shiftWHasBeenPressed = false;
-	public static boolean aHasBeenPressed = false;
+	public static boolean aHasBeenPressed = true;
 	// public static boolean ctrlAasBeenPressed = false;
 	// public static boolean altAHasBeenPressed = false;
 	// public static boolean shiftAHasBeenPressed = false;
-	public static boolean sHasBeenPressed = false;
+	public static boolean sHasBeenPressed = true;
 	// public static boolean ctrlSHasBeenPressed = false;
 	// public static boolean altSHasBeenPressed = false;
 	// public static boolean shiftSHasBeenPressed = false;
-	public static boolean dHasBeenPressed = false;
+	public static boolean dHasBeenPressed = true;
 	// public static boolean ctrlDHasBeenPressed = false;
 	// public static boolean altDHasBeenPressed = false;
 	// public static boolean shiftDHasBeenPressed = false;
@@ -456,7 +456,7 @@ public class Level {
 
 		// UI buttons
 		Button inventoryButton = new LevelButton(110f, 400f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"[I]NVENTORY", false, false, Color.BLACK, Color.WHITE);
+				"INVENTORY [I]", false, false, Color.BLACK, Color.WHITE);
 		inventoryButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -1249,6 +1249,7 @@ public class Level {
 				Player.playerTargetSquare = null;
 			} else {
 				action.perform();
+				dragToFollowPlayer();
 				Player.playerFirstMove = false;
 				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
 					Player.playerPathToMove = null;
@@ -1259,10 +1260,32 @@ public class Level {
 					popupToasts.add(new PopupToast(objects));
 				}
 			}
+		} else if ((Keyboard.isKeyDown(Keyboard.KEY_UP) == true || Keyboard.isKeyDown(Keyboard.KEY_W) == true)
+				&& Game.level.player.animationMove.completed) {
+			UserInputLevel.upTyped(false);
+		} else if ((Keyboard.isKeyDown(Keyboard.KEY_DOWN) == true || Keyboard.isKeyDown(Keyboard.KEY_S) == true)
+				&& Game.level.player.animationMove.completed) {
+			UserInputLevel.downTyped(false);
+		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)
+				&& Game.level.player.animationMove.completed) {
+			UserInputLevel.leftTyped(false);
+		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)
+				&& Game.level.player.animationMove.completed) {
+			UserInputLevel.rightTyped(false);
 		}
-		// } else if (currentFactionMoving != factions.get(0)) {
-		// currentFactionMoving.update(delta);
-		// }
+	}
+
+	public void dragToFollowPlayer() {
+		if (Game.level.player.squareGameObjectIsOn.xInGrid > Game.level.player.lastSquare.xInGrid) {
+			Game.dragX -= Game.SQUARE_WIDTH;
+		} else if (Game.level.player.squareGameObjectIsOn.xInGrid < Game.level.player.lastSquare.xInGrid) {
+			Game.dragX += Game.SQUARE_WIDTH;
+		} else if (Game.level.player.squareGameObjectIsOn.yInGrid > Game.level.player.lastSquare.yInGrid) {
+			Game.dragY -= Game.SQUARE_HEIGHT;
+		} else if (Game.level.player.squareGameObjectIsOn.yInGrid < Game.level.player.lastSquare.yInGrid) {
+			Game.dragY += Game.SQUARE_HEIGHT;
+		}
+
 	}
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
