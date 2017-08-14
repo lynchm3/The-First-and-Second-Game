@@ -169,6 +169,7 @@ public class Level {
 		// textureUndiscovered =
 		// ResourceUtils.getGlobalImage("undiscovered_small.png");
 		Square.loadStaticImages();
+		Actor.loadStaticImages();
 		Action.loadActionImages();
 		Effect.loadEffectImages();
 		Wall.loadStaticImages();
