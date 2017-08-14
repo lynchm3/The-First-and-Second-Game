@@ -2,6 +2,7 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
@@ -84,6 +85,15 @@ public class ActionLock extends Action {
 
 			if (!actor.hasKeyForDoor(openable)) {
 				actionName = ACTION_NAME_NEED_KEY;
+				return false;
+			}
+
+			if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare() == false) {
+				actionName = ACTION_NAME_BLOCKED;
+			}
+
+			if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.contains(Actor.class)) {
+				actionName = ACTION_NAME_BLOCKED;
 				return false;
 			}
 		}

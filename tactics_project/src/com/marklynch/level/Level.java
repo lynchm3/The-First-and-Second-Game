@@ -1224,21 +1224,21 @@ public class Level {
 		projectiles.removeAll(projectilesToRemove);
 		projectilesToRemove.clear();
 
-		int gridX1Bounds = player.squareGameObjectIsOn.xInGrid - player.sight;
+		int gridX1Bounds = player.squareGameObjectIsOn.xInGrid - player.sight - 1;
 		if (gridX1Bounds < 0)
 			gridX1Bounds = 0;
 
 		// + (mouseXinPixels) / Game.zoom);
 
-		int gridX2Bounds = player.squareGameObjectIsOn.xInGrid + player.sight;
+		int gridX2Bounds = player.squareGameObjectIsOn.xInGrid + player.sight + 1;
 		if (gridX2Bounds >= width)
 			gridX2Bounds = width - 1;
 
-		int gridY1Bounds = player.squareGameObjectIsOn.yInGrid - player.sight;
+		int gridY1Bounds = player.squareGameObjectIsOn.yInGrid - player.sight - 1;
 		if (gridY1Bounds < 0)
 			gridY1Bounds = 0;
 
-		int gridY2Bounds = player.squareGameObjectIsOn.yInGrid + player.sight;
+		int gridY2Bounds = player.squareGameObjectIsOn.yInGrid + player.sight + 1;
 		if (gridY2Bounds >= height)
 			gridY2Bounds = height - 1;
 

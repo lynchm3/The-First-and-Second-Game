@@ -175,10 +175,6 @@ public class ActionAttack extends Action {
 			return null;
 
 		float loudness = Math.max(target.soundWhenHit, performer.equipped.soundWhenHitting);
-		System.out.println("target = " + target);
-		System.out.println("target.soundWhenHit = " + target.soundWhenHit);
-		System.out.println("performer = " + performer);
-		System.out.println("performer.equipped.soundWhenHitting = " + performer.equipped.soundWhenHitting);
 		if (performer.equipped != null)
 			return new Sound(performer, performer.equipped, target.squareGameObjectIsOn, loudness, legal,
 					this.getClass());

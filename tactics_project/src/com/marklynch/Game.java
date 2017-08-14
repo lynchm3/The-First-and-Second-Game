@@ -38,16 +38,16 @@ public class Game {
 	// PLAYER START POSITION
 
 	// Shop
-	public static int playerStartPosX = 3;
-	public static int playerStartPosY = 3;
+	// public static int playerStartPosX = 3;
+	// public static int playerStartPosY = 3;
 
 	// Dining room
 	// public static int playerStartPosX = 93;
 	// public static int playerStartPosY = 52;
 
 	// Morts Mine
-	// public static int playerStartPosX = 282;
-	// public static int playerStartPosY = 46;
+	public static int playerStartPosX = 282;
+	public static int playerStartPosY = 46;
 
 	// Burrow in forest
 	// public static int playerStartPosX = 186;

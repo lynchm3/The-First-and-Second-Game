@@ -10,4 +10,6 @@ public abstract class Animation {
 
 	public abstract void update(double delta);
 
+	public abstract void complete();
+
 }

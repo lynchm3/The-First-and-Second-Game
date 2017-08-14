@@ -87,8 +87,8 @@ public class AIRoutineForMort extends AIRoutine {
 		if (!retreatedToRoom) {
 			for (Blind blind : mort.questCaveOfTheBlind.blind) {
 				if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
-					float blindDistanceFromMortsRoom = blind.straightLineDistanceTo(
-							mort.questCaveOfTheBlind.mortsGameRoomDoor.squareGameObjectIsOn);
+					float blindDistanceFromMortsRoom = blind
+							.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsGameRoomDoor.squareGameObjectIsOn);
 					if (blindDistanceFromMortsRoom - mortsDistanceFromGameObjectroomDoor < 4) {
 						Square doorSquare = mort.questCaveOfTheBlind.mortsGameRoomDoor.squareGameObjectIsOn;
 						Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
@@ -258,7 +258,7 @@ public class AIRoutineForMort extends AIRoutine {
 
 		if (squareInTerritory(Game.level.player.squareGameObjectIsOn)) {
 		} else {
-			AIRoutineUtils.moveTowardsTargetSquare(mort.mortsStandingSpot);
+			AIRoutineUtils.moveTowardsTargetSquare(Mort.mortsStandingSpot);
 		}
 	}
 

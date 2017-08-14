@@ -664,7 +664,6 @@ public class UserInputLevel {
 		if (character == ' ') {
 			waitPressed(true, false);
 		} else if (character == 'c' || character == 'C') {
-			System.out.println("zoom = " + Game.zoom + ", dragX = " + Game.dragX + ", dragY = " + Game.dragY);
 
 			if (Game.squareMouseIsOver != null) {
 

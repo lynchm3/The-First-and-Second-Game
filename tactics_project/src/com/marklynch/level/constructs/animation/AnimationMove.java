@@ -44,4 +44,16 @@ public class AnimationMove extends Animation {
 
 	}
 
+	@Override
+	public void complete() {
+
+		if (completed)
+			return;
+
+		completed = true;
+		offsetX = 0;
+		offsetY = 0;
+
+	}
+
 }
