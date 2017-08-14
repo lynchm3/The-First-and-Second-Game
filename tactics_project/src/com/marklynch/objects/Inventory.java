@@ -528,6 +528,14 @@ public class Inventory {
 		return true;
 	}
 
+	public boolean isPassable(GameObject forGameObject) {
+
+		if (forGameObject instanceof Actor)
+			return isPassable((Actor) forGameObject);
+
+		return this.canShareSquare();
+	}
+
 	public GameObject getGameObjectThatCantShareSquare() {
 		for (GameObject gameObject : gameObjects) {
 			if (!gameObject.canShareSquare)

@@ -3,12 +3,12 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -18,12 +18,14 @@ public class ActionTeleport extends Action {
 	public static final String ACTION_NAME = "Teleport here";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 	Actor performer;
+	GameObject teleportee;
 	Square target;
 	boolean endTurn;
 
-	public ActionTeleport(Actor mover, Square target, boolean endTurn) {
+	public ActionTeleport(Actor performer, GameObject teleportee, Square target, boolean endTurn) {
 		super(ACTION_NAME, "action_teleport.png");
-		this.performer = mover;
+		this.performer = performer;
+		this.teleportee = teleportee;
 		this.target = target;
 		this.endTurn = endTurn;
 		if (!check()) {
@@ -48,10 +50,10 @@ public class ActionTeleport extends Action {
 
 		Door door = (Door) target.inventory.getGameObjectOfClass(Door.class);
 		if (door != null && door.isOpen() == false) {
-			new ActionOpen(performer, door).perform();
+			new ActionOpen(teleportee, door).perform();
 		}
 
-		Square oldSquare = performer.squareGameObjectIsOn;
+		Square oldSquare = teleportee.squareGameObjectIsOn;
 		GameObject gameObjectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
 
 		Actor actorInTheWay = null;
@@ -64,54 +66,35 @@ public class ActionTeleport extends Action {
 		}
 
 		if (actorInTheWay == null) {
-			move(performer, target);
+			move(teleportee, target);
 
 		} else {
 			move(actorInTheWay, oldSquare);
-			move(performer, target);
-			if (actorInTheWay.group != null && actorInTheWay.group.getLeader() == performer) {
-				// No swap cooldown for group leaders moving a member of their
-				// group
-			} else {
-				performer.swapCooldown = (int) (Math.random() * 3);
-			}
+			move(teleportee, target);
 		}
 
-		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
+		if (Game.level.shouldLog(performer, teleportee))
+			if (performer == teleportee)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
+			else
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " teleported ", teleportee, " to ", target }));
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 
-		if (performer.hiding) {
-
-			HidingPlace hidingPlaceAtDestination = (HidingPlace) target.inventory
-					.getGameObjectOfClass(HidingPlace.class);
-
-			if (hidingPlaceAtDestination == null || hidingPlaceAtDestination.remainingHealth <= 0) {
-				new ActionStopHiding(performer, performer.hidingPlace).perform();
-				// performer.hiding = false;
-				// performer.hidingPlace.actorsHidingHere.remove(performer);
-				// performer.hidingPlace = null;
-			} else {
-				performer.hidingPlace.actorsHidingHere.remove(performer);
-				performer.hidingPlace = (HidingPlace) target.inventory.getGameObjectOfClass(HidingPlace.class);
-				performer.hidingPlace.actorsHidingHere.add(performer);
-			}
-		}
-
 		if (endTurn && performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 
-		trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+		trespassingCheck(this, performer, teleportee.squareGameObjectIsOn);
+
+		Level.teleportee = null;
 
 	}
 
-	private void move(Actor actor, Square square) {
-		actor.lastSquare = actor.squareGameObjectIsOn;
+	private void move(GameObject actor, Square square) {
 		actor.squareGameObjectIsOn.inventory.remove(actor);
-		actor.distanceMovedThisTurn += 1;
 		actor.squareGameObjectIsOn = square;
 		square.inventory.add(actor);
 
@@ -121,24 +104,8 @@ public class ActionTeleport extends Action {
 	@Override
 	public boolean check() {
 
-		// if (performer.travelDistance - performer.distanceMovedThisTurn <= 0)
-		// return false;
-
-		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))
+		if (target == teleportee.squareGameObjectIsOn || !target.inventory.isPassable(teleportee))
 			return false;
-
-		// Path path = performer.getPathTo(target);
-		// if (path == null)
-		// return false;
-
-		// if (path.travelCost > performer.travelDistance -
-		// performer.distanceMovedThisTurn)
-		// return false;
-
-		// if (performer != Game.level.player && performer.swapCooldown > 0) {
-		// performer.swapCooldown--;
-		// return false;
-		// }
 
 		GameObject objectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
 		if (objectInTheWay != null)
@@ -149,7 +116,7 @@ public class ActionTeleport extends Action {
 
 	@Override
 	public boolean checkLegality() {
-		if (target.restricted == true && !target.owners.contains(performer)) {
+		if (target.restricted == true && !target.owners.contains(teleportee)) {
 			return false;
 		}
 		return true;
@@ -160,9 +127,9 @@ public class ActionTeleport extends Action {
 
 		// Sound of glass
 		ArrayList<GameObject> stampables = target.inventory.getGameObjectsOfClass(Stampable.class);
-		if (!(performer instanceof Blind) && stampables.size() > 0) {
+		if (!(teleportee instanceof Blind) && stampables.size() > 0) {
 			for (GameObject stampable : stampables) {
-				return new Sound(performer, stampable, target, 10, legal, this.getClass());
+				return new Sound(teleportee, stampable, target, 10, legal, this.getClass());
 			}
 		}
 		return null;

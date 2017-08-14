@@ -35,6 +35,7 @@ import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionPourSpecificItem;
 import com.marklynch.objects.actions.ActionTake;
+import com.marklynch.objects.actions.ActionTeleportOther;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.actions.ActionUnequip;
@@ -628,6 +629,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// {
 		if (this != Game.level.player && attackable)
 			actions.add(new ActionAttack(performer, this));
+
+		if (this != Game.level.player && attackable)
+			actions.add(new ActionTeleportOther(performer, this));
 		// }
 		if (this != Game.level.player && this instanceof Actor)
 			actions.add(new ActionFollow(Game.level.player, (Actor) this));

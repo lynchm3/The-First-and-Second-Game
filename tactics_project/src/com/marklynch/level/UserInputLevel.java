@@ -21,6 +21,7 @@ import com.marklynch.level.popup.PopupMenuSelectObject;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Player;
 import com.marklynch.ui.button.Button;
@@ -380,14 +381,17 @@ public class UserInputLevel {
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
-		if (Game.level.levelMode == LevelMode.LEVEL_MODE_CAST) {
-			if (openMenu)
-				Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
-			else {
-				new ActionUsePower(Game.level.player, Game.squareMouseIsOver, Game.level.selectedPower).perform();
-				// Game.level.selectedPower.cast(Game.level.player, square);
-				Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
-			}
+		if (openMenu)
+			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+
+		if (Game.level.levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
+			new ActionTeleport(Game.level.player, Level.teleportee, square, true).perform();
+			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
+			return;
+		} else if (Game.level.levelMode == LevelMode.LEVEL_MODE_CAST) {
+			new ActionUsePower(Game.level.player, Game.squareMouseIsOver, Game.level.selectedPower).perform();
+			// Game.level.selectedPower.cast(Game.level.player, square);
+			Game.level.levelMode = LevelMode.LEVEL_MODE_NORMAL;
 			return;
 		}
 

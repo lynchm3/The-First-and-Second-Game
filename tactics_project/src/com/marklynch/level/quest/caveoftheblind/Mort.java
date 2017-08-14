@@ -18,7 +18,7 @@ public class Mort extends Actor {
 	public StructureSection mortsRooms;
 	public StructureRoom mortsRoom;
 	public StructureRoom mortsVault;
-	public static Square mortsStandingSpot = Game.level.squares[275][40];
+	public static Square mortsStandingSpot = Game.level.squares[281][41];
 	public GameObject mortsMeatChunk;
 	public Bell mortsBell;
 	public boolean performingFeedingDemo = false;

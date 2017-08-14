@@ -143,7 +143,7 @@ public class Level {
 	public ArrayList<GameObject> inanimateObjectsToRemove = new ArrayList<GameObject>();
 
 	public enum LevelMode {
-		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST
+		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST, LEVEL_SELECT_TELEPORT_SQUARE
 	}
 
 	public LevelMode levelMode = LevelMode.LEVEL_MODE_NORMAL;
@@ -932,6 +932,8 @@ public class Level {
 
 	}
 
+	public static GameObject teleportee = null;
+
 	public void drawUI() {
 
 		// Objects 2
@@ -1031,7 +1033,9 @@ public class Level {
 
 		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 
-			if (levelMode == LevelMode.LEVEL_MODE_CAST) {
+			if (levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
+				Game.squareMouseIsOver.drawX();
+			} else if (levelMode == LevelMode.LEVEL_MODE_CAST) {
 
 				// Highlight sqrs you can cast on
 				if (!selectedPower.hasRange(Integer.MAX_VALUE)) {

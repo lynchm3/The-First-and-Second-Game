@@ -634,7 +634,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// Move, teleport, loiter
 		if (this != Game.level.player.squareGameObjectIsOn) {
 			actions.add(new ActionMove(performer, this, true));
-			actions.add(new ActionTeleport(performer, this, true));
+			actions.add(new ActionTeleport(performer, performer, this, true));
 		} else {
 			actions.add(new ActionWait(performer, performer.squareGameObjectIsOn));
 		}
