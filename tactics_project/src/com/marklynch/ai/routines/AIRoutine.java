@@ -654,7 +654,12 @@ public class AIRoutine {
 
 				// Illegal mining
 			} else if (unresolvedIllegalMinings.size() > 0) {
-				actor.miniDialogue = "MY ORES!";
+
+				if (criminal == Game.level.player) {
+					new ActionTalk(this.actor, criminal, createConversationMyOres()).perform();
+				} else {
+					actor.miniDialogue = "MY ORES!";
+				}
 				new ActionThrowSpecificItem(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
 				for (GameObject stolenItem : stolenItemsOnCriminal) {
 					if (criminal.inventory.contains(stolenItem)) {
@@ -821,6 +826,16 @@ public class AIRoutine {
 				new ConversationResponse[] { accept, refuse }, this.actor);
 
 		return new Conversation(conversationPartJustice);
+
+	}
+
+	private Conversation createConversationMyOres() {
+
+		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
+		ConversationPart conversationPartYouWontGetOut = new ConversationPart(new Object[] { "My Ores!" },
+				new ConversationResponse[] { conversationReponseDone }, actor);
+
+		return new Conversation(conversationPartYouWontGetOut);
 
 	}
 
