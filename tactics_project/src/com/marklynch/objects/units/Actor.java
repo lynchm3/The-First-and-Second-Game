@@ -32,7 +32,7 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionHide;
-import com.marklynch.objects.actions.ActionLoiter;
+import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
@@ -663,7 +663,7 @@ public class Actor extends GameObject {
 		// Draw health
 
 		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.translate(new Vector2f(animationMove.offsetX, animationMove.offsetY));
+		view.translate(new Vector2f(animation.offsetX, animation.offsetY));
 		Game.activeBatch.updateUniforms();
 
 		if (remainingHealth != totalHealth) {
@@ -800,7 +800,7 @@ public class Actor extends GameObject {
 		}
 
 		Game.activeBatch.flush();
-		view.translate(new Vector2f(-animationMove.offsetX, -animationMove.offsetY));
+		view.translate(new Vector2f(-animation.offsetX, -animation.offsetY));
 		Game.activeBatch.updateUniforms();
 
 	}
@@ -1034,7 +1034,7 @@ public class Actor extends GameObject {
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 		if (this == Game.level.player) {
-			return new ActionLoiter(performer, performer.squareGameObjectIsOn);
+			return new ActionWait(performer, performer.squareGameObjectIsOn);
 		} else if (performer.attackers.contains(this)) {
 			ActionAttack actionAttack = new ActionAttack(performer, this);
 			// if (actionAttack.enabled && actionAttack.legal) {
@@ -1051,7 +1051,7 @@ public class Actor extends GameObject {
 			if (Game.level.player.peekingThrough != null) {
 				return new ActionStopPeeking(performer);
 			} else {
-				return new ActionLoiter(performer, performer.squareGameObjectIsOn);
+				return new ActionWait(performer, performer.squareGameObjectIsOn);
 			}
 		} else if (performer.attackers.contains(this)) {
 			return new ActionAttack(performer, this);
@@ -1089,7 +1089,7 @@ public class Actor extends GameObject {
 				actions.add(new ActionStopPeeking(performer));
 			}
 
-			actions.add(new ActionLoiter(performer, performer.squareGameObjectIsOn));
+			actions.add(new ActionWait(performer, performer.squareGameObjectIsOn));
 
 			// self action
 			if (equipped instanceof Tool) {

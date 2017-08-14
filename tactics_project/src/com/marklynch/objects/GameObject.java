@@ -11,7 +11,8 @@ import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Group;
-import com.marklynch.level.constructs.animation.AnimationMove;
+import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.AnimationWait;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleeding;
 import com.marklynch.level.conversation.Conversation;
@@ -110,7 +111,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public Object destroyedBy = null;
 	public Action destroyedByAction = null;
 
-	public AnimationMove animationMove = new AnimationMove();
+	public Animation animation = new AnimationWait();
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
@@ -552,8 +553,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (this instanceof Actor) {
 			Actor actor = (Actor) this;
-			if (!animationMove.completed) {
-				animationMove.update(delta);
+			if (!animation.completed) {
+				animation.update(delta);
 				// System.out.println(arg0);
 				actor.thisStepTime += delta;
 				if (actor.thisStepTime > 200 && actor.stepLeftTexture != null) {

@@ -7,11 +7,6 @@ public class AnimationMove extends Animation {
 
 	public Square startSquare;
 	public Square endSquare;
-	public double durationSoFar = 0;
-	public double durationToReach = 200;
-	public boolean completed = false;
-	public int offsetX = 0;
-	public int offsetY = 0;
 	public int startOffsetX = 0;
 	public int startOffsetY = 0;
 
@@ -30,6 +25,7 @@ public class AnimationMove extends Animation {
 
 	}
 
+	@Override
 	public void update(double delta) {
 
 		if (completed)

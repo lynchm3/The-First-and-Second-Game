@@ -29,7 +29,7 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropItemsInInventory;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
-import com.marklynch.objects.actions.ActionLoiter;
+import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPlaceMapMarker;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
@@ -444,7 +444,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			if (action instanceof ActionMove && action.legal)
 				return action;
 
-			if (action instanceof ActionLoiter && action.legal)
+			if (action instanceof ActionWait && action.legal)
 				return action;
 
 			Color color = Color.WHITE;
@@ -584,7 +584,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 
 		if (this == Game.level.player.squareGameObjectIsOn) {
-			return new ActionLoiter(performer, this);
+			return new ActionWait(performer, this);
 		} else if (performer.travelDistance >= performer.straightLineDistanceTo(this)) {
 
 			HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
@@ -636,7 +636,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			actions.add(new ActionMove(performer, this, true));
 			actions.add(new ActionTeleport(performer, this, true));
 		} else {
-			actions.add(new ActionLoiter(performer, performer.squareGameObjectIsOn));
+			actions.add(new ActionWait(performer, performer.squareGameObjectIsOn));
 		}
 
 		// Take all

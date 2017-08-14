@@ -46,10 +46,10 @@ import com.marklynch.objects.Vein;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionHide;
-import com.marklynch.objects.actions.ActionLoiter;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionUsePower;
+import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Projectile;
@@ -182,15 +182,14 @@ public class Level {
 
 		initGrid(this.squares, this.width, this.height);
 
-		endTurnButton = new LevelButton(110f, 40f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "END TURN",
-				false, false, Color.BLACK, Color.WHITE);
-		endTurnButton.setClickListener(new ClickListener() {
+		Button doNothing2Button = new LevelButton(110f, 40f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"nothing", false, false, Color.BLACK, Color.WHITE);
+		doNothing2Button.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				new ActionLoiter(player, player.squareGameObjectIsOn).perform();
 			}
 		});
-		buttons.add(endTurnButton);
+		buttons.add(doNothing2Button);
 
 		Button nothingButton = new LevelButton(220f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
 				"nothing", false, false, Color.BLACK, Color.WHITE);
@@ -498,6 +497,18 @@ public class Level {
 		});
 		centerButton.enabled = true;
 		buttons.add(centerButton);
+
+		endTurnButton = new LevelButton(110f, 480f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"WAIT [SPACE]", false, false, Color.BLACK, Color.WHITE);
+		endTurnButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				UserInputLevel.waitPressed(false, false);
+				// new ActionWait(player,
+				// player.squareGameObjectIsOn).perform();
+			}
+		});
+		buttons.add(endTurnButton);
 	}
 
 	public void openCloseInventory() {
@@ -540,7 +551,7 @@ public class Level {
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				new ActionLoiter(player, player.squareGameObjectIsOn).perform();
+				new ActionWait(player, player.squareGameObjectIsOn).perform();
 			}
 		});
 		buttons.add(endTurnButton);
@@ -1237,7 +1248,7 @@ public class Level {
 			currentFactionMoving.update(delta);
 		}
 		// Auto move player
-		else if (Game.level.player.animationMove.completed && Player.playerTargetSquare != null) {
+		else if (Game.level.player.animation.completed && Player.playerTargetSquare != null) {
 
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
 			if (Player.playerPathToMove == null) {
@@ -1297,17 +1308,19 @@ public class Level {
 					popupToasts.add(new PopupToast(objects));
 				}
 			}
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true && Game.level.player.animation.completed) {
+			UserInputLevel.waitPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_UP) == true || Keyboard.isKeyDown(Keyboard.KEY_W) == true)
-				&& Game.level.player.animationMove.completed) {
+				&& Game.level.player.animation.completed) {
 			UserInputLevel.upPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_DOWN) == true || Keyboard.isKeyDown(Keyboard.KEY_S) == true)
-				&& Game.level.player.animationMove.completed) {
+				&& Game.level.player.animation.completed) {
 			UserInputLevel.downPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)
-				&& Game.level.player.animationMove.completed) {
+				&& Game.level.player.animation.completed) {
 			UserInputLevel.leftPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)
-				&& Game.level.player.animationMove.completed) {
+				&& Game.level.player.animation.completed) {
 			UserInputLevel.rightPressed(false, true);
 		}
 	}

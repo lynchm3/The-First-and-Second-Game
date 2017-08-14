@@ -452,6 +452,30 @@ public class UserInputLevel {
 
 	}
 
+	public static void waitPressed(boolean allowMenuControl, boolean held) {
+
+		if (Player.playerTargetSquare != null) {
+			Player.playerTargetSquare = null;
+			Player.playerTargetActor = null;
+			return;
+		}
+
+		if (Game.level.activeActor != Game.level.player)
+			return;
+
+		if (Game.level.popupMenus.size() != 0) {
+			if (allowMenuControl) {
+				controllingMenu = true;
+				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
+			}
+		} else if (!controllingMenu) {
+			interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE,
+					Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
+					Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
+					Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
+		}
+	}
+
 	public static void upPressed(boolean allowMenuControl, boolean held) {
 
 		if (Player.playerTargetSquare != null) {
@@ -638,24 +662,7 @@ public class UserInputLevel {
 		}
 
 		if (character == ' ') {
-
-			if (Player.playerTargetSquare != null) {
-				Player.playerTargetSquare = null;
-				Player.playerTargetActor = null;
-				return;
-			}
-
-			if (Game.level.activeActor != Game.level.player)
-				return;
-
-			if (Game.level.popupMenus.size() != 0) {
-				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
-			} else {
-				interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE,
-						Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
-						Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
-						Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
-			}
+			waitPressed(true, false);
 		} else if (character == 'c' || character == 'C') {
 			System.out.println("zoom = " + Game.zoom + ", dragX = " + Game.dragX + ", dragY = " + Game.dragY);
 
