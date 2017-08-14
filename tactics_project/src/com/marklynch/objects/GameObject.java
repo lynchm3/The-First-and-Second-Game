@@ -142,7 +142,16 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		height = Game.SQUARE_HEIGHT * heightRatio;
 		halfWidth = width / 2;
 		halfHeight = height / 2;
+		randomisePosition();
 
+		// else {
+		// if (this instanceof Weapon)
+		// this.drawOffsetX = Game.HALF_SQUARE_WIDTH - width / 2;
+		// this.drawOffsetY = Game.SQUARE_HEIGHT - height;
+		// }
+	}
+
+	public void randomisePosition() {
 		if (widthRatio < 1f && heightRatio < 1f) {
 			float drawOffsetXMax = 1 - width / Game.SQUARE_WIDTH;
 			float drawOffsetYMax = 1 - height / Game.SQUARE_WIDTH;
@@ -152,11 +161,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			this.drawOffsetX = (float) (Math.random() * drawOffsetXMax);
 			this.drawOffsetY = (/* Math.random() * */ drawOffsetYMax);
 		}
-		// else {
-		// if (this instanceof Weapon)
-		// this.drawOffsetX = Game.HALF_SQUARE_WIDTH - width / 2;
-		// this.drawOffsetY = Game.SQUARE_HEIGHT - height;
-		// }
 	}
 
 	@Override

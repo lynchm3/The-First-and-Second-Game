@@ -1,6 +1,7 @@
 package com.marklynch.objects;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
@@ -8,7 +9,7 @@ import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
 
-public class SquareInventory extends Inventory {
+public class SquareInventory extends Inventory implements Comparator<GameObject> {
 
 	public transient Square square;
 
@@ -87,6 +88,9 @@ public class SquareInventory extends Inventory {
 			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
+			this.gameObjects.sort(this);
+			// this.sort(eee, false);
+			gameObject.randomisePosition();
 			// for (int i = 0; i < inventorySquares.length; i++) {
 			// for (int j = 0; j < inventorySquares[i].length; j++) {
 			// if (inventorySquares[i][j].gameObject == null) {
@@ -161,6 +165,12 @@ public class SquareInventory extends Inventory {
 			}
 		}
 		return soundDampening;
+	}
+
+	@Override
+	public int compare(GameObject a, GameObject b) {
+		// TODO Auto-generated method stub
+		return (int) (a.height - b.height);
 	}
 
 	// public GameObject getAc() {
