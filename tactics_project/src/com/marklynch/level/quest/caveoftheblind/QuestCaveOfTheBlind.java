@@ -560,7 +560,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.BUSH.makeCopy(Game.level.squares[279][37], null);
 
 		// Morts Rooms Section
-		mort.mortsRooms = new StructureSection("Mort & Mort Mining", 243, 38, 275, 49, true, mort);
+		mort.mortsRooms = new StructureSection("Mort & Mort Mining", 243, 38, 275, 49, false, mort);
 		caveSections.add(mort.mortsRooms);
 
 		// Morts Quarters

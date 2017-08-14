@@ -193,7 +193,7 @@ public class Structure {
 
 	public void drawUI() {
 
-		if (!showOnMap)
+		if (!showOnMap && !Game.fullVisiblity)
 			return;
 
 		// 40sqrs is ideal

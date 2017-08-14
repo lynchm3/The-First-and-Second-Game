@@ -145,7 +145,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (widthRatio < 1f && heightRatio < 1f) {
 			float drawOffsetXMax = 1 - width / Game.SQUARE_WIDTH;
-			float drawOffsetYMax = Game.SQUARE_HEIGHT - height;
+			float drawOffsetYMax = 1 - height / Game.SQUARE_WIDTH;
 			if (drawOffsetYMax < 0) {
 				drawOffsetYMax = 0;
 			}
