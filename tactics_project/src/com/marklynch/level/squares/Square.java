@@ -29,7 +29,6 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropItemsInInventory;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
-import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPlaceMapMarker;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
@@ -38,6 +37,7 @@ import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
+import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -436,8 +436,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
 			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
 			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("action_select_object.png"),
-					squarePositionX + Game.SQUARE_WIDTH - 48, squarePositionY + Game.SQUARE_HEIGHT - 48,
-					squarePositionX + Game.SQUARE_WIDTH - 16, squarePositionY + Game.SQUARE_HEIGHT - 16);
+					squarePositionX + Game.SQUARE_WIDTH - 64, squarePositionY + Game.SQUARE_HEIGHT - 64,
+					squarePositionX + Game.SQUARE_WIDTH - 0, squarePositionY + Game.SQUARE_HEIGHT - 0);
 			// specific action
 		} else if (action != null && action.image != null) {
 
