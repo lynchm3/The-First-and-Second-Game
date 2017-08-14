@@ -394,7 +394,9 @@ public class UserInputLevel {
 		// Clicked on a sqr far away, do move.
 		if (key == -1 && openMenu == false && secondary == false && attack == false
 				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1) {
-			Game.level.cameraFollow = true;
+			if (Game.level.player.onScreen()) {
+				Game.level.cameraFollow = true;
+			}
 			Player.playerTargetSquare = square;
 			Player.playerFirstMove = true;
 			return;

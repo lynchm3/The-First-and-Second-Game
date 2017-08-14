@@ -25,7 +25,10 @@ public class ActionFollow extends Action {
 	public void perform() {
 
 		Player.playerTargetActor = target;
-		Game.level.cameraFollow = true;
+
+		if (performer == Game.level.player && Game.level.player.onScreen()) {
+			Game.level.cameraFollow = true;
+		}
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();

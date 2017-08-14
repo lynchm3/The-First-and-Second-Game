@@ -988,7 +988,7 @@ public class Actor extends GameObject {
 
 		if (this.remainingHealth > 0) {
 
-			if (!this.squareGameObjectIsOn.visibleToPlayer)
+			if (this.squareGameObjectIsOn != null && !this.squareGameObjectIsOn.visibleToPlayer)
 				animation.complete();
 
 			// Remove dead attackers from attackers list
@@ -1338,6 +1338,39 @@ public class Actor extends GameObject {
 				new ConversationResponse[] { conversationReponseDone }, this);
 
 		return new Conversation(conversationPartYouWontGetOut);
+	}
+
+	public boolean onScreen() {
+
+		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.getDragXWithOffset()
+				- (Game.windowWidth / 2) / Game.zoom) / Game.SQUARE_WIDTH);
+		if (gridX1Bounds < 0)
+			gridX1Bounds = 0;
+
+		int gridX2Bounds = (int) (gridX1Bounds + ((Game.windowWidth / Game.SQUARE_WIDTH)) / Game.zoom) + 2;
+		if (gridX2Bounds >= Game.level.width)
+			gridX2Bounds = Game.level.width - 1;
+
+		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.getDragYWithOffset()
+				- (Game.windowHeight / 2) / Game.zoom) / Game.SQUARE_HEIGHT);
+		if (gridY1Bounds < 0)
+			gridY1Bounds = 0;
+
+		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 2;
+		if (gridY2Bounds >= Game.level.height)
+			gridY2Bounds = Game.level.height - 1;
+
+		if (this.squareGameObjectIsOn.xInGrid >= gridX1Bounds && this.squareGameObjectIsOn.xInGrid <= gridX2Bounds
+				&& this.squareGameObjectIsOn.yInGrid >= gridY1Bounds
+				&& this.squareGameObjectIsOn.yInGrid <= gridY2Bounds) {
+
+			System.out.println("onscreen == true");
+
+			return true;
+		}
+		// TODO Auto-generated method stub
+		System.out.println("onscreen == false");
+		return false;
 	}
 
 	// public static void calculateReachableSquares() {
