@@ -84,11 +84,11 @@ public class Templates {
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, true, false, false, false,
-			1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 55, 65);
+			1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 55, 88);
 	public static final Pickaxe PICKAXE = new Pickaxe("Pickaxe", 1, 1, "pickaxe.png", 100, null, true, false, false,
 			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 32, 94);
 	public static final Axe HATCHET = new Axe("Hatchet", 1, 1, "hatchet.png", 100, null, true, false, false, false, 1f,
-			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 21, 99);
+			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null, 48, 89);
 	public static final Knife HUNTING_KNIFE = new Knife("Hunting Knife", 1, 1, "hunting_knife.png", 100, null, true,
 			false, false, false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null,
 			47, 58);
@@ -104,18 +104,18 @@ public class Templates {
 			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 18, 80);
 	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 1, 1, "serrated_spoon.png", 100, null,
 			true, false, false, false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f,
-			null, 54, 64);
+			null, 48, 113);
 	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 1, 1, "bell.png", 100, null, true, false, false,
-			false, 1f, 1f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 52, 63);
+			false, 1f, 1f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 20, 38);
 	public static final Lantern LANTERN = new Lantern("Lantern", 1, 1, "lantern.png", 100, null, true, false, false,
 			false, 1f, 1f, 0f, 0f, 15f, 15f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 63, 6);
 
 	// Blades
 	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, true, false, false,
-			false, 1f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, null, 17, 46);
+			false, 1f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, null, 23, 86);
 
 	public static final Weapon CLEAVER = new Weapon("Cleaver", 5, 1, 1, "cleaver.png", 100, null, true, false, false,
-			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 34, 77);
+			false, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 33, 104);
 
 	// Bows
 	// https://en.wikipedia.org/wiki/Bow_and_arrow#Types_of_bow
@@ -281,8 +281,8 @@ public class Templates {
 			false, true, true, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
 			0f, 100f, 5f, null);
 	public static final ContainerForLiquids JAR = new ContainerForLiquids("Jar", 1, 1, "jar.png", 100, null, true, true,
-			false, false, 0.5f, 0.5f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null,
-			21, 32, 1f, "water_jar.png");
+			false, false, 0.5f, 0.5f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 4,
+			38, 1f, "water_jar.png");
 	public static final Liquid WATER = new Liquid("Water", 5, "effect_wet.png", null, new Inventory(), true, true, true,
 			true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, null,
 			0f, new Effect[] { new EffectWet(5) }, new Effect[] {});
