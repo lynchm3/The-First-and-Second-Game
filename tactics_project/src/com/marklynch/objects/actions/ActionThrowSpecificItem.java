@@ -83,8 +83,11 @@ public class ActionThrowSpecificItem extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		Game.level.projectiles.add(
-				new Projectile(projectile.name, performer, this, targetGameObject, targetSquare, projectile, 2f, true));
+		if (targetSquare.visibleToPlayer || performer.squareGameObjectIsOn.visibleToPlayer)
+			Game.level.projectiles.add(new Projectile(projectile.name, performer, this, targetGameObject, targetSquare,
+					projectile, 2f, true));
+		else
+			targetSquare.inventory.add(projectile);
 
 		if (performer.equipped == projectile) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {

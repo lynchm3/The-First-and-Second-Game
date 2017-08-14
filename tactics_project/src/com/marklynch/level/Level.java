@@ -1380,11 +1380,6 @@ public class Level {
 			}
 		}
 
-		for (Button button : this.buttons) {
-			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
-				return button;
-		}
-
 		if (!Game.level.popupMenus.isEmpty()) {
 
 			for (int i = popupMenus.size() - 1; i >= 0; i--) {
@@ -1397,6 +1392,11 @@ public class Level {
 
 			// for (Popup popup : popups) {
 			// }
+		}
+
+		for (Button button : this.buttons) {
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+				return button;
 		}
 
 		if (activeActor != null && activeActor.faction == factions.get(0))
