@@ -149,7 +149,7 @@ public class Level {
 	public LevelMode levelMode = LevelMode.LEVEL_MODE_NORMAL;
 	public Power selectedPower = null;
 
-	public boolean cameraFollow = true;
+	public boolean cameraFollow = false;
 
 	// java representation of a grid??
 	// 2d array?
