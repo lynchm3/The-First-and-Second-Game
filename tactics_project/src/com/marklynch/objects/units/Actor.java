@@ -50,6 +50,7 @@ import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -841,18 +842,28 @@ public class Actor extends GameObject {
 
 		// Draw mini dialogue
 		if (miniDialogue != null && miniDialogue.length() > 0) {
-			float miniDialogueX1 = (this.squareGameObjectIsOn.xInGrid + 1) * (int) Game.SQUARE_WIDTH;
-			float miniDialogueX2 = (this.squareGameObjectIsOn.xInGrid + 1) * (int) Game.SQUARE_WIDTH
-					+ Game.font.getWidth(miniDialogue);
-			float miniDialogueY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH;
-			float miniDialogueY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_WIDTH + 20;
-			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), miniDialogueX1, miniDialogueX2, miniDialogueY1,
-					miniDialogueY2);
-			TextUtils.printTextWithImages(new Object[] { miniDialogue }, miniDialogueX1, miniDialogueY1,
-					Integer.MAX_VALUE, false);
-		}
 
-		if (thoughtBubbleImageTexture != null) {
+			int expressionBubbleWidth = 64;
+			int expressionBubbleHeight = 64;
+
+			int expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+			int expressionBubblePositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+					+ drawOffsetY - 64);
+			float alphaBubble = 1.0f;
+
+			// TextureUtils.skipNormals = true;
+
+			// if (!this.squareGameObjectIsOn.visibleToPlayer)
+			alphaBubble = 0.5f;
+			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("thought_bubble.png"), alphaBubble,
+					expressionBubblePositionXInPixels, expressionBubblePositionYInPixels,
+					expressionBubblePositionXInPixels + expressionBubbleWidth,
+					expressionBubblePositionYInPixels + expressionBubbleHeight);
+
+			TextUtils.printTextWithImages(new Object[] { new StringWithColor(miniDialogue, Color.BLACK) },
+					expressionBubblePositionXInPixels + 4, expressionBubblePositionYInPixels + 42, Integer.MAX_VALUE,
+					false);
+		} else if (thoughtBubbleImageTexture != null) {
 
 			int expressionBubbleWidth = 64;
 			int expressionBubbleHeight = 64;
