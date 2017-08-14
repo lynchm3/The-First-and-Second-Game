@@ -83,19 +83,19 @@ public class AIRoutineForMort extends AIRoutine {
 
 		// If blind are in mine and getting too close to mgmt door, move to it
 		float mortsDistanceFromGameObjectroomDoor = mort
-				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn);
+				.straightLineDistanceTo(mort.questCaveOfTheBlind.mortsGameRoomDoor.squareGameObjectIsOn);
 		if (!retreatedToRoom) {
 			for (Blind blind : mort.questCaveOfTheBlind.blind) {
 				if (blind.remainingHealth > 0 && blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {
 					float blindDistanceFromMortsRoom = blind.straightLineDistanceTo(
-							mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn);
+							mort.questCaveOfTheBlind.mortsGameRoomDoor.squareGameObjectIsOn);
 					if (blindDistanceFromMortsRoom - mortsDistanceFromGameObjectroomDoor < 4) {
-						Square doorSquare = mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn;
+						Square doorSquare = mort.questCaveOfTheBlind.mortsGameRoomDoor.squareGameObjectIsOn;
 						Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid - 1][doorSquare.yInGrid];
 						mort.performingFeedingDemo = false;
 						if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
 							mort.activityDescription = ACTIVITY_DESCRIPTION_HIDING;
-							new ActionLock(mort, mort.questCaveOfTheBlind.mortsGameObjectroomDoor).perform();
+							new ActionLock(mort, mort.questCaveOfTheBlind.mortsGameRoomDoor).perform();
 							mort.investigationsMap.clear();
 							searchCooldown = 0;
 							retreatedToRoom = true;

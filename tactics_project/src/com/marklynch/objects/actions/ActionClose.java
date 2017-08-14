@@ -78,6 +78,10 @@ public class ActionClose extends Action {
 
 		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare() == false) {
 			actionName = ACTION_NAME_BLOCKED;
+		}
+
+		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.contains(Actor.class)) {
+			actionName = ACTION_NAME_BLOCKED;
 			return false;
 		}
 

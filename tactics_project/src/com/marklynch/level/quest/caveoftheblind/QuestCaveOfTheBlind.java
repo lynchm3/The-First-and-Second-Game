@@ -79,7 +79,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	Lantern lantern;
 	Wall oreWall;
 	Key mortsKey;
-	Door mortsGameObjectroomDoor;
+	Door mortsGameRoomDoor;
 	Door mortsStoreroomDoor;
 	Searchable dropHole;
 
@@ -583,10 +583,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Cave featues for Mort
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][45], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][46], mort));
-		mortsGameObjectroomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, mort,
+		mortsGameRoomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, mort,
 				mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
-		mort.mortsRoomDoorway = mortsGameObjectroomDoor.squareGameObjectIsOn;
-		caveFeatures.add(mortsGameObjectroomDoor);
+		mort.mortsRoomDoorway = mortsGameRoomDoor.squareGameObjectIsOn;
+		caveFeatures.add(mortsGameRoomDoor);
 		mort.aiRoutine.squareBounds.add(mort.mortsRoomDoorway);
 		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[264][40], true, mort, mortsKey,
 				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
