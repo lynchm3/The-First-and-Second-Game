@@ -62,6 +62,8 @@ public class Actor extends GameObject {
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
 			"showInventory", "fitsInInventory", "canContainOtherObjects" };
+	private static Texture SPEEECH_BUBBLE_TEXTURE = null;
+	private static Texture THOUGHT_BUBBLE_TEXTURE = null;
 
 	public enum Direction {
 		UP, RIGHT, DOWN, LEFT
@@ -235,6 +237,11 @@ public class Actor extends GameObject {
 
 		this.canOpenDoors = canOpenDoors;
 		this.canEquipWeapons = canEquipWeapons;
+	}
+
+	public static void loadStaticImages() {
+		SPEEECH_BUBBLE_TEXTURE = ResourceUtils.getGlobalImage("speech_bubble.png");
+		THOUGHT_BUBBLE_TEXTURE = ResourceUtils.getGlobalImage("thought_bubble.png");
 	}
 
 	@Override
@@ -855,13 +862,12 @@ public class Actor extends GameObject {
 
 			// if (!this.squareGameObjectIsOn.visibleToPlayer)
 			alphaBubble = 0.5f;
-			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("thought_bubble.png"), alphaBubble,
-					expressionBubblePositionXInPixels, expressionBubblePositionYInPixels,
-					expressionBubblePositionXInPixels + expressionBubbleWidth,
+			TextureUtils.drawTexture(Actor.SPEEECH_BUBBLE_TEXTURE, alphaBubble, expressionBubblePositionXInPixels,
+					expressionBubblePositionYInPixels, expressionBubblePositionXInPixels + expressionBubbleWidth,
 					expressionBubblePositionYInPixels + expressionBubbleHeight);
 
 			TextUtils.printTextWithImages(new Object[] { new StringWithColor(miniDialogue, Color.BLACK) },
-					expressionBubblePositionXInPixels + 4, expressionBubblePositionYInPixels + 42, Integer.MAX_VALUE,
+					expressionBubblePositionXInPixels + 4, expressionBubblePositionYInPixels + 38, Integer.MAX_VALUE,
 					false);
 		} else if (thoughtBubbleImageTexture != null) {
 
@@ -877,9 +883,8 @@ public class Actor extends GameObject {
 
 			// if (!this.squareGameObjectIsOn.visibleToPlayer)
 			alphaBubble = 0.5f;
-			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("thought_bubble.png"), alphaBubble,
-					expressionBubblePositionXInPixels, expressionBubblePositionYInPixels,
-					expressionBubblePositionXInPixels + expressionBubbleWidth,
+			TextureUtils.drawTexture(Actor.THOUGHT_BUBBLE_TEXTURE, alphaBubble, expressionBubblePositionXInPixels,
+					expressionBubblePositionYInPixels, expressionBubblePositionXInPixels + expressionBubbleWidth,
 					expressionBubblePositionYInPixels + expressionBubbleHeight);
 
 			int expressionWidth = 32;
