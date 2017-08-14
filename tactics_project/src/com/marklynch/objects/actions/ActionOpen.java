@@ -85,6 +85,11 @@ public class ActionOpen extends Action {
 
 	@Override
 	public boolean checkLegality() {
+		if (openable.isLocked()) {
+			Action unlock = new ActionUnlock(performer, openable);
+			if (!unlock.legal)
+				return false;
+		}
 		return true;
 	}
 

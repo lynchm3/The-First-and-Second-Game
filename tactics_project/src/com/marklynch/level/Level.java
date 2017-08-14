@@ -1313,7 +1313,7 @@ public class Level {
 				Player.playerPathToMove = null;
 				Player.playerTargetSquare = null;
 			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
-				Object[] objects = new Object[] { "Stopped before restricted area!" };
+				Object[] objects = new Object[] { "Stopped before illegal action!" };
 				popupToasts.add(new PopupToast(objects));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
 				Player.playerPathToMove = null;

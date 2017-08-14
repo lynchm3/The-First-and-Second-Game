@@ -202,6 +202,15 @@ public class ActionMove extends Action {
 		if (target.restricted == true && !target.owners.contains(performer)) {
 			return false;
 		}
+
+		Door door = (Door) target.inventory.getGameObjectOfClass(Door.class);
+		if (door != null && door.isOpen() == false) {
+			Action open = new ActionOpen(performer, door);
+			if (!open.legal) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 
