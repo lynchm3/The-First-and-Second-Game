@@ -32,13 +32,13 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionHide;
-import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTalk;
+import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -1303,6 +1303,17 @@ public class Actor extends GameObject {
 	public void equip(GameObject gameObject) {
 		if (canEquipWeapons)
 			this.equipped = gameObject;
+	}
+
+	public void setMiniDialogue(String miniDialogue, GameObject target) {
+		this.miniDialogue = miniDialogue;
+		if (Game.level.shouldLog(this)) {
+			if (target != null)
+				Game.level
+						.logOnScreen(new ActivityLog(new Object[] { this, " @", target, ": \"", miniDialogue, "\"" }));
+			else
+				Game.level.logOnScreen(new ActivityLog(new Object[] { this, ": \"", miniDialogue, "\"" }));
+		}
 	}
 
 	// public static void calculateReachableSquares() {

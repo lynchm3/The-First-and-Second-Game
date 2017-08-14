@@ -192,7 +192,7 @@ public class AIRoutineForMort extends AIRoutine {
 				if (!mort.inventory.contains(mort.mortsMeatChunk)) {
 					mort.addAttackerForThisAndGroupMembers(Game.level.player);
 					this.actor.activityDescription = "FEELING BETRAYED";
-					this.actor.miniDialogue = "You! You robbed me!";
+					actor.setMiniDialogue("You! You robbed me!", null);
 					mort.performingFeedingDemo = false;
 					return;
 				}
@@ -210,14 +210,14 @@ public class AIRoutineForMort extends AIRoutine {
 				if (!mort.inventory.contains(mort.mortsBell)) {
 					mort.addAttackerForThisAndGroupMembers(Game.level.player);
 					this.actor.activityDescription = "FEELING BETRAYED";
-					this.actor.miniDialogue = "You! You robbed me!";
+					actor.setMiniDialogue("You! You robbed me!", null);
 					mort.performingFeedingDemo = false;
 					return;
 				}
 
 				new ActionRing(mort, mort.mortsBell).perform();
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
-				this.actor.miniDialogue = "Dinner time!!!";
+				actor.setMiniDialogue("Dinner time!!!", null);
 
 				for (Blind blind : mort.questCaveOfTheBlind.blind) {
 					if (blind.remainingHealth > 0

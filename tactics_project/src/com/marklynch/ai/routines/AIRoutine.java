@@ -629,7 +629,7 @@ public class AIRoutine {
 					if (criminal == Game.level.player)
 						new ActionTalk(this.actor, criminal, createJusticeStopConversation()).perform();
 					else
-						actor.miniDialogue = "Stop that!";
+						actor.setMiniDialogue("Stop that!", criminal);
 					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 					// actor.activityDescription = "Dispensing Justice";
 
@@ -658,7 +658,7 @@ public class AIRoutine {
 				if (criminal == Game.level.player) {
 					new ActionTalk(this.actor, criminal, createConversationMyOres()).perform();
 				} else {
-					actor.miniDialogue = "MY ORES!";
+					actor.setMiniDialogue("MY ORES!", criminal);
 				}
 				new ActionThrowSpecificItem(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
 				for (GameObject stolenItem : stolenItemsOnCriminal) {
@@ -679,7 +679,7 @@ public class AIRoutine {
 						new ActionTalk(this.actor, criminal,
 								createJusticeReclaimConversation(criminal, stolenItemsOnCriminal)).perform();
 					} else {
-						actor.miniDialogue = "Give me that!";
+						actor.setMiniDialogue("Give me that!", criminal);
 						for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
 							new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal, true).perform();
 						}
