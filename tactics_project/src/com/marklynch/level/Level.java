@@ -1224,13 +1224,35 @@ public class Level {
 		projectiles.removeAll(projectilesToRemove);
 		projectilesToRemove.clear();
 
-		for (GameObject inanimateObject : inanimateObjectsOnGround)
-			inanimateObject.updateRealtime(0);
+		int gridX1Bounds = player.squareGameObjectIsOn.xInGrid - player.sight;
+		if (gridX1Bounds < 0)
+			gridX1Bounds = 0;
 
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.updateRealtime(delta);
+		// + (mouseXinPixels) / Game.zoom);
+
+		int gridX2Bounds = player.squareGameObjectIsOn.xInGrid + player.sight;
+		if (gridX2Bounds >= width)
+			gridX2Bounds = width - 1;
+
+		int gridY1Bounds = player.squareGameObjectIsOn.yInGrid - player.sight;
+		if (gridY1Bounds < 0)
+			gridY1Bounds = 0;
+
+		int gridY2Bounds = player.squareGameObjectIsOn.yInGrid + player.sight;
+		if (gridY2Bounds >= height)
+			gridY2Bounds = height - 1;
+
+		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				// is it better to bind once and draw all the same ones?
+				if (squares[i][j].visibleToPlayer) {
+					for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
+						gameObject.updateRealtime(delta);
+					}
+				}
 			}
+
+			Game.activeBatch.flush();
 		}
 
 		for (Decoration decoration : decorations)
