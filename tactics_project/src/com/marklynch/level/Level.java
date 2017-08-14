@@ -149,6 +149,8 @@ public class Level {
 	public LevelMode levelMode = LevelMode.LEVEL_MODE_NORMAL;
 	public Power selectedPower = null;
 
+	public boolean cameraFollow = true;
+
 	// java representation of a grid??
 	// 2d array?
 
@@ -487,6 +489,7 @@ public class Level {
 		centerButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+				cameraFollow = true;
 				Game.dragX = (-Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH)
 						+ Game.halfWindowWidth - Game.HALF_SQUARE_WIDTH;
 				Game.dragY = (-Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT)

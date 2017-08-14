@@ -163,6 +163,11 @@ public class UserInputLevel {
 			if (Mouse.getX() - mouseDownX > 20 || Mouse.getX() - mouseDownX < -20 || Mouse.getY() - mouseDownY > 20
 					|| Mouse.getY() - mouseDownY < -20) {
 				dragging = true;
+				if (Game.level.cameraFollow) {
+					Game.dragX = Game.getDragXWithOffset();
+					Game.dragY = Game.getDragYWithOffset();
+				}
+				Game.level.cameraFollow = false;
 
 				if (inventoriesOpen) {
 
@@ -386,8 +391,10 @@ public class UserInputLevel {
 			return;
 		}
 
+		// Clicked on a sqr far away, do move.
 		if (key == -1 && openMenu == false && secondary == false && attack == false
 				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1) {
+			Game.level.cameraFollow = true;
 			Player.playerTargetSquare = square;
 			Player.playerFirstMove = true;
 			return;

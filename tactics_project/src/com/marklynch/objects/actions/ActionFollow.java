@@ -1,5 +1,6 @@
 package com.marklynch.objects.actions;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
@@ -24,6 +25,7 @@ public class ActionFollow extends Action {
 	public void perform() {
 
 		Player.playerTargetActor = target;
+		Game.level.cameraFollow = true;
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
