@@ -21,6 +21,8 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -1314,6 +1316,14 @@ public class Actor extends GameObject {
 			else
 				Game.level.logOnScreen(new ActivityLog(new Object[] { this, ": \"", miniDialogue, "\"" }));
 		}
+	}
+
+	public Conversation createConversation(String text, String response) {
+		ConversationResponse conversationReponseDone = new ConversationResponse(response, null);
+		ConversationPart conversationPartYouWontGetOut = new ConversationPart(new Object[] { text },
+				new ConversationResponse[] { conversationReponseDone }, this);
+
+		return new Conversation(conversationPartYouWontGetOut);
 	}
 
 	// public static void calculateReachableSquares() {

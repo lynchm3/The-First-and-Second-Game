@@ -118,8 +118,6 @@ public class AIRoutineForMort extends AIRoutine {
 				new ActionTalk(actor, Game.level.player, this.getConversationLastResort()).perform();
 				new ActionRing(mort, bell).perform();
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
-				// this.actor.miniDialogue = "You won't get out of here alive";
-				// HERE
 				rangBellAsLastResort = true;
 				return;
 			}
@@ -192,7 +190,7 @@ public class AIRoutineForMort extends AIRoutine {
 				if (!mort.inventory.contains(mort.mortsMeatChunk)) {
 					mort.addAttackerForThisAndGroupMembers(Game.level.player);
 					this.actor.activityDescription = "FEELING BETRAYED";
-					actor.setMiniDialogue("You! You robbed me!", null);
+					actor.createConversation("You! You robbed me!", "Done");
 					mort.performingFeedingDemo = false;
 					return;
 				}
@@ -210,14 +208,14 @@ public class AIRoutineForMort extends AIRoutine {
 				if (!mort.inventory.contains(mort.mortsBell)) {
 					mort.addAttackerForThisAndGroupMembers(Game.level.player);
 					this.actor.activityDescription = "FEELING BETRAYED";
-					actor.setMiniDialogue("You! You robbed me!", null);
+					actor.createConversation("You! You robbed me!", "Done");
 					mort.performingFeedingDemo = false;
 					return;
 				}
 
 				new ActionRing(mort, mort.mortsBell).perform();
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_RINGING_DINNER_BELL;
-				actor.setMiniDialogue("Dinner time!!!", null);
+				actor.createConversation("Dinner time!", "Done");
 
 				for (Blind blind : mort.questCaveOfTheBlind.blind) {
 					if (blind.remainingHealth > 0
