@@ -988,9 +988,6 @@ public class Actor extends GameObject {
 
 		if (this.remainingHealth > 0) {
 
-			if (this.squareGameObjectIsOn != null && !this.squareGameObjectIsOn.visibleToPlayer)
-				animation.complete();
-
 			// Remove dead attackers from attackers list
 			ArrayList<GameObject> gameObjectsToRemoveFromList = new ArrayList<GameObject>();
 			for (GameObject gameObject : attackers) {
