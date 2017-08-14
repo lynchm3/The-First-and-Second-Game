@@ -637,10 +637,11 @@ public class UserInputLevel {
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
-		if (Game.level.popupTextBoxes.size() != 0) {
-			Game.level.popupTextBoxes.clear();
-			return;
-		}
+		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
+
+		Game.level.popupMenus.clear();
+		Game.level.popupTextBoxes.clear();
+		Game.level.popupToasts.clear();
 		if (Game.level.openInventories.size() != 0) {
 			Game.level.openCloseInventory();
 			return;
