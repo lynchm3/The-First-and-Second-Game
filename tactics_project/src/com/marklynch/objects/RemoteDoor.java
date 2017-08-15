@@ -33,7 +33,7 @@ public class RemoteDoor extends Openable {
 		canBePickedUp = false;
 		showInventory = false;
 		fitsInInventory = false;
-		canShareSquare = false;
+		canShareSquare = true;
 		canContainOtherObjects = false;
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;

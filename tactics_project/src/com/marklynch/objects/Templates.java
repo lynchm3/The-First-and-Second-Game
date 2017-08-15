@@ -137,25 +137,25 @@ public class Templates {
 	// Furniture
 	public static final Bed BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), 1, 1, 0f, 0f,
 			1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 75f, null);
-	public static final GameObjectTemplate SHOP_COUNTER = new GameObjectTemplate("Shop Counter", 5, "shop_counter.png",
-			null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f);
-	public static final GameObjectTemplate TABLE = new GameObjectTemplate("Table", 5, "table.png", null,
-			new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 20f);
-	public static final GameObjectTemplate CHAIR = new GameObjectTemplate("Chair", 5, "chair.png", null,
-			new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f);
-	public static final GameObjectTemplate BENCH = new GameObjectTemplate("Bench", 5, "bench.png", null,
-			new Inventory(), 2f, 1f, -0.5f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 30f);
-	public static final GameObjectTemplate CHAIR_FALLEN = new GameObjectTemplate("Chair", 5, "chair_fallen.png", null,
-			new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f);
-	public static final GameObjectTemplate BARRICADE = new GameObjectTemplate("BARRICADE", 25, "barricade.png", null,
-			new Inventory(), 1f, 1f, 0f, 0f, 10f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f);
-	public static final Readable ROCK_WITH_ETCHING = new Readable("Rock with Etching", 1000, "rock_with_etching.png",
-			null, new Inventory(), null, 1, 1, 0f, 0f, 20f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f,
-			100f, null);
+	public static final BigGameObject SHOP_COUNTER = new BigGameObject("Shop Counter", 5, "shop_counter.png", null,
+			new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, null);
+	public static final BigGameObject TABLE = new BigGameObject("Table", 5, "table.png", null, new Inventory(), 1f, 1f,
+			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 20f, null);
+	public static final BigGameObject CHAIR = new BigGameObject("Chair", 5, "chair.png", null, new Inventory(), 1f, 1f,
+			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f, null);
+	public static final BigGameObject BENCH = new BigGameObject("Bench", 5, "bench.png", null, new Inventory(), 2f, 1f,
+			-0.5f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 30f, null);
+	public static final BigGameObject CHAIR_FALLEN = new BigGameObject("Chair", 5, "chair_fallen.png", null,
+			new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f, null);
+	public static final BigGameObject BARRICADE = new BigGameObject("BARRICADE", 25, "barricade.png", null,
+			new Inventory(), 1f, 1f, 0f, 0f, 10f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, null);
+	public static final Sign ROCK_WITH_ETCHING = new Sign("Rock with Etching", 1000, "rock_with_etching.png", null,
+			new Inventory(), null, 1, 1, 0f, 0f, 20f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 100f,
+			null);
 	public static final Readable SCROLL = new Readable("Scroll", 1000, "scroll.png", null, new Inventory(), null, 1, 1,
 			0f, 0f, 20f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 100f, null);
-	public static final Readable SIGN = new Readable("Sign", 5, "sign.png", null, new Inventory(), null, 1, 1, 0f, 0f,
-			1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 15f, null);
+	public static final Sign SIGN = new Sign("Sign", 5, "sign.png", null, new Inventory(), null, 1, 1, 0f, 0f, 1f, 1f,
+			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 15f, null);
 	public static final Readable DOCUMENTS = new Readable("Documents", 5, "documents.png", null, new Inventory(), null,
 			0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.1f, null);
 
@@ -194,8 +194,8 @@ public class Templates {
 			10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, null);
 	public static final Vein VEIN = new Vein("Vein", 1000, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 15f, 0f,
 			10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 200f, null);
-	public static final GameObject BOULDER = new GameObject("Boulder", 1000, "boulder.png", null, new Inventory(), 1, 1,
-			0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 200f, null);
+	public static final BigGameObject BOULDER = new BigGameObject("Boulder", 1000, "boulder.png", null, new Inventory(),
+			1, 1, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 200f, null);
 	public static final Arrow ARROW = new Arrow("Arrow", 5, "arrow.png", null, new Inventory(), 0.32f, 0.16f, 0f, 0f,
 			15f, 0f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.1f, null);
 	public static final Arrow FIRE_BALL = new Arrow("Fireball", 5, "effect_burn.png", null, new Inventory(), 0.32f,
@@ -206,10 +206,10 @@ public class Templates {
 			0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 100f, null);
 
 	// LARGE CONTAINER
-	public static final GameObjectTemplate DUMPSTER = new GameObjectTemplate("Dumpster", 5, "skip_with_shadow.png",
-			null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 10f);
-	public static final GameObjectTemplate TROUGH = new GameObjectTemplate("Trough", 5, "trough.png", null,
-			new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f);
+	public static final BigGameObject DUMPSTER = new BigGameObject("Dumpster", 5, "skip_with_shadow.png", null,
+			new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 10f, null);
+	public static final GameObject TROUGH = new BigGameObject("Trough", 5, "trough.png", null, new Inventory(), 1, 1,
+			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f, null);
 	// public static final GameObjectTemplate FURNACE = new
 	// GameObjectTemplate("Furnace", 5, "furnace.png", null,
 	// new Inventory(), true, true, 2, 2,
@@ -220,10 +220,10 @@ public class Templates {
 			-0.25f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 150f, null, false);
 	public static final WaterSource WELL = new WaterSource("Well", 5, "well.png", null, new Inventory(), 1.5f, 1.5f,
 			-0.25f, -0.25f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 300f, null, new Effect[] {});
-	public static final GameObjectTemplate SHELF = new GameObjectTemplate("Shelf", 5, "shelf.png", null,
-			new Inventory(), 1, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f);
-	public static final GameObjectTemplate PIG_SIGN = new GameObjectTemplate("Piggy Farm", 5, "pig_sign.png", null,
-			new Inventory(), 1f, 1f, -0.25f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 80f, 0f, 0f, 0f, 100f, 10f);
+	public static final GameObject SHELF = new GameObject("Shelf", 5, "shelf.png", null, new Inventory(), 1, 0.5f, 0f,
+			0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f, null);
+	public static final Inspectable PIG_SIGN = new Inspectable("Piggy Farm", 5, "pig_sign.png", null, new Inventory(),
+			1f, 1f, -0.25f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 80f, 0f, 0f, 0f, 100f, 10f, null);
 
 	// Corpses
 	public static final Carcass CARCASS = new Carcass("Carcass", 50, "carcass.png", null, new Inventory(), 0.5f, 0.5f,
@@ -233,10 +233,10 @@ public class Templates {
 	public static final GameObject ASH = new GameObject("Ash", 50, "ash.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f,
 			1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, null);
 
-	public static final GameObject BLOODY_PULP = new GameObject("Bloody Pulp", 50, "blood.png", null, new Inventory(),
+	public static final Inspectable BLOODY_PULP = new Inspectable("Bloody Pulp", 50, "blood.png", null, new Inventory(),
 			0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 100f, null);
 
-	public static final GameObject BLOOD = new GameObject("Blood", 50, "blood.png", null, new Inventory(), 0.5f, 0.5f,
+	public static final Inspectable BLOOD = new Inspectable("Blood", 50, "blood.png", null, new Inventory(), 0.5f, 0.5f,
 			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, null);
 
 	// Food?
