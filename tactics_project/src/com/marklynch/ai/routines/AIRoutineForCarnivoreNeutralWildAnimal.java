@@ -3,7 +3,7 @@ package com.marklynch.ai.routines;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Corpse;
+import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
@@ -95,8 +95,8 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 		// }
 
 		// 1. attack small animal
-		GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfAttacking(50f,
-				false, true, false, false, true, true, HerbivoreWildAnimal.class);
+		GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfAttacking(50f, false, true, false,
+				false, true, true, HerbivoreWildAnimal.class);
 		if (smallWildAnimal != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			this.actor.thoughtBubbleImageTexture = smallWildAnimal.imageTexture;
@@ -109,8 +109,8 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 		}
 
 		// 2. eat corpse on ground
-		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true,
-				false, false, false, Corpse.class);
+		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
+				false, false, Carcass.class);
 		if (corpse != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTexture = corpse.imageTexture;

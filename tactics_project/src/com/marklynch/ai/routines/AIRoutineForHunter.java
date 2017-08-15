@@ -1,7 +1,7 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.objects.Corpse;
+import com.marklynch.objects.Carcass;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.units.Actor;
@@ -91,7 +91,7 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		// 1. loot corpses
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, false, false, true, true, true,
-				true, Corpse.class);
+				true, Carcass.class);
 		if (carcass != null) {
 			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;

@@ -258,7 +258,7 @@ public class Templates {
 			0.5f, false, 80f, 0f, 0f, 0f, 100f, 10f);
 
 	// Corpses
-	public static final Corpse CARCASS = new Corpse("Carcass", 50, "carcass.png", null, new Inventory(), false, true,
+	public static final Carcass CARCASS = new Carcass("Carcass", 50, "carcass.png", null, new Inventory(), false, true,
 			false, true, false, false, 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
 			0f, null);
 	public static final Corpse CORPSE = new Corpse("Carcass", 50, "carcass.png", null, new Inventory(), false, true,
