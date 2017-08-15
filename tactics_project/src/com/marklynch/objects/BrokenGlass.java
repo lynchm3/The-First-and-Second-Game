@@ -15,15 +15,15 @@ public class BrokenGlass extends Stampable {
 	int glassShardsCount;
 
 	public BrokenGlass(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-			   
-			  float widthRatio, float heightRatio,
-			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float waterResistance, float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory,   
-				   widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner);
+
+			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
+			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
+			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
+			float poisonResistance, float slashResistance, float weight, Actor owner) {
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
+				weight, owner);
 
 		glassShardsCount = 10;// (int) (1d + Math.random() * 20d);
 		glassShards = new GlassShard[glassShardsCount];
@@ -33,15 +33,24 @@ public class BrokenGlass extends Stampable {
 					this);
 		}
 
+		canBePickedUp = true;
+		showInventory = false;
+		fitsInInventory = true;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = true;
+
 	}
 
 	@Override
 	public BrokenGlass makeCopy(Square square, Actor owner) {
 		return new BrokenGlass(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				    
-				 widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner);
+
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, slashResistance, weight, owner);
 	}
 
 	@Override

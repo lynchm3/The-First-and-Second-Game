@@ -42,6 +42,15 @@ public class Weapon extends GameObject {
 		this.minRange = minRange;
 		this.maxRange = maxRange;
 
+		canBePickedUp = true;
+		showInventory = false;
+		fitsInInventory = true;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = true;
+
 	}
 
 	// public void calculateAttackableSquares(Square[][] squares) {

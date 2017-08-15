@@ -21,7 +21,16 @@ public class Stump extends GameObject {
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner);
+
+		// BIG STUMP
 		canBePickedUp = false;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = false;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = true;
+		attackable = true;
 	}
 
 	@Override

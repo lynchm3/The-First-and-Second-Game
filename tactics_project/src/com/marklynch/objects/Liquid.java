@@ -25,6 +25,14 @@ public class Liquid extends GameObject {
 		this.volume = volume;
 		this.touchEffects = touchEffects;
 		this.drinkEffects = drinkEffects;
+		canBePickedUp = false;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = false;
 	}
 
 	public Liquid makeCopy(Square square, Actor owner, float volume) {

@@ -37,7 +37,14 @@ public class MapMarker extends GameObject {
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner);
-		canBePickedUp = false;
+		canBePickedUp = true;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = true;
+		attackable = false;
 	}
 
 	@Override

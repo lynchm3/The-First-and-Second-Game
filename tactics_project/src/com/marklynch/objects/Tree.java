@@ -29,7 +29,16 @@ public class Tree extends GameObject {
 				weight, owner);
 		healthWhenLastDroppedFruit = this.totalHealth;
 		// addApple(appleMaxRatioSize);
+
+		// BIG TREE
 		canBePickedUp = false;
+		showInventory = true;
+		fitsInInventory = false;
+		canShareSquare = false;
+		canContainOtherObjects = false;
+		blocksLineOfSight = true;
+		persistsWhenCantBeSeen = true;
+		attackable = true;
 	}
 
 	public void addApple(float maxSize) {

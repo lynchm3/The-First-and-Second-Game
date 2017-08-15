@@ -238,6 +238,13 @@ public class Actor extends GameObject {
 		this.canEquipWeapons = canEquipWeapons;
 
 		canBePickedUp = false;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = false;
+		canContainOtherObjects = true;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = true;
 	}
 
 	public static void loadStaticImages() {

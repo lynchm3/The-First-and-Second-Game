@@ -23,22 +23,29 @@ public class SwitchForOpenables extends Switch {
 	}
 
 	public SwitchForOpenables(String name, int health, String imagePath, Square squareGameObjectIsOn,
-			Inventory inventory,   
-			  
-			 float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
-			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
-			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, Actor owner, String actionName, String actionVerb, Openable openable,
-			SWITCH_TYPE switchType, RequirementToMeet[] requirementsToMeet) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory,   
-				    widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight,
-				owner, actionName, actionVerb, requirementsToMeet);
+			Inventory inventory,
+
+			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
+			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
+			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
+			float poisonResistance, float slashResistance, float weight, Actor owner, String actionName,
+			String actionVerb, Openable openable, SWITCH_TYPE switchType, RequirementToMeet[] requirementsToMeet) {
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
+				weight, owner, actionName, actionVerb, requirementsToMeet);
 		this.openable = openable;
 		this.switchType = switchType;
 		if (openable != null)
 			this.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SWITCH, this, openable.squareGameObjectIsOn);
+		canBePickedUp = false;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = false;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = true;
+		attackable = true;
 	}
 
 	@Override
@@ -70,12 +77,11 @@ public class SwitchForOpenables extends Switch {
 
 	public SwitchForOpenables makeCopy(Square square, Actor owner, Openable openable, SWITCH_TYPE switchType,
 			RequirementToMeet[] requirementsToMeet) {
-		return new SwitchForOpenables(new String(name), (int) totalHealth, imageTexturePath, square,
-				new Inventory(),    
-				   widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner,
-				actionName, actionVerb, openable, switchType, requirementsToMeet);
+		return new SwitchForOpenables(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, slashResistance, weight, owner, actionName, actionVerb, openable, switchType,
+				requirementsToMeet);
 	}
 
 }

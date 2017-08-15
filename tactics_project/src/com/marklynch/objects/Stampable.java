@@ -18,6 +18,15 @@ public class Stampable extends GameObject {
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner);
 
+		canBePickedUp = true;
+		showInventory = false;
+		fitsInInventory = true;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = true;
+
 	}
 
 	@Override

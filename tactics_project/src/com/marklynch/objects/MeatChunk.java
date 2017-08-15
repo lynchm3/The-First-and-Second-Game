@@ -17,6 +17,14 @@ public class MeatChunk extends GameObject {
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner);
+		canBePickedUp = true;
+		showInventory = false;
+		fitsInInventory = true;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = true;
 	}
 
 	public MeatChunk makeCopy(String name, Square square, Actor owner) {

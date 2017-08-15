@@ -18,19 +18,26 @@ public class RemoteDoor extends Openable {
 	boolean blocksLineOfSightWhenClosed;
 
 	public RemoteDoor(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-			   
-			  float widthRatio, float heightRatio,
-			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float waterResistance, float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
-			boolean locked, Key... keys) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory,   
-				   widthRatio, heightRatio, drawOffsetX,
+
+			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
+			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
+			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
+			float poisonResistance, float slashResistance, float weight, Actor owner, boolean locked, Key... keys) {
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner, locked,
-				keys);
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
+				weight, owner, locked, keys);
 		soundDampeningWhenClosed = soundDampening;
 		blocksLineOfSightWhenClosed = blocksLineOfSight;
+
+		canBePickedUp = false;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = false;
+		canContainOtherObjects = false;
+		blocksLineOfSight = true;
+		persistsWhenCantBeSeen = true;
+		attackable = true;
 
 	}
 
@@ -107,23 +114,24 @@ public class RemoteDoor extends Openable {
 
 	public RemoteDoor makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
 		return new RemoteDoor(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				    
-				 widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner, locked, keys);
+
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, slashResistance, weight, owner, locked, keys);
 	}
 
 	// @Override
 	// public Door makeCopy(Square square, Actor owner) {
 	// return new Door(new String(baseName), (int) totalHealth,
 	// imageTexturePath, square, new Inventory(),
-	//    
-	// 
-	//  widthRatio, heightRatio, drawOffsetX,
+	//
+	//
+	// widthRatio, heightRatio, drawOffsetX,
 	// drawOffsetY, soundWhenHit,
 	// soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 	// stackable, fireResistance,
-	// waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner,
+	// waterResistance, electricResistance, poisonResistance, slashResistance,
+	// weight, owner,
 	// locked, keys);
 	// }
 

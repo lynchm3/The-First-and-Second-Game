@@ -31,6 +31,16 @@ public class Readable extends GameObject {
 			conversation.openingConversationPart.talker = this;
 		}
 
+		// BOOK / SCROLL
+		canBePickedUp = true;
+		showInventory = false;
+		fitsInInventory = true;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = true;
+
 	}
 
 	public Readable makeCopy(Square square, String name, Conversation conversation, Actor owner) {

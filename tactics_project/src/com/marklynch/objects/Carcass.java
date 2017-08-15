@@ -25,6 +25,15 @@ public class Carcass extends GameObject {
 		baseName = new String(name);
 		if (this.inventory.size() == 0)
 			this.name = baseName + " (empty)";
+
+		canBePickedUp = true;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = true;
 	}
 
 	@Override

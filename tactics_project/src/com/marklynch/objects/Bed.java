@@ -26,6 +26,15 @@ public class Bed extends GameObject {
 				weight, owner);
 		this.imagePathCovers = imagePathCovers;
 		loadCoverImage();
+
+		canBePickedUp = false;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = false;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = true;
 	}
 
 	public void loadCoverImage() {

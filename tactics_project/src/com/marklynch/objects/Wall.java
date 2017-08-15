@@ -93,9 +93,16 @@ public class Wall extends GameObject {
 			drawX2 = (int) (drawX1 + width);
 			drawY1 = (int) (squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY);
 			drawY2 = (int) (drawY1 + height);
-
 		}
+
 		canBePickedUp = false;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = false;
+		canContainOtherObjects = false;
+		blocksLineOfSight = true;
+		persistsWhenCantBeSeen = true;
+		attackable = true;
 	}
 
 	public static void loadStaticImages() {

@@ -21,6 +21,17 @@ public class Inspectable extends GameObject {
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner);
+
+		// Giant Footprint
+		canBePickedUp = false;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = true;
+		attackable = false;
+
 	}
 
 	@Override

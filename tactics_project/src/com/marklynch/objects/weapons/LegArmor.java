@@ -28,6 +28,15 @@ public class LegArmor extends GameObject {
 		this.anchorX = anchorX;
 		this.anchorY = anchorY;
 
+		canBePickedUp = true;
+		showInventory = false;
+		fitsInInventory = true;
+		canShareSquare = true;
+		canContainOtherObjects = false;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		attackable = true;
+
 	}
 
 	public Action getUtilityAction(Actor performer) {
