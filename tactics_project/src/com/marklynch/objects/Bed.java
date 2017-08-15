@@ -16,16 +16,13 @@ public class Bed extends GameObject {
 	Texture imageTextureCovers;
 
 	public Bed(String name, int health, String imagePath, String imagePathCovers, Square squareGameObjectIsOn,
-			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
-			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio,
-			float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting,
-			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float waterResistance, float electricResistance, float poisonResistance, float slashResistance, float weight,
-			Actor owner) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, 
+			Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
+			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
+			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
+			float poisonResistance, float slashResistance, float weight, Actor owner) {
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner);
 		this.imagePathCovers = imagePathCovers;
 		loadCoverImage();
@@ -36,20 +33,18 @@ public class Bed extends GameObject {
 	}
 
 	public GameObject makeCopy(Square square) {
-		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
-				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
-				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight, null);
+		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square, new Inventory(),
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, slashResistance, weight, null);
 	}
 
 	@Override
 	public GameObject makeCopy(Square square, Actor owner) {
-		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square,
-				new Inventory(), showInventory, canShareSquare, fitsInInventory, canContainOtherObjects,
-				blocksLineOfSight, persistsWhenCantBeSeen, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
-				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
-				fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner);
+		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square, new Inventory(),
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, slashResistance, weight, owner);
 	}
 
 	@Override
@@ -69,9 +64,8 @@ public class Bed extends GameObject {
 			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
 			// TextureUtils.skipNormals = true;
-			TextureUtils.drawTexture(imageTextureCovers, 1f, actorPositionXInPixels,
-					actorPositionYInPixels, actorPositionXInPixels + Game.SQUARE_WIDTH,
-					actorPositionYInPixels + Game.SQUARE_HEIGHT);
+			TextureUtils.drawTexture(imageTextureCovers, 1f, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels + Game.SQUARE_HEIGHT);
 			// TextureUtils.skipNormals = false;
 		}
 

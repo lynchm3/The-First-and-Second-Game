@@ -18,17 +18,15 @@ public class Tree extends GameObject {
 	float healthWhenLastDroppedFruit;
 
 	public Tree(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-			boolean showInventory, boolean canShareSquare, boolean fitsInInventory, boolean canContainOtherObjects,
-			boolean blocksLineOfSight, boolean persistsWhenCantBeSeen, float widthRatio, float heightRatio,
-			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float waterResistance, float electricResistance, float poisonResistance, float slashResistance,
-			float weight, Actor owner) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, showInventory, canShareSquare, fitsInInventory,
-				canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen, true, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, owner);
+
+			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
+			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
+			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
+			float poisonResistance, float slashResistance, float weight, Actor owner) {
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
+				weight, owner);
 		healthWhenLastDroppedFruit = this.totalHealth;
 		// addApple(appleMaxRatioSize);
 		canBePickedUp = false;
@@ -38,9 +36,8 @@ public class Tree extends GameObject {
 
 		float appleSize = (float) (Math.random() * maxSize);
 
-		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), false, true, true, false, false,
-				false, appleSize, appleSize, 0.5f, 0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f,
-				0.5f, null);
+		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), appleSize, appleSize, 0.5f, 0.5f,
+				1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.5f, null);
 		apple.anchorX = 6;
 		apple.anchorY = 6;
 
@@ -158,10 +155,9 @@ public class Tree extends GameObject {
 
 	@Override
 	public Tree makeCopy(Square square, Actor owner) {
-		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(), showInventory,
-				canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight, persistsWhenCantBeSeen,
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(), widthRatio,
+				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
+				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
 				poisonResistance, slashResistance, weight, owner);
 	}
 

@@ -24,7 +24,7 @@ public class GameObjectTemplate implements InventoryParent {
 	public Inventory inventory;
 	public boolean showInventory;
 	public boolean canShareSquare;
-	public boolean fitsInInventory;
+	public boolean fitsInInventory = true;
 	public boolean canContainOtherObjects;
 	public boolean blocksLineOfSight;
 	public boolean persistsWhenCantBeSeen;
@@ -57,9 +57,7 @@ public class GameObjectTemplate implements InventoryParent {
 	protected ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
 
 	public GameObjectTemplate(String name, float totalHealth, String imageTexturePath, Square squareGameObjectIsOn,
-			Inventory inventory, boolean showInventory, boolean canShareSquare, boolean fitsInInventory,
-			boolean canContainOtherObjects, boolean blocksLineOfSight, boolean persistsWhenCantBeSeen,
-			boolean attackable, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
+			Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float slashResistance, float weight) {
@@ -99,18 +97,16 @@ public class GameObjectTemplate implements InventoryParent {
 
 	public GameObject makeCopy(Square square, Actor owner) {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner);
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, slashResistance, weight, owner);
 	}
 
 	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
 		GameObject copy = new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				showInventory, canShareSquare, fitsInInventory, canContainOtherObjects, blocksLineOfSight,
-				persistsWhenCantBeSeen, true, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
-				soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance,
-				waterResistance, electricResistance, poisonResistance, slashResistance, weight, owner);
+				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
+				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, slashResistance, weight, owner);
 		copy.backwards = backwards;
 		return copy;
 	}
