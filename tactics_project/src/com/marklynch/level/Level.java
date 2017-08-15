@@ -424,11 +424,14 @@ public class Level {
 		bleedButton.enabled = true;
 		buttons.add(bleedButton);
 
-		showHideLogButton = new LevelButton(activityLogger.width, 40f, 50f, 30f, "undo_button.png",
-				"undo_button_disabled.png", " LOG <", true, true, Color.BLACK, Color.WHITE);
+		showHideLogButton = new LevelButton(activityLogger.width, 40f, 70f, 30f, "undo_button.png",
+				"undo_button_disabled.png", " LOG [L] <", true, true, Color.BLACK, Color.WHITE);
 		showHideLogButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+
+				if (activityLogger.x != 0 && activityLogger.x != -activityLogger.width)
+					return;
 
 				showLog = !showLog;
 
@@ -449,7 +452,8 @@ public class Level {
 							}
 							activityLogger.x = 0;
 							showHideLogButton.x = activityLogger.width;
-							showHideLogButton.textParts = new Object[] { new StringWithColor("LOG <", Color.WHITE) };
+							showHideLogButton.textParts = new Object[] {
+									new StringWithColor("LOG [L] <", Color.WHITE) };
 						} else {
 							while (activityLogger.x > -activityLogger.width) {
 								activityLogger.x -= 2;
@@ -463,7 +467,8 @@ public class Level {
 							}
 							activityLogger.x = -activityLogger.width;
 							showHideLogButton.x = 0;
-							showHideLogButton.textParts = new Object[] { new StringWithColor("LOG >", Color.WHITE) };
+							showHideLogButton.textParts = new Object[] {
+									new StringWithColor("LOG [L] >", Color.WHITE) };
 						}
 					}
 				}.start();

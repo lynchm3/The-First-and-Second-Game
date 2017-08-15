@@ -700,6 +700,8 @@ public class UserInputLevel {
 			}
 		} else if (character == 'q' || character == 'Q') {
 			Game.level.centerButton.click();
+		} else if (character == 'l' || character == 'L') {
+			Game.level.showHideLogButton.click();
 		} else if (character == 'w' || character == 'W') {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
