@@ -614,7 +614,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			actions.add(new ActionTake(performer, this));
 		}
 
-		if (!(this instanceof Actor))
+		if (canBePickedUp)
 			actions.add(new ActionPickUp(performer, this));
 		if (!(this instanceof Actor) && canContainOtherObjects && this.inventory.size() > 0) {
 			actions.add(new ActionLootAll(performer, this));

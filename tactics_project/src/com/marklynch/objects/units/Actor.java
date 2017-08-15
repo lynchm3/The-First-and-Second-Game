@@ -237,6 +237,8 @@ public class Actor extends GameObject {
 
 		this.canOpenDoors = canOpenDoors;
 		this.canEquipWeapons = canEquipWeapons;
+
+		canBePickedUp = false;
 	}
 
 	public static void loadStaticImages() {

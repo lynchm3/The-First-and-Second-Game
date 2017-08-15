@@ -7,7 +7,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
-import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
@@ -32,6 +31,7 @@ public class Tree extends GameObject {
 				slashResistance, weight, owner);
 		healthWhenLastDroppedFruit = this.totalHealth;
 		// addApple(appleMaxRatioSize);
+		canBePickedUp = false;
 	}
 
 	public void addApple(float maxSize) {
@@ -146,14 +146,6 @@ public class Tree extends GameObject {
 		actions.add(new ActionChop(performer, this));
 
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-
-		Action pickupAction = null;
-		for (Action action : actions) {
-			if (action instanceof ActionPickUp) {
-				pickupAction = action;
-			}
-		}
-		actions.remove(pickupAction);
 
 		return actions;
 

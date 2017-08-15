@@ -2,12 +2,8 @@ package com.marklynch.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
@@ -101,6 +97,7 @@ public class Wall extends GameObject {
 			drawY2 = (int) (drawY1 + height);
 
 		}
+		canBePickedUp = false;
 	}
 
 	public static void loadStaticImages() {
@@ -332,22 +329,6 @@ public class Wall extends GameObject {
 
 		if (verticalWall = connectedTop && connectedBottom)
 			return;
-
-	}
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-
-		ArrayList<Action> actions = super.getAllActionsPerformedOnThisInWorld(performer);
-		Action pickupAction = null;
-		for (Action action : actions) {
-			if (action instanceof ActionPickUp) {
-				pickupAction = action;
-			}
-		}
-		actions.remove(pickupAction);
-
-		return actions;
 
 	}
 
