@@ -20,8 +20,6 @@ public class Door extends Openable {
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner, locked, keys);
-		soundDampeningWhenClosed = soundDampening;
-		blocksLineOfSightWhenClosed = blocksLineOfSight;
 
 		canBePickedUp = false;
 		showInventory = false;
@@ -31,6 +29,8 @@ public class Door extends Openable {
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
 		attackable = true;
+		soundDampeningWhenClosed = soundDampening;
+		blocksLineOfSightWhenClosed = blocksLineOfSight;
 
 	}
 

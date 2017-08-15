@@ -164,7 +164,7 @@ public class Templates {
 			1, 0f, 0f, 10f, 1f, 5f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, null, true);
 	public static final Door DOOR = new Door("Door", 500, "door.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 10f,
 			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, null, false);
-	public static final Door GATE = new Door("Gate", 100, "gate.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 10f,
+	public static final Gate GATE = new Gate("Gate", 100, "gate.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 10f,
 			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, null, false);
 	public static final Chest CHEST = new Chest("Chest", 200, "chest.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
 			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, null, false);
@@ -190,7 +190,7 @@ public class Templates {
 
 	public static final Wall WALL = new Wall("Wall", 1000, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 10f, 0f,
 			10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 200f, null);
-	public static final Wall FENCE = new Wall("Fence", 50, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 10f, 0f,
+	public static final Wall FENCE = new Fence("Fence", 50, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 10f, 0f,
 			10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, null);
 	public static final Vein VEIN = new Vein("Vein", 1000, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 15f, 0f,
 			10f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 200f, null);
