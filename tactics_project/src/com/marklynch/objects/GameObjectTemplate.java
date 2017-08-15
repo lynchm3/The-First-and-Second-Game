@@ -22,13 +22,13 @@ public class GameObjectTemplate implements InventoryParent {
 	public String imageTexturePath = null;
 	public transient Square squareGameObjectIsOn = null;
 	public Inventory inventory;
-	public boolean showInventory;
-	public boolean canShareSquare;
+	public boolean showInventory = false;;
+	public boolean canShareSquare = true;
 	public boolean fitsInInventory = true;
-	public boolean canContainOtherObjects;
-	public boolean blocksLineOfSight;
-	public boolean persistsWhenCantBeSeen;
-	public boolean attackable;
+	public boolean canContainOtherObjects = false;
+	public boolean blocksLineOfSight = false;
+	public boolean persistsWhenCantBeSeen = false;
+	public boolean attackable = true;
 	public boolean canBePickedUp = true;
 	public boolean decorative = false;
 
