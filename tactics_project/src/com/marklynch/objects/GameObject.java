@@ -608,13 +608,13 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			return actions;
 		// public boolean showInventory;
 		// public boolean canShareSquare;
-		if (fitsInInventory) {
+		if (!decorative && fitsInInventory) {
 			actions.add(new ActionTake(performer, this));
 		}
 
-		if (canBePickedUp)
+		if (!decorative && canBePickedUp)
 			actions.add(new ActionPickUp(performer, this));
-		if (!(this instanceof Actor) && canContainOtherObjects && this.inventory.size() > 0) {
+		if (!decorative && !(this instanceof Actor) && canContainOtherObjects && this.inventory.size() > 0) {
 			actions.add(new ActionLootAll(performer, this));
 		}
 
@@ -625,38 +625,43 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// && Game.level.activeActor.equippedWeapon
 		// .hasRange(Game.level.activeActor.straightLineDistanceTo(this.squareGameObjectIsOn)))
 		// {
-		if (this != Game.level.player && attackable)
+		if (!decorative && this != Game.level.player && attackable)
 			actions.add(new ActionAttack(performer, this));
 
-		if (this != Game.level.player && attackable)
+		if (!decorative && this != Game.level.player && attackable)
 			actions.add(new ActionTeleportOther(performer, this));
 		// }
-		if (this != Game.level.player && this instanceof Actor)
+		if (!decorative && this != Game.level.player && this instanceof Actor)
 			actions.add(new ActionFollow(Game.level.player, (Actor) this));
 
-		if (performer.equipped != null && this.canContainOtherObjects) {
+		if (!decorative && performer.equipped != null && this.canContainOtherObjects) {
 			actions.add(new ActionGiveSpecificItem(performer, this, performer.equipped, false));
 		}
 
 		// Throw from inventory
-		if (this.canContainOtherObjects) {
+		if (!decorative && this.canContainOtherObjects) {
 			actions.add(new ActionGiveItemsInInventory(performer, this));
 		}
 
-		if (this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn && performer.equipped != null) {
+		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn
+				&& performer.equipped != null) {
 			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
 		}
 
 		// Throw from inventory
-		if (this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn)
+		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn)
 			actions.add(new ActionThrowItemInInventory(performer, this));
 
 		// Pour from inventory
-		actions.add(new ActionPourContainerInInventory(performer, this));
+		if (!decorative)
+			actions.add(new ActionPourContainerInInventory(performer, this));
 
-		actions.add(new ActionCastBurn(performer, this));
-		actions.add(new ActionCastDouse(performer, this));
-		actions.add(new ActionCastPoison(performer, this));
+		if (!decorative)
+			actions.add(new ActionCastBurn(performer, this));
+		if (!decorative)
+			actions.add(new ActionCastDouse(performer, this));
+		if (!decorative)
+			actions.add(new ActionCastPoison(performer, this));
 
 		return actions;
 

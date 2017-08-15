@@ -227,6 +227,7 @@ public class QuestSmallGame extends Quest {
 		// Some ground hatchets
 		Templates.HATCHET.makeCopy(Game.level.squares[3][6], Game.level.player);
 		Templates.HATCHET.makeCopy(Game.level.squares[5][6], Game.level.player);
+		Templates.BLOOD.makeCopy(Game.level.squares[5][6], Game.level.player);
 		Templates.HATCHET.makeCopy(Game.level.squares[1][6], Game.level.player);
 
 		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();

@@ -31,6 +31,7 @@ public class Inspectable extends GameObject {
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = true;
 		attackable = false;
+		decorative = true;
 
 	}
 

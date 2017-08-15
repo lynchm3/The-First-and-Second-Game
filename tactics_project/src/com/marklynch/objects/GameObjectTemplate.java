@@ -30,6 +30,7 @@ public class GameObjectTemplate implements InventoryParent {
 	public boolean persistsWhenCantBeSeen;
 	public boolean attackable;
 	public boolean canBePickedUp = true;
+	public boolean decorative = false;
 
 	public float value = 1;
 	public Date pickUpdateDateTime = new Date();

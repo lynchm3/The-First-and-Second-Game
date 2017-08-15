@@ -173,6 +173,27 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		return (int) (a.height - b.height);
 	}
 
+	public int getDecorativeCount() {
+		int count = 0;
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.decorative) {
+				count++;
+			}
+		}
+
+		return count;
+	}
+
+	public GameObject getNonDecorativeGameObject() {
+		for (GameObject gameObject : gameObjects) {
+			if (!gameObject.decorative) {
+				return gameObject;
+			}
+		}
+		return null;
+
+	}
+
 	// public GameObject getAc() {
 	// for (GameObject gameObject : gameObjects) {
 	// if (gameObject instanceof Actor) {

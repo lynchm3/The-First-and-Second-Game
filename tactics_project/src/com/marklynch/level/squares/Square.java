@@ -558,6 +558,12 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			return this.inventory.get(0).getSecondaryActionPerformedOnThisInWorld(performer);
 		}
 
+		if (this.inventory.getDecorativeCount() == this.inventory.size() - 1) {
+			GameObject onlyNonDecorativeObject = this.inventory.getNonDecorativeGameObject();
+			if (onlyNonDecorativeObject != null)
+				return onlyNonDecorativeObject.getSecondaryActionPerformedOnThisInWorld(performer);
+		}
+
 		return null;
 
 	}
