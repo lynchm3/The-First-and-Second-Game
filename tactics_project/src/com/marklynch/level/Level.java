@@ -33,6 +33,7 @@ import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuActionButton;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.popup.PopupToast;
+import com.marklynch.level.popup.PopupTooltip;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -113,6 +114,7 @@ public class Level {
 	public ArrayList<PopupMenu> popupMenus = new ArrayList<PopupMenu>();
 	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
 	public ArrayList<PopupToast> popupToasts = new ArrayList<PopupToast>();
+	public ArrayList<PopupTooltip> popupTooltips = new ArrayList<PopupTooltip>();
 
 	public Toast toast;
 	public Conversation conversation;
@@ -1085,7 +1087,6 @@ public class Level {
 			if (popupMenus.get(1).highlightedButton instanceof PopupMenuActionButton) {
 				((PopupMenuActionButton) popupMenus.get(1).highlightedButton).drawSound();
 			}
-
 		}
 
 		// GL11.glColor4f;
@@ -1201,6 +1202,10 @@ public class Level {
 			}
 		}
 
+		for (PopupTooltip popupTooltip : popupTooltips) {
+			popupTooltip.draw();
+		}
+
 		if (!popupTextBoxes.isEmpty()) {
 			for (PopupTextBox popupTextBox : popupTextBoxes) {
 				popupTextBox.draw();
@@ -1223,6 +1228,8 @@ public class Level {
 
 		if (conversation != null)
 			return;
+
+		this.popupTooltips.clear();
 
 		// if (this.script.activeScriptEvent != null) {
 		script.update(delta);
@@ -1255,9 +1262,11 @@ public class Level {
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
-				if (squares[i][j].visibleToPlayer) {
-					for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
-						gameObject.updateRealtime(delta);
+				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
+					gameObject.updateRealtime(delta);
+					if (Keyboard.isKeyDown(Keyboard.KEY_TAB) == true && squares[i][j].visibleToPlayer) {
+						popupTooltips.add(new PopupTooltip(gameObject));
+
 					}
 				}
 			}
