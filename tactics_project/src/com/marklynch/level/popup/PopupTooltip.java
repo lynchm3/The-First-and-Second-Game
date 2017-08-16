@@ -18,9 +18,7 @@ public class PopupTooltip {
 	public PopupTooltip(GameObject gameObject) {
 		this.gameObject = gameObject;
 		tempString = new String(gameObject.name);
-		drawPositionX = gameObject.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH;
-		drawPositionY = gameObject.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT;
-		this.width = 200;
+		this.width = 128;
 		this.height = 40;
 	}
 
@@ -30,7 +28,8 @@ public class PopupTooltip {
 		drawPositionX = (Game.windowWidth / 2)
 				+ (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.getDragXWithOffset()));
 		drawPositionY = (Game.windowHeight / 2)
-				+ (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.getDragYWithOffset()));
+				+ (Game.zoom * (squarePositionY - Game.windowHeight / 2 + Game.getDragYWithOffset()))
+				+ 40 * gameObject.squareGameObjectIsOn.inventory.getGameObjects().indexOf(gameObject);
 		// QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, Game.windowWidth,
 		// 0, Game.windowHeight);
 		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
