@@ -35,7 +35,6 @@ import com.marklynch.level.popup.PopupMenuSelectAction;
 import com.marklynch.level.popup.PopupMenuSelectObject;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.popup.PopupToast;
-import com.marklynch.level.popup.PopupTooltip;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -115,9 +114,9 @@ public class Level {
 
 	public ArrayList<PopupMenuSelectObject> popupMenuObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
+	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
 	public ArrayList<PopupToast> popupToasts = new ArrayList<PopupToast>();
-	public ArrayList<PopupTooltip> popupTooltips = new ArrayList<PopupTooltip>();
 
 	public Toast toast;
 	public Conversation conversation;
@@ -1157,16 +1156,16 @@ public class Level {
 			inventory.drawStaticUI();
 		}
 
+		for (PopupMenu popupTooltip : popupMenuHighlightObjects) {
+			popupTooltip.draw();
+		}
+
 		for (PopupMenu popup : popupMenuObjects) {
 			popup.draw();
 		}
 
 		for (PopupMenu popup : popupMenuActions) {
 			popup.draw();
-		}
-
-		for (PopupTooltip popupTooltip : popupTooltips) {
-			popupTooltip.draw();
 		}
 
 		if (!popupTextBoxes.isEmpty()) {
@@ -1191,8 +1190,6 @@ public class Level {
 
 		if (conversation != null)
 			return;
-
-		this.popupTooltips.clear();
 
 		// if (this.script.activeScriptEvent != null) {
 		script.update(delta);
@@ -1374,6 +1371,17 @@ public class Level {
 
 			for (int i = popupMenuObjects.size() - 1; i >= 0; i--) {
 				for (Button button : popupMenuObjects.get(i).buttons) {
+					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+						return button;
+				}
+
+			}
+		}
+
+		if (!Game.level.popupMenuHighlightObjects.isEmpty()) {
+
+			for (int i = popupMenuHighlightObjects.size() - 1; i >= 0; i--) {
+				for (Button button : popupMenuHighlightObjects.get(i).buttons) {
 					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 						return button;
 				}

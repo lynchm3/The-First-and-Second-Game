@@ -68,7 +68,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 						for (Button button : buttons) {
 							button.down = false;
 						}
-						highlightedButton.down = true;
+						objectButton.down = true;
 						gameObjectSelected(gameObject);
 					}
 				};
@@ -85,12 +85,18 @@ public class PopupMenuSelectObject extends PopupMenu {
 	}
 
 	public void gameObjectSelected(GameObject gameObject) {
+
+		Game.level.popupMenuObjects.clear();
+		Game.level.popupMenuObjects.add(this);
+
 		Game.level.popupMenuActions.clear();
 		Game.level.popupMenuActions.add(new PopupMenuSelectAction(100, 200, level, gameObject.squareGameObjectIsOn,
 				gameObject.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 
 	public void squareSelected(Square square) {
+		Game.level.popupMenuObjects.clear();
+		Game.level.popupMenuObjects.add(this);
 		Game.level.popupMenuActions.clear();
 		Game.level.popupMenuActions.add(new PopupMenuSelectAction(100, 200, level, square,
 				square.getAllActionsPerformedOnThisInWorld(Game.level.player)));
