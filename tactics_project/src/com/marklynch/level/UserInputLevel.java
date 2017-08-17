@@ -295,8 +295,8 @@ public class UserInputLevel {
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
 
 			// Left Click
-			Game.level.popupMenuObjects.clear();
-			Game.level.popupMenuActions.clear();
+			// Game.level.popupMenuObjects.clear();
+			// Game.level.popupMenuActions.clear();
 			if (scriptInterceptsClick) {
 				// Continue script
 				Game.level.script.click();
@@ -688,13 +688,14 @@ public class UserInputLevel {
 		if (Keyboard.isKeyDown(Keyboard.KEY_TAB) == true) {
 			Game.level.popupMenuActions.clear();
 			Game.level.popupMenuObjects.clear();
+			Game.level.popupMenuHighlightObjects.clear();
 			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 					if (Game.level.squares[i][j].visibleToPlayer) {
 						PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level,
 								Game.level.squares[i][j], false, false);
 						if (popupSelectObject.buttons.size() > 0)
-							Game.level.popupMenuObjects.add(popupSelectObject);
+							Game.level.popupMenuHighlightObjects.add(popupSelectObject);
 					}
 				}
 			}
@@ -796,7 +797,7 @@ public class UserInputLevel {
 			keyStateTab = true;
 		} else if (keyStateTab == true && !Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
 			keyStateTab = false;
-			Game.level.popupMenuObjects.clear();
+			Game.level.popupMenuHighlightObjects.clear();
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
 			keyStateTab = false;
 		}
