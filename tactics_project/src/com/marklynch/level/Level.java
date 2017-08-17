@@ -31,7 +31,6 @@ import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuActionButton;
-import com.marklynch.level.popup.PopupMenuSelectObject;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.popup.PopupToast;
 import com.marklynch.level.popup.PopupTooltip;
@@ -1267,21 +1266,6 @@ public class Level {
 					gameObject.updateRealtime(delta);
 				}
 			}
-		}
-		if (Keyboard.isKeyDown(Keyboard.KEY_TAB) == true) {
-			Game.level.popupMenus.clear();
-			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-					if (squares[i][j].visibleToPlayer) {
-						PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level,
-								squares[i][j], false);
-						if (popupSelectObject.buttons.size() > 0)
-							Game.level.popupMenus.add(popupSelectObject);
-					}
-				}
-			}
-			// popupTooltips.add(new PopupTooltip(gameObject));
-
 		}
 
 		for (Decoration decoration : decorations)

@@ -243,14 +243,16 @@ public class UserInputLevel {
 
 			}
 
-			if (Game.level.popupMenus.size() != 0) {
+			if (Game.level.popupMenus.size() != 0
+					&& Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).highlightedButton != null) {
 				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).highlightedButton.removeHighlight();
 			}
 
 			if (Game.buttonHoveringOver != null) {
 				for (PopupMenu popUp : Game.level.popupMenus) {
 					if (popUp.buttons.contains(Game.buttonHoveringOver)) {
-						popUp.highlightedButton.removeHighlight();
+						if (popUp.highlightedButton != null)
+							popUp.highlightedButton.removeHighlight();
 						popUp.highlightedButton = Game.buttonHoveringOver;
 						popUp.highlightedButtonIndex = popUp.buttons.indexOf(Game.buttonHoveringOver);
 					}
@@ -450,7 +452,8 @@ public class UserInputLevel {
 					Game.level.popupMenus.add(popupSelectAction);
 				// Game.level.popups.add(e);
 			} else if (!(square instanceof InventorySquare)) {
-				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square, true);
+				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square, true,
+						true);
 				if (popupSelectObject.buttons.size() > 0)
 					Game.level.popupMenus.add(popupSelectObject);
 			}
@@ -652,6 +655,36 @@ public class UserInputLevel {
 	}
 
 	public static void tabTyped() {
+		int gridX1Bounds = Game.level.player.squareGameObjectIsOn.xInGrid - Game.level.player.sight;
+		if (gridX1Bounds < 0)
+			gridX1Bounds = 0;
+
+		// + (mouseXinPixels) / Game.zoom);
+
+		int gridX2Bounds = Game.level.player.squareGameObjectIsOn.xInGrid + Game.level.player.sight;
+		if (gridX2Bounds >= Game.level.width)
+			gridX2Bounds = Game.level.width - 1;
+
+		int gridY1Bounds = Game.level.player.squareGameObjectIsOn.yInGrid - Game.level.player.sight;
+		if (gridY1Bounds < 0)
+			gridY1Bounds = 0;
+
+		int gridY2Bounds = Game.level.player.squareGameObjectIsOn.yInGrid + Game.level.player.sight;
+		if (gridY2Bounds >= Game.level.height)
+			gridY2Bounds = Game.level.height - 1;
+		if (Keyboard.isKeyDown(Keyboard.KEY_TAB) == true) {
+			Game.level.popupMenus.clear();
+			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+					if (Game.level.squares[i][j].visibleToPlayer) {
+						PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level,
+								Game.level.squares[i][j], false, false);
+						if (popupSelectObject.buttons.size() > 0)
+							Game.level.popupMenus.add(popupSelectObject);
+					}
+				}
+			}
+		}
 	}
 
 	public static long lastCopy = 0;

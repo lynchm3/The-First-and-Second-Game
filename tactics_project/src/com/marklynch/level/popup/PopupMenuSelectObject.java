@@ -10,12 +10,14 @@ import com.marklynch.ui.button.ClickListener;
 public class PopupMenuSelectObject extends PopupMenu {
 	public PopupMenuButton selectSquareButton;
 	public boolean showSquare = true;
+	public boolean keyControl = true;
 
-	public PopupMenuSelectObject(float width, Level level, Square square, boolean showSquare) {
+	public PopupMenuSelectObject(float width, Level level, Square square, boolean showSquare, boolean keyControl) {
 
 		super(width, level, square);
 
 		this.showSquare = showSquare;
+		this.keyControl = keyControl;
 
 		if (showSquare) {
 
@@ -75,7 +77,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 
 		}
 
-		if (buttons.size() > 0) {
+		if (keyControl && buttons.size() > 0) {
 			highlightedButton = buttons.get(highlightedButtonIndex);
 			highlightedButton.highlight();
 		}
