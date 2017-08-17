@@ -21,7 +21,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 
 		if (showSquare) {
 
-			selectSquareButton = new PopupMenuButton(0, 0, 200, 30, null, null, true, true, square, this, "" + square);
+			selectSquareButton = new PopupMenuButton(0, 0, 128, 30, null, null, true, true, square, this, "" + square);
 
 			selectSquareButton.clickListener = new ClickListener() {
 
@@ -57,7 +57,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 			// BUT... I dont want the buttons to zoom :P
 
 			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
-				final PopupMenuButton objectButton = new PopupMenuButton(0, buttons.size() * 30, 200, 30, null, null,
+				final PopupMenuButton objectButton = new PopupMenuButton(0, buttons.size() * 30, 128, 30, null, null,
 						true, true, gameObject, this, "" + gameObject);
 
 				objectButton.clickListener = new ClickListener() {
@@ -90,7 +90,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 		Game.level.popupMenuObjects.add(this);
 
 		Game.level.popupMenuActions.clear();
-		Game.level.popupMenuActions.add(new PopupMenuSelectAction(100, 200, level, gameObject.squareGameObjectIsOn,
+		Game.level.popupMenuActions.add(new PopupMenuSelectAction(128, 128, level, gameObject.squareGameObjectIsOn,
 				gameObject.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 
@@ -98,7 +98,7 @@ public class PopupMenuSelectObject extends PopupMenu {
 		Game.level.popupMenuObjects.clear();
 		Game.level.popupMenuObjects.add(this);
 		Game.level.popupMenuActions.clear();
-		Game.level.popupMenuActions.add(new PopupMenuSelectAction(100, 200, level, square,
+		Game.level.popupMenuActions.add(new PopupMenuSelectAction(128, 128, level, square,
 				square.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 }

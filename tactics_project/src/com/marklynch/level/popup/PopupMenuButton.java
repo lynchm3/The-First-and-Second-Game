@@ -13,8 +13,14 @@ public class PopupMenuButton extends Button {
 	public Object object;
 	public PopupMenu popup;
 
+	Color colorNormal = new Color(0f, 0f, 0f, 0.60f);
+	Color colorDisabled = new Color(1f, 0.8f, 0.8f, 0.60f);
+	Color colorHighlighted = new Color(0f, 0f, 1f, 0.60f);
+	Color colorSelected = new Color(0f, 1f, 0f, 0.60f);
+
 	public PopupMenuButton(float x, float y, float width, float height, String enabledTexturePath,
-			String disabledTexturePath, boolean xFromLeft, boolean yFromTop, Object object, PopupMenu popup, String text) {
+			String disabledTexturePath, boolean xFromLeft, boolean yFromTop, Object object, PopupMenu popup,
+			String text) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
@@ -36,20 +42,20 @@ public class PopupMenuButton extends Button {
 
 		if (enabled) {
 			if (down) {
-				QuadUtils.drawQuad(Color.GREEN, realX, realX + width, realY, realY + height);
+				QuadUtils.drawQuad(colorSelected, realX, realX + width, realY, realY + height);
 				TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 			} else {
 				if (highlighted) {
-					QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
+					QuadUtils.drawQuad(colorHighlighted, realX, realX + width, realY, realY + height);
 					TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 				} else {
-					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
+					QuadUtils.drawQuad(colorNormal, realX, realX + width, realY, realY + height);
 					TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 				}
 			}
 		} else {
 
-			QuadUtils.drawQuad(Color.LIGHT_GRAY, realX, realX + width, realY, realY + height);
+			QuadUtils.drawQuad(colorDisabled, realX, realX + width, realY, realY + height);
 			TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
 		}
 
