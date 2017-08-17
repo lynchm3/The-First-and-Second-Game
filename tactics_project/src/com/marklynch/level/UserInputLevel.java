@@ -243,26 +243,28 @@ public class UserInputLevel {
 
 			}
 
-			if (Game.level.popupMenus.size() != 0
-					&& Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).highlightedButton != null) {
-				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).highlightedButton.removeHighlight();
+			for (PopupMenu popupMenu : Game.level.popupMenuObjects) {
+				popupMenu.clearHighlights();
+			}
+
+			for (PopupMenu popupMenu : Game.level.popupMenuActions) {
+				popupMenu.clearHighlights();
 			}
 
 			if (Game.buttonHoveringOver != null) {
-				for (PopupMenu popUp : Game.level.popupMenus) {
+				for (PopupMenu popUp : Game.level.popupMenuActions) {
 					if (popUp.buttons.contains(Game.buttonHoveringOver)) {
-						if (popUp.highlightedButton != null)
-							popUp.highlightedButton.removeHighlight();
 						popUp.highlightedButton = Game.buttonHoveringOver;
 						popUp.highlightedButtonIndex = popUp.buttons.indexOf(Game.buttonHoveringOver);
 					}
 				}
-
-				// if (Game.buttonHoveringOver instanceof PopupActionButton)
-				// ((PopupActionButton) Game.buttonHoveringOver).highlight();
-				// else
+				for (PopupMenu popUp : Game.level.popupMenuObjects) {
+					if (popUp.buttons.contains(Game.buttonHoveringOver)) {
+						popUp.highlightedButton = Game.buttonHoveringOver;
+						popUp.highlightedButtonIndex = popUp.buttons.indexOf(Game.buttonHoveringOver);
+					}
+				}
 				Game.buttonHoveringOver.highlight();
-
 			}
 		}
 
@@ -293,14 +295,8 @@ public class UserInputLevel {
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
 
 			// Left Click
-			if (!hoveringOverPopup) {
-				for (PopupMenu popup : Game.level.popupMenus) {
-					for (Button button : popup.buttons) {
-						button.removeHighlight();
-					}
-				}
-				Game.level.popupMenus.clear();
-			}
+			Game.level.popupMenuObjects.clear();
+			Game.level.popupMenuActions.clear();
 			if (scriptInterceptsClick) {
 				// Continue script
 				Game.level.script.click();
@@ -332,17 +328,13 @@ public class UserInputLevel {
 			if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
 				Player.playerTargetSquare = null;
 				Player.playerTargetActor = null;
-			} else if (Game.level.popupMenus.isEmpty() && Game.squareMouseIsOver != null) {
+			} else if (Game.level.popupMenuObjects.isEmpty() && Game.squareMouseIsOver != null) {
 				interactWith(Game.squareMouseIsOver, -1, true, false, false);
 				// Game.level.popups.add(new PopupSelectObject(100, Game.level,
 				// Game.squareMouseIsOver));
 			} else {
-				for (PopupMenu popup : Game.level.popupMenus) {
-					for (Button button : popup.buttons) {
-						button.removeHighlight();
-					}
-				}
-				Game.level.popupMenus.clear();
+				Game.level.popupMenuObjects.clear();
+				Game.level.popupMenuActions.clear();
 			}
 		}
 
@@ -438,24 +430,20 @@ public class UserInputLevel {
 
 			}
 		} else {
-			for (PopupMenu popup : Game.level.popupMenus) {
-				for (Button button : popup.buttons) {
-					button.removeHighlight();
-				}
-			}
-			Game.level.popupMenus.clear();
+			Game.level.popupMenuObjects.clear();
+			Game.level.popupMenuActions.clear();
 			if (square instanceof InventorySquare && ((InventorySquare) square).gameObject != null) {
 				PopupMenuSelectAction popupSelectAction = new PopupMenuSelectAction(0, 200, Game.level, square,
 						((InventorySquare) square).gameObject
 								.getAllActionsPerformedOnThisInInventory(Game.level.player));
 				if (popupSelectAction.buttons.size() > 0)
-					Game.level.popupMenus.add(popupSelectAction);
+					Game.level.popupMenuActions.add(popupSelectAction);
 				// Game.level.popups.add(e);
 			} else if (!(square instanceof InventorySquare)) {
 				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square, true,
 						true);
 				if (popupSelectObject.buttons.size() > 0)
-					Game.level.popupMenus.add(popupSelectObject);
+					Game.level.popupMenuObjects.add(popupSelectObject);
 			}
 		}
 
@@ -472,10 +460,15 @@ public class UserInputLevel {
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
-		if (Game.level.popupMenus.size() != 0) {
+		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
 				controllingMenu = true;
-				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
+				Game.level.popupMenuActions.get(0).clickHighlightedButton();
+			}
+		} else if (Game.level.popupMenuObjects.size() != 0) {
+			if (allowMenuControl) {
+				controllingMenu = true;
+				Game.level.popupMenuObjects.get(0).clickHighlightedButton();
 			}
 		} else if (!controllingMenu) {
 			interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE,
@@ -496,10 +489,15 @@ public class UserInputLevel {
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
 			return;
-		if (Game.level.popupMenus.size() != 0) {
+		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
 				controllingMenu = true;
-				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).moveHighLightUp();
+				Game.level.popupMenuActions.get(0).moveHighLightUp();
+			}
+		} else if (Game.level.popupMenuObjects.size() != 0) {
+			if (allowMenuControl) {
+				controllingMenu = true;
+				Game.level.popupMenuObjects.get(0).moveHighLightUp();
 			}
 		} else if (!controllingMenu) {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid - 1;
@@ -525,10 +523,15 @@ public class UserInputLevel {
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
 			return;
-		if (Game.level.popupMenus.size() != 0) {
+		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
 				controllingMenu = true;
-				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).moveHighLightDown();
+				Game.level.popupMenuActions.get(0).moveHighLightDown();
+			}
+		} else if (Game.level.popupMenuObjects.size() != 0) {
+			if (allowMenuControl) {
+				controllingMenu = true;
+				Game.level.popupMenuObjects.get(0).moveHighLightDown();
 			}
 		} else if (!controllingMenu) {
 			int y = Game.level.activeActor.squareGameObjectIsOn.yInGrid + 1;
@@ -553,23 +556,23 @@ public class UserInputLevel {
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
 			return;
-		if (Game.level.popupMenus.size() != 0) {
+
+		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
 				controllingMenu = true;
-				int popupToRemoveIndex = Game.level.popupMenus.size() - 1;
-				for (Button button : Game.level.popupMenus.get(popupToRemoveIndex).buttons) {
-					button.removeHighlight();
-				}
-				Game.level.popupMenus.remove(popupToRemoveIndex);
-
-				if (Game.level.popupMenus.size() != 0) {
-					for (Button button : Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).buttons) {
-						button.down = false;
-					}
+				Game.level.popupMenuActions.clear();
+				for (Button button : Game.level.popupMenuObjects.get(0).buttons) {
+					button.down = false;
 				}
 			}
+		} else if (Game.level.popupMenuObjects.size() != 0) {
+			if (allowMenuControl) {
+				controllingMenu = true;
+				Game.level.popupMenuObjects.clear();
+			}
+		}
 
-		} else if (!controllingMenu) {
+		else if (!controllingMenu) {
 			int x = Game.level.activeActor.squareGameObjectIsOn.xInGrid - 1;
 			if (x >= 0) {
 				interactWith(Game.level.squares[x][Game.level.activeActor.squareGameObjectIsOn.yInGrid],
@@ -592,10 +595,15 @@ public class UserInputLevel {
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
 			return;
-		if (Game.level.popupMenus.size() != 0) {
+		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
 				controllingMenu = true;
-				Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
+				Game.level.popupMenuActions.get(0).clickHighlightedButton();
+			}
+		} else if (Game.level.popupMenuObjects.size() != 0) {
+			if (allowMenuControl) {
+				controllingMenu = true;
+				Game.level.popupMenuObjects.get(0).clickHighlightedButton();
 			}
 		} else if (!controllingMenu) {
 
@@ -619,8 +627,12 @@ public class UserInputLevel {
 		}
 		if (Game.level.activeActor != Game.level.player)
 			return;
-		if (Game.level.popupMenus.size() != 0) {
-			Game.level.popupMenus.get(Game.level.popupMenus.size() - 1).clickHighlightedButton();
+		if (Game.level.popupMenuActions.size() != 0) {
+			controllingMenu = true;
+			Game.level.popupMenuActions.get(0).clickHighlightedButton();
+		} else if (Game.level.popupMenuObjects.size() != 0) {
+			controllingMenu = true;
+			Game.level.popupMenuObjects.get(0).clickHighlightedButton();
 		}
 	}
 
@@ -642,7 +654,8 @@ public class UserInputLevel {
 
 		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
 
-		Game.level.popupMenus.clear();
+		Game.level.popupMenuActions.clear();
+		Game.level.popupMenuObjects.clear();
 		Game.level.popupTextBoxes.clear();
 		Game.level.popupToasts.clear();
 		if (Game.level.openInventories.size() != 0) {
@@ -673,14 +686,15 @@ public class UserInputLevel {
 		if (gridY2Bounds >= Game.level.height)
 			gridY2Bounds = Game.level.height - 1;
 		if (Keyboard.isKeyDown(Keyboard.KEY_TAB) == true) {
-			Game.level.popupMenus.clear();
+			Game.level.popupMenuActions.clear();
+			Game.level.popupMenuObjects.clear();
 			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 					if (Game.level.squares[i][j].visibleToPlayer) {
 						PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level,
 								Game.level.squares[i][j], false, false);
 						if (popupSelectObject.buttons.size() > 0)
-							Game.level.popupMenus.add(popupSelectObject);
+							Game.level.popupMenuObjects.add(popupSelectObject);
 					}
 				}
 			}
@@ -782,7 +796,7 @@ public class UserInputLevel {
 			keyStateTab = true;
 		} else if (keyStateTab == true && !Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
 			keyStateTab = false;
-			Game.level.popupMenus.clear();
+			Game.level.popupMenuObjects.clear();
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
 			keyStateTab = false;
 		}

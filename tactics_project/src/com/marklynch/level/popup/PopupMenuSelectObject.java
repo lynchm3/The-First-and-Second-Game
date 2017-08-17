@@ -85,26 +85,14 @@ public class PopupMenuSelectObject extends PopupMenu {
 	}
 
 	public void gameObjectSelected(GameObject gameObject) {
-		if (Game.level.popupMenus.size() == 2) {
-			int popupToRemoveIndex = 1;
-			for (Button button : Game.level.popupMenus.get(popupToRemoveIndex).buttons) {
-				button.removeHighlight();
-			}
-			Game.level.popupMenus.remove(popupToRemoveIndex);
-		}
-		Game.level.popupMenus.add(new PopupMenuSelectAction(100, 200, level, gameObject.squareGameObjectIsOn,
+		Game.level.popupMenuActions.clear();
+		Game.level.popupMenuActions.add(new PopupMenuSelectAction(100, 200, level, gameObject.squareGameObjectIsOn,
 				gameObject.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 
 	public void squareSelected(Square square) {
-		if (Game.level.popupMenus.size() == 2) {
-			int popupToRemoveIndex = 1;
-			for (Button button : Game.level.popupMenus.get(popupToRemoveIndex).buttons) {
-				button.removeHighlight();
-			}
-			Game.level.popupMenus.remove(popupToRemoveIndex);
-		}
-		Game.level.popupMenus.add(new PopupMenuSelectAction(100, 200, level, square,
+		Game.level.popupMenuActions.clear();
+		Game.level.popupMenuActions.add(new PopupMenuSelectAction(100, 200, level, square,
 				square.getAllActionsPerformedOnThisInWorld(Game.level.player)));
 	}
 }

@@ -86,4 +86,12 @@ public class PopupMenu {
 		highlightedButton.click();
 	}
 
+	public void clearHighlights() {
+
+		if (highlightedButton != null) {
+			highlightedButton.removeHighlight();
+		}
+
+	}
+
 }

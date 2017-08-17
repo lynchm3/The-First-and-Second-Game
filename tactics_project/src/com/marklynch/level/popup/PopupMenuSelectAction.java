@@ -30,8 +30,8 @@ public class PopupMenuSelectAction extends PopupMenu {
 		for (int i = 0; i < actions.size(); i++) {
 			final int index = i;
 
-			final PopupMenuActionButton actionButton = new PopupMenuActionButton(offsetX, buttons.size() * height - 10, width,
-					height, null, null, actions.get(i).actionName, true, true, actions.get(i), this);
+			final PopupMenuActionButton actionButton = new PopupMenuActionButton(offsetX, buttons.size() * height - 10,
+					width, height, null, null, actions.get(i).actionName, true, true, actions.get(i), this);
 			actionButton.enabled = actions.get(index).enabled;
 
 			actionButton.clickListener = new ClickListener() {
@@ -44,12 +44,8 @@ public class PopupMenuSelectAction extends PopupMenu {
 						}
 						highlightedButton.down = true;
 						actions.get(index).perform();
-						for (PopupMenu popup : Game.level.popupMenus) {
-							for (Button button : popup.buttons) {
-								button.removeHighlight();
-							}
-						}
-						Game.level.popupMenus.clear();
+						Game.level.popupMenuObjects.clear();
+						Game.level.popupMenuActions.clear();
 					}
 				}
 			};
