@@ -450,7 +450,7 @@ public class UserInputLevel {
 					Game.level.popupMenus.add(popupSelectAction);
 				// Game.level.popups.add(e);
 			} else if (!(square instanceof InventorySquare)) {
-				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square);
+				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square, true);
 				if (popupSelectObject.buttons.size() > 0)
 					Game.level.popupMenus.add(popupSelectObject);
 			}
@@ -747,6 +747,9 @@ public class UserInputLevel {
 		if (keyStateTab == false && Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
 			tabTyped();
 			keyStateTab = true;
+		} else if (keyStateTab == true && !Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
+			keyStateTab = false;
+			Game.level.popupMenus.clear();
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
 			keyStateTab = false;
 		}

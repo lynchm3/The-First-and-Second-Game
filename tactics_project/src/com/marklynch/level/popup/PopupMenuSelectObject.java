@@ -9,24 +9,30 @@ import com.marklynch.ui.button.ClickListener;
 
 public class PopupMenuSelectObject extends PopupMenu {
 	public PopupMenuButton selectSquareButton;
+	public boolean showSquare = true;
 
-	public PopupMenuSelectObject(float width, Level level, Square square) {
+	public PopupMenuSelectObject(float width, Level level, Square square, boolean showSquare) {
 
 		super(width, level, square);
 
-		selectSquareButton = new PopupMenuButton(0, 0, 200, 30, null, null, true, true, square, this, "" + square);
+		this.showSquare = showSquare;
 
-		selectSquareButton.clickListener = new ClickListener() {
+		if (showSquare) {
 
-			@Override
-			public void click() {
-				for (Button button : buttons) {
-					button.down = false;
+			selectSquareButton = new PopupMenuButton(0, 0, 200, 30, null, null, true, true, square, this, "" + square);
+
+			selectSquareButton.clickListener = new ClickListener() {
+
+				@Override
+				public void click() {
+					for (Button button : buttons) {
+						button.down = false;
+					}
+					highlightedButton.down = true;
+					squareSelected(PopupMenuSelectObject.this.square);
 				}
-				highlightedButton.down = true;
-				squareSelected(PopupMenuSelectObject.this.square);
-			}
-		};
+			};
+		}
 		updateObjectsButtons();
 	}
 
@@ -34,8 +40,11 @@ public class PopupMenuSelectObject extends PopupMenu {
 
 		buttons.clear();
 
-		if (PopupMenuSelectObject.this.square.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0)
-			buttons.add(selectSquareButton);
+		if (showSquare) {
+			if (PopupMenuSelectObject.this.square.getAllActionsPerformedOnThisInWorld(Game.level.activeActor)
+					.size() > 0)
+				buttons.add(selectSquareButton);
+		}
 
 		for (int i = 0; i < square.inventory.size(); i++) {
 			final GameObject gameObject = square.inventory.get(i);
@@ -46,8 +55,8 @@ public class PopupMenuSelectObject extends PopupMenu {
 			// BUT... I dont want the buttons to zoom :P
 
 			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
-				final PopupMenuButton objectButton = new PopupMenuButton(0, buttons.size() * 30, 200, 30, null, null, true,
-						true, gameObject, this, "" + gameObject);
+				final PopupMenuButton objectButton = new PopupMenuButton(0, buttons.size() * 30, 200, 30, null, null,
+						true, true, gameObject, this, "" + gameObject);
 
 				objectButton.clickListener = new ClickListener() {
 
