@@ -26,9 +26,9 @@ public class Sign extends Readable {
 			conversation.openingConversationPart.talker = this;
 		}
 
-		canBePickedUp = true;
+		canBePickedUp = false;
 		showInventory = false;
-		fitsInInventory = true;
+		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = false;
 		blocksLineOfSight = false;

@@ -11,13 +11,16 @@ public class PopupMenuSelectObject extends PopupMenu {
 	public PopupMenuButton selectSquareButton;
 	public boolean showSquare = true;
 	public boolean keyControl = true;
+	public boolean onlySmallObjects = false;
 
-	public PopupMenuSelectObject(float width, Level level, Square square, boolean showSquare, boolean keyControl) {
+	public PopupMenuSelectObject(float width, Level level, Square square, boolean showSquare, boolean keyControl,
+			boolean onlySmallObjects) {
 
 		super(width, level, square);
 
 		this.showSquare = showSquare;
 		this.keyControl = keyControl;
+		this.onlySmallObjects = onlySmallObjects;
 
 		if (showSquare) {
 
@@ -55,6 +58,8 @@ public class PopupMenuSelectObject extends PopupMenu {
 			// position...
 
 			// BUT... I dont want the buttons to zoom :P
+			if (onlySmallObjects && !gameObject.canBePickedUp)
+				continue;
 
 			if (gameObject.getAllActionsPerformedOnThisInWorld(Game.level.activeActor).size() > 0) {
 				final PopupMenuButton objectButton = new PopupMenuButton(0, buttons.size() * 30, 128, 30, null, null,

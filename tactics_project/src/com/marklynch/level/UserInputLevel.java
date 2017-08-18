@@ -440,8 +440,8 @@ public class UserInputLevel {
 					Game.level.popupMenuActions.add(popupSelectAction);
 				// Game.level.popups.add(e);
 			} else if (!(square instanceof InventorySquare)) {
-				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square, true,
-						true);
+				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square, true, true,
+						false);
 				if (popupSelectObject.buttons.size() > 0)
 					Game.level.popupMenuObjects.add(popupSelectObject);
 			}
@@ -693,7 +693,7 @@ public class UserInputLevel {
 				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 					if (Game.level.squares[i][j].visibleToPlayer) {
 						PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level,
-								Game.level.squares[i][j], false, false);
+								Game.level.squares[i][j], false, false, true);
 						if (popupSelectObject.buttons.size() > 0)
 							Game.level.popupMenuHighlightObjects.add(popupSelectObject);
 					}
