@@ -407,44 +407,6 @@ public class Level {
 					return;
 
 				showLog = !showLog;
-
-				new Thread() {
-					@Override
-					public void run() {
-						super.run();
-						if (showLog == true) {
-							while (activityLogger.x < 0) {
-								activityLogger.x += 2;
-								showHideLogButton.x += 2;
-								try {
-									Thread.sleep(1);
-								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-							activityLogger.x = 0;
-							showHideLogButton.x = activityLogger.width;
-							showHideLogButton.textParts = new Object[] {
-									new StringWithColor("LOG [L] <", Color.WHITE) };
-						} else {
-							while (activityLogger.x > -activityLogger.width) {
-								activityLogger.x -= 2;
-								showHideLogButton.x -= 2;
-								try {
-									Thread.sleep(1);
-								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-							activityLogger.x = -activityLogger.width;
-							showHideLogButton.x = 0;
-							showHideLogButton.textParts = new Object[] {
-									new StringWithColor("LOG [L] >", Color.WHITE) };
-						}
-					}
-				}.start();
 			}
 		});
 		showHideLogButton.enabled = true;
@@ -1266,6 +1228,30 @@ public class Level {
 				Game.zoomLevelIndex = Game.lastZoomLevelIndex = nonMapZoomLevelIndex;
 				Game.zoom = Game.zoomLevels[nonMapZoomLevelIndex];
 				zoomFromMap = false;
+			}
+		}
+
+		// update log animation
+		if (showLog == true) {
+			if (activityLogger.x < 0) {
+				activityLogger.x += (int) (1.20 * delta);
+				showHideLogButton.x += (int) (1.20 * delta);
+				if (activityLogger.x >= 0) {
+					activityLogger.x = 0;
+					showHideLogButton.x = activityLogger.width;
+					showHideLogButton.textParts = new Object[] { new StringWithColor("LOG [L] <", Color.WHITE) };
+				}
+			}
+		} else {
+			if (activityLogger.x > -activityLogger.width) {
+				activityLogger.x -= (int) (1.20 * delta);
+				showHideLogButton.x -= (int) (1.20 * delta);
+
+				if (activityLogger.x <= -activityLogger.width) {
+					activityLogger.x = -activityLogger.width;
+					showHideLogButton.x = 0;
+					showHideLogButton.textParts = new Object[] { new StringWithColor("LOG [L] >", Color.WHITE) };
+				}
 			}
 		}
 
