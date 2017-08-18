@@ -95,11 +95,11 @@ public class Game {
 	// public static float dragX = -1000;
 	// public static float dragY = -4000;
 
-	public static float zoom = 0.5f; // 0.25f
 	public static float[] zoomLevels = { 1f, 0.75f, 0.5f, 0.25f, 0.15f, 0.1f, 0.05f };
 	public static float[] mapZoomLevels = { 1f, 1f, 1f, 1f, 1f, 1f, 1f };
 	public static int zoomLevelIndex = 3;
 	public static int lastZoomLevelIndex = 3;
+	public static float zoom = zoomLevels[zoomLevelIndex];
 	public static final int MAP_MODE_ZOOM_LEVEL_INDEX = 6;
 
 	// public static float windowWidth = 800;

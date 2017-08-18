@@ -122,6 +122,7 @@ public class Level {
 	public Conversation conversation;
 	public transient LevelButton endTurnButton;
 	public transient LevelButton centerButton;
+	public transient LevelButton mapButton;
 	public transient LevelButton showHideLogButton;
 	public transient LevelButton editorButton;
 	public transient ArrayList<Button> buttons;
@@ -487,7 +488,30 @@ public class Level {
 			}
 		});
 		buttons.add(endTurnButton);
+
+		mapButton = new LevelButton(110f, 520f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "MAP [M]",
+				false, false, Color.BLACK, Color.WHITE);
+		mapButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+
+				if (zoomToMap || zoomFromMap)
+					return;
+
+				if (Game.zoom >= 0.1) {
+					zoomToMap = true;
+					nonMapZoomLevelIndex = Game.zoomLevelIndex;
+				} else {
+					zoomFromMap = true;
+				}
+			}
+		});
+		buttons.add(mapButton);
 	}
+
+	boolean zoomToMap;
+	boolean zoomFromMap;
+	int nonMapZoomLevelIndex;
 
 	public void openCloseInventory() {
 		if (Game.level.openInventories.size() > 0) {
@@ -1225,6 +1249,23 @@ public class Level {
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.updateRealtime(delta);
 				}
+			}
+		}
+
+		// update map zoom animation
+		if (zoomToMap) {
+			Game.zoom -= 0.002 * delta;
+			if (Game.zoom <= Game.zoomLevels[Game.zoomLevels.length - 1]) {
+				Game.zoomLevelIndex = Game.lastZoomLevelIndex = Game.zoomLevels.length - 1;
+				Game.zoom = Game.zoomLevels[Game.zoomLevelIndex];
+				zoomToMap = false;
+			}
+		} else if (zoomFromMap) {
+			Game.zoom += 0.002 * delta;
+			if (Game.zoom >= Game.zoomLevels[nonMapZoomLevelIndex]) {
+				Game.zoomLevelIndex = Game.lastZoomLevelIndex = nonMapZoomLevelIndex;
+				Game.zoom = Game.zoomLevels[nonMapZoomLevelIndex];
+				zoomFromMap = false;
 			}
 		}
 

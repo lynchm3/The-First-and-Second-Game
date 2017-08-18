@@ -746,6 +746,8 @@ public class UserInputLevel {
 
 				lastCopy = now;
 			}
+		} else if (character == 'm' || character == 'M') {
+			Game.level.mapButton.click();
 		} else if (character == 'q' || character == 'Q') {
 			Game.level.centerButton.click();
 		} else if (character == 'l' || character == 'L') {
