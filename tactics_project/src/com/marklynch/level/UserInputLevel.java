@@ -104,16 +104,18 @@ public class UserInputLevel {
 		float mouseYinPixels = Mouse.getY();
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
 		if (draggableMouseIsOver == null && scrollableMouseIsOver == null) {
-			if (Game.level.activityLogger.isMouseOver(Mouse.getX(), Mouse.getY())) {
+
+			for (int i = Game.level.popupPinneds.size() - 1; i >= 0; i--) {
+				if (Game.level.popupPinneds.get(i).isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+					draggableMouseIsOver = Game.level.popupPinneds.get(i);
+					break;
+				}
+			}
+
+			if (draggableMouseIsOver == null && scrollableMouseIsOver == null
+					&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
 				draggableMouseIsOver = Game.level.activityLogger;
 				scrollableMouseIsOver = Game.level.activityLogger;
-			} else {
-				for (PopupPinned popupPinned : Game.level.popupPinneds) {
-					if (popupPinned.isMouseOver(Mouse.getX(), Mouse.getY())) {
-						draggableMouseIsOver = popupPinned;
-						break;
-					}
-				}
 			}
 		}
 
@@ -192,6 +194,12 @@ public class UserInputLevel {
 				if (inventoriesOpen) {
 
 				} else if (draggableMouseIsOver != null) {
+
+					if (draggableMouseIsOver instanceof PopupPinned) {
+						Game.level.popupPinneds.remove(draggableMouseIsOver);
+						Game.level.popupPinneds.add((PopupPinned) draggableMouseIsOver);
+					}
+
 					draggableMouseIsOver.drag(Mouse.getX() - mouseLastX, Mouse.getY() - mouseLastY);
 				} else {
 					Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;

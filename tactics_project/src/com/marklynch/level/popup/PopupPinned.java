@@ -63,7 +63,18 @@ public class PopupPinned implements Draggable {
 	}
 
 	public boolean isMouseOver(int mouseX, int mouseY) {
-		if (mouseX > drawPositionX && mouseX < drawPositionX + width && mouseY > drawPositionY) {
+		System.out.println("mouseX = " + mouseX);
+		System.out.println("mouseY = " + mouseY);
+		System.out.println("drawPositionX = " + drawPositionX);
+		System.out.println("drawPositionY = " + drawPositionY);
+		System.out.println("width = " + width);
+		System.out.println("height = " + height);
+		if (mouseX > drawPositionX && mouseX < drawPositionX + width && mouseY > drawPositionY
+				&& mouseY < drawPositionY + height) {
+
+			System.out.println("mouseX = " + mouseX);
+			System.out.println("mouseY = " + mouseY);
+
 			return true;
 		}
 		return false;

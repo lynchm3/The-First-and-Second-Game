@@ -1437,9 +1437,9 @@ public class Level {
 			}
 		}
 
-		for (PopupPinned popupPinned : popupPinneds) {
-			if (popupPinned.mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
-				return popupPinned.closeButton;
+		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
+			if (popupPinneds.get(i).mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
+				return popupPinneds.get(i).closeButton;
 		}
 
 		// for (PopupTooltip popupTooltip : popupTooltips) {
