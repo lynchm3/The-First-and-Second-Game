@@ -530,14 +530,12 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
-		// GameObject targetGameObject =
-		// this.inventory.getGameObjectThatCantShareSquare();
-		// if (targetGameObject != null) {
-		// return
-		// targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
-		// } else {
-		return getDefaultActionPerformedOnThisInWorld(performer);
-		// }
+		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+		if (targetGameObject != null) {
+			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
+		} else {
+			return getDefaultActionPerformedOnThisInWorld(performer);
+		}
 		// return
 	}
 
