@@ -10,10 +10,10 @@ import mdesl.graphics.Color;
 
 public class LevelButton extends Button {
 
-	boolean xFromLeft;
-	boolean yFromTop;
-	Color buttonColor;
-	Color textColor;
+	public boolean xFromLeft;
+	public boolean yFromTop;
+	public Color buttonColor;
+	public Color textColor;
 	public Object[] textParts;
 
 	public LevelButton(float x, float y, float width, float height, String enabledTexturePath,

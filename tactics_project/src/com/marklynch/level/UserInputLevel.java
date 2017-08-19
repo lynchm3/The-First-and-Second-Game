@@ -316,8 +316,7 @@ public class UserInputLevel {
 			} else if (Game.level.popupTextBoxes.size() != 0) {
 
 			} else if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
-				Player.playerTargetSquare = null;
-				Player.playerTargetActor = null;
+				Game.level.pausePlayer();
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
 				if (Game.level.activeActor == Game.level.player) {
 					interactWith(Game.squareMouseIsOver, -1, false,
@@ -334,8 +333,7 @@ public class UserInputLevel {
 			// Right Click
 
 			if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
-				Player.playerTargetSquare = null;
-				Player.playerTargetActor = null;
+				Game.level.pausePlayer();
 			} else if (Game.level.popupMenuObjects.isEmpty() && Game.squareMouseIsOver != null) {
 				interactWith(Game.squareMouseIsOver, -1, true, false, false);
 				// Game.level.popups.add(new PopupSelectObject(100, Game.level,
@@ -460,8 +458,7 @@ public class UserInputLevel {
 	public static void waitPressed(boolean allowMenuControl, boolean held) {
 
 		if (Player.playerTargetSquare != null) {
-			Player.playerTargetSquare = null;
-			Player.playerTargetActor = null;
+			Game.level.pausePlayer();
 			return;
 		}
 
@@ -489,8 +486,7 @@ public class UserInputLevel {
 	public static void upPressed(boolean allowMenuControl, boolean held) {
 
 		if (Player.playerTargetSquare != null) {
-			Player.playerTargetSquare = null;
-			Player.playerTargetActor = null;
+			Game.level.pausePlayer();
 			return;
 		}
 		if (!held)
@@ -523,8 +519,7 @@ public class UserInputLevel {
 	public static void downPressed(boolean allowMenuControl, boolean held) {
 
 		if (Player.playerTargetSquare != null) {
-			Player.playerTargetSquare = null;
-			Player.playerTargetActor = null;
+			Game.level.pausePlayer();
 			return;
 		}
 		if (!held)
@@ -556,8 +551,7 @@ public class UserInputLevel {
 
 	public static void leftPressed(boolean allowMenuControl, boolean held) {
 		if (Player.playerTargetSquare != null) {
-			Player.playerTargetSquare = null;
-			Player.playerTargetActor = null;
+			Game.level.pausePlayer();
 			return;
 		}
 		if (!held)
@@ -595,8 +589,7 @@ public class UserInputLevel {
 
 	public static void rightPressed(boolean allowMenuControl, boolean held) {
 		if (Player.playerTargetSquare != null) {
-			Player.playerTargetSquare = null;
-			Player.playerTargetActor = null;
+			Game.level.pausePlayer();
 			return;
 		}
 		if (!held)

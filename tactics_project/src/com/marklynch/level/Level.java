@@ -277,8 +277,7 @@ public class Level {
 		infernoButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Player.playerTargetSquare = null;
-				Player.playerTargetActor = null;
+				pausePlayer();
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerInferno(Game.level.player);
 				Game.level.popupMenuObjects.clear();
@@ -293,8 +292,7 @@ public class Level {
 		superPeekButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				player.playerTargetSquare = null;
-				player.playerTargetActor = null;
+				pausePlayer();
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerSuperPeek(Game.level.player);
 				Game.level.popupMenuObjects.clear();
@@ -309,8 +307,7 @@ public class Level {
 		healSelfButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				player.playerTargetSquare = null;
-				player.playerTargetActor = null;
+				pausePlayer();
 				new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
 						new PowerHealSelf(Game.level.player)).perform();
 				Game.level.popupMenuObjects.clear();
@@ -325,8 +322,7 @@ public class Level {
 		healTouchButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				player.playerTargetSquare = null;
-				player.playerTargetActor = null;
+				pausePlayer();
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerHealTouch(Game.level.player);
 				Game.level.popupMenuObjects.clear();
@@ -341,8 +337,7 @@ public class Level {
 		healRangedButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				player.playerTargetSquare = null;
-				player.playerTargetActor = null;
+				pausePlayer();
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerHealRanged(Game.level.player);
 				Game.level.popupMenuObjects.clear();
@@ -357,8 +352,7 @@ public class Level {
 		unlockButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				player.playerTargetSquare = null;
-				player.playerTargetActor = null;
+				pausePlayer();
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerUnlock(Game.level.player);
 				Game.level.popupMenuObjects.clear();
@@ -373,8 +367,7 @@ public class Level {
 		poisonBlastButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				player.playerTargetSquare = null;
-				player.playerTargetActor = null;
+				pausePlayer();
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerPoisonBlast(Game.level.player);
 				Game.level.popupMenuObjects.clear();
@@ -388,8 +381,7 @@ public class Level {
 		bleedButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				player.playerTargetSquare = null;
-				player.playerTargetActor = null;
+				pausePlayer();
 				Level.this.levelMode = LevelMode.LEVEL_MODE_CAST;
 				Level.this.selectedPower = new PowerBleed(Game.level.player);
 				Game.level.popupMenuObjects.clear();
@@ -472,8 +464,8 @@ public class Level {
 		});
 		buttons.add(mapButton);
 
-		playButton = new LevelButton(30f, 100f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false,
-				true, Color.BLACK, Color.WHITE);
+		playButton = new LevelButton(30f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false,
+				true, Color.GRAY, Color.WHITE);
 		playButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -491,7 +483,7 @@ public class Level {
 		});
 		buttons.add(playButton);
 
-		pauseButton = new LevelButton(60f, 100f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  ||", false,
+		pauseButton = new LevelButton(60f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  ||", false,
 				true, Color.BLACK, Color.WHITE);
 		pauseButton.setClickListener(new ClickListener() {
 			@Override
@@ -1139,8 +1131,8 @@ public class Level {
 
 		// Turn text
 		if (currentFactionMoving != null) {
-			TextUtils.printTextWithImages(new Object[] { currentFactionMoving.name + " turn " + turn },
-					Game.windowWidth - 150, 20, Integer.MAX_VALUE, true);
+			TextUtils.printTextWithImages(new Object[] { "TURN " + turn }, Game.windowWidth - 150, 20,
+					Integer.MAX_VALUE, true);
 		}
 
 		// Zoom
@@ -1301,8 +1293,7 @@ public class Level {
 		if (Player.playerTargetActor != null) {
 			Player.playerTargetSquare = Player.playerTargetActor.squareGameObjectIsOn;
 			if (player.straightLineDistanceTo(Player.playerTargetSquare) <= 1) {
-				Player.playerTargetSquare = null;
-				Player.playerTargetActor = null;
+				pausePlayer();
 			}
 		}
 
@@ -1320,13 +1311,15 @@ public class Level {
 							player.playerTargetSquare.inventory.getGameObjectThatCantShareSquare(), " there!" };
 					popupToasts.add(new PopupToast(objects));
 					Game.level.logOnScreen(new ActivityLog(objects));
+					pausePlayer();
 				} else {
 					Object[] objects = new Object[] { "There's no available path" };
 					popupToasts.add(new PopupToast(objects));
 					Game.level.logOnScreen(new ActivityLog(objects));
+					pausePlayer();
 
 				}
-				Player.playerTargetSquare = null;
+				pausePlayer();
 				return;
 			}
 
@@ -1350,24 +1343,25 @@ public class Level {
 						squareToMoveTo.inventory.getGameObjectThatCantShareSquare(), "!" };
 				popupToasts.add(new PopupToast(objects));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
-				Player.playerPathToMove = null;
-				Player.playerTargetSquare = null;
+				pausePlayer();
 			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
 				Object[] objects = new Object[] { "Stopped before illegal action!" };
 				popupToasts.add(new PopupToast(objects));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
-				Player.playerPathToMove = null;
-				Player.playerTargetSquare = null;
+				pausePlayer();
 			} else {
 				action.perform();
 				Player.playerFirstMove = false;
 				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
-					Player.playerPathToMove = null;
-					Player.playerTargetSquare = null;
+					pausePlayer();
 				} else {
 
 					Object[] objects = new Object[] { "WASD, SPACE or CLICK to stop" };
 					popupToasts.add(new PopupToast(objects));
+					playButton.textColor = Color.WHITE;
+					playButton.buttonColor = Color.BLACK;
+					pauseButton.textColor = Color.WHITE;
+					pauseButton.buttonColor = Color.GRAY;
 				}
 			}
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true && Game.level.player.animation.completed) {
@@ -1385,6 +1379,16 @@ public class Level {
 				&& Game.level.player.animation.completed) {
 			UserInputLevel.rightPressed(false, true);
 		}
+	}
+
+	public void pausePlayer() {
+		Player.playerPathToMove = null;
+		Player.playerTargetSquare = null;
+		Player.playerTargetActor = null;
+		playButton.textColor = Color.WHITE;
+		playButton.buttonColor = Color.GRAY;
+		pauseButton.textColor = Color.WHITE;
+		pauseButton.buttonColor = Color.BLACK;
 	}
 
 	public void dragToFollowPlayer() {
