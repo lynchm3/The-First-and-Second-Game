@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionRead;
 import com.marklynch.objects.units.Actor;
 
@@ -53,12 +52,16 @@ public class Readable extends GameObject {
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionRead(performer, this);
+		if (this.canShareSquare) {
+			return null;
+		} else {
+			return new ActionRead(performer, this);
+		}
 	}
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionAttack(performer, this);
+		return new ActionRead(performer, this);
 	}
 
 	@Override

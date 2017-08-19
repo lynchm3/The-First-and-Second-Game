@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.units.Actor;
@@ -75,7 +74,7 @@ public class HidingPlace extends Searchable {
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionAttack(performer, this);
+		return null;
 	}
 
 	@Override

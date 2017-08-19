@@ -570,6 +570,9 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			return null;
 		}
 
+		if (inventory.contains(Game.level.player))
+			return null;
+
 		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
 		if (targetGameObject != null) {
 			return new ActionAttack(performer, targetGameObject);
@@ -577,6 +580,12 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		if (this.inventory.size() == 1) {
 			return new ActionAttack(performer, this.inventory.get(0));
+		}
+
+		if (this.inventory.getDecorativeCount() == this.inventory.size() - 1) {
+			GameObject onlyNonDecorativeObject = this.inventory.getNonDecorativeGameObject();
+			if (onlyNonDecorativeObject != null)
+				return new ActionAttack(performer, onlyNonDecorativeObject);
 		}
 
 		return null;
