@@ -33,6 +33,7 @@ import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuActionButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
 import com.marklynch.level.popup.PopupMenuSelectObject;
+import com.marklynch.level.popup.PopupPinned;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.popup.PopupToast;
 import com.marklynch.level.squares.Square;
@@ -117,6 +118,7 @@ public class Level {
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
 	public ArrayList<PopupToast> popupToasts = new ArrayList<PopupToast>();
+	public ArrayList<PopupPinned> popupPinneds = new ArrayList<PopupPinned>();
 
 	public Toast toast;
 	public Conversation conversation;
@@ -1186,15 +1188,15 @@ public class Level {
 			popup.draw();
 		}
 
-		if (!popupTextBoxes.isEmpty()) {
-			for (PopupTextBox popupTextBox : popupTextBoxes) {
-				popupTextBox.draw();
-			}
+		for (PopupPinned popupPinned : popupPinneds) {
+			popupPinned.draw();
 		}
-		if (!popupToasts.isEmpty()) {
-			for (PopupToast popupToast : popupToasts) {
-				popupToast.draw();
-			}
+
+		for (PopupTextBox popupTextBox : popupTextBoxes) {
+			popupTextBox.draw();
+		}
+		for (PopupToast popupToast : popupToasts) {
+			popupToast.draw();
 		}
 
 	}
@@ -1433,6 +1435,11 @@ public class Level {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
+		}
+
+		for (PopupPinned popupPinned : popupPinneds) {
+			if (popupPinned.mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
+				return popupPinned.closeButton;
 		}
 
 		// for (PopupTooltip popupTooltip : popupTooltips) {
