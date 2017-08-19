@@ -8,7 +8,7 @@ import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
 
-public class ActivityLogger {
+public class ActivityLogger implements Draggable, Scrollable {
 	private transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
 	public float width = 420;
 	public float x = 0;
@@ -22,8 +22,7 @@ public class ActivityLogger {
 
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
-			TextUtils.printTextWithImages(logs.get(i).contents, x + 20, textOffsetY + i * 20, Integer.MAX_VALUE,
-					true);
+			TextUtils.printTextWithImages(logs.get(i).contents, x + 20, textOffsetY + i * 20, Integer.MAX_VALUE, true);
 		}
 
 	}
@@ -57,7 +56,8 @@ public class ActivityLogger {
 		logs.remove(logs.lastElement());
 	}
 
-	public void drag(float dragY) {
+	@Override
+	public void drag(float dragX, float dragY) {
 		int totalLogsHeight = logs.size() * 20;
 		this.textOffsetY -= dragY;
 		if (textOffsetY >= 0) {
@@ -65,6 +65,11 @@ public class ActivityLogger {
 		} else if (textOffsetY < Game.windowHeight - totalLogsHeight) {
 			textOffsetY = Game.windowHeight - totalLogsHeight;
 		}
+	}
+
+	@Override
+	public void scroll(float dragX, float dragY) {
+		drag(dragX, dragY);
 	}
 
 }

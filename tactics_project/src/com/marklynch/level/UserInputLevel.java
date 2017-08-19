@@ -18,6 +18,7 @@ import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
 import com.marklynch.level.popup.PopupMenuSelectObject;
+import com.marklynch.level.popup.PopupPinned;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InventorySquare;
@@ -25,6 +26,8 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Player;
+import com.marklynch.ui.Draggable;
+import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 
 public class UserInputLevel {
@@ -91,13 +94,28 @@ public class UserInputLevel {
 	public static AIPath path;
 	static boolean controllingMenu = false;
 
+	public static Draggable draggableMouseIsOver = null;
+	public static Scrollable scrollableMouseIsOver = null;
+
 	public static void userInput(int delta2) {
 
 		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
-		boolean mouseOverLog = Game.level.activityLogger.isMouseOver(Mouse.getX(), Mouse.getY());
+		if (draggableMouseIsOver == null && scrollableMouseIsOver == null) {
+			if (Game.level.activityLogger.isMouseOver(Mouse.getX(), Mouse.getY())) {
+				draggableMouseIsOver = Game.level.activityLogger;
+				scrollableMouseIsOver = Game.level.activityLogger;
+			} else {
+				for (PopupPinned popupPinned : Game.level.popupPinneds) {
+					if (popupPinned.isMouseOver(Mouse.getX(), Mouse.getY())) {
+						draggableMouseIsOver = popupPinned;
+						break;
+					}
+				}
+			}
+		}
 
 		// Transformed mouse coords
 
@@ -116,11 +134,11 @@ public class UserInputLevel {
 
 		if (inventoriesOpen) {
 
-		} else if (mouseOverLog) {
+		} else if (UserInputLevel.scrollableMouseIsOver != null) {
 			if (mouseWheelDelta > 0)
-				Game.level.activityLogger.drag(-100);
+				scrollableMouseIsOver.scroll(0, -100);
 			else if (mouseWheelDelta < 0)
-				Game.level.activityLogger.drag(100);
+				scrollableMouseIsOver.scroll(0, 100);
 			// if (mouseWheelDelta != 0) {
 			// Game.level.activityLogger.drag(-mouseWheelDelta);
 			// }
@@ -173,8 +191,8 @@ public class UserInputLevel {
 
 				if (inventoriesOpen) {
 
-				} else if (mouseOverLog) {
-					Game.level.activityLogger.drag(Mouse.getY() - mouseLastY);
+				} else if (draggableMouseIsOver != null) {
+					draggableMouseIsOver.drag(Mouse.getX() - mouseLastX, Mouse.getY() - mouseLastY);
 				} else {
 					Game.dragX += (Mouse.getX() - mouseLastX) / Game.zoom;
 					Game.dragY -= (Mouse.getY() - mouseLastY) / Game.zoom;
@@ -195,7 +213,7 @@ public class UserInputLevel {
 					.getInventorySquareMouseIsOver(mouseXinPixels, mouseYinPixels);
 			Game.squareMouseIsOver = inventorySquareMouseIsOver;
 			Game.level.openInventories.get(0).setSquareMouseHoveringOver(inventorySquareMouseIsOver);
-		} else if (mouseOverLog) {
+		} else if (draggableMouseIsOver != null) {
 
 		} else {
 			if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
@@ -358,6 +376,8 @@ public class UserInputLevel {
 
 		if (!Mouse.isButtonDown(0)) {
 			dragging = false;
+			UserInputLevel.scrollableMouseIsOver = null;
+			UserInputLevel.draggableMouseIsOver = null;
 		}
 
 		if (Game.level.conversation != null) {
