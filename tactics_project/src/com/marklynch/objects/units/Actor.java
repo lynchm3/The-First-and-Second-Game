@@ -1373,12 +1373,9 @@ public class Actor extends GameObject {
 				&& this.squareGameObjectIsOn.yInGrid >= gridY1Bounds
 				&& this.squareGameObjectIsOn.yInGrid <= gridY2Bounds) {
 
-			System.out.println("onscreen == true");
-
 			return true;
 		}
 		// TODO Auto-generated method stub
-		System.out.println("onscreen == false");
 		return false;
 	}
 

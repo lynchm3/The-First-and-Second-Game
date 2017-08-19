@@ -19,6 +19,7 @@ import com.marklynch.level.popup.PopupMenuButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
 import com.marklynch.level.popup.PopupMenuSelectObject;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTeleport;
@@ -200,6 +201,13 @@ public class UserInputLevel {
 			if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
 					&& (int) mouseYInSquares > -1 && (int) mouseYInSquares < Game.level.squares[0].length) {
 				Game.squareMouseIsOver = Game.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+
+				GameObject gameObjectMouseIsOver;
+				for (int i = Game.squareMouseIsOver.inventory.size() - 1; i >= 0; i--) {
+					if (Game.squareMouseIsOver.inventory.get(i).mouseOver(mouseXTransformed, mouseYTransformed)) {
+
+					}
+				}
 			}
 		}
 

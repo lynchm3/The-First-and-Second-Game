@@ -124,6 +124,8 @@ public class Level {
 	public transient LevelButton centerButton;
 	public transient LevelButton mapButton;
 	public transient LevelButton showHideLogButton;
+	public transient LevelButton playButton;
+	public transient LevelButton pauseButton;
 	public transient LevelButton editorButton;
 	public transient ArrayList<Button> buttons;
 	public transient Button poisonBlastButton;
@@ -469,6 +471,44 @@ public class Level {
 			}
 		});
 		buttons.add(mapButton);
+
+		playButton = new LevelButton(30f, 100f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false,
+				true, Color.BLACK, Color.WHITE);
+		playButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+
+				// if (zoomToMap || zoomFromMap)
+				// return;
+				//
+				// if (Game.zoom >= 0.1) {
+				// zoomToMap = true;
+				// nonMapZoomLevelIndex = Game.zoomLevelIndex;
+				// } else {
+				// zoomFromMap = true;
+				// }
+			}
+		});
+		buttons.add(playButton);
+
+		pauseButton = new LevelButton(60f, 100f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  ||", false,
+				true, Color.BLACK, Color.WHITE);
+		pauseButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+
+				// if (zoomToMap || zoomFromMap)
+				// return;
+				//
+				// if (Game.zoom >= 0.1) {
+				// zoomToMap = true;
+				// nonMapZoomLevelIndex = Game.zoomLevelIndex;
+				// } else {
+				// zoomFromMap = true;
+				// }
+			}
+		});
+		buttons.add(pauseButton);
 	}
 
 	boolean zoomToMap;

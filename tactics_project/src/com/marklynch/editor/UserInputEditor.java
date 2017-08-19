@@ -125,6 +125,7 @@ public class UserInputEditor {
 				&& (int) mouseXInSquares < Game.level.squares.length && (int) mouseYInSquares > -1
 				&& (int) mouseYInSquares < Game.level.squares[0].length) {
 			Game.squareMouseIsOver = Game.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
+
 		}
 
 		// Getting button that we have clicked, if any

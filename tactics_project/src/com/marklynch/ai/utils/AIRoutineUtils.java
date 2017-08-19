@@ -10,7 +10,6 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
-import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -770,26 +769,15 @@ public class AIRoutineUtils {
 
 	public static boolean moveTowardsTargetSquare(Square square) {
 
-		if (square == Mort.mortsStandingSpot)
-			System.out.println("A");
-
 		if (Game.level.activeActor.squareGameObjectIsOn == square)
 			return true;
 
-		if (square == Mort.mortsStandingSpot)
-			System.out.println("B");
 		Square squareToMoveTo = calculateSquareToMoveToForTargetSquare(square);
 
-		if (square == Mort.mortsStandingSpot)
-			System.out.println("C");
 		if (squareToMoveTo != null) {
 			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
-			if (square == Mort.mortsStandingSpot)
-				System.out.println("D");
 			return true;
 		} else {
-			if (square == Mort.mortsStandingSpot)
-				System.out.println("E");
 			return false;
 		}
 	}
@@ -797,9 +785,6 @@ public class AIRoutineUtils {
 	public static Square calculateSquareToMoveToForTargetSquare(Square square) {
 
 		AIPath pathToSquare = Game.level.activeActor.getPathTo(square);
-
-		if (square == Mort.mortsStandingSpot)
-			System.out.println("calculateSquareToMoveToForTargetSquare square = " + pathToSquare);
 
 		if (pathToSquare == null) {
 			return null;
