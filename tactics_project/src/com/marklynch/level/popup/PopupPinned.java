@@ -2,6 +2,7 @@ package com.marklynch.level.popup;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
+import com.marklynch.ui.Draggable;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.QuadUtils;
@@ -9,7 +10,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 
-public class PopupPinned {
+public class PopupPinned implements Draggable {
 
 	public GameObject gameObject;
 	public float width;
@@ -49,8 +50,22 @@ public class PopupPinned {
 	}
 
 	public boolean mouseOverCloseButton(float mouseX, float mouseY) {
-		System.out.println("mouseOverCloseButton closeButton.calculateIfPointInBoundsOfButton(mouseX, mouseY) = "
-				+ closeButton.calculateIfPointInBoundsOfButton(mouseX, mouseY));
 		return closeButton.calculateIfPointInBoundsOfButton(mouseX, mouseY);
+	}
+
+	@Override
+	public void drag(float dragX, float dragY) {
+		this.drawPositionX += dragX;
+		this.drawPositionY -= dragY;
+		this.closeButton.x += dragX;
+		this.closeButton.y -= dragY;
+
+	}
+
+	public boolean isMouseOver(int mouseX, int mouseY) {
+		if (mouseX > drawPositionX && mouseX < drawPositionX + width && mouseY > drawPositionY) {
+			return true;
+		}
+		return false;
 	}
 }
