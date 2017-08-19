@@ -27,7 +27,6 @@ import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropItemsInInventory;
-import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPlaceMapMarker;
@@ -36,7 +35,6 @@ import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
-import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
@@ -662,19 +660,22 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 
 		// drop equipped
-		if (performer.equipped != null) {
-			if (performer.straightLineDistanceTo(this) < 2) {
-				actions.add(new ActionDropSpecificItem(performer, this, performer.equipped));
-			}
-		}
+		// if (performer.equipped != null) {
+		// if (performer.straightLineDistanceTo(this) < 2) {
+		// actions.add(new ActionDropSpecificItem(performer, this,
+		// performer.equipped));
+		// }
+		// }
 
 		// drop from inventory
 		actions.add(new ActionDropItemsInInventory(performer, this));
 
 		// Throw equipped
-		if (this != Game.level.player.squareGameObjectIsOn && performer.equipped != null) {
-			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
-		}
+		// if (this != Game.level.player.squareGameObjectIsOn &&
+		// performer.equipped != null) {
+		// actions.add(new ActionThrowSpecificItem(performer, this,
+		// performer.equipped));
+		// }
 
 		// Throw from inventory
 		if (this != Game.level.player.squareGameObjectIsOn)

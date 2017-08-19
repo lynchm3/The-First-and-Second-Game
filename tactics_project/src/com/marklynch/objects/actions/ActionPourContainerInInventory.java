@@ -14,7 +14,7 @@ import com.marklynch.objects.units.Monster;
 
 public class ActionPourContainerInInventory extends Action {
 
-	public static final String ACTION_NAME = "Pour Something";
+	public static final String ACTION_NAME = "Pour";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;

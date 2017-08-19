@@ -634,19 +634,23 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (!decorative && this != Game.level.player && this instanceof Actor)
 			actions.add(new ActionFollow(Game.level.player, (Actor) this));
 
-		if (!decorative && performer.equipped != null && this.canContainOtherObjects) {
-			actions.add(new ActionGiveSpecificItem(performer, this, performer.equipped, false));
-		}
+		// if (!decorative && performer.equipped != null &&
+		// this.canContainOtherObjects) {
+		// actions.add(new ActionGiveSpecificItem(performer, this,
+		// performer.equipped, false));
+		// }
 
 		// Throw from inventory
 		if (!decorative && this.canContainOtherObjects) {
 			actions.add(new ActionGiveItemsInInventory(performer, this));
 		}
 
-		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn
-				&& performer.equipped != null) {
-			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
-		}
+		// if (!decorative && this.squareGameObjectIsOn !=
+		// Game.level.player.squareGameObjectIsOn
+		// && performer.equipped != null) {
+		// actions.add(new ActionThrowSpecificItem(performer, this,
+		// performer.equipped));
+		// }
 
 		// Throw from inventory
 		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn)
@@ -1000,12 +1004,14 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		// imageTexture.
 
-		int x = (int) (mouseXTransformed - this.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH);
-		int y = (int) (mouseYTransformed - this.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT);
-
-		if (x > imageTexture.getWidth() || y > imageTexture.getHeight()) {
-			return false;
-		}
+		// int x = (int) (mouseXTransformed - this.squareGameObjectIsOn.xInGrid
+		// * Game.SQUARE_WIDTH);
+		// int y = (int) (mouseYTransformed - this.squareGameObjectIsOn.yInGrid
+		// * Game.SQUARE_HEIGHT);
+		//
+		// if (x > imageTexture.getWidth() || y > imageTexture.getHeight()) {
+		// return false;
+		// }
 
 		return false;
 

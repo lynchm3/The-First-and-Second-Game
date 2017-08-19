@@ -11,7 +11,7 @@ import com.marklynch.objects.units.Actor;
 
 public class ActionGiveItemsInInventory extends Action {
 
-	public static final String ACTION_NAME = "Give Something";
+	public static final String ACTION_NAME = "Give";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
