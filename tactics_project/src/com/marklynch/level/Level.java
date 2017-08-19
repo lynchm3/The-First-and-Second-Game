@@ -1358,37 +1358,52 @@ public class Level {
 
 					Object[] objects = new Object[] { "WASD, SPACE or CLICK to stop" };
 					popupToasts.add(new PopupToast(objects));
-					playButton.textColor = Color.WHITE;
-					playButton.buttonColor = Color.BLACK;
-					pauseButton.textColor = Color.WHITE;
-					pauseButton.buttonColor = Color.GRAY;
+					highlightPlayButton();
 				}
 			}
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true && Game.level.player.animation.completed) {
+			highlightPlayButton();
 			UserInputLevel.waitPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_UP) == true || Keyboard.isKeyDown(Keyboard.KEY_W) == true)
 				&& Game.level.player.animation.completed) {
+			highlightPlayButton();
 			UserInputLevel.upPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_DOWN) == true || Keyboard.isKeyDown(Keyboard.KEY_S) == true)
 				&& Game.level.player.animation.completed) {
+			highlightPlayButton();
 			UserInputLevel.downPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)
 				&& Game.level.player.animation.completed) {
+			highlightPlayButton();
 			UserInputLevel.leftPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)
 				&& Game.level.player.animation.completed) {
+			highlightPlayButton();
 			UserInputLevel.rightPressed(false, true);
+		} else if (Game.level.player.animation.completed) {
+			highlightPauseButton();
 		}
+	}
+
+	public void highlightPlayButton() {
+		playButton.textColor = Color.WHITE;
+		playButton.buttonColor = Color.BLACK;
+		pauseButton.textColor = Color.WHITE;
+		pauseButton.buttonColor = Color.GRAY;
+	}
+
+	public void highlightPauseButton() {
+		playButton.textColor = Color.WHITE;
+		playButton.buttonColor = Color.GRAY;
+		pauseButton.textColor = Color.WHITE;
+		pauseButton.buttonColor = Color.BLACK;
 	}
 
 	public void pausePlayer() {
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
 		Player.playerTargetActor = null;
-		playButton.textColor = Color.WHITE;
-		playButton.buttonColor = Color.GRAY;
-		pauseButton.textColor = Color.WHITE;
-		pauseButton.buttonColor = Color.BLACK;
+		highlightPauseButton();
 	}
 
 	public void dragToFollowPlayer() {
