@@ -18,7 +18,7 @@ public class PopupPinned implements Draggable {
 	public float height;
 	public boolean minimised = false;
 	public float drawPositionX, drawPositionY;
-	public LevelButton closeButton, minimiseButton, invisibleMinimiseButton;
+	public LevelButton closeButton, minimiseButton, titleBarButton;
 
 	public PopupPinned(GameObject gameObject) {
 		this.gameObject = gameObject;
@@ -45,9 +45,9 @@ public class PopupPinned implements Draggable {
 			}
 		});
 
-		invisibleMinimiseButton = new LevelButton(drawPositionX, drawPositionY, width, 20f, "end_turn_button.png",
+		titleBarButton = new LevelButton(drawPositionX, drawPositionY, width, 20f, "end_turn_button.png",
 				"end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE);
-		invisibleMinimiseButton.setClickListener(new ClickListener() {
+		titleBarButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
 				PopupPinned.this.minimised = !PopupPinned.this.minimised;
@@ -61,23 +61,32 @@ public class PopupPinned implements Draggable {
 
 	public void draw() {
 
-		if (minimised) {
-			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + 20);
-			// TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX,
-			// drawPositionY, drawPositionX + width,
-			// drawPositionY + height);
-
-		} else {
+		if (!minimised) {
+			// Background
 			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
+			// Image
 			TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX, drawPositionY, drawPositionX + width,
 					drawPositionY + height);
 		}
-		invisibleMinimiseButton.draw();
-		TextUtils.printTextWithImages(drawPositionX, drawPositionY, width - 40, false, gameObject);
+
+		// Titlebar
+		titleBarButton.draw();
+
+		// Title bar text
+		TextUtils.printTextWithImages(drawPositionX + 2, drawPositionY, width - 40, false, gameObject);
+
+		// Title bar buttons
 		this.closeButton.draw();
 		this.minimiseButton.draw();
-		// TextUtils.printTextWithImages(objects, drawPositionX, drawPositionY,
-		// width, true);
+
+		// Borders (left,right,bottom)
+		if (!minimised) {
+			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionX + 2, drawPositionY, drawPositionY + height);
+			QuadUtils.drawQuad(Color.BLACK, drawPositionX + width - 2, drawPositionX + width, drawPositionY,
+					drawPositionY + height);
+			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionX + width, drawPositionY + height - 2,
+					drawPositionY + height);
+		}
 	}
 
 	public boolean mouseOverCloseButton(float mouseX, float mouseY) {
@@ -89,36 +98,36 @@ public class PopupPinned implements Draggable {
 	}
 
 	public boolean mouseOverInvisibleMinimiseButton(float mouseX, float mouseY) {
-		return invisibleMinimiseButton.calculateIfPointInBoundsOfButton(mouseX, mouseY);
+		return titleBarButton.calculateIfPointInBoundsOfButton(mouseX, mouseY);
 	}
 
 	@Override
 	public void drag(float dragX, float dragY) {
 		this.drawPositionX += dragX;
 		this.drawPositionY -= dragY;
-		this.invisibleMinimiseButton.x += dragX;
-		this.invisibleMinimiseButton.y -= dragY;
+		this.titleBarButton.x += dragX;
+		this.titleBarButton.y -= dragY;
 		this.closeButton.x += dragX;
 		this.closeButton.y -= dragY;
 		this.minimiseButton.x += dragX;
 		this.minimiseButton.y -= dragY;
 
 		if (drawPositionX < 0) {
-			drawPositionX = invisibleMinimiseButton.x = 0;
+			drawPositionX = titleBarButton.x = 0;
 			this.closeButton.x = drawPositionX + width - 20;
 			this.minimiseButton.x = drawPositionX + width - 40;
 		} else if (drawPositionX > Game.windowWidth - 20) {
-			drawPositionX = invisibleMinimiseButton.x = Game.windowWidth - 20;
+			drawPositionX = titleBarButton.x = Game.windowWidth - 20;
 			this.closeButton.x = drawPositionX + width - 20;
 			this.minimiseButton.x = drawPositionX + width - 40;
 		}
 
 		if (drawPositionY < 0) {
-			drawPositionY = invisibleMinimiseButton.y = 0;
+			drawPositionY = titleBarButton.y = 0;
 			this.closeButton.y = drawPositionY;
 			this.minimiseButton.y = drawPositionY;
 		} else if (drawPositionY > Game.windowHeight - 20) {
-			drawPositionY = invisibleMinimiseButton.y = Game.windowHeight - 20;
+			drawPositionY = titleBarButton.y = Game.windowHeight - 20;
 			this.closeButton.y = drawPositionY;
 			this.minimiseButton.y = drawPositionY;
 		}

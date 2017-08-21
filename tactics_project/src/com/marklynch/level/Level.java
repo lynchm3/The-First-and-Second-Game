@@ -1443,7 +1443,7 @@ public class Level {
 			if (popupPinneds.get(i).mouseOverMinimiseButton(mouseX, Game.windowHeight - mouseY))
 				return popupPinneds.get(i).minimiseButton;
 			if (popupPinneds.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
-				return popupPinneds.get(i).invisibleMinimiseButton;
+				return popupPinneds.get(i).titleBarButton;
 		}
 
 		// for (PopupTooltip popupTooltip : popupTooltips) {
