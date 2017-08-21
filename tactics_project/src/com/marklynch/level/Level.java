@@ -33,9 +33,9 @@ import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuActionButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
 import com.marklynch.level.popup.PopupMenuSelectObject;
-import com.marklynch.level.popup.Window;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.popup.PopupToast;
+import com.marklynch.level.popup.Window;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -1363,6 +1363,12 @@ public class Level {
 					highlightPlayButton();
 				}
 			}
+		} else if (Game.level.popupTextBoxes.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
+			return;
+		} else if (Game.level.openInventories.size() != 0) {
+			return;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true && Game.level.player.animation.completed) {
 			highlightPlayButton();
 			UserInputLevel.waitPressed(false, true);

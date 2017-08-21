@@ -365,7 +365,11 @@ public class UserInputLevel {
 
 			// Right Click
 
-			if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
+			if (Game.level.conversation != null) {
+
+			} else if (Game.level.popupTextBoxes.size() != 0) {
+
+			} else if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
 				Game.level.pausePlayer();
 			} else if (Game.level.popupMenuObjects.isEmpty() && Game.squareMouseIsOver != null) {
 				interactWith(Game.squareMouseIsOver, -1, true, false, false);
@@ -497,6 +501,14 @@ public class UserInputLevel {
 			return;
 		}
 
+		if (Game.level.popupTextBoxes.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
+			return;
+		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		}
+
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
@@ -524,6 +536,15 @@ public class UserInputLevel {
 			Game.level.pausePlayer();
 			return;
 		}
+
+		if (Game.level.popupTextBoxes.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
+			return;
+		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		}
+
 		if (!held)
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
@@ -557,6 +578,15 @@ public class UserInputLevel {
 			Game.level.pausePlayer();
 			return;
 		}
+
+		if (Game.level.popupTextBoxes.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
+			return;
+		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		}
+
 		if (!held)
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
@@ -589,6 +619,15 @@ public class UserInputLevel {
 			Game.level.pausePlayer();
 			return;
 		}
+
+		if (Game.level.popupTextBoxes.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
+			return;
+		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		}
+
 		if (!held)
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)
@@ -627,6 +666,15 @@ public class UserInputLevel {
 			Game.level.pausePlayer();
 			return;
 		}
+
+		if (Game.level.popupTextBoxes.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
+			return;
+		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		}
+
 		if (!held)
 			controllingMenu = false;
 		if (Game.level.activeActor != Game.level.player)

@@ -13,7 +13,6 @@ import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -593,7 +592,8 @@ public class Inventory {
 	public void drawStaticUI() {
 
 		// Black cover
-		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
+		// QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0,
+		// Game.windowHeight);
 
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
@@ -619,28 +619,24 @@ public class Inventory {
 				button.draw();
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
-			TextUtils.printTextWithImages(
-					100f, 8f, 300f,
-					true, new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 8f, 300f, true,
+					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
 
 			for (Button button : buttonsSort) {
 				button.draw();
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			TextUtils.printTextWithImages(
-					100f, 8f,
-					300f, true, new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 8f, 300f, true,
+					new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
 
 			for (Button button : buttonsSort) {
 				button.draw();
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
-			TextUtils.printTextWithImages(
-					100f, 8f, 300f, true,
+			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
-			TextUtils.printTextWithImages(
-					100f, 8f, 300f, true,
+			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
 			for (Button button : buttonsFilter) {
 				button.draw();
@@ -650,8 +646,7 @@ public class Inventory {
 				button.draw();
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
-			TextUtils.printTextWithImages(
-					100f, 8f, 300f, true,
+			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
 			for (Button button : buttonsFilter) {
 				button.draw();
@@ -661,8 +656,7 @@ public class Inventory {
 				button.draw();
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
-			TextUtils.printTextWithImages(
-					100f, 8f, 300f, true,
+			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 			for (Button button : buttonsFilter) {
 				button.draw();
