@@ -1289,6 +1289,10 @@ public class Level {
 			}
 		}
 
+		for (PopupTextBox popupTextBox : popupTextBoxes) {
+			popupTextBox.updateRealtime(delta);
+		}
+
 		for (Decoration decoration : decorations)
 			decoration.update(delta);
 
