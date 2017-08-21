@@ -141,4 +141,9 @@ public class PopupPinned implements Draggable {
 		}
 		return false;
 	}
+
+	public void bringToFront() {
+		Game.level.popupPinneds.remove(this);
+		Game.level.popupPinneds.add(this);
+	}
 }

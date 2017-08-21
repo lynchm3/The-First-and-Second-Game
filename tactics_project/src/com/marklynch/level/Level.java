@@ -1497,6 +1497,14 @@ public class Level {
 		return null;
 	}
 
+	public PopupPinned getPopupFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
+		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
+			if (popupPinneds.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
+				return popupPinneds.get(i);
+		}
+		return null;
+	}
+
 	public Inventory getInventoryFromMousePosition(float mouseX, float mouseY) {
 
 		for (Inventory inventory : this.openInventories) {

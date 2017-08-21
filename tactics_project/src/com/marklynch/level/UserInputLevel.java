@@ -196,8 +196,7 @@ public class UserInputLevel {
 				} else if (draggableMouseIsOver != null) {
 
 					if (draggableMouseIsOver instanceof PopupPinned) {
-						Game.level.popupPinneds.remove(draggableMouseIsOver);
-						Game.level.popupPinneds.add((PopupPinned) draggableMouseIsOver);
+						((PopupPinned) draggableMouseIsOver).bringToFront();
 					}
 
 					draggableMouseIsOver.drag(Mouse.getX() - mouseLastX, Mouse.getY() - mouseLastY);
@@ -266,9 +265,12 @@ public class UserInputLevel {
 		// Getting button that the mouse is over, if any
 		Game.oldButtonHoveringOver = Game.buttonHoveringOver;
 		Game.buttonHoveringOver = null;
+		Game.popUpHoveringOver = null;
 		if (dragging == false) {
 			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
+			Game.popUpHoveringOver = Game.level.getPopupFromMousePosition(Mouse.getX(), Mouse.getY(), mouseXTransformed,
+					mouseYTransformed);
 		}
 
 		if (mouseLastX != Mouse.getX() || mouseLastY != Mouse.getY()) {
@@ -331,6 +333,9 @@ public class UserInputLevel {
 			// Left Click
 			// Game.level.popupMenuObjects.clear();
 			// Game.level.popupMenuActions.clear();
+			if (Game.popUpHoveringOver != null)
+				Game.popUpHoveringOver.bringToFront();
+
 			if (scriptInterceptsClick) {
 				// Continue script
 				Game.level.script.click();
@@ -355,6 +360,8 @@ public class UserInputLevel {
 		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false)
 
 		{
+			if (Game.popUpHoveringOver != null)
+				Game.popUpHoveringOver.bringToFront();
 
 			// Right Click
 
