@@ -620,28 +620,28 @@ public class Inventory {
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			TextUtils.printTextWithImages(
-					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) }, 100f, 8f,
-					300f, true);
+					100f, 8f, 300f,
+					true, new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
 
 			for (Button button : buttonsSort) {
 				button.draw();
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
 			TextUtils.printTextWithImages(
-					new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) }, 100f,
-					8f, 300f, true);
+					100f, 8f,
+					300f, true, new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
 
 			for (Button button : buttonsSort) {
 				button.draw();
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
 			TextUtils.printTextWithImages(
-					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) }, 100f, 8f, 300f,
-					true);
+					100f, 8f, 300f, true,
+					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
 			TextUtils.printTextWithImages(
-					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) }, 100f, 8f, 300f,
-					true);
+					100f, 8f, 300f, true,
+					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
 			for (Button button : buttonsFilter) {
 				button.draw();
 			}
@@ -651,8 +651,8 @@ public class Inventory {
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
 			TextUtils.printTextWithImages(
-					new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) }, 100f, 8f, 300f,
-					true);
+					100f, 8f, 300f, true,
+					new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
 			for (Button button : buttonsFilter) {
 				button.draw();
 			}
@@ -662,8 +662,8 @@ public class Inventory {
 			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
 			TextUtils.printTextWithImages(
-					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) }, 100f, 8f, 300f,
-					true);
+					100f, 8f, 300f, true,
+					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 			for (Button button : buttonsFilter) {
 				button.draw();
 			}

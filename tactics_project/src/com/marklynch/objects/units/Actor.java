@@ -851,8 +851,8 @@ public class Actor extends GameObject {
 			float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT - 20;
 			float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
 			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
-			TextUtils.printTextWithImages(new Object[] { activityDescription }, activityX1, activityY1,
-					Integer.MAX_VALUE, false);
+			TextUtils.printTextWithImages(activityX1, activityY1, Integer.MAX_VALUE,
+					false, new Object[] { activityDescription });
 		}
 
 		// Draw mini dialogue
@@ -874,9 +874,9 @@ public class Actor extends GameObject {
 					expressionBubblePositionYInPixels, expressionBubblePositionXInPixels + expressionBubbleWidth,
 					expressionBubblePositionYInPixels + expressionBubbleHeight);
 
-			TextUtils.printTextWithImages(new Object[] { new StringWithColor(miniDialogue, Color.BLACK) },
-					expressionBubblePositionXInPixels + 4, expressionBubblePositionYInPixels + 38, Integer.MAX_VALUE,
-					false);
+			TextUtils.printTextWithImages(expressionBubblePositionXInPixels + 4,
+					expressionBubblePositionYInPixels + 38, Integer.MAX_VALUE, false,
+					new Object[] { new StringWithColor(miniDialogue, Color.BLACK) });
 		} else if (thoughtBubbleImageTexture != null) {
 
 			int expressionBubbleWidth = 64;

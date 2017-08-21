@@ -28,7 +28,7 @@ public class PopupTextBox {
 	public void draw() {
 		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, Game.windowWidth, 0, Game.windowHeight);
 		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
-		TextUtils.printTextWithImages(new Object[] { tempString }, drawPositionX, drawPositionY, width, true);
+		TextUtils.printTextWithImages(drawPositionX, drawPositionY, width, true, new Object[] { tempString });
 	}
 
 	public void keyTyped(char character) {

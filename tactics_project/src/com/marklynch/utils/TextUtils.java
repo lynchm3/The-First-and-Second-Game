@@ -26,7 +26,7 @@ import mdesl.graphics.Texture;
 
 public class TextUtils {
 
-	public static void printTextWithImages(Object[] contents, float posX, float posY, float maxWidth, boolean wrap) {
+	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, Object... contents) {
 		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY, maxWidth, wrap);
 	}
 

@@ -34,15 +34,15 @@ public class SelectionWindowButton extends Button {
 		if (enabled) {
 			if (down) {
 				QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
-				TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
+				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, new Object[] { object });
 			} else {
 				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
-				TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
+				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, new Object[] { object });
 			}
 		} else {
 
 			QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
-			TextUtils.printTextWithImages(new Object[] { object }, realX, realY, Integer.MAX_VALUE, true);
+			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, new Object[] { object });
 		}
 
 	}

@@ -53,15 +53,15 @@ public class AtributesWindowButton extends Button {
 			if (enabled) {
 				if (down) {
 					QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
-					TextUtils.printTextWithImages(new Object[] { attribute }, realX, realY, Integer.MAX_VALUE, true);
+					TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, new Object[] { attribute });
 				} else {
 					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
-					TextUtils.printTextWithImages(new Object[] { attribute }, realX, realY, 200, false);
+					TextUtils.printTextWithImages(realX, realY, 200, false, new Object[] { attribute });
 				}
 			} else {
 
 				QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
-				TextUtils.printTextWithImages(new Object[] { attribute }, realX, realY, 200, false);
+				TextUtils.printTextWithImages(realX, realY, 200, false, new Object[] { attribute });
 			}
 
 		} else {
@@ -82,38 +82,38 @@ public class AtributesWindowButton extends Button {
 						if (down) {
 							QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
 							TextUtils.printTextWithImages(
-									new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) }, realX,
-									realY, Integer.MAX_VALUE, true);
+									realX, realY,
+									Integer.MAX_VALUE, true, new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
 						} else {
 							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
 							TextUtils.printTextWithImages(
-									new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) }, realX,
-									realY, 200, false);
+									realX, realY,
+									200, false, new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
 						}
 					} else {
 
 						QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
 						TextUtils.printTextWithImages(
-								new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) }, realX, realY,
-								200, false);
+								realX, realY, 200,
+								false, new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
 					}
 
 				} else {
 					if (enabled) {
 						if (down) {
 							QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
-							TextUtils.printTextWithImages(new Object[] { attribute + ": ", field.get(object) }, realX,
-									realY, Integer.MAX_VALUE, true);
+							TextUtils.printTextWithImages(realX, realY,
+									Integer.MAX_VALUE, true, new Object[] { attribute + ": ", field.get(object) });
 						} else {
 							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
-							TextUtils.printTextWithImages(new Object[] { attribute + ": ", field.get(object) }, realX,
-									realY, 200, false);
+							TextUtils.printTextWithImages(realX, realY,
+									200, false, new Object[] { attribute + ": ", field.get(object) });
 						}
 					} else {
 
 						QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
-						TextUtils.printTextWithImages(new Object[] { attribute + ": ", field.get(object) }, realX,
-								realY, 200, false);
+						TextUtils.printTextWithImages(realX, realY,
+								200, false, new Object[] { attribute + ": ", field.get(object) });
 					}
 
 				}

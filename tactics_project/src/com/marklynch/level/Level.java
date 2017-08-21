@@ -1133,17 +1133,17 @@ public class Level {
 
 		// Turn text
 		if (currentFactionMoving != null) {
-			TextUtils.printTextWithImages(new Object[] { "TURN " + turn }, Game.windowWidth - 150, 20,
-					Integer.MAX_VALUE, true);
+			TextUtils.printTextWithImages(Game.windowWidth - 150, 20, Integer.MAX_VALUE, true,
+					new Object[] { "TURN " + turn });
 		}
 
 		// Zoom
-		TextUtils.printTextWithImages(new Object[] { "Zoom " + Game.zoom }, Game.windowWidth - 150, 40,
-				Integer.MAX_VALUE, true);
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 40, Integer.MAX_VALUE, true,
+				new Object[] { "Zoom " + Game.zoom });
 
 		// FPS
-		TextUtils.printTextWithImages(new Object[] { "FPS " + Game.displayFPS }, Game.windowWidth - 150, 60,
-				Integer.MAX_VALUE, true);
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 60, Integer.MAX_VALUE, true,
+				new Object[] { "FPS " + Game.displayFPS });
 
 		// if (factions.size() > 0 && currentFactionMoving != null) {
 		// if (showTurnNotification) {
@@ -1440,6 +1440,10 @@ public class Level {
 		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
 			if (popupPinneds.get(i).mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
 				return popupPinneds.get(i).closeButton;
+			if (popupPinneds.get(i).mouseOverMinimiseButton(mouseX, Game.windowHeight - mouseY))
+				return popupPinneds.get(i).minimiseButton;
+			if (popupPinneds.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
+				return popupPinneds.get(i).invisibleMinimiseButton;
 		}
 
 		// for (PopupTooltip popupTooltip : popupTooltips) {
