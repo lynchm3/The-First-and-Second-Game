@@ -18,7 +18,7 @@ public class PopupTextBox {
 
 	public PopupTextBox(GameObject gameObject) {
 		this.gameObject = gameObject;
-		tempString = new String(gameObject.name);
+		tempString = new String(((MapMarker) gameObject).baseName);
 		drawPositionX = 300;
 		drawPositionY = 300;
 		this.width = 200;
@@ -38,7 +38,8 @@ public class PopupTextBox {
 	}
 
 	public void enterTyped() {
-		gameObject.name = tempString;
+		((MapMarker) gameObject).baseName = tempString;
+		gameObject.name = "Marker: " + tempString;
 		Game.level.popupTextBoxes.clear();
 
 	}

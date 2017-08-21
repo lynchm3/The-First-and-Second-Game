@@ -27,6 +27,8 @@ public class MapMarker extends GameObject {
 
 	public static ArrayList<Texture> MAP_MARKER_TEXTURES = new ArrayList<Texture>();
 
+	public String baseName = "";
+
 	public MapMarker(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
@@ -37,6 +39,15 @@ public class MapMarker extends GameObject {
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner);
+
+		// if (name == null || name.length() == 0) {
+		baseName = NO_DESCRIPTION;
+		this.name = "Marker: " + baseName;
+		// } else {
+		// baseName = name;
+		// this.name = "Marker: " + baseName;
+		// }
+
 		canBePickedUp = true;
 		showInventory = false;
 		fitsInInventory = false;
