@@ -11,7 +11,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 
-public class PopupPinned implements Draggable {
+public class Window implements Draggable {
 
 	public GameObject gameObject;
 	public float width;
@@ -20,7 +20,7 @@ public class PopupPinned implements Draggable {
 	public float drawPositionX, drawPositionY;
 	public LevelButton closeButton, minimiseButton, titleBarButton;
 
-	public PopupPinned(GameObject gameObject) {
+	public Window(GameObject gameObject) {
 		this.gameObject = gameObject;
 		drawPositionX = 500;
 		drawPositionY = 10;
@@ -32,7 +32,7 @@ public class PopupPinned implements Draggable {
 		closeButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.popupPinneds.remove(PopupPinned.this);
+				Game.level.popupPinneds.remove(Window.this);
 			}
 		});
 
@@ -41,7 +41,7 @@ public class PopupPinned implements Draggable {
 		minimiseButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				PopupPinned.this.minimised = !PopupPinned.this.minimised;
+				Window.this.minimised = !Window.this.minimised;
 			}
 		});
 
@@ -50,7 +50,7 @@ public class PopupPinned implements Draggable {
 		titleBarButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				PopupPinned.this.minimised = !PopupPinned.this.minimised;
+				Window.this.minimised = !Window.this.minimised;
 			}
 		});
 

@@ -14,7 +14,7 @@ import com.marklynch.editor.UserInputEditor;
 import com.marklynch.graphics.ShadowLight;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
-import com.marklynch.level.popup.PopupPinned;
+import com.marklynch.level.popup.Window;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Inventory;
 import com.marklynch.objects.InventorySquare;
@@ -47,8 +47,8 @@ public class Game {
 	// public static int playerStartPosY = 52;
 
 	// Morts Mine
-	public static int playerStartPosX = 282;
-	public static int playerStartPosY = 46;
+	public static int playerStartPosX = 3;
+	public static int playerStartPosY = 3;
 
 	// Burrow in forest
 	// public static int playerStartPosX = 186;
@@ -159,7 +159,7 @@ public class Game {
 
 	public static Inventory inventoryHoveringOver = null;
 	public static InventorySquare inventorySquareMouseIsOver = null;
-	public static PopupPinned popUpHoveringOver;
+	public static Window popUpHoveringOver;
 
 	public void start() {
 

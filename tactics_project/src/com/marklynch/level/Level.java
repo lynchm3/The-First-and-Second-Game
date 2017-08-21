@@ -33,7 +33,7 @@ import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuActionButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
 import com.marklynch.level.popup.PopupMenuSelectObject;
-import com.marklynch.level.popup.PopupPinned;
+import com.marklynch.level.popup.Window;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.popup.PopupToast;
 import com.marklynch.level.squares.Square;
@@ -118,7 +118,7 @@ public class Level {
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
 	public ArrayList<PopupToast> popupToasts = new ArrayList<PopupToast>();
-	public ArrayList<PopupPinned> popupPinneds = new ArrayList<PopupPinned>();
+	public ArrayList<Window> popupPinneds = new ArrayList<Window>();
 
 	public Toast toast;
 	public Conversation conversation;
@@ -1188,7 +1188,7 @@ public class Level {
 			popup.draw();
 		}
 
-		for (PopupPinned popupPinned : popupPinneds) {
+		for (Window popupPinned : popupPinneds) {
 			popupPinned.draw();
 		}
 
@@ -1497,7 +1497,7 @@ public class Level {
 		return null;
 	}
 
-	public PopupPinned getPopupFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
+	public Window getPopupFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
 		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
 			if (popupPinneds.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
 				return popupPinneds.get(i);

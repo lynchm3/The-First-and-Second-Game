@@ -18,7 +18,7 @@ import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
 import com.marklynch.level.popup.PopupMenuSelectObject;
-import com.marklynch.level.popup.PopupPinned;
+import com.marklynch.level.popup.Window;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InventorySquare;
@@ -195,8 +195,8 @@ public class UserInputLevel {
 
 				} else if (draggableMouseIsOver != null) {
 
-					if (draggableMouseIsOver instanceof PopupPinned) {
-						((PopupPinned) draggableMouseIsOver).bringToFront();
+					if (draggableMouseIsOver instanceof Window) {
+						((Window) draggableMouseIsOver).bringToFront();
 					}
 
 					draggableMouseIsOver.drag(Mouse.getX() - mouseLastX, Mouse.getY() - mouseLastY);
