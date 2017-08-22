@@ -589,11 +589,13 @@ public class Inventory {
 
 	}
 
+	public final static Color backgroundColor = new Color(0f, 0f, 0f, 1f);
+
 	@SuppressWarnings("unchecked")
 	public void drawStaticUI() {
 
 		// Black cover
-		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
+		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, 0, Game.windowHeight);
 
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {

@@ -11,6 +11,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.TextureUtils;
 
+import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class InventorySquare extends Square {
@@ -97,8 +98,9 @@ public class InventorySquare extends Square {
 	public Action drawAction() {
 		Action defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player);
 		if (defaultAction != null && defaultAction.image != null) {
-			TextureUtils.drawTexture(defaultAction.image, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
-					yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+			TextureUtils.drawTexture(defaultAction.image, xInPixels + Game.INVENTORY_SQUARE_WIDTH / 2,
+					yInPixels + Game.INVENTORY_SQUARE_HEIGHT / 2, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+					yInPixels + Game.INVENTORY_SQUARE_HEIGHT, Color.BLACK);
 		}
 		return defaultAction;
 	}
