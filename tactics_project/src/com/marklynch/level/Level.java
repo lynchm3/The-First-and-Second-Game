@@ -1433,11 +1433,15 @@ public class Level {
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
 
+		if (this.popupTextBoxes.size() != 0)
+			return null;
+
 		if (conversation != null) {
 			for (Button button : conversation.currentConversationPart.windowSelectConversationResponse.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
+			return null;
 		}
 
 		for (Inventory inventory : openInventories) {
@@ -1445,6 +1449,7 @@ public class Level {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
+			return null;
 		}
 
 		for (int i = popupPinneds.size() - 1; i >= 0; i--) {

@@ -221,6 +221,10 @@ public class UserInputLevel {
 					.getInventorySquareMouseIsOver(mouseXinPixels, mouseYinPixels);
 			Game.squareMouseIsOver = inventorySquareMouseIsOver;
 			Game.level.openInventories.get(0).setSquareMouseHoveringOver(inventorySquareMouseIsOver);
+		} else if (Game.level.popupTextBoxes.size() != 0) {
+
+		} else if (Game.level.conversation != null) {
+
 		} else if (draggableMouseIsOver != null) {
 
 		} else {
@@ -631,6 +635,7 @@ public class UserInputLevel {
 		}
 
 		if (Game.level.popupTextBoxes.size() != 0) {
+			Game.level.popupTextBoxes.get(0).moveCaretLeft();
 			return;
 		} else if (Game.level.conversation != null) {
 			return;
@@ -678,6 +683,7 @@ public class UserInputLevel {
 		}
 
 		if (Game.level.popupTextBoxes.size() != 0) {
+			Game.level.popupTextBoxes.get(0).moveCaretRight();
 			return;
 		} else if (Game.level.conversation != null) {
 			return;
