@@ -92,7 +92,7 @@ public class AIRoutineUtils {
 
 	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
-			boolean ignoreQuestObjects, Class... classes) {
+			boolean ignoreQuestObjects, int minimumValue, Class... classes) {
 
 		if (checkActors) {
 
@@ -113,7 +113,7 @@ public class AIRoutineUtils {
 									&& Game.level.activeActor
 											.straightLineDistanceTo(actor.squareGameObjectIsOn) <= maxRange) {
 								if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
-										ignoreQuestObjects)) {
+										ignoreQuestObjects, minimumValue)) {
 									Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
 									AIPath path = Game.level.activeActor.getPathTo(square);
 									if (path != null) {
@@ -148,7 +148,7 @@ public class AIRoutineUtils {
 								&& Game.level.activeActor
 										.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
 							if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
-									mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
+									mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue)) {
 								Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
 								AIPath path = Game.level.activeActor.getPathTo(square);
 								if (path != null) {
@@ -168,7 +168,7 @@ public class AIRoutineUtils {
 
 	public static GameObject getNearestForPurposeOfAttacking(float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
-			boolean ignoreQuestObjects, Class... classes) {
+			boolean ignoreQuestObjects, int minimumValue, Class... classes) {
 
 		if (checkActors) {
 
@@ -189,7 +189,7 @@ public class AIRoutineUtils {
 									&& Game.level.activeActor
 											.straightLineDistanceTo(actor.squareGameObjectIsOn) <= maxRange) {
 								if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
-										ignoreQuestObjects)) {
+										ignoreQuestObjects, minimumValue)) {
 									Square square = calculateSquareToMoveToToAttackTarget(actor);
 									AIPath path = Game.level.activeActor.getPathTo(square);
 									if (path != null) {
@@ -224,7 +224,7 @@ public class AIRoutineUtils {
 								&& Game.level.activeActor
 										.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
 							if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
-									mustContainObjects, mustBeUnowned, ignoreQuestObjects)) {
+									mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue)) {
 								Square square = calculateSquareToMoveToToAttackTarget(gameObject);
 								AIPath path = Game.level.activeActor.getPathTo(square);
 								if (path != null) {
@@ -243,7 +243,10 @@ public class AIRoutineUtils {
 	}
 
 	public static boolean passesChecks(GameObject gameObject, Class clazz, boolean fitsInInventory,
-			boolean mustContainsObjects, boolean mustBeUnowned, boolean ignoreQuestObjects) {
+			boolean mustContainsObjects, boolean mustBeUnowned, boolean ignoreQuestObjects, int minimumValue) {
+
+		if (gameObject.value < minimumValue)
+			return false;
 
 		if (ignoreQuestObjects && gameObject.quest != null)
 			return false;
@@ -402,7 +405,7 @@ public class AIRoutineUtils {
 
 		// Go to burrow and hide if can
 		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20f,
-				false, false, true, false, false, false, SmallHidingPlace.class);
+				false, false, true, false, false, false, 0, SmallHidingPlace.class);
 		if (smallHidingPlace != null) {
 
 			if (Game.level.activeActor.straightLineDistanceTo(smallHidingPlace.squareGameObjectIsOn) < 2) {
