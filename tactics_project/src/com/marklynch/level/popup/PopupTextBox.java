@@ -11,7 +11,7 @@ import mdesl.graphics.Color;
 public class PopupTextBox {
 
 	public GameObject gameObject;
-	public float width;
+	// public float width;
 	public float height;
 	public float drawPositionX, drawPositionY;
 	public String tempString;
@@ -20,24 +20,35 @@ public class PopupTextBox {
 	public boolean caretOn = true;
 	public int caretTimer = 0;
 	public static final int CARET_BLINK_TIME = 500;
+	public String instructions;
 
-	public PopupTextBox(GameObject gameObject) {
+	public PopupTextBox(GameObject gameObject, String instructions) {
 		this.gameObject = gameObject;
+		this.instructions = instructions;
 		tempString = new String(((MapMarker) gameObject).baseName);
 		drawPositionX = 300;
 		drawPositionY = 300;
 		caretX = drawPositionX + 5;
 		caretY = drawPositionX + 5;
-		this.width = 200;
+		// this.width = 200;
 		this.height = 20;
 	}
 
 	public void draw() {
+		int textWidth = Game.font.getWidth(tempString);
+		// Full blakc bg
 		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, Game.windowWidth, 0, Game.windowHeight);
-		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
-		TextUtils.printTextWithImages(drawPositionX, drawPositionY, width, true, new Object[] { tempString });
+		// Instructions
+		TextUtils.printTextWithImages(drawPositionX, drawPositionY - 36, Integer.MAX_VALUE, true,
+				new Object[] { instructions });
+		// Text box
+		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + textWidth + 4, drawPositionY,
+				drawPositionY + height);
+		// Text string
+		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, true,
+				new Object[] { tempString });
+		// Caret
 		if (caretOn) {
-			int textWidth = Game.font.getWidth(tempString);
 			QuadUtils.drawQuad(Color.BLACK, drawPositionX + textWidth, drawPositionX + textWidth + 2, drawPositionY,
 					drawPositionY + height);
 

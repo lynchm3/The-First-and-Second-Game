@@ -29,7 +29,7 @@ public class ActionRename extends Action {
 		if (!enabled)
 			return;
 
-		Game.level.popupTextBoxes.add(new PopupTextBox(target));
+		Game.level.popupTextBoxes.add(new PopupTextBox(target, "Enter Marker Name"));
 		// Templates.MAP_MARKER.makeCopy(target, null);
 		//
 		// if (Game.level.shouldLog(Game.level.player))
