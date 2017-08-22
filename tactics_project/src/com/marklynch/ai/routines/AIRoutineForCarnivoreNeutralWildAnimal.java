@@ -96,7 +96,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 		// 1. attack small animal
 		GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfAttacking(50f, false, true, false,
-				false, true, true, HerbivoreWildAnimal.class);
+				false, true, true, 0, HerbivoreWildAnimal.class);
 		if (smallWildAnimal != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			this.actor.thoughtBubbleImageTexture = smallWildAnimal.imageTexture;
@@ -110,7 +110,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 		// 2. eat corpse on ground
 		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, Carcass.class);
+				false, false, 0, Carcass.class);
 		if (corpse != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTexture = corpse.imageTexture;
@@ -125,7 +125,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 		// 3. eat food on ground
 		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, Food.class);
+				false, false, 0, Food.class);
 		if (food != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTexture = food.imageTexture;

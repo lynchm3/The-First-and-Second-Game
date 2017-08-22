@@ -256,7 +256,7 @@ public class AIRoutine {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
 
 					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false, true,
-							false, false, false, false, Hunter.class, Farmer.class);
+							false, false, false, false, 0, Hunter.class, Farmer.class);
 
 					// if (this.actor.canSeeGameObject(actorNearby)) {
 					// } else {

@@ -105,7 +105,7 @@ public class AIRoutineForThief extends AIRoutine {
 
 		// 1. loot corpses, even if owned
 		GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(50f, false, false, true, true, false,
-				true, Corpse.class, Chest.class);
+				true, 0, Corpse.class, Chest.class);
 		if (container != null) {
 			if (container.owner != null && container.owner != actor)
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
@@ -121,9 +121,10 @@ public class AIRoutineForThief extends AIRoutine {
 			return;
 		}
 
-		// 1. pick up loot on ground, even if owned
+		// 1. pick up loot on ground, even if owned, all specific stuff, no
+		// stupid generic game object
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(50f, true, false, true, false, false, true,
-				Axe.class, Bell.class, Lantern.class, Pickaxe.class, Tool.class, BodyArmor.class, Helmet.class,
+				0, Axe.class, Bell.class, Lantern.class, Pickaxe.class, Tool.class, BodyArmor.class, Helmet.class,
 				LegArmor.class, Weapon.class, ContainerForLiquids.class, Food.class, Junk.class, Key.class);
 		if (loot != null) {
 			if (loot.owner != null && loot.owner != actor)
