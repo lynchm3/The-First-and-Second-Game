@@ -23,6 +23,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Player;
@@ -389,8 +390,7 @@ public class UserInputLevel {
 				// Game.level.popups.add(new PopupSelectObject(100, Game.level,
 				// Game.squareMouseIsOver));
 			} else {
-				Game.level.popupMenuObjects.clear();
-				Game.level.popupMenuActions.clear();
+				Level.closeAllPopups();
 			}
 		}
 
@@ -449,7 +449,8 @@ public class UserInputLevel {
 
 		// Clicked on a sqr far away, do move.
 		if (key == -1 && openMenu == false && secondary == false && attack == false
-				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1) {
+				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1
+				&& square.getDefaultActionForTheSquareOrObject(Game.level.activeActor) instanceof ActionMove) {
 			if (Game.level.player.onScreen()) {
 				Game.level.cameraFollow = true;
 			}
@@ -488,8 +489,7 @@ public class UserInputLevel {
 
 			}
 		} else {
-			Game.level.popupMenuObjects.clear();
-			Game.level.popupMenuActions.clear();
+			Level.closeAllPopups();
 			if (square instanceof InventorySquare && ((InventorySquare) square).gameObject != null) {
 				PopupMenuSelectAction popupSelectAction = new PopupMenuSelectAction(0, 200, Game.level, square,
 						((InventorySquare) square).gameObject
@@ -761,8 +761,7 @@ public class UserInputLevel {
 
 		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
 
-		Game.level.popupMenuActions.clear();
-		Game.level.popupMenuObjects.clear();
+		Level.closeAllPopups();
 		Game.level.popupTextBoxes.clear();
 		Game.level.popupToasts.clear();
 		if (Game.level.openInventories.size() != 0) {
@@ -793,8 +792,7 @@ public class UserInputLevel {
 		if (gridY2Bounds >= Game.level.height)
 			gridY2Bounds = Game.level.height - 1;
 		if (Keyboard.isKeyDown(Keyboard.KEY_TAB) == true) {
-			Game.level.popupMenuActions.clear();
-			Game.level.popupMenuObjects.clear();
+			Level.closeAllPopups();
 			Game.level.popupMenuHighlightObjects.clear();
 			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
