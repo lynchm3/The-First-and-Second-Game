@@ -16,7 +16,7 @@ public class Readable extends GameObject {
 
 	public Readable(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
-			String conversationText, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
+			Object[] conversationText, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float slashResistance, float weight, Actor owner) {
@@ -39,7 +39,7 @@ public class Readable extends GameObject {
 
 	}
 
-	public Readable makeCopy(Square square, String name, String conversationText, Actor owner) {
+	public Readable makeCopy(Square square, String name, Object[] conversationText, Actor owner) {
 		return new Readable(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 
 				conversationText, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,

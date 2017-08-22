@@ -141,7 +141,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		dropHole.inventory.add(paulsKey);
 
 		Readable rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[244][15],
-				"Rock with etching", "Stay out or The Blind will get you! -Mort", null);
+				"Rock with etching", new Object[] { "Stay out or The Blind will get you! -Mort" }, null);
 
 		// Add spoons
 		serratedSpoon = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[244][11], null);
@@ -230,7 +230,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[260][10], null));
 		Templates.TABLE.makeCopy(Game.level.squares[258][9], null);
 		Templates.DOCUMENTS.makeCopy(Game.level.squares[258][9], "Ingoing/Outgoing",
-				"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter",
+				new Object[] {
+						"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter" },
 				null);
 		Chest securityChest = Templates.CHEST.makeCopy("Security Chest", Game.level.squares[259][9], false, null);
 		securityChest.inventory.add(Templates.PICKAXE.makeCopy(null, null));
@@ -693,7 +694,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public void makeMortsMine() {
 
-		Readable noEntry = Templates.SIGN.makeCopy(Game.level.squares[276][39], "Sign", "PRIVATE! - Mort", mort);
+		Readable noEntry = Templates.SIGN.makeCopy(Game.level.squares[276][39], "Sign",
+				new Object[] { "PRIVATE! - Mort" }, mort);
 		noEntry.quest = this;
 
 		Pickaxe pickaxe = Templates.PICKAXE.makeCopy(Game.level.squares[276][38], mort);

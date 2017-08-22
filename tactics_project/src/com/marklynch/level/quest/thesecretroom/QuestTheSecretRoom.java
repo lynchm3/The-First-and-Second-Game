@@ -114,7 +114,12 @@ public class QuestTheSecretRoom {
 
 		// Signpost 5,20
 		Sign signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[5][20], "Signpost",
-				"North - Shop, Hunter's Lodge; East - Estates; South - Farm", null);
+
+				new Object[] { GameObject.upTexture, " Shop, Hunter's Lodge  ", GameObject.rightTexture, " Estates  ",
+						GameObject.downTexture, " Farm" },
+				null);
+
+		// "North - Shop, Hunter's Lodge; East - Estates; South - Farm",
 
 		// Trees around town square
 		Templates.TREE.makeCopy(Game.level.squares[22][19], null);

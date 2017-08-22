@@ -88,7 +88,8 @@ public class AreaTownForest {
 		}
 
 		Templates.SCROLL.makeCopy(Game.level.squares[160][55], "Scroll of Poison Blast",
-				"[You learn Poison Blast]\nPoisons for base 3 dmg/s Range:10\nUse the power of the forest to murder people with poisons. Nice",
+				new Object[] {
+						"[You learn Poison Blast]\nPoisons for base 3 dmg/s Range:10\nUse the power of the forest to murder people with poisons. Nice" },
 				null);
 
 		// corners

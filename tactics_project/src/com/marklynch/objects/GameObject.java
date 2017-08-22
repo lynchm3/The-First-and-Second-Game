@@ -66,12 +66,14 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	// images
 	public static transient Texture powTexture = null;
 	public static transient Texture vsTexture = null;
-	public transient Texture fightTexture = null;
-	public transient Texture skullTexture = null;
-	public transient Texture xTexture = null;
-	public transient Texture upTexture = null;
-	public transient Texture downTexture = null;
-	public transient Texture armTexture = null;
+	public static transient Texture fightTexture = null;
+	public static transient Texture skullTexture = null;
+	public static transient Texture xTexture = null;
+	public static transient Texture upTexture = null;
+	public static transient Texture downTexture = null;
+	public static transient Texture leftTexture = null;
+	public static transient Texture rightTexture = null;
+	public static transient Texture armTexture = null;
 	public static transient Texture grassNormalTexture = null;
 	public static transient Texture skipNormalTexture = null;
 
@@ -188,6 +190,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		this.xTexture = getGlobalImage("x.png");
 		this.upTexture = getGlobalImage("up.png");
 		this.downTexture = getGlobalImage("down.png");
+		this.leftTexture = getGlobalImage("left.png");
+		this.rightTexture = getGlobalImage("right.png");
 		this.armTexture = getGlobalImage("arm.png");
 		grassNormalTexture = getGlobalImage("grass_NRM.png");
 		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png");
@@ -1054,6 +1058,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public Conversation createConversation(String text, String response) {
+		return Conversation.createConversation(text, response, this);
+	}
+
+	public Conversation createConversation(Object[] text, String response) {
 		return Conversation.createConversation(text, response, this);
 	}
 }
