@@ -1449,6 +1449,17 @@ public class Level {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
+
+			if (!Game.level.popupMenuActions.isEmpty()) {
+
+				for (int i = popupMenuActions.size() - 1; i >= 0; i--) {
+					for (Button button : popupMenuActions.get(i).buttons) {
+						if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+							return button;
+					}
+
+				}
+			}
 			return null;
 		}
 

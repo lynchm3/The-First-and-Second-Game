@@ -606,7 +606,7 @@ public class Inventory {
 		}
 
 		// cursor
-		if (this.inventorySquareMouseIsOver != null) {
+		if (this.inventorySquareMouseIsOver != null && Game.level.popupMenuActions.size() == 0) {
 			this.inventorySquareMouseIsOver.drawCursor();
 			this.inventorySquareMouseIsOver.drawAction();
 		}

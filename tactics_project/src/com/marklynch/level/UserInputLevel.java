@@ -369,13 +369,11 @@ public class UserInputLevel {
 			}
 		}
 
-		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false)
-
-		{
-			if (Game.windowHoveringOver != null)
-				Game.windowHoveringOver.bringToFront();
+		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false) {
 
 			// Right Click
+			if (Game.windowHoveringOver != null)
+				Game.windowHoveringOver.bringToFront();
 
 			if (Game.level.conversation != null) {
 
