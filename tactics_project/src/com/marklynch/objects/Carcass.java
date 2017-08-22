@@ -30,7 +30,7 @@ public class Carcass extends GameObject {
 		showInventory = false;
 		fitsInInventory = false;
 		canShareSquare = true;
-		canContainOtherObjects = false;
+		canContainOtherObjects = true;
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = false;
 		attackable = true;

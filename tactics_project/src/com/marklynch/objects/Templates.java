@@ -102,13 +102,13 @@ public class Templates {
 	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 1, 1, "serrated_spoon.png", 100, null,
 			1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 48, 113);
 	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 1, 1, "bell.png", 100, null, 1f, 1f, 0f, 0f, 25f,
-			25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 20, 38);
+			25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 53, 103);
 	public static final Lantern LANTERN = new Lantern("Lantern", 1, 1, "lantern.png", 100, null, 1f, 1f, 0f, 0f, 15f,
 			15f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 63, 6);
 
 	// Blades
-	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, 1f, 0.5f, 0f, 0f, 1f,
-			1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, null, 23, 86);
+	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f,
+			1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, null, 27, 85);
 
 	public static final Weapon CLEAVER = new Weapon("Cleaver", 5, 1, 1, "cleaver.png", 100, null, 1f, 1f, 0f, 0f, 1f,
 			1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 33, 104);
@@ -244,8 +244,8 @@ public class Templates {
 	// Food?
 	public static final MeatChunk MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(),
 			0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, null);
-	public static final ContainerForLiquids JAR = new ContainerForLiquids("Jar", 1, 1, "jar.png", 100, null, 0.5f, 0.5f,
-			0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 4, 38, 1f, "water_jar.png");
+	public static final ContainerForLiquids JAR = new ContainerForLiquids("Jar", 1, 1, "jar.png", 100, null, 1f, 1f, 0f,
+			0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, null, 56, 100, 1f, "water_jar.png");
 	public static final Liquid WATER = new Liquid("Water", 5, "effect_wet.png", null, new Inventory(), 0.5f, 0.5f, 0f,
 			0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, null, 0f,
 			new Effect[] { new EffectWet(5) }, new Effect[] {});
