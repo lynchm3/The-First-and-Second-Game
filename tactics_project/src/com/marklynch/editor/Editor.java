@@ -32,9 +32,6 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
-import com.marklynch.level.conversation.Conversation;
-import com.marklynch.level.conversation.ConversationPart;
-import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.level.quest.smallgame.QuestSmallGame;
@@ -488,13 +485,8 @@ public class Editor {
 				Square.STONE_TEXTURE);
 		Game.level.structures.add(joesShop);
 
-		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
-		ConversationPart conversationPart = new ConversationPart(new Object[] { joesShop.name },
-				new ConversationResponse[] { conversationReponseDone }, trader);
-		Conversation conversation = new Conversation(conversationPart);
-
-		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign", conversation,
-				trader);
+		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
+				joesShop.name, trader);
 		Weapon broom = Templates.BROOM.makeCopy(null, null);
 		trader.inventory.add(broom);
 		trader.inventory.add(Templates.KATANA.makeCopy(null, null));

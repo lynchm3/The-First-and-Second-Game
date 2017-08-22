@@ -1,6 +1,7 @@
 package com.marklynch.level.conversation;
 
 import com.marklynch.Game;
+import com.marklynch.objects.GameObject;
 import com.marklynch.utils.QuadUtils;
 
 import mdesl.graphics.Color;
@@ -60,5 +61,13 @@ public class Conversation {
 		// TextUtils.printTextWithImages(new Object[] { object }, realX, realY,
 		// Integer.MAX_VALUE, true);
 
+	}
+
+	public static Conversation createConversation(String text, String response, GameObject gameObject) {
+		ConversationResponse conversationReponseDone = new ConversationResponse(response, null);
+		ConversationPart conversationPartYouWontGetOut = new ConversationPart(new Object[] { text },
+				new ConversationResponse[] { conversationReponseDone }, gameObject);
+
+		return new Conversation(conversationPartYouWontGetOut);
 	}
 }

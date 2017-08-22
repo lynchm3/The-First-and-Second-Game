@@ -12,11 +12,11 @@ public class Sign extends Readable {
 
 	public Sign(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
-			Conversation conversation, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
+			String conversationText, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float slashResistance, float weight, Actor owner) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, conversation, widthRatio, heightRatio,
+		super(name, health, imagePath, squareGameObjectIsOn, inventory, conversationText, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner);
@@ -38,10 +38,10 @@ public class Sign extends Readable {
 	}
 
 	@Override
-	public Sign makeCopy(Square square, String name, Conversation conversation, Actor owner) {
+	public Sign makeCopy(Square square, String name, String conversationText, Actor owner) {
 		return new Sign(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 
-				conversation, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
+				conversationText, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, owner);
 	}

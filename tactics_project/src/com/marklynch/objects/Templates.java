@@ -156,6 +156,8 @@ public class Templates {
 			0f, 0f, 20f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 100f, null);
 	public static final Sign SIGN = new Sign("Sign", 5, "sign.png", null, new Inventory(), null, 1, 1, 0f, 0f, 1f, 1f,
 			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 15f, null);
+	public static final Sign SIGNPOST = new Sign("Signpost", 50, "signpost.png", null, new Inventory(), null, 1, 1.25f,
+			0f, -0.25f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 15f, null);
 	public static final Readable DOCUMENTS = new Readable("Documents", 5, "documents.png", null, new Inventory(), null,
 			0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.1f, null);
 

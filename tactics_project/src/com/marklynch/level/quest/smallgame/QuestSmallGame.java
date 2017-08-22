@@ -247,13 +247,8 @@ public class QuestSmallGame extends Quest {
 			hunter.quest = this;
 		}
 
-		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
-		ConversationPart conversationPart = new ConversationPart(
-				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" },
-				new ConversationResponse[] { conversationReponseDone }, null);
-		Conversation conversation = new Conversation(conversationPart);
-		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan", conversation,
-				hunterBrent);
+		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan",
+				"Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast", hunterBrent);
 
 		environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,

@@ -9,8 +9,6 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
-import com.marklynch.level.conversation.ConversationPart;
-import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Chest;
@@ -142,13 +140,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		Game.level.squares[294][45].inventory.add(joesKey);
 		dropHole.inventory.add(paulsKey);
 
-		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
-		ConversationPart conversationPart = new ConversationPart(
-				new Object[] { "Stay out or The Blind will get you! -Mort" },
-				new ConversationResponse[] { conversationReponseDone }, null);
-		Conversation conversation = new Conversation(conversationPart);
 		Readable rockWithEtching = Templates.ROCK_WITH_ETCHING.makeCopy(Game.level.squares[244][15],
-				"Rock with etching", conversation, null);
+				"Rock with etching", "Stay out or The Blind will get you! -Mort", null);
 
 		// Add spoons
 		serratedSpoon = Templates.SERRATED_SPOON.makeCopy(Game.level.squares[244][11], null);
@@ -236,13 +229,9 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[259][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[260][10], null));
 		Templates.TABLE.makeCopy(Game.level.squares[258][9], null);
-		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
-		ConversationPart conversationPart = new ConversationPart(
-				new Object[] {
-						"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter" },
-				new ConversationResponse[] { conversationReponseDone }, null);
-		Conversation conversation = new Conversation(conversationPart);
-		Templates.DOCUMENTS.makeCopy(Game.level.squares[258][9], "Ingoing/Outgoing", conversation, null);
+		Templates.DOCUMENTS.makeCopy(Game.level.squares[258][9], "Ingoing/Outgoing",
+				"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter",
+				null);
 		Chest securityChest = Templates.CHEST.makeCopy("Security Chest", Game.level.squares[259][9], false, null);
 		securityChest.inventory.add(Templates.PICKAXE.makeCopy(null, null));
 
@@ -704,11 +693,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public void makeMortsMine() {
 
-		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
-		ConversationPart conversationPart = new ConversationPart(new Object[] { "PRIVATE! - Mort" },
-				new ConversationResponse[] { conversationReponseDone }, null);
-		Conversation conversation = new Conversation(conversationPart);
-		Readable noEntry = Templates.SIGN.makeCopy(Game.level.squares[276][39], "Sign", conversation, mort);
+		Readable noEntry = Templates.SIGN.makeCopy(Game.level.squares[276][39], "Sign", "PRIVATE! - Mort", mort);
 		noEntry.quest = this;
 
 		Pickaxe pickaxe = Templates.PICKAXE.makeCopy(Game.level.squares[276][38], mort);

@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
+import com.marklynch.objects.Sign;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.WaterSource;
@@ -78,9 +79,7 @@ public class QuestTheSecretRoom {
 				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE));
 
 		// Path to town 24,21 -> 24,29
-		Path pathToTown = new Path(Game.level.squares[24][21], Game.level.squares[24][22], Game.level.squares[24][23],
-				Game.level.squares[24][24], Game.level.squares[24][25], Game.level.squares[24][26],
-				Game.level.squares[24][27], Game.level.squares[24][28], Game.level.squares[24][29]);
+		Path pathToTown = new Path(24, 21, 24, 29);
 
 		// Bushed along path to town
 		Templates.BUSH.makeCopy(Game.level.squares[23][25], null);
@@ -101,6 +100,21 @@ public class QuestTheSecretRoom {
 				Game.level.squares[26][21], Game.level.squares[22][22], Game.level.squares[23][22],
 				Game.level.squares[24][22], Game.level.squares[25][22], Game.level.squares[26][22],
 				Game.level.squares[23][23], Game.level.squares[24][23], Game.level.squares[25][23]);
+
+		// Path left of fountain
+		new Path(4, 21, 21, 21);
+
+		// Path to shop
+		new Path(4, 4, 4, 21);
+
+		// Path to farm
+		new Path(4, 21, 4, 62);
+		new Path(4, 62, 18, 62);
+		new Path(18, 62, 18, 68);
+
+		// Signpost 5,20
+		Sign signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[5][20], "Signpost",
+				"North - Shop, Hunter's Lodge; East - Estates; South - Farm", null);
 
 		// Trees around town square
 		Templates.TREE.makeCopy(Game.level.squares[22][19], null);

@@ -108,12 +108,7 @@ public class QuestBetweenTheWalls {
 				new RequirementToMeet[] { new StatRequirementToMeet(StatRequirementToMeet.Stat.STAT_STRENGTH, 1) });
 
 		// Path to town 24,21 -> 40,21
-		Path pathToTown = new Path(Game.level.squares[24][21], Game.level.squares[25][21], Game.level.squares[26][21],
-				Game.level.squares[27][21], Game.level.squares[28][21], Game.level.squares[29][21],
-				Game.level.squares[30][21], Game.level.squares[31][21], Game.level.squares[32][21],
-				Game.level.squares[33][21], Game.level.squares[34][21], Game.level.squares[35][21],
-				Game.level.squares[36][21], Game.level.squares[37][21], Game.level.squares[38][21],
-				Game.level.squares[39][21], Game.level.squares[40][21]);
+		Path pathToTown = new Path(24, 21, 40, 21);
 
 		// Bushed along path
 		Templates.BUSH.makeCopy(Game.level.squares[28][20], null);

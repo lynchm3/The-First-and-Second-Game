@@ -1052,4 +1052,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// // TODO Auto-generated method stub
 		// return false;
 	}
+
+	public Conversation createConversation(String text, String response) {
+		return Conversation.createConversation(text, response, this);
+	}
 }
