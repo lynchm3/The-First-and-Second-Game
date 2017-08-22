@@ -606,7 +606,7 @@ public class Inventory {
 		}
 
 		// cursor
-		if (this.inventorySquareMouseIsOver != null && Game.level.popupMenuActions.size() == 0) {
+		if (this.inventorySquareMouseIsOver != null && Game.buttonHoveringOver == null) {
 			this.inventorySquareMouseIsOver.drawCursor();
 			this.inventorySquareMouseIsOver.drawAction();
 		}
@@ -782,6 +782,7 @@ public class Inventory {
 	public void userInput() {
 
 		this.inventorySquareMouseIsOver = null;
+
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
 				if (inventorySquares[j][i].calculateIfPointInBoundsOfSquare(UserInputEditor.mouseXinPixels,

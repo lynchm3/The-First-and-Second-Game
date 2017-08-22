@@ -134,15 +134,6 @@ public class UserInputEditor {
 			Game.buttonHoveringOver = editor.getButtonFromMousePosition(Mouse.getX(), Mouse.getY());
 		}
 
-		// Getting inventory that the mouse is over, if any
-		Game.inventoryHoveringOver = null;
-		// if (dragging == false) {
-		Game.inventoryHoveringOver = Game.level.getInventoryFromMousePosition(Mouse.getX(), Mouse.getY());
-		if (Game.inventoryHoveringOver != null)
-			Game.inventoryHoveringOver.userInput();
-
-		// }
-
 		// left click logic
 		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
 				&& Game.buttonHoveringOver != null) {
