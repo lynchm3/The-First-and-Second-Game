@@ -13,6 +13,7 @@ import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -54,8 +55,8 @@ public class Inventory {
 	private transient boolean isOpen = false;
 	transient float x = 300;
 	transient float y = 100;
-	transient float width = widthInSquares * Game.SQUARE_WIDTH;
-	transient float height = heightInSquares * Game.SQUARE_HEIGHT;
+	transient float width = widthInSquares * Game.INVENTORY_SQUARE_WIDTH;
+	transient float height = heightInSquares * Game.INVENTORY_SQUARE_HEIGHT;
 	transient private InventorySquare inventorySquareMouseIsOver;
 	transient private GameObject selectedGameObject;
 
@@ -592,8 +593,7 @@ public class Inventory {
 	public void drawStaticUI() {
 
 		// Black cover
-		// QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0,
-		// Game.windowHeight);
+		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
 
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
@@ -804,8 +804,9 @@ public class Inventory {
 		float offsetY = y;
 		float scroll = 0;
 
-		float mouseXInSquares = (((mouseXInPixels - offsetX) / Game.SQUARE_WIDTH));
-		float mouseYInSquares = ((Game.windowHeight - mouseYInPixels - offsetY - scroll) / Game.SQUARE_HEIGHT);
+		float mouseXInSquares = (((mouseXInPixels - offsetX) / Game.INVENTORY_SQUARE_WIDTH));
+		float mouseYInSquares = ((Game.windowHeight - mouseYInPixels - offsetY - scroll)
+				/ Game.INVENTORY_SQUARE_HEIGHT);
 
 		if (mouseXInSquares >= 0 && mouseXInSquares < inventorySquares.length && mouseYInSquares >= 0
 				&& mouseYInSquares < inventorySquares[0].length) {

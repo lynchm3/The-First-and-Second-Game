@@ -29,8 +29,8 @@ public class InventorySquare extends Square {
 		this.showInventory = false;
 		this.inventoryThisBelongsTo = inventoryThisBelongsTo;
 
-		xInPixels = Math.round(inventoryThisBelongsTo.x + xInGrid * Game.SQUARE_WIDTH);
-		yInPixels = Math.round(inventoryThisBelongsTo.y + yInGrid * Game.SQUARE_HEIGHT);
+		xInPixels = Math.round(inventoryThisBelongsTo.x + xInGrid * Game.INVENTORY_SQUARE_WIDTH);
+		yInPixels = Math.round(inventoryThisBelongsTo.y + yInGrid * Game.INVENTORY_SQUARE_HEIGHT);
 	}
 
 	@Override
@@ -53,12 +53,12 @@ public class InventorySquare extends Square {
 
 		// square texture
 
-		TextureUtils.drawTexture(imageTexture, xInPixels, yInPixels, xInPixels + Game.SQUARE_WIDTH,
-				yInPixels + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(imageTexture, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 		if (gameObject != null) {
 
-			float drawWidth = Game.SQUARE_WIDTH;
-			float drawHeight = Game.SQUARE_HEIGHT;
+			float drawWidth = Game.INVENTORY_SQUARE_WIDTH;
+			float drawHeight = Game.INVENTORY_SQUARE_HEIGHT;
 			float realTextureWidth = gameObject.imageTexture.getWidth();
 			float realTextureHeight = gameObject.imageTexture.getHeight();
 			if (realTextureWidth >= realTextureHeight) {// knife
@@ -72,7 +72,7 @@ public class InventorySquare extends Square {
 
 			for (Effect effect : gameObject.activeEffectsOnGameObject) {
 				TextureUtils.drawTexture(effect.imageTexture, 0.75f, xInPixels, yInPixels,
-						xInPixels + Game.SQUARE_WIDTH, yInPixels + Game.SQUARE_HEIGHT);
+						xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 			}
 
 		}
@@ -83,22 +83,22 @@ public class InventorySquare extends Square {
 	public void drawHighlight() {
 
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, xInPixels, yInPixels,
-				xInPixels + Game.SQUARE_WIDTH, yInPixels + Game.SQUARE_HEIGHT);
+				xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 
 	}
 
 	@Override
 	public void drawCursor() {
-		TextureUtils.drawTexture(Game.level.gameCursor.cursor, xInPixels, yInPixels, xInPixels + Game.SQUARE_WIDTH,
-				yInPixels + Game.SQUARE_HEIGHT);
+		TextureUtils.drawTexture(Game.level.gameCursor.cursor, xInPixels, yInPixels,
+				xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 	}
 
 	@Override
 	public Action drawAction() {
 		Action defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player);
 		if (defaultAction != null && defaultAction.image != null) {
-			TextureUtils.drawTexture(defaultAction.image, xInPixels, yInPixels, xInPixels + Game.SQUARE_WIDTH,
-					yInPixels + Game.SQUARE_HEIGHT);
+			TextureUtils.drawTexture(defaultAction.image, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+					yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 		}
 		return defaultAction;
 	}
@@ -110,8 +110,8 @@ public class InventorySquare extends Square {
 	}
 
 	public boolean calculateIfPointInBoundsOfSquare(float mouseX, float mouseY) {
-		if (mouseX > xInPixels && mouseX < xInPixels + (int) Game.SQUARE_WIDTH && mouseY > yInPixels
-				&& mouseY < yInPixels + (int) Game.SQUARE_HEIGHT) {
+		if (mouseX > xInPixels && mouseX < xInPixels + (int) Game.INVENTORY_SQUARE_WIDTH && mouseY > yInPixels
+				&& mouseY < yInPixels + (int) Game.INVENTORY_SQUARE_HEIGHT) {
 			return true;
 		}
 		return false;
