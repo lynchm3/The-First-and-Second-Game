@@ -1507,10 +1507,19 @@ public class Level {
 		return null;
 	}
 
-	public Window getPopupFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
+	public Window getWindowFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
 		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
 			if (popupPinneds.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
 				return popupPinneds.get(i);
+		}
+		return null;
+	}
+
+	public PopupTextBox getPopupTextBoxFromMousePosition(float mouseX, float mouseY, float alteredMouseX,
+			float alteredMouseY) {
+		for (int i = popupTextBoxes.size() - 1; i >= 0; i--) {
+			if (popupTextBoxes.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
+				return popupTextBoxes.get(i);
 		}
 		return null;
 	}

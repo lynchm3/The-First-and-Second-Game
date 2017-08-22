@@ -14,6 +14,7 @@ import com.marklynch.editor.UserInputEditor;
 import com.marklynch.graphics.ShadowLight;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
+import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.popup.Window;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Inventory;
@@ -159,7 +160,8 @@ public class Game {
 
 	public static Inventory inventoryHoveringOver = null;
 	public static InventorySquare inventorySquareMouseIsOver = null;
-	public static Window popUpHoveringOver;
+	public static Window windowHoveringOver;
+	public static PopupTextBox popupTextBoxHoveringOver = null;
 
 	public void start() {
 

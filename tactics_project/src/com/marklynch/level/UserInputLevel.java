@@ -48,6 +48,7 @@ public class UserInputLevel {
 	public static boolean keyStateTab = false;
 	public static boolean keyStateReturn = false;
 	public static boolean keyStateBack = false;
+	public static boolean keyStateDelete = false;
 	public static boolean keyStateLeftShift = false;
 	public static boolean keyStateRightShift = false;
 	public static boolean keyStateEscape = false;
@@ -265,12 +266,15 @@ public class UserInputLevel {
 		// Getting button that the mouse is over, if any
 		Game.oldButtonHoveringOver = Game.buttonHoveringOver;
 		Game.buttonHoveringOver = null;
-		Game.popUpHoveringOver = null;
+		Game.windowHoveringOver = null;
+		Game.popupTextBoxHoveringOver = null;
 		if (dragging == false) {
 			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
-			Game.popUpHoveringOver = Game.level.getPopupFromMousePosition(Mouse.getX(), Mouse.getY(), mouseXTransformed,
-					mouseYTransformed);
+			Game.windowHoveringOver = Game.level.getWindowFromMousePosition(Mouse.getX(), Mouse.getY(),
+					mouseXTransformed, mouseYTransformed);
+			Game.popupTextBoxHoveringOver = Game.level.getPopupTextBoxFromMousePosition(Mouse.getX(), Mouse.getY(),
+					mouseXTransformed, mouseYTransformed);
 		}
 
 		if (mouseLastX != Mouse.getX() || mouseLastY != Mouse.getY()) {
@@ -333,8 +337,8 @@ public class UserInputLevel {
 			// Left Click
 			// Game.level.popupMenuObjects.clear();
 			// Game.level.popupMenuActions.clear();
-			if (Game.popUpHoveringOver != null)
-				Game.popUpHoveringOver.bringToFront();
+			if (Game.windowHoveringOver != null)
+				Game.windowHoveringOver.bringToFront();
 
 			if (scriptInterceptsClick) {
 				// Continue script
@@ -344,7 +348,11 @@ public class UserInputLevel {
 				Game.buttonHoveringOver.click();
 			} else if (Game.level.conversation != null) {
 
+			} else if (Game.popupTextBoxHoveringOver != null) {
+				Game.popupTextBoxHoveringOver.click(Mouse.getX(), (int) (Game.windowHeight - Mouse.getY()));
 			} else if (Game.level.popupTextBoxes.size() != 0) {
+
+			} else if (Game.windowHoveringOver != null) {
 
 			} else if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
 				Game.level.pausePlayer();
@@ -360,14 +368,16 @@ public class UserInputLevel {
 		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false)
 
 		{
-			if (Game.popUpHoveringOver != null)
-				Game.popUpHoveringOver.bringToFront();
+			if (Game.windowHoveringOver != null)
+				Game.windowHoveringOver.bringToFront();
 
 			// Right Click
 
 			if (Game.level.conversation != null) {
 
 			} else if (Game.level.popupTextBoxes.size() != 0) {
+
+			} else if (Game.windowHoveringOver != null) {
 
 			} else if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
 				Game.level.pausePlayer();
@@ -731,6 +741,14 @@ public class UserInputLevel {
 		Level.closeAllPopups();
 	}
 
+	public static void deleteTyped() {
+
+		if (Game.level.popupTextBoxes.size() != 0) {
+			Game.level.popupTextBoxes.get(0).deleteTyped();
+			return;
+		}
+	}
+
 	public static void escapeTyped() {
 
 		if (Game.level.activeActor != Game.level.player)
@@ -928,6 +946,13 @@ public class UserInputLevel {
 			keyStateBack = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_BACK)) {
 			keyStateBack = false;
+		}
+
+		if (keyStateDelete == false && Keyboard.isKeyDown(Keyboard.KEY_DELETE)) {
+			deleteTyped();
+			keyStateDelete = true;
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_DELETE)) {
+			keyStateDelete = false;
 		}
 
 		if (keyStateLeftShift == false && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
