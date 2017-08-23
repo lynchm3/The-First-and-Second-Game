@@ -11,7 +11,7 @@ import com.marklynch.objects.units.Actor;
 
 public class ActionTradeItemsInOtherInventory extends Action {
 
-	public static final String ACTION_NAME = "Loot";
+	public static final String ACTION_NAME = "Trade";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
@@ -41,7 +41,7 @@ public class ActionTradeItemsInOtherInventory extends Action {
 			}
 		} else {
 
-			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_LOOT);
+			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_TRADE);
 			Game.level.player.inventory.otherInventory = target.inventory;
 			target.inventory.x = 900;
 			Game.level.player.inventory.open();

@@ -155,16 +155,23 @@ public class AIRoutineForTrader extends AIRoutine {
 		}
 
 		if (shopkeepState == SHOPKEEP_STATE.UPDATING_SIGN) {
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_UPDATING_SIGN;
-			this.actor.thoughtBubbleImageTexture = trader.shopSign.imageTexture;
-			// Go to the sign
-			// New action to set text of the sign
-			// Donezo
 
-			AIRoutineUtils.moveTowardsTargetToBeAdjacent(trader.shopSign);
-			if (trader.straightLineDistanceTo(trader.shopSign.squareGameObjectIsOn) < 2) {
-				new ActionWrite(trader, trader.shopSign, trader.getTextForSign()).perform();
+			Object[] textForSign = trader.getTextForSign();
+			if (textForSign == null) {
 				shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
+			} else {
+
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_UPDATING_SIGN;
+				this.actor.thoughtBubbleImageTexture = trader.shopSign.imageTexture;
+				// Go to the sign
+				// New action to set text of the sign
+				// Donezo
+
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(trader.shopSign);
+				if (trader.straightLineDistanceTo(trader.shopSign.squareGameObjectIsOn) < 2) {
+					new ActionWrite(trader, trader.shopSign, textForSign).perform();
+					shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
+				}
 			}
 		}
 	}
