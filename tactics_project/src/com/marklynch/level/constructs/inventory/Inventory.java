@@ -10,6 +10,7 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.WaterSource;
+import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -78,6 +79,9 @@ public class Inventory {
 
 	// Close button
 	static LevelButton buttonClose;
+
+	// Loot all button
+	static LevelButton buttonLootAll;
 
 	public static ArrayList<Button> buttons;
 	public static ArrayList<Button> buttonsSort;
@@ -206,6 +210,16 @@ public class Inventory {
 		});
 		buttons.add(buttonFilterByFood);
 		buttonsFilter.add(buttonFilterByFood);
+
+		buttonLootAll = new LevelButton(Game.halfWindowWidth - 25f + 100f, 100f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "LOOT ALL [A]", true, false, Color.BLACK, Color.WHITE);
+		buttonLootAll.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				new ActionLootAll(Game.level.player, (GameObject) target).perform();
+			}
+		});
+		buttons.add(buttonLootAll);
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, 100f, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "CLOSE [I]", true, false, Color.BLACK, Color.WHITE);
@@ -690,6 +704,10 @@ public class Inventory {
 			for (Button button : buttonsSort) {
 				button.draw();
 			}
+		}
+
+		if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
+			buttonLootAll.draw();
 		}
 
 		buttonClose.draw();

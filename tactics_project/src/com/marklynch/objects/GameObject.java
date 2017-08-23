@@ -31,7 +31,6 @@ import com.marklynch.objects.actions.ActionFillSpecificContainer;
 import com.marklynch.objects.actions.ActionFollow;
 import com.marklynch.objects.actions.ActionGiveItemsInInventory;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
-import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionLootItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
@@ -621,9 +620,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (!decorative && canBePickedUp)
 			actions.add(new ActionPickUp(performer, this));
-		if (!decorative && !(this instanceof Actor) && canContainOtherObjects && this.inventory.size() > 0) {
-			actions.add(new ActionLootAll(performer, this));
-		}
 
 		// Here put view loot
 

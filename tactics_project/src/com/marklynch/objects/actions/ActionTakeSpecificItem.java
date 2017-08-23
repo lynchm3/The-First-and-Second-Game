@@ -41,7 +41,7 @@ public class ActionTakeSpecificItem extends Action {
 
 		if (!enabled)
 			return;
-		if (Game.level.shouldLog(object, performer))
+		if (Game.level.shouldLog(object, performer)) {
 			if (legal) {
 				if (targetGameObject == null)
 					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", object }));
@@ -55,6 +55,7 @@ public class ActionTakeSpecificItem extends Action {
 					Game.level.logOnScreen(
 							new ActivityLog(new Object[] { performer, " stole ", object, " from ", targetGameObject }));
 			}
+		}
 
 		if (targetSquare != null)
 			targetSquare.inventory.remove(object);

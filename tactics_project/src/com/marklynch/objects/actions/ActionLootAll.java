@@ -46,9 +46,15 @@ public class ActionLootAll extends Action {
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 
-			if (Game.level.shouldLog(gameObjectToLoot, performer))
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " looted ", gameObjectToLoot, " from ", container }));
+			if (Game.level.shouldLog(gameObjectToLoot, performer)) {
+				if (gameObjectToLoot.owner == null || gameObjectToLoot.owner == performer) {
+					Game.level.logOnScreen(new ActivityLog(
+							new Object[] { performer, " took ", gameObjectToLoot, " from ", container }));
+				} else {
+					Game.level.logOnScreen(new ActivityLog(
+							new Object[] { performer, " stole ", gameObjectToLoot, " from ", container }));
+				}
+			}
 			container.inventory.remove(gameObjectToLoot);
 			performer.inventory.add(gameObjectToLoot);
 			if (gameObjectToLoot.owner == null)

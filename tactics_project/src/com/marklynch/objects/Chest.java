@@ -6,7 +6,6 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 
@@ -53,9 +52,6 @@ public class Chest extends Openable {
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		if (this.inventory.size() > 0 && (open || !locked || locked && performer.hasKeyForDoor(this))) {
-			actions.add(new ActionLootAll(performer, this));
-		}
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;
 	}
