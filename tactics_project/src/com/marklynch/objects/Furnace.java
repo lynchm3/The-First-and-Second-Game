@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLootAll;

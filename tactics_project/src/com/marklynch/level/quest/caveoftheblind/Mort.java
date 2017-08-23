@@ -4,9 +4,9 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Inventory;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
 

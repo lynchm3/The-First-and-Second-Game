@@ -14,11 +14,10 @@ import com.marklynch.editor.UserInputEditor;
 import com.marklynch.graphics.ShadowLight;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.popup.Window;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Inventory;
-import com.marklynch.objects.InventorySquare;
 import com.marklynch.ui.button.Button;
 
 import mdesl.graphics.SpriteBatch;
@@ -159,8 +158,6 @@ public class Game {
 
 	public static Button oldButtonHoveringOver = null;
 	public static Button buttonHoveringOver = null;
-
-	public static Inventory inventoryHoveringOver = null;
 	public static InventorySquare inventorySquareMouseIsOver = null;
 	public static Window windowHoveringOver;
 	public static PopupTextBox popupTextBoxHoveringOver = null;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Inventory;
 
 public class ActionChangeAppearance extends Action {
 

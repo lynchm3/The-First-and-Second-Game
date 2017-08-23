@@ -9,6 +9,8 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
+import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.inventory.InventoryParent;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
@@ -55,7 +57,7 @@ public class GameObjectTemplate implements InventoryParent {
 	public float weight;
 
 	public transient Texture imageTexture = null;
-	protected ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
+	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
 
 	public GameObjectTemplate(String name, float totalHealth, String imageTexturePath, Square squareGameObjectIsOn,
 			Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,

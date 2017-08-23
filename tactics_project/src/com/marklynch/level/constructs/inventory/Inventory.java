@@ -1,12 +1,15 @@
-package com.marklynch.objects;
+package com.marklynch.level.constructs.inventory;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
 import com.marklynch.Game;
-import com.marklynch.editor.UserInputEditor;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Door;
+import com.marklynch.objects.Food;
+import com.marklynch.objects.GameObject;
+import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -25,7 +28,7 @@ public class Inventory {
 	public int widthInSquares = 5;
 	public int heightInSquares = 6;
 	public transient InventorySquare[][] inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
-	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(widthInSquares * heightInSquares);
+	public ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(widthInSquares * heightInSquares);
 	protected ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>(widthInSquares * heightInSquares);
 
 	public enum INVENTORY_STATE {
@@ -81,6 +84,7 @@ public class Inventory {
 	public static ArrayList<Button> buttonsFilter;
 
 	public InventoryParent parent;
+	private GroundDisplay groundDisplay;
 
 	public static WaterSource waterSource;
 	public static Square square;
@@ -215,12 +219,17 @@ public class Inventory {
 		this.isOpen = true;
 		if (!Game.level.openInventories.contains(this))
 			Game.level.openInventories.add(this);
+
+		this.groundDisplay = null;
+		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL)
+			this.groundDisplay = new GroundDisplay(900, 100);
 	}
 
 	public void close() {
 		this.isOpen = false;
 		if (Game.level.openInventories.contains(this))
 			Game.level.openInventories.remove(this);
+		this.groundDisplay = null;
 	}
 
 	public void sort(INVENTORY_SORT_BY inventorySortBy, boolean filterFirst) {
@@ -267,6 +276,7 @@ public class Inventory {
 		}
 
 		Collections.sort(filteredGameObjects);
+
 		matchGameObjectsToSquares();
 	}
 
@@ -369,6 +379,7 @@ public class Inventory {
 	}
 
 	public void add(GameObject gameObject, int index) {
+		System.out.println("Inventory.add");
 		if (!gameObjects.contains(gameObject)) {
 
 			// Remove references with square
@@ -404,8 +415,12 @@ public class Inventory {
 			if (index != -1) {
 				filteredGameObjects.remove(index);
 				filteredGameObjects.add(index, gameObject);
+			} else {
+				filteredGameObjects.add(gameObject);
 			}
 			matchGameObjectsToSquares();
+			if (groundDisplay != null)
+				groundDisplay.refreshGameObjects();
 
 		}
 	}
@@ -430,6 +445,8 @@ public class Inventory {
 				filteredGameObjects.set(filteredGameObjects.indexOf(gameObject), null);
 			}
 			this.matchGameObjectsToSquares();
+			if (groundDisplay != null)
+				groundDisplay.refreshGameObjects();
 		}
 		return index;
 	}
@@ -448,13 +465,8 @@ public class Inventory {
 		return gameObjects;
 	}
 
-	public void setGameObjects(ArrayList<GameObject> gameObjects) {
-		this.gameObjects = gameObjects;
-		this.sort(inventorySortBy, true);
-		matchGameObjectsToSquares();
-	}
-
 	public void matchGameObjectsToSquares() {
+		System.out.println("Inventory.matchGameObjectsToSquares");
 		if (!isOpen)
 			return;
 
@@ -605,12 +617,6 @@ public class Inventory {
 			}
 		}
 
-		// cursor
-		if (this.inventorySquareMouseIsOver != null && Game.buttonHoveringOver == null) {
-			this.inventorySquareMouseIsOver.drawCursor();
-			this.inventorySquareMouseIsOver.drawAction();
-		}
-
 		// buttons
 		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
 			for (Button button : buttonsFilter) {
@@ -673,7 +679,7 @@ public class Inventory {
 
 		// Actor
 		int actorPositionXInPixels = 650;
-		int actorPositionYInPixels = 250;
+		int actorPositionYInPixels = 100;
 		float alpha = 1.0f;
 		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 				actorPositionXInPixels + Game.level.player.width * 2,
@@ -766,43 +772,28 @@ public class Inventory {
 			int comparisonPositionYInPixels = 250;
 		}
 
+		if (groundDisplay != null) {
+			groundDisplay.drawStaticUI();
+		}
+
+		// cursor
+		if (this.inventorySquareMouseIsOver != null && Game.buttonHoveringOver == null) {
+			this.inventorySquareMouseIsOver.drawCursor();
+			this.inventorySquareMouseIsOver.drawAction();
+		}
+
 	}
 
 	public boolean isOpen() {
 		return isOpen;
 	}
 
-	public boolean calculateIfPointInBoundsOfInventory(float mouseX, float mouseY) {
-		if (mouseX > x && mouseX < x + width && mouseY > y && mouseY < y + height) {
-			return true;
-		}
-		return false;
-	}
-
-	public void userInput() {
-
-		this.inventorySquareMouseIsOver = null;
-
-		for (int i = 0; i < inventorySquares[0].length; i++) {
-			for (int j = 0; j < inventorySquares.length; j++) {
-				if (inventorySquares[j][i].calculateIfPointInBoundsOfSquare(UserInputEditor.mouseXinPixels,
-						Game.windowHeight - UserInputEditor.mouseYinPixels)) {
-					this.inventorySquareMouseIsOver = inventorySquares[j][i];
-				}
-			}
-		}
-	}
-
 	public void click() {
-	}
-
-	private void selectGameObject(GameObject gameObject) {
-		selectedGameObject = gameObject;
-		inventoryState = INVENTORY_STATE.MOVEABLE_OBJECT_SELECTED;
 	}
 
 	public InventorySquare getInventorySquareMouseIsOver(float mouseXInPixels, float mouseYInPixels) {
 
+		// Inventory sqr
 		float offsetX = x;
 		float offsetY = y;
 		float scroll = 0;
@@ -815,6 +806,16 @@ public class Inventory {
 				&& mouseYInSquares < inventorySquares[0].length) {
 
 			return this.inventorySquares[(int) mouseXInSquares][(int) mouseYInSquares];
+		}
+
+		// Ground display sqr
+		if (groundDisplay != null) {
+			GroundDisplaySquare groundDisplaySquareMouseIsOver = groundDisplay
+					.getGroundDisplaySquareMouseIsOver(mouseXInPixels, mouseYInPixels);
+			if (groundDisplaySquareMouseIsOver != null) {
+				return groundDisplaySquareMouseIsOver; // This is working great
+														// 23/08/2017
+			}
 		}
 
 		return null;

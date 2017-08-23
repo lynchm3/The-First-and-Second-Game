@@ -15,6 +15,7 @@ import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.AnimationWait;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleeding;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;

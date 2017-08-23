@@ -3,6 +3,7 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionClose;
@@ -19,8 +20,8 @@ public abstract class Openable extends GameObject {
 
 	protected boolean open = false;
 	public Key[] keys;
-	protected boolean locked;
-	protected String baseName;
+	public boolean locked;
+	public String baseName;
 
 	public Openable(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 

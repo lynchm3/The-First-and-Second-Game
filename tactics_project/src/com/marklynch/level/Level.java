@@ -19,6 +19,8 @@ import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
+import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerHealRanged;
@@ -40,8 +42,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
-import com.marklynch.objects.Inventory;
-import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.Templates;
@@ -1021,7 +1021,7 @@ public class Level {
 			}
 		}
 
-		if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
+		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {
 
 			if (levelMode == LevelMode.LEVEL_SELECT_TELEPORT_SQUARE) {
 				Game.squareMouseIsOver.drawX();
@@ -1537,16 +1537,6 @@ public class Level {
 			if (popupTextBoxes.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
 				return popupTextBoxes.get(i);
 		}
-		return null;
-	}
-
-	public Inventory getInventoryFromMousePosition(float mouseX, float mouseY) {
-
-		for (Inventory inventory : this.openInventories) {
-			if (inventory.calculateIfPointInBoundsOfInventory(mouseX, Game.windowHeight - mouseY))
-				return inventory;
-		}
-
 		return null;
 	}
 

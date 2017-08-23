@@ -14,6 +14,7 @@ import org.lwjgl.input.Mouse;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level.LevelMode;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
@@ -21,9 +22,10 @@ import com.marklynch.level.popup.PopupMenuSelectObject;
 import com.marklynch.level.popup.Window;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.InventorySquare;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Player;
@@ -313,13 +315,6 @@ public class UserInputLevel {
 			}
 		}
 
-		// Getting inventory that the mouse is over, if any
-		Game.inventoryHoveringOver = null;
-		if (dragging == false) {
-			Game.inventoryHoveringOver = Game.level.getInventoryFromMousePosition(Mouse.getX(), Mouse.getY());
-
-		}
-
 		boolean hoveringOverPopup = Game.buttonHoveringOver != null
 				&& Game.buttonHoveringOver instanceof PopupMenuButton;
 
@@ -448,9 +443,12 @@ public class UserInputLevel {
 		}
 
 		// Clicked on a sqr far away, do move.
+		Action defaultActionForClickedSquare = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
 		if (key == -1 && openMenu == false && secondary == false && attack == false
 				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1
-				&& square.getDefaultActionForTheSquareOrObject(Game.level.activeActor) instanceof ActionMove) {
+				&& (defaultActionForClickedSquare instanceof ActionMove
+						|| defaultActionForClickedSquare instanceof ActionHide
+						|| defaultActionForClickedSquare instanceof ActionStopHiding)) {
 			if (Game.level.player.onScreen()) {
 				Game.level.cameraFollow = true;
 			}

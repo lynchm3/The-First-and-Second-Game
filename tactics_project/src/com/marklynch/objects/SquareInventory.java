@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;

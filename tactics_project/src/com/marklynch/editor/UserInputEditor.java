@@ -140,10 +140,6 @@ public class UserInputEditor {
 			// click button
 			Game.buttonHoveringOver.click();
 		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
-				&& Game.inventoryHoveringOver != null) {
-			// click inventory
-			Game.inventoryHoveringOver.click();
-		} else if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false
 				&& Game.squareMouseIsOver != null) {
 			// click square/game object if we're on one
 

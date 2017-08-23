@@ -1,4 +1,4 @@
-package com.marklynch.objects;
+package com.marklynch.level.constructs.inventory;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ArrayUtils;
@@ -30,8 +31,10 @@ public class InventorySquare extends Square {
 		this.showInventory = false;
 		this.inventoryThisBelongsTo = inventoryThisBelongsTo;
 
-		xInPixels = Math.round(inventoryThisBelongsTo.x + xInGrid * Game.INVENTORY_SQUARE_WIDTH);
-		yInPixels = Math.round(inventoryThisBelongsTo.y + yInGrid * Game.INVENTORY_SQUARE_HEIGHT);
+		if (inventoryThisBelongsTo != null) {
+			xInPixels = Math.round(inventoryThisBelongsTo.x + xInGrid * Game.INVENTORY_SQUARE_WIDTH);
+			yInPixels = Math.round(inventoryThisBelongsTo.y + yInGrid * Game.INVENTORY_SQUARE_HEIGHT);
+		}
 	}
 
 	@Override
@@ -121,6 +124,10 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
+		// System.out.println("InventorySquare.getDefaultActionForTheSquareOrObject");
+		// System.out.println("this = " + this);
+		// System.out.println("this instanceof GroundDisplaySquare = " + (this
+		// instanceof GroundDisplaySquare));
 		GameObject targetGameObject = this.gameObject;
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInInventory(performer);

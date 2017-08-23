@@ -2,6 +2,7 @@ package com.marklynch.objects;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionClose;

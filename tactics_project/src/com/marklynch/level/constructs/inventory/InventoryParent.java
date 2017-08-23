@@ -1,4 +1,4 @@
-package com.marklynch.objects;
+package com.marklynch.level.constructs.inventory;
 
 public interface InventoryParent {
 

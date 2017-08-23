@@ -9,9 +9,9 @@ import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.weapons.Weapon;
 

@@ -32,6 +32,7 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
 import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
 import com.marklynch.level.quest.smallgame.QuestSmallGame;
@@ -40,7 +41,6 @@ import com.marklynch.level.quest.thesecretroom.QuestTheSecretRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectTemplate;
-import com.marklynch.objects.Inventory;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
@@ -607,13 +607,6 @@ public class Editor {
 	public void drawOverlay() {
 
 		// draw highlight on selected object
-
-		if (Game.inventoryHoveringOver == null && Game.inventorySquareMouseIsOver != null) {
-			Game.inventorySquareMouseIsOver.drawCursor();
-		} else if (Game.inventoryHoveringOver == null && Game.buttonHoveringOver == null
-				&& Game.squareMouseIsOver != null) {
-			Game.squareMouseIsOver.drawCursor();
-		}
 
 		if (selectedGameObject != null && selectedGameObject.squareGameObjectIsOn != null) {
 			selectedGameObject.squareGameObjectIsOn.drawHighlight();

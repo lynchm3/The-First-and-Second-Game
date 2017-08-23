@@ -1,7 +1,7 @@
 package com.marklynch.objects.tools;
 
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Inventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;

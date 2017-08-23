@@ -3,6 +3,7 @@ package com.marklynch.objects;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.tools.Axe;

@@ -17,12 +17,12 @@ import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.inventory.InventoryParent;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
-import com.marklynch.objects.InventoryParent;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
@@ -596,7 +596,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		if (this == Game.level.player.squareGameObjectIsOn) {
 			return new ActionWait(performer, this);
-		} else if (performer.travelDistance >= performer.straightLineDistanceTo(this)) {
+		} else {
 
 			HidingPlace hidingPlace = (HidingPlace) this.inventory.getGameObjectOfClass(HidingPlace.class);
 			if (hidingPlace != null && hidingPlace.remainingHealth > 0) {
@@ -609,8 +609,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 			return new ActionMove(performer, this, true);
 
-		} else {
-			return null;
 		}
 
 	}
