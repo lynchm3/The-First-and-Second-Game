@@ -119,7 +119,7 @@ public class Inventory {
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY, true);
+				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY, false);
 			}
 		});
 		buttonsSort.add(buttonSortAlphabetically);
@@ -129,7 +129,7 @@ public class Inventory {
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST, false);
 			}
 		});
 		buttonsSort.add(buttonSortByNewest);
@@ -139,7 +139,7 @@ public class Inventory {
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE, false);
 			}
 		});
 		buttonsSort.add(buttonSortByFavourite);
@@ -149,7 +149,7 @@ public class Inventory {
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_VALUE, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_VALUE, false);
 			}
 		});
 		buttonsSort.add(buttonSortByValue);
@@ -159,7 +159,7 @@ public class Inventory {
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE, false);
 			}
 		});
 		buttonsSort.add(buttonSortByTotalDamage);
@@ -169,7 +169,7 @@ public class Inventory {
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE, false);
 			}
 		});
 		buttonsSort.add(buttonSortBySlashDamage);
