@@ -56,7 +56,7 @@ public class GroundDisplay {
 		matchGameObjectsToSquares();
 	}
 
-	public void matchGameObjectsToSquares() {
+	private void matchGameObjectsToSquares() {
 
 		int index = 0;
 		for (int i = 0; i < groundDisplaySquares[0].length; i++) {

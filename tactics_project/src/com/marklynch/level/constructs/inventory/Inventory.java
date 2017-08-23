@@ -10,7 +10,9 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.WaterSource;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLootAll;
+import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
@@ -216,7 +218,25 @@ public class Inventory {
 		buttonLootAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				new ActionLootAll(Game.level.player, (GameObject) target).perform();
+				if (groundDisplay == null) {
+					new ActionLootAll(Game.level.player, (GameObject) target).perform();
+				} else {
+					ArrayList<Action> actionsToPerform = new ArrayList<Action>();
+					for (Square square : groundDisplay.squares) {
+						for (GameObject gameObject : square.inventory.gameObjects) {
+							if (gameObject.fitsInInventory) {
+								Action action = new ActionTakeSpecificItem(Game.level.player, square, gameObject);
+								if (action.legal) {
+									actionsToPerform.add(action);
+								}
+							}
+						}
+					}
+					for (Action action : actionsToPerform) {
+						action.perform();
+					}
+					groundDisplay.refreshGameObjects();
+				}
 			}
 		});
 		buttons.add(buttonLootAll);
@@ -706,7 +726,7 @@ public class Inventory {
 			}
 		}
 
-		if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
+		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 			buttonLootAll.draw();
 		}
 
