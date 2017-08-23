@@ -84,7 +84,7 @@ public class Inventory {
 	public static ArrayList<Button> buttonsFilter;
 
 	public InventoryParent parent;
-	private GroundDisplay groundDisplay;
+	public GroundDisplay groundDisplay;
 
 	public static WaterSource waterSource;
 	public static Square square;

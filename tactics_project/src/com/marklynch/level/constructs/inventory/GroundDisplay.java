@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.utils.StringWithColor;
+import com.marklynch.utils.TextUtils;
+
+import mdesl.graphics.Color;
 
 public class GroundDisplay {
 
@@ -67,6 +71,10 @@ public class GroundDisplay {
 	}
 
 	public void drawStaticUI() {
+
+		TextUtils.printTextWithImages(900f, 8f, 300f, true,
+				new Object[] { new StringWithColor("Items on the Ground", Color.WHITE) });
+
 		for (int i = 0; i < groundDisplaySquares[0].length; i++) {
 			for (int j = 0; j < groundDisplaySquares.length; j++) {
 				groundDisplaySquares[j][i].drawStaticUI();

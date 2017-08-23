@@ -71,6 +71,9 @@ public class ActionDropSpecificItem extends Action {
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, square));
 		}
 
+		if (performer.inventory.groundDisplay != null)
+			performer.inventory.groundDisplay.refreshGameObjects();
+
 		if (performer instanceof Actor)
 			((Actor) performer).actionsPerformedThisTurn.add(this);
 	}

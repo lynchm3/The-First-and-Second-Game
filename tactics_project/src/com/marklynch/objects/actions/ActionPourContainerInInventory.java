@@ -53,11 +53,11 @@ public class ActionPourContainerInInventory extends Action {
 			}
 		} else {
 
+			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR);
 			Game.level.player.inventory.open();
 			Inventory.target = this.target;
 			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
-			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR);
 		}
 		Level.closeAllPopups();
 	}

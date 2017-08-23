@@ -40,11 +40,11 @@ public class ActionFillContainersInInventory extends Action {
 				inventory.close();
 			}
 		} else {
+			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL);
 			Game.level.player.inventory.open();
 			Inventory.waterSource = this.waterSource;
 			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
-			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL);
 			// Game.level.openInventories.add(Game.level.player.inventory);
 
 			// Game.level.player.inventory.setActionOnSelect(new
