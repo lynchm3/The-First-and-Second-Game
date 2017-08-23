@@ -12,7 +12,7 @@ import mdesl.graphics.Color;
 
 public class GroundDisplay {
 
-	public int widthInSquares = 1;
+	public int widthInSquares = 5;
 	public int heightInSquares = 6;
 
 	ArrayList<Square> squares = new ArrayList<Square>();

@@ -59,8 +59,11 @@ public class Inventory {
 	public static transient INVENTORY_MODE inventoryMode = INVENTORY_MODE.MODE_NORMAL;
 
 	private transient boolean isOpen = false;
-	public transient float x = 300;
+	public transient float x = 500;
 	transient float y = 100;
+	transient float sortButtonX = 400;
+	transient int actorX = 100;
+	transient int otherInventoryGameObjectX = 1250;
 	transient float width = widthInSquares * Game.INVENTORY_SQUARE_WIDTH;
 	transient float height = heightInSquares * Game.INVENTORY_SQUARE_HEIGHT;
 	transient private InventorySquare inventorySquareMouseIsOver;
@@ -114,8 +117,8 @@ public class Inventory {
 		buttonsSort = new ArrayList<Button>();
 		buttonsFilter = new ArrayList<Button>();
 
-		buttonSortAlphabetically = new LevelButton(100f, 100f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"SORT A-Z", true, true, Color.BLACK, Color.WHITE);
+		buttonSortAlphabetically = new LevelButton(sortButtonX, 100f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "SORT A-Z", true, true, Color.BLACK, Color.WHITE);
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -124,7 +127,7 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortAlphabetically);
 
-		buttonSortByNewest = new LevelButton(100f, 150f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
+		buttonSortByNewest = new LevelButton(sortButtonX, 150f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"NEWEST", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
@@ -134,8 +137,8 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortByNewest);
 
-		buttonSortByFavourite = new LevelButton(100f, 200f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"FAVOURITES", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByFavourite = new LevelButton(sortButtonX, 200f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "FAVOURITES", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -144,7 +147,7 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortByFavourite);
 
-		buttonSortByValue = new LevelButton(100f, 250f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
+		buttonSortByValue = new LevelButton(sortButtonX, 250f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"VALUE", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
@@ -154,8 +157,8 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortByValue);
 
-		buttonSortByTotalDamage = new LevelButton(100f, 300f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"DAMAGE", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByTotalDamage = new LevelButton(sortButtonX, 300f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "DAMAGE", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -164,8 +167,8 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortByTotalDamage);
 
-		buttonSortBySlashDamage = new LevelButton(100f, 350f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"SLASH", true, true, Color.BLACK, Color.WHITE);
+		buttonSortBySlashDamage = new LevelButton(sortButtonX, 350f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "SLASH", true, true, Color.BLACK, Color.WHITE);
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -174,8 +177,8 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortBySlashDamage);
 
-		buttonFilterByAll = new LevelButton(300f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "ALL",
-				true, true, Color.BLACK, Color.WHITE);
+		buttonFilterByAll = new LevelButton(sortButtonX + 100f, 50f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "ALL", true, true, Color.BLACK, Color.WHITE);
 		buttonFilterByAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -184,8 +187,8 @@ public class Inventory {
 		});
 		buttonsFilter.add(buttonFilterByAll);
 
-		buttonFilterByWeapon = new LevelButton(400f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"WEAPONS", true, true, Color.BLACK, Color.WHITE);
+		buttonFilterByWeapon = new LevelButton(sortButtonX + 200f, 50f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "WEAPONS", true, true, Color.BLACK, Color.WHITE);
 		buttonFilterByWeapon.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -194,8 +197,8 @@ public class Inventory {
 		});
 		buttonsFilter.add(buttonFilterByWeapon);
 
-		buttonFilterByFood = new LevelButton(500f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "FOOD",
-				true, true, Color.BLACK, Color.WHITE);
+		buttonFilterByFood = new LevelButton(sortButtonX + 300f, 50f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "FOOD", true, true, Color.BLACK, Color.WHITE);
 		buttonFilterByFood.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -703,7 +706,7 @@ public class Inventory {
 		}
 
 		// Actor
-		int actorPositionXInPixels = 650;
+		int actorPositionXInPixels = this.actorX;
 		int actorPositionYInPixels = 100;
 		float alpha = 1.0f;
 		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
@@ -801,8 +804,19 @@ public class Inventory {
 			groundDisplay.drawStaticUI();
 		}
 
-		if (otherInventory != null)
+		// Other Gameobject / actor inventory squares
+		if (otherInventory != null) {
 			otherInventory.drawSquares();
+		}
+
+		// Other Gameobject / actor
+		if (otherInventory != null) {
+			// Actor
+			GameObject otherGameObject = (GameObject) target;
+			TextureUtils.drawTexture(otherGameObject.imageTexture, alpha, otherInventoryGameObjectX,
+					actorPositionYInPixels, otherInventoryGameObjectX + otherGameObject.width * 2,
+					actorPositionYInPixels + otherGameObject.height * 2);
+		}
 
 		// cursor
 		if (this.inventorySquareMouseIsOver != null && Game.buttonHoveringOver == null) {
