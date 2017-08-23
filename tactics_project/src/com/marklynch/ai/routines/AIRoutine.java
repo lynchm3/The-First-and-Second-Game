@@ -681,7 +681,7 @@ public class AIRoutine {
 					} else {
 						actor.setMiniDialogue("Give me that!", criminal);
 						for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-							new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal, true).perform();
+							new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal, true, false).perform();
 						}
 					}
 					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
@@ -754,7 +754,7 @@ public class AIRoutine {
 			public void select() {
 				super.select();
 				for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-					new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal, true).perform();
+					new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal, true, false).perform();
 				}
 			}
 		};

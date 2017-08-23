@@ -10,17 +10,20 @@ public class ActionGiveSpecificItem extends Action {
 
 	public static final String ACTION_NAME = "Give";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
-	Actor performer;
+	GameObject performer;
 	GameObject receiver;
 	GameObject object;
 	boolean logAsTake;
+	boolean logAsLoot;
 
-	public ActionGiveSpecificItem(Actor performer, GameObject receiver, GameObject object, boolean logAsTake) {
+	public ActionGiveSpecificItem(GameObject performer, GameObject receiver, GameObject object, boolean logAsTake,
+			boolean logAsLoot) {
 		super(ACTION_NAME, "action_give.png");
 		this.performer = performer;
 		this.receiver = receiver;
 		this.object = object;
 		this.logAsTake = logAsTake;
+		this.logAsLoot = logAsLoot;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -41,16 +44,23 @@ public class ActionGiveSpecificItem extends Action {
 			if (logAsTake)
 				Game.level
 						.logOnScreen(new ActivityLog(new Object[] { receiver, " took ", object, " from ", performer }));
+			else if (logAsLoot)
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { receiver, " looted ", object, " from ", performer }));
 			else
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " gave ", object, " to ", receiver }));
 		performer.inventory.remove(object);
-		if (performer.equipped == object)
-			performer.equip(null);
+
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
+			if (actor.equipped == object)
+				actor.equip(null);
+			actor.actionsPerformedThisTurn.add(this);
+		}
 		receiver.inventory.add(object);
 		if (receiver instanceof Actor) {
 			object.owner = (Actor) receiver;
 		}
-		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
 	}

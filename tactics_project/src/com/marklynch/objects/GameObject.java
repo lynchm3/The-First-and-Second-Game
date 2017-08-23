@@ -783,7 +783,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
-			return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
+			return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false, false);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
@@ -792,6 +792,21 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
 			return new ActionPourSpecificItem(performer, Inventory.target, this);
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
+			if (this.inventoryThatHoldsThisObject == performer.inventory)
+				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false, true);
+			else
+				return new ActionGiveSpecificItem((GameObject) Inventory.target, performer, this, false, true);
+
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
+			if (this.inventoryThatHoldsThisObject == performer.inventory)
+				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false, true);
+			else
+				return new ActionGiveSpecificItem((GameObject) Inventory.target, performer, this, false, true);
 		}
 
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
