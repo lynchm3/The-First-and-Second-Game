@@ -122,7 +122,6 @@ public class Inventory {
 				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY, true);
 			}
 		});
-		buttons.add(buttonSortAlphabetically);
 		buttonsSort.add(buttonSortAlphabetically);
 
 		buttonSortByNewest = new LevelButton(100f, 150f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
@@ -133,7 +132,6 @@ public class Inventory {
 				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST, true);
 			}
 		});
-		buttons.add(buttonSortByNewest);
 		buttonsSort.add(buttonSortByNewest);
 
 		buttonSortByFavourite = new LevelButton(100f, 200f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
@@ -144,7 +142,6 @@ public class Inventory {
 				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE, true);
 			}
 		});
-		buttons.add(buttonSortByFavourite);
 		buttonsSort.add(buttonSortByFavourite);
 
 		buttonSortByValue = new LevelButton(100f, 250f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
@@ -155,7 +152,6 @@ public class Inventory {
 				sort(INVENTORY_SORT_BY.SORT_BY_VALUE, true);
 			}
 		});
-		buttons.add(buttonSortByValue);
 		buttonsSort.add(buttonSortByValue);
 
 		buttonSortByTotalDamage = new LevelButton(100f, 300f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
@@ -166,7 +162,6 @@ public class Inventory {
 				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE, true);
 			}
 		});
-		buttons.add(buttonSortByTotalDamage);
 		buttonsSort.add(buttonSortByTotalDamage);
 
 		buttonSortBySlashDamage = new LevelButton(100f, 350f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
@@ -177,7 +172,6 @@ public class Inventory {
 				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE, true);
 			}
 		});
-		buttons.add(buttonSortBySlashDamage);
 		buttonsSort.add(buttonSortBySlashDamage);
 
 		buttonFilterByAll = new LevelButton(300f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "ALL",
@@ -188,7 +182,6 @@ public class Inventory {
 				filter(INVENTORY_FILTER_BY.FILTER_BY_ALL, false);
 			}
 		});
-		buttons.add(buttonFilterByAll);
 		buttonsFilter.add(buttonFilterByAll);
 
 		buttonFilterByWeapon = new LevelButton(400f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
@@ -199,7 +192,6 @@ public class Inventory {
 				filter(INVENTORY_FILTER_BY.FILTER_BY_WEAPON, false);
 			}
 		});
-		buttons.add(buttonFilterByWeapon);
 		buttonsFilter.add(buttonFilterByWeapon);
 
 		buttonFilterByFood = new LevelButton(500f, 50f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "FOOD",
@@ -210,7 +202,6 @@ public class Inventory {
 				filter(INVENTORY_FILTER_BY.FILTER_BY_FOOD, false);
 			}
 		});
-		buttons.add(buttonFilterByFood);
 		buttonsFilter.add(buttonFilterByFood);
 
 		buttonLootAll = new LevelButton(Game.halfWindowWidth - 25f + 100f, 100f, 100f, 30f, "end_turn_button.png",
@@ -239,7 +230,10 @@ public class Inventory {
 				}
 			}
 		});
-		buttons.add(buttonLootAll);
+
+		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
+			buttons.add(buttonLootAll);
+		}
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, 100f, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "CLOSE [I]", true, false, Color.BLACK, Color.WHITE);
@@ -250,6 +244,20 @@ public class Inventory {
 			}
 		});
 		buttons.add(buttonClose);
+
+		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL || inventoryMode == INVENTORY_MODE.MODE_LOOT
+				|| inventoryMode == INVENTORY_MODE.MODE_TRADE
+				|| inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP
+				|| inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE
+				|| inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
+			buttons.addAll(buttonsFilter);
+			buttons.addAll(buttonsSort);
+		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL
+				|| inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
+			buttons.addAll(buttonsSort);
+		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
+
+		}
 
 		this.isOpen = true;
 		if (!Game.level.openInventories.contains(this))
@@ -665,72 +673,34 @@ public class Inventory {
 		// Black cover
 		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, 0, Game.windowHeight);
 
+		// sqrs
 		drawSquares();
 
 		// buttons
-		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL || inventoryMode == INVENTORY_MODE.MODE_LOOT
-				|| inventoryMode == INVENTORY_MODE.MODE_TRADE) {
-			for (Button button : buttonsFilter) {
-				button.draw();
-			}
+		for (Button button : buttons) {
+			button.draw();
+		}
 
-			for (Button button : buttonsSort) {
-				button.draw();
-			}
-		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
+		// text
+		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
-
-			for (Button button : buttonsSort) {
-				button.draw();
-			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
-
-			for (Button button : buttonsSort) {
-				button.draw();
-			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
-			for (Button button : buttonsFilter) {
-				button.draw();
-			}
-
-			for (Button button : buttonsSort) {
-				button.draw();
-			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
-			for (Button button : buttonsFilter) {
-				button.draw();
-			}
-
-			for (Button button : buttonsSort) {
-				button.draw();
-			}
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
 					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
-			for (Button button : buttonsFilter) {
-				button.draw();
-			}
-
-			for (Button button : buttonsSort) {
-				button.draw();
-			}
 		}
-
-		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
-			buttonLootAll.draw();
-		}
-
-		buttonClose.draw();
 
 		// Actor
 		int actorPositionXInPixels = 650;
