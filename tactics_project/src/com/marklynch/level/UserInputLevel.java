@@ -490,10 +490,10 @@ public class UserInputLevel {
 			Level.closeAllPopups();
 			if (square instanceof InventorySquare && ((InventorySquare) square).gameObject != null) {
 				PopupMenuSelectAction popupSelectAction = new PopupMenuSelectAction(0, 200, Game.level, square,
-						((InventorySquare) square).gameObject
-								.getAllActionsPerformedOnThisInInventory(Game.level.player));
+						((InventorySquare) square).getAllActionsForTheSquareOrObject(Game.level.player));
 				if (popupSelectAction.buttons.size() > 0)
 					Game.level.popupMenuActions.add(popupSelectAction);
+
 				// Game.level.popups.add(e);
 			} else if (!(square instanceof InventorySquare)) {
 				PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level, square, true, true,

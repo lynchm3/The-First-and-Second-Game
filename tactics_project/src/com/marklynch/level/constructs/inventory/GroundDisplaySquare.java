@@ -18,10 +18,6 @@ public class GroundDisplaySquare extends InventorySquare {
 
 	@Override
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
-		// System.out.println("GroundDisplaySquare.getDefaultActionForTheSquareOrObject");
-		// System.out.println("this = " + this);
-		// System.out.println("this instanceof GroundDisplaySquare = " + (this
-		// instanceof GroundDisplaySquare));
 		if (gameObject == null)
 			return null;
 		return new ActionTake(performer, this.gameObject);

@@ -819,7 +819,37 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
+
 		ArrayList<Action> actions = new ArrayList<Action>();
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
+			return actions;
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
+			return actions;
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
+			return actions;
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
+			return actions;
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
+			return actions;
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
+			return actions;
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
+			return actions;
+		}
+
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
 				|| performer.legArmor == this)
 			actions.add(new ActionUnequip(performer, this));

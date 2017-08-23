@@ -403,7 +403,6 @@ public class Inventory {
 	}
 
 	public void add(GameObject gameObject, int index) {
-		System.out.println("Inventory.add");
 		if (!gameObjects.contains(gameObject)) {
 
 			// Remove references with square
@@ -490,7 +489,6 @@ public class Inventory {
 	}
 
 	public void matchGameObjectsToSquares() {
-		System.out.println("Inventory.matchGameObjectsToSquares");
 		if (!isOpen)
 			return;
 
