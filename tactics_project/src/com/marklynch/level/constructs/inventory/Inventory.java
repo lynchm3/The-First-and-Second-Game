@@ -634,7 +634,8 @@ public class Inventory {
 		drawSquares();
 
 		// buttons
-		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
+		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL || inventoryMode == INVENTORY_MODE.MODE_LOOT
+				|| inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 			for (Button button : buttonsFilter) {
 				button.draw();
 			}
