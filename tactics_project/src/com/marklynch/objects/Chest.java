@@ -37,7 +37,7 @@ public class Chest extends Openable {
 		showInventory = false;
 		fitsInInventory = false;
 		canShareSquare = false;
-		canContainOtherObjects = false;
+		canContainOtherObjects = true;
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = false;
 		attackable = true;

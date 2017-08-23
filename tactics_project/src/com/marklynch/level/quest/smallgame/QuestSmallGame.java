@@ -9,13 +9,14 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Chest;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
@@ -249,6 +250,9 @@ public class QuestSmallGame extends Quest {
 
 		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan",
 				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);
+
+		Chest chest = Templates.CHEST.makeCopy("Chest", Game.level.squares[3][1], false, null);
+		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 
 		environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,

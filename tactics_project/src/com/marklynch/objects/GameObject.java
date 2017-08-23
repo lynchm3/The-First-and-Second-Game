@@ -32,6 +32,7 @@ import com.marklynch.objects.actions.ActionFollow;
 import com.marklynch.objects.actions.ActionGiveItemsInInventory;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionLootAll;
+import com.marklynch.objects.actions.ActionLootItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionPourSpecificItem;
@@ -645,9 +646,14 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// performer.equipped, false));
 		// }
 
-		// Throw from inventory
+		// Give from inventory
 		if (!decorative && this.canContainOtherObjects) {
 			actions.add(new ActionGiveItemsInInventory(performer, this));
+		}
+
+		// Loot
+		if (!decorative && this.canContainOtherObjects && !(this instanceof Actor)) {
+			actions.add(new ActionLootItemsInOtherInventory(performer, this));
 		}
 
 		// if (!decorative && this.squareGameObjectIsOn !=

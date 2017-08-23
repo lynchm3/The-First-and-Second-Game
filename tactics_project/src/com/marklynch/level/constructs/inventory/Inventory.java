@@ -50,13 +50,13 @@ public class Inventory {
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
 
 	public enum INVENTORY_MODE {
-		MODE_NORMAL, MODE_SELECT_ITEM_TO_FILL, MODE_SELECT_ITEM_TO_DROP, MODE_SELECT_ITEM_TO_THROW, MODE_SELECT_ITEM_TO_GIVE, MODE_SELECT_ITEM_TO_POUR, MODE_SELECT_MAP_MARKER
+		MODE_NORMAL, MODE_SELECT_ITEM_TO_FILL, MODE_SELECT_ITEM_TO_DROP, MODE_SELECT_ITEM_TO_THROW, MODE_SELECT_ITEM_TO_GIVE, MODE_SELECT_ITEM_TO_POUR, MODE_SELECT_MAP_MARKER, MODE_TRADE, MODE_LOOT
 	}
 
 	public static transient INVENTORY_MODE inventoryMode = INVENTORY_MODE.MODE_NORMAL;
 
 	private transient boolean isOpen = false;
-	transient float x = 300;
+	public transient float x = 300;
 	transient float y = 100;
 	transient float width = widthInSquares * Game.INVENTORY_SQUARE_WIDTH;
 	transient float height = heightInSquares * Game.INVENTORY_SQUARE_HEIGHT;
@@ -85,6 +85,7 @@ public class Inventory {
 
 	public InventoryParent parent;
 	public GroundDisplay groundDisplay;
+	public Inventory otherInventory;
 
 	public static WaterSource waterSource;
 	public static Square square;
@@ -223,16 +224,35 @@ public class Inventory {
 		this.groundDisplay = null;
 		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL)
 			this.groundDisplay = new GroundDisplay(900, 100);
+
+		if (inventoryMode == INVENTORY_MODE.MODE_TRADE || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
+			otherInventory.isOpen = true;
+			for (int i = 0; i < otherInventory.inventorySquares[0].length; i++) {
+				for (int j = 0; j < otherInventory.inventorySquares.length; j++) {
+					otherInventory.inventorySquares[j][i] = new InventorySquare(j, i, null, otherInventory);
+				}
+			}
+		}
 	}
 
 	public void close() {
 		this.isOpen = false;
 		if (Game.level.openInventories.contains(this))
 			Game.level.openInventories.remove(this);
+		this.inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
 		this.groundDisplay = null;
+		if (this.otherInventory != null) {
+			otherInventory.isOpen = false;
+			this.otherInventory.inventorySquares = new InventorySquare[this.otherInventory.widthInSquares][this.otherInventory.heightInSquares];
+			this.otherInventory = null;
+		}
 	}
 
 	public void sort(INVENTORY_SORT_BY inventorySortBy, boolean filterFirst) {
+
+		if (otherInventory != null) {
+			otherInventory.sort(inventorySortBy, filterFirst);
+		}
 
 		for (Button button : buttonsSort) {
 			button.down = false;
@@ -313,6 +333,10 @@ public class Inventory {
 					filteredGameObjects.add(gameObject);
 				}
 			}
+		}
+
+		if (otherInventory != null) {
+			otherInventory.filter(inventoryFilterBy, temporary);
 		}
 
 		sort(Inventory.inventorySortBy, false);
@@ -609,13 +633,7 @@ public class Inventory {
 		// Black cover
 		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, 0, Game.windowHeight);
 
-		for (int i = 0; i < inventorySquares[0].length; i++) {
-			for (int j = 0; j < inventorySquares.length; j++) {
-
-				inventorySquares[j][i].drawStaticUI();
-
-			}
-		}
+		drawSquares();
 
 		// buttons
 		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
@@ -776,6 +794,9 @@ public class Inventory {
 			groundDisplay.drawStaticUI();
 		}
 
+		if (otherInventory != null)
+			otherInventory.drawSquares();
+
 		// cursor
 		if (this.inventorySquareMouseIsOver != null && Game.buttonHoveringOver == null) {
 			this.inventorySquareMouseIsOver.drawCursor();
@@ -784,11 +805,19 @@ public class Inventory {
 
 	}
 
-	public boolean isOpen() {
-		return isOpen;
+	public void drawSquares() {
+
+		for (int i = 0; i < inventorySquares[0].length; i++) {
+			for (int j = 0; j < inventorySquares.length; j++) {
+
+				inventorySquares[j][i].drawStaticUI();
+
+			}
+		}
 	}
 
-	public void click() {
+	public boolean isOpen() {
+		return isOpen;
 	}
 
 	public InventorySquare getInventorySquareMouseIsOver(float mouseXInPixels, float mouseYInPixels) {
@@ -818,22 +847,21 @@ public class Inventory {
 			}
 		}
 
+		if (otherInventory != null) {
+			InventorySquare inventorySquareMouseIsOver = otherInventory.getInventorySquareMouseIsOver(mouseXInPixels,
+					mouseYInPixels);
+			if (inventorySquareMouseIsOver != null) {
+				return inventorySquareMouseIsOver; // This is working great
+													// 23/08/2017
+			}
+		}
+
 		return null;
 	}
 
 	public void setSquareMouseHoveringOver(InventorySquare squareMouseIsOver) {
 		this.inventorySquareMouseIsOver = squareMouseIsOver;
 
-	}
-
-	public boolean containsAll(GameObject[] gameObjectsToCheck) {
-
-		for (GameObject gameObjectToCheck : gameObjectsToCheck) {
-			if (!gameObjects.contains(gameObjectToCheck)) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public void setMode(INVENTORY_MODE mode) {
