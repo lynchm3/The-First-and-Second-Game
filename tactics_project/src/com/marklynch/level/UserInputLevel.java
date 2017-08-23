@@ -14,6 +14,7 @@ import org.lwjgl.input.Mouse;
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level.LevelMode;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuButton;
@@ -865,7 +866,11 @@ public class UserInputLevel {
 			}
 			upPressed(true, false);
 		} else if (character == 'a' || character == 'A') {
-			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+			if (Game.level.openInventories.size() > 0) {
+				if (Inventory.buttons.contains(Inventory.buttonLootAll)) {
+					Inventory.buttonLootAll.click();
+				}
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
 				Level.altActionHasBeenPressed = true;

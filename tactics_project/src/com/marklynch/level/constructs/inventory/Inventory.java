@@ -83,7 +83,7 @@ public class Inventory {
 	static LevelButton buttonClose;
 
 	// Loot all button
-	static LevelButton buttonLootAll;
+	public static LevelButton buttonLootAll;
 
 	public static ArrayList<Button> buttons;
 	public static ArrayList<Button> buttonsSort;
