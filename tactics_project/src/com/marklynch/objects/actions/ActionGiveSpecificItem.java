@@ -14,16 +14,13 @@ public class ActionGiveSpecificItem extends Action {
 	GameObject receiver;
 	GameObject object;
 	boolean logAsTake;
-	boolean logAsLoot;
 
-	public ActionGiveSpecificItem(GameObject performer, GameObject receiver, GameObject object, boolean logAsTake,
-			boolean logAsLoot) {
+	public ActionGiveSpecificItem(GameObject performer, GameObject receiver, GameObject object, boolean logAsTake) {
 		super(ACTION_NAME, "action_give.png");
 		this.performer = performer;
 		this.receiver = receiver;
 		this.object = object;
 		this.logAsTake = logAsTake;
-		this.logAsLoot = logAsLoot;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -44,9 +41,6 @@ public class ActionGiveSpecificItem extends Action {
 			if (logAsTake)
 				Game.level
 						.logOnScreen(new ActivityLog(new Object[] { receiver, " took ", object, " from ", performer }));
-			else if (logAsLoot)
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { receiver, " looted ", object, " from ", performer }));
 			else
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " gave ", object, " to ", receiver }));
 		performer.inventory.remove(object);

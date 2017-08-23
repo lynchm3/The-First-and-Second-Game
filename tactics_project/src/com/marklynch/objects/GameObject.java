@@ -785,7 +785,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
-			return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false, false);
+			return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
@@ -798,7 +798,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
-				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false, true);
+				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
 			else
 				return new ActionTakeSpecificItem(performer, Inventory.target, this);
 
@@ -806,7 +806,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
-				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false, true);
+				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
 			else
 				return new ActionTakeSpecificItem(performer, Inventory.target, this);
 		}

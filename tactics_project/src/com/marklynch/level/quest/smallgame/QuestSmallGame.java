@@ -555,7 +555,7 @@ public class QuestSmallGame extends Quest {
 				super.select();
 				for (GameObject gameObject : weaponsBehindLodge) {
 					if (environmentalistBill.inventory.contains(gameObject)) {
-						new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject, false, false)
+						new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject, false)
 								.perform();
 						talkedToEnvironmentalist = true;
 					}
