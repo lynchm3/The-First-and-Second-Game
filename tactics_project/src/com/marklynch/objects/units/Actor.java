@@ -242,6 +242,7 @@ public class Actor extends GameObject {
 		canContainOtherObjects = true;
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = false;
+		decorative = false;
 		attackable = true;
 	}
 

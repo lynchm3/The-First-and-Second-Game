@@ -19,7 +19,7 @@ import com.marklynch.objects.actions.ActionEat;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.actions.ActionTake;
+import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fight;
 import com.marklynch.objects.weapons.Weapon;
@@ -913,7 +913,7 @@ public class AIRoutineUtils {
 	public static boolean pickupTarget(GameObject target) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
 		if (weaponDistance <= 1) {
-			new ActionTake(Game.level.activeActor, target).perform();
+			new ActionTakeSpecificItem(Game.level.activeActor, target.squareGameObjectIsOn, target).perform();
 			return true;
 		} else {
 			return false;

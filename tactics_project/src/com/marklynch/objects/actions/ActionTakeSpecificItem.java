@@ -3,21 +3,30 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionTake extends Action {
+public class ActionTakeSpecificItem extends Action {
 
 	public static final String ACTION_NAME = "Take";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
+	Object target;
+	Square targetSquare;
+	GameObject targetGameObject;
 	GameObject object;
 
-	public ActionTake(Actor performer, GameObject object) {
+	public ActionTakeSpecificItem(Actor performer, Object target, GameObject object) {
 		super(ACTION_NAME, "action_take.png");
 		this.performer = performer;
+		this.target = target;
+		if (this.target instanceof Square)
+			targetSquare = (Square) target;
+		if (this.target instanceof GameObject)
+			targetGameObject = (GameObject) target;
 		this.object = object;
 		if (!check()) {
 			enabled = false;
@@ -33,11 +42,26 @@ public class ActionTake extends Action {
 		if (!enabled)
 			return;
 		if (Game.level.shouldLog(object, performer))
-			if (legal)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", object }));
-			else
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", object }));
-		object.squareGameObjectIsOn.inventory.remove(object);
+			if (legal) {
+				if (targetGameObject == null)
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", object }));
+				else
+					Game.level.logOnScreen(
+							new ActivityLog(new Object[] { performer, " took ", object, " from ", targetGameObject }));
+			} else {
+				if (targetGameObject == null)
+					Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", object }));
+				else
+					Game.level.logOnScreen(
+							new ActivityLog(new Object[] { performer, " stole ", object, " from ", targetGameObject }));
+			}
+
+		if (targetSquare != null)
+			targetSquare.inventory.remove(object);
+
+		if (targetGameObject != null)
+			targetGameObject.inventory.remove(object);
+
 		performer.inventory.add(object);
 		if (object.owner == null)
 			object.owner = performer;
@@ -55,7 +79,10 @@ public class ActionTake extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) < 2) {
+		if (targetSquare != null && performer.straightLineDistanceTo(targetSquare) < 2) {
+			return true;
+		}
+		if (targetGameObject != null && performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
 		return false;

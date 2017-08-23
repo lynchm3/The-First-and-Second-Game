@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionEquip;
-import com.marklynch.objects.actions.ActionTake;
+import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.units.Actor;
 
 public class GroundDisplaySquare extends InventorySquare {
@@ -20,7 +20,7 @@ public class GroundDisplaySquare extends InventorySquare {
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
 		if (gameObject == null)
 			return null;
-		return new ActionTake(performer, this.gameObject);
+		return new ActionTakeSpecificItem(performer, this.gameObject.squareGameObjectIsOn, this.gameObject);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class GroundDisplaySquare extends InventorySquare {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (gameObject != null) {
-			actions.add(new ActionTake(performer, this.gameObject));
+			actions.add(new ActionTakeSpecificItem(performer, this.gameObject.squareGameObjectIsOn, this.gameObject));
 			actions.add(new ActionEquip(performer, this.gameObject));
 		}
 		return actions;

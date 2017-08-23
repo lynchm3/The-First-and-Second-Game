@@ -36,10 +36,11 @@ import com.marklynch.objects.actions.ActionLootItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionPourSpecificItem;
-import com.marklynch.objects.actions.ActionTake;
+import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.actions.ActionTeleportOther;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
+import com.marklynch.objects.actions.ActionTradeItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
@@ -602,7 +603,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 		if (this.fitsInInventory)
-			return new ActionTake(performer, this);
+			return new ActionTakeSpecificItem(performer, this.squareGameObjectIsOn, this);
 		return null;
 	}
 
@@ -615,7 +616,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// public boolean showInventory;
 		// public boolean canShareSquare;
 		if (!decorative && fitsInInventory) {
-			actions.add(new ActionTake(performer, this));
+			actions.add(new ActionTakeSpecificItem(performer, this.squareGameObjectIsOn, this));
 		}
 
 		if (!decorative && canBePickedUp)
@@ -654,6 +655,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// Loot
 		if (!decorative && this.canContainOtherObjects && !(this instanceof Actor)) {
 			actions.add(new ActionLootItemsInOtherInventory(performer, this));
+		}
+
+		// Trade
+		if (!decorative && this.canContainOtherObjects && (this instanceof Actor)) {
+			actions.add(new ActionTradeItemsInOtherInventory(performer, this));
 		}
 
 		// if (!decorative && this.squareGameObjectIsOn !=
@@ -798,7 +804,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
 				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false, true);
 			else
-				return new ActionGiveSpecificItem((GameObject) Inventory.target, performer, this, false, true);
+				return new ActionTakeSpecificItem(performer, Inventory.target, this);
 
 		}
 
@@ -806,7 +812,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
 				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false, true);
 			else
-				return new ActionGiveSpecificItem((GameObject) Inventory.target, performer, this, false, true);
+				return new ActionTakeSpecificItem(performer, Inventory.target, this);
 		}
 
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this

@@ -24,7 +24,7 @@ import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionShoutForHelp;
-import com.marklynch.objects.actions.ActionTake;
+import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.units.Actor;
@@ -720,7 +720,8 @@ public class AIRoutine {
 			} else if (stolenItemsOnGroundToPickUp.size() > 0) {
 				for (GameObject stolenItemOnGround : stolenItemsOnGroundToPickUp) {
 					if (actor.straightLineDistanceTo(stolenItemOnGround.squareGameObjectIsOn) == 1) {
-						new ActionTake(this.actor, stolenItemOnGround).perform();
+						new ActionTakeSpecificItem(this.actor, stolenItemOnGround.squareGameObjectIsOn,
+								stolenItemOnGround).perform();
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						return true;
 					}
