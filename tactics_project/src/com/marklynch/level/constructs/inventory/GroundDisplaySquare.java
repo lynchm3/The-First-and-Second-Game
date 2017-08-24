@@ -13,7 +13,7 @@ public class GroundDisplaySquare extends InventorySquare {
 	public GroundDisplaySquare(int x, int y, String imagePath, GroundDisplay groundDisplay) {
 		super(x, y, imagePath, null);
 		xInPixels = Math.round(groundDisplay.squaresX + xInGrid * Game.INVENTORY_SQUARE_WIDTH);
-		yInPixels = Math.round(groundDisplay.y + yInGrid * Game.INVENTORY_SQUARE_HEIGHT);
+		yInPixels = Math.round(groundDisplay.squaresY + yInGrid * Game.INVENTORY_SQUARE_HEIGHT);
 	}
 
 	@Override

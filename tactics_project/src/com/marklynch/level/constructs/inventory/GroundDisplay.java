@@ -17,13 +17,13 @@ public class GroundDisplay {
 	ArrayList<Square> squares = new ArrayList<Square>();
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	int squaresX;
-	int y;
+	int squaresY;
 	public transient ArrayList<GroundDisplaySquare> groundDisplaySquares = new ArrayList<GroundDisplaySquare>();
 	transient private GroundDisplaySquare groundDisplaySquareMouseIsOver;
 
 	public GroundDisplay(int x, int y) {
 		this.squaresX = x;
-		this.y = y;
+		this.squaresY = y;
 		squares.add(Game.level.player.squareGameObjectIsOn);
 		if (Game.level.player.squareGameObjectIsOn.getSquareAbove() != null)
 			squares.add(Game.level.player.squareGameObjectIsOn.getSquareAbove());
@@ -71,9 +71,13 @@ public class GroundDisplay {
 	public void resize() {
 		int xIndex = 0;
 		int yIndex = 0;
-		for (GroundDisplaySquare groundDisplaySquare : groundDisplaySquares) {
-			groundDisplaySquare.xInGrid = xIndex;
-			groundDisplaySquare.yInGrid = yIndex;
+		for (InventorySquare inventorySquare : groundDisplaySquares) {
+			inventorySquare.xInGrid = xIndex;
+			inventorySquare.yInGrid = yIndex;
+			inventorySquare.xInPixels = Math
+					.round(this.squaresX + inventorySquare.xInGrid * Game.INVENTORY_SQUARE_WIDTH);
+			inventorySquare.yInPixels = Math
+					.round(this.squaresY + inventorySquare.yInGrid * Game.INVENTORY_SQUARE_HEIGHT);
 			xIndex++;
 			if (xIndex == this.squareGridWidthInSquares) {
 				xIndex = 0;
@@ -102,7 +106,7 @@ public class GroundDisplay {
 
 		// Inventory sqr
 		float offsetX = squaresX;
-		float offsetY = y;
+		float offsetY = squaresY;
 		float scroll = 0;
 
 		int mouseXInSquares = (int) (((mouseXInPixels - offsetX) / Game.INVENTORY_SQUARE_WIDTH));
