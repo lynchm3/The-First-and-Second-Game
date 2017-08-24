@@ -20,11 +20,13 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class Inventory {
 
@@ -102,6 +104,9 @@ public class Inventory {
 	public static Square square;
 	public static Object target;
 
+	public static Texture textureUp;
+	public static Texture textureDown;
+
 	public Inventory(GameObject... gameObjects) {
 		for (GameObject gameObject : gameObjects) {
 			add(gameObject);
@@ -124,7 +129,7 @@ public class Inventory {
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY, false);
+				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY, false, true);
 			}
 		});
 		buttonsSort.add(buttonSortAlphabetically);
@@ -134,7 +139,7 @@ public class Inventory {
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST, false);
+				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST, false, true);
 			}
 		});
 		buttonsSort.add(buttonSortByNewest);
@@ -144,7 +149,7 @@ public class Inventory {
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE, false);
+				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE, false, true);
 			}
 		});
 		buttonsSort.add(buttonSortByFavourite);
@@ -154,7 +159,7 @@ public class Inventory {
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_VALUE, false);
+				sort(INVENTORY_SORT_BY.SORT_BY_VALUE, false, true);
 			}
 		});
 		buttonsSort.add(buttonSortByValue);
@@ -164,7 +169,7 @@ public class Inventory {
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE, false);
+				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE, false, true);
 			}
 		});
 		buttonsSort.add(buttonSortByTotalDamage);
@@ -174,7 +179,7 @@ public class Inventory {
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE, false);
+				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE, false, true);
 			}
 		});
 		buttonsSort.add(buttonSortBySlashDamage);
@@ -295,10 +300,10 @@ public class Inventory {
 		}
 	}
 
-	public void sort(INVENTORY_SORT_BY inventorySortBy, boolean filterFirst) {
+	public void sort(INVENTORY_SORT_BY inventorySortBy, boolean filterFirst, boolean fromSortButtonPress) {
 
 		if (otherInventory != null) {
-			otherInventory.sort(inventorySortBy, filterFirst);
+			otherInventory.sort(inventorySortBy, filterFirst, fromSortButtonPress);
 		}
 
 		Button selectedSortButton = null;
@@ -333,10 +338,13 @@ public class Inventory {
 
 		}
 
-		if (selectedSortButton.down == true)
-			sortBackwards = !sortBackwards;
-		else
-			sortBackwards = false;
+		if (fromSortButtonPress) {
+			if (selectedSortButton.down == true) {
+				sortBackwards = !sortBackwards;
+			} else {
+				sortBackwards = false;
+			}
+		}
 
 		for (Button button : buttonsSort) {
 			button.down = false;
@@ -401,7 +409,7 @@ public class Inventory {
 			otherInventory.filter(inventoryFilterBy, temporary);
 		}
 
-		sort(Inventory.inventorySortBy, false);
+		sort(Inventory.inventorySortBy, false, false);
 	}
 
 	public void postLoad1() {
@@ -448,12 +456,9 @@ public class Inventory {
 
 	}
 
-	public void loadImages() {
-		// for (int i = 0; i < inventorySquares[0].length; i++) {
-		// for (int j = 0; j < inventorySquares.length; j++) {
-		// inventorySquares[j][i].loadImages();
-		// }
-		// }
+	public static void loadStaticImages() {
+		textureUp = ResourceUtils.getGlobalImage("up.png");
+		textureDown = ResourceUtils.getGlobalImage("down.png");
 	}
 
 	public GameObject get(int i) {
@@ -727,6 +732,18 @@ public class Inventory {
 		// buttons
 		for (Button button : buttons) {
 			button.draw();
+		}
+
+		// Up / down icon on active sort button
+		for (Button sortButton : buttonsSort) {
+			if (sortButton.down) {
+				if (sortBackwards)
+					TextureUtils.drawTexture(textureUp, sortButton.x - 8, sortButton.y - 8, sortButton.x + 8,
+							sortButton.y + 8);
+				else
+					TextureUtils.drawTexture(textureDown, sortButton.x - 8, sortButton.y - 8, sortButton.x + 8,
+							sortButton.y + 8);
+			}
 		}
 
 		// text

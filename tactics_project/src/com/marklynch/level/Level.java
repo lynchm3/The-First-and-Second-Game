@@ -184,6 +184,7 @@ public class Level {
 		Wall.loadStaticImages();
 		Vein.loadStaticImages();
 		MapMarker.loadStaticImages();
+		Inventory.loadStaticImages();
 
 		structures = new ArrayList<Structure>();
 
@@ -518,7 +519,7 @@ public class Level {
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_NORMAL);
 			Game.level.player.inventory.open();
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, false);
-			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
+			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 			// Game.level.openInventories.add(Game.level.player.inventory);
 		}
 		closeAllPopups();

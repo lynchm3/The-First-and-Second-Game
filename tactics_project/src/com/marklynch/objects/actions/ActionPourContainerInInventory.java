@@ -57,7 +57,7 @@ public class ActionPourContainerInInventory extends Action {
 			Game.level.player.inventory.open();
 			Inventory.target = this.target;
 			Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS, true);
-			Game.level.player.inventory.sort(Inventory.inventorySortBy, false);
+			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 		}
 		Level.closeAllPopups();
 	}
