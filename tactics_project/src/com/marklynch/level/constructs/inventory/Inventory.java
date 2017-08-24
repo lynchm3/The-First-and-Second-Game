@@ -28,6 +28,7 @@ import mdesl.graphics.Color;
 
 public class Inventory {
 
+	public static boolean sortBackwards = false;
 	public int widthInSquares = 5;
 	public int heightInSquares = 6;
 	public transient InventorySquare[][] inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
@@ -300,12 +301,6 @@ public class Inventory {
 			otherInventory.sort(inventorySortBy, filterFirst);
 		}
 
-		for (Button button : buttonsSort) {
-			button.down = false;
-			button.x = this.sortButtonX;
-			button.width = this.sortButtonWidth;
-		}
-
 		Button selectedSortButton = null;
 
 		if (inventorySortBy == INVENTORY_SORT_BY.SORT_ALPHABETICALLY) {
@@ -337,6 +332,18 @@ public class Inventory {
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_MIN_RANGE) {
 
 		}
+
+		if (selectedSortButton.down == true)
+			sortBackwards = !sortBackwards;
+		else
+			sortBackwards = false;
+
+		for (Button button : buttonsSort) {
+			button.down = false;
+			button.x = this.sortButtonX;
+			button.width = this.sortButtonWidth;
+		}
+
 		selectedSortButton.down = true;
 		selectedSortButton.x -= 20;
 		selectedSortButton.width += 20;
@@ -349,6 +356,8 @@ public class Inventory {
 		}
 
 		Collections.sort(filteredGameObjects);
+		if (sortBackwards)
+			Collections.reverse(filteredGameObjects);
 
 		matchGameObjectsToSquares();
 	}
@@ -546,6 +555,7 @@ public class Inventory {
 			return;
 
 		int index = 0;
+
 		for (int i = 0; i < inventorySquares[0].length; i++) {
 			for (int j = 0; j < inventorySquares.length; j++) {
 				inventorySquares[j][i].gameObject = null;
@@ -553,10 +563,37 @@ public class Inventory {
 					inventorySquares[j][i].gameObject = filteredGameObjects.get(index);
 					index++;
 				}
-				// }
 			}
 		}
 	}
+
+	// public void matchGameObjectsToSquares() {
+	// if (!isOpen)
+	// return;
+	//
+	// int index = 0;
+	// if (sortBackwards)
+	// index = filteredGameObjects.size() - 1;
+	//
+	// for (int i = 0; i < inventorySquares[0].length; i++) {
+	// for (int j = 0; j < inventorySquares.length; j++) {
+	// inventorySquares[j][i].gameObject = null;
+	//
+	// if (!sortBackwards) {
+	//
+	// if (index < filteredGameObjects.size()) {
+	// inventorySquares[j][i].gameObject = filteredGameObjects.get(index);
+	// index++;
+	// }
+	// } else {
+	// if (index >= 0) {
+	// inventorySquares[j][i].gameObject = filteredGameObjects.get(index);
+	// index--;
+	// }
+	// }
+	// }
+	// }
+	// }
 
 	public boolean contains(GameObject gameObject) {
 		return gameObjects.contains(gameObject);
