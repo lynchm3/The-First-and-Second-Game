@@ -212,8 +212,8 @@ public class Inventory implements Draggable, Scrollable {
 		});
 		buttonsFilter.add(buttonFilterByFood);
 
-		buttonLootAll = new LevelButton(900f, 500f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"LOOT ALL [A]", true, true, Color.BLACK, Color.WHITE);
+		buttonLootAll = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "LOOT ALL [A]", true, false, Color.BLACK, Color.WHITE);
 		buttonLootAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -243,7 +243,7 @@ public class Inventory implements Draggable, Scrollable {
 			buttons.add(buttonLootAll);
 		}
 
-		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, 100f, 100f, 30f, "end_turn_button.png",
+		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "CLOSE [I]", true, false, Color.BLACK, Color.WHITE);
 		buttonClose.setClickListener(new ClickListener() {
 			@Override
@@ -586,13 +586,17 @@ public class Inventory implements Draggable, Scrollable {
 
 		fixScroll();
 		resize2();
+		buttonClose.x = squaresX;
+
 		if (this.groundDisplay != null) {
 			this.groundDisplay.fixScroll();
 			this.groundDisplay.resize2();
+			buttonLootAll.x = groundDisplay.squaresX;
 		}
 		if (this.otherInventory != null) {
 			this.otherInventory.fixScroll();
 			this.otherInventory.resize2();
+			buttonLootAll.x = groundDisplay.squaresX;
 		}
 	}
 
@@ -834,6 +838,10 @@ public class Inventory implements Draggable, Scrollable {
 					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
+		if (groundDisplay != null) {
+			groundDisplay.drawText();
+		}
+
 		// Actor
 		int actorPositionXInPixels = this.actorX;
 		int actorPositionYInPixels = 100;
@@ -1004,7 +1012,6 @@ public class Inventory implements Draggable, Scrollable {
 
 	@Override
 	public void drag(float dragX, float dragY) {
-		System.out.println("drag " + dragX + "," + dragY);
 		this.squaresY -= dragY;
 		fixScroll();
 		resize2();

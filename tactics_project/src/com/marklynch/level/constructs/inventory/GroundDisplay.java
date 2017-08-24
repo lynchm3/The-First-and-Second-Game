@@ -90,9 +90,6 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public void drawStaticUI() {
 
-		TextUtils.printTextWithImages(900f, 8f, 300f, true,
-				new Object[] { new StringWithColor("Items on the Ground", Color.WHITE) });
-
 		for (GroundDisplaySquare groundDisplaySquare : groundDisplaySquares) {
 			groundDisplaySquare.drawStaticUI();
 		}
@@ -102,6 +99,13 @@ public class GroundDisplay implements Draggable, Scrollable {
 			this.groundDisplaySquareMouseIsOver.drawCursor();
 			this.groundDisplaySquareMouseIsOver.drawAction();
 		}
+	}
+
+	public void drawText() {
+
+		TextUtils.printTextWithImages(this.squaresX, 8f, 300f, true,
+				new Object[] { new StringWithColor("Items on the Ground", Color.WHITE) });
+
 	}
 
 	public GroundDisplaySquare getGroundDisplaySquareMouseIsOver(float mouseXInPixels, float mouseYInPixels) {
