@@ -30,13 +30,6 @@ import mdesl.graphics.Texture;
 
 public class Inventory {
 
-	public static boolean sortBackwards = false;
-	public int widthInSquares = 5;
-	public int heightInSquares = 6;
-	public transient InventorySquare[][] inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
-	public ArrayList<GameObject> gameObjects = new ArrayList<GameObject>(widthInSquares * heightInSquares);
-	protected ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>(widthInSquares * heightInSquares);
-
 	public enum INVENTORY_STATE {
 		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
 	}
@@ -61,15 +54,20 @@ public class Inventory {
 
 	public static transient INVENTORY_MODE inventoryMode = INVENTORY_MODE.MODE_NORMAL;
 
+	public static boolean sortBackwards = false;
+	public int squareGridWidthInSquares = 5;
+	public transient ArrayList<InventorySquare> inventorySquares = new ArrayList<InventorySquare>();
+	public ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+	protected ArrayList<GameObject> filteredGameObjects = new ArrayList<GameObject>();
+
 	private transient boolean isOpen = false;
-	public transient float x = 500;
-	transient float y = 100;
+	public transient float squaresX = 500;
+	transient float squaresY = 100;
 	transient float sortButtonX = 400;
 	transient float sortButtonWidth = 100;
 	transient int actorX = 100;
+	transient int actorWidth = 256;
 	transient int otherInventoryGameObjectX = 1250;
-	transient float width = widthInSquares * Game.INVENTORY_SQUARE_WIDTH;
-	transient float height = heightInSquares * Game.INVENTORY_SQUARE_HEIGHT;
 	transient private InventorySquare inventorySquareMouseIsOver;
 	transient private GameObject selectedGameObject;
 
@@ -115,11 +113,6 @@ public class Inventory {
 	}
 
 	public void open() {
-		for (int i = 0; i < inventorySquares[0].length; i++) {
-			for (int j = 0; j < inventorySquares.length; j++) {
-				inventorySquares[j][i] = new InventorySquare(j, i, null, this);
-			}
-		}
 		buttons = new ArrayList<Button>();
 		buttonsSort = new ArrayList<Button>();
 		buttonsFilter = new ArrayList<Button>();
@@ -279,11 +272,6 @@ public class Inventory {
 
 		if (inventoryMode == INVENTORY_MODE.MODE_TRADE || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 			otherInventory.isOpen = true;
-			for (int i = 0; i < otherInventory.inventorySquares[0].length; i++) {
-				for (int j = 0; j < otherInventory.inventorySquares.length; j++) {
-					otherInventory.inventorySquares[j][i] = new InventorySquare(j, i, null, otherInventory);
-				}
-			}
 		}
 	}
 
@@ -291,11 +279,11 @@ public class Inventory {
 		this.isOpen = false;
 		if (Game.level.openInventories.contains(this))
 			Game.level.openInventories.remove(this);
-		this.inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
+		this.inventorySquares = new ArrayList<InventorySquare>();
 		this.groundDisplay = null;
 		if (this.otherInventory != null) {
 			otherInventory.isOpen = false;
-			this.otherInventory.inventorySquares = new InventorySquare[this.otherInventory.widthInSquares][this.otherInventory.heightInSquares];
+			this.otherInventory.inventorySquares = new ArrayList<InventorySquare>();
 			this.otherInventory = null;
 		}
 	}
@@ -413,14 +401,8 @@ public class Inventory {
 	}
 
 	public void postLoad1() {
-		inventorySquares = new InventorySquare[widthInSquares][heightInSquares];
-		for (int i = 0; i < inventorySquares[0].length; i++) {
-			for (int j = 0; j < inventorySquares.length; j++) {
-				inventorySquares[j][i] = new InventorySquare(i, j, null, this);
-				inventorySquares[j][i].inventoryThisBelongsTo = this;
-				inventorySquares[j][i].loadImages();
-			}
-		}
+
+		new ArrayList<InventorySquare>();
 
 		// Tell objects they're in this inventory
 		for (GameObject gameObject : gameObjects) {
@@ -559,15 +541,70 @@ public class Inventory {
 		if (!isOpen)
 			return;
 
-		int index = 0;
+		inventorySquares.clear();
 
-		for (int i = 0; i < inventorySquares[0].length; i++) {
-			for (int j = 0; j < inventorySquares.length; j++) {
-				inventorySquares[j][i].gameObject = null;
-				if (index < filteredGameObjects.size()) {
-					inventorySquares[j][i].gameObject = filteredGameObjects.get(index);
-					index++;
-				}
+		for (GameObject gameObject : gameObjects) {
+			InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
+			inventorySquare.gameObject = gameObject;
+			inventorySquares.add(inventorySquare);
+		}
+
+		resize1();
+	}
+
+	public void resize1() {
+		if (!isOpen)
+			return;
+
+		float pixelsToLeftOfSquares = this.actorX + actorWidth + sortButtonWidth;
+		float pixelsToRightOfSquares = actorWidth;
+		float pixelsBetweenSquares = Game.INVENTORY_SQUARE_WIDTH;
+		float availablePixelsForSquares = Game.windowWidth
+				- (pixelsToLeftOfSquares + pixelsBetweenSquares + pixelsToRightOfSquares);
+		this.squareGridWidthInSquares = (int) ((availablePixelsForSquares / 2f) / Game.INVENTORY_SQUARE_WIDTH);
+
+		System.out.println("pixelsToLeftOfSquares = " + pixelsToLeftOfSquares);
+		System.out.println("pixelsToRightOfSquares = " + pixelsToRightOfSquares);
+		System.out.println("availablePixelsForSquares = " + availablePixelsForSquares);
+		System.out.println("squareGridWidthInSquares = " + squareGridWidthInSquares);
+
+		if (this.squareGridWidthInSquares < 1)
+			this.squareGridWidthInSquares = 1;
+		if (otherInventory != null) {
+			otherInventory.squareGridWidthInSquares = this.squareGridWidthInSquares;
+			otherInventory.squaresX = pixelsToLeftOfSquares + (squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH)
+					+ pixelsBetweenSquares;
+		}
+		if (groundDisplay != null) {
+			groundDisplay.squareGridWidthInSquares = this.squareGridWidthInSquares;
+			groundDisplay.squaresX = (int) (pixelsToLeftOfSquares
+					+ (squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH) + pixelsBetweenSquares);
+		}
+
+		resize2();
+
+		if (this.groundDisplay != null)
+			this.groundDisplay.resize();
+		if (this.otherInventory != null)
+			this.otherInventory.resize2();
+	}
+
+	public void resize2() {
+		if (!isOpen)
+			return;
+		int xIndex = 0;
+		int yIndex = 0;
+		for (InventorySquare inventorySquare : inventorySquares) {
+			inventorySquare.xInGrid = xIndex;
+			inventorySquare.yInGrid = yIndex;
+			inventorySquare.xInPixels = Math
+					.round(this.squaresX + inventorySquare.xInGrid * Game.INVENTORY_SQUARE_WIDTH);
+			inventorySquare.yInPixels = Math
+					.round(this.squaresY + inventorySquare.yInGrid * Game.INVENTORY_SQUARE_HEIGHT);
+			xIndex++;
+			if (xIndex == this.squareGridWidthInSquares) {
+				xIndex = 0;
+				yIndex++;
 			}
 		}
 	}
@@ -772,8 +809,7 @@ public class Inventory {
 		int actorPositionYInPixels = 100;
 		float alpha = 1.0f;
 		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-				actorPositionXInPixels + Game.level.player.width * 2,
-				actorPositionYInPixels + Game.level.player.height * 2);
+				actorPositionXInPixels + actorWidth, actorPositionYInPixels + Game.level.player.height * 2);
 
 		GameObject gameObjectMouseIsOver = null;
 
@@ -840,7 +876,7 @@ public class Inventory {
 			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels
 					+ (Game.level.player.bodyAnchorY - gameObjectToDrawOnPlayersBody.anchorY) * 2);
 			TextureUtils.drawTexture(gameObjectToDrawOnPlayersBody.imageTexture, alpha, bodyArmorPositionXInPixels,
-					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + gameObjectToDrawOnPlayersBody.width * 2,
+					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actorWidth,
 					bodyArmorPositionYInPixels + gameObjectToDrawOnPlayersBody.height * 2);
 		}
 
@@ -851,7 +887,7 @@ public class Inventory {
 			int legArmorPositionYInPixels = (int) (actorPositionYInPixels
 					+ (Game.level.player.legsAnchorY - gameObjectToDrawOnPlayersLegs.anchorY) * 2);
 			TextureUtils.drawTexture(gameObjectToDrawOnPlayersLegs.imageTexture, alpha, legArmorPositionXInPixels,
-					legArmorPositionYInPixels, legArmorPositionXInPixels + gameObjectToDrawOnPlayersLegs.width * 2,
+					legArmorPositionYInPixels, legArmorPositionXInPixels + actorWidth,
 					legArmorPositionYInPixels + gameObjectToDrawOnPlayersLegs.height * 2);
 		}
 
@@ -876,7 +912,7 @@ public class Inventory {
 			// Actor
 			GameObject otherGameObject = (GameObject) target;
 			TextureUtils.drawTexture(otherGameObject.imageTexture, alpha, otherInventoryGameObjectX,
-					actorPositionYInPixels, otherInventoryGameObjectX + otherGameObject.width * 2,
+					actorPositionYInPixels, otherInventoryGameObjectX + actorWidth,
 					actorPositionYInPixels + otherGameObject.height * 2);
 		}
 
@@ -889,13 +925,8 @@ public class Inventory {
 	}
 
 	public void drawSquares() {
-
-		for (int i = 0; i < inventorySquares[0].length; i++) {
-			for (int j = 0; j < inventorySquares.length; j++) {
-
-				inventorySquares[j][i].drawStaticUI();
-
-			}
+		for (InventorySquare inventorySquare : inventorySquares) {
+			inventorySquare.drawStaticUI();
 		}
 	}
 
@@ -906,18 +937,17 @@ public class Inventory {
 	public InventorySquare getInventorySquareMouseIsOver(float mouseXInPixels, float mouseYInPixels) {
 
 		// Inventory sqr
-		float offsetX = x;
-		float offsetY = y;
+		float offsetX = squaresX;
+		float offsetY = squaresY;
 		float scroll = 0;
 
 		float mouseXInSquares = (((mouseXInPixels - offsetX) / Game.INVENTORY_SQUARE_WIDTH));
 		float mouseYInSquares = ((Game.windowHeight - mouseYInPixels - offsetY - scroll)
 				/ Game.INVENTORY_SQUARE_HEIGHT);
 
-		if (mouseXInSquares >= 0 && mouseXInSquares < inventorySquares.length && mouseYInSquares >= 0
-				&& mouseYInSquares < inventorySquares[0].length) {
-
-			return this.inventorySquares[(int) mouseXInSquares][(int) mouseYInSquares];
+		for (InventorySquare inventorySquare : inventorySquares) {
+			if (inventorySquare.xInGrid == mouseXInSquares && inventorySquare.yInGrid == mouseYInSquares)
+				return inventorySquare;
 		}
 
 		// Ground display sqr
