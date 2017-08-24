@@ -207,8 +207,8 @@ public class Inventory {
 		});
 		buttonsFilter.add(buttonFilterByFood);
 
-		buttonLootAll = new LevelButton(Game.halfWindowWidth - 25f + 100f, 100f, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "LOOT ALL [A]", true, false, Color.BLACK, Color.WHITE);
+		buttonLootAll = new LevelButton(900f, 500f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
+				"LOOT ALL [A]", true, true, Color.BLACK, Color.WHITE);
 		buttonLootAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
