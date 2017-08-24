@@ -67,6 +67,7 @@ public class Inventory {
 	transient float sortButtonWidth = 100;
 	transient int actorX = 100;
 	transient int actorWidth = 256;
+	transient int bottomBorderHeight = 256;
 	transient int otherInventoryGameObjectX = 1250;
 	transient private InventorySquare inventorySquareMouseIsOver;
 	transient private GameObject selectedGameObject;
@@ -781,7 +782,8 @@ public class Inventory {
 		}
 
 		// Bottom black mask
-		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, Game.windowHeight - 256, Game.windowHeight);
+		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, Game.windowHeight - bottomBorderHeight,
+				Game.windowHeight);
 
 		// buttons
 		for (Button button : buttons) {
@@ -937,6 +939,9 @@ public class Inventory {
 	}
 
 	public InventorySquare getInventorySquareMouseIsOver(float mouseXInPixels, float mouseYInPixels) {
+
+		if (mouseYInPixels <= (bottomBorderHeight))
+			return null;
 
 		// Inventory sqr
 		float offsetX = squaresX;
