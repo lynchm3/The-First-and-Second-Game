@@ -62,6 +62,7 @@ public class Inventory {
 	public transient float x = 500;
 	transient float y = 100;
 	transient float sortButtonX = 400;
+	transient float sortButtonWidth = 100;
 	transient int actorX = 100;
 	transient int otherInventoryGameObjectX = 1250;
 	transient float width = widthInSquares * Game.INVENTORY_SQUARE_WIDTH;
@@ -117,7 +118,7 @@ public class Inventory {
 		buttonsSort = new ArrayList<Button>();
 		buttonsFilter = new ArrayList<Button>();
 
-		buttonSortAlphabetically = new LevelButton(sortButtonX, 100f, 100f, 30f, "end_turn_button.png",
+		buttonSortAlphabetically = new LevelButton(sortButtonX, 100f, sortButtonWidth, 30f, "end_turn_button.png",
 				"end_turn_button.png", "SORT A-Z", true, true, Color.BLACK, Color.WHITE);
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
@@ -127,8 +128,8 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortAlphabetically);
 
-		buttonSortByNewest = new LevelButton(sortButtonX, 150f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"NEWEST", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByNewest = new LevelButton(sortButtonX, 150f, sortButtonWidth, 30f, "end_turn_button.png",
+				"end_turn_button.png", "NEWEST", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -137,7 +138,7 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortByNewest);
 
-		buttonSortByFavourite = new LevelButton(sortButtonX, 200f, 100f, 30f, "end_turn_button.png",
+		buttonSortByFavourite = new LevelButton(sortButtonX, 200f, sortButtonWidth, 30f, "end_turn_button.png",
 				"end_turn_button.png", "FAVOURITES", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
@@ -147,8 +148,8 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortByFavourite);
 
-		buttonSortByValue = new LevelButton(sortButtonX, 250f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"VALUE", true, true, Color.BLACK, Color.WHITE);
+		buttonSortByValue = new LevelButton(sortButtonX, 250f, sortButtonWidth, 30f, "end_turn_button.png",
+				"end_turn_button.png", "VALUE", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -157,7 +158,7 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortByValue);
 
-		buttonSortByTotalDamage = new LevelButton(sortButtonX, 300f, 100f, 30f, "end_turn_button.png",
+		buttonSortByTotalDamage = new LevelButton(sortButtonX, 300f, sortButtonWidth, 30f, "end_turn_button.png",
 				"end_turn_button.png", "DAMAGE", true, true, Color.BLACK, Color.WHITE);
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
@@ -167,7 +168,7 @@ public class Inventory {
 		});
 		buttonsSort.add(buttonSortByTotalDamage);
 
-		buttonSortBySlashDamage = new LevelButton(sortButtonX, 350f, 100f, 30f, "end_turn_button.png",
+		buttonSortBySlashDamage = new LevelButton(sortButtonX, 350f, sortButtonWidth, 30f, "end_turn_button.png",
 				"end_turn_button.png", "SLASH", true, true, Color.BLACK, Color.WHITE);
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
@@ -301,20 +302,24 @@ public class Inventory {
 
 		for (Button button : buttonsSort) {
 			button.down = false;
+			button.x = this.sortButtonX;
+			button.width = this.sortButtonWidth;
 		}
 
+		Button selectedSortButton = null;
+
 		if (inventorySortBy == INVENTORY_SORT_BY.SORT_ALPHABETICALLY) {
-			buttonSortAlphabetically.down = true;
+			selectedSortButton = buttonSortAlphabetically;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_NEWEST) {
-			buttonSortByNewest.down = true;
+			selectedSortButton = buttonSortByNewest;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_VALUE) {
-			buttonSortByValue.down = true;
+			selectedSortButton = buttonSortByValue;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_FAVOURITE) {
-			buttonSortByFavourite.down = true;
+			selectedSortButton = buttonSortByFavourite;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE) {
-			buttonSortByTotalDamage.down = true;
+			selectedSortButton = buttonSortByTotalDamage;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE) {
-			buttonSortBySlashDamage.down = true;
+			selectedSortButton = buttonSortBySlashDamage;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_BLUNT_DAMAGE) {
 
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_PIERCE_DAMAGE) {
@@ -332,6 +337,9 @@ public class Inventory {
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_MIN_RANGE) {
 
 		}
+		selectedSortButton.down = true;
+		selectedSortButton.x -= 20;
+		selectedSortButton.width += 20;
 
 		Inventory.inventorySortBy = inventorySortBy;
 
