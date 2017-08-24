@@ -631,34 +631,6 @@ public class Inventory implements Draggable, Scrollable {
 		}
 	}
 
-	// public void matchGameObjectsToSquares() {
-	// if (!isOpen)
-	// return;
-	//
-	// int index = 0;
-	// if (sortBackwards)
-	// index = filteredGameObjects.size() - 1;
-	//
-	// for (int i = 0; i < inventorySquares[0].length; i++) {
-	// for (int j = 0; j < inventorySquares.length; j++) {
-	// inventorySquares[j][i].gameObject = null;
-	//
-	// if (!sortBackwards) {
-	//
-	// if (index < filteredGameObjects.size()) {
-	// inventorySquares[j][i].gameObject = filteredGameObjects.get(index);
-	// index++;
-	// }
-	// } else {
-	// if (index >= 0) {
-	// inventorySquares[j][i].gameObject = filteredGameObjects.get(index);
-	// index--;
-	// }
-	// }
-	// }
-	// }
-	// }
-
 	public boolean contains(GameObject gameObject) {
 		return gameObjects.contains(gameObject);
 	}
@@ -954,6 +926,10 @@ public class Inventory implements Draggable, Scrollable {
 			TextureUtils.drawTexture(otherGameObject.imageTexture, alpha, otherInventoryGameObjectX,
 					actorPositionYInPixels, otherInventoryGameObjectX + actorWidth,
 					actorPositionYInPixels + otherGameObject.height * 2);
+			if (otherInventory.size() == 0)
+				this.buttonLootAll.enabled = false;
+			else
+				this.buttonLootAll.enabled = true;
 		}
 
 	}

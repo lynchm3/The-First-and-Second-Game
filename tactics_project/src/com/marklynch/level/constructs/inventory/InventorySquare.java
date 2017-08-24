@@ -56,7 +56,7 @@ public class InventorySquare extends Square {
 
 		// square texture
 
-		TextureUtils.drawTexture(imageTexture, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+		TextureUtils.drawTexture(WHITE_SQUARE, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
 				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 		if (gameObject != null) {
 

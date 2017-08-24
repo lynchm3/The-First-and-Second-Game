@@ -102,9 +102,10 @@ public class GroundDisplay implements Draggable, Scrollable {
 	}
 
 	public void drawText() {
+		if (gameObjects.size() > 0)
 
-		TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true,
-				new Object[] { new StringWithColor("Items on the Ground", Color.WHITE) });
+			TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true,
+					new Object[] { new StringWithColor("Items on the Ground", Color.WHITE) });
 
 	}
 

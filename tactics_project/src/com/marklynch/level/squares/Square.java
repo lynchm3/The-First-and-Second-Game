@@ -72,7 +72,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public static Texture DARK_GRASS_TEXTURE;
 	public static Texture STONE_TEXTURE;
 	public static Texture MUD_TEXTURE;
-	public static Texture BLANK_TEXTURE;
+	public static Texture GREY_TEXTURE;
+	public static Texture WHITE_SQUARE;
 	public static Texture W_TEXTURE;
 	public static Texture A_TEXTURE;
 	public static Texture S_TEXTURE;
@@ -145,7 +146,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png");
 		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png");
 		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png");
-		BLANK_TEXTURE = ResourceUtils.getGlobalImage("square.png");
+		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png");
+		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png");
 
 		W_TEXTURE = ResourceUtils.getGlobalImage("w.png");
 		A_TEXTURE = ResourceUtils.getGlobalImage("a.png");
@@ -188,7 +190,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (!Game.fullVisiblity) {
 
 			if (!this.seenByPlayer) {
-				textureToDraw = BLANK_TEXTURE;
+				textureToDraw = GREY_TEXTURE;
 			}
 		}
 
