@@ -108,15 +108,24 @@ public class UserInputLevel {
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
-		if (draggableMouseIsOver == null && scrollableMouseIsOver == null) {
 
+		// Setting the draggable
+		if (draggableMouseIsOver == null && scrollableMouseIsOver == null && inventoriesOpen) {
+			draggableMouseIsOver = Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
+					(int) Game.windowHeight - Mouse.getY());
+			scrollableMouseIsOver = (Scrollable) draggableMouseIsOver;
+		}
+
+		if (draggableMouseIsOver == null && scrollableMouseIsOver == null || !inventoriesOpen) {
 			for (int i = Game.level.popupPinneds.size() - 1; i >= 0; i--) {
 				if (Game.level.popupPinneds.get(i).isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
 					draggableMouseIsOver = Game.level.popupPinneds.get(i);
 					break;
 				}
 			}
+		}
 
+		if (draggableMouseIsOver == null && scrollableMouseIsOver == null && !inventoriesOpen) {
 			if (draggableMouseIsOver == null && scrollableMouseIsOver == null
 					&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
 				draggableMouseIsOver = Game.level.activityLogger;
@@ -139,9 +148,7 @@ public class UserInputLevel {
 		// MOUSE WHEEL
 		int mouseWheelDelta = Mouse.getDWheel();
 
-		if (inventoriesOpen) {
-
-		} else if (UserInputLevel.scrollableMouseIsOver != null) {
+		if (UserInputLevel.scrollableMouseIsOver != null) {
 			if (mouseWheelDelta > 0)
 				scrollableMouseIsOver.scroll(0, -100);
 			else if (mouseWheelDelta < 0)
@@ -196,9 +203,7 @@ public class UserInputLevel {
 				}
 				Game.level.cameraFollow = false;
 
-				if (inventoriesOpen) {
-
-				} else if (draggableMouseIsOver != null) {
+				if (draggableMouseIsOver != null) {
 
 					if (draggableMouseIsOver instanceof Window) {
 						((Window) draggableMouseIsOver).bringToFront();

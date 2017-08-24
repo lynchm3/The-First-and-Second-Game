@@ -16,6 +16,8 @@ import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.ui.Draggable;
+import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -28,7 +30,7 @@ import com.marklynch.utils.TextureUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class Inventory {
+public class Inventory implements Draggable, Scrollable {
 
 	public enum INVENTORY_STATE {
 		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
@@ -62,12 +64,14 @@ public class Inventory {
 
 	private transient boolean isOpen = false;
 	public transient float squaresX = 500;
+	transient final static float squaresBaseY = 100;
 	transient float squaresY = 100;
 	transient float sortButtonX = 400;
 	transient float sortButtonWidth = 100;
 	transient int actorX = 100;
 	transient int actorWidth = 256;
-	transient int bottomBorderHeight = 256;
+	transient static int bottomBorderHeight = 256;
+	transient static int topBorderHeight = 100;
 	transient int otherInventoryGameObjectX = 1250;
 	transient private InventorySquare inventorySquareMouseIsOver;
 	transient private GameObject selectedGameObject;
@@ -580,12 +584,16 @@ public class Inventory {
 					+ (squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH) + pixelsBetweenSquares);
 		}
 
+		fixScroll();
 		resize2();
-
-		if (this.groundDisplay != null)
-			this.groundDisplay.resize();
-		if (this.otherInventory != null)
+		if (this.groundDisplay != null) {
+			this.groundDisplay.fixScroll();
+			this.groundDisplay.resize2();
+		}
+		if (this.otherInventory != null) {
+			this.otherInventory.fixScroll();
 			this.otherInventory.resize2();
+		}
 	}
 
 	public void resize2() {
@@ -781,7 +789,10 @@ public class Inventory {
 			this.inventorySquareMouseIsOver.drawAction();
 		}
 
-		// Bottom black mask
+		// Top border black mask
+		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, 0, topBorderHeight);
+
+		// Bottom border black mask
 		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, Game.windowHeight - bottomBorderHeight,
 				Game.windowHeight);
 
@@ -986,4 +997,55 @@ public class Inventory {
 		inventoryMode = mode;
 	}
 
+	@Override
+	public void scroll(float dragX, float dragY) {
+		drag(dragX, dragY);
+	}
+
+	@Override
+	public void drag(float dragX, float dragY) {
+		System.out.println("drag " + dragX + "," + dragY);
+		this.squaresY -= dragY;
+		fixScroll();
+		resize2();
+	}
+
+	private void fixScroll() {
+		// TODO Auto-generated method stub
+
+		int totalSquaresHeight = (int) ((filteredGameObjects.size() / squareGridWidthInSquares)
+				* Game.INVENTORY_SQUARE_HEIGHT);
+		if (totalSquaresHeight < Game.windowHeight - bottomBorderHeight - topBorderHeight) {
+			this.squaresY = this.squaresBaseY;
+		} else if (this.squaresY < -(totalSquaresHeight - (Game.windowHeight - bottomBorderHeight))) {
+			this.squaresY = -(totalSquaresHeight - (Game.windowHeight - bottomBorderHeight));
+		} else if (this.squaresY > this.squaresBaseY) {
+			this.squaresY = this.squaresBaseY;
+		}
+
+	}
+
+	public Draggable getDraggable(int mouseX, int mouseY) {
+
+		if (this.inventorySquareMouseIsOver == null)
+			return null;
+
+		if (this.inventorySquares.contains(this.inventorySquareMouseIsOver)) {
+			return this;
+		}
+
+		if (this.otherInventory != null) {
+			if (this.otherInventory.inventorySquares.contains(this.inventorySquareMouseIsOver)) {
+				return otherInventory;
+			}
+		}
+
+		if (this.groundDisplay != null) {
+			if (this.groundDisplay.groundDisplaySquares.contains(this.inventorySquareMouseIsOver)) {
+				return groundDisplay;
+			}
+		}
+
+		return null;
+	}
 }

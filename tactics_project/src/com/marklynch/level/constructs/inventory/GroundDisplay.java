@@ -5,19 +5,21 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.ui.Draggable;
+import com.marklynch.ui.Scrollable;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
 
-public class GroundDisplay {
+public class GroundDisplay implements Draggable, Scrollable {
 
 	public int squareGridWidthInSquares = 5;
 
 	ArrayList<Square> squares = new ArrayList<Square>();
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	int squaresX;
-	int squaresY;
+	float squaresY;
 	public transient ArrayList<GroundDisplaySquare> groundDisplaySquares = new ArrayList<GroundDisplaySquare>();
 	transient private GroundDisplaySquare groundDisplaySquareMouseIsOver;
 
@@ -68,7 +70,7 @@ public class GroundDisplay {
 		}
 	}
 
-	public void resize() {
+	public void resize2() {
 		int xIndex = 0;
 		int yIndex = 0;
 		for (InventorySquare inventorySquare : groundDisplaySquares) {
@@ -119,6 +121,31 @@ public class GroundDisplay {
 		}
 
 		return null;
+	}
+
+	@Override
+	public void scroll(float dragX, float dragY) {
+		drag(dragX, dragY);
+	}
+
+	@Override
+	public void drag(float dragX, float dragY) {
+		System.out.println("drag " + dragX + "," + dragY);
+		this.squaresY -= dragY;
+		fixScroll();
+		resize2();
+	}
+
+	public void fixScroll() {
+		int totalSquaresHeight = (int) ((gameObjects.size() / squareGridWidthInSquares) * Game.INVENTORY_SQUARE_HEIGHT);
+		if (totalSquaresHeight < Game.windowHeight - Inventory.bottomBorderHeight - Inventory.topBorderHeight) {
+			this.squaresY = Inventory.squaresBaseY;
+		} else if (this.squaresY < -(totalSquaresHeight - (Game.windowHeight - Inventory.bottomBorderHeight))) {
+			this.squaresY = -(totalSquaresHeight - (Game.windowHeight - Inventory.bottomBorderHeight));
+		} else if (this.squaresY > Inventory.squaresBaseY) {
+			this.squaresY = Inventory.squaresBaseY;
+		}
+
 	}
 
 }
