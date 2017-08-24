@@ -38,9 +38,9 @@ public class ActionDropSpecificItem extends Action {
 
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dropped ", object }));
-		if (!performer.inventory.contains(object)) {
-			performer.inventory.remove(object);
-		}
+		// if (!performer.inventory.contains(object)) {
+		performer.inventory.remove(object);
+		// }
 
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;

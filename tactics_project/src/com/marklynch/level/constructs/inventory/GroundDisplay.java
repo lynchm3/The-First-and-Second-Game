@@ -103,7 +103,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public void drawText() {
 
-		TextUtils.printTextWithImages(this.squaresX, 8f, 300f, true,
+		TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true,
 				new Object[] { new StringWithColor("Items on the Ground", Color.WHITE) });
 
 	}
@@ -134,7 +134,6 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	@Override
 	public void drag(float dragX, float dragY) {
-		System.out.println("drag " + dragX + "," + dragY);
 		this.squaresY -= dragY;
 		fixScroll();
 		resize2();

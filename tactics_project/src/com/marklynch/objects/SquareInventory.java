@@ -70,6 +70,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 	@Override
 	public int remove(GameObject gameObject) {
+
+		// for (GameObject gameObject1 : gameObjects) {
+		// System.out.println("gameObject2 = " + gameObject1);
+		// }
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
 			// gameObject.inventorySquareGameObjectIsOn = null;
@@ -82,6 +86,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			// }
 			// }
 		}
+
+		// for (GameObject gameObject2 : gameObjects) {
+		// System.out.println("gameObject2 = " + gameObject2);
+		// }
 		return -1;
 	}
 

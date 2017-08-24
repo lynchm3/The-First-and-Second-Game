@@ -711,17 +711,19 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			return compareGameObjectToGameObject((GameObject) otherObject);
 		}
 
-		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE) {
-			if (!(this instanceof Weapon) && !(otherObject instanceof Weapon)) {
-				return 0;
-			} else if (!(this instanceof Weapon)) {
-				return +1;
-			} else if (!(otherObject instanceof Weapon)) {
-				return -1;
-			} else {
-				return Math.round((((Weapon) otherObject).slashDamage - ((Weapon) this).slashDamage));
-			}
-		}
+		// if (Inventory.inventorySortBy ==
+		// Inventory.INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE) {
+		// if (!(this instanceof Weapon) && !(otherObject instanceof Weapon)) {
+		// return 0;
+		// } else if (!(this instanceof Weapon)) {
+		// return +1;
+		// } else if (!(otherObject instanceof Weapon)) {
+		// return -1;
+		// } else {
+		// return Math.round((((Weapon) otherObject).slashDamage - ((Weapon)
+		// this).slashDamage));
+		// }
+		// }
 		return 0;
 	}
 

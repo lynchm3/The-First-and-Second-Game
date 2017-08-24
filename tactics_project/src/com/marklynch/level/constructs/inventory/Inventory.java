@@ -127,7 +127,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY, false, true);
+				sort(INVENTORY_SORT_BY.SORT_ALPHABETICALLY, true, true);
 			}
 		});
 		buttonsSort.add(buttonSortAlphabetically);
@@ -137,7 +137,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST, false, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_NEWEST, true, true);
 			}
 		});
 		buttonsSort.add(buttonSortByNewest);
@@ -147,7 +147,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE, false, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_FAVOURITE, true, true);
 			}
 		});
 		buttonsSort.add(buttonSortByFavourite);
@@ -157,7 +157,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_VALUE, false, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_VALUE, true, true);
 			}
 		});
 		buttonsSort.add(buttonSortByValue);
@@ -167,7 +167,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE, false, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE, true, true);
 			}
 		});
 		buttonsSort.add(buttonSortByTotalDamage);
@@ -177,7 +177,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE, false, true);
+				sort(INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE, true, true);
 			}
 		});
 		buttonsSort.add(buttonSortBySlashDamage);
@@ -356,6 +356,7 @@ public class Inventory implements Draggable, Scrollable {
 			return;
 		}
 
+		// sorts filtered game objects
 		Collections.sort(filteredGameObjects);
 		if (sortBackwards)
 			Collections.reverse(filteredGameObjects);
@@ -364,6 +365,7 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void filter(INVENTORY_FILTER_BY inventoryFilterBy, boolean temporary) {
+
 		if (!temporary)
 			Inventory.inventoryFilterBy = inventoryFilterBy;
 		for (Button button : buttonsFilter)
@@ -513,6 +515,7 @@ public class Inventory implements Draggable, Scrollable {
 			}
 
 			gameObjects.remove(gameObject);
+
 			gameObject.inventoryThatHoldsThisObject = null;
 			if (parent != null)
 				parent.inventoryChanged();
@@ -557,6 +560,14 @@ public class Inventory implements Draggable, Scrollable {
 			inventorySquares.add(inventorySquare);
 		}
 
+		int squareAreaHeightInSquares = (int) ((Game.windowHeight - bottomBorderHeight - topBorderHeight)
+				/ Game.INVENTORY_SQUARE_HEIGHT);
+		int squaresRequiredToFillSpace = this.squareGridWidthInSquares * squareAreaHeightInSquares;
+		while (inventorySquares.size() < squaresRequiredToFillSpace) {
+			InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
+			inventorySquares.add(inventorySquare);
+		}
+
 		resize1();
 	}
 
@@ -596,7 +607,7 @@ public class Inventory implements Draggable, Scrollable {
 		if (this.otherInventory != null) {
 			this.otherInventory.fixScroll();
 			this.otherInventory.resize2();
-			buttonLootAll.x = groundDisplay.squaresX;
+			buttonLootAll.x = this.otherInventory.squaresX;
 		}
 	}
 
