@@ -761,6 +761,25 @@ public class Inventory {
 		// sqrs
 		drawSquares();
 
+		// Ground display sqrs
+		if (groundDisplay != null) {
+			groundDisplay.drawStaticUI();
+		}
+
+		// Other Gameobject / actor inventory squares
+		if (otherInventory != null) {
+			otherInventory.drawSquares();
+		}
+
+		// cursor and action over squares
+		if (this.inventorySquareMouseIsOver != null && Game.buttonHoveringOver == null) {
+			this.inventorySquareMouseIsOver.drawCursor();
+			this.inventorySquareMouseIsOver.drawAction();
+		}
+
+		// Bottom black mask
+		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, Game.windowHeight - 256, Game.windowHeight);
+
 		// buttons
 		for (Button button : buttons) {
 			button.draw();
@@ -893,15 +912,6 @@ public class Inventory {
 			int comparisonPositionYInPixels = 250;
 		}
 
-		if (groundDisplay != null) {
-			groundDisplay.drawStaticUI();
-		}
-
-		// Other Gameobject / actor inventory squares
-		if (otherInventory != null) {
-			otherInventory.drawSquares();
-		}
-
 		// Other Gameobject / actor
 		if (otherInventory != null) {
 			// Actor
@@ -909,12 +919,6 @@ public class Inventory {
 			TextureUtils.drawTexture(otherGameObject.imageTexture, alpha, otherInventoryGameObjectX,
 					actorPositionYInPixels, otherInventoryGameObjectX + actorWidth,
 					actorPositionYInPixels + otherGameObject.height * 2);
-		}
-
-		// cursor
-		if (this.inventorySquareMouseIsOver != null && Game.buttonHoveringOver == null) {
-			this.inventorySquareMouseIsOver.drawCursor();
-			this.inventorySquareMouseIsOver.drawAction();
 		}
 
 	}
