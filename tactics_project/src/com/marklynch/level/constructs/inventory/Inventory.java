@@ -563,11 +563,6 @@ public class Inventory {
 				- (pixelsToLeftOfSquares + pixelsBetweenSquares + pixelsToRightOfSquares);
 		this.squareGridWidthInSquares = (int) ((availablePixelsForSquares / 2f) / Game.INVENTORY_SQUARE_WIDTH);
 
-		System.out.println("pixelsToLeftOfSquares = " + pixelsToLeftOfSquares);
-		System.out.println("pixelsToRightOfSquares = " + pixelsToRightOfSquares);
-		System.out.println("availablePixelsForSquares = " + availablePixelsForSquares);
-		System.out.println("squareGridWidthInSquares = " + squareGridWidthInSquares);
-
 		if (this.squareGridWidthInSquares < 1)
 			this.squareGridWidthInSquares = 1;
 		if (otherInventory != null) {
@@ -941,8 +936,8 @@ public class Inventory {
 		float offsetY = squaresY;
 		float scroll = 0;
 
-		float mouseXInSquares = (((mouseXInPixels - offsetX) / Game.INVENTORY_SQUARE_WIDTH));
-		float mouseYInSquares = ((Game.windowHeight - mouseYInPixels - offsetY - scroll)
+		int mouseXInSquares = (int) (((mouseXInPixels - offsetX) / Game.INVENTORY_SQUARE_WIDTH));
+		int mouseYInSquares = (int) ((Game.windowHeight - mouseYInPixels - offsetY - scroll)
 				/ Game.INVENTORY_SQUARE_HEIGHT);
 
 		for (InventorySquare inventorySquare : inventorySquares) {
@@ -955,8 +950,7 @@ public class Inventory {
 			GroundDisplaySquare groundDisplaySquareMouseIsOver = groundDisplay
 					.getGroundDisplaySquareMouseIsOver(mouseXInPixels, mouseYInPixels);
 			if (groundDisplaySquareMouseIsOver != null) {
-				return groundDisplaySquareMouseIsOver; // This is working great
-														// 23/08/2017
+				return groundDisplaySquareMouseIsOver;
 			}
 		}
 
@@ -964,8 +958,7 @@ public class Inventory {
 			InventorySquare inventorySquareMouseIsOver = otherInventory.getInventorySquareMouseIsOver(mouseXInPixels,
 					mouseYInPixels);
 			if (inventorySquareMouseIsOver != null) {
-				return inventorySquareMouseIsOver; // This is working great
-													// 23/08/2017
+				return inventorySquareMouseIsOver;
 			}
 		}
 

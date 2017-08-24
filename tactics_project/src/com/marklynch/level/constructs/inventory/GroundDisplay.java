@@ -105,8 +105,8 @@ public class GroundDisplay {
 		float offsetY = y;
 		float scroll = 0;
 
-		float mouseXInSquares = (((mouseXInPixels - offsetX) / Game.INVENTORY_SQUARE_WIDTH));
-		float mouseYInSquares = ((Game.windowHeight - mouseYInPixels - offsetY - scroll)
+		int mouseXInSquares = (int) (((mouseXInPixels - offsetX) / Game.INVENTORY_SQUARE_WIDTH));
+		int mouseYInSquares = (int) ((Game.windowHeight - mouseYInPixels - offsetY - scroll)
 				/ Game.INVENTORY_SQUARE_HEIGHT);
 
 		for (GroundDisplaySquare groundDisplaySquare : groundDisplaySquares) {
