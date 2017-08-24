@@ -538,12 +538,15 @@ public class Inventory {
 	}
 
 	public void matchGameObjectsToSquares() {
+
+		// System.out.println("matchGameObjectsToSquares");
+
 		if (!isOpen)
 			return;
 
 		inventorySquares.clear();
 
-		for (GameObject gameObject : gameObjects) {
+		for (GameObject gameObject : this.filteredGameObjects) {
 			InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 			inventorySquare.gameObject = gameObject;
 			inventorySquares.add(inventorySquare);
