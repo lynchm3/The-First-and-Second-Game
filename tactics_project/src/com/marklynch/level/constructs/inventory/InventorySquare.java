@@ -9,7 +9,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.utils.ArrayUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
@@ -32,8 +31,8 @@ public class InventorySquare extends Square {
 		this.inventoryThisBelongsTo = inventoryThisBelongsTo;
 
 		if (inventoryThisBelongsTo != null) {
-			xInPixels = Math.round(inventoryThisBelongsTo.x + xInGrid * Game.INVENTORY_SQUARE_WIDTH);
-			yInPixels = Math.round(inventoryThisBelongsTo.y + yInGrid * Game.INVENTORY_SQUARE_HEIGHT);
+			xInPixels = Math.round(inventoryThisBelongsTo.squaresX + xInGrid * Game.INVENTORY_SQUARE_WIDTH);
+			yInPixels = Math.round(inventoryThisBelongsTo.squaresY + yInGrid * Game.INVENTORY_SQUARE_HEIGHT);
 		}
 	}
 
@@ -164,8 +163,12 @@ public class InventorySquare extends Square {
 		boolean xGoingUp = true;
 		boolean yGoingUp = true;
 		for (float i = 0, x = -distance, y = 0; i < distance * 4; i++) {
-			if (ArrayUtils.inBounds(inventoryThisBelongsTo.inventorySquares, this.xInGrid + x, this.yInGrid + y)) {
-				squares.add(inventoryThisBelongsTo.inventorySquares[this.xInGrid + (int) x][this.yInGrid + (int) y]);
+
+			for (InventorySquare inventorySquare : inventoryThisBelongsTo.inventorySquares) {
+				if (inventorySquare.xInGrid == x && inventorySquare.yInGrid == y) {
+					squares.add(inventorySquare);
+					break;
+				}
 			}
 
 			if (xGoingUp) {

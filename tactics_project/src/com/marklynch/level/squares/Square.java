@@ -51,8 +51,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
 
-	public final int xInGrid;
-	public final int yInGrid;
+	public int xInGrid;
+	public int yInGrid;
 	public final int elevation;
 	public int travelCost;
 	public SquareInventory inventory;

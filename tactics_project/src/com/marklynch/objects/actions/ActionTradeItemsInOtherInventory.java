@@ -43,7 +43,7 @@ public class ActionTradeItemsInOtherInventory extends Action {
 
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_TRADE);
 			Game.level.player.inventory.otherInventory = target.inventory;
-			target.inventory.x = 900;
+			target.inventory.squaresX = 900;
 			Game.level.player.inventory.open();
 			Inventory.target = this.target;
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);

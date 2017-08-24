@@ -12,18 +12,17 @@ import mdesl.graphics.Color;
 
 public class GroundDisplay {
 
-	public int widthInSquares = 5;
-	public int heightInSquares = 6;
+	public int squareGridWidthInSquares = 5;
 
 	ArrayList<Square> squares = new ArrayList<Square>();
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-	int x;
+	int squaresX;
 	int y;
-	public transient GroundDisplaySquare[][] groundDisplaySquares = new GroundDisplaySquare[widthInSquares][heightInSquares];
+	public transient ArrayList<GroundDisplaySquare> groundDisplaySquares = new ArrayList<GroundDisplaySquare>();
 	transient private GroundDisplaySquare groundDisplaySquareMouseIsOver;
 
 	public GroundDisplay(int x, int y) {
-		this.x = x;
+		this.squaresX = x;
 		this.y = y;
 		squares.add(Game.level.player.squareGameObjectIsOn);
 		if (Game.level.player.squareGameObjectIsOn.getSquareAbove() != null)
@@ -34,12 +33,6 @@ public class GroundDisplay {
 			squares.add(Game.level.player.squareGameObjectIsOn.getSquareToRightOf());
 		if (Game.level.player.squareGameObjectIsOn.getSquareBelow() != null)
 			squares.add(Game.level.player.squareGameObjectIsOn.getSquareBelow());
-
-		for (int i = 0; i < groundDisplaySquares[0].length; i++) {
-			for (int j = 0; j < groundDisplaySquares.length; j++) {
-				groundDisplaySquares[j][i] = new GroundDisplaySquare(j, i, null, this);
-			}
-		}
 
 		refreshGameObjects();
 	}
@@ -56,16 +49,35 @@ public class GroundDisplay {
 		matchGameObjectsToSquares();
 	}
 
-	private void matchGameObjectsToSquares() {
+	public void matchGameObjectsToSquares() {
 
-		int index = 0;
-		for (int i = 0; i < groundDisplaySquares[0].length; i++) {
-			for (int j = 0; j < groundDisplaySquares.length; j++) {
-				groundDisplaySquares[j][i].gameObject = null;
-				if (index < gameObjects.size()) {
-					groundDisplaySquares[j][i].gameObject = gameObjects.get(index);
-					index++;
-				}
+		groundDisplaySquares.clear();
+
+		int xIndex = 0;
+		int yIndex = 0;
+
+		for (GameObject gameObject : gameObjects) {
+			GroundDisplaySquare groundDisplaySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
+			groundDisplaySquare.gameObject = gameObject;
+			groundDisplaySquares.add(groundDisplaySquare);
+			xIndex++;
+			if (xIndex == this.squareGridWidthInSquares) {
+				xIndex = 0;
+				yIndex++;
+			}
+		}
+	}
+
+	public void resize() {
+		int xIndex = 0;
+		int yIndex = 0;
+		for (GroundDisplaySquare groundDisplaySquare : groundDisplaySquares) {
+			groundDisplaySquare.xInGrid = xIndex;
+			groundDisplaySquare.yInGrid = yIndex;
+			xIndex++;
+			if (xIndex == this.squareGridWidthInSquares) {
+				xIndex = 0;
+				yIndex++;
 			}
 		}
 	}
@@ -75,10 +87,8 @@ public class GroundDisplay {
 		TextUtils.printTextWithImages(900f, 8f, 300f, true,
 				new Object[] { new StringWithColor("Items on the Ground", Color.WHITE) });
 
-		for (int i = 0; i < groundDisplaySquares[0].length; i++) {
-			for (int j = 0; j < groundDisplaySquares.length; j++) {
-				groundDisplaySquares[j][i].drawStaticUI();
-			}
+		for (GroundDisplaySquare groundDisplaySquare : groundDisplaySquares) {
+			groundDisplaySquare.drawStaticUI();
 		}
 
 		// cursor
@@ -91,7 +101,7 @@ public class GroundDisplay {
 	public GroundDisplaySquare getGroundDisplaySquareMouseIsOver(float mouseXInPixels, float mouseYInPixels) {
 
 		// Inventory sqr
-		float offsetX = x;
+		float offsetX = squaresX;
 		float offsetY = y;
 		float scroll = 0;
 
@@ -99,10 +109,9 @@ public class GroundDisplay {
 		float mouseYInSquares = ((Game.windowHeight - mouseYInPixels - offsetY - scroll)
 				/ Game.INVENTORY_SQUARE_HEIGHT);
 
-		if (mouseXInSquares >= 0 && mouseXInSquares < groundDisplaySquares.length && mouseYInSquares >= 0
-				&& mouseYInSquares < groundDisplaySquares[0].length) {
-
-			return this.groundDisplaySquares[(int) mouseXInSquares][(int) mouseYInSquares];
+		for (GroundDisplaySquare groundDisplaySquare : groundDisplaySquares) {
+			if (groundDisplaySquare.xInGrid == mouseXInSquares && groundDisplaySquare.yInGrid == mouseYInSquares)
+				return groundDisplaySquare;
 		}
 
 		return null;

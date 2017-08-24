@@ -1791,4 +1791,10 @@ public class Level {
 		}
 		return null;
 	}
+
+	public void resize() {
+		if (openInventories.size() != 0)
+			openInventories.get(0).resize1();
+
+	}
 }

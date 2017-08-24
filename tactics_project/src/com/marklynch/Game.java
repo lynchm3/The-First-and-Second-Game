@@ -307,6 +307,10 @@ public class Game {
 		if (editor != null)
 			editor.resize();
 
+		if (level != null) {
+			level.resize();
+		}
+
 		// whenever our screen resizes, we need to update our uniform
 		// program.use();
 		// program.setUniformf("resolution", Display.getWidth(),
