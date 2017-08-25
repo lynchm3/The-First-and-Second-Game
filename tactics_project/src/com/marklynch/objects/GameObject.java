@@ -21,9 +21,6 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionCastBurn;
-import com.marklynch.objects.actions.ActionCastDouse;
-import com.marklynch.objects.actions.ActionCastPoison;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionEquip;
@@ -672,12 +669,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (!decorative)
 			actions.add(new ActionPourContainerInInventory(performer, this));
 
-		if (!decorative)
-			actions.add(new ActionCastBurn(performer, this));
-		if (!decorative)
-			actions.add(new ActionCastDouse(performer, this));
-		if (!decorative)
-			actions.add(new ActionCastPoison(performer, this));
+		// if (!decorative)
+		// actions.add(new ActionCastBurn(performer, this));
+		// if (!decorative)
+		// actions.add(new ActionCastDouse(performer, this));
+		// if (!decorative)
+		// actions.add(new ActionCastPoison(performer, this));
 
 		return actions;
 
@@ -862,9 +859,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		actions.add(new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this));
 
 		// actions.add(new ActionThrow(performer, this, performer.equipped));
-		actions.add(new ActionCastBurn(performer, this));
-		actions.add(new ActionCastDouse(performer, this));
-		actions.add(new ActionCastPoison(performer, this));
+		// actions.add(new ActionCastBurn(performer, this));
+		// actions.add(new ActionCastDouse(performer, this));
+		// actions.add(new ActionCastPoison(performer, this));
 
 		return actions;
 	}
