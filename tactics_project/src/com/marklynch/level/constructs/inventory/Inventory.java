@@ -113,6 +113,8 @@ public class Inventory implements Draggable, Scrollable {
 
 	public static Texture textureUp;
 	public static Texture textureDown;
+	public static Texture textureCorner;
+	public static Texture textureFilter;
 
 	public Inventory(GameObject... gameObjects) {
 		for (GameObject gameObject : gameObjects) {
@@ -452,6 +454,8 @@ public class Inventory implements Draggable, Scrollable {
 	public static void loadStaticImages() {
 		textureUp = ResourceUtils.getGlobalImage("up.png");
 		textureDown = ResourceUtils.getGlobalImage("down.png");
+		textureCorner = ResourceUtils.getGlobalImage("inventory_corner.png");
+		textureFilter = ResourceUtils.getGlobalImage("filter.png");
 	}
 
 	public GameObject get(int i) {
@@ -940,6 +944,13 @@ public class Inventory implements Draggable, Scrollable {
 				this.buttonLootAll.enabled = true;
 		}
 
+		// Top left corner
+		// TextureUtils.drawTexture(textureCorner, squaresX - 100, squaresY -
+		// 100, squaresX, squaresY);
+
+		// LineUtils.drawLine(Color.WHITE, squaresX - 200, squaresY - 200,
+		// squaresX, squaresY, 10);
+
 		// buttons
 		for (Button button : buttons) {
 			button.draw();
@@ -954,6 +965,14 @@ public class Inventory implements Draggable, Scrollable {
 				else
 					TextureUtils.drawTexture(textureDown, sortButton.x - 8, sortButton.y - 8, sortButton.x + 8,
 							sortButton.y + 8);
+			}
+		}
+
+		// Up / down icon on active sort button
+		for (Button filterButton : buttonsFilter) {
+			if (filterButton.down) {
+				TextureUtils.drawTexture(textureFilter, filterButton.x - 5, filterButton.y - 5, filterButton.x + 5,
+						filterButton.y + 5);
 			}
 		}
 
