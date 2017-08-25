@@ -891,12 +891,12 @@ public class Inventory implements Draggable, Scrollable {
 					helmetPositionYInPixels, helmetPositionXInPixels + gameObjectToDrawOnPlayersHead.width * 2,
 					helmetPositionYInPixels + gameObjectToDrawOnPlayersHead.height * 2);
 		} else if (Game.level.player.hairImageTexture != null) {
-			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + (Game.level.player.bodyAnchorX - 0) * 2);
-			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + (Game.level.player.bodyAnchorY - 0) * 2);
-			TextureUtils.drawTexture(Game.level.player.hairImageTexture, alpha, bodyArmorPositionXInPixels,
-					bodyArmorPositionYInPixels,
-					bodyArmorPositionXInPixels + Game.level.player.hairImageTexture.getWidth() * 2,
-					bodyArmorPositionYInPixels + Game.level.player.hairImageTexture.getHeight() * 2);
+			int helmetPositionXInPixels = actorPositionXInPixels + 0 * 2;
+			int helmetPositionYInPixels = actorPositionYInPixels + -8 * 2;
+			TextureUtils.drawTexture(Game.level.player.hairImageTexture, alpha, helmetPositionXInPixels,
+					helmetPositionYInPixels,
+					helmetPositionXInPixels + Game.level.player.hairImageTexture.getWidth() * 4,
+					helmetPositionYInPixels + Game.level.player.hairImageTexture.getHeight() * 4);
 		}
 
 		// Body Armor

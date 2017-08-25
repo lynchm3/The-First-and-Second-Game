@@ -122,9 +122,9 @@ public class Templates {
 	// ARMOUR
 	// Helmets
 	public static final Helmet HARD_HAT = new Helmet("Hard Hat", "hard_hat.png", 100, null, 0.25f, 0.12f, 0f, 0f, 1f,
-			1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 100f, 3f, null, 20, 12);
+			1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 100f, 3f, null, 20, 8);
 	public static final Helmet PINK_HARD_HAT = new Helmet("Hard Hat", "pink_hard_hat.png", 100, null, 0.25f, 0.12f, 0f,
-			0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 100f, 3f, null, 20, 12);
+			0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 100f, 3f, null, 20, 8);
 	public static final Helmet COWBOY_HAT = new Helmet("Cowby Hat", "cowboy_hat.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f,
 			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, null, 34, 68);
 	// Body Armor

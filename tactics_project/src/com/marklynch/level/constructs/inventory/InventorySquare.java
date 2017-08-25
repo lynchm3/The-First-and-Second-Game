@@ -55,9 +55,16 @@ public class InventorySquare extends Square {
 	public void drawStaticUI() {
 
 		// square texture
+		Texture squareTexture = WHITE_SQUARE;
 
-		TextureUtils.drawTexture(WHITE_SQUARE, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+		if (Game.level.player.equipped == this.gameObject || Game.level.player.helmet == this.gameObject
+				|| Game.level.player.bodyArmor == this.gameObject || Game.level.player.legArmor == this.gameObject) {
+			squareTexture = YELLOW_SQUARE;
+		}
+
+		TextureUtils.drawTexture(squareTexture, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
 				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+
 		if (gameObject != null) {
 
 			float drawWidth = Game.INVENTORY_SQUARE_WIDTH;
