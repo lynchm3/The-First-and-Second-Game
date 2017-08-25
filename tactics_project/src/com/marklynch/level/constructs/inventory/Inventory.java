@@ -798,23 +798,6 @@ public class Inventory implements Draggable, Scrollable {
 		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, Game.windowHeight - bottomBorderHeight,
 				Game.windowHeight);
 
-		// buttons
-		for (Button button : buttons) {
-			button.draw();
-		}
-
-		// Up / down icon on active sort button
-		for (Button sortButton : buttonsSort) {
-			if (sortButton.down) {
-				if (sortBackwards)
-					TextureUtils.drawTexture(textureUp, sortButton.x - 8, sortButton.y - 8, sortButton.x + 8,
-							sortButton.y + 8);
-				else
-					TextureUtils.drawTexture(textureDown, sortButton.x - 8, sortButton.y - 8, sortButton.x + 8,
-							sortButton.y + 8);
-			}
-		}
-
 		// text
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
@@ -951,6 +934,23 @@ public class Inventory implements Draggable, Scrollable {
 				this.buttonLootAll.enabled = false;
 			else
 				this.buttonLootAll.enabled = true;
+		}
+
+		// buttons
+		for (Button button : buttons) {
+			button.draw();
+		}
+
+		// Up / down icon on active sort button
+		for (Button sortButton : buttonsSort) {
+			if (sortButton.down) {
+				if (sortBackwards)
+					TextureUtils.drawTexture(textureUp, sortButton.x - 8, sortButton.y - 8, sortButton.x + 8,
+							sortButton.y + 8);
+				else
+					TextureUtils.drawTexture(textureDown, sortButton.x - 8, sortButton.y - 8, sortButton.x + 8,
+							sortButton.y + 8);
+			}
 		}
 
 	}
