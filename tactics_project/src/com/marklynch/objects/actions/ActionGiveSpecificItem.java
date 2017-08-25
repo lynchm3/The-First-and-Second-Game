@@ -47,10 +47,22 @@ public class ActionGiveSpecificItem extends Action {
 
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
-			if (actor.equipped == object)
-				actor.equip(null);
-			actor.actionsPerformedThisTurn.add(this);
+			if (actor.equipped == object) {
+				if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
+					actor.equip(actor.equippedBeforePickingUpObject);
+				} else {
+					actor.equip(null);
+				}
+				actor.equippedBeforePickingUpObject = null;
+			}
+			if (actor.helmet == object)
+				actor.helmet = null;
+			if (actor.bodyArmor == object)
+				actor.bodyArmor = null;
+			if (actor.legArmor == object)
+				actor.legArmor = null;
 		}
+
 		receiver.inventory.add(object);
 		if (receiver instanceof Actor) {
 			object.owner = (Actor) receiver;

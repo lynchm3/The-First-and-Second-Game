@@ -57,8 +57,9 @@ public class InventorySquare extends Square {
 		// square texture
 		Texture squareTexture = WHITE_SQUARE;
 
-		if (Game.level.player.equipped == this.gameObject || Game.level.player.helmet == this.gameObject
-				|| Game.level.player.bodyArmor == this.gameObject || Game.level.player.legArmor == this.gameObject) {
+		if (this.gameObject != null && (Game.level.player.equipped == this.gameObject
+				|| Game.level.player.helmet == this.gameObject || Game.level.player.bodyArmor == this.gameObject
+				|| Game.level.player.legArmor == this.gameObject)) {
 			squareTexture = YELLOW_SQUARE;
 		}
 
