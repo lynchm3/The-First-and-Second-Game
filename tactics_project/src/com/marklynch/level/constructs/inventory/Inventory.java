@@ -579,12 +579,13 @@ public class Inventory implements Draggable, Scrollable {
 		if (!isOpen)
 			return;
 
-		float pixelsToLeftOfSquares = this.actorX + actorWidth + sortButtonWidth;
+		float pixelsToLeftOfSquares = this.sortButtonX + sortButtonWidth;
 		float pixelsToRightOfSquares = actorWidth;
 		float pixelsBetweenSquares = Game.INVENTORY_SQUARE_WIDTH;
 		float availablePixelsForSquares = Game.windowWidth
 				- (pixelsToLeftOfSquares + pixelsBetweenSquares + pixelsToRightOfSquares);
 		this.squareGridWidthInSquares = (int) ((availablePixelsForSquares / 2f) / Game.INVENTORY_SQUARE_WIDTH);
+		this.squaresX = pixelsToLeftOfSquares;
 
 		if (this.squareGridWidthInSquares < 1)
 			this.squareGridWidthInSquares = 1;
@@ -825,6 +826,8 @@ public class Inventory implements Draggable, Scrollable {
 					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
+		TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true, "Your Magic Bag");
+
 		if (groundDisplay != null) {
 			groundDisplay.drawText();
 		}
@@ -943,13 +946,7 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void drawOtherInventoryText() {
-
-		System.out.println("drawOtherInventoryText");
-		System.out.println("drawOtherInventoryText gameObjects.size() = " + gameObjects.size());
-		System.out.println("drawOtherInventoryText this.parent = " + this.parent);
-		System.out.println("this.squaresX = " + this.squaresX);
-		if (this.filteredGameObjects.size() > 0)
-			TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true, new Object[] { this.parent });
+		TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true, new Object[] { this.parent });
 
 	}
 
