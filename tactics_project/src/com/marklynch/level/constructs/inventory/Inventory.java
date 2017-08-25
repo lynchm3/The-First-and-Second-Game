@@ -452,8 +452,8 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public static void loadStaticImages() {
-		textureUp = ResourceUtils.getGlobalImage("up.png");
-		textureDown = ResourceUtils.getGlobalImage("down.png");
+		textureUp = ResourceUtils.getGlobalImage("inventory_up.png");
+		textureDown = ResourceUtils.getGlobalImage("inventory_down.png");
 		textureCorner = ResourceUtils.getGlobalImage("inventory_corner.png");
 		textureFilter = ResourceUtils.getGlobalImage("filter.png");
 	}
