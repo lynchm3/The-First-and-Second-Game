@@ -74,7 +74,6 @@ public class Inventory implements Draggable, Scrollable {
 	transient int actorWidth = 256;
 	transient static int bottomBorderHeight = 256;
 	transient static int topBorderHeight = 100;
-	transient int otherInventoryGameObjectX = 1250;
 	transient private InventorySquare inventorySquareMouseIsOver;
 	transient private GameObject selectedGameObject;
 
@@ -577,6 +576,11 @@ public class Inventory implements Draggable, Scrollable {
 		// inventorySquares.add(inventorySquare);
 		// }
 
+		if (this.parent != Game.level.player) {
+			Game.level.player.inventory.matchGameObjectsToSquares();
+			return;
+		}
+
 		resize1();
 	}
 
@@ -600,6 +604,7 @@ public class Inventory implements Draggable, Scrollable {
 			otherInventory.squareGridWidthInSquares = this.squareGridWidthInSquares;
 			otherInventory.squaresX = pixelsToLeftOfSquares + (squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH)
 					+ pixelsBetweenSquares;
+			otherInventory.actorX = (int) (otherInventory.squaresX + squaresWidth);
 		}
 		if (groundDisplay != null) {
 			groundDisplay.squareGridWidthInSquares = this.squareGridWidthInSquares;
@@ -927,9 +932,8 @@ public class Inventory implements Draggable, Scrollable {
 		if (otherInventory != null) {
 			// Actor
 			GameObject otherGameObject = (GameObject) target;
-			TextureUtils.drawTexture(otherGameObject.imageTexture, alpha, otherInventoryGameObjectX,
-					actorPositionYInPixels, otherInventoryGameObjectX + actorWidth,
-					actorPositionYInPixels + otherGameObject.height * 2);
+			TextureUtils.drawTexture(otherGameObject.imageTexture, alpha, otherInventory.actorX, actorPositionYInPixels,
+					otherInventory.actorX + actorWidth, actorPositionYInPixels + otherGameObject.height * 2);
 			if (otherInventory.size() == 0)
 				this.buttonLootAll.enabled = false;
 			else
