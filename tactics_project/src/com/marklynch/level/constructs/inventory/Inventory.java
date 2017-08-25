@@ -296,7 +296,7 @@ public class Inventory implements Draggable, Scrollable {
 	public void sort(INVENTORY_SORT_BY inventorySortBy, boolean filterFirst, boolean fromSortButtonPress) {
 
 		if (otherInventory != null) {
-			otherInventory.sort(inventorySortBy, filterFirst, fromSortButtonPress);
+			otherInventory.sort(inventorySortBy, filterFirst, false);
 		}
 
 		Button selectedSortButton = null;
@@ -560,13 +560,17 @@ public class Inventory implements Draggable, Scrollable {
 			inventorySquares.add(inventorySquare);
 		}
 
-		int squareAreaHeightInSquares = (int) ((Game.windowHeight - bottomBorderHeight - topBorderHeight)
-				/ Game.INVENTORY_SQUARE_HEIGHT);
-		int squaresRequiredToFillSpace = this.squareGridWidthInSquares * squareAreaHeightInSquares;
-		while (inventorySquares.size() < squaresRequiredToFillSpace) {
-			InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
-			inventorySquares.add(inventorySquare);
-		}
+		// Code to fill up space with empty sqrs
+		// int squareAreaHeightInSquares = (int) ((Game.windowHeight -
+		// bottomBorderHeight - topBorderHeight)
+		// / Game.INVENTORY_SQUARE_HEIGHT);
+		// int squaresRequiredToFillSpace = this.squareGridWidthInSquares *
+		// squareAreaHeightInSquares;
+		// while (inventorySquares.size() < squaresRequiredToFillSpace) {
+		// InventorySquare inventorySquare = new InventorySquare(0, 0, null,
+		// this);
+		// inventorySquares.add(inventorySquare);
+		// }
 
 		resize1();
 	}
@@ -825,6 +829,10 @@ public class Inventory implements Draggable, Scrollable {
 			groundDisplay.drawText();
 		}
 
+		if (otherInventory != null) {
+			otherInventory.drawOtherInventoryText();
+		}
+
 		// Actor
 		int actorPositionXInPixels = this.actorX;
 		int actorPositionYInPixels = 100;
@@ -931,6 +939,17 @@ public class Inventory implements Draggable, Scrollable {
 			else
 				this.buttonLootAll.enabled = true;
 		}
+
+	}
+
+	public void drawOtherInventoryText() {
+
+		System.out.println("drawOtherInventoryText");
+		System.out.println("drawOtherInventoryText gameObjects.size() = " + gameObjects.size());
+		System.out.println("drawOtherInventoryText this.parent = " + this.parent);
+		System.out.println("this.squaresX = " + this.squaresX);
+		if (this.filteredGameObjects.size() > 0)
+			TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true, new Object[] { this.parent });
 
 	}
 
