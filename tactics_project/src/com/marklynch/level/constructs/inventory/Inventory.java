@@ -65,6 +65,8 @@ public class Inventory implements Draggable, Scrollable {
 	private transient boolean isOpen = false;
 	public transient float squaresX = 500;
 	transient final static float squaresBaseY = 100;
+	public final static float inventoryNamesY = 30f;
+
 	transient float squaresY = 100;
 	transient float sortButtonX = 400;
 	transient float sortButtonWidth = 100;
@@ -185,7 +187,7 @@ public class Inventory implements Draggable, Scrollable {
 		});
 		buttonsSort.add(buttonSortBySlashDamage);
 
-		buttonFilterByAll = new LevelButton(sortButtonX + 100f, 50f, 100f, 30f, "end_turn_button.png",
+		buttonFilterByAll = new LevelButton(sortButtonX + 100f, squaresY - 30, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "ALL", true, true, Color.BLACK, Color.WHITE);
 		buttonFilterByAll.setClickListener(new ClickListener() {
 			@Override
@@ -195,7 +197,7 @@ public class Inventory implements Draggable, Scrollable {
 		});
 		buttonsFilter.add(buttonFilterByAll);
 
-		buttonFilterByWeapon = new LevelButton(sortButtonX + 200f, 50f, 100f, 30f, "end_turn_button.png",
+		buttonFilterByWeapon = new LevelButton(sortButtonX + 200f, squaresY - 30, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "WEAPONS", true, true, Color.BLACK, Color.WHITE);
 		buttonFilterByWeapon.setClickListener(new ClickListener() {
 			@Override
@@ -205,7 +207,7 @@ public class Inventory implements Draggable, Scrollable {
 		});
 		buttonsFilter.add(buttonFilterByWeapon);
 
-		buttonFilterByFood = new LevelButton(sortButtonX + 300f, 50f, 100f, 30f, "end_turn_button.png",
+		buttonFilterByFood = new LevelButton(sortButtonX + 300f, squaresY - 30, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "FOOD", true, true, Color.BLACK, Color.WHITE);
 		buttonFilterByFood.setClickListener(new ClickListener() {
 			@Override
@@ -834,7 +836,7 @@ public class Inventory implements Draggable, Scrollable {
 					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
-		TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true, "Your Magic Bag");
+		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, "Your Magic Bag");
 
 		if (groundDisplay != null) {
 			groundDisplay.drawText();
@@ -954,7 +956,8 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void drawOtherInventoryText() {
-		TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true, new Object[] { this.parent });
+		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true,
+				new Object[] { ((GameObject) this.parent).name });
 	}
 
 	public void drawBorder() {
