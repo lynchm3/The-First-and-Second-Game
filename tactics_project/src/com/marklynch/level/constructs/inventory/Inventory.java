@@ -103,6 +103,9 @@ public class Inventory implements Draggable, Scrollable {
 	public GroundDisplay groundDisplay;
 	public Inventory otherInventory;
 
+	public static float squaresWidth;
+	public static float squaresHeight;
+
 	public static WaterSource waterSource;
 	public static Square square;
 	public static Object target;
@@ -585,10 +588,12 @@ public class Inventory implements Draggable, Scrollable {
 		float availablePixelsForSquares = Game.windowWidth
 				- (pixelsToLeftOfSquares + pixelsBetweenSquares + pixelsToRightOfSquares);
 		this.squareGridWidthInSquares = (int) ((availablePixelsForSquares / 2f) / Game.INVENTORY_SQUARE_WIDTH);
-		this.squaresX = pixelsToLeftOfSquares;
-
 		if (this.squareGridWidthInSquares < 1)
 			this.squareGridWidthInSquares = 1;
+		squaresWidth = squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH;
+		this.squaresX = pixelsToLeftOfSquares;
+		squaresHeight = Game.windowHeight - Inventory.topBorderHeight - Inventory.bottomBorderHeight;
+
 		if (otherInventory != null) {
 			otherInventory.squareGridWidthInSquares = this.squareGridWidthInSquares;
 			otherInventory.squaresX = pixelsToLeftOfSquares + (squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH)
@@ -762,6 +767,8 @@ public class Inventory implements Draggable, Scrollable {
 		// Black cover
 		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, 0, Game.windowHeight);
 
+		drawBorder();
+
 		// sqrs
 		drawSquares();
 
@@ -772,6 +779,7 @@ public class Inventory implements Draggable, Scrollable {
 
 		// Other Gameobject / actor inventory squares
 		if (otherInventory != null) {
+			otherInventory.drawBorder();
 			otherInventory.drawSquares();
 		}
 
@@ -947,7 +955,11 @@ public class Inventory implements Draggable, Scrollable {
 
 	public void drawOtherInventoryText() {
 		TextUtils.printTextWithImages(this.squaresX, 80f, 300f, true, new Object[] { this.parent });
+	}
 
+	public void drawBorder() {
+		QuadUtils.drawQuad(Color.DARK_GRAY, squaresX, squaresX + squaresWidth, this.squaresY,
+				this.squaresY + squaresHeight);
 	}
 
 	public void drawSquares() {

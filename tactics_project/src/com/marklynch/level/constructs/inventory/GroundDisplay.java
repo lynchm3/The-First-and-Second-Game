@@ -7,6 +7,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
@@ -90,6 +91,8 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public void drawStaticUI() {
 
+		drawBorder();
+
 		for (GroundDisplaySquare groundDisplaySquare : groundDisplaySquares) {
 			groundDisplaySquare.drawStaticUI();
 		}
@@ -99,6 +102,11 @@ public class GroundDisplay implements Draggable, Scrollable {
 			this.groundDisplaySquareMouseIsOver.drawCursor();
 			this.groundDisplaySquareMouseIsOver.drawAction();
 		}
+	}
+
+	public void drawBorder() {
+		QuadUtils.drawQuad(Color.DARK_GRAY, squaresX, squaresX + Inventory.squaresWidth, this.squaresY,
+				this.squaresY + Inventory.squaresHeight);
 	}
 
 	public void drawText() {
