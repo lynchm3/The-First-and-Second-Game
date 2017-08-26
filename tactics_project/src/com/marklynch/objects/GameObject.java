@@ -795,11 +795,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
-			if (this.inventoryThatHoldsThisObject == performer.inventory)
-				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
-			else
+			if (this.inventoryThatHoldsThisObject != performer.inventory)
 				return new ActionTakeSpecificItem(performer, Inventory.target, this);
-
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
@@ -814,6 +811,24 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			return new ActionUnequip(performer, this);
 		else
 			return new ActionEquip(performer, this);
+
+	}
+
+	public Action getSecondaryActionPerformedOnThisInInventory(Actor performer) {
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_NORMAL) {
+
+			if (this.inventoryThatHoldsThisObject == performer.inventory) {
+				return new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this);
+			}
+
+		}
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
+			if (this.inventoryThatHoldsThisObject == performer.inventory) {
+				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
+			}
+
+		}
+		return null;
 
 	}
 
@@ -842,9 +857,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			return actions;
 		}
 
-		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
-			return actions;
-		}
+		// if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
+		// return actions;
+		// }
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
 			return actions;

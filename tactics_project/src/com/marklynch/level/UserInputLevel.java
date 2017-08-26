@@ -469,6 +469,7 @@ public class UserInputLevel {
 			if (attack) {
 				defaultAction = square.getAttackActionForTheSquareOrObject(Game.level.activeActor);
 			} else if (secondary) {
+				System.out.println("secondary");
 				defaultAction = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor);
 			} else {
 				defaultAction = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);

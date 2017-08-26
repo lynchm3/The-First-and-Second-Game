@@ -3,6 +3,8 @@ package com.marklynch.level.constructs.inventory;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import org.lwjgl.input.Keyboard;
+
 import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
@@ -106,7 +108,12 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action drawAction() {
-		Action defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player);
+		Action defaultAction;
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+			defaultAction = this.getSecondaryActionForTheSquareOrObject(Game.level.player);
+		} else {
+			defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player);
+		}
 		if (defaultAction != null && defaultAction.image != null) {
 			TextureUtils.drawTexture(defaultAction.image, xInPixels + Game.INVENTORY_SQUARE_WIDTH / 2,
 					yInPixels + Game.INVENTORY_SQUARE_HEIGHT / 2, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
@@ -138,6 +145,20 @@ public class InventorySquare extends Square {
 		GameObject targetGameObject = this.gameObject;
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInInventory(performer);
+		}
+		return null;
+	}
+
+	@Override
+	public Action getSecondaryActionForTheSquareOrObject(Actor performer) {
+		// System.out.println("InventorySquare.getDefaultActionForTheSquareOrObject");
+		// System.out.println("this = " + this);
+		// System.out.println("this instanceof GroundDisplaySquare = " + (this
+		// instanceof GroundDisplaySquare));
+		GameObject targetGameObject = this.gameObject;
+		if (targetGameObject != null) {
+			System.out.println("targetGameObject = " + targetGameObject);
+			return targetGameObject.getSecondaryActionPerformedOnThisInInventory(performer);
 		}
 		return null;
 	}
