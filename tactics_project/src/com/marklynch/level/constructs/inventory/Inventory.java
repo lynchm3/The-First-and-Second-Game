@@ -959,12 +959,13 @@ public class Inventory implements Draggable, Scrollable {
 		// Up / down icon on active sort button
 		for (Button sortButton : buttonsSort) {
 			if (sortButton.down) {
+				int sortButtonTextSize = Game.font.getWidth(sortButton.text.toString());
 				if (sortBackwards)
-					TextureUtils.drawTexture(textureUp, sortButton.x - 8, sortButton.y - 8, sortButton.x + 8,
-							sortButton.y + 8);
+					TextureUtils.drawTexture(textureUp, sortButton.x + sortButtonTextSize + 5, sortButton.y + 5,
+							sortButton.x + sortButtonTextSize + 15, sortButton.y + 15);
 				else
-					TextureUtils.drawTexture(textureDown, sortButton.x - 8, sortButton.y - 8, sortButton.x + 8,
-							sortButton.y + 8);
+					TextureUtils.drawTexture(textureDown, sortButton.x + sortButtonTextSize + 5, sortButton.y + 5,
+							sortButton.x + sortButtonTextSize + 15, sortButton.y + 15);
 			}
 		}
 
