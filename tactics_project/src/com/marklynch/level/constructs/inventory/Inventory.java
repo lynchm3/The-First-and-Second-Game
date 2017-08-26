@@ -266,6 +266,7 @@ public class Inventory implements Draggable, Scrollable {
 					}
 					groundDisplay.refreshGameObjects();
 				}
+				Game.level.openCloseInventory();
 			}
 		});
 
