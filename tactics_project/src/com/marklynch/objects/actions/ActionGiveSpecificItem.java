@@ -16,7 +16,7 @@ public class ActionGiveSpecificItem extends Action {
 	boolean logAsTake;
 
 	public ActionGiveSpecificItem(GameObject performer, GameObject receiver, GameObject object, boolean logAsTake) {
-		super(ACTION_NAME, "action_give.png");
+		super(ACTION_NAME, "right.png");
 		this.performer = performer;
 		this.receiver = receiver;
 		this.object = object;

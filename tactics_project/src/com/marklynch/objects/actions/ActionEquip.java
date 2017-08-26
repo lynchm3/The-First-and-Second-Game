@@ -18,7 +18,7 @@ public class ActionEquip extends Action {
 	GameObject gameObject;
 
 	public ActionEquip(Actor performer, GameObject gameObject) {
-		super(ACTION_NAME, "action_equip.png");
+		super(ACTION_NAME, "left.png");
 		this.performer = performer;
 		this.gameObject = gameObject;
 		if (!check()) {

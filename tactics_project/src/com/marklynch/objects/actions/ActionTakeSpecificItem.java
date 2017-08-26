@@ -20,7 +20,7 @@ public class ActionTakeSpecificItem extends Action {
 	GameObject object;
 
 	public ActionTakeSpecificItem(Actor performer, Object target, GameObject object) {
-		super(ACTION_NAME, "action_take.png");
+		super(ACTION_NAME, "left.png");
 		this.performer = performer;
 		this.target = target;
 		if (this.target instanceof Square)
