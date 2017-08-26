@@ -78,12 +78,28 @@ public class Inventory implements Draggable, Scrollable {
 	transient private GameObject selectedGameObject;
 
 	// Sort buttons
+	static LevelButton selectedSortButton;
+	public static String selectedSortButtonString;
+	public static int selectedSortButtonLength;
+
 	static LevelButton buttonSortAlphabetically;
+	public final static String stringSortAlphabetically = "A - Z";
+	public final static int lengthSortAlphabetically = Game.font.getWidth(stringSortAlphabetically);
 	static LevelButton buttonSortByNewest;
+	public final static String stringSortByNewest = "Newest";
+	public final static int lengthSortByNewest = Game.font.getWidth(stringSortByNewest);
 	static LevelButton buttonSortByFavourite;
+	public final static String stringSortByFavourite = "Favorites";
+	public final static int lengthSortByFavourite = Game.font.getWidth(stringSortByFavourite);
 	static LevelButton buttonSortByValue;
+	public final static String stringSortByValue = "Value";
+	public final static int lengthSortByValue = Game.font.getWidth(stringSortByValue);
 	static LevelButton buttonSortByTotalDamage;
+	public final static String stringSortByTotalDamage = "Damage";
+	public final static int lengthSortByTotalDamage = Game.font.getWidth(stringSortByTotalDamage);
 	static LevelButton buttonSortBySlashDamage;
+	public final static String stringSortBySlashDamage = "SLASH DMG";
+	public final static int lengthSortBySlashDamage = Game.font.getWidth(stringSortBySlashDamage);
 
 	// Filter buttons
 	static LevelButton buttonFilterByAll;
@@ -129,7 +145,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsFilter = new ArrayList<Button>();
 
 		buttonSortAlphabetically = new LevelButton(sortButtonX, 100f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", "SORT A-Z", true, true, Color.BLACK, Color.WHITE);
+				"end_turn_button.png", stringSortAlphabetically, true, true, Color.BLACK, Color.WHITE);
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -139,7 +155,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortAlphabetically);
 
 		buttonSortByNewest = new LevelButton(sortButtonX, 150f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", "NEWEST", true, true, Color.BLACK, Color.WHITE);
+				"end_turn_button.png", stringSortByNewest, true, true, Color.BLACK, Color.WHITE);
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -149,7 +165,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortByNewest);
 
 		buttonSortByFavourite = new LevelButton(sortButtonX, 200f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", "FAVOURITES", true, true, Color.BLACK, Color.WHITE);
+				"end_turn_button.png", stringSortByFavourite, true, true, Color.BLACK, Color.WHITE);
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -159,7 +175,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortByFavourite);
 
 		buttonSortByValue = new LevelButton(sortButtonX, 250f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", "VALUE", true, true, Color.BLACK, Color.WHITE);
+				"end_turn_button.png", stringSortByValue, true, true, Color.BLACK, Color.WHITE);
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -169,7 +185,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortByValue);
 
 		buttonSortByTotalDamage = new LevelButton(sortButtonX, 300f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", "DAMAGE", true, true, Color.BLACK, Color.WHITE);
+				"end_turn_button.png", stringSortByTotalDamage, true, true, Color.BLACK, Color.WHITE);
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -179,7 +195,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortByTotalDamage);
 
 		buttonSortBySlashDamage = new LevelButton(sortButtonX, 350f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", "SLASH", true, true, Color.BLACK, Color.WHITE);
+				"end_turn_button.png", stringSortBySlashDamage, true, true, Color.BLACK, Color.WHITE);
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -305,20 +321,32 @@ public class Inventory implements Draggable, Scrollable {
 			otherInventory.sort(inventorySortBy, filterFirst, false);
 		}
 
-		Button selectedSortButton = null;
+		// Button selectedSortButton = null;
 
 		if (inventorySortBy == INVENTORY_SORT_BY.SORT_ALPHABETICALLY) {
 			selectedSortButton = buttonSortAlphabetically;
+			selectedSortButtonString = stringSortAlphabetically;
+			selectedSortButtonLength = lengthSortAlphabetically;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_NEWEST) {
 			selectedSortButton = buttonSortByNewest;
+			selectedSortButtonString = stringSortByNewest;
+			selectedSortButtonLength = lengthSortByNewest;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_VALUE) {
 			selectedSortButton = buttonSortByValue;
+			selectedSortButtonString = stringSortByValue;
+			selectedSortButtonLength = lengthSortByValue;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_FAVOURITE) {
 			selectedSortButton = buttonSortByFavourite;
+			selectedSortButtonString = stringSortByFavourite;
+			selectedSortButtonLength = lengthSortByFavourite;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE) {
 			selectedSortButton = buttonSortByTotalDamage;
+			selectedSortButtonString = stringSortByTotalDamage;
+			selectedSortButtonLength = lengthSortByTotalDamage;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE) {
 			selectedSortButton = buttonSortBySlashDamage;
+			selectedSortButtonString = stringSortBySlashDamage;
+			selectedSortButtonLength = lengthSortBySlashDamage;
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_BLUNT_DAMAGE) {
 
 		} else if (inventorySortBy == INVENTORY_SORT_BY.SORT_BY_PIERCE_DAMAGE) {
@@ -957,17 +985,14 @@ public class Inventory implements Draggable, Scrollable {
 		}
 
 		// Up / down icon on active sort button
-		for (Button sortButton : buttonsSort) {
-			if (sortButton.down) {
-				int sortButtonTextSize = Game.font.getWidth(sortButton.text.toString());
-				if (sortBackwards)
-					TextureUtils.drawTexture(textureUp, sortButton.x + sortButtonTextSize + 5, sortButton.y + 5,
-							sortButton.x + sortButtonTextSize + 15, sortButton.y + 15);
-				else
-					TextureUtils.drawTexture(textureDown, sortButton.x + sortButtonTextSize + 5, sortButton.y + 5,
-							sortButton.x + sortButtonTextSize + 15, sortButton.y + 15);
-			}
-		}
+		if (sortBackwards)
+			TextureUtils.drawTexture(textureUp, selectedSortButton.x + selectedSortButtonLength + 5,
+					selectedSortButton.y + 5, selectedSortButton.x + selectedSortButtonLength + 15,
+					selectedSortButton.y + 15);
+		else
+			TextureUtils.drawTexture(textureDown, selectedSortButton.x + selectedSortButtonLength + 5,
+					selectedSortButton.y + 5, selectedSortButton.x + selectedSortButtonLength + 15,
+					selectedSortButton.y + 15);
 
 		// Up / down icon on active sort button
 		for (Button filterButton : buttonsFilter) {
