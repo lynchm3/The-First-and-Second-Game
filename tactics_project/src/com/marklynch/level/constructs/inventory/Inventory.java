@@ -818,6 +818,14 @@ public class Inventory implements Draggable, Scrollable {
 		// Ground display sqrs
 		if (groundDisplay != null) {
 			groundDisplay.drawStaticUI();
+			if (groundDisplay.gameObjects.size() > 0) {
+				groundDisplay.drawSquares();
+			} else {
+				float emptyStringX = groundDisplay.squaresX + this.squaresWidth / 2 - GroundDisplay.lengthEmpty / 2;
+				float emptyStringY = groundDisplay.squaresY + this.squaresHeight / 2 - 10;
+				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
+						new Object[] { GroundDisplay.stringEmpty });
+			}
 		}
 
 		// Other Gameobject / actor inventory squares
