@@ -106,6 +106,10 @@ public class Inventory implements Draggable, Scrollable {
 	static LevelButton buttonFilterByWeapon;
 	static LevelButton buttonFilterByFood;
 
+	// Empty text
+	public static final String stringEmpty = "Nothing here";
+	public static final int lengthEmpty = Game.font.getWidth(stringEmpty);
+
 	// Close button
 	static LevelButton buttonClose;
 
@@ -819,7 +823,14 @@ public class Inventory implements Draggable, Scrollable {
 		// Other Gameobject / actor inventory squares
 		if (otherInventory != null) {
 			otherInventory.drawBorder();
-			otherInventory.drawSquares();
+			if (otherInventory.size() > 0) {
+				otherInventory.drawSquares();
+			} else {
+				float emptyStringX = otherInventory.squaresX + otherInventory.squaresWidth / 2 - lengthEmpty / 2;
+				float emptyStringY = otherInventory.squaresY + otherInventory.squaresHeight / 2 - 10;
+				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
+						new Object[] { stringEmpty });
+			}
 		}
 
 		// cursor and action over squares
