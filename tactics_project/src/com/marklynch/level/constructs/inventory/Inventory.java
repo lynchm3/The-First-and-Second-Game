@@ -86,16 +86,16 @@ public class Inventory implements Draggable, Scrollable {
 	public final static String stringSortAlphabetically = "A - Z";
 	public final static int lengthSortAlphabetically = Game.font.getWidth(stringSortAlphabetically);
 	static LevelButton buttonSortByNewest;
-	public final static String stringSortByNewest = "Newest";
+	public final static String stringSortByNewest = "NEW";
 	public final static int lengthSortByNewest = Game.font.getWidth(stringSortByNewest);
 	static LevelButton buttonSortByFavourite;
-	public final static String stringSortByFavourite = "Favorites";
+	public final static String stringSortByFavourite = "FAV";
 	public final static int lengthSortByFavourite = Game.font.getWidth(stringSortByFavourite);
 	static LevelButton buttonSortByValue;
-	public final static String stringSortByValue = "Value";
+	public final static String stringSortByValue = "VALUE";
 	public final static int lengthSortByValue = Game.font.getWidth(stringSortByValue);
 	static LevelButton buttonSortByTotalDamage;
-	public final static String stringSortByTotalDamage = "Damage";
+	public final static String stringSortByTotalDamage = "DMG";
 	public final static int lengthSortByTotalDamage = Game.font.getWidth(stringSortByTotalDamage);
 	static LevelButton buttonSortBySlashDamage;
 	public final static String stringSortBySlashDamage = "SLASH DMG";
@@ -107,8 +107,11 @@ public class Inventory implements Draggable, Scrollable {
 	static LevelButton buttonFilterByFood;
 
 	// Empty text
-	public static final String stringEmpty = "Nothing here";
+	public static final String stringEmpty = "Empty";
 	public static final int lengthEmpty = Game.font.getWidth(stringEmpty);
+
+	// Color beind inventory squares
+	public final static Color inventoryAreaColor = new Color(1f, 1f, 1f, 0.25f);
 
 	// Close button
 	static LevelButton buttonClose;
@@ -135,6 +138,7 @@ public class Inventory implements Draggable, Scrollable {
 	public static Texture textureDown;
 	public static Texture textureCorner;
 	public static Texture textureFilter;
+	public static Texture textureBag;
 
 	public Inventory(GameObject... gameObjects) {
 		for (GameObject gameObject : gameObjects) {
@@ -488,6 +492,7 @@ public class Inventory implements Draggable, Scrollable {
 		textureDown = ResourceUtils.getGlobalImage("inventory_down.png");
 		textureCorner = ResourceUtils.getGlobalImage("inventory_corner.png");
 		textureFilter = ResourceUtils.getGlobalImage("filter.png");
+		textureBag = ResourceUtils.getGlobalImage("bag.png");
 	}
 
 	public GameObject get(int i) {
@@ -812,6 +817,12 @@ public class Inventory implements Draggable, Scrollable {
 
 		drawBorder();
 
+		// Draw bag textureBag
+		float bagTextureX = this.squaresX + Inventory.squaresWidth / 2 - textureBag.getWidth();
+		float bagTextureY = this.squaresY + Inventory.squaresHeight / 2 - textureBag.getHeight();
+		TextureUtils.drawTexture(textureBag, 0.5f, bagTextureX, bagTextureY, bagTextureX + textureBag.getWidth() * 2,
+				bagTextureY + textureBag.getHeight() * 2);
+
 		// sqrs
 		drawSquares();
 
@@ -823,6 +834,8 @@ public class Inventory implements Draggable, Scrollable {
 			} else {
 				float emptyStringX = groundDisplay.squaresX + this.squaresWidth / 2 - GroundDisplay.lengthEmpty / 2;
 				float emptyStringY = groundDisplay.squaresY + this.squaresHeight / 2 - 10;
+				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringX + GroundDisplay.lengthEmpty + 8,
+						emptyStringY - 8, emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
 						new Object[] { GroundDisplay.stringEmpty });
 			}
@@ -831,14 +844,30 @@ public class Inventory implements Draggable, Scrollable {
 		// Other Gameobject / actor inventory squares
 		if (otherInventory != null) {
 			otherInventory.drawBorder();
+			// Actor
+			GameObject otherGameObject = (GameObject) target;
+			// TextureUtils.drawTexture(otherGameObject.imageTexture, alpha,
+			// otherInventory.actorX, actorPositionYInPixels,
+			// otherInventory.actorX + actorWidth, actorPositionYInPixels +
+			// otherGameObject.height * 2);
+			float otherTextureX = otherInventory.squaresX + otherInventory.squaresWidth / 2 - (otherGameObject.width);
+			float otherTextureY = otherInventory.squaresY + otherInventory.squaresHeight / 2 - (otherGameObject.height);
+			TextureUtils.drawTexture(otherGameObject.imageTexture, 0.5f, otherTextureX, otherTextureY,
+					otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);
 			if (otherInventory.size() > 0) {
 				otherInventory.drawSquares();
 			} else {
 				float emptyStringX = otherInventory.squaresX + otherInventory.squaresWidth / 2 - lengthEmpty / 2;
 				float emptyStringY = otherInventory.squaresY + otherInventory.squaresHeight / 2 - 10;
+				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringX + lengthEmpty + 8, emptyStringY - 8,
+						emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
 						new Object[] { stringEmpty });
 			}
+			if (otherInventory.size() == 0)
+				this.buttonLootAll.enabled = false;
+			else
+				this.buttonLootAll.enabled = true;
 		}
 
 		// cursor and action over squares
@@ -875,7 +904,7 @@ public class Inventory implements Draggable, Scrollable {
 					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
-		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, "Your Magic Bag");
+		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, "Bag");
 
 		if (groundDisplay != null) {
 			groundDisplay.drawText();
@@ -887,7 +916,8 @@ public class Inventory implements Draggable, Scrollable {
 
 		// Actor
 		int actorPositionXInPixels = this.actorX;
-		int actorPositionYInPixels = 100;
+		int actorPositionYInPixels = (int) (squaresY + squaresHeight / 2
+				- (Game.level.player.imageTexture.getHeight()));
 		float alpha = 1.0f;
 		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 				actorPositionXInPixels + actorWidth, actorPositionYInPixels + Game.level.player.height * 2);
@@ -979,18 +1009,6 @@ public class Inventory implements Draggable, Scrollable {
 			int comparisonPositionYInPixels = 250;
 		}
 
-		// Other Gameobject / actor
-		if (otherInventory != null) {
-			// Actor
-			GameObject otherGameObject = (GameObject) target;
-			TextureUtils.drawTexture(otherGameObject.imageTexture, alpha, otherInventory.actorX, actorPositionYInPixels,
-					otherInventory.actorX + actorWidth, actorPositionYInPixels + otherGameObject.height * 2);
-			if (otherInventory.size() == 0)
-				this.buttonLootAll.enabled = false;
-			else
-				this.buttonLootAll.enabled = true;
-		}
-
 		// Top left corner
 		// TextureUtils.drawTexture(textureCorner, squaresX - 100, squaresY -
 		// 100, squaresX, squaresY);
@@ -1029,7 +1047,7 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void drawBorder() {
-		QuadUtils.drawQuad(Color.DARK_GRAY, squaresX, squaresX + squaresWidth, this.squaresY,
+		QuadUtils.drawQuad(inventoryAreaColor, squaresX, squaresX + squaresWidth, this.squaresY,
 				this.squaresY + squaresHeight);
 	}
 

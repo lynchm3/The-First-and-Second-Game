@@ -106,7 +106,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 	}
 
 	public void drawBorder() {
-		QuadUtils.drawQuad(Color.DARK_GRAY, squaresX, squaresX + Inventory.squaresWidth, this.squaresY,
+		QuadUtils.drawQuad(Inventory.inventoryAreaColor, squaresX, squaresX + Inventory.squaresWidth, this.squaresY,
 				this.squaresY + Inventory.squaresHeight);
 	}
 
