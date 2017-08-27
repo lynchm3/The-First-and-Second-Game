@@ -592,11 +592,23 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+		if (this.canContainOtherObjects && !this.canShareSquare)
+			return new ActionLootItemsInOtherInventory(performer, this);
 		return null;
 	}
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+
+		if (this instanceof Chest) {
+			System.out.println("getSecondaryActionPerformedOnThisInWorld");
+			System.out.println("getSecondaryActionPerformedOnThisInWorld this.canContainOtherObjects = "
+					+ this.canContainOtherObjects);
+			System.out.println(
+					"getSecondaryActionPerformedOnThisInWorld this.inventory.size() = " + this.inventory.size());
+		}
+		if (this.canContainOtherObjects && this.inventory.size() > 0)
+			return new ActionLootItemsInOtherInventory(performer, this);
 		if (this.fitsInInventory)
 			return new ActionTakeSpecificItem(performer, this.squareGameObjectIsOn, this);
 		return null;
