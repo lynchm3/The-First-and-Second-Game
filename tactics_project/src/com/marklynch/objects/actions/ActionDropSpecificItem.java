@@ -17,7 +17,7 @@ public class ActionDropSpecificItem extends Action {
 	GameObject object;
 
 	public ActionDropSpecificItem(GameObject performer, Square square, GameObject object) {
-		super(ACTION_NAME, "right.png");
+		super(ACTION_NAME, "down.png");
 		this.performer = performer;
 		this.square = square;
 		this.object = object;

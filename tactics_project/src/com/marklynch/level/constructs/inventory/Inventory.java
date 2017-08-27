@@ -110,6 +110,14 @@ public class Inventory implements Draggable, Scrollable {
 	public static final String stringEmpty = "Empty";
 	public static final int lengthEmpty = Game.font.getWidth(stringEmpty);
 
+	// SHIFT text
+	String stringShiftDrop = "[SHIFT] Drop";
+	int lengthShiftDrop = Game.font.getWidth(stringShiftDrop);
+	String stringShiftPut = "[SHIFT] Put";
+	int lengthShiftPut = Game.font.getWidth(stringShiftPut);
+
+	float textShiftX = 0;
+
 	// Color beind inventory squares
 	public final static Color inventoryAreaColor = new Color(1f, 1f, 1f, 0.25f);
 
@@ -657,6 +665,7 @@ public class Inventory implements Draggable, Scrollable {
 		fixScroll();
 		resize2();
 		buttonClose.x = squaresX;
+		textShiftX = squaresX + buttonClose.width;
 
 		if (this.groundDisplay != null) {
 			this.groundDisplay.fixScroll();
@@ -830,6 +839,8 @@ public class Inventory implements Draggable, Scrollable {
 		// Ground display sqrs
 		if (groundDisplay != null) {
 			groundDisplay.drawStaticUI();
+			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
+					new Object[] { stringShiftDrop });
 			if (groundDisplay.gameObjects.size() > 0) {
 				groundDisplay.drawSquares();
 			} else {
@@ -845,6 +856,8 @@ public class Inventory implements Draggable, Scrollable {
 		// Other Gameobject / actor inventory squares
 		if (otherInventory != null) {
 			otherInventory.drawBorder();
+			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
+					new Object[] { stringShiftPut });
 			// Actor
 			GameObject otherGameObject = (GameObject) target;
 			// TextureUtils.drawTexture(otherGameObject.imageTexture, alpha,
@@ -883,6 +896,17 @@ public class Inventory implements Draggable, Scrollable {
 		// Bottom border black mask
 		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, Game.windowHeight - bottomBorderHeight,
 				Game.windowHeight);
+
+		// [SHIFT]
+		if (groundDisplay != null) {
+			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
+					new Object[] { stringShiftDrop });
+		}
+
+		if (otherInventory != null) {
+			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
+					new Object[] { stringShiftPut });
+		}
 
 		// text
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
