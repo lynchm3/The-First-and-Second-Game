@@ -9,7 +9,7 @@ import com.marklynch.ui.ActivityLog;
 public class ActionGiveSpecificItem extends Action {
 
 	public static final String ACTION_NAME = "Give";
-	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
+	public static final String ACTION_NAME_DISABLED = "(can't reach)";
 	GameObject performer;
 	GameObject receiver;
 	GameObject object;
@@ -17,15 +17,17 @@ public class ActionGiveSpecificItem extends Action {
 
 	public ActionGiveSpecificItem(GameObject performer, GameObject receiver, GameObject object, boolean logAsTake) {
 		super(ACTION_NAME, "right.png");
+		if (!(receiver instanceof Actor))
+			this.actionName = "Put";
 		this.performer = performer;
 		this.receiver = receiver;
 		this.object = object;
 		this.logAsTake = logAsTake;
 		if (!check()) {
 			enabled = false;
-			actionName = ACTION_NAME_DISABLED;
+			actionName = actionName + ACTION_NAME_DISABLED;
 		} else {
-			actionName = ACTION_NAME + " " + object.name;
+			actionName = actionName + " " + object.name;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -41,8 +43,10 @@ public class ActionGiveSpecificItem extends Action {
 			if (logAsTake)
 				Game.level
 						.logOnScreen(new ActivityLog(new Object[] { receiver, " took ", object, " from ", performer }));
-			else
+			else if (receiver instanceof Actor)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " gave ", object, " to ", receiver }));
+			else
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " put ", object, " in ", receiver }));
 		performer.inventory.remove(object);
 
 		if (performer instanceof Actor) {

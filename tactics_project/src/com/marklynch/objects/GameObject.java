@@ -877,12 +877,19 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			return actions;
 		}
 
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
+			return actions;
+		}
+
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
 				|| performer.legArmor == this)
 			actions.add(new ActionUnequip(performer, this));
 		else
 			actions.add(new ActionEquip(performer, this));
 
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
+			actions.add(new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false));
+		}
 		actions.add(new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this));
 
 		// actions.add(new ActionThrow(performer, this, performer.equipped));
