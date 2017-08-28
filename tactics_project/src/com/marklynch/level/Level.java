@@ -425,10 +425,7 @@ public class Level {
 			@Override
 			public void click() {
 				cameraFollow = true;
-				Game.dragX = (-Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH)
-						+ Game.halfWindowWidth - Game.HALF_SQUARE_WIDTH;
-				Game.dragY = (-Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT)
-						+ Game.halfWindowHeight - Game.HALF_SQUARE_HEIGHT;
+				centerToPlayer = true;
 			}
 		});
 		centerButton.enabled = true;
@@ -507,6 +504,7 @@ public class Level {
 	boolean zoomToMap;
 	boolean zoomFromMap;
 	int nonMapZoomLevelIndex;
+	boolean centerToPlayer;
 
 	public void openCloseInventory() {
 		if (Game.level.openInventories.size() > 0) {
@@ -1276,6 +1274,30 @@ public class Level {
 				Game.zoomLevelIndex = Game.lastZoomLevelIndex = nonMapZoomLevelIndex;
 				Game.zoom = Game.zoomLevels[nonMapZoomLevelIndex];
 				zoomFromMap = false;
+			}
+		}
+
+		// update map zoom animation
+		if (centerToPlayer) {
+
+			float idealDragX = (-Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH)
+					+ Game.halfWindowWidth - Game.HALF_SQUARE_WIDTH;
+			float idealDragY = (-Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT)
+					+ Game.halfWindowHeight - Game.HALF_SQUARE_HEIGHT;
+
+			float diffX = idealDragX - Game.dragX;
+			float diffY = idealDragY - Game.dragY;
+			float totalDiff = Math.abs(diffX) + Math.abs(diffY);
+
+			if (totalDiff <= delta * 16f) {
+				Game.dragX = idealDragX;
+				Game.dragY = idealDragY;
+				centerToPlayer = false;
+			} else {
+				float toMoveX = diffX / totalDiff;
+				float toMoveY = diffY / totalDiff;
+				Game.dragX += toMoveX * delta * 16f;
+				Game.dragY += toMoveY * delta * 16f;
 			}
 		}
 

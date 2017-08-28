@@ -202,6 +202,7 @@ public class UserInputLevel {
 					Game.dragY = Game.getDragYWithOffset();
 				}
 				Game.level.cameraFollow = false;
+				Game.level.centerToPlayer = false;
 
 				if (draggableMouseIsOver != null) {
 
