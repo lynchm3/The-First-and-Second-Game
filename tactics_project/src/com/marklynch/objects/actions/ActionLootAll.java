@@ -17,11 +17,15 @@ public class ActionLootAll extends Action {
 
 	Actor performer;
 	GameObject container;
+	ActionOpen actionOpen;
 
 	public ActionLootAll(Actor performer, GameObject container) {
 		super(ACTION_NAME, "action_loot_all.png");
 		this.performer = performer;
 		this.container = container;
+		if (container instanceof Openable && !((Openable) container).isOpen()) {
+			actionOpen = new ActionOpen(performer, (Openable) container);
+		}
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -36,11 +40,8 @@ public class ActionLootAll extends Action {
 		if (!enabled)
 			return;
 
-		if (container instanceof Openable) {
-			Openable openable = (Openable) container;
-			if (!openable.isOpen()) {
-				openable.open();
-			}
+		if (actionOpen != null) {
+			actionOpen.perform();
 		}
 
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
@@ -84,6 +85,11 @@ public class ActionLootAll extends Action {
 
 	@Override
 	public boolean check() {
+
+		if (actionOpen != null) {
+			return actionOpen.check();
+		}
+
 		if (performer.straightLineDistanceTo(container.squareGameObjectIsOn) < 2) {
 			return true;
 		}
@@ -92,6 +98,11 @@ public class ActionLootAll extends Action {
 
 	@Override
 	public boolean checkLegality() {
+		if (actionOpen != null) {
+			if (!actionOpen.legal)
+				return false;
+		}
+
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) container.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {
 			if (gameObjectToLoot.owner != null && gameObjectToLoot.owner != performer)
