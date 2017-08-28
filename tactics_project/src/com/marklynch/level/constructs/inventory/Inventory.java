@@ -49,6 +49,7 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public static transient INVENTORY_FILTER_BY inventoryFilterBy = INVENTORY_FILTER_BY.FILTER_BY_ALL;
+	private static INVENTORY_FILTER_BY lastInventoryFilterBy = null;
 
 	public enum INVENTORY_MODE {
 		MODE_NORMAL, MODE_SELECT_ITEM_TO_FILL, MODE_SELECT_ITEM_TO_DROP, MODE_SELECT_ITEM_TO_THROW, MODE_SELECT_ITEM_TO_GIVE, MODE_SELECT_ITEM_TO_POUR, MODE_SELECT_MAP_MARKER, MODE_TRADE, MODE_LOOT
@@ -321,6 +322,10 @@ public class Inventory implements Draggable, Scrollable {
 
 	public void close() {
 		this.isOpen = false;
+		if (Inventory.lastInventoryFilterBy != null) {
+			Inventory.inventoryFilterBy = lastInventoryFilterBy;
+		}
+
 		if (Game.level.openInventories.contains(this))
 			Game.level.openInventories.remove(this);
 		this.inventorySquares = new ArrayList<InventorySquare>();
@@ -417,8 +422,13 @@ public class Inventory implements Draggable, Scrollable {
 
 	public void filter(INVENTORY_FILTER_BY inventoryFilterBy, boolean temporary) {
 
-		if (!temporary)
+		if (temporary && inventoryFilterBy != Inventory.inventoryFilterBy) {
+			Inventory.lastInventoryFilterBy = Inventory.inventoryFilterBy;
 			Inventory.inventoryFilterBy = inventoryFilterBy;
+		} else if (inventoryFilterBy != Inventory.inventoryFilterBy) {
+			Inventory.inventoryFilterBy = inventoryFilterBy;
+			Inventory.lastInventoryFilterBy = null;
+		}
 		for (Button button : buttonsFilter)
 			button.down = false;
 		if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
