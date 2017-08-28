@@ -1,7 +1,5 @@
 package com.marklynch.objects;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
@@ -40,21 +38,6 @@ public class Carcass extends GameObject {
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 		return new ActionSkin(performer, this);
-	}
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-
-		if (this.remainingHealth <= 0)
-			return actions;
-
-		actions.add(new ActionSkin(performer, this));
-
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-
-		return actions;
-
 	}
 
 	public Carcass makeCopy(String name, Square square, Actor owner, float weight) {

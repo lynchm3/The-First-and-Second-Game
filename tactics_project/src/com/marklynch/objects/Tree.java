@@ -144,21 +144,6 @@ public class Tree extends GameObject {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-
-		if (this.remainingHealth <= 0)
-			return actions;
-
-		actions.add(new ActionChop(performer, this));
-
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-
-		return actions;
-
-	}
-
-	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 		return new ActionChop(performer, this);
 	}

@@ -21,21 +21,35 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionChangeAppearance;
+import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionEquip;
+import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
 import com.marklynch.objects.actions.ActionFollow;
 import com.marklynch.objects.actions.ActionGiveItemsInInventory;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
+import com.marklynch.objects.actions.ActionHide;
+import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionLootItemsInOtherInventory;
+import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionPeek;
 import com.marklynch.objects.actions.ActionPickUp;
+import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionPourSpecificItem;
+import com.marklynch.objects.actions.ActionRead;
+import com.marklynch.objects.actions.ActionRemoveMapMarker;
+import com.marklynch.objects.actions.ActionRename;
+import com.marklynch.objects.actions.ActionSearch;
+import com.marklynch.objects.actions.ActionSkin;
+import com.marklynch.objects.actions.ActionSmash;
+import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.actions.ActionTeleportOther;
@@ -44,6 +58,7 @@ import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.actions.ActionTradeItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionUnlock;
+import com.marklynch.objects.actions.ActionUse;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -618,6 +633,75 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (this.remainingHealth <= 0)
 			return actions;
+
+		// Inspectable
+		if (this instanceof Inspectable) {
+			actions.add(new ActionInspect(performer, this));
+			actions.add(new ActionPin(performer, this));
+			return actions;
+		}
+
+		// Map Marker
+		if (this instanceof MapMarker) {
+			actions.add(new ActionInspect(performer, this));
+			actions.add(new ActionRename(this));
+			actions.add(new ActionChangeAppearance(this));
+			actions.add(new ActionRemoveMapMarker(this));
+			return actions;
+		}
+
+		// Water Source
+		if (this instanceof WaterSource) {
+			actions.add(new ActionFillContainersInInventory(performer, (WaterSource) this));
+			return actions;
+		}
+
+		// Skinnable
+		if (this instanceof Carcass) {
+			actions.add(new ActionSkin(performer, this));
+		}
+
+		// Readable
+		if (this instanceof Readable) {
+			actions.add(new ActionRead(performer, this));
+		}
+
+		// Hiding place
+		if (this instanceof HidingPlace) {
+			HidingPlace hidingPlace = (HidingPlace) this;
+			if (performer.hiding && performer.squareGameObjectIsOn == this.squareGameObjectIsOn) {
+				actions.add(new ActionStopHiding(performer, hidingPlace));
+			} else {
+				actions.add(new ActionHide(performer, hidingPlace));
+			}
+		}
+
+		// Searchable
+		if (this instanceof Searchable) {
+			actions.add(new ActionSearch(performer, (Searchable) this));
+		}
+
+		// Tree and stump
+		if (this instanceof Stump || this instanceof Tree) {
+			actions.add(new ActionChop(performer, this));
+		}
+
+		// Switch
+		if (this instanceof Switch) {
+			Switch zwitch = (Switch) this;
+			actions.add(
+					new ActionUse(performer, zwitch, zwitch.actionName, zwitch.actionVerb, zwitch.requirementsToMeet));
+		}
+
+		// Vein
+		if (this instanceof Vein) {
+			actions.add(new ActionMine(performer, this));
+		}
+
+		// Window
+		if (this instanceof Window) {
+			actions.add(new ActionSmash(performer, this));
+		}
 
 		// Loot
 		if (!decorative && this.canContainOtherObjects && !(this instanceof Actor)) {

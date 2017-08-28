@@ -1,12 +1,8 @@
 package com.marklynch.objects;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
@@ -95,19 +91,6 @@ public class Window extends GameObjectExploder {
 
 	@Override
 	public void draw3() {
-	}
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-
-		if (this.remainingHealth <= 0)
-			return actions;
-
-		actions.add(new ActionSmash(performer, this));
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-		return actions;
-
 	}
 
 	@Override

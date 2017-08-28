@@ -1,7 +1,5 @@
 package com.marklynch.objects;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.squares.Square;
@@ -60,14 +58,6 @@ public class Readable extends GameObject {
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 		return new ActionRead(performer, this);
-	}
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionRead(performer, this));
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-		return actions;
 	}
 
 	@Override

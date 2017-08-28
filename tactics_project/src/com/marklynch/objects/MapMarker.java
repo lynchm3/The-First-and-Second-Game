@@ -7,9 +7,6 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionChangeAppearance;
-import com.marklynch.objects.actions.ActionInspect;
-import com.marklynch.objects.actions.ActionRemoveMapMarker;
-import com.marklynch.objects.actions.ActionRename;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
@@ -57,17 +54,6 @@ public class MapMarker extends GameObject {
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = true;
 		attackable = false;
-	}
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionInspect(performer, this));
-		actions.add(new ActionRename(this));
-		actions.add(new ActionChangeAppearance(this));
-		actions.add(new ActionRemoveMapMarker(this));
-		return actions;
-
 	}
 
 	@Override

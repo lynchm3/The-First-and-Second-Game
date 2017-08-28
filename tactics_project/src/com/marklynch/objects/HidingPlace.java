@@ -41,34 +41,6 @@ public class HidingPlace extends Searchable {
 	}
 
 	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-
-		if (this.remainingHealth <= 0)
-			return actions;
-
-		if (performer.hiding && performer.squareGameObjectIsOn == this.squareGameObjectIsOn) {
-			actions.add(new ActionStopHiding(performer, this));
-		} else {
-			actions.add(new ActionHide(performer, this));
-		}
-
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-
-		// if (performer.equipped != null) {
-		// if (performer.straightLineDistanceTo(this.squareGameObjectIsOn) < 2)
-		// {
-		// actions.add(new ActionDrop(performer, this.squareGameObjectIsOn,
-		// performer.equipped));
-		// }
-		// actions.add(new ActionThrow(performer, this, performer.equipped));
-		// }
-
-		return actions;
-
-	}
-
-	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 		return new ActionHide(performer, this);
 	}

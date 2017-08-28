@@ -2,8 +2,6 @@ package com.marklynch.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
@@ -206,21 +204,6 @@ public class Vein extends Wall {
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 		return new ActionMine(performer, this);
-	}
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-
-		if (this.remainingHealth <= 0)
-			return actions;
-
-		actions.add(new ActionMine(performer, this));
-
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-
-		return actions;
-
 	}
 
 	@Override

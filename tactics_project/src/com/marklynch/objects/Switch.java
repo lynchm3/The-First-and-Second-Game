@@ -1,12 +1,8 @@
 package com.marklynch.objects;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionUse;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -42,13 +38,5 @@ public abstract class Switch extends GameObject {
 	}
 
 	public abstract void use();
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionUse(performer, this, actionName, actionVerb, requirementsToMeet));
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-		return actions;
-	}
 
 }
