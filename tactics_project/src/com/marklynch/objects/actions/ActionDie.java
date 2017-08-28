@@ -129,9 +129,7 @@ public class ActionDie extends Action {
 			// add a carcass
 
 			GameObject body = null;
-			if (performer instanceof RockGolem)
-
-			{
+			if (performer instanceof RockGolem) {
 				Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
 				Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
 				Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
@@ -139,7 +137,10 @@ public class ActionDie extends Action {
 				Templates.ROCK.makeCopy(performer.squareGameObjectIsOn, null);
 			} else if (performer.destroyedBy instanceof EffectBurning) {
 				// Death by fire
-				body = Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
+				Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
+				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
+					new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, gameObject).perform();
+				}
 			} else if (performer.destroyedByAction instanceof ActionSquash) {
 				// Deat by squashing
 				body = Templates.BLOODY_PULP.makeCopy(performer.squareGameObjectIsOn, null);
