@@ -904,6 +904,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public ArrayList<Action> getAllActionsPerformedOnThisInOtherInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		actions.add(new ActionTakeSpecificItem(performer, Inventory.target, this));
+
+		System.out.println("take " + ", " + performer + ", " + Inventory.target + ", " + this);
+
 		actions.add(new ActionEquip(performer, this));
 		return actions;
 	}
