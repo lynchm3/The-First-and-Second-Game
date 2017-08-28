@@ -189,6 +189,11 @@ public class ActionDie extends Action {
 				// null);
 			}
 
+			for (GameObject gameObject : performer.inventory.gameObjects) {
+				Game.level.inanimateObjectsToAdd
+						.add(new InanimateObjectToAddOrRemove(gameObject, performer.squareGameObjectIsOn));
+			}
+
 		}
 	}
 
