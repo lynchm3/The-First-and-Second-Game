@@ -18,7 +18,6 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.power.Power;
@@ -44,7 +43,6 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.SquareInventory;
-import com.marklynch.objects.Templates;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
@@ -1566,11 +1564,12 @@ public class Level {
 				}
 			}
 			for (GameObject gameObject : toRemove) {
-				if (gameObject.destroyedBy instanceof EffectBurning) {
-					player.inventory.replace(gameObject, Templates.ASH.makeCopy(null, player));
-				} else {
-					player.inventory.remove(gameObject);
-				}
+				// if (gameObject.destroyedBy instanceof EffectBurning) {
+				// player.inventory.replace(gameObject,
+				// Templates.ASH.makeCopy(null, player));
+				// } else {
+				player.inventory.remove(gameObject);
+				// }
 			}
 
 			popupToasts.clear();
