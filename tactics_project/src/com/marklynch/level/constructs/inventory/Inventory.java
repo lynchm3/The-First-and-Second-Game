@@ -829,7 +829,7 @@ public class Inventory implements Draggable, Scrollable {
 
 		// Draw bag textureBag
 		float bagTextureX = this.squaresX + Inventory.squaresWidth / 2 - textureBag.getWidth();
-		float bagTextureY = this.squaresY + Inventory.squaresHeight / 2 - textureBag.getHeight();
+		float bagTextureY = this.squaresBaseY + Inventory.squaresHeight / 2 - textureBag.getHeight();
 		TextureUtils.drawTexture(textureBag, 0.5f, bagTextureX, bagTextureY, bagTextureX + textureBag.getWidth() * 2,
 				bagTextureY + textureBag.getHeight() * 2);
 
@@ -865,7 +865,8 @@ public class Inventory implements Draggable, Scrollable {
 			// otherInventory.actorX + actorWidth, actorPositionYInPixels +
 			// otherGameObject.height * 2);
 			float otherTextureX = otherInventory.squaresX + otherInventory.squaresWidth / 2 - (otherGameObject.width);
-			float otherTextureY = otherInventory.squaresY + otherInventory.squaresHeight / 2 - (otherGameObject.height);
+			float otherTextureY = otherInventory.squaresBaseY + otherInventory.squaresHeight / 2
+					- (otherGameObject.height);
 			TextureUtils.drawTexture(otherGameObject.imageTexture, 0.5f, otherTextureX, otherTextureY,
 					otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);
 			if (otherInventory.size() > 0) {
@@ -941,7 +942,7 @@ public class Inventory implements Draggable, Scrollable {
 
 		// Actor
 		int actorPositionXInPixels = this.actorX;
-		int actorPositionYInPixels = (int) (squaresY + squaresHeight / 2
+		int actorPositionYInPixels = (int) (squaresBaseY + squaresHeight / 2
 				- (Game.level.player.imageTexture.getHeight()));
 		float alpha = 1.0f;
 		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
