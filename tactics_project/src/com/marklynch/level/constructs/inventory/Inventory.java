@@ -851,6 +851,10 @@ public class Inventory implements Draggable, Scrollable {
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
 						new Object[] { GroundDisplay.stringEmpty });
 			}
+			if (groundDisplay.gameObjects.size() == 0)
+				this.buttonLootAll.enabled = false;
+			else
+				this.buttonLootAll.enabled = true;
 		}
 
 		// Other Gameobject / actor inventory squares
