@@ -178,7 +178,11 @@ public class InventorySquare extends Square {
 	public ArrayList<Action> getAllActionsForTheSquareOrObject(Actor performer) {
 		GameObject targetGameObject = this.gameObject;
 		if (targetGameObject != null) {
-			return targetGameObject.getAllActionsPerformedOnThisInInventory(performer);
+			if (this.inventoryThisBelongsTo == Game.level.player.inventory)
+				return targetGameObject.getAllActionsPerformedOnThisInInventory(performer);
+			else
+				return targetGameObject.getAllActionsPerformedOnThisInOtherInventory(performer);
+
 		}
 		return new ArrayList<Action>();
 	}

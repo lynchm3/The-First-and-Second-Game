@@ -890,6 +890,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			actions.add(new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false));
 		}
+
 		actions.add(new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this));
 
 		// actions.add(new ActionThrow(performer, this, performer.equipped));
@@ -897,6 +898,13 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// actions.add(new ActionCastDouse(performer, this));
 		// actions.add(new ActionCastPoison(performer, this));
 
+		return actions;
+	}
+
+	public ArrayList<Action> getAllActionsPerformedOnThisInOtherInventory(Actor performer) {
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.add(new ActionTakeSpecificItem(performer, Inventory.target, this));
+		actions.add(new ActionEquip(performer, this));
 		return actions;
 	}
 
