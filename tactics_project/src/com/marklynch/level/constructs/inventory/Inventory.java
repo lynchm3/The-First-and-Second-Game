@@ -1168,25 +1168,51 @@ public class Inventory implements Draggable, Scrollable {
 
 	public Draggable getDraggable(int mouseX, int mouseY) {
 
-		if (this.inventorySquareMouseIsOver == null)
-			return null;
-
-		if (this.inventorySquares.contains(this.inventorySquareMouseIsOver)) {
+		if (mouseX > squaresX && mouseX < squaresX + squaresWidth && mouseY > squaresBaseY
+				&& mouseY < squaresBaseY + squaresHeight) {
 			return this;
 		}
 
 		if (this.otherInventory != null) {
-			if (this.otherInventory.inventorySquares.contains(this.inventorySquareMouseIsOver)) {
+			if (mouseX > otherInventory.squaresX && mouseX < otherInventory.squaresX + squaresWidth
+					&& mouseY > squaresBaseY && mouseY < squaresBaseY + squaresHeight) {
 				return otherInventory;
 			}
 		}
 
 		if (this.groundDisplay != null) {
-			if (this.groundDisplay.groundDisplaySquares.contains(this.inventorySquareMouseIsOver)) {
+			if (mouseX > groundDisplay.squaresX && mouseX < groundDisplay.squaresX + squaresWidth
+					&& mouseY > squaresBaseY && mouseY < squaresBaseY + squaresHeight) {
 				return groundDisplay;
 			}
 		}
 
 		return null;
+
+		// if (this.inventorySquareMouseIsOver == null)
+		// return null;
+		//
+		// if (this.inventorySquares.contains(this.inventorySquareMouseIsOver))
+		// {
+		// return this;
+		// }
+		//
+		// if (this.otherInventory != null) {
+		// if
+		// (this.otherInventory.inventorySquares.contains(this.inventorySquareMouseIsOver))
+		// {
+		// return otherInventory;
+		// }
+		// }
+		//
+		// if (this.groundDisplay != null) {
+		// if
+		// (this.groundDisplay.groundDisplaySquares.contains(this.inventorySquareMouseIsOver))
+		// {
+		// return groundDisplay;
+		// }
+		// }
+		//
+		// return null;
 	}
 }
