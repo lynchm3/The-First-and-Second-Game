@@ -908,7 +908,8 @@ public class Inventory implements Draggable, Scrollable {
 		// cursor and action over squares
 		if (this.inventorySquareMouseIsOver != null && Game.buttonHoveringOver == null) {
 			this.inventorySquareMouseIsOver.drawCursor();
-			this.inventorySquareMouseIsOver.drawAction();
+			this.inventorySquareMouseIsOver.drawAction(false);
+
 		}
 
 		// Top border black mask

@@ -21,6 +21,8 @@ public abstract class Action {
 	public boolean movement = false;
 	public Texture image;
 	public static Texture x;
+	public static Texture textureEllipse;
+	public static Texture textureWalk;
 
 	public Action(String actionName) {
 		super();
@@ -125,7 +127,7 @@ public abstract class Action {
 		getGlobalImage("action_loiter.png");
 		getGlobalImage("action_loot_all.png");
 		getGlobalImage("action_mine.png");
-		getGlobalImage("action_move.png");
+		textureWalk = getGlobalImage("action_move.png");
 		getGlobalImage("action_open.png");
 		getGlobalImage("action_pet.png");
 		getGlobalImage("action_pickpocket_all.png");// untested
@@ -137,7 +139,7 @@ public abstract class Action {
 		getGlobalImage("action_ring.png");
 		getGlobalImage("right.png");
 		getGlobalImage("action_scream.png");// untested
-		getGlobalImage("action_select_object.png");
+		textureEllipse = getGlobalImage("action_select_object.png");
 		getGlobalImage("action_search.png");
 		getGlobalImage("action_sleep.png");// untested
 		getGlobalImage("action_smash.png");

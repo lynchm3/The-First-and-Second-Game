@@ -12,6 +12,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AStarNode;
+import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -425,7 +426,23 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// GL11.glPopMatrix();
 	}
 
-	public Action drawAction() {
+	public Action drawAction(boolean onMouse) {
+
+		if (!this.seenByPlayer) {
+			if (onMouse) {
+				TextureUtils.drawTexture(Action.textureWalk, UserInputLevel.mouseLastX + 16,
+						Game.windowHeight - UserInputLevel.mouseLastY + 16,
+						UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
+						Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
+			} else {
+				int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+				int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+				TextureUtils.drawTexture(Action.textureWalk, squarePositionX + Game.SQUARE_WIDTH - 48,
+						squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX + Game.SQUARE_WIDTH - 16,
+						squarePositionY + Game.SQUARE_HEIGHT - 16);
+			}
+			return null;
+		}
 
 		Action action = null;
 		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
@@ -436,44 +453,47 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
 		}
 
-		// ...
 		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("action_select_object.png"),
-					squarePositionX + Game.SQUARE_WIDTH - 64, squarePositionY + Game.SQUARE_HEIGHT - 64,
-					squarePositionX + Game.SQUARE_WIDTH - 0, squarePositionY + Game.SQUARE_HEIGHT - 0);
-			// specific action
+			if (onMouse) {
+
+				TextureUtils.drawTexture(Action.textureEllipse, 1f, UserInputLevel.mouseLastX + 16,
+						Game.windowHeight - UserInputLevel.mouseLastY + 16,
+						UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
+						Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
+			} else {
+				int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+				int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+				TextureUtils.drawTexture(Action.textureEllipse, squarePositionX + Game.SQUARE_WIDTH - 64,
+						squarePositionY + Game.SQUARE_HEIGHT - 64, squarePositionX + Game.SQUARE_WIDTH - 0,
+						squarePositionY + Game.SQUARE_HEIGHT - 0);
+
+			}
 		} else if (action != null && action.image != null) {
-
-			if (action instanceof ActionMove && action.legal)
-				return action;
-
-			if (action instanceof ActionWait && action.legal)
-				return action;
-
 			Color color = Color.WHITE;
 			if (!action.legal) {
 				color = Color.RED;
 			}
 
-			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-			TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 48,
-					squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX + Game.SQUARE_WIDTH - 16,
-					squarePositionY + Game.SQUARE_HEIGHT - 16, color);
-			// TextUtils.printTextWithImages(new Object[] { action },
-			// squarePositionX + 16/* Game.SQUARE_WIDTH - 48 */, squarePositionY
-			// + Game.SQUARE_HEIGHT - 48, 128,
-			// false);
-			// if (action.enabled == false) {
-			// TextureUtils.drawTexture(Action.x, squarePositionX +
-			// Game.SQUARE_WIDTH - 48,
-			// squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX +
-			// Game.SQUARE_WIDTH - 16,
-			// squarePositionY + Game.SQUARE_HEIGHT - 16, Color.RED);
-			//
-			// }
+			if (onMouse) {
+
+				TextureUtils.drawTexture(action.image, UserInputLevel.mouseLastX + 16,
+						Game.windowHeight - UserInputLevel.mouseLastY + 16,
+						UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
+						Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
+			} else {
+
+				if (action instanceof ActionMove && action.legal)
+					return action;
+
+				if (action instanceof ActionWait && action.legal)
+					return action;
+
+				int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+				int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+				TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 48,
+						squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX + Game.SQUARE_WIDTH - 16,
+						squarePositionY + Game.SQUARE_HEIGHT - 16, color);
+			}
 		}
 		return action;
 	}
@@ -498,14 +518,23 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 	}
 
-	public void drawX() {
+	public void drawX(boolean onMouse) {
 
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
-		TextureUtils.drawTexture(Action.x, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
-				squarePositionY + Game.QUARTER_SQUARE_WIDTH,
-				squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
-				squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
+		if (onMouse) {
+			TextureUtils.drawTexture(Action.x, 1f, UserInputLevel.mouseLastX + 16,
+					Game.windowHeight - UserInputLevel.mouseLastY + 16,
+					UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
+					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
+		} else {
+
+			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+			TextureUtils.drawTexture(Action.x, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
+					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
+					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
+					squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
+		}
+
 	}
 
 	public class PathComparator implements Comparator<Vector<Square>> {
