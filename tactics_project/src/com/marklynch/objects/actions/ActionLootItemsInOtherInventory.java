@@ -7,6 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
 
 public class ActionLootItemsInOtherInventory extends Action {
@@ -16,11 +17,15 @@ public class ActionLootItemsInOtherInventory extends Action {
 
 	Actor performer;
 	GameObject target;
+	ActionOpen actionOpen;
 
 	public ActionLootItemsInOtherInventory(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "action_select_object.png");
 		this.performer = performer;
 		this.target = gameObject;
+		if (target instanceof Openable && !((Openable) gameObject).isOpen()) {
+			actionOpen = new ActionOpen(performer, (Openable) gameObject);
+		}
 		if (!check()) {
 			enabled = false;
 		}
@@ -33,6 +38,10 @@ public class ActionLootItemsInOtherInventory extends Action {
 
 		if (!enabled)
 			return;
+
+		if (actionOpen != null) {
+			actionOpen.perform();
+		}
 
 		if (Game.level.openInventories.size() > 0) {
 
@@ -48,45 +57,16 @@ public class ActionLootItemsInOtherInventory extends Action {
 			Inventory.target = this.target;
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
-			// Game.level.openInventories.add(Game.level.player.inventory);
-			// Game.level.player.inventory.open();
-
-			// Game.level.player.inventory.setActionOnSelect(new
-			// ActionFillEquippedContainer());
 		}
 		Level.closeAllPopups();
-
-		// if (performer.squareGameObjectIsOn.visibleToPlayer)
-		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "
-		// picked up ", object }));
-		// if (performer.inventory.contains(performer.equipped))
-		// performer.equippedBeforePickingUpObject = performer.equipped;
-		// object.squareGameObjectIsOn.inventory.remove(object);
-		// if (object.fitsInInventory)
-		// performer.inventory.add(object);
-		// performer.equip(object);
-		// if (object.owner == null)
-		// object.owner = performer;
-		// performer.actionsPerformedThisTurn.add(this);
-		// if (sound != null)
-		// sound.play();
-		//
-		// if (!legal) {
-		// Crime crime = new Crime(this, this.performer, object.owner, 4,
-		// object);
-		// this.performer.crimesPerformedThisTurn.add(crime);
-		// this.performer.crimesPerformedInLifetime.add(crime);
-		// notifyWitnessesOfCrime(crime);
-		// }
 	}
 
 	@Override
 	public boolean check() {
 
-		// float maxDistance = (performer.getEffectiveStrength() * 100) /
-		// projectile.weight;
-		// if (maxDistance > 10)
-		// float maxDistance = 1;
+		if (actionOpen != null) {
+			return actionOpen.check();
+		}
 
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME + " (can't reach)";
@@ -103,6 +83,8 @@ public class ActionLootItemsInOtherInventory extends Action {
 
 	@Override
 	public boolean checkLegality() {
+		if (actionOpen != null)
+			return actionOpen.legal;
 		return true;
 	}
 
