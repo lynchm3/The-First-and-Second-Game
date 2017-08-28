@@ -576,7 +576,9 @@ public class Inventory implements Draggable, Scrollable {
 			// this.sort(inventorySortBy);
 			if (filteredGameObjects.contains(gameObject)) {
 				index = filteredGameObjects.indexOf(gameObject);
-				filteredGameObjects.set(filteredGameObjects.indexOf(gameObject), null);
+				filteredGameObjects.remove(gameObject);
+				// filteredGameObjects.set(filteredGameObjects.indexOf(gameObject),
+				// null);
 			}
 			this.matchGameObjectsToSquares();
 			if (groundDisplay != null)
@@ -585,11 +587,11 @@ public class Inventory implements Draggable, Scrollable {
 		return index;
 	}
 
-	public void replace(GameObject out, GameObject in) {
-		int index = this.remove(out);
-		this.add(in, index);
-
-	}
+	// public void replace(GameObject out, GameObject in) {
+	// int index = this.remove(out);
+	// this.add(in, index);
+	//
+	// }
 
 	public int size() {
 		return gameObjects.size();
