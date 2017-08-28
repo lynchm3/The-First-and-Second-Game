@@ -169,7 +169,6 @@ public class InventorySquare extends Square {
 		// instanceof GroundDisplaySquare));
 		GameObject targetGameObject = this.gameObject;
 		if (targetGameObject != null) {
-			System.out.println("targetGameObject = " + targetGameObject);
 			return targetGameObject.getSecondaryActionPerformedOnThisInInventory(performer);
 		}
 		return null;

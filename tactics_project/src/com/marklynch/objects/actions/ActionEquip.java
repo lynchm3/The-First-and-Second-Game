@@ -25,8 +25,6 @@ public class ActionEquip extends Action {
 		if (!Game.level.player.inventory.contains(gameObject)) {
 			actionTake = new ActionTakeSpecificItem(performer, gameObject.inventoryThatHoldsThisObject.parent,
 					gameObject);
-			System.out.println("take 2" + ", " + performer + ", " + gameObject.inventoryThatHoldsThisObject.parent
-					+ ", " + gameObject);
 		}
 		if (!check()) {
 			enabled = false;

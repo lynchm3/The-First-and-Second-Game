@@ -599,14 +599,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
-
-		if (this instanceof Chest) {
-			System.out.println("getSecondaryActionPerformedOnThisInWorld");
-			System.out.println("getSecondaryActionPerformedOnThisInWorld this.canContainOtherObjects = "
-					+ this.canContainOtherObjects);
-			System.out.println(
-					"getSecondaryActionPerformedOnThisInWorld this.inventory.size() = " + this.inventory.size());
-		}
 		if (this.canContainOtherObjects && this.inventory.size() > 0)
 			return new ActionLootItemsInOtherInventory(performer, this);
 		if (this.fitsInInventory)
@@ -620,6 +612,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (this.remainingHealth <= 0)
 			return actions;
+
+		// Loot
+		if (!decorative && this.canContainOtherObjects && !(this instanceof Actor)) {
+			actions.add(new ActionLootItemsInOtherInventory(performer, this));
+		}
+
 		// public boolean showInventory;
 		// public boolean canShareSquare;
 		if (!decorative && fitsInInventory) {
@@ -654,11 +652,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// Give from inventory
 		if (!decorative && this.canContainOtherObjects) {
 			actions.add(new ActionGiveItemsInInventory(performer, this));
-		}
-
-		// Loot
-		if (!decorative && this.canContainOtherObjects && !(this instanceof Actor)) {
-			actions.add(new ActionLootItemsInOtherInventory(performer, this));
 		}
 
 		// Trade
@@ -904,8 +897,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public ArrayList<Action> getAllActionsPerformedOnThisInOtherInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		actions.add(new ActionTakeSpecificItem(performer, Inventory.target, this));
-
-		System.out.println("take " + ", " + performer + ", " + Inventory.target + ", " + this);
 
 		actions.add(new ActionEquip(performer, this));
 		return actions;
