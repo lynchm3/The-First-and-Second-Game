@@ -312,7 +312,7 @@ public class Inventory implements Draggable, Scrollable {
 			Game.level.openInventories.add(this);
 
 		this.groundDisplay = null;
-		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL)
+		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL || inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP)
 			this.groundDisplay = new GroundDisplay(900, 100);
 
 		if (inventoryMode == INVENTORY_MODE.MODE_TRADE || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
