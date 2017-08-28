@@ -1054,18 +1054,20 @@ public class Inventory implements Draggable, Scrollable {
 		}
 
 		// Up / down icon on active sort button
-		if (sortBackwards)
-			TextureUtils.drawTexture(textureUp, selectedSortButton.x + selectedSortButtonLength + 5,
-					selectedSortButton.y + 5, selectedSortButton.x + selectedSortButtonLength + 15,
-					selectedSortButton.y + 15);
-		else
-			TextureUtils.drawTexture(textureDown, selectedSortButton.x + selectedSortButtonLength + 5,
-					selectedSortButton.y + 5, selectedSortButton.x + selectedSortButtonLength + 15,
-					selectedSortButton.y + 15);
+		if (buttons.contains(selectedSortButton)) {
+			if (sortBackwards)
+				TextureUtils.drawTexture(textureUp, selectedSortButton.x + selectedSortButtonLength + 5,
+						selectedSortButton.y + 5, selectedSortButton.x + selectedSortButtonLength + 15,
+						selectedSortButton.y + 15);
+			else
+				TextureUtils.drawTexture(textureDown, selectedSortButton.x + selectedSortButtonLength + 5,
+						selectedSortButton.y + 5, selectedSortButton.x + selectedSortButtonLength + 15,
+						selectedSortButton.y + 15);
+		}
 
 		// Up / down icon on active sort button
 		for (Button filterButton : buttonsFilter) {
-			if (filterButton.down) {
+			if (filterButton.down && buttons.contains(filterButton)) {
 				TextureUtils.drawTexture(textureFilter, filterButton.x - 5, filterButton.y - 5, filterButton.x + 5,
 						filterButton.y + 5);
 			}
