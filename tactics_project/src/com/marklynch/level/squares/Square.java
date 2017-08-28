@@ -23,6 +23,7 @@ import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
+import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
@@ -695,7 +696,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// Pour from inventory
 		actions.add(new ActionPourContainerInInventory(performer, this));
 
-		actions.add(new ActionPlaceMapMarker(this));
+		if (!this.inventory.contains(MapMarker.class))
+			actions.add(new ActionPlaceMapMarker(this));
 
 		return actions;
 	}
