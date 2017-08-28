@@ -121,10 +121,15 @@ public class InventorySquare extends Square {
 		} else {
 			defaultAction = this.getDefaultActionForTheSquareOrObject(Game.level.player);
 		}
+
+		Color color = Color.BLACK;
+		if (defaultAction.legal == false)
+			color = Color.RED;
+
 		if (defaultAction != null && defaultAction.image != null) {
 			TextureUtils.drawTexture(defaultAction.image, xInPixels + Game.INVENTORY_SQUARE_WIDTH / 2,
 					yInPixels + Game.INVENTORY_SQUARE_HEIGHT / 2, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
-					yInPixels + Game.INVENTORY_SQUARE_HEIGHT, Color.BLACK);
+					yInPixels + Game.INVENTORY_SQUARE_HEIGHT, color);
 		}
 		return defaultAction;
 	}
