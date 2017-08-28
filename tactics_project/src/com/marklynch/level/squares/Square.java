@@ -75,6 +75,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public static Texture GREY_TEXTURE;
 	public static Texture WHITE_SQUARE;
 	public static Texture YELLOW_SQUARE;
+	public static Texture RED_SQUARE;
 	public static Texture W_TEXTURE;
 	public static Texture A_TEXTURE;
 	public static Texture S_TEXTURE;
@@ -150,6 +151,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png");
 		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png");
 		YELLOW_SQUARE = ResourceUtils.getGlobalImage("yellow_square.png");
+		RED_SQUARE = ResourceUtils.getGlobalImage("red_square.png");
 
 		W_TEXTURE = ResourceUtils.getGlobalImage("w.png");
 		A_TEXTURE = ResourceUtils.getGlobalImage("a.png");

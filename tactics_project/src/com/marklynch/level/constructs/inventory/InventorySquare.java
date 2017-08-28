@@ -59,6 +59,13 @@ public class InventorySquare extends Square {
 		// square texture
 		Texture squareTexture = WHITE_SQUARE;
 
+		// Red border on sqr if illegal to take
+		if ((inventoryThisBelongsTo == null || inventoryThisBelongsTo.parent != Game.level.player)
+				&& this.gameObject.owner != null && this.gameObject.owner != Game.level.player) {
+			squareTexture = RED_SQUARE;
+		}
+
+		// Yellow border on sqr if item is equipped
 		if (this.gameObject != null && (Game.level.player.equipped == this.gameObject
 				|| Game.level.player.helmet == this.gameObject || Game.level.player.bodyArmor == this.gameObject
 				|| Game.level.player.legArmor == this.gameObject)) {
