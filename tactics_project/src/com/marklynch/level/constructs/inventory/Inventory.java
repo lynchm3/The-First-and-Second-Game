@@ -422,13 +422,16 @@ public class Inventory implements Draggable, Scrollable {
 
 	public void filter(INVENTORY_FILTER_BY inventoryFilterBy, boolean temporary) {
 
-		if (temporary && inventoryFilterBy != Inventory.inventoryFilterBy) {
-			Inventory.lastInventoryFilterBy = Inventory.inventoryFilterBy;
-			Inventory.inventoryFilterBy = inventoryFilterBy;
-		} else if (inventoryFilterBy != Inventory.inventoryFilterBy) {
-			Inventory.inventoryFilterBy = inventoryFilterBy;
-			Inventory.lastInventoryFilterBy = null;
+		if (inventoryFilterBy != Inventory.inventoryFilterBy) {
+			if (temporary) {
+				Inventory.lastInventoryFilterBy = Inventory.inventoryFilterBy;
+				Inventory.inventoryFilterBy = inventoryFilterBy;
+			} else {
+				Inventory.inventoryFilterBy = inventoryFilterBy;
+				Inventory.lastInventoryFilterBy = null;
+			}
 		}
+
 		for (Button button : buttonsFilter)
 			button.down = false;
 		if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
