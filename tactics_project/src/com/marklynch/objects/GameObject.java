@@ -709,7 +709,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		// Openable, Chests, Doors
-		if (this instanceof Openable || !(this instanceof RemoteDoor)) {
+		if (this instanceof Openable && !(this instanceof RemoteDoor)) {
 			Openable openable = (Openable) this;
 
 			if (!openable.open) {
