@@ -16,11 +16,15 @@ public class ActionEquip extends Action {
 
 	Actor performer;
 	GameObject gameObject;
+	ActionTakeSpecificItem actionTake;
 
 	public ActionEquip(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "left.png");
 		this.performer = performer;
 		this.gameObject = gameObject;
+		if (!Game.level.player.inventory.contains(gameObject)) {
+			actionTake = new ActionTakeSpecificItem(performer, gameObject.inventory.parent, gameObject);
+		}
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -34,6 +38,9 @@ public class ActionEquip extends Action {
 
 		if (!enabled)
 			return;
+
+		if (actionTake != null)
+			actionTake.perform();
 
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " equipped ", gameObject }));
@@ -56,17 +63,18 @@ public class ActionEquip extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer.inventory.contains(gameObject))
-			return true;
+		if (actionTake != null) {
+			return actionTake.enabled;
+		}
 
-		if (performer.straightLineDistanceTo(gameObject.squareGameObjectIsOn) < 2)
-			return true;
-
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean checkLegality() {
+		if (actionTake != null) {
+			return actionTake.legal;
+		}
 		return true;
 	}
 
