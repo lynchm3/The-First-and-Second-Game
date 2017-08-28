@@ -564,6 +564,9 @@ public class AIRoutine {
 		return false;
 	}
 
+	public static String STOP_THAT = "Stop that!";
+	public static String I_SAW_THAT = "I saw that!!";
+
 	protected boolean runCrimeReactionRoutine() {
 		for (final Actor criminal : actor.crimesWitnessed.keySet()) {
 			int accumulatedSeverity = 0;
@@ -626,10 +629,17 @@ public class AIRoutine {
 			boolean saidStop = false;
 			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
 				if (!crime.hasBeenToldToStop) {
-					if (criminal == Game.level.player)
-						new ActionTalk(this.actor, criminal, createJusticeStopConversation()).perform();
-					else
-						actor.setMiniDialogue("Stop that!", criminal);
+					if (criminal == Game.level.player) {
+						new ActionTalk(this.actor, criminal, createJusticeStopConversation(crime)).perform();
+					} else {
+						if (Game.level.shouldLog(this.actor)) {
+							if (crime.severity == Crime.CRIME_SEVERITY_THEFT)
+								actor.setMiniDialogue(I_SAW_THAT, criminal);
+							else
+								actor.setMiniDialogue(STOP_THAT, criminal);
+						}
+
+					}
 					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 					// actor.activityDescription = "Dispensing Justice";
 
@@ -738,11 +748,18 @@ public class AIRoutine {
 		return false;
 	}
 
-	public Conversation createJusticeStopConversation() {
+	public Conversation createJusticeStopConversation(Crime crime) {
 		ConversationResponse done = new ConversationResponse(":/", null);
+		ConversationPart conversationPartJustice = null;
+		if (crime.severity == Crime.CRIME_SEVERITY_THEFT) {
+			conversationPartJustice = new ConversationPart(new Object[] { I_SAW_THAT },
+					new ConversationResponse[] { done }, this.actor);
 
-		ConversationPart conversationPartJustice = new ConversationPart(new Object[] { "Stop that!" },
-				new ConversationResponse[] { done }, this.actor);
+		} else {
+			conversationPartJustice = new ConversationPart(new Object[] { STOP_THAT },
+					new ConversationResponse[] { done }, this.actor);
+
+		}
 
 		return new Conversation(conversationPartJustice);
 
