@@ -628,7 +628,8 @@ public class Inventory implements Draggable, Scrollable {
 		// inventorySquares.add(inventorySquare);
 		// }
 
-		if (this.parent != Game.level.player) {
+		// System.out.println(x);
+		if (inventoryMode != INVENTORY_MODE.MODE_SELECT_MAP_MARKER && this.parent != Game.level.player) {
 			Game.level.player.inventory.matchGameObjectsToSquares();
 			return;
 		}
