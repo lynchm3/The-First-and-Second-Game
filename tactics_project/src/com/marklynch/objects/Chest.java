@@ -1,11 +1,8 @@
 package com.marklynch.objects;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 
@@ -47,13 +44,6 @@ public class Chest extends Openable {
 	public void loadImages() {
 		chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png");
 		chestClosedTexture = ResourceUtils.getGlobalImage("chest.png");
-	}
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-		return actions;
 	}
 
 	@Override

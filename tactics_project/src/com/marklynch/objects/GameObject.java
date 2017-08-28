@@ -21,6 +21,7 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionEquip;
@@ -28,16 +29,21 @@ import com.marklynch.objects.actions.ActionFillSpecificContainer;
 import com.marklynch.objects.actions.ActionFollow;
 import com.marklynch.objects.actions.ActionGiveItemsInInventory;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
+import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionLootItemsInOtherInventory;
+import com.marklynch.objects.actions.ActionOpen;
+import com.marklynch.objects.actions.ActionPeek;
 import com.marklynch.objects.actions.ActionPickUp;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionPourSpecificItem;
+import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.actions.ActionTeleportOther;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.actions.ActionTradeItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionUnequip;
+import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -616,6 +622,33 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// Loot
 		if (!decorative && this.canContainOtherObjects && !(this instanceof Actor)) {
 			actions.add(new ActionLootItemsInOtherInventory(performer, this));
+		}
+
+		// Openable, Chests, Doors
+		if (this instanceof Openable || !(this instanceof RemoteDoor)) {
+			Openable openable = (Openable) this;
+
+			if (!openable.open) {
+				actions.add(new ActionOpen(performer, openable));
+			}
+
+			if (openable.open)
+				actions.add(new ActionClose(performer, openable));
+
+			if (openable.locked)
+				actions.add(new ActionUnlock(performer, openable));
+
+			if (!openable.locked)
+				actions.add(new ActionLock(performer, openable));
+
+			if (this instanceof Door) {
+				if (!openable.open) {
+					if (Game.level.player.peekingThrough == this)
+						actions.add(new ActionStopPeeking(performer));
+					else
+						actions.add(new ActionPeek(performer, this));
+				}
+			}
 		}
 
 		// public boolean showInventory;

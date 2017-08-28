@@ -1,10 +1,7 @@
 package com.marklynch.objects;
 
-import java.util.ArrayList;
-
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -39,45 +36,6 @@ public class Furnace extends Openable {
 		persistsWhenCantBeSeen = true;
 		attackable = true;
 	}
-
-	// @Override
-	// public void loadImages() {
-	// chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png");
-	// chestClosedTexture = ResourceUtils.getGlobalImage("chest.png");
-	// }
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-		return actions;
-	}
-
-	// @Override
-	// public void draw1() {
-	//
-	// if (!Game.fullVisiblity) {
-	// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
-	// persistsWhenCantBeSeen == false)
-	// return;
-	//
-	// if (!this.squareGameObjectIsOn.seenByPlayer)
-	// return;
-	// }
-	//
-	// if (open)
-	// imageTexture = chestOpenTexture;
-	// else
-	// imageTexture = chestClosedTexture;
-	//
-	// super.draw1();
-	//
-	// // if (!this.squareGameObjectIsOn.inventory.contains(Actor.class)) {
-	// // super.draw1();
-	// // } else {
-	// // }
-	//
-	// }
 
 	@Override
 	public boolean isOpen() {

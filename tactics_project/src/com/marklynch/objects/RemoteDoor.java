@@ -1,15 +1,8 @@
 package com.marklynch.objects;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionClose;
-import com.marklynch.objects.actions.ActionLock;
-import com.marklynch.objects.actions.ActionOpen;
-import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
@@ -39,34 +32,6 @@ public class RemoteDoor extends Openable {
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
 		attackable = true;
-
-	}
-
-	@Override
-	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
-		ArrayList<Action> actions = new ArrayList<Action>();
-
-		if (this.remainingHealth <= 0)
-			return actions;
-
-		// actions.add(new ActionAttack(performer, this));
-		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-
-		ArrayList<Action> toRemove = new ArrayList<Action>();
-		for (Action action : actions) {
-			if (action instanceof ActionOpen) {
-				toRemove.add(action);
-			} else if (action instanceof ActionClose) {
-				toRemove.add(action);
-			} else if (action instanceof ActionLock) {
-				toRemove.add(action);
-			} else if (action instanceof ActionUnlock) {
-				toRemove.add(action);
-			}
-		}
-		actions.removeAll(toRemove);
-
-		return actions;
 
 	}
 
