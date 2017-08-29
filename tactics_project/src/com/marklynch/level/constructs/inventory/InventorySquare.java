@@ -7,10 +7,12 @@ import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.inventory.Inventory.INVENTORY_MODE;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
@@ -82,9 +84,9 @@ public class InventorySquare extends Square {
 			float realTextureWidth = gameObject.imageTexture.getWidth();
 			float realTextureHeight = gameObject.imageTexture.getHeight();
 			if (realTextureWidth >= realTextureHeight) {// knife
-				drawHeight = 64 * realTextureHeight / realTextureWidth;
+				drawHeight = Game.INVENTORY_SQUARE_HEIGHT * realTextureHeight / realTextureWidth;
 			} else {
-				drawWidth = 64 * realTextureWidth / realTextureHeight;
+				drawWidth = Game.INVENTORY_SQUARE_WIDTH * realTextureWidth / realTextureHeight;
 			}
 			// TextureUtils.skipNormals = false;
 			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, yInPixels, xInPixels + drawWidth,
@@ -95,6 +97,12 @@ public class InventorySquare extends Square {
 						xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 			}
 
+			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
+
+				String goldText = "" + gameObject.value;
+				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 30,
+						Integer.MAX_VALUE, false, new Object[] { goldText });
+			}
 		}
 
 	}

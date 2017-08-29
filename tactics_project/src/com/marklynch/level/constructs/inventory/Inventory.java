@@ -1088,7 +1088,7 @@ public class Inventory implements Draggable, Scrollable {
 			}
 		}
 
-		// Gold
+		// Gold for this actor
 		if (this.parent instanceof Actor) {
 			Actor actor = (Actor) this.parent;
 			String goldText = "Gold: " + actor.gold;
