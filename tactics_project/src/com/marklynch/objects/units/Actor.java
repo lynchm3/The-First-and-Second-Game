@@ -160,6 +160,8 @@ public class Actor extends GameObject {
 
 	public ArrayList<Door> doors = new ArrayList<Door>();
 
+	int gold;
+
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
 			GameObject bed, Inventory inventory,
@@ -169,7 +171,7 @@ public class Actor extends GameObject {
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, int gold) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
@@ -228,6 +230,8 @@ public class Actor extends GameObject {
 		this.bodyAnchorY = bodyAnchorY;
 		this.legsAnchorX = legsAnchorX;
 		this.legsAnchorY = legsAnchorY;
+
+		this.gold = gold;
 
 		this.lastSquare = this.squareGameObjectIsOn;
 
@@ -983,14 +987,14 @@ public class Actor extends GameObject {
 		equippedWeaponGUID = this.equipped.guid;
 	}
 
-	public Actor makeCopy(Square square, Faction faction, GameObject bed) {
+	public Actor makeCopy(Square square, Faction faction, GameObject bed, int gold) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), canOpenDoors,
 				canEquipWeapons, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
-				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold);
 		return actor;
 	}
 

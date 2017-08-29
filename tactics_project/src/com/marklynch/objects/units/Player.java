@@ -20,21 +20,18 @@ public class Player extends Actor {
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
-			GameObject bed, Inventory inventory,  
-			   float widthRatio,
-			float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting,
-			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float waterResistance, float electricResistance, float poisonResistance,
-			float slashResistance, float weight, Actor owner, Faction faction, float handAnchorX, float handAnchorY,
-			float headAnchorX, float headAnchorY, float bodyAnchorX, float bodyAnchorY, float legsAnchorX,
-			float legsAnchorY) {
+			GameObject bed, Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX,
+			float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
+			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
+			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
+			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, int gold) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, bed, inventory,  
-				   true, true, widthRatio, heightRatio,
+				squareActorIsStandingOn, travelDistance, sight, bed, inventory, true, true, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold);
 		hairImageTexture = ResourceUtils.getGlobalImage("hair.png");
 		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png");
 		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png");
@@ -52,15 +49,14 @@ public class Player extends Actor {
 	}
 
 	@Override
-	public Player makeCopy(Square square, Faction faction, GameObject bed) {
+	public Player makeCopy(Square square, Faction faction, GameObject bed, int gold) {
 
 		Player actor = new Player(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), 
-				    widthRatio,
+				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
 				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
-				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold);
 		return actor;
 	}
 

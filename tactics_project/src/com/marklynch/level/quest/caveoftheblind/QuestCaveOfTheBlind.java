@@ -104,7 +104,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		mortsKey = Templates.KEY.makeCopy("Mort's Key", null, mort);
 		mortsKey.quest = this;
 		// [147][21]
-		mort = Templates.MORT.makeCopy(Game.level.squares[281][41], Game.level.factions.get(1), mortsGameObject);
+		mort = Templates.MORT.makeCopy(Game.level.squares[281][41], Game.level.factions.get(1), mortsGameObject, 100);
 		mort.quest = this;
 		mort.mortsBell = Templates.DINNER_BELL.makeCopy(null, mort);
 		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy("Meat Chunk", null, null);

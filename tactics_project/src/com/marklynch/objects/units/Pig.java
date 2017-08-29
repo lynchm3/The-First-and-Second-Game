@@ -26,21 +26,19 @@ public class Pig extends Actor {
 	public Weapon broom;
 
 	public Pig(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, GameObject bed,
-			Inventory inventory,   
-			  float widthRatio, float heightRatio,
-			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float waterResistance, float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
+			GameObject bed, Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX,
+			float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
+			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
+			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, bed, inventory,  
-				   false, false, widthRatio,
-				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+				squareActorIsStandingOn, travelDistance, sight, bed, inventory, false, false, widthRatio, heightRatio,
+				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
+				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, 0);
 
 		aiRoutine = new AIRoutineForPig(this);
 	}
@@ -82,11 +80,10 @@ public class Pig extends Actor {
 	public Pig makeCopy(String name, Square square, Faction faction, GameObject bed) {
 
 		Pig actor = new Pig(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
-				imageTexturePath, square, travelDistance, sight, bed, new Inventory(), 
-				    widthRatio,
-				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
+				imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio, heightRatio,
+				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
+				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
 		return actor;
 	}

@@ -23,7 +23,7 @@ public class AggressiveWildAnimal extends Actor {
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, 0);
 		aiRoutine = new AIRoutineForWildAnimal(this);
 	}
 
@@ -38,7 +38,6 @@ public class AggressiveWildAnimal extends Actor {
 		super.postLoad2();
 	}
 
-	@Override
 	public AggressiveWildAnimal makeCopy(Square square, Faction faction, GameObject bed) {
 
 		AggressiveWildAnimal actor = new AggressiveWildAnimal(name, title, actorLevel, (int) totalHealth, strength,

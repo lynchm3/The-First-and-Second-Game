@@ -422,7 +422,7 @@ public class Editor {
 		// Add player
 		// West Security
 		Player player = Templates.Player.makeCopy(Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
-				Game.level.factions.get(0), null);
+				Game.level.factions.get(0), null, 100);
 		// Morts Mine
 		// Actor player = Templates.Player.makeCopy(Game.level.squares[80][39],
 		// Game.level.factions.get(0), null);
@@ -463,7 +463,7 @@ public class Editor {
 		// Trader Joe
 		Trader trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png",
 				Game.level.squares[7][1], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 90f, null, Game.level.factions.get(1), 40, 96, 40, 96, 40, 96, 40, 96);
+				false, 0f, 0f, 0f, 0f, 0f, 90f, null, Game.level.factions.get(1), 40, 96, 40, 96, 40, 96, 40, 96, 1000);
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));

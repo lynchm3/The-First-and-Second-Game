@@ -30,20 +30,20 @@ public class Templates {
 	// Player
 	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "hero.png", null, 1, 10,
 			null, new Inventory(), 1f, 1.5f, 0f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f,
-			null, null, 75f, 127f, 70f, 23f, 0f, 0f, 0f, 0f);
+			null, null, 75f, 127f, 70f, 23f, 0f, 0f, 0f, 0f, 0);
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
 			null, new Inventory(), 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null,
-			null, 88, 54, 88, 54, 88, 54, 88, 54);
+			null, 88, 54, 88, 54, 88, 54, 88, 54, 0);
 
 	public static final Thief THIEF = new Thief("Thief", "Thief", 1, 10, 0, 0, 0, 0, "thief.png", null, 1, 10, null,
 			new Inventory(), 1.5f, 1.5f, -0.25f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f,
-			null, null, 88, 54, 88, 54, 88, 54, 88, 54);
+			null, null, 88, 54, 88, 54, 88, 54, 88, 54, 0);
 
 	public static final Farmer FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "farmer.png", null, 1, 10,
 			null, new Inventory(), 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null,
-			null, 88, 54, 88, 54, 88, 54, 88, 54);
+			null, 88, 54, 88, 54, 88, 54, 88, 54, 0);
 
 	// Domestic animals
 	public static final Pig PIG = new Pig("Pig", "Pig", 1, 10, 0, 0, 0, 0, "pig.png", null, 1, 10, null,
@@ -79,7 +79,7 @@ public class Templates {
 	// Special People
 	public static final Mort MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
 			new Inventory(), 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 70f, null, null, 88,
-			54, 88, 54, 88, 54, 88, 54);
+			54, 88, 54, 88, 54, 88, 54, 0);
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
