@@ -160,7 +160,7 @@ public class Actor extends GameObject {
 
 	public ArrayList<Door> doors = new ArrayList<Door>();
 
-	int gold;
+	public int gold;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,

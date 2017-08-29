@@ -1088,6 +1088,27 @@ public class Inventory implements Draggable, Scrollable {
 			}
 		}
 
+		// Gold
+		if (this.parent instanceof Actor) {
+			Actor actor = (Actor) this.parent;
+			String goldText = "Gold: " + actor.gold;
+			float goldWidth = Game.font.getWidth(goldText);
+			float goldPositionX = squaresX + squaresWidth - goldWidth;
+			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
+					false, new Object[] { goldText });
+		}
+
+		// Gold for other actor
+		if (otherInventory != null && otherInventory.parent instanceof Actor) {
+			Actor actor = (Actor) otherInventory.parent;
+			String goldText = "Gold: " + actor.gold;
+			float goldWidth = Game.font.getWidth(goldText);
+			float goldPositionX = otherInventory.squaresX + squaresWidth - goldWidth;
+			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
+					false, new Object[] { goldText });
+
+		}
+
 	}
 
 	public void drawOtherInventoryText() {
