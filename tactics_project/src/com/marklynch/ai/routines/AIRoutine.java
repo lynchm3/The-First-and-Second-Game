@@ -16,6 +16,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Templates;
@@ -28,10 +29,13 @@ import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.Farmer;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.Pig;
+import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.MapUtil;
 
 public class AIRoutine {
@@ -41,13 +45,13 @@ public class AIRoutine {
 	final String ACTIVITY_DESCRIPTION_BEING_A_CHICKEN = "Being a chicken";
 	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
 	final String ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP = "Shouting for help";
+	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
 
 	public Actor actor;
 	public GameObject target;
 	public int searchCooldown = 0;
 	public GameObject searchCooldownActor = null;
 	public int escapeCooldown = 0;
-	public int shoutForHelpCooldown = 0;
 	public GameObject escapeCooldownAttacker = null;
 
 	public ArrayList<GameObject> visibleHazards = new ArrayList<GameObject>();
@@ -232,9 +236,10 @@ public class AIRoutine {
 		}
 
 		// Return whether we did anything or not
-		if (moved || attacked)
+		if (moved || attacked) {
+			createSearchLocationsBasedOnVisibleAttackers();
 			return true;
-		else
+		} else
 			return false;
 	}
 
@@ -279,11 +284,10 @@ public class AIRoutine {
 		}
 
 		// Return whether we did anything or not
-		if (moved)
-
-		{
+		if (moved) {
 			// shoutForHelpCooldown = 10;
-			shoutForHelpCooldown = 10;
+			createSearchLocationsBasedOnVisibleAttackers();
+			escapeCooldown = 10;
 			return true;
 		} else {
 			return false;
@@ -336,6 +340,7 @@ public class AIRoutine {
 			}
 			escapeCooldown = 10;
 
+			createSearchLocationsBasedOnVisibleAttackers();
 			return true;
 		} else {
 			return false;
@@ -343,6 +348,11 @@ public class AIRoutine {
 	}
 
 	public boolean runEscapeCooldown(boolean shout) {
+
+		if (escapeCooldown <= 0)
+			return false;
+
+		escapeCooldown--;
 
 		// DOORWAYS are my biggest issue here.
 		if (Game.level.activeActor instanceof Pig)
@@ -378,7 +388,8 @@ public class AIRoutine {
 			}
 		}
 
-		return false;
+		createSearchLocationsBasedOnVisibleAttackers();
+		return true;
 	}
 
 	public boolean runSearchRoutine() {
@@ -508,6 +519,7 @@ public class AIRoutine {
 			}
 
 			actor.aiLine = new AILine(AILine.AILineType.AI_LINE_TYPE_SEARCH, actor, searchSquare);
+			createSearchLocationsBasedOnVisibleAttackers();
 			return true;
 		}
 		return false;
@@ -515,6 +527,11 @@ public class AIRoutine {
 	}
 
 	public boolean runSearchCooldown() {
+
+		if (searchCooldown <= 0)
+			return false;
+
+		searchCooldown--;
 
 		// DOORWAYS are my biggest issue here.
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
@@ -561,7 +578,13 @@ public class AIRoutine {
 				moved = AIRoutineUtils.moveTowardsTargetSquare(randomSquareToMoveTo);
 		}
 		// }
-		return false;
+
+		if (moved) {
+			createSearchLocationsBasedOnVisibleAttackers();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public static String STOP_THAT = "Stop that!";
@@ -704,6 +727,7 @@ public class AIRoutine {
 					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						actor.activityDescription = "Confiscating";
+						createSearchLocationsBasedOnVisibleAttackers();
 						return true;
 					}
 				}
@@ -722,6 +746,7 @@ public class AIRoutine {
 						&& actor.canSeeGameObject(criminal)) {
 					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+						createSearchLocationsBasedOnVisibleAttackers();
 						return true;
 					}
 				}
@@ -739,6 +764,7 @@ public class AIRoutine {
 					if (actor.canSeeSquare(stolenItemOnGround.squareGameObjectIsOn)) {
 						if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(stolenItemOnGround)) {
 							actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+							createSearchLocationsBasedOnVisibleAttackers();
 							return true;
 						}
 					}
@@ -855,6 +881,56 @@ public class AIRoutine {
 
 		return new Conversation(conversationPartYouWontGetOut);
 
+	}
+
+	public boolean deferToGroupLeader() {
+
+		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
+			if (this.actor.group.update(this.actor)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean deferToQuest() {
+		if (this.actor.quest != null) {
+			if (this.actor.quest.update(this.actor)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean lootFromGround() {
+		// Pick up loot on ground
+		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false, true, true,
+				10, GameObject.class);
+		if (loot != null) {
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
+			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
+			if (!pickedUpLoot) {
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public void aiRoutineStart() {
+		this.actor.aiLine = null;
+		this.actor.miniDialogue = null;
+		this.actor.activityDescription = null;
+		this.actor.thoughtBubbleImageTexture = null;
+		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class);
+		if (actor instanceof AggressiveWildAnimal || actor instanceof CarnivoreNeutralWildAnimal
+				|| actor instanceof HerbivoreWildAnimal || actor instanceof Pig) {
+
+		} else {
+			createSearchLocationsBasedOnVisibleCriminals();
+		}
+		createSearchLocationsBasedOnVisibleAttackers();
 	}
 
 	public Actor actorToKeepTrackOf = null;

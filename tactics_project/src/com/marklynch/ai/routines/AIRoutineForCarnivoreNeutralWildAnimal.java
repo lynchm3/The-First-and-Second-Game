@@ -8,7 +8,6 @@ import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
-import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
@@ -29,7 +28,6 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
-
 	CarnivoreNeutralWildAnimal wildAnimal;
 	Square targetSquare = null;
 
@@ -46,53 +44,24 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 	@Override
 	public void update() {
-		this.actor.aiLine = null;
-		this.actor.miniDialogue = null;
-		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
-		createSearchLocationsBasedOnSounds(Weapon.class);
-		createSearchLocationsBasedOnVisibleAttackers();
 
-		if (runFightRoutine()) {
-			createSearchLocationsBasedOnVisibleAttackers();
+		aiRoutineStart();
+
+		// Fight
+		if (runFightRoutine())
 			return;
-		}
 
-		if (runSearchRoutine()) {
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search
+		if (runSearchRoutine())
 			return;
-		}
 
-		if (searchCooldown > 0) {
-			runSearchCooldown();
-			searchCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search cooldown
+		if (runSearchCooldown())
 			return;
-		}
 
-		// If not leader defer to pack
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
-			if (this.actor.group.update(this.actor)) {
-				return;
-			}
-		}
-
-		// THIS IS TEMPORARY
-		// GameObject food = target =
-		// AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Food.class, 100f,
-		// true, false,
-		// true, false, false, false);
-		// if (food != null) {
-		// this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
-		// this.actor.thoughtBubbleImageTexture = food.imageTexture;
-		// boolean pickedUpLoot = AIRoutineUtils.eatTarget(food);
-		// if (!pickedUpLoot) {
-		// AIRoutineUtils.moveTowardsTargetToBeAdjacent(food);
-		// } else {
-		//
-		// }
-		// return;
-		// }
+		// Defer to group leader
+		if (deferToGroupLeader())
+			return;
 
 		// 1. attack small animal
 		GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfAttacking(50f, false, true, false,
@@ -139,11 +108,8 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 		}
 
 		// Defer to quest
-		if (this.actor.quest != null) {
-			if (this.actor.quest.update(this.actor)) {
-				return;
-			}
-		}
+		if (deferToQuest())
+			return;
 
 		// Move about a bit
 		if (targetSquare != null) {

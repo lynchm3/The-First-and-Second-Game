@@ -14,7 +14,6 @@ import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForMort extends AIRoutine {
 
@@ -57,29 +56,7 @@ public class AIRoutineForMort extends AIRoutine {
 	@Override
 	public void update() {
 
-		this.actor.aiLine = null;
-		this.actor.miniDialogue = null;
-		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
-
-		createSearchLocationsBasedOnVisibleAttackers();
-		createSearchLocationsBasedOnVisibleCriminals();
-		createSearchLocationsBasedOnSounds(Weapon.class);
-
-		// The below is commented coz its handled in the search and search
-		// cooldown routines
-		// Remove search locations if outside bounds
-		// ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
-		// for (GameObject actor : mort.investigationsMap.keySet()) {
-		// Square squareToSearch = mort.investigationsMap.get(actor).square;
-		// if (!squareInBounds(squareToSearch)) {
-		// toRemove.add(actor);
-		// }
-		// }
-		//
-		// for (GameObject actor : toRemove) {
-		// mort.investigationsMap.remove(actor);
-		// }
+		aiRoutineStart();
 
 		// If blind are in mine and getting too close to mgmt door, move to it
 		float mortsDistanceFromGameObjectroomDoor = mort
@@ -123,53 +100,21 @@ public class AIRoutineForMort extends AIRoutine {
 			}
 		}
 
-		if (runFightRoutine()) {
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Fight
+		if (runFightRoutine())
 			return;
-		}
 
-		if (runCrimeReactionRoutine()) {
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Crime reaction
+		if (runCrimeReactionRoutine())
 			return;
-		}
 
-		if (runSearchRoutine()) {
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search
+		if (runSearchRoutine())
 			return;
-		}
 
-		if (searchCooldown > 0) {
-			runSearchCooldown();
-			searchCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search cooldown
+		if (runSearchCooldown())
 			return;
-		}
-
-		// if already retreated to room and not in it now
-		// if (retreatedToRoom &&
-		// mort.squareGameObjectIsOn.structureRoomSquareIsIn != mort.mortsRoom
-		// && mort.squareGameObjectIsOn.structureRoomSquareIsIn !=
-		// mort.mortsVault) {
-		// Square doorSquare =
-		// mort.questCaveOfTheBlind.mortsGameObjectroomDoor.squareGameObjectIsOn;
-		// Square safeSideOfDoorSquare = Game.level.squares[doorSquare.xInGrid -
-		// 1][doorSquare.yInGrid];
-		// mort.performingFeedingDemo = false;
-		// if (mort.squareGameObjectIsOn == safeSideOfDoorSquare) {
-		// mort.activityDescription = ACTIVITY_DESCRIPTION_HIDING;
-		// System.out.println("mort is locking the door");
-		// new ActionLock(mort,
-		// mort.questCaveOfTheBlind.mortsGameObjectroomDoor).perform();
-		// mort.investigationsMap.clear();
-		// searchCooldown = 0;
-		// retreatedToRoom = true;
-		// } else {
-		// mort.activityDescription = ACTIVITY_DESCRIPTION_RETREATING;
-		// AIRoutineUtils.moveTowardsTargetSquare(safeSideOfDoorSquare);
-		// }
-		// mort.activityDescription = ACTIVITY_DESCRIPTION_HIDING;
-		// return;
-		// }
 
 		if (retreatedToRoom)
 			return;

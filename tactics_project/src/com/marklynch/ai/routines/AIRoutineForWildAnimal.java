@@ -4,7 +4,6 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForWildAnimal extends AIRoutine {
 	Square targetSquare;
@@ -19,53 +18,27 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 	@Override
 	public void update() {
 
-		this.actor.aiLine = null;
-		this.actor.miniDialogue = null;
-		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
-		createSearchLocationsBasedOnSounds(Weapon.class);
-		createSearchLocationsBasedOnVisibleAttackers();
-		if (runFightRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			createSearchLocationsBasedOnVisibleAttackers();
-			return;
-		}
+		aiRoutineStart();
 
-		if (runCrimeReactionRoutine()) {
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Fight
+		if (runFightRoutine())
 			return;
-		}
 
-		if (runCrimeReactionRoutine()) {
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search
+		if (runSearchRoutine())
 			return;
-		}
 
-		if (runSearchRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search cooldown
+		if (runSearchCooldown())
 			return;
-		}
 
-		if (searchCooldown > 0) {
-			runSearchCooldown();
-			searchCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Defer to group leader
+		if (deferToGroupLeader())
 			return;
-		}
-
-		// If not leader defer to pack
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
-			if (this.actor.group.update(this.actor)) {
-				return;
-			}
-		}
 
 		// Defer to quest
-		if (this.actor.quest != null) {
-			this.actor.quest.update(this.actor);
+		if (deferToQuest())
 			return;
-		}
 
 		// Go about ur business...
 		if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {

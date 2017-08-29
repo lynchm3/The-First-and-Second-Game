@@ -8,7 +8,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.actions.ActionStopHidingInside;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
-import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
@@ -46,11 +45,8 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
 	@Override
 	public void update() {
-		this.actor.aiLine = null;
-		this.actor.miniDialogue = null;
-		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
 
+		// Hiding cooldown
 		if (actor.squareGameObjectIsOn == null) {
 			if (actor.inventoryThatHoldsThisObject.parent instanceof SmallHidingPlace) {
 				hidingCount++;
@@ -65,27 +61,18 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 			return;
 		}
 
-		createSearchLocationsBasedOnSounds(Weapon.class);
-		createSearchLocationsBasedOnVisibleAttackers();
+		aiRoutineStart();
 
-		if (runEscapeRoutine()) {
-			createSearchLocationsBasedOnVisibleAttackers();
+		if (runEscapeRoutine())
 			return;
-		}
 
-		if (escapeCooldown > 0) {
-			runEscapeCooldown(false);
-			escapeCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Escape cooldown
+		if (runEscapeCooldown(false))
 			return;
-		}
 
-		// If not leader defer to pack
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
-			if (this.actor.group.update(this.actor)) {
-				return;
-			}
-		}
+		// Defer to group leader
+		if (deferToGroupLeader())
+			return;
 
 		// 1. eat food on ground
 		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
@@ -103,11 +90,8 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 		}
 
 		// Defer to quest
-		if (this.actor.quest != null) {
-			if (this.actor.quest.update(this.actor)) {
-				return;
-			}
-		}
+		if (deferToQuest())
+			return;
 
 		// Move about a bit
 		if (targetSquare != null) {

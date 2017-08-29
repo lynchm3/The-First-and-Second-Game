@@ -10,7 +10,6 @@ import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
 import com.marklynch.objects.units.Trader;
-import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForHunter extends AIRoutine {
 
@@ -43,43 +42,27 @@ public class AIRoutineForHunter extends AIRoutine {
 
 	@Override
 	public void update() {
-		this.actor.aiLine = null;
-		this.actor.miniDialogue = null;
-		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
-		createSearchLocationsBasedOnSounds(Weapon.class);
-		createSearchLocationsBasedOnVisibleAttackers();
-		if (runFightRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			createSearchLocationsBasedOnVisibleAttackers();
-			return;
-		}
+		aiRoutineStart();
 
-		if (runCrimeReactionRoutine()) {
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Fight
+		if (runFightRoutine())
 			return;
-		}
 
-		if (runSearchRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Crime reaction
+		if (runCrimeReactionRoutine())
 			return;
-		}
 
-		if (searchCooldown > 0) {
-			runSearchCooldown();
-			searchCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search
+		if (runSearchRoutine())
 			return;
-		}
-		// If not leader defer to pack
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader())
 
-		{
-			if (this.actor.group.update(this.actor)) {
-				return;
-			}
-		}
+		// Search cooldown
+		if (runSearchCooldown())
+			return;
+
+		// Defer to group leader
+		if (deferToGroupLeader())
+			return;
 
 		// if group leader wait for group
 		if (this.actor.group != null && this.actor == this.actor.group.getLeader()) {
@@ -104,27 +87,13 @@ public class AIRoutineForHunter extends AIRoutine {
 			return;
 		}
 
-		// 1. pick up loot on ground
-		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false, true, true,
-				10, GameObject.class);
-		if (loot != null) {
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
-			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
-			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
-			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
-			} else {
-
-			}
+		// Loot from ground
+		if (lootFromGround())
 			return;
-		}
 
 		// Defer to quest
-		if (this.actor.quest != null) {
-			if (this.actor.quest.update(this.actor)) {
-				return;
-			}
-		}
+		if (deferToQuest())
+			return;
 
 		// Go about your business
 		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL)

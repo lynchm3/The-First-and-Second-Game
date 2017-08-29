@@ -4,7 +4,6 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Pig;
-import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForPig extends AIRoutine {
 
@@ -37,45 +36,19 @@ public class AIRoutineForPig extends AIRoutine {
 
 	@Override
 	public void update() {
-		this.actor.aiLine = null;
-		this.actor.miniDialogue = null;
-		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
-		createSearchLocationsBasedOnSounds(Weapon.class);
-		createSearchLocationsBasedOnVisibleAttackers();
+		aiRoutineStart();
 
-		if (runEscapeRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Escape
+		if (runEscapeRoutine())
 			return;
-		}
 
-		if (escapeCooldown > 0) {
-			runEscapeCooldown(false);
-			escapeCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Escape cooldown
+		if (runEscapeCooldown(false))
 			return;
-		}
 
-		// if (runSearchRoutine()) {
-		// // createSearchLocationsBasedOnSounds();
-		// createSearchLocationsBasedOnVisibleAttackers();
-		// return;
-		// }
-
-		// if (searchCooldown > 0) {
-		// runSearchCooldown();
-		// searchCooldown--;
-		// createSearchLocationsBasedOnVisibleAttackers();
-		// return;
-		// }
-
-		// If not leader defer to pack
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
-			if (this.actor.group.update(this.actor)) {
-				return;
-			}
-		}
+		// Defer to group leader
+		if (deferToGroupLeader())
+			return;
 
 		// 1. eat loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false, false, false,
@@ -93,11 +66,8 @@ public class AIRoutineForPig extends AIRoutine {
 		}
 
 		// Defer to quest
-		if (this.actor.quest != null) {
-			if (this.actor.quest.update(this.actor)) {
-				return;
-			}
-		}
+		if (deferToQuest())
+			return;
 
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BEING_A_PIG;
 		// Move about a bit

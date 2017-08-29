@@ -55,53 +55,26 @@ public class AIRoutineForThief extends AIRoutine {
 
 	@Override
 	public void update() {
-		this.actor.aiLine = null;
-		this.actor.miniDialogue = null;
-		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
+		aiRoutineStart();
 
-		createSearchLocationsBasedOnVisibleAttackers();
-		createSearchLocationsBasedOnVisibleCriminals();
-		createSearchLocationsBasedOnSounds(Weapon.class);
-
-		if (runFightRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Fight
+		if (runFightRoutine())
 			return;
-		}
 
 		// No crime reaction routine coz hes a thief.... altho wat about crims
 		// against him? :P
 
-		if (runSearchRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search
+		if (runSearchRoutine())
 			return;
-		}
 
-		if (searchCooldown > 0) {
-			runSearchCooldown();
-			searchCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search cooldown
+		if (runSearchCooldown())
 			return;
-		}
 
-		// If not leader defer to pack
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader())
-
-		{
-			if (this.actor.group.update(this.actor)) {
-				return;
-			}
-		}
-
-		// if group leader wait for group
-		if (this.actor.group != null && this.actor == this.actor.group.getLeader()) {
-			if (this.actor.group.leaderNeedsToWait()) {
-				this.actor.activityDescription = "Waiting for " + this.actor.group.name;
-				return;
-			}
-		}
+		// Defer to group leader
+		if (deferToGroupLeader())
+			return;
 
 		// 1. loot corpses, even if owned
 		GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(50f, false, false, true, true, false,
@@ -142,11 +115,8 @@ public class AIRoutineForThief extends AIRoutine {
 		}
 
 		// Defer to quest
-		if (this.actor.quest != null) {
-			if (this.actor.quest.update(this.actor)) {
-				return;
-			}
-		}
+		if (deferToQuest())
+			return;
 
 		// Go about ur business... (move around randomly...)
 		if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {

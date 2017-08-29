@@ -11,7 +11,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.ThoughtBubbles;
-import com.marklynch.objects.actions.ActionScream;
 import com.marklynch.objects.actions.ActionTakeBite;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
@@ -161,88 +160,27 @@ public class AIRoutineForBlind extends AIRoutine {
 
 		addNonBlindNonGolemToAttackersList();
 		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class, Tool.class);
-
 		createSearchLocationsBasedOnVisibleAttackers();
 
-		if (runFightRoutine()) {
-			// createSearchLocationsBasedOnSounds();
-			new ActionScream(blind).perform();
-			addNonBlindNonGolemToAttackersList();
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Fight
+		if (runFightRoutine())
 			return;
-		}
 
-		// if (runCrimeReactionRoutine()) {
-		// addNonBlindToAttackersList();
-		// createSearchLocationsBasedOnVisibleAttackers();
-		// return;
-		// }
-
-		// CANT SEE ANY CRIMES MORT COMMITED..
-
-		// blind.runSearchRoutine() = true
-		// blind.runSearchRoutine() gameObject =
-		// com.marklynch.level.quest.caveoftheblind.Mort@24273305
-		// blind.runSearchRoutine() priority = 2
-		// blind.runSearchRoutine() square = 75,40
-		// searchCooldown = 10
-		//
-		// blind.runSearchRoutine() = true
-		// blind.runSearchRoutine() gameObject =
-		// com.marklynch.level.quest.caveoftheblind.Mort@24273305
-		// blind.runSearchRoutine() priority = 2
-		// blind.runSearchRoutine() square = 75,40
-		//
-		// searchCooldown = 10
-		//
-		// searchCooldown = 10
-		//
-		// searchCooldown = 10
-		//
-		// searchCooldown = 10
-		//
-		// blind.runSearchRoutine() = true
-		// blind.runSearchRoutine() gameObject =
-		// com.marklynch.level.quest.caveoftheblind.Mort@24273305
-		// blind.runSearchRoutine() priority = 2
-		// blind.runSearchRoutine() square = 75,40
-
-		if (runSearchRoutine()) {
-
-			// createSearchLocationsBasedOnSounds();
-			addNonBlindNonGolemToAttackersList();
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search
+		if (runSearchRoutine())
 			return;
-		}
 
-		if (searchCooldown > 0) {
-			runSearchCooldown();
-			searchCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search cooldown
+		if (runSearchCooldown())
 			return;
-		}
 
-		// If not leader defer to pack
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
-			if (this.actor.group.update(this.actor)) {
-				return;
-			}
-		}
-
-		// if group leader wait for group
-		if (this.actor.group != null && this.actor == this.actor.group.getLeader()) {
-			if (this.actor.group.leaderNeedsToWait()) {
-				this.actor.activityDescription = "Waiting for " + this.actor.group.name;
-				return;
-			}
-		}
+		// Defer to group leader
+		if (deferToGroupLeader())
+			return;
 
 		// Defer to quest
-		if (this.actor.quest != null) {
-			if (this.actor.quest.update(this.actor)) {
-				return;
-			}
-		}
+		if (deferToQuest())
+			return;
 
 		// Move around room
 		if (targetSquare != null) {

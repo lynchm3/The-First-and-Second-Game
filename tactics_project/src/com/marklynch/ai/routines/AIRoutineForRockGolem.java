@@ -2,16 +2,12 @@ package com.marklynch.ai.routines;
 
 import java.util.ArrayList;
 
-import javax.tools.Tool;
-
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.RockGolem;
-import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForRockGolem extends AIRoutine {
 
@@ -49,55 +45,28 @@ public class AIRoutineForRockGolem extends AIRoutine {
 		if (!rockGolem.awake)
 			return;
 
-		this.actor.aiLine = null;
-		this.actor.miniDialogue = null;
-		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
-
 		addAllToAttackersList();
-		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class, Tool.class);
-		createSearchLocationsBasedOnVisibleAttackers();
+		aiRoutineStart();
 
-		if (runFightRoutine()) {
-			addAllToAttackersList();
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Fight
+		if (runFightRoutine())
 			return;
-		}
 
-		if (runSearchRoutine()) {
-			addAllToAttackersList();
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search
+		if (runSearchRoutine())
 			return;
-		}
 
-		if (searchCooldown > 0) {
-			runSearchCooldown();
-			searchCooldown--;
-			createSearchLocationsBasedOnVisibleAttackers();
+		// Search cooldown
+		if (runSearchCooldown())
 			return;
-		}
 
-		// If not leader defer to pack
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
-			if (this.actor.group.update(this.actor)) {
-				return;
-			}
-		}
-
-		// if group leader wait for group
-		if (this.actor.group != null && this.actor == this.actor.group.getLeader()) {
-			if (this.actor.group.leaderNeedsToWait()) {
-				this.actor.activityDescription = "Waiting for " + this.actor.group.name;
-				return;
-			}
-		}
+		// Defer to group leader
+		if (deferToGroupLeader())
+			return;
 
 		// Defer to quest
-		if (this.actor.quest != null) {
-			if (this.actor.quest.update(this.actor)) {
-				return;
-			}
-		}
+		if (deferToQuest())
+			return;
 
 		// Move around room
 		if (targetSquare != null) {
