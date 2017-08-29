@@ -35,7 +35,8 @@ public class QuestBetweenTheWalls {
 		structureSections.add(new StructureSection("A Lovely House", 41, 19, 56, 28, false));
 
 		// Front door
-		structureFeatures.add(Templates.DOOR.makeCopy("Front Door", Game.level.squares[41][21], false, null));
+		structureFeatures
+				.add(Templates.DOOR.makeCopy("Front Door", Game.level.squares[41][21], false, false, false, null));
 
 		// Front room
 		StructureRoom frontRoom = new StructureRoom("Front Room", 42, 20, false, new ArrayList<Actor>(),
@@ -53,7 +54,8 @@ public class QuestBetweenTheWalls {
 
 		// GameObjectroom door
 		structurePaths.add(new StructurePath("Front Room", false, new ArrayList(), Game.level.squares[42][27]));
-		structureFeatures.add(Templates.DOOR.makeCopy("GameObjectroom Door", Game.level.squares[42][28], false, null));
+		structureFeatures
+				.add(Templates.DOOR.makeCopy("Bedroom Door", Game.level.squares[42][28], false, true, true, null));
 		structurePaths.add(new StructurePath("GameObjectroom", false, new ArrayList(), Game.level.squares[42][29]));
 
 		// GameObjectroom room

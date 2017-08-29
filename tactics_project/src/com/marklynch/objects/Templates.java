@@ -164,11 +164,11 @@ public class Templates {
 
 	// Openables
 	public static final Door WEAK_WOODEN_DOOR = new Door("Weak Wooden Door", 25, "door.png", null, new Inventory(), 1,
-			1, 0f, 0f, 10f, 1f, 5f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, null, true);
+			1, 0f, 0f, 10f, 1f, 5f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, null, false, false, false);
 	public static final Door DOOR = new Door("Door", 500, "door.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 10f,
-			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, null, false);
+			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, null, false, false, false);
 	public static final Gate GATE = new Gate("Gate", 100, "gate.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 10f,
-			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, null, false);
+			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, null, false, false, false);
 	public static final Chest CHEST = new Chest("Chest", 200, "chest.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
 			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, null, false);
 	public static final RemoteDoor FALSE_WALL = new RemoteDoor("Wall", 500, "wall.png", null, new Inventory(), 1, 1, 0f,

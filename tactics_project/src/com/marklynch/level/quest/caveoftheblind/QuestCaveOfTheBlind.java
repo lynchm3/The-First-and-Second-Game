@@ -223,8 +223,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[254][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[255][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[256][10], null));
-		caveFeatures.add(Templates.WEAK_WOODEN_DOOR.makeCopy("Security Door", Game.level.squares[257][10], true, null,
-				mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class)));
+		caveFeatures.add(Templates.WEAK_WOODEN_DOOR.makeCopy("Security Door", Game.level.squares[257][10], true, true,
+				true, null, mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class)));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[258][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[259][10], null));
 		caveFeatures.add(Templates.BARRICADE.makeCopy(Game.level.squares[260][10], null));
@@ -573,13 +573,13 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Cave featues for Mort
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][45], mort));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[276][46], mort));
-		mortsGameRoomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, mort,
-				mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
+		mortsGameRoomDoor = Templates.DOOR.makeCopy("Management Door", Game.level.squares[275][40], true, true, true,
+				mort, mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		mort.mortsRoomDoorway = mortsGameRoomDoor.squareGameObjectIsOn;
 		caveFeatures.add(mortsGameRoomDoor);
 		mort.aiRoutine.squareBounds.add(mort.mortsRoomDoorway);
-		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[264][40], true, mort, mortsKey,
-				(Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
+		mortsStoreroomDoor = Templates.DOOR.makeCopy("Vault Door", Game.level.squares[264][40], true, true, true, mort,
+				mortsKey, (Key) Game.level.player.inventory.getGameObjectOfClass(Key.class));
 		mort.mortsVaultDoorway = mortsStoreroomDoor.squareGameObjectIsOn;
 		caveFeatures.add(mortsStoreroomDoor);
 

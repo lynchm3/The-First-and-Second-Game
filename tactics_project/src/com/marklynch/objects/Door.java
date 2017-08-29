@@ -10,13 +10,16 @@ import mdesl.graphics.Color;
 public class Door extends Openable {
 	float soundDampeningWhenClosed;
 	boolean blocksLineOfSightWhenClosed;
+	private boolean shouldBeClosed;
+	private boolean shouldBeLocked;
 
 	public Door(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, Actor owner, boolean locked, Key... keys) {
+			float poisonResistance, float slashResistance, float weight, Actor owner, boolean locked,
+			boolean shouldBeClosed, boolean shouldBeLocked, Key... keys) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
@@ -32,7 +35,12 @@ public class Door extends Openable {
 		attackable = true;
 		soundDampeningWhenClosed = soundDampening;
 		blocksLineOfSightWhenClosed = blocksLineOfSight;
+		this.shouldBeClosed = shouldBeClosed;
+		this.shouldBeLocked = shouldBeLocked;
 
+		if (owner != null) {
+			owner.doors.add(this);
+		}
 	}
 
 	@Override
@@ -82,12 +90,21 @@ public class Door extends Openable {
 		soundDampening = soundDampeningWhenClosed;
 	}
 
-	public Door makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
+	public Door makeCopy(String name, Square square, boolean locked, boolean shouldBeClosed, boolean shouldBeLocked,
+			Actor owner, Key... keys) {
 		return new Door(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, locked, keys);
+				poisonResistance, slashResistance, weight, owner, locked, shouldBeClosed, shouldBeLocked, keys);
+	}
+
+	public boolean shouldBeClosed() {
+		return shouldBeClosed;
+	}
+
+	public boolean shouldBeLocked() {
+		return shouldBeLocked;
 	}
 
 	// @Override

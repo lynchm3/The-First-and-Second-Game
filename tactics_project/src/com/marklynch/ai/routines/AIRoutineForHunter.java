@@ -60,6 +60,10 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (runSearchCooldown())
 			return;
 
+		// Door maintenance routine
+		if (runDoorRoutine())
+			return;
+
 		// Defer to group leader
 		if (deferToGroupLeader())
 			return;

@@ -17,12 +17,16 @@ import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.BrokenGlass;
+import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
+import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
+import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
@@ -1003,6 +1007,37 @@ public class AIRoutine {
 		for (Square legitSquare : squareBounds) {
 			if (square == legitSquare) {
 				return true;
+			}
+		}
+		return false;
+
+	}
+
+	public boolean runDoorRoutine() {
+		for (Door door : actor.doors) {
+			if (door.locked == false && door.shouldBeLocked() && actor.hasKeyForDoor(door)
+					&& actor.canSeeGameObject(door)) {
+				Action action = new ActionLock(this.actor, door);
+				if (action.enabled) {
+					action.perform();
+					return true;
+				} else {
+					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(door.squareGameObjectIsOn)) {
+						return true;
+					}
+
+				}
+			} else if (door.isOpen() && door.shouldBeClosed() && actor.canSeeGameObject(door)) {
+				Action action = new ActionClose(this.actor, door);
+				if (action.enabled) {
+					action.perform();
+					return true;
+				} else {
+					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(door.squareGameObjectIsOn)) {
+						return true;
+					}
+
+				}
 			}
 		}
 		return false;

@@ -116,6 +116,10 @@ public class AIRoutineForMort extends AIRoutine {
 		if (runSearchCooldown())
 			return;
 
+		// Door maintenance routine
+		if (runDoorRoutine())
+			return;
+
 		if (retreatedToRoom)
 			return;
 

@@ -34,7 +34,8 @@ public class QuestTheSecretRoom {
 		structureSections.add(new StructureSection("A Cozy Place", 21, 30, 29, 36, false));
 
 		// Front door
-		structureFeatures.add(Templates.DOOR.makeCopy("Front Door", Game.level.squares[24][30], false, null));
+		structureFeatures
+				.add(Templates.DOOR.makeCopy("Front Door", Game.level.squares[24][30], false, false, false, null));
 
 		// Front room
 		StructureRoom livingRoom = new StructureRoom("Living Room", 22, 31, false, new ArrayList<Actor>(),
