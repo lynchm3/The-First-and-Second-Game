@@ -52,6 +52,10 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (runCrimeReactionRoutine())
 			return;
 
+		// Door maintenance routine
+		if (runDoorRoutine())
+			return;
+
 		// Defer to group leader
 		if (deferToGroupLeader())
 			return;

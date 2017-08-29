@@ -1016,7 +1016,8 @@ public class AIRoutine {
 	public boolean runDoorRoutine() {
 		for (Door door : actor.doors) {
 			if (door.locked == false && door.shouldBeLocked() && actor.hasKeyForDoor(door)
-					&& actor.canSeeGameObject(door)) {
+					&& actor.squareGameObjectIsOn != door.squareGameObjectIsOn && actor.canSeeGameObject(door)) {
+				actor.thoughtBubbleImageTexture = door.imageTexture;
 				Action action = new ActionLock(this.actor, door);
 				if (action.enabled) {
 					action.perform();
@@ -1027,7 +1028,9 @@ public class AIRoutine {
 					}
 
 				}
-			} else if (door.isOpen() && door.shouldBeClosed() && actor.canSeeGameObject(door)) {
+			} else if (door.isOpen() && door.shouldBeClosed() && actor.squareGameObjectIsOn != door.squareGameObjectIsOn
+					&& actor.canSeeGameObject(door)) {
+				actor.thoughtBubbleImageTexture = door.imageTexture;
 				Action action = new ActionClose(this.actor, door);
 				if (action.enabled) {
 					action.perform();
