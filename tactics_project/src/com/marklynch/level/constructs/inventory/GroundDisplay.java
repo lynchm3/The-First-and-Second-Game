@@ -1,10 +1,12 @@
 package com.marklynch.level.constructs.inventory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gold;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.utils.QuadUtils;
@@ -55,21 +57,36 @@ public class GroundDisplay implements Draggable, Scrollable {
 		matchGameObjectsToSquares();
 	}
 
+	public static HashMap<String, Integer> itemTypeCount = new HashMap<String, Integer>();
+
 	public void matchGameObjectsToSquares() {
 
+		itemTypeCount.clear();
 		groundDisplaySquares.clear();
 
 		int xIndex = 0;
 		int yIndex = 0;
+		ArrayList<String> alreadyAdded = new ArrayList<String>();
 
 		for (GameObject gameObject : gameObjects) {
-			GroundDisplaySquare groundDisplaySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
-			groundDisplaySquare.gameObject = gameObject;
-			groundDisplaySquares.add(groundDisplaySquare);
-			xIndex++;
-			if (xIndex == this.squareGridWidthInSquares) {
-				xIndex = 0;
-				yIndex++;
+
+			if (gameObject.value == 0 && gameObject instanceof Gold)
+				continue;
+
+			if (alreadyAdded.contains(gameObject.name)) {
+				itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
+
+			} else {
+				GroundDisplaySquare groundDisplaySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
+				groundDisplaySquare.gameObject = gameObject;
+				groundDisplaySquares.add(groundDisplaySquare);
+				xIndex++;
+				if (xIndex == this.squareGridWidthInSquares) {
+					xIndex = 0;
+					yIndex++;
+				}
+				alreadyAdded.add(gameObject.name);
+				itemTypeCount.put(gameObject.name, 1);
 			}
 		}
 	}

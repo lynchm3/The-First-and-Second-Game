@@ -100,7 +100,11 @@ public class InventorySquare extends Square {
 			}
 
 			// Count && value
-			int count = this.inventoryThisBelongsTo.itemTypeCount.get(gameObject.name);
+			int count = 1;
+			if (this instanceof GroundDisplaySquare)
+				count = GroundDisplay.itemTypeCount.get(gameObject.name);
+			else
+				count = this.inventoryThisBelongsTo.itemTypeCount.get(gameObject.name);
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 
 				Color goldTextColor = Color.WHITE;
