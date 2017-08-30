@@ -887,8 +887,20 @@ public class Inventory implements Draggable, Scrollable {
 			float otherTextureX = otherInventory.squaresX + otherInventory.squaresWidth / 2 - (otherGameObject.width);
 			float otherTextureY = otherInventory.squaresBaseY + otherInventory.squaresHeight / 2
 					- (otherGameObject.height);
-			TextureUtils.drawTexture(otherGameObject.imageTexture, 0.5f, otherTextureX, otherTextureY,
-					otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);
+			if (otherGameObject instanceof Actor) {
+				int actorPositionXInPixels = otherInventory.actorX;
+				int actorPositionYInPixels = (int) (squaresBaseY + squaresHeight / 2
+						- (otherGameObject.imageTexture.getHeight()));
+				TextureUtils.drawTexture(otherGameObject.imageTexture, actorPositionXInPixels, actorPositionYInPixels,
+						actorPositionXInPixels + otherGameObject.width * 2,
+						actorPositionYInPixels + otherGameObject.height * 2);
+				TextureUtils.drawTexture(textureBag, 0.5f, otherTextureX, otherTextureY,
+						otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);
+			} else {
+				TextureUtils.drawTexture(otherGameObject.imageTexture, 0.5f, otherTextureX, otherTextureY,
+						otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);
+
+			}
 			if (otherInventory.size() > 0) {
 				otherInventory.drawSquares();
 			} else {
