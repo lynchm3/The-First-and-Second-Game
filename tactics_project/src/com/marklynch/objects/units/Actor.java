@@ -36,6 +36,7 @@ import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
+import com.marklynch.objects.actions.ActionSellSpecificItem;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTalk;
@@ -1031,15 +1032,11 @@ public class Actor extends GameObject {
 		super.update(delta);
 	}
 
-	public void sellAllToTarget(Class clazz, GameObject gameObject) {
+	public void sellAllToTarget(Class clazz, Actor target) {
 		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
 		for (GameObject gameObjectToSell : gameObjectsToSell) {
 			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
-				if (Game.level.shouldLog(Game.level.activeActor))
-					Game.level.logOnScreen(
-							new ActivityLog(new Object[] { this, " sold ", gameObjectToSell, " to ", gameObject }));
-				this.inventory.remove(gameObjectToSell);
-				gameObject.inventory.add(gameObjectToSell);
+				new ActionSellSpecificItem(this, target, gameObjectToSell);
 			}
 		}
 

@@ -930,10 +930,10 @@ public class AIRoutineUtils {
 		}
 	}
 
-	public static boolean sellAllToTarget(Class clazz, GameObject gameObject) {
-		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
-		if (weaponDistance <= 1 && gameObject.remainingHealth > 0) {
-			Game.level.activeActor.sellAllToTarget(clazz, gameObject);
+	public static boolean sellAllToTarget(Class clazz, Actor target) {
+		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
+		if (weaponDistance <= 1 && target.remainingHealth > 0) {
+			Game.level.activeActor.sellAllToTarget(clazz, target);
 			return true;
 		} else {
 			return false;

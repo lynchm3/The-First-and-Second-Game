@@ -21,6 +21,7 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
+import com.marklynch.objects.actions.ActionBuySpecificItem;
 import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionClose;
@@ -47,6 +48,7 @@ import com.marklynch.objects.actions.ActionRead;
 import com.marklynch.objects.actions.ActionRemoveMapMarker;
 import com.marklynch.objects.actions.ActionRename;
 import com.marklynch.objects.actions.ActionSearch;
+import com.marklynch.objects.actions.ActionSellSpecificItem;
 import com.marklynch.objects.actions.ActionSkin;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.actions.ActionStopHiding;
@@ -923,9 +925,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
-				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
+				return new ActionSellSpecificItem(performer, (Actor) Inventory.target, this);
 			else
-				return new ActionTakeSpecificItem(performer, Inventory.target, this);
+				return new ActionBuySpecificItem(performer, (Actor) Inventory.target, this);
 		}
 
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this

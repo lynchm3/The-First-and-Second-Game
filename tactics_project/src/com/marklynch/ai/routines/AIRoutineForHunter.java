@@ -150,7 +150,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 
-			boolean soldItems = AIRoutineUtils.sellAllToTarget(Junk.class, target);
+			boolean soldItems = AIRoutineUtils.sellAllToTarget(Junk.class, (Actor) target);
 			if (!soldItems)
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
 			else
