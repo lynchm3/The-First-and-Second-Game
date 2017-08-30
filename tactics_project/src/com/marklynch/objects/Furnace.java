@@ -17,11 +17,11 @@ public class Furnace extends Openable {
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, Actor owner, boolean locked, Key... keys) {
+			float poisonResistance, float slashResistance, float weight, int value, Actor owner, boolean locked, Key... keys) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, owner, locked, keys);
+				weight, value, owner, locked, keys);
 		if (locked)
 			this.name = baseName + " (locked)";
 		else if (this.inventory.size() == 0)
@@ -86,7 +86,7 @@ public class Furnace extends Openable {
 
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, locked, keys);
+				poisonResistance, slashResistance, weight, value, owner, locked, keys);
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class Furnace extends Openable {
 
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, locked, keys);
+				poisonResistance, slashResistance, weight, value, owner, locked, keys);
 	}
 
 }

@@ -18,11 +18,11 @@ public class Searchable extends GameObject {
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, Actor owner, Effect[] effectsFromSearching) {
+			float poisonResistance, float slashResistance, float weight, int value, Actor owner, Effect[] effectsFromSearching) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, owner);
+				weight, value, owner);
 		this.effectsFromInteracting = effectsFromSearching;
 
 		// DROP HOLE
@@ -45,7 +45,7 @@ public class Searchable extends GameObject {
 		return new Searchable(new String(name), (int) totalHealth, imageTexturePath, squareGameObjectIsOn,
 				new Inventory(), widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
-				electricResistance, poisonResistance, slashResistance, weight, owner, effectsFromInteracting);
+				electricResistance, poisonResistance, slashResistance, weight, value, owner, effectsFromInteracting);
 	}
 
 }

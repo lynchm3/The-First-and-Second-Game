@@ -18,21 +18,19 @@ public class Blind extends Monster {
 	public StructureRoom roomLivingIn;
 
 	public Blind(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight, GameObject bed,
-			Inventory inventory,   
-			  float widthRatio, float heightRatio,
-			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float waterResistance, float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
+			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
+			GameObject bed, Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX,
+			float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
+			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
+			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, StructureRoom roomLivingIn) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, bed, inventory,  
-				   false, true, widthRatio, heightRatio,
+				squareActorIsStandingOn, travelDistance, sight, bed, inventory, false, true, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight,
-				owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
-				legsAnchorX, legsAnchorY);
+				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
+				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
 		this.roomLivingIn = roomLivingIn;
 		aiRoutine = new AIRoutineForBlind(this);
 	}
@@ -97,12 +95,11 @@ public class Blind extends Monster {
 	public Blind makeCopy(Square square, Faction faction, StructureRoom roomLivingIn) {
 
 		Blind actor = new Blind(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, null, new Inventory(), 
-				    widthRatio,
+				endurance, imageTexturePath, square, travelDistance, sight, null, new Inventory(), widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn);
+				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
+				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn);
 		return actor;
 	}
 

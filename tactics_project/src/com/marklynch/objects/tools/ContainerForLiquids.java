@@ -27,13 +27,13 @@ public class ContainerForLiquids extends Tool {
 			Square squareGameObjectIsOn, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, Actor owner, float anchorX, float anchorY,
+			float poisonResistance, float slashResistance, float weight, int value, Actor owner, float anchorX, float anchorY,
 			float volume, String imageWhenFullPath) {
 
 		super(name, minRange, maxRange, imagePath, health, squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, owner, anchorX, anchorY, 5);
+				weight, value, owner, anchorX, anchorY, 5);
 		this.volume = volume;
 		this.imageWhenFullPath = imageWhenFullPath;
 		baseName = new String(name);
@@ -55,7 +55,7 @@ public class ContainerForLiquids extends Tool {
 		return new ContainerForLiquids(new String(baseName), minRange, maxRange, imageTexturePath, (int) totalHealth,
 				squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
-				electricResistance, poisonResistance, slashResistance, weight, owner, anchorX, anchorY, volume,
+				electricResistance, poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, volume,
 				imageWhenFullPath);
 	}
 

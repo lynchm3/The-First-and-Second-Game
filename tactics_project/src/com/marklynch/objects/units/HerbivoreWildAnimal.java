@@ -47,12 +47,10 @@ public class HerbivoreWildAnimal extends Actor {
 
 		HerbivoreWildAnimal actor = new HerbivoreWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
 				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
-				new Inventory(),
-
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
-				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, area);
+				new Inventory(), widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
+				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
+				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
+				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, area);
 		return actor;
 	}
 

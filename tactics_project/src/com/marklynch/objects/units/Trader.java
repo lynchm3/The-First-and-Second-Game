@@ -108,7 +108,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 
 	@Override
 	public int compare(GameObject gameObject1, GameObject gameObject2) {
-		return (int) (gameObject2.value - gameObject1.value);
+		return gameObject2.value - gameObject1.value;
 	}
 
 }

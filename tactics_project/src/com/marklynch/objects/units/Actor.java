@@ -175,7 +175,7 @@ public class Actor extends GameObject {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, owner);
+				weight, 0, owner);
 		standingTexture = imageTexture;
 
 		this.strength = strength;
