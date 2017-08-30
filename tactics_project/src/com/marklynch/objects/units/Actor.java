@@ -243,7 +243,7 @@ public class Actor extends GameObject {
 		}
 
 		for (GameObject gameObject : mightHaves) {
-			if (Math.random() > 0.9d)
+			if (Math.random() > 0.8d)
 				this.inventory.add(gameObject);
 		}
 

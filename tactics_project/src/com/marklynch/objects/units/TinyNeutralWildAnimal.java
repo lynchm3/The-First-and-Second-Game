@@ -8,7 +8,6 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSquash;
 
 import mdesl.graphics.Color;
@@ -35,10 +34,10 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 		fitsInInventory = true;
 	}
 
-	@Override
-	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionMove(performer, this.squareGameObjectIsOn, true);
-	}
+	// @Override
+	// public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+	// return new ActionMove(performer, this.squareGameObjectIsOn, true);
+	// }
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {

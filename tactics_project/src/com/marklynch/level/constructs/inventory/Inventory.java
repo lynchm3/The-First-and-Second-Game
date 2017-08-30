@@ -632,6 +632,9 @@ public class Inventory implements Draggable, Scrollable {
 			if (inventoryMode == INVENTORY_MODE.MODE_TRADE && gameObject instanceof Gold)
 				continue;
 
+			if (gameObject.value == 0 && gameObject instanceof Gold)
+				continue;
+
 			InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 			inventorySquare.gameObject = gameObject;
 			inventorySquares.add(inventorySquare);
