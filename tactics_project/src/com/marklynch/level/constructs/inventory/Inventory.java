@@ -620,12 +620,27 @@ public class Inventory implements Draggable, Scrollable {
 
 	public void matchGameObjectsToSquares() {
 
+		/*
+		 * 
+		 * So... merging items What gets merged? Junk Food
+		 * 
+		 * 
+		 * fuck... how the fuck do i even match them...
+		 * 
+		 * By name i gues... So... if(Food || Junk){show #} ughck
+		 * 
+		 * 
+		 * 
+		 */
+
 		// System.out.println("matchGameObjectsToSquares");
 
 		if (!isOpen)
 			return;
 
 		inventorySquares.clear();
+
+		ArrayList<String> alreadyAdded = new ArrayList<String>();
 
 		for (GameObject gameObject : this.filteredGameObjects) {
 
@@ -638,9 +653,15 @@ public class Inventory implements Draggable, Scrollable {
 			if (gameObject.value == 0 && gameObject instanceof Gold)
 				continue;
 
-			InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
-			inventorySquare.gameObject = gameObject;
-			inventorySquares.add(inventorySquare);
+			if (alreadyAdded.contains(gameObject.name)) {
+
+			} else {
+
+				InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
+				inventorySquare.gameObject = gameObject;
+				inventorySquares.add(inventorySquare);
+				alreadyAdded.add(gameObject.name);
+			}
 		}
 
 		// Code to fill up space with empty sqrs

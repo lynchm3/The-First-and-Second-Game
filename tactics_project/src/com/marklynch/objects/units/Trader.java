@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gold;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -53,6 +54,10 @@ public class Trader extends Actor implements Comparator<GameObject> {
 		ArrayList<GameObject> temp = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
 		temp.remove(equipped);
 		temp.remove(broom);
+		for (GameObject gameObject : (ArrayList<GameObject>) temp.clone()) {
+			if (gameObject instanceof Gold)
+				temp.remove(gameObject);
+		}
 		Collections.sort(temp, this);
 
 		if (temp.size() == 0) {

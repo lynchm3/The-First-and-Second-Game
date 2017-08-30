@@ -178,10 +178,8 @@ public class QuestSmallGame extends Quest {
 		// Add lead hunter
 		GameObject brentsGameObject = Templates.BED.makeCopy(Game.level.squares[10][9]);
 		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1),
-				brentsGameObject, 203, new GameObject[] {}, new GameObject[] {});
-		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBrent));
-		hunterBrent.equip(hunterBrent.inventory.get(0));
-		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
+				brentsGameObject, 203, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) },
+				new GameObject[] {});
 
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
@@ -199,37 +197,23 @@ public class QuestSmallGame extends Quest {
 		// Add hunters
 		GameObject brontsGameObject = Templates.BED.makeCopy(Game.level.squares[9][9]);
 		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1),
-				brontsGameObject, 124, new GameObject[] {}, new GameObject[] {});
-		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBront1));
-		hunterBront1.equip(hunterBront1.inventory.get(0));
-		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
+				brontsGameObject, 124, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) },
+				new GameObject[] {});
 
 		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null, 73,
-				new GameObject[] {}, new GameObject[] {});
-		hunterBront2.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront2));
-		hunterBront2.equip(hunterBront2.inventory.get(0));
-		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
 
 		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null, 30,
-				new GameObject[] {}, new GameObject[] {});
-		hunterBront3.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront3));
-		hunterBront3.equip(hunterBront3.inventory.get(0));
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
 		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1), null, 83,
-				new GameObject[] {}, new GameObject[] {});
-		hunterBront4.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront4));
-		hunterBront4.equip(hunterBront4.inventory.get(0));
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
 		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1), null, 23,
-				new GameObject[] {}, new GameObject[] {});
-		hunterBront5.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront5));
-		hunterBront5.equip(hunterBront5.inventory.get(0));
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
 		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1), null, 43,
-				new GameObject[] {}, new GameObject[] {});
-		hunterBront6.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront6));
-		hunterBront6.equip(hunterBront6.inventory.get(0));
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
 
 		Actor thief = Templates.THIEF.makeCopy(Game.level.squares[2][13], Game.level.factions.get(2), null, 64,
-				new GameObject[] {}, new GameObject[] {});
-		thief.inventory.add(Templates.HATCHET.makeCopy(null, thief));
+				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
 
 		// Some ground hatchets
 		Templates.HATCHET.makeCopy(Game.level.squares[3][6], Game.level.player);
@@ -238,7 +222,7 @@ public class QuestSmallGame extends Quest {
 		Templates.HATCHET.makeCopy(Game.level.squares[1][6], Game.level.player);
 
 		hunterPack = new Group("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3, hunterBront4,
-				hunterBront5);// , hunterBront6);
+				hunterBront5, hunterBront6);
 
 		this.hunterPack.quest = this;
 		for (GameObject hunter : hunterPack.getMembers()) {
