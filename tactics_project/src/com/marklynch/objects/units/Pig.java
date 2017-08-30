@@ -18,7 +18,7 @@ import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;
 
-public class Pig extends Actor {
+public class Pig extends Animal {
 
 	public StructureRoom room;
 	public Structure shop;
@@ -34,11 +34,11 @@ public class Pig extends Actor {
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, bed, inventory, false, false, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, 0);
+				squareActorIsStandingOn, travelDistance, sight, bed, inventory, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
+				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
+				legsAnchorX, legsAnchorY);
 
 		aiRoutine = new AIRoutineForPig(this);
 	}

@@ -8,7 +8,7 @@ import com.marklynch.objects.GameObject;
 
 import mdesl.graphics.Color;
 
-public class AggressiveWildAnimal extends Actor {
+public class AggressiveWildAnimal extends Animal {
 
 	public AggressiveWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
@@ -19,11 +19,11 @@ public class AggressiveWildAnimal extends Actor {
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, bed, inventory, false, false, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, 0);
+				squareActorIsStandingOn, travelDistance, sight, bed, inventory, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
+				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
+				legsAnchorX, legsAnchorY);
 		aiRoutine = new AIRoutineForWildAnimal(this);
 	}
 

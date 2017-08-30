@@ -9,7 +9,7 @@ import com.marklynch.objects.GameObject;
 
 import mdesl.graphics.Color;
 
-public class HerbivoreWildAnimal extends Actor {
+public class HerbivoreWildAnimal extends Animal {
 
 	public Area area;
 
@@ -22,11 +22,11 @@ public class HerbivoreWildAnimal extends Actor {
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, Area area) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, bed, inventory, false, false, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, 0);
+				squareActorIsStandingOn, travelDistance, sight, bed, inventory, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
+				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
+				legsAnchorX, legsAnchorY);
 
 		this.area = area;
 		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this, area);
