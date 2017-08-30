@@ -131,6 +131,9 @@ public class Inventory implements Draggable, Scrollable {
 	// Loot all button
 	public static LevelButton buttonLootAll;
 
+	// Quick sell button
+	public static LevelButton buttonQuickSell;
+
 	public static ArrayList<Button> buttons;
 	public static ArrayList<Button> buttonsSort;
 	public static ArrayList<Button> buttonsFilter;
@@ -261,7 +264,7 @@ public class Inventory implements Draggable, Scrollable {
 			public void click() {
 				if (groundDisplay == null) {
 					new ActionLootAll(Game.level.player, (GameObject) target).perform();
-				} else {
+				} else if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 					ArrayList<Action> actionsToPerform = new ArrayList<Action>();
 					for (Square square : groundDisplay.squares) {
 						for (GameObject gameObject : square.inventory.gameObjects) {
@@ -282,8 +285,25 @@ public class Inventory implements Draggable, Scrollable {
 			}
 		});
 
+		buttonQuickSell = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "QUICK SELL [A]", true, false, Color.BLACK, Color.WHITE);
+		buttonQuickSell.setClickListener(new ClickListener() {
+
+			@Override
+			public void click() {
+				if (inventoryMode == INVENTORY_MODE.MODE_TRADE) {
+					Game.level.player.inventory.markItemsToSell();
+					Game.level.player.sellItemsMarkedToSell((Actor) Inventory.target);
+				}
+			}
+		});
+
 		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 			buttons.add(buttonLootAll);
+		}
+
+		if (inventoryMode == INVENTORY_MODE.MODE_TRADE) {
+			buttons.add(buttonQuickSell);
 		}
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
@@ -721,6 +741,7 @@ public class Inventory implements Draggable, Scrollable {
 		resize2();
 		buttonClose.x = squaresX;
 		textShiftX = squaresX + buttonClose.width;
+		buttonQuickSell.x = squaresX + buttonClose.width;
 
 		if (this.groundDisplay != null) {
 			this.groundDisplay.fixScroll();
@@ -732,6 +753,7 @@ public class Inventory implements Draggable, Scrollable {
 			this.otherInventory.resize2();
 			buttonLootAll.x = this.otherInventory.squaresX;
 		}
+
 	}
 
 	public void resize2() {

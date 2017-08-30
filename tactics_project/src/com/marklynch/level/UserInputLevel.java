@@ -875,6 +875,8 @@ public class UserInputLevel {
 			if (Game.level.openInventories.size() > 0) {
 				if (Inventory.buttons.contains(Inventory.buttonLootAll)) {
 					Inventory.buttonLootAll.click();
+				} else if (Inventory.buttons.contains(Inventory.buttonQuickSell)) {
+					Inventory.buttonQuickSell.click();
 				}
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
