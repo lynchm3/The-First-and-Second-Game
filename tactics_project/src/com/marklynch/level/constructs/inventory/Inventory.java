@@ -897,8 +897,6 @@ public class Inventory implements Draggable, Scrollable {
 		// Ground display sqrs
 		if (groundDisplay != null) {
 			groundDisplay.drawStaticUI();
-			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
-					new Object[] { stringShiftDrop });
 			if (groundDisplay.gameObjects.size() > 0) {
 				groundDisplay.drawSquares();
 			} else {
@@ -918,14 +916,7 @@ public class Inventory implements Draggable, Scrollable {
 		// Other Gameobject / actor inventory squares
 		if (otherInventory != null) {
 			otherInventory.drawBorder();
-			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
-					new Object[] { stringShiftPut });
-			// Actor
 			GameObject otherGameObject = (GameObject) target;
-			// TextureUtils.drawTexture(otherGameObject.imageTexture, alpha,
-			// otherInventory.actorX, actorPositionYInPixels,
-			// otherInventory.actorX + actorWidth, actorPositionYInPixels +
-			// otherGameObject.height * 2);
 			float otherTextureX = otherInventory.squaresX + otherInventory.squaresWidth / 2 - (otherGameObject.width);
 			float otherTextureY = otherInventory.squaresBaseY + otherInventory.squaresHeight / 2
 					- (otherGameObject.height);
@@ -979,7 +970,7 @@ public class Inventory implements Draggable, Scrollable {
 					new Object[] { stringShiftDrop });
 		}
 
-		if (otherInventory != null || inventoryMode != INVENTORY_MODE.MODE_TRADE) {
+		if (otherInventory != null && inventoryMode != INVENTORY_MODE.MODE_TRADE) {
 			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
 					new Object[] { stringShiftPut });
 		}
