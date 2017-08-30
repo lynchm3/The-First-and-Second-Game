@@ -645,8 +645,6 @@ public class Inventory implements Draggable, Scrollable {
 
 		inventorySquares.clear();
 
-		ArrayList<String> alreadyAdded = new ArrayList<String>();
-
 		for (GameObject gameObject : this.filteredGameObjects) {
 
 			if (this.parent == Game.level.player && gameObject instanceof Gold)
@@ -658,7 +656,7 @@ public class Inventory implements Draggable, Scrollable {
 			if (gameObject.value == 0 && gameObject instanceof Gold)
 				continue;
 
-			if (alreadyAdded.contains(gameObject.name)) {
+			if (itemTypeCount.containsKey(gameObject.name)) {
 				itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
 
 			} else {
@@ -666,7 +664,6 @@ public class Inventory implements Draggable, Scrollable {
 				InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 				inventorySquare.gameObject = gameObject;
 				inventorySquares.add(inventorySquare);
-				alreadyAdded.add(gameObject.name);
 				itemTypeCount.put(gameObject.name, 1);
 			}
 		}

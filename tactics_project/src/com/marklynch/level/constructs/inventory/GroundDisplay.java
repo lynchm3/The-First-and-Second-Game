@@ -66,14 +66,13 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 		int xIndex = 0;
 		int yIndex = 0;
-		ArrayList<String> alreadyAdded = new ArrayList<String>();
 
 		for (GameObject gameObject : gameObjects) {
 
 			if (gameObject.value == 0 && gameObject instanceof Gold)
 				continue;
 
-			if (alreadyAdded.contains(gameObject.name)) {
+			if (itemTypeCount.containsKey(gameObject.name)) {
 				itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
 
 			} else {
@@ -85,7 +84,6 @@ public class GroundDisplay implements Draggable, Scrollable {
 					xIndex = 0;
 					yIndex++;
 				}
-				alreadyAdded.add(gameObject.name);
 				itemTypeCount.put(gameObject.name, 1);
 			}
 		}
