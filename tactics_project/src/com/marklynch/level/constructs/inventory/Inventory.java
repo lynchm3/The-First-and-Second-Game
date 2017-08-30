@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.inventory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
@@ -618,6 +619,8 @@ public class Inventory implements Draggable, Scrollable {
 		return gameObjects;
 	}
 
+	public HashMap<String, Integer> itemTypeCount = new HashMap<String, Integer>();
+
 	public void matchGameObjectsToSquares() {
 
 		/*
@@ -638,6 +641,8 @@ public class Inventory implements Draggable, Scrollable {
 		if (!isOpen)
 			return;
 
+		itemTypeCount.clear();
+
 		inventorySquares.clear();
 
 		ArrayList<String> alreadyAdded = new ArrayList<String>();
@@ -654,6 +659,7 @@ public class Inventory implements Draggable, Scrollable {
 				continue;
 
 			if (alreadyAdded.contains(gameObject.name)) {
+				itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
 
 			} else {
 
@@ -661,6 +667,7 @@ public class Inventory implements Draggable, Scrollable {
 				inventorySquare.gameObject = gameObject;
 				inventorySquares.add(inventorySquare);
 				alreadyAdded.add(gameObject.name);
+				itemTypeCount.put(gameObject.name, 1);
 			}
 		}
 
@@ -1304,9 +1311,23 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void markItemsToSell() {
+		ArrayList<String> weaponAlreadyAdded = new ArrayList<String>();
 		for (GameObject gameObject : gameObjects) {
-			if (gameObject instanceof Junk)
+
+			// Junk
+			if (gameObject instanceof Junk) {
 				gameObject.toSell = true;
+				continue;
+			}
+
+			// Duplicate weapons
+			if (gameObject instanceof Weapon) {
+				if (weaponAlreadyAdded.contains(gameObject.name)) {
+					gameObject.toSell = true;
+				} else {
+					weaponAlreadyAdded.add(gameObject.name);
+				}
+			}
 		}
 	}
 

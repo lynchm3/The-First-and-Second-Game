@@ -99,6 +99,8 @@ public class InventorySquare extends Square {
 						xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 			}
 
+			// Count && value
+			int count = this.inventoryThisBelongsTo.itemTypeCount.get(gameObject.name);
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 
 				Color goldTextColor = Color.WHITE;
@@ -107,9 +109,13 @@ public class InventorySquare extends Square {
 					goldTextColor = Color.RED;
 				}
 
-				StringWithColor goldText = new StringWithColor("" + gameObject.value, goldTextColor);
-				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 30,
-						Integer.MAX_VALUE, false, new Object[] { goldText });
+				StringWithColor goldText = new StringWithColor(count + "x" + gameObject.value, goldTextColor);
+				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
+						new Object[] { goldText });
+			} else if (count > 1) {
+				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
+						new Object[] { count + "x" });
+
 			}
 		}
 
