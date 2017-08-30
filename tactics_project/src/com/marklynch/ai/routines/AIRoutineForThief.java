@@ -102,7 +102,7 @@ public class AIRoutineForThief extends AIRoutine {
 		// stupid generic game object
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(50f, true, false, true, false, false, true,
 				0, Axe.class, Bell.class, Lantern.class, Pickaxe.class, Tool.class, BodyArmor.class, Helmet.class,
-				LegArmor.class, Weapon.class, ContainerForLiquids.class, Food.class, Junk.class, Key.class);
+				LegArmor.class, Weapon.class, ContainerForLiquids.class, Food.class, Junk.class, Key.class, Junk.class);
 		if (loot != null) {
 			if (loot.owner != null && loot.owner != actor)
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;

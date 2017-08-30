@@ -138,6 +138,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public Animation animation = new AnimationWait();
 
+	public boolean toSell = false;
+
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,

@@ -10,6 +10,7 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
+import com.marklynch.objects.Junk;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLootAll;
@@ -528,6 +529,8 @@ public class Inventory implements Draggable, Scrollable {
 
 	public void add(GameObject gameObject, int index) {
 		if (!gameObjects.contains(gameObject)) {
+
+			gameObject.toSell = false;
 
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null) {
@@ -1277,5 +1280,20 @@ public class Inventory implements Draggable, Scrollable {
 		// }
 		//
 		// return null;
+	}
+
+	public void markItemsToSell() {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject instanceof Junk)
+				gameObject.toSell = true;
+		}
+	}
+
+	public boolean hasItemsToSell() {
+		for (GameObject gameObject : gameObjects)
+			if (gameObject.toSell == true)
+				return true;
+
+		return false;
 	}
 }

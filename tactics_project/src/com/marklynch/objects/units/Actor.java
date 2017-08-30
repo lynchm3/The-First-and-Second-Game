@@ -205,12 +205,6 @@ public class Actor extends GameObject {
 			bed.owner = this;
 
 		ArrayList<Weapon> weapons = getWeaponsInInventory();
-		//
-		// for (Weapon weapon : weapons) {
-		// weaponButtons.add(new WeaponButton(0, 0, 50, 50,
-		// weapon.imageTexturePath, weapon.imageTexturePath, weapon));
-		// }
-
 		if (weapons.size() > 0 && weapons.get(0) != null) {
 			equipped = weapons.get(0);
 			equippedWeaponGUID = weapons.get(0).guid;
@@ -1407,5 +1401,18 @@ public class Actor extends GameObject {
 				gold.value = 0;
 			}
 		}
+	}
+
+	public boolean sellItemsMarkedToSell(Actor buyer) {
+		// System.out.println("sellItemsMarkedToSell");
+		if (this.straightLineDistanceTo(buyer.squareGameObjectIsOn) > 1)
+			return false;
+
+		for (GameObject gameObject : (ArrayList<GameObject>) inventory.gameObjects.clone()) {
+			if (gameObject.toSell == true) {
+				new ActionSellSpecificItem(this, buyer, gameObject).perform();
+			}
+		}
+		return true;
 	}
 }
