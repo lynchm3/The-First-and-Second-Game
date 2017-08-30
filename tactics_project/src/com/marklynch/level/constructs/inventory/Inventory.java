@@ -937,7 +937,7 @@ public class Inventory implements Draggable, Scrollable {
 					new Object[] { stringShiftDrop });
 		}
 
-		if (otherInventory != null) {
+		if (otherInventory != null || inventoryMode != INVENTORY_MODE.MODE_TRADE) {
 			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
 					new Object[] { stringShiftPut });
 		}
