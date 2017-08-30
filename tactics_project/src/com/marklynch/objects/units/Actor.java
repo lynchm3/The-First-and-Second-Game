@@ -1083,8 +1083,7 @@ public class Actor extends GameObject {
 			}
 		} else if (performer.attackers.contains(this)) {
 			return new ActionAttack(performer, this);
-		} else if (this instanceof AggressiveWildAnimal || this instanceof CarnivoreNeutralWildAnimal
-				|| this instanceof HerbivoreWildAnimal || this instanceof Pig) {
+		} else if (this instanceof Animal) {
 			return new ActionPet(performer, this);
 		} else if (this.getConversation() != null) {
 			return new ActionTalk(performer, this);
@@ -1104,8 +1103,7 @@ public class Actor extends GameObject {
 			// Talk
 			if (this.getConversation() != null)
 				actions.add(new ActionTalk(performer, this));
-			if (this instanceof AggressiveWildAnimal || this instanceof CarnivoreNeutralWildAnimal
-					|| this instanceof HerbivoreWildAnimal || this instanceof Pig) {
+			if (this instanceof Animal) {
 				actions.add(new ActionPet(performer, this));
 			}
 			// Inherited from object (attack...)

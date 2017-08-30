@@ -33,8 +33,7 @@ import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.units.Animal;
 import com.marklynch.objects.units.Farmer;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.Hunter;
@@ -928,8 +927,7 @@ public class AIRoutine {
 		this.actor.activityDescription = null;
 		this.actor.thoughtBubbleImageTexture = null;
 		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class);
-		if (actor instanceof AggressiveWildAnimal || actor instanceof CarnivoreNeutralWildAnimal
-				|| actor instanceof HerbivoreWildAnimal || actor instanceof Pig) {
+		if (actor instanceof Animal) {
 
 		} else {
 			createSearchLocationsBasedOnVisibleCriminals();
