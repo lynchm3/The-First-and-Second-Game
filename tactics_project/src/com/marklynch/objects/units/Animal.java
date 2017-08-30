@@ -16,13 +16,14 @@ public class Animal extends NonHuman {
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY) {
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, GameObject[] mustHaves,
+			GameObject[] mightHaves) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
-				legsAnchorX, legsAnchorY);
+				legsAnchorX, legsAnchorY, mustHaves, mightHaves);
 	}
 
 }

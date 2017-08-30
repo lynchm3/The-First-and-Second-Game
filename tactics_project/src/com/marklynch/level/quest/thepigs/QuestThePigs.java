@@ -54,19 +54,25 @@ public class QuestThePigs extends Quest {
 		super();
 
 		// Pigs
-		larry = Templates.PIG.makeCopy("Larry", Game.level.squares[30][76], Game.level.factions.get(1), null);
+		larry = Templates.PIG.makeCopy("Larry", Game.level.squares[30][76], Game.level.factions.get(1), null,
+				new GameObject[] {}, new GameObject[] {});
 		larry.inventory.add(Templates.CLEAVER.makeCopy(null, null));
-		wendy = Templates.PIG.makeCopy("Wendy", Game.level.squares[39][74], Game.level.factions.get(1), null);
+		wendy = Templates.PIG.makeCopy("Wendy", Game.level.squares[39][74], Game.level.factions.get(1), null,
+				new GameObject[] {}, new GameObject[] {});
 		wendy.inventory.add(Templates.CLEAVER.makeCopy(null, null));
-		jane = Templates.PIG.makeCopy("Jane", Game.level.squares[34][78], Game.level.factions.get(1), null);
+		jane = Templates.PIG.makeCopy("Jane", Game.level.squares[34][78], Game.level.factions.get(1), null,
+				new GameObject[] {}, new GameObject[] {});
 		jane.inventory.add(Templates.CLEAVER.makeCopy(null, null));
-		steve = Templates.PIG.makeCopy("Steve", Game.level.squares[35][74], Game.level.factions.get(1), null);
+		steve = Templates.PIG.makeCopy("Steve", Game.level.squares[35][74], Game.level.factions.get(1), null,
+				new GameObject[] {}, new GameObject[] {});
 		steve.inventory.add(Templates.CLEAVER.makeCopy(null, null));
-		prescilla = Templates.PIG.makeCopy("Prescilla", Game.level.squares[31][80], Game.level.factions.get(1), null);
+		prescilla = Templates.PIG.makeCopy("Prescilla", Game.level.squares[31][80], Game.level.factions.get(1), null,
+				new GameObject[] {}, new GameObject[] {});
 		prescilla.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 
 		// Farmer
-		farmer = Templates.FARMER.makeCopy(Game.level.squares[32][75], Game.level.factions.get(1), null, 203);
+		farmer = Templates.FARMER.makeCopy(Game.level.squares[32][75], Game.level.factions.get(1), null, 203,
+				new GameObject[] {}, new GameObject[] {});
 		farmer.quest = this;
 		hoe = Templates.HOE.makeCopy(null, farmer);
 		farmer.inventory.add(hoe);

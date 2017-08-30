@@ -17,13 +17,13 @@ public class Monster extends Actor {
 			float fireResistance, float waterResistance, float electricResistance, float poisonResistance,
 			float slashResistance, float weight, Actor owner, Faction faction, float handAnchorX, float handAnchorY,
 			float headAnchorX, float headAnchorY, float bodyAnchorX, float bodyAnchorY, float legsAnchorX,
-			float legsAnchorY) {
+			float legsAnchorY, GameObject[] mustHaves, GameObject[] mightHaves) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, canOpenDoors, canEquipWeapons,
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
 				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
-				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, 0);
+				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, 0, mustHaves, mightHaves);
 	}
 
 }

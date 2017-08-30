@@ -178,7 +178,7 @@ public class QuestSmallGame extends Quest {
 		// Add lead hunter
 		GameObject brentsGameObject = Templates.BED.makeCopy(Game.level.squares[10][9]);
 		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1),
-				brentsGameObject, 203);
+				brentsGameObject, 203, new GameObject[] {}, new GameObject[] {});
 		hunterBrent.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBrent));
 		hunterBrent.equip(hunterBrent.inventory.get(0));
 		hunterBrent.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
@@ -199,30 +199,36 @@ public class QuestSmallGame extends Quest {
 		// Add hunters
 		GameObject brontsGameObject = Templates.BED.makeCopy(Game.level.squares[9][9]);
 		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1),
-				brontsGameObject, 124);
+				brontsGameObject, 124, new GameObject[] {}, new GameObject[] {});
 		hunterBront1.inventory.add(Templates.HUNTING_BOW.makeCopy(null, hunterBront1));
 		hunterBront1.equip(hunterBront1.inventory.get(0));
 		hunterBront1.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
-		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null, 73);
+		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null, 73,
+				new GameObject[] {}, new GameObject[] {});
 		hunterBront2.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront2));
 		hunterBront2.equip(hunterBront2.inventory.get(0));
 		hunterBront2.equippedWeaponGUID = hunterBrent.inventory.get(0).guid;
 
-		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null, 30);
+		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null, 30,
+				new GameObject[] {}, new GameObject[] {});
 		hunterBront3.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront3));
 		hunterBront3.equip(hunterBront3.inventory.get(0));
-		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1), null, 83);
+		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1), null, 83,
+				new GameObject[] {}, new GameObject[] {});
 		hunterBront4.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront4));
 		hunterBront4.equip(hunterBront4.inventory.get(0));
-		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1), null, 23);
+		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1), null, 23,
+				new GameObject[] {}, new GameObject[] {});
 		hunterBront5.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront5));
 		hunterBront5.equip(hunterBront5.inventory.get(0));
-		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1), null, 43);
+		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1), null, 43,
+				new GameObject[] {}, new GameObject[] {});
 		hunterBront6.inventory.add(Templates.HATCHET.makeCopy(null, hunterBront6));
 		hunterBront6.equip(hunterBront6.inventory.get(0));
 
-		Actor thief = Templates.THIEF.makeCopy(Game.level.squares[2][13], Game.level.factions.get(2), null, 64);
+		Actor thief = Templates.THIEF.makeCopy(Game.level.squares[2][13], Game.level.factions.get(2), null, 64,
+				new GameObject[] {}, new GameObject[] {});
 		thief.inventory.add(Templates.HATCHET.makeCopy(null, thief));
 
 		// Some ground hatchets
@@ -248,22 +254,25 @@ public class QuestSmallGame extends Quest {
 		environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
 				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 110f, null, Game.level.factions.get(1), 0, 0, 0, 0, 0,
-				0, 0, 0, 10);
+				0, 0, 0, 10, new GameObject[] {}, new GameObject[] {});
 		environmentalistBill.inventory.add(Templates.HATCHET.makeCopy(null, environmentalistBill));
 
 		environmentalistBill.quest = this;
 
 		superWolf = new AggressiveWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[207][16], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.get(2), 0, 0, 0, 0, 0, 0, 0, 0);
+				false, 0f, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.get(2), 0, 0, 0, 0, 0, 0, 0, 0,
+				new GameObject[] {}, new GameObject[] {});
 
 		Actor wolf2 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[208][15], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0, 0, 0, 0, 0, 0);
+				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0, 0, 0, 0, 0, 0,
+				new GameObject[] {}, new GameObject[] {});
 
 		Actor wolf3 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
 				Game.level.squares[208][17], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0, 0, 0, 0, 0, 0);
+				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0, 0, 0, 0, 0, 0,
+				new GameObject[] {}, new GameObject[] {});
 
 		wolfPack = new Group("Wolf pack", superWolf, wolf2, wolf3);
 

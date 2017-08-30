@@ -35,56 +35,59 @@ public class Templates {
 	// Player
 	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "hero.png", null, 1, 10,
 			null, new Inventory(), 1f, 1.5f, 0f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f,
-			null, null, 75f, 127f, 70f, 23f, 0f, 0f, 0f, 0f, 0);
+			null, null, 75f, 127f, 70f, 23f, 0f, 0f, 0f, 0f, 0, new GameObject[] {}, new GameObject[] {});
 
 	// General People
 	public static final Hunter HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10,
 			null, new Inventory(), 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null,
-			null, 88, 54, 88, 54, 88, 54, 88, 54, 0);
+			null, 88, 54, 88, 54, 88, 54, 88, 54, 0, new GameObject[] {}, new GameObject[] {});
 
 	public static final Thief THIEF = new Thief("Thief", "Thief", 1, 10, 0, 0, 0, 0, "thief.png", null, 1, 10, null,
 			new Inventory(), 1.5f, 1.5f, -0.25f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f,
-			null, null, 88, 54, 88, 54, 88, 54, 88, 54, 0);
+			null, null, 88, 54, 88, 54, 88, 54, 88, 54, 0, new GameObject[] {}, new GameObject[] {});
 
 	public static final Farmer FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "farmer.png", null, 1, 10,
 			null, new Inventory(), 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null,
-			null, 88, 54, 88, 54, 88, 54, 88, 54, 0);
+			null, 88, 54, 88, 54, 88, 54, 88, 54, 0, new GameObject[] {}, new GameObject[] {});
 
 	// Domestic animals
 	public static final Pig PIG = new Pig("Pig", "Pig", 1, 10, 0, 0, 0, 0, "pig.png", null, 1, 10, null,
 			new Inventory(), 1f, 0.65625f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null,
-			null, 40, 96, 40, 96, 40, 96, 40, 96);
+			null, 40, 96, 40, 96, 40, 96, 40, 96, new GameObject[] {}, new GameObject[] {});
 
 	// Friendly Wild animals
 	public static final TinyNeutralWildAnimal RAT = new TinyNeutralWildAnimal("Rat", "Rat", 1, 1, 0, 0, 0, 0, "rat.png",
 			null, 1, 10, null, new Inventory(), 1, 0.25f, 0f, 0.75f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-			0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
+			0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null, new GameObject[] {}, new GameObject[] {});
 
 	public static final HerbivoreWildAnimal RABBIT = new HerbivoreWildAnimal("Rabbit", "Rabbit", 1, 4, 0, 0, 0, 0,
 			"rabbit.png", null, 1, 10, null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
+			0f, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null, new GameObject[] {},
+			new GameObject[] {});
 
 	public static final TinyNeutralWildAnimal BABY_RABBIT = new TinyNeutralWildAnimal("Baby Rabbit", "Baby Rabbit", 1,
 			10, 0, 0, 0, 0, "baby_rabbit.png", null, 1, 10, null, new Inventory(), 0.25f, 0.25f, 0f, 0f, 1f, 1f, 1f,
-			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
+			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null,
+			new GameObject[] {}, new GameObject[] {});
 
 	public static final CarnivoreNeutralWildAnimal FOX = new CarnivoreNeutralWildAnimal("Fox", "Fox", 1, 10, 0, 0, 0, 0,
 			"fox.png", null, 1, 10, null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
-			0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
+			0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null, new GameObject[] {}, new GameObject[] {});
 
 	// Monsters
 	public static final Blind BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null,
 			new Inventory(), 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 50f, null, null, 88,
-			54, 88, 54, 88, 54, 88, 54, null);
+			54, 88, 54, 88, 54, 88, 54, null, new GameObject[] {}, new GameObject[] {});
 
 	public static final RockGolem ROCK_GOLEM = new RockGolem("Rock Golem", "Rock Golem", 1, 100, 0, 0, 0, 0,
 			"rock_golem.png", null, 1, 10, null, new Inventory(), 1, 1.5f, 0, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-			false, 90f, 0f, 0f, 0f, 100f, 150f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null, false);
+			false, 90f, 0f, 0f, 0f, 100f, 150f, null, null, 88, 54, 88, 54, 88, 54, 88, 54, null, false,
+			new GameObject[] {}, new GameObject[] {});
 
 	// Special People
 	public static final Mort MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null,
 			new Inventory(), 1f, 1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 70f, null, null, 88,
-			54, 88, 54, 88, 54, 88, 54, 0);
+			54, 88, 54, 88, 54, 88, 54, 0, new GameObject[] {}, new GameObject[] {});
 
 	// Tools
 	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,

@@ -84,7 +84,8 @@ public class QuestBetweenTheWalls {
 		structureFeatures.add(falseWall);
 
 		// Rat
-		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.get(2), null, null);
+		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.get(2), null, null,
+				new GameObject[] {}, new GameObject[] {});
 
 		// Hidden room
 		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 36, false, new ArrayList<Actor>(),

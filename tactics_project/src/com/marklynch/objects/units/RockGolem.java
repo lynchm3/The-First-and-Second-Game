@@ -34,13 +34,13 @@ public class RockGolem extends Monster {
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, StructureRoom roomLivingIn,
-			boolean awake) {
+			boolean awake, GameObject[] mustHaves, GameObject[] mightHaves) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, false, false, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY);
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, mustHaves, mightHaves);
 		this.awake = awake;
 		this.roomLivingIn = roomLivingIn;
 		aiRoutine = new AIRoutineForRockGolem(this);
@@ -158,14 +158,16 @@ public class RockGolem extends Monster {
 		return actions;
 	}
 
-	public RockGolem makeCopy(Square square, Faction faction, StructureRoom roomLivingIn, boolean awake) {
+	public RockGolem makeCopy(Square square, Faction faction, StructureRoom roomLivingIn, boolean awake,
+			GameObject[] mustHaves, GameObject[] mightHaves) {
 
 		RockGolem actor = new RockGolem(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
 				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
-				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn, awake);
+				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn, awake, mustHaves,
+				mightHaves);
 		return actor;
 	}
 

@@ -20,13 +20,14 @@ public class HerbivoreWildAnimal extends Animal {
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, Area area) {
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, Area area,
+			GameObject[] mustHaves, GameObject[] mightHaves) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
-				legsAnchorX, legsAnchorY);
+				legsAnchorX, legsAnchorY, mustHaves, mightHaves);
 
 		this.area = area;
 		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this, area);
@@ -43,14 +44,16 @@ public class HerbivoreWildAnimal extends Animal {
 		super.postLoad2();
 	}
 
-	public HerbivoreWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed, Area area) {
+	public HerbivoreWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed, Area area,
+			GameObject[] mustHaves, GameObject[] mightHaves) {
 
 		HerbivoreWildAnimal actor = new HerbivoreWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
 				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
 				new Inventory(), widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
-				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, area);
+				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, area, mustHaves,
+				mightHaves);
 		return actor;
 	}
 

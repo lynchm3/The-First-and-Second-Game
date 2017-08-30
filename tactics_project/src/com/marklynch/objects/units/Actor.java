@@ -172,7 +172,8 @@ public class Actor extends GameObject {
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, int gold) {
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, int gold,
+			GameObject[] mustHaves, GameObject[] mightHaves) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
@@ -236,6 +237,15 @@ public class Actor extends GameObject {
 		inventory.add(Templates.GOLD.makeCopy(null, this, gold));
 
 		this.lastSquare = this.squareGameObjectIsOn;
+
+		for (GameObject gameObject : mustHaves) {
+			this.inventory.add(gameObject);
+		}
+
+		for (GameObject gameObject : mightHaves) {
+			if (Math.random() > 0.9d)
+				this.inventory.add(gameObject);
+		}
 
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			gameObject.owner = this;
@@ -989,14 +999,16 @@ public class Actor extends GameObject {
 		equippedWeaponGUID = this.equipped.guid;
 	}
 
-	public Actor makeCopy(Square square, Faction faction, GameObject bed, int gold) {
+	public Actor makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
+			GameObject[] mightHaves) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), canOpenDoors,
 				canEquipWeapons, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
-				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold);
+				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves,
+				mightHaves);
 		return actor;
 	}
 
