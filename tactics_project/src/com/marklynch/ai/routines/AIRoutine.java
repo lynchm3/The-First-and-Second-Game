@@ -18,8 +18,10 @@ import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
+import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
+import com.marklynch.objects.Junk;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.Action;
@@ -907,14 +909,16 @@ public class AIRoutine {
 
 	public boolean lootFromGround() {
 		// Pick up loot on ground
-		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false, true, true,
-				10, GameObject.class);
+		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, false, true, true,
+				10, Junk.class, Food.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
+			} else {
+				actor.inventory.markItemsToSell();
 			}
 			return true;
 		}

@@ -143,7 +143,6 @@ public class AIRoutineUtils {
 
 				for (Class clazz : classes) {
 					for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
-
 						if (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) >= minRange
 								&& Game.level.activeActor
 										.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
@@ -934,15 +933,16 @@ public class AIRoutineUtils {
 		}
 	}
 
-	public static boolean sellAllToTarget(Class clazz, Actor target) {
-		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
-		if (weaponDistance <= 1 && target.remainingHealth > 0) {
-			Game.level.activeActor.sellAllToTarget(clazz, target);
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// public static boolean sellAllToTarget(Class clazz, Actor target) {
+	// int weaponDistance =
+	// Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
+	// if (weaponDistance <= 1 && target.remainingHealth > 0) {
+	// Game.level.activeActor.sellAllToTarget(clazz, target);
+	// return true;
+	// } else {
+	// return false;
+	// }
+	// }
 
 	public AIRoutineUtils makeCopy() {
 		return null;

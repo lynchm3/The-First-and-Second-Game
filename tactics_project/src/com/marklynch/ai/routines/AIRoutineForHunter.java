@@ -76,8 +76,8 @@ public class AIRoutineForHunter extends AIRoutine {
 			}
 		}
 
-		// 1. loot corpses
-		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, false, false, true, true, true,
+		// 1. loot carcasses
+		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
 				true, 0, Carcass.class);
 		if (carcass != null) {
 			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
@@ -86,14 +86,22 @@ public class AIRoutineForHunter extends AIRoutine {
 			if (!lootedCarcass) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
 			} else {
-
+				System.out.println();
+				actor.inventory.markItemsToSell();
+				if (actor.inventory.hasItemsToSell()) {
+					huntState = HUNT_STATE.PICK_SHOP_KEEPER;
+				}
 			}
 			return;
 		}
 
 		// Loot from ground
-		if (lootFromGround())
+		if (lootFromGround()) {
+			if (actor.inventory.hasItemsToSell()) {
+				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
+			}
 			return;
+		}
 
 		// Defer to quest
 		if (deferToQuest())
@@ -136,21 +144,24 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.PICK_SHOP_KEEPER) {
+			System.out.println("PICK_SHOP_KEEPER");
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(0, false, true, false, false, false, false, 0,
+			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, false, 0,
 					Trader.class);
 			if (target == null) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else {
+
 				huntState = HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK;
 			}
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK) {
+			System.out.println("GO_TO_SHOP_KEEPER_AND_SELL_JUNK");
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 
-			boolean soldItems = AIRoutineUtils.sellAllToTarget(Junk.class, (Actor) target);
+			boolean soldItems = actor.sellItemsMarkedToSell((Actor) target);
 			if (!soldItems)
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
 			else
@@ -159,6 +170,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+			System.out.println("GO_TO_BED_AND_GO_TO_SLEEP");
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
 			// huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 
