@@ -231,17 +231,8 @@ public class QuestSmallGame extends Quest {
 		Templates.BLOOD.makeCopy(Game.level.squares[5][6], Game.level.player);
 		Templates.HATCHET.makeCopy(Game.level.squares[1][6], Game.level.player);
 
-		ArrayList<Actor> hunterPackMembers = new ArrayList<Actor>();
-		hunterPackMembers.add(hunterBrent);
-		hunterPackMembers.add(hunterBront1);
-		hunterPackMembers.add(hunterBront2);
-		hunterPackMembers.add(hunterBront3);
-		hunterPackMembers.add(hunterBront4);
-		hunterPackMembers.add(hunterBront5);
-		hunterPackMembers.add(hunterBront6);
-
 		hunterPack = new Group("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3, hunterBront4,
-				hunterBront5, hunterBront6);
+				hunterBront5);// , hunterBront6);
 
 		this.hunterPack.quest = this;
 		for (GameObject hunter : hunterPack.getMembers()) {

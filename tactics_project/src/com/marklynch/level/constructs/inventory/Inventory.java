@@ -9,6 +9,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gold;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLootAll;
@@ -624,6 +625,13 @@ public class Inventory implements Draggable, Scrollable {
 		inventorySquares.clear();
 
 		for (GameObject gameObject : this.filteredGameObjects) {
+
+			if (this.parent == Game.level.player && gameObject instanceof Gold)
+				continue;
+
+			if (inventoryMode == INVENTORY_MODE.MODE_TRADE && gameObject instanceof Gold)
+				continue;
+
 			InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 			inventorySquare.gameObject = gameObject;
 			inventorySquares.add(inventorySquare);
@@ -1103,7 +1111,7 @@ public class Inventory implements Draggable, Scrollable {
 		// Gold for this actor
 		if (this.parent instanceof Actor) {
 			Actor actor = (Actor) this.parent;
-			String goldText = "Gold: " + actor.gold;
+			String goldText = "Gold: " + actor.getCarriedGoldValue();
 			float goldWidth = Game.font.getWidth(goldText);
 			float goldPositionX = squaresX + squaresWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
@@ -1113,7 +1121,7 @@ public class Inventory implements Draggable, Scrollable {
 		// Gold for other actor
 		if (otherInventory != null && otherInventory.parent instanceof Actor) {
 			Actor actor = (Actor) otherInventory.parent;
-			String goldText = "Gold: " + actor.gold;
+			String goldText = "Gold: " + actor.getCarriedGoldValue();
 			float goldWidth = Game.font.getWidth(goldText);
 			float goldPositionX = otherInventory.squaresX + squaresWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,

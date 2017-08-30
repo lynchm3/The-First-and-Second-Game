@@ -27,6 +27,11 @@ import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
+
+	// GOLD
+	public static final Gold GOLD = new Gold("Gold", 10, "gold.png", null, new Inventory(), 0.5f, 0.125f, 0f, 0f, 1f,
+			1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 0.5f, 0, null);
+
 	// Player
 	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "hero.png", null, 1, 10,
 			null, new Inventory(), 1f, 1.5f, 0f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f,
@@ -324,9 +329,5 @@ public class Templates {
 	public static final SmallHidingPlace BURROW = new SmallHidingPlace("Burrow", 5, "burrow.png", null, new Inventory(),
 			0.5f, 0.5f, 16f, 16f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null,
 			new Effect[] {});
-
-	// BURROW
-	// TREE
-	//
 
 }

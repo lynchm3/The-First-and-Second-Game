@@ -39,8 +39,8 @@ public class ActionBuySpecificItem extends Action {
 			Game.level.logOnScreen(new ActivityLog(
 					new Object[] { performer, " bought ", object, " from ", target, " for ", object.value, " gold" }));
 
-		performer.gold -= object.value;
-		target.gold += object.value;
+		performer.removeFromCarriedGoldValue(object.value);
+		target.addToCarriedGoldValue(object.value);
 		object.owner = performer;
 
 		if (target != null)
@@ -63,7 +63,7 @@ public class ActionBuySpecificItem extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.gold < object.value)
+		if (performer.getCarriedGoldValue() < object.value)
 			return false;
 		if (target != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;

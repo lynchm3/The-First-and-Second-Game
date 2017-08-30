@@ -352,6 +352,10 @@ public class AIRoutineUtils {
 		// about targets squares I need to make list of attack squares, this
 		// shit is heavy
 
+		// if (!Game.level.activeActor.canSeeGameObject(target)) {
+		// return moveTowardsTargetToBeAdjacent(target);
+		// }
+
 		Square squareToMoveTo = calculateSquareToMoveToToAttackTarget(target);
 
 		if (squareToMoveTo != null) {

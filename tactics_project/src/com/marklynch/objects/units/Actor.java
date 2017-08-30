@@ -26,9 +26,11 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gold;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Openable;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
@@ -161,8 +163,6 @@ public class Actor extends GameObject {
 
 	public ArrayList<Door> doors = new ArrayList<Door>();
 
-	public int gold;
-
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
 			GameObject bed, Inventory inventory,
@@ -232,7 +232,8 @@ public class Actor extends GameObject {
 		this.legsAnchorX = legsAnchorX;
 		this.legsAnchorY = legsAnchorY;
 
-		this.gold = gold;
+		// this.gold = Templates.GOLD.makeCopy(null, this, gold);
+		inventory.add(Templates.GOLD.makeCopy(null, this, gold));
 
 		this.lastSquare = this.squareGameObjectIsOn;
 
@@ -1373,98 +1374,28 @@ public class Actor extends GameObject {
 		return false;
 	}
 
-	// public static void calculateReachableSquares() {
-	// // Game.level.activeActor.calculatePathToAllSquares(Game.level.squares);
-	// // Game.level.activeActor.calculateReachableSquares(Game.level.squares);
-	// // Game.level.activeActor.calculateAttackableSquares(Game.level.squares);
-	// }
+	public int getCarriedGoldValue() {
+		int carriedGoldValue = 0;
+		for (GameObject gold : inventory.getGameObjectsOfClass(Gold.class)) {
+			carriedGoldValue += gold.value;
+		}
+		return carriedGoldValue;
+	}
 
-	// public void calculatePathToSquare(Square[][] squares) {
-	//
-	// for (int i = 0; i < squares.length; i++) {
-	// for (int j = 0; j < squares[0].length; j++) {
-	// squares[i][j].walkingDistanceToSquare = Integer.MAX_VALUE;
-	// }
-	// }
-	// // paths
-	// // public transient HashMap<Square, Path> paths = new HashMap<Square,
-	// // Path>();
-	//
-	// highestPathCostSeen = 0;
-	// Square currentSquare = squareGameObjectIsOn;
-	// currentSquare.walkingDistanceToSquare = 0;
-	//
-	// Vector<Square> startPath = new Vector<Square>();
-	// startPath.add(currentSquare);
-	// Path bestPath = new Path((Vector<Square>) startPath.clone(), 0);
-	//
-	// for (int i = 0; i <= highestPathCostSeen; i++) {
-	// // get all paths with that cost
-	// Vector<Path> pathsWithCurrentCost = new Vector<Path>();
-	// Vector<Path> pathsVector = new Vector<Path>();
-	// pathsVector.add(bestPath);
-	// for (int j = 0; j < pathsVector.size(); j++) {
-	// if (pathsVector.get(j).travelCost == i)
-	// pathsWithCurrentCost.add(pathsVector.get(j));
-	// }
-	//
-	// for (int j = 0; j < pathsWithCurrentCost.size(); j++) {
-	// Vector<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
-	// calculatePathToAllSquares2(squares, Direction.UP, squaresInThisPath, i);
-	// calculatePathToAllSquares2(squares, Direction.RIGHT, squaresInThisPath,
-	// i);
-	// calculatePathToAllSquares2(squares, Direction.DOWN, squaresInThisPath,
-	// i);
-	// calculatePathToAllSquares2(squares, Direction.LEFT, squaresInThisPath,
-	// i);
-	//
-	// }
-	// }
-	// }
-	//
-	// public void calculatePathToAllSquares2(Square[][] squares, Direction
-	// direction, Vector<Square> squaresInThisPath,
-	// int pathCost) {
-	//
-	// Square newSquare = null;
-	//
-	// Square parentSquare = squaresInThisPath.get(squaresInThisPath.size() -
-	// 1);
-	//
-	// if (direction == Direction.UP) {
-	// if (parentSquare.yInGrid - 1 >= 0) {
-	// newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid - 1];
-	// }
-	// } else if (direction == Direction.RIGHT) {
-	// if (parentSquare.xInGrid + 1 < squares.length) {
-	// newSquare = squares[parentSquare.xInGrid + 1][parentSquare.yInGrid];
-	// }
-	// } else if (direction == Direction.DOWN) {
-	//
-	// if (parentSquare.yInGrid + 1 < squares[0].length) {
-	// newSquare = squares[parentSquare.xInGrid][parentSquare.yInGrid + 1];
-	// }
-	// } else if (direction == Direction.LEFT) {
-	// if (parentSquare.xInGrid - 1 >= 0) {
-	// newSquare = squares[parentSquare.xInGrid - 1][parentSquare.yInGrid];
-	// }
-	// }
-	//
-	// if (newSquare != null && newSquare.inventory.isPassable(this) &&
-	// !squaresInThisPath.contains(newSquare)
-	// && !paths.containsKey(newSquare)) {
-	// Vector<Square> newPathSquares = (Vector<Square>)
-	// squaresInThisPath.clone();
-	// newPathSquares.add(newSquare);
-	// int newDistance = pathCost + parentSquare.travelCost;
-	// newSquare.walkingDistanceToSquare = newDistance;
-	// if (newDistance > highestPathCostSeen)
-	// highestPathCostSeen = newDistance;
-	// Path newPath = new Path(newPathSquares, newDistance);
-	// paths.put(newSquare, newPath);
-	//
-	// // THEYRE MOCING ON TO THE SAME SQUARE
-	//
-	// }
-	// }
+	public void addToCarriedGoldValue(int toAdd) {
+		GameObject gold = inventory.getGameObjectOfClass(Gold.class);
+		gold.value += toAdd;
+	}
+
+	public void removeFromCarriedGoldValue(int toRemove) {
+		for (GameObject gold : inventory.getGameObjectsOfClass(Gold.class)) {
+			if (gold.value > toRemove) {
+				gold.value -= toRemove;
+				break;
+			} else {
+				toRemove -= gold.value;
+				gold.value = 0;
+			}
+		}
+	}
 }

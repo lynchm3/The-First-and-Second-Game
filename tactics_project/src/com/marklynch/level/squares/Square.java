@@ -810,7 +810,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		Square otherSquare = (Square) node;
 		if (otherSquare.inventory.contains(BrokenGlass.class))
 			return 8;
-		if (otherSquare.inventory.contains(Actor.class))
+		if (Game.level.activeActor != Game.level.player && otherSquare.inventory.contains(Actor.class))
 			return 8;
 		return 1;
 	}
