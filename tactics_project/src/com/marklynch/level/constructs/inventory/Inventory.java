@@ -891,11 +891,11 @@ public class Inventory implements Draggable, Scrollable {
 				int actorPositionXInPixels = otherInventory.actorX;
 				int actorPositionYInPixels = (int) (squaresBaseY + squaresHeight / 2
 						- (otherGameObject.imageTexture.getHeight()));
-				TextureUtils.drawTexture(otherGameObject.imageTexture, actorPositionXInPixels, actorPositionYInPixels,
-						actorPositionXInPixels + otherGameObject.width * 2,
-						actorPositionYInPixels + otherGameObject.height * 2);
+				TextureUtils.drawTexture(otherGameObject.imageTexture, 1f, actorPositionXInPixels,
+						actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
+						actorPositionYInPixels + otherGameObject.height * 2, true);
 				TextureUtils.drawTexture(textureBag, 0.5f, otherTextureX, otherTextureY,
-						otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);
+						otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2, true);
 			} else {
 				TextureUtils.drawTexture(otherGameObject.imageTexture, 0.5f, otherTextureX, otherTextureY,
 						otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);

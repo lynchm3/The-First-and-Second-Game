@@ -12,6 +12,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -62,7 +63,8 @@ public class InventorySquare extends Square {
 		Texture squareTexture = WHITE_SQUARE;
 
 		// Red border on sqr if illegal to take
-		if ((inventoryThisBelongsTo == null || inventoryThisBelongsTo.parent != Game.level.player)
+		if (Inventory.inventoryMode != INVENTORY_MODE.MODE_TRADE
+				&& (inventoryThisBelongsTo == null || inventoryThisBelongsTo.parent != Game.level.player)
 				&& this.gameObject.owner != null && this.gameObject.owner != Game.level.player) {
 			squareTexture = RED_SQUARE;
 		}
@@ -99,7 +101,13 @@ public class InventorySquare extends Square {
 
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 
-				String goldText = "" + gameObject.value;
+				Color goldTextColor = Color.WHITE;
+
+				if (!this.gameObject.getDefaultActionPerformedOnThisInInventory(Game.level.player).enabled) {
+					goldTextColor = Color.RED;
+				}
+
+				StringWithColor goldText = new StringWithColor("" + gameObject.value, goldTextColor);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 30,
 						Integer.MAX_VALUE, false, new Object[] { goldText });
 			}

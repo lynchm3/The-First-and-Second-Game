@@ -121,7 +121,7 @@ public class TextureUtils {
 		// draw the texture unit 0 with our shader effect applied
 
 		if (backwards) {
-			Game.activeBatch.draw(texture, vertexX2, vertexY2, -(vertexX2 - vertexX1), -(vertexY2 - vertexY1));
+			Game.activeBatch.draw(texture, vertexX2, vertexY1, -(vertexX2 - vertexX1), vertexY2 - vertexY1);
 
 		} else {
 			Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);

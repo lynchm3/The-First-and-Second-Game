@@ -39,6 +39,10 @@ public class ActionSellSpecificItem extends Action {
 			Game.level.logOnScreen(new ActivityLog(
 					new Object[] { performer, " sold ", object, " to ", receiver, " for ", object.value, " gold" }));
 
+		performer.gold += object.value;
+		receiver.gold -= object.value;
+		object.owner = receiver;
+
 		performer.inventory.remove(object);
 		if (performer instanceof Actor) {
 			Actor actor = performer;
@@ -68,6 +72,8 @@ public class ActionSellSpecificItem extends Action {
 
 	@Override
 	public boolean check() {
+		if (receiver.gold < object.value)
+			return false;
 		if (performer.straightLineDistanceTo(receiver.squareGameObjectIsOn) < 2) {
 			return true;
 		}

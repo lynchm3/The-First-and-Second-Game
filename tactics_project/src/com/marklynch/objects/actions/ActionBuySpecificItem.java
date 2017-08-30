@@ -63,6 +63,8 @@ public class ActionBuySpecificItem extends Action {
 
 	@Override
 	public boolean check() {
+		if (performer.gold < object.value)
+			return false;
 		if (target != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
 			return true;
 		}
