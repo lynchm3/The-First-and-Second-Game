@@ -1052,18 +1052,15 @@ public class AIRoutine {
 	}
 
 	public boolean sellItems() {
-		System.out.println("SELL ITEMS");
 
 		if (actor.inventory.itemsToSellCount <= 0)
 			return false;
 
-		System.out.println("PICK_SHOP_KEEPER");
 		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, false, 0,
 				Trader.class);
 		if (target == null) {
 			return false;
 		}
-		System.out.println("GO_TO_SHOP_KEEPER_AND_SELL_JUNK");
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 
 		boolean soldItems = actor.sellItemsMarkedToSell((Actor) target);

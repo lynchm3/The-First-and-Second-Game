@@ -232,14 +232,14 @@ public class Actor extends GameObject {
 
 		this.lastSquare = this.squareGameObjectIsOn;
 
-		for (GameObject gameObject : mustHaves) {
-			this.inventory.add(gameObject);
-		}
-
-		for (GameObject gameObject : mightHaves) {
-			if (Math.random() > 0.8d)
-				this.inventory.add(gameObject);
-		}
+		// for (GameObject gameObject : mustHaves) {
+		// this.inventory.add(gameObject);
+		// }
+		//
+		// for (GameObject gameObject : mightHaves) {
+		// if (Math.random() > 0.8d)
+		// this.inventory.add(gameObject);
+		// }
 
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			gameObject.owner = this;
@@ -591,6 +591,9 @@ public class Actor extends GameObject {
 	}
 
 	public boolean hasRange(int weaponDistance) {
+		if (weaponDistance == 1)
+			return true;
+
 		if (!canEquipWeapons) {
 			if (weaponDistance > 1)
 				return false;
