@@ -1275,7 +1275,7 @@ public class Inventory implements Draggable, Scrollable {
 	private void fixScroll() {
 		// TODO Auto-generated method stub
 
-		int totalSquaresHeight = (int) ((filteredGameObjects.size() / squareGridWidthInSquares)
+		int totalSquaresHeight = (int) ((inventorySquares.size() / squareGridWidthInSquares)
 				* Game.INVENTORY_SQUARE_HEIGHT);
 		if (totalSquaresHeight < Game.windowHeight - bottomBorderHeight - topBorderHeight) {
 			this.squaresY = this.squaresBaseY;

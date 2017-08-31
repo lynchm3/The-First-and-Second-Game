@@ -46,8 +46,11 @@ public class Group {
 
 	public void removeMember(Actor actor) {
 		this.members.remove(actor);
-		if (actor == this.leader)
-			this.leader = null;
+		if (actor == this.leader) {
+			if (members.size() > 0) {
+				setLeader(members.get(0));
+			}
+		}
 	}
 
 	public void setLeader(Actor actor) {
@@ -69,14 +72,6 @@ public class Group {
 		}
 
 		attackers.removeAll(attackersToRemoveFromList);
-
-		// Manage leader
-		if (leader.remainingHealth <= 0) {
-			removeMember(leader);
-			if (members.size() > 0) {
-				setLeader(members.get(0));
-			}
-		}
 
 		// AI move towards leader
 		if (actor == leader) {

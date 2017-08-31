@@ -148,6 +148,7 @@ public class Level {
 	public Texture textureUndiscovered;
 	public ArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new ArrayList<InanimateObjectToAddOrRemove>();
 	public ArrayList<GameObject> inanimateObjectsToRemove = new ArrayList<GameObject>();
+	public ArrayList<Actor> actorsToRemove = new ArrayList<Actor>();
 
 	public enum LevelMode {
 		LEVEL_MODE_NORMAL, LEVEL_MODE_CAST, LEVEL_SELECT_TELEPORT_SQUARE
@@ -1683,6 +1684,12 @@ public class Level {
 			for (GameObject gameObject : inanimateObjectsToRemove) {
 				inanimateObjectsOnGround.remove(gameObject);
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+			}
+
+			for (Actor actor : actorsToRemove) {
+				actor.faction.actors.remove(actor);
+				if (actor.group != null)
+					actor.group.removeMember(actor);
 			}
 		}
 
