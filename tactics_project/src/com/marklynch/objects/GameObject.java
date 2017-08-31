@@ -65,6 +65,7 @@ import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayUtils;
@@ -776,7 +777,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		// Trade
-		if (!decorative && this.canContainOtherObjects && (this instanceof Actor)) {
+		if (!decorative && this.canContainOtherObjects && this instanceof Actor && !(this instanceof NonHuman)) {
 			actions.add(new ActionTradeItemsInOtherInventory(performer, this));
 		}
 

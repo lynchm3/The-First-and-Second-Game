@@ -73,7 +73,6 @@ public class Pig extends Animal {
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInWorld(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionPet(performer, this));
 		actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		return actions;
 	}
