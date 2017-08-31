@@ -18,6 +18,8 @@ import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.NonHuman;
+import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -551,8 +553,6 @@ public class Inventory implements Draggable, Scrollable {
 	public void add(GameObject gameObject, int index) {
 		if (!gameObjects.contains(gameObject)) {
 
-			gameObject.toSell = false;
-
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null) {
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
@@ -583,6 +583,8 @@ public class Inventory implements Draggable, Scrollable {
 			if (parent != null)
 				parent.inventoryChanged();
 
+			markItemsToSell();
+
 			if (index != -1) {
 				filteredGameObjects.remove(index);
 				filteredGameObjects.add(index, gameObject);
@@ -611,6 +613,8 @@ public class Inventory implements Draggable, Scrollable {
 			gameObject.inventoryThatHoldsThisObject = null;
 			if (parent != null)
 				parent.inventoryChanged();
+
+			markItemsToSell();
 			// this.sort(inventorySortBy);
 			if (filteredGameObjects.contains(gameObject)) {
 				index = filteredGameObjects.indexOf(gameObject);
@@ -1325,8 +1329,26 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void markItemsToSell() {
+
+		if (!(parent instanceof Actor) || parent instanceof NonHuman)
+			return;
+
+		if (parent instanceof Trader) {
+			for (GameObject gameObject : gameObjects) {
+				gameObject.toSell = true;
+			}
+
+			Trader trader = (Trader) parent;
+			if (trader.broom != null)
+				trader.broom.toSell = false;
+
+			return;
+		}
+
 		ArrayList<String> weaponAlreadyAdded = new ArrayList<String>();
 		for (GameObject gameObject : gameObjects) {
+
+			gameObject.toSell = false;
 
 			// Junk
 			if (gameObject instanceof Junk) {

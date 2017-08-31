@@ -14,6 +14,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.Readable;
+import com.marklynch.objects.Templates;
 import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;
@@ -40,9 +41,11 @@ public class Trader extends Actor implements Comparator<GameObject> {
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves, mightHaves);
-
+		this.broom = Templates.BROOM.makeCopy(null, null);
+		this.inventory.add(this.broom);
+		this.equip(this.broom);
 		aiRoutine = new AIRoutineForTrader(this);
-		equip(broom);
+
 	}
 
 	public boolean isPlayerInTheShop() {

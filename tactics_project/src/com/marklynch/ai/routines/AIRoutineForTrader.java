@@ -76,7 +76,7 @@ public class AIRoutineForTrader extends AIRoutine {
 			if (!trader.isPlayerInTheShop() && trader.getTextForSign() != null)
 				shopkeepState = SHOPKEEP_STATE.UPDATING_SIGN;
 			else {
-				if (trader.equipped != trader.broom)
+				if (trader.equipped != trader.broom && trader.inventory.contains(trader.broom))
 					trader.equip(trader.broom);
 				if (targetSquare != null) {
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);

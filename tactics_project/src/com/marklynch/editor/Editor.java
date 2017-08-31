@@ -489,14 +489,11 @@ public class Editor {
 
 		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
 				new Object[] { joesShop.name }, trader);
-		Weapon broom = Templates.BROOM.makeCopy(null, null);
-		trader.inventory.add(broom);
 		trader.inventory.add(Templates.KATANA.makeCopy(null, null));
 		trader.inventory.add(Templates.HATCHET.makeCopy(null, null));
 		trader.inventory.add(Templates.HUNTING_BOW.makeCopy(null, null));
 		Templates.SHOP_COUNTER.makeCopy(Game.level.squares[7][1], null);
 
-		trader.broom = broom;
 		trader.shop = joesShop;
 		trader.room = shopAtriums.get(0);
 		trader.shopSign = joesShopSign;
