@@ -297,7 +297,6 @@ public class Inventory implements Draggable, Scrollable {
 			@Override
 			public void click() {
 				if (inventoryMode == INVENTORY_MODE.MODE_TRADE) {
-					Game.level.player.inventory.markItemsToSell();
 					Game.level.player.sellItemsMarkedToSell((Actor) Inventory.target);
 				}
 			}
@@ -1337,24 +1336,32 @@ public class Inventory implements Draggable, Scrollable {
 		// return null;
 	}
 
+	public int itemsToSellCount = 0;
+
 	public void markItemsToSell() {
 
 		if (!(parent instanceof Actor) || parent instanceof NonHuman)
 			return;
 
+		itemsToSellCount = 0;
+
 		if (parent instanceof Trader) {
 			for (GameObject gameObject : gameObjects) {
 				gameObject.toSell = true;
+				itemsToSellCount++;
 			}
 
 			Trader trader = (Trader) parent;
-			if (trader.broom != null)
+			if (trader.broom != null) {
 				trader.broom.toSell = false;
+				itemsToSellCount--;
+			}
 
 			return;
 		}
 
 		ArrayList<String> weaponAlreadyAdded = new ArrayList<String>();
+
 		for (GameObject gameObject : gameObjects) {
 
 			gameObject.toSell = false;
@@ -1362,6 +1369,7 @@ public class Inventory implements Draggable, Scrollable {
 			// Junk
 			if (gameObject instanceof Junk) {
 				gameObject.toSell = true;
+				itemsToSellCount++;
 				continue;
 			}
 
@@ -1369,18 +1377,11 @@ public class Inventory implements Draggable, Scrollable {
 			if (gameObject instanceof Weapon) {
 				if (weaponAlreadyAdded.contains(gameObject.name)) {
 					gameObject.toSell = true;
+					itemsToSellCount++;
 				} else {
 					weaponAlreadyAdded.add(gameObject.name);
 				}
 			}
 		}
-	}
-
-	public boolean hasItemsToSell() {
-		for (GameObject gameObject : gameObjects)
-			if (gameObject.toSell == true)
-				return true;
-
-		return false;
 	}
 }

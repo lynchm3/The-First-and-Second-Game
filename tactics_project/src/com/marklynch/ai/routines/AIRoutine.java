@@ -918,7 +918,7 @@ public class AIRoutine {
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
 			} else {
-				actor.inventory.markItemsToSell();
+
 			}
 			return true;
 		}

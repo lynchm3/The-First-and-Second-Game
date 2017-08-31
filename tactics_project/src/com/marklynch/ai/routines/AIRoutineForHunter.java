@@ -87,8 +87,7 @@ public class AIRoutineForHunter extends AIRoutine {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
 			} else {
 				System.out.println();
-				actor.inventory.markItemsToSell();
-				if (actor.inventory.hasItemsToSell()) {
+				if (actor.inventory.itemsToSellCount > 0) {
 					huntState = HUNT_STATE.PICK_SHOP_KEEPER;
 				}
 			}
@@ -97,7 +96,7 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		// Loot from ground
 		if (lootFromGround()) {
-			if (actor.inventory.hasItemsToSell()) {
+			if (actor.inventory.itemsToSellCount > 0) {
 				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
 			}
 			return;
