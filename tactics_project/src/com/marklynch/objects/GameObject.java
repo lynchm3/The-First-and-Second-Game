@@ -945,12 +945,16 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
 				return new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this);
+			} else {
+				return new ActionEquip(Game.level.player, this);
 			}
 
 		}
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
 				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
+			} else {
+				return new ActionEquip(Game.level.player, this);
 			}
 
 		}

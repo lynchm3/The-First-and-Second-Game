@@ -8,6 +8,7 @@ import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.utils.ResourceUtils;
 
 public class ActionEquip extends Action {
 
@@ -25,6 +26,10 @@ public class ActionEquip extends Action {
 		if (!Game.level.player.inventory.contains(gameObject)) {
 			actionTake = new ActionTakeSpecificItem(performer, gameObject.inventoryThatHoldsThisObject.parent,
 					gameObject);
+
+		}
+		if (!Game.level.player.inventory.contains(gameObject) && Game.level.openInventories.size() > 0) {
+			image = ResourceUtils.getGlobalImage("leftleft.png");
 		}
 		if (!check()) {
 			enabled = false;

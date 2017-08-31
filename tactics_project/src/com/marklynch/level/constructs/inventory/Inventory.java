@@ -121,8 +121,11 @@ public class Inventory implements Draggable, Scrollable {
 	int lengthShiftDrop = Game.font.getWidth(stringShiftDrop);
 	String stringShiftPut = "[SHIFT] Put";
 	int lengthShiftPut = Game.font.getWidth(stringShiftPut);
+	String stringShiftEquip = "[SHIFT] Equip";
+	int lengthShiftEquip = Game.font.getWidth(stringShiftEquip);
 
 	float textShiftX = 0;
+	float textOtherShiftX = 0;
 
 	// Color beind inventory squares
 	public final static Color inventoryAreaColor = new Color(1f, 1f, 1f, 0.25f);
@@ -755,11 +758,13 @@ public class Inventory implements Draggable, Scrollable {
 			this.groundDisplay.fixScroll();
 			this.groundDisplay.resize2();
 			buttonLootAll.x = groundDisplay.squaresX;
+			textOtherShiftX = this.groundDisplay.squaresX + buttonLootAll.width;
 		}
 		if (this.otherInventory != null) {
 			this.otherInventory.fixScroll();
 			this.otherInventory.resize2();
 			buttonLootAll.x = this.otherInventory.squaresX;
+			textOtherShiftX = this.otherInventory.squaresX + buttonLootAll.width;
 		}
 
 	}
@@ -995,11 +1000,15 @@ public class Inventory implements Draggable, Scrollable {
 		if (groundDisplay != null) {
 			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
 					new Object[] { stringShiftDrop });
+			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
+					false, new Object[] { stringShiftEquip });
 		}
 
 		if (otherInventory != null && inventoryMode != INVENTORY_MODE.MODE_TRADE) {
 			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
 					new Object[] { stringShiftPut });
+			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
+					false, new Object[] { stringShiftEquip });
 		}
 
 		// text
