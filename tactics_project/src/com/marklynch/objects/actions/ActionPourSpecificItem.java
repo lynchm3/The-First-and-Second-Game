@@ -76,7 +76,8 @@ public class ActionPourSpecificItem extends Action {
 			containerForLiquids.value = containerForLiquids.baseValue;
 		}
 
-		Game.level.openInventories.clear();
+		if (Game.level.openInventories.size() > 0)
+			Game.level.openInventories.get(0).close();
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 

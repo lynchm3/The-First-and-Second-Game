@@ -81,7 +81,6 @@ public class Inventory implements Draggable, Scrollable {
 	transient static int bottomBorderHeight = 256;
 	transient static int topBorderHeight = 100;
 	transient private InventorySquare inventorySquareMouseIsOver;
-	transient private GameObject selectedGameObject;
 
 	// Sort buttons
 	static LevelButton selectedSortButton;
@@ -348,9 +347,11 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void close() {
+		System.out.println("close");
 		this.isOpen = false;
 		if (Inventory.lastInventoryFilterBy != null) {
 			Inventory.inventoryFilterBy = lastInventoryFilterBy;
+			Inventory.lastInventoryFilterBy = null;
 		}
 
 		if (Game.level.openInventories.contains(this))
@@ -448,6 +449,8 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void filter(INVENTORY_FILTER_BY inventoryFilterBy, boolean temporary) {
+
+		System.out.println("filter inventoryFilterBy = " + inventoryFilterBy + ", temporary = " + temporary);
 
 		if (inventoryFilterBy != Inventory.inventoryFilterBy) {
 			if (temporary) {

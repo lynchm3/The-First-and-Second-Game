@@ -44,43 +44,6 @@ public class ActionFillSpecificContainer extends Action {
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(
 					new ActivityLog(new Object[] { performer, " filled ", containerForLiquids, " with ", water }));
-
-		// if (Game.level.openInventories.size() > 0) {
-		// Game.level.openInventories.clear();
-		// } else {
-		//
-		// Game.level.player.inventory.open();
-		// Game.level.player.inventory.filter(Inventory.INVENTORY_FILTER_BY.FILTER_BY_CONTAINER_FOR_LIQUIDS,
-		// true);
-		// Game.level.player.inventory.sort(Inventory.inventorySortBy);
-		// Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_CONTAINER_FOR_LIQUIDS_TO_FILL);
-		// // Game.level.player.inventory.setActionOnSelect(new
-		// // ActionFillEquippedContainer());
-		// }
-		// Level.closeAllPopups();
-
-		// if (performer.squareGameObjectIsOn.visibleToPlayer)
-		// Game.level.logOnScreen(new ActivityLog(new Object[] { performer, "
-		// picked up ", object }));
-		// if (performer.inventory.contains(performer.equipped))
-		// performer.equippedBeforePickingUpObject = performer.equipped;
-		// object.squareGameObjectIsOn.inventory.remove(object);
-		// if (object.fitsInInventory)
-		// performer.inventory.add(object);
-		// performer.equip(object);
-		// if (object.owner == null)
-		// object.owner = performer;
-		// performer.actionsPerformedThisTurn.add(this);
-		// if (sound != null)
-		// sound.play();
-		//
-		// if (!legal) {
-		// Crime crime = new Crime(this, this.performer, object.owner, 4,
-		// object);
-		// this.performer.crimesPerformedThisTurn.add(crime);
-		// this.performer.crimesPerformedInLifetime.add(crime);
-		// notifyWitnessesOfCrime(crime);
-		// }
 	}
 
 	@Override
