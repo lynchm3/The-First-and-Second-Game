@@ -122,6 +122,10 @@ public class AIRoutineForThief extends AIRoutine {
 		if (deferToQuest())
 			return;
 
+		// Sell items
+		if (sellItems())
+			return;
+
 		// Go about ur business... (move around randomly...)
 		if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {
 			targetSquare = AIRoutineUtils.getRandomSquare(10, true);

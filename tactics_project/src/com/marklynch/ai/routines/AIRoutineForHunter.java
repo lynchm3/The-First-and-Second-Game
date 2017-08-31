@@ -9,7 +9,6 @@ import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
-import com.marklynch.objects.units.Trader;
 
 public class AIRoutineForHunter extends AIRoutine {
 
@@ -17,13 +16,12 @@ public class AIRoutineForHunter extends AIRoutine {
 	// Square squareToMoveTo;
 
 	enum HUNT_STATE {
-		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, PICK_SHOP_KEEPER, GO_TO_SHOP_KEEPER_AND_SELL_JUNK, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
+		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
 	};
 
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
 	// final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
-	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling spoils";
 	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
@@ -86,24 +84,20 @@ public class AIRoutineForHunter extends AIRoutine {
 			if (!lootedCarcass) {
 				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
 			} else {
-				System.out.println();
-				if (actor.inventory.itemsToSellCount > 0) {
-					huntState = HUNT_STATE.PICK_SHOP_KEEPER;
-				}
 			}
 			return;
 		}
 
 		// Loot from ground
-		if (lootFromGround()) {
-			if (actor.inventory.itemsToSellCount > 0) {
-				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
-			}
+		if (lootFromGround())
 			return;
-		}
 
 		// Defer to quest
 		if (deferToQuest())
+			return;
+
+		// Sell items
+		if (sellItems())
 			return;
 
 		// Go about your business
@@ -118,7 +112,7 @@ public class AIRoutineForHunter extends AIRoutine {
 
 			if (target == null) {
 				if (this.actor.inventory.contains(Junk.class)) {
-					huntState = HUNT_STATE.PICK_SHOP_KEEPER;
+					huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 				} else {
 					huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 				}
@@ -131,7 +125,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			if (target.remainingHealth <= 0 && this.actor.inventory.size() > 0) {
-				huntState = HUNT_STATE.PICK_SHOP_KEEPER;
+				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else if (target.remainingHealth <= 0 && target.inventory.size() == 0) {
 				huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 			} else {
@@ -140,32 +134,6 @@ public class AIRoutineForHunter extends AIRoutine {
 					AIRoutineUtils.moveTowardsTargetToAttack(target);
 				}
 			}
-		}
-
-		if (huntState == HUNT_STATE.PICK_SHOP_KEEPER) {
-			System.out.println("PICK_SHOP_KEEPER");
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
-			// if (target == null)
-			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, false, 0,
-					Trader.class);
-			if (target == null) {
-				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
-			} else {
-
-				huntState = HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK;
-			}
-		}
-
-		if (huntState == HUNT_STATE.GO_TO_SHOP_KEEPER_AND_SELL_JUNK) {
-			System.out.println("GO_TO_SHOP_KEEPER_AND_SELL_JUNK");
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
-
-			boolean soldItems = actor.sellItemsMarkedToSell((Actor) target);
-			if (!soldItems)
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
-			else
-				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
-
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP) {

@@ -40,6 +40,7 @@ import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.Hunter;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Pig;
+import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.MapUtil;
 
@@ -51,6 +52,7 @@ public class AIRoutine {
 	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
 	final String ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP = "Shouting for help";
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
+	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling loot";
 
 	public Actor actor;
 	public GameObject target;
@@ -1047,6 +1049,28 @@ public class AIRoutine {
 		}
 		return false;
 
+	}
+
+	public boolean sellItems() {
+		System.out.println("SELL ITEMS");
+
+		if (actor.inventory.itemsToSellCount <= 0)
+			return false;
+
+		System.out.println("PICK_SHOP_KEEPER");
+		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, false, 0,
+				Trader.class);
+		if (target == null) {
+			return false;
+		}
+		System.out.println("GO_TO_SHOP_KEEPER_AND_SELL_JUNK");
+		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
+
+		boolean soldItems = actor.sellItemsMarkedToSell((Actor) target);
+		if (!soldItems)
+			return AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
+		else
+			return true;
 	}
 
 }
