@@ -10,6 +10,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory.INVENTORY_MODE;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gold;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.StringWithColor;
@@ -116,6 +117,10 @@ public class InventorySquare extends Square {
 				StringWithColor goldText = new StringWithColor(count + "x" + gameObject.value, goldTextColor);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
 						new Object[] { goldText });
+			} else if (gameObject instanceof Gold) {
+				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
+						new Object[] { gameObject.value });
+
 			} else if (count > 1) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
 						new Object[] { count + "x" });
