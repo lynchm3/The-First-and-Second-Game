@@ -917,7 +917,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			return new ActionPourSpecificItem(performer, Inventory.target, this);
+			return new ActionPourSpecificItem(performer, Inventory.target, (ContainerForLiquids) this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {

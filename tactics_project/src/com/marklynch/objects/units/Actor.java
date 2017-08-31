@@ -232,14 +232,14 @@ public class Actor extends GameObject {
 
 		this.lastSquare = this.squareGameObjectIsOn;
 
-		// for (GameObject gameObject : mustHaves) {
-		// this.inventory.add(gameObject);
-		// }
-		//
-		// for (GameObject gameObject : mightHaves) {
-		// if (Math.random() > 0.8d)
-		// this.inventory.add(gameObject);
-		// }
+		for (GameObject gameObject : mustHaves) {
+			this.inventory.add(gameObject);
+		}
+
+		for (GameObject gameObject : mightHaves) {
+			if (Math.random() > 0.8d)
+				this.inventory.add(gameObject);
+		}
 
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			gameObject.owner = this;

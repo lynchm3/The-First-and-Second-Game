@@ -39,6 +39,7 @@ public class ActionFillSpecificContainer extends Action {
 
 		Liquid water = Templates.WATER.makeCopy(null, performer, containerForLiquids.volume);
 		containerForLiquids.inventory.add(water);
+		containerForLiquids.value = containerForLiquids.baseValue + water.value;
 
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(

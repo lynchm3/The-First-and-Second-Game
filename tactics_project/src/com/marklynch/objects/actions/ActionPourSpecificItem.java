@@ -8,6 +8,7 @@ import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
+import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Monster;
@@ -21,10 +22,10 @@ public class ActionPourSpecificItem extends Action {
 	Actor performer;
 	Square targetSquare;
 	GameObject targetGameObject;
-	GameObject container;
+	ContainerForLiquids containerForLiquids;
 
 	// Default for hostiles
-	public ActionPourSpecificItem(Actor performer, Object target, GameObject object) {
+	public ActionPourSpecificItem(Actor performer, Object target, ContainerForLiquids container) {
 		super(ACTION_NAME, "action_pour.png");
 		this.performer = performer;
 		if (target instanceof Square) {
@@ -34,11 +35,11 @@ public class ActionPourSpecificItem extends Action {
 			targetGameObject = (GameObject) target;
 			targetSquare = targetGameObject.squareGameObjectIsOn;
 		}
-		this.container = object;
+		this.containerForLiquids = container;
 		if (!check()) {
 			enabled = false;
 		} else {
-			actionName = ACTION_NAME + " " + object.name;
+			actionName = ACTION_NAME + " " + container.name;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -52,16 +53,17 @@ public class ActionPourSpecificItem extends Action {
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {
 			if (targetGameObject != null) {
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " poured ", container, " on ", targetGameObject }));
+				Game.level.logOnScreen(new ActivityLog(
+						new Object[] { performer, " poured ", containerForLiquids, " on ", targetGameObject }));
 			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " poured out ", container }));
+				Game.level
+						.logOnScreen(new ActivityLog(new Object[] { performer, " poured out ", containerForLiquids }));
 
 			}
 		}
 
-		if (container.inventory.size() > 0 && container.inventory.get(0) instanceof Liquid) {
-			Liquid liquid = (Liquid) this.container.inventory.get(0);
+		if (containerForLiquids.inventory.size() > 0 && containerForLiquids.inventory.get(0) instanceof Liquid) {
+			Liquid liquid = (Liquid) this.containerForLiquids.inventory.get(0);
 			for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
 				// new ActionDouse(shooter, gameObject).perform();
 				for (Effect effect : liquid.touchEffects) {
@@ -70,7 +72,8 @@ public class ActionPourSpecificItem extends Action {
 						gameObject.removeBurningEffect();
 				}
 			}
-			container.inventory.remove(container.inventory.get(0));
+			containerForLiquids.inventory.remove(containerForLiquids.inventory.get(0));
+			containerForLiquids.value = containerForLiquids.baseValue;
 		}
 
 		Game.level.openInventories.clear();
@@ -110,16 +113,16 @@ public class ActionPourSpecificItem extends Action {
 	@Override
 	public boolean check() {
 
-		if (container.inventory.size() != 0)
-			actionName = ACTION_NAME + " " + container.name + " (empty)";
+		if (containerForLiquids.inventory.size() != 0)
+			actionName = ACTION_NAME + " " + containerForLiquids.name + " (empty)";
 
 		if (performer.straightLineDistanceTo(targetSquare) > 1) {
-			actionName = ACTION_NAME + " " + container.name + " (can't reach)";
+			actionName = ACTION_NAME + " " + containerForLiquids.name + " (can't reach)";
 			return false;
 		}
 
 		if (!performer.canSeeSquare(targetSquare)) {
-			actionName = ACTION_NAME + " " + container.name + " (can't reach)";
+			actionName = ACTION_NAME + " " + containerForLiquids.name + " (can't reach)";
 			return false;
 		}
 
@@ -149,7 +152,7 @@ public class ActionPourSpecificItem extends Action {
 
 		// Sound
 		float loudness = 3;
-		return new Sound(performer, container, targetSquare, loudness, legal, this.getClass());
+		return new Sound(performer, containerForLiquids, targetSquare, loudness, legal, this.getClass());
 	}
 
 }

@@ -22,18 +22,20 @@ public class ContainerForLiquids extends Tool {
 	public Texture baseImage;
 	public Texture imageWhenFull;
 	public String imageWhenFullPath;
+	public int baseValue;
 
 	public ContainerForLiquids(String name, float minRange, float maxRange, String imagePath, float health,
 			Square squareGameObjectIsOn, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, float anchorX, float anchorY,
-			float volume, String imageWhenFullPath) {
+			float poisonResistance, float slashResistance, float weight, int value, Actor owner, float anchorX,
+			float anchorY, float volume, String imageWhenFullPath) {
 
 		super(name, minRange, maxRange, imagePath, health, squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, value, owner, anchorX, anchorY, 5);
+		this.baseValue = value;
 		this.volume = volume;
 		this.imageWhenFullPath = imageWhenFullPath;
 		baseName = new String(name);
@@ -42,9 +44,11 @@ public class ContainerForLiquids extends Tool {
 		if (this.inventory.size() == 0) {
 			this.name = baseName + " (empty)";
 			this.imageTexture = baseImage;
+			this.baseValue = value;
 		} else {
 			this.name = baseName + " of " + inventory.get(0).name;
 			this.imageTexture = imageWhenFull;
+			this.value = baseValue + inventory.get(0).value;
 		}
 
 	}
@@ -67,6 +71,7 @@ public class ContainerForLiquids extends Tool {
 		} else {
 			this.name = baseName + " of " + inventory.get(0).name;
 			this.imageTexture = imageWhenFull;
+			this.value = baseValue + inventory.get(0).value;
 		}
 	}
 
