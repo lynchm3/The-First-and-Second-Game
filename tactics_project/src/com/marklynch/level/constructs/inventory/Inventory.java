@@ -673,6 +673,10 @@ public class Inventory implements Draggable, Scrollable {
 			if (inventoryMode == INVENTORY_MODE.MODE_TRADE && gameObject instanceof Gold)
 				continue;
 
+			if (inventoryMode == INVENTORY_MODE.MODE_TRADE && this.parent != Game.level.player
+					&& gameObject.toSell == false)
+				continue;
+
 			if (gameObject.value == 0 && gameObject instanceof Gold)
 				continue;
 
