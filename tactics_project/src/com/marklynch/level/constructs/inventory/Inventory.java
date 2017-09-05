@@ -576,6 +576,20 @@ public class Inventory implements Draggable, Scrollable {
 				oldInventory.matchGameObjectsToSquares();
 			}
 
+			Date pickupDateTime = new Date();
+			gameObject.pickUpdateDateTime = pickupDateTime;
+
+			// Set that date on all items with that name
+			for (GameObject g : gameObjects) {
+				if (g.name.equals(gameObject.name)) {
+					System.out.println("Match " + g.name);
+					g.pickUpdateDateTime = pickupDateTime;
+					System.out.println("gameObject.pickUpdateDateTime " + gameObject.pickUpdateDateTime);
+					System.out.println("g.pickUpdateDateTime" + g.pickUpdateDateTime);
+
+				}
+			}
+
 			// Add to this inventory's list of game objects
 			gameObjects.add(gameObject);
 			gameObject.inventoryThatHoldsThisObject = this;
@@ -583,7 +597,6 @@ public class Inventory implements Draggable, Scrollable {
 			// this.sort(inventorySortBy);
 
 			// pick up date for sorting by newest
-			gameObject.pickUpdateDateTime = new Date();
 
 			if (parent != null)
 				parent.inventoryChanged();
@@ -1348,6 +1361,7 @@ public class Inventory implements Draggable, Scrollable {
 
 		itemsToSellCount = 0;
 
+		// Special tules for trader
 		if (parent instanceof Trader) {
 			for (GameObject gameObject : gameObjects) {
 				gameObject.toSell = true;
@@ -1363,7 +1377,8 @@ public class Inventory implements Draggable, Scrollable {
 			return;
 		}
 
-		ArrayList<String> weaponAlreadyAdded = new ArrayList<String>();
+		// General rules for actors
+		ArrayList<String> weaponsSeenInInventory = new ArrayList<String>();
 
 		for (GameObject gameObject : gameObjects) {
 
@@ -1378,11 +1393,11 @@ public class Inventory implements Draggable, Scrollable {
 
 			// Duplicate weapons
 			if (gameObject instanceof Weapon) {
-				if (weaponAlreadyAdded.contains(gameObject.name)) {
+				if (weaponsSeenInInventory.contains(gameObject.name)) {
 					gameObject.toSell = true;
 					itemsToSellCount++;
 				} else {
-					weaponAlreadyAdded.add(gameObject.name);
+					weaponsSeenInInventory.add(gameObject.name);
 				}
 			}
 		}
