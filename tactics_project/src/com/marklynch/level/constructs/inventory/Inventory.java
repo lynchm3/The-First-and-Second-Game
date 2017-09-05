@@ -580,13 +580,9 @@ public class Inventory implements Draggable, Scrollable {
 			gameObject.pickUpdateDateTime = pickupDateTime;
 
 			// Set that date on all items with that name
-			for (GameObject g : gameObjects) {
-				if (g.name.equals(gameObject.name)) {
-					System.out.println("Match " + g.name);
-					g.pickUpdateDateTime = pickupDateTime;
-					System.out.println("gameObject.pickUpdateDateTime " + gameObject.pickUpdateDateTime);
-					System.out.println("g.pickUpdateDateTime" + g.pickUpdateDateTime);
-
+			for (GameObject gameObjectInInventory : gameObjects) {
+				if (gameObjectInInventory.name.equals(gameObject.name)) {
+					gameObjectInInventory.pickUpdateDateTime = pickupDateTime;
 				}
 			}
 

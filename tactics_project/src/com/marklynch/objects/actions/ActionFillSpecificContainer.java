@@ -41,6 +41,9 @@ public class ActionFillSpecificContainer extends Action {
 		containerForLiquids.inventory.add(water);
 		containerForLiquids.value = containerForLiquids.baseValue + water.value;
 
+		if (performer == Game.level.player)
+			performer.inventory.matchGameObjectsToSquares();
+
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(
 					new ActivityLog(new Object[] { performer, " filled ", containerForLiquids, " with ", water }));
