@@ -661,21 +661,6 @@ public class Inventory implements Draggable, Scrollable {
 
 	public void matchGameObjectsToSquares() {
 
-		/*
-		 * 
-		 * So... merging items What gets merged? Junk Food
-		 * 
-		 * 
-		 * fuck... how the fuck do i even match them...
-		 * 
-		 * By name i gues... So... if(Food || Junk){show #} ughck
-		 * 
-		 * 
-		 * 
-		 */
-
-		// System.out.println("matchGameObjectsToSquares");
-
 		if (!isOpen)
 			return;
 
@@ -1379,6 +1364,9 @@ public class Inventory implements Draggable, Scrollable {
 		for (GameObject gameObject : gameObjects) {
 
 			gameObject.toSell = false;
+
+			if (gameObject instanceof Gold)
+				continue;
 
 			// Junk
 			if (gameObject instanceof Junk) {

@@ -366,7 +366,8 @@ public class UserInputLevel {
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
 				if (Game.level.activeActor == Game.level.player) {
 					Level.closeAllPopups();
-					interactWith(Game.squareMouseIsOver, -1, false,
+					interactWith(Game.squareMouseIsOver, -1,
+							Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
 							Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
 							Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 				}
