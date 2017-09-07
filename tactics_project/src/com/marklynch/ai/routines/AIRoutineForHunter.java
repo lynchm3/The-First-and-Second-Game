@@ -67,12 +67,14 @@ public class AIRoutineForHunter extends AIRoutine {
 			return;
 
 		// if group leader wait for group
-		if (this.actor.group != null && this.actor == this.actor.group.getLeader()) {
-			if (this.actor.group.leaderNeedsToWait()) {
-				this.actor.activityDescription = "Waiting for " + this.actor.group.name;
-				return;
-			}
-		}
+		// if (this.actor.group != null && this.actor ==
+		// this.actor.group.getLeader()) {
+		// if (this.actor.group.leaderNeedsToWait()) {
+		// this.actor.activityDescription = "Waiting for " +
+		// this.actor.group.name;
+		// return;
+		// }
+		// }
 
 		// 1. loot carcasses
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
