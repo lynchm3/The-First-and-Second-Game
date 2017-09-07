@@ -1014,7 +1014,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		actions.add(new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this));
 
-		actions.add(new ActionStarSpecificItem(this));
+		if (this.inventoryThatHoldsThisObject == Game.level.player.inventory && !(this instanceof Gold)) {
+			actions.add(new ActionStarSpecificItem(this));
+		}
 
 		// actions.add(new ActionThrow(performer, this, performer.equipped));
 		// actions.add(new ActionCastBurn(performer, this));

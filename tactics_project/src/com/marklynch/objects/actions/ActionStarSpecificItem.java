@@ -1,5 +1,6 @@
 package com.marklynch.objects.actions;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 
@@ -31,6 +32,11 @@ public class ActionStarSpecificItem extends Action {
 			return;
 
 		object.starred = !object.starred;
+		for (GameObject gameObjectInInventory : Game.level.player.inventory.gameObjects) {
+			if (gameObjectInInventory.name.equals(object.name)) {
+				gameObjectInInventory.starred = object.starred;
+			}
+		}
 	}
 
 	@Override
