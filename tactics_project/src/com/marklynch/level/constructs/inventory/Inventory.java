@@ -158,6 +158,7 @@ public class Inventory implements Draggable, Scrollable {
 	public static Texture textureCorner;
 	public static Texture textureFilter;
 	public static Texture textureBag;
+	public static Texture textureStar;
 
 	public Inventory(GameObject... gameObjects) {
 		for (GameObject gameObject : gameObjects) {
@@ -545,6 +546,7 @@ public class Inventory implements Draggable, Scrollable {
 		textureCorner = ResourceUtils.getGlobalImage("inventory_corner.png");
 		textureFilter = ResourceUtils.getGlobalImage("filter.png");
 		textureBag = ResourceUtils.getGlobalImage("bag.png");
+		textureStar = ResourceUtils.getGlobalImage("star.png");
 	}
 
 	public GameObject get(int i) {
@@ -1366,6 +1368,12 @@ public class Inventory implements Draggable, Scrollable {
 			gameObject.toSell = false;
 
 			if (gameObject instanceof Gold)
+				continue;
+
+			if (gameObject instanceof ContainerForLiquids)
+				continue;
+
+			if (this.parent == Game.level.player && gameObject.starred)
 				continue;
 
 			// Junk

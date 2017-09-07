@@ -51,6 +51,7 @@ import com.marklynch.objects.actions.ActionSearch;
 import com.marklynch.objects.actions.ActionSellSpecificItem;
 import com.marklynch.objects.actions.ActionSkin;
 import com.marklynch.objects.actions.ActionSmash;
+import com.marklynch.objects.actions.ActionStarSpecificItem;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
@@ -140,6 +141,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public Animation animation = new AnimationWait();
 
 	public boolean toSell = false;
+	public boolean starred = false;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
@@ -988,16 +990,16 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			return actions;
 		}
 
-		// if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
-		// return actions;
-		// }
-
-		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
-			return actions;
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
+			if (this.inventoryThatHoldsThisObject != performer.inventory)
+				actions.add(new ActionTakeSpecificItem(performer, Inventory.target, this));
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
-			return actions;
+			if (this.inventoryThatHoldsThisObject == performer.inventory)
+				actions.add(new ActionSellSpecificItem(performer, (Actor) Inventory.target, this));
+			else
+				actions.add(new ActionBuySpecificItem(performer, (Actor) Inventory.target, this));
 		}
 
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
@@ -1011,6 +1013,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		actions.add(new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this));
+
+		actions.add(new ActionStarSpecificItem(this));
 
 		// actions.add(new ActionThrow(performer, this, performer.equipped));
 		// actions.add(new ActionCastBurn(performer, this));

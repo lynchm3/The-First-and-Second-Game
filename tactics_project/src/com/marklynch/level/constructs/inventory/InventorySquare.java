@@ -126,6 +126,13 @@ public class InventorySquare extends Square {
 						new Object[] { count + "x" });
 
 			}
+
+			// Star
+			if (this.inventoryThisBelongsTo == Game.level.player.inventory && gameObject.starred) {
+				TextureUtils.drawTexture(Inventory.textureStar, xInPixels + Game.INVENTORY_SQUARE_WIDTH - 24,
+						yInPixels + 8, xInPixels + Game.INVENTORY_SQUARE_WIDTH - 8, yInPixels + 24);
+
+			}
 		}
 
 	}
