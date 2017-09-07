@@ -188,10 +188,6 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
-		// System.out.println("InventorySquare.getDefaultActionForTheSquareOrObject");
-		// System.out.println("this = " + this);
-		// System.out.println("this instanceof GroundDisplaySquare = " + (this
-		// instanceof GroundDisplaySquare));
 		GameObject targetGameObject = this.gameObject;
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInInventory(performer);
@@ -201,10 +197,6 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action getSecondaryActionForTheSquareOrObject(Actor performer) {
-		// System.out.println("InventorySquare.getDefaultActionForTheSquareOrObject");
-		// System.out.println("this = " + this);
-		// System.out.println("this instanceof GroundDisplaySquare = " + (this
-		// instanceof GroundDisplaySquare));
 		GameObject targetGameObject = this.gameObject;
 		if (targetGameObject != null) {
 			return targetGameObject.getSecondaryActionPerformedOnThisInInventory(performer);

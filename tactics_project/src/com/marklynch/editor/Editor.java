@@ -157,6 +157,12 @@ public class Editor {
 		colors.add(new Color(Color.ORANGE));
 		Game.level = new Level(360, 100);
 
+		for (int i = 0; i < Game.level.squares.length; i++) {
+			for (int j = 0; j < Game.level.squares[0].length; j++) {
+				Game.level.squares[i][j].afterContructor();
+			}
+		}
+
 		levelSettingsWindow = new LevelSettingsWindow(200, this);
 		squaresSettingsWindow = new SquaresSettingsWindow(200, this);
 		objectsSettingsWindow = new ObjectsSettingsWindow(200, this);

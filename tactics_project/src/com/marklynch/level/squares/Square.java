@@ -19,13 +19,13 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.inventory.InventoryParent;
+import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.MapMarker;
-import com.marklynch.objects.SquareInventory;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropItemsInInventory;
@@ -53,8 +53,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public String guid = UUID.randomUUID().toString();
 	public final static String[] editableAttributes = { "elevation", "travelCost", "imageTexture" };
 
-	public int xInGrid;
-	public int yInGrid;
 	public final int elevation;
 	public int travelCost;
 	public SquareInventory inventory;
@@ -143,6 +141,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 		this.restricted = restricted;
 
+	}
+
+	public void afterContructor() {
+		neighbors = getAllSquaresAtDistance(1);
 	}
 
 	public static void loadStaticImages() {
@@ -731,11 +733,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		return actions;
 	}
 
-	public int straightLineDistanceTo(Square otherSquare) {
-		return Math.abs(otherSquare.xInGrid - this.xInGrid) + Math.abs(otherSquare.yInGrid - this.yInGrid);
-
-	}
-
 	public float getCenterX() {
 		return xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
 	}
@@ -771,33 +768,15 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		return false;
 	}
 
+	@Override
+	public List getNeighbors(Actor actor) {
+		return getAllNeighbourSquaresThatCanBeMovedTo(actor);
+	}
+
 	public Vector<Square> getAllNeighbourSquaresThatCanBeMovedTo(Actor actor) {
+
 		Vector<Square> squares = new Vector<Square>();
-		Square square;
-		// +1,0
-		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid + 1, this.yInGrid)) {
-			square = Game.level.squares[this.xInGrid + 1][this.yInGrid];
-			if (square.includableInPath(actor)) {
-				squares.add(square);
-			}
-		}
-		// -1,0
-		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid - 1, this.yInGrid)) {
-			square = Game.level.squares[this.xInGrid - 1][this.yInGrid];
-			if (square.includableInPath(actor)) {
-				squares.add(square);
-			}
-		}
-		// 0,+1
-		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid + 1)) {
-			square = Game.level.squares[this.xInGrid][this.yInGrid + 1];
-			if (square.includableInPath(actor)) {
-				squares.add(square);
-			}
-		}
-		// 0,-1
-		if (ArrayUtils.inBounds(Game.level.squares, this.xInGrid, this.yInGrid - 1)) {
-			square = Game.level.squares[this.xInGrid][this.yInGrid - 1];
+		for (Square square : neighbors) {
 			if (square.includableInPath(actor)) {
 				squares.add(square);
 			}
@@ -805,25 +784,15 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		return squares;
 	}
 
-	@Override
-	public float getCost(AStarNode node) {
-		Square otherSquare = (Square) node;
-		if (otherSquare.inventory.contains(BrokenGlass.class))
-			return 8;
-		if (Game.level.activeActor != Game.level.player && otherSquare.inventory.contains(Actor.class))
-			return 8;
-		return 1;
-	}
+	// @Override
+	// public float getCost(AStarNode node) {
+	//
+	// return node.cost;
+	// }
 
 	@Override
 	public float getEstimatedCost(AStarNode node) {
-		Square otherSquare = (Square) node;
-		return this.straightLineDistanceTo(otherSquare);
-	}
-
-	@Override
-	public List getNeighbors(Actor actor) {
-		return getAllNeighbourSquaresThatCanBeMovedTo(actor);
+		return this.straightLineDistanceTo(node) + node.cost - 1;
 	}
 
 	public Vector<Square> getAllSquaresAtDistance(float distance) {
@@ -923,5 +892,21 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (y >= Game.level.squares[0].length)
 			return false;
 		return true;
+	}
+
+	public void calculatePathCost() {
+		if (inventory.contains(BrokenGlass.class))
+			cost = 8;
+		else if (inventory.contains(Actor.class))
+			cost = 8;
+		else
+			cost = 1;
+	}
+
+	public void calculatePathCostForPlayer() {
+		if (inventory.contains(BrokenGlass.class))
+			costForPlayer = 8;
+		else
+			costForPlayer = 1;
 	}
 }

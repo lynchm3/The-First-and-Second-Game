@@ -218,8 +218,15 @@ public class Game {
 		// Level
 		if (editorMode)
 			editor = new Editor();
-		else
+		else {
 			level = new Level(10, 10);
+
+			for (int i = 0; i < Game.level.squares.length; i++) {
+				for (int j = 0; j < Game.level.squares[0].length; j++) {
+					Game.level.squares[i][j].afterContructor();
+				}
+			}
+		}
 
 		// LWJGLRenderer renderer = null;
 		// try {

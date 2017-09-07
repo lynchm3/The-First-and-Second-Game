@@ -185,9 +185,9 @@ public class QuestSmallGame extends Quest {
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
 		ArrayList<StructureRoom> lodgeAtriums = new ArrayList<StructureRoom>();
 		lodgeAtriums.add(
-				new StructureRoom("Hunting Lodge", 8, 8, false, new ArrayList<Actor>(), new RoomPart(8, 8, 10, 10)));
+				new StructureRoom("Hunting Lodge", 8, 8, false, new ArrayList<Actor>(), new RoomPart(8, 10, 10, 14)));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
-		lodgeSections.add(new StructureSection("Hunting Lodge", 7, 7, 11, 11, false));
+		lodgeSections.add(new StructureSection("Hunting Lodge", 7, 9, 11, 15, false));
 
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructurePath>(),
 				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true,
@@ -224,10 +224,10 @@ public class QuestSmallGame extends Quest {
 		hunterPack = new Group("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3, hunterBront4,
 				hunterBront5, hunterBront6);
 
-		this.hunterPack.quest = this;
-		for (GameObject hunter : hunterPack.getMembers()) {
-			hunter.quest = this;
-		}
+		// this.hunterPack.quest = this;
+		// for (GameObject hunter : hunterPack.getMembers()) {
+		// hunter.quest = this;
+		// }
 
 		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[6][8], "Hunt Action Plan",
 				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);

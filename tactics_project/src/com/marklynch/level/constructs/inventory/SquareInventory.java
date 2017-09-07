@@ -1,11 +1,12 @@
-package com.marklynch.objects;
+package com.marklynch.level.constructs.inventory;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
@@ -48,23 +49,15 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			gameObject.inventoryThatHoldsThisObject = this;
 			gameObject.squareGameObjectIsOn = square;
 
-			// Add the general level tracking of inanimate objects
 			if (!Game.level.inanimateObjectsOnGround.contains(gameObject) && !(gameObject instanceof Actor))
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
 			this.gameObjects.sort(this);
-			// this.sort(eee, false);
 			gameObject.randomisePosition();
-			// for (int i = 0; i < inventorySquares.length; i++) {
-			// for (int j = 0; j < inventorySquares[i].length; j++) {
-			// if (inventorySquares[i][j].gameObject == null) {
-			//
-			// // Inventory Square
-			// inventorySquares[i][j].gameObject = gameObject;
-			// return;
-			// }
-			// }
-			// }
+
+			square.calculatePathCost();
+			square.calculatePathCostForPlayer();
+
 		}
 	}
 
@@ -90,6 +83,9 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		// for (GameObject gameObject2 : gameObjects) {
 		// System.out.println("gameObject2 = " + gameObject2);
 		// }
+
+		square.calculatePathCost();
+		square.calculatePathCostForPlayer();
 		return -1;
 	}
 

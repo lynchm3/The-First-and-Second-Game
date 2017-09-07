@@ -3,6 +3,7 @@ package com.marklynch.ai.utils;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.marklynch.Game;
 import com.marklynch.objects.units.Actor;
 
 /**
@@ -69,8 +70,11 @@ public class AStarSearch {
 				AStarNode neighborNode = (AStarNode) neighbors.get(i);
 				boolean isOpen = openList.contains(neighborNode);
 				boolean isClosed = closedList.contains(neighborNode);
-				float costFromStart = node.costFromStart + node.getCost(neighborNode);
-
+				float costFromStart = node.costFromStart;
+				if (actor == Game.level.player)
+					costFromStart += node.costForPlayer;
+				else
+					costFromStart += node.cost;
 				// check if the neighbor node has not been
 				// traversed or if a shorter path to this
 				// neighbor node is found.

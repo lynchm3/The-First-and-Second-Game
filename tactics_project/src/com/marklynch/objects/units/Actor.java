@@ -1407,11 +1407,9 @@ public class Actor extends GameObject {
 	}
 
 	public boolean sellItemsMarkedToSell(Actor buyer) {
-		System.out.println("sellItemsMarkedToSell");
 		if (this.straightLineDistanceTo(buyer.squareGameObjectIsOn) > 1)
 			return false;
 
-		System.out.println("inventory.itemsToSellCount = " + inventory.itemsToSellCount);
 		for (GameObject gameObject : (ArrayList<GameObject>) inventory.gameObjects.clone()) {
 			if (gameObject.toSell == true) {
 				new ActionSellSpecificItem(this, buyer, gameObject).perform();

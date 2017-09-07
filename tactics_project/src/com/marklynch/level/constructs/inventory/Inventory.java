@@ -304,7 +304,6 @@ public class Inventory implements Draggable, Scrollable {
 			@Override
 			public void click() {
 				if (inventoryMode == INVENTORY_MODE.MODE_TRADE) {
-					System.out.println("Quick sell clicked");
 					Game.level.player.sellItemsMarkedToSell((Actor) Inventory.target);
 				}
 			}
@@ -1343,9 +1342,6 @@ public class Inventory implements Draggable, Scrollable {
 	public int itemsToSellCount = 0;
 
 	public void markItemsToSell() {
-		if (this.parent == Game.level.player) {
-			System.out.println("Player Mark items to sell 1");
-		}
 
 		if (!(parent instanceof Actor) || parent instanceof NonHuman)
 			return;
@@ -1367,10 +1363,6 @@ public class Inventory implements Draggable, Scrollable {
 
 			return;
 		}
-		if (this.parent == Game.level.player) {
-			System.out.println("Player Mark items to sell 2");
-		}
-
 		// General rules for actors
 		ArrayList<String> weaponsSeenInInventory = new ArrayList<String>();
 

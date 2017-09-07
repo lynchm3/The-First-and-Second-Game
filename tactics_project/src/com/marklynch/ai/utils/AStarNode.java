@@ -1,7 +1,9 @@
 package com.marklynch.ai.utils;
 
 import java.util.List;
+import java.util.Vector;
 
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 /**
@@ -14,6 +16,18 @@ public abstract class AStarNode implements Comparable {
 	AStarNode pathParent;
 	float costFromStart;
 	float estimatedCostToGoal;
+
+	// added by me
+	public float cost = 1;
+	public float costForPlayer = 1;
+	public int xInGrid;
+	public int yInGrid;
+	public Vector<Square> neighbors;
+
+	// added by me
+	public int straightLineDistanceTo(AStarNode otherNode) {
+		return Math.abs(otherNode.xInGrid - this.xInGrid) + Math.abs(otherNode.yInGrid - this.yInGrid);
+	}
 
 	public float getCost() {
 		return costFromStart + estimatedCostToGoal;
@@ -32,7 +46,7 @@ public abstract class AStarNode implements Comparable {
 	 * Gets the cost between this node and the specified adjacent (AKA
 	 * "neighbor" or "child") node.
 	 */
-	public abstract float getCost(AStarNode node);
+	// public abstract float getCost(AStarNode node);
 
 	/**
 	 * Gets the estimated cost between this node and the specified node. The
@@ -40,6 +54,11 @@ public abstract class AStarNode implements Comparable {
 	 * estimate, the more effecient the search.
 	 */
 	public abstract float getEstimatedCost(AStarNode node);
+
+	public List getNeighborsThatCanBeMovedTo(Actor actor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/**
 	 * Gets the children (AKA "neighbors" or "adjacent nodes") of this node.
