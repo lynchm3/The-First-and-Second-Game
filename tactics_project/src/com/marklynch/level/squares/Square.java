@@ -3,6 +3,7 @@ package com.marklynch.level.squares;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -145,6 +146,13 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public void afterContructor() {
 		neighbors = getAllSquaresAtDistance(1);
+		if (isEven(xInGrid + yInGrid)) {
+			Collections.reverse(neighbors);
+		}
+	}
+
+	public static boolean isEven(int i) {
+		return (i & 1) == 0;
 	}
 
 	public static void loadStaticImages() {
@@ -776,6 +784,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public Vector<Square> getAllNeighbourSquaresThatCanBeMovedTo(Actor actor) {
 
 		Vector<Square> squares = new Vector<Square>();
+
 		for (Square square : neighbors) {
 			if (square.includableInPath(actor)) {
 				squares.add(square);

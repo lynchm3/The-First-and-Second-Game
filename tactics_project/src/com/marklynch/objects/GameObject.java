@@ -288,7 +288,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		// Draw POW
 
-		if (squareGameObjectIsOn != null) {
+		if (powTarget != null && powTarget.squareGameObjectIsOn != null) {
 			if (showPow == true) {
 				int powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH));
 				int powPositionYInPixels = powTarget.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
