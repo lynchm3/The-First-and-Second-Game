@@ -13,8 +13,8 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Monster;
+import com.marklynch.objects.units.WildAnimal;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
@@ -163,7 +163,7 @@ public class ActionAttack extends Action {
 		// Is human
 
 		if (target instanceof Actor)
-			if (!(target instanceof Monster) && !(target instanceof AggressiveWildAnimal))
+			if (!(target instanceof Monster) && !(target instanceof WildAnimal))
 				return false;
 		return true;
 	}

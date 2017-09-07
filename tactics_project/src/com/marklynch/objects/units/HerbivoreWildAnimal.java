@@ -9,7 +9,7 @@ import com.marklynch.objects.GameObject;
 
 import mdesl.graphics.Color;
 
-public class HerbivoreWildAnimal extends Animal {
+public class HerbivoreWildAnimal extends WildAnimal {
 
 	public Area area;
 
