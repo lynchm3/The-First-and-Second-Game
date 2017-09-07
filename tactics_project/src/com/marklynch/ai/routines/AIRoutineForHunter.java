@@ -137,7 +137,6 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
-			System.out.println("GO_TO_BED_AND_GO_TO_SLEEP");
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
 			// huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 

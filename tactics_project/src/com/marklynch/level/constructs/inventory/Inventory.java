@@ -16,7 +16,13 @@ import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
+import com.marklynch.objects.tools.Axe;
+import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.Knife;
+import com.marklynch.objects.tools.Lantern;
+import com.marklynch.objects.tools.Pickaxe;
+import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Trader;
@@ -297,6 +303,7 @@ public class Inventory implements Draggable, Scrollable {
 			@Override
 			public void click() {
 				if (inventoryMode == INVENTORY_MODE.MODE_TRADE) {
+					System.out.println("Quick sell clicked");
 					Game.level.player.sellItemsMarkedToSell((Actor) Inventory.target);
 				}
 			}
@@ -348,7 +355,6 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void close() {
-		System.out.println("close");
 		this.isOpen = false;
 		if (Inventory.lastInventoryFilterBy != null) {
 			Inventory.inventoryFilterBy = lastInventoryFilterBy;
@@ -450,8 +456,6 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void filter(INVENTORY_FILTER_BY inventoryFilterBy, boolean temporary) {
-
-		System.out.println("filter inventoryFilterBy = " + inventoryFilterBy + ", temporary = " + temporary);
 
 		if (inventoryFilterBy != Inventory.inventoryFilterBy) {
 			if (temporary) {
@@ -1338,6 +1342,9 @@ public class Inventory implements Draggable, Scrollable {
 	public int itemsToSellCount = 0;
 
 	public void markItemsToSell() {
+		if (this.parent == Game.level.player) {
+			System.out.println("Player Mark items to sell 1");
+		}
 
 		if (!(parent instanceof Actor) || parent instanceof NonHuman)
 			return;
@@ -1359,6 +1366,9 @@ public class Inventory implements Draggable, Scrollable {
 
 			return;
 		}
+		if (this.parent == Game.level.player) {
+			System.out.println("Player Mark items to sell 2");
+		}
 
 		// General rules for actors
 		ArrayList<String> weaponsSeenInInventory = new ArrayList<String>();
@@ -1373,8 +1383,23 @@ public class Inventory implements Draggable, Scrollable {
 			if (gameObject instanceof ContainerForLiquids)
 				continue;
 
-			if (this.parent == Game.level.player && gameObject.starred)
-				continue;
+			if (this.parent == Game.level.player) {
+				if (gameObject.starred)
+					continue;
+				if (Game.level.player.equipped == gameObject)
+					continue;
+				if (Game.level.player.bodyArmor == gameObject)
+					continue;
+				if (Game.level.player.legArmor == gameObject)
+					continue;
+				if (Game.level.player.helmet == gameObject)
+					continue;
+
+				if (gameObject instanceof Weapon) {
+					if (checkIfPlayersWeaponObsolete((Weapon) gameObject))
+						continue;
+				}
+			}
 
 			// Junk
 			if (gameObject instanceof Junk) {
@@ -1394,4 +1419,42 @@ public class Inventory implements Draggable, Scrollable {
 			}
 		}
 	}
+
+	public boolean checkIfPlayersWeaponObsolete(Weapon weapon) {
+
+		for (Weapon weaponInInventory : Game.level.player.getWeaponsInInventory()) {
+
+			if (weapon == weaponInInventory)
+				continue;
+
+			if (weapon instanceof Tool) {
+				if (weapon instanceof Axe && !(weaponInInventory instanceof Axe))
+					continue;
+				if (weapon instanceof Bell && !(weaponInInventory instanceof Bell))
+					continue;
+				if (weapon instanceof Knife && !(weaponInInventory instanceof Knife))
+					continue;
+				if (weapon instanceof Lantern && !(weaponInInventory instanceof Lantern))
+					continue;
+				if (weapon instanceof Pickaxe && !(weaponInInventory instanceof Pickaxe))
+					continue;
+			}
+
+			if (weaponInInventory.bluntDamage >= weapon.bluntDamage
+					&& weaponInInventory.slashDamage >= weapon.slashDamage
+					&& weaponInInventory.pierceDamage >= weapon.pierceDamage
+					&& weaponInInventory.waterDamage >= weapon.waterDamage
+					&& weaponInInventory.fireDamage >= weapon.fireDamage
+					&& weaponInInventory.electricalDamage >= weapon.electricalDamage
+					&& weaponInInventory.poisonDamage >= weapon.poisonDamage
+					&& weaponInInventory.maxRange >= weapon.maxRange && weaponInInventory.minRange <= weapon.minRange) {
+				weapon.toSell = true;
+				itemsToSellCount++;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 }
