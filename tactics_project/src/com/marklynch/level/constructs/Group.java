@@ -78,9 +78,9 @@ public class Group {
 			return false;
 		} else if (leader.squareGameObjectIsOn != null) {
 
-			float maxDistanceFromLeader = 2;
+			float maxDistanceFromLeader = 3;
 			if (members.size() > 6)
-				maxDistanceFromLeader = 3;
+				maxDistanceFromLeader = 4;
 
 			Square currentTarget = targetSquaresMap.get(actor);
 
