@@ -26,6 +26,7 @@ import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Trader;
+import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -1399,6 +1400,11 @@ public class Inventory implements Draggable, Scrollable {
 					if (checkIfPlayersWeaponObsolete((Weapon) gameObject))
 						continue;
 				}
+
+				if (gameObject instanceof Armor) {
+					if (checkIfPlayersArmorObsolete((Armor) gameObject))
+						continue;
+				}
 			}
 
 			// Junk
@@ -1449,6 +1455,48 @@ public class Inventory implements Draggable, Scrollable {
 					&& weaponInInventory.poisonDamage >= weapon.poisonDamage
 					&& weaponInInventory.maxRange >= weapon.maxRange && weaponInInventory.minRange <= weapon.minRange) {
 				weapon.toSell = true;
+				itemsToSellCount++;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean checkIfPlayersArmorObsolete(Armor armor) {
+
+		ArrayList<GameObject> armorsOFSameTypeInInventory = Game.level.player.inventory
+				.getGameObjectsOfClass(armor.getClass());
+
+		for (GameObject armorOFSameTypeInInventory : armorsOFSameTypeInInventory) {
+
+			if (armor == armorOFSameTypeInInventory)
+				continue;
+
+			// if (armor instanceof Tool) {
+			// if (armor instanceof Axe && !(armorOFSameTypeInInventory
+			// instanceof Axe))
+			// continue;
+			// if (armor instanceof Bell && !(armorOFSameTypeInInventory
+			// instanceof Bell))
+			// continue;
+			// if (armor instanceof Knife && !(armorOFSameTypeInInventory
+			// instanceof Knife))
+			// continue;
+			// if (armor instanceof Lantern && !(armorOFSameTypeInInventory
+			// instanceof Lantern))
+			// continue;
+			// if (armor instanceof Pickaxe && !(armorOFSameTypeInInventory
+			// instanceof Pickaxe))
+			// continue;
+			// }
+
+			if (armorOFSameTypeInInventory.fireResistance >= armor.fireResistance
+					&& armorOFSameTypeInInventory.waterResistance >= armor.waterResistance
+					&& armorOFSameTypeInInventory.electricResistance >= armor.electricResistance
+					&& armorOFSameTypeInInventory.poisonResistance >= armor.poisonResistance
+					&& armorOFSameTypeInInventory.slashResistance >= armor.slashResistance) {
+				armor.toSell = true;
 				itemsToSellCount++;
 				return true;
 			}

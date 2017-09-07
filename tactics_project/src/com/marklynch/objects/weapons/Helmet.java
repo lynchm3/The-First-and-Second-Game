@@ -1,14 +1,12 @@
 package com.marklynch.objects.weapons;
 
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
 
-public class Helmet extends GameObject {
+public class Helmet extends Armor {
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
 			"totalHealth", "remainingHealth", "owner", "inventory", "showInventory", "fitsInInventory",
 			"canContainOtherObjects" };
@@ -19,14 +17,10 @@ public class Helmet extends GameObject {
 			float fireResistance, float waterResistance, float electricResistance, float poisonResistance,
 			float slashResistance, float weight, int value, Actor owner, float anchorX, float anchorY) {
 
-		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, value, owner);
-
-		this.owner = owner;
-		this.anchorX = anchorX;
-		this.anchorY = anchorY;
+		super(name, imagePath, health, squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX, drawOffsetY,
+				soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY, stackable,
+				fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance, weight, value,
+				owner, anchorX, anchorY);
 
 		canBePickedUp = true;
 		showInventory = false;
@@ -39,6 +33,7 @@ public class Helmet extends GameObject {
 
 	}
 
+	@Override
 	public Action getUtilityAction(Actor performer) {
 		return null;
 	}
