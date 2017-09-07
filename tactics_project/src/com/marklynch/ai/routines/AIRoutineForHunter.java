@@ -3,7 +3,6 @@ package com.marklynch.ai.routines;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Junk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
@@ -42,6 +41,25 @@ public class AIRoutineForHunter extends AIRoutine {
 	public void update() {
 		aiRoutineStart();
 
+		boolean hostileInAttackers = false;
+		for (GameObject attacker : actor.attackers) {
+			if (!(attacker instanceof HerbivoreWildAnimal)) {
+				hostileInAttackers = true;
+				break;
+			}
+		}
+
+		if (!hostileInAttackers) {
+
+			// Loot from carcass
+			if (lootCarcass())
+				return;
+
+			// Loot from ground
+			if (lootFromGround())
+				return;
+		}
+
 		// Fight
 		if (runFightRoutine())
 			return;
@@ -76,19 +94,9 @@ public class AIRoutineForHunter extends AIRoutine {
 		// }
 		// }
 
-		// 1. loot carcasses
-		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
-				true, 0, Carcass.class);
-		if (carcass != null) {
-			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
-			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
-			if (!lootedCarcass) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
-			} else {
-			}
+		// Loot carcass
+		if (lootCarcass())
 			return;
-		}
 
 		// Loot from ground
 		if (lootFromGround())
@@ -113,11 +121,7 @@ public class AIRoutineForHunter extends AIRoutine {
 					TinyNeutralWildAnimal.class);
 
 			if (target == null) {
-				if (this.actor.inventory.contains(Junk.class)) {
-					huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
-				} else {
-					huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
-				}
+				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else {
 				huntState = HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK;
 			}
@@ -125,6 +129,10 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
+
+			if (target.squareGameObjectIsOn == null)
+				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			if (target.remainingHealth <= 0 && this.actor.inventory.size() > 0) {
 				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
@@ -140,38 +148,39 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
-			// huntState = HUNT_STATE.PICK_WILD_ANIMAL;
-
-			// CONCEPT OF BED AND SLEEPING NEXT
 			if (this.actor.bed != null) {
-
 				if (this.actor.squareGameObjectIsOn == this.actor.bed.squareGameObjectIsOn) {
 					huntState = HUNT_STATE.SLEEP;
 				} else {
-					AIRoutineUtils.moveTowardsTargetToBeOn(this.actor.bed);
+					AIRoutineUtils.moveTowardsTargetToBeAdjacent(this.actor.bed);
 				}
-
-				// boolean goingToSleep = AIRoutineUtils.sleep();
-				// if (!goingToSleep) {
-				// AIRoutineUtils.moveTowardsTargetToBeOn(this.actor.bed);
-				// } else {
-				//
-				// }
-
 			} else {
 				huntState = HUNT_STATE.PICK_WILD_ANIMAL;
 			}
-
-			// ALSO -
-
 		}
 
 		if (huntState == HUNT_STATE.SLEEP) {
-			// this.actor.activityDescription =
-			// ACTIVITY_DESCRIPTION_GOING_TO_BED;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
-			// sleep();
 		}
+	}
+
+	public boolean lootCarcass() {
+
+		// 1. loot carcasses
+		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
+				true, 0, Carcass.class);
+		if (carcass != null) {
+			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
+			if (!lootedCarcass) {
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
+			} else {
+			}
+			return true;
+		}
+
+		return false;
 	}
 
 	// 1. Pick nearest target of type WILD ANIMAL within 100 squares
