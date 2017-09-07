@@ -361,8 +361,9 @@ public class UserInputLevel {
 
 			} else if (Game.windowHoveringOver != null) {
 
-			} else if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
-				Game.level.pausePlayer();
+				// } else if (Game.squareMouseIsOver != null &&
+				// Player.playerTargetSquare != null) {
+				// Game.level.pausePlayer();
 			} else if (Game.squareMouseIsOver != null && Game.level.currentFactionMovingIndex == 0) {
 				if (Game.level.activeActor == Game.level.player) {
 					Level.closeAllPopups();

@@ -1055,10 +1055,10 @@ public class Level {
 
 				// NORMAL MODE
 
-				if (Player.playerTargetSquare == null) {
-					Game.squareMouseIsOver.drawCursor();
-					Game.squareMouseIsOver.drawAction(false);
-				}
+				// if (Player.playerTargetSquare == null) {
+				Game.squareMouseIsOver.drawCursor();
+				Game.squareMouseIsOver.drawAction(false);
+				// }
 			}
 
 		}
@@ -1104,9 +1104,9 @@ public class Level {
 			} else {
 				// NORMAL MODE
 
-				if (Player.playerTargetSquare == null) {
-					Action action = Game.squareMouseIsOver.drawAction(true);
-				}
+				// if (Player.playerTargetSquare == null) {
+				Action action = Game.squareMouseIsOver.drawAction(true);
+				// }
 			}
 
 		}
