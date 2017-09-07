@@ -527,7 +527,7 @@ public class Editor {
 		Templates.TREE.makeCopy(Game.level.squares[14][8], null);
 		Templates.TREE.makeCopy(Game.level.squares[19][3], null);
 		Templates.TREE.makeCopy(Game.level.squares[18][13], null);
-		Templates.TREE.makeCopy(Game.level.squares[9][14], null);
+		Templates.TREE.makeCopy(Game.level.squares[9][16], null);
 		Templates.TREE.makeCopy(Game.level.squares[12][8], null);
 		Templates.TREE.makeCopy(Game.level.squares[27][3], null);
 		Templates.TREE.makeCopy(Game.level.squares[23][5], null);

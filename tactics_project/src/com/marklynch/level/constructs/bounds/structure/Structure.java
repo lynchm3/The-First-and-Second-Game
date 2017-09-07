@@ -28,7 +28,7 @@ public class Structure {
 	ArrayList<Square> wallSquares;
 	ArrayList<Square> featureSquares;
 	boolean blocksLineOfSight;
-	Actor owner;
+	public Actor owner;
 	ArrayList<Square> squaresToRemove;
 	boolean showOnMap = false;
 
@@ -185,8 +185,8 @@ public class Structure {
 
 		for (StructureRoom room : rooms) {
 			if (room.seenByPlayer)
-				TextUtils.printTextWithImages(room.x * Game.SQUARE_WIDTH, room.y * Game.SQUARE_HEIGHT,
-						100, true, new Object[] { room.name });
+				TextUtils.printTextWithImages(room.x * Game.SQUARE_WIDTH, room.y * Game.SQUARE_HEIGHT, 100, true,
+						new Object[] { room.name });
 		}
 
 	}

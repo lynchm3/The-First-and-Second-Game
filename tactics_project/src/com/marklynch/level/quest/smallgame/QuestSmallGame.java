@@ -171,45 +171,44 @@ public class QuestSmallGame extends Quest {
 		squareBehindLodge = Game.level.squares[12][9];
 		huntPlanningArea = Game.level.squares[5][8];
 
-		// FROM EDITOR
-
 		// BRENT
 
 		// Add lead hunter
-		GameObject brentsGameObject = Templates.BED.makeCopy(Game.level.squares[10][9]);
-		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1),
-				brentsGameObject, 203, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) },
-				new GameObject[] {});
+		GameObject brentsBed = Templates.BED.makeCopy(Game.level.squares[10][10]);
+		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[5][8], Game.level.factions.get(1), brentsBed,
+				203, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {});
 
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
-		ArrayList<StructureRoom> lodgeAtriums = new ArrayList<StructureRoom>();
-		lodgeAtriums.add(
-				new StructureRoom("Hunting Lodge", 8, 8, false, new ArrayList<Actor>(), new RoomPart(8, 10, 10, 14)));
+		lodgeFeatures.add(Templates.DOOR.makeCopy("Door", Game.level.squares[5][12], false, true, false, hunterBrent));
+		ArrayList<StructureRoom> lodgeRooms = new ArrayList<StructureRoom>();
+		lodgeRooms.add(
+				new StructureRoom("Hunting Lodge", 6, 8, false, new ArrayList<Actor>(), new RoomPart(6, 10, 10, 14)));
 		ArrayList<StructureSection> lodgeSections = new ArrayList<StructureSection>();
-		lodgeSections.add(new StructureSection("Hunting Lodge", 7, 9, 11, 15, false));
-
-		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeAtriums, new ArrayList<StructurePath>(),
+		lodgeSections.add(new StructureSection("Hunting Lodge", 5, 9, 11, 15, false));
+		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms, new ArrayList<StructurePath>(),
 				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true,
 				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, Square.STONE_TEXTURE);
 		Game.level.structures.add(lodge);
 
 		// Add hunters
-		GameObject brontsGameObject = Templates.BED.makeCopy(Game.level.squares[9][9]);
-		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1),
-				brontsGameObject, 124, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) },
-				new GameObject[] {});
-
-		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), null, 73,
+		GameObject brontsBed = Templates.BED.makeCopy(Game.level.squares[8][10]);
+		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[3][7], Game.level.factions.get(1), brontsBed,
+				124, new GameObject[] { Templates.HUNTING_BOW.makeCopy(null, null) }, new GameObject[] {});
+		GameObject bront2sBed = Templates.BED.makeCopy(Game.level.squares[6][10]);
+		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[3][8], Game.level.factions.get(1), bront2sBed,
+				73, new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
+		GameObject bront3sBed = Templates.BED.makeCopy(Game.level.squares[10][12]);
+		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), bront3sBed, 30,
 				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
-
-		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[3][9], Game.level.factions.get(1), null, 30,
+		GameObject bront4sBed = Templates.BED.makeCopy(Game.level.squares[10][14]);
+		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1), bront4sBed, 83,
 				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
-		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[2][7], Game.level.factions.get(1), null, 83,
+		GameObject bront5sBed = Templates.BED.makeCopy(Game.level.squares[8][14]);
+		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1), bront5sBed, 23,
 				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
-		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[2][8], Game.level.factions.get(1), null, 23,
-				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
-		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1), null, 43,
+		GameObject bront6sBed = Templates.BED.makeCopy(Game.level.squares[6][14]);
+		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[2][9], Game.level.factions.get(1), bront6sBed, 43,
 				new GameObject[] { Templates.HATCHET.makeCopy(null, null) }, new GameObject[] {});
 
 		Actor thief = Templates.THIEF.makeCopy(Game.level.squares[2][13], Game.level.factions.get(2), null, 64,
@@ -236,7 +235,7 @@ public class QuestSmallGame extends Quest {
 		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 
 		environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
-				"environmentalist.png", Game.level.squares[7][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
+				"environmentalist.png", Game.level.squares[5][16], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
 				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 110f, null, Game.level.factions.get(1), 0, 0, 0, 0, 0,
 				0, 0, 0, 10, new GameObject[] {}, new GameObject[] {});
 		environmentalistBill.inventory.add(Templates.HATCHET.makeCopy(null, environmentalistBill));
