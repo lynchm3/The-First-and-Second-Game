@@ -892,7 +892,8 @@ public class AIRoutine {
 
 	public boolean deferToGroupLeader() {
 
-		if (this.actor.group != null && this.actor != this.actor.group.getLeader()) {
+		if (this.actor.group != null && this.actor != this.actor.group.getLeader()
+				&& this.actor.group.getLeader().bedTime == false) {
 			if (this.actor.group.update(this.actor)) {
 				return true;
 			}
@@ -928,6 +929,7 @@ public class AIRoutine {
 	}
 
 	public void aiRoutineStart() {
+		this.actor.bedTime = false;
 		this.actor.aiLine = null;
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;

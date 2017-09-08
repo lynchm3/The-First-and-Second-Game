@@ -80,6 +80,14 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (runDoorRoutine())
 			return;
 
+		// Loot carcass
+		if (lootCarcass())
+			return;
+
+		// Loot from ground
+		if (lootFromGround())
+			return;
+
 		// Defer to group leader
 		if (deferToGroupLeader())
 			return;
@@ -93,14 +101,6 @@ public class AIRoutineForHunter extends AIRoutine {
 		// return;
 		// }
 		// }
-
-		// Loot carcass
-		if (lootCarcass())
-			return;
-
-		// Loot from ground
-		if (lootFromGround())
-			return;
 
 		// Defer to quest
 		if (deferToQuest())
@@ -130,8 +130,10 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
 
-			if (target.squareGameObjectIsOn == null)
+			if (target.squareGameObjectIsOn == null) {
+				target = null;
 				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+			}
 
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			if (target.remainingHealth <= 0 && this.actor.inventory.size() > 0) {
@@ -147,6 +149,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+			actor.bedTime = true;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
 			if (this.actor.bed != null) {
 				if (this.actor.squareGameObjectIsOn == this.actor.bed.squareGameObjectIsOn) {
@@ -160,6 +163,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.SLEEP) {
+			actor.bedTime = true;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 		}
 	}

@@ -162,6 +162,7 @@ public class Actor extends GameObject {
 	public AILine aiLine;
 
 	public ArrayList<Door> doors = new ArrayList<Door>();
+	public boolean bedTime = false;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
