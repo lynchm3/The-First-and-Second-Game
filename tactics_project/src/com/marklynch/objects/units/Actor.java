@@ -323,11 +323,11 @@ public class Actor extends GameObject {
 			return null;
 		}
 
-		if (this instanceof Player && !target.seenByPlayer) {
-
-		} else if (target.inventory.canBeMovedTo() == false) {
-			return null;
-		}
+		// if (this instanceof Player && !target.seenByPlayer) {
+		//
+		// } else if (target.inventory.canBeMovedTo() == false) {
+		// return null;
+		// }
 
 		// ASTARSEACH.FINDPATH
 		int maxPathSize = 1000;
