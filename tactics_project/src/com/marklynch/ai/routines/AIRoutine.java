@@ -1065,31 +1065,34 @@ public class AIRoutine {
 
 	public boolean runDoorRoutine() {
 		for (Door door : actor.doors) {
+
 			if (door.locked == false && door.shouldBeLocked() && actor.hasKeyForDoor(door)
 					&& actor.squareGameObjectIsOn != door.squareGameObjectIsOn && actor.canSeeGameObject(door)) {
 				actor.thoughtBubbleImageTexture = door.imageTexture;
 				Action action = new ActionLock(this.actor, door);
-				if (action.enabled) {
-					action.perform();
-					return true;
-				} else {
+				if (actor.straightLineDistanceTo(door.squareGameObjectIsOn) > 1) {
 					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(door.squareGameObjectIsOn)) {
 						return true;
 					}
-
+				} else if (!action.enabled) {
+					return false;
+				} else {
+					action.perform();
+					return true;
 				}
 			} else if (door.isOpen() && door.shouldBeClosed() && actor.squareGameObjectIsOn != door.squareGameObjectIsOn
 					&& actor.canSeeGameObject(door)) {
 				actor.thoughtBubbleImageTexture = door.imageTexture;
 				Action action = new ActionClose(this.actor, door);
-				if (action.enabled) {
-					action.perform();
-					return true;
-				} else {
+				if (actor.straightLineDistanceTo(door.squareGameObjectIsOn) > 1) {
 					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(door.squareGameObjectIsOn)) {
 						return true;
 					}
-
+				} else if (!action.enabled) {
+					return false;
+				} else {
+					action.perform();
+					return true;
 				}
 			}
 		}
