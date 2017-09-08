@@ -114,7 +114,7 @@ public class AIRoutineUtils {
 								if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
 										ignoreQuestObjects, minimumValue)) {
 									Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(
-											actor.squareGameObjectIsOn, 1f);
+											actor.squareGameObjectIsOn, 0f);
 									AIPath path = Game.level.activeActor.getPathTo(square);
 									if (path != null) {
 										return actor;
@@ -454,7 +454,7 @@ public class AIRoutineUtils {
 			return true;
 		}
 
-		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target.squareGameObjectIsOn, 1f);
+		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target.squareGameObjectIsOn, 0f);
 
 		if (squareToMoveTo != null) {
 			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
@@ -470,7 +470,7 @@ public class AIRoutineUtils {
 			return true;
 		}
 
-		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(square, 1f);
+		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(square, 0f);
 
 		if (squareToMoveTo != null) {
 			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();

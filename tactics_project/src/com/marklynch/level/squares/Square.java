@@ -750,10 +750,15 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		return yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
 	}
 
-	public boolean includableInPath(Actor actor) {
-		if (Game.level.activeActor == Game.level.player && !this.seenByPlayer) {
+	public boolean includableInPath(Actor actor, AStarNode goalNode) {
+
+		if (actor == Game.level.player && !this.seenByPlayer)
 			return true;
-		} else if (inventory.canShareSquare()) {
+
+		if (this == goalNode)
+			return true;
+
+		if (inventory.canShareSquare()) {
 
 			GameObject gameObjectDoor = inventory.getGameObjectOfClass(Door.class);
 			if (gameObjectDoor instanceof Door) {
@@ -778,16 +783,11 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	@Override
-	public List getNeighbors(Actor actor) {
-		return getAllNeighbourSquaresThatCanBeMovedTo(actor);
-	}
-
-	public Vector<Square> getAllNeighbourSquaresThatCanBeMovedTo(Actor actor) {
-
+	public List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, AStarNode goalNode) {
 		Vector<Square> squares = new Vector<Square>();
 
 		for (Square square : neighbors) {
-			if (square.includableInPath(actor)) {
+			if (square.includableInPath(actor, goalNode)) {
 				squares.add(square);
 			}
 		}
@@ -905,8 +905,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public void calculatePathCost() {
-		if (!inventory.canShareSquare())
-			cost = 999;
+		// if (!inventory.canShareSquare())
+		// cost = 999;
 		if (inventory.contains(BrokenGlass.class))
 			cost = 9;
 		else if (inventory.contains(Actor.class))
@@ -917,7 +917,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public void calculatePathCostForPlayer() {
 		if (inventory.contains(BrokenGlass.class))
-			costForPlayer = 8;
+			costForPlayer = 9;
 		else
 			costForPlayer = 1;
 	}

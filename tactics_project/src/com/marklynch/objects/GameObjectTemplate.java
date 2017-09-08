@@ -71,15 +71,8 @@ public class GameObjectTemplate implements InventoryParent {
 		this.squareGameObjectIsOn = squareGameObjectIsOn;
 		this.inventory = inventory;
 		this.inventory.parent = this;
-		this.showInventory = showInventory;
-		this.canShareSquare = canShareSquare;
-		this.fitsInInventory = fitsInInventory;
-		this.canContainOtherObjects = canContainOtherObjects;
 		this.widthRatio = widthRatio;
 		this.heightRatio = heightRatio;
-		this.blocksLineOfSight = blocksLineOfSight;
-		this.persistsWhenCantBeSeen = persistsWhenCantBeSeen;
-		this.attackable = attackable;
 
 		this.drawOffsetX = drawOffsetX;
 		this.drawOffsetY = drawOffsetY;

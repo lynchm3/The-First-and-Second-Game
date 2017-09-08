@@ -62,6 +62,8 @@ public abstract class AStarNode implements Comparable {
 
 	/**
 	 * Gets the children (AKA "neighbors" or "adjacent nodes") of this node.
+	 * 
+	 * @param goalNode
 	 */
-	public abstract List getNeighbors(Actor actor);
+	public abstract List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, AStarNode goalNode);
 }

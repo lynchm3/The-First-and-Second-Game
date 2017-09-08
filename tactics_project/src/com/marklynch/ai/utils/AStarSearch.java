@@ -65,7 +65,7 @@ public class AStarSearch {
 				return constructPath(goalNode);
 			}
 
-			List neighbors = node.getNeighbors(actor);
+			List neighbors = node.getAllNeighbourSquaresThatCanBeMovedTo(actor, goalNode);
 			for (int i = 0; i < neighbors.size(); i++) {
 				AStarNode neighborNode = (AStarNode) neighbors.get(i);
 				boolean isOpen = openList.contains(neighborNode);
