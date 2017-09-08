@@ -162,7 +162,7 @@ public class Actor extends GameObject {
 	public AILine aiLine;
 
 	public ArrayList<Door> doors = new ArrayList<Door>();
-	public boolean bedTime = false;
+	public boolean followersShouldFollow = false;
 	public AIPath path;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
@@ -330,7 +330,7 @@ public class Actor extends GameObject {
 		}
 
 		// ASTARSEACH.FINDPATH
-		int maxPathSize = 100;
+		int maxPathSize = 1000;
 		if (this instanceof Player) {
 			maxPathSize = 1000;
 		}

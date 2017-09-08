@@ -141,6 +141,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			this.owners.add(owner);
 		}
 		this.restricted = restricted;
+		calculatePathCost();
 
 	}
 
@@ -904,10 +905,12 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public void calculatePathCost() {
+		if (!inventory.canShareSquare())
+			cost = 999;
 		if (inventory.contains(BrokenGlass.class))
-			cost = 8;
+			cost = 9;
 		else if (inventory.contains(Actor.class))
-			cost = 8;
+			cost = 9;
 		else
 			cost = 1;
 	}

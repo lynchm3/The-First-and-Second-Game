@@ -25,7 +25,7 @@ public class Thief extends Actor {
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves, mightHaves);
-		aiRoutine = new AIRoutineForThief(this);
+		// aiRoutine = new AIRoutineForThief(this);
 	}
 
 	@Override

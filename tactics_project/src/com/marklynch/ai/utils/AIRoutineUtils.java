@@ -594,6 +594,7 @@ public class AIRoutineUtils {
 			return Game.level.activeActor.squareGameObjectIsOn;
 		}
 
+		Game.level.activeActor.path = pathToSquare;
 		return getSquareToMoveAlongPath(pathToSquare);
 
 	}
@@ -646,6 +647,7 @@ public class AIRoutineUtils {
 
 		}
 
+		Game.level.activeActor.path = pathToSquare;
 		return pathToSquare;
 
 	}
@@ -742,11 +744,13 @@ public class AIRoutineUtils {
 		// but allows CPU to cheat
 		if (pathToSquare.travelCost <= Game.level.activeActor.travelDistance) {
 			squareToMoveTo = pathToSquare.squares.lastElement();
+			Game.level.activeActor.path = pathToSquare;
 		} else {
 			for (int i = pathToSquare.squares.size() - 1; i >= 0; i--) {
 				AIPath subPath = Game.level.activeActor.getPathTo(pathToSquare.squares.get(i));
 				if (subPath != null && subPath.travelCost <= Game.level.activeActor.travelDistance) {
 					squareToMoveTo = pathToSquare.squares.get(i);
+					Game.level.activeActor.path = pathToSquare;
 					break;
 				}
 			}

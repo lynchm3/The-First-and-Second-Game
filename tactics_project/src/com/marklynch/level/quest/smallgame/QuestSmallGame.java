@@ -182,7 +182,7 @@ public class QuestSmallGame extends Quest {
 
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();
-		lodgeFeatures.add(Templates.DOOR.makeCopy("Door", Game.level.squares[5][12], false, true, false, hunterBrent));
+		lodgeFeatures.add(Templates.DOOR.makeCopy("Door", Game.level.squares[5][12], false, false, false, hunterBrent));
 		ArrayList<StructureRoom> lodgeRooms = new ArrayList<StructureRoom>();
 		lodgeRooms.add(
 				new StructureRoom("Hunting Lodge", 6, 8, false, new ArrayList<Actor>(), new RoomPart(6, 10, 10, 14)));

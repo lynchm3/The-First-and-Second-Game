@@ -60,8 +60,10 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Fight
-		if (runFightRoutine())
+		if (runFightRoutine()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Crime reaction
 		if (runCrimeReactionRoutine())
@@ -106,8 +108,10 @@ public class AIRoutineForHunter extends AIRoutine {
 		// }
 
 		// Defer to quest
-		if (deferToQuest())
+		if (deferToQuest()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Sell items
 		if (sellItems())
@@ -117,6 +121,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL)
 
 		{
+			this.actor.followersShouldFollow = true;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			// if (target == null)
 			target = AIRoutineUtils.getNearestForPurposeOfAttacking(100, false, true, false, false, false, true, 0,
@@ -132,6 +137,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
+			this.actor.followersShouldFollow = true;
 
 			if (target.squareGameObjectIsOn == null) {
 				target = null;
@@ -152,7 +158,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
-			actor.bedTime = true;
+			actor.followersShouldFollow = false;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
 			if (this.actor.bed != null) {
 				if (this.actor.squareGameObjectIsOn == this.actor.bed.squareGameObjectIsOn) {
@@ -166,7 +172,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		if (huntState == HUNT_STATE.SLEEP) {
-			actor.bedTime = true;
+			this.actor.followersShouldFollow = false;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 		}
 	}
