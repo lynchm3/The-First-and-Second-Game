@@ -734,13 +734,12 @@ public class Level {
 	// }
 
 	public void drawBackground() {
+
 		// Squares
 		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.getDragXWithOffset()
 				- (Game.windowWidth / 2) / Game.zoom) / Game.SQUARE_WIDTH);
 		if (gridX1Bounds < 0)
 			gridX1Bounds = 0;
-
-		// + (mouseXinPixels) / Game.zoom);
 
 		int gridX2Bounds = (int) (gridX1Bounds + ((Game.windowWidth / Game.SQUARE_WIDTH)) / Game.zoom) + 2;
 		if (gridX2Bounds >= width)
@@ -754,6 +753,25 @@ public class Level {
 		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 2;
 		if (gridY2Bounds >= height)
 			gridY2Bounds = height - 1;
+
+		if (Game.highlightPath) {
+
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+					squares[i][j].highlight = false;
+				}
+			}
+
+			for (Faction faction : factions) {
+				for (Actor actor : faction.actors) {
+					if (actor.path != null) {
+						for (Square square : actor.path.squares) {
+							square.highlight = true;
+						}
+					}
+				}
+			}
+		}
 
 		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {

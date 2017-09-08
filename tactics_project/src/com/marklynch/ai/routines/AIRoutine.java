@@ -23,12 +23,14 @@ import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Junk;
+import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
+import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionShoutForHelp;
@@ -193,6 +195,24 @@ public class AIRoutine {
 		return null;
 	}
 
+	public static boolean escapeFromAttackerToSmallHidingPlace(GameObject attacker) {
+
+		// Go to burrow and hide if can
+		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20f,
+				false, false, true, false, false, false, 0, SmallHidingPlace.class);
+		if (smallHidingPlace != null) {
+
+			if (Game.level.activeActor.straightLineDistanceTo(smallHidingPlace.squareGameObjectIsOn) < 2) {
+				new ActionHideInside(Game.level.activeActor, smallHidingPlace).perform();
+			} else {
+
+				AIRoutineUtils.moveTowardsTargetToBeOn(smallHidingPlace);
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public boolean runFightRoutine() {
 		boolean attacked = false;
 		boolean moved = false;
@@ -325,7 +345,7 @@ public class AIRoutine {
 					// Try to attack the preference 1 target
 					if (attackerToRunFrom != null) {
 						if (actor instanceof HerbivoreWildAnimal
-								&& AIRoutineUtils.escapeFromAttackerToSmallHidingPlace(attackerToRunFrom)) {
+								&& escapeFromAttackerToSmallHidingPlace(attackerToRunFrom)) {
 							// Successfully ran towards burrow
 						} else {
 							AIRoutineUtils.escapeFromAttacker(attackerToRunFrom);

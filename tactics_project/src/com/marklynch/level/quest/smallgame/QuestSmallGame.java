@@ -25,7 +25,7 @@ import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.Hunter;
+import com.marklynch.objects.units.Farmer;
 
 public class QuestSmallGame extends Quest {
 
@@ -250,7 +250,7 @@ public class QuestSmallGame extends Quest {
 		Chest chest = Templates.CHEST.makeCopy("Chest", Game.level.squares[3][1], false, null);
 		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 
-		environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
+		environmentalistBill = new Farmer("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[5][16], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
 				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 110f, null, Game.level.factions.get(1), 0, 0, 0, 0, 0,
 				0, 0, 0, 10, new GameObject[] {}, new GameObject[] {});

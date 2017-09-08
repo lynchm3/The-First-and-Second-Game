@@ -13,10 +13,8 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEat;
-import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSkin;
@@ -115,7 +113,8 @@ public class AIRoutineUtils {
 											.straightLineDistanceTo(actor.squareGameObjectIsOn) <= maxRange) {
 								if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
 										ignoreQuestObjects, minimumValue)) {
-									Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(actor, 1f);
+									Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(
+											actor.squareGameObjectIsOn, 1f);
 									AIPath path = Game.level.activeActor.getPathTo(square);
 									if (path != null) {
 										return actor;
@@ -149,7 +148,8 @@ public class AIRoutineUtils {
 										.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
 							if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
 									mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue)) {
-								Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(gameObject, 1f);
+								Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(
+										gameObject.squareGameObjectIsOn, 1f);
 								AIPath path = Game.level.activeActor.getPathTo(square);
 								if (path != null) {
 									return gameObject;
@@ -395,7 +395,7 @@ public class AIRoutineUtils {
 		// about targets squares I need to make list of attack squares, this
 		// shit is heavy
 
-		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target, 0f);
+		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target.squareGameObjectIsOn, 0f);
 
 		if (squareToMoveTo != null) {
 			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
@@ -403,24 +403,6 @@ public class AIRoutineUtils {
 		} else {
 			return false;
 		}
-	}
-
-	public static boolean escapeFromAttackerToSmallHidingPlace(GameObject attacker) {
-
-		// Go to burrow and hide if can
-		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20f,
-				false, false, true, false, false, false, 0, SmallHidingPlace.class);
-		if (smallHidingPlace != null) {
-
-			if (Game.level.activeActor.straightLineDistanceTo(smallHidingPlace.squareGameObjectIsOn) < 2) {
-				new ActionHideInside(Game.level.activeActor, smallHidingPlace).perform();
-			} else {
-
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(smallHidingPlace);
-			}
-			return true;
-		}
-		return false;
 	}
 
 	public static boolean escapeFromAttacker(GameObject target) {
@@ -472,7 +454,7 @@ public class AIRoutineUtils {
 			return true;
 		}
 
-		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target, 1f);
+		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target.squareGameObjectIsOn, 1f);
 
 		if (squareToMoveTo != null) {
 			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
@@ -668,51 +650,6 @@ public class AIRoutineUtils {
 
 	}
 
-	public static Square calculateSquareToMoveToToBeWithinXSquaresToTarget(GameObject target, float maxDistance) {
-
-		Vector<Float> idealDistances = new Vector<Float>();
-		for (int i = 0; i <= maxDistance; i++) {
-			idealDistances.addElement((float) i);
-		}
-
-		Vector<Square> targetSquares = new Vector<Square>();
-		int bestTravelCostFound = Integer.MAX_VALUE;
-		AIPath pathToSquare = null;
-		for (int i = 0; i < idealDistances.size(); i++) {
-
-			// Check if we're already at this distance
-			if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) == idealDistances.get(i))
-				return Game.level.activeActor.squareGameObjectIsOn;
-
-			targetSquares = target.getAllSquaresAtDistance(idealDistances.get(i));
-
-			// TODO picking which of these squares is the best is an interesting
-			// issue.
-			// Reachable is best.
-			// if There's multiple reachable then safest out of them is best :P
-			// OR somewhere u can attack someone from is the best... i dunno :D
-			for (Square targetSquare : targetSquares) {
-				AIPath currentActorPathToThisSquare = Game.level.activeActor.getPathTo(targetSquare);
-				if (currentActorPathToThisSquare != null
-						&& currentActorPathToThisSquare.travelCost < bestTravelCostFound) {
-					pathToSquare = currentActorPathToThisSquare;
-					bestTravelCostFound = pathToSquare.travelCost;
-				}
-			}
-
-			if (pathToSquare != null)
-				break;
-
-		}
-
-		if (pathToSquare == null) {
-			return null;
-		}
-
-		return getSquareToMoveAlongPath(pathToSquare);
-
-	}
-
 	public static Square calculateSquareToMoveToToBeWithinXSquaresToTarget(Square square, float maxDistance) {
 
 		Vector<Float> idealDistances = new Vector<Float>();
@@ -746,6 +683,8 @@ public class AIRoutineUtils {
 		if (pathToSquare == null) {
 			return null;
 		}
+
+		Game.level.activeActor.path = pathToSquare;
 
 		return getSquareToMoveAlongPath(pathToSquare);
 
