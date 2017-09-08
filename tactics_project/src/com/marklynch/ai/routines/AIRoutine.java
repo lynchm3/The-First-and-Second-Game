@@ -17,6 +17,7 @@ import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.BrokenGlass;
+import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
@@ -34,6 +35,7 @@ import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
+import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Farmer;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
@@ -52,6 +54,7 @@ public class AIRoutine {
 	final String ACTIVITY_DESCRIPTION_RUNNING_AWAY = "Running away";
 	final String ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP = "Shouting for help";
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
+	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling loot";
 
 	public Actor actor;
@@ -907,6 +910,47 @@ public class AIRoutine {
 				return true;
 			}
 		}
+		return false;
+	}
+
+	public boolean lootCarcass() {
+
+		// 1. loot carcasses
+		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
+				true, 0, Carcass.class);
+		if (carcass != null) {
+			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
+			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
+			if (!lootedCarcass) {
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
+			} else {
+			}
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean skinCarcass() {
+
+		if (!actor.inventory.contains(Knife.class))
+			return false;
+
+		// 1. loot carcasses
+		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
+				true, 0, Carcass.class);
+		if (carcass != null) {
+			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
+			boolean lootedCarcass = AIRoutineUtils.skinTarget(carcass);
+			if (!lootedCarcass) {
+				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
+			} else {
+			}
+			return true;
+		}
+
 		return false;
 	}
 

@@ -229,7 +229,8 @@ public class Actor extends GameObject {
 		this.legsAnchorY = legsAnchorY;
 
 		// this.gold = Templates.GOLD.makeCopy(null, this, gold);
-		inventory.add(Templates.GOLD.makeCopy(null, this, gold));
+		if (gold > 0)
+			inventory.add(Templates.GOLD.makeCopy(null, this, gold));
 
 		this.lastSquare = this.squareGameObjectIsOn;
 

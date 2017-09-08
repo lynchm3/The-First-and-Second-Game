@@ -1,7 +1,6 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.objects.Carcass;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
@@ -78,6 +77,10 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		// Door maintenance routine
 		if (runDoorRoutine())
+			return;
+
+		// Loot carcass
+		if (skinCarcass())
 			return;
 
 		// Loot carcass
@@ -166,25 +169,6 @@ public class AIRoutineForHunter extends AIRoutine {
 			actor.bedTime = true;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 		}
-	}
-
-	public boolean lootCarcass() {
-
-		// 1. loot carcasses
-		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
-				true, 0, Carcass.class);
-		if (carcass != null) {
-			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
-			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
-			if (!lootedCarcass) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
-			} else {
-			}
-			return true;
-		}
-
-		return false;
 	}
 
 	// 1. Pick nearest target of type WILD ANIMAL within 100 squares

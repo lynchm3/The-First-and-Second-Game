@@ -19,12 +19,14 @@ public class ActionSkin extends Action {
 
 	Actor performer;
 	GameObject target;
+	ActionLootAll actionLootAll;
 
 	// Default for hostiles
-	public ActionSkin(Actor attacker, GameObject vein) {
+	public ActionSkin(Actor performer, GameObject target) {
 		super(ACTION_NAME, "action_skin.png");
-		this.performer = attacker;
-		this.target = vein;
+		this.performer = performer;
+		this.target = target;
+		actionLootAll = new ActionLootAll(performer, target);
 		if (!check()) {
 			enabled = false;
 		}
@@ -37,6 +39,8 @@ public class ActionSkin extends Action {
 
 		if (!enabled)
 			return;
+
+		actionLootAll.perform();
 
 		Knife knife = (Knife) performer.inventory.getGameObjectOfClass(Knife.class);
 
@@ -106,8 +110,12 @@ public class ActionSkin extends Action {
 
 	@Override
 	public boolean checkLegality() {
+		if (!actionLootAll.legal)
+			return false;
+
 		if (target.owner != null && target.owner != performer)
 			return false;
+
 		return true;
 	}
 
