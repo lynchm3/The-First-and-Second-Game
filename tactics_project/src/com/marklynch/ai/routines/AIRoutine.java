@@ -365,6 +365,7 @@ public class AIRoutine {
 			escapeCooldown = 10;
 			return true;
 		} else {
+			runEscapeRoutine();
 			return false;
 		}
 	}

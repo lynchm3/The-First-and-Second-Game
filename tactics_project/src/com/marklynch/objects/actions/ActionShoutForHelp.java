@@ -53,8 +53,11 @@ public class ActionShoutForHelp extends Action {
 
 	@Override
 	public Sound createSound() {
-		return new Sound(performer, attacker, performer.investigationsMap.get(attacker).square, 20, legal,
-				this.getClass());
+		if (performer.investigationsMap.get(attacker) != null)
+			return new Sound(performer, attacker, performer.investigationsMap.get(attacker).square, 20, legal,
+					this.getClass());
+		else
+			return null;
 	}
 
 }
