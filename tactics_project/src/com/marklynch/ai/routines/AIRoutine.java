@@ -999,18 +999,13 @@ public class AIRoutine {
 
 	public boolean skinCarcass() {
 
-		System.out.println("skinCarcass 1");
-
 		if (!actor.inventory.contains(Knife.class))
 			return false;
-		System.out.println("skinCarcass 2");
 
 		// 1. loot carcasses
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
 				true, 0, Carcass.class);
-		System.out.println("skinCarcass 3");
 		if (carcass != null) {
-			System.out.println("skinCarcass 4");
 			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
 			boolean lootedCarcass = AIRoutineUtils.skinTarget(carcass);

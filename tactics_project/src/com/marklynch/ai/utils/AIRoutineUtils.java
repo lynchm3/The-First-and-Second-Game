@@ -700,24 +700,35 @@ public class AIRoutineUtils {
 
 	public static Square getSquareToMoveAlongPath(AIPath path) {
 
-		// TODO move this to an actor method called moveAlongPath
-		Square squareToMoveTo = null;
-		// squareToMoveTo = pathToSquare.squares.lastElement(); this line works,
-		// but allows CPU to cheat
-		if (path.travelCost <= Game.level.activeActor.travelDistance) {
-			squareToMoveTo = path.squares.lastElement();
-		} else {
-			for (int i = path.squares.size() - 1; i >= 0; i--) {
+		if (path == null)
+			return null;
 
-				AIPath subPath = Game.level.activeActor.getPathTo(path.squares.get(i));
-				if (subPath != null && subPath.travelCost <= Game.level.activeActor.travelDistance) {
-					squareToMoveTo = path.squares.get(i);
-					break;
-				}
-			}
-		}
+		if (path.squares.size() == 0)
+			return null;
 
-		return squareToMoveTo;
+		return path.squares.get(0);
+
+		// // TODO move this to an actor method called moveAlongPath
+		// Square squareToMoveTo = null;
+		// // squareToMoveTo = pathToSquare.squares.lastElement(); this line
+		// works,
+		// // but allows CPU to cheat
+		// if (path.travelCost <= Game.level.activeActor.travelDistance) {
+		// squareToMoveTo = path.squares.lastElement();
+		// } else {
+		// for (int i = path.squares.size() - 1; i >= 0; i--) {
+		//
+		// AIPath subPath =
+		// Game.level.activeActor.getPathTo(path.squares.get(i));
+		// if (subPath != null && subPath.travelCost <=
+		// Game.level.activeActor.travelDistance) {
+		// squareToMoveTo = path.squares.get(i);
+		// break;
+		// }
+		// }
+		// }
+		//
+		// return squareToMoveTo;
 
 	}
 
@@ -764,29 +775,6 @@ public class AIRoutineUtils {
 
 		return squareToMoveTo;
 
-	}
-
-	public static boolean moveToRandomSquare() {
-		// MOVE TO RANDOM SQUARE - maybe for a broken robot or confused
-		// enemy
-
-		Vector<Square> reachableSquares = new Vector<Square>();
-		for (int j = 0; j < Game.level.squares.length; j++) {
-			for (int k = 0; k < Game.level.squares[0].length; k++) {
-				if (Game.level.activeActor.getPathIfCanReachInOneTurn(Game.level.squares[j][k]) != null) {
-					reachableSquares.add(Game.level.squares[j][k]);
-				}
-			}
-		}
-
-		if (reachableSquares.size() > 0) {
-			int random = (int) (Math.random() * (reachableSquares.size() - 1));
-			Square squareToMoveTo = reachableSquares.get(random);
-			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public boolean attackRandomEnemy() {

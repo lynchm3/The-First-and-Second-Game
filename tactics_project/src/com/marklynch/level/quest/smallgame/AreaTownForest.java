@@ -255,6 +255,13 @@ public class AreaTownForest {
 		Templates.BURROW.makeCopy(Game.level.squares[166][64], null);
 		Templates.BURROW.makeCopy(Game.level.squares[171][61], null);
 		Templates.BURROW.makeCopy(Game.level.squares[196][27], null);
+		Templates.BURROW.makeCopy(Game.level.squares[131][70], null);
+		Templates.BURROW.makeCopy(Game.level.squares[155][82], null);
+		Templates.BURROW.makeCopy(Game.level.squares[170][75], null);
+		Templates.BURROW.makeCopy(Game.level.squares[184][45], null);
+		Templates.BURROW.makeCopy(Game.level.squares[175][33], null);
+		Templates.BURROW.makeCopy(Game.level.squares[158][25], null);
+		Templates.BURROW.makeCopy(Game.level.squares[143][31], null);
 
 	}
 

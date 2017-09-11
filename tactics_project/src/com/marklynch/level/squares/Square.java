@@ -20,6 +20,7 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.inventory.InventoryParent;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.BrokenGlass;
@@ -141,7 +142,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			this.owners.add(owner);
 		}
 		this.restricted = restricted;
-		calculatePathCost();
+		if (!(this instanceof InventorySquare))
+			calculatePathCost();
 
 	}
 

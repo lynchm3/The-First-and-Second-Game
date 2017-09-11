@@ -14,16 +14,10 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 	GameObject target;
 	// Square squareToMoveTo;
 
-	enum SHOPKEEP_STATE {
-		SHOPKEEPING, UPDATING_SIGN, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
-	};
-
 	final String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
 	final String ACTIVITY_DESCRIPTION_ESCAPING = "Escaping";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_DISGRUNTLED = "Disgruntled";
-
-	public SHOPKEEP_STATE shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
 
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
@@ -45,6 +39,8 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
 	@Override
 	public void update() {
+
+		actor.followersShouldFollow = true;
 
 		// Hiding cooldown
 		if (actor.squareGameObjectIsOn == null) {

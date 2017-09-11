@@ -322,6 +322,12 @@ public class Actor extends GameObject {
 
 	public AIPath getPathTo(Square target) {
 
+		// if (this instanceof Hunter && this == this.group.getLeader()) {
+		// System.out.println(this + " getPathTo " + target);
+		// System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
+		// // Thread.currentThread().getStackTrace();
+		// }
+
 		if (target == null) {
 			return null;
 		}
@@ -333,7 +339,7 @@ public class Actor extends GameObject {
 		// }
 
 		// ASTARSEACH.FINDPATH
-		int maxPathSize = 1000;
+		int maxPathSize = 100;
 		if (this instanceof Player) {
 			maxPathSize = 1000;
 		}
@@ -354,19 +360,6 @@ public class Actor extends GameObject {
 
 		return null;
 
-	}
-
-	public AIPath getPathIfCanReachInOneTurn(Square target) {
-
-		if (this.straightLineDistanceTo(target) > this.travelDistance)
-			return null;
-
-		AIPath path = getPathTo(target);
-		if (path != null && this.travelDistance >= path.travelCost) {
-			return path;
-		}
-
-		return null;
 	}
 
 	// public void calculateReachableSquares(Square[][] squares) {
