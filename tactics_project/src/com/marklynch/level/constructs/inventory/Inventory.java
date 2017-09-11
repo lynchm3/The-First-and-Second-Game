@@ -276,7 +276,7 @@ public class Inventory implements Draggable, Scrollable {
 			public void click() {
 				if (groundDisplay == null) {
 					new ActionLootAll(Game.level.player, (GameObject) target).perform();
-				} else if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
+				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
 					ArrayList<Action> actionsToPerform = new ArrayList<Action>();
 					for (Square square : groundDisplay.squares) {
 						for (GameObject gameObject : square.inventory.gameObjects) {

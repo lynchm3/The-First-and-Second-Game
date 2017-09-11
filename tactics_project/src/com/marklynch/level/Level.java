@@ -1452,6 +1452,7 @@ public class Level {
 			UserInputLevel.downPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)
 				&& Game.level.player.animation.completed) {
+			System.out.println("A FUCK U");
 			highlightPlayButton();
 			UserInputLevel.leftPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)
