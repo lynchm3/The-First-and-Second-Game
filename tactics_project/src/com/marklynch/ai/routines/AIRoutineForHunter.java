@@ -47,12 +47,16 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (!hostileInAttackers) {
 
 			// Loot from carcass
-			if (lootCarcass())
+			if (lootCarcass()) {
+				this.actor.followersShouldFollow = true;
 				return;
+			}
 
 			// Loot from ground
-			if (lootFromGround())
+			if (lootFromGround()) {
+				this.actor.followersShouldFollow = true;
 				return;
+			}
 		}
 
 		// Fight
@@ -62,36 +66,52 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Crime reaction
-		if (runCrimeReactionRoutine())
+		if (runCrimeReactionRoutine()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Search
-		if (runSearchRoutine())
+		if (runSearchRoutine()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Search cooldown
-		if (runSearchCooldown())
+		if (runSearchCooldown()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Door maintenance routine
-		if (runDoorRoutine())
+		if (runDoorRoutine()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Loot carcass
-		if (skinCarcass())
+		if (skinCarcass()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Loot carcass
-		if (lootCarcass())
+		if (lootCarcass()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Loot from ground
-		if (lootFromGround())
+		if (lootFromGround()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Defer to group leader
-		if (deferToGroupLeader())
+		if (deferToGroupLeader()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// if group leader wait for group
 		// if (this.actor.group != null && this.actor ==
@@ -110,8 +130,10 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Sell items
-		if (sellItems())
+		if (sellItems()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Go about your business
 		if (state == STATE.PICK_WILD_ANIMAL)

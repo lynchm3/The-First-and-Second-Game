@@ -316,6 +316,7 @@ public class AIRoutine {
 		// Return whether we did anything or not
 		if (moved || attacked) {
 			createSearchLocationsBasedOnVisibleAttackers();
+			this.actor.followersShouldFollow = true;
 			return true;
 		} else
 			return false;
