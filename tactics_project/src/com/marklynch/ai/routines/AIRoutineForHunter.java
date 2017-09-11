@@ -158,6 +158,7 @@ public class AIRoutineForHunter extends AIRoutine {
 			if (this.actor.bed != null) {
 				if (this.actor.squareGameObjectIsOn == this.actor.bed.squareGameObjectIsOn) {
 					actor.sleeping = true;
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 				} else {
 					AIRoutineUtils.moveTowardsTargetToBeOn(this.actor.bed);
 				}
