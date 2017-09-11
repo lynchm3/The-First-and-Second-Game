@@ -46,9 +46,6 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 	@Override
 	public void update() {
 
-		if (1 == 1)
-			return;
-
 		// Hiding cooldown
 		if (actor.squareGameObjectIsOn == null) {
 			if (actor.inventoryThatHoldsThisObject.parent instanceof SmallHidingPlace) {

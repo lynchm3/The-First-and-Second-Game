@@ -162,6 +162,14 @@ public class Level {
 	// java representation of a grid??
 	// 2d array?
 
+	int hour = 6;
+	String hourString = "6";
+	int minute = 0;
+	String minuteString = "0";
+	int second = 0;
+	String secondString = "0";
+	String timeString = "06:00";
+
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -1176,6 +1184,9 @@ public class Level {
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 60, Integer.MAX_VALUE, true,
 				new Object[] { "FPS " + Game.displayFPS });
 
+		// TIME
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, new Object[] { timeString });
+
 		// if (factions.size() > 0 && currentFactionMoving != null) {
 		// if (showTurnNotification) {
 		// if (currentFactionMoving == factions.get(0)) {
@@ -1601,6 +1612,40 @@ public class Level {
 
 		// Pre end turn
 		if (currentFactionMovingIndex == 0) {
+
+			// Time
+			second += 20;
+			if (second >= 60) {
+				second = second - 60;
+				minute++;
+				if (minute >= 60) {
+					minute = minute - 60;
+					hour++;
+					if (hour == 24)
+						hour = 0;
+				}
+			}
+
+			if (second < 10) {
+				secondString = "0" + second;
+			} else {
+				secondString = "" + second;
+			}
+
+			if (minute < 10) {
+				minuteString = "0" + minute;
+			} else {
+				minuteString = "" + minute;
+			}
+
+			if (hour < 10) {
+				hourString = "0" + hour;
+			} else {
+				hourString = "" + hour;
+			}
+
+			timeString = hourString + ":" + minuteString;// + ":" +
+															// secondString;
 
 			// If hiding in a place, add it's effects
 			if (player.hidingPlace != null) {
