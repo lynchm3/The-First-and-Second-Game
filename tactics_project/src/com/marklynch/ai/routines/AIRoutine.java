@@ -58,6 +58,7 @@ public class AIRoutine {
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
 	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling loot";
+	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 
 	public Actor actor;
 	public GameObject target;
@@ -65,6 +66,13 @@ public class AIRoutine {
 	public GameObject searchCooldownActor = null;
 	public int escapeCooldown = 0;
 	public GameObject escapeCooldownAttacker = null;
+
+	enum STATE {
+		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP
+	};
+
+	STATE stateOnWakeup;
+	STATE state;
 
 	public ArrayList<GameObject> visibleHazards = new ArrayList<GameObject>();
 
@@ -89,6 +97,9 @@ public class AIRoutine {
 
 	public void createSearchLocationsBasedOnVisibleAttackers() {
 
+		if (actor.sleeping)
+			return;
+
 		// Check for enemies last seen locations to search
 		if (this.actor.hasAttackers()) {
 			for (GameObject attacker : this.actor.getAttackers()) {
@@ -102,6 +113,9 @@ public class AIRoutine {
 	}
 
 	public void createSearchLocationsBasedOnVisibleCriminals() {
+
+		if (actor.sleeping)
+			return;
 
 		// Check for enemies last seen locations to search
 		for (Actor criminal : this.actor.crimesWitnessed.keySet()) {
@@ -167,17 +181,26 @@ public class AIRoutine {
 			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
 					&& !this.actor.canSeeGameObject(sound.sourcePerformer)) {
 
+				if (actor.sleeping && actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2)
+					continue;
+				// (sound.loudness < 5
+
 				if (sound.actionType == ActionShoutForHelp.class) {
 					this.actor.addInvestigation(sound.sourceObject, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
-					if (sound.sourceObject != null && sound.sourceObject.remainingHealth > 0)
+					if (sound.sourceObject != null && sound.sourceObject.remainingHealth > 0) {
 						this.actor.addAttackerForThisAndGroupMembers(sound.sourceObject);
+					}
+					actor.sleeping = false;
 				} else if (!sound.legal) {
+
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
+					actor.sleeping = false;
 				} else if (sound.sourceObject != null && !classesArrayList.contains(sound.sourceObject.getClass())) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
+					actor.sleeping = false;
 				}
 
 			}
@@ -208,6 +231,31 @@ public class AIRoutine {
 
 				AIRoutineUtils.moveTowardsTargetToBeOn(smallHidingPlace);
 			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean runSleepRoutine() {
+
+		if (this.actor.group != null && this.actor != this.actor.group.getLeader()
+				&& this.actor.group.getLeader().followersShouldFollow == true) {
+			actor.sleeping = false;
+			this.actor.sleepCounter = 0;
+			state = stateOnWakeup;
+			return false;
+		}
+
+		if (actor.sleeping) {
+			this.actor.followersShouldFollow = false;
+			this.actor.sleepCounter++;
+			if (this.actor.sleepCounter >= Actor.SLEEP_TIME) {
+				actor.sleeping = false;
+				this.actor.sleepCounter = 0;
+				state = stateOnWakeup;
+				return false;
+			}
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 			return true;
 		}
 		return false;

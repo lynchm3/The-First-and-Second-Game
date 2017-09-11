@@ -31,7 +31,7 @@ public class Bed extends GameObject {
 		canBePickedUp = false;
 		showInventory = false;
 		fitsInInventory = false;
-		canShareSquare = false;
+		canShareSquare = true;
 		canContainOtherObjects = false;
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = false;

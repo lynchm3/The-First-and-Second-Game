@@ -163,6 +163,11 @@ public class Actor extends GameObject {
 
 	public ArrayList<Door> doors = new ArrayList<Door>();
 	public boolean followersShouldFollow = false;
+
+	public boolean sleeping = false;
+	public int sleepCounter = 0;
+	public final static int SLEEP_TIME = 50;
+
 	public AIPath path;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
@@ -335,8 +340,8 @@ public class Actor extends GameObject {
 			maxPathSize = 1000;
 		}
 
-		LinkedList<AStarNode> aStarNodesPath = (LinkedList<AStarNode>) new AStarSearch().findPath(this,
-				this.squareGameObjectIsOn, target, maxPathSize);
+		LinkedList<AStarNode> aStarNodesPath = new AStarSearch().findPath(this, this.squareGameObjectIsOn, target,
+				maxPathSize);
 
 		if (aStarNodesPath != null) {
 			Vector<Square> squarePath = new Vector<Square>();
@@ -1275,6 +1280,7 @@ public class Actor extends GameObject {
 
 		super.attackedBy(attacker, action);
 
+		sleeping = false;
 		removeHidingPlacesFromAttackersList();// prioritize actors
 
 		// update attackers list

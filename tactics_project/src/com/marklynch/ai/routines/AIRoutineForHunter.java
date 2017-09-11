@@ -13,32 +13,27 @@ public class AIRoutineForHunter extends AIRoutine {
 	GameObject target;
 	// Square squareToMoveTo;
 
-	enum HUNT_STATE {
-		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
-	};
-
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
 	// final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Goin' hunting";
 	final String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
-	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
-
-	public HUNT_STATE huntState = HUNT_STATE.PICK_WILD_ANIMAL;
-
-	int sleepCounter = 0;
-	final int SLEEP_TIME = 1000;
 
 	public AIRoutineForHunter(Actor actor) {
 
 		super(actor);
 		aiType = AI_TYPE.FIGHTER;
+		stateOnWakeup = STATE.PICK_WILD_ANIMAL;
+		state = STATE.PICK_WILD_ANIMAL;
 	}
 
 	@Override
 	public void update() {
 		aiRoutineStart();
+
+		if (runSleepRoutine())
+			return;
 
 		boolean hostileInAttackers = false;
 		for (GameObject attacker : actor.attackers) {
@@ -118,7 +113,7 @@ public class AIRoutineForHunter extends AIRoutine {
 			return;
 
 		// Go about your business
-		if (huntState == HUNT_STATE.PICK_WILD_ANIMAL)
+		if (state == STATE.PICK_WILD_ANIMAL)
 
 		{
 			this.actor.followersShouldFollow = true;
@@ -129,26 +124,26 @@ public class AIRoutineForHunter extends AIRoutine {
 					TinyNeutralWildAnimal.class);
 
 			if (target == null) {
-				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+				state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else {
-				huntState = HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK;
+				state = STATE.GO_TO_WILD_ANIMAL_AND_ATTACK;
 			}
 
 		}
 
-		if (huntState == HUNT_STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
+		if (state == STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
 			this.actor.followersShouldFollow = true;
 
 			if (target.squareGameObjectIsOn == null) {
 				target = null;
-				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+				state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			}
 
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
 			if (target.remainingHealth <= 0 && this.actor.inventory.size() > 0) {
-				huntState = HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+				state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 			} else if (target.remainingHealth <= 0 && target.inventory.size() == 0) {
-				huntState = HUNT_STATE.PICK_WILD_ANIMAL;
+				state = STATE.PICK_WILD_ANIMAL;
 			} else {
 				boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
 				if (!attackedAnimal) {
@@ -157,23 +152,18 @@ public class AIRoutineForHunter extends AIRoutine {
 			}
 		}
 
-		if (huntState == HUNT_STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
 			actor.followersShouldFollow = false;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
 			if (this.actor.bed != null) {
 				if (this.actor.squareGameObjectIsOn == this.actor.bed.squareGameObjectIsOn) {
-					huntState = HUNT_STATE.SLEEP;
+					actor.sleeping = true;
 				} else {
-					AIRoutineUtils.moveTowardsTargetToBeAdjacent(this.actor.bed);
+					AIRoutineUtils.moveTowardsTargetToBeOn(this.actor.bed);
 				}
 			} else {
-				huntState = HUNT_STATE.PICK_WILD_ANIMAL;
+				state = STATE.PICK_WILD_ANIMAL;
 			}
-		}
-
-		if (huntState == HUNT_STATE.SLEEP) {
-			this.actor.followersShouldFollow = false;
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 		}
 	}
 
