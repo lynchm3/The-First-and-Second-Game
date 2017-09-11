@@ -304,9 +304,9 @@ public class Templates {
 
 	// NATURE
 	public static final Tree TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), 1f, 1.5f, 0f, -0.5f, 1f,
-			1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 15, null);
+			1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 15, null, true);
 	public static final Tree BIG_TREE = new Tree("Big Tree", 200, "tree_1.png", null, new Inventory(), 1.5f, 1.5f,
-			-0.25f, -0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 20, null);
+			-0.25f, -0.5f, 1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 20, null, false);
 
 	public static final Stump STUMP = new Stump("Stump", 100, "stump.png", null, new Inventory(), 0.5f, 1f, 0.25f, 0f,
 			1f, 1f, 2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 5, null);
