@@ -1,6 +1,7 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.quest.smallgame.AreaTownForest;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
@@ -124,7 +125,7 @@ public class AIRoutineForHunter extends AIRoutine {
 					TinyNeutralWildAnimal.class);
 
 			if (target == null) {
-				state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(AreaTownForest.area.centreSuqare);
 			} else {
 				state = STATE.GO_TO_WILD_ANIMAL_AND_ATTACK;
 			}
@@ -134,20 +135,18 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (state == STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
 			this.actor.followersShouldFollow = true;
 
-			if (target.squareGameObjectIsOn == null) {
+			if (target == null || target.squareGameObjectIsOn == null) {
 				target = null;
 				state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
-			}
-
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-			if (target.remainingHealth <= 0 && this.actor.inventory.size() > 0) {
-				state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
-			} else if (target.remainingHealth <= 0 && target.inventory.size() == 0) {
-				state = STATE.PICK_WILD_ANIMAL;
 			} else {
-				boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
-				if (!attackedAnimal) {
-					AIRoutineUtils.moveTowardsTargetToAttack(target);
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
+				if (target.remainingHealth <= 0) {
+					state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+				} else {
+					boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
+					if (!attackedAnimal) {
+						AIRoutineUtils.moveTowardsTargetToAttack(target);
+					}
 				}
 			}
 		}

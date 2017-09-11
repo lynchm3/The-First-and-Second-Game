@@ -72,7 +72,7 @@ public class AIRoutine {
 	};
 
 	STATE stateOnWakeup;
-	STATE state;
+	public STATE state;
 
 	public ArrayList<GameObject> visibleHazards = new ArrayList<GameObject>();
 
@@ -802,7 +802,7 @@ public class AIRoutine {
 
 				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
 						&& actor.canSeeGameObject(criminal)) {
-					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
+					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(criminal.squareGameObjectIsOn)) {
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						actor.activityDescription = "Confiscating";
 						createSearchLocationsBasedOnVisibleAttackers();
@@ -822,7 +822,7 @@ public class AIRoutine {
 
 				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
 						&& actor.canSeeGameObject(criminal)) {
-					if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(criminal)) {
+					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(criminal.squareGameObjectIsOn)) {
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						createSearchLocationsBasedOnVisibleAttackers();
 						return true;
@@ -840,7 +840,7 @@ public class AIRoutine {
 					}
 
 					if (actor.canSeeSquare(stolenItemOnGround.squareGameObjectIsOn)) {
-						if (AIRoutineUtils.moveTowardsTargetToBeAdjacent(stolenItemOnGround)) {
+						if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(stolenItemOnGround.squareGameObjectIsOn)) {
 							actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 							createSearchLocationsBasedOnVisibleAttackers();
 							return true;
@@ -991,7 +991,7 @@ public class AIRoutine {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
 			if (!lootedCarcass) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(carcass.squareGameObjectIsOn);
 			} else {
 			}
 			return true;
@@ -1013,7 +1013,7 @@ public class AIRoutine {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
 			boolean lootedCarcass = AIRoutineUtils.skinTarget(carcass);
 			if (!lootedCarcass) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(carcass);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(carcass.squareGameObjectIsOn);
 			} else {
 			}
 			return true;
@@ -1031,7 +1031,7 @@ public class AIRoutine {
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);
 			} else {
 
 			}
@@ -1053,6 +1053,8 @@ public class AIRoutine {
 			createSearchLocationsBasedOnVisibleCriminals();
 		}
 		createSearchLocationsBasedOnVisibleAttackers();
+		if (actor.group != null)
+			state = actor.group.getLeader().aiRoutine.state;
 	}
 
 	public Actor actorToKeepTrackOf = null;
@@ -1182,7 +1184,7 @@ public class AIRoutine {
 
 		boolean soldItems = actor.sellItemsMarkedToSell((Actor) target);
 		if (!soldItems)
-			return AIRoutineUtils.moveTowardsTargetToBeAdjacent(target);
+			return AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
 		else
 			return true;
 	}

@@ -72,7 +72,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 			if (this.wildAnimal.canSeeSquare(smallWildAnimal.squareGameObjectIsOn)) {
 				this.wildAnimal.addAttackerForThisAndGroupMembers(smallWildAnimal);
 			} else {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(smallWildAnimal);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(smallWildAnimal.squareGameObjectIsOn);
 			}
 			return;
 		}
@@ -85,7 +85,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 			this.actor.thoughtBubbleImageTexture = corpse.imageTexture;
 			boolean ateCorpse = AIRoutineUtils.eatTarget(corpse);
 			if (!ateCorpse) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(corpse);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(corpse.squareGameObjectIsOn);
 			} else {
 
 			}
@@ -100,7 +100,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 			this.actor.thoughtBubbleImageTexture = food.imageTexture;
 			boolean ateFood = AIRoutineUtils.eatTarget(food);
 			if (!ateFood) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(food);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(food.squareGameObjectIsOn);
 			} else {
 
 			}

@@ -58,7 +58,7 @@ public class AIRoutineForPig extends AIRoutine {
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.eatTarget(loot);
 			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);
 			} else {
 
 			}

@@ -114,7 +114,7 @@ public class Group {
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				}
 
-				// AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);
+				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(leader);
 			} else {
 
 				Square targetSquare = targetSquaresMap.get(actor);
@@ -124,7 +124,7 @@ public class Group {
 					targetSquaresMap.put(actor, null);
 
 			}
-			// AIRoutineUtils.moveTowardsTargetToBeAdjacent(leader);
+			// AIRoutineUtils.moveTowardsSquareToBeAdjacent(leader);
 			actor.activityDescription = leader.activityDescription;
 			return true;
 		}

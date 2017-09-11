@@ -91,7 +91,7 @@ public class AIRoutineForThief extends AIRoutine {
 			this.actor.thoughtBubbleImageTexture = container.imageTexture;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(container);
 			if (!lootedCarcass) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(container);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(container.squareGameObjectIsOn);
 			} else {
 
 			}
@@ -111,7 +111,7 @@ public class AIRoutineForThief extends AIRoutine {
 			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowardsTargetToBeAdjacent(loot);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);
 			} else {
 
 			}

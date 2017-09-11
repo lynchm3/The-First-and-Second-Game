@@ -353,7 +353,7 @@ public class AIRoutineUtils {
 		// shit is heavy
 
 		// if (!Game.level.activeActor.canSeeGameObject(target)) {
-		// return moveTowardsTargetToBeAdjacent(target);
+		// return moveTowardsSquareToBeAdjacent(target);
 		// }
 
 		Square squareToMoveTo = calculateSquareToMoveToToAttackTarget(target);
@@ -448,23 +448,29 @@ public class AIRoutineUtils {
 		return false;
 	}
 
-	public static boolean moveTowardsTargetToBeAdjacent(GameObject target) {
-
-		if (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn) <= 1) {
-			return true;
-		}
-
-		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target.squareGameObjectIsOn, 0f);
-
-		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// public static boolean moveTowardsSquareToBeAdjacent(GameObject target) {
+	//
+	// if
+	// (Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn)
+	// <= 1) {
+	// return true;
+	// }
+	//
+	// Square squareToMoveTo =
+	// calculateSquareToMoveToToBeWithinXSquaresToTarget(target.squareGameObjectIsOn,
+	// 0f);
+	//
+	// if (squareToMoveTo != null) {
+	// new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
+	// return true;
+	// } else {
+	// return false;
+	// }
+	// }
 
 	public static boolean moveTowardsSquareToBeAdjacent(Square square) {
+		if (square == null)
+			return false;
 
 		if (Game.level.activeActor.straightLineDistanceTo(square) <= 1) {
 			return true;

@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.bounds;
 
 import com.marklynch.Game;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
@@ -11,7 +12,8 @@ public class Area {
 
 	public String name;
 	public Texture image;
-	public int gridX1, gridY1, gridX2, gridY2;
+	public int gridX1, gridY1, gridX2, gridY2, gridCenterX, gridCenterY;
+	public Square centreSuqare;
 	public boolean seenByPlayer = false;
 	boolean showOnMap = false;
 
@@ -25,6 +27,16 @@ public class Area {
 		this.gridY1 = gridY1;
 		this.gridX2 = gridX2;
 		this.gridY2 = gridY2;
+		this.gridCenterX = (gridX1 + gridX2) / 2;
+		this.gridCenterY = (gridY1 + gridY2) / 2;
+		this.centreSuqare = Game.level.squares[gridCenterX][gridCenterY];
+
+		System.out.println("name = " + name);
+		System.out.println("gridX1 = " + gridX1);
+		System.out.println("gridX2 = " + gridX2);
+		System.out.println("gridY1 = " + gridY1);
+		System.out.println("gridY2 = " + gridY2);
+		System.out.println("centreSuqare = " + centreSuqare);
 
 		for (int i = gridX1; i <= gridX2; i++) {
 			for (int j = gridY1; j <= gridY2; j++) {
