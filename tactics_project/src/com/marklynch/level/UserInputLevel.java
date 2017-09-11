@@ -880,15 +880,18 @@ public class UserInputLevel {
 				} else if (Inventory.buttons.contains(Inventory.buttonQuickSell)) {
 					Inventory.buttonQuickSell.click();
 				}
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-				Level.ctrlActionHasBeenPressed = true;
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
-				Level.altActionHasBeenPressed = true;
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-				Level.shiftActionHasBeenPressed = true;
+				controllingMenu = true;
+			} else {
+				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+					Level.ctrlActionHasBeenPressed = true;
+				} else if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
+					Level.altActionHasBeenPressed = true;
+				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+					Level.shiftActionHasBeenPressed = true;
+				}
+				System.out.println("A FUCK U PT 2");
+				leftPressed(true, false);
 			}
-			System.out.println("A FUCK U PT 2");
-			leftPressed(true, false);
 		} else if (character == 's' || character == 'S') {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 				Level.ctrlActionHasBeenPressed = true;
