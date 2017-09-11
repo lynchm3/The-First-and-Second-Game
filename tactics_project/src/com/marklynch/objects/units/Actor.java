@@ -165,8 +165,6 @@ public class Actor extends GameObject {
 	public boolean followersShouldFollow = false;
 
 	public boolean sleeping = false;
-	public int sleepCounter = 0;
-	public final static int SLEEP_TIME = 50;
 
 	public AIPath path;
 

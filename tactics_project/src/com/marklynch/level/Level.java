@@ -162,7 +162,7 @@ public class Level {
 	// java representation of a grid??
 	// 2d array?
 
-	int hour = 6;
+	public int hour = 6;
 	String hourString = "6";
 	int minute = 0;
 	String minuteString = "0";

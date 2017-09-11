@@ -1,5 +1,6 @@
 package com.marklynch.ai.routines;
 
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.quest.smallgame.AreaTownForest;
 import com.marklynch.objects.GameObject;
@@ -25,13 +26,17 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		super(actor);
 		aiType = AI_TYPE.FIGHTER;
-		stateOnWakeup = STATE.PICK_WILD_ANIMAL;
-		state = STATE.PICK_WILD_ANIMAL;
 	}
 
 	@Override
 	public void update() {
 		aiRoutineStart();
+
+		if (Game.level.hour > 20 && Game.level.hour < 6) {
+			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+		} else {
+			state = STATE.PICK_WILD_ANIMAL;
+		}
 
 		if (runSleepRoutine())
 			return;
@@ -145,32 +150,23 @@ public class AIRoutineForHunter extends AIRoutine {
 			target = AIRoutineUtils.getNearestForPurposeOfAttacking(100, false, true, false, false, false, true, 0,
 					AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 					TinyNeutralWildAnimal.class);
-
 			if (target == null) {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(AreaTownForest.area.centreSuqare);
 			} else {
-				state = STATE.GO_TO_WILD_ANIMAL_AND_ATTACK;
-			}
-
-		}
-
-		if (state == STATE.GO_TO_WILD_ANIMAL_AND_ATTACK) {
-			this.actor.followersShouldFollow = true;
-
-			if (target == null || target.squareGameObjectIsOn == null) {
-				target = null;
-				state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
-			} else {
-				this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-				if (target.remainingHealth <= 0) {
-					state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+				if (target == null || target.squareGameObjectIsOn == null) {
+					target = null;
 				} else {
-					boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
-					if (!attackedAnimal) {
-						AIRoutineUtils.moveTowardsTargetToAttack(target);
+					this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
+					if (target.remainingHealth <= 0) {
+					} else {
+						boolean attackedAnimal = AIRoutineUtils.attackTarget(target);
+						if (!attackedAnimal) {
+							AIRoutineUtils.moveTowardsTargetToAttack(target);
+						}
 					}
 				}
 			}
+
 		}
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {

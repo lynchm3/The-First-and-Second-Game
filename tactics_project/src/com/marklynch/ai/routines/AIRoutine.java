@@ -71,7 +71,6 @@ public class AIRoutine {
 		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP
 	};
 
-	STATE stateOnWakeup;
 	public STATE state;
 
 	public ArrayList<GameObject> visibleHazards = new ArrayList<GameObject>();
@@ -237,27 +236,24 @@ public class AIRoutine {
 	}
 
 	public boolean runSleepRoutine() {
+		if (state != STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+			actor.sleeping = false;
+			return false;
+
+		}
 
 		if (this.actor.group != null && this.actor != this.actor.group.getLeader()
 				&& this.actor.group.getLeader().followersShouldFollow == true) {
 			actor.sleeping = false;
-			this.actor.sleepCounter = 0;
-			state = stateOnWakeup;
 			return false;
 		}
 
 		if (actor.sleeping) {
 			this.actor.followersShouldFollow = false;
-			this.actor.sleepCounter++;
-			if (this.actor.sleepCounter >= Actor.SLEEP_TIME) {
-				actor.sleeping = false;
-				this.actor.sleepCounter = 0;
-				state = stateOnWakeup;
-				return false;
-			}
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 			return true;
 		}
+
 		return false;
 	}
 
@@ -1003,13 +999,18 @@ public class AIRoutine {
 
 	public boolean skinCarcass() {
 
+		System.out.println("skinCarcass 1");
+
 		if (!actor.inventory.contains(Knife.class))
 			return false;
+		System.out.println("skinCarcass 2");
 
 		// 1. loot carcasses
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
 				true, 0, Carcass.class);
+		System.out.println("skinCarcass 3");
 		if (carcass != null) {
+			System.out.println("skinCarcass 4");
 			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
 			boolean lootedCarcass = AIRoutineUtils.skinTarget(carcass);
