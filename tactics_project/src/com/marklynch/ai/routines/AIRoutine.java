@@ -758,7 +758,7 @@ public class AIRoutine {
 				for (Crime unresolvedCrime : unresolvedCrimes) {
 					unresolvedCrime.resolved = true;
 				}
-				return runFightRoutine();
+				return true;
 
 				// Illegal mining
 			} else if (unresolvedIllegalMinings.size() > 0) {
