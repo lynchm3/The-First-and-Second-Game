@@ -1172,7 +1172,7 @@ public class Inventory implements Draggable, Scrollable {
 		}
 
 		// Gold for this actor
-		if (this.parent instanceof Actor) {
+		if (this.parent instanceof Actor && !(this.parent instanceof Trader)) {
 			Actor actor = (Actor) this.parent;
 			String goldText = "Gold: " + actor.getCarriedGoldValue();
 			float goldWidth = Game.font.getWidth(goldText);
@@ -1183,6 +1183,7 @@ public class Inventory implements Draggable, Scrollable {
 
 		// Gold for other actor
 		if (otherInventory != null && otherInventory.parent instanceof Actor) {
+			// && !(otherInventory.parent instanceof Trader)) {
 			Actor actor = (Actor) otherInventory.parent;
 			String goldText = "Gold: " + actor.getCarriedGoldValue();
 			float goldWidth = Game.font.getWidth(goldText);

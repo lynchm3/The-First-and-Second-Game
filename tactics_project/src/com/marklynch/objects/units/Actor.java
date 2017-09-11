@@ -1390,18 +1390,24 @@ public class Actor extends GameObject {
 	}
 
 	public void addToCarriedGoldValue(int toAdd) {
+
 		GameObject gold = inventory.getGameObjectOfClass(Gold.class);
-		gold.value += toAdd;
+		if (!(this instanceof Trader))
+			gold.value += toAdd;
 	}
 
 	public void removeFromCarriedGoldValue(int toRemove) {
 		for (GameObject gold : inventory.getGameObjectsOfClass(Gold.class)) {
-			if (gold.value > toRemove) {
+
+			if (this instanceof Trader) {
+
+			} else if (gold.value > toRemove) {
 				gold.value -= toRemove;
 				break;
 			} else {
 				toRemove -= gold.value;
 				gold.value = 0;
+				inventory.remove(gold);
 			}
 		}
 	}

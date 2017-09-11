@@ -474,7 +474,7 @@ public class Editor {
 		// Trader Joe
 		Trader trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png",
 				Game.level.squares[7][1], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 90f, null, Game.level.factions.get(1), 40, 96, 40, 96, 40, 96, 40, 96, 1000,
+				false, 0f, 0f, 0f, 0f, 0f, 90f, null, Game.level.factions.get(1), 40, 96, 40, 96, 40, 96, 40, 96, 10000,
 				new GameObject[] {}, new GameObject[] {});
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(

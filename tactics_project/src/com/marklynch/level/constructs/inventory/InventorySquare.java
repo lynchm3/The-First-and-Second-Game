@@ -13,6 +13,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Trader;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -117,7 +118,7 @@ public class InventorySquare extends Square {
 				StringWithColor goldText = new StringWithColor(count + "x" + gameObject.value, goldTextColor);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
 						new Object[] { goldText });
-			} else if (gameObject instanceof Gold) {
+			} else if (gameObject instanceof Gold && !(this.inventory.parent instanceof Trader)) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
 						new Object[] { gameObject.value });
 
