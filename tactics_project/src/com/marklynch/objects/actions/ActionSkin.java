@@ -56,10 +56,8 @@ public class ActionSkin extends Action {
 		performer.inventory.add(fur);
 
 		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " skinned ", target, " with ", knife }));
-
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", fur }));
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { performer, " skinned ", fur, " from ", target, " with ", knife }));
 
 		new ActionLootAll(performer, target).perform();
 
@@ -89,8 +87,7 @@ public class ActionSkin extends Action {
 
 	@Override
 	public boolean check() {
-
-		if (!performer.inventory.contains(Pickaxe.class)) {
+		if (!performer.inventory.contains(Knife.class)) {
 			actionName = ACTION_NAME_NEED_KNIFE;
 			return false;
 		}
@@ -110,6 +107,7 @@ public class ActionSkin extends Action {
 
 	@Override
 	public boolean checkLegality() {
+
 		if (!actionLootAll.legal)
 			return false;
 

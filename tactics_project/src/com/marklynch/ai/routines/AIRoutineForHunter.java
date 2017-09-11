@@ -51,6 +51,12 @@ public class AIRoutineForHunter extends AIRoutine {
 
 		if (!hostileInAttackers) {
 
+			// Skin carcass
+			if (skinCarcass()) {
+				this.actor.followersShouldFollow = true;
+				return;
+			}
+
 			// Loot from carcass
 			if (lootCarcass()) {
 				this.actor.followersShouldFollow = true;
@@ -94,7 +100,7 @@ public class AIRoutineForHunter extends AIRoutine {
 			return;
 		}
 
-		// Loot carcass
+		// Skin carcass
 		if (skinCarcass()) {
 			this.actor.followersShouldFollow = true;
 			return;

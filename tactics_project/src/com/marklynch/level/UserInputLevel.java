@@ -930,6 +930,7 @@ public class UserInputLevel {
 		}
 
 		if (keyStateDown == false && Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+
 			downPressed(true, false);
 			keyStateDown = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
@@ -1264,6 +1265,7 @@ public class UserInputLevel {
 		}
 
 		if (keyStateO == false && Keyboard.isKeyDown(Keyboard.KEY_O)) {
+			Game.zoomLevelIndex++;
 			if (capsLock) {
 				if (keyStateLeftShift || keyStateRightShift) {
 					keyTyped('o');
@@ -1283,6 +1285,7 @@ public class UserInputLevel {
 		}
 
 		if (keyStateP == false && Keyboard.isKeyDown(Keyboard.KEY_P)) {
+			Game.zoomLevelIndex--;
 			if (capsLock) {
 				if (keyStateLeftShift || keyStateRightShift) {
 					keyTyped('p');

@@ -1003,9 +1003,11 @@ public class AIRoutine {
 			return false;
 
 		// 1. loot carcasses
-		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
+		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, false, true,
 				true, 0, Carcass.class);
+
 		if (carcass != null) {
+
 			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
 			boolean lootedCarcass = AIRoutineUtils.skinTarget(carcass);

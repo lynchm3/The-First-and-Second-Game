@@ -165,6 +165,8 @@ public class QuestSmallGame extends Quest {
 	public static Conversation conversationHuntersReadyToGo;
 	public static Conversation conversationHuntersOnlyHuntersGetLoot;
 
+	public static Actor hunter;
+
 	public QuestSmallGame() {
 		super();
 
@@ -179,6 +181,7 @@ public class QuestSmallGame extends Quest {
 				Game.level.factions.get(1), brentsBed, 203, new GameObject[] {
 						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {});
+		hunter = hunterBrent;
 
 		// Hunting lodge
 		ArrayList<GameObject> lodgeFeatures = new ArrayList<GameObject>();

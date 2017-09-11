@@ -31,13 +31,6 @@ public class Area {
 		this.gridCenterY = (gridY1 + gridY2) / 2;
 		this.centreSuqare = Game.level.squares[gridCenterX][gridCenterY];
 
-		System.out.println("name = " + name);
-		System.out.println("gridX1 = " + gridX1);
-		System.out.println("gridX2 = " + gridX2);
-		System.out.println("gridY1 = " + gridY1);
-		System.out.println("gridY2 = " + gridY2);
-		System.out.println("centreSuqare = " + centreSuqare);
-
 		for (int i = gridX1; i <= gridX2; i++) {
 			for (int j = gridY1; j <= gridY2; j++) {
 				Game.level.squares[i][j].areaSquareIsIn = this;

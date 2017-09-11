@@ -85,9 +85,6 @@ public class Faction {
 
 		long start = System.currentTimeMillis();
 
-		System.out.println(
-				"Faction.update " + name + ", count = " + actors.size() + ", start = " + System.currentTimeMillis());
-
 		for (int i = 0; i < actors.size(); i++) {
 			Actor actor = actors.get(i);
 			Game.level.activeActor = actor;
@@ -101,7 +98,6 @@ public class Faction {
 		}
 
 		actors.removeAll(deadActors);
-		System.out.println("time = " + (System.currentTimeMillis() - start));
 
 		Game.level.endTurn();
 	}

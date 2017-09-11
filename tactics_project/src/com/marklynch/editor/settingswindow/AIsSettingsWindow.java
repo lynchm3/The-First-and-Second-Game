@@ -3,10 +3,6 @@ package com.marklynch.editor.settingswindow;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.ai.routines.AIRoutineFreeze;
-import com.marklynch.ai.routines.AIRoutineMoveToSquare;
-import com.marklynch.ai.routines.AIRoutineStationary;
-import com.marklynch.ai.routines.AIRoutineTargetObject;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.ClassSelectionWindow;
@@ -50,10 +46,6 @@ public class AIsSettingsWindow extends SettingsWindow {
 			public void click() {
 
 				ArrayList<Class> classes = new ArrayList<Class>();
-				classes.add(AIRoutineTargetObject.class);
-				classes.add(AIRoutineStationary.class);
-				classes.add(AIRoutineFreeze.class);
-				classes.add(AIRoutineMoveToSquare.class);
 
 				editor.classSelectionWindow = new ClassSelectionWindow(classes, editor, AIRoutineUtils.class,
 						"Select an AI routine");

@@ -31,22 +31,6 @@ public class AIRoutineUtils {
 		name = this.getClass().getSimpleName();
 	}
 
-	public boolean move() {
-		return false;
-	}
-
-	public boolean attack() {
-		return false;
-	}
-
-	public void postLoad() {
-	}
-
-	public static boolean lootNearby() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public static Square getRandomSquare(int maxDistance, boolean mustBeOutdoors) {
 
 		int attempts = 0;
