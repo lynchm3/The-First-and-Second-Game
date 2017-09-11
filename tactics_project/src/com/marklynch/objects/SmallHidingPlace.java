@@ -2,8 +2,11 @@ package com.marklynch.objects;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
+import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.quest.smallgame.AreaTownForest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
@@ -15,6 +18,7 @@ import mdesl.graphics.Color;
 public class SmallHidingPlace extends Searchable {
 
 	public ArrayList<Actor> actorsHidingHere = new ArrayList<Actor>();
+	Group group;
 
 	public SmallHidingPlace(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
@@ -72,6 +76,14 @@ public class SmallHidingPlace extends Searchable {
 				electricResistance, poisonResistance, slashResistance, weight, value, owner, effectsFromInteracting);
 	}
 
+	@Override
+	public void update(int delta) {
+		if (group == null || group.size() == 0) {
+			if (Math.random() > 0.9f)
+				group = createBunGroup();
+		}
+	}
+
 	// @Override
 	// public void attacked(Object attacker) {
 	// super.attacked(attacker);
@@ -79,6 +91,26 @@ public class SmallHidingPlace extends Searchable {
 	// rr
 	// }
 	// }
+
+	public Group createBunGroup() {
+		return new Group("Buns",
+				Templates.RABBIT.makeCopy("Female Bun", this.squareGameObjectIsOn.getSquareAbove(),
+						Game.level.factions.get(2), null, AreaTownForest.area,
+						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }),
+				Templates.RABBIT.makeCopy("Male Bun", this.squareGameObjectIsOn.getSquareToLeftOf(),
+						Game.level.factions.get(2), null, AreaTownForest.area,
+						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }),
+				Templates.BABY_RABBIT.makeCopy("Baby Bun", this.squareGameObjectIsOn.getSquareBelow(),
+						Game.level.factions.get(2), null, AreaTownForest.area,
+						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }),
+				Templates.BABY_RABBIT.makeCopy("Baby Bun", this.squareGameObjectIsOn.getSquareToRightOf(),
+						Game.level.factions.get(2), null, AreaTownForest.area,
+						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }));
+	}
 
 	@Override
 	public boolean checkIfDestroyed(Object attacker, Action action) {
