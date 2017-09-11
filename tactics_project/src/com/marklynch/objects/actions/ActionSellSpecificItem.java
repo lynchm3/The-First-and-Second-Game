@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Trader;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionSellSpecificItem extends Action {
@@ -72,7 +73,7 @@ public class ActionSellSpecificItem extends Action {
 
 	@Override
 	public boolean check() {
-		if (receiver.getCarriedGoldValue() < object.value)
+		if (!(receiver instanceof Trader) && receiver.getCarriedGoldValue() < object.value)
 			return false;
 		if (performer.straightLineDistanceTo(receiver.squareGameObjectIsOn) < 2) {
 			return true;
