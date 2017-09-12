@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import com.marklynch.Game;
+import com.marklynch.level.popup.PopupToast;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
@@ -294,6 +295,8 @@ public class Inventory implements Draggable, Scrollable {
 					groundDisplay.refreshGameObjects();
 				}
 				Game.level.openCloseInventory();
+				Object[] objects = new Object[] { "Looted everything!" };
+				Game.level.popupToasts.add(new PopupToast(objects));
 			}
 		});
 
