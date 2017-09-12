@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 
 import com.marklynch.Game;
-import com.marklynch.level.popup.PopupToast;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
@@ -15,7 +14,6 @@ import com.marklynch.objects.Gold;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionLootAll;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -275,28 +273,30 @@ public class Inventory implements Draggable, Scrollable {
 		buttonLootAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				if (groundDisplay == null) {
-					new ActionLootAll(Game.level.player, (GameObject) target).perform();
-				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
-					ArrayList<Action> actionsToPerform = new ArrayList<Action>();
-					for (Square square : groundDisplay.squares) {
-						for (GameObject gameObject : square.inventory.gameObjects) {
-							if (gameObject.fitsInInventory) {
-								Action action = new ActionTakeSpecificItem(Game.level.player, square, gameObject);
-								if (action.legal) {
-									actionsToPerform.add(action);
-								}
-							}
+				ArrayList<Action> actionsToPerform = new ArrayList<Action>();
+				if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
+
+					for (GameObject gameObject : otherInventory.gameObjects) {
+						Action action = new ActionTakeSpecificItem(Game.level.player, square, gameObject);
+						if (action.legal) {
+							actionsToPerform.add(action);
 						}
 					}
-					for (Action action : actionsToPerform) {
-						action.perform();
+				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
+					for (GameObject gameObject : groundDisplay.gameObjects) {
+						Action action = new ActionTakeSpecificItem(Game.level.player, square, gameObject);
+						if (action.legal) {
+							actionsToPerform.add(action);
+						}
 					}
-					groundDisplay.refreshGameObjects();
+					// groundDisplay.refreshGameObjects();
 				}
-				Game.level.openCloseInventory();
-				Object[] objects = new Object[] { "Looted everything!" };
-				Game.level.popupToasts.add(new PopupToast(objects));
+				for (Action action : actionsToPerform) {
+					action.perform();
+				}
+				// Game.level.openCloseInventory();
+				// Object[] objects = new Object[] { "Looted everything!" };
+				// Game.level.popupToasts.add(new PopupToast(objects));
 			}
 		});
 
