@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -71,6 +72,11 @@ public class ActionGiveSpecificItem extends Action {
 		if (receiver instanceof Actor) {
 			object.owner = (Actor) receiver;
 		}
+
+		if (receiver instanceof Openable) {
+			((Openable) receiver).open();
+		}
+
 		if (sound != null)
 			sound.play();
 	}
