@@ -39,6 +39,10 @@ public class ActionTakeSpecificItem extends Action {
 	@Override
 	public void perform() {
 
+		if (performer == Game.level.player) {
+			System.out.println("TAKE");
+		}
+
 		if (!enabled)
 			return;
 		if (Game.level.shouldLog(object, performer)) {
@@ -80,12 +84,24 @@ public class ActionTakeSpecificItem extends Action {
 
 	@Override
 	public boolean check() {
+
+		if (performer == Game.level.player) {
+			System.out.println("TAKE check 1 targetGameObject = " + targetGameObject);
+		}
 		if (targetSquare != null && performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
+		}
+		if (performer == Game.level.player) {
+			System.out.println(
+					"TAKE check 2 targetGameObject.squareGameObjectIsOn = " + targetGameObject.squareGameObjectIsOn);
 		}
 		if (targetGameObject != null && performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
+		if (performer == Game.level.player) {
+			System.out.println("TAKE check 3");
+		}
+
 		return false;
 	}
 

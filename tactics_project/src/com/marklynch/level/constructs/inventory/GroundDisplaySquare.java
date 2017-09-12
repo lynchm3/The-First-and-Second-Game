@@ -22,7 +22,9 @@ public class GroundDisplaySquare extends InventorySquare {
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
 		if (gameObject == null)
 			return null;
-		return new ActionTakeSpecificItem(performer, this.gameObject.squareGameObjectIsOn, this.gameObject);
+		return new ActionTakeSpecificItem(performer, this.gameObject.inventoryThatHoldsThisObject.parent,
+				this.gameObject);
+
 	}
 
 	@Override
@@ -30,7 +32,8 @@ public class GroundDisplaySquare extends InventorySquare {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (gameObject != null) {
-			actions.add(new ActionTakeSpecificItem(performer, this.gameObject.squareGameObjectIsOn, this.gameObject));
+			actions.add(new ActionTakeSpecificItem(performer, this.gameObject.inventoryThatHoldsThisObject.parent,
+					this.gameObject));
 			actions.add(new ActionEquip(performer, this.gameObject));
 		}
 		return actions;
