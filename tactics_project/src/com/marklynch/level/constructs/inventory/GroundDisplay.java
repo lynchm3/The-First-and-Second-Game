@@ -59,6 +59,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 					} else if (gameObject instanceof Openable) {
 						Openable openable = (Openable) gameObject;
 						if (!openable.locked) {
+							openable.open();
 							for (GameObject gameObjectInContainer : gameObject.inventory.gameObjects) {
 								this.gameObjects.add(gameObjectInContainer);
 							}
