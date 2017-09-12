@@ -7,6 +7,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.TextureUtils;
 
 public class GroundDisplaySquare extends InventorySquare {
 
@@ -32,5 +33,15 @@ public class GroundDisplaySquare extends InventorySquare {
 			actions.add(new ActionEquip(performer, this.gameObject));
 		}
 		return actions;
+	}
+
+	@Override
+	public void drawStaticUI() {
+
+		TextureUtils.drawTexture(gameObject.squareGameObjectIsOn.imageTexture, xInPixels, yInPixels,
+				xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+		;
+
+		super.drawStaticUI();
 	}
 }
