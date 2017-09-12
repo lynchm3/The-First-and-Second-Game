@@ -38,9 +38,9 @@ public class GroundDisplaySquare extends InventorySquare {
 	@Override
 	public void drawStaticUI() {
 
-		TextureUtils.drawTexture(gameObject.squareGameObjectIsOn.imageTexture, xInPixels, yInPixels,
-				xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
-		;
+		if (gameObject.squareGameObjectIsOn.imageTexture != null)
+			TextureUtils.drawTexture(gameObject.squareGameObjectIsOn.imageTexture, xInPixels, yInPixels,
+					xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 
 		super.drawStaticUI();
 	}

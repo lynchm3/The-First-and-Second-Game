@@ -26,7 +26,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 	public transient ArrayList<GroundDisplaySquare> groundDisplaySquares = new ArrayList<GroundDisplaySquare>();
 	transient private GroundDisplaySquare groundDisplaySquareMouseIsOver;
 
-	public static final String stringEmpty = "Nothing on the ground";
+	public static final String stringEmpty = "Nothing on the nearby";
 	public static final int lengthEmpty = Game.font.getWidth(stringEmpty);
 
 	public GroundDisplay(int x, int y) {
@@ -128,7 +128,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 	public void drawText() {
 
 		TextUtils.printTextWithImages(this.squaresX, Inventory.inventoryNamesY, 300f, true,
-				new Object[] { new StringWithColor("Items on the Ground", Color.WHITE) });
+				new Object[] { new StringWithColor("Items Nearby", Color.WHITE) });
 
 	}
 
