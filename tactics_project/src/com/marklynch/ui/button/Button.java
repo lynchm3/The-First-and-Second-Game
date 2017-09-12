@@ -12,7 +12,7 @@ public abstract class Button {
 	public boolean enabled = true;
 	public boolean down = false;
 	public ClickListener clickListener;
-	public Object text;
+	protected Object text;
 	protected boolean highlighted = false;
 
 	public Button(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,

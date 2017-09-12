@@ -273,25 +273,40 @@ public class Inventory implements Draggable, Scrollable {
 		buttonLootAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
+
+				System.out.println("LOOT ALL");
+
 				ArrayList<Action> actionsToPerform = new ArrayList<Action>();
 				if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 
+					System.out.println("LOOT ALL MODE_LOOT");
 					for (GameObject gameObject : otherInventory.gameObjects) {
-						Action action = new ActionTakeSpecificItem(Game.level.player, square, gameObject);
-						if (action.legal) {
+						Action action = new ActionTakeSpecificItem(Game.level.player,
+								gameObject.inventoryThatHoldsThisObject.parent, gameObject);
+						if (!action.legal && buttonLootAll.textParts == LOOT_ALL) {
+						} else {
 							actionsToPerform.add(action);
 						}
 					}
 				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
+					System.out.println("LOOT ALL MODE_LOOT MODE_NORMAL");
 					for (GameObject gameObject : groundDisplay.gameObjects) {
-						Action action = new ActionTakeSpecificItem(Game.level.player, square, gameObject);
-						if (action.legal) {
+						System.out.println("LOOT ALL MODE_LOOT gameObject = " + gameObject);
+						Action action = new ActionTakeSpecificItem(Game.level.player,
+								gameObject.inventoryThatHoldsThisObject.parent, gameObject);
+						if (!action.legal && buttonLootAll.textParts == LOOT_ALL) {
+							System.out.println("LOOT ALL dont add");
+						} else {
+							System.out.println("LOOT ALL add");
 							actionsToPerform.add(action);
+
 						}
 					}
 					// groundDisplay.refreshGameObjects();
 				}
+				System.out.println("LOOT ALL actionsToPerform.size() = " + actionsToPerform.size());
 				for (Action action : actionsToPerform) {
+					System.out.println("LOOT ALL performing action...");
 					action.perform();
 				}
 				// Game.level.openCloseInventory();
@@ -313,6 +328,7 @@ public class Inventory implements Draggable, Scrollable {
 		});
 
 		if (inventoryMode == INVENTORY_MODE.MODE_NORMAL || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
+			// buttons.add(buttonStealAll);
 			buttons.add(buttonLootAll);
 		}
 
@@ -667,6 +683,8 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public HashMap<String, Integer> itemTypeCount = new HashMap<String, Integer>();
+	private Object[] LOOT_ALL = new Object[] { new StringWithColor("LOOT ALL [A]", Color.WHITE) };
+	private Object[] STEAL_ALL = new Object[] { new StringWithColor("STEAL ALL [A]", Color.RED) };
 
 	public void matchGameObjectsToSquares() {
 
@@ -944,10 +962,28 @@ public class Inventory implements Draggable, Scrollable {
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
 						new Object[] { GroundDisplay.stringEmpty });
 			}
-			if (groundDisplay.gameObjects.size() == 0)
-				this.buttonLootAll.enabled = false;
-			else
-				this.buttonLootAll.enabled = true;
+
+			boolean containsLegalStuff = false;
+			for (GameObject gameObject : groundDisplay.gameObjects) {
+				if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+					containsLegalStuff = true;
+					break;
+				}
+			}
+			if (groundDisplay.gameObjects.size() == 0) {
+				Inventory.buttonLootAll.textParts = LOOT_ALL;
+				Inventory.buttonLootAll.enabled = false;
+				Inventory.buttonLootAll.textColor = Color.WHITE;
+			} else {
+				if (containsLegalStuff) {
+					Inventory.buttonLootAll.textParts = LOOT_ALL;
+					Inventory.buttonLootAll.textColor = Color.WHITE;
+				} else {
+					Inventory.buttonLootAll.textParts = STEAL_ALL;
+					Inventory.buttonLootAll.textColor = Color.RED;
+				}
+				Inventory.buttonLootAll.enabled = true;
+			}
 		}
 
 		// Other Gameobject / actor inventory squares
@@ -981,10 +1017,28 @@ public class Inventory implements Draggable, Scrollable {
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
 						new Object[] { stringEmpty });
 			}
-			if (otherInventory.size() == 0)
-				this.buttonLootAll.enabled = false;
-			else
-				this.buttonLootAll.enabled = true;
+
+			boolean containsLegalStuff = false;
+			for (GameObject gameObject : otherInventory.gameObjects) {
+				if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+					containsLegalStuff = true;
+					break;
+				}
+			}
+			if (otherInventory.size() == 0) {
+				Inventory.buttonLootAll.textParts = LOOT_ALL;
+				Inventory.buttonLootAll.enabled = false;
+				Inventory.buttonLootAll.textColor = Color.WHITE;
+			} else {
+				if (containsLegalStuff) {
+					Inventory.buttonLootAll.textParts = LOOT_ALL;
+					Inventory.buttonLootAll.textColor = Color.WHITE;
+				} else {
+					Inventory.buttonLootAll.textParts = STEAL_ALL;
+					Inventory.buttonLootAll.textColor = Color.RED;
+				}
+				Inventory.buttonLootAll.enabled = true;
+			}
 		}
 
 		// cursor and action over squares
