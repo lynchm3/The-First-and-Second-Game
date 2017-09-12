@@ -7,6 +7,8 @@ import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
+import com.marklynch.objects.Openable;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.utils.QuadUtils;
@@ -51,6 +53,21 @@ public class GroundDisplay implements Draggable, Scrollable {
 			for (GameObject gameObject : square.inventory.gameObjects) {
 				if (gameObject.fitsInInventory) {
 					this.gameObjects.add(gameObject);
+				} else if (gameObject.canContainOtherObjects) {
+					if (gameObject instanceof Actor) {
+
+					} else if (gameObject instanceof Openable) {
+						Openable openable = (Openable) gameObject;
+						if (!openable.locked) {
+							for (GameObject gameObjectInContainer : gameObject.inventory.gameObjects) {
+								this.gameObjects.add(gameObjectInContainer);
+							}
+						}
+					} else {
+						for (GameObject gameObjectInContainer : gameObject.inventory.gameObjects) {
+							this.gameObjects.add(gameObjectInContainer);
+						}
+					}
 				}
 			}
 		}
