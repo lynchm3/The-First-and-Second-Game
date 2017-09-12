@@ -3,6 +3,7 @@ package com.marklynch.level.constructs.inventory;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
@@ -38,9 +39,16 @@ public class GroundDisplaySquare extends InventorySquare {
 	@Override
 	public void drawStaticUI() {
 
-		if (gameObject.squareGameObjectIsOn != null && gameObject.squareGameObjectIsOn.imageTexture != null)
+		if (gameObject.squareGameObjectIsOn != null && gameObject.squareGameObjectIsOn.imageTexture != null) {
 			TextureUtils.drawTexture(gameObject.squareGameObjectIsOn.imageTexture, xInPixels, yInPixels,
 					xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+		} else if (gameObject.inventoryThatHoldsThisObject != null
+				&& gameObject.inventoryThatHoldsThisObject.parent != null
+				&& gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject) {
+			TextureUtils.drawTexture(((GameObject) gameObject.inventoryThatHoldsThisObject.parent).imageTexture,
+					xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+					yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+		}
 
 		super.drawStaticUI();
 	}
