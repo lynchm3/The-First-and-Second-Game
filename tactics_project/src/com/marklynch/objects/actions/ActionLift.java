@@ -7,15 +7,15 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionPickUp extends Action {
+public class ActionLift extends Action {
 
-	public static final String ACTION_NAME = "Pick Up";
+	public static final String ACTION_NAME = "Lift";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject object;
 
-	public ActionPickUp(Actor performer, GameObject object) {
+	public ActionLift(Actor performer, GameObject object) {
 		super(ACTION_NAME, "action_pick_up.png");
 		this.performer = performer;
 		this.object = object;
