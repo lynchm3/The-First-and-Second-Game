@@ -2,10 +2,10 @@ package com.marklynch.level.constructs.inventory;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.popup.PopupToast;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
@@ -604,13 +604,12 @@ public class Inventory implements Draggable, Scrollable {
 				oldInventory.matchGameObjectsToSquares();
 			}
 
-			Date pickupDateTime = new Date();
-			gameObject.pickUpdateDateTime = pickupDateTime;
+			gameObject.turnAcquired = Level.turn;
 
 			// Set that date on all items with that name
 			for (GameObject gameObjectInInventory : gameObjects) {
 				if (gameObjectInInventory.name.equals(gameObject.name)) {
-					gameObjectInInventory.pickUpdateDateTime = pickupDateTime;
+					gameObjectInInventory.turnAcquired = Level.turn;
 				}
 			}
 
@@ -709,7 +708,7 @@ public class Inventory implements Draggable, Scrollable {
 				continue;
 
 			if (inventoryMode == INVENTORY_MODE.MODE_TRADE && this.parent != Game.level.player
-					&& gameObject.toSell == false)
+					&& gameObject.toSell == false && gameObject.turnAcquired != Level.turn)
 				continue;
 
 			if (gameObject.value == 0 && gameObject instanceof Gold)

@@ -860,7 +860,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_NEWEST) {
-			return otherGameObject.pickUpdateDateTime.compareTo(this.pickUpdateDateTime);
+			return otherGameObject.turnAcquired - this.turnAcquired;
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_FAVOURITE) {

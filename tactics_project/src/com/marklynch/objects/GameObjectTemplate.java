@@ -3,7 +3,6 @@ package com.marklynch.objects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBurning;
@@ -35,7 +34,7 @@ public class GameObjectTemplate implements InventoryParent {
 	public boolean decorative = false;
 
 	public int value = 1;
-	public Date pickUpdateDateTime = new Date();
+	public int turnAcquired = 1;
 	public float widthRatio = 1;
 	public float heightRatio = 1;
 
