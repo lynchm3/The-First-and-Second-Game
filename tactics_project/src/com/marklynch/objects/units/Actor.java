@@ -1177,7 +1177,10 @@ public class Actor extends GameObject {
 
 		}
 
-		return Conversation.createConversation("Hello!", this);
+		if (!(this instanceof NonHuman))
+			return Conversation.createConversation("Hello!", this);
+
+		return null;
 	}
 
 	public boolean canSeeGameObjectFromSpecificSquare(Square sourceSquare, GameObject gameObject) {
