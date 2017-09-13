@@ -1435,9 +1435,9 @@ public class Level {
 			}
 		} else if (Game.level.popupTextBoxes.size() != 0) {
 			return;
-		} else if (Game.level.conversation != null) {
-			return;
 		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
 			return;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true && Game.level.player.animation.completed) {
 			highlightPlayButton();
@@ -1502,14 +1502,6 @@ public class Level {
 		if (this.popupTextBoxes.size() != 0)
 			return null;
 
-		if (conversation != null) {
-			for (Button button : conversation.currentConversationPart.windowSelectConversationResponse.buttons) {
-				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
-					return button;
-			}
-			return null;
-		}
-
 		for (Inventory inventory : openInventories) {
 			for (Button button : inventory.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
@@ -1525,6 +1517,14 @@ public class Level {
 					}
 
 				}
+			}
+			return null;
+		}
+
+		if (conversation != null) {
+			for (Button button : conversation.currentConversationPart.windowSelectConversationResponse.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
 			}
 			return null;
 		}

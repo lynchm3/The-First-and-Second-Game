@@ -353,7 +353,7 @@ public class UserInputLevel {
 			} else if (Game.buttonHoveringOver != null) {
 				// Click button
 				Game.buttonHoveringOver.click();
-			} else if (Game.level.conversation != null) {
+			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
 			} else if (Game.popupTextBoxHoveringOver != null) {
 				Game.popupTextBoxHoveringOver.click(Mouse.getX(), (int) (Game.windowHeight - Mouse.getY()));
@@ -381,7 +381,7 @@ public class UserInputLevel {
 			if (Game.windowHoveringOver != null)
 				Game.windowHoveringOver.bringToFront();
 
-			if (Game.level.conversation != null) {
+			if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
 			} else if (Game.level.popupTextBoxes.size() != 0) {
 
@@ -416,7 +416,7 @@ public class UserInputLevel {
 			UserInputLevel.draggableMouseIsOver = null;
 		}
 
-		if (Game.level.conversation != null) {
+		if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
 		} else {
 			checkButtons();
@@ -523,9 +523,9 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			return;
-		} else if (Game.level.conversation != null) {
-			return;
 		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
 			return;
 		}
 
@@ -559,9 +559,9 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			return;
-		} else if (Game.level.conversation != null) {
-			return;
 		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
 			return;
 		}
 
@@ -601,9 +601,9 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			return;
-		} else if (Game.level.conversation != null) {
-			return;
 		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
 			return;
 		}
 
@@ -643,9 +643,9 @@ public class UserInputLevel {
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.get(0).moveCaretLeft();
 			return;
-		} else if (Game.level.conversation != null) {
-			return;
 		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
 			return;
 		}
 
@@ -691,9 +691,9 @@ public class UserInputLevel {
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.get(0).moveCaretRight();
 			return;
-		} else if (Game.level.conversation != null) {
-			return;
 		} else if (Game.level.openInventories.size() != 0) {
+			return;
+		} else if (Game.level.conversation != null) {
 			return;
 		}
 
