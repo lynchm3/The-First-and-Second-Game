@@ -154,8 +154,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 	}
 
-	public static boolean isEven(int i) {
-		return (i & 1) == 0;
+	public static boolean isEven(int number) {
+		return (number & 1) == 0;
 	}
 
 	public static void loadStaticImages() {

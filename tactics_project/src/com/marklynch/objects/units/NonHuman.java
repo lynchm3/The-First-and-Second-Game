@@ -17,13 +17,13 @@ public class NonHuman extends Actor {
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, GameObject[] mustHaves,
-			GameObject[] mightHaves) {
+			GameObject[] mightHaves, int templateId) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, false, false, widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, 0, mustHaves, mightHaves);
+				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, 0, mustHaves, mightHaves, templateId);
 	}
 
 }

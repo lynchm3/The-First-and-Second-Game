@@ -137,8 +137,8 @@ public class Group {
 		}
 	}
 
-	public Actor getMember(int i) {
-		return this.members.get(i);
+	public Actor getMember(int index) {
+		return this.members.get(index);
 	}
 
 	public int size() {

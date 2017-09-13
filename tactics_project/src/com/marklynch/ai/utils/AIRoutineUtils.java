@@ -876,10 +876,6 @@ public class AIRoutineUtils {
 	// }
 	// }
 
-	public AIRoutineUtils makeCopy() {
-		return null;
-	}
-
 	// public static boolean inSameBuilding(GameObject gameObject1, GameObject
 	// gameObject2) {
 	// return inSameBuilding(gameObject1.squareGameObjectIsOn,

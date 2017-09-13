@@ -11,6 +11,9 @@ import com.marklynch.ui.ActivityLog;
 
 public class EffectBleeding extends Effect {
 
+	// Template id
+	public int templateId;
+
 	public EffectBleeding(GameObject source, GameObject target, int totalTurns) {
 		this.logString = " cut by ";
 		this.effectName = "Bleed";

@@ -11,11 +11,12 @@ public class Axe extends Tool {
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, float anchorX, float anchorY) {
+			float poisonResistance, float slashResistance, float weight, int value, Actor owner, float anchorX,
+			float anchorY, int templateId) {
 		super(name, minRange, maxRange, imagePath, health, squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, anchorX, anchorY, 5);
+				weight, value, owner, anchorX, anchorY, 5, templateId);
 	}
 
 	@Override
@@ -23,6 +24,6 @@ public class Axe extends Tool {
 		return new Axe(new String(name), minRange, maxRange, imageTexturePath, totalHealth, square, widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY);
+				poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, templateId);
 	}
 }

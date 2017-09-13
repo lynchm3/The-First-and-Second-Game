@@ -19,11 +19,11 @@ public class Door extends Openable {
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float slashResistance, float weight, int value, Actor owner, boolean locked,
-			boolean shouldBeClosed, boolean shouldBeLocked, Key... keys) {
+			boolean shouldBeClosed, boolean shouldBeLocked, int templateId, Key... keys) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, locked, keys);
+				weight, value, owner, locked, templateId);
 
 		canBePickedUp = false;
 		showInventory = false;
@@ -96,7 +96,8 @@ public class Door extends Openable {
 
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, locked, shouldBeClosed, shouldBeLocked, keys);
+				poisonResistance, slashResistance, weight, value, owner, locked, shouldBeClosed, shouldBeLocked,
+				templateId, keys);
 	}
 
 	public boolean shouldBeClosed() {

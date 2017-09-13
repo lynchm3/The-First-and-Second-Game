@@ -176,11 +176,11 @@ public class Actor extends GameObject {
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, int gold,
-			GameObject[] mustHaves, GameObject[] mightHaves) {
+			GameObject[] mustHaves, GameObject[] mightHaves, int templateId) {
 		super(name, health, imagePath, squareActorIsStandingOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, 0, owner);
+				weight, 0, owner, templateId);
 		standingTexture = imageTexture;
 
 		this.strength = strength;
@@ -1002,7 +1002,7 @@ public class Actor extends GameObject {
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
 				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves,
-				mightHaves);
+				mightHaves, templateId);
 		return actor;
 	}
 

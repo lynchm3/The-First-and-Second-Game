@@ -18,6 +18,9 @@ import mdesl.graphics.Texture;
 
 public class GameObjectTemplate implements InventoryParent {
 
+	// Template id
+	public int templateId;
+
 	public String name = "";
 	public float totalHealth = 0;
 	public String imageTexturePath = null;
@@ -62,8 +65,9 @@ public class GameObjectTemplate implements InventoryParent {
 			Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value) {
+			float poisonResistance, float slashResistance, float weight, int value, int templateId) {
 		super();
+		this.templateId = templateId;
 		this.name = name;
 		this.totalHealth = totalHealth;
 		this.imageTexturePath = imageTexturePath;
@@ -95,14 +99,14 @@ public class GameObjectTemplate implements InventoryParent {
 		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner);
+				poisonResistance, slashResistance, weight, value, owner, templateId);
 	}
 
 	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
 		GameObject copy = new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner);
+				poisonResistance, slashResistance, weight, value, owner, templateId);
 		copy.backwards = backwards;
 		return copy;
 	}

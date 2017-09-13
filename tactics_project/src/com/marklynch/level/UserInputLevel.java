@@ -773,7 +773,6 @@ public class UserInputLevel {
 			return;
 		} else if (Game.level.conversation != null) {
 			WindowSelectConversationResponse.buttonLeave.click();
-			System.out.println("ESC");
 			return;
 		}
 
@@ -883,7 +882,6 @@ public class UserInputLevel {
 				}
 				controllingMenu = true;
 			} else if (Game.level.conversation != null) {
-				System.out.println("A");
 				WindowSelectConversationResponse.buttonTrade.click();
 			} else {
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {

@@ -148,12 +148,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner) {
+			float poisonResistance, float slashResistance, float weight, int value, Actor owner, int templateId) {
 
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value);
+				weight, value, templateId);
 		this.remainingHealth = health;
 		this.owner = owner;
 		this.drawOffsetX = drawOffsetX;
@@ -559,7 +559,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner);
+				poisonResistance, slashResistance, weight, value, owner, templateId);
 	}
 
 	public ArrayList<Weapon> getWeaponsInInventory() {
@@ -1283,5 +1283,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public Conversation createConversation(Object[] text) {
 		return Conversation.createConversation(text, this);
+	}
+
+	public static int currentTemplateIdCount = 0;
+
+	public static int generateNewTemplateId() {
+		currentTemplateIdCount++;
+		return currentTemplateIdCount;
 	}
 }

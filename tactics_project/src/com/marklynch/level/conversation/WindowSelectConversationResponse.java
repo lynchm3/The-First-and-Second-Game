@@ -49,8 +49,6 @@ public class WindowSelectConversationResponse {
 
 	public void updateObjectsButtons() {
 
-		System.out.println("updateObjectsButtons");
-
 		totalWidth = 0;
 		for (int i = 0; i < conversationResponses.length; i++) {
 			totalWidth += Game.font.getWidth(conversationResponses[i].text);
@@ -95,7 +93,6 @@ public class WindowSelectConversationResponse {
 		buttonTrade.clickListener = new ClickListener() {
 			@Override
 			public void click() {
-				System.out.println("buttonTrade.click()");
 				new ActionTradeItemsInOtherInventory(Game.level.player, talker).perform();
 			}
 		};

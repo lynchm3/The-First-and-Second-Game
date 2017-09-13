@@ -200,10 +200,12 @@ public class AttributeSelectionWindow<T> {
 									scriptTrigger.makeCopy());
 							editor.stopEditingAttribute();
 						} else if (type.isAssignableFrom(AIRoutineUtils.class)) {// script
-							// trigger
-							AIRoutineUtils ai = (AIRoutineUtils) objects.get(index);
-							ownerOfAttribute.getClass().getField("ai").set(ownerOfAttribute, ai.makeCopy());
-							editor.stopEditingAttribute();
+							// // trigger
+							// AIRoutineUtils ai = (AIRoutineUtils)
+							// objects.get(index);
+							// ownerOfAttribute.getClass().getField("ai").set(ownerOfAttribute,
+							// ai.makeCopy());
+							// editor.stopEditingAttribute();
 						}
 
 					} catch (Exception e) {

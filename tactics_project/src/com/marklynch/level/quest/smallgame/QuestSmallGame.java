@@ -258,7 +258,7 @@ public class QuestSmallGame extends Quest {
 		environmentalistBill = new Farmer("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[105][16], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
 				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 110f, null, Game.level.factions.get(1), 0, 0, 0, 0, 0,
-				0, 0, 0, 10, new GameObject[] {}, new GameObject[] {});
+				0, 0, 0, 10, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 		environmentalistBill.inventory.add(Templates.HATCHET.makeCopy(null, environmentalistBill));
 
 		environmentalistBill.quest = this;
@@ -266,17 +266,17 @@ public class QuestSmallGame extends Quest {
 		superWolf = new AggressiveWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[207][16], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.get(2), 0, 0, 0, 0, 0, 0, 0, 0,
-				new GameObject[] {}, new GameObject[] {});
+				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
 		Actor wolf2 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[208][15], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0, 0, 0, 0, 0, 0,
-				new GameObject[] {}, new GameObject[] {});
+				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
 		Actor wolf3 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
 				Game.level.squares[208][17], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.get(2), 0, 0, 0, 0, 0, 0, 0, 0,
-				new GameObject[] {}, new GameObject[] {});
+				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
 		wolfPack = new Group("Wolf pack", superWolf, wolf2, wolf3);
 

@@ -75,8 +75,8 @@ public class GroundDisplay implements Draggable, Scrollable {
 		matchGameObjectsToSquares();
 	}
 
-	public static HashMap<String, Integer> itemTypeCount = new HashMap<String, Integer>();
-	public static HashMap<String, Integer> illegalItemTypeCount = new HashMap<String, Integer>();
+	public static HashMap<Integer, Integer> itemTypeCount = new HashMap<Integer, Integer>();
+	public static HashMap<Integer, Integer> illegalItemTypeCount = new HashMap<Integer, Integer>();
 
 	public void matchGameObjectsToSquares() {
 
@@ -97,13 +97,13 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 			// Legal items
 			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
-				if (itemTypeCount.containsKey(gameObject.name)) {
-					itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
+				if (itemTypeCount.containsKey(gameObject.templateId)) {
+					itemTypeCount.put(gameObject.templateId, itemTypeCount.get(gameObject.templateId) + 1);
 				} else {
 					GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
 					inventorySquare.gameObject = gameObject;
 					groundDisplaySquares.add(inventorySquare);
-					itemTypeCount.put(gameObject.name, 1);
+					itemTypeCount.put(gameObject.templateId, 1);
 					xIndex++;
 					if (xIndex == this.squareGridWidthInSquares) {
 						xIndex = 0;
@@ -112,13 +112,14 @@ public class GroundDisplay implements Draggable, Scrollable {
 				}
 
 			} else {// Illegal items
-				if (illegalItemTypeCount.containsKey(gameObject.name)) {
-					illegalItemTypeCount.put(gameObject.name, illegalItemTypeCount.get(gameObject.name) + 1);
+				if (illegalItemTypeCount.containsKey(gameObject.templateId)) {
+					illegalItemTypeCount.put(gameObject.templateId,
+							illegalItemTypeCount.get(gameObject.templateId) + 1);
 				} else {
 					GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
 					inventorySquare.gameObject = gameObject;
 					groundDisplaySquares.add(inventorySquare);
-					illegalItemTypeCount.put(gameObject.name, 1);
+					illegalItemTypeCount.put(gameObject.templateId, 1);
 					xIndex++;
 					if (xIndex == this.squareGridWidthInSquares) {
 						xIndex = 0;

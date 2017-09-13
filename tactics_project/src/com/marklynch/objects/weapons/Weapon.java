@@ -29,12 +29,12 @@ public class Weapon extends GameObject {
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float slashResistance, float weight, int value, Actor owner, float anchorX,
-			float anchorY) {
+			float anchorY, int templateId) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, value, owner);
+				slashResistance, weight, value, owner, templateId);
 
 		this.owner = owner;
 		this.anchorX = anchorX;
@@ -232,6 +232,6 @@ public class Weapon extends GameObject {
 		return new Weapon(new String(name), slashDamage, minRange, maxRange, imageTexturePath, totalHealth, square,
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY);
+				poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, templateId);
 	}
 }

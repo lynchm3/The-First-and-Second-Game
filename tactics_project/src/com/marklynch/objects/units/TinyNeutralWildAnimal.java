@@ -22,13 +22,13 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
 			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, Area area,
-			GameObject[] mustHaves, GameObject[] mightHaves) {
+			GameObject[] mustHaves, GameObject[] mightHaves, int templateId) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
-				legsAnchorX, legsAnchorY, area, mustHaves, mightHaves);
+				legsAnchorX, legsAnchorY, area, mustHaves, mightHaves, templateId);
 
 		canBePickedUp = true;
 		fitsInInventory = true;
@@ -67,7 +67,7 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
 				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, area, mustHaves,
-				mightHaves);
+				mightHaves, templateId);
 		return actor;
 	}
 

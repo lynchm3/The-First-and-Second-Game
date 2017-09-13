@@ -106,14 +106,14 @@ public class InventorySquare extends Square {
 			int count = 1;
 			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
 				if (this instanceof GroundDisplaySquare)
-					count = GroundDisplay.itemTypeCount.get(gameObject.name);
+					count = GroundDisplay.itemTypeCount.get(gameObject.templateId);
 				else
-					count = this.inventoryThisBelongsTo.itemTypeCount.get(gameObject.name);
+					count = this.inventoryThisBelongsTo.itemTypeCount.get(gameObject.templateId);
 			} else {
 				if (this instanceof GroundDisplaySquare)
-					count = GroundDisplay.illegalItemTypeCount.get(gameObject.name);
+					count = GroundDisplay.illegalItemTypeCount.get(gameObject.templateId);
 				else
-					count = this.inventoryThisBelongsTo.illegalItemTypeCount.get(gameObject.name);
+					count = this.inventoryThisBelongsTo.illegalItemTypeCount.get(gameObject.templateId);
 			}
 
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {

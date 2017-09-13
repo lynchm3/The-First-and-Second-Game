@@ -575,8 +575,8 @@ public class Inventory implements Draggable, Scrollable {
 		textureStar = ResourceUtils.getGlobalImage("star.png");
 	}
 
-	public GameObject get(int i) {
-		return gameObjects.get(i);
+	public GameObject get(int index) {
+		return gameObjects.get(index);
 	}
 
 	public void add(GameObject gameObject) {
@@ -608,7 +608,7 @@ public class Inventory implements Draggable, Scrollable {
 
 			// Set that date on all items with that name
 			for (GameObject gameObjectInInventory : gameObjects) {
-				if (gameObjectInInventory.name.equals(gameObject.name)) {
+				if (gameObjectInInventory.templateId == gameObject.templateId) {
 					gameObjectInInventory.turnAcquired = Level.turn;
 				}
 			}
@@ -684,8 +684,8 @@ public class Inventory implements Draggable, Scrollable {
 		return gameObjects;
 	}
 
-	public HashMap<String, Integer> itemTypeCount = new HashMap<String, Integer>();
-	public HashMap<String, Integer> illegalItemTypeCount = new HashMap<String, Integer>();
+	public HashMap<Integer, Integer> itemTypeCount = new HashMap<Integer, Integer>();
+	public HashMap<Integer, Integer> illegalItemTypeCount = new HashMap<Integer, Integer>();
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("LOOT ALL [A]", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("STEAL ALL [A]", Color.RED) };
 
@@ -716,23 +716,24 @@ public class Inventory implements Draggable, Scrollable {
 
 			// Legal items
 			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
-				if (itemTypeCount.containsKey(gameObject.name)) {
-					itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
+				if (itemTypeCount.containsKey(gameObject.templateId)) {
+					itemTypeCount.put(gameObject.templateId, itemTypeCount.get(gameObject.templateId) + 1);
 				} else {
 					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 					inventorySquare.gameObject = gameObject;
 					inventorySquares.add(inventorySquare);
-					itemTypeCount.put(gameObject.name, 1);
+					itemTypeCount.put(gameObject.templateId, 1);
 				}
 
 			} else {// Illegal items
-				if (illegalItemTypeCount.containsKey(gameObject.name)) {
-					illegalItemTypeCount.put(gameObject.name, illegalItemTypeCount.get(gameObject.name) + 1);
+				if (illegalItemTypeCount.containsKey(gameObject.templateId)) {
+					illegalItemTypeCount.put(gameObject.templateId,
+							illegalItemTypeCount.get(gameObject.templateId) + 1);
 				} else {
 					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 					inventorySquare.gameObject = gameObject;
 					inventorySquares.add(inventorySquare);
-					illegalItemTypeCount.put(gameObject.name, 1);
+					illegalItemTypeCount.put(gameObject.templateId, 1);
 				}
 			}
 		}

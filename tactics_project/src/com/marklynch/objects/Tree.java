@@ -23,12 +23,12 @@ public class Tree extends GameObject {
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner,
-			boolean canShareSquare) {
+			float poisonResistance, float slashResistance, float weight, int value, Actor owner, boolean canShareSquare,
+			int templateId) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner);
+				weight, value, owner, templateId);
 		healthWhenLastDroppedFruit = this.totalHealth;
 		// addApple(appleMaxRatioSize);
 
@@ -48,7 +48,7 @@ public class Tree extends GameObject {
 		float appleSize = (float) (Math.random() * maxSize);
 
 		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), appleSize, appleSize, 0.5f, 0.5f,
-				1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.5f, 1, null);
+				1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.5f, 1, null, 1000);
 		apple.anchorX = 6;
 		apple.anchorY = 6;
 
@@ -154,7 +154,7 @@ public class Tree extends GameObject {
 		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(), widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, canShareSquare);
+				poisonResistance, slashResistance, weight, value, owner, canShareSquare, templateId);
 	}
 
 }

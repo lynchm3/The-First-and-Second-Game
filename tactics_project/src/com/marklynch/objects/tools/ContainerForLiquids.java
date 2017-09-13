@@ -29,12 +29,12 @@ public class ContainerForLiquids extends Tool {
 			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
 			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float slashResistance, float weight, int value, Actor owner, float anchorX,
-			float anchorY, float volume, String imageWhenFullPath) {
+			float anchorY, float volume, String imageWhenFullPath, int templateId) {
 
 		super(name, minRange, maxRange, imagePath, health, squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, anchorX, anchorY, 5);
+				weight, value, owner, anchorX, anchorY, 5, templateId);
 		this.baseValue = value;
 		this.volume = volume;
 		this.imageWhenFullPath = imageWhenFullPath;
@@ -60,7 +60,7 @@ public class ContainerForLiquids extends Tool {
 				squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, volume,
-				imageWhenFullPath);
+				imageWhenFullPath, templateId);
 	}
 
 	@Override
