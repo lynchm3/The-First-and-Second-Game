@@ -10,32 +10,35 @@ import mdesl.graphics.Color;
 
 public class WeaponComparisonDisplay {
 
-	Weapon weapon;
+	int weaponWidth;
+	int weaponHeight;
+	int width;
 
-	int x = 500;
-	int y = 500;
-	int width = 500;
-	int height = 300;
-	int halfWidth = width / 2;
+	int x;
+	int y;
+	int height;
+	int halfWidth;
 
-	int weaponWidth = 128;
-	int weaponHeight = 128;
-	int weapon1DrawX = x;
-	int weaponDrawY = y;
-	int weapon2DrawX = x + width - weaponWidth;
+	int weapon1DrawX;
+	int weaponDrawY;
+	int weapon2DrawX;
 
-	int stats1RightX = x + halfWidth - 4;
-	int stats2X = x + halfWidth + 4;
+	int stats1RightX;
+	int stats2X;
 
-	int nameY = y;
-	int slashDamageY = y + 16;
-	int bluntDamageY = y + 32;
-	int pierceDamageY = y + 48;
-	int fireDamageY = y + 64;
-	int waterDamageY = y + 80;
-	int electricalDamageY = y + 96;
-	int poisonDamageY = y + 112;
-	int rangeY = y + 128;
+	int nameY;
+	int slashDamageY;
+	int bluntDamageY;
+	int pierceDamageY;
+	int fireDamageY;
+	int waterDamageY;
+	int electricalDamageY;
+	int poisonDamageY;
+	int rangeY;
+
+	public WeaponComparisonDisplay() {
+		resize();
+	}
 
 	public void drawStaticUI() {
 
@@ -206,6 +209,36 @@ public class WeaponComparisonDisplay {
 				Integer.MAX_VALUE, false, new Object[] { new StringWithColor("" + weapon1.maxRange, color1) });
 		TextUtils.printTextWithImages(stats2X, rangeY, Integer.MAX_VALUE, false,
 				new Object[] { new StringWithColor("" + weapon2.maxRange, color2) });
+
+	}
+
+	public void resize() {
+
+		weaponWidth = 128;
+		weaponHeight = 128;
+		width = weaponWidth * 5;
+
+		x = (int) (Game.windowWidth / 2 - width / 2);
+		y = (int) (Game.windowHeight - 256);
+		height = 300;
+		halfWidth = width / 2;
+
+		weapon1DrawX = x;
+		weaponDrawY = y;
+		weapon2DrawX = x + width - weaponWidth;
+
+		stats1RightX = x + halfWidth - 4;
+		stats2X = x + halfWidth + 4;
+
+		nameY = y;
+		slashDamageY = y + 16;
+		bluntDamageY = y + 32;
+		pierceDamageY = y + 48;
+		fireDamageY = y + 64;
+		waterDamageY = y + 80;
+		electricalDamageY = y + 96;
+		poisonDamageY = y + 112;
+		rangeY = y + 128;
 
 	}
 

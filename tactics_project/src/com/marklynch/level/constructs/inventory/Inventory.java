@@ -85,7 +85,7 @@ public class Inventory implements Draggable, Scrollable {
 	transient float sortButtonWidth = 100;
 	transient int actorX = 100;
 	transient int actorWidth = 256;
-	transient static int bottomBorderHeight = 256;
+	transient static int bottomBorderHeight = 384;
 	transient static int topBorderHeight = 100;
 	transient InventorySquare inventorySquareMouseIsOver;
 
@@ -809,6 +809,8 @@ public class Inventory implements Draggable, Scrollable {
 			buttonLootAll.x = this.otherInventory.squaresX;
 			textOtherShiftX = this.otherInventory.squaresX + buttonLootAll.width;
 		}
+
+		weaponComparisonDisplay.resize();
 
 	}
 
