@@ -15,14 +15,13 @@ import mdesl.graphics.Color;
 
 public class WindowSelectConversationResponse {
 
-	public float width;
 	public Vector<LevelButton> buttons = new Vector<LevelButton>();
 	public static LevelButton buttonTrade;
-	public String stringTrade = "TRADE [A]";
-	float tradeButtonWidth = Game.font.getWidth(stringTrade);
+	public final static String stringTrade = "TRADE [A]";
+	final static float tradeButtonWidth = Game.font.getWidth(stringTrade);
 	public static LevelButton buttonLeave;
-	public String stringLeave = "LEAVE [ESC}";
-	float leaveButtonWidth = Game.font.getWidth(stringLeave);
+	public final static String stringLeave = "LEAVE [ESC}";
+	final static float leaveButtonWidth = Game.font.getWidth(stringLeave);
 	// conversationReponseEnd = new ConversationResponse("Leave", null);
 	public Level level;
 	public Square square;
@@ -49,6 +48,10 @@ public class WindowSelectConversationResponse {
 	}
 
 	public void updateObjectsButtons() {
+
+		System.out.println("updateObjectsButtons");
+
+		totalWidth = 0;
 		for (int i = 0; i < conversationResponses.length; i++) {
 			totalWidth += Game.font.getWidth(conversationResponses[i].text);
 			totalWidth += marginBetweenButtons;
@@ -118,5 +121,9 @@ public class WindowSelectConversationResponse {
 			button.draw();
 		}
 
+	}
+
+	public void resize() {
+		updateObjectsButtons();
 	}
 }

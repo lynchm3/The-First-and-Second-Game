@@ -73,4 +73,9 @@ public class ConversationPart {
 				talker);
 	}
 
+	public void resize() {
+		windowSelectConversationResponse.resize();
+
+	}
+
 }

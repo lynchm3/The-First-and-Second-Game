@@ -1902,5 +1902,8 @@ public class Level {
 		if (openInventories.size() != 0)
 			openInventories.get(0).resize1();
 
+		if (conversation != null)
+			conversation.resize();
+
 	}
 }

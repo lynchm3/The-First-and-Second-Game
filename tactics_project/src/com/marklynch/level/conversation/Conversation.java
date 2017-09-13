@@ -73,4 +73,9 @@ public class Conversation {
 	public static Conversation createConversation(String text, GameObject gameObject) {
 		return createConversation(new Object[] { text }, gameObject);
 	}
+
+	public void resize() {
+		currentConversationPart.resize();
+
+	}
 }
