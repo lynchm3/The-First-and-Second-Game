@@ -23,9 +23,9 @@ public class ConversationPart {
 		// textWidth = Game.font.getWidth(text);
 		// halfTextWidth = textWidth / 2;
 
-		if (conversationResponses.length > 0)
-			windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level,
-					conversationResponses, talker);
+		// if (conversationResponses.length > 0)
+		windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level, conversationResponses,
+				talker);
 
 	}
 

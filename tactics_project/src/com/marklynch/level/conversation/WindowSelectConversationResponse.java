@@ -87,11 +87,8 @@ public class WindowSelectConversationResponse {
 
 		}
 
-		highlightedButton = buttons.get(highlightedButtonIndex);
-		highlightedButton.highlight();
-
-		buttonTrade = new LevelButton(leaveButtonWidth + 60, buttonHeight + 10, tradeButtonWidth, buttonHeight, null,
-				null, stringTrade, false, false, Color.WHITE, Color.BLACK);
+		buttonTrade = new LevelButton(leaveButtonWidth + 30 + tradeButtonWidth + 30, buttonHeight + 10,
+				tradeButtonWidth, buttonHeight, null, null, stringTrade, false, false, Color.WHITE, Color.BLACK);
 		buttonTrade.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -101,8 +98,8 @@ public class WindowSelectConversationResponse {
 		};
 		buttons.add(buttonTrade);
 
-		buttonLeave = new LevelButton(30, buttonHeight + 10, leaveButtonWidth, buttonHeight, null, null, stringLeave,
-				false, false, Color.WHITE, Color.BLACK);
+		buttonLeave = new LevelButton(leaveButtonWidth + 30, buttonHeight + 10, leaveButtonWidth, buttonHeight, null,
+				null, stringLeave, false, false, Color.WHITE, Color.BLACK);
 		buttonLeave.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -110,6 +107,9 @@ public class WindowSelectConversationResponse {
 			}
 		};
 		buttons.add(buttonLeave);
+
+		highlightedButton = buttons.get(highlightedButtonIndex);
+		highlightedButton.highlight();
 
 	}
 

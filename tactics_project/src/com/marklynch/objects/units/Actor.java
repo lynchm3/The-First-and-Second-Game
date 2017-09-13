@@ -128,8 +128,6 @@ public class Actor extends GameObject {
 	public boolean canOpenDoors;
 	public boolean canEquipWeapons;
 
-	public transient Conversation conversation;
-
 	public boolean wasSwappedWithThisTurn = false;
 
 	public int swapCooldown = 0;
@@ -1179,7 +1177,7 @@ public class Actor extends GameObject {
 
 		}
 
-		return this.conversation;
+		return Conversation.createConversation("Hello!", this);
 	}
 
 	public boolean canSeeGameObjectFromSpecificSquare(Square sourceSquare, GameObject gameObject) {
