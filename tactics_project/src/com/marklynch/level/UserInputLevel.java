@@ -889,7 +889,6 @@ public class UserInputLevel {
 				} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 					Level.shiftActionHasBeenPressed = true;
 				}
-				System.out.println("A FUCK U PT 2");
 				leftPressed(true, false);
 			}
 		} else if (character == 's' || character == 'S') {

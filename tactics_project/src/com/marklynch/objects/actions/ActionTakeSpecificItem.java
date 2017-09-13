@@ -86,17 +86,13 @@ public class ActionTakeSpecificItem extends Action {
 	@Override
 	public boolean check() {
 
-		System.out.println("TAKE check 1");
-
 		if (targetSquare != null && performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
 		}
-		System.out.println("TAKE check 2");
 
 		if (targetGameObject != null && performer.straightLineDistanceTo(targetGameObject.squareGameObjectIsOn) < 2) {
 			return true;
 		}
-		System.out.println("TAKE check 3");
 
 		return false;
 	}

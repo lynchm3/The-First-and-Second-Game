@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import com.marklynch.Game;
+import com.marklynch.level.popup.PopupToast;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
@@ -274,12 +275,8 @@ public class Inventory implements Draggable, Scrollable {
 			@Override
 			public void click() {
 
-				System.out.println("LOOT ALL");
-
 				ArrayList<Action> actionsToPerform = new ArrayList<Action>();
 				if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
-
-					System.out.println("LOOT ALL MODE_LOOT");
 					for (GameObject gameObject : otherInventory.gameObjects) {
 						Action action = new ActionTakeSpecificItem(Game.level.player,
 								gameObject.inventoryThatHoldsThisObject.parent, gameObject);
@@ -289,29 +286,35 @@ public class Inventory implements Draggable, Scrollable {
 						}
 					}
 				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
-					System.out.println("LOOT ALL MODE_LOOT MODE_NORMAL");
 					for (GameObject gameObject : groundDisplay.gameObjects) {
-						System.out.println("LOOT ALL MODE_LOOT gameObject = " + gameObject);
 						Action action = new ActionTakeSpecificItem(Game.level.player,
 								gameObject.inventoryThatHoldsThisObject.parent, gameObject);
 						if (!action.legal && buttonLootAll.textParts == LOOT_ALL) {
-							System.out.println("LOOT ALL dont add");
 						} else {
-							System.out.println("LOOT ALL add");
 							actionsToPerform.add(action);
 
 						}
 					}
-					// groundDisplay.refreshGameObjects();
 				}
-				System.out.println("LOOT ALL actionsToPerform.size() = " + actionsToPerform.size());
 				for (Action action : actionsToPerform) {
-					System.out.println("LOOT ALL performing action...");
 					action.perform();
 				}
-				// Game.level.openCloseInventory();
-				// Object[] objects = new Object[] { "Looted everything!" };
-				// Game.level.popupToasts.add(new PopupToast(objects));
+
+				// Close inventory if emptied
+				if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
+					if (otherInventory.size() == 0) {
+						Game.level.openCloseInventory();
+						Object[] objects = new Object[] { "Looted everything!" };
+						Game.level.popupToasts.add(new PopupToast(objects));
+					}
+				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
+					if (groundDisplay.gameObjects.size() == 0) {
+						Game.level.openCloseInventory();
+						Object[] objects = new Object[] { "Looted everything!" };
+						Game.level.popupToasts.add(new PopupToast(objects));
+					}
+				}
+
 			}
 		});
 
