@@ -17,11 +17,11 @@ public class WindowSelectConversationResponse {
 
 	public float width;
 	public Vector<LevelButton> buttons = new Vector<LevelButton>();
-	public LevelButton buttonTrade;
-	public String stringTrade = "Trade";
+	public static LevelButton buttonTrade;
+	public String stringTrade = "TRADE [A]";
 	float tradeButtonWidth = Game.font.getWidth(stringTrade);
-	public LevelButton buttonLeave;
-	public String stringLeave = "Leave";
+	public static LevelButton buttonLeave;
+	public String stringLeave = "LEAVE [ESC}";
 	float leaveButtonWidth = Game.font.getWidth(stringLeave);
 	// conversationReponseEnd = new ConversationResponse("Leave", null);
 	public Level level;

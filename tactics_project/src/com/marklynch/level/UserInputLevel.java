@@ -16,6 +16,7 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
+import com.marklynch.level.conversation.WindowSelectConversationResponse;
 import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
@@ -416,11 +417,7 @@ public class UserInputLevel {
 			UserInputLevel.draggableMouseIsOver = null;
 		}
 
-		if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
-
-		} else {
-			checkButtons();
-		}
+		checkButtons();
 
 		mouseLastX = Mouse.getX();
 		mouseLastY = Mouse.getY();
@@ -774,6 +771,10 @@ public class UserInputLevel {
 		if (Game.level.openInventories.size() != 0) {
 			Game.level.openCloseInventory();
 			return;
+		} else if (Game.level.conversation != null) {
+			WindowSelectConversationResponse.buttonLeave.click();
+			System.out.println("ESC");
+			return;
 		}
 
 		Level.closeAllPopups();
@@ -881,6 +882,9 @@ public class UserInputLevel {
 					Inventory.buttonQuickSell.click();
 				}
 				controllingMenu = true;
+			} else if (Game.level.conversation != null) {
+				System.out.println("A");
+				WindowSelectConversationResponse.buttonTrade.click();
 			} else {
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 					Level.ctrlActionHasBeenPressed = true;
@@ -987,10 +991,10 @@ public class UserInputLevel {
 			keyStateRightShift = false;
 		}
 
-		if (keyStateRightShift == false && Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+		if (keyStateEscape == false && Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 			keyStateEscape = true;
 			escapeTyped();
-		} else if (!Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+		} else if (!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 			keyStateEscape = false;
 		}
 
