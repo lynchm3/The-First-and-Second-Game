@@ -19,11 +19,12 @@ public class Chest extends Openable {
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
 			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, boolean locked, Key... keys) {
+			float poisonResistance, float slashResistance, float weight, int value, Actor owner, boolean locked, int i,
+			Key... keys) {
 		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, locked, keys);
+				weight, value, owner, locked, i, keys);
 		if (locked)
 			this.name = baseName + " (locked)";
 		else if (this.inventory.size() == 0)
@@ -120,7 +121,7 @@ public class Chest extends Openable {
 
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, locked, keys);
+				poisonResistance, slashResistance, weight, value, owner, locked, templateId, keys);
 	}
 
 	@Override
@@ -129,7 +130,7 @@ public class Chest extends Openable {
 
 				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
 				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, locked, keys);
+				poisonResistance, slashResistance, weight, value, owner, locked, templateId, keys);
 	}
 
 }
