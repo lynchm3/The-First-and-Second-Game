@@ -20,9 +20,6 @@ public class ConversationForFarmer extends Conversation {
 	ConversationPart conversationPartCantComplain;
 	ConversationPart conversationPartNoDemonsAroundHere;
 
-	// End reponse
-	ConversationResponse conversationReponseEnd;
-
 	// Response to hows it going
 	ConversationResponse conversationResponseImGood;
 
@@ -57,9 +54,6 @@ public class ConversationForFarmer extends Conversation {
 		conversationPartNoDemonsAroundHere = new ConversationPart(new Object[] { "Nope, can't say that I have." },
 				new ConversationResponse[] {}, farmer);
 
-		// End reponse
-		conversationReponseEnd = new ConversationResponse("Leave", null);
-
 		// I'm good, I like your farm!"
 		conversationResponseImGood = new ConversationResponse("I'm good, I like your farm!", null);
 
@@ -76,7 +70,7 @@ public class ConversationForFarmer extends Conversation {
 		// FILL IN POINTERS
 		// opening
 		conversationPartopening.setConversationResponses(new ConversationResponse[] { conversationResponseHi,
-				conversationResponseHowsTheFarm, conversationResponseSeenAnyDemons, conversationReponseEnd });
+				conversationResponseHowsTheFarm, conversationResponseSeenAnyDemons });
 
 		// Hello there
 		conversationResponseHi.nextConversationPart = conversationPartHowsItGoing;
@@ -85,15 +79,15 @@ public class ConversationForFarmer extends Conversation {
 
 		// Farmer - how's it goinf
 		conversationPartHowsItGoing.setConversationResponses(new ConversationResponse[] { conversationResponseHi,
-				conversationResponseHowsTheFarm, conversationResponseSeenAnyDemons, conversationReponseEnd });
+				conversationResponseHowsTheFarm, conversationResponseSeenAnyDemons });
 
 		// You're in my mine
 		conversationPartCantComplain.setConversationResponses(new ConversationResponse[] { conversationResponseHi,
-				conversationResponseHowsTheFarm, conversationResponseSeenAnyDemons, conversationReponseEnd });
+				conversationResponseHowsTheFarm, conversationResponseSeenAnyDemons });
 
 		// I'm Mort
 		conversationPartNoDemonsAroundHere.setConversationResponses(new ConversationResponse[] { conversationResponseHi,
-				conversationResponseHowsTheFarm, conversationResponseSeenAnyDemons, conversationReponseEnd });
+				conversationResponseHowsTheFarm, conversationResponseSeenAnyDemons });
 
 		this.currentConversationPart = this.openingConversationPart;
 	}

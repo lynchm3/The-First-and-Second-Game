@@ -1277,11 +1277,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// return false;
 	}
 
-	public Conversation createConversation(String text, String response) {
-		return Conversation.createConversation(text, response, this);
+	public Conversation createConversation(String text) {
+		return Conversation.createConversation(text, this);
 	}
 
-	public Conversation createConversation(Object[] text, String response) {
-		return Conversation.createConversation(text, response, this);
+	public Conversation createConversation(Object[] text) {
+		return Conversation.createConversation(text, this);
 	}
 }

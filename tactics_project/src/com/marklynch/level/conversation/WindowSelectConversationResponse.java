@@ -5,6 +5,8 @@ import java.util.Vector;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionTradeItemsInOtherInventory;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -15,11 +17,18 @@ public class WindowSelectConversationResponse {
 
 	public float width;
 	public Vector<LevelButton> buttons = new Vector<LevelButton>();
+	public LevelButton buttonTrade;
+	public String stringTrade = "Trade";
+	float tradeButtonWidth = Game.font.getWidth(stringTrade);
+	public LevelButton buttonLeave;
+	public String stringLeave = "Leave";
+	float leaveButtonWidth = Game.font.getWidth(stringLeave);
+	// conversationReponseEnd = new ConversationResponse("Leave", null);
 	public Level level;
 	public Square square;
 	public LevelButton selectSquareButton;
 	public float drawPositionX, drawPositionY;
-	public float marginBetweenButtons = 30;;
+	public float marginBetweenButtons = 30;
 
 	Button highlightedButton;
 	int highlightedButtonIndex = 0;
@@ -28,9 +37,13 @@ public class WindowSelectConversationResponse {
 
 	float totalWidth = 0;
 
-	public WindowSelectConversationResponse(float width, Level level, ConversationResponse[] conversationResponses) {
+	GameObject talker;
+
+	public WindowSelectConversationResponse(float width, Level level, ConversationResponse[] conversationResponses,
+			GameObject talker) {
 
 		this.conversationResponses = conversationResponses;
+		this.talker = talker;
 		updateObjectsButtons();
 
 	}
@@ -66,7 +79,6 @@ public class WindowSelectConversationResponse {
 
 				@Override
 				public void click() {
-
 					conversationResponses[index].select();
 				}
 			};
@@ -77,6 +89,27 @@ public class WindowSelectConversationResponse {
 
 		highlightedButton = buttons.get(highlightedButtonIndex);
 		highlightedButton.highlight();
+
+		buttonTrade = new LevelButton(leaveButtonWidth + 60, buttonHeight + 10, tradeButtonWidth, buttonHeight, null,
+				null, stringTrade, false, false, Color.WHITE, Color.BLACK);
+		buttonTrade.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				System.out.println("buttonTrade.click()");
+				new ActionTradeItemsInOtherInventory(Game.level.player, talker).perform();
+			}
+		};
+		buttons.add(buttonTrade);
+
+		buttonLeave = new LevelButton(30, buttonHeight + 10, leaveButtonWidth, buttonHeight, null, null, stringLeave,
+				false, false, Color.WHITE, Color.BLACK);
+		buttonLeave.clickListener = new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.conversation = null;
+			}
+		};
+		buttons.add(buttonLeave);
 
 	}
 

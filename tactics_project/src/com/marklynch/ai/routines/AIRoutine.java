@@ -951,9 +951,8 @@ public class AIRoutine {
 
 	private Conversation createConversationMyOres() {
 
-		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
 		ConversationPart conversationPartYouWontGetOut = new ConversationPart(new Object[] { "My Ores!" },
-				new ConversationResponse[] { conversationReponseDone }, actor);
+				new ConversationResponse[] {}, actor);
 
 		return new Conversation(conversationPartYouWontGetOut);
 

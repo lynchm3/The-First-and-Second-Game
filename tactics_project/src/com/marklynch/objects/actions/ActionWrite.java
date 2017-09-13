@@ -37,9 +37,7 @@ public class ActionWrite extends Action {
 		if (!enabled)
 			return;
 
-		ConversationResponse conversationReponseDone = new ConversationResponse("Done", null);
-		ConversationPart conversationPart = new ConversationPart(text,
-				new ConversationResponse[] { conversationReponseDone }, null);
+		ConversationPart conversationPart = new ConversationPart(text, new ConversationResponse[] {}, null);
 		Conversation conversation = new Conversation(conversationPart);
 		sign.setConversation(conversation);
 		if (Game.level.shouldLog(performer))

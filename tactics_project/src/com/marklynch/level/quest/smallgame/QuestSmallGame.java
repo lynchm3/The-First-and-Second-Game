@@ -493,21 +493,26 @@ public class QuestSmallGame extends Quest {
 		if (!questAcceptedFromHunters) {
 			return conversationEnviromentalistImNotSpying;
 		} else if (!talkedToEnvironmentalist) {
+			for (GameObject gameObject : weaponsBehindLodge) {
+				if (environmentalistBill.inventory.contains(gameObject)) {
+					new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject, false).perform();
+					talkedToEnvironmentalist = true;
+				}
+			}
 			return conversationEnviromentalistSaveTheWolf;
 		}
 		return null;
 	}
 
 	public void setUpConversationReadyToGo() {
-		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
 
 		ConversationPart conversationPartTheresEquipment = new ConversationPart(
 				new Object[] {
 						"There's spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready." },
-				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
+				new ConversationResponse[] {}, hunterPack.getLeader());
 
 		ConversationPart conversationPartSuitYourself = new ConversationPart(new Object[] { "Suit yourself." },
-				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
+				new ConversationResponse[] {}, hunterPack.getLeader());
 
 		ConversationResponse conversationResponseNoThanks = new ConversationResponse("No thanks",
 				conversationPartSuitYourself);
@@ -538,50 +543,28 @@ public class QuestSmallGame extends Quest {
 		// feelings
 		// Anime style
 		// try it out
-		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null);
 		ConversationPart conversationPartImNotSpying = new ConversationPart(
-				new Object[] { "What? NO! I'm not spying! You're spying!" },
-				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalistBill);
+				new Object[] { "What? NO! I'm not spying! You're spying!" }, new ConversationResponse[] {},
+				environmentalistBill);
 		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying);
 	}
 
 	private void setUpConversationSaveTheWolf() {
 
-		// Should Be
-		// 1. Plead
-		// 2. Here's your hunting equipment
-		// 3. And here, this should help if you choose to do the right thing
-		// (give you remove imbument or imbue with fire.
-
-		ConversationResponse conversationReponseEndAfterAccepting = new ConversationResponse("Leave", null) {
-			@Override
-			public void select() {
-				super.select();
-				for (GameObject gameObject : weaponsBehindLodge) {
-					if (environmentalistBill.inventory.contains(gameObject)) {
-						new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject, false)
-								.perform();
-						talkedToEnvironmentalist = true;
-					}
-				}
-			}
-
-		};
 		ConversationPart conversationPartSaveTheWolf = new ConversationPart(new Object[] { "Save the wolf!" },
-				new ConversationResponse[] { conversationReponseEndAfterAccepting }, environmentalistBill);
+				new ConversationResponse[] {}, environmentalistBill);
 		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf);
 
 	}
 
 	public void setUpConversationJoinTheHunt() {
-		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
 
 		ConversationPart conversationAlrightLetsGo = new ConversationPart(
-				new Object[] { "Alright! Let's go bag us a some pelts!" },
-				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
+				new Object[] { "Alright! Let's go bag us a some pelts!" }, new ConversationResponse[] {},
+				hunterPack.getLeader());
 
 		ConversationPart conversationPartWellHurryOn = new ConversationPart(new Object[] { "Well hurry on!" },
-				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
+				new ConversationResponse[] {}, hunterPack.getLeader());
 
 		ConversationResponse conversationResponseNotYet = new ConversationResponse("Not yet",
 				conversationPartWellHurryOn);
@@ -606,10 +589,9 @@ public class QuestSmallGame extends Quest {
 
 	private void setUpConversationYouDidntHelp() {
 		// Really like the "Now fuck off!" bit.
-		ConversationResponse conversationReponseEnd = new ConversationResponse("Leave", null);
 		ConversationPart conversationPartOnlyHuntersGetLoot = new ConversationPart(
-				new Object[] { "Only hunters get loot. Now fuck off!" },
-				new ConversationResponse[] { conversationReponseEnd }, hunterPack.getLeader());
+				new Object[] { "Only hunters get loot. Now fuck off!" }, new ConversationResponse[] {},
+				hunterPack.getLeader());
 		conversationHuntersOnlyHuntersGetLoot = new Conversation(conversationPartOnlyHuntersGetLoot);
 	}
 

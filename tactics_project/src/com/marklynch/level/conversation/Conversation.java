@@ -63,15 +63,14 @@ public class Conversation {
 
 	}
 
-	public static Conversation createConversation(Object[] text, String response, GameObject gameObject) {
-		ConversationResponse conversationReponseDone = new ConversationResponse(response, null);
-		ConversationPart conversationPartYouWontGetOut = new ConversationPart(text,
-				new ConversationResponse[] { conversationReponseDone }, gameObject);
+	public static Conversation createConversation(Object[] text, GameObject gameObject) {
+		ConversationPart conversationPartYouWontGetOut = new ConversationPart(text, new ConversationResponse[] {},
+				gameObject);
 
 		return new Conversation(conversationPartYouWontGetOut);
 	}
 
-	public static Conversation createConversation(String text, String response, GameObject gameObject) {
-		return createConversation(new Object[] { text }, response, gameObject);
+	public static Conversation createConversation(String text, GameObject gameObject) {
+		return createConversation(new Object[] { text }, gameObject);
 	}
 }

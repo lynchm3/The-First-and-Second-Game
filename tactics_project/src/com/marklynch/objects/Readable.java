@@ -24,7 +24,7 @@ public class Readable extends GameObject {
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, value, owner);
 
-		this.conversation = this.createConversation(conversationText, "Done");
+		this.conversation = this.createConversation(conversationText);
 
 		// BOOK / SCROLL
 		canBePickedUp = true;

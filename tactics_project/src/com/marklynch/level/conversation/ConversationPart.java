@@ -25,7 +25,7 @@ public class ConversationPart {
 
 		if (conversationResponses.length > 0)
 			windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level,
-					conversationResponses);
+					conversationResponses, talker);
 
 	}
 
@@ -49,8 +49,8 @@ public class ConversationPart {
 				Game.windowHeight);
 
 		// Speker 2 image (player)
-		TextureUtils.drawTexture(Game.level.player.imageTexture, 1.0f, Game.windowWidth,
-				Game.halfWindowHeight, Game.windowWidth - Game.halfWindowHeight, Game.windowHeight);
+		TextureUtils.drawTexture(Game.level.player.imageTexture, 1.0f, Game.windowWidth, Game.halfWindowHeight,
+				Game.windowWidth - Game.halfWindowHeight, Game.windowHeight);
 
 		windowSelectConversationResponse.draw();
 
@@ -69,7 +69,8 @@ public class ConversationPart {
 
 	public void setConversationResponses(ConversationResponse[] conversationResponses) {
 		this.conversationResponses = conversationResponses;
-		windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level, conversationResponses);
+		windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level, conversationResponses,
+				talker);
 	}
 
 }

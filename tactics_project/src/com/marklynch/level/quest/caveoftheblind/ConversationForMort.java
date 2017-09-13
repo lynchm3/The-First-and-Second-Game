@@ -18,7 +18,6 @@ public class ConversationForMort extends Conversation {
 	ConversationPart conversationPartTheBlind;
 	ConversationPart conversationPartYoureInTheCaveOfTheBlind;
 	ConversationPart conversationPartImMort;
-	ConversationResponse conversationReponseEnd;
 
 	// You feed them?
 	ConversationResponse conversationResponseYouFeedThem;
@@ -103,8 +102,6 @@ public class ConversationForMort extends Conversation {
 
 		conversationPartImMort = new ConversationPart(new Object[] { "I'm Mort, this is my mine, don't touch my ore." },
 				new ConversationResponse[] {}, questCaveOfTheBlind.mort);
-
-		conversationReponseEnd = new ConversationResponse("Leave", null);
 
 		// You feed them?
 		conversationResponseYouFeedThem = new ConversationResponse("You feed them?", null);
@@ -206,7 +203,7 @@ public class ConversationForMort extends Conversation {
 		// FILL IN POINTERS
 		// opening
 		conversationPartopening.setConversationResponses(new ConversationResponse[] { conversationResponseWhoAreYou,
-				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind });
 
 		// opening responses
 		conversationResponseWhoAreYou.nextConversationPart = conversationPartImMort;
@@ -215,16 +212,15 @@ public class ConversationForMort extends Conversation {
 
 		// I'm Mort
 		conversationPartImMort.setConversationResponses(new ConversationResponse[] { conversationResponseWhoAreYou,
-				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind });
 
 		// You're in my mine
-		conversationPartYoureInTheCaveOfTheBlind.setConversationResponses(
-				new ConversationResponse[] { conversationResponseWhoAreYou, conversationResponseWhereAmI,
-						conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+		conversationPartYoureInTheCaveOfTheBlind.setConversationResponses(new ConversationResponse[] {
+				conversationResponseWhoAreYou, conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind });
 
 		// The blind
-		conversationPartTheBlind.setConversationResponses(
-				new ConversationResponse[] { conversationResponseYouFeedThem, conversationReponseEnd });
+		conversationPartTheBlind
+				.setConversationResponses(new ConversationResponse[] { conversationResponseYouFeedThem });
 
 		// You Feed them?
 		if (questCaveOfTheBlind.feedingDemoAvailable) {
@@ -236,33 +232,30 @@ public class ConversationForMort extends Conversation {
 		// Yup, wanna see?
 		conversationPartYupWannaSee.setConversationResponses(new ConversationResponse[] {
 				conversationResponseWhatDoYouFeedThem, conversationResponseShowMe, conversationResponseWhoAreYou,
-				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+				conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind });
 
 		// I already showed you!
-		conversationPartIAlreadyShowedYou.setConversationResponses(new ConversationResponse[] {
-				conversationResponseWhatDoYouFeedThem, conversationResponseWhoAreYou, conversationResponseWhereAmI,
-				conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+		conversationPartIAlreadyShowedYou.setConversationResponses(
+				new ConversationResponse[] { conversationResponseWhatDoYouFeedThem, conversationResponseWhoAreYou,
+						conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind });
 
 		// What do you feed them?
 		conversationResponseWhatDoYouFeedThem.nextConversationPart = conversationPartPun1;
 
 		// Pun 1
-		conversationPartPun1.setConversationResponses(
-				new ConversationResponse[] { conversationResponseDotDotDot1, conversationReponseEnd });
+		conversationPartPun1.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot1 });
 
 		// ... 1
 		conversationResponseDotDotDot1.nextConversationPart = conversationPartPun2;
 
 		// Pun 2
-		conversationPartPun2.setConversationResponses(
-				new ConversationResponse[] { conversationResponseDotDotDot2, conversationReponseEnd });
+		conversationPartPun2.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot2 });
 
 		// ... 2
 		conversationResponseDotDotDot2.nextConversationPart = conversationPartPun3;
 
 		// Pun 3
-		conversationPartPun3.setConversationResponses(
-				new ConversationResponse[] { conversationResponseDotDotDot3, conversationReponseEnd });
+		conversationPartPun3.setConversationResponses(new ConversationResponse[] { conversationResponseDotDotDot3 });
 
 		// ... 3
 		conversationResponseDotDotDot3.nextConversationPart = conversationPartPun4;
@@ -271,11 +264,11 @@ public class ConversationForMort extends Conversation {
 		if (questCaveOfTheBlind.feedingDemoAvailable) {
 			conversationPartPun4.setConversationResponses(new ConversationResponse[] {
 					conversationResponseWhatDoYouFeedThem, conversationResponseShowMe, conversationResponseWhoAreYou,
-					conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+					conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind });
 		} else {
-			conversationPartPun4.setConversationResponses(new ConversationResponse[] {
-					conversationResponseWhatDoYouFeedThem, conversationResponseWhoAreYou, conversationResponseWhereAmI,
-					conversationResponseTellMeAboutTheBlind, conversationReponseEnd });
+			conversationPartPun4.setConversationResponses(
+					new ConversationResponse[] { conversationResponseWhatDoYouFeedThem, conversationResponseWhoAreYou,
+							conversationResponseWhereAmI, conversationResponseTellMeAboutTheBlind });
 
 		}
 
@@ -283,7 +276,7 @@ public class ConversationForMort extends Conversation {
 		conversationResponseShowMe.nextConversationPart = illShowYou;
 
 		// I'll show you
-		illShowYou.setConversationResponses(new ConversationResponse[] { conversationReponseEnd });
+		illShowYou.setConversationResponses(new ConversationResponse[] {});
 
 		this.currentConversationPart = this.openingConversationPart;
 	}
