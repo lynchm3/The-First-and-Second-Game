@@ -16,7 +16,7 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
-import com.marklynch.level.conversation.WindowSelectConversationResponse;
+import com.marklynch.level.conversation.ConversationResponseDisplay;
 import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
@@ -772,7 +772,7 @@ public class UserInputLevel {
 			Game.level.openCloseInventory();
 			return;
 		} else if (Game.level.conversation != null) {
-			WindowSelectConversationResponse.buttonLeave.click();
+			ConversationResponseDisplay.buttonLeave.click();
 			return;
 		}
 
@@ -882,7 +882,7 @@ public class UserInputLevel {
 				}
 				controllingMenu = true;
 			} else if (Game.level.conversation != null) {
-				WindowSelectConversationResponse.buttonTrade.click();
+				ConversationResponseDisplay.buttonTrade.click();
 			} else {
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 					Level.ctrlActionHasBeenPressed = true;

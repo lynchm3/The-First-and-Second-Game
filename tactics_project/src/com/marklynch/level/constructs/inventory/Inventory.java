@@ -87,7 +87,7 @@ public class Inventory implements Draggable, Scrollable {
 	transient int actorWidth = 256;
 	transient static int bottomBorderHeight = 256;
 	transient static int topBorderHeight = 100;
-	transient private InventorySquare inventorySquareMouseIsOver;
+	transient InventorySquare inventorySquareMouseIsOver;
 
 	// Sort buttons
 	static LevelButton selectedSortButton;
@@ -152,6 +152,7 @@ public class Inventory implements Draggable, Scrollable {
 	public InventoryParent parent;
 	public GroundDisplay groundDisplay;
 	public Inventory otherInventory;
+	public static WeaponComparisonDisplay weaponComparisonDisplay;
 
 	public static float squaresWidth;
 	public static float squaresHeight;
@@ -171,6 +172,9 @@ public class Inventory implements Draggable, Scrollable {
 		for (GameObject gameObject : gameObjects) {
 			add(gameObject);
 		}
+
+		if (weaponComparisonDisplay == null)
+			weaponComparisonDisplay = new WeaponComparisonDisplay();
 
 	}
 
@@ -1265,6 +1269,8 @@ public class Inventory implements Draggable, Scrollable {
 					false, new Object[] { goldText });
 
 		}
+
+		weaponComparisonDisplay.drawStaticUI();
 
 	}
 

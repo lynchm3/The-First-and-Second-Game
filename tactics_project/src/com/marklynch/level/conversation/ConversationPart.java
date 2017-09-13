@@ -12,7 +12,7 @@ public class ConversationPart {
 	public Object[] text;
 	// int textWidth;
 	int halfTextWidth;
-	public WindowSelectConversationResponse windowSelectConversationResponse;
+	public ConversationResponseDisplay windowSelectConversationResponse;
 	public GameObject talker;
 
 	public ConversationPart(Object[] text, ConversationResponse[] conversationResponses, GameObject talker) {
@@ -24,7 +24,7 @@ public class ConversationPart {
 		// halfTextWidth = textWidth / 2;
 
 		// if (conversationResponses.length > 0)
-		windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level, conversationResponses,
+		windowSelectConversationResponse = new ConversationResponseDisplay(100, Game.level, conversationResponses,
 				talker);
 
 	}
@@ -69,7 +69,7 @@ public class ConversationPart {
 
 	public void setConversationResponses(ConversationResponse[] conversationResponses) {
 		this.conversationResponses = conversationResponses;
-		windowSelectConversationResponse = new WindowSelectConversationResponse(100, Game.level, conversationResponses,
+		windowSelectConversationResponse = new ConversationResponseDisplay(100, Game.level, conversationResponses,
 				talker);
 	}
 

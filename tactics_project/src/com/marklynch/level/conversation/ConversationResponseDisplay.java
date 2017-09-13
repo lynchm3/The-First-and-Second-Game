@@ -13,7 +13,7 @@ import com.marklynch.ui.button.LevelButton;
 
 import mdesl.graphics.Color;
 
-public class WindowSelectConversationResponse {
+public class ConversationResponseDisplay {
 
 	public Vector<LevelButton> buttons = new Vector<LevelButton>();
 	public static LevelButton buttonTrade;
@@ -38,7 +38,7 @@ public class WindowSelectConversationResponse {
 
 	GameObject talker;
 
-	public WindowSelectConversationResponse(float width, Level level, ConversationResponse[] conversationResponses,
+	public ConversationResponseDisplay(float width, Level level, ConversationResponse[] conversationResponses,
 			GameObject talker) {
 
 		this.conversationResponses = conversationResponses;
