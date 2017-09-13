@@ -40,8 +40,8 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 	@Override
 	public void update() {
 
-		if (1 == 1)
-			return;
+		// if (1 == 1)
+		// return;
 
 		actor.followersShouldFollow = true;
 

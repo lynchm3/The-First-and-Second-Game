@@ -683,6 +683,7 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public HashMap<String, Integer> itemTypeCount = new HashMap<String, Integer>();
+	public HashMap<String, Integer> illegalItemTypeCount = new HashMap<String, Integer>();
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("LOOT ALL [A]", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("STEAL ALL [A]", Color.RED) };
 
@@ -692,6 +693,7 @@ public class Inventory implements Draggable, Scrollable {
 			return;
 
 		itemTypeCount.clear();
+		illegalItemTypeCount.clear();
 
 		inventorySquares.clear();
 
@@ -710,15 +712,26 @@ public class Inventory implements Draggable, Scrollable {
 			if (gameObject.value == 0 && gameObject instanceof Gold)
 				continue;
 
-			if (itemTypeCount.containsKey(gameObject.name)) {
-				itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
+			// Legal items
+			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+				if (itemTypeCount.containsKey(gameObject.name)) {
+					itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
+				} else {
+					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
+					inventorySquare.gameObject = gameObject;
+					inventorySquares.add(inventorySquare);
+					itemTypeCount.put(gameObject.name, 1);
+				}
 
-			} else {
-
-				InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
-				inventorySquare.gameObject = gameObject;
-				inventorySquares.add(inventorySquare);
-				itemTypeCount.put(gameObject.name, 1);
+			} else {// Illegal items
+				if (illegalItemTypeCount.containsKey(gameObject.name)) {
+					illegalItemTypeCount.put(gameObject.name, illegalItemTypeCount.get(gameObject.name) + 1);
+				} else {
+					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
+					inventorySquare.gameObject = gameObject;
+					inventorySquares.add(inventorySquare);
+					illegalItemTypeCount.put(gameObject.name, 1);
+				}
 			}
 		}
 

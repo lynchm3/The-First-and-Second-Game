@@ -64,10 +64,12 @@ public class InventorySquare extends Square {
 		Texture squareTexture = WHITE_SQUARE;
 
 		// Red border on sqr if illegal to take
-		if (Inventory.inventoryMode != INVENTORY_MODE.MODE_TRADE
-				&& (inventoryThisBelongsTo == null || inventoryThisBelongsTo.parent != Game.level.player)
-				&& this.gameObject.owner != null && this.gameObject.owner != Game.level.player) {
-			squareTexture = RED_SQUARE;
+		if (this.gameObject.owner != null && this.gameObject.owner != Game.level.player) {
+			if (inventoryThisBelongsTo == null || inventoryThisBelongsTo.parent == Game.level.player) {
+				squareTexture = RED_SQUARE;
+			} else if (Inventory.inventoryMode != INVENTORY_MODE.MODE_TRADE) {
+				squareTexture = RED_SQUARE;
+			}
 		}
 
 		// Yellow border on sqr if item is equipped
@@ -102,10 +104,18 @@ public class InventorySquare extends Square {
 
 			// Count && value
 			int count = 1;
-			if (this instanceof GroundDisplaySquare)
-				count = GroundDisplay.itemTypeCount.get(gameObject.name);
-			else
-				count = this.inventoryThisBelongsTo.itemTypeCount.get(gameObject.name);
+			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+				if (this instanceof GroundDisplaySquare)
+					count = GroundDisplay.itemTypeCount.get(gameObject.name);
+				else
+					count = this.inventoryThisBelongsTo.itemTypeCount.get(gameObject.name);
+			} else {
+				if (this instanceof GroundDisplaySquare)
+					count = GroundDisplay.illegalItemTypeCount.get(gameObject.name);
+				else
+					count = this.inventoryThisBelongsTo.illegalItemTypeCount.get(gameObject.name);
+			}
+
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 
 				Color goldTextColor = Color.WHITE;

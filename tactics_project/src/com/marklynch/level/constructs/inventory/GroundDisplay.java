@@ -76,10 +76,12 @@ public class GroundDisplay implements Draggable, Scrollable {
 	}
 
 	public static HashMap<String, Integer> itemTypeCount = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> illegalItemTypeCount = new HashMap<String, Integer>();
 
 	public void matchGameObjectsToSquares() {
 
 		itemTypeCount.clear();
+		illegalItemTypeCount.clear();
 		groundDisplaySquares.clear();
 
 		int xIndex = 0;
@@ -90,19 +92,39 @@ public class GroundDisplay implements Draggable, Scrollable {
 			if (gameObject.value == 0 && gameObject instanceof Gold)
 				continue;
 
-			if (itemTypeCount.containsKey(gameObject.name)) {
-				itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
+			if (gameObject.value == 0 && gameObject instanceof Gold)
+				continue;
 
-			} else {
-				GroundDisplaySquare groundDisplaySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
-				groundDisplaySquare.gameObject = gameObject;
-				groundDisplaySquares.add(groundDisplaySquare);
-				xIndex++;
-				if (xIndex == this.squareGridWidthInSquares) {
-					xIndex = 0;
-					yIndex++;
+			// Legal items
+			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+				if (itemTypeCount.containsKey(gameObject.name)) {
+					itemTypeCount.put(gameObject.name, itemTypeCount.get(gameObject.name) + 1);
+				} else {
+					GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
+					inventorySquare.gameObject = gameObject;
+					groundDisplaySquares.add(inventorySquare);
+					itemTypeCount.put(gameObject.name, 1);
+					xIndex++;
+					if (xIndex == this.squareGridWidthInSquares) {
+						xIndex = 0;
+						yIndex++;
+					}
 				}
-				itemTypeCount.put(gameObject.name, 1);
+
+			} else {// Illegal items
+				if (illegalItemTypeCount.containsKey(gameObject.name)) {
+					illegalItemTypeCount.put(gameObject.name, illegalItemTypeCount.get(gameObject.name) + 1);
+				} else {
+					GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
+					inventorySquare.gameObject = gameObject;
+					groundDisplaySquares.add(inventorySquare);
+					illegalItemTypeCount.put(gameObject.name, 1);
+					xIndex++;
+					if (xIndex == this.squareGridWidthInSquares) {
+						xIndex = 0;
+						yIndex++;
+					}
+				}
 			}
 		}
 	}
