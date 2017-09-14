@@ -6,6 +6,7 @@ public class BestiaryKnowledge {
 
 	// general
 	public boolean name;
+	public boolean level;
 	public boolean image;
 	public boolean totalHealth;
 

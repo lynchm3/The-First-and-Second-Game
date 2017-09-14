@@ -102,10 +102,11 @@ public class AIRoutineForTrader extends AIRoutine {
 			} else {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_UPDATING_SIGN;
 				this.actor.thoughtBubbleImageTexture = trader.shopSign.imageTexture;
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(trader.shopSign.squareGameObjectIsOn);
 				if (trader.straightLineDistanceTo(trader.shopSign.squareGameObjectIsOn) < 2) {
 					new ActionWrite(trader, trader.shopSign, textForSign).perform();
 					shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
+				} else {
+					AIRoutineUtils.moveTowardsSquareToBeAdjacent(trader.shopSign.squareGameObjectIsOn);
 				}
 			}
 		}
