@@ -1199,19 +1199,19 @@ public class Level {
 		// Turn text
 		if (currentFactionMoving != null) {
 			TextUtils.printTextWithImages(Game.windowWidth - 150, 20, Integer.MAX_VALUE, true,
-					new Object[] { "TURN " + turn });
+					false, new Object[] { "TURN " + turn });
 		}
 
 		// Zoom
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 40, Integer.MAX_VALUE, true,
-				new Object[] { "Zoom " + Game.zoom });
+				false, new Object[] { "Zoom " + Game.zoom });
 
 		// FPS
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 60, Integer.MAX_VALUE, true,
-				new Object[] { "FPS " + Game.displayFPS });
+				false, new Object[] { "FPS " + Game.displayFPS });
 
 		// TIME
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, new Object[] { timeString });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, false, new Object[] { timeString });
 
 		// if (factions.size() > 0 && currentFactionMoving != null) {
 		// if (showTurnNotification) {

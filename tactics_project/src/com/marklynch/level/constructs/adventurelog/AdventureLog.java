@@ -93,7 +93,7 @@ public class AdventureLog implements Draggable, Scrollable {
 					// HIGHLIGHT
 				}
 				TextUtils.printTextWithImages(listX + listBorder,
-						listY + listBorder + questsDrawnInList * listItemHeight, Integer.MAX_VALUE, true,
+						listY + listBorder + questsDrawnInList * listItemHeight, Integer.MAX_VALUE, true, false,
 						new Object[] { quest.name });
 				questsDrawnInList++;
 
@@ -105,14 +105,14 @@ public class AdventureLog implements Draggable, Scrollable {
 		if (selectedQuest != null) {
 			for (Object pieceOfInfo : selectedQuest.info) {
 				TextUtils.printTextWithImages(contentX + contentBorder,
-						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true,
+						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true, true,
 						new Object[] { pieceOfInfo });
 				questTextsDrawn++;
 			}
 		}
 
 		if (questsDrawnInList == 0) {
-			TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, true, new Object[] { "NO QUESTS" });
+			TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, true, false, new Object[] { "NO QUESTS" });
 		} else {
 		}
 

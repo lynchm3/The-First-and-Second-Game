@@ -73,7 +73,7 @@ public class Window implements Draggable {
 		titleBarButton.draw();
 
 		// Title bar text
-		TextUtils.printTextWithImages(drawPositionX + 2, drawPositionY, width - 40, false, gameObject);
+		TextUtils.printTextWithImages(drawPositionX + 2, drawPositionY, width - 40, false, false, gameObject);
 
 		// Title bar buttons
 		this.closeButton.draw();

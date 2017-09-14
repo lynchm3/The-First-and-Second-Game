@@ -77,9 +77,9 @@ public class WeaponComparisonDisplay {
 
 		// Name
 		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.name), nameY, Integer.MAX_VALUE,
-				false, new Object[] { new StringWithColor("" + weapon1.name, color1) });
+				false, false, new Object[] { new StringWithColor("" + weapon1.name, color1) });
 		TextUtils.printTextWithImages(stats2X, nameY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon2.name, color2) });
+				false, new Object[] { new StringWithColor("" + weapon2.name, color2) });
 
 		// Slash Damage
 		if (weapon1.slashDamage == weapon2.slashDamage) {
@@ -93,9 +93,9 @@ public class WeaponComparisonDisplay {
 			color2 = Color.RED;
 		}
 		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.slashDamage), slashDamageY,
-				Integer.MAX_VALUE, false, new Object[] { new StringWithColor("" + weapon1.slashDamage, color1) });
+				Integer.MAX_VALUE, false, false, new Object[] { new StringWithColor("" + weapon1.slashDamage, color1) });
 		TextUtils.printTextWithImages(stats2X, slashDamageY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon2.slashDamage, color2) });
+				false, new Object[] { new StringWithColor("" + weapon2.slashDamage, color2) });
 
 		// Blunt Damage
 		if (weapon1.bluntDamage == weapon2.bluntDamage) {
@@ -109,9 +109,9 @@ public class WeaponComparisonDisplay {
 			color2 = Color.RED;
 		}
 		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.bluntDamage), bluntDamageY,
-				Integer.MAX_VALUE, false, new Object[] { new StringWithColor("" + weapon1.bluntDamage, color1) });
+				Integer.MAX_VALUE, false, false, new Object[] { new StringWithColor("" + weapon1.bluntDamage, color1) });
 		TextUtils.printTextWithImages(stats2X, bluntDamageY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon2.bluntDamage, color2) });
+				false, new Object[] { new StringWithColor("" + weapon2.bluntDamage, color2) });
 
 		// Pierce Damage
 		if (weapon1.pierceDamage == weapon2.pierceDamage) {
@@ -125,9 +125,9 @@ public class WeaponComparisonDisplay {
 			color2 = Color.RED;
 		}
 		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.pierceDamage), pierceDamageY,
-				Integer.MAX_VALUE, false, new Object[] { new StringWithColor("" + weapon1.pierceDamage, color1) });
+				Integer.MAX_VALUE, false, false, new Object[] { new StringWithColor("" + weapon1.pierceDamage, color1) });
 		TextUtils.printTextWithImages(stats2X, pierceDamageY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon2.pierceDamage, color2) });
+				false, new Object[] { new StringWithColor("" + weapon2.pierceDamage, color2) });
 
 		// Fire Damage
 		if (weapon1.fireDamage == weapon2.fireDamage) {
@@ -141,9 +141,9 @@ public class WeaponComparisonDisplay {
 			color2 = Color.RED;
 		}
 		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.fireDamage), fireDamageY,
-				Integer.MAX_VALUE, false, new Object[] { new StringWithColor("" + weapon1.fireDamage, color1) });
+				Integer.MAX_VALUE, false, false, new Object[] { new StringWithColor("" + weapon1.fireDamage, color1) });
 		TextUtils.printTextWithImages(stats2X, fireDamageY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon2.fireDamage, color2) });
+				false, new Object[] { new StringWithColor("" + weapon2.fireDamage, color2) });
 
 		// Water Damage
 		if (weapon1.waterDamage == weapon2.waterDamage) {
@@ -157,9 +157,9 @@ public class WeaponComparisonDisplay {
 			color2 = Color.RED;
 		}
 		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.waterDamage), waterDamageY,
-				Integer.MAX_VALUE, false, new Object[] { new StringWithColor("" + weapon1.waterDamage, color1) });
+				Integer.MAX_VALUE, false, false, new Object[] { new StringWithColor("" + weapon1.waterDamage, color1) });
 		TextUtils.printTextWithImages(stats2X, waterDamageY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon2.waterDamage, color2) });
+				false, new Object[] { new StringWithColor("" + weapon2.waterDamage, color2) });
 
 		// Electrical Damage
 		if (weapon1.electricalDamage == weapon2.electricalDamage) {
@@ -174,9 +174,9 @@ public class WeaponComparisonDisplay {
 		}
 		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.electricalDamage),
 				electricalDamageY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon1.electricalDamage, color1) });
+				false, new Object[] { new StringWithColor("" + weapon1.electricalDamage, color1) });
 		TextUtils.printTextWithImages(stats2X, electricalDamageY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon2.electricalDamage, color2) });
+				false, new Object[] { new StringWithColor("" + weapon2.electricalDamage, color2) });
 
 		// Posion Damage
 		if (weapon1.poisonDamage == weapon2.poisonDamage) {
@@ -190,9 +190,9 @@ public class WeaponComparisonDisplay {
 			color2 = Color.RED;
 		}
 		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.poisonDamage), poisonDamageY,
-				Integer.MAX_VALUE, false, new Object[] { new StringWithColor("" + weapon1.poisonDamage, color1) });
+				Integer.MAX_VALUE, false, false, new Object[] { new StringWithColor("" + weapon1.poisonDamage, color1) });
 		TextUtils.printTextWithImages(stats2X, poisonDamageY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon2.poisonDamage, color2) });
+				false, new Object[] { new StringWithColor("" + weapon2.poisonDamage, color2) });
 
 		// Range
 		if (weapon1.maxRange == weapon2.maxRange) {
@@ -206,9 +206,9 @@ public class WeaponComparisonDisplay {
 			color2 = Color.RED;
 		}
 		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.maxRange), rangeY,
-				Integer.MAX_VALUE, false, new Object[] { new StringWithColor("" + weapon1.maxRange, color1) });
+				Integer.MAX_VALUE, false, false, new Object[] { new StringWithColor("" + weapon1.maxRange, color1) });
 		TextUtils.printTextWithImages(stats2X, rangeY, Integer.MAX_VALUE, false,
-				new Object[] { new StringWithColor("" + weapon2.maxRange, color2) });
+				false, new Object[] { new StringWithColor("" + weapon2.maxRange, color2) });
 
 	}
 

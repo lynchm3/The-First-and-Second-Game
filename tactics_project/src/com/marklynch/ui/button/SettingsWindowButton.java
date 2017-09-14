@@ -41,15 +41,15 @@ public abstract class SettingsWindowButton extends Button {
 		if (enabled) {
 			if (down) {
 				QuadUtils.drawQuad(Color.BLACK, x, x + width, y, y + height);
-				TextUtils.printTextWithImages(x, y, Integer.MAX_VALUE, true, new Object[] { text });
+				TextUtils.printTextWithImages(x, y, Integer.MAX_VALUE, true, false, new Object[] { text });
 			} else {
 				QuadUtils.drawQuad(Color.DARK_GRAY, x, x + width, y, y + height);
-				TextUtils.printTextWithImages(x, y, 200, false, new Object[] { text });
+				TextUtils.printTextWithImages(x, y, 200, false, false, new Object[] { text });
 			}
 		} else {
 
 			QuadUtils.drawQuad(Color.RED, x, x + width, y, y + height);
-			TextUtils.printTextWithImages(x, y, 200, false, new Object[] { text });
+			TextUtils.printTextWithImages(x, y, 200, false, false, new Object[] { text });
 		}
 
 	}

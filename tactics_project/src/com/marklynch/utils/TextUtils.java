@@ -28,11 +28,13 @@ import mdesl.graphics.Texture;
 
 public class TextUtils {
 
-	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, Object... contents) {
-		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY, maxWidth, wrap);
+	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, boolean link,
+			Object... contents) {
+		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY, maxWidth, wrap, link);
 	}
 
-	public static void printTextWithImages(ArrayList contents, float posX, float posY, float maxWidth, boolean wrap) {
+	public static void printTextWithImages(ArrayList contents, float posX, float posY, float maxWidth, boolean wrap,
+			boolean link) {
 
 		if (contents == null)
 			return;
@@ -132,8 +134,9 @@ public class TextUtils {
 
 				float endX = posX + offsetX;
 
-				ActivityLogger.buttons.add(new Link(startX, posY + offsetY, endX, posY + offsetY + 20, null, null, "",
-						true, true, Color.WHITE, Color.WHITE, gameObject));
+				if (link)
+					ActivityLogger.buttons.add(new Link(startX, posY + offsetY, endX, posY + offsetY + 20, null, null,
+							"", true, true, Color.WHITE, Color.WHITE, gameObject));
 				// } else if (content instanceof Weapon || content instanceof
 				// WeaponTemplate) {
 				//

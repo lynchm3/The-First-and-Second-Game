@@ -186,7 +186,7 @@ public class Structure {
 		for (StructureRoom room : rooms) {
 			if (room.seenByPlayer)
 				TextUtils.printTextWithImages(room.x * Game.SQUARE_WIDTH, room.y * Game.SQUARE_HEIGHT, 100, true,
-						new Object[] { room.name });
+						false, new Object[] { room.name });
 		}
 
 	}

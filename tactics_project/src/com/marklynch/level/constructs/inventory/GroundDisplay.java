@@ -169,7 +169,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 	public void drawText() {
 
 		TextUtils.printTextWithImages(this.squaresX, Inventory.inventoryNamesY, 300f, true,
-				new Object[] { new StringWithColor("Items Nearby", Color.WHITE) });
+				false, new Object[] { new StringWithColor("Items Nearby", Color.WHITE) });
 
 	}
 
