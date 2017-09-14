@@ -18,10 +18,14 @@ public class AdventureLog implements Draggable, Scrollable {
 	public boolean showing = false;
 	public Quest selectedQuest = null;
 
-	int leftBarX;
-	int leftBarWidth;
+	int listX;
+	int listY;
+	int listBorder;
+	int listWidth;
 
 	int contentX;
+	int contentY;
+	int contentBorder;
 
 	int listItemHeight = 30;
 	public ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
@@ -31,10 +35,14 @@ public class AdventureLog implements Draggable, Scrollable {
 	}
 
 	public void resize() {
-		leftBarX = 0;
-		leftBarWidth = 300;
+		listX = 0;
+		listY = 0;
+		listBorder = 16;
+		listWidth = 300;
 
-		contentX = 300;
+		contentX = listX + listWidth + listBorder * 2;
+		contentY = 0;
+		contentBorder = 16;
 
 		listItemHeight = 30;
 
@@ -59,14 +67,32 @@ public class AdventureLog implements Draggable, Scrollable {
 		int questsDrawnInList = 0;
 		for (Quest quest : Level.quests) {
 			if (quest.started) {
-				TextUtils.printTextWithImages(leftBarX, questsDrawnInList * listItemHeight, Integer.MAX_VALUE, true,
+				if (selectedQuest == null)
+					selectedQuest = quest;
+				if (quest == selectedQuest) {
+					// HIGHLIGHT
+				}
+				TextUtils.printTextWithImages(listX + listBorder,
+						listY + listBorder + questsDrawnInList * listItemHeight, Integer.MAX_VALUE, true,
 						new Object[] { quest.name });
 				questsDrawnInList++;
+
 			}
+		}
+
+		int questTextsDrawn = 0;
+		if (selectedQuest != null) {
+			for (String textPart : selectedQuest.text) {
+				TextUtils.printTextWithImages(contentX + contentBorder,
+						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true,
+						new Object[] { textPart });
+			}
+			questTextsDrawn++;
 		}
 
 		if (questsDrawnInList == 0) {
 			TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, true, new Object[] { "NO QUESTS" });
+		} else {
 		}
 	}
 
