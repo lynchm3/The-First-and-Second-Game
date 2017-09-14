@@ -20,6 +20,8 @@ import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
+import com.marklynch.ui.ActivityLogger;
+import com.marklynch.ui.button.Link;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
@@ -95,6 +97,8 @@ public class TextUtils {
 
 			} else if (content instanceof GameObjectTemplate) {
 
+				float startX = posX + offsetX;
+
 				GameObjectTemplate gameObject = (GameObjectTemplate) content;
 
 				float textWidth = Game.font.getWidth(gameObject.name);
@@ -126,6 +130,10 @@ public class TextUtils {
 				TextureUtils.drawTexture(gameObject.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
 				offsetX += textureWidth;
 
+				float endX = posX + offsetX;
+
+				ActivityLogger.buttons.add(new Link(startX, posY + offsetY, endX, posY + offsetY + 20, null, null, "",
+						true, true, Color.WHITE, Color.WHITE, gameObject));
 				// } else if (content instanceof Weapon || content instanceof
 				// WeaponTemplate) {
 				//

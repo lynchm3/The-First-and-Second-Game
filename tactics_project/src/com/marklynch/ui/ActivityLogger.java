@@ -1,8 +1,10 @@
 package com.marklynch.ui;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.marklynch.Game;
+import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
@@ -13,9 +15,12 @@ public class ActivityLogger implements Draggable, Scrollable {
 	public float width = 420;
 	public float x = 0;
 	public float textOffsetY = 0;
+	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 	// public float
 
 	public void drawStaticUI() {
+
+		buttons.clear();
 
 		// Log
 		QuadUtils.drawQuad(Color.BLACK, x, x + width, 0, Game.windowHeight);
