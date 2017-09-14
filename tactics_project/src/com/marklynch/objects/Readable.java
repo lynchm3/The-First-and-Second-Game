@@ -1,5 +1,6 @@
 package com.marklynch.objects;
 
+import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.squares.Square;
@@ -12,6 +13,7 @@ import mdesl.graphics.Color;
 public class Readable extends GameObject {
 
 	Conversation conversation;
+	private ActionListener onReadListener;
 
 	public Readable(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
@@ -68,6 +70,17 @@ public class Readable extends GameObject {
 	public void setConversation(Conversation conversation) {
 		this.conversation = conversation;
 		conversation.openingConversationPart.talker = this;
+	}
+
+	public void setOnReadListener(ActionListener actionListener) {
+		this.onReadListener = actionListener;
+
+	}
+
+	public void wasRead() {
+		if (this.onReadListener != null) {
+			onReadListener.run();
+		}
 	}
 
 }

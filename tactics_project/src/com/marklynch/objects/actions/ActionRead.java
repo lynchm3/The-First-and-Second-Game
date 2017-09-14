@@ -3,7 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Readable;
 import com.marklynch.objects.units.Actor;
 
 public class ActionRead extends Action {
@@ -11,10 +11,10 @@ public class ActionRead extends Action {
 	public static final String ACTION_NAME = "Read";
 
 	public Actor performer;
-	public GameObject target;
+	public Readable target;
 
 	// Default for hostiles
-	public ActionRead(Actor reader, GameObject target) {
+	public ActionRead(Actor reader, Readable target) {
 		super(ACTION_NAME, "action_read.png");
 		this.performer = reader;
 		this.target = target;
@@ -31,6 +31,8 @@ public class ActionRead extends Action {
 			conversation.currentConversationPart = conversation.openingConversationPart;
 			Game.level.conversation = conversation;
 		}
+
+		target.wasRead();
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

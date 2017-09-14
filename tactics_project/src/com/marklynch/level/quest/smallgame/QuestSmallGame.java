@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
@@ -257,7 +258,7 @@ public class QuestSmallGame extends Quest {
 			hunter.quest = this;
 		}
 
-		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[106][8], "Hunt Action Plan",
+		final Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[106][8], "Hunt Action Plan",
 				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);
 
 		Chest chest = Templates.CHEST.makeCopy("Chest", Game.level.squares[103][1], false, null);
@@ -312,9 +313,23 @@ public class QuestSmallGame extends Quest {
 		setUpConversationReadyToGo();
 		setUpConversationYouDidntHelp();
 
-		info.add("In the staging area for the hunt I found the plan for the hunt");
-		info.add(huntingPlan);
-		info.add(superWolf);
+		huntingPlan.setOnReadListener(new ActionListener() {
+			@Override
+			public void run() {
+				if (!info.contains(huntingPlan)) {
+					if (!started) {
+						info.add("In the staging area for a hunt I found the plan for the hunt");
+						started = true;
+						turnStarted = turnUpdated = Level.turn;
+					} else {
+						info.add("In the staging area for the hunt I found the plan for the hunt");
+						turnStarted = turnUpdated = Level.turn;
+					}
+					info.add(huntingPlan);
+					info.add(superWolf);
+				}
+			}
+		});
 
 	}
 

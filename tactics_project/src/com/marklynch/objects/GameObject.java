@@ -35,12 +35,12 @@ import com.marklynch.objects.actions.ActionGiveItemsInInventory;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionInspect;
+import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionLootItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionPeek;
-import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionPourSpecificItem;
@@ -670,7 +670,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		// Readable
 		if (this instanceof Readable) {
-			actions.add(new ActionRead(performer, this));
+			actions.add(new ActionRead(performer, (Readable) this));
 		}
 
 		// Hiding place
