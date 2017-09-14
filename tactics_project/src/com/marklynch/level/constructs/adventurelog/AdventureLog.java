@@ -2,12 +2,16 @@ package com.marklynch.level.constructs.adventurelog;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
+
+import mdesl.graphics.Color;
 
 public class AdventureLog implements Draggable, Scrollable {
 
@@ -48,6 +52,10 @@ public class AdventureLog implements Draggable, Scrollable {
 	}
 
 	public void drawStaticUI() {
+
+		// Black cover
+		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
+
 		int questsDrawnInList = 0;
 		for (Quest quest : Level.quests) {
 			if (quest.started) {

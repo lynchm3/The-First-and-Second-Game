@@ -547,10 +547,11 @@ public class Level {
 	}
 
 	public void openCloseAdventureLog() {
+
 		if (adventureLog.showing) {
-			adventureLog.open();
-		} else {
 			adventureLog.close();
+		} else {
+			adventureLog.open();
 		}
 		closeAllPopups();
 	}
