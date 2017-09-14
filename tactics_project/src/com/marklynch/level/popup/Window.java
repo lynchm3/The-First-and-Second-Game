@@ -114,6 +114,10 @@ public class Window implements Draggable {
 		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(actor.templateId);
 
 		// Slash resistance
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + resistancesImageX,
+				drawPositionY + resistancesY, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 20);
 		if (bestiaryKnowledge.slashResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY, width - 40,
 					false, false, null, "" + gameObject.slashResistance);
@@ -125,6 +129,10 @@ public class Window implements Draggable {
 		}
 
 		// Blunt resistance
+
+		TextureUtils.drawTexture(getGlobalImage("action_blunt.png"), drawPositionX + resistancesImageX,
+				drawPositionY + resistancesY + 30, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 30 + 20);
 		if (bestiaryKnowledge.bluntResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 30,
 					width - 40, false, false, null, "" + gameObject.bluntResistance);
@@ -136,6 +144,10 @@ public class Window implements Draggable {
 		}
 
 		// Pierce resistance
+
+		TextureUtils.drawTexture(getGlobalImage("action_pierce.png"), drawPositionX + resistancesImageX,
+				drawPositionY + resistancesY + 60, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 60 + 20);
 		if (bestiaryKnowledge.pierceResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
 					width - 40, false, false, null, "" + gameObject.pierceResistance);
@@ -175,6 +187,10 @@ public class Window implements Draggable {
 		}
 
 		// Electric resistance
+
+		TextureUtils.drawTexture(getGlobalImage("action_electric.png"), drawPositionX + resistancesImageX,
+				drawPositionY + resistancesY + 150, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 150 + 20);
 		if (bestiaryKnowledge.electricResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
 					width - 40, false, false, null, "" + gameObject.electricResistance);

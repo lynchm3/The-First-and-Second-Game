@@ -112,12 +112,14 @@ public abstract class Action {
 	public static void loadActionImages() {
 		getGlobalImage("action_add_map_marker.png");
 		getGlobalImage("action_attack.png");
+		getGlobalImage("action_blunt.png");
 		getGlobalImage("action_burn.png");
 		getGlobalImage("action_chop.png");
 		getGlobalImage("action_close.png");
 		getGlobalImage("action_die.png");// untested
 		getGlobalImage("action_drop.png");
 		getGlobalImage("action_equip.png");
+		getGlobalImage("action_electric.png");
 		getGlobalImage("action_fill_container.png");
 		getGlobalImage("action_give.png");
 		getGlobalImage("action_heal.png");
@@ -130,6 +132,7 @@ public abstract class Action {
 		textureWalk = getGlobalImage("action_move.png");
 		getGlobalImage("action_open.png");
 		getGlobalImage("action_pet.png");
+		getGlobalImage("action_pierce.png");
 		getGlobalImage("action_pickpocket_all.png");// untested
 		getGlobalImage("action_pick_up.png");
 		getGlobalImage("action_posion.png");
@@ -141,6 +144,7 @@ public abstract class Action {
 		getGlobalImage("action_scream.png");// untested
 		textureEllipse = getGlobalImage("action_select_object.png");
 		getGlobalImage("action_search.png");
+		getGlobalImage("action_slash.png");
 		getGlobalImage("action_sleep.png");// untested
 		getGlobalImage("action_smash.png");
 		getGlobalImage("action_spot.png");// untested
