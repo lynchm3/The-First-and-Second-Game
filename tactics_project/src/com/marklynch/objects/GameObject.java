@@ -10,6 +10,7 @@ import org.lwjgl.util.Point;
 import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.level.constructs.animation.AnimationWait;
@@ -1293,8 +1294,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public static int generateNewTemplateId() {
 		currentTemplateIdCount++;
 
-		Game.level.player.bestiaryKnowledgeCollection.put(currentTemplateIdCount,
-				new BestiaryKnowledge(currentTemplateIdCount));
+		Level.bestiaryKnowledgeCollection.put(currentTemplateIdCount, new BestiaryKnowledge(currentTemplateIdCount));
 
 		return currentTemplateIdCount;
 	}

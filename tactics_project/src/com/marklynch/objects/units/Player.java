@@ -1,10 +1,8 @@
 package com.marklynch.objects.units;
 
-import java.util.HashMap;
-
-import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.utils.AIPath;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -21,7 +19,6 @@ public class Player extends Actor {
 	public static Square playerTargetSquare = null;
 	public static Actor playerTargetActor = null;
 	public static boolean playerFirstMove = false;
-	public HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
@@ -66,7 +63,7 @@ public class Player extends Actor {
 				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves, mightHaves,
 				templateId);
 
-		BestiaryKnowledge bestiaryKnowledge = Game.level.player.bestiaryKnowledgeCollection.get(templateId);
+		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(templateId);
 
 		bestiaryKnowledge.name = true;
 		bestiaryKnowledge.image = true;

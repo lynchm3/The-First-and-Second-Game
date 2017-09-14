@@ -7,6 +7,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
+import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
@@ -175,8 +176,6 @@ public class QuestSmallGame extends Quest {
 	public QuestSmallGame() {
 		super();
 
-		this.started = true;
-
 		name = "SMALL GAME";
 		currentObjective = "CURRENT OBJECTIVE";
 
@@ -320,13 +319,20 @@ public class QuestSmallGame extends Quest {
 					if (!started) {
 						info.add("In the staging area for a hunt I found the plan for the hunt");
 						started = true;
-						turnStarted = turnUpdated = Level.turn;
+						turnStarted = Level.turn;
 					} else {
 						info.add("In the staging area for the hunt I found the plan for the hunt");
-						turnStarted = turnUpdated = Level.turn;
 					}
+					turnUpdated = Level.turn;
 					info.add(huntingPlan);
 					info.add(superWolf);
+
+					BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
+					bestiaryKnowledge.name = true;
+					bestiaryKnowledge.image = true;
+					bestiaryKnowledge.fireResistance = true;
+					bestiaryKnowledge.waterResistance = true;
+
 				}
 			}
 		});

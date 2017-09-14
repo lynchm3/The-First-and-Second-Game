@@ -1,7 +1,10 @@
 package com.marklynch.level.popup;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
+import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -19,13 +22,15 @@ public class Window implements Draggable {
 	public boolean minimised = false;
 	public float drawPositionX, drawPositionY;
 	public LevelButton closeButton, minimiseButton, titleBarButton;
+	public int titleBarHeight = 20;
+	public int borderWidth = 2;
 
 	public Window(GameObject gameObject) {
 		this.gameObject = gameObject;
 		drawPositionX = 500;
 		drawPositionY = 10;
-		this.width = gameObject.imageTexture.getWidth();
-		this.height = gameObject.imageTexture.getHeight();
+		this.width = gameObject.imageTexture.getWidth() + borderWidth * 2;
+		this.height = gameObject.imageTexture.getHeight() + titleBarHeight + borderWidth;
 
 		closeButton = new LevelButton(drawPositionX + width - 20, drawPositionY, 20f, 20f, "end_turn_button.png",
 				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE);
@@ -65,8 +70,27 @@ public class Window implements Draggable {
 			// Background
 			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
 			// Image
-			TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX, drawPositionY, drawPositionX + width,
-					drawPositionY + height);
+			TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
+					drawPositionY + titleBarHeight, drawPositionX + width - borderWidth,
+					drawPositionY + height - borderWidth);
+
+			if (gameObject instanceof Actor) {
+				// System.out.println("Actor");
+				Actor actor = (Actor) gameObject;
+				BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(actor.templateId);
+				if (bestiaryKnowledge.fireResistance) {
+					TextUtils.printTextWithImages(drawPositionX + borderWidth,
+							drawPositionY + titleBarHeight + borderWidth, width - 40, false, false, null,
+							"" + gameObject.fireResistance);
+
+				}
+				if (bestiaryKnowledge.waterResistance) {
+					TextUtils.printTextWithImages(drawPositionX + borderWidth,
+							drawPositionY + titleBarHeight + borderWidth + 20, width - 40, false, false, null,
+							"" + gameObject.waterResistance);
+
+				}
+			}
 		}
 
 		// Titlebar

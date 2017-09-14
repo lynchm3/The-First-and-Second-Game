@@ -3,6 +3,7 @@ package com.marklynch.level;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 import java.util.Vector;
 
@@ -16,6 +17,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.ai.utils.Move;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.adventurelog.AdventureLog;
+import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
@@ -108,6 +110,7 @@ public class Level {
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 	public static transient ArrayList<Quest> quests = new ArrayList<Quest>();
 	public static transient AdventureLog adventureLog = new AdventureLog();
+	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
 
 	// public Vector<Actor> actors;
 	public transient Player player;
