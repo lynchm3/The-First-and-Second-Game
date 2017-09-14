@@ -514,10 +514,12 @@ public class Editor {
 		// Game.level.structures.add(new Building("Hunting Lodge", 7, 7, 11, 11,
 		// doorLocations2));
 
-		QuestCaveOfTheBlind questCaveOfTheBlind = new QuestCaveOfTheBlind();
-		QuestThePigs questThePigs = new QuestThePigs();
-		QuestBetweenTheWalls questBetweenTheWalls = new QuestBetweenTheWalls();
-		QuestTheSecretRoom questSecretRoom = new QuestTheSecretRoom();
+		Level.quests.clear();
+		Level.quests.add(new QuestSmallGame());
+		Level.quests.add(new QuestCaveOfTheBlind());
+		Level.quests.add(new QuestThePigs());
+		Level.quests.add(new QuestBetweenTheWalls());
+		Level.quests.add(new QuestTheSecretRoom());
 
 		// Add a game object
 		Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);
@@ -538,8 +540,6 @@ public class Editor {
 				new FactionRelationship(-100, Game.level.factions.get(0), Game.level.factions.get(1)));
 		Game.level.factions.get(1).relationships.put(Game.level.factions.get(0),
 				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
-
-		QuestSmallGame questSmallGame = new QuestSmallGame();
 
 		// Decorations
 		// Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");

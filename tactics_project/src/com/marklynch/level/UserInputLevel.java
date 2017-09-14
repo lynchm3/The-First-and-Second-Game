@@ -111,6 +111,12 @@ public class UserInputLevel {
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
 
 		// Setting the draggable
+
+		if (draggableMouseIsOver == null && scrollableMouseIsOver == null && Level.adventureLog.showing) {
+			draggableMouseIsOver = Level.adventureLog;
+			scrollableMouseIsOver = Level.adventureLog;
+		}
+
 		if (draggableMouseIsOver == null && scrollableMouseIsOver == null && inventoriesOpen) {
 			draggableMouseIsOver = Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
 					(int) Game.windowHeight - Mouse.getY());
@@ -227,7 +233,8 @@ public class UserInputLevel {
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
-		if (Game.level.openInventories.size() > 0) {
+		if (Level.adventureLog.showing) {
+		} else if (Game.level.openInventories.size() > 0) {
 			InventorySquare inventorySquareMouseIsOver = Game.level.openInventories.get(0)
 					.getInventorySquareMouseIsOver(mouseXinPixels, mouseYinPixels);
 			Game.squareMouseIsOver = inventorySquareMouseIsOver;
@@ -354,6 +361,8 @@ public class UserInputLevel {
 			} else if (Game.buttonHoveringOver != null) {
 				// Click button
 				Game.buttonHoveringOver.click();
+			} else if (Level.adventureLog.showing) {
+
 			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
 			} else if (Game.popupTextBoxHoveringOver != null) {
@@ -382,7 +391,8 @@ public class UserInputLevel {
 			if (Game.windowHoveringOver != null)
 				Game.windowHoveringOver.bringToFront();
 
-			if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
+			if (Level.adventureLog.showing) {
+			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
 			} else if (Game.level.popupTextBoxes.size() != 0) {
 
@@ -520,6 +530,8 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			return;
+		} else if (Level.adventureLog.showing) {
+			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
 		} else if (Game.level.conversation != null) {
@@ -555,6 +567,8 @@ public class UserInputLevel {
 		}
 
 		if (Game.level.popupTextBoxes.size() != 0) {
+			return;
+		} else if (Level.adventureLog.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -598,6 +612,8 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			return;
+		} else if (Level.adventureLog.showing) {
+			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
 		} else if (Game.level.conversation != null) {
@@ -639,6 +655,8 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.get(0).moveCaretLeft();
+			return;
+		} else if (Level.adventureLog.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -687,6 +705,8 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.get(0).moveCaretRight();
+			return;
+		} else if (Level.adventureLog.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -768,7 +788,9 @@ public class UserInputLevel {
 		Level.closeAllPopups();
 		Game.level.popupTextBoxes.clear();
 		Game.level.popupToasts.clear();
-		if (Game.level.openInventories.size() != 0) {
+		if (Level.adventureLog.showing) {
+			Game.level.openCloseAdventureLog();
+		} else if (Game.level.openInventories.size() != 0) {
 			Game.level.openCloseInventory();
 			return;
 		} else if (Game.level.conversation != null) {
@@ -823,6 +845,11 @@ public class UserInputLevel {
 			return;
 		}
 
+		if (character == 'l' || character == 'L') {
+			Game.level.openCloseAdventureLog();
+			return;
+		}
+
 		if (character == 'i' || character == 'I') {
 			Game.level.openCloseInventory();
 			return;
@@ -874,7 +901,9 @@ public class UserInputLevel {
 			}
 			upPressed(true, false);
 		} else if (character == 'a' || character == 'A') {
-			if (Game.level.openInventories.size() > 0) {
+			if (Level.adventureLog.showing) {
+
+			} else if (Game.level.openInventories.size() > 0) {
 				if (Inventory.buttons.contains(Inventory.buttonLootAll)) {
 					Inventory.buttonLootAll.click();
 				} else if (Inventory.buttons.contains(Inventory.buttonQuickSell)) {

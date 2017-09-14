@@ -1,13 +1,21 @@
 package com.marklynch.level.quest;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;
 
 public class Quest {
 
-	String questName;
-	String questCurrentObjective;
-	String questText;
+	public String name;
+	public String currentObjective;
+	public ArrayList<String> objectives = new ArrayList<String>();
+	public ArrayList<String> text = new ArrayList<String>();
+	public ArrayList<Conversation> conversationLog = new ArrayList<Conversation>();
+	public boolean started = false;
+	public boolean resolved = false;
+	public int turnStarted;
+	public int turnUpdated;
 
 	// Called once per cycle
 	public void update() {

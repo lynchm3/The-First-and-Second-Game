@@ -15,6 +15,7 @@ import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.ai.utils.Move;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.adventurelog.AdventureLog;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
@@ -38,6 +39,7 @@ import com.marklynch.level.popup.PopupMenuSelectObject;
 import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.level.popup.PopupToast;
 import com.marklynch.level.popup.Window;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -103,6 +105,8 @@ public class Level {
 	public transient Script script;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
+	public static transient ArrayList<Quest> quests = new ArrayList<Quest>();
+	public static transient AdventureLog adventureLog = new AdventureLog();
 
 	// public Vector<Actor> actors;
 	public transient Player player;
@@ -428,6 +432,18 @@ public class Level {
 		inventoryButton.enabled = true;
 		buttons.add(inventoryButton);
 
+		// UI buttons
+		Button adventureLogButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "ADVENTURES [L]", false, false, Color.BLACK, Color.WHITE);
+		adventureLogButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				openCloseAdventureLog();
+			}
+		});
+		adventureLogButton.enabled = true;
+		buttons.add(adventureLogButton);
+
 		centerButton = new LevelButton(110f, 440f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
 				"CENTER [Q]", false, false, Color.BLACK, Color.WHITE);
 		centerButton.setClickListener(new ClickListener() {
@@ -526,6 +542,15 @@ public class Level {
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, false);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 			// Game.level.openInventories.add(Game.level.player.inventory);
+		}
+		closeAllPopups();
+	}
+
+	public void openCloseAdventureLog() {
+		if (adventureLog.showing) {
+			adventureLog.open();
+		} else {
+			adventureLog.close();
 		}
 		closeAllPopups();
 	}
@@ -1207,12 +1232,15 @@ public class Level {
 		else // if (showLog)
 
 		{
-
 			activityLogger.drawStaticUI();
 		}
 
 		// script
 		script.draw();
+
+		if (adventureLog.showing) {
+			adventureLog.drawStaticUI();
+		}
 
 		for (Inventory inventory : openInventories) {
 			inventory.drawStaticUI();
@@ -1435,6 +1463,8 @@ public class Level {
 			}
 		} else if (Game.level.popupTextBoxes.size() != 0) {
 			return;
+		} else if (adventureLog.showing) {
+			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
 		} else if (Game.level.conversation != null) {
@@ -1501,6 +1531,15 @@ public class Level {
 
 		if (this.popupTextBoxes.size() != 0)
 			return null;
+
+		if (adventureLog.showing) {
+			for (Button button : adventureLog.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
+			return null;
+
+		}
 
 		for (Inventory inventory : openInventories) {
 			for (Button button : inventory.buttons) {
@@ -1901,6 +1940,8 @@ public class Level {
 	public void resize() {
 		if (openInventories.size() != 0)
 			openInventories.get(0).resize1();
+		if (adventureLog.showing)
+			adventureLog.resize();
 
 		if (conversation != null)
 			conversation.resize();

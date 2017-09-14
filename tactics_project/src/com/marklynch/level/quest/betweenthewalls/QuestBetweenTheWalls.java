@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
 import com.marklynch.level.constructs.requirementtomeet.StatRequirementToMeet;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
@@ -19,7 +20,7 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.units.Actor;
 
-public class QuestBetweenTheWalls {
+public class QuestBetweenTheWalls extends Quest {
 
 	public QuestBetweenTheWalls() {
 

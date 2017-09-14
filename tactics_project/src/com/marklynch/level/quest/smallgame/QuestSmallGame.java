@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -167,8 +168,14 @@ public class QuestSmallGame extends Quest {
 
 	public static Actor hunter;
 
+	String questTextTheHuntersAreGoingOnAHunt = "I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge";
+	String questTextOnOurWay = "I'm following the hunters to the beasts lair";
+
 	public QuestSmallGame() {
 		super();
+
+		name = "SMALL GAME";
+		currentObjective = "CURRENT OBJECTIVE";
 
 		squareBehindLodge = Game.level.squares[112][9];
 		huntPlanningArea = Game.level.squares[105][8];
@@ -243,10 +250,10 @@ public class QuestSmallGame extends Quest {
 		hunterPack = new Group("Hunting Party", hunterBrent, hunterBront1, hunterBront2, hunterBront3, hunterBront4,
 				hunterBront5, hunterBront6);
 
-		// this.hunterPack.quest = this;
-		// for (GameObject hunter : hunterPack.getMembers()) {
-		// hunter.quest = this;
-		// }
+		this.hunterPack.quest = this;
+		for (GameObject hunter : hunterPack.getMembers()) {
+			hunter.quest = this;
+		}
 
 		Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[106][8], "Hunt Action Plan",
 				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);
@@ -525,6 +532,15 @@ public class QuestSmallGame extends Quest {
 				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
 				// PACK HUNTERS"
 				questAcceptedFromHunters = true;
+				if (!started) {
+					started = true;
+					turnStarted = turnUpdated = Level.turn;
+				}
+
+				if (!text.contains(questTextTheHuntersAreGoingOnAHunt)) {
+					QuestSmallGame.this.text.add(questTextTheHuntersAreGoingOnAHunt);
+				}
+
 			}
 		};
 

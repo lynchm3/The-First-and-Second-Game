@@ -9,6 +9,7 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
@@ -18,7 +19,7 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.units.Actor;
 
-public class QuestTheSecretRoom {
+public class QuestTheSecretRoom extends Quest {
 
 	public QuestTheSecretRoom() {
 
