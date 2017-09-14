@@ -2,8 +2,6 @@ package com.marklynch.script;
 
 import java.util.ArrayList;
 
-import mdesl.graphics.Color;
-
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -14,6 +12,8 @@ import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
+
+import mdesl.graphics.Color;
 
 public class ScriptEventSpeech extends ScriptEvent {
 
@@ -131,7 +131,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 				// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128,
 				// 128);
-				TextUtils.printTextWithImages(text, textX1, textY1, 200, true, false);
+				TextUtils.printTextWithImages(text, textX1, textY1, 200, true, false, null);
 
 				// reset the matrix to identity, i.e. "no camera transform"
 
@@ -153,8 +153,8 @@ public class ScriptEventSpeech extends ScriptEvent {
 						alpha = 0.5f;
 					}
 					if (directions.get(i).equals(true)) {
-						TextureUtils.drawTexture(actors.get(i).imageTexture, alpha, positions.get(i),
-								posY, positions.get(i) + 256, posY + 256);
+						TextureUtils.drawTexture(actors.get(i).imageTexture, alpha, positions.get(i), posY,
+								positions.get(i) + 256, posY + 256);
 					} else {
 						TextureUtils.drawTextureBackwards(actors.get(i).imageTexture, alpha,
 								Game.windowWidth - positions.get(i) - 256, posY, Game.windowWidth - positions.get(i),
@@ -170,7 +170,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 				// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128,
 				// 128);
-				TextUtils.printTextWithImages(text, textX1, posY, width, true, false);
+				TextUtils.printTextWithImages(text, textX1, posY, width, true, false, null);
 			}
 		}
 

@@ -2,12 +2,12 @@ package com.marklynch.script;
 
 import java.util.ArrayList;
 
-import mdesl.graphics.Color;
-
 import com.marklynch.Game;
 import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
+
+import mdesl.graphics.Color;
 
 public class ScriptEventEndLevel extends ScriptEvent {
 
@@ -56,7 +56,7 @@ public class ScriptEventEndLevel extends ScriptEvent {
 			width = 100;
 
 		// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128, 128);
-		TextUtils.printTextWithImages(text, textX1, posY, width, true, false);
+		TextUtils.printTextWithImages(text, textX1, posY, width, true, false, null);
 	}
 
 	@Override

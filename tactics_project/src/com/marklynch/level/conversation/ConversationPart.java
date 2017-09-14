@@ -1,12 +1,16 @@
 package com.marklynch.level.conversation;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class ConversationPart {
+	public static ArrayList<LevelButton> links = new ArrayList<LevelButton>();
 
 	protected ConversationResponse[] conversationResponses;
 	public Object[] text;
@@ -58,12 +62,14 @@ public class ConversationPart {
 
 	public void drawStaticUI2() {
 
+		links.clear();
+
 		float topMargin = 25;
 		float maxWidth = Game.windowWidth;
 		float x1 = Game.halfWindowWidth - halfTextWidth;
 		float y1 = Game.windowHeight - Conversation.bottomMargin - Conversation.height + topMargin;
 
-		TextUtils.printTextWithImages(x1, y1, maxWidth, true, true, null, text);
+		TextUtils.printTextWithImages(x1, y1, maxWidth, true, true, links, text);
 
 	}
 

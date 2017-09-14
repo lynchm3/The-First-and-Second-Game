@@ -32,6 +32,7 @@ import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.popup.PopupMenu;
 import com.marklynch.level.popup.PopupMenuActionButton;
 import com.marklynch.level.popup.PopupMenuSelectAction;
@@ -1568,6 +1569,10 @@ public class Level {
 
 		if (conversation != null) {
 			for (Button button : conversation.currentConversationPart.windowSelectConversationResponse.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
+			for (Button button : ConversationPart.links) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
