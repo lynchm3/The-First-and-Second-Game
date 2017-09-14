@@ -1,8 +1,12 @@
 package com.marklynch.objects.units;
 
+import java.util.HashMap;
+
+import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -17,6 +21,7 @@ public class Player extends Actor {
 	public static Square playerTargetSquare = null;
 	public static Actor playerTargetActor = null;
 	public static boolean playerFirstMove = false;
+	public HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
@@ -60,6 +65,32 @@ public class Player extends Actor {
 				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
 				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves, mightHaves,
 				templateId);
+
+		BestiaryKnowledge bestiaryKnowledge = Game.level.player.bestiaryKnowledgeCollection.get(templateId);
+
+		bestiaryKnowledge.name = true;
+		bestiaryKnowledge.image = true;
+		bestiaryKnowledge.totalHealth = true;
+
+		// Damage
+		bestiaryKnowledge.slashDamage = true;
+		bestiaryKnowledge.bluntDamage = true;
+		bestiaryKnowledge.pierceDamage = true;
+		bestiaryKnowledge.fireDamage = true;
+		bestiaryKnowledge.waterDamage = true;
+		bestiaryKnowledge.electricDamage = true;
+		bestiaryKnowledge.poisonDamage = true;
+		bestiaryKnowledge.range = true;
+
+		// Resistances
+		bestiaryKnowledge.slashResistance = true;
+		bestiaryKnowledge.bluntResistance = true;
+		bestiaryKnowledge.pierceResistance = true;
+		bestiaryKnowledge.fireResistance = true;
+		bestiaryKnowledge.waterResistance = true;
+		bestiaryKnowledge.electricResistance = true;
+		bestiaryKnowledge.poisonResistance = true;
+
 		return actor;
 	}
 
