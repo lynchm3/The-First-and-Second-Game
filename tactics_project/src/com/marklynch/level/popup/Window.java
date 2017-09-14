@@ -126,75 +126,75 @@ public class Window implements Draggable {
 
 		// Blunt resistance
 		if (bestiaryKnowledge.bluntResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 20,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 30,
 					width - 40, false, false, null, "" + gameObject.bluntResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 20,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 30,
 					width - 40, false, false, null, unknownStats);
 
 		}
 
 		// Pierce resistance
 		if (bestiaryKnowledge.pierceResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 40,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
 					width - 40, false, false, null, "" + gameObject.pierceResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 40,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
 					width - 40, false, false, null, unknownStats);
 
 		}
 
 		// Fire resistance
 		TextureUtils.drawTexture(getGlobalImage("action_burn.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 60, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 60 + 20);
+				drawPositionY + resistancesY + 90, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 90 + 20);
 		if (bestiaryKnowledge.fireResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
 					width - 40, false, false, null, "" + gameObject.fireResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
 					width - 40, false, false, null, unknownStats);
 
 		}
 
 		// Water resistance
 		TextureUtils.drawTexture(getGlobalImage("action_douse.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 80, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 80 + 20);
+				drawPositionY + resistancesY + 120, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 120 + 20);
 		if (bestiaryKnowledge.waterResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 80,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
 					width - 40, false, false, null, "" + gameObject.waterResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 80,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
 					width - 40, false, false, null, unknownStats);
 
 		}
 
 		// Electric resistance
 		if (bestiaryKnowledge.electricResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 100,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
 					width - 40, false, false, null, "" + gameObject.electricResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 100,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
 					width - 40, false, false, null, unknownStats);
 
 		}
 
 		// Poison resistance
 		TextureUtils.drawTexture(getGlobalImage("action_poison.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 120, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 120 + 20);
+				drawPositionY + resistancesY + 180, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 180 + 20);
 		if (bestiaryKnowledge.poisonResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
 					width - 40, false, false, null, "" + gameObject.poisonResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
 					width - 40, false, false, null, unknownStats);
 
 		}
