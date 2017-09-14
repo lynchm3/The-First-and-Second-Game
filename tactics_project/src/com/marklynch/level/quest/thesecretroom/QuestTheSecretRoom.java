@@ -118,7 +118,7 @@ public class QuestTheSecretRoom extends Quest {
 		// Signpost 5,20
 		Sign signpost = Templates.SIGNPOST.makeCopy(Game.level.squares[5][20], "Signpost",
 
-				new Object[] { GameObject.upTexture, " Shop, Hunter's Lodge  ", GameObject.rightTexture, " Estates  ",
+				new Object[] { GameObject.upTexture, " Shop  ", GameObject.rightTexture, " Estates  ",
 						GameObject.downTexture, " Farm" },
 				null);
 
