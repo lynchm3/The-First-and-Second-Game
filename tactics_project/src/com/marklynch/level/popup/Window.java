@@ -19,11 +19,14 @@ public class Window implements Draggable {
 	public GameObject gameObject;
 	public float width;
 	public float height;
+	public float resistancesX;
+	public float resistancesY;
 	public boolean minimised = false;
 	public float drawPositionX, drawPositionY;
 	public LevelButton closeButton, minimiseButton, titleBarButton;
 	public int titleBarHeight = 20;
 	public int borderWidth = 2;
+	public static Object[] unknownStats = new Object[] { "??" };
 
 	public Window(GameObject gameObject) {
 		this.gameObject = gameObject;
@@ -31,6 +34,8 @@ public class Window implements Draggable {
 		drawPositionY = 10;
 		this.width = gameObject.imageTexture.getWidth() + borderWidth * 2;
 		this.height = gameObject.imageTexture.getHeight() + titleBarHeight + borderWidth;
+		resistancesX = borderWidth;
+		resistancesY = titleBarHeight + borderWidth;
 
 		closeButton = new LevelButton(drawPositionX + width - 20, drawPositionY, 20f, 20f, "end_turn_button.png",
 				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE);
@@ -76,20 +81,8 @@ public class Window implements Draggable {
 
 			if (gameObject instanceof Actor) {
 				// System.out.println("Actor");
-				Actor actor = (Actor) gameObject;
-				BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(actor.templateId);
-				if (bestiaryKnowledge.fireResistance) {
-					TextUtils.printTextWithImages(drawPositionX + borderWidth,
-							drawPositionY + titleBarHeight + borderWidth, width - 40, false, false, null,
-							"" + gameObject.fireResistance);
 
-				}
-				if (bestiaryKnowledge.waterResistance) {
-					TextUtils.printTextWithImages(drawPositionX + borderWidth,
-							drawPositionY + titleBarHeight + borderWidth + 20, width - 40, false, false, null,
-							"" + gameObject.waterResistance);
-
-				}
+				drawResistances((Actor) gameObject);
 			}
 		}
 
@@ -111,6 +104,88 @@ public class Window implements Draggable {
 			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionX + width, drawPositionY + height - 2,
 					drawPositionY + height);
 		}
+	}
+
+	private void drawResistances(Actor actor) {
+		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(actor.templateId);
+
+		// Slash resistance
+		if (bestiaryKnowledge.slashResistance) {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY, width - 40, false,
+					false, null, "" + gameObject.slashResistance);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY, width - 40, false,
+					false, null, unknownStats);
+
+		}
+
+		// Blunt resistance
+		if (bestiaryKnowledge.bluntResistance) {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 20, width - 40,
+					false, false, null, "" + gameObject.bluntResistance);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 20, width - 40,
+					false, false, null, unknownStats);
+
+		}
+
+		// Pierce resistance
+		if (bestiaryKnowledge.pierceResistance) {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 40, width - 40,
+					false, false, null, "" + gameObject.pierceResistance);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 40, width - 40,
+					false, false, null, unknownStats);
+
+		}
+
+		// Fire resistance
+		if (bestiaryKnowledge.fireResistance) {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 60, width - 40,
+					false, false, null, "" + gameObject.fireResistance);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 60, width - 40,
+					false, false, null, unknownStats);
+
+		}
+
+		// Water resistance
+		if (bestiaryKnowledge.waterResistance) {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 80, width - 40,
+					false, false, null, "" + gameObject.waterResistance);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 80, width - 40,
+					false, false, null, unknownStats);
+
+		}
+
+		// Electric resistance
+		if (bestiaryKnowledge.electricResistance) {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 100, width - 40,
+					false, false, null, "" + gameObject.electricResistance);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 100, width - 40,
+					false, false, null, unknownStats);
+
+		}
+
+		// Poison resistance
+		if (bestiaryKnowledge.poisonResistance) {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 120, width - 40,
+					false, false, null, "" + gameObject.poisonResistance);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + resistancesX, drawPositionY + resistancesY + 120, width - 40,
+					false, false, null, unknownStats);
+
+		}
+
 	}
 
 	public boolean mouseOverCloseButton(float mouseX, float mouseY) {

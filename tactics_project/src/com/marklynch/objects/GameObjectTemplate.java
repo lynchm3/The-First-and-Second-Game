@@ -50,11 +50,13 @@ public class GameObjectTemplate implements InventoryParent {
 	public float lightHandleX;
 	public float lightHandlY;
 	public boolean stackable;
+	public float slashResistance;
+	public float bluntResistance;
+	public float pierceResistance;
 	public float fireResistance;
 	public float waterResistance;
 	public float electricResistance;
 	public float poisonResistance;
-	public float slashResistance;
 
 	public float weight;
 
