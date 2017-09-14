@@ -281,7 +281,7 @@ public class AttributesDialog {
 
 		QuadUtils.drawQuad(Color.WHITE, x, x + 200, y, y + 30);
 
-		TextUtils.printTextWithImages(x, y, 200, true, false, new Object[] { new StringWithColor(title, Color.BLACK) });
+		TextUtils.printTextWithImages(x, y, 200, true, false, null, new Object[] { new StringWithColor(title, Color.BLACK) });
 
 		for (AtributesWindowButton button : buttons) {
 			button.draw();

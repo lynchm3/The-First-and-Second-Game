@@ -15,12 +15,11 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
-import com.marklynch.ui.ActivityLogger;
+import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
 
 import mdesl.graphics.Color;
@@ -29,12 +28,13 @@ import mdesl.graphics.Texture;
 public class TextUtils {
 
 	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, boolean link,
-			Object... contents) {
-		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY, maxWidth, wrap, link);
+			ArrayList<LevelButton> arrayToAddLinksTo, Object... contents) {
+		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY, maxWidth, wrap, link,
+				arrayToAddLinksTo);
 	}
 
 	public static void printTextWithImages(ArrayList contents, float posX, float posY, float maxWidth, boolean wrap,
-			boolean link) {
+			boolean link, ArrayList<LevelButton> arrayToAddLinksTo) {
 
 		if (contents == null)
 			return;
@@ -116,15 +116,11 @@ public class TextUtils {
 					}
 				}
 
-				// Name
-				// Game.activeBatch.setColor(Color.BLACK);
-				if (gameObject instanceof Actor) {
-					Actor actor = (Actor) gameObject;
-					// Game.activeBatch.setColor(actor.faction.color);
-					Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
-				} else {
-					Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
-				}
+				if (link)
+					Game.activeBatch.setColor(Color.YELLOW);
+
+				Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
+
 				offsetX += textWidth;
 
 				// Image
@@ -134,9 +130,10 @@ public class TextUtils {
 
 				float endX = posX + offsetX;
 
-				if (link)
-					ActivityLogger.buttons.add(new Link(startX, posY + offsetY, endX, posY + offsetY + 20, null, null,
-							"", true, true, Color.WHITE, Color.WHITE, gameObject));
+				if (link) {
+					arrayToAddLinksTo.add(new Link(startX, posY + offsetY, endX, posY + offsetY + 20, null, null, "",
+							true, true, Color.WHITE, Color.WHITE, gameObject));
+				}
 				// } else if (content instanceof Weapon || content instanceof
 				// WeaponTemplate) {
 				//

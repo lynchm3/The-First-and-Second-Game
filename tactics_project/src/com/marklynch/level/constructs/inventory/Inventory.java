@@ -982,7 +982,7 @@ public class Inventory implements Draggable, Scrollable {
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringX + GroundDisplay.lengthEmpty + 8,
 						emptyStringY - 8, emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
-						false, new Object[] { GroundDisplay.stringEmpty });
+						false, null, new Object[] { GroundDisplay.stringEmpty });
 			}
 
 			boolean containsLegalStuff = false;
@@ -1037,7 +1037,7 @@ public class Inventory implements Draggable, Scrollable {
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringX + lengthEmpty + 8, emptyStringY - 8,
 						emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
-						false, new Object[] { stringEmpty });
+						false, null, new Object[] { stringEmpty });
 			}
 
 			boolean containsLegalStuff = false;
@@ -1080,40 +1080,40 @@ public class Inventory implements Draggable, Scrollable {
 		// [SHIFT]
 		if (groundDisplay != null) {
 			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
-					false, new Object[] { stringShiftDrop });
+					false, null, new Object[] { stringShiftDrop });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, false, new Object[] { stringShiftEquip });
+					false, false, null, new Object[] { stringShiftEquip });
 		}
 
 		if (otherInventory != null && inventoryMode != INVENTORY_MODE.MODE_TRADE) {
 			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
-					false, new Object[] { stringShiftPut });
+					false, null, new Object[] { stringShiftPut });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, false, new Object[] { stringShiftEquip });
+					false, false, null, new Object[] { stringShiftEquip });
 		}
 
 		// text
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
+					false, null, new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
+					false, null, new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
+					false, null, new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
+					false, null, new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
+					false, null, new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
+					false, null, new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
-		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, false, "Bag");
+		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, false, null, "Bag");
 
 		if (groundDisplay != null) {
 			groundDisplay.drawText();
@@ -1257,7 +1257,7 @@ public class Inventory implements Draggable, Scrollable {
 			float goldWidth = Game.font.getWidth(goldText);
 			float goldPositionX = squaresX + squaresWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, false, new Object[] { goldText });
+					false, false, null, new Object[] { goldText });
 		}
 
 		// Gold for other actor
@@ -1268,7 +1268,7 @@ public class Inventory implements Draggable, Scrollable {
 			float goldWidth = Game.font.getWidth(goldText);
 			float goldPositionX = otherInventory.squaresX + squaresWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
-					false, false, new Object[] { goldText });
+					false, false, null, new Object[] { goldText });
 
 		}
 
@@ -1278,7 +1278,7 @@ public class Inventory implements Draggable, Scrollable {
 
 	public void drawOtherInventoryText() {
 		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true,
-				false, new Object[] { ((GameObject) this.parent).name });
+				false, null, new Object[] { ((GameObject) this.parent).name });
 	}
 
 	public void drawBorder() {

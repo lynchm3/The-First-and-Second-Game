@@ -1198,20 +1198,21 @@ public class Level {
 
 		// Turn text
 		if (currentFactionMoving != null) {
-			TextUtils.printTextWithImages(Game.windowWidth - 150, 20, Integer.MAX_VALUE, true,
-					false, new Object[] { "TURN " + turn });
+			TextUtils.printTextWithImages(Game.windowWidth - 150, 20, Integer.MAX_VALUE, true, false, null,
+					new Object[] { "TURN " + turn });
 		}
 
 		// Zoom
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 40, Integer.MAX_VALUE, true,
-				false, new Object[] { "Zoom " + Game.zoom });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 40, Integer.MAX_VALUE, true, false, null,
+				new Object[] { "Zoom " + Game.zoom });
 
 		// FPS
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 60, Integer.MAX_VALUE, true,
-				false, new Object[] { "FPS " + Game.displayFPS });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 60, Integer.MAX_VALUE, true, false, null,
+				new Object[] { "FPS " + Game.displayFPS });
 
 		// TIME
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, false, new Object[] { timeString });
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, false, null,
+				new Object[] { timeString });
 
 		// if (factions.size() > 0 && currentFactionMoving != null) {
 		// if (showTurnNotification) {
@@ -1538,6 +1539,10 @@ public class Level {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
+			for (Button button : adventureLog.links) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
 			return null;
 
 		}
@@ -1578,7 +1583,7 @@ public class Level {
 				return popupPinneds.get(i).titleBarButton;
 		}
 
-		for (Button button : activityLogger.buttons) {
+		for (Button button : activityLogger.links) {
 			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}

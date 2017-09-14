@@ -52,12 +52,12 @@ public class PopupTextBox {
 		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, Game.windowWidth, 0, Game.windowHeight);
 		// Instructions
 		TextUtils.printTextWithImages(drawPositionX, drawPositionY - 36, Integer.MAX_VALUE, true,
-				false, new Object[] { instructions });
+				false, null, new Object[] { instructions });
 		// Text box
 		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width + 4, drawPositionY, drawPositionY + height);
 		// Text string
 		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, true,
-				false, new Object[] { tempString });
+				false, null, new Object[] { tempString });
 		// Caret
 		if (caretOn) {
 			QuadUtils.drawQuad(Color.BLACK, drawPositionX + caretPosition, drawPositionX + caretPosition + 2,

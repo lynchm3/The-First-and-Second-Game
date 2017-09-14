@@ -15,19 +15,19 @@ public class ActivityLogger implements Draggable, Scrollable {
 	public float width = 420;
 	public float x = 0;
 	public float textOffsetY = 0;
-	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> links = new ArrayList<LevelButton>();
 	// public float
 
 	public void drawStaticUI() {
 
-		buttons.clear();
+		links.clear();
 
 		// Log
 		QuadUtils.drawQuad(Color.BLACK, x, x + width, 0, Game.windowHeight);
 
 		// Log text
 		for (int i = logs.size() - 1; i > -1; i--) {
-			TextUtils.printTextWithImages(x + 20, textOffsetY + i * 20, Integer.MAX_VALUE, true, true,
+			TextUtils.printTextWithImages(x + 20, textOffsetY + i * 20, Integer.MAX_VALUE, true, true, links,
 					logs.get(i).contents);
 		}
 

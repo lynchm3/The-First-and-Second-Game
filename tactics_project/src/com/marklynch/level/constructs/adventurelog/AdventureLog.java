@@ -33,7 +33,8 @@ public class AdventureLog implements Draggable, Scrollable {
 
 	transient static int bottomBorderHeight;
 
-	public ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> links = new ArrayList<LevelButton>();
 	// Close button
 	static LevelButton buttonClose;
 
@@ -80,6 +81,8 @@ public class AdventureLog implements Draggable, Scrollable {
 
 	public void drawStaticUI() {
 
+		links.clear();
+
 		// Black cover
 		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
 
@@ -93,7 +96,7 @@ public class AdventureLog implements Draggable, Scrollable {
 					// HIGHLIGHT
 				}
 				TextUtils.printTextWithImages(listX + listBorder,
-						listY + listBorder + questsDrawnInList * listItemHeight, Integer.MAX_VALUE, true, false,
+						listY + listBorder + questsDrawnInList * listItemHeight, Integer.MAX_VALUE, true, false, links,
 						new Object[] { quest.name });
 				questsDrawnInList++;
 
@@ -106,13 +109,13 @@ public class AdventureLog implements Draggable, Scrollable {
 			for (Object pieceOfInfo : selectedQuest.info) {
 				TextUtils.printTextWithImages(contentX + contentBorder,
 						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true, true,
-						new Object[] { pieceOfInfo });
+						links, new Object[] { pieceOfInfo });
 				questTextsDrawn++;
 			}
 		}
 
 		if (questsDrawnInList == 0) {
-			TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, true, false, new Object[] { "NO QUESTS" });
+			TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, true, false, links, new Object[] { "NO QUESTS" });
 		} else {
 		}
 
