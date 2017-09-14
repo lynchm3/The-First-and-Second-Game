@@ -30,16 +30,26 @@ public class Window implements Draggable {
 	public int titleBarHeight = 20;
 	public int borderWidth = 2;
 	public static Object[] unknownStats = new Object[] { "??" };
+	public Actor actor;
 
 	public Window(GameObject gameObject) {
 		this.gameObject = gameObject;
+		if (gameObject instanceof Actor)
+			actor = (Actor) gameObject;
 		drawPositionX = 500;
 		drawPositionY = 10;
 		this.width = gameObject.imageTexture.getWidth() + borderWidth * 2;
 		this.height = gameObject.imageTexture.getHeight() + titleBarHeight + borderWidth;
-		resistancesImageX = 8;
-		resistancesTextX = 32;
-		resistancesY = titleBarHeight + borderWidth;
+
+		if (actor != null) {
+			width += 200;
+			if (height < 256)
+				height = 256;
+
+			resistancesImageX = width - 200 + 8;
+			resistancesTextX = width - 200 + 32;
+			resistancesY = titleBarHeight + borderWidth;
+		}
 
 		closeButton = new LevelButton(drawPositionX + width - 20, drawPositionY, 20f, 20f, "end_turn_button.png",
 				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE);
@@ -80,13 +90,11 @@ public class Window implements Draggable {
 			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
 			// Image
 			TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
-					drawPositionY + titleBarHeight, drawPositionX + width - borderWidth,
-					drawPositionY + height - borderWidth);
+					drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),
+					drawPositionY + gameObject.imageTexture.getHeight());
 
-			if (gameObject instanceof Actor) {
-				// System.out.println("Actor");
-
-				drawResistances((Actor) gameObject);
+			if (actor != null) {
+				drawResistances(actor);
 			}
 		}
 
