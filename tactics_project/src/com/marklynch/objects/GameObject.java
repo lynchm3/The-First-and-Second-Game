@@ -644,9 +644,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// Inspectable
 		if (this instanceof Inspectable) {
 			actions.add(new ActionInspect(performer, this));
-			actions.add(new ActionPin(performer, this));
 			return actions;
 		}
+
+		actions.add(new ActionPin(performer, this));
 
 		// Map Marker
 		if (this instanceof MapMarker) {
