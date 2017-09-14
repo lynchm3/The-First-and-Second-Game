@@ -845,7 +845,7 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (character == 'l' || character == 'L') {
+		if (character == 'n' || character == 'N') {
 			Game.level.openCloseAdventureLog();
 			return;
 		}

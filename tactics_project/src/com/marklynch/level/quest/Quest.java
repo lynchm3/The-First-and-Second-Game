@@ -10,7 +10,7 @@ public class Quest {
 	public String name;
 	public String currentObjective;
 	public ArrayList<String> objectives = new ArrayList<String>();
-	public ArrayList<String> text = new ArrayList<String>();
+	public ArrayList<Object> info = new ArrayList<Object>();
 	public ArrayList<Conversation> conversationLog = new ArrayList<Conversation>();
 	public boolean started = false;
 	public boolean resolved = false;

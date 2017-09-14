@@ -41,7 +41,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		resize();
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "CLOSE [L]", true, false, Color.BLACK, Color.WHITE);
+				"end_turn_button.png", "CLOSE [N]", true, false, Color.BLACK, Color.WHITE);
 		buttonClose.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -103,12 +103,12 @@ public class AdventureLog implements Draggable, Scrollable {
 		// Content
 		int questTextsDrawn = 0;
 		if (selectedQuest != null) {
-			for (String textPart : selectedQuest.text) {
+			for (Object pieceOfInfo : selectedQuest.info) {
 				TextUtils.printTextWithImages(contentX + contentBorder,
 						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true,
-						new Object[] { textPart });
+						new Object[] { pieceOfInfo });
+				questTextsDrawn++;
 			}
-			questTextsDrawn++;
 		}
 
 		if (questsDrawnInList == 0) {

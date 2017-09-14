@@ -174,6 +174,8 @@ public class QuestSmallGame extends Quest {
 	public QuestSmallGame() {
 		super();
 
+		this.started = true;
+
 		name = "SMALL GAME";
 		currentObjective = "CURRENT OBJECTIVE";
 
@@ -309,6 +311,10 @@ public class QuestSmallGame extends Quest {
 		setUpConversationSaveTheWolf();
 		setUpConversationReadyToGo();
 		setUpConversationYouDidntHelp();
+
+		info.add("In the staging area for the hunt I found the plan for the hunt");
+		info.add(huntingPlan);
+		info.add(superWolf);
 
 	}
 
@@ -538,7 +544,7 @@ public class QuestSmallGame extends Quest {
 				}
 
 				if (!text.contains(questTextTheHuntersAreGoingOnAHunt)) {
-					QuestSmallGame.this.text.add(questTextTheHuntersAreGoingOnAHunt);
+					QuestSmallGame.this.info.add(questTextTheHuntersAreGoingOnAHunt);
 				}
 
 			}

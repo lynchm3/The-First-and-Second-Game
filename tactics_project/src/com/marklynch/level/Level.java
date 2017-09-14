@@ -434,7 +434,7 @@ public class Level {
 
 		// UI buttons
 		Button adventureLogButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "ADVENTURES [L]", false, false, Color.BLACK, Color.WHITE);
+				"undo_button_disabled.png", "ADVENTURES [N]", false, false, Color.BLACK, Color.WHITE);
 		adventureLogButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
