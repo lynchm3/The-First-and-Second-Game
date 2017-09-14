@@ -131,8 +131,8 @@ public class TextUtils {
 				float endX = posX + offsetX;
 
 				if (link) {
-					arrayToAddLinksTo.add(new Link(startX, posY + offsetY, endX, posY + offsetY + 20, null, null, "",
-							true, true, Color.WHITE, Color.WHITE, gameObject));
+					arrayToAddLinksTo.add(new Link(startX, posY + offsetY, endX - startX, 20, null, null, "", true,
+							true, Color.WHITE, Color.WHITE, gameObject));
 				}
 				// } else if (content instanceof Weapon || content instanceof
 				// WeaponTemplate) {
