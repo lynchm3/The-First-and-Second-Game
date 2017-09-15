@@ -2,9 +2,12 @@ package com.marklynch.level.quest.smallgame;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Group;
+import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
 
@@ -91,10 +94,16 @@ public class AreaTownForest {
 
 		}
 
-		Templates.SCROLL.makeCopy(Game.level.squares[160][55], "Scroll of Poison Blast",
+		Readable scrollOfPoisonBlast = Templates.SCROLL.makeCopy(Game.level.squares[160][55], "Scroll of Poison Blast",
 				new Object[] {
 						"[You learn Poison Blast]\nPoisons for base 3 dmg/s Range:10\nUse the power of the forest to murder people with poisons. Nice" },
 				null);
+		scrollOfPoisonBlast.setOnReadListener(new ActionListener() {
+			@Override
+			public void run() {
+				Game.level.player.powers.add(new PowerPoisonBlast(Game.level.player));
+			}
+		});
 
 		// corners
 		Templates.BIG_TREE.makeCopy(Game.level.squares[154][49], null);
