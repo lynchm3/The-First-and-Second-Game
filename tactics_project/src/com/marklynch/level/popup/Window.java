@@ -76,8 +76,8 @@ public class Window implements Draggable {
 			resistancesY = titleBarHeight + borderWidth;
 
 			// powers
-			powersImageX = drawPositionX + 8;
-			powersTextX = drawPositionX + 32;
+			powersImageX = 8;
+			powersTextX = 32;
 			powersTitleY = 300;
 			powersListY = 330;
 
@@ -375,10 +375,10 @@ public class Window implements Draggable {
 			for (Power power : actor.powers) {
 				TextureUtils.drawTexture(power.image, drawPositionX + powersImageX,
 						drawPositionY + powersListY + powersDrawn * 30, drawPositionX + powersImageX + 20,
-						drawPositionY + drawPositionY + powersListY + powersDrawn * 30 + 20);
+						drawPositionY + powersListY + powersDrawn * 30 + 20);
 				TextUtils.printTextWithImages(drawPositionX + powersTextX,
-						drawPositionY + powersListY + powersDrawn * 30, width - 40, false, false, null,
-						"" + gameObject.poisonResistance);
+						drawPositionY + powersListY + powersDrawn * 30, width - 40, false, false, null, power.name);
+				powersDrawn++;
 			}
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + powersTextX, drawPositionY + powersListY, width - 40, false,

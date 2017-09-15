@@ -6,6 +6,8 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.power.PowerBleed;
+import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.ResourceUtils;
@@ -38,6 +40,9 @@ public class Player extends Actor {
 		hairImageTexture = ResourceUtils.getGlobalImage("hair.png");
 		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png");
 		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png");
+
+		powers.add(new PowerBleed(this));
+		powers.add(new PowerInferno(this));
 	}
 
 	@Override
