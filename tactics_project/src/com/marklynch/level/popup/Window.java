@@ -144,24 +144,24 @@ public class Window implements Draggable {
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
 				drawPositionY + statsY + 30, drawPositionX + statsImageX + 20, drawPositionY + statsY + 30 + 20);
 		if (bestiaryKnowledge.level) {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
-					null, "" + actor.actorLevel);
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false,
+					false, null, "" + actor.actorLevel);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
-					null, unknownStats);
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false,
+					false, null, unknownStats);
 
 		}
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
 				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 60 + 20);
 		if (bestiaryKnowledge.totalHealth) {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
-					null, "" + actor.totalHealth);
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false,
+					false, null, "" + actor.totalHealth);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
-					null, unknownStats);
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false,
+					false, null, unknownStats);
 
 		}
 
