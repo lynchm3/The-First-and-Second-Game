@@ -89,6 +89,9 @@ public class Player extends Actor {
 		bestiaryKnowledge.electricResistance = true;
 		bestiaryKnowledge.poisonResistance = true;
 
+		// Powers
+		bestiaryKnowledge.powers = true;
+
 		return actor;
 	}
 

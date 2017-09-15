@@ -5,6 +5,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
+import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
@@ -21,12 +22,7 @@ public class Window implements Draggable {
 	public GameObject gameObject;
 	public float width;
 	public float height;
-	public float statsImageX;
-	public float statsTextX;
-	public float statsY;
-	public float resistancesImageX;
-	public float resistancesTextX;
-	public float resistancesY;
+
 	public boolean minimised = false;
 	public float drawPositionX, drawPositionY;
 	public LevelButton closeButton, minimiseButton, titleBarButton;
@@ -34,6 +30,26 @@ public class Window implements Draggable {
 	public int borderWidth = 2;
 	public static Object[] unknownStats = new Object[] { "??" };
 	public Actor actor;
+
+	// Actor
+
+	// Stats for actor
+	public float statsImageX;
+	public float statsTextX;
+	public float statsY;
+	public float resistancesImageX;
+	public float resistancesTextX;
+	public float resistancesY;
+
+	// Powers for actor
+	public float powersImageX;
+	public float powersTextX;
+	public float powersTitleY;
+	public float powersListY;
+
+	// Equipped weapon for actor
+
+	// Practical damage
 
 	public Window(GameObject gameObject) {
 		this.gameObject = gameObject;
@@ -49,12 +65,22 @@ public class Window implements Draggable {
 			if (height < 256)
 				height = 256;
 
+			// stats
 			statsImageX = width - 200 + 8;
 			statsTextX = width - 200 + 32;
 			statsY = titleBarHeight + borderWidth;
+
+			// resistances
 			resistancesImageX = width - 100 + 8;
 			resistancesTextX = width - 100 + 32;
 			resistancesY = titleBarHeight + borderWidth;
+
+			// powers
+			powersImageX = drawPositionX + 8;
+			powersTextX = drawPositionX + 32;
+			powersTitleY = 300;
+			powersListY = 330;
+
 		}
 
 		closeButton = new LevelButton(drawPositionX + width - 20, drawPositionY, 20f, 20f, "end_turn_button.png",
@@ -127,7 +153,9 @@ public class Window implements Draggable {
 	private void drawStats(Actor actor) {
 		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(actor.templateId);
 
-		// LVL
+		// GENERAL
+
+		// Name
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
 				drawPositionY + statsY, drawPositionX + statsImageX + 20, drawPositionY + statsY + 20);
@@ -141,6 +169,8 @@ public class Window implements Draggable {
 
 		}
 
+		// Level
+
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
 				drawPositionY + statsY + 30, drawPositionX + statsImageX + 20, drawPositionY + statsY + 30 + 20);
 		if (bestiaryKnowledge.level) {
@@ -152,6 +182,8 @@ public class Window implements Draggable {
 					false, null, unknownStats);
 
 		}
+
+		// total health
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
 				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 60 + 20);
@@ -165,34 +197,96 @@ public class Window implements Draggable {
 
 		}
 
+		// STATS
+		TextUtils.printTextWithImages(drawPositionX + statsImageX, drawPositionY + statsY + 150, width - 40, false,
+				false, null, "STATS");
+
+		// strength
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 180 + 20);
+		if (bestiaryKnowledge.strength) {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false,
+					false, null, "" + actor.strength);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false,
+					false, null, unknownStats);
+
+		}
+
+		// dexterity
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 210 + 20);
+		if (bestiaryKnowledge.dexterity) {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false,
+					false, null, "" + actor.dexterity);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false,
+					false, null, unknownStats);
+
+		}
+
+		// intelligence
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 240 + 20);
+		if (bestiaryKnowledge.intelligence) {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false,
+					false, null, "" + actor.intelligence);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false,
+					false, null, unknownStats);
+
+		}
+
+		// endurance
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 270 + 20);
+		if (bestiaryKnowledge.endurance) {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 270, width - 40, false,
+					false, null, "" + actor.endurance);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 270, width - 40, false,
+					false, null, unknownStats);
+
+		}
+
 		// RESISTANCES
+		TextUtils.printTextWithImages(drawPositionX + statsImageX, drawPositionY + statsY + 0, width - 40, false, false,
+				null, "RESISTANCES");
 
 		// Slash resistance
 
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 20);
+				drawPositionY + resistancesY + 60, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 60 + 20);
 		if (bestiaryKnowledge.slashResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY, width - 40,
-					false, false, null, "" + gameObject.slashResistance);
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
+					width - 40, false, false, null, "" + gameObject.slashResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY, width - 40,
-					false, false, null, unknownStats);
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
+					width - 40, false, false, null, unknownStats);
 
 		}
 
 		// Blunt resistance
 
 		TextureUtils.drawTexture(getGlobalImage("action_blunt.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 30, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 30 + 20);
+				drawPositionY + resistancesY + 90, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 90 + 20);
 		if (bestiaryKnowledge.bluntResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 30,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
 					width - 40, false, false, null, "" + gameObject.bluntResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 30,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
 					width - 40, false, false, null, unknownStats);
 
 		}
@@ -200,42 +294,42 @@ public class Window implements Draggable {
 		// Pierce resistance
 
 		TextureUtils.drawTexture(getGlobalImage("action_pierce.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 60, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 60 + 20);
+				drawPositionY + resistancesY + 120, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 120 + 20);
 		if (bestiaryKnowledge.pierceResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
 					width - 40, false, false, null, "" + gameObject.pierceResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
 					width - 40, false, false, null, unknownStats);
 
 		}
 
 		// Fire resistance
 		TextureUtils.drawTexture(getGlobalImage("action_burn.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 90, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 90 + 20);
+				drawPositionY + resistancesY + 150, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 150 + 20);
 		if (bestiaryKnowledge.fireResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
 					width - 40, false, false, null, "" + gameObject.fireResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
 					width - 40, false, false, null, unknownStats);
 
 		}
 
 		// Water resistance
 		TextureUtils.drawTexture(getGlobalImage("action_douse.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 120, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 120 + 20);
+				drawPositionY + resistancesY + 180, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 180 + 20);
 		if (bestiaryKnowledge.waterResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
 					width - 40, false, false, null, "" + gameObject.waterResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
 					width - 40, false, false, null, unknownStats);
 
 		}
@@ -243,22 +337,22 @@ public class Window implements Draggable {
 		// Electric resistance
 
 		TextureUtils.drawTexture(getGlobalImage("action_electric.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 150, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 150 + 20);
+				drawPositionY + resistancesY + 210, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 210 + 20);
 		if (bestiaryKnowledge.electricResistance) {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
 					width - 40, false, false, null, "" + gameObject.electricResistance);
 
 		} else {
-			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
 					width - 40, false, false, null, unknownStats);
 
 		}
 
 		// Poison resistance
 		TextureUtils.drawTexture(getGlobalImage("action_poison.png"), drawPositionX + resistancesImageX,
-				drawPositionY + resistancesY + 180, drawPositionX + resistancesImageX + 20,
-				drawPositionY + resistancesY + 180 + 20);
+				drawPositionY + resistancesY + 240, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 240 + 20);
 		if (bestiaryKnowledge.poisonResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
 					width - 40, false, false, null, "" + gameObject.poisonResistance);
@@ -268,6 +362,30 @@ public class Window implements Draggable {
 					width - 40, false, false, null, unknownStats);
 
 		}
+
+		// POWERS
+		TextUtils.printTextWithImages(drawPositionX + powersImageX, drawPositionY + powersTitleY, width - 40, false,
+				false, null, "POWERS");
+
+		if (bestiaryKnowledge.powers && actor.powers.size() == 0) {
+			TextUtils.printTextWithImages(drawPositionX + powersTextX, drawPositionY + powersListY, width - 40, false,
+					false, null, "None");
+		} else if (bestiaryKnowledge.powers) {
+			int powersDrawn = 0;
+			for (Power power : actor.powers) {
+				TextureUtils.drawTexture(power.image, drawPositionX + powersImageX,
+						drawPositionY + powersListY + powersDrawn * 30, drawPositionX + powersImageX + 20,
+						drawPositionY + drawPositionY + powersListY + powersDrawn * 30 + 20);
+				TextUtils.printTextWithImages(drawPositionX + powersTextX,
+						drawPositionY + powersListY + powersDrawn * 30, width - 40, false, false, null,
+						"" + gameObject.poisonResistance);
+			}
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + powersTextX, drawPositionY + powersListY, width - 40, false,
+					false, null, unknownStats);
+		}
+
+		// PRACTICAL DAMAGE
 
 	}
 

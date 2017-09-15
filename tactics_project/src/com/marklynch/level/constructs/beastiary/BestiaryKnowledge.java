@@ -10,6 +10,21 @@ public class BestiaryKnowledge {
 	public boolean image;
 	public boolean totalHealth;
 
+	// stats
+	public boolean strength;
+	public boolean dexterity;
+	public boolean intelligence;
+	public boolean endurance;
+
+	// Resistances
+	public boolean slashResistance;
+	public boolean bluntResistance;
+	public boolean pierceResistance;
+	public boolean fireResistance;
+	public boolean waterResistance;
+	public boolean electricResistance;
+	public boolean poisonResistance;
+
 	// Damage
 	public boolean slashDamage;
 	public boolean bluntDamage;
@@ -20,14 +35,8 @@ public class BestiaryKnowledge {
 	public boolean poisonDamage;
 	public boolean range;
 
-	// Resistances
-	public boolean slashResistance;
-	public boolean bluntResistance;
-	public boolean pierceResistance;
-	public boolean fireResistance;
-	public boolean waterResistance;
-	public boolean electricResistance;
-	public boolean poisonResistance;
+	// Powers
+	public boolean powers;
 
 	public BestiaryKnowledge(int templateId) {
 		this.templateId = templateId;

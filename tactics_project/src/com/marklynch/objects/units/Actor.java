@@ -21,6 +21,7 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
@@ -71,10 +72,10 @@ public class Actor extends GameObject {
 		UP, RIGHT, DOWN, LEFT
 	}
 
-	protected int strength;
-	protected int dexterity;
-	protected int intelligence;
-	protected int endurance;
+	public int strength;
+	public int dexterity;
+	public int intelligence;
+	public int endurance;
 	public String title = "";
 	public int actorLevel = 1;
 	public int travelDistance = 4;
@@ -165,6 +166,8 @@ public class Actor extends GameObject {
 	public boolean sleeping = false;
 
 	public AIPath path;
+
+	public ArrayList<Power> powers = new ArrayList<Power>();
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
@@ -863,8 +866,8 @@ public class Actor extends GameObject {
 			float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT - 20;
 			float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
 			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
-			TextUtils.printTextWithImages(activityX1, activityY1, Integer.MAX_VALUE, false,
-					false, null, new Object[] { activityDescription });
+			TextUtils.printTextWithImages(activityX1, activityY1, Integer.MAX_VALUE, false, false, null,
+					new Object[] { activityDescription });
 		}
 
 		// Draw mini dialogue
@@ -887,7 +890,8 @@ public class Actor extends GameObject {
 					expressionBubblePositionYInPixels + expressionBubbleHeight);
 
 			TextUtils.printTextWithImages(expressionBubblePositionXInPixels + 4, expressionBubblePositionYInPixels + 38,
-					Integer.MAX_VALUE, false, false, null, new Object[] { new StringWithColor(miniDialogue, Color.BLACK) });
+					Integer.MAX_VALUE, false, false, null,
+					new Object[] { new StringWithColor(miniDialogue, Color.BLACK) });
 		} else if (thoughtBubbleImageTexture != null) {
 
 			int expressionBubbleWidth = 64;
