@@ -1,42 +1,26 @@
 package com.marklynch.ui.quickbar;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
-import com.marklynch.level.constructs.power.Power;
-import com.marklynch.objects.GameObject;
-import com.marklynch.utils.TextureUtils;
 
 public class QuickBar {
 
-	ArrayList<Object> shortcuts = new ArrayList<Object>();
-	int positionX = 428;
-	int positionY = 8;
-	int shortcutWidth = 32;
+	QuickBarSquare[] quickBarSquareItems = new QuickBarSquare[] { new QuickBarSquare(0), new QuickBarSquare(1),
+			new QuickBarSquare(2), new QuickBarSquare(3), new QuickBarSquare(4), new QuickBarSquare(5),
+			new QuickBarSquare(6), new QuickBarSquare(7), new QuickBarSquare(8), new QuickBarSquare(9) };
+	public static int positionX = 428;
+	public static int positionY = 8;
+	public static int shortcutWidth = 32;
 
 	public void drawStaticUI() {
 
-		int shortcutsDrawn = 0;
-		shortcuts.clear();
-		shortcuts.addAll(Game.level.player.powers);
-		for (Object shortcut : shortcuts) {
-			if (shortcut instanceof Power) {
-				drawPower((Power) shortcut, shortcutsDrawn);
-			} else if (shortcut instanceof GameObject) {
-				drawGameObject((GameObject) shortcut, shortcutsDrawn);
-			}
-			shortcutsDrawn++;
+		for (int i = 0; i < quickBarSquareItems.length && i < Game.level.player.powers.size(); i++) {
+			quickBarSquareItems[i].object = null;
+			quickBarSquareItems[i].object = Game.level.player.powers.get(i);
 		}
-	}
 
-	public void drawPower(Power power, int index) {
-		TextureUtils.drawTexture(power.image, positionX + index * shortcutWidth, positionY,
-				positionX + index * shortcutWidth + shortcutWidth, positionY + shortcutWidth);
-	}
-
-	public void drawGameObject(GameObject gameObject, int index) {
-		TextureUtils.drawTexture(gameObject.imageTexture, positionX + index * shortcutWidth, positionY,
-				positionX + index * shortcutWidth + shortcutWidth, positionY + shortcutWidth);
+		for (QuickBarSquare quickBarSquare : quickBarSquareItems) {
+			quickBarSquare.drawStaticUI();
+		}
 	}
 
 }
