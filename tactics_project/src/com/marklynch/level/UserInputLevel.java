@@ -17,11 +17,6 @@ import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.conversation.ConversationResponseDisplay;
-import com.marklynch.level.popup.PopupMenu;
-import com.marklynch.level.popup.PopupMenuButton;
-import com.marklynch.level.popup.PopupMenuSelectAction;
-import com.marklynch.level.popup.PopupMenuSelectObject;
-import com.marklynch.level.popup.Window;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
@@ -33,7 +28,12 @@ import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Player;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
+import com.marklynch.ui.Window;
 import com.marklynch.ui.button.Button;
+import com.marklynch.ui.popups.PopupMenu;
+import com.marklynch.ui.popups.PopupMenuButton;
+import com.marklynch.ui.popups.PopupMenuSelectAction;
+import com.marklynch.ui.popups.PopupMenuSelectObject;
 
 public class UserInputLevel {
 

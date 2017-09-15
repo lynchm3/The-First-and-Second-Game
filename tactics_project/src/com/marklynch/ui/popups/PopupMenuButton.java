@@ -1,4 +1,4 @@
-package com.marklynch.level.popup;
+package com.marklynch.ui.popups;
 
 import com.marklynch.ui.button.Button;
 import com.marklynch.utils.QuadUtils;

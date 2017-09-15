@@ -1,4 +1,4 @@
-package com.marklynch.level.popup;
+package com.marklynch.ui;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
@@ -8,7 +8,6 @@ import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.ui.Draggable;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.QuadUtils;
@@ -115,7 +114,7 @@ public class Window implements Draggable {
 		// this.height = 40;
 	}
 
-	public void draw() {
+	public void drawStaticUI() {
 
 		if (!minimised) {
 			// Background

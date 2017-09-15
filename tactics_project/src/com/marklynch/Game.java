@@ -15,10 +15,10 @@ import com.marklynch.graphics.ShadowLight;
 import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.inventory.InventorySquare;
-import com.marklynch.level.popup.PopupTextBox;
-import com.marklynch.level.popup.Window;
 import com.marklynch.level.squares.Square;
+import com.marklynch.ui.Window;
 import com.marklynch.ui.button.Button;
+import com.marklynch.ui.popups.PopupTextBox;
 
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;

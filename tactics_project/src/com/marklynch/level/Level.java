@@ -35,13 +35,6 @@ import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
-import com.marklynch.level.popup.PopupMenu;
-import com.marklynch.level.popup.PopupMenuActionButton;
-import com.marklynch.level.popup.PopupMenuSelectAction;
-import com.marklynch.level.popup.PopupMenuSelectObject;
-import com.marklynch.level.popup.PopupTextBox;
-import com.marklynch.level.popup.PopupToast;
-import com.marklynch.level.popup.Window;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -64,9 +57,17 @@ import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.Toast;
+import com.marklynch.ui.Window;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.popups.PopupMenu;
+import com.marklynch.ui.popups.PopupMenuActionButton;
+import com.marklynch.ui.popups.PopupMenuSelectAction;
+import com.marklynch.ui.popups.PopupMenuSelectObject;
+import com.marklynch.ui.popups.PopupTextBox;
+import com.marklynch.ui.popups.PopupToast;
+import com.marklynch.ui.quickbar.QuickBar;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
@@ -146,6 +147,7 @@ public class Level {
 	public transient int currentFactionMovingIndex;
 	public transient Stack<Move> undoList;
 	public ActivityLogger activityLogger;
+	public QuickBar quickBar;
 
 	public transient GameCursor gameCursor;
 
@@ -184,6 +186,7 @@ public class Level {
 		squares = new Square[width][height];
 
 		activityLogger = new ActivityLogger();
+		quickBar = new QuickBar();
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
 		decorations = new Vector<Decoration>();
@@ -409,7 +412,7 @@ public class Level {
 		bleedButton.enabled = true;
 		buttons.add(bleedButton);
 
-		showHideLogButton = new LevelButton(activityLogger.width, 40f, 70f, 30f, "undo_button.png",
+		showHideLogButton = new LevelButton(activityLogger.width, 64f, 70f, 30f, "undo_button.png",
 				"undo_button_disabled.png", " LOG [L] <", true, true, Color.BLACK, Color.WHITE);
 		showHideLogButton.setClickListener(new ClickListener() {
 			@Override
@@ -1238,6 +1241,7 @@ public class Level {
 		else // if (showLog)
 
 		{
+			quickBar.drawStaticUI();
 			activityLogger.drawStaticUI();
 		}
 
@@ -1265,7 +1269,7 @@ public class Level {
 		}
 
 		for (Window popupPinned : popupPinneds) {
-			popupPinned.draw();
+			popupPinned.drawStaticUI();
 		}
 
 		for (PopupTextBox popupTextBox : popupTextBoxes) {

@@ -1,4 +1,4 @@
-package com.marklynch.level.popup;
+package com.marklynch.ui.popups;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;

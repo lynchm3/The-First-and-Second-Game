@@ -1,4 +1,4 @@
-package com.marklynch.level.popup;
+package com.marklynch.ui.popups;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;

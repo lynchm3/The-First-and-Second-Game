@@ -2,8 +2,8 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.popup.PopupTextBox;
 import com.marklynch.objects.GameObject;
+import com.marklynch.ui.popups.PopupTextBox;
 
 public class ActionRename extends Action {
 
