@@ -21,8 +21,11 @@ public class Window implements Draggable {
 	public GameObject gameObject;
 	public float width;
 	public float height;
-	public float resistancesTextX;
+	public float statsImageX;
+	public float statsTextX;
+	public float statsY;
 	public float resistancesImageX;
+	public float resistancesTextX;
 	public float resistancesY;
 	public boolean minimised = false;
 	public float drawPositionX, drawPositionY;
@@ -46,8 +49,11 @@ public class Window implements Draggable {
 			if (height < 256)
 				height = 256;
 
-			resistancesImageX = width - 200 + 8;
-			resistancesTextX = width - 200 + 32;
+			statsImageX = width - 200 + 8;
+			statsTextX = width - 200 + 32;
+			statsY = titleBarHeight + borderWidth;
+			resistancesImageX = width - 100 + 8;
+			resistancesTextX = width - 100 + 32;
 			resistancesY = titleBarHeight + borderWidth;
 		}
 
@@ -94,7 +100,7 @@ public class Window implements Draggable {
 					drawPositionY + gameObject.imageTexture.getHeight());
 
 			if (actor != null) {
-				drawResistances(actor);
+				drawStats(actor);
 			}
 		}
 
@@ -118,8 +124,48 @@ public class Window implements Draggable {
 		}
 	}
 
-	private void drawResistances(Actor actor) {
+	private void drawStats(Actor actor) {
 		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(actor.templateId);
+
+		// LVL
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+				drawPositionY + statsY, drawPositionX + statsImageX + 20, drawPositionY + statsY + 20);
+		if (bestiaryKnowledge.name) {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
+					null, "" + actor.name);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
+					null, unknownStats);
+
+		}
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+				drawPositionY + statsY + 30, drawPositionX + statsImageX + 20, drawPositionY + statsY + 30 + 20);
+		if (bestiaryKnowledge.level) {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
+					null, "" + actor.actorLevel);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
+					null, unknownStats);
+
+		}
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 60 + 20);
+		if (bestiaryKnowledge.totalHealth) {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
+					null, "" + actor.totalHealth);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
+					null, unknownStats);
+
+		}
+
+		// RESISTANCES
 
 		// Slash resistance
 

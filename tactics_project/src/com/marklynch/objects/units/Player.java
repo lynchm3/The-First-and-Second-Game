@@ -66,6 +66,7 @@ public class Player extends Actor {
 		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(templateId);
 
 		bestiaryKnowledge.name = true;
+		bestiaryKnowledge.level = true;
 		bestiaryKnowledge.image = true;
 		bestiaryKnowledge.totalHealth = true;
 
