@@ -116,7 +116,7 @@ public class Window implements Draggable {
 	}
 
 	public void drawLine() {
-		if (!minimised) {
+		if (!minimised && gameObject.squareGameObjectIsOn.visibleToPlayer) {
 
 			// LINE
 			float lineX1 = this.drawPositionX + this.width / 2;
