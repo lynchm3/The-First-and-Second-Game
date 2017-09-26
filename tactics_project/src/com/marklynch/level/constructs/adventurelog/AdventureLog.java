@@ -87,20 +87,30 @@ public class AdventureLog implements Draggable, Scrollable {
 				}
 
 				final LevelButton button = new LevelButton(listX + listBorder,
-						listY + listBorder + questsDrawnInList * listItemHeight, listWidth, 20f, "end_turn_button.png",
-						"end_turn_button.png", quest.name, true, true, Color.BLACK, Color.WHITE);
+						listY + listBorder + questsDrawnInList * listItemHeight, listWidth, listItemHeight,
+						"end_turn_button.png", "end_turn_button.png", quest.name, true, true, Color.BLACK, Color.WHITE);
 				button.setClickListener(new ClickListener() {
 
 					@Override
 					public void click() {
-						for (Button button : buttons) {
-							button.removeHighlight();
+						for (LevelButton button : buttons) {
+							// change colors to off
+							button.buttonColor = Color.BLACK;
+							button.setTextColor(Color.WHITE);
 						}
-						button.highlight();
+						button.buttonColor = Color.WHITE;
+						button.setTextColor(Color.BLACK);
 						selectedQuest = quest;
 
 					}
 				});
+
+				if (selectedQuest == quest) {
+					button.buttonColor = Color.WHITE;
+					button.setTextColor(Color.BLACK);
+
+				}
+
 				buttons.add(button);
 				questsDrawnInList++;
 

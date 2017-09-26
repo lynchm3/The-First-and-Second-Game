@@ -13,7 +13,7 @@ public class LevelButton extends Button {
 	public boolean xFromLeft;
 	public boolean yFromTop;
 	public Color buttonColor;
-	public Color textColor;
+	private Color textColor;
 	public Object[] textParts;
 
 	public LevelButton(float x, float y, float width, float height, String enabledTexturePath,
@@ -89,6 +89,11 @@ public class LevelButton extends Button {
 			return true;
 		}
 		return false;
+	}
+
+	public void setTextColor(Color color) {
+		this.textColor = color;
+		this.textParts = new Object[] { new StringWithColor(text.toString(), textColor) };
 	}
 
 }
