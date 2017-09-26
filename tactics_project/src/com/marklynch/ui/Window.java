@@ -119,10 +119,19 @@ public class Window implements Draggable {
 
 		if (!minimised) {
 
+			// LINE
+			float lineX1 = this.drawPositionX + this.width / 2;
+			float lineY1 = drawPositionY + height / 2;
+
+			int gameObjectX = (gameObject.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_HEIGHT);
+			int gameObjectY = (gameObject.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT);
+			float lineX2 = (Game.windowWidth / 2) + (Game.zoom
+					* (gameObjectX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
+			float lineY2 = (Game.windowHeight / 2) + (Game.zoom
+					* (gameObjectY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
+
 			// Draw line from window to subject
-			// gameObject
-			LineUtils.drawLine(Color.BLACK, drawPositionX, drawPositionY, Game.halfWindowWidth, Game.halfWindowHeight,
-					5);
+			LineUtils.drawLine(Color.BLACK, lineX1, lineY1, lineX2, lineY2, 5);
 			// QuadUtils.drawQuad(Color.BLACK, drawPositionX,
 			// Game.halfWindowWidth, drawPositionY, Game.halfWindowHeight);
 
@@ -150,6 +159,7 @@ public class Window implements Draggable {
 
 		// Borders (left,right,bottom)
 		if (!minimised) {
+
 			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionX + 2, drawPositionY, drawPositionY + height);
 			QuadUtils.drawQuad(Color.BLACK, drawPositionX + width - 2, drawPositionX + width, drawPositionY,
 					drawPositionY + height);
