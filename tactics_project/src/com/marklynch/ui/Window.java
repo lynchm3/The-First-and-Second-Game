@@ -458,9 +458,17 @@ public class Window implements Draggable {
 	}
 
 	public boolean isMouseOver(int mouseX, int mouseY) {
-		if (mouseX > drawPositionX && mouseX < drawPositionX + width && mouseY > drawPositionY
-				&& mouseY < drawPositionY + height) {
-			return true;
+		if (!minimised) {
+			if (mouseX > drawPositionX && mouseX < drawPositionX + width && mouseY > drawPositionY
+					&& mouseY < drawPositionY + height) {
+				return true;
+			}
+		} else {
+			if (mouseX > drawPositionX && mouseX < drawPositionX + width && mouseY > drawPositionY
+					&& mouseY < drawPositionY + titleBarHeight) {
+				return true;
+			}
+
 		}
 		return false;
 	}
