@@ -23,6 +23,7 @@ import com.marklynch.objects.units.Actor;
 public class QuestBetweenTheWalls extends Quest {
 
 	public QuestBetweenTheWalls() {
+		name = "BETWEEN THE WALLS";
 
 		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>();
 		ArrayList<GameObject> structureFeatures = new ArrayList<GameObject>();
@@ -129,6 +130,9 @@ public class QuestBetweenTheWalls extends Quest {
 		Templates.BUSH.makeCopy(Game.level.squares[38][22], null);
 		Templates.BUSH.makeCopy(Game.level.squares[40][20], null);
 		Templates.BUSH.makeCopy(Game.level.squares[40][22], null);
+
+		started = true;
+		info.add("There's something between the walls...");
 
 	}
 

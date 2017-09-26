@@ -22,6 +22,7 @@ import com.marklynch.objects.units.Actor;
 public class QuestTheSecretRoom extends Quest {
 
 	public QuestTheSecretRoom() {
+		name = "THE SECRET ROOM";
 
 		ArrayList<Wall> structureExtraWalls = new ArrayList<Wall>();
 		ArrayList<GameObject> structureFeatures = new ArrayList<GameObject>();
@@ -129,6 +130,9 @@ public class QuestTheSecretRoom extends Quest {
 		Templates.TREE.makeCopy(Game.level.squares[22][23], null);
 		Templates.TREE.makeCopy(Game.level.squares[26][19], null);
 		Templates.TREE.makeCopy(Game.level.squares[26][23], null);
+
+		started = true;
+		info.add("I've found a secret door in a mansion in town " + falseWall.squareGameObjectIsOn);
 
 	}
 

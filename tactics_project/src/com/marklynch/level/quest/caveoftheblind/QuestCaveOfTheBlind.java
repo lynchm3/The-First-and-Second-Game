@@ -97,6 +97,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public QuestCaveOfTheBlind() {
 		super();
+		name = "CAVE OF THE BLIND";
 
 		// Mort and his bed
 		GameObject mortsGameObject = Templates.BED.makeCopy(Game.level.squares[267][42]);
@@ -150,6 +151,9 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Conversations
 		conversationForMort = new ConversationForMort(this);
+
+		started = true;
+		info.add("I've heard about a 'haunted' cave to the east of town.");
 	}
 
 	@Override

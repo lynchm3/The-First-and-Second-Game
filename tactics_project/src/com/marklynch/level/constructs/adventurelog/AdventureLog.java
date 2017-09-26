@@ -73,6 +73,40 @@ public class AdventureLog implements Draggable, Scrollable {
 		// And also sort by completed...
 		resize();
 		showing = true;
+
+		buttons.clear();
+		buttons.add(buttonClose);
+
+		int questsDrawnInList = 0;
+		for (final Quest quest : Level.quests) {
+			if (quest.started) {
+				if (selectedQuest == null)
+					selectedQuest = quest;
+				if (quest == selectedQuest) {
+					// HIGHLIGHT
+				}
+
+				final LevelButton button = new LevelButton(listX + listBorder,
+						listY + listBorder + questsDrawnInList * listItemHeight, listWidth, 20f, "end_turn_button.png",
+						"end_turn_button.png", quest.name, true, true, Color.BLACK, Color.WHITE);
+				button.setClickListener(new ClickListener() {
+
+					@Override
+					public void click() {
+						for (Button button : buttons) {
+							button.removeHighlight();
+						}
+						button.highlight();
+						selectedQuest = quest;
+
+					}
+				});
+				buttons.add(button);
+				questsDrawnInList++;
+
+			}
+		}
+
 	}
 
 	public void close() {
@@ -87,21 +121,24 @@ public class AdventureLog implements Draggable, Scrollable {
 		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
 
 		// List of quests
-		int questsDrawnInList = 0;
-		for (Quest quest : Level.quests) {
-			if (quest.started) {
-				if (selectedQuest == null)
-					selectedQuest = quest;
-				if (quest == selectedQuest) {
-					// HIGHLIGHT
-				}
-				TextUtils.printTextWithImages(listX + listBorder,
-						listY + listBorder + questsDrawnInList * listItemHeight, Integer.MAX_VALUE, true, false, links,
-						new Object[] { quest.name });
-				questsDrawnInList++;
-
-			}
-		}
+		// int questsDrawnInList = 0;
+		// for (Quest quest : Level.quests) {
+		// if (quest.started) {
+		// if (selectedQuest == null)
+		// selectedQuest = quest;
+		// if (quest == selectedQuest) {
+		// // HIGHLIGHT
+		// }
+		//
+		//
+		// TextUtils.printTextWithImages(listX + listBorder,
+		// listY + listBorder + questsDrawnInList * listItemHeight,
+		// Integer.MAX_VALUE, true, false, links,
+		// new Object[] { quest.name });
+		// questsDrawnInList++;
+		//
+		// }
+		// }
 
 		// Content
 		int questTextsDrawn = 0;
@@ -114,7 +151,7 @@ public class AdventureLog implements Draggable, Scrollable {
 			}
 		}
 
-		if (questsDrawnInList == 0) {
+		if (buttons.size() == 1) {
 			TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, true, false, links, new Object[] { "NO QUESTS" });
 		} else {
 		}

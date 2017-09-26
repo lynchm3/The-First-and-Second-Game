@@ -52,6 +52,7 @@ public class QuestThePigs extends Quest {
 
 	public QuestThePigs() {
 		super();
+		name = "THE PIGS";
 
 		// Pigs
 		larry = Templates.PIG.makeCopy("Larry", Game.level.squares[30][76], Game.level.factions.get(1), null,
@@ -229,6 +230,9 @@ public class QuestThePigs extends Quest {
 		Templates.WHEAT.makeCopy(Game.level.squares[62][73], null);
 		Templates.WHEAT.makeCopy(Game.level.squares[63][73], null);
 		Templates.WHEAT.makeCopy(Game.level.squares[64][73], null);
+
+		started = true;
+		info.add("Found a farm...");
 
 	}
 

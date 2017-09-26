@@ -337,6 +337,9 @@ public class QuestSmallGame extends Quest {
 			}
 		});
 
+		started = true;
+		info.add(questTextTheHuntersAreGoingOnAHunt);
+
 	}
 
 	@Override
