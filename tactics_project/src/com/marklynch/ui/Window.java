@@ -10,6 +10,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -117,6 +118,14 @@ public class Window implements Draggable {
 	public void drawStaticUI() {
 
 		if (!minimised) {
+
+			// Draw line from window to subject
+			// gameObject
+			LineUtils.drawLine(Color.BLACK, drawPositionX, drawPositionY, Game.halfWindowWidth, Game.halfWindowHeight,
+					5);
+			// QuadUtils.drawQuad(Color.BLACK, drawPositionX,
+			// Game.halfWindowWidth, drawPositionY, Game.halfWindowHeight);
+
 			// Background
 			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
 			// Image
