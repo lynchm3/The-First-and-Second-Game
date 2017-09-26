@@ -1513,16 +1513,16 @@ public class Level {
 	}
 
 	public void highlightPlayButton() {
-		playButton.textColor = Color.WHITE;
+		playButton.setTextColor(Color.WHITE);
 		playButton.buttonColor = Color.BLACK;
-		pauseButton.textColor = Color.WHITE;
+		pauseButton.setTextColor(Color.WHITE);
 		pauseButton.buttonColor = Color.GRAY;
 	}
 
 	public void highlightPauseButton() {
-		playButton.textColor = Color.WHITE;
+		playButton.setTextColor(Color.WHITE);
 		playButton.buttonColor = Color.GRAY;
-		pauseButton.textColor = Color.WHITE;
+		pauseButton.setTextColor(Color.WHITE);
 		pauseButton.buttonColor = Color.BLACK;
 	}
 

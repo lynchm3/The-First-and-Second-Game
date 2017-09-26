@@ -981,8 +981,8 @@ public class Inventory implements Draggable, Scrollable {
 				float emptyStringY = groundDisplay.squaresY + this.squaresHeight / 2 - 10;
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringX + GroundDisplay.lengthEmpty + 8,
 						emptyStringY - 8, emptyStringY + 28);
-				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
-						false, null, new Object[] { GroundDisplay.stringEmpty });
+				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, false, null,
+						new Object[] { GroundDisplay.stringEmpty });
 			}
 
 			boolean containsLegalStuff = false;
@@ -995,14 +995,14 @@ public class Inventory implements Draggable, Scrollable {
 			if (groundDisplay.gameObjects.size() == 0) {
 				Inventory.buttonLootAll.textParts = LOOT_ALL;
 				Inventory.buttonLootAll.enabled = false;
-				Inventory.buttonLootAll.textColor = Color.WHITE;
+				Inventory.buttonLootAll.setTextColor(Color.WHITE);
 			} else {
 				if (containsLegalStuff) {
 					Inventory.buttonLootAll.textParts = LOOT_ALL;
-					Inventory.buttonLootAll.textColor = Color.WHITE;
+					Inventory.buttonLootAll.setTextColor(Color.WHITE);
 				} else {
 					Inventory.buttonLootAll.textParts = STEAL_ALL;
-					Inventory.buttonLootAll.textColor = Color.RED;
+					Inventory.buttonLootAll.setTextColor(Color.RED);
 				}
 				Inventory.buttonLootAll.enabled = true;
 			}
@@ -1036,8 +1036,8 @@ public class Inventory implements Draggable, Scrollable {
 				float emptyStringY = otherInventory.squaresY + otherInventory.squaresHeight / 2 - 10;
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringX + lengthEmpty + 8, emptyStringY - 8,
 						emptyStringY + 28);
-				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false,
-						false, null, new Object[] { stringEmpty });
+				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, false, null,
+						new Object[] { stringEmpty });
 			}
 
 			boolean containsLegalStuff = false;
@@ -1050,14 +1050,14 @@ public class Inventory implements Draggable, Scrollable {
 			if (otherInventory.size() == 0) {
 				Inventory.buttonLootAll.textParts = LOOT_ALL;
 				Inventory.buttonLootAll.enabled = false;
-				Inventory.buttonLootAll.textColor = Color.WHITE;
+				Inventory.buttonLootAll.setTextColor(Color.WHITE);
 			} else {
 				if (containsLegalStuff) {
 					Inventory.buttonLootAll.textParts = LOOT_ALL;
-					Inventory.buttonLootAll.textColor = Color.WHITE;
+					Inventory.buttonLootAll.setTextColor(Color.WHITE);
 				} else {
 					Inventory.buttonLootAll.textParts = STEAL_ALL;
-					Inventory.buttonLootAll.textColor = Color.RED;
+					Inventory.buttonLootAll.setTextColor(Color.RED);
 				}
 				Inventory.buttonLootAll.enabled = true;
 			}
@@ -1094,23 +1094,23 @@ public class Inventory implements Draggable, Scrollable {
 
 		// text
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, null, new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 8f, 300f, true, false, null,
+					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, null, new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 8f, 300f, true, false, null,
+					new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, null, new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 8f, 300f, true, false, null,
+					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, null, new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 8f, 300f, true, false, null,
+					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, null, new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 8f, 300f, true, false, null,
+					new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true,
-					false, null, new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
+			TextUtils.printTextWithImages(100f, 8f, 300f, true, false, null,
+					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
 		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, false, null, "Bag");
@@ -1277,8 +1277,8 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void drawOtherInventoryText() {
-		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true,
-				false, null, new Object[] { ((GameObject) this.parent).name });
+		TextUtils.printTextWithImages(this.squaresX, inventoryNamesY, 300f, true, false, null,
+				new Object[] { ((GameObject) this.parent).name });
 	}
 
 	public void drawBorder() {
