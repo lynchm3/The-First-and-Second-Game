@@ -821,6 +821,15 @@ public class Level {
 			}
 		}
 
+		Game.activeBatch.flush();
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.setIdentity();
+		Game.activeBatch.updateUniforms();
+		// Draw lines for the popup windows
+		for (Window window : this.popupPinneds) {
+			window.drawLine();
+		}
+		Game.activeBatch.flush();
 		// if (levelMode == LevelMode.LEVEL_MODE_CAST) {
 		// for (int i = 0; i < 10; i++) {
 		// if (selectedPower.hasRange(i)) {

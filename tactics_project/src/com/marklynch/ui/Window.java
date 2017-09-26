@@ -115,8 +115,7 @@ public class Window implements Draggable {
 		// this.height = 40;
 	}
 
-	public void drawStaticUI() {
-
+	public void drawLine() {
 		if (!minimised) {
 
 			// LINE
@@ -132,6 +131,12 @@ public class Window implements Draggable {
 
 			// Draw line from window to subject
 			LineUtils.drawLine(Color.BLACK, lineX1, lineY1, lineX2, lineY2, 5);
+		}
+	}
+
+	public void drawStaticUI() {
+
+		if (!minimised) {
 			// QuadUtils.drawQuad(Color.BLACK, drawPositionX,
 			// Game.halfWindowWidth, drawPositionY, Game.halfWindowHeight);
 
