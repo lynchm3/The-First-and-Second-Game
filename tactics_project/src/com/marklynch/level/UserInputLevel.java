@@ -41,7 +41,7 @@ public class UserInputLevel {
 	public static float mouseDownY = -1;
 	public static float mouseLastX = -1;
 	public static float mouseLastY = -1;
-	public static boolean dragging = false;
+	public static boolean draggingMap = false;
 	public static boolean mouseButtonStateLeft = false;
 	public static boolean mouseButtonStateRight = false;
 
@@ -108,37 +108,10 @@ public class UserInputLevel {
 		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();
 		float mouseYinPixels = Mouse.getY();
-		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
 
 		// Setting the draggable
 
-		if (draggableMouseIsOver == null && scrollableMouseIsOver == null && Level.adventureLog.showing) {
-			draggableMouseIsOver = Level.adventureLog;
-			scrollableMouseIsOver = Level.adventureLog;
-		}
-
-		if (draggableMouseIsOver == null && scrollableMouseIsOver == null && inventoriesOpen) {
-			draggableMouseIsOver = Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
-					(int) Game.windowHeight - Mouse.getY());
-			scrollableMouseIsOver = (Scrollable) draggableMouseIsOver;
-		}
-
-		if (draggableMouseIsOver == null && scrollableMouseIsOver == null || !inventoriesOpen) {
-			for (int i = Game.level.popupPinneds.size() - 1; i >= 0; i--) {
-				if (Game.level.popupPinneds.get(i).isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
-					draggableMouseIsOver = Game.level.popupPinneds.get(i);
-					break;
-				}
-			}
-		}
-
-		if (draggableMouseIsOver == null && scrollableMouseIsOver == null && !inventoriesOpen) {
-			if (draggableMouseIsOver == null && scrollableMouseIsOver == null
-					&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
-				draggableMouseIsOver = Game.level.activityLogger;
-				scrollableMouseIsOver = Game.level.activityLogger;
-			}
-		}
+		setDraggableAndScrollableMouseIsOver();
 
 		// Transformed mouse coords
 
@@ -197,13 +170,13 @@ public class UserInputLevel {
 			if (mouseDownX == -1) {
 				mouseDownX = Mouse.getX();
 				mouseDownY = Mouse.getY();
-				dragging = false;
+				draggingMap = false;
 			}
 			mouseButtonStateLeft = true;
 
 			if (Mouse.getX() - mouseDownX > 20 || Mouse.getX() - mouseDownX < -20 || Mouse.getY() - mouseDownY > 20
 					|| Mouse.getY() - mouseDownY < -20) {
-				dragging = true;
+				draggingMap = true;
 				if (Game.level.cameraFollow) {
 					Game.dragX = Game.getDragXWithOffset();
 					Game.dragY = Game.getDragYWithOffset();
@@ -290,7 +263,7 @@ public class UserInputLevel {
 		Game.buttonHoveringOver = null;
 		Game.windowHoveringOver = null;
 		Game.popupTextBoxHoveringOver = null;
-		if (dragging == false) {
+		if (draggingMap == false) {
 			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
 			Game.windowHoveringOver = Game.level.getWindowFromMousePosition(Mouse.getX(), Mouse.getY(),
@@ -347,7 +320,7 @@ public class UserInputLevel {
 		// }
 
 		// Lifted the mouse to perform click
-		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && dragging == false) {
+		if (mouseButtonStateLeft == true && !Mouse.isButtonDown(0) && draggingMap == false) {
 
 			// Left Click
 			// Game.level.popupMenuObjects.clear();
@@ -385,7 +358,7 @@ public class UserInputLevel {
 			}
 		}
 
-		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && dragging == false) {
+		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && draggingMap == false) {
 
 			// Right Click
 			if (Game.windowHoveringOver != null)
@@ -422,7 +395,7 @@ public class UserInputLevel {
 		}
 
 		if (!Mouse.isButtonDown(0)) {
-			dragging = false;
+			draggingMap = false;
 			UserInputLevel.scrollableMouseIsOver = null;
 			UserInputLevel.draggableMouseIsOver = null;
 		}
@@ -435,6 +408,46 @@ public class UserInputLevel {
 		// Game.level.endTurn();
 
 		// interactedThisTurn = false;
+	}
+
+	private static void setDraggableAndScrollableMouseIsOver() {
+
+		if (draggingMap)
+			return;
+
+		if (draggableMouseIsOver != null)
+			return;
+
+		if (scrollableMouseIsOver != null)
+			return;
+
+		if (Level.adventureLog.showing) {
+			draggableMouseIsOver = Level.adventureLog;
+			scrollableMouseIsOver = Level.adventureLog;
+		}
+
+		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
+		if (inventoriesOpen) {
+			draggableMouseIsOver = Game.level.openInventories.get(0).getDraggable(Mouse.getX(),
+					(int) Game.windowHeight - Mouse.getY());
+			scrollableMouseIsOver = (Scrollable) draggableMouseIsOver;
+		}
+
+		if (!inventoriesOpen) {
+			for (int i = Game.level.popupPinneds.size() - 1; i >= 0; i--) {
+				if (Game.level.popupPinneds.get(i).isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+					draggableMouseIsOver = Game.level.popupPinneds.get(i);
+					break;
+				}
+			}
+
+			if (draggableMouseIsOver == null && scrollableMouseIsOver == null
+					&& Game.level.activityLogger.isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+				draggableMouseIsOver = Game.level.activityLogger;
+				scrollableMouseIsOver = Game.level.activityLogger;
+			}
+		}
+
 	}
 
 	// static boolean interactedThisTurn = false;
