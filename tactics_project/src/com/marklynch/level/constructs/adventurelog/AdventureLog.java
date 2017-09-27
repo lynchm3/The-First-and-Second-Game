@@ -14,6 +14,7 @@ import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 
@@ -230,17 +231,11 @@ public class AdventureLog implements Draggable, Scrollable {
 
 			int playerX = (Game.level.player.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_HEIGHT);
 			int playerY = (Game.level.player.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT);
-			float x1 = (Game.windowWidth / 2) + (Game.zoom
-					* (playerX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
-			float y1 = (Game.windowHeight / 2) + (Game.zoom
-					* (playerY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
+			int x1 = (int) Game.halfWindowWidth;
+			int y1 = (int) Game.halfWindowHeight;
 
-			// float x1 = Game.level.player.squareGameObjectIsOn.xInGrid *
-			// Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
-			// float y1 = Game.level.player.squareGameObjectIsOn.yInGrid *
-			// Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
-			float x2 = Integer.MAX_VALUE;
-			float y2 = Integer.MAX_VALUE;
+			int x2 = Integer.MAX_VALUE;
+			int y2 = Integer.MAX_VALUE;
 
 			int markersDrawn = 0;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
@@ -249,40 +244,65 @@ public class AdventureLog implements Draggable, Scrollable {
 
 					int squareX = (currentObjective.gameObject.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_HEIGHT);
 					int squareY = (currentObjective.gameObject.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT);
-					x2 = (Game.windowWidth / 2) + (Game.zoom
-							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
-					y2 = (Game.windowHeight / 2) + (Game.zoom
-							* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
-					// x2 =
-					// currentObjective.gameObject.squareGameObjectIsOn.xInGrid
-					// * Game.SQUARE_WIDTH
-					// + Game.HALF_SQUARE_WIDTH;
-					// y2 =
-					// currentObjective.gameObject.squareGameObjectIsOn.yInGrid
-					// * Game.SQUARE_HEIGHT
-					// + Game.HALF_SQUARE_HEIGHT;
+					x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
+							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH)));
+					y2 = (int) ((Game.windowHeight / 2) + (Game.zoom
+							* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT)));
+
 				} else if (currentObjective.square != null) {
 
 					int squareX = (currentObjective.square.xInGrid * (int) Game.SQUARE_HEIGHT);
 					int squareY = (currentObjective.square.yInGrid * (int) Game.SQUARE_HEIGHT);
-					x2 = (Game.windowWidth / 2) + (Game.zoom
-							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
-					y2 = (Game.windowHeight / 2) + (Game.zoom
-							* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
-					// x2 = currentObjective.square.xInGrid * Game.SQUARE_WIDTH
-					// + Game.HALF_SQUARE_WIDTH;
-					// y2 = currentObjective.square.yInGrid * Game.SQUARE_HEIGHT
-					// + Game.HALF_SQUARE_HEIGHT;
+					x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
+							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH)));
+					y2 = (int) ((Game.windowHeight / 2) + (Game.zoom
+							* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT)));
+
 				}
 
 				if (x2 != Integer.MAX_VALUE) {
 					LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 5);
+
+					// Get intersection of line and edge of screen
+
+					// Right edge
+					int x3 = (int) Game.windowWidth;
+					int x4 = (int) Game.windowWidth;
+					int y3 = 0;
+					int y4 = (int) Game.windowHeight;
+
+					int[] intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
+
+					if (intersect != null) {
+						TextureUtils.drawTexture(Game.level.gameCursor.cursor, intersect[0] - 10, intersect[1] - 10,
+								intersect[0] + 10, intersect[1] + 10);
+					}
+
 				}
 
 				markersDrawn++;
 
 			}
 		}
+	}
+
+	public static int[] lineIntersect(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+		double denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
+		if (denom == 0.0) { // Lines are parallel.
+			return null;
+		}
+		double ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denom;
+		double ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denom;
+		if (ua >= 0.0f && ua <= 1.0f && ub >= 0.0f && ub <= 1.0f) {
+
+			int[] result = new int[2];
+			result[0] = (int) (x1 + ua * (x2 - x1));
+			result[1] = (int) (y1 + ua * (y2 - y1));
+			System.out.println("result x = " + result[0] + ", " + result[1]);
+			return result;
+		}
+
+		return null;
 	}
 
 	@Override
