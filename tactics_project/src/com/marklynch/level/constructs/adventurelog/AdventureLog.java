@@ -10,7 +10,6 @@ import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -228,9 +227,6 @@ public class AdventureLog implements Draggable, Scrollable {
 
 	public static void drawQuestLines() {
 		if (activeQuest != null) {
-
-			int playerX = (Game.level.player.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_HEIGHT);
-			int playerY = (Game.level.player.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT);
 			int x1 = (int) Game.halfWindowWidth;
 			int y1 = (int) Game.halfWindowHeight;
 
@@ -261,7 +257,7 @@ public class AdventureLog implements Draggable, Scrollable {
 				}
 
 				if (x2 != Integer.MAX_VALUE) {
-					LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 5);
+					// LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 5);
 
 					// Get intersection of line and edge of screen
 
@@ -276,11 +272,62 @@ public class AdventureLog implements Draggable, Scrollable {
 					if (intersect != null) {
 						TextureUtils.drawTexture(Game.level.gameCursor.cursor, intersect[0] - 10, intersect[1] - 10,
 								intersect[0] + 10, intersect[1] + 10);
+
+						markersDrawn++;
+						continue;
 					}
 
-				}
+					// Left edge
+					x3 = 0;
+					x4 = 0;
+					y3 = 0;
+					y4 = (int) Game.windowHeight;
 
-				markersDrawn++;
+					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
+
+					if (intersect != null) {
+						TextureUtils.drawTexture(Game.level.gameCursor.cursor, intersect[0] - 10, intersect[1] - 10,
+								intersect[0] + 10, intersect[1] + 10);
+
+						markersDrawn++;
+						continue;
+					}
+
+					// Top edge
+					x3 = 0;
+					x4 = (int) Game.windowWidth;
+					y3 = 0;
+					y4 = 0;
+
+					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
+
+					if (intersect != null) {
+						TextureUtils.drawTexture(Game.level.gameCursor.cursor, intersect[0] - 10, intersect[1] - 10,
+								intersect[0] + 10, intersect[1] + 10);
+
+						markersDrawn++;
+						continue;
+					}
+
+					// Bottom edge
+					x3 = 0;
+					x4 = (int) Game.windowWidth;
+					y3 = (int) Game.windowHeight;
+					y4 = (int) Game.windowHeight;
+
+					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
+
+					if (intersect != null) {
+						TextureUtils.drawTexture(Game.level.gameCursor.cursor, intersect[0] - 10, intersect[1] - 10,
+								intersect[0] + 10, intersect[1] + 10);
+
+						markersDrawn++;
+						continue;
+					}
+
+					markersDrawn++;
+
+				}
 
 			}
 		}
