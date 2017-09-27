@@ -172,15 +172,19 @@ public class QuestSmallGame extends Quest {
 
 	public static Actor hunter;
 
-	String questTextTheHuntersAreGoingOnAHunt = "I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge";
-	String questTextOnOurWay = "I'm following the hunters to the beasts lair";
-
 	// public String objectiveTheWolves;// = "The Wolves";
 	// public String objectiveTheWeapons = "Weapons behind lodge";
 	// public String objectiveTheHunters = "Hunters";
 	public Objective objectiveWolves;
 	public Objective objectiveWeaponsBehindLodge;
 	public Objective objectiveHunters;
+
+	// Info strings
+	String infoSeenHunters = "I've spotted some hunters planning a hunt";
+	String infoAgreedToJoinHunters = "I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge";
+	String infoImFollowingTheHunters = "I'm following the hunters to the beasts lair";
+	String infoReadHuntPlan1 = "In the staging area for a hunt I found the plan for the hunt";
+	String infoReadHuntPlan2 = "In the staging area for the hunt I found the plan for the hunt";
 
 	public QuestSmallGame() {
 		super();
@@ -330,16 +334,15 @@ public class QuestSmallGame extends Quest {
 			public void run() {
 				if (!info.contains(huntingPlan)) {
 					if (!started) {
-						info.add("In the staging area for a hunt I found the plan for the hunt");
+						addInfo(infoReadHuntPlan1);
 						addObjective(objectiveHunters);
-						started = true;
-						turnStarted = Level.turn;
+						start();
 					} else {
-						info.add("In the staging area for the hunt I found the plan for the hunt");
+						addInfo(infoReadHuntPlan2);
 					}
 					turnUpdated = Level.turn;
-					info.add(huntingPlan);
-					info.add(superWolf);
+					addInfo(huntingPlan);
+					addInfo(superWolf);
 
 					BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
 					bestiaryKnowledge.name = true;
@@ -350,16 +353,18 @@ public class QuestSmallGame extends Quest {
 				}
 			}
 		});
-
-		started = true;
-		info.add(questTextTheHuntersAreGoingOnAHunt);
-		addObjective(objectiveHunters);
-
 	}
 
 	@Override
 	public void update() {
 		// Set flags
+		if (!started) {
+			if (hunterBrent.squareGameObjectIsOn.visibleToPlayer) {
+				start();
+				addInfo(infoSeenHunters);
+				addObjective(objectiveHunters);
+			}
+		}
 
 		// The wolves are dead
 		if (wolvesDead == false) {
@@ -578,14 +583,12 @@ public class QuestSmallGame extends Quest {
 				// PACK HUNTERS"
 				questAcceptedFromHunters = true;
 				if (!started) {
-					started = true;
-					turnStarted = turnUpdated = Level.turn;
+					start();
 				}
 
-				if (!text.contains(questTextTheHuntersAreGoingOnAHunt)) {
-					QuestSmallGame.this.info.add(questTextTheHuntersAreGoingOnAHunt);
-					addObjective(objectiveWeaponsBehindLodge);
-				}
+				addInfo(infoAgreedToJoinHunters);
+				addObjective(objectiveWeaponsBehindLodge);
+				addObjective(objectiveHunters);
 
 			}
 		};
@@ -641,7 +644,7 @@ public class QuestSmallGame extends Quest {
 				currentObjectives.remove(objectiveWeaponsBehindLodge);
 				addObjective(objectiveWolves);
 				if (Game.level.quests.questCaveOfTheBlind.started == false) {
-					Game.level.quests.questCaveOfTheBlind.started = true;
+					Game.level.quests.questCaveOfTheBlind.start();
 					Game.level.quests.questCaveOfTheBlind
 							.addObjective(Game.level.quests.questCaveOfTheBlind.objectiveCave);
 					Game.level.quests.questCaveOfTheBlind.addObjective(objectiveHunters);

@@ -231,9 +231,6 @@ public class QuestThePigs extends Quest {
 		Templates.WHEAT.makeCopy(Game.level.squares[63][73], null);
 		Templates.WHEAT.makeCopy(Game.level.squares[64][73], null);
 
-		started = true;
-		info.add("Found a farm...");
-
 	}
 
 	@Override

@@ -157,9 +157,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Conversations
 		conversationForMort = new ConversationForMort(this);
 
-		started = true;
-		info.add("I've heard about a 'haunted' cave to the east of town.");
-
+		// Objectives
 		objectiveCave = new Objective("Cave", null, null);
 	}
 

@@ -131,9 +131,6 @@ public class QuestTheSecretRoom extends Quest {
 		Templates.TREE.makeCopy(Game.level.squares[26][19], null);
 		Templates.TREE.makeCopy(Game.level.squares[26][23], null);
 
-		started = true;
-		info.add("I've found a secret door in a mansion in town " + falseWall.squareGameObjectIsOn);
-
 	}
 
 }
