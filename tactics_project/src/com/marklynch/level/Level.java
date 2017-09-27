@@ -1257,6 +1257,10 @@ public class Level {
 		// script
 		script.draw();
 
+		for (Window popupPinned : popupPinneds) {
+			popupPinned.drawStaticUI();
+		}
+
 		if (adventureLog.showing) {
 			adventureLog.drawStaticUI();
 		}
@@ -1275,10 +1279,6 @@ public class Level {
 
 		for (PopupMenu popup : popupMenuActions) {
 			popup.draw();
-		}
-
-		for (Window popupPinned : popupPinneds) {
-			popupPinned.drawStaticUI();
 		}
 
 		for (PopupTextBox popupTextBox : popupTextBoxes) {
