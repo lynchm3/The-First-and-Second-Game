@@ -309,8 +309,8 @@ public class QuestSmallGame extends Quest {
 		}
 
 		weaponsBehindLodge = new ArrayList<GameObject>();
-		weaponsBehindLodge.add(Templates.HATCHET.makeCopy(Game.level.squares[112][9], hunterBrent));
-		weaponsBehindLodge.add(Templates.HUNTING_BOW.makeCopy(Game.level.squares[112][9], hunterBrent));
+		weaponsBehindLodge.add(Templates.HATCHET.makeCopy(squareBehindLodge, hunterBrent));
+		weaponsBehindLodge.add(Templates.HUNTING_BOW.makeCopy(squareBehindLodge, hunterBrent));
 
 		for (GameObject weaponBehindLodge : weaponsBehindLodge) {
 			weaponBehindLodge.quest = this;
@@ -320,13 +320,13 @@ public class QuestSmallGame extends Quest {
 		AreaTownForest.createForest();
 
 		objectiveWolves = new Objective("The Wolves", superWolf, null);
-		objectiveWeaponsBehindLodge = new Objective("Weapons", null, squareBehindLodge);
+		objectiveWeaponsBehindLodge = new Objective("Hunting Weapons", null, squareBehindLodge);
 		objectiveHunters = new Objective("The Hunters", hunterBrent, null);
 
-		setUpConversationJoinTheHunt();
+		setUpConversationReady();
 		setUpConversationImNotSpying();
 		setUpConversationSaveTheWolf();
-		setUpConversationReadyToGo();
+		setUpConversationHunterOpening();
 		setUpConversationYouDidntHelp();
 
 		huntingPlan.setOnReadListener(new ActionListener() {
@@ -561,7 +561,7 @@ public class QuestSmallGame extends Quest {
 		return null;
 	}
 
-	public void setUpConversationReadyToGo() {
+	public void setUpConversationHunterOpening() {
 
 		ConversationPart conversationPartTheresEquipment = new ConversationPart(
 				new Object[] {
@@ -588,6 +588,9 @@ public class QuestSmallGame extends Quest {
 
 				addInfo(infoAgreedToJoinHunters);
 				addObjective(objectiveWeaponsBehindLodge);
+				for (GameObject weapon : weaponsBehindLodge) {
+					weapon.owner = null;
+				}
 				addObjective(objectiveHunters);
 
 			}
@@ -622,7 +625,7 @@ public class QuestSmallGame extends Quest {
 
 	}
 
-	public void setUpConversationJoinTheHunt() {
+	public void setUpConversationReady() {
 
 		ConversationPart conversationAlrightLetsGo = new ConversationPart(
 				new Object[] {
@@ -641,7 +644,6 @@ public class QuestSmallGame extends Quest {
 				// Update quest log
 				// Set enviromentalist to come watch
 				// Hunters on the way
-				currentObjectives.remove(objectiveWeaponsBehindLodge);
 				addObjective(objectiveWolves);
 				if (Game.level.quests.questCaveOfTheBlind.started == false) {
 					Game.level.quests.questCaveOfTheBlind.start();
