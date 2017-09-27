@@ -992,6 +992,8 @@ public class Level {
 
 	public void drawUI() {
 
+		adventureLog.drawQuestMarkers();
+
 		// Objects 2
 
 		for (GameObject gameObject : inanimateObjectsOnGround) {

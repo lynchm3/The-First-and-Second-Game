@@ -186,7 +186,7 @@ public class QuestSmallGame extends Quest {
 		super();
 
 		name = "SMALL GAME";
-		// currentObjectives.add("No objective");
+		// addObjective("No objective");
 
 		squareBehindLodge = Game.level.squares[112][9];
 		huntPlanningArea = Game.level.squares[105][8];
@@ -331,7 +331,7 @@ public class QuestSmallGame extends Quest {
 				if (!info.contains(huntingPlan)) {
 					if (!started) {
 						info.add("In the staging area for a hunt I found the plan for the hunt");
-						currentObjectives.add(objectiveHunters);
+						addObjective(objectiveHunters);
 						started = true;
 						turnStarted = Level.turn;
 					} else {
@@ -353,7 +353,7 @@ public class QuestSmallGame extends Quest {
 
 		started = true;
 		info.add(questTextTheHuntersAreGoingOnAHunt);
-		currentObjectives.add(objectiveHunters);
+		addObjective(objectiveHunters);
 
 	}
 
@@ -584,7 +584,7 @@ public class QuestSmallGame extends Quest {
 
 				if (!text.contains(questTextTheHuntersAreGoingOnAHunt)) {
 					QuestSmallGame.this.info.add(questTextTheHuntersAreGoingOnAHunt);
-					currentObjectives.add(objectiveWeaponsBehindLodge);
+					addObjective(objectiveWeaponsBehindLodge);
 				}
 
 			}
@@ -656,6 +656,12 @@ public class QuestSmallGame extends Quest {
 				new Object[] { "Only hunters get loot. Now fuck off!" }, new ConversationResponse[] {},
 				hunterPack.getLeader());
 		conversationHuntersOnlyHuntersGetLoot = new Conversation(conversationPartOnlyHuntersGetLoot);
+	}
+
+	public void addObjective(Objective objective) {
+		if (!currentObjectives.contains(objective)) {
+			currentObjectives.add(objective);
+		}
 	}
 
 }

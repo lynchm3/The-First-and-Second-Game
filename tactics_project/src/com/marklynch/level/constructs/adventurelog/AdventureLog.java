@@ -208,6 +208,22 @@ public class AdventureLog implements Draggable, Scrollable {
 		}
 	}
 
+	public void drawQuestMarkers() {
+		if (activeQuest != null) {
+			int markersDrawn = 0;
+			for (Objective currentObjective : activeQuest.currentObjectives) {
+
+				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
+					currentObjective.gameObject.squareGameObjectIsOn.drawObjective(markersDrawn);
+				} else if (currentObjective.square != null) {
+					currentObjective.square.drawObjective(markersDrawn);
+				}
+				markersDrawn++;
+
+			}
+		}
+	}
+
 	@Override
 	public void scroll(float dragX, float dragY) {
 		// TODO Auto-generated method stub

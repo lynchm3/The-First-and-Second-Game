@@ -439,6 +439,14 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// GL11.glPopMatrix();
 	}
 
+	public void drawObjective(int objectiveNumber) {
+		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
+		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+
+		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+	}
+
 	public Action drawAction(boolean onMouse) {
 
 		if (!this.seenByPlayer) {
