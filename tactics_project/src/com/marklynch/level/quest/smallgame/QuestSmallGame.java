@@ -29,7 +29,7 @@ import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
-import com.marklynch.objects.units.Farmer;
+import com.marklynch.objects.units.Hunter;
 
 public class QuestSmallGame extends Quest {
 
@@ -192,7 +192,7 @@ public class QuestSmallGame extends Quest {
 		name = "SMALL GAME";
 		// addObjective("No objective");
 
-		squareBehindLodge = Game.level.squares[112][9];
+		squareBehindLodge = Game.level.squares[111][16];
 		huntPlanningArea = Game.level.squares[105][8];
 
 		// BRENT
@@ -277,12 +277,11 @@ public class QuestSmallGame extends Quest {
 		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		chest.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, thief));
 
-		environmentalistBill = new Farmer("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
+		environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
 				"environmentalist.png", Game.level.squares[105][16], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
 				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 110f, null, Game.level.factions.get(1), 0, 0, 0, 0, 0,
 				0, 0, 0, 10, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 		environmentalistBill.inventory.add(Templates.HATCHET.makeCopy(null, environmentalistBill));
-
 		environmentalistBill.quest = this;
 
 		superWolf = new AggressiveWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
@@ -418,8 +417,10 @@ public class QuestSmallGame extends Quest {
 	public boolean update(Actor actor) {
 		update();
 		if (hunterPack.contains(actor)) {
+			System.out.println("Hunter A");
 			return updateHunter(actor);
 		} else if (actor == environmentalistBill) {
+			System.out.println("Bill A");
 			return updateEnvironmentalist(actor);
 		} else if (wolfPack.contains(actor)) {
 			return true;
