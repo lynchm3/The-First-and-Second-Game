@@ -1212,22 +1212,25 @@ public class Level {
 			}
 		}
 
+		// Current objective quest
+		adventureLog.drawActiveQuestObjective();
+
 		// Turn text
 		if (currentFactionMoving != null) {
-			TextUtils.printTextWithImages(Game.windowWidth - 150, 20, Integer.MAX_VALUE, true, false, null,
+			TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, false, null,
 					new Object[] { "TURN " + turn });
 		}
 
 		// Zoom
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 40, Integer.MAX_VALUE, true, false, null,
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 100, Integer.MAX_VALUE, true, false, null,
 				new Object[] { "Zoom " + Game.zoom });
 
 		// FPS
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 60, Integer.MAX_VALUE, true, false, null,
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 120, Integer.MAX_VALUE, true, false, null,
 				new Object[] { "FPS " + Game.displayFPS });
 
 		// TIME
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, false, null,
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, false, null,
 				new Object[] { timeString });
 
 		// if (factions.size() > 0 && currentFactionMoving != null) {

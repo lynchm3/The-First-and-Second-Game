@@ -177,7 +177,7 @@ public class QuestSmallGame extends Quest {
 		super();
 
 		name = "SMALL GAME";
-		currentObjective = "CURRENT OBJECTIVE";
+		currentObjectives.add("No objective");
 
 		squareBehindLodge = Game.level.squares[112][9];
 		huntPlanningArea = Game.level.squares[105][8];

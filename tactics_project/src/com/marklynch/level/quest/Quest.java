@@ -8,7 +8,7 @@ import com.marklynch.objects.units.Actor;
 public class Quest {
 
 	public String name;
-	public String currentObjective;
+	public ArrayList<String> currentObjectives = new ArrayList<String>();
 	public ArrayList<String> objectives = new ArrayList<String>();
 	public ArrayList<Object> info = new ArrayList<Object>();
 	public ArrayList<Conversation> conversationLog = new ArrayList<Conversation>();

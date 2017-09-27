@@ -27,6 +27,7 @@ import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
+import com.marklynch.level.constructs.adventurelog.AdventureLog;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
@@ -516,6 +517,8 @@ public class Editor {
 
 		Level.quests.clear();
 		Level.quests.add(new QuestSmallGame());
+		AdventureLog.activeQuest = Game.level.quests.get(0);
+		AdventureLog.questToDisplayInAdventureLog = Game.level.quests.get(0);
 		Level.quests.add(new QuestCaveOfTheBlind());
 		Level.quests.add(new QuestThePigs());
 		Level.quests.add(new QuestBetweenTheWalls());
