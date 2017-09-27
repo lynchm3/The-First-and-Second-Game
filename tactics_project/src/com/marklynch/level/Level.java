@@ -17,6 +17,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.ai.utils.Move;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.adventurelog.AdventureLog;
+import com.marklynch.level.constructs.adventurelog.QuestList;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -35,7 +36,6 @@ import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
-import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -109,8 +109,8 @@ public class Level {
 	public transient Script script;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
-	public static transient ArrayList<Quest> quests = new ArrayList<Quest>();
 	public static transient AdventureLog adventureLog = new AdventureLog();
+	public static transient QuestList quests = new QuestList();
 	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
 
 	// public Vector<Actor> actors;

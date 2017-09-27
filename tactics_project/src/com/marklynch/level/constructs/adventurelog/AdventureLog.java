@@ -345,7 +345,6 @@ public class AdventureLog implements Draggable, Scrollable {
 			int[] result = new int[2];
 			result[0] = (int) (x1 + ua * (x2 - x1));
 			result[1] = (int) (y1 + ua * (y2 - y1));
-			System.out.println("result x = " + result[0] + ", " + result[1]);
 			return result;
 		}
 

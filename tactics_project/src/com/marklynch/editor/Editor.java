@@ -27,18 +27,12 @@ import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
-import com.marklynch.level.constructs.adventurelog.AdventureLog;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.inventory.Inventory;
-import com.marklynch.level.quest.betweenthewalls.QuestBetweenTheWalls;
-import com.marklynch.level.quest.caveoftheblind.QuestCaveOfTheBlind;
-import com.marklynch.level.quest.smallgame.QuestSmallGame;
-import com.marklynch.level.quest.thepigs.QuestThePigs;
-import com.marklynch.level.quest.thesecretroom.QuestTheSecretRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.GameObjectTemplate;
@@ -156,6 +150,7 @@ public class Editor {
 		colors.add(new Color(Color.MAGENTA));
 		colors.add(new Color(Color.CYAN));
 		colors.add(new Color(Color.ORANGE));
+
 		Game.level = new Level(360, 100);
 
 		for (int i = 0; i < Game.level.squares.length; i++) {
@@ -180,6 +175,8 @@ public class Editor {
 		settingsWindow = levelSettingsWindow;
 
 		generateTestObjects();
+
+		Game.level.quests.makeQuests();
 
 		// TABS
 		String tabText = "LEVEL";
@@ -514,15 +511,6 @@ public class Editor {
 		// // doorLocations2.add(Game.level.squares[11][9]);
 		// Game.level.structures.add(new Building("Hunting Lodge", 7, 7, 11, 11,
 		// doorLocations2));
-
-		Level.quests.clear();
-		Level.quests.add(new QuestSmallGame());
-		AdventureLog.activeQuest = Game.level.quests.get(0);
-		AdventureLog.questToDisplayInAdventureLog = Game.level.quests.get(0);
-		Level.quests.add(new QuestCaveOfTheBlind());
-		Level.quests.add(new QuestThePigs());
-		Level.quests.add(new QuestBetweenTheWalls());
-		Level.quests.add(new QuestTheSecretRoom());
 
 		// Add a game object
 		Templates.DUMPSTER.makeCopy(Game.level.squares[4][2], null);

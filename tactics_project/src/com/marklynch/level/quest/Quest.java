@@ -32,4 +32,10 @@ public class Quest {
 		return null;
 	}
 
+	public void addObjective(Objective objective) {
+		if (!currentObjectives.contains(objective)) {
+			currentObjectives.add(objective);
+		}
+	}
+
 }

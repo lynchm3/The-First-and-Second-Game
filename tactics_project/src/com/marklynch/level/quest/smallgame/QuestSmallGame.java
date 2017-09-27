@@ -622,8 +622,9 @@ public class QuestSmallGame extends Quest {
 	public void setUpConversationJoinTheHunt() {
 
 		ConversationPart conversationAlrightLetsGo = new ConversationPart(
-				new Object[] { "Alright! Let's go bag us a some pelts!" }, new ConversationResponse[] {},
-				hunterPack.getLeader());
+				new Object[] {
+						"Alright! The cave is to the east, past the forest, at the entrance to a now defunct mining operation." },
+				new ConversationResponse[] {}, hunterPack.getLeader());
 
 		ConversationPart conversationPartWellHurryOn = new ConversationPart(new Object[] { "Well hurry on!" },
 				new ConversationResponse[] {}, hunterPack.getLeader());
@@ -638,6 +639,15 @@ public class QuestSmallGame extends Quest {
 				// Set enviromentalist to come watch
 				// Hunters on the way
 				currentObjectives.remove(objectiveWeaponsBehindLodge);
+				addObjective(objectiveWolves);
+				if (Game.level.quests.questCaveOfTheBlind.started == false) {
+					Game.level.quests.questCaveOfTheBlind.started = true;
+					Game.level.quests.questCaveOfTheBlind
+							.addObjective(Game.level.quests.questCaveOfTheBlind.objectiveCave);
+					Game.level.quests.questCaveOfTheBlind.addObjective(objectiveHunters);
+					Game.level.quests.questCaveOfTheBlind.info.add(
+							"I heard from some hunters about a now defunct mining operation to the east of town, past the forest, it might be worth having a look.");
+				}
 				readyToGo = true;
 			}
 		};
@@ -656,12 +666,6 @@ public class QuestSmallGame extends Quest {
 				new Object[] { "Only hunters get loot. Now fuck off!" }, new ConversationResponse[] {},
 				hunterPack.getLeader());
 		conversationHuntersOnlyHuntersGetLoot = new Conversation(conversationPartOnlyHuntersGetLoot);
-	}
-
-	public void addObjective(Objective objective) {
-		if (!currentObjectives.contains(objective)) {
-			currentObjectives.add(objective);
-		}
 	}
 
 }

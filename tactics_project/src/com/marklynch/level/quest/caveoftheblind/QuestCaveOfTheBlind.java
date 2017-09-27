@@ -3,6 +3,7 @@ package com.marklynch.level.quest.caveoftheblind;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
@@ -95,6 +96,10 @@ public class QuestCaveOfTheBlind extends Quest {
 	Key seansKey;
 	Key paulsKey;
 
+	Structure cave;
+
+	public Objective objectiveCave;
+
 	public QuestCaveOfTheBlind() {
 		super();
 		name = "CAVE OF THE BLIND";
@@ -154,6 +159,8 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		started = true;
 		info.add("I've heard about a 'haunted' cave to the east of town.");
+
+		objectiveCave = new Objective("Cave", null, null);
 	}
 
 	@Override
@@ -674,9 +681,10 @@ public class QuestCaveOfTheBlind extends Quest {
 		squaresToRemove.add(Game.level.squares[224][9]);
 		squaresToRemove.add(Game.level.squares[224][10]);
 
-		Game.level.structures.add(new Structure("Mort & Mort Mining", caveSections, rooms, cavePaths, caveFeatures,
+		cave = new Structure("Mort & Mort Mining", caveSections, rooms, cavePaths, caveFeatures,
 				new ArrayList<Square>(), "map_cave.png", 223, 0, 321, 74, true, mort, squaresToRemove, extraWalls,
-				Templates.WALL, Square.STONE_TEXTURE));
+				Templates.WALL, Square.STONE_TEXTURE);
+		Game.level.structures.add(cave);
 
 		// Dirty Sheet
 		// Templates.DIRTY_SHEET.makeCopy(Game.level.squares[247][11]);
