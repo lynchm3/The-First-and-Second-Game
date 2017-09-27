@@ -18,7 +18,9 @@ import mdesl.graphics.Color;
 public class AdventureLog implements Draggable, Scrollable {
 
 	public boolean showing = false;
-	public Quest selectedQuest = null;
+
+	public Quest questToDisplayInAdventureLog = null;
+	public Quest activeQuest = null;
 
 	int listX;
 	int listY;
@@ -34,6 +36,8 @@ public class AdventureLog implements Draggable, Scrollable {
 	transient static int bottomBorderHeight;
 
 	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> buttonsToMakeQuestAcive = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> links = new ArrayList<LevelButton>();
 	// Close button
 	static LevelButton buttonClose;
@@ -75,43 +79,78 @@ public class AdventureLog implements Draggable, Scrollable {
 		showing = true;
 
 		buttons.clear();
+		buttonsToMakeQuestAcive.clear();
+		buttonsToDisplayQuest.clear();
 		buttons.add(buttonClose);
 
 		int questsDrawnInList = 0;
 		for (final Quest quest : Level.quests) {
 			if (quest.started) {
-				if (selectedQuest == null)
-					selectedQuest = quest;
-				if (quest == selectedQuest) {
-					// HIGHLIGHT
+				if (questToDisplayInAdventureLog == null) {
+					questToDisplayInAdventureLog = quest;
+				}
+				if (activeQuest == null) {
+					activeQuest = quest;
 				}
 
-				final LevelButton button = new LevelButton(listX + listBorder,
-						listY + listBorder + questsDrawnInList * listItemHeight, listWidth, listItemHeight,
-						"end_turn_button.png", "end_turn_button.png", quest.name, true, true, Color.BLACK, Color.WHITE);
-				button.setClickListener(new ClickListener() {
+				// buttons to make quest the active one
+				final LevelButton buttonToMakeQuestActive = new LevelButton(
+						listX + listBorder + listWidth - listItemHeight,
+						listY + listBorder + questsDrawnInList * listItemHeight, listItemHeight, listItemHeight,
+						"end_turn_button.png", "end_turn_button.png", "", true, true, Color.BLACK, Color.WHITE);
+				buttonToMakeQuestActive.setClickListener(new ClickListener() {
 
 					@Override
 					public void click() {
-						for (LevelButton button : buttons) {
+						for (LevelButton button : buttonsToMakeQuestAcive) {
 							// change colors to off
 							button.buttonColor = Color.BLACK;
 							button.setTextColor(Color.WHITE);
 						}
-						button.buttonColor = Color.WHITE;
-						button.setTextColor(Color.BLACK);
-						selectedQuest = quest;
+						buttonToMakeQuestActive.buttonColor = Color.WHITE;
+						buttonToMakeQuestActive.setTextColor(Color.BLACK);
+						activeQuest = quest;
 
 					}
 				});
 
-				if (selectedQuest == quest) {
-					button.buttonColor = Color.WHITE;
-					button.setTextColor(Color.BLACK);
-
+				if (questToDisplayInAdventureLog == quest) {
+					buttonToMakeQuestActive.buttonColor = Color.WHITE;
+					buttonToMakeQuestActive.setTextColor(Color.BLACK);
 				}
 
-				buttons.add(button);
+				buttons.add(buttonToMakeQuestActive);
+				buttonsToMakeQuestAcive.add(buttonToMakeQuestActive);
+
+				// Button w/ the name of the quest -
+
+				final LevelButton buttonToShowQuestDetails = new LevelButton(listX + listBorder,
+						listY + listBorder + questsDrawnInList * listItemHeight, listWidth - listItemHeight,
+						listItemHeight, "end_turn_button.png", "end_turn_button.png", quest.name, true, true,
+						Color.BLACK, Color.WHITE);
+				buttonToShowQuestDetails.setClickListener(new ClickListener() {
+
+					@Override
+					public void click() {
+						for (LevelButton button : buttonsToDisplayQuest) {
+							// change colors to off
+							button.buttonColor = Color.BLACK;
+							button.setTextColor(Color.WHITE);
+						}
+						buttonToShowQuestDetails.buttonColor = Color.WHITE;
+						buttonToShowQuestDetails.setTextColor(Color.BLACK);
+						questToDisplayInAdventureLog = quest;
+
+					}
+				});
+
+				if (questToDisplayInAdventureLog == quest) {
+					buttonToShowQuestDetails.buttonColor = Color.WHITE;
+					buttonToShowQuestDetails.setTextColor(Color.BLACK);
+				}
+
+				buttons.add(buttonToShowQuestDetails);
+				buttonsToDisplayQuest.add(buttonToShowQuestDetails);
 				questsDrawnInList++;
 
 			}
@@ -152,8 +191,8 @@ public class AdventureLog implements Draggable, Scrollable {
 
 		// Content
 		int questTextsDrawn = 0;
-		if (selectedQuest != null) {
-			for (Object pieceOfInfo : selectedQuest.info) {
+		if (questToDisplayInAdventureLog != null) {
+			for (Object pieceOfInfo : questToDisplayInAdventureLog.info) {
 				TextUtils.printTextWithImages(contentX + contentBorder,
 						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true, true,
 						links, new Object[] { pieceOfInfo });
