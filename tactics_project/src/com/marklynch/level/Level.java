@@ -825,6 +825,10 @@ public class Level {
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
 		Game.activeBatch.updateUniforms();
+
+		// Quest lines
+		AdventureLog.drawQuestLines();
+
 		// Draw lines for the popup windows
 		for (Window window : this.popupPinneds) {
 			window.drawLine();

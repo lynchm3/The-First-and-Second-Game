@@ -10,6 +10,7 @@ import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -218,6 +219,66 @@ public class AdventureLog implements Draggable, Scrollable {
 				} else if (currentObjective.square != null) {
 					currentObjective.square.drawObjective(markersDrawn);
 				}
+				markersDrawn++;
+
+			}
+		}
+	}
+
+	public static void drawQuestLines() {
+		if (activeQuest != null) {
+
+			int playerX = (Game.level.player.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_HEIGHT);
+			int playerY = (Game.level.player.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT);
+			float x1 = (Game.windowWidth / 2) + (Game.zoom
+					* (playerX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
+			float y1 = (Game.windowHeight / 2) + (Game.zoom
+					* (playerY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
+
+			// float x1 = Game.level.player.squareGameObjectIsOn.xInGrid *
+			// Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
+			// float y1 = Game.level.player.squareGameObjectIsOn.yInGrid *
+			// Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
+			float x2 = Integer.MAX_VALUE;
+			float y2 = Integer.MAX_VALUE;
+
+			int markersDrawn = 0;
+			for (Objective currentObjective : activeQuest.currentObjectives) {
+
+				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
+
+					int squareX = (currentObjective.gameObject.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_HEIGHT);
+					int squareY = (currentObjective.gameObject.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT);
+					x2 = (Game.windowWidth / 2) + (Game.zoom
+							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
+					y2 = (Game.windowHeight / 2) + (Game.zoom
+							* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
+					// x2 =
+					// currentObjective.gameObject.squareGameObjectIsOn.xInGrid
+					// * Game.SQUARE_WIDTH
+					// + Game.HALF_SQUARE_WIDTH;
+					// y2 =
+					// currentObjective.gameObject.squareGameObjectIsOn.yInGrid
+					// * Game.SQUARE_HEIGHT
+					// + Game.HALF_SQUARE_HEIGHT;
+				} else if (currentObjective.square != null) {
+
+					int squareX = (currentObjective.square.xInGrid * (int) Game.SQUARE_HEIGHT);
+					int squareY = (currentObjective.square.yInGrid * (int) Game.SQUARE_HEIGHT);
+					x2 = (Game.windowWidth / 2) + (Game.zoom
+							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
+					y2 = (Game.windowHeight / 2) + (Game.zoom
+							* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
+					// x2 = currentObjective.square.xInGrid * Game.SQUARE_WIDTH
+					// + Game.HALF_SQUARE_WIDTH;
+					// y2 = currentObjective.square.yInGrid * Game.SQUARE_HEIGHT
+					// + Game.HALF_SQUARE_HEIGHT;
+				}
+
+				if (x2 != Integer.MAX_VALUE) {
+					LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 5);
+				}
+
 				markersDrawn++;
 
 			}
