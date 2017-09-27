@@ -7,6 +7,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
+import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -160,6 +161,7 @@ public class QuestSmallGame extends Quest {
 	// Squares
 	Square squareBehindLodge;
 	Square huntPlanningArea;
+	Actor hunterBrent;
 
 	// Conversations
 	public static Conversation conversationHuntersJoinTheHunt;
@@ -173,11 +175,18 @@ public class QuestSmallGame extends Quest {
 	String questTextTheHuntersAreGoingOnAHunt = "I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge";
 	String questTextOnOurWay = "I'm following the hunters to the beasts lair";
 
+	// public String objectiveTheWolves;// = "The Wolves";
+	// public String objectiveTheWeapons = "Weapons behind lodge";
+	// public String objectiveTheHunters = "Hunters";
+	public Objective objectiveWolves;
+	public Objective objectiveWeaponsBehindLodge;
+	public Objective objectiveHunters;
+
 	public QuestSmallGame() {
 		super();
 
 		name = "SMALL GAME";
-		currentObjectives.add("No objective");
+		// currentObjectives.add("No objective");
 
 		squareBehindLodge = Game.level.squares[112][9];
 		huntPlanningArea = Game.level.squares[105][8];
@@ -186,7 +195,7 @@ public class QuestSmallGame extends Quest {
 
 		// Add lead hunter
 		GameObject brentsBed = Templates.BED.makeCopy(Game.level.squares[110][10]);
-		Actor hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[105][8],
+		hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[105][8],
 				Game.level.factions.get(1), brentsBed, 203, new GameObject[] {
 						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {});
@@ -306,6 +315,10 @@ public class QuestSmallGame extends Quest {
 
 		AreaTownForest.createForest();
 
+		objectiveWolves = new Objective("The Wolves", superWolf, null);
+		objectiveWeaponsBehindLodge = new Objective("Weapons", null, squareBehindLodge);
+		objectiveHunters = new Objective("The Hunters", hunterBrent, null);
+
 		setUpConversationJoinTheHunt();
 		setUpConversationImNotSpying();
 		setUpConversationSaveTheWolf();
@@ -318,6 +331,7 @@ public class QuestSmallGame extends Quest {
 				if (!info.contains(huntingPlan)) {
 					if (!started) {
 						info.add("In the staging area for a hunt I found the plan for the hunt");
+						currentObjectives.add(objectiveHunters);
 						started = true;
 						turnStarted = Level.turn;
 					} else {
@@ -339,6 +353,7 @@ public class QuestSmallGame extends Quest {
 
 		started = true;
 		info.add(questTextTheHuntersAreGoingOnAHunt);
+		currentObjectives.add(objectiveHunters);
 
 	}
 
@@ -569,6 +584,7 @@ public class QuestSmallGame extends Quest {
 
 				if (!text.contains(questTextTheHuntersAreGoingOnAHunt)) {
 					QuestSmallGame.this.info.add(questTextTheHuntersAreGoingOnAHunt);
+					currentObjectives.add(objectiveWeaponsBehindLodge);
 				}
 
 			}
@@ -621,6 +637,7 @@ public class QuestSmallGame extends Quest {
 				// Update quest log
 				// Set enviromentalist to come watch
 				// Hunters on the way
+				currentObjectives.remove(objectiveWeaponsBehindLodge);
 				readyToGo = true;
 			}
 		};

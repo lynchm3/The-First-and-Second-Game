@@ -2,13 +2,14 @@ package com.marklynch.level.quest;
 
 import java.util.ArrayList;
 
+import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;
 
 public class Quest {
 
 	public String name;
-	public ArrayList<String> currentObjectives = new ArrayList<String>();
+	public ArrayList<Objective> currentObjectives = new ArrayList<Objective>();
 	public ArrayList<String> objectives = new ArrayList<String>();
 	public ArrayList<Object> info = new ArrayList<Object>();
 	public ArrayList<Conversation> conversationLog = new ArrayList<Conversation>();

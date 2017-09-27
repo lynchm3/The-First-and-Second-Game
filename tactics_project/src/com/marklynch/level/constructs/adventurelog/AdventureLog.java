@@ -199,10 +199,11 @@ public class AdventureLog implements Draggable, Scrollable {
 					new Object[] { new StringWithColor(activeQuest.name, Color.WHITE) });
 
 			int objectivesPrinted = 0;
-			for (String currentObjective : activeQuest.currentObjectives) {
-				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(currentObjective) - 150,
+			for (Objective currentObjective : activeQuest.currentObjectives) {
+				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(currentObjective.text) - 150,
 						40 + 20 * objectivesPrinted, Integer.MAX_VALUE, false, false, null,
-						new Object[] { new StringWithColor(currentObjective, Color.WHITE) });
+						new Object[] { new StringWithColor(currentObjective.text, Color.WHITE) });
+				objectivesPrinted++;
 			}
 		}
 	}
