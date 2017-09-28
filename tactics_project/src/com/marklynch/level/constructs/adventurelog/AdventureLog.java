@@ -88,9 +88,6 @@ public class AdventureLog implements Draggable, Scrollable {
 		int questsDrawnInList = 0;
 		for (final Quest quest : Level.quests) {
 			if (quest.started) {
-				if (questToDisplayInAdventureLog == null) {
-					questToDisplayInAdventureLog = quest;
-				}
 
 				// buttons to make quest the active one
 				final LevelButton buttonToMakeQuestActive = new LevelButton(
@@ -146,6 +143,15 @@ public class AdventureLog implements Draggable, Scrollable {
 				if (questToDisplayInAdventureLog == quest) {
 					buttonToShowQuestDetails.buttonColor = Color.WHITE;
 					buttonToShowQuestDetails.setTextColor(Color.BLACK);
+				}
+
+				if (quest.turnStarted == Game.level.turn) {
+					buttonToShowQuestDetails.click();
+				}
+
+				if (questToDisplayInAdventureLog == null) {
+					buttonToShowQuestDetails.click();
+					;
 				}
 
 				buttons.add(buttonToShowQuestDetails);
