@@ -182,7 +182,7 @@ public class QuestSmallGame extends Quest {
 	// Info strings
 	String infoSeenHunters = "I've spotted some hunters planning a hunt";
 	String infoAgreedToJoinHunters = "I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge";
-	String infoImFollowingTheHunters = "I'm following the hunters to the beasts lair";
+	String infoRetrievedWeapons = "I've retrieved the weapons from behind the hunter's lodge";
 	String infoReadHuntPlan1 = "In the staging area for a hunt I found the plan for the hunt";
 	String infoReadHuntPlan2 = "In the staging area for the hunt I found the plan for the hunt";
 
@@ -369,6 +369,7 @@ public class QuestSmallGame extends Quest {
 			for (GameObject weapon : weaponsBehindLodge) {
 				if (Game.level.player.inventory.contains(weapon)) {
 					currentObjectives.remove(this.objectiveWeaponsBehindLodge);
+					addInfo(infoRetrievedWeapons);
 				}
 			}
 		}
@@ -572,7 +573,7 @@ public class QuestSmallGame extends Quest {
 
 		ConversationPart conversationPartTheresEquipment = new ConversationPart(
 				new Object[] {
-						"There's spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready." },
+						"There's should be some spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready." },
 				new ConversationResponse[] {}, hunterPack.getLeader());
 
 		ConversationPart conversationPartSuitYourself = new ConversationPart(new Object[] { "Suit yourself." },
