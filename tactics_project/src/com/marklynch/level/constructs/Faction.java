@@ -13,7 +13,6 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.objects.units.Actor;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Faction {
@@ -37,8 +36,6 @@ public class Faction {
 	public String imageTexturePath = null;
 	public transient Texture imageTexture = null;
 
-	public Color color;
-
 	public enum STAGE {
 		SELECT, MOVE, ATTACK
 	};
@@ -51,9 +48,8 @@ public class Faction {
 	public String guid = UUID.randomUUID().toString();
 	public Map<String, FactionRelationship> relationshipGUIDs = new HashMap<String, FactionRelationship>();
 
-	public Faction(String name, Color color, String imagePath) {
+	public Faction(String name, String imagePath) {
 		this.name = name;
-		this.color = color;
 		this.imageTexturePath = imagePath;
 		loadImages();
 	}
@@ -68,7 +64,6 @@ public class Faction {
 
 	public void postLoad() {
 		this.actors = new Vector<Actor>();
-		this.color = new Color(this.color.r, this.color.g, this.color.b, this.color.a);
 
 		currentStage = STAGE.SELECT;
 		relationships = new HashMap<Faction, FactionRelationship>();

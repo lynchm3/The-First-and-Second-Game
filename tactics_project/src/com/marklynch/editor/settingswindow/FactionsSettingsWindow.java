@@ -8,8 +8,6 @@ import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
-import mdesl.graphics.Color;
-
 public class FactionsSettingsWindow extends SettingsWindow {
 
 	public FactionsSettingsWindow(float width, final Editor editor) {
@@ -48,8 +46,7 @@ public class FactionsSettingsWindow extends SettingsWindow {
 				if (Game.level.factions.size() == 10)
 					return;
 
-				Faction newFaction = new Faction("Faction " + Game.level.factions.size(), Color.RED,
-						"faction_blue.png");
+				Faction newFaction = new Faction("Faction " + Game.level.factions.size(), "faction_blue.png");
 				Game.level.factions.add(newFaction);
 				updateFactionsButtons();
 				editor.clearSelectedObject();

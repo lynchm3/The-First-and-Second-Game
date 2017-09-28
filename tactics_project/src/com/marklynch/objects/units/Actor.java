@@ -709,7 +709,7 @@ public class Actor extends GameObject {
 			float weaponAreaPositionXInPixels = 0;
 			float weaponAreaPositionYInPixels = 0;
 
-			if (this.faction == Game.level.factions.get(0)) {
+			if (this.faction == Game.level.factions.player) {
 				weaponAreaPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
 				weaponAreaPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 			} else {
@@ -725,9 +725,9 @@ public class Actor extends GameObject {
 					weaponAreaPositionYInPixels + weaponAreaHeightInPixels - 1);
 
 			// Colored health bar
-			QuadUtils.drawQuad(new Color(this.faction.color.r, this.faction.color.g, this.faction.color.b),
-					weaponAreaPositionXInPixels + 1, weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1,
-					weaponAreaPositionYInPixels + 1, weaponAreaPositionYInPixels + healthBarHeightInPixels - 1);
+			QuadUtils.drawQuad(Color.RED, weaponAreaPositionXInPixels + 1,
+					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1, weaponAreaPositionYInPixels + 1,
+					weaponAreaPositionYInPixels + healthBarHeightInPixels - 1);
 		}
 
 		super.draw1();

@@ -416,20 +416,13 @@ public class Editor {
 		// Expressions
 		ThoughtBubbles.loadExpressions();
 
-		// Add factions
-		Game.level.factions.add(new Faction("Player", colors.get(0), "faction_blue.png"));
-		Game.level.factions.add(new Faction("Townspeople", colors.get(1), "faction_red.png"));
-		Game.level.factions.add(new Faction("Wolves", colors.get(2), "wolf.png"));
-		Game.level.factions.add(new Faction("Blind", colors.get(3), "blind.png"));
-		Game.level.factions.add(new Faction("Rock Golem", colors.get(4), "blind.png"));
-
 		// Add player
 		// West Security
 		Player player = Templates.Player.makeCopy(Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
-				Game.level.factions.get(0), null, 100, new GameObject[] {}, new GameObject[] {});
+				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {});
 		// Morts Mine
 		// Actor player = Templates.Player.makeCopy(Game.level.squares[80][39],
-		// Game.level.factions.get(0), null);
+		// Game.level.factions.player, null);
 		Game.level.player = player;
 		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null, player));
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));
@@ -472,8 +465,8 @@ public class Editor {
 		// Trader Joe
 		Trader trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png",
 				Game.level.squares[7][1], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 90f, null, Game.level.factions.get(1), 40, 96, 40, 96, 40, 96, 40, 96, 10000,
-				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+				false, 0f, 0f, 0f, 0f, 0f, 90f, null, Game.level.factions.townsPeople, 40, 96, 40, 96, 40, 96, 40, 96,
+				10000, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
@@ -527,10 +520,10 @@ public class Editor {
 		Templates.BUSH.makeCopy(Game.level.squares[17][19], null);
 
 		// relationships
-		Game.level.factions.get(0).relationships.put(Game.level.factions.get(1),
-				new FactionRelationship(-100, Game.level.factions.get(0), Game.level.factions.get(1)));
-		Game.level.factions.get(1).relationships.put(Game.level.factions.get(0),
-				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.get(0)));
+		Game.level.factions.player.relationships.put(Game.level.factions.get(1),
+				new FactionRelationship(-100, Game.level.factions.player, Game.level.factions.get(1)));
+		Game.level.factions.get(1).relationships.put(Game.level.factions.player,
+				new FactionRelationship(-100, Game.level.factions.get(1), Game.level.factions.player));
 
 		// Decorations
 		// Cat cat = new Cat("Cat", 345f, 464f, 128f, 128f, false, "cat.png");

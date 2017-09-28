@@ -22,6 +22,7 @@ import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.inventory.SquareInventory;
@@ -111,6 +112,7 @@ public class Level {
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 	public static transient AdventureLog adventureLog = new AdventureLog();
 	public static transient QuestList quests = new QuestList();
+	public static transient FactionList factions = new FactionList();
 	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
 
 	// public Vector<Actor> actors;
@@ -142,7 +144,7 @@ public class Level {
 	public boolean showLog = true;
 
 	public transient static int turn = 1;
-	public ArrayList<Faction> factions;
+	// public ArrayList<Faction> factions;
 	public transient Faction currentFactionMoving;
 	public transient int currentFactionMovingIndex;
 	public transient Stack<Move> undoList;
@@ -208,7 +210,7 @@ public class Level {
 
 		structures = new ArrayList<Structure>();
 
-		factions = new ArrayList<Faction>();
+		factions.makeFactions();
 		inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 
 		initGrid(this.squares, this.width, this.height);
@@ -1243,7 +1245,7 @@ public class Level {
 
 		// if (factions.size() > 0 && currentFactionMoving != null) {
 		// if (showTurnNotification) {
-		// if (currentFactionMoving == factions.get(0)) {
+		// if (currentFactionMoving == factions.player) {
 		// TextUtils.printTextWithImages(new Object[] { "Your turn ",
 		// this.currentFactionMoving.imageTexture,
 		// ", click to continue." }, 500, 500, Integer.MAX_VALUE, true);
@@ -1427,7 +1429,7 @@ public class Level {
 			}
 		}
 
-		if (!this.script.checkIfBlocking() && currentFactionMoving != factions.get(0)) {
+		if (!this.script.checkIfBlocking() && currentFactionMoving != factions.player) {
 			currentFactionMoving.update(delta);
 		}
 		// Auto move player
@@ -1665,7 +1667,7 @@ public class Level {
 				return button;
 		}
 
-		if (activeActor != null && activeActor.faction == factions.get(0))
+		if (activeActor != null && activeActor.faction == factions.player)
 			return this.activeActor.getButtonFromMousePosition(alteredMouseX, alteredMouseY);
 
 		return null;
@@ -1877,7 +1879,7 @@ public class Level {
 
 	// public void showTurnNotification() {
 	// showTurnNotification = true;
-	// if (this.currentFactionMoving != factions.get(0))
+	// if (this.currentFactionMoving != factions.player)
 	// new hideTurnNotificationThread().start();
 	// }
 
