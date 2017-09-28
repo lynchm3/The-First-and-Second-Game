@@ -42,6 +42,9 @@ public class ConversationResponseDisplay {
 			GameObject talker) {
 
 		this.conversationResponses = conversationResponses;
+		for (int i = 0; i < this.conversationResponses.length; i++) {
+			conversationResponses[i].text = (i + 1) + ". " + conversationResponses[i].text;
+		}
 		this.talker = talker;
 		updateObjectsButtons();
 
