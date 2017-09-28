@@ -1221,7 +1221,7 @@ public class Level {
 		}
 
 		// Current objective quest
-		adventureLog.drawActiveQuestObjective();
+		adventureLog.drawActiveQuestObjectiveText();
 
 		// Turn text
 		if (currentFactionMoving != null) {

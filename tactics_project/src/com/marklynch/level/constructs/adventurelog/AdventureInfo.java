@@ -1,5 +1,7 @@
 package com.marklynch.level.constructs.adventurelog;
 
+import com.marklynch.Game;
+
 public class AdventureInfo {
 
 	public Object object;
@@ -13,7 +15,7 @@ public class AdventureInfo {
 
 	public void setTurn(int turn) {
 		this.turn = turn;
-		this.turnString = "Turn " + turn + " ";
+		this.turnString = Game.level.timeString + " (Turn " + turn + ") ";
 	}
 
 	public String getTurnString() {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.objects.GameObject;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
@@ -196,7 +197,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		}
 	}
 
-	public void drawActiveQuestObjective() {
+	public void drawActiveQuestObjectiveText() {
 		if (activeQuest != null) {
 			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 150, 20,
 					Integer.MAX_VALUE, false, false, null,
@@ -217,8 +218,15 @@ public class AdventureLog implements Draggable, Scrollable {
 			int markersDrawn = 0;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
-				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
-					currentObjective.gameObject.squareGameObjectIsOn.drawObjective(markersDrawn);
+				if (currentObjective.gameObject != null) {
+					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
+						currentObjective.gameObject.squareGameObjectIsOn.drawObjective(markersDrawn);
+					} else if (currentObjective.gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject
+							&& ((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn != null) {
+						((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn
+								.drawObjective(markersDrawn);
+
+					}
 				} else if (currentObjective.square != null) {
 					currentObjective.square.drawObjective(markersDrawn);
 				}

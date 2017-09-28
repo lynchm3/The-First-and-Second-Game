@@ -322,7 +322,7 @@ public class QuestSmallGame extends Quest {
 		AreaTownForest.createForest();
 
 		objectiveWolves = new Objective("The Wolves", superWolf, null);
-		objectiveWeaponsBehindLodge = new Objective("Hunting Weapons", null, squareBehindLodge);
+		objectiveWeaponsBehindLodge = new Objective("Hunting Weapons", weaponsBehindLodge.get(0), null);
 		objectiveHunters = new Objective("The Hunters", hunterBrent, null);
 
 		setUpConversationReady();
