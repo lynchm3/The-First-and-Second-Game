@@ -41,12 +41,20 @@ public class Quest {
 		}
 	}
 
+	public boolean haveObjective(Objective objective) {
+		return currentObjectives.contains(objective);
+	}
+
 	public void addInfo(AdventureInfo info) {
 		if (!infoList.contains(info)) {
 			info.setTurn(Game.level.turn);
 			infoList.add(info);
 		}
 
+	}
+
+	public boolean haveInfo(AdventureInfo info) {
+		return infoList.contains(info);
 	}
 
 	public void start() {

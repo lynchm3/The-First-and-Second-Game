@@ -135,16 +135,8 @@ public class QuestSmallGame extends Quest {
 	final String ACTIVITY_WAITING_FOR_YOU = "Waiting for you";
 	final String ACTIVITY_DESCRIPTION_GOING_HOME = "Going home";
 
-	// Flags
-	boolean playerAttackedHunters;
-	boolean playerAttackedWolves;
-	boolean huntersDead;
-	boolean wolvesDead;
-
 	// End
 	boolean huntersReleasedFromQuest;
-
-	boolean huntersAndWolvesFought = false;
 
 	// Actors
 	Group hunterPack;
@@ -195,6 +187,18 @@ public class QuestSmallGame extends Quest {
 	AdventureInfo infoReadHuntPlan1 = new AdventureInfo("In the staging area for a hunt I found the plan for the hunt");
 	AdventureInfo infoReadHuntPlan2 = new AdventureInfo(
 			"In the staging area for the hunt I found the plan for the hunt");
+
+	AdventureInfo infoAttackedHunters = new AdventureInfo("I attacked the hunters");
+	AdventureInfo infoAttackedWolves = new AdventureInfo("I attacked the wolves");
+	AdventureInfo infoHuntersEngagedWolves = new AdventureInfo("The hunters have engaged the wolves");
+	AdventureInfo infoHuntersDead = new AdventureInfo("All the hunters are dead");
+	AdventureInfo infoWolvesDead = new AdventureInfo("All the wolves are dead");
+
+	// Flags
+
+	// boolean playerAttackedWolves;
+	// boolean huntersDead;
+	// boolean wolvesDead;
 
 	public QuestSmallGame() {
 		super();
@@ -342,7 +346,7 @@ public class QuestSmallGame extends Quest {
 		huntingPlan.setOnReadListener(new ActionListener() {
 			@Override
 			public void run() {
-				if (!infoList.contains(huntingPlan)) {
+				if (!haveInfo(infoReadHuntPlan1) && !haveInfo(infoReadHuntPlan2)) {
 					if (!started) {
 						addInfo(infoReadHuntPlan1);
 						addObjective(objectiveHunters);
@@ -380,7 +384,7 @@ public class QuestSmallGame extends Quest {
 			for (GameObject weapon : weaponsBehindLodge) {
 				if (Game.level.player.inventory.contains(weapon)) {
 					currentObjectives.remove(this.objectiveWeaponsBehindLodge);
-					if (!infoList.contains(infoSaveTheWolf1) && !infoList.contains(infoSaveTheWolf2)) {
+					if (!haveInfo(infoSaveTheWolf1) && !haveInfo(infoSaveTheWolf2)) {
 						addInfo(infoRetrievedWeapons);
 					}
 				}
@@ -388,46 +392,51 @@ public class QuestSmallGame extends Quest {
 		}
 
 		// The wolves are dead
-		if (wolvesDead == false) {
-			wolvesDead = true;
+		if (!haveInfo(infoWolvesDead)) {
+			boolean wolvesDead = true;
 			for (int i = 0; i < wolfPack.size(); i++) {
 				if (wolfPack.getMember(i).remainingHealth > 0) {
 					wolvesDead = false;
 					break;
 				}
 			}
+			if (wolvesDead) {
+				addInfo(infoWolvesDead);
+			}
 		}
 
 		// Player has attacked the wolves
-		if (playerAttackedWolves == false && wolfPack.hasAttackers()) {
+		if (!haveInfo(infoAttackedWolves) && wolfPack.hasAttackers()) {
 			if (wolfPack.getAttackers().contains(Game.level.player)) {
-				playerAttackedWolves = true;
+				addInfo(infoAttackedWolves);
 			}
 		}
 
 		// The hunters are dead
-		if (huntersDead == false) {
-			huntersDead = true;
+		if (!haveInfo(infoHuntersDead)) {
+			boolean huntersDead = true;
 			for (int i = 0; i < hunterPack.size(); i++) {
 				if (hunterPack.getMember(i).remainingHealth > 0) {
 					huntersDead = false;
 					break;
 				}
 			}
-		}
-
-		// Player has attacked the hunters
-		if (playerAttackedHunters == false && hunterPack.hasAttackers()) {
-			if (hunterPack.getAttackers().contains(Game.level.player)) {
-				playerAttackedHunters = true;
+			if (huntersDead) {
+				addInfo(infoHuntersDead);
 			}
 		}
 
+		// Player has attacked the hunters after accepting quest
+		if (!haveInfo(infoAgreedToJoinHunters) && !haveInfo(infoAttackedHunters)
+				&& hunterPack.getAttackers().contains(Game.level.player)) {
+			addInfo(infoAttackedHunters);
+		}
+
 		// Hunters and wolves have fought
-		if (huntersAndWolvesFought == false && hunterPack.hasAttackers()) {
+		if (!haveInfo(infoHuntersEngagedWolves) && hunterPack.hasAttackers()) {
 			for (int j = 0; j < wolfPack.size(); j++) {
 				if (hunterPack.getAttackers().contains(wolfPack.getMember(j))) {
-					huntersAndWolvesFought = true;
+					addInfo(infoHuntersEngagedWolves);
 					break;
 				}
 			}
@@ -454,12 +463,12 @@ public class QuestSmallGame extends Quest {
 			return false;
 		}
 
-		if (!infoList.contains(infoSetOffWithHunters)) {
+		if (!haveInfo(infoSetOffWithHunters)) {
 			actor.activityDescription = ACTIVITY_PLANNING_A_HUNT;
 			if (actor == hunterPack.getLeader()) {
 				goToHuntPlanningArea(actor);
 			}
-		} else if (infoList.contains(infoSetOffWithHunters) && !this.wolvesDead) {
+		} else if (haveInfo(infoSetOffWithHunters) && !haveInfo(infoWolvesDead)) {
 
 			if (actor == hunterPack.getLeader()) {
 
@@ -477,14 +486,14 @@ public class QuestSmallGame extends Quest {
 					}
 				}
 			}
-		} else if (this.wolvesDead && this.playerAttackedWolves && !infoList.contains(infoAgreedToJoinHunters)) {
+		} else if (haveInfo(infoWolvesDead) && haveInfo(infoAttackedWolves) && !haveInfo(infoAgreedToJoinHunters)) {
 			// Wolves were killed by player before accepting the mission
 			goToHuntPlanningArea(actor);
-		} else if (this.wolvesDead && this.playerAttackedWolves && !infoList.contains(infoSetOffWithHunters)) {
+		} else if (haveInfo(infoWolvesDead) && haveInfo(infoAttackedWolves) && !haveInfo(infoSetOffWithHunters)) {
 			// Wolves were killed by player after accepting the mission, but
 			// before he told the hunters he's ready to go
 			goToHuntPlanningArea(actor);
-		} else if (this.wolvesDead && this.playerAttackedWolves) {
+		} else if (haveInfo(infoWolvesDead) && haveInfo(infoAttackedWolves)) {
 			// Wolves were killed after departing for the hunt, and the player
 			// helped kill them
 			// Talk to them... for some reason
@@ -495,7 +504,7 @@ public class QuestSmallGame extends Quest {
 					AIRoutineUtils.moveTowardsSquareToBeAdjacent(Game.level.player.squareGameObjectIsOn);
 				}
 			}
-		} else if (this.wolvesDead && !this.playerAttackedWolves) {
+		} else if (haveInfo(infoWolvesDead) && !haveInfo(infoAttackedWolves)) {
 			// Wolves were killed, but player didnt help
 			if (actor == hunterPack.getLeader()) {
 				if (actor.squareGameObjectIsOn != huntPlanningArea) {
@@ -515,18 +524,17 @@ public class QuestSmallGame extends Quest {
 	}
 
 	private boolean updateEnvironmentalist(Actor actor) {
-		if (infoList.contains(infoSetOffWithHunters)) {
+		if (haveInfo(infoSetOffWithHunters)) {
 			if (environmentalistBill.canSeeGameObject(superWolf)) {
 			} else {
 				AIRoutineUtils.moveTowardsTargetSquare(superWolf.squareGameObjectIsOn);
 			}
 			return true;
 
-		} else if (!infoList.contains(infoAgreedToJoinHunters)) {
+		} else if (!haveInfo(infoAgreedToJoinHunters)) {
 			actor.activityDescription = ACTIVITY_SPYING;
 
-		} else if (infoList.contains(infoAgreedToJoinHunters)
-				&& (!infoList.contains(infoSaveTheWolf1) && !infoList.contains(infoSaveTheWolf2))) {
+		} else if (haveInfo(infoAgreedToJoinHunters) && (!haveInfo(infoSaveTheWolf1) && !haveInfo(infoSaveTheWolf2))) {
 			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
 
 			if (environmentalistBill.squareGameObjectIsOn != squareBehindLodge) {
@@ -564,11 +572,11 @@ public class QuestSmallGame extends Quest {
 
 	public Conversation getConversationForHunter(Actor actor) {
 		// Talking to a hunter
-		if (!infoList.contains(infoAgreedToJoinHunters)) {
+		if (!haveInfo(infoAgreedToJoinHunters)) {
 			return conversationHuntersJoinTheHunt;
-		} else if (!infoList.contains(infoSetOffWithHunters)) {
+		} else if (!haveInfo(infoSetOffWithHunters)) {
 			return conversationHuntersReadyToGo;
-		} else if (this.wolvesDead && !this.playerAttackedWolves) {
+		} else if (haveInfo(infoWolvesDead) && !haveInfo(infoAttackedWolves)) {
 			return conversationHuntersOnlyHuntersGetLoot;
 		}
 		return null;
@@ -576,9 +584,9 @@ public class QuestSmallGame extends Quest {
 
 	public Conversation getConversationForEnvironmentalist(Actor actor) {
 		// Talking to environmentalist
-		if (!!infoList.contains(infoAgreedToJoinHunters)) {
+		if (!haveInfo(infoAgreedToJoinHunters)) {
 			return conversationEnviromentalistImNotSpying;
-		} else if (!!infoList.contains(infoSaveTheWolf1) && !infoList.contains(infoSaveTheWolf1)) {
+		} else if (!haveInfo(infoSaveTheWolf1) && !haveInfo(infoSaveTheWolf2)) {
 			return conversationEnviromentalistSaveTheWolf;
 		}
 		return environmentalistBill.createConversation("...");
@@ -663,7 +671,7 @@ public class QuestSmallGame extends Quest {
 
 					}
 				}
-				if (infoList.contains(infoEnviromentalistWasSpying)) {
+				if (haveInfo(infoEnviromentalistWasSpying)) {
 					addInfo(infoSaveTheWolf2);
 				} else {
 					addInfo(infoSaveTheWolf1);
