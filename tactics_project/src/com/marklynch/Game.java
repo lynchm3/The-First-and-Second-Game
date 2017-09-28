@@ -47,8 +47,12 @@ public class Game {
 	// public static int playerStartPosY = 52;
 
 	// Mort
-	public static int playerStartPosX = 280;
-	public static int playerStartPosY = 46;
+	// public static int playerStartPosX = 280;
+	// public static int playerStartPosY = 46;
+
+	// Lodge
+	public static int playerStartPosX = 102;
+	public static int playerStartPosY = 16;
 
 	// Burrow in forest
 	// public static int playerStartPosX = 186;
@@ -64,11 +68,15 @@ public class Game {
 	// public static int playerStartPosX = 53;
 	// public static int playerStartPosY = 21;
 
+	// Square size
+	public static float SQUARE_WIDTH = 128f;
+	public static float SQUARE_HEIGHT = 128f;
+
 	// CAMERA START POSITION
 
 	// 0,0
-	public static float dragX = 0;
-	public static float dragY = 0;
+	public static float dragX = -(Game.SQUARE_WIDTH * playerStartPosX);
+	public static float dragY = -(Game.SQUARE_HEIGHT * playerStartPosY);
 
 	public static float getDragXWithOffset() {
 		if (Game.level.cameraFollow)
@@ -123,8 +131,6 @@ public class Game {
 	public static Level level;
 	public static Editor editor;
 	public static boolean editorMode = true;
-	public static float SQUARE_WIDTH = 128f;
-	public static float SQUARE_HEIGHT = 128f;
 	public static float INVENTORY_SQUARE_WIDTH = 64f;
 	public static float INVENTORY_SQUARE_HEIGHT = 64f;
 	public static float HALF_SQUARE_WIDTH = SQUARE_WIDTH / 2f;

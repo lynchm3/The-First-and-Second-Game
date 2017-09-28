@@ -585,9 +585,11 @@ public class QuestSmallGame extends Quest {
 				addInfo(infoSaveTheWolf1);
 			}
 			talkedToEnvironmentalist = true;
+			System.out.println("return conversationEnviromentalistSaveTheWolf;");
 			return conversationEnviromentalistSaveTheWolf;
 		}
 
+		System.out.println("return environmentalistBill.createConversation(\"...\");");
 		return environmentalistBill.createConversation("...");
 	}
 

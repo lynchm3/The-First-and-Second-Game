@@ -83,9 +83,15 @@ public class ActionGiveSpecificItem extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.straightLineDistanceTo(receiver.squareGameObjectIsOn) < 2) {
-			return true;
+		// if (performer.straightLineDistanceTo(receiver.squareGameObjectIsOn) <
+		// 2) {
+		// return true;
+		// }
+
+		if (performer instanceof Actor && !((Actor) performer).canSeeSquare(receiver.squareGameObjectIsOn)) {
+			return false;
 		}
+
 		return false;
 	}
 
