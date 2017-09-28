@@ -137,7 +137,7 @@ public class QuestSmallGame extends Quest {
 
 	// Flags
 	boolean questAcceptedFromHunters;
-	boolean talkedToEnvironmentalist;
+	boolean toldToSaveWolf;
 	boolean readyToGo;
 	boolean playerAttackedHunters;
 	boolean playerAttackedWolves;
@@ -179,6 +179,7 @@ public class QuestSmallGame extends Quest {
 	public Objective objectiveWolves;
 	public Objective objectiveWeaponsBehindLodge;
 	public Objective objectiveHunters;
+	public Objective objectiveEnvironmentalist;
 
 	// Info strings
 	AdventureInfo infoSeenHunters = new AdventureInfo("I've spotted some hunters planning a hunt");
@@ -187,9 +188,9 @@ public class QuestSmallGame extends Quest {
 	AdventureInfo infoEnviromentalistWasSpying = new AdventureInfo(
 			"I met a strange figure spying on the hunters of Town Lodge");
 	AdventureInfo infoSaveTheWolf1 = new AdventureInfo(
-			"Behind the hunting lodge, where the weapons were meant to be, stood a starange figure. He spoke 3 words - \"Save the wolf\"");
+			"Behind the hunting lodge, where the weapons were meant to be, stood a strange figure. He spoke 3 words - \"Save the wolf\"");
 	AdventureInfo infoSaveTheWolf2 = new AdventureInfo(
-			"Behind the hunting lodge, where the weapons were meant to be, stood the starange figure from before. He spoke 3 words - \"Save the wolf\"");
+			"Behind the hunting lodge, where the weapons were meant to be, stood the strange figure from before. He spoke 3 words - \"Save the wolf\"");
 
 	AdventureInfo infoRetrievedWeapons = new AdventureInfo("I've retrieved the weapons from behind the hunter's lodge");
 	AdventureInfo infoReadHuntPlan1 = new AdventureInfo("In the staging area for a hunt I found the plan for the hunt");
@@ -331,6 +332,7 @@ public class QuestSmallGame extends Quest {
 		objectiveWolves = new Objective("The Wolves", superWolf, null);
 		objectiveWeaponsBehindLodge = new Objective("Hunting Weapons", weaponsBehindLodge.get(0), null);
 		objectiveHunters = new Objective("The Hunters", hunterBrent, null);
+		objectiveEnvironmentalist = new Objective("Environmentalist", environmentalistBill, null);
 
 		setUpConversationReady();
 		setUpConversationImNotSpying();
@@ -517,7 +519,7 @@ public class QuestSmallGame extends Quest {
 		if (!questAcceptedFromHunters) {
 			actor.activityDescription = ACTIVITY_SPYING;
 
-		} else if (questAcceptedFromHunters && !talkedToEnvironmentalist) {
+		} else if (questAcceptedFromHunters && !toldToSaveWolf) {
 			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
 
 			if (environmentalistBill.squareGameObjectIsOn != squareBehindLodge) {
@@ -568,28 +570,10 @@ public class QuestSmallGame extends Quest {
 	public Conversation getConversationForEnvironmentalist(Actor actor) {
 		// Talking to environmentalist
 		if (!questAcceptedFromHunters) {
-			start();
-			addInfo(infoEnviromentalistWasSpying);
-			addObjective(objectiveHunters);
 			return conversationEnviromentalistImNotSpying;
-		} else if (!talkedToEnvironmentalist) {
-			for (GameObject gameObject : weaponsBehindLodge) {
-				if (environmentalistBill.inventory.contains(gameObject)) {
-					new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject, false).perform();
-
-				}
-			}
-			if (infoList.contains(infoEnviromentalistWasSpying)) {
-				addInfo(infoSaveTheWolf2);
-			} else {
-				addInfo(infoSaveTheWolf1);
-			}
-			talkedToEnvironmentalist = true;
-			System.out.println("return conversationEnviromentalistSaveTheWolf;");
+		} else if (!toldToSaveWolf) {
 			return conversationEnviromentalistSaveTheWolf;
 		}
-
-		System.out.println("return environmentalistBill.createConversation(\"...\");");
 		return environmentalistBill.createConversation("...");
 	}
 
@@ -647,14 +631,41 @@ public class QuestSmallGame extends Quest {
 		// try it out
 		ConversationPart conversationPartImNotSpying = new ConversationPart(
 				new Object[] { "What? NO! I'm not spying! You're spying!" }, new ConversationResponse[] {},
-				environmentalistBill);
+				environmentalistBill) {
+			@Override
+			public void leave() {
+				start();
+				addInfo(infoEnviromentalistWasSpying);
+				addObjective(objectiveEnvironmentalist);
+				addObjective(objectiveHunters);
+			}
+		};
 		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying);
 	}
 
 	private void setUpConversationSaveTheWolf() {
 
 		ConversationPart conversationPartSaveTheWolf = new ConversationPart(new Object[] { "Save the wolf!" },
-				new ConversationResponse[] {}, environmentalistBill);
+				new ConversationResponse[] {}, environmentalistBill) {
+			@Override
+			public void leave() {
+				addObjective(objectiveEnvironmentalist);
+				for (GameObject gameObject : weaponsBehindLodge) {
+					if (environmentalistBill.inventory.contains(gameObject)) {
+						new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject, false)
+								.perform();
+
+					}
+				}
+				if (infoList.contains(infoEnviromentalistWasSpying)) {
+					addInfo(infoSaveTheWolf2);
+				} else {
+					addInfo(infoSaveTheWolf1);
+				}
+				toldToSaveWolf = true;
+			}
+
+		};
 		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf);
 
 	}

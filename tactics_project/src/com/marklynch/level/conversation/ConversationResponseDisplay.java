@@ -37,11 +37,13 @@ public class ConversationResponseDisplay {
 	float totalWidth = 0;
 
 	GameObject talker;
+	private ConversationPart conversationPart;
 
 	public ConversationResponseDisplay(float width, Level level, ConversationResponse[] conversationResponses,
-			GameObject talker) {
+			GameObject talker, ConversationPart conversationPart) {
 
 		this.conversationResponses = conversationResponses;
+		this.conversationPart = conversationPart;
 		for (int i = 0; i < this.conversationResponses.length; i++) {
 			conversationResponses[i].text = (i + 1) + ". " + conversationResponses[i].text;
 		}
@@ -106,6 +108,7 @@ public class ConversationResponseDisplay {
 		buttonLeave.clickListener = new ClickListener() {
 			@Override
 			public void click() {
+				leave();
 				Game.level.conversation = null;
 			}
 		};
@@ -125,6 +128,10 @@ public class ConversationResponseDisplay {
 
 	public void resize() {
 		updateObjectsButtons();
+	}
+
+	public void leave() {
+		conversationPart.leave();
 	}
 
 	public void selectDialogueOption(char character) {

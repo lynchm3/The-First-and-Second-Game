@@ -29,7 +29,7 @@ public class ConversationPart {
 
 		// if (conversationResponses.length > 0)
 		windowSelectConversationResponse = new ConversationResponseDisplay(100, Game.level, conversationResponses,
-				talker);
+				talker, this);
 
 	}
 
@@ -76,7 +76,7 @@ public class ConversationPart {
 	public void setConversationResponses(ConversationResponse[] conversationResponses) {
 		this.conversationResponses = conversationResponses;
 		windowSelectConversationResponse = new ConversationResponseDisplay(100, Game.level, conversationResponses,
-				talker);
+				talker, this);
 	}
 
 	public void resize() {
@@ -86,6 +86,11 @@ public class ConversationPart {
 
 	public void selectDialogueOption(char character) {
 		windowSelectConversationResponse.selectDialogueOption(character);
+
+	}
+
+	public void leave() {
+		// TODO Auto-generated method stub
 
 	}
 
