@@ -136,9 +136,6 @@ public class QuestSmallGame extends Quest {
 	final String ACTIVITY_DESCRIPTION_GOING_HOME = "Going home";
 
 	// Flags
-	boolean questAcceptedFromHunters;
-	boolean toldToSaveWolf;
-	boolean readyToGo;
 	boolean playerAttackedHunters;
 	boolean playerAttackedWolves;
 	boolean huntersDead;
@@ -185,6 +182,8 @@ public class QuestSmallGame extends Quest {
 	AdventureInfo infoSeenHunters = new AdventureInfo("I've spotted some hunters planning a hunt");
 	AdventureInfo infoAgreedToJoinHunters = new AdventureInfo(
 			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
+	AdventureInfo infoSetOffWithHunters = new AdventureInfo(
+			"I've set off with the hunters towards the creature's lair");
 	AdventureInfo infoEnviromentalistWasSpying = new AdventureInfo(
 			"I met a strange figure spying on the hunters of Town Lodge");
 	AdventureInfo infoSaveTheWolf1 = new AdventureInfo(
@@ -455,12 +454,12 @@ public class QuestSmallGame extends Quest {
 			return false;
 		}
 
-		if (!readyToGo) {
+		if (!infoList.contains(infoSetOffWithHunters)) {
 			actor.activityDescription = ACTIVITY_PLANNING_A_HUNT;
 			if (actor == hunterPack.getLeader()) {
 				goToHuntPlanningArea(actor);
 			}
-		} else if (readyToGo && !this.wolvesDead) {
+		} else if (infoList.contains(infoSetOffWithHunters) && !this.wolvesDead) {
 
 			if (actor == hunterPack.getLeader()) {
 
@@ -478,10 +477,10 @@ public class QuestSmallGame extends Quest {
 					}
 				}
 			}
-		} else if (this.wolvesDead && this.playerAttackedWolves && !questAcceptedFromHunters) {
+		} else if (this.wolvesDead && this.playerAttackedWolves && !infoList.contains(infoAgreedToJoinHunters)) {
 			// Wolves were killed by player before accepting the mission
 			goToHuntPlanningArea(actor);
-		} else if (this.wolvesDead && this.playerAttackedWolves && !readyToGo) {
+		} else if (this.wolvesDead && this.playerAttackedWolves && !infoList.contains(infoSetOffWithHunters)) {
 			// Wolves were killed by player after accepting the mission, but
 			// before he told the hunters he's ready to go
 			goToHuntPlanningArea(actor);
@@ -516,10 +515,18 @@ public class QuestSmallGame extends Quest {
 	}
 
 	private boolean updateEnvironmentalist(Actor actor) {
-		if (!questAcceptedFromHunters) {
+		if (infoList.contains(infoSetOffWithHunters)) {
+			if (environmentalistBill.canSeeGameObject(superWolf)) {
+			} else {
+				AIRoutineUtils.moveTowardsTargetSquare(superWolf.squareGameObjectIsOn);
+			}
+			return true;
+
+		} else if (!infoList.contains(infoAgreedToJoinHunters)) {
 			actor.activityDescription = ACTIVITY_SPYING;
 
-		} else if (questAcceptedFromHunters && !toldToSaveWolf) {
+		} else if (infoList.contains(infoAgreedToJoinHunters)
+				&& (!infoList.contains(infoSaveTheWolf1) && !infoList.contains(infoSaveTheWolf2))) {
 			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
 
 			if (environmentalistBill.squareGameObjectIsOn != squareBehindLodge) {
@@ -557,9 +564,9 @@ public class QuestSmallGame extends Quest {
 
 	public Conversation getConversationForHunter(Actor actor) {
 		// Talking to a hunter
-		if (!questAcceptedFromHunters) {
+		if (!infoList.contains(infoAgreedToJoinHunters)) {
 			return conversationHuntersJoinTheHunt;
-		} else if (!readyToGo) {
+		} else if (!infoList.contains(infoSetOffWithHunters)) {
 			return conversationHuntersReadyToGo;
 		} else if (this.wolvesDead && !this.playerAttackedWolves) {
 			return conversationHuntersOnlyHuntersGetLoot;
@@ -569,9 +576,9 @@ public class QuestSmallGame extends Quest {
 
 	public Conversation getConversationForEnvironmentalist(Actor actor) {
 		// Talking to environmentalist
-		if (!questAcceptedFromHunters) {
+		if (!!infoList.contains(infoAgreedToJoinHunters)) {
 			return conversationEnviromentalistImNotSpying;
-		} else if (!toldToSaveWolf) {
+		} else if (!!infoList.contains(infoSaveTheWolf1) && !infoList.contains(infoSaveTheWolf1)) {
 			return conversationEnviromentalistSaveTheWolf;
 		}
 		return environmentalistBill.createConversation("...");
@@ -597,7 +604,6 @@ public class QuestSmallGame extends Quest {
 				// ADD QUEST TO QUEST LOG IF NO IN HARDCORE MODE
 				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
 				// PACK HUNTERS"
-				questAcceptedFromHunters = true;
 				start();
 
 				addInfo(infoAgreedToJoinHunters);
@@ -662,7 +668,6 @@ public class QuestSmallGame extends Quest {
 				} else {
 					addInfo(infoSaveTheWolf1);
 				}
-				toldToSaveWolf = true;
 			}
 
 		};
@@ -698,7 +703,7 @@ public class QuestSmallGame extends Quest {
 					Game.level.quests.questCaveOfTheBlind
 							.addInfo(Game.level.quests.questCaveOfTheBlind.infoHeardFromHunters);
 				}
-				readyToGo = true;
+				addInfo(infoSetOffWithHunters);
 			}
 		};
 
