@@ -78,4 +78,9 @@ public class Conversation {
 		currentConversationPart.resize();
 
 	}
+
+	public void selectDialogueOption(char character) {
+		this.currentConversationPart.selectDialogueOption(character);
+
+	}
 }

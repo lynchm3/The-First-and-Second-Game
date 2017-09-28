@@ -123,4 +123,11 @@ public class ConversationResponseDisplay {
 	public void resize() {
 		updateObjectsButtons();
 	}
+
+	public void selectDialogueOption(char character) {
+		int index = Character.getNumericValue(character) - 1;
+		if (index >= 0 && index < conversationResponses.length) {
+			conversationResponses[index].select();
+		}
+	}
 }

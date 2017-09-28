@@ -84,4 +84,9 @@ public class ConversationPart {
 
 	}
 
+	public void selectDialogueOption(char character) {
+		windowSelectConversationResponse.selectDialogueOption(character);
+
+	}
+
 }
