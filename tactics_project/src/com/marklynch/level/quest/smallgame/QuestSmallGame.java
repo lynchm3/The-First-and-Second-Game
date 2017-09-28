@@ -186,10 +186,10 @@ public class QuestSmallGame extends Quest {
 			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
 	AdventureInfo infoEnviromentalistWasSpying = new AdventureInfo(
 			"I met a strange figure spying on the hunters of Town Lodge");
-	AdventureInfo infoEnviromentalistGaevMeWeapons1 = new AdventureInfo(
-			"Behind the hunting lodge, where the weapons were meant to be, stood a starange figure. He spoke 3 words \"Save the wolf\", then handed me the hunting gear along with a fire wand and some enchantments");
-	AdventureInfo infoEnviromentalistGaevMeWeapons2 = new AdventureInfo(
-			"Behind the hunting lodge, where the weapons were meant to be, stood the starange figure from before. He spoke 3 words \"Save the wolf\", then handed me the hunting gear along with a fire wand and some enchantments");
+	AdventureInfo infoSaveTheWolf1 = new AdventureInfo(
+			"Behind the hunting lodge, where the weapons were meant to be, stood a starange figure. He spoke 3 words - \"Save the wolf\"");
+	AdventureInfo infoSaveTheWolf2 = new AdventureInfo(
+			"Behind the hunting lodge, where the weapons were meant to be, stood the starange figure from before. He spoke 3 words - \"Save the wolf\"");
 
 	AdventureInfo infoRetrievedWeapons = new AdventureInfo("I've retrieved the weapons from behind the hunter's lodge");
 	AdventureInfo infoReadHuntPlan1 = new AdventureInfo("In the staging area for a hunt I found the plan for the hunt");
@@ -379,7 +379,9 @@ public class QuestSmallGame extends Quest {
 			for (GameObject weapon : weaponsBehindLodge) {
 				if (Game.level.player.inventory.contains(weapon)) {
 					currentObjectives.remove(this.objectiveWeaponsBehindLodge);
-					addInfo(infoRetrievedWeapons);
+					if (!infoList.contains(infoSaveTheWolf1) && !infoList.contains(infoSaveTheWolf2)) {
+						addInfo(infoRetrievedWeapons);
+					}
 				}
 			}
 		}
@@ -574,9 +576,15 @@ public class QuestSmallGame extends Quest {
 			for (GameObject gameObject : weaponsBehindLodge) {
 				if (environmentalistBill.inventory.contains(gameObject)) {
 					new ActionGiveSpecificItem(environmentalistBill, Game.level.player, gameObject, false).perform();
-					talkedToEnvironmentalist = true;
+
 				}
 			}
+			if (infoList.contains(infoEnviromentalistWasSpying)) {
+				addInfo(infoSaveTheWolf2);
+			} else {
+				addInfo(infoSaveTheWolf1);
+			}
+			talkedToEnvironmentalist = true;
 			return conversationEnviromentalistSaveTheWolf;
 		}
 
