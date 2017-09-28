@@ -75,10 +75,12 @@ public class ActionSellSpecificItem extends Action {
 	public boolean check() {
 		if (!(receiver instanceof Trader) && receiver.getCarriedGoldValue() < object.value)
 			return false;
-		if (performer.straightLineDistanceTo(receiver.squareGameObjectIsOn) < 2) {
-			return true;
-		}
-		return false;
+		return true;
+		// if (performer.straightLineDistanceTo(receiver.squareGameObjectIsOn) <
+		// 2) {
+		// return true;
+		// }
+		// return false;
 	}
 
 	@Override

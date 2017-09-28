@@ -41,8 +41,6 @@ public class ConversationResponseDisplay {
 	public ConversationResponseDisplay(float width, Level level, ConversationResponse[] conversationResponses,
 			GameObject talker) {
 
-		System.out.println("ConversationResponseDisplay() talker = " + talker);
-
 		this.conversationResponses = conversationResponses;
 		this.talker = talker;
 		updateObjectsButtons();
