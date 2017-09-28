@@ -26,8 +26,6 @@ public class QuestList extends ArrayList<Quest> {
 
 		questSmallGame = new QuestSmallGame();
 		add(questSmallGame);
-		AdventureLog.activeQuest = questSmallGame;
-		AdventureLog.questToDisplayInAdventureLog = questSmallGame;
 
 		questCaveOfTheBlind = new QuestCaveOfTheBlind();
 		add(questCaveOfTheBlind);

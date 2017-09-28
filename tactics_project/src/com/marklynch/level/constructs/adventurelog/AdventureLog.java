@@ -91,9 +91,6 @@ public class AdventureLog implements Draggable, Scrollable {
 				if (questToDisplayInAdventureLog == null) {
 					questToDisplayInAdventureLog = quest;
 				}
-				if (activeQuest == null) {
-					activeQuest = quest;
-				}
 
 				// buttons to make quest the active one
 				final LevelButton buttonToMakeQuestActive = new LevelButton(
