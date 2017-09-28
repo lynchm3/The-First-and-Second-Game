@@ -16,10 +16,10 @@ import mdesl.graphics.Color;
 public class ConversationResponseDisplay {
 
 	public Vector<LevelButton> buttons = new Vector<LevelButton>();
-	public static LevelButton buttonTrade;
+	public LevelButton buttonTrade;
 	public final static String stringTrade = "TRADE [A]";
 	final static float tradeButtonWidth = Game.font.getWidth(stringTrade);
-	public static LevelButton buttonLeave;
+	public LevelButton buttonLeave;
 	public final static String stringLeave = "LEAVE [ESC}";
 	final static float leaveButtonWidth = Game.font.getWidth(stringLeave);
 	// conversationReponseEnd = new ConversationResponse("Leave", null);
@@ -40,6 +40,8 @@ public class ConversationResponseDisplay {
 
 	public ConversationResponseDisplay(float width, Level level, ConversationResponse[] conversationResponses,
 			GameObject talker) {
+
+		System.out.println("ConversationResponseDisplay() talker = " + talker);
 
 		this.conversationResponses = conversationResponses;
 		this.talker = talker;

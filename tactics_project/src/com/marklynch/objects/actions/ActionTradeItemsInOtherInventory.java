@@ -88,10 +88,11 @@ public class ActionTradeItemsInOtherInventory extends Action {
 		// if (maxDistance > 10)
 		// float maxDistance = 1;
 
-		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			actionName = ACTION_NAME + " (can't reach)";
-			return false;
-		}
+		// if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) >
+		// 1) {
+		// actionName = ACTION_NAME + " (can't reach)";
+		// return false;
+		// }
 
 		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME + " (can't reach)";

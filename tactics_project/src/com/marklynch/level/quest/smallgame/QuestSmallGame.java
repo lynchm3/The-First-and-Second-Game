@@ -417,10 +417,8 @@ public class QuestSmallGame extends Quest {
 	public boolean update(Actor actor) {
 		update();
 		if (hunterPack.contains(actor)) {
-			System.out.println("Hunter A");
 			return updateHunter(actor);
 		} else if (actor == environmentalistBill) {
-			System.out.println("Bill A");
 			return updateEnvironmentalist(actor);
 		} else if (wolfPack.contains(actor)) {
 			return true;
