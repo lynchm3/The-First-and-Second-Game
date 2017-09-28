@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.adventurelog.AdventureInfo;
 import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;
@@ -13,7 +14,7 @@ public class Quest {
 
 	public String name;
 	public ArrayList<Objective> currentObjectives = new ArrayList<Objective>();
-	public ArrayList<Object> info = new ArrayList<Object>();
+	public ArrayList<AdventureInfo> infoList = new ArrayList<AdventureInfo>();
 	public ArrayList<Conversation> conversationLog = new ArrayList<Conversation>();
 	public boolean started = false;
 	public boolean resolved = false;
@@ -40,9 +41,10 @@ public class Quest {
 		}
 	}
 
-	public void addInfo(Object object) {
-		if (!info.contains(object)) {
-			info.add(object);
+	public void addInfo(AdventureInfo info) {
+		if (!infoList.contains(info)) {
+			info.setTurn(Game.level.turn);
+			infoList.add(info);
 		}
 
 	}

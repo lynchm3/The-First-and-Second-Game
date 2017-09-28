@@ -7,6 +7,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
+import com.marklynch.level.constructs.adventurelog.AdventureInfo;
 import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -180,11 +181,13 @@ public class QuestSmallGame extends Quest {
 	public Objective objectiveHunters;
 
 	// Info strings
-	String infoSeenHunters = "I've spotted some hunters planning a hunt";
-	String infoAgreedToJoinHunters = "I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge";
-	String infoRetrievedWeapons = "I've retrieved the weapons from behind the hunter's lodge";
-	String infoReadHuntPlan1 = "In the staging area for a hunt I found the plan for the hunt";
-	String infoReadHuntPlan2 = "In the staging area for the hunt I found the plan for the hunt";
+	AdventureInfo infoSeenHunters = new AdventureInfo("I've spotted some hunters planning a hunt");
+	AdventureInfo infoAgreedToJoinHunters = new AdventureInfo(
+			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
+	AdventureInfo infoRetrievedWeapons = new AdventureInfo("I've retrieved the weapons from behind the hunter's lodge");
+	AdventureInfo infoReadHuntPlan1 = new AdventureInfo("In the staging area for a hunt I found the plan for the hunt");
+	AdventureInfo infoReadHuntPlan2 = new AdventureInfo(
+			"In the staging area for the hunt I found the plan for the hunt");
 
 	public QuestSmallGame() {
 		super();
@@ -331,7 +334,7 @@ public class QuestSmallGame extends Quest {
 		huntingPlan.setOnReadListener(new ActionListener() {
 			@Override
 			public void run() {
-				if (!info.contains(huntingPlan)) {
+				if (!infoList.contains(huntingPlan)) {
 					if (!started) {
 						addInfo(infoReadHuntPlan1);
 						addObjective(objectiveHunters);
@@ -340,8 +343,8 @@ public class QuestSmallGame extends Quest {
 						addInfo(infoReadHuntPlan2);
 					}
 					turnUpdated = Level.turn;
-					addInfo(huntingPlan);
-					addInfo(superWolf);
+					addInfo(new AdventureInfo(huntingPlan));
+					addInfo(new AdventureInfo(superWolf));
 
 					BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
 					bestiaryKnowledge.name = true;
@@ -662,8 +665,8 @@ public class QuestSmallGame extends Quest {
 					Game.level.quests.questCaveOfTheBlind
 							.addObjective(Game.level.quests.questCaveOfTheBlind.objectiveCave);
 					Game.level.quests.questCaveOfTheBlind.addObjective(objectiveHunters);
-					Game.level.quests.questCaveOfTheBlind.info.add(
-							"I heard from some hunters about a now defunct mining operation to the east of town, past the forest, it might be worth having a look.");
+					Game.level.quests.questCaveOfTheBlind
+							.addInfo(Game.level.quests.questCaveOfTheBlind.infoHeardFromHunters);
 				}
 				readyToGo = true;
 			}

@@ -3,6 +3,7 @@ package com.marklynch.level.quest.caveoftheblind;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.adventurelog.AdventureInfo;
 import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -99,6 +100,10 @@ public class QuestCaveOfTheBlind extends Quest {
 	Structure cave;
 
 	public Objective objectiveCave;
+
+	public AdventureInfo infoHeardFromHunters = new AdventureInfo(
+			"I heard from some hunters about a now defunct mining operation to the east of town, past the forest, it might be worth having a look.");
+	AdventureInfo infoArrivedAtMine = new AdventureInfo("I've arrived at Mort and Mort Mining");
 
 	public QuestCaveOfTheBlind() {
 		super();
