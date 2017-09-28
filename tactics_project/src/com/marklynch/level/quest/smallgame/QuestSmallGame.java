@@ -568,6 +568,7 @@ public class QuestSmallGame extends Quest {
 		if (!questAcceptedFromHunters) {
 			start();
 			addInfo(infoEnviromentalistWasSpying);
+			addObjective(objectiveHunters);
 			return conversationEnviromentalistImNotSpying;
 		} else if (!talkedToEnvironmentalist) {
 			for (GameObject gameObject : weaponsBehindLodge) {
