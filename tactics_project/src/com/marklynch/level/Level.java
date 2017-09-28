@@ -172,13 +172,15 @@ public class Level {
 	// java representation of a grid??
 	// 2d array?
 
+	public int day = 1;
+	String dayString = "1";
 	public int hour = 6;
 	String hourString = "6";
 	int minute = 0;
 	String minuteString = "0";
 	int second = 0;
 	String secondString = "0";
-	String timeString = "06:00";
+	public String timeString = "Day 1, 06:00";
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -1701,8 +1703,10 @@ public class Level {
 				if (minute >= 60) {
 					minute = minute - 60;
 					hour++;
-					if (hour == 24)
+					if (hour == 24) {
 						hour = 0;
+						day++;
+					}
 				}
 			}
 
@@ -1724,8 +1728,10 @@ public class Level {
 				hourString = "" + hour;
 			}
 
-			timeString = hourString + ":" + minuteString;// + ":" +
-															// secondString;
+			timeString = "Day " + dayString + ", " + hourString + ":" + minuteString;// +
+																						// ":"
+																						// +
+			// secondString;
 
 			// If hiding in a place, add it's effects
 			if (player.hidingPlace != null) {
