@@ -356,7 +356,6 @@ public class QuestSmallGame extends Quest {
 
 	@Override
 	public void update() {
-		System.out.println("0");
 		// Set flags
 		if (!started) {
 			if (hunterBrent.squareGameObjectIsOn.visibleToPlayer) {
@@ -367,11 +366,8 @@ public class QuestSmallGame extends Quest {
 		}
 
 		if (currentObjectives.contains(objectiveWeaponsBehindLodge)) {
-			System.out.println("A");
 			for (GameObject weapon : weaponsBehindLodge) {
-				System.out.println("B");
 				if (Game.level.player.inventory.contains(weapon)) {
-					System.out.println("C");
 					currentObjectives.remove(this.objectiveWeaponsBehindLodge);
 				}
 			}

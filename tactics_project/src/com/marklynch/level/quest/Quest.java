@@ -13,7 +13,6 @@ public class Quest {
 
 	public String name;
 	public ArrayList<Objective> currentObjectives = new ArrayList<Objective>();
-	public ArrayList<String> objectives = new ArrayList<String>();
 	public ArrayList<Object> info = new ArrayList<Object>();
 	public ArrayList<Conversation> conversationLog = new ArrayList<Conversation>();
 	public boolean started = false;
