@@ -792,9 +792,10 @@ public class UserInputLevel {
 	}
 
 	public static void escapeTyped() {
+		System.out.println("escapeTyped()");
 
-		if (Game.level.activeActor != Game.level.player)
-			return;
+		// if (Game.level.activeActor != Game.level.player)
+		// return;
 
 		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
 
@@ -807,6 +808,7 @@ public class UserInputLevel {
 			Game.level.openCloseInventory();
 			return;
 		} else if (Game.level.conversation != null) {
+			System.out.println("calling ConversationResponseDisplay.buttonLeave.click();");
 			ConversationResponseDisplay.buttonLeave.click();
 			return;
 		}
@@ -1033,6 +1035,7 @@ public class UserInputLevel {
 
 		if (keyStateEscape == false && Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 			keyStateEscape = true;
+			System.out.println("calling escapeTyped()");
 			escapeTyped();
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 			keyStateEscape = false;
