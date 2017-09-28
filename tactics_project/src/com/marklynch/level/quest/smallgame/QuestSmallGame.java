@@ -356,12 +356,24 @@ public class QuestSmallGame extends Quest {
 
 	@Override
 	public void update() {
+		System.out.println("0");
 		// Set flags
 		if (!started) {
 			if (hunterBrent.squareGameObjectIsOn.visibleToPlayer) {
 				start();
 				addInfo(infoSeenHunters);
 				addObjective(objectiveHunters);
+			}
+		}
+
+		if (currentObjectives.contains(objectiveWeaponsBehindLodge)) {
+			System.out.println("A");
+			for (GameObject weapon : weaponsBehindLodge) {
+				System.out.println("B");
+				if (Game.level.player.inventory.contains(weapon)) {
+					System.out.println("C");
+					currentObjectives.remove(this.objectiveWeaponsBehindLodge);
+				}
 			}
 		}
 
@@ -586,11 +598,15 @@ public class QuestSmallGame extends Quest {
 				}
 
 				addInfo(infoAgreedToJoinHunters);
-				addObjective(objectiveWeaponsBehindLodge);
-				for (GameObject weapon : weaponsBehindLodge) {
-					weapon.owner = null;
-				}
+
 				addObjective(objectiveHunters);
+				// Add marker for weapons only if theyre on the square
+				for (GameObject weapon : weaponsBehindLodge) {
+					if (squareBehindLodge.inventory.contains(weapon)) {
+						addObjective(objectiveWeaponsBehindLodge);
+						weapon.owner = null;
+					}
+				}
 
 			}
 		};
