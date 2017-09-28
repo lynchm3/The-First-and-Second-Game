@@ -66,10 +66,16 @@ public class ActionBuySpecificItem extends Action {
 	public boolean check() {
 		if (!(performer instanceof Trader) && performer.getCarriedGoldValue() < object.value)
 			return false;
-		if (target != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
-			return true;
+		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
+			actionName = ACTION_NAME + " (can't reach)";
+			return false;
 		}
-		return false;
+		return true;
+		// if (target != null &&
+		// performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
+		// return true;
+		// }
+		// return false;
 	}
 
 	@Override

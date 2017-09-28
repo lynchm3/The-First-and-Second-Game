@@ -865,33 +865,6 @@ public class AIRoutineUtils {
 		}
 	}
 
-	// public static boolean sellAllToTarget(Class clazz, Actor target) {
-	// int weaponDistance =
-	// Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
-	// if (weaponDistance <= 1 && target.remainingHealth > 0) {
-	// Game.level.activeActor.sellAllToTarget(clazz, target);
-	// return true;
-	// } else {
-	// return false;
-	// }
-	// }
-
-	// public static boolean inSameBuilding(GameObject gameObject1, GameObject
-	// gameObject2) {
-	// return inSameBuilding(gameObject1.squareGameObjectIsOn,
-	// gameObject2.squareGameObjectIsOn);
-	// }
-	//
-	// public static boolean inSameBuilding(GameObject gameObject1, Square
-	// square2) {
-	// return inSameBuilding(gameObject1.squareGameObjectIsOn, square2);
-	//
-	// }
-	//
-	// public static boolean inSameBuilding(Square square1, Square square2) {
-	// return square1.structureSquareIsIn == square2.structureSquareIsIn;
-	// }
-
 	public static Square getRandomSquareInBuilding(Structure building) {
 
 		ArrayList<Square> randomSquares = new ArrayList<Square>();

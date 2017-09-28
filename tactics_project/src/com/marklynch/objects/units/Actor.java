@@ -1043,16 +1043,6 @@ public class Actor extends GameObject {
 		super.update(delta);
 	}
 
-	public void sellAllToTarget(Class clazz, Actor target) {
-		ArrayList<GameObject> gameObjectsToSell = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
-		for (GameObject gameObjectToSell : gameObjectsToSell) {
-			if (clazz == null || clazz.isInstance(gameObjectToSell)) {
-				new ActionSellSpecificItem(this, target, gameObjectToSell);
-			}
-		}
-
-	}
-
 	private void addAttackerIfVisible(GameObject potentialAttacker) {
 
 		if (!this.attackers.contains(potentialAttacker)
@@ -1418,9 +1408,6 @@ public class Actor extends GameObject {
 	}
 
 	public boolean sellItemsMarkedToSell(Actor buyer) {
-		if (this.straightLineDistanceTo(buyer.squareGameObjectIsOn) > 1)
-			return false;
-
 		for (GameObject gameObject : (ArrayList<GameObject>) inventory.gameObjects.clone()) {
 			if (gameObject.toSell == true) {
 				new ActionSellSpecificItem(this, buyer, gameObject).perform();
