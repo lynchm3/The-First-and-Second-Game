@@ -310,8 +310,8 @@ public class UserInputLevel {
 		// && Game.level.activeActor != null
 		// && Game.squareMouseIsOver != null &&
 		// Game.squareMouseIsOver.reachableBySelectedCharater
-		// && Game.level.activeActor.faction == Game.level.factions.get(0)
-		// && Game.level.currentFactionMoving == Game.level.factions.get(0)) {
+		// && Game.level.activeActor.faction == Game.level.factions.player
+		// && Game.level.currentFactionMoving == Game.level.factions.player) {
 		//// path = Game.level.activeActor.paths.get(Game.squareMouseIsOver);
 		// for (Square square : path.squares) {
 		// square.inPath = true;

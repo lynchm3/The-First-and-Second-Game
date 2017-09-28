@@ -44,7 +44,7 @@ public class ActionClose extends Action {
 
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
-			if (actor.faction == Game.level.factions.get(0)) {
+			if (actor.faction == Game.level.factions.player) {
 				Game.level.undoList.clear();
 			}
 

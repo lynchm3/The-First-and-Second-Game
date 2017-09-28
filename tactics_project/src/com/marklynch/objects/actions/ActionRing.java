@@ -36,7 +36,7 @@ public class ActionRing extends Action {
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " rang ", object }));
 
-		if (performer.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
 		}
 

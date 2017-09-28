@@ -37,7 +37,7 @@ public class Roof extends GameObject {
 	@Override
 	public void draw3() {
 		// if (this.squareGameObjectIsOn.building !=
-		// Game.level.factions.get(0).actors
+		// Game.level.factions.player.actors
 		// .get(0).squareGameObjectIsOn.building) {
 		// super.draw1();
 		// } else {

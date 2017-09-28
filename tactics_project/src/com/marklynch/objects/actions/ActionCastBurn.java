@@ -69,7 +69,7 @@ public class ActionCastBurn extends Action {
 		// performer.showPow(target);
 		// }
 
-		if (performer.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
 		}
 

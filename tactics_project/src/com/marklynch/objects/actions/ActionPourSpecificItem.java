@@ -81,7 +81,7 @@ public class ActionPourSpecificItem extends Action {
 
 		performer.distanceMovedThisTurn = performer.travelDistance;
 
-		if (performer.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
 		}
 

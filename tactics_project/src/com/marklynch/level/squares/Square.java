@@ -276,7 +276,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		// draw weapon icons on square
 		// if (this.gameObject != null
-		// && level.currentFactionMoving == level.factions.get(0)) {
+		// && level.currentFactionMoving == level.factions.player) {
 		// float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
 		// float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
 		// for (int i = 0; i < this.weaponsThatCanAttack.size(); i++) {

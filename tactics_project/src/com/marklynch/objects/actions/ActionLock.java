@@ -49,7 +49,7 @@ public class ActionLock extends Action {
 
 			performer.showPow(openable);
 
-			if (actor.faction == Game.level.factions.get(0)) {
+			if (actor.faction == Game.level.factions.player) {
 				Game.level.undoList.clear();
 			}
 

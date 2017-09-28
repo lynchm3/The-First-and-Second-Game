@@ -37,7 +37,7 @@ public class ActionTakeBite extends Action {
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took a bite of ", target }));
 
-		if (performer.faction == Game.level.factions.get(0)) {
+		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();
 		}
 
