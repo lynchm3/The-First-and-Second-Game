@@ -184,6 +184,13 @@ public class QuestSmallGame extends Quest {
 	AdventureInfo infoSeenHunters = new AdventureInfo("I've spotted some hunters planning a hunt");
 	AdventureInfo infoAgreedToJoinHunters = new AdventureInfo(
 			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
+	AdventureInfo infoEnviromentalistWasSpying = new AdventureInfo(
+			"I met a strange figure spying on the hunters of Town Lodge");
+	AdventureInfo infoEnviromentalistGaevMeWeapons1 = new AdventureInfo(
+			"Behind the hunting lodge, where the weapons were meant to be, stood a starange figure. He spoke 3 words \"Save the wolf\", then handed me the hunting gear along with a fire wand and some enchantments");
+	AdventureInfo infoEnviromentalistGaevMeWeapons2 = new AdventureInfo(
+			"Behind the hunting lodge, where the weapons were meant to be, stood the starange figure from before. He spoke 3 words \"Save the wolf\", then handed me the hunting gear along with a fire wand and some enchantments");
+
 	AdventureInfo infoRetrievedWeapons = new AdventureInfo("I've retrieved the weapons from behind the hunter's lodge");
 	AdventureInfo infoReadHuntPlan1 = new AdventureInfo("In the staging area for a hunt I found the plan for the hunt");
 	AdventureInfo infoReadHuntPlan2 = new AdventureInfo(
@@ -559,6 +566,8 @@ public class QuestSmallGame extends Quest {
 	public Conversation getConversationForEnvironmentalist(Actor actor) {
 		// Talking to environmentalist
 		if (!questAcceptedFromHunters) {
+			start();
+			addInfo(infoEnviromentalistWasSpying);
 			return conversationEnviromentalistImNotSpying;
 		} else if (!talkedToEnvironmentalist) {
 			for (GameObject gameObject : weaponsBehindLodge) {
@@ -569,7 +578,8 @@ public class QuestSmallGame extends Quest {
 			}
 			return conversationEnviromentalistSaveTheWolf;
 		}
-		return null;
+
+		return environmentalistBill.createConversation("...");
 	}
 
 	public void setUpConversationHunterOpening() {
@@ -593,9 +603,7 @@ public class QuestSmallGame extends Quest {
 				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
 				// PACK HUNTERS"
 				questAcceptedFromHunters = true;
-				if (!started) {
-					start();
-				}
+				start();
 
 				addInfo(infoAgreedToJoinHunters);
 

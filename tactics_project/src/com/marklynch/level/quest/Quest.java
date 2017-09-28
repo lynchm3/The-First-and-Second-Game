@@ -50,6 +50,8 @@ public class Quest {
 	}
 
 	public void start() {
+		if (started)
+			return;
 		started = true;
 		Game.level.popupToasts.add(new PopupToast(new Object[] { "Quest " + name + " started!" }));
 		turnStarted = turnUpdated = Level.turn;
