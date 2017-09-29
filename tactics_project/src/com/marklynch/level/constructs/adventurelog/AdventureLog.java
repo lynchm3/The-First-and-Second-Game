@@ -94,7 +94,8 @@ public class AdventureLog implements Draggable, Scrollable {
 				final LevelButton buttonToMakeQuestActive = new LevelButton(
 						listX + listBorder + listWidth - listItemHeight,
 						listY + listBorder + questsDrawnInList * listItemHeight, listItemHeight, listItemHeight,
-						"end_turn_button.png", "end_turn_button.png", "", true, true, Color.GRAY, Color.WHITE, null);
+						"end_turn_button.png", "end_turn_button.png", "", true, true, Color.GRAY, Color.WHITE,
+						"Track or stop tracking this quest. You can have multipple active quests.");
 				buttonToMakeQuestActive.setClickListener(new ClickListener() {
 
 					@Override
@@ -124,7 +125,7 @@ public class AdventureLog implements Draggable, Scrollable {
 				final LevelButton buttonToShowQuestDetails = new LevelButton(listX + listBorder,
 						listY + listBorder + questsDrawnInList * listItemHeight, listWidth - listItemHeight,
 						listItemHeight, "end_turn_button.png", "end_turn_button.png", quest.name, true, true,
-						Color.BLACK, Color.WHITE, null);
+						Color.BLACK, Color.WHITE, "Display quest details");
 				buttonToShowQuestDetails.setClickListener(new ClickListener() {
 
 					@Override

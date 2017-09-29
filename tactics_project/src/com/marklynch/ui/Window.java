@@ -84,7 +84,7 @@ public class Window implements Draggable {
 		}
 
 		closeButton = new LevelButton(drawPositionX + width - 20, drawPositionY, 20f, 20f, "end_turn_button.png",
-				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE, "Close window");
 		closeButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -93,7 +93,7 @@ public class Window implements Draggable {
 		});
 
 		minimiseButton = new LevelButton(drawPositionX + width - 40, drawPositionY, 20f, 20f, "end_turn_button.png",
-				"end_turn_button.png", "_", true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "_", true, true, Color.BLACK, Color.WHITE, "Minimise window");
 		minimiseButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {

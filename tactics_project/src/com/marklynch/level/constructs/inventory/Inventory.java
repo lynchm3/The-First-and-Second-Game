@@ -184,7 +184,8 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsFilter = new ArrayList<Button>();
 
 		buttonSortAlphabetically = new LevelButton(sortButtonX, 100f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", stringSortAlphabetically, true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", stringSortAlphabetically, true, true, Color.BLACK, Color.WHITE,
+				"Sort items in inventory alphabetically");
 		buttonSortAlphabetically.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -194,7 +195,8 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortAlphabetically);
 
 		buttonSortByNewest = new LevelButton(sortButtonX, 150f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", stringSortByNewest, true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", stringSortByNewest, true, true, Color.BLACK, Color.WHITE,
+				"Sort items in inventory by the order they were acquired");
 		buttonSortByNewest.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -204,7 +206,8 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortByNewest);
 
 		buttonSortByFavourite = new LevelButton(sortButtonX, 200f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", stringSortByFavourite, true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", stringSortByFavourite, true, true, Color.BLACK, Color.WHITE,
+				"Sort items in inventory by starredness");
 		buttonSortByFavourite.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -214,7 +217,8 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortByFavourite);
 
 		buttonSortByValue = new LevelButton(sortButtonX, 250f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", stringSortByValue, true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", stringSortByValue, true, true, Color.BLACK, Color.WHITE,
+				"Sort items in inventory by value");
 		buttonSortByValue.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -224,7 +228,8 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortByValue);
 
 		buttonSortByTotalDamage = new LevelButton(sortButtonX, 300f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", stringSortByTotalDamage, true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", stringSortByTotalDamage, true, true, Color.BLACK, Color.WHITE,
+				"Sort items in inventory by total damage");
 		buttonSortByTotalDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -234,7 +239,8 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortByTotalDamage);
 
 		buttonSortBySlashDamage = new LevelButton(sortButtonX, 350f, sortButtonWidth, 30f, "end_turn_button.png",
-				"end_turn_button.png", stringSortBySlashDamage, true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", stringSortBySlashDamage, true, true, Color.BLACK, Color.WHITE,
+				"Sort items in inventory by slash damage");
 		buttonSortBySlashDamage.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -244,7 +250,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsSort.add(buttonSortBySlashDamage);
 
 		buttonFilterByAll = new LevelButton(sortButtonX + 100f, squaresY - 30, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "ALL", true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "ALL", true, true, Color.BLACK, Color.WHITE, "Show all items in inventory");
 		buttonFilterByAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -254,7 +260,8 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsFilter.add(buttonFilterByAll);
 
 		buttonFilterByWeapon = new LevelButton(sortButtonX + 200f, squaresY - 30, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "WEAPONS", true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "WEAPONS", true, true, Color.BLACK, Color.WHITE,
+				"Show only weapons in inventory");
 		buttonFilterByWeapon.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -264,7 +271,8 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsFilter.add(buttonFilterByWeapon);
 
 		buttonFilterByFood = new LevelButton(sortButtonX + 300f, squaresY - 30, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "FOOD", true, true, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "FOOD", true, true, Color.BLACK, Color.WHITE,
+				"Show only food items in inventory");
 		buttonFilterByFood.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -274,7 +282,8 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsFilter.add(buttonFilterByFood);
 
 		buttonLootAll = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "LOOT ALL [A]", true, false, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "LOOT ALL [A]", true, false, Color.BLACK, Color.WHITE,
+				"Loot all items nearby (legal if white, illegal if red)");
 		buttonLootAll.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -323,7 +332,8 @@ public class Inventory implements Draggable, Scrollable {
 		});
 
 		buttonQuickSell = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "QUICK SELL [A]", true, false, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "QUICK SELL [A]", true, false, Color.BLACK, Color.WHITE,
+				"Sell useless items, obsolete weapons and armor, and duplicate tools");
 		buttonQuickSell.setClickListener(new ClickListener() {
 
 			@Override

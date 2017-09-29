@@ -13,7 +13,7 @@ public class Link extends LevelButton {
 	public Link(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
 			String text, boolean xFromLeft, boolean yFromTop, Color buttonColor, Color textColor, Object object) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text, xFromLeft, yFromTop, buttonColor,
-				textColor, null);
+				textColor, "View more details");
 		this.object = object;
 		this.setClickListener(defaultClickListener);
 	}

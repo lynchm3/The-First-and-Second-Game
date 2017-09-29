@@ -11,7 +11,7 @@ public class Tooltip {
 
 	public StringWithColor textWithColor;
 	// public int textWidth;
-	public static final int wrapWidth = 100;
+	public static final int wrapWidth = 200;
 	LevelButton levelButton;
 	float[] dimensions;
 

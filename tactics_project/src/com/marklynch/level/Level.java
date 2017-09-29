@@ -473,7 +473,7 @@ public class Level {
 
 		endTurnButton = new LevelButton(110f, 480f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"WAIT [SPACE]", false, false, Color.BLACK, Color.WHITE,
-				"Press or Hold to wait and watch the world go by - [SPACE]");
+				"Wait a turn. You can also hold SPACE to wait longer and watch the world go by");
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
