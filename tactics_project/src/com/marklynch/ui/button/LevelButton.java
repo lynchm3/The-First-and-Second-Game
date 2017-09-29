@@ -21,14 +21,16 @@ public class LevelButton extends Button {
 
 	public LevelButton(float x, float y, float width, float height, String enabledTexturePath,
 			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Color buttonColor,
-			Color textColor) {
+			Color textColor, String tooltipText) {
 		super(x, y, width, height, enabledTexturePath, disabledTexturePath, text);
 		this.xFromLeft = xFromLeft;
 		this.yFromTop = yFromTop;
 		this.buttonColor = buttonColor;
 		this.textColor = textColor;
 		this.textParts = new Object[] { new StringWithColor(text, textColor) };
-		this.tooltip = new Tooltip("TOOLTIP", this);
+
+		if (tooltipText != null)
+			this.tooltip = new Tooltip(tooltipText, this);
 
 		realX = x;
 		if (this.xFromLeft == false)
@@ -63,9 +65,12 @@ public class LevelButton extends Button {
 			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, false, null, this.textParts);
 		}
 
-		if (Game.buttonHoveringOver == this && tooltip != null)
-			tooltip.drawStaticUI();
+	}
 
+	@Override
+	public void drawTooltip() {
+		if (tooltip != null)
+			tooltip.drawStaticUI();
 	}
 
 	@Override

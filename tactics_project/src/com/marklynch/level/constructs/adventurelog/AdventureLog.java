@@ -49,7 +49,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		resize();
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "CLOSE [N]", true, false, Color.BLACK, Color.WHITE);
+				"end_turn_button.png", "CLOSE [N]", true, false, Color.BLACK, Color.WHITE, null);
 		buttonClose.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -94,7 +94,7 @@ public class AdventureLog implements Draggable, Scrollable {
 				final LevelButton buttonToMakeQuestActive = new LevelButton(
 						listX + listBorder + listWidth - listItemHeight,
 						listY + listBorder + questsDrawnInList * listItemHeight, listItemHeight, listItemHeight,
-						"end_turn_button.png", "end_turn_button.png", "", true, true, Color.GRAY, Color.WHITE);
+						"end_turn_button.png", "end_turn_button.png", "", true, true, Color.GRAY, Color.WHITE, null);
 				buttonToMakeQuestActive.setClickListener(new ClickListener() {
 
 					@Override
@@ -124,7 +124,7 @@ public class AdventureLog implements Draggable, Scrollable {
 				final LevelButton buttonToShowQuestDetails = new LevelButton(listX + listBorder,
 						listY + listBorder + questsDrawnInList * listItemHeight, listWidth - listItemHeight,
 						listItemHeight, "end_turn_button.png", "end_turn_button.png", quest.name, true, true,
-						Color.BLACK, Color.WHITE);
+						Color.BLACK, Color.WHITE, null);
 				buttonToShowQuestDetails.setClickListener(new ClickListener() {
 
 					@Override

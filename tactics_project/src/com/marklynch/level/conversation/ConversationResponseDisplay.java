@@ -79,7 +79,7 @@ public class ConversationResponseDisplay {
 
 			final LevelButton responseButton = new LevelButton(positionX + widthSoFar,
 					Conversation.bottomMargin + buttonHeight + 10, buttonWidth, buttonHeight, null, null,
-					"" + conversationResponses[i].text, true, false, Color.WHITE, Color.BLACK);
+					"" + conversationResponses[i].text, true, false, Color.WHITE, Color.BLACK, null);
 
 			responseButton.clickListener = new ClickListener() {
 
@@ -94,7 +94,7 @@ public class ConversationResponseDisplay {
 		}
 
 		buttonTrade = new LevelButton(leaveButtonWidth + 30 + tradeButtonWidth + 30, buttonHeight + 10,
-				tradeButtonWidth, buttonHeight, null, null, stringTrade, false, false, Color.WHITE, Color.BLACK);
+				tradeButtonWidth, buttonHeight, null, null, stringTrade, false, false, Color.WHITE, Color.BLACK, null);
 		buttonTrade.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -104,7 +104,7 @@ public class ConversationResponseDisplay {
 		buttons.add(buttonTrade);
 
 		buttonLeave = new LevelButton(leaveButtonWidth + 30, buttonHeight + 10, leaveButtonWidth, buttonHeight, null,
-				null, stringLeave, false, false, Color.WHITE, Color.BLACK);
+				null, stringLeave, false, false, Color.WHITE, Color.BLACK, null);
 		buttonLeave.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -123,7 +123,6 @@ public class ConversationResponseDisplay {
 		for (LevelButton button : buttons) {
 			button.draw();
 		}
-
 	}
 
 	public void resize() {

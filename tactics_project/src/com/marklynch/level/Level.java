@@ -49,7 +49,6 @@ import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionUsePower;
-import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Projectile;
@@ -216,7 +215,7 @@ public class Level {
 		initGrid(this.squares, this.width, this.height);
 
 		Button doNothing2Button = new LevelButton(110f, 40f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"nothing", false, false, Color.BLACK, Color.WHITE);
+				"nothing", false, false, Color.BLACK, Color.WHITE, "Nothing to see here");
 		doNothing2Button.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -225,7 +224,7 @@ public class Level {
 		buttons.add(doNothing2Button);
 
 		Button nothingButton = new LevelButton(220f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"nothing", false, false, Color.BLACK, Color.WHITE);
+				"nothing", false, false, Color.BLACK, Color.WHITE, "Nothing to see here");
 		nothingButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -236,7 +235,7 @@ public class Level {
 		buttons.add(nothingButton);
 
 		Button seeAllButton = new LevelButton(330f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"FULL VIS", false, false, Color.BLACK, Color.WHITE);
+				"FULL VIS", false, false, Color.BLACK, Color.WHITE, "DEV - Reveal all squares");
 		seeAllButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -247,7 +246,7 @@ public class Level {
 		buttons.add(seeAllButton);
 
 		Button showAILinesButton = new LevelButton(440f, 40f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"AI LINES", false, false, Color.BLACK, Color.WHITE);
+				"AI LINES", false, false, Color.BLACK, Color.WHITE, "DEV - Draw AI target Lines");
 		showAILinesButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -258,7 +257,8 @@ public class Level {
 		buttons.add(showAILinesButton);
 
 		Button showTriggerLinesButton = new LevelButton(550f, 40f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "TRGR LINES", false, false, Color.BLACK, Color.WHITE);
+				"undo_button_disabled.png", "TRGR LINES", false, false, Color.BLACK, Color.WHITE,
+				"DEV - Draw trigger lines between switches etc.");
 		showTriggerLinesButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -269,7 +269,8 @@ public class Level {
 		buttons.add(showTriggerLinesButton);
 
 		Button highlightRestrictedButton = new LevelButton(660f, 40f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "RSTRCTD SQRS", false, false, Color.BLACK, Color.WHITE);
+				"undo_button_disabled.png", "RSTRCTD SQRS", false, false, Color.BLACK, Color.WHITE,
+				"DEV - Highlight restricted squares");
 		highlightRestrictedButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -280,7 +281,8 @@ public class Level {
 		buttons.add(highlightRestrictedButton);
 
 		Button highlightOPathButton = new LevelButton(770f, 40f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "PATH SQRS", false, false, Color.BLACK, Color.WHITE);
+				"undo_button_disabled.png", "PATH SQRS", false, false, Color.BLACK, Color.WHITE,
+				"DEV - Highlight path");
 		highlightOPathButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -298,7 +300,7 @@ public class Level {
 		buttons.add(highlightOPathButton);
 
 		Button infernoButton = new LevelButton(110f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"INFERNO", false, false, Color.BLACK, Color.WHITE);
+				"INFERNO", false, false, Color.BLACK, Color.WHITE, "DEV - Cast INFERNO");
 		infernoButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -313,7 +315,7 @@ public class Level {
 		buttons.add(infernoButton);
 
 		Button superPeekButton = new LevelButton(220f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"SUPERPEEK", false, false, Color.BLACK, Color.WHITE);
+				"SUPERPEEK", false, false, Color.BLACK, Color.WHITE, "DEV - Cast SUPERPEEK");
 		superPeekButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -328,7 +330,7 @@ public class Level {
 		buttons.add(superPeekButton);
 
 		Button healSelfButton = new LevelButton(330f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"HEAL SELF", false, false, Color.BLACK, Color.WHITE);
+				"HEAL SELF", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL SELF");
 		healSelfButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -343,7 +345,7 @@ public class Level {
 		buttons.add(healSelfButton);
 
 		Button healTouchButton = new LevelButton(440f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"HEAL TOUCH", false, false, Color.BLACK, Color.WHITE);
+				"HEAL TOUCH", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL TOUCH");
 		healTouchButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -358,7 +360,7 @@ public class Level {
 		buttons.add(healTouchButton);
 
 		Button healRangedButton = new LevelButton(550f, 80f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"HEAL RANGED", false, false, Color.BLACK, Color.WHITE);
+				"HEAL RANGED", false, false, Color.BLACK, Color.WHITE, "DEV - Cast HEAL RANGED");
 		healRangedButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -373,7 +375,7 @@ public class Level {
 		buttons.add(healRangedButton);
 
 		Button unlockButton = new LevelButton(110f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"UNLOCK", false, false, Color.BLACK, Color.WHITE);
+				"UNLOCK", false, false, Color.BLACK, Color.WHITE, "DEV - Cast UNLOCK");
 		unlockButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -388,7 +390,7 @@ public class Level {
 		buttons.add(unlockButton);
 
 		poisonBlastButton = new LevelButton(220f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"POISON", false, false, Color.BLACK, Color.WHITE);
+				"POISON", false, false, Color.BLACK, Color.WHITE, "DEV - Cast POISON BLAST");
 		poisonBlastButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -402,7 +404,7 @@ public class Level {
 		poisonBlastButton.enabled = true;
 
 		Button bleedButton = new LevelButton(330f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"BLEED", false, false, Color.BLACK, Color.WHITE);
+				"BLEED", false, false, Color.BLACK, Color.WHITE, "DEV - Cast BLEED");
 		bleedButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -417,7 +419,8 @@ public class Level {
 		buttons.add(bleedButton);
 
 		showHideLogButton = new LevelButton(activityLogger.width, 64f, 70f, 30f, "undo_button.png",
-				"undo_button_disabled.png", " LOG [L] <", true, true, Color.BLACK, Color.WHITE);
+				"undo_button_disabled.png", " LOG [L] <", true, true, Color.BLACK, Color.WHITE,
+				"Show/Hide the Log - [L]");
 		showHideLogButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -433,7 +436,7 @@ public class Level {
 
 		// UI buttons
 		Button inventoryButton = new LevelButton(110f, 400f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"INVENTORY [I]", false, false, Color.BLACK, Color.WHITE);
+				"INVENTORY [I]", false, false, Color.BLACK, Color.WHITE, "Open your Inventory - [I]");
 		inventoryButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -445,7 +448,8 @@ public class Level {
 
 		// UI buttons
 		Button adventureLogButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "ADVENTURES [N]", false, false, Color.BLACK, Color.WHITE);
+				"undo_button_disabled.png", "ADVENTURES [N]", false, false, Color.BLACK, Color.WHITE,
+				"Take a look at your Adventure Log - [N]");
 		adventureLogButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -456,7 +460,7 @@ public class Level {
 		buttons.add(adventureLogButton);
 
 		centerButton = new LevelButton(110f, 440f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
-				"CENTER [Q]", false, false, Color.BLACK, Color.WHITE);
+				"CENTER [Q]", false, false, Color.BLACK, Color.WHITE, "Center view on self - [Q]");
 		centerButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -468,7 +472,8 @@ public class Level {
 		buttons.add(centerButton);
 
 		endTurnButton = new LevelButton(110f, 480f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
-				"WAIT [SPACE]", false, false, Color.BLACK, Color.WHITE);
+				"WAIT [SPACE]", false, false, Color.BLACK, Color.WHITE,
+				"Press or Hold to wait and watch the world go by - [SPACE]");
 		endTurnButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -480,7 +485,7 @@ public class Level {
 		buttons.add(endTurnButton);
 
 		mapButton = new LevelButton(110f, 520f, 100f, 30f, "end_turn_button.png", "end_turn_button.png", "MAP [M]",
-				false, false, Color.BLACK, Color.WHITE);
+				false, false, Color.BLACK, Color.WHITE, "Zoom out to Map and back again - [M]");
 		mapButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -499,7 +504,7 @@ public class Level {
 		buttons.add(mapButton);
 
 		playButton = new LevelButton(30f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false,
-				true, Color.GRAY, Color.WHITE);
+				true, Color.GRAY, Color.WHITE, "Let time pass - [SPACE]");
 		playButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -518,7 +523,7 @@ public class Level {
 		buttons.add(playButton);
 
 		pauseButton = new LevelButton(60f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  ||", false,
-				true, Color.BLACK, Color.WHITE);
+				true, Color.BLACK, Color.WHITE, "Pause time");
 		pauseButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -578,16 +583,6 @@ public class Level {
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
 		gameCursor = new GameCursor();
-
-		endTurnButton = new LevelButton(210f, 110f, 200f, 100f, "end_turn_button.png", "end_turn_button.png",
-				"END TURN", false, false, Color.BLACK, Color.WHITE);
-		endTurnButton.setClickListener(new ClickListener() {
-			@Override
-			public void click() {
-				new ActionWait(player, player.squareGameObjectIsOn).perform();
-			}
-		});
-		buttons.add(endTurnButton);
 
 		this.inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 		this.projectiles = new ArrayList<Projectile>();
@@ -1300,6 +1295,9 @@ public class Level {
 		for (PopupToast popupToast : popupToasts) {
 			popupToast.draw();
 		}
+
+		if (Game.buttonHoveringOver != null)
+			Game.buttonHoveringOver.drawTooltip();
 
 	}
 
