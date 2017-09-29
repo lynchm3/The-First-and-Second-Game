@@ -15,6 +15,9 @@ public class LevelButton extends Button {
 	public Color buttonColor;
 	private Color textColor;
 	public Object[] textParts;
+	public Tooltip tooltip;
+	public float realX = x;
+	public float realY = y;
 
 	public LevelButton(float x, float y, float width, float height, String enabledTexturePath,
 			String disabledTexturePath, String text, boolean xFromLeft, boolean yFromTop, Color buttonColor,
@@ -25,13 +28,16 @@ public class LevelButton extends Button {
 		this.buttonColor = buttonColor;
 		this.textColor = textColor;
 		this.textParts = new Object[] { new StringWithColor(text, textColor) };
+		this.tooltip = new Tooltip("TOOLTIP", this);
+		if (this.xFromLeft == false)
+			realX = Game.windowWidth - x;
+
+		if (this.yFromTop == false)
+			realY = Game.windowHeight - y;
 	}
 
 	@Override
 	public void draw() {
-
-		float realX = x;
-		float realY = y;
 		if (this.xFromLeft == false)
 			realX = Game.windowWidth - x;
 
@@ -51,6 +57,9 @@ public class LevelButton extends Button {
 			QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
 			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, false, null, this.textParts);
 		}
+
+		if (Game.buttonHoveringOver == this)
+			tooltip.drawStaticUI();
 
 	}
 
