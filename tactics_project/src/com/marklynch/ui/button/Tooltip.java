@@ -2,24 +2,26 @@ package com.marklynch.ui.button;
 
 import com.marklynch.Game;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
 
 public class Tooltip {
 
-	String text;
+	StringWithColor textWithColor;
 	int textWidth;
 	int wrapWidth = 100;
 	LevelButton levelButton;
 
 	public Tooltip(String text, LevelButton button) {
-		this.text = text;
+		textWithColor = new StringWithColor(text, Color.BLACK);
 		textWidth = Game.font.getWidth(text);
 		this.levelButton = button;
 	}
 
 	public void drawStaticUI() {
+
 		if (levelButton != null) {
 
 			float x1 = 0;
@@ -58,9 +60,9 @@ public class Tooltip {
 
 			// textWidth
 
-			QuadUtils.drawQuad(Color.BLACK, x1, x2, y1, y2);
+			QuadUtils.drawQuad(Color.WHITE, x1, x2, y1, y2);
 
-			TextUtils.printTextWithImages(x1, y1, wrapWidth, true, false, null, text);
+			TextUtils.printTextWithImages(x1, y1, wrapWidth, true, false, null, textWithColor);
 
 		}
 	}

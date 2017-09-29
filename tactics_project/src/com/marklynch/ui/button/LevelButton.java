@@ -63,7 +63,7 @@ public class LevelButton extends Button {
 			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, false, null, this.textParts);
 		}
 
-		if (Game.buttonHoveringOver == this)
+		if (Game.buttonHoveringOver == this && tooltip != null)
 			tooltip.drawStaticUI();
 
 	}
