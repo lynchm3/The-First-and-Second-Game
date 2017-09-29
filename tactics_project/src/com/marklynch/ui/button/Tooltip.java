@@ -9,15 +9,17 @@ import mdesl.graphics.Color;
 
 public class Tooltip {
 
-	StringWithColor textWithColor;
-	int textWidth;
-	int wrapWidth = 100;
+	public StringWithColor textWithColor;
+	// public int textWidth;
+	public static final int wrapWidth = 100;
 	LevelButton levelButton;
+	float[] dimensions;
 
 	public Tooltip(String text, LevelButton button) {
 		textWithColor = new StringWithColor(text, Color.BLACK);
-		textWidth = Game.font.getWidth(text);
+		// textWidth = Game.font.getWidth(text);
 		this.levelButton = button;
+		dimensions = TextUtils.getDimensions(this.textWithColor.string, wrapWidth);
 	}
 
 	public void drawStaticUI() {
@@ -28,33 +30,37 @@ public class Tooltip {
 			float x2 = 0;
 			float y1 = 0;
 			float y2 = 0;
+
 			if (levelButton.realX <= Game.halfWindowWidth && levelButton.realY <= Game.halfWindowHeight) {
 				// top left quadrant
 				x1 = levelButton.realX + levelButton.width + 10;
-				x2 = x1 + wrapWidth;
+				x2 = x1 + dimensions[0];
 				y2 = levelButton.realY + levelButton.height;
-				y1 = y2 - 20;
+				y1 = y2 - dimensions[1];
+				;
 
 			} else if (levelButton.realX <= Game.halfWindowWidth && levelButton.realY > Game.halfWindowHeight) {
 				// bottom left quadrant
 				x1 = levelButton.realX + levelButton.width + 10;
-				x2 = x1 + wrapWidth;
+				x2 = x1 + dimensions[0];
 				y1 = levelButton.realY;
-				y2 = y1 + 20;
+				y2 = y1 + dimensions[1];
+				;
 
 			} else if (levelButton.realX > Game.halfWindowWidth && levelButton.realY <= Game.halfWindowHeight) {
 				// top right
 				x2 = levelButton.realX + -10;
-				x1 = x2 - wrapWidth;
+				x1 = x2 - dimensions[0];
 				y2 = levelButton.realY + levelButton.height;
-				y1 = y2 - 20;
+				y1 = y2 - dimensions[1];
+				;
 
 			} else if (levelButton.realX > Game.halfWindowWidth && levelButton.realY > Game.halfWindowHeight) {
 				// bottom right
 				x2 = levelButton.realX + -10;
-				x1 = x2 - wrapWidth;
+				x1 = x2 - dimensions[0];
 				y1 = levelButton.realY;
-				y2 = y1 + 20;
+				y2 = y1 + dimensions[1];
 
 			}
 
@@ -62,7 +68,7 @@ public class Tooltip {
 
 			QuadUtils.drawQuad(Color.WHITE, x1, x2, y1, y2);
 
-			TextUtils.printTextWithImages(x1, y1, wrapWidth, true, false, null, textWithColor);
+			TextUtils.printTextWithImages(x1, y1, wrapWidth, true, false, null, this.textWithColor);
 
 		}
 	}

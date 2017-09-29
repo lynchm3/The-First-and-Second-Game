@@ -21,16 +21,54 @@ import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
+import com.marklynch.ui.button.Tooltip;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class TextUtils {
 
+	public final static String splitRegex = "(?<=[\\p{Punct}\\p{Space}|\\p{Space}\\p{Punct}|\\p{Punct}|\\p{Space}])";
+
 	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, boolean link,
 			ArrayList<LevelButton> arrayToAddLinksTo, Object... contents) {
 		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY, maxWidth, wrap, link,
 				arrayToAddLinksTo);
+	}
+
+	public static float[] getDimensions(String string, float maxWidth) {
+
+		float[] dimensions = new float[2];
+
+		float fullStringWidth = Game.font.getWidth(string);
+		if (fullStringWidth <= maxWidth) {
+			dimensions[0] = fullStringWidth;
+			dimensions[1] = 20;
+			return dimensions;
+		}
+
+		dimensions[0] = maxWidth;
+
+		float offsetX = 0;
+		float offsetY = 0;
+
+		String[] stringParts = string.split(splitRegex);
+		for (String stringPart : stringParts) {
+
+			float width = Game.font.getWidth(stringPart);
+			if (offsetX + width > maxWidth && offsetX != 0) {
+
+				offsetY += 20;
+				offsetX = 0;
+			}
+
+			offsetX += width;
+
+		}
+
+		dimensions[1] = offsetY + 20;
+
+		return dimensions;
 	}
 
 	public static void printTextWithImages(ArrayList contents, float posX, float posY, float maxWidth, boolean wrap,
@@ -45,7 +83,7 @@ public class TextUtils {
 
 		for (Object content : contents) {
 			if (content instanceof String || content instanceof StringWithColor || content instanceof Integer
-					|| content instanceof Float || content instanceof Boolean) {
+					|| content instanceof Float || content instanceof Boolean || content instanceof Tooltip) {
 
 				String string = null;
 				Color color = Color.WHITE;
@@ -58,11 +96,14 @@ public class TextUtils {
 					StringWithColor stringWithColor = (StringWithColor) content;
 					string = stringWithColor.string;
 					color = stringWithColor.color;
+				} else if (content instanceof Tooltip) {
+					Tooltip tooltip = (Tooltip) content;
+					string = tooltip.textWithColor.string;
+					color = tooltip.textWithColor.color;
 				}
 				Game.activeBatch.setColor(color);
 
-				String[] stringParts = string
-						.split("(?<=[\\p{Punct}\\p{Space}|\\p{Space}\\p{Punct}|\\p{Punct}|\\p{Space}])");
+				String[] stringParts = string.split(splitRegex);
 
 				for (String stringPart : stringParts) {
 
