@@ -23,7 +23,6 @@ public class Quest {
 
 	// Called once per cycle
 	public void update() {
-
 	}
 
 	// Called my members of quest when they dont know what to do
@@ -35,8 +34,15 @@ public class Quest {
 		return null;
 	}
 
+	private void setLastUpdatedTime() {
+		turnUpdated = Game.level.turn;
+
+	}
+
 	public void addObjective(Objective objective) {
 		if (!currentObjectives.contains(objective)) {
+			start();
+			setLastUpdatedTime();
 			currentObjectives.add(objective);
 		}
 	}
@@ -47,6 +53,8 @@ public class Quest {
 
 	public void addInfo(AdventureInfo info) {
 		if (!infoList.contains(info)) {
+			start();
+			setLastUpdatedTime();
 			info.setTurn(Game.level.turn);
 			infoList.add(info);
 		}

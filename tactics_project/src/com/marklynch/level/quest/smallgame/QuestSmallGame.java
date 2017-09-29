@@ -172,6 +172,8 @@ public class QuestSmallGame extends Quest {
 
 	// Info strings
 	AdventureInfo infoSeenHunters = new AdventureInfo("I've spotted some hunters planning a hunt");
+	AdventureInfo infoSeenWolves = new AdventureInfo(
+			"I've spotted a pack of wolves. Their leader is montrous in size but seems gentle in nature.");
 	AdventureInfo infoAgreedToJoinHunters = new AdventureInfo(
 			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
 	AdventureInfo infoSetOffWithHunters = new AdventureInfo(
@@ -350,7 +352,6 @@ public class QuestSmallGame extends Quest {
 					if (!started) {
 						addInfo(infoReadHuntPlan1);
 						addObjective(objectiveHunters);
-						start();
 					} else {
 						addInfo(infoReadHuntPlan2);
 					}
@@ -371,15 +372,24 @@ public class QuestSmallGame extends Quest {
 
 	@Override
 	public void update() {
-		// Set flags
-		if (!started) {
+
+		// See hunters for first time
+		if (!haveInfo(infoSeenHunters)) {
 			if (hunterBrent.squareGameObjectIsOn.visibleToPlayer) {
-				start();
 				addInfo(infoSeenHunters);
 				addObjective(objectiveHunters);
 			}
 		}
 
+		// See wolves for first time
+		if (!haveInfo(infoSeenWolves)) {
+			if (superWolf.squareGameObjectIsOn.visibleToPlayer) {
+				addInfo(infoSeenWolves);
+				addObjective(objectiveWolves);
+			}
+		}
+
+		// You have the pick up weapons objective and pick them up
 		if (currentObjectives.contains(objectiveWeaponsBehindLodge)) {
 			for (GameObject weapon : weaponsBehindLodge) {
 				if (Game.level.player.inventory.contains(weapon)) {
@@ -393,42 +403,28 @@ public class QuestSmallGame extends Quest {
 
 		// The wolves are dead
 		if (!haveInfo(infoWolvesDead)) {
-			boolean wolvesDead = true;
-			for (int i = 0; i < wolfPack.size(); i++) {
-				if (wolfPack.getMember(i).remainingHealth > 0) {
-					wolvesDead = false;
-					break;
-				}
-			}
-			if (wolvesDead) {
+			if (wolfPack.size() == 0) {
 				addInfo(infoWolvesDead);
 			}
 		}
 
 		// Player has attacked the wolves
-		if (!haveInfo(infoAttackedWolves) && wolfPack.hasAttackers()) {
-			if (wolfPack.getAttackers().contains(Game.level.player)) {
-				addInfo(infoAttackedWolves);
-			}
+		if (!haveInfo(infoAttackedWolves) && wolfPack.getAttackers().contains(Game.level.player)) {
+			addInfo(infoSeenWolves);
+			addInfo(infoAttackedWolves);
+
 		}
 
 		// The hunters are dead
 		if (!haveInfo(infoHuntersDead)) {
-			boolean huntersDead = true;
-			for (int i = 0; i < hunterPack.size(); i++) {
-				if (hunterPack.getMember(i).remainingHealth > 0) {
-					huntersDead = false;
-					break;
-				}
-			}
-			if (huntersDead) {
+			if (hunterPack.size() == 0) {
 				addInfo(infoHuntersDead);
 			}
 		}
 
 		// Player has attacked the hunters after accepting quest
-		if (!haveInfo(infoAgreedToJoinHunters) && !haveInfo(infoAttackedHunters)
-				&& hunterPack.getAttackers().contains(Game.level.player)) {
+		if (!haveInfo(infoAttackedHunters) && hunterPack.getAttackers().contains(Game.level.player)) {
+			addInfo(infoSeenHunters);
 			addInfo(infoAttackedHunters);
 		}
 
@@ -603,7 +599,19 @@ public class QuestSmallGame extends Quest {
 				new ConversationResponse[] {}, hunterPack.getLeader());
 
 		ConversationResponse conversationResponseNoThanks = new ConversationResponse("No thanks",
-				conversationPartSuitYourself);
+				conversationPartSuitYourself) {
+			@Override
+			public void select() {
+				super.select();
+				// ADD QUEST TO QUEST LOG IF NO IN HARDCORE MODE
+				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
+				// PACK HUNTERS"
+
+				addInfo(infoSeenHunters);
+				addObjective(objectiveHunters);
+
+			}
+		};
 		ConversationResponse conversationResponseYesPlease = new ConversationResponse("Yes please",
 				conversationPartTheresEquipment) {
 			@Override
@@ -612,8 +620,8 @@ public class QuestSmallGame extends Quest {
 				// ADD QUEST TO QUEST LOG IF NO IN HARDCORE MODE
 				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
 				// PACK HUNTERS"
-				start();
 
+				addInfo(infoSeenHunters);
 				addInfo(infoAgreedToJoinHunters);
 
 				addObjective(objectiveHunters);
@@ -648,7 +656,6 @@ public class QuestSmallGame extends Quest {
 				environmentalistBill) {
 			@Override
 			public void leave() {
-				start();
 				addInfo(infoEnviromentalistWasSpying);
 				addObjective(objectiveEnvironmentalist);
 				addObjective(objectiveHunters);
@@ -704,7 +711,6 @@ public class QuestSmallGame extends Quest {
 				// Hunters on the way
 				addObjective(objectiveWolves);
 				if (Game.level.quests.questCaveOfTheBlind.started == false) {
-					Game.level.quests.questCaveOfTheBlind.start();
 					Game.level.quests.questCaveOfTheBlind
 							.addObjective(Game.level.quests.questCaveOfTheBlind.objectiveCave);
 					Game.level.quests.questCaveOfTheBlind.addObjective(objectiveHunters);
