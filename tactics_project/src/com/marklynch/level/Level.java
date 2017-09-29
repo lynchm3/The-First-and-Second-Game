@@ -1436,7 +1436,8 @@ public class Level {
 		else if (Game.level.player.animation.completed && Player.playerTargetSquare != null) {
 
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
-			if (Player.playerPathToMove == null) {
+			if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
+					|| Player.playerPathToMove.squares.size() == 0) {
 				if (!player.playerTargetSquare.inventory.canShareSquare()) {
 
 					Object[] objects = new Object[] { "Theres a ",

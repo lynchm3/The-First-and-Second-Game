@@ -49,6 +49,9 @@ public class AStarSearch {
 	 */
 	public LinkedList<AStarNode> findPath(Actor actor, AStarNode startNode, AStarNode goalNode, int maxCount) {
 
+		AStarNode bestNodeFound = null;
+		float bestPathFoundDistanceToTarget = Integer.MAX_VALUE;
+
 		PriorityList openList = new PriorityList();
 		LinkedList closedList = new LinkedList();
 
@@ -92,8 +95,14 @@ public class AStarSearch {
 			}
 			closedList.add(node);
 			count++;
+
+			if (node.estimatedCostToGoal < bestPathFoundDistanceToTarget) {
+				bestNodeFound = node;
+				bestPathFoundDistanceToTarget = node.estimatedCostToGoal;
+			}
+
 			if (count == maxCount) {
-				return constructPath(node);
+				return constructPath(bestNodeFound);
 				// return constructPath(node);
 				// return null;
 			}

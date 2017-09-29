@@ -738,12 +738,19 @@ public class AIRoutineUtils {
 		if (pathToSquare == null) {
 			return null;
 		}
+		if (pathToSquare.travelCost == 0) {
+			return null;
+		}
 
 		// TODO move this to an actor method called moveAlongPath
 		Square squareToMoveTo = null;
+
+		// pathToSquare.s
+
 		// squareToMoveTo = pathToSquare.squares.lastElement(); this line works,
 		// but allows CPU to cheat
 		if (pathToSquare.travelCost <= Game.level.activeActor.travelDistance) {
+
 			squareToMoveTo = pathToSquare.squares.lastElement();
 			Game.level.activeActor.path = pathToSquare;
 		} else {

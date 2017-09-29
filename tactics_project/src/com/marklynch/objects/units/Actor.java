@@ -342,7 +342,7 @@ public class Actor extends GameObject {
 		// ASTARSEACH.FINDPATH
 		int maxPathSize = 100;
 		if (this instanceof Player) {
-			maxPathSize = 1000;
+			maxPathSize = 100;
 		}
 
 		LinkedList<AStarNode> aStarNodesPath = new AStarSearch().findPath(this, this.squareGameObjectIsOn, target,
