@@ -29,18 +29,23 @@ public class LevelButton extends Button {
 		this.textColor = textColor;
 		this.textParts = new Object[] { new StringWithColor(text, textColor) };
 		this.tooltip = new Tooltip("TOOLTIP", this);
+
+		realX = x;
 		if (this.xFromLeft == false)
 			realX = Game.windowWidth - x;
 
+		realY = y;
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
 	}
 
 	@Override
 	public void draw() {
+		realX = x;
 		if (this.xFromLeft == false)
 			realX = Game.windowWidth - x;
 
+		realY = y;
 		if (this.yFromTop == false)
 			realY = Game.windowHeight - y;
 
