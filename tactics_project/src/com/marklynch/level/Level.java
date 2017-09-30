@@ -58,7 +58,7 @@ import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.Toast;
-import com.marklynch.ui.Window;
+import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -127,7 +127,7 @@ public class Level {
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
 	public ArrayList<PopupToast> popupToasts = new ArrayList<PopupToast>();
-	public ArrayList<Window> popupPinneds = new ArrayList<Window>();
+	public ArrayList<PinWindow> popupPinneds = new ArrayList<PinWindow>();
 
 	public Toast toast;
 	public Conversation conversation;
@@ -830,7 +830,7 @@ public class Level {
 		AdventureLog.drawQuestLines();
 
 		// Draw lines for the popup windows
-		for (Window window : this.popupPinneds) {
+		for (PinWindow window : this.popupPinneds) {
 			window.drawLine();
 		}
 		Game.activeBatch.flush();
@@ -1266,7 +1266,7 @@ public class Level {
 		// script
 		script.draw();
 
-		for (Window popupPinned : popupPinneds) {
+		for (PinWindow popupPinned : popupPinneds) {
 			popupPinned.drawStaticUI();
 		}
 
@@ -1673,7 +1673,7 @@ public class Level {
 		return null;
 	}
 
-	public Window getWindowFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
+	public PinWindow getWindowFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
 		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
 			if (popupPinneds.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
 				return popupPinneds.get(i);

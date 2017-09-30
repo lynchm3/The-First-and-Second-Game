@@ -27,7 +27,7 @@ import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Player;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
-import com.marklynch.ui.Window;
+import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.popups.PopupMenu;
 import com.marklynch.ui.popups.PopupMenuButton;
@@ -185,8 +185,8 @@ public class UserInputLevel {
 
 				if (draggableMouseIsOver != null) {
 
-					if (draggableMouseIsOver instanceof Window) {
-						((Window) draggableMouseIsOver).bringToFront();
+					if (draggableMouseIsOver instanceof PinWindow) {
+						((PinWindow) draggableMouseIsOver).bringToFront();
 					}
 
 					draggableMouseIsOver.drag(Mouse.getX() - mouseLastX, Mouse.getY() - mouseLastY);

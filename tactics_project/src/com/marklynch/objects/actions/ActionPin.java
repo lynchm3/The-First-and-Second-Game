@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.ui.Window;
+import com.marklynch.ui.PinWindow;
 
 public class ActionPin extends Action {
 
@@ -25,7 +25,7 @@ public class ActionPin extends Action {
 	@Override
 	public void perform() {
 
-		Game.level.popupPinneds.add(new Window(target));
+		Game.level.popupPinneds.add(new PinWindow(target));
 
 		performer.actionsPerformedThisTurn.add(this);
 	}

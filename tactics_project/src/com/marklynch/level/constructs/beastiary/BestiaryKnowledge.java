@@ -9,6 +9,7 @@ public class BestiaryKnowledge {
 	public boolean level;
 	public boolean image;
 	public boolean totalHealth;
+	public boolean faction;
 
 	// stats
 	public boolean strength;

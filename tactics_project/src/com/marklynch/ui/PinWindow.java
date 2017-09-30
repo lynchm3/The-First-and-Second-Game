@@ -17,7 +17,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 
-public class Window implements Draggable {
+public class PinWindow implements Draggable {
 
 	public GameObject gameObject;
 	public float width;
@@ -51,7 +51,7 @@ public class Window implements Draggable {
 
 	// Practical damage
 
-	public Window(GameObject gameObject) {
+	public PinWindow(GameObject gameObject) {
 		this.gameObject = gameObject;
 		if (gameObject instanceof Actor)
 			actor = (Actor) gameObject;
@@ -88,7 +88,7 @@ public class Window implements Draggable {
 		closeButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.popupPinneds.remove(Window.this);
+				Game.level.popupPinneds.remove(PinWindow.this);
 			}
 		});
 
@@ -97,7 +97,7 @@ public class Window implements Draggable {
 		minimiseButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Window.this.minimised = !Window.this.minimised;
+				PinWindow.this.minimised = !PinWindow.this.minimised;
 			}
 		});
 
@@ -106,7 +106,7 @@ public class Window implements Draggable {
 		titleBarButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Window.this.minimised = !Window.this.minimised;
+				PinWindow.this.minimised = !PinWindow.this.minimised;
 			}
 		});
 
@@ -142,7 +142,8 @@ public class Window implements Draggable {
 
 			// Background
 			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
-			// Image
+
+			// GameObject Image
 			TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
 					drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),
 					drawPositionY + gameObject.imageTexture.getHeight());
@@ -178,13 +179,25 @@ public class Window implements Draggable {
 
 		// GENERAL
 
-		// Name
+		// Faction Image
+		// TextureUtils.drawTexture(actor.faction.imageTexture, drawPositionX +
+		// borderWidth,
+		// drawPositionY + titleBarHeight + actor.imageTexture.getHeight(),
+		// drawPositionX + borderWidth + 20,
+		// drawPositionY + titleBarHeight + actor.imageTexture.getHeight() +
+		// 20);
+		if (bestiaryKnowledge.faction) {
+			TextUtils.printTextWithImages(drawPositionX + borderWidth,
+					drawPositionY + titleBarHeight + actor.imageTexture.getHeight(), 128, false, false, null,
+					actor.faction);
+		}
 
+		// Name
 		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
 				drawPositionY + statsY, drawPositionX + statsImageX + 20, drawPositionY + statsY + 20);
 		if (bestiaryKnowledge.name) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
-					null, "" + actor.name);
+					null, actor.name);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, false,
