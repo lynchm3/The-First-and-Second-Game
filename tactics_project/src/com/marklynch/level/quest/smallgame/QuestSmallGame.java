@@ -301,7 +301,7 @@ public class QuestSmallGame extends Quest {
 		environmentalistBill.quest = this;
 
 		superWolf = new AggressiveWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
-				Game.level.squares[207][16], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+				Game.level.squares[129][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
@@ -314,6 +314,8 @@ public class QuestSmallGame extends Quest {
 				Game.level.squares[208][17], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+
+		// [207][16]
 
 		wolfPack = new Group("Wolf pack", superWolf, wolf2, wolf3);
 
@@ -423,6 +425,7 @@ public class QuestSmallGame extends Quest {
 		}
 
 		// Player has attacked the hunters after accepting quest
+		System.out.println("hunterPack.getAttackers().size() = " + hunterPack.getAttackers().size());
 		if (!haveInfo(infoAttackedHunters) && hunterPack.getAttackers().contains(Game.level.player)) {
 			addInfo(infoSeenHunters);
 			addInfo(infoAttackedHunters);
@@ -442,7 +445,6 @@ public class QuestSmallGame extends Quest {
 
 	@Override
 	public boolean update(Actor actor) {
-		update();
 		if (hunterPack.contains(actor)) {
 			return updateHunter(actor);
 		} else if (actor == environmentalistBill) {

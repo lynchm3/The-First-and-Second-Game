@@ -37,6 +37,7 @@ import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -1761,6 +1762,9 @@ public class Level {
 			}
 
 			popupToasts.clear();
+
+			for (Quest quest : quests)
+				quest.update();
 
 		}
 
