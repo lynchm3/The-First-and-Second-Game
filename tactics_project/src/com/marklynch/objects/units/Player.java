@@ -75,6 +75,7 @@ public class Player extends Actor {
 		bestiaryKnowledge.image = true;
 		bestiaryKnowledge.totalHealth = true;
 		bestiaryKnowledge.faction = true;
+		bestiaryKnowledge.group = true;
 
 		// Stats
 		bestiaryKnowledge.strength = true;

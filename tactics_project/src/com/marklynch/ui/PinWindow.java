@@ -178,18 +178,16 @@ public class PinWindow implements Draggable {
 		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(actor.templateId);
 
 		// GENERAL
-
-		// Faction Image
-		// TextureUtils.drawTexture(actor.faction.imageTexture, drawPositionX +
-		// borderWidth,
-		// drawPositionY + titleBarHeight + actor.imageTexture.getHeight(),
-		// drawPositionX + borderWidth + 20,
-		// drawPositionY + titleBarHeight + actor.imageTexture.getHeight() +
-		// 20);
 		if (bestiaryKnowledge.faction) {
 			TextUtils.printTextWithImages(drawPositionX + borderWidth,
 					drawPositionY + titleBarHeight + actor.imageTexture.getHeight(), 128, false, false, null,
 					actor.faction);
+		}
+
+		if (bestiaryKnowledge.group && actor.group != null) {
+			TextUtils.printTextWithImages(drawPositionX + borderWidth,
+					drawPositionY + titleBarHeight + actor.imageTexture.getHeight() + 30, 128, false, false, null,
+					actor.group.name);
 		}
 
 		// Name

@@ -10,6 +10,7 @@ public class BestiaryKnowledge {
 	public boolean image;
 	public boolean totalHealth;
 	public boolean faction;
+	public boolean group;
 
 	// stats
 	public boolean strength;
