@@ -38,6 +38,7 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPet;
+import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionSellSpecificItem;
 import com.marklynch.objects.actions.ActionStopHiding;
@@ -1099,18 +1100,7 @@ public class Actor extends GameObject {
 		if (this.remainingHealth <= 0)
 			return actions;
 
-		if (this != Game.level.player) {
-			// Talk
-			if (this.getConversation() != null)
-				actions.add(new ActionTalk(performer, this));
-			if (this instanceof Animal) {
-				actions.add(new ActionPet(performer, this));
-			}
-			// Inherited from object (attack...)
-			actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
-			// Inherited from squre (move/swap squares)
-			// actions.addAll(squareGameObjectIsOn.getAllActionsPerformedOnThisInWorld(performer));
-		} else {
+		if (this == Game.level.player) {
 			if (Game.level.player.peekingThrough != null) {
 				actions.add(new ActionStopPeeking(performer));
 			}
@@ -1136,6 +1126,15 @@ public class Actor extends GameObject {
 				if (hidingPlaceStandingOn != null)
 					actions.add(new ActionHide(this, hidingPlaceStandingOn));
 			}
+			actions.add(new ActionPin(performer, this));
+		} else {
+			// Talk
+			if (this.getConversation() != null)
+				actions.add(new ActionTalk(performer, this));
+			if (this instanceof Animal) {
+				actions.add(new ActionPet(performer, this));
+			}
+			actions.addAll(super.getAllActionsPerformedOnThisInWorld(performer));
 		}
 
 		actions.add(new ActionMove(performer, this.squareGameObjectIsOn, true));
