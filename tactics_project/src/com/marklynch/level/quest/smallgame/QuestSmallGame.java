@@ -172,8 +172,7 @@ public class QuestSmallGame extends Quest {
 
 	// Info strings
 	AdventureInfo infoSeenHunters = new AdventureInfo("I've spotted some hunters planning a hunt");
-	AdventureInfo infoSeenWolves = new AdventureInfo(
-			"I've spotted a pack of wolves. Their leader is montrous in size but seems gentle in nature.");
+	AdventureInfo infoSeenWolves = new AdventureInfo("I've spotted a pack of wolves.");
 	AdventureInfo infoAgreedToJoinHunters = new AdventureInfo(
 			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
 	AdventureInfo infoSetOffWithHunters = new AdventureInfo(
@@ -435,6 +434,7 @@ public class QuestSmallGame extends Quest {
 		if (!haveInfo(infoHuntersEngagedWolves) && hunterPack.hasAttackers()) {
 			for (int j = 0; j < wolfPack.size(); j++) {
 				if (hunterPack.getAttackers().contains(wolfPack.getMember(j))) {
+					addInfo(infoSeenWolves);
 					addInfo(infoHuntersEngagedWolves);
 					break;
 				}
