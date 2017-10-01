@@ -19,7 +19,7 @@ public class Tooltip {
 		textWithColor = new StringWithColor(text, Color.BLACK);
 		// textWidth = Game.font.getWidth(text);
 		this.levelButton = button;
-		dimensions = TextUtils.getDimensions(this.textWithColor.string, wrapWidth);
+		dimensions = TextUtils.getDimensions(wrapWidth, this.textWithColor.string);
 	}
 
 	public void drawStaticUI() {

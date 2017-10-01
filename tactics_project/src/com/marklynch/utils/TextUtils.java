@@ -36,37 +36,6 @@ public class TextUtils {
 				arrayToAddLinksTo);
 	}
 
-	public static float[] getDimensions(String string, float maxWidth) {
-
-		float[] dimensions = new float[2];
-
-		float offsetX = 0;
-		float offsetY = 0;
-
-		String[] stringParts = string.split(splitRegex);
-		for (String stringPart : stringParts) {
-
-			float width = Game.font.getWidth(stringPart);
-			if (offsetX + width > maxWidth && offsetX != 0) {
-
-				offsetY += 20;
-				offsetX = 0;
-			}
-
-			offsetX += width;
-
-		}
-
-		dimensions[1] = offsetY + 20;
-		if (dimensions[1] > 20) {
-			dimensions[0] = maxWidth;
-		} else {
-			dimensions[0] = offsetX;
-		}
-
-		return dimensions;
-	}
-
 	public static float[] getDimensions(float maxWidth, Object... contents) {
 		return getDimensions(new ArrayList<Object>(Arrays.asList(contents)), maxWidth);
 	}
@@ -80,7 +49,6 @@ public class TextUtils {
 		float[] dimensions = new float[2];
 		float offsetX = 0;
 		float offsetY = 0;
-		Game.activeBatch.setColor(Color.WHITE);
 
 		for (Object content : contents) {
 			if (content instanceof String || content instanceof StringWithColor || content instanceof Integer
@@ -370,7 +338,6 @@ public class TextUtils {
 						}
 					}
 
-					// GameObject.font.
 					Game.font.drawText(Game.activeBatch, stringPart, posX + offsetX, posY + offsetY);
 
 					offsetX += width;
