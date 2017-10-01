@@ -124,16 +124,6 @@ public class RockGolem extends Monster {
 	}
 
 	@Override
-	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		if (!awake) {
-			return null;
-		} else {
-			ActionAttack actionAttack = new ActionAttack(performer, this);
-			return actionAttack;
-		}
-	}
-
-	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 		if (!awake) {
 			return null;

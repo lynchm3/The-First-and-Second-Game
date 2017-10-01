@@ -424,7 +424,6 @@ public class QuestSmallGame extends Quest {
 		}
 
 		// Player has attacked the hunters after accepting quest
-		System.out.println("hunterPack.getAttackers().size() = " + hunterPack.getAttackers().size());
 		if (!haveInfo(infoAttackedHunters) && hunterPack.getAttackers().contains(Game.level.player)) {
 			addInfo(infoSeenHunters);
 			addInfo(infoAttackedHunters);

@@ -12,7 +12,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -53,12 +52,6 @@ public class Pig extends Animal {
 	@Override
 	public void postLoad2() {
 		super.postLoad2();
-	}
-
-	@Override
-	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
-		return new ActionMove(performer, this.squareGameObjectIsOn, true);
-
 	}
 
 	@Override

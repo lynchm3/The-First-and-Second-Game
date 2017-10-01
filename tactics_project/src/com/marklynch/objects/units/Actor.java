@@ -36,6 +36,7 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionHide;
+import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.actions.ActionPin;
@@ -1065,13 +1066,22 @@ public class Actor extends GameObject {
 		if (this == Game.level.player) {
 			return new ActionWait(performer, performer.squareGameObjectIsOn);
 		} else if (performer.attackers.contains(this)) {
-			ActionAttack actionAttack = new ActionAttack(performer, this);
-			// if (actionAttack.enabled && actionAttack.legal) {
-			return actionAttack;
-			// }
-		} else {
-			return new ActionMove(performer, this.squareGameObjectIsOn, true);
+			return new ActionAttack(performer, this);
+		} else if (this instanceof RockGolem) {
+			RockGolem rockGolem = (RockGolem) this;
+			if (!rockGolem.awake) {
+				return new ActionLift(performer, this);
+			} else {
+				return new ActionAttack(performer, this);
+			}
+		} else if (this instanceof AggressiveWildAnimal) {
+			return new ActionAttack(performer, this);
+		} else if (this instanceof Animal) {
+			return new ActionPet(performer, this);
+		} else if (this instanceof Monster) {
+			return new ActionAttack(performer, this);
 		}
+		return new ActionTalk(performer, this);
 	}
 
 	@Override
@@ -1082,14 +1092,9 @@ public class Actor extends GameObject {
 			} else {
 				return new ActionWait(performer, performer.squareGameObjectIsOn);
 			}
-		} else if (performer.attackers.contains(this)) {
-			return new ActionAttack(performer, this);
-		} else if (this instanceof Animal) {
-			return new ActionPet(performer, this);
-		} else if (this.getConversation() != null) {
-			return new ActionTalk(performer, this);
+		} else {
+			return new ActionMove(performer, this.squareGameObjectIsOn, true);
 		}
-		return null;
 	}
 
 	@Override
