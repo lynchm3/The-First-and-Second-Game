@@ -3,13 +3,13 @@ package com.marklynch.ui.button;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import mdesl.graphics.Color;
-
 import com.marklynch.Game;
 import com.marklynch.editor.AttributesDialog;
 import com.marklynch.utils.ClassUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
+
+import mdesl.graphics.Color;
 
 public class AtributesWindowButton extends Button {
 
@@ -53,15 +53,16 @@ public class AtributesWindowButton extends Button {
 			if (enabled) {
 				if (down) {
 					QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
-					TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, false, null, new Object[] { attribute });
+					TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null,
+							new Object[] { attribute });
 				} else {
 					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
-					TextUtils.printTextWithImages(realX, realY, 200, false, false, null, new Object[] { attribute });
+					TextUtils.printTextWithImages(realX, realY, 200, false, null, new Object[] { attribute });
 				}
 			} else {
 
 				QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
-				TextUtils.printTextWithImages(realX, realY, 200, false, false, null, new Object[] { attribute });
+				TextUtils.printTextWithImages(realX, realY, 200, false, null, new Object[] { attribute });
 			}
 
 		} else {
@@ -81,39 +82,36 @@ public class AtributesWindowButton extends Button {
 					if (enabled) {
 						if (down) {
 							QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
-							TextUtils.printTextWithImages(
-									realX, realY,
-									Integer.MAX_VALUE, true, false, null, new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
+							TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null,
+									new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
 						} else {
 							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
-							TextUtils.printTextWithImages(
-									realX, realY,
-									200, false, false, null, new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
+							TextUtils.printTextWithImages(realX, realY, 200, false, null,
+									new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
 						}
 					} else {
 
 						QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
-						TextUtils.printTextWithImages(
-								realX, realY, 200,
-								false, false, null, new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
+						TextUtils.printTextWithImages(realX, realY, 200, false, null,
+								new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
 					}
 
 				} else {
 					if (enabled) {
 						if (down) {
 							QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
-							TextUtils.printTextWithImages(realX, realY,
-									Integer.MAX_VALUE, true, false, null, new Object[] { attribute + ": ", field.get(object) });
+							TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null,
+									new Object[] { attribute + ": ", field.get(object) });
 						} else {
 							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
-							TextUtils.printTextWithImages(realX, realY,
-									200, false, false, null, new Object[] { attribute + ": ", field.get(object) });
+							TextUtils.printTextWithImages(realX, realY, 200, false, null,
+									new Object[] { attribute + ": ", field.get(object) });
 						}
 					} else {
 
 						QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
-						TextUtils.printTextWithImages(realX, realY,
-								200, false, false, null, new Object[] { attribute + ": ", field.get(object) });
+						TextUtils.printTextWithImages(realX, realY, 200, false, null,
+								new Object[] { attribute + ": ", field.get(object) });
 					}
 
 				}

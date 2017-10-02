@@ -1,10 +1,10 @@
 package com.marklynch.ui.button;
 
-import mdesl.graphics.Color;
-
 import com.marklynch.Game;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
+
+import mdesl.graphics.Color;
 
 public class SelectionWindowButton extends Button {
 
@@ -34,15 +34,15 @@ public class SelectionWindowButton extends Button {
 		if (enabled) {
 			if (down) {
 				QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
-				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, false, null, new Object[] { object });
+				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, new Object[] { object });
 			} else {
 				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
-				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, false, null, new Object[] { object });
+				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, new Object[] { object });
 			}
 		} else {
 
 			QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
-			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, false, null, new Object[] { object });
+			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, new Object[] { object });
 		}
 
 	}

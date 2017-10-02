@@ -19,7 +19,6 @@ import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
-import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
 import com.marklynch.ui.button.Tooltip;
 
@@ -29,12 +28,6 @@ import mdesl.graphics.Texture;
 public class TextUtils {
 
 	public final static String splitRegex = "(?<=[\\p{Punct}\\p{Space}|\\p{Space}\\p{Punct}|\\p{Punct}|\\p{Space}])";
-
-	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, boolean link,
-			ArrayList<LevelButton> arrayToAddLinksTo, Object... contents) {
-		printTextWithImages(new ArrayList(Arrays.asList(contents)), posX, posY, maxWidth, wrap, link,
-				arrayToAddLinksTo);
-	}
 
 	public static float[] getDimensions(float maxWidth, Object... contents) {
 		return getDimensions(new ArrayList<Object>(Arrays.asList(contents)), maxWidth);
@@ -292,11 +285,46 @@ public class TextUtils {
 
 	}
 
-	public static void printTextWithImages(ArrayList contents, float posX, float posY, float maxWidth, boolean wrap,
-			boolean link, ArrayList<LevelButton> arrayToAddLinksTo) {
+	// public static ArrayList<LevelButton> getButtons(Object... contents) {
+	// return getDimensions(new ArrayList<Object>(Arrays.asList(contents)),
+	// maxWidth);
+	// }
+
+	public static ArrayList<Link> getLinks(Object[] contents) {
+		return getLinks(new ArrayList<Object>(Arrays.asList(contents)));
+	}
+
+	public static ArrayList<Link> getLinks(ArrayList<Object> contents) {
+
+		ArrayList<Link> buttons = new ArrayList<Link>();
+		for (Object content : contents) {
+			if (content instanceof GameObjectTemplate) {
+				GameObjectTemplate gameObject = (GameObjectTemplate) content;
+
+				float textWidth = Game.font.getWidth(gameObject.name);
+				float textureWidth = 20;
+
+				float width = textWidth + textureWidth;
+				buttons.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content));
+			}
+
+		}
+		return buttons;
+
+	}
+
+	public static void printTextWithImages(float posX, float posY, float maxWidth, boolean wrap, ArrayList<Link> links,
+			Object... contents) {
+		printTextWithImages(new ArrayList<Object>(Arrays.asList(contents)), posX, posY, maxWidth, wrap, links);
+	}
+
+	public static void printTextWithImages(ArrayList<Object> contents, float posX, float posY, float maxWidth,
+			boolean wrap, ArrayList<Link> links) {
 
 		if (contents == null)
 			return;
+
+		int buttonIndex = 0;
 
 		float offsetX = 0;
 		float offsetY = 0;
@@ -377,8 +405,9 @@ public class TextUtils {
 					}
 				}
 
-				if (link)
+				if (links != null) {
 					Game.activeBatch.setColor(Color.YELLOW);
+				}
 
 				Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
 
@@ -389,11 +418,11 @@ public class TextUtils {
 				TextureUtils.drawTexture(gameObject.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
 				offsetX += textureWidth;
 
-				float endX = posX + offsetX;
+				// float endX = posX + offsetX;
 
-				if (link) {
-					arrayToAddLinksTo.add(new Link(startX, posY + offsetY, endX - startX, 20, null, null, "", true,
-							true, Color.WHITE, Color.WHITE, gameObject));
+				if (links != null) {
+					links.get(buttonIndex).x = startX;
+					links.get(buttonIndex).y = posY + offsetY;
 				}
 
 			} else if (content instanceof Faction) {

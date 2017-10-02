@@ -35,8 +35,7 @@ public class ActivityLogger implements Draggable, Scrollable {
 		// Log text
 		// for (int i = logs.size() - 1; i > -1; i--) {
 		for (ActivityLog log : logs) {
-			TextUtils.printTextWithImages(x + leftBorder, textOffsetY + heightSoFar, width, true, true, links,
-					log.contents);
+			TextUtils.printTextWithImages(x + leftBorder, textOffsetY + heightSoFar, width, true, null, log.contents);
 			heightSoFar += log.height;
 		}
 

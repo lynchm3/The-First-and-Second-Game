@@ -57,8 +57,8 @@ import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.ActivityLogger;
-import com.marklynch.ui.Toast;
 import com.marklynch.ui.PinWindow;
+import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -1223,20 +1223,20 @@ public class Level {
 
 		// Turn text
 		if (currentFactionMoving != null) {
-			TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, false, null,
+			TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null,
 					new Object[] { "TURN " + turn });
 		}
 
 		// Zoom
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 100, Integer.MAX_VALUE, true, false, null,
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 100, Integer.MAX_VALUE, true, null,
 				new Object[] { "Zoom " + Game.zoom });
 
 		// FPS
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 120, Integer.MAX_VALUE, true, false, null,
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 120, Integer.MAX_VALUE, true, null,
 				new Object[] { "FPS " + Game.displayFPS });
 
 		// TIME
-		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, false, null,
+		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, null,
 				new Object[] { timeString });
 
 		// if (factions.size() > 0 && currentFactionMoving != null) {

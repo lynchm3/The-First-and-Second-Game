@@ -25,6 +25,6 @@ public class PopupToast {
 
 	public void draw() {
 		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
-		TextUtils.printTextWithImages(drawPositionX, drawPositionY, width, true, false, null, objects);
+		TextUtils.printTextWithImages(drawPositionX, drawPositionY, width, true, null, objects);
 	}
 }

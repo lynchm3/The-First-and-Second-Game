@@ -181,14 +181,14 @@ public class AdventureLog implements Draggable, Scrollable {
 		if (questToDisplayInAdventureLog != null) {
 			for (AdventureInfo pieceOfInfo : questToDisplayInAdventureLog.infoList) {
 				TextUtils.printTextWithImages(contentX + contentBorder,
-						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true, true,
-						links, new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.object });
+						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true, null,
+						new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.object });
 				questTextsDrawn++;
 			}
 		}
 
 		if (buttons.size() == 1) {
-			TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, true, false, links, new Object[] { "NO QUESTS" });
+			TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, true, null, new Object[] { "NO QUESTS" });
 		} else {
 		}
 
@@ -201,13 +201,13 @@ public class AdventureLog implements Draggable, Scrollable {
 	public void drawActiveQuestObjectiveText() {
 		if (activeQuest != null) {
 			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 150, 20,
-					Integer.MAX_VALUE, false, false, null,
+					Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor(activeQuest.name, Color.WHITE) });
 
 			int objectivesPrinted = 0;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(currentObjective.text) - 150,
-						40 + 20 * objectivesPrinted, Integer.MAX_VALUE, false, false, null,
+						40 + 20 * objectivesPrinted, Integer.MAX_VALUE, false, null,
 						new Object[] { new StringWithColor(currentObjective.text, Color.WHITE) });
 				objectivesPrinted++;
 			}

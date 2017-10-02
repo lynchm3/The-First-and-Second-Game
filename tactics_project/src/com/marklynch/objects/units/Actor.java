@@ -868,7 +868,7 @@ public class Actor extends GameObject {
 			float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT - 20;
 			float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
 			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
-			TextUtils.printTextWithImages(activityX1, activityY1, Integer.MAX_VALUE, false, false, null,
+			TextUtils.printTextWithImages(activityX1, activityY1, Integer.MAX_VALUE, false, null,
 					new Object[] { activityDescription });
 		}
 
@@ -892,8 +892,7 @@ public class Actor extends GameObject {
 					expressionBubblePositionYInPixels + expressionBubbleHeight);
 
 			TextUtils.printTextWithImages(expressionBubblePositionXInPixels + 4, expressionBubblePositionYInPixels + 38,
-					Integer.MAX_VALUE, false, false, null,
-					new Object[] { new StringWithColor(miniDialogue, Color.BLACK) });
+					Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor(miniDialogue, Color.BLACK) });
 		} else if (thoughtBubbleImageTexture != null) {
 
 			int expressionBubbleWidth = 64;

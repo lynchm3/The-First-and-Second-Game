@@ -125,15 +125,15 @@ public class InventorySquare extends Square {
 				}
 
 				StringWithColor goldText = new StringWithColor(count + "x" + gameObject.value, goldTextColor);
-				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
-						false, null, new Object[] { goldText });
+				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
+						new Object[] { goldText });
 			} else if (gameObject instanceof Gold) {
-				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
-						false, null, new Object[] { gameObject.value });
+				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
+						new Object[] { gameObject.value });
 
 			} else if (count > 1) {
-				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false,
-						false, null, new Object[] { count + "x" });
+				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
+						new Object[] { count + "x" });
 
 			}
 

@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.button.Link;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class ConversationPart {
-	public static ArrayList<LevelButton> links = new ArrayList<LevelButton>();
+	public static ArrayList<Link> links = new ArrayList<Link>();
 
 	protected ConversationResponse[] conversationResponses;
 	public Object[] text;
@@ -69,7 +69,7 @@ public class ConversationPart {
 		float x1 = Game.halfWindowWidth - halfTextWidth;
 		float y1 = Game.windowHeight - Conversation.bottomMargin - Conversation.height + topMargin;
 
-		TextUtils.printTextWithImages(x1, y1, maxWidth, true, true, links, text);
+		TextUtils.printTextWithImages(x1, y1, maxWidth, true, links, text);
 
 	}
 
