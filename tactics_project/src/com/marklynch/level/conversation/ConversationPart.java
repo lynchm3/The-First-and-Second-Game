@@ -10,7 +10,7 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 public class ConversationPart {
-	public static ArrayList<Link> links = new ArrayList<Link>();
+	public ArrayList<Link> links;
 
 	protected ConversationResponse[] conversationResponses;
 	public Object[] text;
@@ -30,6 +30,9 @@ public class ConversationPart {
 		// if (conversationResponses.length > 0)
 		windowSelectConversationResponse = new ConversationResponseDisplay(100, Game.level, conversationResponses,
 				talker, this);
+
+		if (text != null)
+			links = TextUtils.getLinks(text);
 
 	}
 
@@ -61,8 +64,6 @@ public class ConversationPart {
 	}
 
 	public void drawStaticUI2() {
-
-		links.clear();
 
 		float topMargin = 25;
 		float maxWidth = Game.windowWidth;

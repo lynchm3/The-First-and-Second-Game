@@ -421,8 +421,10 @@ public class TextUtils {
 				// float endX = posX + offsetX;
 
 				if (links != null) {
-					links.get(buttonIndex).x = startX;
-					links.get(buttonIndex).y = posY + offsetY;
+					// links.get(buttonIndex).x = startX;
+					// links.get(buttonIndex).y = posY + offsetY;
+					links.get(buttonIndex).updatePosition(startX, posY + offsetY);
+					buttonIndex++;
 				}
 
 			} else if (content instanceof Faction) {

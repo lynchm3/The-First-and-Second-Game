@@ -36,7 +36,6 @@ import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
-import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -1601,7 +1600,7 @@ public class Level {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
-			for (Button button : ConversationPart.links) {
+			for (Button button : conversation.currentConversationPart.links) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}

@@ -115,4 +115,19 @@ public class LevelButton extends Button {
 		this.textParts = new Object[] { new StringWithColor(text.toString(), textColor) };
 	}
 
+	public void updatePosition(float x, float y) {
+
+		this.x = x;
+		this.y = y;
+
+		realX = x;
+		if (this.xFromLeft == false)
+			realX = Game.windowWidth - x;
+
+		realY = y;
+		if (this.yFromTop == false)
+			realY = Game.windowHeight - y;
+
+	}
+
 }

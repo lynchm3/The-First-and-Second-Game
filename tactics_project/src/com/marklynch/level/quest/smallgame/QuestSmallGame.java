@@ -653,7 +653,7 @@ public class QuestSmallGame extends Quest {
 		// Anime style
 		// try it out
 		ConversationPart conversationPartImNotSpying = new ConversationPart(
-				new Object[] { "What? NO! I'm not spying! You're spying!" }, new ConversationResponse[] {},
+				new Object[] { "What? NO! I'm not spying! You're spying!", superWolf }, new ConversationResponse[] {},
 				environmentalistBill) {
 			@Override
 			public void leave() {

@@ -11,6 +11,7 @@ import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.button.Link;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -41,7 +42,7 @@ public class AdventureLog implements Draggable, Scrollable {
 	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToMakeQuestAcive = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
-	public static ArrayList<LevelButton> links = new ArrayList<LevelButton>();
+	public static ArrayList<Link> links;
 	// Close button
 	static LevelButton buttonClose;
 
@@ -139,6 +140,8 @@ public class AdventureLog implements Draggable, Scrollable {
 						buttonToShowQuestDetails.setTextColor(Color.BLACK);
 						questToDisplayInAdventureLog = quest;
 
+						generateLinks();
+
 					}
 				});
 
@@ -165,13 +168,22 @@ public class AdventureLog implements Draggable, Scrollable {
 
 	}
 
+	public void generateLinks() {
+		ArrayList<Object> items = new ArrayList<Object>();
+		for (AdventureInfo info : questToDisplayInAdventureLog.infoList) {
+			items.add(info.object);
+		}
+
+		links = TextUtils.getLinks(items);
+	}
+
 	public void close() {
 		showing = false;
 	}
 
 	public void drawStaticUI() {
 
-		links.clear();
+		// links.clear();
 
 		// Black cover
 		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
@@ -181,7 +193,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		if (questToDisplayInAdventureLog != null) {
 			for (AdventureInfo pieceOfInfo : questToDisplayInAdventureLog.infoList) {
 				TextUtils.printTextWithImages(contentX + contentBorder,
-						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true, null,
+						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true, links,
 						new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.object });
 				questTextsDrawn++;
 			}
