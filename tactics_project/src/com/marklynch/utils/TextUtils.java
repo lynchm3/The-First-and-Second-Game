@@ -389,7 +389,7 @@ public class TextUtils {
 
 			} else if (content instanceof GameObjectTemplate) {
 
-				float startX = posX + offsetX;
+				// float startX = posX + offsetX;
 
 				GameObjectTemplate gameObject = (GameObjectTemplate) content;
 
@@ -408,8 +408,15 @@ public class TextUtils {
 
 				if (links != null) {
 					Game.activeBatch.setColor(Color.YELLOW);
+					// links.get(buttonIndex).x = startX;
+					// links.get(buttonIndex).y = posY + offsetY;
+					links.get(buttonIndex).updatePosition(posX + offsetX, posY + offsetY);
+					System.out.println("Placing link for " + links.get(buttonIndex).object + " @ " + posX + offsetX
+							+ "," + (posY + offsetY));
+					buttonIndex++;
 				}
 
+				// Text
 				Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
 
 				offsetX += textWidth;
@@ -418,15 +425,6 @@ public class TextUtils {
 				float x = posX + offsetX;
 				TextureUtils.drawTexture(gameObject.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
 				offsetX += textureWidth;
-
-				// float endX = posX + offsetX;
-
-				if (links != null) {
-					// links.get(buttonIndex).x = startX;
-					// links.get(buttonIndex).y = posY + offsetY;
-					links.get(buttonIndex).updatePosition(startX, posY + offsetY);
-					buttonIndex++;
-				}
 
 			} else if (content instanceof Faction) {
 				Faction faction = (Faction) content;

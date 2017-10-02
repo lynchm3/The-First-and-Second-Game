@@ -8,7 +8,7 @@ import mdesl.graphics.Color;
 
 public class Link extends LevelButton {
 
-	Object object;
+	public Object object;
 
 	public Link(float x, float y, float width, float height, String enabledTexturePath, String disabledTexturePath,
 			String text, boolean xFromLeft, boolean yFromTop, Color buttonColor, Color textColor, Object object) {
