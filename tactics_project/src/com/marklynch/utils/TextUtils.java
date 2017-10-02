@@ -300,6 +300,7 @@ public class TextUtils {
 		for (Object content : contents) {
 			if (content instanceof GameObjectTemplate) {
 				GameObjectTemplate gameObject = (GameObjectTemplate) content;
+				System.out.println("Making link for " + gameObject);
 
 				float textWidth = Game.font.getWidth(gameObject.name);
 				float textureWidth = 20;
