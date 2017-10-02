@@ -1,17 +1,16 @@
 package com.marklynch.ui;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 import com.marklynch.Game;
-import com.marklynch.ui.button.LevelButton;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
 
 public class ActivityLogger implements Draggable, Scrollable {
-	private transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
+
+	public transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
 
 	public float totalHeight = 0;
 	public final static float width = 300;
@@ -20,12 +19,9 @@ public class ActivityLogger implements Draggable, Scrollable {
 	public final static float textWidth = width - leftBorder - rightBorder;
 	public float x = 0;
 	public float textOffsetY = 0;
-	public static ArrayList<LevelButton> links = new ArrayList<LevelButton>();
 	// public float
 
 	public void drawStaticUI() {
-
-		links.clear();
 
 		// Log
 		QuadUtils.drawQuad(Color.BLACK, x, x + width, 0, Game.windowHeight);
@@ -35,7 +31,8 @@ public class ActivityLogger implements Draggable, Scrollable {
 		// Log text
 		// for (int i = logs.size() - 1; i > -1; i--) {
 		for (ActivityLog log : logs) {
-			TextUtils.printTextWithImages(x + leftBorder, textOffsetY + heightSoFar, width, true, null, log.contents);
+			TextUtils.printTextWithImages(x + leftBorder, textOffsetY + heightSoFar, width, true, log.links,
+					log.contents);
 			heightSoFar += log.height;
 		}
 

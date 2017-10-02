@@ -1617,9 +1617,12 @@ public class Level {
 				return popupPinneds.get(i).titleBarButton;
 		}
 
-		for (Button button : activityLogger.links) {
-			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
-				return button;
+		for (ActivityLog log : activityLogger.logs) {
+
+			for (Button button : log.links) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
 		}
 
 		// for (PopupTooltip popupTooltip : popupTooltips) {
