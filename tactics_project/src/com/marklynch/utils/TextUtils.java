@@ -285,10 +285,9 @@ public class TextUtils {
 
 	}
 
-	// public static ArrayList<LevelButton> getButtons(Object... contents) {
-	// return getDimensions(new ArrayList<Object>(Arrays.asList(contents)),
-	// maxWidth);
-	// }
+	public static ArrayList<Link> getLinks(boolean thisVariableDoesNothing, Object... contents) {
+		return getLinks(new ArrayList<Object>(Arrays.asList(contents)));
+	}
 
 	public static ArrayList<Link> getLinks(Object[] contents) {
 		return getLinks(new ArrayList<Object>(Arrays.asList(contents)));
@@ -300,7 +299,6 @@ public class TextUtils {
 		for (Object content : contents) {
 			if (content instanceof GameObjectTemplate) {
 				GameObjectTemplate gameObject = (GameObjectTemplate) content;
-				System.out.println("Making link for " + gameObject);
 
 				float textWidth = Game.font.getWidth(gameObject.name);
 				float textureWidth = 20;
@@ -411,8 +409,6 @@ public class TextUtils {
 					// links.get(buttonIndex).x = startX;
 					// links.get(buttonIndex).y = posY + offsetY;
 					links.get(buttonIndex).updatePosition(posX + offsetX, posY + offsetY);
-					System.out.println("Placing link for " + links.get(buttonIndex).object + " @ " + posX + offsetX
-							+ "," + (posY + offsetY));
 					buttonIndex++;
 				}
 

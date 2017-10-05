@@ -826,7 +826,7 @@ public class Level {
 		Game.activeBatch.updateUniforms();
 
 		// Quest lines
-		AdventureLog.drawQuestLines();
+		AdventureLog.drawQuestInfo();
 
 		// Draw lines for the popup windows
 		for (PinWindow window : this.popupPinneds) {

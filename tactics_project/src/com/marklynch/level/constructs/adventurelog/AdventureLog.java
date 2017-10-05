@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.adventurelog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -42,7 +43,11 @@ public class AdventureLog implements Draggable, Scrollable {
 	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToMakeQuestAcive = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
-	public static ArrayList<Link> links;
+
+	public HashMap<AdventureInfo, ArrayList<Link>> linkMap = new HashMap<AdventureInfo, ArrayList<Link>>();
+	public ArrayList<Link> links = new ArrayList<Link>();
+
+	// public static ArrayList<Link> links;
 	// Close button
 	static LevelButton buttonClose;
 
@@ -169,12 +174,16 @@ public class AdventureLog implements Draggable, Scrollable {
 	}
 
 	public void generateLinks() {
-		ArrayList<Object> items = new ArrayList<Object>();
-		for (AdventureInfo info : questToDisplayInAdventureLog.infoList) {
-			items.add(info.object);
-		}
 
-		links = TextUtils.getLinks(items);
+		links.clear();
+		linkMap.clear();
+
+		for (AdventureInfo info : questToDisplayInAdventureLog.infoList) {
+
+			ArrayList<Link> generatedLinks = TextUtils.getLinks(true, info.object);
+			linkMap.put(info, generatedLinks);
+			links.addAll(generatedLinks);
+		}
 	}
 
 	public void close() {
@@ -193,8 +202,8 @@ public class AdventureLog implements Draggable, Scrollable {
 		if (questToDisplayInAdventureLog != null) {
 			for (AdventureInfo pieceOfInfo : questToDisplayInAdventureLog.infoList) {
 				TextUtils.printTextWithImages(contentX + contentBorder,
-						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true, links,
-						new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.object });
+						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true,
+						linkMap.get(pieceOfInfo), new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.object });
 				questTextsDrawn++;
 			}
 		}
@@ -249,7 +258,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		}
 	}
 
-	public static void drawQuestLines() {
+	public static void drawQuestInfo() {
 		if (activeQuest != null) {
 			int x1 = (int) Game.halfWindowWidth;
 			int y1 = (int) Game.halfWindowHeight;
