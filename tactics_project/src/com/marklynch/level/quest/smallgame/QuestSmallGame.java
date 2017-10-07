@@ -190,6 +190,9 @@ public class QuestSmallGame extends Quest {
 	AdventureInfo infoReadHuntPlan2 = new AdventureInfo(
 			"In the staging area for the hunt I found the plan for the hunt");
 
+	AdventureInfo infoTalkedToWolves = new AdventureInfo(
+			"A wolf, talked to me. He told me \"They come\". He showed me hunters in the town nearby planning a hunt.");
+
 	AdventureInfo infoAttackedHunters = new AdventureInfo("I attacked the hunters");
 	AdventureInfo infoAttackedWolves = new AdventureInfo("I attacked the wolves");
 	AdventureInfo infoHuntersEngagedWolves = new AdventureInfo("The hunters have engaged the wolves");
@@ -606,8 +609,15 @@ public class QuestSmallGame extends Quest {
 			return superWolf.createConversation("They come");
 		} else if (!haveInfo(infoSetOffWithHunters)) {
 			Conversation conversation = superWolf.createConversation("They plot");
-			conversation.openingConversationPart = null;
-			;
+			conversation.openingConversationPart.leaveConversationListener = new LeaveConversationListener() {
+				@Override
+				public void leave() {
+					addInfo(infoSeenWolves);
+					addInfo(infoTalkedToWolves);
+					addObjective(objectiveWolves);
+					addObjective(objectiveHunters);
+				}
+			};
 			return conversation;
 		}
 		return null;
