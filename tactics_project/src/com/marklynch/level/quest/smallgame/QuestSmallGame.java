@@ -19,6 +19,7 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.level.conversation.LeaveConversationListener;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Chest;
@@ -604,7 +605,10 @@ public class QuestSmallGame extends Quest {
 		} else if (haveInfo(infoSetOffWithHunters)) {
 			return superWolf.createConversation("They come");
 		} else if (!haveInfo(infoSetOffWithHunters)) {
-			return superWolf.createConversation("They plot");
+			Conversation conversation = superWolf.createConversation("They plot");
+			conversation.openingConversationPart = null;
+			;
+			return conversation;
 		}
 		return null;
 	}
@@ -674,21 +678,30 @@ public class QuestSmallGame extends Quest {
 		// try it out
 		ConversationPart conversationPartImNotSpying = new ConversationPart(new Object[] {
 				"What? NO! I'm not spying! You're spying!", superWolf, hunterBrent, environmentalistBill },
-				new ConversationResponse[] {}, environmentalistBill) {
+				new ConversationResponse[] {}, environmentalistBill);
+
+		conversationPartImNotSpying.leaveConversationListener = new LeaveConversationListener() {
+
 			@Override
 			public void leave() {
 				addInfo(infoEnviromentalistWasSpying);
 				addObjective(objectiveEnvironmentalist);
 				addObjective(objectiveHunters);
+
 			}
+
 		};
+
 		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying);
 	}
 
 	private void setUpConversationSaveTheWolf() {
 
 		ConversationPart conversationPartSaveTheWolf = new ConversationPart(new Object[] { "Save the wolf!" },
-				new ConversationResponse[] {}, environmentalistBill) {
+				new ConversationResponse[] {}, environmentalistBill);
+
+		conversationPartSaveTheWolf.leaveConversationListener = new LeaveConversationListener() {
+
 			@Override
 			public void leave() {
 				addObjective(objectiveEnvironmentalist);

@@ -19,6 +19,8 @@ public class ConversationPart {
 	public ConversationResponseDisplay windowSelectConversationResponse;
 	public GameObject talker;
 
+	public LeaveConversationListener leaveConversationListener;
+
 	public ConversationPart(Object[] text, ConversationResponse[] conversationResponses, GameObject talker) {
 		super();
 		this.conversationResponses = conversationResponses;
@@ -91,7 +93,8 @@ public class ConversationPart {
 	}
 
 	public void leave() {
-		// TODO Auto-generated method stub
+		if (leaveConversationListener != null)
+			leaveConversationListener.leave();
 
 	}
 
