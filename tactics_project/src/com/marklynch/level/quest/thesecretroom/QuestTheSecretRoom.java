@@ -75,8 +75,8 @@ public class QuestTheSecretRoom extends Quest {
 		// null));
 
 		// Rat
-		Templates.RAT.makeCopy("Rat", Game.level.squares[25][39], Game.level.factions.rats, null, null,
-				new GameObject[] {}, new GameObject[] {});
+		Templates.RAT.makeCopy("Rat", Game.level.squares[25][39], Game.level.factions.rats, null, new GameObject[] {},
+				new GameObject[] {}, null);
 
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
 				structureFeatures, structureEntranceSquares, null, 0, 0, 0, 0, true, null, structureSquaresToRemove,

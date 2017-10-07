@@ -7,6 +7,7 @@ import java.util.Comparator;
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -105,7 +106,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 
 	@Override
 	public Trader makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves) {
+			GameObject[] mightHaves, Area area) {
 
 		Trader actor = new Trader(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,
@@ -114,6 +115,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
 				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves, mightHaves,
 				templateId);
+		actor.area = area;
 		return actor;
 	}
 

@@ -2,6 +2,7 @@ package com.marklynch.objects.units;
 
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -41,7 +42,7 @@ public class Farmer extends Actor {
 
 	@Override
 	public Farmer makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves) {
+			GameObject[] mightHaves, Area area) {
 
 		Farmer actor = new Farmer(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,
@@ -50,6 +51,7 @@ public class Farmer extends Actor {
 				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
 				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves, mightHaves,
 				templateId);
+		actor.area = area;
 		return actor;
 	}
 

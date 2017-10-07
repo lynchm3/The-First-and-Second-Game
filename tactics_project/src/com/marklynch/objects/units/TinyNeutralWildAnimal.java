@@ -21,14 +21,14 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, Area area,
-			GameObject[] mustHaves, GameObject[] mightHaves, int templateId) {
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, GameObject[] mustHaves,
+			GameObject[] mightHaves, int templateId) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
-				legsAnchorX, legsAnchorY, area, mustHaves, mightHaves, templateId);
+				legsAnchorX, legsAnchorY, mustHaves, mightHaves, templateId);
 
 		canBePickedUp = true;
 		fitsInInventory = true;
@@ -58,16 +58,17 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 	}
 
 	@Override
-	public TinyNeutralWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed, Area area,
-			GameObject[] mustHaves, GameObject[] mightHaves) {
+	public TinyNeutralWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed,
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		TinyNeutralWildAnimal actor = new TinyNeutralWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
 				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
 				new Inventory(), widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
-				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, area, mustHaves,
-				mightHaves, templateId);
+				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, mustHaves, mightHaves,
+				templateId);
+		actor.area = area;
 		return actor;
 	}
 

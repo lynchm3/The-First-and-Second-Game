@@ -5,6 +5,7 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerInferno;
@@ -58,7 +59,7 @@ public class Player extends Actor {
 
 	@Override
 	public Player makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves) {
+			GameObject[] mightHaves, Area area) {
 
 		Player actor = new Player(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,

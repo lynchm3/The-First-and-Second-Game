@@ -97,21 +97,17 @@ public class SmallHidingPlace extends Searchable {
 	public Group createBunGroup() {
 		return new Group("Buns",
 				Templates.RABBIT.makeCopy("Female Bun", this.squareGameObjectIsOn.getSquareAbove(),
-						Game.level.factions.buns, null, AreaTownForest.area,
-						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }),
+						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, AreaTownForest.area),
 				Templates.RABBIT.makeCopy("Male Bun", this.squareGameObjectIsOn.getSquareToLeftOf(),
-						Game.level.factions.buns, null, AreaTownForest.area,
-						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }),
+						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, AreaTownForest.area),
 				Templates.BABY_RABBIT.makeCopy("Baby Bun", this.squareGameObjectIsOn.getSquareBelow(),
-						Game.level.factions.buns, null, AreaTownForest.area,
-						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }),
+						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, null),
 				Templates.BABY_RABBIT.makeCopy("Baby Bun", this.squareGameObjectIsOn.getSquareToRightOf(),
-						Game.level.factions.buns, null, AreaTownForest.area,
-						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }));
+						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, null));
 	}
 
 	@Override

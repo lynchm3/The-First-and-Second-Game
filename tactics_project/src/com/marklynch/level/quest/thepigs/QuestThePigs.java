@@ -56,24 +56,24 @@ public class QuestThePigs extends Quest {
 
 		// Pigs
 		larry = Templates.PIG.makeCopy("Larry", Game.level.squares[30][76], Game.level.factions.townsPeople, null,
-				new GameObject[] {}, new GameObject[] {});
+				new GameObject[] {}, new GameObject[] {}, null);
 		larry.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		wendy = Templates.PIG.makeCopy("Wendy", Game.level.squares[39][74], Game.level.factions.townsPeople, null,
-				new GameObject[] {}, new GameObject[] {});
+				new GameObject[] {}, new GameObject[] {}, null);
 		wendy.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		jane = Templates.PIG.makeCopy("Jane", Game.level.squares[34][78], Game.level.factions.townsPeople, null,
-				new GameObject[] {}, new GameObject[] {});
+				new GameObject[] {}, new GameObject[] {}, null);
 		jane.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		steve = Templates.PIG.makeCopy("Steve", Game.level.squares[35][74], Game.level.factions.townsPeople, null,
-				new GameObject[] {}, new GameObject[] {});
+				new GameObject[] {}, new GameObject[] {}, null);
 		steve.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		prescilla = Templates.PIG.makeCopy("Prescilla", Game.level.squares[31][80], Game.level.factions.townsPeople,
-				null, new GameObject[] {}, new GameObject[] {});
+				null, new GameObject[] {}, new GameObject[] {}, null);
 		prescilla.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 
 		// Farmer
 		farmer = Templates.FARMER.makeCopy(Game.level.squares[32][75], Game.level.factions.townsPeople, null, 203,
-				new GameObject[] {}, new GameObject[] {});
+				new GameObject[] {}, new GameObject[] {}, null);
 		farmer.quest = this;
 		hoe = Templates.HOE.makeCopy(null, farmer);
 		farmer.inventory.add(hoe);

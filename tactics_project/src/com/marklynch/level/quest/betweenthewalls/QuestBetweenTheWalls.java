@@ -89,8 +89,8 @@ public class QuestBetweenTheWalls extends Quest {
 		structureFeatures.add(falseWall);
 
 		// Rat
-		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.rats, null, null,
-				new GameObject[] {}, new GameObject[] {});
+		Templates.RAT.makeCopy("Rat", Game.level.squares[44][28], Game.level.factions.rats, null, new GameObject[] {},
+				new GameObject[] {}, null);
 
 		// Hidden room
 		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 36, false, new ArrayList<Actor>(),

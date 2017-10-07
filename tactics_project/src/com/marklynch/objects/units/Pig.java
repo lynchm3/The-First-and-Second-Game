@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -71,7 +72,7 @@ public class Pig extends Animal {
 	}
 
 	public Pig makeCopy(String name, Square square, Faction faction, GameObject bed, GameObject[] mustHaves,
-			GameObject[] mightHaves) {
+			GameObject[] mightHaves, Area area) {
 
 		Pig actor = new Pig(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
 				imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio, heightRatio,
@@ -79,6 +80,7 @@ public class Pig extends Animal {
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, mustHaves, mightHaves, actorLevel);
+		actor.area = area;
 		return actor;
 	}
 

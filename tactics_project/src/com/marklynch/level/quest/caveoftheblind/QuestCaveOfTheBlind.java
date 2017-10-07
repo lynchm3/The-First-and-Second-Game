@@ -116,7 +116,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		mortsKey.quest = this;
 		// [147][21]
 		mort = Templates.MORT.makeCopy(Game.level.squares[281][41], Game.level.factions.townsPeople, mortsGameObject,
-				100, new GameObject[] {}, new GameObject[] {});
+				100, new GameObject[] {}, new GameObject[] {}, null);
 		mort.quest = this;
 		mort.mortsBell = Templates.DINNER_BELL.makeCopy(null, mort);
 		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy("Meat Chunk", null, null);
@@ -373,7 +373,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Rock Golem
 		RockGolem rockGolem = Templates.ROCK_GOLEM.makeCopy(Game.level.squares[291][35], Game.level.factions.rockGolems,
-				caveIn, false, new GameObject[] {}, new GameObject[] {});
+				caveIn, false, new GameObject[] {}, new GameObject[] {}, null);
 
 		// Path Caved In Corridor to dining room
 		cavePaths.add(new StructurePath("Caved In Corridor", false, new ArrayList<Actor>(), Game.level.squares[295][37],

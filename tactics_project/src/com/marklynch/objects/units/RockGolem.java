@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
@@ -149,7 +150,7 @@ public class RockGolem extends Monster {
 	}
 
 	public RockGolem makeCopy(Square square, Faction faction, StructureRoom roomLivingIn, boolean awake,
-			GameObject[] mustHaves, GameObject[] mightHaves) {
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		RockGolem actor = new RockGolem(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,
@@ -158,6 +159,7 @@ public class RockGolem extends Monster {
 				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
 				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn, awake, mustHaves,
 				mightHaves, actorLevel);
+		actor.area = area;
 		return actor;
 	}
 

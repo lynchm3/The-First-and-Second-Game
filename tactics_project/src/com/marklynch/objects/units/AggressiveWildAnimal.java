@@ -2,6 +2,7 @@ package com.marklynch.objects.units;
 
 import com.marklynch.ai.routines.AIRoutineForWildAnimal;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -40,7 +41,7 @@ public class AggressiveWildAnimal extends WildAnimal {
 	}
 
 	public AggressiveWildAnimal makeCopy(Square square, Faction faction, GameObject bed, GameObject[] mustHaves,
-			GameObject[] mightHaves) {
+			GameObject[] mightHaves, Area area) {
 
 		AggressiveWildAnimal actor = new AggressiveWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
 				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
@@ -49,6 +50,7 @@ public class AggressiveWildAnimal extends WildAnimal {
 				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
 				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, mustHaves, mightHaves,
 				templateId);
+		actor.area = area;
 		return actor;
 	}
 

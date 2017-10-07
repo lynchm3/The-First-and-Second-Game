@@ -63,22 +63,22 @@ public class Templates {
 	// Friendly Wild animals
 	public static final TinyNeutralWildAnimal RAT = new TinyNeutralWildAnimal("Rat", "Rat", 1, 1, 0, 0, 0, 0, "rat.png",
 			null, 1, 10, null, new Inventory(), 1, 0.25f, 0f, 0.75f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f,
-			0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null, new GameObject[] {}, new GameObject[] {},
+			0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, new GameObject[] {}, new GameObject[] {},
 			GameObject.generateNewTemplateId());
 
 	public static final HerbivoreWildAnimal RABBIT = new HerbivoreWildAnimal("Rabbit", "Rabbit", 1, 4, 0, 0, 0, 0,
 			"rabbit.png", null, 1, 10, null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-			0f, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null, new GameObject[] {}, new GameObject[] {},
+			0f, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, new GameObject[] {}, new GameObject[] {},
 			GameObject.generateNewTemplateId());
 
 	public static final TinyNeutralWildAnimal BABY_RABBIT = new TinyNeutralWildAnimal("Baby Rabbit", "Baby Rabbit", 1,
 			10, 0, 0, 0, 0, "baby_rabbit.png", null, 1, 10, null, new Inventory(), 0.25f, 0.25f, 0f, 0f, 1f, 1f, 1f,
-			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null,
-			new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, new GameObject[] {},
+			new GameObject[] {}, GameObject.generateNewTemplateId());
 
 	public static final CarnivoreNeutralWildAnimal FOX = new CarnivoreNeutralWildAnimal("Fox", "Fox", 1, 10, 0, 0, 0, 0,
 			"fox.png", null, 1, 10, null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
-			0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, null, new GameObject[] {}, new GameObject[] {},
+			0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, new GameObject[] {}, new GameObject[] {},
 			GameObject.generateNewTemplateId());
 
 	// Monsters

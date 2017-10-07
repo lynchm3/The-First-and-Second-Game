@@ -19,6 +19,7 @@ import com.marklynch.ai.utils.AStarSearch;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.Power;
@@ -170,6 +171,8 @@ public class Actor extends GameObject {
 	public AIPath path;
 
 	public ArrayList<Power> powers = new ArrayList<Power>();
+
+	public Area area;
 
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
@@ -999,7 +1002,7 @@ public class Actor extends GameObject {
 	}
 
 	public Actor makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves) {
+			GameObject[] mightHaves, Area area) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), canOpenDoors,
@@ -1008,6 +1011,7 @@ public class Actor extends GameObject {
 				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
 				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves,
 				mightHaves, templateId);
+		actor.area = area;
 		return actor;
 	}
 

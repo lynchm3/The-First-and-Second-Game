@@ -11,8 +11,6 @@ import mdesl.graphics.Color;
 
 public class HerbivoreWildAnimal extends WildAnimal {
 
-	public Area area;
-
 	public HerbivoreWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
 			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
 			int sight, GameObject bed, Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX,
@@ -20,8 +18,8 @@ public class HerbivoreWildAnimal extends WildAnimal {
 			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
 			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
 			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, Area area,
-			GameObject[] mustHaves, GameObject[] mightHaves, int templateId) {
+			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, GameObject[] mustHaves,
+			GameObject[] mightHaves, int templateId) {
 		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
 				squareActorIsStandingOn, travelDistance, sight, bed, inventory, widthRatio, heightRatio, drawOffsetX,
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
@@ -29,7 +27,6 @@ public class HerbivoreWildAnimal extends WildAnimal {
 				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
 				legsAnchorX, legsAnchorY, mustHaves, mightHaves, templateId);
 
-		this.area = area;
 		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this, area);
 	}
 
@@ -44,16 +41,17 @@ public class HerbivoreWildAnimal extends WildAnimal {
 		super.postLoad2();
 	}
 
-	public HerbivoreWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed, Area area,
-			GameObject[] mustHaves, GameObject[] mightHaves) {
+	public HerbivoreWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed,
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		HerbivoreWildAnimal actor = new HerbivoreWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
 				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
 				new Inventory(), widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
-				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, area, mustHaves,
-				mightHaves, templateId);
+				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, mustHaves, mightHaves,
+				templateId);
+		actor.area = area;
 		return actor;
 	}
 

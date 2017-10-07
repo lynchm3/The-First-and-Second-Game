@@ -2,6 +2,7 @@ package com.marklynch.level.quest.caveoftheblind;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.inventory.Inventory;
@@ -57,7 +58,7 @@ public class Mort extends Actor {
 
 	@Override
 	public Mort makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves) {
+			GameObject[] mightHaves, Area area) {
 
 		Mort actor = new Mort(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
 				imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio, heightRatio,
