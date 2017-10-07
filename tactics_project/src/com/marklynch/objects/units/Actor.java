@@ -1070,7 +1070,11 @@ public class Actor extends GameObject {
 		} else if (this instanceof AggressiveWildAnimal) {
 			return new ActionAttack(performer, this);
 		} else if (this instanceof Animal) {
-			return new ActionPet(performer, this);
+			if (this.getConversation() != null) {
+				return new ActionTalk(performer, this);
+			} else {
+				return new ActionPet(performer, this);
+			}
 		} else if (this instanceof Monster) {
 			return new ActionAttack(performer, this);
 		}

@@ -1368,10 +1368,10 @@ public class Level {
 		// update map zoom animation
 		if (centerToPlayer) {
 
-			float idealDragX = (-Game.level.player.squareGameObjectIsOn.xInGridPixels)
-					+ Game.halfWindowWidth - Game.HALF_SQUARE_WIDTH;
-			float idealDragY = (-Game.level.player.squareGameObjectIsOn.yInGridPixels)
-					+ Game.halfWindowHeight - Game.HALF_SQUARE_HEIGHT;
+			float idealDragX = (-Game.level.player.squareGameObjectIsOn.xInGridPixels) + Game.halfWindowWidth
+					- Game.HALF_SQUARE_WIDTH;
+			float idealDragY = (-Game.level.player.squareGameObjectIsOn.yInGridPixels) + Game.halfWindowHeight
+					- Game.HALF_SQUARE_HEIGHT;
 
 			float diffX = idealDragX - Game.dragX;
 			float diffY = idealDragY - Game.dragY;
@@ -1595,6 +1595,15 @@ public class Level {
 			return null;
 		}
 
+		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
+			if (popupPinneds.get(i).mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
+				return popupPinneds.get(i).closeButton;
+			if (popupPinneds.get(i).mouseOverMinimiseButton(mouseX, Game.windowHeight - mouseY))
+				return popupPinneds.get(i).minimiseButton;
+			if (popupPinneds.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
+				return popupPinneds.get(i).titleBarButton;
+		}
+
 		if (conversation != null) {
 			for (Button button : conversation.currentConversationPart.windowSelectConversationResponse.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
@@ -1605,15 +1614,6 @@ public class Level {
 					return button;
 			}
 			return null;
-		}
-
-		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
-			if (popupPinneds.get(i).mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
-				return popupPinneds.get(i).closeButton;
-			if (popupPinneds.get(i).mouseOverMinimiseButton(mouseX, Game.windowHeight - mouseY))
-				return popupPinneds.get(i).minimiseButton;
-			if (popupPinneds.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
-				return popupPinneds.get(i).titleBarButton;
 		}
 
 		for (ActivityLog log : activityLogger.logs) {
