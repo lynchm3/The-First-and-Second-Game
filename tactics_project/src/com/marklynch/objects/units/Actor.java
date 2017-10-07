@@ -174,6 +174,8 @@ public class Actor extends GameObject {
 
 	public Area area;
 
+	public int thoughtsOnPlayer = 0;
+
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
 			GameObject bed, Inventory inventory,
@@ -680,6 +682,9 @@ public class Actor extends GameObject {
 		return false;
 	}
 
+	float healthWidthInPixels = Game.SQUARE_WIDTH / 20;
+	float healthHeightInPixels = Game.SQUARE_HEIGHT;
+
 	@Override
 	public void draw1() {
 
@@ -704,36 +709,30 @@ public class Actor extends GameObject {
 		view.translate(new Vector2f(animation.offsetX, animation.offsetY));
 		Game.activeBatch.updateUniforms();
 
-		if (remainingHealth != totalHealth) {
+		// if (remainingHealth != totalHealth) {
 
-			// draw sidebar on square
-			float healthPercentage = (remainingHealth) / (totalHealth);
-			float weaponAreaWidthInPixels = Game.SQUARE_WIDTH / 20;
-			float weaponAreaHeightInPixels = Game.SQUARE_HEIGHT;
-			float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
-			float weaponAreaPositionXInPixels = 0;
-			float weaponAreaPositionYInPixels = 0;
+		// draw sidebar on square
+		float healthPercentage = (remainingHealth) / (totalHealth);
+		float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
+		float healthXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
+		float healthYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
 
-			if (this.faction == Game.level.factions.player) {
-				weaponAreaPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-				weaponAreaPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
-			} else {
-				weaponAreaPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-						+ Game.SQUARE_WIDTH - weaponAreaWidthInPixels;
-				weaponAreaPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
-
-			}
-
-			// White bit under health bar
-			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), weaponAreaPositionXInPixels + 1,
-					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1, weaponAreaPositionYInPixels + 1,
-					weaponAreaPositionYInPixels + weaponAreaHeightInPixels - 1);
-
-			// Colored health bar
-			QuadUtils.drawQuad(Color.RED, weaponAreaPositionXInPixels + 1,
-					weaponAreaPositionXInPixels + weaponAreaWidthInPixels - 1, weaponAreaPositionYInPixels + 1,
-					weaponAreaPositionYInPixels + healthBarHeightInPixels - 1);
+		Color color = Color.YELLOW;
+		if (thoughtsOnPlayer > 50) {
+			color = Color.GREEN;
+		} else if (thoughtsOnPlayer < -50) {
+			color = Color.RED;
 		}
+
+		// White bit under health bar
+		QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), healthXInPixels + 1,
+				healthXInPixels + healthWidthInPixels - 1, healthYInPixels + 1,
+				healthYInPixels + healthHeightInPixels - 1);
+
+		// Colored health bar
+		QuadUtils.drawQuad(color, healthXInPixels + 1, healthXInPixels + healthWidthInPixels - 1, healthYInPixels + 1,
+				healthYInPixels + healthBarHeightInPixels - 1);
+		// }
 
 		super.draw1();
 

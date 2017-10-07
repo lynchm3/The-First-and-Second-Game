@@ -35,7 +35,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		if (Game.level.hour > 20 && Game.level.hour < 6) {
 			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 		} else {
-			state = STATE.PICK_WILD_ANIMAL;
+			state = STATE.HUNTING;
 		}
 
 		if (runSleepRoutine())
@@ -100,24 +100,6 @@ public class AIRoutineForHunter extends AIRoutine {
 			return;
 		}
 
-		// Skin carcass
-		if (skinCarcass()) {
-			this.actor.followersShouldFollow = true;
-			return;
-		}
-
-		// Loot carcass
-		if (lootCarcass()) {
-			this.actor.followersShouldFollow = true;
-			return;
-		}
-
-		// Loot from ground
-		if (lootFromGround()) {
-			this.actor.followersShouldFollow = true;
-			return;
-		}
-
 		// Defer to group leader
 		if (deferToGroupLeader()) {
 			this.actor.followersShouldFollow = true;
@@ -147,7 +129,7 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 
 		// Go about your business
-		if (state == STATE.PICK_WILD_ANIMAL)
+		if (state == STATE.HUNTING)
 
 		{
 			this.actor.followersShouldFollow = true;
@@ -186,7 +168,7 @@ public class AIRoutineForHunter extends AIRoutine {
 					AIRoutineUtils.moveTowardsTargetToBeOn(this.actor.bed);
 				}
 			} else {
-				state = STATE.PICK_WILD_ANIMAL;
+				state = STATE.HUNTING;
 			}
 		}
 	}

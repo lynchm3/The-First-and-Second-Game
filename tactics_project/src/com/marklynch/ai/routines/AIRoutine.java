@@ -58,6 +58,7 @@ public class AIRoutine {
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
 	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling loot";
+	final String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 
 	public Actor actor;
@@ -68,7 +69,7 @@ public class AIRoutine {
 	public GameObject escapeCooldownAttacker = null;
 
 	enum STATE {
-		PICK_WILD_ANIMAL, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP
+		HUNTING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP
 	};
 
 	public STATE state;
@@ -1031,6 +1032,40 @@ public class AIRoutine {
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);
+			} else {
+
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean eatFoodOnGround() {
+		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
+				false, false, 0, Food.class);
+		if (food != null) {
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
+			this.actor.thoughtBubbleImageTexture = food.imageTexture;
+			boolean ateFood = AIRoutineUtils.eatTarget(food);
+			if (!ateFood) {
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(food.squareGameObjectIsOn);
+			} else {
+
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean eatCarcassOnGround() {
+		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
+				false, false, 0, Carcass.class);
+		if (corpse != null) {
+			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
+			this.actor.thoughtBubbleImageTexture = corpse.imageTexture;
+			boolean ateCorpse = AIRoutineUtils.eatTarget(corpse);
+			if (!ateCorpse) {
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(corpse.squareGameObjectIsOn);
 			} else {
 
 			}

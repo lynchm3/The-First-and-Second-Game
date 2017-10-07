@@ -1,10 +1,9 @@
 package com.marklynch.ai.routines;
 
+import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Carcass;
-import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
@@ -18,13 +17,10 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 		SHOPKEEPING, UPDATING_SIGN, GO_TO_BED_AND_GO_TO_SLEEP, SLEEP
 	};
 
-	final String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
 	final String ACTIVITY_DESCRIPTION_HUNTING = "Hunting";
 	final String ACTIVITY_DESCRIPTION_ESCAPING = "Escaping";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 	final String ACTIVITY_DESCRIPTION_DISGRUNTLED = "Disgruntled";
-
-	public SHOPKEEP_STATE shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
 
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
@@ -47,69 +43,83 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 		aiRoutineStart();
 
-		// Fight
-		if (runFightRoutine())
+		if (Game.level.hour > 20 && Game.level.hour < 6) {
+			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
+		} else {
+			state = STATE.HUNTING;
+		}
+
+		if (runSleepRoutine())
 			return;
+
+		boolean hostileInAttackers = false;
+		for (GameObject attacker : actor.attackers) {
+			if (!(attacker instanceof HerbivoreWildAnimal)) {
+				hostileInAttackers = true;
+				break;
+			}
+		}
+
+		if (!hostileInAttackers) {
+
+			// Eat carcass on ground
+			if (eatCarcassOnGround()) {
+				this.actor.followersShouldFollow = true;
+				return;
+			}
+
+			// Eat food on ground
+			if (eatFoodOnGround()) {
+				this.actor.followersShouldFollow = true;
+				return;
+			}
+		}
+
+		// Fight
+		if (runFightRoutine()) {
+			this.actor.followersShouldFollow = true;
+			return;
+		}
 
 		// Search
-		if (runSearchRoutine())
+		if (runSearchRoutine()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Search cooldown
-		if (runSearchCooldown())
+		if (runSearchCooldown()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
 
 		// Defer to group leader
-		if (deferToGroupLeader())
-			return;
-
-		// 1. attack small animal
-		GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfAttacking(50f, false, true, false,
-				false, true, true, 0, HerbivoreWildAnimal.class);
-		if (smallWildAnimal != null) {
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-			this.actor.thoughtBubbleImageTexture = smallWildAnimal.imageTexture;
-			if (this.wildAnimal.canSeeSquare(smallWildAnimal.squareGameObjectIsOn)) {
-				this.wildAnimal.addAttackerForThisAndGroupMembers(smallWildAnimal);
-			} else {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(smallWildAnimal.squareGameObjectIsOn);
-			}
-			return;
-		}
-
-		// 2. eat corpse on ground
-		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, 0, Carcass.class);
-		if (corpse != null) {
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
-			this.actor.thoughtBubbleImageTexture = corpse.imageTexture;
-			boolean ateCorpse = AIRoutineUtils.eatTarget(corpse);
-			if (!ateCorpse) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(corpse.squareGameObjectIsOn);
-			} else {
-
-			}
-			return;
-		}
-
-		// 3. eat food on ground
-		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, 0, Food.class);
-		if (food != null) {
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
-			this.actor.thoughtBubbleImageTexture = food.imageTexture;
-			boolean ateFood = AIRoutineUtils.eatTarget(food);
-			if (!ateFood) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(food.squareGameObjectIsOn);
-			} else {
-
-			}
+		if (deferToGroupLeader()) {
+			this.actor.followersShouldFollow = true;
 			return;
 		}
 
 		// Defer to quest
-		if (deferToQuest())
+		if (deferToQuest()) {
+			this.actor.followersShouldFollow = true;
 			return;
+		}
+
+		// 1. attack small animal
+		if (state == STATE.HUNTING) {
+			GameObject smallWildAnimal = target = AIRoutineUtils.getNearestForPurposeOfAttacking(50f, false, true,
+					false, false, true, true, 0, HerbivoreWildAnimal.class);
+			if (smallWildAnimal != null) {
+				this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
+				this.actor.thoughtBubbleImageTexture = smallWildAnimal.imageTexture;
+				if (this.wildAnimal.canSeeSquare(smallWildAnimal.squareGameObjectIsOn)) {
+					this.wildAnimal.addAttackerForThisAndGroupMembers(smallWildAnimal);
+				} else {
+					AIRoutineUtils.moveTowardsSquareToBeAdjacent(smallWildAnimal.squareGameObjectIsOn);
+				}
+				return;
+			}
+		}
 
 		// Move about a bit
 		if (targetSquare != null) {

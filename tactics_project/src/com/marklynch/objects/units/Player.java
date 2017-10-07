@@ -44,6 +44,7 @@ public class Player extends Actor {
 
 		powers.add(new PowerBleed(this));
 		powers.add(new PowerInferno(this));
+		thoughtsOnPlayer = 100;
 	}
 
 	@Override

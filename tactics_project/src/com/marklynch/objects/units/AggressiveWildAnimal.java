@@ -26,6 +26,7 @@ public class AggressiveWildAnimal extends WildAnimal {
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
 				legsAnchorX, legsAnchorY, mustHaves, mightHaves, templateId);
+		thoughtsOnPlayer = -100;
 		aiRoutine = new AIRoutineForWildAnimal(this);
 	}
 

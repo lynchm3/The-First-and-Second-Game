@@ -30,7 +30,7 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.AggressiveWildAnimal;
+import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.Hunter;
 
 public class QuestSmallGame extends Quest {
@@ -303,17 +303,17 @@ public class QuestSmallGame extends Quest {
 		environmentalistBill.inventory.add(Templates.HATCHET.makeCopy(null, environmentalistBill));
 		environmentalistBill.quest = this;
 
-		superWolf = new AggressiveWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
+		superWolf = new CarnivoreNeutralWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[129][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
-		Actor wolf2 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
+		Actor wolf2 = new CarnivoreNeutralWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[208][15], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
-		Actor wolf3 = new AggressiveWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
+		Actor wolf3 = new CarnivoreNeutralWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
 				Game.level.squares[208][17], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
