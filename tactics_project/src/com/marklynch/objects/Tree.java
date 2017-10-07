@@ -80,9 +80,9 @@ public class Tree extends GameObject {
 
 		// DRAW INVENTORY
 		for (GameObject fruit : inventory.gameObjects) {
-			int fruitPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			int fruitPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 					+ fruit.drawOffsetX * Game.SQUARE_WIDTH);
-			int fruitPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			int fruitPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ fruit.drawOffsetY * Game.SQUARE_HEIGHT);
 
 			float alpha = 1.0f;

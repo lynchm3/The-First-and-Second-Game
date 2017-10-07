@@ -90,8 +90,8 @@ public class RockGolem extends Monster {
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
-			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+			float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+			float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels;
 
 			float alpha = 1.0f;
 

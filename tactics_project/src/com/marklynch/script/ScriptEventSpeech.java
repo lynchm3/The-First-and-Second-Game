@@ -126,8 +126,8 @@ public class ScriptEventSpeech extends ScriptEvent {
 				// update the new view matrix
 				Game.activeBatch.updateUniforms();
 
-				float textX1 = talker.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH;
-				float textY1 = talker.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT;
+				float textX1 = talker.squareGameObjectIsOn.xInGridPixels;
+				float textY1 = talker.squareGameObjectIsOn.yInGridPixels;
 
 				// TextureUtils.drawTexture(talker.imageTexture, 0, 0, 128,
 				// 128);

@@ -105,9 +105,9 @@ public class BrokenGlass extends Stampable {
 			}
 
 			// Draw object
-			int actorPositionXInPixels = (int) (this.parent.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			int actorPositionXInPixels = (int) (this.parent.squareGameObjectIsOn.xInGridPixels
 					+ drawOffsetX);
-			int actorPositionYInPixels = (int) (this.parent.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			int actorPositionYInPixels = (int) (this.parent.squareGameObjectIsOn.yInGridPixels
 					+ drawOffsetY);
 
 			float alpha = 1.0f;

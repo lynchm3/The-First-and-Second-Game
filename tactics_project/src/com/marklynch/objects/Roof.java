@@ -43,8 +43,8 @@ public class Roof extends GameObject {
 		// } else {
 		// Draw object
 		if (squareGameObjectIsOn != null) {
-			int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-			int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+			float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+			float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels;
 
 			float alpha = 0.33f;
 

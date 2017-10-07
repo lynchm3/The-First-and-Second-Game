@@ -249,10 +249,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 
-			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 					+ Game.SQUARE_WIDTH * drawOffsetX);// +
 														// animationMove.offsetX);
-			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * drawOffsetY);// +
 														// animationMove.offsetY);
 
@@ -292,8 +292,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (powTarget != null && powTarget.squareGameObjectIsOn != null) {
 			if (showPow == true) {
-				int powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH));
-				int powPositionYInPixels = powTarget.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+				float powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.xInGridPixels));
+				float powPositionYInPixels = powTarget.squareGameObjectIsOn.yInGridPixels;
 
 				TextureUtils.drawTexture(this.powTexture, powPositionXInPixels, powPositionYInPixels,
 						powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
@@ -613,11 +613,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	}
 
 	public float getCenterX() {
-		return squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
+		return squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH;
 	}
 
 	public float getCenterY() {
-		return squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
+		return squareGameObjectIsOn.yInGridPixels + Game.HALF_SQUARE_HEIGHT;
 	}
 
 	@Override

@@ -1368,9 +1368,9 @@ public class Level {
 		// update map zoom animation
 		if (centerToPlayer) {
 
-			float idealDragX = (-Game.level.player.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH)
+			float idealDragX = (-Game.level.player.squareGameObjectIsOn.xInGridPixels)
 					+ Game.halfWindowWidth - Game.HALF_SQUARE_WIDTH;
-			float idealDragY = (-Game.level.player.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT)
+			float idealDragY = (-Game.level.player.squareGameObjectIsOn.yInGridPixels)
 					+ Game.halfWindowHeight - Game.HALF_SQUARE_HEIGHT;
 
 			float diffX = idealDragX - Game.dragX;

@@ -90,9 +90,9 @@ public class Wall extends GameObject {
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, value, owner, templateId);
 		if (squareGameObjectIsOn != null) {
-			drawX1 = (int) (squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX);
+			drawX1 = (int) (squareGameObjectIsOn.xInGridPixels + drawOffsetX);
 			drawX2 = (int) (drawX1 + width);
-			drawY1 = (int) (squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY);
+			drawY1 = (int) (squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 			drawY2 = (int) (drawY1 + height);
 		}
 

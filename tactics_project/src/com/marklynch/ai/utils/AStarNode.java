@@ -20,8 +20,13 @@ public abstract class AStarNode implements Comparable {
 	// added by me
 	public float cost = 1;
 	public float costForPlayer = 1;
+
 	public int xInGrid;
 	public int yInGrid;
+
+	public float xInGridPixels;
+	public float yInGridPixels;
+
 	public Vector<Square> neighbors;
 
 	// added by me

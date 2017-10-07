@@ -122,8 +122,8 @@ public class PinWindow implements Draggable {
 			float lineX1 = this.drawPositionX + this.width / 2;
 			float lineY1 = drawPositionY + height / 2;
 
-			int gameObjectX = (gameObject.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_HEIGHT);
-			int gameObjectY = (gameObject.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT);
+			float gameObjectX = (gameObject.squareGameObjectIsOn.xInGridPixels);
+			float gameObjectY = (gameObject.squareGameObjectIsOn.yInGridPixels);
 			float lineX2 = (Game.windowWidth / 2) + (Game.zoom
 					* (gameObjectX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
 			float lineY2 = (Game.windowHeight / 2) + (Game.zoom

@@ -52,15 +52,13 @@ public class Window extends GameObjectExploder {
 
 			// Draw object
 			if (squareGameObjectIsOn != null) {
-				int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-						+ drawOffsetX);
-				int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-						+ drawOffsetY);
+				float actorPositionXInPixels = (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+				float actorPositionYInPixels = (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 						actorPositionXInPixels + width, actorPositionYInPixels + height);
 				// stub
-				actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-				actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+				actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+				actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels;
 				TextureUtils.drawTexture(imageTexture, 1 - alpha, actorPositionXInPixels, actorPositionYInPixels,
 						actorPositionXInPixels + Game.SQUARE_WIDTH, actorPositionYInPixels + Game.SQUARE_HEIGHT);
 			}

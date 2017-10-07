@@ -271,8 +271,8 @@ public class AdventureLog implements Draggable, Scrollable {
 
 				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
 
-					int squareX = (currentObjective.gameObject.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_HEIGHT);
-					int squareY = (currentObjective.gameObject.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT);
+					float squareX = (currentObjective.gameObject.squareGameObjectIsOn.xInGridPixels);
+					float squareY = (currentObjective.gameObject.squareGameObjectIsOn.yInGridPixels);
 					x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
 							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH)));
 					y2 = (int) ((Game.windowHeight / 2) + (Game.zoom
@@ -280,8 +280,8 @@ public class AdventureLog implements Draggable, Scrollable {
 
 				} else if (currentObjective.square != null) {
 
-					int squareX = (currentObjective.square.xInGrid * (int) Game.SQUARE_HEIGHT);
-					int squareY = (currentObjective.square.yInGrid * (int) Game.SQUARE_HEIGHT);
+					float squareX = (currentObjective.square.xInGridPixels);
+					float squareY = (currentObjective.square.yInGridPixels);
 					x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
 							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH)));
 					y2 = (int) ((Game.windowHeight / 2) + (Game.zoom

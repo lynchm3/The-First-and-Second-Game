@@ -500,7 +500,7 @@ public class TODO {
 	// allows them to wander around, but means the player can still find them.
 
 	// look out for calls to this, unnecessary
-	// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+	// this.squareGameObjectIsOn.xInGridPixels
 
 	// character that has never laughed, and u have to find a way to make it
 	// laugh, make it dark, like he only laughs when u kill someone on front of

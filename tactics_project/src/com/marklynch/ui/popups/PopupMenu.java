@@ -32,8 +32,8 @@ public class PopupMenu {
 			drawPositionX = ((InventorySquare) square).xInPixels;
 			drawPositionY = ((InventorySquare) square).yInPixels;
 		} else {
-			int squarePositionX = square.xInGrid * (int) Game.SQUARE_WIDTH;
-			int squarePositionY = square.yInGrid * (int) Game.SQUARE_HEIGHT;
+			float squarePositionX = square.xInGridPixels;
+			float squarePositionY = square.yInGridPixels;
 			drawPositionX = (Game.windowWidth / 2)
 					+ (Game.zoom * (squarePositionX - Game.windowWidth / 2 + Game.getDragXWithOffset()));
 			drawPositionY = (Game.windowHeight / 2)

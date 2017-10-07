@@ -120,6 +120,9 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		super();
 		this.xInGrid = x;
 		this.yInGrid = y;
+		this.xInGridPixels = xInGrid * Game.SQUARE_WIDTH;
+		this.yInGridPixels = yInGrid * Game.SQUARE_HEIGHT;
+
 		this.imageTexturePath = imagePath;
 		this.travelCost = travelCost;
 		this.elevation = elevation;
@@ -214,8 +217,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 
 		// square texture
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
 		// QuadUtils.drawQuad(new Color(0.2f, 0.4f, 0.1f, 1.0f),
 		// squarePositionX, squarePositionX + Game.SQUARE_WIDTH,
 		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
@@ -303,8 +306,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public void drawHighlight() {
 
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
@@ -312,8 +315,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public void drawAttackHighlight(ArrayList<Square> attackableSquares) {
 
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
 
 		if (this.getSquareAbove() != null && !attackableSquares.contains(this.getSquareAbove())
 				&& this.getSquareAbove() != Game.level.player.squareGameObjectIsOn) {
@@ -343,8 +346,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public void drawSoundHighlight2() {
 
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
 
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
@@ -375,8 +378,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public void drawSoundHighlight() {
 
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
 
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture2, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
@@ -405,8 +408,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public void drawRedHighlight() {
 
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
 		TextureUtils.drawTexture(Game.level.gameCursor.imageTexture4, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
@@ -414,8 +417,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public void draw2() {
 
-		// int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		// int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		// int squarePositionX = xInGridPixels;
+		// int squarePositionY = yInGridPixels;
 		//
 		// if (!this.visibleToPlayer)
 		// QuadUtils.drawQuad(new Color(0.5f, 0.5f, 0.5f, 0.75f),
@@ -431,8 +434,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// GL11.glScalef(Game.zoom, Game.zoom, 0);
 		// GL11.glTranslatef(Game.getDragX(), Game.getDragY(), 0);
 		// GL11.glTranslatef(-Game.windowWidth / 2, -Game.windowHeight / 2, 0);
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
 
 		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
@@ -440,8 +443,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public void drawObjective(int objectiveNumber) {
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
 
 		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
@@ -456,8 +459,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 						UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 						Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
 			} else {
-				int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-				int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+				float squarePositionX = xInGridPixels;
+				float squarePositionY = yInGridPixels;
 				TextureUtils.drawTexture(Action.textureWalk, squarePositionX + Game.SQUARE_WIDTH - 48,
 						squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX + Game.SQUARE_WIDTH - 16,
 						squarePositionY + Game.SQUARE_HEIGHT - 16);
@@ -482,8 +485,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 						UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 						Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
 			} else {
-				int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-				int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+				float squarePositionX = xInGridPixels;
+				float squarePositionY = yInGridPixels;
 				TextureUtils.drawTexture(Action.textureEllipse, squarePositionX + Game.SQUARE_WIDTH - 64,
 						squarePositionY + Game.SQUARE_HEIGHT - 64, squarePositionX + Game.SQUARE_WIDTH - 0,
 						squarePositionY + Game.SQUARE_HEIGHT - 0);
@@ -509,8 +512,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 				if (action instanceof ActionWait && action.legal)
 					return action;
 
-				int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-				int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+				float squarePositionX = xInGridPixels;
+				float squarePositionY = yInGridPixels;
 				TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 48,
 						squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX + Game.SQUARE_WIDTH - 16,
 						squarePositionY + Game.SQUARE_HEIGHT - 16, color);
@@ -520,8 +523,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public void drawKey(Texture texture) {
-		int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
 		TextureUtils.drawTexture(texture, squarePositionX, squarePositionY, squarePositionX + Game.SQUARE_WIDTH,
 				squarePositionY + Game.SQUARE_HEIGHT);
 
@@ -530,8 +533,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public void drawPower(Power power) {
 
 		if (power != null && power.image != null) {
-			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+			float squarePositionX = xInGridPixels;
+			float squarePositionY = yInGridPixels;
 			TextureUtils.drawTexture(power.image, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
 					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
 					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
@@ -548,8 +551,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
 		} else {
 
-			int squarePositionX = xInGrid * (int) Game.SQUARE_WIDTH;
-			int squarePositionY = yInGrid * (int) Game.SQUARE_HEIGHT;
+			float squarePositionX = xInGridPixels;
+			float squarePositionY = yInGridPixels;
 			TextureUtils.drawTexture(Action.x, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
 					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
 					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
@@ -753,11 +756,11 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public float getCenterX() {
-		return xInGrid * Game.SQUARE_WIDTH + Game.HALF_SQUARE_WIDTH;
+		return xInGridPixels + Game.HALF_SQUARE_WIDTH;
 	}
 
 	public float getCenterY() {
-		return yInGrid * Game.SQUARE_HEIGHT + Game.HALF_SQUARE_HEIGHT;
+		return yInGridPixels + Game.HALF_SQUARE_HEIGHT;
 	}
 
 	public boolean includableInPath(Actor actor, AStarNode goalNode) {

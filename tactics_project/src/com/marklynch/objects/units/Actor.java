@@ -714,8 +714,8 @@ public class Actor extends GameObject {
 		// draw sidebar on square
 		float healthPercentage = (remainingHealth) / (totalHealth);
 		float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
-		float healthXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-		float healthYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+		float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+		float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
 
 		Color color = Color.YELLOW;
 		if (thoughtsOnPlayer > 50) {
@@ -737,22 +737,17 @@ public class Actor extends GameObject {
 		super.draw1();
 
 		// hand anchor
-		QuadUtils.drawQuad(Color.BLACK,
-				this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX * Game.SQUARE_WIDTH
-						+ handAnchorX - 3,
-				this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH + drawOffsetX * Game.SQUARE_WIDTH
-						+ handAnchorX + 3,
-				this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY * Game.SQUARE_HEIGHT
-						+ handAnchorY - 3,
-				this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + drawOffsetY * Game.SQUARE_HEIGHT
-						+ handAnchorY + 3);
+		QuadUtils.drawQuad(Color.BLACK, this.squareGameObjectIsOn.xInGridPixels + handAnchorX - 3,
+				this.squareGameObjectIsOn.xInGridPixels + handAnchorX + 3,
+				this.squareGameObjectIsOn.yInGridPixels + handAnchorY - 3,
+				this.squareGameObjectIsOn.yInGridPixels + handAnchorY + 3);
 
 		// weapon
 		if (equipped != null && !sleeping) {
 
-			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 					+ drawOffsetX * Game.SQUARE_WIDTH + handAnchorX - equipped.anchorX);
-			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ drawOffsetY * Game.SQUARE_HEIGHT + handAnchorY - equipped.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.equipped.imageTexture, alpha, weaponPositionXInPixels,
@@ -762,17 +757,17 @@ public class Actor extends GameObject {
 
 		if (helmet != null && !sleeping) {
 
-			int helmetPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			int helmetPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 					+ drawOffsetX * Game.SQUARE_WIDTH + headAnchorX - helmet.anchorX);
-			int helmetPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			int helmetPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ drawOffsetY * Game.SQUARE_HEIGHT + headAnchorY - helmet.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.helmet.imageTexture, alpha, helmetPositionXInPixels, helmetPositionYInPixels,
 					helmetPositionXInPixels + helmet.width, helmetPositionYInPixels + helmet.height);
 		} else if (hairImageTexture != null) {
-			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 					+ drawOffsetX * Game.SQUARE_WIDTH + bodyAnchorX - 0);
-			int bodyArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			int bodyArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ drawOffsetY * Game.SQUARE_HEIGHT + bodyAnchorY - 0);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.hairImageTexture, alpha, bodyArmorPositionXInPixels,
@@ -782,9 +777,9 @@ public class Actor extends GameObject {
 
 		if (bodyArmor != null && !sleeping) {
 
-			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 					+ drawOffsetX * Game.SQUARE_WIDTH + bodyAnchorX - bodyArmor.anchorX);
-			int bodyArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			int bodyArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ drawOffsetY * Game.SQUARE_HEIGHT + bodyAnchorY - bodyArmor.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
@@ -794,9 +789,9 @@ public class Actor extends GameObject {
 
 		if (legArmor != null && !sleeping) {
 
-			int legArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
+			int legArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
 					+ drawOffsetX * Game.SQUARE_WIDTH + legsAnchorX - legArmor.anchorX);
-			int legArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
+			int legArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ drawOffsetY * Game.SQUARE_WIDTH + legsAnchorY - legArmor.anchorY);
 			float alpha = 1.0f;
 			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
@@ -806,29 +801,29 @@ public class Actor extends GameObject {
 
 		// draw anchor
 		// QuadUtils.drawQuad(Color.WHITE,
-		// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH +
+		// this.squareGameObjectIsOn.xInGridPixels +
 		// drawOffsetX + headAnchorX - 5f,
-		// this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH +
+		// this.squareGameObjectIsOn.xInGridPixels +
 		// drawOffsetX + headAnchorX + 5f,
-		// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT +
+		// this.squareGameObjectIsOn.yInGridPixels +
 		// drawOffsetY + headAnchorY - 5f,
-		// this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT +
+		// this.squareGameObjectIsOn.yInGridPixels +
 		// drawOffsetY + headAnchorY + 5f);
 
 		// TextureUtils.skipNormals = false;
 
-		int actorPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-		int actorPositionYInPixels = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels;
 
 		// body shoulder coords, arm shoulder coords
-		int armPositionXInPixels = actorPositionXInPixels + 65 - 11;
-		int armPositionYInPixels = actorPositionYInPixels + 41 - 13;
+		float armPositionXInPixels = actorPositionXInPixels + 65 - 11;
+		float armPositionYInPixels = actorPositionYInPixels + 41 - 13;
 
-		int rotateXInPixels = actorPositionXInPixels + 65;
-		int rotateYInPixels = actorPositionYInPixels + 41;
+		float rotateXInPixels = actorPositionXInPixels + 65;
+		float rotateYInPixels = actorPositionYInPixels + 41;
 
-		int equippedWeaponPositionXInPixels = armPositionXInPixels + 70 - 20;
-		int equippedWeaponPositionYInPixels = armPositionYInPixels + 110 - 86;
+		float equippedWeaponPositionXInPixels = armPositionXInPixels + 70 - 20;
+		float equippedWeaponPositionYInPixels = armPositionYInPixels + 110 - 86;
 
 		float alpha = 1.0f;
 
@@ -864,11 +859,10 @@ public class Actor extends GameObject {
 
 		// Draw activity text
 		if (activityDescription != null && activityDescription.length() > 0) {
-			float activityX1 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-			float activityX2 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ Game.font.getWidth(activityDescription);
-			float activityY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT - 20;
-			float activityY2 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT;
+			float activityX1 = this.squareGameObjectIsOn.xInGridPixels;
+			float activityX2 = this.squareGameObjectIsOn.xInGridPixels + Game.font.getWidth(activityDescription);
+			float activityY1 = this.squareGameObjectIsOn.yInGridPixels - 20;
+			float activityY2 = this.squareGameObjectIsOn.yInGridPixels;
 			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
 			TextUtils.printTextWithImages(activityX1, activityY1, Integer.MAX_VALUE, false, null,
 					new Object[] { activityDescription });
@@ -880,9 +874,8 @@ public class Actor extends GameObject {
 			int expressionBubbleWidth = 64;
 			int expressionBubbleHeight = 64;
 
-			int expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-			int expressionBubblePositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY - 64);
+			float expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+			float expressionBubblePositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetY - 64;
 			float alphaBubble = 1.0f;
 
 			// TextureUtils.skipNormals = true;
@@ -900,9 +893,8 @@ public class Actor extends GameObject {
 			int expressionBubbleWidth = 64;
 			int expressionBubbleHeight = 64;
 
-			int expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-			int expressionBubblePositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY - 64);
+			float expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+			float expressionBubblePositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetY - 64;
 			float alphaBubble = 1.0f;
 
 			// TextureUtils.skipNormals = true;
@@ -923,10 +915,9 @@ public class Actor extends GameObject {
 				expressionWidth = 32 * realTextureWidth / realTextureHeight;
 			}
 
-			int expressionPositionXInPixels = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH
-					+ (32 - expressionWidth / 2);
-			int expressionPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT
-					+ drawOffsetY - expressionHeight);
+			float expressionPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels + (32 - expressionWidth / 2);
+			float expressionPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetY
+					- expressionHeight;
 			float alpha = 1.0f;
 
 			// TextureUtils.skipNormals = true;

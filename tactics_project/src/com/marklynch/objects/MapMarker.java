@@ -97,8 +97,8 @@ public class MapMarker extends GameObject {
 		if (Game.zoomLevelIndex < Game.MAP_MODE_ZOOM_LEVEL_INDEX)
 			alpha = 0.5f;
 
-		int squarePositionX1 = this.squareGameObjectIsOn.xInGrid * (int) Game.SQUARE_WIDTH;
-		int squarePositionY1 = this.squareGameObjectIsOn.yInGrid * (int) Game.SQUARE_HEIGHT;
+		float squarePositionX1 = this.squareGameObjectIsOn.xInGridPixels;
+		float squarePositionY1 = this.squareGameObjectIsOn.yInGridPixels;
 		float drawPositionX1 = (Game.windowWidth / 2)
 				+ (Game.zoom * (squarePositionX1 - Game.windowWidth / 2 + Game.getDragXWithOffset()))
 				- (Game.HALF_SQUARE_WIDTH - Game.HALF_SQUARE_WIDTH * Game.zoom);

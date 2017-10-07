@@ -613,11 +613,11 @@ public class Editor {
 				&& Game.squareMouseIsOver != null
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
-			float x1 = this.selectedGameObject.squareGameObjectIsOn.xInGrid * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
-			float y1 = this.selectedGameObject.squareGameObjectIsOn.yInGrid * Game.SQUARE_HEIGHT
+			float x1 = this.selectedGameObject.squareGameObjectIsOn.xInGridPixels / 2;
+			float y1 = this.selectedGameObject.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT / 2;
-			float x2 = Game.squareMouseIsOver.xInGrid * Game.SQUARE_WIDTH + Game.SQUARE_WIDTH / 2;
-			float y2 = Game.squareMouseIsOver.yInGrid * Game.SQUARE_HEIGHT + Game.SQUARE_HEIGHT / 2;
+			float x2 = Game.squareMouseIsOver.xInGridPixels / 2;
+			float y2 = Game.squareMouseIsOver.yInGridPixels / 2;
 
 			// CircleUtils.drawCircle(Color.white, 10d, x1, y1);
 			TextureUtils.drawTexture(Game.level.gameCursor.circle, x1 - 10, y1 - 10, x1 + 10, y1 + 10);
