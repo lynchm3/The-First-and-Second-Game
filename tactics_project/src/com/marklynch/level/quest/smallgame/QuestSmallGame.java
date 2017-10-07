@@ -563,6 +563,8 @@ public class QuestSmallGame extends Quest {
 			return getConversationForHunter(actor);
 		} else if (actor == environmentalistBill) {
 			return getConversationForEnvironmentalist(actor);
+		} else if (wolfPack.contains(actor)) {
+			return getConversationForWolf(actor);
 		}
 		return null;
 	}
@@ -587,6 +589,24 @@ public class QuestSmallGame extends Quest {
 			return conversationEnviromentalistSaveTheWolf;
 		}
 		return environmentalistBill.createConversation("...");
+	}
+
+	public Conversation getConversationForWolf(Actor actor) {
+		// Talking to environmentalist
+		if (haveInfo(infoAttackedWolves)) {
+			return null;
+		} else if (haveInfo(infoHuntersDead) && !haveInfo(infoAttackedHunters)) {
+			return superWolf.createConversation("I have survived, no thanks to you");
+		} else if (haveInfo(infoHuntersDead) && haveInfo(infoAttackedHunters)) {
+			return superWolf.createConversation("Thank you");
+		} else if (haveInfo(infoHuntersEngagedWolves)) {
+			return null;
+		} else if (haveInfo(infoSetOffWithHunters)) {
+			return superWolf.createConversation("They come");
+		} else if (!haveInfo(infoSetOffWithHunters)) {
+			return superWolf.createConversation("They plot");
+		}
+		return null;
 	}
 
 	public void setUpConversationHunterOpening() {
