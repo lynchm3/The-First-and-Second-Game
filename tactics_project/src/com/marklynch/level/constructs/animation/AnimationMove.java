@@ -1,5 +1,6 @@
 package com.marklynch.level.constructs.animation;
 
+import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 
 public class AnimationMove extends Animation {
@@ -19,8 +20,8 @@ public class AnimationMove extends Animation {
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
 
-		startOffsetX = offsetX = this.startSquare.xInGridPixels;
-		startOffsetY = offsetY = this.startSquare.yInGridPixels;
+		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
+		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
 
 	}
 
