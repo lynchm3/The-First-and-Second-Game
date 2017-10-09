@@ -14,6 +14,7 @@ public class ActivityLogger implements Draggable, Scrollable {
 
 	public float totalHeight = 0;
 	public final static float width = 300;
+	public final static float negativeWidth = -width;
 	public final static float leftBorder = 20;
 	public final static float rightBorder = 20;
 	public final static float textWidth = width - leftBorder - rightBorder;
@@ -23,6 +24,9 @@ public class ActivityLogger implements Draggable, Scrollable {
 
 	public void drawStaticUI() {
 
+		if (x < negativeWidth)
+			return;
+
 		// Log
 		QuadUtils.drawQuad(Color.BLACK, x, x + width, 0, Game.windowHeight);
 
@@ -30,9 +34,19 @@ public class ActivityLogger implements Draggable, Scrollable {
 
 		// Log text
 		// for (int i = logs.size() - 1; i > -1; i--) {
+
+		float drawY;
+		float drawX = x + leftBorder;
 		for (ActivityLog log : logs) {
-			TextUtils.printTextWithImages(x + leftBorder, textOffsetY + heightSoFar, width, true, log.links,
-					log.contents);
+
+			drawY = textOffsetY + heightSoFar;
+
+			if (drawY < -20) {
+			} else if (drawY > Game.windowHeight) {
+			} else {
+
+				TextUtils.printTextWithImages(drawX, drawY, width, true, log.links, log.contents);
+			}
 			heightSoFar += log.height;
 		}
 
