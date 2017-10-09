@@ -293,8 +293,14 @@ public class Inventory implements Draggable, Scrollable {
 					for (GameObject gameObject : otherInventory.gameObjects) {
 						Action action = new ActionTakeSpecificItem(Game.level.player,
 								gameObject.inventoryThatHoldsThisObject.parent, gameObject);
+						System.out.println("action = " + action);
+						System.out.println("action.legal = " + action.legal);
+						System.out.println("buttonLootAll.textParts = " + buttonLootAll.textParts);
+						System.out.println("LOOT_ALL = " + LOOT_ALL);
 						if (!action.legal && buttonLootAll.textParts == LOOT_ALL) {
+							System.out.println("a");
 						} else {
+							System.out.println("b");
 							actionsToPerform.add(action);
 						}
 					}
@@ -305,7 +311,6 @@ public class Inventory implements Draggable, Scrollable {
 						if (!action.legal && buttonLootAll.textParts == LOOT_ALL) {
 						} else {
 							actionsToPerform.add(action);
-
 						}
 					}
 				}
@@ -700,8 +705,8 @@ public class Inventory implements Draggable, Scrollable {
 
 	public HashMap<Integer, Integer> itemTypeCount = new HashMap<Integer, Integer>();
 	public HashMap<Integer, Integer> illegalItemTypeCount = new HashMap<Integer, Integer>();
-	private Object[] LOOT_ALL = new Object[] { new StringWithColor("LOOT ALL [A]", Color.WHITE) };
-	private Object[] STEAL_ALL = new Object[] { new StringWithColor("STEAL ALL [A]", Color.RED) };
+	private Object[] LOOT_ALL = new Object[] { new StringWithColor("LOOT ALL [SPACE]", Color.WHITE) };
+	private Object[] STEAL_ALL = new Object[] { new StringWithColor("STEAL ALL [SPACE]", Color.RED) };
 
 	public void matchGameObjectsToSquares() {
 
@@ -1005,14 +1010,14 @@ public class Inventory implements Draggable, Scrollable {
 			if (groundDisplay.gameObjects.size() == 0) {
 				Inventory.buttonLootAll.textParts = LOOT_ALL;
 				Inventory.buttonLootAll.enabled = false;
-				Inventory.buttonLootAll.setTextColor(Color.WHITE);
+				// Inventory.buttonLootAll.setTextColor(Color.WHITE);
 			} else {
 				if (containsLegalStuff) {
 					Inventory.buttonLootAll.textParts = LOOT_ALL;
-					Inventory.buttonLootAll.setTextColor(Color.WHITE);
+					// Inventory.buttonLootAll.setTextColor(Color.WHITE);
 				} else {
 					Inventory.buttonLootAll.textParts = STEAL_ALL;
-					Inventory.buttonLootAll.setTextColor(Color.RED);
+					// Inventory.buttonLootAll.setTextColor(Color.RED);
 				}
 				Inventory.buttonLootAll.enabled = true;
 			}
@@ -1060,14 +1065,14 @@ public class Inventory implements Draggable, Scrollable {
 			if (otherInventory.size() == 0) {
 				Inventory.buttonLootAll.textParts = LOOT_ALL;
 				Inventory.buttonLootAll.enabled = false;
-				Inventory.buttonLootAll.setTextColor(Color.WHITE);
+				// Inventory.buttonLootAll.setTextColor(Color.WHITE);
 			} else {
 				if (containsLegalStuff) {
 					Inventory.buttonLootAll.textParts = LOOT_ALL;
-					Inventory.buttonLootAll.setTextColor(Color.WHITE);
+					// Inventory.buttonLootAll.setTextColor(Color.WHITE);
 				} else {
 					Inventory.buttonLootAll.textParts = STEAL_ALL;
-					Inventory.buttonLootAll.setTextColor(Color.RED);
+					// Inventory.buttonLootAll.setTextColor(Color.RED);
 				}
 				Inventory.buttonLootAll.enabled = true;
 			}

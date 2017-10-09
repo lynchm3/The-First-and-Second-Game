@@ -535,13 +535,10 @@ public class UserInputLevel {
 
 	public static void waitPressed(boolean allowMenuControl, boolean held) {
 
-		System.out.println("a");
 		if (Player.playerTargetSquare != null) {
 			Game.level.pausePlayer();
 			return;
 		}
-
-		System.out.println("b");
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			return;
@@ -558,7 +555,6 @@ public class UserInputLevel {
 		} else if (Game.level.conversation != null) {
 			return;
 		}
-		System.out.println("c");
 
 		if (!held)
 			controllingMenu = false;
@@ -566,29 +562,22 @@ public class UserInputLevel {
 		if (Game.level.activeActor != Game.level.player)
 			return;
 
-		System.out.println("d");
-		System.out.println("controllingMenu = " + controllingMenu);
-
 		if (Game.level.popupMenuActions.size() != 0) {
 			if (allowMenuControl) {
-				System.out.println("d1");
 				controllingMenu = true;
 				Game.level.popupMenuActions.get(0).clickHighlightedButton();
 			}
 		} else if (Game.level.popupMenuObjects.size() != 0) {
 			if (allowMenuControl) {
-				System.out.println("d2");
 				controllingMenu = true;
 				Game.level.popupMenuObjects.get(0).clickHighlightedButton();
 			}
 		} else if (!controllingMenu) {
-			System.out.println("d3");
 			interactWith(Game.level.activeActor.squareGameObjectIsOn, Keyboard.KEY_SPACE,
 					Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL),
 					Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT),
 					Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
 		}
-		System.out.println("e");
 	}
 
 	public static void upPressed(boolean allowMenuControl, boolean held) {
