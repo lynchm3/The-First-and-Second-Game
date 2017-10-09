@@ -1429,6 +1429,10 @@ public class Level {
 
 		if (!this.script.checkIfBlocking() && currentFactionMoving != factions.player) {
 			currentFactionMoving.update(delta);
+		} else if (Game.level.player.animation.completed && Game.level.player.playerTargetAction != null
+				&& Game.level.player.playerTargetAction.recheck()) {
+			Game.level.player.playerTargetAction.perform();
+			pausePlayer();
 		}
 		// Auto move player
 		else if (Game.level.player.animation.completed && Player.playerTargetSquare != null) {
@@ -1541,6 +1545,7 @@ public class Level {
 	public void pausePlayer() {
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
+		Player.playerTargetAction = null;
 		Player.playerTargetActor = null;
 		highlightPauseButton();
 	}

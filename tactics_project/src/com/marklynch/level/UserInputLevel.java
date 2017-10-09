@@ -19,9 +19,6 @@ import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionHide;
-import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Player;
@@ -470,53 +467,33 @@ public class UserInputLevel {
 			return;
 		}
 
-		// Clicked on a sqr far away, do move.
-		Action defaultActionForClickedSquare = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
-		if (key == -1 && openMenu == false && secondary == false && attack == false
-				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1
-				&& (defaultActionForClickedSquare instanceof ActionMove
-						|| defaultActionForClickedSquare instanceof ActionHide
-						|| defaultActionForClickedSquare instanceof ActionStopHiding)) {
-			if (Game.level.player.onScreen()) {
-				Game.level.cameraFollow = true;
-			}
-			Player.playerTargetSquare = square;
-			Player.playerFirstMove = true;
-			return;
-		}
-
-		// Clicked a square far away, is secondary action
-		Action secondaryActionForClickedSquare = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor);
-		if (key == -1 && openMenu == false && secondary == true && attack == false
-				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1
-				&& (secondaryActionForClickedSquare instanceof ActionMove
-						|| secondaryActionForClickedSquare instanceof ActionHide
-						|| secondaryActionForClickedSquare instanceof ActionStopHiding)) {
-			if (Game.level.player.onScreen()) {
-				Game.level.cameraFollow = true;
-			}
-			Player.playerTargetSquare = square;
-			Player.playerFirstMove = true;
-			return;
-		}
-
-		Action defaultAction = null;
+		Action action = null;
 
 		if (!openMenu) {
 			if (attack) {
-				defaultAction = square.getAttackActionForTheSquareOrObject(Game.level.activeActor);
+				action = square.getAttackActionForTheSquareOrObject(Game.level.activeActor);
 			} else if (secondary) {
-				defaultAction = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor);
+				action = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor);
 			} else {
-				defaultAction = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
+				action = square.getDefaultActionForTheSquareOrObject(Game.level.activeActor);
 			}
 		}
 
-		if (defaultAction != null) {
+		if (key == -1 && action != null && !(square instanceof InventorySquare) && !action.enabled) {
+			if (Game.level.player.onScreen()) {
+				Game.level.cameraFollow = true;
+			}
+			Player.playerTargetAction = action;
+			Player.playerTargetSquare = square;
+			Player.playerFirstMove = true;
+			return;
+		}
 
-			defaultAction.perform();
+		if (action != null) {
 
-			if (defaultAction.movement && defaultAction.enabled) {
+			action.perform();
+
+			if (action.movement && action.enabled) {
 
 				if (key == Keyboard.KEY_UP) {
 					Level.wHasBeenPressed = true;

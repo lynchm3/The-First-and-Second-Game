@@ -39,6 +39,12 @@ public abstract class Action {
 
 	public abstract boolean check();
 
+	public boolean recheck() {
+		return this.enabled = check();
+	}
+
+	// public abstract boolean withinRange();
+
 	public abstract boolean checkLegality();
 
 	public abstract Sound createSound();

@@ -11,6 +11,7 @@ import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.utils.ResourceUtils;
 
 import mdesl.graphics.Color;
@@ -22,6 +23,7 @@ public class Player extends Actor {
 	public static Square playerTargetSquare = null;
 	public static Actor playerTargetActor = null;
 	public static boolean playerFirstMove = false;
+	public static Action playerTargetAction = null;
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
