@@ -282,7 +282,7 @@ public class Inventory implements Draggable, Scrollable {
 		buttonsFilter.add(buttonFilterByFood);
 
 		buttonLootAll = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "LOOT ALL [A]", true, false, Color.BLACK, Color.WHITE,
+				"end_turn_button.png", "LOOT ALL [SPACE]", true, false, Color.BLACK, Color.WHITE,
 				"Loot all items nearby (legal if white, illegal if red)");
 		buttonLootAll.setClickListener(new ClickListener() {
 			@Override
@@ -332,7 +332,7 @@ public class Inventory implements Draggable, Scrollable {
 		});
 
 		buttonQuickSell = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "QUICK SELL [A]", true, false, Color.BLACK, Color.WHITE,
+				"end_turn_button.png", "QUICK SELL [SPACE]", true, false, Color.BLACK, Color.WHITE,
 				"Sell useless items, obsolete weapons and armor, and duplicate tools");
 		buttonQuickSell.setClickListener(new ClickListener() {
 

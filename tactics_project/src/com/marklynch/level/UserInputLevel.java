@@ -548,6 +548,12 @@ public class UserInputLevel {
 		} else if (Level.adventureLog.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
+			if (Inventory.buttons.contains(Inventory.buttonLootAll)) {
+				Inventory.buttonLootAll.click();
+			} else if (Inventory.buttons.contains(Inventory.buttonQuickSell)) {
+				Inventory.buttonQuickSell.click();
+			}
+			controllingMenu = true;
 			return;
 		} else if (Game.level.conversation != null) {
 			return;
@@ -930,12 +936,6 @@ public class UserInputLevel {
 			if (Level.adventureLog.showing) {
 
 			} else if (Game.level.openInventories.size() > 0) {
-				if (Inventory.buttons.contains(Inventory.buttonLootAll)) {
-					Inventory.buttonLootAll.click();
-				} else if (Inventory.buttons.contains(Inventory.buttonQuickSell)) {
-					Inventory.buttonQuickSell.click();
-				}
-				controllingMenu = true;
 			} else if (Game.level.conversation != null) {
 				Game.level.conversation.currentConversationPart.windowSelectConversationResponse.buttonTrade.click();
 			} else {
