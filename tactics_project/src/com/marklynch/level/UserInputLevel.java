@@ -485,6 +485,21 @@ public class UserInputLevel {
 			return;
 		}
 
+		// Clicked a square far away, is secondary action
+		Action secondaryActionForClickedSquare = square.getSecondaryActionForTheSquareOrObject(Game.level.activeActor);
+		if (key == -1 && openMenu == false && secondary == true && attack == false
+				&& !(square instanceof InventorySquare) && Game.level.player.straightLineDistanceTo(square) > 1
+				&& (secondaryActionForClickedSquare instanceof ActionMove
+						|| secondaryActionForClickedSquare instanceof ActionHide
+						|| secondaryActionForClickedSquare instanceof ActionStopHiding)) {
+			if (Game.level.player.onScreen()) {
+				Game.level.cameraFollow = true;
+			}
+			Player.playerTargetSquare = square;
+			Player.playerFirstMove = true;
+			return;
+		}
+
 		Action defaultAction = null;
 
 		if (!openMenu) {
