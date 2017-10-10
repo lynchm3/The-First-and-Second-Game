@@ -99,52 +99,56 @@ public class Templates {
 			GameObject.generateNewTemplateId());
 
 	// Tools
-	public static final Weapon BROOM = new Weapon("Broom", 1, 1, 1, "broom.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 10, null, 55, 88, GameObject.generateNewTemplateId());
-	public static final Pickaxe PICKAXE = new Pickaxe("Pickaxe", 1, 1, "pickaxe.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f,
-			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 30, null, 32, 94,
+	public static final Weapon BROOM = new Weapon("Broom", 0, 0, 1, 0, 0, 0, 0, 1, 1, "broom.png", 100, null, 1f, 1f,
+			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 10, null, 55, 88,
 			GameObject.generateNewTemplateId());
-	public static final Axe HATCHET = new Axe("Hatchet", 1, 1, "hatchet.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 32, null, 48, 89, GameObject.generateNewTemplateId());
-	public static final Knife HUNTING_KNIFE = new Knife("Hunting Knife", 1, 1, "hunting_knife.png", 100, null, 1f, 1f,
-			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 27, null, 47, 58,
+	public static final Pickaxe PICKAXE = new Pickaxe("Pickaxe", 0, 7, 0, 0, 0, 0, 0, 1, 1, "pickaxe.png", 100, null,
+			1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 30, null, 32, 94,
 			GameObject.generateNewTemplateId());
-	public static final Weapon HOE = new Weapon("Hoe", 2, 1, 1, "hoe.png", 100, null, 1f, 1f, 1f, 1f, 0f, 0f, 1f, null,
-			0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 40, null, 61, 90, GameObject.generateNewTemplateId());
-	public static final Weapon SICKLE = new Weapon("Sickle", 3, 1, 1, "sickle.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f,
-			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 34, null, 20, 29,
+	public static final Axe HATCHET = new Axe("Hatchet", 6, 0, 0, 0, 0, 0, 0, 1, 1, "hatchet.png", 100, null, 1f, 1f,
+			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 32, null, 48, 89,
 			GameObject.generateNewTemplateId());
-	public static final Weapon HAMMER = new Weapon("Hammer", 4, 1, 1, "hammer.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f,
-			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 4f, 29, null, 31, 98,
+	public static final Knife HUNTING_KNIFE = new Knife("Hunting Knife", 0, 5, 0, 0, 0, 0, 0, 1, 1, "hunting_knife.png",
+			100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 27, null, 47, 58,
 			GameObject.generateNewTemplateId());
-	public static final Weapon BASKET = new Weapon("Basket", 1, 1, 1, "basket.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f,
-			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 1f, 20, null, 65, 11,
+	public static final Weapon HOE = new Weapon("Hoe", 2, 0, 0, 0, 0, 0, 0, 1, 1, "hoe.png", 100, null, 1f, 1f, 1f, 1f,
+			0f, 0f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 40, null, 61, 90,
 			GameObject.generateNewTemplateId());
-	public static final Weapon WHIP = new Weapon("Whip", 3, 1, 1, "whip.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 43, null, 18, 80, GameObject.generateNewTemplateId());
-	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 1, 1, "serrated_spoon.png", 100, null,
-			1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, 23, null, 48, 113,
+	public static final Weapon SICKLE = new Weapon("Sickle", 3, 0, 0, 0, 0, 0, 0, 1, 1, "sickle.png", 100, null, 1f, 1f,
+			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 34, null, 20, 29,
 			GameObject.generateNewTemplateId());
-	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 1, 1, "bell.png", 100, null, 1f, 1f, 0f, 0f, 25f,
-			25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, 18, null, 53, 103,
+	public static final Weapon HAMMER = new Weapon("Hammer", 0, 0, 6, 0, 0, 0, 0, 1, 1, "hammer.png", 100, null, 1f, 1f,
+			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 4f, 29, null, 31, 98,
 			GameObject.generateNewTemplateId());
-	public static final Lantern LANTERN = new Lantern("Lantern", 1, 1, "lantern.png", 100, null, 1f, 1f, 0f, 0f, 15f,
-			15f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 32, null, 63, 6,
+	public static final Weapon BASKET = new Weapon("Basket", 0, 0, 1, 0, 0, 0, 0, 1, 1, "basket.png", 100, null, 1f, 1f,
+			0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 1f, 20, null, 65, 11,
+			GameObject.generateNewTemplateId());
+	public static final Weapon WHIP = new Weapon("Whip", 4, 0, 0, 0, 0, 0, 0, 1, 1, "whip.png", 100, null, 1f, 1f, 0f,
+			0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 43, null, 18, 80,
+			GameObject.generateNewTemplateId());
+	public static final Weapon SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 0, 0, 0, 0, 0, 0, 1, 1,
+			"serrated_spoon.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f,
+			1f, 23, null, 48, 113, GameObject.generateNewTemplateId());
+	public static final Bell DINNER_BELL = new Bell("Dinner Bell", 0, 0, 1, 0, 0, 0, 0, 1, 1, "bell.png", 100, null, 1f,
+			1f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, 18, null, 53, 103,
+			GameObject.generateNewTemplateId());
+	public static final Lantern LANTERN = new Lantern("Lantern", 0, 0, 1, 2, 0, 0, 0, 1, 1, "lantern.png", 100, null,
+			1f, 1f, 0f, 0f, 15f, 15f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 32, null, 63, 6,
 			GameObject.generateNewTemplateId());
 
 	// Blades
-	public static final Weapon KATANA = new Weapon("Katana", 10, 1, 1, "katana.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f,
-			1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, 323, null, 27, 85,
+	public static final Weapon KATANA = new Weapon("Katana", 10, 10, 0, 0, 0, 0, 0, 1, 1, "katana.png", 100, null, 1f,
+			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, 323, null, 27, 85,
 			GameObject.generateNewTemplateId());
 
-	public static final Weapon CLEAVER = new Weapon("Cleaver", 5, 1, 1, "cleaver.png", 100, null, 1f, 1f, 0f, 0f, 1f,
-			1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 58, null, 33, 104,
+	public static final Weapon CLEAVER = new Weapon("Cleaver", 5, 0, 0, 0, 0, 0, 0, 1, 1, "cleaver.png", 100, null, 1f,
+			1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 58, null, 33, 104,
 			GameObject.generateNewTemplateId());
 
 	// Bows
 	// https://en.wikipedia.org/wiki/Bow_and_arrow#Types_of_bow
-	public static final Weapon HUNTING_BOW = new Weapon("Hunting Bow", 1, 1, 10, "a2r2.png", 100, null, 1f, 1f, 0f, 0f,
-			1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 73, null, 86, 86,
+	public static final Weapon HUNTING_BOW = new Weapon("Hunting Bow", 0, 5, 0, 0, 0, 0, 0, 1, 10, "a2r2.png", 100,
+			null, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 73, null, 86, 86,
 			GameObject.generateNewTemplateId());
 
 	// ARMOUR
@@ -305,9 +309,9 @@ public class Templates {
 	public static final MeatChunk MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(),
 			0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 10, null,
 			GameObject.generateNewTemplateId());
-	public static final ContainerForLiquids JAR = new ContainerForLiquids("Jar", 1, 1, "jar.png", 100, null, 1f, 1f, 0f,
-			0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, 5, null, 56, 100, 1f, "water_jar.png",
-			GameObject.generateNewTemplateId());
+	public static final ContainerForLiquids JAR = new ContainerForLiquids("Jar", 2, 2, 0, 0, 0, 0, 0, 1, 1, "jar.png",
+			100, null, 1f, 1f, 0f, 0f, 25f, 25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, 5, null, 56,
+			100, 1f, "water_jar.png", GameObject.generateNewTemplateId());
 	public static final Liquid WATER = new Liquid("Water", 5, "effect_wet.png", null, new Inventory(), 0.5f, 0.5f, 0f,
 			0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, 2, null, 0f,
 			new Effect[] { new EffectWet(5) }, new Effect[] {}, GameObject.generateNewTemplateId());

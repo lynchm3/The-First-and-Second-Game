@@ -10,23 +10,19 @@ import mdesl.graphics.Color;
 
 public class Tool extends Weapon {
 
-	public Tool(String name, float minRange, float maxRange, String imagePath, float health,
-			Square squareGameObjectIsOn, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
-			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
-			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, float anchorX,
-			float anchorY, float damage, int templateId) {
+	public Tool(String name, float slashDamage, float pierceDamage, float bluntDamage, float fireDamage,
+			float waterDamage, float electricalDamage, float poisonDamage, float minRange, float maxRange,
+			String imagePath, float health, Square squareGameObjectIsOn, float widthRatio, float heightRatio,
+			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float waterResistance, float electricResistance, float poisonResistance, float slashResistance,
+			float weight, int value, Actor owner, float anchorX, float anchorY, int templateId) {
 
-		super(name, damage, minRange, maxRange, imagePath, health, squareGameObjectIsOn, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, value, owner, anchorX, anchorY, templateId);
-
-		this.minRange = minRange;
-		this.maxRange = maxRange;
-		this.owner = owner;
-		this.anchorX = anchorX;
-		this.anchorY = anchorY;
+		super(name, slashDamage, pierceDamage, bluntDamage, fireDamage, waterDamage, electricalDamage, poisonDamage,
+				minRange, maxRange, imagePath, health, squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX,
+				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
+				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
+				weight, value, owner, anchorX, anchorY, templateId);
 	}
 
 	// public void calculateAttackableSquares(Square[][] squares) {
@@ -135,9 +131,10 @@ public class Tool extends Weapon {
 
 	@Override
 	public Tool makeCopy(Square square, Actor owner) {
-		return new Tool(new String(name), minRange, maxRange, imageTexturePath, totalHealth, square, widthRatio,
+		return new Tool(new String(name), slashDamage, pierceDamage, bluntDamage, fireDamage, waterDamage,
+				electricalDamage, poisonDamage, minRange, maxRange, imageTexturePath, totalHealth, square, widthRatio,
 				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
 				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, 5, templateId);
+				poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, templateId);
 	}
 }

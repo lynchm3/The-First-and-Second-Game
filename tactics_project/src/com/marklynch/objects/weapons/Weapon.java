@@ -24,12 +24,13 @@ public class Weapon extends GameObject {
 	public float minRange = 0;
 	public float maxRange = 0;
 
-	public Weapon(String name, float damage, float minRange, float maxRange, String imagePath, float health,
-			Square squareGameObjectIsOn, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
-			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
-			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, float anchorX,
-			float anchorY, int templateId) {
+	public Weapon(String name, float slashDamage, float pierceDamage, float bluntDamage, float fireDamage,
+			float waterDamage, float electricalDamage, float poisonDamage, float minRange, float maxRange,
+			String imagePath, float health, Square squareGameObjectIsOn, float widthRatio, float heightRatio,
+			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
+			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
+			float waterResistance, float electricResistance, float poisonResistance, float slashResistance,
+			float weight, int value, Actor owner, float anchorX, float anchorY, int templateId) {
 
 		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), widthRatio, heightRatio,
 				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
@@ -39,7 +40,13 @@ public class Weapon extends GameObject {
 		this.owner = owner;
 		this.anchorX = anchorX;
 		this.anchorY = anchorY;
-		this.slashDamage = damage;
+		this.slashDamage = slashDamage;
+		this.pierceDamage = pierceDamage;
+		this.bluntDamage = bluntDamage;
+		this.fireDamage = fireDamage;
+		this.waterDamage = waterDamage;
+		this.electricalDamage = electricalDamage;
+		this.poisonDamage = poisonDamage;
 		this.minRange = minRange;
 		this.maxRange = maxRange;
 
@@ -229,9 +236,10 @@ public class Weapon extends GameObject {
 
 	@Override
 	public Weapon makeCopy(Square square, Actor owner) {
-		return new Weapon(new String(name), slashDamage, minRange, maxRange, imageTexturePath, totalHealth, square,
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, templateId);
+		return new Weapon(new String(name), slashDamage, 0, 0, 0, 0, 0, 0, minRange, maxRange, imageTexturePath,
+				totalHealth, square, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
+				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
+				electricResistance, poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY,
+				templateId);
 	}
 }
