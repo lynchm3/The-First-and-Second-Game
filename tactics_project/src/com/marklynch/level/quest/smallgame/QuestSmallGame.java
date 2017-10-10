@@ -526,16 +526,18 @@ public class QuestSmallGame extends Quest {
 
 	private boolean updateEnvironmentalist(Actor actor) {
 		if (haveInfo(infoSetOffWithHunters)) {
+			// Hunters are on the move, head to wolf
 			if (environmentalistBill.canSeeGameObject(superWolf)) {
 			} else {
 				AIRoutineUtils.moveTowardsTargetSquare(superWolf.squareGameObjectIsOn);
 			}
 			return true;
-
 		} else if (!haveInfo(infoAgreedToJoinHunters)) {
+			// Starting point, spying
 			actor.activityDescription = ACTIVITY_SPYING;
-
 		} else if (haveInfo(infoAgreedToJoinHunters) && (!haveInfo(infoSaveTheWolf1) && !haveInfo(infoSaveTheWolf2))) {
+			// Go get the weapons
+
 			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
 
 			if (environmentalistBill.squareGameObjectIsOn != squareBehindLodge) {

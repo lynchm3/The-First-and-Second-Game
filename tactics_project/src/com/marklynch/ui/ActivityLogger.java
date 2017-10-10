@@ -24,7 +24,7 @@ public class ActivityLogger implements Draggable, Scrollable {
 
 	public void drawStaticUI() {
 
-		if (x < negativeWidth)
+		if (x <= negativeWidth)
 			return;
 
 		// Log
