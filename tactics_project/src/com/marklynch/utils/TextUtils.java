@@ -96,8 +96,7 @@ public class TextUtils {
 					offsetX = 0;
 				}
 
-				offsetX += textWidth;
-				offsetX += textureWidth;
+				offsetX += width;
 
 			} else if (content instanceof Faction) {
 				Faction faction = (Faction) content;

@@ -45,7 +45,7 @@ public class ActivityLogger implements Draggable, Scrollable {
 			} else if (drawY > Game.windowHeight) {
 			} else {
 
-				TextUtils.printTextWithImages(drawX, drawY, width, true, log.links, log.contents);
+				TextUtils.printTextWithImages(drawX, drawY, textWidth, true, log.links, log.contents);
 			}
 			heightSoFar += log.height;
 		}
