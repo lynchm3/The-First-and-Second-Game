@@ -188,6 +188,10 @@ public class TextUtils {
 				ScriptEvent scriptEvent = (ScriptEvent) content;
 
 				float textWidth = Game.font.getWidth(scriptEvent.name);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				offsetX += textWidth;
 
 			} else if (content instanceof ScriptTrigger) {
@@ -195,6 +199,10 @@ public class TextUtils {
 				ScriptTrigger scriptTrigger = (ScriptTrigger) content;
 
 				float textWidth = Game.font.getWidth(scriptTrigger.name);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				offsetX += textWidth;
 
 			} else if (content instanceof Class) {
@@ -202,6 +210,10 @@ public class TextUtils {
 				Class klass = (Class) content;
 
 				float textWidth = Game.font.getWidth(klass.getSimpleName());
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				offsetX += textWidth;
 
 			} else if (content instanceof AIRoutineUtils) {
@@ -209,6 +221,10 @@ public class TextUtils {
 				AIRoutineUtils ai = (AIRoutineUtils) content;
 
 				float textWidth = Game.font.getWidth(ai.name);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				offsetX += textWidth;
 
 			} else if (content instanceof Square) {
@@ -217,6 +233,11 @@ public class TextUtils {
 				String string = "Square @ " + square.xInGrid + " , " + square.yInGrid;
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
 				offsetX += textWidth;
 
 			} else if (content instanceof FactionRelationship) {
@@ -226,6 +247,10 @@ public class TextUtils {
 						+ factionRelationship.relationship + ")";
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				offsetX += textWidth;
 
 			} else if (content instanceof SpeechPart) {
@@ -238,6 +263,10 @@ public class TextUtils {
 				string = "\"" + string + "\"";
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				offsetX += textWidth;
 
 			} else if (content instanceof Action) {
@@ -260,6 +289,10 @@ public class TextUtils {
 				String string = projectile.name;
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				offsetX += textWidth;
 
 			} else if (content instanceof Effect) {
@@ -268,6 +301,10 @@ public class TextUtils {
 				String string = effect.effectName;
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				offsetX += textWidth;
 
 			}
@@ -570,6 +607,10 @@ public class TextUtils {
 				ScriptEvent scriptEvent = (ScriptEvent) content;
 
 				float textWidth = Game.font.getWidth(scriptEvent.name);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				Game.font.drawText(Game.activeBatch, scriptEvent.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -578,6 +619,10 @@ public class TextUtils {
 				ScriptTrigger scriptTrigger = (ScriptTrigger) content;
 
 				float textWidth = Game.font.getWidth(scriptTrigger.name);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				Game.font.drawText(Game.activeBatch, scriptTrigger.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -586,6 +631,10 @@ public class TextUtils {
 				Class klass = (Class) content;
 
 				float textWidth = Game.font.getWidth(klass.getSimpleName());
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				Game.font.drawText(Game.activeBatch, klass.getSimpleName(), posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -594,6 +643,10 @@ public class TextUtils {
 				AIRoutineUtils ai = (AIRoutineUtils) content;
 
 				float textWidth = Game.font.getWidth(ai.name);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				Game.font.drawText(Game.activeBatch, ai.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -603,6 +656,11 @@ public class TextUtils {
 				String string = "Square @ " + square.xInGrid + " , " + square.yInGrid;
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -613,6 +671,10 @@ public class TextUtils {
 						+ factionRelationship.relationship + ")";
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -626,6 +688,10 @@ public class TextUtils {
 				string = "\"" + string + "\"";
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -643,6 +709,10 @@ public class TextUtils {
 				Game.activeBatch.setColor(color);
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -671,6 +741,10 @@ public class TextUtils {
 				String string = projectile.name;
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
@@ -680,6 +754,10 @@ public class TextUtils {
 				String string = effect.effectName;
 
 				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
