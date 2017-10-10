@@ -9,6 +9,7 @@ import com.marklynch.objects.units.Actor;
 public class ActionRead extends Action {
 
 	public static final String ACTION_NAME = "Read";
+	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	public Actor performer;
 	public Readable target;
@@ -18,12 +19,17 @@ public class ActionRead extends Action {
 		super(ACTION_NAME, "action_read.png");
 		this.performer = reader;
 		this.target = target;
+		if (!check()) {
+			enabled = false;
+			actionName = ACTION_NAME_DISABLED;
+		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
 	public void perform() {
+
 		Conversation conversation = null;
 		conversation = target.getConversation();
 
@@ -41,8 +47,9 @@ public class ActionRead extends Action {
 
 	@Override
 	public boolean check() {
-		// TODO Auto-generated method stub
-		return true;
+		if (performer.canSeeGameObject(target))
+			return true;
+		return false;
 	}
 
 	@Override
