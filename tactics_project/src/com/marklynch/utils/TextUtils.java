@@ -230,7 +230,7 @@ public class TextUtils {
 			} else if (content instanceof Square) {
 
 				Square square = (Square) content;
-				String string = "Square @ " + square.xInGrid + " , " + square.yInGrid;
+				String string = square.name;
 
 				float textWidth = Game.font.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
@@ -653,7 +653,7 @@ public class TextUtils {
 			} else if (content instanceof Square) {
 
 				Square square = (Square) content;
-				String string = "Square @ " + square.xInGrid + " , " + square.yInGrid;
+				String string = square.name;
 
 				float textWidth = Game.font.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {

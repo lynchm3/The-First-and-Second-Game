@@ -108,6 +108,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public ArrayList<Actor> owners;
 	public boolean restricted;
+	public String name;
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory,
 			boolean restricted, Actor... owners) {
@@ -120,6 +121,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		super();
 		this.xInGrid = x;
 		this.yInGrid = y;
+		name = "Square @ " + this.xInGrid + "," + this.yInGrid;
 		this.xInGridPixels = xInGrid * Game.SQUARE_WIDTH;
 		this.yInGridPixels = yInGrid * Game.SQUARE_HEIGHT;
 
