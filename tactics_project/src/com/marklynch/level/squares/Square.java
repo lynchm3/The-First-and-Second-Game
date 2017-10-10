@@ -450,7 +450,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 	}
 
-	public Action drawAction(boolean onMouse) {
+	public Action drawActionThatWillBePerformed(boolean onMouse) {
 
 		if (!this.seenByPlayer) {
 			if (onMouse) {
@@ -554,6 +554,25 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			float squarePositionX = xInGridPixels;
 			float squarePositionY = yInGridPixels;
 			TextureUtils.drawTexture(Action.x, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
+					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
+					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
+					squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
+		}
+
+	}
+
+	public void drawAction(Action action, boolean onMouse) {
+
+		if (onMouse) {
+			TextureUtils.drawTexture(action.image, 1f, UserInputLevel.mouseLastX + 16,
+					Game.windowHeight - UserInputLevel.mouseLastY + 16,
+					UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
+					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
+		} else {
+
+			float squarePositionX = xInGridPixels;
+			float squarePositionY = yInGridPixels;
+			TextureUtils.drawTexture(action.image, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
 					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
 					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
 					squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);

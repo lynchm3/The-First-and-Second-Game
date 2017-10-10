@@ -1018,13 +1018,16 @@ public class Level {
 
 		// Draw actions on sqrs.
 
-		player.squareGameObjectIsOn.drawAction(false);
+		player.squareGameObjectIsOn.drawActionThatWillBePerformed(false);
 
 		if (Player.playerTargetSquare != null)
-			Player.playerTargetSquare.drawX(false);
+			if (Player.playerTargetAction != null)
+				Player.playerTargetSquare.drawAction(Player.playerTargetAction, false);
+			else
+				Player.playerTargetSquare.drawX(false);
 
 		if (player.squareGameObjectIsOn.getSquareToLeftOf() != null) {
-			Action action = player.squareGameObjectIsOn.getSquareToLeftOf().drawAction(false);
+			Action action = player.squareGameObjectIsOn.getSquareToLeftOf().drawActionThatWillBePerformed(false);
 			if (!aHasBeenPressed && action != null && action instanceof ActionMove && action.legal && action.enabled) {
 				player.squareGameObjectIsOn.getSquareToLeftOf().drawKey(Square.A_TEXTURE);
 			} else if (!shiftActionHasBeenPressed) {
@@ -1036,7 +1039,7 @@ public class Level {
 		}
 
 		if (player.squareGameObjectIsOn.getSquareToRightOf() != null) {
-			Action action = player.squareGameObjectIsOn.getSquareToRightOf().drawAction(false);
+			Action action = player.squareGameObjectIsOn.getSquareToRightOf().drawActionThatWillBePerformed(false);
 			if (!dHasBeenPressed && action != null && action instanceof ActionMove && action.legal && action.enabled) {
 				player.squareGameObjectIsOn.getSquareToRightOf().drawKey(Square.D_TEXTURE);
 			} else if (!shiftActionHasBeenPressed) {
@@ -1048,7 +1051,7 @@ public class Level {
 		}
 
 		if (player.squareGameObjectIsOn.getSquareAbove() != null) {
-			Action action = player.squareGameObjectIsOn.getSquareAbove().drawAction(false);
+			Action action = player.squareGameObjectIsOn.getSquareAbove().drawActionThatWillBePerformed(false);
 			if (!wHasBeenPressed && action != null && action instanceof ActionMove && action.legal && action.enabled) {
 				player.squareGameObjectIsOn.getSquareAbove().drawKey(Square.W_TEXTURE);
 			} else if (!shiftActionHasBeenPressed) {
@@ -1060,7 +1063,7 @@ public class Level {
 		}
 
 		if (player.squareGameObjectIsOn.getSquareBelow() != null) {
-			Action action = player.squareGameObjectIsOn.getSquareBelow().drawAction(false);
+			Action action = player.squareGameObjectIsOn.getSquareBelow().drawActionThatWillBePerformed(false);
 			if (!sHasBeenPressed && action != null && action instanceof ActionMove && action.legal && action.enabled) {
 				player.squareGameObjectIsOn.getSquareBelow().drawKey(Square.S_TEXTURE);
 			} else if (!shiftActionHasBeenPressed) {
@@ -1130,7 +1133,7 @@ public class Level {
 
 				// if (Player.playerTargetSquare == null) {
 				Game.squareMouseIsOver.drawCursor();
-				Game.squareMouseIsOver.drawAction(false);
+				Game.squareMouseIsOver.drawActionThatWillBePerformed(false);
 				// }
 			}
 
@@ -1178,7 +1181,7 @@ public class Level {
 				// NORMAL MODE
 
 				// if (Player.playerTargetSquare == null) {
-				Action action = Game.squareMouseIsOver.drawAction(true);
+				Action action = Game.squareMouseIsOver.drawActionThatWillBePerformed(true);
 				// }
 			}
 

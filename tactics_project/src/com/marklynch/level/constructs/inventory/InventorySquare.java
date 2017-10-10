@@ -162,7 +162,7 @@ public class InventorySquare extends Square {
 	}
 
 	@Override
-	public Action drawAction(boolean onMouse) {
+	public Action drawActionThatWillBePerformed(boolean onMouse) {
 		Action defaultAction;
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 			defaultAction = this.getSecondaryActionForTheSquareOrObject(Game.level.player);
