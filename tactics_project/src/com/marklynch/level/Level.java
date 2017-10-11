@@ -206,6 +206,7 @@ public class Level {
 		Vein.loadStaticImages();
 		MapMarker.loadStaticImages();
 		Inventory.loadStaticImages();
+		AdventureLog.loadStaticImages();
 
 		structures = new ArrayList<Structure>();
 

@@ -14,11 +14,13 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class AdventureLog implements Draggable, Scrollable {
 
@@ -51,6 +53,9 @@ public class AdventureLog implements Draggable, Scrollable {
 	// Close button
 	static LevelButton buttonClose;
 
+	public static Texture checkBoxChecked;
+	public static Texture checkBoxUnchecked;
+
 	public AdventureLog() {
 		resize();
 
@@ -63,6 +68,11 @@ public class AdventureLog implements Draggable, Scrollable {
 			}
 		});
 		buttons.add(buttonClose);
+	}
+
+	public static void loadStaticImages() {
+		checkBoxChecked = ResourceUtils.getGlobalImage("check_box_checked.png");
+		checkBoxUnchecked = ResourceUtils.getGlobalImage("check_box_unchecked.png");
 	}
 
 	public void resize() {
@@ -216,6 +226,24 @@ public class AdventureLog implements Draggable, Scrollable {
 		// Buttons
 		for (Button button : buttons) {
 			button.draw();
+		}
+
+		// check box
+		int questsDrawnInList = 0;
+		for (final Quest quest : Level.quests) {
+			if (quest.started) {
+				Texture checkBoxTextureToUse = checkBoxUnchecked;
+				if (quest == AdventureLog.activeQuest) {
+					checkBoxTextureToUse = checkBoxChecked;
+				}
+
+				float checkBoxx1 = listX + listBorder + listWidth - listItemHeight;
+				float checkBoxY1 = listY + listBorder + questsDrawnInList * listItemHeight;
+
+				TextureUtils.drawTexture(checkBoxTextureToUse, checkBoxx1, checkBoxY1, checkBoxx1 + listItemHeight,
+						checkBoxY1 + listItemHeight);
+				questsDrawnInList++;
+			}
 		}
 	}
 
