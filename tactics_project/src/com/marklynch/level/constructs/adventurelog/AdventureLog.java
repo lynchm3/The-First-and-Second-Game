@@ -45,6 +45,7 @@ public class AdventureLog implements Draggable, Scrollable {
 	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToMakeQuestAcive = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> buttonsToTrackObjectives = new ArrayList<LevelButton>();
 
 	public HashMap<AdventureInfo, ArrayList<Link>> linkMap = new HashMap<AdventureInfo, ArrayList<Link>>();
 	public ArrayList<Link> links = new ArrayList<Link>();
@@ -118,8 +119,10 @@ public class AdventureLog implements Draggable, Scrollable {
 					public void click() {
 						if (activeQuests.contains(quest)) {
 							activeQuests.remove(quest);
+							createButtonsToTrackObjectives();
 						} else {
 							activeQuests.add(quest);
+							createButtonsToTrackObjectives();
 						}
 					}
 				});
@@ -249,6 +252,13 @@ public class AdventureLog implements Draggable, Scrollable {
 				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(currentObjective.text) - 180,
 						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
 						new Object[] { new StringWithColor(currentObjective.text, Color.WHITE) });
+				if (currentObjective.showMarker) {
+					TextureUtils.drawTexture(checkBoxChecked, Game.windowWidth - 180, 20 + 20 * linesPrinted,
+							Game.windowWidth - 160, 20 + 20 * linesPrinted + 20);
+				} else {
+					TextureUtils.drawTexture(checkBoxUnchecked, Game.windowWidth - 180, 20 + 20 * linesPrinted,
+							Game.windowWidth - 160, 20 + 20 * linesPrinted + 20);
+				}
 				linesPrinted++;
 			}
 			linesPrinted++;
@@ -260,7 +270,7 @@ public class AdventureLog implements Draggable, Scrollable {
 			int markersDrawn = 0;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
-				if (currentObjective.gameObject != null) {
+				if (currentObjective.gameObject != null && currentObjective.showMarker) {
 					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
 						currentObjective.gameObject.squareGameObjectIsOn.drawObjective(markersDrawn);
 					} else if (currentObjective.gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject
@@ -291,7 +301,8 @@ public class AdventureLog implements Draggable, Scrollable {
 			int markersDrawn = 0;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
-				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
+				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null
+						&& currentObjective.showMarker) {
 
 					float squareX = (currentObjective.gameObject.squareGameObjectIsOn.xInGridPixels);
 					float squareY = (currentObjective.gameObject.squareGameObjectIsOn.yInGridPixels);
@@ -385,6 +396,33 @@ public class AdventureLog implements Draggable, Scrollable {
 				}
 
 			}
+		}
+	}
+
+	public void createButtonsToTrackObjectives() {
+		Game.level.buttons.removeAll(buttonsToTrackObjectives);
+		buttonsToTrackObjectives.clear();
+
+		int linesPrinted = 0;
+		for (Quest activeQuest : activeQuests) {
+			linesPrinted++;
+			for (final Objective currentObjective : activeQuest.currentObjectives) {
+				final LevelButton buttonToTrackObjective = new LevelButton(Game.windowWidth - 180,
+						20 + 20 * linesPrinted, 20, 20, "end_turn_button.png", "end_turn_button.png", "", true, true,
+						Color.GRAY, Color.WHITE, "Turn on/off map marker for this objective");
+				buttonToTrackObjective.setClickListener(new ClickListener() {
+
+					@Override
+					public void click() {
+						currentObjective.showMarker = !currentObjective.showMarker;
+					}
+				});
+
+				Game.level.buttons.add(buttonToTrackObjective);
+				buttonsToTrackObjectives.add(buttonToTrackObjective);
+				linesPrinted++;
+			}
+			linesPrinted++;
 		}
 	}
 

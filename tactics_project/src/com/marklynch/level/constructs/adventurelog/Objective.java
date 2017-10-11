@@ -8,6 +8,7 @@ public class Objective {
 	public GameObject gameObject;
 	public String text;
 	public Square square;
+	public boolean showMarker = true;
 
 	public Objective(String text, GameObject gameObject, Square square) {
 		super();
