@@ -236,10 +236,10 @@ public class Weapon extends GameObject {
 
 	@Override
 	public Weapon makeCopy(Square square, Actor owner) {
-		return new Weapon(new String(name), slashDamage, 0, 0, 0, 0, 0, 0, minRange, maxRange, imageTexturePath,
-				totalHealth, square, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
-				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
-				electricResistance, poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY,
-				templateId);
+		return new Weapon(new String(name), slashDamage, pierceDamage, bluntDamage, fireDamage, waterDamage,
+				electricalDamage, poisonDamage, minRange, maxRange, imageTexturePath, totalHealth, square, widthRatio,
+				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
+				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
+				poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, templateId);
 	}
 }
