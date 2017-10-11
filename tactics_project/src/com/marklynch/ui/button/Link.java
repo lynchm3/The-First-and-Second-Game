@@ -1,6 +1,7 @@
 package com.marklynch.ui.button;
 
 import com.marklynch.Game;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionPin;
 
@@ -24,8 +25,11 @@ public class Link extends LevelButton {
 		public void click() {
 			if (object instanceof GameObject) {
 				new ActionPin(Game.level.player, (GameObject) object).perform();
-			} else {
-				// I dunno
+			} else if (object instanceof Quest) {
+				// open quest log on that thing
+				if (!Game.level.adventureLog.showing)
+					Game.level.openCloseAdventureLog();
+				Game.level.adventureLog.questToDisplayInAdventureLog = (Quest) object;
 			}
 		}
 	};

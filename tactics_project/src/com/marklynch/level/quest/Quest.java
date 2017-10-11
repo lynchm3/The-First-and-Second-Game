@@ -8,6 +8,7 @@ import com.marklynch.level.constructs.adventurelog.AdventureInfo;
 import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.popups.PopupToast;
 
 public class Quest {
@@ -70,6 +71,8 @@ public class Quest {
 			return;
 		started = true;
 		Game.level.popupToasts.add(new PopupToast(new Object[] { "Quest " + name + " started!" }));
+		Game.level.activityLogger
+				.addActivityLog(new ActivityLog(new Object[] { Game.level.player, " started quest ", this }));
 		turnStarted = turnUpdated = Level.turn;
 	}
 

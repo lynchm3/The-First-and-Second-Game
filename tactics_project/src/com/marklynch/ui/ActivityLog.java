@@ -16,5 +16,6 @@ public class ActivityLog {
 		this.contents = contents;
 		height = TextUtils.getDimensions(contents, ActivityLogger.textWidth)[1] + 10;
 		links = TextUtils.getLinks(contents);
+		System.out.println("links.size() = " + links.size());
 	}
 }

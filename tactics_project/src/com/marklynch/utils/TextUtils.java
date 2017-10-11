@@ -12,6 +12,7 @@ import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.actions.Action;
@@ -307,6 +308,18 @@ public class TextUtils {
 				}
 				offsetX += textWidth;
 
+			} else if (content instanceof Quest) {
+
+				Quest quest = (Quest) content;
+				String string = quest.name;
+
+				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+				offsetX += textWidth;
+
 			}
 		}
 
@@ -341,9 +354,17 @@ public class TextUtils {
 
 				float width = textWidth + textureWidth;
 				buttons.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content));
+			} else if (content instanceof Quest) {
+				Quest quest = (Quest) content;
+
+				float width = Game.font.getWidth(quest.name);
+
+				buttons.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content));
+
 			}
 
 		}
+
 		return buttons;
 
 	}
@@ -359,7 +380,7 @@ public class TextUtils {
 		if (contents == null)
 			return;
 
-		int buttonIndex = 0;
+		int linkIndex = 0;
 
 		float offsetX = 0;
 		float offsetY = 0;
@@ -442,10 +463,8 @@ public class TextUtils {
 
 				if (links != null) {
 					Game.activeBatch.setColor(Color.YELLOW);
-					// links.get(buttonIndex).x = startX;
-					// links.get(buttonIndex).y = posY + offsetY;
-					links.get(buttonIndex).updatePosition(posX + offsetX, posY + offsetY);
-					buttonIndex++;
+					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
+					linkIndex++;
 				}
 
 				// Text
@@ -757,6 +776,26 @@ public class TextUtils {
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
+				}
+
+				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				offsetX += textWidth;
+
+			} else if (content instanceof Quest) {
+
+				Quest quest = (Quest) content;
+				String string = quest.name;
+
+				float textWidth = Game.font.getWidth(string);
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
+				if (links != null) {
+					Game.activeBatch.setColor(Color.YELLOW);
+					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
+					linkIndex++;
 				}
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
