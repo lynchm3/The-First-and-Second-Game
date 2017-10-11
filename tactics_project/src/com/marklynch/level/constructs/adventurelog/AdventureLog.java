@@ -244,14 +244,18 @@ public class AdventureLog implements Draggable, Scrollable {
 	public void drawActiveQuestsObjectiveText() {
 		int linesPrinted = 0;
 		for (Quest activeQuest : activeQuests) {
-			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 180,
+			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 202,
 					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor(activeQuest.name, Color.WHITE) });
 			linesPrinted++;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
-				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(currentObjective.text) - 180,
+				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(currentObjective.text) - 202,
 						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
 						new Object[] { new StringWithColor(currentObjective.text, Color.WHITE) });
+				QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - 200, 20 + 20 * linesPrinted, Game.windowWidth - 180,
+						20 + 20 * linesPrinted + 20);
+				TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, Game.windowWidth - 200,
+						20 + 20 * linesPrinted, Game.windowWidth - 180, 20 + 20 * linesPrinted + 20);
 				if (currentObjective.showMarker) {
 					TextureUtils.drawTexture(checkBoxChecked, Game.windowWidth - 180, 20 + 20 * linesPrinted,
 							Game.windowWidth - 160, 20 + 20 * linesPrinted + 20);
@@ -272,15 +276,15 @@ public class AdventureLog implements Draggable, Scrollable {
 
 				if (currentObjective.gameObject != null && currentObjective.showMarker) {
 					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
-						currentObjective.gameObject.squareGameObjectIsOn.drawObjective();
+						currentObjective.gameObject.squareGameObjectIsOn.drawObjective(currentObjective);
 					} else if (currentObjective.gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject
 							&& ((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn != null) {
 						((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn
-								.drawObjective();
+								.drawObjective(currentObjective);
 
 					}
 				} else if (currentObjective.square != null) {
-					currentObjective.square.drawObjective();
+					currentObjective.square.drawObjective(currentObjective);
 				}
 				markersDrawn++;
 

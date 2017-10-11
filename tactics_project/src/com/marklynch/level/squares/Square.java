@@ -15,6 +15,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AStarNode;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
@@ -44,6 +45,7 @@ import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -444,12 +446,20 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// GL11.glPopMatrix();
 	}
 
-	public void drawObjective() {
+	public void drawObjective(Objective objective) {
 		float squarePositionX = xInGridPixels;
 		float squarePositionY = yInGridPixels;
 
-		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionY,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		if (this.visibleToPlayer) {
+			TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionY,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		} else {
+			QuadUtils.drawQuad(Color.WHITE, squarePositionX, squarePositionY, squarePositionX + Game.SQUARE_WIDTH,
+					squarePositionY + Game.SQUARE_HEIGHT);
+			TextureUtils.drawTexture(objective.gameObject.imageTexture, squarePositionX, squarePositionY,
+					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+
+		}
 	}
 
 	public Action drawActionThatWillBePerformed(boolean onMouse) {
