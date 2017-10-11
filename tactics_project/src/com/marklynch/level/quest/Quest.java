@@ -81,9 +81,12 @@ public class Quest {
 	}
 
 	public void hasBeenUpdated() {
-		Game.level.popupToasts.add(new PopupToast(new Object[] { "Quest " + name + " updated" }));
-		Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { "Quest ", this, " was updated" }));
-		turnStarted = turnUpdated = Level.turn;
+
+		if (turnUpdated < Level.turn) {
+			Game.level.popupToasts.add(new PopupToast(new Object[] { "Quest " + name + " updated" }));
+			Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { "Quest ", this, " was updated" }));
+			turnUpdated = Level.turn;
+		}
 	}
 
 }
