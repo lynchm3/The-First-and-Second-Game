@@ -827,7 +827,7 @@ public class Level {
 		Game.activeBatch.updateUniforms();
 
 		// Quest lines
-		AdventureLog.drawQuestInfo();
+		AdventureLog.drawQuestMarkersForOffScreenObjectives();
 
 		// Draw lines for the popup windows
 		for (PinWindow window : this.popupPinneds) {
@@ -996,7 +996,7 @@ public class Level {
 
 	public void drawUI() {
 
-		adventureLog.drawQuestMarkers();
+		adventureLog.drawQuestsMarkers();
 
 		// Objects 2
 
@@ -1222,7 +1222,7 @@ public class Level {
 		}
 
 		// Current objective quest
-		adventureLog.drawActiveQuestObjectiveText();
+		adventureLog.drawActiveQuestsObjectiveText();
 
 		// Turn text
 		if (currentFactionMoving != null) {

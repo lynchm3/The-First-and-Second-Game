@@ -27,7 +27,7 @@ public class AdventureLog implements Draggable, Scrollable {
 	public boolean showing = false;
 
 	public static Quest questToDisplayInAdventureLog = null;
-	public static Quest activeQuest = null;
+	public static ArrayList<Quest> activeQuests = new ArrayList<Quest>();
 
 	int listX;
 	int listY;
@@ -116,12 +116,11 @@ public class AdventureLog implements Draggable, Scrollable {
 
 					@Override
 					public void click() {
-						if (activeQuest == quest) {
-							activeQuest = null;
+						if (activeQuests.contains(quest)) {
+							activeQuests.remove(quest);
 						} else {
-							activeQuest = quest;
+							activeQuests.add(quest);
 						}
-
 					}
 				});
 
@@ -225,7 +224,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		for (final Quest quest : Level.quests) {
 			if (quest.started) {
 				Texture checkBoxTextureToUse = checkBoxUnchecked;
-				if (quest == AdventureLog.activeQuest) {
+				if (activeQuests.contains(quest)) {
 					checkBoxTextureToUse = checkBoxChecked;
 				}
 
@@ -239,24 +238,25 @@ public class AdventureLog implements Draggable, Scrollable {
 		}
 	}
 
-	public void drawActiveQuestObjectiveText() {
-		if (activeQuest != null) {
-			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 150, 20,
-					Integer.MAX_VALUE, false, null,
+	public void drawActiveQuestsObjectiveText() {
+		int linesPrinted = 0;
+		for (Quest activeQuest : activeQuests) {
+			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 150,
+					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor(activeQuest.name, Color.WHITE) });
-
-			int objectivesPrinted = 0;
+			linesPrinted++;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(currentObjective.text) - 150,
-						40 + 20 * objectivesPrinted, Integer.MAX_VALUE, false, null,
+						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
 						new Object[] { new StringWithColor(currentObjective.text, Color.WHITE) });
-				objectivesPrinted++;
+				linesPrinted++;
 			}
+			linesPrinted++;
 		}
 	}
 
-	public void drawQuestMarkers() {
-		if (activeQuest != null) {
+	public void drawQuestsMarkers() {
+		for (Quest activeQuest : activeQuests) {
 			int markersDrawn = 0;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
@@ -278,8 +278,8 @@ public class AdventureLog implements Draggable, Scrollable {
 		}
 	}
 
-	public static void drawQuestInfo() {
-		if (activeQuest != null) {
+	public static void drawQuestMarkersForOffScreenObjectives() { // i have no idea what this does
+		for (Quest activeQuest : activeQuests) {
 			int x1 = (int) Game.halfWindowWidth;
 			int y1 = (int) Game.halfWindowHeight;
 
