@@ -116,22 +116,14 @@ public class AdventureLog implements Draggable, Scrollable {
 
 					@Override
 					public void click() {
-						for (LevelButton button : buttonsToMakeQuestAcive) {
-							// change colors to off
-							button.buttonColor = Color.GRAY;
-							button.setTextColor(Color.WHITE);
+						if (activeQuest == quest) {
+							activeQuest = null;
+						} else {
+							activeQuest = quest;
 						}
-						buttonToMakeQuestActive.buttonColor = Color.GREEN;
-						buttonToMakeQuestActive.setTextColor(Color.BLACK);
-						activeQuest = quest;
 
 					}
 				});
-
-				if (questToDisplayInAdventureLog == quest) {
-					buttonToMakeQuestActive.buttonColor = Color.GREEN;
-					buttonToMakeQuestActive.setTextColor(Color.BLACK);
-				}
 
 				buttons.add(buttonToMakeQuestActive);
 				buttonsToMakeQuestAcive.add(buttonToMakeQuestActive);
