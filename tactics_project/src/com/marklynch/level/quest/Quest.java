@@ -22,10 +22,6 @@ public class Quest {
 	public int turnStarted;
 	public int turnUpdated;
 
-	// Called once per cycle
-	public void update() {
-	}
-
 	// Called my members of quest when they dont know what to do
 	public boolean update(Actor actor) {
 		return false;
@@ -35,15 +31,18 @@ public class Quest {
 		return null;
 	}
 
-	private void setLastUpdatedTime() {
-		turnUpdated = Game.level.turn;
+	public void update() {
 
 	}
 
 	public void addObjective(Objective objective) {
 		if (!currentObjectives.contains(objective)) {
-			start();
-			setLastUpdatedTime();
+
+			if (started) {
+				hasBeenUpdated();
+			} else {
+				start();
+			}
 			currentObjectives.add(objective);
 		}
 	}
@@ -54,8 +53,13 @@ public class Quest {
 
 	public void addInfo(AdventureInfo info) {
 		if (!infoList.contains(info)) {
-			start();
-			setLastUpdatedTime();
+
+			if (started) {
+				hasBeenUpdated();
+			} else {
+				start();
+			}
+
 			info.setTurn(Game.level.turn);
 			infoList.add(info);
 		}
@@ -73,6 +77,12 @@ public class Quest {
 		Game.level.popupToasts.add(new PopupToast(new Object[] { "Quest " + name + " started!" }));
 		Game.level.activityLogger
 				.addActivityLog(new ActivityLog(new Object[] { Game.level.player, " started quest ", this }));
+		turnStarted = turnUpdated = Level.turn;
+	}
+
+	public void hasBeenUpdated() {
+		Game.level.popupToasts.add(new PopupToast(new Object[] { "Quest " + name + " updated" }));
+		Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { "Quest ", this, " was updated" }));
 		turnStarted = turnUpdated = Level.turn;
 	}
 

@@ -241,12 +241,12 @@ public class AdventureLog implements Draggable, Scrollable {
 	public void drawActiveQuestsObjectiveText() {
 		int linesPrinted = 0;
 		for (Quest activeQuest : activeQuests) {
-			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 150,
+			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 180,
 					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor(activeQuest.name, Color.WHITE) });
 			linesPrinted++;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
-				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(currentObjective.text) - 150,
+				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(currentObjective.text) - 180,
 						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
 						new Object[] { new StringWithColor(currentObjective.text, Color.WHITE) });
 				linesPrinted++;
@@ -278,7 +278,9 @@ public class AdventureLog implements Draggable, Scrollable {
 		}
 	}
 
-	public static void drawQuestMarkersForOffScreenObjectives() { // i have no idea what this does
+	public static void drawQuestMarkersForOffScreenObjectives() { // i have no
+																	// idea what
+																	// this does
 		for (Quest activeQuest : activeQuests) {
 			int x1 = (int) Game.halfWindowWidth;
 			int y1 = (int) Game.halfWindowHeight;
