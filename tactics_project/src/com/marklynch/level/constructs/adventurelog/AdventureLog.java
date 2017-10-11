@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.quest.Quest;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
@@ -300,11 +301,14 @@ public class AdventureLog implements Draggable, Scrollable {
 			int x2 = Integer.MAX_VALUE;
 			int y2 = Integer.MAX_VALUE;
 
+			Square targetSquare = null;
+
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
 				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null
 						&& currentObjective.showMarker) {
 
+					targetSquare = currentObjective.gameObject.squareGameObjectIsOn;
 					float squareX = (currentObjective.gameObject.squareGameObjectIsOn.xInGridPixels);
 					float squareY = (currentObjective.gameObject.squareGameObjectIsOn.yInGridPixels);
 					x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
@@ -314,6 +318,7 @@ public class AdventureLog implements Draggable, Scrollable {
 
 				} else if (currentObjective.square != null) {
 
+					targetSquare = currentObjective.square;
 					float squareX = (currentObjective.square.xInGridPixels);
 					float squareY = (currentObjective.square.yInGridPixels);
 					x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
@@ -324,6 +329,9 @@ public class AdventureLog implements Draggable, Scrollable {
 				}
 
 				if (x2 != Integer.MAX_VALUE) {
+
+					String distanceString = Game.level.player.straightLineDistanceTo(targetSquare) + "m";
+					float distanceStringWidth = Game.font.getWidth(distanceString);
 					// LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 5);
 
 					// Get intersection of line and edge of screen
@@ -351,6 +359,9 @@ public class AdventureLog implements Draggable, Scrollable {
 						QuadUtils.drawQuad(Color.WHITE, intersect[0] - 20, drawY1, intersect[0], drawY2);
 						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0] - 20, drawY1,
 								intersect[0], drawY2);
+
+						TextUtils.printTextWithImages(intersect[0] - 20 - distanceStringWidth - 4, drawY1,
+								Integer.MAX_VALUE, false, null, distanceString);
 						continue;
 					}
 
@@ -377,6 +388,9 @@ public class AdventureLog implements Draggable, Scrollable {
 						QuadUtils.drawQuad(Color.WHITE, intersect[0], drawY1, intersect[0] + 20, drawY2);
 						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0], drawY1,
 								intersect[0] + 20, drawY2);
+
+						TextUtils.printTextWithImages(intersect[0] + 20 + 4, drawY1, Integer.MAX_VALUE, false, null,
+								distanceString);
 						continue;
 					}
 
@@ -403,6 +417,8 @@ public class AdventureLog implements Draggable, Scrollable {
 						QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1], drawX2, intersect[1] + 20);
 						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, drawX1, intersect[1], drawX2,
 								intersect[1] + 20);
+						TextUtils.printTextWithImages(drawX1, intersect[1] + 20 + 4, Integer.MAX_VALUE, false, null,
+								distanceString);
 
 						continue;
 					}
@@ -430,6 +446,8 @@ public class AdventureLog implements Draggable, Scrollable {
 						QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1] - 20, drawX2, intersect[1]);
 						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, drawX1, intersect[1] - 20,
 								drawX2, intersect[1]);
+						TextUtils.printTextWithImages(drawX1, intersect[1] - 20 - 24, Integer.MAX_VALUE, false, null,
+								distanceString);
 
 						continue;
 					}
