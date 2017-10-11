@@ -12,6 +12,8 @@ import mdesl.graphics.Color;
 
 public class WeaponComparisonDisplay {
 
+	public final static String stringEquipped = "EQUIPPED";
+
 	int weaponWidth;
 	int weaponHeight;
 	int width;
@@ -21,6 +23,8 @@ public class WeaponComparisonDisplay {
 	int height;
 	int halfWidth;
 
+	int equippedStringX;
+	int equippedStringY;
 	int weapon1DrawX;
 	int weaponDrawY;
 	int weapon2DrawX;
@@ -63,7 +67,10 @@ public class WeaponComparisonDisplay {
 		Weapon weapon1 = (Weapon) Game.level.player.equipped;
 		Weapon weapon2 = (Weapon) Game.level.player.inventory.inventorySquareMouseIsOver.gameObject;
 
-		// Square
+		// "Equipped"
+		TextUtils.printTextWithImages(equippedStringX, equippedStringY, Integer.MAX_VALUE, false, null, stringEquipped);
+
+		// Squares
 		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon1DrawX, weaponDrawY, weapon1DrawX + weaponWidth,
 				weaponDrawY + weaponHeight);
 		TextureUtils.drawTexture(InventorySquare.WHITE_SQUARE, weapon2DrawX, weaponDrawY, weapon2DrawX + weaponWidth,
@@ -245,6 +252,8 @@ public class WeaponComparisonDisplay {
 		height = 300;
 		halfWidth = width / 2;
 
+		equippedStringX = x + 32;
+		equippedStringY = y - 32;
 		weapon1DrawX = x;
 		weaponDrawY = y;
 		weapon2DrawX = x + width - weaponWidth;
