@@ -333,10 +333,20 @@ public class AdventureLog implements Draggable, Scrollable {
 					int[] intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
 
 					if (intersect != null) {
-						QuadUtils.drawQuad(Color.WHITE, intersect[0] - 20, intersect[1] - 10, intersect[0],
-								intersect[1] + 10);
-						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0] - 20,
-								intersect[1] - 10, intersect[0], intersect[1] + 10);
+
+						float drawY1 = intersect[1] - 10;
+						float drawY2 = intersect[1] + 10;
+						if (drawY1 < 0) {
+							drawY1 = 0;
+							drawY2 = 20;
+						} else if (drawY2 > Game.windowHeight) {
+							drawY1 = Game.windowHeight - 20;
+							drawY2 = Game.windowHeight;
+						}
+
+						QuadUtils.drawQuad(Color.WHITE, intersect[0] - 20, drawY1, intersect[0], drawY2);
+						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0] - 20, drawY1,
+								intersect[0], drawY2);
 						continue;
 					}
 
@@ -349,10 +359,20 @@ public class AdventureLog implements Draggable, Scrollable {
 					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
 
 					if (intersect != null) {
-						QuadUtils.drawQuad(Color.WHITE, intersect[0], intersect[1] - 10, intersect[0] + 20,
-								intersect[1] + 10);
-						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0],
-								intersect[1] - 10, intersect[0] + 20, intersect[1] + 10);
+
+						float drawY1 = intersect[1] - 10;
+						float drawY2 = intersect[1] + 10;
+						if (drawY1 < 0) {
+							drawY1 = 0;
+							drawY2 = 20;
+						} else if (drawY2 > Game.windowHeight) {
+							drawY1 = Game.windowHeight - 20;
+							drawY2 = Game.windowHeight;
+						}
+
+						QuadUtils.drawQuad(Color.WHITE, intersect[0], drawY1, intersect[0] + 20, drawY2);
+						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0], drawY1,
+								intersect[0] + 20, drawY2);
 						continue;
 					}
 
@@ -365,10 +385,20 @@ public class AdventureLog implements Draggable, Scrollable {
 					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
 
 					if (intersect != null) {
-						QuadUtils.drawQuad(Color.WHITE, intersect[0] - 10, intersect[1], intersect[0] + 10,
+
+						float drawX1 = intersect[0] - 10;
+						float drawX2 = intersect[0] + 10;
+						if (drawX1 < 0) {
+							drawX1 = 0;
+							drawX2 = 20;
+						} else if (drawX2 > Game.windowWidth) {
+							drawX1 = Game.windowWidth - 20;
+							drawX2 = Game.windowWidth;
+						}
+
+						QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1], drawX2, intersect[1] + 20);
+						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, drawX1, intersect[1], drawX2,
 								intersect[1] + 20);
-						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0] - 10,
-								intersect[1], intersect[0] + 10, intersect[1] + 20);
 
 						continue;
 					}
@@ -382,10 +412,20 @@ public class AdventureLog implements Draggable, Scrollable {
 					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
 
 					if (intersect != null) {
-						QuadUtils.drawQuad(Color.WHITE, intersect[0] - 10, intersect[1] - 20, intersect[0] + 10,
-								intersect[1]);
-						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0] - 10,
-								intersect[1] - 20, intersect[0] + 10, intersect[1]);
+
+						float drawX1 = intersect[0] - 10;
+						float drawX2 = intersect[0] + 10;
+						if (drawX1 < 0) {
+							drawX1 = 0;
+							drawX2 = 20;
+						} else if (drawX2 > Game.windowWidth) {
+							drawX1 = Game.windowWidth - 20;
+							drawX2 = Game.windowWidth;
+						}
+
+						QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1] - 20, drawX2, intersect[1]);
+						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, drawX1, intersect[1] - 20,
+								drawX2, intersect[1]);
 
 						continue;
 					}
