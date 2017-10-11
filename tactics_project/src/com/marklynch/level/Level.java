@@ -996,7 +996,8 @@ public class Level {
 
 	public void drawUI() {
 
-		adventureLog.drawQuestsMarkers();
+		// Quest markers for objects on screen
+		adventureLog.drawQuestsMarkersForOnScreenObjectives();
 
 		// Objects 2
 
@@ -1187,6 +1188,14 @@ public class Level {
 			}
 
 		}
+
+		// Game.activeBatch.flush();
+		// Matrix4f view = Game.activeBatch.getViewMatrix();
+		// view.setIdentity();
+		// Game.activeBatch.updateUniforms();
+
+		// Quest lines
+		AdventureLog.drawQuestMarkersForOffScreenObjectives();
 
 		Game.activeBatch.flush();
 

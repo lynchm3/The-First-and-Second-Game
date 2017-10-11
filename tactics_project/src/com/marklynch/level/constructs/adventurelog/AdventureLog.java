@@ -265,7 +265,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		}
 	}
 
-	public void drawQuestsMarkers() {
+	public void drawQuestsMarkersForOnScreenObjectives() {
 		for (Quest activeQuest : activeQuests) {
 			int markersDrawn = 0;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
