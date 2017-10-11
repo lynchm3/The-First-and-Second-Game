@@ -309,14 +309,14 @@ public class PinWindow implements Draggable {
 
 		}
 
-		// Blunt resistance
+		// Pierce resistance
 
-		TextureUtils.drawTexture(getGlobalImage("action_blunt.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_pierce.png"), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 90, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 90 + 20);
-		if (bestiaryKnowledge.bluntResistance) {
+		if (bestiaryKnowledge.pierceResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
-					width - 40, false, null, "" + gameObject.bluntResistance);
+					width - 40, false, null, "" + gameObject.pierceResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
@@ -324,14 +324,14 @@ public class PinWindow implements Draggable {
 
 		}
 
-		// Pierce resistance
+		// Blunt resistance
 
-		TextureUtils.drawTexture(getGlobalImage("action_pierce.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_blunt.png"), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 120, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 120 + 20);
-		if (bestiaryKnowledge.pierceResistance) {
+		if (bestiaryKnowledge.bluntResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
-					width - 40, false, null, "" + gameObject.pierceResistance);
+					width - 40, false, null, "" + gameObject.bluntResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,

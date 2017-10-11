@@ -1,5 +1,7 @@
 package com.marklynch.level.constructs.inventory;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.Game;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.StringWithColor;
@@ -23,8 +25,9 @@ public class WeaponComparisonDisplay {
 	int weaponDrawY;
 	int weapon2DrawX;
 
-	int stats1RightX;
-	int stats2X;
+	int statsOfEquippedRightX;
+	int statsOfHoveredX;
+	int iconsX;
 
 	int nameY;
 	int slashDamageY;
@@ -76,9 +79,9 @@ public class WeaponComparisonDisplay {
 		Color color2 = Color.WHITE;
 
 		// Name
-		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.name), nameY, Integer.MAX_VALUE,
-				false, null, new Object[] { new StringWithColor("" + weapon1.name, color1) });
-		TextUtils.printTextWithImages(stats2X, nameY, Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + weapon1.name), nameY,
+				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + weapon1.name, color1) });
+		TextUtils.printTextWithImages(statsOfHoveredX, nameY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.name, color2) });
 
 		// Slash Damage
@@ -92,26 +95,13 @@ public class WeaponComparisonDisplay {
 			color1 = Color.GREEN;
 			color2 = Color.RED;
 		}
-		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.slashDamage), slashDamageY,
-				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + weapon1.slashDamage, color1) });
-		TextUtils.printTextWithImages(stats2X, slashDamageY, Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + weapon1.slashDamage),
+				slashDamageY, Integer.MAX_VALUE, false, null,
+				new Object[] { new StringWithColor("" + weapon1.slashDamage, color1) });
+		TextUtils.printTextWithImages(statsOfHoveredX, slashDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.slashDamage, color2) });
-
-		// Blunt Damage
-		if (weapon1.bluntDamage == weapon2.bluntDamage) {
-			color1 = Color.WHITE;
-			color2 = Color.WHITE;
-		} else if (weapon1.bluntDamage < weapon2.bluntDamage) {
-			color1 = Color.RED;
-			color2 = Color.GREEN;
-		} else {
-			color1 = Color.GREEN;
-			color2 = Color.RED;
-		}
-		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.bluntDamage), bluntDamageY,
-				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + weapon1.bluntDamage, color1) });
-		TextUtils.printTextWithImages(stats2X, bluntDamageY, Integer.MAX_VALUE, false, null,
-				new Object[] { new StringWithColor("" + weapon2.bluntDamage, color2) });
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), iconsX, slashDamageY, iconsX + 16,
+				slashDamageY + 16);
 
 		// Pierce Damage
 		if (weapon1.pierceDamage == weapon2.pierceDamage) {
@@ -124,11 +114,32 @@ public class WeaponComparisonDisplay {
 			color1 = Color.GREEN;
 			color2 = Color.RED;
 		}
-		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.pierceDamage), pierceDamageY,
-				Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + weapon1.pierceDamage),
+				pierceDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon1.pierceDamage, color1) });
-		TextUtils.printTextWithImages(stats2X, pierceDamageY, Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfHoveredX, pierceDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.pierceDamage, color2) });
+		TextureUtils.drawTexture(getGlobalImage("action_pierce.png"), iconsX, pierceDamageY, iconsX + 16,
+				pierceDamageY + 16);
+
+		// Blunt Damage
+		if (weapon1.bluntDamage == weapon2.bluntDamage) {
+			color1 = Color.WHITE;
+			color2 = Color.WHITE;
+		} else if (weapon1.bluntDamage < weapon2.bluntDamage) {
+			color1 = Color.RED;
+			color2 = Color.GREEN;
+		} else {
+			color1 = Color.GREEN;
+			color2 = Color.RED;
+		}
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + weapon1.bluntDamage),
+				bluntDamageY, Integer.MAX_VALUE, false, null,
+				new Object[] { new StringWithColor("" + weapon1.bluntDamage, color1) });
+		TextUtils.printTextWithImages(statsOfHoveredX, bluntDamageY, Integer.MAX_VALUE, false, null,
+				new Object[] { new StringWithColor("" + weapon2.bluntDamage, color2) });
+		TextureUtils.drawTexture(getGlobalImage("action_blunt.png"), iconsX, bluntDamageY, iconsX + 16,
+				bluntDamageY + 16);
 
 		// Fire Damage
 		if (weapon1.fireDamage == weapon2.fireDamage) {
@@ -141,10 +152,11 @@ public class WeaponComparisonDisplay {
 			color1 = Color.GREEN;
 			color2 = Color.RED;
 		}
-		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.fireDamage), fireDamageY,
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + weapon1.fireDamage), fireDamageY,
 				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + weapon1.fireDamage, color1) });
-		TextUtils.printTextWithImages(stats2X, fireDamageY, Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfHoveredX, fireDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.fireDamage, color2) });
+		TextureUtils.drawTexture(getGlobalImage("action_burn.png"), iconsX, fireDamageY, iconsX + 16, fireDamageY + 16);
 
 		// Water Damage
 		if (weapon1.waterDamage == weapon2.waterDamage) {
@@ -157,10 +169,13 @@ public class WeaponComparisonDisplay {
 			color1 = Color.GREEN;
 			color2 = Color.RED;
 		}
-		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.waterDamage), waterDamageY,
-				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + weapon1.waterDamage, color1) });
-		TextUtils.printTextWithImages(stats2X, waterDamageY, Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + weapon1.waterDamage),
+				waterDamageY, Integer.MAX_VALUE, false, null,
+				new Object[] { new StringWithColor("" + weapon1.waterDamage, color1) });
+		TextUtils.printTextWithImages(statsOfHoveredX, waterDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.waterDamage, color2) });
+		TextureUtils.drawTexture(getGlobalImage("action_douse.png"), iconsX, waterDamageY, iconsX + 16,
+				waterDamageY + 16);
 
 		// Electrical Damage
 		if (weapon1.electricalDamage == weapon2.electricalDamage) {
@@ -173,11 +188,13 @@ public class WeaponComparisonDisplay {
 			color1 = Color.GREEN;
 			color2 = Color.RED;
 		}
-		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.electricalDamage),
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + weapon1.electricalDamage),
 				electricalDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon1.electricalDamage, color1) });
-		TextUtils.printTextWithImages(stats2X, electricalDamageY, Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfHoveredX, electricalDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.electricalDamage, color2) });
+		TextureUtils.drawTexture(getGlobalImage("action_electric.png"), iconsX, electricalDamageY, iconsX + 16,
+				electricalDamageY + 16);
 
 		// Posion Damage
 		if (weapon1.poisonDamage == weapon2.poisonDamage) {
@@ -190,11 +207,13 @@ public class WeaponComparisonDisplay {
 			color1 = Color.GREEN;
 			color2 = Color.RED;
 		}
-		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.poisonDamage), poisonDamageY,
-				Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + weapon1.poisonDamage),
+				poisonDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon1.poisonDamage, color1) });
-		TextUtils.printTextWithImages(stats2X, poisonDamageY, Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfHoveredX, poisonDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.poisonDamage, color2) });
+		TextureUtils.drawTexture(getGlobalImage("action_poison.png"), iconsX, poisonDamageY, iconsX + 16,
+				poisonDamageY + 16);
 
 		// Range
 		if (weapon1.maxRange == weapon2.maxRange) {
@@ -207,10 +226,11 @@ public class WeaponComparisonDisplay {
 			color1 = Color.GREEN;
 			color2 = Color.RED;
 		}
-		TextUtils.printTextWithImages(stats1RightX - Game.font.getWidth("" + weapon1.maxRange), rangeY,
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + weapon1.maxRange), rangeY,
 				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + weapon1.maxRange, color1) });
-		TextUtils.printTextWithImages(stats2X, rangeY, Integer.MAX_VALUE, false, null,
+		TextUtils.printTextWithImages(statsOfHoveredX, rangeY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.maxRange, color2) });
+		TextureUtils.drawTexture(getGlobalImage("action_burn.png"), iconsX, rangeY, iconsX + 16, rangeY + 16);
 
 	}
 
@@ -229,13 +249,14 @@ public class WeaponComparisonDisplay {
 		weaponDrawY = y;
 		weapon2DrawX = x + width - weaponWidth;
 
-		stats1RightX = x + halfWidth - 4;
-		stats2X = x + halfWidth + 4;
+		statsOfEquippedRightX = x + halfWidth - 10;
+		statsOfHoveredX = x + halfWidth + 10;
+		iconsX = x + halfWidth - 8;
 
 		nameY = y;
 		slashDamageY = y + 16;
-		bluntDamageY = y + 32;
-		pierceDamageY = y + 48;
+		pierceDamageY = y + 32;
+		bluntDamageY = y + 48;
 		fireDamageY = y + 64;
 		waterDamageY = y + 80;
 		electricalDamageY = y + 96;
