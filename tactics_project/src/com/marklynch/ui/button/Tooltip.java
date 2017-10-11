@@ -66,7 +66,7 @@ public class Tooltip {
 
 			// textWidth
 
-			QuadUtils.drawQuad(Color.WHITE, x1, x2, y1, y2);
+			QuadUtils.drawQuad(Color.WHITE, x1, y1, x2, y2);
 
 			TextUtils.printTextWithImages(x1, y1, wrapWidth, true, null, this.textWithColor);
 

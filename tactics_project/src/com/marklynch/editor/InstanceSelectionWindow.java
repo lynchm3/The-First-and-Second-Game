@@ -70,7 +70,7 @@ public class InstanceSelectionWindow<T> {
 
 	public void draw() {
 
-		QuadUtils.drawQuad(Color.WHITE, 0, Game.windowWidth, 0, Game.windowHeight);
+		QuadUtils.drawQuad(Color.WHITE, 0, 0, Game.windowWidth, Game.windowHeight);
 
 		for (SelectionWindowButton button : buttons) {
 			button.draw();

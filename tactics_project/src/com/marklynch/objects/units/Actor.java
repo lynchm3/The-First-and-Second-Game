@@ -726,11 +726,11 @@ public class Actor extends GameObject {
 
 		// White bit under health bar
 		QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), healthXInPixels + 1,
-				healthXInPixels + healthWidthInPixels - 1, healthYInPixels + 1,
+				healthYInPixels + 1, healthXInPixels + healthWidthInPixels - 1,
 				healthYInPixels + healthHeightInPixels - 1);
 
 		// Colored health bar
-		QuadUtils.drawQuad(color, healthXInPixels + 1, healthXInPixels + healthWidthInPixels - 1, healthYInPixels + 1,
+		QuadUtils.drawQuad(color, healthXInPixels + 1, healthYInPixels + 1, healthXInPixels + healthWidthInPixels - 1,
 				healthYInPixels + healthBarHeightInPixels - 1);
 		// }
 
@@ -738,8 +738,8 @@ public class Actor extends GameObject {
 
 		// hand anchor
 		QuadUtils.drawQuad(Color.BLACK, this.squareGameObjectIsOn.xInGridPixels + handAnchorX - 3,
-				this.squareGameObjectIsOn.xInGridPixels + handAnchorX + 3,
 				this.squareGameObjectIsOn.yInGridPixels + handAnchorY - 3,
+				this.squareGameObjectIsOn.xInGridPixels + handAnchorX + 3,
 				this.squareGameObjectIsOn.yInGridPixels + handAnchorY + 3);
 
 		// weapon
@@ -863,7 +863,7 @@ public class Actor extends GameObject {
 			float activityX2 = this.squareGameObjectIsOn.xInGridPixels + Game.font.getWidth(activityDescription);
 			float activityY1 = this.squareGameObjectIsOn.yInGridPixels - 20;
 			float activityY2 = this.squareGameObjectIsOn.yInGridPixels;
-			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityX2, activityY1, activityY2);
+			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityY1, activityX2, activityY2);
 			TextUtils.printTextWithImages(activityX1, activityY1, Integer.MAX_VALUE, false, null,
 					new Object[] { activityDescription });
 		}

@@ -279,7 +279,7 @@ public class AttributesDialog {
 	public void draw() {
 		// QuadUtils.drawQuad(Color.WHITE, x, x + width, y, Game.windowHeight);
 
-		QuadUtils.drawQuad(Color.WHITE, x, x + 200, y, y + 30);
+		QuadUtils.drawQuad(Color.WHITE, x, y, x + 200, y + 30);
 
 		TextUtils.printTextWithImages(x, y, 200, true, null, new Object[] { new StringWithColor(title, Color.BLACK) });
 

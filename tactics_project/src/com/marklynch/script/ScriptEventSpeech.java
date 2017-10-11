@@ -141,7 +141,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 			} else {
 				// NOT INLINE
 
-				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), 0f, Game.windowWidth, 0f, Game.windowHeight);
+				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), 0f, 0f, Game.windowWidth, Game.windowHeight);
 
 				float posY = Game.windowHeight / 2f;
 

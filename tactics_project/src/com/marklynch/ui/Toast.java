@@ -32,7 +32,7 @@ public class Toast {
 
 	public void draw() {
 
-		QuadUtils.drawQuad(Color.WHITE, x, x + width, y, y + height);
+		QuadUtils.drawQuad(Color.WHITE, x, y, x + width, y + height);
 		Game.activeBatch.setColor(Color.RED);
 		Game.font.drawText(Game.activeBatch, text, x, y);
 	}

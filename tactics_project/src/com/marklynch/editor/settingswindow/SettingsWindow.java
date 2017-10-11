@@ -25,7 +25,7 @@ public abstract class SettingsWindow {
 	}
 
 	public void draw() {
-		QuadUtils.drawQuad(Color.WHITE, 0, width, 100, Game.windowHeight);
+		QuadUtils.drawQuad(Color.WHITE, 0, 100, width, Game.windowHeight);
 		for (Button button : buttons) {
 			button.draw();
 		}

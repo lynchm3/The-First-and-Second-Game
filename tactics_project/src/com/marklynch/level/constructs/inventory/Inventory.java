@@ -973,7 +973,7 @@ public class Inventory implements Draggable, Scrollable {
 	public void drawStaticUI() {
 
 		// Black cover
-		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, 0, Game.windowHeight);
+		QuadUtils.drawQuad(backgroundColor, 0, 0, Game.windowWidth, Game.windowHeight);
 
 		drawBorder();
 
@@ -994,8 +994,8 @@ public class Inventory implements Draggable, Scrollable {
 			} else {
 				float emptyStringX = groundDisplay.squaresX + this.squaresWidth / 2 - GroundDisplay.lengthEmpty / 2;
 				float emptyStringY = groundDisplay.squaresY + this.squaresHeight / 2 - 10;
-				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringX + GroundDisplay.lengthEmpty + 8,
-						emptyStringY - 8, emptyStringY + 28);
+				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringY - 8,
+						emptyStringX + GroundDisplay.lengthEmpty + 8, emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null,
 						new Object[] { GroundDisplay.stringEmpty });
 			}
@@ -1049,7 +1049,7 @@ public class Inventory implements Draggable, Scrollable {
 			} else {
 				float emptyStringX = otherInventory.squaresX + otherInventory.squaresWidth / 2 - lengthEmpty / 2;
 				float emptyStringY = otherInventory.squaresY + otherInventory.squaresHeight / 2 - 10;
-				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringX + lengthEmpty + 8, emptyStringY - 8,
+				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringY - 8, emptyStringX + lengthEmpty + 8,
 						emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null,
 						new Object[] { stringEmpty });
@@ -1086,10 +1086,10 @@ public class Inventory implements Draggable, Scrollable {
 		}
 
 		// Top border black mask
-		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, 0, topBorderHeight);
+		QuadUtils.drawQuad(backgroundColor, 0, 0, Game.windowWidth, topBorderHeight);
 
 		// Bottom border black mask
-		QuadUtils.drawQuad(backgroundColor, 0, Game.windowWidth, Game.windowHeight - bottomBorderHeight,
+		QuadUtils.drawQuad(backgroundColor, 0, Game.windowHeight - bottomBorderHeight, Game.windowWidth,
 				Game.windowHeight);
 
 		// [SHIFT]
@@ -1297,7 +1297,7 @@ public class Inventory implements Draggable, Scrollable {
 	}
 
 	public void drawBorder() {
-		QuadUtils.drawQuad(inventoryAreaColor, squaresX, squaresX + squaresWidth, this.squaresY,
+		QuadUtils.drawQuad(inventoryAreaColor, squaresX, this.squaresY, squaresX + squaresWidth,
 				this.squaresY + squaresHeight);
 	}
 

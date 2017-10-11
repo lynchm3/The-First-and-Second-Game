@@ -199,7 +199,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		// links.clear();
 
 		// Black cover
-		QuadUtils.drawQuad(Color.BLACK, 0, Game.windowWidth, 0, Game.windowHeight);
+		QuadUtils.drawQuad(Color.BLACK, 0, 0, Game.windowWidth, Game.windowHeight);
 
 		// Content
 		int questTextsDrawn = 0;
@@ -272,15 +272,15 @@ public class AdventureLog implements Draggable, Scrollable {
 
 				if (currentObjective.gameObject != null && currentObjective.showMarker) {
 					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
-						currentObjective.gameObject.squareGameObjectIsOn.drawObjective(markersDrawn);
+						currentObjective.gameObject.squareGameObjectIsOn.drawObjective();
 					} else if (currentObjective.gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject
 							&& ((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn != null) {
 						((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn
-								.drawObjective(markersDrawn);
+								.drawObjective();
 
 					}
 				} else if (currentObjective.square != null) {
-					currentObjective.square.drawObjective(markersDrawn);
+					currentObjective.square.drawObjective();
 				}
 				markersDrawn++;
 
@@ -288,9 +288,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		}
 	}
 
-	public static void drawQuestMarkersForOffScreenObjectives() { // i have no
-																	// idea what
-																	// this does
+	public static void drawQuestMarkersForOffScreenObjectives() {
 		for (Quest activeQuest : activeQuests) {
 			int x1 = (int) Game.halfWindowWidth;
 			int y1 = (int) Game.halfWindowHeight;
@@ -298,7 +296,6 @@ public class AdventureLog implements Draggable, Scrollable {
 			int x2 = Integer.MAX_VALUE;
 			int y2 = Integer.MAX_VALUE;
 
-			int markersDrawn = 0;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
 				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null
@@ -336,10 +333,10 @@ public class AdventureLog implements Draggable, Scrollable {
 					int[] intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
 
 					if (intersect != null) {
-						TextureUtils.drawTexture(Game.level.gameCursor.cursor, intersect[0] - 10, intersect[1] - 10,
-								intersect[0] + 10, intersect[1] + 10);
-
-						markersDrawn++;
+						QuadUtils.drawQuad(Color.WHITE, intersect[0] - 20, intersect[1] - 10, intersect[0],
+								intersect[1] + 10);
+						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0] - 20,
+								intersect[1] - 10, intersect[0], intersect[1] + 10);
 						continue;
 					}
 
@@ -352,10 +349,10 @@ public class AdventureLog implements Draggable, Scrollable {
 					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
 
 					if (intersect != null) {
-						TextureUtils.drawTexture(Game.level.gameCursor.cursor, intersect[0] - 10, intersect[1] - 10,
-								intersect[0] + 10, intersect[1] + 10);
-
-						markersDrawn++;
+						QuadUtils.drawQuad(Color.WHITE, intersect[0], intersect[1] - 10, intersect[0] + 20,
+								intersect[1] + 10);
+						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0],
+								intersect[1] - 10, intersect[0] + 20, intersect[1] + 10);
 						continue;
 					}
 
@@ -368,10 +365,11 @@ public class AdventureLog implements Draggable, Scrollable {
 					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
 
 					if (intersect != null) {
-						TextureUtils.drawTexture(Game.level.gameCursor.cursor, intersect[0] - 10, intersect[1] - 10,
-								intersect[0] + 10, intersect[1] + 10);
+						QuadUtils.drawQuad(Color.WHITE, intersect[0] - 10, intersect[1], intersect[0] + 10,
+								intersect[1] + 20);
+						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0] - 10,
+								intersect[1], intersect[0] + 10, intersect[1] + 20);
 
-						markersDrawn++;
 						continue;
 					}
 
@@ -384,14 +382,13 @@ public class AdventureLog implements Draggable, Scrollable {
 					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
 
 					if (intersect != null) {
-						TextureUtils.drawTexture(Game.level.gameCursor.cursor, intersect[0] - 10, intersect[1] - 10,
-								intersect[0] + 10, intersect[1] + 10);
+						QuadUtils.drawQuad(Color.WHITE, intersect[0] - 10, intersect[1] - 20, intersect[0] + 10,
+								intersect[1]);
+						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0] - 10,
+								intersect[1] - 20, intersect[0] + 10, intersect[1]);
 
-						markersDrawn++;
 						continue;
 					}
-
-					markersDrawn++;
 
 				}
 

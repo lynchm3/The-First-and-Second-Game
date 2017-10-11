@@ -28,7 +28,7 @@ public class ActivityLogger implements Draggable, Scrollable {
 			return;
 
 		// Log
-		QuadUtils.drawQuad(Color.BLACK, x, x + width, 0, Game.windowHeight);
+		QuadUtils.drawQuad(Color.BLACK, x, 0, x + width, Game.windowHeight);
 
 		float heightSoFar = 0;
 

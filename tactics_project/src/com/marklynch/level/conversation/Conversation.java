@@ -54,8 +54,8 @@ public class Conversation {
 		y1 = Game.windowHeight - bottomMargin - height;
 		x2 = width;
 		y2 = Game.windowHeight - bottomMargin;
-		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, Game.windowWidth, 0, Game.windowHeight);
-		QuadUtils.drawQuad(Color.BLACK, x1, x2, y1, y2);
+		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, 0, Game.windowWidth, Game.windowHeight);
+		QuadUtils.drawQuad(Color.BLACK, x1, y1, x2, y2);
 		currentConversationPart.drawStaticUI1();
 		currentConversationPart.drawStaticUI2();
 		// TextUtils.printTextWithImages(new Object[] { object }, realX, realY,

@@ -52,16 +52,16 @@ public class AtributesWindowButton extends Button {
 
 			if (enabled) {
 				if (down) {
-					QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
+					QuadUtils.drawQuad(Color.BLACK, realX, realY, realX + width, realY + height);
 					TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null,
 							new Object[] { attribute });
 				} else {
-					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
+					QuadUtils.drawQuad(Color.DARK_GRAY, realX, realY, realX + width, realY + height);
 					TextUtils.printTextWithImages(realX, realY, 200, false, null, new Object[] { attribute });
 				}
 			} else {
 
-				QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
+				QuadUtils.drawQuad(Color.RED, realX, realY, realX + width, realY + height);
 				TextUtils.printTextWithImages(realX, realY, 200, false, null, new Object[] { attribute });
 			}
 
@@ -81,17 +81,17 @@ public class AtributesWindowButton extends Button {
 				if (arrayList != null) {
 					if (enabled) {
 						if (down) {
-							QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
+							QuadUtils.drawQuad(Color.BLACK, realX, realY, realX + width, realY + height);
 							TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null,
 									new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
 						} else {
-							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
+							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realY, realX + width, realY + height);
 							TextUtils.printTextWithImages(realX, realY, 200, false, null,
 									new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
 						}
 					} else {
 
-						QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
+						QuadUtils.drawQuad(Color.RED, realX, realY, realX + width, realY + height);
 						TextUtils.printTextWithImages(realX, realY, 200, false, null,
 								new Object[] { attribute + "[" + index + "]: ", arrayList.get(index) });
 					}
@@ -99,17 +99,17 @@ public class AtributesWindowButton extends Button {
 				} else {
 					if (enabled) {
 						if (down) {
-							QuadUtils.drawQuad(Color.BLACK, realX, realX + width, realY, realY + height);
+							QuadUtils.drawQuad(Color.BLACK, realX, realY, realX + width, realY + height);
 							TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null,
 									new Object[] { attribute + ": ", field.get(object) });
 						} else {
-							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realX + width, realY, realY + height);
+							QuadUtils.drawQuad(Color.DARK_GRAY, realX, realY, realX + width, realY + height);
 							TextUtils.printTextWithImages(realX, realY, 200, false, null,
 									new Object[] { attribute + ": ", field.get(object) });
 						}
 					} else {
 
-						QuadUtils.drawQuad(Color.RED, realX, realX + width, realY, realY + height);
+						QuadUtils.drawQuad(Color.RED, realX, realY, realX + width, realY + height);
 						TextUtils.printTextWithImages(realX, realY, 200, false, null,
 								new Object[] { attribute + ": ", field.get(object) });
 					}

@@ -141,7 +141,7 @@ public class PinWindow implements Draggable {
 			// Game.halfWindowWidth, drawPositionY, Game.halfWindowHeight);
 
 			// Background
-			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width, drawPositionY, drawPositionY + height);
+			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionY, drawPositionX + width, drawPositionY + height);
 
 			// GameObject Image
 			TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
@@ -166,10 +166,10 @@ public class PinWindow implements Draggable {
 		// Borders (left,right,bottom)
 		if (!minimised) {
 
-			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionX + 2, drawPositionY, drawPositionY + height);
-			QuadUtils.drawQuad(Color.BLACK, drawPositionX + width - 2, drawPositionX + width, drawPositionY,
+			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionY, drawPositionX + 2, drawPositionY + height);
+			QuadUtils.drawQuad(Color.BLACK, drawPositionX + width - 2, drawPositionY, drawPositionX + width,
 					drawPositionY + height);
-			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionX + width, drawPositionY + height - 2,
+			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionY + height - 2, drawPositionX + width,
 					drawPositionY + height);
 		}
 	}

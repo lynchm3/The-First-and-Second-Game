@@ -444,7 +444,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// GL11.glPopMatrix();
 	}
 
-	public void drawObjective(int objectiveNumber) {
+	public void drawObjective() {
 		float squarePositionX = xInGridPixels;
 		float squarePositionY = yInGridPixels;
 

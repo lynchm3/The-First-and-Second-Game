@@ -618,7 +618,7 @@ public class TextUtils {
 				Color color = (Color) content;
 
 				float x = posX + offsetX;
-				QuadUtils.drawQuad(color, x, x + 20, posY + offsetY, posY + offsetY + 20);
+				QuadUtils.drawQuad(color, x, posY + offsetY, x + 20, posY + offsetY + 20);
 				offsetX += 20;
 
 			} else if (content instanceof ScriptEvent) {

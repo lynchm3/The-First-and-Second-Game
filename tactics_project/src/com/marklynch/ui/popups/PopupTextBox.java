@@ -49,19 +49,19 @@ public class PopupTextBox {
 		// }
 
 		// Full blakc bg
-		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, Game.windowWidth, 0, Game.windowHeight);
+		QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, 0, Game.windowWidth, Game.windowHeight);
 		// Instructions
 		TextUtils.printTextWithImages(drawPositionX, drawPositionY - 36, Integer.MAX_VALUE, true, null,
 				new Object[] { instructions });
 		// Text box
-		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionX + width + 4, drawPositionY, drawPositionY + height);
+		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionY, drawPositionX + width + 4, drawPositionY + height);
 		// Text string
 		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, true, null,
 				new Object[] { tempString });
 		// Caret
 		if (caretOn) {
-			QuadUtils.drawQuad(Color.BLACK, drawPositionX + caretPosition, drawPositionX + caretPosition + 2,
-					drawPositionY, drawPositionY + height);
+			QuadUtils.drawQuad(Color.BLACK, drawPositionX + caretPosition, drawPositionY,
+					drawPositionX + caretPosition + 2, drawPositionY + height);
 
 		}
 	}
