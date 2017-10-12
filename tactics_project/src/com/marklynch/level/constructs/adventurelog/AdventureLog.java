@@ -463,7 +463,7 @@ public class AdventureLog implements Draggable, Scrollable {
 		}
 	}
 
-	public void createButtonsToTrackObjectives() {
+	public static void createButtonsToTrackObjectives() {
 		Game.level.buttons.removeAll(buttonsToTrackObjectives);
 		buttonsToTrackObjectives.clear();
 

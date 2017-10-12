@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.adventurelog.AdventureInfo;
+import com.marklynch.level.constructs.adventurelog.AdventureLog;
 import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;
@@ -44,6 +45,7 @@ public class Quest {
 				start();
 			}
 			currentObjectives.add(objective);
+			AdventureLog.createButtonsToTrackObjectives();
 		}
 	}
 
