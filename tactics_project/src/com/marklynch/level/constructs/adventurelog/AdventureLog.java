@@ -272,7 +272,6 @@ public class AdventureLog implements Draggable, Scrollable {
 
 	public void drawQuestsMarkersForOnScreenObjectives() {
 		for (Quest activeQuest : activeQuests) {
-			int markersDrawn = 0;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
 				if (currentObjective.gameObject != null && currentObjective.showMarker) {
@@ -287,7 +286,6 @@ public class AdventureLog implements Draggable, Scrollable {
 				} else if (currentObjective.square != null) {
 					currentObjective.square.drawObjective(currentObjective);
 				}
-				markersDrawn++;
 
 			}
 		}
@@ -305,8 +303,15 @@ public class AdventureLog implements Draggable, Scrollable {
 
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
-				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null
-						&& currentObjective.showMarker) {
+				if ((currentObjective.gameObject == null || currentObjective.gameObject.squareGameObjectIsOn == null)
+						&& currentObjective.square == null && currentObjective.showMarker == false) {
+					return;
+				}
+
+				x2 = Integer.MAX_VALUE;
+				y2 = Integer.MAX_VALUE;
+
+				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
 
 					targetSquare = currentObjective.gameObject.squareGameObjectIsOn;
 					float squareX = (currentObjective.gameObject.squareGameObjectIsOn.xInGridPixels);
