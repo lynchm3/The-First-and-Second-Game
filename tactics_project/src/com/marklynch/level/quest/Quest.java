@@ -63,6 +63,7 @@ public class Quest {
 			}
 
 			info.setTurn(Game.level.turn);
+			info.setSquare(Game.level.player.squareGameObjectIsOn);
 			infoList.add(info);
 		}
 

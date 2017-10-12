@@ -45,7 +45,10 @@ public class TextUtils {
 		float offsetY = 0;
 
 		for (Object content : contents) {
-			if (content instanceof String || content instanceof StringWithColor || content instanceof Integer
+			if (content instanceof NewLine) {
+				offsetY += 20;
+				offsetX = 0;
+			} else if (content instanceof String || content instanceof StringWithColor || content instanceof Integer
 					|| content instanceof Float || content instanceof Boolean || content instanceof Tooltip) {
 
 				String string = null;
@@ -374,6 +377,10 @@ public class TextUtils {
 		printTextWithImages(new ArrayList<Object>(Arrays.asList(contents)), posX, posY, maxWidth, wrap, links);
 	}
 
+	public static class NewLine {
+		public static final NewLine NEW_LINE = new NewLine();
+	}
+
 	public static void printTextWithImages(ArrayList<Object> contents, float posX, float posY, float maxWidth,
 			boolean wrap, ArrayList<Link> links) {
 
@@ -387,7 +394,11 @@ public class TextUtils {
 		Game.activeBatch.setColor(Color.WHITE);
 
 		for (Object content : contents) {
-			if (content instanceof String || content instanceof StringWithColor || content instanceof Integer
+
+			if (content instanceof NewLine) {
+				offsetY += 20;
+				offsetX = 0;
+			} else if (content instanceof String || content instanceof StringWithColor || content instanceof Integer
 					|| content instanceof Float || content instanceof Boolean || content instanceof Tooltip) {
 
 				String string = null;
