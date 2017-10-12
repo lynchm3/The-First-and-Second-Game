@@ -347,7 +347,7 @@ public class TextUtils {
 
 	public static ArrayList<Link> getLinks(ArrayList<Object> contents) {
 
-		ArrayList<Link> buttons = new ArrayList<Link>();
+		ArrayList<Link> links = new ArrayList<Link>();
 		for (Object content : contents) {
 			if (content instanceof GameObjectTemplate) {
 				GameObjectTemplate gameObject = (GameObjectTemplate) content;
@@ -356,19 +356,31 @@ public class TextUtils {
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
-				buttons.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content));
+				links.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content,
+						"Pin details"));
 			} else if (content instanceof Quest) {
 				Quest quest = (Quest) content;
 
 				float width = Game.font.getWidth(quest.name);
 
-				buttons.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content));
+				links.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content,
+						"View quest"));
+
+			} else if (content instanceof Square) {
+
+				System.out.println("SQUARE LINK");
+				Square square = (Square) content;
+
+				float width = Game.font.getWidth(square.name);
+
+				links.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content,
+						"View square"));
 
 			}
 
 		}
 
-		return buttons;
+		return links;
 
 	}
 
@@ -689,6 +701,12 @@ public class TextUtils {
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
+				}
+
+				if (links != null) {
+					Game.activeBatch.setColor(Color.YELLOW);
+					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
+					linkIndex++;
 				}
 
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);

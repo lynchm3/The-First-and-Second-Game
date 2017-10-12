@@ -185,7 +185,7 @@ public class AdventureLog implements Draggable, Scrollable {
 
 		for (AdventureInfo info : questToDisplayInAdventureLog.infoList) {
 
-			ArrayList<Link> generatedLinks = TextUtils.getLinks(true, info.object);
+			ArrayList<Link> generatedLinks = TextUtils.getLinks(true, info.getSquare(), info.object);
 			linkMap.put(info, generatedLinks);
 			links.addAll(generatedLinks);
 		}

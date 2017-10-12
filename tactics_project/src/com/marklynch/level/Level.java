@@ -466,7 +466,8 @@ public class Level {
 			@Override
 			public void click() {
 				cameraFollow = true;
-				centerToPlayer = true;
+				centerToSquare = true;
+				squareToCenterTo = Game.level.player.squareGameObjectIsOn;
 			}
 		});
 		centerButton.enabled = true;
@@ -546,7 +547,8 @@ public class Level {
 	boolean zoomToMap;
 	boolean zoomFromMap;
 	int nonMapZoomLevelIndex;
-	boolean centerToPlayer;
+	public boolean centerToSquare;
+	public Square squareToCenterTo;
 
 	public void openCloseInventory() {
 		if (Game.level.openInventories.size() > 0) {
@@ -1379,12 +1381,10 @@ public class Level {
 		}
 
 		// update map zoom animation
-		if (centerToPlayer) {
+		if (centerToSquare) {
 
-			float idealDragX = (-Game.level.player.squareGameObjectIsOn.xInGridPixels) + Game.halfWindowWidth
-					- Game.HALF_SQUARE_WIDTH;
-			float idealDragY = (-Game.level.player.squareGameObjectIsOn.yInGridPixels) + Game.halfWindowHeight
-					- Game.HALF_SQUARE_HEIGHT;
+			float idealDragX = (-squareToCenterTo.xInGridPixels) + Game.halfWindowWidth - Game.HALF_SQUARE_WIDTH;
+			float idealDragY = (-squareToCenterTo.yInGridPixels) + Game.halfWindowHeight - Game.HALF_SQUARE_HEIGHT;
 
 			float diffX = idealDragX - Game.dragX;
 			float diffY = idealDragY - Game.dragY;
@@ -1393,7 +1393,7 @@ public class Level {
 			if (totalDiff <= delta * 16f) {
 				Game.dragX = idealDragX;
 				Game.dragY = idealDragY;
-				centerToPlayer = false;
+				centerToSquare = false;
 			} else {
 				float toMoveX = diffX / totalDiff;
 				float toMoveY = diffY / totalDiff;
