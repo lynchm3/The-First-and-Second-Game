@@ -162,12 +162,12 @@ public class AdventureLog implements Draggable, Scrollable {
 				if (questToDisplayInAdventureLog == quest) {
 					buttonToShowQuestDetails.buttonColor = Color.WHITE;
 					buttonToShowQuestDetails.setTextColor(Color.BLACK);
-					// quest.updatedSinceLastViewed = false;
+					quest.updatedSinceLastViewed = false;
 				}
 
-				if (quest.turnStarted == Game.level.turn) {
-					buttonToShowQuestDetails.click();
-				}
+				// if (quest.turnStarted == Game.level.turn) {
+				// buttonToShowQuestDetails.click();
+				// }
 
 				if (questToDisplayInAdventureLog == null) {
 					buttonToShowQuestDetails.click();
