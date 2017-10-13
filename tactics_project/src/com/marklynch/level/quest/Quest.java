@@ -22,6 +22,7 @@ public class Quest {
 	public boolean resolved = false;
 	public int turnStarted;
 	public int turnUpdated;
+	public boolean updatedSinceLastViewed;
 
 	// Called my members of quest when they dont know what to do
 	public boolean update(Actor actor) {
@@ -81,6 +82,7 @@ public class Quest {
 		Game.level.activityLogger
 				.addActivityLog(new ActivityLog(new Object[] { Game.level.player, " started quest ", this }));
 		turnStarted = turnUpdated = Level.turn;
+		updatedSinceLastViewed = true;
 	}
 
 	public void hasBeenUpdated() {
@@ -89,6 +91,7 @@ public class Quest {
 			Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " updated" }));
 			Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { "Quest ", this, " was updated" }));
 			turnUpdated = Level.turn;
+			updatedSinceLastViewed = true;
 		}
 	}
 

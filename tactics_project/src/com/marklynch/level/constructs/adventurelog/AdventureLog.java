@@ -57,6 +57,7 @@ public class AdventureLog implements Draggable, Scrollable {
 
 	public static Texture checkBoxChecked;
 	public static Texture checkBoxUnchecked;
+	public static Texture exclamationTexture;
 
 	public AdventureLog() {
 		resize();
@@ -75,6 +76,7 @@ public class AdventureLog implements Draggable, Scrollable {
 	public static void loadStaticImages() {
 		checkBoxChecked = ResourceUtils.getGlobalImage("check_box_checked.png");
 		checkBoxUnchecked = ResourceUtils.getGlobalImage("check_box_unchecked.png");
+		exclamationTexture = ResourceUtils.getGlobalImage("exclamation_mark.png");
 	}
 
 	public void resize() {
@@ -152,6 +154,7 @@ public class AdventureLog implements Draggable, Scrollable {
 						buttonToShowQuestDetails.setTextColor(Color.BLACK);
 						questToDisplayInAdventureLog = quest;
 						generateLinks();
+						quest.updatedSinceLastViewed = false;
 
 					}
 				});
@@ -159,6 +162,7 @@ public class AdventureLog implements Draggable, Scrollable {
 				if (questToDisplayInAdventureLog == quest) {
 					buttonToShowQuestDetails.buttonColor = Color.WHITE;
 					buttonToShowQuestDetails.setTextColor(Color.BLACK);
+					// quest.updatedSinceLastViewed = false;
 				}
 
 				if (quest.turnStarted == Game.level.turn) {
@@ -167,7 +171,6 @@ public class AdventureLog implements Draggable, Scrollable {
 
 				if (questToDisplayInAdventureLog == null) {
 					buttonToShowQuestDetails.click();
-					;
 				}
 
 				buttons.add(buttonToShowQuestDetails);
@@ -228,10 +231,12 @@ public class AdventureLog implements Draggable, Scrollable {
 			button.draw();
 		}
 
-		// check box
+		// check box && exclamation mark
 		int questsDrawnInList = 0;
 		for (final Quest quest : Level.quests) {
 			if (quest.started) {
+
+				// Check box
 				Texture checkBoxTextureToUse = checkBoxUnchecked;
 				if (activeQuests.contains(quest)) {
 					checkBoxTextureToUse = checkBoxChecked;
@@ -242,7 +247,18 @@ public class AdventureLog implements Draggable, Scrollable {
 
 				TextureUtils.drawTexture(checkBoxTextureToUse, checkBoxx1, checkBoxY1, checkBoxx1 + listItemHeight,
 						checkBoxY1 + listItemHeight);
+
+				// Exclamation
+				if (quest.updatedSinceLastViewed) {
+					float exclamationX1 = listX + listBorder + listWidth - listItemHeight * 2;
+					float exclamationY1 = listY + listBorder + questsDrawnInList * listItemHeight;
+
+					TextureUtils.drawTexture(exclamationTexture, exclamationX1, exclamationY1,
+							exclamationX1 + listItemHeight, exclamationY1 + listItemHeight);
+				}
+
 				questsDrawnInList++;
+
 			}
 		}
 	}
