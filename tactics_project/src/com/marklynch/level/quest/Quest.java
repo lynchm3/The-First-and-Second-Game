@@ -77,7 +77,7 @@ public class Quest {
 		if (started)
 			return;
 		started = true;
-		Game.level.notifications.add(new Notification(new Object[] { "Quest " + name + " started!" }));
+		Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " started!" }));
 		Game.level.activityLogger
 				.addActivityLog(new ActivityLog(new Object[] { Game.level.player, " started quest ", this }));
 		turnStarted = turnUpdated = Level.turn;
@@ -86,7 +86,7 @@ public class Quest {
 	public void hasBeenUpdated() {
 
 		if (turnUpdated < Level.turn) {
-			Game.level.notifications.add(new Notification(new Object[] { "Quest " + name + " updated" }));
+			Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " updated" }));
 			Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { "Quest ", this, " was updated" }));
 			turnUpdated = Level.turn;
 		}

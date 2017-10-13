@@ -1620,6 +1620,11 @@ public class Level {
 		for (Notification notification : notifications) {
 			if (notification.mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
 				return notification.closeButton;
+
+			for (Button button : notification.links) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
 		}
 
 		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
