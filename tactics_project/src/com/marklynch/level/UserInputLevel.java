@@ -800,7 +800,7 @@ public class UserInputLevel {
 
 		Level.closeAllPopups();
 		Game.level.popupTextBoxes.clear();
-		Game.level.popupToasts.clear();
+		// Game.level.notifications.clear();
 		if (Level.adventureLog.showing) {
 			Game.level.openCloseAdventureLog();
 		} else if (Game.level.openInventories.size() != 0) {

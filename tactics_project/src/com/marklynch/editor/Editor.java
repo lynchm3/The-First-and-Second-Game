@@ -52,7 +52,7 @@ import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech;
 import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.script.trigger.ScriptTriggerActorSelected;
-import com.marklynch.ui.Toast;
+import com.marklynch.ui.EditorToast;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -103,7 +103,7 @@ public class Editor {
 	public RelationsSettingsWindow relationsSettingsWindow;
 	public SpeechPartSettingsWindow speechPartSettingsWindow;
 	public Popup popup;
-	public Toast toast;
+	public EditorToast toast;
 
 	public GameObject selectedGameObject;
 
@@ -834,7 +834,7 @@ public class Editor {
 			// Give to Actor X
 			// Put in Object Y
 		} else {
-			this.toast = new Toast("No space for the object here! Please pick a different square. :)");
+			this.toast = new EditorToast("No space for the object here! Please pick a different square. :)");
 		}
 	}
 
@@ -847,14 +847,14 @@ public class Editor {
 		}
 		square.inventory.add(gameObject);
 		this.objectsSettingsWindow.update();
-		this.toast = new Toast("Select a location to add object");
+		this.toast = new EditorToast("Select a location to add object");
 	}
 
 	public void placeObjectInInventory(GameObject gameObjectThatCanHoldOtherObjects) {
 		GameObject gameObjectToPutInInventroy = gameObjectTemplate.makeCopy(null, null);
 		gameObjectThatCanHoldOtherObjects.inventory.add(gameObjectToPutInInventroy);
 		this.objectsSettingsWindow.update();
-		this.toast = new Toast("Select a location to add object");
+		this.toast = new EditorToast("Select a location to add object");
 		// if (gameObject instanceof Actor) {
 		// gameObject.faction.actors.add((Actor) gameObject);
 		// } else {

@@ -5,7 +5,7 @@ import com.marklynch.utils.QuadUtils;
 
 import mdesl.graphics.Color;
 
-public class Toast {
+public class EditorToast {
 
 	float x;
 	float y;
@@ -14,7 +14,7 @@ public class Toast {
 	float width;
 	float height;
 
-	public Toast(String text) {
+	public EditorToast(String text) {
 		this.x = 200f;
 		this.y = 50f;
 		this.text = text;
@@ -22,7 +22,7 @@ public class Toast {
 		this.height = 30;
 	}
 
-	public Toast(float x, float y, String text) {
+	public EditorToast(float x, float y, String text) {
 		this.x = x;
 		this.y = y;
 		this.text = text;

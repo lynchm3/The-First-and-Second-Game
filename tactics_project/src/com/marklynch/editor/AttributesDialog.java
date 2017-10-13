@@ -13,7 +13,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
-import com.marklynch.ui.Toast;
+import com.marklynch.ui.EditorToast;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -207,7 +207,7 @@ public class AttributesDialog {
 					editor.clearSelectedObject();
 					editor.settingsWindow.update();
 					editor.objectsSettingsWindow.addObjectsButton.down = true;
-					editor.toast = new Toast(200, 50, "Select location to add object");
+					editor.toast = new EditorToast(200, 50, "Select location to add object");
 				}
 			});
 		} else if (object instanceof Faction) {

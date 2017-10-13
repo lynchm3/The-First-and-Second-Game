@@ -32,7 +32,7 @@ import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
-import com.marklynch.ui.popups.PopupToast;
+import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
@@ -323,13 +323,13 @@ public class Inventory implements Draggable, Scrollable {
 					if (otherInventory.size() == 0) {
 						Game.level.openCloseInventory();
 						Object[] objects = new Object[] { "Looted everything!" };
-						Game.level.popupToasts.add(new PopupToast(objects));
+						Game.level.notifications.add(new Notification(objects));
 					}
 				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
 					if (groundDisplay.gameObjects.size() == 0) {
 						Game.level.openCloseInventory();
 						Object[] objects = new Object[] { "Looted everything!" };
-						Game.level.popupToasts.add(new PopupToast(objects));
+						Game.level.notifications.add(new Notification(objects));
 					}
 				}
 

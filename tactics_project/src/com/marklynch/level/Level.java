@@ -57,16 +57,15 @@ import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.PinWindow;
-import com.marklynch.ui.Toast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
 import com.marklynch.ui.popups.PopupMenuActionButton;
 import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
 import com.marklynch.ui.popups.PopupTextBox;
-import com.marklynch.ui.popups.PopupToast;
 import com.marklynch.ui.quickbar.QuickBar;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -125,10 +124,9 @@ public class Level {
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
-	public ArrayList<PopupToast> popupToasts = new ArrayList<PopupToast>();
+	public ArrayList<Notification> notifications = new ArrayList<Notification>();
 	public ArrayList<PinWindow> popupPinneds = new ArrayList<PinWindow>();
 
-	public Toast toast;
 	public Conversation conversation;
 	public transient LevelButton endTurnButton;
 	public transient LevelButton centerButton;
@@ -1307,8 +1305,17 @@ public class Level {
 		for (PopupTextBox popupTextBox : popupTextBoxes) {
 			popupTextBox.draw();
 		}
-		for (PopupToast popupToast : popupToasts) {
-			popupToast.draw();
+
+		// Notifications
+		float notificationsHeight = Notification.border;
+		Notification.x = Game.halfWindowWidth - Notification.halfWidth;
+		Notification.textX = Notification.x + Notification.border;
+		Notification.closeButtonX = Notification.x + Notification.width - Notification.closeButtonWidth;
+		for (Notification notification : notifications) {
+			notification.y = notification.closeButton.y = notificationsHeight;
+			notification.closeButton.x = Notification.closeButtonX;
+			notification.draw();
+			notificationsHeight += notification.height + Notification.border;
 		}
 
 		if (Game.buttonHoveringOver != null)
@@ -1457,12 +1464,12 @@ public class Level {
 
 					Object[] objects = new Object[] { "Theres a ",
 							player.playerTargetSquare.inventory.getGameObjectThatCantShareSquare(), " there!" };
-					popupToasts.add(new PopupToast(objects));
+					notifications.add(new Notification(objects));
 					Game.level.logOnScreen(new ActivityLog(objects));
 					pausePlayer();
 				} else {
 					Object[] objects = new Object[] { "There's no available path" };
-					popupToasts.add(new PopupToast(objects));
+					notifications.add(new Notification(objects));
 					Game.level.logOnScreen(new ActivityLog(objects));
 					pausePlayer();
 
@@ -1489,12 +1496,12 @@ public class Level {
 			if (!action.enabled) {
 				Object[] objects = new Object[] { "Path blocked by ",
 						squareToMoveTo.inventory.getGameObjectThatCantShareSquare(), "!" };
-				popupToasts.add(new PopupToast(objects));
+				notifications.add(new Notification(objects));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
 				pausePlayer();
 			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
 				Object[] objects = new Object[] { "Stopped before illegal action!" };
-				popupToasts.add(new PopupToast(objects));
+				notifications.add(new Notification(objects));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
 				pausePlayer();
 			} else {
@@ -1503,9 +1510,6 @@ public class Level {
 				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
 					pausePlayer();
 				} else {
-
-					Object[] objects = new Object[] { "WASD, SPACE or CLICK to stop" };
-					popupToasts.add(new PopupToast(objects));
 					highlightPlayButton();
 				}
 			}
@@ -1611,6 +1615,11 @@ public class Level {
 				}
 			}
 			return null;
+		}
+
+		for (Notification notification : notifications) {
+			if (notification.mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
+				return notification.closeButton;
 		}
 
 		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
@@ -1781,7 +1790,7 @@ public class Level {
 				// }
 			}
 
-			popupToasts.clear();
+			// notifications.clear();
 
 			for (Quest quest : quests)
 				quest.update();

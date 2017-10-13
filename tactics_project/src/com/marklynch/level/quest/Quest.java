@@ -10,7 +10,7 @@ import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.ui.popups.PopupToast;
+import com.marklynch.ui.popups.Notification;
 
 public class Quest {
 
@@ -77,7 +77,7 @@ public class Quest {
 		if (started)
 			return;
 		started = true;
-		Game.level.popupToasts.add(new PopupToast(new Object[] { "Quest " + name + " started!" }));
+		Game.level.notifications.add(new Notification(new Object[] { "Quest " + name + " started!" }));
 		Game.level.activityLogger
 				.addActivityLog(new ActivityLog(new Object[] { Game.level.player, " started quest ", this }));
 		turnStarted = turnUpdated = Level.turn;
@@ -86,7 +86,7 @@ public class Quest {
 	public void hasBeenUpdated() {
 
 		if (turnUpdated < Level.turn) {
-			Game.level.popupToasts.add(new PopupToast(new Object[] { "Quest " + name + " updated" }));
+			Game.level.notifications.add(new Notification(new Object[] { "Quest " + name + " updated" }));
 			Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { "Quest ", this, " was updated" }));
 			turnUpdated = Level.turn;
 		}
