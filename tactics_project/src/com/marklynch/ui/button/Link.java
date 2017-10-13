@@ -32,6 +32,7 @@ public class Link extends LevelButton {
 				if (!Game.level.adventureLog.showing)
 					Game.level.openCloseAdventureLog();
 				Game.level.adventureLog.questToDisplayInAdventureLog = (Quest) object;
+				Game.level.adventureLog.generateLinks();
 			} else if (object instanceof Square) {
 				// go to square
 				Game.level.centerToSquare = true;

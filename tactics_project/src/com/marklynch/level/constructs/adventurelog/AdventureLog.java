@@ -104,6 +104,8 @@ public class AdventureLog implements Draggable, Scrollable {
 		buttonsToDisplayQuest.clear();
 		buttons.add(buttonClose);
 
+		generateLinks();
+
 		int questsDrawnInList = 0;
 		for (final Quest quest : Level.quests) {
 			if (quest.started) {
@@ -149,7 +151,6 @@ public class AdventureLog implements Draggable, Scrollable {
 						buttonToShowQuestDetails.buttonColor = Color.WHITE;
 						buttonToShowQuestDetails.setTextColor(Color.BLACK);
 						questToDisplayInAdventureLog = quest;
-
 						generateLinks();
 
 					}
@@ -180,6 +181,9 @@ public class AdventureLog implements Draggable, Scrollable {
 
 	public void generateLinks() {
 
+		if (questToDisplayInAdventureLog == null)
+			return;
+
 		links.clear();
 		linkMap.clear();
 
@@ -203,14 +207,14 @@ public class AdventureLog implements Draggable, Scrollable {
 		QuadUtils.drawQuad(Color.BLACK, 0, 0, Game.windowWidth, Game.windowHeight);
 
 		// Content
-		int questTextsDrawn = 0;
+		float height = 0;
 		if (questToDisplayInAdventureLog != null) {
 			for (AdventureInfo pieceOfInfo : questToDisplayInAdventureLog.infoList) {
-				TextUtils.printTextWithImages(contentX + contentBorder,
-						contentY + contentBorder + questTextsDrawn * listItemHeight, Integer.MAX_VALUE, true,
-						linkMap.get(pieceOfInfo), new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.getSquare(),
-								TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
-				questTextsDrawn++;
+				TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
+						Integer.MAX_VALUE, true, linkMap.get(pieceOfInfo), new Object[] { pieceOfInfo.getTurnString(),
+								pieceOfInfo.getSquare(), TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
+				height += pieceOfInfo.height + 20;
+
 			}
 		}
 
@@ -256,8 +260,12 @@ public class AdventureLog implements Draggable, Scrollable {
 						new Object[] { new StringWithColor(currentObjective.text, Color.WHITE) });
 				QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - 200, 20 + 20 * linesPrinted, Game.windowWidth - 180,
 						20 + 20 * linesPrinted + 20);
-				TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, Game.windowWidth - 200,
-						20 + 20 * linesPrinted, Game.windowWidth - 180, 20 + 20 * linesPrinted + 20);
+
+				if (currentObjective.gameObject != null) {
+					TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, Game.windowWidth - 200,
+							20 + 20 * linesPrinted, Game.windowWidth - 180, 20 + 20 * linesPrinted + 20);
+				}
+
 				if (currentObjective.showMarker) {
 					TextureUtils.drawTexture(checkBoxChecked, Game.windowWidth - 180, 20 + 20 * linesPrinted,
 							Game.windowWidth - 160, 20 + 20 * linesPrinted + 20);
