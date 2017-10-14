@@ -621,6 +621,9 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
+		if (!seenByPlayer) {
+			return new ActionMove(performer, this, true);
+		}
 		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
@@ -685,7 +688,9 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 
-		if (this == Game.level.player.squareGameObjectIsOn) {
+		if (!seenByPlayer) {
+			return new ActionMove(performer, this, true);
+		} else if (this == Game.level.player.squareGameObjectIsOn) {
 			return new ActionWait(performer, this);
 		} else {
 
