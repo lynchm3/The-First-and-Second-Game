@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.adventurelog;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import com.marklynch.Game;
@@ -23,7 +24,7 @@ import com.marklynch.utils.TextureUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class AdventureLog implements Draggable, Scrollable {
+public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 
 	public boolean showing = false;
 
@@ -98,6 +99,8 @@ public class AdventureLog implements Draggable, Scrollable {
 	public void open() {
 		// Sort quests by active, keep selectedQuest at top
 		// And also sort by completed...
+
+		Level.quests.sort(this);
 		resize();
 		showing = true;
 
@@ -544,6 +547,24 @@ public class AdventureLog implements Draggable, Scrollable {
 	public void drag(float dragX, float dragY) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int compare(Quest quest1, Quest quest2) {
+
+		if (quest1.resolved && !quest2.resolved)
+			return +1;
+
+		if (!quest1.resolved && quest2.resolved)
+			return -1;
+
+		if (activeQuests.contains(quest1) && !activeQuests.contains(quest2))
+			return -1;
+
+		if (!activeQuests.contains(quest1) && activeQuests.contains(quest2))
+			return +1;
+
+		return quest2.turnUpdated - quest1.turnUpdated;
 	}
 
 }
