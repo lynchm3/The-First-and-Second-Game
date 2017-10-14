@@ -33,9 +33,9 @@ public class Templates {
 			1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 0.5f, 0, null, GameObject.generateNewTemplateId());
 
 	// Player
-	public static final Player Player = new Player("You", "Fighter", 10, 100, 10, 0, 0, 0, "hero.png", null, 1, 10,
-			null, new Inventory(), 1f, 1.5f, 0f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f,
-			null, null, 75f, 127f, 70f, 23f, 0f, 0f, 0f, 0f, 0, new GameObject[] {}, new GameObject[] {},
+	public static final Player Player = new Player("You", "Fighter", 1, 100, 10, 0, 0, 0, "hero.png", null, 1, 10, null,
+			new Inventory(), 1f, 1.5f, 0f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null,
+			null, 75f, 127f, 70f, 23f, 0f, 0f, 0f, 0f, 0, new GameObject[] {}, new GameObject[] {},
 			GameObject.generateNewTemplateId());
 
 	// General People

@@ -1,5 +1,6 @@
 package com.marklynch.objects.units;
 
+import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level;
@@ -12,6 +13,8 @@ import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.ResourceUtils;
 
 import mdesl.graphics.Color;
@@ -24,6 +27,8 @@ public class Player extends Actor {
 	public static Actor playerTargetActor = null;
 	public static boolean playerFirstMove = false;
 	public static Action playerTargetAction = null;
+	public static int xp;
+	public static int xpPerLevel = 55;
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
@@ -110,6 +115,18 @@ public class Player extends Actor {
 		bestiaryKnowledge.powers = true;
 
 		return actor;
+	}
+
+	public void addXP(int xp) {
+		Player.xp += xp;
+		Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { Game.level.player,
+				" got " + xp + "XP (" + Player.xp + "/" + xpPerLevel * actorLevel + ")" }));
+		if (Player.xp >= xpPerLevel * actorLevel) {
+			actorLevel++;
+			Game.level.notifications.add(new Notification(new Object[] { Game.level.player, " leveled Up!" }));
+			Game.level.activityLogger.addActivityLog(
+					new ActivityLog(new Object[] { Game.level.player, " are now Level " + actorLevel }));
+		}
 	}
 
 }

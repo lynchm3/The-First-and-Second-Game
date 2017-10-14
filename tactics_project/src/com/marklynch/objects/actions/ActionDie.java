@@ -44,6 +44,7 @@ public class ActionDie extends Action {
 
 		logDeath();
 		createCorpse();
+		generateXP();
 
 		// Remove from draw/update
 		if (performer instanceof Actor) {
@@ -200,4 +201,7 @@ public class ActionDie extends Action {
 		}
 	}
 
+	public void generateXP() {
+		Game.level.player.addXP(10);
+	}
 }
