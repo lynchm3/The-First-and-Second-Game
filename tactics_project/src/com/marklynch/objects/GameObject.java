@@ -302,12 +302,6 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		}
 	}
 
-	public void drawStaticUI() {
-
-		// inventory.drawStaticUI();
-
-	}
-
 	public boolean checkIfDestroyed(Object attacker, Action action) {
 		if (remainingHealth <= 0) {
 			destroyedBy = attacker;

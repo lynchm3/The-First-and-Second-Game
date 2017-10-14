@@ -1164,15 +1164,10 @@ public class Level {
 		view.setIdentity();
 		Game.activeBatch.updateUniforms();
 
-		for (GameObject gameObject : inanimateObjectsOnGround) {
-			gameObject.drawStaticUI();
-		}
+		player.drawStaticUI();
 
-		// Actors 2
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.drawStaticUI();
-			}
+		for (GameObject mapMarker : inanimateObjectsOnGround.get(MapMarker.class)) {
+			((MapMarker) mapMarker).drawStaticUI();
 		}
 
 		if (openInventories.size() == 0 && Game.buttonHoveringOver == null && Game.squareMouseIsOver != null) {

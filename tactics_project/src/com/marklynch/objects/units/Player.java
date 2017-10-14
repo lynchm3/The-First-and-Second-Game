@@ -15,6 +15,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.popups.Notification;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 
 import mdesl.graphics.Color;
@@ -27,8 +28,9 @@ public class Player extends Actor {
 	public static Actor playerTargetActor = null;
 	public static boolean playerFirstMove = false;
 	public static Action playerTargetAction = null;
-	public static int xp;
-	public static int xpPerLevel = 55;
+	public static float xp;
+	public static float xpThisLevel;
+	public static float xpPerLevel = 55;
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
@@ -119,14 +121,26 @@ public class Player extends Actor {
 
 	public void addXP(int xp) {
 		Player.xp += xp;
-		Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { Game.level.player,
-				" got " + xp + "XP (" + Player.xp + "/" + xpPerLevel * actorLevel + ")" }));
-		if (Player.xp >= xpPerLevel * actorLevel) {
+		Player.xpThisLevel += xp;
+		Game.level.activityLogger.addActivityLog(new ActivityLog(
+				new Object[] { Game.level.player, " got " + xp + "XP (" + xpThisLevel + "/" + xpPerLevel + ")" }));
+		if (Player.xpThisLevel >= xpPerLevel) {
 			actorLevel++;
 			Game.level.notifications.add(new Notification(new Object[] { Game.level.player, " leveled Up!" }));
 			Game.level.activityLogger.addActivityLog(
 					new ActivityLog(new Object[] { Game.level.player, " are now Level " + actorLevel }));
+			Player.xpThisLevel -= xpPerLevel;
 		}
+	}
+
+	public void drawStaticUI() {
+		// XP Bar!
+		float percentage = xpThisLevel / xpPerLevel;
+		System.out.println("percentage = " + percentage);
+		float xpBarWidth = Game.windowWidth * percentage;
+		System.out.println("xpBarWidth = " + xpBarWidth);
+		QuadUtils.drawQuad(Color.YELLOW, 0, Game.windowHeight - 20, xpBarWidth, Game.windowHeight);
+
 	}
 
 }

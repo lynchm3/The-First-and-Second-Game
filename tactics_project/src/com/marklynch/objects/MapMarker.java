@@ -90,7 +90,6 @@ public class MapMarker extends GameObject {
 
 	}
 
-	@Override
 	public void drawStaticUI() {
 
 		float alpha = 1;

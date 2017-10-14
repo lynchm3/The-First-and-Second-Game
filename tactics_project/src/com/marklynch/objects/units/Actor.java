@@ -725,9 +725,8 @@ public class Actor extends GameObject {
 		}
 
 		// White bit under health bar
-		QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), healthXInPixels + 1,
-				healthYInPixels + 1, healthXInPixels + healthWidthInPixels - 1,
-				healthYInPixels + healthHeightInPixels - 1);
+		QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), healthXInPixels + 1, healthYInPixels + 1,
+				healthXInPixels + healthWidthInPixels - 1, healthYInPixels + healthHeightInPixels - 1);
 
 		// Colored health bar
 		QuadUtils.drawQuad(color, healthXInPixels + 1, healthYInPixels + 1, healthXInPixels + healthWidthInPixels - 1,
@@ -944,11 +943,6 @@ public class Actor extends GameObject {
 		if (this.squareGameObjectIsOn == null || this.squareGameObjectIsOn.visibleToPlayer == false)
 			return;
 		super.drawUI();
-	}
-
-	@Override
-	public void drawStaticUI() {
-
 	}
 
 	public Vector<Float> calculateIdealDistanceFromTargetToAttack(GameObject target) {
