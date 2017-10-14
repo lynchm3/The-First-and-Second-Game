@@ -20,7 +20,7 @@ public class Notification {
 	public static float x;
 	public float y;
 	public static float textX;
-	public static float border = 10;
+	public static float border = 20f;
 	public static float textWidth = width - border * 2;
 	public static float closeButtonX;
 	public static float closeButtonWidth = 20f;
