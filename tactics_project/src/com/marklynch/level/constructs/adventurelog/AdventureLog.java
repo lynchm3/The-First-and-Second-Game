@@ -26,6 +26,9 @@ import mdesl.graphics.Texture;
 
 public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 
+	public static final String active = "Active";
+	public static final String resolved = "Resolved";
+
 	public boolean showing = false;
 
 	public static Quest questToDisplayInAdventureLog = null;
@@ -41,6 +44,9 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 	int contentBorder;
 
 	int listItemHeight;
+
+	float activeDrawPosition;
+	float resolvedDrawPosition;
 
 	transient static int bottomBorderHeight;
 
@@ -112,8 +118,34 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		generateLinks();
 
 		int questsDrawnInList = 0;
+
+		boolean activeAdded = false;
+		boolean resolvedAdded = false;
+
 		for (final Quest quest : Level.quests) {
 			if (quest.started) {
+
+				if (!activeAdded && !quest.resolved) {
+
+					final LevelButton activeButton = new LevelButton(listX + listBorder,
+							listY + listBorder + questsDrawnInList * listItemHeight, listWidth - listItemHeight,
+							listItemHeight, "end_turn_button.png", "end_turn_button.png", this.active, true, true,
+							Color.BLACK, Color.WHITE, "Display quest details");
+					questsDrawnInList++;
+					activeAdded = true;
+					buttons.add(activeButton);
+				}
+
+				if (!resolvedAdded && quest.resolved) {
+
+					final LevelButton activeButton = new LevelButton(listX + listBorder,
+							listY + listBorder + questsDrawnInList * listItemHeight, listWidth - listItemHeight,
+							listItemHeight, "end_turn_button.png", "end_turn_button.png", this.resolved, true, true,
+							Color.BLACK, Color.WHITE, "Display quest details");
+					questsDrawnInList++;
+					resolvedAdded = true;
+					buttons.add(activeButton);
+				}
 
 				// buttons to make quest the active one
 				final LevelButton buttonToMakeQuestActive = new LevelButton(
@@ -237,8 +269,20 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 
 		// check box && exclamation mark
 		int questsDrawnInList = 0;
+		boolean activeAdded = false;
+		boolean resolvedAdded = false;
 		for (final Quest quest : Level.quests) {
 			if (quest.started) {
+
+				if (!activeAdded && !quest.resolved) {
+					questsDrawnInList++;
+					activeAdded = true;
+				}
+
+				if (!resolvedAdded && quest.resolved) {
+					questsDrawnInList++;
+					resolvedAdded = true;
+				}
 
 				// Check box
 				Texture checkBoxTextureToUse = checkBoxUnchecked;
