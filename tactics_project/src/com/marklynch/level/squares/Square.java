@@ -124,6 +124,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		this.xInGrid = x;
 		this.yInGrid = y;
 		name = "Square @ " + this.xInGrid + "," + this.yInGrid;
+		name = this.xInGrid + "," + this.yInGrid;
 		this.xInGridPixels = xInGrid * Game.SQUARE_WIDTH;
 		this.yInGridPixels = yInGrid * Game.SQUARE_HEIGHT;
 

@@ -26,6 +26,8 @@ public class ActionSpot extends Action {
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " spotted ", spotted }));
 
+		Game.level.player.addXP(5);
+
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();

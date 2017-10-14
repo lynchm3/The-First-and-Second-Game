@@ -38,6 +38,10 @@ public class Quest {
 	}
 
 	public void addObjective(Objective objective) {
+
+		if (resolved)
+			return;
+
 		if (!currentObjectives.contains(objective)) {
 
 			if (started) {
@@ -55,6 +59,10 @@ public class Quest {
 	}
 
 	public void addInfo(AdventureInfo info) {
+
+		if (resolved)
+			return;
+
 		if (!infoList.contains(info)) {
 
 			if (started) {
@@ -76,10 +84,10 @@ public class Quest {
 	}
 
 	public void start() {
-		if (started)
+		if (started || resolved)
 			return;
 		started = true;
-		Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " started!" }));
+		Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " started" }));
 		Game.level.activityLogger
 				.addActivityLog(new ActivityLog(new Object[] { Game.level.player, " started quest ", this }));
 		turnStarted = turnUpdated = Level.turn;
@@ -88,12 +96,21 @@ public class Quest {
 
 	public void hasBeenUpdated() {
 
+		if (resolved)
+			return;
+
 		if (turnUpdated < Level.turn) {
 			Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " updated" }));
 			Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { "Quest ", this, " was updated" }));
 			turnUpdated = Level.turn;
 			updatedSinceLastViewed = true;
 		}
+	}
+
+	public void resolve() {
+		resolved = true;
+		Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " resolved!" }));
+		Game.level.player.addXP(15);
 	}
 
 }

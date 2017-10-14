@@ -199,6 +199,14 @@ public class QuestSmallGame extends Quest {
 	AdventureInfo infoHuntersDead = new AdventureInfo("All the hunters are dead");
 	AdventureInfo infoWolvesDead = new AdventureInfo("All the wolves are dead");
 
+	// Resolutions
+	AdventureInfo infoToldToFuckOffByHunters = new AdventureInfo(
+			"I didn't help the hunters and they're giving me nothing");
+	AdventureInfo infoRewardedByHunters = new AdventureInfo("The hunters rewarded me for helping them");
+	AdventureInfo infoIgnoredByWolves = new AdventureInfo("I didn't help the wolves and they are ignoring me");
+	AdventureInfo infoThankedByWolves = new AdventureInfo("The wolves thanked me for helping them");
+	AdventureInfo infoAllDead = new AdventureInfo("The hunters and wolves are all dead");
+
 	// Flags
 
 	// boolean playerAttackedWolves;
@@ -304,17 +312,17 @@ public class QuestSmallGame extends Quest {
 		environmentalistBill.quest = this;
 
 		superWolf = new CarnivoreNeutralWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
-				Game.level.squares[129][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+				Game.level.squares[128][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
 		Actor wolf2 = new CarnivoreNeutralWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
-				Game.level.squares[208][15], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+				Game.level.squares[127][13], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
 		Actor wolf3 = new CarnivoreNeutralWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
-				Game.level.squares[208][17], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
+				Game.level.squares[127][11], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
@@ -377,6 +385,8 @@ public class QuestSmallGame extends Quest {
 
 	@Override
 	public void update() {
+		if (resolved)
+			return;
 
 		// See hunters for first time
 		if (!haveInfo(infoSeenHunters)) {
@@ -448,6 +458,8 @@ public class QuestSmallGame extends Quest {
 
 	@Override
 	public boolean update(Actor actor) {
+		if (resolved)
+			return false;
 		if (hunterPack.contains(actor)) {
 			return updateHunter(actor);
 		} else if (actor == environmentalistBill) {
@@ -565,6 +577,8 @@ public class QuestSmallGame extends Quest {
 
 	@Override
 	public Conversation getConversation(Actor actor) {
+		if (resolved)
+			return null;
 		if (hunterPack.contains(actor)) {
 			return getConversationForHunter(actor);
 		} else if (actor == environmentalistBill) {
@@ -780,7 +794,17 @@ public class QuestSmallGame extends Quest {
 		ConversationPart conversationPartOnlyHuntersGetLoot = new ConversationPart(
 				new Object[] { "Only hunters get loot. Now fuck off!" }, new ConversationResponse[] {},
 				hunterPack.getLeader());
+		conversationPartOnlyHuntersGetLoot.leaveConversationListener = new LeaveConversationListener() {
+
+			@Override
+			public void leave() {
+				addInfo(infoToldToFuckOffByHunters);
+				resolve();
+			}
+		};
+
 		conversationHuntersOnlyHuntersGetLoot = new Conversation(conversationPartOnlyHuntersGetLoot);
+
 	}
 
 }
