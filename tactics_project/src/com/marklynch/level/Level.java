@@ -1282,6 +1282,18 @@ public class Level {
 			popupPinned.drawStaticUI();
 		}
 
+		// Notifications
+		float notificationsHeight = Notification.border;
+		Notification.x = Game.halfWindowWidth - Notification.halfWidth;
+		Notification.textX = Notification.x + Notification.border;
+		Notification.closeButtonX = Notification.x + Notification.width - Notification.closeButtonWidth;
+		for (Notification notification : notifications) {
+			notification.y = notification.closeButton.y = notificationsHeight;
+			notification.closeButton.x = Notification.closeButtonX;
+			notification.draw();
+			notificationsHeight += notification.height + Notification.border;
+		}
+
 		if (adventureLog.showing) {
 			adventureLog.drawStaticUI();
 		}
@@ -1304,18 +1316,6 @@ public class Level {
 
 		for (PopupTextBox popupTextBox : popupTextBoxes) {
 			popupTextBox.draw();
-		}
-
-		// Notifications
-		float notificationsHeight = Notification.border;
-		Notification.x = Game.halfWindowWidth - Notification.halfWidth;
-		Notification.textX = Notification.x + Notification.border;
-		Notification.closeButtonX = Notification.x + Notification.width - Notification.closeButtonWidth;
-		for (Notification notification : notifications) {
-			notification.y = notification.closeButton.y = notificationsHeight;
-			notification.closeButton.x = Notification.closeButtonX;
-			notification.draw();
-			notificationsHeight += notification.height + Notification.border;
 		}
 
 		if (Game.buttonHoveringOver != null)
