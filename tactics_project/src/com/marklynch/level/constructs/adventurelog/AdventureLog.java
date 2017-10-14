@@ -214,8 +214,9 @@ public class AdventureLog implements Draggable, Scrollable {
 		if (questToDisplayInAdventureLog != null) {
 			for (AdventureInfo pieceOfInfo : questToDisplayInAdventureLog.infoList) {
 				TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-						Integer.MAX_VALUE, true, linkMap.get(pieceOfInfo), new Object[] { pieceOfInfo.getTurnString(),
-								pieceOfInfo.getSquare(), TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
+						Integer.MAX_VALUE, true, linkMap.get(pieceOfInfo),
+						new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.getArea(), pieceOfInfo.getSquare(),
+								TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
 				height += pieceOfInfo.height + 20;
 
 			}

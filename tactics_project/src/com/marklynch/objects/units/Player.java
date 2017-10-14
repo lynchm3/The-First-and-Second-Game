@@ -136,9 +136,7 @@ public class Player extends Actor {
 	public void drawStaticUI() {
 		// XP Bar!
 		float percentage = xpThisLevel / xpPerLevel;
-		System.out.println("percentage = " + percentage);
 		float xpBarWidth = Game.windowWidth * percentage;
-		System.out.println("xpBarWidth = " + xpBarWidth);
 		QuadUtils.drawQuad(Color.YELLOW, 0, Game.windowHeight - 20, xpBarWidth, Game.windowHeight);
 
 	}

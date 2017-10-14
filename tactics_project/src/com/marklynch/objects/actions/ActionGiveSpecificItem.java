@@ -37,11 +37,8 @@ public class ActionGiveSpecificItem extends Action {
 	@Override
 	public void perform() {
 
-		System.out.println("perform() 1");
-
 		if (!enabled)
 			return;
-		System.out.println("perform() 2");
 
 		if (Game.level.shouldLog(receiver, performer))
 			if (logAsTake)

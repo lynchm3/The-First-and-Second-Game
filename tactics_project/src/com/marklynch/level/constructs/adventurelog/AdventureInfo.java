@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.adventurelog;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.utils.TextUtils;
 
@@ -9,6 +10,7 @@ public class AdventureInfo {
 	public Object object;
 	private int turn;
 	private String turnString;
+	private Area area;
 	private Square square;
 	public float height;
 
@@ -34,6 +36,14 @@ public class AdventureInfo {
 
 	public Square getSquare() {
 		return square;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+
+	public Area getArea() {
+		return area;
 	}
 
 }

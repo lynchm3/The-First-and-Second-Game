@@ -293,14 +293,8 @@ public class Inventory implements Draggable, Scrollable {
 					for (GameObject gameObject : otherInventory.gameObjects) {
 						Action action = new ActionTakeSpecificItem(Game.level.player,
 								gameObject.inventoryThatHoldsThisObject.parent, gameObject);
-						System.out.println("action = " + action);
-						System.out.println("action.legal = " + action.legal);
-						System.out.println("buttonLootAll.textParts = " + buttonLootAll.textParts);
-						System.out.println("LOOT_ALL = " + LOOT_ALL);
 						if (!action.legal && buttonLootAll.textParts == LOOT_ALL) {
-							System.out.println("a");
 						} else {
-							System.out.println("b");
 							actionsToPerform.add(action);
 						}
 					}
