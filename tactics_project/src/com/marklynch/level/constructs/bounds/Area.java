@@ -16,9 +16,10 @@ public class Area {
 	public Square centreSuqare;
 	public boolean seenByPlayer = false;
 	boolean showOnMap = false;
+	public int level;
 
-	public Area(String name, String imageString, Texture squareTexture, int gridX1, int gridY1, int gridX2,
-			int gridY2) {
+	public Area(String name, String imageString, Texture squareTexture, int gridX1, int gridY1, int gridX2, int gridY2,
+			int level) {
 		super();
 		this.name = name;
 		if (imageString != null)
@@ -30,6 +31,7 @@ public class Area {
 		this.gridCenterX = (gridX1 + gridX2) / 2;
 		this.gridCenterY = (gridY1 + gridY2) / 2;
 		this.centreSuqare = Game.level.squares[gridCenterX][gridCenterY];
+		this.level = level;
 
 		for (int i = gridX1; i <= gridX2; i++) {
 			for (int j = gridY1; j <= gridY2; j++) {

@@ -15,13 +15,26 @@ public class StructureRoom {
 	public float y;
 	public boolean seenByPlayer = false;
 	public Structure structure;
+	public int level = 0;
 
 	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList,
 			RoomPart... roomParts) {
+		this(name, x, y, restricted, ownersArrayList, 0, true, roomParts);
+	}
+
+	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList, int level,
+			RoomPart... roomParts) {
+		this(name, x, y, restricted, ownersArrayList, level, true, roomParts);
+
+	}
+
+	public StructureRoom(String name, float x, float y, boolean restricted, ArrayList<Actor> ownersArrayList, int level,
+			boolean doesNothing, RoomPart[] roomParts) {
 		super();
 		this.name = name;
 		this.x = x;
 		this.y = y;
+		this.level = level;
 		this.roomParts = roomParts;// Floor squares
 		for (RoomPart roomPart : this.roomParts) {
 			for (int i = roomPart.gridX1; i <= roomPart.gridX2; i++) {

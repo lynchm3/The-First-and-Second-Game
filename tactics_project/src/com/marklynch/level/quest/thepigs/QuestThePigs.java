@@ -118,7 +118,7 @@ public class QuestThePigs extends Quest {
 
 		Game.level.structures.add(new Structure("Pen", pigPenSections, pigPenRooms, pigPenPaths, pigPenFeatures,
 				new ArrayList<Square>(), null, 0, 0, 0, 0, true, larry, pigPenSquaresToRemove, pigPenWalls,
-				Templates.FENCE, Square.MUD_TEXTURE));
+				Templates.FENCE, Square.MUD_TEXTURE, 3));
 
 		// Farm house 2,69 -> 24,85
 		ArrayList<Wall> farmHouseWalls = new ArrayList<Wall>();
@@ -163,7 +163,7 @@ public class QuestThePigs extends Quest {
 
 		Game.level.structures.add(new Structure("Farm House", farmHouseSections, farmHouseRooms, farmHousePaths,
 				farmHouseFeatures, new ArrayList<Square>(), null, 0, 0, 0, 0, true, farmer, farmHouseSquaresToRemove,
-				farmHouseWalls, Templates.WALL, Square.STONE_TEXTURE));
+				farmHouseWalls, Templates.WALL, Square.STONE_TEXTURE, 3));
 
 		Templates.SHELF.makeCopy(Game.level.squares[14][69], farmer);
 		Templates.SHELF.makeCopy(Game.level.squares[15][69], farmer);

@@ -144,10 +144,10 @@ public class AreaTownForest {
 		Templates.BIG_TREE.makeCopy(Game.level.squares[157][62], null);
 		Templates.BIG_TREE.makeCopy(Game.level.squares[154][59], null);
 
-		area = new Area("Town Forest", "map_forest.png", Square.DARK_GRASS_TEXTURE, 121, 11, 199, 90);
+		area = new Area("Town Forest", "map_forest.png", Square.DARK_GRASS_TEXTURE, 121, 11, 199, 90, 1);
 		Game.level.areas.add(area);
 
-		Area areaInnerTownForest = new Area("Inner Town Forest", null, Square.DARK_GRASS_TEXTURE, 146, 33, 180, 63);
+		Area areaInnerTownForest = new Area("Inner Town Forest", null, Square.DARK_GRASS_TEXTURE, 146, 33, 180, 63, 2);
 		Game.level.areas.add(areaInnerTownForest);
 
 		// Make the edges blend

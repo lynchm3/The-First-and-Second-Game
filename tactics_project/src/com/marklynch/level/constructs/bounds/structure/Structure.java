@@ -36,7 +36,7 @@ public class Structure {
 			ArrayList<StructurePath> paths, ArrayList<GameObject> features, ArrayList<Square> entrances,
 			String imageTexturePath, int overlayX1, int overlayY1, int overlayX2, int overlayY2,
 			boolean blocksLineOfSight, Actor owner, ArrayList<Square> squaresToRemove, ArrayList<Wall> extraWalls,
-			Wall wallTemplate, Texture imageTexture) {
+			Wall wallTemplate, Texture imageTexture, int level) {
 		super();
 
 		this.name = name;
@@ -50,6 +50,7 @@ public class Structure {
 		this.gridY2 = overlayY2;
 		this.entranceSquares = entrances;
 		this.blocksLineOfSight = blocksLineOfSight;
+		this.level = level;
 		floorSquares = new ArrayList<Square>();
 		wallSquares = new ArrayList<Square>();
 		featureSquares = new ArrayList<Square>();
@@ -180,6 +181,7 @@ public class Structure {
 	}
 
 	public float roofAlpha = 1f;
+	public int level;
 
 	public void draw2() {
 

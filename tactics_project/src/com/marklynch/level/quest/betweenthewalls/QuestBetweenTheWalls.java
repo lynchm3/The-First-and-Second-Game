@@ -93,7 +93,7 @@ public class QuestBetweenTheWalls extends Quest {
 				new GameObject[] {}, null);
 
 		// Hidden room
-		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 36, false, new ArrayList<Actor>(),
+		StructureRoom hiddenRoom = new StructureRoom("Hidey-Hole", 42, 36, false, new ArrayList<Actor>(), 4,
 				new RoomPart(42, 36, 55, 37));
 		structureRooms.add(hiddenRoom);
 
@@ -108,7 +108,7 @@ public class QuestBetweenTheWalls extends Quest {
 		// null));
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
 				structureFeatures, structureEntranceSquares, null, 0, 0, 0, 0, true, null, structureSquaresToRemove,
-				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE));
+				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Antler switch
 		Templates.ANTLERS_SWITCH_FOR_OPENABLES.makeCopy(Game.level.squares[53][19], null, falseWall,

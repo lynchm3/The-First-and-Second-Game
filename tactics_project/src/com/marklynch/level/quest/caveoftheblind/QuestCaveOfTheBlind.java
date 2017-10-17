@@ -686,7 +686,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		cave = new Structure("Mort & Mort Mining", caveSections, rooms, cavePaths, caveFeatures,
 				new ArrayList<Square>(), "map_cave.png", 223, 0, 321, 74, true, mort, squaresToRemove, extraWalls,
-				Templates.WALL, Square.STONE_TEXTURE);
+				Templates.WALL, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(cave);
 
 		// Dirty Sheet

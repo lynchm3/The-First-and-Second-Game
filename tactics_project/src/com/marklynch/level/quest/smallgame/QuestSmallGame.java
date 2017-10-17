@@ -243,7 +243,7 @@ public class QuestSmallGame extends Quest {
 		lodgeSections.add(new StructureSection("Hunting Lodge", 105, 9, 111, 15, false));
 		Structure lodge = new Structure("Hunting Lodge", lodgeSections, lodgeRooms, new ArrayList<StructurePath>(),
 				lodgeFeatures, new ArrayList<Square>(), "building.png", 896, 896 + 640, 896, 896 + 640, true,
-				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, Square.STONE_TEXTURE);
+				hunterBrent, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL, Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(lodge);
 
 		// Add hunters

@@ -2,6 +2,9 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.bounds.structure.Structure;
+import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -26,7 +29,15 @@ public class ActionSpot extends Action {
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " spotted ", spotted }));
 
-		Game.level.player.addXP(5);
+		if (spotted instanceof Area) {
+			Game.level.player.addXP((int) Math.pow(5, ((Area) spotted).level));
+		} else if (spotted instanceof Structure) {
+			Game.level.player.addXP((int) Math.pow(5, ((Structure) spotted).level));
+		} else if (spotted instanceof StructureRoom) {
+			StructureRoom structureRoom = (StructureRoom) spotted;
+			if (structureRoom.level != 0)
+				Game.level.player.addXP((int) Math.pow(5, structureRoom.level));
+		}
 
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)

@@ -486,7 +486,7 @@ public class Editor {
 		Structure joesShop = new Structure("Trader Joe's Shop", shopSections, shopAtriums,
 				new ArrayList<StructurePath>(), shopFeatures, entranceSquares, "building2.png", 640, 640 + 1664, -100,
 				-100 + 868, true, trader, new ArrayList<Square>(), new ArrayList<Wall>(), Templates.WALL,
-				Square.STONE_TEXTURE);
+				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(joesShop);
 
 		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
@@ -614,8 +614,7 @@ public class Editor {
 				&& Game.squareMouseIsOver != this.selectedGameObject.squareGameObjectIsOn) {
 
 			float x1 = this.selectedGameObject.squareGameObjectIsOn.xInGridPixels / 2;
-			float y1 = this.selectedGameObject.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT / 2;
+			float y1 = this.selectedGameObject.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT / 2;
 			float x2 = Game.squareMouseIsOver.xInGridPixels / 2;
 			float y2 = Game.squareMouseIsOver.yInGridPixels / 2;
 

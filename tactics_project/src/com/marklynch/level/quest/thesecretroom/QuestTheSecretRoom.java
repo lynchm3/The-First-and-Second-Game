@@ -62,7 +62,7 @@ public class QuestTheSecretRoom extends Quest {
 		structureFeatures.add(falseWall);
 
 		// Back room
-		StructureRoom backRoom = new StructureRoom("GameObjectroom", 20, 37, false, new ArrayList<Actor>(),
+		StructureRoom backRoom = new StructureRoom("GameObjectroom", 20, 37, false, new ArrayList<Actor>(), 4,
 				new RoomPart(20, 37, 35, 45));
 		structureRooms.add(backRoom);
 
@@ -80,7 +80,7 @@ public class QuestTheSecretRoom extends Quest {
 
 		Game.level.structures.add(new Structure("A Lovely House", structureSections, structureRooms, structurePaths,
 				structureFeatures, structureEntranceSquares, null, 0, 0, 0, 0, true, null, structureSquaresToRemove,
-				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE));
+				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Path to town 24,21 -> 24,29
 		Path pathToTown = new Path(24, 21, 24, 29);
