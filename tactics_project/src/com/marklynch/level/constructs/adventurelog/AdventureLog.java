@@ -245,7 +245,10 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		}
 
 		for (ConversationPart conversationPart : questToDisplayInAdventureLog.conversationLog) {
-			ArrayList<Link> generatedLinks = TextUtils.getLinks(true, conversationPart.squareAndText);
+			System.out.println("squareAndText - " + conversationPart.squareAndText);
+			System.out.println("squareAndText.size() - " + conversationPart.squareAndText.size());
+			ArrayList<Link> generatedLinks = TextUtils.getLinks(conversationPart.squareAndText);
+			System.out.println("generated links - " + generatedLinks);
 			conversationLinkMap.put(conversationPart, generatedLinks);
 			conversationLinks.addAll(generatedLinks);
 		}
@@ -274,10 +277,10 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 									TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
 					height += pieceOfInfo.height + 20;
 				}
-			} else if (mode == MODE.CONVERSATION) {// conversationLinkMap.get(conversationPart)
+			} else if (mode == MODE.CONVERSATION) {
 				for (ConversationPart conversationPart : questToDisplayInAdventureLog.conversationLog) {
 					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-							Integer.MAX_VALUE, true, null,
+							Integer.MAX_VALUE, true, conversationLinkMap.get(conversationPart),
 							new Object[] { conversationPart.getTurnString(), conversationPart.getArea(),
 									conversationPart.getSquare(), TextUtils.NewLine.NEW_LINE,
 									conversationPart.text[0] });
