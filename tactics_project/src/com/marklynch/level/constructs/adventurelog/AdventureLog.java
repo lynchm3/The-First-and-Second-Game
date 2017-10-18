@@ -30,6 +30,12 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 	public static final String active = "Active";
 	public static final String resolved = "Resolved";
 
+	public static enum MODE {
+		INFO, CONVERSATION
+	};
+
+	public MODE mode = MODE.CONVERSATION;
+
 	public boolean showing = false;
 
 	public static Quest questToDisplayInAdventureLog = null;
@@ -56,8 +62,10 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToTrackObjectives = new ArrayList<LevelButton>();
 
-	public HashMap<AdventureInfo, ArrayList<Link>> linkMap = new HashMap<AdventureInfo, ArrayList<Link>>();
-	public ArrayList<Link> links = new ArrayList<Link>();
+	public HashMap<AdventureInfo, ArrayList<Link>> infoLinkMap = new HashMap<AdventureInfo, ArrayList<Link>>();
+	public ArrayList<Link> infoLinks = new ArrayList<Link>();
+	public HashMap<ConversationPart, ArrayList<Link>> conversationLinkMap = new HashMap<ConversationPart, ArrayList<Link>>();
+	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
 
 	// public static ArrayList<Link> links;
 	// Close button
@@ -223,14 +231,23 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		if (questToDisplayInAdventureLog == null)
 			return;
 
-		links.clear();
-		linkMap.clear();
+		infoLinks.clear();
+		infoLinkMap.clear();
+
+		conversationLinks.clear();
+		conversationLinkMap.clear();
 
 		for (AdventureInfo info : questToDisplayInAdventureLog.infoList) {
 
 			ArrayList<Link> generatedLinks = TextUtils.getLinks(true, info.getSquare(), info.object);
-			linkMap.put(info, generatedLinks);
-			links.addAll(generatedLinks);
+			infoLinkMap.put(info, generatedLinks);
+			infoLinks.addAll(generatedLinks);
+		}
+
+		for (ConversationPart conversationPart : questToDisplayInAdventureLog.conversationLog) {
+			ArrayList<Link> generatedLinks = TextUtils.getLinks(true, conversationPart.squareAndText);
+			conversationLinkMap.put(conversationPart, generatedLinks);
+			conversationLinks.addAll(generatedLinks);
 		}
 	}
 
@@ -249,26 +266,24 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		float height = 0;
 		if (questToDisplayInAdventureLog != null) {
 
-			for (ConversationPart conversationPart : questToDisplayInAdventureLog.conversationLog) {
-				TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-						Integer.MAX_VALUE, true, null,
-						new Object[] { conversationPart.getTurnString(), conversationPart.getArea(),
-								conversationPart.getSquare(), TextUtils.NewLine.NEW_LINE, conversationPart.text[0] });
-				height += conversationPart.height + 20;
-
+			if (mode == MODE.INFO) {
+				for (AdventureInfo pieceOfInfo : questToDisplayInAdventureLog.infoList) {
+					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
+							Integer.MAX_VALUE, true, infoLinkMap.get(pieceOfInfo),
+							new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.getArea(), pieceOfInfo.getSquare(),
+									TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
+					height += pieceOfInfo.height + 20;
+				}
+			} else if (mode == MODE.CONVERSATION) {// conversationLinkMap.get(conversationPart)
+				for (ConversationPart conversationPart : questToDisplayInAdventureLog.conversationLog) {
+					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
+							Integer.MAX_VALUE, true, null,
+							new Object[] { conversationPart.getTurnString(), conversationPart.getArea(),
+									conversationPart.getSquare(), TextUtils.NewLine.NEW_LINE,
+									conversationPart.text[0] });
+					height += conversationPart.height + 20;
+				}
 			}
-
-			// for (AdventureInfo pieceOfInfo :
-			// questToDisplayInAdventureLog.infoList) {
-			// TextUtils.printTextWithImages(contentX + contentBorder, contentY
-			// + contentBorder + height,
-			// Integer.MAX_VALUE, true, linkMap.get(pieceOfInfo),
-			// new Object[] { pieceOfInfo.getTurnString(),
-			// pieceOfInfo.getArea(), pieceOfInfo.getSquare(),
-			// TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
-			// height += pieceOfInfo.height + 20;
-			//
-			// }
 		}
 
 		if (buttons.size() == 1) {

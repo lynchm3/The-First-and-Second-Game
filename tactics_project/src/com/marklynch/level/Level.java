@@ -1585,10 +1585,19 @@ public class Level {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
-			for (Button button : adventureLog.links) {
-				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
-					return button;
+
+			if (adventureLog.mode == AdventureLog.MODE.INFO) {
+				for (Button button : adventureLog.infoLinks) {
+					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+						return button;
+				}
+			} else if (adventureLog.mode == AdventureLog.MODE.CONVERSATION) {
+				for (Button button : adventureLog.conversationLinks) {
+					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+						return button;
+				}
 			}
+
 			return null;
 
 		}
@@ -1640,6 +1649,7 @@ public class Level {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
+
 			return null;
 		}
 

@@ -1,6 +1,7 @@
 package com.marklynch.level.conversation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.bounds.Area;
@@ -31,6 +32,7 @@ public class ConversationPart {
 	private String turnString;
 	private Area area;
 	private Square square;
+	public ArrayList<Object> squareAndText;
 
 	public ConversationPart(Object[] text, ConversationResponse[] conversationResponses, GameObject talker,
 			Quest quest) {
@@ -133,6 +135,9 @@ public class ConversationPart {
 
 	public void setSquare(Square square) {
 		this.square = square;
+		squareAndText = new ArrayList<Object>();
+		squareAndText.add(square);
+		squareAndText.addAll(Arrays.asList(text));
 	}
 
 	public Square getSquare() {
