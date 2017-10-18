@@ -29,14 +29,14 @@ public class ConversationForFarmer extends Conversation {
 	QuestThePigs questThePigs;
 	Farmer farmer;
 
-	public ConversationForFarmer(final QuestThePigs questCaveOfTheBlind, Farmer farmer) {
+	public ConversationForFarmer(final QuestThePigs questThePigs, Farmer farmer) {
 		super(null);
 		this.questThePigs = questThePigs;
 		this.farmer = farmer;
 
 		// Opening
 		conversationPartopening = new ConversationPart(new Object[] { "Hello there!" }, new ConversationResponse[] {},
-				farmer);
+				farmer, this.questThePigs);
 
 		// General responses
 		conversationResponseHi = new ConversationResponse("Hi!", null);
@@ -45,21 +45,21 @@ public class ConversationForFarmer extends Conversation {
 
 		// First level parts
 		conversationPartHowsItGoing = new ConversationPart(new Object[] { "How's it going?" },
-				new ConversationResponse[] {}, farmer);
+				new ConversationResponse[] {}, farmer, this.questThePigs);
 
 		conversationPartCantComplain = new ConversationPart(
 				new Object[] { "Can't complain, I've got me pigs and me turnips and me lovely wife." },
-				new ConversationResponse[] {}, farmer);
+				new ConversationResponse[] {}, farmer, this.questThePigs);
 
 		conversationPartNoDemonsAroundHere = new ConversationPart(new Object[] { "Nope, can't say that I have." },
-				new ConversationResponse[] {}, farmer);
+				new ConversationResponse[] {}, farmer, this.questThePigs);
 
 		// I'm good, I like your farm!"
 		conversationResponseImGood = new ConversationResponse("I'm good, I like your farm!", null);
 
 		// Well Thanks!
 		conversationPartWellThanks = new ConversationPart(new Object[] { "Well Thanks!" },
-				new ConversationResponse[] {}, farmer);
+				new ConversationResponse[] {}, farmer, this.questThePigs);
 
 		// NEEDS TO BE ADDED
 		this.openingConversationPart = this.currentConversationPart = conversationPartopening;

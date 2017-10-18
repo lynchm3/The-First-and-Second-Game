@@ -644,10 +644,10 @@ public class QuestSmallGame extends Quest {
 		ConversationPart conversationPartTheresEquipment = new ConversationPart(
 				new Object[] {
 						"There's should be some spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready." },
-				new ConversationResponse[] {}, hunterPack.getLeader());
+				new ConversationResponse[] {}, hunterPack.getLeader(), this);
 
 		ConversationPart conversationPartSuitYourself = new ConversationPart(new Object[] { "Suit yourself." },
-				new ConversationResponse[] {}, hunterPack.getLeader());
+				new ConversationResponse[] {}, hunterPack.getLeader(), this);
 
 		ConversationResponse conversationResponseNoThanks = new ConversationResponse("No thanks",
 				conversationPartSuitYourself) {
@@ -690,7 +690,7 @@ public class QuestSmallGame extends Quest {
 		ConversationPart conversationPartWantToComeHunting = new ConversationPart(
 				new Object[] { "We're just about to head out on the hunt, an extra man wouldn't go amiss." },
 				new ConversationResponse[] { conversationResponseYesPlease, conversationResponseNoThanks },
-				hunterPack.getLeader());
+				hunterPack.getLeader(), this);
 
 		conversationHuntersJoinTheHunt = new Conversation(conversationPartWantToComeHunting);
 
@@ -704,7 +704,7 @@ public class QuestSmallGame extends Quest {
 		// try it out
 		ConversationPart conversationPartImNotSpying = new ConversationPart(new Object[] {
 				"What? NO! I'm not spying! You're spying!", superWolf, hunterBrent, environmentalistBill },
-				new ConversationResponse[] {}, environmentalistBill);
+				new ConversationResponse[] {}, environmentalistBill, this);
 
 		conversationPartImNotSpying.leaveConversationListener = new LeaveConversationListener() {
 
@@ -724,7 +724,7 @@ public class QuestSmallGame extends Quest {
 	private void setUpConversationSaveTheWolf() {
 
 		ConversationPart conversationPartSaveTheWolf = new ConversationPart(new Object[] { "Save the wolf!" },
-				new ConversationResponse[] {}, environmentalistBill);
+				new ConversationResponse[] {}, environmentalistBill, this);
 
 		conversationPartSaveTheWolf.leaveConversationListener = new LeaveConversationListener() {
 
@@ -755,10 +755,10 @@ public class QuestSmallGame extends Quest {
 		ConversationPart conversationAlrightLetsGo = new ConversationPart(
 				new Object[] {
 						"Alright! The cave is to the east, past the forest, at the entrance to a now defunct mining operation." },
-				new ConversationResponse[] {}, hunterPack.getLeader());
+				new ConversationResponse[] {}, hunterPack.getLeader(), this);
 
 		ConversationPart conversationPartWellHurryOn = new ConversationPart(new Object[] { "Well hurry on!" },
-				new ConversationResponse[] {}, hunterPack.getLeader());
+				new ConversationResponse[] {}, hunterPack.getLeader(), this);
 
 		ConversationResponse conversationResponseNotYet = new ConversationResponse("Not yet",
 				conversationPartWellHurryOn);
@@ -783,7 +783,7 @@ public class QuestSmallGame extends Quest {
 
 		ConversationPart conversationPartReadyToGo = new ConversationPart(new Object[] { "Ready to go, pal?" },
 				new ConversationResponse[] { conversationResponseReady, conversationResponseNotYet },
-				hunterPack.getLeader());
+				hunterPack.getLeader(), this);
 
 		conversationHuntersReadyToGo = new Conversation(conversationPartReadyToGo);
 
@@ -793,7 +793,7 @@ public class QuestSmallGame extends Quest {
 		// Really like the "Now fuck off!" bit.
 		ConversationPart conversationPartOnlyHuntersGetLoot = new ConversationPart(
 				new Object[] { "Only hunters get loot. Now fuck off!" }, new ConversationResponse[] {},
-				hunterPack.getLeader());
+				hunterPack.getLeader(), this);
 		conversationPartOnlyHuntersGetLoot.leaveConversationListener = new LeaveConversationListener() {
 
 			@Override

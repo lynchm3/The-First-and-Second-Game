@@ -73,16 +73,16 @@ public class ConversationForMort extends Conversation {
 		if (questCaveOfTheBlind.talkedToMort && questCaveOfTheBlind.playerMinedOres > 0) {
 			// You mined his ore
 			conversationPartopening = new ConversationPart(new Object[] { "Hands off my ore!" },
-					new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+					new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 		} else if (questCaveOfTheBlind.talkedToMort) {
 			conversationPartopening = new ConversationPart(new Object[] { "Yes?" }, // annoyed
-					new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+					new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 		} else {
 			// Havent talked yet, annoyed by your mere presence
 			conversationPartopening = new ConversationPart(
 					new Object[] {
 							"What are you doing here? Hands off my ore! You should leave, would be terrible if the blind got you!" },
-					new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+					new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 		}
 
 		// General responses
@@ -94,26 +94,26 @@ public class ConversationForMort extends Conversation {
 		conversationPartTheBlind = new ConversationPart(
 				new Object[] {
 						"They can be pretty vicious. But as long as I feed them they keep to themselves. O... and... eh... they're blind. They weren't always mind, but they must have turned on eachother at some point, when the hunger got to them." },
-				new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+				new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 
 		conversationPartYoureInTheCaveOfTheBlind = new ConversationPart(
 				new Object[] { "You're in my mine, don't touch my ore" }, new ConversationResponse[] {},
-				questCaveOfTheBlind.mort);
+				questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 
 		conversationPartImMort = new ConversationPart(new Object[] { "I'm Mort, this is my mine, don't touch my ore." },
-				new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+				new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 
 		// You feed them?
 		conversationResponseYouFeedThem = new ConversationResponse("You feed them?", null);
 
 		// Yup, wanna see?
 		conversationPartYupWannaSee = new ConversationPart(new Object[] { "Yup! ...you wanna see?" },
-				new ConversationResponse[] {}, questCaveOfTheBlind.mort); // pride?
-																			// shifty?
+				new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind); // pride?
+		// shifty?
 
 		// I already showed you
 		conversationPartIAlreadyShowedYou = new ConversationPart(new Object[] { "I already showed you!" },
-				new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+				new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 
 		// What do you feed them?
 		conversationResponseWhatDoYouFeedThem = new ConversationResponse("What do you feed them?", null);
@@ -146,21 +146,21 @@ public class ConversationForMort extends Conversation {
 
 		// Pun 1
 		conversationPartPun1 = new ConversationPart(new Object[] { "EYE couldn't possibly say" },
-				new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+				new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 
 		// ... 1
 		conversationResponseDotDotDot1 = new ConversationResponse("...What?", null);
 
 		// Pun 2
 		conversationPartPun2 = new ConversationPart(new Object[] { "IRISk a lot if I by telling you" },
-				new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+				new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 
 		// ... 2
 		conversationResponseDotDotDot2 = new ConversationResponse("Why are you talking like that?", null);
 
 		// Pun 3
 		conversationPartPun3 = new ConversationPart(new Object[] { "These will just keep getting Cornea!" },
-				new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+				new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 
 		// ... 3
 		conversationResponseDotDotDot3 = new ConversationResponse("...", null);
@@ -169,7 +169,7 @@ public class ConversationForMort extends Conversation {
 		conversationPartPun4 = new ConversationPart(
 				new Object[] {
 						"It's eyeballs, I feed them human eyeballs! ...it's all they'll eat. I've found though,  if I bury the eyes inside the corpse they'll at least eat through a lot of the evidence to get to their prize." },
-				new ConversationResponse[] {}, questCaveOfTheBlind.mort);
+				new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind);
 
 		// ...4
 		// conversationResponseDotDotDot4 = new
@@ -191,8 +191,8 @@ public class ConversationForMort extends Conversation {
 		// I'll show you
 		illShowYou = new ConversationPart(
 				new Object[] { "I'll show you, just keep your distance from them, they'll attack ON SIGHT. Heh heh." },
-				new ConversationResponse[] {}, questCaveOfTheBlind.mort); // Thin
-																			// grin
+				new ConversationResponse[] {}, questCaveOfTheBlind.mort, this.questCaveOfTheBlind); // Thin
+		// grin
 
 		// NEEDS TO BE ADDED
 		this.openingConversationPart = this.currentConversationPart = conversationPartopening;

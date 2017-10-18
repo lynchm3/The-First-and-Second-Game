@@ -8,6 +8,7 @@ import com.marklynch.level.constructs.adventurelog.AdventureInfo;
 import com.marklynch.level.constructs.adventurelog.AdventureLog;
 import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.popups.Notification;
@@ -17,7 +18,7 @@ public class Quest {
 	public String name;
 	public ArrayList<Objective> currentObjectives = new ArrayList<Objective>();
 	public ArrayList<AdventureInfo> infoList = new ArrayList<AdventureInfo>();
-	public ArrayList<Conversation> conversationLog = new ArrayList<Conversation>();
+	public ArrayList<ConversationPart> conversationLog = new ArrayList<ConversationPart>();
 	public boolean started = false;
 	public boolean resolved = false;
 	public int turnStarted;
@@ -75,6 +76,21 @@ public class Quest {
 			info.setSquare(Game.level.player.squareGameObjectIsOn);
 			info.setArea(Game.level.player.squareGameObjectIsOn.areaSquareIsIn);
 			infoList.add(info);
+		}
+
+	}
+
+	public void addConversationPart(ConversationPart conversationPart) {
+
+		if (resolved)
+			return;
+
+		if (!conversationLog.contains(conversationPart)) {
+
+			conversationPart.setTurn(Game.level.turn);
+			conversationPart.setSquare(Game.level.player.squareGameObjectIsOn);
+			conversationPart.setArea(Game.level.player.squareGameObjectIsOn.areaSquareIsIn);
+			conversationLog.add(conversationPart);
 		}
 
 	}

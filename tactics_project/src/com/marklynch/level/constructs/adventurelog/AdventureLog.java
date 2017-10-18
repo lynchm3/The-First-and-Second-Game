@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -247,14 +248,27 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		// Content
 		float height = 0;
 		if (questToDisplayInAdventureLog != null) {
-			for (AdventureInfo pieceOfInfo : questToDisplayInAdventureLog.infoList) {
+
+			for (ConversationPart conversationPart : questToDisplayInAdventureLog.conversationLog) {
 				TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-						Integer.MAX_VALUE, true, linkMap.get(pieceOfInfo),
-						new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.getArea(), pieceOfInfo.getSquare(),
-								TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
-				height += pieceOfInfo.height + 20;
+						Integer.MAX_VALUE, true, null,
+						new Object[] { conversationPart.getTurnString(), conversationPart.getArea(),
+								conversationPart.getSquare(), TextUtils.NewLine.NEW_LINE, conversationPart.text[0] });
+				height += conversationPart.height + 20;
 
 			}
+
+			// for (AdventureInfo pieceOfInfo :
+			// questToDisplayInAdventureLog.infoList) {
+			// TextUtils.printTextWithImages(contentX + contentBorder, contentY
+			// + contentBorder + height,
+			// Integer.MAX_VALUE, true, linkMap.get(pieceOfInfo),
+			// new Object[] { pieceOfInfo.getTurnString(),
+			// pieceOfInfo.getArea(), pieceOfInfo.getSquare(),
+			// TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
+			// height += pieceOfInfo.height + 20;
+			//
+			// }
 		}
 
 		if (buttons.size() == 1) {
