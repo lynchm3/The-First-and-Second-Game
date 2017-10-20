@@ -34,7 +34,7 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		INFO, CONVERSATION
 	};
 
-	public MODE mode = MODE.CONVERSATION;
+	public MODE mode = MODE.INFO;
 
 	public boolean showing = false;
 
