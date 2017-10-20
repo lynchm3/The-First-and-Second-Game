@@ -69,6 +69,12 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 
 	// public static ArrayList<Link> links;
 	// Close button
+	static LevelButton buttonInfo;
+	static String info = "INFO";
+	static int infoLength = Game.font.getWidth(info);
+	static LevelButton buttonConversations;
+	static String conversations = "CONVERSATIONS";
+	static int conversationsLength = Game.font.getWidth(conversations);
 	static LevelButton buttonClose;
 
 	public static Texture checkBoxChecked;
@@ -77,6 +83,37 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 
 	public AdventureLog() {
 		resize();
+
+		buttonInfo = new LevelButton(contentX, 0, infoLength, 30f, "end_turn_button.png", "end_turn_button.png", info,
+				true, true, Color.WHITE, Color.BLACK, null);
+		buttonInfo.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				mode = MODE.INFO;
+				buttonInfo.setTextColor(Color.BLACK);
+				buttonInfo.buttonColor = Color.WHITE;
+
+				buttonConversations.setTextColor(Color.WHITE);
+				buttonConversations.buttonColor = Color.BLACK;
+			}
+		});
+		buttons.add(buttonInfo);
+
+		buttonConversations = new LevelButton(contentX + infoLength + 16, 0, conversationsLength, 30f,
+				"end_turn_button.png", "end_turn_button.png", conversations, true, true, Color.BLACK, Color.WHITE,
+				null);
+		buttonConversations.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				mode = MODE.CONVERSATION;
+				buttonConversations.setTextColor(Color.BLACK);
+				buttonConversations.buttonColor = Color.WHITE;
+
+				buttonInfo.setTextColor(Color.WHITE);
+				buttonInfo.buttonColor = Color.BLACK;
+			}
+		});
+		buttons.add(buttonConversations);
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "CLOSE [N]", true, false, Color.BLACK, Color.WHITE, null);
@@ -102,7 +139,7 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		listWidth = 300;
 
 		contentX = listX + listWidth + listBorder * 2;
-		contentY = 0;
+		contentY = 30;
 		contentBorder = 16;
 
 		listItemHeight = 30;
@@ -122,6 +159,8 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		buttons.clear();
 		buttonsToMakeQuestAcive.clear();
 		buttonsToDisplayQuest.clear();
+		buttons.add(buttonInfo);
+		buttons.add(buttonConversations);
 		buttons.add(buttonClose);
 
 		generateLinks();
