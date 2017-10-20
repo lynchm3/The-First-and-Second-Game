@@ -1,0 +1,262 @@
+package com.marklynch.level.quest.smallgame;
+
+import com.marklynch.Game;
+import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.level.conversation.LeaveConversationListener;
+import com.marklynch.objects.GameObject;
+import com.marklynch.objects.actions.ActionGiveSpecificItem;
+import com.marklynch.objects.units.Actor;
+
+public class ConversationsSmallGame {
+
+	static QuestSmallGame quest;
+
+	// Conversations for bill
+	public static Conversation conversationEnviromentalistImNotSpying;
+	public static Conversation conversationEnviromentalistSaveTheWolf;
+
+	// Conversations for hunter
+	public static Conversation conversationHuntersJoinTheHunt;
+	public static Conversation conversationHuntersReadyToGo;
+	public static Conversation conversationHuntersOnlyHuntersGetLoot;
+
+	// Wolves
+	public static Conversation conversationWolfTheyPlot;
+	public static Conversation conversationWolfTheyCome;
+	public static Conversation conversationWolfISurvivedNoThanksToYou;
+	public static Conversation conversationWolfThankYou;
+
+	public static void createConversations() {
+		// Bill
+		setUpConversationImNotSpying();
+		setUpConversationSaveTheWolf();
+
+		// Hunters
+		setUpConversationReady();
+		setUpConversationHunterOpening();
+		setUpConversationYouDidntHelp();
+
+		// Wolves
+		setUpConversationTheyPlot();
+		setUpConversationTheyCome();
+		setUpConversationISurvivedNoThanksToYou();
+		setUpConversationThankYou();
+	}
+
+	private static void setUpConversationThankYou() {
+		conversationWolfThankYou = quest.superWolf.createConversation("Thank you");
+		conversationWolfThankYou.openingConversationPart.leaveConversationListener = new LeaveConversationListener() {
+			@Override
+			public void leave() {
+				for (Actor wolf : quest.wolfPack.getMembers()) {
+					wolf.thoughtsOnPlayer = 100;
+				}
+				quest.resolve();
+			}
+		};
+		conversationWolfThankYou.openingConversationPart.quest = quest;
+	}
+
+	private static void setUpConversationISurvivedNoThanksToYou() {
+		conversationWolfISurvivedNoThanksToYou = quest.superWolf.createConversation("We survived without your aid.");
+		conversationWolfISurvivedNoThanksToYou.openingConversationPart.leaveConversationListener = new LeaveConversationListener() {
+			@Override
+			public void leave() {
+				quest.resolve();
+			}
+		};
+		conversationWolfISurvivedNoThanksToYou.openingConversationPart.quest = quest;
+
+	}
+
+	private static void setUpConversationTheyCome() {
+		conversationWolfTheyCome = quest.superWolf.createConversation("They come");
+		conversationWolfTheyCome.openingConversationPart.quest = quest;
+	}
+
+	private static void setUpConversationTheyPlot() {
+		conversationWolfTheyPlot = quest.superWolf.createConversation("They plot");
+		conversationWolfTheyPlot.openingConversationPart.leaveConversationListener = new LeaveConversationListener() {
+			@Override
+			public void leave() {
+				quest.addInfo(quest.infoSeenWolves);
+				quest.addInfo(quest.infoTalkedToWolves);
+				quest.addObjective(quest.objectiveWolves);
+				quest.addObjective(quest.objectiveHunters);
+			}
+		};
+		conversationWolfTheyPlot.openingConversationPart.quest = quest;
+	}
+
+	public static void setUpConversationHunterOpening() {
+
+		ConversationPart conversationPartTheresEquipment = new ConversationPart(
+				new Object[] {
+						"There's should be some spare equipment 'round back, help yourself! Joe runs a shop to the North if you think you need anything else. Let us know when you're ready." },
+				new ConversationResponse[] {}, quest.hunterPack.getLeader(), quest);
+
+		ConversationPart conversationPartSuitYourself = new ConversationPart(new Object[] { "Suit yourself." },
+				new ConversationResponse[] {}, quest.hunterPack.getLeader(), quest);
+
+		ConversationResponse conversationResponseNoThanks = new ConversationResponse("No thanks",
+				conversationPartSuitYourself) {
+			@Override
+			public void select() {
+				super.select();
+				// ADD QUEST TO QUEST LOG IF NO IN HARDCORE MODE
+				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
+				// PACK HUNTERS"
+
+				quest.addInfo(quest.infoSeenHunters);
+				quest.addObjective(quest.objectiveHunters);
+
+			}
+		};
+		ConversationResponse conversationResponseYesPlease = new ConversationResponse("Yes please",
+				conversationPartTheresEquipment) {
+			@Override
+			public void select() {
+				super.select();
+				// ADD QUEST TO QUEST LOG IF NO IN HARDCORE MODE
+				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
+				// PACK HUNTERS"
+
+				quest.addInfo(quest.infoSeenHunters);
+				quest.addInfo(quest.infoAgreedToJoinHunters);
+
+				quest.addObjective(quest.objectiveHunters);
+				// Add marker for weapons only if theyre on the square
+				for (GameObject weapon : quest.weaponsBehindLodge) {
+					if (quest.squareBehindLodge.inventory.contains(weapon)) {
+						quest.addObjective(quest.objectiveWeaponsBehindLodge);
+						weapon.owner = null;
+					}
+				}
+
+			}
+		};
+
+		ConversationPart conversationPartWantToComeHunting = new ConversationPart(
+				new Object[] { "We're just about to head out on the hunt, an extra man wouldn't go amiss." },
+				new ConversationResponse[] { conversationResponseYesPlease, conversationResponseNoThanks },
+				quest.hunterPack.getLeader(), quest);
+
+		conversationHuntersJoinTheHunt = new Conversation(conversationPartWantToComeHunting);
+
+	}
+
+	private static void setUpConversationImNotSpying() {
+
+		// Environmentalist could have emoticon over his head showing his
+		// feelings
+		// Anime style
+		// try it out
+		ConversationPart conversationPartImNotSpying = new ConversationPart(
+				new Object[] { "What? NO! I'm not spying! You're spying!", quest.superWolf, quest.hunterBrent,
+						quest.environmentalistBill },
+				new ConversationResponse[] {}, quest.environmentalistBill, quest);
+
+		conversationPartImNotSpying.leaveConversationListener = new LeaveConversationListener() {
+
+			@Override
+			public void leave() {
+				quest.addInfo(quest.infoEnviromentalistWasSpying);
+				quest.addObjective(quest.objectiveEnvironmentalist);
+				quest.addObjective(quest.objectiveHunters);
+
+			}
+
+		};
+
+		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying);
+	}
+
+	private static void setUpConversationSaveTheWolf() {
+
+		ConversationPart conversationPartSaveTheWolf = new ConversationPart(new Object[] { "Save the wolf!" },
+				new ConversationResponse[] {}, quest.environmentalistBill, quest);
+
+		conversationPartSaveTheWolf.leaveConversationListener = new LeaveConversationListener() {
+
+			@Override
+			public void leave() {
+				quest.addObjective(quest.objectiveEnvironmentalist);
+				for (GameObject gameObject : quest.weaponsBehindLodge) {
+					if (quest.environmentalistBill.inventory.contains(gameObject)) {
+						new ActionGiveSpecificItem(quest.environmentalistBill, Game.level.player, gameObject, false)
+								.perform();
+
+					}
+				}
+				if (quest.haveInfo(quest.infoEnviromentalistWasSpying)) {
+					quest.addInfo(quest.infoSaveTheWolf2);
+				} else {
+					quest.addInfo(quest.infoSaveTheWolf1);
+				}
+			}
+
+		};
+		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf);
+
+	}
+
+	public static void setUpConversationReady() {
+
+		ConversationPart conversationAlrightLetsGo = new ConversationPart(
+				new Object[] {
+						"Alright! The cave is to the east, past the forest, at the entrance to a now defunct mining operation." },
+				new ConversationResponse[] {}, quest.hunterPack.getLeader(), quest);
+
+		ConversationPart conversationPartWellHurryOn = new ConversationPart(new Object[] { "Well hurry on!" },
+				new ConversationResponse[] {}, quest.hunterPack.getLeader(), quest);
+
+		ConversationResponse conversationResponseNotYet = new ConversationResponse("Not yet",
+				conversationPartWellHurryOn);
+		ConversationResponse conversationResponseReady = new ConversationResponse("Ready!", conversationAlrightLetsGo) {
+			@Override
+			public void select() {
+				super.select();
+				// Update quest log
+				// Set enviromentalist to come watch
+				// Hunters on the way
+				quest.addObjective(quest.objectiveWolves);
+				if (Game.level.quests.questCaveOfTheBlind.started == false) {
+					Game.level.quests.questCaveOfTheBlind
+							.addObjective(Game.level.quests.questCaveOfTheBlind.objectiveCave);
+					Game.level.quests.questCaveOfTheBlind.addObjective(quest.objectiveHunters);
+					Game.level.quests.questCaveOfTheBlind
+							.addInfo(Game.level.quests.questCaveOfTheBlind.infoHeardFromHunters);
+				}
+				quest.addInfo(quest.infoSetOffWithHunters);
+			}
+		};
+
+		ConversationPart conversationPartReadyToGo = new ConversationPart(new Object[] { "Ready to go, pal?" },
+				new ConversationResponse[] { conversationResponseReady, conversationResponseNotYet },
+				quest.hunterPack.getLeader(), quest);
+
+		conversationHuntersReadyToGo = new Conversation(conversationPartReadyToGo);
+
+	}
+
+	private static void setUpConversationYouDidntHelp() {
+		// Really like the "Now fuck off!" bit.
+		ConversationPart conversationPartOnlyHuntersGetLoot = new ConversationPart(
+				new Object[] { "Only hunters get loot. Now fuck off!" }, new ConversationResponse[] {},
+				quest.hunterPack.getLeader(), quest);
+		conversationPartOnlyHuntersGetLoot.leaveConversationListener = new LeaveConversationListener() {
+
+			@Override
+			public void leave() {
+				quest.addInfo(quest.infoToldToFuckOffByHunters);
+				quest.resolve();
+			}
+		};
+
+		conversationHuntersOnlyHuntersGetLoot = new Conversation(conversationPartOnlyHuntersGetLoot);
+
+	}
+
+}
