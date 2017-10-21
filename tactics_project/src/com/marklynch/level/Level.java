@@ -1649,6 +1649,13 @@ public class Level {
 			return null;
 		}
 
+		// On screen objectives links
+		for (Button button : adventureLog.objectiveLinks) {
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+				return button;
+		}
+
+		// Notifications
 		for (Notification notification : notifications) {
 			if (notification.mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
 				return notification.closeButton;
