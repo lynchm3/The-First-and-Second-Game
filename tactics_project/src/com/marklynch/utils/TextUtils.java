@@ -8,7 +8,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Decoration;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.effect.Effect;

@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs.bounds;
+package com.marklynch.level.constructs.area;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;

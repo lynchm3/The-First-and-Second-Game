@@ -1,7 +1,7 @@
 package com.marklynch.level.constructs.adventurelog;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.utils.TextUtils;
 

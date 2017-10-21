@@ -2,7 +2,7 @@ package com.marklynch.level.quest.caveoftheblind;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.inventory.Inventory;

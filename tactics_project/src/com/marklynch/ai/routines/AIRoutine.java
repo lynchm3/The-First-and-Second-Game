@@ -9,7 +9,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;

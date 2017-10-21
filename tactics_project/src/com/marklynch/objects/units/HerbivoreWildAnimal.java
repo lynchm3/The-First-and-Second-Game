@@ -2,7 +2,7 @@ package com.marklynch.objects.units;
 
 import com.marklynch.ai.routines.AIRoutineForHerbivoreWildAnimal;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;

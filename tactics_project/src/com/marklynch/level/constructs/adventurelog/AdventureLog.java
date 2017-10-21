@@ -414,7 +414,8 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		}
 	}
 
-	public void drawQuestsMarkersForOnScreenObjectives() {
+	public static void drawQuestsMarkersForOnScreenObjectives() {
+
 		for (Quest activeQuest : activeQuests) {
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
@@ -458,24 +459,22 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
 
 					targetSquare = currentObjective.gameObject.squareGameObjectIsOn;
-					float squareX = (currentObjective.gameObject.squareGameObjectIsOn.xInGridPixels);
-					float squareY = (currentObjective.gameObject.squareGameObjectIsOn.yInGridPixels);
-					x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
-							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH)));
-					y2 = (int) ((Game.windowHeight / 2) + (Game.zoom
-							* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT)));
 
 				} else if (currentObjective.square != null) {
 
 					targetSquare = currentObjective.square;
-					float squareX = (currentObjective.square.xInGridPixels);
-					float squareY = (currentObjective.square.yInGridPixels);
-					x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
-							* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH)));
-					y2 = (int) ((Game.windowHeight / 2) + (Game.zoom
-							* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT)));
 
 				}
+
+				if (targetSquare.onScreen())
+					continue;
+
+				float squareX = (targetSquare.xInGridPixels);
+				float squareY = (targetSquare.yInGridPixels);
+				x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
+						* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH)));
+				y2 = (int) ((Game.windowHeight / 2) + (Game.zoom
+						* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT)));
 
 				if (x2 != Integer.MAX_VALUE) {
 

@@ -13,10 +13,11 @@ import org.lwjgl.input.Keyboard;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AStarNode;
+import com.marklynch.level.Level;
 import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.adventurelog.Objective;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
@@ -454,13 +455,27 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (this.visibleToPlayer) {
 			TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionY,
 					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
-		} else {
-			QuadUtils.drawQuad(Color.WHITE, squarePositionX, squarePositionY, squarePositionX + Game.SQUARE_WIDTH,
-					squarePositionY + Game.SQUARE_HEIGHT);
-			TextureUtils.drawTexture(objective.gameObject.imageTexture, squarePositionX, squarePositionY,
-					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
+		} else if (onScreen()) {
+
+			float drawPositionX = (Game.halfWindowWidth) + (Game.zoom
+					* (squarePositionX + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
+			float drawPositionY = (Game.halfWindowHeight) + (Game.zoom
+					* (squarePositionY + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
+			QuadUtils.drawQuad(Color.WHITE, drawPositionX - 10, drawPositionY - 10, drawPositionX + 10,
+					drawPositionY + 10);
+			TextureUtils.drawTexture(objective.gameObject.imageTexture, drawPositionX - 10, drawPositionY - 10,
+					drawPositionX + 10, drawPositionY + 10);
 
 		}
+	}
+
+	public boolean onScreen() {
+
+		if (this.xInGrid >= Level.gridX1Bounds && this.xInGrid < Level.gridX2Bounds
+				&& this.yInGrid >= Level.gridY1Bounds && this.yInGrid < Level.gridY2Bounds) {
+			return true;
+		}
+		return false;
 	}
 
 	public Action drawActionThatWillBePerformed(boolean onMouse) {

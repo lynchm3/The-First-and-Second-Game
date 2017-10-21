@@ -19,7 +19,7 @@ import com.marklynch.ai.utils.AStarSearch;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.Power;

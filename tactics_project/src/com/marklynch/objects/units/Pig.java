@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.ai.routines.AIRoutineForPig;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.inventory.Inventory;

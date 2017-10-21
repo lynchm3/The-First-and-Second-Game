@@ -18,8 +18,8 @@ import com.marklynch.ai.utils.Move;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.adventurelog.AdventureLog;
 import com.marklynch.level.constructs.adventurelog.QuestList;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
-import com.marklynch.level.constructs.bounds.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.faction.FactionList;
@@ -774,24 +774,29 @@ public class Level {
 	// }
 	// }
 
+	public static int gridX1Bounds;
+	public static int gridX2Bounds;
+	public static int gridY1Bounds;
+	public static int gridY2Bounds;
+
 	public void drawBackground() {
 
 		// Squares
-		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.getDragXWithOffset()
-				- (Game.windowWidth / 2) / Game.zoom) / Game.SQUARE_WIDTH);
+		gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.getDragXWithOffset() - (Game.windowWidth / 2) / Game.zoom)
+				/ Game.SQUARE_WIDTH);
 		if (gridX1Bounds < 0)
 			gridX1Bounds = 0;
 
-		int gridX2Bounds = (int) (gridX1Bounds + ((Game.windowWidth / Game.SQUARE_WIDTH)) / Game.zoom) + 2;
+		gridX2Bounds = (int) (gridX1Bounds + ((Game.windowWidth / Game.SQUARE_WIDTH)) / Game.zoom) + 2;
 		if (gridX2Bounds >= width)
 			gridX2Bounds = width - 1;
 
-		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.getDragYWithOffset()
+		gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.getDragYWithOffset()
 				- (Game.windowHeight / 2) / Game.zoom) / Game.SQUARE_HEIGHT);
 		if (gridY1Bounds < 0)
 			gridY1Bounds = 0;
 
-		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 2;
+		gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 2;
 		if (gridY2Bounds >= height)
 			gridY2Bounds = height - 1;
 
@@ -827,7 +832,7 @@ public class Level {
 		Game.activeBatch.updateUniforms();
 
 		// Quest lines
-		AdventureLog.drawQuestMarkersForOffScreenObjectives();
+		// AdventureLog.drawQuestMarkersForOffScreenObjectives();
 
 		// Draw lines for the popup windows
 		for (PinWindow window : this.popupPinneds) {
@@ -995,9 +1000,6 @@ public class Level {
 	public static GameObject teleportee = null;
 
 	public void drawUI() {
-
-		// Quest markers for objects on screen
-		adventureLog.drawQuestsMarkersForOnScreenObjectives();
 
 		// Objects 2
 
@@ -1190,6 +1192,7 @@ public class Level {
 		// Game.activeBatch.updateUniforms();
 
 		// Quest lines
+		AdventureLog.drawQuestsMarkersForOnScreenObjectives();
 		AdventureLog.drawQuestMarkersForOffScreenObjectives();
 
 		Game.activeBatch.flush();

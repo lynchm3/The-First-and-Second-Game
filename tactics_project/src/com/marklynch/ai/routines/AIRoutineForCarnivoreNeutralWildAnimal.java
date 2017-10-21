@@ -2,7 +2,7 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;

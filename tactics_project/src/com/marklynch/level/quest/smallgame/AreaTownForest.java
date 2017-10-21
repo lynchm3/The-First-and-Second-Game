@@ -3,7 +3,7 @@ package com.marklynch.level.quest.smallgame;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
-import com.marklynch.level.constructs.bounds.Area;
+import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
