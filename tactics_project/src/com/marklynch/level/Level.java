@@ -542,11 +542,21 @@ public class Level {
 		buttons.add(pauseButton);
 	}
 
+	// values for zoom animation
 	boolean zoomToMap;
 	boolean zoomFromMap;
 	int nonMapZoomLevelIndex;
+
+	// values for center animation
 	public boolean centerToSquare;
 	public Square squareToCenterTo;
+
+	// values for square flash animation
+	public static boolean flashSquare;
+	public static Square squareToFlash;
+	public static int flashSquareCounter = 0;
+	public static final int flashSquareFrequency = 200;// ms
+	public static final int flashSquareTotalTime = 1200;// ms
 
 	public void openCloseInventory() {
 		if (Game.level.openInventories.size() > 0) {
@@ -1399,11 +1409,26 @@ public class Level {
 				Game.dragX = idealDragX;
 				Game.dragY = idealDragY;
 				centerToSquare = false;
+				Level.flashSquare = true;
+				Level.squareToFlash = squareToCenterTo;
+				Level.flashSquareCounter = 0;
 			} else {
 				float toMoveX = diffX / totalDiff;
 				float toMoveY = diffY / totalDiff;
 				Game.dragX += toMoveX * delta * 16f;
 				Game.dragY += toMoveY * delta * 16f;
+			}
+		}
+
+		if (flashSquare) {
+			flashSquareCounter += delta;
+			if (flashSquareCounter >= flashSquareTotalTime) {
+				squareToFlash.flash = false;
+				flashSquare = false;
+			} else if ((flashSquareCounter / flashSquareFrequency) % 2 == 0) {
+				squareToFlash.flash = true;
+			} else {
+				squareToFlash.flash = false;
 			}
 		}
 

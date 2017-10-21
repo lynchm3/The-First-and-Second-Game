@@ -112,6 +112,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public ArrayList<Actor> owners;
 	public boolean restricted;
 	public String name;
+	public boolean flash;
 
 	public Square(int x, int y, String imagePath, int travelCost, int elevation, SquareInventory inventory,
 			boolean restricted, Actor... owners) {
@@ -237,74 +238,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (restricted && Game.redHighlightOnRestrictedSquares) {
 			drawRedHighlight();
 		}
-
-		// square highlights
-
-		// if (reachableBySelectedCharater || weaponsThatCanAttack.size() > 0) {
-		//
-		// Texture highlightTexture = null;
-		//
-		// if (Game.level.activeActor != null &&
-		// Game.level.activeActor.equippedWeapon != null
-		// && this.inventory.size() != 0
-		// && Game.level.activeActor.equippedWeapon
-		// .hasRange(Game.level.activeActor.straightLineDistanceTo(this))
-		// && !Game.level.activeActor.hasAttackedThisTurn) {
-		// highlightTexture = Game.level.gameCursor.imageTexture4;
-		// } else if (Game.level.currentFactionMovingIndex == 0 && (inPath))//
-		// ||
-		// // this
-		// // ==
-		// // Game.squareMouseIsOver))
-		// highlightTexture = Game.level.gameCursor.imageTexture3;
-		// else if (reachableBySelectedCharater)
-		// highlightTexture = Game.level.gameCursor.imageTexture;
-		// else
-		// highlightTexture = Game.level.gameCursor.imageTexture2;
-		// TextureUtils.drawTexture(highlightTexture, squarePositionX,
-		// squarePositionX + Game.SQUARE_WIDTH,
-		// squarePositionY, squarePositionY + Game.SQUARE_HEIGHT);
-		// }
-
-		// if (this.reachableBySelectedCharater) {
-		// int costTextWidth = Game.font.getWidth("" + walkingDistanceToSquare);
-		// float costPositionX = squarePositionX + (Game.SQUARE_WIDTH -
-		// costTextWidth) / 2f;
-		// float costPositionY = squarePositionY + (Game.SQUARE_HEIGHT - 60) /
-		// 2f;
-
-		// if (walkingDistanceToSquare != Integer.MAX_VALUE &&
-		// Game.level.activeActor != null) {
-		// TextUtils.printTextWithImages(new Object[] { "" +
-		// walkingDistanceToSquare }, costPositionX, costPositionY,
-		// Integer.MAX_VALUE, true);
-		// }
-		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-		// }
-
-		// draw weapon icons on square
-		// if (this.gameObject != null
-		// && level.currentFactionMoving == level.factions.player) {
-		// float weaponWidthInPixels = Game.SQUARE_WIDTH / 5;
-		// float weaponHeightInPixels = Game.SQUARE_HEIGHT / 5;
-		// for (int i = 0; i < this.weaponsThatCanAttack.size(); i++) {
-		//
-		// Weapon weapon = this.weaponsThatCanAttack.get(i);
-		// float weaponPositionXInPixels = 0;
-		// float weaponPositionYInPixels = 0;
-		//
-		// weaponPositionXInPixels = this.x * (int) Game.SQUARE_WIDTH;
-		// weaponPositionYInPixels = this.y * (int) Game.SQUARE_HEIGHT
-		// + (i * weaponHeightInPixels);
-		//
-		// TextureUtils.drawTexture(weapon.imageTexture,
-		// weaponPositionXInPixels, weaponPositionXInPixels
-		// + weaponWidthInPixels, weaponPositionYInPixels,
-		// weaponPositionYInPixels + weaponHeightInPixels);
-		// }
-		// }
 		if (highlight) {
+			drawHighlight();
+		}
+		if (flash) {
 			drawHighlight();
 		}
 
