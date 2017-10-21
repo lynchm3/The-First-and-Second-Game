@@ -1,6 +1,7 @@
 package com.marklynch.ui.button;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -38,6 +39,17 @@ public class Link extends LevelButton {
 				Square square = (Square) object;
 				Game.level.centerToSquare = true;
 				Game.level.squareToCenterTo = square;
+				if (Game.level.adventureLog.showing)
+					Game.level.openCloseAdventureLog();
+			} else if (object instanceof Objective) {
+				Objective objective = (Objective) object;
+				if (objective.gameObject != null) {
+					Game.level.centerToSquare = true;
+					Game.level.squareToCenterTo = objective.gameObject.squareGameObjectIsOn;
+				} else if (objective.square != null) {
+					Game.level.centerToSquare = true;
+					Game.level.squareToCenterTo = objective.square;
+				}
 				if (Game.level.adventureLog.showing)
 					Game.level.openCloseAdventureLog();
 			}

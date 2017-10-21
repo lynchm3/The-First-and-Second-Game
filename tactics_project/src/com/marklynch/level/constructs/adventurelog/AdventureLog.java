@@ -393,8 +393,7 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 			linesPrinted++;
 			for (Objective objective : activeQuest.currentObjectives) {
 				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(objective.text) - 202,
-						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, objective.links,
-						new Object[] { objective.gameObject });
+						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, objective.links, objective);
 
 				objectiveLinks.add(objective.links.get(0));
 

@@ -8,6 +8,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Decoration;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
+import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
@@ -323,6 +324,15 @@ public class TextUtils {
 				}
 				offsetX += textWidth;
 
+			} else if (content instanceof Objective) {
+				Objective objective = (Objective) content;
+				float totalWidth = Game.font.getWidth(objective.text) + 20;
+				if (offsetX + totalWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+				offsetX += totalWidth;
+
 			}
 		}
 
@@ -368,7 +378,6 @@ public class TextUtils {
 
 			} else if (content instanceof Square) {
 
-				System.out.println("SQUARE LINK");
 				Square square = (Square) content;
 
 				float width = Game.font.getWidth(square.name);
@@ -376,8 +385,13 @@ public class TextUtils {
 				links.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content,
 						"View square"));
 
-			}
+			} else if (content instanceof Objective) {
+				Objective objective = (Objective) content;
 
+				links.add(new Link(0, 0, objective.width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE,
+						content, "View square"));
+
+			}
 		}
 
 		return links;
@@ -828,6 +842,31 @@ public class TextUtils {
 				}
 				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
+
+			} else if (content instanceof Objective) {
+				Objective objective = (Objective) content;
+				float textWidth = Game.font.getWidth(objective.text);
+				float textureWidth = 20;
+				if (offsetX + textWidth > maxWidth && offsetX != 0) {
+					offsetY += 20;
+					offsetX = 0;
+				}
+
+				if (links != null) {
+					Game.activeBatch.setColor(Color.YELLOW);
+					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
+					linkIndex++;
+				}
+
+				// Text
+				Game.font.drawText(Game.activeBatch, objective.text, posX + offsetX, posY + offsetY);
+
+				offsetX += textWidth;
+
+				// Image
+				float x = posX + offsetX;
+				TextureUtils.drawTexture(objective.texture, x, posY + offsetY, x + 20, posY + offsetY + 20);
+				offsetX += textureWidth;
 
 			}
 
