@@ -1,8 +1,11 @@
 package com.marklynch.level.constructs.journal;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
+import com.marklynch.ui.button.Link;
 import com.marklynch.utils.TextUtils;
 
 public class JournalLog {
@@ -13,6 +16,7 @@ public class JournalLog {
 	private Area area;
 	private Square square;
 	public float height;
+	public ArrayList<Link> links;
 
 	public JournalLog(Object object) {
 		super();
@@ -31,6 +35,7 @@ public class JournalLog {
 
 	public void setSquare(Square square) {
 		this.square = square;
+		links = TextUtils.getLinks(true, square, object);
 	}
 
 	public Square getSquare() {

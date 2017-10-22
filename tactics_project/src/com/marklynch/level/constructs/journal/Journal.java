@@ -2,7 +2,6 @@ package com.marklynch.level.constructs.journal;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -62,9 +61,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToTrackObjectives = new ArrayList<LevelButton>();
 
-	public HashMap<JournalLog, ArrayList<Link>> journalLogLinkMap = new HashMap<JournalLog, ArrayList<Link>>();
 	public ArrayList<Link> logLinks = new ArrayList<Link>();
-	public HashMap<ConversationPart, ArrayList<Link>> conversationLinkMap = new HashMap<ConversationPart, ArrayList<Link>>();
 	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
 	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
 
@@ -272,25 +269,15 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			return;
 
 		logLinks.clear();
-		journalLogLinkMap.clear();
 
 		conversationLinks.clear();
-		conversationLinkMap.clear();
 
 		for (JournalLog log : questToDisplayInJournal.logList) {
-
-			ArrayList<Link> generatedLinks = TextUtils.getLinks(true, log.getSquare(), log.object);
-			journalLogLinkMap.put(log, generatedLinks);
-			logLinks.addAll(generatedLinks);
+			logLinks.addAll(log.links);
 		}
 
 		for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
-			System.out.println("squareAndText - " + conversationPart.squareAndText);
-			System.out.println("squareAndText.size() - " + conversationPart.squareAndText.size());
-			ArrayList<Link> generatedLinks = TextUtils.getLinks(conversationPart.squareAndText);
-			System.out.println("generated links - " + generatedLinks);
-			conversationLinkMap.put(conversationPart, generatedLinks);
-			conversationLinks.addAll(generatedLinks);
+			conversationLinks.addAll(conversationPart.links);
 		}
 	}
 
@@ -312,7 +299,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			if (mode == MODE.LOG) {
 				for (JournalLog journalLog : questToDisplayInJournal.logList) {
 					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-							Integer.MAX_VALUE, true, journalLogLinkMap.get(journalLog),
+							Integer.MAX_VALUE, true, journalLog.links,
 							new Object[] { journalLog.getTurnString(), journalLog.getArea(), journalLog.getSquare(),
 									TextUtils.NewLine.NEW_LINE, journalLog.object });
 					height += journalLog.height + 20;
@@ -320,7 +307,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			} else if (mode == MODE.CONVERSATION) {
 				for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
 					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-							Integer.MAX_VALUE, true, conversationLinkMap.get(conversationPart),
+							Integer.MAX_VALUE, true, conversationPart.links,
 							new Object[] { conversationPart.getTurnString(), conversationPart.getArea(),
 									conversationPart.getSquare(), TextUtils.NewLine.NEW_LINE,
 									conversationPart.text[0] });
