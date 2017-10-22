@@ -15,6 +15,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class ConversationPart {
 	public ArrayList<Link> links;
+	public ArrayList<Link> linksForJournal;
 
 	protected ConversationResponse[] conversationResponses;
 	public Object[] text;
@@ -51,6 +52,7 @@ public class ConversationPart {
 		if (text != null) {
 			links = TextUtils.getLinks(text);
 			height = TextUtils.getDimensions(text, Integer.MAX_VALUE)[1];
+
 		}
 
 	}
@@ -124,28 +126,29 @@ public class ConversationPart {
 
 	}
 
-	public void setTurn(int turn) {
+	public void setTurnAndSquareAndArea(int turn, Square square, Area area) {
 		this.turn = turn;
 		this.turnString = Game.level.timeString + " (Turn " + turn + ") ";
-	}
 
-	public String getTurnString() {
-		return turnString;
-	}
-
-	public void setSquare(Square square) {
 		this.square = square;
 		squareAndText = new ArrayList<Object>();
 		squareAndText.add(square);
 		squareAndText.addAll(Arrays.asList(text));
+
+		this.area = area;
+
+		linksForJournal = new ArrayList<Link>();
+		linksForJournal.addAll(TextUtils.getLinks(true, square));
+		linksForJournal.addAll(links);
+
 	}
 
 	public Square getSquare() {
 		return square;
 	}
 
-	public void setArea(Area area) {
-		this.area = area;
+	public String getTurnString() {
+		return turnString;
 	}
 
 	public Area getArea() {

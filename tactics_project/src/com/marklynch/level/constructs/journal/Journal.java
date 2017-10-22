@@ -307,7 +307,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			} else if (mode == MODE.CONVERSATION) {
 				for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
 					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-							Integer.MAX_VALUE, true, conversationPart.links,
+							Integer.MAX_VALUE, true, conversationPart.linksForJournal,
 							new Object[] { conversationPart.getTurnString(), conversationPart.getArea(),
 									conversationPart.getSquare(), TextUtils.NewLine.NEW_LINE,
 									conversationPart.text[0] });

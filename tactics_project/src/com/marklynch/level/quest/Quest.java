@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Journal;
+import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
@@ -87,9 +87,8 @@ public class Quest {
 
 		if (!conversationLog.contains(conversationPart)) {
 
-			conversationPart.setTurn(Game.level.turn);
-			conversationPart.setSquare(Game.level.player.squareGameObjectIsOn);
-			conversationPart.setArea(Game.level.player.squareGameObjectIsOn.areaSquareIsIn);
+			conversationPart.setTurnAndSquareAndArea(Game.level.turn, Game.level.player.squareGameObjectIsOn,
+					Game.level.player.squareGameObjectIsOn.areaSquareIsIn);
 			conversationLog.add(conversationPart);
 		}
 
