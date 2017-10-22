@@ -217,8 +217,11 @@ public class Templates {
 	public static final Gate GATE = new Gate("Gate", 100, "gate.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 10f,
 			null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, 232, null, false, false, false,
 			GameObject.generateNewTemplateId());
-	public static final Chest CHEST = new Chest("Chest", 200, "chest.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
-			1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, 135, null, false,
+	public static final Chest CHEST = new Chest("Chest", 200, "chest.png", "chest_open.png", null, new Inventory(), 1,
+			1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, 135, null, false,
+			GameObject.generateNewTemplateId());
+	public static final Chest CRATE = new Chest("Crate", 200, "crate.png", "crate.png", null, new Inventory(), 1, 1, 0f,
+			0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, 135, null, false,
 			GameObject.generateNewTemplateId());
 	public static final RemoteDoor FALSE_WALL = new RemoteDoor("Wall", 500, "wall.png", null, new Inventory(), 1, 1, 0f,
 			0f, 1f, 1f, 10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, 200, null, false,

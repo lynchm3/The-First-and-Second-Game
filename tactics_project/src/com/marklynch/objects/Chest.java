@@ -13,8 +13,10 @@ public class Chest extends Openable {
 
 	Texture chestOpenTexture;
 	Texture chestClosedTexture;
+	String imagePathWhenOpen;
 
-	public Chest(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
+	public Chest(String name, int health, String imagePath, String imagePathWhenOpen, Square squareGameObjectIsOn,
+			Inventory inventory,
 
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
 			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
@@ -30,6 +32,10 @@ public class Chest extends Openable {
 		else if (this.inventory.size() == 0)
 			this.name = baseName + " (empty)";
 
+		chestClosedTexture = imageTexture;
+		this.imagePathWhenOpen = imagePathWhenOpen;
+		chestOpenTexture = ResourceUtils.getGlobalImage(imagePathWhenOpen);
+
 		canBePickedUp = true;
 		showInventory = false;
 		fitsInInventory = false;
@@ -41,11 +47,11 @@ public class Chest extends Openable {
 
 	}
 
-	@Override
-	public void loadImages() {
-		chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png");
-		chestClosedTexture = ResourceUtils.getGlobalImage("chest.png");
-	}
+	// @Override
+	// public void loadImages() {
+	// chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png");
+	// chestClosedTexture = ResourceUtils.getGlobalImage("chest.png");
+	// }
 
 	@Override
 	public void draw1() {
@@ -117,20 +123,10 @@ public class Chest extends Openable {
 	}
 
 	public Chest makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
-		return new Chest(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, locked, templateId, keys);
-	}
-
-	@Override
-	public Chest makeCopy(Square square, Actor owner) {
-		return new Chest(new String(baseName), (int) totalHealth, imageTexturePath, square, new Inventory(),
-
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, locked, templateId, keys);
+		return new Chest(new String(name), (int) totalHealth, imageTexturePath, imagePathWhenOpen, square,
+				new Inventory(), widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
+				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
+				electricResistance, poisonResistance, slashResistance, weight, value, owner, locked, templateId, keys);
 	}
 
 }
