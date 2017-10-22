@@ -15,9 +15,11 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionDiscover;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.QuadUtils;
@@ -153,7 +155,12 @@ public class Player extends Actor {
 
 	public void discoveryCheck() {
 		for (Square square : squaresVisibleToPlayerOnlyPlayer) {
-
+			for (GameObject discoverableGameObject : square.inventory.getGameObjectsOfClass(Discoverable.class)) {
+				Discoverable discoverable = ((Discoverable) discoverableGameObject);
+				if (!discoverable.discovered) {
+					new ActionDiscover(this, discoverable).perform();
+				}
+			}
 		}
 	}
 
