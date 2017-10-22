@@ -616,6 +616,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
+		if (this instanceof Discoverable) {
+			Discoverable discoverable = (Discoverable) this;
+			if (!discoverable.discovered)
+				return null;
+		}
 		if (this.canContainOtherObjects && !this.canShareSquare)
 			return new ActionLootItemsInOtherInventory(performer, this);
 		return null;
@@ -623,6 +628,11 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
+		if (this instanceof Discoverable) {
+			Discoverable discoverable = (Discoverable) this;
+			if (!discoverable.discovered)
+				return null;
+		}
 		if (this.canContainOtherObjects && this.inventory.size() > 0)
 			return new ActionLootItemsInOtherInventory(performer, this);
 		if (this.fitsInInventory)
@@ -636,6 +646,12 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		if (this.remainingHealth <= 0)
 			return actions;
+
+		if (this instanceof Discoverable) {
+			Discoverable discoverable = (Discoverable) this;
+			if (!discoverable.discovered)
+				return actions;
+		}
 
 		// Inspectable
 		if (this instanceof Inspectable) {

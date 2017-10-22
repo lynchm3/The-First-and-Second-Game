@@ -410,4 +410,8 @@ public class Templates {
 			0.5f, 0.5f, 16f, 16f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null,
 			new Effect[] {}, GameObject.generateNewTemplateId());
 
+	public static final Discoverable MOUND = new Discoverable("Mound of Dirt", 5, 1, "mound.png", null, null,
+			new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null,
+			GameObject.generateNewTemplateId());
+
 }

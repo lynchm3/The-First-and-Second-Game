@@ -20,6 +20,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Chest;
+import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Templates;
@@ -369,6 +370,9 @@ public class QuestSmallGame extends Quest {
 				}
 			}
 		});
+
+		Discoverable mound = Templates.MOUND.makeCopy(Game.level.squares[122][7], null);
+		mound.discovered();
 	}
 
 	@Override
