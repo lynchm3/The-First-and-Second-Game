@@ -13,7 +13,7 @@ import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Chest;
+import com.marklynch.objects.Storage;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
@@ -248,7 +248,7 @@ public class QuestCaveOfTheBlind extends Quest {
 				new Object[] {
 						"In: 1.5kg Grain, 38x Steak, 38x Grapefruit, 1x Replacement pickaxe Out: .2kg Gold Ore, .3kg Silver Ore, 2kg General Waste, 10kg Fecal Matter" },
 				null);
-		Chest securityChest = Templates.CHEST.makeCopy("Security Chest", Game.level.squares[259][9], false, null);
+		Storage securityChest = Templates.CHEST.makeCopy("Security Chest", Game.level.squares[259][9], false, null);
 		securityChest.inventory.add(Templates.PICKAXE.makeCopy(null, null));
 
 		// West Security to outer mine y 17 -> 21 55+56x
@@ -572,7 +572,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		mort.mortsRoom = new StructureRoom("Management", 265, 39, false, new ArrayList<Actor>(),
 				new RoomPart(265, 39, 274, 42));
 		rooms.add(mort.mortsRoom);
-		Chest confiscatedChest = Templates.CHEST.makeCopy("Confiscated", Game.level.squares[269][42], false, mort,
+		Storage confiscatedChest = Templates.CHEST.makeCopy("Confiscated", Game.level.squares[269][42], false, mort,
 				mortsKey);
 		confiscatedChest.inventory.add(alsKey);
 		mort.aiRoutine.roomBounds.add(mort.mortsRoom);

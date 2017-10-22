@@ -9,13 +9,13 @@ import com.marklynch.utils.ResourceUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class Chest extends Openable {
+public class Storage extends Openable {
 
 	Texture chestOpenTexture;
 	Texture chestClosedTexture;
 	String imagePathWhenOpen;
 
-	public Chest(String name, int health, String imagePath, String imagePathWhenOpen, Square squareGameObjectIsOn,
+	public Storage(String name, int health, String imagePath, String imagePathWhenOpen, Square squareGameObjectIsOn,
 			Inventory inventory,
 
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
@@ -122,8 +122,8 @@ public class Chest extends Openable {
 			this.name = baseName;
 	}
 
-	public Chest makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
-		return new Chest(new String(name), (int) totalHealth, imageTexturePath, imagePathWhenOpen, square,
+	public Storage makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
+		return new Storage(new String(name), (int) totalHealth, imageTexturePath, imagePathWhenOpen, square,
 				new Inventory(), widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
 				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
 				electricResistance, poisonResistance, slashResistance, weight, value, owner, locked, templateId, keys);

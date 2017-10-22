@@ -2,7 +2,7 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Chest;
+import com.marklynch.objects.Storage;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
@@ -82,7 +82,7 @@ public class AIRoutineForThief extends AIRoutine {
 
 		// 1. loot corpses, even if owned
 		GameObject container = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(50f, false, false, true, true, false,
-				true, 0, Corpse.class, Chest.class);
+				true, 0, Corpse.class, Storage.class);
 		if (container != null) {
 			if (container.owner != null && container.owner != actor)
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;

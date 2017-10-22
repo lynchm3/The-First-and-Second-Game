@@ -19,7 +19,7 @@ import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Chest;
+import com.marklynch.objects.Storage;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
@@ -292,7 +292,7 @@ public class QuestSmallGame extends Quest {
 		final Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[106][8], "Hunt Action Plan",
 				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);
 
-		Chest chest = Templates.CHEST.makeCopy("Chest", Game.level.squares[103][1], false, null);
+		Storage chest = Templates.CHEST.makeCopy("Chest", Game.level.squares[103][1], false, null);
 		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		chest.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, thief));
 
@@ -372,7 +372,7 @@ public class QuestSmallGame extends Quest {
 		});
 
 		Discoverable mound = Templates.MOUND.makeCopy(Game.level.squares[122][7], null);
-		Chest crate = Templates.CRATE.makeCopy("Crate", Game.level.squares[123][9], false, null);
+		Storage crate = Templates.CRATE.makeCopy("Crate", Game.level.squares[123][9], false, null);
 		crate.inventory.add(Templates.HATCHET.makeCopy(null, null));
 		// mound.discovered();
 	}
