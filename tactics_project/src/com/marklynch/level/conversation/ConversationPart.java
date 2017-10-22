@@ -28,7 +28,7 @@ public class ConversationPart {
 
 	public float height;
 
-	public Quest quest;
+	public ArrayList<Quest> quests;
 	private int turn;
 	private String turnString;
 	private Area area;
@@ -36,12 +36,12 @@ public class ConversationPart {
 	public ArrayList<Object> squareAndText;
 
 	public ConversationPart(Object[] text, ConversationResponse[] conversationResponses, GameObject talker,
-			Quest quest) {
+			Quest... quests) {
 		super();
 		this.conversationResponses = conversationResponses;
 		this.text = text;
 		this.talker = talker;
-		this.quest = quest;
+		this.quests = new ArrayList<Quest>(Arrays.asList(quests));
 		// textWidth = Game.font.getWidth(text);
 		// halfTextWidth = textWidth / 2;
 
@@ -55,10 +55,6 @@ public class ConversationPart {
 
 		}
 
-	}
-
-	public ConversationPart(Object[] text, ConversationResponse[] conversationResponses, GameObject talker) {
-		this(text, conversationResponses, talker, null);
 	}
 
 	public void drawStaticUI1() {
@@ -113,7 +109,7 @@ public class ConversationPart {
 	public void selectDialogueOption(char character) {
 		windowSelectConversationResponse.selectDialogueOption(character);
 
-		if (quest != null)
+		for (Quest quest : quests)
 			quest.addConversationPart(this);
 	}
 
@@ -121,7 +117,7 @@ public class ConversationPart {
 		if (leaveConversationListener != null)
 			leaveConversationListener.leave();
 
-		if (quest != null)
+		for (Quest quest : quests)
 			quest.addConversationPart(this);
 
 	}

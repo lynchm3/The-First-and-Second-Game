@@ -41,8 +41,8 @@ public class AggressiveWildAnimal extends WildAnimal {
 		super.postLoad2();
 	}
 
-	public AggressiveWildAnimal makeCopy(Square square, Faction faction, GameObject bed, GameObject[] mustHaves,
-			GameObject[] mightHaves, Area area) {
+	public AggressiveWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed,
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		AggressiveWildAnimal actor = new AggressiveWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
 				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,

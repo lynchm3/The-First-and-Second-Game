@@ -1,6 +1,7 @@
 package com.marklynch.level.quest.smallgame;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
@@ -56,7 +57,7 @@ public class ConversationsSmallGame {
 				quest.resolve();
 			}
 		};
-		conversationWolfThankYou.openingConversationPart.quest = quest;
+		conversationWolfThankYou.openingConversationPart.quests.add(quest);
 	}
 
 	private static void setUpConversationISurvivedNoThanksToYou() {
@@ -67,13 +68,13 @@ public class ConversationsSmallGame {
 				quest.resolve();
 			}
 		};
-		conversationWolfISurvivedNoThanksToYou.openingConversationPart.quest = quest;
+		conversationWolfISurvivedNoThanksToYou.openingConversationPart.quests.add(quest);
 
 	}
 
 	private static void setUpConversationTheyCome() {
 		conversationWolfTheyCome = quest.superWolf.createConversation("They come");
-		conversationWolfTheyCome.openingConversationPart.quest = quest;
+		conversationWolfTheyCome.openingConversationPart.quests.add(quest);
 	}
 
 	private static void setUpConversationTheyPlot() {
@@ -87,7 +88,7 @@ public class ConversationsSmallGame {
 				quest.addObjective(quest.objectiveHunters);
 			}
 		};
-		conversationWolfTheyPlot.openingConversationPart.quest = quest;
+		conversationWolfTheyPlot.openingConversationPart.quests.add(quest);
 	}
 
 	public static void setUpConversationHunterOpening() {
@@ -207,7 +208,7 @@ public class ConversationsSmallGame {
 		ConversationPart conversationAlrightLetsGo = new ConversationPart(
 				new Object[] {
 						"Alright! The cave is to the east, past the forest, at the entrance to a now defunct mining operation." },
-				new ConversationResponse[] {}, quest.hunterPack.getLeader(), quest);
+				new ConversationResponse[] {}, quest.hunterPack.getLeader(), quest, QuestList.questCaveOfTheBlind);
 
 		ConversationPart conversationPartWellHurryOn = new ConversationPart(new Object[] { "Well hurry on!" },
 				new ConversationResponse[] {}, quest.hunterPack.getLeader(), quest);

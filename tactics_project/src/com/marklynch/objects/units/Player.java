@@ -68,8 +68,8 @@ public class Player extends Actor {
 	}
 
 	@Override
-	public Player makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves, Area area) {
+	public Player makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		Player actor = new Player(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,

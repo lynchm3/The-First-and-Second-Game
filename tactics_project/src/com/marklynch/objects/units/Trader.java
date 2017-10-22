@@ -105,8 +105,8 @@ public class Trader extends Actor implements Comparator<GameObject> {
 	}
 
 	@Override
-	public Trader makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves, Area area) {
+	public Trader makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		Trader actor = new Trader(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,

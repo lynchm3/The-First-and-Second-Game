@@ -72,8 +72,8 @@ public class QuestThePigs extends Quest {
 		prescilla.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 
 		// Farmer
-		farmer = Templates.FARMER.makeCopy(Game.level.squares[32][75], Game.level.factions.townsPeople, null, 203,
-				new GameObject[] {}, new GameObject[] {}, null);
+		farmer = Templates.FARMER.makeCopy("Farmer Pete", Game.level.squares[32][75], Game.level.factions.townsPeople,
+				null, 203, new GameObject[] {}, new GameObject[] {}, null);
 		farmer.quest = this;
 		hoe = Templates.HOE.makeCopy(null, farmer);
 		farmer.inventory.add(hoe);

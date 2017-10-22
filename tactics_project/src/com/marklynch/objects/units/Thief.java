@@ -41,7 +41,7 @@ public class Thief extends Actor {
 	}
 
 	@Override
-	public Thief makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
+	public Thief makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 
 		Thief actor = new Thief(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,

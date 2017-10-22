@@ -41,8 +41,8 @@ public class Farmer extends Actor {
 	}
 
 	@Override
-	public Farmer makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
-			GameObject[] mightHaves, Area area) {
+	public Farmer makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		Farmer actor = new Farmer(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
 				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,

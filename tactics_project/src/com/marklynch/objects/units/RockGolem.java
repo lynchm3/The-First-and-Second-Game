@@ -149,7 +149,7 @@ public class RockGolem extends Monster {
 		return actions;
 	}
 
-	public RockGolem makeCopy(Square square, Faction faction, StructureRoom roomLivingIn, boolean awake,
+	public RockGolem makeCopy(String name, Square square, Faction faction, StructureRoom roomLivingIn, boolean awake,
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		RockGolem actor = new RockGolem(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,

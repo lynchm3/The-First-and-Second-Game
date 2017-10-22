@@ -12,11 +12,11 @@ import com.marklynch.level.quest.thesecretroom.QuestTheSecretRoom;
 
 @SuppressWarnings("serial")
 public class QuestList extends ArrayList<Quest> {
-	public QuestSmallGame questSmallGame;
-	public QuestCaveOfTheBlind questCaveOfTheBlind;
-	public QuestThePigs questThePigs;
-	public QuestBetweenTheWalls questBetweenTheWalls;
-	public QuestTheSecretRoom questTheSecretRoom;
+	public static QuestSmallGame questSmallGame;
+	public static QuestCaveOfTheBlind questCaveOfTheBlind;
+	public static QuestThePigs questThePigs;
+	public static QuestBetweenTheWalls questBetweenTheWalls;
+	public static QuestTheSecretRoom questTheSecretRoom;
 
 	public QuestList() {
 
@@ -24,11 +24,11 @@ public class QuestList extends ArrayList<Quest> {
 
 	public void makeQuests() {
 
-		questSmallGame = new QuestSmallGame();
-		add(questSmallGame);
-
 		questCaveOfTheBlind = new QuestCaveOfTheBlind();
 		add(questCaveOfTheBlind);
+
+		questSmallGame = new QuestSmallGame();
+		add(questSmallGame);
 
 		questThePigs = new QuestThePigs();
 		Level.quests.add(questThePigs);

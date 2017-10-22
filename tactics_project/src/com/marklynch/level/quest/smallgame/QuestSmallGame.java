@@ -217,7 +217,7 @@ public class QuestSmallGame extends Quest {
 
 		// Add lead hunter
 		GameObject brentsBed = Templates.BED.makeCopy(Game.level.squares[110][10]);
-		hunterBrent = Templates.HUNTER.makeCopy(Game.level.squares[105][8],
+		hunterBrent = Templates.HUNTER.makeCopy("Hunter Brent", Game.level.squares[105][8],
 				Game.level.factions.townsPeople, brentsBed, 203, new GameObject[] {
 						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
@@ -239,37 +239,37 @@ public class QuestSmallGame extends Quest {
 
 		// Add hunters
 		GameObject brontsBed = Templates.BED.makeCopy(Game.level.squares[108][10]);
-		Actor hunterBront1 = Templates.HUNTER.makeCopy(Game.level.squares[103][7],
+		Actor hunterBront1 = Templates.HUNTER.makeCopy("Hunter Bront", Game.level.squares[103][7],
 				Game.level.factions.townsPeople, brontsBed, 124, new GameObject[] {
 						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
 		GameObject bront2sBed = Templates.BED.makeCopy(Game.level.squares[106][10]);
-		Actor hunterBront2 = Templates.HUNTER.makeCopy(Game.level.squares[103][8],
+		Actor hunterBront2 = Templates.HUNTER.makeCopy("Hunter Brunt", Game.level.squares[103][8],
 				Game.level.factions.townsPeople, bront2sBed, 73, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
 		GameObject bront3sBed = Templates.BED.makeCopy(Game.level.squares[110][12]);
-		Actor hunterBront3 = hunterBront2.makeCopy(Game.level.squares[103][9],
+		Actor hunterBront3 = hunterBront2.makeCopy("Hunter Brant", Game.level.squares[103][9],
 				Game.level.factions.townsPeople, bront3sBed, 30, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
 		GameObject bront4sBed = Templates.BED.makeCopy(Game.level.squares[110][14]);
-		Actor hunterBront4 = hunterBront2.makeCopy(Game.level.squares[102][7],
+		Actor hunterBront4 = hunterBront2.makeCopy("Hunter Brint", Game.level.squares[102][7],
 				Game.level.factions.townsPeople, bront4sBed, 83, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
 		GameObject bront5sBed = Templates.BED.makeCopy(Game.level.squares[108][14]);
-		Actor hunterBront5 = hunterBront2.makeCopy(Game.level.squares[102][8],
+		Actor hunterBront5 = hunterBront2.makeCopy("Hunter Brynt", Game.level.squares[102][8],
 				Game.level.factions.townsPeople, bront5sBed, 23, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
 		GameObject bront6sBed = Templates.BED.makeCopy(Game.level.squares[106][14]);
-		Actor hunterBront6 = hunterBront2.makeCopy(Game.level.squares[102][9],
+		Actor hunterBront6 = hunterBront2.makeCopy("Hunter Brint the Younger", Game.level.squares[102][9],
 				Game.level.factions.townsPeople, bront6sBed, 43, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
 
-		Actor thief = Templates.THIEF.makeCopy(
+		Actor thief = Templates.THIEF.makeCopy("Thief Carl",
 				Game.level.squares[12][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);

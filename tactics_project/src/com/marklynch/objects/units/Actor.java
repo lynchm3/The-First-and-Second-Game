@@ -985,7 +985,7 @@ public class Actor extends GameObject {
 		equippedWeaponGUID = this.equipped.guid;
 	}
 
-	public Actor makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
+	public Actor makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 
 		Actor actor = new Actor(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,

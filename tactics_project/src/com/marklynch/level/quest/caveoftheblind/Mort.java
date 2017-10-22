@@ -57,7 +57,7 @@ public class Mort extends Actor {
 	}
 
 	@Override
-	public Mort makeCopy(Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
+	public Mort makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 
 		Mort actor = new Mort(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence, endurance,
