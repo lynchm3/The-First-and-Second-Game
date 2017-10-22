@@ -1,5 +1,6 @@
 package com.marklynch.objects;
 
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
@@ -47,6 +48,9 @@ public class Discoverable extends GameObject {
 	public void discovered() {
 		discovered = true;
 		imageTexture = postDiscoverTexture;
+		Level.flashGameObject = true;
+		Level.gameObjectToFlash = this;
+		Level.flashGameObjectCounter = 0;
 	}
 
 	@Override

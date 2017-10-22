@@ -557,6 +557,13 @@ public class Level {
 	public static final int flashSquareFrequency = 200;// ms
 	public static final int flashSquareTotalTime = 1200;// ms
 
+	// values for square gameObject animation
+	public static boolean flashGameObject;
+	public static GameObject gameObjectToFlash;
+	public static int flashGameObjectCounter = 0;
+	public static final int flashGameObjectFrequency = 200;// ms
+	public static final int flashGameObjectTotalTime = 1200;// ms
+
 	public void openCloseInventory() {
 		if (Game.level.openInventories.size() > 0) {
 			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {
@@ -1419,6 +1426,7 @@ public class Level {
 			}
 		}
 
+		// Flash square
 		if (flashSquare) {
 			flashSquareCounter += delta;
 			if (flashSquareCounter >= flashSquareTotalTime) {
@@ -1428,6 +1436,19 @@ public class Level {
 				squareToFlash.flash = true;
 			} else {
 				squareToFlash.flash = false;
+			}
+		}
+
+		// Flash gameObject
+		if (flashGameObject) {
+			flashGameObjectCounter += delta;
+			if (flashGameObjectCounter >= flashGameObjectTotalTime) {
+				gameObjectToFlash.flash = false;
+				flashGameObject = false;
+			} else if ((flashGameObjectCounter / flashGameObjectFrequency) % 2 == 0) {
+				gameObjectToFlash.flash = true;
+			} else {
+				gameObjectToFlash.flash = false;
 			}
 		}
 

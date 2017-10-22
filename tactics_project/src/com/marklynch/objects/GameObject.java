@@ -144,6 +144,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	public boolean toSell = false;
 	public boolean starred = false;
+	public boolean flash = false;
 
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
@@ -269,11 +270,21 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
 			// TextureUtils.skipNormals = false;
 
+			if (flash) {
+				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+						actorPositionXInPixels + width, actorPositionYInPixels + height, backwards, Color.BLACK);
+			}
+
 			if (!(this instanceof Actor)) {
 
 				Game.activeBatch.flush();
 			}
 		}
+	}
+
+	private void drawHighlight() {
+		// TODO Auto-generated method stub
+
 	}
 
 	public void draw2() {
