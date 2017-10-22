@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.constructs.adventurelog.AdventureInfo;
-import com.marklynch.level.constructs.adventurelog.AdventureLog;
-import com.marklynch.level.constructs.adventurelog.Objective;
+import com.marklynch.level.constructs.journal.JournalLog;
+import com.marklynch.level.constructs.journal.Journal;
+import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.objects.units.Actor;
@@ -17,7 +17,7 @@ public class Quest {
 
 	public String name;
 	public ArrayList<Objective> currentObjectives = new ArrayList<Objective>();
-	public ArrayList<AdventureInfo> infoList = new ArrayList<AdventureInfo>();
+	public ArrayList<JournalLog> logList = new ArrayList<JournalLog>();
 	public ArrayList<ConversationPart> conversationLog = new ArrayList<ConversationPart>();
 	public boolean started = false;
 	public boolean resolved = false;
@@ -51,7 +51,7 @@ public class Quest {
 				start();
 			}
 			currentObjectives.add(objective);
-			AdventureLog.createButtonsToTrackObjectives();
+			Journal.createButtonsToTrackObjectives();
 		}
 	}
 
@@ -59,12 +59,12 @@ public class Quest {
 		return currentObjectives.contains(objective);
 	}
 
-	public void addInfo(AdventureInfo info) {
+	public void addInfo(JournalLog info) {
 
 		if (resolved)
 			return;
 
-		if (!infoList.contains(info)) {
+		if (!logList.contains(info)) {
 
 			if (started) {
 				hasBeenUpdated();
@@ -75,7 +75,7 @@ public class Quest {
 			info.setTurn(Game.level.turn);
 			info.setSquare(Game.level.player.squareGameObjectIsOn);
 			info.setArea(Game.level.player.squareGameObjectIsOn.areaSquareIsIn);
-			infoList.add(info);
+			logList.add(info);
 		}
 
 	}
@@ -95,8 +95,8 @@ public class Quest {
 
 	}
 
-	public boolean haveInfo(AdventureInfo info) {
-		return infoList.contains(info);
+	public boolean haveInfo(JournalLog info) {
+		return logList.contains(info);
 	}
 
 	public void start() {

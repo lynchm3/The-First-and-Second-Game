@@ -1,11 +1,11 @@
-package com.marklynch.level.constructs.adventurelog;
+package com.marklynch.level.constructs.journal;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.utils.TextUtils;
 
-public class AdventureInfo {
+public class JournalLog {
 
 	public Object object;
 	private int turn;
@@ -14,7 +14,7 @@ public class AdventureInfo {
 	private Square square;
 	public float height;
 
-	public AdventureInfo(Object object) {
+	public JournalLog(Object object) {
 		super();
 		this.object = object;
 		height = TextUtils.getDimensions(Integer.MAX_VALUE, TextUtils.NewLine.NEW_LINE, object)[1];

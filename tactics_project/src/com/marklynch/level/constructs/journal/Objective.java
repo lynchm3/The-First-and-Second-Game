@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs.adventurelog;
+package com.marklynch.level.constructs.journal;
 
 import java.util.ArrayList;
 

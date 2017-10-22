@@ -1,7 +1,7 @@
 package com.marklynch.ui.button;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.adventurelog.Objective;
+import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -30,17 +30,17 @@ public class Link extends LevelButton {
 				new ActionPin(Game.level.player, (GameObject) object).perform();
 			} else if (object instanceof Quest) {
 				// open quest log on that thing
-				if (!Game.level.adventureLog.showing)
-					Game.level.openCloseAdventureLog();
-				Game.level.adventureLog.questToDisplayInAdventureLog = (Quest) object;
-				Game.level.adventureLog.generateLinks();
+				if (!Game.level.journal.showing)
+					Game.level.openCloseJournal();
+				Game.level.journal.questToDisplayInJournal = (Quest) object;
+				Game.level.journal.generateLinks();
 			} else if (object instanceof Square) {
 				// go to square
 				Square square = (Square) object;
 				Game.level.centerToSquare = true;
 				Game.level.squareToCenterTo = square;
-				if (Game.level.adventureLog.showing)
-					Game.level.openCloseAdventureLog();
+				if (Game.level.journal.showing)
+					Game.level.openCloseJournal();
 			} else if (object instanceof Objective) {
 				Objective objective = (Objective) object;
 				if (objective.gameObject != null) {
@@ -50,8 +50,8 @@ public class Link extends LevelButton {
 					Game.level.centerToSquare = true;
 					Game.level.squareToCenterTo = objective.square;
 				}
-				if (Game.level.adventureLog.showing)
-					Game.level.openCloseAdventureLog();
+				if (Game.level.journal.showing)
+					Game.level.openCloseJournal();
 			}
 		}
 	};

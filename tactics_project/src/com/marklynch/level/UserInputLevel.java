@@ -202,7 +202,7 @@ public class UserInputLevel {
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
-		if (Level.adventureLog.showing) {
+		if (Level.journal.showing) {
 		} else if (Game.level.openInventories.size() > 0) {
 			InventorySquare inventorySquareMouseIsOver = Game.level.openInventories.get(0)
 					.getInventorySquareMouseIsOver(mouseXinPixels, mouseYinPixels);
@@ -330,7 +330,7 @@ public class UserInputLevel {
 			} else if (Game.buttonHoveringOver != null) {
 				// Click button
 				Game.buttonHoveringOver.click();
-			} else if (Level.adventureLog.showing) {
+			} else if (Level.journal.showing) {
 
 			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
@@ -360,7 +360,7 @@ public class UserInputLevel {
 			if (Game.windowHoveringOver != null)
 				Game.windowHoveringOver.bringToFront();
 
-			if (Level.adventureLog.showing) {
+			if (Level.journal.showing) {
 			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
 			} else if (Game.level.popupTextBoxes.size() != 0) {
@@ -417,9 +417,9 @@ public class UserInputLevel {
 		if (scrollableMouseIsOver != null)
 			return;
 
-		if (Level.adventureLog.showing) {
-			draggableMouseIsOver = Level.adventureLog;
-			scrollableMouseIsOver = Level.adventureLog;
+		if (Level.journal.showing) {
+			draggableMouseIsOver = Level.journal;
+			scrollableMouseIsOver = Level.journal;
 		}
 
 		boolean inventoriesOpen = Game.level.openInventories.size() > 0;
@@ -534,7 +534,7 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			return;
-		} else if (Level.adventureLog.showing) {
+		} else if (Level.journal.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			if (Inventory.buttons.contains(Inventory.buttonLootAll)) {
@@ -581,7 +581,7 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			return;
-		} else if (Level.adventureLog.showing) {
+		} else if (Level.journal.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -625,7 +625,7 @@ public class UserInputLevel {
 
 		if (Game.level.popupTextBoxes.size() != 0) {
 			return;
-		} else if (Level.adventureLog.showing) {
+		} else if (Level.journal.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -669,7 +669,7 @@ public class UserInputLevel {
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.get(0).moveCaretLeft();
 			return;
-		} else if (Level.adventureLog.showing) {
+		} else if (Level.journal.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -719,7 +719,7 @@ public class UserInputLevel {
 		if (Game.level.popupTextBoxes.size() != 0) {
 			Game.level.popupTextBoxes.get(0).moveCaretRight();
 			return;
-		} else if (Level.adventureLog.showing) {
+		} else if (Level.journal.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -801,8 +801,8 @@ public class UserInputLevel {
 		Level.closeAllPopups();
 		Game.level.popupTextBoxes.clear();
 		// Game.level.notifications.clear();
-		if (Level.adventureLog.showing) {
-			Game.level.openCloseAdventureLog();
+		if (Level.journal.showing) {
+			Game.level.openCloseJournal();
 		} else if (Game.level.openInventories.size() != 0) {
 			Game.level.openCloseInventory();
 			return;
@@ -858,8 +858,8 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (character == 'n' || character == 'N') {
-			Game.level.openCloseAdventureLog();
+		if (character == 'j' || character == 'J') {
+			Game.level.openCloseJournal();
 			return;
 		}
 
@@ -914,7 +914,7 @@ public class UserInputLevel {
 			}
 			upPressed(true, false);
 		} else if (character == 'a' || character == 'A') {
-			if (Level.adventureLog.showing) {
+			if (Level.journal.showing) {
 
 			} else if (Game.level.openInventories.size() > 0) {
 			} else if (Game.level.conversation != null) {

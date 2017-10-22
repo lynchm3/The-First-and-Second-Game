@@ -16,8 +16,6 @@ import com.marklynch.GameCursor;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.ai.utils.Move;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.adventurelog.AdventureLog;
-import com.marklynch.level.constructs.adventurelog.QuestList;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -26,6 +24,8 @@ import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.inventory.SquareInventory;
+import com.marklynch.level.constructs.journal.Journal;
+import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerHealRanged;
@@ -108,7 +108,7 @@ public class Level {
 	public transient Script script;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
-	public static transient AdventureLog adventureLog = new AdventureLog();
+	public static transient Journal journal = new Journal();
 	public static transient QuestList quests = new QuestList();
 	public static transient FactionList factions = new FactionList();
 	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
@@ -204,7 +204,7 @@ public class Level {
 		Vein.loadStaticImages();
 		MapMarker.loadStaticImages();
 		Inventory.loadStaticImages();
-		AdventureLog.loadStaticImages();
+		Journal.loadStaticImages();
 
 		structures = new ArrayList<Structure>();
 
@@ -446,17 +446,17 @@ public class Level {
 		buttons.add(inventoryButton);
 
 		// UI buttons
-		Button adventureLogButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "ADVENTURES [N]", false, false, Color.BLACK, Color.WHITE,
-				"Take a look at your Adventure Log - [N]");
-		adventureLogButton.setClickListener(new ClickListener() {
+		Button journalButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png",
+				"undo_button_disabled.png", "ADVENTURES [J]", false, false, Color.BLACK, Color.WHITE,
+				"Take a look at your Journal - [J]");
+		journalButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				openCloseAdventureLog();
+				openCloseJournal();
 			}
 		});
-		adventureLogButton.enabled = true;
-		buttons.add(adventureLogButton);
+		journalButton.enabled = true;
+		buttons.add(journalButton);
 
 		centerButton = new LevelButton(110f, 440f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
 				"CENTER [Q]", false, false, Color.BLACK, Color.WHITE, "Center view on self - [Q]");
@@ -573,12 +573,12 @@ public class Level {
 		closeAllPopups();
 	}
 
-	public void openCloseAdventureLog() {
+	public void openCloseJournal() {
 
-		if (adventureLog.showing) {
-			adventureLog.close();
+		if (journal.showing) {
+			journal.close();
 		} else {
-			adventureLog.open();
+			journal.open();
 		}
 		closeAllPopups();
 	}
@@ -842,7 +842,7 @@ public class Level {
 		Game.activeBatch.updateUniforms();
 
 		// Quest lines
-		// AdventureLog.drawQuestMarkersForOffScreenObjectives();
+		// Journal.drawQuestMarkersForOffScreenObjectives();
 
 		// Draw lines for the popup windows
 		for (PinWindow window : this.popupPinneds) {
@@ -1202,8 +1202,8 @@ public class Level {
 		// Game.activeBatch.updateUniforms();
 
 		// Quest lines
-		AdventureLog.drawQuestsMarkersForOnScreenObjectives();
-		AdventureLog.drawQuestMarkersForOffScreenObjectives();
+		Journal.drawQuestsMarkersForOnScreenObjectives();
+		Journal.drawQuestMarkersForOffScreenObjectives();
 
 		Game.activeBatch.flush();
 
@@ -1239,7 +1239,7 @@ public class Level {
 		}
 
 		// Current objective quest
-		adventureLog.drawActiveQuestsObjectiveText();
+		journal.drawActiveQuestsObjectiveText();
 
 		// Turn text
 		if (currentFactionMoving != null) {
@@ -1302,8 +1302,8 @@ public class Level {
 			notificationsHeight += notification.height + Notification.border;
 		}
 
-		if (adventureLog.showing) {
-			adventureLog.drawStaticUI();
+		if (journal.showing) {
+			journal.drawStaticUI();
 		}
 
 		for (Inventory inventory : openInventories) {
@@ -1538,7 +1538,7 @@ public class Level {
 			}
 		} else if (Game.level.popupTextBoxes.size() != 0) {
 			return;
-		} else if (adventureLog.showing) {
+		} else if (journal.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -1608,19 +1608,19 @@ public class Level {
 		if (this.popupTextBoxes.size() != 0)
 			return null;
 
-		if (adventureLog.showing) {
-			for (Button button : adventureLog.buttons) {
+		if (journal.showing) {
+			for (Button button : journal.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
 
-			if (adventureLog.mode == AdventureLog.MODE.INFO) {
-				for (Button button : adventureLog.infoLinks) {
+			if (journal.mode == Journal.MODE.LOG) {
+				for (Button button : journal.logLinks) {
 					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 						return button;
 				}
-			} else if (adventureLog.mode == AdventureLog.MODE.CONVERSATION) {
-				for (Button button : adventureLog.conversationLinks) {
+			} else if (journal.mode == Journal.MODE.CONVERSATION) {
+				for (Button button : journal.conversationLinks) {
 					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 						return button;
 				}
@@ -1650,7 +1650,7 @@ public class Level {
 		}
 
 		// On screen objectives links
-		for (Button button : adventureLog.objectiveLinks) {
+		for (Button button : journal.objectiveLinks) {
 			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}
@@ -2066,8 +2066,8 @@ public class Level {
 	public void resize() {
 		if (openInventories.size() != 0)
 			openInventories.get(0).resize1();
-		if (adventureLog.showing)
-			adventureLog.resize();
+		if (journal.showing)
+			journal.resize();
 
 		if (conversation != null)
 			conversation.resize();

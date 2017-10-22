@@ -7,8 +7,6 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
-import com.marklynch.level.constructs.adventurelog.AdventureInfo;
-import com.marklynch.level.constructs.adventurelog.Objective;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
@@ -16,6 +14,8 @@ import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.journal.JournalLog;
+import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
@@ -163,40 +163,40 @@ public class QuestSmallGame extends Quest {
 	public Objective objectiveEnvironmentalist;
 
 	// Info strings
-	AdventureInfo infoSeenHunters = new AdventureInfo("I've spotted some hunters planning a hunt");
-	AdventureInfo infoSeenWolves = new AdventureInfo("I've spotted a pack of wolves.");
-	AdventureInfo infoAgreedToJoinHunters = new AdventureInfo(
+	JournalLog infoSeenHunters = new JournalLog("I've spotted some hunters planning a hunt");
+	JournalLog infoSeenWolves = new JournalLog("I've spotted a pack of wolves.");
+	JournalLog infoAgreedToJoinHunters = new JournalLog(
 			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
-	AdventureInfo infoSetOffWithHunters = new AdventureInfo(
+	JournalLog infoSetOffWithHunters = new JournalLog(
 			"I've set off with the hunters towards the creature's lair");
-	AdventureInfo infoEnviromentalistWasSpying = new AdventureInfo(
+	JournalLog infoEnviromentalistWasSpying = new JournalLog(
 			"I met a strange figure spying on the hunters of Town Lodge");
-	AdventureInfo infoSaveTheWolf1 = new AdventureInfo(
+	JournalLog infoSaveTheWolf1 = new JournalLog(
 			"Behind the hunting lodge, where the weapons were meant to be, stood a strange figure. He spoke 3 words - \"Save the wolf\"");
-	AdventureInfo infoSaveTheWolf2 = new AdventureInfo(
+	JournalLog infoSaveTheWolf2 = new JournalLog(
 			"Behind the hunting lodge, where the weapons were meant to be, stood the strange figure from before. He spoke 3 words - \"Save the wolf\"");
 
-	AdventureInfo infoRetrievedWeapons = new AdventureInfo("I've retrieved the weapons from behind the hunter's lodge");
-	AdventureInfo infoReadHuntPlan1 = new AdventureInfo("In the staging area for a hunt I found the plan for the hunt");
-	AdventureInfo infoReadHuntPlan2 = new AdventureInfo(
+	JournalLog infoRetrievedWeapons = new JournalLog("I've retrieved the weapons from behind the hunter's lodge");
+	JournalLog infoReadHuntPlan1 = new JournalLog("In the staging area for a hunt I found the plan for the hunt");
+	JournalLog infoReadHuntPlan2 = new JournalLog(
 			"In the staging area for the hunt I found the plan for the hunt");
 
-	AdventureInfo infoTalkedToWolves = new AdventureInfo(
+	JournalLog infoTalkedToWolves = new JournalLog(
 			"A wolf, talked to me. He told me \"They come\". He showed me hunters in the town nearby planning a hunt.");
 
-	AdventureInfo infoAttackedHunters = new AdventureInfo("I attacked the hunters");
-	AdventureInfo infoAttackedWolves = new AdventureInfo("I attacked the wolves");
-	AdventureInfo infoHuntersEngagedWolves = new AdventureInfo("The hunters have engaged the wolves");
-	AdventureInfo infoHuntersDead = new AdventureInfo("All the hunters are dead");
-	AdventureInfo infoWolvesDead = new AdventureInfo("All the wolves are dead");
+	JournalLog infoAttackedHunters = new JournalLog("I attacked the hunters");
+	JournalLog infoAttackedWolves = new JournalLog("I attacked the wolves");
+	JournalLog infoHuntersEngagedWolves = new JournalLog("The hunters have engaged the wolves");
+	JournalLog infoHuntersDead = new JournalLog("All the hunters are dead");
+	JournalLog infoWolvesDead = new JournalLog("All the wolves are dead");
 
 	// Resolutions
-	AdventureInfo infoToldToFuckOffByHunters = new AdventureInfo(
+	JournalLog infoToldToFuckOffByHunters = new JournalLog(
 			"I didn't help the hunters and they're giving me nothing");
-	AdventureInfo infoRewardedByHunters = new AdventureInfo("The hunters rewarded me for helping them");
-	AdventureInfo infoIgnoredByWolves = new AdventureInfo("I didn't help the wolves and they are ignoring me");
-	AdventureInfo infoThankedByWolves = new AdventureInfo("The wolves thanked me for helping them");
-	AdventureInfo infoAllDead = new AdventureInfo("The hunters and wolves are all dead");
+	JournalLog infoRewardedByHunters = new JournalLog("The hunters rewarded me for helping them");
+	JournalLog infoIgnoredByWolves = new JournalLog("I didn't help the wolves and they are ignoring me");
+	JournalLog infoThankedByWolves = new JournalLog("The wolves thanked me for helping them");
+	JournalLog infoAllDead = new JournalLog("The hunters and wolves are all dead");
 
 	// Flags
 
@@ -357,8 +357,8 @@ public class QuestSmallGame extends Quest {
 						addInfo(infoReadHuntPlan2);
 					}
 					turnUpdated = Level.turn;
-					addInfo(new AdventureInfo(huntingPlan));
-					addInfo(new AdventureInfo(superWolf));
+					addInfo(new JournalLog(huntingPlan));
+					addInfo(new JournalLog(superWolf));
 
 					BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
 					bestiaryKnowledge.name = true;

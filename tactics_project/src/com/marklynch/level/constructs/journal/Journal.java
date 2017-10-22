@@ -1,4 +1,4 @@
-package com.marklynch.level.constructs.adventurelog;
+package com.marklynch.level.constructs.journal;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,20 +25,20 @@ import com.marklynch.utils.TextureUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
+public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	public static final String active = "Active";
 	public static final String resolved = "Resolved";
 
 	public static enum MODE {
-		INFO, CONVERSATION
+		LOG, CONVERSATION
 	};
 
-	public MODE mode = MODE.INFO;
+	public MODE mode = MODE.LOG;
 
 	public boolean showing = false;
 
-	public static Quest questToDisplayInAdventureLog = null;
+	public static Quest questToDisplayInJournal = null;
 	public static ArrayList<Quest> activeQuests = new ArrayList<Quest>();
 
 	int listX;
@@ -62,17 +62,17 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToTrackObjectives = new ArrayList<LevelButton>();
 
-	public HashMap<AdventureInfo, ArrayList<Link>> infoLinkMap = new HashMap<AdventureInfo, ArrayList<Link>>();
-	public ArrayList<Link> infoLinks = new ArrayList<Link>();
+	public HashMap<JournalLog, ArrayList<Link>> journalLogLinkMap = new HashMap<JournalLog, ArrayList<Link>>();
+	public ArrayList<Link> logLinks = new ArrayList<Link>();
 	public HashMap<ConversationPart, ArrayList<Link>> conversationLinkMap = new HashMap<ConversationPart, ArrayList<Link>>();
 	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
 	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
 
 	// public static ArrayList<Link> links;
 	// Close button
-	static LevelButton buttonInfo;
-	static String info = "INFO";
-	static int infoLength = Game.font.getWidth(info);
+	static LevelButton buttonLog;
+	static String log = "LOG";
+	static int logLength = Game.font.getWidth(log);
 	static LevelButton buttonConversations;
 	static String conversations = "CONVERSATIONS";
 	static int conversationsLength = Game.font.getWidth(conversations);
@@ -82,25 +82,25 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 	public static Texture checkBoxUnchecked;
 	public static Texture exclamationTexture;
 
-	public AdventureLog() {
+	public Journal() {
 		resize();
 
-		buttonInfo = new LevelButton(contentX, 0, infoLength, 30f, "end_turn_button.png", "end_turn_button.png", info,
+		buttonLog = new LevelButton(contentX, 0, logLength, 30f, "end_turn_button.png", "end_turn_button.png", log,
 				true, true, Color.WHITE, Color.BLACK, null);
-		buttonInfo.setClickListener(new ClickListener() {
+		buttonLog.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				mode = MODE.INFO;
-				buttonInfo.setTextColor(Color.BLACK);
-				buttonInfo.buttonColor = Color.WHITE;
+				mode = MODE.LOG;
+				buttonLog.setTextColor(Color.BLACK);
+				buttonLog.buttonColor = Color.WHITE;
 
 				buttonConversations.setTextColor(Color.WHITE);
 				buttonConversations.buttonColor = Color.BLACK;
 			}
 		});
-		buttons.add(buttonInfo);
+		buttons.add(buttonLog);
 
-		buttonConversations = new LevelButton(contentX + infoLength + 16, 0, conversationsLength, 30f,
+		buttonConversations = new LevelButton(contentX + logLength + 16, 0, conversationsLength, 30f,
 				"end_turn_button.png", "end_turn_button.png", conversations, true, true, Color.BLACK, Color.WHITE,
 				null);
 		buttonConversations.setClickListener(new ClickListener() {
@@ -110,18 +110,18 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 				buttonConversations.setTextColor(Color.BLACK);
 				buttonConversations.buttonColor = Color.WHITE;
 
-				buttonInfo.setTextColor(Color.WHITE);
-				buttonInfo.buttonColor = Color.BLACK;
+				buttonLog.setTextColor(Color.WHITE);
+				buttonLog.buttonColor = Color.BLACK;
 			}
 		});
 		buttons.add(buttonConversations);
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "CLOSE [N]", true, false, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "CLOSE [J]", true, false, Color.BLACK, Color.WHITE, null);
 		buttonClose.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.openCloseAdventureLog();
+				Game.level.openCloseJournal();
 			}
 		});
 		buttons.add(buttonClose);
@@ -160,7 +160,7 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 		buttons.clear();
 		buttonsToMakeQuestAcive.clear();
 		buttonsToDisplayQuest.clear();
-		buttons.add(buttonInfo);
+		buttons.add(buttonLog);
 		buttons.add(buttonConversations);
 		buttons.add(buttonClose);
 
@@ -236,14 +236,14 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 						}
 						buttonToShowQuestDetails.buttonColor = Color.WHITE;
 						buttonToShowQuestDetails.setTextColor(Color.BLACK);
-						questToDisplayInAdventureLog = quest;
+						questToDisplayInJournal = quest;
 						generateLinks();
 						quest.updatedSinceLastViewed = false;
 
 					}
 				});
 
-				if (questToDisplayInAdventureLog == quest) {
+				if (questToDisplayInJournal == quest) {
 					buttonToShowQuestDetails.buttonColor = Color.WHITE;
 					buttonToShowQuestDetails.setTextColor(Color.BLACK);
 					quest.updatedSinceLastViewed = false;
@@ -253,7 +253,7 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 				// buttonToShowQuestDetails.click();
 				// }
 
-				if (questToDisplayInAdventureLog == null) {
+				if (questToDisplayInJournal == null) {
 					buttonToShowQuestDetails.click();
 				}
 
@@ -268,23 +268,23 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 
 	public void generateLinks() {
 
-		if (questToDisplayInAdventureLog == null)
+		if (questToDisplayInJournal == null)
 			return;
 
-		infoLinks.clear();
-		infoLinkMap.clear();
+		logLinks.clear();
+		journalLogLinkMap.clear();
 
 		conversationLinks.clear();
 		conversationLinkMap.clear();
 
-		for (AdventureInfo info : questToDisplayInAdventureLog.infoList) {
+		for (JournalLog log : questToDisplayInJournal.logList) {
 
-			ArrayList<Link> generatedLinks = TextUtils.getLinks(true, info.getSquare(), info.object);
-			infoLinkMap.put(info, generatedLinks);
-			infoLinks.addAll(generatedLinks);
+			ArrayList<Link> generatedLinks = TextUtils.getLinks(true, log.getSquare(), log.object);
+			journalLogLinkMap.put(log, generatedLinks);
+			logLinks.addAll(generatedLinks);
 		}
 
-		for (ConversationPart conversationPart : questToDisplayInAdventureLog.conversationLog) {
+		for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
 			System.out.println("squareAndText - " + conversationPart.squareAndText);
 			System.out.println("squareAndText.size() - " + conversationPart.squareAndText.size());
 			ArrayList<Link> generatedLinks = TextUtils.getLinks(conversationPart.squareAndText);
@@ -307,18 +307,18 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 
 		// Content
 		float height = 0;
-		if (questToDisplayInAdventureLog != null) {
+		if (questToDisplayInJournal != null) {
 
-			if (mode == MODE.INFO) {
-				for (AdventureInfo pieceOfInfo : questToDisplayInAdventureLog.infoList) {
+			if (mode == MODE.LOG) {
+				for (JournalLog journalLog : questToDisplayInJournal.logList) {
 					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-							Integer.MAX_VALUE, true, infoLinkMap.get(pieceOfInfo),
-							new Object[] { pieceOfInfo.getTurnString(), pieceOfInfo.getArea(), pieceOfInfo.getSquare(),
-									TextUtils.NewLine.NEW_LINE, pieceOfInfo.object });
-					height += pieceOfInfo.height + 20;
+							Integer.MAX_VALUE, true, journalLogLinkMap.get(journalLog),
+							new Object[] { journalLog.getTurnString(), journalLog.getArea(), journalLog.getSquare(),
+									TextUtils.NewLine.NEW_LINE, journalLog.object });
+					height += journalLog.height + 20;
 				}
 			} else if (mode == MODE.CONVERSATION) {
-				for (ConversationPart conversationPart : questToDisplayInAdventureLog.conversationLog) {
+				for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
 					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
 							Integer.MAX_VALUE, true, conversationLinkMap.get(conversationPart),
 							new Object[] { conversationPart.getTurnString(), conversationPart.getArea(),
@@ -401,8 +401,8 @@ public class AdventureLog implements Draggable, Scrollable, Comparator<Quest> {
 						20 + 20 * linesPrinted + 20);
 
 				// if (objective.gameObject != null) {
-				TextureUtils.drawTexture(objective.gameObject.imageTexture, Game.windowWidth - 200,
-						20 + 20 * linesPrinted, Game.windowWidth - 180, 20 + 20 * linesPrinted + 20);
+				TextureUtils.drawTexture(objective.texture, Game.windowWidth - 200, 20 + 20 * linesPrinted,
+						Game.windowWidth - 180, 20 + 20 * linesPrinted + 20);
 				// }
 
 				if (objective.showMarker) {
