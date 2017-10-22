@@ -124,12 +124,16 @@ public class Player extends Actor {
 		Player.xpThisLevel += xp;
 		Game.level.activityLogger.addActivityLog(new ActivityLog(
 				new Object[] { Game.level.player, " got " + xp + "XP (" + xpThisLevel + "/" + xpPerLevel + ")" }));
-		if (Player.xpThisLevel >= xpPerLevel) {
+		boolean leveledUp = false;
+		while (Player.xpThisLevel >= xpPerLevel) {
 			actorLevel++;
+			Player.xpThisLevel -= xpPerLevel;
+			leveledUp = true;
+		}
+		if (leveledUp) {
 			Game.level.notifications.add(new Notification(new Object[] { Game.level.player, " leveled Up!" }));
 			Game.level.activityLogger.addActivityLog(
 					new ActivityLog(new Object[] { Game.level.player, " are now Level " + actorLevel }));
-			Player.xpThisLevel -= xpPerLevel;
 		}
 	}
 
