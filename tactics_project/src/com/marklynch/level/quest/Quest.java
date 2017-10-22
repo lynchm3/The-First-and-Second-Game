@@ -59,12 +59,12 @@ public class Quest {
 		return currentObjectives.contains(objective);
 	}
 
-	public void addInfo(JournalLog info) {
+	public void addJournalLog(JournalLog journalLog) {
 
 		if (resolved)
 			return;
 
-		if (!logList.contains(info)) {
+		if (!logList.contains(journalLog)) {
 
 			if (started) {
 				hasBeenUpdated();
@@ -72,10 +72,10 @@ public class Quest {
 				start();
 			}
 
-			info.setTurn(Game.level.turn);
-			info.setSquare(Game.level.player.squareGameObjectIsOn);
-			info.setArea(Game.level.player.squareGameObjectIsOn.areaSquareIsIn);
-			logList.add(info);
+			journalLog.setTurn(Game.level.turn);
+			journalLog.setSquare(Game.level.player.squareGameObjectIsOn);
+			journalLog.setArea(Game.level.player.squareGameObjectIsOn.areaSquareIsIn);
+			logList.add(journalLog);
 		}
 
 	}
@@ -95,8 +95,8 @@ public class Quest {
 
 	}
 
-	public boolean haveInfo(JournalLog info) {
-		return logList.contains(info);
+	public boolean haveJournalLog(JournalLog journalLog) {
+		return logList.contains(journalLog);
 	}
 
 	public void start() {

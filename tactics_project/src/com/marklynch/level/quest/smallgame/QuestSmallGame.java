@@ -162,41 +162,41 @@ public class QuestSmallGame extends Quest {
 	public Objective objectiveHunters;
 	public Objective objectiveEnvironmentalist;
 
-	// Info strings
-	JournalLog infoSeenHunters = new JournalLog("I've spotted some hunters planning a hunt");
-	JournalLog infoSeenWolves = new JournalLog("I've spotted a pack of wolves.");
-	JournalLog infoAgreedToJoinHunters = new JournalLog(
+	// journalLog strings
+	JournalLog journalLogSeenHunters = new JournalLog("I've spotted some hunters planning a hunt");
+	JournalLog journalLogSeenWolves = new JournalLog("I've spotted a pack of wolves.");
+	JournalLog journalLogAgreedToJoinHunters = new JournalLog(
 			"I've agreed to join a group of hunters in town on a hunt for The Super Wolf, they told me there's some weapons around the back of their Lodge");
-	JournalLog infoSetOffWithHunters = new JournalLog(
+	JournalLog journalLogSetOffWithHunters = new JournalLog(
 			"I've set off with the hunters towards the creature's lair");
-	JournalLog infoEnviromentalistWasSpying = new JournalLog(
+	JournalLog journalLogEnviromentalistWasSpying = new JournalLog(
 			"I met a strange figure spying on the hunters of Town Lodge");
-	JournalLog infoSaveTheWolf1 = new JournalLog(
+	JournalLog journalLogSaveTheWolf1 = new JournalLog(
 			"Behind the hunting lodge, where the weapons were meant to be, stood a strange figure. He spoke 3 words - \"Save the wolf\"");
-	JournalLog infoSaveTheWolf2 = new JournalLog(
+	JournalLog journalLogSaveTheWolf2 = new JournalLog(
 			"Behind the hunting lodge, where the weapons were meant to be, stood the strange figure from before. He spoke 3 words - \"Save the wolf\"");
 
-	JournalLog infoRetrievedWeapons = new JournalLog("I've retrieved the weapons from behind the hunter's lodge");
-	JournalLog infoReadHuntPlan1 = new JournalLog("In the staging area for a hunt I found the plan for the hunt");
-	JournalLog infoReadHuntPlan2 = new JournalLog(
+	JournalLog journalLogRetrievedWeapons = new JournalLog("I've retrieved the weapons from behind the hunter's lodge");
+	JournalLog journalLogReadHuntPlan1 = new JournalLog("In the staging area for a hunt I found the plan for the hunt");
+	JournalLog journalLogReadHuntPlan2 = new JournalLog(
 			"In the staging area for the hunt I found the plan for the hunt");
 
-	JournalLog infoTalkedToWolves = new JournalLog(
+	JournalLog journalLogTalkedToWolves = new JournalLog(
 			"A wolf, talked to me. He told me \"They come\". He showed me hunters in the town nearby planning a hunt.");
 
-	JournalLog infoAttackedHunters = new JournalLog("I attacked the hunters");
-	JournalLog infoAttackedWolves = new JournalLog("I attacked the wolves");
-	JournalLog infoHuntersEngagedWolves = new JournalLog("The hunters have engaged the wolves");
-	JournalLog infoHuntersDead = new JournalLog("All the hunters are dead");
-	JournalLog infoWolvesDead = new JournalLog("All the wolves are dead");
+	JournalLog journalLogAttackedHunters = new JournalLog("I attacked the hunters");
+	JournalLog journalLogAttackedWolves = new JournalLog("I attacked the wolves");
+	JournalLog journalLogHuntersEngagedWolves = new JournalLog("The hunters have engaged the wolves");
+	JournalLog journalLogHuntersDead = new JournalLog("All the hunters are dead");
+	JournalLog journalLogWolvesDead = new JournalLog("All the wolves are dead");
 
 	// Resolutions
-	JournalLog infoToldToFuckOffByHunters = new JournalLog(
+	JournalLog journalLogToldToFuckOffByHunters = new JournalLog(
 			"I didn't help the hunters and they're giving me nothing");
-	JournalLog infoRewardedByHunters = new JournalLog("The hunters rewarded me for helping them");
-	JournalLog infoIgnoredByWolves = new JournalLog("I didn't help the wolves and they are ignoring me");
-	JournalLog infoThankedByWolves = new JournalLog("The wolves thanked me for helping them");
-	JournalLog infoAllDead = new JournalLog("The hunters and wolves are all dead");
+	JournalLog journalLogRewardedByHunters = new JournalLog("The hunters rewarded me for helping them");
+	JournalLog journalLogIgnoredByWolves = new JournalLog("I didn't help the wolves and they are ignoring me");
+	JournalLog journalLogThankedByWolves = new JournalLog("The wolves thanked me for helping them");
+	JournalLog journalLogAllDead = new JournalLog("The hunters and wolves are all dead");
 
 	// Flags
 
@@ -349,16 +349,16 @@ public class QuestSmallGame extends Quest {
 		huntingPlan.setOnReadListener(new ActionListener() {
 			@Override
 			public void run() {
-				if (!haveInfo(infoReadHuntPlan1) && !haveInfo(infoReadHuntPlan2)) {
+				if (!haveJournalLog(journalLogReadHuntPlan1) && !haveJournalLog(journalLogReadHuntPlan2)) {
 					if (!started) {
-						addInfo(infoReadHuntPlan1);
+						addJournalLog(journalLogReadHuntPlan1);
 						addObjective(objectiveHunters);
 					} else {
-						addInfo(infoReadHuntPlan2);
+						addJournalLog(journalLogReadHuntPlan2);
 					}
 					turnUpdated = Level.turn;
-					addInfo(new JournalLog(huntingPlan));
-					addInfo(new JournalLog(superWolf));
+					addJournalLog(new JournalLog(huntingPlan));
+					addJournalLog(new JournalLog(superWolf));
 
 					BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
 					bestiaryKnowledge.name = true;
@@ -377,17 +377,17 @@ public class QuestSmallGame extends Quest {
 			return;
 
 		// See hunters for first time
-		if (!haveInfo(infoSeenHunters)) {
+		if (!haveJournalLog(journalLogSeenHunters)) {
 			if (hunterBrent.squareGameObjectIsOn.visibleToPlayer) {
-				addInfo(infoSeenHunters);
+				addJournalLog(journalLogSeenHunters);
 				addObjective(objectiveHunters);
 			}
 		}
 
 		// See wolves for first time
-		if (!haveInfo(infoSeenWolves)) {
+		if (!haveJournalLog(journalLogSeenWolves)) {
 			if (superWolf.squareGameObjectIsOn.visibleToPlayer) {
-				addInfo(infoSeenWolves);
+				addJournalLog(journalLogSeenWolves);
 				addObjective(objectiveWolves);
 			}
 		}
@@ -397,46 +397,46 @@ public class QuestSmallGame extends Quest {
 			for (GameObject weapon : weaponsBehindLodge) {
 				if (Game.level.player.inventory.contains(weapon)) {
 					currentObjectives.remove(this.objectiveWeaponsBehindLodge);
-					if (!haveInfo(infoSaveTheWolf1) && !haveInfo(infoSaveTheWolf2)) {
-						addInfo(infoRetrievedWeapons);
+					if (!haveJournalLog(journalLogSaveTheWolf1) && !haveJournalLog(journalLogSaveTheWolf2)) {
+						addJournalLog(journalLogRetrievedWeapons);
 					}
 				}
 			}
 		}
 
 		// The wolves are dead
-		if (!haveInfo(infoWolvesDead)) {
+		if (!haveJournalLog(journalLogWolvesDead)) {
 			if (wolfPack.size() == 0) {
-				addInfo(infoWolvesDead);
+				addJournalLog(journalLogWolvesDead);
 			}
 		}
 
 		// Player has attacked the wolves
-		if (!haveInfo(infoAttackedWolves) && wolfPack.getAttackers().contains(Game.level.player)) {
-			addInfo(infoSeenWolves);
-			addInfo(infoAttackedWolves);
+		if (!haveJournalLog(journalLogAttackedWolves) && wolfPack.getAttackers().contains(Game.level.player)) {
+			addJournalLog(journalLogSeenWolves);
+			addJournalLog(journalLogAttackedWolves);
 
 		}
 
 		// The hunters are dead
-		if (!haveInfo(infoHuntersDead)) {
+		if (!haveJournalLog(journalLogHuntersDead)) {
 			if (hunterPack.size() == 0) {
-				addInfo(infoHuntersDead);
+				addJournalLog(journalLogHuntersDead);
 			}
 		}
 
 		// Player has attacked the hunters after accepting quest
-		if (!haveInfo(infoAttackedHunters) && hunterPack.getAttackers().contains(Game.level.player)) {
-			addInfo(infoSeenHunters);
-			addInfo(infoAttackedHunters);
+		if (!haveJournalLog(journalLogAttackedHunters) && hunterPack.getAttackers().contains(Game.level.player)) {
+			addJournalLog(journalLogSeenHunters);
+			addJournalLog(journalLogAttackedHunters);
 		}
 
 		// Hunters and wolves have fought
-		if (!haveInfo(infoHuntersEngagedWolves) && hunterPack.hasAttackers()) {
+		if (!haveJournalLog(journalLogHuntersEngagedWolves) && hunterPack.hasAttackers()) {
 			for (int j = 0; j < wolfPack.size(); j++) {
 				if (hunterPack.getAttackers().contains(wolfPack.getMember(j))) {
-					addInfo(infoSeenWolves);
-					addInfo(infoHuntersEngagedWolves);
+					addJournalLog(journalLogSeenWolves);
+					addJournalLog(journalLogHuntersEngagedWolves);
 					break;
 				}
 			}
@@ -464,12 +464,12 @@ public class QuestSmallGame extends Quest {
 			return false;
 		}
 
-		if (!haveInfo(infoSetOffWithHunters)) {
+		if (!haveJournalLog(journalLogSetOffWithHunters)) {
 			actor.activityDescription = ACTIVITY_PLANNING_A_HUNT;
 			if (actor == hunterPack.getLeader()) {
 				goToHuntPlanningArea(actor);
 			}
-		} else if (haveInfo(infoSetOffWithHunters) && !haveInfo(infoWolvesDead)) {
+		} else if (haveJournalLog(journalLogSetOffWithHunters) && !haveJournalLog(journalLogWolvesDead)) {
 
 			if (actor == hunterPack.getLeader()) {
 
@@ -487,14 +487,16 @@ public class QuestSmallGame extends Quest {
 					}
 				}
 			}
-		} else if (haveInfo(infoWolvesDead) && haveInfo(infoAttackedWolves) && !haveInfo(infoAgreedToJoinHunters)) {
+		} else if (haveJournalLog(journalLogWolvesDead) && haveJournalLog(journalLogAttackedWolves)
+				&& !haveJournalLog(journalLogAgreedToJoinHunters)) {
 			// Wolves were killed by player before accepting the mission
 			goToHuntPlanningArea(actor);
-		} else if (haveInfo(infoWolvesDead) && haveInfo(infoAttackedWolves) && !haveInfo(infoSetOffWithHunters)) {
+		} else if (haveJournalLog(journalLogWolvesDead) && haveJournalLog(journalLogAttackedWolves)
+				&& !haveJournalLog(journalLogSetOffWithHunters)) {
 			// Wolves were killed by player after accepting the mission, but
 			// before he told the hunters he's ready to go
 			goToHuntPlanningArea(actor);
-		} else if (haveInfo(infoWolvesDead) && haveInfo(infoAttackedWolves)) {
+		} else if (haveJournalLog(journalLogWolvesDead) && haveJournalLog(journalLogAttackedWolves)) {
 			// Wolves were killed after departing for the hunt, and the player
 			// helped kill them
 			// Talk to them... for some reason
@@ -505,7 +507,7 @@ public class QuestSmallGame extends Quest {
 					AIRoutineUtils.moveTowardsSquareToBeAdjacent(Game.level.player.squareGameObjectIsOn);
 				}
 			}
-		} else if (haveInfo(infoWolvesDead) && !haveInfo(infoAttackedWolves)) {
+		} else if (haveJournalLog(journalLogWolvesDead) && !haveJournalLog(journalLogAttackedWolves)) {
 			// Wolves were killed, but player didnt help
 			if (actor == hunterPack.getLeader()) {
 				if (actor.squareGameObjectIsOn != huntPlanningArea) {
@@ -525,17 +527,18 @@ public class QuestSmallGame extends Quest {
 	}
 
 	private boolean updateEnvironmentalist(Actor actor) {
-		if (haveInfo(infoSetOffWithHunters)) {
+		if (haveJournalLog(journalLogSetOffWithHunters)) {
 			// Hunters are on the move, head to wolf
 			if (environmentalistBill.canSeeGameObject(superWolf)) {
 			} else {
 				AIRoutineUtils.moveTowardsTargetSquare(superWolf.squareGameObjectIsOn);
 			}
 			return true;
-		} else if (!haveInfo(infoAgreedToJoinHunters)) {
+		} else if (!haveJournalLog(journalLogAgreedToJoinHunters)) {
 			// Starting point, spying
 			actor.activityDescription = ACTIVITY_SPYING;
-		} else if (haveInfo(infoAgreedToJoinHunters) && (!haveInfo(infoSaveTheWolf1) && !haveInfo(infoSaveTheWolf2))) {
+		} else if (haveJournalLog(journalLogAgreedToJoinHunters)
+				&& (!haveJournalLog(journalLogSaveTheWolf1) && !haveJournalLog(journalLogSaveTheWolf2))) {
 			// Go get the weapons
 
 			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
@@ -579,11 +582,11 @@ public class QuestSmallGame extends Quest {
 
 	public Conversation getConversationForHunter(Actor actor) {
 		// Talking to a hunter
-		if (!haveInfo(infoAgreedToJoinHunters)) {
+		if (!haveJournalLog(journalLogAgreedToJoinHunters)) {
 			return ConversationsSmallGame.conversationHuntersJoinTheHunt;
-		} else if (!haveInfo(infoSetOffWithHunters)) {
+		} else if (!haveJournalLog(journalLogSetOffWithHunters)) {
 			return ConversationsSmallGame.conversationHuntersReadyToGo;
-		} else if (haveInfo(infoWolvesDead) && !haveInfo(infoAttackedWolves)) {
+		} else if (haveJournalLog(journalLogWolvesDead) && !haveJournalLog(journalLogAttackedWolves)) {
 			return ConversationsSmallGame.conversationHuntersOnlyHuntersGetLoot;
 		}
 		return null;
@@ -591,9 +594,9 @@ public class QuestSmallGame extends Quest {
 
 	public Conversation getConversationForEnvironmentalist(Actor actor) {
 		// Talking to environmentalist
-		if (!haveInfo(infoAgreedToJoinHunters)) {
+		if (!haveJournalLog(journalLogAgreedToJoinHunters)) {
 			return ConversationsSmallGame.conversationEnviromentalistImNotSpying;
-		} else if (!haveInfo(infoSaveTheWolf1) && !haveInfo(infoSaveTheWolf2)) {
+		} else if (!haveJournalLog(journalLogSaveTheWolf1) && !haveJournalLog(journalLogSaveTheWolf2)) {
 			return ConversationsSmallGame.conversationEnviromentalistSaveTheWolf;
 		}
 		return environmentalistBill.createConversation("...");
@@ -602,17 +605,17 @@ public class QuestSmallGame extends Quest {
 	public Conversation getConversationForWolf(Actor actor) {
 
 		// Talking to environmentalist
-		if (haveInfo(infoAttackedWolves)) {
+		if (haveJournalLog(journalLogAttackedWolves)) {
 			return null;
-		} else if (haveInfo(infoHuntersDead) && !haveInfo(infoAttackedHunters)) {
+		} else if (haveJournalLog(journalLogHuntersDead) && !haveJournalLog(journalLogAttackedHunters)) {
 			return ConversationsSmallGame.conversationWolfISurvivedNoThanksToYou;
-		} else if (haveInfo(infoHuntersDead) && haveInfo(infoAttackedHunters)) {
+		} else if (haveJournalLog(journalLogHuntersDead) && haveJournalLog(journalLogAttackedHunters)) {
 			return ConversationsSmallGame.conversationWolfThankYou;
-		} else if (haveInfo(infoHuntersEngagedWolves)) {
+		} else if (haveJournalLog(journalLogHuntersEngagedWolves)) {
 			return null;
-		} else if (haveInfo(infoSetOffWithHunters)) {
+		} else if (haveJournalLog(journalLogSetOffWithHunters)) {
 			return ConversationsSmallGame.conversationWolfTheyCome;
-		} else if (!haveInfo(infoSetOffWithHunters)) {
+		} else if (!haveJournalLog(journalLogSetOffWithHunters)) {
 			return ConversationsSmallGame.conversationWolfTheyPlot;
 		}
 		return null;

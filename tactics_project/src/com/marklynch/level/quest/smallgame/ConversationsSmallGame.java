@@ -81,8 +81,8 @@ public class ConversationsSmallGame {
 		conversationWolfTheyPlot.openingConversationPart.leaveConversationListener = new LeaveConversationListener() {
 			@Override
 			public void leave() {
-				quest.addInfo(quest.infoSeenWolves);
-				quest.addInfo(quest.infoTalkedToWolves);
+				quest.addJournalLog(quest.journalLogSeenWolves);
+				quest.addJournalLog(quest.journalLogTalkedToWolves);
 				quest.addObjective(quest.objectiveWolves);
 				quest.addObjective(quest.objectiveHunters);
 			}
@@ -109,7 +109,7 @@ public class ConversationsSmallGame {
 				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
 				// PACK HUNTERS"
 
-				quest.addInfo(quest.infoSeenHunters);
+				quest.addJournalLog(quest.journalLogSeenHunters);
 				quest.addObjective(quest.objectiveHunters);
 
 			}
@@ -123,8 +123,8 @@ public class ConversationsSmallGame {
 				// THIS ALSO COMES WITH A TOAST / POPUP SAYING "QUEST STARTED -
 				// PACK HUNTERS"
 
-				quest.addInfo(quest.infoSeenHunters);
-				quest.addInfo(quest.infoAgreedToJoinHunters);
+				quest.addJournalLog(quest.journalLogSeenHunters);
+				quest.addJournalLog(quest.journalLogAgreedToJoinHunters);
 
 				quest.addObjective(quest.objectiveHunters);
 				// Add marker for weapons only if theyre on the square
@@ -162,7 +162,7 @@ public class ConversationsSmallGame {
 
 			@Override
 			public void leave() {
-				quest.addInfo(quest.infoEnviromentalistWasSpying);
+				quest.addJournalLog(quest.journalLogEnviromentalistWasSpying);
 				quest.addObjective(quest.objectiveEnvironmentalist);
 				quest.addObjective(quest.objectiveHunters);
 
@@ -190,10 +190,10 @@ public class ConversationsSmallGame {
 
 					}
 				}
-				if (quest.haveInfo(quest.infoEnviromentalistWasSpying)) {
-					quest.addInfo(quest.infoSaveTheWolf2);
+				if (quest.haveJournalLog(quest.journalLogEnviromentalistWasSpying)) {
+					quest.addJournalLog(quest.journalLogSaveTheWolf2);
 				} else {
-					quest.addInfo(quest.infoSaveTheWolf1);
+					quest.addJournalLog(quest.journalLogSaveTheWolf1);
 				}
 			}
 
@@ -227,9 +227,9 @@ public class ConversationsSmallGame {
 							.addObjective(Game.level.quests.questCaveOfTheBlind.objectiveCave);
 					Game.level.quests.questCaveOfTheBlind.addObjective(quest.objectiveHunters);
 					Game.level.quests.questCaveOfTheBlind
-							.addInfo(Game.level.quests.questCaveOfTheBlind.infoHeardFromHunters);
+							.addJournalLog(Game.level.quests.questCaveOfTheBlind.journalLogHeardFromHunters);
 				}
-				quest.addInfo(quest.infoSetOffWithHunters);
+				quest.addJournalLog(quest.journalLogSetOffWithHunters);
 			}
 		};
 
@@ -250,7 +250,7 @@ public class ConversationsSmallGame {
 
 			@Override
 			public void leave() {
-				quest.addInfo(quest.infoToldToFuckOffByHunters);
+				quest.addJournalLog(quest.journalLogToldToFuckOffByHunters);
 				quest.resolve();
 			}
 		};

@@ -7,9 +7,9 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
+import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
-import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
@@ -101,9 +101,9 @@ public class QuestCaveOfTheBlind extends Quest {
 
 	public Objective objectiveCave;
 
-	public JournalLog infoHeardFromHunters = new JournalLog(
+	public JournalLog journalLogHeardFromHunters = new JournalLog(
 			"I heard from some hunters about a now defunct mining operation to the east of town, past the forest, it might be worth having a look.");
-	JournalLog infoArrivedAtMine = new JournalLog("I've arrived at Mort and Mort Mining");
+	JournalLog journalLogArrivedAtMine = new JournalLog("I've arrived at Mort and Mort Mining");
 
 	public QuestCaveOfTheBlind() {
 		super();
