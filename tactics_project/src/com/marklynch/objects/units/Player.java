@@ -1,5 +1,9 @@
 package com.marklynch.objects.units;
 
+import java.util.ArrayList;
+
+import org.lwjgl.util.Point;
+
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.utils.AIPath;
@@ -12,6 +16,7 @@ import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.popups.Notification;
@@ -31,6 +36,7 @@ public class Player extends Actor {
 	public static float xp;
 	public static float xpThisLevel;
 	public static float xpPerLevel = 55;
+	public ArrayList<Square> squaresVisibleToPlayerOnlyPlayer = new ArrayList<Square>();
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
@@ -142,6 +148,206 @@ public class Player extends Actor {
 		float percentage = xpThisLevel / xpPerLevel;
 		float xpBarWidth = Game.windowWidth * percentage;
 		QuadUtils.drawQuad(Color.YELLOW, 0, Game.windowHeight - 20, xpBarWidth, Game.windowHeight);
+
+	}
+
+	public void discoveryCheck() {
+		for (Square square : squaresVisibleToPlayerOnlyPlayer) {
+
+		}
+	}
+
+	public void calculateVisibleSquares(Square square) {
+
+		// for (int x = 0; x < Game.level.squares.length; x++) {
+		// for (int y = 0; y < Game.level.squares[0].length; y++) {
+		// Game.level.squares[x][y].visibleToSelectedCharacter = false;
+		// if (this == Game.level.player) {
+		// Game.level.squares[x][y].visibleToPlayer = false;
+		// }
+		// }
+		// }
+
+		for (Square squarePreviouslyVisibleToPlayer : squaresVisibleToPlayerOnlyPlayer) {
+			squarePreviouslyVisibleToPlayer.visibleToPlayer = false;
+		}
+
+		squaresVisibleToPlayerOnlyPlayer.clear();
+
+		double x1 = square.xInGrid;
+		double y1 = square.yInGrid;
+
+		// for (int i = sight; i > 0; i--) {
+		ArrayList<Point> furthestVisiblePoints = this.getAllCoordinatesAtDistanceFromSquare(sight, square);
+		for (Point point : furthestVisiblePoints) {
+			markVisibleSquaresInLineTo(x1 + 0.5d, y1 + 0.5d, point.getX() + 0.5d, point.getY() + 0.5d);
+		}
+		// }
+
+		// Awkward corner squares (the inner corner ones that u cant tecnically
+		// see)
+		ArrayList<Square> awkwardSquaresToMakeVisible = new ArrayList<Square>();
+		for (Square potentiallyVIsibleSquare : this.getAllSquaresWithinDistance(sight, square)) {
+
+			if (potentiallyVIsibleSquare.visibleToPlayer)
+				continue;
+
+			if (!potentiallyVIsibleSquare.inventory.contains(Wall.class))
+				continue;
+
+			int visibleNeighbors = 0;
+
+			Square squareAbove = potentiallyVIsibleSquare.getSquareAbove();
+			if (squareAbove != null && squareAbove.visibleToPlayer)
+				visibleNeighbors++;
+
+			Square squareBelow = potentiallyVIsibleSquare.getSquareBelow();
+			if (squareBelow != null && squareBelow.visibleToPlayer)
+				visibleNeighbors++;
+
+			Square squareToLeftOf = potentiallyVIsibleSquare.getSquareToLeftOf();
+			if (squareToLeftOf != null && squareToLeftOf.visibleToPlayer)
+				visibleNeighbors++;
+
+			Square squareToRightOf = potentiallyVIsibleSquare.getSquareToRightOf();
+			if (squareToRightOf != null && squareToRightOf.visibleToPlayer)
+				visibleNeighbors++;
+
+			if (visibleNeighbors > 1) {
+				boolean playerToLeftOfAwkwardWall = false;
+				boolean playerToRightOfAwkwardWall = false;
+				boolean playerAboveAwkwardWall = false;
+				boolean playerBelowAwkwardWall = false;
+
+				if (this.squareGameObjectIsOn.xInGrid < potentiallyVIsibleSquare.xInGrid) {
+					playerToLeftOfAwkwardWall = true;
+				} else if (this.squareGameObjectIsOn.xInGrid > potentiallyVIsibleSquare.xInGrid) {
+					playerToRightOfAwkwardWall = true;
+				}
+				if (this.squareGameObjectIsOn.yInGrid < potentiallyVIsibleSquare.yInGrid) {
+					playerAboveAwkwardWall = true;
+				} else if (this.squareGameObjectIsOn.yInGrid > potentiallyVIsibleSquare.yInGrid) {
+					playerBelowAwkwardWall = true;
+				}
+
+				if (playerToLeftOfAwkwardWall && playerAboveAwkwardWall) {
+					if (!Game.level.squares[potentiallyVIsibleSquare.xInGrid - 1][potentiallyVIsibleSquare.yInGrid
+							- 1].inventory.blocksLineOfSight()) {
+						awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+					}
+				} else if (playerToLeftOfAwkwardWall && playerBelowAwkwardWall) {
+					if (!Game.level.squares[potentiallyVIsibleSquare.xInGrid - 1][potentiallyVIsibleSquare.yInGrid
+							+ 1].inventory.blocksLineOfSight()) {
+						awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+					}
+				} else if (playerToRightOfAwkwardWall && playerAboveAwkwardWall) {
+					if (!Game.level.squares[potentiallyVIsibleSquare.xInGrid + 1][potentiallyVIsibleSquare.yInGrid
+							- 1].inventory.blocksLineOfSight()) {
+						awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+					}
+				} else if (playerToRightOfAwkwardWall && playerBelowAwkwardWall) {
+					if (!Game.level.squares[potentiallyVIsibleSquare.xInGrid + 1][potentiallyVIsibleSquare.yInGrid
+							+ 1].inventory.blocksLineOfSight()) {
+						awkwardSquaresToMakeVisible.add(potentiallyVIsibleSquare);
+					}
+				}
+
+			}
+		}
+		for (Square awkwardSquareToMakeVisible : awkwardSquaresToMakeVisible) {
+			markSquareAsVisibleToActiveCharacter(awkwardSquareToMakeVisible.xInGrid,
+					awkwardSquareToMakeVisible.yInGrid);
+		}
+	}
+
+	public boolean markSquareAsVisibleToActiveCharacter(int x, int y) {
+
+		if (x < 0)
+			return true;
+		if (y < 0)
+			return true;
+		if (x >= Game.level.squares.length)
+			return true;
+		if (y >= Game.level.squares[0].length)
+			return true;
+
+		if (!squaresVisibleToPlayerOnlyPlayer.contains(Game.level.squares[x][y])) {
+			Game.level.squares[x][y].visibleToSelectedCharacter = true;
+			squaresVisibleToPlayerOnlyPlayer.add(Game.level.squares[x][y]);
+			if (this == Game.level.player) {
+				Game.level.squares[x][y].visibleToPlayer = true;
+				Game.level.squares[x][y].seenByPlayer = true;
+				// Seen area for first time?
+				if (Game.level.squares[x][y].areaSquareIsIn != null
+						&& Game.level.squares[x][y].areaSquareIsIn.seenByPlayer == false) {
+					Game.level.squares[x][y].areaSquareIsIn.hasBeenSeenByPlayer();
+				}
+				// Seen structure for first time?
+				if (Game.level.squares[x][y].structureSquareIsIn != null
+						&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
+					Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer();
+				}
+				// Seen room for first time?
+				if (Game.level.squares[x][y].structureRoomSquareIsIn != null
+						&& Game.level.squares[x][y].structureRoomSquareIsIn.seenByPlayer == false) {
+					Game.level.squares[x][y].structureRoomSquareIsIn.hasBeenSeenByPlayer();
+				}
+			}
+		}
+
+		if (Game.level.squares[x][y] == squareGameObjectIsOn)
+			return false;
+
+		return Game.level.squares[x][y].inventory.blocksLineOfSight();
+	}
+
+	// SUPERCOVER algorithm
+	public void markVisibleSquaresInLineTo(double x0, double y0, double x1, double y1) {
+		double vx = x1 - x0;
+		double vy = y1 - y0;
+		double dx = Math.sqrt(1 + Math.pow((vy / vx), 2));
+		double dy = Math.sqrt(1 + Math.pow((vx / vy), 2));
+		double ix = Math.floor(x0);
+		double iy = Math.floor(y0);
+		double sx, ex;
+
+		if (vx < 0) {
+			sx = -1;
+			ex = (x0 - ix) * dx;
+		} else {
+			sx = 1;
+			ex = (ix + 1 - x0) * dx;
+		}
+
+		double sy, ey;
+		if (vy < 0) {
+			sy = -1;
+			ey = (y0 - iy) * dy;
+		} else {
+			sy = 1;
+			ey = (iy + 1 - y0) * dy;
+		}
+
+		boolean done = false;
+		double len = Math.sqrt(vx * vx + vy * vy);
+
+		while (done == false) {
+			if (Math.min(ex, ey) <= len) {
+				double rx = ix;
+				double ry = iy;
+				if (ex < ey) {
+					ex = ex + dx;
+					ix = ix + sx;
+				} else {
+					ey = ey + dy;
+					iy = iy + sy;
+				}
+				done = markSquareAsVisibleToActiveCharacter((int) rx, (int) ry);
+			} else if (!done) {
+				done = true;
+				markSquareAsVisibleToActiveCharacter((int) ix, (int) iy);
+			}
+		}
 
 	}
 

@@ -446,9 +446,8 @@ public class Level {
 		buttons.add(inventoryButton);
 
 		// UI buttons
-		Button journalButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png",
-				"undo_button_disabled.png", "ADVENTURES [J]", false, false, Color.BLACK, Color.WHITE,
-				"Take a look at your Journal - [J]");
+		Button journalButton = new LevelButton(110f, 360f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"ADVENTURES [J]", false, false, Color.BLACK, Color.WHITE, "Take a look at your Journal - [J]");
 		journalButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -1881,6 +1880,7 @@ public class Level {
 			} else {
 				player.calculateVisibleSquares(Game.level.activeActor.squareGameObjectIsOn);
 			}
+			player.discoveryCheck();
 
 			ArrayList<GameObject> attackersToRemoveFromList = new ArrayList<GameObject>();
 			for (GameObject gameObject : player.getAttackers()) {

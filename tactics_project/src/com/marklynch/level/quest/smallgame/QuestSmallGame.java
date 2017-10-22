@@ -372,7 +372,7 @@ public class QuestSmallGame extends Quest {
 		});
 
 		Discoverable mound = Templates.MOUND.makeCopy(Game.level.squares[122][7], null);
-		mound.discovered();
+		// mound.discovered();
 	}
 
 	@Override
