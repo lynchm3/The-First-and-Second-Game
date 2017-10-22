@@ -138,7 +138,7 @@ public class ConversationPart {
 		this.area = area;
 
 		linksForJournal = new ArrayList<Link>();
-		linksForJournal.addAll(TextUtils.getLinks(true, square));
+		linksForJournal.addAll(TextUtils.getLinks(true, talker, square));
 		linksForJournal.addAll(links);
 
 	}

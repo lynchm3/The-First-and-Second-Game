@@ -277,7 +277,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		}
 
 		for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
-			conversationLinks.addAll(conversationPart.links);
+			conversationLinks.addAll(conversationPart.linksForJournal);
 		}
 	}
 
@@ -308,9 +308,9 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
 					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
 							Integer.MAX_VALUE, true, conversationPart.linksForJournal,
-							new Object[] { conversationPart.getTurnString(), conversationPart.getArea(),
-									conversationPart.getSquare(), TextUtils.NewLine.NEW_LINE,
-									conversationPart.text[0] });
+							new Object[] { conversationPart.getTurnString(), conversationPart.talker,
+									conversationPart.getArea(), conversationPart.getSquare(),
+									TextUtils.NewLine.NEW_LINE, conversationPart.text[0] });
 					height += conversationPart.height + 20;
 				}
 			}
