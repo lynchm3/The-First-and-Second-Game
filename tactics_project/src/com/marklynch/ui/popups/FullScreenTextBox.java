@@ -4,12 +4,13 @@ import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.ui.TextBox;
+import com.marklynch.ui.TextBoxHolder;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Color;
 
-public class PopupTextBox {
+public class FullScreenTextBox implements TextBoxHolder {
 
 	public GameObject gameObject;
 	// public float width;
@@ -17,10 +18,10 @@ public class PopupTextBox {
 	public TextBox textBox;
 	public float instructionsDrawPositionY;
 
-	public PopupTextBox(GameObject gameObject, String instructions) {
+	public FullScreenTextBox(GameObject gameObject, String instructions) {
 		this.gameObject = gameObject;
 		this.instructions = instructions;
-		this.textBox = new TextBox(new String(((MapMarker) gameObject).baseName), 300, 300);
+		this.textBox = new TextBox(this, new String(((MapMarker) gameObject).baseName), 300, 300);
 		this.instructionsDrawPositionY = textBox.drawPositionY - 36;
 	}
 
@@ -43,6 +44,7 @@ public class PopupTextBox {
 		textBox.keyTyped(character);
 	}
 
+	@Override
 	public void enterTyped() {
 		if (textBox.tempString.length() == 0)
 			textBox.tempString = MapMarker.NO_DESCRIPTION;
@@ -52,7 +54,7 @@ public class PopupTextBox {
 
 	}
 
-	public void backSpacedTyped() {
+	public void backSpaceTyped() {
 		if (textBox.tempString.equals(MapMarker.NO_DESCRIPTION)) {
 			textBox.tempString = "";
 			textBox.caretPositionIndex = 0;
@@ -66,23 +68,6 @@ public class PopupTextBox {
 			textBox.caretPositionIndex = 0;
 		}
 		textBox.deleteTyped();
-	}
-
-	public void updateRealtime(int delta) {
-		textBox.updateRealtime(delta);
-	}
-
-	public void moveCaretLeft() {
-		textBox.moveCaretLeft();
-	}
-
-	public void moveCaretRight() {
-		textBox.moveCaretRight();
-
-	}
-
-	public void moveCaretTo(int newPosition) {
-		textBox.moveCaretTo(newPosition);
 	}
 
 	public boolean isMouseOver(int mouseX, int mouseY) {

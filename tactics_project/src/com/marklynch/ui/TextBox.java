@@ -18,10 +18,11 @@ public class TextBox {
 	public String tempString;
 	public int width = 2;
 
-	// public TextBoxHolder parent;
+	public TextBoxHolder parent;
 
-	public TextBox(String tempString, float drawPositionX, float drawPositionY) {
+	public TextBox(TextBoxHolder parent, String tempString, float drawPositionX, float drawPositionY) {
 
+		this.parent = parent;
 		this.tempString = tempString;
 		this.drawPositionX = drawPositionX;
 		this.drawPositionY = drawPositionY;
@@ -139,6 +140,10 @@ public class TextBox {
 
 		}
 		return false;
+	}
+
+	public void enterTyped() {
+		parent.enterTyped();
 	}
 
 }

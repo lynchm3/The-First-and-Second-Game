@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
-import com.marklynch.ui.popups.PopupTextBox;
+import com.marklynch.ui.popups.FullScreenTextBox;
 
 public class ActionRename extends Action {
 
@@ -30,8 +30,8 @@ public class ActionRename extends Action {
 		if (!enabled)
 			return;
 
-		Game.level.popupTextBoxes.add(new PopupTextBox(target, "Enter Marker Name"));
-		Level.activeTextBox = Game.level.popupTextBoxes.get(0).textBox;
+		Game.level.fullScreenTextBox = new FullScreenTextBox(target, "Enter Marker Name");
+		Level.activeTextBox = Game.level.fullScreenTextBox.textBox;
 		// Templates.MAP_MARKER.makeCopy(target, null);
 		//
 		// if (Game.level.shouldLog(Game.level.player))

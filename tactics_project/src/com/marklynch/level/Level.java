@@ -61,12 +61,12 @@ import com.marklynch.ui.TextBox;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.popups.FullScreenTextBox;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
 import com.marklynch.ui.popups.PopupMenuActionButton;
 import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
-import com.marklynch.ui.popups.PopupTextBox;
 import com.marklynch.ui.quickbar.QuickBar;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -124,7 +124,7 @@ public class Level {
 	public ArrayList<PopupMenuSelectObject> popupMenuObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
-	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
+	public FullScreenTextBox fullScreenTextBox = null;
 	public static TextBox activeTextBox = null;
 	public ArrayList<Notification> notifications = new ArrayList<Notification>();
 	public ArrayList<PinWindow> popupPinneds = new ArrayList<PinWindow>();
@@ -1330,9 +1330,8 @@ public class Level {
 			popup.draw();
 		}
 
-		for (PopupTextBox popupTextBox : popupTextBoxes) {
-			popupTextBox.draw();
-		}
+		if (fullScreenTextBox != null)
+			fullScreenTextBox.draw();
 
 		if (Game.buttonHoveringOver != null)
 			Game.buttonHoveringOver.drawTooltip();
@@ -1478,8 +1477,8 @@ public class Level {
 			}
 		}
 
-		for (PopupTextBox popupTextBox : popupTextBoxes) {
-			popupTextBox.updateRealtime(delta);
+		if (activeTextBox != null) {
+			activeTextBox.updateRealtime(delta);
 		}
 
 		for (Decoration decoration : decorations)
@@ -1558,7 +1557,7 @@ public class Level {
 					highlightPlayButton();
 				}
 			}
-		} else if (Game.level.popupTextBoxes.size() != 0) {
+		} else if (Game.level.fullScreenTextBox != null) {
 			return;
 		} else if (journal.showing) {
 			return;
@@ -1627,7 +1626,7 @@ public class Level {
 
 	public Button getButtonFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
 
-		if (this.popupTextBoxes.size() != 0)
+		if (fullScreenTextBox != null)
 			return null;
 
 		if (journal.showing) {
@@ -1777,12 +1776,11 @@ public class Level {
 		return null;
 	}
 
-	public PopupTextBox getPopupTextBoxFromMousePosition(float mouseX, float mouseY, float alteredMouseX,
+	public FullScreenTextBox getPopupTextBoxFromMousePosition(float mouseX, float mouseY, float alteredMouseX,
 			float alteredMouseY) {
-		for (int i = popupTextBoxes.size() - 1; i >= 0; i--) {
-			if (popupTextBoxes.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
-				return popupTextBoxes.get(i);
-		}
+		if (fullScreenTextBox != null
+				&& fullScreenTextBox.isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
+			return fullScreenTextBox;
 		return null;
 	}
 

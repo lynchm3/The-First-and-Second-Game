@@ -208,7 +208,7 @@ public class UserInputLevel {
 					.getInventorySquareMouseIsOver(mouseXinPixels, mouseYinPixels);
 			Game.squareMouseIsOver = inventorySquareMouseIsOver;
 			Game.level.openInventories.get(0).setSquareMouseHoveringOver(inventorySquareMouseIsOver);
-		} else if (Game.level.popupTextBoxes.size() != 0) {
+		} else if (Game.level.fullScreenTextBox != null) {
 
 		} else if (Game.level.conversation != null) {
 
@@ -258,13 +258,13 @@ public class UserInputLevel {
 		Game.oldButtonHoveringOver = Game.buttonHoveringOver;
 		Game.buttonHoveringOver = null;
 		Game.windowHoveringOver = null;
-		Game.popupTextBoxHoveringOver = null;
+		Game.fullScreenTextBoxHoveringOver = null;
 		if (draggingMap == false) {
 			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
 			Game.windowHoveringOver = Game.level.getWindowFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
-			Game.popupTextBoxHoveringOver = Game.level.getPopupTextBoxFromMousePosition(Mouse.getX(), Mouse.getY(),
+			Game.fullScreenTextBoxHoveringOver = Game.level.getPopupTextBoxFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
 		}
 
@@ -334,9 +334,9 @@ public class UserInputLevel {
 
 			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
-			} else if (Game.popupTextBoxHoveringOver != null) {
-				Game.popupTextBoxHoveringOver.click(Mouse.getX(), (int) (Game.windowHeight - Mouse.getY()));
-			} else if (Game.level.popupTextBoxes.size() != 0) {
+			} else if (Game.fullScreenTextBoxHoveringOver != null) {
+				Game.fullScreenTextBoxHoveringOver.click(Mouse.getX(), (int) (Game.windowHeight - Mouse.getY()));
+			} else if (Game.level.fullScreenTextBox != null) {
 
 			} else if (Game.windowHoveringOver != null) {
 
@@ -363,7 +363,7 @@ public class UserInputLevel {
 			if (Level.journal.showing) {
 			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
-			} else if (Game.level.popupTextBoxes.size() != 0) {
+			} else if (Game.level.fullScreenTextBox != null) {
 
 			} else if (Game.windowHoveringOver != null) {
 
@@ -532,7 +532,7 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Game.level.popupTextBoxes.size() != 0) {
+		if (Game.level.fullScreenTextBox != null) {
 			return;
 		} else if (Level.journal.showing) {
 			return;
@@ -579,7 +579,7 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Game.level.popupTextBoxes.size() != 0) {
+		if (Game.level.fullScreenTextBox != null) {
 			return;
 		} else if (Level.journal.showing) {
 			return;
@@ -623,7 +623,7 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Game.level.popupTextBoxes.size() != 0) {
+		if (Game.level.fullScreenTextBox != null) {
 			return;
 		} else if (Level.journal.showing) {
 			return;
@@ -666,8 +666,8 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Game.level.popupTextBoxes.size() != 0) {
-			Game.level.popupTextBoxes.get(0).moveCaretLeft();
+		if (Level.activeTextBox != null) {
+			Level.activeTextBox.moveCaretLeft();
 			return;
 		} else if (Level.journal.showing) {
 			return;
@@ -716,8 +716,8 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Game.level.popupTextBoxes.size() != 0) {
-			Game.level.popupTextBoxes.get(0).moveCaretRight();
+		if (Level.activeTextBox != null) {
+			Level.activeTextBox.moveCaretRight();
 			return;
 		} else if (Level.journal.showing) {
 			return;
@@ -757,8 +757,8 @@ public class UserInputLevel {
 	}
 
 	public static void enterTyped() {
-		if (Game.level.popupTextBoxes.size() != 0) {
-			Game.level.popupTextBoxes.get(0).enterTyped();
+		if (Level.activeTextBox != null) {
+			Level.activeTextBox.enterTyped();
 			return;
 		}
 		if (Game.level.activeActor != Game.level.player)
@@ -772,10 +772,10 @@ public class UserInputLevel {
 		}
 	}
 
-	public static void backSpacedTyped() {
+	public static void backSpaceTyped() {
 
-		if (Game.level.popupTextBoxes.size() != 0) {
-			Game.level.popupTextBoxes.get(0).backSpacedTyped();
+		if (Game.level.activeTextBox != null) {
+			Game.level.activeTextBox.backSpaceTyped();
 			return;
 		}
 		if (Game.level.activeActor != Game.level.player)
@@ -785,8 +785,8 @@ public class UserInputLevel {
 
 	public static void deleteTyped() {
 
-		if (Game.level.popupTextBoxes.size() != 0) {
-			Game.level.popupTextBoxes.get(0).deleteTyped();
+		if (Game.level.activeTextBox != null) {
+			Game.level.activeTextBox.deleteTyped();
 			return;
 		}
 	}
@@ -799,7 +799,7 @@ public class UserInputLevel {
 		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
 
 		Level.closeAllPopups();
-		Game.level.popupTextBoxes.clear();
+		Game.level.fullScreenTextBox = null;
 		// Game.level.notifications.clear();
 		if (Level.journal.showing) {
 			Game.level.openCloseJournal();
@@ -858,8 +858,8 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Game.level.popupTextBoxes.size() == 1) {
-			Game.level.popupTextBoxes.get(0).keyTyped(character);
+		if (Game.level.fullScreenTextBox != null) {
+			Game.level.fullScreenTextBox.keyTyped(character);
 			return;
 		}
 
@@ -1010,7 +1010,7 @@ public class UserInputLevel {
 		}
 
 		if (keyStateBack == false && Keyboard.isKeyDown(Keyboard.KEY_BACK)) {
-			backSpacedTyped();
+			backSpaceTyped();
 			keyStateBack = true;
 		} else if (!Keyboard.isKeyDown(Keyboard.KEY_BACK)) {
 			keyStateBack = false;
