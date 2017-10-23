@@ -48,7 +48,7 @@ public class PopupTextBox {
 			textBox.tempString = MapMarker.NO_DESCRIPTION;
 		((MapMarker) gameObject).baseName = textBox.tempString;
 		gameObject.name = "Marker: " + textBox.tempString;
-		Game.level.popupTextBoxes.clear();
+		// Game.level.popupTextBoxes.clear();
 
 	}
 

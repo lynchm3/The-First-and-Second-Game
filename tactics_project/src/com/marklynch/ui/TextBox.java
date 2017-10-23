@@ -18,6 +18,8 @@ public class TextBox {
 	public String tempString;
 	public int width = 2;
 
+	// public TextBoxHolder parent;
+
 	public TextBox(String tempString, float drawPositionX, float drawPositionY) {
 
 		this.tempString = tempString;

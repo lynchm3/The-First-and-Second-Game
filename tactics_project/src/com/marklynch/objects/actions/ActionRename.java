@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.ui.popups.PopupTextBox;
@@ -30,6 +31,7 @@ public class ActionRename extends Action {
 			return;
 
 		Game.level.popupTextBoxes.add(new PopupTextBox(target, "Enter Marker Name"));
+		Level.activeTextBox = Game.level.popupTextBoxes.get(0).textBox;
 		// Templates.MAP_MARKER.makeCopy(target, null);
 		//
 		// if (Game.level.shouldLog(Game.level.player))

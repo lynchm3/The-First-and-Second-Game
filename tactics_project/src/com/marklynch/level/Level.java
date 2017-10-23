@@ -57,6 +57,7 @@ import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.PinWindow;
+import com.marklynch.ui.TextBox;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -124,6 +125,7 @@ public class Level {
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupTextBox> popupTextBoxes = new ArrayList<PopupTextBox>();
+	public static TextBox activeTextBox = null;
 	public ArrayList<Notification> notifications = new ArrayList<Notification>();
 	public ArrayList<PinWindow> popupPinneds = new ArrayList<PinWindow>();
 

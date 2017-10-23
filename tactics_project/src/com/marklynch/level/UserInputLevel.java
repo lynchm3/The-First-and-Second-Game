@@ -853,7 +853,12 @@ public class UserInputLevel {
 
 	public static void keyTyped(char character) {
 
-		if (Game.level.popupTextBoxes.size() != 0) {
+		if (Level.activeTextBox != null) {
+			Level.activeTextBox.keyTyped(character);
+			return;
+		}
+
+		if (Game.level.popupTextBoxes.size() == 1) {
 			Game.level.popupTextBoxes.get(0).keyTyped(character);
 			return;
 		}
