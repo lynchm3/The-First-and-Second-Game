@@ -1,6 +1,7 @@
 package com.marklynch.ui.popups;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.ui.TextBox;
@@ -21,7 +22,13 @@ public class FullScreenTextBox implements TextBoxHolder {
 	public FullScreenTextBox(GameObject gameObject, String instructions) {
 		this.gameObject = gameObject;
 		this.instructions = instructions;
-		this.textBox = new TextBox(this, new String(((MapMarker) gameObject).baseName), 300, 300);
+
+		String textBoxText = ((MapMarker) gameObject).baseName;
+		if (textBoxText == MapMarker.NO_DESCRIPTION) {
+			textBoxText = "";
+		}
+
+		this.textBox = new TextBox(this, textBoxText, MapMarker.NO_DESCRIPTION, 300, 300);
 		this.instructionsDrawPositionY = textBox.drawPositionY - 36;
 	}
 
@@ -37,8 +44,8 @@ public class FullScreenTextBox implements TextBoxHolder {
 
 	public void keyTyped(char character) {
 
-		if (textBox.tempString.equals(MapMarker.NO_DESCRIPTION)) {
-			textBox.tempString = "";
+		if (textBox.text.equals(MapMarker.NO_DESCRIPTION)) {
+			textBox.text = "";
 			textBox.caretPositionIndex = 0;
 		}
 		textBox.keyTyped(character);
@@ -46,25 +53,27 @@ public class FullScreenTextBox implements TextBoxHolder {
 
 	@Override
 	public void enterTyped() {
-		if (textBox.tempString.length() == 0)
-			textBox.tempString = MapMarker.NO_DESCRIPTION;
-		((MapMarker) gameObject).baseName = textBox.tempString;
-		gameObject.name = "Marker: " + textBox.tempString;
+		if (textBox.text.length() == 0)
+			textBox.text = MapMarker.NO_DESCRIPTION;
+		((MapMarker) gameObject).baseName = textBox.text;
+		gameObject.name = "Marker: " + textBox.text;
 		// Game.level.popupTextBoxes.clear();
+		Level.activeTextBox = null;
+		Level.fullScreenTextBox = null;
 
 	}
 
 	public void backSpaceTyped() {
-		if (textBox.tempString.equals(MapMarker.NO_DESCRIPTION)) {
-			textBox.tempString = "";
+		if (textBox.text.equals(MapMarker.NO_DESCRIPTION)) {
+			textBox.text = "";
 			textBox.caretPositionIndex = 0;
 		}
 		textBox.backSpaceTyped();
 	}
 
 	public void deleteTyped() {
-		if (textBox.tempString.equals(MapMarker.NO_DESCRIPTION)) {
-			textBox.tempString = "";
+		if (textBox.text.equals(MapMarker.NO_DESCRIPTION)) {
+			textBox.text = "";
 			textBox.caretPositionIndex = 0;
 		}
 		textBox.deleteTyped();

@@ -124,7 +124,7 @@ public class Level {
 	public ArrayList<PopupMenuSelectObject> popupMenuObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
-	public FullScreenTextBox fullScreenTextBox = null;
+	public static FullScreenTextBox fullScreenTextBox = null;
 	public static TextBox activeTextBox = null;
 	public ArrayList<Notification> notifications = new ArrayList<Notification>();
 	public ArrayList<PinWindow> popupPinneds = new ArrayList<PinWindow>();

@@ -858,22 +858,18 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Game.level.fullScreenTextBox != null) {
-			Game.level.fullScreenTextBox.keyTyped(character);
+		if (Level.fullScreenTextBox != null) {
+			Level.fullScreenTextBox.keyTyped(character);
 			return;
 		}
 
 		if (character == 'j' || character == 'J') {
 			Game.level.openCloseJournal();
 			return;
-		}
-
-		if (character == 'i' || character == 'I') {
+		} else if (character == 'i' || character == 'I') {
 			Game.level.openCloseInventory();
 			return;
-		}
-
-		if (character == ' ') {
+		} else if (character == ' ') {
 			waitPressed(true, false);
 		} else if (character == 'c' || character == 'C') {
 
@@ -957,6 +953,10 @@ public class UserInputLevel {
 			if (Game.level.conversation != null) {
 				Game.level.conversation.selectDialogueOption(character);
 			}
+		} else if (character == 'p' || character == 'P') {
+			Game.zoomLevelIndex--;
+		} else if (character == 'o' || character == 'O') {
+			Game.zoomLevelIndex++;
 		}
 
 	}
@@ -1316,7 +1316,6 @@ public class UserInputLevel {
 		}
 
 		if (keyStateO == false && Keyboard.isKeyDown(Keyboard.KEY_O)) {
-			Game.zoomLevelIndex++;
 			if (capsLock) {
 				if (keyStateLeftShift || keyStateRightShift) {
 					keyTyped('o');
@@ -1336,7 +1335,6 @@ public class UserInputLevel {
 		}
 
 		if (keyStateP == false && Keyboard.isKeyDown(Keyboard.KEY_P)) {
-			Game.zoomLevelIndex--;
 			if (capsLock) {
 				if (keyStateLeftShift || keyStateRightShift) {
 					keyTyped('p');

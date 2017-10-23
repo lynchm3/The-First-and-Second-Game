@@ -15,64 +15,69 @@ public class TextBox {
 	public static final int CARET_BLINK_TIME = 500;
 	public float drawPositionX, drawPositionY;
 	public float height = 20;
-	public String tempString;
-	public int width = 2;
+	public String text;
+	public String hint;
+	public float width = 2;
 
 	public TextBoxHolder parent;
 
-	public TextBox(TextBoxHolder parent, String tempString, float drawPositionX, float drawPositionY) {
+	public TextBox(TextBoxHolder parent, String text, String hint, float drawPositionX, float drawPositionY) {
 
 		this.parent = parent;
-		this.tempString = tempString;
+		this.text = text;
+		this.hint = hint;
 		this.drawPositionX = drawPositionX;
 		this.drawPositionY = drawPositionY;
 
 		caretX = drawPositionX + 5;
 		caretY = drawPositionX + 5;
-		caretPositionIndex = tempString.length();
+		caretPositionIndex = text.length();
 
 	}
 
 	public void draw() {
-		width = Game.font.getWidth(tempString);
-		// if(tempString.length() > 0)
-		// {
-		// int caretPosition =
-		// }
-		// else
-		// {
-		int caretPosition = Game.font.getWidth(tempString, 0, caretPositionIndex);
+		width = Game.windowWidth - drawPositionX;
 		// Text box
 		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionY, drawPositionX + width + 4, drawPositionY + height);
-		// Text string
-		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, true, null,
-				new Object[] { tempString });
+
+		if (text.length() > 0) {
+			// Text string
+			TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, true, null,
+					new Object[] { text });
+
+		} else {
+			// Text string
+			TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, true, null,
+					new Object[] { hint });
+
+		}
+
 		// Caret
+		int caretPosition = Game.font.getWidth(text, 0, caretPositionIndex);
 		if (caretOn) {
 			QuadUtils.drawQuad(Color.BLACK, drawPositionX + caretPosition, drawPositionY,
 					drawPositionX + caretPosition + 2, drawPositionY + height);
-
 		}
 	}
 
 	public void keyTyped(char character) {
-		tempString = tempString.substring(0, this.caretPositionIndex) + character
-				+ tempString.substring(this.caretPositionIndex, tempString.length());
+		text = text.substring(0, this.caretPositionIndex) + character
+				+ text.substring(this.caretPositionIndex, text.length());
 		caretPositionIndex++;
 	}
 
 	public void backSpaceTyped() {
-		if (tempString.length() > 0 && caretPositionIndex > 0) {
-			tempString = tempString.substring(0, this.caretPositionIndex - 1)
-					+ tempString.substring(this.caretPositionIndex, tempString.length());
+		if (text.length() > 0 && caretPositionIndex > 0) {
+			text = text.substring(0, this.caretPositionIndex - 1)
+					+ text.substring(this.caretPositionIndex, text.length());
 			caretPositionIndex--;
 		}
 	}
 
 	public void deleteTyped() {
-		if (tempString.length() > 0 && caretPositionIndex < tempString.length()) {
-			tempString = tempString.substring(0, this.caretPositionIndex)
-					+ tempString.substring(this.caretPositionIndex + 1, tempString.length());
+		if (text.length() > 0 && caretPositionIndex < text.length()) {
+			text = text.substring(0, this.caretPositionIndex)
+					+ text.substring(this.caretPositionIndex + 1, text.length());
 		}
 	}
 
@@ -94,7 +99,7 @@ public class TextBox {
 	}
 
 	public void moveCaretTo(int newPosition) {
-		if (newPosition < 0 || newPosition > tempString.length()) {
+		if (newPosition < 0 || newPosition > text.length()) {
 			return;
 		}
 		caretPositionIndex = newPosition;
@@ -117,8 +122,8 @@ public class TextBox {
 			int clickIndex = 0;
 			int relativeX = (int) (mouseX - drawPositionX);
 			boolean found = false;
-			while (clickIndex < tempString.length() && !found) {
-				if (relativeX < Game.font.getWidth(tempString, 0, clickIndex)) {
+			while (clickIndex < text.length() && !found) {
+				if (relativeX < Game.font.getWidth(text, 0, clickIndex)) {
 					found = true;
 				} else {
 					clickIndex++;
@@ -128,8 +133,8 @@ public class TextBox {
 			if (clickIndex == 0) {
 				this.caretPositionIndex = clickIndex;
 			} else {
-				int distanceToLower = Math.abs(relativeX - Game.font.getWidth(tempString, 0, clickIndex - 1));
-				int distanceToUpper = Math.abs(relativeX - Game.font.getWidth(tempString, 0, clickIndex));
+				int distanceToLower = Math.abs(relativeX - Game.font.getWidth(text, 0, clickIndex - 1));
+				int distanceToUpper = Math.abs(relativeX - Game.font.getWidth(text, 0, clickIndex));
 				if (distanceToLower <= distanceToUpper)
 					this.caretPositionIndex = clickIndex - 1;
 				else
