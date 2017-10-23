@@ -258,14 +258,22 @@ public class UserInputLevel {
 		Game.oldButtonHoveringOver = Game.buttonHoveringOver;
 		Game.buttonHoveringOver = null;
 		Game.windowHoveringOver = null;
-		Game.fullScreenTextBoxHoveringOver = null;
+		Game.textBoxHoveringOver = null;
 		if (draggingMap == false) {
 			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
 			Game.windowHoveringOver = Game.level.getWindowFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
-			Game.fullScreenTextBoxHoveringOver = Game.level.getPopupTextBoxFromMousePosition(Mouse.getX(), Mouse.getY(),
-					mouseXTransformed, mouseYTransformed);
+		}
+
+		if (draggingMap == false) {
+			if (Game.level.openInventories.size() > 0 && Game.level.openInventories.get(0)
+					.isMouseOverTextBox(Mouse.getX(), (int) (Game.windowHeight - Mouse.getY()))) {
+				Game.textBoxHoveringOver = Game.level.openInventories.get(0).textBox;
+			} else if (Game.level.fullScreenTextBox != null && Game.level.fullScreenTextBox.isMouseOver(Mouse.getX(),
+					(int) (Game.windowHeight - Mouse.getY()))) {
+				Game.textBoxHoveringOver = Game.level.fullScreenTextBox.textBox;
+			}
 		}
 
 		if (mouseLastX != Mouse.getX() || mouseLastY != Mouse.getY()) {
@@ -334,8 +342,8 @@ public class UserInputLevel {
 
 			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
-			} else if (Game.fullScreenTextBoxHoveringOver != null) {
-				Game.fullScreenTextBoxHoveringOver.click(Mouse.getX(), (int) (Game.windowHeight - Mouse.getY()));
+			} else if (Game.textBoxHoveringOver != null) {
+				Game.textBoxHoveringOver.click(Mouse.getX(), (int) (Game.windowHeight - Mouse.getY()));
 			} else if (Game.level.fullScreenTextBox != null) {
 
 			} else if (Game.windowHoveringOver != null) {
@@ -855,11 +863,6 @@ public class UserInputLevel {
 
 		if (Level.activeTextBox != null) {
 			Level.activeTextBox.keyTyped(character);
-			return;
-		}
-
-		if (Level.fullScreenTextBox != null) {
-			Level.fullScreenTextBox.keyTyped(character);
 			return;
 		}
 

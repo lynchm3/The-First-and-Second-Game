@@ -29,6 +29,8 @@ import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
+import com.marklynch.ui.TextBox;
+import com.marklynch.ui.TextBoxHolder;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -42,7 +44,7 @@ import com.marklynch.utils.TextureUtils;
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
-public class Inventory implements Draggable, Scrollable {
+public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public enum INVENTORY_STATE {
 		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
@@ -167,6 +169,8 @@ public class Inventory implements Draggable, Scrollable {
 	public static Texture textureFilter;
 	public static Texture textureBag;
 	public static Texture textureStar;
+
+	public TextBox textBox = new TextBox(this, "", "Search", 0, 0);
 
 	public Inventory(GameObject... gameObjects) {
 		for (GameObject gameObject : gameObjects) {
@@ -387,6 +391,8 @@ public class Inventory implements Draggable, Scrollable {
 		if (inventoryMode == INVENTORY_MODE.MODE_TRADE || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 			otherInventory.isOpen = true;
 		}
+
+		Level.activeTextBox = textBox;
 	}
 
 	public void close() {
@@ -405,6 +411,7 @@ public class Inventory implements Draggable, Scrollable {
 			this.otherInventory.inventorySquares = new ArrayList<InventorySquare>();
 			this.otherInventory = null;
 		}
+		Level.activeTextBox = null;
 	}
 
 	public void sort(INVENTORY_SORT_BY inventorySortBy, boolean filterFirst, boolean fromSortButtonPress) {
@@ -504,11 +511,15 @@ public class Inventory implements Draggable, Scrollable {
 
 		for (Button button : buttonsFilter)
 			button.down = false;
-		if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
-		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_WEAPON) {
-		}
+
 		filteredGameObjects.clear();
-		if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
+		if (textBox.text.length() > 0) {
+			for (GameObject gameObject : gameObjects) {
+				if (TextUtils.containsIgnoreCase(gameObject.name, textBox.text)) {
+					filteredGameObjects.add(gameObject);
+				}
+			}
+		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_ALL) {
 			buttonFilterByAll.down = true;
 			filteredGameObjects.addAll(gameObjects);
 		} else if (inventoryFilterBy == INVENTORY_FILTER_BY.FILTER_BY_WEAPON) {
@@ -1283,6 +1294,9 @@ public class Inventory implements Draggable, Scrollable {
 
 		weaponComparisonDisplay.drawStaticUI();
 
+		if (this.parent == Game.level.player)
+			textBox.draw();
+
 	}
 
 	public void drawOtherInventoryText() {
@@ -1586,6 +1600,24 @@ public class Inventory implements Draggable, Scrollable {
 		}
 
 		return false;
+	}
+
+	@Override
+	public void enterTyped() {
+
+	}
+
+	@Override
+	public void textChanged() {
+		filter(inventoryFilterBy, false);
+	}
+
+	public boolean isMouseOverTextBox(int mouseX, int mouseY) {
+		return textBox.isMouseOver(mouseX, mouseY);
+	}
+
+	public boolean clickTextBox(int mouseX, int mouseY) {
+		return textBox.click(mouseX, mouseY);
 	}
 
 }

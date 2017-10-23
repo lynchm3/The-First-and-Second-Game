@@ -17,6 +17,7 @@ import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.ui.PinWindow;
+import com.marklynch.ui.TextBox;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.popups.FullScreenTextBox;
 
@@ -171,6 +172,7 @@ public class Game {
 	public static InventorySquare inventorySquareMouseIsOver = null;
 	public static PinWindow windowHoveringOver;
 	public static FullScreenTextBox fullScreenTextBoxHoveringOver = null;
+	public static TextBox textBoxHoveringOver;
 
 	public void start() {
 

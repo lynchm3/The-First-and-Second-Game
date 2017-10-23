@@ -4,4 +4,6 @@ public interface TextBoxHolder {
 
 	void enterTyped();
 
+	void textChanged();
+
 }

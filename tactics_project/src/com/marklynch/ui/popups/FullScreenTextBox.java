@@ -42,15 +42,6 @@ public class FullScreenTextBox implements TextBoxHolder {
 		textBox.draw();
 	}
 
-	public void keyTyped(char character) {
-
-		if (textBox.text.equals(MapMarker.NO_DESCRIPTION)) {
-			textBox.text = "";
-			textBox.caretPositionIndex = 0;
-		}
-		textBox.keyTyped(character);
-	}
-
 	@Override
 	public void enterTyped() {
 		if (textBox.text.length() == 0)
@@ -60,23 +51,6 @@ public class FullScreenTextBox implements TextBoxHolder {
 		// Game.level.popupTextBoxes.clear();
 		Level.activeTextBox = null;
 		Level.fullScreenTextBox = null;
-
-	}
-
-	public void backSpaceTyped() {
-		if (textBox.text.equals(MapMarker.NO_DESCRIPTION)) {
-			textBox.text = "";
-			textBox.caretPositionIndex = 0;
-		}
-		textBox.backSpaceTyped();
-	}
-
-	public void deleteTyped() {
-		if (textBox.text.equals(MapMarker.NO_DESCRIPTION)) {
-			textBox.text = "";
-			textBox.caretPositionIndex = 0;
-		}
-		textBox.deleteTyped();
 	}
 
 	public boolean isMouseOver(int mouseX, int mouseY) {
@@ -85,6 +59,10 @@ public class FullScreenTextBox implements TextBoxHolder {
 
 	public boolean click(int mouseX, int mouseY) {
 		return textBox.click(mouseX, mouseY);
+	}
+
+	@Override
+	public void textChanged() {
 	}
 
 }

@@ -1778,9 +1778,11 @@ public class Level {
 
 	public FullScreenTextBox getPopupTextBoxFromMousePosition(float mouseX, float mouseY, float alteredMouseX,
 			float alteredMouseY) {
+
 		if (fullScreenTextBox != null
 				&& fullScreenTextBox.isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
 			return fullScreenTextBox;
+
 		return null;
 	}
 

@@ -64,6 +64,7 @@ public class TextBox {
 		text = text.substring(0, this.caretPositionIndex) + character
 				+ text.substring(this.caretPositionIndex, text.length());
 		caretPositionIndex++;
+		parent.textChanged();
 	}
 
 	public void backSpaceTyped() {
@@ -71,6 +72,7 @@ public class TextBox {
 			text = text.substring(0, this.caretPositionIndex - 1)
 					+ text.substring(this.caretPositionIndex, text.length());
 			caretPositionIndex--;
+			parent.textChanged();
 		}
 	}
 
@@ -78,6 +80,7 @@ public class TextBox {
 		if (text.length() > 0 && caretPositionIndex < text.length()) {
 			text = text.substring(0, this.caretPositionIndex)
 					+ text.substring(this.caretPositionIndex + 1, text.length());
+			parent.textChanged();
 		}
 	}
 
