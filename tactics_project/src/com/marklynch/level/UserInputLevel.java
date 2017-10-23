@@ -867,11 +867,15 @@ public class UserInputLevel {
 		}
 
 		if (character == 'j' || character == 'J') {
-			Game.level.openCloseJournal();
-			return;
+			if (!Game.level.journal.showing) {
+				Game.level.openCloseJournal();
+				return;
+			}
 		} else if (character == 'i' || character == 'I') {
-			Game.level.openCloseInventory();
-			return;
+			if (Game.level.openInventories.size() == 0) {
+				Game.level.openCloseInventory();
+				return;
+			}
 		} else if (character == ' ') {
 			waitPressed(true, false);
 		} else if (character == 'c' || character == 'C') {

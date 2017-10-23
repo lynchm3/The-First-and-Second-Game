@@ -357,7 +357,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "CLOSE [I]", true, false, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
 		buttonClose.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -513,9 +513,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			button.down = false;
 
 		filteredGameObjects.clear();
-		if (textBox.text.length() > 0) {
+		if (Game.level.player.inventory.textBox.text.length() > 0) {
 			for (GameObject gameObject : gameObjects) {
-				if (TextUtils.containsIgnoreCase(gameObject.name, textBox.text)) {
+				if (TextUtils.containsIgnoreCase(gameObject.name, Game.level.player.inventory.textBox.text)) {
 					filteredGameObjects.add(gameObject);
 				}
 			}
@@ -1610,6 +1610,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	@Override
 	public void textChanged() {
 		filter(inventoryFilterBy, false);
+		if (otherInventory != null) {
+			otherInventory.filter(inventoryFilterBy, false);
+		}
 	}
 
 	public boolean isMouseOverTextBox(int mouseX, int mouseY) {

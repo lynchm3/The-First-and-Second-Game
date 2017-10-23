@@ -114,7 +114,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		buttons.add(buttonConversations);
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "CLOSE [J]", true, false, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
 		buttonClose.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
