@@ -387,10 +387,10 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - 200, 20 + 20 * linesPrinted, Game.windowWidth - 180,
 						20 + 20 * linesPrinted + 20);
 
-				// if (objective.gameObject != null) {
-				TextureUtils.drawTexture(objective.texture, Game.windowWidth - 200, 20 + 20 * linesPrinted,
-						Game.windowWidth - 180, 20 + 20 * linesPrinted + 20);
-				// }
+				if (objective.texture != null) {
+					TextureUtils.drawTexture(objective.texture, Game.windowWidth - 200, 20 + 20 * linesPrinted,
+							Game.windowWidth - 180, 20 + 20 * linesPrinted + 20);
+				}
 
 				if (objective.showMarker) {
 					TextureUtils.drawTexture(checkBoxChecked, Game.windowWidth - 180, 20 + 20 * linesPrinted,
@@ -457,7 +457,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 				}
 
-				if (targetSquare.onScreen())
+				if (targetSquare == null || targetSquare.onScreen())
 					continue;
 
 				float squareX = (targetSquare.xInGridPixels);

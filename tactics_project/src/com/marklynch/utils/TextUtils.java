@@ -864,9 +864,11 @@ public class TextUtils {
 				offsetX += textWidth;
 
 				// Image
-				float x = posX + offsetX;
-				TextureUtils.drawTexture(objective.texture, x, posY + offsetY, x + 20, posY + offsetY + 20);
-				offsetX += textureWidth;
+				if (objective.texture != null) {
+					float x = posX + offsetX;
+					TextureUtils.drawTexture(objective.texture, x, posY + offsetY, x + 20, posY + offsetY + 20);
+					offsetX += textureWidth;
+				}
 
 			}
 
