@@ -32,6 +32,7 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.enchantment.EnchantmentFireDamage;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -424,7 +425,9 @@ public class Editor {
 		// Actor player = Templates.Player.makeCopy(Game.level.squares[80][39],
 		// Game.level.factions.player, null);
 		Game.level.player = player;
-		player.inventory.add(Templates.HUNTING_BOW.makeCopy(null, player));
+		Weapon playersHuntingBow = Templates.HUNTING_BOW.makeCopy(null, player);
+		playersHuntingBow.enchantment = new EnchantmentFireDamage();
+		player.inventory.add(playersHuntingBow);
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));
 		player.inventory.add(Templates.HATCHET.makeCopy(null, player));
 		player.inventory.add(Templates.HATCHET.makeCopy(null, player));
