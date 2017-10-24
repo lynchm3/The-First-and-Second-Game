@@ -1,6 +1,6 @@
 package com.marklynch.objects.weapons;
 
-import com.marklynch.level.constructs.enchantment.Enchantment;
+import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -25,7 +25,7 @@ public class Weapon extends GameObject {
 	public float minRange = 0;
 	public float maxRange = 0;
 
-	public Enchantment enchantment;
+	public Enhancement enhancement;
 
 	public Weapon(String name, float slashDamage, float pierceDamage, float bluntDamage, float fireDamage,
 			float waterDamage, float electricalDamage, float poisonDamage, float minRange, float maxRange,
@@ -192,44 +192,44 @@ public class Weapon extends GameObject {
 	}
 
 	public float getEffectiveSlashDamage() {
-		if (enchantment != null)
-			return slashDamage + enchantment.slashDamage;
+		if (enhancement != null)
+			return slashDamage + enhancement.slashDamage;
 		return slashDamage;
 	}
 
 	public float getEffectivePierceDamage() {
-		if (enchantment != null)
-			return pierceDamage + enchantment.pierceDamage;
+		if (enhancement != null)
+			return pierceDamage + enhancement.pierceDamage;
 		return pierceDamage;
 	}
 
 	public float getEffectiveBluntDamage() {
-		if (enchantment != null)
-			return bluntDamage + enchantment.bluntDamage;
+		if (enhancement != null)
+			return bluntDamage + enhancement.bluntDamage;
 		return bluntDamage;
 	}
 
 	public float getEffectiveFireDamage() {
-		if (enchantment != null)
-			return fireDamage + enchantment.fireDamage;
+		if (enhancement != null)
+			return fireDamage + enhancement.fireDamage;
 		return fireDamage;
 	}
 
 	public float getEffectiveWaterDamage() {
-		if (enchantment != null)
-			return waterDamage + enchantment.waterDamage;
+		if (enhancement != null)
+			return waterDamage + enhancement.waterDamage;
 		return waterDamage;
 	}
 
 	public float getEffectiveElectricalDamage() {
-		if (enchantment != null)
-			return electricalDamage + enchantment.electricalDamage;
+		if (enhancement != null)
+			return electricalDamage + enhancement.electricalDamage;
 		return electricalDamage;
 	}
 
 	public float getEffectivePoisonDamage() {
-		if (enchantment != null)
-			return electricalDamage + enchantment.electricalDamage;
+		if (enhancement != null)
+			return electricalDamage + enhancement.electricalDamage;
 		return poisonDamage;
 	}
 
