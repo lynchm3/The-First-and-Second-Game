@@ -417,12 +417,15 @@ public class Editor {
 		// Expressions
 		ThoughtBubbles.loadExpressions();
 
+		new Templates();
+
 		// Add player
 		// West Security
 		Player player = Templates.Player.makeCopy("You", Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
 				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {}, null);
 		// Morts Mine
-		// Actor player = Templates.Player.makeCopy(Game.level.squares[80][39],
+		// Actor player =
+		// Templates.Player.makeCopy(Game.level.squares[80][39],
 		// Game.level.factions.player, null);
 		Game.level.player = player;
 		Weapon playersHuntingBow = Templates.HUNTING_BOW.makeCopy(null, player);
