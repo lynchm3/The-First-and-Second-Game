@@ -306,9 +306,21 @@ public class QuestSmallGame extends Quest {
 
 		superWolf = new CarnivoreNeutralWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
 				Game.level.squares[128][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
+				false, 200f, -50f, 0f, 0f, 0f, 150f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 		superWolf.powers.add(new PowerSuperPeek(superWolf));
+
+		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
+		bestiaryKnowledge.name = true;
+		bestiaryKnowledge.image = true;
+		bestiaryKnowledge.fireResistance = true;
+		bestiaryKnowledge.waterResistance = true;
+		bestiaryKnowledge.bluntResistance = true;
+		bestiaryKnowledge.pierceResistance = true;
+		bestiaryKnowledge.slashResistance = true;
+		bestiaryKnowledge.poisonResistance = true;
+		bestiaryKnowledge.electricResistance = true;
+		bestiaryKnowledge.powers = true;
 
 		Actor wolf2 = new CarnivoreNeutralWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[127][13], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
@@ -351,7 +363,7 @@ public class QuestSmallGame extends Quest {
 
 		huntingPlan.setOnReadListener(new ActionListener() {
 			@Override
-			public void run() {
+			public void onRead() {
 				if (!haveJournalLog(journalLogReadHuntPlan1) && !haveJournalLog(journalLogReadHuntPlan2)) {
 					if (!started) {
 						addJournalLog(journalLogReadHuntPlan1);
@@ -368,6 +380,11 @@ public class QuestSmallGame extends Quest {
 					bestiaryKnowledge.image = true;
 					bestiaryKnowledge.fireResistance = true;
 					bestiaryKnowledge.waterResistance = true;
+					bestiaryKnowledge.bluntResistance = true;
+					bestiaryKnowledge.pierceResistance = true;
+					bestiaryKnowledge.slashResistance = true;
+					bestiaryKnowledge.poisonResistance = true;
+					bestiaryKnowledge.electricResistance = true;
 
 				}
 			}

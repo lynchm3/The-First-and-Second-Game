@@ -100,7 +100,7 @@ public class AreaTownForest {
 				null);
 		scrollOfPoisonBlast.setOnReadListener(new ActionListener() {
 			@Override
-			public void run() {
+			public void onRead() {
 				Game.level.player.powers.add(new PowerPoisonBlast(Game.level.player));
 			}
 		});

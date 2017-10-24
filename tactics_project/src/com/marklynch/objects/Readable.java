@@ -79,7 +79,7 @@ public class Readable extends GameObject {
 
 	public void wasRead() {
 		if (this.onReadListener != null) {
-			onReadListener.run();
+			onReadListener.onRead();
 		}
 	}
 
