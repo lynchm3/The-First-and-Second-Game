@@ -16,7 +16,7 @@ import mdesl.graphics.Texture;
 
 public class MapMarker extends GameObject {
 
-	public static final String NO_DESCRIPTION = "No Description";;
+	public static final String NO_DESCRIPTION = "No Description";
 	public static Texture RED_MAP_MARKER_TEXTURE;
 	public static Texture TREASURE_MAP_MARKER_TEXTURE;
 	public static Texture SKULL_MAP_MARKER_TEXTURE;

@@ -16,13 +16,14 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
+import com.marklynch.level.constructs.power.PowerSuperPeek;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Storage;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
+import com.marklynch.objects.Storage;
 import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionTalk;
@@ -307,6 +308,7 @@ public class QuestSmallGame extends Quest {
 				Game.level.squares[128][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 0f, 0f, 0f, 0f, 0f, 150f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
 				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+		superWolf.powers.add(new PowerSuperPeek(superWolf));
 
 		Actor wolf2 = new CarnivoreNeutralWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
 				Game.level.squares[127][13], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
