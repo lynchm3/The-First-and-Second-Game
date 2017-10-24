@@ -38,7 +38,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	public boolean showing = false;
 
 	public static Quest questToDisplayInJournal = null;
-	public static ArrayList<Quest> activeQuests = new ArrayList<Quest>();
+	public static ArrayList<Quest> questsToTrack = new ArrayList<Quest>();
 
 	int listX;
 	int listY;
@@ -203,11 +203,11 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 					@Override
 					public void click() {
-						if (activeQuests.contains(quest)) {
-							activeQuests.remove(quest);
+						if (questsToTrack.contains(quest)) {
+							questsToTrack.remove(quest);
 							createButtonsToTrackObjectives();
 						} else {
-							activeQuests.add(quest);
+							questsToTrack.add(quest);
 							createButtonsToTrackObjectives();
 						}
 					}
@@ -345,7 +345,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 				// Check box
 				Texture checkBoxTextureToUse = checkBoxUnchecked;
-				if (activeQuests.contains(quest)) {
+				if (questsToTrack.contains(quest)) {
 					checkBoxTextureToUse = checkBoxChecked;
 				}
 
@@ -373,7 +373,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	public void drawActiveQuestsObjectiveText() {
 		int linesPrinted = 0;
 		objectiveLinks.clear();
-		for (Quest activeQuest : activeQuests) {
+		for (Quest activeQuest : questsToTrack) {
 			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 202,
 					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor(activeQuest.name, Color.WHITE) });
@@ -407,7 +407,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	public static void drawQuestsMarkersForOnScreenObjectives() {
 
-		for (Quest activeQuest : activeQuests) {
+		for (Quest activeQuest : questsToTrack) {
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
 				if (currentObjective.gameObject != null && currentObjective.showMarker) {
@@ -428,7 +428,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	}
 
 	public static void drawQuestMarkersForOffScreenObjectives() {
-		for (Quest activeQuest : activeQuests) {
+		for (Quest activeQuest : questsToTrack) {
 			int x1 = (int) Game.halfWindowWidth;
 			int y1 = (int) Game.halfWindowHeight;
 
@@ -602,7 +602,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		buttonsToTrackObjectives.clear();
 
 		int linesPrinted = 0;
-		for (Quest activeQuest : activeQuests) {
+		for (Quest activeQuest : questsToTrack) {
 			linesPrinted++;
 			for (final Objective currentObjective : activeQuest.currentObjectives) {
 				final LevelButton buttonToTrackObjective = new LevelButton(Game.windowWidth - 180,
@@ -663,10 +663,10 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		if (!quest1.resolved && quest2.resolved)
 			return -1;
 
-		if (activeQuests.contains(quest1) && !activeQuests.contains(quest2))
+		if (questsToTrack.contains(quest1) && !questsToTrack.contains(quest2))
 			return -1;
 
-		if (!activeQuests.contains(quest1) && activeQuests.contains(quest2))
+		if (!questsToTrack.contains(quest1) && questsToTrack.contains(quest2))
 			return +1;
 
 		return quest2.turnUpdated - quest1.turnUpdated;

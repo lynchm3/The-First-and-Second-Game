@@ -101,12 +101,22 @@ public class Quest {
 	public void start() {
 		if (started || resolved)
 			return;
+		if (this.isFirstQuest())
+			Journal.questsToTrack.add(this);
 		started = true;
 		Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " started" }));
 		Game.level.activityLogger
 				.addActivityLog(new ActivityLog(new Object[] { Game.level.player, " started quest ", this }));
 		turnStarted = turnUpdated = Level.turn;
 		updatedSinceLastViewed = true;
+	}
+
+	boolean isFirstQuest() {
+		for (Quest quest : Level.quests) {
+			if (quest.started)
+				return false;
+		}
+		return true;
 	}
 
 	public void hasBeenUpdated() {
