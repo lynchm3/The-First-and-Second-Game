@@ -14,9 +14,9 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Sign;
-import com.marklynch.objects.Templates;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.WaterSource;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
 public class QuestTheSecretRoom extends Quest {

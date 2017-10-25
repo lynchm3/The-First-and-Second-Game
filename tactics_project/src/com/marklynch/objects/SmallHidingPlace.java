@@ -11,6 +11,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionStopHidingInside;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;

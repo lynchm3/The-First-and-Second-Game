@@ -8,8 +8,8 @@ import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
-import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
+import com.marklynch.objects.templates.Templates;
 
 public class AreaTownForest {
 

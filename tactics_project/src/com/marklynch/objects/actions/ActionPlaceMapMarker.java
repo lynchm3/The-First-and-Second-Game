@@ -5,7 +5,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Templates;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionPlaceMapMarker extends Action {

@@ -1,13 +1,45 @@
-package com.marklynch.objects;
+package com.marklynch.objects.templates;
 
-import com.marklynch.ai.routines.AIRoutineForHunter;
-import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
+import com.marklynch.objects.Arrow;
+import com.marklynch.objects.Bed;
+import com.marklynch.objects.BigGameObject;
+import com.marklynch.objects.BrokenGlass;
+import com.marklynch.objects.Carcass;
+import com.marklynch.objects.Corpse;
+import com.marklynch.objects.Discoverable;
+import com.marklynch.objects.Door;
+import com.marklynch.objects.Fence;
+import com.marklynch.objects.Food;
+import com.marklynch.objects.Furnace;
+import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gate;
+import com.marklynch.objects.Gold;
+import com.marklynch.objects.HidingPlace;
+import com.marklynch.objects.Inspectable;
+import com.marklynch.objects.Junk;
+import com.marklynch.objects.Key;
+import com.marklynch.objects.Liquid;
+import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.Readable;
+import com.marklynch.objects.RemoteDoor;
+import com.marklynch.objects.Searchable;
+import com.marklynch.objects.Sign;
+import com.marklynch.objects.SmallHidingPlace;
+import com.marklynch.objects.Stampable;
+import com.marklynch.objects.Storage;
+import com.marklynch.objects.Stump;
+import com.marklynch.objects.SwitchForOpenables;
+import com.marklynch.objects.Tree;
+import com.marklynch.objects.Vein;
+import com.marklynch.objects.Wall;
+import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -32,78 +64,7 @@ public class Templates {
 
 	public Templates() {
 
-		// Player
-		PLAYER = new Player();
-		PLAYER.title = "Fighter";
-		PLAYER.actorLevel = 1;
-		PLAYER.totalHealth = PLAYER.remainingHealth = 100;
-		PLAYER.strength = 10;
-		PLAYER.dexterity = 10;
-		PLAYER.intelligence = 10;
-		PLAYER.endurance = 10;
-		PLAYER.imageTexturePath = "hero.png";
-		PLAYER.heightRatio = 1.5f;
-		PLAYER.drawOffsetY = -0.5f;
-		PLAYER.weight = 90f;
-		PLAYER.handAnchorX = 75f;
-		PLAYER.handAnchorY = 127f;
-		PLAYER.headAnchorX = 70f;
-		PLAYER.headAnchorY = 23f;
-		PLAYER.canOpenDoors = true;
-		PLAYER.canEquipWeapons = true;
-		PLAYER.templateId = GameObject.generateNewTemplateId();
-
-		// General People
-		HUNTER = new Human();
-		HUNTER.title = "Hunter";
-		HUNTER.actorLevel = 1;
-		HUNTER.totalHealth = HUNTER.remainingHealth = 10;
-		HUNTER.strength = 10;
-		HUNTER.dexterity = 10;
-		HUNTER.intelligence = 10;
-		HUNTER.endurance = 10;
-		HUNTER.imageTexturePath = "hunter.png";
-		HUNTER.weight = 90f;
-		HUNTER.handAnchorX = 88f;
-		HUNTER.handAnchorY = 54f;
-		HUNTER.canOpenDoors = true;
-		HUNTER.canEquipWeapons = true;
-		HUNTER.aiRoutine = new AIRoutineForHunter(HUNTER);
-		HUNTER.templateId = GameObject.generateNewTemplateId();
-
-		THIEF = new Human();
-		THIEF.title = "Thief";
-		THIEF.actorLevel = 1;
-		THIEF.totalHealth = THIEF.remainingHealth = 10;
-		THIEF.strength = 10;
-		THIEF.dexterity = 10;
-		THIEF.intelligence = 10;
-		THIEF.endurance = 10;
-		THIEF.imageTexturePath = "thief.png";
-		THIEF.weight = 90f;
-		THIEF.handAnchorX = 88f;
-		THIEF.handAnchorY = 54f;
-		THIEF.canOpenDoors = true;
-		THIEF.canEquipWeapons = true;
-		THIEF.aiRoutine = new AIRoutineForThief(THIEF);
-		THIEF.templateId = GameObject.generateNewTemplateId();
-
-		FARMER = new Human();
-		FARMER.title = "Farmer";
-		FARMER.actorLevel = 1;
-		FARMER.totalHealth = FARMER.remainingHealth = 10;
-		FARMER.strength = 10;
-		FARMER.dexterity = 10;
-		FARMER.intelligence = 10;
-		FARMER.endurance = 10;
-		FARMER.imageTexturePath = "farmer.png";
-		FARMER.weight = 90f;
-		FARMER.handAnchorX = 88f;
-		FARMER.handAnchorY = 54f;
-		FARMER.canOpenDoors = true;
-		FARMER.canEquipWeapons = true;
-		FARMER.aiRoutine = new AIRoutineForHunter(FARMER);
-		FARMER.templateId = GameObject.generateNewTemplateId();
+		new TemplatesHumans();
 
 		// Domestic animals
 		PIG = new Pig("Pig", "Pig", 1, 10, 0, 0, 0, 0, "pig.png", null, 1, 10, null, new Inventory(), 1f, 0.65625f, 0,

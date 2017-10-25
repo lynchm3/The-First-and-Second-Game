@@ -15,7 +15,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.Readable;
-import com.marklynch.objects.Templates;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.weapons.Weapon;
 
 import mdesl.graphics.Color;

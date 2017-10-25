@@ -285,11 +285,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			if (hiding)
 				alpha = 0.5f;
 
-			System.out.println("name = " + name);
-			System.out.println("imageTexture = " + imageTexture);
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
-			// TextureUtils.skipNormals = false;
 
 			if (flash) {
 				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,

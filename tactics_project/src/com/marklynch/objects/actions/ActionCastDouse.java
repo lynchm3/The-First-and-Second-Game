@@ -6,7 +6,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Liquid;
-import com.marklynch.objects.Templates;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
