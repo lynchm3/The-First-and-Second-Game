@@ -34,7 +34,6 @@ public class Templates {
 
 		// Player
 		Player = new Player();
-		// Player.name = "You";
 		Player.title = "Fighter";
 		Player.actorLevel = 1;
 		Player.totalHealth = Player.remainingHealth = 100;
@@ -43,19 +42,9 @@ public class Templates {
 		Player.intelligence = 10;
 		Player.endurance = 10;
 		Player.imageTexturePath = "hero.png";
-		// Player.squareGameObjectIsOn = null;
-		Player.travelDistance = 1;
-		Player.sight = 10;
-		// Player.bed = null;
-		// Player.inventory = new Inventory();
-		Player.widthRatio = 1f;
 		Player.heightRatio = 1.5f;
 		Player.drawOffsetX = 0f;
 		Player.drawOffsetY = -0.5f;
-		Player.soundWhenHit = 1f;
-		Player.soundWhenHitting = 1f;
-		// Player.soundDampening = 1f;
-		// Player.stackable = false;
 		Player.weight = 90f;
 		Player.handAnchorX = 75f;
 		Player.handAnchorY = 127f;
@@ -65,15 +54,9 @@ public class Templates {
 		Player.bodyAnchorY = 0;
 		Player.legsAnchorX = 0;
 		Player.legsAnchorY = 0;
+		Player.templateId = GameObject.generateNewTemplateId();
 		Player.canOpenDoors = true;
 		Player.canEquipWeapons = true;
-		// gold
-		Player.templateId = GameObject.generateNewTemplateId();
-
-		// Player.init();
-
-		GOLD = new Gold("Gold", 10, "gold.png", null, new Inventory(), 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
-				0.5f, false, 90f, 0f, 0f, 0f, 100f, 0.5f, 0, null, GameObject.generateNewTemplateId());
 
 		// General People
 		HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10, null, new Inventory(), 1f,
@@ -432,6 +415,10 @@ public class Templates {
 		MOUND = new Discoverable("Mound of Dirt", 5, 1, "mound.png", null, null, new Inventory(), 1f, 1f, 0f, 0f, 1f,
 				1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null,
 				GameObject.generateNewTemplateId());
+
+		// GOLD BITCH
+		GOLD = new Gold("Gold", 10, "gold.png", null, new Inventory(), 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
+				0.5f, false, 90f, 0f, 0f, 0f, 100f, 0.5f, 0, null, GameObject.generateNewTemplateId());
 
 	}
 

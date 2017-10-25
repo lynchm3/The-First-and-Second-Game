@@ -79,8 +79,8 @@ public class Actor extends GameObject {
 	public int endurance;
 	public String title = "";
 	public int actorLevel = 1;
-	public int travelDistance = 4;
-	public int sight = 4;
+	public int travelDistance = 1;
+	public int sight = 10;
 
 	public transient int distanceMovedThisTurn = 0;
 	public transient boolean showWeaponButtons = false;
@@ -127,8 +127,8 @@ public class Actor extends GameObject {
 	public float legsAnchorX;
 	public float legsAnchorY;
 
-	public boolean canOpenDoors;
-	public boolean canEquipWeapons;
+	public boolean canOpenDoors = false;
+	public boolean canEquipWeapons = false;
 
 	public boolean wasSwappedWithThisTurn = false;
 
@@ -174,12 +174,21 @@ public class Actor extends GameObject {
 	public int thoughtsOnPlayer = 0;
 
 	public Actor() {
+
+		canBePickedUp = false;
+		showInventory = false;
+		fitsInInventory = false;
+		canShareSquare = false;
+		canContainOtherObjects = true;
+		blocksLineOfSight = false;
+		persistsWhenCantBeSeen = false;
+		decorative = false;
+		attackable = true;
 	}
 
 	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {
 		super.init();
 
-		this.bed = bed;
 		if (bed != null)
 			this.bedGUID = bed.guid;
 		if (bed != null)
@@ -191,7 +200,6 @@ public class Actor extends GameObject {
 			equippedWeaponGUID = weapons.get(0).guid;
 		}
 
-		this.faction = faction;
 		if (this.faction != null) {
 			factionGUID = this.faction.guid;
 			this.faction.actors.add(this);

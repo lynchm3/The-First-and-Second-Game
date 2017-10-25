@@ -41,10 +41,10 @@ public class GameObjectTemplate implements InventoryParent {
 	public float widthRatio = 1;
 	public float heightRatio = 1;
 
-	public float drawOffsetX;
-	public float drawOffsetY;
-	public float soundWhenHit;
-	public float soundWhenHitting;
+	public float drawOffsetX = 0;
+	public float drawOffsetY = 0;
+	public float soundWhenHit = 1;
+	public float soundWhenHitting = 1;
 	public float soundDampening = 1;
 	public Color light;
 	public float lightHandleX;
