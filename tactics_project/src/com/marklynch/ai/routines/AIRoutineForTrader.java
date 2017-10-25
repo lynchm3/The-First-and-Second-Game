@@ -4,6 +4,7 @@ import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionWrite;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Trader;
 
 public class AIRoutineForTrader extends AIRoutine {
@@ -29,9 +30,9 @@ public class AIRoutineForTrader extends AIRoutine {
 	Trader trader;
 	Square targetSquare = null;
 
-	public AIRoutineForTrader(Trader actor) {
+	public AIRoutineForTrader(Actor actor) {
 		super(actor);
-		this.trader = actor;
+		this.trader = (Trader) actor;
 		aiType = AI_TYPE.RUNNER;
 	}
 
@@ -110,5 +111,10 @@ public class AIRoutineForTrader extends AIRoutine {
 				}
 			}
 		}
+	}
+
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForTrader(actor);
 	}
 }

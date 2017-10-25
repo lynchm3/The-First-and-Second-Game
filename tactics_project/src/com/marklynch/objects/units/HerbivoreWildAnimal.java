@@ -27,13 +27,13 @@ public class HerbivoreWildAnimal extends WildAnimal {
 				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
 				legsAnchorX, legsAnchorY, mustHaves, mightHaves, templateId);
 
-		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this, area);
+		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this);
 	}
 
 	@Override
 	public void postLoad1() {
 		super.postLoad1();
-		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this, area);
+		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this);
 	}
 
 	@Override

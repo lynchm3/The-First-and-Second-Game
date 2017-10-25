@@ -173,6 +173,11 @@ public class AIRoutineForHunter extends AIRoutine {
 		}
 	}
 
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForHunter(actor);
+	}
+
 	// 1. Pick nearest target of type WILD ANIMAL within 100 squares
 	// 2. Go to target
 	// 3. Kill it

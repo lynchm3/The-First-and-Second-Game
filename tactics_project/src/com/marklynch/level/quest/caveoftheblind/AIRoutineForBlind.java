@@ -41,9 +41,9 @@ public class AIRoutineForBlind extends AIRoutine {
 	int failedToGetPathToBellCount = 0;
 	int failedToGetPathToFoodCount = 0;
 
-	public AIRoutineForBlind(Blind blind) {
+	public AIRoutineForBlind(Actor blind) {
 		super(blind);
-		this.blind = blind;
+		this.blind = (Blind) blind;
 		aiType = AI_TYPE.HOSTILE;
 	}
 
@@ -225,5 +225,10 @@ public class AIRoutineForBlind extends AIRoutine {
 				}
 			}
 		}
+	}
+
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForBlind(actor);
 	}
 }

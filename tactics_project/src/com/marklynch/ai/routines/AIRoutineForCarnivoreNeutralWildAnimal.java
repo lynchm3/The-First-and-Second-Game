@@ -2,10 +2,9 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 
 public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
@@ -24,14 +23,14 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
-	CarnivoreNeutralWildAnimal wildAnimal;
+	Actor wildAnimal;
 	Square targetSquare = null;
 
-	public AIRoutineForCarnivoreNeutralWildAnimal(CarnivoreNeutralWildAnimal actor, Area area) {
+	public AIRoutineForCarnivoreNeutralWildAnimal(Actor actor) {
 		super(actor);
-		if (area != null) {
+		if (actor.area != null) {
 			keepInBounds = true;
-			this.areaBounds.add(area);
+			this.areaBounds.add(actor.area);
 		}
 		this.wildAnimal = actor;
 		aiType = AI_TYPE.FIGHTER;
@@ -135,6 +134,11 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 					return;
 			}
 		}
+	}
+
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForCarnivoreNeutralWildAnimal(actor);
 	}
 
 }

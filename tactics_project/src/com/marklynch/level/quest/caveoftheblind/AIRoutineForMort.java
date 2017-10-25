@@ -44,10 +44,10 @@ public class AIRoutineForMort extends AIRoutine {
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
 
-	public AIRoutineForMort(Mort mort) {
+	public AIRoutineForMort(Actor mort) {
 
 		super(mort);
-		this.mort = mort;
+		this.mort = (Mort) mort;
 		aiType = AI_TYPE.FIGHTER;
 
 		keepInBounds = true;
@@ -242,5 +242,10 @@ public class AIRoutineForMort extends AIRoutine {
 
 		return new Conversation(conversationPartYouWontGetOut);
 
+	}
+
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForMort(actor);
 	}
 }

@@ -1,5 +1,7 @@
 package com.marklynch.objects;
 
+import com.marklynch.ai.routines.AIRoutineForHunter;
+import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -13,13 +15,11 @@ import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
-import com.marklynch.objects.units.Farmer;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
-import com.marklynch.objects.units.Hunter;
+import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.RockGolem;
-import com.marklynch.objects.units.Thief;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
@@ -54,7 +54,7 @@ public class Templates {
 		PLAYER.templateId = GameObject.generateNewTemplateId();
 
 		// General People
-		HUNTER = new Hunter();
+		HUNTER = new Human();
 		HUNTER.title = "Hunter";
 		HUNTER.actorLevel = 1;
 		HUNTER.totalHealth = HUNTER.remainingHealth = 10;
@@ -68,27 +68,42 @@ public class Templates {
 		HUNTER.handAnchorY = 54f;
 		HUNTER.canOpenDoors = true;
 		HUNTER.canEquipWeapons = true;
+		HUNTER.aiRoutine = new AIRoutineForHunter(HUNTER);
 		HUNTER.templateId = GameObject.generateNewTemplateId();
 
-		THIEF = new Thief();
-		HUNTER.title = "Thief";
-		HUNTER.actorLevel = 1;
-		HUNTER.totalHealth = HUNTER.remainingHealth = 10;
-		HUNTER.strength = 10;
-		HUNTER.dexterity = 10;
-		HUNTER.intelligence = 10;
-		HUNTER.endurance = 10;
-		HUNTER.imageTexturePath = "thief.png";
-		HUNTER.weight = 90f;
-		HUNTER.handAnchorX = 88f;
-		HUNTER.handAnchorY = 54f;
-		HUNTER.canOpenDoors = true;
-		HUNTER.canEquipWeapons = true;
-		HUNTER.templateId = GameObject.generateNewTemplateId();
+		THIEF = new Human();
+		THIEF.title = "Thief";
+		THIEF.actorLevel = 1;
+		THIEF.totalHealth = THIEF.remainingHealth = 10;
+		THIEF.strength = 10;
+		THIEF.dexterity = 10;
+		THIEF.intelligence = 10;
+		THIEF.endurance = 10;
+		THIEF.imageTexturePath = "thief.png";
+		THIEF.weight = 90f;
+		THIEF.handAnchorX = 88f;
+		THIEF.handAnchorY = 54f;
+		THIEF.canOpenDoors = true;
+		THIEF.canEquipWeapons = true;
+		THIEF.aiRoutine = new AIRoutineForThief(THIEF);
+		THIEF.templateId = GameObject.generateNewTemplateId();
 
-		FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "farmer.png", null, 1, 10, null, new Inventory(), 1f,
-				1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88,
-				54, 88, 54, 0, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+		FARMER = new Human();
+		FARMER.title = "Farmer";
+		FARMER.actorLevel = 1;
+		FARMER.totalHealth = FARMER.remainingHealth = 10;
+		FARMER.strength = 10;
+		FARMER.dexterity = 10;
+		FARMER.intelligence = 10;
+		FARMER.endurance = 10;
+		FARMER.imageTexturePath = "farmer.png";
+		FARMER.weight = 90f;
+		FARMER.handAnchorX = 88f;
+		FARMER.handAnchorY = 54f;
+		FARMER.canOpenDoors = true;
+		FARMER.canEquipWeapons = true;
+		FARMER.aiRoutine = new AIRoutineForHunter(FARMER);
+		FARMER.templateId = GameObject.generateNewTemplateId();
 
 		// Domestic animals
 		PIG = new Pig("Pig", "Pig", 1, 10, 0, 0, 0, 0, "pig.png", null, 1, 10, null, new Inventory(), 1f, 0.65625f, 0,
@@ -447,11 +462,11 @@ public class Templates {
 	public static Player PLAYER;
 
 	// General People
-	public static Hunter HUNTER;
+	public static Human HUNTER;
 
-	public static Thief THIEF;
+	public static Human THIEF;
 
-	public static Farmer FARMER;
+	public static Human FARMER;
 
 	// Domestic animals
 	public static Pig PIG;

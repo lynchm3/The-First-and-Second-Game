@@ -2,12 +2,12 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Storage;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.Key;
+import com.marklynch.objects.Storage;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -140,6 +140,11 @@ public class AIRoutineForThief extends AIRoutine {
 				targetSquare = null;
 			return;
 		}
+	}
+
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForThief(actor);
 	}
 
 }

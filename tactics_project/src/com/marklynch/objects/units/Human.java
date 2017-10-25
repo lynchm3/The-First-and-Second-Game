@@ -1,20 +1,18 @@
 package com.marklynch.objects.units;
 
-import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
-public class Thief extends Actor {
+public class Human extends Actor {
 
-	public Thief() {
+	public Human() {
 	}
 
 	@Override
 	public void postLoad1() {
 		super.postLoad1();
-		aiRoutine = new AIRoutineForThief(this);
 	}
 
 	@Override
@@ -23,9 +21,9 @@ public class Thief extends Actor {
 	}
 
 	@Override
-	public Thief makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
+	public Human makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
-		Thief actor = new Thief();
+		Human actor = new Human();
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;
@@ -65,6 +63,7 @@ public class Thief extends Actor {
 		actor.canEquipWeapons = canEquipWeapons;
 		// gold
 		actor.templateId = templateId;
+		actor.aiRoutine = aiRoutine.getInstance(actor);
 
 		actor.init(gold, mustHaves, mightHaves);
 		return actor;

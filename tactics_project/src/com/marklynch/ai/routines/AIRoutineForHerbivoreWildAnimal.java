@@ -1,13 +1,12 @@
 package com.marklynch.ai.routines;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.actions.ActionStopHidingInside;
-import com.marklynch.objects.units.HerbivoreWildAnimal;
+import com.marklynch.objects.units.Actor;
 
 public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
@@ -22,16 +21,16 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
 
-	HerbivoreWildAnimal friendlyWildAnimal;
+	Actor friendlyWildAnimal;
 	Square targetSquare = null;
 
 	int hidingCount = 0;
 
-	public AIRoutineForHerbivoreWildAnimal(HerbivoreWildAnimal actor, Area area) {
+	public AIRoutineForHerbivoreWildAnimal(Actor actor) {
 		super(actor);
-		if (area != null) {
+		if (actor.area != null) {
 			keepInBounds = true;
-			this.areaBounds.add(area);
+			this.areaBounds.add(actor.area);
 		}
 		this.friendlyWildAnimal = actor;
 		aiType = AI_TYPE.RUNNER;
@@ -107,6 +106,11 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 					return;
 			}
 		}
+	}
+
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForHerbivoreWildAnimal(actor);
 	}
 
 }

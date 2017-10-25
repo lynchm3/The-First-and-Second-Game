@@ -26,13 +26,13 @@ public class CarnivoreNeutralWildAnimal extends WildAnimal {
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
 				legsAnchorX, legsAnchorY, mustHaves, mightHaves, templateId);
-		aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(this, area);
+		aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(this);
 	}
 
 	@Override
 	public void postLoad1() {
 		super.postLoad1();
-		aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(this, area);
+		aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(this);
 	}
 
 	@Override

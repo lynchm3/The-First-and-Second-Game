@@ -17,7 +17,7 @@ import com.marklynch.objects.Templates;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Farmer;
+import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.weapons.Weapon;
 
@@ -37,7 +37,7 @@ public class QuestThePigs extends Quest {
 
 	// Actors
 	Pig larry, wendy, jane, steve, prescilla;
-	Farmer farmer;
+	Human farmer;
 	Weapon hoe;
 
 	// GameObjects

@@ -55,4 +55,9 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 
 	}
 
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForWildAnimal(actor);
+	}
+
 }

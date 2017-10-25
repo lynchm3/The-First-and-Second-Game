@@ -39,16 +39,15 @@ import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Farmer;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
-import com.marklynch.objects.units.Hunter;
+import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.MapUtil;
 
-public class AIRoutine {
+public abstract class AIRoutine {
 
 	String ACTIVITY_DESCRIPTION_FIGHTING = "Fighting";
 	final String ACTIVITY_DESCRIPTION_SEARCHING = "Searching";
@@ -337,7 +336,7 @@ public class AIRoutine {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
 
 					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false, true,
-							false, false, false, false, 0, Hunter.class, Farmer.class);
+							false, false, false, false, 0, Human.class);
 
 					// if (this.actor.canSeeGameObject(actorNearby)) {
 					// } else {
@@ -1222,5 +1221,7 @@ public class AIRoutine {
 		else
 			return true;
 	}
+
+	public abstract AIRoutine getInstance(Actor actor);
 
 }

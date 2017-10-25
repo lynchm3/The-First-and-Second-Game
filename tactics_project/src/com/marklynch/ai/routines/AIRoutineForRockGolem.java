@@ -33,9 +33,9 @@ public class AIRoutineForRockGolem extends AIRoutine {
 	int failedToGetPathToBellCount = 0;
 	int failedToGetPathToFoodCount = 0;
 
-	public AIRoutineForRockGolem(RockGolem rockGolem) {
+	public AIRoutineForRockGolem(Actor rockGolem) {
 		super(rockGolem);
-		this.rockGolem = rockGolem;
+		this.rockGolem = (RockGolem) rockGolem;
 		aiType = AI_TYPE.HOSTILE;
 	}
 
@@ -109,5 +109,10 @@ public class AIRoutineForRockGolem extends AIRoutine {
 				}
 			}
 		}
+	}
+
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForRockGolem(actor);
 	}
 }

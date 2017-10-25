@@ -3,7 +3,7 @@ package com.marklynch.level.quest.thepigs;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
-import com.marklynch.objects.units.Farmer;
+import com.marklynch.objects.units.Human;
 
 public class ConversationForFarmer extends Conversation {
 
@@ -27,9 +27,9 @@ public class ConversationForFarmer extends Conversation {
 	ConversationPart conversationPartWellThanks;
 
 	QuestThePigs questThePigs;
-	Farmer farmer;
+	Human farmer;
 
-	public ConversationForFarmer(final QuestThePigs questThePigs, Farmer farmer) {
+	public ConversationForFarmer(final QuestThePigs questThePigs, Human farmer) {
 		super(null);
 		this.questThePigs = questThePigs;
 		this.farmer = farmer;

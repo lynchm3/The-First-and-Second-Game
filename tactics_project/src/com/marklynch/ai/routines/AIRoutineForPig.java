@@ -3,7 +3,7 @@ package com.marklynch.ai.routines;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Pig;
+import com.marklynch.objects.units.Actor;
 
 public class AIRoutineForPig extends AIRoutine {
 
@@ -25,10 +25,10 @@ public class AIRoutineForPig extends AIRoutine {
 	int sleepCounter = 0;
 	final int SLEEP_TIME = 1000;
 
-	Pig pig;
+	Actor pig;
 	Square targetSquare = null;
 
-	public AIRoutineForPig(Pig actor) {
+	public AIRoutineForPig(Actor actor) {
 		super(actor);
 		this.pig = actor;
 		aiType = AI_TYPE.RUNNER;
@@ -84,6 +84,11 @@ public class AIRoutineForPig extends AIRoutine {
 					return;
 			}
 		}
+	}
+
+	@Override
+	public AIRoutine getInstance(Actor actor) {
+		return new AIRoutineForPig(actor);
 	}
 
 }
