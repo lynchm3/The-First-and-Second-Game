@@ -173,6 +173,49 @@ public class Actor extends GameObject {
 
 	public int thoughtsOnPlayer = 0;
 
+	public Actor() {
+	}
+
+	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {
+		super.init();
+
+		this.bed = bed;
+		if (bed != null)
+			this.bedGUID = bed.guid;
+		if (bed != null)
+			bed.owner = this;
+
+		ArrayList<Weapon> weapons = getWeaponsInInventory();
+		if (weapons.size() > 0 && weapons.get(0) != null) {
+			equipped = weapons.get(0);
+			equippedWeaponGUID = weapons.get(0).guid;
+		}
+
+		this.faction = faction;
+		if (this.faction != null) {
+			factionGUID = this.faction.guid;
+			this.faction.actors.add(this);
+		}
+
+		if (gold > 0)
+			inventory.add(Templates.GOLD.makeCopy(null, this, gold));
+
+		this.lastSquare = this.squareGameObjectIsOn;
+
+		for (GameObject gameObject : mustHaves) {
+			this.inventory.add(gameObject);
+		}
+
+		for (GameObject gameObject : mightHaves) {
+			if (Math.random() > 0.8d)
+				this.inventory.add(gameObject);
+		}
+
+		for (GameObject gameObject : inventory.getGameObjects()) {
+			gameObject.owner = this;
+		}
+	}
+
 	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
 			GameObject bed, Inventory inventory,
@@ -188,7 +231,7 @@ public class Actor extends GameObject {
 				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
 				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
 				weight, 0, owner, templateId);
-		standingTexture = imageTexture;
+		// standingTexture = imageTexture;
 
 		this.strength = strength;
 		this.dexterity = dexterity;
@@ -219,8 +262,6 @@ public class Actor extends GameObject {
 			equipped = weapons.get(0);
 			equippedWeaponGUID = weapons.get(0).guid;
 		}
-
-		attackers = new ArrayList<GameObject>();
 
 		this.faction = faction;
 		if (this.faction != null) {

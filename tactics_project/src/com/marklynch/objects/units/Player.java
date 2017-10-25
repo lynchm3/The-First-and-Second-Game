@@ -40,6 +40,21 @@ public class Player extends Actor {
 	public static float xpPerLevel = 55;
 	public ArrayList<Square> squaresVisibleToPlayerOnlyPlayer = new ArrayList<Square>();
 
+	public Player() {
+		hairImageTexture = ResourceUtils.getGlobalImage("hair.png");
+		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png");
+		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png");
+
+		powers.add(new PowerBleed(this));
+		powers.add(new PowerInferno(this));
+		thoughtsOnPlayer = 100;
+	}
+
+	@Override
+	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {
+		super.init(gold, mustHaves, mightHaves);
+	}
+
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
 			GameObject bed, Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX,
@@ -55,13 +70,6 @@ public class Player extends Actor {
 				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
 				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
 				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves, mightHaves, templateId);
-		hairImageTexture = ResourceUtils.getGlobalImage("hair.png");
-		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png");
-		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png");
-
-		powers.add(new PowerBleed(this));
-		powers.add(new PowerInferno(this));
-		thoughtsOnPlayer = 100;
 	}
 
 	@Override
@@ -79,13 +87,61 @@ public class Player extends Actor {
 	public Player makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
-		Player actor = new Player(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,
-				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
-				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, gold, mustHaves, mightHaves,
-				templateId);
+		Player actor = new Player();
+		actor.name = name;
+		actor.squareGameObjectIsOn = square;
+		actor.faction = faction;
+
+		actor.title = title;
+		actor.actorLevel = actorLevel;
+		actor.totalHealth = actor.remainingHealth = totalHealth;
+		actor.strength = strength;
+		actor.dexterity = dexterity;
+		actor.intelligence = intelligence;
+		actor.endurance = endurance;
+		actor.imageTexturePath = imageTexturePath;
+		// actor.squareGameObjectIsOn = null;
+		actor.travelDistance = travelDistance;
+		actor.sight = sight;
+		// actor.bed = null;
+		// actor.inventory = new Inventory();
+		actor.widthRatio = widthRatio;
+		actor.heightRatio = heightRatio;
+		actor.drawOffsetX = drawOffsetX;
+		actor.drawOffsetY = drawOffsetY;
+		actor.soundWhenHit = soundWhenHit;
+		actor.soundWhenHitting = soundWhenHitting;
+		// actor.soundDampening = 1f;
+		// actor.stackable = false;
+		actor.weight = weight;
+		actor.handAnchorX = handAnchorX;
+		actor.handAnchorY = handAnchorY;
+		actor.headAnchorX = headAnchorX;
+		actor.headAnchorY = headAnchorY;
+		actor.bodyAnchorX = bodyAnchorX;
+		actor.bodyAnchorY = bodyAnchorY;
+		actor.legsAnchorX = legsAnchorX;
+		actor.legsAnchorY = legsAnchorY;
+		actor.canOpenDoors = canOpenDoors;
+		actor.canEquipWeapons = canEquipWeapons;
+		// gold
+		actor.templateId = templateId;
+
+		actor.init(gold, mustHaves, mightHaves);
+
+		// Player actor = new Player(name, title, actorLevel, (int) totalHealth,
+		// strength, dexterity, intelligence,
+		// endurance, imageTexturePath, square, travelDistance, sight, bed, new
+		// Inventory(), widthRatio,
+		// heightRatio, drawOffsetX, drawOffsetY, soundWhenHit,
+		// soundWhenHitting, soundDampening, light,
+		// lightHandleX, lightHandlY, stackable, fireResistance,
+		// waterResistance, electricResistance,
+		// poisonResistance, slashResistance, weight, owner, faction,
+		// handAnchorX, handAnchorY, headAnchorX,
+		// headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY,
+		// gold, mustHaves, mightHaves,
+		// templateId);
 
 		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(templateId);
 

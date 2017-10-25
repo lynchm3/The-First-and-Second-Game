@@ -146,6 +146,25 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public boolean starred = false;
 	public boolean flash = false;
 
+	public GameObject() {
+	}
+
+	public void init() {
+
+		if (squareGameObjectIsOn != null) {
+			this.squareGameObjectIsOn.inventory.add(this);
+		}
+
+		loadImages();
+
+		width = Game.SQUARE_WIDTH * widthRatio;
+		height = Game.SQUARE_HEIGHT * heightRatio;
+		halfWidth = width / 2;
+		halfHeight = height / 2;
+		randomisePosition();
+
+	}
+
 	public GameObject(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
 
 			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
@@ -266,6 +285,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			if (hiding)
 				alpha = 0.5f;
 
+			System.out.println("name = " + name);
+			System.out.println("imageTexture = " + imageTexture);
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
 			// TextureUtils.skipNormals = false;
@@ -596,22 +617,26 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 			if (!animation.completed) {
 				animation.update(delta);
 				// System.out.println(arg0);
-				actor.thisStepTime += delta;
-				if (actor.thisStepTime > 200 && actor.stepLeftTexture != null) {
-					if (actor.currentStepTexture == actor.stepLeftTexture) {
-						actor.imageTexture = actor.currentStepTexture = actor.stepRightTexture;
-						actor.thisStepTime = 0;
-					} else {
-						actor.imageTexture = actor.currentStepTexture = actor.stepLeftTexture;
-						actor.thisStepTime = 0;
-					}
-
-				} else if (actor.thisStepTime > actor.timePerStep && actor.stepLeftTexture != null) {
-					actor.imageTexture = actor.standingTexture;
-				}
+				// actor.thisStepTime += delta;
+				// if (actor.thisStepTime > 200 && actor.stepLeftTexture !=
+				// null) {
+				// if (actor.currentStepTexture == actor.stepLeftTexture) {
+				// actor.imageTexture = actor.currentStepTexture =
+				// actor.stepRightTexture;
+				// actor.thisStepTime = 0;
+				// } else {
+				// actor.imageTexture = actor.currentStepTexture =
+				// actor.stepLeftTexture;
+				// actor.thisStepTime = 0;
+				// }
+				//
+				// } else if (actor.thisStepTime > actor.timePerStep &&
+				// actor.stepLeftTexture != null) {
+				// actor.imageTexture = actor.standingTexture;
+				// }
 			} else {
-				actor.imageTexture = actor.standingTexture;
-				actor.thisStepTime = actor.timePerStep;
+				// actor.imageTexture = actor.standingTexture;
+				// actor.thisStepTime = actor.timePerStep;
 			}
 		}
 

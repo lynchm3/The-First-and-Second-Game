@@ -25,7 +25,7 @@ public class GameObjectTemplate implements InventoryParent {
 	public float totalHealth = 0;
 	public String imageTexturePath = null;
 	public transient Square squareGameObjectIsOn = null;
-	public Inventory inventory;
+	public Inventory inventory = new Inventory();
 	public boolean showInventory = false;;
 	public boolean canShareSquare = true;
 	public boolean fitsInInventory = true;
@@ -62,6 +62,9 @@ public class GameObjectTemplate implements InventoryParent {
 
 	public transient Texture imageTexture = null;
 	public ArrayList<Effect> activeEffectsOnGameObject = new ArrayList<Effect>();
+
+	public GameObjectTemplate() {
+	}
 
 	public GameObjectTemplate(String name, float totalHealth, String imageTexturePath, Square squareGameObjectIsOn,
 			Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
