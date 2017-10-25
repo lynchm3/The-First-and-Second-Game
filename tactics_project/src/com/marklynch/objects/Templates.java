@@ -33,35 +33,42 @@ public class Templates {
 	public Templates() {
 
 		// Player
-		Player = new Player();
-		Player.title = "Fighter";
-		Player.actorLevel = 1;
-		Player.totalHealth = Player.remainingHealth = 100;
-		Player.strength = 10;
-		Player.dexterity = 10;
-		Player.intelligence = 10;
-		Player.endurance = 10;
-		Player.imageTexturePath = "hero.png";
-		Player.heightRatio = 1.5f;
-		Player.drawOffsetX = 0f;
-		Player.drawOffsetY = -0.5f;
-		Player.weight = 90f;
-		Player.handAnchorX = 75f;
-		Player.handAnchorY = 127f;
-		Player.headAnchorX = 70f;
-		Player.headAnchorY = 23f;
-		Player.bodyAnchorX = 0;
-		Player.bodyAnchorY = 0;
-		Player.legsAnchorX = 0;
-		Player.legsAnchorY = 0;
-		Player.templateId = GameObject.generateNewTemplateId();
-		Player.canOpenDoors = true;
-		Player.canEquipWeapons = true;
+		PLAYER = new Player();
+		PLAYER.title = "Fighter";
+		PLAYER.actorLevel = 1;
+		PLAYER.totalHealth = PLAYER.remainingHealth = 100;
+		PLAYER.strength = 10;
+		PLAYER.dexterity = 10;
+		PLAYER.intelligence = 10;
+		PLAYER.endurance = 10;
+		PLAYER.imageTexturePath = "hero.png";
+		PLAYER.heightRatio = 1.5f;
+		PLAYER.drawOffsetY = -0.5f;
+		PLAYER.weight = 90f;
+		PLAYER.handAnchorX = 75f;
+		PLAYER.handAnchorY = 127f;
+		PLAYER.headAnchorX = 70f;
+		PLAYER.headAnchorY = 23f;
+		PLAYER.canOpenDoors = true;
+		PLAYER.canEquipWeapons = true;
+		PLAYER.templateId = GameObject.generateNewTemplateId();
 
 		// General People
-		HUNTER = new Hunter("Hunter", "Hunter", 1, 10, 0, 0, 0, 0, "hunter.png", null, 1, 10, null, new Inventory(), 1f,
-				1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88,
-				54, 88, 54, 0, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+		HUNTER = new Hunter();
+		HUNTER.title = "Hunter";
+		HUNTER.actorLevel = 1;
+		HUNTER.totalHealth = HUNTER.remainingHealth = 10;
+		HUNTER.strength = 10;
+		HUNTER.dexterity = 10;
+		HUNTER.intelligence = 10;
+		HUNTER.endurance = 10;
+		HUNTER.imageTexturePath = "hunter.png";
+		HUNTER.weight = 90f;
+		HUNTER.handAnchorX = 88f;
+		HUNTER.handAnchorY = 54f;
+		HUNTER.canOpenDoors = true;
+		HUNTER.canEquipWeapons = true;
+		HUNTER.templateId = GameObject.generateNewTemplateId();
 
 		THIEF = new Thief("Thief", "Thief", 1, 10, 0, 0, 0, 0, "thief.png", null, 1, 10, null, new Inventory(), 1.5f,
 				1.5f, -0.25f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null, null, 88, 54,
@@ -426,7 +433,7 @@ public class Templates {
 	public static Gold GOLD;
 
 	// Player
-	public static Player Player;
+	public static Player PLAYER;
 
 	// General People
 	public static Hunter HUNTER;

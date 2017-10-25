@@ -44,16 +44,16 @@ public class Player extends Actor {
 		hairImageTexture = ResourceUtils.getGlobalImage("hair.png");
 		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png");
 		stepRightTexture = ResourceUtils.getGlobalImage("player_step_right.png");
-
 		powers.add(new PowerBleed(this));
 		powers.add(new PowerInferno(this));
 		thoughtsOnPlayer = 100;
 	}
 
-	@Override
-	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {
-		super.init(gold, mustHaves, mightHaves);
-	}
+	// @Override
+	// public void init(int gold, GameObject[] mustHaves, GameObject[]
+	// mightHaves) {
+	// super.init(gold, mustHaves, mightHaves);
+	// }
 
 	public Player(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
 			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,

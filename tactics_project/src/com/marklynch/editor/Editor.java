@@ -421,7 +421,7 @@ public class Editor {
 
 		// Add player
 		// West Security
-		Player player = Templates.Player.makeCopy("You", Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
+		Player player = Templates.PLAYER.makeCopy("You", Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
 				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {}, null);
 		// Morts Mine
 		// Actor player =
