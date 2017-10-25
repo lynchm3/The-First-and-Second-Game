@@ -65,31 +65,7 @@ public class Templates {
 	public Templates() {
 
 		new TemplatesHumans();
-
-		// Domestic animals
-		PIG = new Pig("Pig", "Pig", 1, 10, 0, 0, 0, 0, "pig.png", null, 1, 10, null, new Inventory(), 1f, 0.65625f, 0,
-				0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null, null, 40, 96, 40, 96, 40, 96, 40,
-				96, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
-
-		// Friendly Wild animals
-		RAT = new TinyNeutralWildAnimal("Rat", "Rat", 1, 1, 0, 0, 0, 0, "rat.png", null, 1, 10, null, new Inventory(),
-				1, 0.25f, 0f, 0.75f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 60f, null, null, 0, 0, 0,
-				0, 0, 0, 0, 0, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
-
-		RABBIT = new HerbivoreWildAnimal("Rabbit", "Rabbit", 1, 4, 0, 0, 0, 0, "rabbit.png", null, 1, 10, null,
-				new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 60f, null,
-				null, 0, 0, 0, 0, 0, 0, 0, 0, new GameObject[] {}, new GameObject[] {},
-				GameObject.generateNewTemplateId());
-
-		BABY_RABBIT = new TinyNeutralWildAnimal("Baby Rabbit", "Baby Rabbit", 1, 10, 0, 0, 0, 0, "baby_rabbit.png",
-				null, 1, 10, null, new Inventory(), 0.25f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f,
-				0f, 0f, 0f, 60f, null, null, 0, 0, 0, 0, 0, 0, 0, 0, new GameObject[] {}, new GameObject[] {},
-				GameObject.generateNewTemplateId());
-
-		FOX = new CarnivoreNeutralWildAnimal("Fox", "Fox", 1, 10, 0, 0, 0, 0, "fox.png", null, 1, 10, null,
-				new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 60f, null,
-				null, 0, 0, 0, 0, 0, 0, 0, 0, new GameObject[] {}, new GameObject[] {},
-				GameObject.generateNewTemplateId());
+		new TemplatesAnimals();
 
 		// Monsters
 		BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png", null, 1, 1, null, new Inventory(), 1f, 1f,
