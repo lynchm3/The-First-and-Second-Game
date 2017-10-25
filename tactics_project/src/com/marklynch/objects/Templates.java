@@ -70,10 +70,21 @@ public class Templates {
 		HUNTER.canEquipWeapons = true;
 		HUNTER.templateId = GameObject.generateNewTemplateId();
 
-		THIEF = new Thief("Thief", "Thief", 1, 10, 0, 0, 0, 0, "thief.png", null, 1, 10, null, new Inventory(), 1.5f,
-				1.5f, -0.25f, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null, null, 88, 54,
-				88, 54, 88, 54, 88, 54, 0, new GameObject[] {}, new GameObject[] {},
-				GameObject.generateNewTemplateId());
+		THIEF = new Thief();
+		HUNTER.title = "Thief";
+		HUNTER.actorLevel = 1;
+		HUNTER.totalHealth = HUNTER.remainingHealth = 10;
+		HUNTER.strength = 10;
+		HUNTER.dexterity = 10;
+		HUNTER.intelligence = 10;
+		HUNTER.endurance = 10;
+		HUNTER.imageTexturePath = "thief.png";
+		HUNTER.weight = 90f;
+		HUNTER.handAnchorX = 88f;
+		HUNTER.handAnchorY = 54f;
+		HUNTER.canOpenDoors = true;
+		HUNTER.canEquipWeapons = true;
+		HUNTER.templateId = GameObject.generateNewTemplateId();
 
 		FARMER = new Farmer("Farmer", "Farmer", 1, 10, 0, 0, 0, 0, "farmer.png", null, 1, 10, null, new Inventory(), 1f,
 				1f, 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 90f, null, null, 88, 54, 88, 54, 88,

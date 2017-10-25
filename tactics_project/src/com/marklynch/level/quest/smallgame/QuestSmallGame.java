@@ -29,7 +29,6 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
-import com.marklynch.objects.units.Hunter;
 
 public class QuestSmallGame extends Quest {
 
@@ -297,11 +296,10 @@ public class QuestSmallGame extends Quest {
 		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		chest.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, thief));
 
-		environmentalistBill = new Hunter("Environmentalist Bill", "Environmentalist", 1, 10, 0, 0, 0, 0,
-				"environmentalist.png", Game.level.squares[105][16], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 110f, null, Game.level.factions.outsiders, 0, 0, 0, 0,
-				0, 0, 0, 0, 10, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
-		environmentalistBill.inventory.add(Templates.HATCHET.makeCopy(null, environmentalistBill));
+		environmentalistBill = hunterBront2.makeCopy("Enviromentalist Bill",
+				Game.level.squares[105][16], Game.level.factions.townsPeople, null, 83, new GameObject[] {
+						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, null);
 		environmentalistBill.quest = this;
 
 		superWolf = new CarnivoreNeutralWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
