@@ -104,13 +104,6 @@ public class TemplatesAnimals {
 		Templates.FOX.canEquipWeapons = false;
 		Templates.FOX.templateId = GameObject.generateNewTemplateId();
 		Templates.FOX.aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(Templates.FOX);
-
-		// "Fox", "Fox", 1, 10, 0, 0, 0, 0, "fox.png", null, 1, 10, null,
-		// new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-		// 0f, 0f, 0f, 0f, 0f, 60f, null,
-		// null, 0, 0, 0, 0, 0, 0, 0, 0, new GameObject[] {}, new GameObject[]
-		// {},
-		// GameObject.generateNewTemplateId());
 	}
 
 }

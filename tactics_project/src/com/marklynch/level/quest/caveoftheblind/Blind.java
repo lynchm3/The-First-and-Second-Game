@@ -2,7 +2,6 @@ package com.marklynch.level.quest.caveoftheblind;
 
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
@@ -11,29 +10,12 @@ import com.marklynch.objects.actions.ActionScream;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
 
-import mdesl.graphics.Color;
-
 public class Blind extends Monster {
 
 	public StructureRoom roomLivingIn;
 
-	public Blind(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
-			GameObject bed, Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX,
-			float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
-			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
-			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
-			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, StructureRoom roomLivingIn,
-			GameObject[] mustHaves, GameObject[] mightHaves, int templateId) {
-		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, bed, inventory, false, true, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, mustHaves, mightHaves, templateId);
-		this.roomLivingIn = roomLivingIn;
-		aiRoutine = new AIRoutineForBlind(this);
+	public Blind() {
+		super();
 	}
 
 	@Override
@@ -96,13 +78,51 @@ public class Blind extends Monster {
 	public Blind makeCopy(Square square, Faction faction, StructureRoom roomLivingIn, GameObject[] mustHaves,
 			GameObject[] mightHaves) {
 
-		Blind actor = new Blind(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, null, new Inventory(), widthRatio,
-				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
-				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn, mustHaves, mightHaves,
-				templateId);
+		Blind actor = new Blind();
+		actor.squareGameObjectIsOn = square;
+		actor.faction = faction;
+		this.roomLivingIn = roomLivingIn;
+
+		actor.title = title;
+		actor.name = name;
+		actor.area = area;
+		actor.actorLevel = actorLevel;
+		actor.totalHealth = actor.remainingHealth = totalHealth;
+		actor.strength = strength;
+		actor.dexterity = dexterity;
+		actor.intelligence = intelligence;
+		actor.endurance = endurance;
+		actor.imageTexturePath = imageTexturePath;
+		// actor.squareGameObjectIsOn = null;
+		actor.travelDistance = travelDistance;
+		actor.sight = sight;
+		// actor.bed = null;
+		// actor.inventory = new Inventory();
+		actor.widthRatio = widthRatio;
+		actor.heightRatio = heightRatio;
+		actor.drawOffsetX = drawOffsetX;
+		actor.drawOffsetY = drawOffsetY;
+		actor.soundWhenHit = soundWhenHit;
+		actor.soundWhenHitting = soundWhenHitting;
+		// actor.soundDampening = 1f;
+		// actor.stackable = false;
+		actor.weight = weight;
+		actor.handAnchorX = handAnchorX;
+		actor.handAnchorY = handAnchorY;
+		actor.headAnchorX = headAnchorX;
+		actor.headAnchorY = headAnchorY;
+		actor.bodyAnchorX = bodyAnchorX;
+		actor.bodyAnchorY = bodyAnchorY;
+		actor.legsAnchorX = legsAnchorX;
+		actor.legsAnchorY = legsAnchorY;
+		actor.canOpenDoors = canOpenDoors;
+		actor.canEquipWeapons = canEquipWeapons;
+		// gold
+		actor.templateId = templateId;
+
+		actor.aiRoutine = aiRoutine.getInstance(actor);
+
+		actor.init(0, mustHaves, mightHaves);
 		return actor;
 	}
 
