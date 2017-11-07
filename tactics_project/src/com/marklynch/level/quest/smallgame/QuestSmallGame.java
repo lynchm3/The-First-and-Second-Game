@@ -13,7 +13,6 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
@@ -28,7 +27,6 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 
 public class QuestSmallGame extends Quest {
 
@@ -302,10 +300,8 @@ public class QuestSmallGame extends Quest {
 				new GameObject[] {}, null);
 		environmentalistBill.quest = this;
 
-		superWolf = new CarnivoreNeutralWildAnimal("Wolf Queen", "Wild animal", 1, 10, 0, 0, 0, 0, "fire_wolf.png",
-				Game.level.squares[128][12], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 200f, -50f, 0f, 0f, 0f, 150f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
-				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+		superWolf = Templates.WOLF.makeCopy("Wolf Queen", Game.level.squares[128][12], Game.level.factions.wolves, null,
+				new GameObject[] {}, new GameObject[] {}, null);
 		superWolf.powers.add(new PowerSuperPeek(superWolf));
 
 		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(superWolf.templateId);
@@ -320,15 +316,11 @@ public class QuestSmallGame extends Quest {
 		bestiaryKnowledge.electricResistance = true;
 		bestiaryKnowledge.powers = true;
 
-		Actor wolf2 = new CarnivoreNeutralWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_green.png",
-				Game.level.squares[127][13], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
-				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+		Actor wolf2 = Templates.WOLF.makeCopy("Wolf", Game.level.squares[128][11], Game.level.factions.wolves, null,
+				new GameObject[] {}, new GameObject[] {}, null);
 
-		Actor wolf3 = new CarnivoreNeutralWildAnimal("Wolf", "Wild animal", 1, 10, 0, 0, 0, 0, "wolf_pink.png",
-				Game.level.squares[127][11], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.wolves, 0, 0, 0, 0, 0, 0, 0, 0,
-				new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+		Actor wolf3 = Templates.WOLF.makeCopy("Wolf", Game.level.squares[127][11], Game.level.factions.wolves, null,
+				new GameObject[] {}, new GameObject[] {}, null);
 
 		// [207][16]
 

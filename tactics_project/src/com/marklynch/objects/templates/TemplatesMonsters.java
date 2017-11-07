@@ -27,14 +27,6 @@ public class TemplatesMonsters {
 		Templates.BLIND.templateId = GameObject.generateNewTemplateId();
 		Templates.BLIND.aiRoutine = new AIRoutineForBlind(Templates.BLIND);
 
-		// Monsters
-		// BLIND = new Blind("Blind", "Blind", 1, 10, 0, 0, 0, 0, "blind.png",
-		// null, 1, 1, null, new Inventory(), 1f, 1f,
-		// 0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 50f,
-		// null, null, 88, 54, 88, 54, 88, 54,
-		// 88, 54, null, new GameObject[] {}, new GameObject[] {},
-		// GameObject.generateNewTemplateId());
-		//
 		// ROCK_GOLEM = new RockGolem("Rock Golem", "Rock Golem", 1, 100, 0, 0,
 		// 0, 0, "rock_golem.png", null, 1, 10, null,
 		// new Inventory(), 1, 1.5f, 0, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,

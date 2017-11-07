@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForRockGolem;
 import com.marklynch.level.constructs.Faction;
-import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
@@ -17,7 +15,6 @@ import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class RockGolem extends Monster {
@@ -27,22 +24,8 @@ public class RockGolem extends Monster {
 	public Texture sleepingTexture;
 	public Texture awakeTexture;
 
-	public RockGolem(String name, String title, int actorLevel, int health, int strength, int dexterity,
-			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
-			int sight, GameObject bed, Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX,
-			float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
-			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
-			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
-			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, StructureRoom roomLivingIn,
-			boolean awake, GameObject[] mustHaves, GameObject[] mightHaves, int templateId) {
-		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, bed, inventory, false, false, widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY,
-				bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, mustHaves, mightHaves, templateId);
-		this.awake = awake;
+	public RockGolem() {
+		super();
 		this.roomLivingIn = roomLivingIn;
 		aiRoutine = new AIRoutineForRockGolem(this);
 		sleepingTexture = ResourceUtils.getGlobalImage("rock_golem_sleeping.png");
@@ -51,15 +34,10 @@ public class RockGolem extends Monster {
 		anchorX = 16;
 		anchorY = 64;
 
-		if (!awake) {
-			this.blocksLineOfSight = true;
-			this.name = "Suspicious Boulder";
-			imageTexture = sleepingTexture;
-			canBePickedUp = true;
-		} else {
-			canBePickedUp = false;
-			this.blocksLineOfSight = false;
-		}
+		this.blocksLineOfSight = true;
+		this.name = "Suspicious Boulder";
+		imageTexture = sleepingTexture;
+		canBePickedUp = true;
 
 	}
 
@@ -149,20 +127,6 @@ public class RockGolem extends Monster {
 		return actions;
 	}
 
-	public RockGolem makeCopy(String name, Square square, Faction faction, StructureRoom roomLivingIn, boolean awake,
-			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
-
-		RockGolem actor = new RockGolem(name, title, actorLevel, (int) totalHealth, strength, dexterity, intelligence,
-				endurance, imageTexturePath, square, travelDistance, sight, bed, new Inventory(), widthRatio,
-				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY, headAnchorX,
-				headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, roomLivingIn, awake, mustHaves,
-				mightHaves, actorLevel);
-		actor.area = area;
-		return actor;
-	}
-
 	@Override
 	public void landed(Actor shooter, Action action) {
 		if (!awake)
@@ -192,6 +156,57 @@ public class RockGolem extends Monster {
 		if (Game.level.shouldLog(this))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { this, " went to sleep" }));
 
+	}
+
+	public RockGolem makeCopy(String name, Square square, Faction faction, StructureRoom roomLivingIn,
+			GameObject[] mustHaves, GameObject[] mightHaves) {
+
+		RockGolem actor = new RockGolem();
+		actor.squareGameObjectIsOn = square;
+		actor.faction = faction;
+		this.roomLivingIn = roomLivingIn;
+
+		actor.title = title;
+		actor.name = name;
+		actor.area = area;
+		actor.actorLevel = actorLevel;
+		actor.totalHealth = actor.remainingHealth = totalHealth;
+		actor.strength = strength;
+		actor.dexterity = dexterity;
+		actor.intelligence = intelligence;
+		actor.endurance = endurance;
+		actor.imageTexturePath = imageTexturePath;
+		// actor.squareGameObjectIsOn = null;
+		actor.travelDistance = travelDistance;
+		actor.sight = sight;
+		// actor.bed = null;
+		// actor.inventory = new Inventory();
+		actor.widthRatio = widthRatio;
+		actor.heightRatio = heightRatio;
+		actor.drawOffsetX = drawOffsetX;
+		actor.drawOffsetY = drawOffsetY;
+		actor.soundWhenHit = soundWhenHit;
+		actor.soundWhenHitting = soundWhenHitting;
+		// actor.soundDampening = 1f;
+		// actor.stackable = false;
+		actor.weight = weight;
+		actor.handAnchorX = handAnchorX;
+		actor.handAnchorY = handAnchorY;
+		actor.headAnchorX = headAnchorX;
+		actor.headAnchorY = headAnchorY;
+		actor.bodyAnchorX = bodyAnchorX;
+		actor.bodyAnchorY = bodyAnchorY;
+		actor.legsAnchorX = legsAnchorX;
+		actor.legsAnchorY = legsAnchorY;
+		actor.canOpenDoors = canOpenDoors;
+		actor.canEquipWeapons = canEquipWeapons;
+		// gold
+		actor.templateId = templateId;
+
+		actor.aiRoutine = aiRoutine.getInstance(actor);
+
+		actor.init(0, mustHaves, mightHaves);
+		return actor;
 	}
 
 }

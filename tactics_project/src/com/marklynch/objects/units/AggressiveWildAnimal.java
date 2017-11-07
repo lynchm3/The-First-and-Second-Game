@@ -3,31 +3,14 @@ package com.marklynch.objects.units;
 import com.marklynch.ai.routines.AIRoutineForWildAnimal;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
-import mdesl.graphics.Color;
-
 public class AggressiveWildAnimal extends WildAnimal {
 
-	public AggressiveWildAnimal(String name, String title, int actorLevel, int health, int strength, int dexterity,
-			int intelligence, int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance,
-			int sight, GameObject bed, Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX,
-			float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
-			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
-			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
-			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, GameObject[] mustHaves,
-			GameObject[] mightHaves, int templateId) {
-		super(name, title, actorLevel, health, strength, dexterity, intelligence, endurance, imagePath,
-				squareActorIsStandingOn, travelDistance, sight, bed, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, owner, faction, handAnchorX, handAnchorY, headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY,
-				legsAnchorX, legsAnchorY, mustHaves, mightHaves, templateId);
+	public AggressiveWildAnimal() {
+		super();
 		thoughtsOnPlayer = -100;
-		aiRoutine = new AIRoutineForWildAnimal(this);
 	}
 
 	@Override
@@ -44,14 +27,49 @@ public class AggressiveWildAnimal extends WildAnimal {
 	public AggressiveWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed,
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
-		AggressiveWildAnimal actor = new AggressiveWildAnimal(name, title, actorLevel, (int) totalHealth, strength,
-				dexterity, intelligence, endurance, imageTexturePath, square, travelDistance, sight, bed,
-				new Inventory(), widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
-				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
-				electricResistance, poisonResistance, slashResistance, weight, owner, faction, handAnchorX, handAnchorY,
-				headAnchorX, headAnchorY, bodyAnchorX, bodyAnchorY, legsAnchorX, legsAnchorY, mustHaves, mightHaves,
-				templateId);
+		AggressiveWildAnimal actor = new AggressiveWildAnimal();
+		actor.name = name;
+		actor.squareGameObjectIsOn = square;
+		actor.faction = faction;
 		actor.area = area;
+
+		actor.title = title;
+		actor.actorLevel = actorLevel;
+		actor.totalHealth = actor.remainingHealth = totalHealth;
+		actor.strength = strength;
+		actor.dexterity = dexterity;
+		actor.intelligence = intelligence;
+		actor.endurance = endurance;
+		actor.imageTexturePath = imageTexturePath;
+		// actor.squareGameObjectIsOn = null;
+		actor.travelDistance = travelDistance;
+		actor.sight = sight;
+		// actor.bed = null;
+		// actor.inventory = new Inventory();
+		actor.widthRatio = widthRatio;
+		actor.heightRatio = heightRatio;
+		actor.drawOffsetX = drawOffsetX;
+		actor.drawOffsetY = drawOffsetY;
+		actor.soundWhenHit = soundWhenHit;
+		actor.soundWhenHitting = soundWhenHitting;
+		// actor.soundDampening = 1f;
+		// actor.stackable = false;
+		actor.weight = weight;
+		actor.handAnchorX = handAnchorX;
+		actor.handAnchorY = handAnchorY;
+		actor.headAnchorX = headAnchorX;
+		actor.headAnchorY = headAnchorY;
+		actor.bodyAnchorX = bodyAnchorX;
+		actor.bodyAnchorY = bodyAnchorY;
+		actor.legsAnchorX = legsAnchorX;
+		actor.legsAnchorY = legsAnchorY;
+		actor.canOpenDoors = canOpenDoors;
+		actor.canEquipWeapons = canEquipWeapons;
+		// gold
+		actor.templateId = templateId;
+		actor.aiRoutine = aiRoutine.getInstance(actor);
+
+		actor.init(0, mustHaves, mightHaves);
 		return actor;
 	}
 

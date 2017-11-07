@@ -399,7 +399,7 @@ public class Templates {
 	// Domestic animals
 	public static Pig PIG;
 
-	// Friendly Wild animals
+	// Wild animals
 	public static TinyNeutralWildAnimal RAT;
 
 	public static HerbivoreWildAnimal RABBIT;
@@ -407,6 +407,8 @@ public class Templates {
 	public static TinyNeutralWildAnimal BABY_RABBIT;
 
 	public static CarnivoreNeutralWildAnimal FOX;
+
+	public static CarnivoreNeutralWildAnimal WOLF;
 
 	// Monsters
 	public static Blind BLIND;
