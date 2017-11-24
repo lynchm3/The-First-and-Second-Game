@@ -175,6 +175,8 @@ public class Actor extends GameObject {
 
 	public Actor() {
 
+		super();
+
 		canBePickedUp = false;
 		showInventory = false;
 		fitsInInventory = false;

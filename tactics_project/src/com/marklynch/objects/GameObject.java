@@ -147,6 +147,7 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public boolean flash = false;
 
 	public GameObject() {
+		super();
 	}
 
 	public void init() {
@@ -162,6 +163,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		halfWidth = width / 2;
 		halfHeight = height / 2;
 		randomisePosition();
+
+		inventory = new Inventory();
+		inventory.parent = this;
 
 	}
 

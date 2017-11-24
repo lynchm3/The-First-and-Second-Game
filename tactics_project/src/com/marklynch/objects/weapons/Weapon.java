@@ -7,8 +7,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 
-import mdesl.graphics.Color;
-
 public class Weapon extends GameObject {
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
 			"totalHealth", "remainingHealth", "owner", "inventory", "showInventory", "fitsInInventory",
@@ -27,31 +25,9 @@ public class Weapon extends GameObject {
 
 	public Enhancement enhancement;
 
-	public Weapon(String name, float slashDamage, float pierceDamage, float bluntDamage, float fireDamage,
-			float waterDamage, float electricalDamage, float poisonDamage, float minRange, float maxRange,
-			String imagePath, float health, Square squareGameObjectIsOn, float widthRatio, float heightRatio,
-			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float waterResistance, float electricResistance, float poisonResistance, float slashResistance,
-			float weight, int value, Actor owner, float anchorX, float anchorY, int templateId) {
+	public Weapon() {
 
-		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, value, owner, templateId);
-
-		this.owner = owner;
-		this.anchorX = anchorX;
-		this.anchorY = anchorY;
-		this.slashDamage = slashDamage;
-		this.pierceDamage = pierceDamage;
-		this.bluntDamage = bluntDamage;
-		this.fireDamage = fireDamage;
-		this.waterDamage = waterDamage;
-		this.electricalDamage = electricalDamage;
-		this.poisonDamage = poisonDamage;
-		this.minRange = minRange;
-		this.maxRange = maxRange;
+		super();
 
 		canBePickedUp = true;
 		showInventory = false;
@@ -253,10 +229,40 @@ public class Weapon extends GameObject {
 
 	@Override
 	public Weapon makeCopy(Square square, Actor owner) {
-		return new Weapon(new String(name), slashDamage, pierceDamage, bluntDamage, fireDamage, waterDamage,
-				electricalDamage, poisonDamage, minRange, maxRange, imageTexturePath, totalHealth, square, widthRatio,
-				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, templateId);
+		Weapon weapon = new Weapon();
+		setAttributesForCopy(weapon, square, owner);
+		return weapon;
+	}
+
+	public void setAttributesForCopy(Weapon weapon, Square square, Actor owner) {
+		weapon.owner = owner;
+		weapon.squareGameObjectIsOn = square;
+		weapon.anchorX = anchorX;
+		weapon.anchorY = anchorY;
+		weapon.slashDamage = slashDamage;
+		weapon.pierceDamage = pierceDamage;
+		weapon.bluntDamage = bluntDamage;
+		weapon.fireDamage = fireDamage;
+		weapon.waterDamage = waterDamage;
+		weapon.electricalDamage = electricalDamage;
+		weapon.poisonDamage = poisonDamage;
+		weapon.minRange = minRange;
+		weapon.maxRange = maxRange;
+		weapon.name = name;
+		weapon.squareGameObjectIsOn = square;
+
+		weapon.totalHealth = weapon.remainingHealth = totalHealth;
+		weapon.imageTexturePath = imageTexturePath;
+		weapon.widthRatio = widthRatio;
+		weapon.heightRatio = heightRatio;
+		weapon.drawOffsetX = drawOffsetX;
+		weapon.drawOffsetY = drawOffsetY;
+		weapon.soundWhenHit = soundWhenHit;
+		weapon.soundWhenHitting = soundWhenHitting;
+		weapon.weight = weight;
+
+		weapon.templateId = templateId;
+
+		weapon.init();
 	}
 }

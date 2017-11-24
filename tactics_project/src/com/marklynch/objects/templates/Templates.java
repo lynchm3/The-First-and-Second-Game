@@ -64,6 +64,8 @@ public class Templates {
 
 	public Templates() {
 
+		new TemplatesWeapons();
+		new TemplatesTools();
 		new TemplatesHumans();
 		new TemplatesAnimals();
 		new TemplatesMonsters();
@@ -72,56 +74,6 @@ public class Templates {
 		MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null, new Inventory(), 1f, 1f,
 				0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54,
 				88, 54, 0, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
-
-		// Tools
-		BROOM = new Weapon("Broom", 0, 0, 1, 0, 0, 0, 0, 1, 1, "broom.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 10, null, 55, 88, GameObject.generateNewTemplateId());
-		PICKAXE = new Pickaxe("Pickaxe", 0, 7, 0, 0, 0, 0, 0, 1, 1, "pickaxe.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 30, null, 32, 94,
-				GameObject.generateNewTemplateId());
-		HATCHET = new Axe("Hatchet", 6, 0, 0, 0, 0, 0, 0, 1, 1, "hatchet.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 32, null, 48, 89,
-				GameObject.generateNewTemplateId());
-		HUNTING_KNIFE = new Knife("Hunting Knife", 0, 5, 0, 0, 0, 0, 0, 1, 1, "hunting_knife.png", 100, null, 1f, 1f,
-				0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 27, null, 47, 58,
-				GameObject.generateNewTemplateId());
-		HOE = new Weapon("Hoe", 2, 0, 0, 0, 0, 0, 0, 1, 1, "hoe.png", 100, null, 1f, 1f, 1f, 1f, 0f, 0f, 1f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 40, null, 61, 90, GameObject.generateNewTemplateId());
-		SICKLE = new Weapon("Sickle", 3, 0, 0, 0, 0, 0, 0, 1, 1, "sickle.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 34, null, 20, 29,
-				GameObject.generateNewTemplateId());
-		HAMMER = new Weapon("Hammer", 0, 0, 6, 0, 0, 0, 0, 1, 1, "hammer.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 4f, 29, null, 31, 98,
-				GameObject.generateNewTemplateId());
-		BASKET = new Weapon("Basket", 0, 0, 1, 0, 0, 0, 0, 1, 1, "basket.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 1f, 20, null, 65, 11,
-				GameObject.generateNewTemplateId());
-		WHIP = new Weapon("Whip", 4, 0, 0, 0, 0, 0, 0, 1, 1, "whip.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 43, null, 18, 80, GameObject.generateNewTemplateId());
-		SERRATED_SPOON = new Weapon("Serrated Spoon", 1, 0, 0, 0, 0, 0, 0, 1, 1, "serrated_spoon.png", 100, null, 1f,
-				1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, 23, null, 48, 113,
-				GameObject.generateNewTemplateId());
-		DINNER_BELL = new Bell("Dinner Bell", 0, 0, 1, 0, 0, 0, 0, 1, 1, "bell.png", 100, null, 1f, 1f, 0f, 0f, 25f,
-				25f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, 18, null, 53, 103,
-				GameObject.generateNewTemplateId());
-		LANTERN = new Lantern("Lantern", 0, 0, 1, 2, 0, 0, 0, 1, 1, "lantern.png", 100, null, 1f, 1f, 0f, 0f, 15f, 15f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 32, null, 63, 6,
-				GameObject.generateNewTemplateId());
-
-		// Blades
-		KATANA = new Weapon("Katana", 10, 10, 0, 0, 0, 0, 0, 1, 1, "katana.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, 323, null, 27, 85,
-				GameObject.generateNewTemplateId());
-
-		CLEAVER = new Weapon("Cleaver", 5, 0, 0, 0, 0, 0, 0, 1, 1, "cleaver.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 58, null, 33, 104,
-				GameObject.generateNewTemplateId());
-
-		// Bows
-		// https://en.wikipedia.org/wiki/Bow_and_arrow#Types_of_bow
-		HUNTING_BOW = new Weapon("Hunting Bow", 0, 5, 0, 0, 0, 0, 0, 1, 10, "a2r2.png", 100, null, 1f, 1f, 0f, 0f, 1f,
-				1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 3f, 73, null, 86, 86,
-				GameObject.generateNewTemplateId());
 
 		// ARMOUR
 		// Helmets
