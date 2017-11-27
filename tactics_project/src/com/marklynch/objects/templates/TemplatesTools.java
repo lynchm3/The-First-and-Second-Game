@@ -3,10 +3,12 @@ package com.marklynch.objects.templates;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
+import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.utils.ResourceUtils;
 
 public class TemplatesTools {
 
@@ -247,7 +249,7 @@ public class TemplatesTools {
 		Templates.DINNER_BELL.bluntDamage = 2;
 		Templates.DINNER_BELL.minRange = 1;
 		Templates.DINNER_BELL.maxRange = 1;
-		Templates.DINNER_BELL.imageTexturePath = "dinner_bell.png";
+		Templates.DINNER_BELL.imageTexturePath = "bell.png";
 		Templates.DINNER_BELL.totalHealth = Templates.DINNER_BELL.remainingHealth = 25;
 		Templates.DINNER_BELL.widthRatio = 1f;
 		Templates.DINNER_BELL.heightRatio = 1f;
@@ -284,6 +286,32 @@ public class TemplatesTools {
 		Templates.LANTERN.anchorX = 63;
 		Templates.LANTERN.anchorY = 6;
 		Templates.LANTERN.templateId = GameObject.generateNewTemplateId();
+
+		Templates.JAR = new ContainerForLiquids();
+		Templates.JAR.name = "Jar";
+		Templates.JAR.slashDamage = 10;
+		Templates.JAR.minRange = 1;
+		Templates.JAR.maxRange = 1;
+		Templates.JAR.imageTexturePath = "jar.png";
+		Templates.JAR.totalHealth = Templates.JAR.remainingHealth = 14;
+		Templates.JAR.widthRatio = 0.25f;
+		Templates.JAR.heightRatio = 0.25f;
+		Templates.JAR.drawOffsetX = 0f;
+		Templates.JAR.drawOffsetY = 0f;
+		Templates.JAR.soundWhenHit = 1f;
+		Templates.JAR.soundWhenHitting = 1f;
+		Templates.JAR.soundDampening = 1f;
+		Templates.JAR.stackable = false;
+		Templates.JAR.weight = 10f;
+		Templates.JAR.value = Templates.JAR.baseValue = 42;
+		Templates.JAR.anchorX = 56;
+		Templates.JAR.anchorY = 100;
+		Templates.JAR.templateId = GameObject.generateNewTemplateId();
+		Templates.JAR.volume = 1;
+		Templates.JAR.imageWhenFullPath = "water_jar.png";
+		Templates.JAR.baseName = new String("Jar");
+		Templates.JAR.baseImage = ResourceUtils.getGlobalImage("jar.png");
+		Templates.JAR.imageWhenFull = ResourceUtils.getGlobalImage("water_jar.png");
 	}
 
 }

@@ -1,32 +1,18 @@
 package com.marklynch.objects.weapons;
 
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
-
-import mdesl.graphics.Color;
 
 public class Armor extends GameObject {
 	public final static String[] editableAttributes = { "name", "imageTexture", "damage", "minRange", "maxRange",
 			"totalHealth", "remainingHealth", "owner", "inventory", "showInventory", "fitsInInventory",
 			"canContainOtherObjects" };
 
-	public Armor(String name, String imagePath, float health, Square squareGameObjectIsOn, float widthRatio,
-			float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting,
-			float soundDampening, Color light, float lightHandleX, float lightHandlY, boolean stackable,
-			float fireResistance, float waterResistance, float electricResistance, float poisonResistance,
-			float slashResistance, float weight, int value, Actor owner, float anchorX, float anchorY, int templateId) {
+	public Armor() {
 
-		super(name, (int) health, imagePath, squareGameObjectIsOn, new Inventory(), widthRatio, heightRatio,
-				drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX,
-				lightHandlY, stackable, fireResistance, waterResistance, electricResistance, poisonResistance,
-				slashResistance, weight, value, owner, templateId);
-
-		this.owner = owner;
-		this.anchorX = anchorX;
-		this.anchorY = anchorY;
+		super();
 
 		canBePickedUp = true;
 		showInventory = false;
@@ -41,5 +27,28 @@ public class Armor extends GameObject {
 
 	public Action getUtilityAction(Actor performer) {
 		return null;
+	}
+
+	public void setAttributesForCopy(Armor armor, Square square, Actor owner) {
+		armor.owner = owner;
+		armor.squareGameObjectIsOn = square;
+		armor.anchorX = anchorX;
+		armor.anchorY = anchorY;
+		armor.name = name;
+		armor.squareGameObjectIsOn = square;
+
+		armor.totalHealth = armor.remainingHealth = totalHealth;
+		armor.imageTexturePath = imageTexturePath;
+		armor.widthRatio = widthRatio;
+		armor.heightRatio = heightRatio;
+		armor.drawOffsetX = drawOffsetX;
+		armor.drawOffsetY = drawOffsetY;
+		armor.soundWhenHit = soundWhenHit;
+		armor.soundWhenHitting = soundWhenHitting;
+		armor.weight = weight;
+
+		armor.templateId = templateId;
+
+		armor.init();
 	}
 }

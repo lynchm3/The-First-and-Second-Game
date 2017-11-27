@@ -60,7 +60,7 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.name = "Hunting Bow";
 		Templates.HUNTING_BOW.pierceDamage = 5;
 		Templates.HUNTING_BOW.minRange = 1;
-		Templates.HUNTING_BOW.maxRange = 1;
+		Templates.HUNTING_BOW.maxRange = 9;
 		Templates.HUNTING_BOW.imageTexturePath = "a2r2.png";
 		Templates.HUNTING_BOW.totalHealth = Templates.HUNTING_BOW.remainingHealth = 20;
 		Templates.HUNTING_BOW.widthRatio = 1f;
@@ -71,7 +71,7 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.soundWhenHitting = 1f;
 		Templates.HUNTING_BOW.soundDampening = 1f;
 		Templates.HUNTING_BOW.stackable = false;
-		Templates.BASKET.fireResistance = -70f;
+		Templates.HUNTING_BOW.fireResistance = -70f;
 		Templates.HUNTING_BOW.weight = 26f;
 		Templates.HUNTING_BOW.value = 54;
 		Templates.HUNTING_BOW.anchorX = 86;

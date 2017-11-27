@@ -66,6 +66,7 @@ public class Templates {
 
 		new TemplatesWeapons();
 		new TemplatesTools();
+		new TemplatesArmor();
 		new TemplatesHumans();
 		new TemplatesAnimals();
 		new TemplatesMonsters();
@@ -74,22 +75,6 @@ public class Templates {
 		MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null, new Inventory(), 1f, 1f,
 				0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54,
 				88, 54, 0, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
-
-		// ARMOUR
-		// Helmets
-		HARD_HAT = new Helmet("Hard Hat", "hard_hat.png", 100, null, 0.25f, 0.12f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 50f, 0f, 0f, 0f, 100f, 3f, 52, null, 20, 8, GameObject.generateNewTemplateId());
-		PINK_HARD_HAT = new Helmet("Hard Hat", "pink_hard_hat.png", 100, null, 0.25f, 0.12f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 50f, 0f, 0f, 0f, 100f, 3f, 53, null, 20, 8, GameObject.generateNewTemplateId());
-		COWBOY_HAT = new Helmet("Cowby Hat", "cowboy_hat.png", 100, null, 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 100f, 3f, 73, null, 34, 68, GameObject.generateNewTemplateId());
-		// Body Armor
-		JUMPER = new BodyArmor("Jumper", "jumper.png", 100, null, 1f, 1.5f, 0f, -32f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 50f, 0f, 0f, 0f, 100f, 3f, 54, null, 0, 0, GameObject.generateNewTemplateId());
-
-		// Leg Armor
-		PANTS = new LegArmor("Pants", "pants.png", 100, null, 1f, 1.5f, 0f, -32f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-				50f, 0f, 0f, 0f, 100f, 3f, 78, null, 0, 0, GameObject.generateNewTemplateId());
 
 		// Furniture
 		BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null,
@@ -220,10 +205,6 @@ public class Templates {
 		// Food?
 		MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f,
 				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 10, null, GameObject.generateNewTemplateId());
-
-		JAR = new ContainerForLiquids("Jar", 2, 2, 0, 0, 0, 0, 0, 1, 1, "jar.png", 100, null, 1f, 1f, 0f, 0f, 25f, 25f,
-				1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 1f, 5, null, 56, 100, 1f, "water_jar.png",
-				GameObject.generateNewTemplateId());
 
 		WATER = new Liquid("Water", 5, "effect_wet.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null,
 				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, 2, null, 0f, new Effect[] { new EffectWet(5) },

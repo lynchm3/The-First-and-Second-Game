@@ -11,60 +11,43 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
-import com.marklynch.utils.ResourceUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class ContainerForLiquids extends Tool {
-	protected String baseName;
+	public String baseName;
 	public float volume;
 	public Texture baseImage;
 	public Texture imageWhenFull;
 	public String imageWhenFullPath;
 	public int baseValue;
 
-	public ContainerForLiquids(String name, float slashDamage, float pierceDamage, float bluntDamage, float fireDamage,
-			float waterDamage, float electricalDamage, float poisonDamage, float minRange, float maxRange,
-			String imagePath, float health, Square squareGameObjectIsOn, float widthRatio, float heightRatio,
-			float drawOffsetX, float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening,
-			Color light, float lightHandleX, float lightHandlY, boolean stackable, float fireResistance,
-			float waterResistance, float electricResistance, float poisonResistance, float slashResistance,
-			float weight, int value, Actor owner, float anchorX, float anchorY, float volume, String imageWhenFullPath,
-			int templateId) {
+	public ContainerForLiquids() {
 
-		super(name, slashDamage, pierceDamage, bluntDamage, fireDamage, waterDamage, electricalDamage, poisonDamage,
-				minRange, maxRange, imagePath, health, squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, anchorX, anchorY, templateId);
-		this.baseValue = value;
-		this.volume = volume;
-		this.imageWhenFullPath = imageWhenFullPath;
-		baseName = new String(name);
-		baseImage = this.imageTexture;
-		this.imageWhenFull = ResourceUtils.getGlobalImage(imageWhenFullPath);
-		if (this.inventory.size() == 0) {
-			this.name = baseName + " (empty)";
-			this.imageTexture = baseImage;
-			this.baseValue = value;
-		} else {
-			this.name = baseName + " of " + inventory.get(0).name;
-			this.imageTexture = imageWhenFull;
-			this.value = baseValue + inventory.get(0).value;
-		}
+		super();
 
 	}
 
 	@Override
 	public ContainerForLiquids makeCopy(Square square, Actor owner) {
-
-		return new ContainerForLiquids(new String(baseName), slashDamage, pierceDamage, bluntDamage, fireDamage,
-				waterDamage, electricalDamage, poisonDamage, minRange, maxRange, imageTexturePath, (int) totalHealth,
-				squareGameObjectIsOn, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
-				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
-				electricResistance, poisonResistance, slashResistance, weight, value, owner, anchorX, anchorY, volume,
-				imageWhenFullPath, templateId);
+		ContainerForLiquids weapon = new ContainerForLiquids();
+		setAttributesForCopy(weapon, square, owner);
+		weapon.baseValue = value;
+		weapon.volume = volume;
+		weapon.imageWhenFullPath = imageWhenFullPath;
+		weapon.baseName = baseName;
+		weapon.baseImage = this.baseImage;
+		weapon.imageWhenFull = this.imageWhenFull;
+		if (weapon.inventory.size() == 0) {
+			weapon.name = baseName + " (empty)";
+			weapon.imageTexture = baseImage;
+			weapon.baseValue = value;
+		} else {
+			weapon.name = baseName + " of " + inventory.get(0).name;
+			weapon.imageTexture = imageWhenFull;
+			weapon.value = baseValue + inventory.get(0).value;
+		}
+		return weapon;
 	}
 
 	@Override
