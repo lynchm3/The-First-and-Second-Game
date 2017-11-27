@@ -235,10 +235,7 @@ public class Weapon extends GameObject {
 	}
 
 	public void setAttributesForCopy(Weapon weapon, Square square, Actor owner) {
-		weapon.owner = owner;
-		weapon.squareGameObjectIsOn = square;
-		weapon.anchorX = anchorX;
-		weapon.anchorY = anchorY;
+
 		weapon.slashDamage = slashDamage;
 		weapon.pierceDamage = pierceDamage;
 		weapon.bluntDamage = bluntDamage;
@@ -248,20 +245,8 @@ public class Weapon extends GameObject {
 		weapon.poisonDamage = poisonDamage;
 		weapon.minRange = minRange;
 		weapon.maxRange = maxRange;
-		weapon.name = name;
-		weapon.squareGameObjectIsOn = square;
 
-		weapon.totalHealth = weapon.remainingHealth = totalHealth;
-		weapon.imageTexturePath = imageTexturePath;
-		weapon.widthRatio = widthRatio;
-		weapon.heightRatio = heightRatio;
-		weapon.drawOffsetX = drawOffsetX;
-		weapon.drawOffsetY = drawOffsetY;
-		weapon.soundWhenHit = soundWhenHit;
-		weapon.soundWhenHitting = soundWhenHitting;
-		weapon.weight = weight;
-
-		weapon.templateId = templateId;
+		super.setAttributesForCopy(weapon, square, owner);
 
 		weapon.init();
 	}

@@ -3,29 +3,19 @@ package com.marklynch.objects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Bed extends GameObject {
 
 	String imagePathCovers;
-	Texture imageTextureCovers;
+	public Texture imageTextureCovers;
 
-	public Bed(String name, int health, String imagePath, String imagePathCovers, Square squareGameObjectIsOn,
-			Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
-			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
-			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, int templateId) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, templateId);
-		this.imagePathCovers = imagePathCovers;
+	public Bed() {
+		super();
 		loadCoverImage();
 
 		canBePickedUp = false;
@@ -42,19 +32,12 @@ public class Bed extends GameObject {
 		this.imageTextureCovers = getGlobalImage(imagePathCovers);
 	}
 
-	public GameObject makeCopy(Square square) {
-		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square, new Inventory(),
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, null, templateId);
-	}
-
 	@Override
-	public GameObject makeCopy(Square square, Actor owner) {
-		return new Bed(new String(name), (int) totalHealth, imageTexturePath, imagePathCovers, square, new Inventory(),
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, templateId);
+	public Bed makeCopy(Square square, Actor owner) {
+		Bed bed = new Bed();
+		super.setAttributesForCopy(bed, square, owner);
+		bed.imageTextureCovers = getGlobalImage(imagePathCovers);
+		return bed;
 	}
 
 	@Override

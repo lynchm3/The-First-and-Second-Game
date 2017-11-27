@@ -76,20 +76,6 @@ public class Templates {
 				0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54,
 				88, 54, 0, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
 
-		// Furniture
-		BED = new Bed("Bed", 5, "bed.png", "bed_Covers.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 75f, 300, null, GameObject.generateNewTemplateId());
-		SHOP_COUNTER = new BigGameObject("Shop Counter", 5, "shop_counter.png", null, new Inventory(), 1f, 1f, 0f, 0f,
-				1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 232, null,
-				GameObject.generateNewTemplateId());
-		TABLE = new BigGameObject("Table", 5, "table.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 20f, 148, null, GameObject.generateNewTemplateId());
-		CHAIR = new BigGameObject("Chair", 5, "chair.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f, 52, null, GameObject.generateNewTemplateId());
-		BENCH = new BigGameObject("Bench", 5, "bench.png", null, new Inventory(), 2f, 1f, -0.5f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 30f, 86, null, GameObject.generateNewTemplateId());
-		CHAIR_FALLEN = new BigGameObject("Chair", 5, "chair_fallen.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f, 86, null, GameObject.generateNewTemplateId());
 		BARRICADE = new BigGameObject("BARRICADE", 25, "barricade.png", null, new Inventory(), 1f, 1f, 0f, 0f, 10f, 1f,
 				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, 24, null, GameObject.generateNewTemplateId());
 		ROCK_WITH_ETCHING = new Sign("Rock with Etching", 1000, "rock_with_etching.png", null, new Inventory(), null, 1,

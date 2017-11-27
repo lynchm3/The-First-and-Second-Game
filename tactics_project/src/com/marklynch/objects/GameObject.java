@@ -1345,4 +1345,27 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 		return currentTemplateIdCount;
 	}
+
+	public void setAttributesForCopy(GameObject gameObject, Square square, Actor owner) {
+		gameObject.owner = owner;
+		gameObject.squareGameObjectIsOn = square;
+		gameObject.anchorX = anchorX;
+		gameObject.anchorY = anchorY;
+		gameObject.name = name;
+		gameObject.squareGameObjectIsOn = square;
+
+		gameObject.totalHealth = gameObject.remainingHealth = totalHealth;
+		gameObject.imageTexturePath = imageTexturePath;
+		gameObject.widthRatio = widthRatio;
+		gameObject.heightRatio = heightRatio;
+		gameObject.drawOffsetX = drawOffsetX;
+		gameObject.drawOffsetY = drawOffsetY;
+		gameObject.soundWhenHit = soundWhenHit;
+		gameObject.soundWhenHitting = soundWhenHitting;
+		gameObject.weight = weight;
+
+		gameObject.templateId = templateId;
+
+		gameObject.init();
+	}
 }
