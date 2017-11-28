@@ -75,9 +75,6 @@ public class Templates {
 		MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null, new Inventory(), 1f, 1f,
 				0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54,
 				88, 54, 0, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
-
-		BARRICADE = new BigGameObject("BARRICADE", 25, "barricade.png", null, new Inventory(), 1f, 1f, 0f, 0f, 10f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, 24, null, GameObject.generateNewTemplateId());
 		ROCK_WITH_ETCHING = new Sign("Rock with Etching", 1000, "rock_with_etching.png", null, new Inventory(), null, 1,
 				1, 0f, 0f, 20f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 100f, 14, null,
 				GameObject.generateNewTemplateId());
@@ -90,23 +87,6 @@ public class Templates {
 		DOCUMENTS = new Readable("Documents", 5, "documents.png", null, new Inventory(), null, 0.5f, 0.5f, 0f, 0f, 1f,
 				1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.1f, 14, null,
 				GameObject.generateNewTemplateId());
-
-		// Openables
-		WEAK_WOODEN_DOOR = new Door("Weak Wooden Door", 25, "door.png", null, new Inventory(), 1, 1, 0f, 0f, 10f, 1f,
-				5f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, 128, null, false, false, false,
-				GameObject.generateNewTemplateId());
-		DOOR = new Door("Door", 500, "door.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 10f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 100f, 40f, 275, null, false, false, false, GameObject.generateNewTemplateId());
-		GATE = new Gate("Gate", 100, "gate.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 10f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 100f, 40f, 232, null, false, false, false, GameObject.generateNewTemplateId());
-		CHEST = new Storage("Chest", 200, "chest.png", "chest_open.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, 135, null, false,
-				GameObject.generateNewTemplateId());
-		CRATE = new Storage("Crate", 200, "crate.png", "crate_open.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 25f, 135, null, false,
-				GameObject.generateNewTemplateId());
-		FALSE_WALL = new RemoteDoor("Wall", 500, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 10f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 40f, 200, null, false, GameObject.generateNewTemplateId());
 
 		KEY = new Key("Key", 10, "key.png", null, new Inventory(), 0.3f, 0.3f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 90f, 0f, 0f, 0f, 100f, 0.5f, 0, null, GameObject.generateNewTemplateId());
@@ -136,9 +116,6 @@ public class Templates {
 		VEIN = new Vein("Vein", 1000, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f,
 				false, 90f, 0f, 0f, 0f, 100f, 200f, 200, null, GameObject.generateNewTemplateId());
 
-		BOULDER = new BigGameObject("Boulder", 1000, "boulder.png", null, new Inventory(), 1, 1, 0f, 0f, 15f, 0f, 10f,
-				null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 200f, 17, null, GameObject.generateNewTemplateId());
-
 		ARROW = new Arrow("Arrow", 5, "arrow.png", null, new Inventory(), 0.32f, 0.16f, 0f, 0f, 15f, 0f, 10f, null,
 				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.1f, 1, null, GameObject.generateNewTemplateId());
 
@@ -152,11 +129,6 @@ public class Templates {
 				null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 100f, 0, null, GameObject.generateNewTemplateId());
 
 		// LARGE CONTAINER
-		DUMPSTER = new BigGameObject("Dumpster", 5, "skip_with_shadow.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 10f, 103, null, GameObject.generateNewTemplateId());
-
-		TROUGH = new BigGameObject("Trough", 5, "trough.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f, 38, null, GameObject.generateNewTemplateId());
 
 		FURNACE = new Furnace("Furnace", 200, "furnace.png", null, new Inventory(), 1.5f, 1.5f, -0.25f, -0.5f, 1f, 1f,
 				1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 150f, 402, null, false,
@@ -422,6 +394,7 @@ public class Templates {
 	public static Storage CRATE;
 
 	public static RemoteDoor FALSE_WALL;;
+
 	public static Key KEY;
 
 	public static SwitchForOpenables ANTLERS_SWITCH_FOR_OPENABLES;

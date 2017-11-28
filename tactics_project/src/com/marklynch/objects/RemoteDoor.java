@@ -1,27 +1,15 @@
 package com.marklynch.objects;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-import mdesl.graphics.Color;
-
 public class RemoteDoor extends Openable {
-	float soundDampeningWhenClosed;
-	boolean blocksLineOfSightWhenClosed;
+	public float soundDampeningWhenClosed;
+	public boolean blocksLineOfSightWhenClosed;
 
-	public RemoteDoor(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-
-			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
-			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
-			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, boolean locked,
-			int templateId, Key... keys) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, locked, templateId);
+	public RemoteDoor() {
+		super();
 		soundDampeningWhenClosed = soundDampening;
 		blocksLineOfSightWhenClosed = blocksLineOfSight;
 
@@ -79,12 +67,19 @@ public class RemoteDoor extends Openable {
 		soundDampening = soundDampeningWhenClosed;
 	}
 
-	public RemoteDoor makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
-		return new RemoteDoor(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
+	public Door makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
 
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, locked, templateId, keys);
+		Door door = new Door();
+
+		super.setAttributesForCopy(door, square, locked, owner, keys);
+
+		if (owner != null) {
+			owner.doors.add(door);
+		}
+		door.soundDampeningWhenClosed = soundDampening;
+		door.blocksLineOfSightWhenClosed = blocksLineOfSight;
+
+		return door;
 	}
 
 	// @Override

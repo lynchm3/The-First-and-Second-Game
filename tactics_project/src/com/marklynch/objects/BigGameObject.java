@@ -3,12 +3,7 @@ package com.marklynch.objects;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-import mdesl.graphics.Texture;
-
 public class BigGameObject extends GameObject {
-
-	Texture chestOpenTexture;
-	Texture chestClosedTexture;
 
 	public BigGameObject() {
 		super();
