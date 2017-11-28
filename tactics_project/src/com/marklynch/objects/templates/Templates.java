@@ -60,10 +60,11 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 
-	// 55 todo out of 113
+	// 50 todo out of 113
 
 	public Templates() {
 
+		new TemplatesReadables();
 		new TemplatesWeapons();
 		new TemplatesTools();
 		new TemplatesArmor();
@@ -83,18 +84,6 @@ public class Templates {
 		MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null, new Inventory(), 1f, 1f,
 				0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54,
 				88, 54, 0, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
-		ROCK_WITH_ETCHING = new Sign("Rock with Etching", 1000, "rock_with_etching.png", null, new Inventory(), null, 1,
-				1, 0f, 0f, 20f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 100f, 14, null,
-				GameObject.generateNewTemplateId());
-		SCROLL = new Readable("Scroll", 1000, "scroll.png", null, new Inventory(), null, 1, 1, 0f, 0f, 20f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 100f, 0, null, GameObject.generateNewTemplateId());
-		SIGN = new Sign("Sign", 5, "sign.png", null, new Inventory(), null, 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 100f, 15f, 128, null, GameObject.generateNewTemplateId());
-		SIGNPOST = new Sign("Signpost", 50, "signpost.png", null, new Inventory(), null, 1, 1.25f, 0f, -0.25f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 15f, 213, null, GameObject.generateNewTemplateId());
-		DOCUMENTS = new Readable("Documents", 5, "documents.png", null, new Inventory(), null, 0.5f, 0.5f, 0f, 0f, 1f,
-				1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.1f, 14, null,
-				GameObject.generateNewTemplateId());
 
 		KEY = new Key("Key", 10, "key.png", null, new Inventory(), 0.3f, 0.3f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
 				false, 90f, 0f, 0f, 0f, 100f, 0.5f, 0, null, GameObject.generateNewTemplateId());
