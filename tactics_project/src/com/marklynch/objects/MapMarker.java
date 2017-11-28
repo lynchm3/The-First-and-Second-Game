@@ -3,7 +3,6 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionChangeAppearance;
@@ -11,7 +10,6 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class MapMarker extends GameObject {
@@ -27,24 +25,11 @@ public class MapMarker extends GameObject {
 
 	public String baseName = "";
 
-	public MapMarker(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
+	public MapMarker() {
+		super();
 
-			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
-			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
-			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, int templateId) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, templateId);
-
-		// if (name == null || name.length() == 0) {
 		baseName = NO_DESCRIPTION;
 		this.name = "Marker: " + baseName;
-		// } else {
-		// baseName = name;
-		// this.name = "Marker: " + baseName;
-		// }
 
 		canBePickedUp = true;
 		showInventory = false;
@@ -112,11 +97,9 @@ public class MapMarker extends GameObject {
 
 	@Override
 	public MapMarker makeCopy(Square square, Actor owner) {
-		return new MapMarker(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, templateId);
+		MapMarker mapMarker = new MapMarker();
+		super.setAttributesForCopy(mapMarker, square, owner);
+		return mapMarker;
 	}
 
 	public static void loadStaticImages() {

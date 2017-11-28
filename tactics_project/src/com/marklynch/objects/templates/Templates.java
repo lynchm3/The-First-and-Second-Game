@@ -60,7 +60,7 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 
-	// \t\tpublic\sstatic\sfinal\s[a-zA-Z]+\s
+	// 55 todo out of 113
 
 	public Templates() {
 
@@ -76,6 +76,8 @@ public class Templates {
 		new TemplatesHumans();
 		new TemplatesAnimals();
 		new TemplatesMonsters();
+
+		new TemplatesMapMarkers();
 
 		// Special People
 		MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null, new Inventory(), 1f, 1f,
@@ -199,22 +201,6 @@ public class Templates {
 
 		DRIED_BLOOD = new Inspectable("Dried Blood", 5, "blood.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f,
 				null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 100f, 0.1f, 1, null, GameObject.generateNewTemplateId());
-
-		MAP_MARKER_RED = new MapMarker("", 5, "map_marker_red.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 100f, 0.1f, 0, null, GameObject.generateNewTemplateId());
-
-		MAP_MARKER_GREEN = new MapMarker("", 5, "map_marker_green.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 100f, 0.1f, 0, null, GameObject.generateNewTemplateId());
-
-		MAP_MARKER_BLUE = new MapMarker("", 5, "map_marker_blue.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 100f, 0.1f, 0, null, GameObject.generateNewTemplateId());
-
-		MAP_MARKER_SKULL = new MapMarker("", 5, "map_marker_skull.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 100f, 0.1f, 0, null, GameObject.generateNewTemplateId());
-
-		MAP_MARKER_TREASURE = new MapMarker("", 5, "map_marker_treasure.png", null, new Inventory(), 1, 1, 0f, 0f, 1f,
-				1f, 1f, null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 100f, 0.1f, 0, null,
-				GameObject.generateNewTemplateId());
 
 		GIANT_FOOTPRINT = new Inspectable("Giant Footprint", 5, "footprint.png", null, new Inventory(), 2, 1.5f, -0.5f,
 				-0.25f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0.1f, 0, null,
