@@ -19,10 +19,7 @@ public class Furnace extends Openable {
 			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
 			float poisonResistance, float slashResistance, float weight, int value, Actor owner, boolean locked,
 			int templateId, Key... keys) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, locked, templateId, keys);
+		super();
 		if (locked)
 			this.name = baseName + " (locked)";
 		else if (this.inventory.size() == 0)

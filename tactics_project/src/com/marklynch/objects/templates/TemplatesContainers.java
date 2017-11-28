@@ -10,7 +10,7 @@ public class TemplatesContainers {
 
 		Templates.CHEST = new Storage();
 		Templates.CHEST.name = "Chest";
-		Templates.CRATE.baseName = "Chest";
+		Templates.CHEST.baseName = "Chest";
 		Templates.CHEST.chestClosedTexture = ResourceUtils.getGlobalImage("chest.png");
 		Templates.CHEST.chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png");
 		Templates.CHEST.totalHealth = Templates.CHEST.remainingHealth = 200;

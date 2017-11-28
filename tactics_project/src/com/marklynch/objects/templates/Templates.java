@@ -67,6 +67,12 @@ public class Templates {
 		new TemplatesWeapons();
 		new TemplatesTools();
 		new TemplatesArmor();
+
+		new TemplatesEntrances();
+		new TemplatesContainers();
+		new TemplatesBigObjects();
+		new TemplatesFurniture();
+
 		new TemplatesHumans();
 		new TemplatesAnimals();
 		new TemplatesMonsters();

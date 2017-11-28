@@ -2,7 +2,6 @@ package com.marklynch.objects;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.units.Actor;
 
 public class RemoteDoor extends Openable {
 	public float soundDampeningWhenClosed;
@@ -67,15 +66,11 @@ public class RemoteDoor extends Openable {
 		soundDampening = soundDampeningWhenClosed;
 	}
 
-	public Door makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
+	public RemoteDoor makeCopy(String name, Square square, boolean locked, Key... keys) {
 
-		Door door = new Door();
+		RemoteDoor door = new RemoteDoor();
 
-		super.setAttributesForCopy(door, square, locked, owner, keys);
-
-		if (owner != null) {
-			owner.doors.add(door);
-		}
+		super.setAttributesForCopy(door, square, locked, null, keys);
 		door.soundDampeningWhenClosed = soundDampening;
 		door.blocksLineOfSightWhenClosed = blocksLineOfSight;
 
