@@ -60,7 +60,7 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 
-	// 50 todo out of 113
+	// 44 todo out of 113
 
 	public Templates() {
 
@@ -170,23 +170,6 @@ public class Templates {
 				new Effect[] { new EffectPoison(5) }, GameObject.generateNewTemplateId());
 
 		// JUNK
-		FUR = new Junk("Fur", 5, "fur.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false,
-				0f, 0f, 0f, 0f, 100f, 5f, 55, null, GameObject.generateNewTemplateId());
-
-		DIRTY_SHEET = new Junk("Dirty Sheet", 5, "dirty_sheet.png", null, new Inventory(), 0.75f, 0.56f, 0f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 1f, 5, null, GameObject.generateNewTemplateId());
-
-		DIRTY_SHEET_2 = new Junk("Dirty Sheet", 5, "dirty_sheet_2.png", null, new Inventory(), 0.88f, 1f, 0f, 0f, 1f,
-				1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 1f, 5, null, GameObject.generateNewTemplateId());
-
-		DIRTY_SHEET_3 = new Junk("Dirty Sheet", 5, "dirty_sheet_3.png", null, new Inventory(), 0.88f, 1f, 0f, 0f, 1f,
-				1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 1f, 5, null, GameObject.generateNewTemplateId());
-
-		ORE = new Junk("Ore", 5, "ore.png", null, new Inventory(), 0.25f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 90f, 0f, 0f, 0f, 100f, 5f, 39, null, GameObject.generateNewTemplateId());
-
-		WOOD = new Junk("Wood", 5, "wood.png", null, new Inventory(), 0.5f, 0.25f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 90f, 0f, 0f, 0f, 100f, 5f, 3, null, GameObject.generateNewTemplateId());
 
 		DRIED_BLOOD = new Inspectable("Dried Blood", 5, "blood.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f,
 				null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 100f, 0.1f, 1, null, GameObject.generateNewTemplateId());
@@ -439,10 +422,6 @@ public class Templates {
 
 	// JUNK
 	public static Junk FUR;
-
-	public static Junk DIRTY_SHEET;
-
-	public static Junk DIRTY_SHEET_2;
 
 	public static Junk DIRTY_SHEET_3;
 
