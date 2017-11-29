@@ -1,6 +1,5 @@
 package com.marklynch.objects;
 
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
@@ -25,11 +24,11 @@ public class Sign extends Readable {
 
 	@Override
 	public Sign makeCopy(Square square, String name, Object[] conversationText, Actor owner) {
-		return new Sign(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
 
-				conversationText, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
-				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
-				electricResistance, poisonResistance, slashResistance, weight, value, owner, templateId);
+		Sign readable = new Sign();
+		super.setAttributesForCopy(readable, square, owner);
+		readable.conversation = this.createConversation(conversationText);
+		return readable;
 	}
 
 }

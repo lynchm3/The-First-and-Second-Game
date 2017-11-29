@@ -1,7 +1,6 @@
 package com.marklynch.objects;
 
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
@@ -30,12 +29,10 @@ public class Readable extends GameObject {
 
 	public Readable makeCopy(Square square, String name, Object[] conversationText, Actor owner) {
 
-		this.conversation = this.createConversation(conversationText);
-		return new Readable(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-
-				conversationText, widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting,
-				soundDampening, light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance,
-				electricResistance, poisonResistance, slashResistance, weight, value, owner, templateId);
+		Readable readable = new Readable();
+		super.setAttributesForCopy(readable, square, owner);
+		readable.conversation = this.createConversation(conversationText);
+		return readable;
 	}
 
 	@Override
