@@ -60,24 +60,30 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 
-	// 44 todo out of 113
+	// 38 todo out of 113
 
 	public Templates() {
 
+		// Small
 		new TemplatesReadables();
+		new TemplatesInspectables();
+		new TemplatesJunk();
 		new TemplatesWeapons();
 		new TemplatesTools();
 		new TemplatesArmor();
 
+		// Big
 		new TemplatesEntrances();
 		new TemplatesContainers();
 		new TemplatesBigObjects();
 		new TemplatesFurniture();
 
+		// Peeps
 		new TemplatesHumans();
 		new TemplatesAnimals();
 		new TemplatesMonsters();
 
+		// Markers
 		new TemplatesMapMarkers();
 
 		// Special People
@@ -138,9 +144,6 @@ public class Templates {
 		SHELF = new GameObject("Shelf", 5, "shelf.png", null, new Inventory(), 1, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
 				0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f, 28, null, GameObject.generateNewTemplateId());
 
-		PIG_SIGN = new Inspectable("Piggy Farm", 5, "pig_sign.png", null, new Inventory(), 1f, 1f, -0.25f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 80f, 0f, 0f, 0f, 100f, 10f, 92, null, GameObject.generateNewTemplateId());
-
 		// Corpses
 		CARCASS = new Carcass("Carcass", 50, "carcass.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null,
 				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, 15, null, GameObject.generateNewTemplateId());
@@ -150,12 +153,6 @@ public class Templates {
 
 		ASH = new GameObject("Ash", 50, "ash.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
 				0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null, GameObject.generateNewTemplateId());
-
-		BLOODY_PULP = new Inspectable("Bloody Pulp", 50, "blood.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 100f, 15, null, GameObject.generateNewTemplateId());
-
-		BLOOD = new Inspectable("Blood", 50, "blood.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, 10, null, GameObject.generateNewTemplateId());
 
 		// Food?
 		MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f,
@@ -170,17 +167,6 @@ public class Templates {
 				new Effect[] { new EffectPoison(5) }, GameObject.generateNewTemplateId());
 
 		// JUNK
-
-		DRIED_BLOOD = new Inspectable("Dried Blood", 5, "blood.png", null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 40f, 0f, 0f, 0f, 100f, 0.1f, 1, null, GameObject.generateNewTemplateId());
-
-		GIANT_FOOTPRINT = new Inspectable("Giant Footprint", 5, "footprint.png", null, new Inventory(), 2, 1.5f, -0.5f,
-				-0.25f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0.1f, 0, null,
-				GameObject.generateNewTemplateId());
-
-		GIANT_FOOTPRINT_LEFT = new Inspectable("Giant Footprint", 5, "footprint_left.png", null, new Inventory(), 2,
-				1.5f, -0.5f, -0.25f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0.1f, 0, null,
-				GameObject.generateNewTemplateId());
 
 		// TRAPS
 		BROKEN_LAMP = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f,
