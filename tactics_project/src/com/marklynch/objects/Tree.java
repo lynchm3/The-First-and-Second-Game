@@ -3,40 +3,28 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionDropSpecificItem;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
-
-import mdesl.graphics.Color;
 
 public class Tree extends GameObject {
 
 	float appleMaxRatioSize = 0.1f;
 	float healthWhenLastDroppedFruit;
 
-	public Tree(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-
-			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
-			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
-			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, boolean canShareSquare,
-			int templateId) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, templateId);
-		healthWhenLastDroppedFruit = this.totalHealth;
+	public Tree() {
+		super();
 		// addApple(appleMaxRatioSize);
 
 		// BIG TREE
 		canBePickedUp = false;
 		showInventory = true;
 		fitsInInventory = false;
-		this.canShareSquare = canShareSquare;
+		this.canShareSquare = true;
 		canContainOtherObjects = false;
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
@@ -47,8 +35,7 @@ public class Tree extends GameObject {
 
 		float appleSize = (float) (Math.random() * maxSize);
 
-		Food apple = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), appleSize, appleSize, 0.5f, 0.5f,
-				1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.5f, 1, null, 1000);
+		Food apple = Templates.APPLE.makeCopy(null, null);
 		apple.anchorX = 6;
 		apple.anchorY = 6;
 
@@ -151,10 +138,10 @@ public class Tree extends GameObject {
 
 	@Override
 	public Tree makeCopy(Square square, Actor owner) {
-		return new Tree(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(), widthRatio,
-				heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light,
-				lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, canShareSquare, templateId);
+		Tree tree = new Tree();
+		super.setAttributesForCopy(tree, square, owner);
+		healthWhenLastDroppedFruit = this.totalHealth;
+		return tree;
 	}
 
 }

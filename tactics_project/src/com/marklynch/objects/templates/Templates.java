@@ -60,13 +60,14 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 
-	// 38 todo out of 113
+	// 27 todo out of 113
 
 	public Templates() {
 
 		// Small
 		new TemplatesReadables();
 		new TemplatesInspectables();
+		new TemplatesNature();
 		new TemplatesJunk();
 		new TemplatesWeapons();
 		new TemplatesTools();
@@ -182,41 +183,6 @@ public class Templates {
 				GameObject.generateNewTemplateId());
 
 		// NATURE
-		TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), 1f, 1.5f, 0f, -0.5f, 1f, 1f, 2f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 15, null, true, GameObject.generateNewTemplateId());
-		BIG_TREE = new Tree("Big Tree", 200, "tree_1.png", null, new Inventory(), 1.5f, 1.5f, -0.25f, -0.5f, 1f, 1f, 2f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 20, null, false,
-				GameObject.generateNewTemplateId());
-
-		STUMP = new Stump("Stump", 100, "stump.png", null, new Inventory(), 0.5f, 1f, 0.25f, 0f, 1f, 1f, 2f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 5, null, GameObject.generateNewTemplateId());
-		BIG_STUMP = new Stump("Big Stump", 200, "stump.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 2f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 7, null, GameObject.generateNewTemplateId());
-
-		BUSH = new HidingPlace("Bush", 10, "bush.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 7, null, new Effect[] {}, GameObject.generateNewTemplateId());
-
-		POISON_BUSH = new HidingPlace("Posion Bush", 10, "bush.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 2f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 7, null, new Effect[] { new EffectPoison(3) },
-				GameObject.generateNewTemplateId());
-
-		LONG_GRASS = new HidingPlace("Long Grass", 10, "long_grass.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f,
-				2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 5, null, new Effect[] {},
-				GameObject.generateNewTemplateId());
-
-		WHEAT = new HidingPlace("Wheat", 10, "wheat.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 10, null, new Effect[] {}, GameObject.generateNewTemplateId());
-
-		MUSHROOM = new Food("Mushroom", 5, "mushroom.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.5f, 10, null, GameObject.generateNewTemplateId());
-
-		BURROW = new SmallHidingPlace("Burrow", 5, "burrow.png", null, new Inventory(), 0.5f, 0.5f, 16f, 16f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null, new Effect[] {},
-				GameObject.generateNewTemplateId());
-
-		MOUND = new Discoverable("Mound of Dirt", 5, 1, "mound.png", null, null, new Inventory(), 1f, 1f, 0f, 0f, 1f,
-				1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null,
-				GameObject.generateNewTemplateId());
 
 		// GOLD BITCH
 		GOLD = new Gold("Gold", 10, "gold.png", null, new Inventory(), 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
@@ -456,6 +422,8 @@ public class Templates {
 	public static HidingPlace WHEAT;
 
 	public static Food MUSHROOM;
+
+	public static Food APPLE;
 
 	public static SmallHidingPlace BURROW;
 
