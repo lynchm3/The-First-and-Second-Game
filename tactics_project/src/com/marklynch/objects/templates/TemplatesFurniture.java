@@ -4,7 +4,6 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.BigGameObject;
 import com.marklynch.objects.BrokenGlass;
@@ -224,24 +223,98 @@ public class TemplatesFurniture {
 		Templates.DINNER_FORK.anchorY = 0;
 		Templates.DINNER_FORK.templateId = GameObject.generateNewTemplateId();
 
-		ANTLERS_SWITCH_FOR_OPENABLES = new SwitchForOpenables("Obvious Antlers", 5, "antlers.png", null,
-				new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.5f, 305,
-				null, "Touch", "touched", null, null, null, GameObject.generateNewTemplateId());
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES = new SwitchForOpenables();
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.name = "Obvious Antlers";
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.imageTexturePath = "antlers.png";
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.totalHealth = Templates.ANTLERS_SWITCH_FOR_OPENABLES.remainingHealth = 36;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.widthRatio = 1f;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.heightRatio = 1f;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.drawOffsetX = 0f;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.drawOffsetY = 0f;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.soundWhenHit = 1f;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.soundWhenHitting = 1f;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.soundDampening = 1f;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.stackable = false;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.weight = 43f;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.value = 130;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.anchorX = 0;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.anchorY = 0;
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.templateId = GameObject.generateNewTemplateId();
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.actionName = "Touch";
+		Templates.ANTLERS_SWITCH_FOR_OPENABLES.actionVerb = "touched";
 
-		FURNACE = new Furnace("Furnace", 200, "furnace.png", null, new Inventory(), 1.5f, 1.5f, -0.25f, -0.5f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 150f, 402, null, false,
-				GameObject.generateNewTemplateId());
-		BROKEN_LAMP = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f,
-				1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, 1, null,
-				GameObject.generateNewTemplateId());
+		Templates.FURNACE = new Furnace();
+		Templates.FURNACE.name = "FURNACE";
+		Templates.FURNACE.imageTexturePath = "furnace.png";
+		Templates.FURNACE.totalHealth = Templates.FURNACE.remainingHealth = 122;
+		Templates.FURNACE.widthRatio = 1f;
+		Templates.FURNACE.heightRatio = 1f;
+		Templates.FURNACE.drawOffsetX = 0f;
+		Templates.FURNACE.drawOffsetY = 0f;
+		Templates.FURNACE.soundWhenHit = 1f;
+		Templates.FURNACE.soundWhenHitting = 1f;
+		Templates.FURNACE.soundDampening = 1f;
+		Templates.FURNACE.stackable = false;
+		Templates.FURNACE.weight = 165f;
+		Templates.FURNACE.value = 142;
+		Templates.FURNACE.anchorX = 0;
+		Templates.FURNACE.anchorY = 0;
+		Templates.FURNACE.templateId = GameObject.generateNewTemplateId();
 
-		BROKEN_GLASS = new BrokenGlass("Broken Glass", 5, "smashed_glass.png", null, new Inventory(), 0.5f, 0.5f, 0f,
-				0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, 1, null,
-				GameObject.generateNewTemplateId());
+		Templates.BROKEN_LAMP = new BrokenGlass();
+		Templates.BROKEN_LAMP.name = "Broken Lamp";
+		Templates.BROKEN_LAMP.imageTexturePath = "smashed_glass.png";
+		Templates.BROKEN_LAMP.totalHealth = Templates.BROKEN_LAMP.remainingHealth = 11;
+		Templates.BROKEN_LAMP.widthRatio = 1f;
+		Templates.BROKEN_LAMP.heightRatio = 1f;
+		Templates.BROKEN_LAMP.drawOffsetX = 0f;
+		Templates.BROKEN_LAMP.drawOffsetY = 0f;
+		Templates.BROKEN_LAMP.soundWhenHit = 1f;
+		Templates.BROKEN_LAMP.soundWhenHitting = 1f;
+		Templates.BROKEN_LAMP.soundDampening = 1f;
+		Templates.BROKEN_LAMP.stackable = false;
+		Templates.BROKEN_LAMP.weight = 23f;
+		Templates.BROKEN_LAMP.value = 2;
+		Templates.BROKEN_LAMP.anchorX = 0;
+		Templates.BROKEN_LAMP.anchorY = 0;
+		Templates.BROKEN_LAMP.templateId = GameObject.generateNewTemplateId();
 
-		DROP_HOLE = new Searchable("Drop Hole", 5, "drop_hole.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 0f, 100f, 0, null, new Effect[] { new EffectPoison(3) },
-				GameObject.generateNewTemplateId());
+		Templates.BROKEN_GLASS = new BrokenGlass();
+		Templates.BROKEN_GLASS.name = "Broken Glass";
+		Templates.BROKEN_GLASS.imageTexturePath = "smashed_glass.png";
+		Templates.BROKEN_GLASS.totalHealth = Templates.BROKEN_GLASS.remainingHealth = 12;
+		Templates.BROKEN_GLASS.widthRatio = 1f;
+		Templates.BROKEN_GLASS.heightRatio = 1f;
+		Templates.BROKEN_GLASS.drawOffsetX = 0f;
+		Templates.BROKEN_GLASS.drawOffsetY = 0f;
+		Templates.BROKEN_GLASS.soundWhenHit = 1f;
+		Templates.BROKEN_GLASS.soundWhenHitting = 1f;
+		Templates.BROKEN_GLASS.soundDampening = 1f;
+		Templates.BROKEN_GLASS.stackable = false;
+		Templates.BROKEN_GLASS.weight = 16f;
+		Templates.BROKEN_GLASS.value = 1;
+		Templates.BROKEN_GLASS.anchorX = 0;
+		Templates.BROKEN_GLASS.anchorY = 0;
+		Templates.BROKEN_GLASS.templateId = GameObject.generateNewTemplateId();
+
+		Templates.DROP_HOLE = new Searchable();
+		Templates.DROP_HOLE.name = "Drop Hole";
+		Templates.DROP_HOLE.imageTexturePath = "drop_hole.png";
+		Templates.DROP_HOLE.totalHealth = Templates.DROP_HOLE.remainingHealth = 100;
+		Templates.DROP_HOLE.widthRatio = 1f;
+		Templates.DROP_HOLE.heightRatio = 1f;
+		Templates.DROP_HOLE.drawOffsetX = 0f;
+		Templates.DROP_HOLE.drawOffsetY = 0f;
+		Templates.DROP_HOLE.soundWhenHit = 1f;
+		Templates.DROP_HOLE.soundWhenHitting = 1f;
+		Templates.DROP_HOLE.soundDampening = 1f;
+		Templates.DROP_HOLE.stackable = false;
+		Templates.DROP_HOLE.weight = 1f;
+		Templates.DROP_HOLE.value = 1;
+		Templates.DROP_HOLE.anchorX = 0;
+		Templates.DROP_HOLE.anchorY = 0;
+		Templates.DROP_HOLE.templateId = GameObject.generateNewTemplateId();
+		Templates.DROP_HOLE.effectsFromInteracting = new Effect[] { new EffectPoison(3) };
 
 	}
 

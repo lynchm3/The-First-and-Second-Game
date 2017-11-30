@@ -1,13 +1,11 @@
 package com.marklynch.objects;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class BrokenGlass extends Stampable {
@@ -15,25 +13,8 @@ public class BrokenGlass extends Stampable {
 	GlassShard[] glassShards;
 	int glassShardsCount;
 
-	public BrokenGlass(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-
-			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
-			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
-			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, int templateId) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, templateId);
-
-		glassShardsCount = 10;// (int) (1d + Math.random() * 20d);
-		glassShards = new GlassShard[glassShardsCount];
-		for (int i = 0; i < glassShardsCount; i++) {
-			int randomShardNumber = (int) (Math.random() * 10d);
-			glassShards[i] = new GlassShard(ResourceUtils.getGlobalImage("glass_shard_" + randomShardNumber + ".png"),
-					this);
-		}
-
+	public BrokenGlass() {
+		super();
 		canBePickedUp = true;
 		showInventory = false;
 		fitsInInventory = true;
@@ -42,16 +23,20 @@ public class BrokenGlass extends Stampable {
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = false;
 		attackable = true;
-
 	}
 
 	@Override
 	public BrokenGlass makeCopy(Square square, Actor owner) {
-		return new BrokenGlass(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, templateId);
+		BrokenGlass brokenGlass = new BrokenGlass();
+		super.setAttributesForCopy(brokenGlass, square, owner);
+		glassShardsCount = 10;// (int) (1d + Math.random() * 20d);
+		glassShards = new GlassShard[glassShardsCount];
+		for (int i = 0; i < glassShardsCount; i++) {
+			int randomShardNumber = (int) (Math.random() * 10d);
+			glassShards[i] = new GlassShard(ResourceUtils.getGlobalImage("glass_shard_" + randomShardNumber + ".png"),
+					this);
+		}
+		return brokenGlass;
 	}
 
 	@Override
@@ -105,10 +90,8 @@ public class BrokenGlass extends Stampable {
 			}
 
 			// Draw object
-			int actorPositionXInPixels = (int) (this.parent.squareGameObjectIsOn.xInGridPixels
-					+ drawOffsetX);
-			int actorPositionYInPixels = (int) (this.parent.squareGameObjectIsOn.yInGridPixels
-					+ drawOffsetY);
+			int actorPositionXInPixels = (int) (this.parent.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+			int actorPositionYInPixels = (int) (this.parent.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
 
 			float alpha = 1.0f;
 
