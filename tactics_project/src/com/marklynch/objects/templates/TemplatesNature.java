@@ -2,152 +2,237 @@ package com.marklynch.objects.templates;
 
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectPoison;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
-import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
-
-import mdesl.graphics.Texture;
+import com.marklynch.utils.ResourceUtils;
 
 public class TemplatesNature {
 
 	public TemplatesNature() {
-		TREE = new Tree("Tree", 100, "tree_1.png", null, new Inventory(), 1f, 1.5f, 0f, -0.5f, 1f, 1f, 2f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 15, null, true, GameObject.generateNewTemplateId());
-		BIG_TREE = new Tree("Big Tree", 200, "tree_1.png", null, new Inventory(), 1.5f, 1.5f, -0.25f, -0.5f, 1f, 1f, 2f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 20, null, false,
-				GameObject.generateNewTemplateId());
 
-		STUMP = new Stump("Stump", 100, "stump.png", null, new Inventory(), 0.5f, 1f, 0.25f, 0f, 1f, 1f, 2f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 5, null, GameObject.generateNewTemplateId());
-		BIG_STUMP = new Stump("Big Stump", 200, "stump.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 2f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 7, null, GameObject.generateNewTemplateId());
+		Templates.TREE = new Tree();
+		Templates.TREE.name = "Tree";
+		Templates.TREE.imageTexturePath = "tree_1.png";
+		Templates.TREE.totalHealth = Templates.TREE.remainingHealth = 100;
+		Templates.TREE.widthRatio = 1f;
+		Templates.TREE.heightRatio = 1.5f;
+		Templates.TREE.drawOffsetX = 0f;
+		Templates.TREE.drawOffsetY = -0.5f;
+		Templates.TREE.soundWhenHit = 1f;
+		Templates.TREE.soundWhenHitting = 1f;
+		Templates.TREE.soundDampening = 1f;
+		Templates.TREE.stackable = false;
+		Templates.TREE.weight = 100f;
+		Templates.TREE.value = 10;
+		Templates.TREE.anchorX = 0;
+		Templates.TREE.anchorY = 0;
+		Templates.TREE.templateId = GameObject.generateNewTemplateId();
 
-		BUSH = new HidingPlace("Bush", 10, "bush.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 7, null, new Effect[] {}, GameObject.generateNewTemplateId());
+		Templates.BIG_TREE = new Tree();
+		Templates.BIG_TREE.name = "Big Tree";
+		Templates.BIG_TREE.imageTexturePath = "tree_1.png";
+		Templates.BIG_TREE.totalHealth = Templates.BIG_TREE.remainingHealth = 150;
+		Templates.BIG_TREE.widthRatio = 1.5f;
+		Templates.BIG_TREE.heightRatio = 1.5f;
+		Templates.BIG_TREE.drawOffsetX = -0.25f;
+		Templates.BIG_TREE.drawOffsetY = -0.5f;
+		Templates.BIG_TREE.soundWhenHit = 1f;
+		Templates.BIG_TREE.soundWhenHitting = 1f;
+		Templates.BIG_TREE.soundDampening = 1f;
+		Templates.BIG_TREE.stackable = false;
+		Templates.BIG_TREE.weight = 200f;
+		Templates.BIG_TREE.value = 13;
+		Templates.BIG_TREE.anchorX = 0;
+		Templates.BIG_TREE.anchorY = 0;
+		Templates.BIG_TREE.templateId = GameObject.generateNewTemplateId();
 
-		POISON_BUSH = new HidingPlace("Posion Bush", 10, "bush.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 2f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 7, null, new Effect[] { new EffectPoison(3) },
-				GameObject.generateNewTemplateId());
+		Templates.STUMP = new Stump();
+		Templates.STUMP.name = "Stump";
+		Templates.STUMP.imageTexturePath = "stump.png";
+		Templates.STUMP.totalHealth = Templates.STUMP.remainingHealth = 52;
+		Templates.STUMP.widthRatio = 0.5f;
+		Templates.STUMP.heightRatio = 1f;
+		Templates.STUMP.drawOffsetX = 0.25f;
+		Templates.STUMP.drawOffsetY = 0f;
+		Templates.STUMP.soundWhenHit = 1f;
+		Templates.STUMP.soundWhenHitting = 1f;
+		Templates.STUMP.soundDampening = 1f;
+		Templates.STUMP.stackable = false;
+		Templates.STUMP.weight = 50f;
+		Templates.STUMP.value = 6;
+		Templates.STUMP.anchorX = 0;
+		Templates.STUMP.anchorY = 0;
+		Templates.STUMP.templateId = GameObject.generateNewTemplateId();
 
-		LONG_GRASS = new HidingPlace("Long Grass", 10, "long_grass.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f,
-				2f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 5, null, new Effect[] {},
-				GameObject.generateNewTemplateId());
+		Templates.BIG_STUMP = new Stump();
+		Templates.BIG_STUMP.name = "";
+		Templates.BIG_STUMP.imageTexturePath = "BIG_STUMP.png";
+		Templates.BIG_STUMP.totalHealth = Templates.BIG_STUMP.remainingHealth = 73;
+		Templates.BIG_STUMP.widthRatio = 1f;
+		Templates.BIG_STUMP.heightRatio = 1f;
+		Templates.BIG_STUMP.drawOffsetX = 0f;
+		Templates.BIG_STUMP.drawOffsetY = 0f;
+		Templates.BIG_STUMP.soundWhenHit = 1f;
+		Templates.BIG_STUMP.soundWhenHitting = 1f;
+		Templates.BIG_STUMP.soundDampening = 1f;
+		Templates.BIG_STUMP.stackable = false;
+		Templates.BIG_STUMP.weight = 83f;
+		Templates.BIG_STUMP.value = 9;
+		Templates.BIG_STUMP.anchorX = 0;
+		Templates.BIG_STUMP.anchorY = 0;
+		Templates.BIG_STUMP.templateId = GameObject.generateNewTemplateId();
 
-		WHEAT = new HidingPlace("Wheat", 10, "wheat.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 2f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 100f, 10, null, new Effect[] {}, GameObject.generateNewTemplateId());
+		Templates.BUSH = new HidingPlace();
+		Templates.BUSH.name = "Bush";
+		Templates.BUSH.imageTexturePath = "bush.png";
+		Templates.BUSH.totalHealth = Templates.BUSH.remainingHealth = 21;
+		Templates.BUSH.widthRatio = 1f;
+		Templates.BUSH.heightRatio = 1f;
+		Templates.BUSH.drawOffsetX = 0f;
+		Templates.BUSH.drawOffsetY = 0f;
+		Templates.BUSH.soundWhenHit = 1f;
+		Templates.BUSH.soundWhenHitting = 1f;
+		Templates.BUSH.soundDampening = 1f;
+		Templates.BUSH.stackable = false;
+		Templates.BUSH.weight = 34f;
+		Templates.BUSH.value = 11;
+		Templates.BUSH.anchorX = 0;
+		Templates.BUSH.anchorY = 0;
+		Templates.BUSH.templateId = GameObject.generateNewTemplateId();
 
-		MUSHROOM = new Food("Mushroom", 5, "mushroom.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.5f, 10, null, GameObject.generateNewTemplateId());
+		Templates.POISON_BUSH = new HidingPlace();
+		Templates.POISON_BUSH.name = "Posion Bush";
+		Templates.POISON_BUSH.imageTexturePath = "bush.png";
+		Templates.POISON_BUSH.totalHealth = Templates.POISON_BUSH.remainingHealth = 21;
+		Templates.POISON_BUSH.widthRatio = 1f;
+		Templates.POISON_BUSH.heightRatio = 1f;
+		Templates.POISON_BUSH.drawOffsetX = 0f;
+		Templates.POISON_BUSH.drawOffsetY = 0f;
+		Templates.POISON_BUSH.soundWhenHit = 1f;
+		Templates.POISON_BUSH.soundWhenHitting = 1f;
+		Templates.POISON_BUSH.soundDampening = 1f;
+		Templates.POISON_BUSH.stackable = false;
+		Templates.POISON_BUSH.weight = 34f;
+		Templates.POISON_BUSH.value = 16;
+		Templates.POISON_BUSH.anchorX = 0;
+		Templates.POISON_BUSH.anchorY = 0;
+		Templates.POISON_BUSH.effectsFromInteracting = new Effect[] { new EffectPoison(3) };
+		Templates.POISON_BUSH.templateId = GameObject.generateNewTemplateId();
 
-		BURROW = new SmallHidingPlace("Burrow", 5, "burrow.png", null, new Inventory(), 0.5f, 0.5f, 16f, 16f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null, new Effect[] {},
-				GameObject.generateNewTemplateId());
+		Templates.LONG_GRASS = new HidingPlace();
+		Templates.LONG_GRASS.name = "Long Grass";
+		Templates.LONG_GRASS.imageTexturePath = "long_grass.png";
+		Templates.LONG_GRASS.totalHealth = Templates.LONG_GRASS.remainingHealth = 10;
+		Templates.LONG_GRASS.widthRatio = 1f;
+		Templates.LONG_GRASS.heightRatio = 1f;
+		Templates.LONG_GRASS.drawOffsetX = 0f;
+		Templates.LONG_GRASS.drawOffsetY = 0f;
+		Templates.LONG_GRASS.soundWhenHit = 1f;
+		Templates.LONG_GRASS.soundWhenHitting = 1f;
+		Templates.LONG_GRASS.soundDampening = 1f;
+		Templates.LONG_GRASS.stackable = false;
+		Templates.LONG_GRASS.weight = 5f;
+		Templates.LONG_GRASS.value = 8;
+		Templates.LONG_GRASS.anchorX = 0;
+		Templates.LONG_GRASS.anchorY = 0;
+		Templates.LONG_GRASS.templateId = GameObject.generateNewTemplateId();
 
-		MOUND = new Discoverable("Mound of Dirt", 5, 1, "mound.png", null, null, new Inventory(), 1f, 1f, 0f, 0f, 1f,
-				1f, 1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null,
-				GameObject.generateNewTemplateId());
-		public Texture preDiscoverTexture;
-		public Texture postDiscoverTexture;
-		this.level = level;
+		Templates.WHEAT = new HidingPlace();
+		Templates.WHEAT.name = "Wheat";
+		Templates.WHEAT.imageTexturePath = "wheat.png";
+		Templates.WHEAT.totalHealth = Templates.WHEAT.remainingHealth = 11;
+		Templates.WHEAT.widthRatio = 1f;
+		Templates.WHEAT.heightRatio = 1f;
+		Templates.WHEAT.drawOffsetX = 0f;
+		Templates.WHEAT.drawOffsetY = 0f;
+		Templates.WHEAT.soundWhenHit = 1f;
+		Templates.WHEAT.soundWhenHitting = 1f;
+		Templates.WHEAT.soundDampening = 1f;
+		Templates.WHEAT.stackable = false;
+		Templates.WHEAT.weight = 9f;
+		Templates.WHEAT.value = 17;
+		Templates.WHEAT.anchorX = 0;
+		Templates.WHEAT.anchorY = 0;
+		Templates.WHEAT.templateId = GameObject.generateNewTemplateId();
 
-		APPLE = new Food("Unripe Apple", 5, "apple.png", null, new Inventory(), appleSize, appleSize, 0.5f, 0.5f, 1f,
-				1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.5f, 1, null, 1000);
+		Templates.MUSHROOM = new Food();
+		Templates.MUSHROOM.name = "Mushroom";
+		Templates.MUSHROOM.imageTexturePath = "mushroom.png";
+		Templates.MUSHROOM.totalHealth = Templates.MUSHROOM.remainingHealth = 13;
+		Templates.MUSHROOM.widthRatio = 0.5f;
+		Templates.MUSHROOM.heightRatio = 0.5f;
+		Templates.MUSHROOM.drawOffsetX = 0f;
+		Templates.MUSHROOM.drawOffsetY = 0f;
+		Templates.MUSHROOM.soundWhenHit = 1f;
+		Templates.MUSHROOM.soundWhenHitting = 1f;
+		Templates.MUSHROOM.soundDampening = 1f;
+		Templates.MUSHROOM.stackable = false;
+		Templates.MUSHROOM.weight = 14f;
+		Templates.MUSHROOM.value = 19;
+		Templates.MUSHROOM.anchorX = 0;
+		Templates.MUSHROOM.anchorY = 0;
+		Templates.MUSHROOM.templateId = GameObject.generateNewTemplateId();
 
-		Templates.MAP_MARKER_RED = new MapMarker();
-		Templates.MAP_MARKER_RED.name = "";
-		Templates.MAP_MARKER_RED.imageTexturePath = "map_marker_red.png";
-		Templates.MAP_MARKER_RED.totalHealth = Templates.MAP_MARKER_RED.remainingHealth = 1;
-		Templates.MAP_MARKER_RED.widthRatio = 1f;
-		Templates.MAP_MARKER_RED.heightRatio = 1f;
-		Templates.MAP_MARKER_RED.drawOffsetX = 0f;
-		Templates.MAP_MARKER_RED.drawOffsetY = 0f;
-		Templates.MAP_MARKER_RED.soundWhenHit = 1f;
-		Templates.MAP_MARKER_RED.soundWhenHitting = 1f;
-		Templates.MAP_MARKER_RED.soundDampening = 1f;
-		Templates.MAP_MARKER_RED.stackable = false;
-		Templates.MAP_MARKER_RED.weight = 0f;
-		Templates.MAP_MARKER_RED.value = 0;
-		Templates.MAP_MARKER_RED.anchorX = 0;
-		Templates.MAP_MARKER_RED.anchorY = 0;
-		Templates.MAP_MARKER_RED.templateId = GameObject.generateNewTemplateId();
+		Templates.BURROW = new SmallHidingPlace();
+		Templates.BURROW.name = "Burrow";
+		Templates.BURROW.imageTexturePath = "burrow.png";
+		Templates.BURROW.totalHealth = Templates.BURROW.remainingHealth = 32;
+		Templates.BURROW.widthRatio = 0.5f;
+		Templates.BURROW.heightRatio = 0.5f;
+		Templates.BURROW.drawOffsetX = 16f;
+		Templates.BURROW.drawOffsetY = 16f;
+		Templates.BURROW.soundWhenHit = 1f;
+		Templates.BURROW.soundWhenHitting = 1f;
+		Templates.BURROW.soundDampening = 1f;
+		Templates.BURROW.stackable = false;
+		Templates.BURROW.weight = 100f;
+		Templates.BURROW.value = 14;
+		Templates.BURROW.anchorX = 0;
+		Templates.BURROW.anchorY = 0;
+		Templates.BURROW.templateId = GameObject.generateNewTemplateId();
 
-		Templates.MAP_MARKER_GREEN = new MapMarker();
-		Templates.MAP_MARKER_GREEN.name = "";
-		Templates.MAP_MARKER_GREEN.imageTexturePath = "map_marker_green.png";
-		Templates.MAP_MARKER_GREEN.totalHealth = Templates.MAP_MARKER_GREEN.remainingHealth = 1;
-		Templates.MAP_MARKER_GREEN.widthRatio = 1f;
-		Templates.MAP_MARKER_GREEN.heightRatio = 1f;
-		Templates.MAP_MARKER_GREEN.drawOffsetX = 0f;
-		Templates.MAP_MARKER_GREEN.drawOffsetY = 0f;
-		Templates.MAP_MARKER_GREEN.soundWhenHit = 1f;
-		Templates.MAP_MARKER_GREEN.soundWhenHitting = 1f;
-		Templates.MAP_MARKER_GREEN.soundDampening = 1f;
-		Templates.MAP_MARKER_GREEN.stackable = false;
-		Templates.MAP_MARKER_GREEN.weight = 0f;
-		Templates.MAP_MARKER_GREEN.value = 0;
-		Templates.MAP_MARKER_GREEN.anchorX = 0;
-		Templates.MAP_MARKER_GREEN.anchorY = 0;
-		Templates.MAP_MARKER_GREEN.templateId = GameObject.generateNewTemplateId();
+		Templates.MOUND = new Discoverable();
+		Templates.MOUND.name = "Mound of Dirt";
+		Templates.MOUND.imageTexturePath = "mound.png";
+		Templates.MOUND.totalHealth = Templates.MOUND.remainingHealth = 103;
+		Templates.MOUND.widthRatio = 1f;
+		Templates.MOUND.heightRatio = 1f;
+		Templates.MOUND.drawOffsetX = 0f;
+		Templates.MOUND.drawOffsetY = 0f;
+		Templates.MOUND.soundWhenHit = 1f;
+		Templates.MOUND.soundWhenHitting = 1f;
+		Templates.MOUND.soundDampening = 1f;
+		Templates.MOUND.stackable = false;
+		Templates.MOUND.weight = 100f;
+		Templates.MOUND.value = 15;
+		Templates.MOUND.anchorX = 0;
+		Templates.MOUND.anchorY = 0;
+		Templates.MOUND.templateId = GameObject.generateNewTemplateId();
+		Templates.MOUND.preDiscoverTexture = ResourceUtils.getGlobalImage("mound.png");
+		Templates.MOUND.postDiscoverTexture = ResourceUtils.getGlobalImage("mound.png");
 
-		Templates.MAP_MARKER_BLUE = new MapMarker();
-		Templates.MAP_MARKER_BLUE.name = "";
-		Templates.MAP_MARKER_BLUE.imageTexturePath = "map_marker_blue.png";
-		Templates.MAP_MARKER_BLUE.totalHealth = Templates.MAP_MARKER_BLUE.remainingHealth = 1;
-		Templates.MAP_MARKER_BLUE.widthRatio = 1f;
-		Templates.MAP_MARKER_BLUE.heightRatio = 1f;
-		Templates.MAP_MARKER_BLUE.drawOffsetX = 0f;
-		Templates.MAP_MARKER_BLUE.drawOffsetY = 0f;
-		Templates.MAP_MARKER_BLUE.soundWhenHit = 1f;
-		Templates.MAP_MARKER_BLUE.soundWhenHitting = 1f;
-		Templates.MAP_MARKER_BLUE.soundDampening = 1f;
-		Templates.MAP_MARKER_BLUE.stackable = false;
-		Templates.MAP_MARKER_BLUE.weight = 0f;
-		Templates.MAP_MARKER_BLUE.value = 0;
-		Templates.MAP_MARKER_BLUE.anchorX = 0;
-		Templates.MAP_MARKER_BLUE.anchorY = 0;
-		Templates.MAP_MARKER_BLUE.templateId = GameObject.generateNewTemplateId();
-
-		Templates.MAP_MARKER_SKULL = new MapMarker();
-		Templates.MAP_MARKER_SKULL.name = "";
-		Templates.MAP_MARKER_SKULL.imageTexturePath = "map_marker_skull.png";
-		Templates.MAP_MARKER_SKULL.totalHealth = Templates.MAP_MARKER_SKULL.remainingHealth = 1;
-		Templates.MAP_MARKER_SKULL.widthRatio = 1f;
-		Templates.MAP_MARKER_SKULL.heightRatio = 1f;
-		Templates.MAP_MARKER_SKULL.drawOffsetX = 0f;
-		Templates.MAP_MARKER_SKULL.drawOffsetY = 0f;
-		Templates.MAP_MARKER_SKULL.soundWhenHit = 1f;
-		Templates.MAP_MARKER_SKULL.soundWhenHitting = 1f;
-		Templates.MAP_MARKER_SKULL.soundDampening = 1f;
-		Templates.MAP_MARKER_SKULL.stackable = false;
-		Templates.MAP_MARKER_SKULL.weight = 0f;
-		Templates.MAP_MARKER_SKULL.value = 0;
-		Templates.MAP_MARKER_SKULL.anchorX = 0;
-		Templates.MAP_MARKER_SKULL.anchorY = 0;
-		Templates.MAP_MARKER_SKULL.templateId = GameObject.generateNewTemplateId();
-
-		Templates.MAP_MARKER_TREASURE = new MapMarker();
-		Templates.MAP_MARKER_TREASURE.name = "";
-		Templates.MAP_MARKER_TREASURE.imageTexturePath = "map_marker_treasure.png";
-		Templates.MAP_MARKER_TREASURE.totalHealth = Templates.MAP_MARKER_TREASURE.remainingHealth = 1;
-		Templates.MAP_MARKER_TREASURE.widthRatio = 1f;
-		Templates.MAP_MARKER_TREASURE.heightRatio = 1f;
-		Templates.MAP_MARKER_TREASURE.drawOffsetX = 0f;
-		Templates.MAP_MARKER_TREASURE.drawOffsetY = 0f;
-		Templates.MAP_MARKER_TREASURE.soundWhenHit = 1f;
-		Templates.MAP_MARKER_TREASURE.soundWhenHitting = 1f;
-		Templates.MAP_MARKER_TREASURE.soundDampening = 1f;
-		Templates.MAP_MARKER_TREASURE.stackable = false;
-		Templates.MAP_MARKER_TREASURE.weight = 0f;
-		Templates.MAP_MARKER_TREASURE.value = 0;
-		Templates.MAP_MARKER_TREASURE.anchorX = 0;
-		Templates.MAP_MARKER_TREASURE.anchorY = 0;
-		Templates.MAP_MARKER_TREASURE.templateId = GameObject.generateNewTemplateId();
+		Templates.APPLE = new Food();
+		Templates.APPLE.name = "Apple";
+		Templates.APPLE.imageTexturePath = "apple.png";
+		Templates.APPLE.totalHealth = Templates.APPLE.remainingHealth = 11;
+		Templates.APPLE.widthRatio = 0.5f;
+		Templates.APPLE.heightRatio = 0.5f;
+		Templates.APPLE.drawOffsetX = 0f;
+		Templates.APPLE.drawOffsetY = 0f;
+		Templates.APPLE.soundWhenHit = 1f;
+		Templates.APPLE.soundWhenHitting = 1f;
+		Templates.APPLE.soundDampening = 1f;
+		Templates.APPLE.stackable = false;
+		Templates.APPLE.weight = 5f;
+		Templates.APPLE.value = 15;
+		Templates.APPLE.anchorX = 0;
+		Templates.APPLE.anchorY = 0;
+		Templates.APPLE.templateId = GameObject.generateNewTemplateId();
 
 	}
 

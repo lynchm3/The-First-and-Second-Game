@@ -52,10 +52,10 @@ public class Discoverable extends GameObject {
 		super.draw2();
 	}
 
-	@Override
-	public Discoverable makeCopy(Square square, Actor owner) {
+	public Discoverable makeCopy(Square square, Actor owner, int level) {
 		Discoverable discoverable = new Discoverable();
 		super.setAttributesForCopy(discoverable, square, owner);
+		discoverable.level = level;
 		return discoverable;
 	}
 

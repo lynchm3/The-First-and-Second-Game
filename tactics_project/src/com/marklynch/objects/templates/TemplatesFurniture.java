@@ -2,9 +2,19 @@ package com.marklynch.objects.templates;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.effect.EffectPoison;
+import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.BigGameObject;
+import com.marklynch.objects.BrokenGlass;
+import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Key;
+import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.Searchable;
+import com.marklynch.objects.Stampable;
+import com.marklynch.objects.SwitchForOpenables;
 
 public class TemplatesFurniture {
 
@@ -123,6 +133,115 @@ public class TemplatesFurniture {
 		Templates.CHAIR_FALLEN.anchorX = 0;
 		Templates.CHAIR_FALLEN.anchorY = 0;
 		Templates.CHAIR_FALLEN.templateId = GameObject.generateNewTemplateId();
+
+		Templates.KEY = new Key();
+		Templates.KEY.name = "Key";
+		Templates.KEY.imageTexturePath = "key.png";
+		Templates.KEY.totalHealth = Templates.KEY.remainingHealth = 10;
+		Templates.KEY.widthRatio = 0.3f;
+		Templates.KEY.heightRatio = 0.3f;
+		Templates.KEY.drawOffsetX = 0f;
+		Templates.KEY.drawOffsetY = 0f;
+		Templates.KEY.soundWhenHit = 1f;
+		Templates.KEY.soundWhenHitting = 1f;
+		Templates.KEY.soundDampening = 1f;
+		Templates.KEY.stackable = false;
+		Templates.KEY.weight = 5f;
+		Templates.KEY.value = 12;
+		Templates.KEY.anchorX = 0;
+		Templates.KEY.anchorY = 0;
+		Templates.KEY.templateId = GameObject.generateNewTemplateId();
+
+		Templates.PLATE = new Stampable();
+		Templates.PLATE.name = "Plate";
+		Templates.PLATE.imageTexturePath = "plate.png";
+		Templates.PLATE.totalHealth = Templates.PLATE.remainingHealth = 6;
+		Templates.PLATE.widthRatio = 0.5f;
+		Templates.PLATE.heightRatio = 0.5f;
+		Templates.PLATE.drawOffsetX = 0f;
+		Templates.PLATE.drawOffsetY = 0f;
+		Templates.PLATE.soundWhenHit = 1f;
+		Templates.PLATE.soundWhenHitting = 1f;
+		Templates.PLATE.soundDampening = 1f;
+		Templates.PLATE.stackable = false;
+		Templates.PLATE.weight = 12f;
+		Templates.PLATE.value = 14;
+		Templates.PLATE.anchorX = 0;
+		Templates.PLATE.anchorY = 0;
+		Templates.PLATE.templateId = GameObject.generateNewTemplateId();
+
+		Templates.BROKEN_PLATE = new Stampable();
+		Templates.BROKEN_PLATE.name = "Broken Plate";
+		Templates.BROKEN_PLATE.imageTexturePath = "broken_plate.png";
+		Templates.BROKEN_PLATE.totalHealth = Templates.BROKEN_PLATE.remainingHealth = 4;
+		Templates.BROKEN_PLATE.widthRatio = 0.5f;
+		Templates.BROKEN_PLATE.heightRatio = 0.5f;
+		Templates.BROKEN_PLATE.drawOffsetX = 0f;
+		Templates.BROKEN_PLATE.drawOffsetY = 0f;
+		Templates.BROKEN_PLATE.soundWhenHit = 1f;
+		Templates.BROKEN_PLATE.soundWhenHitting = 1f;
+		Templates.BROKEN_PLATE.soundDampening = 1f;
+		Templates.BROKEN_PLATE.stackable = false;
+		Templates.BROKEN_PLATE.weight = 12f;
+		Templates.BROKEN_PLATE.value = 3;
+		Templates.BROKEN_PLATE.anchorX = 0;
+		Templates.BROKEN_PLATE.anchorY = 0;
+		Templates.BROKEN_PLATE.templateId = GameObject.generateNewTemplateId();
+
+		Templates.DINNER_KNIFE = new GameObject();
+		Templates.DINNER_KNIFE.name = "Dinner Knife";
+		Templates.DINNER_KNIFE.imageTexturePath = "knife.png";
+		Templates.DINNER_KNIFE.totalHealth = Templates.DINNER_KNIFE.remainingHealth = 21;
+		Templates.DINNER_KNIFE.widthRatio = 1f;
+		Templates.DINNER_KNIFE.heightRatio = 1f;
+		Templates.DINNER_KNIFE.drawOffsetX = 0.5f;
+		Templates.DINNER_KNIFE.drawOffsetY = 0.125f;
+		Templates.DINNER_KNIFE.soundWhenHit = 1f;
+		Templates.DINNER_KNIFE.soundWhenHitting = 1f;
+		Templates.DINNER_KNIFE.soundDampening = 1f;
+		Templates.DINNER_KNIFE.stackable = false;
+		Templates.DINNER_KNIFE.weight = 6f;
+		Templates.DINNER_KNIFE.value = 17;
+		Templates.DINNER_KNIFE.anchorX = 0;
+		Templates.DINNER_KNIFE.anchorY = 0;
+		Templates.DINNER_KNIFE.templateId = GameObject.generateNewTemplateId();
+
+		Templates.DINNER_FORK = new MapMarker();
+		Templates.DINNER_FORK.name = "Dinner Fork";
+		Templates.DINNER_FORK.imageTexturePath = "fork.png";
+		Templates.DINNER_FORK.totalHealth = Templates.DINNER_FORK.remainingHealth = 12;
+		Templates.DINNER_FORK.widthRatio = 0.5f;
+		Templates.DINNER_FORK.heightRatio = 0.125f;
+		Templates.DINNER_FORK.drawOffsetX = 0f;
+		Templates.DINNER_FORK.drawOffsetY = 0f;
+		Templates.DINNER_FORK.soundWhenHit = 1f;
+		Templates.DINNER_FORK.soundWhenHitting = 1f;
+		Templates.DINNER_FORK.soundDampening = 1f;
+		Templates.DINNER_FORK.stackable = false;
+		Templates.DINNER_FORK.weight = 7f;
+		Templates.DINNER_FORK.value = 17;
+		Templates.DINNER_FORK.anchorX = 0;
+		Templates.DINNER_FORK.anchorY = 0;
+		Templates.DINNER_FORK.templateId = GameObject.generateNewTemplateId();
+
+		ANTLERS_SWITCH_FOR_OPENABLES = new SwitchForOpenables("Obvious Antlers", 5, "antlers.png", null,
+				new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.5f, 305,
+				null, "Touch", "touched", null, null, null, GameObject.generateNewTemplateId());
+
+		FURNACE = new Furnace("Furnace", 200, "furnace.png", null, new Inventory(), 1.5f, 1.5f, -0.25f, -0.5f, 1f, 1f,
+				1f, null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 150f, 402, null, false,
+				GameObject.generateNewTemplateId());
+		BROKEN_LAMP = new BrokenGlass("Broken Lamp", 5, "smashed_glass.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f,
+				1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, 1, null,
+				GameObject.generateNewTemplateId());
+
+		BROKEN_GLASS = new BrokenGlass("Broken Glass", 5, "smashed_glass.png", null, new Inventory(), 0.5f, 0.5f, 0f,
+				0f, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 3f, 1, null,
+				GameObject.generateNewTemplateId());
+
+		DROP_HOLE = new Searchable("Drop Hole", 5, "drop_hole.png", null, new Inventory(), 1f, 1f, 0f, 0f, 1f, 1f, 1f,
+				null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 0f, 100f, 0, null, new Effect[] { new EffectPoison(3) },
+				GameObject.generateNewTemplateId());
 
 	}
 
