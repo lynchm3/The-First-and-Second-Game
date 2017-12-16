@@ -121,15 +121,6 @@ public class TemplatesAnimals {
 		Templates.WOLF.canEquipWeapons = false;
 		Templates.WOLF.templateId = GameObject.generateNewTemplateId();
 		Templates.WOLF.aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(Templates.WOLF);
-
-		// Actor wolf3 = new CarnivoreNeutralWildAnimal("Wolf", "Wild animal",
-		// 1, 10, 0, 0, 0, 0, "wolf_pink.png",
-		// Game.level.squares[127][11], 1, 10, null, new Inventory(), 1, 1, 0f,
-		// 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-		// false, 0f, 0f, 0f, 0f, 0f, 60f, null, Game.level.factions.wolves, 0,
-		// 0, 0, 0, 0, 0, 0, 0,
-		// new GameObject[] {}, new GameObject[] {},
-		// GameObject.generateNewTemplateId());
 	}
 
 }

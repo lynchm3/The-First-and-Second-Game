@@ -3,12 +3,10 @@ package com.marklynch.objects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Wall extends GameObject {
@@ -79,22 +77,8 @@ public class Wall extends GameObject {
 	public float quarterWidth = Game.SQUARE_WIDTH / 4;
 	public float quarterHeight = Game.SQUARE_HEIGHT / 4;
 
-	public Wall(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-
-			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
-			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
-			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, int templateId) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, templateId);
-		if (squareGameObjectIsOn != null) {
-			drawX1 = (int) (squareGameObjectIsOn.xInGridPixels + drawOffsetX);
-			drawX2 = (int) (drawX1 + width);
-			drawY1 = (int) (squareGameObjectIsOn.yInGridPixels + drawOffsetY);
-			drawY2 = (int) (drawY1 + height);
-		}
+	public Wall() {
+		super();
 
 		canBePickedUp = false;
 		showInventory = false;
@@ -267,11 +251,15 @@ public class Wall extends GameObject {
 
 	@Override
 	public Wall makeCopy(Square square, Actor owner) {
-		return new Wall(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, templateId);
+		Wall wall = new Wall();
+		super.setAttributesForCopy(wall, square, owner);
+		if (squareGameObjectIsOn != null) {
+			wall.drawX1 = (int) (wall.squareGameObjectIsOn.xInGridPixels + wall.drawOffsetX);
+			wall.drawX2 = (int) (wall.drawX1 + wall.width);
+			wall.drawY1 = (int) (wall.squareGameObjectIsOn.yInGridPixels + wall.drawOffsetY);
+			wall.drawY2 = (int) (wall.drawY1 + wall.height);
+		}
+		return wall;
 	}
 
 	public void checkIfFullWall() {

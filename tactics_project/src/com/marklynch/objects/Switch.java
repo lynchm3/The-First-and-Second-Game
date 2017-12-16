@@ -1,6 +1,12 @@
 package com.marklynch.objects;
 
+import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
+
 public abstract class Switch extends GameObject {
+
+	public String actionName;
+	public String actionVerb;
+	public RequirementToMeet[] requirementsToMeet;
 
 	public Switch() {
 		super();

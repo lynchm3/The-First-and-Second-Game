@@ -1,9 +1,5 @@
 package com.marklynch.objects.templates;
 
-import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.effect.EffectPoison;
-import com.marklynch.level.constructs.effect.EffectWet;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.Arrow;
@@ -14,7 +10,6 @@ import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.Door;
-import com.marklynch.objects.Fence;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
@@ -59,9 +54,12 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Templates {
 
-	// 17 todo out of 113
+	// 2 todo out of an original 113
 
 	public Templates() {
+
+		// GOLD BITCH
+		new TemplatesGold();
 
 		// Small
 		new TemplatesReadables();
@@ -70,13 +68,16 @@ public class Templates {
 		new TemplatesJunk();
 		new TemplatesWeapons();
 		new TemplatesTools();
-		new TemplatesArmor();
+		new TemplatesProjectiles();
+		new TemplatesLiquids();
 
 		// Big
+		new TemplatesCorpses();
 		new TemplatesEntrances();
 		new TemplatesContainers();
 		new TemplatesBigObjects();
 		new TemplatesFurniture();
+		new TemplatesBuilding();
 
 		// Peeps
 		new TemplatesHumans();
@@ -85,69 +86,6 @@ public class Templates {
 
 		// Markers
 		new TemplatesMapMarkers();
-
-		// Special People
-		MORT = new Mort("Mort", "Miner", 1, 50, 0, 0, 0, 0, "old_man.png", null, 1, 10, null, new Inventory(), 1f, 1f,
-				0, 0, 1f, 1f, 1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 0f, 70f, null, null, 88, 54, 88, 54, 88, 54,
-				88, 54, 0, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
-
-		// Kitchenware
-
-		WALL = new Wall("Wall", 1000, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 10f, 0f, 10f, null, 0.5f, 0.5f,
-				false, 90f, 0f, 0f, 0f, 100f, 200f, 100, null, GameObject.generateNewTemplateId());
-
-		FENCE = new Fence("Fence", 50, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 10f, 0f, 10f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 100f, 100f, 50, null, GameObject.generateNewTemplateId());
-
-		VEIN = new Vein("Vein", 1000, "wall.png", null, new Inventory(), 1, 1, 0f, 0f, 15f, 0f, 10f, null, 0.5f, 0.5f,
-				false, 90f, 0f, 0f, 0f, 100f, 200f, 200, null, GameObject.generateNewTemplateId());
-
-		ARROW = new Arrow("Arrow", 5, "arrow.png", null, new Inventory(), 0.32f, 0.16f, 0f, 0f, 15f, 0f, 10f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.1f, 1, null, GameObject.generateNewTemplateId());
-
-		FIRE_BALL = new Arrow("Fireball", 5, "effect_burn.png", null, new Inventory(), 0.32f, 0.32f, 0f, 0f, 15f, 0f,
-				10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.1f, 0, null, GameObject.generateNewTemplateId());
-
-		WATER_BALL = new Arrow("Waterball", 5, "effect_wet.png", null, new Inventory(), 0.32f, 0.32f, 0f, 0f, 15f, 0f,
-				10f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0.1f, 0, null, GameObject.generateNewTemplateId());
-
-		ROCK = new GameObject("Stone", 1000, "rock.png", null, new Inventory(), 0.32f, 0.32f, 0f, 0f, 15f, 0f, 10f,
-				null, 0.5f, 0.5f, false, 90f, 0f, 0f, 0f, 100f, 100f, 0, null, GameObject.generateNewTemplateId());
-
-		// LARGE CONTAINER
-
-		WELL = new WaterSource("Well", 5, "well.png", null, new Inventory(), 1.5f, 1.5f, -0.25f, -0.25f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 100f, 0f, 0f, 0f, 100f, 300f, 364, null, new Effect[] {},
-				GameObject.generateNewTemplateId());
-
-		SHELF = new GameObject("Shelf", 5, "shelf.png", null, new Inventory(), 1, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
-				0.5f, false, 0f, 0f, 0f, 0f, 100f, 10f, 28, null, GameObject.generateNewTemplateId());
-
-		// Corpses
-		CARCASS = new Carcass("Carcass", 50, "carcass.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, 15, null, GameObject.generateNewTemplateId());
-
-		CORPSE = new Corpse("Carcass", 50, "carcass.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, 0, null, GameObject.generateNewTemplateId());
-
-		ASH = new GameObject("Ash", 50, "ash.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
-				0.5f, false, 100f, 0f, 0f, 0f, 100f, 0f, 0, null, GameObject.generateNewTemplateId());
-
-		// Food?
-		MEAT_CHUNK = new MeatChunk("Meat Chunk", 5, "meat_chunk.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f,
-				1f, null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 5f, 10, null, GameObject.generateNewTemplateId());
-
-		WATER = new Liquid("Water", 5, "effect_wet.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f, null,
-				0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, 2, null, 0f, new Effect[] { new EffectWet(5) },
-				new Effect[] {}, GameObject.generateNewTemplateId());
-
-		POISON = new Liquid("Poison", 5, "effect_poison.png", null, new Inventory(), 0.5f, 0.5f, 0f, 0f, 1f, 1f, 1f,
-				null, 0.5f, 0.5f, false, 0f, 0f, 0f, 0f, 100f, 0f, 25, null, 0f, new Effect[] { new EffectPoison(5) },
-				new Effect[] { new EffectPoison(5) }, GameObject.generateNewTemplateId());
-
-		// GOLD BITCH
-		GOLD = new Gold("Gold", 10, "gold.png", null, new Inventory(), 0.5f, 0.125f, 0f, 0f, 1f, 1f, 1f, null, 0.5f,
-				0.5f, false, 90f, 0f, 0f, 0f, 100f, 0.5f, 0, null, GameObject.generateNewTemplateId());
 
 	}
 

@@ -10,10 +10,10 @@ import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Key;
-import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.SwitchForOpenables;
+import com.marklynch.objects.WaterSource;
 
 public class TemplatesFurniture {
 
@@ -205,7 +205,7 @@ public class TemplatesFurniture {
 		Templates.DINNER_KNIFE.anchorY = 0;
 		Templates.DINNER_KNIFE.templateId = GameObject.generateNewTemplateId();
 
-		Templates.DINNER_FORK = new MapMarker();
+		Templates.DINNER_FORK = new GameObject();
 		Templates.DINNER_FORK.name = "Dinner Fork";
 		Templates.DINNER_FORK.imageTexturePath = "fork.png";
 		Templates.DINNER_FORK.totalHealth = Templates.DINNER_FORK.remainingHealth = 12;
@@ -315,6 +315,43 @@ public class TemplatesFurniture {
 		Templates.DROP_HOLE.anchorY = 0;
 		Templates.DROP_HOLE.templateId = GameObject.generateNewTemplateId();
 		Templates.DROP_HOLE.effectsFromInteracting = new Effect[] { new EffectPoison(3) };
+
+		Templates.SHELF = new GameObject();
+		Templates.SHELF.name = "Shelf";
+		Templates.SHELF.imageTexturePath = "shelf.png";
+		Templates.SHELF.totalHealth = Templates.SHELF.remainingHealth = 28;
+		Templates.SHELF.widthRatio = 1f;
+		Templates.SHELF.heightRatio = 0.5f;
+		Templates.SHELF.drawOffsetX = 0f;
+		Templates.SHELF.drawOffsetY = 0f;
+		Templates.SHELF.soundWhenHit = 1f;
+		Templates.SHELF.soundWhenHitting = 1f;
+		Templates.SHELF.soundDampening = 1f;
+		Templates.SHELF.stackable = false;
+		Templates.SHELF.weight = 27f;
+		Templates.SHELF.value = 21;
+		Templates.SHELF.anchorX = 0;
+		Templates.SHELF.anchorY = 0;
+		Templates.SHELF.templateId = GameObject.generateNewTemplateId();
+
+		Templates.WELL = new WaterSource();
+		Templates.WELL.name = "Well";
+		Templates.WELL.imageTexturePath = "well";
+		Templates.WELL.totalHealth = Templates.WELL.remainingHealth = 138;
+		Templates.WELL.widthRatio = 1.5f;
+		Templates.WELL.heightRatio = 1.5f;
+		Templates.WELL.drawOffsetX = -0.25f;
+		Templates.WELL.drawOffsetY = -0.25f;
+		Templates.WELL.soundWhenHit = 1f;
+		Templates.WELL.soundWhenHitting = 1f;
+		Templates.WELL.soundDampening = 1f;
+		Templates.WELL.stackable = false;
+		Templates.WELL.weight = 213f;
+		Templates.WELL.value = 89;
+		Templates.WELL.anchorX = 0;
+		Templates.WELL.anchorY = 0;
+		Templates.WELL.templateId = GameObject.generateNewTemplateId();
+		Templates.WELL.effectsFromInteracting = new Effect[] {};
 
 	}
 

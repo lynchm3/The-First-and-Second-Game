@@ -16,10 +16,6 @@ public class SwitchForOpenables extends Switch {
 	public SWITCH_TYPE switchType;
 	public AILine aiLine;
 
-	public String actionName;
-	public String actionVerb;
-	public RequirementToMeet[] requirementsToMeet;
-
 	public enum SWITCH_TYPE {
 		OPEN_CLOSE, LOCK_UNLOCK
 	}

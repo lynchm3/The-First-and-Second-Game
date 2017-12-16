@@ -3,14 +3,12 @@ package com.marklynch.objects;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Vein extends Wall {
@@ -63,16 +61,8 @@ public class Vein extends Wall {
 	public float quarterWidth = Game.SQUARE_WIDTH / 4;
 	public float quarterHeight = Game.SQUARE_HEIGHT / 4;
 
-	public Vein(String name, int health, String imagePath, Square squareGameObjectIsOn, Inventory inventory,
-
-			float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY, float soundWhenHit,
-			float soundWhenHitting, float soundDampening, Color light, float lightHandleX, float lightHandlY,
-			boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, int templateId) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, templateId);
+	public Vein() {
+		super();
 		if (squareGameObjectIsOn != null) {
 			drawX1 = (int) (squareGameObjectIsOn.xInGridPixels + drawOffsetX);
 			drawX2 = (int) (drawX1 + width);
@@ -208,11 +198,15 @@ public class Vein extends Wall {
 
 	@Override
 	public Vein makeCopy(Square square, Actor owner) {
-		return new Vein(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, templateId);
+		Vein vein = new Vein();
+		super.setAttributesForCopy(vein, square, owner);
+		if (squareGameObjectIsOn != null) {
+			vein.drawX1 = (int) (vein.squareGameObjectIsOn.xInGridPixels + vein.drawOffsetX);
+			vein.drawX2 = (int) (vein.drawX1 + vein.width);
+			vein.drawY1 = (int) (vein.squareGameObjectIsOn.yInGridPixels + vein.drawOffsetY);
+			vein.drawY2 = (int) (vein.drawY1 + vein.height);
+		}
+		return vein;
 	}
 
 	@Override

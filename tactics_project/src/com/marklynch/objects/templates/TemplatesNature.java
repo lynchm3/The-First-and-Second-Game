@@ -6,9 +6,11 @@ import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
+import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Stump;
 import com.marklynch.objects.Tree;
+import com.marklynch.objects.Vein;
 import com.marklynch.utils.ResourceUtils;
 
 public class TemplatesNature {
@@ -233,6 +235,61 @@ public class TemplatesNature {
 		Templates.APPLE.anchorX = 0;
 		Templates.APPLE.anchorY = 0;
 		Templates.APPLE.templateId = GameObject.generateNewTemplateId();
+
+		Templates.ROCK = new GameObject();
+		Templates.ROCK.name = "Rock";
+		Templates.ROCK.imageTexturePath = "rock.png";
+		Templates.ROCK.totalHealth = Templates.ROCK.remainingHealth = 51;
+		Templates.ROCK.widthRatio = 0.32f;
+		Templates.ROCK.heightRatio = 0.32f;
+		Templates.ROCK.drawOffsetX = 0f;
+		Templates.ROCK.drawOffsetY = 0f;
+		Templates.ROCK.soundWhenHit = 1f;
+		Templates.ROCK.soundWhenHitting = 1f;
+		Templates.ROCK.soundDampening = 1f;
+		Templates.ROCK.stackable = false;
+		Templates.ROCK.weight = 12f;
+		Templates.ROCK.value = 6;
+		Templates.ROCK.anchorX = 0;
+		Templates.ROCK.anchorY = 0;
+		Templates.ROCK.templateId = GameObject.generateNewTemplateId();
+
+		Templates.VEIN = new Vein();
+		Templates.VEIN.name = "Vein";
+		Templates.VEIN.imageTexturePath = "wall.png";
+		Templates.VEIN.totalHealth = Templates.VEIN.remainingHealth = 1000;
+		Templates.VEIN.widthRatio = 1f;
+		Templates.VEIN.heightRatio = 1f;
+		Templates.VEIN.drawOffsetX = 0f;
+		Templates.VEIN.drawOffsetY = 0f;
+		Templates.VEIN.soundWhenHit = 1f;
+		Templates.VEIN.soundWhenHitting = 1f;
+		Templates.VEIN.soundDampening = 1f;
+		Templates.VEIN.stackable = false;
+		Templates.VEIN.weight = 1000f;
+		Templates.VEIN.value = 36;
+		Templates.VEIN.anchorX = 0;
+		Templates.VEIN.anchorY = 0;
+		Templates.VEIN.templateId = GameObject.generateNewTemplateId();
+
+		// Food?
+		Templates.MEAT_CHUNK = new MeatChunk();
+		Templates.MEAT_CHUNK.name = "Meat Chunk";
+		Templates.MEAT_CHUNK.imageTexturePath = "meat_chunk.png";
+		Templates.MEAT_CHUNK.totalHealth = Templates.MEAT_CHUNK.remainingHealth = 13;
+		Templates.MEAT_CHUNK.widthRatio = 1f;
+		Templates.MEAT_CHUNK.heightRatio = 1f;
+		Templates.MEAT_CHUNK.drawOffsetX = 0f;
+		Templates.MEAT_CHUNK.drawOffsetY = 0f;
+		Templates.MEAT_CHUNK.soundWhenHit = 1f;
+		Templates.MEAT_CHUNK.soundWhenHitting = 1f;
+		Templates.MEAT_CHUNK.soundDampening = 1f;
+		Templates.MEAT_CHUNK.stackable = false;
+		Templates.MEAT_CHUNK.weight = 14f;
+		Templates.MEAT_CHUNK.value = 18;
+		Templates.MEAT_CHUNK.anchorX = 0;
+		Templates.MEAT_CHUNK.anchorY = 0;
+		Templates.MEAT_CHUNK.templateId = GameObject.generateNewTemplateId();
 
 	}
 
