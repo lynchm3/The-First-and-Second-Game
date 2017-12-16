@@ -119,7 +119,7 @@ public class QuestCaveOfTheBlind extends Quest {
 				mortsGameObject, 100, new GameObject[] {}, new GameObject[] {}, null);
 		mort.quest = this;
 		mort.mortsBell = Templates.DINNER_BELL.makeCopy(null, mort);
-		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy("Meat Chunk", null, null);
+		mort.mortsMeatChunk = Templates.MEAT_CHUNK.makeCopy(null, null);
 		mort.inventory.add(Templates.CLEAVER.makeCopy(null, mort));
 		mort.inventory.add(Templates.LANTERN.makeCopy(null, mort));
 		mort.inventory.add(Templates.PICKAXE.makeCopy(null, mort));

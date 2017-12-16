@@ -17,7 +17,8 @@ public class MeatChunk extends GameObject {
 		attackable = true;
 	}
 
-	public MeatChunk makeCopy(Square square, Actor owner, float volume) {
+	@Override
+	public MeatChunk makeCopy(Square square, Actor owner) {
 		MeatChunk meatChunk = new MeatChunk();
 		super.setAttributesForCopy(meatChunk, square, owner);
 		return meatChunk;

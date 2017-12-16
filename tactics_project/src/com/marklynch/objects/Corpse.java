@@ -22,13 +22,14 @@ public class Corpse extends GameObject {
 		attackable = true;
 	}
 
-	@Override
-	public Corpse makeCopy(Square square, Actor owner) {
+	public Corpse makeCopy(String name, Square square, Actor owner, float weight) {
 		Corpse meatChunk = new Corpse();
 		super.setAttributesForCopy(meatChunk, square, owner);
+		meatChunk.weight = weight;
+		meatChunk.name = name;
 		meatChunk.baseName = new String(meatChunk.name);
-		if (this.inventory.size() == 0)
-			this.name = meatChunk.baseName + " (empty)";
+		if (meatChunk.inventory.size() == 0)
+			meatChunk.name = this.baseName + " (empty)";
 		return meatChunk;
 	}
 

@@ -380,7 +380,7 @@ public class QuestSmallGame extends Quest {
 			}
 		});
 
-		Discoverable mound = Templates.MOUND.makeCopy(Game.level.squares[122][7], null);
+		Discoverable mound = Templates.MOUND.makeCopy(Game.level.squares[122][7], null, 1);
 		Storage crate = Templates.CRATE.makeCopy("Crate", Game.level.squares[123][9], false, null);
 		crate.inventory.add(Templates.HATCHET.makeCopy(null, null));
 		// mound.discovered();
