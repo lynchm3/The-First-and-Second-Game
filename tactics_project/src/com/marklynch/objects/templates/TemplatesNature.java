@@ -222,8 +222,8 @@ public class TemplatesNature {
 		Templates.APPLE.name = "Apple";
 		Templates.APPLE.imageTexturePath = "apple.png";
 		Templates.APPLE.totalHealth = Templates.APPLE.remainingHealth = 11;
-		Templates.APPLE.widthRatio = 0.5f;
-		Templates.APPLE.heightRatio = 0.5f;
+		Templates.APPLE.widthRatio = 0.25f;
+		Templates.APPLE.heightRatio = 0.25f;
 		Templates.APPLE.drawOffsetX = 0f;
 		Templates.APPLE.drawOffsetY = 0f;
 		Templates.APPLE.soundWhenHit = 1f;
