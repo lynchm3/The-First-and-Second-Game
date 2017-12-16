@@ -112,7 +112,8 @@ public class Storage extends Openable {
 		else if (this.inventory.size() == 0)
 			this.name = baseName + " (empty)";
 
-		chestClosedTexture = imageTexture;
+		storage.chestOpenTexture = chestOpenTexture;
+		storage.chestClosedTexture = chestClosedTexture;
 		// this.imagePathWhenOpen = imagePathWhenOpen;
 
 		return storage;
