@@ -104,7 +104,6 @@ public class Trader extends Actor implements Comparator<GameObject> {
 		super.postLoad2();
 	}
 
-	@Override
 	public Trader makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 

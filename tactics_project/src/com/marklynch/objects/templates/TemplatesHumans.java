@@ -2,6 +2,7 @@ package com.marklynch.objects.templates;
 
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.routines.AIRoutineForThief;
+import com.marklynch.level.quest.caveoftheblind.AIRoutineForMort;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Human;
@@ -101,7 +102,7 @@ public class TemplatesHumans {
 		Templates.MORT.handAnchorY = 54f;
 		Templates.MORT.canOpenDoors = true;
 		Templates.MORT.canEquipWeapons = true;
-		Templates.MORT.aiRoutine = new AIRoutineForHunter(Templates.MORT);
+		Templates.MORT.aiRoutine = new AIRoutineForMort(Templates.MORT);
 		Templates.FARMER.templateId = GameObject.generateNewTemplateId();
 	}
 

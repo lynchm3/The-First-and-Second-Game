@@ -40,7 +40,6 @@ public class Mort extends Actor {
 		super.postLoad2();
 	}
 
-	@Override
 	public Mort makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 		Mort actor = new Mort();

@@ -20,7 +20,6 @@ public class Human extends Actor {
 		super.postLoad2();
 	}
 
-	@Override
 	public Human makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 		Human actor = new Human();

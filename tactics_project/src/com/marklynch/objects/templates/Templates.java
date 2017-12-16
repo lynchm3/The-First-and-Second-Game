@@ -67,6 +67,7 @@ public class Templates {
 		new TemplatesNature();
 		new TemplatesJunk();
 		new TemplatesWeapons();
+		new TemplatesArmor();
 		new TemplatesTools();
 		new TemplatesProjectiles();
 		new TemplatesLiquids();
