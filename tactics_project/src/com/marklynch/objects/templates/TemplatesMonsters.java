@@ -22,7 +22,7 @@ public class TemplatesMonsters {
 		Templates.BLIND.endurance = 10;
 		Templates.BLIND.imageTexturePath = "blind.png";
 		Templates.BLIND.heightRatio = 1f;
-		Templates.BLIND.drawOffsetY = 1f;
+		Templates.BLIND.drawOffsetY = 0f;
 		Templates.BLIND.weight = 70f;
 		Templates.BLIND.canOpenDoors = false;
 		Templates.BLIND.canEquipWeapons = true;
