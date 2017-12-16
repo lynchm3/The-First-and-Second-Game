@@ -56,6 +56,8 @@ public class Discoverable extends GameObject {
 		Discoverable discoverable = new Discoverable();
 		super.setAttributesForCopy(discoverable, square, owner);
 		discoverable.level = level;
+		discoverable.preDiscoverTexture = preDiscoverTexture;
+		discoverable.postDiscoverTexture = postDiscoverTexture;
 		return discoverable;
 	}
 
