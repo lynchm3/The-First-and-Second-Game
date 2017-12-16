@@ -1,12 +1,9 @@
 package com.marklynch.objects;
 
-import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 public class Sign extends Readable {
-
-	Conversation conversation;
 
 	public Sign() {
 		super();
@@ -27,7 +24,7 @@ public class Sign extends Readable {
 
 		Sign readable = new Sign();
 		super.setAttributesForCopy(readable, square, owner);
-		readable.conversation = this.createConversation(conversationText);
+		readable.conversation = readable.createConversation(conversationText);
 		return readable;
 	}
 

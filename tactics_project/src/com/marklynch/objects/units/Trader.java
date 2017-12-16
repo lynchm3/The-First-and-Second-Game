@@ -81,6 +81,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 			}
 
 		} else {
+			// shopSign.getConversation() = null
 			if (shopSign.getConversation().openingConversationPart.text.length != 5) {
 				return new Object[] { this.shop, " - FEATURED INVENTORY - ", temp.get(0), " - ", temp.get(1) };
 			} else if (shopSign.getConversation().openingConversationPart.text[2] != temp.get(0)

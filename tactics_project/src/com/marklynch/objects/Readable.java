@@ -31,7 +31,7 @@ public class Readable extends GameObject {
 
 		Readable readable = new Readable();
 		super.setAttributesForCopy(readable, square, owner);
-		readable.conversation = this.createConversation(conversationText);
+		readable.conversation = readable.createConversation(conversationText);
 		return readable;
 	}
 
