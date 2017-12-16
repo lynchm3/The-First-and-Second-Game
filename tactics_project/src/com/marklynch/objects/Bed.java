@@ -36,7 +36,7 @@ public class Bed extends GameObject {
 	public Bed makeCopy(Square square, Actor owner) {
 		Bed bed = new Bed();
 		super.setAttributesForCopy(bed, square, owner);
-		bed.imageTextureCovers = getGlobalImage(imagePathCovers);
+		bed.imageTextureCovers = imageTextureCovers;
 		return bed;
 	}
 
