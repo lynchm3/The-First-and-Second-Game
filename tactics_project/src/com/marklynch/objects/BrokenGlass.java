@@ -29,12 +29,12 @@ public class BrokenGlass extends Stampable {
 	public BrokenGlass makeCopy(Square square, Actor owner) {
 		BrokenGlass brokenGlass = new BrokenGlass();
 		super.setAttributesForCopy(brokenGlass, square, owner);
-		glassShardsCount = 10;// (int) (1d + Math.random() * 20d);
-		glassShards = new GlassShard[glassShardsCount];
+		brokenGlass.glassShardsCount = 10;// (int) (1d + Math.random() * 20d);
+		brokenGlass.glassShards = new GlassShard[glassShardsCount];
 		for (int i = 0; i < glassShardsCount; i++) {
 			int randomShardNumber = (int) (Math.random() * 10d);
-			glassShards[i] = new GlassShard(ResourceUtils.getGlobalImage("glass_shard_" + randomShardNumber + ".png"),
-					this);
+			brokenGlass.glassShards[i] = new GlassShard(
+					ResourceUtils.getGlobalImage("glass_shard_" + randomShardNumber + ".png"), this);
 		}
 		return brokenGlass;
 	}
