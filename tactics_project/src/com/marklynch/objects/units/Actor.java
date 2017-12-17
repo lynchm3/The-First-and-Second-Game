@@ -526,6 +526,7 @@ public class Actor extends GameObject {
 		if (remainingHealth <= 0) {
 			super.checkIfDestroyed(attacker, action);
 			this.faction.checkIfDestroyed();
+			// If not player, erase crimes
 			for (Crime crime : crimesPerformedInLifetime) {
 				for (Actor witness : crime.witnesses) {
 					witness.crimesWitnessed.remove(this);

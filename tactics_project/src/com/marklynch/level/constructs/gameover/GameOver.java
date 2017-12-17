@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
+import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.QuadUtils;
@@ -34,17 +35,22 @@ public class GameOver implements Draggable, Scrollable {
 
 	public static Texture youDied;
 
-	public GameOver() {
-		resize();
+	Color translucentBlack = new Color(0f, 0f, 0f, 0.5f);
 
-		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
-		// buttonClose.setClickListener(new ClickListener() {
-		// @Override
-		// public void click() {
-		// Game.level.openCloseJournal();
-		// }
-		// });
+	public GameOver() {
+
+		buttonClose = new LevelButton(Game.halfWindowWidth - 35f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "GO!", true, false, Color.BLACK, Color.WHITE, null);
+		buttonClose.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				// bit buggy when u come back to life :{ is there a dead flag or
+				// something? hmm...
+				/// see what happens in checkifdestroyed
+				Game.level.player.remainingHealth = Game.level.player.totalHealth;
+				Game.level.openCloseGameOver();
+			}
+		});
 		buttons.add(buttonClose);
 		resize();
 	}
@@ -58,6 +64,8 @@ public class GameOver implements Draggable, Scrollable {
 		contentX = (int) (Game.windowWidth / 2 - 640 / 2);
 		contentY = (int) (Game.windowHeight / 2 - 128 / 2);
 		bottomBorderHeight = 384;
+
+		buttonClose.updatePosition(Game.halfWindowWidth - 35f, bottomBorderHeight);
 
 	}
 
@@ -79,7 +87,7 @@ public class GameOver implements Draggable, Scrollable {
 		// links.clear();
 
 		// Black cover
-		QuadUtils.drawQuad(Color.BLACK, 0, 0, Game.windowWidth, Game.windowHeight);
+		QuadUtils.drawQuad(translucentBlack, 0, 0, Game.windowWidth, Game.windowHeight);
 
 		TextureUtils.drawTexture(youDied, contentX, contentY, contentX + 640, contentY + 128);
 

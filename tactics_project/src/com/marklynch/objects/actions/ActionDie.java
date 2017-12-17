@@ -44,20 +44,23 @@ public class ActionDie extends Action {
 
 		logDeath();
 		createCorpse();
+
 		Game.level.player.addXP(10);
 
 		// Remove from draw/update
-		if (performer instanceof Actor) {
-			if (performer.squareGameObjectIsOn != null) {
-				Game.level.inanimateObjectsOnGround.remove(performer);
-				performer.squareGameObjectIsOn.inventory.remove(performer);
-			} else if (performer.inventoryThatHoldsThisObject != null) {
-				performer.inventoryThatHoldsThisObject.remove(performer);
-			}
-			Game.level.actorsToRemove.add((Actor) performer);
+		if (performer != Game.level.player) {
+			if (performer instanceof Actor) {
+				if (performer.squareGameObjectIsOn != null) {
+					Game.level.inanimateObjectsOnGround.remove(performer);
+					performer.squareGameObjectIsOn.inventory.remove(performer);
+				} else if (performer.inventoryThatHoldsThisObject != null) {
+					performer.inventoryThatHoldsThisObject.remove(performer);
+				}
+				Game.level.actorsToRemove.add((Actor) performer);
 
-		} else {
-			Game.level.inanimateObjectsToRemove.add(performer);
+			} else {
+				Game.level.inanimateObjectsToRemove.add(performer);
+			}
 		}
 
 		// this.faction.actors.remove(this);

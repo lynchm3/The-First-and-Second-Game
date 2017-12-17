@@ -18,6 +18,7 @@ import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDiscover;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.popups.Notification;
@@ -392,11 +393,17 @@ public class Player extends Human {
 
 	@Override
 	public boolean checkIfDestroyed(Object attacker, Action action) {
-		boolean destroyed = super.checkIfDestroyed(attacker, action);
-		if (destroyed) {
-			Game.level.openCloseGameOver();
+		if (remainingHealth <= 0) {
+			destroyedBy = attacker;
+			destroyedByAction = action;
+			remainingHealth = totalHealth;
+			if (!Game.level.gameOver.showing)
+				Game.level.openCloseGameOver();
+			new ActionDie(this, squareGameObjectIsOn).perform();
+
+			return true;
 		}
-		return destroyed;
+		return false;
 	}
 
 }
