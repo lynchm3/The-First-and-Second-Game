@@ -390,4 +390,13 @@ public class Player extends Human {
 
 	}
 
+	@Override
+	public boolean checkIfDestroyed(Object attacker, Action action) {
+		boolean destroyed = super.checkIfDestroyed(attacker, action);
+		if (destroyed) {
+			Game.level.openCloseGameOver();
+		}
+		return destroyed;
+	}
+
 }

@@ -1,0 +1,104 @@
+package com.marklynch.level.constructs.gameover;
+
+import java.util.ArrayList;
+
+import com.marklynch.Game;
+import com.marklynch.ui.Draggable;
+import com.marklynch.ui.Scrollable;
+import com.marklynch.ui.button.Button;
+import com.marklynch.ui.button.LevelButton;
+import com.marklynch.ui.button.Link;
+import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextureUtils;
+
+import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
+
+public class GameOver implements Draggable, Scrollable {
+
+	public boolean showing = false;
+
+	int contentX;
+	int contentY;
+
+	transient static int bottomBorderHeight;
+
+	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+
+	public ArrayList<Link> logLinks = new ArrayList<Link>();
+	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
+	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
+
+	static LevelButton buttonClose;
+
+	public static Texture youDied;
+
+	public GameOver() {
+		resize();
+
+		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
+		// buttonClose.setClickListener(new ClickListener() {
+		// @Override
+		// public void click() {
+		// Game.level.openCloseJournal();
+		// }
+		// });
+		buttons.add(buttonClose);
+		resize();
+	}
+
+	public static void loadStaticImages() {
+		youDied = ResourceUtils.getGlobalImage("you_died.png");
+	}
+
+	public void resize() {
+
+		contentX = (int) (Game.windowWidth / 2 - 640 / 2);
+		contentY = (int) (Game.windowHeight / 2 - 128 / 2);
+		bottomBorderHeight = 384;
+
+	}
+
+	public void open() {
+		resize();
+		showing = true;
+
+		buttons.clear();
+		buttons.add(buttonClose);
+
+	}
+
+	public void close() {
+		showing = false;
+	}
+
+	public void drawStaticUI() {
+
+		// links.clear();
+
+		// Black cover
+		QuadUtils.drawQuad(Color.BLACK, 0, 0, Game.windowWidth, Game.windowHeight);
+
+		TextureUtils.drawTexture(youDied, contentX, contentY, contentX + 640, contentY + 128);
+
+		// Buttons
+		for (Button button : buttons) {
+			button.draw();
+		}
+	}
+
+	@Override
+	public void scroll(float dragX, float dragY) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void drag(float dragX, float dragY) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -203,6 +203,7 @@ public class UserInputLevel {
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
 		if (Level.journal.showing) {
+		} else if (Level.gameOver.showing) {
 		} else if (Game.level.openInventories.size() > 0) {
 			InventorySquare inventorySquareMouseIsOver = Game.level.openInventories.get(0)
 					.getInventorySquareMouseIsOver(mouseXinPixels, mouseYinPixels);
@@ -425,6 +426,11 @@ public class UserInputLevel {
 		if (scrollableMouseIsOver != null)
 			return;
 
+		if (Level.gameOver.showing) {
+			draggableMouseIsOver = Level.gameOver;
+			scrollableMouseIsOver = Level.gameOver;
+		}
+
 		if (Level.journal.showing) {
 			draggableMouseIsOver = Level.journal;
 			scrollableMouseIsOver = Level.journal;
@@ -544,6 +550,8 @@ public class UserInputLevel {
 			return;
 		} else if (Level.journal.showing) {
 			return;
+		} else if (Level.gameOver.showing) {
+			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			if (Inventory.buttons.contains(Inventory.buttonLootAll)) {
 				Inventory.buttonLootAll.click();
@@ -591,6 +599,8 @@ public class UserInputLevel {
 			return;
 		} else if (Level.journal.showing) {
 			return;
+		} else if (Level.gameOver.showing) {
+			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
 		} else if (Game.level.conversation != null) {
@@ -635,6 +645,8 @@ public class UserInputLevel {
 			return;
 		} else if (Level.journal.showing) {
 			return;
+		} else if (Level.gameOver.showing) {
+			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
 		} else if (Game.level.conversation != null) {
@@ -678,6 +690,8 @@ public class UserInputLevel {
 			Level.activeTextBox.moveCaretLeft();
 			return;
 		} else if (Level.journal.showing) {
+			return;
+		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -728,6 +742,8 @@ public class UserInputLevel {
 			Level.activeTextBox.moveCaretRight();
 			return;
 		} else if (Level.journal.showing) {
+			return;
+		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
@@ -811,6 +827,8 @@ public class UserInputLevel {
 		// Game.level.notifications.clear();
 		if (Level.journal.showing) {
 			Game.level.openCloseJournal();
+		} else if (Level.gameOver.showing) {
+			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			Game.level.openCloseInventory();
 			return;
@@ -871,6 +889,8 @@ public class UserInputLevel {
 				Game.level.openCloseJournal();
 				return;
 			}
+		} else if (Level.gameOver.showing) {
+			return;
 		} else if (character == 'i' || character == 'I') {
 			if (Game.level.openInventories.size() == 0) {
 				Game.level.openCloseInventory();

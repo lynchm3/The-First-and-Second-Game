@@ -21,6 +21,7 @@ import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.faction.FactionList;
+import com.marklynch.level.constructs.gameover.GameOver;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.inventory.SquareInventory;
@@ -112,6 +113,7 @@ public class Level {
 	public static transient Journal journal = new Journal();
 	public static transient QuestList quests = new QuestList();
 	public static transient FactionList factions = new FactionList();
+	public static transient GameOver gameOver = new GameOver();
 	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
 
 	// public Vector<Actor> actors;
@@ -207,6 +209,7 @@ public class Level {
 		MapMarker.loadStaticImages();
 		Inventory.loadStaticImages();
 		Journal.loadStaticImages();
+		GameOver.loadStaticImages();
 
 		structures = new ArrayList<Structure>();
 
@@ -587,6 +590,16 @@ public class Level {
 			journal.close();
 		} else {
 			journal.open();
+		}
+		closeAllPopups();
+	}
+
+	public void openCloseGameOver() {
+
+		if (gameOver.showing) {
+			gameOver.close();
+		} else {
+			gameOver.open();
 		}
 		closeAllPopups();
 	}
@@ -1314,6 +1327,10 @@ public class Level {
 			journal.drawStaticUI();
 		}
 
+		if (gameOver.showing) {
+			gameOver.drawStaticUI();
+		}
+
 		for (Inventory inventory : openInventories) {
 			inventory.drawStaticUI();
 		}
@@ -1561,6 +1578,8 @@ public class Level {
 			return;
 		} else if (journal.showing) {
 			return;
+		} else if (gameOver.showing) {
+			return;
 		} else if (Game.level.openInventories.size() != 0) {
 			return;
 		} else if (Game.level.conversation != null) {
@@ -1649,6 +1668,13 @@ public class Level {
 
 			return null;
 
+		}
+
+		if (gameOver.showing) {
+			for (Button button : gameOver.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
 		}
 
 		for (Inventory inventory : openInventories) {
@@ -2091,6 +2117,8 @@ public class Level {
 			openInventories.get(0).resize1();
 		if (journal.showing)
 			journal.resize();
+		if (gameOver.showing)
+			gameOver.resize();
 
 		if (conversation != null)
 			conversation.resize();
