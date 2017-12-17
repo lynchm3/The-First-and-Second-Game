@@ -11,13 +11,12 @@ import mdesl.graphics.Texture;
 
 public class Wall extends GameObject {
 
+	// 3+ connections
 	public boolean fullWall;
 	public boolean fullRightWall;
 	public boolean fullLeftWall;
 	public boolean fullTopWall;
 	public boolean fullBottomWall;
-	public boolean horizontalWall;
-	public boolean verticalWall;
 	public boolean connectedTop;
 	public boolean connectedTopRight;
 	public boolean connectedRight;
@@ -35,6 +34,14 @@ public class Wall extends GameObject {
 	public boolean topRightInnerCorner;
 	public boolean bottomRightInnerCorner;
 	public boolean bottomLeftInnerCorner;
+
+	// 2 connections
+	public boolean horizontalWall;
+	public boolean verticalWall;
+	public boolean topLeftCorner;
+	public boolean topRightCorner;
+	public boolean bottomLeftCorner;
+	public boolean bottomRightCorner;
 
 	public static Texture textureFullWall;
 	public static Texture textureFullTopWall;
@@ -99,13 +106,13 @@ public class Wall extends GameObject {
 		textureHorizontalWall = getGlobalImage("wall_horizontal.png");
 		textureVerticalWall = getGlobalImage("wall_vertical.png");
 		textureTop = getGlobalImage("wall_top.png");
-		textureTopRight = getGlobalImage("wall_top_right.png");
+		textureTopRight = getGlobalImage("wall_top_right_corner.png");
 		textureRight = getGlobalImage("wall_right.png");
-		textureBottomRight = getGlobalImage("wall_bottom_right.png");
+		textureBottomRight = getGlobalImage("wall_bottom_right_corner.png");
 		textureBottom = getGlobalImage("wall_bottom.png");
-		textureBottomLeft = getGlobalImage("wall_bottom_left.png");
+		textureBottomLeft = getGlobalImage("wall_bottom_left_corner.png");
 		textureLeft = getGlobalImage("wall_left.png");
-		textureTopLeft = getGlobalImage("wall_top_left.png");
+		textureTopLeft = getGlobalImage("wall_top_left_corner.png");
 		textureCross = getGlobalImage("wall_cross.png");
 		textureTopLeftOuterCorner = getGlobalImage("wall_top_left_corner_outer.png");
 		textureTopRightOuterCorner = getGlobalImage("wall_top_right_corner_outer.png");
@@ -216,6 +223,22 @@ public class Wall extends GameObject {
 				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawY1, drawX2, drawY2);
 			}
 
+			else if (topLeftCorner) {
+				TextureUtils.drawTexture(textureTopLeft, alpha, drawX1, drawY1, drawX2, drawY2);
+			}
+
+			else if (topRightCorner) {
+				TextureUtils.drawTexture(textureTopRight, alpha, drawX1, drawY1, drawX2, drawY2);
+			}
+
+			else if (bottomLeftCorner) {
+				TextureUtils.drawTexture(textureBottomLeft, alpha, drawX1, drawY1, drawX2, drawY2);
+			}
+
+			else if (bottomRightCorner) {
+				TextureUtils.drawTexture(textureBottomRight, alpha, drawX1, drawY1, drawX2, drawY2);
+			}
+
 			// if (connectedTop)
 			// TextureUtils.drawTexture(textureTop, alpha, topDrawX1, topDrawX2,
 			// topDrawY1, topDrawY2);
@@ -259,11 +282,6 @@ public class Wall extends GameObject {
 			wall.drawY1 = (int) (wall.squareGameObjectIsOn.yInGridPixels + wall.drawOffsetY);
 			wall.drawY2 = (int) (wall.drawY1 + wall.height);
 		}
-
-		System.out.println("wall.drawX1 = " + wall.drawX1);
-		System.out.println("wall.drawX2 = " + wall.drawX2);
-		System.out.println("wall.drawY1 = " + wall.drawY1);
-		System.out.println("wall.drawY2 = " + wall.drawY2);
 		return wall;
 	}
 
@@ -327,6 +345,18 @@ public class Wall extends GameObject {
 			return;
 
 		if (verticalWall = connectedTop && connectedBottom)
+			return;
+
+		if (topLeftCorner = connectedRight && connectedBottom)
+			return;
+
+		if (topRightCorner = connectedLeft && connectedBottom)
+			return;
+
+		if (bottomLeftCorner = connectedRight && connectedTop)
+			return;
+
+		if (bottomRightCorner = connectedLeft && connectedTop)
 			return;
 
 	}
