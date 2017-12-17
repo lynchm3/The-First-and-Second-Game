@@ -44,9 +44,6 @@ public class GameOver implements Draggable, Scrollable {
 		buttonClose.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				// bit buggy when u come back to life :{ is there a dead flag or
-				// something? hmm...
-				/// see what happens in checkifdestroyed
 				Game.level.player.remainingHealth = Game.level.player.totalHealth;
 				Game.level.openCloseGameOver();
 			}

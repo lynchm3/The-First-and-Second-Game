@@ -1323,16 +1323,16 @@ public class Level {
 			notificationsHeight += notification.height + Notification.border;
 		}
 
+		for (Inventory inventory : openInventories) {
+			inventory.drawStaticUI();
+		}
+
 		if (journal.showing) {
 			journal.drawStaticUI();
 		}
 
 		if (gameOver.showing) {
 			gameOver.drawStaticUI();
-		}
-
-		for (Inventory inventory : openInventories) {
-			inventory.drawStaticUI();
 		}
 
 		for (PopupMenu popupTooltip : popupMenuHighlightObjects) {
@@ -1648,6 +1648,15 @@ public class Level {
 		if (fullScreenTextBox != null)
 			return null;
 
+		if (gameOver.showing) {
+			for (Button button : gameOver.buttons) {
+				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+					return button;
+			}
+
+			return null;
+		}
+
 		if (journal.showing) {
 			for (Button button : journal.buttons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
@@ -1668,13 +1677,6 @@ public class Level {
 
 			return null;
 
-		}
-
-		if (gameOver.showing) {
-			for (Button button : gameOver.buttons) {
-				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
-					return button;
-			}
 		}
 
 		for (Inventory inventory : openInventories) {
