@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObject.DestructionListener;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.TextUtils;
 
 import mdesl.graphics.Texture;
 
-public class Objective implements DestructionListener {
+public class Objective {// implements DestructionListener {
 
 	public GameObject gameObject;
 	public String text;
@@ -19,6 +18,7 @@ public class Objective implements DestructionListener {
 	public float width;
 	public ArrayList<Link> links;
 	public Texture texture;
+	public boolean objectiveDestroyed = false;
 
 	public Objective(String text, GameObject gameObject, Square square) {
 		super();
@@ -27,15 +27,15 @@ public class Objective implements DestructionListener {
 		this.square = square;
 		if (gameObject != null) {
 			this.texture = gameObject.imageTexture;
-			gameObject.addDestructionListener(this);
+			// gameObject.addDestructionListener(this);
 		}
 		width = TextUtils.getDimensions(Integer.MAX_VALUE, this)[0];
 		links = TextUtils.getLinks(true, this);
 	}
 
-	@Override
-	public void onDestroy() {
-		gameObject = null;
-	}
+	// @Override
+	// public void onDestroy() {
+	// objectiveDestroyed = true;
+	// }
 
 }

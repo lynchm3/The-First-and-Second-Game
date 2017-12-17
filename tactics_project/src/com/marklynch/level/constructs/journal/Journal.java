@@ -410,7 +410,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		for (Quest activeQuest : questsToTrack) {
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
-				if (currentObjective.gameObject != null && currentObjective.showMarker) {
+				if (currentObjective.gameObject != null && currentObjective.showMarker
+						&& !currentObjective.objectiveDestroyed) {
 					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
 						currentObjective.gameObject.squareGameObjectIsOn.drawObjective(currentObjective);
 					} else if (currentObjective.gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject
@@ -436,12 +437,16 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			int y2 = Integer.MAX_VALUE;
 
 			Square targetSquare = null;
-
 			for (Objective currentObjective : activeQuest.currentObjectives) {
+
+				// if (currentObjective.gameObject != null &&
+				// currentObjective.gameObject.remainingHealth == 0) {
+				// continue; // Dead
+				// }
 
 				if ((currentObjective.gameObject == null || currentObjective.gameObject.squareGameObjectIsOn == null)
 						&& currentObjective.square == null && currentObjective.showMarker == false) {
-					return;
+					continue;
 				}
 
 				x2 = Integer.MAX_VALUE;
