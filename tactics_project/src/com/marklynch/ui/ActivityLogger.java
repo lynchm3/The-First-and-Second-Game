@@ -4,16 +4,19 @@ import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class ActivityLogger implements Draggable, Scrollable {
 
 	public transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
 
 	public float totalHeight = 0;
-	public final static float width = 300;
+	public final static float width = 256;
 	public final static float negativeWidth = -width;
 	public final static float leftBorder = 20;
 	public final static float rightBorder = 20;
@@ -21,6 +24,9 @@ public class ActivityLogger implements Draggable, Scrollable {
 	public float x = 0;
 	public float textOffsetY = 0;
 	// public float
+
+	public static Texture fadeTop;
+	public static Texture fadeBottom;
 
 	public void drawStaticUI() {
 
@@ -48,6 +54,15 @@ public class ActivityLogger implements Draggable, Scrollable {
 				TextUtils.printTextWithImages(drawX, drawY, textWidth, true, log.links, log.contents);
 			}
 			heightSoFar += log.height;
+		}
+
+		if (textOffsetY < 0) {
+			TextureUtils.drawTexture(fadeTop, x, 0, x + width, 64);
+		}
+
+		float totalHeight = heightSoFar;
+		if (textOffsetY + totalHeight > Game.windowHeight) {
+			TextureUtils.drawTexture(fadeBottom, x, Game.windowHeight - 64, x + width, Game.windowHeight);
 		}
 
 	}
@@ -97,6 +112,12 @@ public class ActivityLogger implements Draggable, Scrollable {
 	@Override
 	public void scroll(float dragX, float dragY) {
 		drag(dragX, dragY);
+	}
+
+	public static void loadStaticImages() {
+		fadeTop = ResourceUtils.getGlobalImage("fade_top.png");
+		fadeBottom = ResourceUtils.getGlobalImage("fade_bottom.png");
+
 	}
 
 }

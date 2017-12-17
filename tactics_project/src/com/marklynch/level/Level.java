@@ -209,6 +209,7 @@ public class Level {
 		MapMarker.loadStaticImages();
 		Inventory.loadStaticImages();
 		Journal.loadStaticImages();
+		ActivityLogger.loadStaticImages();
 		GameOver.loadStaticImages();
 
 		structures = new ArrayList<Structure>();
