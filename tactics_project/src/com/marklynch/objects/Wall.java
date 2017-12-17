@@ -253,12 +253,17 @@ public class Wall extends GameObject {
 	public Wall makeCopy(Square square, Actor owner) {
 		Wall wall = new Wall();
 		super.setAttributesForCopy(wall, square, owner);
-		if (squareGameObjectIsOn != null) {
+		if (wall.squareGameObjectIsOn != null) {
 			wall.drawX1 = (int) (wall.squareGameObjectIsOn.xInGridPixels + wall.drawOffsetX);
 			wall.drawX2 = (int) (wall.drawX1 + wall.width);
 			wall.drawY1 = (int) (wall.squareGameObjectIsOn.yInGridPixels + wall.drawOffsetY);
 			wall.drawY2 = (int) (wall.drawY1 + wall.height);
 		}
+
+		System.out.println("wall.drawX1 = " + wall.drawX1);
+		System.out.println("wall.drawX2 = " + wall.drawX2);
+		System.out.println("wall.drawY1 = " + wall.drawY1);
+		System.out.println("wall.drawY2 = " + wall.drawY2);
 		return wall;
 	}
 
