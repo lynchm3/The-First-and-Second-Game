@@ -7,7 +7,6 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
@@ -48,38 +47,28 @@ public class ActionTeleport extends Action {
 			new ActionStopPeeking(performer).perform();
 		}
 
-		Door door = (Door) target.inventory.getGameObjectOfClass(Door.class);
-		if (door != null && door.isOpen() == false) {
-			new ActionOpen(teleportee, door).perform();
-		}
+		// Door door = (Door) target.inventory.getGameObjectOfClass(Door.class);
+		// if (door != null && door.isOpen() == false) {
+		// new ActionOpen(teleportee, door).perform();
+		// }
 
-		Square oldSquare = teleportee.squareGameObjectIsOn;
-		GameObject gameObjectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
+		// Actor actorInTheWay = null;
+		//
+		// if (gameObjectInTheWay instanceof Actor)
+		// actorInTheWay = (Actor)
+		// target.inventory.getGameObjectThatCantShareSquare();
 
-		Actor actorInTheWay = null;
+		// if (actorInTheWay == Game.level.player) {
+		// return;
+		// }
 
-		if (gameObjectInTheWay instanceof Actor)
-			actorInTheWay = (Actor) target.inventory.getGameObjectThatCantShareSquare();
+		// if (actorInTheWay == null) {
+		teleport(teleportee, target);
 
-		if (actorInTheWay == Game.level.player) {
-			return;
-		}
-
-		if (actorInTheWay == null) {
-			move(teleportee, target);
-
-		} else {
-			move(actorInTheWay, oldSquare);
-			move(teleportee, target);
-		}
-
-		if (Game.level.shouldLog(performer, teleportee))
-			if (performer == teleportee)
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
-			else
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " teleported ", teleportee, " to ", target }));
-
+		// } else {
+		// move(actorInTheWay, oldSquare);
+		// move(teleportee, target);
+		// }
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
@@ -93,23 +82,58 @@ public class ActionTeleport extends Action {
 
 	}
 
-	private void move(GameObject actor, Square square) {
-		actor.squareGameObjectIsOn.inventory.remove(actor);
-		actor.squareGameObjectIsOn = square;
-		square.inventory.add(actor);
+	private void teleport(GameObject gameObject, Square square) {
 
-		// Actor.highlightSelectedCharactersSquares();
+		GameObject gameObjectInTheWay = null;
+		if (!gameObject.canShareSquare)
+			gameObjectInTheWay = square.inventory.getGameObjectThatCantShareSquare();
+
+		gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+		gameObject.squareGameObjectIsOn = square;
+		square.inventory.add(gameObject);
+
+		if (Game.level.shouldLog(performer, teleportee)) {
+			if (performer == teleportee)
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " teleported to ", target }));
+			else
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " teleported ", teleportee, " to ", target }));
+		}
+
+		// Teleported big object on to big object... someone has to die.
+		if (gameObjectInTheWay != null) {
+			float damage = Math.min(gameObject.remainingHealth, gameObjectInTheWay.remainingHealth);
+			if (Game.level.shouldLog(gameObject, gameObjectInTheWay))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObject, " teleported in to ",
+						gameObjectInTheWay, ", both took " + damage + " damage" }));
+
+			gameObject.remainingHealth -= damage;
+			gameObjectInTheWay.remainingHealth -= damage;
+
+			if (performer == teleportee) {
+				gameObjectInTheWay.attackedBy(gameObject, this);
+				gameObject.attackedBy(gameObjectInTheWay, this);
+			} else {
+				gameObjectInTheWay.attackedBy(performer, this);
+				gameObject.attackedBy(performer, this);
+			}
+
+		}
 	}
 
 	@Override
 	public boolean check() {
 
-		if (target == teleportee.squareGameObjectIsOn || !target.inventory.isPassable(teleportee))
+		if (target == teleportee.squareGameObjectIsOn)
 			return false;
 
-		GameObject objectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
-		if (objectInTheWay != null)
-			return false;
+		// if (target.inventory.isPassable(teleportee))
+		// return false;
+		//
+		// GameObject objectInTheWay =
+		// target.inventory.getGameObjectThatCantShareSquare();
+		// if (objectInTheWay != null)
+		// return false;
 
 		return true;
 	}
