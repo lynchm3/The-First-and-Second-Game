@@ -146,6 +146,8 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 	public boolean starred = false;
 	public boolean flash = false;
 
+	public ArrayList<DestructionListener> destructionListeners = new ArrayList<DestructionListener>();
+
 	public GameObject() {
 		super();
 	}
@@ -367,6 +369,10 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 				if (actor.legArmor == this)
 					actor.legArmor = null;
 
+			}
+
+			for (DestructionListener destructionListener : destructionListeners) {
+				destructionListener.onDestroy();
 			}
 
 			new ActionDie(this, squareGameObjectIsOn).perform();
@@ -1367,5 +1373,14 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 		gameObject.templateId = templateId;
 
 		gameObject.init();
+	}
+
+	public static interface DestructionListener {
+		public void onDestroy();
+	}
+
+	public void addDestructionListener(DestructionListener destructionListener) {
+		if (!destructionListeners.contains(destructionListener))
+			destructionListeners.add(destructionListener);
 	}
 }
