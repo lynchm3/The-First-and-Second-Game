@@ -40,6 +40,7 @@ import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionTeleport;
+import com.marklynch.objects.actions.ActionTeleportSwap;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionableInWorld;
@@ -701,6 +702,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (this != Game.level.player.squareGameObjectIsOn) {
 			actions.add(new ActionMove(performer, this, true));
 			actions.add(new ActionTeleport(performer, performer, this, true));
+			actions.add(new ActionTeleportSwap(performer, performer, this, true));
 		} else {
 			actions.add(new ActionWait(performer, performer.squareGameObjectIsOn));
 		}
