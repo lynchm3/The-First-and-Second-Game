@@ -380,19 +380,27 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		float squarePositionX = xInGridPixels;
 		float squarePositionY = yInGridPixels;
 
+		// System.out.println("VISIBLE");
 		TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 		// GL11.glPopMatrix();
 	}
 
-	public void drawObjective(Objective objective) {
+	public void drawQuestsMarkersForVisibleOnScreenObjectives(Objective objective) {
 		float squarePositionX = xInGridPixels;
 		float squarePositionY = yInGridPixels;
 
-		if (this.visibleToPlayer) {
+		if (this.visibleToPlayer && onScreen()) {
 			TextureUtils.drawTexture(Game.level.gameCursor.cursor, squarePositionX, squarePositionY,
 					squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
-		} else if (onScreen()) {
+		}
+	}
+
+	public void drawQuestsMarkersForNonVisibleOnScreenObjectives(Objective objective) {
+		float squarePositionX = xInGridPixels;
+		float squarePositionY = yInGridPixels;
+
+		if (!this.visibleToPlayer && onScreen()) {
 
 			float drawPositionX = (Game.halfWindowWidth) + (Game.zoom
 					* (squarePositionX + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));

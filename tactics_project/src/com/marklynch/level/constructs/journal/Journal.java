@@ -405,7 +405,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		}
 	}
 
-	public static void drawQuestsMarkersForOnScreenObjectives() {
+	public static void drawQuestsMarkersForVisibleOnScreenObjectives() {
 
 		for (Quest activeQuest : questsToTrack) {
 			for (Objective currentObjective : activeQuest.currentObjectives) {
@@ -413,15 +413,40 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				if (currentObjective.gameObject != null && currentObjective.showMarker
 						&& !currentObjective.objectiveDestroyed) {
 					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
-						currentObjective.gameObject.squareGameObjectIsOn.drawObjective(currentObjective);
+						currentObjective.gameObject.squareGameObjectIsOn
+								.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
 					} else if (currentObjective.gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject
 							&& ((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn != null) {
 						((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn
-								.drawObjective(currentObjective);
+								.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
 
 					}
 				} else if (currentObjective.square != null) {
-					currentObjective.square.drawObjective(currentObjective);
+					currentObjective.square.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
+				}
+
+			}
+		}
+	}
+
+	public static void drawQuestsMarkersForNonVisibleOnScreenObjectives() {
+
+		for (Quest activeQuest : questsToTrack) {
+			for (Objective currentObjective : activeQuest.currentObjectives) {
+
+				if (currentObjective.gameObject != null && currentObjective.showMarker
+						&& !currentObjective.objectiveDestroyed) {
+					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
+						currentObjective.gameObject.squareGameObjectIsOn
+								.drawQuestsMarkersForNonVisibleOnScreenObjectives(currentObjective);
+					} else if (currentObjective.gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject
+							&& ((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn != null) {
+						((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn
+								.drawQuestsMarkersForNonVisibleOnScreenObjectives(currentObjective);
+
+					}
+				} else if (currentObjective.square != null) {
+					currentObjective.square.drawQuestsMarkersForNonVisibleOnScreenObjectives(currentObjective);
 				}
 
 			}

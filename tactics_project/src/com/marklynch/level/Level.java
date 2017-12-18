@@ -952,6 +952,9 @@ public class Level {
 
 			Game.activeBatch.flush();
 		}
+
+		Journal.drawQuestsMarkersForVisibleOnScreenObjectives();
+
 		// for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 		// for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 		// // is it better to bind once and draw all the same ones?
@@ -1224,7 +1227,7 @@ public class Level {
 		// Game.activeBatch.updateUniforms();
 
 		// Quest lines
-		Journal.drawQuestsMarkersForOnScreenObjectives();
+		Journal.drawQuestsMarkersForNonVisibleOnScreenObjectives();
 		Journal.drawQuestMarkersForOffScreenObjectives();
 
 		Game.activeBatch.flush();
