@@ -133,11 +133,6 @@ public class ActionDie extends Action {
 	public void createCorpse() {
 
 		if (performer instanceof Actor) {
-			// add a carcass
-
-			System.out.println("performer = " + performer.name);
-			System.out.println("performer.templateId = " + performer.templateId);
-			System.out.println("CRATE.templateId = " + Templates.CRATE.templateId);
 
 			GameObject body = null;
 			if (performer instanceof RockGolem) {

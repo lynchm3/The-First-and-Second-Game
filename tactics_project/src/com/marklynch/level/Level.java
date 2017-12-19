@@ -132,6 +132,7 @@ public class Level {
 	public ArrayList<PinWindow> pinWindows = new ArrayList<PinWindow>();
 
 	public Conversation conversation;
+	public transient LevelButton clearNotificationsButton;
 	public transient LevelButton endTurnButton;
 	public transient LevelButton centerButton;
 	public transient LevelButton mapButton;
@@ -218,6 +219,15 @@ public class Level {
 		inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 
 		initGrid(this.squares, this.width, this.height);
+
+		clearNotificationsButton = new LevelButton(0, 0, 100, 20, "end_turn_button.png", "end_turn_button.png", "CLEAR",
+				true, true, Color.BLACK, Color.WHITE, "Clear All Notifications");
+		clearNotificationsButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				Game.level.notifications.clear();
+			}
+		});
 
 		Button doNothing2Button = new LevelButton(110f, 40f, 100f, 30f, "end_turn_button.png", "end_turn_button.png",
 				"nothing", false, false, Color.BLACK, Color.WHITE, "Nothing to see here");
@@ -1327,6 +1337,12 @@ public class Level {
 			notificationsHeight += notification.height + Notification.border;
 		}
 
+		if (notifications.size() > 0) {
+			clearNotificationsButton.x = Notification.x;
+			clearNotificationsButton.y = notificationsHeight;
+			clearNotificationsButton.draw();
+		}
+
 		for (Inventory inventory : openInventories) {
 			inventory.drawStaticUI();
 		}
@@ -1793,6 +1809,10 @@ public class Level {
 			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}
+
+		if (notifications.size() > 0
+				&& clearNotificationsButton.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+			return clearNotificationsButton;
 
 		if (activeActor != null && activeActor.faction == factions.player)
 			return this.activeActor.getButtonFromMousePosition(alteredMouseX, alteredMouseY);

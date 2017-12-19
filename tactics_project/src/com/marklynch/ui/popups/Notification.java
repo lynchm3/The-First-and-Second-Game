@@ -33,7 +33,7 @@ public class Notification {
 	public Notification(Object[] objects) {
 		this.objects = objects;
 		closeButton = new LevelButton(0, 0, closeButtonWidth, closeButtonHeight, "end_turn_button.png",
-				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE, "Close window");
+				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE, "Close notification");
 		closeButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
