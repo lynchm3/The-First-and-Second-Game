@@ -55,12 +55,31 @@ public class TemplatesCorpses {
 		Templates.ASH.soundWhenHit = 1f;
 		Templates.ASH.soundWhenHitting = 1f;
 		Templates.ASH.soundDampening = 1f;
-		Templates.ASH.stackable = false;
+		Templates.ASH.stackable = true;
 		Templates.ASH.weight = 2f;
 		Templates.ASH.value = 3;
 		Templates.ASH.anchorX = 0;
 		Templates.ASH.anchorY = 0;
 		Templates.ASH.templateId = GameObject.generateNewTemplateId();
+
+		Templates.WOOD_CHIPS = new GameObject();
+		Templates.WOOD_CHIPS.name = "Whood Chips";
+		Templates.WOOD_CHIPS.imageTexturePath = "wood_chips.png";
+		Templates.WOOD_CHIPS.totalHealth = Templates.WOOD_CHIPS.remainingHealth = 16;
+		Templates.WOOD_CHIPS.widthRatio = 0.5f;
+		Templates.WOOD_CHIPS.heightRatio = 0.5f;
+		Templates.WOOD_CHIPS.drawOffsetX = 0f;
+		Templates.WOOD_CHIPS.drawOffsetY = 0f;
+		Templates.WOOD_CHIPS.soundWhenHit = 1f;
+		Templates.WOOD_CHIPS.soundWhenHitting = 1f;
+		Templates.WOOD_CHIPS.fireResistance = -100f;
+		Templates.WOOD_CHIPS.soundDampening = 1f;
+		Templates.WOOD_CHIPS.stackable = true;
+		Templates.WOOD_CHIPS.weight = 12f;
+		Templates.WOOD_CHIPS.value = 6;
+		Templates.WOOD_CHIPS.anchorX = 0;
+		Templates.WOOD_CHIPS.anchorY = 0;
+		Templates.WOOD_CHIPS.templateId = GameObject.generateNewTemplateId();
 
 	}
 

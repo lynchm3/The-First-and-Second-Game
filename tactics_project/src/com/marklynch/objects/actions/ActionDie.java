@@ -135,6 +135,10 @@ public class ActionDie extends Action {
 		if (performer instanceof Actor) {
 			// add a carcass
 
+			System.out.println("performer = " + performer.name);
+			System.out.println("performer.templateId = " + performer.templateId);
+			System.out.println("CRATE.templateId = " + Templates.CRATE.templateId);
+
 			GameObject body = null;
 			if (performer instanceof RockGolem) {
 				Templates.ORE.makeCopy(performer.squareGameObjectIsOn, null);
@@ -178,6 +182,15 @@ public class ActionDie extends Action {
 				// Death by fire
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
 						Templates.ASH.makeCopy(null, null), performer.squareGameObjectIsOn));
+				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
+					new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, gameObject).perform();
+				}
+			} else if (performer.templateId == Templates.CRATE.templateId) {
+				// Death by fire
+				Templates.WOOD_CHIPS.makeCopy(performer.squareGameObjectIsOn, null);
+				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
+					new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, gameObject).perform();
+				}
 			} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChop) {
 
 				if (!performer.name.contains("Big")) {
