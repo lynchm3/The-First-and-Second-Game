@@ -16,7 +16,7 @@ public class ActivityLogger implements Draggable, Scrollable {
 	public transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
 
 	public float totalHeight = 0;
-	public final static float width = 256;
+	public final static float width = 300;
 	public final static float negativeWidth = -width;
 	public final static float leftBorder = 20;
 	public final static float rightBorder = 20;

@@ -444,9 +444,9 @@ public class UserInputLevel {
 		}
 
 		if (!inventoriesOpen) {
-			for (int i = Game.level.popupPinneds.size() - 1; i >= 0; i--) {
-				if (Game.level.popupPinneds.get(i).isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
-					draggableMouseIsOver = Game.level.popupPinneds.get(i);
+			for (int i = Game.level.pinWindows.size() - 1; i >= 0; i--) {
+				if (Game.level.pinWindows.get(i).isMouseOver(Mouse.getX(), (int) Game.windowHeight - Mouse.getY())) {
+					draggableMouseIsOver = Game.level.pinWindows.get(i);
 					break;
 				}
 			}

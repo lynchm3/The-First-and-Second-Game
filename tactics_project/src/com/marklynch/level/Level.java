@@ -129,7 +129,7 @@ public class Level {
 	public static FullScreenTextBox fullScreenTextBox = null;
 	public static TextBox activeTextBox = null;
 	public ArrayList<Notification> notifications = new ArrayList<Notification>();
-	public ArrayList<PinWindow> popupPinneds = new ArrayList<PinWindow>();
+	public ArrayList<PinWindow> pinWindows = new ArrayList<PinWindow>();
 
 	public Conversation conversation;
 	public transient LevelButton endTurnButton;
@@ -867,7 +867,7 @@ public class Level {
 		// Journal.drawQuestMarkersForOffScreenObjectives();
 
 		// Draw lines for the popup windows
-		for (PinWindow window : this.popupPinneds) {
+		for (PinWindow window : this.pinWindows) {
 			window.drawLine();
 		}
 		Game.activeBatch.flush();
@@ -1311,7 +1311,7 @@ public class Level {
 		// script
 		script.draw();
 
-		for (PinWindow popupPinned : popupPinneds) {
+		for (PinWindow popupPinned : pinWindows) {
 			popupPinned.drawStaticUI();
 		}
 
@@ -1719,13 +1719,13 @@ public class Level {
 			}
 		}
 
-		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
-			if (popupPinneds.get(i).mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
-				return popupPinneds.get(i).closeButton;
-			if (popupPinneds.get(i).mouseOverMinimiseButton(mouseX, Game.windowHeight - mouseY))
-				return popupPinneds.get(i).minimiseButton;
-			if (popupPinneds.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
-				return popupPinneds.get(i).titleBarButton;
+		for (int i = pinWindows.size() - 1; i >= 0; i--) {
+			if (pinWindows.get(i).mouseOverCloseButton(mouseX, Game.windowHeight - mouseY))
+				return pinWindows.get(i).closeButton;
+			if (pinWindows.get(i).mouseOverMinimiseButton(mouseX, Game.windowHeight - mouseY))
+				return pinWindows.get(i).minimiseButton;
+			if (pinWindows.get(i).mouseOverInvisibleMinimiseButton(mouseX, Game.windowHeight - mouseY))
+				return pinWindows.get(i).titleBarButton;
 		}
 
 		if (conversation != null) {
@@ -1801,9 +1801,9 @@ public class Level {
 	}
 
 	public PinWindow getWindowFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
-		for (int i = popupPinneds.size() - 1; i >= 0; i--) {
-			if (popupPinneds.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
-				return popupPinneds.get(i);
+		for (int i = pinWindows.size() - 1; i >= 0; i--) {
+			if (pinWindows.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
+				return pinWindows.get(i);
 		}
 		return null;
 	}

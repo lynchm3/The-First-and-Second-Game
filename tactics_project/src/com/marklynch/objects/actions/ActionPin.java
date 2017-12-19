@@ -25,7 +25,7 @@ public class ActionPin extends Action {
 	@Override
 	public void perform() {
 
-		Game.level.popupPinneds.add(new PinWindow(target));
+		Game.level.pinWindows.add(new PinWindow(target));
 
 		performer.actionsPerformedThisTurn.add(this);
 	}

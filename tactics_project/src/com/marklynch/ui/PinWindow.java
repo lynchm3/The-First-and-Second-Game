@@ -88,7 +88,7 @@ public class PinWindow implements Draggable {
 		closeButton.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-				Game.level.popupPinneds.remove(PinWindow.this);
+				Game.level.pinWindows.remove(PinWindow.this);
 			}
 		});
 
@@ -484,7 +484,7 @@ public class PinWindow implements Draggable {
 	}
 
 	public void bringToFront() {
-		Game.level.popupPinneds.remove(this);
-		Game.level.popupPinneds.add(this);
+		Game.level.pinWindows.remove(this);
+		Game.level.pinWindows.add(this);
 	}
 }
