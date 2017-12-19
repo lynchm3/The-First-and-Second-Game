@@ -16,6 +16,7 @@ import com.marklynch.ui.popups.Notification;
 public class Quest {
 
 	public String name;
+	public ArrayList<Objective> allObjectives = new ArrayList<Objective>();
 	public ArrayList<Objective> currentObjectives = new ArrayList<Objective>();
 	public ArrayList<JournalLog> logList = new ArrayList<JournalLog>();
 	public ArrayList<ConversationPart> conversationLog = new ArrayList<ConversationPart>();
@@ -35,7 +36,15 @@ public class Quest {
 	}
 
 	public void update() {
-
+		for (Objective objective : allObjectives) {
+			if (objective.gameObject != null) {
+				if (objective.gameObject.remainingHealth <= 0) {
+					if (objective.gameObject.squareGameObjectIsOn.visibleToPlayer) {
+						objective.objectiveDestroyedAndWitnessed = true;
+					}
+				}
+			}
+		}
 	}
 
 	public void addObjective(Objective objective) {
@@ -112,7 +121,7 @@ public class Quest {
 	}
 
 	boolean isFirstQuest() {
-		for (Quest quest : Level.quests) {
+		for (Quest quest : Level.fullQuestList) {
 			if (quest.started)
 				return false;
 		}

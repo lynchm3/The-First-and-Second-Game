@@ -233,7 +233,7 @@ public class Game {
 		else {
 			level = new Level(10, 10);
 
-			level.quests.makeQuests();
+			level.fullQuestList.makeQuests();
 
 			for (int i = 0; i < Game.level.squares.length; i++) {
 				for (int j = 0; j < Game.level.squares[0].length; j++) {

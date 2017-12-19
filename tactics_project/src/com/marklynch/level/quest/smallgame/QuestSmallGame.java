@@ -348,9 +348,13 @@ public class QuestSmallGame extends Quest {
 		AreaTownForest.createForest();
 
 		objectiveWolves = new Objective("The Wolves", superWolf, null);
+		allObjectives.add(objectiveWolves);
 		objectiveWeaponsBehindLodge = new Objective("Hunting Weapons", weaponsBehindLodge.get(0), null);
+		allObjectives.add(objectiveWeaponsBehindLodge);
 		objectiveHunters = new Objective("The Hunters", hunterBrent, null);
+		allObjectives.add(objectiveHunters);
 		objectiveEnvironmentalist = new Objective("Environmentalist", environmentalistBill, null);
+		allObjectives.add(objectiveEnvironmentalist);
 
 		ConversationsSmallGame.quest = this;
 		ConversationsSmallGame.createConversations();
@@ -394,6 +398,8 @@ public class QuestSmallGame extends Quest {
 	public void update() {
 		if (resolved)
 			return;
+
+		super.update();
 
 		// See hunters for first time
 		if (!haveJournalLog(journalLogSeenHunters)) {

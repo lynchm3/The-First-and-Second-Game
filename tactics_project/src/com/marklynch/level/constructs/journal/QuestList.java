@@ -31,13 +31,19 @@ public class QuestList extends ArrayList<Quest> {
 		add(questSmallGame);
 
 		questThePigs = new QuestThePigs();
-		Level.quests.add(questThePigs);
+		Level.fullQuestList.add(questThePigs);
 
 		questBetweenTheWalls = new QuestBetweenTheWalls();
-		Level.quests.add(questBetweenTheWalls);
+		Level.fullQuestList.add(questBetweenTheWalls);
 
 		questTheSecretRoom = new QuestTheSecretRoom();
-		Level.quests.add(questTheSecretRoom);
+		Level.fullQuestList.add(questTheSecretRoom);
 	}
+
+	// public void update() {
+	// for (Quest quest : this) {
+	//
+	// }
+	// }
 
 }

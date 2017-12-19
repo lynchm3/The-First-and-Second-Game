@@ -223,12 +223,12 @@ public class ConversationsSmallGame {
 				// Set enviromentalist to come watch
 				// Hunters on the way
 				quest.addObjective(quest.objectiveWolves);
-				if (Game.level.quests.questCaveOfTheBlind.started == false) {
-					Game.level.quests.questCaveOfTheBlind
-							.addObjective(Game.level.quests.questCaveOfTheBlind.objectiveCave);
-					Game.level.quests.questCaveOfTheBlind.addObjective(quest.objectiveHunters);
-					Game.level.quests.questCaveOfTheBlind
-							.addJournalLog(Game.level.quests.questCaveOfTheBlind.journalLogHeardFromHunters);
+				if (Game.level.fullQuestList.questCaveOfTheBlind.started == false) {
+					Game.level.fullQuestList.questCaveOfTheBlind
+							.addObjective(Game.level.fullQuestList.questCaveOfTheBlind.objectiveCave);
+					Game.level.fullQuestList.questCaveOfTheBlind.addObjective(quest.objectiveHunters);
+					Game.level.fullQuestList.questCaveOfTheBlind
+							.addJournalLog(Game.level.fullQuestList.questCaveOfTheBlind.journalLogHeardFromHunters);
 				}
 				quest.addJournalLog(quest.journalLogSetOffWithHunters);
 			}

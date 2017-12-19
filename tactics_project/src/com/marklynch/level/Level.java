@@ -111,7 +111,7 @@ public class Level {
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 	public static transient Journal journal = new Journal();
-	public static transient QuestList quests = new QuestList();
+	public static transient QuestList fullQuestList = new QuestList();
 	public static transient FactionList factions = new FactionList();
 	public static transient GameOver gameOver = new GameOver();
 	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
@@ -1891,7 +1891,7 @@ public class Level {
 
 			// notifications.clear();
 
-			for (Quest quest : quests)
+			for (Quest quest : fullQuestList)
 				quest.update();
 
 		}

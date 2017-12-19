@@ -133,4 +133,13 @@ public class QuestTheSecretRoom extends Quest {
 
 	}
 
+	@Override
+	public void update() {
+		if (resolved)
+			return;
+
+		super.update();
+
+	}
+
 }

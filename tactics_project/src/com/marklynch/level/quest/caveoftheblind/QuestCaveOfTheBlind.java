@@ -164,11 +164,15 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Objectives
 		objectiveCave = new Objective("Cave", null, null);
+		allObjectives.add(objectiveCave);
 	}
 
 	@Override
 	public void update() {
+		if (resolved)
+			return;
 
+		super.update();
 	}
 
 	@Override

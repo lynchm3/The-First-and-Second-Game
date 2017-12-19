@@ -177,7 +177,7 @@ public class Editor {
 
 		generateTestObjects();
 
-		Game.level.quests.makeQuests();
+		Game.level.fullQuestList.makeQuests();
 
 		// TABS
 		String tabText = "LEVEL";

@@ -18,7 +18,8 @@ public class Objective {// implements DestructionListener {
 	public float width;
 	public ArrayList<Link> links;
 	public Texture texture;
-	public boolean objectiveDestroyed = false;
+	// public boolean objectiveDestroyed = false;
+	public boolean objectiveDestroyedAndWitnessed = false;
 
 	public Objective(String text, GameObject gameObject, Square square) {
 		super();

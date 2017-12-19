@@ -150,7 +150,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		// Sort quests by active, keep selectedQuest at top
 		// And also sort by completed...
 
-		Level.quests.sort(this);
+		Level.fullQuestList.sort(this);
 		resize();
 		showing = true;
 
@@ -168,7 +168,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		boolean activeAdded = false;
 		boolean resolvedAdded = false;
 
-		for (final Quest quest : Level.quests) {
+		for (final Quest quest : Level.fullQuestList) {
 			if (quest.started) {
 
 				if (!activeAdded && !quest.resolved) {
@@ -330,7 +330,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		int questsDrawnInList = 0;
 		boolean activeAdded = false;
 		boolean resolvedAdded = false;
-		for (final Quest quest : Level.quests) {
+		for (final Quest quest : Level.fullQuestList) {
 			if (quest.started) {
 
 				if (!activeAdded && !quest.resolved) {
@@ -382,6 +382,11 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(objective.text) - 202,
 						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, objective.links, objective);
 
+				if (objective.objectiveDestroyedAndWitnessed) {
+					QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - Game.font.getWidth(objective.text) - 202,
+							30 + 20 * linesPrinted, Game.windowWidth - 202, 32 + 20 * linesPrinted);
+				}
+
 				objectiveLinks.add(objective.links.get(0));
 
 				QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - 200, 20 + 20 * linesPrinted, Game.windowWidth - 180,
@@ -410,8 +415,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		for (Quest activeQuest : questsToTrack) {
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
-				if (currentObjective.gameObject != null && currentObjective.showMarker
-						&& !currentObjective.objectiveDestroyed) {
+				if (currentObjective.gameObject != null && currentObjective.showMarker) {
 					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
 						currentObjective.gameObject.squareGameObjectIsOn
 								.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
@@ -434,8 +438,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		for (Quest activeQuest : questsToTrack) {
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
-				if (currentObjective.gameObject != null && currentObjective.showMarker
-						&& !currentObjective.objectiveDestroyed) {
+				if (currentObjective.gameObject != null && currentObjective.showMarker) {
 					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
 						currentObjective.gameObject.squareGameObjectIsOn
 								.drawQuestsMarkersForNonVisibleOnScreenObjectives(currentObjective);
