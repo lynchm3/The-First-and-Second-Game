@@ -9,6 +9,7 @@ import com.marklynch.ui.PinWindow;
 public class ActionPin extends Action {
 
 	public static final String ACTION_NAME = "Pin";
+	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (duplicate)";
 
 	public Actor performer;
 	public GameObject target;
@@ -18,12 +19,19 @@ public class ActionPin extends Action {
 		super(ACTION_NAME, "action_search.png");
 		this.performer = reader;
 		this.target = target;
+		if (!check()) {
+			enabled = false;
+			actionName = ACTION_NAME_DISABLED;
+		}
 		legal = checkLegality();
 		sound = createSound();
 	}
 
 	@Override
 	public void perform() {
+
+		if (!enabled)
+			return;
 
 		Game.level.pinWindows.add(new PinWindow(target));
 
@@ -32,8 +40,13 @@ public class ActionPin extends Action {
 
 	@Override
 	public boolean check() {
-		// TODO Auto-generated method stub
+		for (PinWindow pinWindow : Game.level.pinWindows) {
+			if (pinWindow.gameObject == target) {
+				return false;
+			}
+		}
 		return true;
+
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionPin;
-import com.marklynch.ui.PinWindow;
 
 import mdesl.graphics.Color;
 
@@ -28,11 +27,7 @@ public class Link extends LevelButton {
 		@Override
 		public void click() {
 			if (object instanceof GameObject) {
-				for (PinWindow pinWindow : Game.level.pinWindows) {
-					if (pinWindow.gameObject == object) {
-						return;
-					}
-				}
+
 				new ActionPin(Game.level.player, (GameObject) object).perform();
 			} else if (object instanceof Quest) {
 				// open quest log on that thing
