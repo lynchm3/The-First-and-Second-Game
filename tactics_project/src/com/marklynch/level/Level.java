@@ -1801,6 +1801,10 @@ public class Level {
 	}
 
 	public PinWindow getWindowFromMousePosition(float mouseX, float mouseY, float alteredMouseX, float alteredMouseY) {
+
+		if (openInventories.size() != 0 || journal.showing || gameOver.showing)
+			return null;
+
 		for (int i = pinWindows.size() - 1; i >= 0; i--) {
 			if (pinWindows.get(i).isMouseOver((int) mouseX, (int) (Game.windowHeight - mouseY)))
 				return pinWindows.get(i);

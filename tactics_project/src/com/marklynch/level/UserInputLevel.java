@@ -27,7 +27,6 @@ import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.popups.PopupMenu;
-import com.marklynch.ui.popups.PopupMenuButton;
 import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
 
@@ -258,12 +257,12 @@ public class UserInputLevel {
 		// Getting button that the mouse is over, if any
 		Game.oldButtonHoveringOver = Game.buttonHoveringOver;
 		Game.buttonHoveringOver = null;
-		Game.windowHoveringOver = null;
+		Game.pinWindowHoveringOver = null;
 		Game.textBoxHoveringOver = null;
 		if (draggingMap == false) {
 			Game.buttonHoveringOver = Game.level.getButtonFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
-			Game.windowHoveringOver = Game.level.getWindowFromMousePosition(Mouse.getX(), Mouse.getY(),
+			Game.pinWindowHoveringOver = Game.level.getWindowFromMousePosition(Mouse.getX(), Mouse.getY(),
 					mouseXTransformed, mouseYTransformed);
 		}
 
@@ -308,9 +307,6 @@ public class UserInputLevel {
 			}
 		}
 
-		boolean hoveringOverPopup = Game.buttonHoveringOver != null
-				&& Game.buttonHoveringOver instanceof PopupMenuButton;
-
 		// Path highlights
 		// if (scriptInterceptsClick == false && Game.buttonHoveringOver == null
 		// && Game.level.activeActor != null
@@ -330,8 +326,8 @@ public class UserInputLevel {
 			// Left Click
 			// Game.level.popupMenuObjects.clear();
 			// Game.level.popupMenuActions.clear();
-			if (Game.windowHoveringOver != null)
-				Game.windowHoveringOver.bringToFront();
+			if (Game.pinWindowHoveringOver != null)
+				Game.pinWindowHoveringOver.bringToFront();
 
 			if (scriptInterceptsClick) {
 				// Continue script
@@ -347,7 +343,7 @@ public class UserInputLevel {
 				Game.textBoxHoveringOver.click(Mouse.getX(), (int) (Game.windowHeight - Mouse.getY()));
 			} else if (Game.level.fullScreenTextBox != null) {
 
-			} else if (Game.windowHoveringOver != null) {
+			} else if (Game.pinWindowHoveringOver != null) {
 
 				// } else if (Game.squareMouseIsOver != null &&
 				// Player.playerTargetSquare != null) {
@@ -366,15 +362,15 @@ public class UserInputLevel {
 		if (mouseButtonStateRight == true && !Mouse.isButtonDown(1) && draggingMap == false) {
 
 			// Right Click
-			if (Game.windowHoveringOver != null)
-				Game.windowHoveringOver.bringToFront();
+			if (Game.pinWindowHoveringOver != null)
+				Game.pinWindowHoveringOver.bringToFront();
 
 			if (Level.journal.showing) {
 			} else if (Game.level.conversation != null && Game.level.openInventories.size() == 0) {
 
 			} else if (Game.level.fullScreenTextBox != null) {
 
-			} else if (Game.windowHoveringOver != null) {
+			} else if (Game.pinWindowHoveringOver != null) {
 
 			} else if (Game.squareMouseIsOver != null && Player.playerTargetSquare != null) {
 				Game.level.pausePlayer();

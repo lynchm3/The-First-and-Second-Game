@@ -170,7 +170,7 @@ public class Game {
 	public static Button oldButtonHoveringOver = null;
 	public static Button buttonHoveringOver = null;
 	public static InventorySquare inventorySquareMouseIsOver = null;
-	public static PinWindow windowHoveringOver;
+	public static PinWindow pinWindowHoveringOver;
 	public static FullScreenTextBox fullScreenTextBoxHoveringOver = null;
 	public static TextBox textBoxHoveringOver;
 
