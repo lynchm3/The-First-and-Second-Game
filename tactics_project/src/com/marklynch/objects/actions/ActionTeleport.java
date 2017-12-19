@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.quest.caveoftheblind.Blind;
 import com.marklynch.level.squares.Square;
@@ -20,6 +21,7 @@ public class ActionTeleport extends Action {
 	GameObject teleportee;
 	Square target;
 	boolean endTurn;
+	GameObject gameObjectInTheWay;
 
 	public ActionTeleport(Actor performer, GameObject teleportee, Square target, boolean endTurn) {
 		super(ACTION_NAME, "action_teleport.png");
@@ -31,6 +33,8 @@ public class ActionTeleport extends Action {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
 		}
+		if (!teleportee.canShareSquare)
+			gameObjectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
 		legal = checkLegality();
 		sound = createSound();
 		movement = true;
@@ -47,31 +51,56 @@ public class ActionTeleport extends Action {
 			new ActionStopPeeking(performer).perform();
 		}
 
-		// Door door = (Door) target.inventory.getGameObjectOfClass(Door.class);
-		// if (door != null && door.isOpen() == false) {
-		// new ActionOpen(teleportee, door).perform();
-		// }
-
-		// Actor actorInTheWay = null;
-		//
-		// if (gameObjectInTheWay instanceof Actor)
-		// actorInTheWay = (Actor)
-		// target.inventory.getGameObjectThatCantShareSquare();
-
-		// if (actorInTheWay == Game.level.player) {
-		// return;
-		// }
-
-		// if (actorInTheWay == null) {
 		teleport(teleportee, target);
 
-		// } else {
-		// move(actorInTheWay, oldSquare);
-		// move(teleportee, target);
-		// }
 		performer.actionsPerformedThisTurn.add(this);
 		if (sound != null)
 			sound.play();
+
+		if (!legal) {
+			System.out.println("NOT LEGAL");
+
+			// GameObject gameObjectInTheWay = null;
+			if (gameObjectInTheWay != null) {
+				if (teleportee != Game.level.player && teleportee.owner != null
+						&& teleportee.owner != Game.level.player) {
+					Actor victim;
+					int severity;
+					if (teleportee instanceof Actor) {
+						victim = (Actor) teleportee;
+						severity = Crime.CRIME_SEVERITY_ATTACK;
+
+					} else {
+						victim = teleportee.owner;
+						severity = Crime.CRIME_SEVERITY_VANDALISM;
+					}
+					Crime crime = new Crime(this, this.performer, victim, severity);
+					this.performer.crimesPerformedThisTurn.add(crime);
+					this.performer.crimesPerformedInLifetime.add(crime);
+					notifyWitnessesOfCrime(crime);
+
+				}
+				if (gameObjectInTheWay != Game.level.player && gameObjectInTheWay.owner != null
+						&& gameObjectInTheWay.owner != Game.level.player) {
+					Actor victim;
+					int severity;
+					if (gameObjectInTheWay instanceof Actor) {
+						victim = (Actor) gameObjectInTheWay;
+						severity = Crime.CRIME_SEVERITY_ATTACK;
+
+					} else {
+						victim = gameObjectInTheWay.owner;
+						severity = Crime.CRIME_SEVERITY_VANDALISM;
+					}
+					Crime crime = new Crime(this, this.performer, victim, severity);
+					this.performer.crimesPerformedThisTurn.add(crime);
+					this.performer.crimesPerformedInLifetime.add(crime);
+					notifyWitnessesOfCrime(crime);
+				}
+			}
+		} else {
+			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+		}
 
 		if (endTurn && performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
@@ -83,10 +112,6 @@ public class ActionTeleport extends Action {
 	}
 
 	private void teleport(GameObject gameObject, Square square) {
-
-		GameObject gameObjectInTheWay = null;
-		if (!gameObject.canShareSquare)
-			gameObjectInTheWay = square.inventory.getGameObjectThatCantShareSquare();
 
 		gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
 		gameObject.squareGameObjectIsOn = square;
@@ -143,6 +168,17 @@ public class ActionTeleport extends Action {
 		if (target.restricted == true && !target.owners.contains(teleportee)) {
 			return false;
 		}
+
+		// If ur going to dmg something...
+		if (gameObjectInTheWay != null) {
+			if (teleportee != Game.level.player && teleportee.owner != null && teleportee.owner != Game.level.player)
+				return false;
+			if (gameObjectInTheWay != Game.level.player && gameObjectInTheWay.owner != null
+					&& gameObjectInTheWay.owner != Game.level.player)
+				return false;
+
+		}
+
 		return true;
 	}
 

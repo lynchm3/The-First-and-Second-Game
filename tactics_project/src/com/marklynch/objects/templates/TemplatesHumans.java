@@ -18,7 +18,7 @@ public class TemplatesHumans {
 		Templates.PLAYER = new Player();
 		Templates.PLAYER.title = "Fighter";
 		Templates.PLAYER.actorLevel = 1;
-		Templates.PLAYER.totalHealth = Templates.PLAYER.remainingHealth = 100;
+		Templates.PLAYER.totalHealth = Templates.PLAYER.remainingHealth = 1000;
 		Templates.PLAYER.strength = 10;
 		Templates.PLAYER.dexterity = 10;
 		Templates.PLAYER.intelligence = 10;

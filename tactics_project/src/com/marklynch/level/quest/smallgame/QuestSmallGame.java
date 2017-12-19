@@ -294,6 +294,8 @@ public class QuestSmallGame extends Quest {
 		final Readable huntingPlan = Templates.SIGN.makeCopy(Game.level.squares[106][8], "Hunt Action Plan",
 				new Object[] { "Super Wolf - Weaknesses: Water Strengths: Fire will heal the beast" }, hunterBrent);
 
+		// IF I ATTACK OR TELEPORT ON TO THE SIGN THEY SHOULD BE ANGRY..
+
 		Storage chest = Templates.CHEST.makeCopy("Chest", Game.level.squares[103][1], false, null);
 		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		chest.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, thief));
