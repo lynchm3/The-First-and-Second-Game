@@ -13,13 +13,14 @@ public class TemplatesGold {
 		Templates.GOLD.name = "Gold";
 		Templates.GOLD.imageTexturePath = "gold.png";
 		Templates.GOLD.totalHealth = Templates.GOLD.remainingHealth = 1;
-		Templates.GOLD.widthRatio = 0.5f;
-		Templates.GOLD.heightRatio = 0.125f;
+		Templates.GOLD.widthRatio = 0.25f;
+		Templates.GOLD.heightRatio = 0.25f;
 		Templates.GOLD.drawOffsetX = 0f;
 		Templates.GOLD.drawOffsetY = 0f;
 		Templates.GOLD.soundWhenHit = 1f;
 		Templates.GOLD.soundWhenHitting = 1f;
 		Templates.GOLD.soundDampening = 1f;
+		Templates.GOLD.fireResistance = 100f;
 		Templates.GOLD.stackable = false;
 		Templates.GOLD.weight = 1f;
 		Templates.GOLD.value = 1;

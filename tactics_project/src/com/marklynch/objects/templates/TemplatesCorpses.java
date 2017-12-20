@@ -56,6 +56,7 @@ public class TemplatesCorpses {
 		Templates.ASH.soundWhenHitting = 1f;
 		Templates.ASH.soundDampening = 1f;
 		Templates.ASH.stackable = true;
+		Templates.ASH.fireResistance = 100f;
 		Templates.ASH.weight = 2f;
 		Templates.ASH.value = 3;
 		Templates.ASH.anchorX = 0;
@@ -72,8 +73,8 @@ public class TemplatesCorpses {
 		Templates.WOOD_CHIPS.drawOffsetY = 0f;
 		Templates.WOOD_CHIPS.soundWhenHit = 1f;
 		Templates.WOOD_CHIPS.soundWhenHitting = 1f;
-		Templates.WOOD_CHIPS.fireResistance = -100f;
 		Templates.WOOD_CHIPS.soundDampening = 1f;
+		Templates.WOOD_CHIPS.fireResistance = -100f;
 		Templates.WOOD_CHIPS.stackable = true;
 		Templates.WOOD_CHIPS.weight = 12f;
 		Templates.WOOD_CHIPS.value = 6;
