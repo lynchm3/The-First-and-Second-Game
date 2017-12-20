@@ -12,7 +12,7 @@ public class PopupSelectPlaceToPutObject extends Popup {
 
 	public PopupSelectPlaceToPutObject(float width, final Editor editor, final Square square) {
 		super(width, editor, square);
-		boolean canBePlacedOnGround = editor.gameObjectTemplate.canShareSquare || square.inventory.canShareSquare();
+		boolean canBePlacedOnGround = editor.gameObject.canShareSquare || square.inventory.canShareSquare();
 
 		if (canBePlacedOnGround) {
 			selectSquareButton = new PopupButton(0, 0, 200, 30, null, null, "" + square, true, true, square, this);

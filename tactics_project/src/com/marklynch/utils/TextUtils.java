@@ -15,7 +15,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObjectTemplate;
+import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.ScriptEvent;
@@ -88,9 +88,9 @@ public class TextUtils {
 				}
 				offsetX += width;
 
-			} else if (content instanceof GameObjectTemplate) {
+			} else if (content instanceof GameObject) {
 
-				GameObjectTemplate gameObject = (GameObjectTemplate) content;
+				GameObject gameObject = (GameObject) content;
 
 				float textWidth = Game.font.getWidth(gameObject.name);
 				float textureWidth = 20;
@@ -359,8 +359,8 @@ public class TextUtils {
 
 		ArrayList<Link> links = new ArrayList<Link>();
 		for (Object content : contents) {
-			if (content instanceof GameObjectTemplate) {
-				GameObjectTemplate gameObject = (GameObjectTemplate) content;
+			if (content instanceof GameObject) {
+				GameObject gameObject = (GameObject) content;
 
 				float textWidth = Game.font.getWidth(gameObject.name);
 				float textureWidth = 20;
@@ -479,11 +479,11 @@ public class TextUtils {
 						posY + offsetY + 20);
 				offsetX += width;
 
-			} else if (content instanceof GameObjectTemplate) {
+			} else if (content instanceof GameObject) {
 
 				// float startX = posX + offsetX;
 
-				GameObjectTemplate gameObject = (GameObjectTemplate) content;
+				GameObject gameObject = (GameObject) content;
 
 				float textWidth = Game.font.getWidth(gameObject.name);
 				float textureWidth = 20;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor.EDITOR_STATE;
-import com.marklynch.objects.GameObjectTemplate;
+import com.marklynch.objects.GameObject;
 import com.marklynch.ui.EditorToast;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
@@ -42,10 +42,10 @@ public class InstanceSelectionWindow<T> {
 
 					try {
 
-						if (instances.get(index) instanceof GameObjectTemplate) {
-							GameObjectTemplate gameObjectTemplate = (GameObjectTemplate) instances.get(index);
+						if (instances.get(index) instanceof GameObject) {
+							GameObject gameObject = (GameObject) instances.get(index);
 							// Weapon weapon = weaponTemplate.makeWeapon();
-							editor.gameObjectTemplate = gameObjectTemplate;
+							editor.gameObject = gameObject;
 							// editor.weapons.add(weapon);
 							editor.instanceSelectionWindow = null;
 

@@ -203,7 +203,7 @@ public class AttributesDialog {
 					editor.depressButtonsSettingsAndDetailsButtons();
 					editor.clearSelectedObject();
 					editor.editorState = EDITOR_STATE.ADD_OBJECT;
-					editor.gameObjectTemplate = gameObject;
+					editor.gameObject = gameObject;
 					editor.clearSelectedObject();
 					editor.settingsWindow.update();
 					editor.objectsSettingsWindow.addObjectsButton.down = true;

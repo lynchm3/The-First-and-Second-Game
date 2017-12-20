@@ -36,7 +36,6 @@ import com.marklynch.level.constructs.enchantment.EnhancementFireDamage;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.GameObjectTemplate;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
@@ -118,7 +117,7 @@ public class Editor {
 	public ArrayList<Texture> textures = new ArrayList<Texture>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public AttributeSelectionWindow attributeSelectionWindow;
-	public GameObjectTemplate gameObjectTemplate;
+	public GameObject gameObject;
 	public Actor actorTemplate;
 
 	public enum EDITOR_STATE {
@@ -821,7 +820,7 @@ public class Editor {
 
 	public void attemptToAddNewObjectToSquare(Square square) {
 
-		boolean canBePlaceOnGround = gameObjectTemplate.canShareSquare || square.inventory.canShareSquare();
+		boolean canBePlaceOnGround = gameObject.canShareSquare || square.inventory.canShareSquare();
 		boolean canBePlacedInAnInventory = square.inventory.hasGameObjectsThatCanContainOtherObjects();
 
 		if (!canBePlacedInAnInventory && canBePlaceOnGround) {
