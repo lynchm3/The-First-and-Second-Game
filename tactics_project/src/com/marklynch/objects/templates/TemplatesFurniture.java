@@ -336,7 +336,7 @@ public class TemplatesFurniture {
 
 		Templates.WELL = new WaterSource();
 		Templates.WELL.name = "Well";
-		Templates.WELL.imageTexturePath = "well";
+		Templates.WELL.imageTexturePath = "well.png";
 		Templates.WELL.totalHealth = Templates.WELL.remainingHealth = 138;
 		Templates.WELL.widthRatio = 1.5f;
 		Templates.WELL.heightRatio = 1.5f;
