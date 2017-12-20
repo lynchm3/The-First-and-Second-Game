@@ -64,7 +64,7 @@ public class InventorySquare extends Square {
 		Texture squareTexture = WHITE_SQUARE;
 
 		// Red border on sqr if illegal to take
-		if (this.gameObject.owner != null && this.gameObject.owner != Game.level.player) {
+		if (gameObject != null && this.gameObject.owner != null && this.gameObject.owner != Game.level.player) {
 			if (inventoryThisBelongsTo == null || inventoryThisBelongsTo.parent == Game.level.player) {
 				squareTexture = RED_SQUARE;
 			} else if (Inventory.inventoryMode != INVENTORY_MODE.MODE_TRADE) {

@@ -11,11 +11,14 @@ import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
+import com.marklynch.level.constructs.effect.Effect;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.power.PowerBleed;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Gold;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDie;
@@ -24,8 +27,11 @@ import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class Player extends Human {
 
@@ -184,6 +190,63 @@ public class Player extends Human {
 		float percentage = xpThisLevel / xpPerLevel;
 		float xpBarWidth = Game.windowWidth * percentage;
 		QuadUtils.drawQuad(Color.YELLOW, 0, Game.windowHeight - 20, xpBarWidth, Game.windowHeight);
+
+		// Equipped item!
+		Texture squareTexture = InventorySquare.YELLOW_SQUARE; // yellow is used
+																// for equipped
+																// items in
+																// inventory
+
+		float xInPixels = 64;
+		float yInPixels = Game.windowHeight - 64 - Game.INVENTORY_SQUARE_HEIGHT;
+
+		TextureUtils.drawTexture(squareTexture, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+
+		if (equipped != null) {
+
+			float drawWidth = Game.INVENTORY_SQUARE_WIDTH;
+			float drawHeight = Game.INVENTORY_SQUARE_HEIGHT;
+			float realTextureWidth = equipped.imageTexture.getWidth();
+			float realTextureHeight = equipped.imageTexture.getHeight();
+			if (realTextureWidth >= realTextureHeight) {// knife
+				drawHeight = Game.INVENTORY_SQUARE_HEIGHT * realTextureHeight / realTextureWidth;
+			} else {
+				drawWidth = Game.INVENTORY_SQUARE_WIDTH * realTextureWidth / realTextureHeight;
+			}
+
+			TextureUtils.drawTexture(equipped.imageTexture, xInPixels, yInPixels, xInPixels + drawWidth,
+					yInPixels + drawHeight);
+
+			for (Effect effect : equipped.activeEffectsOnGameObject) {
+				TextureUtils.drawTexture(effect.imageTexture, 0.75f, xInPixels, yInPixels,
+						xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+			}
+
+			// Count && value
+			System.out.println("inventory = " + inventory);
+
+			System.out.println("inventory.itemTypeCount = " + inventory.itemTypeCount);
+
+			System.out.println("equipped = " + equipped);
+
+			System.out.println("equipped.templateId = " + equipped.templateId);
+
+			Integer count = null;
+			if (inventory.itemTypeCount != null && equipped != null)
+				count = inventory.itemTypeCount.get(equipped.templateId);
+			if (count == null)
+				count = 1;
+
+			if (equipped instanceof Gold) {
+				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
+						new Object[] { equipped.value });
+
+			} else if (count > 1) {
+				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
+						new Object[] { count + "x" });
+			}
+		}
 
 	}
 
