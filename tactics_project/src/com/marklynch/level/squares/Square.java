@@ -33,6 +33,7 @@ import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionDropItemsInInventory;
+import com.marklynch.objects.actions.ActionDropSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPlaceMapMarker;
@@ -725,12 +726,11 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 
 		// drop equipped
-		// if (performer.equipped != null) {
-		// if (performer.straightLineDistanceTo(this) < 2) {
-		// actions.add(new ActionDropSpecificItem(performer, this,
-		// performer.equipped));
-		// }
-		// }
+		if (performer.equipped != null) {
+			if (performer.straightLineDistanceTo(this) < 2) {
+				actions.add(new ActionDropSpecificItem(performer, this, performer.equipped));
+			}
+		}
 
 		// drop from inventory
 		actions.add(new ActionDropItemsInInventory(performer, this));
