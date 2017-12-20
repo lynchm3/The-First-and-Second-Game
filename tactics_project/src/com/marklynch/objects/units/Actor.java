@@ -20,7 +20,6 @@ import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.effect.Effect;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
@@ -224,101 +223,6 @@ public class Actor extends GameObject {
 		for (GameObject gameObject : inventory.getGameObjects()) {
 			gameObject.owner = this;
 		}
-	}
-
-	public Actor(String name, String title, int actorLevel, int health, int strength, int dexterity, int intelligence,
-			int endurance, String imagePath, Square squareActorIsStandingOn, int travelDistance, int sight,
-			GameObject bed, Inventory inventory,
-
-			boolean canOpenDoors, boolean canEquipWeapons, float widthRatio, float heightRatio, float drawOffsetX,
-			float drawOffsetY, float soundWhenHit, float soundWhenHitting, float soundDampening, Color light,
-			float lightHandleX, float lightHandlY, boolean stackable, float fireResistance, float waterResistance,
-			float electricResistance, float poisonResistance, float slashResistance, float weight, Actor owner,
-			Faction faction, float handAnchorX, float handAnchorY, float headAnchorX, float headAnchorY,
-			float bodyAnchorX, float bodyAnchorY, float legsAnchorX, float legsAnchorY, int gold,
-			GameObject[] mustHaves, GameObject[] mightHaves, int templateId) {
-		super(name, health, imagePath, squareActorIsStandingOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, 0, owner, templateId);
-		// standingTexture = imageTexture;
-
-		this.strength = strength;
-		this.dexterity = dexterity;
-		this.intelligence = intelligence;
-		this.endurance = endurance;
-		this.title = title;
-		this.actorLevel = actorLevel;
-		this.travelDistance = travelDistance;
-		this.sight = sight;
-
-		this.strength = strength;
-		this.dexterity = dexterity;
-		this.intelligence = intelligence;
-		this.endurance = endurance;
-
-		this.title = title;
-		this.actorLevel = actorLevel;
-		this.travelDistance = travelDistance;
-
-		this.bed = bed;
-		if (bed != null)
-			this.bedGUID = bed.guid;
-		if (bed != null)
-			bed.owner = this;
-
-		ArrayList<Weapon> weapons = getWeaponsInInventory();
-		if (weapons.size() > 0 && weapons.get(0) != null) {
-			equipped = weapons.get(0);
-			equippedWeaponGUID = weapons.get(0).guid;
-		}
-
-		this.faction = faction;
-		if (this.faction != null) {
-			factionGUID = this.faction.guid;
-			this.faction.actors.add(this);
-		}
-
-		this.handAnchorX = handAnchorX;
-		this.handAnchorY = handAnchorY;
-		this.headAnchorX = headAnchorX;
-		this.headAnchorY = headAnchorY;
-		this.bodyAnchorX = bodyAnchorX;
-		this.bodyAnchorY = bodyAnchorY;
-		this.legsAnchorX = legsAnchorX;
-		this.legsAnchorY = legsAnchorY;
-
-		// this.gold = Templates.GOLD.makeCopy(null, this, gold);
-		if (gold > 0)
-			inventory.add(Templates.GOLD.makeCopy(null, this, gold));
-
-		this.lastSquare = this.squareGameObjectIsOn;
-
-		for (GameObject gameObject : mustHaves) {
-			this.inventory.add(gameObject);
-		}
-
-		for (GameObject gameObject : mightHaves) {
-			if (Math.random() > 0.8d)
-				this.inventory.add(gameObject);
-		}
-
-		for (GameObject gameObject : inventory.getGameObjects()) {
-			gameObject.owner = this;
-		}
-
-		this.canOpenDoors = canOpenDoors;
-		this.canEquipWeapons = canEquipWeapons;
-
-		canBePickedUp = false;
-		showInventory = false;
-		fitsInInventory = false;
-		canShareSquare = false;
-		canContainOtherObjects = true;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
-		decorative = false;
-		attackable = true;
 	}
 
 	public static void loadStaticImages() {

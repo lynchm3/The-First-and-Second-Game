@@ -469,10 +469,8 @@ public class Editor {
 		player.inventory.add(jar3);
 
 		// Trader Joe
-		Trader trader = new Trader("Trader Joe", "Trader", 1, 10, 0, 0, 0, 0, "shopKeeper.png",
-				Game.level.squares[7][1], 1, 10, null, new Inventory(), 1, 1, 0f, 0f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-				false, 0f, 0f, 0f, 0f, 0f, 90f, null, Game.level.factions.townsPeople, 40, 96, 40, 96, 40, 96, 40, 96,
-				10000, new GameObject[] {}, new GameObject[] {}, GameObject.generateNewTemplateId());
+		Trader trader = Templates.TRADER.makeCopy("Joe", Game.level.squares[7][1], Game.level.factions.townsPeople,
+				null, 10000, new GameObject[] {}, new GameObject[] {}, null);
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));

@@ -3,26 +3,16 @@ package com.marklynch.objects;
 import java.awt.geom.AffineTransform;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TriangleUtils;
 
-import mdesl.graphics.Color;
-
 public class GameObjectExploder extends GameObject {
 
-	public GameObjectExploder(String name, int health, String imagePath, Square squareGameObjectIsOn,
-			Inventory inventory, float widthRatio, float heightRatio, float drawOffsetX, float drawOffsetY,
-			float soundWhenHit, float soundWhenHitting, float soundDampening, Color light, float lightHandleX,
-			float lightHandlY, boolean stackable, float fireResistance, float waterResistance, float electricResistance,
-			float poisonResistance, float slashResistance, float weight, int value, Actor owner, int templateId) {
-		super(name, health, imagePath, squareGameObjectIsOn, inventory, widthRatio, heightRatio, drawOffsetX,
-				drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-				stackable, fireResistance, waterResistance, electricResistance, poisonResistance, slashResistance,
-				weight, value, owner, templateId);
+	public GameObjectExploder() {
+		super();
 	}
 
 	public SquarePiece[] squarePieces;
@@ -342,10 +332,9 @@ public class GameObjectExploder extends GameObject {
 	}
 
 	@Override
-	public GameObjectExploder makeCopy(Square square, Actor owner) {
-		return new GameObjectExploder(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, templateId);
+	public GameObject makeCopy(Square square, Actor owner) {
+		GameObjectExploder gameObject = new GameObjectExploder();
+		setAttributesForCopy(gameObject, square, owner);
+		return gameObject;
 	}
 }

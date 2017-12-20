@@ -592,11 +592,9 @@ public class GameObject extends GameObjectTemplate implements ActionableInWorld,
 
 	@Override
 	public GameObject makeCopy(Square square, Actor owner) {
-		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, templateId);
+		GameObject gameObject = new GameObject();
+		setAttributesForCopy(gameObject, square, owner);
+		return gameObject;
 	}
 
 	public ArrayList<Weapon> getWeaponsInInventory() {

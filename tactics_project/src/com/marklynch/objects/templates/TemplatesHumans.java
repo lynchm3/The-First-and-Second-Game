@@ -2,11 +2,13 @@ package com.marklynch.objects.templates;
 
 import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.routines.AIRoutineForThief;
+import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForMort;
 import com.marklynch.level.quest.caveoftheblind.Mort;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Player;
+import com.marklynch.objects.units.Trader;
 
 public class TemplatesHumans {
 
@@ -103,7 +105,24 @@ public class TemplatesHumans {
 		Templates.MORT.canOpenDoors = true;
 		Templates.MORT.canEquipWeapons = true;
 		Templates.MORT.aiRoutine = new AIRoutineForMort(Templates.MORT);
-		Templates.FARMER.templateId = GameObject.generateNewTemplateId();
+		Templates.MORT.templateId = GameObject.generateNewTemplateId();
+
+		Templates.TRADER = new Trader();
+		Templates.TRADER.title = "Trader";
+		Templates.TRADER.actorLevel = 1;
+		Templates.TRADER.totalHealth = Templates.TRADER.remainingHealth = 10;
+		Templates.TRADER.strength = 10;
+		Templates.TRADER.dexterity = 10;
+		Templates.TRADER.intelligence = 10;
+		Templates.TRADER.endurance = 10;
+		Templates.TRADER.imageTexturePath = "shopkeeper.png";
+		Templates.TRADER.weight = 90f;
+		Templates.TRADER.handAnchorX = 40f;
+		Templates.TRADER.handAnchorY = 96f;
+		Templates.TRADER.canOpenDoors = true;
+		Templates.TRADER.canEquipWeapons = true;
+		Templates.TRADER.aiRoutine = new AIRoutineForTrader(Templates.TRADER);
+		Templates.TRADER.templateId = GameObject.generateNewTemplateId();
 	}
 
 }
