@@ -1332,6 +1332,7 @@ public class Level {
 		Notification.closeButtonX = Notification.x + Notification.width - Notification.closeButtonWidth;
 		for (Notification notification : notifications) {
 			notification.y = notification.closeButton.y = notificationsHeight;
+			notification.textY = notification.y + 4;
 			notification.closeButton.x = Notification.closeButtonX;
 			notification.draw();
 			notificationsHeight += notification.height + Notification.border;
@@ -1339,7 +1340,7 @@ public class Level {
 
 		if (notifications.size() > 0) {
 			clearNotificationsButton.x = Notification.x;
-			clearNotificationsButton.y = notificationsHeight;
+			clearNotificationsButton.y = notificationsHeight - Notification.border + 8;
 			clearNotificationsButton.draw();
 		}
 

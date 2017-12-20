@@ -3,6 +3,7 @@ package com.marklynch.ui.popups;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
@@ -19,6 +20,7 @@ public class Notification {
 	public static float halfWidth = width / 2;
 	public static float x;
 	public float y;
+	public float textY;
 	public static float textX;
 	public static float border = 20f;
 	public static float textWidth = width - border * 2;
@@ -27,6 +29,7 @@ public class Notification {
 	public static float closeButtonHeight = 20f;
 	public float closeButtonY;
 	public LevelButton closeButton;
+	public Object[] turn = new Object[1];
 
 	public ArrayList<Link> links;
 
@@ -42,6 +45,7 @@ public class Notification {
 		this.objects = objects;
 		this.type = type;
 		this.target = target;
+		this.turn[0] = "Turn " + Level.turn;
 		closeButton = new LevelButton(0, 0, closeButtonWidth, closeButtonHeight, "end_turn_button.png",
 				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE, "Close notification");
 		closeButton.setClickListener(new ClickListener() {
@@ -50,13 +54,15 @@ public class Notification {
 				Game.level.notifications.remove(Notification.this);
 			}
 		});
-		height = TextUtils.getDimensions(textWidth, objects)[1];
+		height = TextUtils.getDimensions(textWidth, objects)[1] + 8;
 		links = TextUtils.getLinks(objects);
 	}
 
 	public void draw() {
 		QuadUtils.drawQuad(Color.PINK, x, y, x + width, y + height);
-		TextUtils.printTextWithImages(textX, y, textWidth, true, links, objects);
+		TextUtils.printTextWithImages(textX, textY, textWidth, true, links, objects);
+		QuadUtils.drawQuad(Color.BLACK, x + 12, y - 16, x + 76, y + 4);
+		TextUtils.printTextWithImages(textX, y - 16, 999, false, null, turn);
 		closeButton.draw();
 	}
 
