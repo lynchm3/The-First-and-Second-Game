@@ -1545,12 +1545,12 @@ public class Level {
 
 					Object[] objects = new Object[] { "Theres a ",
 							player.playerTargetSquare.inventory.getGameObjectThatCantShareSquare(), " there!" };
-					notifications.add(new Notification(objects));
+					notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 					Game.level.logOnScreen(new ActivityLog(objects));
 					pausePlayer();
 				} else {
 					Object[] objects = new Object[] { "There's no available path" };
-					notifications.add(new Notification(objects));
+					notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 					Game.level.logOnScreen(new ActivityLog(objects));
 					pausePlayer();
 
@@ -1577,12 +1577,12 @@ public class Level {
 			if (!action.enabled) {
 				Object[] objects = new Object[] { "Path blocked by ",
 						squareToMoveTo.inventory.getGameObjectThatCantShareSquare(), "!" };
-				notifications.add(new Notification(objects));
+				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
 				pausePlayer();
 			} else if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
 				Object[] objects = new Object[] { "Stopped before illegal action!" };
-				notifications.add(new Notification(objects));
+				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
 				pausePlayer();
 			} else {
@@ -2153,5 +2153,14 @@ public class Level {
 		if (conversation != null)
 			conversation.resize();
 
+	}
+
+	public void addNotification(Notification notificationToAdd) {
+		for (Notification notification : notifications) {
+			if (notification.equals(notificationToAdd)) {
+				return;
+			}
+		}
+		notifications.add(notificationToAdd);
 	}
 }

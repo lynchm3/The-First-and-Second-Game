@@ -321,13 +321,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					if (otherInventory.size() == 0) {
 						Game.level.openCloseInventory();
 						Object[] objects = new Object[] { "Looted everything!" };
-						Game.level.notifications.add(new Notification(objects));
+						Game.level.addNotification(new Notification(objects, Notification.NotificationType.MISC, null));
 					}
 				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
 					if (groundDisplay.gameObjects.size() == 0) {
 						Game.level.openCloseInventory();
 						Object[] objects = new Object[] { "Looted everything!" };
-						Game.level.notifications.add(new Notification(objects));
+						Game.level.addNotification(new Notification(objects, Notification.NotificationType.MISC, null));
 					}
 				}
 

@@ -172,7 +172,8 @@ public class Player extends Human {
 			leveledUp = true;
 		}
 		if (leveledUp) {
-			Game.level.notifications.add(new Notification(new Object[] { Game.level.player, " leveled Up!" }));
+			Game.level.addNotification(new Notification(new Object[] { Game.level.player, " leveled Up!" },
+					Notification.NotificationType.LEVEL_UP, this));
 			Game.level.activityLogger.addActivityLog(
 					new ActivityLog(new Object[] { Game.level.player, " are now Level " + actorLevel }));
 		}

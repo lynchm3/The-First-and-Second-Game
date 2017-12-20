@@ -113,7 +113,8 @@ public class Quest {
 		if (this.isFirstQuest())
 			Journal.questsToTrack.add(this);
 		started = true;
-		Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " started" }));
+		Game.level.addNotification(new Notification(new Object[] { "Quest ", this, " started" },
+				Notification.NotificationType.QUEST_STARTED, this));
 		Game.level.activityLogger
 				.addActivityLog(new ActivityLog(new Object[] { Game.level.player, " started quest ", this }));
 		turnStarted = turnUpdated = Level.turn;
@@ -134,7 +135,8 @@ public class Quest {
 			return;
 
 		if (turnUpdated < Level.turn) {
-			Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " updated" }));
+			Game.level.addNotification(new Notification(new Object[] { "Quest ", this, " updated" },
+					Notification.NotificationType.QUEST_UPDATED, this));
 			Game.level.activityLogger.addActivityLog(new ActivityLog(new Object[] { "Quest ", this, " was updated" }));
 			turnUpdated = Level.turn;
 			updatedSinceLastViewed = true;
@@ -143,7 +145,8 @@ public class Quest {
 
 	public void resolve() {
 		resolved = true;
-		Game.level.notifications.add(new Notification(new Object[] { "Quest ", this, " resolved!" }));
+		Game.level.addNotification(new Notification(new Object[] { "Quest ", this, " resolved!" },
+				Notification.NotificationType.QUEST_RESOLVED, this));
 		Game.level.player.addXP(15);
 	}
 

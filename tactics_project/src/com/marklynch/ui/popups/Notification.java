@@ -30,8 +30,18 @@ public class Notification {
 
 	public ArrayList<Link> links;
 
-	public Notification(Object[] objects) {
+	// Specifics
+	public static enum NotificationType {
+		QUEST_STARTED, QUEST_UPDATED, QUEST_RESOLVED, LEVEL_UP, MISC
+	}
+
+	NotificationType type;
+	Object target;
+
+	public Notification(Object[] objects, NotificationType type, Object target) {
 		this.objects = objects;
+		this.type = type;
+		this.target = target;
 		closeButton = new LevelButton(0, 0, closeButtonWidth, closeButtonHeight, "end_turn_button.png",
 				"end_turn_button.png", "X", true, true, Color.BLACK, Color.WHITE, "Close notification");
 		closeButton.setClickListener(new ClickListener() {
@@ -52,5 +62,13 @@ public class Notification {
 
 	public boolean mouseOverCloseButton(float mouseX, float mouseY) {
 		return closeButton.calculateIfPointInBoundsOfButton(mouseX, mouseY);
+	}
+
+	public boolean equals(Notification otherNotification) {
+
+		if (type == otherNotification.type && target == otherNotification.target) {
+			return true;
+		}
+		return false;
 	}
 }
