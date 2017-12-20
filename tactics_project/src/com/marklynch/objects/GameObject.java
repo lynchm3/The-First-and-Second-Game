@@ -249,20 +249,24 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void loadImages() {
 		this.imageTexture = getGlobalImage(imageTexturePath);
-		this.powTexture = getGlobalImage("pow.png");
-		this.vsTexture = getGlobalImage("vs.png");
-		this.fightTexture = getGlobalImage("fight.png");
-		this.skullTexture = getGlobalImage("skull.png");
-		this.xTexture = getGlobalImage("x.png");
-		this.upTexture = getGlobalImage("up.png");
-		this.downTexture = getGlobalImage("down.png");
-		this.leftTexture = getGlobalImage("left.png");
-		this.rightTexture = getGlobalImage("right.png");
-		this.armTexture = getGlobalImage("arm.png");
+
+	}
+
+	public static void loadStaticImages() {
+
+		powTexture = getGlobalImage("pow.png");
+		vsTexture = getGlobalImage("vs.png");
+		fightTexture = getGlobalImage("fight.png");
+		skullTexture = getGlobalImage("skull.png");
+		xTexture = getGlobalImage("x.png");
+		upTexture = getGlobalImage("up.png");
+		downTexture = getGlobalImage("down.png");
+		leftTexture = getGlobalImage("left.png");
+		rightTexture = getGlobalImage("right.png");
+		armTexture = getGlobalImage("arm.png");
 		grassNormalTexture = getGlobalImage("grass_NRM.png");
 		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png");
 		screamAudio = ResourceUtils.getGlobalSound("scream.wav");
-
 	}
 
 	public void draw1() {
