@@ -2156,11 +2156,15 @@ public class Level {
 	}
 
 	public void addNotification(Notification notificationToAdd) {
+		Notification oldNotificationToRemove = null;
 		for (Notification notification : notifications) {
 			if (notification.equals(notificationToAdd)) {
-				return;
+				oldNotificationToRemove = notification;
+				break;
 			}
 		}
+		if (oldNotificationToRemove != null)
+			notifications.remove(oldNotificationToRemove);
 		notifications.add(notificationToAdd);
 	}
 }
