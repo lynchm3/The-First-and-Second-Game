@@ -250,8 +250,8 @@ public class TemplatesNature {
 		Templates.ROCK.stackable = false;
 		Templates.ROCK.weight = 12f;
 		Templates.ROCK.value = 6;
-		Templates.ROCK.anchorX = 0;
-		Templates.ROCK.anchorY = 0;
+		Templates.ROCK.anchorX = 12;
+		Templates.ROCK.anchorY = 14;
 		Templates.ROCK.templateId = GameObject.generateNewTemplateId();
 
 		Templates.VEIN = new Vein();

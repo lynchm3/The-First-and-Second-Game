@@ -853,12 +853,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionTradeItemsInOtherInventory(performer, this));
 		}
 
-		// if (!decorative && this.squareGameObjectIsOn !=
-		// Game.level.player.squareGameObjectIsOn
-		// && performer.equipped != null) {
-		// actions.add(new ActionThrowSpecificItem(performer, this,
-		// performer.equipped));
-		// }
+		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn
+				&& performer.equipped != null) {
+			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
+		}
 
 		// Throw from inventory
 		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn)

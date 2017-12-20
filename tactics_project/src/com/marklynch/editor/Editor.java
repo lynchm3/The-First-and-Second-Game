@@ -444,6 +444,9 @@ public class Editor {
 		player.inventory.add(Templates.LANTERN.makeCopy(null, player));
 		player.inventory.add(Templates.KEY.makeCopy("Player test key", null, player));
 		player.inventory.add(Templates.PICKAXE.makeCopy(null, player));
+		for (int i = 0; i < 25; i++) {
+			player.inventory.add(Templates.ROCK.makeCopy(null, player));
+		}
 		// player.inventory.add(Templates.PICKAXE.makeCopy(null));
 		Helmet playersHardHat = Templates.HARD_HAT.makeCopy(null, player);
 		player.inventory.add(playersHardHat);
