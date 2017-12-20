@@ -842,22 +842,23 @@ public class Editor {
 	}
 
 	public void placeObjectOnSquare(Square square) {
-		GameObject gameObject = gameObjectTemplate.makeCopy(square, null);
-		if (gameObject instanceof Actor) {
-			((Actor) gameObject).faction.actors.add((Actor) gameObject);
-		} else {
-			// Game.level.inanimateObjectsOnGround.add(gameObject);
-		}
-		square.inventory.add(gameObject);
-		this.objectsSettingsWindow.update();
-		this.toast = new EditorToast("Select a location to add object");
+		// GameObject gameObject = gameObjectTemplate.makeCopy(square, null);
+		// if (gameObject instanceof Actor) {
+		// ((Actor) gameObject).faction.actors.add((Actor) gameObject);
+		// } else {
+		// // Game.level.inanimateObjectsOnGround.add(gameObject);
+		// }
+		// square.inventory.add(gameObject);
+		// this.objectsSettingsWindow.update();
+		// this.toast = new EditorToast("Select a location to add object");
 	}
 
 	public void placeObjectInInventory(GameObject gameObjectThatCanHoldOtherObjects) {
-		GameObject gameObjectToPutInInventroy = gameObjectTemplate.makeCopy(null, null);
-		gameObjectThatCanHoldOtherObjects.inventory.add(gameObjectToPutInInventroy);
-		this.objectsSettingsWindow.update();
-		this.toast = new EditorToast("Select a location to add object");
+		// GameObject gameObjectToPutInInventroy =
+		// gameObjectTemplate.makeCopy(null, null);
+		// gameObjectThatCanHoldOtherObjects.inventory.add(gameObjectToPutInInventroy);
+		// this.objectsSettingsWindow.update();
+		// this.toast = new EditorToast("Select a location to add object");
 		// if (gameObject instanceof Actor) {
 		// gameObject.faction.actors.add((Actor) gameObject);
 		// } else {

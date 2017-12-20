@@ -55,7 +55,7 @@ public class PopupSelectPlaceToPutObject extends Popup {
 				@Override
 				public void click() {
 
-					editor.placeObjectInInventory(gameObjectsThatCanContainOtherObjects.get(index));
+					// editor.placeObjectInInventory(gameObjectsThatCanContainOtherObjects.get(index));
 					// editor.popupSelectObject = null; MAYYBE?
 
 					// editor.clearSelectedObject();

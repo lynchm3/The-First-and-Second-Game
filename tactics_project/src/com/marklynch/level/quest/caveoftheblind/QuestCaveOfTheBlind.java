@@ -405,13 +405,13 @@ public class QuestCaveOfTheBlind extends Quest {
 		Templates.PLATE.makeCopy(Game.level.squares[296][44], null);
 		Templates.PLATE.makeCopy(Game.level.squares[297][54], null);
 		Templates.BROKEN_PLATE.makeCopy(Game.level.squares[290][53], null);
-		Templates.BROKEN_PLATE.makeCopy(Game.level.squares[290][40], null, true);
+		Templates.BROKEN_PLATE.makeCopy(Game.level.squares[290][40], null);
 		Templates.BROKEN_GLASS.makeCopy(Game.level.squares[293][39], null);
-		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[296][52], null, false);
-		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[291][51], null, true);
-		Templates.DINNER_FORK.makeCopy(Game.level.squares[293][46], null, true);
-		Templates.DINNER_FORK.makeCopy(Game.level.squares[294][52], null, false);
-		Templates.DINNER_FORK.makeCopy(Game.level.squares[293][52], null, true);
+		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[296][52], null);
+		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[291][51], null);
+		Templates.DINNER_FORK.makeCopy(Game.level.squares[293][46], null);
+		Templates.DINNER_FORK.makeCopy(Game.level.squares[294][52], null);
+		Templates.DINNER_FORK.makeCopy(Game.level.squares[293][52], null);
 		// Chairs 1
 		Templates.CHAIR.makeCopy(Game.level.squares[290][42], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[291][43], null);
@@ -423,15 +423,15 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[290][49], null);
 		Templates.CHAIR.makeCopy(Game.level.squares[291][50], null);
 		// Chairs 2
-		Templates.CHAIR.makeCopy(Game.level.squares[297][42], null, true);
-		Templates.CHAIR.makeCopy(Game.level.squares[295][43], null, true);
-		Templates.CHAIR.makeCopy(Game.level.squares[296][44], null, true);
-		Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[295][45], null, true);
-		Templates.CHAIR.makeCopy(Game.level.squares[295][46], null, true);
-		Templates.CHAIR.makeCopy(Game.level.squares[295][47], null, true);
-		Templates.CHAIR.makeCopy(Game.level.squares[295][49], null, true);
-		Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[297][50], null, true);
-		Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[295][51], null, true);
+		Templates.CHAIR.makeCopy(Game.level.squares[297][42], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[295][43], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[296][44], null);
+		Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[295][45], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[295][46], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[295][47], null);
+		Templates.CHAIR.makeCopy(Game.level.squares[295][49], null);
+		Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[297][50], null);
+		Templates.CHAIR_FALLEN.makeCopy(Game.level.squares[295][51], null);
 		// Table 1
 		Templates.TABLE.makeCopy(Game.level.squares[292][42], null);
 		Templates.PLATE.makeCopy(Game.level.squares[292][42], null);
@@ -456,21 +456,21 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Table 2
 		Templates.TABLE.makeCopy(Game.level.squares[294][42], null);
 		Templates.TABLE.makeCopy(Game.level.squares[294][43], null);
-		Templates.DINNER_FORK.makeCopy(Game.level.squares[294][43], null, true);
+		Templates.DINNER_FORK.makeCopy(Game.level.squares[294][43], null);
 		Templates.PLATE.makeCopy(Game.level.squares[294][43], null);
 		Templates.TABLE.makeCopy(Game.level.squares[294][44], null);
 		Templates.BROKEN_PLATE.makeCopy(Game.level.squares[294][44], null);
-		Templates.DINNER_FORK.makeCopy(Game.level.squares[294][44], null, true);
+		Templates.DINNER_FORK.makeCopy(Game.level.squares[294][44], null);
 		Templates.TABLE.makeCopy(Game.level.squares[294][45], null);
 		Templates.TABLE.makeCopy(Game.level.squares[294][46], null);
-		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[294][46], null, true);
+		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[294][46], null);
 		Templates.TABLE.makeCopy(Game.level.squares[294][47], null);
-		Templates.BROKEN_PLATE.makeCopy(Game.level.squares[294][47], null, true);
+		Templates.BROKEN_PLATE.makeCopy(Game.level.squares[294][47], null);
 		Templates.TABLE.makeCopy(Game.level.squares[294][48], null);
 		Templates.TABLE.makeCopy(Game.level.squares[294][49], null);
 		Templates.TABLE.makeCopy(Game.level.squares[294][50], null);
-		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[294][50], null, true);
-		Templates.DINNER_FORK.makeCopy(Game.level.squares[294][50], null, true);
+		Templates.DINNER_KNIFE.makeCopy(Game.level.squares[294][50], null);
+		Templates.DINNER_FORK.makeCopy(Game.level.squares[294][50], null);
 		Templates.PLATE.makeCopy(Game.level.squares[294][50], null);
 		Templates.TABLE.makeCopy(Game.level.squares[294][51], null);
 

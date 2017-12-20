@@ -11,7 +11,6 @@ import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventoryParent;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.units.Actor;
 
 import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
@@ -98,22 +97,6 @@ public class GameObjectTemplate implements InventoryParent {
 		this.poisonResistance = poisonResistance;
 		this.weight = weight;
 		this.value = value;
-	}
-
-	public GameObject makeCopy(Square square, Actor owner) {
-		return new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, templateId);
-	}
-
-	public GameObject makeCopy(Square square, Actor owner, boolean backwards) {
-		GameObject copy = new GameObject(new String(name), (int) totalHealth, imageTexturePath, square, new Inventory(),
-				widthRatio, heightRatio, drawOffsetX, drawOffsetY, soundWhenHit, soundWhenHitting, soundDampening,
-				light, lightHandleX, lightHandlY, stackable, fireResistance, waterResistance, electricResistance,
-				poisonResistance, slashResistance, weight, value, owner, templateId);
-		copy.backwards = backwards;
-		return copy;
 	}
 
 	public void postLoad1() {
