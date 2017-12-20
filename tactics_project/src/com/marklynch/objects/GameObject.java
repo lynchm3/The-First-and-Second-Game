@@ -372,6 +372,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				if (actor.equipped == this) {
 					if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
 						actor.equip(actor.equippedBeforePickingUpObject);
+					} else if (actor.inventory.containsDuplicateOf(this)) {
+						actor.equip(actor.inventory.getDuplicateOf(this));
 					} else {
 						actor.equip(null);
 					}

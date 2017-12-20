@@ -44,12 +44,13 @@ public class ActionSellSpecificItem extends Action {
 		receiver.removeFromCarriedGoldValue(object.value);
 		object.owner = receiver;
 
-		performer.inventory.remove(object);
 		if (performer instanceof Actor) {
 			Actor actor = performer;
 			if (actor.equipped == object) {
 				if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
 					actor.equip(actor.equippedBeforePickingUpObject);
+				} else if (actor.inventory.containsDuplicateOf(object)) {
+					actor.equip(actor.inventory.getDuplicateOf(object));
 				} else {
 					actor.equip(null);
 				}
@@ -62,6 +63,7 @@ public class ActionSellSpecificItem extends Action {
 			if (actor.legArmor == object)
 				actor.legArmor = null;
 		}
+		performer.inventory.remove(object);
 
 		receiver.inventory.add(object);
 		if (receiver instanceof Actor) {

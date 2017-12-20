@@ -92,6 +92,8 @@ public class ActionThrowSpecificItem extends Action {
 		if (performer.equipped == projectile) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
 				performer.equip(performer.equippedBeforePickingUpObject);
+			} else if (performer.inventory.containsDuplicateOf(projectile)) {
+				performer.equip(performer.inventory.getDuplicateOf(projectile));
 			} else {
 				performer.equip(null);
 			}

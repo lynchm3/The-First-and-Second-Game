@@ -39,14 +39,16 @@ public class ActionDropSpecificItem extends Action {
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dropped ", object }));
 		// if (!performer.inventory.contains(object)) {
-		performer.inventory.remove(object);
 		// }
 
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
+
 			if (actor.equipped == object) {
 				if (actor.inventory.contains(actor.equippedBeforePickingUpObject)) {
 					actor.equip(actor.equippedBeforePickingUpObject);
+				} else if (actor.inventory.containsDuplicateOf(object)) {
+					actor.equip(actor.inventory.getDuplicateOf(object));
 				} else {
 					actor.equip(null);
 				}
@@ -59,6 +61,7 @@ public class ActionDropSpecificItem extends Action {
 			if (actor.legArmor == object)
 				actor.legArmor = null;
 		}
+		performer.inventory.remove(object);
 
 		// receiver.inventory.add(object);
 		if (square.inventory.contains(Searchable.class)) {

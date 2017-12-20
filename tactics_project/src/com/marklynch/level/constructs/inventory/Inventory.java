@@ -867,6 +867,42 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return false;
 	}
 
+	public boolean containsObjectWithTemplateId(int id) {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.templateId == id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public GameObject getObjectWithTemplateId(int id) {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.templateId == id) {
+				return gameObject;
+			}
+		}
+		return null;
+	}
+
+	public boolean containsDuplicateOf(GameObject g) {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.templateId == g.templateId && gameObject != g) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public GameObject getDuplicateOf(GameObject g) {
+		for (GameObject gameObject : gameObjects) {
+			if (gameObject.templateId == g.templateId && gameObject != g) {
+				return gameObject;
+			}
+		}
+		return null;
+	}
+
 	public boolean canShareSquare() {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject != null && !gameObject.canShareSquare)
