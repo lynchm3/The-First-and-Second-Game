@@ -126,12 +126,13 @@ public class Projectile {
 		view.rotate(radians, new Vector3f(0f, 0f, 1f));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, 0, 0, 0 + projectileObject.width,
-				0 + projectileObject.height, projectileObject.backwards);
+		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, 0 - projectileObject.width / 2,
+				0 - projectileObject.height / 2, 0 + projectileObject.width - projectileObject.width / 2,
+				0 + projectileObject.height - projectileObject.height / 2, projectileObject.backwards);
 
 		Game.activeBatch.flush();
 		view.rotate(-radians, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-x, -y));
+		view.translate(new Vector2f(-(x), -(y)));
 		Game.activeBatch.updateUniforms();
 
 		// translate to center of object
