@@ -660,6 +660,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
 
+			updateItemCounts();
+
 		}
 	}
 
@@ -690,6 +692,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			this.matchGameObjectsToSquares();
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
+
+			updateItemCounts();
 		}
 		return index;
 	}
@@ -718,10 +722,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (!isOpen)
 			return;
 
-		itemTypeCount.clear();
-		illegalItemTypeCount.clear();
-
 		inventorySquares.clear();
+
+		ArrayList<Integer> itemIdsAlreadyDone = new ArrayList<Integer>();
 
 		for (GameObject gameObject : this.filteredGameObjects) {
 
@@ -740,24 +743,20 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			// Legal items
 			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
-				if (itemTypeCount.containsKey(gameObject.templateId)) {
-					itemTypeCount.put(gameObject.templateId, itemTypeCount.get(gameObject.templateId) + 1);
-				} else {
+
+				if (!itemIdsAlreadyDone.contains(gameObject.templateId)) {
 					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 					inventorySquare.gameObject = gameObject;
 					inventorySquares.add(inventorySquare);
-					itemTypeCount.put(gameObject.templateId, 1);
+					itemIdsAlreadyDone.add(gameObject.templateId);
 				}
 
 			} else {// Illegal items
-				if (illegalItemTypeCount.containsKey(gameObject.templateId)) {
-					illegalItemTypeCount.put(gameObject.templateId,
-							illegalItemTypeCount.get(gameObject.templateId) + 1);
-				} else {
+				if (!itemIdsAlreadyDone.contains(gameObject.templateId)) {
 					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 					inventorySquare.gameObject = gameObject;
 					inventorySquares.add(inventorySquare);
-					illegalItemTypeCount.put(gameObject.templateId, 1);
+					itemIdsAlreadyDone.add(gameObject.templateId);
 				}
 			}
 		}
@@ -781,6 +780,30 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		resize1();
+	}
+
+	public void updateItemCounts() {
+
+		itemTypeCount.clear();
+		illegalItemTypeCount.clear();
+		for (GameObject gameObject : gameObjects) {
+			// Legal items
+			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+				if (itemTypeCount.containsKey(gameObject.templateId)) {
+					itemTypeCount.put(gameObject.templateId, itemTypeCount.get(gameObject.templateId) + 1);
+				} else {
+					itemTypeCount.put(gameObject.templateId, 1);
+				}
+
+			} else {// Illegal items
+				if (illegalItemTypeCount.containsKey(gameObject.templateId)) {
+					illegalItemTypeCount.put(gameObject.templateId,
+							illegalItemTypeCount.get(gameObject.templateId) + 1);
+				} else {
+					illegalItemTypeCount.put(gameObject.templateId, 1);
+				}
+			}
+		}
 	}
 
 	public void resize1() {
