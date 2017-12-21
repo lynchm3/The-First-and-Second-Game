@@ -85,7 +85,7 @@ public class ActionThrowSpecificItem extends Action {
 		// shoot projectile
 		if (targetSquare.visibleToPlayer || performer.squareGameObjectIsOn.visibleToPlayer)
 			Game.level.projectiles.add(new Projectile(projectile.name, performer, this, targetGameObject, targetSquare,
-					projectile, 2f, true));
+					projectile, 0.2f, 1f, true));
 		else
 			targetSquare.inventory.add(projectile);
 

@@ -197,8 +197,8 @@ public class Player extends Human {
 																// items in
 																// inventory
 
-		float xInPixels = 64;
-		float yInPixels = Game.windowHeight - 64 - Game.INVENTORY_SQUARE_HEIGHT;
+		float xInPixels = Game.windowWidth - 120;
+		float yInPixels = Game.windowHeight - 180 - Game.INVENTORY_SQUARE_HEIGHT;
 
 		TextureUtils.drawTexture(squareTexture, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
 				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
@@ -224,17 +224,8 @@ public class Player extends Human {
 			}
 
 			// Count && value
-			System.out.println("inventory = " + inventory);
 
-			System.out.println("inventory.itemTypeCount = " + inventory.itemTypeCount);
-
-			System.out.println("equipped = " + equipped);
-
-			System.out.println("equipped.templateId = " + equipped.templateId);
-
-			Integer count = null;
-			if (inventory.itemTypeCount != null && equipped != null)
-				count = inventory.itemTypeCount.get(equipped.templateId);
+			Integer count = inventory.itemTypeCount.get(equipped.templateId);
 			if (count == null)
 				count = 1;
 

@@ -86,7 +86,7 @@ public class ActionAttack extends Action {
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			if (performer.squareGameObjectIsOn.visibleToPlayer || target.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.projectiles.add(new Projectile("Arrow", performer, this, target, target.squareGameObjectIsOn,
-						Templates.ARROW.makeCopy(null, null), 2f, true));
+						Templates.ARROW.makeCopy(null, null), 2f, 0f, true));
 		} else {
 			if (target.squareGameObjectIsOn.visibleToPlayer)
 				performer.showPow(target);

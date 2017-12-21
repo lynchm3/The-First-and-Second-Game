@@ -63,7 +63,7 @@ public class ActionCastBurn extends Action {
 
 			if (performer.squareGameObjectIsOn.visibleToPlayer || target.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.projectiles.add(new Projectile("Fire Ball", performer, this, target,
-						target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null), 1f, true));
+						target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null), 1f, 0f, true));
 		}
 		// else {
 		// performer.showPow(target);
