@@ -50,8 +50,12 @@ public class Projectile {
 
 		this.x = this.originX = shooter.getCenterX();
 		this.y = this.originY = shooter.getCenterY();
-		this.targetX = targetSquare.getCenterX();
-		this.targetY = targetSquare.getCenterY();
+		this.targetX = this.targetSquare.xInGridPixels + Game.SQUARE_WIDTH * this.projectileObject.drawOffsetX
+				+ this.projectileObject.width / 2;
+		this.targetY = this.targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * this.projectileObject.drawOffsetY
+				+ this.projectileObject.height / 2;
+		// (int) (this.targetSquare.yInGridPixels
+		// + Game.SQUARE_HEIGHT * this.projectileObject.drawOffsetY)
 
 		distanceToCoverX = this.targetX - this.originX;
 		distanceToCoverY = this.targetY - this.originY;
