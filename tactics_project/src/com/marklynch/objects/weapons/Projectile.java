@@ -29,10 +29,10 @@ public class Projectile {
 	Texture imageTexture;
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
-	float spinSpeed = 0;
+	float rotationSpeed = 0;
 
 	public Projectile(String name, Actor shooter, Action action, GameObject targetGameObject, Square targetSquare,
-			GameObject projectileObject, float speed, float spinSpeed, boolean onTarget) {
+			GameObject projectileObject, float speed, float rotationSpeed, boolean onTarget) {
 		super();
 
 		if (shooter == Game.level.player) {
@@ -60,7 +60,10 @@ public class Projectile {
 		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
 		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
 
-		this.spinSpeed = spinSpeed;
+		if (speedX < 0)
+			this.rotationSpeed = -rotationSpeed;
+		else
+			this.rotationSpeed = rotationSpeed;
 
 		if (projectileObject instanceof Arrow && distanceToCoverX < 0) {
 			projectileObject.backwards = true;
@@ -74,7 +77,7 @@ public class Projectile {
 		float distanceX = speedX * delta;
 		float distanceY = speedY * delta;
 
-		angle += spinSpeed;
+		angle += rotationSpeed * delta;
 
 		distanceCoveredX += distanceX;
 		distanceCoveredY += distanceY;
@@ -132,7 +135,7 @@ public class Projectile {
 
 		Game.activeBatch.flush();
 		view.rotate(-radians, new Vector3f(0f, 0f, 1f));
-		view.translate(new Vector2f(-(x), -(y)));
+		view.translate(new Vector2f(-x, -y));
 		Game.activeBatch.updateUniforms();
 
 		// translate to center of object
