@@ -135,6 +135,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	float textShiftX = 0;
 	float textOtherShiftX = 0;
 
+	// [ENTER] / Search text
+	String stringEnterSearch = "[ENTER] Search";
+	int lengthEnterSearch = Game.font.getWidth(stringEnterSearch);
+
 	// Color beind inventory squares
 	public final static Color inventoryAreaColor = new Color(1f, 1f, 1f, 0.25f);
 
@@ -143,6 +147,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	// Loot all button
 	public static LevelButton buttonLootAll;
+
+	// Search button
+	public static LevelButton buttonSearch;
 
 	// Quick sell button
 	public static LevelButton buttonQuickSell;
@@ -170,7 +177,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureBag;
 	public static Texture textureStar;
 
-	public TextBox textBox = new TextBox(this, "", "Search", 0, 0);
+	public TextBox textBoxSearch = new TextBox(this, "", "Search", 0, 0);
+	boolean searching = false;
 
 	public Inventory(GameObject... gameObjects) {
 		for (GameObject gameObject : gameObjects) {
@@ -183,6 +191,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void open() {
+		searching = false;
+		if (Level.activeTextBox == textBoxSearch) {
+			Level.activeTextBox = null;
+		}
+		Game.level.player.inventory.textBoxSearch.text = "";
 		buttons = new ArrayList<Button>();
 		buttonsSort = new ArrayList<Button>();
 		buttonsFilter = new ArrayList<Button>();
@@ -285,7 +298,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		});
 		buttonsFilter.add(buttonFilterByFood);
 
-		buttonLootAll = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
+		buttonLootAll = new LevelButton(900f, bottomBorderHeight, 150f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "LOOT ALL [SPACE]", true, false, Color.BLACK, Color.WHITE,
 				"Loot all items nearby (legal if white, illegal if red)");
 		buttonLootAll.setClickListener(new ClickListener() {
@@ -333,6 +346,27 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			}
 		});
+
+		buttonSearch = new LevelButton(1000f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", stringEnterSearch, true, false, Color.BLACK, Color.WHITE, "Search!");
+		buttonSearch.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+
+				searching = !searching;
+
+				if (searching) {
+					Level.activeTextBox = textBoxSearch;
+				} else {
+					if (Level.activeTextBox == textBoxSearch) {
+						Level.activeTextBox = null;
+					}
+				}
+
+				// System.out.println("SEARCH");
+			}
+		});
+		buttons.add(buttonSearch);
 
 		buttonQuickSell = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "QUICK SELL [SPACE]", true, false, Color.BLACK, Color.WHITE,
@@ -391,8 +425,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (inventoryMode == INVENTORY_MODE.MODE_TRADE || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 			otherInventory.isOpen = true;
 		}
-
-		Level.activeTextBox = textBox;
 	}
 
 	public void close() {
@@ -513,9 +545,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			button.down = false;
 
 		filteredGameObjects.clear();
-		if (Game.level.player.inventory.textBox.text.length() > 0) {
+		if (Game.level.player.inventory.textBoxSearch.text.length() > 0) {
 			for (GameObject gameObject : gameObjects) {
-				if (TextUtils.containsIgnoreCase(gameObject.name, Game.level.player.inventory.textBox.text)) {
+				if (TextUtils.containsIgnoreCase(gameObject.name, Game.level.player.inventory.textBoxSearch.text)) {
 					filteredGameObjects.add(gameObject);
 				}
 			}
@@ -838,6 +870,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		resize2();
 		buttonClose.x = squaresX;
 		textShiftX = squaresX + buttonClose.width;
+		buttonSearch.x = textShiftX + 100;
 		buttonQuickSell.x = squaresX + buttonClose.width;
 
 		if (this.groundDisplay != null) {
@@ -1171,6 +1204,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					false, null, new Object[] { stringShiftEquip });
 		}
 
+		// [ENTER] Search
+		buttonSearch.draw();
+
 		// text
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			TextUtils.printTextWithImages(100f, 8f, 300f, true, null,
@@ -1210,30 +1246,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 				actorPositionXInPixels + actorWidth, actorPositionYInPixels + Game.level.player.height * 2);
 
-		GameObject gameObjectMouseIsOver = null;
-
 		GameObject gameObjectToDrawInPlayersHand = null;
 		GameObject gameObjectToDrawOnPlayersHead = Game.level.player.helmet;
 		GameObject gameObjectToDrawOnPlayersBody = Game.level.player.bodyArmor;
 		GameObject gameObjectToDrawOnPlayersLegs = Game.level.player.legArmor;
-
-		// if (Game.squareMouseIsOver != null && Game.squareMouseIsOver
-		// instanceof InventorySquare) {
-		// // Preview weapon
-		// gameObjectMouseIsOver = ((InventorySquare)
-		// Game.squareMouseIsOver).gameObject;
-		//
-		// if (gameObjectMouseIsOver instanceof Helmet) {
-		// gameObjectToDrawOnPlayersHead = gameObjectMouseIsOver;
-		// } else if (gameObjectMouseIsOver instanceof BodyArmor) {
-		// gameObjectToDrawOnPlayersBody = gameObjectMouseIsOver;
-		// } else if (gameObjectMouseIsOver instanceof LegArmor) {
-		// gameObjectToDrawOnPlayersLegs = gameObjectMouseIsOver;
-		// } else {
-		// gameObjectToDrawInPlayersHand = gameObjectMouseIsOver;
-		// }
-		//
-		// }
 
 		if (gameObjectToDrawInPlayersHand == null) {
 			gameObjectToDrawInPlayersHand = Game.level.player.equipped;
@@ -1353,8 +1369,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		weaponComparisonDisplay.drawStaticUI();
 
-		if (this.parent == Game.level.player)
-			textBox.draw();
+		if (this.parent == Game.level.player && searching)
+			textBoxSearch.draw();
 
 	}
 
@@ -1675,11 +1691,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public boolean isMouseOverTextBox(int mouseX, int mouseY) {
-		return textBox.isMouseOver(mouseX, mouseY);
+		return textBoxSearch.isMouseOver(mouseX, mouseY);
 	}
 
 	public boolean clickTextBox(int mouseX, int mouseY) {
-		return textBox.click(mouseX, mouseY);
+		return textBoxSearch.click(mouseX, mouseY);
 	}
 
 }

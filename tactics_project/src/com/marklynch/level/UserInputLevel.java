@@ -269,7 +269,7 @@ public class UserInputLevel {
 		if (draggingMap == false) {
 			if (Game.level.openInventories.size() > 0 && Game.level.openInventories.get(0)
 					.isMouseOverTextBox(Mouse.getX(), (int) (Game.windowHeight - Mouse.getY()))) {
-				Game.textBoxHoveringOver = Game.level.openInventories.get(0).textBox;
+				Game.textBoxHoveringOver = Game.level.openInventories.get(0).textBoxSearch;
 			} else if (Game.level.fullScreenTextBox != null && Game.level.fullScreenTextBox.isMouseOver(Mouse.getX(),
 					(int) (Game.windowHeight - Mouse.getY()))) {
 				Game.textBoxHoveringOver = Game.level.fullScreenTextBox.textBox;
@@ -781,6 +781,10 @@ public class UserInputLevel {
 			Level.activeTextBox.enterTyped();
 			return;
 		}
+		if (Game.level.openInventories.size() > 0) {
+			Game.level.player.inventory.buttonSearch.click();
+		}
+
 		if (Game.level.activeActor != Game.level.player)
 			return;
 		if (Game.level.popupMenuActions.size() != 0) {
