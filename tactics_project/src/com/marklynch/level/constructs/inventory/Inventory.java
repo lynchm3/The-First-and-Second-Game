@@ -358,12 +358,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				if (searching) {
 					Level.activeTextBox = textBoxSearch;
 				} else {
+					// Level.activeTextBox = null;
 					if (Level.activeTextBox == textBoxSearch) {
 						Level.activeTextBox = null;
 					}
 				}
-
-				// System.out.println("SEARCH");
 			}
 		});
 		buttons.add(buttonSearch);
@@ -1679,7 +1678,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	@Override
 	public void enterTyped() {
-
+		Game.level.player.inventory.buttonSearch.click();
 	}
 
 	@Override
