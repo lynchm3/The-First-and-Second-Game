@@ -139,6 +139,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	String stringEnterSearch = "[ENTER] Search";
 	int lengthEnterSearch = Game.font.getWidth(stringEnterSearch);
 
+	// "Search:" tag
+	String stringSearch = "Search:";
+	int lengthSearch = Game.font.getWidth(stringSearch);
+
 	// Color beind inventory squares
 	public final static Color inventoryAreaColor = new Color(1f, 1f, 1f, 0.25f);
 
@@ -177,7 +181,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureBag;
 	public static Texture textureStar;
 
-	public TextBox textBoxSearch = new TextBox(this, "", "Search", 0, 0);
+	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0);
 	boolean searching = false;
 
 	public Inventory(GameObject... gameObjects) {
@@ -1189,10 +1193,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		QuadUtils.drawQuad(backgroundColor, 0, Game.windowHeight - bottomBorderHeight, Game.windowWidth,
 				Game.windowHeight);
 
+		// "Search:" text
+		TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, false, null, new Object[] { stringSearch });
+
 		// [SHIFT]
 		if (groundDisplay != null) {
 			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
-					null, new Object[] { stringShiftDrop });
+					null, new Object[] { stringSearch });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
 					false, null, new Object[] { stringShiftEquip });
 		}
