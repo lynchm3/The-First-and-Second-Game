@@ -13,6 +13,7 @@ import mdesl.graphics.Color;
 
 public class FullScreenTextBox implements TextBoxHolder {
 
+	public static final String ENTER_NEW_MARKER_NAME = "Enter New Marker Name";
 	public GameObject gameObject;
 	// public float width;
 	public String instructions;
@@ -24,11 +25,7 @@ public class FullScreenTextBox implements TextBoxHolder {
 		this.instructions = instructions;
 
 		String textBoxText = ((MapMarker) gameObject).baseName;
-		if (textBoxText == MapMarker.NO_DESCRIPTION) {
-			textBoxText = "";
-		}
-
-		this.textBox = new TextBox(this, textBoxText, MapMarker.NO_DESCRIPTION, 300, 300);
+		this.textBox = new TextBox(this, textBoxText, ENTER_NEW_MARKER_NAME, 300, 300);
 		this.instructionsDrawPositionY = textBox.drawPositionY - 36;
 	}
 
@@ -44,10 +41,12 @@ public class FullScreenTextBox implements TextBoxHolder {
 
 	@Override
 	public void enterTyped() {
-		if (textBox.getText().length() == 0)
-			textBox.setText(MapMarker.NO_DESCRIPTION);
 		((MapMarker) gameObject).baseName = textBox.getText();
-		gameObject.name = "Marker: " + textBox.getText();
+		if (((MapMarker) gameObject).baseName.length() == 0)
+			gameObject.name = "Marker";
+		else
+			gameObject.name = ((MapMarker) gameObject).baseName;
+
 		// Game.level.popupTextBoxes.clear();
 		Level.activeTextBox = null;
 		Level.fullScreenTextBox = null;

@@ -14,7 +14,6 @@ import mdesl.graphics.Texture;
 
 public class MapMarker extends GameObject {
 
-	public static final String NO_DESCRIPTION = "No Description";
 	public static Texture RED_MAP_MARKER_TEXTURE;
 	public static Texture TREASURE_MAP_MARKER_TEXTURE;
 	public static Texture SKULL_MAP_MARKER_TEXTURE;
@@ -27,9 +26,6 @@ public class MapMarker extends GameObject {
 
 	public MapMarker() {
 		super();
-
-		baseName = NO_DESCRIPTION;
-		this.name = "Marker: " + baseName;
 
 		canBePickedUp = true;
 		showInventory = false;
@@ -99,8 +95,8 @@ public class MapMarker extends GameObject {
 	public MapMarker makeCopy(Square square, Actor owner) {
 		MapMarker mapMarker = new MapMarker();
 		super.setAttributesForCopy(mapMarker, square, owner);
-		baseName = NO_DESCRIPTION;
-		this.name = "Marker: " + baseName;
+		mapMarker.baseName = "";
+		mapMarker.name = "Marker";
 		return mapMarker;
 	}
 
