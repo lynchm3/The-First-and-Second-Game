@@ -17,7 +17,6 @@ public class TextBox {
 	public float drawPositionX, drawPositionY;
 	public float height = 20;
 	private String text;
-	// public String hint;
 	public StringWithColor hintWithColor;
 	public float width = 2;
 
@@ -27,7 +26,6 @@ public class TextBox {
 
 		this.parent = parent;
 		this.text = text;
-		// this.hint = hint;
 		this.hintWithColor = new StringWithColor(hint, Color.GRAY);
 		this.drawPositionX = drawPositionX;
 		this.drawPositionY = drawPositionY;

@@ -802,8 +802,15 @@ public class UserInputLevel {
 			Game.level.activeTextBox.backSpaceTyped();
 			return;
 		}
+
+		if (Game.level.openInventories.size() > 0) {
+			Game.level.player.inventory.backSpaceTyped();
+			return;
+		}
+
 		if (Game.level.activeActor != Game.level.player)
 			return;
+
 		Level.closeAllPopups();
 	}
 

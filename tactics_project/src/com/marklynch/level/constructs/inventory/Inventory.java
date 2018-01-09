@@ -139,6 +139,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	String stringEnterSearch = "[ENTER] Search";
 	int lengthEnterSearch = Game.font.getWidth(stringEnterSearch);
 
+	// [<-] / Clear search text
+	String stringClearSearch = "[<-] Clear";
+	int lengthClearSearch = Game.font.getWidth(stringClearSearch);
+
 	// "Search:" tag
 	String stringSearch = "Search:";
 	int lengthSearch = Game.font.getWidth(stringSearch);
@@ -152,8 +156,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	// Loot all button
 	public static LevelButton buttonLootAll;
 
-	// Search button
+	// Search buttons
 	public static LevelButton buttonSearch;
+	public static LevelButton buttonClearSearch;
 
 	// Quick sell button
 	public static LevelButton buttonQuickSell;
@@ -370,6 +375,20 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 		});
 		buttons.add(buttonSearch);
+
+		buttonClearSearch = new LevelButton(lengthSearch + 16, 30f, lengthClearSearch, 30f, "end_turn_button.png",
+				"end_turn_button.png", stringClearSearch, true, true, Color.BLACK, Color.WHITE, "Clear search filter");
+		buttonClearSearch.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				textBoxSearch.clearText();
+				searching = false;
+				if (Level.activeTextBox == textBoxSearch) {
+					Level.activeTextBox = null;
+				}
+			}
+		});
+		buttons.add(buttonClearSearch);
 
 		buttonQuickSell = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "QUICK SELL [SPACE]", true, false, Color.BLACK, Color.WHITE,
@@ -1199,7 +1218,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// [SHIFT]
 		if (groundDisplay != null) {
 			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
-					null, new Object[] { stringSearch });
+					null, new Object[] { stringShiftDrop });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
 					false, null, new Object[] { stringShiftEquip });
 		}
@@ -1212,6 +1231,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		// [ENTER] Search
+		buttonSearch.draw();
+
+		// [<-] Clear Search
 		buttonSearch.draw();
 
 		// text
@@ -1687,6 +1709,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	@Override
 	public void enterTyped() {
 		Game.level.player.inventory.buttonSearch.click();
+	}
+
+	public void backSpaceTyped() {
+		Game.level.player.inventory.buttonClearSearch.click();
 	}
 
 	@Override
