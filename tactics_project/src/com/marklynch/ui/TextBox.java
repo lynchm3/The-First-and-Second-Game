@@ -128,6 +128,9 @@ public class TextBox {
 	}
 
 	public boolean click(int mouseX, int mouseY) {
+
+		Game.level.activeTextBox = this;
+
 		if (mouseX > drawPositionX && mouseX < drawPositionX + width && mouseY > drawPositionY
 				&& mouseY < drawPositionY + height) {
 

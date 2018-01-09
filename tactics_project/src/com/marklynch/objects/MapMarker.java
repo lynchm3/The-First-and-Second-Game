@@ -99,6 +99,8 @@ public class MapMarker extends GameObject {
 	public MapMarker makeCopy(Square square, Actor owner) {
 		MapMarker mapMarker = new MapMarker();
 		super.setAttributesForCopy(mapMarker, square, owner);
+		baseName = NO_DESCRIPTION;
+		this.name = "Marker: " + baseName;
 		return mapMarker;
 	}
 
