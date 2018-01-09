@@ -75,8 +75,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	static String log = "LOG";
 	static int logLength = Game.font.getWidth(log);
 	static LevelButton buttonMarkers;
-	static String markers = "MARKERS";
-	static int markersLength = Game.font.getWidth(markers);
+	static String mapMarkers = "MAP MARKERS";
+	static int mapMarkersLength = Game.font.getWidth(mapMarkers);
 	static LevelButton buttonConversations;
 	static String conversations = "CONVERSATIONS";
 	static int conversationsLength = Game.font.getWidth(conversations);
@@ -107,8 +107,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		});
 		tabButtons.add(buttonLog);
 
-		buttonMarkers = new LevelButton(contentX + logLength + 16, 0, markersLength, 30f, "end_turn_button.png",
-				"end_turn_button.png", markers, true, true, Color.BLACK, Color.WHITE, null);
+		buttonMarkers = new LevelButton(contentX + logLength + 16, 0, mapMarkersLength, 30f, "end_turn_button.png",
+				"end_turn_button.png", mapMarkers, true, true, Color.BLACK, Color.WHITE, null);
 		buttonMarkers.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -126,7 +126,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		});
 		tabButtons.add(buttonMarkers);
 
-		buttonConversations = new LevelButton(contentX + logLength + 16 + markersLength + 16, 0, conversationsLength,
+		buttonConversations = new LevelButton(contentX + logLength + 16 + mapMarkersLength + 16, 0, conversationsLength,
 				30f, "end_turn_button.png", "end_turn_button.png", conversations, true, true, Color.BLACK, Color.WHITE,
 				null);
 		buttonConversations.setClickListener(new ClickListener() {
@@ -502,6 +502,30 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				linesPrinted++;
 			}
 			linesPrinted++;
+		}
+
+		if (markersToTrack.size() > 0) {
+			TextUtils.printTextWithImages(Game.windowWidth - mapMarkersLength - 202, 20 + 20 * linesPrinted,
+					Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor(mapMarkers, Color.WHITE) });
+			linesPrinted++;
+			for (MapMarker trackedMapMarker : markersToTrack) {
+				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(trackedMapMarker.name) - 202,
+						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
+						new Object[] { new StringWithColor(trackedMapMarker.name, Color.WHITE) });
+
+				QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - 200, 20 + 20 * linesPrinted, Game.windowWidth - 180,
+						20 + 20 * linesPrinted + 20);
+
+				if (trackedMapMarker.imageTexture != null) {
+					TextureUtils.drawTexture(trackedMapMarker.imageTexture, Game.windowWidth - 200,
+							20 + 20 * linesPrinted, Game.windowWidth - 180, 20 + 20 * linesPrinted + 20);
+				}
+
+				TextureUtils.drawTexture(checkBoxChecked, Game.windowWidth - 180, 20 + 20 * linesPrinted,
+						Game.windowWidth - 160, 20 + 20 * linesPrinted + 20);
+
+				linesPrinted++;
+			}
 		}
 	}
 
