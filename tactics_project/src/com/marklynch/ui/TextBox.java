@@ -38,7 +38,12 @@ public class TextBox {
 	public void draw() {
 		width = Game.windowWidth - drawPositionX;
 		// Text box
-		QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionY, drawPositionX + width + 4, drawPositionY + height);
+		if (Game.level.activeTextBox == this)
+			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionY, drawPositionX + width + 4,
+					drawPositionY + height);
+		else
+			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionY, drawPositionX + width + 4,
+					drawPositionY + height);
 
 		if (text.length() > 0) {
 			// Text string
@@ -53,11 +58,14 @@ public class TextBox {
 		}
 
 		// Caret
-		int caretPosition = Game.font.getWidth(text, 0, caretPositionIndex);
-		if (caretOn) {
-			QuadUtils.drawQuad(Color.BLACK, drawPositionX + caretPosition, drawPositionY,
-					drawPositionX + caretPosition + 2, drawPositionY + height);
+		if (Game.level.activeTextBox == this) { TEXT WAS CLEARED BUT CARET WAS NOT			
+			int caretPosition = Game.font.getWidth(text, 0, caretPositionIndex);
+			if (caretOn) {
+				QuadUtils.drawQuad(Color.BLACK, drawPositionX + caretPosition, drawPositionY,
+						drawPositionX + caretPosition + 2, drawPositionY + height);
+			}
 		}
+
 	}
 
 	public void keyTyped(char character) {

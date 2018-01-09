@@ -1368,8 +1368,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		weaponComparisonDisplay.drawStaticUI();
 
-		if (this.parent == Game.level.player && searching)
-			textBoxSearch.draw();
+		// if (this.parent == Game.level.player && searching)
+		textBoxSearch.draw();
 
 	}
 
