@@ -5,6 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.animation.AnimationThrow;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
@@ -75,6 +76,8 @@ public class Projectile {
 		}
 
 		this.onTarget = onTarget;
+
+		shooter.animation = new AnimationThrow(this);
 	}
 
 	public void update(float delta) {

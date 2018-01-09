@@ -3,7 +3,6 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationThrow;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -87,11 +86,11 @@ public class ActionThrowSpecificItem extends Action {
 		Projectile projectile = null;
 		if (targetSquare.visibleToPlayer || performer.squareGameObjectIsOn.visibleToPlayer) {
 			projectile = new Projectile(gameObjectToThrow.name, performer, this, targetGameObject, targetSquare,
-					gameObjectToThrow, 0.2f, 0.5f, true);
+					gameObjectToThrow, 1f, 0.5f, true);
 			Game.level.projectiles.add(projectile);
-			performer.animation = new AnimationThrow(projectile);
-		} else
+		} else {
 			targetSquare.inventory.add(gameObjectToThrow);
+		}
 
 		if (performer.equipped == gameObjectToThrow) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
