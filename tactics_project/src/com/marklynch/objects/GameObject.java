@@ -64,9 +64,11 @@ import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.actions.ActionTeleportOther;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
+import com.marklynch.objects.actions.ActionTrackMapMarker;
 import com.marklynch.objects.actions.ActionTradeItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionUnlock;
+import com.marklynch.objects.actions.ActionUntrackMapMarker;
 import com.marklynch.objects.actions.ActionUse;
 import com.marklynch.objects.actions.ActionableInInventory;
 import com.marklynch.objects.actions.ActionableInWorld;
@@ -714,10 +716,17 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Map Marker
 		if (this instanceof MapMarker) {
-			actions.add(new ActionInspect(performer, this));
-			actions.add(new ActionRename(this));
-			actions.add(new ActionChangeAppearance(this));
-			actions.add(new ActionRemoveMapMarker((MapMarker) this));
+			MapMarker mapMarker = (MapMarker) this;
+
+			actions.add(new ActionInspect(performer, mapMarker));
+			if (mapMarker.track) {
+				actions.add(new ActionUntrackMapMarker(mapMarker));
+			} else {
+				actions.add(new ActionTrackMapMarker(mapMarker));
+			}
+			actions.add(new ActionRename(mapMarker));
+			actions.add(new ActionChangeAppearance(mapMarker));
+			actions.add(new ActionRemoveMapMarker(mapMarker));
 			return actions;
 		}
 

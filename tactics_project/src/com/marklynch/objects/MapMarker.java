@@ -24,6 +24,8 @@ public class MapMarker extends GameObject {
 
 	public String baseName = "";
 
+	public boolean track = false;
+
 	public MapMarker() {
 		super();
 
