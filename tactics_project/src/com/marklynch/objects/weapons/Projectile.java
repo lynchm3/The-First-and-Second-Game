@@ -30,6 +30,7 @@ public class Projectile {
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
 	float rotationSpeed = 0;
+	public boolean landed = false;
 
 	public Projectile(String name, Actor shooter, Action action, GameObject targetGameObject, Square targetSquare,
 			GameObject projectileObject, float speed, float rotationSpeed, boolean onTarget) {
@@ -89,6 +90,7 @@ public class Projectile {
 		if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
 			Game.level.projectilesToRemove.add(this);
+			landed = true;
 			if (targetGameObject != null)
 				shooter.showPow(targetGameObject);
 			if (!(projectileObject instanceof Arrow)) {

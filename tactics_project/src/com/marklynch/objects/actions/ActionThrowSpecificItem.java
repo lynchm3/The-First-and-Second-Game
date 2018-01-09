@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationThrow;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -20,10 +21,10 @@ public class ActionThrowSpecificItem extends Action {
 	Actor performer;
 	Square targetSquare;
 	GameObject targetGameObject;
-	GameObject projectile;
+	GameObject gameObjectToThrow;
 
 	// Default for hostiles
-	public ActionThrowSpecificItem(Actor performer, Object target, GameObject object) {
+	public ActionThrowSpecificItem(Actor performer, Object target, GameObject gameObjectToThrow) {
 		super(ACTION_NAME, "action_throw.png");
 		this.performer = performer;
 		if (target instanceof Square) {
@@ -33,11 +34,11 @@ public class ActionThrowSpecificItem extends Action {
 			targetGameObject = (GameObject) target;
 			targetSquare = targetGameObject.squareGameObjectIsOn;
 		}
-		this.projectile = object;
+		this.gameObjectToThrow = gameObjectToThrow;
 		if (!check()) {
 			enabled = false;
 		} else {
-			actionName = ACTION_NAME + " " + object.name;
+			actionName = ACTION_NAME + " " + gameObjectToThrow.name;
 		}
 		legal = checkLegality();
 		sound = createSound();
@@ -51,11 +52,11 @@ public class ActionThrowSpecificItem extends Action {
 
 		float damage = 0;
 
-		if (projectile instanceof Weapon) {
-			damage = performer.getEffectiveStrength() + projectile.weight / 10f
-					+ ((Weapon) projectile).getTotalEffectiveDamage();
+		if (gameObjectToThrow instanceof Weapon) {
+			damage = performer.getEffectiveStrength() + gameObjectToThrow.weight / 10f
+					+ ((Weapon) gameObjectToThrow).getTotalEffectiveDamage();
 		} else {
-			damage = performer.getEffectiveStrength() + projectile.weight / 10f;
+			damage = performer.getEffectiveStrength() + gameObjectToThrow.weight / 10f;
 
 		}
 		if (targetGameObject != null && targetGameObject.attackable) {
@@ -64,10 +65,10 @@ public class ActionThrowSpecificItem extends Action {
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {
 			if (targetGameObject != null) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile, " at ",
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", gameObjectToThrow, " at ",
 						targetGameObject, " for " + damage + " damage" }));
 			} else {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", projectile }));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", gameObjectToThrow }));
 
 			}
 		}
@@ -83,33 +84,36 @@ public class ActionThrowSpecificItem extends Action {
 		performer.hasAttackedThisTurn = true;
 
 		// shoot projectile
-		if (targetSquare.visibleToPlayer || performer.squareGameObjectIsOn.visibleToPlayer)
-			Game.level.projectiles.add(new Projectile(projectile.name, performer, this, targetGameObject, targetSquare,
-					projectile, 0.2f, 0.5f, true));
-		else
-			targetSquare.inventory.add(projectile);
+		Projectile projectile = null;
+		if (targetSquare.visibleToPlayer || performer.squareGameObjectIsOn.visibleToPlayer) {
+			projectile = new Projectile(gameObjectToThrow.name, performer, this, targetGameObject, targetSquare,
+					gameObjectToThrow, 0.2f, 0.5f, true);
+			Game.level.projectiles.add(projectile);
+			performer.animation = new AnimationThrow(projectile);
+		} else
+			targetSquare.inventory.add(gameObjectToThrow);
 
-		if (performer.equipped == projectile) {
+		if (performer.equipped == gameObjectToThrow) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {
 				performer.equip(performer.equippedBeforePickingUpObject);
-			} else if (performer.inventory.containsDuplicateOf(projectile)) {
-				performer.equip(performer.inventory.getDuplicateOf(projectile));
+			} else if (performer.inventory.containsDuplicateOf(gameObjectToThrow)) {
+				performer.equip(performer.inventory.getDuplicateOf(gameObjectToThrow));
 			} else {
 				performer.equip(null);
 			}
 			performer.equippedBeforePickingUpObject = null;
 		}
-		if (performer.helmet == projectile)
+		if (performer.helmet == gameObjectToThrow)
 			performer.helmet = null;
-		if (performer.bodyArmor == projectile)
+		if (performer.bodyArmor == gameObjectToThrow)
 			performer.bodyArmor = null;
-		if (performer.legArmor == projectile)
+		if (performer.legArmor == gameObjectToThrow)
 			performer.legArmor = null;
 
-		if (performer.inventory.contains(projectile))
-			performer.inventory.remove(projectile);
+		if (performer.inventory.contains(gameObjectToThrow))
+			performer.inventory.remove(gameObjectToThrow);
 
-		projectile.thrown(performer);
+		gameObjectToThrow.thrown(performer);
 
 		if (Game.level.openInventories.size() > 0)
 			Game.level.openInventories.get(0).close();
@@ -151,17 +155,17 @@ public class ActionThrowSpecificItem extends Action {
 	@Override
 	public boolean check() {
 
-		float maxDistance = (performer.getEffectiveStrength() * 100) / projectile.weight;
+		float maxDistance = (performer.getEffectiveStrength() * 100) / gameObjectToThrow.weight;
 		if (maxDistance > 10)
 			maxDistance = 10;
 
 		if (performer.straightLineDistanceTo(targetSquare) > maxDistance) {
-			actionName = ACTION_NAME + " " + projectile.name + " (too heavy)";
+			actionName = ACTION_NAME + " " + gameObjectToThrow.name + " (too heavy)";
 			return false;
 		}
 
 		if (!performer.canSeeSquare(targetSquare)) {
-			actionName = ACTION_NAME + " " + projectile.name + " (can't reach)";
+			actionName = ACTION_NAME + " " + gameObjectToThrow.name + " (can't reach)";
 			return false;
 		}
 
@@ -194,15 +198,15 @@ public class ActionThrowSpecificItem extends Action {
 
 		// Sound
 		if (targetGameObject != null) {
-			float loudness = Math.max(targetGameObject.soundWhenHit, projectile.soundWhenHitting);
+			float loudness = Math.max(targetGameObject.soundWhenHit, gameObjectToThrow.soundWhenHitting);
 			// float loudness = targetGameObject.soundWhenHit *
 			// projectile.soundWhenHitting;
 			if (performer.equipped != null)
-				return new Sound(performer, projectile, targetSquare, loudness, legal, this.getClass());
+				return new Sound(performer, gameObjectToThrow, targetSquare, loudness, legal, this.getClass());
 		} else {
-			float loudness = projectile.soundWhenHitting;
+			float loudness = gameObjectToThrow.soundWhenHitting;
 			if (performer.equipped != null)
-				return new Sound(performer, projectile, targetSquare, loudness, legal, this.getClass());
+				return new Sound(performer, gameObjectToThrow, targetSquare, loudness, legal, this.getClass());
 
 		}
 		return null;

@@ -19,15 +19,4 @@ public class AnimationWait extends Animation {
 		}
 
 	}
-
-	@Override
-	public void complete() {
-
-		if (completed)
-			return;
-
-		completed = true;
-
-	}
-
 }
