@@ -1,10 +1,11 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
+import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
 
@@ -32,7 +33,7 @@ public class ActionPlaceMapMarker extends Action {
 		if (!enabled)
 			return;
 
-		GameObject mapMarker = Templates.MAP_MARKER_RED.makeCopy(target, null);
+		MapMarker mapMarker = Templates.MAP_MARKER_RED.makeCopy(target, null);
 		mapMarker.inventory.add(Templates.MAP_MARKER_RED.makeCopy(null, null));
 		mapMarker.inventory.add(Templates.MAP_MARKER_GREEN.makeCopy(null, null));
 		mapMarker.inventory.add(Templates.MAP_MARKER_BLUE.makeCopy(null, null));
@@ -41,6 +42,8 @@ public class ActionPlaceMapMarker extends Action {
 
 		if (Game.level.shouldLog(Game.level.player))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { "Added map marker to ", target }));
+
+		Level.markerList.add(mapMarker);
 
 		mapMarker.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_MAP_MARKER);
 		mapMarker.inventory.open();

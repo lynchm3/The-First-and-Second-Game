@@ -26,6 +26,7 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.constructs.journal.Journal;
+import com.marklynch.level.constructs.journal.MarkerList;
 import com.marklynch.level.constructs.journal.QuestList;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.level.constructs.power.PowerBleed;
@@ -112,6 +113,7 @@ public class Level {
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 	public static transient Journal journal = new Journal();
 	public static transient QuestList fullQuestList = new QuestList();
+	public static transient MarkerList markerList = new MarkerList();
 	public static transient FactionList factions = new FactionList();
 	public static transient GameOver gameOver = new GameOver();
 	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();

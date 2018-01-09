@@ -182,7 +182,7 @@ public class QuestSmallGame extends Quest {
 			"In the staging area for the hunt I found the plan for the hunt");
 
 	JournalLog journalLogTalkedToWolves = new JournalLog(
-			"A wolf, talked to me. He told me \"They come\". He showed me hunters in the town nearby planning a hunt.");
+			"A wolf, talked to me. He told me \"They plot\". He showed me hunters in the town nearby planning a hunt.");
 
 	JournalLog journalLogAttackedHunters = new JournalLog("I attacked the hunters");
 	JournalLog journalLogAttackedWolves = new JournalLog("I attacked the wolves");

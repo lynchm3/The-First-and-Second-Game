@@ -9,6 +9,7 @@ import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.MapMarker;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
@@ -30,7 +31,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	public static final String resolved = "Resolved";
 
 	public static enum MODE {
-		LOG, CONVERSATION
+		LOG, MARKER, CONVERSATION
 	};
 
 	public MODE mode = MODE.LOG;
@@ -70,6 +71,9 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	static LevelButton buttonLog;
 	static String log = "LOG";
 	static int logLength = Game.font.getWidth(log);
+	static LevelButton buttonMarkers;
+	static String markers = "MARKERS";
+	static int markersLength = Game.font.getWidth(markers);
 	static LevelButton buttonConversations;
 	static String conversations = "CONVERSATIONS";
 	static int conversationsLength = Game.font.getWidth(conversations);
@@ -91,14 +95,36 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				buttonLog.setTextColor(Color.BLACK);
 				buttonLog.buttonColor = Color.WHITE;
 
+				buttonMarkers.setTextColor(Color.WHITE);
+				buttonMarkers.buttonColor = Color.BLACK;
+
 				buttonConversations.setTextColor(Color.WHITE);
 				buttonConversations.buttonColor = Color.BLACK;
 			}
 		});
 		buttons.add(buttonLog);
 
-		buttonConversations = new LevelButton(contentX + logLength + 16, 0, conversationsLength, 30f,
-				"end_turn_button.png", "end_turn_button.png", conversations, true, true, Color.BLACK, Color.WHITE,
+		buttonMarkers = new LevelButton(contentX + logLength + 16, 0, markersLength, 30f, "end_turn_button.png",
+				"end_turn_button.png", markers, true, true, Color.BLACK, Color.WHITE, null);
+		buttonMarkers.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				mode = MODE.MARKER;
+
+				buttonMarkers.setTextColor(Color.BLACK);
+				buttonMarkers.buttonColor = Color.WHITE;
+
+				buttonConversations.setTextColor(Color.WHITE);
+				buttonConversations.buttonColor = Color.BLACK;
+
+				buttonLog.setTextColor(Color.WHITE);
+				buttonLog.buttonColor = Color.BLACK;
+			}
+		});
+		buttons.add(buttonMarkers);
+
+		buttonConversations = new LevelButton(contentX + logLength + 16 + markersLength + 16, 0, conversationsLength,
+				30f, "end_turn_button.png", "end_turn_button.png", conversations, true, true, Color.BLACK, Color.WHITE,
 				null);
 		buttonConversations.setClickListener(new ClickListener() {
 			@Override
@@ -109,6 +135,9 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 				buttonLog.setTextColor(Color.WHITE);
 				buttonLog.buttonColor = Color.BLACK;
+
+				buttonMarkers.setTextColor(Color.WHITE);
+				buttonMarkers.buttonColor = Color.BLACK;
 			}
 		});
 		buttons.add(buttonConversations);
@@ -158,6 +187,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		buttonsToMakeQuestAcive.clear();
 		buttonsToDisplayQuest.clear();
 		buttons.add(buttonLog);
+		buttons.add(buttonMarkers);
 		buttons.add(buttonConversations);
 		buttons.add(buttonClose);
 
@@ -294,7 +324,14 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 		// Content
 		float height = 0;
-		if (questToDisplayInJournal != null) {
+
+		if (mode == MODE.MARKER) {
+			for (MapMarker marker : Level.markerList) {
+				TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
+						Integer.MAX_VALUE, true, null, new Object[] { marker });
+				height += 40;
+			}
+		} else if (questToDisplayInJournal != null) {
 
 			if (mode == MODE.LOG) {
 				for (JournalLog journalLog : questToDisplayInJournal.logList) {

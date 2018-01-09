@@ -717,7 +717,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionInspect(performer, this));
 			actions.add(new ActionRename(this));
 			actions.add(new ActionChangeAppearance(this));
-			actions.add(new ActionRemoveMapMarker(this));
+			actions.add(new ActionRemoveMapMarker((MapMarker) this));
 			return actions;
 		}
 
