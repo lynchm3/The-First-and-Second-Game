@@ -823,6 +823,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionLift(performer, this));
 		}
 
+		if (!decorative && canBePickedUp && fitsInInventory) {
+			actions.add(new ActionEquip(performer, this));
+		}
+
 		// Here put view loot
 
 		// if (Game.level.activeActor != null &&
