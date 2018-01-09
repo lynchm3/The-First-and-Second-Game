@@ -1683,9 +1683,16 @@ public class Level {
 		}
 
 		if (journal.showing) {
-			for (Button button : journal.buttons) {
+			for (Button button : journal.tabButtons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
+			}
+
+			if (journal.mode == Journal.MODE.LOG || journal.mode == Journal.MODE.CONVERSATION) {
+				for (Button button : journal.questButtons) {
+					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+						return button;
+				}
 			}
 
 			if (journal.mode == Journal.MODE.LOG) {

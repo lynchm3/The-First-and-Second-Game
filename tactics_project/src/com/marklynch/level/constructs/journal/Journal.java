@@ -57,7 +57,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	transient static int bottomBorderHeight;
 
-	public static ArrayList<LevelButton> buttons = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> tabButtons = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> questButtons = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToMakeQuestAcive = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToTrackObjectives = new ArrayList<LevelButton>();
@@ -102,7 +103,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				buttonConversations.buttonColor = Color.BLACK;
 			}
 		});
-		buttons.add(buttonLog);
+		tabButtons.add(buttonLog);
 
 		buttonMarkers = new LevelButton(contentX + logLength + 16, 0, markersLength, 30f, "end_turn_button.png",
 				"end_turn_button.png", markers, true, true, Color.BLACK, Color.WHITE, null);
@@ -121,7 +122,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				buttonLog.buttonColor = Color.BLACK;
 			}
 		});
-		buttons.add(buttonMarkers);
+		tabButtons.add(buttonMarkers);
 
 		buttonConversations = new LevelButton(contentX + logLength + 16 + markersLength + 16, 0, conversationsLength,
 				30f, "end_turn_button.png", "end_turn_button.png", conversations, true, true, Color.BLACK, Color.WHITE,
@@ -140,7 +141,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				buttonMarkers.buttonColor = Color.BLACK;
 			}
 		});
-		buttons.add(buttonConversations);
+		tabButtons.add(buttonConversations);
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
 				"end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
@@ -150,7 +151,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				Game.level.openCloseJournal();
 			}
 		});
-		buttons.add(buttonClose);
+		tabButtons.add(buttonClose);
 	}
 
 	public static void loadStaticImages() {
@@ -183,13 +184,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		resize();
 		showing = true;
 
-		buttons.clear();
 		buttonsToMakeQuestAcive.clear();
 		buttonsToDisplayQuest.clear();
-		buttons.add(buttonLog);
-		buttons.add(buttonMarkers);
-		buttons.add(buttonConversations);
-		buttons.add(buttonClose);
 
 		generateLinks();
 
@@ -209,7 +205,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 							Color.BLACK, Color.WHITE, "Display quest details");
 					questsDrawnInList++;
 					activeAdded = true;
-					buttons.add(activeButton);
+					questButtons.add(activeButton);
 				}
 
 				if (!resolvedAdded && quest.resolved) {
@@ -220,7 +216,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 							Color.BLACK, Color.WHITE, "Display quest details");
 					questsDrawnInList++;
 					resolvedAdded = true;
-					buttons.add(activeButton);
+					questButtons.add(activeButton);
 				}
 
 				// buttons to make quest the active one
@@ -243,7 +239,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 					}
 				});
 
-				buttons.add(buttonToMakeQuestActive);
+				questButtons.add(buttonToMakeQuestActive);
 				buttonsToMakeQuestAcive.add(buttonToMakeQuestActive);
 
 				// Button w/ the name of the quest -
@@ -284,7 +280,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 					buttonToShowQuestDetails.click();
 				}
 
-				buttons.add(buttonToShowQuestDetails);
+				questButtons.add(buttonToShowQuestDetails);
 				buttonsToDisplayQuest.add(buttonToShowQuestDetails);
 				questsDrawnInList++;
 
@@ -325,84 +321,109 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		// Content
 		float height = 0;
 
-		if (mode == MODE.MARKER) {
-			for (MapMarker marker : Level.markerList) {
-				TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-						Integer.MAX_VALUE, true, null, new Object[] { marker });
-				height += 40;
-			}
-		} else if (questToDisplayInJournal != null) {
-
-			if (mode == MODE.LOG) {
-				for (JournalLog journalLog : questToDisplayInJournal.logList) {
-					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-							Integer.MAX_VALUE, true, journalLog.links,
-							new Object[] { journalLog.getTurnString(), journalLog.getArea(), journalLog.getSquare(),
-									TextUtils.NewLine.NEW_LINE, journalLog.object });
-					height += journalLog.height + 20;
-				}
-			} else if (mode == MODE.CONVERSATION) {
-				for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
-					TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-							Integer.MAX_VALUE, true, conversationPart.linksForJournal,
-							new Object[] { conversationPart.getTurnString(), conversationPart.talker,
-									conversationPart.getArea(), conversationPart.getSquare(),
-									TextUtils.NewLine.NEW_LINE, conversationPart.text[0] });
-					height += conversationPart.height + 20;
-				}
-			}
-		}
-
-		if (buttons.size() == 1) {
-			TextUtils.printTextWithImages(0, 0, Integer.MAX_VALUE, true, null, new Object[] { "NO QUESTS" });
-		} else {
-		}
-
-		// Buttons
-		for (Button button : buttons) {
+		// Tab Buttons
+		for (Button button : tabButtons) {
 			button.draw();
 		}
 
-		// check box && exclamation mark
-		int questsDrawnInList = 0;
-		boolean activeAdded = false;
-		boolean resolvedAdded = false;
-		for (final Quest quest : Level.fullQuestList) {
-			if (quest.started) {
+		if (mode == MODE.MARKER) {
+			for (MapMarker marker : Level.markerList) {
 
-				if (!activeAdded && !quest.resolved) {
-					questsDrawnInList++;
-					activeAdded = true;
-				}
-
-				if (!resolvedAdded && quest.resolved) {
-					questsDrawnInList++;
-					resolvedAdded = true;
-				}
+				// Marker
+				TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
+						Integer.MAX_VALUE, true, null, new Object[] { marker });
 
 				// Check box
 				Texture checkBoxTextureToUse = checkBoxUnchecked;
-				if (questsToTrack.contains(quest)) {
+				if (marker.track) {
 					checkBoxTextureToUse = checkBoxChecked;
 				}
 
 				float checkBoxx1 = listX + listBorder + listWidth - listItemHeight;
-				float checkBoxY1 = listY + listBorder + questsDrawnInList * listItemHeight;
+				float checkBoxY1 = contentY + contentBorder + height;
 
 				TextureUtils.drawTexture(checkBoxTextureToUse, checkBoxx1, checkBoxY1, checkBoxx1 + listItemHeight,
 						checkBoxY1 + listItemHeight);
+				height += listItemHeight;
+			}
+			if (Level.markerList.size() == 0)
+				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, new Object[] { "NO MARKERS",
+						TextUtils.NewLine.NEW_LINE, "(Markers you add to the map will appear here)" });
+		} else {
+			for (Button button : questButtons) {
+				button.draw();
+			}
 
-				// Exclamation
-				if (quest.updatedSinceLastViewed) {
-					float exclamationX1 = listX + listBorder + listWidth - listItemHeight * 2;
-					float exclamationY1 = listY + listBorder + questsDrawnInList * listItemHeight;
+			if (questToDisplayInJournal != null)
 
-					TextureUtils.drawTexture(exclamationTexture, exclamationX1, exclamationY1,
-							exclamationX1 + listItemHeight, exclamationY1 + listItemHeight);
+			{
+
+				if (mode == MODE.LOG) {
+					for (JournalLog journalLog : questToDisplayInJournal.logList) {
+						TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
+								Integer.MAX_VALUE, true, journalLog.links,
+								new Object[] { journalLog.getTurnString(), journalLog.getArea(), journalLog.getSquare(),
+										TextUtils.NewLine.NEW_LINE, journalLog.object });
+						height += journalLog.height + 20;
+					}
+				} else if (mode == MODE.CONVERSATION) {
+					for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
+						TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
+								Integer.MAX_VALUE, true, conversationPart.linksForJournal,
+								new Object[] { conversationPart.getTurnString(), conversationPart.talker,
+										conversationPart.getArea(), conversationPart.getSquare(),
+										TextUtils.NewLine.NEW_LINE, conversationPart.text[0] });
+						height += conversationPart.height + 20;
+					}
 				}
+			}
 
-				questsDrawnInList++;
+			if (tabButtons.size() == 1) {
+				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, new Object[] { "NO QUESTS" });
+			} else {
+			}
 
+			// check box && exclamation mark
+			int questsDrawnInList = 0;
+			boolean activeAdded = false;
+			boolean resolvedAdded = false;
+			for (final Quest quest : Level.fullQuestList) {
+				if (quest.started) {
+
+					if (!activeAdded && !quest.resolved) {
+						questsDrawnInList++;
+						activeAdded = true;
+					}
+
+					if (!resolvedAdded && quest.resolved) {
+						questsDrawnInList++;
+						resolvedAdded = true;
+					}
+
+					// Check box
+					Texture checkBoxTextureToUse = checkBoxUnchecked;
+					if (questsToTrack.contains(quest)) {
+						checkBoxTextureToUse = checkBoxChecked;
+					}
+
+					float checkBoxx1 = listX + listBorder + listWidth - listItemHeight;
+					float checkBoxY1 = listY + listBorder + questsDrawnInList * listItemHeight;
+
+					TextureUtils.drawTexture(checkBoxTextureToUse, checkBoxx1, checkBoxY1, checkBoxx1 + listItemHeight,
+							checkBoxY1 + listItemHeight);
+
+					// Exclamation
+					if (quest.updatedSinceLastViewed) {
+						float exclamationX1 = listX + listBorder + listWidth - listItemHeight * 2;
+						float exclamationY1 = listY + listBorder + questsDrawnInList * listItemHeight;
+
+						TextureUtils.drawTexture(exclamationTexture, exclamationX1, exclamationY1,
+								exclamationX1 + listItemHeight, exclamationY1 + listItemHeight);
+					}
+
+					questsDrawnInList++;
+
+				}
 			}
 		}
 	}
