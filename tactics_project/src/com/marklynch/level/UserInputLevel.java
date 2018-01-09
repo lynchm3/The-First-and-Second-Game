@@ -885,17 +885,13 @@ public class UserInputLevel {
 		}
 
 		if (character == 'j' || character == 'J') {
-			if (!Game.level.journal.showing) {
-				Game.level.openCloseJournal();
-				return;
-			}
+			Game.level.openCloseJournal();
+			return;
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (character == 'i' || character == 'I') {
-			if (Game.level.openInventories.size() == 0) {
-				Game.level.openCloseInventory();
-				return;
-			}
+			Game.level.openCloseInventory();
+			return;
 		} else if (character == ' ') {
 			waitPressed(true, false);
 		} else if (character == 'c' || character == 'C') {
