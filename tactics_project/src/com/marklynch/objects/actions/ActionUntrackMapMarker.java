@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.objects.MapMarker;
 
 public class ActionUntrackMapMarker extends Action {
@@ -27,7 +28,8 @@ public class ActionUntrackMapMarker extends Action {
 		if (!enabled)
 			return;
 
-		mapMarker.track = false;
+		if (Journal.markersToTrack.contains(mapMarker))
+			Journal.markersToTrack.remove(mapMarker);
 
 	}
 

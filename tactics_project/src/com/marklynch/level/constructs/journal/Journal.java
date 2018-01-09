@@ -40,6 +40,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	public static Quest questToDisplayInJournal = null;
 	public static ArrayList<Quest> questsToTrack = new ArrayList<Quest>();
+	public static ArrayList<MapMarker> markersToTrack = new ArrayList<MapMarker>();
 
 	int listX;
 	int listY;
@@ -59,6 +60,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	public static ArrayList<LevelButton> tabButtons = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> questButtons = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> markerButtons = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToMakeQuestAcive = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToDisplayQuest = new ArrayList<LevelButton>();
 	public static ArrayList<LevelButton> buttonsToTrackObjectives = new ArrayList<LevelButton>();
@@ -186,9 +188,40 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 		buttonsToMakeQuestAcive.clear();
 		buttonsToDisplayQuest.clear();
+		questButtons.clear();
+		markerButtons.clear();
 
 		generateLinks();
 
+		int markersDrawnInList = 0;
+		// Set up map marker list
+		for (final MapMarker marker : Level.markerList) {
+
+			final LevelButton buttonToTrackMarker = new LevelButton(listX + listBorder + listWidth - listItemHeight,
+					listY + listBorder + listItemHeight + markersDrawnInList * listItemHeight, listItemHeight,
+					listItemHeight, "end_turn_button.png", "end_turn_button.png", "", true, true, Color.GRAY,
+					Color.WHITE, "Track or stop tracking marker. You can track multiple markers.");
+			buttonToTrackMarker.setClickListener(new ClickListener() {
+
+				@Override
+				public void click() {
+					if (markersToTrack.contains(marker)) {
+						markersToTrack.remove(marker);
+						createButtonsToTrackObjectives();// Key to adding marker
+															// to top right
+					} else {
+						markersToTrack.add(marker);
+						createButtonsToTrackObjectives();// Key to adding marker
+															// to tap right
+					}
+				}
+			});
+
+			markerButtons.add(buttonToTrackMarker);
+			markersDrawnInList++;
+		}
+
+		// Set up quest list
 		int questsDrawnInList = 0;
 
 		boolean activeAdded = false;
@@ -219,7 +252,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 					questButtons.add(activeButton);
 				}
 
-				// buttons to make quest the active one
+				// buttons to make quest tracked
 				final LevelButton buttonToMakeQuestActive = new LevelButton(
 						listX + listBorder + listWidth - listItemHeight,
 						listY + listBorder + questsDrawnInList * listItemHeight, listItemHeight, listItemHeight,
@@ -327,15 +360,18 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		}
 
 		if (mode == MODE.MARKER) {
+			for (LevelButton markerButton : markerButtons) {
+				markerButton.draw();
+			}
 			for (MapMarker marker : Level.markerList) {
 
 				// Marker
-				TextUtils.printTextWithImages(contentX + contentBorder, contentY + contentBorder + height,
-						Integer.MAX_VALUE, true, null, new Object[] { marker });
+				TextUtils.printTextWithImages(listX + listBorder, contentY + contentBorder + height, Integer.MAX_VALUE,
+						true, null, new Object[] { marker });
 
 				// Check box
 				Texture checkBoxTextureToUse = checkBoxUnchecked;
-				if (marker.track) {
+				if (markersToTrack.contains(marker)) {
 					checkBoxTextureToUse = checkBoxChecked;
 				}
 
@@ -345,6 +381,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				TextureUtils.drawTexture(checkBoxTextureToUse, checkBoxx1, checkBoxY1, checkBoxx1 + listItemHeight,
 						checkBoxY1 + listItemHeight);
 				height += listItemHeight;
+
 			}
 			if (Level.markerList.size() == 0)
 				TextUtils.printTextWithImages(0, 256, Integer.MAX_VALUE, true, null, new Object[] { "NO MARKERS",

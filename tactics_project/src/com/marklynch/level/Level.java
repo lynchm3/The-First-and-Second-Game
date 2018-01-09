@@ -1705,6 +1705,11 @@ public class Level {
 					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 						return button;
 				}
+			} else if (journal.mode == Journal.MODE.MARKER) {
+				for (Button button : journal.markerButtons) {
+					if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+						return button;
+				}
 			}
 
 			return null;
