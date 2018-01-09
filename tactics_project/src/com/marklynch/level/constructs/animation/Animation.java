@@ -1,6 +1,7 @@
 package com.marklynch.level.constructs.animation;
 
 public abstract class Animation {
+	public boolean blockAI = false;
 	public boolean completed = false;
 	public float offsetX = 0;
 	public float offsetY = 0;

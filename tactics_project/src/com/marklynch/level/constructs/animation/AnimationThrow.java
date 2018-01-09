@@ -6,13 +6,9 @@ public class AnimationThrow extends Animation {
 
 	Projectile projectile;
 
-	public AnimationThrow() {
-		super();
-		completed = true;
-	}
-
 	public AnimationThrow(Projectile projectile) {
 		super();
+		blockAI = true;
 		this.projectile = projectile;
 	}
 

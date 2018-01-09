@@ -4,6 +4,7 @@ public class AnimationWait extends Animation {
 
 	public AnimationWait() {
 		super();
+		blockAI = false;
 	}
 
 	@Override

@@ -10,11 +10,6 @@ public class AnimationMove extends Animation {
 	public float startOffsetX = 0;
 	public float startOffsetY = 0;
 
-	public AnimationMove() {
-		super();
-		completed = true;
-	}
-
 	public AnimationMove(Square startSquare, Square endSquare) {
 		super();
 		this.startSquare = startSquare;
@@ -22,6 +17,7 @@ public class AnimationMove extends Animation {
 
 		startOffsetX = offsetX = (int) ((this.startSquare.xInGrid - this.endSquare.xInGrid) * Game.SQUARE_WIDTH);
 		startOffsetY = offsetY = (int) ((this.startSquare.yInGrid - this.endSquare.yInGrid) * Game.SQUARE_HEIGHT);
+		blockAI = false;
 
 	}
 
