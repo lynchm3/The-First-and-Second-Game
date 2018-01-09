@@ -95,7 +95,7 @@ public class Projectile {
 			Game.level.projectilesToRemove.add(this);
 			landed = true;
 			if (targetGameObject != null)
-				shooter.showPow(targetGameObject);
+				targetGameObject.showPow();
 			if (!(projectileObject instanceof Arrow)) {
 				if (targetGameObject instanceof Searchable && projectileObject.canShareSquare) {
 					targetGameObject.inventory.add(projectileObject);

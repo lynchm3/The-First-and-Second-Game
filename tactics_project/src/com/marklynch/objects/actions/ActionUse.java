@@ -49,7 +49,7 @@ public class ActionUse extends Action {
 
 		switchToUse.use();
 
-		performer.showPow(switchToUse);
+		switchToUse.showPow();
 
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;

@@ -47,7 +47,7 @@ public class ActionLock extends Action {
 				Game.level
 						.logOnScreen(new ActivityLog(new Object[] { performer, " locked ", openable, " with ", key }));
 
-			performer.showPow(openable);
+			openable.showPow();
 
 			if (actor.faction == Game.level.factions.player) {
 				Game.level.undoList.clear();
@@ -64,7 +64,7 @@ public class ActionLock extends Action {
 			if (performer.squareGameObjectIsOn.visibleToPlayer)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " locked ", openable }));
 
-			performer.showPow(openable);
+			openable.showPow();
 		}
 		if (sound != null)
 			sound.play();

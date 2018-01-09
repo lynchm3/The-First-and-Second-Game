@@ -63,7 +63,7 @@ public class ActionSkin extends Action {
 
 		target.checkIfDestroyed(performer, this);
 
-		performer.showPow(target);
+		target.showPow();
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();

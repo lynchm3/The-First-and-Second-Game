@@ -39,7 +39,7 @@ public class ActionOpen extends Action {
 		if (Game.level.shouldLog(openable, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " opened ", openable }));
 
-		performer.showPow(openable);
+		openable.showPow();
 
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;

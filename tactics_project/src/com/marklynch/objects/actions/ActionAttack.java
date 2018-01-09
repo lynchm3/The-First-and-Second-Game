@@ -89,7 +89,7 @@ public class ActionAttack extends Action {
 						Templates.ARROW.makeCopy(null, null), 2f, 0f, true));
 		} else {
 			if (target.squareGameObjectIsOn.visibleToPlayer)
-				performer.showPow(target);
+				target.showPow();
 		}
 
 		if (performer.faction == Game.level.factions.player) {

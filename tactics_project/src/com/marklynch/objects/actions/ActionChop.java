@@ -64,7 +64,7 @@ public class ActionChop extends Action {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", wood }));
 		}
 
-		performer.showPow(target);
+		target.showPow();
 
 		if (performer.faction == Game.level.factions.player) {
 			Game.level.undoList.clear();

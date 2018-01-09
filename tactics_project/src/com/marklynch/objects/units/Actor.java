@@ -557,19 +557,6 @@ public class Actor extends GameObject {
 					legArmorPositionYInPixels + legArmor.height);
 		}
 
-		// draw anchor
-		// QuadUtils.drawQuad(Color.WHITE,
-		// this.squareGameObjectIsOn.xInGridPixels +
-		// drawOffsetX + headAnchorX - 5f,
-		// this.squareGameObjectIsOn.xInGridPixels +
-		// drawOffsetX + headAnchorX + 5f,
-		// this.squareGameObjectIsOn.yInGridPixels +
-		// drawOffsetY + headAnchorY - 5f,
-		// this.squareGameObjectIsOn.yInGridPixels +
-		// drawOffsetY + headAnchorY + 5f);
-
-		// TextureUtils.skipNormals = false;
-
 		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
 		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels;
 
@@ -612,6 +599,10 @@ public class Actor extends GameObject {
 			if (!this.squareGameObjectIsOn.seenByPlayer)
 				return;
 		}
+
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.translate(new Vector2f(animation.offsetX, animation.offsetY));
+		Game.activeBatch.updateUniforms();
 
 		super.draw2();
 
@@ -688,6 +679,10 @@ public class Actor extends GameObject {
 			// TextureUtils.skipNormals = false;
 		}
 
+		Game.activeBatch.flush();
+		view.translate(new Vector2f(-animation.offsetX, -animation.offsetY));
+		Game.activeBatch.updateUniforms();
+
 		if (Game.showAILines) {
 			if (aiLine != null) {
 				aiLine.draw2();
@@ -701,7 +696,16 @@ public class Actor extends GameObject {
 
 		if (this.squareGameObjectIsOn == null || this.squareGameObjectIsOn.visibleToPlayer == false)
 			return;
+
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.translate(new Vector2f(animation.offsetX, animation.offsetY));
+		Game.activeBatch.updateUniforms();
+
 		super.drawUI();
+
+		Game.activeBatch.flush();
+		view.translate(new Vector2f(-animation.offsetX, -animation.offsetY));
+		Game.activeBatch.updateUniforms();
 	}
 
 	public Vector<Float> calculateIdealDistanceFromTargetToAttack(GameObject target) {

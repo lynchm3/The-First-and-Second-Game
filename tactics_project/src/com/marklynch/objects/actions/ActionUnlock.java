@@ -42,7 +42,7 @@ public class ActionUnlock extends Action {
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { performer, " unlocked ", openable, " with ", key }));
 
-			performer.showPow(openable);
+			openable.showPow();
 
 			if (actor.faction == Game.level.factions.player) {
 				Game.level.undoList.clear();
@@ -62,7 +62,7 @@ public class ActionUnlock extends Action {
 			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " unlocked ", openable }));
 
-			performer.showPow(openable);
+			openable.showPow();
 		}
 
 		if (sound != null)

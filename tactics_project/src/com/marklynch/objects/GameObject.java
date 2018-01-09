@@ -156,7 +156,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public static transient Audio screamAudio = null;
 
 	// POW
-	public transient GameObject powTarget = null;
 	public transient boolean showPow = false;
 
 	// Placement in inventory
@@ -339,16 +338,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public void drawUI() {
 
 		// Draw POW
-
-		if (powTarget != null && powTarget.squareGameObjectIsOn != null) {
-			if (showPow == true) {
-				float powPositionXInPixels = Math.abs((powTarget.squareGameObjectIsOn.xInGridPixels));
-				float powPositionYInPixels = powTarget.squareGameObjectIsOn.yInGridPixels;
-
-				TextureUtils.drawTexture(this.powTexture, powPositionXInPixels, powPositionYInPixels,
-						powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
-
-			}
+		if (showPow == true) {
+			float powPositionXInPixels = Math.abs(squareGameObjectIsOn.xInGridPixels);
+			float powPositionYInPixels = squareGameObjectIsOn.yInGridPixels;
+			TextureUtils.drawTexture(this.powTexture, powPositionXInPixels, powPositionYInPixels,
+					powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
 		}
 	}
 
@@ -565,8 +559,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return coordinates;
 	}
 
-	public void showPow(GameObject target) {
-		powTarget = target;
+	public void showPow() {
 		showPow = true;
 		new HidePowThread(this).start();
 	}
