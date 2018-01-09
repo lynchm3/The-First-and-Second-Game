@@ -15,7 +15,7 @@ public class TextBox {
 	public static final int CARET_BLINK_TIME = 500;
 	public float drawPositionX, drawPositionY;
 	public float height = 20;
-	public String text;
+	private String text;
 	public String hint;
 	public float width = 2;
 
@@ -58,7 +58,8 @@ public class TextBox {
 		}
 
 		// Caret
-		if (Game.level.activeTextBox == this) { TEXT WAS CLEARED BUT CARET WAS NOT			
+		if (Game.level.activeTextBox == this) { // CRASH WHEN TEXT WAS CLEARED
+												// BUT CARET WAS NOT
 			int caretPosition = Game.font.getWidth(text, 0, caretPositionIndex);
 			if (caretOn) {
 				QuadUtils.drawQuad(Color.BLACK, drawPositionX + caretPosition, drawPositionY,
@@ -160,6 +161,19 @@ public class TextBox {
 
 	public void enterTyped() {
 		parent.enterTyped();
+	}
+
+	public void clearText() {
+		text = "";
+		caretPositionIndex = 0;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 
 }

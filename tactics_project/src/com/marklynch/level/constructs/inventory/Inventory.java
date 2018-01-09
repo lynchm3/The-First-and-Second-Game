@@ -195,7 +195,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (Level.activeTextBox == textBoxSearch) {
 			Level.activeTextBox = null;
 		}
-		Game.level.player.inventory.textBoxSearch.text = "";
+		Game.level.player.inventory.textBoxSearch.clearText();
 		buttons = new ArrayList<Button>();
 		buttonsSort = new ArrayList<Button>();
 		buttonsFilter = new ArrayList<Button>();
@@ -544,9 +544,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			button.down = false;
 
 		filteredGameObjects.clear();
-		if (Game.level.player.inventory.textBoxSearch.text.length() > 0) {
+		if (Game.level.player.inventory.textBoxSearch.getText().length() > 0) {
 			for (GameObject gameObject : gameObjects) {
-				if (TextUtils.containsIgnoreCase(gameObject.name, Game.level.player.inventory.textBoxSearch.text)) {
+				if (TextUtils.containsIgnoreCase(gameObject.name,
+						Game.level.player.inventory.textBoxSearch.getText())) {
 					filteredGameObjects.add(gameObject);
 				}
 			}
