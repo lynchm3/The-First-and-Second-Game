@@ -837,7 +837,7 @@ public class UserInputLevel {
 		} else if (Level.gameOver.showing) {
 			return;
 		} else if (Game.level.openInventories.size() != 0) {
-			Game.level.openCloseInventory();
+			Game.level.player.inventory.escapeTyped();
 			return;
 		} else if (Game.level.conversation != null) {
 			Game.level.conversation.currentConversationPart.windowSelectConversationResponse.buttonLeave.click();

@@ -187,7 +187,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureStar;
 
 	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0);
-	boolean searching = false;
 
 	public Inventory(GameObject... gameObjects) {
 		for (GameObject gameObject : gameObjects) {
@@ -200,7 +199,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void open() {
-		searching = false;
 		if (Level.activeTextBox == textBoxSearch) {
 			Level.activeTextBox = null;
 		}
@@ -361,16 +359,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		buttonSearch.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
-
-				searching = !searching;
-
-				if (searching) {
-					Level.activeTextBox = textBoxSearch;
+				// Level.activeTextBox = null;
+				if (Level.activeTextBox == textBoxSearch) {
+					Level.activeTextBox = null;
 				} else {
-					// Level.activeTextBox = null;
-					if (Level.activeTextBox == textBoxSearch) {
-						Level.activeTextBox = null;
-					}
+					Level.activeTextBox = textBoxSearch;
+
 				}
 			}
 		});
@@ -382,7 +376,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			@Override
 			public void click() {
 				textBoxSearch.clearText();
-				searching = false;
 				if (Level.activeTextBox == textBoxSearch) {
 					Level.activeTextBox = null;
 				}
@@ -1731,4 +1724,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return textBoxSearch.click(mouseX, mouseY);
 	}
 
+	public void escapeTyped() {
+		if (Level.activeTextBox == textBoxSearch) {
+			Level.activeTextBox = null;
+		} else {
+			Game.level.openCloseInventory();
+		}
+	}
 }
