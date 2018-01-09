@@ -1209,22 +1209,22 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// text
 		if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
 					new Object[] { new StringWithColor("Please Select a Container to Fill", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
 					new Object[] { new StringWithColor("Please Select a Container to Pour Out", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_MAP_MARKER) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
 					new Object[] { new StringWithColor("Please Select a Map Marker", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
 					new Object[] { new StringWithColor("Please Select an Item to Drop", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
 					new Object[] { new StringWithColor("Please Select an Item to Give", Color.WHITE) });
 		} else if (inventoryMode == INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
-			TextUtils.printTextWithImages(100f, 8f, 300f, true, null,
+			TextUtils.printTextWithImages(100f, 32f, 300f, true, null,
 					new Object[] { new StringWithColor("Please Select an Item to Throw", Color.WHITE) });
 		}
 
