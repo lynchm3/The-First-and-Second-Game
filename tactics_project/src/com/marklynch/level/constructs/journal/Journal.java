@@ -34,7 +34,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		LOG, MARKER, CONVERSATION
 	};
 
-	public MODE mode = MODE.LOG;
+	public static MODE mode = MODE.LOG;
 
 	public boolean showing = false;
 

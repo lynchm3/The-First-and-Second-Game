@@ -1,6 +1,8 @@
 package com.marklynch.ui.button;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
+import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
@@ -37,10 +39,12 @@ public class Link extends LevelButton {
 				new ActionPin(Game.level.player, (GameObject) object).perform();
 			} else if (object instanceof Quest) {
 				// open quest log on that thing
-				if (!Game.level.journal.showing)
+				Journal.questToDisplayInJournal = (Quest) object;
+				Journal.mode = Journal.MODE.LOG;
+				Level.journal.generateLinks();
+
+				if (!Level.journal.showing)
 					Game.level.openCloseJournal();
-				Game.level.journal.questToDisplayInJournal = (Quest) object;
-				Game.level.journal.generateLinks();
 			} else if (object instanceof Square) {
 				// go to square
 				Square square = (Square) object;
