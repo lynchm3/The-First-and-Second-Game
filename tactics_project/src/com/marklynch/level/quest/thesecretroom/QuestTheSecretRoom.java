@@ -18,6 +18,7 @@ import com.marklynch.objects.Wall;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.TextUtils;
 
 public class QuestTheSecretRoom extends Quest {
 
@@ -130,6 +131,8 @@ public class QuestTheSecretRoom extends Quest {
 		Templates.TREE.makeCopy(Game.level.squares[22][23], null);
 		Templates.TREE.makeCopy(Game.level.squares[26][19], null);
 		Templates.TREE.makeCopy(Game.level.squares[26][23], null);
+
+		links = TextUtils.getLinks(true, this);
 
 	}
 

@@ -20,6 +20,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.utils.TextUtils;
 
 public class QuestThePigs extends Quest {
 
@@ -230,6 +231,7 @@ public class QuestThePigs extends Quest {
 		Templates.WHEAT.makeCopy(Game.level.squares[62][73], null);
 		Templates.WHEAT.makeCopy(Game.level.squares[63][73], null);
 		Templates.WHEAT.makeCopy(Game.level.squares[64][73], null);
+		links = TextUtils.getLinks(true, this);
 
 	}
 

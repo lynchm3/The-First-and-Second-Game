@@ -28,6 +28,7 @@ import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Human;
+import com.marklynch.utils.TextUtils;
 
 public class QuestSmallGame extends Quest {
 
@@ -394,6 +395,7 @@ public class QuestSmallGame extends Quest {
 		Storage crate = Templates.CRATE.makeCopy("Crate", Game.level.squares[123][9], false, null);
 		crate.inventory.add(Templates.HATCHET.makeCopy(null, null));
 		// mound.discovered();
+		links = TextUtils.getLinks(true, this);
 	}
 
 	@Override

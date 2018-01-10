@@ -28,6 +28,7 @@ import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.utils.TextUtils;
 
 public class QuestCaveOfTheBlind extends Quest {
 
@@ -165,6 +166,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		// Objectives
 		objectiveCave = new Objective("Cave", null, null);
 		allObjectives.add(objectiveCave);
+
+		links = TextUtils.getLinks(true, this);
 	}
 
 	@Override

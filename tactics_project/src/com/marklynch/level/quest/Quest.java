@@ -11,6 +11,7 @@ import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
+import com.marklynch.ui.button.Link;
 import com.marklynch.ui.popups.Notification;
 
 public class Quest {
@@ -25,6 +26,7 @@ public class Quest {
 	public int turnStarted;
 	public int turnUpdated;
 	public boolean updatedSinceLastViewed;
+	public ArrayList<Link> links;
 
 	// Called my members of quest when they dont know what to do
 	public boolean update(Actor actor) {

@@ -1742,7 +1742,12 @@ public class Level {
 		}
 
 		// On screen objectives links
-		for (Button button : journal.objectiveLinks) {
+
+		for (Button button : journal.questLinksTopRight) {
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+				return button;
+		}
+		for (Button button : journal.objectiveLinksTopRight) {
 			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}

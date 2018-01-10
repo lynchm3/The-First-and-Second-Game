@@ -19,6 +19,7 @@ import com.marklynch.objects.SwitchForOpenables;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.TextUtils;
 
 public class QuestBetweenTheWalls extends Quest {
 
@@ -134,6 +135,7 @@ public class QuestBetweenTheWalls extends Quest {
 		Templates.BUSH.makeCopy(Game.level.squares[40][20], null);
 		Templates.BUSH.makeCopy(Game.level.squares[40][22], null);
 
+		links = TextUtils.getLinks(true, this);
 	}
 
 	@Override

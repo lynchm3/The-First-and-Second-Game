@@ -67,7 +67,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	public ArrayList<Link> logLinks = new ArrayList<Link>();
 	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
-	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
+	public ArrayList<Link> objectiveLinksTopRight = new ArrayList<Link>();
+	public ArrayList<Link> questLinksTopRight = new ArrayList<Link>();
 	public ArrayList<Link> markerLinksTopRight = new ArrayList<Link>();
 	public ArrayList<Link> markerLinksInJournal = new ArrayList<Link>();
 
@@ -471,11 +472,13 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	public void drawTrackedStuffInTopRight() {
 		int linesPrinted = 0;
-		objectiveLinks.clear();
+		questLinksTopRight.clear();
+		objectiveLinksTopRight.clear();
 		for (Quest activeQuest : questsToTrack) {
+
+			questLinksTopRight.add(activeQuest.links.get(0));
 			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 202,
-					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
-					new Object[] { new StringWithColor(activeQuest.name, Color.WHITE) });
+					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, activeQuest.links, new Object[] { activeQuest });
 			TextureUtils.drawTexture(x, Game.windowWidth - 180, 20 + 20 * linesPrinted, Game.windowWidth - 160,
 					20 + 20 * linesPrinted + 20);
 			linesPrinted++;
@@ -488,7 +491,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 							30 + 20 * linesPrinted, Game.windowWidth - 202, 32 + 20 * linesPrinted);
 				}
 
-				objectiveLinks.add(objective.links.get(0));
+				objectiveLinksTopRight.add(objective.links.get(0));
 
 				QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - 200, 20 + 20 * linesPrinted, Game.windowWidth - 180,
 						20 + 20 * linesPrinted + 20);
@@ -598,14 +601,13 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
 
 					targetSquare = currentObjective.gameObject.squareGameObjectIsOn;
-
+					drawOffscreenMarker(targetSquare, currentObjective.gameObject.imageTexture);
 				} else if (currentObjective.square != null) {
 
 					targetSquare = currentObjective.square;
-
+					drawOffscreenMarker(targetSquare, targetSquare.imageTexture);
 				}
 
-				drawOffscreenMarker(targetSquare, currentObjective.gameObject.imageTexture);
 			}
 		}
 	}
