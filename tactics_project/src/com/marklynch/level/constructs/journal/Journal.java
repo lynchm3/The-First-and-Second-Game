@@ -543,23 +543,25 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	public static void drawQuestsMarkersForVisibleOnScreenObjectives() {
 
-		for (Quest activeQuest : questsToTrack) {
-			for (Objective currentObjective : activeQuest.currentObjectives) {
+		for (Quest quest : Level.fullQuestList) {
+			if (quest.started) {
+				for (Objective currentObjective : quest.currentObjectives) {
 
-				if (currentObjective.gameObject != null && currentObjective.showMarker) {
-					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
-						currentObjective.gameObject.squareGameObjectIsOn
-								.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
-					} else if (currentObjective.gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject
-							&& ((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn != null) {
-						((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn
-								.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
+					if (currentObjective.gameObject != null) {
+						if (currentObjective.gameObject.squareGameObjectIsOn != null) {
+							currentObjective.gameObject.squareGameObjectIsOn
+									.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
+						} else if (currentObjective.gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject
+								&& ((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn != null) {
+							((GameObject) currentObjective.gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn
+									.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
 
+						}
+					} else if (currentObjective.square != null) {
+						currentObjective.square.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
 					}
-				} else if (currentObjective.square != null) {
-					currentObjective.square.drawQuestsMarkersForVisibleOnScreenObjectives(currentObjective);
-				}
 
+				}
 			}
 		}
 	}
