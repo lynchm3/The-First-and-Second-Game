@@ -238,6 +238,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
+		if (sounds.size() > 0) {
+			drawRedHighlight();
+		}
+
 		if (restricted && Game.redHighlightOnRestrictedSquares) {
 			drawRedHighlight();
 		}

@@ -180,9 +180,19 @@ public abstract class AIRoutine {
 			if (!this.actor.investigationsMap.containsValue(sound.sourceSquare)
 					&& !this.actor.canSeeGameObject(sound.sourcePerformer)) {
 
+				// If asleep then sound has to be nearer for detection.
 				if (actor.sleeping && actor.straightLineDistanceTo(sound.sourceSquare) > sound.loudness - 2)
 					continue;
-				// (sound.loudness < 5
+
+				// Check if sound is in passed in list of classes
+				boolean soundInTypeList = false;
+				if (sound.sourceObject != null) {
+					for (Class clazz : classes) {
+						if (clazz.isInstance(sound.sourceObject)) {
+							soundInTypeList = true;
+						}
+					}
+				}
 
 				if (sound.actionType == ActionShoutForHelp.class) {
 					this.actor.addInvestigation(sound.sourceObject, sound.sourceSquare,
@@ -192,11 +202,14 @@ public abstract class AIRoutine {
 					}
 					actor.sleeping = false;
 				} else if (!sound.legal) {
-
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_CRIME_HEARD);
 					actor.sleeping = false;
-				} else if (sound.sourceObject != null && !classesArrayList.contains(sound.sourceObject.getClass())) {
+				} else if (soundInTypeList == true) {
+					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
+							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
+					actor.sleeping = false;
+				} else if (sound.loudness >= 5) {
 					this.actor.addInvestigation(sound.sourcePerformer, sound.sourceSquare,
 							Investigation.INVESTIGATION_PRIORITY_SOUND_HEARD);
 					actor.sleeping = false;
