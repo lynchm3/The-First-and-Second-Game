@@ -149,7 +149,7 @@ public class QuestSmallGame extends Quest {
 	// Squares
 	Square squareBehindLodge;
 	Square huntPlanningArea;
-	Actor hunterBrent;
+	public Actor hunterBrent;
 
 	// Conversations
 
