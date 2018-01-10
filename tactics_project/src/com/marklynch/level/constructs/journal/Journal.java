@@ -571,6 +571,10 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		for (Quest activeQuest : questsToTrack) {
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
+				if (currentObjective.showMarker == false) {
+					continue;
+				}
+
 				if (currentObjective.gameObject != null && currentObjective.showMarker) {
 					if (currentObjective.gameObject.squareGameObjectIsOn != null) {
 						currentObjective.gameObject.squareGameObjectIsOn
@@ -596,7 +600,11 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			for (Objective currentObjective : activeQuest.currentObjectives) {
 
 				if ((currentObjective.gameObject == null || currentObjective.gameObject.squareGameObjectIsOn == null)
-						&& currentObjective.square == null && currentObjective.showMarker == false) {
+						&& currentObjective.square == null) {
+					continue;
+				}
+
+				if (currentObjective.showMarker == false) {
 					continue;
 				}
 
@@ -612,6 +620,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 			}
 		}
+
 	}
 
 	public static void drawOfScreenMapMarkers() {
@@ -816,6 +825,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 					markersToTrack.remove(mapMarker);
 					createButtonsForTrackedStuffInTopRight();
 				}
+
 			});
 
 			Game.level.buttons.add(buttonToTrackObjective);
