@@ -182,7 +182,8 @@ public class ShadowLight {
 		// glClear(GL_COLOR_BUFFER_BIT);
 
 		// code for mouse light, spot light, spotlight, mouselight
-		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.getDragX() -
+		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.getDragX()
+		// -
 		// (Game.windowWidth / 2) / Game.zoom)
 		// + (Mouse.getX()) / Game.zoom);
 		// float mouseYTransformed = ((Game.windowHeight / 2 - Game.getDragY() -
@@ -315,7 +316,8 @@ public class ShadowLight {
 			view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 
 			Game.activeBatch.updateUniforms();
-			// System.out.println("Map draw Game.getDragX() = " + Game.getDragX() + ",
+			// System.out.println("Map draw Game.getDragX() = " +
+			// Game.getDragX() + ",
 			// Game.getDragY() = " + Game.getDragY());
 			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("bird.png"), 3000, 1000, 3000 + 128, 1000 + 128);
 			Game.activeBatch.flush();
@@ -420,6 +422,7 @@ public class ShadowLight {
 			frameBuffer.end();
 		}
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		Game.activeBatch.setColor(Color.WHITE);
 		// batch.end();
 	}
 

@@ -11,6 +11,7 @@ public class QuadUtils {
 
 		Game.activeBatch.setColor(color);
 		Game.activeBatch.draw(Game.quadTexture, x1, y1, x2 - x1, y2 - y1);
+		Game.activeBatch.setColor(Color.WHITE);
 	}
 
 	public static void drawQuad(Texture texture, float x1, float x2, float x3, float x4, float y1, float y2, float y3,

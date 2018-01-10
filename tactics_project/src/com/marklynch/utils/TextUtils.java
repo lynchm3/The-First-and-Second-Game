@@ -873,6 +873,7 @@ public class TextUtils {
 			}
 
 		}
+		Game.activeBatch.setColor(Color.WHITE);
 
 	}
 

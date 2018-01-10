@@ -472,6 +472,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 202,
 					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor(activeQuest.name, Color.WHITE) });
+			TextureUtils.drawTexture(x, Game.windowWidth - 180, 20 + 20 * linesPrinted, Game.windowWidth - 160,
+					20 + 20 * linesPrinted + 20);
 			linesPrinted++;
 			for (Objective objective : activeQuest.currentObjectives) {
 				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(objective.text) - 202,
@@ -756,7 +758,21 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		buttonsToTrackObjectives.clear();
 
 		int linesPrinted = 0;
-		for (Quest activeQuest : questsToTrack) {
+		for (final Quest activeQuest : questsToTrack) {
+			final LevelButton buttonToTrackQuest = new LevelButton(Game.windowWidth - 180, 20 + 20 * linesPrinted, 20,
+					20, "end_turn_button.png", "end_turn_button.png", "", true, true, Color.GRAY, Color.WHITE,
+					"Stop tracking quest");
+			buttonToTrackQuest.setClickListener(new ClickListener() {
+
+				@Override
+				public void click() {
+					questsToTrack.remove(activeQuest);
+					createButtonsForTrackedStuffInTopRight();
+				}
+			});
+
+			Game.level.buttons.add(buttonToTrackQuest);
+			buttonsToTrackObjectives.add(buttonToTrackQuest);
 			linesPrinted++;
 			for (final Objective currentObjective : activeQuest.currentObjectives) {
 				final LevelButton buttonToTrackObjective = new LevelButton(Game.windowWidth - 180,

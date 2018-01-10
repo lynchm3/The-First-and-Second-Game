@@ -8,6 +8,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
@@ -85,10 +86,16 @@ public class MapMarker extends GameObject {
 		float drawPositionY1 = (Game.windowHeight / 2)
 				+ (Game.zoom * (squarePositionY1 - Game.windowHeight / 2 + Game.getDragYWithOffset()))
 				- (Game.SQUARE_HEIGHT - Game.SQUARE_HEIGHT * Game.zoom) - (Game.HALF_SQUARE_HEIGHT * Game.zoom);
-		;
 		float drawPositionX2 = drawPositionX1 + (int) Game.SQUARE_WIDTH;
 		float drawPositionY2 = drawPositionY1 + (int) Game.SQUARE_HEIGHT;
 		TextureUtils.drawTexture(imageTexture, alpha, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
+
+		if (baseName.length() > 0) {
+			System.out.println("Name length > 0");
+			TextUtils.printTextWithImages(drawPositionX1, drawPositionY1 + Game.HALF_SQUARE_HEIGHT,
+					(int) Game.SQUARE_WIDTH, false, null, new Object[] { baseName });
+		}
+
 	}
 
 	@Override
