@@ -30,11 +30,11 @@ public class BrokenGlass extends Stampable {
 		BrokenGlass brokenGlass = new BrokenGlass();
 		super.setAttributesForCopy(brokenGlass, square, owner);
 		brokenGlass.glassShardsCount = 10;// (int) (1d + Math.random() * 20d);
-		brokenGlass.glassShards = new GlassShard[glassShardsCount];
-		for (int i = 0; i < glassShardsCount; i++) {
+		brokenGlass.glassShards = new GlassShard[brokenGlass.glassShardsCount];
+		for (int i = 0; i < brokenGlass.glassShardsCount; i++) {
 			int randomShardNumber = (int) (Math.random() * 10d);
 			brokenGlass.glassShards[i] = new GlassShard(
-					ResourceUtils.getGlobalImage("glass_shard_" + randomShardNumber + ".png"), this);
+					ResourceUtils.getGlobalImage("glass_shard_" + randomShardNumber + ".png"), brokenGlass);
 		}
 		return brokenGlass;
 	}
