@@ -29,7 +29,8 @@ public class QuestList extends ArrayList<Quest> {
 
 		questSmallGame = new QuestSmallGame();
 		add(questSmallGame);
-		questCaveOfTheBlind.objectiveHunters = new Objective("The Hunters", questSmallGame.hunterBrent, null);
+		questCaveOfTheBlind.objectiveHunters = new Objective("The Hunters", questSmallGame.hunterBrent, null,
+				questSmallGame.hunterBrent.imageTexture);
 
 		questThePigs = new QuestThePigs();
 		Level.fullQuestList.add(questThePigs);

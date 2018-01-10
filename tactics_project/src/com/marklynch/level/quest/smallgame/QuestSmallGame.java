@@ -350,13 +350,15 @@ public class QuestSmallGame extends Quest {
 
 		AreaTownForest.createForest();
 
-		objectiveWolves = new Objective("The Wolves", superWolf, null);
+		objectiveWolves = new Objective("The Wolves", superWolf, null, superWolf.imageTexture);
 		allObjectives.add(objectiveWolves);
-		objectiveWeaponsBehindLodge = new Objective("Hunting Weapons", weaponsBehindLodge.get(0), null);
+		objectiveWeaponsBehindLodge = new Objective("Hunting Weapons", weaponsBehindLodge.get(0), null,
+				weaponsBehindLodge.get(0).imageTexture);
 		allObjectives.add(objectiveWeaponsBehindLodge);
-		objectiveHunters = new Objective("The Hunters", hunterBrent, null);
+		objectiveHunters = new Objective("The Hunters", hunterBrent, null, hunterBrent.imageTexture);
 		allObjectives.add(objectiveHunters);
-		objectiveEnvironmentalist = new Objective("Environmentalist", environmentalistBill, null);
+		objectiveEnvironmentalist = new Objective("Environmentalist", environmentalistBill, null,
+				environmentalistBill.imageTexture);
 		allObjectives.add(objectiveEnvironmentalist);
 
 		ConversationsSmallGame.quest = this;

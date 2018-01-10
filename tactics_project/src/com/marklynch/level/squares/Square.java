@@ -411,10 +411,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 					* (squarePositionY + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
 			QuadUtils.drawQuad(Color.WHITE, drawPositionX - 10, drawPositionY - 10, drawPositionX + 10,
 					drawPositionY + 10);
-			if (objective.gameObject != null) {
-				TextureUtils.drawTexture(objective.gameObject.imageTexture, drawPositionX - 10, drawPositionY - 10,
-						drawPositionX + 10, drawPositionY + 10);
-			}
+			TextureUtils.drawTexture(objective.texture, drawPositionX - 10, drawPositionY - 10, drawPositionX + 10,
+					drawPositionY + 10);
 
 		}
 	}

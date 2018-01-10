@@ -601,11 +601,11 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
 
 					targetSquare = currentObjective.gameObject.squareGameObjectIsOn;
-					drawOffscreenMarker(targetSquare, currentObjective.gameObject.imageTexture);
+					drawOffscreenMarker(targetSquare, currentObjective.texture);
 				} else if (currentObjective.square != null) {
 
 					targetSquare = currentObjective.square;
-					drawOffscreenMarker(targetSquare, targetSquare.imageTexture);
+					drawOffscreenMarker(targetSquare, currentObjective.texture);
 				}
 
 			}

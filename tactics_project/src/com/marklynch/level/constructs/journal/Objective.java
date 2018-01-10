@@ -11,8 +11,8 @@ import mdesl.graphics.Texture;
 
 public class Objective {// implements DestructionListener {
 
-	public GameObject gameObject;
 	public String text;
+	public GameObject gameObject;
 	public Square square;
 	public boolean showMarker = true;
 	public float width;
@@ -21,15 +21,12 @@ public class Objective {// implements DestructionListener {
 	// public boolean objectiveDestroyed = false;
 	public boolean objectiveDestroyedAndWitnessed = false;
 
-	public Objective(String text, GameObject gameObject, Square square) {
+	public Objective(String text, GameObject gameObject, Square square, Texture texture) {
 		super();
 		this.gameObject = gameObject;
 		this.text = text;
 		this.square = square;
-		if (gameObject != null) {
-			this.texture = gameObject.imageTexture;
-			// gameObject.addDestructionListener(this);
-		}
+		this.texture = texture;
 		width = TextUtils.getDimensions(Integer.MAX_VALUE, this)[0];
 		links = TextUtils.getLinks(true, this);
 	}
