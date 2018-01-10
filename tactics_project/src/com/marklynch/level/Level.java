@@ -1256,7 +1256,7 @@ public class Level {
 			} catch (LWJGLException e) {
 				e.printStackTrace();
 			}
-			Game.activeBatch.setColor(1,1,1,1);
+			Game.activeBatch.setColor(1, 1, 1, 1);
 
 			for (Area area : Game.level.areas) {
 				area.drawUI();
@@ -1738,6 +1738,10 @@ public class Level {
 
 		// On screen objectives links
 		for (Button button : journal.objectiveLinks) {
+			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+				return button;
+		}
+		for (Button button : journal.markerLinks) {
 			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
 		}

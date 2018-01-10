@@ -5,6 +5,7 @@ import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.actions.ActionPin;
 
 import mdesl.graphics.Color;
@@ -26,7 +27,12 @@ public class Link extends LevelButton {
 
 		@Override
 		public void click() {
-			if (object instanceof GameObject) {
+			if (object instanceof MapMarker) {
+				Game.level.centerToSquare = true;
+				Game.level.squareToCenterTo = ((MapMarker) object).squareGameObjectIsOn;
+				if (Game.level.journal.showing)
+					Game.level.openCloseJournal();
+			} else if (object instanceof GameObject) {
 
 				new ActionPin(Game.level.player, (GameObject) object).perform();
 			} else if (object instanceof Quest) {

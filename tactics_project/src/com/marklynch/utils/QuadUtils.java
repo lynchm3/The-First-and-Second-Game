@@ -9,9 +9,10 @@ public class QuadUtils {
 
 	public static void drawQuad(Color color, float x1, float y1, float x2, float y2) {
 
+		// Game.activeBatch.setColor(1, 1, 1, 1);
 		Game.activeBatch.setColor(color);
 		Game.activeBatch.draw(Game.quadTexture, x1, y1, x2 - x1, y2 - y1);
-		Game.activeBatch.setColor(1,1,1,1);
+		Game.activeBatch.setColor(1, 1, 1, 1);
 	}
 
 	public static void drawQuad(Texture texture, float x1, float x2, float x3, float x4, float y1, float y2, float y3,

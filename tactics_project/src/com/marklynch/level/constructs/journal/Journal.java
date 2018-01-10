@@ -68,6 +68,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	public ArrayList<Link> logLinks = new ArrayList<Link>();
 	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
 	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
+	public ArrayList<Link> markerLinks = new ArrayList<Link>();
 
 	// public static ArrayList<Link> links;
 	// Close button
@@ -506,14 +507,17 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			linesPrinted++;
 		}
 
+		markerLinks.clear();
 		if (markersToTrack.size() > 0) {
 			TextUtils.printTextWithImages(Game.windowWidth - mapMarkersLength - 202, 20 + 20 * linesPrinted,
 					Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor(mapMarkers, Color.WHITE) });
 			linesPrinted++;
 			for (MapMarker trackedMapMarker : markersToTrack) {
 				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(trackedMapMarker.name) - 202,
-						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, null,
-						new Object[] { new StringWithColor(trackedMapMarker.name, Color.WHITE) });
+						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, trackedMapMarker.links,
+						new Object[] { trackedMapMarker });
+
+				markerLinks.add(trackedMapMarker.links.get(0));
 
 				QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - 200, 20 + 20 * linesPrinted, Game.windowWidth - 180,
 						20 + 20 * linesPrinted + 20);

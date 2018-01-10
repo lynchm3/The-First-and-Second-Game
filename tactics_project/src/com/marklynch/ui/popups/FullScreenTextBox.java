@@ -41,11 +41,15 @@ public class FullScreenTextBox implements TextBoxHolder {
 
 	@Override
 	public void enterTyped() {
-		((MapMarker) gameObject).baseName = textBox.getText();
-		if (((MapMarker) gameObject).baseName.length() == 0)
-			gameObject.name = "Marker";
-		else
-			gameObject.name = ((MapMarker) gameObject).baseName;
+		MapMarker mapMarker = (MapMarker) gameObject;
+		mapMarker.baseName = textBox.getText();
+		if (mapMarker.baseName.length() == 0) {
+			mapMarker.name = "Marker";
+			mapMarker.links = TextUtils.getLinks(true, this);
+		} else {
+			mapMarker.name = mapMarker.baseName;
+			mapMarker.links = TextUtils.getLinks(true, this);
+		}
 
 		// Game.level.popupTextBoxes.clear();
 		Level.activeTextBox = null;

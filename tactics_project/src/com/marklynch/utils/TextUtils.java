@@ -16,6 +16,7 @@ import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.ScriptEvent;
@@ -359,7 +360,16 @@ public class TextUtils {
 
 		ArrayList<Link> links = new ArrayList<Link>();
 		for (Object content : contents) {
-			if (content instanceof GameObject) {
+			if (content instanceof MapMarker) {
+				GameObject gameObject = (GameObject) content;
+
+				float textWidth = Game.font.getWidth(gameObject.name);
+				float textureWidth = 20;
+
+				float width = textWidth + textureWidth;
+				links.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content,
+						"Go to marker"));
+			} else if (content instanceof GameObject) {
 				GameObject gameObject = (GameObject) content;
 
 				float textWidth = Game.font.getWidth(gameObject.name);
@@ -383,13 +393,13 @@ public class TextUtils {
 				float width = Game.font.getWidth(square.name);
 
 				links.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content,
-						"View square"));
+						"Go to square"));
 
 			} else if (content instanceof Objective) {
 				Objective objective = (Objective) content;
 
 				links.add(new Link(0, 0, objective.width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE,
-						content, "View square"));
+						content, "Go to objective"));
 
 			}
 		}
@@ -417,7 +427,7 @@ public class TextUtils {
 
 		float offsetX = 0;
 		float offsetY = 0;
-		Game.activeBatch.setColor(1,1,1,1);
+		Game.activeBatch.setColor(1, 1, 1, 1);
 
 		for (Object content : contents) {
 
@@ -873,7 +883,7 @@ public class TextUtils {
 			}
 
 		}
-		Game.activeBatch.setColor(1,1,1,1);
+		Game.activeBatch.setColor(1, 1, 1, 1);
 
 	}
 

@@ -7,6 +7,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.ui.button.Link;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -24,11 +25,13 @@ public class MapMarker extends GameObject {
 	public static ArrayList<Texture> MAP_MARKER_TEXTURES = new ArrayList<Texture>();
 
 	public String baseName = "";
+	public ArrayList<Link> links;
 
 	public MapMarker() {
 		super();
-
-		canBePickedUp = true;
+		name = "Marker";
+		links = TextUtils.getLinks(true, this);
+		canBePickedUp = false;
 		showInventory = false;
 		fitsInInventory = false;
 		canShareSquare = true;
