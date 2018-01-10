@@ -713,7 +713,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return actions;
 		}
 
-		actions.add(new ActionPin(performer, this));
+		if (!(this instanceof MapMarker))
+			actions.add(new ActionPin(performer, this));
 
 		// Map Marker
 		if (this instanceof MapMarker) {
