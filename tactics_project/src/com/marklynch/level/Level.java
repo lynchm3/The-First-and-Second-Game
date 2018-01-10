@@ -138,6 +138,7 @@ public class Level {
 	public transient LevelButton endTurnButton;
 	public transient LevelButton centerButton;
 	public transient LevelButton mapButton;
+	public transient LevelButton showHideLocationIconsButton;
 	public transient LevelButton showHideLogButton;
 	public transient LevelButton playButton;
 	public transient LevelButton pauseButton;
@@ -521,6 +522,16 @@ public class Level {
 		});
 		buttons.add(mapButton);
 
+		showHideLocationIconsButton = new LevelButton(110f, 560f, 100f, 30f, "end_turn_button.png",
+				"end_turn_button.png", "LOCATION ICONS", false, false, Color.BLACK, Color.WHITE,
+				"Show/Hide location icons");
+		showHideLocationIconsButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				drawLocationIcons = !drawLocationIcons;
+			}
+		});
+
 		playButton = new LevelButton(30f, 20f, 20f, 20f, "end_turn_button.png", "end_turn_button.png", "  >", false,
 				true, Color.GRAY, Color.WHITE, "Let time pass - [SPACE]");
 		playButton.setClickListener(new ClickListener() {
@@ -564,6 +575,9 @@ public class Level {
 	boolean zoomToMap;
 	boolean zoomFromMap;
 	int nonMapZoomLevelIndex;
+
+	// Location icons when fully zoomed out
+	boolean drawLocationIcons = true;
 
 	// values for center animation
 	public boolean centerToSquare;
@@ -1258,11 +1272,13 @@ public class Level {
 			}
 			Game.activeBatch.setColor(1, 1, 1, 1);
 
-			for (Area area : Game.level.areas) {
-				area.drawUI();
-			}
-			for (Structure structure : Game.level.structures) {
-				structure.drawUI();
+			if (drawLocationIcons) {
+				for (Area area : Game.level.areas) {
+					area.drawUI();
+				}
+				for (Structure structure : Game.level.structures) {
+					structure.drawUI();
+				}
 			}
 		}
 		Game.activeBatch.flush();
@@ -1274,6 +1290,10 @@ public class Level {
 		if (!Game.editorMode) {
 			for (Button button : buttons) {
 				button.draw();
+			}
+
+			if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
+				showHideLocationIconsButton.draw();
 			}
 		}
 
@@ -1837,9 +1857,14 @@ public class Level {
 			}
 		}
 
-		for (Button button : this.buttons) {
+		for (Button button : buttons) {
 			if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 				return button;
+		}
+
+		if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
+			if (showHideLocationIconsButton.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
+				return showHideLocationIconsButton;
 		}
 
 		if (notifications.size() > 0
