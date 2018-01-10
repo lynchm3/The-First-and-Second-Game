@@ -101,6 +101,7 @@ public class QuestCaveOfTheBlind extends Quest {
 	Structure cave;
 
 	public Objective objectiveCave;
+	public Objective objectiveHunters;
 
 	public JournalLog journalLogHeardFromHunters = new JournalLog(
 			"I heard from some hunters about a now defunct mining operation to the east of town, past the forest, it might be worth having a look.");
@@ -165,6 +166,7 @@ public class QuestCaveOfTheBlind extends Quest {
 
 		// Objectives
 		objectiveCave = new Objective("Cave", null, null);
+		objectiveHunters = new Objective("Hunters", null, null);
 		allObjectives.add(objectiveCave);
 
 		links = TextUtils.getLinks(true, this);

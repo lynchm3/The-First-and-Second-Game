@@ -226,7 +226,8 @@ public class ConversationsSmallGame {
 				if (Game.level.fullQuestList.questCaveOfTheBlind.started == false) {
 					Game.level.fullQuestList.questCaveOfTheBlind
 							.addObjective(Game.level.fullQuestList.questCaveOfTheBlind.objectiveCave);
-					Game.level.fullQuestList.questCaveOfTheBlind.addObjective(quest.objectiveHunters);
+					Game.level.fullQuestList.questCaveOfTheBlind
+							.addObjective(Game.level.fullQuestList.questCaveOfTheBlind.objectiveHunters);
 					Game.level.fullQuestList.questCaveOfTheBlind
 							.addJournalLog(Game.level.fullQuestList.questCaveOfTheBlind.journalLogHeardFromHunters);
 				}
