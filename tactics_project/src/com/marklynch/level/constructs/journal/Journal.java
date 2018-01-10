@@ -577,27 +577,14 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	public static void drawQuestMarkersForOffScreenObjectives() {
 		for (Quest activeQuest : questsToTrack) {
-			int x1 = (int) Game.halfWindowWidth;
-			int y1 = (int) Game.halfWindowHeight;
-
-			int x2 = Integer.MAX_VALUE;
-			int y2 = Integer.MAX_VALUE;
 
 			Square targetSquare = null;
 			for (Objective currentObjective : activeQuest.currentObjectives) {
-
-				// if (currentObjective.gameObject != null &&
-				// currentObjective.gameObject.remainingHealth == 0) {
-				// continue; // Dead
-				// }
 
 				if ((currentObjective.gameObject == null || currentObjective.gameObject.squareGameObjectIsOn == null)
 						&& currentObjective.square == null && currentObjective.showMarker == false) {
 					continue;
 				}
-
-				x2 = Integer.MAX_VALUE;
-				y2 = Integer.MAX_VALUE;
 
 				if (currentObjective.gameObject != null && currentObjective.gameObject.squareGameObjectIsOn != null) {
 
@@ -609,144 +596,156 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 				}
 
-				if (targetSquare == null || targetSquare.onScreen())
-					continue;
-
-				float squareX = (targetSquare.xInGridPixels);
-				float squareY = (targetSquare.yInGridPixels);
-				x2 = (int) ((Game.windowWidth / 2) + (Game.zoom
-						* (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH)));
-				y2 = (int) ((Game.windowHeight / 2) + (Game.zoom
-						* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT)));
-
-				if (x2 != Integer.MAX_VALUE) {
-
-					String distanceString = Game.level.player.straightLineDistanceTo(targetSquare) + "m";
-					float distanceStringWidth = Game.font.getWidth(distanceString);
-					// LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 5);
-
-					// Get intersection of line and edge of screen
-
-					// Right edge
-					int x3 = (int) Game.windowWidth;
-					int x4 = (int) Game.windowWidth;
-					int y3 = 0;
-					int y4 = (int) Game.windowHeight;
-
-					int[] intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
-
-					if (intersect != null) {
-
-						float drawY1 = intersect[1] - 10;
-						float drawY2 = intersect[1] + 10;
-						if (drawY1 < 0) {
-							drawY1 = 0;
-							drawY2 = 20;
-						} else if (drawY2 > Game.windowHeight) {
-							drawY1 = Game.windowHeight - 20;
-							drawY2 = Game.windowHeight;
-						}
-
-						QuadUtils.drawQuad(Color.WHITE, intersect[0] - 20, drawY1, intersect[0], drawY2);
-						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0] - 20, drawY1,
-								intersect[0], drawY2);
-
-						TextUtils.printTextWithImages(intersect[0] - 20 - distanceStringWidth - 4, drawY1,
-								Integer.MAX_VALUE, false, null, distanceString);
-						continue;
-					}
-
-					// Left edge
-					x3 = 0;
-					x4 = 0;
-					y3 = 0;
-					y4 = (int) Game.windowHeight;
-
-					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
-
-					if (intersect != null) {
-
-						float drawY1 = intersect[1] - 10;
-						float drawY2 = intersect[1] + 10;
-						if (drawY1 < 0) {
-							drawY1 = 0;
-							drawY2 = 20;
-						} else if (drawY2 > Game.windowHeight) {
-							drawY1 = Game.windowHeight - 20;
-							drawY2 = Game.windowHeight;
-						}
-
-						QuadUtils.drawQuad(Color.WHITE, intersect[0], drawY1, intersect[0] + 20, drawY2);
-						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, intersect[0], drawY1,
-								intersect[0] + 20, drawY2);
-
-						TextUtils.printTextWithImages(intersect[0] + 20 + 4, drawY1, Integer.MAX_VALUE, false, null,
-								distanceString);
-						continue;
-					}
-
-					// Top edge
-					x3 = 0;
-					x4 = (int) Game.windowWidth;
-					y3 = 0;
-					y4 = 0;
-
-					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
-
-					if (intersect != null) {
-
-						float drawX1 = intersect[0] - 10;
-						float drawX2 = intersect[0] + 10;
-						if (drawX1 < 0) {
-							drawX1 = 0;
-							drawX2 = 20;
-						} else if (drawX2 > Game.windowWidth) {
-							drawX1 = Game.windowWidth - 20;
-							drawX2 = Game.windowWidth;
-						}
-
-						QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1], drawX2, intersect[1] + 20);
-						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, drawX1, intersect[1], drawX2,
-								intersect[1] + 20);
-						TextUtils.printTextWithImages(drawX1, intersect[1] + 20 + 4, Integer.MAX_VALUE, false, null,
-								distanceString);
-
-						continue;
-					}
-
-					// Bottom edge
-					x3 = 0;
-					x4 = (int) Game.windowWidth;
-					y3 = (int) Game.windowHeight;
-					y4 = (int) Game.windowHeight;
-
-					intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
-
-					if (intersect != null) {
-
-						float drawX1 = intersect[0] - 10;
-						float drawX2 = intersect[0] + 10;
-						if (drawX1 < 0) {
-							drawX1 = 0;
-							drawX2 = 20;
-						} else if (drawX2 > Game.windowWidth) {
-							drawX1 = Game.windowWidth - 20;
-							drawX2 = Game.windowWidth;
-						}
-
-						QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1] - 20, drawX2, intersect[1]);
-						TextureUtils.drawTexture(currentObjective.gameObject.imageTexture, drawX1, intersect[1] - 20,
-								drawX2, intersect[1]);
-						TextUtils.printTextWithImages(drawX1, intersect[1] - 20 - 24, Integer.MAX_VALUE, false, null,
-								distanceString);
-
-						continue;
-					}
-
-				}
-
+				drawOffscreenMarker(targetSquare, currentObjective.gameObject.imageTexture);
 			}
 		}
+	}
+
+	public static void drawOfScreenMapMarkers() {
+	}
+
+	public static void drawOffscreenMarker(Square square, Texture texture) {
+
+		if (square == null || square.onScreen())
+			return;
+
+		if (texture == null)
+			return;
+
+		int x1 = (int) Game.halfWindowWidth;
+		int y1 = (int) Game.halfWindowHeight;
+
+		int x2 = Integer.MAX_VALUE;
+		int y2 = Integer.MAX_VALUE;
+
+		float squareX = (square.xInGridPixels);
+		float squareY = (square.yInGridPixels);
+		x2 = (int) ((Game.windowWidth / 2)
+				+ (Game.zoom * (squareX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH)));
+		y2 = (int) ((Game.windowHeight / 2) + (Game.zoom
+				* (squareY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT)));
+
+		if (x2 != Integer.MAX_VALUE) {
+
+			String distanceString = Game.level.player.straightLineDistanceTo(square) + "m";
+			float distanceStringWidth = Game.font.getWidth(distanceString);
+			// LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 5);
+
+			// Get intersection of line and edge of screen
+
+			// Right edge
+			int x3 = (int) Game.windowWidth;
+			int x4 = (int) Game.windowWidth;
+			int y3 = 0;
+			int y4 = (int) Game.windowHeight;
+
+			int[] intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
+
+			if (intersect != null) {
+
+				float drawY1 = intersect[1] - 10;
+				float drawY2 = intersect[1] + 10;
+				if (drawY1 < 0) {
+					drawY1 = 0;
+					drawY2 = 20;
+				} else if (drawY2 > Game.windowHeight) {
+					drawY1 = Game.windowHeight - 20;
+					drawY2 = Game.windowHeight;
+				}
+
+				QuadUtils.drawQuad(Color.WHITE, intersect[0] - 20, drawY1, intersect[0], drawY2);
+				TextureUtils.drawTexture(texture, intersect[0] - 20, drawY1, intersect[0], drawY2);
+
+				TextUtils.printTextWithImages(intersect[0] - 20 - distanceStringWidth - 4, drawY1, Integer.MAX_VALUE,
+						false, null, distanceString);
+				return;
+			}
+
+			// Left edge
+			x3 = 0;
+			x4 = 0;
+			y3 = 0;
+			y4 = (int) Game.windowHeight;
+
+			intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
+
+			if (intersect != null) {
+
+				float drawY1 = intersect[1] - 10;
+				float drawY2 = intersect[1] + 10;
+				if (drawY1 < 0) {
+					drawY1 = 0;
+					drawY2 = 20;
+				} else if (drawY2 > Game.windowHeight) {
+					drawY1 = Game.windowHeight - 20;
+					drawY2 = Game.windowHeight;
+				}
+
+				QuadUtils.drawQuad(Color.WHITE, intersect[0], drawY1, intersect[0] + 20, drawY2);
+				TextureUtils.drawTexture(texture, intersect[0], drawY1, intersect[0] + 20, drawY2);
+
+				TextUtils.printTextWithImages(intersect[0] + 20 + 4, drawY1, Integer.MAX_VALUE, false, null,
+						distanceString);
+				return;
+			}
+
+			// Top edge
+			x3 = 0;
+			x4 = (int) Game.windowWidth;
+			y3 = 0;
+			y4 = 0;
+
+			intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
+
+			if (intersect != null) {
+
+				float drawX1 = intersect[0] - 10;
+				float drawX2 = intersect[0] + 10;
+				if (drawX1 < 0) {
+					drawX1 = 0;
+					drawX2 = 20;
+				} else if (drawX2 > Game.windowWidth) {
+					drawX1 = Game.windowWidth - 20;
+					drawX2 = Game.windowWidth;
+				}
+
+				QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1], drawX2, intersect[1] + 20);
+				TextureUtils.drawTexture(texture, drawX1, intersect[1], drawX2, intersect[1] + 20);
+				TextUtils.printTextWithImages(drawX1, intersect[1] + 20 + 4, Integer.MAX_VALUE, false, null,
+						distanceString);
+
+				return;
+			}
+
+			// Bottom edge
+			x3 = 0;
+			x4 = (int) Game.windowWidth;
+			y3 = (int) Game.windowHeight;
+			y4 = (int) Game.windowHeight;
+
+			intersect = lineIntersect(x1, y1, x2, y2, x3, y3, x4, y4);
+
+			if (intersect != null) {
+
+				float drawX1 = intersect[0] - 10;
+				float drawX2 = intersect[0] + 10;
+				if (drawX1 < 0) {
+					drawX1 = 0;
+					drawX2 = 20;
+				} else if (drawX2 > Game.windowWidth) {
+					drawX1 = Game.windowWidth - 20;
+					drawX2 = Game.windowWidth;
+				}
+
+				QuadUtils.drawQuad(Color.WHITE, drawX1, intersect[1] - 20, drawX2, intersect[1]);
+				TextureUtils.drawTexture(texture, drawX1, intersect[1] - 20, drawX2, intersect[1]);
+				TextUtils.printTextWithImages(drawX1, intersect[1] - 20 - 24, Integer.MAX_VALUE, false, null,
+						distanceString);
+
+				return;
+			}
+		}
+
 	}
 
 	public static void createButtonsToTrackObjectives() {

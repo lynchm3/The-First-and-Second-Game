@@ -1242,6 +1242,7 @@ public class Level {
 		// Quest lines
 		Journal.drawQuestsMarkersForNonVisibleOnScreenObjectives();
 		Journal.drawQuestMarkersForOffScreenObjectives();
+		Journal.drawOfScreenMapMarkers();
 
 		Game.activeBatch.flush();
 
