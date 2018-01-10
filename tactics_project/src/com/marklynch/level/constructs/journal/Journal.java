@@ -68,7 +68,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	public ArrayList<Link> logLinks = new ArrayList<Link>();
 	public ArrayList<Link> conversationLinks = new ArrayList<Link>();
 	public ArrayList<Link> objectiveLinks = new ArrayList<Link>();
-	public ArrayList<Link> markerLinks = new ArrayList<Link>();
+	public ArrayList<Link> markerLinksTopRight = new ArrayList<Link>();
+	public ArrayList<Link> markerLinksInJournal = new ArrayList<Link>();
 
 	// public static ArrayList<Link> links;
 	// Close button
@@ -325,19 +326,21 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	public void generateLinks() {
 
-		if (questToDisplayInJournal == null)
-			return;
-
-		logLinks.clear();
-
-		conversationLinks.clear();
-
-		for (JournalLog log : questToDisplayInJournal.logList) {
-			logLinks.addAll(log.links);
+		markerLinksInJournal.clear();
+		for (MapMarker marker : Level.markerList) {
+			markerLinksInJournal.addAll(marker.links);
 		}
 
-		for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
-			conversationLinks.addAll(conversationPart.linksForJournal);
+		if (questToDisplayInJournal != null) {
+			logLinks.clear();
+			for (JournalLog log : questToDisplayInJournal.logList) {
+				logLinks.addAll(log.links);
+			}
+
+			conversationLinks.clear();
+			for (ConversationPart conversationPart : questToDisplayInJournal.conversationLog) {
+				conversationLinks.addAll(conversationPart.linksForJournal);
+			}
 		}
 	}
 
@@ -368,7 +371,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 				// Marker
 				TextUtils.printTextWithImages(listX + listBorder, contentY + contentBorder + height, Integer.MAX_VALUE,
-						true, null, new Object[] { marker });
+						true, marker.links, new Object[] { marker });
 
 				// Check box
 				Texture checkBoxTextureToUse = checkBoxUnchecked;
@@ -507,7 +510,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 			linesPrinted++;
 		}
 
-		markerLinks.clear();
+		markerLinksTopRight.clear();
 		if (markersToTrack.size() > 0) {
 			TextUtils.printTextWithImages(Game.windowWidth - mapMarkersLength - 202, 20 + 20 * linesPrinted,
 					Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor(mapMarkers, Color.WHITE) });
@@ -517,7 +520,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, trackedMapMarker.links,
 						new Object[] { trackedMapMarker });
 
-				markerLinks.add(trackedMapMarker.links.get(0));
+				markerLinksTopRight.add(trackedMapMarker.links.get(0));
 
 				QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - 200, 20 + 20 * linesPrinted, Game.windowWidth - 180,
 						20 + 20 * linesPrinted + 20);
