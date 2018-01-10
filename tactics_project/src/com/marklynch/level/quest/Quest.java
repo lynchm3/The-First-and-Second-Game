@@ -60,7 +60,7 @@ public class Quest {
 				start();
 			}
 			currentObjectives.add(objective);
-			Journal.createButtonsToTrackObjectives();
+			Journal.createButtonsForTrackedStuffInTopRight();
 		}
 	}
 

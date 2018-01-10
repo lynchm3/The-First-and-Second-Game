@@ -85,6 +85,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	public static Texture checkBoxChecked;
 	public static Texture checkBoxUnchecked;
 	public static Texture exclamationTexture;
+	public static Texture x;
 
 	public Journal() {
 		resize();
@@ -160,6 +161,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		checkBoxChecked = ResourceUtils.getGlobalImage("check_box_checked.png");
 		checkBoxUnchecked = ResourceUtils.getGlobalImage("check_box_unchecked.png");
 		exclamationTexture = ResourceUtils.getGlobalImage("exclamation_mark.png");
+		x = ResourceUtils.getGlobalImage("x.png");
 	}
 
 	public void resize() {
@@ -207,12 +209,10 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				public void click() {
 					if (markersToTrack.contains(marker)) {
 						markersToTrack.remove(marker);
-						createButtonsToTrackObjectives();// Key to adding marker
-															// to top right
+						createButtonsForTrackedStuffInTopRight();
 					} else {
 						markersToTrack.add(marker);
-						createButtonsToTrackObjectives();// Key to adding marker
-															// to tap right
+						createButtonsForTrackedStuffInTopRight();
 					}
 				}
 			});
@@ -264,10 +264,10 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 					public void click() {
 						if (questsToTrack.contains(quest)) {
 							questsToTrack.remove(quest);
-							createButtonsToTrackObjectives();
+							createButtonsForTrackedStuffInTopRight();
 						} else {
 							questsToTrack.add(quest);
-							createButtonsToTrackObjectives();
+							createButtonsForTrackedStuffInTopRight();
 						}
 					}
 				});
@@ -465,7 +465,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		}
 	}
 
-	public void drawActiveQuestsObjectiveText() {
+	public void drawTrackedStuffInTopRight() {
 		int linesPrinted = 0;
 		objectiveLinks.clear();
 		for (Quest activeQuest : questsToTrack) {
@@ -521,8 +521,8 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 							20 + 20 * linesPrinted, Game.windowWidth - 180, 20 + 20 * linesPrinted + 20);
 				}
 
-				TextureUtils.drawTexture(checkBoxChecked, Game.windowWidth - 180, 20 + 20 * linesPrinted,
-						Game.windowWidth - 160, 20 + 20 * linesPrinted + 20);
+				TextureUtils.drawTexture(x, Game.windowWidth - 180, 20 + 20 * linesPrinted, Game.windowWidth - 160,
+						20 + 20 * linesPrinted + 20);
 
 				linesPrinted++;
 			}
@@ -751,7 +751,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 
 	}
 
-	public static void createButtonsToTrackObjectives() {
+	public static void createButtonsForTrackedStuffInTopRight() {
 		Game.level.buttons.removeAll(buttonsToTrackObjectives);
 		buttonsToTrackObjectives.clear();
 
@@ -774,6 +774,25 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 				buttonsToTrackObjectives.add(buttonToTrackObjective);
 				linesPrinted++;
 			}
+			linesPrinted++;
+		}
+
+		linesPrinted++;
+		for (final MapMarker mapMarker : markersToTrack) {
+			final LevelButton buttonToTrackObjective = new LevelButton(Game.windowWidth - 180, 20 + 20 * linesPrinted,
+					20, 20, "end_turn_button.png", "end_turn_button.png", "", true, true, Color.GRAY, Color.WHITE,
+					"Stop tracking this map marker");
+			buttonToTrackObjective.setClickListener(new ClickListener() {
+
+				@Override
+				public void click() {
+					markersToTrack.remove(mapMarker);
+					createButtonsForTrackedStuffInTopRight();
+				}
+			});
+
+			Game.level.buttons.add(buttonToTrackObjective);
+			buttonsToTrackObjectives.add(buttonToTrackObjective);
 			linesPrinted++;
 		}
 	}

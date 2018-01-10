@@ -28,8 +28,10 @@ public class ActionUntrackMapMarker extends Action {
 		if (!enabled)
 			return;
 
-		if (Journal.markersToTrack.contains(mapMarker))
+		if (Journal.markersToTrack.contains(mapMarker)) {
 			Journal.markersToTrack.remove(mapMarker);
+			Journal.createButtonsForTrackedStuffInTopRight();
+		}
 
 	}
 

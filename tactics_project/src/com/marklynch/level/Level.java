@@ -1278,7 +1278,7 @@ public class Level {
 		}
 
 		// Current objective quest
-		journal.drawActiveQuestsObjectiveText();
+		journal.drawTrackedStuffInTopRight();
 
 		// Turn text
 		if (currentFactionMoving != null) {
