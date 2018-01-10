@@ -16,6 +16,7 @@ public class Blind extends Monster {
 
 	public Blind() {
 		super();
+		sight = 1;
 	}
 
 	@Override
