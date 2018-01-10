@@ -602,6 +602,9 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	}
 
 	public static void drawOfScreenMapMarkers() {
+		for (MapMarker mapMarker : markersToTrack) {
+			drawOffscreenMarker(mapMarker.squareGameObjectIsOn, mapMarker.imageTexture);
+		}
 	}
 
 	public static void drawOffscreenMarker(Square square, Texture texture) {
