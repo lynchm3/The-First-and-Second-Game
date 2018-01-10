@@ -201,7 +201,7 @@ public class ShadowLight {
 		// lightShader.setUniformf("LightPos", lightPos);
 		lightShader.setUniformf("Resolution", Display.getWidth(), Display.getHeight());
 
-		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(1,1,1,1);
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 
 		// Draw level BG
@@ -226,7 +226,7 @@ public class ShadowLight {
 		// GL11.glDisable(GL_DEPTH_TEST);
 
 		// Draw lights
-		// Game.activeBatch.setColor(Color.WHITE);
+		// Game.activeBatch.setColor(1,1,1,1);
 		// Game.activeBatch.resize(Display.getWidth(), Display.getHeight());
 		// Game.activeBatch.getViewMatrix().setIdentity();
 		// Game.activeBatch.updateUniforms();
@@ -245,7 +245,7 @@ public class ShadowLight {
 			Game.activeBatch.getViewMatrix().setIdentity();
 			Game.activeBatch.updateUniforms();
 			Game.activeBatch.setShader(lightShader);
-			Game.activeBatch.setColor(Color.WHITE);
+			Game.activeBatch.setColor(1,1,1,1);
 			view.setIdentity();
 			view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
@@ -272,7 +272,7 @@ public class ShadowLight {
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
-		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(1,1,1,1);
 		Game.level.drawUI();
 		Game.activeBatch.flush();
 
@@ -300,7 +300,7 @@ public class ShadowLight {
 			}
 			view.setIdentity();
 			Game.activeBatch.updateUniforms();
-			Game.activeBatch.setColor(Color.WHITE);
+			Game.activeBatch.setColor(1,1,1,1);
 			Game.editor.drawUI();
 			Game.activeBatch.flush();
 		}
@@ -422,7 +422,7 @@ public class ShadowLight {
 			frameBuffer.end();
 		}
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(1,1,1,1);
 		// batch.end();
 	}
 

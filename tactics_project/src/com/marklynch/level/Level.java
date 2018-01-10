@@ -1256,7 +1256,7 @@ public class Level {
 			} catch (LWJGLException e) {
 				e.printStackTrace();
 			}
-			Game.activeBatch.setColor(Color.WHITE);
+			Game.activeBatch.setColor(1,1,1,1);
 
 			for (Area area : Game.level.areas) {
 				area.drawUI();

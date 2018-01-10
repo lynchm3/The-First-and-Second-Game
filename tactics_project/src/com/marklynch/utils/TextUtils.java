@@ -417,7 +417,7 @@ public class TextUtils {
 
 		float offsetX = 0;
 		float offsetY = 0;
-		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(1,1,1,1);
 
 		for (Object content : contents) {
 
@@ -873,7 +873,7 @@ public class TextUtils {
 			}
 
 		}
-		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(1,1,1,1);
 
 	}
 

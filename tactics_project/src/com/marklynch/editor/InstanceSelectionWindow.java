@@ -79,7 +79,7 @@ public class InstanceSelectionWindow<T> {
 		float textWidth = Game.font.getWidth(title);
 		Game.activeBatch.setColor(Color.RED);
 		Game.font.drawText(Game.activeBatch, title, 200, 50);
-		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(1,1,1,1);
 
 	}
 

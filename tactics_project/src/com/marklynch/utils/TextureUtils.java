@@ -127,7 +127,10 @@ public class TextureUtils {
 			Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
 
 		}
-		Game.activeBatch.setColor(Color.WHITE);
+
+		Color whiteWith1Alpha = new Color(Color.WHITE);
+		whiteWith1Alpha.a = 1;
+		Game.activeBatch.setColor(1, 1, 1, 1);
 
 	}
 
@@ -140,7 +143,7 @@ public class TextureUtils {
 		float vertexY1 = y1;
 		float vertexY2 = y2;
 
-		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(1,1,1,1);
 		// Game.batch.setColor(1f, 1.0f, 1.0f, 0.1f);
 
 		// draw some sprites... they will all be affected by our shaders
@@ -163,7 +166,8 @@ public class TextureUtils {
 		// draw the texture unit 0 with our shader effect applied
 
 		Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1, u1, v1, u2, v2);
-		Game.activeBatch.setColor(Color.WHITE);
+
+		Game.activeBatch.setColor(1, 1, 1, 1);
 
 	}
 

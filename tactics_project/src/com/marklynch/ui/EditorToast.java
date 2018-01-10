@@ -35,7 +35,7 @@ public class EditorToast {
 		QuadUtils.drawQuad(Color.WHITE, x, y, x + width, y + height);
 		Game.activeBatch.setColor(Color.RED);
 		Game.font.drawText(Game.activeBatch, text, x, y);
-		Game.activeBatch.setColor(Color.WHITE);
+		Game.activeBatch.setColor(1,1,1,1);
 	}
 
 }

@@ -24,6 +24,9 @@ public class Tooltip {
 
 	public void drawStaticUI() {
 
+		// if (1 == 1)
+		// return;
+
 		if (levelButton != null) {
 
 			float x1 = 0;
