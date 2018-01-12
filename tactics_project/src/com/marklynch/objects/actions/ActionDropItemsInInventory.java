@@ -42,7 +42,6 @@ public class ActionDropItemsInInventory extends Action {
 		} else {
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP);
 			Game.level.player.inventory.open();
-			Inventory.square = this.target;
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
 			// Game.level.openInventories.add(Game.level.player.inventory);

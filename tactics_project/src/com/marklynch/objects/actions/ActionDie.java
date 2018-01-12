@@ -145,7 +145,7 @@ public class ActionDie extends Action {
 				// Death by fire
 				Templates.ASH.makeCopy(performer.squareGameObjectIsOn, null);
 				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
-					new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, gameObject).perform();
+					new ActionDropSpecificItems(performer, performer.squareGameObjectIsOn, gameObject).perform();
 				}
 			} else if (performer.destroyedByAction instanceof ActionSquash) {
 				// Deat by squashing
@@ -178,13 +178,13 @@ public class ActionDie extends Action {
 				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
 						Templates.ASH.makeCopy(null, null), performer.squareGameObjectIsOn));
 				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
-					new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, gameObject).perform();
+					new ActionDropSpecificItems(performer, performer.squareGameObjectIsOn, gameObject).perform();
 				}
 			} else if (performer.templateId == Templates.CRATE.templateId) {
 				// Death by fire
 				Templates.WOOD_CHIPS.makeCopy(performer.squareGameObjectIsOn, null);
 				for (GameObject gameObject : (ArrayList<GameObject>) performer.inventory.gameObjects.clone()) {
-					new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, gameObject).perform();
+					new ActionDropSpecificItems(performer, performer.squareGameObjectIsOn, gameObject).perform();
 				}
 			} else if (performer instanceof Tree && performer.destroyedByAction instanceof ActionChop) {
 

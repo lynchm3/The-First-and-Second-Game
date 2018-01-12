@@ -23,12 +23,15 @@ import mdesl.graphics.Texture;
 public class InventorySquare extends Square {
 
 	public transient GameObject gameObject;
+	public transient ArrayList<GameObject> stack = new ArrayList<GameObject>();
 	public transient Inventory inventoryThisBelongsTo;
 
 	public int xInPixels = 0;
 	public int yInPixels = 0;
 
 	public static Texture imageTexture;
+
+	public int count = 1;
 
 	public InventorySquare(int x, int y, String imagePath, Inventory inventoryThisBelongsTo) {
 		super(x, y, imagePath, 1, 1, null, false);
@@ -103,7 +106,6 @@ public class InventorySquare extends Square {
 			}
 
 			// Count && value
-			int count = 1;
 			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
 				if (this instanceof GroundDisplaySquare)
 					count = GroundDisplay.itemTypeCount.get(gameObject.templateId);
@@ -115,6 +117,8 @@ public class InventorySquare extends Square {
 				else
 					count = this.inventoryThisBelongsTo.illegalItemTypeCount.get(gameObject.templateId);
 			}
+
+			// count = stack.size();
 
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 
@@ -143,6 +147,8 @@ public class InventorySquare extends Square {
 						yInPixels + 8, xInPixels + Game.INVENTORY_SQUARE_WIDTH - 8, yInPixels + 24);
 
 			}
+
+			gameObject.inventorySquare = this;
 		}
 
 	}

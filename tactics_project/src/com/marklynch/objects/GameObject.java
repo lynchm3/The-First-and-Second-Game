@@ -22,6 +22,7 @@ import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventoryParent;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
@@ -33,7 +34,7 @@ import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
-import com.marklynch.objects.actions.ActionDropSpecificItem;
+import com.marklynch.objects.actions.ActionDropSpecificItemsFromInventory;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
@@ -98,6 +99,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float totalHealth = 0;
 	public String imageTexturePath = null;
 	public transient Square squareGameObjectIsOn = null;
+	public transient InventorySquare inventorySquare = null;
 	public Inventory inventory = new Inventory();
 	public boolean showInventory = false;;
 	public boolean canShareSquare = true;
@@ -986,7 +988,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
-			return new ActionDropSpecificItem(performer, Inventory.square, this);
+			return new ActionDropSpecificItemsFromInventory(performer, performer.squareGameObjectIsOn, this,
+					this.inventorySquare);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
@@ -1025,7 +1028,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_NORMAL) {
 
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
-				return new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this);
+				return new ActionDropSpecificItemsFromInventory(performer, performer.squareGameObjectIsOn, this,
+						this.inventorySquare);
 			} else {
 				return new ActionEquip(Game.level.player, this);
 			}
@@ -1090,7 +1094,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false));
 		}
 
-		actions.add(new ActionDropSpecificItem(performer, performer.squareGameObjectIsOn, this));
+		actions.add(new ActionDropSpecificItemsFromInventory(performer, performer.squareGameObjectIsOn, this,
+				this.inventorySquare));
 
 		if (this.inventoryThatHoldsThisObject == Game.level.player.inventory && !(this instanceof Gold)) {
 			actions.add(new ActionStarSpecificItem(this));

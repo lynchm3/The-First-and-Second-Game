@@ -14,6 +14,7 @@ import com.marklynch.objects.Gold;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionDropSpecificItems;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -178,7 +179,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public float totalSquaresHeight;
 
 	public static WaterSource waterSource;
-	public static Square square;
+	// public static InventorySquare square;
 	public static Object target;
 
 	public static Texture textureUp;
@@ -189,7 +190,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureStar;
 
 	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0, TextBox.TYPE.ALL);
-	public TextBox textBoxQty = new TextBox(this, "", "Enter Qty", 22 + 16, 0, TextBox.TYPE.NUMERIC);
+	public TextBox textBoxQty = new TextBox(this, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
 
 	public Inventory(GameObject... gameObjects) {
 		for (GameObject gameObject : gameObjects) {
@@ -1407,17 +1408,20 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					squaresBaseY + 64);
 		}
 
-		System.out.println("squaresY = " + squaresY);
-		System.out.println("totalSquaresHeight = " + totalSquaresHeight);
-		System.out.println("this.squaresY + totalSquaresHeight = " + (this.squaresY + totalSquaresHeight));
-
-		// squaresY = 100.0
-		// squaresHeight = 516.0
-
 		if (this.squaresY + totalSquaresHeight > Game.windowHeight - bottomBorderHeight) {
-			System.out.println("true");
 			TextureUtils.drawTexture(ActivityLogger.fadeBottom, squaresX, Game.windowHeight - bottomBorderHeight - 64,
 					squaresX + squaresAreaWidth, Game.windowHeight - bottomBorderHeight);//
+		}
+
+		if (Game.level.activeTextBox == textBoxQty) {
+
+			// Full blakc bg
+			QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, 0, Game.windowWidth, Game.windowHeight);
+			// Instructions
+			TextUtils.printTextWithImages(textBoxSearch.drawPositionX, textBoxSearch.drawPositionY - 36,
+					Integer.MAX_VALUE, true, null, new Object[] { "Enter Qty" });
+			textBoxSearch.draw();
+
 		}
 
 	}
@@ -1537,32 +1541,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		return null;
-
-		// if (this.inventorySquareMouseIsOver == null)
-		// return null;
-		//
-		// if (this.inventorySquares.contains(this.inventorySquareMouseIsOver))
-		// {
-		// return this;
-		// }
-		//
-		// if (this.otherInventory != null) {
-		// if
-		// (this.otherInventory.inventorySquares.contains(this.inventorySquareMouseIsOver))
-		// {
-		// return otherInventory;
-		// }
-		// }
-		//
-		// if (this.groundDisplay != null) {
-		// if
-		// (this.groundDisplay.groundDisplaySquares.contains(this.inventorySquareMouseIsOver))
-		// {
-		// return groundDisplay;
-		// }
-		// }
-		//
-		// return null;
 	}
 
 	public int itemsToSellCount = 0;
@@ -1725,7 +1703,23 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	@Override
 	public void enterTyped(TextBox textBox) {
-		Game.level.player.inventory.buttonSearch.click();
+		if (textBox == textBoxSearch) {
+			Game.level.player.inventory.buttonSearch.click();
+		} else if (textBox == textBoxQty) {
+			int amtAddedToDropList = 0;
+			int qty = Integer.parseInt(textBoxQty.getText());
+			ArrayList<GameObject> objectsToDrop = new ArrayList<GameObject>();
+			for (GameObject gameObject : gameObjects) {
+				if (gameObject.templateId == gameObjectForQtyTextBox.templateId) {
+					objectsToDrop.add(gameObject);
+					amtAddedToDropList++;
+					if (amtAddedToDropList == qty) {
+						break;
+					}
+				}
+			}
+			new ActionDropSpecificItems(performerForQtyTextBox, squareForQtyTextBox, objectsToDrop).perform();
+		}
 	}
 
 	public void backSpaceTyped() {
@@ -1742,7 +1736,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		} else if (textBox == textBoxQty) {
 
 		}
-
 	}
 
 	public boolean isMouseOverTextBox(int mouseX, int mouseY) {
@@ -1756,8 +1749,23 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public void escapeTyped() {
 		if (Level.activeTextBox == textBoxSearch) {
 			Level.activeTextBox = null;
+		} else if (Level.activeTextBox == textBoxQty) {
+			Level.activeTextBox = null;
 		} else {
 			Game.level.openCloseInventory();
 		}
+	}
+
+	GameObject performerForQtyTextBox = null;
+	Square squareForQtyTextBox = null;
+	GameObject gameObjectForQtyTextBox = null;
+
+	public void showQTYDialog(GameObject performer, Square square, GameObject gameObject, int max) {
+		textBoxQty.clearText();
+		performerForQtyTextBox = performer;
+		squareForQtyTextBox = square;
+		gameObjectForQtyTextBox = gameObject;
+		Game.level.activeTextBox = textBoxQty;
+
 	}
 }

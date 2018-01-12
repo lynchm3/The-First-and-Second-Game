@@ -27,7 +27,7 @@ import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionClose;
-import com.marklynch.objects.actions.ActionDropSpecificItem;
+import com.marklynch.objects.actions.ActionDropSpecificItems;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
@@ -785,7 +785,7 @@ public abstract class AIRoutine {
 				new ActionThrowSpecificItem(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
 				for (GameObject stolenItem : stolenItemsOnCriminal) {
 					if (criminal.inventory.contains(stolenItem)) {
-						new ActionDropSpecificItem(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();
+						new ActionDropSpecificItems(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();
 						this.actor.thoughtBubbleImageTexture = stolenItem.imageTexture;
 					}
 				}
@@ -939,7 +939,7 @@ public abstract class AIRoutine {
 			public void select() {
 				super.select();
 				for (GameObject stolenItemOnCriminal : stolenItemsEquippedByCriminal) {
-					new ActionDropSpecificItem(criminal, criminal.squareGameObjectIsOn, stolenItemOnCriminal).perform();
+					new ActionDropSpecificItems(criminal, criminal.squareGameObjectIsOn, stolenItemOnCriminal).perform();
 				}
 			}
 		};

@@ -1,0 +1,86 @@
+package com.marklynch.objects.actions;
+
+import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.inventory.Inventory;
+import com.marklynch.level.constructs.inventory.InventorySquare;
+import com.marklynch.level.squares.Square;
+import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
+
+public class ActionDropSpecificItemsFromInventory extends Action {
+
+	public static final String ACTION_NAME = "Drop";
+	GameObject performer;
+	Square square;
+	GameObject object;
+	InventorySquare inventorySquare;
+
+	public ActionDropSpecificItemsFromInventory(GameObject performer, Square square, GameObject object,
+			InventorySquare inventorySquare) {
+		super(ACTION_NAME, "right.png");
+		this.performer = performer;
+		this.square = square;
+		this.object = object;
+		this.inventorySquare = inventorySquare;
+
+		if (!check()) {
+			enabled = false;
+		} else {
+			actionName = ACTION_NAME + " " + object.name;
+		}
+		legal = checkLegality();
+		sound = createSound();
+	}
+
+	@Override
+	public void perform() {
+		if (!enabled)
+			return;
+
+		Inventory inventory = object.inventoryThatHoldsThisObject;
+
+		if (inventorySquare.count <= 5) {
+			new ActionDropSpecificItems(performer, square, object).perform();
+		} else {
+			inventory.showQTYDialog(performer, square, object, inventorySquare.count);
+		}
+	}
+
+	@Override
+	public boolean check() {
+		if (performer.straightLineDistanceTo(square) > 1) {
+			actionName = ACTION_NAME + " " + object.name + " (can't reach)";
+			return false;
+		}
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
+			if (!actor.inventory.contains(object)) {
+				actionName = ACTION_NAME + " " + object.name + " (can't reach)";
+				return false;
+			}
+		} else {
+			if (!performer.inventory.contains(object)) {
+				actionName = ACTION_NAME + " " + object.name + " (can't reach)";
+				return false;
+			}
+
+		}
+
+		if (!square.inventory.canShareSquare() && !object.canShareSquare) {
+			actionName = ACTION_NAME + " " + object.name + " (no space)";
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean checkLegality() {
+		return true;
+	}
+
+	@Override
+	public Sound createSound() {
+		return null;
+	}
+}
