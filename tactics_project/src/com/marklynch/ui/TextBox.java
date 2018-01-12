@@ -28,6 +28,7 @@ public class TextBox {
 	public float width = 2;
 
 	public TextBoxHolder parent;
+	public int maxNumericValue = 0;
 
 	public TextBox(TextBoxHolder parent, String text, String hint, float drawPositionX, float drawPositionY,
 			TYPE type) {
@@ -84,9 +85,29 @@ public class TextBox {
 			return;
 		}
 
+		int oldTextLength = text.length();
+
 		text = text.substring(0, this.caretPositionIndex) + character
 				+ text.substring(this.caretPositionIndex, text.length());
-		caretPositionIndex++;
+
+		// Max numeric value
+		if (type == TYPE.NUMERIC && maxNumericValue != 0) {
+			int integerValue = maxNumericValue;
+			try {
+				integerValue = Integer.parseInt(text);
+			} catch (Exception e) {
+				text = "" + maxNumericValue;
+			}
+			if (integerValue > maxNumericValue) {
+				text = "" + maxNumericValue;
+			}
+		}
+
+		int newTextLength = text.length();
+
+		if (newTextLength > oldTextLength)
+			caretPositionIndex++;
+
 		parent.textChanged(this);
 	}
 

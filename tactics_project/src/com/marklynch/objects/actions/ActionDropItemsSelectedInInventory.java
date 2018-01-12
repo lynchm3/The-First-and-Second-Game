@@ -15,13 +15,12 @@ public class ActionDropItemsSelectedInInventory extends Action {
 	GameObject object;
 	InventorySquare inventorySquare;
 
-	public ActionDropItemsSelectedInInventory(GameObject performer, Square square, GameObject object,
-			InventorySquare inventorySquare) {
+	public ActionDropItemsSelectedInInventory(GameObject performer, Square square, GameObject object) {
 		super(ACTION_NAME, "right.png");
 		this.performer = performer;
 		this.square = square;
 		this.object = object;
-		this.inventorySquare = inventorySquare;
+		this.inventorySquare = object.inventorySquare;
 
 		if (!check()) {
 			enabled = false;
@@ -42,7 +41,8 @@ public class ActionDropItemsSelectedInInventory extends Action {
 		if (inventorySquare.stack.size() <= 5) {
 			new ActionDropItems(performer, square, object).perform();
 		} else {
-			inventory.showQTYDialog(new ActionDropItems(performer, square, object.inventorySquare.stack));
+			inventory.showQTYDialog(new ActionDropItems(performer, square, object.inventorySquare.stack),
+					inventorySquare.stack.size());
 		}
 	}
 

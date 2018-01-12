@@ -988,8 +988,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
-			return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this,
-					this.inventorySquare);
+			return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
@@ -1028,8 +1027,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_NORMAL) {
 
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
-				return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this,
-						this.inventorySquare);
+				return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this);
 			} else {
 				return new ActionEquip(Game.level.player, this);
 			}
@@ -1094,8 +1092,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false));
 		}
 
-		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this,
-				this.inventorySquare));
+		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this));
 
 		if (this.inventoryThatHoldsThisObject == Game.level.player.inventory && !(this instanceof Gold)) {
 			actions.add(new ActionStarSpecificItem(this));

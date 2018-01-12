@@ -1707,9 +1707,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	@Override
 	public void enterTyped(TextBox textBox) {
 		if (textBox == textBoxSearch) {
-			Game.level.player.inventory.buttonSearch.click();
+			Inventory.buttonSearch.click();
 		} else if (textBox == textBoxQty) {
-			// int amtAddedToDropList = 0;
 			int qty = 0;
 			try {
 				qty = Integer.parseInt(textBoxQty.getText());
@@ -1718,20 +1717,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 			variableAction.variable = qty;
 			variableAction.perform();
-			// ArrayList<GameObject> objectsToDrop = new
-			// ArrayList<GameObject>();
-			// for (GameObject gameObject : gameObjects) {
-			// if (gameObject.templateId == gameObjectForQtyTextBox.templateId)
-			// {
-			// objectsToDrop.add(gameObject);
-			// amtAddedToDropList++;
-			// if (amtAddedToDropList == qty) {
-			// break;
-			// }
-			// }
-			// }
-			// new ActionDropItems(performerForQtyTextBox, squareForQtyTextBox,
-			// objectsToDrop).perform();
 			Level.activeTextBox = null;
 		}
 	}
@@ -1772,8 +1757,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	VariableQtyAction variableAction = null;
 
-	public void showQTYDialog(VariableQtyAction variableAction) {
+	public void showQTYDialog(VariableQtyAction variableAction, int maxNumericValue) {
 		this.variableAction = variableAction;
+		textBoxQty.maxNumericValue = maxNumericValue;
 		textBoxQty.clearText();
 		Level.activeTextBox = textBoxQty;
 	}
