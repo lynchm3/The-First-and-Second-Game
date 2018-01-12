@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionEquip;
-import com.marklynch.objects.actions.ActionTakeSpecificItem;
+import com.marklynch.objects.actions.ActionTakeItemsSelectedInInventory;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
@@ -22,7 +22,7 @@ public class GroundDisplaySquare extends InventorySquare {
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
 		if (gameObject == null)
 			return null;
-		return new ActionTakeSpecificItem(performer, this.gameObject.inventoryThatHoldsThisObject.parent,
+		return new ActionTakeItemsSelectedInInventory(performer, this.gameObject.inventoryThatHoldsThisObject.parent,
 				this.gameObject);
 
 	}
@@ -32,8 +32,8 @@ public class GroundDisplaySquare extends InventorySquare {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (gameObject != null) {
-			actions.add(new ActionTakeSpecificItem(performer, this.gameObject.inventoryThatHoldsThisObject.parent,
-					this.gameObject));
+			actions.add(new ActionTakeItemsSelectedInInventory(performer,
+					this.gameObject.inventoryThatHoldsThisObject.parent, this.gameObject));
 			actions.add(new ActionEquip(performer, this.gameObject));
 		}
 		return actions;

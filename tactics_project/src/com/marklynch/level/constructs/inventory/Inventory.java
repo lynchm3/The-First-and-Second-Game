@@ -13,7 +13,7 @@ import com.marklynch.objects.Gold;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionTakeSpecificItem;
+import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.VariableQtyAction;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -318,7 +318,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				ArrayList<Action> actionsToPerform = new ArrayList<Action>();
 				if (inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 					for (GameObject gameObject : otherInventory.gameObjects) {
-						Action action = new ActionTakeSpecificItem(Game.level.player,
+						Action action = new ActionTakeItems(Game.level.player,
 								gameObject.inventoryThatHoldsThisObject.parent, gameObject);
 						if (!action.legal && buttonLootAll.textParts == LOOT_ALL) {
 						} else {
@@ -327,7 +327,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					}
 				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
 					for (GameObject gameObject : groundDisplay.gameObjects) {
-						Action action = new ActionTakeSpecificItem(Game.level.player,
+						Action action = new ActionTakeItems(Game.level.player,
 								gameObject.inventoryThatHoldsThisObject.parent, gameObject);
 						if (!action.legal && buttonLootAll.textParts == LOOT_ALL) {
 						} else {
@@ -1721,6 +1721,15 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 	}
 
+	VariableQtyAction variableAction = null;
+
+	public void showQTYDialog(VariableQtyAction variableAction, int maxNumericValue) {
+		this.variableAction = variableAction;
+		textBoxQty.maxNumericValue = maxNumericValue;
+		textBoxQty.clearText();
+		Level.activeTextBox = textBoxQty;
+	}
+
 	public void backSpaceTyped() {
 		Game.level.player.inventory.buttonClearSearch.click();
 	}
@@ -1753,14 +1762,5 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		} else {
 			Game.level.openCloseInventory();
 		}
-	}
-
-	VariableQtyAction variableAction = null;
-
-	public void showQTYDialog(VariableQtyAction variableAction, int maxNumericValue) {
-		this.variableAction = variableAction;
-		textBoxQty.maxNumericValue = maxNumericValue;
-		textBoxQty.clearText();
-		Level.activeTextBox = textBoxQty;
 	}
 }

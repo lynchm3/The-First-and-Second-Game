@@ -49,6 +49,9 @@ public class ActionDropItems extends VariableQtyAction {
 
 		int amountToDrop = Math.min(objects.length, variable);
 
+		if (amountToDrop == 0)
+			return;
+
 		for (int i = 0; i < amountToDrop; i++) {
 
 			GameObject object = objects[i];

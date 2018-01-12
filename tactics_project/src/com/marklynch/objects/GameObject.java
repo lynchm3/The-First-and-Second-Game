@@ -42,6 +42,7 @@ import com.marklynch.objects.actions.ActionFollow;
 import com.marklynch.objects.actions.ActionGiveItemsInInventory;
 import com.marklynch.objects.actions.ActionGiveSpecificItem;
 import com.marklynch.objects.actions.ActionHide;
+import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionLock;
@@ -62,12 +63,12 @@ import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.actions.ActionStarSpecificItem;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
-import com.marklynch.objects.actions.ActionTakeSpecificItem;
+import com.marklynch.objects.actions.ActionTakeItems;
+import com.marklynch.objects.actions.ActionTakeItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionTeleportOther;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.actions.ActionTrackMapMarker;
-import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.actions.ActionUntrackMapMarker;
@@ -692,7 +693,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (this.canContainOtherObjects && this.inventory.size() > 0)
 			return new ActionLootItemsInOtherInventory(performer, this);
 		if (this.fitsInInventory)
-			return new ActionTakeSpecificItem(performer, this.squareGameObjectIsOn, this);
+			return new ActionTakeItems(performer, this.squareGameObjectIsOn, this);
 		return null;
 	}
 
@@ -822,7 +823,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// public boolean showInventory;
 		// public boolean canShareSquare;
 		if (!decorative && fitsInInventory) {
-			actions.add(new ActionTakeSpecificItem(performer, this.squareGameObjectIsOn, this));
+			actions.add(new ActionTakeItems(performer, this.squareGameObjectIsOn, this));
 		}
 
 		if (!decorative && canBePickedUp && !fitsInInventory) {
@@ -1005,7 +1006,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			if (this.inventoryThatHoldsThisObject != performer.inventory)
-				return new ActionTakeSpecificItem(performer, Inventory.target, this);
+				return new ActionTakeItemsSelectedInInventory(performer, Inventory.target, this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
@@ -1072,7 +1073,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			if (this.inventoryThatHoldsThisObject != performer.inventory)
-				actions.add(new ActionTakeSpecificItem(performer, Inventory.target, this));
+				actions.add(new ActionTakeItemsSelectedInInventory(performer, Inventory.target, this));
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
@@ -1108,7 +1109,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public ArrayList<Action> getAllActionsPerformedOnThisInOtherInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
-		actions.add(new ActionTakeSpecificItem(performer, Inventory.target, this));
+		actions.add(new ActionTakeItemsSelectedInInventory(performer, Inventory.target, this));
 
 		actions.add(new ActionEquip(performer, this));
 		return actions;

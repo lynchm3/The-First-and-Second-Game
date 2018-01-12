@@ -17,14 +17,14 @@ public class ActionEquip extends Action {
 
 	Actor performer;
 	GameObject gameObject;
-	ActionTakeSpecificItem actionTake;
+	ActionTakeItems actionTake;
 
 	public ActionEquip(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "left.png");
 		this.performer = performer;
 		this.gameObject = gameObject;
 		if (!Game.level.player.inventory.contains(gameObject)) {
-			actionTake = new ActionTakeSpecificItem(performer, gameObject.inventoryThatHoldsThisObject.parent,
+			actionTake = new ActionTakeItems(performer, gameObject.inventoryThatHoldsThisObject.parent,
 					gameObject);
 
 		}
