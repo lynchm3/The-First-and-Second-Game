@@ -8,6 +8,13 @@ import com.marklynch.utils.TextUtils;
 import mdesl.graphics.Color;
 
 public class TextBox {
+
+	public enum TYPE {
+		ALL, NUMERIC
+	}
+
+	public final TYPE type;
+
 	public float caretX;
 	public float caretY;
 	public boolean caretOn = true;
@@ -22,13 +29,15 @@ public class TextBox {
 
 	public TextBoxHolder parent;
 
-	public TextBox(TextBoxHolder parent, String text, String hint, float drawPositionX, float drawPositionY) {
+	public TextBox(TextBoxHolder parent, String text, String hint, float drawPositionX, float drawPositionY,
+			TYPE type) {
 
 		this.parent = parent;
 		this.text = text;
 		this.hintWithColor = new StringWithColor(hint, Color.GRAY);
 		this.drawPositionX = drawPositionX;
 		this.drawPositionY = drawPositionY;
+		this.type = type;
 
 		caretX = drawPositionX + 5;
 		caretY = drawPositionX + 5;
@@ -67,14 +76,18 @@ public class TextBox {
 						drawPositionX + caretPosition + 2, drawPositionY + height);
 			}
 		}
-
 	}
 
 	public void keyTyped(char character) {
+
+		if (type == TYPE.NUMERIC && !Character.isDigit(character)) {
+			return;
+		}
+
 		text = text.substring(0, this.caretPositionIndex) + character
 				+ text.substring(this.caretPositionIndex, text.length());
 		caretPositionIndex++;
-		parent.textChanged();
+		parent.textChanged(this);
 	}
 
 	public void backSpaceTyped() {
@@ -82,7 +95,7 @@ public class TextBox {
 			text = text.substring(0, this.caretPositionIndex - 1)
 					+ text.substring(this.caretPositionIndex, text.length());
 			caretPositionIndex--;
-			parent.textChanged();
+			parent.textChanged(this);
 		}
 	}
 
@@ -90,7 +103,7 @@ public class TextBox {
 		if (text.length() > 0 && caretPositionIndex < text.length()) {
 			text = text.substring(0, this.caretPositionIndex)
 					+ text.substring(this.caretPositionIndex + 1, text.length());
-			parent.textChanged();
+			parent.textChanged(this);
 		}
 	}
 
@@ -164,14 +177,14 @@ public class TextBox {
 	}
 
 	public void enterTyped() {
-		parent.enterTyped();
+		parent.enterTyped(this);
 	}
 
 	public void clearText() {
 		if (text.length() > 0) {
 			text = "";
 			caretPositionIndex = 0;
-			parent.textChanged();
+			parent.textChanged(this);
 		}
 	}
 
@@ -181,6 +194,7 @@ public class TextBox {
 
 	public void setText(String text) {
 		this.text = text;
+		parent.textChanged(this);
 	}
 
 }

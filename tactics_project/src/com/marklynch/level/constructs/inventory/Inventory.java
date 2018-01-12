@@ -188,7 +188,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureBag;
 	public static Texture textureStar;
 
-	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0);
+	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0, TextBox.TYPE.ALL);
+	public TextBox textBoxQty = new TextBox(this, "", "Enter Qty", 22 + 16, 0, TextBox.TYPE.NUMERIC);
 
 	public Inventory(GameObject... gameObjects) {
 		for (GameObject gameObject : gameObjects) {
@@ -1723,7 +1724,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	@Override
-	public void enterTyped() {
+	public void enterTyped(TextBox textBox) {
 		Game.level.player.inventory.buttonSearch.click();
 	}
 
@@ -1732,11 +1733,16 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	@Override
-	public void textChanged() {
-		filter(inventoryFilterBy, false);
-		if (otherInventory != null) {
-			otherInventory.filter(inventoryFilterBy, false);
+	public void textChanged(TextBox textBox) {
+		if (textBox == textBoxSearch) {
+			filter(inventoryFilterBy, false);
+			if (otherInventory != null) {
+				otherInventory.filter(inventoryFilterBy, false);
+			}
+		} else if (textBox == textBoxQty) {
+
 		}
+
 	}
 
 	public boolean isMouseOverTextBox(int mouseX, int mouseY) {

@@ -25,7 +25,7 @@ public class FullScreenTextBox implements TextBoxHolder {
 		this.instructions = instructions;
 
 		String textBoxText = ((MapMarker) gameObject).baseName;
-		this.textBox = new TextBox(this, textBoxText, ENTER_NEW_MARKER_NAME, 300, 300);
+		this.textBox = new TextBox(this, textBoxText, ENTER_NEW_MARKER_NAME, 300, 300, TextBox.TYPE.ALL);
 		this.instructionsDrawPositionY = textBox.drawPositionY - 36;
 	}
 
@@ -40,7 +40,7 @@ public class FullScreenTextBox implements TextBoxHolder {
 	}
 
 	@Override
-	public void enterTyped() {
+	public void enterTyped(TextBox textBox) {
 		MapMarker mapMarker = (MapMarker) gameObject;
 		mapMarker.baseName = textBox.getText();
 		if (mapMarker.baseName.length() == 0) {
@@ -65,7 +65,7 @@ public class FullScreenTextBox implements TextBoxHolder {
 	}
 
 	@Override
-	public void textChanged() {
+	public void textChanged(TextBox textBox) {
 	}
 
 }

@@ -2,8 +2,8 @@ package com.marklynch.ui;
 
 public interface TextBoxHolder {
 
-	void enterTyped();
+	void enterTyped(TextBox textBox);
 
-	void textChanged();
+	void textChanged(TextBox textBox);
 
 }
