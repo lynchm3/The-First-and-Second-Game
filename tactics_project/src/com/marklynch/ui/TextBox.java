@@ -168,8 +168,11 @@ public class TextBox {
 	}
 
 	public void clearText() {
-		text = "";
-		caretPositionIndex = 0;
+		if (text.length() > 0) {
+			text = "";
+			caretPositionIndex = 0;
+			parent.textChanged();
+		}
 	}
 
 	public String getText() {

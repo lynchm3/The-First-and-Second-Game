@@ -204,7 +204,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (Level.activeTextBox == textBoxSearch) {
 			Level.activeTextBox = null;
 		}
-		Game.level.player.inventory.textBoxSearch.clearText();
+		// Game.level.player.inventory.textBoxSearch.clearText();
 		buttons = new ArrayList<Button>();
 		buttonsSort = new ArrayList<Button>();
 		buttonsFilter = new ArrayList<Button>();
