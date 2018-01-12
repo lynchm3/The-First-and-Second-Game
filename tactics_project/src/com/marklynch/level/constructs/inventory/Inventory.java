@@ -1414,13 +1414,14 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		if (Game.level.activeTextBox == textBoxQty) {
+			// textBoxQty.setText("TEST BOX QTY");
 
 			// Full blakc bg
 			QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, 0, Game.windowWidth, Game.windowHeight);
 			// Instructions
 			TextUtils.printTextWithImages(textBoxSearch.drawPositionX, textBoxSearch.drawPositionY - 36,
 					Integer.MAX_VALUE, true, null, new Object[] { "Enter Qty" });
-			textBoxSearch.draw();
+			textBoxQty.draw();
 
 		}
 
@@ -1719,6 +1720,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				}
 			}
 			new ActionDropSpecificItems(performerForQtyTextBox, squareForQtyTextBox, objectsToDrop).perform();
+			Level.activeTextBox = null;
 		}
 	}
 
