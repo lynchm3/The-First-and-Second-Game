@@ -764,8 +764,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return gameObjects;
 	}
 
-	public HashMap<Integer, Integer> itemTypeCount = new HashMap<Integer, Integer>();
-	public HashMap<Integer, Integer> illegalItemTypeCount = new HashMap<Integer, Integer>();
+	// public HashMap<Integer, Integer> itemTypeCount = new HashMap<Integer,
+	// Integer>();
+	public HashMap<Integer, ArrayList<GameObject>> itemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
+	// public HashMap<Integer, Integer> illegalItemTypeCount = new
+	// HashMap<Integer, Integer>();
+	public HashMap<Integer, ArrayList<GameObject>> illegalItemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("LOOT ALL [SPACE]", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("STEAL ALL [SPACE]", Color.RED) };
 
@@ -838,23 +842,26 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void updateItemCounts() {
 
-		itemTypeCount.clear();
-		illegalItemTypeCount.clear();
+		itemTypeStacks.clear();
+		illegalItemTypeStacks.clear();
 		for (GameObject gameObject : gameObjects) {
 			// Legal items
 			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
-				if (itemTypeCount.containsKey(gameObject.templateId)) {
-					itemTypeCount.put(gameObject.templateId, itemTypeCount.get(gameObject.templateId) + 1);
+				if (itemTypeStacks.containsKey(gameObject.templateId)) {
+					itemTypeStacks.get(gameObject.templateId).add(gameObject);
 				} else {
-					itemTypeCount.put(gameObject.templateId, 1);
+					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
+					newStack.add(gameObject);
+					itemTypeStacks.put(gameObject.templateId, newStack);
 				}
 
 			} else {// Illegal items
-				if (illegalItemTypeCount.containsKey(gameObject.templateId)) {
-					illegalItemTypeCount.put(gameObject.templateId,
-							illegalItemTypeCount.get(gameObject.templateId) + 1);
+				if (illegalItemTypeStacks.containsKey(gameObject.templateId)) {
+					illegalItemTypeStacks.get(gameObject.templateId).add(gameObject);
 				} else {
-					illegalItemTypeCount.put(gameObject.templateId, 1);
+					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
+					newStack.add(gameObject);
+					illegalItemTypeStacks.put(gameObject.templateId, newStack);
 				}
 			}
 		}

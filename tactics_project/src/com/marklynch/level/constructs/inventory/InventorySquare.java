@@ -110,12 +110,12 @@ public class InventorySquare extends Square {
 				if (this instanceof GroundDisplaySquare)
 					count = GroundDisplay.itemTypeCount.get(gameObject.templateId);
 				else
-					count = this.inventoryThisBelongsTo.itemTypeCount.get(gameObject.templateId);
+					count = this.inventoryThisBelongsTo.itemTypeStacks.get(gameObject.templateId).size();
 			} else {
 				if (this instanceof GroundDisplaySquare)
 					count = GroundDisplay.illegalItemTypeCount.get(gameObject.templateId);
 				else
-					count = this.inventoryThisBelongsTo.illegalItemTypeCount.get(gameObject.templateId);
+					count = this.inventoryThisBelongsTo.illegalItemTypeStacks.get(gameObject.templateId).size();
 			}
 
 			// count = stack.size();
