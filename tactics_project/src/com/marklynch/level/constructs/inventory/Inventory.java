@@ -27,6 +27,7 @@ import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.TextBox;
@@ -172,8 +173,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public Inventory otherInventory;
 	public static WeaponComparisonDisplay weaponComparisonDisplay;
 
-	public static float squaresWidth;
-	public static float squaresHeight;
+	public static float squaresAreaWidth;
+	public static float squaresAreaHeight;
+	public float totalSquaresHeight;
 
 	public static WaterSource waterSource;
 	public static Square square;
@@ -809,6 +811,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 		}
 
+		totalSquaresHeight = ((inventorySquares.size() / squareGridWidthInSquares) * Game.INVENTORY_SQUARE_HEIGHT);
+
 		// Code to fill up space with empty sqrs
 		// int squareAreaHeightInSquares = (int) ((Game.windowHeight -
 		// bottomBorderHeight - topBorderHeight)
@@ -866,15 +870,15 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		this.squareGridWidthInSquares = (int) ((availablePixelsForSquares / 2f) / Game.INVENTORY_SQUARE_WIDTH);
 		if (this.squareGridWidthInSquares < 1)
 			this.squareGridWidthInSquares = 1;
-		squaresWidth = squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH;
+		squaresAreaWidth = squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH;
 		this.squaresX = pixelsToLeftOfSquares;
-		squaresHeight = Game.windowHeight - Inventory.topBorderHeight - Inventory.bottomBorderHeight;
+		squaresAreaHeight = Game.windowHeight - Inventory.topBorderHeight - Inventory.bottomBorderHeight;
 
 		if (otherInventory != null) {
 			otherInventory.squareGridWidthInSquares = this.squareGridWidthInSquares;
 			otherInventory.squaresX = pixelsToLeftOfSquares + (squareGridWidthInSquares * Game.INVENTORY_SQUARE_WIDTH)
 					+ pixelsBetweenSquares;
-			otherInventory.actorX = (int) (otherInventory.squaresX + squaresWidth);
+			otherInventory.actorX = (int) (otherInventory.squaresX + squaresAreaWidth);
 		}
 		if (groundDisplay != null) {
 			groundDisplay.squareGridWidthInSquares = this.squareGridWidthInSquares;
@@ -924,6 +928,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				yIndex++;
 			}
 		}
+		totalSquaresHeight = ((inventorySquares.size() / squareGridWidthInSquares) * Game.INVENTORY_SQUARE_HEIGHT);
 	}
 
 	public boolean contains(GameObject gameObject) {
@@ -1091,8 +1096,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		drawBorder();
 
 		// Draw bag textureBag
-		float bagTextureX = this.squaresX + Inventory.squaresWidth / 2 - textureBag.getWidth();
-		float bagTextureY = this.squaresBaseY + Inventory.squaresHeight / 2 - textureBag.getHeight();
+		float bagTextureX = this.squaresX + Inventory.squaresAreaWidth / 2 - textureBag.getWidth();
+		float bagTextureY = this.squaresBaseY + Inventory.squaresAreaHeight / 2 - textureBag.getHeight();
 		TextureUtils.drawTexture(textureBag, 0.5f, bagTextureX, bagTextureY, bagTextureX + textureBag.getWidth() * 2,
 				bagTextureY + textureBag.getHeight() * 2);
 
@@ -1105,8 +1110,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (groundDisplay.gameObjects.size() > 0) {
 				groundDisplay.drawSquares();
 			} else {
-				float emptyStringX = groundDisplay.squaresX + this.squaresWidth / 2 - GroundDisplay.lengthEmpty / 2;
-				float emptyStringY = groundDisplay.squaresY + this.squaresHeight / 2 - 10;
+				float emptyStringX = groundDisplay.squaresX + this.squaresAreaWidth / 2 - GroundDisplay.lengthEmpty / 2;
+				float emptyStringY = groundDisplay.squaresY + this.squaresAreaHeight / 2 - 10;
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringY - 8,
 						emptyStringX + GroundDisplay.lengthEmpty + 8, emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null,
@@ -1140,12 +1145,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (otherInventory != null) {
 			otherInventory.drawBorder();
 			GameObject otherGameObject = (GameObject) target;
-			float otherTextureX = otherInventory.squaresX + otherInventory.squaresWidth / 2 - (otherGameObject.width);
-			float otherTextureY = otherInventory.squaresBaseY + otherInventory.squaresHeight / 2
+			float otherTextureX = otherInventory.squaresX + otherInventory.squaresAreaWidth / 2
+					- (otherGameObject.width);
+			float otherTextureY = otherInventory.squaresBaseY + otherInventory.squaresAreaHeight / 2
 					- (otherGameObject.height);
 			if (otherGameObject instanceof Actor) {
 				int actorPositionXInPixels = otherInventory.actorX;
-				int actorPositionYInPixels = (int) (squaresBaseY + squaresHeight / 2
+				int actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
 						- (otherGameObject.imageTexture.getHeight()));
 				TextureUtils.drawTexture(otherGameObject.imageTexture, 1f, actorPositionXInPixels,
 						actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
@@ -1160,8 +1166,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (otherInventory.size() > 0) {
 				otherInventory.drawSquares();
 			} else {
-				float emptyStringX = otherInventory.squaresX + otherInventory.squaresWidth / 2 - lengthEmpty / 2;
-				float emptyStringY = otherInventory.squaresY + otherInventory.squaresHeight / 2 - 10;
+				float emptyStringX = otherInventory.squaresX + otherInventory.squaresAreaWidth / 2 - lengthEmpty / 2;
+				float emptyStringY = otherInventory.squaresY + otherInventory.squaresAreaHeight / 2 - 10;
 				QuadUtils.drawQuad(Color.BLACK, emptyStringX - 8, emptyStringY - 8, emptyStringX + lengthEmpty + 8,
 						emptyStringY + 28);
 				TextUtils.printTextWithImages(emptyStringX, emptyStringY, Integer.MAX_VALUE, false, null,
@@ -1262,7 +1268,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// Actor
 		int actorPositionXInPixels = this.actorX;
-		int actorPositionYInPixels = (int) (squaresBaseY + squaresHeight / 2
+		int actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
 				- (Game.level.player.imageTexture.getHeight()));
 		float alpha = 1.0f;
 		TextureUtils.drawTexture(Game.level.player.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
@@ -1372,7 +1378,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			Actor actor = (Actor) this.parent;
 			String goldText = "Gold: " + actor.getCarriedGoldValue();
 			float goldWidth = Game.font.getWidth(goldText);
-			float goldPositionX = squaresX + squaresWidth - goldWidth;
+			float goldPositionX = squaresX + squaresAreaWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
 					false, null, new Object[] { goldText });
 		}
@@ -1383,7 +1389,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			Actor actor = (Actor) otherInventory.parent;
 			String goldText = "Gold: " + actor.getCarriedGoldValue();
 			float goldWidth = Game.font.getWidth(goldText);
-			float goldPositionX = otherInventory.squaresX + squaresWidth - goldWidth;
+			float goldPositionX = otherInventory.squaresX + squaresAreaWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
 					false, null, new Object[] { goldText });
 
@@ -1394,6 +1400,25 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// if (this.parent == Game.level.player && searching)
 		textBoxSearch.draw();
 
+		// Fade for scroll
+		if (this.squaresY < squaresBaseY) {
+			TextureUtils.drawTexture(ActivityLogger.fadeTop, squaresX, squaresBaseY, squaresX + squaresAreaWidth,
+					squaresBaseY + 64);
+		}
+
+		System.out.println("squaresY = " + squaresY);
+		System.out.println("totalSquaresHeight = " + totalSquaresHeight);
+		System.out.println("this.squaresY + totalSquaresHeight = " + (this.squaresY + totalSquaresHeight));
+
+		// squaresY = 100.0
+		// squaresHeight = 516.0
+
+		if (this.squaresY + totalSquaresHeight > Game.windowHeight - bottomBorderHeight) {
+			System.out.println("true");
+			TextureUtils.drawTexture(ActivityLogger.fadeBottom, squaresX, Game.windowHeight - bottomBorderHeight - 64,
+					squaresX + squaresAreaWidth, Game.windowHeight - bottomBorderHeight);//
+		}
+
 	}
 
 	public void drawOtherInventoryText() {
@@ -1402,8 +1427,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void drawBorder() {
-		QuadUtils.drawQuad(inventoryAreaColor, squaresX, this.squaresY, squaresX + squaresWidth,
-				this.squaresY + squaresHeight);
+		QuadUtils.drawQuad(inventoryAreaColor, squaresX, this.squaresY, squaresX + squaresAreaWidth,
+				this.squaresY + squaresAreaHeight);
 	}
 
 	public void drawSquares() {
@@ -1479,8 +1504,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	private void fixScroll() {
 		// TODO Auto-generated method stub
 
-		int totalSquaresHeight = (int) ((inventorySquares.size() / squareGridWidthInSquares)
-				* Game.INVENTORY_SQUARE_HEIGHT);
 		if (totalSquaresHeight < Game.windowHeight - bottomBorderHeight - topBorderHeight) {
 			this.squaresY = this.squaresBaseY;
 		} else if (this.squaresY < -(totalSquaresHeight - (Game.windowHeight - bottomBorderHeight))) {
@@ -1493,21 +1516,21 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public Draggable getDraggable(int mouseX, int mouseY) {
 
-		if (mouseX > squaresX && mouseX < squaresX + squaresWidth && mouseY > squaresBaseY
-				&& mouseY < squaresBaseY + squaresHeight) {
+		if (mouseX > squaresX && mouseX < squaresX + squaresAreaWidth && mouseY > squaresBaseY
+				&& mouseY < squaresBaseY + squaresAreaHeight) {
 			return this;
 		}
 
 		if (this.otherInventory != null) {
-			if (mouseX > otherInventory.squaresX && mouseX < otherInventory.squaresX + squaresWidth
-					&& mouseY > squaresBaseY && mouseY < squaresBaseY + squaresHeight) {
+			if (mouseX > otherInventory.squaresX && mouseX < otherInventory.squaresX + squaresAreaWidth
+					&& mouseY > squaresBaseY && mouseY < squaresBaseY + squaresAreaHeight) {
 				return otherInventory;
 			}
 		}
 
 		if (this.groundDisplay != null) {
-			if (mouseX > groundDisplay.squaresX && mouseX < groundDisplay.squaresX + squaresWidth
-					&& mouseY > squaresBaseY && mouseY < squaresBaseY + squaresHeight) {
+			if (mouseX > groundDisplay.squaresX && mouseX < groundDisplay.squaresX + squaresAreaWidth
+					&& mouseY > squaresBaseY && mouseY < squaresBaseY + squaresAreaHeight) {
 				return groundDisplay;
 			}
 		}
