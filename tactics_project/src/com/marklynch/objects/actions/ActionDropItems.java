@@ -11,26 +11,27 @@ import com.marklynch.objects.Searchable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionDropSpecificItems extends Action {
+public class ActionDropItems extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Drop";
 	GameObject performer;
 	Square square;
 	GameObject[] objects;
 
-	public ActionDropSpecificItems(GameObject performer, Square square, ArrayList<GameObject> objects) {
+	public ActionDropItems(GameObject performer, Square square, ArrayList<GameObject> objects) {
 		this(performer, square, objects.toArray(new GameObject[objects.size()]), false);
 	}
 
-	public ActionDropSpecificItems(GameObject performer, Square square, GameObject... objects) {
+	public ActionDropItems(GameObject performer, Square square, GameObject... objects) {
 		this(performer, square, objects, false);
 	}
 
-	public ActionDropSpecificItems(GameObject performer, Square square, GameObject[] objects, boolean doesnothing) {
+	public ActionDropItems(GameObject performer, Square square, GameObject[] objects, boolean doesnothing) {
 		super(ACTION_NAME, "right.png");
 		this.performer = performer;
 		this.square = square;
 		this.objects = objects;
+
 		if (!check()) {
 			enabled = false;
 		} else {
@@ -46,9 +47,11 @@ public class ActionDropSpecificItems extends Action {
 		if (!enabled)
 			return;
 
-		for (GameObject object : objects) {
-			if (Game.level.shouldLog(performer))
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dropped ", object }));
+		int amountToDrop = Math.min(objects.length, variable);
+
+		for (int i = 0; i < amountToDrop; i++) {
+
+			GameObject object = objects[i];
 			// if (!performer.inventory.contains(object)) {
 			// }
 
@@ -83,6 +86,15 @@ public class ActionDropSpecificItems extends Action {
 					square.inventory.add(object);
 				else
 					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, square));
+			}
+		}
+
+		if (Game.level.shouldLog(performer)) {
+			if (amountToDrop == 1) {
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dropped ", objects[0] }));
+			} else if (amountToDrop > 1) {
+				Game.level.logOnScreen(
+						new ActivityLog(new Object[] { performer, " dropped ", objects[0], "x" + amountToDrop }));
 			}
 		}
 

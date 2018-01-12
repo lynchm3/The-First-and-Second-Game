@@ -8,7 +8,7 @@ import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.ActionDropSpecificItems;
+import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionRing;
 import com.marklynch.objects.actions.ActionTalk;
@@ -144,7 +144,7 @@ public class AIRoutineForMort extends AIRoutine {
 					return;
 				}
 
-				new ActionDropSpecificItems(mort, mort.questCaveOfTheBlind.troughSquare, mort.mortsMeatChunk).perform();
+				new ActionDropItems(mort, mort.questCaveOfTheBlind.troughSquare, mort.mortsMeatChunk).perform();
 				mort.mortsMeatChunk.quest = null;
 
 				feedingDemoState = FEEDING_DEMO_STATE.RING_BELL;

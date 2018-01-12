@@ -9,7 +9,7 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-public class ActionDropItemsInInventory extends Action {
+public class ActionOpenInventoryToDropItems extends Action {
 
 	public static final String ACTION_NAME = "Drop";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -17,7 +17,7 @@ public class ActionDropItemsInInventory extends Action {
 	Actor performer;
 	Square target;
 
-	public ActionDropItemsInInventory(Actor performer, Square target) {
+	public ActionOpenInventoryToDropItems(Actor performer, Square target) {
 		super(ACTION_NAME, "action_select_object.png");
 		this.performer = performer;
 		this.target = target;

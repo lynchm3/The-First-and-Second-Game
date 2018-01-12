@@ -32,8 +32,8 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionDropItemsInInventory;
-import com.marklynch.objects.actions.ActionDropSpecificItems;
+import com.marklynch.objects.actions.ActionOpenInventoryToDropItems;
+import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPlaceMapMarker;
@@ -732,12 +732,12 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// drop equipped
 		if (performer.equipped != null) {
 			if (performer.straightLineDistanceTo(this) < 2) {
-				actions.add(new ActionDropSpecificItems(performer, this, performer.equipped));
+				actions.add(new ActionDropItems(performer, this, performer.equipped));
 			}
 		}
 
 		// drop from inventory
-		actions.add(new ActionDropItemsInInventory(performer, this));
+		actions.add(new ActionOpenInventoryToDropItems(performer, this));
 
 		// Throw equipped
 		if (this != Game.level.player.squareGameObjectIsOn && performer.equipped != null) {

@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
@@ -14,8 +13,8 @@ import com.marklynch.objects.Gold;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.actions.ActionDropSpecificItems;
 import com.marklynch.objects.actions.ActionTakeSpecificItem;
+import com.marklynch.objects.actions.VariableQtyAction;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
@@ -764,11 +763,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return gameObjects;
 	}
 
-	// public HashMap<Integer, Integer> itemTypeCount = new HashMap<Integer,
-	// Integer>();
 	public HashMap<Integer, ArrayList<GameObject>> itemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
-	// public HashMap<Integer, Integer> illegalItemTypeCount = new
-	// HashMap<Integer, Integer>();
 	public HashMap<Integer, ArrayList<GameObject>> illegalItemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("LOOT ALL [SPACE]", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("STEAL ALL [SPACE]", Color.RED) };
@@ -1714,19 +1709,29 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (textBox == textBoxSearch) {
 			Game.level.player.inventory.buttonSearch.click();
 		} else if (textBox == textBoxQty) {
-			int amtAddedToDropList = 0;
-			int qty = Integer.parseInt(textBoxQty.getText());
-			ArrayList<GameObject> objectsToDrop = new ArrayList<GameObject>();
-			for (GameObject gameObject : gameObjects) {
-				if (gameObject.templateId == gameObjectForQtyTextBox.templateId) {
-					objectsToDrop.add(gameObject);
-					amtAddedToDropList++;
-					if (amtAddedToDropList == qty) {
-						break;
-					}
-				}
+			// int amtAddedToDropList = 0;
+			int qty = 0;
+			try {
+				qty = Integer.parseInt(textBoxQty.getText());
+			} catch (Exception e) {
+
 			}
-			new ActionDropSpecificItems(performerForQtyTextBox, squareForQtyTextBox, objectsToDrop).perform();
+			variableAction.variable = qty;
+			variableAction.perform();
+			// ArrayList<GameObject> objectsToDrop = new
+			// ArrayList<GameObject>();
+			// for (GameObject gameObject : gameObjects) {
+			// if (gameObject.templateId == gameObjectForQtyTextBox.templateId)
+			// {
+			// objectsToDrop.add(gameObject);
+			// amtAddedToDropList++;
+			// if (amtAddedToDropList == qty) {
+			// break;
+			// }
+			// }
+			// }
+			// new ActionDropItems(performerForQtyTextBox, squareForQtyTextBox,
+			// objectsToDrop).perform();
 			Level.activeTextBox = null;
 		}
 	}
@@ -1765,16 +1770,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 	}
 
-	GameObject performerForQtyTextBox = null;
-	Square squareForQtyTextBox = null;
-	GameObject gameObjectForQtyTextBox = null;
+	VariableQtyAction variableAction = null;
 
-	public void showQTYDialog(GameObject performer, Square square, GameObject gameObject, int max) {
+	public void showQTYDialog(VariableQtyAction variableAction) {
+		this.variableAction = variableAction;
 		textBoxQty.clearText();
-		performerForQtyTextBox = performer;
-		squareForQtyTextBox = square;
-		gameObjectForQtyTextBox = gameObject;
-		Game.level.activeTextBox = textBoxQty;
-
+		Level.activeTextBox = textBoxQty;
 	}
 }

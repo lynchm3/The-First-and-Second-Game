@@ -34,7 +34,7 @@ import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
-import com.marklynch.objects.actions.ActionDropSpecificItemsFromInventory;
+import com.marklynch.objects.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
@@ -67,7 +67,7 @@ import com.marklynch.objects.actions.ActionTeleportOther;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowSpecificItem;
 import com.marklynch.objects.actions.ActionTrackMapMarker;
-import com.marklynch.objects.actions.ActionTradeItemsInOtherInventory;
+import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.actions.ActionUntrackMapMarker;
@@ -862,7 +862,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Trade
 		if (!decorative && this.canContainOtherObjects && this instanceof Actor && !(this instanceof NonHuman)) {
-			actions.add(new ActionTradeItemsInOtherInventory(performer, this));
+			actions.add(new ActionInitiateTrade(performer, this));
 		}
 
 		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn
@@ -988,7 +988,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
-			return new ActionDropSpecificItemsFromInventory(performer, performer.squareGameObjectIsOn, this,
+			return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this,
 					this.inventorySquare);
 		}
 
@@ -1028,7 +1028,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_NORMAL) {
 
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
-				return new ActionDropSpecificItemsFromInventory(performer, performer.squareGameObjectIsOn, this,
+				return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this,
 						this.inventorySquare);
 			} else {
 				return new ActionEquip(Game.level.player, this);
@@ -1094,7 +1094,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false));
 		}
 
-		actions.add(new ActionDropSpecificItemsFromInventory(performer, performer.squareGameObjectIsOn, this,
+		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this,
 				this.inventorySquare));
 
 		if (this.inventoryThatHoldsThisObject == Game.level.player.inventory && !(this instanceof Gold)) {

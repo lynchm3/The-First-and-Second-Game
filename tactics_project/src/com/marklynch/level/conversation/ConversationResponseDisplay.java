@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.ActionTradeItemsInOtherInventory;
+import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -98,7 +98,7 @@ public class ConversationResponseDisplay {
 		buttonTrade.clickListener = new ClickListener() {
 			@Override
 			public void click() {
-				new ActionTradeItemsInOtherInventory(Game.level.player, talker).perform();
+				new ActionInitiateTrade(Game.level.player, talker).perform();
 			}
 		};
 		buttons.add(buttonTrade);

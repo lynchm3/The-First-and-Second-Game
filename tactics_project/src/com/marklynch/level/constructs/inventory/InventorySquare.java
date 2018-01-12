@@ -23,7 +23,6 @@ import mdesl.graphics.Texture;
 public class InventorySquare extends Square {
 
 	public transient GameObject gameObject;
-	public transient ArrayList<GameObject> stack = new ArrayList<GameObject>();
 	public transient Inventory inventoryThisBelongsTo;
 
 	public int xInPixels = 0;
@@ -31,7 +30,7 @@ public class InventorySquare extends Square {
 
 	public static Texture imageTexture;
 
-	public int count = 1;
+	public transient ArrayList<GameObject> stack = new ArrayList<GameObject>();
 
 	public InventorySquare(int x, int y, String imagePath, Inventory inventoryThisBelongsTo) {
 		super(x, y, imagePath, 1, 1, null, false);
@@ -108,14 +107,14 @@ public class InventorySquare extends Square {
 			// Count && value
 			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
 				if (this instanceof GroundDisplaySquare)
-					count = GroundDisplay.itemTypeCount.get(gameObject.templateId);
+					stack = GroundDisplay.itemTypeStacks.get(gameObject.templateId);
 				else
-					count = this.inventoryThisBelongsTo.itemTypeStacks.get(gameObject.templateId).size();
+					stack = this.inventoryThisBelongsTo.itemTypeStacks.get(gameObject.templateId);
 			} else {
 				if (this instanceof GroundDisplaySquare)
-					count = GroundDisplay.illegalItemTypeCount.get(gameObject.templateId);
+					stack = GroundDisplay.illegalItemTypeStacks.get(gameObject.templateId);
 				else
-					count = this.inventoryThisBelongsTo.illegalItemTypeStacks.get(gameObject.templateId).size();
+					stack = this.inventoryThisBelongsTo.illegalItemTypeStacks.get(gameObject.templateId);
 			}
 
 			// count = stack.size();
@@ -128,16 +127,16 @@ public class InventorySquare extends Square {
 					goldTextColor = Color.RED;
 				}
 
-				StringWithColor goldText = new StringWithColor(count + "x" + gameObject.value, goldTextColor);
+				StringWithColor goldText = new StringWithColor(stack.size() + "x" + gameObject.value, goldTextColor);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
 						new Object[] { goldText });
 			} else if (gameObject instanceof Gold) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
 						new Object[] { gameObject.value });
 
-			} else if (count > 1) {
+			} else if (stack.size() > 1) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						new Object[] { count + "x" });
+						new Object[] { stack.size() + "x" });
 
 			}
 

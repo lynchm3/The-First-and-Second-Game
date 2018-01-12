@@ -9,7 +9,7 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
-public class ActionTradeItemsInOtherInventory extends Action {
+public class ActionInitiateTrade extends Action {
 
 	public static final String ACTION_NAME = "Trade";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -17,7 +17,7 @@ public class ActionTradeItemsInOtherInventory extends Action {
 	Actor performer;
 	GameObject target;
 
-	public ActionTradeItemsInOtherInventory(Actor performer, GameObject gameObject) {
+	public ActionInitiateTrade(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "action_select_object.png");
 		this.performer = performer;
 		this.target = gameObject;

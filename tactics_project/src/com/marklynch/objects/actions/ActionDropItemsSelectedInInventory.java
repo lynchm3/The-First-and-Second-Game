@@ -7,7 +7,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
-public class ActionDropSpecificItemsFromInventory extends Action {
+public class ActionDropItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Drop";
 	GameObject performer;
@@ -15,7 +15,7 @@ public class ActionDropSpecificItemsFromInventory extends Action {
 	GameObject object;
 	InventorySquare inventorySquare;
 
-	public ActionDropSpecificItemsFromInventory(GameObject performer, Square square, GameObject object,
+	public ActionDropItemsSelectedInInventory(GameObject performer, Square square, GameObject object,
 			InventorySquare inventorySquare) {
 		super(ACTION_NAME, "right.png");
 		this.performer = performer;
@@ -39,10 +39,10 @@ public class ActionDropSpecificItemsFromInventory extends Action {
 
 		Inventory inventory = object.inventoryThatHoldsThisObject;
 
-		if (inventorySquare.count <= 5) {
-			new ActionDropSpecificItems(performer, square, object).perform();
+		if (inventorySquare.stack.size() <= 5) {
+			new ActionDropItems(performer, square, object).perform();
 		} else {
-			inventory.showQTYDialog(performer, square, object, inventorySquare.count);
+			inventory.showQTYDialog(new ActionDropItems(performer, square, object.inventorySquare.stack));
 		}
 	}
 
