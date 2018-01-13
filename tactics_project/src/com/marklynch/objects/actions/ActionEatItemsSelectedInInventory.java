@@ -1,27 +1,28 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.Carcass;
-import com.marklynch.objects.Corpse;
-import com.marklynch.objects.Food;
+import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.ui.ActivityLog;
 
-public class ActionEat extends Action {
+public class ActionEatItemsSelectedInInventory extends VariableQtyAction {
 
 	public static final String ACTION_NAME = "Eat";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject object;
+	InventorySquare inventorySquare;
 
-	public ActionEat(Actor performer, GameObject object) {
+	public ActionEatItemsSelectedInInventory(Actor performer, GameObject object) {
+
+		// public ActionTakeItems(Actor performer, Object target, GameObject
+		// object) {
 		super(ACTION_NAME, "action_eat.png");
 		this.performer = performer;
 		this.object = object;
+		this.inventorySquare = object.inventorySquare;
 		if (!check()) {
 			enabled = false;
 			actionName = ACTION_NAME_DISABLED;
@@ -36,26 +37,11 @@ public class ActionEat extends Action {
 		if (!enabled)
 			return;
 
-		if (Game.level.shouldLog(performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ate ", object }));
-		object.inventoryThatHoldsThisObject.remove(object);
-
-		if (object instanceof Food || object instanceof Corpse || object instanceof Carcass) {
+		if (inventorySquare.stack.size() <= 5) {
+			new ActionEatItems(performer, object).perform();
 		} else {
-			performer.inventory.add(object);
-		}
-
-		if (object.owner == null)
-			object.owner = performer;
-		performer.actionsPerformedThisTurn.add(this);
-		if (sound != null)
-			sound.play();
-
-		if (!legal) {
-			Crime crime = new Crime(this, this.performer, object.owner, Crime.CRIME_SEVERITY_THEFT, object);
-			this.performer.crimesPerformedThisTurn.add(crime);
-			this.performer.crimesPerformedInLifetime.add(crime);
-			notifyWitnessesOfCrime(crime);
+			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, object.inventorySquare.stack),
+					inventorySquare.stack.size());
 		}
 	}
 
@@ -66,6 +52,7 @@ public class ActionEat extends Action {
 		}
 		if (performer.inventory == object.inventoryThatHoldsThisObject)
 			return true;
+
 		return false;
 	}
 

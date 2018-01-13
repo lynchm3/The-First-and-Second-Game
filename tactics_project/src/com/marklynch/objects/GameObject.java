@@ -35,7 +35,8 @@ import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDropItemsSelectedInInventory;
-import com.marklynch.objects.actions.ActionEat;
+import com.marklynch.objects.actions.ActionEatItems;
+import com.marklynch.objects.actions.ActionEatItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
@@ -774,7 +775,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Food
 		if (this instanceof Food) {
-			actions.add(new ActionEat(performer, this));
+			actions.add(new ActionEatItems(performer, this));
 		}
 
 		// Switch
@@ -1023,7 +1024,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (this instanceof Food) {
-			return new ActionEat(performer, this);
+			return new ActionEatItemsSelectedInInventory(performer, this);
 		}
 
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
@@ -1100,7 +1101,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionEquip(performer, this));
 
 		if (this instanceof Food) {
-			actions.add(new ActionEat(performer, this));
+			actions.add(new ActionEatItemsSelectedInInventory(performer, this));
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {

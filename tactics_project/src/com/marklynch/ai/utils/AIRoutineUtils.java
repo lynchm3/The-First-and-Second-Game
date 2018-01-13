@@ -14,7 +14,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionEat;
+import com.marklynch.objects.actions.ActionEatItems;
 import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSkin;
@@ -865,7 +865,7 @@ public class AIRoutineUtils {
 	public static boolean eatTarget(GameObject target) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
 		if (weaponDistance <= 1) {
-			new ActionEat(Game.level.activeActor, target).perform();
+			new ActionEatItems(Game.level.activeActor, target).perform();
 			return true;
 		} else {
 			return false;
