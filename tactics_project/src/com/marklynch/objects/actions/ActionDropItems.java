@@ -93,12 +93,11 @@ public class ActionDropItems extends VariableQtyAction {
 		}
 
 		if (Game.level.shouldLog(performer)) {
-			if (amountToDrop == 1) {
-				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " dropped ", objects[0] }));
-			} else if (amountToDrop > 1) {
-				Game.level.logOnScreen(
-						new ActivityLog(new Object[] { performer, " dropped ", objects[0], "x" + amountToDrop }));
-			}
+			String amountToDropString = "";
+			if (amountToDrop > 1)
+				amountToDropString = "x" + amountToDrop;
+			Game.level.logOnScreen(
+					new ActivityLog(new Object[] { performer, " dropped ", objects[0], amountToDropString }));
 		}
 
 		if (performer.inventory.groundDisplay != null)
