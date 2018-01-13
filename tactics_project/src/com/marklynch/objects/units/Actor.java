@@ -38,7 +38,7 @@ import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionPet;
 import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
-import com.marklynch.objects.actions.ActionSellSpecificItem;
+import com.marklynch.objects.actions.ActionSellItems;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTalk;
@@ -1154,7 +1154,7 @@ public class Actor extends GameObject {
 	public boolean sellItemsMarkedToSell(Actor buyer) {
 		for (GameObject gameObject : (ArrayList<GameObject>) inventory.gameObjects.clone()) {
 			if (gameObject.toSell == true) {
-				new ActionSellSpecificItem(this, buyer, gameObject).perform();
+				new ActionSellItems(this, buyer, gameObject).perform();
 			}
 		}
 		return true;

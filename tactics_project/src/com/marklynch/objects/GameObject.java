@@ -59,7 +59,7 @@ import com.marklynch.objects.actions.ActionRead;
 import com.marklynch.objects.actions.ActionRemoveMapMarker;
 import com.marklynch.objects.actions.ActionRename;
 import com.marklynch.objects.actions.ActionSearch;
-import com.marklynch.objects.actions.ActionSellSpecificItem;
+import com.marklynch.objects.actions.ActionSellItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionSkin;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.actions.ActionStarSpecificItem;
@@ -1018,7 +1018,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
-				return new ActionSellSpecificItem(performer, (Actor) Inventory.target, this);
+				return new ActionSellItemsSelectedInInventory(performer, (Actor) Inventory.target, this);
 			else
 				return new ActionBuySpecificItem(performer, (Actor) Inventory.target, this);
 		}
@@ -1089,7 +1089,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_TRADE) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
-				actions.add(new ActionSellSpecificItem(performer, (Actor) Inventory.target, this));
+				actions.add(new ActionSellItemsSelectedInInventory(performer, (Actor) Inventory.target, this));
 			else
 				actions.add(new ActionBuySpecificItem(performer, (Actor) Inventory.target, this));
 		}

@@ -52,12 +52,12 @@ public class Game {
 	// public static int playerStartPosY = 46;
 
 	// Lodge
-	// public static int playerStartPosX = 102;
-	// public static int playerStartPosY = 16;
+	public static int playerStartPosX = 102;
+	public static int playerStartPosY = 16;
 
 	// Wolf
-	public static int playerStartPosX = 129;
-	public static int playerStartPosY = 7;
+	// public static int playerStartPosX = 129;
+	// public static int playerStartPosY = 7;
 
 	// Burrow in forest
 	// public static int playerStartPosX = 186;
