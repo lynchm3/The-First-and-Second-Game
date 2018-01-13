@@ -357,7 +357,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 		});
 
-		buttonSearch = new LevelButton(1000f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
+		buttonSearch = new LevelButton(1100f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
 				"end_turn_button.png", stringEnterSearch, true, false, Color.BLACK, Color.WHITE, "Search!");
 		buttonSearch.setClickListener(new ClickListener() {
 			@Override
@@ -894,7 +894,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		resize2();
 		buttonClose.x = squaresX;
 		textShiftX = squaresX + buttonClose.width;
-		buttonSearch.x = textShiftX + 100;
+		buttonSearch.x = textShiftX + 200;
 		buttonQuickSell.x = squaresX + buttonClose.width;
 
 		if (this.groundDisplay != null) {
@@ -1234,9 +1234,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		// [ENTER] Search
-		buttonSearch.draw();
-
-		// [<-] Clear Search
 		buttonSearch.draw();
 
 		// text
