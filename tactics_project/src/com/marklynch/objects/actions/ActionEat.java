@@ -41,7 +41,6 @@ public class ActionEat extends Action {
 		object.inventoryThatHoldsThisObject.remove(object);
 
 		if (object instanceof Food || object instanceof Corpse || object instanceof Carcass) {
-
 		} else {
 			performer.inventory.add(object);
 		}
