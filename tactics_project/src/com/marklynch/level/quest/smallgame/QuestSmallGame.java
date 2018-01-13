@@ -300,6 +300,7 @@ public class QuestSmallGame extends Quest {
 		Storage chest = Templates.CHEST.makeCopy("Chest", Game.level.squares[103][1], false, null);
 		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
 		chest.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, thief));
+		chest.inventory.add(Templates.GOLD.makeCopy(null, null, 101));
 
 		environmentalistBill = hunterBront2.makeCopy("Enviromentalist Bill",
 				Game.level.squares[105][16], Game.level.factions.townsPeople, null, 83, new GameObject[] {
