@@ -172,10 +172,10 @@ public class QuestSmallGame extends Quest {
 			"I've set off with the hunters towards the creature's lair");
 	JournalLog journalLogEnviromentalistWasSpying = new JournalLog(
 			"I met a strange figure spying on the hunters of Town Lodge");
-	JournalLog journalLogSaveTheWolf1 = new JournalLog(
-			"Behind the hunting lodge, where the weapons were meant to be, stood a strange figure. He spoke 3 words - \"Save the wolf\"");
-	JournalLog journalLogSaveTheWolf2 = new JournalLog(
-			"Behind the hunting lodge, where the weapons were meant to be, stood the strange figure from before. He spoke 3 words - \"Save the wolf\"");
+	JournalLog journalLogSaveTheWolfVariant1 = new JournalLog(
+			"Behind the hunting lodge, where the weapons were meant to be, stood a strange figure. He told me the the hunters' mark is an intelligent being should be spared.");
+	JournalLog journalLogSaveTheWolfVariant2 = new JournalLog(
+			"Behind the hunting lodge, where the weapons were meant to be, stood the strange figure from before. He told me the the hunters' mark is an intelligent being and should be spared.");
 
 	JournalLog journalLogRetrievedWeapons = new JournalLog("I've retrieved the weapons from behind the hunter's lodge");
 	JournalLog journalLogReadHuntPlan1 = new JournalLog("In the staging area for a hunt I found the plan for the hunt");
@@ -428,7 +428,8 @@ public class QuestSmallGame extends Quest {
 			for (GameObject weapon : weaponsBehindLodge) {
 				if (Game.level.player.inventory.contains(weapon)) {
 					currentObjectives.remove(this.objectiveWeaponsBehindLodge);
-					if (!haveJournalLog(journalLogSaveTheWolf1) && !haveJournalLog(journalLogSaveTheWolf2)) {
+					if (!haveJournalLog(journalLogSaveTheWolfVariant1)
+							&& !haveJournalLog(journalLogSaveTheWolfVariant2)) {
 						addJournalLog(journalLogRetrievedWeapons);
 					}
 				}
@@ -569,7 +570,7 @@ public class QuestSmallGame extends Quest {
 			// Starting point, spying
 			actor.activityDescription = ACTIVITY_SPYING;
 		} else if (haveJournalLog(journalLogAgreedToJoinHunters)
-				&& (!haveJournalLog(journalLogSaveTheWolf1) && !haveJournalLog(journalLogSaveTheWolf2))) {
+				&& (!haveJournalLog(journalLogSaveTheWolfVariant1) && !haveJournalLog(journalLogSaveTheWolfVariant2))) {
 			// Go get the weapons
 
 			actor.activityDescription = ACTIVITY_SAVING_THE_WORLD;
@@ -627,7 +628,7 @@ public class QuestSmallGame extends Quest {
 		// Talking to environmentalist
 		if (!haveJournalLog(journalLogAgreedToJoinHunters)) {
 			return ConversationsSmallGame.conversationEnviromentalistImNotSpying;
-		} else if (!haveJournalLog(journalLogSaveTheWolf1) && !haveJournalLog(journalLogSaveTheWolf2)) {
+		} else if (!haveJournalLog(journalLogSaveTheWolfVariant1) && !haveJournalLog(journalLogSaveTheWolfVariant2)) {
 			return ConversationsSmallGame.conversationEnviromentalistSaveTheWolf;
 		}
 		return environmentalistBill.createConversation("...");

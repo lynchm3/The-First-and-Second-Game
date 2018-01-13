@@ -176,7 +176,9 @@ public class ConversationsSmallGame {
 
 	private static void setUpConversationSaveTheWolf() {
 
-		ConversationPart conversationPartSaveTheWolf = new ConversationPart(new Object[] { "Save the wolf!" },
+		ConversationPart conversationPartSaveTheWolf = new ConversationPart(
+				new Object[] {
+						"You can't take part in this. She's not just a normal wolf, she's an intelligent being. Smarter than those knuckleheads that want to mount her on a wall anyway." },
 				new ConversationResponse[] {}, quest.environmentalistBill, quest);
 
 		conversationPartSaveTheWolf.leaveConversationListener = new LeaveConversationListener() {
@@ -186,15 +188,14 @@ public class ConversationsSmallGame {
 				quest.addObjective(quest.objectiveEnvironmentalist);
 				for (GameObject gameObject : quest.weaponsBehindLodge) {
 					if (quest.environmentalistBill.inventory.contains(gameObject)) {
-						new ActionGiveItems(quest.environmentalistBill, Game.level.player, false, gameObject)
-								.perform();
+						new ActionGiveItems(quest.environmentalistBill, Game.level.player, false, gameObject).perform();
 
 					}
 				}
 				if (quest.haveJournalLog(quest.journalLogEnviromentalistWasSpying)) {
-					quest.addJournalLog(quest.journalLogSaveTheWolf2);
+					quest.addJournalLog(quest.journalLogSaveTheWolfVariant2);
 				} else {
-					quest.addJournalLog(quest.journalLogSaveTheWolf1);
+					quest.addJournalLog(quest.journalLogSaveTheWolfVariant1);
 				}
 			}
 
