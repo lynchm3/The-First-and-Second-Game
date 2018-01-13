@@ -40,7 +40,8 @@ public class ActionBuytemsSelectedInInventory extends Action {
 			new ActionBuyItems(performer, target, object).perform();
 		} else {
 			Game.level.player.inventory.showQTYDialog(
-					new ActionBuyItems(performer, target, object.inventorySquare.stack), inventorySquare.stack.size());
+					new ActionBuyItems(performer, target, object.inventorySquare.stack), inventorySquare.stack.size(),
+					"Enter qty to buy", object.value);
 		}
 	}
 

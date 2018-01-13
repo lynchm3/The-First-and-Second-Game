@@ -41,7 +41,7 @@ public class ActionEatItemsSelectedInInventory extends Action {
 			new ActionEatItems(performer, object).perform();
 		} else {
 			Game.level.player.inventory.showQTYDialog(new ActionEatItems(performer, object.inventorySquare.stack),
-					inventorySquare.stack.size());
+					inventorySquare.stack.size(), "Enter qty to eat", 0);
 		}
 	}
 

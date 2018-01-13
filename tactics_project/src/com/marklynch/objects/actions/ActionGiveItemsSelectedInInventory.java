@@ -43,7 +43,7 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 		} else {
 			Game.level.player.inventory.showQTYDialog(
 					new ActionGiveItems(performer, receiver, logAsTake, object.inventorySquare.stack),
-					inventorySquare.stack.size());
+					inventorySquare.stack.size(), "Enter qty to give", 0);
 		}
 	}
 

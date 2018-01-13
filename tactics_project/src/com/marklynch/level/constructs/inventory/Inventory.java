@@ -1422,14 +1422,16 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, 0, Game.windowWidth, Game.windowHeight);
 			// Instructions
 			TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY - 36, Integer.MAX_VALUE,
-					true, null, new Object[] { new StringWithColor("Enter Qty", Color.WHITE) });
-			// TextUtils.printTextWithImages(300, 300, Integer.MAX_VALUE, true,
-			// null,
-			// new Object[] { new StringWithColor("Enter Qty", Color.BLUE) });
-			// TextUtils.printTextWithImages(200, 200, Integer.MAX_VALUE, true,
-			// null,
-			// new Object[] { new StringWithColor("Enter Qty", Color.WHITE) });
+					true, null, new Object[] { qtyStringWithColor });
 			textBoxQty.draw();
+			if (valuePerQty != 0 && textBoxQty.getText().length() > 0) {
+				int totalValue = valuePerQty * Integer.parseInt(textBoxQty.getText());
+				String totalValueString = "Total value " + totalValue + " gold";
+				TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY + 36,
+						Integer.MAX_VALUE, true, null,
+						new Object[] { new StringWithColor(totalValueString, Color.WHITE) });
+
+			}
 
 		}
 
@@ -1728,11 +1730,18 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	VariableQtyAction variableAction = null;
+	// String qtyString = null;
+	StringWithColor qtyStringWithColor = null;
+	int valuePerQty = 0;
 
-	public void showQTYDialog(VariableQtyAction variableAction, int maxNumericValue) {
+	public void showQTYDialog(VariableQtyAction variableAction, int maxNumericValue, String qtyString,
+			int valuePerQty) {
 		this.variableAction = variableAction;
 		textBoxQty.maxNumericValue = maxNumericValue;
 		textBoxQty.clearText();
+		qtyStringWithColor = new StringWithColor(qtyString, Color.WHITE);
+		this.valuePerQty = valuePerQty;
+
 		Level.activeTextBox = textBoxQty;
 	}
 

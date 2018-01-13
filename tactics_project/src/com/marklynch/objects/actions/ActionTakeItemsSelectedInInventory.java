@@ -50,7 +50,8 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 			new ActionTakeItems(performer, target, object).perform();
 		} else {
 			Game.level.player.inventory.showQTYDialog(
-					new ActionTakeItems(performer, target, object.inventorySquare.stack), inventorySquare.stack.size());
+					new ActionTakeItems(performer, target, object.inventorySquare.stack), inventorySquare.stack.size(),
+					"Enter qty to take", 0);
 		}
 	}
 
