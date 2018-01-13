@@ -53,11 +53,6 @@ public class ActionBuytemsSelectedInInventory extends Action {
 			return false;
 		}
 		return true;
-		// if (target != null &&
-		// performer.straightLineDistanceTo(target.squareGameObjectIsOn) < 2) {
-		// return true;
-		// }
-		// return false;
 	}
 
 	@Override

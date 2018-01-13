@@ -7,7 +7,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
-public class ActionTakeItemsSelectedInInventory extends VariableQtyAction {
+public class ActionTakeItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Take";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";

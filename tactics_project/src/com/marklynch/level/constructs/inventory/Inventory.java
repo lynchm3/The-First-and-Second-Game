@@ -1421,8 +1421,14 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			// Full blakc bg
 			QuadUtils.drawQuad(new Color(0f, 0f, 0f, 0.5f), 0, 0, Game.windowWidth, Game.windowHeight);
 			// Instructions
-			TextUtils.printTextWithImages(textBoxSearch.drawPositionX, textBoxSearch.drawPositionY - 36,
-					Integer.MAX_VALUE, true, null, new Object[] { "Enter Qty" });
+			TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY - 36, Integer.MAX_VALUE,
+					true, null, new Object[] { new StringWithColor("Enter Qty", Color.WHITE) });
+			// TextUtils.printTextWithImages(300, 300, Integer.MAX_VALUE, true,
+			// null,
+			// new Object[] { new StringWithColor("Enter Qty", Color.BLUE) });
+			// TextUtils.printTextWithImages(200, 200, Integer.MAX_VALUE, true,
+			// null,
+			// new Object[] { new StringWithColor("Enter Qty", Color.WHITE) });
 			textBoxQty.draw();
 
 		}
