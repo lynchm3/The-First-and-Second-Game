@@ -29,7 +29,7 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionBuySpecificItem;
+import com.marklynch.objects.actions.ActionBuytemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionClose;
@@ -1020,7 +1020,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
 				return new ActionSellItemsSelectedInInventory(performer, (Actor) Inventory.target, this);
 			else
-				return new ActionBuySpecificItem(performer, (Actor) Inventory.target, this);
+				return new ActionBuytemsSelectedInInventory(performer, (Actor) Inventory.target, this);
 		}
 
 		if (this instanceof Food) {
@@ -1091,7 +1091,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (this.inventoryThatHoldsThisObject == performer.inventory)
 				actions.add(new ActionSellItemsSelectedInInventory(performer, (Actor) Inventory.target, this));
 			else
-				actions.add(new ActionBuySpecificItem(performer, (Actor) Inventory.target, this));
+				actions.add(new ActionBuytemsSelectedInInventory(performer, (Actor) Inventory.target, this));
 		}
 
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this

@@ -117,8 +117,6 @@ public class InventorySquare extends Square {
 					stack = this.inventoryThisBelongsTo.illegalItemTypeStacks.get(gameObject.templateId);
 			}
 
-			// count = stack.size();
-
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 
 				Color goldTextColor = Color.WHITE;
