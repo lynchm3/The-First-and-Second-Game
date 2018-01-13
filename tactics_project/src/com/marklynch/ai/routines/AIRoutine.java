@@ -28,7 +28,7 @@ import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDropItems;
-import com.marklynch.objects.actions.ActionGiveSpecificItem;
+import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
@@ -803,7 +803,7 @@ public abstract class AIRoutine {
 					} else {
 						actor.setMiniDialogue("Give me that!", criminal);
 						for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-							new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal, true).perform();
+							new ActionGiveItems(criminal, actor, true, stolenItemOnCriminal).perform();
 						}
 					}
 					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
@@ -887,7 +887,7 @@ public abstract class AIRoutine {
 			public void select() {
 				super.select();
 				for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-					new ActionGiveSpecificItem(criminal, actor, stolenItemOnCriminal, true).perform();
+					new ActionGiveItems(criminal, actor, true, stolenItemOnCriminal).perform();
 				}
 			}
 		};

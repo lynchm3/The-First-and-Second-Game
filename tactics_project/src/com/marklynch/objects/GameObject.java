@@ -39,8 +39,7 @@ import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
 import com.marklynch.objects.actions.ActionFollow;
-import com.marklynch.objects.actions.ActionGiveItemsInInventory;
-import com.marklynch.objects.actions.ActionGiveSpecificItem;
+import com.marklynch.objects.actions.ActionGiveItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.objects.actions.ActionInspect;
@@ -49,6 +48,7 @@ import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionLootItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionOpen;
+import com.marklynch.objects.actions.ActionOpenInventoryToGiveItems;
 import com.marklynch.objects.actions.ActionPeek;
 import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
@@ -858,7 +858,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Give from inventory
 		if (!decorative && this.canContainOtherObjects) {
-			actions.add(new ActionGiveItemsInInventory(performer, this));
+			actions.add(new ActionOpenInventoryToGiveItems(performer, this));
 		}
 
 		// Trade
@@ -993,7 +993,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {
-			return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
+			return new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
@@ -1036,7 +1036,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
-				return new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false);
+				return new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this);
 			} else {
 				return new ActionEquip(Game.level.player, this);
 			}
@@ -1090,7 +1090,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionEquip(performer, this));
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
-			actions.add(new ActionGiveSpecificItem(performer, (GameObject) Inventory.target, this, false));
+			actions.add(new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this));
 		}
 
 		actions.add(new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this));

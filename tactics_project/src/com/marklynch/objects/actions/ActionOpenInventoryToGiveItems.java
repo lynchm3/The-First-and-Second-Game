@@ -9,7 +9,7 @@ import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
-public class ActionGiveItemsInInventory extends Action {
+public class ActionOpenInventoryToGiveItems extends Action {
 
 	public static final String ACTION_NAME = "Give";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -17,7 +17,7 @@ public class ActionGiveItemsInInventory extends Action {
 	Actor performer;
 	GameObject target;
 
-	public ActionGiveItemsInInventory(Actor performer, GameObject gameObject) {
+	public ActionOpenInventoryToGiveItems(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "action_select_object.png");
 		this.performer = performer;
 		this.target = gameObject;

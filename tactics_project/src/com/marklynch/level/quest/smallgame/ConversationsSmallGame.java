@@ -7,7 +7,7 @@ import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
 import com.marklynch.level.conversation.LeaveConversationListener;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.actions.ActionGiveSpecificItem;
+import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.units.Actor;
 
 public class ConversationsSmallGame {
@@ -186,7 +186,7 @@ public class ConversationsSmallGame {
 				quest.addObjective(quest.objectiveEnvironmentalist);
 				for (GameObject gameObject : quest.weaponsBehindLodge) {
 					if (quest.environmentalistBill.inventory.contains(gameObject)) {
-						new ActionGiveSpecificItem(quest.environmentalistBill, Game.level.player, gameObject, false)
+						new ActionGiveItems(quest.environmentalistBill, Game.level.player, false, gameObject)
 								.perform();
 
 					}
