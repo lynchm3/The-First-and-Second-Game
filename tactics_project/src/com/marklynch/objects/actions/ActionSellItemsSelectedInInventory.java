@@ -11,15 +11,15 @@ public class ActionSellItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Sell";
 	Actor performer;
-	Actor receiver;
+	Actor buyer;
 	GameObject object;
 	InventorySquare inventorySquare;
 
-	public ActionSellItemsSelectedInInventory(Actor performer, Actor receiver, GameObject object) {
+	public ActionSellItemsSelectedInInventory(Actor performer, Actor buyer, GameObject object) {
 		super(ACTION_NAME, "right.png");
 		this.performer = performer;
 		this.object = object;
-		this.receiver = receiver;
+		this.buyer = buyer;
 		this.inventorySquare = object.inventorySquare;
 
 		if (!check()) {
@@ -37,19 +37,21 @@ public class ActionSellItemsSelectedInInventory extends Action {
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {
-			new ActionSellItems(performer, receiver, object).perform();
+			new ActionSellItems(performer, buyer, object).perform();
 		} else {
+			int maxCanAfford = Math.floorDiv(buyer.getCarriedGoldValue(), object.value);
+			int maxCanBuy = Math.min(maxCanAfford, inventorySquare.stack.size());
 			Game.level.player.inventory.showQTYDialog(
-					new ActionSellItems(performer, receiver, object.inventorySquare.stack),
-					inventorySquare.stack.size(), "Enter qty to sell", object.value);
+					new ActionSellItems(performer, buyer, object.inventorySquare.stack), maxCanBuy, "Enter qty to sell",
+					object.value);
 		}
 	}
 
 	@Override
 	public boolean check() {
-		if (!(receiver instanceof Trader) && receiver.getCarriedGoldValue() < object.value)
+		if (!(buyer instanceof Trader) && buyer.getCarriedGoldValue() < object.value)
 			return false;
-		if (!performer.canSeeSquare(receiver.squareGameObjectIsOn)) {
+		if (!performer.canSeeSquare(buyer.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME + " (can't reach)";
 			return false;
 		}
