@@ -1398,6 +1398,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.anchorY = anchorY;
 		gameObject.name = name;
 		gameObject.squareGameObjectIsOn = square;
+		gameObject.value = value;
 
 		gameObject.totalHealth = gameObject.remainingHealth = totalHealth;
 		gameObject.imageTexturePath = imageTexturePath;

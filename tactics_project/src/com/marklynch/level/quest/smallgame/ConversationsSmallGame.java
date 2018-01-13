@@ -180,6 +180,7 @@ public class ConversationsSmallGame {
 				new Object[] {
 						"You can't take part in this. She's not just a normal wolf, she's an intelligent being. Smarter than those knuckleheads that want to mount her on a wall anyway." },
 				new ConversationResponse[] {}, quest.environmentalistBill, quest);
+		// Would like to use the word sentient or something for the above
 
 		conversationPartSaveTheWolf.leaveConversationListener = new LeaveConversationListener() {
 
