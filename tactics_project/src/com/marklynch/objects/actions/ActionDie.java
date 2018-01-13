@@ -59,7 +59,7 @@ public class ActionDie extends Action {
 				Game.level.actorsToRemove.add((Actor) performer);
 
 			} else {
-				Game.level.inanimateObjectsToRemove.add(performer);
+				Game.level.inanimateObjectsOnGroundToRemove.add(performer);
 			}
 		}
 

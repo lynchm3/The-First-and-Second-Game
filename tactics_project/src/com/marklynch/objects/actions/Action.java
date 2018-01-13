@@ -124,6 +124,7 @@ public abstract class Action {
 		getGlobalImage("action_close.png");
 		getGlobalImage("action_die.png");// untested
 		getGlobalImage("action_drop.png");
+		getGlobalImage("action_eat.png");
 		getGlobalImage("action_equip.png");
 		getGlobalImage("action_electric.png");
 		getGlobalImage("action_fill_container.png");

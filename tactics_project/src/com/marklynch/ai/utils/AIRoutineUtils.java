@@ -15,7 +15,7 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEat;
-import com.marklynch.objects.actions.ActionLootAll;
+import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSkin;
 import com.marklynch.objects.actions.ActionTakeItems;
@@ -835,7 +835,7 @@ public class AIRoutineUtils {
 	public static boolean lootTarget(GameObject gameObject) {
 		int straightLineDistance = Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
 		if (straightLineDistance <= 1) {
-			new ActionLootAll(Game.level.activeActor, gameObject).perform();
+			new ActiontTakeAll(Game.level.activeActor, gameObject).perform();
 			return true;
 		} else {
 			return false;

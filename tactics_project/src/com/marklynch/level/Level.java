@@ -164,7 +164,7 @@ public class Level {
 	public transient boolean ended = false;
 	public Texture textureUndiscovered;
 	public ArrayList<InanimateObjectToAddOrRemove> inanimateObjectsToAdd = new ArrayList<InanimateObjectToAddOrRemove>();
-	public ArrayList<GameObject> inanimateObjectsToRemove = new ArrayList<GameObject>();
+	public ArrayList<GameObject> inanimateObjectsOnGroundToRemove = new ArrayList<GameObject>();
 	public ArrayList<Actor> actorsToRemove = new ArrayList<Actor>();
 
 	public enum LevelMode {
@@ -2045,7 +2045,7 @@ public class Level {
 			}
 			inanimateObjectsToAdd.clear();
 
-			for (GameObject gameObject : inanimateObjectsToRemove) {
+			for (GameObject gameObject : inanimateObjectsOnGroundToRemove) {
 				inanimateObjectsOnGround.remove(gameObject);
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
 			}

@@ -3,6 +3,9 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.objects.Carcass;
+import com.marklynch.objects.Corpse;
+import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -35,8 +38,14 @@ public class ActionEat extends Action {
 
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ate ", object }));
-		object.squareGameObjectIsOn.inventory.remove(object);
-		performer.inventory.add(object);
+		object.inventoryThatHoldsThisObject.remove(object);
+
+		if (object instanceof Food || object instanceof Corpse || object instanceof Carcass) {
+
+		} else {
+			performer.inventory.add(object);
+		}
+
 		if (object.owner == null)
 			object.owner = performer;
 		performer.actionsPerformedThisTurn.add(this);
@@ -56,6 +65,8 @@ public class ActionEat extends Action {
 		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) < 2) {
 			return true;
 		}
+		if (performer.inventory == object.inventoryThatHoldsThisObject)
+			return true;
 		return false;
 	}
 

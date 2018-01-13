@@ -10,16 +10,16 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
 
-public class ActionLootItemsInOtherInventory extends Action {
+public class ActionOpenOtherInventory extends Action {
 
-	public static final String ACTION_NAME = "Loot";
+	public static final String ACTION_NAME = "Open";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
 	GameObject target;
 	ActionOpen actionOpen;
 
-	public ActionLootItemsInOtherInventory(Actor performer, GameObject gameObject) {
+	public ActionOpenOtherInventory(Actor performer, GameObject gameObject) {
 		super(ACTION_NAME, "action_select_object.png");
 		this.performer = performer;
 		this.target = gameObject;

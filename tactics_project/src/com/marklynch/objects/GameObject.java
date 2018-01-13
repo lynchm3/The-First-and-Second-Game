@@ -35,6 +35,7 @@ import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDropItemsSelectedInInventory;
+import com.marklynch.objects.actions.ActionEat;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
@@ -45,10 +46,10 @@ import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.objects.actions.ActionInspect;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.objects.actions.ActionLock;
-import com.marklynch.objects.actions.ActionLootItemsInOtherInventory;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionOpenInventoryToGiveItems;
+import com.marklynch.objects.actions.ActionOpenOtherInventory;
 import com.marklynch.objects.actions.ActionPeek;
 import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
@@ -679,7 +680,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return null;
 		}
 		if (this.canContainOtherObjects && !this.canShareSquare)
-			return new ActionLootItemsInOtherInventory(performer, this);
+			return new ActionOpenOtherInventory(performer, this);
 		return null;
 	}
 
@@ -691,7 +692,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return null;
 		}
 		if (this.canContainOtherObjects && this.inventory.size() > 0)
-			return new ActionLootItemsInOtherInventory(performer, this);
+			return new ActionOpenOtherInventory(performer, this);
 		if (this.fitsInInventory)
 			return new ActionTakeItems(performer, this.squareGameObjectIsOn, this);
 		return null;
@@ -771,6 +772,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionChop(performer, this));
 		}
 
+		// Food
+		if (this instanceof Food) {
+			actions.add(new ActionEat(performer, this));
+		}
+
 		// Switch
 		if (this instanceof Switch) {
 			Switch zwitch = (Switch) this;
@@ -790,7 +796,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Loot
 		if (!decorative && this.canContainOtherObjects && !(this instanceof Actor)) {
-			actions.add(new ActionLootItemsInOtherInventory(performer, this));
+			actions.add(new ActionOpenOtherInventory(performer, this));
 		}
 
 		// Openable, Chests, Doors
@@ -1016,6 +1022,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return new ActionBuySpecificItem(performer, (Actor) Inventory.target, this);
 		}
 
+		if (this instanceof Food) {
+			return new ActionEat(performer, this);
+		}
+
 		if (performer.equipped == this || performer.helmet == this || performer.bodyArmor == this
 				|| performer.legArmor == this)
 			return new ActionUnequip(performer, this);
@@ -1088,6 +1098,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			actions.add(new ActionUnequip(performer, this));
 		else
 			actions.add(new ActionEquip(performer, this));
+
+		if (this instanceof Food) {
+			actions.add(new ActionEat(performer, this));
+		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			actions.add(new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this));

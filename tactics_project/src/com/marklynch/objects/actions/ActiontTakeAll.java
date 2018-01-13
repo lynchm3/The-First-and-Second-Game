@@ -10,7 +10,7 @@ import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-public class ActionLootAll extends Action {
+public class ActiontTakeAll extends Action {
 
 	public static final String ACTION_NAME = "Loot All";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -19,7 +19,7 @@ public class ActionLootAll extends Action {
 	GameObject container;
 	ActionOpen actionOpen;
 
-	public ActionLootAll(Actor performer, GameObject container) {
+	public ActiontTakeAll(Actor performer, GameObject container) {
 		super(ACTION_NAME, "action_loot_all.png");
 		this.performer = performer;
 		this.container = container;

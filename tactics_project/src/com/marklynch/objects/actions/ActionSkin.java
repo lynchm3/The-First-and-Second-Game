@@ -19,14 +19,14 @@ public class ActionSkin extends Action {
 
 	Actor performer;
 	GameObject target;
-	ActionLootAll actionLootAll;
+	ActiontTakeAll actionLootAll;
 
 	// Default for hostiles
 	public ActionSkin(Actor performer, GameObject target) {
 		super(ACTION_NAME, "action_skin.png");
 		this.performer = performer;
 		this.target = target;
-		actionLootAll = new ActionLootAll(performer, target);
+		actionLootAll = new ActiontTakeAll(performer, target);
 		if (!check()) {
 			enabled = false;
 		}
@@ -59,7 +59,7 @@ public class ActionSkin extends Action {
 			Game.level.logOnScreen(
 					new ActivityLog(new Object[] { performer, " skinned ", fur, " from ", target, " with ", knife }));
 
-		new ActionLootAll(performer, target).perform();
+		new ActiontTakeAll(performer, target).perform();
 
 		target.checkIfDestroyed(performer, this);
 

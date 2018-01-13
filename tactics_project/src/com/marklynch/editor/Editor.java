@@ -436,6 +436,9 @@ public class Editor {
 		for (int i = 0; i < 25; i++) {
 			player.inventory.add(Templates.ROCK.makeCopy(null, player));
 		}
+		for (int i = 0; i < 25; i++) {
+			player.inventory.add(Templates.APPLE.makeCopy(null, player));
+		}
 		player.inventory.add(Templates.FUR.makeCopy(null, player));
 		player.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, player));
 		player.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, player));
