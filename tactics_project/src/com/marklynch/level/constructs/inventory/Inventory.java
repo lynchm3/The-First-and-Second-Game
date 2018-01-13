@@ -134,6 +134,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	int lengthShiftEquip = Game.font.getWidth(stringShiftEquip);
 
 	float textShiftX = 0;
+	float textShiftY = 0;
 	float textOtherShiftX = 0;
 
 	// [ENTER] / Search text
@@ -309,7 +310,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		buttonsFilter.add(buttonFilterByFood);
 
 		buttonLootAll = new LevelButton(900f, bottomBorderHeight, 150f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "LOOT ALL [SPACE]", true, false, Color.BLACK, Color.WHITE,
+				"end_turn_button.png", "[SPACE] LOOT ALL", true, false, Color.BLACK, Color.WHITE,
 				"Loot all items nearby (legal if white, illegal if red)");
 		buttonLootAll.setClickListener(new ClickListener() {
 			@Override
@@ -387,7 +388,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		buttons.add(buttonClearSearch);
 
 		buttonQuickSell = new LevelButton(900f, bottomBorderHeight, 100f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "QUICK SELL [SPACE]", true, false, Color.BLACK, Color.WHITE,
+				"end_turn_button.png", "[SPACE] Quick Sell", true, false, Color.BLACK, Color.WHITE,
 				"Sell useless items, obsolete weapons and armor, and duplicate tools");
 		buttonQuickSell.setClickListener(new ClickListener() {
 
@@ -409,7 +410,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		buttonClose = new LevelButton(Game.halfWindowWidth - 25f, bottomBorderHeight, 70f, 30f, "end_turn_button.png",
-				"end_turn_button.png", "CLOSE", true, false, Color.BLACK, Color.WHITE, null);
+				"end_turn_button.png", "[ESC] Close", true, false, Color.BLACK, Color.WHITE, null);
 		buttonClose.setClickListener(new ClickListener() {
 			@Override
 			public void click() {
@@ -765,8 +766,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public HashMap<Integer, ArrayList<GameObject>> itemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
 	public HashMap<Integer, ArrayList<GameObject>> illegalItemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
-	private Object[] LOOT_ALL = new Object[] { new StringWithColor("LOOT ALL [SPACE]", Color.WHITE) };
-	private Object[] STEAL_ALL = new Object[] { new StringWithColor("STEAL ALL [SPACE]", Color.RED) };
+	private Object[] LOOT_ALL = new Object[] { new StringWithColor("[SPACE] LOOT ALL", Color.WHITE) };
+	private Object[] STEAL_ALL = new Object[] { new StringWithColor("[SPACE] STEAL ALL", Color.RED) };
 
 	public void matchGameObjectsToSquares() {
 
@@ -892,22 +893,30 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		fixScroll();
 		resize2();
+
 		buttonClose.x = squaresX;
-		textShiftX = squaresX + buttonClose.width;
-		buttonSearch.x = textShiftX + 200;
-		buttonQuickSell.x = squaresX + buttonClose.width;
+		textShiftX = squaresX;
+		buttonSearch.x = squaresX;
+		buttonQuickSell.x = squaresX;
+
+		textShiftY = Game.windowHeight - bottomBorderHeight;
+		buttonQuickSell.y = bottomBorderHeight;
+		buttonSearch.y = bottomBorderHeight - 30;
+		buttonClose.y = bottomBorderHeight - 60;
 
 		if (this.groundDisplay != null) {
 			this.groundDisplay.fixScroll();
 			this.groundDisplay.resize2();
 			buttonLootAll.x = groundDisplay.squaresX;
-			textOtherShiftX = this.groundDisplay.squaresX + buttonLootAll.width;
+			buttonLootAll.y = bottomBorderHeight - 30;
+			textOtherShiftX = this.groundDisplay.squaresX;
 		}
 		if (this.otherInventory != null) {
 			this.otherInventory.fixScroll();
 			this.otherInventory.resize2();
 			buttonLootAll.x = this.otherInventory.squaresX;
-			textOtherShiftX = this.otherInventory.squaresX + buttonLootAll.width;
+			buttonLootAll.y = bottomBorderHeight - 30;
+			textOtherShiftX = this.otherInventory.squaresX;
 		}
 
 		weaponComparisonDisplay.resize();
@@ -1220,15 +1229,15 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		// [SHIFT]
 		if (groundDisplay != null) {
-			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
-					null, new Object[] { stringShiftDrop });
+			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null,
+					new Object[] { stringShiftDrop });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
 					false, null, new Object[] { stringShiftEquip });
 		}
 
 		if (otherInventory != null && inventoryMode != INVENTORY_MODE.MODE_TRADE) {
-			TextUtils.printTextWithImages(textShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE, false,
-					null, new Object[] { stringShiftPut });
+			TextUtils.printTextWithImages(textShiftX, textShiftY, Integer.MAX_VALUE, false, null,
+					new Object[] { stringShiftPut });
 			TextUtils.printTextWithImages(textOtherShiftX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
 					false, null, new Object[] { stringShiftEquip });
 		}
