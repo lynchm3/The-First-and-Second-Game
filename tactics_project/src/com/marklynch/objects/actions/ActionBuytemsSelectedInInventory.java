@@ -43,8 +43,8 @@ public class ActionBuytemsSelectedInInventory extends Action {
 			int maxCanBuy = Math.min(maxCanAfford, inventorySquare.stack.size());
 
 			Game.level.player.inventory.showQTYDialog(
-					new ActionBuyItems(performer, seller, object.inventorySquare.stack), maxCanBuy, "Enter qty to buy",
-					object.value);
+					new ActionBuyItems(performer, seller, object.inventorySquare.stack), maxCanBuy,
+					"Enter qty to buy (max " + maxCanBuy + ")", object.value);
 		}
 	}
 

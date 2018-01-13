@@ -40,10 +40,10 @@ public class ActionSellItemsSelectedInInventory extends Action {
 			new ActionSellItems(performer, buyer, object).perform();
 		} else {
 			int maxCanAfford = Math.floorDiv(buyer.getCarriedGoldValue(), object.value);
-			int maxCanBuy = Math.min(maxCanAfford, inventorySquare.stack.size());
+			int maxCanSell = Math.min(maxCanAfford, inventorySquare.stack.size());
 			Game.level.player.inventory.showQTYDialog(
-					new ActionSellItems(performer, buyer, object.inventorySquare.stack), maxCanBuy, "Enter qty to sell",
-					object.value);
+					new ActionSellItems(performer, buyer, object.inventorySquare.stack), maxCanSell,
+					"Enter qty to sell (max " + maxCanSell + ")", object.value);
 		}
 	}
 
