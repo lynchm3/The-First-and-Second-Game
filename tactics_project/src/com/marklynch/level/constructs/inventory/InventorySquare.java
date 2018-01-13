@@ -10,7 +10,6 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.inventory.Inventory.INVENTORY_MODE;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gold;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.StringWithColor;
@@ -125,14 +124,29 @@ public class InventorySquare extends Square {
 					goldTextColor = Color.RED;
 				}
 
-				StringWithColor goldText = new StringWithColor(stack.size() + "x" + gameObject.value, goldTextColor);
-				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						new Object[] { goldText });
-			} else if (gameObject instanceof Gold) {
-				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						new Object[] { gameObject.value });
+				String goldTextString = "" + gameObject.value;
+				int goldTextLength = Game.font.getWidth(goldTextString);
+				StringWithColor goldTextStringWithColor = new StringWithColor(goldTextString, goldTextColor);
+				TextUtils.printTextWithImages(xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10,
+						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27, Integer.MAX_VALUE, false, null,
+						new Object[] { goldTextStringWithColor });
 
-			} else if (stack.size() > 1) {
+				TextureUtils.drawTexture(Inventory.textureGold,
+						xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10 - 16,
+						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27,
+						xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10,
+						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27 + 16);
+
+			}
+
+			// if (gameObject instanceof Gold) {
+			// TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7,
+			// Integer.MAX_VALUE, false, null,
+			// new Object[] { gameObject.value });
+			//
+			// }
+
+			if (stack.size() > 1) {
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
 						new Object[] { stack.size() + "x" });
 

@@ -188,6 +188,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public static Texture textureFilter;
 	public static Texture textureBag;
 	public static Texture textureStar;
+	public static Texture textureGold;
 
 	public TextBox textBoxSearch = new TextBox(this, "", "Enter Search Term", lengthSearch + 16, 0, TextBox.TYPE.ALL);
 	public TextBox textBoxQty = new TextBox(this, "", "Enter Qty", 300, 300, TextBox.TYPE.NUMERIC);
@@ -649,6 +650,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		textureFilter = ResourceUtils.getGlobalImage("filter.png");
 		textureBag = ResourceUtils.getGlobalImage("bag.png");
 		textureStar = ResourceUtils.getGlobalImage("star.png");
+		textureGold = ResourceUtils.getGlobalImage("gold.png");
 	}
 
 	public GameObject get(int index) {
