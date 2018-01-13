@@ -1,7 +1,7 @@
 package com.marklynch.objects.actions;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -46,16 +46,11 @@ public class ActionTakeItemsSelectedInInventory extends VariableQtyAction {
 		if (!enabled)
 			return;
 
-		Inventory inventory = object.inventoryThatHoldsThisObject;
-
-		System.out.println("inventorySquare.stack.size() = " + inventorySquare.stack.size());
-		System.out.println("inventorySquare.inventory = " + inventorySquare.inventory);
-
 		if (inventorySquare.stack.size() <= 5) {
 			new ActionTakeItems(performer, target, object).perform();
 		} else {
-			inventory.showQTYDialog(new ActionTakeItems(performer, target, object.inventorySquare.stack),
-					inventorySquare.stack.size());
+			Game.level.player.inventory.showQTYDialog(
+					new ActionTakeItems(performer, target, object.inventorySquare.stack), inventorySquare.stack.size());
 		}
 	}
 

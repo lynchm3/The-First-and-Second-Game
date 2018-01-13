@@ -56,28 +56,13 @@ public class ActionTakeItems extends VariableQtyAction {
 		if (!enabled)
 			return;
 
-		int amountToDrop = Math.min(objects.length, variable);
+		int amountToTake = Math.min(objects.length, variable);
 
-		if (amountToDrop == 0)
+		if (amountToTake == 0)
 			return;
 
-		for (int i = 0; i < amountToDrop; i++) {
+		for (int i = 0; i < amountToTake; i++) {
 			GameObject object = objects[i];
-			if (Game.level.shouldLog(object, performer)) {
-				if (legal) {
-					if (targetGameObject == null)
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", object }));
-					else
-						Game.level.logOnScreen(new ActivityLog(
-								new Object[] { performer, " took ", object, " from ", targetGameObject }));
-				} else {
-					if (targetGameObject == null)
-						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", object }));
-					else
-						Game.level.logOnScreen(new ActivityLog(
-								new Object[] { performer, " stole ", object, " from ", targetGameObject }));
-				}
-			}
 
 			if (targetSquare != null)
 				targetSquare.inventory.remove(object);
@@ -103,6 +88,31 @@ public class ActionTakeItems extends VariableQtyAction {
 				notifyWitnessesOfCrime(crime);
 			}
 		}
+
+		if (Game.level.shouldLog(performer)) {
+			if (amountToTake > 0) {
+				String amountText = "";
+				if (amountToTake > 1) {
+					amountText = "x" + amountToTake;
+				}
+				if (legal) {
+					if (targetGameObject == null)
+						Game.level.logOnScreen(
+								new ActivityLog(new Object[] { performer, " took ", objects[0], amountText }));
+					else
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " took ", objects[0],
+								amountText, " from ", targetGameObject }));
+				} else {
+					if (targetGameObject == null)
+						Game.level.logOnScreen(
+								new ActivityLog(new Object[] { performer, " stole ", objects[0], amountText }));
+					else
+						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " stole ", objects[0],
+								amountText, " from ", targetGameObject }));
+				}
+			}
+		}
+
 	}
 
 	@Override

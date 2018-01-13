@@ -1,7 +1,7 @@
 package com.marklynch.objects.actions;
 
+import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -36,13 +36,11 @@ public class ActionDropItemsSelectedInInventory extends Action {
 		if (!enabled)
 			return;
 
-		Inventory inventory = object.inventoryThatHoldsThisObject;
-
 		if (inventorySquare.stack.size() <= 5) {
 			new ActionDropItems(performer, square, object).perform();
 		} else {
-			inventory.showQTYDialog(new ActionDropItems(performer, square, object.inventorySquare.stack),
-					inventorySquare.stack.size());
+			Game.level.player.inventory.showQTYDialog(
+					new ActionDropItems(performer, square, object.inventorySquare.stack), inventorySquare.stack.size());
 		}
 	}
 
