@@ -18,6 +18,8 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 	public ActionGiveItemsSelectedInInventory(GameObject performer, GameObject receiver, boolean logAsTake,
 			GameObject object) {
 		super(ACTION_NAME, "right.png");
+		if (!(receiver instanceof Actor))
+			this.actionName = "Put";
 		this.performer = performer;
 		this.receiver = receiver;
 		this.logAsTake = logAsTake;
@@ -41,9 +43,13 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 		if (inventorySquare.stack.size() <= 5) {
 			new ActionGiveItems(performer, receiver, logAsTake, object).perform();
 		} else {
+			String qtyString = "Enter qty to give";
+			if (!(receiver instanceof Actor)) {
+				qtyString = "Enter qty to put";
+			}
 			Game.level.player.inventory.showQTYDialog(
 					new ActionGiveItems(performer, receiver, logAsTake, object.inventorySquare.stack),
-					inventorySquare.stack.size(), "Enter qty to give", 0);
+					inventorySquare.stack.size(), qtyString, 0);
 		}
 	}
 
