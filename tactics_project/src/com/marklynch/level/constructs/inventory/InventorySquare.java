@@ -13,6 +13,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -31,6 +32,8 @@ public class InventorySquare extends Square {
 	public static Texture imageTexture;
 
 	public transient ArrayList<GameObject> stack = new ArrayList<GameObject>();
+
+	static Color translucentBlack = new Color(0.5f, 0f, 0f, 0f);
 
 	public InventorySquare(int x, int y, String imagePath, Inventory inventoryThisBelongsTo) {
 		super(x, y, imagePath, 1, 1, null, false);
@@ -128,6 +131,13 @@ public class InventorySquare extends Square {
 				String goldTextString = "" + gameObject.value;
 				int goldTextLength = Game.font.getWidth(goldTextString);
 				StringWithColor goldTextStringWithColor = new StringWithColor(goldTextString, goldTextColor);
+
+				// String amtString =
+
+				QuadUtils.drawQuad(Color.BLACK, xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10 - 16,
+						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
+						yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
+
 				TextUtils.printTextWithImages(xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10,
 						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27, Integer.MAX_VALUE, false, null,
 						new Object[] { goldTextStringWithColor });
@@ -140,13 +150,19 @@ public class InventorySquare extends Square {
 
 			}
 
-			if (gameObject instanceof Gold) {
+			if (gameObject instanceof Gold) {// translucentBlack
+				String amtString = gameObject.value + "x";
+				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.font.getWidth(amtString),
+						yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						new Object[] { gameObject.value + "x" });
+						new Object[] { amtString });
 
 			} else if (stack.size() > 1) {
+				String amtString = stack.size() + "x";
+				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.font.getWidth(amtString),
+						yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
-						new Object[] { stack.size() + "x" });
+						new Object[] { amtString });
 
 			}
 
