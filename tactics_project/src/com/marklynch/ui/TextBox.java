@@ -142,7 +142,10 @@ public class TextBox {
 
 	public void moveCaretRight() {
 		this.moveCaretTo(caretPositionIndex + 1);
+	}
 
+	public void moveCaretToEnd() {
+		moveCaretTo(text.length());
 	}
 
 	public void moveCaretTo(int newPosition) {

@@ -1742,11 +1742,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	StringWithColor qtyStringWithColor = null;
 	int valuePerQty = 0;
 
-	public void showQTYDialog(VariableQtyAction variableAction, int maxNumericValue, String qtyString,
-			int valuePerQty) {
+	public void showQTYDialog(VariableQtyAction variableAction, int maxQty, String qtyString, int valuePerQty) {
 		this.variableAction = variableAction;
-		textBoxQty.maxNumericValue = maxNumericValue;
-		textBoxQty.clearText();
+		textBoxQty.maxNumericValue = maxQty;
+		textBoxQty.setText("" + maxQty);
+		textBoxQty.moveCaretToEnd();
 		qtyStringWithColor = new StringWithColor(qtyString, Color.WHITE);
 		this.valuePerQty = valuePerQty;
 

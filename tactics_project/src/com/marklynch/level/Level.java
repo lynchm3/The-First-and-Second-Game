@@ -1407,8 +1407,8 @@ public class Level {
 
 	public void update(int delta) {
 
-		if (conversation != null)
-			return;
+		// if (conversation != null)
+		// return;
 
 		// if (this.script.activeScriptEvent != null) {
 		script.update(delta);
