@@ -779,7 +779,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Switch
-		if (this instanceof Switch) {
+		if (this instanceof PressurePlate) {
+
+		} else if (this instanceof Switch) {
 			Switch zwitch = (Switch) this;
 			actions.add(
 					new ActionUse(performer, zwitch, zwitch.actionName, zwitch.actionVerb, zwitch.requirementsToMeet));

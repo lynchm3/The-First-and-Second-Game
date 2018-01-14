@@ -22,6 +22,7 @@ import com.marklynch.objects.Key;
 import com.marklynch.objects.Liquid;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.RemoteDoor;
 import com.marklynch.objects.Searchable;
@@ -217,6 +218,8 @@ public class Templates {
 	public static Key KEY;
 
 	public static Switch ANTLERS_SWITCH;
+
+	public static PressurePlate PRESSURE_PLATE;
 
 	// Kitchenware
 	public static GameObject PLATE;

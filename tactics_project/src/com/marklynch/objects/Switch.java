@@ -25,7 +25,7 @@ public class Switch extends GameObject {
 		canBePickedUp = false;
 		showInventory = false;
 		fitsInInventory = false;
-		canShareSquare = false;
+		canShareSquare = true;
 		canContainOtherObjects = false;
 		blocksLineOfSight = false;
 		persistsWhenCantBeSeen = true;
@@ -33,7 +33,12 @@ public class Switch extends GameObject {
 	}
 
 	@Override
+	public void draw1() {
+	}
+
+	@Override
 	public void draw2() {
+		super.draw1();
 		super.draw2();
 		if (Game.showTriggerLines) {
 			if (switchListener instanceof GameObject) {

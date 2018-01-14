@@ -10,6 +10,7 @@ import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Key;
+import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.Switch;
@@ -242,6 +243,26 @@ public class TemplatesFurniture {
 		Templates.ANTLERS_SWITCH.templateId = GameObject.generateNewTemplateId();
 		Templates.ANTLERS_SWITCH.actionName = "Touch";
 		Templates.ANTLERS_SWITCH.actionVerb = "touched";
+
+		Templates.PRESSURE_PLATE = new PressurePlate();
+		Templates.PRESSURE_PLATE.name = "Pressure Plate";
+		Templates.PRESSURE_PLATE.imageTexturePath = "pressure_plate.png";
+		Templates.PRESSURE_PLATE.totalHealth = Templates.PRESSURE_PLATE.remainingHealth = 1;
+		Templates.PRESSURE_PLATE.widthRatio = 1f;
+		Templates.PRESSURE_PLATE.heightRatio = 1f;
+		Templates.PRESSURE_PLATE.drawOffsetX = 0f;
+		Templates.PRESSURE_PLATE.drawOffsetY = 0f;
+		Templates.PRESSURE_PLATE.soundWhenHit = 1f;
+		Templates.PRESSURE_PLATE.soundWhenHitting = 1f;
+		Templates.PRESSURE_PLATE.soundDampening = 1f;
+		Templates.PRESSURE_PLATE.stackable = false;
+		Templates.PRESSURE_PLATE.weight = 0f;
+		Templates.PRESSURE_PLATE.value = 27;
+		Templates.PRESSURE_PLATE.anchorX = 0;
+		Templates.PRESSURE_PLATE.anchorY = 0;
+		Templates.PRESSURE_PLATE.templateId = GameObject.generateNewTemplateId();
+		Templates.PRESSURE_PLATE.actionName = "Trigger";
+		Templates.PRESSURE_PLATE.actionVerb = "triggered";
 
 		Templates.FURNACE = new Furnace();
 		Templates.FURNACE.name = "FURNACE";

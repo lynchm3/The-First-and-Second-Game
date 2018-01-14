@@ -116,13 +116,8 @@ public class QuestBetweenTheWalls extends Quest {
 				new RequirementToMeet[] { new StatRequirementToMeet(StatRequirementToMeet.Stat.STAT_STRENGTH, 1) });
 
 		// Pressure Plate
-		// HH
-		// Templates.ANTLERS_SWITCH_FOR_OPENABLES.makeCopy(Game.level.squares[53][19],
-		// null, falseWall,
-		// SwitchForOpenables.SWITCH_TYPE.OPEN_CLOSE,
-		// new RequirementToMeet[] { new
-		// StatRequirementToMeet(StatRequirementToMeet.Stat.STAT_STRENGTH, 1)
-		// });
+		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[51][21], null, falseWall, Switch.SWITCH_TYPE.OPEN_CLOSE,
+				10);
 
 		// Path to town 24,21 -> 40,21
 		Path pathToTown = new Path(24, 21, 40, 21);
