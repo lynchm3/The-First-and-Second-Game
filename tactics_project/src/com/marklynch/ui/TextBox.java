@@ -29,9 +29,12 @@ public class TextBox {
 	public float width = 2;
 
 	public TextBoxHolder parent;
-	public int maxNumericValue = 0;
 
 	public boolean textHighlighted = false;
+
+	// numeric stuff
+	public int numericValue = 0;
+	public int maxNumericValue = 0;
 
 	public TextBox(TextBoxHolder parent, String text, String hint, float drawPositionX, float drawPositionY,
 			TYPE type) {
@@ -103,18 +106,7 @@ public class TextBox {
 		text = text.substring(0, this.caretPositionIndex) + character
 				+ text.substring(this.caretPositionIndex, text.length());
 
-		// Max numeric value
-		if (type == TYPE.NUMERIC && maxNumericValue != 0) {
-			int integerValue = maxNumericValue;
-			try {
-				integerValue = Integer.parseInt(text);
-			} catch (Exception e) {
-				text = "" + maxNumericValue;
-			}
-			if (integerValue > maxNumericValue) {
-				text = "" + maxNumericValue;
-			}
-		}
+		cleanupNumeric();
 
 		int newTextLength = text.length();
 
@@ -122,6 +114,30 @@ public class TextBox {
 			caretPositionIndex++;
 
 		parent.textChanged(this);
+	}
+
+	public void cleanupNumeric() {
+
+		// Numeric info
+		if (type == TYPE.NUMERIC) {
+			numericValue = 0;
+			if (text.length() == 0) {
+				numericValue = 0;
+			} else {
+				try {
+					numericValue = Integer.parseInt(text);
+				} catch (Exception e) {
+					text = "0";
+					numericValue = 0;
+				}
+				if (maxNumericValue != 0) {
+					if (numericValue > maxNumericValue) {
+						text = "" + maxNumericValue;
+					}
+				}
+			}
+		}
+
 	}
 
 	public void backSpaceTyped() {
@@ -134,6 +150,7 @@ public class TextBox {
 
 			text = text.substring(0, this.caretPositionIndex - 1)
 					+ text.substring(this.caretPositionIndex, text.length());
+			cleanupNumeric();
 			caretPositionIndex--;
 			textHighlighted = false;
 			parent.textChanged(this);
@@ -149,6 +166,7 @@ public class TextBox {
 			}
 			text = text.substring(0, this.caretPositionIndex)
 					+ text.substring(this.caretPositionIndex + 1, text.length());
+			cleanupNumeric();
 			textHighlighted = false;
 			parent.textChanged(this);
 		}
@@ -236,6 +254,7 @@ public class TextBox {
 	public void clearText() {
 		if (text.length() > 0) {
 			text = "";
+			cleanupNumeric();
 			caretPositionIndex = 0;
 			textHighlighted = false;
 			parent.textChanged(this);
@@ -248,6 +267,7 @@ public class TextBox {
 
 	public void setText(String text) {
 		this.text = text;
+		cleanupNumeric();
 		textHighlighted = false;
 		parent.textChanged(this);
 	}

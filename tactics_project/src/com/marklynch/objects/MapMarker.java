@@ -94,7 +94,6 @@ public class MapMarker extends GameObject {
 		TextureUtils.drawTexture(imageTexture, alpha, drawPositionX1, drawPositionY1, drawPositionX2, drawPositionY2);
 
 		if (baseName.length() > 0) {
-			System.out.println("Name length > 0");
 			TextUtils.printTextWithImages(drawPositionX1, drawPositionY1 + Game.HALF_SQUARE_HEIGHT,
 					(int) Game.SQUARE_WIDTH, false, null, new Object[] { baseName });
 		}

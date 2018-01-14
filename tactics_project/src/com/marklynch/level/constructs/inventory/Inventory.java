@@ -1451,8 +1451,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY - 36, Integer.MAX_VALUE,
 					true, null, new Object[] { qtyStringWithColor });
 			textBoxQty.draw();
-			if (valuePerQty != 0 && textBoxQty.getText().length() > 0) {
-				int totalValue = valuePerQty * Integer.parseInt(textBoxQty.getText());
+			if (valuePerQty != 0 && textBoxQty.numericValue > 0) {
+				int totalValue = valuePerQty * textBoxQty.numericValue;
 				String totalValueString = "Total value " + totalValue + " gold";
 				TextUtils.printTextWithImages(textBoxQty.drawPositionX, textBoxQty.drawPositionY + 36,
 						Integer.MAX_VALUE, true, null,
@@ -1744,13 +1744,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (textBox == textBoxSearch) {
 			Inventory.buttonSearch.click();
 		} else if (textBox == textBoxQty) {
-			int qty = 0;
-			try {
-				qty = Integer.parseInt(textBoxQty.getText());
-			} catch (Exception e) {
-
-			}
-			variableAction.variable = qty;
+			variableAction.variable = textBoxQty.numericValue;
 			variableAction.perform();
 			Level.activeTextBox = null;
 		}
