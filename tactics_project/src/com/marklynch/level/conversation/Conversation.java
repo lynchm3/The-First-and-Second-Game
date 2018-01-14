@@ -2,6 +2,7 @@ package com.marklynch.level.conversation;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.QuadUtils;
 
 import mdesl.graphics.Color;
@@ -19,6 +20,7 @@ public class Conversation {
 	// ArrayList<ConversationPart> conversationParts;
 	public ConversationPart openingConversationPart;
 	public ConversationPart currentConversationPart;
+	public Actor originalConversationTarget;
 
 	public Conversation(ConversationPart openingConversationPart) {
 		super();

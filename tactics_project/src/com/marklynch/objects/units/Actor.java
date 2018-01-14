@@ -908,15 +908,18 @@ public class Actor extends GameObject {
 		if (quest != null) {
 			Conversation questConversation = null;
 			questConversation = quest.getConversation(this);
-
 			if (questConversation != null) {
+				questConversation.originalConversationTarget = this;
 				return questConversation;
 			}
 
 		}
 
-		if (!(this instanceof NonHuman))
-			return Conversation.createConversation("Hello!", this);
+		if (!(this instanceof NonHuman)) {
+			Conversation conversation = Conversation.createConversation("Hello!", this);
+			conversation.originalConversationTarget = this;
+			return conversation;
+		}
 
 		return null;
 	}

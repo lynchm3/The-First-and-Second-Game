@@ -98,7 +98,8 @@ public class ConversationResponseDisplay {
 		buttonTrade.clickListener = new ClickListener() {
 			@Override
 			public void click() {
-				new ActionInitiateTrade(Game.level.player, talker).perform();
+				new ActionInitiateTrade(Game.level.player, Game.level.conversation.originalConversationTarget)
+						.perform();
 			}
 		};
 		buttons.add(buttonTrade);
