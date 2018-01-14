@@ -154,6 +154,9 @@ public class ActionThrowSpecificItem extends Action {
 	@Override
 	public boolean check() {
 
+		if (targetSquare == null && targetGameObject == null)
+			return false;
+
 		float maxDistance = (performer.getEffectiveStrength() * 100) / gameObjectToThrow.weight;
 		if (maxDistance > 10)
 			maxDistance = 10;

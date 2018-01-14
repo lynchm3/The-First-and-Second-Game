@@ -449,6 +449,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void close() {
 		this.isOpen = false;
+		Inventory.target = null;
 		if (Inventory.lastInventoryFilterBy != null) {
 			Inventory.inventoryFilterBy = lastInventoryFilterBy;
 			Inventory.lastInventoryFilterBy = null;
@@ -1210,6 +1211,24 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				}
 				Inventory.buttonLootAll.enabled = true;
 			}
+		} else if (target != null && target instanceof GameObject) {
+			// Not drawing other actor/objects inventory, but draw them
+			GameObject otherGameObject = (GameObject) target;
+			float otherTextureX = squaresX + squaresAreaWidth + Game.SQUARE_WIDTH;
+			float otherTextureY = squaresBaseY + squaresAreaHeight / 2 - (otherGameObject.height);
+			if (otherGameObject instanceof Actor) {
+				int actorPositionXInPixels = (int) otherTextureX;
+				int actorPositionYInPixels = (int) (squaresBaseY + squaresAreaHeight / 2
+						- (otherGameObject.imageTexture.getHeight()));
+				TextureUtils.drawTexture(otherGameObject.imageTexture, 1f, actorPositionXInPixels,
+						actorPositionYInPixels, actorPositionXInPixels + otherGameObject.width * 2,
+						actorPositionYInPixels + otherGameObject.height * 2, true);
+			} else {
+				TextureUtils.drawTexture(otherGameObject.imageTexture, 0.5f, otherTextureX, otherTextureY,
+						otherTextureX + otherGameObject.width * 2, otherTextureY + otherGameObject.height * 2);
+
+			}
+
 		}
 
 		// cursor and action over squares

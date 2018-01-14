@@ -56,6 +56,9 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
+		if (receiver == null)
+			return false;
+
 		if (performer instanceof Actor && !((Actor) performer).canSeeSquare(receiver.squareGameObjectIsOn)) {
 			return false;
 		}

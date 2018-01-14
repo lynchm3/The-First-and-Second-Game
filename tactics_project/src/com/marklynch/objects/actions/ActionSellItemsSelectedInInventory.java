@@ -49,6 +49,10 @@ public class ActionSellItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean check() {
+
+		if (buyer == null || object == null)
+			return false;
+
 		if (!(buyer instanceof Trader) && buyer.getCarriedGoldValue() < object.value)
 			return false;
 		if (!performer.canSeeSquare(buyer.squareGameObjectIsOn)) {

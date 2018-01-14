@@ -114,6 +114,9 @@ public class ActionPourSpecificItem extends Action {
 	@Override
 	public boolean check() {
 
+		if (targetSquare == null && targetGameObject == null)
+			return false;
+
 		if (containerForLiquids.inventory.size() != 0)
 			actionName = ACTION_NAME + " " + containerForLiquids.name + " (empty)";
 

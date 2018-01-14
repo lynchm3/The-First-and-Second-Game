@@ -58,6 +58,9 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
+		if (targetSquare == null && targetGameObject == null)
+			return false;
+
 		if (targetSquare != null && performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
 		}

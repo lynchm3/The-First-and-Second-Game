@@ -42,6 +42,7 @@ public class ActionOpenInventoryToGiveItems extends Action {
 		} else {
 
 			Game.level.player.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE);
+			// Game.level.player.inventory.otherInventory = target.inventory;
 			Game.level.player.inventory.open();
 			Inventory.target = this.target;
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, true);
