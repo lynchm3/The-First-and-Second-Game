@@ -96,19 +96,4 @@ public class Door extends Openable {
 		return shouldBeLocked;
 	}
 
-	// @Override
-	// public Door makeCopy(Square square, Actor owner) {
-	// return new Door(new String(baseName), (int) totalHealth,
-	// imageTexturePath, square, new Inventory(),
-	//
-	//
-	// widthRatio, heightRatio, drawOffsetX,
-	// drawOffsetY, soundWhenHit,
-	// soundWhenHitting, soundDampening, light, lightHandleX, lightHandlY,
-	// stackable, fireResistance,
-	// waterResistance, electricResistance, poisonResistance, slashResistance,
-	// weight, value, owner,
-	// locked, keys);
-	// }
-
 }

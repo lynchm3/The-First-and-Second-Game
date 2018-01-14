@@ -15,7 +15,7 @@ import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.RemoteDoor;
-import com.marklynch.objects.SwitchForOpenables;
+import com.marklynch.objects.Switch;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -112,9 +112,17 @@ public class QuestBetweenTheWalls extends Quest {
 				structureExtraWalls, Templates.WALL, Square.STONE_TEXTURE, 2));
 
 		// Antler switch
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.makeCopy(Game.level.squares[53][19], null, falseWall,
-				SwitchForOpenables.SWITCH_TYPE.OPEN_CLOSE,
+		Templates.ANTLERS_SWITCH.makeCopy(Game.level.squares[53][19], null, falseWall, Switch.SWITCH_TYPE.OPEN_CLOSE,
 				new RequirementToMeet[] { new StatRequirementToMeet(StatRequirementToMeet.Stat.STAT_STRENGTH, 1) });
+
+		// Pressure Plate
+		// HH
+		// Templates.ANTLERS_SWITCH_FOR_OPENABLES.makeCopy(Game.level.squares[53][19],
+		// null, falseWall,
+		// SwitchForOpenables.SWITCH_TYPE.OPEN_CLOSE,
+		// new RequirementToMeet[] { new
+		// StatRequirementToMeet(StatRequirementToMeet.Stat.STAT_STRENGTH, 1)
+		// });
 
 		// Path to town 24,21 -> 40,21
 		Path pathToTown = new Path(24, 21, 40, 21);

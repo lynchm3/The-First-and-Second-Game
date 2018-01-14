@@ -1,9 +1,14 @@
 package com.marklynch.objects;
 
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Switch.SWITCH_TYPE;
+import com.marklynch.objects.actions.ActionClose;
+import com.marklynch.objects.actions.ActionLock;
+import com.marklynch.objects.actions.ActionOpen;
+import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
 
-public abstract class Openable extends GameObject {
+public abstract class Openable extends GameObject implements SwitchListener {
 
 	protected boolean open = false;
 	public Key[] keys;
@@ -45,6 +50,24 @@ public abstract class Openable extends GameObject {
 		openable.baseName = baseName;
 		if (locked)
 			this.name = baseName + " (locked)";
+
+	}
+
+	@Override
+	public void zwitch(Switch zwitch) {
+		if (zwitch.switchType == SWITCH_TYPE.OPEN_CLOSE) {
+			if (open) {
+				new ActionClose(zwitch, this).perform();
+			} else {
+				new ActionOpen(zwitch, this).perform();
+			}
+		} else if (zwitch.switchType == SWITCH_TYPE.LOCK_UNLOCK) {
+			if (locked) {
+				new ActionUnlock(zwitch, this).perform();
+			} else {
+				new ActionLock(zwitch, this).perform();
+			}
+		}
 
 	}
 

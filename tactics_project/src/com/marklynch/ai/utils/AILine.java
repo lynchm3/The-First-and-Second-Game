@@ -27,6 +27,10 @@ public class AILine {
 	}
 
 	public void draw2() {
+
+		if (source == null || target == null)
+			return;
+
 		// TODO Auto-generated method stub
 		float x1 = this.source.squareGameObjectIsOn.xInGridPixels + Game.HALF_SQUARE_WIDTH;
 		float y1 = this.source.squareGameObjectIsOn.yInGridPixels + Game.HALF_SQUARE_HEIGHT;

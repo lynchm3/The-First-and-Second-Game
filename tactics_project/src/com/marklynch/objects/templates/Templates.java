@@ -29,7 +29,7 @@ import com.marklynch.objects.Sign;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.Stump;
-import com.marklynch.objects.SwitchForOpenables;
+import com.marklynch.objects.Switch;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.Wall;
@@ -216,7 +216,7 @@ public class Templates {
 
 	public static Key KEY;
 
-	public static SwitchForOpenables ANTLERS_SWITCH_FOR_OPENABLES;
+	public static Switch ANTLERS_SWITCH;
 
 	// Kitchenware
 	public static GameObject PLATE;

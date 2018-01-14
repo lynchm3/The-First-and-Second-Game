@@ -12,7 +12,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Key;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Stampable;
-import com.marklynch.objects.SwitchForOpenables;
+import com.marklynch.objects.Switch;
 import com.marklynch.objects.WaterSource;
 
 public class TemplatesFurniture {
@@ -223,25 +223,25 @@ public class TemplatesFurniture {
 		Templates.DINNER_FORK.anchorY = 0;
 		Templates.DINNER_FORK.templateId = GameObject.generateNewTemplateId();
 
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES = new SwitchForOpenables();
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.name = "Obvious Antlers";
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.imageTexturePath = "antlers.png";
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.totalHealth = Templates.ANTLERS_SWITCH_FOR_OPENABLES.remainingHealth = 36;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.widthRatio = 1f;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.heightRatio = 1f;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.drawOffsetX = 0f;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.drawOffsetY = 0f;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.soundWhenHit = 1f;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.soundWhenHitting = 1f;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.soundDampening = 1f;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.stackable = false;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.weight = 43f;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.value = 130;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.anchorX = 0;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.anchorY = 0;
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.templateId = GameObject.generateNewTemplateId();
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.actionName = "Touch";
-		Templates.ANTLERS_SWITCH_FOR_OPENABLES.actionVerb = "touched";
+		Templates.ANTLERS_SWITCH = new Switch();
+		Templates.ANTLERS_SWITCH.name = "Obvious Antlers";
+		Templates.ANTLERS_SWITCH.imageTexturePath = "antlers.png";
+		Templates.ANTLERS_SWITCH.totalHealth = Templates.ANTLERS_SWITCH.remainingHealth = 36;
+		Templates.ANTLERS_SWITCH.widthRatio = 1f;
+		Templates.ANTLERS_SWITCH.heightRatio = 1f;
+		Templates.ANTLERS_SWITCH.drawOffsetX = 0f;
+		Templates.ANTLERS_SWITCH.drawOffsetY = 0f;
+		Templates.ANTLERS_SWITCH.soundWhenHit = 1f;
+		Templates.ANTLERS_SWITCH.soundWhenHitting = 1f;
+		Templates.ANTLERS_SWITCH.soundDampening = 1f;
+		Templates.ANTLERS_SWITCH.stackable = false;
+		Templates.ANTLERS_SWITCH.weight = 43f;
+		Templates.ANTLERS_SWITCH.value = 130;
+		Templates.ANTLERS_SWITCH.anchorX = 0;
+		Templates.ANTLERS_SWITCH.anchorY = 0;
+		Templates.ANTLERS_SWITCH.templateId = GameObject.generateNewTemplateId();
+		Templates.ANTLERS_SWITCH.actionName = "Touch";
+		Templates.ANTLERS_SWITCH.actionVerb = "touched";
 
 		Templates.FURNACE = new Furnace();
 		Templates.FURNACE.name = "FURNACE";
