@@ -2,6 +2,7 @@ package com.marklynch.level.conversation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+//import mdesl.graphics.Color;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.area.Area;
@@ -12,6 +13,8 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
+
+import mdesl.graphics.Color;
 
 public class ConversationPart {
 	public ArrayList<Link> links;
@@ -62,13 +65,35 @@ public class ConversationPart {
 		if (talker.group != null) {
 			for (Actor actor : talker.group.getMembers()) {
 
+				if (actor.remainingHealth <= 0)
+					continue;
+
+				if (actor == talker)
+					continue;
+
 				float offsetX = -(System.identityHashCode(actor) % Game.halfWindowHeight);// -
 																							// 128f;//
 																							// -64;
 				float offsetY = 0;
-				TextureUtils.drawTexture(actor.imageTexture, 1.0f, 0 + offsetX, Game.halfWindowHeight + offsetY,
-						Game.halfWindowHeight + offsetX, Game.windowHeight + offsetY);
 
+				if (actor == Game.level.conversation.originalConversationTarget) {
+
+				} else {
+					TextureUtils.drawTexture(actor.imageTexture, 1.0f, 0 + offsetX, Game.halfWindowHeight + offsetY,
+							Game.halfWindowHeight + offsetX, Game.windowHeight + offsetY);
+				}
+
+			}
+
+			if (talker != Game.level.conversation.originalConversationTarget) {
+				float offsetX = -(System.identityHashCode(Game.level.conversation.originalConversationTarget)
+						% Game.halfWindowHeight); // -64;
+				float offsetY = 0;
+				TextureUtils.drawTexture(Game.level.conversation.originalConversationTarget.imageTexture, 0 + offsetX,
+						Game.halfWindowHeight + offsetY, Game.halfWindowHeight + offsetX, Game.windowHeight + offsetY,
+						Color.RED);
+				// (Texture texture, float x1, float y1, float x2, float y2,
+				// Color color)
 			}
 		}
 
