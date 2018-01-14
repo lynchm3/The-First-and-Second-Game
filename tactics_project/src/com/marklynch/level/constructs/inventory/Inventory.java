@@ -1744,7 +1744,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (textBox == textBoxSearch) {
 			Inventory.buttonSearch.click();
 		} else if (textBox == textBoxQty) {
-			variableAction.variable = textBoxQty.numericValue;
+			variableAction.qty = textBoxQty.numericValue;
 			variableAction.perform();
 			Level.activeTextBox = null;
 		}

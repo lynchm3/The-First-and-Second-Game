@@ -1155,11 +1155,30 @@ public class Actor extends GameObject {
 	}
 
 	public boolean sellItemsMarkedToSell(Actor buyer) {
+
+		HashMap<Integer, ArrayList<GameObject>> gameObjectStacks = new HashMap<Integer, ArrayList<GameObject>>();
 		for (GameObject gameObject : (ArrayList<GameObject>) inventory.gameObjects.clone()) {
 			if (gameObject.toSell == true) {
-				new ActionSellItems(this, buyer, gameObject).perform();
+				if (gameObjectStacks.containsKey(gameObject.templateId)) {
+					gameObjectStacks.get(gameObject.templateId).add(gameObject);
+				} else {
+					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
+					newStack.add(gameObject);
+					gameObjectStacks.put(gameObject.templateId, newStack);
+				}
 			}
 		}
+
+		for (ArrayList<GameObject> stack : gameObjectStacks.values()) {
+			ActionSellItems actionSellItems = new ActionSellItems(this, buyer, stack);
+
+			int maxCanAfford = Math.floorDiv(buyer.getCarriedGoldValue(), stack.get(0).value);
+			int amtToSell = Math.min(maxCanAfford, stack.size());
+
+			actionSellItems.qty = amtToSell;
+			actionSellItems.perform();
+		}
+
 		return true;
 	}
 }

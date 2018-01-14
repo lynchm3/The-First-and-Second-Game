@@ -2,7 +2,7 @@ package com.marklynch.objects.actions;
 
 public abstract class VariableQtyAction extends Action {
 
-	public int variable = 1;
+	public int qty = 1;
 
 	public VariableQtyAction(String actionName) {
 		super(actionName);

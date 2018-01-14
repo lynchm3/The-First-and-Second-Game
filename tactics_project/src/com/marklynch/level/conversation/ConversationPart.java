@@ -92,8 +92,6 @@ public class ConversationPart {
 				TextureUtils.drawTexture(Game.level.conversation.originalConversationTarget.imageTexture, 0 + offsetX,
 						Game.halfWindowHeight + offsetY, Game.halfWindowHeight + offsetX, Game.windowHeight + offsetY,
 						Color.RED);
-				// (Texture texture, float x1, float y1, float x2, float y2,
-				// Color color)
 			}
 		}
 
