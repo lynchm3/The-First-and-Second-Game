@@ -1,6 +1,7 @@
 package com.marklynch.ui;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -30,6 +31,8 @@ public class TextBox {
 	public TextBoxHolder parent;
 	public int maxNumericValue = 0;
 
+	public boolean textHighlighted = false;
+
 	public TextBox(TextBoxHolder parent, String text, String hint, float drawPositionX, float drawPositionY,
 			TYPE type) {
 
@@ -49,12 +52,17 @@ public class TextBox {
 	public void draw() {
 		width = Game.windowWidth - drawPositionX;
 		// Text box
-		if (Game.level.activeTextBox == this)
+		if (Level.activeTextBox == this) {
 			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionY, drawPositionX + width + 4,
 					drawPositionY + height);
-		else
+			if (textHighlighted) {
+				QuadUtils.drawQuad(Color.BLUE, drawPositionX, drawPositionY, drawPositionX + Game.font.getWidth(text),
+						drawPositionY + height);
+			}
+		} else {
 			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionY, drawPositionX + width + 4,
 					drawPositionY + height);
+		}
 
 		if (text.length() > 0) {
 			// Text string
@@ -85,6 +93,11 @@ public class TextBox {
 			return;
 		}
 
+		if (textHighlighted) {
+			clearText();
+			textHighlighted = false;
+		}
+
 		int oldTextLength = text.length();
 
 		text = text.substring(0, this.caretPositionIndex) + character
@@ -113,17 +126,30 @@ public class TextBox {
 
 	public void backSpaceTyped() {
 		if (text.length() > 0 && caretPositionIndex > 0) {
+
+			if (textHighlighted) {
+				clearText();
+				textHighlighted = false;
+			}
+
 			text = text.substring(0, this.caretPositionIndex - 1)
 					+ text.substring(this.caretPositionIndex, text.length());
 			caretPositionIndex--;
+			textHighlighted = false;
 			parent.textChanged(this);
 		}
 	}
 
 	public void deleteTyped() {
 		if (text.length() > 0 && caretPositionIndex < text.length()) {
+
+			if (textHighlighted) {
+				clearText();
+				textHighlighted = false;
+			}
 			text = text.substring(0, this.caretPositionIndex)
 					+ text.substring(this.caretPositionIndex + 1, text.length());
+			textHighlighted = false;
 			parent.textChanged(this);
 		}
 	}
@@ -149,6 +175,7 @@ public class TextBox {
 	}
 
 	public void moveCaretTo(int newPosition) {
+		textHighlighted = false;
 		if (newPosition < 0 || newPosition > text.length()) {
 			return;
 		}
@@ -166,6 +193,7 @@ public class TextBox {
 	}
 
 	public boolean click(int mouseX, int mouseY) {
+		textHighlighted = false;
 
 		Game.level.activeTextBox = this;
 
@@ -201,6 +229,7 @@ public class TextBox {
 	}
 
 	public void enterTyped() {
+		textHighlighted = false;
 		parent.enterTyped(this);
 	}
 
@@ -208,6 +237,7 @@ public class TextBox {
 		if (text.length() > 0) {
 			text = "";
 			caretPositionIndex = 0;
+			textHighlighted = false;
 			parent.textChanged(this);
 		}
 	}
@@ -218,6 +248,7 @@ public class TextBox {
 
 	public void setText(String text) {
 		this.text = text;
+		textHighlighted = false;
 		parent.textChanged(this);
 	}
 

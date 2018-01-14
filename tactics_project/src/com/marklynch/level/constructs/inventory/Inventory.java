@@ -1747,6 +1747,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		textBoxQty.maxNumericValue = maxQty;
 		textBoxQty.setText("" + maxQty);
 		textBoxQty.moveCaretToEnd();
+		textBoxQty.textHighlighted = true;
 		qtyStringWithColor = new StringWithColor(qtyString, Color.WHITE);
 		this.valuePerQty = valuePerQty;
 
