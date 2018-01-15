@@ -20,6 +20,7 @@ import com.marklynch.level.constructs.effect.EffectBleeding;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.constructs.effect.EffectPoison;
 import com.marklynch.level.constructs.effect.EffectWet;
+import com.marklynch.level.constructs.enchantment.Enhancement;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventoryParent;
 import com.marklynch.level.constructs.inventory.InventorySquare;
@@ -201,6 +202,19 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public boolean toSell = false;
 	public boolean starred = false;
 	public boolean flash = false;
+
+	// weapons
+	public float slashDamage = 0;
+	public float pierceDamage = 0;
+	public float bluntDamage = 0;
+	public float fireDamage = 0; // fire/purify/clean
+	public float waterDamage = 0; // water/life
+	public float electricalDamage = 0; // lightning/light/electrical/speed
+	public float poisonDamage = 0;// poison/ground/contaminate/neutralize/slow/corruption
+	public float minRange = 1;
+	public float maxRange = 1;
+
+	public Enhancement enhancement;
 
 	// public ArrayList<DestructionListener> destructionListeners = new
 	// ArrayList<DestructionListener>();
@@ -1412,6 +1426,16 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.soundWhenHitting = soundWhenHitting;
 		gameObject.weight = weight;
 
+		gameObject.slashDamage = slashDamage;
+		gameObject.pierceDamage = pierceDamage;
+		gameObject.bluntDamage = bluntDamage;
+		gameObject.fireDamage = fireDamage;
+		gameObject.waterDamage = waterDamage;
+		gameObject.electricalDamage = electricalDamage;
+		gameObject.poisonDamage = poisonDamage;
+		gameObject.minRange = minRange;
+		gameObject.maxRange = maxRange;
+
 		gameObject.templateId = templateId;
 
 		gameObject.init();
@@ -1504,4 +1528,124 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	// if (!destructionListeners.contains(destructionListener))
 	// destructionListeners.add(destructionListener);
 	// }
+
+	public boolean hasRange(int weaponDistanceTo) {
+		if (getEffectiveMinRange() == 1 && weaponDistanceTo == 0)
+			return true;
+
+		if (weaponDistanceTo >= getEffectiveMinRange() && weaponDistanceTo <= getEffectiveMaxRange()) {
+			return true;
+		}
+		return false;
+	}
+
+	public int compareWeaponToWeapon(Weapon otherGameObject) {
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_TOTAL_DAMAGE) {
+			return Math.round(otherGameObject.getTotalDamage() - this.getTotalDamage());
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_SLASH_DAMAGE) {
+			return Math.round(otherGameObject.slashDamage - this.slashDamage);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_BLUNT_DAMAGE) {
+			return Math.round(otherGameObject.bluntDamage - this.bluntDamage);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_PIERCE_DAMAGE) {
+			return Math.round(otherGameObject.pierceDamage - this.pierceDamage);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_FIRE_DAMAGE) {
+			return Math.round(otherGameObject.fireDamage - this.fireDamage);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_WATER_DAMAGE) {
+			return Math.round(otherGameObject.waterDamage - this.waterDamage);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_POISON_DAMAGE) {
+			return Math.round(otherGameObject.electricalDamage - this.electricalDamage);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_ELECTRICAL_DAMAGE) {
+			return Math.round(otherGameObject.poisonDamage - this.poisonDamage);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_MAX_RANGE) {
+			return Math.round(otherGameObject.maxRange - this.maxRange);
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_MIN_RANGE) {
+			return Math.round(otherGameObject.minRange - this.minRange);
+		}
+
+		return 0;
+
+	}
+
+	public Action getUtilityAction(Actor performer) {
+		return null;
+	}
+
+	public float getEffectiveSlashDamage() {
+		if (enhancement != null)
+			return slashDamage + enhancement.slashDamage;
+		return slashDamage;
+	}
+
+	public float getEffectivePierceDamage() {
+		if (enhancement != null)
+			return pierceDamage + enhancement.pierceDamage;
+		return pierceDamage;
+	}
+
+	public float getEffectiveBluntDamage() {
+		if (enhancement != null)
+			return bluntDamage + enhancement.bluntDamage;
+		return bluntDamage;
+	}
+
+	public float getEffectiveFireDamage() {
+		if (enhancement != null)
+			return fireDamage + enhancement.fireDamage;
+		return fireDamage;
+	}
+
+	public float getEffectiveWaterDamage() {
+		if (enhancement != null)
+			return waterDamage + enhancement.waterDamage;
+		return waterDamage;
+	}
+
+	public float getEffectiveElectricalDamage() {
+		if (enhancement != null)
+			return electricalDamage + enhancement.electricalDamage;
+		return electricalDamage;
+	}
+
+	public float getEffectivePoisonDamage() {
+		if (enhancement != null)
+			return electricalDamage + enhancement.electricalDamage;
+		return poisonDamage;
+	}
+
+	public float getEffectiveMinRange() {
+		return minRange;
+	}
+
+	public float getEffectiveMaxRange() {
+		return maxRange;
+	}
+
+	public float getTotalDamage() {
+		return slashDamage + pierceDamage + bluntDamage + fireDamage + waterDamage + electricalDamage + poisonDamage;
+	}
+
+	public float getTotalEffectiveDamage() {
+		return getEffectiveSlashDamage() + getEffectivePierceDamage() + getEffectiveBluntDamage()
+				+ getEffectiveFireDamage() + getEffectiveWaterDamage() + getEffectiveElectricalDamage()
+				+ getEffectivePoisonDamage();
+	}
 }

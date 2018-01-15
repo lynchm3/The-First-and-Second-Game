@@ -3,7 +3,7 @@ package com.marklynch.level.constructs.inventory;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
-import com.marklynch.objects.weapons.Weapon;
+import com.marklynch.objects.GameObject;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
@@ -55,17 +55,19 @@ public class WeaponComparisonDisplay {
 		if (Game.level.player.inventory.inventorySquareMouseIsOver.gameObject == null)
 			return;
 
-		if (!(Game.level.player.inventory.inventorySquareMouseIsOver.gameObject instanceof Weapon))
-			return;
+		// if
+		// (!(Game.level.player.inventory.inventorySquareMouseIsOver.gameObject
+		// instanceof Weapon))
+		// return;
 
 		if (Game.level.player.equipped == null)
 			return;
 
-		if (!(Game.level.player.equipped instanceof Weapon))
-			return;
+		// if (!(Game.level.player.equipped instanceof Weapon))
+		// return;
 
-		Weapon weapon1 = (Weapon) Game.level.player.equipped;
-		Weapon weapon2 = (Weapon) Game.level.player.inventory.inventorySquareMouseIsOver.gameObject;
+		GameObject weapon1 = Game.level.player.equipped;
+		GameObject weapon2 = Game.level.player.inventory.inventorySquareMouseIsOver.gameObject;
 
 		// "Equipped"
 		TextUtils.printTextWithImages(equippedStringX, equippedStringY, Integer.MAX_VALUE, false, null, stringEquipped);
