@@ -9,6 +9,7 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
+import mdesl.graphics.Texture;
 
 public class WeaponComparisonDisplay {
 
@@ -43,8 +44,32 @@ public class WeaponComparisonDisplay {
 	int poisonDamageY;
 	int rangeY;
 
+	public static Texture imageSlash;
+	public static Texture imagePierce;
+	public static Texture imageBlunt;
+	public static Texture imageFire;
+	public static Texture imageWater;
+	public static Texture imageElectrical;
+	public static Texture imagePosion;
+	public static Texture imageRange;
+	public static Texture imageWeight;
+	public static Texture imageValue;
+
 	public WeaponComparisonDisplay() {
 		resize();
+	}
+
+	public static void loadStaticImages() {
+		imageSlash = getGlobalImage("action_slash.png");
+		imagePierce = getGlobalImage("action_pierce.png");
+		imageBlunt = getGlobalImage("action_blunt.png");
+		imageFire = getGlobalImage("action_burn.png");
+		imageWater = getGlobalImage("action_douse.png");
+		imageElectrical = getGlobalImage("action_electric.png");
+		imagePosion = getGlobalImage("action_poison.png");
+		imageRange = getGlobalImage("range.png");
+		imageWeight = getGlobalImage("weight.png");
+		imageValue = getGlobalImage("gold.png");
 	}
 
 	public void drawStaticUI() {
@@ -115,8 +140,7 @@ public class WeaponComparisonDisplay {
 				new Object[] { new StringWithColor("" + equippedSlashDamage, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, slashDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.slashDamage, color2) });
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), iconsX, slashDamageY, iconsX + 16,
-				slashDamageY + 16);
+		TextureUtils.drawTexture(imageSlash, iconsX, slashDamageY, iconsX + 16, slashDamageY + 16);
 
 		// Pierce Damage
 		float equippedPierceDamage = 0;
@@ -138,8 +162,7 @@ public class WeaponComparisonDisplay {
 				new Object[] { new StringWithColor("" + equippedPierceDamage, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, pierceDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.pierceDamage, color2) });
-		TextureUtils.drawTexture(getGlobalImage("action_pierce.png"), iconsX, pierceDamageY, iconsX + 16,
-				pierceDamageY + 16);
+		TextureUtils.drawTexture(imagePierce, iconsX, pierceDamageY, iconsX + 16, pierceDamageY + 16);
 
 		// Blunt Damage
 		float equippedBluntDamage = 1;
@@ -161,8 +184,7 @@ public class WeaponComparisonDisplay {
 				new Object[] { new StringWithColor("" + equippedBluntDamage, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, bluntDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.bluntDamage, color2) });
-		TextureUtils.drawTexture(getGlobalImage("action_blunt.png"), iconsX, bluntDamageY, iconsX + 16,
-				bluntDamageY + 16);
+		TextureUtils.drawTexture(imageBlunt, iconsX, bluntDamageY, iconsX + 16, bluntDamageY + 16);
 
 		// Fire Damage
 		float equippedFireDamage = 0;
@@ -183,7 +205,7 @@ public class WeaponComparisonDisplay {
 				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + equippedFireDamage, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, fireDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.fireDamage, color2) });
-		TextureUtils.drawTexture(getGlobalImage("action_burn.png"), iconsX, fireDamageY, iconsX + 16, fireDamageY + 16);
+		TextureUtils.drawTexture(imageFire, iconsX, fireDamageY, iconsX + 16, fireDamageY + 16);
 
 		// Water Damage
 		float equippedWaterDamage = 0;
@@ -205,8 +227,7 @@ public class WeaponComparisonDisplay {
 				new Object[] { new StringWithColor("" + equippedWaterDamage, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, waterDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.waterDamage, color2) });
-		TextureUtils.drawTexture(getGlobalImage("action_douse.png"), iconsX, waterDamageY, iconsX + 16,
-				waterDamageY + 16);
+		TextureUtils.drawTexture(imageWater, iconsX, waterDamageY, iconsX + 16, waterDamageY + 16);
 
 		// Electrical Damage
 		float equippedElectricalDamage = 0;
@@ -228,8 +249,7 @@ public class WeaponComparisonDisplay {
 				new Object[] { new StringWithColor("" + equippedElectricalDamage, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, electricalDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.electricalDamage, color2) });
-		TextureUtils.drawTexture(getGlobalImage("action_electric.png"), iconsX, electricalDamageY, iconsX + 16,
-				electricalDamageY + 16);
+		TextureUtils.drawTexture(imageElectrical, iconsX, electricalDamageY, iconsX + 16, electricalDamageY + 16);
 
 		// Posion Damage
 		float equippedPoisonDamage = 0;
@@ -251,8 +271,7 @@ public class WeaponComparisonDisplay {
 				new Object[] { new StringWithColor("" + equippedPoisonDamage, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, poisonDamageY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.poisonDamage, color2) });
-		TextureUtils.drawTexture(getGlobalImage("action_poison.png"), iconsX, poisonDamageY, iconsX + 16,
-				poisonDamageY + 16);
+		TextureUtils.drawTexture(imagePosion, iconsX, poisonDamageY, iconsX + 16, poisonDamageY + 16);
 
 		// Range
 		float equippedMaxRange = 0;
@@ -273,7 +292,7 @@ public class WeaponComparisonDisplay {
 				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + equippedMaxRange, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, rangeY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + weapon2.maxRange, color2) });
-		TextureUtils.drawTexture(getGlobalImage("action_burn.png"), iconsX, rangeY, iconsX + 16, rangeY + 16);
+		TextureUtils.drawTexture(imageRange, iconsX, rangeY, iconsX + 16, rangeY + 16);
 
 	}
 
