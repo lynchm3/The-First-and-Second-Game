@@ -235,6 +235,7 @@ public class TemplatesNature {
 		Templates.APPLE.anchorX = 0;
 		Templates.APPLE.anchorY = 0;
 		Templates.APPLE.templateId = GameObject.generateNewTemplateId();
+		Templates.APPLE.bluntDamage = 1;
 
 		Templates.ROCK = new GameObject();
 		Templates.ROCK.name = "Rock";
@@ -253,6 +254,7 @@ public class TemplatesNature {
 		Templates.ROCK.anchorX = 12;
 		Templates.ROCK.anchorY = 14;
 		Templates.ROCK.templateId = GameObject.generateNewTemplateId();
+		Templates.ROCK.bluntDamage = 5;
 
 		Templates.VEIN = new Vein();
 		Templates.VEIN.name = "Vein";
@@ -290,6 +292,7 @@ public class TemplatesNature {
 		Templates.MEAT_CHUNK.anchorX = 0;
 		Templates.MEAT_CHUNK.anchorY = 0;
 		Templates.MEAT_CHUNK.templateId = GameObject.generateNewTemplateId();
+		Templates.MEAT_CHUNK.bluntDamage = 2;
 
 	}
 

@@ -60,6 +60,7 @@ public class TemplatesJunk {
 		Templates.WOOD.anchorX = 0;
 		Templates.WOOD.anchorY = 0;
 		Templates.WOOD.templateId = GameObject.generateNewTemplateId();
+		Templates.WOOD.bluntDamage = 4;
 
 		Templates.ORE = new Junk();
 		Templates.ORE.name = "Ore";
@@ -78,6 +79,7 @@ public class TemplatesJunk {
 		Templates.ORE.anchorX = 0;
 		Templates.ORE.anchorY = 0;
 		Templates.ORE.templateId = GameObject.generateNewTemplateId();
+		Templates.ORE.bluntDamage = 6;
 
 	}
 

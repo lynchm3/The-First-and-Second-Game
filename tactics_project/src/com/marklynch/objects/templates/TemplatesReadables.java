@@ -96,6 +96,7 @@ public class TemplatesReadables {
 		Templates.DOCUMENTS.anchorX = 0;
 		Templates.DOCUMENTS.anchorY = 0;
 		Templates.DOCUMENTS.templateId = GameObject.generateNewTemplateId();
+		Templates.DOCUMENTS.slashDamage = 1;
 
 	}
 

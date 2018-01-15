@@ -47,14 +47,6 @@ public class TemplatesMonsters {
 		Templates.ROCK_GOLEM.canEquipWeapons = false;
 		Templates.ROCK_GOLEM.templateId = GameObject.generateNewTemplateId();
 		Templates.ROCK_GOLEM.aiRoutine = new AIRoutineForRockGolem(Templates.ROCK_GOLEM);
-
-		// ROCK_GOLEM = new RockGolem("Rock Golem", "Rock Golem", 1, 100, 0, 0,
-		// 0, 0, "rock_golem.png", null, 1, 10, null,
-		// new Inventory(), 1, 1.5f, 0, -0.5f, 1f, 1f, 1f, null, 0.5f, 0.5f,
-		// false, 90f, 0f, 0f, 0f, 100f, 150f,
-		// null, null, 88, 54, 88, 54, 88, 54, 88, 54, null, false, new
-		// GameObject[] {}, new GameObject[] {},
-		// GameObject.generateNewTemplateId());
 	}
 
 }

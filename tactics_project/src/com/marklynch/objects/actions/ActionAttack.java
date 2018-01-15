@@ -47,9 +47,9 @@ public class ActionAttack extends Action {
 			return;
 
 		float damage = 1;
-		Weapon weapon = null;
-		if (performer.equipped != null && performer.equipped instanceof Weapon) {
-			weapon = (Weapon) performer.equipped;
+		GameObject weapon = null;
+		if (performer.equipped != null) {
+			weapon = performer.equipped;
 			damage = weapon.getTotalEffectiveDamage();
 		}
 

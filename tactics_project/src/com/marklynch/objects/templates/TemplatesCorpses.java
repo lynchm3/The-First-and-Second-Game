@@ -25,6 +25,9 @@ public class TemplatesCorpses {
 		Templates.CARCASS.anchorX = 0;
 		Templates.CARCASS.anchorY = 0;
 		Templates.CARCASS.templateId = GameObject.generateNewTemplateId();
+		Templates.CARCASS.slashDamage = 1;
+		Templates.CARCASS.pierceDamage = 1;
+		Templates.CARCASS.bluntDamage = 1;
 
 		Templates.CORPSE = new Corpse();
 		Templates.CORPSE.name = "Corpse";
@@ -43,6 +46,9 @@ public class TemplatesCorpses {
 		Templates.CORPSE.anchorX = 0;
 		Templates.CORPSE.anchorY = 0;
 		Templates.CORPSE.templateId = GameObject.generateNewTemplateId();
+		Templates.CORPSE.slashDamage = 1;
+		Templates.CORPSE.pierceDamage = 1;
+		Templates.CORPSE.bluntDamage = 1;
 
 		Templates.ASH = new GameObject();
 		Templates.ASH.name = "Ash";

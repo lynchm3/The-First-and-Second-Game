@@ -30,6 +30,7 @@ public class TemplatesLiquids {
 		Templates.WATER.volume = 1;
 		Templates.WATER.touchEffects = new Effect[] { new EffectWet(5) };
 		Templates.WATER.drinkEffects = new Effect[] {};
+		Templates.WATER.waterDamage = 1;
 
 		Templates.POISON = new Liquid();
 		Templates.POISON.name = "Poison";
@@ -48,9 +49,10 @@ public class TemplatesLiquids {
 		Templates.POISON.anchorX = 0;
 		Templates.POISON.anchorY = 0;
 		Templates.POISON.templateId = GameObject.generateNewTemplateId();
-		Templates.WATER.volume = 1;
-		Templates.WATER.touchEffects = new Effect[] { new EffectPoison(5) };
-		Templates.WATER.drinkEffects = new Effect[] { new EffectPoison(10) };
+		Templates.POISON.volume = 1;
+		Templates.POISON.touchEffects = new Effect[] { new EffectPoison(5) };
+		Templates.POISON.drinkEffects = new Effect[] { new EffectPoison(10) };
+		Templates.POISON.poisonDamage = 3;
 	}
 
 }
