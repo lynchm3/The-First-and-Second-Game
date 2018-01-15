@@ -117,7 +117,7 @@ public class QuestBetweenTheWalls extends Quest {
 
 		// Pressure Plate
 		Templates.PRESSURE_PLATE.makeCopy(Game.level.squares[51][21], null, falseWall, Switch.SWITCH_TYPE.OPEN_CLOSE,
-				10);
+				30);
 
 		// Path to town 24,21 -> 40,21
 		Path pathToTown = new Path(24, 21, 40, 21);

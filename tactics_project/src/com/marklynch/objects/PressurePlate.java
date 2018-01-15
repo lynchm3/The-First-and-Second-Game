@@ -16,9 +16,13 @@ public class PressurePlate extends Switch {
 	}
 
 	@Override
-	public void draw2() {
+	public void draw1() {
 		super.draw1();
 		super.draw2();
+	}
+
+	@Override
+	public void draw2() {
 		if (Game.showTriggerLines) {
 			if (switchListener instanceof GameObject) {
 				aiLine.target = ((GameObject) switchListener).squareGameObjectIsOn;
