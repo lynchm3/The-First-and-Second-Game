@@ -25,7 +25,7 @@ import com.marklynch.level.constructs.gameover.GameOver;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.inventory.SquareInventory;
-import com.marklynch.level.constructs.inventory.WeaponComparisonDisplay;
+import com.marklynch.level.constructs.inventory.ComparisonDisplay;
 import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.journal.MarkerList;
 import com.marklynch.level.constructs.journal.QuestList;
@@ -214,7 +214,7 @@ public class Level {
 		Vein.loadStaticImages();
 		MapMarker.loadStaticImages();
 		Inventory.loadStaticImages();
-		WeaponComparisonDisplay.loadStaticImages();
+		ComparisonDisplay.loadStaticImages();
 		Journal.loadStaticImages();
 		ActivityLogger.loadStaticImages();
 		GameOver.loadStaticImages();

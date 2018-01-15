@@ -172,7 +172,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public InventoryParent parent;
 	public GroundDisplay groundDisplay;
 	public Inventory otherInventory;
-	public static WeaponComparisonDisplay weaponComparisonDisplay;
+	public static ComparisonDisplay weaponComparisonDisplay;
 
 	public static float squaresAreaWidth;
 	public static float squaresAreaHeight;
@@ -199,7 +199,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		if (weaponComparisonDisplay == null)
-			weaponComparisonDisplay = new WeaponComparisonDisplay();
+			weaponComparisonDisplay = new ComparisonDisplay();
 
 	}
 
