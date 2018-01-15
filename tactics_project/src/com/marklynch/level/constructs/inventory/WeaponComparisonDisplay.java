@@ -43,6 +43,8 @@ public class WeaponComparisonDisplay {
 	int electricalDamageY;
 	int poisonDamageY;
 	int rangeY;
+	int weightY;
+	int valueY;
 
 	public static Texture imageSlash;
 	public static Texture imagePierce;
@@ -294,6 +296,48 @@ public class WeaponComparisonDisplay {
 				new Object[] { new StringWithColor("" + weapon2.maxRange, color2) });
 		TextureUtils.drawTexture(imageRange, iconsX, rangeY, iconsX + 16, rangeY + 16);
 
+		// Weight
+		float equippedWeight = 0;
+		if (weapon1 != null)
+			equippedWeight = weapon1.weight;
+		if (equippedWeight == weapon2.weight) {
+			color1 = Color.WHITE;
+			color2 = Color.WHITE;
+		} else if (equippedWeight < weapon2.weight) {
+			color1 = Color.RED;
+			color2 = Color.GREEN;
+		} else {
+			color1 = Color.GREEN;
+			color2 = Color.RED;
+		}
+
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + equippedWeight), weightY,
+				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + equippedWeight, color1) });
+		TextUtils.printTextWithImages(statsOfHoveredX, weightY, Integer.MAX_VALUE, false, null,
+				new Object[] { new StringWithColor("" + weapon2.weight, color2) });
+		TextureUtils.drawTexture(imageWeight, iconsX, weightY, iconsX + 16, weightY + 16);
+
+		// vlaue
+		float equippedValue = 0;
+		if (weapon1 != null)
+			equippedValue = weapon1.value;
+		if (equippedValue == weapon2.value) {
+			color1 = Color.WHITE;
+			color2 = Color.WHITE;
+		} else if (equippedValue < weapon2.value) {
+			color1 = Color.RED;
+			color2 = Color.GREEN;
+		} else {
+			color1 = Color.GREEN;
+			color2 = Color.RED;
+		}
+
+		TextUtils.printTextWithImages(statsOfEquippedRightX - Game.font.getWidth("" + equippedValue), valueY,
+				Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + equippedValue, color1) });
+		TextUtils.printTextWithImages(statsOfHoveredX, valueY, Integer.MAX_VALUE, false, null,
+				new Object[] { new StringWithColor("" + weapon2.value, color2) });
+		TextureUtils.drawTexture(imageValue, iconsX, valueY, iconsX + 16, valueY + 16);
+
 	}
 
 	public void resize() {
@@ -326,6 +370,8 @@ public class WeaponComparisonDisplay {
 		electricalDamageY = y + 96;
 		poisonDamageY = y + 112;
 		rangeY = y + 128;
+		weightY = y + 144;
+		valueY = y + 160;
 
 	}
 
