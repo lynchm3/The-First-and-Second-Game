@@ -106,6 +106,7 @@ public class TemplatesNature {
 		Templates.BUSH.anchorX = 0;
 		Templates.BUSH.anchorY = 0;
 		Templates.BUSH.templateId = GameObject.generateNewTemplateId();
+		Templates.BUSH.effectsFromInteracting = new Effect[] {};
 
 		Templates.POISON_BUSH = new HidingPlace();
 		Templates.POISON_BUSH.name = "Posion Bush";
@@ -143,6 +144,7 @@ public class TemplatesNature {
 		Templates.LONG_GRASS.anchorX = 0;
 		Templates.LONG_GRASS.anchorY = 0;
 		Templates.LONG_GRASS.templateId = GameObject.generateNewTemplateId();
+		Templates.LONG_GRASS.effectsFromInteracting = new Effect[] {};
 
 		Templates.WHEAT = new HidingPlace();
 		Templates.WHEAT.name = "Wheat";
@@ -161,6 +163,7 @@ public class TemplatesNature {
 		Templates.WHEAT.anchorX = 0;
 		Templates.WHEAT.anchorY = 0;
 		Templates.WHEAT.templateId = GameObject.generateNewTemplateId();
+		Templates.WHEAT.effectsFromInteracting = new Effect[] {};
 
 		Templates.MUSHROOM = new Food();
 		Templates.MUSHROOM.name = "Mushroom";
