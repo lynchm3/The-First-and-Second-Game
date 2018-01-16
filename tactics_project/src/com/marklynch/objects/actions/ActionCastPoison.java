@@ -92,9 +92,9 @@ public class ActionCastPoison extends Action {
 			else
 				victim = target.owner;
 
-			int severity = Crime.CRIME_SEVERITY_ATTACK;
+			Crime.TYPE severity = Crime.TYPE.CRIME_ASSAULT;
 			if (!(target instanceof Actor))
-				severity = Crime.CRIME_SEVERITY_VANDALISM;
+				severity = Crime.TYPE.CRIME_VANDALISM;
 			Crime crime = new Crime(this, this.performer, victim, severity);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);

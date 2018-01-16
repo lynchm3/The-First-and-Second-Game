@@ -25,6 +25,7 @@ import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
+import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDropItems;
@@ -117,9 +118,9 @@ public abstract class AIRoutine {
 			return;
 
 		// Check for enemies last seen locations to search
-		for (Actor criminal : this.actor.crimesWitnessed.keySet()) {
+		for (Actor criminal : this.actor.mapActorToCrimesWitnessed.keySet()) {
 
-			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
+			for (Crime crime : actor.mapActorToCrimesWitnessed.get(criminal)) {
 				if (!crime.resolved) {
 					if (this.actor.canSeeGameObject(criminal)) {
 						this.actor.addInvestigation(criminal, criminal.squareGameObjectIsOn,
@@ -680,7 +681,7 @@ public abstract class AIRoutine {
 	public static String I_SAW_THAT = "I saw that!!";
 
 	protected boolean runCrimeReactionRoutine() {
-		for (final Actor criminal : actor.crimesWitnessed.keySet()) {
+		for (final Actor criminal : actor.mapActorToCrimesWitnessed.keySet()) {
 			int accumulatedSeverity = 0;
 			final ArrayList<Crime> unresolvedIllegalMinings = new ArrayList<Crime>();
 			final ArrayList<Crime> unresolvedThefts = new ArrayList<Crime>();
@@ -693,11 +694,11 @@ public abstract class AIRoutine {
 			// ArrayList<GameObject>();
 
 			// Mark issues as resolved
-			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
+			for (Crime crime : actor.mapActorToCrimesWitnessed.get(criminal)) {
 				if (crime.resolved == false) {
 
 					if (crime.stolenItems.length == 0) {
-						crime.resolved = true;
+						crime.resolve();
 						continue;
 					}
 					boolean itemsToBeRetaken = false;
@@ -715,8 +716,8 @@ public abstract class AIRoutine {
 
 			// Create list of unresolved crimes, stolenItems
 			// Also calculate accumulated severity of crimes
-			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
-				accumulatedSeverity += crime.severity;
+			for (Crime crime : actor.mapActorToCrimesWitnessed.get(criminal)) {
+				accumulatedSeverity += crime.type.severity;
 				if (crime.resolved == false) {
 					unresolvedCrimes.add(crime);
 					if (crime.action instanceof ActionMine) {
@@ -739,13 +740,13 @@ public abstract class AIRoutine {
 
 			// "STOP THAT!"
 			boolean saidStop = false;
-			for (Crime crime : actor.crimesWitnessed.get(criminal)) {
+			for (Crime crime : actor.mapActorToCrimesWitnessed.get(criminal)) {
 				if (!crime.hasBeenToldToStop) {
 					if (criminal == Game.level.player) {
 						new ActionTalk(this.actor, criminal, createJusticeStopConversation(crime)).perform();
 					} else {
 						if (Game.level.shouldLog(this.actor)) {
-							if (crime.severity == Crime.CRIME_SEVERITY_THEFT)
+							if (crime.type == Crime.TYPE.CRIME_THEFT)
 								actor.setMiniDialogue(I_SAW_THAT, criminal);
 							else
 								actor.setMiniDialogue(STOP_THAT, criminal);
@@ -844,8 +845,8 @@ public abstract class AIRoutine {
 			} else if (stolenItemsOnGroundToPickUp.size() > 0) {
 				for (GameObject stolenItemOnGround : stolenItemsOnGroundToPickUp) {
 					if (actor.straightLineDistanceTo(stolenItemOnGround.squareGameObjectIsOn) == 1) {
-						new ActionTakeItems(this.actor, stolenItemOnGround.squareGameObjectIsOn,
-								stolenItemOnGround).perform();
+						new ActionTakeItems(this.actor, stolenItemOnGround.squareGameObjectIsOn, stolenItemOnGround)
+								.perform();
 						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 						return true;
 					}
@@ -866,7 +867,7 @@ public abstract class AIRoutine {
 	public Conversation createJusticeStopConversation(Crime crime) {
 		ConversationResponse done = new ConversationResponse(":/", null);
 		ConversationPart conversationPartJustice = null;
-		if (crime.severity == Crime.CRIME_SEVERITY_THEFT) {
+		if (crime.type == Crime.TYPE.CRIME_THEFT) {
 			conversationPartJustice = new ConversationPart(new Object[] { I_SAW_THAT },
 					new ConversationResponse[] { done }, this.actor);
 
@@ -1233,6 +1234,29 @@ public abstract class AIRoutine {
 			return AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
 		else
 			return true;
+	}
+
+	public boolean updateWantedPosterRoutine(WantedPoster wantedPoster) {
+
+		if (actor.highestAccumulatedUnresolvedCrimeSeverity == 0)
+			return false;
+
+		if (wantedPoster.accumulatedSAeverity >= actor.highestAccumulatedUnresolvedCrimeSeverity)
+			return false;
+
+		this.actor.activityDescription = "Updating Wanted Poater";
+
+		if (actor.straightLineDistanceTo(wantedPoster.squareGameObjectIsOn) < 2) {
+			wantedPoster.updateCrimes(
+					actor.mapActorToCrimesWitnessed.get(actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity),
+					actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity,
+					actor.highestAccumulatedUnresolvedCrimeSeverity);
+			return true;
+		} else {
+
+			return AIRoutineUtils.moveTowardsSquareToBeAdjacent(wantedPoster.squareGameObjectIsOn);
+		}
+
 	}
 
 	public abstract AIRoutine getInstance(Actor actor);

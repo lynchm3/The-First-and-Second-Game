@@ -18,7 +18,7 @@ public class PowerHealRanged extends Power {
 		super(NAME, ResourceUtils.getGlobalImage("action_heal.png"), source,
 				new Effect[] { new EffectHeal(source, null, 1) }, 5,
 				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
-				5, false, false, Crime.CRIME_SEVERITY_ATTACK);
+				5, false, false, Crime.TYPE.CRIME_ASSAULT);
 	}
 
 	@Override

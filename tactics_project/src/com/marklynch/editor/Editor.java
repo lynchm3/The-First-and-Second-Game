@@ -25,6 +25,7 @@ import com.marklynch.editor.settingswindow.SpeechPartSettingsWindow;
 import com.marklynch.editor.settingswindow.SquaresSettingsWindow;
 import com.marklynch.editor.settingswindow.TemplatesSettingsWindow;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -36,9 +37,10 @@ import com.marklynch.level.constructs.enchantment.EnhancementFireDamage;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Readable;
+import com.marklynch.objects.Sign;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
@@ -501,8 +503,10 @@ public class Editor {
 				Square.STONE_TEXTURE, 2);
 		Game.level.structures.add(joesShop);
 
-		Readable joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
+		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
 				new Object[] { joesShop.name }, trader);
+		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[3][5], "Wanter Poster",
+				new ArrayList<Crime>(), trader);
 		trader.inventory.add(Templates.KATANA.makeCopy(null, null));
 		trader.inventory.add(Templates.HATCHET.makeCopy(null, null));
 		trader.inventory.add(Templates.HUNTING_BOW.makeCopy(null, null));
@@ -511,6 +515,7 @@ public class Editor {
 		trader.shop = joesShop;
 		trader.room = shopAtriums.get(0);
 		trader.shopSign = joesShopSign;
+		trader.wantedPoster = wantedPoster;
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();
 		// doorLocations2.add(Game.level.squares[7][9]);
 		// // doorLocations2.add(Game.level.squares[11][9]);

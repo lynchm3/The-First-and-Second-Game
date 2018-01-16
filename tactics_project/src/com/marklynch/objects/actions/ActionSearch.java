@@ -73,7 +73,8 @@ public class ActionSearch extends Action {
 				}
 			}
 			if (stolenObjects.size() > 0) {
-				Crime crime = new Crime(this, this.performer, stolenObjects.get(0).owner, 2, stolenObjects);
+				Crime crime = new Crime(this, this.performer, stolenObjects.get(0).owner, Crime.TYPE.CRIME_THEFT,
+						stolenObjects);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);

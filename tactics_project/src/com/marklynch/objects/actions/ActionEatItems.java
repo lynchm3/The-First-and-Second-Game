@@ -67,7 +67,7 @@ public class ActionEatItems extends VariableQtyAction {
 				sound.play();
 
 			if (!legal) {
-				Crime crime = new Crime(this, this.performer, object.owner, Crime.CRIME_SEVERITY_THEFT, object);
+				Crime crime = new Crime(this, this.performer, object.owner, Crime.TYPE.CRIME_THEFT, object);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);

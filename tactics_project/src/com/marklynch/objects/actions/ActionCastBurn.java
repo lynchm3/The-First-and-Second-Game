@@ -85,9 +85,9 @@ public class ActionCastBurn extends Action {
 			else
 				victim = target.owner;
 
-			int severity = Crime.CRIME_SEVERITY_ATTACK;
+			Crime.TYPE severity = Crime.TYPE.CRIME_ASSAULT;
 			if (!(target instanceof Actor))
-				severity = Crime.CRIME_SEVERITY_ARSON;
+				severity = Crime.TYPE.CRIME_ARSON;
 			Crime crime = new Crime(this, this.performer, victim, severity);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);

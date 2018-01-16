@@ -65,14 +65,14 @@ public class ActionTeleport extends Action {
 				if (teleportee != Game.level.player && teleportee.owner != null
 						&& teleportee.owner != Game.level.player) {
 					Actor victim;
-					int severity;
+					Crime.TYPE severity;
 					if (teleportee instanceof Actor) {
 						victim = (Actor) teleportee;
-						severity = Crime.CRIME_SEVERITY_ATTACK;
+						severity = Crime.TYPE.CRIME_ASSAULT;
 
 					} else {
 						victim = teleportee.owner;
-						severity = Crime.CRIME_SEVERITY_VANDALISM;
+						severity = Crime.TYPE.CRIME_VANDALISM;
 					}
 					Crime crime = new Crime(this, this.performer, victim, severity);
 					this.performer.crimesPerformedThisTurn.add(crime);
@@ -83,14 +83,14 @@ public class ActionTeleport extends Action {
 				if (gameObjectInTheWay != Game.level.player && gameObjectInTheWay.owner != null
 						&& gameObjectInTheWay.owner != Game.level.player) {
 					Actor victim;
-					int severity;
+					Crime.TYPE severity;
 					if (gameObjectInTheWay instanceof Actor) {
 						victim = (Actor) gameObjectInTheWay;
-						severity = Crime.CRIME_SEVERITY_ATTACK;
+						severity = Crime.TYPE.CRIME_ASSAULT;
 
 					} else {
 						victim = gameObjectInTheWay.owner;
-						severity = Crime.CRIME_SEVERITY_VANDALISM;
+						severity = Crime.TYPE.CRIME_VANDALISM;
 					}
 					Crime crime = new Crime(this, this.performer, victim, severity);
 					this.performer.crimesPerformedThisTurn.add(crime);

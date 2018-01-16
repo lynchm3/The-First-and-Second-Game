@@ -40,8 +40,8 @@ public class Game {
 	// PLAYER START POSITION
 
 	// Shop
-	// public static int playerStartPosX = 3;
-	// public static int playerStartPosY = 3;
+	public static int playerStartPosX = 3;
+	public static int playerStartPosY = 3;
 
 	// Dining room
 	// public static int playerStartPosX = 93;
@@ -70,8 +70,8 @@ public class Game {
 	// public static int playerStartPosY = 70;
 
 	// Between the walls
-	public static int playerStartPosX = 53;
-	public static int playerStartPosY = 21;
+	// public static int playerStartPosX = 53;
+	// public static int playerStartPosY = 21;
 
 	// Square size
 	public static float SQUARE_WIDTH = 128f;

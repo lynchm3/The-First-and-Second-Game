@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -25,13 +26,13 @@ public abstract class Power {
 	public int loudness;
 	public boolean hostile;
 	public boolean potentialyCriminal;
-	public int crimeSeverity;
+	public Crime.TYPE crimeSeverity;
 
 	int range;
 	Point[] areaOfEffect;
 
 	public Power(String name, Texture image, GameObject source, Effect[] effects, int range, Point[] areaOfEffect,
-			int loudness, boolean hostile, boolean potentiallyCriminal, int crimeSeverity) {
+			int loudness, boolean hostile, boolean potentiallyCriminal, Crime.TYPE crimeSeverity) {
 		this.name = name;
 		this.image = image;
 		this.source = source;

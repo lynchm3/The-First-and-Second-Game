@@ -34,6 +34,7 @@ import com.marklynch.objects.Switch;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.Wall;
+import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
@@ -199,6 +200,8 @@ public class Templates {
 	public static Sign SIGN;
 
 	public static Sign SIGNPOST;
+
+	public static WantedPoster WANTED_POSTER;
 
 	public static Readable DOCUMENTS;
 

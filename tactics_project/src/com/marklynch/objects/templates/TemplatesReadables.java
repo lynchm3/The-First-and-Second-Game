@@ -3,6 +3,7 @@ package com.marklynch.objects.templates;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.Sign;
+import com.marklynch.objects.WantedPoster;
 
 public class TemplatesReadables {
 
@@ -61,10 +62,28 @@ public class TemplatesReadables {
 		Templates.SIGN.anchorY = 0;
 		Templates.SIGN.templateId = GameObject.generateNewTemplateId();
 
+		Templates.WANTED_POSTER = new WantedPoster();
+		Templates.WANTED_POSTER.name = "Wanted Poster";
+		Templates.WANTED_POSTER.imageTexturePath = "wanted_poster.png";
+		Templates.WANTED_POSTER.totalHealth = Templates.WANTED_POSTER.remainingHealth = 100;
+		Templates.WANTED_POSTER.widthRatio = 1f;
+		Templates.WANTED_POSTER.heightRatio = 1f;
+		Templates.WANTED_POSTER.drawOffsetX = 0f;
+		Templates.WANTED_POSTER.drawOffsetY = 0f;
+		Templates.WANTED_POSTER.soundWhenHit = 1f;
+		Templates.WANTED_POSTER.soundWhenHitting = 1f;
+		Templates.WANTED_POSTER.soundDampening = 1f;
+		Templates.WANTED_POSTER.stackable = false;
+		Templates.WANTED_POSTER.weight = 77;
+		Templates.WANTED_POSTER.value = 18;
+		Templates.WANTED_POSTER.anchorX = 0;
+		Templates.WANTED_POSTER.anchorY = 0;
+		Templates.WANTED_POSTER.templateId = GameObject.generateNewTemplateId();
+
 		Templates.SIGNPOST = new Sign();
 		Templates.SIGNPOST.name = "Signpost";
 		Templates.SIGNPOST.imageTexturePath = "signpost.png";
-		Templates.SIGNPOST.totalHealth = Templates.SIGNPOST.remainingHealth = 1;
+		Templates.SIGNPOST.totalHealth = Templates.SIGNPOST.remainingHealth = 100;
 		Templates.SIGNPOST.widthRatio = 1f;
 		Templates.SIGNPOST.heightRatio = 1.25f;
 		Templates.SIGNPOST.drawOffsetX = 0f;

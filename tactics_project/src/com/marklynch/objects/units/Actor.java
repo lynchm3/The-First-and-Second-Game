@@ -154,8 +154,13 @@ public class Actor extends GameObject {
 	public int timePerStep = 100;
 	public int thisStepTime = timePerStep;
 
-	// public ArrayList<Crime> crimesWitnessed;
-	public Map<Actor, ArrayList<Crime>> crimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
+	public ArrayList<Crime> crimesWitnessed = new ArrayList<Crime>();
+	public ArrayList<Actor> knownCriminals = new ArrayList<Actor>();
+	public Map<Actor, ArrayList<Crime>> mapActorToCrimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
+	public Map<Actor, Integer> accumulatedCrimeSeverityWitnessed = new HashMap<Actor, Integer>();
+	public Map<Actor, Integer> accumulatedCrimeSeverityUnresolved = new HashMap<Actor, Integer>();
+	public int highestAccumulatedUnresolvedCrimeSeverity = 0;
+	public Actor criminalWithHighestAccumulatedUnresolvedCrimeSeverity = null;
 
 	public AILine aiLine;
 
@@ -355,6 +360,7 @@ public class Actor extends GameObject {
 	// }
 	// }
 
+	@Override
 	public boolean hasRange(int weaponDistance) {
 		if (weaponDistance == 1)
 			return true;
@@ -430,12 +436,6 @@ public class Actor extends GameObject {
 		if (remainingHealth <= 0) {
 			super.checkIfDestroyed(attacker, action);
 			this.faction.checkIfDestroyed();
-			// If not player, erase crimes
-			for (Crime crime : crimesPerformedInLifetime) {
-				for (Actor witness : crime.witnesses) {
-					witness.crimesWitnessed.remove(this);
-				}
-			}
 			return true;
 		}
 		return false;
@@ -763,6 +763,9 @@ public class Actor extends GameObject {
 				}
 			}
 
+			// clean up witnessed crimes list
+			manageWitnessedCrimes();
+
 			for (GameObject gameObject : gameObjectsToRemoveFromList) {
 				attackers.remove(gameObject);
 			}
@@ -772,7 +775,7 @@ public class Actor extends GameObject {
 				this.aiRoutine.update();
 		}
 
-		// If hifing in a place get the effects
+		// If hiding in a place get the effects
 		if (hidingPlace != null) {
 			for (Effect effect : hidingPlace.effectsFromInteracting) {
 				addEffect(effect.makeCopy(hidingPlace, this));
@@ -1180,5 +1183,110 @@ public class Actor extends GameObject {
 		}
 
 		return true;
+	}
+
+	// public ArrayList<Crime> crimesWitnessed = new ArrayList<Crime>();
+	// public ArrayList<Actor> knownCriminals = new ArrayList<Actor>();
+	// public Map<Actor, ArrayList<Crime>> mapActorToCrimesWitnessed = new
+	// HashMap<Actor, ArrayList<Crime>>();
+	// public Map<Actor, Integer> accumulatedCrimeSeverityWitnessed = new
+	// HashMap<Actor, Integer>();
+
+	public void manageWitnessedCrimes() {
+		ArrayList<Crime> crimesToRemove = new ArrayList<Crime>();
+		for (Crime crime : crimesWitnessed) {
+			if (crime.resolved)
+				crimesToRemove.add(crime);
+			else if (crime.performer.remainingHealth <= 0)
+				crimesToRemove.add(crime);
+
+		}
+		for (Crime crime : crimesToRemove) {
+			removeWitnessedCrime(crime);
+		}
+	}
+
+	public void addWitnessedCrime(Crime crime) {
+
+		if (crime.resolved) {
+			return;
+		}
+
+		if (crimesWitnessed.contains(crime)) {
+			return;
+		}
+
+		if (crime.performer == this)
+			return;
+
+		if (this.group != null && this.group.contains(crime.performer))
+			return;
+
+		Actor criminal = crime.performer;
+
+		crimesWitnessed.add(crime);
+
+		if (!knownCriminals.contains(criminal))
+			knownCriminals.add(criminal);
+
+		if (mapActorToCrimesWitnessed.containsKey(criminal)) {
+			mapActorToCrimesWitnessed.get(criminal).add(crime);
+		} else {
+			ArrayList<Crime> newCrimeList = new ArrayList<Crime>();
+			newCrimeList.add(crime);
+			mapActorToCrimesWitnessed.put(crime.performer, newCrimeList);
+		}
+
+		if (accumulatedCrimeSeverityWitnessed.containsKey(criminal)) {
+			accumulatedCrimeSeverityWitnessed.put(criminal,
+					accumulatedCrimeSeverityWitnessed.get(criminal) + crime.type.severity);
+			accumulatedCrimeSeverityUnresolved.put(criminal,
+					accumulatedCrimeSeverityUnresolved.get(criminal) + crime.type.severity);
+		} else {
+			accumulatedCrimeSeverityWitnessed.put(criminal, crime.type.severity);
+			accumulatedCrimeSeverityUnresolved.put(criminal, crime.type.severity);
+
+		}
+
+		updateHighestUnresolvedCrimeSeverity();
+	}
+
+	public void removeWitnessedCrime(Crime crime) {
+
+		if (!crimesWitnessed.contains(crime)) {
+			return;
+		}
+
+		Actor criminal = crime.performer;
+
+		crimesWitnessed.remove(crime);
+
+		mapActorToCrimesWitnessed.get(criminal).remove(crime);
+
+		if (mapActorToCrimesWitnessed.get(criminal).size() == 0) {
+			knownCriminals.remove(criminal);
+			mapActorToCrimesWitnessed.remove(criminal);
+		}
+
+		accumulatedCrimeSeverityUnresolved.put(criminal,
+				accumulatedCrimeSeverityUnresolved.get(criminal) - crime.type.severity);
+
+		if (accumulatedCrimeSeverityUnresolved.get(criminal) == 0)
+			accumulatedCrimeSeverityUnresolved.remove(criminal);
+
+		updateHighestUnresolvedCrimeSeverity();
+	}
+
+	public void updateHighestUnresolvedCrimeSeverity() {
+
+		highestAccumulatedUnresolvedCrimeSeverity = 0;
+		criminalWithHighestAccumulatedUnresolvedCrimeSeverity = null;
+		for (Actor criminal : accumulatedCrimeSeverityUnresolved.keySet()) {
+			if (accumulatedCrimeSeverityUnresolved.get(criminal) > highestAccumulatedUnresolvedCrimeSeverity) {
+				highestAccumulatedUnresolvedCrimeSeverity = accumulatedCrimeSeverityUnresolved.get(criminal);
+				criminalWithHighestAccumulatedUnresolvedCrimeSeverity = criminal;
+			}
+		}
+
 	}
 }

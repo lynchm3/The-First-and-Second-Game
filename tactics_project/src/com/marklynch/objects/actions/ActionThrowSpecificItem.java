@@ -138,10 +138,10 @@ public class ActionThrowSpecificItem extends Action {
 			else if (targetGameObject != null)
 				victim = targetGameObject.owner;
 			if (victim != null) {
-				int severity = Crime.CRIME_SEVERITY_ATTACK;
+				Crime.TYPE severity = Crime.TYPE.CRIME_ASSAULT;
 				if (!(targetGameObject instanceof Actor))
-					severity = Crime.CRIME_SEVERITY_VANDALISM;
-				Crime crime = new Crime(this, this.performer, victim, Crime.CRIME_SEVERITY_ATTACK);
+					severity = Crime.TYPE.CRIME_VANDALISM;
+				Crime crime = new Crime(this, this.performer, victim, Crime.TYPE.CRIME_ASSAULT);
 				this.performer.crimesPerformedThisTurn.add(crime);
 				this.performer.crimesPerformedInLifetime.add(crime);
 				notifyWitnessesOfCrime(crime);

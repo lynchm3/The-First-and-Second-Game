@@ -41,6 +41,10 @@ public class AIRoutineForTrader extends AIRoutine {
 
 		aiRoutineStart();
 
+		// Update wanted poster
+		if (updateWantedPosterRoutine(trader.wantedPoster))
+			return;
+
 		// Shout for help
 		if (runGetHelpRoutine())
 			return;

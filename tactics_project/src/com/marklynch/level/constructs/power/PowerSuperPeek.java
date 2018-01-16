@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.Point;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -17,7 +18,7 @@ public class PowerSuperPeek extends Power {
 
 	public PowerSuperPeek(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_stop_hiding.png"), source, new Effect[] {}, Integer.MAX_VALUE,
-				new Point[] { new Point(0, 0) }, 0, false, false, 0);
+				new Point[] { new Point(0, 0) }, 0, false, false, Crime.TYPE.NONE);
 	}
 
 	@Override

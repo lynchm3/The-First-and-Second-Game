@@ -15,6 +15,6 @@ public class PowerBleed extends Power {
 	public PowerBleed(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("effect_bleed.png"), source,
 				new Effect[] { new EffectBleeding(source, null, 3) }, 5, new Point[] { new Point(0, 0) }, 10, true,
-				true, Crime.CRIME_SEVERITY_ATTACK);
+				true, Crime.TYPE.CRIME_ASSAULT);
 	}
 }

@@ -61,7 +61,7 @@ public class ActionPeek extends Action {
 				Game.level.player.calculateVisibleSquares(peekSquare);
 		}
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, object.owner, Crime.CRIME_SEVERITY_SPY);
+			Crime crime = new Crime(this, this.performer, object.owner, Crime.TYPE.CRIME_VOYEURISM);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

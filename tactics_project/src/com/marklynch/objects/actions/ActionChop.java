@@ -77,7 +77,7 @@ public class ActionChop extends Action {
 			sound.play();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.CRIME_SEVERITY_THEFT, wood);
+			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, wood);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

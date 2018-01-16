@@ -44,7 +44,7 @@ public class ActionSmash extends Action {
 			Game.level.endTurn();
 
 		if (!legal) {
-			Crime crime = new Crime(this, this.performer, target.owner, Crime.CRIME_SEVERITY_VANDALISM);
+			Crime crime = new Crime(this, this.performer, target.owner, Crime.TYPE.CRIME_VANDALISM);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);
 			notifyWitnessesOfCrime(crime);

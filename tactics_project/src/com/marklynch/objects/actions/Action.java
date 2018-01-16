@@ -2,8 +2,6 @@ package com.marklynch.objects.actions;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.ArrayList;
-
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
@@ -79,15 +77,8 @@ public abstract class Action {
 				Actor potentialWitness = (Actor) Game.level.squares[i][j].inventory.getGameObjectOfClass(Actor.class);
 				if (potentialWitness != null && potentialWitness != crime.performer) {
 					if (potentialWitness.canSeeGameObject(crime.performer)) {
-						crime.witnesses.add(potentialWitness);
-						ArrayList<Crime> crimes = potentialWitness.crimesWitnessed.get(crime.performer);
-						if (crimes != null) {
-							crimes.add(crime);
-						} else {
-							crimes = new ArrayList<Crime>();
-							crimes.add(crime);
-							potentialWitness.crimesWitnessed.put(crime.performer, crimes);
-						}
+
+						potentialWitness.addWitnessedCrime(crime);
 					}
 				}
 			}
@@ -105,9 +96,9 @@ public abstract class Action {
 			ActionTrespass actionTrespass = new ActionTrespass(performer, square, loudness);
 			Crime crime = null;
 			if (square.owners.size() > 0)
-				crime = new Crime(actionTrespass, performer, square.owners.get(0), Crime.CRIME_SEVERITY_TRESPASSING);
+				crime = new Crime(actionTrespass, performer, square.owners.get(0), Crime.TYPE.CRIME_TRESPASSING);
 			else
-				crime = new Crime(actionTrespass, performer, null, 0);
+				crime = new Crime(actionTrespass, performer, null, Crime.TYPE.CRIME_TRESPASSING);
 
 			performer.crimesPerformedThisTurn.add(crime);
 			performer.crimesPerformedInLifetime.add(crime);

@@ -2,6 +2,7 @@ package com.marklynch.level.constructs.power;
 
 import org.lwjgl.util.Point;
 
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectHeal;
 import com.marklynch.objects.GameObject;
@@ -14,6 +15,6 @@ public class PowerHealSelf extends Power {
 	public PowerHealSelf(GameObject source) {
 		super(NAME, ResourceUtils.getGlobalImage("action_heal.png"), source,
 				new Effect[] { new EffectHeal(source, null, 1) }, 0, new Point[] { new Point(0, 0) }, 5, false, false,
-				0);
+				Crime.TYPE.NONE);
 	}
 }

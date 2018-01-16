@@ -69,9 +69,9 @@ public class ActionUsePower extends Action {
 					else
 						victim = gameObject.owner;
 
-					int severity = power.crimeSeverity;
-					if (severity == Crime.CRIME_SEVERITY_ATTACK && !(gameObject instanceof Actor))
-						severity = Crime.CRIME_SEVERITY_VANDALISM;
+					Crime.TYPE severity = power.crimeSeverity;
+					if (severity == Crime.TYPE.CRIME_ASSAULT && !(gameObject instanceof Actor))
+						severity = Crime.TYPE.CRIME_VANDALISM;
 
 					if (victim != performer && victim != null) {
 						Crime crime = new Crime(this, this.performer, victim, severity);
