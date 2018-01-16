@@ -1237,13 +1237,20 @@ public class Actor extends GameObject {
 			mapActorToCrimesWitnessed.put(crime.performer, newCrimeList);
 		}
 
+		// Accumulated severity
 		if (accumulatedCrimeSeverityWitnessed.containsKey(criminal)) {
 			accumulatedCrimeSeverityWitnessed.put(criminal,
 					accumulatedCrimeSeverityWitnessed.get(criminal) + crime.type.severity);
+		} else {
+			accumulatedCrimeSeverityWitnessed.put(criminal, crime.type.severity);
+
+		}
+
+		// Accumulated severity of unresolved crimes
+		if (accumulatedCrimeSeverityUnresolved.containsKey(criminal)) {
 			accumulatedCrimeSeverityUnresolved.put(criminal,
 					accumulatedCrimeSeverityUnresolved.get(criminal) + crime.type.severity);
 		} else {
-			accumulatedCrimeSeverityWitnessed.put(criminal, crime.type.severity);
 			accumulatedCrimeSeverityUnresolved.put(criminal, crime.type.severity);
 
 		}

@@ -43,8 +43,6 @@ public class Bed extends GameObject {
 	@Override
 	public void draw2() {
 
-		super.draw2();
-
 		if (!Game.fullVisiblity) {
 
 			if (this.squareGameObjectIsOn.visibleToPlayer == false)

@@ -3,7 +3,6 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
@@ -67,13 +66,6 @@ public class ActionBuyItems extends VariableQtyAction {
 			performer.actionsPerformedThisTurn.add(this);
 			if (sound != null)
 				sound.play();
-
-			if (!legal) {
-				Crime crime = new Crime(this, this.performer, object.owner, Crime.TYPE.CRIME_THEFT, object);
-				this.performer.crimesPerformedThisTurn.add(crime);
-				this.performer.crimesPerformedInLifetime.add(crime);
-				notifyWitnessesOfCrime(crime);
-			}
 		}
 
 		if (Game.level.shouldLog(target, performer)) {

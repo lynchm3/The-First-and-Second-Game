@@ -45,16 +45,16 @@ public class AIRoutineForTrader extends AIRoutine {
 		if (updateWantedPosterRoutine(trader.wantedPoster))
 			return;
 
+		// Crime reaction
+		if (runCrimeReactionRoutine())
+			return;
+
 		// Shout for help
 		if (runGetHelpRoutine())
 			return;
 
 		// Shout for help cooldown
 		if (runEscapeCooldown(true))
-			return;
-
-		// Crime reaction
-		if (runCrimeReactionRoutine())
 			return;
 
 		// Door maintenance routine

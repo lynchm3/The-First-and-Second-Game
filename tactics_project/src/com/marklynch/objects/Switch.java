@@ -39,13 +39,13 @@ public class Switch extends GameObject {
 	@Override
 	public void draw2() {
 		super.draw1();
-		super.draw2();
 		if (Game.showTriggerLines) {
 			if (switchListener instanceof GameObject) {
 				aiLine.target = ((GameObject) switchListener).squareGameObjectIsOn;
 			}
 			aiLine.draw2();
 		}
+		super.draw2();
 	}
 
 	public void use() {
