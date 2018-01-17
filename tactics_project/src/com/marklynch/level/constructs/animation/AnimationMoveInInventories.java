@@ -5,13 +5,9 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.InanimateObjectToAddOrRemove;
-import com.marklynch.objects.Searchable;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
@@ -21,7 +17,6 @@ public class AnimationMoveInInventories extends Animation {
 	public String name;
 	public GameObject shooter;
 	public Action action;
-	public Square targetSquare;
 	float x, y, originX, originY, targetX, targetY, speedX, speedY;
 	float angle = 0;
 	boolean onTarget;
@@ -31,8 +26,8 @@ public class AnimationMoveInInventories extends Animation {
 	GameObject projectileObject;
 	float rotationSpeed = 0;
 
-	public AnimationMoveInInventories(String name, GameObject shooter, Action action, Square targetSquare,
-			GameObject projectileObject, float speed, float rotationSpeed, boolean onTarget) {
+	public AnimationMoveInInventories(String name, GameObject shooter, Action action, int originX, int originY,
+			int targetX, int targetY, GameObject projectileObject, float speed, float rotationSpeed, boolean onTarget) {
 
 		if (shooter == Game.level.player) {
 			name = "Your " + name;
@@ -40,28 +35,15 @@ public class AnimationMoveInInventories extends Animation {
 			name = shooter.name + "'s " + name;
 		}
 
-		if (shooter instanceof Actor) {
-			System.out.println("A");
-			Actor shooterActor = (Actor) shooter;
-			this.x = originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels
-					+ shooter.drawOffsetX * Game.SQUARE_WIDTH + shooterActor.handAnchorX - projectileObject.anchorX);
-			this.y = originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels
-					+ shooter.drawOffsetY * Game.SQUARE_HEIGHT + shooterActor.handAnchorY - projectileObject.anchorY);
-		} else {
-			System.out.println("B");
-			this.x = originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels
-					+ (Game.SQUARE_WIDTH - projectileObject.width) / 2);
-			this.y = originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels
-					+ (Game.SQUARE_HEIGHT - projectileObject.height) / 2);
-		}
+		this.x = this.originX = originX;
+		this.y = this.originX = originY;
 
-		targetX = (int) (targetSquare.xInGridPixels + Game.SQUARE_WIDTH * projectileObject.drawOffsetX);
-		targetY = (int) (targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * projectileObject.drawOffsetY);
+		this.targetX = targetX;
+		this.targetY = targetY;
 
 		this.name = name;
 		this.shooter = shooter;
 		this.action = action;
-		this.targetSquare = targetSquare;
 		this.projectileObject = projectileObject;
 
 		distanceToCoverX = this.targetX - this.originX;
@@ -115,12 +97,14 @@ public class AnimationMoveInInventories extends Animation {
 		completed = true;
 
 		// receiver.inventory.add(object);
-		if (targetSquare.inventory.contains(Searchable.class)) {
-			Searchable searchable = (Searchable) targetSquare.inventory.getGameObjectOfClass(Searchable.class);
-			searchable.inventory.add(projectileObject);
-		} else {
-			Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(projectileObject, targetSquare));
-		}
+		// if (targetSquare.inventory.contains(Searchable.class)) {
+		// Searchable searchable = (Searchable)
+		// targetSquare.inventory.getGameObjectOfClass(Searchable.class);
+		// searchable.inventory.add(projectileObject);
+		// } else {
+		// Game.level.inanimateObjectsToAdd.add(new
+		// InanimateObjectToAddOrRemove(projectileObject, targetSquare));
+		// }
 
 		if (Game.level.player.inventory.groundDisplay != null)
 			Game.level.player.inventory.groundDisplay.refreshGameObjects();

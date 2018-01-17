@@ -7,6 +7,8 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationDrop;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.InanimateObjectToAddOrRemove;
+import com.marklynch.objects.Searchable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -51,7 +53,14 @@ public class ActionDropItems extends VariableQtyAction {
 		if (amountToDrop == 0)
 			return;
 
-		performer.animation = new AnimationDrop(objects[0].name, performer, this, square, objects[0], 0.5f, 0f, true);
+		if (Game.level.openInventories.size() > 0) {
+			// Game.level.player.inventory.animation = new
+			// AnimationMoveInInventories(objects[0].name, performer, this,
+			// originX, originY, targetX, targetY, objects[0], 0.5f, 0f, true);
+		} else {
+			performer.animation = new AnimationDrop(objects[0].name, performer, this, square, objects[0], 0.5f, 0f,
+					true);
+		}
 
 		for (int i = 0; i < amountToDrop; i++) {
 
@@ -82,18 +91,20 @@ public class ActionDropItems extends VariableQtyAction {
 
 			performer.inventory.remove(object);
 
-			// receiver.inventory.add(object);
-			// if (square.inventory.contains(Searchable.class)) {
-			// Searchable searchable = (Searchable)
-			// square.inventory.getGameObjectOfClass(Searchable.class);
-			// searchable.inventory.add(object);
-			// } else {
-			// if (performer instanceof Actor)
-			// square.inventory.add(object);
-			// else
-			// Game.level.inanimateObjectsToAdd.add(new
-			// InanimateObjectToAddOrRemove(object, square));
-			// }
+			// if inventory is open, we're not doing animattion, just throw it
+			// on in there
+			if (Game.level.openInventories.size() > 0) {
+				if (square.inventory.contains(Searchable.class)) {
+					Searchable searchable = (Searchable) square.inventory.getGameObjectOfClass(Searchable.class);
+					searchable.inventory.add(object);
+				} else {
+					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, square));
+				}
+			}
+
+			if (Game.level.player.inventory.groundDisplay != null)
+				Game.level.player.inventory.groundDisplay.refreshGameObjects();
+
 		}
 
 		if (Game.level.shouldLog(performer)) {

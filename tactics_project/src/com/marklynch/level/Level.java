@@ -1887,6 +1887,7 @@ public class Level {
 	}
 
 	public void endTurn() {
+		addRemoveObjectToFromGround();
 		// this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
 		// " ended turn " + this.turn }));
 
@@ -2025,27 +2026,32 @@ public class Level {
 			for (GameObject inanimateObject : inanimateObjectsOnGround) {
 				inanimateObject.update(0);
 			}
-
-			for (InanimateObjectToAddOrRemove inanimateObjectToAdd : inanimateObjectsToAdd) {
-				GameObject gameObject = inanimateObjectToAdd.gameObject;
-				inanimateObjectToAdd.square.inventory.add(gameObject);
-			}
-			inanimateObjectsToAdd.clear();
-
-			for (GameObject gameObject : inanimateObjectsOnGroundToRemove) {
-				inanimateObjectsOnGround.remove(gameObject);
-				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-			}
-
-			for (Actor actor : actorsToRemove) {
-				actor.faction.actors.remove(actor);
-				if (actor.group != null)
-					actor.group.removeMember(actor);
-			}
-
-			if (Game.level.player.inventory.groundDisplay != null)
-				Game.level.player.inventory.groundDisplay.refreshGameObjects();
 		}
+
+	}
+
+	public void addRemoveObjectToFromGround() {
+
+		for (InanimateObjectToAddOrRemove inanimateObjectToAdd : inanimateObjectsToAdd) {
+			inanimateObjectToAdd.square.inventory.add(inanimateObjectToAdd.gameObject);
+		}
+		inanimateObjectsToAdd.clear();
+
+		for (GameObject gameObject : inanimateObjectsOnGroundToRemove) {
+			inanimateObjectsOnGround.remove(gameObject);
+			gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+		}
+		inanimateObjectsOnGroundToRemove.clear();
+
+		for (Actor actor : actorsToRemove) {
+			actor.faction.actors.remove(actor);
+			if (actor.group != null)
+				actor.group.removeMember(actor);
+		}
+		actorsToRemove.clear();
+
+		if (Game.level.player.inventory.groundDisplay != null)
+			Game.level.player.inventory.groundDisplay.refreshGameObjects();
 
 	}
 
