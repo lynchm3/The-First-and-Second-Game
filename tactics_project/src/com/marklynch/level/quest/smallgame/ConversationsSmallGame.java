@@ -144,7 +144,8 @@ public class ConversationsSmallGame {
 				new ConversationResponse[] { conversationResponseYesPlease, conversationResponseNoThanks },
 				quest.hunterPack.getLeader(), quest);
 
-		conversationHuntersJoinTheHunt = new Conversation(conversationPartWantToComeHunting);
+		conversationHuntersJoinTheHunt = new Conversation(conversationPartWantToComeHunting,
+				quest.hunterPack.getLeader());
 
 	}
 
@@ -171,7 +172,8 @@ public class ConversationsSmallGame {
 
 		};
 
-		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying);
+		conversationEnviromentalistImNotSpying = new Conversation(conversationPartImNotSpying,
+				quest.hunterPack.getLeader());
 	}
 
 	private static void setUpConversationSaveTheWolf() {
@@ -201,7 +203,8 @@ public class ConversationsSmallGame {
 			}
 
 		};
-		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf);
+		conversationEnviromentalistSaveTheWolf = new Conversation(conversationPartSaveTheWolf,
+				quest.hunterPack.getLeader());
 
 	}
 
@@ -241,7 +244,7 @@ public class ConversationsSmallGame {
 				new ConversationResponse[] { conversationResponseReady, conversationResponseNotYet },
 				quest.hunterPack.getLeader(), quest);
 
-		conversationHuntersReadyToGo = new Conversation(conversationPartReadyToGo);
+		conversationHuntersReadyToGo = new Conversation(conversationPartReadyToGo, quest.hunterPack.getLeader());
 
 	}
 
@@ -259,7 +262,8 @@ public class ConversationsSmallGame {
 			}
 		};
 
-		conversationHuntersOnlyHuntersGetLoot = new Conversation(conversationPartOnlyHuntersGetLoot);
+		conversationHuntersOnlyHuntersGetLoot = new Conversation(conversationPartOnlyHuntersGetLoot,
+				quest.hunterPack.getLeader());
 
 	}
 

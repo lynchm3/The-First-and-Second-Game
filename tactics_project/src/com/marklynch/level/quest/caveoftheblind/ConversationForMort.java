@@ -65,7 +65,7 @@ public class ConversationForMort extends Conversation {
 	QuestCaveOfTheBlind questCaveOfTheBlind;
 
 	public ConversationForMort(final QuestCaveOfTheBlind questCaveOfTheBlind) {
-		super(null);
+		super(null, questCaveOfTheBlind.mort);
 		this.questCaveOfTheBlind = questCaveOfTheBlind;
 
 		// Opening

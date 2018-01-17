@@ -2,7 +2,6 @@ package com.marklynch.level.conversation;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.QuadUtils;
 
 import mdesl.graphics.Color;
@@ -20,9 +19,9 @@ public class Conversation {
 	// ArrayList<ConversationPart> conversationParts;
 	public ConversationPart openingConversationPart;
 	public ConversationPart currentConversationPart;
-	public Actor originalConversationTarget;
+	public GameObject originalConversationTarget;
 
-	public Conversation(ConversationPart openingConversationPart) {
+	public Conversation(ConversationPart openingConversationPart, GameObject originalCOnversationTarget) {
 		super();
 		// this.conversationParts = new ArrayList<ConversationPart>();
 
@@ -35,6 +34,7 @@ public class Conversation {
 		// float y1 = Game.windowHeight - bottomMargin - height - topMargin;
 
 		this.openingConversationPart = this.currentConversationPart = openingConversationPart;
+		this.originalConversationTarget = originalCOnversationTarget;
 
 		// ConversationResponse end = new ConversationResponse("End", null);
 		// ConversationResponse[] conversationResponses2 = { end };
@@ -69,7 +69,7 @@ public class Conversation {
 		ConversationPart conversationPartYouWontGetOut = new ConversationPart(text, new ConversationResponse[] {},
 				gameObject);
 
-		return new Conversation(conversationPartYouWontGetOut);
+		return new Conversation(conversationPartYouWontGetOut, gameObject);
 	}
 
 	public static Conversation createConversation(String text, GameObject gameObject) {
