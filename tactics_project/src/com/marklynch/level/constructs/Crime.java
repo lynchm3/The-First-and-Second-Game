@@ -73,6 +73,7 @@ public class Crime {
 
 		if (resolved)
 			return;
+
 		if (performer.remainingHealth <= 0)
 			return;
 

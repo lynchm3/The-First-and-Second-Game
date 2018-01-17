@@ -11,6 +11,8 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 
 	public static final String ACTION_NAME = "Take";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
+	public static final String ACTION_NAME_ILLEGAL = "Steal";
+	public static final String ACTION_NAME_DISABLED_ILLEGAL = ACTION_NAME_ILLEGAL + " (can't reach)";
 
 	Actor performer;
 	Object target;
@@ -37,6 +39,13 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 			actionName = ACTION_NAME_DISABLED;
 		}
 		legal = checkLegality();
+		if (legal == false) {
+			if (enabled) {
+				actionName = ACTION_NAME_ILLEGAL;
+			} else {
+				actionName = ACTION_NAME_DISABLED_ILLEGAL;
+			}
+		}
 		sound = createSound();
 	}
 
