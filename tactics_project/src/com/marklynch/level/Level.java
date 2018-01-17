@@ -1432,6 +1432,7 @@ public class Level {
 				}
 			}
 		}
+		player.inventory.updateRealtime(delta);
 
 		// update map zoom animation
 		if (zoomToMap) {

@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
+import com.marklynch.level.constructs.animation.Animation;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
@@ -46,6 +47,8 @@ import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Inventory implements Draggable, Scrollable, TextBoxHolder {
+
+	public Animation animation;
 
 	public enum INVENTORY_STATE {
 		DEFAULT, ADD_OBJECT, MOVEABLE_OBJECT_SELECTED, SETTINGS_CHANGE
@@ -1462,6 +1465,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		}
 
+		if (animation != null && !animation.completed) {
+			animation.draw();
+		}
+
 	}
 
 	public void drawOtherInventoryText() {
@@ -1798,6 +1805,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			Level.activeTextBox = null;
 		} else {
 			Game.level.openCloseInventory();
+		}
+	}
+
+	public void updateRealtime(int delta) {
+		if (animation != null && !animation.completed) {
+			animation.update(delta);
+		} else {
 		}
 	}
 }

@@ -69,8 +69,8 @@ import com.marklynch.objects.actions.ActionStopPeeking;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTakeItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionTeleportOther;
-import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowItem;
+import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionTrackMapMarker;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionUnlock;
@@ -649,35 +649,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void updateRealtime(int delta) {
-
-		if (this instanceof Actor) {
-			Actor actor = (Actor) this;
-			if (!animation.completed) {
-				animation.update(delta);
-				// System.out.println(arg0);
-				// actor.thisStepTime += delta;
-				// if (actor.thisStepTime > 200 && actor.stepLeftTexture !=
-				// null) {
-				// if (actor.currentStepTexture == actor.stepLeftTexture) {
-				// actor.imageTexture = actor.currentStepTexture =
-				// actor.stepRightTexture;
-				// actor.thisStepTime = 0;
-				// } else {
-				// actor.imageTexture = actor.currentStepTexture =
-				// actor.stepLeftTexture;
-				// actor.thisStepTime = 0;
-				// }
-				//
-				// } else if (actor.thisStepTime > actor.timePerStep &&
-				// actor.stepLeftTexture != null) {
-				// actor.imageTexture = actor.standingTexture;
-				// }
-			} else {
-				// actor.imageTexture = actor.standingTexture;
-				// actor.thisStepTime = actor.timePerStep;
-			}
+		if (animation != null && !animation.completed) {
+			animation.update(delta);
+		} else {
 		}
-
 	}
 
 	public float getCenterX() {
@@ -1005,6 +980,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	@Override
 	public Action getDefaultActionPerformedOnThisInInventory(Actor performer) {
+
+		if (this.inventoryThatHoldsThisObject == null) {
+			return null;
+		}
+
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			if (this instanceof ContainerForLiquids)
 				return new ActionFillSpecificContainer(performer, Inventory.waterSource, (ContainerForLiquids) this);
@@ -1053,8 +1033,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public Action getSecondaryActionPerformedOnThisInInventory(Actor performer) {
-		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_NORMAL) {
 
+		if (this.inventoryThatHoldsThisObject == null) {
+			return null;
+		}
+
+		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_NORMAL) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
 				return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this);
 			} else {
@@ -1062,6 +1046,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 
 		}
+
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_LOOT) {
 			if (this.inventoryThatHoldsThisObject == performer.inventory) {
 				return new ActionGiveItemsSelectedInInventory(performer, (GameObject) Inventory.target, false, this);
@@ -1070,14 +1055,18 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 
 		}
-		return null;
 
+		return null;
 	}
 
 	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
+
+		if (this.inventoryThatHoldsThisObject == null) {
+			return actions;
+		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_FILL) {
 			return actions;
