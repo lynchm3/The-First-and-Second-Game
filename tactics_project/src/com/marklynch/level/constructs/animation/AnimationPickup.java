@@ -24,10 +24,19 @@ public class AnimationPickup extends Animation {
 		super();
 
 		this.gameObject = gameObject;
-		this.x = originX = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-				+ Game.SQUARE_WIDTH * gameObject.drawOffsetX);
-		this.y = originY = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * gameObject.drawOffsetY);
+		if (gameObject.squareGameObjectIsOn != null) {
+			// on the ground
+			this.x = originX = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * gameObject.drawOffsetX);
+			this.y = originY = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetY);
+		} else {
+			// in a container
+			this.x = originX = (int) (((GameObject) gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn.xInGridPixels
+					+ (Game.SQUARE_WIDTH - gameObject.width) / 2);
+			this.y = originY = (int) (((GameObject) gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn.yInGridPixels
+					+ (Game.SQUARE_HEIGHT - gameObject.height) / 2);
+		}
 		targetX = (int) (targetSquare.xInGridPixels + (Game.SQUARE_WIDTH - gameObject.width) / 2);
 		targetY = (int) (targetSquare.yInGridPixels + (Game.SQUARE_HEIGHT - gameObject.height) / 2);
 
