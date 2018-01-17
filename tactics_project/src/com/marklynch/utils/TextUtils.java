@@ -18,7 +18,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.actions.Action;
-import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.script.ScriptEvent;
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -288,18 +287,6 @@ public class TextUtils {
 				if (action.image != null) {
 					offsetX += textureWidth * 2;
 				}
-
-			} else if (content instanceof Projectile) {
-
-				Projectile projectile = (Projectile) content;
-				String string = projectile.name;
-
-				float textWidth = Game.font.getWidth(string);
-				if (offsetX + textWidth > maxWidth && offsetX != 0) {
-					offsetY += 20;
-					offsetX = 0;
-				}
-				offsetX += textWidth;
 
 			} else if (content instanceof Effect) {
 
@@ -806,19 +793,6 @@ public class TextUtils {
 					}
 
 				}
-
-			} else if (content instanceof Projectile) {
-
-				Projectile projectile = (Projectile) content;
-				String string = projectile.name;
-
-				float textWidth = Game.font.getWidth(string);
-				if (offsetX + textWidth > maxWidth && offsetX != 0) {
-					offsetY += 20;
-					offsetX = 0;
-				}
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
-				offsetX += textWidth;
 
 			} else if (content instanceof Effect) {
 

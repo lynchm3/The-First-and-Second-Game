@@ -3,13 +3,13 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationThrow;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Monster;
-import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionCastBurn extends Action {
@@ -60,10 +60,9 @@ public class ActionCastBurn extends Action {
 
 		// shoot projectile
 		if (target.squareGameObjectIsOn != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-
 			if (performer.squareGameObjectIsOn.visibleToPlayer || target.squareGameObjectIsOn.visibleToPlayer)
-				Game.level.projectiles.add(new Projectile("Fire Ball", performer, this, target,
-						target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null), 1f, 0f, true));
+				performer.animation = new AnimationThrow("Fire Ball", performer, this, target,
+						target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null), 1f, 0f, true);
 		}
 		// else {
 		// performer.showPow(target);

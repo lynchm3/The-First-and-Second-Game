@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationThrow;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectBleeding;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -15,7 +16,6 @@ import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
 import com.marklynch.objects.units.WildAnimal;
-import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
@@ -85,8 +85,8 @@ public class ActionAttack extends Action {
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			if (performer.squareGameObjectIsOn.visibleToPlayer || target.squareGameObjectIsOn.visibleToPlayer)
-				Game.level.projectiles.add(new Projectile("Arrow", performer, this, target, target.squareGameObjectIsOn,
-						Templates.ARROW.makeCopy(null, null), 2f, 0f, true));
+				performer.animation = new AnimationThrow("Arrow", performer, this, target, target.squareGameObjectIsOn,
+						Templates.ARROW.makeCopy(null, null), 2f, 0f, true);
 		} else {
 			if (target.squareGameObjectIsOn.visibleToPlayer)
 				target.showPow();

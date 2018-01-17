@@ -22,10 +22,10 @@ import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.faction.FactionList;
 import com.marklynch.level.constructs.gameover.GameOver;
+import com.marklynch.level.constructs.inventory.ComparisonDisplay;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.constructs.inventory.SquareInventory;
-import com.marklynch.level.constructs.inventory.ComparisonDisplay;
 import com.marklynch.level.constructs.journal.Journal;
 import com.marklynch.level.constructs.journal.MarkerList;
 import com.marklynch.level.constructs.journal.QuestList;
@@ -54,7 +54,6 @@ import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
-import com.marklynch.objects.weapons.Projectile;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
@@ -123,8 +122,6 @@ public class Level {
 	public transient Player player;
 	public transient Actor activeActor;
 	public transient ArrayListMappedInanimateObjects<GameObject> inanimateObjectsOnGround;
-	public transient ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-	public transient ArrayList<Projectile> projectilesToRemove = new ArrayList<Projectile>();
 
 	public ArrayList<PopupMenuSelectObject> popupMenuObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
@@ -647,8 +644,6 @@ public class Level {
 		gameCursor = new GameCursor();
 
 		this.inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
-		this.projectiles = new ArrayList<Projectile>();
-		this.projectilesToRemove = new ArrayList<Projectile>();
 		this.openInventories = new ArrayList<Inventory>();
 		this.script = new Script();
 
@@ -1043,10 +1038,6 @@ public class Level {
 		// gameObject.draw3();
 		// }
 
-		// draw any projectiles
-		for (Projectile projectile : projectiles) {
-			projectile.drawForeground();
-		}
 		// Squares
 		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
@@ -1414,13 +1405,6 @@ public class Level {
 
 		// if (this.script.activeScriptEvent != null) {
 		script.update(delta);
-
-		// update projectiles
-		for (Projectile projectile : projectiles) {
-			projectile.update(delta);
-		}
-		projectiles.removeAll(projectilesToRemove);
-		projectilesToRemove.clear();
 
 		int gridX1Bounds = player.squareGameObjectIsOn.xInGrid - player.sight - 1;
 		if (gridX1Bounds < 0)

@@ -9,7 +9,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Window;
 import com.marklynch.objects.actions.ActionSmash;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.Projectile;
 
 public class SquareInventory extends Inventory implements Comparator<GameObject> {
 
@@ -114,10 +113,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		return false;
 	}
 
-	public void smashWindows(Projectile projectile) {
+	public void smashWindows(Actor actor) {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.remainingHealth > 0 && gameObject instanceof Window) {
-				new ActionSmash(projectile.shooter, gameObject).perform();
+				new ActionSmash(actor, gameObject).perform();
 
 			}
 		}
