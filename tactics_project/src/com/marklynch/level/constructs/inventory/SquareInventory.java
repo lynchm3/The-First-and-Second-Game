@@ -52,7 +52,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
 			this.gameObjects.sort(this);
-			gameObject.randomisePosition();
+			// gameObject.randomisePosition();
 
 			square.calculatePathCost();
 			square.calculatePathCostForPlayer();

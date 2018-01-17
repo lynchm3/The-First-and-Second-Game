@@ -11,6 +11,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
@@ -20,7 +21,6 @@ public class AnimationDrop extends Animation {
 	public String name;
 	public GameObject shooter;
 	public Action action;
-	public GameObject targetGameObject;
 	public Square targetSquare;
 	float x, y, originX, originY, targetX, targetY, speedX, speedY;
 	float angle = 0;
@@ -31,8 +31,8 @@ public class AnimationDrop extends Animation {
 	GameObject projectileObject;
 	float rotationSpeed = 0;
 
-	public AnimationDrop(String name, GameObject shooter, Action action, GameObject targetGameObject,
-			Square targetSquare, GameObject projectileObject, float speed, float rotationSpeed, boolean onTarget) {
+	public AnimationDrop(String name, GameObject shooter, Action action, Square targetSquare,
+			GameObject projectileObject, float speed, float rotationSpeed, boolean onTarget) {
 
 		if (shooter == Game.level.player) {
 			name = "Your " + name;
@@ -40,19 +40,38 @@ public class AnimationDrop extends Animation {
 			name = shooter.name + "'s " + name;
 		}
 
+		if (shooter instanceof Actor) {
+			System.out.println("A");
+			Actor shooterActor = (Actor) shooter;
+			this.x = originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels
+					+ shooter.drawOffsetX * Game.SQUARE_WIDTH + shooterActor.handAnchorX - projectileObject.anchorX);
+			this.y = originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels
+					+ shooter.drawOffsetY * Game.SQUARE_HEIGHT + shooterActor.handAnchorY - projectileObject.anchorY);
+		} else {
+			System.out.println("B");
+			this.x = originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels
+					+ (Game.SQUARE_WIDTH - projectileObject.width) / 2);
+			this.y = originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels
+					+ (Game.SQUARE_HEIGHT - projectileObject.height) / 2);
+		}
+
+		targetX = (int) (targetSquare.xInGridPixels + Game.SQUARE_WIDTH * projectileObject.drawOffsetX);
+		targetY = (int) (targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * projectileObject.drawOffsetY);
+
 		this.name = name;
 		this.shooter = shooter;
 		this.action = action;
-		this.targetGameObject = targetGameObject;
 		this.targetSquare = targetSquare;
 		this.projectileObject = projectileObject;
 
-		this.x = this.originX = shooter.getCenterX();
-		this.y = this.originY = shooter.getCenterY();
-		this.targetX = this.targetSquare.xInGridPixels + Game.SQUARE_WIDTH * this.projectileObject.drawOffsetX
-				+ this.projectileObject.width / 2;
-		this.targetY = this.targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * this.projectileObject.drawOffsetY
-				+ this.projectileObject.height / 2;
+		// this.x = this.originX = shooter.getCenterX();
+		// this.y = this.originY = shooter.getCenterY();
+		// this.targetX = this.targetSquare.xInGridPixels + Game.SQUARE_WIDTH *
+		// this.projectileObject.drawOffsetX
+		// + this.projectileObject.width / 2;
+		// this.targetY = this.targetSquare.yInGridPixels + Game.SQUARE_HEIGHT *
+		// this.projectileObject.drawOffsetY
+		// + this.projectileObject.height / 2;
 		// (int) (this.targetSquare.yInGridPixels
 		// + Game.SQUARE_HEIGHT * this.projectileObject.drawOffsetY)
 
@@ -126,9 +145,8 @@ public class AnimationDrop extends Animation {
 		view.rotate(radians, new Vector3f(0f, 0f, 1f));
 		Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, 0 - projectileObject.width / 2,
-				0 - projectileObject.height / 2, 0 + projectileObject.width - projectileObject.width / 2,
-				0 + projectileObject.height - projectileObject.height / 2, projectileObject.backwards);
+		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, 0, 0, 0 + projectileObject.width,
+				0 + projectileObject.height);
 
 		Game.activeBatch.flush();
 		view.rotate(-radians, new Vector3f(0f, 0f, 1f));

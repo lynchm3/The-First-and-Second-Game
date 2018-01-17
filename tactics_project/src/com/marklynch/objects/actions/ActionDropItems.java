@@ -51,8 +51,7 @@ public class ActionDropItems extends VariableQtyAction {
 		if (amountToDrop == 0)
 			return;
 
-		performer.animation = new AnimationDrop(objects[0].name, performer, this, null, square, objects[0], 1f, 0.5f,
-				true);
+		performer.animation = new AnimationDrop(objects[0].name, performer, this, square, objects[0], 0.5f, 0f, true);
 
 		for (int i = 0; i < amountToDrop; i++) {
 
