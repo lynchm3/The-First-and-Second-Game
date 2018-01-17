@@ -110,6 +110,12 @@ public class ActionDropItems extends VariableQtyAction {
 
 		if (performer instanceof Actor)
 			((Actor) performer).actionsPerformedThisTurn.add(this);
+
+		if (performer == Game.level.player)
+			Game.level.endTurn();
+
+		if (performer instanceof Actor)
+			trespassingCheck(this, (Actor) performer, performer.squareGameObjectIsOn);
 	}
 
 	@Override
