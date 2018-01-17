@@ -85,7 +85,8 @@ public class ConversationPart {
 
 			}
 
-			if (talker != Game.level.conversation.originalConversationTarget) {
+			if (Game.level.conversation.originalConversationTarget != null
+					&& talker != Game.level.conversation.originalConversationTarget) {
 				float offsetX = -(System.identityHashCode(Game.level.conversation.originalConversationTarget)
 						% Game.halfWindowHeight); // -64;
 				float offsetY = 0;
