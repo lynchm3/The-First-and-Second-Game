@@ -105,6 +105,9 @@ public class AnimationThrow extends Animation {
 				projectileObject.landed(shooter, action);
 			}
 
+			if (Game.level.player.inventory.groundDisplay != null)
+				Game.level.player.inventory.groundDisplay.refreshGameObjects();
+
 		} else {
 			x += distanceX;
 			y += distanceY;

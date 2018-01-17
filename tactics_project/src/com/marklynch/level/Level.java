@@ -2042,6 +2042,9 @@ public class Level {
 				if (actor.group != null)
 					actor.group.removeMember(actor);
 			}
+
+			if (Game.level.player.inventory.groundDisplay != null)
+				Game.level.player.inventory.groundDisplay.refreshGameObjects();
 		}
 
 	}

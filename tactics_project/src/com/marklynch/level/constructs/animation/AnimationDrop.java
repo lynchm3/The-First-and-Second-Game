@@ -132,6 +132,9 @@ public class AnimationDrop extends Animation {
 		} else {
 			Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(projectileObject, targetSquare));
 		}
+
+		if (Game.level.player.inventory.groundDisplay != null)
+			Game.level.player.inventory.groundDisplay.refreshGameObjects();
 	}
 
 	@Override

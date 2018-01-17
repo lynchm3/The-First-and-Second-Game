@@ -71,6 +71,9 @@ public class AnimationPickup extends Animation {
 				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
 			completed = true;
 
+			if (Game.level.player.inventory.groundDisplay != null)
+				Game.level.player.inventory.groundDisplay.refreshGameObjects();
+
 		} else {
 			x += distanceX;
 			y += distanceY;
