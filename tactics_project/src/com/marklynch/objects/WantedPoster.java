@@ -1,6 +1,7 @@
 package com.marklynch.objects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
@@ -105,19 +106,30 @@ public class WantedPoster extends Sign implements CrimeListener {
 
 		reward = 0;
 		ArrayList<Crime.TYPE> uniqueCrimes = new ArrayList<Crime.TYPE>();
+		HashMap<Crime.TYPE, Integer> crimeTypeCounts = new HashMap<Crime.TYPE, Integer>();
 		for (Crime crime : crimes) {
 			if (!uniqueCrimes.contains(crime.type)) {
 				uniqueCrimes.add(crime.type);
+			}
+			if (crimeTypeCounts.containsKey(crime.type)) {
+				crimeTypeCounts.put(crime.type, crimeTypeCounts.get(crime.type) + 1);
+			} else {
+				crimeTypeCounts.put(crime.type, 1);
 			}
 			reward += crime.type.severity * 100;
 			crime.addCrimeListener(this);
 		}
 
 		String crimesString = "For ";
-		for (Crime.TYPE crimetype : uniqueCrimes) {
-			crimesString += crimetype.name;
-			if (crimetype != uniqueCrimes.get(uniqueCrimes.size() - 1))
+		for (Crime.TYPE crimeType : uniqueCrimes) {
+			crimesString += crimeTypeCounts.get(crimeType) + " counts of " + crimeType.name;
+			if (crimeType == uniqueCrimes.get(uniqueCrimes.size() - 1)) {
+
+			} else if (crimeType == uniqueCrimes.get(uniqueCrimes.size() - 2)) {
+				crimesString += " and ";
+			} else {
 				crimesString += ", ";
+			}
 		}
 
 		Object[] conversationText = { "WANTED!", TextUtils.NewLine.NEW_LINE, crimesString, TextUtils.NewLine.NEW_LINE,
