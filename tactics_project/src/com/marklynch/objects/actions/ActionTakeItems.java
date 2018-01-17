@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.level.constructs.animation.AnimationPickup;
+import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Openable;
@@ -72,10 +72,13 @@ public class ActionTakeItems extends VariableQtyAction {
 		if (amountToTake == 0)
 			return;
 
+		if (Game.level.openInventories.size() > 0) {
+		} else {
+			performer.animation = new AnimationTake(objects[0], performer.squareGameObjectIsOn);
+		}
+
 		for (int i = 0; i < amountToTake; i++) {
 			GameObject object = objects[i];
-
-			performer.animation = new AnimationPickup(object, performer.squareGameObjectIsOn);
 
 			if (targetSquare != null)
 				targetSquare.inventory.remove(object);

@@ -54,9 +54,6 @@ public class ActionDropItems extends VariableQtyAction {
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
-			// Game.level.player.inventory.animation = new
-			// AnimationMoveInInventories(objects[0].name, performer, this,
-			// originX, originY, targetX, targetY, objects[0], 0.5f, 0f, true);
 		} else {
 			performer.animation = new AnimationDrop(objects[0].name, performer, this, square, objects[0], 0.5f, 0f,
 					true);

@@ -5,7 +5,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextureUtils;
 
-public class AnimationPickup extends Animation {
+public class AnimationTake extends Animation {
 
 	float x, y; // originX, originY, targetX, targetY, speedX, speedY;
 	public float originX = 0;
@@ -20,7 +20,7 @@ public class AnimationPickup extends Animation {
 	public float speed = 1;
 	public boolean onTarget = true;
 
-	public AnimationPickup(GameObject gameObject, Square targetSquare) {
+	public AnimationTake(GameObject gameObject, Square targetSquare) {
 		super();
 
 		this.gameObject = gameObject;
