@@ -2,7 +2,6 @@ package com.marklynch.objects.actions;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
@@ -56,35 +55,7 @@ public abstract class Action {
 	// }
 
 	public static void notifyWitnessesOfCrime(Crime crime) {
-		int searchBoxX1 = crime.performer.squareGameObjectIsOn.xInGrid - 10;
-		if (searchBoxX1 < 0)
-			searchBoxX1 = 0;
-
-		int searchBoxX2 = crime.performer.squareGameObjectIsOn.xInGrid + 10;
-		if (searchBoxX2 > Game.level.width - 1)
-			searchBoxX2 = Game.level.width - 1;
-
-		int searchBoxY1 = crime.performer.squareGameObjectIsOn.yInGrid - 10;
-		if (searchBoxY1 < 0)
-			searchBoxY1 = 0;
-
-		int searchBoxY2 = crime.performer.squareGameObjectIsOn.yInGrid + 10;
-		if (searchBoxY2 > Game.level.height - 1)
-			searchBoxY2 = Game.level.height - 1;
-
-		for (int i = searchBoxX1; i <= searchBoxX2; i++) {
-			for (int j = searchBoxY1; j <= searchBoxY2; j++) {
-				Actor potentialWitness = (Actor) Game.level.squares[i][j].inventory.getGameObjectOfClass(Actor.class);
-				if (potentialWitness != null && potentialWitness != crime.performer) {
-					if (potentialWitness.canSeeGameObject(crime.performer)) {
-
-						potentialWitness.addWitnessedCrime(crime);
-					}
-				}
-			}
-		}
-		// public ArrayList<Actor> witnesses;
-		// public boolean resolved;
+		crime.notifyWitnessesOfCrime();
 
 	}
 

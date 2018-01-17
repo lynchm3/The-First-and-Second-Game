@@ -93,6 +93,14 @@ public class WantedPoster extends Sign implements CrimeListener {
 		}
 	}
 
+	@Override
+	public void update(int delta) {
+		super.update(delta);
+		for (Crime crime : crimes) {
+			crime.notifyWitnessesOfCrime();
+		}
+	}
+
 	public void crimesUpdated() {
 
 		if (crimes.size() == 0) {
@@ -139,12 +147,14 @@ public class WantedPoster extends Sign implements CrimeListener {
 
 	}
 
+	public void notifyWitnesses() {
+
+	}
+
 	@Override
 	public void crimwUpdate(Crime crime) {
-
 		if (crime.resolved) {
 			crimes.remove(crime);
 		}
-
 	}
 }

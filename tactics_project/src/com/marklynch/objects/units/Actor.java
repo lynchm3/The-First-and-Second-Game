@@ -154,7 +154,7 @@ public class Actor extends GameObject {
 	public int timePerStep = 100;
 	public int thisStepTime = timePerStep;
 
-	public ArrayList<Crime> crimesWitnessed = new ArrayList<Crime>();
+	public ArrayList<Crime> crimesWitnessedUnresolved = new ArrayList<Crime>();
 	public ArrayList<Actor> knownCriminals = new ArrayList<Actor>();
 	public Map<Actor, ArrayList<Crime>> mapActorToCrimesWitnessed = new HashMap<Actor, ArrayList<Crime>>();
 	public Map<Actor, Integer> accumulatedCrimeSeverityWitnessed = new HashMap<Actor, Integer>();
@@ -1194,7 +1194,7 @@ public class Actor extends GameObject {
 
 	public void manageWitnessedCrimes() {
 		ArrayList<Crime> crimesToRemove = new ArrayList<Crime>();
-		for (Crime crime : crimesWitnessed) {
+		for (Crime crime : crimesWitnessedUnresolved) {
 			if (crime.resolved)
 				crimesToRemove.add(crime);
 			else if (crime.performer.remainingHealth <= 0)
@@ -1212,7 +1212,7 @@ public class Actor extends GameObject {
 			return;
 		}
 
-		if (crimesWitnessed.contains(crime)) {
+		if (crimesWitnessedUnresolved.contains(crime)) {
 			return;
 		}
 
@@ -1224,7 +1224,7 @@ public class Actor extends GameObject {
 
 		Actor criminal = crime.performer;
 
-		crimesWitnessed.add(crime);
+		crimesWitnessedUnresolved.add(crime);
 
 		if (!knownCriminals.contains(criminal))
 			knownCriminals.add(criminal);
@@ -1260,13 +1260,13 @@ public class Actor extends GameObject {
 
 	public void removeWitnessedCrime(Crime crime) {
 
-		if (!crimesWitnessed.contains(crime)) {
+		if (!crimesWitnessedUnresolved.contains(crime)) {
 			return;
 		}
 
 		Actor criminal = crime.performer;
 
-		crimesWitnessed.remove(crime);
+		crimesWitnessedUnresolved.remove(crime);
 
 		mapActorToCrimesWitnessed.get(criminal).remove(crime);
 

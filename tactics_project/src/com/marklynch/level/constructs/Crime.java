@@ -2,6 +2,7 @@ package com.marklynch.level.constructs;
 
 import java.util.ArrayList;
 
+import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
@@ -66,6 +67,42 @@ public class Crime {
 
 	public void resolve() {
 
+	}
+
+	public void notifyWitnessesOfCrime() {
+
+		if (resolved)
+			return;
+		if (performer.remainingHealth <= 0)
+			return;
+
+		int searchBoxX1 = performer.squareGameObjectIsOn.xInGrid - 10;
+		if (searchBoxX1 < 0)
+			searchBoxX1 = 0;
+
+		int searchBoxX2 = performer.squareGameObjectIsOn.xInGrid + 10;
+		if (searchBoxX2 > Game.level.width - 1)
+			searchBoxX2 = Game.level.width - 1;
+
+		int searchBoxY1 = performer.squareGameObjectIsOn.yInGrid - 10;
+		if (searchBoxY1 < 0)
+			searchBoxY1 = 0;
+
+		int searchBoxY2 = performer.squareGameObjectIsOn.yInGrid + 10;
+		if (searchBoxY2 > Game.level.height - 1)
+			searchBoxY2 = Game.level.height - 1;
+
+		for (int i = searchBoxX1; i <= searchBoxX2; i++) {
+			for (int j = searchBoxY1; j <= searchBoxY2; j++) {
+				Actor potentialWitness = (Actor) Game.level.squares[i][j].inventory.getGameObjectOfClass(Actor.class);
+				if (potentialWitness != null && potentialWitness != performer
+						&& !performer.crimesWitnessedUnresolved.contains(this)) {
+					if (potentialWitness.canSeeGameObject(performer)) {
+						potentialWitness.addWitnessedCrime(this);
+					}
+				}
+			}
+		}
 	}
 
 }
