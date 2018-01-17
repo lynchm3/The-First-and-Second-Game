@@ -113,10 +113,10 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		return false;
 	}
 
-	public void smashWindows(Actor actor) {
+	public void smashWindows(GameObject smasher) {
 		for (GameObject gameObject : gameObjects) {
 			if (gameObject.remainingHealth > 0 && gameObject instanceof Window) {
-				new ActionSmash(actor, gameObject).perform();
+				new ActionSmash(smasher, gameObject).perform();
 
 			}
 		}

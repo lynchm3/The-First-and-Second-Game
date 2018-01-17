@@ -11,13 +11,16 @@ public class ActionSmash extends Action {
 	public static final String ACTION_NAME = "Smash";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
-	Actor performer;
+	GameObject performer;
 	GameObject target;
+	Actor actor;
 
 	// Default for hostiles
-	public ActionSmash(Actor attacker, GameObject target) {
+	public ActionSmash(GameObject attacker, GameObject target) {
 		super(ACTION_NAME, "action_smash.png");
 		this.performer = attacker;
+		if (performer instanceof Actor)
+			actor = (Actor) performer;
 		this.target = target;
 		if (!check()) {
 			enabled = false;
@@ -36,20 +39,24 @@ public class ActionSmash extends Action {
 		target.remainingHealth = 0;
 		target.checkIfDestroyed(performer, this);
 
-		performer.actionsPerformedThisTurn.add(this);
+		if (actor != null)
+			actor.actionsPerformedThisTurn.add(this);
+
 		if (sound != null)
 			sound.play();
 
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();
 
-		if (!legal) {
-			Crime crime = new Crime(this, this.performer, target.owner, Crime.TYPE.CRIME_VANDALISM);
-			this.performer.crimesPerformedThisTurn.add(crime);
-			this.performer.crimesPerformedInLifetime.add(crime);
-			notifyWitnessesOfCrime(crime);
-		} else {
-			trespassingCheck(this, performer, performer.squareGameObjectIsOn);
+		if (actor != null) {
+			if (!legal) {
+				Crime crime = new Crime(this, this.actor, target.owner, Crime.TYPE.CRIME_VANDALISM);
+				this.actor.crimesPerformedThisTurn.add(crime);
+				this.actor.crimesPerformedInLifetime.add(crime);
+				notifyWitnessesOfCrime(crime);
+			} else {
+				trespassingCheck(this, actor, actor.squareGameObjectIsOn);
+			}
 		}
 	}
 

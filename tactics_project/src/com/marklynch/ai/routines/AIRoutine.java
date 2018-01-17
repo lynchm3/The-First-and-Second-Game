@@ -36,7 +36,7 @@ import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTalk;
-import com.marklynch.objects.actions.ActionThrowSpecificItem;
+import com.marklynch.objects.actions.ActionThrowItem;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.units.Actor;
@@ -783,7 +783,7 @@ public abstract class AIRoutine {
 				} else {
 					actor.setMiniDialogue("MY ORES!", criminal);
 				}
-				new ActionThrowSpecificItem(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
+				new ActionThrowItem(actor, criminal, Templates.ROCK.makeCopy(null, null)).perform();
 				for (GameObject stolenItem : stolenItemsOnCriminal) {
 					if (criminal.inventory.contains(stolenItem)) {
 						new ActionDropItems(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();

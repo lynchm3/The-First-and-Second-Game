@@ -43,7 +43,7 @@ import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionTeleportSwap;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
-import com.marklynch.objects.actions.ActionThrowSpecificItem;
+import com.marklynch.objects.actions.ActionThrowItem;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
@@ -741,7 +741,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		// Throw equipped
 		if (this != Game.level.player.squareGameObjectIsOn && performer.equipped != null) {
-			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
+			actions.add(new ActionThrowItem(performer, this, performer.equipped));
 		}
 
 		// Throw from inventory

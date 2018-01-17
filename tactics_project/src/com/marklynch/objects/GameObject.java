@@ -70,7 +70,7 @@ import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTakeItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionTeleportOther;
 import com.marklynch.objects.actions.ActionThrowItemInInventory;
-import com.marklynch.objects.actions.ActionThrowSpecificItem;
+import com.marklynch.objects.actions.ActionThrowItem;
 import com.marklynch.objects.actions.ActionTrackMapMarker;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionUnlock;
@@ -892,7 +892,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn
 				&& performer.equipped != null) {
-			actions.add(new ActionThrowSpecificItem(performer, this, performer.equipped));
+			actions.add(new ActionThrowItem(performer, this, performer.equipped));
 		}
 
 		// Throw from inventory
@@ -1021,7 +1021,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_THROW) {
-			return new ActionThrowSpecificItem(performer, Inventory.target, this);
+			return new ActionThrowItem(performer, Inventory.target, this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_POUR) {
