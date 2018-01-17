@@ -29,7 +29,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 		WantedPoster wantedPoster = new WantedPoster();
 		super.setAttributesForCopy(wantedPoster, square, owner);
 		wantedPoster.crimes = crimes;
-		wantedPoster.generateText();
+		wantedPoster.crimesUpdated();
 		return wantedPoster;
 	}
 
@@ -37,7 +37,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 		this.crimes = crimes;
 		this.criminal = criminal;
 		this.accumulatedSAeverity = accumulatedSeverity;
-		generateText();
+		crimesUpdated();
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 		}
 	}
 
-	public void generateText() {
+	public void crimesUpdated() {
 
 		if (crimes.size() == 0) {
 
@@ -104,14 +104,20 @@ public class WantedPoster extends Sign implements CrimeListener {
 		}
 
 		reward = 0;
-		String crimesString = "For ";
-
+		ArrayList<Crime.TYPE> uniqueCrimes = new ArrayList<Crime.TYPE>();
 		for (Crime crime : crimes) {
+			if (!uniqueCrimes.contains(crime.type)) {
+				uniqueCrimes.add(crime.type);
+			}
 			reward += crime.type.severity * 100;
-			crimesString += crime.type.name;
-			if (crime != crimes.get(crimes.size() - 1))
-				crimesString += ", ";
 			crime.addCrimeListener(this);
+		}
+
+		String crimesString = "For ";
+		for (Crime.TYPE crimetype : uniqueCrimes) {
+			crimesString += crimetype.name;
+			if (crimetype != uniqueCrimes.get(uniqueCrimes.size() - 1))
+				crimesString += ", ";
 		}
 
 		Object[] conversationText = { "WANTED!", TextUtils.NewLine.NEW_LINE, crimesString, TextUtils.NewLine.NEW_LINE,
