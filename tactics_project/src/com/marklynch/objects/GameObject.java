@@ -312,11 +312,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (squareGameObjectIsOn != null) {
 
 			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetX);// +
-														// animationMove.offsetX);
+					+ Game.SQUARE_WIDTH * drawOffsetX);
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetY);// +
-														// animationMove.offsetY);
+					+ Game.SQUARE_HEIGHT * drawOffsetY);
 
 			float alpha = 1.0f;
 
@@ -340,6 +338,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				Game.activeBatch.flush();
 			}
 		}
+
+		if (animation != null && animation.completed == false)
+			animation.draw();
 	}
 
 	private void drawHighlight() {

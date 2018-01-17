@@ -20,4 +20,9 @@ public class AnimationWait extends Animation {
 		}
 
 	}
+
+	@Override
+	public void draw() {
+
+	}
 }

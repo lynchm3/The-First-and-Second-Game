@@ -23,4 +23,9 @@ public class AnimationThrow extends Animation {
 			return;
 		}
 	}
+
+	@Override
+	public void draw() {
+
+	}
 }
