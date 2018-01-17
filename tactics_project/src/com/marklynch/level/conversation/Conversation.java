@@ -2,6 +2,7 @@ package com.marklynch.level.conversation;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.QuadUtils;
 
 import mdesl.graphics.Color;
@@ -21,33 +22,23 @@ public class Conversation {
 	public ConversationPart currentConversationPart;
 	public GameObject originalConversationTarget;
 
-	public Conversation(ConversationPart openingConversationPart, GameObject originalCOnversationTarget) {
-		super();
-		// this.conversationParts = new ArrayList<ConversationPart>();
+	public boolean enableTrade = true;
+	public boolean enableEsc = true;
 
-		// float height = 100;
-		// float bottomMargin = 300;
-		// float topMargin = 25;
-		// float width = 100;
-		// float halfTextWidth = Game.font.getWidth("End") / 2;
-		// float x1 = Game.halfWindowWidth - halfTextWidth;
-		// float y1 = Game.windowHeight - bottomMargin - height - topMargin;
+	public Conversation(ConversationPart openingConversationPart, GameObject originalConversationTarget) {
+		super();
+
+		if (originalConversationTarget instanceof Actor) {
+			Actor actor = (Actor) originalConversationTarget;
+			if (actor.knownCriminals.contains(Game.level.player)) {
+				enableTrade = false;
+			}
+		} else {
+			enableTrade = false;
+		}
 
 		this.openingConversationPart = this.currentConversationPart = openingConversationPart;
-		this.originalConversationTarget = originalCOnversationTarget;
-
-		// ConversationResponse end = new ConversationResponse("End", null);
-		// ConversationResponse[] conversationResponses2 = { end };
-		// ConversationPart conversationPart2 = new ConversationPart("What are
-		// you doing here?", conversationResponses2,
-		// talker);
-		//
-		// ConversationResponse next = new ConversationResponse("Next",
-		// conversationPart2);
-		// ConversationResponse[] conversationResponses1 = { next, end };
-		//
-		// currentConversationPart = new ConversationPart("Hello, How are you?",
-		// conversationResponses1, talker);
+		this.originalConversationTarget = originalConversationTarget;
 	}
 
 	public void drawStaticUI() {

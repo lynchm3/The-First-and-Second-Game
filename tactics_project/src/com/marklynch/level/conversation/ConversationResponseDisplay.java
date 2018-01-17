@@ -7,6 +7,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionInitiateTrade;
+import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -98,11 +99,20 @@ public class ConversationResponseDisplay {
 		buttonTrade.clickListener = new ClickListener() {
 			@Override
 			public void click() {
-				new ActionInitiateTrade(Game.level.player, Game.level.conversation.originalConversationTarget)
-						.perform();
+				if (Game.level.conversation.enableTrade) {
+					new ActionInitiateTrade(Game.level.player,
+							(Actor) Game.level.conversation.originalConversationTarget).perform();
+				}
 			}
 		};
 		buttons.add(buttonTrade);
+		if (Game.level.conversation != null) {
+			if (Game.level.conversation.enableTrade) {
+				buttonTrade.enabled = true;
+			} else {
+				buttonTrade.enabled = false;
+			}
+		}
 
 		buttonLeave = new LevelButton(leaveButtonWidth + 30, buttonHeight + 10, leaveButtonWidth, buttonHeight, null,
 				null, stringLeave, false, false, Color.WHITE, Color.BLACK, null);
@@ -114,6 +124,13 @@ public class ConversationResponseDisplay {
 			}
 		};
 		buttons.add(buttonLeave);
+		if (Game.level.conversation != null) {
+			if (Game.level.conversation.enableEsc) {
+				buttonLeave.enabled = true;
+			} else {
+				buttonLeave.enabled = false;
+			}
+		}
 
 		highlightedButton = buttons.get(highlightedButtonIndex);
 		highlightedButton.highlight();

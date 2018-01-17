@@ -862,7 +862,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Trade
 		if (!decorative && this.canContainOtherObjects && this instanceof Actor && !(this instanceof NonHuman)) {
-			actions.add(new ActionInitiateTrade(performer, this));
+			actions.add(new ActionInitiateTrade(performer, (Actor) this));
 		}
 
 		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn

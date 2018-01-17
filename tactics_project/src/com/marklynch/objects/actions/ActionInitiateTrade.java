@@ -6,7 +6,6 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.inventory.Inventory;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 
 public class ActionInitiateTrade extends Action {
@@ -15,12 +14,12 @@ public class ActionInitiateTrade extends Action {
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
-	GameObject target;
+	Actor target;
 
-	public ActionInitiateTrade(Actor performer, GameObject gameObject) {
+	public ActionInitiateTrade(Actor performer, Actor target) {
 		super(ACTION_NAME, "action_select_object.png");
 		this.performer = performer;
-		this.target = gameObject;
+		this.target = target;
 		if (!check()) {
 			enabled = false;
 		}
@@ -93,6 +92,10 @@ public class ActionInitiateTrade extends Action {
 		// actionName = ACTION_NAME + " (can't reach)";
 		// return false;
 		// }
+		if (target.knownCriminals.contains(performer)) {
+			actionName = ACTION_NAME + " (distrust)";
+			return false;
+		}
 
 		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME + " (can't reach)";
