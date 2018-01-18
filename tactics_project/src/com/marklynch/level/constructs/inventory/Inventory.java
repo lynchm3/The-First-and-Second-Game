@@ -772,6 +772,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public HashMap<Integer, ArrayList<GameObject>> itemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
 	public HashMap<Integer, ArrayList<GameObject>> illegalItemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
+
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("[SPACE] LOOT ALL", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("[SPACE] STEAL ALL", Color.RED) };
 
@@ -848,7 +849,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		illegalItemTypeStacks.clear();
 		for (GameObject gameObject : gameObjects) {
 			// Legal items
-			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+			if (gameObject.owner == null || gameObject.owner == parent) {
 				if (itemTypeStacks.containsKey(gameObject.templateId)) {
 					itemTypeStacks.get(gameObject.templateId).add(gameObject);
 				} else {
