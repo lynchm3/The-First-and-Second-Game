@@ -38,6 +38,7 @@ import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTalk;
 import com.marklynch.objects.actions.ActionThrowItem;
+import com.marklynch.objects.actions.ActionWrite;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.units.Actor;
@@ -1271,9 +1272,9 @@ public abstract class AIRoutine {
 					actor.mapActorToCrimesWitnessed.get(actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity),
 					actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity,
 					actor.highestAccumulatedUnresolvedCrimeSeverity);
+			new ActionWrite(actor, wantedPoster, wantedPoster.generateText()).perform();
 			return true;
 		} else {
-
 			return AIRoutineUtils.moveTowardsSquareToBeAdjacent(wantedPoster.squareGameObjectIsOn);
 		}
 

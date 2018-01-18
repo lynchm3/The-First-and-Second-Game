@@ -30,7 +30,8 @@ public class WantedPoster extends Sign implements CrimeListener {
 		WantedPoster wantedPoster = new WantedPoster();
 		super.setAttributesForCopy(wantedPoster, square, owner);
 		wantedPoster.crimes = crimes;
-		wantedPoster.crimesUpdated();
+		conversation = createConversation(wantedPoster.generateText());
+		;
 		return wantedPoster;
 	}
 
@@ -38,7 +39,6 @@ public class WantedPoster extends Sign implements CrimeListener {
 		this.crimes = crimes;
 		this.criminal = criminal;
 		this.accumulatedSAeverity = accumulatedSeverity;
-		crimesUpdated();
 	}
 
 	@Override
@@ -101,14 +101,12 @@ public class WantedPoster extends Sign implements CrimeListener {
 		}
 	}
 
-	public void crimesUpdated() {
+	public Object[] generateText() {
 
 		if (crimes.size() == 0) {
 
 			Object[] conversationText = { "For official use only" };
-
-			conversation = createConversation(conversationText);
-			return;
+			return conversationText;
 
 		}
 
@@ -143,7 +141,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 		Object[] conversationText = { "WANTED!", TextUtils.NewLine.NEW_LINE, crimesString, TextUtils.NewLine.NEW_LINE,
 				Templates.GOLD.imageTexture, "Reward " + reward };
 
-		conversation = createConversation(conversationText);
+		return conversationText;
 
 	}
 

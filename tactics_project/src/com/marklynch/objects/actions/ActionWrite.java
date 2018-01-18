@@ -11,7 +11,7 @@ import com.marklynch.ui.ActivityLog;
 
 public class ActionWrite extends Action {
 
-	public static final String ACTION_NAME = "Pick Up";
+	public static final String ACTION_NAME = "Write";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
 
 	Actor performer;
