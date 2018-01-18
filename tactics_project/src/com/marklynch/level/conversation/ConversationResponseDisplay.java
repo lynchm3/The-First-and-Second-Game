@@ -17,10 +17,11 @@ import mdesl.graphics.Color;
 public class ConversationResponseDisplay {
 
 	public Vector<LevelButton> buttons = new Vector<LevelButton>();
-	public LevelButton buttonTrade;
+	public static Vector<LevelButton> standardButtons = new Vector<LevelButton>();
+	public static LevelButton buttonTrade;
 	public final static String stringTrade = "TRADE [A]";
 	final static float tradeButtonWidth = Game.font.getWidth(stringTrade);
-	public LevelButton buttonLeave;
+	public static LevelButton buttonLeave;
 	public final static String stringLeave = "LEAVE [ESC}";
 	final static float leaveButtonWidth = Game.font.getWidth(stringLeave);
 	// conversationReponseEnd = new ConversationResponse("Leave", null);
@@ -49,11 +50,11 @@ public class ConversationResponseDisplay {
 			conversationResponses[i].text = (i + 1) + ". " + conversationResponses[i].text;
 		}
 		this.talker = talker;
-		updateObjectsButtons();
+		updateButtons();
 
 	}
 
-	public void updateObjectsButtons() {
+	public void updateButtons() {
 
 		totalWidth = 0;
 		for (int i = 0; i < conversationResponses.length; i++) {
@@ -66,6 +67,8 @@ public class ConversationResponseDisplay {
 		float widthSoFar = 0;
 
 		buttons.clear();
+		buttonTrade = null;
+		buttonLeave = null;
 
 		float buttonHeight = 30;
 
@@ -93,47 +96,52 @@ public class ConversationResponseDisplay {
 			widthSoFar += buttonWidth + marginBetweenButtons;
 
 		}
+		// if (Game.level.conversation != null) {
+		// if (Game.level.conversation.enableEsc) {
+		// buttonLeave.enabled = true;
+		// } else {
+		// buttonLeave.enabled = false;
+		// }
+		// }
 
-		buttonTrade = new LevelButton(leaveButtonWidth + 30 + tradeButtonWidth + 30, buttonHeight + 10,
-				tradeButtonWidth, buttonHeight, null, null, stringTrade, false, false, Color.WHITE, Color.BLACK, null);
-		buttonTrade.clickListener = new ClickListener() {
-			@Override
-			public void click() {
-				if (Game.level.conversation.enableTrade) {
+		// if()
+		// highlightedButton = buttons.get(highlightedButtonIndex);
+		// highlightedButton.highlight();
+
+	}
+
+	public static void updateStandardButtons() {
+
+		standardButtons.clear();
+		buttonTrade = null;
+		buttonLeave = null;
+		float buttonHeight = 30;
+		if (Game.level.conversation != null && Game.level.conversation.enableTrade) {
+			buttonTrade = new LevelButton(leaveButtonWidth + 30 + tradeButtonWidth + 30, buttonHeight + 10,
+					tradeButtonWidth, buttonHeight, null, null, stringTrade, false, false, Color.WHITE, Color.BLACK,
+					null);
+			buttonTrade.clickListener = new ClickListener() {
+				@Override
+				public void click() {
 					new ActionInitiateTrade(Game.level.player,
 							(Actor) Game.level.conversation.originalConversationTarget).perform();
 				}
-			}
-		};
-		buttons.add(buttonTrade);
-		if (Game.level.conversation != null) {
-			if (Game.level.conversation.enableTrade) {
-				buttonTrade.enabled = true;
-			} else {
-				buttonTrade.enabled = false;
-			}
+			};
+			standardButtons.add(buttonTrade);
 		}
 
-		buttonLeave = new LevelButton(leaveButtonWidth + 30, buttonHeight + 10, leaveButtonWidth, buttonHeight, null,
-				null, stringLeave, false, false, Color.WHITE, Color.BLACK, null);
-		buttonLeave.clickListener = new ClickListener() {
-			@Override
-			public void click() {
-				leave();
-				Game.level.conversation = null;
-			}
-		};
-		buttons.add(buttonLeave);
-		if (Game.level.conversation != null) {
-			if (Game.level.conversation.enableEsc) {
-				buttonLeave.enabled = true;
-			} else {
-				buttonLeave.enabled = false;
-			}
+		if (Game.level.conversation != null && Game.level.conversation.enableEsc) {
+			buttonLeave = new LevelButton(leaveButtonWidth + 30, buttonHeight + 10, leaveButtonWidth, buttonHeight,
+					null, null, stringLeave, false, false, Color.WHITE, Color.BLACK, null);
+			buttonLeave.clickListener = new ClickListener() {
+				@Override
+				public void click() {
+					leave();
+					Game.level.conversation = null;
+				}
+			};
+			standardButtons.add(buttonLeave);
 		}
-
-		highlightedButton = buttons.get(highlightedButtonIndex);
-		highlightedButton.highlight();
 
 	}
 
@@ -141,14 +149,18 @@ public class ConversationResponseDisplay {
 		for (LevelButton button : buttons) {
 			button.draw();
 		}
+		for (LevelButton button : standardButtons) {
+			button.draw();
+		}
 	}
 
 	public void resize() {
-		updateObjectsButtons();
+		updateButtons();
+		updateStandardButtons();
 	}
 
-	public void leave() {
-		conversationPart.leave();
+	public static void leave() {
+		Game.level.conversation.currentConversationPart.leave();
 	}
 
 	public void selectDialogueOption(char character) {

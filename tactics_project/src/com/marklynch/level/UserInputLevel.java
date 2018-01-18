@@ -839,7 +839,8 @@ public class UserInputLevel {
 		} else if (Game.level.openInventories.size() != 0) {
 			Game.level.player.inventory.escapeTyped();
 			return;
-		} else if (Game.level.conversation != null) {
+		} else if (Game.level.conversation != null
+				&& Game.level.conversation.currentConversationPart.windowSelectConversationResponse.buttonLeave != null) {
 			Game.level.conversation.currentConversationPart.windowSelectConversationResponse.buttonLeave.click();
 			return;
 		}
@@ -948,7 +949,8 @@ public class UserInputLevel {
 			if (Level.journal.showing) {
 
 			} else if (Game.level.openInventories.size() > 0) {
-			} else if (Game.level.conversation != null) {
+			} else if (Game.level.conversation != null
+					&& Game.level.conversation.currentConversationPart.windowSelectConversationResponse.buttonTrade != null) {
 				Game.level.conversation.currentConversationPart.windowSelectConversationResponse.buttonTrade.click();
 			} else {
 				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {

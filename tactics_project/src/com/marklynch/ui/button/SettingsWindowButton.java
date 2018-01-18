@@ -2,7 +2,6 @@ package com.marklynch.ui.button;
 
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 
@@ -50,19 +49,6 @@ public abstract class SettingsWindowButton extends Button {
 
 			QuadUtils.drawQuad(Color.RED, x, y, x + width, y + height);
 			TextUtils.printTextWithImages(x, y, 200, false, null, new Object[] { text });
-		}
-
-	}
-
-	@Override
-	public void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
-
-		if (enabled) {
-			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, x, y, x + width, y + height, boundsX1, boundsX2,
-					boundsY1, boundsY2);
-		} else {
-			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, x, y, x + width, y + height, boundsX1, boundsX2,
-					boundsY1, boundsY2);
 		}
 
 	}

@@ -68,8 +68,4 @@ public class PopupButton extends Button {
 		return false;
 	}
 
-	@Override
-	public void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
-	}
-
 }

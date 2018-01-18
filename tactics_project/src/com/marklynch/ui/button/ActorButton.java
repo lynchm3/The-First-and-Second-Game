@@ -19,16 +19,4 @@ public abstract class ActorButton extends Button {
 
 	}
 
-	@Override
-	public void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
-
-		if (enabled)
-			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, x, y, x + width, y + height, boundsX1, boundsX2,
-					boundsY1, boundsY2);
-		else
-			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, x, y, x + width, y + height, boundsX1, boundsX2,
-					boundsY1, boundsY2);
-
-	}
-
 }

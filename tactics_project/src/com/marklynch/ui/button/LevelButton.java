@@ -4,7 +4,6 @@ import com.marklynch.Game;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
 
@@ -53,16 +52,20 @@ public class LevelButton extends Button {
 
 		if (enabled) {
 			if (down) {
-				QuadUtils.drawQuad(Color.DARK_GRAY, realX, realY, realX + width, realY + height);
-				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, this.textParts);
+				// QuadUtils.drawQuad(Color.DARK_GRAY, realX, realY, realX +
+				// width, realY + height);
+				// TextUtils.printTextWithImages(realX, realY,
+				// Integer.MAX_VALUE, true, null, this.textParts);
 			} else {
 				QuadUtils.drawQuad(buttonColor, realX, realY, realX + width, realY + height);
 				TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, this.textParts);
 			}
 		} else {
 
-			QuadUtils.drawQuad(Color.RED, realX, realY, realX + width, realY + height);
-			TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE, true, null, this.textParts);
+			// QuadUtils.drawQuad(Color.RED, realX, realY, realX + width, realY
+			// + height);
+			// TextUtils.printTextWithImages(realX, realY, Integer.MAX_VALUE,
+			// true, null, this.textParts);
 		}
 
 	}
@@ -71,27 +74,6 @@ public class LevelButton extends Button {
 	public void drawTooltip() {
 		if (tooltip != null)
 			tooltip.drawStaticUI();
-	}
-
-	@Override
-	public void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
-
-		float realX = x;
-		float realY = y;
-		if (this.xFromLeft == false)
-			realX = Game.windowWidth - x;
-
-		if (this.yFromTop == false)
-			realY = Game.windowHeight - y;
-
-		if (enabled) {
-			TextureUtils.drawTextureWithinBounds(enabledTexture, 1.0f, realX, realY, realX + width, realY + height,
-					boundsX1, boundsX2, boundsY1, boundsY2);
-		} else {
-			TextureUtils.drawTextureWithinBounds(disabledTexture, 1.0f, realX, realY, realX + width, realY + height,
-					boundsX1, boundsX2, boundsY1, boundsY2);
-		}
-
 	}
 
 	@Override

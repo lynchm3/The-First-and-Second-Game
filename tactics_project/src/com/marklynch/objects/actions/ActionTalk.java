@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.conversation.Conversation;
+import com.marklynch.level.conversation.ConversationResponseDisplay;
 import com.marklynch.objects.units.Actor;
 
 public class ActionTalk extends Action {
@@ -45,6 +46,7 @@ public class ActionTalk extends Action {
 		if (conversation != null) {
 			conversation.currentConversationPart = conversation.openingConversationPart;
 			Game.level.conversation = conversation;
+			ConversationResponseDisplay.updateStandardButtons();
 
 		}
 

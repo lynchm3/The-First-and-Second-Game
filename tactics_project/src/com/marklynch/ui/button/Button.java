@@ -45,8 +45,6 @@ public abstract class Button {
 
 	public abstract void draw();
 
-	public abstract void drawWithinBounds(float boundsX1, float boundsX2, float boundsY1, float boundsY2);
-
 	public void highlight() {
 		highlighted = true;
 
