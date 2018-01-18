@@ -908,6 +908,10 @@ public class Actor extends GameObject {
 			quest = this.quest;
 		}
 
+		if (this.knownCriminals.contains(Game.level.player)) {
+			return null;
+		}
+
 		if (quest != null) {
 			Conversation questConversation = null;
 			questConversation = quest.getConversation(this);

@@ -37,6 +37,7 @@ public class ActionRead extends Action {
 		if (conversation != null) {
 			conversation.currentConversationPart = conversation.openingConversationPart;
 			Game.level.conversation = conversation;
+			Game.level.conversation.updateFlags();
 			ConversationResponseDisplay.updateStandardButtons();
 		}
 

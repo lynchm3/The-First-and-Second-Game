@@ -29,19 +29,24 @@ public class Conversation {
 	public Conversation(ConversationPart openingConversationPart, GameObject originalConversationTarget,
 			boolean enableEsc) {
 		super();
-
-		if (originalConversationTarget instanceof Human) {
-			Actor actor = (Actor) originalConversationTarget;
-			if (actor.knownCriminals.contains(Game.level.player)) {
-				enableTrade = false;
-			}
-		} else {
-			enableTrade = false;
-		}
+		updateFlags();
 		this.enableEsc = enableEsc;
 
 		this.openingConversationPart = this.currentConversationPart = openingConversationPart;
 		this.originalConversationTarget = originalConversationTarget;
+	}
+
+	public void updateFlags() {
+		if (originalConversationTarget instanceof Human) {
+			Actor actor = (Actor) originalConversationTarget;
+			if (actor.knownCriminals.contains(Game.level.player)) {
+				enableTrade = false;
+			} else {
+				enableTrade = true;
+			}
+		} else {
+			enableTrade = false;
+		}
 	}
 
 	public void drawStaticUI() {
