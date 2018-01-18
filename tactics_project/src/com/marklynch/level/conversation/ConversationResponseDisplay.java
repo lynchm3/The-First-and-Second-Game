@@ -8,6 +8,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionInitiateTrade;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Human;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
@@ -117,8 +118,9 @@ public class ConversationResponseDisplay {
 		buttonLeave = null;
 		float buttonHeight = 30;
 
-		if (Game.level.conversation != null) {
+		if (Game.level.conversation != null && Game.level.conversation.originalConversationTarget instanceof Human) {
 			String tooltipText;
+
 			if (Game.level.conversation.enableTrade) {
 				tooltipText = "Open trade";
 			} else {

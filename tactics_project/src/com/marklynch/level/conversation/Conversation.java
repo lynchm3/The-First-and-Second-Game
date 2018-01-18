@@ -3,6 +3,7 @@ package com.marklynch.level.conversation;
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Human;
 import com.marklynch.utils.QuadUtils;
 
 import mdesl.graphics.Color;
@@ -29,7 +30,7 @@ public class Conversation {
 			boolean enableEsc) {
 		super();
 
-		if (originalConversationTarget instanceof Actor) {
+		if (originalConversationTarget instanceof Human) {
 			Actor actor = (Actor) originalConversationTarget;
 			if (actor.knownCriminals.contains(Game.level.player)) {
 				enableTrade = false;
