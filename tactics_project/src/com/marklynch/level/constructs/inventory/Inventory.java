@@ -16,13 +16,7 @@ import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.VariableQtyAction;
-import com.marklynch.objects.tools.Axe;
-import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
-import com.marklynch.objects.tools.Knife;
-import com.marklynch.objects.tools.Lantern;
-import com.marklynch.objects.tools.Pickaxe;
-import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.NonHuman;
@@ -1672,7 +1666,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					continue;
 
 				if (gameObject instanceof Weapon) {
-					if (checkIfPlayersWeaponObsolete((Weapon) gameObject))
+					if (checkIfPlayersWeaponObsolete(gameObject))
 						continue;
 				}
 
@@ -1701,34 +1695,33 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 	}
 
-	public boolean checkIfPlayersWeaponObsolete(Weapon weapon) {
+	public boolean checkIfPlayersWeaponObsolete(GameObject weapon) {
 
-		for (Weapon weaponInInventory : Game.level.player.getWeaponsInInventory()) {
+		boolean seenSelf = false;
 
-			if (weapon == weaponInInventory)
+		for (GameObject otherWeapon : Game.level.player.inventory.getGameObjectsOfClass(weapon.getClass())) {
+
+			if (weapon == otherWeapon) {
+				seenSelf = true;
 				continue;
-
-			if (weapon instanceof Tool) {
-				if (weapon instanceof Axe && !(weaponInInventory instanceof Axe))
-					continue;
-				if (weapon instanceof Bell && !(weaponInInventory instanceof Bell))
-					continue;
-				if (weapon instanceof Knife && !(weaponInInventory instanceof Knife))
-					continue;
-				if (weapon instanceof Lantern && !(weaponInInventory instanceof Lantern))
-					continue;
-				if (weapon instanceof Pickaxe && !(weaponInInventory instanceof Pickaxe))
-					continue;
 			}
 
-			if (weaponInInventory.bluntDamage >= weapon.bluntDamage
-					&& weaponInInventory.slashDamage >= weapon.slashDamage
-					&& weaponInInventory.pierceDamage >= weapon.pierceDamage
-					&& weaponInInventory.waterDamage >= weapon.waterDamage
-					&& weaponInInventory.fireDamage >= weapon.fireDamage
-					&& weaponInInventory.electricalDamage >= weapon.electricalDamage
-					&& weaponInInventory.poisonDamage >= weapon.poisonDamage
-					&& weaponInInventory.maxRange >= weapon.maxRange && weaponInInventory.minRange <= weapon.minRange) {
+			if (weapon.templateId == otherWeapon.templateId) {
+				if (seenSelf) {
+					continue;
+				} else {
+					weapon.toSell = true;
+					itemsToSellCount++;
+					return true;
+				}
+			}
+
+			if (otherWeapon.bluntDamage >= weapon.bluntDamage && otherWeapon.slashDamage >= weapon.slashDamage
+					&& otherWeapon.pierceDamage >= weapon.pierceDamage && otherWeapon.waterDamage >= weapon.waterDamage
+					&& otherWeapon.fireDamage >= weapon.fireDamage
+					&& otherWeapon.electricalDamage >= weapon.electricalDamage
+					&& otherWeapon.poisonDamage >= weapon.poisonDamage && otherWeapon.maxRange >= weapon.maxRange
+					&& otherWeapon.minRange <= weapon.minRange) {
 				weapon.toSell = true;
 				itemsToSellCount++;
 				return true;
@@ -1747,24 +1740,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			if (armor == armorOFSameTypeInInventory)
 				continue;
-
-			// if (armor instanceof Tool) {
-			// if (armor instanceof Axe && !(armorOFSameTypeInInventory
-			// instanceof Axe))
-			// continue;
-			// if (armor instanceof Bell && !(armorOFSameTypeInInventory
-			// instanceof Bell))
-			// continue;
-			// if (armor instanceof Knife && !(armorOFSameTypeInInventory
-			// instanceof Knife))
-			// continue;
-			// if (armor instanceof Lantern && !(armorOFSameTypeInInventory
-			// instanceof Lantern))
-			// continue;
-			// if (armor instanceof Pickaxe && !(armorOFSameTypeInInventory
-			// instanceof Pickaxe))
-			// continue;
-			// }
 
 			if (armorOFSameTypeInInventory.fireResistance >= armor.fireResistance
 					&& armorOFSameTypeInInventory.waterResistance >= armor.waterResistance

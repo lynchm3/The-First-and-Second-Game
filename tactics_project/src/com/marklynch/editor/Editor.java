@@ -433,6 +433,7 @@ public class Editor {
 		playersHuntingBow.enhancement = new EnhancementFireDamage();
 		player.inventory.add(playersHuntingBow);
 		player.inventory.add(Templates.KATANA.makeCopy(null, player));
+		player.inventory.add(Templates.KATANA.makeCopy(null, player));
 		player.inventory.add(Templates.HATCHET.makeCopy(null, player));
 		player.inventory.add(Templates.HATCHET.makeCopy(null, player));
 		for (int i = 0; i < 25; i++) {
