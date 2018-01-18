@@ -10,7 +10,7 @@ import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
 
-public class AnimationSell extends Animation {
+public class AnimationGive extends Animation {
 
 	public GameObject giver;
 	public GameObject receiver;
@@ -20,13 +20,13 @@ public class AnimationSell extends Animation {
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
 
-	public AnimationSell(GameObject giver, GameObject receiver, GameObject projectileObject) {
+	public AnimationGive(GameObject giver, GameObject receiver, GameObject projectileObject) {
 
-		float speed = 0.1f;
+		float speed = 1f;
 
-		this.x = originX = (int) (receiver.squareGameObjectIsOn.xInGridPixels
+		this.x = originX = (int) (giver.squareGameObjectIsOn.xInGridPixels
 				+ (Game.SQUARE_WIDTH - projectileObject.width) / 2);
-		this.y = originY = (int) (receiver.squareGameObjectIsOn.yInGridPixels
+		this.y = originY = (int) (giver.squareGameObjectIsOn.yInGridPixels
 				+ (Game.SQUARE_HEIGHT - projectileObject.height) / 2);
 
 		targetX = (int) (receiver.squareGameObjectIsOn.xInGridPixels
