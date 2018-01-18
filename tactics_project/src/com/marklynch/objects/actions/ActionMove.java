@@ -13,6 +13,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
 
@@ -24,9 +25,9 @@ public class ActionMove extends Action {
 	Square target;
 	boolean endTurn;
 
-	public ActionMove(Actor mover, Square target, boolean endTurn) {
+	public ActionMove(Actor performer, Square target, boolean endTurn) {
 		super(ACTION_NAME, "action_move.png");
-		this.performer = mover;
+		this.performer = performer;
 		this.target = target;
 		this.endTurn = endTurn;
 		if (!check()) {
@@ -146,19 +147,14 @@ public class ActionMove extends Action {
 		if (performer.travelDistance - performer.distanceMovedThisTurn <= 0)
 			return false;
 
-		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))// PASSABLE
-																								// CAN
-																								// BE
-																								// CHANGED
-																								// TO
-																								// INCLUDE
-																								// FUCKING
-																								// IMPASSABLE
-																								// SHIT
+		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))
 			return false;
 
 		AIPath path = performer.getPathTo(target);
 		if (path == null)
+			return false;
+
+		if (performer.straightLineDistanceTo(target) > performer.travelDistance - performer.distanceMovedThisTurn)
 			return false;
 
 		if (path.travelCost > performer.travelDistance - performer.distanceMovedThisTurn)

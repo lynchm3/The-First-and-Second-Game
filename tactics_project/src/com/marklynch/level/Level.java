@@ -1560,13 +1560,10 @@ public class Level {
 							player.playerTargetSquare.inventory.getGameObjectThatCantShareSquare(), " there!" };
 					notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 					Game.level.logOnScreen(new ActivityLog(objects));
-					pausePlayer();
 				} else {
 					Object[] objects = new Object[] { "There's no available path" };
 					notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
 					Game.level.logOnScreen(new ActivityLog(objects));
-					pausePlayer();
-
 				}
 				pausePlayer();
 				return;
