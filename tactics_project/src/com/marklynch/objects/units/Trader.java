@@ -18,7 +18,7 @@ import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.weapons.Weapon;
 
-public class Trader extends Actor implements Comparator<GameObject> {
+public class Trader extends Human implements Comparator<GameObject> {
 
 	public StructureRoom room;
 	public Structure shop;
@@ -86,6 +86,7 @@ public class Trader extends Actor implements Comparator<GameObject> {
 		super.postLoad2();
 	}
 
+	@Override
 	public Trader makeCopy(String name, Square square, Faction faction, GameObject bed, int gold,
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
