@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationGive;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Trader;
@@ -48,6 +49,12 @@ public class ActionBuyItems extends VariableQtyAction {
 
 		if (amountToSell == 0)
 			return;
+
+		if (Game.level.openInventories.size() > 0) {
+		} else {
+			target.animation = new AnimationGive(target, performer, objects[0]);
+			performer.animation = new AnimationGive(performer, target, AnimationGive.gold);
+		}
 
 		for (int i = 0; i < amountToSell; i++) {
 

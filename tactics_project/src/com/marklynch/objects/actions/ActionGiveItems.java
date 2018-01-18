@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationGive;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
@@ -56,6 +57,11 @@ public class ActionGiveItems extends VariableQtyAction {
 
 		if (amountToGive == 0)
 			return;
+
+		if (Game.level.openInventories.size() > 0) {
+		} else {
+			performer.animation = new AnimationGive(performer, receiver, objects[0]);
+		}
 
 		if (receiver instanceof Openable) {
 			((Openable) receiver).open();
