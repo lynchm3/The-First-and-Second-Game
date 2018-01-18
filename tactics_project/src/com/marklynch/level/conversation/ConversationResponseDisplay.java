@@ -16,7 +16,7 @@ import mdesl.graphics.Color;
 
 public class ConversationResponseDisplay {
 
-	public Vector<LevelButton> buttons = new Vector<LevelButton>();
+	public Vector<LevelButton> responseButtons = new Vector<LevelButton>();
 	public static Vector<LevelButton> standardButtons = new Vector<LevelButton>();
 	public static LevelButton buttonTrade;
 	public final static String stringTrade = "TRADE [A]";
@@ -50,11 +50,11 @@ public class ConversationResponseDisplay {
 			conversationResponses[i].text = (i + 1) + ". " + conversationResponses[i].text;
 		}
 		this.talker = talker;
-		updateButtons();
+		updateResponseButtons();
 
 	}
 
-	public void updateButtons() {
+	public void updateResponseButtons() {
 
 		totalWidth = 0;
 		for (int i = 0; i < conversationResponses.length; i++) {
@@ -66,7 +66,7 @@ public class ConversationResponseDisplay {
 		float positionX = Game.halfWindowWidth - totalWidth / 2;
 		float widthSoFar = 0;
 
-		buttons.clear();
+		responseButtons.clear();
 		buttonTrade = null;
 		buttonLeave = null;
 
@@ -92,7 +92,7 @@ public class ConversationResponseDisplay {
 					conversationResponses[index].select();
 				}
 			};
-			buttons.add(responseButton);
+			responseButtons.add(responseButton);
 			widthSoFar += buttonWidth + marginBetweenButtons;
 
 		}
@@ -116,10 +116,18 @@ public class ConversationResponseDisplay {
 		buttonTrade = null;
 		buttonLeave = null;
 		float buttonHeight = 30;
-		if (Game.level.conversation != null && Game.level.conversation.enableTrade) {
+
+		if (Game.level.conversation != null) {
+			String tooltipText;
+			if (Game.level.conversation.enableTrade) {
+				tooltipText = "Open trade";
+			} else {
+				tooltipText = "Won't trade, recently witnessed you committing a crime";
+			}
+
 			buttonTrade = new LevelButton(leaveButtonWidth + 30 + tradeButtonWidth + 30, buttonHeight + 10,
 					tradeButtonWidth, buttonHeight, null, null, stringTrade, false, false, Color.WHITE, Color.BLACK,
-					null);
+					tooltipText);
 			buttonTrade.clickListener = new ClickListener() {
 				@Override
 				public void click() {
@@ -128,11 +136,19 @@ public class ConversationResponseDisplay {
 				}
 			};
 			standardButtons.add(buttonTrade);
+			buttonTrade.enabled = Game.level.conversation.enableTrade;
 		}
 
-		if (Game.level.conversation != null && Game.level.conversation.enableEsc) {
+		if (Game.level.conversation != null) {
+			String tooltipText;
+			if (Game.level.conversation.enableEsc) {
+				tooltipText = "Leave conversation";
+			} else {
+				tooltipText = "Response required";
+			}
+
 			buttonLeave = new LevelButton(leaveButtonWidth + 30, buttonHeight + 10, leaveButtonWidth, buttonHeight,
-					null, null, stringLeave, false, false, Color.WHITE, Color.BLACK, null);
+					null, null, stringLeave, false, false, Color.WHITE, Color.BLACK, tooltipText);
 			buttonLeave.clickListener = new ClickListener() {
 				@Override
 				public void click() {
@@ -141,12 +157,13 @@ public class ConversationResponseDisplay {
 				}
 			};
 			standardButtons.add(buttonLeave);
+			buttonTrade.enabled = Game.level.conversation.enableEsc;
 		}
 
 	}
 
 	public void draw() {
-		for (LevelButton button : buttons) {
+		for (LevelButton button : responseButtons) {
 			button.draw();
 		}
 		for (LevelButton button : standardButtons) {
@@ -155,7 +172,7 @@ public class ConversationResponseDisplay {
 	}
 
 	public void resize() {
-		updateButtons();
+		updateResponseButtons();
 		updateStandardButtons();
 	}
 

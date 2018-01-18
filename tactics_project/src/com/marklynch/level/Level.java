@@ -1784,7 +1784,7 @@ public class Level {
 		}
 
 		if (conversation != null) {
-			for (Button button : conversation.currentConversationPart.windowSelectConversationResponse.buttons) {
+			for (Button button : conversation.currentConversationPart.windowSelectConversationResponse.responseButtons) {
 				if (button.calculateIfPointInBoundsOfButton(mouseX, Game.windowHeight - mouseY))
 					return button;
 			}
