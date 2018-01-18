@@ -15,6 +15,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
 import com.marklynch.level.conversation.ConversationResponse;
+import com.marklynch.level.conversation.LeaveConversationListener;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Carcass;
@@ -928,8 +929,17 @@ public abstract class AIRoutine {
 
 		ConversationPart conversationPartJustice = new ConversationPart(demand,
 				new ConversationResponse[] { accept, refuse }, this.actor);
+		conversationPartJustice.leaveConversationListener = new LeaveConversationListener() {
 
-		return new Conversation(conversationPartJustice, actor, false);
+			@Override
+			public void leave() {
+				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+				actor.addAttackerForThisAndGroupMembers(criminal);
+			}
+
+		};
+
+		return new Conversation(conversationPartJustice, actor, true);
 
 	}
 
@@ -959,7 +969,17 @@ public abstract class AIRoutine {
 		ConversationPart conversationPartJustice = new ConversationPart(demand,
 				new ConversationResponse[] { accept, refuse }, this.actor);
 
-		return new Conversation(conversationPartJustice, actor, false);
+		conversationPartJustice.leaveConversationListener = new LeaveConversationListener() {
+
+			@Override
+			public void leave() {
+				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
+				actor.addAttackerForThisAndGroupMembers(criminal);
+			}
+
+		};
+
+		return new Conversation(conversationPartJustice, actor, true);
 
 	}
 
