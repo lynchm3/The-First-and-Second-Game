@@ -24,6 +24,7 @@ import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Trader;
 import com.marklynch.objects.weapons.Armor;
@@ -448,6 +449,15 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (inventoryMode == INVENTORY_MODE.MODE_TRADE || inventoryMode == INVENTORY_MODE.MODE_LOOT) {
 			otherInventory.isOpen = true;
 		}
+
+		updateItemCounts();
+		if (otherInventory != null) {
+			otherInventory.updateItemCounts();
+		}
+		// if(groundDisplay != null)
+		// {
+		// groundDisplay
+		// }
 	}
 
 	public void close() {
@@ -801,7 +811,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				continue;
 
 			// Legal items
-			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+			if (objectLegal(gameObject)) {
 
 				if (!itemIdsAlreadyDone.contains(gameObject.templateId)) {
 					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
@@ -843,13 +853,36 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		resize1();
 	}
 
+	public boolean objectLegal(GameObject gameObject) {
+		if (parent == Game.level.player) { // player
+			if (gameObject.owner != null && gameObject.owner != Game.level.player) {
+				return false;
+			} else {
+				return true;
+			}
+		} else if (parent instanceof Human) { // npc
+			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
+				return true;
+			} else {
+				return false;
+			}
+		} else { // a container or ground
+			if (gameObject.owner != null && gameObject.owner != Game.level.player) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+
 	public void updateItemCounts() {
 
 		itemTypeStacks.clear();
 		illegalItemTypeStacks.clear();
 		for (GameObject gameObject : gameObjects) {
 			// Legal items
-			if (gameObject.owner == null || gameObject.owner == parent) {
+
+			if (objectLegal(gameObject)) {
 				if (itemTypeStacks.containsKey(gameObject.templateId)) {
 					itemTypeStacks.get(gameObject.templateId).add(gameObject);
 				} else {
@@ -1140,7 +1173,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			boolean containsLegalStuff = false;
 			for (GameObject gameObject : groundDisplay.gameObjects) {
-				if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+				if (objectLegal(gameObject)) {
 					containsLegalStuff = true;
 					break;
 				}
@@ -1196,7 +1229,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			boolean containsLegalStuff = false;
 			for (GameObject gameObject : otherInventory.gameObjects) {
-				if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+				if (objectLegal(gameObject)) {
 					containsLegalStuff = true;
 					break;
 				}

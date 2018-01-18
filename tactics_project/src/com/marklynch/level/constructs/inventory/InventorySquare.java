@@ -69,12 +69,8 @@ public class InventorySquare extends Square {
 		Texture squareTexture = WHITE_SQUARE;
 
 		// Red border on sqr if illegal to take
-		if (gameObject != null && this.gameObject.owner != null && this.gameObject.owner != Game.level.player) {
-			if (inventoryThisBelongsTo == null || inventoryThisBelongsTo.parent == Game.level.player) {
-				squareTexture = RED_SQUARE;
-			} else if (Inventory.inventoryMode != INVENTORY_MODE.MODE_TRADE) {
-				squareTexture = RED_SQUARE;
-			}
+		if (!objectLegal(gameObject)) {
+			squareTexture = RED_SQUARE;
 		}
 
 		// Yellow border on sqr if item is equipped
@@ -108,7 +104,7 @@ public class InventorySquare extends Square {
 			}
 
 			// Count && value
-			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+			if (objectLegal(gameObject)) {
 				if (this instanceof GroundDisplaySquare)
 					stack = GroundDisplay.itemTypeStacks.get(gameObject.templateId);
 				else
@@ -176,6 +172,14 @@ public class InventorySquare extends Square {
 			gameObject.inventorySquare = this;
 		}
 
+	}
+
+	private boolean objectLegal(GameObject gameObject) {
+		if (this instanceof GroundDisplaySquare) {
+			return GroundDisplay.objectLegal(gameObject);
+		} else {
+			return this.inventoryThisBelongsTo.objectLegal(gameObject);
+		}
 	}
 
 	@Override

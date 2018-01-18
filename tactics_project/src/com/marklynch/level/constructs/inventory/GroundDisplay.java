@@ -47,6 +47,14 @@ public class GroundDisplay implements Draggable, Scrollable {
 		refreshGameObjects();
 	}
 
+	public static boolean objectLegal(GameObject gameObject) {
+		if (gameObject.owner != null && gameObject.owner != Game.level.player) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public void refreshGameObjects() {
 		this.gameObjects.clear();
 		for (Square square : squares) {
@@ -96,7 +104,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 				continue;
 
 			// Legal items
-			if (gameObject.owner == null || gameObject.owner == Game.level.player) {
+			if (objectLegal(gameObject)) {
 				if (itemTypeStacks.containsKey(gameObject.templateId)) {
 					itemTypeStacks.get(gameObject.templateId).add(gameObject);
 				} else {
