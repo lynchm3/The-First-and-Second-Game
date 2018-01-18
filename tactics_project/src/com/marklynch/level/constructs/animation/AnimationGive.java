@@ -6,6 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 import com.marklynch.Game;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Texture;
@@ -19,10 +20,11 @@ public class AnimationGive extends Animation {
 	Texture imageTexture;
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	GameObject projectileObject;
+	public static GameObject gold = Templates.GOLD.makeCopy(null, null);
 
 	public AnimationGive(GameObject giver, GameObject receiver, GameObject projectileObject) {
 
-		float speed = 1f;
+		float speed = 0.5f;
 
 		this.x = originX = (int) (giver.squareGameObjectIsOn.xInGridPixels
 				+ (Game.SQUARE_WIDTH - projectileObject.width) / 2);
