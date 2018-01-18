@@ -24,6 +24,7 @@ public class Sign extends Readable {
 
 		Sign readable = new Sign();
 		super.setAttributesForCopy(readable, square, owner);
+		readable.name = name;
 		readable.conversation = readable.createConversation(conversationText);
 		return readable;
 	}
