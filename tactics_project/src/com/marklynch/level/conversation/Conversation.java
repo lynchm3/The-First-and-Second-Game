@@ -25,7 +25,8 @@ public class Conversation {
 	public boolean enableTrade = true;
 	public boolean enableEsc = true;
 
-	public Conversation(ConversationPart openingConversationPart, GameObject originalConversationTarget) {
+	public Conversation(ConversationPart openingConversationPart, GameObject originalConversationTarget,
+			boolean enableEsc) {
 		super();
 
 		if (originalConversationTarget instanceof Actor) {
@@ -36,6 +37,7 @@ public class Conversation {
 		} else {
 			enableTrade = false;
 		}
+		this.enableEsc = enableEsc;
 
 		this.openingConversationPart = this.currentConversationPart = openingConversationPart;
 		this.originalConversationTarget = originalConversationTarget;
@@ -60,7 +62,7 @@ public class Conversation {
 		ConversationPart conversationPartYouWontGetOut = new ConversationPart(text, new ConversationResponse[] {},
 				gameObject);
 
-		return new Conversation(conversationPartYouWontGetOut, gameObject);
+		return new Conversation(conversationPartYouWontGetOut, gameObject, true);
 	}
 
 	public static Conversation createConversation(String text, GameObject gameObject) {

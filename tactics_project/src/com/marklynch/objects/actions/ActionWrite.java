@@ -38,7 +38,7 @@ public class ActionWrite extends Action {
 			return;
 
 		ConversationPart conversationPart = new ConversationPart(text, new ConversationResponse[] {}, null);
-		Conversation conversation = new Conversation(conversationPart, sign);
+		Conversation conversation = new Conversation(conversationPart, sign, true);
 		sign.setConversation(conversation);
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " wrote on ", sign }));

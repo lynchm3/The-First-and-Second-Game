@@ -877,7 +877,7 @@ public abstract class AIRoutine {
 
 		}
 
-		return new Conversation(conversationPartJustice, actor);
+		return new Conversation(conversationPartJustice, actor, true);
 
 	}
 
@@ -929,7 +929,7 @@ public abstract class AIRoutine {
 		ConversationPart conversationPartJustice = new ConversationPart(demand,
 				new ConversationResponse[] { accept, refuse }, this.actor);
 
-		return new Conversation(conversationPartJustice, actor);
+		return new Conversation(conversationPartJustice, actor, false);
 
 	}
 
@@ -959,7 +959,7 @@ public abstract class AIRoutine {
 		ConversationPart conversationPartJustice = new ConversationPart(demand,
 				new ConversationResponse[] { accept, refuse }, this.actor);
 
-		return new Conversation(conversationPartJustice, actor);
+		return new Conversation(conversationPartJustice, actor, false);
 
 	}
 
@@ -968,7 +968,7 @@ public abstract class AIRoutine {
 		ConversationPart conversationPartYouWontGetOut = new ConversationPart(new Object[] { "My Ores!" },
 				new ConversationResponse[] {}, actor);
 
-		return new Conversation(conversationPartYouWontGetOut, actor);
+		return new Conversation(conversationPartYouWontGetOut, actor, true);
 
 	}
 

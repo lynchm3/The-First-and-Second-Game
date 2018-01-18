@@ -157,7 +157,7 @@ public class ConversationResponseDisplay {
 				}
 			};
 			standardButtons.add(buttonLeave);
-			buttonTrade.enabled = Game.level.conversation.enableEsc;
+			buttonLeave.enabled = Game.level.conversation.enableEsc;
 		}
 
 	}

@@ -30,7 +30,7 @@ public class ConversationForFarmer extends Conversation {
 	Human farmer;
 
 	public ConversationForFarmer(final QuestThePigs questThePigs, Human farmer) {
-		super(null, farmer);
+		super(null, farmer, true);
 		this.questThePigs = questThePigs;
 		this.farmer = farmer;
 

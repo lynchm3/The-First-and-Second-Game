@@ -240,7 +240,7 @@ public class AIRoutineForMort extends AIRoutine {
 				new Object[] { "You won't get out of here alive [Mort rings his bell]" },
 				new ConversationResponse[] { conversationReponseDone }, mort);
 
-		return new Conversation(conversationPartYouWontGetOut, actor);
+		return new Conversation(conversationPartYouWontGetOut, actor, true);
 
 	}
 
