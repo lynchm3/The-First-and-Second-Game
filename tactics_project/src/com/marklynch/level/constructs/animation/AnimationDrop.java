@@ -41,14 +41,12 @@ public class AnimationDrop extends Animation {
 		}
 
 		if (shooter instanceof Actor) {
-			System.out.println("A");
 			Actor shooterActor = (Actor) shooter;
 			this.x = originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels
 					+ shooter.drawOffsetX * Game.SQUARE_WIDTH + shooterActor.handAnchorX - projectileObject.anchorX);
 			this.y = originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels
 					+ shooter.drawOffsetY * Game.SQUARE_HEIGHT + shooterActor.handAnchorY - projectileObject.anchorY);
 		} else {
-			System.out.println("B");
 			this.x = originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels
 					+ (Game.SQUARE_WIDTH - projectileObject.width) / 2);
 			this.y = originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels

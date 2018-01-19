@@ -58,7 +58,6 @@ public class ActionTeleport extends Action {
 			sound.play();
 
 		if (!legal) {
-			System.out.println("NOT LEGAL");
 
 			// GameObject gameObjectInTheWay = null;
 			if (gameObjectInTheWay != null) {

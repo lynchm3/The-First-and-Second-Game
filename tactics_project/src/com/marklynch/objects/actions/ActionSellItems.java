@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
@@ -57,6 +58,14 @@ public class ActionSellItems extends VariableQtyAction {
 		for (GameObject object : objects) {
 			if (object.owner == receiver) {
 				Crime crime = new Crime(this, this.performer, object.owner, Crime.TYPE.CRIME_THEFT, object);
+
+				for (Crime c : performer.crimesPerformedInLifetime) {
+					if (Arrays.asList(c.stolenItems).contains(object)) {
+						System.out.println("Found Crime!");
+						crime = c;
+					}
+				}
+
 				receiver.addWitnessedCrime(crime);
 				if (Game.level.openInventories.size() > 0)
 					Game.level.openCloseInventory();
@@ -64,7 +73,7 @@ public class ActionSellItems extends VariableQtyAction {
 				stolenObjects.add(object);
 				new ActionTalk(this.receiver, performer,
 						AIRoutine.createJusticeReclaimConversation(receiver, performer, stolenObjects)).perform();
-				crime.hasBeenToldToStop = true;
+				// crime.hasBeenToldToStop = true;
 				return;
 			}
 		}

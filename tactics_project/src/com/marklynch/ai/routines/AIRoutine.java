@@ -892,6 +892,10 @@ public abstract class AIRoutine {
 				super.select();
 				for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
 					new ActionGiveItems(criminal, accuser, true, stolenItemOnCriminal).perform();
+
+				}
+				for (Crime crime : criminal.crimesPerformedInLifetime) {
+					crime.resolved = true;
 				}
 			}
 		};
@@ -959,6 +963,9 @@ public abstract class AIRoutine {
 				super.select();
 				for (GameObject stolenItemOnCriminal : stolenItemsEquippedByCriminal) {
 					new ActionDropItems(criminal, criminal.squareGameObjectIsOn, stolenItemOnCriminal).perform();
+				}
+				for (Crime crime : criminal.crimesPerformedInLifetime) {
+					crime.resolved = true;
 				}
 			}
 		};
