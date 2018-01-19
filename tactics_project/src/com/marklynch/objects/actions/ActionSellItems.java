@@ -64,6 +64,7 @@ public class ActionSellItems extends VariableQtyAction {
 				stolenObjects.add(object);
 				new ActionTalk(this.receiver, performer,
 						AIRoutine.createJusticeReclaimConversation(receiver, performer, stolenObjects)).perform();
+				crime.hasBeenToldToStop = true;
 				return;
 			}
 		}

@@ -944,7 +944,9 @@ public abstract class AIRoutine {
 			}
 
 		};
-
+		for (Crime crime : criminal.crimesPerformedInLifetime) {
+			crime.hasBeenToldToStop = true;
+		}
 		return new Conversation(conversationPartJustice, accuser, true);
 
 	}
@@ -984,6 +986,10 @@ public abstract class AIRoutine {
 			}
 
 		};
+
+		for (Crime crime : criminal.crimesPerformedInLifetime) {
+			crime.hasBeenToldToStop = true;
+		}
 
 		return new Conversation(conversationPartJustice, actor, true);
 
