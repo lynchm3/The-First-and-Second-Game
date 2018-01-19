@@ -799,7 +799,7 @@ public abstract class AIRoutine {
 				return true;
 				// Stolen items in criminal inventory
 			} else if (stolenItemsOnCriminal.size() > 0) {
-				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
+				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) <= 2) {
 					if (criminal == Game.level.player) {
 						new ActionTalk(this.actor, criminal,
 								createJusticeReclaimConversation(this.actor, criminal, stolenItemsOnCriminal))
@@ -1261,18 +1261,22 @@ public abstract class AIRoutine {
 		if (actor.inventory.itemsToSellCount <= 0)
 			return false;
 
-		target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false, false, false, 0,
-				Trader.class);
+		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false,
+				false, false, 0, Trader.class);
 		if (target == null) {
 			return false;
 		}
+
+		if (target.knownCriminals.contains(actor)) {
+			return false;
+		}
+
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 
-		boolean soldItems = actor.sellItemsMarkedToSell((Actor) target);
-		if (!soldItems)
+		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2)
 			return AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
 		else
-			return true;
+			return actor.sellItemsMarkedToSell(target);
 	}
 
 	public boolean updateWantedPosterRoutine(WantedPoster wantedPoster) {

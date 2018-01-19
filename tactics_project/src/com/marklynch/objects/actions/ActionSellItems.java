@@ -134,6 +134,8 @@ public class ActionSellItems extends VariableQtyAction {
 	public boolean check() {
 		if (!(receiver instanceof Trader) && receiver.getCarriedGoldValue() < objects[0].value)
 			return false;
+		if (receiver.knownCriminals.contains(performer))
+			return false;
 		if (!performer.canSeeSquare(receiver.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME + " (can't reach)";
 			return false;
