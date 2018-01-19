@@ -225,7 +225,7 @@ public class Player extends Human {
 
 			// Count && value
 
-			Integer count = inventory.itemTypeStacks.get(equipped.templateId).size();
+			Integer count = inventory.legalStacks.get(equipped.templateId).size();
 			if (count == null)
 				count = 1;
 

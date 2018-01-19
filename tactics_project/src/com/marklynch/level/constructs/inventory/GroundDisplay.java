@@ -83,13 +83,13 @@ public class GroundDisplay implements Draggable, Scrollable {
 		matchGameObjectsToSquares();
 	}
 
-	public static HashMap<Integer, ArrayList<GameObject>> itemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
-	public static HashMap<Integer, ArrayList<GameObject>> illegalItemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
+	public static HashMap<Integer, ArrayList<GameObject>> legalStacks = new HashMap<Integer, ArrayList<GameObject>>();
+	public static HashMap<Integer, ArrayList<GameObject>> illegalStacks = new HashMap<Integer, ArrayList<GameObject>>();
 
 	public void matchGameObjectsToSquares() {
 
-		itemTypeStacks.clear();
-		illegalItemTypeStacks.clear();
+		legalStacks.clear();
+		illegalStacks.clear();
 		groundDisplaySquares.clear();
 
 		int xIndex = 0;
@@ -105,15 +105,15 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 			// Legal items
 			if (objectLegal(gameObject)) {
-				if (itemTypeStacks.containsKey(gameObject.templateId)) {
-					itemTypeStacks.get(gameObject.templateId).add(gameObject);
+				if (legalStacks.containsKey(gameObject.templateId)) {
+					legalStacks.get(gameObject.templateId).add(gameObject);
 				} else {
 					GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
 					inventorySquare.gameObject = gameObject;
 					groundDisplaySquares.add(inventorySquare);
 					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
 					newStack.add(gameObject);
-					itemTypeStacks.put(gameObject.templateId, newStack);
+					legalStacks.put(gameObject.templateId, newStack);
 					xIndex++;
 					if (xIndex == this.squareGridWidthInSquares) {
 						xIndex = 0;
@@ -122,15 +122,15 @@ public class GroundDisplay implements Draggable, Scrollable {
 				}
 
 			} else {// Illegal items
-				if (illegalItemTypeStacks.containsKey(gameObject.templateId)) {
-					illegalItemTypeStacks.get(gameObject.templateId).add(gameObject);
+				if (illegalStacks.containsKey(gameObject.templateId)) {
+					illegalStacks.get(gameObject.templateId).add(gameObject);
 				} else {
 					GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
 					inventorySquare.gameObject = gameObject;
 					groundDisplaySquares.add(inventorySquare);
 					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
 					newStack.add(gameObject);
-					illegalItemTypeStacks.put(gameObject.templateId, newStack);
+					illegalStacks.put(gameObject.templateId, newStack);
 					xIndex++;
 					if (xIndex == this.squareGridWidthInSquares) {
 						xIndex = 0;

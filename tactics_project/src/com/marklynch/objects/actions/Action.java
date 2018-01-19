@@ -56,7 +56,6 @@ public abstract class Action {
 
 	public static void notifyWitnessesOfCrime(Crime crime) {
 		crime.notifyWitnessesOfCrime();
-
 	}
 
 	public void trespassingCheck(Action action, Actor performer, Square square) {

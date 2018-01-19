@@ -12,6 +12,7 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
@@ -103,17 +104,25 @@ public class InventorySquare extends Square {
 						xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 			}
 
+			if (inventoryThisBelongsTo == Game.level.player.inventory && gameObject instanceof Axe) {
+				System.out.println("" + gameObject + ", owner = " + gameObject.owner);
+			}
+
 			// Count && value
 			if (objectLegal(gameObject)) {
 				if (this instanceof GroundDisplaySquare)
-					stack = GroundDisplay.itemTypeStacks.get(gameObject.templateId);
+					stack = GroundDisplay.legalStacks.get(gameObject.templateId);
 				else
-					stack = this.inventoryThisBelongsTo.itemTypeStacks.get(gameObject.templateId);
+					stack = this.inventoryThisBelongsTo.legalStacks.get(gameObject.templateId);
 			} else {
 				if (this instanceof GroundDisplaySquare)
-					stack = GroundDisplay.illegalItemTypeStacks.get(gameObject.templateId);
+					stack = GroundDisplay.illegalStacks.get(gameObject.templateId);
 				else
-					stack = this.inventoryThisBelongsTo.illegalItemTypeStacks.get(gameObject.templateId);
+					stack = this.inventoryThisBelongsTo.illegalStacks.get(gameObject.templateId);
+			}
+
+			if (inventoryThisBelongsTo == Game.level.player.inventory && gameObject instanceof Axe) {
+				System.out.println("stack = " + stack);
 			}
 
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
@@ -143,17 +152,16 @@ public class InventorySquare extends Square {
 						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27,
 						xInPixels + Game.INVENTORY_SQUARE_WIDTH - goldTextLength - 10,
 						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27 + 16);
-
 			}
 
-			if (gameObject instanceof Gold) {// translucentBlack
+			if (gameObject instanceof Gold) {
 				String amtString = gameObject.value + "x";
 				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.font.getWidth(amtString),
 						yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
 						new Object[] { amtString });
 
-			} else if (stack.size() > 1) {
+			} else {
 				String amtString = stack.size() + "x";
 				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.font.getWidth(amtString),
 						yInPixels + 7 + 20);

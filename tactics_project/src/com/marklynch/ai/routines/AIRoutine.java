@@ -802,7 +802,8 @@ public abstract class AIRoutine {
 				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
 					if (criminal == Game.level.player) {
 						new ActionTalk(this.actor, criminal,
-								createJusticeReclaimConversation(criminal, stolenItemsOnCriminal)).perform();
+								createJusticeReclaimConversation(this.actor, criminal, stolenItemsOnCriminal))
+										.perform();
 					} else {
 						actor.setMiniDialogue("Give me that!", criminal);
 						for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
@@ -883,14 +884,14 @@ public abstract class AIRoutine {
 
 	}
 
-	public Conversation createJusticeReclaimConversation(final Actor criminal,
+	public static Conversation createJusticeReclaimConversation(final Actor accuser, final Actor criminal,
 			final ArrayList<GameObject> stolenItemsOnCriminal) {
 		ConversationResponse accept = new ConversationResponse("Comply [Give items]", null) {
 			@Override
 			public void select() {
 				super.select();
 				for (GameObject stolenItemOnCriminal : stolenItemsOnCriminal) {
-					new ActionGiveItems(criminal, actor, true, stolenItemOnCriminal).perform();
+					new ActionGiveItems(criminal, accuser, true, stolenItemOnCriminal).perform();
 				}
 			}
 		};
@@ -898,14 +899,18 @@ public abstract class AIRoutine {
 			@Override
 			public void select() {
 				super.select();
-				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
-				actor.addAttackerForThisAndGroupMembers(criminal);
+				accuser.addAttackerForNearbyFactionMembersIfVisible(criminal);
+				accuser.addAttackerForThisAndGroupMembers(criminal);
 			}
 		};
 
 		Object[] demand = new Object[] {};
 		if (stolenItemsOnCriminal.size() == 1) {
-			demand = new Object[] { "Give me that ", stolenItemsOnCriminal.get(0), "!" };
+			if (stolenItemsOnCriminal.get(0).owner == accuser) {
+				demand = new Object[] { "That's my ", stolenItemsOnCriminal.get(0), ", give it back!" };
+			} else {
+				demand = new Object[] { "Give me that ", stolenItemsOnCriminal.get(0), "!" };
+			}
 		} else {
 			ArrayList<Object> demandArrayList = new ArrayList<Object>();
 			for (int i = 0; i < stolenItemsOnCriminal.size(); i++) {
@@ -929,18 +934,18 @@ public abstract class AIRoutine {
 		}
 
 		ConversationPart conversationPartJustice = new ConversationPart(demand,
-				new ConversationResponse[] { accept, refuse }, this.actor);
+				new ConversationResponse[] { accept, refuse }, accuser);
 		conversationPartJustice.leaveConversationListener = new LeaveConversationListener() {
 
 			@Override
 			public void leave() {
-				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
-				actor.addAttackerForThisAndGroupMembers(criminal);
+				accuser.addAttackerForNearbyFactionMembersIfVisible(criminal);
+				accuser.addAttackerForThisAndGroupMembers(criminal);
 			}
 
 		};
 
-		return new Conversation(conversationPartJustice, actor, true);
+		return new Conversation(conversationPartJustice, accuser, true);
 
 	}
 

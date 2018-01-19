@@ -444,9 +444,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			otherInventory.isOpen = true;
 		}
 
-		updateItemCounts();
+		updateStacks();
 		if (otherInventory != null) {
-			otherInventory.updateItemCounts();
+			otherInventory.updateStacks();
 		}
 		// if(groundDisplay != null)
 		// {
@@ -722,7 +722,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
 
-			updateItemCounts();
+			updateStacks();
 
 		}
 	}
@@ -755,7 +755,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
 
-			updateItemCounts();
+			updateStacks();
 		}
 		return index;
 	}
@@ -774,8 +774,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		return gameObjects;
 	}
 
-	public HashMap<Integer, ArrayList<GameObject>> itemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
-	public HashMap<Integer, ArrayList<GameObject>> illegalItemTypeStacks = new HashMap<Integer, ArrayList<GameObject>>();
+	public HashMap<Integer, ArrayList<GameObject>> legalStacks = new HashMap<Integer, ArrayList<GameObject>>();
+	public HashMap<Integer, ArrayList<GameObject>> illegalStacks = new HashMap<Integer, ArrayList<GameObject>>();
 
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("[SPACE] LOOT ALL", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("[SPACE] STEAL ALL", Color.RED) };
@@ -787,7 +787,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		inventorySquares.clear();
 
-		ArrayList<Integer> itemIdsAlreadyDone = new ArrayList<Integer>();
+		ArrayList<Integer> legalItemIdsAlreadyDone = new ArrayList<Integer>();
+		ArrayList<Integer> illegalItemIdsAlreadyDone = new ArrayList<Integer>();
 
 		for (GameObject gameObject : this.filteredGameObjects) {
 
@@ -807,19 +808,19 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			// Legal items
 			if (objectLegal(gameObject)) {
 
-				if (!itemIdsAlreadyDone.contains(gameObject.templateId)) {
+				if (!legalItemIdsAlreadyDone.contains(gameObject.templateId)) {
 					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 					inventorySquare.gameObject = gameObject;
 					inventorySquares.add(inventorySquare);
-					itemIdsAlreadyDone.add(gameObject.templateId);
+					legalItemIdsAlreadyDone.add(gameObject.templateId);
 				}
 
 			} else {// Illegal items
-				if (!itemIdsAlreadyDone.contains(gameObject.templateId)) {
+				if (!illegalItemIdsAlreadyDone.contains(gameObject.templateId)) {
 					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
 					inventorySquare.gameObject = gameObject;
 					inventorySquares.add(inventorySquare);
-					itemIdsAlreadyDone.add(gameObject.templateId);
+					illegalItemIdsAlreadyDone.add(gameObject.templateId);
 				}
 			}
 		}
@@ -869,29 +870,27 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 	}
 
-	public void updateItemCounts() {
+	public void updateStacks() {
 
-		itemTypeStacks.clear();
-		illegalItemTypeStacks.clear();
+		legalStacks.clear();
+		illegalStacks.clear();
 		for (GameObject gameObject : gameObjects) {
-			// Legal items
-
 			if (objectLegal(gameObject)) {
-				if (itemTypeStacks.containsKey(gameObject.templateId)) {
-					itemTypeStacks.get(gameObject.templateId).add(gameObject);
+				if (legalStacks.containsKey(gameObject.templateId)) {
+					legalStacks.get(gameObject.templateId).add(gameObject);
 				} else {
 					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
 					newStack.add(gameObject);
-					itemTypeStacks.put(gameObject.templateId, newStack);
+					legalStacks.put(gameObject.templateId, newStack);
 				}
 
 			} else {// Illegal items
-				if (illegalItemTypeStacks.containsKey(gameObject.templateId)) {
-					illegalItemTypeStacks.get(gameObject.templateId).add(gameObject);
+				if (illegalStacks.containsKey(gameObject.templateId)) {
+					illegalStacks.get(gameObject.templateId).add(gameObject);
 				} else {
 					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
 					newStack.add(gameObject);
-					illegalItemTypeStacks.put(gameObject.templateId, newStack);
+					illegalStacks.put(gameObject.templateId, newStack);
 				}
 			}
 		}

@@ -3,6 +3,8 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.ai.routines.AIRoutine;
+import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationGive;
 import com.marklynch.objects.GameObject;
@@ -51,6 +53,20 @@ public class ActionSellItems extends VariableQtyAction {
 
 		if (amountToSell == 0)
 			return;
+
+		for (GameObject object : objects) {
+			if (object.owner == receiver) {
+				Crime crime = new Crime(this, this.performer, object.owner, Crime.TYPE.CRIME_THEFT, object);
+				receiver.addWitnessedCrime(crime);
+				if (Game.level.openInventories.size() > 0)
+					Game.level.openCloseInventory();
+				ArrayList<GameObject> stolenObjects = new ArrayList<GameObject>();
+				stolenObjects.add(object);
+				new ActionTalk(this.receiver, performer,
+						AIRoutine.createJusticeReclaimConversation(receiver, performer, stolenObjects)).perform();
+				return;
+			}
+		}
 
 		if (Game.level.openInventories.size() > 0) {
 		} else {
@@ -117,6 +133,11 @@ public class ActionSellItems extends VariableQtyAction {
 
 	@Override
 	public boolean checkLegality() {
+		for (GameObject gameObject : objects) {
+			if (gameObject.owner == receiver) {
+				return false;
+			}
+		}
 		return true;
 	}
 

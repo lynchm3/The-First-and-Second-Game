@@ -482,6 +482,7 @@ public class Editor {
 		// Trader Joe
 		Trader trader = Templates.TRADER.makeCopy("Joe", Game.level.squares[7][1], Game.level.factions.townsPeople,
 				null, 10000, new GameObject[] {}, new GameObject[] {}, null);
+		Templates.HATCHET.makeCopy(Game.level.squares[3][3], trader);
 		// Joe's shop
 		ArrayList<Square> entranceSquares = new ArrayList<Square>(
 				Arrays.asList(new Square[] { Game.level.squares[4][4] }));
