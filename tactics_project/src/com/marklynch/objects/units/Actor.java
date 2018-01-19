@@ -319,7 +319,12 @@ public class Actor extends GameObject {
 				squarePath.add((Square) aStarNode);
 			}
 
-			AIPath path = new AIPath(squarePath, squarePath.size());
+			boolean completePath = false;
+			if (squarePath.size() > 0 && squarePath.lastElement() == target) {
+				completePath = true;
+			}
+
+			AIPath path = new AIPath(squarePath, squarePath.size(), completePath);
 			return path;
 		}
 

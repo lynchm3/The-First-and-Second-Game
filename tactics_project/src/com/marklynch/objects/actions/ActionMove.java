@@ -13,7 +13,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.Stampable;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.RockGolem;
 import com.marklynch.objects.units.TinyNeutralWildAnimal;
 
@@ -152,6 +151,9 @@ public class ActionMove extends Action {
 
 		AIPath path = performer.getPathTo(target);
 		if (path == null)
+			return false;
+
+		if (!path.complete)
 			return false;
 
 		if (performer.straightLineDistanceTo(target) > performer.travelDistance - performer.distanceMovedThisTurn)

@@ -55,7 +55,7 @@ public class Sound {
 
 		Vector<Square> startPath = new Vector<Square>();
 		startPath.add(currentSquare);
-		squareToPath.put(currentSquare, new AIPath((Vector<Square>) startPath.clone(), 0));
+		squareToPath.put(currentSquare, new AIPath((Vector<Square>) startPath.clone(), 0, false));
 
 		for (int i = 0; i <= highestPathCostSeen; i++) {
 			// get all paths with that cost
@@ -115,7 +115,7 @@ public class Sound {
 			int newDistance = (int) (pathCost + newSquare.inventory.getSoundDampening());
 			if (newDistance > highestPathCostSeen)
 				highestPathCostSeen = newDistance;
-			AIPath newPath = new AIPath(newPathSquares, newDistance);
+			AIPath newPath = new AIPath(newPathSquares, newDistance, false);
 			squareToPath.put(newSquare, newPath);
 			if (!destinationSquares.contains(newSquare))
 				this.destinationSquares.add(newSquare);
