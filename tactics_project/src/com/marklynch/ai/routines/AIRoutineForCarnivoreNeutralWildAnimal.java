@@ -110,7 +110,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 					false, false, true, true, 0, HerbivoreWildAnimal.class);
 			if (smallWildAnimal != null) {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_HUNTING;
-				this.actor.thoughtBubbleImageTexture = smallWildAnimal.imageTexture;
+				this.actor.thoughtBubbleImageTextureObject = smallWildAnimal.imageTexture;
 				if (this.wildAnimal.canSeeSquare(smallWildAnimal.squareGameObjectIsOn)) {
 					this.wildAnimal.addAttackerForThisAndGroupMembers(smallWildAnimal);
 				} else {

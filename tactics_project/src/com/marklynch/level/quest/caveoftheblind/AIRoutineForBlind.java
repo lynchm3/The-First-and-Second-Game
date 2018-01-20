@@ -53,7 +53,7 @@ public class AIRoutineForBlind extends AIRoutine {
 		this.actor.aiLine = null;
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
+		this.actor.thoughtBubbleImageTextureObject = null;
 
 		// hungry?
 		if (timeSinceEating > 50) {
@@ -67,7 +67,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				bellSound = null;
 				blind.investigationsMap.clear();
 				targetSquare = null;
-				this.actor.thoughtBubbleImageTexture = this.meatChunk.imageTexture;
+				this.actor.thoughtBubbleImageTextureObject = this.meatChunk.imageTexture;
 			} else if (this.meatChunk != null) { // smelt a meatchunk but
 													// nooooope
 				if (this.meatChunk.squareGameObjectIsOn != this.originalMeatChunkSquare) {
@@ -89,7 +89,7 @@ public class AIRoutineForBlind extends AIRoutine {
 					failedToGetPathToFoodCount = 0;
 				} else {
 					failedToGetPathToFoodCount++;
-					blind.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
+					blind.thoughtBubbleImageTextureObject = ThoughtBubbles.QUESTION_MARK;
 					if (failedToGetPathToFoodCount == 10) {
 						failedToGetPathToFoodCount = 0;
 						if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)
@@ -126,12 +126,12 @@ public class AIRoutineForBlind extends AIRoutine {
 			// There's a bell sound
 			if (bellSound != null) {
 				this.blind.activityDescription = "Dinner time!";
-				this.actor.thoughtBubbleImageTexture = ThoughtBubbles.MEAT_CHUNK;
+				this.actor.thoughtBubbleImageTextureObject = ThoughtBubbles.MEAT_CHUNK;
 				if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare)) {
 					failedToGetPathToBellCount = 0;
 				} else {
 					failedToGetPathToBellCount++;
-					blind.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
+					blind.thoughtBubbleImageTextureObject = ThoughtBubbles.QUESTION_MARK;
 					if (failedToGetPathToBellCount == 10) {
 						failedToGetPathToBellCount = 0;
 						if (this.blind.squareGameObjectIsOn.structureRoomSquareIsIn != null)
@@ -155,7 +155,7 @@ public class AIRoutineForBlind extends AIRoutine {
 			meatChunk = null;
 			hangry = false;
 			timeSinceEating++;
-			this.actor.thoughtBubbleImageTexture = null;
+			this.actor.thoughtBubbleImageTextureObject = null;
 		}
 
 		addNonBlindNonGolemToAttackersList();

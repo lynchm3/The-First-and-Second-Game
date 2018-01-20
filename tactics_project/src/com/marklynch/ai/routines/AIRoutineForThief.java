@@ -88,7 +88,7 @@ public class AIRoutineForThief extends AIRoutine {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
 			else
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
-			this.actor.thoughtBubbleImageTexture = container.imageTexture;
+			this.actor.thoughtBubbleImageTextureObject = container.imageTexture;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(container);
 			if (!lootedCarcass) {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(container.squareGameObjectIsOn);
@@ -108,7 +108,7 @@ public class AIRoutineForThief extends AIRoutine {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;
 			else
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
-			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
+			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);

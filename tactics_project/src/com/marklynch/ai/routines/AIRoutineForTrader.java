@@ -106,7 +106,7 @@ public class AIRoutineForTrader extends AIRoutine {
 				shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
 			} else {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_UPDATING_SIGN;
-				this.actor.thoughtBubbleImageTexture = trader.shopSign.imageTexture;
+				this.actor.thoughtBubbleImageTextureObject = trader.shopSign.imageTexture;
 				if (trader.straightLineDistanceTo(trader.shopSign.squareGameObjectIsOn) < 2) {
 					new ActionWrite(trader, trader.shopSign, textForSign).perform();
 					shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;

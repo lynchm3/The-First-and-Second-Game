@@ -55,7 +55,7 @@ public class AIRoutineForPig extends AIRoutine {
 				0, GameObject.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_PIGGING_OUT;
-			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
+			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.eatTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);

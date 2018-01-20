@@ -1,5 +1,7 @@
 package com.marklynch.ai.routines;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -538,7 +540,7 @@ public abstract class AIRoutine {
 			if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 					&& this.actor.getPathTo(searchSquare) != null) {
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-				this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
+				this.actor.thoughtBubbleImageTextureObject = ThoughtBubbles.QUESTION_MARK;
 				moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquare);
 
 				break;
@@ -558,7 +560,7 @@ public abstract class AIRoutine {
 				if (this.actor.squareGameObjectIsOn.straightLineDistanceTo(searchSquare) > 1
 						&& this.actor.getPathTo(searchSquareAtDistanceOne) != null) {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
+					this.actor.thoughtBubbleImageTextureObject = ThoughtBubbles.QUESTION_MARK;
 					moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceOne);
 
 					break;
@@ -578,7 +580,7 @@ public abstract class AIRoutine {
 			for (Square searchSquareAtDistanceTwo : searchSquare.getAllSquaresAtDistance(2)) {
 				if (this.actor.getPathTo(searchSquareAtDistanceTwo) != null) {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-					this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
+					this.actor.thoughtBubbleImageTextureObject = ThoughtBubbles.QUESTION_MARK;
 					moved = AIRoutineUtils.moveTowardsTargetSquare(searchSquareAtDistanceTwo);
 					break;
 
@@ -601,7 +603,7 @@ public abstract class AIRoutine {
 				if (this.actor.canSeeGameObject(attacker)) {
 					// Change status to fighting if u can see an enemy from
 					// new location
-					this.actor.thoughtBubbleImageTexture = null;
+					this.actor.thoughtBubbleImageTextureObject = null;
 					if (target instanceof HidingPlace) {
 						this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
 					} else
@@ -627,7 +629,7 @@ public abstract class AIRoutine {
 
 		// DOORWAYS are my biggest issue here.
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SEARCHING;
-		this.actor.thoughtBubbleImageTexture = ThoughtBubbles.QUESTION_MARK;
+		this.actor.thoughtBubbleImageTextureObject = ThoughtBubbles.QUESTION_MARK;
 
 		// if (room != null) {
 		// AIRoutineUtils.moveTowardsTargetSquare(AIRoutineUtils.getRandomSquareInRoom(room));
@@ -756,7 +758,7 @@ public abstract class AIRoutine {
 						}
 
 					}
-					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+					actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 					// actor.activityDescription = "Dispensing Justice";
 
 					saidStop = true;
@@ -790,7 +792,7 @@ public abstract class AIRoutine {
 				for (GameObject stolenItem : stolenItemsOnCriminal) {
 					if (criminal.inventory.contains(stolenItem)) {
 						new ActionDropItems(criminal, criminal.squareGameObjectIsOn, stolenItem).perform();
-						this.actor.thoughtBubbleImageTexture = stolenItem.imageTexture;
+						this.actor.thoughtBubbleImageTextureObject = stolenItem.imageTexture;
 					}
 				}
 				for (Crime unresolvedCrime : unresolvedIllegalMinings) {
@@ -811,7 +813,7 @@ public abstract class AIRoutine {
 							new ActionGiveItems(criminal, actor, true, stolenItemOnCriminal).perform();
 						}
 					}
-					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+					actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 					actor.activityDescription = "Confiscating";
 					return true;
 				}
@@ -819,7 +821,7 @@ public abstract class AIRoutine {
 				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
 						&& actor.canSeeGameObject(criminal)) {
 					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(criminal.squareGameObjectIsOn)) {
-						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+						actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 						actor.activityDescription = "Confiscating";
 						createSearchLocationsBasedOnVisibleAttackers();
 						return true;
@@ -832,14 +834,14 @@ public abstract class AIRoutine {
 				if (actor.straightLineDistanceTo(criminal.squareGameObjectIsOn) == 1) {
 					new ActionTalk(this.actor, criminal,
 							createJusticeDropConversation(criminal, stolenItemsEquippedByCriminal)).perform();
-					actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+					actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 					return true;
 				}
 
 				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
 						&& actor.canSeeGameObject(criminal)) {
 					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(criminal.squareGameObjectIsOn)) {
-						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+						actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 						createSearchLocationsBasedOnVisibleAttackers();
 						return true;
 					}
@@ -851,13 +853,13 @@ public abstract class AIRoutine {
 					if (actor.straightLineDistanceTo(stolenItemOnGround.squareGameObjectIsOn) == 1) {
 						new ActionTakeItems(this.actor, stolenItemOnGround.squareGameObjectIsOn, stolenItemOnGround)
 								.perform();
-						actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+						actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 						return true;
 					}
 
 					if (actor.canSeeSquare(stolenItemOnGround.squareGameObjectIsOn)) {
 						if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(stolenItemOnGround.squareGameObjectIsOn)) {
-							actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
+							actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 							createSearchLocationsBasedOnVisibleAttackers();
 							return true;
 						}
@@ -1038,7 +1040,7 @@ public abstract class AIRoutine {
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
 				true, 0, Carcass.class);
 		if (carcass != null) {
-			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
+			this.actor.thoughtBubbleImageTextureObject = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
 			if (!lootedCarcass) {
@@ -1062,7 +1064,7 @@ public abstract class AIRoutine {
 
 		if (carcass != null) {
 
-			this.actor.thoughtBubbleImageTexture = carcass.imageTexture;
+			this.actor.thoughtBubbleImageTextureObject = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
 			boolean lootedCarcass = AIRoutineUtils.skinTarget(carcass);
 			if (!lootedCarcass) {
@@ -1081,7 +1083,8 @@ public abstract class AIRoutine {
 				10, Junk.class, Food.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
-			this.actor.thoughtBubbleImageTexture = loot.imageTexture;
+			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
+			this.actor.thoughtBubbleImageTextureAction = getGlobalImage("left.png");
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);
@@ -1098,7 +1101,7 @@ public abstract class AIRoutine {
 				false, false, 0, Food.class);
 		if (food != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
-			this.actor.thoughtBubbleImageTexture = food.imageTexture;
+			this.actor.thoughtBubbleImageTextureObject = food.imageTexture;
 			boolean ateFood = AIRoutineUtils.eatTarget(food);
 			if (!ateFood) {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(food.squareGameObjectIsOn);
@@ -1115,7 +1118,7 @@ public abstract class AIRoutine {
 				false, false, 0, Carcass.class);
 		if (corpse != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
-			this.actor.thoughtBubbleImageTexture = corpse.imageTexture;
+			this.actor.thoughtBubbleImageTextureObject = corpse.imageTexture;
 			boolean ateCorpse = AIRoutineUtils.eatTarget(corpse);
 			if (!ateCorpse) {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(corpse.squareGameObjectIsOn);
@@ -1132,7 +1135,8 @@ public abstract class AIRoutine {
 		this.actor.aiLine = null;
 		this.actor.miniDialogue = null;
 		this.actor.activityDescription = null;
-		this.actor.thoughtBubbleImageTexture = null;
+		this.actor.thoughtBubbleImageTextureObject = null;
+		this.actor.thoughtBubbleImageTextureAction = null;
 		createSearchLocationsBasedOnSounds(Weapon.class, BrokenGlass.class);
 		if (actor instanceof NonHuman) {
 
@@ -1225,7 +1229,7 @@ public abstract class AIRoutine {
 
 			if (door.locked == false && door.shouldBeLocked() && actor.hasKeyForDoor(door)
 					&& actor.squareGameObjectIsOn != door.squareGameObjectIsOn && actor.canSeeGameObject(door)) {
-				actor.thoughtBubbleImageTexture = door.imageTexture;
+				actor.thoughtBubbleImageTextureObject = door.imageTexture;
 				Action action = new ActionLock(this.actor, door);
 				if (actor.straightLineDistanceTo(door.squareGameObjectIsOn) > 1) {
 					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(door.squareGameObjectIsOn)) {
@@ -1239,7 +1243,7 @@ public abstract class AIRoutine {
 				}
 			} else if (door.isOpen() && door.shouldBeClosed() && actor.squareGameObjectIsOn != door.squareGameObjectIsOn
 					&& actor.canSeeGameObject(door)) {
-				actor.thoughtBubbleImageTexture = door.imageTexture;
+				actor.thoughtBubbleImageTextureObject = door.imageTexture;
 				Action action = new ActionClose(this.actor, door);
 				if (actor.straightLineDistanceTo(door.squareGameObjectIsOn) > 1) {
 					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(door.squareGameObjectIsOn)) {
