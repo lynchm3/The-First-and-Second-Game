@@ -612,15 +612,19 @@ public class Actor extends GameObject {
 		super.draw2();
 
 		// Draw activity text
-		if (activityDescription != null && activityDescription.length() > 0) {
-			float activityX1 = this.squareGameObjectIsOn.xInGridPixels;
-			float activityX2 = this.squareGameObjectIsOn.xInGridPixels + Game.font.getWidth(activityDescription);
-			float activityY1 = this.squareGameObjectIsOn.yInGridPixels - 20;
-			float activityY2 = this.squareGameObjectIsOn.yInGridPixels;
-			QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1, activityY1, activityX2, activityY2);
-			TextUtils.printTextWithImages(activityX1, activityY1, Integer.MAX_VALUE, false, null,
-					new Object[] { activityDescription });
-		}
+		// if (activityDescription != null && activityDescription.length() > 0)
+		// {
+		// float activityX1 = this.squareGameObjectIsOn.xInGridPixels;
+		// float activityX2 = this.squareGameObjectIsOn.xInGridPixels +
+		// Game.font.getWidth(activityDescription);
+		// float activityY1 = this.squareGameObjectIsOn.yInGridPixels - 20;
+		// float activityY2 = this.squareGameObjectIsOn.yInGridPixels;
+		// QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1,
+		// activityY1, activityX2, activityY2);
+		// TextUtils.printTextWithImages(activityX1, activityY1,
+		// Integer.MAX_VALUE, false, null,
+		// new Object[] { activityDescription });
+		// }
 
 		// Draw mini dialogue
 		if (miniDialogue != null && miniDialogue.length() > 0) {

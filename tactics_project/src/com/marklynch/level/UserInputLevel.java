@@ -99,6 +99,8 @@ public class UserInputLevel {
 	public static Scrollable scrollableMouseIsOver = null;
 
 	public static void userInput(int delta2) {
+		if (Game.ticksSinceDisplayInactive < 10)
+			return;
 
 		// Getting what square pixel the mouse is on
 		float mouseXinPixels = Mouse.getX();

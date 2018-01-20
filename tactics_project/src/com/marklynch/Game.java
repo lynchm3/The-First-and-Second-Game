@@ -153,7 +153,8 @@ public class Game {
 	}
 
 	public boolean paused = false;
-	public boolean displayActive = true;
+	public static boolean displayActive = true;
+	public static int ticksSinceDisplayInactive = 0;
 
 	public static TextureRegion quadTexture;
 
@@ -183,12 +184,18 @@ public class Game {
 
 		while (!Display.isCloseRequested()) {
 
+			boolean wasActive = displayActive;
+
 			if (!Display.isActive()) {
 				paused = true;
 				displayActive = false;
+				ticksSinceDisplayInactive = 0;
 			} else {
 				paused = false;
 				displayActive = true;
+
+				if (ticksSinceDisplayInactive < 60)
+					ticksSinceDisplayInactive++;
 			}
 
 			delta = getDelta();
@@ -199,9 +206,11 @@ public class Game {
 			}
 
 			if (!paused)
-
 				update(delta);
 
+			// if (!displayActive && wasActive)
+			// drawInactive();
+			// else
 			if (displayActive)
 				render();
 

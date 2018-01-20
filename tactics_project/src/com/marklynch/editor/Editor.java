@@ -507,7 +507,7 @@ public class Editor {
 
 		Sign joesShopSign = Templates.SIGN.makeCopy(Game.level.squares[4][5], joesShop.name + " sign",
 				new Object[] { joesShop.name }, trader);
-		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[3][5], "Wanter Poster",
+		WantedPoster wantedPoster = Templates.WANTED_POSTER.makeCopy(Game.level.squares[0][0], "Wanter Poster",
 				new ArrayList<Crime>(), trader);
 		trader.inventory.add(Templates.KATANA.makeCopy(null, null));
 		trader.inventory.add(Templates.HATCHET.makeCopy(null, null));
