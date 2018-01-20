@@ -61,7 +61,6 @@ public class ActionSellItems extends VariableQtyAction {
 
 				for (Crime c : performer.crimesPerformedInLifetime) {
 					if (Arrays.asList(c.stolenItems).contains(object)) {
-						System.out.println("Found Crime!");
 						crime = c;
 					}
 				}

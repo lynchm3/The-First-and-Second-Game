@@ -1208,7 +1208,7 @@ public class Actor extends GameObject {
 	public void manageWitnessedCrimes() {
 		ArrayList<Crime> crimesToRemove = new ArrayList<Crime>();
 		for (Crime crime : crimesWitnessedUnresolved) {
-			if (crime.resolved)
+			if (crime.isResolved())
 				crimesToRemove.add(crime);
 			else if (crime.performer.remainingHealth <= 0)
 				crimesToRemove.add(crime);
@@ -1221,7 +1221,7 @@ public class Actor extends GameObject {
 
 	public void addWitnessedCrime(Crime crime) {
 
-		if (crime.resolved) {
+		if (crime.isResolved()) {
 			return;
 		}
 

@@ -38,9 +38,10 @@ public class Crime {
 	// final public static int TYPE.CRIME_MANSLAUGHTER = 5;
 	// final public static int TYPE.CRIME_ASSAULT = 10;
 
-	public boolean resolved;
+	private boolean resolved;
 	public GameObject stolenItems[];
 	public TYPE type;
+	private ArrayList<CrimeListener> crimeListeners = new ArrayList<CrimeListener>();;
 
 	public Crime(Action action, Actor performer, Actor visctim, TYPE type, GameObject... stolenItems) {
 		super();
@@ -56,22 +57,36 @@ public class Crime {
 		this(action, performer, visctim, type, stolenItems.toArray(new GameObject[stolenItems.size()]));
 	}
 
-	public void addCrimeListener(CrimeListener wantedPoster) {
-		// TODO Auto-generated method stub
+	public void addCrimeListener(CrimeListener crimeListener) {
+		if (!this.crimeListeners.contains(crimeListener)) {
+			crimeListeners.add(crimeListener);
+		}
 
 	}
 
 	public interface CrimeListener {
-		public void crimwUpdate(Crime crime);
+		public void crimeUpdate(Crime crime);
 	}
 
 	public void resolve() {
-
+		resolved = true;
+		for (CrimeListener crimeListener : crimeListeners) {
+			crimeListener.crimeUpdate(this);
+		}
+		crimeListeners.clear();
 	}
+
+	public boolean isResolved() {
+		return resolved;
+	}
+
+	// public void setResolved(boolean resolved) {
+	// this.resolved = resolved;
+	// }
 
 	public void notifyWitnessesOfCrime() {
 
-		if (resolved)
+		if (isResolved())
 			return;
 
 		if (performer.remainingHealth <= 0)

@@ -120,10 +120,10 @@ public abstract class AIRoutine {
 			return;
 
 		// Check for enemies last seen locations to search
-		for (Actor criminal : this.actor.mapActorToCrimesWitnessed.keySet()) {
+		for (Actor criminal : this.actor.knownCriminals) {
 
 			for (Crime crime : actor.mapActorToCrimesWitnessed.get(criminal)) {
-				if (!crime.resolved) {
+				if (!crime.isResolved()) {
 					if (this.actor.canSeeGameObject(criminal)) {
 						this.actor.addInvestigation(criminal, criminal.squareGameObjectIsOn,
 								Investigation.INVESTIGATION_PRIORITY_CRIME_SEEN);
@@ -683,7 +683,7 @@ public abstract class AIRoutine {
 	public static String I_SAW_THAT = "I saw that!!";
 
 	protected boolean runCrimeReactionRoutine() {
-		for (final Actor criminal : actor.mapActorToCrimesWitnessed.keySet()) {
+		for (final Actor criminal : actor.knownCriminals) {
 			int accumulatedSeverity = 0;
 			final ArrayList<Crime> unresolvedIllegalMinings = new ArrayList<Crime>();
 			final ArrayList<Crime> unresolvedThefts = new ArrayList<Crime>();
@@ -697,7 +697,7 @@ public abstract class AIRoutine {
 
 			// Mark issues as resolved
 			for (Crime crime : actor.mapActorToCrimesWitnessed.get(criminal)) {
-				if (crime.resolved == false) {
+				if (crime.isResolved() == false) {
 
 					if (crime.stolenItems.length == 0) {
 						crime.resolve();
@@ -709,10 +709,11 @@ public abstract class AIRoutine {
 							itemsToBeRetaken = true;
 						}
 					}
-					if (itemsToBeRetaken)
-						crime.resolved = false;
-					else
-						crime.resolved = true;
+					if (itemsToBeRetaken) {
+
+					} else {
+						crime.resolve();
+					}
 				}
 			}
 
@@ -720,7 +721,7 @@ public abstract class AIRoutine {
 			// Also calculate accumulated severity of crimes
 			for (Crime crime : actor.mapActorToCrimesWitnessed.get(criminal)) {
 				accumulatedSeverity += crime.type.severity;
-				if (crime.resolved == false) {
+				if (crime.isResolved() == false) {
 					unresolvedCrimes.add(crime);
 					if (crime.action instanceof ActionMine) {
 						unresolvedIllegalMinings.add(crime);
@@ -773,7 +774,7 @@ public abstract class AIRoutine {
 				actor.addAttackerForNearbyFactionMembersIfVisible(criminal);
 				actor.addAttackerForThisAndGroupMembers(criminal);
 				for (Crime unresolvedCrime : unresolvedCrimes) {
-					unresolvedCrime.resolved = true;
+					unresolvedCrime.resolve();
 				}
 				return true;
 
@@ -793,7 +794,7 @@ public abstract class AIRoutine {
 					}
 				}
 				for (Crime unresolvedCrime : unresolvedIllegalMinings) {
-					unresolvedCrime.resolved = true;
+					unresolvedCrime.resolve();
 				}
 				// actor.thoughtBubbleImageTexture = ThoughtBubbles.JUSTICE;
 				return true;
@@ -895,7 +896,7 @@ public abstract class AIRoutine {
 
 				}
 				for (Crime crime : criminal.crimesPerformedInLifetime) {
-					crime.resolved = true;
+					crime.resolve();
 				}
 			}
 		};
@@ -965,7 +966,7 @@ public abstract class AIRoutine {
 					new ActionDropItems(criminal, criminal.squareGameObjectIsOn, stolenItemOnCriminal).perform();
 				}
 				for (Crime crime : criminal.crimesPerformedInLifetime) {
-					crime.resolved = true;
+					crime.resolve();
 				}
 			}
 		};
@@ -1291,9 +1292,9 @@ public abstract class AIRoutine {
 
 		if (actor.straightLineDistanceTo(wantedPoster.squareGameObjectIsOn) < 2) {
 			wantedPoster.updateCrimes(
-					actor.mapActorToCrimesWitnessed.get(actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity),
-					actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity,
-					actor.highestAccumulatedUnresolvedCrimeSeverity);
+					(ArrayList<Crime>) actor.mapActorToCrimesWitnessed
+							.get(actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity).clone(),
+					actor.criminalWithHighestAccumulatedUnresolvedCrimeSeverity);
 			new ActionWrite(actor, wantedPoster, wantedPoster.generateText()).perform();
 			return true;
 		} else {

@@ -31,14 +31,12 @@ public class WantedPoster extends Sign implements CrimeListener {
 		super.setAttributesForCopy(wantedPoster, square, owner);
 		wantedPoster.crimes = crimes;
 		conversation = createConversation(wantedPoster.generateText());
-		;
 		return wantedPoster;
 	}
 
-	public void updateCrimes(ArrayList<Crime> crimes, Actor criminal, int accumulatedSeverity) {
+	public void updateCrimes(ArrayList<Crime> crimes, Actor criminal) {
 		this.crimes = crimes;
 		this.criminal = criminal;
-		this.accumulatedSAeverity = accumulatedSeverity;
 	}
 
 	@Override
@@ -103,14 +101,16 @@ public class WantedPoster extends Sign implements CrimeListener {
 
 	public Object[] generateText() {
 
+		reward = 0;
+		accumulatedSAeverity = 0;
+
 		if (crimes.size() == 0) {
 
+			criminal = null;
 			Object[] conversationText = { "For official use only" };
 			return conversationText;
 
 		}
-
-		reward = 0;
 		ArrayList<Crime.TYPE> uniqueCrimes = new ArrayList<Crime.TYPE>();
 		HashMap<Crime.TYPE, Integer> crimeTypeCounts = new HashMap<Crime.TYPE, Integer>();
 		for (Crime crime : crimes) {
@@ -123,6 +123,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 				crimeTypeCounts.put(crime.type, 1);
 			}
 			reward += crime.type.severity * 100;
+			accumulatedSAeverity += crime.type.severity;
 			crime.addCrimeListener(this);
 		}
 
@@ -150,9 +151,10 @@ public class WantedPoster extends Sign implements CrimeListener {
 	}
 
 	@Override
-	public void crimwUpdate(Crime crime) {
-		if (crime.resolved) {
+	public void crimeUpdate(Crime crime) {
+		if (crime.isResolved()) {
 			crimes.remove(crime);
 		}
+		conversation = createConversation(generateText());
 	}
 }
