@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.Vector;
 
 import org.lwjgl.util.Point;
+import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
@@ -292,6 +293,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void draw1() {
 
+		if (!(this instanceof Actor) && animation != null) {
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
+			Game.activeBatch.updateUniforms();
+		}
+
 		if (this.remainingHealth <= 0)
 			return;
 		if (squareGameObjectIsOn == null)
@@ -341,6 +347,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (animation != null && animation.completed == false)
 			animation.draw();
+
+		if (animation != null && !(this instanceof Actor)) {
+			Game.activeBatch.flush();
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(-animation.offsetX, -animation.offsetY));
+			Game.activeBatch.updateUniforms();
+		}
 	}
 
 	private void drawHighlight() {

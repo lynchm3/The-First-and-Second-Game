@@ -55,7 +55,7 @@ public class ActionDropItems extends VariableQtyAction {
 
 		if (Game.level.openInventories.size() > 0) {
 		} else {
-			performer.animation = new AnimationDrop(objects[0].name, performer, this, square, objects[0], 0.5f, 0f,
+			objects[0].animation = new AnimationDrop(objects[0].name, performer, this, square, objects[0], 0.5f, 0f,
 					true);
 		}
 
@@ -90,14 +90,18 @@ public class ActionDropItems extends VariableQtyAction {
 
 			// if inventory is open, we're not doing animattion, just throw it
 			// on in there
-			if (Game.level.openInventories.size() > 0) {
-				if (square.inventory.contains(Searchable.class)) {
-					Searchable searchable = (Searchable) square.inventory.getGameObjectOfClass(Searchable.class);
-					searchable.inventory.add(object);
-				} else {
+			// if (Game.level.openInventories.size() > 0) {
+			if (square.inventory.contains(Searchable.class)) {
+				Searchable searchable = (Searchable) square.inventory.getGameObjectOfClass(Searchable.class);
+				searchable.inventory.add(object);
+			} else {
+
+				if (performer instanceof Actor)
+					square.inventory.add(object);
+				else
 					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, square));
-				}
 			}
+			// }
 
 			if (Game.level.player.inventory.groundDisplay != null)
 				Game.level.player.inventory.groundDisplay.refreshGameObjects();
@@ -118,8 +122,8 @@ public class ActionDropItems extends VariableQtyAction {
 		if (performer instanceof Actor)
 			((Actor) performer).actionsPerformedThisTurn.add(this);
 
-		if (performer == Game.level.player)
-			Game.level.endTurn();
+		// if (performer == Game.level.player)
+		// Game.level.endTurn();
 
 		if (performer instanceof Actor)
 			trespassingCheck(this, (Actor) performer, performer.squareGameObjectIsOn);

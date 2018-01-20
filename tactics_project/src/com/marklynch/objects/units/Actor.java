@@ -468,13 +468,11 @@ public class Actor extends GameObject {
 			if (!this.squareGameObjectIsOn.seenByPlayer)
 				return;
 		}
-		// Draw health
 
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.translate(new Vector2f(animation.offsetX, animation.offsetY));
-		Game.activeBatch.updateUniforms();
-
-		// if (remainingHealth != totalHealth) {
+		if (animation != null) {
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
+			Game.activeBatch.updateUniforms();
+		}
 
 		// draw sidebar on square
 		float healthPercentage = (remainingHealth) / (totalHealth);
@@ -582,9 +580,11 @@ public class Actor extends GameObject {
 			alpha = 0.5f;
 		}
 
-		Game.activeBatch.flush();
-		view.translate(new Vector2f(-animation.offsetX, -animation.offsetY));
-		Game.activeBatch.updateUniforms();
+		if (animation != null) {
+			Game.activeBatch.flush();
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(-animation.offsetX, -animation.offsetY));
+			Game.activeBatch.updateUniforms();
+		}
 
 	}
 
