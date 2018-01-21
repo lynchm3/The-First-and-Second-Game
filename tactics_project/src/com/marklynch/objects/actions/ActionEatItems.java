@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Carcass;
 import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Food;
@@ -46,16 +47,20 @@ public class ActionEatItems extends VariableQtyAction {
 		if (!enabled)
 			return;
 
-		int amountToTake = Math.min(objects.length, qty);
+		int amountToEat = Math.min(objects.length, qty);
 
-		if (amountToTake == 0)
+		if (amountToEat == 0)
 			return;
 
-		for (int i = 0; i < amountToTake; i++) {
+		for (int i = 0; i < amountToEat; i++) {
 			GameObject object = objects[i];
-			object.inventoryThatHoldsThisObject.remove(object);
 
 			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass) {
+				object.remainingHealth = 0;
+				object.inventoryThatHoldsThisObject.remove(object);
+				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
+					Game.level.inanimateObjectsOnGroundToRemove.add(object);
+				}
 			} else {
 				performer.inventory.add(object);
 			}
@@ -76,8 +81,8 @@ public class ActionEatItems extends VariableQtyAction {
 
 		if (Game.level.shouldLog(performer)) {
 			String amountText = "";
-			if (amountToTake > 1) {
-				amountText = "x" + amountToTake;
+			if (amountToEat > 1) {
+				amountText = "x" + amountToEat;
 			}
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " ate ", objects[0], amountText }));
 		}
