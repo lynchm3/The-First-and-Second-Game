@@ -682,6 +682,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (!discoverable.discovered)
 				return null;
 		}
+
+		if (this instanceof Stump || this instanceof Tree) {
+			return new ActionChop(performer, this);
+		}
+
 		if (this.canContainOtherObjects && !this.canShareSquare)
 			return new ActionOpenOtherInventory(performer, this);
 		return null;
@@ -694,8 +699,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (!discoverable.discovered)
 				return null;
 		}
-		if (this.canContainOtherObjects && this.inventory.size() > 0)
-			return new ActionOpenOtherInventory(performer, this);
+		if (this instanceof Tree)
+
+			if (this instanceof Stump)
+
+				if (this.canContainOtherObjects && this.inventory.size() > 0)
+					return new ActionOpenOtherInventory(performer, this);
 		if (this.fitsInInventory)
 			return new ActionTakeItems(performer, this.squareGameObjectIsOn, this);
 		return null;

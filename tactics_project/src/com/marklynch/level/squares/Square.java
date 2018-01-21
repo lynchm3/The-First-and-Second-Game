@@ -30,20 +30,22 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
 import com.marklynch.objects.MapMarker;
+import com.marklynch.objects.Stump;
+import com.marklynch.objects.Tree;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
-import com.marklynch.objects.actions.ActionOpenInventoryToDropItems;
 import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
+import com.marklynch.objects.actions.ActionOpenInventoryToDropItems;
 import com.marklynch.objects.actions.ActionPlaceMapMarker;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionTeleportSwap;
-import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionThrowItem;
+import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
@@ -610,6 +612,16 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
 		if (targetGameObject != null) {
 			return targetGameObject.getSecondaryActionPerformedOnThisInWorld(performer);
+		}
+
+		Tree tree = (Tree) this.inventory.getGameObjectOfClass(Tree.class);
+		if (tree != null) {
+			return tree.getSecondaryActionPerformedOnThisInWorld(performer);
+		}
+
+		Stump stump = (Stump) this.inventory.getGameObjectOfClass(Stump.class);
+		if (stump != null) {
+			return stump.getSecondaryActionPerformedOnThisInWorld(performer);
 		}
 
 		if (this.inventory.size() == 1) {

@@ -120,14 +120,14 @@ public class Tree extends GameObject {
 		// Drop apples?
 		ArrayList<GameObject> objectsToDropRandomly = new ArrayList<GameObject>();
 		for (GameObject gameObject : inventory.gameObjects) {
-			if (gameObject instanceof Food && Math.random() > 0.990d)
+			if (gameObject instanceof Food && Math.random() > 0.990d) {
 				objectsToDropRandomly.add(gameObject);
+			}
 		}
 
 		for (GameObject objectToDrop : objectsToDropRandomly) {
-			new ActionDropItems(this, this.squareGameObjectIsOn, objectToDrop);
 			objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
-			// - 32;
+			new ActionDropItems(this, this.squareGameObjectIsOn, objectToDrop).perform();
 		}
 	}
 
