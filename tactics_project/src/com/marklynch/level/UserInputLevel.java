@@ -26,6 +26,7 @@ import com.marklynch.ui.Draggable;
 import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
+import com.marklynch.ui.popups.FullScreenTextBox;
 import com.marklynch.ui.popups.PopupMenu;
 import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
@@ -783,12 +784,18 @@ public class UserInputLevel {
 			Level.activeTextBox.enterTyped();
 			return;
 		}
+
 		if (Game.level.openInventories.size() > 0) {
 			Game.level.player.inventory.buttonSearch.click();
 		}
 
+		if (Level.journal.showing) {
+			return;
+		}
+
 		if (Game.level.activeActor != Game.level.player)
 			return;
+
 		if (Game.level.popupMenuActions.size() != 0) {
 			controllingMenu = true;
 			Game.level.popupMenuActions.get(0).clickHighlightedButton();
@@ -796,6 +803,11 @@ public class UserInputLevel {
 			controllingMenu = true;
 			Game.level.popupMenuObjects.get(0).clickHighlightedButton();
 		}
+
+		Game.level.fullScreenTextBox = new FullScreenTextBox(null, FullScreenTextBox.SQUARE_SEARCH_X,
+				FullScreenTextBox.TYPE.SQUARE_SEARCH_X);
+		Game.level.activeTextBox = Game.level.fullScreenTextBox.textBox;
+		Game.level.activeTextBox.maxNumericValue = Game.level.squares.length - 1;
 	}
 
 	public static void backSpaceTyped() {
@@ -833,6 +845,7 @@ public class UserInputLevel {
 
 		Level.closeAllPopups();
 		Game.level.fullScreenTextBox = null;
+		Level.activeTextBox = null;
 		// Game.level.notifications.clear();
 		if (Level.journal.showing) {
 			Game.level.openCloseJournal();

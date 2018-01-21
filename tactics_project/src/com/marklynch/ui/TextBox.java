@@ -133,6 +133,7 @@ public class TextBox {
 				if (maxNumericValue != 0) {
 					if (numericValue > maxNumericValue) {
 						text = "" + maxNumericValue;
+						numericValue = maxNumericValue;
 					}
 				}
 			}

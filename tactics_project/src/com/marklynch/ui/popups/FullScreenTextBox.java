@@ -13,19 +13,38 @@ import mdesl.graphics.Color;
 
 public class FullScreenTextBox implements TextBoxHolder {
 
-	public static final String ENTER_NEW_MARKER_NAME = "Enter New Marker Name";
+	public enum TYPE {
+		RENAME_MAP_MARKER, SQUARE_SEARCH_X, SQUARE_SEARCH_Y
+	}
+
+	TYPE type;
+
+	public static final String ENTER_NEW_MARKER = "Enter New Marker Name";
+	public static final String SQUARE_SEARCH_X = "Square search - Enter square X";
+	public static final String SQUARE_SEARCH_Y = "Square search - Enter square Y";
 	public GameObject gameObject;
 	// public float width;
 	public String instructions;
 	public TextBox textBox;
 	public float instructionsDrawPositionY;
 
-	public FullScreenTextBox(GameObject gameObject, String instructions) {
+	static int squareX = 0;
+	static int squareY = 0;
+
+	public FullScreenTextBox(GameObject gameObject, String instructions, TYPE type) {
 		this.gameObject = gameObject;
 		this.instructions = instructions;
+		this.type = type;
 
-		String textBoxText = ((MapMarker) gameObject).baseName;
-		this.textBox = new TextBox(this, textBoxText, ENTER_NEW_MARKER_NAME, 300, 300, TextBox.TYPE.ALL);
+		if (type == TYPE.RENAME_MAP_MARKER) {
+			String textBoxText = ((MapMarker) gameObject).baseName;
+			this.textBox = new TextBox(this, textBoxText, ENTER_NEW_MARKER, 300, 300, TextBox.TYPE.ALL);
+		} else if (type == TYPE.SQUARE_SEARCH_X) {
+
+			this.textBox = new TextBox(this, "", SQUARE_SEARCH_X, 300, 300, TextBox.TYPE.NUMERIC);
+		} else if (type == TYPE.SQUARE_SEARCH_Y) {
+			this.textBox = new TextBox(this, "", SQUARE_SEARCH_Y, 300, 300, TextBox.TYPE.NUMERIC);
+		}
 		this.instructionsDrawPositionY = textBox.drawPositionY - 36;
 	}
 
@@ -41,19 +60,33 @@ public class FullScreenTextBox implements TextBoxHolder {
 
 	@Override
 	public void enterTyped(TextBox textBox) {
-		MapMarker mapMarker = (MapMarker) gameObject;
-		mapMarker.baseName = textBox.getText();
-		if (mapMarker.baseName.length() == 0) {
-			mapMarker.name = "Marker";
-			mapMarker.links = TextUtils.getLinks(true, this);
-		} else {
-			mapMarker.name = mapMarker.baseName;
-			mapMarker.links = TextUtils.getLinks(true, this);
+		if (type == TYPE.RENAME_MAP_MARKER) {
+			if (gameObject instanceof MapMarker) {
+				MapMarker mapMarker = (MapMarker) gameObject;
+				mapMarker.baseName = textBox.getText();
+				if (mapMarker.baseName.length() == 0) {
+					mapMarker.name = "Marker";
+					mapMarker.links = TextUtils.getLinks(true, this);
+				} else {
+					mapMarker.name = mapMarker.baseName;
+					mapMarker.links = TextUtils.getLinks(true, this);
+				}
+				Level.activeTextBox = null;
+				Level.fullScreenTextBox = null;
+			}
+		} else if (type == TYPE.SQUARE_SEARCH_X) {
+			Level.fullScreenTextBox = new FullScreenTextBox(null, FullScreenTextBox.SQUARE_SEARCH_Y,
+					FullScreenTextBox.TYPE.SQUARE_SEARCH_Y);
+			Level.activeTextBox = Level.fullScreenTextBox.textBox;
+			Level.activeTextBox.maxNumericValue = Game.level.squares[0].length - 1;
+			squareX = this.textBox.numericValue;
+		} else if (type == TYPE.SQUARE_SEARCH_Y) {
+			Level.activeTextBox = null;
+			Level.fullScreenTextBox = null;
+			squareY = this.textBox.numericValue;
+			Game.level.centerToSquare = true;
+			Game.level.squareToCenterTo = Game.level.squares[squareX][squareY];
 		}
-
-		// Game.level.popupTextBoxes.clear();
-		Level.activeTextBox = null;
-		Level.fullScreenTextBox = null;
 	}
 
 	public boolean isMouseOver(int mouseX, int mouseY) {
