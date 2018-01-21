@@ -25,4 +25,15 @@ public class Food extends GameObject {
 		return food;
 	}
 
+	@Override
+	public void draw1() {
+
+	}
+
+	@Override
+	public void draw2() {
+		super.draw1();
+		super.draw2();
+	}
+
 }

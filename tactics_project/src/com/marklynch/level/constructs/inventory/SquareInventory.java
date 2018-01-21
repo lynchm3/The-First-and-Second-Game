@@ -52,36 +52,17 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 				Game.level.inanimateObjectsOnGround.add(gameObject);
 
 			this.gameObjects.sort(this);
-			// gameObject.randomisePosition();
 
 			square.calculatePathCost();
 			square.calculatePathCostForPlayer();
-
 		}
 	}
 
 	@Override
 	public int remove(GameObject gameObject) {
-
-		// for (GameObject gameObject1 : gameObjects) {
-		// System.out.println("gameObject2 = " + gameObject1);
-		// }
 		if (gameObjects.contains(gameObject)) {
 			gameObjects.remove(gameObject);
-			// gameObject.inventorySquareGameObjectIsOn = null;
-			// for (int i = 0; i < inventorySquares.length; i++) {
-			// for (int j = 0; j < inventorySquares[i].length; j++) {
-			// if (inventorySquares[i][j].gameObject == gameObject) {
-			// inventorySquares[i][j].gameObject = null;
-			// return;
-			// }
-			// }
-			// }
 		}
-
-		// for (GameObject gameObject2 : gameObjects) {
-		// System.out.println("gameObject2 = " + gameObject2);
-		// }
 
 		square.calculatePathCost();
 		square.calculatePathCostForPlayer();
@@ -136,8 +117,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 	@Override
 	public int compare(GameObject a, GameObject b) {
-		// TODO Auto-generated method stub
-		return (int) (a.height - b.height);
+		return (int) (b.height - a.height);
 	}
 
 	public int getDecorativeCount() {
@@ -160,13 +140,4 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		return null;
 
 	}
-
-	// public GameObject getAc() {
-	// for (GameObject gameObject : gameObjects) {
-	// if (gameObject instanceof Actor) {
-	// return gameObject;
-	// }
-	// }
-	// return null;
-	// }
 }

@@ -96,12 +96,12 @@ public class ActionDropItems extends VariableQtyAction {
 				searchable.inventory.add(object);
 			} else {
 
-				if (performer instanceof Actor)
+				if (performer instanceof Actor) {
 					square.inventory.add(object);
-				else
+				} else {
 					Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(object, square));
+				}
 			}
-			// }
 
 			if (Game.level.player.inventory.groundDisplay != null)
 				Game.level.player.inventory.groundDisplay.refreshGameObjects();

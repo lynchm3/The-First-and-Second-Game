@@ -955,7 +955,7 @@ public class Level {
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
-					gameObject.draw1();
+					gameObject.draw1(); //HERE
 				}
 			}
 

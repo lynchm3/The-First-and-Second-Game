@@ -239,7 +239,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		inventory = new Inventory();
 		inventory.parent = this;
-
 	}
 
 	public void randomisePosition() {
@@ -293,11 +292,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void draw1() {
 
-		if (!(this instanceof Actor) && animation != null) {
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
-			Game.activeBatch.updateUniforms();
-		}
-
 		if (this.remainingHealth <= 0)
 			return;
 		if (squareGameObjectIsOn == null)
@@ -312,6 +306,12 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			if (!this.squareGameObjectIsOn.seenByPlayer)
 				return;
+		}
+
+		if (!(this instanceof Actor) && animation != null) {
+			Game.activeBatch.flush();
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
+			Game.activeBatch.updateUniforms();
 		}
 
 		// Draw object

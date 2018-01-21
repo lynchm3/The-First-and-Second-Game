@@ -13,7 +13,7 @@ import com.marklynch.utils.TextureUtils;
 
 public class Tree extends GameObject {
 
-	float appleMaxRatioSize = 0.1f;
+	float appleMaxRatioSize = 0.25f;
 	float healthWhenLastDroppedFruit;
 
 	public Tree() {
@@ -31,25 +31,38 @@ public class Tree extends GameObject {
 		attackable = true;
 	}
 
-	public void addApple(float maxSize) {
+	public void addApple(float sizeRatio) {
 
-		float appleSize = (float) (Math.random() * maxSize);
-
+		// float appleSizeRatio = (float) (Math.random() * sizeRatio);
+		// System.out.println("maxSizeRatio = " + sizeRatio);
+		// System.out.println("appleSizeRatio = " + appleSizeRatio);
 		Food apple = Templates.APPLE.makeCopy(null, null);
+
+		apple.widthRatio = sizeRatio;
+		apple.heightRatio = sizeRatio;
+
+		apple.width = Game.SQUARE_WIDTH * apple.widthRatio;
+		apple.height = Game.SQUARE_HEIGHT * apple.heightRatio;
+		apple.halfWidth = apple.width / 2;
+		apple.halfHeight = apple.height / 2;
+
 		apple.anchorX = 6;
 		apple.anchorY = 6;
 
-		float appleDrawOffsetXMax = 0.5f - apple.width / Game.SQUARE_WIDTH;
-		float appleDrawOffsetXMin = 0.5f;
-		float appleDrawOffsetYMax = 1 - apple.height / Game.SQUARE_HEIGHT;
+		float appleDrawOffsetXMax = 0.75f - apple.width / Game.SQUARE_WIDTH;
+		float appleDrawOffsetXMin = 0.25f;
+		float appleDrawOffsetYMin = -0.35f;
+		float appleDrawOffsetYMax = 0.35f;
 
 		apple.drawOffsetX = appleDrawOffsetXMin + (float) (Math.random() * (appleDrawOffsetXMax - appleDrawOffsetXMin));
-		apple.drawOffsetY = (float) (Math.random() * appleDrawOffsetYMax);
-		// apple.drawOffsetX = 0;
-		// apple.drawOffsetY = 0;
+		apple.drawOffsetY = appleDrawOffsetYMin + (float) (Math.random() * (appleDrawOffsetYMax - appleDrawOffsetYMin));
 
 		inventory.add(apple);
 
+	}
+
+	@Override
+	public void draw1() {
 	}
 
 	@Override
@@ -86,47 +99,69 @@ public class Tree extends GameObject {
 	public void update(int delta) {
 		super.update(delta);
 
+		// WE were hit, drop all fruit
 		if (remainingHealth < healthWhenLastDroppedFruit && inventory.size() > 0) {
 
 			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();
 			objectsToDropFromHit.addAll(this.inventory.gameObjects);
 			for (GameObject objectToDrop : objectsToDropFromHit) {
+				objectToDrop.drawOffsetY = 1 - (objectToDrop.height / Game.SQUARE_HEIGHT);
 				new ActionDropItems(this, this.squareGameObjectIsOn, objectToDrop).perform();
-				objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
 			}
 			healthWhenLastDroppedFruit = this.remainingHealth;
 
 		}
 
+		// Decide what to drop
 		for (GameObject gameObject : inventory.gameObjects) {
 			if (gameObject instanceof Food) {
 				if (gameObject.widthRatio < appleMaxRatioSize) {
 					gameObject.widthRatio += 0.01f;
 					gameObject.heightRatio += 0.01f;
-					gameObject.drawOffsetX -= 0.005f * Game.SQUARE_WIDTH;
+
+					// old
+					gameObject.drawOffsetX -= 0.005f;
 
 					gameObject.width = Game.SQUARE_WIDTH * gameObject.widthRatio;
 					gameObject.height = Game.SQUARE_HEIGHT * gameObject.heightRatio;
+					gameObject.halfWidth = gameObject.width / 2;
+					gameObject.halfHeight = gameObject.height / 2;
+
+					// new
+					// float appleDrawOffsetXMax = 0.5f - gameObject.width /
+					// Game.SQUARE_WIDTH;
+					// float appleDrawOffsetXMin = 0.5f;
+					// float appleDrawOffsetYMax = 1 - gameObject.height /
+					// Game.SQUARE_HEIGHT;
+					// gameObject.drawOffsetX = appleDrawOffsetXMin
+					// + (float) (Math.random() * (appleDrawOffsetXMax -
+					// appleDrawOffsetXMin));
+					// gameObject.drawOffsetY = (float) (Math.random() *
+					// appleDrawOffsetYMax);
+
 				} else {
 					gameObject.name = "Apple";
 				}
 			}
 		}
 
-		// Start new apple?
-		if (Math.random() > 0.990d)
-			addApple(0.01f);
+		if (Math.random() > 0.9d) {
+			addApple(0.1f);
+		}
 
 		// Drop apples?
 		ArrayList<GameObject> objectsToDropRandomly = new ArrayList<GameObject>();
 		for (GameObject gameObject : inventory.gameObjects) {
-			if (gameObject instanceof Food && Math.random() > 0.990d) {
+
+			if (gameObject.widthRatio >= appleMaxRatioSize) {
 				objectsToDropRandomly.add(gameObject);
 			}
 		}
 
 		for (GameObject objectToDrop : objectsToDropRandomly) {
-			objectToDrop.drawOffsetY = Game.SQUARE_HEIGHT - objectToDrop.height;
+			// System.out.println("Dropping apple @ " +
+			// this.squareGameObjectIsOn);
+			objectToDrop.drawOffsetY = 1 - (objectToDrop.height / Game.SQUARE_HEIGHT);
 			new ActionDropItems(this, this.squareGameObjectIsOn, objectToDrop).perform();
 		}
 	}
