@@ -1,6 +1,5 @@
 package com.marklynch.objects.actions;
 
-import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.objects.GameObject;
@@ -30,10 +29,9 @@ public class ActionRename extends Action {
 		if (!enabled)
 			return;
 
-		Game.level.fullScreenTextBox = new FullScreenTextBox(target, FullScreenTextBox.ENTER_NEW_MARKER,
+		FullScreenTextBox fullScreenTextBox = new FullScreenTextBox(target, FullScreenTextBox.ENTER_NEW_MARKER,
 				FullScreenTextBox.TYPE.RENAME_MAP_MARKER);
-		Level.activeTextBox = Game.level.fullScreenTextBox.textBox;
-		Game.level.pausePlayer();
+		Level.openFullScreenTextBox(fullScreenTextBox);
 		// Templates.MAP_MARKER.makeCopy(target, null);
 		//
 		// if (Game.level.shouldLog(Game.level.player))

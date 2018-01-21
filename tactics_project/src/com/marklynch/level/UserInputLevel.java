@@ -800,10 +800,9 @@ public class UserInputLevel {
 			controllingMenu = true;
 			Game.level.popupMenuObjects.get(0).clickHighlightedButton();
 		} else {
-			Game.level.fullScreenTextBox = new FullScreenTextBox(null, FullScreenTextBox.SQUARE_SEARCH_X,
+			FullScreenTextBox fullScreenTextBox = new FullScreenTextBox(null, FullScreenTextBox.SQUARE_SEARCH_X,
 					FullScreenTextBox.TYPE.SQUARE_SEARCH_X);
-			Game.level.pausePlayer();
-			Level.activeTextBox = Level.fullScreenTextBox.textBox;
+			Level.openFullScreenTextBox(fullScreenTextBox);
 			Level.activeTextBox.maxNumericValue = Game.level.squares.length - 1;
 		}
 		// if (Game.level.activeActor != Game.level.player)
@@ -844,7 +843,7 @@ public class UserInputLevel {
 		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
 
 		Level.closeAllPopups();
-		Game.level.fullScreenTextBox = null;
+		Game.level.closeFullScreenTextBox();
 		Level.activeTextBox = null;
 		// Game.level.notifications.clear();
 		if (Level.journal.showing) {

@@ -72,18 +72,16 @@ public class FullScreenTextBox implements TextBoxHolder {
 					mapMarker.links = TextUtils.getLinks(true, this);
 				}
 				Level.activeTextBox = null;
-				Level.fullScreenTextBox = null;
+				Level.closeFullScreenTextBox();
 			}
 		} else if (type == TYPE.SQUARE_SEARCH_X) {
-			Level.fullScreenTextBox = new FullScreenTextBox(null, FullScreenTextBox.SQUARE_SEARCH_Y,
-					FullScreenTextBox.TYPE.SQUARE_SEARCH_Y);
-			Game.level.pausePlayer();
-			Level.activeTextBox = Level.fullScreenTextBox.textBox;
-			Level.activeTextBox.maxNumericValue = Game.level.squares[0].length - 1;
 			squareX = this.textBox.numericValue;
+			FullScreenTextBox fullScreenTextBox = new FullScreenTextBox(null, FullScreenTextBox.SQUARE_SEARCH_Y,
+					FullScreenTextBox.TYPE.SQUARE_SEARCH_Y);
+			Level.openFullScreenTextBox(fullScreenTextBox);
+			Level.activeTextBox.maxNumericValue = Game.level.squares[0].length - 1;
 		} else if (type == TYPE.SQUARE_SEARCH_Y) {
-			Level.activeTextBox = null;
-			Level.fullScreenTextBox = null;
+			Level.closeFullScreenTextBox();
 			squareY = this.textBox.numericValue;
 			Game.level.centerToSquare = true;
 			Game.level.squareToCenterTo = Game.level.squares[squareX][squareY];

@@ -126,7 +126,7 @@ public class Level {
 	public ArrayList<PopupMenuSelectObject> popupMenuObjects = new ArrayList<PopupMenuSelectObject>();
 	public ArrayList<PopupMenuSelectAction> popupMenuActions = new ArrayList<PopupMenuSelectAction>();
 	public ArrayList<PopupMenuSelectObject> popupMenuHighlightObjects = new ArrayList<PopupMenuSelectObject>();
-	public static FullScreenTextBox fullScreenTextBox = null;
+	static FullScreenTextBox fullScreenTextBox = null;
 	public static TextBox activeTextBox = null;
 	public ArrayList<Notification> notifications = new ArrayList<Notification>();
 	public ArrayList<PinWindow> pinWindows = new ArrayList<PinWindow>();
@@ -632,6 +632,21 @@ public class Level {
 			pausePlayer();
 		}
 		closeAllPopups();
+	}
+
+	public static void openFullScreenTextBox(FullScreenTextBox fullScreenTextBox) {
+		Level.fullScreenTextBox = fullScreenTextBox;
+		Level.activeTextBox = Level.fullScreenTextBox.textBox;
+		pausePlayer();
+		closeAllPopups();
+	}
+
+	public static void closeFullScreenTextBox() {
+
+		if (activeTextBox == fullScreenTextBox.textBox) {
+			Level.activeTextBox = null;
+		}
+		Level.fullScreenTextBox = null;
 	}
 
 	public static void closeAllPopups() {
@@ -1656,12 +1671,12 @@ public class Level {
 		pauseButton.buttonColor = Color.BLACK;
 	}
 
-	public void pausePlayer() {
+	public static void pausePlayer() {
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;
 		Player.playerTargetActor = null;
-		highlightPauseButton();
+		Game.level.highlightPauseButton();
 	}
 
 	public void dragToFollowPlayer() {
