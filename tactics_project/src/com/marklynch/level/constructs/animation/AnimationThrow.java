@@ -119,7 +119,7 @@ public class AnimationThrow extends Animation {
 	}
 
 	@Override
-	public void draw() {
+	public void draw2() {
 		float alpha = 1.0f;
 
 		float radians = (float) Math.toRadians(angle);
@@ -137,5 +137,11 @@ public class AnimationThrow extends Animation {
 		view.rotate(-radians, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-x, -y));
 		Game.activeBatch.updateUniforms();
+	}
+
+	@Override
+	public void draw1() {
+		// TODO Auto-generated method stub
+
 	}
 }

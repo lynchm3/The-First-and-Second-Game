@@ -80,7 +80,7 @@ public class AnimationGive extends Animation {
 	}
 
 	@Override
-	public void draw() {
+	public void draw2() {
 		float alpha = 1.0f;
 
 		Game.activeBatch.flush();
@@ -94,5 +94,11 @@ public class AnimationGive extends Animation {
 		Game.activeBatch.flush();
 		view.translate(new Vector2f(-x, -y));
 		Game.activeBatch.updateUniforms();
+	}
+
+	@Override
+	public void draw1() {
+		// TODO Auto-generated method stub
+
 	}
 }

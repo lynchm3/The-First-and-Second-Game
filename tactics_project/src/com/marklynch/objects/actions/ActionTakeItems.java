@@ -74,7 +74,12 @@ public class ActionTakeItems extends VariableQtyAction {
 
 		if (Game.level.openInventories.size() > 0) {
 		} else {
-			performer.animation = new AnimationTake(objects[0], performer.squareGameObjectIsOn);
+			if (targetSquare != null)
+				performer.animation = new AnimationTake(objects[0], performer.squareGameObjectIsOn, targetSquare);
+			else
+				performer.animation = new AnimationTake(objects[0], performer.squareGameObjectIsOn,
+						targetGameObject.squareGameObjectIsOn);
+
 		}
 
 		for (int i = 0; i < amountToTake; i++) {

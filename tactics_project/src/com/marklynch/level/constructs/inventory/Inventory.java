@@ -1491,7 +1491,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		if (animation != null && !animation.completed) {
-			animation.draw();
+			animation.draw2();
 		}
 
 	}

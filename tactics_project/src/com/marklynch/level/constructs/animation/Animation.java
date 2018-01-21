@@ -11,6 +11,8 @@ public abstract class Animation {
 
 	public abstract void update(double delta);
 
-	public abstract void draw();
+	public abstract void draw1();
+
+	public abstract void draw2();
 
 }

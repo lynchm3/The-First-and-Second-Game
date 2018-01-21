@@ -16,13 +16,17 @@ public class AnimationTake extends Animation {
 	public double speedY = 0.1d;
 	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
 	public GameObject gameObject;
+	public Square originSquare;
+	public Square targetSquare;
 
 	public float speed = 1;
 	public boolean onTarget = true;
 
-	public AnimationTake(GameObject gameObject, Square targetSquare) {
+	public AnimationTake(GameObject gameObject, Square targetSquare, Square originSquare) {
 		super();
 
+		this.originSquare = originSquare;
+		this.targetSquare = targetSquare;
 		this.gameObject = gameObject;
 		if (gameObject.squareGameObjectIsOn != null) {
 			// on the ground
@@ -87,8 +91,21 @@ public class AnimationTake extends Animation {
 	}
 
 	@Override
-	public void draw() {
-		TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height, false);
+	public void draw1() {
+		if (originSquare.yInGrid < targetSquare.yInGrid) {
+			System.out.println("draw1");
+			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
+					false);
+		}
+	}
+
+	@Override
+	public void draw2() {
+		if (originSquare.yInGrid >= targetSquare.yInGrid) {
+			System.out.println("draw2");
+			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
+					false);
+		}
 	}
 
 }

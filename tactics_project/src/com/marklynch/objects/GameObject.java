@@ -314,6 +314,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			Game.activeBatch.updateUniforms();
 		}
 
+		if (animation != null && animation.completed == false)
+			animation.draw1();
+
 		// Draw object
 		if (squareGameObjectIsOn != null) {
 
@@ -345,9 +348,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			}
 		}
 
-		if (animation != null && animation.completed == false)
-			animation.draw();
-
 		if (animation != null && !(this instanceof Actor)) {
 			Game.activeBatch.flush();
 			Game.activeBatch.getViewMatrix().translate(new Vector2f(-animation.offsetX, -animation.offsetY));
@@ -356,13 +356,27 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	private void drawHighlight() {
-		// TODO Auto-generated method stub
 
 	}
 
 	public void draw2() {
+
+		if (!(this instanceof Actor) && animation != null) {
+			Game.activeBatch.flush();
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
+			Game.activeBatch.updateUniforms();
+		}
 		for (Effect effect : activeEffectsOnGameObject) {
 			effect.draw2();
+		}
+
+		if (animation != null && animation.completed == false)
+			animation.draw2();
+
+		if (animation != null && !(this instanceof Actor)) {
+			Game.activeBatch.flush();
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(-animation.offsetX, -animation.offsetY));
+			Game.activeBatch.updateUniforms();
 		}
 	}
 

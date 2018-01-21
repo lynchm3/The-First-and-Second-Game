@@ -23,7 +23,13 @@ public class AnimationWait extends Animation {
 	}
 
 	@Override
-	public void draw() {
+	public void draw2() {
+
+	}
+
+	@Override
+	public void draw1() {
+		// TODO Auto-generated method stub
 
 	}
 }

@@ -70,7 +70,13 @@ public class AnimationDrop extends Animation {
 	}
 
 	@Override
-	public void draw() {
+	public void draw2() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void draw1() {
 		// TODO Auto-generated method stub
 
 	}
