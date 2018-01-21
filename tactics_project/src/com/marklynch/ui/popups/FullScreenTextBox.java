@@ -77,6 +77,7 @@ public class FullScreenTextBox implements TextBoxHolder {
 		} else if (type == TYPE.SQUARE_SEARCH_X) {
 			Level.fullScreenTextBox = new FullScreenTextBox(null, FullScreenTextBox.SQUARE_SEARCH_Y,
 					FullScreenTextBox.TYPE.SQUARE_SEARCH_Y);
+			Game.level.pausePlayer();
 			Level.activeTextBox = Level.fullScreenTextBox.textBox;
 			Level.activeTextBox.maxNumericValue = Game.level.squares[0].length - 1;
 			squareX = this.textBox.numericValue;

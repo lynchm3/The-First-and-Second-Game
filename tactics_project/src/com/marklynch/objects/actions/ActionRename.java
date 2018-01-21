@@ -33,6 +33,7 @@ public class ActionRename extends Action {
 		Game.level.fullScreenTextBox = new FullScreenTextBox(target, FullScreenTextBox.ENTER_NEW_MARKER,
 				FullScreenTextBox.TYPE.RENAME_MAP_MARKER);
 		Level.activeTextBox = Game.level.fullScreenTextBox.textBox;
+		Game.level.pausePlayer();
 		// Templates.MAP_MARKER.makeCopy(target, null);
 		//
 		// if (Game.level.shouldLog(Game.level.player))

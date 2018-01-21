@@ -793,21 +793,21 @@ public class UserInputLevel {
 			return;
 		}
 
-		if (Game.level.activeActor != Game.level.player)
-			return;
-
 		if (Game.level.popupMenuActions.size() != 0) {
 			controllingMenu = true;
 			Game.level.popupMenuActions.get(0).clickHighlightedButton();
 		} else if (Game.level.popupMenuObjects.size() != 0) {
 			controllingMenu = true;
 			Game.level.popupMenuObjects.get(0).clickHighlightedButton();
+		} else {
+			Game.level.fullScreenTextBox = new FullScreenTextBox(null, FullScreenTextBox.SQUARE_SEARCH_X,
+					FullScreenTextBox.TYPE.SQUARE_SEARCH_X);
+			Game.level.pausePlayer();
+			Level.activeTextBox = Level.fullScreenTextBox.textBox;
+			Level.activeTextBox.maxNumericValue = Game.level.squares.length - 1;
 		}
-
-		Game.level.fullScreenTextBox = new FullScreenTextBox(null, FullScreenTextBox.SQUARE_SEARCH_X,
-				FullScreenTextBox.TYPE.SQUARE_SEARCH_X);
-		Game.level.activeTextBox = Game.level.fullScreenTextBox.textBox;
-		Game.level.activeTextBox.maxNumericValue = Game.level.squares.length - 1;
+		// if (Game.level.activeActor != Game.level.player)
+		// return;
 	}
 
 	public static void backSpaceTyped() {

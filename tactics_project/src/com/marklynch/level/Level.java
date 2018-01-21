@@ -606,6 +606,7 @@ public class Level {
 			Game.level.player.inventory.open();
 			Game.level.player.inventory.filter(Inventory.inventoryFilterBy, false);
 			Game.level.player.inventory.sort(Inventory.inventorySortBy, false, false);
+			pausePlayer();
 			// Game.level.openInventories.add(Game.level.player.inventory);
 		}
 		closeAllPopups();
@@ -617,6 +618,7 @@ public class Level {
 			journal.close();
 		} else {
 			journal.open();
+			pausePlayer();
 		}
 		closeAllPopups();
 	}
@@ -627,6 +629,7 @@ public class Level {
 			gameOver.close();
 		} else {
 			gameOver.open();
+			pausePlayer();
 		}
 		closeAllPopups();
 	}
