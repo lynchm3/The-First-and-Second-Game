@@ -474,27 +474,29 @@ public class Actor extends GameObject {
 			Game.activeBatch.updateUniforms();
 		}
 
-		// draw sidebar on square
-		float healthPercentage = (remainingHealth) / (totalHealth);
-		float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
-		float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
-		float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
+		if (remainingHealth != totalHealth) {
+			// draw sidebar on square
+			float healthPercentage = (remainingHealth) / (totalHealth);
+			float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
+			float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+			float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
 
-		Color color = Color.YELLOW;
-		if (thoughtsOnPlayer > 50) {
-			color = Color.GREEN;
-		} else if (thoughtsOnPlayer < -50) {
-			color = Color.RED;
+			Color color = Color.YELLOW;
+			if (thoughtsOnPlayer > 50) {
+				color = Color.GREEN;
+			} else if (thoughtsOnPlayer < -50) {
+				color = Color.RED;
+			}
+
+			// White bit under health bar
+			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), healthXInPixels + 1, healthYInPixels + 1,
+					healthXInPixels + healthWidthInPixels - 1, healthYInPixels + healthHeightInPixels - 1);
+
+			// Colored health bar
+			QuadUtils.drawQuad(color, healthXInPixels + 1, healthYInPixels + 1,
+					healthXInPixels + healthWidthInPixels - 1, healthYInPixels + healthBarHeightInPixels - 1);
+			// }
 		}
-
-		// White bit under health bar
-		QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), healthXInPixels + 1, healthYInPixels + 1,
-				healthXInPixels + healthWidthInPixels - 1, healthYInPixels + healthHeightInPixels - 1);
-
-		// Colored health bar
-		QuadUtils.drawQuad(color, healthXInPixels + 1, healthYInPixels + 1, healthXInPixels + healthWidthInPixels - 1,
-				healthYInPixels + healthBarHeightInPixels - 1);
-		// }
 
 		super.draw1();
 
