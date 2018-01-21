@@ -55,7 +55,8 @@ public class Tree extends GameObject {
 		float appleDrawOffsetYMax = 0.35f;
 
 		apple.drawOffsetX = appleDrawOffsetXMin + (float) (Math.random() * (appleDrawOffsetXMax - appleDrawOffsetXMin));
-		apple.drawOffsetY = appleDrawOffsetYMin + (float) (Math.random() * (appleDrawOffsetYMax - appleDrawOffsetYMin));
+		apple.drawOffsetY = apple.drawOffsetYInTree = appleDrawOffsetYMin
+				+ (float) (Math.random() * (appleDrawOffsetYMax - appleDrawOffsetYMin));
 
 		inventory.add(apple);
 
@@ -145,7 +146,7 @@ public class Tree extends GameObject {
 			}
 		}
 
-		if (Math.random() > 0.9d) {
+		if (Math.random() > 0.999d) {
 			addApple(0.1f);
 		}
 

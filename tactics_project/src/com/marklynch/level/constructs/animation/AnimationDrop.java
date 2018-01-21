@@ -2,7 +2,9 @@ package com.marklynch.level.constructs.animation;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Tree;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 
@@ -14,7 +16,7 @@ public class AnimationDrop extends Animation {
 	public float startOffsetY = 0;
 
 	public AnimationDrop(String name, GameObject shooter, Action action, Square targetSquare,
-			GameObject projectileObject, float speed, float rotationSpeed, boolean onTarget) {
+			GameObject projectileObject, float speed) {
 
 		if (shooter == Game.level.player) {
 			name = "Your " + name;
@@ -28,6 +30,10 @@ public class AnimationDrop extends Animation {
 					+ shooterActor.handAnchorX - projectileObject.anchorX);
 			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + shooter.drawOffsetY * Game.SQUARE_HEIGHT
 					+ shooterActor.handAnchorY - projectileObject.anchorY);
+		} else if (shooter instanceof Tree && projectileObject instanceof Food) {
+			Food fruit = (Food) projectileObject;
+			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + fruit.drawOffsetX * Game.SQUARE_WIDTH);
+			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + fruit.drawOffsetYInTree * Game.SQUARE_HEIGHT);
 		} else {
 			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels
 					+ (Game.SQUARE_WIDTH - projectileObject.width) / 2);

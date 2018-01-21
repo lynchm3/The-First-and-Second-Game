@@ -5,6 +5,8 @@ import com.marklynch.objects.units.Actor;
 
 public class Food extends GameObject {
 
+	public float drawOffsetYInTree;
+
 	public Food() {
 		super();
 
