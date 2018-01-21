@@ -10,6 +10,7 @@ import com.marklynch.objects.BrokenGlass;
 import com.marklynch.objects.Furnace;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Key;
+import com.marklynch.objects.Mirror;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.Stampable;
@@ -43,6 +44,19 @@ public class TemplatesFurniture {
 		Templates.BED.anchorX = 0;
 		Templates.BED.anchorY = 0;
 		Templates.BED.templateId = GameObject.generateNewTemplateId();
+
+		Templates.MIRROR = new Mirror();
+		Templates.MIRROR.name = "Mirror";
+		Templates.MIRROR.imageTexturePath = "mirror.png";
+		Templates.MIRROR.totalHealth = Templates.MIRROR.remainingHealth = 50;
+		Templates.MIRROR.widthRatio = 1f;
+		Templates.MIRROR.heightRatio = 1.5f;
+		Templates.MIRROR.drawOffsetY = -0.5f;
+		Templates.MIRROR.soundWhenHit = 10f;
+		Templates.MIRROR.stackable = false;
+		Templates.MIRROR.weight = 52f;
+		Templates.MIRROR.value = 104;
+		Templates.MIRROR.templateId = GameObject.generateNewTemplateId();
 
 		Templates.SHOP_COUNTER = new BigGameObject();
 		Templates.SHOP_COUNTER.name = "Shop Counter";

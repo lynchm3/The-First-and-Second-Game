@@ -117,7 +117,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 
 	@Override
 	public int compare(GameObject a, GameObject b) {
-		return (int) (b.height - a.height);
+		return (int) (a.height - b.height);
 	}
 
 	public int getDecorativeCount() {

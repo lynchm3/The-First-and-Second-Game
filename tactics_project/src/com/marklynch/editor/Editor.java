@@ -37,6 +37,7 @@ import com.marklynch.level.constructs.enchantment.EnhancementFireDamage;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Mirror;
 import com.marklynch.objects.Sign;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
@@ -419,6 +420,8 @@ public class Editor {
 		ThoughtBubbles.loadExpressions();
 
 		new Templates();
+
+		Mirror mirror = Templates.MIRROR.makeCopy(Game.level.squares[3][0], null);
 
 		// Add player
 		// West Security

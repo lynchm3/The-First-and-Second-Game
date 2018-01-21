@@ -841,10 +841,12 @@ public class UserInputLevel {
 		// return;
 
 		Game.level.levelMode = Level.LevelMode.LEVEL_MODE_NORMAL;
+		Level.activeTextBox = null;
 
 		Level.closeAllPopups();
-		Game.level.closeFullScreenTextBox();
-		Level.activeTextBox = null;
+		if (Level.fullScreenTextBox != null) {
+			Level.closeFullScreenTextBox();
+		}
 		// Game.level.notifications.clear();
 		if (Level.journal.showing) {
 			Game.level.openCloseJournal();

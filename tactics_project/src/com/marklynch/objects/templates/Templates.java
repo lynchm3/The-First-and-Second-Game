@@ -22,6 +22,7 @@ import com.marklynch.objects.Key;
 import com.marklynch.objects.Liquid;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.MeatChunk;
+import com.marklynch.objects.Mirror;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.RemoteDoor;
@@ -180,6 +181,8 @@ public class Templates {
 
 	// Furniture;
 	public static Bed BED;
+
+	public static Mirror MIRROR;
 
 	public static BigGameObject SHOP_COUNTER;
 
