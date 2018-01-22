@@ -84,7 +84,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 
 			if (flash) {
 				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-						actorPositionXInPixels + halfWidth, actorPositionYInPixels + halfWidth, backwards, Color.BLACK);
+						actorPositionXInPixels + halfWidth, actorPositionYInPixels + halfWidth, 0, 0, 0, 0, backwards, Color.BLACK, false);
 			}
 
 			Game.activeBatch.flush();

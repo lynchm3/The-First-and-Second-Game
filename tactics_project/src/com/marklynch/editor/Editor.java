@@ -421,7 +421,7 @@ public class Editor {
 
 		new Templates();
 
-		Mirror mirror = Templates.MIRROR.makeCopy(Game.level.squares[3][0], null);
+		Mirror mirror = Templates.MIRROR.makeCopy(Game.level.squares[2][4], null);
 
 		// Add player
 		// West Security

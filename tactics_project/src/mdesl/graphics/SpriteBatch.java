@@ -36,15 +36,15 @@ import java.nio.FloatBuffer;
 import java.util.Arrays;
 import java.util.List;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Matrix4f;
+
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.graphics.glutils.VertexArray;
 import mdesl.graphics.glutils.VertexAttrib;
 import mdesl.graphics.glutils.VertexData;
 import mdesl.util.MathUtil;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.util.vector.Matrix4f;
 
 /**
  * @author Matt (mdesl) DesLauriers
@@ -299,7 +299,9 @@ public class SpriteBatch {
 		float v = srcY / tex.getHeight();
 		float u2 = (srcX + srcWidth) / tex.getWidth();
 		float v2 = (srcY + srcHeight) / tex.getHeight();
+
 		draw(tex, dstX, dstY, dstWidth, dstHeight, u, v, u2, v2);
+
 	}
 
 	public void drawRegion(TextureRegion region, float srcX, float srcY, float srcWidth, float srcHeight, float dstX,
