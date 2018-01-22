@@ -158,18 +158,6 @@ public class Mirror extends GameObject {
 				actorPositionXInPixels + actor.width, actorPositionYInPixels + actor.height, boundsX1, boundsY1,
 				boundsX2, boundsY2, false, false);
 
-		// weapon
-		if (actor.equipped != null && !actor.sleeping) {
-
-			int weaponPositionXInPixels = (int) (actorPositionXInPixels + actor.handAnchorX - actor.equipped.anchorX);
-			int weaponPositionYInPixels = (int) (actorPositionYInPixels + actor.handAnchorY - actor.equipped.anchorY);
-			alpha = 1.0f;
-			TextureUtils.drawTextureWithinBounds(actor.equipped.imageTexture, alpha, weaponPositionXInPixels,
-					weaponPositionYInPixels, weaponPositionXInPixels + actor.equipped.width,
-					weaponPositionYInPixels + actor.equipped.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
-					false);
-		}
-
 		if (actor.helmet != null && !actor.sleeping) {
 
 			int helmetPositionXInPixels = (int) (actorPositionXInPixels + actor.headAnchorX - actor.helmet.anchorX);
@@ -210,6 +198,18 @@ public class Mirror extends GameObject {
 			TextureUtils.drawTextureWithinBounds(actor.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + actor.legArmor.width,
 					legArmorPositionYInPixels + actor.legArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
+		}
+
+		// weapon
+		if (actor.equipped != null && !actor.sleeping) {
+
+			int weaponPositionXInPixels = (int) (actorPositionXInPixels + actor.handAnchorX - actor.equipped.anchorX);
+			int weaponPositionYInPixels = (int) (actorPositionYInPixels + actor.handAnchorY - actor.equipped.anchorY);
+			alpha = 1.0f;
+			TextureUtils.drawTextureWithinBounds(actor.equipped.imageTexture, alpha, weaponPositionXInPixels,
+					weaponPositionYInPixels, weaponPositionXInPixels + actor.equipped.width,
+					weaponPositionYInPixels + actor.equipped.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
 					false);
 		}
 
