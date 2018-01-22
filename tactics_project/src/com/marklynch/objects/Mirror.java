@@ -5,7 +5,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.Texture;
 
 public class Mirror extends GameObject {
@@ -115,11 +114,19 @@ public class Mirror extends GameObject {
 
 	public void drawGameObject(GameObject gameObject, int offsetY) {
 
-		int actorPositionXInPixels = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-				+ Game.SQUARE_WIDTH * gameObject.drawOffsetX);
-		int actorPositionYInPixels = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
-				- Game.SQUARE_HEIGHT * gameObject.drawOffsetY - offsetY * Game.SQUARE_HEIGHT
-				- Game.SQUARE_HEIGHT * offsetY);
+		float actorPositionXInPixels = gameObject.squareGameObjectIsOn.xInGridPixels
+				+ Game.SQUARE_WIDTH * gameObject.drawOffsetX;
+		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
+				+ Game.SQUARE_HEIGHT * gameObject.drawOffsetY - Game.SQUARE_HEIGHT * offsetY;
+
+		// int actorPositionXInPixels = (int)
+		// (gameObject.squareGameObjectIsOn.xInGridPixels
+		// + Game.SQUARE_WIDTH * gameObject.drawOffsetX);
+		// int actorPositionYInPixels = (int)
+		// (gameObject.squareGameObjectIsOn.yInGridPixels
+		// - Game.SQUARE_HEIGHT * gameObject.drawOffsetY - offsetY *
+		// Game.SQUARE_HEIGHT
+		// - Game.SQUARE_HEIGHT * offsetY);
 
 		float alpha = 1.0f;
 
@@ -130,15 +137,9 @@ public class Mirror extends GameObject {
 		if (hiding)
 			alpha = 0.5f;
 
-		TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels - 128,
-				actorPositionXInPixels + gameObject.width, actorPositionYInPixels - gameObject.height - 128,
-				gameObject.backwards);
-
-		if (flash) {
-			TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + gameObject.width, actorPositionYInPixels - gameObject.height, 0, 0, 0, 0,
-					gameObject.backwards, false, Color.BLACK, false);
-		}
+		TextureUtils.drawTextureWithinBounds(gameObject.imageTexture, alpha, actorPositionXInPixels,
+				actorPositionYInPixels, actorPositionXInPixels + gameObject.width,
+				actorPositionYInPixels + gameObject.height, boundsX1, boundsY1, boundsX2, boundsY2, false, true);
 
 	}
 
