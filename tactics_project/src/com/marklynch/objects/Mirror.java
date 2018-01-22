@@ -76,7 +76,7 @@ public class Mirror extends GameObject {
 
 		// 1 sqr away
 		squareToMirrorX = squareGameObjectIsOn.xInGrid;
-		squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
+		squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
 		if (squareToMirrorY < Game.level.squares[0].length) {
 			Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 
@@ -85,9 +85,9 @@ public class Mirror extends GameObject {
 			for (int i = 0; i < squareToMirror.inventory.size(); i++) {
 				GameObject gameObject = squareToMirror.inventory.gameObjects.get(i);
 				if (gameObject instanceof Actor) {
-					drawActor((Actor) gameObject, 1);
+					drawActor((Actor) gameObject, 0);
 				} else {
-					drawGameObject(gameObject, 1);
+					drawGameObject(gameObject, 0);
 				}
 			}
 		}
@@ -115,47 +115,39 @@ public class Mirror extends GameObject {
 
 	public void drawGameObject(GameObject gameObject, int offsetY) {
 
-		// Draw object
-		if (squareGameObjectIsOn != null) {
+		int actorPositionXInPixels = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
+				+ Game.SQUARE_WIDTH * gameObject.drawOffsetX);
+		int actorPositionYInPixels = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
+				- Game.SQUARE_HEIGHT * gameObject.drawOffsetY - offsetY * Game.SQUARE_HEIGHT
+				- Game.SQUARE_HEIGHT * offsetY);
 
-			int actorPositionXInPixels = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * gameObject.drawOffsetX);
-			int actorPositionYInPixels = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
-					- Game.SQUARE_HEIGHT * gameObject.drawOffsetY - offsetY * Game.SQUARE_HEIGHT
-					- Game.SQUARE_HEIGHT * offsetY);
+		float alpha = 1.0f;
 
-			float alpha = 1.0f;
+		// TextureUtils.skipNormals = true;
 
-			// TextureUtils.skipNormals = true;
+		if (!this.squareGameObjectIsOn.visibleToPlayer && gameObject != Game.level.player)
+			alpha = 0.5f;
+		if (hiding)
+			alpha = 0.5f;
 
-			if (!this.squareGameObjectIsOn.visibleToPlayer && gameObject != Game.level.player)
-				alpha = 0.5f;
-			if (hiding)
-				alpha = 0.5f;
+		TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels - 128,
+				actorPositionXInPixels + gameObject.width, actorPositionYInPixels - gameObject.height - 128,
+				gameObject.backwards);
 
-			TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels,
-					actorPositionYInPixels - 128, actorPositionXInPixels + gameObject.width,
-					actorPositionYInPixels - gameObject.height - 128, gameObject.backwards);
-
-			if (flash) {
-				TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-						actorPositionXInPixels + gameObject.width, actorPositionYInPixels - gameObject.height, 0, 0, 0,
-						0, gameObject.backwards, false, Color.BLACK, false);
-			}
+		if (flash) {
+			TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+					actorPositionXInPixels + gameObject.width, actorPositionYInPixels - gameObject.height, 0, 0, 0, 0,
+					gameObject.backwards, false, Color.BLACK, false);
 		}
 
 	}
 
 	public void drawActor(Actor actor, int offsetY) {
-
-		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-				+ Game.SQUARE_WIDTH * actor.drawOffsetX);
-		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * actor.drawOffsetY - offsetY * Game.SQUARE_HEIGHT);
+		float actorPositionXInPixels = actor.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * actor.drawOffsetX;
+		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * actor.drawOffsetY
+				- Game.SQUARE_HEIGHT * offsetY;
 
 		float alpha = 1.0f;
-
-		// TextureUtils.skipNormals = true;
 
 		if (!this.squareGameObjectIsOn.visibleToPlayer && actor != Game.level.player)
 			alpha = 0.5f;
@@ -169,62 +161,56 @@ public class Mirror extends GameObject {
 		// weapon
 		if (actor.equipped != null && !actor.sleeping) {
 
-			int weaponPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ actor.drawOffsetX * Game.SQUARE_WIDTH + actor.handAnchorX - actor.equipped.anchorX);
-			int weaponPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ actor.drawOffsetY * Game.SQUARE_HEIGHT + actor.handAnchorY - actor.equipped.anchorY
-					- offsetY * Game.SQUARE_HEIGHT);
+			int weaponPositionXInPixels = (int) (actorPositionXInPixels + actor.handAnchorX - actor.equipped.anchorX);
+			int weaponPositionYInPixels = (int) (actorPositionYInPixels + actor.handAnchorY - actor.equipped.anchorY);
 			alpha = 1.0f;
-			TextureUtils.drawTexture(actor.equipped.imageTexture, alpha, weaponPositionXInPixels,
+			TextureUtils.drawTextureWithinBounds(actor.equipped.imageTexture, alpha, weaponPositionXInPixels,
 					weaponPositionYInPixels, weaponPositionXInPixels + actor.equipped.width,
-					weaponPositionYInPixels + actor.equipped.height);
+					weaponPositionYInPixels + actor.equipped.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
 		}
 
 		if (actor.helmet != null && !actor.sleeping) {
 
-			int helmetPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ actor.drawOffsetX * Game.SQUARE_WIDTH + actor.headAnchorX - actor.helmet.anchorX);
-			int helmetPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ actor.drawOffsetY * Game.SQUARE_HEIGHT + actor.headAnchorY - actor.helmet.anchorY
-					- offsetY * Game.SQUARE_HEIGHT);
+			int helmetPositionXInPixels = (int) (actorPositionXInPixels + actor.headAnchorX - actor.helmet.anchorX);
+			int helmetPositionYInPixels = (int) (actorPositionYInPixels + actor.headAnchorY - actor.helmet.anchorY);
 			alpha = 1.0f;
-			TextureUtils.drawTexture(actor.helmet.imageTexture, alpha, helmetPositionXInPixels, helmetPositionYInPixels,
-					helmetPositionXInPixels + actor.helmet.width, helmetPositionYInPixels + actor.helmet.height);
+			TextureUtils.drawTextureWithinBounds(actor.helmet.imageTexture, alpha, helmetPositionXInPixels,
+					helmetPositionYInPixels, helmetPositionXInPixels + actor.helmet.width,
+					helmetPositionYInPixels + actor.helmet.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
 		} else if (actor.hairImageTexture != null) {
-			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ actor.drawOffsetX * Game.SQUARE_WIDTH + actor.bodyAnchorX - 0);
-			int bodyArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ actor.drawOffsetY * Game.SQUARE_HEIGHT + actor.bodyAnchorY - 0);
+			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + actor.bodyAnchorX - 0);
+			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + actor.bodyAnchorY - 0);
 			alpha = 1.0f;
-			TextureUtils.drawTexture(actor.hairImageTexture, alpha, bodyArmorPositionXInPixels,
+			TextureUtils.drawTextureWithinBounds(actor.hairImageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actor.hairImageTexture.getWidth(),
-					bodyArmorPositionYInPixels + actor.hairImageTexture.getHeight());
+					bodyArmorPositionYInPixels + actor.hairImageTexture.getHeight(), boundsX1, boundsY1, boundsX2,
+					boundsY2, false, false);
 		}
 
 		if (actor.bodyArmor != null && !actor.sleeping) {
 
-			int bodyArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ actor.drawOffsetX * Game.SQUARE_WIDTH + actor.bodyAnchorX - actor.bodyArmor.anchorX);
-			int bodyArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ actor.drawOffsetY * Game.SQUARE_HEIGHT + actor.bodyAnchorY - actor.bodyArmor.anchorY
-					- offsetY * Game.SQUARE_HEIGHT);
+			int bodyArmorPositionXInPixels = (int) (actorPositionXInPixels + actor.bodyAnchorX
+					- actor.bodyArmor.anchorX);
+			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels + actor.bodyAnchorY
+					- actor.bodyArmor.anchorY);
 			alpha = 1.0f;
-			TextureUtils.drawTexture(actor.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
+			TextureUtils.drawTextureWithinBounds(actor.bodyArmor.imageTexture, alpha, bodyArmorPositionXInPixels,
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actor.bodyArmor.width,
-					bodyArmorPositionYInPixels + actor.bodyArmor.height);
+					bodyArmorPositionYInPixels + actor.bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
 		}
 
 		if (actor.legArmor != null && !actor.sleeping) {
 
-			int legArmorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ actor.drawOffsetX * Game.SQUARE_WIDTH + actor.legsAnchorX - actor.legArmor.anchorX);
-			int legArmorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ actor.drawOffsetY * Game.SQUARE_WIDTH + actor.legsAnchorY - actor.legArmor.anchorY
-					- offsetY * Game.SQUARE_HEIGHT);
+			int legArmorPositionXInPixels = (int) (actorPositionXInPixels + actor.legsAnchorX - actor.legArmor.anchorX);
+			int legArmorPositionYInPixels = (int) (actorPositionYInPixels + actor.legsAnchorY - actor.legArmor.anchorY);
 			alpha = 1.0f;
-			TextureUtils.drawTexture(actor.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
+			TextureUtils.drawTextureWithinBounds(actor.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + actor.legArmor.width,
-					legArmorPositionYInPixels + actor.legArmor.height);
+					legArmorPositionYInPixels + actor.legArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
+					false);
 		}
 
 	}
