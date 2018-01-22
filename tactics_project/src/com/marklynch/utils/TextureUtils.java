@@ -18,14 +18,15 @@ public class TextureUtils {
 	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2,
 			boolean inBounds, float boundsX1, float boundsY1, float boundsX2, float boundsY2, boolean backwards,
 			boolean upsideDown, boolean inbounds) {
-		drawTexture(texture, alpha, x1, y1, x2, y2, boundsX1, boundsY1, boundsX2, boundsY2, backwards, Color.WHITE,
-				inbounds);
+		drawTexture(texture, alpha, x1, y1, x2, y2, boundsX1, boundsY1, boundsX2, boundsY2, backwards, upsideDown,
+				Color.WHITE, inbounds);
 
 	}
 
 	// master drawTexture method
 	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2, float boundsX1,
-			float boundsY1, float boundsX2, float boundsY2, boolean backwards, Color color, boolean inBounds) {
+			float boundsY1, float boundsX2, float boundsY2, boolean backwards, boolean upsideDown, Color color,
+			boolean inBounds) {
 
 		float vertexX1 = x1;
 		float vertexY1 = y1;
@@ -39,6 +40,8 @@ public class TextureUtils {
 		float textureY1 = 0f;
 		float textureX2 = texture.getWidth();
 		float textureY2 = texture.getHeight();
+
+		// float bottom = y1
 
 		if (inBounds == true) {
 			System.out.println("inBounds == true");
@@ -124,11 +127,7 @@ public class TextureUtils {
 		// textureY2, vertexX1, vertexY1,
 		// vertexX2 - vertexX1, vertexY2 - vertexY1);
 
-		if (backwards) {
-			System.out.println("backwards = true");
-			Game.activeBatch.draw(texture, vertexX2, vertexY1, -(vertexX2 - vertexX1), vertexY2 - vertexY1);
-
-		} else {
+		{
 			if (inBounds == true) {
 
 				System.out.println("vertexX1 = " + vertexX1);
@@ -141,10 +140,36 @@ public class TextureUtils {
 				System.out.println("textureX2 = " + textureX2);
 				System.out.println("textureY2 = " + textureY2);
 
-				Game.activeBatch.drawRegion(texture, textureX1, textureY1, textureX2 - textureX1, textureY2 - textureY1,
-						vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
+				System.out.println(" texture.getHeight() - textureY1 = " + (texture.getHeight() - textureY1));
+				System.out.println("texture.getHeight() - (textureY2 - textureY1) = "
+						+ (texture.getHeight() - (textureY2 - textureY1)));
+				// vertexX1 = 256.0
+				// vertexY1 = 448.0
+				// vertexX2 - vertexX1 = 128.0
+				// vertexY2 - vertexY1 = 64.0
+				// textureX1 = 0.0
+				// textureY1 = 64.0
+				// textureX2 = 128.0
+				// textureY2 = 128.0
+
+				if (upsideDown) {
+					System.out.println("upside down in bounds yo");
+					Game.activeBatch.drawRegion(texture, textureX1, texture.getHeight() - textureY1,
+							textureX2 - textureX1, (texture.getHeight() - textureY2) - textureY1, vertexX1, vertexY1,
+							vertexX2 - vertexX1, vertexY2 - vertexY1);
+				} else {
+					System.out.println("right way up in bounds yo");
+					Game.activeBatch.drawRegion(texture, textureX1, textureY1, textureX2 - textureX1,
+							(textureY2 - textureY1), vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
+				}
 			} else {
-				Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
+				if (backwards) {
+					System.out.println("backwards = true");
+					Game.activeBatch.draw(texture, vertexX2, vertexY1, -(vertexX2 - vertexX1), vertexY2 - vertexY1);
+
+				} else {
+					Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
+				}
 
 			}
 
@@ -198,11 +223,11 @@ public class TextureUtils {
 	}
 
 	public static void drawTexture(Texture texture, float x1, float y1, float x2, float y2) {
-		drawTexture(texture, 1.0f, x1, y1, x2, y2, 0, 0, 0, 0, false, Color.WHITE, false);
+		drawTexture(texture, 1.0f, x1, y1, x2, y2, 0, 0, 0, 0, false, false, Color.WHITE, false);
 	}
 
 	public static void drawTexture(Texture texture, float x1, float y1, float x2, float y2, Color color) {
-		drawTexture(texture, 1.0f, x1, y1, x2, y2, 0, 0, 0, 0, false, color, false);
+		drawTexture(texture, 1.0f, x1, y1, x2, y2, 0, 0, 0, 0, false, false, color, false);
 	}
 
 	public static void drawTexture(Texture texture, float alpha, float x1, float y1, float x2, float y2) {
@@ -223,7 +248,8 @@ public class TextureUtils {
 	}
 
 	public static void drawTextureWithinBounds(Texture texture, float alpha, float x1, float y1, float x2, float y2,
-			float boundsX1, float boundsY1, float boundsX2, float boundsY2) {
-		drawTexture(texture, alpha, x1, y1, x2, y2, true, boundsX1, boundsY1, boundsX2, boundsY2, false, false, true);
+			float boundsX1, float boundsY1, float boundsX2, float boundsY2, boolean backwards, boolean upsideDown) {
+		drawTexture(texture, alpha, x1, y1, x2, y2, true, boundsX1, boundsY1, boundsX2, boundsY2, backwards, upsideDown,
+				true);
 	}
 }

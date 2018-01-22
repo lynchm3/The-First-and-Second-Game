@@ -119,10 +119,10 @@ public class Mirror extends GameObject {
 		int boundsY2 = (int) (boundsY1 + height);
 
 		TextureUtils.drawTextureWithinBounds(textureToDraw, alpha, squarePositionX, squarePositionY - 128,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY - 128 + Game.SQUARE_HEIGHT,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT - 128,
 
 				// the bounds of this
-				boundsX1, boundsY1, boundsX2, boundsY2
+				boundsX1, boundsY1, boundsX2, boundsY2, false, true
 
 		);
 
@@ -162,14 +162,14 @@ public class Mirror extends GameObject {
 			if (hiding)
 				alpha = 0.5f;
 
-			TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-					actorPositionXInPixels + gameObject.width, actorPositionYInPixels - gameObject.height,
-					gameObject.backwards);
+			TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels,
+					actorPositionYInPixels - 128, actorPositionXInPixels + gameObject.width,
+					actorPositionYInPixels - gameObject.height - 128, gameObject.backwards);
 
 			if (flash) {
 				TextureUtils.drawTexture(gameObject.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 						actorPositionXInPixels + gameObject.width, actorPositionYInPixels - gameObject.height, 0, 0, 0,
-						0, gameObject.backwards, Color.BLACK, false);
+						0, gameObject.backwards, false, Color.BLACK, false);
 			}
 		}
 

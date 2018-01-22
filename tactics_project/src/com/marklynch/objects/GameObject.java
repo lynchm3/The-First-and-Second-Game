@@ -339,7 +339,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			if (flash) {
 				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, Color.BLACK, false);
+						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+						Color.BLACK, false);
 			}
 
 			if (!(this instanceof Actor)) {
