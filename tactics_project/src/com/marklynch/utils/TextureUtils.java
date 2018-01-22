@@ -140,23 +140,27 @@ public class TextureUtils {
 				System.out.println("textureX2 = " + textureX2);
 				System.out.println("textureY2 = " + textureY2);
 
-				System.out.println(" texture.getHeight() - textureY1 = " + (texture.getHeight() - textureY1));
-				System.out.println("texture.getHeight() - (textureY2 - textureY1) = "
-						+ (texture.getHeight() - (textureY2 - textureY1)));
-				// vertexX1 = 256.0
-				// vertexY1 = 448.0
-				// vertexX2 - vertexX1 = 128.0
-				// vertexY2 - vertexY1 = 64.0
-				// textureX1 = 0.0
-				// textureY1 = 64.0
-				// textureX2 = 128.0
-				// textureY2 = 128.0
+				// Working -
+				// texture.getHeight() - textureY1 = 64.0
+				// texture.getHeight() - (textureY2 - textureY1) = 64.0
+				//
+				//
+
+				// Not working for some reason?
+				// texture.getHeight() - textureY1 = 128.0
+				// texture.getHeight() - (textureY2 - textureY1) = 0.0
 
 				if (upsideDown) {
 					System.out.println("upside down in bounds yo");
-					Game.activeBatch.drawRegion(texture, textureX1, texture.getHeight() - textureY1,
-							textureX2 - textureX1, (texture.getHeight() - textureY2) - textureY1, vertexX1, vertexY1,
-							vertexX2 - vertexX1, vertexY2 - vertexY1);
+
+					float srcY = (texture.getHeight() - textureY1);
+					float srcHeight = -(textureY2 - textureY1);
+
+					System.out.println("srcY = " + srcY);
+					System.out.println("srcHeight " + srcHeight);
+
+					Game.activeBatch.drawRegion(texture, textureX1, srcY, textureX2 - textureX1, srcHeight, vertexX1,
+							vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
 				} else {
 					System.out.println("right way up in bounds yo");
 					Game.activeBatch.drawRegion(texture, textureX1, textureY1, textureX2 - textureX1,

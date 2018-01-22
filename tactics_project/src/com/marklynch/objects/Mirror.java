@@ -10,8 +10,13 @@ import mdesl.graphics.Texture;
 
 public class Mirror extends GameObject {
 
-	public Texture imageTextureFrame;
-	public Texture imageTextureGlass;
+	public Texture imageTextureBack;
+	public Texture imageTextureFront;
+
+	int boundsX1;
+	int boundsY1;
+	int boundsX2;
+	int boundsY2;
 
 	public Mirror() {
 		canBePickedUp = false;
@@ -43,6 +48,14 @@ public class Mirror extends GameObject {
 				return;
 		}
 
+		boundsX1 = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetX);
+		boundsY1 = (int) (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetY);
+		boundsX2 = (int) (boundsX1 + width);
+		boundsY2 = (int) (boundsY1 + height);
+
+		imageTexture = imageTextureBack;
+		super.draw1();
+
 		// 2 sqrs away
 		int squareToMirrorX = squareGameObjectIsOn.xInGrid;
 		int squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
@@ -61,31 +74,13 @@ public class Mirror extends GameObject {
 			}
 		}
 
-		// adjacent sqr
-		// squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
-		// if (squareToMirrorY < Game.level.squares[0].length) {
-		// Square squareToMirror =
-		// Game.level.squares[squareToMirrorX][squareToMirrorY];
-		// drawSquare(squareToMirror, 0);
-		// for (int i = 0; i < squareToMirror.inventory.size(); i++) {
-		// GameObject gameObject = squareToMirror.inventory.gameObjects.get(i);
-		// if (gameObject instanceof Actor) {
-		// drawActor((Actor) gameObject, 0);
-		// } else {
-		// drawGameObject(gameObject, 0);
-		// }
-		// }
-		// }
-
-		super.draw1();
-
-		// 2 sqrs away
+		// 1 sqr away
 		squareToMirrorX = squareGameObjectIsOn.xInGrid;
 		squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
 		if (squareToMirrorY < Game.level.squares[0].length) {
 			Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 
-			drawSquare(squareToMirror, 1);
+			drawSquare(squareToMirror, 0);
 
 			for (int i = 0; i < squareToMirror.inventory.size(); i++) {
 				GameObject gameObject = squareToMirror.inventory.gameObjects.get(i);
@@ -97,48 +92,24 @@ public class Mirror extends GameObject {
 			}
 		}
 
+		imageTexture = imageTextureFront;
+		super.draw1();
+
 	}
 
 	public void drawSquare(Square square, int offsetY) {
 
 		Texture textureToDraw = square.imageTexture;
 		float squarePositionX = square.xInGridPixels;
-		float squarePositionY = square.yInGridPixels - Game.SQUARE_HEIGHT * offsetY * 2;
+		float squarePositionY = this.squareGameObjectIsOn.yInGridPixels - Game.SQUARE_HEIGHT * offsetY;
 
 		float alpha = 1f;
 		if (!this.squareGameObjectIsOn.visibleToPlayer)
 			alpha = 0.5f;
-		// TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX,
-		// squarePositionY,
-		// squarePositionX + Game.SQUARE_WIDTH, squarePositionY -
-		// Game.SQUARE_HEIGHT);
 
-		int boundsX1 = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetX);
-		int boundsY1 = (int) (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetY);
-		int boundsX2 = (int) (boundsX1 + width);
-		int boundsY2 = (int) (boundsY1 + height);
-
-		TextureUtils.drawTextureWithinBounds(textureToDraw, alpha, squarePositionX, squarePositionY - 128,
-				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT - 128,
-
-				// the bounds of this
-				boundsX1, boundsY1, boundsX2, boundsY2, false, true
-
-		);
-
-		// TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX,
-		// squarePositionY,
-		// squarePositionX + Game.SQUARE_WIDTH, squarePositionY -
-		// Game.SQUARE_HEIGHT
-
-		// the bounds of this
-		// boundsX1, boundsY1, boundsX2, boundsY2
-
-		// );
-
-		// public static void drawTextureWithinBounds(Texture texture, float
-		// alpha, float x1, float y1, float x2, float y2,
-		// float boundsX1, float boundsX2, float boundsY1, float boundsY2) {
+		TextureUtils.drawTextureWithinBounds(textureToDraw, alpha, squarePositionX, squarePositionY,
+				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT, boundsX1, boundsY1, boundsX2,
+				boundsY2, false, true);
 
 	}
 
@@ -191,8 +162,9 @@ public class Mirror extends GameObject {
 		if (hiding)
 			alpha = 0.5f;
 
-		TextureUtils.drawTexture(actor.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
-				actorPositionXInPixels + actor.width, actorPositionYInPixels + actor.height, actor.backwards);
+		TextureUtils.drawTextureWithinBounds(actor.imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
+				actorPositionXInPixels + actor.width, actorPositionYInPixels + actor.height, boundsX1, boundsY1,
+				boundsX2, boundsY2, false, false);
 
 		// weapon
 		if (actor.equipped != null && !actor.sleeping) {
@@ -261,6 +233,8 @@ public class Mirror extends GameObject {
 	public Mirror makeCopy(Square square, Actor owner) {
 		Mirror mirror = new Mirror();
 		super.setAttributesForCopy(mirror, square, owner);
+		mirror.imageTextureBack = this.imageTextureBack;
+		mirror.imageTextureFront = this.imageTextureFront;
 		return mirror;
 	}
 
