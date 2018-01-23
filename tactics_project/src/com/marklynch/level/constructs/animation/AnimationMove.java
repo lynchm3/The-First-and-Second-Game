@@ -12,7 +12,7 @@ public class AnimationMove extends Animation {
 
 	public AnimationMove(Square startSquare, Square endSquare) {
 		super();
-		durationToReach = 1000;
+		durationToReach = 200;
 		this.startSquare = startSquare;
 		this.endSquare = endSquare;
 

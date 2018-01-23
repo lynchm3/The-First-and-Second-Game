@@ -832,22 +832,6 @@ public class Level {
 		// }
 	}
 
-	// public void removeWalkingHighlight() {
-	// for (int i = 0; i < squares.length; i++) {
-	// for (int j = 0; j < squares[0].length; j++) {
-	// squares[i][j].reachableBySelectedCharater = false;
-	// }
-	// }
-	// }
-
-	// public void removeWeaponsThatCanAttackHighlight() {
-	// for (int i = 0; i < squares.length; i++) {
-	// for (int j = 0; j < squares[0].length; j++) {
-	// squares[i][j].weaponsThatCanAttack.clear();
-	// }
-	// }
-	// }
-
 	public static int gridX1Bounds;
 	public static int gridX2Bounds;
 	public static int gridY1Bounds;
@@ -863,7 +847,7 @@ public class Level {
 
 		gridX2Bounds = (int) (gridX1Bounds + ((Game.windowWidth / Game.SQUARE_WIDTH)) / Game.zoom) + 2;
 		if (gridX2Bounds >= width)
-			gridX2Bounds = width - 1;
+			gridX2Bounds = width;
 
 		gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.getDragYWithOffset()
 				- (Game.windowHeight / 2) / Game.zoom) / Game.SQUARE_HEIGHT);
@@ -872,7 +856,7 @@ public class Level {
 
 		gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 2;
 		if (gridY2Bounds >= height)
-			gridY2Bounds = height - 1;
+			gridY2Bounds = height;
 
 		if (Game.highlightPath) {
 
