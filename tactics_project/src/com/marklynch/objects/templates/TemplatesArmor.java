@@ -80,10 +80,10 @@ public class TemplatesArmor {
 		Templates.JUMPER.name = "Jumper";
 		Templates.JUMPER.imageTexturePath = "jumper.png";
 		Templates.JUMPER.totalHealth = Templates.JUMPER.remainingHealth = 20;
-		Templates.JUMPER.widthRatio = 1f;
-		Templates.JUMPER.heightRatio = 1.5f;
+		Templates.JUMPER.widthRatio = 0.25f;
+		Templates.JUMPER.heightRatio = 0.75f;
 		Templates.JUMPER.drawOffsetX = 0f;
-		Templates.JUMPER.drawOffsetY = -32f;
+		Templates.JUMPER.drawOffsetY = 0f;
 		Templates.JUMPER.soundWhenHit = 1f;
 		Templates.JUMPER.soundWhenHitting = 1f;
 		Templates.JUMPER.soundDampening = 1f;

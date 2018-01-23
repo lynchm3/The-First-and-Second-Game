@@ -33,8 +33,8 @@ public class TemplatesHumans {
 		Templates.PLAYER.handAnchorY = 127f;
 		Templates.PLAYER.headAnchorX = 70f;
 		Templates.PLAYER.headAnchorY = 23f;
-		Templates.PLAYER.bodyAnchorX = 0f;
-		Templates.PLAYER.bodyAnchorY = 0f;
+		Templates.PLAYER.bodyAnchorX = 46f;
+		Templates.PLAYER.bodyAnchorY = 44f;
 		Templates.PLAYER.legsAnchorX = 32f;
 		Templates.PLAYER.legsAnchorY = 64f;
 		Templates.PLAYER.canOpenDoors = true;
