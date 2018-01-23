@@ -142,7 +142,8 @@ public class Mirror extends GameObject {
 		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * offsetX
 				+ Game.SQUARE_WIDTH * gameObject.drawOffsetX;
 		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * gameObject.drawOffsetY - Game.SQUARE_HEIGHT * offsetY;
+				+ Game.SQUARE_HEIGHT * gameObject.drawOffsetY - Game.SQUARE_HEIGHT * offsetY
+				- (Game.SQUARE_HEIGHT - gameObject.height);
 
 		float alpha = 1.0f;
 
