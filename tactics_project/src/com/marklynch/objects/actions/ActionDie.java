@@ -8,6 +8,7 @@ import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
+import com.marklynch.objects.Mirror;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.templates.Templates;
@@ -202,6 +203,9 @@ public class ActionDie extends Action {
 				// Dead animal
 				// Templates.BLOOD.makeCopy(performer.squareGameObjectIsOn,
 				// null);
+			} else if (performer instanceof Mirror) {
+				Game.level.inanimateObjectsToAdd.add(new InanimateObjectToAddOrRemove(
+						Templates.BROKEN_GLASS.makeCopy(null, null), performer.squareGameObjectIsOn));
 			}
 
 			for (GameObject gameObject : performer.inventory.gameObjects) {
