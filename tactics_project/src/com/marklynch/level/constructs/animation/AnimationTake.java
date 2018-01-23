@@ -93,7 +93,6 @@ public class AnimationTake extends Animation {
 	@Override
 	public void draw1() {
 		if (originSquare.yInGrid < targetSquare.yInGrid) {
-			System.out.println("draw1");
 			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
 					false);
 		}
@@ -102,7 +101,6 @@ public class AnimationTake extends Animation {
 	@Override
 	public void draw2() {
 		if (originSquare.yInGrid >= targetSquare.yInGrid) {
-			System.out.println("draw2");
 			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
 					false);
 		}

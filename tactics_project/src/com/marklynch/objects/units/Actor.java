@@ -468,10 +468,11 @@ public class Actor extends GameObject {
 				return;
 		}
 
+		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetX);
+		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetY);
 		if (animation != null) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
-			Game.activeBatch.updateUniforms();
+			actorPositionXInPixels += animation.offsetX;
+			actorPositionYInPixels += animation.offsetY;
 		}
 
 		if (remainingHealth != totalHealth) {
@@ -480,6 +481,10 @@ public class Actor extends GameObject {
 			float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
 			float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
 			float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
+			if (animation != null) {
+				healthXInPixels += animation.offsetX;
+				healthYInPixels += animation.offsetY;
+			}
 
 			Color color = Color.YELLOW;
 			if (thoughtsOnPlayer > 50) {
@@ -495,20 +500,9 @@ public class Actor extends GameObject {
 			// Colored health bar
 			QuadUtils.drawQuad(color, healthXInPixels + 1, healthYInPixels + 1,
 					healthXInPixels + healthWidthInPixels - 1, healthYInPixels + healthBarHeightInPixels - 1);
-			// }
 		}
 
 		super.draw1();
-
-		// hand anchor
-		// QuadUtils.drawQuad(Color.BLACK,
-		// this.squareGameObjectIsOn.xInGridPixels + handAnchorX - 3,
-		// this.squareGameObjectIsOn.yInGridPixels + handAnchorY - 3,
-		// this.squareGameObjectIsOn.xInGridPixels + handAnchorX + 3,
-		// this.squareGameObjectIsOn.yInGridPixels + handAnchorY + 3);
-
-		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetX);
-		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetY);
 
 		// weapon
 		if (equipped != null && !sleeping) {
@@ -555,12 +549,6 @@ public class Actor extends GameObject {
 			TextureUtils.drawTexture(this.legArmor.imageTexture, alpha, legArmorPositionXInPixels,
 					legArmorPositionYInPixels, legArmorPositionXInPixels + legArmor.width,
 					legArmorPositionYInPixels + legArmor.height);
-		}
-
-		if (animation != null) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(-animation.offsetX, -animation.offsetY));
-			Game.activeBatch.updateUniforms();
 		}
 
 	}

@@ -308,12 +308,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return;
 		}
 
-		if (!(this instanceof Actor) && animation != null) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
-			Game.activeBatch.updateUniforms();
-		}
-
 		if (animation != null && animation.completed == false)
 			animation.draw1();
 
@@ -324,6 +318,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 					+ Game.SQUARE_WIDTH * drawOffsetX);
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * drawOffsetY);
+			if (animation != null) {
+				actorPositionXInPixels += animation.offsetX;
+				actorPositionYInPixels += animation.offsetY;
+			}
 
 			float alpha = 1.0f;
 
@@ -347,12 +345,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 				Game.activeBatch.flush();
 			}
-		}
-
-		if (animation != null && !(this instanceof Actor)) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(-animation.offsetX, -animation.offsetY));
-			Game.activeBatch.updateUniforms();
 		}
 	}
 

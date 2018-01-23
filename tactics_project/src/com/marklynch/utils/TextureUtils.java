@@ -44,7 +44,6 @@ public class TextureUtils {
 		// float bottom = y1
 
 		if (inBounds == true) {
-			System.out.println("inBounds == true");
 
 			float imageWidth = Math.abs(x2 - x1);
 			float imageHeight = Math.abs(y2 - y1);
@@ -53,13 +52,10 @@ public class TextureUtils {
 			float outOfBoundsLeft = boundsX1 - x1;
 			if (outOfBoundsLeft <= 0) {
 				// completely in bounds
-				System.out.println("return a1");
 			} else if (outOfBoundsLeft >= imageWidth) {
 				// completely out of bounds, don't draw anything
-				System.out.println("return a2");
 				return;
 			} else {
-				System.out.println("return a3");
 				textureX1 = outOfBoundsLeft;
 				vertexX1 = boundsX1;
 			}
@@ -68,14 +64,11 @@ public class TextureUtils {
 			float outOfBoundsRight = x2 - boundsX2;
 			if (outOfBoundsRight <= 0) {
 				// completely in bounds
-				System.out.println("return b1");
 			} else if (outOfBoundsRight >= imageWidth) {
 				// completely out of bounds, don't draw anything
-				System.out.println("return b2");
 				return;
 			} else {
 				textureX2 = texture.getWidth() - (outOfBoundsRight);
-				System.out.println("return b3");
 				vertexX2 = boundsX2;
 			}
 
@@ -83,13 +76,10 @@ public class TextureUtils {
 			float outOfBoundsTop = boundsY1 - y1;
 			if (outOfBoundsTop <= 0) {
 				// completely in bounds
-				System.out.println("return c1");
 			} else if (outOfBoundsTop >= imageHeight) {
 				// completely out of bounds, don't draw anything
-				System.out.println("return c2");
 				return;
 			} else {
-				System.out.println("return c3");
 				textureY1 = outOfBoundsTop;
 				vertexY1 = boundsY1;
 			}
@@ -98,13 +88,10 @@ public class TextureUtils {
 			float outOfBoundsBottom = y2 - boundsY2;
 			if (outOfBoundsBottom <= 0) {
 				// completely in bounds
-				System.out.println("return d1");
 			} else if (outOfBoundsBottom >= imageHeight) {
 				// completely out of bounds, don't draw anything
-				System.out.println("return d2");
 				return;
 			} else {
-				System.out.println("return d3");
 				textureY2 = texture.getHeight() - (outOfBoundsBottom);
 				vertexY2 = boundsY2;
 			}
@@ -130,16 +117,6 @@ public class TextureUtils {
 		{
 			if (inBounds == true) {
 
-				System.out.println("vertexX1 = " + vertexX1);
-				System.out.println("vertexY1 = " + vertexY1);
-				System.out.println("vertexX2 - vertexX1 = " + (vertexX2 - vertexX1));
-				System.out.println("vertexY2 - vertexY1 = " + (vertexY2 - vertexY1));
-
-				System.out.println("textureX1 = " + textureX1);
-				System.out.println("textureY1 = " + textureY1);
-				System.out.println("textureX2 = " + textureX2);
-				System.out.println("textureY2 = " + textureY2);
-
 				// Working -
 				// texture.getHeight() - textureY1 = 64.0
 				// texture.getHeight() - (textureY2 - textureY1) = 64.0
@@ -151,24 +128,18 @@ public class TextureUtils {
 				// texture.getHeight() - (textureY2 - textureY1) = 0.0
 
 				if (upsideDown) {
-					System.out.println("upside down in bounds yo");
 
 					float srcY = (texture.getHeight() - textureY1);
 					float srcHeight = -(textureY2 - textureY1);
 
-					System.out.println("srcY = " + srcY);
-					System.out.println("srcHeight " + srcHeight);
-
 					Game.activeBatch.drawRegion(texture, textureX1, srcY, textureX2 - textureX1, srcHeight, vertexX1,
 							vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
 				} else {
-					System.out.println("right way up in bounds yo");
 					Game.activeBatch.drawRegion(texture, textureX1, textureY1, textureX2 - textureX1,
 							(textureY2 - textureY1), vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
 				}
 			} else {
 				if (backwards) {
-					System.out.println("backwards = true");
 					Game.activeBatch.draw(texture, vertexX2, vertexY1, -(vertexX2 - vertexX1), vertexY2 - vertexY1);
 
 				} else {
