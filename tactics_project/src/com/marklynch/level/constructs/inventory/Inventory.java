@@ -1378,7 +1378,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			int bodyArmorPositionYInPixels = (int) (actorPositionYInPixels
 					+ (Game.level.player.bodyAnchorY - gameObjectToDrawOnPlayersBody.anchorY) * 2);
 			TextureUtils.drawTexture(gameObjectToDrawOnPlayersBody.imageTexture, alpha, bodyArmorPositionXInPixels,
-					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actorWidth,
+					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + gameObjectToDrawOnPlayersBody.width * 2,
 					bodyArmorPositionYInPixels + gameObjectToDrawOnPlayersBody.height * 2);
 		}
 
@@ -1389,7 +1389,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			int legArmorPositionYInPixels = (int) (actorPositionYInPixels
 					+ (Game.level.player.legsAnchorY - gameObjectToDrawOnPlayersLegs.anchorY) * 2);
 			TextureUtils.drawTexture(gameObjectToDrawOnPlayersLegs.imageTexture, alpha, legArmorPositionXInPixels,
-					legArmorPositionYInPixels, legArmorPositionXInPixels + actorWidth,
+					legArmorPositionYInPixels, legArmorPositionXInPixels + gameObjectToDrawOnPlayersLegs.width * 2,
 					legArmorPositionYInPixels + gameObjectToDrawOnPlayersLegs.height * 2);
 		}
 

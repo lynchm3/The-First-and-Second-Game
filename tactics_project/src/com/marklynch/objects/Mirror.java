@@ -55,9 +55,10 @@ public class Mirror extends GameObject {
 		imageTexture = imageTextureBack;
 		super.draw1();
 
-		// 2 y sqrs away
 		int squareToMirrorX = 0;
 		int squareToMirrorY = 0;
+
+		// sqr 2 sqrs away
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
@@ -69,17 +70,49 @@ public class Mirror extends GameObject {
 			}
 		}
 
-		// 1 sqr away
+		// sqe 1 sqr away
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
 			if (squareToMirrorY < Game.level.squares[0].length) {
 				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
-
 				drawSquare(squareToMirror, offsetX, 0);
 			}
 		}
 
+		// object 2 sqr away
+		for (int offsetX = -1; offsetX < 2; offsetX++) {
+			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
+			squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
+			if (squareToMirrorX > 0 && squareToMirrorX < Game.level.squares.length
+					&& squareToMirrorY < Game.level.squares[0].length) {
+				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
+
+				for (int i = 0; i < squareToMirror.inventory.size(); i++) {
+					GameObject gameObject = squareToMirror.inventory.gameObjects.get(i);
+					if (gameObject instanceof Actor) {
+					} else {
+						drawGameObject(gameObject, offsetX, 1);
+					}
+				}
+			}
+		}
+		// object 1 sqr away
+		for (int offsetX = -1; offsetX < 2; offsetX++) {
+			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
+			squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
+			if (squareToMirrorY < Game.level.squares[0].length) {
+				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
+				for (int i = 0; i < squareToMirror.inventory.size(); i++) {
+					GameObject gameObject = squareToMirror.inventory.gameObjects.get(i);
+					if (gameObject instanceof Actor) {
+					} else {
+						drawGameObject(gameObject, offsetX, 0);
+					}
+				}
+			}
+		}
+		// actor 2 sqr away
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
@@ -92,13 +125,11 @@ public class Mirror extends GameObject {
 					if (gameObject instanceof Actor) {
 						drawActor((Actor) gameObject, offsetX, 1);
 					} else {
-						drawGameObject(gameObject, offsetX, 1);
 					}
 				}
 			}
 		}
-
-		// 1 sqr away
+		// actor 1 sqr away
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
@@ -110,7 +141,6 @@ public class Mirror extends GameObject {
 					if (gameObject instanceof Actor) {
 						drawActor((Actor) gameObject, offsetX, 0);
 					} else {
-						drawGameObject(gameObject, offsetX, 0);
 					}
 				}
 			}
