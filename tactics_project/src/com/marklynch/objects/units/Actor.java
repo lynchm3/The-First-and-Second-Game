@@ -471,9 +471,9 @@ public class Actor extends GameObject {
 
 		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetX);
 		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetY);
-		if (animation != null) {
-			actorPositionXInPixels += animation.offsetX;
-			actorPositionYInPixels += animation.offsetY;
+		if (primaryAnimation != null) {
+			actorPositionXInPixels += primaryAnimation.offsetX;
+			actorPositionYInPixels += primaryAnimation.offsetY;
 		}
 
 		if (remainingHealth != totalHealth) {
@@ -482,9 +482,9 @@ public class Actor extends GameObject {
 			float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
 			float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
 			float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
-			if (animation != null) {
-				healthXInPixels += animation.offsetX;
-				healthYInPixels += animation.offsetY;
+			if (primaryAnimation != null) {
+				healthXInPixels += primaryAnimation.offsetX;
+				healthYInPixels += primaryAnimation.offsetY;
 			}
 
 			Color color = Color.YELLOW;
@@ -572,9 +572,9 @@ public class Actor extends GameObject {
 				return;
 		}
 
-		if (animation != null) {
+		if (primaryAnimation != null) {
 			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(primaryAnimation.offsetX, primaryAnimation.offsetY));
 			Game.activeBatch.updateUniforms();
 		}
 
@@ -695,9 +695,9 @@ public class Actor extends GameObject {
 			}
 		}
 
-		if (animation != null) {
+		if (primaryAnimation != null) {
 			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(-animation.offsetX, -animation.offsetY));
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(-primaryAnimation.offsetX, -primaryAnimation.offsetY));
 			Game.activeBatch.updateUniforms();
 		}
 
@@ -717,17 +717,17 @@ public class Actor extends GameObject {
 		if (this.squareGameObjectIsOn == null || this.squareGameObjectIsOn.visibleToPlayer == false)
 			return;
 
-		if (animation != null) {
+		if (primaryAnimation != null) {
 			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(primaryAnimation.offsetX, primaryAnimation.offsetY));
 			Game.activeBatch.updateUniforms();
 		}
 
 		super.drawUI();
 
-		if (animation != null) {
+		if (primaryAnimation != null) {
 			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(-animation.offsetX, -animation.offsetY));
+			Game.activeBatch.getViewMatrix().translate(new Vector2f(-primaryAnimation.offsetX, -primaryAnimation.offsetY));
 			Game.activeBatch.updateUniforms();
 		}
 	}

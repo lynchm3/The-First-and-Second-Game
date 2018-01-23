@@ -85,14 +85,14 @@ public class Game {
 
 	public static float getDragXWithOffset() {
 		if (Game.level.cameraFollow)
-			return dragX - Game.level.player.animation.offsetX;
+			return dragX - Game.level.player.primaryAnimation.offsetX;
 		else
 			return dragX;
 	}
 
 	public static float getDragYWithOffset() {
 		if (Game.level.cameraFollow)
-			return dragY - Game.level.player.animation.offsetY;
+			return dragY - Game.level.player.primaryAnimation.offsetY;
 		else
 			return dragY;
 	}

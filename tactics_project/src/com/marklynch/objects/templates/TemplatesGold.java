@@ -2,6 +2,7 @@ package com.marklynch.objects.templates;
 
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
+import com.marklynch.objects.Orb;
 
 public class TemplatesGold {
 
@@ -27,6 +28,25 @@ public class TemplatesGold {
 		Templates.GOLD.anchorX = 0;
 		Templates.GOLD.anchorY = 0;
 		Templates.GOLD.templateId = GameObject.generateNewTemplateId();
+
+		Templates.ORB = new Orb();
+		Templates.ORB.name = "Orb";
+		Templates.ORB.imageTexturePath = "orb.png";
+		Templates.ORB.totalHealth = Templates.ORB.remainingHealth = 1;
+		Templates.ORB.widthRatio = 0.25f;
+		Templates.ORB.heightRatio = 0.25f;
+		Templates.ORB.drawOffsetX = 0f;
+		Templates.ORB.drawOffsetY = 0f;
+		Templates.ORB.soundWhenHit = 1f;
+		Templates.ORB.soundWhenHitting = 1f;
+		Templates.ORB.soundDampening = 1f;
+		Templates.ORB.fireResistance = 100f;
+		Templates.ORB.stackable = false;
+		Templates.ORB.weight = 1f;
+		Templates.ORB.value = 1;
+		Templates.ORB.anchorX = 0;
+		Templates.ORB.anchorY = 0;
+		Templates.ORB.templateId = GameObject.generateNewTemplateId();
 
 	}
 

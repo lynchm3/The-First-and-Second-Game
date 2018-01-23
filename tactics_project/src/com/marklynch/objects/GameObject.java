@@ -7,7 +7,6 @@ import java.util.UUID;
 import java.util.Vector;
 
 import org.lwjgl.util.Point;
-import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.openal.Audio;
 
 import com.marklynch.Game;
@@ -198,7 +197,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Object destroyedBy = null;
 	public Action destroyedByAction = null;
 
-	public Animation animation = new AnimationWait();
+	public Animation primaryAnimation = new AnimationWait();
+	public ArrayList<Animation> secondaryAnimations = new ArrayList<Animation>();
 
 	public boolean toSell = false;
 	public boolean starred = false;
@@ -308,8 +308,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return;
 		}
 
-		if (animation != null && animation.completed == false)
-			animation.draw1();
+		if (primaryAnimation != null && primaryAnimation.completed == false)
+			primaryAnimation.draw1();
+
+		for (Animation secondaryAnimation : secondaryAnimations)
+			secondaryAnimation.draw1();
 
 		// Draw object
 		if (squareGameObjectIsOn != null) {
@@ -318,9 +321,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 					+ Game.SQUARE_WIDTH * drawOffsetX);
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * drawOffsetY);
-			if (animation != null) {
-				actorPositionXInPixels += animation.offsetX;
-				actorPositionYInPixels += animation.offsetY;
+			if (primaryAnimation != null) {
+				actorPositionXInPixels += primaryAnimation.offsetX;
+				actorPositionYInPixels += primaryAnimation.offsetY;
 			}
 
 			float alpha = 1.0f;
@@ -353,24 +356,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void draw2() {
-
-		if (!(this instanceof Actor) && animation != null) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(animation.offsetX, animation.offsetY));
-			Game.activeBatch.updateUniforms();
-		}
 		for (Effect effect : activeEffectsOnGameObject) {
 			effect.draw2();
 		}
 
-		if (animation != null && animation.completed == false)
-			animation.draw2();
+		if (primaryAnimation != null && primaryAnimation.completed == false)
+			primaryAnimation.draw2();
 
-		if (animation != null && !(this instanceof Actor)) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(-animation.offsetX, -animation.offsetY));
-			Game.activeBatch.updateUniforms();
-		}
+		for (Animation secondaryAnimation : secondaryAnimations)
+			secondaryAnimation.draw2();
 	}
 
 	public void draw3() {
@@ -668,9 +662,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void updateRealtime(int delta) {
-		if (animation != null && !animation.completed) {
-			animation.update(delta);
+		if (primaryAnimation != null && !primaryAnimation.completed) {
+			primaryAnimation.update(delta);
 		} else {
+		}
+
+		for (Animation secondaryAnimation : (ArrayList<Animation>) secondaryAnimations.clone()) {
+			secondaryAnimation.update(delta);
+			if (secondaryAnimation.completed)
+				secondaryAnimations.remove(secondaryAnimation);
 		}
 	}
 

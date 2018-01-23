@@ -60,7 +60,7 @@ public class ActionGiveItems extends VariableQtyAction {
 
 		if (Game.level.openInventories.size() > 0) {
 		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.animation = new AnimationGive(performer, receiver, objects[0]);
+			performer.secondaryAnimations.add(new AnimationGive(performer, receiver, objects[0]));
 		}
 
 		if (receiver instanceof Openable) {

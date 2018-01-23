@@ -84,8 +84,8 @@ public class ActionThrowItem extends Action {
 
 		// shoot projectile
 		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-			performer.animation = new AnimationThrow(gameObjectToThrow.name, performer, this, targetGameObject,
-					targetSquare, gameObjectToThrow, 1f, 0.5f, true);
+			performer.secondaryAnimations.add(new AnimationThrow(gameObjectToThrow.name, performer, this,
+					targetGameObject, targetSquare, gameObjectToThrow, 1f, 0.5f, true));
 
 		if (performer.equipped == gameObjectToThrow) {
 			if (performer.inventory.contains(performer.equippedBeforePickingUpObject)) {

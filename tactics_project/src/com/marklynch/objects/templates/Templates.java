@@ -23,6 +23,7 @@ import com.marklynch.objects.Liquid;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.MeatChunk;
 import com.marklynch.objects.Mirror;
+import com.marklynch.objects.Orb;
 import com.marklynch.objects.PressurePlate;
 import com.marklynch.objects.Readable;
 import com.marklynch.objects.RemoteDoor;
@@ -96,6 +97,7 @@ public class Templates {
 
 	// GOLD
 	public static Gold GOLD;
+	public static Orb ORB;
 
 	// Player
 	public static Player PLAYER;

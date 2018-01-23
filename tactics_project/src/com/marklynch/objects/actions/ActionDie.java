@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.level.constructs.effect.EffectBurning;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.InanimateObjectToAddOrRemove;
 import com.marklynch.objects.Mirror;
+import com.marklynch.objects.Orb;
 import com.marklynch.objects.Tree;
 import com.marklynch.objects.Vein;
 import com.marklynch.objects.templates.Templates;
@@ -45,8 +47,12 @@ public class ActionDie extends Action {
 
 		logDeath();
 		createCorpse();
-
 		Game.level.player.addXP(10);
+
+		Orb orb = Templates.ORB.makeCopy(performer.squareGameObjectIsOn, null, 10);
+		Game.level.player.secondaryAnimations
+				.add(new AnimationTake(orb, Game.level.player.squareGameObjectIsOn, performer.squareGameObjectIsOn));
+		Game.level.inanimateObjectsOnGroundToRemove.add(orb);
 
 		// Remove from draw/update
 		if (performer != Game.level.player) {

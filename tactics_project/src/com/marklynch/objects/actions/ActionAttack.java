@@ -85,8 +85,8 @@ public class ActionAttack extends Action {
 		// shoot projectile
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
-				performer.animation = new AnimationThrow("Arrow", performer, this, target, target.squareGameObjectIsOn,
-						Templates.ARROW.makeCopy(null, null), 2f, 0f, true);
+				performer.secondaryAnimations.add(new AnimationThrow("Arrow", performer, this, target,
+						target.squareGameObjectIsOn, Templates.ARROW.makeCopy(null, null), 2f, 0f, true));
 		} else {
 			if (target.squareGameObjectIsOn.visibleToPlayer)
 				target.showPow();

@@ -1384,15 +1384,15 @@ public class Level {
 		}
 
 		if (currentFactionMoving != factions.player
-				&& (Game.level.player.animation.completed || !Game.level.player.animation.blockAI)) {
+				&& (Game.level.player.primaryAnimation.completed || !Game.level.player.primaryAnimation.blockAI)) {
 			currentFactionMoving.update(delta);
-		} else if (Game.level.player.animation.completed && Game.level.player.playerTargetAction != null
+		} else if (Game.level.player.primaryAnimation.completed && Game.level.player.playerTargetAction != null
 				&& Game.level.player.playerTargetAction.recheck()) {
 			Game.level.player.playerTargetAction.perform();
 			pausePlayer();
 		}
 		// Auto move player
-		else if (Game.level.player.animation.completed && Player.playerTargetSquare != null) {
+		else if (Game.level.player.primaryAnimation.completed && Player.playerTargetSquare != null) {
 
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
 			if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
@@ -1457,26 +1457,26 @@ public class Level {
 			return;
 		} else if (Game.level.conversation != null) {
 			return;
-		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true && Game.level.player.animation.completed) {
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE) == true && Game.level.player.primaryAnimation.completed) {
 			highlightPlayButton();
 			UserInputLevel.waitPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_UP) == true || Keyboard.isKeyDown(Keyboard.KEY_W) == true)
-				&& Game.level.player.animation.completed) {
+				&& Game.level.player.primaryAnimation.completed) {
 			highlightPlayButton();
 			UserInputLevel.upPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_DOWN) == true || Keyboard.isKeyDown(Keyboard.KEY_S) == true)
-				&& Game.level.player.animation.completed) {
+				&& Game.level.player.primaryAnimation.completed) {
 			highlightPlayButton();
 			UserInputLevel.downPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) == true || Keyboard.isKeyDown(Keyboard.KEY_A) == true)
-				&& Game.level.player.animation.completed) {
+				&& Game.level.player.primaryAnimation.completed) {
 			highlightPlayButton();
 			UserInputLevel.leftPressed(false, true);
 		} else if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) == true || Keyboard.isKeyDown(Keyboard.KEY_D) == true)
-				&& Game.level.player.animation.completed) {
+				&& Game.level.player.primaryAnimation.completed) {
 			highlightPlayButton();
 			UserInputLevel.rightPressed(false, true);
-		} else if (Game.level.player.animation.completed) {
+		} else if (Game.level.player.primaryAnimation.completed) {
 			highlightPauseButton();
 		}
 	}
