@@ -14,6 +14,7 @@ import com.marklynch.ai.utils.AILine;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.ai.utils.AStarNode;
 import com.marklynch.ai.utils.AStarSearch;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
@@ -1125,27 +1126,10 @@ public class Actor extends GameObject {
 
 	public boolean onScreen() {
 
-		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.getDragXWithOffset()
-				- (Game.windowWidth / 2) / Game.zoom) / Game.SQUARE_WIDTH);
-		if (gridX1Bounds < 0)
-			gridX1Bounds = 0;
-
-		int gridX2Bounds = (int) (gridX1Bounds + ((Game.windowWidth / Game.SQUARE_WIDTH)) / Game.zoom) + 2;
-		if (gridX2Bounds >= Game.level.width)
-			gridX2Bounds = Game.level.width - 1;
-
-		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.getDragYWithOffset()
-				- (Game.windowHeight / 2) / Game.zoom) / Game.SQUARE_HEIGHT);
-		if (gridY1Bounds < 0)
-			gridY1Bounds = 0;
-
-		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 2;
-		if (gridY2Bounds >= Game.level.height)
-			gridY2Bounds = Game.level.height - 1;
-
-		if (this.squareGameObjectIsOn.xInGrid >= gridX1Bounds && this.squareGameObjectIsOn.xInGrid <= gridX2Bounds
-				&& this.squareGameObjectIsOn.yInGrid >= gridY1Bounds
-				&& this.squareGameObjectIsOn.yInGrid <= gridY2Bounds) {
+		if (this.squareGameObjectIsOn.xInGrid >= Level.gridX1Bounds
+				&& this.squareGameObjectIsOn.xInGrid <= Level.gridX2Bounds
+				&& this.squareGameObjectIsOn.yInGrid >= Level.gridY1Bounds
+				&& this.squareGameObjectIsOn.yInGrid <= Level.gridY2Bounds) {
 
 			return true;
 		}

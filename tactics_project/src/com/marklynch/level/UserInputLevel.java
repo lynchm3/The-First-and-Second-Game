@@ -862,28 +862,11 @@ public class UserInputLevel {
 	}
 
 	public static void tabTyped() {
-		int gridX1Bounds = Game.level.player.squareGameObjectIsOn.xInGrid - Game.level.player.sight;
-		if (gridX1Bounds < 0)
-			gridX1Bounds = 0;
-
-		// + (mouseXinPixels) / Game.zoom);
-
-		int gridX2Bounds = Game.level.player.squareGameObjectIsOn.xInGrid + Game.level.player.sight;
-		if (gridX2Bounds >= Game.level.width)
-			gridX2Bounds = Game.level.width - 1;
-
-		int gridY1Bounds = Game.level.player.squareGameObjectIsOn.yInGrid - Game.level.player.sight;
-		if (gridY1Bounds < 0)
-			gridY1Bounds = 0;
-
-		int gridY2Bounds = Game.level.player.squareGameObjectIsOn.yInGrid + Game.level.player.sight;
-		if (gridY2Bounds >= Game.level.height)
-			gridY2Bounds = Game.level.height - 1;
 		if (Keyboard.isKeyDown(Keyboard.KEY_TAB) == true) {
 			Level.closeAllPopups();
 			Game.level.popupMenuHighlightObjects.clear();
-			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-				for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+			for (int j = Level.gridY1Bounds; j < Level.gridY2Bounds; j++) {
+				for (int i = Level.gridX1Bounds; i < Level.gridX2Bounds; i++) {
 					if (Game.level.squares[i][j].visibleToPlayer) {
 						PopupMenuSelectObject popupSelectObject = new PopupMenuSelectObject(100, Game.level,
 								Game.level.squares[i][j], false, false, true);
