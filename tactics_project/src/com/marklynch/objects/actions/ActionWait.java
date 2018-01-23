@@ -35,7 +35,7 @@ public class ActionWait extends Action {
 		if (sound != null)
 			sound.play();
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
 			performer.animation = new AnimationWait();
 		if (performer == Game.level.player && Game.level.activeActor == Game.level.player)
 			Game.level.endTurn();

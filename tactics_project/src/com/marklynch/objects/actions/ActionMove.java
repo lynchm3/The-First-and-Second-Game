@@ -70,7 +70,7 @@ public class ActionMove extends Action {
 			return;
 		}
 
-		if (performer.squareGameObjectIsOn.visibleToPlayer)
+		if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
 			performer.animation = new AnimationMove(actor.squareGameObjectIsOn, squareToMoveTo);
 
 		if (actorInTheWay == null) {

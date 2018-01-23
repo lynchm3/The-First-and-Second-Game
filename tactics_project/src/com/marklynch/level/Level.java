@@ -1261,7 +1261,10 @@ public class Level {
 	// public static ArrayList<Action> actionQueueForInanimateObjects = new
 	// ArrayList<Action>();
 
+	public static long lastUpdate = 0;
+
 	public void update(int delta) {
+		lastUpdate = System.currentTimeMillis();
 		addRemoveObjectToFromGround();
 
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
@@ -1272,6 +1275,8 @@ public class Level {
 				}
 			}
 		}
+
+		player.updateRealtime(delta);
 
 		player.inventory.updateRealtime(delta);
 

@@ -51,7 +51,7 @@ public class ActionBuyItems extends VariableQtyAction {
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
-		} else {
+		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 			target.animation = new AnimationGive(target, performer, objects[0]);
 			performer.animation = new AnimationGive(performer, target, AnimationGive.gold);
 		}

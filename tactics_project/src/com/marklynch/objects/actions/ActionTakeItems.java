@@ -73,7 +73,7 @@ public class ActionTakeItems extends VariableQtyAction {
 			return;
 
 		if (Game.level.openInventories.size() > 0) {
-		} else {
+		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
 			if (targetSquare != null)
 				performer.animation = new AnimationTake(objects[0], performer.squareGameObjectIsOn, targetSquare);
 			else

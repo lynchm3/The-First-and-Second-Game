@@ -60,7 +60,7 @@ public class ActionCastBurn extends Action {
 
 		// shoot projectile
 		if (target.squareGameObjectIsOn != null && performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
-			if (performer.squareGameObjectIsOn.visibleToPlayer || target.squareGameObjectIsOn.visibleToPlayer)
+			if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer)
 				performer.animation = new AnimationThrow("Fire Ball", performer, this, target,
 						target.squareGameObjectIsOn, Templates.FIRE_BALL.makeCopy(null, null), 1f, 0f, true);
 		}

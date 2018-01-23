@@ -46,6 +46,8 @@ public class Player extends Human {
 	public static float xpPerLevel = 55;
 	public ArrayList<Square> squaresVisibleToPlayerOnlyPlayer = new ArrayList<Square>();
 
+	public long lastUpdateRealtime = 0;
+
 	public Player() {
 		hairImageTexture = ResourceUtils.getGlobalImage("hair.png");
 		stepLeftTexture = ResourceUtils.getGlobalImage("player_step_left.png");
@@ -64,6 +66,14 @@ public class Player extends Human {
 	@Override
 	public void postLoad2() {
 		super.postLoad2();
+	}
+
+	@Override
+	public void updateRealtime(int delta) {
+		if (lastUpdateRealtime == Level.lastUpdate)
+			return;
+		lastUpdateRealtime = Level.lastUpdate;
+		super.updateRealtime(delta);
 	}
 
 	@Override
