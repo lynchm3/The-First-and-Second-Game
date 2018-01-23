@@ -100,10 +100,10 @@ public class TemplatesArmor {
 		Templates.PANTS.name = "Pants";
 		Templates.PANTS.imageTexturePath = "pants.png";
 		Templates.PANTS.totalHealth = Templates.PANTS.remainingHealth = 20;
-		Templates.PANTS.widthRatio = 1f;
-		Templates.PANTS.heightRatio = 1.5f;
+		Templates.PANTS.widthRatio = 0.5f;
+		Templates.PANTS.heightRatio = 1f;
 		Templates.PANTS.drawOffsetX = 0f;
-		Templates.PANTS.drawOffsetY = -32f;
+		Templates.PANTS.drawOffsetY = 0f;
 		Templates.PANTS.soundWhenHit = 1f;
 		Templates.PANTS.soundWhenHitting = 1f;
 		Templates.PANTS.soundDampening = 1f;

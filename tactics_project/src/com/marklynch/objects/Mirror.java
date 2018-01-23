@@ -211,6 +211,11 @@ public class Mirror extends GameObject {
 					bodyArmorPositionYInPixels, bodyArmorPositionXInPixels + actor.bodyArmor.width,
 					bodyArmorPositionYInPixels + actor.bodyArmor.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
 					false);
+			// TextureUtils.drawTexture(actor.bodyArmor.imageTexture, alpha,
+			// bodyArmorPositionXInPixels,
+			// bodyArmorPositionYInPixels, bodyArmorPositionXInPixels +
+			// actor.bodyArmor.width,
+			// bodyArmorPositionYInPixels + actor.bodyArmor.height);
 		}
 
 		if (actor.legArmor != null && !actor.sleeping) {
