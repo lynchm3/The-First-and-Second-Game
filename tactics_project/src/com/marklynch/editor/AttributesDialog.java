@@ -243,7 +243,6 @@ public class AttributesDialog {
 				@Override
 				public void click() {
 					depressButtons();
-					Game.level.decorations.remove(object);
 					editor.clearSelectedObject();
 					editor.decorationsSettingsWindow.updateDecorationsButtons();
 					editor.settingsWindow.update();

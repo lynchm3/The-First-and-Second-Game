@@ -1076,8 +1076,6 @@ public class Editor {
 						"Select a Square");
 			} else if (type.isAssignableFrom(ScriptEvent.class)) {
 				// scriptEvent
-				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.script.scriptEvents, false, this,
-						objectToEdit, "Select a Script Event");
 			} else if (type.isAssignableFrom(Texture.class)) {
 				// texture
 				attributeSelectionWindow = new AttributeSelectionWindow(textures, false, this, objectToEdit,
@@ -1117,8 +1115,6 @@ public class Editor {
 				attributeSelectionWindow = new AttributeSelectionWindow(actors, false, this, objectToEdit,
 						"Select an Actor");
 			} else if (type.isAssignableFrom(ScriptTrigger.class)) {
-				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.script.scriptTriggers, false, this,
-						objectToEdit, "Select a Script Trigger");
 			} else if (type.isAssignableFrom(AIRoutineUtils.class)) {
 				attributeSelectionWindow = new AttributeSelectionWindow(Game.level.ais, false, this, objectToEdit,
 						"Select an AI Routine");

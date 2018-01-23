@@ -1,6 +1,5 @@
 package com.marklynch.script.trigger;
 
-import com.marklynch.Game;
 import com.marklynch.script.ScriptEvent;
 
 public class ScriptTriggerScriptEventEnded extends ScriptTrigger {
@@ -26,7 +25,6 @@ public class ScriptTriggerScriptEventEnded extends ScriptTrigger {
 
 	@Override
 	public void postLoad() {
-		scriptEvent = Game.level.script.findScriptEventFromGUID(scriptEventGUID);
 	}
 
 	@Override

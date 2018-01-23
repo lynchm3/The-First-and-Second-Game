@@ -55,7 +55,6 @@ import com.marklynch.objects.actions.ActionUsePower;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Weapon;
-import com.marklynch.script.Script;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.ActivityLogger;
 import com.marklynch.ui.PinWindow;
@@ -107,8 +106,6 @@ public class Level {
 	public Square[][] squares;
 	public ArrayList<Area> areas = new ArrayList<Area>();
 	public ArrayList<Structure> structures;
-	public Vector<Decoration> decorations;
-	public transient Script script;
 	public transient ArrayList<AIRoutineUtils> ais = new ArrayList<AIRoutineUtils>();
 	public transient ArrayList<Inventory> openInventories = new ArrayList<Inventory>();
 	public static transient Journal journal = new Journal();
@@ -196,9 +193,7 @@ public class Level {
 		quickBar = new QuickBar();
 		undoList = new Stack<Move>();
 		buttons = new ArrayList<Button>();
-		decorations = new Vector<Decoration>();
 		gameCursor = new GameCursor();
-		script = new Script();
 
 		// textureUndiscovered =
 		// ResourceUtils.getGlobalImage("undiscovered_small.png");
@@ -663,7 +658,6 @@ public class Level {
 
 		this.inanimateObjectsOnGround = new ArrayListMappedInanimateObjects<GameObject>();
 		this.openInventories = new ArrayList<Inventory>();
-		this.script = new Script();
 
 		// buildings = new ArrayList<Building>();
 
@@ -719,10 +713,6 @@ public class Level {
 
 		for (Faction faction : factions) {
 			faction.loadImages();
-		}
-
-		for (Decoration decoration : decorations) {
-			decoration.loadImages();
 		}
 	}
 
@@ -919,38 +909,6 @@ public class Level {
 
 		// Background decorations
 
-		// float mouseXTransformed = (((Game.windowWidth / 2) - Game.getDragX()
-		// -
-		// (Game.windowWidth / 2) / Game.zoom)
-		// + (mouseXinPixels) / Game.zoom);
-
-		// GameObjects and actors
-		// int gridX1Bounds = -(int) (Game.getDragX() / Game.SQUARE_WIDTH) + 1;
-		// if (gridX1Bounds < 0)
-		// gridX1Bounds = 0;
-
-		int gridX1Bounds = (int) (((Game.windowWidth / 2) - Game.getDragXWithOffset()
-				- (Game.windowWidth / 2) / Game.zoom) / Game.SQUARE_WIDTH);
-		if (gridX1Bounds < 0)
-			gridX1Bounds = 0;
-
-		// + (mouseXinPixels) / Game.zoom);
-
-		int gridX2Bounds = (int) (gridX1Bounds + ((Game.windowWidth / Game.SQUARE_WIDTH)) / Game.zoom) + 2;
-		if (gridX2Bounds >= width)
-			gridX2Bounds = width - 1;
-
-		int gridY1Bounds = (int) (((Game.windowHeight / 2) - Game.getDragYWithOffset()
-				- (Game.windowHeight / 2) / Game.zoom) / Game.SQUARE_HEIGHT);
-		if (gridY1Bounds < 0)
-			gridY1Bounds = 0;
-
-		int gridY2Bounds = (int) (gridY1Bounds + ((Game.windowHeight / Game.SQUARE_HEIGHT)) / Game.zoom) + 2;
-		if (gridY2Bounds >= height)
-			gridY2Bounds = height - 1;
-
-		ArrayList<Square> squaresInWindow = new ArrayList<Square>();
-
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
 			Game.activeBatch.flush();
@@ -981,65 +939,6 @@ public class Level {
 
 		Journal.drawQuestsMarkersForVisibleOnScreenObjectives();
 
-		// for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-		// for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-		// // is it better to bind once and draw all the same ones?
-		// for (GameObject gameObject :
-		// squares[i][j].inventory.getGameObjects()) {
-		// gameObject.draw2();
-		// }
-		// }
-		// }
-		// for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
-		// for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
-		// // is it better to bind once and draw all the same ones?
-		// for (GameObject gameObject :
-		// squares[i][j].inventory.getGameObjects()) {
-		// gameObject.draw3();
-		// }
-		// }
-		// }
-
-		for (Decoration decoration : decorations) {
-			decoration.draw();
-		}
-
-		// // Objects 1
-		//
-		// for (GameObject gameObject : inanimateObjectsOnGround) {
-		// gameObject.draw1();
-		// }
-		//
-		// // Actors 1
-		// for (Faction faction : factions) {
-		// for (Actor actor : faction.actors) {
-		// actor.draw1();
-		// }
-		// }
-
-		// Foreground decorations
-
-		for (Decoration decoration : decorations) {
-			decoration.draw2();
-		}
-
-		// // Objects 2
-		//
-		// for (GameObject gameObject : inanimateObjectsOnGround) {
-		// gameObject.draw2();
-		// }
-		//
-		// // Actors 2
-		// for (Faction faction : factions) {
-		// for (Actor actor : faction.actors) {
-		// actor.draw2();
-		// }
-		// }
-		//
-		// for (GameObject gameObject : inanimateObjectsOnGround) {
-		// gameObject.draw3();
-		// }
-
 		// Squares
 		for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 			for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
@@ -1058,24 +957,17 @@ public class Level {
 
 	public void drawUI() {
 
-		// Objects 2
+		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
-		for (GameObject gameObject : inanimateObjectsOnGround) {
-			gameObject.drawUI();
-		}
-
-		// Actors 2
-		for (Faction faction : factions) {
-			for (Actor actor : faction.actors) {
-				actor.drawUI();
+			Game.activeBatch.flush();
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				// is it better to bind once and draw all the same ones?
+				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
+					gameObject.drawUI(); // HERE
+				}
 			}
+			Game.activeBatch.flush();
 		}
-
-		// if (Game.inventoryHoveringOver == null &&
-		// Game.inventorySquareMouseIsOver != null) {
-		// Game.inventorySquareMouseIsOver.drawCursor();
-		// } else
-		//
 
 		// Draw actions on sqrs.
 
@@ -1204,20 +1096,6 @@ public class Level {
 			((PopupMenuActionButton) popupMenuActions.get(0).highlightedButton).drawSound();
 		}
 
-		// GL11.glColor4f;
-		// font60.drawString(0, 0, "YOUR", new Color(1.0f, 0.5f, 0.5f, 0.75f));
-		// font60.drawString(0, Game.SQUARE_HEIGHT, "TURN ", new Color(1.0f,
-		// 0.5f,
-		// 0.5f, 0.75f));
-		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-		// zoom end
-		// GL11.glPopMatrix();
-
-		// GL11.glColor3f(1.0f, 1.0f, 1.0f);
-
-		// reset the matrix to identity, i.e. "no camera transform"
-
 		Game.activeBatch.flush();
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
@@ -1313,20 +1191,6 @@ public class Level {
 		TextUtils.printTextWithImages(Game.windowWidth - 150, 140, Integer.MAX_VALUE, true, null,
 				new Object[] { timeString });
 
-		// if (factions.size() > 0 && currentFactionMoving != null) {
-		// if (showTurnNotification) {
-		// if (currentFactionMoving == factions.player) {
-		// TextUtils.printTextWithImages(new Object[] { "Your turn ",
-		// this.currentFactionMoving.imageTexture,
-		// ", click to continue." }, 500, 500, Integer.MAX_VALUE, true);
-		// } else {
-		// TextUtils.printTextWithImages(new Object[] {
-		// this.currentFactionMoving, "'s turn" }, 500, 500,
-		// Integer.MAX_VALUE, true);
-		// }
-		// }
-		// }
-
 		if (conversation != null)
 
 			conversation.drawStaticUI();
@@ -1336,9 +1200,6 @@ public class Level {
 			quickBar.drawStaticUI();
 			activityLogger.drawStaticUI();
 		}
-
-		// script
-		script.draw();
 
 		for (PinWindow popupPinned : pinWindows) {
 			popupPinned.drawStaticUI();
@@ -1403,30 +1264,6 @@ public class Level {
 	public void update(int delta) {
 		addRemoveObjectToFromGround();
 
-		// if (conversation != null)
-		// return;
-
-		// if (this.script.activeScriptEvent != null) {
-		script.update(delta);
-
-		int gridX1Bounds = player.squareGameObjectIsOn.xInGrid - player.sight - 1;
-		if (gridX1Bounds < 0)
-			gridX1Bounds = 0;
-
-		// + (mouseXinPixels) / Game.zoom);
-
-		int gridX2Bounds = player.squareGameObjectIsOn.xInGrid + player.sight + 1;
-		if (gridX2Bounds >= width)
-			gridX2Bounds = width - 1;
-
-		int gridY1Bounds = player.squareGameObjectIsOn.yInGrid - player.sight - 1;
-		if (gridY1Bounds < 0)
-			gridY1Bounds = 0;
-
-		int gridY2Bounds = player.squareGameObjectIsOn.yInGrid + player.sight + 1;
-		if (gridY2Bounds >= height)
-			gridY2Bounds = height - 1;
-
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
@@ -1435,6 +1272,7 @@ public class Level {
 				}
 			}
 		}
+
 		player.inventory.updateRealtime(delta);
 
 		// update map zoom animation
@@ -1533,9 +1371,6 @@ public class Level {
 			activeTextBox.updateRealtime(delta);
 		}
 
-		for (Decoration decoration : decorations)
-			decoration.update(delta);
-
 		if (Player.playerTargetActor != null) {
 			Player.playerTargetSquare = Player.playerTargetActor.squareGameObjectIsOn;
 			if (player.straightLineDistanceTo(Player.playerTargetSquare) <= 1) {
@@ -1543,7 +1378,7 @@ public class Level {
 			}
 		}
 
-		if (!this.script.checkIfBlocking() && currentFactionMoving != factions.player
+		if (currentFactionMoving != factions.player
 				&& (Game.level.player.animation.completed || !Game.level.player.animation.blockAI)) {
 			currentFactionMoving.update(delta);
 		} else if (Game.level.player.animation.completed && Game.level.player.playerTargetAction != null

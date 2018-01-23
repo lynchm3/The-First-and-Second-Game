@@ -2,8 +2,6 @@ package com.marklynch.editor.settingswindow;
 
 import java.util.ArrayList;
 
-import com.marklynch.Game;
-import com.marklynch.editor.AttributesDialog;
 import com.marklynch.editor.ClassSelectionWindow;
 import com.marklynch.editor.Editor;
 import com.marklynch.script.ScriptEvent;
@@ -63,46 +61,6 @@ public class ScriptEventsSettingsWindow extends SettingsWindow {
 			}
 		};
 		buttons.add(addScriptButton);
-
-		for (int i = 0; i < Game.level.script.scriptEvents.size(); i++) {
-			final int index = i;
-
-			final SettingsWindowButton scriptButton = new SettingsWindowButton(0, 200 + i * 30, 200, 30,
-					Game.level.script.scriptEvents.get(i), true, true) {
-
-				@Override
-				public void keyTyped(char character) {
-				}
-
-				@Override
-				public void enterTyped() {
-				}
-
-				@Override
-				public void backTyped() {
-				}
-
-				@Override
-				public void depress() {
-				}
-
-			};
-
-			scriptButton.clickListener = new ClickListener() {
-
-				@Override
-				public void click() {
-					editor.clearSelectedObject();
-					editor.depressButtonsSettingsAndDetailsButtons();
-					scriptButton.down = true;
-					editor.attributesWindow = new AttributesDialog(200, 200, 200,
-							Game.level.script.scriptEvents.get(index), editor);
-
-				}
-			};
-			buttons.add(scriptButton);
-
-		}
 
 	}
 

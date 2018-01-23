@@ -3,9 +3,6 @@ package com.marklynch.editor;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.script.ScriptEvent;
-import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
@@ -44,18 +41,6 @@ public class ClassSelectionWindow<T> {
 				public void click() {
 
 					try {
-
-						if (superClass == ScriptEvent.class) {
-							Game.level.script.scriptEvents.add((ScriptEvent) classes.get(index).newInstance());
-							editor.classSelectionWindow = null;
-						} else if (superClass == ScriptTrigger.class) {
-							Game.level.script.scriptTriggers.add((ScriptTrigger) classes.get(index).newInstance());
-							editor.classSelectionWindow = null;
-						} else if (superClass == AIRoutineUtils.class) {
-							Game.level.ais.add((AIRoutineUtils) classes.get(index).newInstance());
-							editor.classSelectionWindow = null;
-						}
-
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

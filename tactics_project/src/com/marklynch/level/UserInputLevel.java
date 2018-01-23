@@ -198,9 +198,6 @@ public class UserInputLevel {
 
 		// Check if a script is hogging the screen and intercepting clicks
 		boolean scriptInterceptsClick = false;
-		if (Game.level.script.checkIfBlocking()) {
-			scriptInterceptsClick = true;
-		}
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
@@ -334,7 +331,6 @@ public class UserInputLevel {
 
 			if (scriptInterceptsClick) {
 				// Continue script
-				Game.level.script.click();
 			} else if (Game.buttonHoveringOver != null) {
 				// Click button
 				Game.buttonHoveringOver.click();
