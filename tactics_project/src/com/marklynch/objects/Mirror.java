@@ -66,6 +66,26 @@ public class Mirror extends GameObject {
 				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 
 				drawSquare(squareToMirror, offsetX, 1);
+			}
+		}
+
+		// 1 sqr away
+		for (int offsetX = -1; offsetX < 2; offsetX++) {
+			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
+			squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
+			if (squareToMirrorY < Game.level.squares[0].length) {
+				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
+
+				drawSquare(squareToMirror, offsetX, 0);
+			}
+		}
+
+		for (int offsetX = -1; offsetX < 2; offsetX++) {
+			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
+			squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
+			if (squareToMirrorX > 0 && squareToMirrorX < Game.level.squares.length
+					&& squareToMirrorY < Game.level.squares[0].length) {
+				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 
 				for (int i = 0; i < squareToMirror.inventory.size(); i++) {
 					GameObject gameObject = squareToMirror.inventory.gameObjects.get(i);
@@ -84,8 +104,6 @@ public class Mirror extends GameObject {
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
 			if (squareToMirrorY < Game.level.squares[0].length) {
 				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
-
-				drawSquare(squareToMirror, offsetX, 0);
 
 				for (int i = 0; i < squareToMirror.inventory.size(); i++) {
 					GameObject gameObject = squareToMirror.inventory.gameObjects.get(i);
