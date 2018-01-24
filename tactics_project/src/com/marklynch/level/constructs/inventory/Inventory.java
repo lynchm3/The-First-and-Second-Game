@@ -554,7 +554,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (sortBackwards)
 			Collections.reverse(filteredGameObjects);
 
-		matchGameObjectsToSquares();
+		matchStacksToSquares();
 	}
 
 	public void filter(INVENTORY_FILTER_BY inventoryFilterBy, boolean temporary) {
@@ -675,7 +675,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null) {
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
-				gameObject.squareGameObjectIsOn.inventory.matchGameObjectsToSquares();
+				gameObject.squareGameObjectIsOn.inventory.matchStacksToSquares();
 			}
 			gameObject.squareGameObjectIsOn = null;
 
@@ -687,7 +687,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (gameObject.inventoryThatHoldsThisObject != null) {
 				Inventory oldInventory = gameObject.inventoryThatHoldsThisObject;
 				oldInventory.remove(gameObject);
-				oldInventory.matchGameObjectsToSquares();
+				oldInventory.matchStacksToSquares();
 			}
 
 			gameObject.turnAcquired = Level.turn;
@@ -718,7 +718,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			} else {
 				filteredGameObjects.add(gameObject);
 			}
-			matchGameObjectsToSquares();
+			matchStacksToSquares();
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
 
@@ -751,7 +751,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				// filteredGameObjects.set(filteredGameObjects.indexOf(gameObject),
 				// null);
 			}
-			this.matchGameObjectsToSquares();
+			this.matchStacksToSquares();
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
 
@@ -776,11 +776,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public HashMap<Integer, ArrayList<GameObject>> legalStacks = new HashMap<Integer, ArrayList<GameObject>>();
 	public HashMap<Integer, ArrayList<GameObject>> illegalStacks = new HashMap<Integer, ArrayList<GameObject>>();
+	public HashMap<Integer, ArrayList<GameObject>> equippedStacks = new HashMap<Integer, ArrayList<GameObject>>();
 
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("[SPACE] LOOT ALL", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("[SPACE] STEAL ALL", Color.RED) };
 
-	public void matchGameObjectsToSquares() {
+	public void matchStacksToSquares() {
 
 		if (!isOpen)
 			return;
@@ -790,70 +791,56 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		ArrayList<Integer> legalItemIdsAlreadyDone = new ArrayList<Integer>();
 		ArrayList<Integer> illegalItemIdsAlreadyDone = new ArrayList<Integer>();
 
-		for (GameObject gameObject : this.filteredGameObjects) {
+		for (ArrayList<GameObject> stack : legalStacks.values()) {
+			matchStackToSquare(stack);
+		}
 
-			if (this.parent == Game.level.player && gameObject instanceof Gold)
-				continue;
+		for (ArrayList<GameObject> stack : illegalStacks.values()) {
+			matchStackToSquare(stack);
+		}
 
-			if (inventoryMode == INVENTORY_MODE.MODE_TRADE && gameObject instanceof Gold)
-				continue;
-
-			if (inventoryMode == INVENTORY_MODE.MODE_TRADE && this.parent != Game.level.player
-					&& gameObject.toSell == false && gameObject.turnAcquired != Level.turn)
-				continue;
-
-			if (gameObject.value == 0 && gameObject instanceof Gold)
-				continue;
-
-			// Legal items
-			if (objectLegal(gameObject)) {
-
-				if (!legalItemIdsAlreadyDone.contains(gameObject.templateId)) {
-					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
-					inventorySquare.gameObject = gameObject;
-					inventorySquares.add(inventorySquare);
-					legalItemIdsAlreadyDone.add(gameObject.templateId);
-				}
-
-			} else {// Illegal items
-				if (!illegalItemIdsAlreadyDone.contains(gameObject.templateId)) {
-					InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
-					inventorySquare.gameObject = gameObject;
-					inventorySquares.add(inventorySquare);
-					illegalItemIdsAlreadyDone.add(gameObject.templateId);
-				}
-			}
+		for (ArrayList<GameObject> stack : equippedStacks.values()) {
+			matchStackToSquare(stack);
 		}
 
 		totalSquaresHeight = ((inventorySquares.size() / squareGridWidthInSquares) * Game.INVENTORY_SQUARE_HEIGHT);
 
-		// Code to fill up space with empty sqrs
-		// int squareAreaHeightInSquares = (int) ((Game.windowHeight -
-		// bottomBorderHeight - topBorderHeight)
-		// / Game.INVENTORY_SQUARE_HEIGHT);
-		// int squaresRequiredToFillSpace = this.squareGridWidthInSquares *
-		// squareAreaHeightInSquares;
-		// while (inventorySquares.size() < squaresRequiredToFillSpace) {
-		// InventorySquare inventorySquare = new InventorySquare(0, 0, null,
-		// this);
-		// inventorySquares.add(inventorySquare);
-		// }
 		if (inventoryMode != INVENTORY_MODE.MODE_SELECT_MAP_MARKER && this.parent != Game.level.player) {
-			Game.level.player.inventory.matchGameObjectsToSquares();
+			Game.level.player.inventory.matchStacksToSquares();
 			return;
 		}
 
 		resize1();
 	}
 
-	public boolean objectLegal(GameObject gameObject) {
-		if (parent == Game.level.player) { // player
+	public void matchStackToSquare(ArrayList<GameObject> stack) {
+
+		if (this.parent == Game.level.player && stack.get(0) instanceof Gold)
+			return;
+
+		if (inventoryMode == INVENTORY_MODE.MODE_TRADE && stack.get(0) instanceof Gold)
+			return;
+
+		if (inventoryMode == INVENTORY_MODE.MODE_TRADE && this.parent != Game.level.player
+				&& stack.get(0).toSell == false && stack.get(0).turnAcquired != Level.turn)
+			return;
+
+		if (stack.get(0).value == 0 && stack.get(0) instanceof Gold)
+			return;
+
+		InventorySquare inventorySquare = new InventorySquare(0, 0, null, this);
+		inventorySquare.stack = stack;
+		inventorySquares.add(inventorySquare);
+	}
+
+	public static boolean objectLegal(GameObject gameObject, Inventory inventory) {
+		if (inventory.parent == Game.level.player) { // player
 			if (gameObject.owner != null && gameObject.owner != Game.level.player) {
 				return false;
 			} else {
 				return true;
 			}
-		} else if (parent instanceof Human) { // npc
+		} else if (inventory.parent instanceof Human) { // npc
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 				return true;
 			} else {
@@ -873,7 +860,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		legalStacks.clear();
 		illegalStacks.clear();
 		for (GameObject gameObject : gameObjects) {
-			if (objectLegal(gameObject)) {
+			if (objectLegal(gameObject, this)) {
 				if (legalStacks.containsKey(gameObject.templateId)) {
 					legalStacks.get(gameObject.templateId).add(gameObject);
 				} else {
@@ -1164,7 +1151,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			boolean containsLegalStuff = false;
 			for (GameObject gameObject : groundDisplay.gameObjects) {
-				if (objectLegal(gameObject)) {
+				if (objectLegal(gameObject, this)) {
 					containsLegalStuff = true;
 					break;
 				}
@@ -1220,7 +1207,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 			boolean containsLegalStuff = false;
 			for (GameObject gameObject : otherInventory.gameObjects) {
-				if (objectLegal(gameObject)) {
+				if (objectLegal(gameObject, this)) {
 					containsLegalStuff = true;
 					break;
 				}
@@ -1394,7 +1381,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		// Weapon comparison
-		if (this.inventorySquareMouseIsOver != null && this.inventorySquareMouseIsOver.gameObject instanceof Weapon) {
+		if (this.inventorySquareMouseIsOver != null && this.inventorySquareMouseIsOver.stack.get(0) instanceof Weapon) {
 
 			int comparisonPositionXInPixels = 1150;
 			int comparisonPositionYInPixels = 250;

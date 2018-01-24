@@ -42,7 +42,7 @@ public class ActionFillSpecificContainer extends Action {
 		containerForLiquids.value = containerForLiquids.baseValue + water.value;
 
 		if (performer == Game.level.player)
-			performer.inventory.matchGameObjectsToSquares();
+			performer.inventory.matchStacksToSquares();
 
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(

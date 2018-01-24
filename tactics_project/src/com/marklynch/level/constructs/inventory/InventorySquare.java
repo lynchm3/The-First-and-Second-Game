@@ -23,7 +23,6 @@ import mdesl.graphics.Texture;
 
 public class InventorySquare extends Square {
 
-	public transient GameObject gameObject;
 	public transient Inventory inventoryThisBelongsTo;
 
 	public int xInPixels = 0;
@@ -69,62 +68,49 @@ public class InventorySquare extends Square {
 		Texture squareTexture = WHITE_SQUARE;
 
 		// Red border on sqr if illegal to take
-		if (!objectLegal(gameObject)) {
+		if (!objectLegal(stack.get(0))) {
 			squareTexture = RED_SQUARE;
 		}
 
 		// Yellow border on sqr if item is equipped
-		if (this.gameObject != null && (Game.level.player.equipped == this.gameObject
-				|| Game.level.player.helmet == this.gameObject || Game.level.player.bodyArmor == this.gameObject
-				|| Game.level.player.legArmor == this.gameObject)) {
+		if (this.stack.get(0) != null && (Game.level.player.equipped == this.stack.get(0)
+				|| Game.level.player.helmet == this.stack.get(0) || Game.level.player.bodyArmor == this.stack.get(0)
+				|| Game.level.player.legArmor == this.stack.get(0))) {
 			squareTexture = YELLOW_SQUARE;
 		}
 
 		TextureUtils.drawTexture(squareTexture, xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
 				yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 
-		if (gameObject != null) {
+		if (stack.get(0) != null) {
 
 			float drawWidth = Game.INVENTORY_SQUARE_WIDTH;
 			float drawHeight = Game.INVENTORY_SQUARE_HEIGHT;
-			float realTextureWidth = gameObject.imageTexture.getWidth();
-			float realTextureHeight = gameObject.imageTexture.getHeight();
+			float realTextureWidth = stack.get(0).imageTexture.getWidth();
+			float realTextureHeight = stack.get(0).imageTexture.getHeight();
 			if (realTextureWidth >= realTextureHeight) {// knife
 				drawHeight = Game.INVENTORY_SQUARE_HEIGHT * realTextureHeight / realTextureWidth;
 			} else {
 				drawWidth = Game.INVENTORY_SQUARE_WIDTH * realTextureWidth / realTextureHeight;
 			}
 			// TextureUtils.skipNormals = false;
-			TextureUtils.drawTexture(gameObject.imageTexture, xInPixels, yInPixels, xInPixels + drawWidth,
+			TextureUtils.drawTexture(stack.get(0).imageTexture, xInPixels, yInPixels, xInPixels + drawWidth,
 					yInPixels + drawHeight);
 
-			for (Effect effect : gameObject.activeEffectsOnGameObject) {
+			for (Effect effect : stack.get(0).activeEffectsOnGameObject) {
 				TextureUtils.drawTexture(effect.imageTexture, 0.75f, xInPixels, yInPixels,
 						xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
-			}
-
-			// Count && value
-			if (objectLegal(gameObject)) {
-				if (this instanceof GroundDisplaySquare)
-					stack = GroundDisplay.legalStacks.get(gameObject.templateId);
-				else
-					stack = this.inventoryThisBelongsTo.legalStacks.get(gameObject.templateId);
-			} else {
-				if (this instanceof GroundDisplaySquare)
-					stack = GroundDisplay.illegalStacks.get(gameObject.templateId);
-				else
-					stack = this.inventoryThisBelongsTo.illegalStacks.get(gameObject.templateId);
 			}
 
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 
 				Color goldTextColor = Color.WHITE;
 
-				if (!this.gameObject.getDefaultActionPerformedOnThisInInventory(Game.level.player).enabled) {
+				if (!this.stack.get(0).getDefaultActionPerformedOnThisInInventory(Game.level.player).enabled) {
 					goldTextColor = Color.RED;
 				}
 
-				String goldTextString = "" + gameObject.value;
+				String goldTextString = "" + stack.get(0).value;
 				int goldTextLength = Game.font.getWidth(goldTextString);
 				StringWithColor goldTextStringWithColor = new StringWithColor(goldTextString, goldTextColor);
 
@@ -145,8 +131,8 @@ public class InventorySquare extends Square {
 						yInPixels + Game.INVENTORY_SQUARE_HEIGHT - 27 + 16);
 			}
 
-			if (gameObject instanceof Gold) {
-				String amtString = gameObject.value + "x";
+			if (stack.get(0) instanceof Gold) {
+				String amtString = stack.get(0).value + "x";
 				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.font.getWidth(amtString),
 						yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
@@ -162,23 +148,19 @@ public class InventorySquare extends Square {
 			}
 
 			// Star
-			if (this.inventoryThisBelongsTo == Game.level.player.inventory && gameObject.starred) {
+			if (this.inventoryThisBelongsTo == Game.level.player.inventory && stack.get(0).starred) {
 				TextureUtils.drawTexture(Inventory.textureStar, xInPixels + Game.INVENTORY_SQUARE_WIDTH - 24,
 						yInPixels + 8, xInPixels + Game.INVENTORY_SQUARE_WIDTH - 8, yInPixels + 24);
 
 			}
 
-			gameObject.inventorySquare = this;
+			stack.get(0).inventorySquare = this;
 		}
 
 	}
 
 	private boolean objectLegal(GameObject gameObject) {
-		if (this instanceof GroundDisplaySquare) {
-			return GroundDisplay.objectLegal(gameObject);
-		} else {
-			return this.inventoryThisBelongsTo.objectLegal(gameObject);
-		}
+		return Inventory.objectLegal(gameObject, this.inventoryThisBelongsTo);
 	}
 
 	@Override
@@ -232,7 +214,7 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
-		GameObject targetGameObject = this.gameObject;
+		GameObject targetGameObject = this.stack.get(0);
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInInventory(performer);
 		}
@@ -241,7 +223,7 @@ public class InventorySquare extends Square {
 
 	@Override
 	public Action getSecondaryActionForTheSquareOrObject(Actor performer) {
-		GameObject targetGameObject = this.gameObject;
+		GameObject targetGameObject = this.stack.get(0);
 		if (targetGameObject != null) {
 			return targetGameObject.getSecondaryActionPerformedOnThisInInventory(performer);
 		}
@@ -249,7 +231,7 @@ public class InventorySquare extends Square {
 	}
 
 	public ArrayList<Action> getAllActionsForTheSquareOrObject(Actor performer) {
-		GameObject targetGameObject = this.gameObject;
+		GameObject targetGameObject = this.stack.get(0);
 		if (targetGameObject != null) {
 			if (this.inventoryThisBelongsTo == Game.level.player.inventory)
 				return targetGameObject.getAllActionsPerformedOnThisInInventory(performer);

@@ -82,7 +82,7 @@ public class ComparisonDisplay {
 		if (Game.level.player.inventory.inventorySquareMouseIsOver == null)
 			return;
 
-		if (Game.level.player.inventory.inventorySquareMouseIsOver.gameObject == null)
+		if (Game.level.player.inventory.inventorySquareMouseIsOver.stack.get(0) == null)
 			return;
 
 		// if
@@ -96,7 +96,7 @@ public class ComparisonDisplay {
 		// if (!(Game.level.player.equipped instanceof Weapon))
 		// return;
 
-		GameObject gameObject2 = Game.level.player.inventory.inventorySquareMouseIsOver.gameObject;
+		GameObject gameObject2 = Game.level.player.inventory.inventorySquareMouseIsOver.stack.get(0);
 
 		GameObject gameObject1 = Game.level.player.equipped;
 		if (gameObject2 instanceof BodyArmor) {

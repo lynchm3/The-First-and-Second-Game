@@ -20,10 +20,10 @@ public class GroundDisplaySquare extends InventorySquare {
 
 	@Override
 	public Action getDefaultActionForTheSquareOrObject(Actor performer) {
-		if (gameObject == null)
+		if (stack.get(0) == null)
 			return null;
-		return new ActionTakeItemsSelectedInInventory(performer, this.gameObject.inventoryThatHoldsThisObject.parent,
-				this.gameObject);
+		return new ActionTakeItemsSelectedInInventory(performer, this.stack.get(0).inventoryThatHoldsThisObject.parent,
+				this.stack.get(0));
 
 	}
 
@@ -31,10 +31,10 @@ public class GroundDisplaySquare extends InventorySquare {
 	public ArrayList<Action> getAllActionsForTheSquareOrObject(Actor performer) {
 
 		ArrayList<Action> actions = new ArrayList<Action>();
-		if (gameObject != null) {
+		if (stack.get(0) != null) {
 			actions.add(new ActionTakeItemsSelectedInInventory(performer,
-					this.gameObject.inventoryThatHoldsThisObject.parent, this.gameObject));
-			actions.add(new ActionEquip(performer, this.gameObject));
+					this.stack.get(0).inventoryThatHoldsThisObject.parent, this.stack.get(0)));
+			actions.add(new ActionEquip(performer, this.stack.get(0)));
 		}
 		return actions;
 	}
@@ -42,13 +42,13 @@ public class GroundDisplaySquare extends InventorySquare {
 	@Override
 	public void drawStaticUI() {
 
-		if (gameObject.squareGameObjectIsOn != null && gameObject.squareGameObjectIsOn.imageTexture != null) {
-			TextureUtils.drawTexture(gameObject.squareGameObjectIsOn.imageTexture, xInPixels, yInPixels,
+		if (stack.get(0).squareGameObjectIsOn != null && stack.get(0).squareGameObjectIsOn.imageTexture != null) {
+			TextureUtils.drawTexture(stack.get(0).squareGameObjectIsOn.imageTexture, xInPixels, yInPixels,
 					xInPixels + Game.INVENTORY_SQUARE_WIDTH, yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
-		} else if (gameObject.inventoryThatHoldsThisObject != null
-				&& gameObject.inventoryThatHoldsThisObject.parent != null
-				&& gameObject.inventoryThatHoldsThisObject.parent instanceof GameObject) {
-			TextureUtils.drawTexture(((GameObject) gameObject.inventoryThatHoldsThisObject.parent).imageTexture,
+		} else if (stack.get(0).inventoryThatHoldsThisObject != null
+				&& stack.get(0).inventoryThatHoldsThisObject.parent != null
+				&& stack.get(0).inventoryThatHoldsThisObject.parent instanceof GameObject) {
+			TextureUtils.drawTexture(((GameObject) stack.get(0).inventoryThatHoldsThisObject.parent).imageTexture,
 					xInPixels, yInPixels, xInPixels + Game.INVENTORY_SQUARE_WIDTH,
 					yInPixels + Game.INVENTORY_SQUARE_HEIGHT);
 		}

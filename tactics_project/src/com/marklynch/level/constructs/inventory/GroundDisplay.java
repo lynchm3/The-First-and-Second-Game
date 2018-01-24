@@ -1,12 +1,10 @@
 package com.marklynch.level.constructs.inventory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Gold;
 import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
@@ -31,6 +29,11 @@ public class GroundDisplay implements Draggable, Scrollable {
 	public static final String stringEmpty = "Nothing nearby";
 	public static final int lengthEmpty = Game.font.getWidth(stringEmpty);
 
+	// public static HashMap<Integer, ArrayList<GameObject>> legalStacks = new
+	// HashMap<Integer, ArrayList<GameObject>>();
+	// public static HashMap<Integer, ArrayList<GameObject>> illegalStacks = new
+	// HashMap<Integer, ArrayList<GameObject>>();
+
 	public GroundDisplay(int x, int y) {
 		this.squaresX = x;
 		this.squaresY = y;
@@ -45,14 +48,6 @@ public class GroundDisplay implements Draggable, Scrollable {
 			squares.add(Game.level.player.squareGameObjectIsOn.getSquareBelow());
 
 		refreshGameObjects();
-	}
-
-	public static boolean objectLegal(GameObject gameObject) {
-		if (gameObject.owner != null && gameObject.owner != Game.level.player) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 
 	public void refreshGameObjects() {
@@ -80,66 +75,70 @@ public class GroundDisplay implements Draggable, Scrollable {
 				}
 			}
 		}
-		matchGameObjectsToSquares();
+		matchGameStacksToSquares();
 	}
 
-	public static HashMap<Integer, ArrayList<GameObject>> legalStacks = new HashMap<Integer, ArrayList<GameObject>>();
-	public static HashMap<Integer, ArrayList<GameObject>> illegalStacks = new HashMap<Integer, ArrayList<GameObject>>();
+	public void matchGameStacksToSquares() {
 
-	public void matchGameObjectsToSquares() {
-
-		legalStacks.clear();
-		illegalStacks.clear();
-		groundDisplaySquares.clear();
-
-		int xIndex = 0;
-		int yIndex = 0;
-
-		for (GameObject gameObject : gameObjects) {
-
-			if (gameObject.value == 0 && gameObject instanceof Gold)
-				continue;
-
-			if (gameObject.value == 0 && gameObject instanceof Gold)
-				continue;
-
-			// Legal items
-			if (objectLegal(gameObject)) {
-				if (legalStacks.containsKey(gameObject.templateId)) {
-					legalStacks.get(gameObject.templateId).add(gameObject);
-				} else {
-					GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
-					inventorySquare.gameObject = gameObject;
-					groundDisplaySquares.add(inventorySquare);
-					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
-					newStack.add(gameObject);
-					legalStacks.put(gameObject.templateId, newStack);
-					xIndex++;
-					if (xIndex == this.squareGridWidthInSquares) {
-						xIndex = 0;
-						yIndex++;
-					}
-				}
-
-			} else {// Illegal items
-				if (illegalStacks.containsKey(gameObject.templateId)) {
-					illegalStacks.get(gameObject.templateId).add(gameObject);
-				} else {
-					GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex, yIndex, null, this);
-					inventorySquare.gameObject = gameObject;
-					groundDisplaySquares.add(inventorySquare);
-					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
-					newStack.add(gameObject);
-					illegalStacks.put(gameObject.templateId, newStack);
-					xIndex++;
-					if (xIndex == this.squareGridWidthInSquares) {
-						xIndex = 0;
-						yIndex++;
-					}
-				}
-			}
-		}
 	}
+
+	// public void matchGameObjectsToSquares() {
+	//
+	// // legalStacks.clear();
+	// // illegalStacks.clear();
+	// groundDisplaySquares.clear();
+	//
+	// int xIndex = 0;
+	// int yIndex = 0;
+	//
+	// for (GameObject gameObject : gameObjects) {
+	//
+	// if (gameObject.value == 0 && gameObject instanceof Gold)
+	// continue;
+	//
+	// if (gameObject.value == 0 && gameObject instanceof Gold)
+	// continue;
+	//
+	// // Legal items
+	// if (Inventory.objectLegal(gameObject,
+	// gameObject.inventoryThatHoldsThisObject)) {
+	// if (legalStacks.containsKey(gameObject.templateId)) {
+	// legalStacks.get(gameObject.templateId).add(gameObject);
+	// } else {
+	// GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex,
+	// yIndex, null, this);
+	// inventorySquare.gameObject = gameObject;
+	// groundDisplaySquares.add(inventorySquare);
+	// ArrayList<GameObject> newStack = new ArrayList<GameObject>();
+	// newStack.add(gameObject);
+	// legalStacks.put(gameObject.templateId, newStack);
+	// xIndex++;
+	// if (xIndex == this.squareGridWidthInSquares) {
+	// xIndex = 0;
+	// yIndex++;
+	// }
+	// }
+	//
+	// } else {// Illegal items
+	// if (illegalStacks.containsKey(gameObject.templateId)) {
+	// illegalStacks.get(gameObject.templateId).add(gameObject);
+	// } else {
+	// GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex,
+	// yIndex, null, this);
+	// inventorySquare.gameObject = gameObject;
+	// groundDisplaySquares.add(inventorySquare);
+	// ArrayList<GameObject> newStack = new ArrayList<GameObject>();
+	// newStack.add(gameObject);
+	// illegalStacks.put(gameObject.templateId, newStack);
+	// xIndex++;
+	// if (xIndex == this.squareGridWidthInSquares) {
+	// xIndex = 0;
+	// yIndex++;
+	// }
+	// }
+	// }
+	// }
+	// }
 
 	public void resize2() {
 		int xIndex = 0;
