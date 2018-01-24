@@ -88,15 +88,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public void matchStacksToSquaresForInventory(Inventory inventory) {
 
-		for (ArrayList<GameObject> stack : inventory.legalStacks.values()) {
-			matchStackToSquare(stack);
-		}
-
-		for (ArrayList<GameObject> stack : inventory.illegalStacks.values()) {
-			matchStackToSquare(stack);
-		}
-
-		for (ArrayList<GameObject> stack : inventory.equippedStacks.values()) {
+		for (ArrayList<GameObject> stack : inventory.allStacks) {
 			matchStackToSquare(stack);
 		}
 	}

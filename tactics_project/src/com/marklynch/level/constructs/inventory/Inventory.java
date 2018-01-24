@@ -785,6 +785,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public HashMap<Integer, ArrayList<GameObject>> legalStacks = new HashMap<Integer, ArrayList<GameObject>>();
 	public HashMap<Integer, ArrayList<GameObject>> illegalStacks = new HashMap<Integer, ArrayList<GameObject>>();
 	public HashMap<Integer, ArrayList<GameObject>> equippedStacks = new HashMap<Integer, ArrayList<GameObject>>();
+	public ArrayList<ArrayList<GameObject>> allStacks = new ArrayList<ArrayList<GameObject>>();
 
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("[SPACE] LOOT ALL", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("[SPACE] STEAL ALL", Color.RED) };
@@ -797,6 +798,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		legalStacks.clear();
 		illegalStacks.clear();
 		equippedStacks.clear();
+		allStacks.clear();
 		for (GameObject gameObject : gameObjects) {
 
 			if (!gameObject.fitsInInventory)
@@ -812,6 +814,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
 					newStack.add(gameObject);
 					equippedStacks.put(gameObject.templateId, newStack);
+					allStacks.add(newStack);
 				}
 			} else if (objectLegal(gameObject, this)) {
 				if (legalStacks.containsKey(gameObject.templateId)) {
@@ -820,6 +823,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
 					newStack.add(gameObject);
 					legalStacks.put(gameObject.templateId, newStack);
+					allStacks.add(newStack);
 				}
 
 			} else {// Illegal items
@@ -829,6 +833,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
 					newStack.add(gameObject);
 					illegalStacks.put(gameObject.templateId, newStack);
+					allStacks.add(newStack);
 				}
 			}
 		}
@@ -841,18 +846,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		inventorySquares.clear();
 
-		ArrayList<Integer> legalItemIdsAlreadyDone = new ArrayList<Integer>();
-		ArrayList<Integer> illegalItemIdsAlreadyDone = new ArrayList<Integer>();
-
-		for (ArrayList<GameObject> stack : legalStacks.values()) {
-			matchStackToSquare(stack);
-		}
-
-		for (ArrayList<GameObject> stack : illegalStacks.values()) {
-			matchStackToSquare(stack);
-		}
-
-		for (ArrayList<GameObject> stack : equippedStacks.values()) {
+		for (ArrayList<GameObject> stack : allStacks) {
 			matchStackToSquare(stack);
 		}
 
