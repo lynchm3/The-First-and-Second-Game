@@ -73,9 +73,9 @@ public class Templates {
 		new TemplatesJunk();
 		new TemplatesWeapons();
 		new TemplatesArmor();
+		new TemplatesLiquids();
 		new TemplatesTools();
 		new TemplatesProjectiles();
-		new TemplatesLiquids();
 
 		// Big
 		new TemplatesCorpses();
@@ -284,6 +284,7 @@ public class Templates {
 	public static MeatChunk MEAT_CHUNK;
 
 	public static ContainerForLiquids JAR;
+	public static ContainerForLiquids JAR_OF_WATER;
 
 	public static Liquid WATER;
 

@@ -7,7 +7,7 @@ import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectWet;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Liquid;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
@@ -62,19 +62,20 @@ public class ActionPourSpecificItem extends Action {
 			}
 		}
 
-		if (containerForLiquids.inventory.size() > 0 && containerForLiquids.inventory.get(0) instanceof Liquid) {
-			Liquid liquid = (Liquid) this.containerForLiquids.inventory.get(0);
-			for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
-				// new ActionDouse(shooter, gameObject).perform();
-				for (Effect effect : liquid.touchEffects) {
-					gameObject.addEffect(effect.makeCopy(performer, gameObject));
-					if (effect instanceof EffectWet)
-						gameObject.removeBurningEffect();
-				}
+		for (GameObject gameObject : this.targetSquare.inventory.getGameObjects()) {
+			// new ActionDouse(shooter, gameObject).perform();
+			for (Effect effect : containerForLiquids.liquid.touchEffects) {
+				gameObject.addEffect(effect.makeCopy(performer, gameObject));
+				if (effect instanceof EffectWet)
+					gameObject.removeBurningEffect();
 			}
-			containerForLiquids.inventory.remove(containerForLiquids.inventory.get(0));
-			containerForLiquids.value = containerForLiquids.baseValue;
 		}
+
+		GameObject newJar = Templates.JAR.makeCopy(null, containerForLiquids.owner);
+		performer.inventory.add(newJar);
+		if (performer.equipped == containerForLiquids)
+			performer.equipped = newJar;
+		performer.inventory.remove(containerForLiquids);
 
 		if (Game.level.openInventories.size() > 0)
 			Game.level.openInventories.get(0).close();
@@ -117,7 +118,7 @@ public class ActionPourSpecificItem extends Action {
 		if (targetSquare == null && targetGameObject == null)
 			return false;
 
-		if (containerForLiquids.inventory.size() != 0)
+		if (containerForLiquids.liquid == null)
 			actionName = ACTION_NAME + " " + containerForLiquids.name + " (empty)";
 
 		if (performer.straightLineDistanceTo(targetSquare) > 1) {

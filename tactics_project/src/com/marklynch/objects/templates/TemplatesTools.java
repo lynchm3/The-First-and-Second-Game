@@ -8,7 +8,6 @@ import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.weapons.Weapon;
-import com.marklynch.utils.ResourceUtils;
 
 public class TemplatesTools {
 
@@ -288,7 +287,7 @@ public class TemplatesTools {
 		Templates.LANTERN.templateId = GameObject.generateNewTemplateId();
 
 		Templates.JAR = new ContainerForLiquids();
-		Templates.JAR.name = "Jar";
+		Templates.JAR.name = "Empty Jar";
 		Templates.JAR.slashDamage = 10;
 		Templates.JAR.minRange = 1;
 		Templates.JAR.maxRange = 1;
@@ -301,17 +300,37 @@ public class TemplatesTools {
 		Templates.JAR.soundWhenHit = 1f;
 		Templates.JAR.soundWhenHitting = 1f;
 		Templates.JAR.soundDampening = 1f;
-		Templates.JAR.stackable = false;
+		Templates.JAR.stackable = true;
 		Templates.JAR.weight = 10f;
-		Templates.JAR.value = Templates.JAR.baseValue = 42;
+		Templates.JAR.value = 42;
 		Templates.JAR.anchorX = 56;
 		Templates.JAR.anchorY = 100;
 		Templates.JAR.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR.volume = 1;
-		Templates.JAR.imageWhenFullPath = "water_jar.png";
-		Templates.JAR.baseName = new String("Jar");
-		Templates.JAR.baseImage = ResourceUtils.getGlobalImage("jar.png");
-		Templates.JAR.imageWhenFull = ResourceUtils.getGlobalImage("water_jar.png");
+		Templates.JAR.liquid = null;
+
+		Templates.JAR_OF_WATER = new ContainerForLiquids();
+		Templates.JAR_OF_WATER.name = "Jar of Water";
+		Templates.JAR_OF_WATER.slashDamage = 10;
+		Templates.JAR_OF_WATER.minRange = 1;
+		Templates.JAR_OF_WATER.maxRange = 1;
+		Templates.JAR_OF_WATER.imageTexturePath = "water_jar.png";
+		Templates.JAR_OF_WATER.totalHealth = Templates.JAR_OF_WATER.remainingHealth = 14;
+		Templates.JAR_OF_WATER.widthRatio = 0.25f;
+		Templates.JAR_OF_WATER.heightRatio = 0.25f;
+		Templates.JAR_OF_WATER.drawOffsetX = 0f;
+		Templates.JAR_OF_WATER.drawOffsetY = 0f;
+		Templates.JAR_OF_WATER.soundWhenHit = 1f;
+		Templates.JAR_OF_WATER.soundWhenHitting = 1f;
+		Templates.JAR_OF_WATER.soundDampening = 1f;
+		Templates.JAR_OF_WATER.stackable = true;
+		Templates.JAR_OF_WATER.weight = 10f;
+		Templates.JAR_OF_WATER.value = 48;
+		Templates.JAR_OF_WATER.anchorX = 56;
+		Templates.JAR_OF_WATER.anchorY = 100;
+		Templates.JAR_OF_WATER.templateId = GameObject.generateNewTemplateId();
+		Templates.JAR_OF_WATER.volume = 1;
+		Templates.JAR_OF_WATER.liquid = Templates.WATER.makeCopy(null, null, 1);
 	}
 
 }

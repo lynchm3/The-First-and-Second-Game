@@ -43,7 +43,6 @@ import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.units.Trader;
@@ -472,15 +471,13 @@ public class Editor {
 		player.inventory.add(Templates.PINK_HARD_HAT.makeCopy(null, player));
 		player.inventory.add(Templates.COWBOY_HAT.makeCopy(null, player));
 		player.inventory.add(Templates.JAR.makeCopy(null, player));
-		ContainerForLiquids jar1 = Templates.JAR.makeCopy(null, player);
-		jar1.inventory.add(Templates.WATER.makeCopy(null, player, jar1.volume));
-		player.inventory.add(jar1);
-		ContainerForLiquids jar2 = Templates.JAR.makeCopy(null, player);
-		jar2.inventory.add(Templates.WATER.makeCopy(null, player, jar2.volume));
-		player.inventory.add(jar2);
-		ContainerForLiquids jar3 = Templates.JAR.makeCopy(null, player);
-		jar3.inventory.add(Templates.WATER.makeCopy(null, player, jar3.volume));
-		player.inventory.add(jar3);
+		player.inventory.add(Templates.JAR.makeCopy(null, player));
+		player.inventory.add(Templates.JAR.makeCopy(null, player));
+		player.inventory.add(Templates.JAR.makeCopy(null, player));
+		player.inventory.add(Templates.JAR.makeCopy(null, player));
+		player.inventory.add(Templates.JAR.makeCopy(null, player));
+		player.inventory.add(Templates.JAR.makeCopy(null, player));
+		player.inventory.add(Templates.JAR.makeCopy(null, player));
 
 		// Trader Joe
 		Trader trader = Templates.TRADER.makeCopy("Trader Joe", Game.level.squares[7][1],

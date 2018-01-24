@@ -12,15 +12,9 @@ import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
-import mdesl.graphics.Texture;
-
 public class ContainerForLiquids extends Tool {
-	public String baseName;
 	public float volume;
-	public Texture baseImage;
-	public Texture imageWhenFull;
-	public String imageWhenFullPath;
-	public int baseValue;
+	public Liquid liquid;
 
 	public ContainerForLiquids() {
 
@@ -32,34 +26,10 @@ public class ContainerForLiquids extends Tool {
 	public ContainerForLiquids makeCopy(Square square, Actor owner) {
 		ContainerForLiquids weapon = new ContainerForLiquids();
 		setAttributesForCopy(weapon, square, owner);
-		weapon.baseValue = value;
 		weapon.volume = volume;
-		weapon.imageWhenFullPath = imageWhenFullPath;
-		weapon.baseName = baseName;
-		weapon.baseImage = this.baseImage;
-		weapon.imageWhenFull = this.imageWhenFull;
-		if (weapon.inventory.size() == 0) {
-			weapon.name = baseName + " (empty)";
-			weapon.imageTexture = baseImage;
-			weapon.baseValue = value;
-		} else {
-			weapon.name = baseName + " of " + inventory.get(0).name;
-			weapon.imageTexture = imageWhenFull;
-			weapon.value = baseValue + inventory.get(0).value;
-		}
+		if (weapon.liquid != null)
+			weapon.liquid = liquid.makeCopy(null, owner, volume);
 		return weapon;
-	}
-
-	@Override
-	public void inventoryChanged() {
-		if (this.inventory.size() == 0) {
-			this.name = baseName + " (empty)";
-			this.imageTexture = baseImage;
-		} else {
-			this.name = baseName + " of " + inventory.get(0).name;
-			this.imageTexture = imageWhenFull;
-			this.value = baseValue + inventory.get(0).value;
-		}
 	}
 
 	@Override
