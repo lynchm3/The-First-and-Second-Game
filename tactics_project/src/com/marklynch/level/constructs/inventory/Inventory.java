@@ -202,6 +202,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public void open() {
+
+		System.out.println("open() parnet = " + parent);
+
 		if (Level.activeTextBox == textBoxSearch) {
 			Level.activeTextBox = null;
 		}
@@ -778,8 +781,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void updateStacks() {
 
-		// if (!isOpen)
-		// return;
+		System.out.println("updateStacks parent = " + parent);
+		System.out.println("updateStacks gameObjects.size() = " + gameObjects.size());
+		System.out.println("updateStacks filteredGameObjects.size() = " + filteredGameObjects.size());
 
 		legalStacks.clear();
 		illegalStacks.clear();
@@ -792,7 +796,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		for (GameObject gameObject : toUse) {
 
-			if (!gameObject.fitsInInventory)
+			System.out.println("gameObject.fitsInInventory = " + gameObject.fitsInInventory);
+			if (!gameObject.fitsInInventory && inventoryMode != INVENTORY_MODE.MODE_SELECT_MAP_MARKER)
 				continue;
 
 			if (this.parent == Game.level.player
@@ -832,22 +837,27 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void matchStacksToSquares() {
 
+		System.out.println("matchStacksToSquares()");
+		System.out.println("matchStacksToSquares() parent = " + parent);
+
 		if (!isOpen)
 			return;
 
 		inventorySquares.clear();
 
+		System.out.println("allStacks.size() = " + allStacks.size());
 		for (ArrayList<GameObject> stack : allStacks) {
 			matchStackToSquare(stack);
 		}
 
 		totalSquaresHeight = ((inventorySquares.size() / squareGridWidthInSquares) * Game.INVENTORY_SQUARE_HEIGHT);
 
-		if (inventoryMode != INVENTORY_MODE.MODE_SELECT_MAP_MARKER && this.parent != Game.level.player) {
-			Game.level.player.inventory.updateStacks();
-			Game.level.player.inventory.matchStacksToSquares();
-			return;
-		}
+		// if (inventoryMode != INVENTORY_MODE.MODE_SELECT_MAP_MARKER &&
+		// this.parent != Game.level.player) {
+		// Game.level.player.inventory.updateStacks();
+		// Game.level.player.inventory.matchStacksToSquares();
+		// return;
+		// }
 
 		resize1();
 
