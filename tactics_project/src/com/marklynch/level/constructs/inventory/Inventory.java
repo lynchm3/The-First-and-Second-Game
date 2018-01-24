@@ -481,6 +481,8 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		if (otherInventory != null) {
 			otherInventory.sort(inventorySortBy, filterFirst, false);
+			otherInventory.updateStacks();
+			otherInventory.matchStacksToSquares();
 		}
 
 		// Button selectedSortButton = null;
@@ -563,7 +565,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	public void filter(INVENTORY_FILTER_BY inventoryFilterBy, boolean temporary) {
 
-		if (inventoryFilterBy != Inventory.inventoryFilterBy) {
+		if (parent == Game.level.player && inventoryFilterBy != Inventory.inventoryFilterBy) {
 			if (temporary) {
 				Inventory.lastInventoryFilterBy = Inventory.inventoryFilterBy;
 				Inventory.inventoryFilterBy = inventoryFilterBy;
@@ -610,11 +612,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 		}
 
+		sort(Inventory.inventorySortBy, false, false);
+
 		if (otherInventory != null) {
 			otherInventory.filter(inventoryFilterBy, temporary);
 		}
-
-		sort(Inventory.inventorySortBy, false, false);
 	}
 
 	public void postLoad1() {
@@ -628,22 +630,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		int index = 0;
-
-		// Put objects in inventory
-		// for (int i = 0; i < inventorySquares[0].length; i++) {
-		// for (int j = 0; j < inventorySquares.length; j++) {
-		//
-		// if (index >= gameObjects.size())
-		// return;
-		//
-		// // if (inventorySquares[j][i].gameObject == null) {
-		// // inventorySquares[j][i].gameObject = gameObjects.get(index);
-		// // gameObjects.get(index).inventorySquareGameObjectIsOn =
-		// // inventorySquares[j][i];
-		// // index++;
-		// // }
-		// }
-		// }
 	}
 
 	public void postLoad2() {
@@ -801,7 +787,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		allStacks.clear();
 
 		ArrayList<GameObject> toUse = gameObjects;
-		if (parent == Game.level.player)
+		if (parent instanceof GameObject)
 			toUse = filteredGameObjects;
 
 		for (GameObject gameObject : toUse) {
