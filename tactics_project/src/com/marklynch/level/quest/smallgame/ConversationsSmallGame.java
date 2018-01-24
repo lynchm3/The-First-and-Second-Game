@@ -54,7 +54,7 @@ public class ConversationsSmallGame {
 				for (Actor wolf : quest.wolfPack.getMembers()) {
 					wolf.thoughtsOnPlayer = 100;
 				}
-				quest.resolve();
+				quest.resolve(quest.wolfPack.getLeader().squareGameObjectIsOn);
 			}
 		};
 		conversationWolfThankYou.openingConversationPart.quests.add(quest);
@@ -65,7 +65,7 @@ public class ConversationsSmallGame {
 		conversationWolfISurvivedNoThanksToYou.openingConversationPart.leaveConversationListener = new LeaveConversationListener() {
 			@Override
 			public void leave() {
-				quest.resolve();
+				quest.resolve(quest.wolfPack.getLeader().squareGameObjectIsOn);
 			}
 		};
 		conversationWolfISurvivedNoThanksToYou.openingConversationPart.quests.add(quest);
@@ -258,7 +258,7 @@ public class ConversationsSmallGame {
 			@Override
 			public void leave() {
 				quest.addJournalLog(quest.journalLogToldToFuckOffByHunters);
-				quest.resolve();
+				quest.resolve(quest.hunterPack.getLeader().squareGameObjectIsOn);
 			}
 		};
 

@@ -97,7 +97,9 @@ public class Templates {
 
 	// GOLD
 	public static Gold GOLD;
-	public static Orb ORB;
+	public static Orb SMALL_ORB;
+	public static Orb MEDIUM_ORB;
+	public static Orb LARGE_ORB;
 
 	// Player
 	public static Player PLAYER;

@@ -1383,8 +1383,7 @@ public class Level {
 			}
 		}
 
-		if (currentFactionMoving != factions.player
-				&& (Game.level.player.primaryAnimation.completed || !Game.level.player.primaryAnimation.blockAI)) {
+		if (currentFactionMoving != factions.player && (!Game.level.player.animationsBlockingAI())) {
 			currentFactionMoving.update(delta);
 		} else if (Game.level.player.primaryAnimation.completed && Game.level.player.playerTargetAction != null
 				&& Game.level.player.playerTargetAction.recheck()) {

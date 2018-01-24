@@ -9,6 +9,7 @@ import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.conversation.ConversationPart;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Link;
@@ -145,11 +146,11 @@ public class Quest {
 		}
 	}
 
-	public void resolve() {
+	public void resolve(Square square) {
 		resolved = true;
 		Game.level.addNotification(new Notification(new Object[] { "Quest ", this, " resolved!" },
 				Notification.NotificationType.QUEST_RESOLVED, this));
-		Game.level.player.addXP(15);
+		Game.level.player.addXP(15, square);
 	}
 
 }

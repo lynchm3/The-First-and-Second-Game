@@ -1663,4 +1663,16 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				+ getEffectiveFireDamage() + getEffectiveWaterDamage() + getEffectiveElectricalDamage()
 				+ getEffectivePoisonDamage();
 	}
+
+	public boolean animationsBlockingAI() {
+		if (!primaryAnimation.completed && primaryAnimation.blockAI)
+			return true;
+
+		for (Animation secondaryAnimation : secondaryAnimations) {
+			if (!secondaryAnimation.completed && secondaryAnimation.blockAI)
+				return true;
+		}
+
+		return false;
+	}
 }

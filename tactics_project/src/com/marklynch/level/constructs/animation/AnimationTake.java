@@ -19,7 +19,7 @@ public class AnimationTake extends Animation {
 	public Square originSquare;
 	public Square targetSquare;
 
-	public float speed = 1;
+	public float speed = 0.1f;
 	public boolean onTarget = true;
 
 	public AnimationTake(GameObject gameObject, Square targetSquare, Square originSquare) {

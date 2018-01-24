@@ -5,6 +5,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
@@ -14,11 +15,13 @@ public class ActionSpot extends Action {
 
 	public Actor performer;
 	public Object spotted;
+	public Square specificSquareSpotted;
 
-	public ActionSpot(Actor spotter, Object spotted) {
+	public ActionSpot(Actor spotter, Object spotted, Square specificSquareSpotted) {
 		super(ACTION_NAME, "action_spot.png");
 		this.performer = spotter;
 		this.spotted = spotted;
+		this.specificSquareSpotted = specificSquareSpotted;
 		legal = checkLegality();
 		sound = createSound();
 	}
@@ -30,13 +33,13 @@ public class ActionSpot extends Action {
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " spotted ", spotted }));
 
 		if (spotted instanceof Area) {
-			Game.level.player.addXP((int) Math.pow(5, ((Area) spotted).level));
+			Game.level.player.addXP((int) Math.pow(5, ((Area) spotted).level), specificSquareSpotted);
 		} else if (spotted instanceof Structure) {
-			Game.level.player.addXP((int) Math.pow(5, ((Structure) spotted).level));
+			Game.level.player.addXP((int) Math.pow(5, ((Structure) spotted).level), specificSquareSpotted);
 		} else if (spotted instanceof StructureRoom) {
 			StructureRoom structureRoom = (StructureRoom) spotted;
 			if (structureRoom.level != 0)
-				Game.level.player.addXP((int) Math.pow(5, structureRoom.level));
+				Game.level.player.addXP((int) Math.pow(5, structureRoom.level), specificSquareSpotted);
 		}
 
 		performer.actionsPerformedThisTurn.add(this);

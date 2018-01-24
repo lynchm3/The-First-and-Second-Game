@@ -9,6 +9,7 @@ import com.marklynch.ai.routines.AIRoutineForHunter;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Faction;
+import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.effect.Effect;
@@ -19,10 +20,12 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
+import com.marklynch.objects.Orb;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionDie;
 import com.marklynch.objects.actions.ActionDiscover;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.popups.Notification;
 import com.marklynch.utils.QuadUtils;
@@ -176,7 +179,37 @@ public class Player extends Human {
 		return actor;
 	}
 
-	public void addXP(int xp) {
+	public void addXP(int xp, Square square) {
+
+		if (square != null) {
+
+			int orbs = xp;
+
+			while (orbs > 0) {
+				if (orbs >= 1) {
+					Orb orb = Templates.SMALL_ORB.makeCopy(square, null, 1);
+					Game.level.player.secondaryAnimations
+							.add(new AnimationTake(orb, Game.level.player.squareGameObjectIsOn, square));
+					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
+					orbs -= 1;
+				}
+				if (orbs >= 5) {
+					Orb orb = Templates.MEDIUM_ORB.makeCopy(square, null, 5);
+					Game.level.player.secondaryAnimations
+							.add(new AnimationTake(orb, Game.level.player.squareGameObjectIsOn, square));
+					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
+					orbs -= 5;
+				}
+				if (orbs >= 10) {
+					Orb orb = Templates.LARGE_ORB.makeCopy(square, null, 10);
+					Game.level.player.secondaryAnimations
+							.add(new AnimationTake(orb, Game.level.player.squareGameObjectIsOn, square));
+					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
+					orbs -= 10;
+				}
+			}
+		}
+
 		Player.xp += xp;
 		Player.xpThisLevel += xp;
 		Game.level.activityLogger.addActivityLog(new ActivityLog(
@@ -385,17 +418,17 @@ public class Player extends Human {
 				// Seen area for first time?
 				if (Game.level.squares[x][y].areaSquareIsIn != null
 						&& Game.level.squares[x][y].areaSquareIsIn.seenByPlayer == false) {
-					Game.level.squares[x][y].areaSquareIsIn.hasBeenSeenByPlayer();
+					Game.level.squares[x][y].areaSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
 				}
 				// Seen structure for first time?
 				if (Game.level.squares[x][y].structureSquareIsIn != null
 						&& Game.level.squares[x][y].structureSquareIsIn.seenByPlayer == false) {
-					Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer();
+					Game.level.squares[x][y].structureSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
 				}
 				// Seen room for first time?
 				if (Game.level.squares[x][y].structureRoomSquareIsIn != null
 						&& Game.level.squares[x][y].structureRoomSquareIsIn.seenByPlayer == false) {
-					Game.level.squares[x][y].structureRoomSquareIsIn.hasBeenSeenByPlayer();
+					Game.level.squares[x][y].structureRoomSquareIsIn.hasBeenSeenByPlayer(Game.level.squares[x][y]);
 				}
 			}
 		}

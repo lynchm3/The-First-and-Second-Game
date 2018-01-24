@@ -219,9 +219,9 @@ public class Structure {
 
 	}
 
-	public void hasBeenSeenByPlayer() {
+	public void hasBeenSeenByPlayer(Square squareSeen) {
 		this.seenByPlayer = true;
-		new ActionSpot(Game.level.player, this).perform();
+		new ActionSpot(Game.level.player, this, squareSeen).perform();
 		this.showOnMap = true;
 	}
 }
