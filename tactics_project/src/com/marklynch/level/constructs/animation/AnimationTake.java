@@ -1,9 +1,14 @@
 package com.marklynch.level.constructs.animation;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextureUtils;
+
+import mdesl.graphics.Color;
 
 public class AnimationTake extends Animation {
 
@@ -21,6 +26,8 @@ public class AnimationTake extends Animation {
 	public Square originSquare;
 
 	public float speed = 1f;
+
+	ArrayList<Line> trailLines = new ArrayList<Line>();
 
 	public AnimationTake(GameObject gameObject, GameObject taker, Square originSquare, float speed) {
 		super();
@@ -53,6 +60,9 @@ public class AnimationTake extends Animation {
 		if (completed)
 			return;
 
+		float oldX = x;
+		float oldY = y;
+
 		targetX = (int) (taker.squareGameObjectIsOn.xInGridPixels + (Game.SQUARE_WIDTH - gameObject.width) / 2);
 		targetY = (int) (taker.squareGameObjectIsOn.yInGridPixels + (Game.SQUARE_HEIGHT - gameObject.height) / 2);
 		if (taker.primaryAnimation != null) {
@@ -80,27 +90,51 @@ public class AnimationTake extends Animation {
 		// completed = true;
 		// } else {
 
-		if (totalDistanceToCover < 1) {
+		if (totalDistanceToCover < 10) {
 			completed = true;
 		} else {
 			x += distanceX;
 			y += distanceY;
 		}
 
+		trailLines.add(new Line(oldX + gameObject.halfWidth, oldY + gameObject.halfHeight, x + gameObject.halfWidth,
+				y + gameObject.halfHeight));
+
 	}
 
 	@Override
 	public void draw1() {
-		// if (originSquare.yInGrid < taker.squareGameObjectIsOn.yInGrid) {
-		TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height, false);
-		// }
+		if (originSquare.yInGrid < taker.squareGameObjectIsOn.yInGrid) {
+			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
+					false);
+			for (Line trailLine : trailLines) {
+				QuadUtils.drawQuad(Color.WHITE, trailLine.x1, trailLine.y1, trailLine.x2, trailLine.y2);
+			}
+
+		}
 	}
 
 	@Override
 	public void draw2() {
-		// if (originSquare.yInGrid >= taker.squareGameObjectIsOn.yInGrid) {
-		TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height, false);
-		// }
+		if (originSquare.yInGrid >= taker.squareGameObjectIsOn.yInGrid) {
+			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
+					false);
+			for (Line trailLine : trailLines) {
+				QuadUtils.drawQuad(Color.WHITE, trailLine.x1, trailLine.y1, trailLine.x2, trailLine.y2);
+			}
+		}
+	}
+
+	public class Line {
+		public float x1, y1, x2, y2;
+
+		public Line(float x1, float y1, float x2, float y2) {
+			super();
+			this.x1 = x1;
+			this.y1 = y1;
+			this.x2 = x2;
+			this.y2 = y2;
+		}
 	}
 
 }
