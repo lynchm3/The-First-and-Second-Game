@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.utils.QuadUtils;
+import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.TextureUtils;
 
 import mdesl.graphics.Color;
@@ -28,6 +28,8 @@ public class AnimationTake extends Animation {
 	public float speed = 1f;
 
 	ArrayList<Line> trailLines = new ArrayList<Line>();
+
+	boolean reachedDestination = false;
 
 	public AnimationTake(GameObject gameObject, GameObject taker, Square originSquare, float speed) {
 		super();
@@ -91,7 +93,7 @@ public class AnimationTake extends Animation {
 		// } else {
 
 		if (totalDistanceToCover < 10) {
-			completed = true;
+			reachedDestination = true;
 		} else {
 			x += distanceX;
 			y += distanceY;
@@ -99,17 +101,26 @@ public class AnimationTake extends Animation {
 
 		trailLines.add(new Line(oldX + gameObject.halfWidth, oldY + gameObject.halfHeight, x + gameObject.halfWidth,
 				y + gameObject.halfHeight));
+		if (reachedDestination) {
+			trailLines.remove(0);
+			if (trailLines.size() == 0)
+				completed = true;
+		} else if (trailLines.size() > 100) {
+			trailLines.remove(0);
+		}
 
 	}
 
 	@Override
 	public void draw1() {
 		if (originSquare.yInGrid < taker.squareGameObjectIsOn.yInGrid) {
+			for (Line trailLine : trailLines) {
+				// QuadUtils.drawQuad(Color.WHITE, trailLine.x1, trailLine.y1,
+				// trailLine.x2, trailLine.y2);
+				LineUtils.drawLine(Color.WHITE, trailLine.x1, trailLine.y1, trailLine.x2, trailLine.y2, 2);
+			}
 			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
 					false);
-			for (Line trailLine : trailLines) {
-				QuadUtils.drawQuad(Color.WHITE, trailLine.x1, trailLine.y1, trailLine.x2, trailLine.y2);
-			}
 
 		}
 	}
@@ -117,11 +128,13 @@ public class AnimationTake extends Animation {
 	@Override
 	public void draw2() {
 		if (originSquare.yInGrid >= taker.squareGameObjectIsOn.yInGrid) {
+			for (Line trailLine : trailLines) {
+				// QuadUtils.drawQuad(Color.WHITE, trailLine.x1, trailLine.y1,
+				// trailLine.x2, trailLine.y2);
+				LineUtils.drawLine(Color.WHITE, trailLine.x1, trailLine.y1, trailLine.x2, trailLine.y2, 2);
+			}
 			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
 					false);
-			for (Line trailLine : trailLines) {
-				QuadUtils.drawQuad(Color.WHITE, trailLine.x1, trailLine.y1, trailLine.x2, trailLine.y2);
-			}
 		}
 	}
 
