@@ -802,7 +802,18 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (!gameObject.fitsInInventory)
 				continue;
 
-			if (objectLegal(gameObject, this)) {
+			if (this.parent == Game.level.player
+					&& (Game.level.player.equipped == gameObject || Game.level.player.helmet == gameObject
+							|| Game.level.player.bodyArmor == gameObject || Game.level.player.legArmor == gameObject)) {
+
+				if (equippedStacks.containsKey(gameObject.templateId)) {
+					equippedStacks.get(gameObject.templateId).add(gameObject);
+				} else {
+					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
+					newStack.add(gameObject);
+					equippedStacks.put(gameObject.templateId, newStack);
+				}
+			} else if (objectLegal(gameObject, this)) {
 				if (legalStacks.containsKey(gameObject.templateId)) {
 					legalStacks.get(gameObject.templateId).add(gameObject);
 				} else {

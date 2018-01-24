@@ -223,8 +223,8 @@ public class Player extends Human {
 		if (leveledUp) {
 			Game.level.addNotification(new Notification(new Object[] { Game.level.player, " leveled Up!" },
 					Notification.NotificationType.LEVEL_UP, this));
-			Game.level.activityLogger.addActivityLog(
-					new ActivityLog(new Object[] { Game.level.player, " are now Level " + level }));
+			Game.level.activityLogger
+					.addActivityLog(new ActivityLog(new Object[] { Game.level.player, " are now Level " + level }));
 		}
 	}
 
@@ -267,8 +267,9 @@ public class Player extends Human {
 			}
 
 			// Count && value
-
-			Integer count = inventory.legalStacks.get(equipped.templateId).size();
+			Integer count = 1;
+			if (inventory.equippedStacks.get(equipped.templateId) != null)
+				count = inventory.equippedStacks.get(equipped.templateId).size();
 			if (count == null)
 				count = 1;
 
