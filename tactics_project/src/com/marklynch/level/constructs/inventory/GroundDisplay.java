@@ -17,6 +17,8 @@ import mdesl.graphics.Color;
 
 public class GroundDisplay implements Draggable, Scrollable {
 
+	int x, y;
+
 	ArrayList<ArrayList<GameObject>> stacks = new ArrayList<ArrayList<GameObject>>();
 
 	public int squareGridWidthInSquares = 5;
@@ -29,11 +31,6 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public static final String stringEmpty = "Nothing nearby";
 	public static final int lengthEmpty = Game.font.getWidth(stringEmpty);
-
-	// public static HashMap<Integer, ArrayList<GameObject>> legalStacks = new
-	// HashMap<Integer, ArrayList<GameObject>>();
-	// public static HashMap<Integer, ArrayList<GameObject>> illegalStacks = new
-	// HashMap<Integer, ArrayList<GameObject>>();
 
 	public GroundDisplay(int x, int y) {
 		this.squaresX = x;
@@ -56,10 +53,16 @@ public class GroundDisplay implements Draggable, Scrollable {
 	}
 
 	public void matchStacksToSquares() {
+
 		System.out.println("GroundDisplay.matchStacksToSquares");
 
-		groundDisplaySquares.clear();
+		for (StackTraceElement ste : Thread.currentThread().getStackTrace()) {
+			System.out.println("ste = " + ste);
+		}
 
+		x = 0;
+		y = 0;
+		groundDisplaySquares.clear();
 		for (Square square : squares) {
 			matchStacksToSquaresForInventory(square.inventory);
 			for (GameObject gameObject : square.inventory.gameObjects) {
@@ -102,6 +105,8 @@ public class GroundDisplay implements Draggable, Scrollable {
 		GroundDisplaySquare inventorySquare = new GroundDisplaySquare(0, 0, null, this);
 		inventorySquare.stack = stack;
 		groundDisplaySquares.add(inventorySquare);
+
+		x++;
 	}
 
 	public void resize2() {

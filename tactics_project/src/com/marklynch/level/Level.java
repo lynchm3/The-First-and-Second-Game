@@ -1875,6 +1875,11 @@ public class Level {
 
 	public void addRemoveObjectToFromGround() {
 
+		if (inanimateObjectsToAdd.size() == 0 && inanimateObjectsOnGroundToRemove.size() == 0
+				&& actorsToRemove.size() == 0) {
+			return;
+		}
+
 		for (InanimateObjectToAddOrRemove inanimateObjectToAdd : inanimateObjectsToAdd) {
 			inanimateObjectToAdd.square.inventory.add(inanimateObjectToAdd.gameObject);
 		}
@@ -1893,8 +1898,9 @@ public class Level {
 		}
 		actorsToRemove.clear();
 
-		if (Game.level.player.inventory.groundDisplay != null)
+		if (Game.level.player.inventory.groundDisplay != null) {
 			Game.level.player.inventory.groundDisplay.refreshGameObjects();
+		}
 
 	}
 
