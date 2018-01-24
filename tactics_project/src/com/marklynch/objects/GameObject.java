@@ -691,8 +691,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				return null;
 		}
 
+		// Water Source
+		if (this instanceof WaterSource) {
+			return new ActionFillContainersInInventory(performer, (WaterSource) this);
+		}
+
 		if (this.canContainOtherObjects && !this.canShareSquare)
 			return new ActionOpenOtherInventory(performer, this);
+
 		return null;
 	}
 
@@ -706,6 +712,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (this instanceof Stump || this instanceof Tree) {
 			return new ActionChop(performer, this);
+		}
+
+		// Water Source
+		if (this instanceof WaterSource) {
+			return new ActionFillContainersInInventory(performer, (WaterSource) this);
 		}
 
 		if (this.canContainOtherObjects && this.inventory.size() > 0)
