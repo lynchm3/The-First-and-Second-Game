@@ -1,6 +1,7 @@
 package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
@@ -31,6 +32,9 @@ public class ActionSpot extends Action {
 
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " spotted ", spotted }));
+
+		Level.squareToFlash = specificSquareSpotted;
+		Level.flashSquare = true;
 
 		if (spotted instanceof Area) {
 			Game.level.player.addXP((int) Math.pow(5, ((Area) spotted).level), specificSquareSpotted);
