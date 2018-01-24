@@ -19,7 +19,7 @@ public class TemplatesHumans {
 		// Player
 		Templates.PLAYER = new Player();
 		Templates.PLAYER.title = "Fighter";
-		Templates.PLAYER.actorLevel = 1;
+		Templates.PLAYER.level = 1;
 		Templates.PLAYER.totalHealth = Templates.PLAYER.remainingHealth = 1000;
 		Templates.PLAYER.strength = 10;
 		Templates.PLAYER.dexterity = 10;
@@ -44,7 +44,7 @@ public class TemplatesHumans {
 		// General People
 		Templates.HUNTER = new Human();
 		Templates.HUNTER.title = "Hunter";
-		Templates.HUNTER.actorLevel = 1;
+		Templates.HUNTER.level = 1;
 		Templates.HUNTER.totalHealth = Templates.HUNTER.remainingHealth = 10;
 		Templates.HUNTER.strength = 10;
 		Templates.HUNTER.dexterity = 10;
@@ -61,7 +61,7 @@ public class TemplatesHumans {
 
 		Templates.THIEF = new Human();
 		Templates.THIEF.title = "Thief";
-		Templates.THIEF.actorLevel = 1;
+		Templates.THIEF.level = 1;
 		Templates.THIEF.totalHealth = Templates.THIEF.remainingHealth = 10;
 		Templates.THIEF.strength = 10;
 		Templates.THIEF.dexterity = 10;
@@ -78,7 +78,7 @@ public class TemplatesHumans {
 
 		Templates.FARMER = new Human();
 		Templates.FARMER.title = "Farmer";
-		Templates.FARMER.actorLevel = 1;
+		Templates.FARMER.level = 1;
 		Templates.FARMER.totalHealth = Templates.FARMER.remainingHealth = 10;
 		Templates.FARMER.strength = 10;
 		Templates.FARMER.dexterity = 10;
@@ -96,7 +96,7 @@ public class TemplatesHumans {
 		// Special People
 		Templates.MORT = new Mort();
 		Templates.MORT.title = "Mort";
-		Templates.MORT.actorLevel = 1;
+		Templates.MORT.level = 1;
 		Templates.MORT.totalHealth = Templates.MORT.remainingHealth = 10;
 		Templates.MORT.strength = 10;
 		Templates.MORT.dexterity = 10;
@@ -113,7 +113,7 @@ public class TemplatesHumans {
 
 		Templates.TRADER = new Trader();
 		Templates.TRADER.title = "Trader";
-		Templates.TRADER.actorLevel = 1;
+		Templates.TRADER.level = 1;
 		Templates.TRADER.totalHealth = Templates.TRADER.remainingHealth = 10;
 		Templates.TRADER.strength = 10;
 		Templates.TRADER.dexterity = 10;

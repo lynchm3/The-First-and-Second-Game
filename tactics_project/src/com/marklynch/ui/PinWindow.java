@@ -208,7 +208,7 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 30, drawPositionX + statsImageX + 20, drawPositionY + statsY + 30 + 20);
 		if (bestiaryKnowledge.level) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false,
-					null, "" + actor.actorLevel);
+					null, "" + actor.level);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false,

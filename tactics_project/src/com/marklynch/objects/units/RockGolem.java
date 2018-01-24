@@ -169,7 +169,7 @@ public class RockGolem extends Monster {
 		actor.title = title;
 		actor.name = name;
 		actor.area = area;
-		actor.actorLevel = actorLevel;
+		actor.level = level;
 		actor.totalHealth = actor.remainingHealth = totalHealth;
 		actor.strength = strength;
 		actor.dexterity = dexterity;

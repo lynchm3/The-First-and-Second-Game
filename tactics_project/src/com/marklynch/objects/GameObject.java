@@ -216,6 +216,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float maxRange = 1;
 
 	public Enhancement enhancement;
+	public int level = 1;
 
 	// public ArrayList<DestructionListener> destructionListeners = new
 	// ArrayList<DestructionListener>();

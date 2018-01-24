@@ -17,7 +17,7 @@ public class TemplatesAnimals {
 
 		Templates.PIG = new Pig();
 		Templates.PIG.title = "Pig";
-		Templates.PIG.actorLevel = 1;
+		Templates.PIG.level = 1;
 		Templates.PIG.totalHealth = Templates.PIG.remainingHealth = 100;
 		Templates.PIG.strength = 10;
 		Templates.PIG.dexterity = 10;
@@ -35,7 +35,7 @@ public class TemplatesAnimals {
 		// Friendly Wild animals
 		Templates.RAT = new TinyNeutralWildAnimal();
 		Templates.RAT.title = "Rat";
-		Templates.RAT.actorLevel = 1;
+		Templates.RAT.level = 1;
 		Templates.RAT.totalHealth = Templates.RAT.remainingHealth = 100;
 		Templates.RAT.strength = 10;
 		Templates.RAT.dexterity = 10;
@@ -54,7 +54,7 @@ public class TemplatesAnimals {
 
 		Templates.RABBIT = new HerbivoreWildAnimal();
 		Templates.RABBIT.title = "Rabbit";
-		Templates.RABBIT.actorLevel = 1;
+		Templates.RABBIT.level = 1;
 		Templates.RABBIT.totalHealth = Templates.RABBIT.remainingHealth = 100;
 		Templates.RABBIT.strength = 10;
 		Templates.RABBIT.dexterity = 10;
@@ -71,7 +71,7 @@ public class TemplatesAnimals {
 
 		Templates.BABY_RABBIT = new TinyNeutralWildAnimal();
 		Templates.BABY_RABBIT.title = "Baby Rabbit";
-		Templates.BABY_RABBIT.actorLevel = 1;
+		Templates.BABY_RABBIT.level = 1;
 		Templates.BABY_RABBIT.totalHealth = Templates.BABY_RABBIT.remainingHealth = 100;
 		Templates.BABY_RABBIT.strength = 10;
 		Templates.BABY_RABBIT.dexterity = 10;
@@ -90,7 +90,7 @@ public class TemplatesAnimals {
 
 		Templates.FOX = new CarnivoreNeutralWildAnimal();
 		Templates.FOX.title = "Fox";
-		Templates.FOX.actorLevel = 1;
+		Templates.FOX.level = 1;
 		Templates.FOX.totalHealth = Templates.FOX.remainingHealth = 100;
 		Templates.FOX.strength = 10;
 		Templates.FOX.dexterity = 10;
@@ -107,7 +107,7 @@ public class TemplatesAnimals {
 
 		Templates.WOLF = new CarnivoreNeutralWildAnimal();
 		Templates.WOLF.title = "Wolf";
-		Templates.WOLF.actorLevel = 1;
+		Templates.WOLF.level = 1;
 		Templates.WOLF.totalHealth = Templates.WOLF.remainingHealth = 100;
 		Templates.WOLF.strength = 10;
 		Templates.WOLF.dexterity = 10;

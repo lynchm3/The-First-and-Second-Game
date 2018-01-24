@@ -14,7 +14,7 @@ public class TemplatesMonsters {
 
 		Templates.BLIND = new Blind();
 		Templates.BLIND.title = "Blind";
-		Templates.BLIND.actorLevel = 1;
+		Templates.BLIND.level = 1;
 		Templates.BLIND.totalHealth = Templates.BLIND.remainingHealth = 100;
 		Templates.BLIND.strength = 10;
 		Templates.BLIND.dexterity = 10;
@@ -33,7 +33,7 @@ public class TemplatesMonsters {
 
 		Templates.ROCK_GOLEM = new RockGolem();
 		Templates.ROCK_GOLEM.title = "Suspicious Boulder";
-		Templates.ROCK_GOLEM.actorLevel = 1;
+		Templates.ROCK_GOLEM.level = 1;
 		Templates.ROCK_GOLEM.totalHealth = Templates.ROCK_GOLEM.remainingHealth = 300;
 		Templates.ROCK_GOLEM.strength = 10;
 		Templates.ROCK_GOLEM.dexterity = 10;

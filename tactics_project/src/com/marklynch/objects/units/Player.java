@@ -89,7 +89,7 @@ public class Player extends Human {
 		actor.faction = faction;
 
 		actor.title = title;
-		actor.actorLevel = actorLevel;
+		actor.level = level;
 		actor.totalHealth = actor.remainingHealth = totalHealth;
 		actor.strength = strength;
 		actor.dexterity = dexterity;
@@ -216,7 +216,7 @@ public class Player extends Human {
 				new Object[] { Game.level.player, " got " + xp + "XP (" + xpThisLevel + "/" + xpPerLevel + ")" }));
 		boolean leveledUp = false;
 		while (Player.xpThisLevel >= xpPerLevel) {
-			actorLevel++;
+			level++;
 			Player.xpThisLevel -= xpPerLevel;
 			leveledUp = true;
 		}
@@ -224,7 +224,7 @@ public class Player extends Human {
 			Game.level.addNotification(new Notification(new Object[] { Game.level.player, " leveled Up!" },
 					Notification.NotificationType.LEVEL_UP, this));
 			Game.level.activityLogger.addActivityLog(
-					new ActivityLog(new Object[] { Game.level.player, " are now Level " + actorLevel }));
+					new ActivityLog(new Object[] { Game.level.player, " are now Level " + level }));
 		}
 	}
 

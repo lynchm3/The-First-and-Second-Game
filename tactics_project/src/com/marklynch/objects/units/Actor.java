@@ -77,7 +77,6 @@ public class Actor extends GameObject {
 	public int intelligence;
 	public int endurance;
 	public String title = "";
-	public int actorLevel = 1;
 	public int travelDistance = 1;
 	public int sight = 10;
 
@@ -574,7 +573,8 @@ public class Actor extends GameObject {
 
 		if (primaryAnimation != null) {
 			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(primaryAnimation.offsetX, primaryAnimation.offsetY));
+			Game.activeBatch.getViewMatrix()
+					.translate(new Vector2f(primaryAnimation.offsetX, primaryAnimation.offsetY));
 			Game.activeBatch.updateUniforms();
 		}
 
@@ -697,7 +697,8 @@ public class Actor extends GameObject {
 
 		if (primaryAnimation != null) {
 			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(-primaryAnimation.offsetX, -primaryAnimation.offsetY));
+			Game.activeBatch.getViewMatrix()
+					.translate(new Vector2f(-primaryAnimation.offsetX, -primaryAnimation.offsetY));
 			Game.activeBatch.updateUniforms();
 		}
 
@@ -719,7 +720,8 @@ public class Actor extends GameObject {
 
 		if (primaryAnimation != null) {
 			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(primaryAnimation.offsetX, primaryAnimation.offsetY));
+			Game.activeBatch.getViewMatrix()
+					.translate(new Vector2f(primaryAnimation.offsetX, primaryAnimation.offsetY));
 			Game.activeBatch.updateUniforms();
 		}
 
@@ -727,7 +729,8 @@ public class Actor extends GameObject {
 
 		if (primaryAnimation != null) {
 			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix().translate(new Vector2f(-primaryAnimation.offsetX, -primaryAnimation.offsetY));
+			Game.activeBatch.getViewMatrix()
+					.translate(new Vector2f(-primaryAnimation.offsetX, -primaryAnimation.offsetY));
 			Game.activeBatch.updateUniforms();
 		}
 	}

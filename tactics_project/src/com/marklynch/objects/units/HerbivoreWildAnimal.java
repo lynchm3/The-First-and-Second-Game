@@ -33,7 +33,7 @@ public class HerbivoreWildAnimal extends WildAnimal {
 		actor.area = area;
 
 		actor.title = title;
-		actor.actorLevel = actorLevel;
+		actor.level = level;
 		actor.totalHealth = actor.remainingHealth = totalHealth;
 		actor.strength = strength;
 		actor.dexterity = dexterity;
