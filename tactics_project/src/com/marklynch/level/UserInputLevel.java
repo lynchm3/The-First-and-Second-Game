@@ -783,6 +783,7 @@ public class UserInputLevel {
 
 		if (Game.level.openInventories.size() > 0) {
 			Game.level.player.inventory.buttonSearch.click();
+			return;
 		}
 
 		if (Level.journal.showing) {
