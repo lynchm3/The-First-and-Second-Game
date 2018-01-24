@@ -52,10 +52,19 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public void refreshGameObjects() {
 		this.gameObjects.clear();
+
+		matchStacksToSquares();
+	}
+
+	public void matchStacksToSquares() {
+
+		groundDisplaySquares.clear();
+
 		for (Square square : squares) {
+			matchStacksToSquaresForInventory(square.inventory);
 			for (GameObject gameObject : square.inventory.gameObjects) {
 				if (gameObject.fitsInInventory) {
-					this.gameObjects.add(gameObject);
+
 				} else if (gameObject.canContainOtherObjects) {
 					if (gameObject instanceof Actor) {
 
@@ -63,82 +72,37 @@ public class GroundDisplay implements Draggable, Scrollable {
 						Openable openable = (Openable) gameObject;
 						if (!openable.locked) {
 							openable.open();
-							for (GameObject gameObjectInContainer : gameObject.inventory.gameObjects) {
-								this.gameObjects.add(gameObjectInContainer);
-							}
+							matchStacksToSquaresForInventory(gameObject.inventory);
 						}
 					} else {
-						for (GameObject gameObjectInContainer : gameObject.inventory.gameObjects) {
-							this.gameObjects.add(gameObjectInContainer);
-						}
+						matchStacksToSquaresForInventory(gameObject.inventory);
 					}
 				}
 			}
 		}
-		matchGameStacksToSquares();
 	}
 
-	public void matchGameStacksToSquares() {
+	public void matchStacksToSquaresForInventory(Inventory inventory) {
 
+		for (ArrayList<GameObject> stack : inventory.legalStacks.values()) {
+			matchStackToSquare(stack);
+		}
+
+		for (ArrayList<GameObject> stack : inventory.illegalStacks.values()) {
+			matchStackToSquare(stack);
+		}
+
+		for (ArrayList<GameObject> stack : inventory.equippedStacks.values()) {
+			matchStackToSquare(stack);
+		}
 	}
 
-	// public void matchGameObjectsToSquares() {
-	//
-	// // legalStacks.clear();
-	// // illegalStacks.clear();
-	// groundDisplaySquares.clear();
-	//
-	// int xIndex = 0;
-	// int yIndex = 0;
-	//
-	// for (GameObject gameObject : gameObjects) {
-	//
-	// if (gameObject.value == 0 && gameObject instanceof Gold)
-	// continue;
-	//
-	// if (gameObject.value == 0 && gameObject instanceof Gold)
-	// continue;
-	//
-	// // Legal items
-	// if (Inventory.objectLegal(gameObject,
-	// gameObject.inventoryThatHoldsThisObject)) {
-	// if (legalStacks.containsKey(gameObject.templateId)) {
-	// legalStacks.get(gameObject.templateId).add(gameObject);
-	// } else {
-	// GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex,
-	// yIndex, null, this);
-	// inventorySquare.gameObject = gameObject;
-	// groundDisplaySquares.add(inventorySquare);
-	// ArrayList<GameObject> newStack = new ArrayList<GameObject>();
-	// newStack.add(gameObject);
-	// legalStacks.put(gameObject.templateId, newStack);
-	// xIndex++;
-	// if (xIndex == this.squareGridWidthInSquares) {
-	// xIndex = 0;
-	// yIndex++;
-	// }
-	// }
-	//
-	// } else {// Illegal items
-	// if (illegalStacks.containsKey(gameObject.templateId)) {
-	// illegalStacks.get(gameObject.templateId).add(gameObject);
-	// } else {
-	// GroundDisplaySquare inventorySquare = new GroundDisplaySquare(xIndex,
-	// yIndex, null, this);
-	// inventorySquare.gameObject = gameObject;
-	// groundDisplaySquares.add(inventorySquare);
-	// ArrayList<GameObject> newStack = new ArrayList<GameObject>();
-	// newStack.add(gameObject);
-	// illegalStacks.put(gameObject.templateId, newStack);
-	// xIndex++;
-	// if (xIndex == this.squareGridWidthInSquares) {
-	// xIndex = 0;
-	// yIndex++;
-	// }
-	// }
-	// }
-	// }
-	// }
+	public void matchStackToSquare(ArrayList<GameObject> stack) {
+
+		GroundDisplaySquare inventorySquare = new GroundDisplaySquare(0, 0, null, this);
+		inventorySquare.stack = stack;
+		groundDisplaySquares.add(inventorySquare);
+	}
 
 	public void resize2() {
 		int xIndex = 0;
