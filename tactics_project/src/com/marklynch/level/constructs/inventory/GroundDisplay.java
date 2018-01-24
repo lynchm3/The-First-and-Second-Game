@@ -17,10 +17,11 @@ import mdesl.graphics.Color;
 
 public class GroundDisplay implements Draggable, Scrollable {
 
+	ArrayList<ArrayList<GameObject>> stacks = new ArrayList<ArrayList<GameObject>>();
+
 	public int squareGridWidthInSquares = 5;
 
 	ArrayList<Square> squares = new ArrayList<Square>();
-	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	int squaresX;
 	float squaresY;
 	public transient ArrayList<GroundDisplaySquare> groundDisplaySquares = new ArrayList<GroundDisplaySquare>();
@@ -51,12 +52,11 @@ public class GroundDisplay implements Draggable, Scrollable {
 	}
 
 	public void refreshGameObjects() {
-		this.gameObjects.clear();
-
 		matchStacksToSquares();
 	}
 
 	public void matchStacksToSquares() {
+		System.out.println("GroundDisplay.matchStacksToSquares");
 
 		groundDisplaySquares.clear();
 
@@ -179,7 +179,11 @@ public class GroundDisplay implements Draggable, Scrollable {
 	}
 
 	public void fixScroll() {
-		int totalSquaresHeight = (int) ((gameObjects.size() / squareGridWidthInSquares) * Game.INVENTORY_SQUARE_HEIGHT);
+
+		// int stackCount =
+
+		int totalSquaresHeight = (int) ((groundDisplaySquares.size() / squareGridWidthInSquares)
+				* Game.INVENTORY_SQUARE_HEIGHT);
 		if (totalSquaresHeight < Game.windowHeight - Inventory.bottomBorderHeight - Inventory.topBorderHeight) {
 			this.squaresY = Inventory.squaresBaseY;
 		} else if (this.squaresY < -(totalSquaresHeight - (Game.windowHeight - Inventory.bottomBorderHeight))) {

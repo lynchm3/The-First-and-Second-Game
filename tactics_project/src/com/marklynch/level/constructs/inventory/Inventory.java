@@ -326,9 +326,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 						}
 					}
 				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
-					for (GameObject gameObject : groundDisplay.gameObjects) {
+					for (GroundDisplaySquare groundDisplaySquare : groundDisplay.groundDisplaySquares) {
 						Action action = new ActionTakeItems(Game.level.player,
-								gameObject.inventoryThatHoldsThisObject.parent, gameObject);
+								groundDisplaySquare.stack.get(0).inventoryThatHoldsThisObject.parent,
+								groundDisplaySquare.stack.get(0));
 						if (!action.legal && buttonLootAll.textParts == LOOT_ALL) {
 						} else {
 							actionsToPerform.add(action);
@@ -347,7 +348,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 						Game.level.addNotification(new Notification(objects, Notification.NotificationType.MISC, null));
 					}
 				} else if (inventoryMode == INVENTORY_MODE.MODE_NORMAL) {
-					if (groundDisplay.gameObjects.size() == 0) {
+					if (groundDisplay.groundDisplaySquares.size() == 0) {
 						Game.level.openCloseInventory();
 						Object[] objects = new Object[] { "Looted everything!" };
 						Game.level.addNotification(new Notification(objects, Notification.NotificationType.MISC, null));
@@ -784,6 +785,36 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	private Object[] LOOT_ALL = new Object[] { new StringWithColor("[SPACE] LOOT ALL", Color.WHITE) };
 	private Object[] STEAL_ALL = new Object[] { new StringWithColor("[SPACE] STEAL ALL", Color.RED) };
 
+	public void updateStacks() {
+
+		// if (!isOpen)
+		// return;
+
+		legalStacks.clear();
+		illegalStacks.clear();
+		equippedStacks.clear();
+		for (GameObject gameObject : gameObjects) {
+			if (objectLegal(gameObject, this)) {
+				if (legalStacks.containsKey(gameObject.templateId)) {
+					legalStacks.get(gameObject.templateId).add(gameObject);
+				} else {
+					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
+					newStack.add(gameObject);
+					legalStacks.put(gameObject.templateId, newStack);
+				}
+
+			} else {// Illegal items
+				if (illegalStacks.containsKey(gameObject.templateId)) {
+					illegalStacks.get(gameObject.templateId).add(gameObject);
+				} else {
+					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
+					newStack.add(gameObject);
+					illegalStacks.put(gameObject.templateId, newStack);
+				}
+			}
+		}
+	}
+
 	public void matchStacksToSquares() {
 
 		if (!isOpen)
@@ -838,13 +869,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public static boolean objectLegal(GameObject gameObject, Inventory inventory) {
-		if (inventory.parent == Game.level.player) { // player
+		if (inventory != null && inventory.parent == Game.level.player) { // player
 			if (gameObject.owner != null && gameObject.owner != Game.level.player) {
 				return false;
 			} else {
 				return true;
 			}
-		} else if (inventory.parent instanceof Human) { // npc
+		} else if (inventory != null && inventory.parent instanceof Human) { // npc
 			if (Inventory.inventoryMode == INVENTORY_MODE.MODE_TRADE) {
 				return true;
 			} else {
@@ -855,33 +886,6 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				return false;
 			} else {
 				return true;
-			}
-		}
-	}
-
-	public void updateStacks() {
-
-		legalStacks.clear();
-		illegalStacks.clear();
-		equippedStacks.clear();
-		for (GameObject gameObject : gameObjects) {
-			if (objectLegal(gameObject, this)) {
-				if (legalStacks.containsKey(gameObject.templateId)) {
-					legalStacks.get(gameObject.templateId).add(gameObject);
-				} else {
-					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
-					newStack.add(gameObject);
-					legalStacks.put(gameObject.templateId, newStack);
-				}
-
-			} else {// Illegal items
-				if (illegalStacks.containsKey(gameObject.templateId)) {
-					illegalStacks.get(gameObject.templateId).add(gameObject);
-				} else {
-					ArrayList<GameObject> newStack = new ArrayList<GameObject>();
-					newStack.add(gameObject);
-					illegalStacks.put(gameObject.templateId, newStack);
-				}
 			}
 		}
 	}
@@ -1143,7 +1147,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		// Ground display sqrs
 		if (groundDisplay != null) {
 			groundDisplay.drawStaticUI();
-			if (groundDisplay.gameObjects.size() > 0) {
+			if (groundDisplay.groundDisplaySquares.size() > 0) {
 				groundDisplay.drawSquares();
 			} else {
 				float emptyStringX = groundDisplay.squaresX + this.squaresAreaWidth / 2 - GroundDisplay.lengthEmpty / 2;
@@ -1155,13 +1159,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			}
 
 			boolean containsLegalStuff = false;
-			for (GameObject gameObject : groundDisplay.gameObjects) {
-				if (objectLegal(gameObject, this)) {
+			for (GroundDisplaySquare groundDisplaySquare : groundDisplay.groundDisplaySquares) {
+				if (objectLegal(groundDisplaySquare.stack.get(0), this)) {
 					containsLegalStuff = true;
 					break;
 				}
 			}
-			if (groundDisplay.gameObjects.size() == 0) {
+			if (groundDisplay.groundDisplaySquares.size() == 0) {
 				Inventory.buttonLootAll.textParts = LOOT_ALL;
 				Inventory.buttonLootAll.enabled = false;
 				// Inventory.buttonLootAll.setTextColor(Color.WHITE);
