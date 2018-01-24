@@ -31,6 +31,9 @@ public class AnimationTake extends Animation {
 
 	boolean reachedDestination = false;
 
+	Color trailColor1 = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+	Color trailColor2 = new Color(0.5f, 0f, 0f, 0f);
+
 	public AnimationTake(GameObject gameObject, GameObject taker, Square originSquare, float speed) {
 		super();
 
@@ -99,14 +102,16 @@ public class AnimationTake extends Animation {
 			y += distanceY;
 		}
 
-		trailLines.add(new Line(oldX + gameObject.halfWidth, oldY + gameObject.halfHeight, x + gameObject.halfWidth,
-				y + gameObject.halfHeight));
 		if (reachedDestination) {
 			trailLines.remove(0);
 			if (trailLines.size() == 0)
 				completed = true;
-		} else if (trailLines.size() > 100) {
-			trailLines.remove(0);
+		} else {
+			trailLines.add(new Line(oldX + gameObject.halfWidth, oldY + gameObject.halfHeight, x + gameObject.halfWidth,
+					y + gameObject.halfHeight));
+			if (trailLines.size() > 100) {
+				trailLines.remove(0);
+			}
 		}
 
 	}
@@ -114,28 +119,32 @@ public class AnimationTake extends Animation {
 	@Override
 	public void draw1() {
 		if (originSquare.yInGrid < taker.squareGameObjectIsOn.yInGrid) {
-			for (Line trailLine : trailLines) {
-				// QuadUtils.drawQuad(Color.WHITE, trailLine.x1, trailLine.y1,
-				// trailLine.x2, trailLine.y2);
-				LineUtils.drawLine(Color.WHITE, trailLine.x1, trailLine.y1, trailLine.x2, trailLine.y2, 2);
-			}
-			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
-					false);
-
+			draw();
 		}
 	}
 
 	@Override
 	public void draw2() {
 		if (originSquare.yInGrid >= taker.squareGameObjectIsOn.yInGrid) {
-			for (Line trailLine : trailLines) {
-				// QuadUtils.drawQuad(Color.WHITE, trailLine.x1, trailLine.y1,
-				// trailLine.x2, trailLine.y2);
-				LineUtils.drawLine(Color.WHITE, trailLine.x1, trailLine.y1, trailLine.x2, trailLine.y2, 2);
-			}
+			draw();
+		}
+	}
+
+	public void draw() {
+
+		for (int i = 10; i < trailLines.size(); i++) {
+			LineUtils.drawLine(trailColor2, trailLines.get(i).x1, trailLines.get(i).y1, trailLines.get(i).x2,
+					trailLines.get(i).y2, 4);
+		}
+
+		for (Line trailLine : trailLines) {
+			LineUtils.drawLine(trailColor1, trailLine.x1, trailLine.y1, trailLine.x2, trailLine.y2, 2);
+		}
+
+		if (!reachedDestination)
 			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
 					false);
-		}
+
 	}
 
 	public class Line {
