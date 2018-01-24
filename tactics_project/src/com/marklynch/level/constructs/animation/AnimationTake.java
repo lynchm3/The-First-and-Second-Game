@@ -112,7 +112,7 @@ public class AnimationTake extends Animation {
 		} else {
 			trailLines.add(new Line(oldX + gameObject.halfWidth, oldY + gameObject.halfHeight, x + gameObject.halfWidth,
 					y + gameObject.halfHeight));
-			if (trailLines.size() > 100) {
+			if (trailLines.size() > 20) {
 				trailLines.remove(0);
 			}
 		}
@@ -135,7 +135,7 @@ public class AnimationTake extends Animation {
 
 	public void draw() {
 
-		for (int i = 10; i < trailLines.size(); i++) {
+		for (int i = 2; i < trailLines.size(); i++) {
 			LineUtils.drawLine(trailColor2, trailLines.get(i).x1, trailLines.get(i).y1, trailLines.get(i).x2,
 					trailLines.get(i).y2, 6);
 		}
