@@ -14,20 +14,21 @@ public class AnimationTake extends Animation {
 	public float targetY = 0;
 	public double speedX = 0.1d;
 	public double speedY = 0.1d;
-	float distanceToCoverX, distanceToCoverY, distanceCoveredX, distanceCoveredY;
+	// float distanceToCoverX, distanceToCoverY, distanceCoveredX,
+	// distanceCoveredY;
 	public GameObject gameObject;
+	public GameObject taker;
 	public Square originSquare;
-	public Square targetSquare;
 
-	public float speed = 0.1f;
-	public boolean onTarget = true;
+	public float speed = 1f;
 
-	public AnimationTake(GameObject gameObject, Square targetSquare, Square originSquare) {
+	public AnimationTake(GameObject gameObject, GameObject taker, Square originSquare, float speed) {
 		super();
 
 		this.originSquare = originSquare;
-		this.targetSquare = targetSquare;
+		this.taker = taker;
 		this.gameObject = gameObject;
+		this.speed = speed;
 		if (gameObject.squareGameObjectIsOn != null) {
 			// on the ground
 			this.x = originX = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
@@ -41,17 +42,6 @@ public class AnimationTake extends Animation {
 			this.y = originY = (int) (((GameObject) gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn.yInGridPixels
 					+ (Game.SQUARE_HEIGHT - gameObject.height) / 2);
 		}
-		targetX = (int) (targetSquare.xInGridPixels + (Game.SQUARE_WIDTH - gameObject.width) / 2);
-		targetY = (int) (targetSquare.yInGridPixels + (Game.SQUARE_HEIGHT - gameObject.height) / 2);
-
-		distanceToCoverX = this.targetX - this.originX;
-		distanceToCoverY = this.targetY - this.originY;
-		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
-
-		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
-		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
-
-		this.onTarget = true;
 
 		blockAI = false;
 
@@ -63,47 +53,54 @@ public class AnimationTake extends Animation {
 		if (completed)
 			return;
 
+		targetX = (int) (taker.squareGameObjectIsOn.xInGridPixels + (Game.SQUARE_WIDTH - gameObject.width) / 2);
+		targetY = (int) (taker.squareGameObjectIsOn.yInGridPixels + (Game.SQUARE_HEIGHT - gameObject.height) / 2);
+		if (taker.primaryAnimation != null) {
+			targetX += taker.primaryAnimation.offsetX;
+			targetX += taker.primaryAnimation.offsetY;
+		}
+
+		float distanceToCoverX = this.targetX - this.x;
+		float distanceToCoverY = this.targetY - this.y;
+		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
+
+		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
+		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
+
 		double distanceX = speedX * delta;
 		double distanceY = speedY * delta;
 
 		// angle += rotationSpeed * delta;
 
-		distanceCoveredX += distanceX;
-		distanceCoveredY += distanceY;
+		// distanceCoveredX += distanceX;
+		// distanceCoveredY += distanceY;
 
-		if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
-				&& Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
+		// if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
+		// && Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
+		// completed = true;
+		// } else {
+
+		if (totalDistanceToCover < 1) {
 			completed = true;
-
-			if (Game.level.player.inventory.groundDisplay != null)
-				Game.level.player.inventory.groundDisplay.refreshGameObjects();
-
 		} else {
 			x += distanceX;
 			y += distanceY;
-			// Square square = Game.level.squares[(int) Math.floor(x /
-			// Game.SQUARE_WIDTH)][(int) Math
-			// .floor(y / Game.SQUARE_HEIGHT)];
-			// square.inventory.smashWindows(this);
-
 		}
 
 	}
 
 	@Override
 	public void draw1() {
-		if (originSquare.yInGrid < targetSquare.yInGrid) {
-			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
-					false);
-		}
+		// if (originSquare.yInGrid < taker.squareGameObjectIsOn.yInGrid) {
+		TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height, false);
+		// }
 	}
 
 	@Override
 	public void draw2() {
-		if (originSquare.yInGrid >= targetSquare.yInGrid) {
-			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
-					false);
-		}
+		// if (originSquare.yInGrid >= taker.squareGameObjectIsOn.yInGrid) {
+		TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height, false);
+		// }
 	}
 
 }

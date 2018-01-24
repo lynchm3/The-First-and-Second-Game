@@ -188,22 +188,22 @@ public class Player extends Human {
 			while (orbs > 0) {
 				if (orbs >= 1) {
 					Orb orb = Templates.SMALL_ORB.makeCopy(square, null, 1);
-					Game.level.player.secondaryAnimations
-							.add(new AnimationTake(orb, Game.level.player.squareGameObjectIsOn, square));
+					Game.level.player.secondaryAnimations.add(
+							new AnimationTake(orb, Game.level.player, square, (float) (Math.random() * 0.25f + 0.75f)));
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
 					orbs -= 1;
 				}
 				if (orbs >= 5) {
 					Orb orb = Templates.MEDIUM_ORB.makeCopy(square, null, 5);
-					Game.level.player.secondaryAnimations
-							.add(new AnimationTake(orb, Game.level.player.squareGameObjectIsOn, square));
+					Game.level.player.secondaryAnimations.add(
+							new AnimationTake(orb, Game.level.player, square, (float) (Math.random() * 0.25f + 0.75f)));
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
 					orbs -= 5;
 				}
 				if (orbs >= 10) {
 					Orb orb = Templates.LARGE_ORB.makeCopy(square, null, 10);
-					Game.level.player.secondaryAnimations
-							.add(new AnimationTake(orb, Game.level.player.squareGameObjectIsOn, square));
+					Game.level.player.secondaryAnimations.add(
+							new AnimationTake(orb, Game.level.player, square, (float) (Math.random() * 0.25f + 0.75f)));
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
 					orbs -= 10;
 				}
