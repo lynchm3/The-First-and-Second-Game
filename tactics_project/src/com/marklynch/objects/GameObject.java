@@ -378,6 +378,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (showPow == true) {
 			float powPositionXInPixels = Math.abs(squareGameObjectIsOn.xInGridPixels);
 			float powPositionYInPixels = squareGameObjectIsOn.yInGridPixels;
+			if (primaryAnimation != null) {
+				powPositionXInPixels += primaryAnimation.offsetX;
+				powPositionYInPixels += primaryAnimation.offsetY;
+			}
 			TextureUtils.drawTexture(this.powTexture, powPositionXInPixels, powPositionYInPixels,
 					powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
 		}

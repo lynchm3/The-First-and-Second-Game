@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Vector;
 
-import org.lwjgl.util.vector.Vector2f;
-
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
 import com.marklynch.ai.utils.AILine;
@@ -571,29 +569,15 @@ public class Actor extends GameObject {
 				return;
 		}
 
-		if (primaryAnimation != null) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix()
-					.translate(new Vector2f(primaryAnimation.offsetX, primaryAnimation.offsetY));
-			Game.activeBatch.updateUniforms();
-		}
+		// if (primaryAnimation != null) {
+		// Game.activeBatch.flush();
+		// Game.activeBatch.getViewMatrix()
+		// .translate(new Vector2f(primaryAnimation.offsetX,
+		// primaryAnimation.offsetY));
+		// Game.activeBatch.updateUniforms();
+		// }
 
 		super.draw2();
-
-		// Draw activity text
-		// if (activityDescription != null && activityDescription.length() > 0)
-		// {
-		// float activityX1 = this.squareGameObjectIsOn.xInGridPixels;
-		// float activityX2 = this.squareGameObjectIsOn.xInGridPixels +
-		// Game.font.getWidth(activityDescription);
-		// float activityY1 = this.squareGameObjectIsOn.yInGridPixels - 20;
-		// float activityY2 = this.squareGameObjectIsOn.yInGridPixels;
-		// QuadUtils.drawQuad(new Color(0.0f, 0.0f, 0.0f, 0.5f), activityX1,
-		// activityY1, activityX2, activityY2);
-		// TextUtils.printTextWithImages(activityX1, activityY1,
-		// Integer.MAX_VALUE, false, null,
-		// new Object[] { activityDescription });
-		// }
 
 		// Draw mini dialogue
 		if (miniDialogue != null && miniDialogue.length() > 0) {
@@ -603,6 +587,10 @@ public class Actor extends GameObject {
 
 			float expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
 			float expressionBubblePositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetY - 64;
+			if (primaryAnimation != null) {
+				expressionBubblePositionXInPixels += primaryAnimation.offsetX;
+				expressionBubblePositionYInPixels += primaryAnimation.offsetY;
+			}
 			float alphaBubble = 1.0f;
 
 			// TextureUtils.skipNormals = true;
@@ -625,6 +613,10 @@ public class Actor extends GameObject {
 
 				float expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
 				float expressionBubblePositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetY - 64;
+				if (primaryAnimation != null) {
+					expressionBubblePositionXInPixels += primaryAnimation.offsetX;
+					expressionBubblePositionYInPixels += primaryAnimation.offsetY;
+				}
 				float alphaBubble = 1.0f;
 
 				// TextureUtils.skipNormals = true;
@@ -653,6 +645,10 @@ public class Actor extends GameObject {
 						+ (32 - expressionWidth / 2);
 				float expressionPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetY
 						- expressionHeight;
+				if (primaryAnimation != null) {
+					expressionPositionXInPixels += primaryAnimation.offsetX;
+					expressionPositionYInPixels += primaryAnimation.offsetY;
+				}
 				float alpha = 1.0f;
 
 				// TextureUtils.skipNormals = true;
@@ -682,6 +678,10 @@ public class Actor extends GameObject {
 						+ (32 - expressionWidth / 2);
 				float expressionPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetY
 						- expressionHeight;
+				if (primaryAnimation != null) {
+					expressionPositionXInPixels += primaryAnimation.offsetX;
+					expressionPositionYInPixels += primaryAnimation.offsetY;
+				}
 				float alpha = 1.0f;
 
 				// TextureUtils.skipNormals = true;
@@ -694,13 +694,14 @@ public class Actor extends GameObject {
 				// TextureUtils.skipNormals = false;
 			}
 		}
-
-		if (primaryAnimation != null) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix()
-					.translate(new Vector2f(-primaryAnimation.offsetX, -primaryAnimation.offsetY));
-			Game.activeBatch.updateUniforms();
-		}
+		//
+		// if (primaryAnimation != null) {
+		// Game.activeBatch.flush();
+		// Game.activeBatch.getViewMatrix()
+		// .translate(new Vector2f(-primaryAnimation.offsetX,
+		// -primaryAnimation.offsetY));
+		// Game.activeBatch.updateUniforms();
+		// }
 
 		if (Game.showAILines)
 
@@ -718,21 +719,7 @@ public class Actor extends GameObject {
 		if (this.squareGameObjectIsOn == null || this.squareGameObjectIsOn.visibleToPlayer == false)
 			return;
 
-		if (primaryAnimation != null) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix()
-					.translate(new Vector2f(primaryAnimation.offsetX, primaryAnimation.offsetY));
-			Game.activeBatch.updateUniforms();
-		}
-
 		super.drawUI();
-
-		if (primaryAnimation != null) {
-			Game.activeBatch.flush();
-			Game.activeBatch.getViewMatrix()
-					.translate(new Vector2f(-primaryAnimation.offsetX, -primaryAnimation.offsetY));
-			Game.activeBatch.updateUniforms();
-		}
 	}
 
 	public Vector<Float> calculateIdealDistanceFromTargetToAttack(GameObject target) {

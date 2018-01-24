@@ -34,6 +34,10 @@ public abstract class Effect {
 					+ Game.SQUARE_WIDTH * target.drawOffsetX);
 			int actorPositionYInPixels = (int) (target.squareGameObjectIsOn.yInGridPixels
 					+ Game.SQUARE_HEIGHT * target.drawOffsetY);
+			if (target != null) {
+				actorPositionXInPixels += target.primaryAnimation.offsetX;
+				actorPositionYInPixels += target.primaryAnimation.offsetY;
+			}
 
 			float alpha = 1.0f;
 
