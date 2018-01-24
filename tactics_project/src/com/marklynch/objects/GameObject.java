@@ -84,6 +84,7 @@ import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayUtils;
+import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
@@ -218,6 +219,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public Enhancement enhancement;
 	public int level = 1;
 
+	public int thoughtsOnPlayer = 0;
+
+	public static float healthWidthInPixels = Game.SQUARE_WIDTH / 20;
+	// public static float healthHeightInPixels = Game.SQUARE_HEIGHT;
+
 	// public ArrayList<DestructionListener> destructionListeners = new
 	// ArrayList<DestructionListener>();
 
@@ -343,6 +349,35 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
 						Color.BLACK, false);
+			}
+
+			if (remainingHealth != totalHealth) {
+				// draw sidebar on square
+				float healthPercentage = (remainingHealth) / (totalHealth);
+				float healthBarHeightInPixels = height * healthPercentage;
+				float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
+				float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
+				if (primaryAnimation != null) {
+					healthXInPixels += primaryAnimation.offsetX;
+					healthYInPixels += primaryAnimation.offsetY;
+				}
+
+				Color color = Color.YELLOW;
+				if (thoughtsOnPlayer > 50) {
+					color = Color.GREEN;
+				} else if (thoughtsOnPlayer < -50) {
+					color = Color.RED;
+				}
+
+				// White bit under health bar
+				QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), actorPositionXInPixels + 1,
+						actorPositionYInPixels + 1, actorPositionXInPixels + healthWidthInPixels - 1,
+						actorPositionYInPixels + height - 1);
+
+				// Colored health bar
+				QuadUtils.drawQuad(color, actorPositionXInPixels + 1, actorPositionYInPixels + 1,
+						actorPositionXInPixels + healthWidthInPixels - 1,
+						actorPositionYInPixels + healthBarHeightInPixels - 1);
 			}
 
 			if (!(this instanceof Actor)) {

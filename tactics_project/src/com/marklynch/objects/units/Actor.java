@@ -49,7 +49,6 @@ import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
-import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
@@ -172,8 +171,6 @@ public class Actor extends GameObject {
 	public ArrayList<Power> powers = new ArrayList<Power>();
 
 	public Area area;
-
-	public int thoughtsOnPlayer = 0;
 
 	public Actor() {
 
@@ -444,9 +441,6 @@ public class Actor extends GameObject {
 		return false;
 	}
 
-	float healthWidthInPixels = Game.SQUARE_WIDTH / 20;
-	float healthHeightInPixels = Game.SQUARE_HEIGHT;
-
 	@Override
 	public void draw1() {
 
@@ -471,33 +465,6 @@ public class Actor extends GameObject {
 		if (primaryAnimation != null) {
 			actorPositionXInPixels += primaryAnimation.offsetX;
 			actorPositionYInPixels += primaryAnimation.offsetY;
-		}
-
-		if (remainingHealth != totalHealth) {
-			// draw sidebar on square
-			float healthPercentage = (remainingHealth) / (totalHealth);
-			float healthBarHeightInPixels = Game.SQUARE_HEIGHT * healthPercentage;
-			float healthXInPixels = this.squareGameObjectIsOn.xInGridPixels;
-			float healthYInPixels = this.squareGameObjectIsOn.yInGridPixels;
-			if (primaryAnimation != null) {
-				healthXInPixels += primaryAnimation.offsetX;
-				healthYInPixels += primaryAnimation.offsetY;
-			}
-
-			Color color = Color.YELLOW;
-			if (thoughtsOnPlayer > 50) {
-				color = Color.GREEN;
-			} else if (thoughtsOnPlayer < -50) {
-				color = Color.RED;
-			}
-
-			// White bit under health bar
-			QuadUtils.drawQuad(new Color(1.0f, 1.0f, 1.0f, 0.5f), healthXInPixels + 1, healthYInPixels + 1,
-					healthXInPixels + healthWidthInPixels - 1, healthYInPixels + healthHeightInPixels - 1);
-
-			// Colored health bar
-			QuadUtils.drawQuad(color, healthXInPixels + 1, healthYInPixels + 1,
-					healthXInPixels + healthWidthInPixels - 1, healthYInPixels + healthBarHeightInPixels - 1);
 		}
 
 		super.draw1();
