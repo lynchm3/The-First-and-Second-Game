@@ -31,8 +31,11 @@ public class AnimationTake extends Animation {
 
 	boolean reachedDestination = false;
 
-	Color trailColor1 = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-	Color trailColor2 = new Color(0.5f, 0f, 0f, 0f);
+	// Color trailColor1 = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+	Color trailColor1 = Color.BLUE;
+
+	// Color trailColor2 = new Color(0.5f, 0f, 0f, 0f);
+	Color trailColor2 = Color.PINK;
 
 	public AnimationTake(GameObject gameObject, GameObject taker, Square originSquare, float speed) {
 		super();
@@ -134,7 +137,7 @@ public class AnimationTake extends Animation {
 
 		for (int i = 10; i < trailLines.size(); i++) {
 			LineUtils.drawLine(trailColor2, trailLines.get(i).x1, trailLines.get(i).y1, trailLines.get(i).x2,
-					trailLines.get(i).y2, 4);
+					trailLines.get(i).y2, 6);
 		}
 
 		for (Line trailLine : trailLines) {
