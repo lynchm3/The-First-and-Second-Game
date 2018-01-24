@@ -451,6 +451,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			otherInventory.updateStacks();
 			otherInventory.matchStacksToSquares();
 		}
+		if (groundDisplay != null) {
+			groundDisplay.matchStacksToSquares();
+			groundDisplay.resize2();
+		}
 	}
 
 	public void close() {
@@ -846,6 +850,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		resize1();
+
 	}
 
 	public void matchStackToSquare(ArrayList<GameObject> stack) {

@@ -50,6 +50,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public void refreshGameObjects() {
 		matchStacksToSquares();
+		resize2();
 	}
 
 	public void matchStacksToSquares() {
