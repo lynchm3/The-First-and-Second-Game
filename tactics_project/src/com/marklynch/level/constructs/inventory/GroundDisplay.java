@@ -55,12 +55,6 @@ public class GroundDisplay implements Draggable, Scrollable {
 
 	public void matchStacksToSquares() {
 
-		System.out.println("GroundDisplay.matchStacksToSquares");
-
-		for (StackTraceElement ste : Thread.currentThread().getStackTrace()) {
-			System.out.println("ste = " + ste);
-		}
-
 		x = 0;
 		y = 0;
 		groundDisplaySquares.clear();

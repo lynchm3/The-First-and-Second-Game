@@ -799,7 +799,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		illegalStacks.clear();
 		equippedStacks.clear();
 		allStacks.clear();
-		for (GameObject gameObject : gameObjects) {
+
+		ArrayList<GameObject> toUse = gameObjects;
+		if (parent == Game.level.player)
+			toUse = filteredGameObjects;
+
+		for (GameObject gameObject : toUse) {
 
 			if (!gameObject.fitsInInventory)
 				continue;
