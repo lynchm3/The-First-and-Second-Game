@@ -798,6 +798,10 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		illegalStacks.clear();
 		equippedStacks.clear();
 		for (GameObject gameObject : gameObjects) {
+
+			if (!gameObject.fitsInInventory)
+				continue;
+
 			if (objectLegal(gameObject, this)) {
 				if (legalStacks.containsKey(gameObject.templateId)) {
 					legalStacks.get(gameObject.templateId).add(gameObject);
