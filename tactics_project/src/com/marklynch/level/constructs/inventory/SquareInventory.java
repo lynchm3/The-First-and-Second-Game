@@ -57,6 +57,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 			square.calculatePathCostForPlayer();
 
 			updateStacks();
+			matchStacksToSquares();
 		}
 	}
 
@@ -70,6 +71,7 @@ public class SquareInventory extends Inventory implements Comparator<GameObject>
 		square.calculatePathCostForPlayer();
 
 		updateStacks();
+		matchStacksToSquares();
 		return -1;
 	}
 

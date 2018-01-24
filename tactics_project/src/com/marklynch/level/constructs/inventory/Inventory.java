@@ -445,13 +445,11 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		}
 
 		updateStacks();
+		matchStacksToSquares();
 		if (otherInventory != null) {
 			otherInventory.updateStacks();
+			otherInventory.matchStacksToSquares();
 		}
-		// if(groundDisplay != null)
-		// {
-		// groundDisplay
-		// }
 	}
 
 	public void close() {
@@ -554,6 +552,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (sortBackwards)
 			Collections.reverse(filteredGameObjects);
 
+		updateStacks();
 		matchStacksToSquares();
 	}
 
@@ -675,6 +674,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			// Remove references with square
 			if (gameObject.squareGameObjectIsOn != null) {
 				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+				gameObject.squareGameObjectIsOn.inventory.updateStacks();
 				gameObject.squareGameObjectIsOn.inventory.matchStacksToSquares();
 			}
 			gameObject.squareGameObjectIsOn = null;
@@ -687,6 +687,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			if (gameObject.inventoryThatHoldsThisObject != null) {
 				Inventory oldInventory = gameObject.inventoryThatHoldsThisObject;
 				oldInventory.remove(gameObject);
+				oldInventory.updateStacks();
 				oldInventory.matchStacksToSquares();
 			}
 
@@ -718,11 +719,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			} else {
 				filteredGameObjects.add(gameObject);
 			}
-			matchStacksToSquares();
+
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
 
 			updateStacks();
+			matchStacksToSquares();
 
 		}
 	}
@@ -751,11 +753,12 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 				// filteredGameObjects.set(filteredGameObjects.indexOf(gameObject),
 				// null);
 			}
-			this.matchStacksToSquares();
+
 			if (groundDisplay != null)
 				groundDisplay.refreshGameObjects();
 
 			updateStacks();
+			matchStacksToSquares();
 		}
 		return index;
 	}
@@ -806,6 +809,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		totalSquaresHeight = ((inventorySquares.size() / squareGridWidthInSquares) * Game.INVENTORY_SQUARE_HEIGHT);
 
 		if (inventoryMode != INVENTORY_MODE.MODE_SELECT_MAP_MARKER && this.parent != Game.level.player) {
+			Game.level.player.inventory.updateStacks();
 			Game.level.player.inventory.matchStacksToSquares();
 			return;
 		}
@@ -859,6 +863,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 		legalStacks.clear();
 		illegalStacks.clear();
+		equippedStacks.clear();
 		for (GameObject gameObject : gameObjects) {
 			if (objectLegal(gameObject, this)) {
 				if (legalStacks.containsKey(gameObject.templateId)) {
