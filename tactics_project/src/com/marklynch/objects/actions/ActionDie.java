@@ -67,6 +67,7 @@ public class ActionDie extends Action {
 		// this.faction.actors.remove(this);
 		if (performer instanceof Actor) {
 			((Actor) performer).actionsPerformedThisTurn.add(this);
+			((Actor) performer).clearActions();
 		}
 
 		if (sound != null)
