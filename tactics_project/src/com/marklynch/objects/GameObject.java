@@ -735,8 +735,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionFillContainersInInventory(performer, (WaterSource) this);
 		}
 
+		if (this instanceof Stump || this instanceof Tree) {
+			return new ActionChop(performer, this);
+		}
+
 		if (this.canContainOtherObjects && !this.canShareSquare)
 			return new ActionOpenOtherInventory(performer, this);
+
+		if (this.fitsInInventory)
+			return new ActionTakeItems(performer, this.squareGameObjectIsOn, this);
 
 		return null;
 	}

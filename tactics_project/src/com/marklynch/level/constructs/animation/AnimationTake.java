@@ -97,7 +97,7 @@ public class AnimationTake extends Animation {
 		// completed = true;
 		// } else {
 
-		if (totalDistanceToCover < 10) {
+		if (totalDistanceToCover < 32) {
 			reachedDestination = true;
 		} else {
 			x += distanceX;

@@ -594,7 +594,16 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (!seenByPlayer) {
 			return new ActionMove(performer, this, true);
 		}
-		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+
+		GameObject targetGameObject = null;
+
+		if (this == Game.squareMouseIsOver) {
+			targetGameObject = getGameObjectMouseIsOver();
+		}
+
+		if (targetGameObject == null)
+			targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
 		} else {
@@ -602,6 +611,29 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 		// return
 	}
+
+	public GameObject getGameObjectMouseIsOver() {
+
+		for (int i = this.inventory.gameObjects.size() - 1; i >= 0; i--) {
+
+			GameObject gameObject = this.inventory.gameObjects.get(i);
+			float x = this.xInGridPixels + gameObject.drawOffsetX;
+			float y = this.yInGridPixels + gameObject.drawOffsetY;
+
+			if (UserInputLevel.mouseXTransformed > x && UserInputLevel.mouseXTransformed < x + gameObject.width
+					&& UserInputLevel.mouseYTransformed > y
+					&& UserInputLevel.mouseYTransformed < y + gameObject.height) {
+				return gameObject;
+			}
+		}
+		return null;
+
+	}
+
+	// this.xInGridPixels;
+	//
+	// mouseXTransformed
+	// mouseYTransformed
 
 	public Action getSecondaryActionForTheSquareOrObject(Actor performer) {
 

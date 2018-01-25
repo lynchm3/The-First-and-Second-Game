@@ -99,6 +99,9 @@ public class UserInputLevel {
 	public static Draggable draggableMouseIsOver = null;
 	public static Scrollable scrollableMouseIsOver = null;
 
+	public static float mouseXTransformed = 0;
+	public static float mouseYTransformed = 0;
+
 	public static void userInput(int delta2) {
 		if (Game.ticksSinceDisplayInactive < 10)
 			return;
@@ -112,11 +115,10 @@ public class UserInputLevel {
 		setDraggableAndScrollableMouseIsOver();
 
 		// Transformed mouse coords
-
-		float mouseXTransformed = (((Game.windowWidth / 2) - Game.getDragXWithOffset()
-				- (Game.windowWidth / 2) / Game.zoom) + (mouseXinPixels) / Game.zoom);
-		float mouseYTransformed = ((Game.windowHeight / 2 - Game.getDragYWithOffset()
-				- (Game.windowHeight / 2) / Game.zoom) + (((Game.windowHeight - mouseYinPixels)) / Game.zoom));
+		mouseXTransformed = (((Game.windowWidth / 2) - Game.getDragXWithOffset() - (Game.windowWidth / 2) / Game.zoom)
+				+ (mouseXinPixels) / Game.zoom);
+		mouseYTransformed = ((Game.windowHeight / 2 - Game.getDragYWithOffset() - (Game.windowHeight / 2) / Game.zoom)
+				+ (((Game.windowHeight - mouseYinPixels)) / Game.zoom));
 
 		// Getting what square coordinates the mouse is on (as in squares on the
 		// grid)
