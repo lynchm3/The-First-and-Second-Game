@@ -441,11 +441,13 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 						UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 						Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
 			} else {
-				float squarePositionX = xInGridPixels;
-				float squarePositionY = yInGridPixels;
-				TextureUtils.drawTexture(Action.textureWalk, squarePositionX + Game.SQUARE_WIDTH - 48,
-						squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX + Game.SQUARE_WIDTH - 16,
-						squarePositionY + Game.SQUARE_HEIGHT - 16);
+				// float squarePositionX = xInGridPixels;
+				// float squarePositionY = yInGridPixels;
+				// TextureUtils.drawTexture(Action.textureWalk, squarePositionX
+				// + Game.SQUARE_WIDTH - 48,
+				// squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX +
+				// Game.SQUARE_WIDTH - 16,
+				// squarePositionY + Game.SQUARE_HEIGHT - 16);
 			}
 			return null;
 		}
@@ -467,11 +469,13 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 						UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
 						Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
 			} else {
-				float squarePositionX = xInGridPixels;
-				float squarePositionY = yInGridPixels;
-				TextureUtils.drawTexture(Action.textureEllipse, squarePositionX + Game.SQUARE_WIDTH - 64,
-						squarePositionY + Game.SQUARE_HEIGHT - 64, squarePositionX + Game.SQUARE_WIDTH - 0,
-						squarePositionY + Game.SQUARE_HEIGHT - 0);
+				// float squarePositionX = xInGridPixels;
+				// float squarePositionY = yInGridPixels;
+				// TextureUtils.drawTexture(Action.textureEllipse,
+				// squarePositionX + Game.SQUARE_WIDTH - 64,
+				// squarePositionY + Game.SQUARE_HEIGHT - 64, squarePositionX +
+				// Game.SQUARE_WIDTH - 0,
+				// squarePositionY + Game.SQUARE_HEIGHT - 0);
 
 			}
 		} else if (action != null && action.image != null) {
@@ -488,17 +492,19 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 						Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
 			} else {
 
-				if (action instanceof ActionMove && action.legal)
-					return action;
-
-				if (action instanceof ActionWait && action.legal)
-					return action;
-
-				float squarePositionX = xInGridPixels;
-				float squarePositionY = yInGridPixels;
-				TextureUtils.drawTexture(action.image, squarePositionX + Game.SQUARE_WIDTH - 48,
-						squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX + Game.SQUARE_WIDTH - 16,
-						squarePositionY + Game.SQUARE_HEIGHT - 16, color);
+				// if (action instanceof ActionMove && action.legal)
+				// return action;
+				//
+				// if (action instanceof ActionWait && action.legal)
+				// return action;
+				//
+				// float squarePositionX = xInGridPixels;
+				// float squarePositionY = yInGridPixels;
+				// TextureUtils.drawTexture(action.image, squarePositionX +
+				// Game.SQUARE_WIDTH - 48,
+				// squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX +
+				// Game.SQUARE_WIDTH - 16,
+				// squarePositionY + Game.SQUARE_HEIGHT - 16, color);
 			}
 		}
 		return action;
@@ -552,12 +558,14 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
 		} else {
 
-			float squarePositionX = xInGridPixels;
-			float squarePositionY = yInGridPixels;
-			TextureUtils.drawTexture(action.image, squarePositionX + Game.QUARTER_SQUARE_WIDTH,
-					squarePositionY + Game.QUARTER_SQUARE_WIDTH,
-					squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
-					squarePositionY + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
+			// float squarePositionX = xInGridPixels;
+			// float squarePositionY = yInGridPixels;
+			// TextureUtils.drawTexture(action.image, squarePositionX +
+			// Game.QUARTER_SQUARE_WIDTH,
+			// squarePositionY + Game.QUARTER_SQUARE_WIDTH,
+			// squarePositionX + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
+			// squarePositionY + Game.SQUARE_HEIGHT -
+			// Game.QUARTER_SQUARE_WIDTH);
 		}
 
 	}
@@ -647,7 +655,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 				}
 
-				if (color.a > 0)
+				if (color != null && color.a > 0)
 					return gameObject;
 			}
 		}
