@@ -277,9 +277,9 @@ public class Wall extends GameObject {
 		Wall wall = new Wall();
 		super.setAttributesForCopy(wall, square, owner);
 		if (wall.squareGameObjectIsOn != null) {
-			wall.drawX1 = (int) (wall.squareGameObjectIsOn.xInGridPixels + wall.drawOffsetX);
+			wall.drawX1 = (int) (wall.squareGameObjectIsOn.xInGridPixels + wall.drawOffsetRatioX);
 			wall.drawX2 = (int) (wall.drawX1 + wall.width);
-			wall.drawY1 = (int) (wall.squareGameObjectIsOn.yInGridPixels + wall.drawOffsetY);
+			wall.drawY1 = (int) (wall.squareGameObjectIsOn.yInGridPixels + wall.drawOffsetRatioY);
 			wall.drawY2 = (int) (wall.drawY1 + wall.height);
 		}
 		return wall;

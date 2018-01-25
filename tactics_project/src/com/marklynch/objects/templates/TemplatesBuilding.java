@@ -14,8 +14,8 @@ public class TemplatesBuilding {
 		Templates.WALL.totalHealth = Templates.WALL.remainingHealth = 1000;
 		Templates.WALL.widthRatio = 1f;
 		Templates.WALL.heightRatio = 1f;
-		Templates.WALL.drawOffsetX = 0f;
-		Templates.WALL.drawOffsetY = 0f;
+		Templates.WALL.drawOffsetRatioX = 0f;
+		Templates.WALL.drawOffsetRatioY = 0f;
 		Templates.WALL.soundWhenHit = 1f;
 		Templates.WALL.soundWhenHitting = 1f;
 		Templates.WALL.soundDampening = 1f;
@@ -32,8 +32,8 @@ public class TemplatesBuilding {
 		Templates.FENCE.totalHealth = Templates.FENCE.remainingHealth = 100;
 		Templates.FENCE.widthRatio = 1f;
 		Templates.FENCE.heightRatio = 1f;
-		Templates.FENCE.drawOffsetX = 0f;
-		Templates.FENCE.drawOffsetY = 0f;
+		Templates.FENCE.drawOffsetRatioX = 0f;
+		Templates.FENCE.drawOffsetRatioY = 0f;
 		Templates.FENCE.soundWhenHit = 1f;
 		Templates.FENCE.soundWhenHitting = 1f;
 		Templates.FENCE.soundDampening = 1f;

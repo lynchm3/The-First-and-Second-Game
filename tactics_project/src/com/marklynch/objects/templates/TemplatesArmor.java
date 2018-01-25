@@ -19,8 +19,8 @@ public class TemplatesArmor {
 		Templates.HARD_HAT.totalHealth = Templates.HARD_HAT.remainingHealth = 50;
 		Templates.HARD_HAT.widthRatio = 0.25f;
 		Templates.HARD_HAT.heightRatio = 0.12f;
-		Templates.HARD_HAT.drawOffsetX = 0f;
-		Templates.HARD_HAT.drawOffsetY = 0f;
+		Templates.HARD_HAT.drawOffsetRatioX = 0f;
+		Templates.HARD_HAT.drawOffsetRatioY = 0f;
 		Templates.HARD_HAT.soundWhenHit = 1f;
 		Templates.HARD_HAT.soundWhenHitting = 1f;
 		Templates.HARD_HAT.soundDampening = 1f;
@@ -41,8 +41,8 @@ public class TemplatesArmor {
 		Templates.PINK_HARD_HAT.totalHealth = Templates.PINK_HARD_HAT.remainingHealth = 50;
 		Templates.PINK_HARD_HAT.widthRatio = 0.25f;
 		Templates.PINK_HARD_HAT.heightRatio = 0.12f;
-		Templates.PINK_HARD_HAT.drawOffsetX = 0f;
-		Templates.PINK_HARD_HAT.drawOffsetY = 0f;
+		Templates.PINK_HARD_HAT.drawOffsetRatioX = 0f;
+		Templates.PINK_HARD_HAT.drawOffsetRatioY = 0f;
 		Templates.PINK_HARD_HAT.soundWhenHit = 1f;
 		Templates.PINK_HARD_HAT.soundWhenHitting = 1f;
 		Templates.PINK_HARD_HAT.soundDampening = 1f;
@@ -63,8 +63,8 @@ public class TemplatesArmor {
 		Templates.COWBOY_HAT.totalHealth = Templates.COWBOY_HAT.remainingHealth = 15;
 		Templates.COWBOY_HAT.widthRatio = 0.5f;
 		Templates.COWBOY_HAT.heightRatio = 0.5f;
-		Templates.COWBOY_HAT.drawOffsetX = 0f;
-		Templates.COWBOY_HAT.drawOffsetY = 0f;
+		Templates.COWBOY_HAT.drawOffsetRatioX = 0f;
+		Templates.COWBOY_HAT.drawOffsetRatioY = 0f;
 		Templates.COWBOY_HAT.soundWhenHit = 1f;
 		Templates.COWBOY_HAT.soundWhenHitting = 1f;
 		Templates.COWBOY_HAT.soundDampening = 1f;
@@ -82,8 +82,8 @@ public class TemplatesArmor {
 		Templates.JUMPER.totalHealth = Templates.JUMPER.remainingHealth = 20;
 		Templates.JUMPER.widthRatio = 0.25f;
 		Templates.JUMPER.heightRatio = 0.75f;
-		Templates.JUMPER.drawOffsetX = 0f;
-		Templates.JUMPER.drawOffsetY = 0f;
+		Templates.JUMPER.drawOffsetRatioX = 0f;
+		Templates.JUMPER.drawOffsetRatioY = 0f;
 		Templates.JUMPER.soundWhenHit = 1f;
 		Templates.JUMPER.soundWhenHitting = 1f;
 		Templates.JUMPER.soundDampening = 1f;
@@ -102,8 +102,8 @@ public class TemplatesArmor {
 		Templates.PANTS.totalHealth = Templates.PANTS.remainingHealth = 20;
 		Templates.PANTS.widthRatio = 0.5f;
 		Templates.PANTS.heightRatio = 1f;
-		Templates.PANTS.drawOffsetX = 0f;
-		Templates.PANTS.drawOffsetY = 0f;
+		Templates.PANTS.drawOffsetRatioX = 0f;
+		Templates.PANTS.drawOffsetRatioY = 0f;
 		Templates.PANTS.soundWhenHit = 1f;
 		Templates.PANTS.soundWhenHitting = 1f;
 		Templates.PANTS.soundDampening = 1f;

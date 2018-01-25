@@ -49,9 +49,9 @@ public class AnimationThrow extends Animation {
 
 		this.x = this.originX = shooter.getCenterX();
 		this.y = this.originY = shooter.getCenterY();
-		this.targetX = this.targetSquare.xInGridPixels + Game.SQUARE_WIDTH * this.projectileObject.drawOffsetX
+		this.targetX = this.targetSquare.xInGridPixels + Game.SQUARE_WIDTH * this.projectileObject.drawOffsetRatioX
 				+ this.projectileObject.width / 2;
-		this.targetY = this.targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * this.projectileObject.drawOffsetY
+		this.targetY = this.targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * this.projectileObject.drawOffsetRatioY
 				+ this.projectileObject.height / 2;
 		// (int) (this.targetSquare.yInGridPixels
 		// + Game.SQUARE_HEIGHT * this.projectileObject.drawOffsetY)

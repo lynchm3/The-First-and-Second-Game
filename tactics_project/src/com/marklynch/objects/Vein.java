@@ -64,9 +64,9 @@ public class Vein extends Wall {
 	public Vein() {
 		super();
 		if (squareGameObjectIsOn != null) {
-			drawX1 = (int) (squareGameObjectIsOn.xInGridPixels + drawOffsetX);
+			drawX1 = (int) (squareGameObjectIsOn.xInGridPixels + drawOffsetRatioX);
 			drawX2 = (int) (drawX1 + width);
-			drawY1 = (int) (squareGameObjectIsOn.yInGridPixels + drawOffsetY);
+			drawY1 = (int) (squareGameObjectIsOn.yInGridPixels + drawOffsetRatioY);
 			drawY2 = (int) (drawY1 + height);
 
 		}
@@ -201,9 +201,9 @@ public class Vein extends Wall {
 		Vein vein = new Vein();
 		super.setAttributesForCopy(vein, square, owner);
 		if (squareGameObjectIsOn != null) {
-			vein.drawX1 = (int) (vein.squareGameObjectIsOn.xInGridPixels + vein.drawOffsetX);
+			vein.drawX1 = (int) (vein.squareGameObjectIsOn.xInGridPixels + vein.drawOffsetRatioX);
 			vein.drawX2 = (int) (vein.drawX1 + vein.width);
-			vein.drawY1 = (int) (vein.squareGameObjectIsOn.yInGridPixels + vein.drawOffsetY);
+			vein.drawY1 = (int) (vein.squareGameObjectIsOn.yInGridPixels + vein.drawOffsetRatioY);
 			vein.drawY2 = (int) (vein.drawY1 + vein.height);
 		}
 		return vein;

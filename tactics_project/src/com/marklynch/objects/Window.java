@@ -41,8 +41,8 @@ public class Window extends GameObjectExploder {
 
 			// Draw object
 			if (squareGameObjectIsOn != null) {
-				float actorPositionXInPixels = (this.squareGameObjectIsOn.xInGridPixels + drawOffsetX);
-				float actorPositionYInPixels = (this.squareGameObjectIsOn.yInGridPixels + drawOffsetY);
+				float actorPositionXInPixels = (this.squareGameObjectIsOn.xInGridPixels + drawOffsetRatioX);
+				float actorPositionYInPixels = (this.squareGameObjectIsOn.yInGridPixels + drawOffsetRatioY);
 				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 						actorPositionXInPixels + width, actorPositionYInPixels + height);
 				// stub

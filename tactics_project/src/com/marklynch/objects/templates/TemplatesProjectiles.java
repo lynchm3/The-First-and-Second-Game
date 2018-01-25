@@ -13,8 +13,8 @@ public class TemplatesProjectiles {
 		Templates.ARROW.totalHealth = Templates.ARROW.remainingHealth = 10;
 		Templates.ARROW.widthRatio = 0.32f;
 		Templates.ARROW.heightRatio = 0.16f;
-		Templates.ARROW.drawOffsetX = 0f;
-		Templates.ARROW.drawOffsetY = 0f;
+		Templates.ARROW.drawOffsetRatioX = 0f;
+		Templates.ARROW.drawOffsetRatioY = 0f;
 		Templates.ARROW.soundWhenHit = 1f;
 		Templates.ARROW.soundWhenHitting = 1f;
 		Templates.ARROW.soundDampening = 1f;
@@ -32,8 +32,8 @@ public class TemplatesProjectiles {
 		Templates.FIRE_BALL.totalHealth = Templates.FIRE_BALL.remainingHealth = 10;
 		Templates.FIRE_BALL.widthRatio = 0.32f;
 		Templates.FIRE_BALL.heightRatio = 0.32f;
-		Templates.FIRE_BALL.drawOffsetX = 0f;
-		Templates.FIRE_BALL.drawOffsetY = 0f;
+		Templates.FIRE_BALL.drawOffsetRatioX = 0f;
+		Templates.FIRE_BALL.drawOffsetRatioY = 0f;
 		Templates.FIRE_BALL.soundWhenHit = 1f;
 		Templates.FIRE_BALL.soundWhenHitting = 1f;
 		Templates.FIRE_BALL.soundDampening = 1f;
@@ -51,8 +51,8 @@ public class TemplatesProjectiles {
 		Templates.WATER_BALL.totalHealth = Templates.WATER_BALL.remainingHealth = 10;
 		Templates.WATER_BALL.widthRatio = 0.32f;
 		Templates.WATER_BALL.heightRatio = 0.32f;
-		Templates.WATER_BALL.drawOffsetX = 0f;
-		Templates.WATER_BALL.drawOffsetY = 0f;
+		Templates.WATER_BALL.drawOffsetRatioX = 0f;
+		Templates.WATER_BALL.drawOffsetRatioY = 0f;
 		Templates.WATER_BALL.soundWhenHit = 1f;
 		Templates.WATER_BALL.soundWhenHitting = 1f;
 		Templates.WATER_BALL.soundDampening = 1f;

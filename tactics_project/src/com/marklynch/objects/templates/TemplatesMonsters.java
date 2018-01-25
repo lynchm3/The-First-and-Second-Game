@@ -22,7 +22,7 @@ public class TemplatesMonsters {
 		Templates.BLIND.endurance = 10;
 		Templates.BLIND.imageTexturePath = "blind.png";
 		Templates.BLIND.heightRatio = 1f;
-		Templates.BLIND.drawOffsetY = 0f;
+		Templates.BLIND.drawOffsetRatioY = 0f;
 		Templates.BLIND.weight = 70f;
 		Templates.BLIND.canOpenDoors = false;
 		Templates.BLIND.canEquipWeapons = true;
@@ -41,7 +41,7 @@ public class TemplatesMonsters {
 		Templates.ROCK_GOLEM.endurance = 10;
 		Templates.ROCK_GOLEM.imageTexturePath = "rock_golem_sleeping.png";
 		Templates.ROCK_GOLEM.heightRatio = 1f;
-		Templates.ROCK_GOLEM.drawOffsetY = 1f;
+		Templates.ROCK_GOLEM.drawOffsetRatioY = 1f;
 		Templates.ROCK_GOLEM.weight = 210f;
 		Templates.ROCK_GOLEM.canOpenDoors = false;
 		Templates.ROCK_GOLEM.canEquipWeapons = false;

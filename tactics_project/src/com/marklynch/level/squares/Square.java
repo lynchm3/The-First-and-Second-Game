@@ -617,8 +617,16 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		for (int i = this.inventory.gameObjects.size() - 1; i >= 0; i--) {
 
 			GameObject gameObject = this.inventory.gameObjects.get(i);
-			float x = this.xInGridPixels + gameObject.drawOffsetX;
-			float y = this.yInGridPixels + gameObject.drawOffsetY;
+
+			int x = (int) (this.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
+			int y = (int) (this.yInGridPixels + Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
+			if (gameObject.primaryAnimation != null) {
+				x += gameObject.primaryAnimation.offsetX;
+				y += gameObject.primaryAnimation.offsetY;
+			}
+
+			// float x = this.xInGridPixels + gameObject.drawOffsetX;
+			// float y = this.yInGridPixels + gameObject.drawOffsetY;
 
 			if (UserInputLevel.mouseXTransformed > x && UserInputLevel.mouseXTransformed < x + gameObject.width
 					&& UserInputLevel.mouseYTransformed > y

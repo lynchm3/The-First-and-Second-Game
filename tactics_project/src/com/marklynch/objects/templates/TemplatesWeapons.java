@@ -19,8 +19,8 @@ public class TemplatesWeapons {
 		Templates.KATANA.totalHealth = Templates.KATANA.remainingHealth = 22;
 		Templates.KATANA.widthRatio = 1f;
 		Templates.KATANA.heightRatio = 1f;
-		Templates.KATANA.drawOffsetX = 0f;
-		Templates.KATANA.drawOffsetY = 0f;
+		Templates.KATANA.drawOffsetRatioX = 0f;
+		Templates.KATANA.drawOffsetRatioY = 0f;
 		Templates.KATANA.soundWhenHit = 1f;
 		Templates.KATANA.soundWhenHitting = 1f;
 		Templates.KATANA.soundDampening = 1f;
@@ -44,8 +44,8 @@ public class TemplatesWeapons {
 		Templates.CLEAVER.totalHealth = Templates.CLEAVER.remainingHealth = 20;
 		Templates.CLEAVER.widthRatio = 1f;
 		Templates.CLEAVER.heightRatio = 1f;
-		Templates.CLEAVER.drawOffsetX = 0f;
-		Templates.CLEAVER.drawOffsetY = 0f;
+		Templates.CLEAVER.drawOffsetRatioX = 0f;
+		Templates.CLEAVER.drawOffsetRatioY = 0f;
 		Templates.CLEAVER.soundWhenHit = 1f;
 		Templates.CLEAVER.soundWhenHitting = 1f;
 		Templates.CLEAVER.soundDampening = 1f;
@@ -65,8 +65,8 @@ public class TemplatesWeapons {
 		Templates.HUNTING_BOW.totalHealth = Templates.HUNTING_BOW.remainingHealth = 20;
 		Templates.HUNTING_BOW.widthRatio = 1f;
 		Templates.HUNTING_BOW.heightRatio = 1f;
-		Templates.HUNTING_BOW.drawOffsetX = 0f;
-		Templates.HUNTING_BOW.drawOffsetY = 0f;
+		Templates.HUNTING_BOW.drawOffsetRatioX = 0f;
+		Templates.HUNTING_BOW.drawOffsetRatioY = 0f;
 		Templates.HUNTING_BOW.soundWhenHit = 1f;
 		Templates.HUNTING_BOW.soundWhenHitting = 1f;
 		Templates.HUNTING_BOW.soundDampening = 1f;

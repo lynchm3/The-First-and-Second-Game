@@ -16,8 +16,8 @@ public class TemplatesContainers {
 		Templates.CHEST.totalHealth = Templates.CHEST.remainingHealth = 200;
 		Templates.CHEST.widthRatio = 1f;
 		Templates.CHEST.heightRatio = 1f;
-		Templates.CHEST.drawOffsetX = 0f;
-		Templates.CHEST.drawOffsetY = 0f;
+		Templates.CHEST.drawOffsetRatioX = 0f;
+		Templates.CHEST.drawOffsetRatioY = 0f;
 		Templates.CHEST.soundWhenHit = 1f;
 		Templates.CHEST.soundWhenHitting = 1f;
 		Templates.CHEST.soundDampening = 1f;
@@ -41,8 +41,8 @@ public class TemplatesContainers {
 		Templates.CRATE.totalHealth = Templates.CRATE.remainingHealth = 60;
 		Templates.CRATE.widthRatio = 1f;
 		Templates.CRATE.heightRatio = 1f;
-		Templates.CRATE.drawOffsetX = 0f;
-		Templates.CRATE.drawOffsetY = 0f;
+		Templates.CRATE.drawOffsetRatioX = 0f;
+		Templates.CRATE.drawOffsetRatioY = 0f;
 		Templates.CRATE.soundWhenHit = 1f;
 		Templates.CRATE.soundWhenHitting = 1f;
 		Templates.CRATE.soundDampening = 1f;

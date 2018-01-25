@@ -43,8 +43,8 @@ public class Orb extends GameObject {
 			if (drawOffsetYMax < 0) {
 				drawOffsetYMax = 0;
 			}
-			this.drawOffsetX = (float) (Math.random() * drawOffsetXMax);
-			this.drawOffsetY = (float) (Math.random() * drawOffsetYMax);
+			this.drawOffsetRatioX = (float) (Math.random() * drawOffsetXMax);
+			this.drawOffsetRatioY = (float) (Math.random() * drawOffsetYMax);
 		}
 	}
 }

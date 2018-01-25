@@ -27,7 +27,7 @@ public class TemplatesHumans {
 		Templates.PLAYER.endurance = 10;
 		Templates.PLAYER.imageTexturePath = "hero.png";
 		Templates.PLAYER.heightRatio = 1.5f;
-		Templates.PLAYER.drawOffsetY = -0.5f;
+		Templates.PLAYER.drawOffsetRatioY = -0.5f;
 		Templates.PLAYER.weight = 90f;
 		Templates.PLAYER.handAnchorX = 75f;
 		Templates.PLAYER.handAnchorY = 127f;

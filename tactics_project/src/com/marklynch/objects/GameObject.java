@@ -121,8 +121,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float widthRatio = 1;
 	public float heightRatio = 1;
 
-	public float drawOffsetX = 0;
-	public float drawOffsetY = 0;
+	public float drawOffsetRatioX = 0;
+	public float drawOffsetRatioY = 0;
 	public float soundWhenHit = 1;
 	public float soundWhenHitting = 1;
 	public float soundDampening = 1;
@@ -255,8 +255,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (drawOffsetYMax < 0) {
 				drawOffsetYMax = 0;
 			}
-			this.drawOffsetX = (float) (Math.random() * drawOffsetXMax);
-			this.drawOffsetY = (/* Math.random() * */ drawOffsetYMax);
+			this.drawOffsetRatioX = (float) (Math.random() * drawOffsetXMax);
+			this.drawOffsetRatioY = (/* Math.random() * */ drawOffsetYMax);
 		}
 	}
 
@@ -325,9 +325,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (squareGameObjectIsOn != null) {
 
 			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * drawOffsetX);
+					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
 			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * drawOffsetY);
+					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
 			if (primaryAnimation != null) {
 				actorPositionXInPixels += primaryAnimation.offsetX;
 				actorPositionYInPixels += primaryAnimation.offsetY;
@@ -1493,8 +1493,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.imageTexturePath = imageTexturePath;
 		gameObject.widthRatio = widthRatio;
 		gameObject.heightRatio = heightRatio;
-		gameObject.drawOffsetX = drawOffsetX;
-		gameObject.drawOffsetY = drawOffsetY;
+		gameObject.drawOffsetRatioX = drawOffsetRatioX;
+		gameObject.drawOffsetRatioY = drawOffsetRatioY;
 		gameObject.soundWhenHit = soundWhenHit;
 		gameObject.soundWhenHitting = soundWhenHitting;
 		gameObject.weight = weight;

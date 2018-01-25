@@ -47,8 +47,8 @@ public class HerbivoreWildAnimal extends WildAnimal {
 		// actor.inventory = new Inventory();
 		actor.widthRatio = widthRatio;
 		actor.heightRatio = heightRatio;
-		actor.drawOffsetX = drawOffsetX;
-		actor.drawOffsetY = drawOffsetY;
+		actor.drawOffsetRatioX = drawOffsetRatioX;
+		actor.drawOffsetRatioY = drawOffsetRatioY;
 		actor.soundWhenHit = soundWhenHit;
 		actor.soundWhenHitting = soundWhenHitting;
 		// actor.soundDampening = 1f;

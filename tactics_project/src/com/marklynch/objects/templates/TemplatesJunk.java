@@ -13,8 +13,8 @@ public class TemplatesJunk {
 		Templates.FUR.totalHealth = Templates.FUR.remainingHealth = 21;
 		Templates.FUR.widthRatio = 1f;
 		Templates.FUR.heightRatio = 1f;
-		Templates.FUR.drawOffsetX = 0f;
-		Templates.FUR.drawOffsetY = 0f;
+		Templates.FUR.drawOffsetRatioX = 0f;
+		Templates.FUR.drawOffsetRatioY = 0f;
 		Templates.FUR.soundWhenHit = 1f;
 		Templates.FUR.soundWhenHitting = 1f;
 		Templates.FUR.soundDampening = 1f;
@@ -31,8 +31,8 @@ public class TemplatesJunk {
 		Templates.DIRTY_SHEET_3.totalHealth = Templates.DIRTY_SHEET_3.remainingHealth = 1;
 		Templates.DIRTY_SHEET_3.widthRatio = 0.88f;
 		Templates.DIRTY_SHEET_3.heightRatio = 1f;
-		Templates.DIRTY_SHEET_3.drawOffsetX = 0f;
-		Templates.DIRTY_SHEET_3.drawOffsetY = 0f;
+		Templates.DIRTY_SHEET_3.drawOffsetRatioX = 0f;
+		Templates.DIRTY_SHEET_3.drawOffsetRatioY = 0f;
 		Templates.DIRTY_SHEET_3.soundWhenHit = 1f;
 		Templates.DIRTY_SHEET_3.soundWhenHitting = 1f;
 		Templates.DIRTY_SHEET_3.soundDampening = 1f;
@@ -49,8 +49,8 @@ public class TemplatesJunk {
 		Templates.WOOD.totalHealth = Templates.WOOD.remainingHealth = 16;
 		Templates.WOOD.widthRatio = 1f;
 		Templates.WOOD.heightRatio = 1f;
-		Templates.WOOD.drawOffsetX = 0f;
-		Templates.WOOD.drawOffsetY = 0f;
+		Templates.WOOD.drawOffsetRatioX = 0f;
+		Templates.WOOD.drawOffsetRatioY = 0f;
 		Templates.WOOD.soundWhenHit = 1f;
 		Templates.WOOD.soundWhenHitting = 1f;
 		Templates.WOOD.soundDampening = 1f;
@@ -68,8 +68,8 @@ public class TemplatesJunk {
 		Templates.ORE.totalHealth = Templates.ORE.remainingHealth = 1;
 		Templates.ORE.widthRatio = 0.25f;
 		Templates.ORE.heightRatio = 0.25f;
-		Templates.ORE.drawOffsetX = 0f;
-		Templates.ORE.drawOffsetY = 0f;
+		Templates.ORE.drawOffsetRatioX = 0f;
+		Templates.ORE.drawOffsetRatioY = 0f;
 		Templates.ORE.soundWhenHit = 1f;
 		Templates.ORE.soundWhenHitting = 1f;
 		Templates.ORE.soundDampening = 1f;

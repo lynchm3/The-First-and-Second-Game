@@ -16,8 +16,8 @@ public class TemplatesEntrances {
 		Templates.WEAK_WOODEN_DOOR.totalHealth = Templates.WEAK_WOODEN_DOOR.remainingHealth = 25;
 		Templates.WEAK_WOODEN_DOOR.widthRatio = 1f;
 		Templates.WEAK_WOODEN_DOOR.heightRatio = 1f;
-		Templates.WEAK_WOODEN_DOOR.drawOffsetX = 0f;
-		Templates.WEAK_WOODEN_DOOR.drawOffsetY = 0f;
+		Templates.WEAK_WOODEN_DOOR.drawOffsetRatioX = 0f;
+		Templates.WEAK_WOODEN_DOOR.drawOffsetRatioY = 0f;
 		Templates.WEAK_WOODEN_DOOR.soundWhenHit = 1f;
 		Templates.WEAK_WOODEN_DOOR.soundWhenHitting = 1f;
 		Templates.WEAK_WOODEN_DOOR.soundDampening = 1f;
@@ -41,8 +41,8 @@ public class TemplatesEntrances {
 		Templates.DOOR.totalHealth = Templates.DOOR.remainingHealth = 160;
 		Templates.DOOR.widthRatio = 1f;
 		Templates.DOOR.heightRatio = 1f;
-		Templates.DOOR.drawOffsetX = 0f;
-		Templates.DOOR.drawOffsetY = 0f;
+		Templates.DOOR.drawOffsetRatioX = 0f;
+		Templates.DOOR.drawOffsetRatioY = 0f;
 		Templates.DOOR.soundWhenHit = 1f;
 		Templates.DOOR.soundWhenHitting = 1f;
 		Templates.DOOR.soundDampening = 1f;
@@ -66,8 +66,8 @@ public class TemplatesEntrances {
 		Templates.GATE.totalHealth = Templates.GATE.remainingHealth = 100;
 		Templates.GATE.widthRatio = 1f;
 		Templates.GATE.heightRatio = 1f;
-		Templates.GATE.drawOffsetX = 0f;
-		Templates.GATE.drawOffsetY = 0f;
+		Templates.GATE.drawOffsetRatioX = 0f;
+		Templates.GATE.drawOffsetRatioY = 0f;
 		Templates.GATE.soundWhenHit = 1f;
 		Templates.GATE.soundWhenHitting = 1f;
 		Templates.GATE.soundDampening = 1f;
@@ -89,8 +89,8 @@ public class TemplatesEntrances {
 		Templates.FALSE_WALL.totalHealth = Templates.FALSE_WALL.remainingHealth = 500;
 		Templates.FALSE_WALL.widthRatio = 1f;
 		Templates.FALSE_WALL.heightRatio = 1f;
-		Templates.FALSE_WALL.drawOffsetX = 0f;
-		Templates.FALSE_WALL.drawOffsetY = 0f;
+		Templates.FALSE_WALL.drawOffsetRatioX = 0f;
+		Templates.FALSE_WALL.drawOffsetRatioY = 0f;
 		Templates.FALSE_WALL.soundWhenHit = 1f;
 		Templates.FALSE_WALL.soundWhenHitting = 1f;
 		Templates.FALSE_WALL.soundDampening = 1f;

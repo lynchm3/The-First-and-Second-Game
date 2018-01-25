@@ -16,8 +16,8 @@ public class TemplatesGold {
 		Templates.GOLD.totalHealth = Templates.GOLD.remainingHealth = 1;
 		Templates.GOLD.widthRatio = 0.25f;
 		Templates.GOLD.heightRatio = 0.25f;
-		Templates.GOLD.drawOffsetX = 0f;
-		Templates.GOLD.drawOffsetY = 0f;
+		Templates.GOLD.drawOffsetRatioX = 0f;
+		Templates.GOLD.drawOffsetRatioY = 0f;
 		Templates.GOLD.soundWhenHit = 1f;
 		Templates.GOLD.soundWhenHitting = 1f;
 		Templates.GOLD.soundDampening = 1f;
@@ -35,8 +35,8 @@ public class TemplatesGold {
 		Templates.SMALL_ORB.totalHealth = Templates.SMALL_ORB.remainingHealth = 1;
 		Templates.SMALL_ORB.widthRatio = 0.125f;
 		Templates.SMALL_ORB.heightRatio = 0.125f;
-		Templates.SMALL_ORB.drawOffsetX = 0f;
-		Templates.SMALL_ORB.drawOffsetY = 0f;
+		Templates.SMALL_ORB.drawOffsetRatioX = 0f;
+		Templates.SMALL_ORB.drawOffsetRatioY = 0f;
 		Templates.SMALL_ORB.soundWhenHit = 1f;
 		Templates.SMALL_ORB.soundWhenHitting = 1f;
 		Templates.SMALL_ORB.soundDampening = 1f;
@@ -54,8 +54,8 @@ public class TemplatesGold {
 		Templates.MEDIUM_ORB.totalHealth = Templates.MEDIUM_ORB.remainingHealth = 1;
 		Templates.MEDIUM_ORB.widthRatio = 0.25f;
 		Templates.MEDIUM_ORB.heightRatio = 0.25f;
-		Templates.MEDIUM_ORB.drawOffsetX = 0f;
-		Templates.MEDIUM_ORB.drawOffsetY = 0f;
+		Templates.MEDIUM_ORB.drawOffsetRatioX = 0f;
+		Templates.MEDIUM_ORB.drawOffsetRatioY = 0f;
 		Templates.MEDIUM_ORB.soundWhenHit = 1f;
 		Templates.MEDIUM_ORB.soundWhenHitting = 1f;
 		Templates.MEDIUM_ORB.soundDampening = 1f;
@@ -73,8 +73,8 @@ public class TemplatesGold {
 		Templates.LARGE_ORB.totalHealth = Templates.LARGE_ORB.remainingHealth = 1;
 		Templates.LARGE_ORB.widthRatio = 0.5f;
 		Templates.LARGE_ORB.heightRatio = 0.5f;
-		Templates.LARGE_ORB.drawOffsetX = 0f;
-		Templates.LARGE_ORB.drawOffsetY = 0f;
+		Templates.LARGE_ORB.drawOffsetRatioX = 0f;
+		Templates.LARGE_ORB.drawOffsetRatioY = 0f;
 		Templates.LARGE_ORB.soundWhenHit = 1f;
 		Templates.LARGE_ORB.soundWhenHitting = 1f;
 		Templates.LARGE_ORB.soundDampening = 1f;

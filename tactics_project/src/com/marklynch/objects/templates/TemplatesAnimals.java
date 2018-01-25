@@ -25,7 +25,7 @@ public class TemplatesAnimals {
 		Templates.PIG.endurance = 10;
 		Templates.PIG.imageTexturePath = "pig.png";
 		Templates.PIG.heightRatio = 0.25f;
-		Templates.PIG.drawOffsetY = 0.75f;
+		Templates.PIG.drawOffsetRatioY = 0.75f;
 		Templates.PIG.weight = 70f;
 		Templates.PIG.canOpenDoors = false;
 		Templates.PIG.canEquipWeapons = false;
@@ -43,7 +43,7 @@ public class TemplatesAnimals {
 		Templates.RAT.endurance = 10;
 		Templates.RAT.imageTexturePath = "rat.png";
 		Templates.RAT.heightRatio = 0.25f;
-		Templates.RAT.drawOffsetY = 0.75f;
+		Templates.RAT.drawOffsetRatioY = 0.75f;
 		Templates.RAT.weight = 70f;
 		Templates.RAT.canOpenDoors = false;
 		Templates.RAT.canEquipWeapons = false;

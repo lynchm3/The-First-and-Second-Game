@@ -12,8 +12,8 @@ public class TemplatesInspectables {
 		Templates.PIG_SIGN.totalHealth = Templates.PIG_SIGN.remainingHealth = 26;
 		Templates.PIG_SIGN.widthRatio = 1f;
 		Templates.PIG_SIGN.heightRatio = 1f;
-		Templates.PIG_SIGN.drawOffsetX = -0.25f;
-		Templates.PIG_SIGN.drawOffsetY = 0f;
+		Templates.PIG_SIGN.drawOffsetRatioX = -0.25f;
+		Templates.PIG_SIGN.drawOffsetRatioY = 0f;
 		Templates.PIG_SIGN.soundWhenHit = 1f;
 		Templates.PIG_SIGN.soundWhenHitting = 1f;
 		Templates.PIG_SIGN.soundDampening = 1f;
@@ -30,8 +30,8 @@ public class TemplatesInspectables {
 		Templates.BLOODY_PULP.totalHealth = Templates.BLOODY_PULP.remainingHealth = 1;
 		Templates.BLOODY_PULP.widthRatio = 1f;
 		Templates.BLOODY_PULP.heightRatio = 1f;
-		Templates.BLOODY_PULP.drawOffsetX = 0f;
-		Templates.BLOODY_PULP.drawOffsetY = 0f;
+		Templates.BLOODY_PULP.drawOffsetRatioX = 0f;
+		Templates.BLOODY_PULP.drawOffsetRatioY = 0f;
 		Templates.BLOODY_PULP.soundWhenHit = 1f;
 		Templates.BLOODY_PULP.soundWhenHitting = 1f;
 		Templates.BLOODY_PULP.soundDampening = 1f;
@@ -48,8 +48,8 @@ public class TemplatesInspectables {
 		Templates.BLOOD.totalHealth = Templates.BLOOD.remainingHealth = 1;
 		Templates.BLOOD.widthRatio = 1f;
 		Templates.BLOOD.heightRatio = 1f;
-		Templates.BLOOD.drawOffsetX = 0f;
-		Templates.BLOOD.drawOffsetY = 0f;
+		Templates.BLOOD.drawOffsetRatioX = 0f;
+		Templates.BLOOD.drawOffsetRatioY = 0f;
 		Templates.BLOOD.soundWhenHit = 1f;
 		Templates.BLOOD.soundWhenHitting = 1f;
 		Templates.BLOOD.soundDampening = 1f;
@@ -66,8 +66,8 @@ public class TemplatesInspectables {
 		Templates.DRIED_BLOOD.totalHealth = Templates.DRIED_BLOOD.remainingHealth = 1;
 		Templates.DRIED_BLOOD.widthRatio = 1f;
 		Templates.DRIED_BLOOD.heightRatio = 1f;
-		Templates.DRIED_BLOOD.drawOffsetX = 0f;
-		Templates.DRIED_BLOOD.drawOffsetY = 0f;
+		Templates.DRIED_BLOOD.drawOffsetRatioX = 0f;
+		Templates.DRIED_BLOOD.drawOffsetRatioY = 0f;
 		Templates.DRIED_BLOOD.soundWhenHit = 1f;
 		Templates.DRIED_BLOOD.soundWhenHitting = 1f;
 		Templates.DRIED_BLOOD.soundDampening = 1f;
@@ -84,8 +84,8 @@ public class TemplatesInspectables {
 		Templates.GIANT_FOOTPRINT.totalHealth = Templates.GIANT_FOOTPRINT.remainingHealth = 1;
 		Templates.GIANT_FOOTPRINT.widthRatio = 2f;
 		Templates.GIANT_FOOTPRINT.heightRatio = 1.5f;
-		Templates.GIANT_FOOTPRINT.drawOffsetX = -0.5f;
-		Templates.GIANT_FOOTPRINT.drawOffsetY = -0.25f;
+		Templates.GIANT_FOOTPRINT.drawOffsetRatioX = -0.5f;
+		Templates.GIANT_FOOTPRINT.drawOffsetRatioY = -0.25f;
 		Templates.GIANT_FOOTPRINT.soundWhenHit = 1f;
 		Templates.GIANT_FOOTPRINT.soundWhenHitting = 1f;
 		Templates.GIANT_FOOTPRINT.soundDampening = 1f;
@@ -102,8 +102,8 @@ public class TemplatesInspectables {
 		Templates.GIANT_FOOTPRINT_LEFT.totalHealth = Templates.GIANT_FOOTPRINT_LEFT.remainingHealth = 1;
 		Templates.GIANT_FOOTPRINT_LEFT.widthRatio = 2f;
 		Templates.GIANT_FOOTPRINT_LEFT.heightRatio = 1.5f;
-		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetX = -0.5f;
-		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetY = -0.25f;
+		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetRatioX = -0.5f;
+		Templates.GIANT_FOOTPRINT_LEFT.drawOffsetRatioY = -0.25f;
 		Templates.GIANT_FOOTPRINT_LEFT.soundWhenHit = 1f;
 		Templates.GIANT_FOOTPRINT_LEFT.soundWhenHitting = 1f;
 		Templates.GIANT_FOOTPRINT_LEFT.soundDampening = 1f;

@@ -13,8 +13,8 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_RED.totalHealth = Templates.MAP_MARKER_RED.remainingHealth = 1;
 		Templates.MAP_MARKER_RED.widthRatio = 1f;
 		Templates.MAP_MARKER_RED.heightRatio = 1f;
-		Templates.MAP_MARKER_RED.drawOffsetX = 0f;
-		Templates.MAP_MARKER_RED.drawOffsetY = 0f;
+		Templates.MAP_MARKER_RED.drawOffsetRatioX = 0f;
+		Templates.MAP_MARKER_RED.drawOffsetRatioY = 0f;
 		Templates.MAP_MARKER_RED.soundWhenHit = 1f;
 		Templates.MAP_MARKER_RED.soundWhenHitting = 1f;
 		Templates.MAP_MARKER_RED.soundDampening = 1f;
@@ -31,8 +31,8 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_GREEN.totalHealth = Templates.MAP_MARKER_GREEN.remainingHealth = 1;
 		Templates.MAP_MARKER_GREEN.widthRatio = 1f;
 		Templates.MAP_MARKER_GREEN.heightRatio = 1f;
-		Templates.MAP_MARKER_GREEN.drawOffsetX = 0f;
-		Templates.MAP_MARKER_GREEN.drawOffsetY = 0f;
+		Templates.MAP_MARKER_GREEN.drawOffsetRatioX = 0f;
+		Templates.MAP_MARKER_GREEN.drawOffsetRatioY = 0f;
 		Templates.MAP_MARKER_GREEN.soundWhenHit = 1f;
 		Templates.MAP_MARKER_GREEN.soundWhenHitting = 1f;
 		Templates.MAP_MARKER_GREEN.soundDampening = 1f;
@@ -49,8 +49,8 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_BLUE.totalHealth = Templates.MAP_MARKER_BLUE.remainingHealth = 1;
 		Templates.MAP_MARKER_BLUE.widthRatio = 1f;
 		Templates.MAP_MARKER_BLUE.heightRatio = 1f;
-		Templates.MAP_MARKER_BLUE.drawOffsetX = 0f;
-		Templates.MAP_MARKER_BLUE.drawOffsetY = 0f;
+		Templates.MAP_MARKER_BLUE.drawOffsetRatioX = 0f;
+		Templates.MAP_MARKER_BLUE.drawOffsetRatioY = 0f;
 		Templates.MAP_MARKER_BLUE.soundWhenHit = 1f;
 		Templates.MAP_MARKER_BLUE.soundWhenHitting = 1f;
 		Templates.MAP_MARKER_BLUE.soundDampening = 1f;
@@ -67,8 +67,8 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_SKULL.totalHealth = Templates.MAP_MARKER_SKULL.remainingHealth = 1;
 		Templates.MAP_MARKER_SKULL.widthRatio = 1f;
 		Templates.MAP_MARKER_SKULL.heightRatio = 1f;
-		Templates.MAP_MARKER_SKULL.drawOffsetX = 0f;
-		Templates.MAP_MARKER_SKULL.drawOffsetY = 0f;
+		Templates.MAP_MARKER_SKULL.drawOffsetRatioX = 0f;
+		Templates.MAP_MARKER_SKULL.drawOffsetRatioY = 0f;
 		Templates.MAP_MARKER_SKULL.soundWhenHit = 1f;
 		Templates.MAP_MARKER_SKULL.soundWhenHitting = 1f;
 		Templates.MAP_MARKER_SKULL.soundDampening = 1f;
@@ -85,8 +85,8 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_TREASURE.totalHealth = Templates.MAP_MARKER_TREASURE.remainingHealth = 1;
 		Templates.MAP_MARKER_TREASURE.widthRatio = 1f;
 		Templates.MAP_MARKER_TREASURE.heightRatio = 1f;
-		Templates.MAP_MARKER_TREASURE.drawOffsetX = 0f;
-		Templates.MAP_MARKER_TREASURE.drawOffsetY = 0f;
+		Templates.MAP_MARKER_TREASURE.drawOffsetRatioX = 0f;
+		Templates.MAP_MARKER_TREASURE.drawOffsetRatioY = 0f;
 		Templates.MAP_MARKER_TREASURE.soundWhenHit = 1f;
 		Templates.MAP_MARKER_TREASURE.soundWhenHitting = 1f;
 		Templates.MAP_MARKER_TREASURE.soundDampening = 1f;

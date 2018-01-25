@@ -14,8 +14,8 @@ public class TemplatesCorpses {
 		Templates.CARCASS.totalHealth = Templates.CARCASS.remainingHealth = 34;
 		Templates.CARCASS.widthRatio = 0.5f;
 		Templates.CARCASS.heightRatio = 0.5f;
-		Templates.CARCASS.drawOffsetX = 0f;
-		Templates.CARCASS.drawOffsetY = -0f;
+		Templates.CARCASS.drawOffsetRatioX = 0f;
+		Templates.CARCASS.drawOffsetRatioY = -0f;
 		Templates.CARCASS.soundWhenHit = 1f;
 		Templates.CARCASS.soundWhenHitting = 1f;
 		Templates.CARCASS.soundDampening = 1f;
@@ -35,8 +35,8 @@ public class TemplatesCorpses {
 		Templates.CORPSE.totalHealth = Templates.CORPSE.remainingHealth = 32;
 		Templates.CORPSE.widthRatio = 0.5f;
 		Templates.CORPSE.heightRatio = 0.5f;
-		Templates.CORPSE.drawOffsetX = 0f;
-		Templates.CORPSE.drawOffsetY = 0f;
+		Templates.CORPSE.drawOffsetRatioX = 0f;
+		Templates.CORPSE.drawOffsetRatioY = 0f;
 		Templates.CORPSE.soundWhenHit = 1f;
 		Templates.CORPSE.soundWhenHitting = 1f;
 		Templates.CORPSE.soundDampening = 1f;
@@ -56,8 +56,8 @@ public class TemplatesCorpses {
 		Templates.ASH.totalHealth = Templates.ASH.remainingHealth = 1000;
 		Templates.ASH.widthRatio = 0.5f;
 		Templates.ASH.heightRatio = 0.5f;
-		Templates.ASH.drawOffsetX = 0f;
-		Templates.ASH.drawOffsetY = 0f;
+		Templates.ASH.drawOffsetRatioX = 0f;
+		Templates.ASH.drawOffsetRatioY = 0f;
 		Templates.ASH.soundWhenHit = 1f;
 		Templates.ASH.soundWhenHitting = 1f;
 		Templates.ASH.soundDampening = 1f;
@@ -75,8 +75,8 @@ public class TemplatesCorpses {
 		Templates.WOOD_CHIPS.totalHealth = Templates.WOOD_CHIPS.remainingHealth = 16;
 		Templates.WOOD_CHIPS.widthRatio = 0.5f;
 		Templates.WOOD_CHIPS.heightRatio = 0.5f;
-		Templates.WOOD_CHIPS.drawOffsetX = 0f;
-		Templates.WOOD_CHIPS.drawOffsetY = 0f;
+		Templates.WOOD_CHIPS.drawOffsetRatioX = 0f;
+		Templates.WOOD_CHIPS.drawOffsetRatioY = 0f;
 		Templates.WOOD_CHIPS.soundWhenHit = 1f;
 		Templates.WOOD_CHIPS.soundWhenHitting = 1f;
 		Templates.WOOD_CHIPS.soundDampening = 1f;

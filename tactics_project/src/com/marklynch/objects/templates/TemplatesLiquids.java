@@ -16,8 +16,8 @@ public class TemplatesLiquids {
 		Templates.WATER.totalHealth = Templates.WATER.remainingHealth = 10;
 		Templates.WATER.widthRatio = 0.5f;
 		Templates.WATER.heightRatio = 0.5f;
-		Templates.WATER.drawOffsetX = 0f;
-		Templates.WATER.drawOffsetY = 0f;
+		Templates.WATER.drawOffsetRatioX = 0f;
+		Templates.WATER.drawOffsetRatioY = 0f;
 		Templates.WATER.soundWhenHit = 1f;
 		Templates.WATER.soundWhenHitting = 1f;
 		Templates.WATER.soundDampening = 1f;
@@ -38,8 +38,8 @@ public class TemplatesLiquids {
 		Templates.POISON.totalHealth = Templates.POISON.remainingHealth = 10;
 		Templates.POISON.widthRatio = 0.5f;
 		Templates.POISON.heightRatio = 0.5f;
-		Templates.POISON.drawOffsetX = 0f;
-		Templates.POISON.drawOffsetY = 0f;
+		Templates.POISON.drawOffsetRatioX = 0f;
+		Templates.POISON.drawOffsetRatioY = 0f;
 		Templates.POISON.soundWhenHit = 1f;
 		Templates.POISON.soundWhenHitting = 1f;
 		Templates.POISON.soundDampening = 1f;

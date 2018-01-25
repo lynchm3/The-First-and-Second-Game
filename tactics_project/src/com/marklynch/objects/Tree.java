@@ -54,8 +54,8 @@ public class Tree extends GameObject {
 		float appleDrawOffsetYMin = -0.35f;
 		float appleDrawOffsetYMax = 0.35f;
 
-		apple.drawOffsetX = appleDrawOffsetXMin + (float) (Math.random() * (appleDrawOffsetXMax - appleDrawOffsetXMin));
-		apple.drawOffsetY = apple.drawOffsetYInTree = appleDrawOffsetYMin
+		apple.drawOffsetRatioX = appleDrawOffsetXMin + (float) (Math.random() * (appleDrawOffsetXMax - appleDrawOffsetXMin));
+		apple.drawOffsetRatioY = apple.drawOffsetYInTree = appleDrawOffsetYMin
 				+ (float) (Math.random() * (appleDrawOffsetYMax - appleDrawOffsetYMin));
 
 		inventory.add(apple);
@@ -82,9 +82,9 @@ public class Tree extends GameObject {
 		// DRAW INVENTORY
 		for (GameObject fruit : inventory.gameObjects) {
 			int fruitPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
-					+ fruit.drawOffsetX * Game.SQUARE_WIDTH);
+					+ fruit.drawOffsetRatioX * Game.SQUARE_WIDTH);
 			int fruitPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
-					+ fruit.drawOffsetY * Game.SQUARE_HEIGHT);
+					+ fruit.drawOffsetRatioY * Game.SQUARE_HEIGHT);
 
 			float alpha = 1.0f;
 
@@ -106,7 +106,7 @@ public class Tree extends GameObject {
 			ArrayList<GameObject> objectsToDropFromHit = new ArrayList<GameObject>();
 			objectsToDropFromHit.addAll(this.inventory.gameObjects);
 			for (GameObject objectToDrop : objectsToDropFromHit) {
-				objectToDrop.drawOffsetY = 1 - (objectToDrop.height / Game.SQUARE_HEIGHT);
+				objectToDrop.drawOffsetRatioY = 1 - (objectToDrop.height / Game.SQUARE_HEIGHT);
 				new ActionDropItems(this, this.squareGameObjectIsOn, objectToDrop).perform();
 			}
 			healthWhenLastDroppedFruit = this.remainingHealth;
@@ -121,7 +121,7 @@ public class Tree extends GameObject {
 					gameObject.heightRatio += 0.01f;
 
 					// old
-					gameObject.drawOffsetX -= 0.005f;
+					gameObject.drawOffsetRatioX -= 0.005f;
 
 					gameObject.width = Game.SQUARE_WIDTH * gameObject.widthRatio;
 					gameObject.height = Game.SQUARE_HEIGHT * gameObject.heightRatio;
@@ -162,7 +162,7 @@ public class Tree extends GameObject {
 		for (GameObject objectToDrop : objectsToDropRandomly) {
 			// System.out.println("Dropping apple @ " +
 			// this.squareGameObjectIsOn);
-			objectToDrop.drawOffsetY = 1 - (objectToDrop.height / Game.SQUARE_HEIGHT);
+			objectToDrop.drawOffsetRatioY = 1 - (objectToDrop.height / Game.SQUARE_HEIGHT);
 			new ActionDropItems(this, this.squareGameObjectIsOn, objectToDrop).perform();
 		}
 	}

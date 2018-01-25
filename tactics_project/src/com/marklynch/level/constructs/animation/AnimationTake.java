@@ -46,9 +46,9 @@ public class AnimationTake extends Animation {
 		if (gameObject.squareGameObjectIsOn != null) {
 			// on the ground
 			this.x = originX = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
-					+ Game.SQUARE_WIDTH * gameObject.drawOffsetX);
+					+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
 			this.y = originY = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
-					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetY);
+					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
 		} else {
 			// in a container
 			this.x = originX = (int) (((GameObject) gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn.xInGridPixels

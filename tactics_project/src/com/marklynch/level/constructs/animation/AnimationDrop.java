@@ -26,13 +26,13 @@ public class AnimationDrop extends Animation {
 
 		if (shooter instanceof Actor) {
 			Actor shooterActor = (Actor) shooter;
-			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + shooter.drawOffsetX * Game.SQUARE_WIDTH
+			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + shooter.drawOffsetRatioX * Game.SQUARE_WIDTH
 					+ shooterActor.handAnchorX - projectileObject.anchorX);
-			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + shooter.drawOffsetY * Game.SQUARE_HEIGHT
+			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + shooter.drawOffsetRatioY * Game.SQUARE_HEIGHT
 					+ shooterActor.handAnchorY - projectileObject.anchorY);
 		} else if (shooter instanceof Tree && projectileObject instanceof Food) {
 			Food fruit = (Food) projectileObject;
-			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + fruit.drawOffsetX * Game.SQUARE_WIDTH);
+			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels + fruit.drawOffsetRatioX * Game.SQUARE_WIDTH);
 			originY = (int) (shooter.squareGameObjectIsOn.yInGridPixels + fruit.drawOffsetYInTree * Game.SQUARE_HEIGHT);
 		} else {
 			originX = (int) (shooter.squareGameObjectIsOn.xInGridPixels
@@ -41,8 +41,8 @@ public class AnimationDrop extends Animation {
 					+ (Game.SQUARE_HEIGHT - projectileObject.height) / 2);
 		}
 
-		targetX = (int) (targetSquare.xInGridPixels + Game.SQUARE_WIDTH * projectileObject.drawOffsetX);
-		targetY = (int) (targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * projectileObject.drawOffsetY);
+		targetX = (int) (targetSquare.xInGridPixels + Game.SQUARE_WIDTH * projectileObject.drawOffsetRatioX);
+		targetY = (int) (targetSquare.yInGridPixels + Game.SQUARE_HEIGHT * projectileObject.drawOffsetRatioY);
 
 		startOffsetX = offsetX = originX - targetX;
 		startOffsetY = offsetY = originY - targetY;
