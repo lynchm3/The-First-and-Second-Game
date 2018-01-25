@@ -64,7 +64,6 @@ import java.nio.ByteBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.EXTFramebufferObject;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
@@ -194,6 +193,8 @@ public class Texture implements ITexture {
 		this(pngRef, filter, filter, DEFAULT_WRAP, genMipmap);
 	}
 
+	public byte[] pixels;
+
 	public Texture(URL pngRef, int minFilter, int magFilter, int wrap, boolean genMipmap) throws IOException {
 		// TODO: npot check
 		InputStream input = null;
@@ -206,6 +207,10 @@ public class Texture implements ITexture {
 			ByteBuffer buf = BufferUtils.createByteBuffer(4 * width * height);
 			dec.decode(buf, width * 4, PNGDecoder.Format.RGBA);
 			buf.flip();
+
+			ByteBuffer dupe = buf.duplicate();
+			pixels = new byte[dupe.remaining()];
+			dupe.get(pixels);
 
 			glEnable(getTarget());
 			id = glGenTextures();
@@ -316,10 +321,12 @@ public class Texture implements ITexture {
 		return id != 0;
 	}
 
+	@Override
 	public int getWidth() {
 		return width;
 	}
 
+	@Override
 	public int getHeight() {
 		return height;
 	}
@@ -329,6 +336,7 @@ public class Texture implements ITexture {
 	 * 
 	 * @return this texture object
 	 */
+	@Override
 	public Texture getTexture() {
 		return this;
 	}

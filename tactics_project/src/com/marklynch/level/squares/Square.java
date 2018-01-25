@@ -618,6 +618,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 			GameObject gameObject = this.inventory.gameObjects.get(i);
 
+			// gameObject.imageTexture.getTexture().
+
 			int x = (int) (this.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
 			int y = (int) (this.yInGridPixels + Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
 			if (gameObject.primaryAnimation != null) {
@@ -631,11 +633,51 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			if (UserInputLevel.mouseXTransformed > x && UserInputLevel.mouseXTransformed < x + gameObject.width
 					&& UserInputLevel.mouseYTransformed > y
 					&& UserInputLevel.mouseYTransformed < y + gameObject.height) {
-				return gameObject;
+
+				Color color = getPixel(gameObject.imageTexture, (int) (UserInputLevel.mouseXTransformed - x),
+						(int) (UserInputLevel.mouseYTransformed - y));
+
+				System.out.println("Color = " + color);
+				if (color != null) {
+					System.out.println("Color.a = " + color.a);
+					System.out.println("Color.r = " + color.r);
+					System.out.println("Color.g = " + color.g);
+					System.out.println("Color.b = " + color.b);
+
+				}
+
+				if (color.a == 1.0)
+					return gameObject;
 			}
 		}
 		return null;
 
+	}
+
+	public Color getPixel(Texture texture, int x, int y) {
+		System.out.println("x = " + x);
+		System.out.println("y = " + y);
+		System.out.println("texture.pixels = " + texture.pixels);
+		System.out.println("texture.pixels.length = " + texture.pixels.length);
+
+		// in method
+		if (x < 0 || y < 0)
+			return null;
+
+		if (x > texture.getWidth() - 1 || y > texture.getHeight() - 1) {
+			return null;
+		}
+
+		int index = (x + y * texture.getWidth()) * 4;
+		System.out.println("texture.pixels.length = " + texture.pixels.length);
+		System.out.println("index = " + index);
+
+		int r = texture.pixels[index] & 0xFF;
+		int g = texture.pixels[index + 1] & 0xFF;
+		int b = texture.pixels[index + 2] & 0xFF;
+		int a = texture.pixels[index + 3] & 0xFF;
+
+		return new Color(r, g, b, a);
 	}
 
 	// this.xInGridPixels;
