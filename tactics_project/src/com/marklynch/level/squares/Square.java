@@ -597,12 +597,13 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		GameObject targetGameObject = null;
 
-		if (this == Game.squareMouseIsOver) {
-			targetGameObject = getGameObjectMouseIsOver();
+		if (Game.gameObjectMouseIsOver != null && this.inventory.contains(Game.gameObjectMouseIsOver)) {
+			targetGameObject = Game.gameObjectMouseIsOver;
 		}
 
-		if (targetGameObject == null)
+		if (targetGameObject == null) {
 			targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
+		}
 
 		if (targetGameObject != null) {
 			return targetGameObject.getDefaultActionPerformedOnThisInWorld(performer);
@@ -646,7 +647,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 				}
 
-				if (color.a == 1.0)
+				if (color.a > 0)
 					return gameObject;
 			}
 		}

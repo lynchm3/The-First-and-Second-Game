@@ -17,7 +17,6 @@ import com.marklynch.level.Level.LevelMode;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.constructs.inventory.InventorySquare;
 import com.marklynch.level.squares.Square;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionUsePower;
@@ -203,6 +202,7 @@ public class UserInputLevel {
 
 		// Get the square that we're hovering over
 		Game.squareMouseIsOver = null;
+		Game.gameObjectMouseIsOver = null;
 		if (Level.journal.showing) {
 		} else if (Level.gameOver.showing) {
 		} else if (Game.level.openInventories.size() > 0) {
@@ -220,13 +220,8 @@ public class UserInputLevel {
 			if ((int) mouseXInSquares > -1 && (int) mouseXInSquares < Game.level.squares.length
 					&& (int) mouseYInSquares > -1 && (int) mouseYInSquares < Game.level.squares[0].length) {
 				Game.squareMouseIsOver = Game.level.squares[(int) mouseXInSquares][(int) mouseYInSquares];
-
-				GameObject gameObjectMouseIsOver;
-				for (int i = Game.squareMouseIsOver.inventory.size() - 1; i >= 0; i--) {
-					if (Game.squareMouseIsOver.inventory.get(i).mouseOver(mouseXTransformed, mouseYTransformed)) {
-
-					}
-				}
+				if (Game.squareMouseIsOver != null)
+					Game.gameObjectMouseIsOver = Game.squareMouseIsOver.getGameObjectMouseIsOver();
 			}
 		}
 
