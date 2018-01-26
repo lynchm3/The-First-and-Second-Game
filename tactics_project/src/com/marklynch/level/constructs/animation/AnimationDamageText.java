@@ -36,7 +36,7 @@ public class AnimationDamageText extends Animation {
 
 		String damageString = "" + damage;
 		this.damageStringLength = Game.font.getWidth(damageString);
-		Color damageStringColor = Color.WHITE;
+		Color damageStringColor = Color.RED;
 		damageStringWithColor = new StringWithColor(damageString, damageStringColor);
 
 		this.speed = speed;
@@ -104,16 +104,11 @@ public class AnimationDamageText extends Animation {
 
 	@Override
 	public void draw1() {
-		if (originY < targetGameObject.squareGameObjectIsOn.yInGrid) {
-			draw();
-		}
 	}
 
 	@Override
 	public void draw2() {
-		if (originY >= targetGameObject.squareGameObjectIsOn.yInGrid) {
-			draw();
-		}
+		draw();
 	}
 
 	public void draw() {
