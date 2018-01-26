@@ -858,7 +858,7 @@ public class Level {
 
 			for (Faction faction : factions) {
 				for (Actor actor : faction.actors) {
-					if (actor.path != null) {
+					if (actor.path != null && actor.path.complete) {
 						for (Square square : actor.path.squares) {
 							square.highlight = true;
 						}

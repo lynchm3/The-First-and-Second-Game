@@ -37,7 +37,6 @@ import com.marklynch.level.constructs.enchantment.EnhancementFireDamage;
 import com.marklynch.level.constructs.inventory.Inventory;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
-import com.marklynch.objects.Mirror;
 import com.marklynch.objects.Sign;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.Wall;
@@ -420,7 +419,11 @@ public class Editor {
 
 		new Templates();
 
-		Mirror mirror = Templates.MIRROR.makeCopy(Game.level.squares[2][4], null);
+		Templates.MIRROR.makeCopy(Game.level.squares[0][4], null);
+		Templates.MIRROR.makeCopy(Game.level.squares[1][4], null);
+		Templates.MIRROR.makeCopy(Game.level.squares[2][4], null);
+		Templates.MIRROR.makeCopy(Game.level.squares[3][4], null);
+		Templates.MIRROR.makeCopy(Game.level.squares[4][4], null);
 
 		// Add player
 		// West Security

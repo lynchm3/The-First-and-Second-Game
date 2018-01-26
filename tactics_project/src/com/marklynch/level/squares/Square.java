@@ -646,15 +646,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 				Color color = getPixel(gameObject.imageTexture, (int) (UserInputLevel.mouseXTransformed - x),
 						(int) (UserInputLevel.mouseYTransformed - y));
 
-				System.out.println("Color = " + color);
-				if (color != null) {
-					System.out.println("Color.a = " + color.a);
-					System.out.println("Color.r = " + color.r);
-					System.out.println("Color.g = " + color.g);
-					System.out.println("Color.b = " + color.b);
-
-				}
-
 				if (color != null && color.a > 0)
 					return gameObject;
 			}
@@ -664,10 +655,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public Color getPixel(Texture texture, int x, int y) {
-		System.out.println("x = " + x);
-		System.out.println("y = " + y);
-		System.out.println("texture.pixels = " + texture.pixels);
-		System.out.println("texture.pixels.length = " + texture.pixels.length);
 
 		// in method
 		if (x < 0 || y < 0)
@@ -678,8 +665,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		}
 
 		int index = (x + y * texture.getWidth()) * 4;
-		System.out.println("texture.pixels.length = " + texture.pixels.length);
-		System.out.println("index = " + index);
 
 		int r = texture.pixels[index] & 0xFF;
 		int g = texture.pixels[index + 1] & 0xFF;

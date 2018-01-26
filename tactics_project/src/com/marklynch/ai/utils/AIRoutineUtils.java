@@ -15,10 +15,10 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEatItems;
-import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSkin;
 import com.marklynch.objects.actions.ActionTakeItems;
+import com.marklynch.objects.actions.ActiontTakeAll;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Fight;
 import com.marklynch.objects.weapons.Weapon;
@@ -100,7 +100,7 @@ public class AIRoutineUtils {
 									Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(
 											actor.squareGameObjectIsOn, 0f);
 									AIPath path = Game.level.activeActor.getPathTo(square);
-									if (path != null) {
+									if (path != null && path.complete) {
 										return actor;
 									}
 								}
@@ -135,7 +135,7 @@ public class AIRoutineUtils {
 								Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(
 										gameObject.squareGameObjectIsOn, 1f);
 								AIPath path = Game.level.activeActor.getPathTo(square);
-								if (path != null) {
+								if (path != null && path.complete) {
 									return gameObject;
 
 								}
@@ -176,7 +176,7 @@ public class AIRoutineUtils {
 										ignoreQuestObjects, minimumValue)) {
 									Square square = calculateSquareToMoveToToAttackTarget(actor);
 									AIPath path = Game.level.activeActor.getPathTo(square);
-									if (path != null) {
+									if (path != null && path.complete) {
 										return actor;
 									}
 								}
@@ -211,7 +211,7 @@ public class AIRoutineUtils {
 									mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue)) {
 								Square square = calculateSquareToMoveToToAttackTarget(gameObject);
 								AIPath path = Game.level.activeActor.getPathTo(square);
-								if (path != null) {
+								if (path != null && path.complete) {
 									return gameObject;
 
 								}
@@ -262,7 +262,7 @@ public class AIRoutineUtils {
 		for (Actor actor : attackers) {
 			Square square = calculateSquareToMoveToToAttackTarget(actor);
 			AIPath path = Game.level.activeActor.getPathTo(square);
-			if (path != null && path.travelCost < costToBest) {
+			if (path != null && path.complete && path.travelCost < costToBest) {
 				result = actor;
 				costToBest = path.travelCost;
 			}
@@ -295,7 +295,7 @@ public class AIRoutineUtils {
 				for (Actor actor : faction.actors) {
 					Square square = calculateSquareToMoveToToAttackTarget(actor);
 					AIPath path = Game.level.activeActor.getPathTo(square);
-					if (path != null && path.travelCost < costToBest) {
+					if (path != null && path.complete && path.travelCost < costToBest) {
 						result = actor;
 						costToBest = path.travelCost;
 					}
@@ -516,7 +516,7 @@ public class AIRoutineUtils {
 					Square square = calculateSquareToMoveToToAttackTarget(actor);
 					AIPath path = Game.level.activeActor.getPathTo(square);
 
-					if (path != null) {
+					if (path != null && path.complete) {
 						int turns = path.travelCost / Game.level.activeActor.travelDistance;
 						if (turns < turnsToBest) {
 							bestTargetsBasedOnTurnsToReach.clear();
@@ -684,7 +684,7 @@ public class AIRoutineUtils {
 
 	public static Square getSquareToMoveAlongPath(AIPath path) {
 
-		if (path == null)
+		if (path == null || path.complete == false)
 			return null;
 
 		if (path.squares.size() == 0)
@@ -756,7 +756,8 @@ public class AIRoutineUtils {
 		} else {
 			for (int i = pathToSquare.squares.size() - 1; i >= 0; i--) {
 				AIPath subPath = Game.level.activeActor.getPathTo(pathToSquare.squares.get(i));
-				if (subPath != null && subPath.travelCost <= Game.level.activeActor.travelDistance) {
+				if (subPath != null && subPath.complete
+						&& subPath.travelCost <= Game.level.activeActor.travelDistance) {
 					squareToMoveTo = pathToSquare.squares.get(i);
 					Game.level.activeActor.path = pathToSquare;
 					break;

@@ -62,7 +62,7 @@ public class Mirror extends GameObject {
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
-			if (squareToMirrorX > 0 && squareToMirrorX < Game.level.squares.length
+			if (squareToMirrorX >= 0 && squareToMirrorX < Game.level.squares.length && squareToMirrorY >= 0
 					&& squareToMirrorY < Game.level.squares[0].length) {
 				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 
@@ -74,7 +74,8 @@ public class Mirror extends GameObject {
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
-			if (squareToMirrorY < Game.level.squares[0].length) {
+			if (squareToMirrorX >= 0 && squareToMirrorX < Game.level.squares.length && squareToMirrorY >= 0
+					&& squareToMirrorY < Game.level.squares[0].length) {
 				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 				drawSquare(squareToMirror, offsetX, 0);
 			}
@@ -84,7 +85,7 @@ public class Mirror extends GameObject {
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
-			if (squareToMirrorX > 0 && squareToMirrorX < Game.level.squares.length
+			if (squareToMirrorX >= 0 && squareToMirrorX < Game.level.squares.length && squareToMirrorY >= 0
 					&& squareToMirrorY < Game.level.squares[0].length) {
 				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 
@@ -101,7 +102,8 @@ public class Mirror extends GameObject {
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
-			if (squareToMirrorY < Game.level.squares[0].length) {
+			if (squareToMirrorX >= 0 && squareToMirrorX < Game.level.squares.length && squareToMirrorY >= 0
+					&& squareToMirrorY < Game.level.squares[0].length) {
 				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 				for (int i = 0; i < squareToMirror.inventory.size(); i++) {
 					GameObject gameObject = squareToMirror.inventory.gameObjects.get(i);
@@ -116,7 +118,7 @@ public class Mirror extends GameObject {
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 2;
-			if (squareToMirrorX > 0 && squareToMirrorX < Game.level.squares.length
+			if (squareToMirrorX >= 0 && squareToMirrorX < Game.level.squares.length && squareToMirrorY >= 0
 					&& squareToMirrorY < Game.level.squares[0].length) {
 				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 
@@ -133,7 +135,8 @@ public class Mirror extends GameObject {
 		for (int offsetX = -1; offsetX < 2; offsetX++) {
 			squareToMirrorX = squareGameObjectIsOn.xInGrid + offsetX;
 			squareToMirrorY = squareGameObjectIsOn.yInGrid + 1;
-			if (squareToMirrorY < Game.level.squares[0].length) {
+			if (squareToMirrorX >= 0 && squareToMirrorX < Game.level.squares.length && squareToMirrorY >= 0
+					&& squareToMirrorY < Game.level.squares[0].length) {
 				Square squareToMirror = Game.level.squares[squareToMirrorX][squareToMirrorY];
 
 				for (int i = 0; i < squareToMirror.inventory.size(); i++) {
@@ -194,8 +197,8 @@ public class Mirror extends GameObject {
 
 		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * offsetX
 				+ Game.SQUARE_WIDTH * actor.drawOffsetRatioX;
-		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * actor.drawOffsetRatioY
-				- Game.SQUARE_HEIGHT * offsetY;
+		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
+				+ Game.SQUARE_HEIGHT * actor.drawOffsetRatioY - Game.SQUARE_HEIGHT * offsetY;
 		if (actor.primaryAnimation != null) {
 			actorPositionXInPixels += actor.primaryAnimation.offsetX;
 			actorPositionYInPixels -= actor.primaryAnimation.offsetY;

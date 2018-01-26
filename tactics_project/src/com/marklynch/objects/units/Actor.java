@@ -460,8 +460,10 @@ public class Actor extends GameObject {
 				return;
 		}
 
-		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
-		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
+		int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+				+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+		int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+				+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
 		if (primaryAnimation != null) {
 			actorPositionXInPixels += primaryAnimation.offsetX;
 			actorPositionYInPixels += primaryAnimation.offsetY;
@@ -579,7 +581,8 @@ public class Actor extends GameObject {
 				int expressionBubbleHeight = 64;
 
 				float expressionBubblePositionXInPixels = this.squareGameObjectIsOn.xInGridPixels;
-				float expressionBubblePositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetRatioY - 64;
+				float expressionBubblePositionYInPixels = this.squareGameObjectIsOn.yInGridPixels + drawOffsetRatioY
+						- 64;
 				if (primaryAnimation != null) {
 					expressionBubblePositionXInPixels += primaryAnimation.offsetX;
 					expressionBubblePositionYInPixels += primaryAnimation.offsetY;

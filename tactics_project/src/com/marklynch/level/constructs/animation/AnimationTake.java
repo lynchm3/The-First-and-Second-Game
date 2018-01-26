@@ -3,7 +3,6 @@ package com.marklynch.level.constructs.animation;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextureUtils;
 
@@ -22,7 +21,6 @@ public class AnimationTake extends Animation {
 	// distanceCoveredY;
 	public GameObject gameObject;
 	public GameObject taker;
-	public Square originSquare;
 
 	public float speed = 1f;
 
@@ -36,13 +34,25 @@ public class AnimationTake extends Animation {
 	// Color trailColor2 = new Color(0.5f, 0f, 0f, 0f);
 	Color trailColor2 = Color.PINK;
 
-	public AnimationTake(GameObject gameObject, GameObject taker, Square originSquare, float speed) {
-		super();
+	public AnimationTake(GameObject gameObject, GameObject taker, float originX, float originY, float speed) {
 
-		this.originSquare = originSquare;
 		this.taker = taker;
 		this.gameObject = gameObject;
 		this.speed = speed;
+
+		this.x = this.originX = originX;
+		this.x = this.originX = originY;
+
+		blockAI = false;
+
+	}
+
+	public AnimationTake(GameObject gameObject, GameObject taker, float speed) {
+
+		this.taker = taker;
+		this.gameObject = gameObject;
+		this.speed = speed;
+
 		if (gameObject.squareGameObjectIsOn != null) {
 			// on the ground
 			this.x = originX = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
@@ -56,8 +66,6 @@ public class AnimationTake extends Animation {
 			this.y = originY = (int) (((GameObject) gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn.yInGridPixels
 					+ (Game.SQUARE_HEIGHT - gameObject.height) / 2);
 		}
-
-		blockAI = false;
 
 	}
 
@@ -105,9 +113,11 @@ public class AnimationTake extends Animation {
 		}
 
 		if (reachedDestination) {
-			trailLines.remove(0);
-			if (trailLines.size() == 0)
-				completed = true;
+			if (trailLines.size() > 0) {
+				trailLines.remove(0);
+				if (trailLines.size() == 0)
+					completed = true;
+			}
 		} else {
 			trailLines.add(new Line(oldX + gameObject.halfWidth, oldY + gameObject.halfHeight, x + gameObject.halfWidth,
 					y + gameObject.halfHeight));
@@ -120,14 +130,14 @@ public class AnimationTake extends Animation {
 
 	@Override
 	public void draw1() {
-		if (originSquare.yInGrid < taker.squareGameObjectIsOn.yInGrid) {
+		if (originY < taker.squareGameObjectIsOn.yInGrid) {
 			draw();
 		}
 	}
 
 	@Override
 	public void draw2() {
-		if (originSquare.yInGrid >= taker.squareGameObjectIsOn.yInGrid) {
+		if (originY >= taker.squareGameObjectIsOn.yInGrid) {
 			draw();
 		}
 	}
