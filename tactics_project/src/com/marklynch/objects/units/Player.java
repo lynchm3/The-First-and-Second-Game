@@ -187,23 +187,34 @@ public class Player extends Human {
 
 			while (orbs > 0) {
 				if (orbs >= 1) {
-					Orb orb = Templates.SMALL_ORB.makeCopy(square, null, 1);
+					Orb orb = Templates.SMALL_ORB.makeCopy(null, null, 1);
+
+					float x = square.xInGridPixels + Game.SQUARE_WIDTH * orb.drawOffsetRatioX;
+					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
+
 					Game.level.player.secondaryAnimations.add(
-							new AnimationTake(orb, Game.level.player, (float) (Math.random() * 0.25f + 0.25f)));
+							new AnimationTake(orb, Game.level.player, x, y, (float) (Math.random() * 0.25f + 0.75f)));
+
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
 					orbs -= 1;
 				}
 				if (orbs >= 5) {
-					Orb orb = Templates.MEDIUM_ORB.makeCopy(square, null, 5);
+					Orb orb = Templates.MEDIUM_ORB.makeCopy(null, null, 5);
+
+					float x = square.xInGridPixels + Game.SQUARE_WIDTH * orb.drawOffsetRatioX;
+					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
 					Game.level.player.secondaryAnimations.add(
-							new AnimationTake(orb, Game.level.player, (float) (Math.random() * 0.25f + 0.25f)));
+							new AnimationTake(orb, Game.level.player, x, y, (float) (Math.random() * 0.25f + 0.75f)));
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
 					orbs -= 5;
 				}
 				if (orbs >= 10) {
-					Orb orb = Templates.LARGE_ORB.makeCopy(square, null, 10);
+					Orb orb = Templates.LARGE_ORB.makeCopy(null, null, 10);
+
+					float x = square.xInGridPixels + Game.SQUARE_WIDTH * orb.drawOffsetRatioX;
+					float y = square.yInGridPixels + Game.SQUARE_HEIGHT * orb.drawOffsetRatioY;
 					Game.level.player.secondaryAnimations.add(
-							new AnimationTake(orb, Game.level.player, (float) (Math.random() * 0.25f + 0.25f)));
+							new AnimationTake(orb, Game.level.player, x, y, (float) (Math.random() * 0.25f + 0.75f)));
 					Game.level.inanimateObjectsOnGroundToRemove.add(orb);
 					orbs -= 10;
 				}

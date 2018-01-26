@@ -41,7 +41,7 @@ public class AnimationTake extends Animation {
 		this.speed = speed;
 
 		this.x = this.originX = originX;
-		this.x = this.originX = originY;
+		this.y = this.originY = originY;
 
 		blockAI = false;
 

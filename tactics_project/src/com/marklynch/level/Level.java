@@ -1886,8 +1886,10 @@ public class Level {
 		inanimateObjectsToAdd.clear();
 
 		for (GameObject gameObject : inanimateObjectsOnGroundToRemove) {
-			inanimateObjectsOnGround.remove(gameObject);
-			gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
+			if ((inanimateObjectsOnGround).contains(gameObject))
+				inanimateObjectsOnGround.remove(gameObject);
+			if (gameObject.squareGameObjectIsOn != null)
+				gameObject.squareGameObjectIsOn.inventory.remove(gameObject);
 		}
 		inanimateObjectsOnGroundToRemove.clear();
 
