@@ -68,8 +68,9 @@ public class ActionAttack extends Action {
 					if (Game.level.shouldLog(target, performer))
 						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
 								target, " for " + damage + " damage" }));
-
 				}
+
+				target.doDamageAnimation((int) damage);
 			}
 
 			if (weapon != null && weapon instanceof ContainerForLiquids) {

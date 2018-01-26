@@ -13,6 +13,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.animation.Animation;
+import com.marklynch.level.constructs.animation.AnimationDamageText;
 import com.marklynch.level.constructs.animation.AnimationWait;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.effect.Effect;
@@ -1767,5 +1768,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		return false;
+	}
+
+	public void doDamageAnimation(int damage) {
+
+		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
+		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
+
+		this.secondaryAnimations.add(new AnimationDamageText(damage, this, x + 32, y, 0.1f, -32, -128));
 	}
 }
