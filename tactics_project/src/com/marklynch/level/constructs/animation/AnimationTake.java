@@ -15,12 +15,14 @@ public class AnimationTake extends Animation {
 	public float originY = 0;
 	public float targetX = 0;
 	public float targetY = 0;
+	public float targetOffsetX = 0;
+	public float targetOffsetY = 0;
 	public double speedX = 0.1d;
 	public double speedY = 0.1d;
 	// float distanceToCoverX, distanceToCoverY, distanceCoveredX,
 	// distanceCoveredY;
 	public GameObject gameObject;
-	public GameObject taker;
+	public GameObject targetGameObject;
 
 	public float speed = 1f;
 
@@ -34,22 +36,27 @@ public class AnimationTake extends Animation {
 	// Color trailColor2 = new Color(0.5f, 0f, 0f, 0f);
 	Color trailColor2 = Color.PINK;
 
-	public AnimationTake(GameObject gameObject, GameObject taker, float originX, float originY, float speed) {
+	public AnimationTake(GameObject gameObject, GameObject taker, float originX, float originY, float speed,
+			float targetOffsetX, float targetOffsetY) {
 
-		this.taker = taker;
+		this.targetGameObject = taker;
 		this.gameObject = gameObject;
 		this.speed = speed;
 
 		this.x = this.originX = originX;
 		this.y = this.originY = originY;
 
+		this.targetOffsetX = targetOffsetX;
+		this.targetOffsetY = targetOffsetY;
+
 		blockAI = false;
 
 	}
 
-	public AnimationTake(GameObject gameObject, GameObject taker, float speed) {
+	public AnimationTake(GameObject gameObject, GameObject taker, float targetOffsetX, float targetOffsetY,
+			float speed) {
 
-		this.taker = taker;
+		this.targetGameObject = taker;
 		this.gameObject = gameObject;
 		this.speed = speed;
 
@@ -67,6 +74,9 @@ public class AnimationTake extends Animation {
 					+ (Game.SQUARE_HEIGHT - gameObject.height) / 2);
 		}
 
+		this.targetOffsetX = targetOffsetX;
+		this.targetOffsetY = targetOffsetY;
+
 	}
 
 	@Override
@@ -78,11 +88,13 @@ public class AnimationTake extends Animation {
 		float oldX = x;
 		float oldY = y;
 
-		targetX = (int) (taker.squareGameObjectIsOn.xInGridPixels + (Game.SQUARE_WIDTH - gameObject.width) / 2);
-		targetY = (int) (taker.squareGameObjectIsOn.yInGridPixels + (Game.SQUARE_HEIGHT - gameObject.height) / 2);
-		if (taker.primaryAnimation != null) {
-			targetX += taker.primaryAnimation.offsetX;
-			targetX += taker.primaryAnimation.offsetY;
+		targetX = (int) (targetGameObject.squareGameObjectIsOn.xInGridPixels
+				+ (Game.SQUARE_WIDTH - gameObject.width) / 2) + targetOffsetX;
+		targetY = (int) (targetGameObject.squareGameObjectIsOn.yInGridPixels
+				+ (Game.SQUARE_HEIGHT - gameObject.height) / 2) + targetOffsetY;
+		if (targetGameObject.primaryAnimation != null) {
+			targetX += targetGameObject.primaryAnimation.offsetX;
+			targetX += targetGameObject.primaryAnimation.offsetY;
 		}
 
 		float distanceToCoverX = this.targetX - this.x;
@@ -130,14 +142,14 @@ public class AnimationTake extends Animation {
 
 	@Override
 	public void draw1() {
-		if (originY < taker.squareGameObjectIsOn.yInGrid) {
+		if (originY < targetGameObject.squareGameObjectIsOn.yInGrid) {
 			draw();
 		}
 	}
 
 	@Override
 	public void draw2() {
-		if (originY >= taker.squareGameObjectIsOn.yInGrid) {
+		if (originY >= targetGameObject.squareGameObjectIsOn.yInGrid) {
 			draw();
 		}
 	}
@@ -162,6 +174,9 @@ public class AnimationTake extends Animation {
 		// LineUtils.drawLine(trailColor1, trailLine.x1, trailLine.y1,
 		// trailLine.x2, trailLine.y2, trailwidth);
 		// }
+
+		// this.targetOffsetX = targetOffsetX;
+		// this.targetOffsetY = targetOffsetY;
 
 		if (!reachedDestination)
 			TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x + gameObject.width, y + gameObject.height,
