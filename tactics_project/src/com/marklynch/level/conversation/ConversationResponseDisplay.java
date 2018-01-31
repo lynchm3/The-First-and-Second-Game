@@ -21,10 +21,10 @@ public class ConversationResponseDisplay {
 	public static Vector<LevelButton> standardButtons = new Vector<LevelButton>();
 	public static LevelButton buttonTrade;
 	public final static String stringTrade = "TRADE [A]";
-	final static float tradeButtonWidth = Game.font.getWidth(stringTrade);
+	final static float tradeButtonWidth = Game.smallFont.getWidth(stringTrade);
 	public static LevelButton buttonLeave;
 	public final static String stringLeave = "LEAVE [ESC}";
-	final static float leaveButtonWidth = Game.font.getWidth(stringLeave);
+	final static float leaveButtonWidth = Game.smallFont.getWidth(stringLeave);
 	// conversationReponseEnd = new ConversationResponse("Leave", null);
 	public Level level;
 	public Square square;
@@ -59,7 +59,7 @@ public class ConversationResponseDisplay {
 
 		totalWidth = 0;
 		for (int i = 0; i < conversationResponses.length; i++) {
-			totalWidth += Game.font.getWidth(conversationResponses[i].text);
+			totalWidth += Game.smallFont.getWidth(conversationResponses[i].text);
 			totalWidth += marginBetweenButtons;
 		}
 		totalWidth -= 30;
@@ -80,7 +80,7 @@ public class ConversationResponseDisplay {
 			// position...
 
 			// BUT... I dont want the buttons to zoom :P
-			float buttonWidth = Game.font.getWidth(conversationResponses[i].text);
+			float buttonWidth = Game.smallFont.getWidth(conversationResponses[i].text);
 
 			final LevelButton responseButton = new LevelButton(positionX + widthSoFar,
 					Conversation.bottomMargin + buttonHeight + 10, buttonWidth, buttonHeight, null, null,

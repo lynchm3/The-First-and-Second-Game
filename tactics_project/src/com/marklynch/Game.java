@@ -3,11 +3,16 @@ package com.marklynch;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.glViewport;
 
+import java.awt.Font;
+import java.io.InputStream;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.util.ResourceLoader;
 
 import com.marklynch.editor.Editor;
 import com.marklynch.editor.UserInputEditor;
@@ -163,7 +168,8 @@ public class Game {
 	public static Texture fontTexture;
 
 	// a simple font to play with
-	public static BitmapFont font;
+	public static BitmapFont smallFont;
+	public static BitmapFont largeFont;
 
 	public static SpriteBatch activeBatch;
 	public static ShaderProgram program;
@@ -275,23 +281,28 @@ public class Game {
 		// gui.applyTheme(theme);
 	}
 
+	public static TrueTypeFont font1;
+	public static TrueTypeFont font2;
+
 	private void initGL(float width, float height) {
 		try {
 			Display.setDisplayMode(new DisplayMode((int) width, (int) height));
 			Display.setResizable(true);
-			Display.setLocation(960, 0);
-			// Display.setLocation(0, 0);
+			Display.setLocation(0, 0);
 			Display.create();
 			Display.setVSyncEnabled(true);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-
-			GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 			System.exit(0);
 		}
-
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glShadeModel(GL11.GL_SMOOTH);// copied for FontExample
 		GL11.glDisable(GL_DEPTH_TEST);
+		GL11.glDisable(GL11.GL_LIGHTING);// copied for FontExample
+
+		GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		GL11.glClearDepth(1);// copied for FontExample
+
 		// enable alpha blending
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -308,6 +319,8 @@ public class Game {
 		try {
 			Game.fontTexture = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
 
+			Game.smallFont = new BitmapFont(Util.getResource("res/ptsans.fnt"), Game.fontTexture);
+
 			// in Photoshop, we included a small white box at the bottom
 			// right
 			// of our font sheet
@@ -316,7 +329,24 @@ public class Game {
 			Game.quadTexture = new TextureRegion(Game.fontTexture, Game.fontTexture.getWidth() - 2,
 					Game.fontTexture.getHeight() - 2, 1, 1);
 
-			Game.font = new BitmapFont(Util.getResource("res/ptsans.fnt"), Game.fontTexture);
+			Texture fontTexture2 = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+			largeFont = new BitmapFont(Util.getResource("res/ptsans.fnt"), fontTexture2);
+
+			// load a default java font
+			Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
+			font1 = new TrueTypeFont(awtFont, false);
+
+			// load font from a .ttf file
+			try {
+				InputStream inputStream = ResourceLoader.getResourceAsStream("res/fonts/myfont.ttf");
+
+				Font awtFont2 = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+				awtFont2 = awtFont2.deriveFont(24f); // set font size
+				font2 = new TrueTypeFont(awtFont2, false);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			ShadowLight.init();
 			resize();

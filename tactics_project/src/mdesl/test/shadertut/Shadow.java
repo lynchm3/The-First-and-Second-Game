@@ -6,21 +6,20 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 
 import java.util.ArrayList;
 
-import mdesl.graphics.Color;
-import mdesl.graphics.SpriteBatch;
-import mdesl.graphics.Texture;
-import mdesl.graphics.glutils.FrameBuffer;
-import mdesl.graphics.glutils.ShaderProgram;
-import mdesl.graphics.text.BitmapFont;
-import mdesl.test.Game;
-import mdesl.test.SimpleGame;
-import mdesl.test.Util;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
+
+import mdesl.graphics.Color;
+import mdesl.graphics.SpriteBatch;
+import mdesl.graphics.Texture;
+import mdesl.graphics.glutils.FrameBuffer;
+import mdesl.graphics.glutils.ShaderProgram;
+import mdesl.test.Game;
+import mdesl.test.SimpleGame;
+import mdesl.test.Util;
 
 /**
  * Per-pixel shadows on GPU:
@@ -50,7 +49,7 @@ public class Shadow extends SimpleGame {
 
 	private final float lightSize = 500;
 	SpriteBatch batch;
-	BitmapFont font;
+	// BitmapFont font;
 	FrameBuffer occludersFBO;
 	FrameBuffer shadowMapFBO;
 	Texture casterSprites;
@@ -95,8 +94,10 @@ public class Shadow extends SimpleGame {
 			Texture shadowMapTex = shadowMapFBO.getTexture();
 			shadowMapTex.setFilter(Texture.LINEAR, Texture.LINEAR);
 			shadowMapTex.setWrap(Texture.REPEAT);
-			Texture fontTexture = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
-			font = new BitmapFont(Util.getResource("res/ptsans.fnt"), fontTexture);
+			// Texture fontTexture = new
+			// Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+			// font = new BitmapFont(Util.getResource("res/ptsans.fnt"),
+			// fontTexture);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(0);

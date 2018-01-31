@@ -111,7 +111,7 @@ public class InventorySquare extends Square {
 				}
 
 				String goldTextString = "" + stack.get(0).value;
-				int goldTextLength = Game.font.getWidth(goldTextString);
+				int goldTextLength = Game.smallFont.getWidth(goldTextString);
 				StringWithColor goldTextStringWithColor = new StringWithColor(goldTextString, goldTextColor);
 
 				// String amtString =
@@ -133,14 +133,14 @@ public class InventorySquare extends Square {
 
 			if (stack.get(0) instanceof Gold) {
 				String amtString = stack.get(0).value + "x";
-				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.font.getWidth(amtString),
+				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.smallFont.getWidth(amtString),
 						yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
 						new Object[] { amtString });
 
 			} else {
 				String amtString = stack.size() + "x";
-				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.font.getWidth(amtString),
+				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.smallFont.getWidth(amtString),
 						yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
 						new Object[] { amtString });

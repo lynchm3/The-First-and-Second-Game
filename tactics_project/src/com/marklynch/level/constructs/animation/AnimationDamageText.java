@@ -35,7 +35,7 @@ public class AnimationDamageText extends Animation {
 		this.targetGameObject = taker;
 
 		String damageString = "" + damage;
-		this.damageStringLength = Game.font.getWidth(damageString);
+		this.damageStringLength = Game.smallFont.getWidth(damageString);
 		Color damageStringColor = Color.RED;
 		damageStringWithColor = new StringWithColor(damageString, damageStringColor);
 

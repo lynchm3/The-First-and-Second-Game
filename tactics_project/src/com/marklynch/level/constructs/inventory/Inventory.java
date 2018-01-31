@@ -97,22 +97,22 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	static LevelButton buttonSortAlphabetically;
 	public final static String stringSortAlphabetically = "A - Z";
-	public final static int lengthSortAlphabetically = Game.font.getWidth(stringSortAlphabetically);
+	public final static int lengthSortAlphabetically = Game.smallFont.getWidth(stringSortAlphabetically);
 	static LevelButton buttonSortByNewest;
 	public final static String stringSortByNewest = "NEW";
-	public final static int lengthSortByNewest = Game.font.getWidth(stringSortByNewest);
+	public final static int lengthSortByNewest = Game.smallFont.getWidth(stringSortByNewest);
 	static LevelButton buttonSortByFavourite;
 	public final static String stringSortByFavourite = "FAV";
-	public final static int lengthSortByFavourite = Game.font.getWidth(stringSortByFavourite);
+	public final static int lengthSortByFavourite = Game.smallFont.getWidth(stringSortByFavourite);
 	static LevelButton buttonSortByValue;
 	public final static String stringSortByValue = "VALUE";
-	public final static int lengthSortByValue = Game.font.getWidth(stringSortByValue);
+	public final static int lengthSortByValue = Game.smallFont.getWidth(stringSortByValue);
 	static LevelButton buttonSortByTotalDamage;
 	public final static String stringSortByTotalDamage = "DMG";
-	public final static int lengthSortByTotalDamage = Game.font.getWidth(stringSortByTotalDamage);
+	public final static int lengthSortByTotalDamage = Game.smallFont.getWidth(stringSortByTotalDamage);
 	static LevelButton buttonSortBySlashDamage;
 	public final static String stringSortBySlashDamage = "SLASH DMG";
-	public final static int lengthSortBySlashDamage = Game.font.getWidth(stringSortBySlashDamage);
+	public final static int lengthSortBySlashDamage = Game.smallFont.getWidth(stringSortBySlashDamage);
 
 	// Filter buttons
 	static LevelButton buttonFilterByAll;
@@ -121,15 +121,15 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	// Empty text
 	public static final String stringEmpty = "Empty";
-	public static final int lengthEmpty = Game.font.getWidth(stringEmpty);
+	public static final int lengthEmpty = Game.smallFont.getWidth(stringEmpty);
 
 	// SHIFT text
 	String stringShiftDrop = "[SHIFT] Drop";
-	int lengthShiftDrop = Game.font.getWidth(stringShiftDrop);
+	int lengthShiftDrop = Game.smallFont.getWidth(stringShiftDrop);
 	String stringShiftPut = "[SHIFT] Put";
-	int lengthShiftPut = Game.font.getWidth(stringShiftPut);
+	int lengthShiftPut = Game.smallFont.getWidth(stringShiftPut);
 	String stringShiftEquip = "[SHIFT] Equip";
-	int lengthShiftEquip = Game.font.getWidth(stringShiftEquip);
+	int lengthShiftEquip = Game.smallFont.getWidth(stringShiftEquip);
 
 	float textShiftX = 0;
 	float textShiftY = 0;
@@ -137,15 +137,15 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
 	// [ENTER] / Search text
 	String stringEnterSearch = "[ENTER] Search";
-	int lengthEnterSearch = Game.font.getWidth(stringEnterSearch);
+	int lengthEnterSearch = Game.smallFont.getWidth(stringEnterSearch);
 
 	// [<-] / Clear search text
 	String stringClearSearch = "[<-] Clear";
-	int lengthClearSearch = Game.font.getWidth(stringClearSearch);
+	int lengthClearSearch = Game.smallFont.getWidth(stringClearSearch);
 
 	// "Search:" tag
 	String stringSearch = "Search:";
-	int lengthSearch = Game.font.getWidth(stringSearch);
+	int lengthSearch = Game.smallFont.getWidth(stringSearch);
 
 	// Color beind inventory squares
 	public final static Color inventoryAreaColor = new Color(1f, 1f, 1f, 0.25f);
@@ -1436,7 +1436,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 		if (this.parent instanceof Actor && !(this.parent instanceof Trader)) {
 			Actor actor = (Actor) this.parent;
 			String goldText = "Gold: " + actor.getCarriedGoldValue();
-			float goldWidth = Game.font.getWidth(goldText);
+			float goldWidth = Game.smallFont.getWidth(goldText);
 			float goldPositionX = squaresX + squaresAreaWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
 					false, null, new Object[] { goldText });
@@ -1447,7 +1447,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 			// && !(otherInventory.parent instanceof Trader)) {
 			Actor actor = (Actor) otherInventory.parent;
 			String goldText = "Gold: " + actor.getCarriedGoldValue();
-			float goldWidth = Game.font.getWidth(goldText);
+			float goldWidth = Game.smallFont.getWidth(goldText);
 			float goldPositionX = otherInventory.squaresX + squaresAreaWidth - goldWidth;
 			TextUtils.printTextWithImages(goldPositionX, Game.windowHeight - bottomBorderHeight, Integer.MAX_VALUE,
 					false, null, new Object[] { goldText });

@@ -18,7 +18,7 @@ public class EditorToast {
 		this.x = 200f;
 		this.y = 50f;
 		this.text = text;
-		this.width = Game.font.getWidth(text);
+		this.width = Game.smallFont.getWidth(text);
 		this.height = 30;
 	}
 
@@ -26,7 +26,7 @@ public class EditorToast {
 		this.x = x;
 		this.y = y;
 		this.text = text;
-		this.width = Game.font.getWidth(text);
+		this.width = Game.smallFont.getWidth(text);
 		this.height = 30;
 	}
 
@@ -34,7 +34,7 @@ public class EditorToast {
 
 		QuadUtils.drawQuad(Color.WHITE, x, y, x + width, y + height);
 		Game.activeBatch.setColor(Color.RED);
-		Game.font.drawText(Game.activeBatch, text, x, y);
+		Game.smallFont.drawText(Game.activeBatch, text, x, y);
 		Game.activeBatch.setColor(1,1,1,1);
 	}
 

@@ -1173,6 +1173,11 @@ public class Level {
 		// Current objective quest
 		journal.drawTrackedStuffInTopRight();
 
+		Game.font2.drawString(0, 0, "TEXT ETXT ETXTT TEXT TEX T", org.newdawn.slick.Color.green);
+
+		Game.font1.drawString(100, 50, "THE LIGHTWEIGHT JAVA GAMES LIBRARY", org.newdawn.slick.Color.yellow);
+		Game.font2.drawString(100, 100, "NICE LOOKING FONTS!", org.newdawn.slick.Color.green);
+
 		// Turn text
 		if (currentFactionMoving != null) {
 			TextUtils.printTextWithImages(Game.windowWidth - 150, 80, Integer.MAX_VALUE, true, null,

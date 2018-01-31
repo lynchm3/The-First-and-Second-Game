@@ -59,9 +59,9 @@ public class ClassSelectionWindow<T> {
 			button.draw();
 		}
 
-		float textWidth = Game.font.getWidth(title);
+		float textWidth = Game.smallFont.getWidth(title);
 		Game.activeBatch.setColor(Color.RED);
-		Game.font.drawText(Game.activeBatch, title, 200, 50);
+		Game.smallFont.drawText(Game.activeBatch, title, 200, 50);
 		Game.activeBatch.setColor(1, 1, 1, 1);
 
 	}

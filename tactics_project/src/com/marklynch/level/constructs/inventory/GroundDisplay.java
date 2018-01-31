@@ -30,7 +30,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 	transient private GroundDisplaySquare groundDisplaySquareMouseIsOver;
 
 	public static final String stringEmpty = "Nothing nearby";
-	public static final int lengthEmpty = Game.font.getWidth(stringEmpty);
+	public static final int lengthEmpty = Game.smallFont.getWidth(stringEmpty);
 
 	public GroundDisplay(int x, int y) {
 		this.squaresX = x;

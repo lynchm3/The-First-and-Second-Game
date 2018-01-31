@@ -76,13 +76,13 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	// Close button
 	static LevelButton buttonLog;
 	static String log = "LOG";
-	static int logLength = Game.font.getWidth(log);
+	static int logLength = Game.smallFont.getWidth(log);
 	static LevelButton buttonMarkers;
 	static String mapMarkers = "MAP MARKERS";
-	static int mapMarkersLength = Game.font.getWidth(mapMarkers);
+	static int mapMarkersLength = Game.smallFont.getWidth(mapMarkers);
 	static LevelButton buttonConversations;
 	static String conversations = "CONVERSATIONS";
-	static int conversationsLength = Game.font.getWidth(conversations);
+	static int conversationsLength = Game.smallFont.getWidth(conversations);
 	static LevelButton buttonClose;
 
 	public static Texture checkBoxChecked;
@@ -477,17 +477,17 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		for (Quest activeQuest : questsToTrack) {
 
 			questLinksTopRight.add(activeQuest.links.get(0));
-			TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(activeQuest.name) - 202,
+			TextUtils.printTextWithImages(Game.windowWidth - Game.smallFont.getWidth(activeQuest.name) - 202,
 					20 + 20 * linesPrinted, Integer.MAX_VALUE, false, activeQuest.links, new Object[] { activeQuest });
 			TextureUtils.drawTexture(x, Game.windowWidth - 180, 20 + 20 * linesPrinted, Game.windowWidth - 160,
 					20 + 20 * linesPrinted + 20);
 			linesPrinted++;
 			for (Objective objective : activeQuest.currentObjectives) {
-				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(objective.text) - 202,
+				TextUtils.printTextWithImages(Game.windowWidth - Game.smallFont.getWidth(objective.text) - 202,
 						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, objective.links, objective);
 
 				if (objective.objectiveDestroyedAndWitnessed) {
-					QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - Game.font.getWidth(objective.text) - 202,
+					QuadUtils.drawQuad(Color.WHITE, Game.windowWidth - Game.smallFont.getWidth(objective.text) - 202,
 							30 + 20 * linesPrinted, Game.windowWidth - 202, 32 + 20 * linesPrinted);
 				}
 
@@ -519,7 +519,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 					Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor(mapMarkers, Color.WHITE) });
 			linesPrinted++;
 			for (MapMarker trackedMapMarker : markersToTrack) {
-				TextUtils.printTextWithImages(Game.windowWidth - Game.font.getWidth(trackedMapMarker.name) - 202,
+				TextUtils.printTextWithImages(Game.windowWidth - Game.smallFont.getWidth(trackedMapMarker.name) - 202,
 						20 + 20 * linesPrinted, Integer.MAX_VALUE, false, trackedMapMarker.links,
 						new Object[] { trackedMapMarker });
 
@@ -653,7 +653,7 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 		if (x2 != Integer.MAX_VALUE) {
 
 			String distanceString = Game.level.player.straightLineDistanceTo(square) + "m";
-			float distanceStringWidth = Game.font.getWidth(distanceString);
+			float distanceStringWidth = Game.smallFont.getWidth(distanceString);
 			// LineUtils.drawLine(Color.WHITE, x1, y1, x2, y2, 5);
 
 			// Get intersection of line and edge of screen

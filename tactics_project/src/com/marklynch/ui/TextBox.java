@@ -59,7 +59,7 @@ public class TextBox {
 			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionY, drawPositionX + width + 4,
 					drawPositionY + height);
 			if (textHighlighted) {
-				QuadUtils.drawQuad(Color.BLUE, drawPositionX, drawPositionY, drawPositionX + Game.font.getWidth(text),
+				QuadUtils.drawQuad(Color.BLUE, drawPositionX, drawPositionY, drawPositionX + Game.smallFont.getWidth(text),
 						drawPositionY + height);
 			}
 		} else {
@@ -82,7 +82,7 @@ public class TextBox {
 		// Caret
 		if (Game.level.activeTextBox == this) { // CRASH WHEN TEXT WAS CLEARED
 												// BUT CARET WAS NOT
-			int caretPosition = Game.font.getWidth(text, 0, caretPositionIndex);
+			int caretPosition = Game.smallFont.getWidth(text, 0, caretPositionIndex);
 			if (caretOn) {
 				QuadUtils.drawQuad(Color.BLACK, drawPositionX + caretPosition, drawPositionY,
 						drawPositionX + caretPosition + 2, drawPositionY + height);
@@ -223,7 +223,7 @@ public class TextBox {
 			int relativeX = (int) (mouseX - drawPositionX);
 			boolean found = false;
 			while (clickIndex < text.length() && !found) {
-				if (relativeX < Game.font.getWidth(text, 0, clickIndex)) {
+				if (relativeX < Game.smallFont.getWidth(text, 0, clickIndex)) {
 					found = true;
 				} else {
 					clickIndex++;
@@ -233,8 +233,8 @@ public class TextBox {
 			if (clickIndex == 0) {
 				this.caretPositionIndex = clickIndex;
 			} else {
-				int distanceToLower = Math.abs(relativeX - Game.font.getWidth(text, 0, clickIndex - 1));
-				int distanceToUpper = Math.abs(relativeX - Game.font.getWidth(text, 0, clickIndex));
+				int distanceToLower = Math.abs(relativeX - Game.smallFont.getWidth(text, 0, clickIndex - 1));
+				int distanceToUpper = Math.abs(relativeX - Game.smallFont.getWidth(text, 0, clickIndex));
 				if (distanceToLower <= distanceToUpper)
 					this.caretPositionIndex = clickIndex - 1;
 				else

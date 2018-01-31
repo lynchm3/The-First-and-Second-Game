@@ -70,7 +70,7 @@ public class TextUtils {
 
 				for (String stringPart : stringParts) {
 
-					float width = Game.font.getWidth(stringPart);
+					float width = Game.smallFont.getWidth(stringPart);
 					if (offsetX + width > maxWidth && offsetX != 0) {
 						offsetY += 20;
 						offsetX = 0;
@@ -92,7 +92,7 @@ public class TextUtils {
 
 				GameObject gameObject = (GameObject) content;
 
-				float textWidth = Game.font.getWidth(gameObject.name);
+				float textWidth = Game.smallFont.getWidth(gameObject.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -106,7 +106,7 @@ public class TextUtils {
 			} else if (content instanceof Faction) {
 				Faction faction = (Faction) content;
 
-				float textWidth = Game.font.getWidth(faction.name);
+				float textWidth = Game.smallFont.getWidth(faction.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -121,7 +121,7 @@ public class TextUtils {
 			} else if (content instanceof Decoration) {
 				Decoration decoration = (Decoration) content;
 
-				float textWidth = Game.font.getWidth(decoration.name);
+				float textWidth = Game.smallFont.getWidth(decoration.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -138,7 +138,7 @@ public class TextUtils {
 				Area area = (Area) content;
 
 				String string = area.name;
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -157,7 +157,7 @@ public class TextUtils {
 			} else if (content instanceof Structure) {
 				Structure structure = (Structure) content;
 
-				float textWidth = Game.font.getWidth(structure.name);
+				float textWidth = Game.smallFont.getWidth(structure.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -175,7 +175,7 @@ public class TextUtils {
 				StructureRoom structureRoom = (StructureRoom) content;
 
 				String string = structureRoom.name + " (" + structureRoom.structure.name + ")";
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -192,7 +192,7 @@ public class TextUtils {
 
 				ScriptEvent scriptEvent = (ScriptEvent) content;
 
-				float textWidth = Game.font.getWidth(scriptEvent.name);
+				float textWidth = Game.smallFont.getWidth(scriptEvent.name);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -203,7 +203,7 @@ public class TextUtils {
 
 				ScriptTrigger scriptTrigger = (ScriptTrigger) content;
 
-				float textWidth = Game.font.getWidth(scriptTrigger.name);
+				float textWidth = Game.smallFont.getWidth(scriptTrigger.name);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -214,7 +214,7 @@ public class TextUtils {
 
 				Class klass = (Class) content;
 
-				float textWidth = Game.font.getWidth(klass.getSimpleName());
+				float textWidth = Game.smallFont.getWidth(klass.getSimpleName());
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -225,7 +225,7 @@ public class TextUtils {
 
 				AIRoutineUtils ai = (AIRoutineUtils) content;
 
-				float textWidth = Game.font.getWidth(ai.name);
+				float textWidth = Game.smallFont.getWidth(ai.name);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -237,7 +237,7 @@ public class TextUtils {
 				Square square = (Square) content;
 				String string = square.name;
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -251,7 +251,7 @@ public class TextUtils {
 				String string = "" + factionRelationship.source + " -> " + factionRelationship.target + " ("
 						+ factionRelationship.relationship + ")";
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -267,7 +267,7 @@ public class TextUtils {
 				}
 				string = "\"" + string + "\"";
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -280,7 +280,7 @@ public class TextUtils {
 				String string = action.actionName;
 				float textureWidth = 20;
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				offsetX += textWidth;
 
 				// Image
@@ -293,7 +293,7 @@ public class TextUtils {
 				Effect effect = (Effect) content;
 				String string = effect.effectName;
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -305,7 +305,7 @@ public class TextUtils {
 				Quest quest = (Quest) content;
 				String string = quest.name;
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -314,7 +314,7 @@ public class TextUtils {
 
 			} else if (content instanceof Objective) {
 				Objective objective = (Objective) content;
-				float totalWidth = Game.font.getWidth(objective.text) + 20;
+				float totalWidth = Game.smallFont.getWidth(objective.text) + 20;
 				if (offsetX + totalWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -350,7 +350,7 @@ public class TextUtils {
 			if (content instanceof MapMarker) {
 				GameObject gameObject = (GameObject) content;
 
-				float textWidth = Game.font.getWidth(gameObject.name);
+				float textWidth = Game.smallFont.getWidth(gameObject.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -359,7 +359,7 @@ public class TextUtils {
 			} else if (content instanceof GameObject) {
 				GameObject gameObject = (GameObject) content;
 
-				float textWidth = Game.font.getWidth(gameObject.name);
+				float textWidth = Game.smallFont.getWidth(gameObject.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -368,7 +368,7 @@ public class TextUtils {
 			} else if (content instanceof Quest) {
 				Quest quest = (Quest) content;
 
-				float width = Game.font.getWidth(quest.name);
+				float width = Game.smallFont.getWidth(quest.name);
 
 				links.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content,
 						"View quest"));
@@ -377,7 +377,7 @@ public class TextUtils {
 
 				Square square = (Square) content;
 
-				float width = Game.font.getWidth(square.name);
+				float width = Game.smallFont.getWidth(square.name);
 
 				links.add(new Link(0, 0, width, 20, null, null, "", true, true, Color.WHITE, Color.WHITE, content,
 						"Go to square"));
@@ -446,7 +446,7 @@ public class TextUtils {
 
 				for (String stringPart : stringParts) {
 
-					float width = Game.font.getWidth(stringPart);
+					float width = Game.smallFont.getWidth(stringPart);
 					if (offsetX + width > maxWidth && offsetX != 0) {
 						if (wrap) {
 							offsetY += 20;
@@ -456,7 +456,12 @@ public class TextUtils {
 						}
 					}
 
-					Game.font.drawText(Game.activeBatch, stringPart, posX + offsetX, posY + offsetY);
+					Game.smallFont.drawText(Game.activeBatch, stringPart, posX + offsetX, posY + offsetY);
+
+					// Game.font1.drawString(posX + offsetX, posY + offsetY,
+					// stringPart, org.newdawn.slick.Color.black);
+					// Game.font2.drawString(posX + offsetX, posY + offsetY,
+					// stringPart, org.newdawn.slick.Color.green);
 
 					offsetX += width;
 
@@ -482,7 +487,7 @@ public class TextUtils {
 
 				GameObject gameObject = (GameObject) content;
 
-				float textWidth = Game.font.getWidth(gameObject.name);
+				float textWidth = Game.smallFont.getWidth(gameObject.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -502,7 +507,7 @@ public class TextUtils {
 				}
 
 				// Text
-				Game.font.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, gameObject.name, posX + offsetX, posY + offsetY);
 
 				offsetX += textWidth;
 
@@ -514,7 +519,7 @@ public class TextUtils {
 			} else if (content instanceof Faction) {
 				Faction faction = (Faction) content;
 
-				float textWidth = Game.font.getWidth(faction.name);
+				float textWidth = Game.smallFont.getWidth(faction.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -530,7 +535,7 @@ public class TextUtils {
 				// Name
 
 				// Game.activeBatch.setColor(faction.color);
-				Game.font.drawText(Game.activeBatch, faction.name, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, faction.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
@@ -542,7 +547,7 @@ public class TextUtils {
 			} else if (content instanceof Decoration) {
 				Decoration decoration = (Decoration) content;
 
-				float textWidth = Game.font.getWidth(decoration.name);
+				float textWidth = Game.smallFont.getWidth(decoration.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -557,7 +562,7 @@ public class TextUtils {
 
 				// Name
 
-				Game.font.drawText(Game.activeBatch, decoration.name, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, decoration.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
@@ -570,7 +575,7 @@ public class TextUtils {
 				Area area = (Area) content;
 
 				String string = area.name;
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -585,7 +590,7 @@ public class TextUtils {
 
 				// Name
 
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
@@ -598,7 +603,7 @@ public class TextUtils {
 			} else if (content instanceof Structure) {
 				Structure structure = (Structure) content;
 
-				float textWidth = Game.font.getWidth(structure.name);
+				float textWidth = Game.smallFont.getWidth(structure.name);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -613,7 +618,7 @@ public class TextUtils {
 
 				// Name
 
-				Game.font.drawText(Game.activeBatch, structure.name, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, structure.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
@@ -627,7 +632,7 @@ public class TextUtils {
 				StructureRoom structureRoom = (StructureRoom) content;
 
 				String string = structureRoom.name + " (" + structureRoom.structure.name + ")";
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				float textureWidth = 20;
 
 				float width = textWidth + textureWidth;
@@ -642,7 +647,7 @@ public class TextUtils {
 
 				// Name
 
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof Color) {
@@ -659,48 +664,48 @@ public class TextUtils {
 
 				ScriptEvent scriptEvent = (ScriptEvent) content;
 
-				float textWidth = Game.font.getWidth(scriptEvent.name);
+				float textWidth = Game.smallFont.getWidth(scriptEvent.name);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
 				}
-				Game.font.drawText(Game.activeBatch, scriptEvent.name, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, scriptEvent.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof ScriptTrigger) {
 
 				ScriptTrigger scriptTrigger = (ScriptTrigger) content;
 
-				float textWidth = Game.font.getWidth(scriptTrigger.name);
+				float textWidth = Game.smallFont.getWidth(scriptTrigger.name);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
 				}
-				Game.font.drawText(Game.activeBatch, scriptTrigger.name, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, scriptTrigger.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof Class) {
 
 				Class klass = (Class) content;
 
-				float textWidth = Game.font.getWidth(klass.getSimpleName());
+				float textWidth = Game.smallFont.getWidth(klass.getSimpleName());
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
 				}
-				Game.font.drawText(Game.activeBatch, klass.getSimpleName(), posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, klass.getSimpleName(), posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof AIRoutineUtils) {
 
 				AIRoutineUtils ai = (AIRoutineUtils) content;
 
-				float textWidth = Game.font.getWidth(ai.name);
+				float textWidth = Game.smallFont.getWidth(ai.name);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
 				}
-				Game.font.drawText(Game.activeBatch, ai.name, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, ai.name, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof Square) {
@@ -708,7 +713,7 @@ public class TextUtils {
 				Square square = (Square) content;
 				String string = square.name;
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -720,7 +725,7 @@ public class TextUtils {
 					linkIndex++;
 				}
 
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof FactionRelationship) {
@@ -729,12 +734,12 @@ public class TextUtils {
 				String string = "" + factionRelationship.source + " -> " + factionRelationship.target + " ("
 						+ factionRelationship.relationship + ")";
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
 				}
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof SpeechPart) {
@@ -746,12 +751,12 @@ public class TextUtils {
 				}
 				string = "\"" + string + "\"";
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
 				}
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof Action) {
@@ -767,12 +772,12 @@ public class TextUtils {
 
 				Game.activeBatch.setColor(color);
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
 				}
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 				// Image
@@ -799,13 +804,13 @@ public class TextUtils {
 				Effect effect = (Effect) content;
 				String string = effect.effectName;
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
 				}
 
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof Quest) {
@@ -813,7 +818,7 @@ public class TextUtils {
 				Quest quest = (Quest) content;
 				String string = quest.name;
 
-				float textWidth = Game.font.getWidth(string);
+				float textWidth = Game.smallFont.getWidth(string);
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
 					offsetX = 0;
@@ -824,12 +829,12 @@ public class TextUtils {
 					links.get(linkIndex).updatePosition(posX + offsetX, posY + offsetY);
 					linkIndex++;
 				}
-				Game.font.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, string, posX + offsetX, posY + offsetY);
 				offsetX += textWidth;
 
 			} else if (content instanceof Objective) {
 				Objective objective = (Objective) content;
-				float textWidth = Game.font.getWidth(objective.text);
+				float textWidth = Game.smallFont.getWidth(objective.text);
 				float textureWidth = 20;
 				if (offsetX + textWidth > maxWidth && offsetX != 0) {
 					offsetY += 20;
@@ -843,7 +848,7 @@ public class TextUtils {
 				}
 
 				// Text
-				Game.font.drawText(Game.activeBatch, objective.text, posX + offsetX, posY + offsetY);
+				Game.smallFont.drawText(Game.activeBatch, objective.text, posX + offsetX, posY + offsetY);
 
 				offsetX += textWidth;
 
