@@ -62,7 +62,7 @@ import com.marklynch.ui.button.SettingsWindowButton;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 import mdesl.graphics.Texture;
 
 public class Editor {

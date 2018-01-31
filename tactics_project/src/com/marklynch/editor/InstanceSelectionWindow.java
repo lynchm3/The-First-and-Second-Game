@@ -11,7 +11,7 @@ import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SelectionWindowButton;
 import com.marklynch.utils.QuadUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class InstanceSelectionWindow<T> {
 

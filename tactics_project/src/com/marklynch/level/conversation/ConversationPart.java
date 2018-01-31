@@ -2,7 +2,7 @@ package com.marklynch.level.conversation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-//import mdesl.graphics.Color;
+//import com.marklynch.utils.Color;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.area.Area;
@@ -14,7 +14,7 @@ import com.marklynch.ui.button.Link;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class ConversationPart {
 	public ArrayList<Link> links;

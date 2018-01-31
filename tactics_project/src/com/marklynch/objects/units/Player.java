@@ -33,7 +33,7 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 import mdesl.graphics.Texture;
 
 public class Player extends Human {

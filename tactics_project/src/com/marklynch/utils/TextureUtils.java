@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.GL13.glActiveTexture;
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 import mdesl.graphics.Texture;
 
 public class TextureUtils {

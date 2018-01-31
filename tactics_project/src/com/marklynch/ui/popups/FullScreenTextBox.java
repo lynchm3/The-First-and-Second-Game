@@ -9,7 +9,7 @@ import com.marklynch.ui.TextBoxHolder;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class FullScreenTextBox implements TextBoxHolder {
 

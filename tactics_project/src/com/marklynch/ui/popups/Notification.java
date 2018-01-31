@@ -10,7 +10,7 @@ import com.marklynch.ui.button.Link;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class Notification {
 

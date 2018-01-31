@@ -12,7 +12,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class WantedPoster extends Sign implements CrimeListener {
 

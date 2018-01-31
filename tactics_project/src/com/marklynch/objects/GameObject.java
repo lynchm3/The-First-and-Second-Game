@@ -89,7 +89,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 import mdesl.graphics.Texture;
 
 public class GameObject implements ActionableInWorld, ActionableInInventory, Comparable, InventoryParent {

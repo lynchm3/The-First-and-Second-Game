@@ -2,7 +2,7 @@ package com.marklynch.utils;
 
 import com.marklynch.Game;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class LineUtils {
 

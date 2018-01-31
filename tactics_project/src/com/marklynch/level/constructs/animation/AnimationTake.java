@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class AnimationTake extends Animation {
 

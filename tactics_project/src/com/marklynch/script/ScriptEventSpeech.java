@@ -13,7 +13,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class ScriptEventSpeech extends ScriptEvent {
 

@@ -54,7 +54,7 @@ import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 import mdesl.graphics.Texture;
 
 public class Actor extends GameObject {

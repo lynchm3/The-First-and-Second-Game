@@ -6,7 +6,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Human;
 import com.marklynch.utils.QuadUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class Conversation {
 

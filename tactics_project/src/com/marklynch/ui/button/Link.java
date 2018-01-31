@@ -10,7 +10,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.MapMarker;
 import com.marklynch.objects.actions.ActionPin;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class Link extends LevelButton {
 

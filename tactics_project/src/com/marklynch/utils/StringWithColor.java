@@ -1,6 +1,6 @@
 package com.marklynch.utils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class StringWithColor {
 

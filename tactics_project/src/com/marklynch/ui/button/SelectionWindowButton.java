@@ -4,7 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class SelectionWindowButton extends Button {
 

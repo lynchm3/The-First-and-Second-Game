@@ -5,7 +5,7 @@ import com.marklynch.editor.Editor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.SettingsWindowButton;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class ColorSettingsWindow extends SettingsWindow {
 

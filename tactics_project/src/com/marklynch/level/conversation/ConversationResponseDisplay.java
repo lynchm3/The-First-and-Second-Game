@@ -13,7 +13,7 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class ConversationResponseDisplay {
 

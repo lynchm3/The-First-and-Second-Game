@@ -5,7 +5,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class AnimationDamageText extends Animation {
 

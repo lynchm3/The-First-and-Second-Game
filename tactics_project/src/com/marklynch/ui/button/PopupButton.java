@@ -4,7 +4,7 @@ import com.marklynch.editor.popup.Popup;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class PopupButton extends Button {
 

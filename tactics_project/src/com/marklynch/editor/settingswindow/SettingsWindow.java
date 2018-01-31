@@ -2,7 +2,7 @@ package com.marklynch.editor.settingswindow;
 
 import java.util.Vector;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor;

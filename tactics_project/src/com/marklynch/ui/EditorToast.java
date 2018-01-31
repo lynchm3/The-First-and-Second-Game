@@ -3,7 +3,7 @@ package com.marklynch.ui;
 import com.marklynch.Game;
 import com.marklynch.utils.QuadUtils;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 
 public class EditorToast {
 

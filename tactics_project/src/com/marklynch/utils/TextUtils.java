@@ -24,7 +24,7 @@ import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.ui.button.Link;
 import com.marklynch.ui.button.Tooltip;
 
-import mdesl.graphics.Color;
+import com.marklynch.utils.Color;
 import mdesl.graphics.Texture;
 
 public class TextUtils {
