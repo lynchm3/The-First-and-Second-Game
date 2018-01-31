@@ -126,7 +126,7 @@ public class AnimationDrop extends Animation {
 	// float alpha = 1.0f;
 	//
 	// float radians = (float) Math.toRadians(angle);
-	// Game.activeBatch.flush();
+	// Game.flush();
 	// Matrix4f view = Game.activeBatch.getViewMatrix();
 	// view.translate(new Vector2f(x, y));
 	// view.rotate(radians, new Vector3f(0f, 0f, 1f));
@@ -136,7 +136,7 @@ public class AnimationDrop extends Animation {
 	// projectileObject.width,
 	// 0 + projectileObject.height);
 	//
-	// Game.activeBatch.flush();
+	// Game.flush();
 	// view.rotate(-radians, new Vector3f(0f, 0f, 1f));
 	// view.translate(new Vector2f(-x, -y));
 	// Game.activeBatch.updateUniforms();

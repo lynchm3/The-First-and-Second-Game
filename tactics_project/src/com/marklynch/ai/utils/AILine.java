@@ -43,7 +43,7 @@ public class AILine {
 		float degrees = (float) Math.toDegrees(radians);
 		float distance = (float) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
-		Game.activeBatch.flush();
+		Game.flush();
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.translate(new Vector2f(x1, y1));
 		view.rotate(radians, new Vector3f(0f, 0f, 1f));
@@ -64,7 +64,7 @@ public class AILine {
 			TextureUtils.drawTexture(Game.level.gameCursor.blueArrow, 0.5f, 0, 0 - 16, 0 + distance, 0 + 16);
 		}
 
-		Game.activeBatch.flush();
+		Game.flush();
 		view.rotate(-radians, new Vector3f(0f, 0f, 1f));
 		view.translate(new Vector2f(-x1, -y1));
 		Game.activeBatch.updateUniforms();

@@ -871,7 +871,7 @@ public class Level {
 			}
 		}
 
-		Game.activeBatch.flush();
+		Game.flush();
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
 		Game.activeBatch.updateUniforms();
@@ -883,7 +883,7 @@ public class Level {
 		for (PinWindow window : this.pinWindows) {
 			window.drawLine();
 		}
-		Game.activeBatch.flush();
+		Game.flush();
 		// if (levelMode == LevelMode.LEVEL_MODE_CAST) {
 		// for (int i = 0; i < 10; i++) {
 		// if (selectedPower.hasRange(i)) {
@@ -908,7 +908,7 @@ public class Level {
 
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
-			Game.activeBatch.flush();
+			Game.flush();
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
@@ -916,14 +916,14 @@ public class Level {
 				}
 			}
 
-			Game.activeBatch.flush();
+			Game.flush();
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.draw2();
 				}
 			}
-			Game.activeBatch.flush();
+			Game.flush();
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
@@ -931,7 +931,7 @@ public class Level {
 				}
 			}
 
-			Game.activeBatch.flush();
+			Game.flush();
 		}
 
 		Journal.drawQuestsMarkersForVisibleOnScreenObjectives();
@@ -956,14 +956,14 @@ public class Level {
 
 		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
 
-			Game.activeBatch.flush();
+			Game.flush();
 			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
 				// is it better to bind once and draw all the same ones?
 				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
 					gameObject.drawUI(); // HERE
 				}
 			}
-			Game.activeBatch.flush();
+			Game.flush();
 		}
 
 		// Draw actions on sqrs.
@@ -1093,7 +1093,7 @@ public class Level {
 			((PopupMenuActionButton) popupMenuActions.get(0).highlightedButton).drawSound();
 		}
 
-		Game.activeBatch.flush();
+		Game.flush();
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.setIdentity();
 		Game.activeBatch.updateUniforms();
@@ -1118,7 +1118,7 @@ public class Level {
 
 		}
 
-		// Game.activeBatch.flush();
+		// Game.flush();
 		// Matrix4f view = Game.activeBatch.getViewMatrix();
 		// view.setIdentity();
 		// Game.activeBatch.updateUniforms();
@@ -1128,7 +1128,7 @@ public class Level {
 		Journal.drawQuestMarkersForOffScreenObjectives();
 		Journal.drawOfScreenMapMarkers();
 
-		Game.activeBatch.flush();
+		Game.flush();
 
 		// MAP ICONS
 		if (Game.zoomLevelIndex >= Game.MAP_MODE_ZOOM_LEVEL_INDEX) {
@@ -1151,7 +1151,7 @@ public class Level {
 				}
 			}
 		}
-		Game.activeBatch.flush();
+		Game.flush();
 
 		// if (Game.buttonHoveringOver == null && Game.squareMouseIsOver !=
 		// null)

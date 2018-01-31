@@ -88,7 +88,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 						false, Color.BLACK, false);
 			}
 
-			Game.activeBatch.flush();
+			Game.flush();
 		}
 	}
 

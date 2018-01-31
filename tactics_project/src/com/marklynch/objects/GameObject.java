@@ -418,7 +418,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			if (!(this instanceof Actor)) {
 
-				Game.activeBatch.flush();
+				Game.flush();
 			}
 		}
 	}

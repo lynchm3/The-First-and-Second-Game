@@ -428,4 +428,8 @@ public class Game {
 	public void render() {
 		ShadowLight.draw();
 	}
+
+	public static void flush() {
+		activeBatch.flush();
+	}
 }

@@ -539,7 +539,7 @@ public class Actor extends GameObject {
 		}
 
 		// if (primaryAnimation != null) {
-		// Game.activeBatch.flush();
+		// Game.flush();
 		// Game.activeBatch.getViewMatrix()
 		// .translate(new Vector2f(primaryAnimation.offsetX,
 		// primaryAnimation.offsetY));
@@ -666,7 +666,7 @@ public class Actor extends GameObject {
 		}
 		//
 		// if (primaryAnimation != null) {
-		// Game.activeBatch.flush();
+		// Game.flush();
 		// Game.activeBatch.getViewMatrix()
 		// .translate(new Vector2f(-primaryAnimation.offsetX,
 		// -primaryAnimation.offsetY));

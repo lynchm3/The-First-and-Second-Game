@@ -83,7 +83,7 @@ public class AnimationGive extends Animation {
 	public void draw2() {
 		float alpha = 1.0f;
 
-		Game.activeBatch.flush();
+		Game.flush();
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.translate(new Vector2f(x, y));
 		Game.activeBatch.updateUniforms();
@@ -91,7 +91,7 @@ public class AnimationGive extends Animation {
 		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, 0, 0, 0 + projectileObject.width,
 				0 + projectileObject.height);
 
-		Game.activeBatch.flush();
+		Game.flush();
 		view.translate(new Vector2f(-x, -y));
 		Game.activeBatch.updateUniforms();
 	}

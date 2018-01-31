@@ -209,7 +209,7 @@ public class ShadowLight {
 		// TextureUtils.drawTexture(Game.level.textureUndiscovered, 1f, 0,
 		// 1920,
 		// 0, 1080);
-		// Game.activeBatch.flush();
+		// Game.flush();
 
 		view.setIdentity();
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
@@ -221,7 +221,7 @@ public class ShadowLight {
 			Game.level.drawBackground();
 		else
 			Game.level.drawBackground();
-		Game.activeBatch.flush();
+		Game.flush();
 		// lightsFBO.end();
 		// GL11.glDisable(GL_DEPTH_TEST);
 
@@ -233,7 +233,7 @@ public class ShadowLight {
 		// for (int i = 0; i < lights.size(); i++) {
 		// renderLight(lights.get(i), null);
 		// }
-		// Game.activeBatch.flush();
+		// Game.flush();
 
 		// lightsFBO.begin();
 
@@ -256,7 +256,7 @@ public class ShadowLight {
 				Game.level.drawForeground();
 			else
 				Game.level.drawForeground();
-			Game.activeBatch.flush();
+			Game.flush();
 		}
 		// GL11.glDisable(GL_DEPTH_TEST);
 
@@ -274,7 +274,7 @@ public class ShadowLight {
 		}
 		Game.activeBatch.setColor(1, 1, 1, 1);
 		Game.level.drawUI();
-		Game.activeBatch.flush();
+		Game.flush();
 
 		if (Game.editorMode) {
 			// Draw editor overlay
@@ -290,7 +290,7 @@ public class ShadowLight {
 			view.translate(new Vector2f(Game.getDragXWithOffset(), Game.getDragYWithOffset()));
 			Game.activeBatch.updateUniforms();
 			Game.editor.drawOverlay();
-			Game.activeBatch.flush();
+			Game.flush();
 
 			// Draw Editor UI
 			try {
@@ -302,7 +302,7 @@ public class ShadowLight {
 			Game.activeBatch.updateUniforms();
 			Game.activeBatch.setColor(1, 1, 1, 1);
 			Game.editor.drawUI();
-			Game.activeBatch.flush();
+			Game.flush();
 		}
 
 		/// START SKY
@@ -320,7 +320,7 @@ public class ShadowLight {
 			// Game.getDragX() + ",
 			// Game.getDragY() = " + Game.getDragY());
 			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("bird.png"), 3000, 1000, 3000 + 128, 1000 + 128);
-			Game.activeBatch.flush();
+			Game.flush();
 		}
 		////////// END SKY
 
@@ -472,7 +472,7 @@ public class ShadowLight {
 	// GL11.glEnable(GL_DEPTH_TEST);
 	// Game.activeBatch.draw(lightsFBO, 0, 0);
 	// GL11.glDisable(GL_DEPTH_TEST);
-	// Game.activeBatch.flush();
+	// Game.flush();
 	// blur2FBO.end();
 	//
 	// // VERTICAL BLUR()
@@ -483,7 +483,7 @@ public class ShadowLight {
 	// blurShader.setUniformf("dir", 0f, 1f);
 	// blurShader.setUniformf("radius", 2);
 	// Game.activeBatch.draw(blur2FBO, 0, 0);
-	// Game.activeBatch.flush();
+	// Game.flush();
 	// blur3FBO.end();
 	// }
 }

@@ -153,7 +153,7 @@ public class Vein extends Wall {
 				TextureUtils.drawTexture(textureVerticalWall, alpha, drawX1, drawY1, drawX2, drawY2);
 
 			}
-			Game.activeBatch.flush();
+			Game.flush();
 
 			// if (connectedTop)
 			// TextureUtils.drawTexture(textureTop, alpha, topDrawX1, topDrawX2,

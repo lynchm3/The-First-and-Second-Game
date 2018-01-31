@@ -268,7 +268,7 @@ public class Wall extends GameObject {
 			// topLeftDrawX2, topLeftDrawY1,
 			// topLeftDrawY2);
 
-			Game.activeBatch.flush();
+			Game.flush();
 		}
 	}
 

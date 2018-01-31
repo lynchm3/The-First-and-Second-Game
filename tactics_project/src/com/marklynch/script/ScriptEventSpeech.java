@@ -115,7 +115,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 				// reset the matrix to identity, i.e. "no camera transform"
 
-				Game.activeBatch.flush();
+				Game.flush();
 				view.setIdentity();
 
 				view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
@@ -135,7 +135,7 @@ public class ScriptEventSpeech extends ScriptEvent {
 
 				// reset the matrix to identity, i.e. "no camera transform"
 
-				Game.activeBatch.flush();
+				Game.flush();
 				view.setIdentity();
 				Game.activeBatch.updateUniforms();
 			} else {
