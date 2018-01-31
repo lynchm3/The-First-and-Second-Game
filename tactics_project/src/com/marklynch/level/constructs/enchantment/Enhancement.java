@@ -4,7 +4,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.effect.Effect;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public abstract class Enhancement {
 

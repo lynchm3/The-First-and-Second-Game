@@ -26,9 +26,9 @@ import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.TextBox;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.popups.FullScreenTextBox;
+import com.marklynch.utils.Texture;
 
 import mdesl.graphics.SpriteBatch;
-import mdesl.graphics.Texture;
 import mdesl.graphics.TextureRegion;
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.graphics.text.BitmapFont;

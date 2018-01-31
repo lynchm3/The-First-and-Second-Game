@@ -16,12 +16,12 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import com.marklynch.Game;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
+import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-import com.marklynch.utils.Color;
 import mdesl.graphics.SpriteBatch;
-import mdesl.graphics.Texture;
 import mdesl.graphics.glutils.FrameBuffer;
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.graphics.text.BitmapFont;
@@ -119,7 +119,7 @@ public class ShadowLight {
 
 			lightsFBO = new FrameBuffer(Display.getWidth(), Display.getHeight(), Texture.LINEAR);
 
-			Texture shadowMapTex = shadowMapFBO.getTexture();
+			mdesl.graphics.Texture shadowMapTex = shadowMapFBO.getTexture();
 			shadowMapTex.setFilter(Texture.LINEAR, Texture.LINEAR);
 			shadowMapTex.setWrap(Texture.REPEAT);
 		} catch (Exception e) {
@@ -201,7 +201,7 @@ public class ShadowLight {
 		// lightShader.setUniformf("LightPos", lightPos);
 		lightShader.setUniformf("Resolution", Display.getWidth(), Display.getHeight());
 
-		Game.activeBatch.setColor(1,1,1,1);
+		Game.activeBatch.setColor(1, 1, 1, 1);
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 
 		// Draw level BG
@@ -245,7 +245,7 @@ public class ShadowLight {
 			Game.activeBatch.getViewMatrix().setIdentity();
 			Game.activeBatch.updateUniforms();
 			Game.activeBatch.setShader(lightShader);
-			Game.activeBatch.setColor(1,1,1,1);
+			Game.activeBatch.setColor(1, 1, 1, 1);
 			view.setIdentity();
 			view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
 			view.scale(new Vector3f(Game.zoom, Game.zoom, 1f));
@@ -272,7 +272,7 @@ public class ShadowLight {
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
-		Game.activeBatch.setColor(1,1,1,1);
+		Game.activeBatch.setColor(1, 1, 1, 1);
 		Game.level.drawUI();
 		Game.activeBatch.flush();
 
@@ -300,7 +300,7 @@ public class ShadowLight {
 			}
 			view.setIdentity();
 			Game.activeBatch.updateUniforms();
-			Game.activeBatch.setColor(1,1,1,1);
+			Game.activeBatch.setColor(1, 1, 1, 1);
 			Game.editor.drawUI();
 			Game.activeBatch.flush();
 		}
@@ -422,7 +422,7 @@ public class ShadowLight {
 			frameBuffer.end();
 		}
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		Game.activeBatch.setColor(1,1,1,1);
+		Game.activeBatch.setColor(1, 1, 1, 1);
 		// batch.end();
 	}
 

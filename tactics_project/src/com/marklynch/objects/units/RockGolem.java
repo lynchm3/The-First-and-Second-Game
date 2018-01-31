@@ -15,7 +15,7 @@ import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class RockGolem extends Monster {
 

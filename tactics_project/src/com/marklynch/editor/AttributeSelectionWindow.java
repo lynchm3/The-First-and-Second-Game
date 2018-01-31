@@ -19,7 +19,7 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 
 import com.marklynch.utils.Color;
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class AttributeSelectionWindow<T> {
 

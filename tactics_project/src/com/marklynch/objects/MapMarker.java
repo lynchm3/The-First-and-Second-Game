@@ -12,7 +12,7 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class MapMarker extends GameObject {
 

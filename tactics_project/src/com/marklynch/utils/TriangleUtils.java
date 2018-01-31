@@ -2,7 +2,7 @@ package com.marklynch.utils;
 
 import com.marklynch.Game;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class TriangleUtils {
 

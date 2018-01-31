@@ -7,7 +7,7 @@ import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public abstract class Action {
 

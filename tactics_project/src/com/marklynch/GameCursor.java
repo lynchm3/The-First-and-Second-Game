@@ -2,7 +2,7 @@ package com.marklynch;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class GameCursor {
 

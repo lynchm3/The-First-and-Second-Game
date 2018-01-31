@@ -13,7 +13,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
 import com.marklynch.objects.units.Actor;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class Faction {
 	public final static String[] editableAttributes = { "name", "color" };

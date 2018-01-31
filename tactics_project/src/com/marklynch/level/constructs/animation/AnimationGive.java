@@ -9,7 +9,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class AnimationGive extends Animation {
 

@@ -3,7 +3,7 @@ package com.marklynch.objects;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class Furnace extends Openable {
 

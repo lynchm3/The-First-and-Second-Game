@@ -11,7 +11,7 @@ import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 import mdesl.test.Util;
 
 public class ResourceUtils {
@@ -38,8 +38,8 @@ public class ResourceUtils {
 		if (texture != null) {
 		} else {
 			try {
-				texture = new mdesl.graphics.Texture(Util.getResource("res/images/" + path),
-						mdesl.graphics.Texture.LINEAR);
+				texture = new com.marklynch.utils.Texture(Util.getResource("res/images/" + path),
+						com.marklynch.utils.Texture.LINEAR);
 				globalImages.put(path, texture);
 			} catch (Exception e) {
 

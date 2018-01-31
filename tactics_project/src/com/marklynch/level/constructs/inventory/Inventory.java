@@ -39,7 +39,7 @@ import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
 import com.marklynch.utils.Color;
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 

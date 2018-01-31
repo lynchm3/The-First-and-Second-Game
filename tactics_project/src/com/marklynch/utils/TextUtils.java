@@ -25,7 +25,7 @@ import com.marklynch.ui.button.Link;
 import com.marklynch.ui.button.Tooltip;
 
 import com.marklynch.utils.Color;
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class TextUtils {
 

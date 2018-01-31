@@ -74,7 +74,7 @@ import com.marklynch.utils.TextUtils;
 
 import com.marklynch.utils.Color;
 import mdesl.graphics.SpriteBatch;
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class Level {
 

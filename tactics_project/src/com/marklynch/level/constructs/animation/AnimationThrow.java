@@ -13,7 +13,7 @@ import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class AnimationThrow extends Animation {
 

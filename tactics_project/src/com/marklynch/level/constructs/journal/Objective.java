@@ -7,7 +7,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.TextUtils;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class Objective {// implements DestructionListener {
 

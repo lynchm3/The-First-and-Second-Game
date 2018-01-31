@@ -4,7 +4,7 @@ import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public class Discoverable extends GameObject {
 

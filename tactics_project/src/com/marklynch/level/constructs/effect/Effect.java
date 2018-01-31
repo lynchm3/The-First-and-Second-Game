@@ -6,7 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.TextureUtils;
 
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 public abstract class Effect {
 

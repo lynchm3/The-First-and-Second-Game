@@ -1,7 +1,7 @@
 package com.marklynch.level;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
-import mdesl.graphics.Texture;
+import com.marklynch.utils.Texture;
 
 import com.marklynch.utils.TextureUtils;
 
