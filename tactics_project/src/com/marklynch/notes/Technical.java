@@ -11,9 +11,6 @@ public class Technical {
 	 * GLSL GOTCHS (for Android...)
 	 * https://github.com/mattdesl/lwjgl-basics/wiki/GLSL-Gotchas
 	 * 
-	 * mattdesl does other tutorials aswell... have a look on his github and in
-	 * the packages mdesl.test and mdesl.test.shadertut
-	 * 
 	 * 
 	 * 
 	 * Experiment with unknowns early on to save headaches

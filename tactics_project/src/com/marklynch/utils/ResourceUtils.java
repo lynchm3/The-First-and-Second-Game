@@ -11,7 +11,6 @@ import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
-import com.marklynch.utils.Texture;
 import mdesl.test.Util;
 
 public class ResourceUtils {
@@ -44,7 +43,8 @@ public class ResourceUtils {
 			} catch (Exception e) {
 
 				// e.printStackTrace();
-				// System.err.println("path = " + path);
+				// System.err.println("Failed to load texture @ path = " +
+				// path);
 			}
 		}
 

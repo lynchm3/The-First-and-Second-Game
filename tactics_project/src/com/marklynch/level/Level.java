@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Stack;
 import java.util.Vector;
 
-import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Matrix4f;
 
@@ -69,11 +68,9 @@ import com.marklynch.ui.popups.PopupMenuActionButton;
 import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
 import com.marklynch.ui.quickbar.QuickBar;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-
-import com.marklynch.utils.Color;
-import mdesl.graphics.SpriteBatch;
 import com.marklynch.utils.Texture;
 
 public class Level {
@@ -1138,11 +1135,11 @@ public class Level {
 
 			view.setIdentity();
 			Game.activeBatch.updateUniforms();
-			try {
-				Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
-			} catch (LWJGLException e) {
-				e.printStackTrace();
-			}
+			// try {
+			// Game.activeBatch.setShader(SpriteBatch.getDefaultShader());
+			// } catch (LWJGLException e) {
+			// e.printStackTrace();
+			// }
 			Game.activeBatch.setColor(1, 1, 1, 1);
 
 			if (drawLocationIcons) {
