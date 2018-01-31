@@ -9,7 +9,6 @@
 	<classpathentry kind="lib" path="libs/natives-linux.jar"/>
 	<classpathentry kind="lib" path="libs/natives-mac.jar"/>
 	<classpathentry kind="lib" path="libs/natives-windows.jar"/>
-	<classpathentry kind="lib" path="libs/slick-util.jar" sourcepath="C:/dev/slick-util/src"/>
 	<classpathentry kind="lib" path="libs/AppleJavaExtensions.jar"/>
 	<classpathentry kind="lib" path="libs/asm-debug-all.jar"/>
 	<classpathentry kind="lib" path="libs/jinput.jar"/>
