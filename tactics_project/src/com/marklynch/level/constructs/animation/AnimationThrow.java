@@ -11,9 +11,8 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Searchable;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class AnimationThrow extends Animation {
 
@@ -122,8 +121,8 @@ public class AnimationThrow extends Animation {
 	public void draw2() {
 		float alpha = 1.0f;
 
-		float radians = (float) Math.toRadians(angle);
 		Game.flush();
+		float radians = (float) Math.toRadians(angle);
 		Matrix4f view = Game.activeBatch.getViewMatrix();
 		view.translate(new Vector2f(x, y));
 		view.rotate(radians, new Vector3f(0f, 0f, 1f));
@@ -143,5 +142,9 @@ public class AnimationThrow extends Animation {
 	public void draw1() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void drawStaticUI() {
 	}
 }

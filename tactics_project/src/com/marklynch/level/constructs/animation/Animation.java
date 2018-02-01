@@ -15,4 +15,6 @@ public abstract class Animation {
 
 	public abstract void draw2();
 
+	public abstract void drawStaticUI();
+
 }

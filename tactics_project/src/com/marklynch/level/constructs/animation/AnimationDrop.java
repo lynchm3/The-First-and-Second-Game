@@ -81,6 +81,10 @@ public class AnimationDrop extends Animation {
 
 	}
 
+	@Override
+	public void drawStaticUI() {
+	}
+
 	// @Override
 	// public void update(double delta) {
 	//

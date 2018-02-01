@@ -1098,6 +1098,20 @@ public class Level {
 		view.setIdentity();
 		Game.activeBatch.updateUniforms();
 
+		// drawStaticUI
+
+		for (int j = gridY1Bounds; j < gridY2Bounds; j++) {
+
+			Game.flush();
+			for (int i = gridX1Bounds; i < gridX2Bounds; i++) {
+				// is it better to bind once and draw all the same ones?
+				for (GameObject gameObject : squares[i][j].inventory.getGameObjects()) {
+					gameObject.drawStaticUI(); // HERE
+				}
+			}
+			Game.flush();
+		}
+
 		player.drawStaticUI();
 
 		for (GameObject mapMarker : inanimateObjectsOnGround.get(MapMarker.class)) {

@@ -52,4 +52,8 @@ public class AnimationMove extends Animation {
 
 	}
 
+	@Override
+	public void drawStaticUI() {
+	}
+
 }

@@ -28,13 +28,12 @@ import com.marklynch.objects.actions.ActionDiscover;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.popups.Notification;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Player extends Human {
 
@@ -239,7 +238,11 @@ public class Player extends Human {
 		}
 	}
 
+	@Override
 	public void drawStaticUI() {
+
+		super.drawStaticUI();// dmg numbers probably
+
 		// XP Bar!
 		float percentage = xpThisLevel / xpPerLevel;
 		float xpBarWidth = Game.windowWidth * percentage;

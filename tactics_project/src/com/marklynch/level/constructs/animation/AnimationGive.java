@@ -1,15 +1,11 @@
 package com.marklynch.level.constructs.animation;
 
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector2f;
-
 import com.marklynch.Game;
 import com.marklynch.objects.Arrow;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.templates.Templates;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class AnimationGive extends Animation {
 
@@ -83,22 +79,26 @@ public class AnimationGive extends Animation {
 	public void draw2() {
 		float alpha = 1.0f;
 
-		Game.flush();
-		Matrix4f view = Game.activeBatch.getViewMatrix();
-		view.translate(new Vector2f(x, y));
-		Game.activeBatch.updateUniforms();
+		// Game.flush();
+		// Matrix4f view = Game.activeBatch.getViewMatrix();
+		// view.translate(new Vector2f(x, y));
+		// Game.activeBatch.updateUniforms();
 
-		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, 0, 0, 0 + projectileObject.width,
-				0 + projectileObject.height);
+		TextureUtils.drawTexture(projectileObject.imageTexture, alpha, x, y, x + projectileObject.width,
+				y + projectileObject.height);
 
-		Game.flush();
-		view.translate(new Vector2f(-x, -y));
-		Game.activeBatch.updateUniforms();
+		// Game.flush();
+		// view.translate(new Vector2f(-x, -y));
+		// Game.activeBatch.updateUniforms();
 	}
 
 	@Override
 	public void draw1() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void drawStaticUI() {
 	}
 }

@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Color;
+import com.marklynch.utils.TextureUtils;
 
 public class AnimationTake extends Animation {
 
@@ -152,6 +151,10 @@ public class AnimationTake extends Animation {
 		if (originY >= targetGameObject.squareGameObjectIsOn.yInGrid) {
 			draw();
 		}
+	}
+
+	@Override
+	public void drawStaticUI() {
 	}
 
 	public void draw() {

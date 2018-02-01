@@ -2,10 +2,9 @@ package com.marklynch.level.constructs.animation;
 
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-
-import com.marklynch.utils.Color;
 
 public class AnimationDamageText extends Animation {
 
@@ -108,37 +107,25 @@ public class AnimationDamageText extends Animation {
 
 	@Override
 	public void draw2() {
+	}
+
+	@Override
+	public void drawStaticUI() {
 		draw();
 	}
 
 	public void draw() {
 
-		// float trailwidth = 2;
-		//
-		// if (gameObject.templateId == Templates.MEDIUM_ORB.templateId)
-		// trailwidth = 4;
-		// if (gameObject.templateId == Templates.MEDIUM_ORB.templateId)
-		// trailwidth = 8;
-		//
-		// for (int i = 2; i < trailLines.size(); i++) {
-		//
-		// LineUtils.drawLine(trailColor2, trailLines.get(i).x1,
-		// trailLines.get(i).y1, trailLines.get(i).x2,
-		// trailLines.get(i).y2, trailwidth * 3);
-		// }
-		//
-		// for (Line trailLine : trailLines) {
-		// LineUtils.drawLine(trailColor1, trailLine.x1, trailLine.y1,
-		// trailLine.x2, trailLine.y2, trailwidth);
-		// }
-
-		// this.targetOffsetX = targetOffsetX;
-		// this.targetOffsetY = targetOffsetY;
+		float drawPositionX = (Game.halfWindowWidth)
+				+ (Game.zoom * (x + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
+		float drawPositionY = (Game.halfWindowHeight)
+				+ (Game.zoom * (y + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
+		// QuadUtils.drawQuad(Color.WHITE, drawPositionX - 10, drawPositionY -
+		// 10, drawPositionX + 10, drawPositionY + 10);
 
 		if (!reachedDestination)
-			TextUtils.printTextWithImages(x, y, Integer.MAX_VALUE, false, null, damageStringWithColor);
-		// TextureUtils.drawTexture(gameObject.imageTexture, 1f, x, y, x +
-		// gameObject.width, y + gameObject.height, false);
+			TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null,
+					damageStringWithColor);
 
 	}
 

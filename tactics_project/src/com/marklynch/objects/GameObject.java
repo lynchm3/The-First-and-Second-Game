@@ -85,12 +85,11 @@ import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ArrayUtils;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class GameObject implements ActionableInWorld, ActionableInInventory, Comparable, InventoryParent {
 
@@ -460,6 +459,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			TextureUtils.drawTexture(this.powTexture, powPositionXInPixels, powPositionYInPixels,
 					powPositionXInPixels + Game.SQUARE_WIDTH, powPositionYInPixels + Game.SQUARE_HEIGHT);
 		}
+	}
+
+	public void drawStaticUI() {
+
+		if (primaryAnimation != null && primaryAnimation.completed == false)
+			primaryAnimation.drawStaticUI();
+
+		for (Animation secondaryAnimation : secondaryAnimations)
+			secondaryAnimation.drawStaticUI();
 	}
 
 	public boolean checkIfDestroyed(Object attacker, Action action) {
@@ -1779,6 +1787,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
-		this.secondaryAnimations.add(new AnimationDamageText(damage, this, x + 32, y, 0.1f, -32, -128));
+		this.secondaryAnimations.add(new AnimationDamageText(damage, this, x + 32, y, 0.1f, -32, -256));
 	}
 }

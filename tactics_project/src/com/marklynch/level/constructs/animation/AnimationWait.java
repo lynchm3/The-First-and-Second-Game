@@ -32,4 +32,8 @@ public class AnimationWait extends Animation {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void drawStaticUI() {
+	}
 }
