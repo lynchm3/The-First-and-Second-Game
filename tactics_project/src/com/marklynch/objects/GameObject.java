@@ -1787,6 +1787,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
-		this.secondaryAnimations.add(new AnimationDamageText(damage, this, x + 32, y, 0.1f, -32, -256));
+		this.secondaryAnimations.add(new AnimationDamageText(damage, this, x + 32, y - 64, 0.1f));
 	}
 }

@@ -1,5 +1,9 @@
 package com.marklynch.level.constructs.animation;
 
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 import com.marklynch.utils.Color;
@@ -13,10 +17,10 @@ public class AnimationDamageText extends Animation {
 	public float originY = 0;
 	public float targetX = 0;
 	public float targetY = 0;
-	public float targetOffsetX = 0;
-	public float targetOffsetY = 0;
-	public double speedX = 0.1d;
-	public double speedY = 0.1d;
+	// public float targetOffsetX = 0;
+	// public float targetOffsetY = 0;
+	// public double speedX = 0.1d;
+	// public double speedY = 0.1d;
 	// float distanceToCoverX, distanceToCoverY, distanceCoveredX,
 	// distanceCoveredY;
 	public int damageStringLength;
@@ -28,8 +32,7 @@ public class AnimationDamageText extends Animation {
 
 	boolean reachedDestination = false;
 
-	public AnimationDamageText(int damage, GameObject taker, float originX, float originY, float speed,
-			float targetOffsetX, float targetOffsetY) {
+	public AnimationDamageText(int damage, GameObject taker, float originX, float originY, float speed) {
 
 		this.targetGameObject = taker;
 
@@ -43,8 +46,10 @@ public class AnimationDamageText extends Animation {
 		this.x = this.originX = originX;
 		this.y = this.originY = originY;
 
-		this.targetOffsetX = targetOffsetX;
-		this.targetOffsetY = targetOffsetY;
+		this.durationToReach = 1000f;
+
+		// this.targetOffsetX = targetOffsetX;
+		// this.targetOffsetY = targetOffsetY;
 
 		blockAI = false;
 
@@ -56,48 +61,63 @@ public class AnimationDamageText extends Animation {
 		if (completed)
 			return;
 
-		float oldX = x;
-		float oldY = y;
-
-		targetX = (int) (targetGameObject.squareGameObjectIsOn.xInGridPixels
-				+ (Game.SQUARE_WIDTH - damageStringLength) / 2) + targetOffsetX;
-		targetY = (int) (targetGameObject.squareGameObjectIsOn.yInGridPixels + (Game.SQUARE_HEIGHT - 12) / 2)
-				+ targetOffsetY;
-		if (targetGameObject.primaryAnimation != null) {
-			targetX += targetGameObject.primaryAnimation.offsetX;
-			targetX += targetGameObject.primaryAnimation.offsetY;
-		}
-
-		float distanceToCoverX = this.targetX - this.x;
-		float distanceToCoverY = this.targetY - this.y;
-		float totalDistanceToCover = Math.abs(distanceToCoverX) + Math.abs(distanceToCoverY);
-
-		this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
-		this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
-
-		double distanceX = speedX * delta;
-		double distanceY = speedY * delta;
-
-		// angle += rotationSpeed * delta;
-
-		// distanceCoveredX += distanceX;
-		// distanceCoveredY += distanceY;
-
-		// if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
-		// && Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
-		// completed = true;
-		// } else {
-
-		if (totalDistanceToCover < 32) {
-			reachedDestination = true;
-		} else {
-			x += distanceX;
-			y += distanceY;
-		}
-
-		if (reachedDestination) {
+		durationSoFar += delta;
+		double progress = durationSoFar / durationToReach;
+		if (progress >= 1) {
 			completed = true;
+			offsetX = 0;
+			offsetY = 0;
+		} else {
+			// x += delta * 0.01f;
+			y -= delta * 0.1f;
+			// offsetX = (int) (startOffsetX * (1 - progress));
+			// offsetY = (int) (startOffsetY * (1 - progress));
 		}
+
+		// float oldX = x;
+		// float oldY = y;
+		//
+		// targetX = (int) (targetGameObject.squareGameObjectIsOn.xInGridPixels
+		// + (Game.SQUARE_WIDTH - damageStringLength) / 2) + targetOffsetX;
+		// targetY = (int) (targetGameObject.squareGameObjectIsOn.yInGridPixels
+		// + (Game.SQUARE_HEIGHT - 12) / 2)
+		// + targetOffsetY;
+		// if (targetGameObject.primaryAnimation != null) {
+		// targetX += targetGameObject.primaryAnimation.offsetX;
+		// targetX += targetGameObject.primaryAnimation.offsetY;
+		// }
+		//
+		// float distanceToCoverX = this.targetX - this.x;
+		// float distanceToCoverY = this.targetY - this.y;
+		// float totalDistanceToCover = Math.abs(distanceToCoverX) +
+		// Math.abs(distanceToCoverY);
+		//
+		// this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
+		// this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
+		//
+		// double distanceX = speedX * delta;
+		// double distanceY = speedY * delta;
+		//
+		// // angle += rotationSpeed * delta;
+		//
+		// // distanceCoveredX += distanceX;
+		// // distanceCoveredY += distanceY;
+		//
+		// // if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
+		// // && Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
+		// // completed = true;
+		// // } else {
+		//
+		// if (totalDistanceToCover < 32) {
+		// reachedDestination = true;
+		// } else {
+		// x += distanceX;
+		// y += distanceY;
+		// }
+		//
+		// if (reachedDestination) {
+		// completed = true;
+		// }
 
 	}
 
@@ -115,17 +135,37 @@ public class AnimationDamageText extends Animation {
 	}
 
 	public void draw() {
+		if (reachedDestination)
+			return;
 
-		float drawPositionX = (Game.halfWindowWidth)
-				+ (Game.zoom * (x + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
-		float drawPositionY = (Game.halfWindowHeight)
-				+ (Game.zoom * (y + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
+		if (completed)
+			return;
+
+		float size = 2f;
+		float inverseSize = 0.5f;
+
+		Game.activeBatch.flush();
+		Matrix4f view = Game.activeBatch.getViewMatrix();
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(size, size, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
+		Game.activeBatch.updateUniforms();
+
+		float drawPositionX = (Game.halfWindowWidth) + (Game.zoom * inverseSize
+				* (x + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
+		float drawPositionY = (Game.halfWindowHeight) + (Game.zoom * inverseSize
+				* (y + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
 		// QuadUtils.drawQuad(Color.WHITE, drawPositionX - 10, drawPositionY -
 		// 10, drawPositionX + 10, drawPositionY + 10);
 
-		if (!reachedDestination)
-			TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null,
-					damageStringWithColor);
+		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null,
+				damageStringWithColor);
+
+		Game.activeBatch.flush();
+		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
+		view.scale(new Vector3f(inverseSize, inverseSize, 1f));
+		view.translate(new Vector2f(-Game.windowWidth / 2, -Game.windowHeight / 2));
+		Game.activeBatch.updateUniforms();
 
 	}
 
