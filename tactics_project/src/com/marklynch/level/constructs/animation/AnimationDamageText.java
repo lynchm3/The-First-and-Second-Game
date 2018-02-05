@@ -65,60 +65,9 @@ public class AnimationDamageText extends Animation {
 		double progress = durationSoFar / durationToReach;
 		if (progress >= 1) {
 			completed = true;
-			offsetX = 0;
-			offsetY = 0;
 		} else {
-			// x += delta * 0.01f;
 			y -= delta * 0.1f;
-			// offsetX = (int) (startOffsetX * (1 - progress));
-			// offsetY = (int) (startOffsetY * (1 - progress));
 		}
-
-		// float oldX = x;
-		// float oldY = y;
-		//
-		// targetX = (int) (targetGameObject.squareGameObjectIsOn.xInGridPixels
-		// + (Game.SQUARE_WIDTH - damageStringLength) / 2) + targetOffsetX;
-		// targetY = (int) (targetGameObject.squareGameObjectIsOn.yInGridPixels
-		// + (Game.SQUARE_HEIGHT - 12) / 2)
-		// + targetOffsetY;
-		// if (targetGameObject.primaryAnimation != null) {
-		// targetX += targetGameObject.primaryAnimation.offsetX;
-		// targetX += targetGameObject.primaryAnimation.offsetY;
-		// }
-		//
-		// float distanceToCoverX = this.targetX - this.x;
-		// float distanceToCoverY = this.targetY - this.y;
-		// float totalDistanceToCover = Math.abs(distanceToCoverX) +
-		// Math.abs(distanceToCoverY);
-		//
-		// this.speedX = (distanceToCoverX / totalDistanceToCover) * speed;
-		// this.speedY = (distanceToCoverY / totalDistanceToCover) * speed;
-		//
-		// double distanceX = speedX * delta;
-		// double distanceY = speedY * delta;
-		//
-		// // angle += rotationSpeed * delta;
-		//
-		// // distanceCoveredX += distanceX;
-		// // distanceCoveredY += distanceY;
-		//
-		// // if (Math.abs(distanceCoveredX) >= Math.abs(distanceToCoverX)
-		// // && Math.abs(distanceCoveredY) >= Math.abs(distanceToCoverY)) {
-		// // completed = true;
-		// // } else {
-		//
-		// if (totalDistanceToCover < 32) {
-		// reachedDestination = true;
-		// } else {
-		// x += distanceX;
-		// y += distanceY;
-		// }
-		//
-		// if (reachedDestination) {
-		// completed = true;
-		// }
-
 	}
 
 	@Override
@@ -155,8 +104,6 @@ public class AnimationDamageText extends Animation {
 				* (x + Game.HALF_SQUARE_WIDTH - Game.halfWindowWidth + Game.getDragXWithOffset()));
 		float drawPositionY = (Game.halfWindowHeight) + (Game.zoom * inverseSize
 				* (y + Game.HALF_SQUARE_HEIGHT - Game.halfWindowHeight + Game.getDragYWithOffset()));
-		// QuadUtils.drawQuad(Color.WHITE, drawPositionX - 10, drawPositionY -
-		// 10, drawPositionX + 10, drawPositionY + 10);
 
 		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null,
 				damageStringWithColor);

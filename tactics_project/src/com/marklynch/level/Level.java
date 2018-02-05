@@ -51,6 +51,7 @@ import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionStopHiding;
 import com.marklynch.objects.actions.ActionUsePower;
+import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Player;
 import com.marklynch.objects.weapons.Weapon;
@@ -1394,9 +1395,6 @@ public class Level {
 
 		if (Player.playerTargetActor != null) {
 			Player.playerTargetSquare = Player.playerTargetActor.squareGameObjectIsOn;
-			if (player.straightLineDistanceTo(Player.playerTargetSquare) <= 1) {
-				pausePlayer();
-			}
 		}
 
 		if (currentFactionMoving != factions.player && (!Game.level.player.animationsBlockingAI())) {
@@ -1405,9 +1403,28 @@ public class Level {
 				&& Game.level.player.playerTargetAction.recheck()) {
 			Game.level.player.playerTargetAction.perform();
 			pausePlayer();
-		}
-		// Auto move player
-		else if (Game.level.player.primaryAnimation.completed && Player.playerTargetSquare != null) {
+		} else if (player.playerTargetActor != null && player.straightLineDistanceTo(Player.playerTargetSquare) <= 2) {
+
+			// Wait if following someone ur beside
+			Action action = new ActionWait(Game.level.player, player.squareGameObjectIsOn);
+
+			if (!action.legal && !player.squareGameObjectIsOn.restricted && Player.playerFirstMove == false) {
+				Object[] objects = new Object[] { "Stopped before illegal action!" };
+				notifications.add(new Notification(objects, Notification.NotificationType.MISC, null));
+				Game.level.logOnScreen(new ActivityLog(new Object[] { objects }));
+				pausePlayer();
+			} else {
+				action.perform();
+				Player.playerFirstMove = false;
+				if (player.squareGameObjectIsOn == Player.playerTargetSquare) {
+					// pausePlayer();
+				} else {
+					highlightPlayButton();
+				}
+			}
+
+		} else if (Game.level.player.primaryAnimation.completed && Player.playerTargetSquare != null) {
+			// Auto move player
 
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
 			if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null

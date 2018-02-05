@@ -434,10 +434,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (primaryAnimation != null && primaryAnimation.completed == false)
 			primaryAnimation.draw2();
 		for (Animation secondaryAnimation : secondaryAnimations) {
-
-			if (this instanceof Tree) {
-				System.out.println("TREE DMG  TEXT... ");
-			}
 			secondaryAnimation.draw2();
 		}
 	}
