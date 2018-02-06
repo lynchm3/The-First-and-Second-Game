@@ -7,9 +7,6 @@ import static org.lwjgl.opengl.GL13.glActiveTexture;
 import com.marklynch.Game;
 import com.marklynch.objects.GameObject;
 
-import com.marklynch.utils.Color;
-import com.marklynch.utils.Texture;
-
 public class TextureUtils {
 
 	public static boolean skipNormals = false;
@@ -97,8 +94,21 @@ public class TextureUtils {
 			}
 		}
 
-		color.a = alpha;
-		Game.activeBatch.setColor(color);
+		// Colors everything white
+		// System.out.println("color.red(); = " + color.red());
+		// Game.activeBatch.setColor(255, 255, 255, alpha);
+
+		// all green
+		// Game.activeBatch.setColor(0, 255, 0, alpha);
+
+		// Colors everything black
+		// Game.activeBatch.setColor(0, 0, 0, 1); // black
+
+		// Gives all their proper color
+		// Game.activeBatch.setColor(Color.WHITE);
+
+		// Gives proper color... i'm so fucking confused
+		Game.activeBatch.setColor(1, 1, 1, alpha);// gives all proper color
 
 		glActiveTexture(GL_TEXTURE1);
 		if (!skipNormals) {
@@ -110,22 +120,8 @@ public class TextureUtils {
 		glActiveTexture(GL_TEXTURE0);
 		texture.bind();
 
-		// Game.activeBatch.drawRegion(texture, textureX1, textureY1, textureX2,
-		// textureY2, vertexX1, vertexY1,
-		// vertexX2 - vertexX1, vertexY2 - vertexY1);
-
 		{
 			if (inBounds == true) {
-
-				// Working -
-				// texture.getHeight() - textureY1 = 64.0
-				// texture.getHeight() - (textureY2 - textureY1) = 64.0
-				//
-				//
-
-				// Not working for some reason?
-				// texture.getHeight() - textureY1 = 128.0
-				// texture.getHeight() - (textureY2 - textureY1) = 0.0
 
 				if (upsideDown) {
 
@@ -148,14 +144,8 @@ public class TextureUtils {
 
 			}
 
-			// Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 -
-			// vertexX1, vertexY2 - vertexY1, textureX1,
-			// textureY1, 0.5f, 1f);
-
 		}
 
-		Color whiteWith1Alpha = new Color(Color.WHITE);
-		whiteWith1Alpha.a = 1;
 		Game.activeBatch.setColor(1, 1, 1, 1);
 
 	}

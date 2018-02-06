@@ -51,12 +51,11 @@ import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.ArrayUtils;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Square extends AStarNode implements ActionableInWorld, InventoryParent {
 
@@ -237,6 +236,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		float alpha = 1f;
 		if (!this.visibleToPlayer)
 			alpha = 0.5f;
+
 		TextureUtils.drawTexture(textureToDraw, alpha, squarePositionX, squarePositionY,
 				squarePositionX + Game.SQUARE_WIDTH, squarePositionY + Game.SQUARE_HEIGHT);
 
