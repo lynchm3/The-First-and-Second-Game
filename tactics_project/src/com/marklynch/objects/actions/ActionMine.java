@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.templates.Templates;
@@ -48,7 +49,12 @@ public class ActionMine extends Action {
 		if (target.owner != null)
 			oreOwner = target.owner;
 
-		Junk ore = Templates.ORE.makeCopy(null, oreOwner);
+		Junk ore = Templates.ORE.makeCopy(target.squareGameObjectIsOn, oreOwner);
+
+		if (Game.level.openInventories.size() > 0) {
+		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
+			performer.secondaryAnimations.add(new AnimationTake(ore, performer, 0, 0, 0.25f));
+		}
 		performer.inventory.add(ore);
 
 		if (Game.level.shouldLog(target, performer))

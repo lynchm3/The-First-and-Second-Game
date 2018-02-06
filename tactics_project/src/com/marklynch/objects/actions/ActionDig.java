@@ -49,7 +49,6 @@ public class ActionDig extends Action {
 		for (GameObject buriedGamObject : (ArrayList<GameObject>) target.inventory.gameObjects.clone()) {
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-
 				performer.secondaryAnimations.add(new AnimationTake(buriedGamObject, performer, 0, 0, 0.25f));
 			}
 			performer.inventory.add(buriedGamObject);

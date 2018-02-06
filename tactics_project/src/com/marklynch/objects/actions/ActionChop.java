@@ -3,6 +3,7 @@ package com.marklynch.objects.actions;
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
+import com.marklynch.level.constructs.animation.AnimationTake;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
 import com.marklynch.objects.templates.Templates;
@@ -58,10 +59,16 @@ public class ActionChop extends Action {
 
 		Junk wood = null;
 		if (target.checkIfDestroyed(performer, this)) {
-			wood = Templates.WOOD.makeCopy(null, oreOwner);
+			wood = Templates.WOOD.makeCopy(target.squareGameObjectIsOn, oreOwner);
+			if (Game.level.openInventories.size() > 0) {
+			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
+				performer.secondaryAnimations.add(new AnimationTake(wood, performer, 0, 0, 0.25f));
+			}
 			performer.inventory.add(wood);
-			if (Game.level.shouldLog(target, performer))
+			if (Game.level.shouldLog(target, performer)) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", wood }));
+			}
+
 		}
 
 		target.showPow();
