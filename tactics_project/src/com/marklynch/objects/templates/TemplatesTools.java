@@ -7,6 +7,7 @@ import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
+import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.weapons.Weapon;
 
 public class TemplatesTools {
@@ -69,6 +70,22 @@ public class TemplatesTools {
 		Templates.PICKAXE.anchorX = 32;
 		Templates.PICKAXE.anchorY = 94;
 		Templates.PICKAXE.templateId = GameObject.generateNewTemplateId();
+
+		Templates.SHOVEL = new Shovel();
+		Templates.SHOVEL.name = "Shovel";
+		Templates.SHOVEL.slashDamage = 6;
+		Templates.SHOVEL.imageTexturePath = "shovel.png";
+		Templates.SHOVEL.totalHealth = Templates.SHOVEL.remainingHealth = 27;
+		Templates.SHOVEL.soundWhenHit = 1f;
+		Templates.SHOVEL.soundWhenHitting = 1f;
+		Templates.SHOVEL.soundDampening = 1f;
+		Templates.SHOVEL.stackable = false;
+		Templates.SHOVEL.fireResistance = -40f;
+		Templates.SHOVEL.weight = 28f;
+		Templates.SHOVEL.value = 6;
+		Templates.SHOVEL.anchorX = 63;
+		Templates.SHOVEL.anchorY = 67;
+		Templates.SHOVEL.templateId = GameObject.generateNewTemplateId();
 
 		Templates.HATCHET = new Axe();
 		Templates.HATCHET.name = "Hatchet";

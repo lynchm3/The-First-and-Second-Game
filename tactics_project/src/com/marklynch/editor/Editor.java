@@ -59,11 +59,10 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.SettingsWindowButton;
-import com.marklynch.utils.LineUtils;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Color;
+import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Editor {
 
@@ -278,8 +277,8 @@ public class Editor {
 		tabs.add(colorsTabButton);
 
 		tabText = "DECORATIONS";
-		decorationsTabButton = new LevelButton(10, 50, Game.smallFont.getWidth(tabText), 30, "", "", tabText, true, true,
-				Color.BLACK, Color.WHITE, null);
+		decorationsTabButton = new LevelButton(10, 50, Game.smallFont.getWidth(tabText), 30, "", "", tabText, true,
+				true, Color.BLACK, Color.WHITE, null);
 		decorationsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -294,8 +293,8 @@ public class Editor {
 		tabs.add(decorationsTabButton);
 
 		tabText = "SCRIPT EVENTS";
-		scriptEventsTabButton = new LevelButton(180, 50, Game.smallFont.getWidth(tabText), 30, "", "", tabText, true, true,
-				Color.BLACK, Color.WHITE, null);
+		scriptEventsTabButton = new LevelButton(180, 50, Game.smallFont.getWidth(tabText), 30, "", "", tabText, true,
+				true, Color.BLACK, Color.WHITE, null);
 		scriptEventsTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -310,8 +309,8 @@ public class Editor {
 		tabs.add(scriptEventsTabButton);
 
 		tabText = "SCRIPT TRIGGERS";
-		scriptTriggersTabButton = new LevelButton(350, 50, Game.smallFont.getWidth(tabText), 30, "", "", tabText, true, true,
-				Color.BLACK, Color.WHITE, null);
+		scriptTriggersTabButton = new LevelButton(350, 50, Game.smallFont.getWidth(tabText), 30, "", "", tabText, true,
+				true, Color.BLACK, Color.WHITE, null);
 		scriptTriggersTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -358,8 +357,8 @@ public class Editor {
 		tabs.add(relationsTabButton);
 
 		tabText = "SPEECH PART";
-		speechPartTabButton = new LevelButton(730, 50, Game.smallFont.getWidth(tabText), 30, "", "", tabText, true, true,
-				Color.BLACK, Color.WHITE, null);
+		speechPartTabButton = new LevelButton(730, 50, Game.smallFont.getWidth(tabText), 30, "", "", tabText, true,
+				true, Color.BLACK, Color.WHITE, null);
 		speechPartTabButton.clickListener = new ClickListener() {
 			@Override
 			public void click() {
@@ -461,6 +460,7 @@ public class Editor {
 		player.inventory.add(Templates.LANTERN.makeCopy(null, player));
 		player.inventory.add(Templates.KEY.makeCopy("Player test key", null, player));
 		player.inventory.add(Templates.PICKAXE.makeCopy(null, player));
+		player.inventory.add(Templates.SHOVEL.makeCopy(null, player));
 		// player.inventory.add(Templates.PICKAXE.makeCopy(null));
 		Helmet playersHardHat = Templates.HARD_HAT.makeCopy(null, player);
 		player.inventory.add(playersHardHat);

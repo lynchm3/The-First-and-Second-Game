@@ -44,6 +44,7 @@ import com.marklynch.objects.tools.ContainerForLiquids;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
+import com.marklynch.objects.tools.Shovel;
 import com.marklynch.objects.units.CarnivoreNeutralWildAnimal;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 import com.marklynch.objects.units.Human;
@@ -139,6 +140,8 @@ public class Templates {
 	public static Weapon BROOM;
 
 	public static Pickaxe PICKAXE;
+
+	public static Shovel SHOVEL;
 
 	public static Axe HATCHET;
 
