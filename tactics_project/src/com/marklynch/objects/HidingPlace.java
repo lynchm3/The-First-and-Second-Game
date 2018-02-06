@@ -16,13 +16,13 @@ public class HidingPlace extends Searchable {
 		super();
 		// BUSH
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
+
 		canContainOtherObjects = true;
-		blocksLineOfSight = false;
+
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 
 	}
 

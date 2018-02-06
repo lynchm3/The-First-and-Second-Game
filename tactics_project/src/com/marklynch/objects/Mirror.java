@@ -19,13 +19,13 @@ public class Mirror extends GameObject {
 
 	public Mirror() {
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
 		canShareSquare = false;
-		canContainOtherObjects = false;
+
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 	}
 
 	@Override

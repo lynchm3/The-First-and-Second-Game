@@ -88,13 +88,13 @@ public class Wall extends GameObject {
 		super();
 
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
 		canShareSquare = false;
-		canContainOtherObjects = false;
+
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 	}
 
 	public static void loadStaticImages() {

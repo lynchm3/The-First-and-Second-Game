@@ -8,13 +8,13 @@ public class Orb extends GameObject {
 
 	public Orb() {
 		super();
-		canBePickedUp = true;
-		showInventoryInGroundDisplay = false;
-		fitsInInventory = true;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
+
+
+
+
+
+
+
 		attackable = false;
 
 	}

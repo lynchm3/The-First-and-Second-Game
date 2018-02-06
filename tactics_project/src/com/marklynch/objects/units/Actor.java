@@ -177,14 +177,14 @@ public class Actor extends GameObject {
 		super();
 
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
+
+
 		decorative = false;
-		attackable = true;
+
 	}
 
 	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {

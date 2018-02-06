@@ -13,9 +13,8 @@ import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionLift;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class RockGolem extends Monster {
 
@@ -37,7 +36,6 @@ public class RockGolem extends Monster {
 		this.blocksLineOfSight = true;
 		this.name = "Suspicious Boulder";
 		imageTexture = sleepingTexture;
-		canBePickedUp = true;
 
 	}
 
@@ -137,9 +135,9 @@ public class RockGolem extends Monster {
 
 	public void wakeUp() {
 
-		awake = true;
+		this.awake = true;
 		this.blocksLineOfSight = false;
-		canBePickedUp = false;
+		this.canBePickedUp = false;
 		this.name = "Rock Golem";
 		imageTexture = awakeTexture;
 		if (Game.level.shouldLog(this))
@@ -148,9 +146,9 @@ public class RockGolem extends Monster {
 
 	public void sleep() {
 
-		awake = false;
+		this.awake = false;
 		this.blocksLineOfSight = true;
-		canBePickedUp = true;
+		this.canBePickedUp = true;
 		this.name = "Suspicious Boulder";
 		imageTexture = sleepingTexture;
 		if (Game.level.shouldLog(this))

@@ -10,14 +10,13 @@ public class Food extends GameObject {
 	public Food() {
 		super();
 
-		canBePickedUp = true;
-		showInventoryInGroundDisplay = false;
-		fitsInInventory = true;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
-		attackable = true;
+
+
+
+
+
+
+
 	}
 
 	@Override

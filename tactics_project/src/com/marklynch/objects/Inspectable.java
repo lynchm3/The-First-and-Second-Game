@@ -9,11 +9,11 @@ public class Inspectable extends GameObject {
 		super();
 
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
+
+
+
 		persistsWhenCantBeSeen = true;
 		attackable = false;
 		decorative = true;

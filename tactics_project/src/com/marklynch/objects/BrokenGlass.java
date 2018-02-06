@@ -4,9 +4,8 @@ import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class BrokenGlass extends Stampable {
 
@@ -15,14 +14,14 @@ public class BrokenGlass extends Stampable {
 
 	public BrokenGlass() {
 		super();
-		canBePickedUp = true;
-		showInventoryInGroundDisplay = false;
-		fitsInInventory = true;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
-		attackable = true;
+
+
+
+
+
+
+
+
 	}
 
 	@Override

@@ -11,13 +11,13 @@ public class Window extends GameObjectExploder {
 		super();
 
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
 		canShareSquare = false;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
+
+
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 	}
 
 	@Override

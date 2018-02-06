@@ -23,13 +23,13 @@ public class Switch extends GameObject {
 	public Switch() {
 		super();
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
+
+
+
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 	}
 
 	@Override

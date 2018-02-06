@@ -9,13 +9,13 @@ public class Gold extends GameObject {
 		super();
 
 		// BOOK / SCROLL
-		canBePickedUp = true;
-		showInventoryInGroundDisplay = false;
-		fitsInInventory = true;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
+
+
+
+
+
+
+
 		attackable = false;
 
 	}

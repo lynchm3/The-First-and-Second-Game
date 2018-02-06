@@ -8,14 +8,13 @@ public class Stampable extends GameObject {
 	public Stampable() {
 		super();
 
-		canBePickedUp = true;
-		showInventoryInGroundDisplay = false;
-		fitsInInventory = true;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
-		attackable = true;
+
+
+
+
+
+
+
 
 	}
 

@@ -38,7 +38,7 @@ public class ContainerForLiquids extends Tool {
 		this.remainingHealth = 0;
 		this.canShareSquare = true;
 		this.blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
+
 		soundDampening = 1;
 		this.activeEffectsOnGameObject.clear();
 

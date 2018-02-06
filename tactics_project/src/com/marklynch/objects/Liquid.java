@@ -12,12 +12,12 @@ public class Liquid extends GameObject {
 	public Liquid() {
 		super();
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
+
+
+
+
 		attackable = false;
 	}
 

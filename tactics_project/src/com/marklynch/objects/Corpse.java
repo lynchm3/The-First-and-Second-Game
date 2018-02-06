@@ -12,14 +12,13 @@ public class Corpse extends GameObject {
 		if (this.inventory.size() == 0)
 			this.name = baseName + " (empty)";
 
-		canBePickedUp = true;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
+
 		canContainOtherObjects = true;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
-		attackable = true;
+
+
+
 	}
 
 	public Corpse makeCopy(String name, Square square, Actor owner, float weight) {

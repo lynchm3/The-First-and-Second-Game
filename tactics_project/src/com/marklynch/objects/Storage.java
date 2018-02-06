@@ -14,14 +14,13 @@ public class Storage extends Openable {
 	public Storage() {
 		super();
 
-		canBePickedUp = true;
 		showInventoryInGroundDisplay = true;
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
-		attackable = true;
+
+
+
 
 	}
 

@@ -14,13 +14,13 @@ public class Door extends Openable {
 		super();
 
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
-		canContainOtherObjects = false;
+
+
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class Door extends Openable {
 	@Override
 	public void open() {
 		open = true;
-		blocksLineOfSight = false;
+
 		soundDampening = 1f;
 	}
 

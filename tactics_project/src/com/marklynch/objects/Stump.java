@@ -12,13 +12,13 @@ public class Stump extends GameObject {
 
 		// BIG STUMP
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
+
+
+
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 	}
 
 	@Override

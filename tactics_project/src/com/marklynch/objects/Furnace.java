@@ -14,13 +14,13 @@ public class Furnace extends Openable {
 		super();
 
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 	}
 
 	@Override

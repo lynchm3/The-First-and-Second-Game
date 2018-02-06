@@ -464,7 +464,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			destroyedByAction = action;
 			this.canShareSquare = true;
 			this.blocksLineOfSight = false;
-			persistsWhenCantBeSeen = false;
+	
 			soundDampening = 1;
 			this.activeEffectsOnGameObject.clear();
 

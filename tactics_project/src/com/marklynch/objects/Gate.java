@@ -11,13 +11,13 @@ public class Gate extends Door {
 		super();
 
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
+
+
+
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 		soundDampeningWhenClosed = soundDampening;
 		blocksLineOfSightWhenClosed = blocksLineOfSight;
 

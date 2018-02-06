@@ -22,13 +22,13 @@ public class Tree extends GameObject {
 
 		// BIG TREE
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
 		this.canShareSquare = true;
-		canContainOtherObjects = false;
+
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 	}
 
 	public void addApple(float sizeRatio) {

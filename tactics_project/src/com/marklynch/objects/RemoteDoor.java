@@ -13,13 +13,13 @@ public class RemoteDoor extends Openable {
 		blocksLineOfSightWhenClosed = blocksLineOfSight;
 
 		canBePickedUp = false;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
-		canContainOtherObjects = false;
+
+
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
-		attackable = true;
+
 
 	}
 
@@ -55,7 +55,7 @@ public class RemoteDoor extends Openable {
 	@Override
 	public void open() {
 		open = true;
-		blocksLineOfSight = false;
+
 		soundDampening = 1f;
 	}
 

@@ -6,14 +6,14 @@ import com.marklynch.objects.units.Actor;
 public class Junk extends GameObject {
 
 	public Junk() {
-		canBePickedUp = true;
-		showInventoryInGroundDisplay = false;
-		fitsInInventory = true;
-		canShareSquare = true;
-		canContainOtherObjects = false;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
-		attackable = true;
+
+
+
+
+
+
+
+
 	}
 
 	@Override

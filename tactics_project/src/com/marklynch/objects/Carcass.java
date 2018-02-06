@@ -11,14 +11,13 @@ public class Carcass extends GameObject {
 	public Carcass() {
 		super();
 
-		canBePickedUp = true;
-		showInventoryInGroundDisplay = false;
+
 		fitsInInventory = false;
-		canShareSquare = true;
+
 		canContainOtherObjects = true;
-		blocksLineOfSight = false;
-		persistsWhenCantBeSeen = false;
-		attackable = true;
+
+
+
 	}
 
 	public Carcass makeCopy(String name, Square square, Actor owner, float weight) {
