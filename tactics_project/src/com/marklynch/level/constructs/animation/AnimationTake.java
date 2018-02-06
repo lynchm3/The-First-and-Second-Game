@@ -67,6 +67,9 @@ public class AnimationTake extends Animation {
 					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
 		} else {
 			// in a container
+			if (taker == Game.level.player)
+				System.out.println("In a conainer");
+
 			this.x = originX = (int) (((GameObject) gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn.xInGridPixels
 					+ (Game.SQUARE_WIDTH - gameObject.width) / 2);
 			this.y = originY = (int) (((GameObject) gameObject.inventoryThatHoldsThisObject.parent).squareGameObjectIsOn.yInGridPixels
@@ -141,14 +144,14 @@ public class AnimationTake extends Animation {
 
 	@Override
 	public void draw1() {
-		if (originY < targetGameObject.squareGameObjectIsOn.yInGrid) {
+		if (originY < targetGameObject.squareGameObjectIsOn.yInGridPixels) {
 			draw();
 		}
 	}
 
 	@Override
 	public void draw2() {
-		if (originY >= targetGameObject.squareGameObjectIsOn.yInGrid) {
+		if (originY >= targetGameObject.squareGameObjectIsOn.yInGridPixels) {
 			draw();
 		}
 	}

@@ -36,6 +36,7 @@ import com.marklynch.objects.actions.ActionChangeAppearance;
 import com.marklynch.objects.actions.ActionChop;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDie;
+import com.marklynch.objects.actions.ActionDig;
 import com.marklynch.objects.actions.ActionDropItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionEatItems;
 import com.marklynch.objects.actions.ActionEatItemsSelectedInInventory;
@@ -222,6 +223,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public int thoughtsOnPlayer = 0;
 
 	public static float healthWidthInPixels = Game.SQUARE_WIDTH / 20;
+
+	public boolean diggable = false;
 	// public static float healthHeightInPixels = Game.SQUARE_HEIGHT;
 
 	// public ArrayList<DestructionListener> destructionListeners = new
@@ -779,6 +782,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return new ActionFillContainersInInventory(performer, (WaterSource) this);
 		}
 
+		if (diggable) {
+			return new ActionDig(performer, this);
+		}
+
 		if (this instanceof Stump || this instanceof Tree) {
 			return new ActionChop(performer, this);
 		}
@@ -798,6 +805,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			Discoverable discoverable = (Discoverable) this;
 			if (!discoverable.discovered)
 				return null;
+		}
+
+		if (diggable) {
+			return new ActionDig(performer, this);
 		}
 
 		if (this instanceof Stump || this instanceof Tree) {
@@ -883,6 +894,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// Searchable
 		if (this instanceof Searchable) {
 			actions.add(new ActionSearch(performer, (Searchable) this));
+		}
+
+		if (diggable) {
+			actions.add(new ActionDig(performer, this));
 		}
 
 		// Tree and stump
@@ -1554,6 +1569,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.maxRange = maxRange;
 
 		gameObject.templateId = templateId;
+
+		gameObject.diggable = diggable;
 
 		gameObject.init();
 	}

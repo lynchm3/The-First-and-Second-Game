@@ -77,9 +77,7 @@ public class ActionTakeItems extends VariableQtyAction {
 			if (targetSquare != null)
 				performer.secondaryAnimations.add(new AnimationTake(objects[0], performer, 0, 0, 1f));
 			else
-				performer.secondaryAnimations
-						.add(new AnimationTake(objects[0], performer, 0, 0, 1f));
-
+				performer.secondaryAnimations.add(new AnimationTake(objects[0], performer, 0, 0, 1f));
 		}
 
 		for (int i = 0; i < amountToTake; i++) {

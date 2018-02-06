@@ -220,6 +220,8 @@ public class TemplatesNature {
 		Templates.MOUND.templateId = GameObject.generateNewTemplateId();
 		Templates.MOUND.preDiscoverTexture = ResourceUtils.getGlobalImage("mound.png");
 		Templates.MOUND.postDiscoverTexture = ResourceUtils.getGlobalImage("mound.png");
+		Templates.MOUND.diggable = true;
+		Templates.MOUND.canContainOtherObjects = false;
 
 		Templates.APPLE = new Food();
 		Templates.APPLE.name = "Apple";

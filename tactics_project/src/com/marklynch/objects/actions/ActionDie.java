@@ -45,7 +45,7 @@ public class ActionDie extends Action {
 
 		logDeath();
 		createCorpse();
-		if (target.visibleToPlayer)
+		if (target.visibleToPlayer && performer instanceof Actor)
 			Game.level.player.addXP((int) Math.pow(5, performer.level), performer.squareGameObjectIsOn);
 
 		// Remove from draw/update
@@ -122,6 +122,8 @@ public class ActionDie extends Action {
 			if (Game.level.shouldLog(performer))
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { performer.destroyedBy, " killed ", performer, this.image }));
+
+		} else if (performer.diggable == true) {
 
 		} else {
 

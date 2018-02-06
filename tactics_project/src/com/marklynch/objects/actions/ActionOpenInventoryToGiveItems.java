@@ -21,8 +21,14 @@ public class ActionOpenInventoryToGiveItems extends Action {
 		super(ACTION_NAME, "action_select_object.png");
 		this.performer = performer;
 		this.target = gameObject;
+
+		if (!(target instanceof Actor)) {
+			this.actionName = "Put";
+		}
+
 		if (!check()) {
 			enabled = false;
+			this.actionName += " (can't reach)";
 		}
 		legal = checkLegality();
 		sound = createSound();

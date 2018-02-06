@@ -6,7 +6,6 @@ import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
-
 import com.marklynch.utils.Texture;
 
 public abstract class Action {
@@ -84,6 +83,7 @@ public abstract class Action {
 		getGlobalImage("action_chop.png");
 		getGlobalImage("action_close.png");
 		getGlobalImage("action_die.png");// untested
+		getGlobalImage("action_dig.png");
 		getGlobalImage("action_drop.png");
 		getGlobalImage("action_eat.png");
 		getGlobalImage("action_equip.png");
