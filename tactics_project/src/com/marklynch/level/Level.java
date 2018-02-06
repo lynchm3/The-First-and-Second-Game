@@ -583,9 +583,9 @@ public class Level {
 	public static final int flashSquareTotalTime = 1200;// ms
 
 	// values for square gameObject animation
-	public static boolean flashGameObject;
-	public static GameObject gameObjectToFlash;
-	public static int flashGameObjectCounter = 0;
+	// public static boolean flashGameObject;
+	public static ArrayList<GameObject> gameObjectsToFlash = new ArrayList<GameObject>();
+	public static HashMap<GameObject, Integer> flashGameObjectCounters = new HashMap<GameObject, Integer>();
 	public static final int flashGameObjectFrequency = 200;// ms
 	public static final int flashGameObjectTotalTime = 1200;// ms
 
@@ -1358,17 +1358,20 @@ public class Level {
 			}
 		}
 
-		// Flash gameObject
-		if (flashGameObject) {
-			flashGameObjectCounter += delta;
-			if (flashGameObjectCounter >= flashGameObjectTotalTime) {
+		for (GameObject gameObjectToFlash : (ArrayList<GameObject>) gameObjectsToFlash.clone()) {
+
+			flashGameObjectCounters.put(gameObjectToFlash, flashGameObjectCounters.get(gameObjectToFlash) + delta);
+
+			if (flashGameObjectCounters.get(gameObjectToFlash) >= flashGameObjectTotalTime) {
 				gameObjectToFlash.flash = false;
-				flashGameObject = false;
-			} else if ((flashGameObjectCounter / flashGameObjectFrequency) % 2 == 0) {
+				gameObjectsToFlash.remove(gameObjectToFlash);
+				flashGameObjectCounters.remove(gameObjectToFlash);
+			} else if ((flashGameObjectCounters.get(gameObjectToFlash) / flashGameObjectFrequency) % 2 == 0) {
 				gameObjectToFlash.flash = true;
 			} else {
 				gameObjectToFlash.flash = false;
 			}
+
 		}
 
 		// update log animation

@@ -32,9 +32,9 @@ public class Discoverable extends GameObject {
 	public void discovered() {
 		discovered = true;
 		imageTexture = postDiscoverTexture;
-		Level.flashGameObject = true;
-		Level.gameObjectToFlash = this;
-		Level.flashGameObjectCounter = 0;
+
+		Level.gameObjectsToFlash.add(this);
+		Level.flashGameObjectCounters.put(this, 0);
 	}
 
 	@Override

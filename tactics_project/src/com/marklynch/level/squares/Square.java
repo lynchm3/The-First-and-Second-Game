@@ -723,18 +723,26 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		if (inventory.contains(Game.level.player))
 			return null;
 
+		if (Game.gameObjectMouseIsOver != null) {
+			if (Game.gameObjectMouseIsOver.attackable) {
+				return new ActionAttack(performer, Game.gameObjectMouseIsOver);
+			} else {
+				return null;
+			}
+		}
+
 		GameObject targetGameObject = this.inventory.getGameObjectThatCantShareSquare();
-		if (targetGameObject != null) {
+		if (targetGameObject != null && targetGameObject.attackable) {
 			return new ActionAttack(performer, targetGameObject);
 		}
 
-		if (this.inventory.size() == 1) {
+		if (this.inventory.size() == 1 && this.inventory.get(0).attackable) {
 			return new ActionAttack(performer, this.inventory.get(0));
 		}
 
 		if (this.inventory.getDecorativeCount() == this.inventory.size() - 1) {
 			GameObject onlyNonDecorativeObject = this.inventory.getNonDecorativeGameObject();
-			if (onlyNonDecorativeObject != null)
+			if (onlyNonDecorativeObject != null && onlyNonDecorativeObject.attackable)
 				return new ActionAttack(performer, onlyNonDecorativeObject);
 		}
 
