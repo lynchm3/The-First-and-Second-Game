@@ -133,12 +133,17 @@ public class AIRoutineForThief extends AIRoutine {
 
 		if (targetSquare != null) {
 			Square squareToMoveTo = AIRoutineUtils.getSquareToMoveAlongPath(this.actor.getPathTo(targetSquare));
-			new ActionMove(this.actor, squareToMoveTo, true).perform();
-			this.actor.activityDescription = ACTIVITY_WANDERING;
-			// AIRoutineUtils.moveTo(this.actor, squareToMoveTo);
-			if (this.actor.squareGameObjectIsOn == targetSquare)
+			if (squareToMoveTo == null) {
 				targetSquare = null;
-			return;
+				return;
+			} else {
+				new ActionMove(this.actor, squareToMoveTo, true).perform();
+				this.actor.activityDescription = ACTIVITY_WANDERING;
+				// AIRoutineUtils.moveTo(this.actor, squareToMoveTo);
+				if (this.actor.squareGameObjectIsOn == targetSquare)
+					targetSquare = null;
+				return;
+			}
 		}
 	}
 

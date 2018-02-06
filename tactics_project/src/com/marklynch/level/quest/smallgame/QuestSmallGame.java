@@ -273,14 +273,24 @@ public class QuestSmallGame extends Quest {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
 
-		Human thief = Templates.THIEF.makeCopy("Thief Carl",
+		Templates.THIEF.makeCopy("Thief Carl",
 				Game.level.squares[12][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
+						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, null);
+
+		Templates.THIEF.makeCopy("Thief Carl",
+				Game.level.squares[11][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
+						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
+				new GameObject[] {}, null);
+
+		Templates.THIEF.makeCopy("Thief Carl",
+				Game.level.squares[10][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);
 
 		// Some ground hatchets
 		Templates.HATCHET.makeCopy(Game.level.squares[3][6], Game.level.player);
-		Templates.HATCHET.makeCopy(Game.level.squares[5][6], thief);
+		Templates.HATCHET.makeCopy(Game.level.squares[5][6], Game.level.player);
 		Templates.BLOOD.makeCopy(Game.level.squares[5][6], Game.level.player);
 		Templates.HATCHET.makeCopy(Game.level.squares[1][6], Game.level.player);
 
@@ -299,7 +309,7 @@ public class QuestSmallGame extends Quest {
 
 		Storage chest = Templates.CHEST.makeCopy("Chest", Game.level.squares[103][1], false, null);
 		chest.inventory.add(Templates.CLEAVER.makeCopy(null, null));
-		chest.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, thief));
+		chest.inventory.add(Templates.HUNTING_KNIFE.makeCopy(null, null));
 		chest.inventory.add(Templates.GOLD.makeCopy(null, null, 101));
 
 		environmentalistBill = hunterBront2.makeCopy("Enviromentalist Bill",
