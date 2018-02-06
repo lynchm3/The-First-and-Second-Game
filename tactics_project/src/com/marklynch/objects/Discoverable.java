@@ -3,7 +3,6 @@ package com.marklynch.objects;
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
-
 import com.marklynch.utils.Texture;
 
 public class Discoverable extends GameObject {
@@ -40,14 +39,14 @@ public class Discoverable extends GameObject {
 
 	@Override
 	public void draw1() {
-		if (imageTexture == null)
+		if (!discovered)
 			return;
 		super.draw1();
 	}
 
 	@Override
 	public void draw2() {
-		if (imageTexture == null)
+		if (!discovered)
 			return;
 		super.draw2();
 	}
