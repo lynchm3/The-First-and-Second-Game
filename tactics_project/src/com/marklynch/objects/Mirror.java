@@ -19,7 +19,7 @@ public class Mirror extends GameObject {
 
 	public Mirror() {
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = false;

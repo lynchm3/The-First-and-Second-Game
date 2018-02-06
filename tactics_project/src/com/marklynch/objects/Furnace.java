@@ -14,7 +14,7 @@ public class Furnace extends Openable {
 		super();
 
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;

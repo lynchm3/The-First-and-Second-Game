@@ -9,11 +9,10 @@ import com.marklynch.objects.Openable;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.Draggable;
 import com.marklynch.ui.Scrollable;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-
-import com.marklynch.utils.Color;
 
 public class GroundDisplay implements Draggable, Scrollable {
 
@@ -63,7 +62,7 @@ public class GroundDisplay implements Draggable, Scrollable {
 			for (GameObject gameObject : square.inventory.gameObjects) {
 				if (gameObject.fitsInInventory) {
 
-				} else if (gameObject.canContainOtherObjects) {
+				} else if (gameObject.canContainOtherObjects && gameObject.showInventoryInGroundDisplay) {
 					if (gameObject instanceof Actor) {
 
 					} else if (gameObject instanceof Openable) {

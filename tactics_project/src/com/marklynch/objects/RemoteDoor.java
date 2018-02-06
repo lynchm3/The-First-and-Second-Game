@@ -13,7 +13,7 @@ public class RemoteDoor extends Openable {
 		blocksLineOfSightWhenClosed = blocksLineOfSight;
 
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = true;
 		canContainOtherObjects = false;

@@ -19,7 +19,7 @@ public class Discoverable extends GameObject {
 
 		// Settings for BURROW
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = true;
 		canContainOtherObjects = true;

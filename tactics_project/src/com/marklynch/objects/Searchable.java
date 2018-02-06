@@ -15,7 +15,7 @@ public class Searchable extends GameObject {
 
 		// DROP HOLE
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;

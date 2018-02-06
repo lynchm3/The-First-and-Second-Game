@@ -8,7 +8,7 @@ public class MeatChunk extends GameObject {
 	public MeatChunk() {
 		super();
 		canBePickedUp = true;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = true;
 		canShareSquare = true;
 		canContainOtherObjects = false;

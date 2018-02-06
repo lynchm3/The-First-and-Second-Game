@@ -7,7 +7,7 @@ public class Junk extends GameObject {
 
 	public Junk() {
 		canBePickedUp = true;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = true;
 		canShareSquare = true;
 		canContainOtherObjects = false;

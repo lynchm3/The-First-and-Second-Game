@@ -32,7 +32,7 @@ public class MapMarker extends GameObject {
 		name = "Marker";
 		links = TextUtils.getLinks(true, this);
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = true;
 		canContainOtherObjects = false;

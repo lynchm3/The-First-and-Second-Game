@@ -177,7 +177,7 @@ public class Actor extends GameObject {
 		super();
 
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;

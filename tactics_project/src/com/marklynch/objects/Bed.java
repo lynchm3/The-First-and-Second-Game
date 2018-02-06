@@ -19,7 +19,7 @@ public class Bed extends GameObject {
 		loadCoverImage();
 
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = true;
 		canContainOtherObjects = false;

@@ -22,7 +22,7 @@ public class SmallHidingPlace extends Searchable {
 
 		// Settings for BURROW
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = true;
 		canContainOtherObjects = true;

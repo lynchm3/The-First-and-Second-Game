@@ -12,7 +12,7 @@ public class Carcass extends GameObject {
 		super();
 
 		canBePickedUp = true;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = true;
 		canContainOtherObjects = true;

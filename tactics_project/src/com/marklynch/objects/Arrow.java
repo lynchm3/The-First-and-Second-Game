@@ -9,7 +9,7 @@ public class Arrow extends GameObject {
 		super();
 
 		canBePickedUp = true;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = true;
 		canShareSquare = true;
 		canContainOtherObjects = false;

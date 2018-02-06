@@ -3,7 +3,6 @@ package com.marklynch.objects;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
-
 import com.marklynch.utils.Texture;
 
 public class Storage extends Openable {
@@ -16,7 +15,7 @@ public class Storage extends Openable {
 		super();
 
 		canBePickedUp = true;
-		showInventory = false;
+		showInventoryInGroundDisplay = true;
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;

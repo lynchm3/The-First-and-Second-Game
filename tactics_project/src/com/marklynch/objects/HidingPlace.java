@@ -16,7 +16,7 @@ public class HidingPlace extends Searchable {
 		super();
 		// BUSH
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = true;
 		canContainOtherObjects = true;

@@ -9,7 +9,7 @@ public class Sign extends Readable {
 		super();
 
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = false;

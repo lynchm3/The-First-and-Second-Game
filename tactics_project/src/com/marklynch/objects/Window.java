@@ -11,7 +11,7 @@ public class Window extends GameObjectExploder {
 		super();
 
 		canBePickedUp = false;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = false;

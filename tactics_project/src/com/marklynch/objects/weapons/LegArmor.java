@@ -14,7 +14,7 @@ public class LegArmor extends Armor {
 		super();
 
 		canBePickedUp = true;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = true;
 		canShareSquare = true;
 		canContainOtherObjects = false;

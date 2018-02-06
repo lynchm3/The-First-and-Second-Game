@@ -22,7 +22,7 @@ public class Tree extends GameObject {
 
 		// BIG TREE
 		canBePickedUp = false;
-		showInventory = true;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		this.canShareSquare = true;
 		canContainOtherObjects = false;

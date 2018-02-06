@@ -13,7 +13,7 @@ public class Corpse extends GameObject {
 			this.name = baseName + " (empty)";
 
 		canBePickedUp = true;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = false;
 		canShareSquare = true;
 		canContainOtherObjects = true;

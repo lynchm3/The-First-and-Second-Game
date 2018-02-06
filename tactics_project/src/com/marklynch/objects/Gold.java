@@ -10,7 +10,7 @@ public class Gold extends GameObject {
 
 		// BOOK / SCROLL
 		canBePickedUp = true;
-		showInventory = false;
+		showInventoryInGroundDisplay = false;
 		fitsInInventory = true;
 		canShareSquare = true;
 		canContainOtherObjects = false;
