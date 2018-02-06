@@ -9,6 +9,8 @@ import com.marklynch.objects.GameObject;
 
 public class TextureUtils {
 
+	static Color neutralColor = new Color(1f, 1f, 1f, 1f);
+
 	public static boolean skipNormals = false;
 
 	// master drawTexture method
@@ -16,7 +18,7 @@ public class TextureUtils {
 			boolean inBounds, float boundsX1, float boundsY1, float boundsX2, float boundsY2, boolean backwards,
 			boolean upsideDown, boolean inbounds) {
 		drawTexture(texture, alpha, x1, y1, x2, y2, boundsX1, boundsY1, boundsX2, boundsY2, backwards, upsideDown,
-				Color.WHITE, inbounds);
+				neutralColor, inbounds);
 
 	}
 
@@ -107,8 +109,18 @@ public class TextureUtils {
 		// Gives all their proper color
 		// Game.activeBatch.setColor(Color.WHITE);
 
+		// neutral - 1,1,1
+		System.out.println("color = " + color);
+		System.out.println("color.r = " + color.r);
+		System.out.println("color.red() = " + color.red());
+		// color.System.out.println("neutralColor = " + neutralColor);
+		System.out.println("neutralColor.r = " + neutralColor.r);
+		System.out.println("neutralColor.red() = " + neutralColor.red());
+
 		// Gives proper color... i'm so fucking confused
-		Game.activeBatch.setColor(1, 1, 1, alpha);// gives all proper color
+		Game.activeBatch.setColor(color.r, color.b, color.g, alpha);// gives all
+																	// proper
+																	// color
 
 		glActiveTexture(GL_TEXTURE1);
 		if (!skipNormals) {
@@ -119,29 +131,25 @@ public class TextureUtils {
 		// bind diffuse color to texture unit 0
 		glActiveTexture(GL_TEXTURE0);
 		texture.bind();
+		if (inBounds == true) {
 
-		{
-			if (inBounds == true) {
+			if (upsideDown) {
 
-				if (upsideDown) {
+				float srcY = (texture.getHeight() - textureY1);
+				float srcHeight = -(textureY2 - textureY1);
 
-					float srcY = (texture.getHeight() - textureY1);
-					float srcHeight = -(textureY2 - textureY1);
-
-					Game.activeBatch.drawRegion(texture, textureX1, srcY, textureX2 - textureX1, srcHeight, vertexX1,
-							vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
-				} else {
-					Game.activeBatch.drawRegion(texture, textureX1, textureY1, textureX2 - textureX1,
-							(textureY2 - textureY1), vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
-				}
+				Game.activeBatch.drawRegion(texture, textureX1, srcY, textureX2 - textureX1, srcHeight, vertexX1,
+						vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
 			} else {
-				if (backwards) {
-					Game.activeBatch.draw(texture, vertexX2, vertexY1, -(vertexX2 - vertexX1), vertexY2 - vertexY1);
+				Game.activeBatch.drawRegion(texture, textureX1, textureY1, textureX2 - textureX1,
+						(textureY2 - textureY1), vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
+			}
+		} else {
+			if (backwards) {
+				Game.activeBatch.draw(texture, vertexX2, vertexY1, -(vertexX2 - vertexX1), vertexY2 - vertexY1);
 
-				} else {
-					Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
-				}
-
+			} else {
+				Game.activeBatch.draw(texture, vertexX1, vertexY1, vertexX2 - vertexX1, vertexY2 - vertexY1);
 			}
 
 		}
@@ -188,7 +196,7 @@ public class TextureUtils {
 	}
 
 	public static void drawTexture(Texture texture, float x1, float y1, float x2, float y2) {
-		drawTexture(texture, 1.0f, x1, y1, x2, y2, 0, 0, 0, 0, false, false, Color.WHITE, false);
+		drawTexture(texture, 1.0f, x1, y1, x2, y2, 0, 0, 0, 0, false, false, neutralColor, false);
 	}
 
 	public static void drawTexture(Texture texture, float x1, float y1, float x2, float y2, Color color) {

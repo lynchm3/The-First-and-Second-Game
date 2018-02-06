@@ -300,6 +300,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		screamAudio = ResourceUtils.getGlobalSound("scream.wav");
 	}
 
+	Color flashColor = new Color(255f, 255f, 255f, 0.5f);
+
 	public void draw1() {
 
 		if (this.remainingHealth <= 0)
@@ -345,23 +347,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (hiding)
 				alpha = 0.5f;
 
-			if (flash || this == Game.gameObjectMouseIsOver) {
-
-				float[] colour = { 0.0f, 0.0f, 1.0f, 1.0f };
-				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels + 5, actorPositionYInPixels + 5,
-						actorPositionXInPixels + width + 5, actorPositionYInPixels + height + 5, 0, 0, 0, 0, backwards,
-						false, Color.BLACK, false);
-				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels - 5, actorPositionYInPixels + 5,
-						actorPositionXInPixels + width - 5, actorPositionYInPixels + height + 5, 0, 0, 0, 0, backwards,
-						false, Color.BLACK, false);
-				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels + 5, actorPositionYInPixels - 5,
-						actorPositionXInPixels + width + 5, actorPositionYInPixels + height - 5, 0, 0, 0, 0, backwards,
-						false, Color.BLACK, false);
-				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels - 5, actorPositionYInPixels - 5,
-						actorPositionXInPixels + width - 5, actorPositionYInPixels + height - 5, 0, 0, 0, 0, backwards,
-						false, Color.BLACK, false);
-			}
-
 			// GL11.glTexParameterf(GL11.GL_TEXTURE_2D,
 			// GL11.GL_TEXTURE_BORDER_COLOR, Color.BLACK);
 			// GL11.glTexParameterf(GL11.GL_TEXTURE_2D,
@@ -372,6 +357,18 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			// GL11.glTexParameteri(target, pname, param);
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
+
+			if (flash || this == Game.gameObjectMouseIsOver) {
+				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
+						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
+						flashColor, false);
+				// offset a bit
+				// TextureUtils.drawTexture(imageTexture, 0.5f,
+				// actorPositionXInPixels + 5, actorPositionYInPixels + 5,
+				// actorPositionXInPixels + width + 5, actorPositionYInPixels +
+				// height + 5, 0, 0, 0, 0, backwards,
+				// false, color, false);
+			}
 
 			// if (flash || this == Game.gameObjectMouseIsOver) {
 			// TextureUtils.drawTexture(imageTexture, alpha,

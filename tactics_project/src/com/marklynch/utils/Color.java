@@ -31,14 +31,14 @@ public class Color extends mdesl.graphics.Color {
 	/** The fixed colour dark magenta */
 	public final static Color MAGENTA = new Color(255, 0, 255, 255);
 
-	/** The red component [0.0 - 1.0]. */
-	public float r;
-	/** The green component [0.0 - 1.0]. */
-	public float g;
-	/** The blue component [0.0 - 1.0]. */
-	public float b;
-	/** The alpha component [0.0 - 1.0]. */
-	public float a;
+	// /** The red component [0.0 - 1.0]. */
+	// public float r;
+	// /** The green component [0.0 - 1.0]. */
+	// public float g;
+	// /** The blue component [0.0 - 1.0]. */
+	// public float b;
+	// /** The alpha component [0.0 - 1.0]. */
+	// public float a;
 
 	public Color() {
 		super();
