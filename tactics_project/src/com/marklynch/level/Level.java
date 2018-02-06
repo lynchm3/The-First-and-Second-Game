@@ -971,11 +971,17 @@ public class Level {
 
 		player.squareGameObjectIsOn.drawActionThatWillBePerformed(false);
 
-		if (Player.playerTargetSquare != null)
+		if (Player.playerTargetActor != null) {
+			if (Player.playerTargetAction != null)
+				Player.playerTargetActor.drawAction(Player.playerTargetAction, false);
+			else
+				Player.playerTargetActor.drawX(false);
+		} else if (Player.playerTargetSquare != null) {
 			if (Player.playerTargetAction != null)
 				Player.playerTargetSquare.drawAction(Player.playerTargetAction, false);
 			else
 				Player.playerTargetSquare.drawX(false);
+		}
 
 		if (player.squareGameObjectIsOn.getSquareToLeftOf() != null) {
 			Action action = player.squareGameObjectIsOn.getSquareToLeftOf().drawActionThatWillBePerformed(false);

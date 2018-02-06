@@ -146,6 +146,15 @@ public class ActionMove extends Action {
 		if (performer.travelDistance - performer.distanceMovedThisTurn <= 0)
 			return false;
 
+		if (target == null) {
+			System.out.println("performer = " + performer);
+			System.out.println("target = " + target);
+			System.out.println("target.inventory = " + target.inventory);
+			for (StackTraceElement s : Thread.currentThread().getStackTrace()) {
+				System.out.println(s);
+			}
+		}
+
 		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))
 			return false;
 

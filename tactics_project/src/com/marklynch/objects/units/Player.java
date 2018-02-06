@@ -71,6 +71,11 @@ public class Player extends Human {
 	}
 
 	@Override
+	public void update(int delta) {
+		super.update(delta);
+	}
+
+	@Override
 	public void updateRealtime(int delta) {
 		if (lastUpdateRealtime == Level.lastUpdate)
 			return;

@@ -13,6 +13,7 @@ import com.marklynch.ai.utils.AIPath;
 import com.marklynch.ai.utils.AStarNode;
 import com.marklynch.ai.utils.AStarSearch;
 import com.marklynch.level.Level;
+import com.marklynch.level.UserInputLevel;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.Investigation;
@@ -49,13 +50,12 @@ import com.marklynch.objects.weapons.LegArmor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 import com.marklynch.ui.button.Button;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Actor extends GameObject {
 
@@ -1264,6 +1264,59 @@ public class Actor extends GameObject {
 				highestAccumulatedUnresolvedCrimeSeverity = accumulatedCrimeSeverityUnresolved.get(criminal);
 				criminalWithHighestAccumulatedUnresolvedCrimeSeverity = criminal;
 			}
+		}
+
+	}
+
+	public void drawX(boolean onMouse) {
+
+		if (onMouse) {
+			TextureUtils.drawTexture(Action.x, 1f, UserInputLevel.mouseLastX + 16,
+					Game.windowHeight - UserInputLevel.mouseLastY + 16,
+					UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
+					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
+		} else {
+
+			// float squarePositionX = squareGameObjectIsOn.xInGridPixels;
+			// float squarePositionY = squareGameObjectIsOn.yInGridPixels;
+
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			if (primaryAnimation != null) {
+				actorPositionXInPixels += primaryAnimation.offsetX;
+				actorPositionYInPixels += primaryAnimation.offsetY;
+			}
+			TextureUtils.drawTexture(Action.x, actorPositionXInPixels + Game.QUARTER_SQUARE_WIDTH,
+					actorPositionYInPixels + Game.QUARTER_SQUARE_WIDTH,
+					actorPositionXInPixels + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
+					actorPositionYInPixels + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
+		}
+
+	}
+
+	public void drawAction(Action action, boolean onMouse) {
+
+		if (onMouse) {
+			TextureUtils.drawTexture(action.image, 1f, UserInputLevel.mouseLastX + 16,
+					Game.windowHeight - UserInputLevel.mouseLastY + 16,
+					UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
+					Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16);
+		} else {
+
+			int actorPositionXInPixels = (int) (this.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * drawOffsetRatioX);
+			int actorPositionYInPixels = (int) (this.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * drawOffsetRatioY);
+			if (primaryAnimation != null) {
+				actorPositionXInPixels += primaryAnimation.offsetX;
+				actorPositionYInPixels += primaryAnimation.offsetY;
+			}
+			TextureUtils.drawTexture(action.image, actorPositionXInPixels + Game.QUARTER_SQUARE_WIDTH,
+					actorPositionYInPixels + Game.QUARTER_SQUARE_WIDTH,
+					actorPositionXInPixels + Game.SQUARE_WIDTH - Game.QUARTER_SQUARE_WIDTH,
+					actorPositionYInPixels + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
 		}
 
 	}
