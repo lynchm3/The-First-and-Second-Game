@@ -87,7 +87,7 @@ public class HidingPlace extends Searchable {
 				actorsHidingHere.clear();
 			} else {
 				if (attacker != null) {
-					ArrayList<Square> adjacentSquares = this.getAllSquaresWithinDistance(1);
+					ArrayList<Square> adjacentSquares = this.getAllSquaresWithinDistance(0, 1);
 					for (Square adjacentSquare : adjacentSquares) {
 						HidingPlace hidingPlace = (HidingPlace) adjacentSquare.inventory
 								.getGameObjectOfClass(HidingPlace.class);

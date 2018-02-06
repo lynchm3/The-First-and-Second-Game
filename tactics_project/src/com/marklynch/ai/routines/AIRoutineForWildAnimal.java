@@ -42,7 +42,7 @@ public class AIRoutineForWildAnimal extends AIRoutine {
 
 		// Go about ur business...
 		if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {
-			targetSquare = AIRoutineUtils.getRandomSquare(10, true);
+			targetSquare = AIRoutineUtils.getRandomSquare(0, 10, true);
 		}
 
 		if (targetSquare != null) {

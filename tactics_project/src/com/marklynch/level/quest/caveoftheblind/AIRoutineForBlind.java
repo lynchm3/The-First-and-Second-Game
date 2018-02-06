@@ -189,7 +189,7 @@ public class AIRoutineForBlind extends AIRoutine {
 				targetSquare = null;
 		} else if (blind.squareGameObjectIsOn.structureRoomSquareIsIn != blind.roomLivingIn) {
 			if (blind.roomLivingIn == null) {
-				targetSquare = AIRoutineUtils.getRandomSquare(5, true);
+				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, true);
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			} else {
 				targetSquare = AIRoutineUtils.getRandomSquareInRoom(blind.roomLivingIn);
@@ -198,7 +198,7 @@ public class AIRoutineForBlind extends AIRoutine {
 		} else {
 			if (Math.random() < 0.1) {
 				if (blind.roomLivingIn == null) {
-					targetSquare = AIRoutineUtils.getRandomSquare(5, true);
+					targetSquare = AIRoutineUtils.getRandomSquare(0, 5, true);
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				} else {
 					targetSquare = AIRoutineUtils.getRandomSquareInRoom(blind.roomLivingIn);
@@ -215,7 +215,7 @@ public class AIRoutineForBlind extends AIRoutine {
 	}
 
 	public void addNonBlindNonGolemToAttackersList() {
-		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(this.actor.sight);
+		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(0, this.actor.sight);
 		for (Square square : squares) {
 			if (this.actor.canSeeSquare(square)) {
 				Actor actorOnSquare = (Actor) square.inventory.getGameObjectOfClass(Actor.class);

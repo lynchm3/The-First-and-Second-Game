@@ -79,7 +79,7 @@ public class AIRoutineForPig extends AIRoutine {
 				return;
 		} else {
 			if (Math.random() < 0.05) {
-				targetSquare = AIRoutineUtils.getRandomSquare(5, false);
+				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, false);
 				if (AIRoutineUtils.moveTowardsTargetSquare(targetSquare))
 					return;
 			}

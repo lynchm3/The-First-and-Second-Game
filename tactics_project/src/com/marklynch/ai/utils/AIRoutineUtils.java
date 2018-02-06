@@ -31,12 +31,12 @@ public class AIRoutineUtils {
 		name = this.getClass().getSimpleName();
 	}
 
-	public static Square getRandomSquare(int maxDistance, boolean mustBeOutdoors) {
+	public static Square getRandomSquare(int minDistance, int maxDistance, boolean mustBeOutdoors) {
 
 		int attempts = 0;
 		int maxAttempts = 5;
 		Square randomSquare = null;
-		ArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(maxDistance);
+		ArrayList<Square> squaresInRange = Game.level.activeActor.getAllSquaresWithinDistance(minDistance, maxDistance);
 		if (squaresInRange.size() == 0)
 			return null;
 

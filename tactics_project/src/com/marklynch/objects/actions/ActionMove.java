@@ -147,12 +147,12 @@ public class ActionMove extends Action {
 			return false;
 
 		if (target == null) {
-			System.out.println("performer = " + performer);
-			System.out.println("target = " + target);
-			System.out.println("target.inventory = " + target.inventory);
 			for (StackTraceElement s : Thread.currentThread().getStackTrace()) {
 				System.out.println(s);
 			}
+			System.out.println("performer = " + performer);
+			System.out.println("target = " + target);
+			System.out.println("target.inventory = " + target.inventory);
 		}
 
 		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))

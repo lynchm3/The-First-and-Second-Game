@@ -75,7 +75,7 @@ public class AIRoutineForRockGolem extends AIRoutine {
 				targetSquare = null;
 		} else if (rockGolem.squareGameObjectIsOn.structureRoomSquareIsIn != rockGolem.roomLivingIn) {
 			if (rockGolem.roomLivingIn == null) {
-				targetSquare = AIRoutineUtils.getRandomSquare(5, true);
+				targetSquare = AIRoutineUtils.getRandomSquare(0, 5, true);
 				AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 			} else {
 				targetSquare = AIRoutineUtils.getRandomSquareInRoom(rockGolem.roomLivingIn);
@@ -100,7 +100,7 @@ public class AIRoutineForRockGolem extends AIRoutine {
 	}
 
 	public void addAllToAttackersList() {
-		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(this.actor.sight);
+		ArrayList<Square> squares = this.actor.getAllSquaresWithinDistance(0, this.actor.sight);
 		for (Square square : squares) {
 			if (this.actor.canSeeSquare(square)) {
 				Actor actorOnSquare = (Actor) square.inventory.getGameObjectOfClass(Actor.class);

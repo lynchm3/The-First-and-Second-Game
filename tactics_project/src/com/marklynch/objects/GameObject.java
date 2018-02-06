@@ -566,14 +566,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return squares;
 	}
 
-	public ArrayList<Square> getAllSquaresWithinDistance(float maxDistance) {
-		return getAllSquaresWithinDistance(maxDistance, this.squareGameObjectIsOn);
+	public ArrayList<Square> getAllSquaresWithinDistance(int minDistance, int maxDistance) {
+		return getAllSquaresWithinDistance(minDistance, maxDistance, this.squareGameObjectIsOn);
 	}
 
-	public static ArrayList<Square> getAllSquaresWithinDistance(float maxDistance, Square squareFrom) {
+	public static ArrayList<Square> getAllSquaresWithinDistance(int minDistance, int maxDistance, Square squareFrom) {
 		ArrayList<Square> squares = new ArrayList<Square>();
 
-		for (int distance = 0; distance <= maxDistance; distance++) {
+		for (int distance = minDistance; distance <= maxDistance; distance++) {
 
 			if (distance == 0)
 

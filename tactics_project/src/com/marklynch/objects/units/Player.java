@@ -345,7 +345,7 @@ public class Player extends Human {
 		// Awkward corner squares (the inner corner ones that u cant tecnically
 		// see)
 		ArrayList<Square> awkwardSquaresToMakeVisible = new ArrayList<Square>();
-		for (Square potentiallyVIsibleSquare : this.getAllSquaresWithinDistance(sight, square)) {
+		for (Square potentiallyVIsibleSquare : this.getAllSquaresWithinDistance(0, sight, square)) {
 
 			if (potentiallyVIsibleSquare.visibleToPlayer)
 				continue;

@@ -31,7 +31,7 @@ public class PowerSuperPeek extends Power {
 	@Override
 	public ArrayList<Square> getAffectedSquares(Square target) {
 		// ArrayList<Square> squares = new ArrayList<Square>();
-		return Actor.getAllSquaresWithinDistance(10, target);
+		return Actor.getAllSquaresWithinDistance(0, 10, target);
 
 		// for (int i = -5; i <= 5; i++) {
 		// for (int j = -5; j <= 5; j++) {

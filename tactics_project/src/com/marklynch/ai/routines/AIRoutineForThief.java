@@ -128,7 +128,7 @@ public class AIRoutineForThief extends AIRoutine {
 
 		// Go about ur business... (move around randomly...)
 		if (targetSquare == null || this.actor.getPathTo(targetSquare) == null) {
-			targetSquare = AIRoutineUtils.getRandomSquare(10, true);
+			targetSquare = AIRoutineUtils.getRandomSquare(7, 10, true);
 		}
 
 		if (targetSquare != null) {
