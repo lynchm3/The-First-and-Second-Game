@@ -347,27 +347,19 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 			if (flash || this == Game.gameObjectMouseIsOver) {
 
-				// float[] colour = { 0.0f, 0.0f, 1.0f, 1.0f };
-				// TextureUtils.drawTexture(imageTexture, alpha,
-				// actorPositionXInPixels + 5, actorPositionYInPixels + 5,
-				// actorPositionXInPixels + width + 5, actorPositionYInPixels +
-				// height + 5, 0, 0, 0, 0, backwards,
-				// false, Color.BLACK, false);
-				// TextureUtils.drawTexture(imageTexture, alpha,
-				// actorPositionXInPixels - 5, actorPositionYInPixels + 5,
-				// actorPositionXInPixels + width - 5, actorPositionYInPixels +
-				// height + 5, 0, 0, 0, 0, backwards,
-				// false, Color.BLACK, false);
-				// TextureUtils.drawTexture(imageTexture, alpha,
-				// actorPositionXInPixels + 5, actorPositionYInPixels - 5,
-				// actorPositionXInPixels + width + 5, actorPositionYInPixels +
-				// height - 5, 0, 0, 0, 0, backwards,
-				// false, Color.BLACK, false);
-				// TextureUtils.drawTexture(imageTexture, alpha,
-				// actorPositionXInPixels - 5, actorPositionYInPixels - 5,
-				// actorPositionXInPixels + width - 5, actorPositionYInPixels +
-				// height - 5, 0, 0, 0, 0, backwards,
-				// false, Color.BLACK, false);
+				float[] colour = { 0.0f, 0.0f, 1.0f, 1.0f };
+				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels + 5, actorPositionYInPixels + 5,
+						actorPositionXInPixels + width + 5, actorPositionYInPixels + height + 5, 0, 0, 0, 0, backwards,
+						false, Color.BLACK, false);
+				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels - 5, actorPositionYInPixels + 5,
+						actorPositionXInPixels + width - 5, actorPositionYInPixels + height + 5, 0, 0, 0, 0, backwards,
+						false, Color.BLACK, false);
+				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels + 5, actorPositionYInPixels - 5,
+						actorPositionXInPixels + width + 5, actorPositionYInPixels + height - 5, 0, 0, 0, 0, backwards,
+						false, Color.BLACK, false);
+				TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels - 5, actorPositionYInPixels - 5,
+						actorPositionXInPixels + width - 5, actorPositionYInPixels + height - 5, 0, 0, 0, 0, backwards,
+						false, Color.BLACK, false);
 			}
 
 			// GL11.glTexParameterf(GL11.GL_TEXTURE_2D,
