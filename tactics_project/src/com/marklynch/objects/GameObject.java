@@ -53,6 +53,7 @@ import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionOpen;
 import com.marklynch.objects.actions.ActionOpenInventoryToGiveItems;
+import com.marklynch.objects.actions.ActionOpenInventoryToThrowItems;
 import com.marklynch.objects.actions.ActionOpenOtherInventory;
 import com.marklynch.objects.actions.ActionPeek;
 import com.marklynch.objects.actions.ActionPin;
@@ -72,7 +73,6 @@ import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTakeItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionTeleportOther;
 import com.marklynch.objects.actions.ActionThrowItem;
-import com.marklynch.objects.actions.ActionThrowItemInInventory;
 import com.marklynch.objects.actions.ActionTrackMapMarker;
 import com.marklynch.objects.actions.ActionUnequip;
 import com.marklynch.objects.actions.ActionUnlock;
@@ -464,7 +464,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			destroyedByAction = action;
 			this.canShareSquare = true;
 			this.blocksLineOfSight = false;
-	
+
 			soundDampening = 1;
 			this.activeEffectsOnGameObject.clear();
 
@@ -1003,7 +1003,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Throw from inventory
 		if (!decorative && this.squareGameObjectIsOn != Game.level.player.squareGameObjectIsOn)
-			actions.add(new ActionThrowItemInInventory(performer, this));
+			actions.add(new ActionOpenInventoryToThrowItems(performer, this));
 
 		// Pour from inventory
 		if (!decorative)
@@ -1124,7 +1124,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_DROP) {
-			return new ActionDropItemsSelectedInInventory(performer, performer.squareGameObjectIsOn, this);
+			return new ActionDropItemsSelectedInInventory(performer, (Square) Inventory.target, this);
 		}
 
 		if (Inventory.inventoryMode == Inventory.INVENTORY_MODE.MODE_SELECT_ITEM_TO_GIVE) {

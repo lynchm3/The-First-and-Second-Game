@@ -12,7 +12,7 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Monster;
 
-public class ActionThrowItemInInventory extends Action {
+public class ActionOpenInventoryToThrowItems extends Action {
 
 	public static final String ACTION_NAME = "Throw";
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (can't reach)";
@@ -22,7 +22,7 @@ public class ActionThrowItemInInventory extends Action {
 	Square targetSquare;
 	GameObject targetGameObject;
 
-	public ActionThrowItemInInventory(Actor performer, Object target) {
+	public ActionOpenInventoryToThrowItems(Actor performer, Object target) {
 		super(ACTION_NAME, "action_select_object.png");
 		this.performer = performer;
 		this.target = target;
