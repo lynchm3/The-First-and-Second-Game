@@ -30,6 +30,9 @@ public class Notification {
 	public LevelButton closeButton;
 	public Object[] turn = new Object[1];
 
+	public boolean flash = false;
+	public int flashCounter = 0;
+
 	public ArrayList<Link> links;
 
 	// Specifics
@@ -58,7 +61,11 @@ public class Notification {
 	}
 
 	public void draw() {
-		QuadUtils.drawQuad(Color.PINK, x, y, x + width, y + height);
+		if (flash) {
+			QuadUtils.drawQuad(Color.WHITE, x, y, x + width, y + height);
+		} else {
+			QuadUtils.drawQuad(Color.PINK, x, y, x + width, y + height);
+		}
 		TextUtils.printTextWithImages(textX, textY, textWidth, true, links, objects);
 		QuadUtils.drawQuad(Color.BLACK, x + 12, y - 16, x + 76, y + 4);
 		TextUtils.printTextWithImages(textX, y - 16, 999, false, null, turn);

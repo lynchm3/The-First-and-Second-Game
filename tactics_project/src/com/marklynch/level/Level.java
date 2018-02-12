@@ -1374,6 +1374,20 @@ public class Level {
 
 		}
 
+		for (Notification notification : notifications) {
+
+			if (notification.flashCounter >= flashGameObjectTotalTime) {
+				notification.flash = false;
+			} else if ((notification.flashCounter / flashGameObjectFrequency) % 2 == 0) {
+				notification.flashCounter += delta;
+				notification.flash = true;
+			} else {
+				notification.flashCounter += delta;
+				notification.flash = false;
+			}
+
+		}
+
 		// update log animation
 		if (showLog == true) {
 			if (activityLogger.x < 0) {
