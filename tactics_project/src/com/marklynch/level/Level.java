@@ -1409,7 +1409,8 @@ public class Level {
 		if (currentFactionMoving != factions.player && (!Game.level.player.animationsBlockingAI())) {
 			currentFactionMoving.update(delta);
 		} else if (Game.level.player.primaryAnimation.completed && Game.level.player.playerTargetAction != null
-				&& Game.level.player.playerTargetAction.recheck()) {
+				&& Game.level.player.playerTargetAction.recheck()
+				&& Game.level.player.playerTargetAction.checkRange()) {
 			Game.level.player.playerTargetAction.perform();
 			pausePlayer();
 		} else if (player.playerTargetActor != null && player.straightLineDistanceTo(Player.playerTargetSquare) <= 2) {
@@ -1434,6 +1435,8 @@ public class Level {
 
 		} else if (Game.level.player.primaryAnimation.completed && Player.playerTargetSquare != null) {
 			// Auto move player
+
+			System.out.println("auto move player");
 
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
 			if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
@@ -1537,6 +1540,7 @@ public class Level {
 	}
 
 	public static void pausePlayer() {
+		System.out.println("pausePlayer()");
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;
