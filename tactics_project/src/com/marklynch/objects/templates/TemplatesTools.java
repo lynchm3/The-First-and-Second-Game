@@ -4,6 +4,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
@@ -86,6 +87,22 @@ public class TemplatesTools {
 		Templates.SHOVEL.anchorX = 63;
 		Templates.SHOVEL.anchorY = 67;
 		Templates.SHOVEL.templateId = GameObject.generateNewTemplateId();
+
+		Templates.FISHING_ROD = new FishingRod();
+		Templates.FISHING_ROD.name = "Fishing Rod";
+		Templates.FISHING_ROD.slashDamage = 4;
+		Templates.FISHING_ROD.imageTexturePath = "fishing_rod.png";
+		Templates.FISHING_ROD.totalHealth = Templates.FISHING_ROD.remainingHealth = 16;
+		Templates.FISHING_ROD.soundWhenHit = 1f;
+		Templates.FISHING_ROD.soundWhenHitting = 1f;
+		Templates.FISHING_ROD.soundDampening = 1f;
+		Templates.FISHING_ROD.stackable = false;
+		Templates.FISHING_ROD.fireResistance = -60f;
+		Templates.FISHING_ROD.weight = 23f;
+		Templates.FISHING_ROD.value = 17;
+		Templates.FISHING_ROD.anchorX = 55;
+		Templates.FISHING_ROD.anchorY = 89;
+		Templates.FISHING_ROD.templateId = GameObject.generateNewTemplateId();
 
 		Templates.HATCHET = new Axe();
 		Templates.HATCHET.name = "Hatchet";

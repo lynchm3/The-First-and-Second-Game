@@ -43,6 +43,7 @@ import com.marklynch.objects.actions.ActionEatItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionEquip;
 import com.marklynch.objects.actions.ActionFillContainersInInventory;
 import com.marklynch.objects.actions.ActionFillSpecificContainer;
+import com.marklynch.objects.actions.ActionFishing;
 import com.marklynch.objects.actions.ActionFollow;
 import com.marklynch.objects.actions.ActionGiveItemsSelectedInInventory;
 import com.marklynch.objects.actions.ActionHide;
@@ -768,7 +769,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Water Source
 		if (this instanceof WaterSource) {
-			return new ActionFillContainersInInventory(performer, (WaterSource) this);
+			return new ActionFishing(performer, (WaterSource) this);
+			// return new ActionFillContainersInInventory(performer,
+			// (WaterSource) this);
 		}
 
 		if (diggable) {
@@ -811,6 +814,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// Water Source
 		if (this instanceof WaterSource) {
 			return new ActionFillContainersInInventory(performer, (WaterSource) this);
+			// return new ActionFishing(performer, (WaterSource) this);
 		}
 
 		if (this.canContainOtherObjects && this.inventory.size() > 0)
@@ -861,6 +865,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// Water Source
 		if (this instanceof WaterSource) {
 			actions.add(new ActionFillContainersInInventory(performer, (WaterSource) this));
+			actions.add(new ActionFishing(performer, (WaterSource) this));
 			return actions;
 		}
 

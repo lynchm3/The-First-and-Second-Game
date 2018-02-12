@@ -1450,8 +1450,6 @@ public class Level {
 		} else if (Game.level.player.primaryAnimation.completed && Player.playerTargetSquare != null) {
 			// Auto move player
 
-			System.out.println("auto move player");
-
 			Player.playerPathToMove = Game.level.player.getPathTo(Player.playerTargetSquare);
 			if (Player.playerPathToMove == null || Player.playerPathToMove.squares == null
 					|| Player.playerPathToMove.squares.size() == 0) {
@@ -1554,7 +1552,6 @@ public class Level {
 	}
 
 	public static void pausePlayer() {
-		System.out.println("pausePlayer()");
 		Player.playerPathToMove = null;
 		Player.playerTargetSquare = null;
 		Player.playerTargetAction = null;

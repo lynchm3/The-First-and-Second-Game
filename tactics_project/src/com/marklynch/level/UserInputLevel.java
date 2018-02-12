@@ -503,8 +503,6 @@ public class UserInputLevel {
 				Game.level.cameraFollow = true;
 			}
 			Player.playerTargetAction = action;
-
-			System.out.println("setting target sqr");
 			Player.playerTargetSquare = square;
 			Player.playerFirstMove = true;
 			return;

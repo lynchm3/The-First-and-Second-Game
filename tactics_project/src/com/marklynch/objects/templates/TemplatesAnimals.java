@@ -121,6 +121,28 @@ public class TemplatesAnimals {
 		Templates.WOLF.canEquipWeapons = false;
 		Templates.WOLF.templateId = GameObject.generateNewTemplateId();
 		Templates.WOLF.aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(Templates.WOLF);
+
+		// Friendly Wild animals
+		Templates.FISH = new TinyNeutralWildAnimal();
+		Templates.FISH.title = "Fish";
+		Templates.FISH.level = 1;
+		Templates.FISH.totalHealth = Templates.FISH.remainingHealth = 100;
+		Templates.FISH.strength = 1;
+		Templates.FISH.dexterity = 1;
+		Templates.FISH.intelligence = 1;
+		Templates.FISH.endurance = 1;
+		Templates.FISH.imageTexturePath = "fish.png";
+		Templates.FISH.heightRatio = 0.25f;
+		Templates.FISH.drawOffsetRatioY = 0.75f;
+		Templates.FISH.widthRatio = 0.25f;
+		Templates.FISH.drawOffsetRatioX = 0.75f;
+		Templates.FISH.weight = 10f;
+		Templates.FISH.canOpenDoors = false;
+		Templates.FISH.canEquipWeapons = false;
+		Templates.FISH.templateId = GameObject.generateNewTemplateId();
+		Templates.FISH.aiRoutine = new AIRoutineForHerbivoreWildAnimal(Templates.FISH);
+		Templates.FISH.canBePickedUp = true;
+		Templates.FISH.fitsInInventory = true;
 	}
 
 }

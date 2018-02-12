@@ -41,6 +41,7 @@ import com.marklynch.objects.WaterSource;
 import com.marklynch.objects.tools.Axe;
 import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.tools.ContainerForLiquids;
+import com.marklynch.objects.tools.FishingRod;
 import com.marklynch.objects.tools.Knife;
 import com.marklynch.objects.tools.Lantern;
 import com.marklynch.objects.tools.Pickaxe;
@@ -120,6 +121,8 @@ public class Templates {
 	// Wild animals
 	public static TinyNeutralWildAnimal RAT;
 
+	public static TinyNeutralWildAnimal FISH;
+
 	public static HerbivoreWildAnimal RABBIT;
 
 	public static TinyNeutralWildAnimal BABY_RABBIT;
@@ -142,6 +145,8 @@ public class Templates {
 	public static Pickaxe PICKAXE;
 
 	public static Shovel SHOVEL;
+
+	public static FishingRod FISHING_ROD;
 
 	public static Axe HATCHET;
 
