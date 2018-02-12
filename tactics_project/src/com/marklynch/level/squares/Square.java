@@ -26,6 +26,7 @@ import com.marklynch.level.constructs.inventory.SquareInventory;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.Power;
 import com.marklynch.objects.BrokenGlass;
+import com.marklynch.objects.Discoverable;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.HidingPlace;
@@ -38,6 +39,7 @@ import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionOpenInventoryToDropItems;
+import com.marklynch.objects.actions.ActionOpenInventoryToThrowItems;
 import com.marklynch.objects.actions.ActionPlaceMapMarker;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionStopHiding;
@@ -45,7 +47,6 @@ import com.marklynch.objects.actions.ActionTakeAll;
 import com.marklynch.objects.actions.ActionTeleport;
 import com.marklynch.objects.actions.ActionTeleportSwap;
 import com.marklynch.objects.actions.ActionThrowItem;
-import com.marklynch.objects.actions.ActionOpenInventoryToThrowItems;
 import com.marklynch.objects.actions.ActionWait;
 import com.marklynch.objects.actions.ActionableInWorld;
 import com.marklynch.objects.units.Actor;
@@ -434,6 +435,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public Action drawActionThatWillBePerformed(boolean onMouse) {
 
+		Action action = null;
 		if (!this.seenByPlayer) {
 			if (onMouse) {
 				TextureUtils.drawTexture(Action.textureWalk, UserInputLevel.mouseLastX + 16,
@@ -452,14 +454,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			return null;
 		}
 
-		Action action = null;
-		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
-			action = this.getAttackActionForTheSquareOrObject(Game.level.player);
-		} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-			action = this.getSecondaryActionForTheSquareOrObject(Game.level.player);
-		} else {
-			action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
-		}
+		// if (action != null && !action.enabled)
+		// action = null;
 
 		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
 			if (onMouse) {
@@ -478,33 +474,50 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 				// squarePositionY + Game.SQUARE_HEIGHT - 0);
 
 			}
-		} else if (action != null && action.image != null) {
-			Color color = Color.WHITE;
-			if (!action.legal) {
-				color = Color.RED;
+		} else {
+			if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
+				action = this.getAttackActionForTheSquareOrObject(Game.level.player);
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+				action = this.getSecondaryActionForTheSquareOrObject(Game.level.player);
+			} else {
+				action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
 			}
 
-			if (onMouse) {
+			// System.out.println("action = " + action);
+			// System.out.println("action.enabled = " + action.enabled);
+			if (action != null && action.image != null) {
+				Color color = Color.WHITE;
+				if (!action.legal) {
+					color = Color.RED;
+				}
 
-				TextureUtils.drawTexture(action.image, UserInputLevel.mouseLastX + 16,
-						Game.windowHeight - UserInputLevel.mouseLastY + 16,
-						UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
-						Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
-			} else {
+				// else if (!action.enabled) {
+				// color = Color.GRAY;
+				// }
 
-				// if (action instanceof ActionMove && action.legal)
-				// return action;
-				//
-				// if (action instanceof ActionWait && action.legal)
-				// return action;
-				//
-				// float squarePositionX = xInGridPixels;
-				// float squarePositionY = yInGridPixels;
-				// TextureUtils.drawTexture(action.image, squarePositionX +
-				// Game.SQUARE_WIDTH - 48,
-				// squarePositionY + Game.SQUARE_HEIGHT - 48, squarePositionX +
-				// Game.SQUARE_WIDTH - 16,
-				// squarePositionY + Game.SQUARE_HEIGHT - 16, color);
+				if (onMouse) {
+
+					TextureUtils.drawTexture(action.image, UserInputLevel.mouseLastX + 16,
+							Game.windowHeight - UserInputLevel.mouseLastY + 16,
+							UserInputLevel.mouseLastX + Game.QUARTER_SQUARE_WIDTH + 16,
+							Game.windowHeight - UserInputLevel.mouseLastY + Game.QUARTER_SQUARE_HEIGHT + 16, color);
+				} else {
+
+					// if (action instanceof ActionMove && action.legal)
+					// return action;
+					//
+					// if (action instanceof ActionWait && action.legal)
+					// return action;
+					//
+					// float squarePositionX = xInGridPixels;
+					// float squarePositionY = yInGridPixels;
+					// TextureUtils.drawTexture(action.image, squarePositionX +
+					// Game.SQUARE_WIDTH - 48,
+					// squarePositionY + Game.SQUARE_HEIGHT - 48,
+					// squarePositionX +
+					// Game.SQUARE_WIDTH - 16,
+					// squarePositionY + Game.SQUARE_HEIGHT - 16, color);
+				}
 			}
 		}
 		return action;
@@ -623,9 +636,20 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public GameObject getGameObjectMouseIsOver() {
 
+		if (!this.seenByPlayer)
+			return null;
+
 		for (int i = this.inventory.gameObjects.size() - 1; i >= 0; i--) {
 
 			GameObject gameObject = this.inventory.gameObjects.get(i);
+			if (gameObject instanceof Discoverable) {
+				Discoverable d = (Discoverable) gameObject;
+				if (!d.discovered)
+					continue;
+			}
+
+			if (!this.visibleToPlayer && !gameObject.persistsWhenCantBeSeen)
+				continue;
 
 			// gameObject.imageTexture.getTexture().
 

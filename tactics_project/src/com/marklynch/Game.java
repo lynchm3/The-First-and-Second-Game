@@ -288,7 +288,7 @@ public class Game {
 		try {
 			Display.setDisplayMode(new DisplayMode((int) width, (int) height));
 			Display.setResizable(true);
-			Display.setLocation(0, 0);
+			Display.setLocation(1000, 0);
 			Display.create();
 			Display.setVSyncEnabled(true);
 		} catch (LWJGLException e) {
