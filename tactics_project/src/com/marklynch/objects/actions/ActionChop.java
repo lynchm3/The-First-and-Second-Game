@@ -100,6 +100,7 @@ public class ActionChop extends Action {
 	public boolean check() {
 
 		if (!performer.inventory.contains(Axe.class)) {
+			disabledReason = "You need an axe";
 			actionName = ACTION_NAME_NEED_AXE;
 			return false;
 		}

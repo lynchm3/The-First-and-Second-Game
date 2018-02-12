@@ -68,6 +68,7 @@ public class ActionOpenOtherInventory extends Action {
 	public boolean check() {
 
 		if (actionOpen != null) {
+			disabledReason = actionOpen.disabledReason;
 			return actionOpen.check();
 		}
 

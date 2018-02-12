@@ -21,6 +21,8 @@ public abstract class Action {
 	public static Texture textureEllipse;
 	public static Texture textureWalk;
 
+	public String disabledReason = "";
+
 	public Action(String actionName) {
 		super();
 		this.actionName = actionName;

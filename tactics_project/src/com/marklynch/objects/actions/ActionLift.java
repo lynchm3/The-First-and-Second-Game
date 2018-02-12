@@ -66,6 +66,7 @@ public class ActionLift extends Action {
 		float maxWeightForPerformer = 50f + performer.getEffectiveStrength() * 10f;
 		if (object.weight > maxWeightForPerformer) {
 			actionName = ACTION_NAME + " (too heavy)";
+			disabledReason = "Too heavy";
 			return false;
 		}
 		return true;

@@ -116,8 +116,10 @@ public class ActionCastPoison extends Action {
 		// if (!performer.canSeeGameObject(target))
 		// return false;
 
-		if (!target.attackable)
+		if (!target.attackable) {
+			disabledReason = "Can't be attacked";
 			return false;
+		}
 
 		return true;
 	}

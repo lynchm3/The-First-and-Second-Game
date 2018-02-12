@@ -72,6 +72,8 @@ public class ActionEquip extends Action {
 	public boolean check() {
 
 		if (actionTake != null) {
+			if (!actionTake.enabled)
+				disabledReason = "Can't reach";
 			return actionTake.enabled;
 		}
 

@@ -7,10 +7,9 @@ import com.marklynch.level.Level;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.button.Link;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
-
-import com.marklynch.utils.Color;
 
 public class Notification {
 
@@ -35,7 +34,7 @@ public class Notification {
 
 	// Specifics
 	public static enum NotificationType {
-		QUEST_STARTED, QUEST_UPDATED, QUEST_RESOLVED, LEVEL_UP, MISC
+		QUEST_STARTED, QUEST_UPDATED, QUEST_RESOLVED, LEVEL_UP, MISC, ACTION_DISABLED
 	}
 
 	NotificationType type;

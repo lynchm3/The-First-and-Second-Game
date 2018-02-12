@@ -86,6 +86,7 @@ public class ActionInitiateTrade extends Action {
 	public boolean check() {
 		if (target.knownCriminals.contains(performer)) {
 			actionName = ACTION_NAME + " (distrust)";
+			disabledReason = "Not enough trust";
 			return false;
 		}
 

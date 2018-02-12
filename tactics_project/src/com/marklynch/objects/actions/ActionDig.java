@@ -93,6 +93,7 @@ public class ActionDig extends Action {
 
 		if (!performer.inventory.contains(Shovel.class)) {
 			actionName = ACTION_NAME_NEED_SHOVEL;
+			disabledReason = "You need a shovel";
 			return false;
 		}
 

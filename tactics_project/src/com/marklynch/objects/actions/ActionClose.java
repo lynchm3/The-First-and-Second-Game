@@ -68,15 +68,18 @@ public class ActionClose extends Action {
 			Actor actor = (Actor) performer;
 			if (openable.isLocked() && !actor.hasKeyForDoor(openable)) {
 				actionName = ACTION_NAME_NEED_KEY;
+				disabledReason = "You need a key";
 				return false;
 			}
 		}
 
 		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare() == false) {
+			disabledReason = "Doorway blocked";
 			actionName = ACTION_NAME_BLOCKED;
 		}
 
 		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.contains(Actor.class)) {
+			disabledReason = "Doorway blocked";
 			actionName = ACTION_NAME_BLOCKED;
 			return false;
 		}

@@ -99,6 +99,7 @@ public class ActionMine extends Action {
 
 		if (!performer.inventory.contains(Pickaxe.class)) {
 			actionName = ACTION_NAME_NEED_PICKAXE;
+			disabledReason = "You need a pickaxe";
 			return false;
 		}
 

@@ -91,6 +91,7 @@ public class ActiontTakeAll extends Action {
 	public boolean check() {
 
 		if (actionOpen != null) {
+			disabledReason = actionOpen.disabledReason;
 			return actionOpen.check();
 		}
 		return false;

@@ -161,6 +161,7 @@ public class ActionThrowItem extends Action {
 
 		if (performer.straightLineDistanceTo(targetSquare) > maxDistance) {
 			actionName = ACTION_NAME + " " + gameObjectToThrow.name + " (too heavy)";
+			disabledReason = "Too heavy";
 			return false;
 		}
 

@@ -83,6 +83,7 @@ public class ActionUnlock extends Action {
 
 			if (!actor.hasKeyForDoor(openable)) {
 				actionName = ACTION_NAME_NEED_KEY;
+				disabledReason = "You need a key";
 				return false;
 			}
 		}

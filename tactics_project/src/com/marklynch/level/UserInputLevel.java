@@ -26,6 +26,7 @@ import com.marklynch.ui.PinWindow;
 import com.marklynch.ui.Scrollable;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.popups.FullScreenTextBox;
+import com.marklynch.ui.popups.Notification;
 import com.marklynch.ui.popups.PopupMenu;
 import com.marklynch.ui.popups.PopupMenuSelectAction;
 import com.marklynch.ui.popups.PopupMenuSelectObject;
@@ -486,7 +487,13 @@ public class UserInputLevel {
 		}
 
 		if (action != null && !action.enabled) {
-			System.out.println("enabled = false");
+			// System.out.println("enabled = false");
+
+			Game.level.addNotification(new Notification(new Object[] { action.disabledReason },
+					Notification.NotificationType.ACTION_DISABLED, null));
+			// new Toast(new Object[] { "NOPE" },
+			// Notification.NotificationType.MISC, null);
+
 			return;
 		}
 

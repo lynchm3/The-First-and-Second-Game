@@ -477,32 +477,41 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		} else {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
 				action = this.getAttackActionForTheSquareOrObject(Game.level.player);
-				if (action == null || !action.enabled) {
-					this.getDefaultActionPerformedOnThisInWorld(Game.level.player);
-				}
+				// if (action == null || !action.enabled) {
+				// action =
+				// this.getDefaultActionPerformedOnThisInWorld(Game.level.player);
+				// }
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				action = this.getSecondaryActionForTheSquareOrObject(Game.level.player);
-				if (action == null || !action.enabled) {
-					this.getSecondaryActionPerformedOnThisInWorld(Game.level.player);
-				}
+				// if (action == null || !action.enabled) {
+				// action =
+				// this.getSecondaryActionPerformedOnThisInWorld(Game.level.player);
+				// }
 			} else {
 				action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
-				if (action == null || !action.enabled) {
-					this.getDefaultActionPerformedOnThisInWorld(Game.level.player);
-				}
+				// System.out.println("action @ a = " + action);
+				// if (action != null)
+				// System.out.println("action.enabled @ b = " + action.enabled);
+				// if (!action.enabled) {
+				// System.out.println("getting new");
+				// action =
+				// this.getDefaultActionPerformedOnThisInWorld(Game.level.player);
+				// }
+				// System.out.println("action @ c = " + action);
+				// if (action != null)
+				// System.out.println("action.enabled @ d = " + action.enabled);
 			}
 
 			// System.out.println("action = " + action);
 			// System.out.println("action.enabled = " + action.enabled);
 			if (action != null && action.image != null) {
 				Color color = Color.WHITE;
-				if (!action.legal) {
+
+				if (!action.enabled) {
+					color = Color.GRAY;
+				} else if (!action.legal) {
 					color = Color.RED;
 				}
-
-				// else if (!action.enabled) {
-				// color = Color.GRAY;
-				// }
 
 				if (onMouse) {
 

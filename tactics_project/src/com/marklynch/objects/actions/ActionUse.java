@@ -76,11 +76,21 @@ public class ActionUse extends Action {
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
 
+			boolean requirementsMet = true;
+
 			for (RequirementToMeet requirementToMeet : requirementsToMeet) {
 				if (!requirementToMeet.isRequirementMet(actor)) {
-					return false;
+					if (disabledReason.length() == 0)
+						disabledReason += "Requirements not met: " + requirementToMeet.getText();
+					else
+						disabledReason += ", " + requirementToMeet.getText();
+					requirementsMet = false;
 				}
 			}
+
+			if (requirementsMet == false)
+				return false;
+
 		}
 
 		return true;

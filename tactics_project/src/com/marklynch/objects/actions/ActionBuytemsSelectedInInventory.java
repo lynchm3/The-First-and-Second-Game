@@ -55,10 +55,13 @@ public class ActionBuytemsSelectedInInventory extends Action {
 	@Override
 	public boolean check() {
 
-		if (seller == null || object == null)
+		if (seller == null || object == null) {
 			return false;
-		if (!(performer instanceof Trader) && performer.getCarriedGoldValue() < object.value)
+		}
+		if (!(performer instanceof Trader) && performer.getCarriedGoldValue() < object.value) {
+			disabledReason = "Not enough money";
 			return false;
+		}
 		return true;
 	}
 

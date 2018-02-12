@@ -134,10 +134,14 @@ public class ActionSellItems extends VariableQtyAction {
 
 	@Override
 	public boolean check() {
-		if (!(receiver instanceof Trader) && receiver.getCarriedGoldValue() < objects[0].value)
+		if (!(receiver instanceof Trader) && receiver.getCarriedGoldValue() < objects[0].value) {
+			disabledReason = "Not enough money";
 			return false;
-		if (receiver.knownCriminals.contains(performer))
+		}
+		if (receiver.knownCriminals.contains(performer)) {
+			disabledReason = "Not enough trust";
 			return false;
+		}
 		return true;
 	}
 

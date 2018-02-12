@@ -96,6 +96,7 @@ public class ActionUsePower extends Action {
 	@Override
 	public boolean check() {
 
+		disabledReason = power.disabledReason;
 		return power.check(performer, target);
 	}
 

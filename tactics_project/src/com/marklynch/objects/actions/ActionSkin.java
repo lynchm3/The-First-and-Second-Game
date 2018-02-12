@@ -92,6 +92,7 @@ public class ActionSkin extends Action {
 	public boolean check() {
 		if (!performer.inventory.contains(Knife.class)) {
 			actionName = ACTION_NAME_NEED_KNIFE;
+			disabledReason = "You need a knife";
 			return false;
 		}
 

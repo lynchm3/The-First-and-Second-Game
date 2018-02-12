@@ -73,6 +73,7 @@ public class ActionOpen extends Action {
 
 			if (openable.isLocked() && !actor.hasKeyForDoor(openable)) {
 				actionName = ACTION_NAME_NEED_KEY;
+				disabledReason = "You need a key";
 				return false;
 			}
 		}

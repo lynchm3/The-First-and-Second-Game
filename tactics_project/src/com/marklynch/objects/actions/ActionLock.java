@@ -83,15 +83,18 @@ public class ActionLock extends Action {
 
 			if (!actor.hasKeyForDoor(openable)) {
 				actionName = ACTION_NAME_NEED_KEY;
+				disabledReason = "You need a key";
 				return false;
 			}
 
 			if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.canShareSquare() == false) {
 				actionName = ACTION_NAME_BLOCKED;
+				disabledReason = "Doorway blocked";
 			}
 
 			if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.contains(Actor.class)) {
 				actionName = ACTION_NAME_BLOCKED;
+				disabledReason = "Doorway blocked";
 				return false;
 			}
 		}

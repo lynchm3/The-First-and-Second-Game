@@ -124,6 +124,7 @@ public class ActionPourSpecificItem extends Action {
 		if (containerForLiquids.liquid == null) {
 
 			actionName = ACTION_NAME + " " + containerForLiquids.name + " (empty)";
+			disabledReason = "Container is empty";
 			return false;
 		}
 

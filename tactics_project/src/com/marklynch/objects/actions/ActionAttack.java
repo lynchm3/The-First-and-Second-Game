@@ -130,8 +130,10 @@ public class ActionAttack extends Action {
 	@Override
 	public boolean check() {
 
-		if (!target.attackable)
+		if (!target.attackable) {
+			disabledReason = "Can't be attacked";
 			return false;
+		}
 
 		return true;
 	}

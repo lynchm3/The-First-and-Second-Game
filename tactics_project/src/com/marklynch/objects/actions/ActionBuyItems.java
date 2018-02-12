@@ -89,8 +89,10 @@ public class ActionBuyItems extends VariableQtyAction {
 
 	@Override
 	public boolean check() {
-		if (!(performer instanceof Trader) && performer.getCarriedGoldValue() < objects[0].value)
+		if (!(performer instanceof Trader) && performer.getCarriedGoldValue() < objects[0].value) {
+			disabledReason = "You don't have enough money";
 			return false;
+		}
 		return true;
 	}
 
