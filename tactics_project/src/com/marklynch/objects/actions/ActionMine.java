@@ -38,6 +38,9 @@ public class ActionMine extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
 
 		float damage = target.totalHealth / 4f;

@@ -32,6 +32,9 @@ public class ActionLift extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (Game.level.shouldLog(object, performer))
 			if (legal)
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " picked up ", object }));

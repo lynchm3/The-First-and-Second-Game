@@ -485,7 +485,7 @@ public class UserInputLevel {
 			}
 		}
 
-		if (key == -1 && action != null && !(square instanceof InventorySquare) && !action.enabled) {
+		if (key == -1 && action != null && !(square instanceof InventorySquare) && !action.checkRange()) {
 			if (Game.level.player.onScreen()) {
 				Game.level.cameraFollow = true;
 			}

@@ -35,6 +35,9 @@ public class ActionHideInside extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " hid in ", "" + object }));
 

@@ -26,6 +26,9 @@ public class ActionStopPeeking extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		// object.actorsHidingHere.add(performer);
 		if (performer.peekingThrough != null) {
 			if (Game.level.shouldLog(performer))

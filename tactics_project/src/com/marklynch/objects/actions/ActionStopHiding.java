@@ -31,6 +31,9 @@ public class ActionStopHiding extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (performer.hiding == true) {
 			performer.hiding = false;
 			performer.hidingPlace.actorsHidingHere.remove(performer);

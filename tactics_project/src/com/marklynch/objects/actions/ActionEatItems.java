@@ -47,6 +47,9 @@ public class ActionEatItems extends VariableQtyAction {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		int amountToEat = Math.min(objects.length, qty);
 
 		if (amountToEat == 0)

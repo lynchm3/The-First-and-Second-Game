@@ -33,6 +33,9 @@ public class ActionPin extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		Game.level.pinWindows.add(new PinWindow(target));
 
 		performer.actionsPerformedThisTurn.add(this);

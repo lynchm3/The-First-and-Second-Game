@@ -31,6 +31,9 @@ public class ActionChangeAppearance extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (target.squareGameObjectIsOn != null) {
 			target.inventory.setMode(Inventory.INVENTORY_MODE.MODE_SELECT_MAP_MARKER);
 			target.inventory.open();

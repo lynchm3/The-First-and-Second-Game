@@ -44,6 +44,9 @@ public class ActionTeleportSwap extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (performer.peekSquare != null) {
 			new ActionStopPeeking(performer).perform();
 		}

@@ -33,6 +33,12 @@ public class ActionClose extends Action {
 	@Override
 	public void perform() {
 
+		if (!enabled)
+			return;
+
+		if (!checkRange())
+			return;
+
 		// Key key = closer.getKeyFor(door);
 
 		openable.close();

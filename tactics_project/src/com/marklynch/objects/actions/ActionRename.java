@@ -29,6 +29,9 @@ public class ActionRename extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		FullScreenTextBox fullScreenTextBox = new FullScreenTextBox(target, FullScreenTextBox.ENTER_NEW_MARKER,
 				FullScreenTextBox.TYPE.RENAME_MAP_MARKER);
 		Level.openFullScreenTextBox(fullScreenTextBox);

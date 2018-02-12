@@ -37,6 +37,9 @@ public class ActionEatItemsSelectedInInventory extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (inventorySquare.stack.size() <= 5) {
 			new ActionEatItems(performer, object).perform();
 		} else {

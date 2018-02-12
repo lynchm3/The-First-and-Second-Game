@@ -51,6 +51,9 @@ public class ActionPourSpecificItem extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (Game.level.shouldLog(targetGameObject, performer)) {
 			if (targetGameObject != null) {
 				Game.level.logOnScreen(new ActivityLog(

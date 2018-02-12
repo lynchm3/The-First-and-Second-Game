@@ -38,6 +38,9 @@ public class ActionSquash extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (target.attackable) {
 			target.remainingHealth = 0;
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {

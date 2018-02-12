@@ -33,6 +33,9 @@ public class ActionPlaceMapMarker extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		MapMarker mapMarker = Templates.MAP_MARKER_RED.makeCopy(target, null);
 		mapMarker.inventory.add(Templates.MAP_MARKER_RED.makeCopy(null, null));
 		mapMarker.inventory.add(Templates.MAP_MARKER_GREEN.makeCopy(null, null));

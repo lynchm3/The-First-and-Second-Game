@@ -55,6 +55,9 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (inventorySquare.stack.size() <= 5) {
 			new ActionTakeItems(performer, target, object).perform();
 		} else {

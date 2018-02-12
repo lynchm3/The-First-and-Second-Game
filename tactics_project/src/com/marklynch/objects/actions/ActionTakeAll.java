@@ -36,6 +36,9 @@ public class ActionTakeAll extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		ArrayList<GameObject> gameObjectsToLoot = (ArrayList<GameObject>) square.inventory
 				.getGameObjectsThatFitInInventory().clone();
 		for (GameObject gameObjectToLoot : gameObjectsToLoot) {

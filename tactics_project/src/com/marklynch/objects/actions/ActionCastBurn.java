@@ -41,6 +41,9 @@ public class ActionCastBurn extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast burn on ", target }));
 		if (Math.random() * 100 > target.getEffectiveFireResistance()) {

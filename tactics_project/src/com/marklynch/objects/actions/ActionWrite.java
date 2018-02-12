@@ -37,6 +37,9 @@ public class ActionWrite extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		ConversationPart conversationPart = new ConversationPart(text, new ConversationResponse[] {}, null);
 		Conversation conversation = new Conversation(conversationPart, sign, true);
 		sign.setConversation(conversation);

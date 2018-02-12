@@ -33,7 +33,11 @@ public class ActionDiscover extends Action {
 
 	@Override
 	public void perform() {
+
 		if (!enabled)
+			return;
+
+		if (!checkRange())
 			return;
 
 		target.discovered();

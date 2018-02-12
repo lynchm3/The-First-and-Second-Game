@@ -46,6 +46,9 @@ public class ActionPourContainerInInventory extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (Game.level.openInventories.size() > 0) {
 
 			for (Inventory inventory : (ArrayList<Inventory>) Game.level.openInventories.clone()) {

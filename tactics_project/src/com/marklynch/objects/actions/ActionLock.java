@@ -34,6 +34,12 @@ public class ActionLock extends Action {
 	@Override
 	public void perform() {
 
+		if (!enabled)
+			return;
+
+		if (!checkRange())
+			return;
+
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
 			Key key = actor.getKeyFor(openable);

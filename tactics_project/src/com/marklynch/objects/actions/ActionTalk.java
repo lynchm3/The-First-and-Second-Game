@@ -32,7 +32,11 @@ public class ActionTalk extends Action {
 
 	@Override
 	public void perform() {
+
 		if (!enabled)
+			return;
+
+		if (!checkRange())
 			return;
 
 		if (conversation != null) {

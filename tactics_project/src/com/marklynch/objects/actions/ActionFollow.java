@@ -24,6 +24,12 @@ public class ActionFollow extends Action {
 	@Override
 	public void perform() {
 
+		if (!enabled)
+			return;
+
+		if (!checkRange())
+			return;
+
 		Player.playerTargetActor = target;
 
 		if (performer == Game.level.player && Game.level.player.onScreen()) {

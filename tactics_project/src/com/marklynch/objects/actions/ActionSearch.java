@@ -37,6 +37,9 @@ public class ActionSearch extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (Game.level.shouldLog(object, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " searched ", object }));
 

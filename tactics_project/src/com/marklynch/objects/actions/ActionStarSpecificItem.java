@@ -31,6 +31,9 @@ public class ActionStarSpecificItem extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		object.starred = !object.starred;
 		for (GameObject gameObjectInInventory : Game.level.player.inventory.gameObjects) {
 			if (gameObjectInInventory.name.equals(object.name)) {

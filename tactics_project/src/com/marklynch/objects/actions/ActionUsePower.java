@@ -40,6 +40,9 @@ public class ActionUsePower extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		power.log(performer, target);
 		power.cast(performer, target);
 

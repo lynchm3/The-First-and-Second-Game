@@ -30,6 +30,12 @@ public class ActionSpot extends Action {
 	@Override
 	public void perform() {
 
+		if (!enabled)
+			return;
+
+		if (!checkRange())
+			return;
+
 		if (Game.level.shouldLog(performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " spotted ", spotted }));
 

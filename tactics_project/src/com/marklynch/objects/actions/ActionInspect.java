@@ -25,6 +25,12 @@ public class ActionInspect extends Action {
 
 	@Override
 	public void perform() {
+
+		if (!enabled)
+			return;
+
+		if (!checkRange())
+			return;
 		Conversation conversation = null;
 		conversation = target.getConversation();
 

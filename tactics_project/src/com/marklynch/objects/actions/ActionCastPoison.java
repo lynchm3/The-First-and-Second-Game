@@ -40,6 +40,9 @@ public class ActionCastPoison extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast poison on ", target }));
 		if (target instanceof ContainerForLiquids && target.inventory.size() != 0) {

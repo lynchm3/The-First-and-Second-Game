@@ -34,6 +34,9 @@ public class ActionTrespass extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		performer.actionsPerformedThisTurn.add(this);
 
 		if (Game.level.shouldLog(performer))

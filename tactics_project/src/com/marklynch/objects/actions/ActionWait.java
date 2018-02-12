@@ -30,6 +30,9 @@ public class ActionWait extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		performer.actionsPerformedThisTurn.add(this);
 
 		if (sound != null)

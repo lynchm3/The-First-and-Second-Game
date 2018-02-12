@@ -39,6 +39,9 @@ public class ActionChop extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		Axe axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
 
 		float damage = target.totalHealth / 4f;

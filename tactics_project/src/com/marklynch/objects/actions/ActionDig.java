@@ -39,6 +39,9 @@ public class ActionDig extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		Shovel shovel = (Shovel) performer.inventory.getGameObjectOfClass(Shovel.class);
 
 		performer.distanceMovedThisTurn = performer.travelDistance;

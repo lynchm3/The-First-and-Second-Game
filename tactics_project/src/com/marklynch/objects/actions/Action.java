@@ -12,7 +12,7 @@ public abstract class Action {
 
 	public String actionName;
 	public boolean enabled = true;
-	public boolean inRange = true;
+	// public boolean inRange = true;
 	public boolean legal = true;
 	public Sound sound;
 	public boolean movement = false;

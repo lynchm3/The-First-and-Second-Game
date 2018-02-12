@@ -45,6 +45,9 @@ public class ActionBuyItems extends VariableQtyAction {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		int amountToSell = Math.min(objects.length, qty);
 
 		if (amountToSell == 0)

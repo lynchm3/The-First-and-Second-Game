@@ -44,6 +44,9 @@ public class ActionEquip extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (actionTake != null)
 			actionTake.perform();
 

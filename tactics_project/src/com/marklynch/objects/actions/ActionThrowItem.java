@@ -49,6 +49,9 @@ public class ActionThrowItem extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		float damage = 0;
 
 		if (gameObjectToThrow instanceof Weapon) {

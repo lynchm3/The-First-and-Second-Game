@@ -40,6 +40,9 @@ public class ActionSkin extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		actionLootAll.perform();
 
 		Knife knife = (Knife) performer.inventory.getGameObjectOfClass(Knife.class);

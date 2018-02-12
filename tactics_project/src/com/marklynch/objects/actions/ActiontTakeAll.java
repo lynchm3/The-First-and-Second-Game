@@ -40,6 +40,9 @@ public class ActiontTakeAll extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (actionOpen != null) {
 			actionOpen.perform();
 		}

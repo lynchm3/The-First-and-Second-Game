@@ -48,6 +48,9 @@ public class ActionDropItems extends VariableQtyAction {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		int amountToDrop = Math.min(objects.length, qty);
 
 		if (amountToDrop == 0)

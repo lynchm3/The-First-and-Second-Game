@@ -40,6 +40,9 @@ public class ActionCastDouse extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (Game.level.shouldLog(target, performer))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " cast douse on ", target }));
 		target.removeBurningEffect();

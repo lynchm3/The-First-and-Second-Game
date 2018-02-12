@@ -37,7 +37,11 @@ public class ActionGiveItemsSelectedInInventory extends Action {
 
 	@Override
 	public void perform() {
+
 		if (!enabled)
+			return;
+
+		if (!checkRange())
 			return;
 
 		if (inventorySquare.stack.size() <= 5) {

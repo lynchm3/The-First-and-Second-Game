@@ -31,6 +31,8 @@ public class ActionPeek extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
 		// object.actorsHidingHere.add(performer);
 
 		if (Game.level.shouldLog(performer))

@@ -28,6 +28,9 @@ public class ActionTrackMapMarker extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (!Journal.markersToTrack.contains(mapMarker)) {
 			Journal.markersToTrack.add(mapMarker);
 			Journal.createButtonsForTrackedStuffInTopRight();

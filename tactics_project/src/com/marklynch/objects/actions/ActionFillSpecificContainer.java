@@ -38,6 +38,9 @@ public class ActionFillSpecificContainer extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		Liquid water = Templates.WATER.makeCopy(null, performer, containerForLiquids.volume);
 
 		if (Game.level.shouldLog(performer))

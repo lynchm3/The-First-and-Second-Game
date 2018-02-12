@@ -40,6 +40,9 @@ public class ActionHide extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		if (actionMove != null)
 			actionMove.perform();
 

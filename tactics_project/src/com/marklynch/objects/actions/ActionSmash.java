@@ -36,6 +36,9 @@ public class ActionSmash extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		target.remainingHealth = 0;
 		target.checkIfDestroyed(performer, this);
 

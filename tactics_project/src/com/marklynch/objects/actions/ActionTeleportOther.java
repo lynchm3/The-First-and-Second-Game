@@ -33,6 +33,9 @@ public class ActionTeleportOther extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		Game.level.levelMode = LevelMode.LEVEL_SELECT_TELEPORT_SQUARE;
 		Level.teleportee = teleportee;
 

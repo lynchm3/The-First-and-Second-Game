@@ -67,6 +67,9 @@ public class ActionTakeItems extends VariableQtyAction {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		int amountToTake = Math.min(objects.length, qty);
 
 		if (amountToTake == 0)

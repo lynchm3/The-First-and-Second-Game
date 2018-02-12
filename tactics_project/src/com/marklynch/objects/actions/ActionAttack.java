@@ -46,6 +46,9 @@ public class ActionAttack extends Action {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		float damage = 1;
 		GameObject weapon = null;
 		if (performer.equipped != null) {

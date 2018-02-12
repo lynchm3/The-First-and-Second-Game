@@ -53,6 +53,9 @@ public class ActionGiveItems extends VariableQtyAction {
 		if (!enabled)
 			return;
 
+		if (!checkRange())
+			return;
+
 		int amountToGive = Math.min(objects.length, qty);
 
 		if (amountToGive == 0)

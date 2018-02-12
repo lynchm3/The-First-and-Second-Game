@@ -31,6 +31,12 @@ public class ActionOpen extends Action {
 	@Override
 	public void perform() {
 
+		if (!enabled)
+			return;
+
+		if (!checkRange())
+			return;
+
 		if (openable.isLocked())
 			new ActionUnlock(performer, openable).perform();
 

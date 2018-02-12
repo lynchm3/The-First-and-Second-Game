@@ -44,6 +44,9 @@ public class ActionMove extends Action {
 
 		if (!enabled)
 			return;
+
+		if (!checkRange())
+			return;
 		moveTo(performer, target);
 	}
 
