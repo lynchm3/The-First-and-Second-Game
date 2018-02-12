@@ -74,14 +74,6 @@ public class ActionLock extends Action {
 	public boolean check() {
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
-			if (!actor.canSeeGameObject(openable)) {
-				actionName = ACTION_NAME_CANT_REACH;
-				return false;
-			}
-			if (actor.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
-				actionName = ACTION_NAME_CANT_REACH;
-				return false;
-			}
 
 			if (!actor.hasKeyForDoor(openable)) {
 				actionName = ACTION_NAME_NEED_KEY;
@@ -94,6 +86,23 @@ public class ActionLock extends Action {
 
 			if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.contains(Actor.class)) {
 				actionName = ACTION_NAME_BLOCKED;
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
+			if (!actor.canSeeGameObject(openable)) {
+				actionName = ACTION_NAME_CANT_REACH;
+				return false;
+			}
+			if (actor.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
+				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 		}

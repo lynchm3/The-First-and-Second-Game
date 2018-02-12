@@ -57,6 +57,11 @@ public class ActionStopPeeking extends Action {
 	}
 
 	@Override
+	public boolean checkRange() {
+		return true;
+	}
+
+	@Override
 	public boolean checkLegality() {
 		return true;
 	}

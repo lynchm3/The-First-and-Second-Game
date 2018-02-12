@@ -55,6 +55,11 @@ public class PowerUnlock extends Power {
 		return false;
 	}
 
+	@Override
+	public boolean checkRange(Actor source, Square targetSquare) {
+		return true;
+	}
+
 	// @Override
 	// public ArrayList<Square> getAffectedSquares(Square target) {
 	// // ArrayList<Square> squares = new ArrayList<Square>();

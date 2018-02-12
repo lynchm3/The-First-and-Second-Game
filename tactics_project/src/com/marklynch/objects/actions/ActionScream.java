@@ -44,6 +44,11 @@ public class ActionScream extends Action {
 	}
 
 	@Override
+	public boolean checkRange() {
+		return true;
+	}
+
+	@Override
 	public boolean checkLegality() {
 		return true;
 	}

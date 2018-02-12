@@ -118,8 +118,17 @@ public class ActionPourSpecificItem extends Action {
 		if (targetSquare == null && targetGameObject == null)
 			return false;
 
-		if (containerForLiquids.liquid == null)
+		if (containerForLiquids.liquid == null) {
+
 			actionName = ACTION_NAME + " " + containerForLiquids.name + " (empty)";
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(targetSquare) > 1) {
 			actionName = ACTION_NAME + " " + containerForLiquids.name + " (can't reach)";

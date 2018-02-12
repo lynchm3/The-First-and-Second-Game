@@ -47,6 +47,12 @@ public class ActionInspect extends Action {
 	}
 
 	@Override
+	public boolean checkRange() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
 	public boolean checkLegality() {
 		// TODO Auto-generated method stub
 		return true;

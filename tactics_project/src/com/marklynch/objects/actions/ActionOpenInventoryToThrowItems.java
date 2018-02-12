@@ -93,6 +93,12 @@ public class ActionOpenInventoryToThrowItems extends Action {
 	@Override
 	public boolean check() {
 
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
 		// float maxDistance = (performer.getEffectiveStrength() * 100) /
 		// projectile.weight;
 		// if (maxDistance > 10)

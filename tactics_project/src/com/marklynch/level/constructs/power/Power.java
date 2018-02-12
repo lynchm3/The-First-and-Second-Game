@@ -13,7 +13,6 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
-
 import com.marklynch.utils.Texture;
 
 public abstract class Power {
@@ -100,6 +99,10 @@ public abstract class Power {
 	}
 
 	public boolean check(Actor source, Square targetSquare) {
+		return true;
+	}
+
+	public boolean checkRange(Actor source, Square targetSquare) {
 		return true;
 	}
 

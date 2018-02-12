@@ -58,6 +58,12 @@ public class ActionTalk extends Action {
 
 	@Override
 	public boolean check() {
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		// TODO Auto-generated method stub
 		if (!performer.canSeeSquare(target.squareGameObjectIsOn)) {
 			return false;

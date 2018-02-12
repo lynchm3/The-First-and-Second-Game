@@ -55,6 +55,11 @@ public class ActionRing extends Action {
 	}
 
 	@Override
+	public boolean checkRange() {
+		return true;
+	}
+
+	@Override
 	public boolean checkLegality() {
 		// TODO Auto-generated method stub
 		return true;

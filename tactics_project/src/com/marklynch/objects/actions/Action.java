@@ -12,6 +12,7 @@ public abstract class Action {
 
 	public String actionName;
 	public boolean enabled = true;
+	public boolean inRange = true;
 	public boolean legal = true;
 	public Sound sound;
 	public boolean movement = false;
@@ -34,6 +35,8 @@ public abstract class Action {
 	public abstract void perform();
 
 	public abstract boolean check();
+
+	public abstract boolean checkRange();
 
 	public boolean recheck() {
 		return this.enabled = check();

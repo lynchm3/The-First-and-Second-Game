@@ -55,6 +55,12 @@ public class ActionSellItemsSelectedInInventory extends Action {
 
 		if (!(buyer instanceof Trader) && buyer.getCarriedGoldValue() < object.value)
 			return false;
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		if (!performer.canSeeSquare(buyer.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME + " (can't reach)";
 			return false;

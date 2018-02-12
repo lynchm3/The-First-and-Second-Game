@@ -161,6 +161,15 @@ public class ActionThrowItem extends Action {
 			return false;
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
+		if (targetSquare == null && targetGameObject == null)
+			return false;
+
 		if (!performer.canSeeSquare(targetSquare)) {
 			actionName = ACTION_NAME + " " + gameObjectToThrow.name + " (can't reach)";
 			return false;

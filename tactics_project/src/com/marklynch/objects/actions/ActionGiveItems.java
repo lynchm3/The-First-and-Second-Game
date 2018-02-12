@@ -120,6 +120,12 @@ public class ActionGiveItems extends VariableQtyAction {
 	@Override
 	public boolean check() {
 
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
 		if (performer instanceof Actor && !((Actor) performer).canSeeSquare(receiver.squareGameObjectIsOn)) {
 			return false;
 		}

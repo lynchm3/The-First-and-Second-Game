@@ -70,6 +70,15 @@ public class ActionTakeItemsSelectedInInventory extends Action {
 		if (targetSquare == null && targetGameObject == null)
 			return false;
 
+		return false;
+	}
+
+	@Override
+	public boolean checkRange() {
+
+		if (targetSquare == null && targetGameObject == null)
+			return false;
+
 		if (targetSquare != null && performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
 		}

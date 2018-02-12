@@ -772,7 +772,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (diggable) {
-			return new ActionDig(performer, this);
+			System.out.println("digable");
+			Action action = new ActionDig(performer, this);
+			System.out.println("action = " + action);
+			System.out.println("action.enabled = " + action.enabled);
+			return action;
 		}
 
 		if (this instanceof Stump || this instanceof Tree) {

@@ -135,6 +135,12 @@ public class ActionSellItems extends VariableQtyAction {
 			return false;
 		if (receiver.knownCriminals.contains(performer))
 			return false;
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
 		if (!performer.canSeeSquare(receiver.squareGameObjectIsOn)) {
 			actionName = ACTION_NAME + " (can't reach)";
 			return false;

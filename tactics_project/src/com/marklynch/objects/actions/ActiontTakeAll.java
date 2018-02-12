@@ -90,11 +90,21 @@ public class ActiontTakeAll extends Action {
 		if (actionOpen != null) {
 			return actionOpen.check();
 		}
+		return false;
+	}
+
+	@Override
+	public boolean checkRange() {
+
+		if (actionOpen != null) {
+			return actionOpen.checkRange();
+		}
 
 		if (performer.straightLineDistanceTo(container.squareGameObjectIsOn) < 2) {
 			return true;
 		}
-		return false;
+
+		return true;
 	}
 
 	@Override

@@ -96,6 +96,12 @@ public class ActionSquash extends Action {
 	@Override
 	public boolean check() {
 
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
 			return false;
 

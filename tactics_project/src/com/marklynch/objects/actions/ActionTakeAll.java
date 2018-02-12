@@ -74,6 +74,11 @@ public class ActionTakeAll extends Action {
 
 	@Override
 	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		if (performer.straightLineDistanceTo(square) < 2) {
 			return true;
 		}

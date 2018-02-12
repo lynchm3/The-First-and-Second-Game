@@ -88,10 +88,11 @@ public class ActionOpenInventoryToGiveItems extends Action {
 	@Override
 	public boolean check() {
 
-		// float maxDistance = (performer.getEffectiveStrength() * 100) /
-		// projectile.weight;
-		// if (maxDistance > 10)
-		// float maxDistance = 1;
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME + " (can't reach)";

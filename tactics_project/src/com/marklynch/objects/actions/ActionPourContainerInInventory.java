@@ -64,6 +64,12 @@ public class ActionPourContainerInInventory extends Action {
 
 	@Override
 	public boolean check() {
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		float maxDistance = 1;
 
 		if (performer.straightLineDistanceTo(targetSquare) > maxDistance) {

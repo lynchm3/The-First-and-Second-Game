@@ -53,10 +53,11 @@ public class ActionFillSpecificContainer extends Action {
 
 	@Override
 	public boolean check() {
-		if (containerForLiquids.inventory.size() > 0) {
-			actionName = ACTION_NAME_DISABLED;
-			return false;
-		}
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(waterSource.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME_DISABLED;

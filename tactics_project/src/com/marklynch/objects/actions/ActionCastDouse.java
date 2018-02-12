@@ -119,6 +119,15 @@ public class ActionCastDouse extends Action {
 		return true;
 	}
 
+	@Override
+	public boolean checkRange() {
+
+		if (!target.attackable)
+			return false;
+
+		return true;
+	}
+
 	// @Override
 	// public boolean checkLegality() {
 	// // Something that belongs to some one else

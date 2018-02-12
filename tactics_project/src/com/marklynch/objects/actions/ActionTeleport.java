@@ -163,6 +163,12 @@ public class ActionTeleport extends Action {
 	}
 
 	@Override
+	public boolean checkRange() {
+
+		return true;
+	}
+
+	@Override
 	public boolean checkLegality() {
 		if (target.restricted == true && !target.owners.contains(teleportee)) {
 			return false;

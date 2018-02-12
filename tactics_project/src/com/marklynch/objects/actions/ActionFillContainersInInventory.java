@@ -78,6 +78,11 @@ public class ActionFillContainersInInventory extends Action {
 
 	@Override
 	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		if (performer.straightLineDistanceTo(waterSource.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME_DISABLED;
 			return false;

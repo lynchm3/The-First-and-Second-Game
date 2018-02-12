@@ -68,6 +68,16 @@ public class ActionOpenOtherInventory extends Action {
 			return actionOpen.check();
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
+		if (actionOpen != null) {
+			return actionOpen.checkRange();
+		}
+
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME + " (can't reach)";
 			return false;

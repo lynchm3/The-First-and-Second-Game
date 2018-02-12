@@ -51,6 +51,11 @@ public class ActionOpenInventoryToDropItems extends Action {
 
 	@Override
 	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		if (performer.straightLineDistanceTo(target) > 1) {
 			actionName = ACTION_NAME_DISABLED;
 			return false;

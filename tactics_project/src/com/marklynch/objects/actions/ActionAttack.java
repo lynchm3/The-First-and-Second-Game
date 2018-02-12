@@ -127,6 +127,15 @@ public class ActionAttack extends Action {
 	@Override
 	public boolean check() {
 
+		if (!target.attackable)
+			return false;
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
 		if (performer.equipped == null || !(performer.equipped instanceof Weapon)) {
 			if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1)
 				return false;
@@ -137,9 +146,6 @@ public class ActionAttack extends Action {
 		}
 
 		if (!performer.canSeeGameObject(target))
-			return false;
-
-		if (!target.attackable)
 			return false;
 
 		return true;

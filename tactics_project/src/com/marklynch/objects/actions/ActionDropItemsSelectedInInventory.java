@@ -47,10 +47,6 @@ public class ActionDropItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean check() {
-		if (performer.straightLineDistanceTo(square) > 1) {
-			actionName = ACTION_NAME + " " + object.name + " (can't reach)";
-			return false;
-		}
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
 			if (!actor.inventory.contains(object)) {
@@ -67,6 +63,16 @@ public class ActionDropItemsSelectedInInventory extends Action {
 
 		if (!square.inventory.canShareSquare() && !object.canShareSquare) {
 			actionName = ACTION_NAME + " " + object.name + " (no space)";
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+		if (performer.straightLineDistanceTo(square) > 1) {
+			actionName = ACTION_NAME + " " + object.name + " (can't reach)";
 			return false;
 		}
 

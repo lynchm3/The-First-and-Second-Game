@@ -76,7 +76,13 @@ public class ActionHide extends Action {
 		if (performer.squareGameObjectIsOn != object.squareGameObjectIsOn) {
 			this.actionMove = new ActionMove(performer, object.squareGameObjectIsOn, false);
 			return this.actionMove.enabled;
-		} else if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
+		}
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
 			return false;
 		}
 		return true;

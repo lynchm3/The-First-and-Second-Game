@@ -52,6 +52,11 @@ public class ActionHideInside extends Action {
 
 	@Override
 	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
 			return false;
 		}

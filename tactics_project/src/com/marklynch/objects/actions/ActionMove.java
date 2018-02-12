@@ -208,6 +208,11 @@ public class ActionMove extends Action {
 	}
 
 	@Override
+	public boolean checkRange() {
+		return true;
+	}
+
+	@Override
 	public boolean checkLegality() {
 		if (target.restricted == true && !target.owners.contains(performer)) {
 			return false;

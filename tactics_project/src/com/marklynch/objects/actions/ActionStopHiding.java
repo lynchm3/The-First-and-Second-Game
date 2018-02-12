@@ -52,6 +52,11 @@ public class ActionStopHiding extends Action {
 	}
 
 	@Override
+	public boolean checkRange() {
+		return true;
+	}
+
+	@Override
 	public boolean checkLegality() {
 		// if (object.squareGameObjectIsOn.restricted == true &&
 		// !object.squareGameObjectIsOn.owners.contains(performer)) {

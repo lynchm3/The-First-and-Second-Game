@@ -86,6 +86,31 @@ public class ActionSmash extends Action {
 	}
 
 	@Override
+	public boolean checkRange() {
+
+		// if (performer.equipped == target)
+		// return true;
+
+		// if (performer instanceof Actor) {
+		// Actor actor = (performer);
+		//
+		// Weapon weapon = null;
+		// if (actor.equipped instanceof Weapon) {
+		// weapon = (Weapon) actor.equipped;
+		// } else {
+		// return false;
+		// }
+		// if
+		// (weapon.hasRange(actor.straightLineDistanceTo(target.squareGameObjectIsOn)))
+		// return false;
+		// if (!actor.canSeeGameObject(target))
+		// return false;
+		// }
+
+		return true;
+	}
+
+	@Override
 	public boolean checkLegality() {
 		if (target.owner != null && target.owner != performer)
 			return false;

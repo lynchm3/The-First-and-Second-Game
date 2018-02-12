@@ -137,6 +137,12 @@ public class ActionTakeItems extends VariableQtyAction {
 	@Override
 	public boolean check() {
 
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
 		if (targetSquare != null && performer.straightLineDistanceTo(targetSquare) < 2) {
 			return true;
 		}

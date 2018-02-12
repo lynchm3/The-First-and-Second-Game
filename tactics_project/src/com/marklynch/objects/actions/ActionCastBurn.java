@@ -111,6 +111,12 @@ public class ActionCastBurn extends Action {
 		return true;
 	}
 
+	@Override
+	public boolean checkRange() {
+
+		return true;
+	}
+
 	// @Override
 	// public boolean checkLegality() {
 	// // Something that belongs to some one else

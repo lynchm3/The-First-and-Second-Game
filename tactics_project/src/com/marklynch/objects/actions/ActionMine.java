@@ -99,6 +99,12 @@ public class ActionMine extends Action {
 			return false;
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
 		if (!performer.canSeeGameObject(target)) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;

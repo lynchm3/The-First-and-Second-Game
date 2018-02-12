@@ -50,6 +50,11 @@ public class ActionRead extends Action {
 
 	@Override
 	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		if (performer.canSeeGameObject(target))
 			return true;
 		return false;

@@ -130,10 +130,6 @@ public class ActionDropItems extends VariableQtyAction {
 
 	@Override
 	public boolean check() {
-		if (performer.straightLineDistanceTo(square) > 1) {
-			actionName = ACTION_NAME + " " + objects[0].name + " (can't reach)";
-			return false;
-		}
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
 			if (!actor.inventory.contains(objects[0]) && actor.equipped != objects[0]) {
@@ -150,6 +146,16 @@ public class ActionDropItems extends VariableQtyAction {
 
 		if (!square.inventory.canShareSquare() && !objects[0].canShareSquare) {
 			actionName = ACTION_NAME + " " + objects[0].name + " (no space)";
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+		if (performer.straightLineDistanceTo(square) > 1) {
+			actionName = ACTION_NAME + " " + objects[0].name + " (can't reach)";
 			return false;
 		}
 

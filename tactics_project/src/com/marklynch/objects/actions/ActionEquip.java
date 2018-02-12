@@ -24,8 +24,7 @@ public class ActionEquip extends Action {
 		this.performer = performer;
 		this.gameObject = gameObject;
 		if (!Game.level.player.inventory.contains(gameObject)) {
-			actionTake = new ActionTakeItems(performer, gameObject.inventoryThatHoldsThisObject.parent,
-					gameObject);
+			actionTake = new ActionTakeItems(performer, gameObject.inventoryThatHoldsThisObject.parent, gameObject);
 
 		}
 		if (!Game.level.player.inventory.contains(gameObject) && Game.level.openInventories.size() > 0) {
@@ -73,6 +72,15 @@ public class ActionEquip extends Action {
 			return actionTake.enabled;
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
+		if (actionTake != null) {
+			return actionTake.checkRange();
+		}
 		return true;
 	}
 

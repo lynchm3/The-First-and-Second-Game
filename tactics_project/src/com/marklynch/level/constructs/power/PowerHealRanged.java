@@ -25,4 +25,9 @@ public class PowerHealRanged extends Power {
 	public boolean check(Actor source, Square targetSquare) {
 		return true;
 	}
+
+	@Override
+	public boolean checkRange(Actor source, Square targetSquare) {
+		return true;
+	}
 }

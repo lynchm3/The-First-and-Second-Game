@@ -90,6 +90,11 @@ public class ActionEatItems extends VariableQtyAction {
 
 	@Override
 	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		if (performer.straightLineDistanceTo(objects[0].squareGameObjectIsOn) < 2) {
 			return true;
 		}

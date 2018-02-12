@@ -49,6 +49,11 @@ public class ActionWrite extends Action {
 
 	@Override
 	public boolean check() {
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 		if (performer.straightLineDistanceTo(sign.squareGameObjectIsOn) < 2) {
 			return true;
 		}

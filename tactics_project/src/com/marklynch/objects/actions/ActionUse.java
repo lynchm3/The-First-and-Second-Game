@@ -69,6 +69,21 @@ public class ActionUse extends Action {
 	public boolean check() {
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
+
+			for (RequirementToMeet requirementToMeet : requirementsToMeet) {
+				if (!requirementToMeet.isRequirementMet(actor)) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
 			if (!actor.canSeeGameObject(switchToUse)) {
 				actionName = ACTION_NAME_CANT_REACH;
 				return false;
@@ -77,12 +92,6 @@ public class ActionUse extends Action {
 			if (performer.straightLineDistanceTo(switchToUse.squareGameObjectIsOn) != 1) {
 				actionName = ACTION_NAME_CANT_REACH;
 				return false;
-			}
-
-			for (RequirementToMeet requirementToMeet : requirementsToMeet) {
-				if (!requirementToMeet.isRequirementMet(actor)) {
-					return false;
-				}
 			}
 		}
 

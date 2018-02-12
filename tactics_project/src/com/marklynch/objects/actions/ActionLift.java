@@ -65,6 +65,11 @@ public class ActionLift extends Action {
 			actionName = ACTION_NAME + " (too heavy)";
 			return false;
 		}
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
 
 		if (performer.straightLineDistanceTo(object.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME_DISABLED;

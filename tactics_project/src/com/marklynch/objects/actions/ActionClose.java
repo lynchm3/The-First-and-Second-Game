@@ -60,18 +60,8 @@ public class ActionClose extends Action {
 
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
-			if (!actor.canSeeGameObject(openable)) {
-				actionName = ACTION_NAME_CANT_REACH;
-				return false;
-			}
-
 			if (openable.isLocked() && !actor.hasKeyForDoor(openable)) {
 				actionName = ACTION_NAME_NEED_KEY;
-				return false;
-			}
-
-			if (performer.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
-				actionName = ACTION_NAME_CANT_REACH;
 				return false;
 			}
 		}
@@ -83,6 +73,25 @@ public class ActionClose extends Action {
 		if (openable instanceof Door && openable.squareGameObjectIsOn.inventory.contains(Actor.class)) {
 			actionName = ACTION_NAME_BLOCKED;
 			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean checkRange() {
+
+		if (performer instanceof Actor) {
+			Actor actor = (Actor) performer;
+			if (!actor.canSeeGameObject(openable)) {
+				actionName = ACTION_NAME_CANT_REACH;
+				return false;
+			}
+
+			if (performer.straightLineDistanceTo(openable.squareGameObjectIsOn) != 1) {
+				actionName = ACTION_NAME_CANT_REACH;
+				return false;
+			}
 		}
 
 		return true;

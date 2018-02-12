@@ -93,13 +93,19 @@ public class ActionUsePower extends Action {
 	@Override
 	public boolean check() {
 
+		return power.check(performer, target);
+	}
+
+	@Override
+	public boolean checkRange() {
+
 		if (!target.visibleToPlayer && !power.hasRange(Integer.MAX_VALUE))
 			return false;
 
 		if (!power.hasRange(performer.straightLineDistanceTo(target)))
 			return false;
 
-		return power.check(performer, target);
+		return true;
 	}
 
 	// @Override

@@ -477,10 +477,19 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		} else {
 			if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU)) {
 				action = this.getAttackActionForTheSquareOrObject(Game.level.player);
+				if (action == null || !action.enabled) {
+					this.getDefaultActionPerformedOnThisInWorld(Game.level.player);
+				}
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
 				action = this.getSecondaryActionForTheSquareOrObject(Game.level.player);
+				if (action == null || !action.enabled) {
+					this.getSecondaryActionPerformedOnThisInWorld(Game.level.player);
+				}
 			} else {
 				action = this.getDefaultActionForTheSquareOrObject(Game.level.player);
+				if (action == null || !action.enabled) {
+					this.getDefaultActionPerformedOnThisInWorld(Game.level.player);
+				}
 			}
 
 			// System.out.println("action = " + action);
