@@ -3,7 +3,6 @@ package com.marklynch.objects.actions;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
-import com.marklynch.ai.utils.AIPath;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationMove;
 import com.marklynch.level.quest.caveoftheblind.Blind;
@@ -146,38 +145,32 @@ public class ActionMove extends Action {
 	@Override
 	public boolean check() {
 
-		if (performer.travelDistance - performer.distanceMovedThisTurn <= 0)
-			return false;
-
-		if (target == null) {
-			for (StackTraceElement s : Thread.currentThread().getStackTrace()) {
-				System.out.println(s);
-			}
-			System.out.println("performer = " + performer);
-			System.out.println("target = " + target);
-			System.out.println("target.inventory = " + target.inventory);
-		}
-
-		if (target == performer.squareGameObjectIsOn || !target.inventory.isPassable(performer))
-			return false;
-
-		AIPath path = performer.getPathTo(target);
-		if (path == null)
-			return false;
-
-		if (!path.complete)
-			return false;
-
-		if (performer.straightLineDistanceTo(target) > performer.travelDistance - performer.distanceMovedThisTurn)
-			return false;
-
-		if (path.travelCost > performer.travelDistance - performer.distanceMovedThisTurn)
-			return false;
-
-		if (performer != Game.level.player && performer.swapCooldown > 0) {
-			performer.swapCooldown--;
-			return false;
-		}
+		// if (performer.travelDistance - performer.distanceMovedThisTurn <= 0)
+		// return false;
+		//
+		// if (target == performer.squareGameObjectIsOn ||
+		// !target.inventory.isPassable(performer))
+		// return false;
+		//
+		// AIPath path = performer.getPathTo(target);
+		// if (path == null)
+		// return false;
+		//
+		// if (!path.complete)
+		// return false;
+		//
+		// if (performer.straightLineDistanceTo(target) >
+		// performer.travelDistance - performer.distanceMovedThisTurn)
+		// return false;
+		//
+		// if (path.travelCost > performer.travelDistance -
+		// performer.distanceMovedThisTurn)
+		// return false;
+		//
+		// if (performer != Game.level.player && performer.swapCooldown > 0) {
+		// performer.swapCooldown--;
+		// return false;
+		// }
 
 		GameObject objectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
 
@@ -212,6 +205,8 @@ public class ActionMove extends Action {
 
 	@Override
 	public boolean checkRange() {
+		if (performer.straightLineDistanceTo(target) > 1)
+			return false;
 		return true;
 	}
 
