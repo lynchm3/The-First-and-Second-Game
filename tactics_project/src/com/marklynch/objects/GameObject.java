@@ -216,6 +216,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float waterDamage = 0; // water/life
 	public float electricalDamage = 0; // lightning/light/electrical/speed
 	public float poisonDamage = 0;// poison/ground/contaminate/neutralize/slow/corruption
+	public float bleedingDamage = 0;
 	public float healing = 0;
 	public float minRange = 1;
 	public float maxRange = 1;
@@ -1798,8 +1799,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	@Override
 	public float getEffectiveBleedingDamage() {
 		if (enhancement != null)
-			return poisonDamage + enhancement.poisonDamage;
-		return poisonDamage;
+			return bleedingDamage + enhancement.bleedingDamage;
+		return bleedingDamage;
 	}
 
 	@Override

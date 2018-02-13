@@ -16,6 +16,7 @@ public abstract class Enhancement {
 	public float waterDamage = 0;
 	public float electricalDamage = 0;
 	public float poisonDamage = 0;
+	public float bleedingDamage = 0;
 	public float healing = 0;
 
 	public Effect[] effect = {};

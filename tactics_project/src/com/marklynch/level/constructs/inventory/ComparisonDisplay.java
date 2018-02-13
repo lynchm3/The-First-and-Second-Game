@@ -7,12 +7,11 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.weapons.BodyArmor;
 import com.marklynch.objects.weapons.Helmet;
 import com.marklynch.objects.weapons.LegArmor;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class ComparisonDisplay {
 
@@ -56,6 +55,8 @@ public class ComparisonDisplay {
 	public static Texture imageWater;
 	public static Texture imageElectrical;
 	public static Texture imagePosion;
+	public static Texture imageBleeding;
+	public static Texture imageHealing;
 	public static Texture imageRange;
 	public static Texture imageWeight;
 	public static Texture imageValue;
@@ -72,6 +73,8 @@ public class ComparisonDisplay {
 		imageWater = getGlobalImage("action_douse.png");
 		imageElectrical = getGlobalImage("action_electric.png");
 		imagePosion = getGlobalImage("action_poison.png");
+		imageBleeding = getGlobalImage("effect_bleed.png");
+		imageHealing = getGlobalImage("action_heal.png");
 		imageRange = getGlobalImage("range.png");
 		imageWeight = getGlobalImage("weight.png");
 		imageValue = getGlobalImage("gold.png");
@@ -130,8 +133,8 @@ public class ComparisonDisplay {
 
 		// Name
 		if (gameObject1 != null)
-			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + gameObject1.name), currentY,
-					Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + gameObject1.name),
+					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + gameObject1.name, color1) });
 		TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
 				new Object[] { new StringWithColor("" + gameObject2.name, color2) });
@@ -228,8 +231,8 @@ public class ComparisonDisplay {
 				color2 = Color.RED;
 			}
 
-			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedFireDamage), currentY,
-					Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedFireDamage),
+					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedFireDamage, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + gameObject2.fireDamage, color2) });
@@ -278,8 +281,9 @@ public class ComparisonDisplay {
 				color2 = Color.RED;
 			}
 
-			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedElectricalDamage),
-					currentY, Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(
+					statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedElectricalDamage), currentY,
+					Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedElectricalDamage, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + gameObject2.electricalDamage, color2) });
@@ -312,6 +316,56 @@ public class ComparisonDisplay {
 			currentY += fieldHeight;
 		}
 
+		// Bleeding
+		float equippedBleedingDamage = 0;
+		if (gameObject1 != null)
+			equippedBleedingDamage = gameObject1.bleedingDamage;
+		if (equippedBleedingDamage != 0 || gameObject2.bleedingDamage != 0) {
+			if (equippedBleedingDamage == gameObject2.bleedingDamage) {
+				color1 = Color.WHITE;
+				color2 = Color.WHITE;
+			} else if (equippedBleedingDamage < gameObject2.bleedingDamage) {
+				color1 = Color.RED;
+				color2 = Color.GREEN;
+			} else {
+				color1 = Color.GREEN;
+				color2 = Color.RED;
+			}
+
+			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedBleedingDamage),
+					currentY, Integer.MAX_VALUE, false, null,
+					new Object[] { new StringWithColor("" + equippedBleedingDamage, color1) });
+			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
+					new Object[] { new StringWithColor("" + gameObject2.bleedingDamage, color2) });
+			TextureUtils.drawTexture(imagePosion, iconsX, currentY, iconsX + 16, currentY + 16);
+			currentY += fieldHeight;
+		}
+
+		// Healing
+		float equippedHealingDamage = 0;
+		if (gameObject1 != null)
+			equippedHealingDamage = gameObject1.healing;
+		if (equippedHealingDamage != 0 || gameObject2.healing != 0) {
+			if (equippedHealingDamage == gameObject2.healing) {
+				color1 = Color.WHITE;
+				color2 = Color.WHITE;
+			} else if (equippedHealingDamage < gameObject2.healing) {
+				color1 = Color.RED;
+				color2 = Color.GREEN;
+			} else {
+				color1 = Color.GREEN;
+				color2 = Color.RED;
+			}
+
+			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedHealingDamage),
+					currentY, Integer.MAX_VALUE, false, null,
+					new Object[] { new StringWithColor("" + equippedHealingDamage, color1) });
+			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
+					new Object[] { new StringWithColor("" + gameObject2.healing, color2) });
+			TextureUtils.drawTexture(imagePosion, iconsX, currentY, iconsX + 16, currentY + 16);
+			currentY += fieldHeight;
+		}
+
 		// Range
 		float equippedMaxRange = 0;
 		if (gameObject1 != null)
@@ -328,8 +382,8 @@ public class ComparisonDisplay {
 				color2 = Color.RED;
 			}
 
-			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedMaxRange), currentY,
-					Integer.MAX_VALUE, false, null,
+			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedMaxRange),
+					currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + equippedMaxRange, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + gameObject2.maxRange, color2) });
@@ -353,8 +407,9 @@ public class ComparisonDisplay {
 				color2 = Color.RED;
 			}
 
-			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedWeight), currentY,
-					Integer.MAX_VALUE, false, null, new Object[] { new StringWithColor("" + equippedWeight, color1) });
+			TextUtils.printTextWithImages(statsOfEquippedRightX - Game.smallFont.getWidth("" + equippedWeight),
+					currentY, Integer.MAX_VALUE, false, null,
+					new Object[] { new StringWithColor("" + equippedWeight, color1) });
 			TextUtils.printTextWithImages(statsOfHoveredX, currentY, Integer.MAX_VALUE, false, null,
 					new Object[] { new StringWithColor("" + gameObject2.weight, color2) });
 			TextureUtils.drawTexture(imageWeight, iconsX, currentY, iconsX + 16, currentY + 16);
