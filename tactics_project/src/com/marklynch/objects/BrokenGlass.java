@@ -15,13 +15,6 @@ public class BrokenGlass extends Stampable {
 	public BrokenGlass() {
 		super();
 
-
-
-
-
-
-
-
 	}
 
 	@Override
@@ -33,7 +26,7 @@ public class BrokenGlass extends Stampable {
 		for (int i = 0; i < brokenGlass.glassShardsCount; i++) {
 			int randomShardNumber = (int) (Math.random() * 10d);
 			brokenGlass.glassShards[i] = new GlassShard(
-					ResourceUtils.getGlobalImage("glass_shard_" + randomShardNumber + ".png"), brokenGlass);
+					ResourceUtils.getGlobalImage("glass_shard_" + randomShardNumber + ".png", true), brokenGlass);
 		}
 		return brokenGlass;
 	}

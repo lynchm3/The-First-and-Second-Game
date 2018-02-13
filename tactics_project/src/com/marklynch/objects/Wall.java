@@ -5,9 +5,8 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Wall extends GameObject {
 
@@ -98,30 +97,30 @@ public class Wall extends GameObject {
 	}
 
 	public static void loadStaticImages() {
-		textureFullWall = getGlobalImage("wall.png");
-		textureFullTopWall = getGlobalImage("wall_full_top.png");
-		textureFullRightWall = getGlobalImage("wall_full_right.png");
-		textureFullBottomWall = getGlobalImage("wall_full_bottom.png");
-		textureFullLeftWall = getGlobalImage("wall_full_left.png");
-		textureHorizontalWall = getGlobalImage("wall_horizontal.png");
-		textureVerticalWall = getGlobalImage("wall_vertical.png");
-		textureTop = getGlobalImage("wall_top.png");
-		textureTopRight = getGlobalImage("wall_top_right_corner.png");
-		textureRight = getGlobalImage("wall_right.png");
-		textureBottomRight = getGlobalImage("wall_bottom_right_corner.png");
-		textureBottom = getGlobalImage("wall_bottom.png");
-		textureBottomLeft = getGlobalImage("wall_bottom_left_corner.png");
-		textureLeft = getGlobalImage("wall_left.png");
-		textureTopLeft = getGlobalImage("wall_top_left_corner.png");
-		textureCross = getGlobalImage("wall_cross.png");
-		textureTopLeftOuterCorner = getGlobalImage("wall_top_left_corner_outer.png");
-		textureTopRightOuterCorner = getGlobalImage("wall_top_right_corner_outer.png");
-		textureBottomRightOuterCorner = getGlobalImage("wall_bottom_right_corner_outer.png");
-		textureBottomLeftOuterCorner = getGlobalImage("wall_bottom_left_corner_outer.png");
-		textureTopLeftInnerCorner = getGlobalImage("wall_top_left_corner_inner.png");
-		textureTopRightInnerCorner = getGlobalImage("wall_top_right_corner_inner.png");
-		textureBottomRightInnerCorner = getGlobalImage("wall_bottom_right_corner_inner.png");
-		textureBottomLeftInnerCorner = getGlobalImage("wall_bottom_left_corner_inner.png");
+		textureFullWall = getGlobalImage("wall.png", true);
+		textureFullTopWall = getGlobalImage("wall_full_top.png", true);
+		textureFullRightWall = getGlobalImage("wall_full_right.png", true);
+		textureFullBottomWall = getGlobalImage("wall_full_bottom.png", true);
+		textureFullLeftWall = getGlobalImage("wall_full_left.png", true);
+		textureHorizontalWall = getGlobalImage("wall_horizontal.png", true);
+		textureVerticalWall = getGlobalImage("wall_vertical.png", true);
+		textureTop = getGlobalImage("wall_top.png", true);
+		textureTopRight = getGlobalImage("wall_top_right_corner.png", true);
+		textureRight = getGlobalImage("wall_right.png", true);
+		textureBottomRight = getGlobalImage("wall_bottom_right_corner.png", true);
+		textureBottom = getGlobalImage("wall_bottom.png", true);
+		textureBottomLeft = getGlobalImage("wall_bottom_left_corner.png", true);
+		textureLeft = getGlobalImage("wall_left.png", true);
+		textureTopLeft = getGlobalImage("wall_top_left_corner.png", true);
+		textureCross = getGlobalImage("wall_cross.png", true);
+		textureTopLeftOuterCorner = getGlobalImage("wall_top_left_corner_outer.png", true);
+		textureTopRightOuterCorner = getGlobalImage("wall_top_right_corner_outer.png", true);
+		textureBottomRightOuterCorner = getGlobalImage("wall_bottom_right_corner_outer.png", true);
+		textureBottomLeftOuterCorner = getGlobalImage("wall_bottom_left_corner_outer.png", true);
+		textureTopLeftInnerCorner = getGlobalImage("wall_top_left_corner_inner.png", true);
+		textureTopRightInnerCorner = getGlobalImage("wall_top_right_corner_inner.png", true);
+		textureBottomRightInnerCorner = getGlobalImage("wall_bottom_right_corner_inner.png", true);
+		textureBottomLeftInnerCorner = getGlobalImage("wall_bottom_left_corner_inner.png", true);
 	}
 
 	@Override

@@ -11,8 +11,8 @@ public class TemplatesContainers {
 		Templates.CHEST = new Storage();
 		Templates.CHEST.name = "Chest";
 		Templates.CHEST.baseName = "Chest";
-		Templates.CHEST.chestClosedTexture = ResourceUtils.getGlobalImage("chest.png");
-		Templates.CHEST.chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png");
+		Templates.CHEST.chestClosedTexture = ResourceUtils.getGlobalImage("chest.png", true);
+		Templates.CHEST.chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png", true);
 		Templates.CHEST.totalHealth = Templates.CHEST.remainingHealth = 200;
 		Templates.CHEST.widthRatio = 1f;
 		Templates.CHEST.heightRatio = 1f;
@@ -37,8 +37,8 @@ public class TemplatesContainers {
 		Templates.CRATE = new Storage();
 		Templates.CRATE.name = "Crate";
 		Templates.CRATE.baseName = "Crate";
-		Templates.CRATE.chestClosedTexture = ResourceUtils.getGlobalImage("crate.png");
-		Templates.CRATE.chestOpenTexture = ResourceUtils.getGlobalImage("crate_open.png");
+		Templates.CRATE.chestClosedTexture = ResourceUtils.getGlobalImage("crate.png", true);
+		Templates.CRATE.chestOpenTexture = ResourceUtils.getGlobalImage("crate_open.png", true);
 		Templates.CRATE.totalHealth = Templates.CRATE.remainingHealth = 60;
 		Templates.CRATE.widthRatio = 1f;
 		Templates.CRATE.heightRatio = 1f;

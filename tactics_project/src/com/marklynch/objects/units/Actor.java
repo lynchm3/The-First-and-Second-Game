@@ -226,8 +226,8 @@ public class Actor extends GameObject {
 	}
 
 	public static void loadStaticImages() {
-		SPEEECH_BUBBLE_TEXTURE = ResourceUtils.getGlobalImage("speech_bubble.png");
-		THOUGHT_BUBBLE_TEXTURE = ResourceUtils.getGlobalImage("thought_bubble.png");
+		SPEEECH_BUBBLE_TEXTURE = ResourceUtils.getGlobalImage("speech_bubble.png", false);
+		THOUGHT_BUBBLE_TEXTURE = ResourceUtils.getGlobalImage("thought_bubble.png", false);
 	}
 
 	@Override

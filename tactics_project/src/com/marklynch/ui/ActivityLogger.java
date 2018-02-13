@@ -115,8 +115,8 @@ public class ActivityLogger implements Draggable, Scrollable {
 	}
 
 	public static void loadStaticImages() {
-		fadeTop = ResourceUtils.getGlobalImage("fade_top.png");
-		fadeBottom = ResourceUtils.getGlobalImage("fade_bottom.png");
+		fadeTop = ResourceUtils.getGlobalImage("fade_top.png", false);
+		fadeBottom = ResourceUtils.getGlobalImage("fade_bottom.png", false);
 
 	}
 

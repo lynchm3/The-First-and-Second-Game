@@ -1,20 +1,19 @@
 package mdesl.test;
 
+import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE1;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE2;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
-import static org.lwjgl.opengl.GL20.glUniform1i;
-import static org.lwjgl.opengl.GL11.*;
 
 import java.io.IOException;
+
+import org.lwjgl.LWJGLException;
+import org.lwjgl.Sys;
 
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.glutils.ShaderProgram;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
 
 public class TextureBlendTest extends SimpleGame {
 
@@ -38,6 +37,7 @@ public class TextureBlendTest extends SimpleGame {
 	SpriteBatch batch;
 	Texture tex0, tex1, mask;
 
+	@Override
 	public void create() throws LWJGLException {
 		super.create();
 
@@ -55,9 +55,9 @@ public class TextureBlendTest extends SimpleGame {
 		batch = new SpriteBatch(shader, 1000);
 
 		try {
-			tex0 = new Texture(Util.getResource("res/dirt.png"));
-			tex1 = new Texture(Util.getResource("res/grass.png"));
-			mask = new Texture(Util.getResource("res/mask.png"));
+			tex0 = new Texture(Util.getResource("res/dirt.png"), false);
+			tex1 = new Texture(Util.getResource("res/grass.png"), false);
+			mask = new Texture(Util.getResource("res/mask.png"), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,6 +82,7 @@ public class TextureBlendTest extends SimpleGame {
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	}
 
+	@Override
 	public void render() throws LWJGLException {
 		super.render();
 

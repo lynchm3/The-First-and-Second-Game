@@ -32,7 +32,7 @@ public class Decoration {
 	}
 
 	public void loadImages() {
-		this.imageTexture = getGlobalImage(imageTexturePath);
+		this.imageTexture = getGlobalImage(imageTexturePath, false);
 	}
 
 	public void draw() {

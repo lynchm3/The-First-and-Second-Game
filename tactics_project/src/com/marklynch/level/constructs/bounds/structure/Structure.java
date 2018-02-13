@@ -43,7 +43,7 @@ public class Structure {
 		this.structureSections = caveSections;
 		this.rooms = rooms;
 		if (imageTexturePath != null)
-			this.image = ResourceUtils.getGlobalImage(imageTexturePath);
+			this.image = ResourceUtils.getGlobalImage(imageTexturePath, false);
 		this.gridX1 = overlayX1;
 		this.gridY1 = overlayY1;
 		this.gridX2 = overlayX2;

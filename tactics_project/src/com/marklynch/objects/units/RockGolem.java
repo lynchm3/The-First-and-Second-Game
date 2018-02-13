@@ -27,8 +27,8 @@ public class RockGolem extends Monster {
 		super();
 		this.roomLivingIn = roomLivingIn;
 		aiRoutine = new AIRoutineForRockGolem(this);
-		sleepingTexture = ResourceUtils.getGlobalImage("rock_golem_sleeping.png");
-		awakeTexture = ResourceUtils.getGlobalImage("rock_golem.png");
+		sleepingTexture = ResourceUtils.getGlobalImage("rock_golem_sleeping.png", false);
+		awakeTexture = ResourceUtils.getGlobalImage("rock_golem.png", false);
 
 		anchorX = 16;
 		anchorY = 64;

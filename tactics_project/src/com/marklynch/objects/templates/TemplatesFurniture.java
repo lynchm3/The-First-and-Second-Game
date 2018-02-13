@@ -25,7 +25,7 @@ public class TemplatesFurniture {
 		Templates.BED = new Bed();
 		Templates.BED.name = "Bed";
 		Templates.BED.imageTexturePath = "bed.png";
-		Templates.BED.imageTextureCovers = getGlobalImage("bed_covers.png");
+		Templates.BED.imageTextureCovers = getGlobalImage("bed_covers.png", false);
 		Templates.BED.totalHealth = Templates.BED.remainingHealth = 50;
 		Templates.BED.widthRatio = 1f;
 		Templates.BED.heightRatio = 1f;
@@ -48,8 +48,8 @@ public class TemplatesFurniture {
 		Templates.MIRROR = new Mirror();
 		Templates.MIRROR.name = "Mirror";
 		Templates.MIRROR.imageTexturePath = "mirror.png";
-		Templates.MIRROR.imageTextureFront = getGlobalImage("mirror.png");
-		Templates.MIRROR.imageTextureBack = getGlobalImage("mirror_back.png");
+		Templates.MIRROR.imageTextureFront = getGlobalImage("mirror.png", true);
+		Templates.MIRROR.imageTextureBack = getGlobalImage("mirror_back.png", true);
 		Templates.MIRROR.totalHealth = Templates.MIRROR.remainingHealth = 50;
 		Templates.MIRROR.widthRatio = 1f;
 		Templates.MIRROR.heightRatio = 1.5f;

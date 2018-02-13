@@ -34,12 +34,6 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 
 import java.io.IOException;
 
-import mdesl.graphics.Color;
-import mdesl.graphics.SpriteBatch;
-import mdesl.graphics.Texture;
-import mdesl.graphics.TextureRegion;
-import mdesl.graphics.text.BitmapFont;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
@@ -47,6 +41,12 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+
+import mdesl.graphics.Color;
+import mdesl.graphics.SpriteBatch;
+import mdesl.graphics.Texture;
+import mdesl.graphics.TextureRegion;
+import mdesl.graphics.text.BitmapFont;
 
 public class SpriteBatchTest extends SimpleGame {
 
@@ -66,13 +66,14 @@ public class SpriteBatchTest extends SimpleGame {
 	final float ZOOM_SPEED = 0.025f;
 	final float ROT_SPEED = 0.05f;
 
+	@Override
 	protected void create() throws LWJGLException {
 		super.create();
 
 		// Load some textures
 		try {
-			tex = new Texture(Util.getResource("res/tiles.png"), Texture.NEAREST);
-			tex2 = new Texture(Util.getResource("res/ptsans_00.png"));
+			tex = new Texture(Util.getResource("res/tiles.png"), Texture.NEAREST, false);
+			tex2 = new Texture(Util.getResource("res/ptsans_00.png"), false);
 			tile = new TextureRegion(tex, 128, 64, 64, 64);
 
 			font = new BitmapFont(Util.getResource("res/ptsans.fnt"), Util.getResource("res/ptsans_00.png"));
@@ -155,6 +156,7 @@ public class SpriteBatchTest extends SimpleGame {
 		batch.end();
 	}
 
+	@Override
 	protected void render() throws LWJGLException {
 		super.render();
 
@@ -184,6 +186,7 @@ public class SpriteBatchTest extends SimpleGame {
 		drawHUD();
 	}
 
+	@Override
 	protected void resize() throws LWJGLException {
 		super.resize();
 		batch.resize(Display.getWidth(), Display.getHeight());

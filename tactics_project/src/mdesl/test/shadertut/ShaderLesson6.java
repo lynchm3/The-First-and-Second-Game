@@ -6,18 +6,18 @@ import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 import java.io.IOException;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
+
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.test.Game;
 import mdesl.test.SimpleGame;
 import mdesl.test.Util;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
 
 public class ShaderLesson6 extends SimpleGame {
 
@@ -49,13 +49,14 @@ public class ShaderLesson6 extends SimpleGame {
 	// Attenuation coefficients for light falloff
 	public static final Vector3f FALLOFF = new Vector3f(.4f, 3f, 20f);
 
+	@Override
 	protected void create() throws LWJGLException {
 		super.create();
 
 		try {
 			// load our texture with linear filter
-			rock = new Texture(Util.getResource("res/rock.png"), Texture.LINEAR);
-			rockNormals = new Texture(Util.getResource("res/rock_n.png"), Texture.LINEAR);
+			rock = new Texture(Util.getResource("res/rock.png"), Texture.LINEAR, false);
+			rockNormals = new Texture(Util.getResource("res/rock_n.png"), Texture.LINEAR, false);
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode texture");
 		}
@@ -96,6 +97,7 @@ public class ShaderLesson6 extends SimpleGame {
 		}
 	}
 
+	@Override
 	protected void render() throws LWJGLException {
 		super.render();
 
@@ -126,17 +128,20 @@ public class ShaderLesson6 extends SimpleGame {
 		batch.end();
 	}
 
+	@Override
 	public void mousePressed(int x, int y, int button) {
 		LIGHT_POS.z = DEFAULT_LIGHT_Z;
 		System.out.println("New light Z: " + LIGHT_POS.z);
 	}
 
+	@Override
 	public void mouseWheelChanged(int delta) {
 		LIGHT_POS.z = Math.max(0f, LIGHT_POS.z + (delta * 0.005f));
 		System.out.println("New light Z: " + LIGHT_POS.z);
 	}
 
 	// called to resize the display
+	@Override
 	protected void resize() throws LWJGLException {
 		super.resize();
 		shader.use();

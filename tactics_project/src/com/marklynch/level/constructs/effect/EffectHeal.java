@@ -16,7 +16,7 @@ public class EffectHeal extends Effect {
 		this.target = target;
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
-		this.imageTexture = getGlobalImage("action_heal.png");
+		this.imageTexture = getGlobalImage("action_heal.png", false);
 		healing = 10;
 	}
 

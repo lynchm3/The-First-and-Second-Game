@@ -21,7 +21,7 @@ public class EffectBleeding extends Effect {
 		this.target = target;
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
-		this.imageTexture = getGlobalImage("effect_bleed.png");
+		this.imageTexture = getGlobalImage("effect_bleed.png", false);
 		this.bleedingDamage = 5;
 	}
 

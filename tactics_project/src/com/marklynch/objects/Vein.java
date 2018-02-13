@@ -7,9 +7,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Vein extends Wall {
 
@@ -82,19 +81,19 @@ public class Vein extends Wall {
 	}
 
 	public static void loadStaticImages() {
-		textureFullWall = getGlobalImage("vein.png");
-		textureFullTopWall = getGlobalImage("vein_full_top.png");
-		textureFullRightWall = getGlobalImage("vein_full_right.png");
-		textureFullBottomWall = getGlobalImage("vein_full_bottom.png");
-		textureFullLeftWall = getGlobalImage("vein_full_left.png");
-		textureTop = getGlobalImage("vein_top.png");
-		textureTopRight = getGlobalImage("vein_top_right.png");
-		textureRight = getGlobalImage("vein_right.png");
-		textureBottomRight = getGlobalImage("vein_bottom_right.png");
-		textureBottom = getGlobalImage("vein_bottom.png");
-		textureBottomLeft = getGlobalImage("vein_bottom_left.png");
-		textureLeft = getGlobalImage("vein_left.png");
-		textureTopLeft = getGlobalImage("vein_top_left.png");
+		textureFullWall = getGlobalImage("vein.png", true);
+		textureFullTopWall = getGlobalImage("vein_full_top.png", false);
+		textureFullRightWall = getGlobalImage("vein_full_right.png", false);
+		textureFullBottomWall = getGlobalImage("vein_full_bottom.png", false);
+		textureFullLeftWall = getGlobalImage("vein_full_left.png", false);
+		textureTop = getGlobalImage("vein_top.png", false);
+		textureTopRight = getGlobalImage("vein_top_right.png", false);
+		textureRight = getGlobalImage("vein_right.png", false);
+		textureBottomRight = getGlobalImage("vein_bottom_right.png", false);
+		textureBottom = getGlobalImage("vein_bottom.png", false);
+		textureBottomLeft = getGlobalImage("vein_bottom_left.png", false);
+		textureLeft = getGlobalImage("vein_left.png", false);
+		textureTopLeft = getGlobalImage("vein_top_left.png", false);
 	}
 
 	@Override

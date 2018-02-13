@@ -6,6 +6,10 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 
 import java.io.IOException;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
+
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.glutils.FrameBuffer;
@@ -13,10 +17,6 @@ import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.test.Game;
 import mdesl.test.SimpleGame;
 import mdesl.test.Util;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 
 public class ShaderLesson5 extends SimpleGame {
 
@@ -50,8 +50,8 @@ public class ShaderLesson5 extends SimpleGame {
 
 		try {
 			// load our texture with linear filter
-			tex = new Texture(Util.getResource("res/slider.png"), Texture.LINEAR);
-			tex2 = new Texture(Util.getResource("res/tiles.png"), Texture.LINEAR);
+			tex = new Texture(Util.getResource("res/slider.png"), Texture.LINEAR, false);
+			tex2 = new Texture(Util.getResource("res/tiles.png"), Texture.LINEAR, false);
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode texture");
 		}

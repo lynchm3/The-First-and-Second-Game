@@ -52,7 +52,7 @@ public class GameOver implements Draggable, Scrollable {
 	}
 
 	public static void loadStaticImages() {
-		youDied = ResourceUtils.getGlobalImage("you_died.png");
+		youDied = ResourceUtils.getGlobalImage("you_died.png", false);
 	}
 
 	public void resize() {

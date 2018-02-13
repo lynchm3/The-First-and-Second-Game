@@ -70,8 +70,8 @@ public class ShadowLight {
 		// LIGHT init
 		try {
 			// load our texture with linear filter
-			rock = new Texture(Util.getResource("res/rock.png"), Texture.LINEAR);
-			rockNormals = new Texture(Util.getResource("res/rock_n.png"), Texture.LINEAR);
+			rock = new Texture(Util.getResource("res/rock.png"), Texture.LINEAR, false);
+			rockNormals = new Texture(Util.getResource("res/rock_n.png"), Texture.LINEAR, false);
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode texture");
 		}
@@ -319,7 +319,7 @@ public class ShadowLight {
 			// System.out.println("Map draw Game.getDragX() = " +
 			// Game.getDragX() + ",
 			// Game.getDragY() = " + Game.getDragY());
-			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("bird.png"), 3000, 1000, 3000 + 128, 1000 + 128);
+			TextureUtils.drawTexture(ResourceUtils.getGlobalImage("bird.png", false), 3000, 1000, 3000 + 128, 1000 + 128);
 			Game.flush();
 		}
 		////////// END SKY

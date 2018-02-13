@@ -88,7 +88,7 @@ public class Shadow extends SimpleGame {
 					Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_map.frag")));
 			shadowRenderShader = createShader(Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_pass.vert")),
 					Util.readFile(Util.getResourceAsStream("res/shadertut/shadow_render.frag")));
-			casterSprites = new Texture(Util.getResource("res/cat4.png"), Texture.LINEAR);
+			casterSprites = new Texture(Util.getResource("res/cat4.png"), Texture.LINEAR, false);
 			occludersFBO = new FrameBuffer((int) lightSize, (int) lightSize, Texture.LINEAR);
 			shadowMapFBO = new FrameBuffer((int) lightSize, 1, Texture.LINEAR);
 			Texture shadowMapTex = shadowMapFBO.getTexture();

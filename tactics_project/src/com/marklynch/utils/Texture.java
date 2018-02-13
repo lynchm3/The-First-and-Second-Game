@@ -25,28 +25,29 @@ public class Texture extends mdesl.graphics.Texture {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Texture(URL pngRef, int filter, boolean genMipmap) throws IOException {
-		super(pngRef, filter, genMipmap);
+	public Texture(URL pngRef, int filter, boolean genMipmap, boolean generatePixelsArray) throws IOException {
+		super(pngRef, filter, genMipmap, generatePixelsArray);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Texture(URL pngRef, int minFilter, int magFilter, int wrap, boolean genMipmap) throws IOException {
-		super(pngRef, minFilter, magFilter, wrap, genMipmap);
+	public Texture(URL pngRef, int minFilter, int magFilter, int wrap, boolean genMipmap, boolean generatePixelsArray)
+			throws IOException {
+		super(pngRef, minFilter, magFilter, wrap, genMipmap, generatePixelsArray);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Texture(URL pngRef, int filter, int wrap) throws IOException {
-		super(pngRef, filter, wrap);
+	public Texture(URL pngRef, int filter, int wrap, boolean generatePixelsArray) throws IOException {
+		super(pngRef, filter, wrap, generatePixelsArray);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Texture(URL pngRef, int filter) throws IOException {
-		super(pngRef, filter);
+	public Texture(URL pngRef, int filter, boolean generatePixelsArray) throws IOException {
+		super(pngRef, filter, generatePixelsArray);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Texture(URL pngRef) throws IOException {
-		super(pngRef);
+	public Texture(URL pngRef, boolean generatePixelsArray) throws IOException {
+		super(pngRef, generatePixelsArray);
 		// TODO Auto-generated constructor stub
 	}
 

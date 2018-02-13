@@ -1,19 +1,14 @@
 package mdesl.test;
 
-import static org.lwjgl.opengl.GL11.GL_BACK;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_COLOR_LOGIC_OP;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.GL_FRONT;
-import static org.lwjgl.opengl.GL11.GL_FRONT_FACE;
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLE_STRIP;
 import static org.lwjgl.opengl.GL11.GL_XOR;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
-import static org.lwjgl.opengl.GL11.glCullFace;
 import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glLogicOp;
@@ -36,6 +31,12 @@ import java.util.prefs.Preferences;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
+
 import mdesl.graphics.Color;
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
@@ -46,12 +47,6 @@ import mdesl.graphics.glutils.VertexAttrib;
 import mdesl.graphics.glutils.VertexData;
 import mdesl.graphics.text.BitmapFont;
 import mdesl.util.MathUtil;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
 
 public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 
@@ -133,6 +128,7 @@ public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 
 	private boolean showTerrain = false;
 
+	@Override
 	public void dispose() throws LWJGLException {
 		if (tex != null)
 			tex.dispose();
@@ -153,6 +149,7 @@ public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 		}
 	}
 
+	@Override
 	public void create() throws LWJGLException {
 		super.create();
 
@@ -161,7 +158,7 @@ public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 		checkBG = prefs.getBoolean("checkBG", true);
 		polling = prefs.getBoolean("polling", true);
 		try {
-			Texture fontTex = new Texture(Util.getResource("res/ptsans_00.png"));
+			Texture fontTex = new Texture(Util.getResource("res/ptsans_00.png"), false);
 			font = new BitmapFont(Util.getResource("res/ptsans.fnt"), fontTex);
 
 			String path = prefs.get("url", null);
@@ -218,7 +215,7 @@ public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 		try {
 			if (tex != null)
 				tex.dispose();
-			tex = new Texture(url, curFilter, Texture.REPEAT);
+			tex = new Texture(url, curFilter, Texture.REPEAT, false);
 			errStr = "";
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -226,11 +223,13 @@ public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 		}
 	}
 
+	@Override
 	public void resize() throws LWJGLException {
 		batch.resize(Display.getWidth(), Display.getHeight());
 		setDisplayMode(Display.getWidth(), Display.getHeight());
 	}
 
+	@Override
 	public void render() throws LWJGLException {
 		// super.render();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -362,6 +361,7 @@ public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 		batch.end();
 	}
 
+	@Override
 	public void keyPressed(int k, char c) {
 		if (k == Keyboard.KEY_SPACE) {
 			scale = DEFAULT_SCALE_INDEX;
@@ -393,6 +393,7 @@ public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 		}
 	}
 
+	@Override
 	public void mouseWheelChanged(int delta) {
 		if (delta > 0 && scale < scales.length - 1) {
 			scale++;
@@ -400,6 +401,7 @@ public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 			scale--;
 	}
 
+	@Override
 	public void mousePressed(int x, int y, int button) {
 		if (errStr.length() != 0) {
 			errStr = "";
@@ -509,7 +511,7 @@ public class TextureRepeat extends SimpleGame implements FileDrop.Listener {
 		}
 
 		void vert(float x, float y, float z, float texSize) {
-			data.put(x).put(y).put(z).put(x / (float) w * texSize).put(y / (float) h * texSize);
+			data.put(x).put(y).put(z).put(x / w * texSize).put(y / h * texSize);
 		}
 
 		float rot = 0;

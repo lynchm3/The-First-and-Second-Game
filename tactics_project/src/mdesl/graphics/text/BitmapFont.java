@@ -90,7 +90,7 @@ public class BitmapFont {
 	}
 
 	public BitmapFont(URL fontDef, URL texture) throws IOException {
-		this(fontDef, new Texture(texture));
+		this(fontDef, new Texture(texture, false));
 	}
 
 	public BitmapFont(URL fontDef, Texture texture) throws IOException {

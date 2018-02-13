@@ -2,32 +2,22 @@ package mdesl.test;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_ONE;
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_RGBA;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL14.glBlendFuncSeparate;
-import static org.lwjgl.opengl.GL30.GL_COLOR_ATTACHMENT0;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
-import javax.imageio.ImageIO;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
 
-import mdesl.graphics.Color;
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.TextureRegion;
 import mdesl.graphics.glutils.FrameBuffer;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
 
 public class FBOTest extends SimpleGame {
 
@@ -48,11 +38,12 @@ public class FBOTest extends SimpleGame {
 	FrameBuffer fbo;
 	TextureRegion fboRegion;
 
+	@Override
 	protected void create() throws LWJGLException {
 		super.create();
 		// create our font
 		try {
-			atlas = new Texture(Util.getResource("res/slider.png"), Texture.NEAREST);
+			atlas = new Texture(Util.getResource("res/slider.png"), Texture.NEAREST, false);
 
 			// ideally you would use a texture packer like in LibGDX
 			track = new TextureRegion(atlas, 0, 0, 64, 256);
@@ -126,6 +117,7 @@ public class FBOTest extends SimpleGame {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
+	@Override
 	protected void render() throws LWJGLException {
 		// nice smooth background color
 		float L = 233 / 255f;
@@ -160,6 +152,7 @@ public class FBOTest extends SimpleGame {
 	}
 
 	// called to resize the display
+	@Override
 	protected void resize() throws LWJGLException {
 		super.resize();
 		// resize our batch with the new screen size

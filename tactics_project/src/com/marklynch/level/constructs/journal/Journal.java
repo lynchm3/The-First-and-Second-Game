@@ -161,10 +161,10 @@ public class Journal implements Draggable, Scrollable, Comparator<Quest> {
 	}
 
 	public static void loadStaticImages() {
-		checkBoxChecked = ResourceUtils.getGlobalImage("check_box_checked.png");
-		checkBoxUnchecked = ResourceUtils.getGlobalImage("check_box_unchecked.png");
-		exclamationTexture = ResourceUtils.getGlobalImage("exclamation_mark.png");
-		x = ResourceUtils.getGlobalImage("x.png");
+		checkBoxChecked = ResourceUtils.getGlobalImage("check_box_checked.png", false);
+		checkBoxUnchecked = ResourceUtils.getGlobalImage("check_box_unchecked.png", false);
+		exclamationTexture = ResourceUtils.getGlobalImage("exclamation_mark.png", false);
+		x = ResourceUtils.getGlobalImage("x.png", false);
 	}
 
 	public void resize() {

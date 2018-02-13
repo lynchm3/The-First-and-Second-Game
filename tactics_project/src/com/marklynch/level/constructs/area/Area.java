@@ -23,7 +23,7 @@ public class Area {
 		super();
 		this.name = name;
 		if (imageString != null)
-			this.image = ResourceUtils.getGlobalImage(imageString);
+			this.image = ResourceUtils.getGlobalImage(imageString, false);
 		this.gridX1 = gridX1;
 		this.gridY1 = gridY1;
 		this.gridX2 = gridX2;

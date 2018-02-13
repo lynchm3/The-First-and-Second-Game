@@ -2,15 +2,15 @@ package mdesl.test.shadertut;
 
 import java.io.IOException;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.test.Game;
 import mdesl.test.SimpleGame;
 import mdesl.test.Util;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
 
 public class ShaderLesson1 extends SimpleGame {
 
@@ -26,12 +26,13 @@ public class ShaderLesson1 extends SimpleGame {
 	// our sprite batch
 	SpriteBatch batch;
 
+	@Override
 	protected void create() throws LWJGLException {
 		super.create();
 
 		// this will be ignored in this lesson...
 		try {
-			tex = new Texture(Util.getResource("res/grass.png"), Texture.NEAREST);
+			tex = new Texture(Util.getResource("res/grass.png"), Texture.NEAREST, false);
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode texture");
 		}
@@ -58,6 +59,7 @@ public class ShaderLesson1 extends SimpleGame {
 		}
 	}
 
+	@Override
 	protected void render() throws LWJGLException {
 		super.render();
 
@@ -73,6 +75,7 @@ public class ShaderLesson1 extends SimpleGame {
 	}
 
 	// called to resize the display
+	@Override
 	protected void resize() throws LWJGLException {
 		super.resize();
 

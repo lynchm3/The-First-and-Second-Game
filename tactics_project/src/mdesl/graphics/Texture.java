@@ -177,25 +177,26 @@ public class Texture implements ITexture {
 		upload(GL_RGBA, buf);
 	}
 
-	public Texture(URL pngRef) throws IOException {
-		this(pngRef, DEFAULT_FILTER);
+	public Texture(URL pngRef, boolean generatePixelsArray) throws IOException {
+		this(pngRef, DEFAULT_FILTER, generatePixelsArray);
 	}
 
-	public Texture(URL pngRef, int filter) throws IOException {
-		this(pngRef, filter, DEFAULT_WRAP);
+	public Texture(URL pngRef, int filter, boolean generatePixelsArray) throws IOException {
+		this(pngRef, filter, DEFAULT_WRAP, generatePixelsArray);
 	}
 
-	public Texture(URL pngRef, int filter, int wrap) throws IOException {
-		this(pngRef, filter, filter, wrap, false);
+	public Texture(URL pngRef, int filter, int wrap, boolean generatePixelsArray) throws IOException {
+		this(pngRef, filter, filter, wrap, false, generatePixelsArray);
 	}
 
-	public Texture(URL pngRef, int filter, boolean genMipmap) throws IOException {
-		this(pngRef, filter, filter, DEFAULT_WRAP, genMipmap);
+	public Texture(URL pngRef, int filter, boolean genMipmap, boolean generatePixelsArray) throws IOException {
+		this(pngRef, filter, filter, DEFAULT_WRAP, genMipmap, generatePixelsArray);
 	}
 
 	public byte[] pixels;
 
-	public Texture(URL pngRef, int minFilter, int magFilter, int wrap, boolean genMipmap) throws IOException {
+	public Texture(URL pngRef, int minFilter, int magFilter, int wrap, boolean genMipmap, boolean generatePixelsArray)
+			throws IOException {
 		// TODO: npot check
 		InputStream input = null;
 		try {
@@ -208,9 +209,11 @@ public class Texture implements ITexture {
 			dec.decode(buf, width * 4, PNGDecoder.Format.RGBA);
 			buf.flip();
 
-			ByteBuffer dupe = buf.duplicate();
-			pixels = new byte[dupe.remaining()];
-			dupe.get(pixels);
+			if (generatePixelsArray) {
+				ByteBuffer dupe = buf.duplicate();
+				pixels = new byte[dupe.remaining()];
+				dupe.get(pixels);
+			}
 
 			glEnable(getTarget());
 			id = glGenTextures();

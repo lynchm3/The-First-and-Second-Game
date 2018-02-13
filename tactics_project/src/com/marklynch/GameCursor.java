@@ -18,15 +18,15 @@ public class GameCursor {
 	public transient Texture greenArrow = null;
 
 	public GameCursor() {
-		this.imageTexture = getGlobalImage("highlight.png");
-		this.imageTexture2 = getGlobalImage("highlight2.png");
-		this.imageTexture3 = getGlobalImage("highlight3.png");
-		this.imageTexture4 = getGlobalImage("highlight4.png");
-		this.cursor = getGlobalImage("cursor.png");
-		this.circle = getGlobalImage("circle.png");
-		this.redArrow = getGlobalImage("red_arrow.png");
-		this.yellowArrow = getGlobalImage("yellow_arrow.png");
-		this.blueArrow = getGlobalImage("blue_arrow.png");
-		this.greenArrow = getGlobalImage("green_arrow.png");
+		this.imageTexture = getGlobalImage("highlight.png", false);
+		this.imageTexture2 = getGlobalImage("highlight2.png", false);
+		this.imageTexture3 = getGlobalImage("highlight3.png", false);
+		this.imageTexture4 = getGlobalImage("highlight4.png", false);
+		this.cursor = getGlobalImage("cursor.png", false);
+		this.circle = getGlobalImage("circle.png", false);
+		this.redArrow = getGlobalImage("red_arrow.png", false);
+		this.yellowArrow = getGlobalImage("yellow_arrow.png", false);
+		this.blueArrow = getGlobalImage("blue_arrow.png", false);
+		this.greenArrow = getGlobalImage("green_arrow.png", false);
 	}
 }

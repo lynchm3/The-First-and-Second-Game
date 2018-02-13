@@ -4,15 +4,15 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 
 import java.io.IOException;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
+
 import mdesl.graphics.Color;
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.TextureRegion;
 import mdesl.graphics.text.BitmapFont;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 
 public class RectTest extends SimpleGame {
 
@@ -42,7 +42,7 @@ public class RectTest extends SimpleGame {
 		super.create();
 		// create our font
 		try {
-			fontTex = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+			fontTex = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST, false);
 
 			// in Photoshop, we included a small white box at the bottom right
 			// of our font sheet

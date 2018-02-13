@@ -1084,7 +1084,7 @@ public abstract class AIRoutine {
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
-			this.actor.thoughtBubbleImageTextureAction = getGlobalImage("left.png");
+			this.actor.thoughtBubbleImageTextureAction = getGlobalImage("left.png", false);
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
 				AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);

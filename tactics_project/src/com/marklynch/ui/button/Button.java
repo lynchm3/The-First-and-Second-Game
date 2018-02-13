@@ -22,8 +22,8 @@ public abstract class Button {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.enabledTexture = ResourceUtils.getGlobalImage(enabledTexturePath);
-		this.disabledTexture = ResourceUtils.getGlobalImage(disabledTexturePath);
+		this.enabledTexture = ResourceUtils.getGlobalImage(enabledTexturePath, false);
+		this.disabledTexture = ResourceUtils.getGlobalImage(disabledTexturePath, false);
 		this.text = text;
 	}
 

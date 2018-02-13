@@ -271,7 +271,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void postLoad1() {
 		inventory.postLoad1();
-		loadImages();
+		// loadImages();
 		// paths = new HashMap<Square, Path>();
 		if (squareGameObjectIsOn != null) {
 			this.squareGameObjectIsOn.inventory.add(this);
@@ -285,24 +285,24 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public void loadImages() {
-		this.imageTexture = getGlobalImage(imageTexturePath);
+		this.imageTexture = getGlobalImage(imageTexturePath, true);
 
 	}
 
 	public static void loadStaticImages() {
 
-		powTexture = getGlobalImage("pow.png");
-		vsTexture = getGlobalImage("vs.png");
-		fightTexture = getGlobalImage("fight.png");
-		skullTexture = getGlobalImage("skull.png");
-		xTexture = getGlobalImage("x.png");
-		upTexture = getGlobalImage("up.png");
-		downTexture = getGlobalImage("down.png");
-		leftTexture = getGlobalImage("left.png");
-		rightTexture = getGlobalImage("right.png");
-		armTexture = getGlobalImage("arm.png");
-		grassNormalTexture = getGlobalImage("grass_NRM.png");
-		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png");
+		powTexture = getGlobalImage("pow.png", false);
+		vsTexture = getGlobalImage("vs.png", false);
+		fightTexture = getGlobalImage("fight.png", false);
+		skullTexture = getGlobalImage("skull.png", false);
+		xTexture = getGlobalImage("x.png", false);
+		upTexture = getGlobalImage("up.png", false);
+		downTexture = getGlobalImage("down.png", false);
+		leftTexture = getGlobalImage("left.png", false);
+		rightTexture = getGlobalImage("right.png", false);
+		armTexture = getGlobalImage("arm.png", false);
+		grassNormalTexture = getGlobalImage("grass_NRM.png", false);
+		skipNormalTexture = getGlobalImage("skip_with_shadow_NRM.png", false);
 		screamAudio = ResourceUtils.getGlobalSound("scream.wav");
 	}
 

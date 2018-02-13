@@ -66,10 +66,10 @@ public abstract class Effect implements DamageDealer {
 	}
 
 	public static void loadEffectImages() {
-		getGlobalImage("effect_bleed.png");
-		getGlobalImage("effect_burn.png");
-		getGlobalImage("effect_poison.png");
-		getGlobalImage("effect_wet.png");
+		getGlobalImage("effect_bleed.png", false);
+		getGlobalImage("effect_burn.png", false);
+		getGlobalImage("effect_poison.png", false);
+		getGlobalImage("effect_wet.png", false);
 	}
 
 	// @Override

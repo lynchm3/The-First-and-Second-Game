@@ -317,7 +317,7 @@ public class Game {
 
 		// load our shader program and sprite batch
 		try {
-			Game.fontTexture = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+			Game.fontTexture = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST, false);
 
 			Game.smallFont = new BitmapFont(Util.getResource("res/ptsans.fnt"), Game.fontTexture);
 
@@ -329,7 +329,7 @@ public class Game {
 			Game.quadTexture = new TextureRegion(Game.fontTexture, Game.fontTexture.getWidth() - 2,
 					Game.fontTexture.getHeight() - 2, 1, 1);
 
-			Texture fontTexture2 = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST);
+			Texture fontTexture2 = new Texture(Util.getResource("res/ptsans_00.png"), Texture.NEAREST, false);
 			largeFont = new BitmapFont(Util.getResource("res/ptsans.fnt"), fontTexture2);
 
 			// load a default java font

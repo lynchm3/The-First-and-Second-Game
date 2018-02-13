@@ -13,7 +13,7 @@ public class PowerHealSelf extends Power {
 	private static String NAME = "Heal Self";
 
 	public PowerHealSelf(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("action_heal.png"), source,
+		super(NAME, ResourceUtils.getGlobalImage("action_heal.png", false), source,
 				new Effect[] { new EffectHeal(source, null, 1) }, 0, new Point[] { new Point(0, 0) }, 5, false, false,
 				Crime.TYPE.NONE);
 	}

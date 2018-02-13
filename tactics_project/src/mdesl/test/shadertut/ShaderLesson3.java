@@ -2,15 +2,15 @@ package mdesl.test.shadertut;
 
 import java.io.IOException;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.test.Game;
 import mdesl.test.SimpleGame;
 import mdesl.test.Util;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
 
 public class ShaderLesson3 extends SimpleGame {
 
@@ -29,6 +29,7 @@ public class ShaderLesson3 extends SimpleGame {
 	// our program
 	ShaderProgram program;
 
+	@Override
 	protected void create() throws LWJGLException {
 		super.create();
 
@@ -39,7 +40,7 @@ public class ShaderLesson3 extends SimpleGame {
 		// using an FBO.
 		// For now we will apply the concepts to individual textures.
 		try {
-			tex = new Texture(Util.getResource("res/scene.png"), Texture.NEAREST);
+			tex = new Texture(Util.getResource("res/scene.png"), Texture.NEAREST, false);
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode texture");
 		}
@@ -66,6 +67,7 @@ public class ShaderLesson3 extends SimpleGame {
 		}
 	}
 
+	@Override
 	protected void render() throws LWJGLException {
 		super.render();
 
@@ -78,6 +80,7 @@ public class ShaderLesson3 extends SimpleGame {
 	}
 
 	// called to resize the display
+	@Override
 	protected void resize() throws LWJGLException {
 		super.resize();
 

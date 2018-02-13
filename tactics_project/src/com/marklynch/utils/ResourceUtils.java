@@ -21,7 +21,7 @@ public class ResourceUtils {
 	private static HashMap<String, TrueTypeFont> levelFonts = new HashMap<String, TrueTypeFont>();
 	private static HashMap<String, Audio> globalSounds = new HashMap<String, Audio>();
 
-	public static Texture getGlobalImage(String path) {
+	public static Texture getGlobalImage(String path, boolean generatePixels) {
 
 		if (path == null || path.length() == 0)
 			return null;
@@ -38,7 +38,7 @@ public class ResourceUtils {
 		} else {
 			try {
 				texture = new com.marklynch.utils.Texture(Util.getResource("res/images/" + path),
-						com.marklynch.utils.Texture.LINEAR);
+						com.marklynch.utils.Texture.LINEAR, generatePixels);
 				globalImages.put(path, texture);
 			} catch (Exception e) {
 

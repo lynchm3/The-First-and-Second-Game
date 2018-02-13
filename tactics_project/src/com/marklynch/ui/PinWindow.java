@@ -189,7 +189,7 @@ public class PinWindow implements Draggable {
 		}
 
 		// Name
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY, drawPositionX + statsImageX + 20, drawPositionY + statsY + 20);
 		if (bestiaryKnowledge.name) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, null,
@@ -203,7 +203,7 @@ public class PinWindow implements Draggable {
 
 		// Level
 
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 30, drawPositionX + statsImageX + 20, drawPositionY + statsY + 30 + 20);
 		if (bestiaryKnowledge.level) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false,
@@ -217,7 +217,7 @@ public class PinWindow implements Draggable {
 
 		// total health
 
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 60 + 20);
 		if (bestiaryKnowledge.totalHealth) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false,
@@ -235,7 +235,7 @@ public class PinWindow implements Draggable {
 
 		// strength
 
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 150, drawPositionX + statsImageX + 20, drawPositionY + statsY + 150 + 20);
 		if (bestiaryKnowledge.strength) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false,
@@ -249,7 +249,7 @@ public class PinWindow implements Draggable {
 
 		// dexterity
 
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 180, drawPositionX + statsImageX + 20, drawPositionY + statsY + 180 + 20);
 		if (bestiaryKnowledge.dexterity) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false,
@@ -263,7 +263,7 @@ public class PinWindow implements Draggable {
 
 		// intelligence
 
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 210, drawPositionX + statsImageX + 20, drawPositionY + statsY + 210 + 20);
 		if (bestiaryKnowledge.intelligence) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false,
@@ -277,7 +277,7 @@ public class PinWindow implements Draggable {
 
 		// endurance
 
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + statsImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
 				drawPositionY + statsY + 240, drawPositionX + statsImageX + 20, drawPositionY + statsY + 240 + 20);
 		if (bestiaryKnowledge.endurance) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false,
@@ -295,7 +295,7 @@ public class PinWindow implements Draggable {
 
 		// Slash resistance
 
-		TextureUtils.drawTexture(getGlobalImage("action_slash.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 60, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 60 + 20);
 		if (bestiaryKnowledge.slashResistance) {
@@ -310,7 +310,7 @@ public class PinWindow implements Draggable {
 
 		// Pierce resistance
 
-		TextureUtils.drawTexture(getGlobalImage("action_pierce.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_pierce.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 90, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 90 + 20);
 		if (bestiaryKnowledge.pierceResistance) {
@@ -325,7 +325,7 @@ public class PinWindow implements Draggable {
 
 		// Blunt resistance
 
-		TextureUtils.drawTexture(getGlobalImage("action_blunt.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_blunt.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 120, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 120 + 20);
 		if (bestiaryKnowledge.bluntResistance) {
@@ -339,7 +339,7 @@ public class PinWindow implements Draggable {
 		}
 
 		// Fire resistance
-		TextureUtils.drawTexture(getGlobalImage("action_burn.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_burn.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 150, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 150 + 20);
 		if (bestiaryKnowledge.fireResistance) {
@@ -353,7 +353,7 @@ public class PinWindow implements Draggable {
 		}
 
 		// Water resistance
-		TextureUtils.drawTexture(getGlobalImage("action_douse.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_douse.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 180, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 180 + 20);
 		if (bestiaryKnowledge.waterResistance) {
@@ -368,7 +368,7 @@ public class PinWindow implements Draggable {
 
 		// Electric resistance
 
-		TextureUtils.drawTexture(getGlobalImage("action_electric.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_electric.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 210, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 210 + 20);
 		if (bestiaryKnowledge.electricResistance) {
@@ -382,7 +382,7 @@ public class PinWindow implements Draggable {
 		}
 
 		// Poison resistance
-		TextureUtils.drawTexture(getGlobalImage("action_poison.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("action_poison.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 240, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 240 + 20);
 		if (bestiaryKnowledge.poisonResistance) {
@@ -396,7 +396,7 @@ public class PinWindow implements Draggable {
 		}
 
 		// Bleeding resistance
-		TextureUtils.drawTexture(getGlobalImage("effect_bleeding.png"), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("effect_bleeding.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 270, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 270 + 20);
 		if (bestiaryKnowledge.poisonResistance) {

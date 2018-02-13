@@ -227,8 +227,8 @@ public class TemplatesNature {
 		Templates.MOUND.anchorX = 0;
 		Templates.MOUND.anchorY = 0;
 		Templates.MOUND.templateId = GameObject.generateNewTemplateId();
-		Templates.MOUND.preDiscoverTexture = ResourceUtils.getGlobalImage("mound.png");
-		Templates.MOUND.postDiscoverTexture = ResourceUtils.getGlobalImage("mound.png");
+		Templates.MOUND.preDiscoverTexture = ResourceUtils.getGlobalImage("mound.png", true);
+		Templates.MOUND.postDiscoverTexture = ResourceUtils.getGlobalImage("mound.png", true);
 		Templates.MOUND.diggable = true;
 		Templates.MOUND.canContainOtherObjects = false;
 		Templates.MOUND.flipYAxisInMirror = false;

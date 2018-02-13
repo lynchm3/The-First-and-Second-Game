@@ -12,9 +12,9 @@ public class ThoughtBubbles {
 
 	public static void loadExpressions() {
 
-		QUESTION_MARK = ResourceUtils.getGlobalImage("question_mark.png");
-		MEAT_CHUNK = ResourceUtils.getGlobalImage("meat_chunk.png");
-		JUSTICE = ResourceUtils.getGlobalImage("expression_justice.png");
+		QUESTION_MARK = ResourceUtils.getGlobalImage("question_mark.png", false);
+		MEAT_CHUNK = ResourceUtils.getGlobalImage("meat_chunk.png", false);
+		JUSTICE = ResourceUtils.getGlobalImage("expression_justice.png", false);
 
 	}
 

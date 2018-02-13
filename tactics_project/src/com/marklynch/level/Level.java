@@ -716,7 +716,7 @@ public class Level {
 
 	private void initGrid(final Square[][] squares, final int width, final int height) {
 
-		InventorySquare.imageTexture = getGlobalImage("dialogbg.png");
+		InventorySquare.imageTexture = getGlobalImage("dialogbg.png", false);
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {

@@ -31,7 +31,7 @@ public abstract class Action {
 	public Action(String actionName, String imageName) {
 		super();
 		this.actionName = actionName;
-		this.image = getGlobalImage(imageName);
+		this.image = getGlobalImage(imageName, false);
 	}
 
 	public abstract void perform();
@@ -81,60 +81,60 @@ public abstract class Action {
 	}
 
 	public static void loadActionImages() {
-		getGlobalImage("action_add_map_marker.png");
-		getGlobalImage("action_attack.png");
-		getGlobalImage("action_blunt.png");
-		getGlobalImage("action_burn.png");
-		getGlobalImage("action_chop.png");
-		getGlobalImage("action_close.png");
-		getGlobalImage("action_die.png");// untested
-		getGlobalImage("action_dig.png");
-		getGlobalImage("action_drop.png");
-		getGlobalImage("action_eat.png");
-		getGlobalImage("action_equip.png");
-		getGlobalImage("action_electric.png");
-		getGlobalImage("action_fill_container.png");
-		getGlobalImage("action_give.png");
-		getGlobalImage("action_heal.png");
-		getGlobalImage("action_hide.png");
-		getGlobalImage("left.png");
-		getGlobalImage("action_lock.png");
-		getGlobalImage("action_loiter.png");
-		getGlobalImage("action_loot_all.png");
-		getGlobalImage("action_mine.png");
-		textureWalk = getGlobalImage("action_move.png");
-		getGlobalImage("action_open.png");
-		getGlobalImage("action_pet.png");
-		getGlobalImage("action_pierce.png");
-		getGlobalImage("action_pickpocket_all.png");// untested
-		getGlobalImage("action_pick_up.png");
-		getGlobalImage("action_posion.png");
-		getGlobalImage("action_pour.png");
-		getGlobalImage("action_put.png");// untested
-		getGlobalImage("action_read.png");
-		getGlobalImage("action_ring.png");
-		getGlobalImage("right.png");
-		getGlobalImage("action_scream.png");// untested
-		textureEllipse = getGlobalImage("action_select_object.png");
-		getGlobalImage("action_search.png");
-		getGlobalImage("action_slash.png");
-		getGlobalImage("action_sleep.png");// untested
-		getGlobalImage("action_smash.png");
-		getGlobalImage("action_spot.png");// untested
-		getGlobalImage("action_squash.png");
-		getGlobalImage("action_stop_hiding.png");
-		getGlobalImage("action_take.png");
-		getGlobalImage("action_take_all.png");
-		getGlobalImage("action_take_bite.png");// untested
-		getGlobalImage("action_talk.png");
-		getGlobalImage("action_teleport.png");
-		getGlobalImage("action_throw.png");
-		getGlobalImage("action_trespass.png"); // untested
-		getGlobalImage("action_unlock.png");
-		getGlobalImage("action_use.png");
-		getGlobalImage("action_write.png"); // untested
-		getGlobalImage("star.png");
-		x = getGlobalImage("x.png");
+		getGlobalImage("action_add_map_marker.png", false);
+		getGlobalImage("action_attack.png", false);
+		getGlobalImage("action_blunt.png", false);
+		getGlobalImage("action_burn.png", false);
+		getGlobalImage("action_chop.png", false);
+		getGlobalImage("action_close.png", false);
+		getGlobalImage("action_die.png", false);// untested
+		getGlobalImage("action_dig.png", false);
+		getGlobalImage("action_drop.png", false);
+		getGlobalImage("action_eat.png", false);
+		getGlobalImage("action_equip.png", false);
+		getGlobalImage("action_electric.png", false);
+		getGlobalImage("action_fill_container.png", false);
+		getGlobalImage("action_give.png", false);
+		getGlobalImage("action_heal.png", false);
+		getGlobalImage("action_hide.png", false);
+		getGlobalImage("left.png", false);
+		getGlobalImage("action_lock.png", false);
+		getGlobalImage("action_loiter.png", false);
+		getGlobalImage("action_loot_all.png", false);
+		getGlobalImage("action_mine.png", false);
+		textureWalk = getGlobalImage("action_move.png", false);
+		getGlobalImage("action_open.png", false);
+		getGlobalImage("action_pet.png", false);
+		getGlobalImage("action_pierce.png", false);
+		getGlobalImage("action_pickpocket_all.png", false);// untested
+		getGlobalImage("action_pick_up.png", false);
+		getGlobalImage("action_posion.png", false);
+		getGlobalImage("action_pour.png", false);
+		getGlobalImage("action_put.png", false);// untested
+		getGlobalImage("action_read.png", false);
+		getGlobalImage("action_ring.png", false);
+		getGlobalImage("right.png", false);
+		getGlobalImage("action_scream.png", false);// untested
+		textureEllipse = getGlobalImage("action_select_object.png", false);
+		getGlobalImage("action_search.png", false);
+		getGlobalImage("action_slash.png", false);
+		getGlobalImage("action_sleep.png", false);// untested
+		getGlobalImage("action_smash.png", false);
+		getGlobalImage("action_spot.png", false);// untested
+		getGlobalImage("action_squash.png", false);
+		getGlobalImage("action_stop_hiding.png", false);
+		getGlobalImage("action_take.png", false);
+		getGlobalImage("action_take_all.png", false);
+		getGlobalImage("action_take_bite.png", false);// untested
+		getGlobalImage("action_talk.png", false);
+		getGlobalImage("action_teleport.png", false);
+		getGlobalImage("action_throw.png", false);
+		getGlobalImage("action_trespass.png", false); // untested
+		getGlobalImage("action_unlock.png", false);
+		getGlobalImage("action_use.png", false);
+		getGlobalImage("action_write.png", false); // untested
+		getGlobalImage("star.png", false);
+		x = getGlobalImage("x.png", false);
 
 	}
 }

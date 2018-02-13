@@ -13,7 +13,7 @@ public class PowerPoisonBlast extends Power {
 	private static String NAME = "Poison";
 
 	public PowerPoisonBlast(GameObject source) {
-		super(NAME, ResourceUtils.getGlobalImage("action_poison.png"), source,
+		super(NAME, ResourceUtils.getGlobalImage("action_poison.png", false), source,
 				new Effect[] { new EffectPoison(source, null, 3) }, 10,
 				new Point[] { new Point(0, 0), new Point(0, 1), new Point(0, -1), new Point(-1, 0), new Point(1, 0) },
 				10, true, true, Crime.TYPE.CRIME_ASSAULT);

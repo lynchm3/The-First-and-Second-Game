@@ -10,9 +10,8 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.Link;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class MapMarker extends GameObject {
 
@@ -34,8 +33,6 @@ public class MapMarker extends GameObject {
 		canBePickedUp = false;
 
 		fitsInInventory = false;
-
-
 
 		persistsWhenCantBeSeen = true;
 		attackable = false;
@@ -75,6 +72,7 @@ public class MapMarker extends GameObject {
 
 	}
 
+	@Override
 	public void drawStaticUI() {
 
 		float alpha = 1;
@@ -111,11 +109,11 @@ public class MapMarker extends GameObject {
 
 	public static void loadStaticImages() {
 
-		RED_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_red.png");
-		TREASURE_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_treasure.png");
-		SKULL_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_skull.png");
-		GREEN_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_green.png");
-		BLUE_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_blue.png");
+		RED_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_red.png", true);
+		TREASURE_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_treasure.png", true);
+		SKULL_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_skull.png", true);
+		GREEN_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_green.png", true);
+		BLUE_MAP_MARKER_TEXTURE = ResourceUtils.getGlobalImage("map_marker_blue.png", true);
 
 		MAP_MARKER_TEXTURES.add(RED_MAP_MARKER_TEXTURE);
 		MAP_MARKER_TEXTURES.add(TREASURE_MAP_MARKER_TEXTURE);

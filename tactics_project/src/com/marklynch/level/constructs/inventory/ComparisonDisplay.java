@@ -66,18 +66,18 @@ public class ComparisonDisplay {
 	}
 
 	public static void loadStaticImages() {
-		imageSlash = getGlobalImage("action_slash.png");
-		imagePierce = getGlobalImage("action_pierce.png");
-		imageBlunt = getGlobalImage("action_blunt.png");
-		imageFire = getGlobalImage("action_burn.png");
-		imageWater = getGlobalImage("action_douse.png");
-		imageElectrical = getGlobalImage("action_electric.png");
-		imagePosion = getGlobalImage("action_poison.png");
-		imageBleeding = getGlobalImage("effect_bleed.png");
-		imageHealing = getGlobalImage("action_heal.png");
-		imageRange = getGlobalImage("range.png");
-		imageWeight = getGlobalImage("weight.png");
-		imageValue = getGlobalImage("gold.png");
+		imageSlash = getGlobalImage("action_slash.png", false);
+		imagePierce = getGlobalImage("action_pierce.png", false);
+		imageBlunt = getGlobalImage("action_blunt.png", false);
+		imageFire = getGlobalImage("action_burn.png", false);
+		imageWater = getGlobalImage("action_douse.png", false);
+		imageElectrical = getGlobalImage("action_electric.png", false);
+		imagePosion = getGlobalImage("action_poison.png", false);
+		imageBleeding = getGlobalImage("effect_bleed.png", false);
+		imageHealing = getGlobalImage("action_heal.png", false);
+		imageRange = getGlobalImage("range.png", false);
+		imageWeight = getGlobalImage("weight.png", false);
+		imageValue = getGlobalImage("gold.png", false);
 	}
 
 	public void drawStaticUI() {

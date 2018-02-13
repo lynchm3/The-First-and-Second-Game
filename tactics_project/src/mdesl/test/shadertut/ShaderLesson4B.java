@@ -8,15 +8,15 @@ import static org.lwjgl.opengl.GL13.glActiveTexture;
 
 import java.io.IOException;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+
 import mdesl.graphics.SpriteBatch;
 import mdesl.graphics.Texture;
 import mdesl.graphics.glutils.ShaderProgram;
 import mdesl.test.Game;
 import mdesl.test.SimpleGame;
 import mdesl.test.Util;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
 
 public class ShaderLesson4B extends SimpleGame {
 
@@ -44,13 +44,14 @@ public class ShaderLesson4B extends SimpleGame {
 	// our very simple timing mechanism which we'll send to the shader
 	float tick = 0;
 
+	@Override
 	protected void create() throws LWJGLException {
 		super.create();
 
 		try {
-			tex0 = new Texture(Util.getResource("res/grass.png"), Texture.NEAREST, Texture.REPEAT);
-			tex1 = new Texture(Util.getResource("res/dirt.png"), Texture.NEAREST, Texture.REPEAT);
-			mask = new Texture(Util.getResource("res/mask.png"), Texture.NEAREST, Texture.REPEAT);
+			tex0 = new Texture(Util.getResource("res/grass.png"), Texture.NEAREST, Texture.REPEAT, false);
+			tex1 = new Texture(Util.getResource("res/dirt.png"), Texture.NEAREST, Texture.REPEAT, false);
+			mask = new Texture(Util.getResource("res/mask.png"), Texture.NEAREST, Texture.REPEAT, false);
 		} catch (IOException e) {
 			throw new RuntimeException("couldn't decode textures");
 		}
@@ -99,6 +100,7 @@ public class ShaderLesson4B extends SimpleGame {
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	}
 
+	@Override
 	protected void render() throws LWJGLException {
 		super.render();
 
@@ -113,6 +115,7 @@ public class ShaderLesson4B extends SimpleGame {
 	}
 
 	// called to resize the display
+	@Override
 	protected void resize() throws LWJGLException {
 		super.resize();
 

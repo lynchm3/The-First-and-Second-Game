@@ -28,7 +28,7 @@ public class ActionEquip extends Action {
 
 		}
 		if (!Game.level.player.inventory.contains(gameObject) && Game.level.openInventories.size() > 0) {
-			image = ResourceUtils.getGlobalImage("leftleft.png");
+			image = ResourceUtils.getGlobalImage("leftleft.png", false);
 		}
 		if (!check()) {
 			enabled = false;

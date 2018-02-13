@@ -642,13 +642,13 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	}
 
 	public static void loadStaticImages() {
-		textureUp = ResourceUtils.getGlobalImage("inventory_up.png");
-		textureDown = ResourceUtils.getGlobalImage("inventory_down.png");
-		textureCorner = ResourceUtils.getGlobalImage("inventory_corner.png");
-		textureFilter = ResourceUtils.getGlobalImage("filter.png");
-		textureBag = ResourceUtils.getGlobalImage("bag.png");
-		textureStar = ResourceUtils.getGlobalImage("star.png");
-		textureGold = ResourceUtils.getGlobalImage("gold.png");
+		textureUp = ResourceUtils.getGlobalImage("inventory_up.png", false);
+		textureDown = ResourceUtils.getGlobalImage("inventory_down.png", false);
+		textureCorner = ResourceUtils.getGlobalImage("inventory_corner.png", false);
+		textureFilter = ResourceUtils.getGlobalImage("filter.png", false);
+		textureBag = ResourceUtils.getGlobalImage("bag.png", false);
+		textureStar = ResourceUtils.getGlobalImage("star.png", false);
+		textureGold = ResourceUtils.getGlobalImage("gold.png", false);
 	}
 
 	public GameObject get(int index) {

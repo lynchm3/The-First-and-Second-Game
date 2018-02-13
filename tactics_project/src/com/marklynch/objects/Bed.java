@@ -29,7 +29,7 @@ public class Bed extends GameObject {
 	}
 
 	public void loadCoverImage() {
-		this.imageTextureCovers = getGlobalImage(imagePathCovers);
+		this.imageTextureCovers = getGlobalImage(imagePathCovers, false);
 	}
 
 	@Override

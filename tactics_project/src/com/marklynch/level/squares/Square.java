@@ -174,30 +174,30 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public static void loadStaticImages() {
-		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png");
-		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png");
-		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png");
-		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png");
-		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png");
-		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png");
-		YELLOW_SQUARE = ResourceUtils.getGlobalImage("yellow_square.png");
-		RED_SQUARE = ResourceUtils.getGlobalImage("red_square.png");
+		GRASS_TEXTURE = ResourceUtils.getGlobalImage("grass.png", false);
+		DARK_GRASS_TEXTURE = ResourceUtils.getGlobalImage("dark_grass.png", false);
+		STONE_TEXTURE = ResourceUtils.getGlobalImage("stone.png", false);
+		MUD_TEXTURE = ResourceUtils.getGlobalImage("mud.png", false);
+		GREY_TEXTURE = ResourceUtils.getGlobalImage("square.png", false);
+		WHITE_SQUARE = ResourceUtils.getGlobalImage("white_square.png", false);
+		YELLOW_SQUARE = ResourceUtils.getGlobalImage("yellow_square.png", false);
+		RED_SQUARE = ResourceUtils.getGlobalImage("red_square.png", false);
 
-		W_TEXTURE = ResourceUtils.getGlobalImage("w.png");
-		A_TEXTURE = ResourceUtils.getGlobalImage("a.png");
-		S_TEXTURE = ResourceUtils.getGlobalImage("s.png");
-		D_TEXTURE = ResourceUtils.getGlobalImage("d.png");
-		SHIFT_W_TEXTURE = ResourceUtils.getGlobalImage("shiftw.png");
-		SHIFT_A_TEXTURE = ResourceUtils.getGlobalImage("shifta.png");
-		SHIFT_S_TEXTURE = ResourceUtils.getGlobalImage("shifts.png");
-		SHIFT_D_TEXTURE = ResourceUtils.getGlobalImage("shiftd.png");
+		W_TEXTURE = ResourceUtils.getGlobalImage("w.png", false);
+		A_TEXTURE = ResourceUtils.getGlobalImage("a.png", false);
+		S_TEXTURE = ResourceUtils.getGlobalImage("s.png", false);
+		D_TEXTURE = ResourceUtils.getGlobalImage("d.png", false);
+		SHIFT_W_TEXTURE = ResourceUtils.getGlobalImage("shiftw.png", false);
+		SHIFT_A_TEXTURE = ResourceUtils.getGlobalImage("shifta.png", false);
+		SHIFT_S_TEXTURE = ResourceUtils.getGlobalImage("shifts.png", false);
+		SHIFT_D_TEXTURE = ResourceUtils.getGlobalImage("shiftd.png", false);
 
-		ATTACK_LEFT_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_left_border.png");
-		ATTACK_RIGHT_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_right_border.png");
-		ATTACK_TOP_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_top_border.png");
-		ATTACK_BOTTOM_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_bottom_border.png");
+		ATTACK_LEFT_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_left_border.png", false);
+		ATTACK_RIGHT_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_right_border.png", false);
+		ATTACK_TOP_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_top_border.png", false);
+		ATTACK_BOTTOM_BORDER_TEXTURE = ResourceUtils.getGlobalImage("attack_bottom_border.png", false);
 
-		SOUND_TEXTURE = ResourceUtils.getGlobalImage("sound.png");
+		SOUND_TEXTURE = ResourceUtils.getGlobalImage("sound.png", false);
 	}
 
 	public void postLoad1() {
@@ -213,7 +213,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	}
 
 	public void loadImages() {
-		this.imageTexture = getGlobalImage(imageTexturePath);
+		this.imageTexture = getGlobalImage(imageTexturePath, false);
 
 	}
 
@@ -685,6 +685,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 					&& UserInputLevel.mouseYTransformed > y
 					&& UserInputLevel.mouseYTransformed < y + gameObject.height) {
 
+				System.out.println("gameObject = " + gameObject);
 				Color color = getPixel(gameObject.imageTexture, (int) (UserInputLevel.mouseXTransformed - x),
 						(int) (UserInputLevel.mouseYTransformed - y));
 

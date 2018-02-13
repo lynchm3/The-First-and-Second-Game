@@ -56,7 +56,7 @@ public class Faction {
 
 	public void loadImages() {
 		// actors = new Vector<Actor>();
-		this.imageTexture = getGlobalImage(imageTexturePath);
+		this.imageTexture = getGlobalImage(imageTexturePath, false);
 		// for (Actor actor : actors) {
 		// actor.loadImages();
 		// }
