@@ -35,8 +35,9 @@ public class EffectBleeding extends Effect {
 		if (!(target instanceof Actor))
 			return;
 
-		float damage = 5 - (10 * (target.getEffectiveSlashResistance() / 100f));
-		target.changeHealth(this, null, this);
+		// float damage = 5 - (10 * (target.getEffectiveSlashResistance() /
+		// 100f));
+		float damage = target.changeHealth(this, null, this);
 		if (Game.level.shouldLog(target))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
 		// target.attackedBy(this, null);

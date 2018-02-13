@@ -29,8 +29,9 @@ public class EffectBurning extends Effect {
 	@Override
 	public void activate() {
 
-		float damage = 5 - (10 * (target.getEffectiveFireResistance() / 100f));
-		target.changeHealth(this, null, this);
+		// float damage = 5 - (10 * (target.getEffectiveFireResistance() /
+		// 100f));
+		float damage = target.changeHealth(this, null, this);
 		if (Game.level.shouldLog(target))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
 		// target.attackedBy(this, null);

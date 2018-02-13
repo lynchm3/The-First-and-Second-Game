@@ -36,7 +36,7 @@ public class EffectHeal extends Effect {
 			// to ", this }));
 			// target.attackedBy(this, null);
 			// } else {
-			target.changeHealth(this, null, this);
+			float healing = -target.changeHealth(this, null, this);
 			if (Game.level.shouldLog(target))
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { target, " gained " + healing + " HP from ", this }));

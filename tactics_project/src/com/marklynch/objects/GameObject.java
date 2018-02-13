@@ -1360,7 +1360,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public void addEffect(Effect effectToAdd) {
 
-		if (remainingHealth <= 0)
+		if (remainingHealth <= 0 || !attackable)
 			return;
 
 		if (effectToAdd instanceof EffectBleeding && !(this instanceof Actor))
@@ -1870,10 +1870,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	}
 
-	public void changeHealth(Object attacker, Action action, DamageDealer damageDealer) {
+	public float changeHealth(Object attacker, Action action, DamageDealer damageDealer) {
 
 		int offsetY = 0;
 		boolean thisIsAnAttack = false;
+		float totalDamage = 0;
 
 		// Slash
 		if (damageDealer.getEffectiveSlashDamage() != 0) {
@@ -1883,6 +1884,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float dmg = damageDealer.getEffectiveSlashDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.SLASH, this.getEffectiveSlashResistance());
 			remainingHealth -= dmg;
+			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
 			offsetY += 48;
@@ -1896,6 +1898,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float dmg = damageDealer.getEffectiveBluntDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLUNT, this.getEffectiveBluntResistance());
 			remainingHealth -= dmg;
+			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
 			offsetY += 48;
@@ -1909,6 +1912,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float dmg = damageDealer.getEffectivePierceDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.PIERCE, this.getEffectivePierceResistance());
 			remainingHealth -= dmg;
+			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
 			offsetY += 48;
@@ -1922,6 +1926,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float dmg = damageDealer.getEffectiveFireDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.FIRE, this.getEffectiveFireResistance());
 			remainingHealth -= dmg;
+			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
 			offsetY += 48;
@@ -1935,6 +1940,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float dmg = damageDealer.getEffectiveWaterDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.WATER, this.getEffectiveWaterResistance());
 			remainingHealth -= dmg;
+			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
 			offsetY += 48;
@@ -1948,6 +1954,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float dmg = damageDealer.getEffectiveElectricDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.ELECTRIC, this.getEffectiveelectricResistance());
 			remainingHealth -= dmg;
+			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
 			offsetY += 48;
@@ -1961,6 +1968,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float dmg = damageDealer.getEffectivePoisonDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.POISON, this.getEffectivePoisonResistance());
 			remainingHealth -= dmg;
+			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
 			offsetY += 48;
@@ -1974,6 +1982,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float dmg = damageDealer.getEffectiveBleedingDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLEEDING, this.getEffectiveBleedingResistance());
 			remainingHealth -= dmg;
+			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
 			offsetY += 48;
@@ -1985,6 +1994,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			// (this.getEffectivePosionResistance() / 100);
 			doDamageAnimation(damageDealer.getEffectiveHealing(), offsetY, DAMAGE_TYPE.HEALING, +200f);
 			remainingHealth += damageDealer.getEffectiveHealing();
+			totalDamage -= damageDealer.getEffectiveHealing();
 			// thisIsAnAttack = true;
 			offsetY += 48;
 		}
@@ -1996,6 +2006,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (attacker != null && thisIsAnAttack == true)
 			attackedBy(attacker, action);
+
+		return totalDamage;
 	}
 
 	public enum DAMAGE_TYPE {

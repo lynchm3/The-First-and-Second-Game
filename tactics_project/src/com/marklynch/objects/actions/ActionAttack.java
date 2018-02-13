@@ -49,7 +49,7 @@ public class ActionAttack extends Action {
 		if (!checkRange())
 			return;
 
-		float damage = 1;
+		// float damage = 1;
 		GameObject weapon = null;
 		if (performer.equipped != null) {
 			weapon = performer.equipped;
@@ -58,7 +58,7 @@ public class ActionAttack extends Action {
 		}
 
 		if (target.attackable) {
-			target.changeHealth(performer, this, weapon);
+			float damage = target.changeHealth(performer, this, weapon);
 			String attackTypeString;
 			attackTypeString = "attacked ";
 

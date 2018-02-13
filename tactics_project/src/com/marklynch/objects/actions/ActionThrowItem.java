@@ -51,7 +51,7 @@ public class ActionThrowItem extends Action {
 		if (!checkRange())
 			return;
 
-		float damage = 0;
+		// float damage = 0;
 
 		// if (gameObjectToThrow instanceof Weapon) {
 		// damage = performer.getEffectiveStrength() + gameObjectToThrow.weight
@@ -63,11 +63,9 @@ public class ActionThrowItem extends Action {
 		//
 		// }
 		if (targetGameObject != null && targetGameObject.attackable) {
-			targetGameObject.changeHealth(performer, this, gameObjectToThrow);
-		}
+			float damage = targetGameObject.changeHealth(performer, this, gameObjectToThrow);
 
-		if (Game.level.shouldLog(targetGameObject, performer)) {
-			if (targetGameObject != null) {
+			if (Game.level.shouldLog(targetGameObject, performer)) {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " threw a ", gameObjectToThrow, " at ",
 						targetGameObject, " for " + damage + " damage" }));
 			} else {
