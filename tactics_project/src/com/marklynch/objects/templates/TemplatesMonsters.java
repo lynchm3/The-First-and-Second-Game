@@ -30,6 +30,7 @@ public class TemplatesMonsters {
 		Templates.BLIND.handAnchorY = 54;
 		Templates.BLIND.templateId = GameObject.generateNewTemplateId();
 		Templates.BLIND.aiRoutine = new AIRoutineForBlind(Templates.BLIND);
+		Templates.BLIND.flipYAxisInMirror = false;
 
 		Templates.ROCK_GOLEM = new RockGolem();
 		Templates.ROCK_GOLEM.title = "Suspicious Boulder";
@@ -47,6 +48,7 @@ public class TemplatesMonsters {
 		Templates.ROCK_GOLEM.canEquipWeapons = false;
 		Templates.ROCK_GOLEM.templateId = GameObject.generateNewTemplateId();
 		Templates.ROCK_GOLEM.aiRoutine = new AIRoutineForRockGolem(Templates.ROCK_GOLEM);
+		Templates.ROCK_GOLEM.flipYAxisInMirror = false;
 	}
 
 }

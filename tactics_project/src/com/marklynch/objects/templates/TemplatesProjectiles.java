@@ -25,6 +25,7 @@ public class TemplatesProjectiles {
 		Templates.ARROW.anchorY = 0;
 		Templates.ARROW.templateId = GameObject.generateNewTemplateId();
 		Templates.ARROW.pierceDamage = 5;
+		Templates.ARROW.flipYAxisInMirror = false;
 
 		Templates.FIRE_BALL = new Arrow();
 		Templates.FIRE_BALL.name = "Fireball";
@@ -43,7 +44,8 @@ public class TemplatesProjectiles {
 		Templates.FIRE_BALL.anchorX = 0;
 		Templates.FIRE_BALL.anchorY = 0;
 		Templates.FIRE_BALL.templateId = GameObject.generateNewTemplateId();
-		Templates.ARROW.fireDamage = 5;
+		Templates.FIRE_BALL.fireDamage = 5;
+		Templates.FIRE_BALL.flipYAxisInMirror = false;
 
 		Templates.WATER_BALL = new Arrow();
 		Templates.WATER_BALL.name = "Waterball";
@@ -62,7 +64,8 @@ public class TemplatesProjectiles {
 		Templates.WATER_BALL.anchorX = 0;
 		Templates.WATER_BALL.anchorY = 0;
 		Templates.WATER_BALL.templateId = GameObject.generateNewTemplateId();
-		Templates.ARROW.waterDamage = 5;
+		Templates.WATER_BALL.waterDamage = 5;
+		Templates.WATER_BALL.flipYAxisInMirror = false;
 	}
 
 }

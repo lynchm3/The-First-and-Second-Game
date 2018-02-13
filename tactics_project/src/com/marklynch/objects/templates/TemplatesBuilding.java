@@ -25,6 +25,7 @@ public class TemplatesBuilding {
 		Templates.WALL.anchorX = 0;
 		Templates.WALL.anchorY = 0;
 		Templates.WALL.templateId = GameObject.generateNewTemplateId();
+		Templates.WALL.flipYAxisInMirror = false;
 
 		Templates.FENCE = new Fence();
 		Templates.FENCE.name = "Fence";
@@ -43,6 +44,7 @@ public class TemplatesBuilding {
 		Templates.FENCE.anchorX = 0;
 		Templates.FENCE.anchorY = 0;
 		Templates.FENCE.templateId = GameObject.generateNewTemplateId();
+		Templates.FENCE.flipYAxisInMirror = false;
 	}
 
 }

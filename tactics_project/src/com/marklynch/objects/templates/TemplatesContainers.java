@@ -32,6 +32,7 @@ public class TemplatesContainers {
 		Templates.CHEST.anchorY = 0;
 		Templates.CHEST.templateId = GameObject.generateNewTemplateId();
 		Templates.CHEST.bluntDamage = 5;
+		Templates.CHEST.flipYAxisInMirror = false;
 
 		Templates.CRATE = new Storage();
 		Templates.CRATE.name = "Crate";
@@ -58,6 +59,7 @@ public class TemplatesContainers {
 		Templates.CRATE.anchorY = 0;
 		Templates.CRATE.templateId = GameObject.generateNewTemplateId();
 		Templates.CRATE.bluntDamage = 4;
+		Templates.CRATE.flipYAxisInMirror = false;
 
 	}
 

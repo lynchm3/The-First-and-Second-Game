@@ -24,6 +24,7 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_RED.anchorX = 0;
 		Templates.MAP_MARKER_RED.anchorY = 0;
 		Templates.MAP_MARKER_RED.templateId = GameObject.generateNewTemplateId();
+		Templates.MAP_MARKER_RED.flipYAxisInMirror = false;
 
 		Templates.MAP_MARKER_GREEN = new MapMarker();
 		Templates.MAP_MARKER_GREEN.name = "";
@@ -42,6 +43,7 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_GREEN.anchorX = 0;
 		Templates.MAP_MARKER_GREEN.anchorY = 0;
 		Templates.MAP_MARKER_GREEN.templateId = GameObject.generateNewTemplateId();
+		Templates.MAP_MARKER_GREEN.flipYAxisInMirror = false;
 
 		Templates.MAP_MARKER_BLUE = new MapMarker();
 		Templates.MAP_MARKER_BLUE.name = "";
@@ -60,6 +62,7 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_BLUE.anchorX = 0;
 		Templates.MAP_MARKER_BLUE.anchorY = 0;
 		Templates.MAP_MARKER_BLUE.templateId = GameObject.generateNewTemplateId();
+		Templates.MAP_MARKER_BLUE.flipYAxisInMirror = false;
 
 		Templates.MAP_MARKER_SKULL = new MapMarker();
 		Templates.MAP_MARKER_SKULL.name = "";
@@ -78,6 +81,7 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_SKULL.anchorX = 0;
 		Templates.MAP_MARKER_SKULL.anchorY = 0;
 		Templates.MAP_MARKER_SKULL.templateId = GameObject.generateNewTemplateId();
+		Templates.MAP_MARKER_SKULL.flipYAxisInMirror = false;
 
 		Templates.MAP_MARKER_TREASURE = new MapMarker();
 		Templates.MAP_MARKER_TREASURE.name = "";
@@ -96,6 +100,7 @@ public class TemplatesMapMarkers {
 		Templates.MAP_MARKER_TREASURE.anchorX = 0;
 		Templates.MAP_MARKER_TREASURE.anchorY = 0;
 		Templates.MAP_MARKER_TREASURE.templateId = GameObject.generateNewTemplateId();
+		Templates.MAP_MARKER_TREASURE.flipYAxisInMirror = false;
 
 	}
 

@@ -68,6 +68,7 @@ public class TemplatesCorpses {
 		Templates.ASH.anchorX = 0;
 		Templates.ASH.anchorY = 0;
 		Templates.ASH.templateId = GameObject.generateNewTemplateId();
+		Templates.ASH.flipYAxisInMirror = false;
 
 		Templates.WOOD_CHIPS = new GameObject();
 		Templates.WOOD_CHIPS.name = "Whood Chips";

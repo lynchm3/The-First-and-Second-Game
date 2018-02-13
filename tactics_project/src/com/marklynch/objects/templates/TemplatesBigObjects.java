@@ -24,6 +24,7 @@ public class TemplatesBigObjects {
 		Templates.BARRICADE.anchorX = 0;
 		Templates.BARRICADE.anchorY = 0;
 		Templates.BARRICADE.templateId = GameObject.generateNewTemplateId();
+		Templates.BARRICADE.flipYAxisInMirror = false;
 
 		Templates.BOULDER = new BigGameObject();
 		Templates.BOULDER.name = "Boulder";
@@ -42,6 +43,7 @@ public class TemplatesBigObjects {
 		Templates.BOULDER.anchorX = 0;
 		Templates.BOULDER.anchorY = 0;
 		Templates.BOULDER.templateId = GameObject.generateNewTemplateId();
+		Templates.BOULDER.flipYAxisInMirror = false;
 
 		Templates.DUMPSTER = new BigGameObject();
 		Templates.DUMPSTER.name = "Dumpster";
@@ -60,6 +62,7 @@ public class TemplatesBigObjects {
 		Templates.DUMPSTER.anchorX = 0;
 		Templates.DUMPSTER.anchorY = 0;
 		Templates.DUMPSTER.templateId = GameObject.generateNewTemplateId();
+		Templates.DUMPSTER.flipYAxisInMirror = false;
 
 		Templates.TROUGH = new BigGameObject();
 		Templates.TROUGH.name = "Trough";
@@ -78,6 +81,7 @@ public class TemplatesBigObjects {
 		Templates.TROUGH.anchorX = 0;
 		Templates.TROUGH.anchorY = 0;
 		Templates.TROUGH.templateId = GameObject.generateNewTemplateId();
+		Templates.TROUGH.flipYAxisInMirror = false;
 	}
 
 }

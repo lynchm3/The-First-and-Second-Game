@@ -33,6 +33,7 @@ public class TemplatesEntrances {
 		Templates.WEAK_WOODEN_DOOR.soundDampeningWhenClosed = 2;
 		Templates.WEAK_WOODEN_DOOR.blocksLineOfSightWhenClosed = true;
 		Templates.WEAK_WOODEN_DOOR.templateId = GameObject.generateNewTemplateId();
+		Templates.WEAK_WOODEN_DOOR.flipYAxisInMirror = false;
 
 		Templates.DOOR = new Door();
 		Templates.DOOR.name = "Door";
@@ -58,6 +59,7 @@ public class TemplatesEntrances {
 		Templates.DOOR.soundDampeningWhenClosed = 3;
 		Templates.DOOR.blocksLineOfSightWhenClosed = true;
 		Templates.DOOR.templateId = GameObject.generateNewTemplateId();
+		Templates.DOOR.flipYAxisInMirror = false;
 
 		Templates.GATE = new Gate();
 		Templates.GATE.name = "Gate";
@@ -81,6 +83,7 @@ public class TemplatesEntrances {
 		Templates.GATE.anchorX = 0;
 		Templates.GATE.anchorY = 0;
 		Templates.GATE.templateId = GameObject.generateNewTemplateId();
+		Templates.GATE.flipYAxisInMirror = false;
 
 		Templates.FALSE_WALL = new RemoteDoor();
 		Templates.FALSE_WALL.name = "Wall";
@@ -106,6 +109,7 @@ public class TemplatesEntrances {
 		Templates.FALSE_WALL.soundDampeningWhenClosed = 2;
 		Templates.FALSE_WALL.blocksLineOfSightWhenClosed = true;
 		Templates.FALSE_WALL.templateId = GameObject.generateNewTemplateId();
+		Templates.FALSE_WALL.flipYAxisInMirror = false;
 
 	}
 

@@ -31,6 +31,7 @@ public class TemplatesAnimals {
 		Templates.PIG.canEquipWeapons = false;
 		Templates.PIG.templateId = GameObject.generateNewTemplateId();
 		Templates.PIG.aiRoutine = new AIRoutineForPig(Templates.PIG);
+		Templates.PIG.flipYAxisInMirror = false;
 
 		// Friendly Wild animals
 		Templates.RAT = new TinyNeutralWildAnimal();
@@ -51,6 +52,7 @@ public class TemplatesAnimals {
 		Templates.RAT.aiRoutine = new AIRoutineForHerbivoreWildAnimal(Templates.RAT);
 		Templates.RAT.canBePickedUp = true;
 		Templates.RAT.fitsInInventory = true;
+		Templates.RAT.flipYAxisInMirror = false;
 
 		Templates.RABBIT = new HerbivoreWildAnimal();
 		Templates.RABBIT.title = "Rabbit";
@@ -68,6 +70,7 @@ public class TemplatesAnimals {
 		Templates.RABBIT.canEquipWeapons = false;
 		Templates.RABBIT.templateId = GameObject.generateNewTemplateId();
 		Templates.RABBIT.aiRoutine = new AIRoutineForHerbivoreWildAnimal(Templates.RABBIT);
+		Templates.RABBIT.flipYAxisInMirror = false;
 
 		Templates.BABY_RABBIT = new TinyNeutralWildAnimal();
 		Templates.BABY_RABBIT.title = "Baby Rabbit";
@@ -87,6 +90,7 @@ public class TemplatesAnimals {
 		Templates.BABY_RABBIT.aiRoutine = new AIRoutineForHerbivoreWildAnimal(Templates.BABY_RABBIT);
 		Templates.BABY_RABBIT.canBePickedUp = true;
 		Templates.BABY_RABBIT.fitsInInventory = true;
+		Templates.BABY_RABBIT.flipYAxisInMirror = false;
 
 		Templates.FOX = new CarnivoreNeutralWildAnimal();
 		Templates.FOX.title = "Fox";
@@ -104,6 +108,7 @@ public class TemplatesAnimals {
 		Templates.FOX.canEquipWeapons = false;
 		Templates.FOX.templateId = GameObject.generateNewTemplateId();
 		Templates.FOX.aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(Templates.FOX);
+		Templates.FOX.flipYAxisInMirror = false;
 
 		Templates.WOLF = new CarnivoreNeutralWildAnimal();
 		Templates.WOLF.title = "Wolf";
@@ -121,6 +126,7 @@ public class TemplatesAnimals {
 		Templates.WOLF.canEquipWeapons = false;
 		Templates.WOLF.templateId = GameObject.generateNewTemplateId();
 		Templates.WOLF.aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(Templates.WOLF);
+		Templates.WOLF.flipYAxisInMirror = false;
 
 		// Friendly Wild animals
 		Templates.FISH = new TinyNeutralWildAnimal();

@@ -3,9 +3,8 @@ package com.marklynch.objects;
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Mirror extends GameObject {
 
@@ -174,9 +173,19 @@ public class Mirror extends GameObject {
 
 		float actorPositionXInPixels = this.squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * offsetX
 				+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX;
-		float actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
-				+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY - Game.SQUARE_HEIGHT * offsetY
-				- (Game.SQUARE_HEIGHT - gameObject.height);
+		actorPositionXInPixels += gameObject.primaryAnimation.offsetX;
+
+		float actorPositionYInPixels = 0;
+		if (gameObject.flipYAxisInMirror == false) {
+			actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY - Game.SQUARE_HEIGHT * offsetY;
+			actorPositionYInPixels -= gameObject.primaryAnimation.offsetY;
+		} else {
+			actorPositionYInPixels = this.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY - Game.SQUARE_HEIGHT * offsetY
+					- (Game.SQUARE_HEIGHT - gameObject.height);
+			actorPositionYInPixels += gameObject.primaryAnimation.offsetY;
+		}
 
 		float alpha = 1.0f;
 
@@ -189,7 +198,8 @@ public class Mirror extends GameObject {
 
 		TextureUtils.drawTextureWithinBounds(gameObject.imageTexture, alpha, actorPositionXInPixels,
 				actorPositionYInPixels, actorPositionXInPixels + gameObject.width,
-				actorPositionYInPixels + gameObject.height, boundsX1, boundsY1, boundsX2, boundsY2, false, true);
+				actorPositionYInPixels + gameObject.height, boundsX1, boundsY1, boundsX2, boundsY2, false,
+				gameObject.flipYAxisInMirror);
 
 	}
 

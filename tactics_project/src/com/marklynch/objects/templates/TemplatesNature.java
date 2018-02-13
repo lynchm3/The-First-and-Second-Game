@@ -34,6 +34,7 @@ public class TemplatesNature {
 		Templates.TREE.anchorX = 0;
 		Templates.TREE.anchorY = 0;
 		Templates.TREE.templateId = GameObject.generateNewTemplateId();
+		Templates.TREE.flipYAxisInMirror = false;
 
 		Templates.BIG_TREE = new Tree();
 		Templates.BIG_TREE.name = "Big Tree";
@@ -52,6 +53,7 @@ public class TemplatesNature {
 		Templates.BIG_TREE.anchorX = 0;
 		Templates.BIG_TREE.anchorY = 0;
 		Templates.BIG_TREE.templateId = GameObject.generateNewTemplateId();
+		Templates.BIG_TREE.flipYAxisInMirror = false;
 
 		Templates.STUMP = new Stump();
 		Templates.STUMP.name = "Stump";
@@ -70,6 +72,7 @@ public class TemplatesNature {
 		Templates.STUMP.anchorX = 0;
 		Templates.STUMP.anchorY = 0;
 		Templates.STUMP.templateId = GameObject.generateNewTemplateId();
+		Templates.STUMP.flipYAxisInMirror = false;
 
 		Templates.BIG_STUMP = new Stump();
 		Templates.BIG_STUMP.name = "";
@@ -88,6 +91,7 @@ public class TemplatesNature {
 		Templates.BIG_STUMP.anchorX = 0;
 		Templates.BIG_STUMP.anchorY = 0;
 		Templates.BIG_STUMP.templateId = GameObject.generateNewTemplateId();
+		Templates.BIG_STUMP.flipYAxisInMirror = false;
 
 		Templates.BUSH = new HidingPlace();
 		Templates.BUSH.name = "Bush";
@@ -107,6 +111,7 @@ public class TemplatesNature {
 		Templates.BUSH.anchorY = 0;
 		Templates.BUSH.templateId = GameObject.generateNewTemplateId();
 		Templates.BUSH.effectsFromInteracting = new Effect[] {};
+		Templates.BUSH.flipYAxisInMirror = false;
 
 		Templates.POISON_BUSH = new HidingPlace();
 		Templates.POISON_BUSH.name = "Posion Bush";
@@ -126,6 +131,7 @@ public class TemplatesNature {
 		Templates.POISON_BUSH.anchorY = 0;
 		Templates.POISON_BUSH.effectsFromInteracting = new Effect[] { new EffectPoison(3) };
 		Templates.POISON_BUSH.templateId = GameObject.generateNewTemplateId();
+		Templates.POISON_BUSH.flipYAxisInMirror = false;
 
 		Templates.LONG_GRASS = new HidingPlace();
 		Templates.LONG_GRASS.name = "Long Grass";
@@ -145,6 +151,7 @@ public class TemplatesNature {
 		Templates.LONG_GRASS.anchorY = 0;
 		Templates.LONG_GRASS.templateId = GameObject.generateNewTemplateId();
 		Templates.LONG_GRASS.effectsFromInteracting = new Effect[] {};
+		Templates.LONG_GRASS.flipYAxisInMirror = false;
 
 		Templates.WHEAT = new HidingPlace();
 		Templates.WHEAT.name = "Wheat";
@@ -164,6 +171,7 @@ public class TemplatesNature {
 		Templates.WHEAT.anchorY = 0;
 		Templates.WHEAT.templateId = GameObject.generateNewTemplateId();
 		Templates.WHEAT.effectsFromInteracting = new Effect[] {};
+		Templates.WHEAT.flipYAxisInMirror = false;
 
 		Templates.MUSHROOM = new Food();
 		Templates.MUSHROOM.name = "Mushroom";
@@ -182,6 +190,7 @@ public class TemplatesNature {
 		Templates.MUSHROOM.anchorX = 0;
 		Templates.MUSHROOM.anchorY = 0;
 		Templates.MUSHROOM.templateId = GameObject.generateNewTemplateId();
+		Templates.MUSHROOM.flipYAxisInMirror = false;
 
 		Templates.BURROW = new SmallHidingPlace();
 		Templates.BURROW.name = "Burrow";
@@ -222,6 +231,7 @@ public class TemplatesNature {
 		Templates.MOUND.postDiscoverTexture = ResourceUtils.getGlobalImage("mound.png");
 		Templates.MOUND.diggable = true;
 		Templates.MOUND.canContainOtherObjects = false;
+		Templates.MOUND.flipYAxisInMirror = false;
 
 		Templates.APPLE = new Food();
 		Templates.APPLE.name = "Apple";
@@ -241,6 +251,7 @@ public class TemplatesNature {
 		Templates.APPLE.anchorY = 0;
 		Templates.APPLE.templateId = GameObject.generateNewTemplateId();
 		Templates.APPLE.bluntDamage = 1;
+		Templates.APPLE.flipYAxisInMirror = false;
 
 		Templates.ROCK = new GameObject();
 		Templates.ROCK.name = "Rock";
@@ -260,6 +271,7 @@ public class TemplatesNature {
 		Templates.ROCK.anchorY = 14;
 		Templates.ROCK.templateId = GameObject.generateNewTemplateId();
 		Templates.ROCK.bluntDamage = 5;
+		Templates.ROCK.flipYAxisInMirror = false;
 
 		Templates.VEIN = new Vein();
 		Templates.VEIN.name = "Vein";
@@ -278,6 +290,7 @@ public class TemplatesNature {
 		Templates.VEIN.anchorX = 0;
 		Templates.VEIN.anchorY = 0;
 		Templates.VEIN.templateId = GameObject.generateNewTemplateId();
+		Templates.VEIN.flipYAxisInMirror = false;
 
 		// Food?
 		Templates.MEAT_CHUNK = new MeatChunk();

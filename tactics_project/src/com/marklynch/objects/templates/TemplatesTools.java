@@ -234,6 +234,7 @@ public class TemplatesTools {
 		Templates.BASKET.anchorX = 65;
 		Templates.BASKET.anchorY = 11;
 		Templates.BASKET.templateId = GameObject.generateNewTemplateId();
+		Templates.BASKET.flipYAxisInMirror = false;
 
 		Templates.WHIP = new Weapon();
 		Templates.WHIP.name = "Whip";
@@ -319,6 +320,7 @@ public class TemplatesTools {
 		Templates.LANTERN.anchorX = 63;
 		Templates.LANTERN.anchorY = 6;
 		Templates.LANTERN.templateId = GameObject.generateNewTemplateId();
+		Templates.LANTERN.flipYAxisInMirror = false;
 
 		Templates.JAR = new ContainerForLiquids();
 		Templates.JAR.name = "Empty Jar";
@@ -342,6 +344,7 @@ public class TemplatesTools {
 		Templates.JAR.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR.volume = 1;
 		Templates.JAR.liquid = null;
+		Templates.JAR.flipYAxisInMirror = false;
 
 		Templates.JAR_OF_WATER = new ContainerForLiquids();
 		Templates.JAR_OF_WATER.name = "Jar of Water";
@@ -365,6 +368,7 @@ public class TemplatesTools {
 		Templates.JAR_OF_WATER.templateId = GameObject.generateNewTemplateId();
 		Templates.JAR_OF_WATER.volume = 1;
 		Templates.JAR_OF_WATER.liquid = Templates.WATER.makeCopy(null, null, 1);
+		Templates.JAR_OF_WATER.flipYAxisInMirror = false;
 	}
 
 }

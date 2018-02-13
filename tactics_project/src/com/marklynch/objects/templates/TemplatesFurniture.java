@@ -59,6 +59,7 @@ public class TemplatesFurniture {
 		Templates.MIRROR.weight = 52f;
 		Templates.MIRROR.value = 104;
 		Templates.MIRROR.templateId = GameObject.generateNewTemplateId();
+		Templates.MIRROR.flipYAxisInMirror = false;
 
 		Templates.SHOP_COUNTER = new BigGameObject();
 		Templates.SHOP_COUNTER.name = "Shop Counter";
@@ -77,6 +78,7 @@ public class TemplatesFurniture {
 		Templates.SHOP_COUNTER.anchorX = 0;
 		Templates.SHOP_COUNTER.anchorY = 0;
 		Templates.SHOP_COUNTER.templateId = GameObject.generateNewTemplateId();
+		Templates.SHOP_COUNTER.flipYAxisInMirror = false;
 
 		Templates.TABLE = new BigGameObject();
 		Templates.TABLE.name = "Table";
@@ -95,6 +97,7 @@ public class TemplatesFurniture {
 		Templates.TABLE.anchorX = 0;
 		Templates.TABLE.anchorY = 0;
 		Templates.TABLE.templateId = GameObject.generateNewTemplateId();
+		Templates.TABLE.flipYAxisInMirror = false;
 
 		Templates.CHAIR = new BigGameObject();
 		Templates.CHAIR.name = "Chair";
@@ -113,6 +116,7 @@ public class TemplatesFurniture {
 		Templates.CHAIR.anchorX = 0;
 		Templates.CHAIR.anchorY = 0;
 		Templates.CHAIR.templateId = GameObject.generateNewTemplateId();
+		Templates.CHAIR.flipYAxisInMirror = false;
 
 		Templates.BENCH = new BigGameObject();
 		Templates.BENCH.name = "Bench";
@@ -131,6 +135,7 @@ public class TemplatesFurniture {
 		Templates.BENCH.anchorX = 0;
 		Templates.BENCH.anchorY = 0;
 		Templates.BENCH.templateId = GameObject.generateNewTemplateId();
+		Templates.BENCH.flipYAxisInMirror = false;
 
 		Templates.CHAIR_FALLEN = new BigGameObject();
 		Templates.CHAIR_FALLEN.name = "Chair";

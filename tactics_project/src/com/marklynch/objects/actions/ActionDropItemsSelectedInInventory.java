@@ -51,6 +51,10 @@ public class ActionDropItemsSelectedInInventory extends Action {
 
 	@Override
 	public boolean check() {
+
+		if (square == null)
+			return false;
+
 		if (performer instanceof Actor) {
 			Actor actor = (Actor) performer;
 			if (!actor.inventory.contains(object)) {
@@ -65,6 +69,9 @@ public class ActionDropItemsSelectedInInventory extends Action {
 
 		}
 
+		System.out.println("square = " + square);
+		System.out.println("square.inventory = " + square.inventory);
+		System.out.println("object = " + object);
 		if (!square.inventory.canShareSquare() && !object.canShareSquare) {
 			actionName = ACTION_NAME + " " + object.name + " (no space)";
 			return false;

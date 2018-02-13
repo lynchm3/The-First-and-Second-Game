@@ -226,6 +226,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public static float healthWidthInPixels = Game.SQUARE_WIDTH / 20;
 
 	public boolean diggable = false;
+
+	public boolean flipYAxisInMirror = true;
 	// public static float healthHeightInPixels = Game.SQUARE_HEIGHT;
 
 	// public ArrayList<DestructionListener> destructionListeners = new
@@ -1569,6 +1571,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.templateId = templateId;
 
 		gameObject.diggable = diggable;
+		gameObject.flipYAxisInMirror = flipYAxisInMirror;
 
 		gameObject.init();
 	}

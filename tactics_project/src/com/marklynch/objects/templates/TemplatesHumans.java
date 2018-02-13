@@ -40,6 +40,7 @@ public class TemplatesHumans {
 		Templates.PLAYER.canOpenDoors = true;
 		Templates.PLAYER.canEquipWeapons = true;
 		Templates.PLAYER.templateId = GameObject.generateNewTemplateId();
+		Templates.PLAYER.flipYAxisInMirror = false;
 
 		// General People
 		Templates.HUNTER = new Human();
@@ -58,6 +59,7 @@ public class TemplatesHumans {
 		Templates.HUNTER.canEquipWeapons = true;
 		Templates.HUNTER.aiRoutine = new AIRoutineForHunter(Templates.HUNTER);
 		Templates.HUNTER.templateId = GameObject.generateNewTemplateId();
+		Templates.HUNTER.flipYAxisInMirror = false;
 
 		Templates.THIEF = new Human();
 		Templates.THIEF.title = "Thief";
@@ -75,6 +77,7 @@ public class TemplatesHumans {
 		Templates.THIEF.canEquipWeapons = true;
 		Templates.THIEF.aiRoutine = new AIRoutineForThief(Templates.THIEF);
 		Templates.THIEF.templateId = GameObject.generateNewTemplateId();
+		Templates.THIEF.flipYAxisInMirror = false;
 
 		Templates.FARMER = new Human();
 		Templates.FARMER.title = "Farmer";
@@ -92,6 +95,7 @@ public class TemplatesHumans {
 		Templates.FARMER.canEquipWeapons = true;
 		Templates.FARMER.aiRoutine = new AIRoutineForHunter(Templates.FARMER);
 		Templates.FARMER.templateId = GameObject.generateNewTemplateId();
+		Templates.FARMER.flipYAxisInMirror = false;
 
 		// Special People
 		Templates.MORT = new Mort();
@@ -110,6 +114,7 @@ public class TemplatesHumans {
 		Templates.MORT.canEquipWeapons = true;
 		Templates.MORT.aiRoutine = new AIRoutineForMort(Templates.MORT);
 		Templates.MORT.templateId = GameObject.generateNewTemplateId();
+		Templates.MORT.flipYAxisInMirror = false;
 
 		Templates.TRADER = new Trader();
 		Templates.TRADER.title = "Trader";
@@ -127,6 +132,7 @@ public class TemplatesHumans {
 		Templates.TRADER.canEquipWeapons = true;
 		Templates.TRADER.aiRoutine = new AIRoutineForTrader(Templates.TRADER);
 		Templates.TRADER.templateId = GameObject.generateNewTemplateId();
+		Templates.TRADER.flipYAxisInMirror = false;
 	}
 
 }
