@@ -10,12 +10,11 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.LineUtils;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 
 public class PinWindow implements Draggable {
 
@@ -392,6 +391,20 @@ public class PinWindow implements Draggable {
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 240,
+					width - 40, false, null, unknownStats);
+
+		}
+
+		// Bleeding resistance
+		TextureUtils.drawTexture(getGlobalImage("effect_bleeding.png"), drawPositionX + resistancesImageX,
+				drawPositionY + resistancesY + 270, drawPositionX + resistancesImageX + 20,
+				drawPositionY + resistancesY + 270 + 20);
+		if (bestiaryKnowledge.poisonResistance) {
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 270,
+					width - 40, false, null, "" + gameObject.poisonResistance);
+
+		} else {
+			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 270,
 					width - 40, false, null, unknownStats);
 
 		}

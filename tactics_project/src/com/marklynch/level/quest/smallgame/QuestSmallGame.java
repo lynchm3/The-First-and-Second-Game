@@ -218,7 +218,7 @@ public class QuestSmallGame extends Quest {
 
 		// Add lead hunter
 		GameObject brentsBed = Templates.BED.makeCopy(Game.level.squares[110][10], null);
-		hunterBrent = Templates.HUNTER.makeCopy("Hunter Brent", Game.level.squares[105][8],
+		hunterBrent = Templates.HUNTER.makeCopy("Lead Hunter Brent", Game.level.squares[105][8],
 				Game.level.factions.townsPeople, brentsBed, 203, new GameObject[] {
 						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, null);

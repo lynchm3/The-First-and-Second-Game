@@ -298,6 +298,7 @@ public class TemplatesNature {
 		Templates.VEIN.waterResistance = 100;
 		Templates.VEIN.electricResistance = 100;
 		Templates.VEIN.poisonResistance = 100;
+		Templates.VEIN.bleedingResistance = 100;
 
 		// Food?
 		Templates.MEAT_CHUNK = new MeatChunk();

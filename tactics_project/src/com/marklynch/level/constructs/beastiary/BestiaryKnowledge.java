@@ -35,6 +35,8 @@ public class BestiaryKnowledge {
 	public boolean waterDamage;
 	public boolean electricDamage;
 	public boolean poisonDamage;
+	public boolean bleedingDamage;
+	public boolean healing;
 	public boolean range;
 
 	// Powers

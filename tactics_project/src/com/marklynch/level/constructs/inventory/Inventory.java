@@ -32,14 +32,13 @@ import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
 import com.marklynch.ui.button.LevelButton;
 import com.marklynch.ui.popups.Notification;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 
@@ -52,7 +51,7 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 	public transient INVENTORY_STATE inventoryState = INVENTORY_STATE.DEFAULT;
 
 	public enum INVENTORY_SORT_BY {
-		SORT_ALPHABETICALLY, SORT_BY_NEWEST, SORT_BY_VALUE, SORT_BY_FAVOURITE, SORT_BY_TOTAL_DAMAGE, SORT_BY_SLASH_DAMAGE, SORT_BY_BLUNT_DAMAGE, SORT_BY_PIERCE_DAMAGE, SORT_BY_FIRE_DAMAGE, SORT_BY_WATER_DAMAGE, SORT_BY_POISON_DAMAGE, SORT_BY_ELECTRICAL_DAMAGE, SORT_BY_MAX_RANGE, SORT_BY_MIN_RANGE
+		SORT_ALPHABETICALLY, SORT_BY_NEWEST, SORT_BY_VALUE, SORT_BY_FAVOURITE, SORT_BY_TOTAL_DAMAGE, SORT_BY_SLASH_DAMAGE, SORT_BY_BLUNT_DAMAGE, SORT_BY_PIERCE_DAMAGE, SORT_BY_FIRE_DAMAGE, SORT_BY_WATER_DAMAGE, SORT_BY_POISON_DAMAGE, SORT_BY_ELECTRICAL_DAMAGE, SORT_BY_BLEEDING_DAMAGE, SORT_BY_HEALING, SORT_BY_MAX_RANGE, SORT_BY_MIN_RANGE
 	}
 
 	public static transient INVENTORY_SORT_BY inventorySortBy = INVENTORY_SORT_BY.SORT_BY_NEWEST;
@@ -1717,8 +1716,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					&& otherWeapon.pierceDamage >= weapon.pierceDamage && otherWeapon.waterDamage >= weapon.waterDamage
 					&& otherWeapon.fireDamage >= weapon.fireDamage
 					&& otherWeapon.electricalDamage >= weapon.electricalDamage
-					&& otherWeapon.poisonDamage >= weapon.poisonDamage && otherWeapon.maxRange >= weapon.maxRange
-					&& otherWeapon.minRange <= weapon.minRange) {
+					&& otherWeapon.poisonDamage >= weapon.poisonDamage
+					&& otherWeapon.bleedingDamage >= weapon.bleedingDamage && otherWeapon.healing >= weapon.healing
+					&& otherWeapon.maxRange >= weapon.maxRange && otherWeapon.minRange <= weapon.minRange) {
 				weapon.toSell = true;
 				itemsToSellCount++;
 				return true;
@@ -1742,6 +1742,9 @@ public class Inventory implements Draggable, Scrollable, TextBoxHolder {
 					&& armorOFSameTypeInInventory.waterResistance >= armor.waterResistance
 					&& armorOFSameTypeInInventory.electricResistance >= armor.electricResistance
 					&& armorOFSameTypeInInventory.poisonResistance >= armor.poisonResistance
+					&& armorOFSameTypeInInventory.bleedingResistance >= armor.bleedingResistance
+					&& armorOFSameTypeInInventory.pierceResistance >= armor.pierceResistance
+					&& armorOFSameTypeInInventory.bluntResistance >= armor.bluntResistance
 					&& armorOFSameTypeInInventory.slashResistance >= armor.slashResistance) {
 				armor.toSell = true;
 				itemsToSellCount++;

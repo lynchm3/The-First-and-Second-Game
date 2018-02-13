@@ -1568,6 +1568,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.waterDamage = waterDamage;
 		gameObject.electricalDamage = electricalDamage;
 		gameObject.poisonDamage = poisonDamage;
+		gameObject.bleedingDamage = bleedingDamage;
+		gameObject.healing = healing;
 		gameObject.minRange = minRange;
 		gameObject.maxRange = maxRange;
 
@@ -1578,6 +1580,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.waterResistance = waterResistance;
 		gameObject.electricResistance = electricResistance;
 		gameObject.poisonResistance = poisonResistance;
+		gameObject.bleedingResistance = bleedingResistance;
 
 		gameObject.templateId = templateId;
 
@@ -1628,7 +1631,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public float getEffectiveBleedingResistance() {
-		return poisonResistance;
+		return bleedingResistance;
 	}
 
 	public float getEffectiveelectricResistance() {
@@ -1724,11 +1727,22 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_POISON_DAMAGE) {
-			return Math.round(otherGameObject.electricalDamage - this.electricalDamage);
+			return Math.round(otherGameObject.poisonDamage - this.poisonDamage);
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_ELECTRICAL_DAMAGE) {
-			return Math.round(otherGameObject.poisonDamage - this.poisonDamage);
+			return Math.round(otherGameObject.electricalDamage - this.electricalDamage);
+
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_BLEEDING_DAMAGE) {
+			return Math.round(otherGameObject.bleedingDamage - this.bleedingDamage);
+
+		}
+
+		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_HEALING) {
+			return Math.round(otherGameObject.healing - this.healing);
+
 		}
 
 		if (Inventory.inventorySortBy == Inventory.INVENTORY_SORT_BY.SORT_BY_MAX_RANGE) {
@@ -1819,7 +1833,8 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public float getTotalDamage() {
-		return slashDamage + pierceDamage + bluntDamage + fireDamage + waterDamage + electricalDamage + poisonDamage;
+		return slashDamage + pierceDamage + bluntDamage + fireDamage + waterDamage + electricalDamage + poisonDamage
+				+ bleedingDamage;
 	}
 
 	// public float getTotalEffectiveDamage() {

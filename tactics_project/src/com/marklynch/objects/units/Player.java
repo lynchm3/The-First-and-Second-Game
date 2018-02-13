@@ -166,6 +166,7 @@ public class Player extends Human {
 		bestiaryKnowledge.waterDamage = true;
 		bestiaryKnowledge.electricDamage = true;
 		bestiaryKnowledge.poisonDamage = true;
+		bestiaryKnowledge.bleedingDamage = true;
 		bestiaryKnowledge.range = true;
 
 		// Resistances
