@@ -53,17 +53,18 @@ public class ActionAttack extends Action {
 		GameObject weapon = null;
 		if (performer.equipped != null) {
 			weapon = performer.equipped;
-			damage = weapon.getTotalEffectiveDamage();
+		} else {
+			weapon = performer;
 		}
 
 		if (target.attackable) {
-			target.changeHealth(-damage);
+			target.changeHealth(performer, this, weapon, 0);
 			String attackTypeString;
 			attackTypeString = "attacked ";
 
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
 
-				if (weapon != null) {
+				if (weapon != performer) {
 					if (Game.level.shouldLog(target, performer))
 						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
 								target, " with ", weapon, " for " + damage + " damage" }));
@@ -72,15 +73,13 @@ public class ActionAttack extends Action {
 						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " " + attackTypeString + " ",
 								target, " for " + damage + " damage" }));
 				}
-
-				target.doDamageAnimation((int) damage);
 			}
 
-			if (weapon != null && weapon instanceof ContainerForLiquids) {
+			if (weapon instanceof ContainerForLiquids) {
 				smashContainer((ContainerForLiquids) weapon);
 			}
 
-			target.attackedBy(performer, this);
+			// target.attackedBy(performer, this);
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;

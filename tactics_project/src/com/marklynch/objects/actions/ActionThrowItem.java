@@ -9,7 +9,6 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
 import com.marklynch.objects.units.Monster;
-import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.ui.ActivityLog;
 
 public class ActionThrowItem extends Action {
@@ -54,15 +53,17 @@ public class ActionThrowItem extends Action {
 
 		float damage = 0;
 
-		if (gameObjectToThrow instanceof Weapon) {
-			damage = performer.getEffectiveStrength() + gameObjectToThrow.weight / 10f
-					+ ((Weapon) gameObjectToThrow).getTotalEffectiveDamage();
-		} else {
-			damage = performer.getEffectiveStrength() + gameObjectToThrow.weight / 10f;
-
-		}
+		// if (gameObjectToThrow instanceof Weapon) {
+		// damage = performer.getEffectiveStrength() + gameObjectToThrow.weight
+		// / 10f
+		// + ((Weapon) gameObjectToThrow).getTotalEffectiveDamage();
+		// } else {
+		// damage = performer.getEffectiveStrength() + gameObjectToThrow.weight
+		// / 10f;
+		//
+		// }
 		if (targetGameObject != null && targetGameObject.attackable) {
-			targetGameObject.changeHealth(-damage);
+			targetGameObject.changeHealth(performer, this, gameObjectToThrow, 0);
 		}
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {

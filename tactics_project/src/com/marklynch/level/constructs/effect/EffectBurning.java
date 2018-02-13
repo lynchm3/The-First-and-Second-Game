@@ -19,6 +19,7 @@ public class EffectBurning extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_burn.png");
+		this.fireDamage = 5;
 	}
 
 	public EffectBurning(int totalTurns) {
@@ -29,10 +30,10 @@ public class EffectBurning extends Effect {
 	public void activate() {
 
 		float damage = 5 - (10 * (target.getEffectiveFireResistance() / 100f));
-		target.changeHealth(-damage);
+		target.changeHealth(this, null, this, 0);
 		if (Game.level.shouldLog(target))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
-		target.attackedBy(this, null);
+		// target.attackedBy(this, null);
 
 		// Spread fire if not turn 1
 		if (totalTurns != turnsRemaining) {

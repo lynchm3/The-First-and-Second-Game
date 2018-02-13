@@ -42,7 +42,7 @@ public class ActionSquash extends Action {
 			return;
 
 		if (target.attackable) {
-			target.changeHealth(-target.remainingHealth);
+			target.changeHealth(-target.remainingHealth, performer, this);
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
 
 				if (accidental) {
@@ -56,7 +56,6 @@ public class ActionSquash extends Action {
 						Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " squashed", target }));
 				}
 			}
-			target.attackedBy(performer, this);
 		}
 
 		performer.distanceMovedThisTurn = performer.travelDistance;

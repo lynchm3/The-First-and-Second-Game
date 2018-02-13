@@ -47,7 +47,7 @@ public class ActionSkin extends Action {
 
 		Knife knife = (Knife) performer.inventory.getGameObjectOfClass(Knife.class);
 
-		target.changeHealth(-target.remainingHealth);
+		target.changeHealth(-target.remainingHealth, null, null);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 

@@ -3,12 +3,21 @@ package com.marklynch.level.constructs.effect;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.Game;
+import com.marklynch.objects.DamageDealer;
 import com.marklynch.objects.GameObject;
+import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-import com.marklynch.utils.Texture;
+public abstract class Effect implements DamageDealer {
 
-public abstract class Effect {
+	// weapons
+	public float slashDamage = 0;
+	public float pierceDamage = 0;
+	public float bluntDamage = 0;
+	public float fireDamage = 0; // fire/purify/clean
+	public float waterDamage = 0; // water/life
+	public float electricalDamage = 0; // lightning/light/electrical/speed
+	public float poisonDamage = 0;// poison/ground/contaminate/neutralize/slow/corruption
 
 	public String logString;
 	public String effectName;
@@ -89,4 +98,39 @@ public abstract class Effect {
 	// // TextureUtils.skipNormals = false;
 	// }
 	// }
+
+	@Override
+	public float getEffectiveSlashDamage() {
+		return slashDamage;
+	}
+
+	@Override
+	public float getEffectivePierceDamage() {
+		return pierceDamage;
+	}
+
+	@Override
+	public float getEffectiveBluntDamage() {
+		return bluntDamage;
+	}
+
+	@Override
+	public float getEffectiveFireDamage() {
+		return fireDamage;
+	}
+
+	@Override
+	public float getEffectiveWaterDamage() {
+		return waterDamage;
+	}
+
+	@Override
+	public float getEffectiveElectricalDamage() {
+		return electricalDamage;
+	}
+
+	@Override
+	public float getEffectivePoisonDamage() {
+		return poisonDamage;
+	}
 }

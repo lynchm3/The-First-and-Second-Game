@@ -22,6 +22,7 @@ public class EffectBleeding extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_bleed.png");
+		this.slashDamage = 5;
 	}
 
 	public EffectBleeding(int totalTurns) {
@@ -35,10 +36,10 @@ public class EffectBleeding extends Effect {
 			return;
 
 		float damage = 5 - (10 * (target.getEffectiveSlashResistance() / 100f));
-		target.changeHealth(-damage);
+		target.changeHealth(this, null, this, 0);
 		if (Game.level.shouldLog(target))
 			Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
-		target.attackedBy(this, null);
+		// target.attackedBy(this, null);
 
 		// Spread fire if not turn 1
 		// if (totalTurns != turnsRemaining) {

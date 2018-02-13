@@ -134,15 +134,15 @@ public class ActionTeleport extends Action {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObject, " teleported in to ",
 						gameObjectInTheWay, ", both took " + damage + " damage" }));
 
-			gameObject.changeHealth(-damage);
-			gameObjectInTheWay.changeHealth(-damage);
+			gameObject.changeHealth(-damage, null, null);
+			gameObjectInTheWay.changeHealth(-damage, null, null);
 
 			if (performer == teleportee) {
-				gameObjectInTheWay.attackedBy(gameObject, this);
-				gameObject.attackedBy(gameObjectInTheWay, this);
+				gameObject.changeHealth(-damage, gameObjectInTheWay, this);
+				gameObjectInTheWay.changeHealth(-damage, gameObject, this);
 			} else {
-				gameObjectInTheWay.attackedBy(performer, this);
-				gameObject.attackedBy(performer, this);
+				gameObject.changeHealth(-damage, performer, this);
+				gameObjectInTheWay.changeHealth(-damage, performer, this);
 			}
 
 		}

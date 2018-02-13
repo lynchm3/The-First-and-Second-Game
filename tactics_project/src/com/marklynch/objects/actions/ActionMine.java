@@ -44,7 +44,7 @@ public class ActionMine extends Action {
 		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
 
 		float damage = target.totalHealth / 4f;
-		target.changeHealth(-damage);
+		target.changeHealth(-damage, null, null);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 

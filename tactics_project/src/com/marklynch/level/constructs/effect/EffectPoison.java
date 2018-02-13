@@ -17,6 +17,7 @@ public class EffectPoison extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_poison.png");
+		this.poisonDamage = 5;
 	}
 
 	public EffectPoison(int totalTurns) {
@@ -27,10 +28,10 @@ public class EffectPoison extends Effect {
 	public void activate() {
 		if (target instanceof Actor) {
 			float damage = 10 - (10 * (target.getEffectivePosionResistance() / 100f));
-			target.changeHealth(-damage);
+			target.changeHealth(this, null, this, 0);
 			if (Game.level.shouldLog(target))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { target, " lost " + damage + " HP to ", this }));
-			target.attackedBy(this, null);
+			// target.attackedBy(this, null);
 		}
 		turnsRemaining--;
 	}

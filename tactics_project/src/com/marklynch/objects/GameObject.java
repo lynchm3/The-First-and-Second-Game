@@ -93,7 +93,7 @@ import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-public class GameObject implements ActionableInWorld, ActionableInInventory, Comparable, InventoryParent {
+public class GameObject implements ActionableInWorld, ActionableInInventory, Comparable, InventoryParent, DamageDealer {
 
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
@@ -1588,6 +1588,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return slashResistance;
 	}
 
+	public float getEffectiveBluntResistance() {
+		return bluntResistance;
+	}
+
+	public float getEffectivePierceResistance() {
+		return pierceResistance;
+	}
+
 	public float getEffectiveFireResistance() {
 		float res = fireResistance;
 		if (isWet()) {
@@ -1724,42 +1732,49 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return null;
 	}
 
+	@Override
 	public float getEffectiveSlashDamage() {
 		if (enhancement != null)
 			return slashDamage + enhancement.slashDamage;
 		return slashDamage;
 	}
 
+	@Override
 	public float getEffectivePierceDamage() {
 		if (enhancement != null)
 			return pierceDamage + enhancement.pierceDamage;
 		return pierceDamage;
 	}
 
+	@Override
 	public float getEffectiveBluntDamage() {
 		if (enhancement != null)
 			return bluntDamage + enhancement.bluntDamage;
 		return bluntDamage;
 	}
 
+	@Override
 	public float getEffectiveFireDamage() {
 		if (enhancement != null)
 			return fireDamage + enhancement.fireDamage;
 		return fireDamage;
 	}
 
+	@Override
 	public float getEffectiveWaterDamage() {
 		if (enhancement != null)
 			return waterDamage + enhancement.waterDamage;
 		return waterDamage;
 	}
 
+	@Override
 	public float getEffectiveElectricalDamage() {
 		if (enhancement != null)
 			return electricalDamage + enhancement.electricalDamage;
 		return electricalDamage;
 	}
 
+	@Override
 	public float getEffectivePoisonDamage() {
 		if (enhancement != null)
 			return electricalDamage + enhancement.electricalDamage;
@@ -1778,11 +1793,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return slashDamage + pierceDamage + bluntDamage + fireDamage + waterDamage + electricalDamage + poisonDamage;
 	}
 
-	public float getTotalEffectiveDamage() {
-		return getEffectiveSlashDamage() + getEffectivePierceDamage() + getEffectiveBluntDamage()
-				+ getEffectiveFireDamage() + getEffectiveWaterDamage() + getEffectiveElectricalDamage()
-				+ getEffectivePoisonDamage();
-	}
+	// public float getTotalEffectiveDamage() {
+	// return getEffectiveSlashDamage() + getEffectivePierceDamage() +
+	// getEffectiveBluntDamage()
+	// + getEffectiveFireDamage() + getEffectiveWaterDamage() +
+	// getEffectiveElectricalDamage()
+	// + getEffectivePoisonDamage();
+	// }
 
 	public boolean animationsBlockingAI() {
 		if (!primaryAnimation.completed && primaryAnimation.blockAI)
@@ -1796,20 +1813,115 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return false;
 	}
 
-	public void changeHealth(float change) {
+	public void changeHealth(float change, Object attacker, Action action) {
+
 		remainingHealth += change;
 		if (remainingHealth > totalHealth)
 			remainingHealth = totalHealth;
 		if (remainingHealth < 0)
 			remainingHealth = 0;
-		doDamageAnimation(change);
+
+		if (change < 0)
+			attackedBy(attacker, action);
+
 	}
 
-	public void doDamageAnimation(float healing) {
+	public void changeHealth(Object attacker, Action action, DamageDealer damageDealer, float healing) {
+
+		int offsetY = 0;
+		boolean thisIsAnAttack = false;
+
+		// Slash
+		if (damageDealer.getEffectiveSlashDamage() != 0) {
+			float dmg = damageDealer.getEffectiveSlashDamage() / (this.getEffectiveSlashResistance() / 100);
+			doDamageAnimation(dmg, offsetY);
+			remainingHealth += dmg;
+			thisIsAnAttack = true;
+			offsetY += 16;
+		}
+
+		// Blunt
+		if (damageDealer.getEffectiveBluntDamage() != 0) {
+			float dmg = damageDealer.getEffectiveBluntDamage() / (this.getEffectiveBluntResistance() / 100);
+			doDamageAnimation(dmg, offsetY);
+			remainingHealth += dmg;
+			thisIsAnAttack = true;
+			offsetY += 16;
+		}
+
+		// Pierce
+		if (damageDealer.getEffectivePierceDamage() != 0) {
+			float dmg = damageDealer.getEffectivePierceDamage() / (this.getEffectivePierceResistance() / 100);
+			doDamageAnimation(dmg, offsetY);
+			remainingHealth += dmg;
+			thisIsAnAttack = true;
+			offsetY += 16;
+		}
+
+		// Fire
+		if (damageDealer.getEffectiveFireDamage() != 0) {
+			float dmg = damageDealer.getEffectiveFireDamage() / (this.getEffectiveFireResistance() / 100);
+			doDamageAnimation(dmg, offsetY);
+			remainingHealth += dmg;
+			thisIsAnAttack = true;
+			offsetY += 16;
+		}
+
+		// Water
+		if (damageDealer.getEffectiveWaterDamage() != 0) {
+			float dmg = damageDealer.getEffectiveWaterDamage() / (this.getEffectiveWaterResistance() / 100);
+			doDamageAnimation(dmg, offsetY);
+			remainingHealth += dmg;
+			thisIsAnAttack = true;
+			offsetY += 16;
+		}
+
+		// Electrical
+		if (damageDealer.getEffectiveElectricalDamage() != 0) {
+			float dmg = damageDealer.getEffectiveElectricalDamage() / (this.getEffectiveelectricResistance() / 100);
+			doDamageAnimation(dmg, offsetY);
+			remainingHealth -= dmg;
+			thisIsAnAttack = true;
+			offsetY += 16;
+		}
+
+		// Poison
+		if (damageDealer.getEffectivePoisonDamage() != 0) {
+			float dmg = damageDealer.getEffectivePoisonDamage() / (this.getEffectivePosionResistance() / 100);
+			doDamageAnimation(dmg, offsetY);
+			remainingHealth -= dmg;
+			thisIsAnAttack = true;
+			offsetY += 16;
+		}
+
+		// Healing
+		if (healing != 0) {
+			// float dmg = damageDealer.getEffectivePoisonDamage() /
+			// (this.getEffectivePosionResistance() / 100);
+			doDamageAnimation(healing, offsetY);
+			remainingHealth += healing;
+			// thisIsAnAttack = true;
+			offsetY += 16;
+		}
+
+		if (remainingHealth > totalHealth)
+			remainingHealth = totalHealth;
+		if (remainingHealth < 0)
+			remainingHealth = 0;
+
+		if (attacker != null && thisIsAnAttack == true)
+			attackedBy(attacker, action);
+	}
+
+	public void doDamageAnimation(float healing, float offsetY) {
+
+		// TYPES
+		// CRIT large red, HIGH DMG red, NORMAL DMG white, resisted DMG grey,
+		// HEAL green
 
 		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
-		this.secondaryAnimations.add(new AnimationDamageText((int) healing, this, x + 32, y - 64, 0.1f));
+		this.secondaryAnimations.add(new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f));
 	}
 }
