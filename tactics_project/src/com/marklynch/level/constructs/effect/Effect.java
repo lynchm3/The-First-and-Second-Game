@@ -125,7 +125,7 @@ public abstract class Effect implements DamageDealer {
 	}
 
 	@Override
-	public float getEffectiveElectricalDamage() {
+	public float getEffectiveElectricDamage() {
 		return electricalDamage;
 	}
 

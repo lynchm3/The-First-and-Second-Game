@@ -291,6 +291,13 @@ public class TemplatesNature {
 		Templates.VEIN.anchorY = 0;
 		Templates.VEIN.templateId = GameObject.generateNewTemplateId();
 		Templates.VEIN.flipYAxisInMirror = false;
+		Templates.VEIN.slashResistance = 100;
+		Templates.VEIN.bluntResistance = 100;
+		Templates.VEIN.pierceResistance = 100;
+		Templates.VEIN.fireResistance = 100;
+		Templates.VEIN.waterResistance = 100;
+		Templates.VEIN.electricResistance = 100;
+		Templates.VEIN.poisonResistance = 100;
 
 		// Food?
 		Templates.MEAT_CHUNK = new MeatChunk();

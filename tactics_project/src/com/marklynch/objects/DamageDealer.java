@@ -12,7 +12,7 @@ public interface DamageDealer {
 
 	float getEffectiveWaterDamage();
 
-	float getEffectiveElectricalDamage();
+	float getEffectiveElectricDamage();
 
 	float getEffectivePoisonDamage();
 

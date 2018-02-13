@@ -13,6 +13,7 @@ public class TemplatesWeapons {
 		Templates.KATANA = new Weapon();
 		Templates.KATANA.name = "Katana";
 		Templates.KATANA.slashDamage = 11;
+		Templates.KATANA.pierceDamage = 3;
 		Templates.KATANA.minRange = 1;
 		Templates.KATANA.maxRange = 1;
 		Templates.KATANA.imageTexturePath = "katana.png";

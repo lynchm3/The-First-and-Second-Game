@@ -54,7 +54,7 @@ public class ActionCastPoison extends Action {
 			if (Game.level.shouldLog(target, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " made ", poison, " in ", target }));
 		} else {
-			if (Math.random() * 100 > target.getEffectivePosionResistance()) {
+			if (Math.random() * 100 > target.getEffectivePoisonResistance()) {
 				target.addEffect(new EffectPoison(performer, target, 5));
 			} else {
 

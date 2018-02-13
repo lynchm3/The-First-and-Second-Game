@@ -1568,6 +1568,14 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		gameObject.minRange = minRange;
 		gameObject.maxRange = maxRange;
 
+		gameObject.slashResistance = slashResistance;
+		gameObject.bluntResistance = bluntResistance;
+		gameObject.pierceResistance = pierceResistance;
+		gameObject.fireResistance = fireResistance;
+		gameObject.waterResistance = waterResistance;
+		gameObject.electricResistance = electricResistance;
+		gameObject.poisonResistance = poisonResistance;
+
 		gameObject.templateId = templateId;
 
 		gameObject.diggable = diggable;
@@ -1612,7 +1620,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return waterResistance;
 	}
 
-	public float getEffectivePosionResistance() {
+	public float getEffectivePoisonResistance() {
 		return poisonResistance;
 	}
 
@@ -1768,7 +1776,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	@Override
-	public float getEffectiveElectricalDamage() {
+	public float getEffectiveElectricDamage() {
 		if (enhancement != null)
 			return electricalDamage + enhancement.electricalDamage;
 		return electricalDamage;
@@ -1833,65 +1841,93 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Slash
 		if (damageDealer.getEffectiveSlashDamage() != 0) {
-			float dmg = damageDealer.getEffectiveSlashDamage() / (this.getEffectiveSlashResistance() / 100);
+
+			float resistance = (this.getEffectiveSlashResistance() / 100);
+			float resistedDamage = damageDealer.getEffectiveSlashDamage() * resistance;
+			float dmg = damageDealer.getEffectiveSlashDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY);
-			remainingHealth += dmg;
-			thisIsAnAttack = true;
-			offsetY += 16;
+			remainingHealth -= dmg;
+			if (dmg > 0)
+				thisIsAnAttack = true;
+			offsetY += 48;
 		}
 
 		// Blunt
 		if (damageDealer.getEffectiveBluntDamage() != 0) {
-			float dmg = damageDealer.getEffectiveBluntDamage() / (this.getEffectiveBluntResistance() / 100);
+
+			float resistance = (this.getEffectiveBluntResistance() / 100);
+			float resistedDamage = damageDealer.getEffectiveBluntDamage() * resistance;
+			float dmg = damageDealer.getEffectiveBluntDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY);
-			remainingHealth += dmg;
-			thisIsAnAttack = true;
-			offsetY += 16;
+			remainingHealth -= dmg;
+			if (dmg > 0)
+				thisIsAnAttack = true;
+			offsetY += 48;
 		}
 
 		// Pierce
 		if (damageDealer.getEffectivePierceDamage() != 0) {
-			float dmg = damageDealer.getEffectivePierceDamage() / (this.getEffectivePierceResistance() / 100);
+
+			float resistance = (this.getEffectivePierceResistance() / 100);
+			float resistedDamage = damageDealer.getEffectivePierceDamage() * resistance;
+			float dmg = damageDealer.getEffectivePierceDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY);
-			remainingHealth += dmg;
-			thisIsAnAttack = true;
-			offsetY += 16;
+			remainingHealth -= dmg;
+			if (dmg > 0)
+				thisIsAnAttack = true;
+			offsetY += 48;
 		}
 
 		// Fire
 		if (damageDealer.getEffectiveFireDamage() != 0) {
-			float dmg = damageDealer.getEffectiveFireDamage() / (this.getEffectiveFireResistance() / 100);
+
+			float resistance = (this.getEffectiveFireResistance() / 100);
+			float resistedDamage = damageDealer.getEffectiveFireDamage() * resistance;
+			float dmg = damageDealer.getEffectiveFireDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY);
-			remainingHealth += dmg;
-			thisIsAnAttack = true;
-			offsetY += 16;
+			remainingHealth -= dmg;
+			if (dmg > 0)
+				thisIsAnAttack = true;
+			offsetY += 48;
 		}
 
 		// Water
 		if (damageDealer.getEffectiveWaterDamage() != 0) {
-			float dmg = damageDealer.getEffectiveWaterDamage() / (this.getEffectiveWaterResistance() / 100);
+
+			float resistance = (this.getEffectiveWaterResistance() / 100);
+			float resistedDamage = damageDealer.getEffectiveWaterDamage() * resistance;
+			float dmg = damageDealer.getEffectiveWaterDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY);
-			remainingHealth += dmg;
-			thisIsAnAttack = true;
-			offsetY += 16;
+			remainingHealth -= dmg;
+			if (dmg > 0)
+				thisIsAnAttack = true;
+			offsetY += 48;
 		}
 
 		// Electrical
-		if (damageDealer.getEffectiveElectricalDamage() != 0) {
-			float dmg = damageDealer.getEffectiveElectricalDamage() / (this.getEffectiveelectricResistance() / 100);
+		if (damageDealer.getEffectiveElectricDamage() != 0) {
+
+			float resistance = (this.getEffectiveelectricResistance() / 100);
+			float resistedDamage = damageDealer.getEffectiveElectricDamage() * resistance;
+			float dmg = damageDealer.getEffectiveElectricDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY);
 			remainingHealth -= dmg;
-			thisIsAnAttack = true;
-			offsetY += 16;
+			if (dmg > 0)
+				thisIsAnAttack = true;
+			offsetY += 48;
 		}
 
 		// Poison
 		if (damageDealer.getEffectivePoisonDamage() != 0) {
-			float dmg = damageDealer.getEffectivePoisonDamage() / (this.getEffectivePosionResistance() / 100);
+
+			float resistance = (this.getEffectivePoisonResistance() / 100);
+			float resistedDamage = damageDealer.getEffectivePoisonDamage() * resistance;
+			float dmg = damageDealer.getEffectivePoisonDamage() - resistedDamage;
 			doDamageAnimation(dmg, offsetY);
 			remainingHealth -= dmg;
-			thisIsAnAttack = true;
-			offsetY += 16;
+			if (dmg > 0)
+				thisIsAnAttack = true;
+			offsetY += 48;
 		}
 
 		// Healing
@@ -1901,7 +1937,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			doDamageAnimation(healing, offsetY);
 			remainingHealth += healing;
 			// thisIsAnAttack = true;
-			offsetY += 16;
+			offsetY += 48;
 		}
 
 		if (remainingHealth > totalHealth)

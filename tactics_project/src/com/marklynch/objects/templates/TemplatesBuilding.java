@@ -26,6 +26,13 @@ public class TemplatesBuilding {
 		Templates.WALL.anchorY = 0;
 		Templates.WALL.templateId = GameObject.generateNewTemplateId();
 		Templates.WALL.flipYAxisInMirror = false;
+		Templates.WALL.slashResistance = 100;
+		Templates.WALL.bluntResistance = 100;
+		Templates.WALL.pierceResistance = 100;
+		Templates.WALL.fireResistance = 100;
+		Templates.WALL.waterResistance = 100;
+		Templates.WALL.electricResistance = 100;
+		Templates.WALL.poisonResistance = 100;
 
 		Templates.FENCE = new Fence();
 		Templates.FENCE.name = "Fence";
