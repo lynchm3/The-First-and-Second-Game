@@ -11,6 +11,7 @@ import com.marklynch.objects.GameObject.DAMAGE_TYPE;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class AnimationDamageText extends Animation {
@@ -35,6 +36,8 @@ public class AnimationDamageText extends Animation {
 
 	boolean reachedDestination = false;
 
+	public Texture texture = ComparisonDisplay.imageSlash;
+
 	public AnimationDamageText(int damage, GameObject taker, float originX, float originY, float speed,
 			DAMAGE_TYPE damageType) {
 
@@ -54,6 +57,24 @@ public class AnimationDamageText extends Animation {
 
 		// this.targetOffsetX = targetOffsetX;
 		// this.targetOffsetY = targetOffsetY;
+
+		if (damageType == DAMAGE_TYPE.SLASH) {
+			texture = ComparisonDisplay.imageSlash;
+		} else if (damageType == DAMAGE_TYPE.BLUNT) {
+			texture = ComparisonDisplay.imageBlunt;
+		} else if (damageType == DAMAGE_TYPE.PIERCE) {
+			texture = ComparisonDisplay.imagePierce;
+		} else if (damageType == DAMAGE_TYPE.FIRE) {
+			texture = ComparisonDisplay.imageFire;
+		} else if (damageType == DAMAGE_TYPE.WATER) {
+			texture = ComparisonDisplay.imageWater;
+		} else if (damageType == DAMAGE_TYPE.ELECTRIC) {
+			texture = ComparisonDisplay.imageElectrical;
+		} else if (damageType == DAMAGE_TYPE.POISON) {
+			texture = ComparisonDisplay.imagePosion;
+		} else if (damageType == DAMAGE_TYPE.HEAL) {
+			texture = ComparisonDisplay.imageWeight;
+		}
 
 		blockAI = false;
 
@@ -112,8 +133,7 @@ public class AnimationDamageText extends Animation {
 
 		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null,
 				damageStringWithColor);
-		TextureUtils.drawTexture(ComparisonDisplay.imageSlash, 1, drawPositionX - 16, drawPositionY, drawPositionX,
-				drawPositionY + 16);
+		TextureUtils.drawTexture(texture, 1, drawPositionX - 16, drawPositionY, drawPositionX, drawPositionY + 16);
 
 		Game.activeBatch.flush();
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));
