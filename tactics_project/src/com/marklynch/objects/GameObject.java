@@ -139,6 +139,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float waterResistance;
 	public float electricResistance;
 	public float poisonResistance;
+	public float bleedingResistance;
 
 	public float weight;
 
@@ -1625,6 +1626,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return poisonResistance;
 	}
 
+	public float getEffectiveBleedingResistance() {
+		return poisonResistance;
+	}
+
 	public float getEffectiveelectricResistance() {
 		return electricResistance;
 	}
@@ -1791,6 +1796,13 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	@Override
+	public float getEffectiveBleedingDamage() {
+		if (enhancement != null)
+			return poisonDamage + enhancement.poisonDamage;
+		return poisonDamage;
+	}
+
+	@Override
 	public float getEffectiveHealing() {
 		if (enhancement != null)
 			return healing + enhancement.healing;
@@ -1938,6 +1950,19 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			offsetY += 48;
 		}
 
+		// Bleeding
+		if (damageDealer.getEffectiveBleedingDamage() != 0) {
+
+			float resistance = (this.getEffectiveBleedingResistance() / 100);
+			float resistedDamage = damageDealer.getEffectiveBleedingDamage() * resistance;
+			float dmg = damageDealer.getEffectiveBleedingDamage() - resistedDamage;
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLEEDING, this.getEffectiveBleedingResistance());
+			remainingHealth -= dmg;
+			if (dmg > 0)
+				thisIsAnAttack = true;
+			offsetY += 48;
+		}
+
 		// Healing
 		if (damageDealer.getEffectiveHealing() != 0) {
 			// float dmg = damageDealer.getEffectivePoisonDamage() /
@@ -1958,7 +1983,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public enum DAMAGE_TYPE {
-		SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, HEAL
+		SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, BLEEDING, HEAL
 	};
 
 	public void doDamageAnimation(float healing, float offsetY, DAMAGE_TYPE damageType, float res) {
@@ -1977,6 +2002,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// good hit
 		else if (res < -50)
+
 			color = color.RED;
 		else if (res < 0)
 			color = color.ORANGE;

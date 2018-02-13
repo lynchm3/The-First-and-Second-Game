@@ -18,6 +18,7 @@ public abstract class Effect implements DamageDealer {
 	public float waterDamage = 0; // water/life
 	public float electricalDamage = 0; // lightning/light/electrical/speed
 	public float poisonDamage = 0;// poison/ground/contaminate/neutralize/slow/corruption
+	public float bleedingDamage = 0;
 	public float healing = 0;
 
 	public String logString;
@@ -132,6 +133,11 @@ public abstract class Effect implements DamageDealer {
 
 	@Override
 	public float getEffectivePoisonDamage() {
+		return poisonDamage;
+	}
+
+	@Override
+	public float getEffectiveBleedingDamage() {
 		return poisonDamage;
 	}
 

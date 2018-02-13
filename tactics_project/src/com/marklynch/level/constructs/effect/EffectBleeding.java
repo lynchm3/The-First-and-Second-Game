@@ -22,7 +22,7 @@ public class EffectBleeding extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("effect_bleed.png");
-		this.slashDamage = 5;
+		this.bleedingDamage = 5;
 	}
 
 	public EffectBleeding(int totalTurns) {
