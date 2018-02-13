@@ -74,8 +74,10 @@ public class AnimationDamageText extends Animation {
 			texture = ComparisonDisplay.imageElectrical;
 		} else if (damageType == DAMAGE_TYPE.POISON) {
 			texture = ComparisonDisplay.imagePosion;
-		} else if (damageType == DAMAGE_TYPE.HEAL) {
-			texture = ComparisonDisplay.imageWeight;
+		} else if (damageType == DAMAGE_TYPE.BLEEDING) {
+			texture = ComparisonDisplay.imageBleeding;
+		} else if (damageType == DAMAGE_TYPE.HEALING) {
+			texture = ComparisonDisplay.imageHealing;
 		}
 
 		blockAI = false;

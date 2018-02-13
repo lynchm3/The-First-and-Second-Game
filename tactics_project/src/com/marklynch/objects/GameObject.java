@@ -1968,7 +1968,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (damageDealer.getEffectiveHealing() != 0) {
 			// float dmg = damageDealer.getEffectivePoisonDamage() /
 			// (this.getEffectivePosionResistance() / 100);
-			doDamageAnimation(damageDealer.getEffectiveHealing(), offsetY, DAMAGE_TYPE.HEAL, +200f);
+			doDamageAnimation(damageDealer.getEffectiveHealing(), offsetY, DAMAGE_TYPE.HEALING, +200f);
 			remainingHealth += damageDealer.getEffectiveHealing();
 			// thisIsAnAttack = true;
 			offsetY += 48;
@@ -1984,7 +1984,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	}
 
 	public enum DAMAGE_TYPE {
-		SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, BLEEDING, HEAL
+		SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, BLEEDING, HEALING
 	};
 
 	public void doDamageAnimation(float healing, float offsetY, DAMAGE_TYPE damageType, float res) {
