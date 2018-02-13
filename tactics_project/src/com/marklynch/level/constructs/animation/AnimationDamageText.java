@@ -5,10 +5,13 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.inventory.ComparisonDisplay;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.GameObject.DAMAGE_TYPE;
 import com.marklynch.utils.Color;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
+import com.marklynch.utils.TextureUtils;
 
 public class AnimationDamageText extends Animation {
 
@@ -32,7 +35,8 @@ public class AnimationDamageText extends Animation {
 
 	boolean reachedDestination = false;
 
-	public AnimationDamageText(int damage, GameObject taker, float originX, float originY, float speed) {
+	public AnimationDamageText(int damage, GameObject taker, float originX, float originY, float speed,
+			DAMAGE_TYPE damageType) {
 
 		this.targetGameObject = taker;
 
@@ -76,6 +80,7 @@ public class AnimationDamageText extends Animation {
 
 	@Override
 	public void draw2() {
+
 	}
 
 	@Override
@@ -107,6 +112,8 @@ public class AnimationDamageText extends Animation {
 
 		TextUtils.printTextWithImages(drawPositionX, drawPositionY, Integer.MAX_VALUE, false, null,
 				damageStringWithColor);
+		TextureUtils.drawTexture(ComparisonDisplay.imageSlash, 1, drawPositionX - 16, drawPositionY, drawPositionX,
+				drawPositionY + 16);
 
 		Game.activeBatch.flush();
 		view.translate(new Vector2f(Game.windowWidth / 2, Game.windowHeight / 2));

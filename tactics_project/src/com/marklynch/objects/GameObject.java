@@ -1845,7 +1845,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float resistance = (this.getEffectiveSlashResistance() / 100);
 			float resistedDamage = damageDealer.getEffectiveSlashDamage() * resistance;
 			float dmg = damageDealer.getEffectiveSlashDamage() - resistedDamage;
-			doDamageAnimation(dmg, offsetY);
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.SLASH);
 			remainingHealth -= dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
@@ -1858,7 +1858,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float resistance = (this.getEffectiveBluntResistance() / 100);
 			float resistedDamage = damageDealer.getEffectiveBluntDamage() * resistance;
 			float dmg = damageDealer.getEffectiveBluntDamage() - resistedDamage;
-			doDamageAnimation(dmg, offsetY);
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.BLUNT);
 			remainingHealth -= dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
@@ -1871,7 +1871,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float resistance = (this.getEffectivePierceResistance() / 100);
 			float resistedDamage = damageDealer.getEffectivePierceDamage() * resistance;
 			float dmg = damageDealer.getEffectivePierceDamage() - resistedDamage;
-			doDamageAnimation(dmg, offsetY);
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.PIERCE);
 			remainingHealth -= dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
@@ -1884,7 +1884,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float resistance = (this.getEffectiveFireResistance() / 100);
 			float resistedDamage = damageDealer.getEffectiveFireDamage() * resistance;
 			float dmg = damageDealer.getEffectiveFireDamage() - resistedDamage;
-			doDamageAnimation(dmg, offsetY);
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.FIRE);
 			remainingHealth -= dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
@@ -1897,20 +1897,20 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float resistance = (this.getEffectiveWaterResistance() / 100);
 			float resistedDamage = damageDealer.getEffectiveWaterDamage() * resistance;
 			float dmg = damageDealer.getEffectiveWaterDamage() - resistedDamage;
-			doDamageAnimation(dmg, offsetY);
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.WATER);
 			remainingHealth -= dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
 			offsetY += 48;
 		}
 
-		// Electrical
+		// Electric
 		if (damageDealer.getEffectiveElectricDamage() != 0) {
 
 			float resistance = (this.getEffectiveelectricResistance() / 100);
 			float resistedDamage = damageDealer.getEffectiveElectricDamage() * resistance;
 			float dmg = damageDealer.getEffectiveElectricDamage() - resistedDamage;
-			doDamageAnimation(dmg, offsetY);
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.ELECTRIC);
 			remainingHealth -= dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
@@ -1923,7 +1923,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			float resistance = (this.getEffectivePoisonResistance() / 100);
 			float resistedDamage = damageDealer.getEffectivePoisonDamage() * resistance;
 			float dmg = damageDealer.getEffectivePoisonDamage() - resistedDamage;
-			doDamageAnimation(dmg, offsetY);
+			doDamageAnimation(dmg, offsetY, DAMAGE_TYPE.POISON);
 			remainingHealth -= dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
@@ -1934,7 +1934,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (healing != 0) {
 			// float dmg = damageDealer.getEffectivePoisonDamage() /
 			// (this.getEffectivePosionResistance() / 100);
-			doDamageAnimation(healing, offsetY);
+			doDamageAnimation(healing, offsetY, DAMAGE_TYPE.HEAL);
 			remainingHealth += healing;
 			// thisIsAnAttack = true;
 			offsetY += 48;
@@ -1949,7 +1949,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			attackedBy(attacker, action);
 	}
 
-	public void doDamageAnimation(float healing, float offsetY) {
+	public enum DAMAGE_TYPE {
+		SLASH, BLUNT, PIERCE, FIRE, WATER, ELECTRIC, POISON, HEAL
+	};
+
+	public void doDamageAnimation(float healing, float offsetY, DAMAGE_TYPE damageType) {
 
 		// TYPES
 		// CRIT large red, HIGH DMG red, NORMAL DMG white, resisted DMG grey,
@@ -1958,6 +1962,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
-		this.secondaryAnimations.add(new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f));
+		this.secondaryAnimations
+				.add(new AnimationDamageText((int) healing, this, x + 32, y - 64 + offsetY, 0.1f, damageType));
 	}
 }
