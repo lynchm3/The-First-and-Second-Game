@@ -38,15 +38,17 @@ public class AnimationDamageText extends Animation {
 
 	public Texture texture = ComparisonDisplay.imageSlash;
 
+	Color color;
+
 	public AnimationDamageText(int damage, GameObject taker, float originX, float originY, float speed,
-			DAMAGE_TYPE damageType) {
+			DAMAGE_TYPE damageType, Color color) {
 
 		this.targetGameObject = taker;
 
 		String damageString = "" + damage;
 		this.damageStringLength = Game.smallFont.getWidth(damageString);
-		Color damageStringColor = Color.RED;
-		damageStringWithColor = new StringWithColor(damageString, damageStringColor);
+		this.color = color;
+		damageStringWithColor = new StringWithColor(damageString, color);
 
 		this.speed = speed;
 
