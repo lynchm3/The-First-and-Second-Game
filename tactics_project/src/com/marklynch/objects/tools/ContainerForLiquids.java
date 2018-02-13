@@ -35,7 +35,7 @@ public class ContainerForLiquids extends Tool {
 	@Override
 	public void landed(Actor shooter, Action action) {
 
-		this.remainingHealth = 0;
+		this.changeHealth(-this.remainingHealth);
 		this.canShareSquare = true;
 		this.blocksLineOfSight = false;
 

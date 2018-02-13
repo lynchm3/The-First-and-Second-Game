@@ -134,8 +134,8 @@ public class ActionTeleport extends Action {
 				Game.level.logOnScreen(new ActivityLog(new Object[] { gameObject, " teleported in to ",
 						gameObjectInTheWay, ", both took " + damage + " damage" }));
 
-			gameObject.remainingHealth -= damage;
-			gameObjectInTheWay.remainingHealth -= damage;
+			gameObject.changeHealth(-damage);
+			gameObjectInTheWay.changeHealth(-damage);
 
 			if (performer == teleportee) {
 				gameObjectInTheWay.attackedBy(gameObject, this);

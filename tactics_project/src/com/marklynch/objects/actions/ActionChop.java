@@ -45,7 +45,7 @@ public class ActionChop extends Action {
 		Axe axe = (Axe) performer.inventory.getGameObjectOfClass(Axe.class);
 
 		float damage = target.totalHealth / 4f;
-		target.remainingHealth -= damage;
+		target.changeHealth(-damage);
 		performer.distanceMovedThisTurn = performer.travelDistance;
 		performer.hasAttackedThisTurn = true;
 

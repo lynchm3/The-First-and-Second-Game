@@ -57,7 +57,7 @@ public class ActionAttack extends Action {
 		}
 
 		if (target.attackable) {
-			target.remainingHealth -= damage;
+			target.changeHealth(-damage);
 			String attackTypeString;
 			attackTypeString = "attacked ";
 

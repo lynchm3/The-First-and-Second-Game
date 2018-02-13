@@ -42,7 +42,7 @@ public class ActionSquash extends Action {
 			return;
 
 		if (target.attackable) {
-			target.remainingHealth = 0;
+			target.changeHealth(-target.remainingHealth);
 			if (performer.squareGameObjectIsOn.visibleToPlayer) {
 
 				if (accidental) {

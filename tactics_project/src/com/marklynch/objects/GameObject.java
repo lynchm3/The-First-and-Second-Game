@@ -1796,11 +1796,20 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return false;
 	}
 
-	public void doDamageAnimation(int damage) {
+	public void changeHealth(float change) {
+		remainingHealth += change;
+		if (remainingHealth > totalHealth)
+			remainingHealth = totalHealth;
+		if (remainingHealth < 0)
+			remainingHealth = 0;
+		doDamageAnimation(change);
+	}
+
+	public void doDamageAnimation(float healing) {
 
 		int x = (int) (squareGameObjectIsOn.xInGridPixels + Game.SQUARE_WIDTH * drawOffsetRatioX);
 		int y = (int) (squareGameObjectIsOn.yInGridPixels + Game.SQUARE_HEIGHT * drawOffsetRatioY);
 
-		this.secondaryAnimations.add(new AnimationDamageText(damage, this, x + 32, y - 64, 0.1f));
+		this.secondaryAnimations.add(new AnimationDamageText((int) healing, this, x + 32, y - 64, 0.1f));
 	}
 }

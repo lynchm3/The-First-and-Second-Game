@@ -129,7 +129,7 @@ public class RockGolem extends Monster {
 	public void landed(Actor shooter, Action action) {
 		if (!awake)
 			wakeUp();
-		this.remainingHealth -= 10;
+		changeHealth(-10);
 		this.attackedBy(shooter, action);
 	}
 

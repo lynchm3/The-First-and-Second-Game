@@ -59,7 +59,7 @@ public class ActionEatItems extends VariableQtyAction {
 			GameObject object = objects[i];
 
 			if (object instanceof Food || object instanceof Corpse || object instanceof Carcass) {
-				object.remainingHealth = 0;
+				object.changeHealth(-object.remainingHealth);
 				if (object.inventoryThatHoldsThisObject.parent instanceof Square) {
 					Game.level.inanimateObjectsOnGroundToRemove.add(object);
 				}
