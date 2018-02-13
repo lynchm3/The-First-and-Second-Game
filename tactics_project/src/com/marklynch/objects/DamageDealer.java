@@ -16,4 +16,6 @@ public interface DamageDealer {
 
 	float getEffectivePoisonDamage();
 
+	float getEffectiveHealing();
+
 }

@@ -215,6 +215,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public float waterDamage = 0; // water/life
 	public float electricalDamage = 0; // lightning/light/electrical/speed
 	public float poisonDamage = 0;// poison/ground/contaminate/neutralize/slow/corruption
+	public float healing = 0;
 	public float minRange = 1;
 	public float maxRange = 1;
 
@@ -1785,8 +1786,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	@Override
 	public float getEffectivePoisonDamage() {
 		if (enhancement != null)
-			return electricalDamage + enhancement.electricalDamage;
+			return poisonDamage + enhancement.poisonDamage;
 		return poisonDamage;
+	}
+
+	@Override
+	public float getEffectiveHealing() {
+		if (enhancement != null)
+			return healing + enhancement.healing;
+		return healing;
 	}
 
 	public float getEffectiveMinRange() {
@@ -1834,7 +1842,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	}
 
-	public void changeHealth(Object attacker, Action action, DamageDealer damageDealer, float healing) {
+	public void changeHealth(Object attacker, Action action, DamageDealer damageDealer) {
 
 		int offsetY = 0;
 		boolean thisIsAnAttack = false;
@@ -1931,11 +1939,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		// Healing
-		if (healing != 0) {
+		if (damageDealer.getEffectiveHealing() != 0) {
 			// float dmg = damageDealer.getEffectivePoisonDamage() /
 			// (this.getEffectivePosionResistance() / 100);
-			doDamageAnimation(healing, offsetY, DAMAGE_TYPE.HEAL);
-			remainingHealth += healing;
+			doDamageAnimation(damageDealer.getEffectiveHealing(), offsetY, DAMAGE_TYPE.HEAL);
+			remainingHealth += damageDealer.getEffectiveHealing();
 			// thisIsAnAttack = true;
 			offsetY += 48;
 		}

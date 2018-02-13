@@ -3,7 +3,6 @@ package com.marklynch.level.constructs.enchantment;
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import com.marklynch.level.constructs.effect.Effect;
-
 import com.marklynch.utils.Texture;
 
 public abstract class Enhancement {
@@ -17,6 +16,7 @@ public abstract class Enhancement {
 	public float waterDamage = 0;
 	public float electricalDamage = 0;
 	public float poisonDamage = 0;
+	public float healing = 0;
 
 	public Effect[] effect = {};
 

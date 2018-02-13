@@ -17,6 +17,7 @@ public class EffectHeal extends Effect {
 		this.totalTurns = totalTurns;
 		this.turnsRemaining = totalTurns;
 		this.imageTexture = getGlobalImage("action_heal.png");
+		healing = 10;
 	}
 
 	public EffectHeal(int totalTurns) {
@@ -26,10 +27,6 @@ public class EffectHeal extends Effect {
 	@Override
 	public void activate() {
 		if (target instanceof Actor) {
-			float healing = 10;
-			if (target.remainingHealth + healing > target.totalHealth) {
-				healing = target.totalHealth - target.remainingHealth;
-			}
 
 			// if (target instanceof Undead) {
 			// target.remainingHealth -= healing;
@@ -39,7 +36,7 @@ public class EffectHeal extends Effect {
 			// to ", this }));
 			// target.attackedBy(this, null);
 			// } else {
-			target.changeHealth(this, null, this, healing);
+			target.changeHealth(this, null, this);
 			if (Game.level.shouldLog(target))
 				Game.level.logOnScreen(
 						new ActivityLog(new Object[] { target, " gained " + healing + " HP from ", this }));

@@ -63,7 +63,7 @@ public class ActionThrowItem extends Action {
 		//
 		// }
 		if (targetGameObject != null && targetGameObject.attackable) {
-			targetGameObject.changeHealth(performer, this, gameObjectToThrow, 0);
+			targetGameObject.changeHealth(performer, this, gameObjectToThrow);
 		}
 
 		if (Game.level.shouldLog(targetGameObject, performer)) {
