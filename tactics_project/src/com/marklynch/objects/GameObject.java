@@ -1875,6 +1875,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		int offsetY = 0;
 		boolean thisIsAnAttack = false;
 		float totalDamage = 0;
+		GameObject gameObjectAttacker = null;
+		if (attacker instanceof GameObject)
+			gameObjectAttacker = (GameObject) attacker;
 
 		// Slash
 		if (damageDealer.getEffectiveSlashDamage() != 0) {
@@ -1887,6 +1890,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
+
+			// Update bestiary
+			if (Game.level.shouldLog(this))
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).slashResistance = true;
+
+			if (gameObjectAttacker != null)
+				if (Game.level.shouldLog(gameObjectAttacker))
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).slashDamage = true;
+
 			offsetY += 48;
 		}
 
@@ -1901,6 +1913,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
+
+			// Update bestiary
+			if (Game.level.shouldLog(this))
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).bluntResistance = true;
+
+			if (gameObjectAttacker != null)
+				if (Game.level.shouldLog(gameObjectAttacker))
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).bluntDamage = true;
+
 			offsetY += 48;
 		}
 
@@ -1915,6 +1936,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
+
+			// Update bestiary
+			if (Game.level.shouldLog(this))
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).pierceResistance = true;
+
+			if (gameObjectAttacker != null)
+				if (Game.level.shouldLog(gameObjectAttacker))
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).pierceDamage = true;
+
 			offsetY += 48;
 		}
 
@@ -1929,6 +1959,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
+
+			// Update bestiary
+			if (Game.level.shouldLog(this))
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).fireResistance = true;
+
+			if (gameObjectAttacker != null)
+				if (Game.level.shouldLog(gameObjectAttacker))
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).fireDamage = true;
+
 			offsetY += 48;
 		}
 
@@ -1943,6 +1982,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
+
+			// Update bestiary
+			if (Game.level.shouldLog(this))
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).waterResistance = true;
+
+			if (gameObjectAttacker != null)
+				if (Game.level.shouldLog(gameObjectAttacker))
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).waterDamage = true;
+
 			offsetY += 48;
 		}
 
@@ -1957,6 +2005,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
+
+			// Update bestiary
+			if (Game.level.shouldLog(this))
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).electricResistance = true;
+
+			if (gameObjectAttacker != null)
+				if (Game.level.shouldLog(gameObjectAttacker))
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).electricDamage = true;
+
 			offsetY += 48;
 		}
 
@@ -1971,6 +2028,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
+
+			// Update bestiary
+			if (Game.level.shouldLog(this))
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).poisonResistance = true;
+
+			if (gameObjectAttacker != null)
+				if (Game.level.shouldLog(gameObjectAttacker))
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).poisonDamage = true;
+
 			offsetY += 48;
 		}
 
@@ -1985,6 +2051,15 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			totalDamage += dmg;
 			if (dmg > 0)
 				thisIsAnAttack = true;
+
+			// Update bestiary
+			if (Game.level.shouldLog(this))
+				Game.level.bestiaryKnowledgeCollection.get(this.templateId).bleedingResistance = true;
+
+			if (gameObjectAttacker != null)
+				if (Game.level.shouldLog(gameObjectAttacker))
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).bleedingDamage = true;
+
 			offsetY += 48;
 		}
 
@@ -1996,6 +2071,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			remainingHealth += damageDealer.getEffectiveHealing();
 			totalDamage -= damageDealer.getEffectiveHealing();
 			// thisIsAnAttack = true;
+
+			if (gameObjectAttacker != null)
+				if (Game.level.shouldLog(gameObjectAttacker))
+					Game.level.bestiaryKnowledgeCollection.get(gameObjectAttacker.templateId).healing = true;
+
 			offsetY += 48;
 		}
 

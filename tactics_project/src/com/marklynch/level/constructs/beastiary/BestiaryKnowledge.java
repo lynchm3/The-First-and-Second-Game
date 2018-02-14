@@ -26,6 +26,7 @@ public class BestiaryKnowledge {
 	public boolean waterResistance;
 	public boolean electricResistance;
 	public boolean poisonResistance;
+	public boolean bleedingResistance;
 
 	// Damage
 	public boolean slashDamage;

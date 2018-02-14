@@ -396,7 +396,7 @@ public class PinWindow implements Draggable {
 		}
 
 		// Bleeding resistance
-		TextureUtils.drawTexture(getGlobalImage("effect_bleeding.png", false), drawPositionX + resistancesImageX,
+		TextureUtils.drawTexture(getGlobalImage("effect_bleed.png", false), drawPositionX + resistancesImageX,
 				drawPositionY + resistancesY + 270, drawPositionX + resistancesImageX + 20,
 				drawPositionY + resistancesY + 270 + 20);
 		if (bestiaryKnowledge.poisonResistance) {
