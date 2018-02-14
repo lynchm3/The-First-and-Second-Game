@@ -211,8 +211,20 @@ public class Texture implements ITexture {
 
 			if (generatePixelsArray) {
 				ByteBuffer dupe = buf.duplicate();
-				pixels = new byte[dupe.remaining()];
-				dupe.get(pixels);
+				pixels = new byte[dupe.remaining() / 4];
+
+				int rgba = 0;
+				int pixelsIndex = 0;
+				while (dupe.hasRemaining()) {
+					if (rgba == 3) {
+						pixels[pixelsIndex] = dupe.get();
+						rgba = 0;
+						pixelsIndex++;
+					} else {
+						dupe.get();
+						rgba++;
+					}
+				}
 			}
 
 			glEnable(getTarget());

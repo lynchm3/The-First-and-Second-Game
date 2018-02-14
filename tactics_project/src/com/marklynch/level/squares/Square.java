@@ -706,14 +706,14 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			return null;
 		}
 
-		int index = (x + y * texture.getWidth()) * 4;
+		int index = (x + y * texture.getWidth());
 
-		int r = texture.pixels[index] & 0xFF;
-		int g = texture.pixels[index + 1] & 0xFF;
-		int b = texture.pixels[index + 2] & 0xFF;
-		int a = texture.pixels[index + 3] & 0xFF;
+		// int r = texture.pixels[index] & 0xFF;
+		// int g = texture.pixels[index + 1] & 0xFF;
+		// int b = texture.pixels[index + 2] & 0xFF;
+		int a = texture.pixels[index] & 0xFF;
 
-		return new Color(r, g, b, a);
+		return new Color(0, 0, 0, a);
 	}
 
 	// this.xInGridPixels;
