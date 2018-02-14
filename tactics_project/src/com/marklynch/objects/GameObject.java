@@ -1879,6 +1879,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (attacker instanceof GameObject)
 			gameObjectAttacker = (GameObject) attacker;
 
+		System.out.println("damageDealer = " + damageDealer);
+		System.out.println("damageDealer.getEffectiveBluntDamage() = " + damageDealer.getEffectiveBluntDamage());
+		// System.out.println("damageDealer.bluntDamage = " + ((Actor)
+		// damageDealer).bluntDamage);
+
 		// Slash
 		if (damageDealer.getEffectiveSlashDamage() != 0) {
 

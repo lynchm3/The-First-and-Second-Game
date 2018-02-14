@@ -428,6 +428,7 @@ public class Editor {
 		// West Security
 		Player player = Templates.PLAYER.makeCopy("You", Game.level.squares[Game.playerStartPosX][Game.playerStartPosY],
 				Level.factions.player, null, 100, new GameObject[] {}, new GameObject[] {}, null);
+		// player.getEffectiveBluntDamage()
 		// Morts Mine
 		// Actor player =
 		// Templates.Player.makeCopy(Game.level.squares[80][39],

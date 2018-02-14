@@ -25,6 +25,7 @@ public class TemplatesHumans {
 		Templates.PLAYER.dexterity = 10;
 		Templates.PLAYER.intelligence = 10;
 		Templates.PLAYER.endurance = 10;
+		Templates.PLAYER.bluntDamage = 3;
 		Templates.PLAYER.imageTexturePath = "hero.png";
 		Templates.PLAYER.heightRatio = 1.5f;
 		Templates.PLAYER.drawOffsetRatioY = -0.5f;
@@ -46,6 +47,7 @@ public class TemplatesHumans {
 		Templates.HUNTER = new Human();
 		Templates.HUNTER.title = "Hunter";
 		Templates.HUNTER.level = 1;
+		Templates.HUNTER.bluntDamage = 3;
 		Templates.HUNTER.totalHealth = Templates.HUNTER.remainingHealth = 10;
 		Templates.HUNTER.strength = 10;
 		Templates.HUNTER.dexterity = 10;
@@ -64,6 +66,7 @@ public class TemplatesHumans {
 		Templates.THIEF = new Human();
 		Templates.THIEF.title = "Thief";
 		Templates.THIEF.level = 1;
+		Templates.THIEF.bluntDamage = 3;
 		Templates.THIEF.totalHealth = Templates.THIEF.remainingHealth = 10;
 		Templates.THIEF.strength = 10;
 		Templates.THIEF.dexterity = 10;
@@ -82,6 +85,7 @@ public class TemplatesHumans {
 		Templates.FARMER = new Human();
 		Templates.FARMER.title = "Farmer";
 		Templates.FARMER.level = 1;
+		Templates.FARMER.bluntDamage = 3;
 		Templates.FARMER.totalHealth = Templates.FARMER.remainingHealth = 10;
 		Templates.FARMER.strength = 10;
 		Templates.FARMER.dexterity = 10;
@@ -101,6 +105,7 @@ public class TemplatesHumans {
 		Templates.MORT = new Mort();
 		Templates.MORT.title = "Mort";
 		Templates.MORT.level = 1;
+		Templates.MORT.bluntDamage = 2;
 		Templates.MORT.totalHealth = Templates.MORT.remainingHealth = 10;
 		Templates.MORT.strength = 10;
 		Templates.MORT.dexterity = 10;
@@ -119,6 +124,7 @@ public class TemplatesHumans {
 		Templates.TRADER = new Trader();
 		Templates.TRADER.title = "Trader";
 		Templates.TRADER.level = 1;
+		Templates.TRADER.bluntDamage = 2;
 		Templates.TRADER.totalHealth = Templates.TRADER.remainingHealth = 10;
 		Templates.TRADER.strength = 10;
 		Templates.TRADER.dexterity = 10;

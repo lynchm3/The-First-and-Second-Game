@@ -88,6 +88,7 @@ public class Player extends Human {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		Player actor = new Player();
+		setAttributesForCopy(actor, square, null);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;
