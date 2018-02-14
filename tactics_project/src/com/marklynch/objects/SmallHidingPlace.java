@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Group;
-import com.marklynch.level.quest.smallgame.AreaTownForest;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.actions.ActionAttack;
@@ -81,19 +80,21 @@ public class SmallHidingPlace extends Searchable {
 	// }
 
 	public Group createBunGroup() {
-		return new Group("Buns",
-				Templates.RABBIT.makeCopy("Female Bun", this.squareGameObjectIsOn.getSquareAbove(),
-						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, AreaTownForest.area),
+		return new Group("Buns", Templates.RABBIT.makeCopy("Female Bun", this.squareGameObjectIsOn.getSquareAbove(),
+				Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
+				new GameObject[] { Templates.FUR.makeCopy(null, null) }, this.squareGameObjectIsOn.areaSquareIsIn),
 				Templates.RABBIT.makeCopy("Male Bun", this.squareGameObjectIsOn.getSquareToLeftOf(),
 						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, AreaTownForest.area),
+						new GameObject[] { Templates.FUR.makeCopy(null, null) },
+						this.squareGameObjectIsOn.areaSquareIsIn),
 				Templates.BABY_RABBIT.makeCopy("Baby Bun", this.squareGameObjectIsOn.getSquareBelow(),
 						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, null),
+						new GameObject[] { Templates.FUR.makeCopy(null, null) },
+						this.squareGameObjectIsOn.areaSquareIsIn),
 				Templates.BABY_RABBIT.makeCopy("Baby Bun", this.squareGameObjectIsOn.getSquareToRightOf(),
 						Game.level.factions.buns, null, new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, null));
+						new GameObject[] { Templates.FUR.makeCopy(null, null) },
+						this.squareGameObjectIsOn.areaSquareIsIn));
 	}
 
 	@Override

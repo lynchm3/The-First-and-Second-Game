@@ -169,6 +169,8 @@ public class QuestCaveOfTheBlind extends Quest {
 		allObjectives.add(objectiveCave);
 
 		links = TextUtils.getLinks(true, this);
+
+		AreaMinorMine.createMine();
 	}
 
 	@Override
@@ -200,6 +202,7 @@ public class QuestCaveOfTheBlind extends Quest {
 		ArrayList<StructurePath> cavePaths = new ArrayList<StructurePath>();
 		ArrayList<StructureSection> caveSections = new ArrayList<StructureSection>();
 		ArrayList<StructureRoom> rooms = new ArrayList<StructureRoom>();
+		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
 
 		// West Entrance section
 		caveSections.add(new StructureSection("Mort & Mort Mining", 224, 6, 240, 20, false));
@@ -685,7 +688,6 @@ public class QuestCaveOfTheBlind extends Quest {
 				new RoomPart(309, 30, 317, 33), new RoomPart(310, 30, 321, 30));
 		rooms.add(eastEntrance);
 
-		ArrayList<Square> squaresToRemove = new ArrayList<Square>();
 		squaresToRemove.add(Game.level.squares[224][6]);
 		squaresToRemove.add(Game.level.squares[224][7]);
 		squaresToRemove.add(Game.level.squares[224][8]);

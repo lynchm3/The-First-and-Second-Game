@@ -2,7 +2,6 @@ package com.marklynch.ai.routines;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.quest.smallgame.AreaTownForest;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.AggressiveWildAnimal;
@@ -139,7 +138,7 @@ public class AIRoutineForHunter extends AIRoutine {
 					AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 					TinyNeutralWildAnimal.class);
 			if (target == null) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(AreaTownForest.area.centreSuqare);
+				AIRoutineUtils.moveTowardsSquareToBeAdjacent(actor.area.centreSuqare);
 			} else {
 				if (target == null || target.squareGameObjectIsOn == null) {
 					target = null;

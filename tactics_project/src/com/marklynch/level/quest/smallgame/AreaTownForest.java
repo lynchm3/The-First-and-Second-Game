@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Group;
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.constructs.area.Area;
+import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -13,7 +14,7 @@ import com.marklynch.objects.templates.Templates;
 
 public class AreaTownForest {
 
-	public static Area area;
+	// public static Area area;
 
 	public static void createForest() {
 
@@ -144,10 +145,12 @@ public class AreaTownForest {
 		Templates.BIG_TREE.makeCopy(Game.level.squares[157][62], null);
 		Templates.BIG_TREE.makeCopy(Game.level.squares[154][59], null);
 
-		area = new Area("Town Forest", "map_forest.png", Square.DARK_GRASS_TEXTURE, 121, 11, 199, 90, 1);
-		Game.level.areas.add(area);
+		Area areaTownForest = new Area("Town Forest", "map_forest.png", Square.DARK_GRASS_TEXTURE, 121, 11, 199, 90, 1);
+		AreaList.townForest = areaTownForest;
+		Game.level.areas.add(areaTownForest);
 
 		Area areaInnerTownForest = new Area("Inner Town Forest", null, Square.DARK_GRASS_TEXTURE, 146, 33, 180, 63, 2);
+		AreaList.innerTownForest = areaInnerTownForest;
 		Game.level.areas.add(areaInnerTownForest);
 
 		// Make the edges blend
@@ -176,30 +179,30 @@ public class AreaTownForest {
 		new Group("Buns",
 				Templates.RABBIT.makeCopy("Female Bun", Game.level.squares[183][61], Game.level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, area),
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, areaTownForest),
 				Templates.RABBIT.makeCopy("Male Bun", Game.level.squares[182][62], Game.level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, area),
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, areaTownForest),
 				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[181][63], Game.level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
 						new GameObject[] { Templates.FUR.makeCopy(null, null) }, null),
 				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[183][62], Game.level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, area),
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, areaTownForest),
 				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[182][63], Game.level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, area),
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, areaTownForest),
 				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[181][61], Game.level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, area));
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, areaTownForest));
 
 		new Group("Buns",
 				Templates.RABBIT.makeCopy("Female Bun", Game.level.squares[93][20], Game.level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, area),
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, areaTownForest),
 				Templates.RABBIT.makeCopy("Male Bun", Game.level.squares[94][21], Game.level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-						new GameObject[] { Templates.FUR.makeCopy(null, null) }, area),
+						new GameObject[] { Templates.FUR.makeCopy(null, null) }, areaTownForest),
 				Templates.BABY_RABBIT.makeCopy("Baby Bun", Game.level.squares[95][19], Game.level.factions.buns, null,
 						new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
 						new GameObject[] { Templates.FUR.makeCopy(null, null) }, null),
@@ -215,7 +218,7 @@ public class AreaTownForest {
 
 		Templates.FOX.makeCopy("Fox", Game.level.squares[200][78], Game.level.factions.foxes, null,
 				new GameObject[] { Templates.MEAT_CHUNK.makeCopy(null, null) },
-				new GameObject[] { Templates.FUR.makeCopy(null, null) }, area);
+				new GameObject[] { Templates.FUR.makeCopy(null, null) }, areaTownForest);
 
 		// Mushrooms
 		Templates.MUSHROOM.makeCopy(Game.level.squares[115][84], null);

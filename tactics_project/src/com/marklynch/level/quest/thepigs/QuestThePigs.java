@@ -8,6 +8,7 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
 import com.marklynch.level.squares.Square;
@@ -74,7 +75,7 @@ public class QuestThePigs extends Quest {
 
 		// Farmer
 		farmer = Templates.FARMER.makeCopy("Farmer Pete", Game.level.squares[32][75], Game.level.factions.townsPeople,
-				null, 203, new GameObject[] {}, new GameObject[] {}, null);
+				null, 203, new GameObject[] {}, new GameObject[] {}, AreaList.townForest);
 		farmer.quest = this;
 		hoe = Templates.HOE.makeCopy(null, farmer);
 		farmer.inventory.add(hoe);

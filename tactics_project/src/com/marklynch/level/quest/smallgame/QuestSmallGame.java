@@ -13,6 +13,7 @@ import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.constructs.journal.JournalLog;
 import com.marklynch.level.constructs.journal.Objective;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
@@ -208,6 +209,8 @@ public class QuestSmallGame extends Quest {
 	public QuestSmallGame() {
 		super();
 
+		AreaTownForest.createForest();
+
 		name = "SMALL GAME";
 		// addObjective("No objective");
 
@@ -221,7 +224,7 @@ public class QuestSmallGame extends Quest {
 		hunterBrent = Templates.HUNTER.makeCopy("Lead Hunter Brent", Game.level.squares[105][8],
 				Game.level.factions.townsPeople, brentsBed, 203, new GameObject[] {
 						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.townForest);
 		hunter = hunterBrent;
 
 		// Hunting lodge
@@ -243,17 +246,17 @@ public class QuestSmallGame extends Quest {
 		Actor hunterBront1 = Templates.HUNTER.makeCopy("Hunter Bront", Game.level.squares[103][7],
 				Game.level.factions.townsPeople, brontsBed, 1234, new GameObject[] {
 						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.townForest);
 		GameObject bront2sBed = Templates.BED.makeCopy(Game.level.squares[106][10], null);
 		Human hunterBront2 = Templates.HUNTER.makeCopy("Hunter Brunt", Game.level.squares[103][8],
 				Game.level.factions.townsPeople, bront2sBed, 73, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.townForest);
 		GameObject bront3sBed = Templates.BED.makeCopy(Game.level.squares[110][12], null);
 		Human hunterBront3 = hunterBront2.makeCopy("Hunter Brant", Game.level.squares[103][9],
 				Game.level.factions.townsPeople, bront3sBed, 30, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.townForest);
 		// (String name, Square square, Faction faction, GameObject bed, int
 		// gold, GameObject[] mustHaves,
 		// GameObject[] mightHaves, Area area)
@@ -261,17 +264,17 @@ public class QuestSmallGame extends Quest {
 		Human hunterBront4 = hunterBront2.makeCopy("Hunter Brint", Game.level.squares[102][7],
 				Game.level.factions.townsPeople, bront4sBed, 83, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.townForest);
 		GameObject bront5sBed = Templates.BED.makeCopy(Game.level.squares[108][14], null);
 		Human hunterBront5 = hunterBront2.makeCopy("Hunter Brynt", Game.level.squares[102][8],
 				Game.level.factions.townsPeople, bront5sBed, 23, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.townForest);
 		GameObject bront6sBed = Templates.BED.makeCopy(Game.level.squares[106][14], null);
 		Human hunterBront6 = hunterBront2.makeCopy("Hunter Brint the Younger", Game.level.squares[102][9],
 				Game.level.factions.townsPeople, bront6sBed, 43, new GameObject[] {
 						Templates.HATCHET.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
-				new GameObject[] {}, null);
+				new GameObject[] {}, AreaList.townForest);
 
 		Templates.THIEF.makeCopy("Thief Carl",
 				Game.level.squares[12][13], Game.level.factions.outsiders, null, 64, new GameObject[] {
@@ -358,8 +361,6 @@ public class QuestSmallGame extends Quest {
 			weaponBehindLodge.quest = this;
 		}
 		// END OF FROM EDITOR
-
-		AreaTownForest.createForest();
 
 		objectiveWolves = new Objective("The Wolves", superWolf, null, superWolf.imageTexture);
 		allObjectives.add(objectiveWolves);
