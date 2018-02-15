@@ -141,6 +141,11 @@ public class AIRoutineUtils {
 			objects.addAll((ArrayList<GameObject>) getFieldValue(clazz, "instances"));
 		}
 
+		if (objects.size() > maxDistance * maxDistance) {
+			return getNearestForPurposeOfBeingAdjacent(maxDistance, fitsInInventory, checkActors, checkInanimateObjects,
+					mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue, types);
+		}
+
 		for (GameObject object : objects) {
 			if (Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn) <= maxDistance) {
 
@@ -168,13 +173,10 @@ public class AIRoutineUtils {
 
 	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
-			boolean ignoreQuestObjects, int minimumValue, Class... classes) {
+			boolean ignoreQuestObjects, int minimumValue, Class[] classes) {
 
-		if (maxDistance > Game.level.width) {
-			maxDistance = Game.level.width;
-		}
-		if (maxDistance > Game.level.height) {
-			maxDistance = Game.level.height;
+		if (maxDistance > Game.level.width + Game.level.height) {
+			maxDistance = Game.level.width + Game.level.height;
 		}
 
 		if (checkActors) {
@@ -201,7 +203,7 @@ public class AIRoutineUtils {
 									// calculateSquareToMoveToToBeWithinXSquaresToTarget(
 									// actor.squareGameObjectIsOn, 0f);
 									AIPath path = Game.level.activeActor.getPathTo(actor.squareGameObjectIsOn);
-									if (path != null) {
+									if (path != null && (path.complete || path.maxedOut)) {
 										return actor;
 									}
 								}
@@ -237,7 +239,7 @@ public class AIRoutineUtils {
 								// calculateSquareToMoveToToBeWithinXSquaresToTarget(
 								// gameObject.squareGameObjectIsOn, 1f);
 								AIPath path = Game.level.activeActor.getPathTo(gameObject.squareGameObjectIsOn);
-								if (path != null) {
+								if (path != null && (path.complete || path.maxedOut)) {
 									return gameObject;
 
 								}
