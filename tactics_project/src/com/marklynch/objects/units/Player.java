@@ -62,6 +62,12 @@ public class Player extends Human {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void postLoad1() {
 		super.postLoad1();
 		aiRoutine = new AIRoutineForHunter(this);
@@ -90,7 +96,7 @@ public class Player extends Human {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		Player actor = new Player();
-		instances.add(actor);
+		setInstances(actor);
 		setAttributesForCopy(actor, square, null);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;

@@ -15,9 +15,15 @@ public class FishingRod extends Tool {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public FishingRod makeCopy(Square square, Actor owner) {
 		FishingRod weapon = new FishingRod();
-		instances.add(weapon);
+		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		return weapon;
 	}

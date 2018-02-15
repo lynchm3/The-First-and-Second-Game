@@ -27,6 +27,12 @@ public class Door extends Openable {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void draw1() {
 
 		// Don't draw if dead
@@ -77,7 +83,7 @@ public class Door extends Openable {
 			Actor owner, Key... keys) {
 
 		Door door = new Door();
-		instances.add(door);
+		setInstances(door);
 
 		super.setAttributesForCopy(door, square, locked, owner, keys);
 

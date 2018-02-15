@@ -26,11 +26,17 @@ public class Gate extends Door {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Gate makeCopy(String name, Square square, boolean locked, boolean shouldBeClosed, boolean shouldBeLocked,
 			Actor owner, Key... keys) {
 
 		Gate door = new Gate();
-		instances.add(door);
+		setInstances(door);
 
 		super.setAttributesForCopy(door, square, locked, owner, keys);
 

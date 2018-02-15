@@ -15,9 +15,15 @@ public class Shovel extends Tool {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Shovel makeCopy(Square square, Actor owner) {
 		Shovel weapon = new Shovel();
-		instances.add(weapon);
+		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		return weapon;
 	}

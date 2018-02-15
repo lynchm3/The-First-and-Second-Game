@@ -15,9 +15,15 @@ public class Arrow extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Arrow makeCopy(Square square, Actor owner) {
 		Arrow arrow = new Arrow();
-		instances.add(arrow);
+		setInstances(arrow);
 		super.setAttributesForCopy(arrow, square, owner);
 		return arrow;
 	}

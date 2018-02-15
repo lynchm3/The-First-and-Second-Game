@@ -16,6 +16,12 @@ public class Roof extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void draw1() {
 
 		if (!Game.fullVisiblity) {
@@ -52,7 +58,7 @@ public class Roof extends GameObject {
 	@Override
 	public Roof makeCopy(Square square, Actor owner) {
 		Roof roof = new Roof();
-		instances.add(roof);
+		setInstances(roof);
 		setAttributesForCopy(roof, square, owner);
 		return roof;
 	}

@@ -41,6 +41,12 @@ public class MapMarker extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public ArrayList<Action> getAllActionsPerformedOnThisInInventory(Actor performer) {
 		ArrayList<Action> actions = new ArrayList<Action>();
 		actions.add(new ActionChangeAppearance(this));
@@ -103,7 +109,7 @@ public class MapMarker extends GameObject {
 	@Override
 	public MapMarker makeCopy(Square square, Actor owner) {
 		MapMarker mapMarker = new MapMarker();
-		instances.add(mapMarker);
+		setInstances(mapMarker);
 		super.setAttributesForCopy(mapMarker, square, owner);
 		mapMarker.baseName = "";
 		mapMarker.name = "Marker";

@@ -25,6 +25,12 @@ public class Storage extends Openable {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	// @Override
 	// public void loadImages() {
 	// chestOpenTexture = ResourceUtils.getGlobalImage("chest_open.png");
@@ -103,7 +109,7 @@ public class Storage extends Openable {
 	public Storage makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
 
 		Storage storage = new Storage();
-		instances.add(storage);
+		setInstances(storage);
 		super.setAttributesForCopy(storage, square, locked, owner, keys);
 
 		storage.baseName = baseName;

@@ -17,9 +17,15 @@ public class Food extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Food makeCopy(Square square, Actor owner) {
 		Food food = new Food();
-		instances.add(food);
+		setInstances(food);
 		super.setAttributesForCopy(food, square, owner);
 		return food;
 	}

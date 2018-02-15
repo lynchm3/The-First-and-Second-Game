@@ -15,9 +15,15 @@ public class Pickaxe extends Tool {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Pickaxe makeCopy(Square square, Actor owner) {
 		Pickaxe weapon = new Pickaxe();
-		instances.add(weapon);
+		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		return weapon;
 	}

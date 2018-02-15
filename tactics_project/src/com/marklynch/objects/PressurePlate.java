@@ -20,6 +20,12 @@ public class PressurePlate extends Switch {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void draw1() {
 		super.draw1();
 		super.draw2();
@@ -60,7 +66,7 @@ public class PressurePlate extends Switch {
 			int targetWeight) {
 
 		PressurePlate pressurePlate = new PressurePlate();
-		instances.add(pressurePlate);
+		setInstances(pressurePlate);
 		super.setAttributesForCopy(pressurePlate, square, owner);
 		pressurePlate.actionName = actionName;
 		pressurePlate.actionVerb = actionVerb;

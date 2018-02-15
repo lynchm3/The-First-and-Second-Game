@@ -114,18 +114,12 @@ public class AIRoutineUtils {
 		int bestPathTravelCost = Integer.MAX_VALUE;
 		ArrayList<GameObject> objects = new ArrayList<GameObject>();
 		for (Class clazz : types) {
+			System.out.println("class = " + clazz);
 			objects.addAll((ArrayList<GameObject>) getFieldValue(clazz, "instances"));
 		}
 
-		System.out.println("objects.size() = " + objects.size());
-		System.out.println("maxDistance = " + maxDistance);
-
 		for (GameObject object : objects) {
-			System.out.println("object = " + object);
-			System.out.println("Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn) = "
-					+ Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn));
 			if (Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn) <= maxDistance) {
-				System.out.println("a");
 				if (passesChecks(object, null, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
 						minimumValue)) {
 					// Square square =
@@ -133,7 +127,6 @@ public class AIRoutineUtils {
 					// 0f);
 					// System.out.println("square = " + square);
 					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn);
-					System.out.println("path = " + path);
 					if (path != null && path.travelCost < bestPathTravelCost) {
 						bestObject = object;
 						bestPath = path;
@@ -184,10 +177,11 @@ public class AIRoutineUtils {
 											.straightLineDistanceTo(actor.squareGameObjectIsOn) <= maxRange) {
 								if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
 										ignoreQuestObjects, minimumValue)) {
-									Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(
-											actor.squareGameObjectIsOn, 0f);
-									AIPath path = Game.level.activeActor.getPathTo(square);
-									if (path != null && path.complete) {
+									// Square square =
+									// calculateSquareToMoveToToBeWithinXSquaresToTarget(
+									// actor.squareGameObjectIsOn, 0f);
+									AIPath path = Game.level.activeActor.getPathTo(actor.squareGameObjectIsOn);
+									if (path != null) {
 										return actor;
 									}
 								}
@@ -219,10 +213,11 @@ public class AIRoutineUtils {
 										.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
 							if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
 									mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue)) {
-								Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(
-										gameObject.squareGameObjectIsOn, 1f);
-								AIPath path = Game.level.activeActor.getPathTo(square);
-								if (path != null && path.complete) {
+								// Square square =
+								// calculateSquareToMoveToToBeWithinXSquaresToTarget(
+								// gameObject.squareGameObjectIsOn, 1f);
+								AIPath path = Game.level.activeActor.getPathTo(gameObject.squareGameObjectIsOn);
+								if (path != null) {
 									return gameObject;
 
 								}
@@ -334,9 +329,8 @@ public class AIRoutineUtils {
 		if (gameObject.fitsInInventory != fitsInInventory)
 			return false;
 
-		// check class
-		// if (clazz != null && !clazz.isInstance(gameObject))
-		// return false;
+		if (clazz != null && !clazz.isInstance(gameObject))
+			return false;
 
 		return true;
 
@@ -1082,12 +1076,6 @@ public class AIRoutineUtils {
 
 	public static void goToBedAndSleep() {
 
-		if (Game.level.activeActor.name.contains("Dan")) {
-			System.out.println("goToBedAndSleep()");
-			System.out.println("Game.level.activeActor.bed = " + Game.level.activeActor.bed);
-
-		}
-
 		Game.level.activeActor.followersShouldFollow = false;
 		Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
 		if (Game.level.activeActor.bed != null) {
@@ -1098,10 +1086,6 @@ public class AIRoutineUtils {
 				// boolean s = AIRoutineUtils
 				// .moveTowardsSquareToBeAdjacent(Game.level.activeActor.bed.squareGameObjectIsOn);
 				boolean s = AIRoutineUtils.moveTowardsTargetToBeOn(Game.level.activeActor.bed);
-
-				if (Game.level.activeActor.name.contains("Dan")) {
-					System.out.println("s = " + s);
-				}
 			}
 		} else {
 		}

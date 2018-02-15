@@ -58,7 +58,7 @@ import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class Actor extends GameObject {
-
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public final static String[] editableAttributes = { "name", "imageTexture", "faction", "strength", "dexterity",
 			"intelligence", "endurance", "totalHealth", "remainingHealth", "travelDistance", "inventory",
 			"showInventory", "fitsInInventory", "canContainOtherObjects" };
@@ -182,9 +182,14 @@ public class Actor extends GameObject {
 		canShareSquare = false;
 		canContainOtherObjects = true;
 
-
 		decorative = false;
 
+	}
+
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
 	}
 
 	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {

@@ -18,6 +18,12 @@ public class GameObjectExploder extends GameObject {
 		super();
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public SquarePiece[] squarePieces;
 
 	public TrianglePiece[] trianglePieces;
@@ -337,7 +343,7 @@ public class GameObjectExploder extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square, Actor owner) {
 		GameObjectExploder gameObject = new GameObjectExploder();
-		instances.add(gameObject);
+		setInstances(gameObject);
 		setAttributesForCopy(gameObject, square, owner);
 		return gameObject;
 	}

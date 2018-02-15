@@ -23,9 +23,15 @@ public class Inspectable extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Inspectable makeCopy(Square square, Actor owner) {
 		Inspectable inspectable = new Inspectable();
-		instances.add(inspectable);
+		setInstances(inspectable);
 		super.setAttributesForCopy(inspectable, square, owner);
 		return inspectable;
 	}

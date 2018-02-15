@@ -22,9 +22,15 @@ public class BrokenGlass extends Stampable {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public BrokenGlass makeCopy(Square square, Actor owner) {
 		BrokenGlass brokenGlass = new BrokenGlass();
-		instances.add(brokenGlass);
+		setInstances(brokenGlass);
 		super.setAttributesForCopy(brokenGlass, square, owner);
 		brokenGlass.glassShardsCount = 10;// (int) (1d + Math.random() * 20d);
 		brokenGlass.glassShards = new GlassShard[brokenGlass.glassShardsCount];

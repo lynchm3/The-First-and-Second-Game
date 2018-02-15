@@ -21,6 +21,12 @@ public class BodyArmor extends Armor {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Action getUtilityAction(Actor performer) {
 		return null;
 	}
@@ -28,7 +34,7 @@ public class BodyArmor extends Armor {
 	@Override
 	public BodyArmor makeCopy(Square square, Actor owner) {
 		BodyArmor bodyArmor = new BodyArmor();
-		instances.add(bodyArmor);
+		setInstances(bodyArmor);
 		setAttributesForCopy(bodyArmor, square, owner);
 		return bodyArmor;
 	}

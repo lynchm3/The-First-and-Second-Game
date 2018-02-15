@@ -33,6 +33,12 @@ public class Tree extends GameObject {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public void addApple(float sizeRatio) {
 
 		// float appleSizeRatio = (float) (Math.random() * sizeRatio);
@@ -178,7 +184,7 @@ public class Tree extends GameObject {
 	@Override
 	public Tree makeCopy(Square square, Actor owner) {
 		Tree tree = new Tree();
-		instances.add(tree);
+		setInstances(tree);
 		super.setAttributesForCopy(tree, square, owner);
 		healthWhenLastDroppedFruit = this.totalHealth;
 		return tree;

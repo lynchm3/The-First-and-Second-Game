@@ -26,6 +26,12 @@ public class RemoteDoor extends Openable {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void draw1() {
 
 		if (!Game.fullVisiblity) {
@@ -71,7 +77,7 @@ public class RemoteDoor extends Openable {
 	public RemoteDoor makeCopy(String name, Square square, boolean locked, Key... keys) {
 
 		RemoteDoor door = new RemoteDoor();
-		instances.add(door);
+		setInstances(door);
 
 		super.setAttributesForCopy(door, square, locked, null, keys);
 		door.soundDampeningWhenClosed = soundDampening;

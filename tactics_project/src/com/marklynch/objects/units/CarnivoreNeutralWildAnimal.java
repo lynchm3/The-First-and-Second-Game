@@ -17,6 +17,12 @@ public class CarnivoreNeutralWildAnimal extends WildAnimal {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void postLoad1() {
 		super.postLoad1();
 		aiRoutine = new AIRoutineForCarnivoreNeutralWildAnimal(this);
@@ -31,7 +37,7 @@ public class CarnivoreNeutralWildAnimal extends WildAnimal {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		CarnivoreNeutralWildAnimal actor = new CarnivoreNeutralWildAnimal();
-		instances.add(actor);
+		setInstances(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

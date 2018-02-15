@@ -29,6 +29,12 @@ public class Pig extends Animal {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void postLoad1() {
 		super.postLoad1();
 		aiRoutine = new AIRoutineForPig(this);
@@ -58,7 +64,7 @@ public class Pig extends Animal {
 	public Pig makeCopy(String name, Square square, Faction faction, GameObject bed, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 		Pig actor = new Pig();
-		instances.add(actor);
+		setInstances(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

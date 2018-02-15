@@ -100,6 +100,12 @@ public class Wall extends GameObject {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public static void loadStaticImages() {
 		textureFullWall = getGlobalImage("wall.png", true);
 		textureFullTopWall = getGlobalImage("wall_full_top.png", true);
@@ -279,7 +285,7 @@ public class Wall extends GameObject {
 	@Override
 	public Wall makeCopy(Square square, Actor owner) {
 		Wall wall = new Wall();
-		instances.add(wall);
+		setInstances(wall);
 		super.setAttributesForCopy(wall, square, owner);
 		if (wall.squareGameObjectIsOn != null) {
 			wall.drawX1 = (int) (wall.squareGameObjectIsOn.xInGridPixels + wall.drawOffsetRatioX);

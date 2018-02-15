@@ -28,6 +28,12 @@ public class HidingPlace extends Searchable {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 		return new ActionHide(performer, this);
 	}
@@ -56,7 +62,7 @@ public class HidingPlace extends Searchable {
 	public HidingPlace makeCopy(Square square, Actor owner) {
 
 		HidingPlace hidingPlace = new HidingPlace();
-		instances.add(hidingPlace);
+		setInstances(hidingPlace);
 		super.setAttributesForCopy(hidingPlace, square, owner);
 		return hidingPlace;
 

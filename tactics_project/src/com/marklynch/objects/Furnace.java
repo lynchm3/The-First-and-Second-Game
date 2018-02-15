@@ -27,6 +27,12 @@ public class Furnace extends Openable {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public boolean isOpen() {
 		return open;
 	}
@@ -72,7 +78,7 @@ public class Furnace extends Openable {
 
 	public Furnace makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
 		Furnace furnace = new Furnace();
-		instances.add(furnace);
+		setInstances(furnace);
 		super.setAttributesForCopy(furnace, square, locked, owner, keys);
 		if (locked)
 			this.name = baseName + " (locked)";

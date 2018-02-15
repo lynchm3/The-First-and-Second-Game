@@ -32,6 +32,12 @@ public class Trader extends Human implements Comparator<GameObject> {
 		super();
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public boolean isPlayerInTheShop() {
 		return Game.level.player.squareGameObjectIsOn.structureSquareIsIn == shop;
 	}
@@ -93,7 +99,7 @@ public class Trader extends Human implements Comparator<GameObject> {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		Trader actor = new Trader();
-		instances.add(actor);
+		setInstances(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

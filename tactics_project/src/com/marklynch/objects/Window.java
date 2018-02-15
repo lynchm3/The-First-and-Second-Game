@@ -24,6 +24,12 @@ public class Window extends GameObjectExploder {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void draw1() {
 
 		if (!Game.fullVisiblity) {
@@ -86,7 +92,7 @@ public class Window extends GameObjectExploder {
 	@Override
 	public Window makeCopy(Square square, Actor owner) {
 		Window window = new Window();
-		instances.add(window);
+		setInstances(window);
 		setAttributesForCopy(window, square, owner);
 		return window;
 	}

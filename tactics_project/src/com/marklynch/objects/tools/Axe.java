@@ -15,9 +15,15 @@ public class Axe extends Tool {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Axe makeCopy(Square square, Actor owner) {
 		Axe weapon = new Axe();
-		instances.add(weapon);
+		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		return weapon;
 	}

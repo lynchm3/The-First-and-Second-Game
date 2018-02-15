@@ -27,7 +27,7 @@ public class Human extends Actor {
 	public Human makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 		Human actor = new Human();
-		instances.add(actor);
+		setInstances(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

@@ -24,6 +24,12 @@ public class Stump extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Action getSecondaryActionPerformedOnThisInWorld(Actor performer) {
 		return new ActionChop(performer, this);
 	}
@@ -31,7 +37,7 @@ public class Stump extends GameObject {
 	@Override
 	public Stump makeCopy(Square square, Actor owner) {
 		Stump stump = new Stump();
-		instances.add(stump);
+		setInstances(stump);
 		super.setAttributesForCopy(stump, square, owner);
 		return stump;
 	}

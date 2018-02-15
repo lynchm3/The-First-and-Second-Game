@@ -21,6 +21,12 @@ public class Helmet extends Armor {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Action getUtilityAction(Actor performer) {
 		return null;
 	}
@@ -28,7 +34,7 @@ public class Helmet extends Armor {
 	@Override
 	public Helmet makeCopy(Square square, Actor owner) {
 		Helmet helmet = new Helmet();
-		instances.add(helmet);
+		setInstances(helmet);
 		setAttributesForCopy(helmet, square, owner);
 		return helmet;
 	}

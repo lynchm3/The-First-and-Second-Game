@@ -74,7 +74,7 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 
 		// 1. eat food on ground
 		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, 0, Food.class);
+				false, false, 0, false, Food.class);
 		if (food != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTextureObject = food.imageTexture;

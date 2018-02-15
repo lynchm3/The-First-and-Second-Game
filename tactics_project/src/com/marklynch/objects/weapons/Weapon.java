@@ -19,10 +19,15 @@ public class Weapon extends GameObject {
 
 	}
 
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	@Override
 	public Weapon makeCopy(Square square, Actor owner) {
 		Weapon weapon = new Weapon();
-		instances.add(weapon);
+		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		return weapon;
 	}

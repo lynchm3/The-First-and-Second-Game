@@ -27,9 +27,15 @@ public class WantedPoster extends Sign implements CrimeListener {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public WantedPoster makeCopy(Square square, String name, ArrayList<Crime> crimes, Actor owner) {
 		WantedPoster wantedPoster = new WantedPoster();
-		instances.add(wantedPoster);
+		setInstances(wantedPoster);
 		super.setAttributesForCopy(wantedPoster, square, owner);
 		wantedPoster.crimes = crimes;
 		conversation = createConversation(wantedPoster.generateText());

@@ -27,6 +27,12 @@ public class WaterSource extends GameObject {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public ArrayList<GameObject> search() {
 		return (ArrayList<GameObject>) inventory.gameObjects.clone();
 	}
@@ -34,7 +40,7 @@ public class WaterSource extends GameObject {
 	@Override
 	public WaterSource makeCopy(Square square, Actor owner) {
 		WaterSource waterSource = new WaterSource();
-		instances.add(waterSource);
+		setInstances(waterSource);
 		super.setAttributesForCopy(waterSource, square, owner);
 		waterSource.effectsFromInteracting = effectsFromInteracting;
 		return waterSource;

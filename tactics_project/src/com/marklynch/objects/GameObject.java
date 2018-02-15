@@ -241,6 +241,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 	public GameObject() {
 	}
 
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+	}
+
 	public void init() {
 
 		if (squareGameObjectIsOn != null) {
@@ -721,7 +725,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public GameObject makeCopy(Square square, Actor owner) {
 		GameObject gameObject = new GameObject();
-		instances.add(gameObject);
+		setInstances(gameObject);
 		setAttributesForCopy(gameObject, square, owner);
 		return gameObject;
 	}
@@ -1891,9 +1895,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		GameObject gameObjectAttacker = null;
 		if (attacker instanceof GameObject)
 			gameObjectAttacker = (GameObject) attacker;
-
-		System.out.println("damageDealer = " + damageDealer);
-		System.out.println("damageDealer.getEffectiveBluntDamage() = " + damageDealer.getEffectiveBluntDamage());
 		// System.out.println("damageDealer.bluntDamage = " + ((Actor)
 		// damageDealer).bluntDamage);
 

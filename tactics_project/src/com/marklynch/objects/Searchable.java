@@ -26,6 +26,12 @@ public class Searchable extends GameObject {
 		attackable = false;
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public ArrayList<GameObject> search() {
 		return (ArrayList<GameObject>) inventory.gameObjects.clone();
 	}
@@ -33,7 +39,7 @@ public class Searchable extends GameObject {
 	@Override
 	public Searchable makeCopy(Square square, Actor owner) {
 		Searchable searchable = new Searchable();
-		instances.add(searchable);
+		setInstances(searchable);
 		super.setAttributesForCopy(searchable, square, owner);
 		searchable.effectsFromInteracting = effectsFromInteracting;
 		return searchable;

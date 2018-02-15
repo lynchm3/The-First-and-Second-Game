@@ -33,6 +33,12 @@ public class Discoverable extends GameObject {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public void discovered() {
 		discovered = true;
 		imageTexture = postDiscoverTexture;
@@ -57,7 +63,7 @@ public class Discoverable extends GameObject {
 
 	public Discoverable makeCopy(Square square, Actor owner, int level) {
 		Discoverable discoverable = new Discoverable();
-		instances.add(discoverable);
+		setInstances(discoverable);
 		super.setAttributesForCopy(discoverable, square, owner);
 		discoverable.level = level;
 		discoverable.preDiscoverTexture = preDiscoverTexture;

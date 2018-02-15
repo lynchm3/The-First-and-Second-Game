@@ -18,6 +18,12 @@ public class Bell extends Tool {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Action getUtilityAction(Actor performer) {
 		return new ActionRing(performer, this);
 	}
@@ -25,7 +31,7 @@ public class Bell extends Tool {
 	@Override
 	public Bell makeCopy(Square square, Actor owner) {
 		Bell weapon = new Bell();
-		instances.add(weapon);
+		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		return weapon;
 	}

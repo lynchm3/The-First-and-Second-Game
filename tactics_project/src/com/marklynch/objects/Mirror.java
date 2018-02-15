@@ -32,6 +32,12 @@ public class Mirror extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void draw1() {
 
 		if (this.remainingHealth <= 0)
@@ -294,7 +300,7 @@ public class Mirror extends GameObject {
 	@Override
 	public Mirror makeCopy(Square square, Actor owner) {
 		Mirror mirror = new Mirror();
-		instances.add(mirror);
+		setInstances(mirror);
 		super.setAttributesForCopy(mirror, square, owner);
 		mirror.imageTextureBack = this.imageTextureBack;
 		mirror.imageTextureFront = this.imageTextureFront;

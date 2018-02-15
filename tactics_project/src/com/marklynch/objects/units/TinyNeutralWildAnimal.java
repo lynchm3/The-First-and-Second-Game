@@ -17,6 +17,12 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 		super();
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	// @Override
 	// public Action getDefaultActionPerformedOnThisInWorld(Actor performer) {
 	// return new ActionMove(performer, this.squareGameObjectIsOn, true);
@@ -44,7 +50,7 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 	public TinyNeutralWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed,
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 		TinyNeutralWildAnimal actor = new TinyNeutralWildAnimal();
-		instances.add(actor);
+		setInstances(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

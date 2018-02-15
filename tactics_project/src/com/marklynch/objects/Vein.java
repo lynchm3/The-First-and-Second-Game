@@ -266,9 +266,15 @@ public class Vein extends Wall {
 	// }
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Vein makeCopy(Square square, Actor owner) {
 		Vein vein = new Vein();
-		instances.add(vein);
+		setInstances(vein);
 		super.setAttributesForCopy(vein, square, owner);
 		if (vein.squareGameObjectIsOn != null) {
 			vein.drawX1 = (int) (vein.squareGameObjectIsOn.xInGridPixels + vein.drawOffsetRatioX);

@@ -15,9 +15,15 @@ public class MeatChunk extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public MeatChunk makeCopy(Square square, Actor owner) {
 		MeatChunk meatChunk = new MeatChunk();
-		instances.add(meatChunk);
+		setInstances(meatChunk);
 		super.setAttributesForCopy(meatChunk, square, owner);
 		return meatChunk;
 	}

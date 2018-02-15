@@ -34,6 +34,12 @@ public class Mort extends Actor {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void postLoad1() {
 		super.postLoad1();
 		aiRoutine = new AIRoutineForMort(this);
@@ -47,7 +53,7 @@ public class Mort extends Actor {
 	public Mort makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 		Mort actor = new Mort();
-		instances.add(actor);
+		setInstances(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

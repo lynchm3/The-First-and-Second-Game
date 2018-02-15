@@ -14,6 +14,12 @@ public class Lantern extends Tool {
 		super();
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	// @Override
 	// public Action getUtilityAction(Actor performer) {
 	// return new ActionRing(performer, this);
@@ -22,7 +28,7 @@ public class Lantern extends Tool {
 	@Override
 	public Lantern makeCopy(Square square, Actor owner) {
 		Lantern weapon = new Lantern();
-		instances.add(weapon);
+		setInstances(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		return weapon;
 	}

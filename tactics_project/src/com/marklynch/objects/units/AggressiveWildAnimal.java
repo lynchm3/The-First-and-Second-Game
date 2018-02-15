@@ -18,6 +18,12 @@ public class AggressiveWildAnimal extends WildAnimal {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void postLoad1() {
 		super.postLoad1();
 		aiRoutine = new AIRoutineForWildAnimal(this);
@@ -32,7 +38,7 @@ public class AggressiveWildAnimal extends WildAnimal {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		AggressiveWildAnimal actor = new AggressiveWildAnimal();
-		instances.add(actor);
+		setInstances(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

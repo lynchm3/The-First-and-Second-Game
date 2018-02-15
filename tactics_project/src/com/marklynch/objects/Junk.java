@@ -14,9 +14,15 @@ public class Junk extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Junk makeCopy(Square square, Actor owner) {
 		Junk junk = new Junk();
-		instances.add(junk);
+		setInstances(junk);
 		super.setAttributesForCopy(junk, square, owner);
 		return junk;
 	}

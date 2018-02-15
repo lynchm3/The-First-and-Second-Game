@@ -22,9 +22,15 @@ public class Liquid extends GameObject {
 		attackable = false;
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public Liquid makeCopy(Square square, Actor owner, float volume) {
 		Liquid liquid = new Liquid();
-		instances.add(liquid);
+		setInstances(liquid);
 		super.setAttributesForCopy(liquid, square, owner);
 		liquid.volume = volume;
 		liquid.touchEffects = touchEffects;

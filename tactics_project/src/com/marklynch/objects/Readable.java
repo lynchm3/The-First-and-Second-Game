@@ -23,10 +23,16 @@ public class Readable extends GameObject {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public Readable makeCopy(Square square, String name, Object[] conversationText, Actor owner) {
 
 		Readable readable = new Readable();
-		instances.add(readable);
+		setInstances(readable);
 		super.setAttributesForCopy(readable, square, owner);
 		readable.conversation = readable.createConversation(conversationText);
 		return readable;

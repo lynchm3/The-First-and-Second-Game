@@ -16,9 +16,15 @@ public class Key extends GameObject {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public Key makeCopy(String name, Square square, Actor owner) {
 		Key key = new Key();
-		instances.add(key);
+		setInstances(key);
 		super.setAttributesForCopy(key, square, owner);
 		key.name = name;
 		return key;

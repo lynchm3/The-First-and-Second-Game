@@ -19,13 +19,19 @@ public class Gold extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public String toString() {
 		return "" + value;
 	}
 
 	public Gold makeCopy(Square square, Actor owner, int value) {
 		Gold gold = new Gold();
-		instances.add(gold);
+		setInstances(gold);
 
 		super.setAttributesForCopy(gold, square, owner);
 		gold.value = value;

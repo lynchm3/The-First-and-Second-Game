@@ -19,9 +19,15 @@ public class BigGameObject extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public BigGameObject makeCopy(Square square, Actor owner) {
 		BigGameObject bigGameObject = new BigGameObject();
-		instances.add(bigGameObject);
+		setInstances(bigGameObject);
 		super.setAttributesForCopy(bigGameObject, square, owner);
 		return bigGameObject;
 	}

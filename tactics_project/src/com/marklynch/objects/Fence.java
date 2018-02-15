@@ -22,9 +22,15 @@ public class Fence extends Wall {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Fence makeCopy(Square square, Actor owner) {
 		Fence fence = new Fence();
-		instances.add(fence);
+		setInstances(fence);
 		super.setAttributesForCopy(fence, square, owner);
 		return fence;
 	}

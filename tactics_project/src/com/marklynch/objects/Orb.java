@@ -18,13 +18,19 @@ public class Orb extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public String toString() {
 		return "" + value + "XP";
 	}
 
 	public Orb makeCopy(Square square, Actor owner, int value) {
 		Orb orb = new Orb();
-		instances.add(orb);
+		setInstances(orb);
 
 		super.setAttributesForCopy(orb, square, owner);
 		orb.value = value;

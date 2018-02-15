@@ -21,9 +21,15 @@ public class Carcass extends GameObject {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public Carcass makeCopy(String name, Square square, Actor owner, float weight) {
 		Carcass meatChunk = new Carcass();
-		instances.add(meatChunk);
+		setInstances(meatChunk);
 		super.setAttributesForCopy(meatChunk, square, owner);
 		meatChunk.weight = weight;
 		meatChunk.name = name;

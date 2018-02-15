@@ -80,11 +80,17 @@ public class Blind extends Monster {
 		super.attackedBy(attacker, action);
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public Blind makeCopy(Square square, Faction faction, StructureRoom roomLivingIn, GameObject[] mustHaves,
 			GameObject[] mightHaves) {
 
 		Blind actor = new Blind();
-		instances.add(actor);
+		setInstances(actor);
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;
 		this.roomLivingIn = roomLivingIn;

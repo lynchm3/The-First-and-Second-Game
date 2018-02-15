@@ -17,6 +17,12 @@ public class HerbivoreWildAnimal extends WildAnimal {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void postLoad1() {
 		super.postLoad1();
 		aiRoutine = new AIRoutineForHerbivoreWildAnimal(this);
@@ -31,7 +37,7 @@ public class HerbivoreWildAnimal extends WildAnimal {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		HerbivoreWildAnimal actor = new HerbivoreWildAnimal();
-		instances.add(actor);
+		setInstances(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

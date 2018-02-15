@@ -27,6 +27,12 @@ public class Bed extends GameObject {
 
 	}
 
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
 	public void loadCoverImage() {
 		this.imageTextureCovers = getGlobalImage(imagePathCovers, false);
 	}
@@ -34,7 +40,7 @@ public class Bed extends GameObject {
 	@Override
 	public Bed makeCopy(Square square, Actor owner) {
 		Bed bed = new Bed();
-		instances.add(bed);
+		setInstances(bed);
 		super.setAttributesForCopy(bed, square, owner);
 		bed.imageTextureCovers = imageTextureCovers;
 		return bed;

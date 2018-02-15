@@ -35,6 +35,12 @@ public class Switch extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void draw1() {
 	}
 
@@ -58,7 +64,7 @@ public class Switch extends GameObject {
 			RequirementToMeet[] requirementsToMeet) {
 
 		Switch zwitch = new Switch();
-		instances.add(zwitch);
+		setInstances(zwitch);
 		super.setAttributesForCopy(zwitch, square, owner);
 		zwitch.actionName = actionName;
 		zwitch.actionVerb = actionVerb;

@@ -1,5 +1,7 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Switch.SWITCH_TYPE;
 import com.marklynch.objects.actions.ActionClose;
@@ -9,6 +11,7 @@ import com.marklynch.objects.actions.ActionUnlock;
 import com.marklynch.objects.units.Actor;
 
 public abstract class Openable extends GameObject implements SwitchListener {
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	protected boolean open = false;
 	public Key[] keys;
@@ -18,6 +21,12 @@ public abstract class Openable extends GameObject implements SwitchListener {
 	public Openable() {
 		super();
 
+	}
+
+	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
 	}
 
 	public boolean isOpen() {

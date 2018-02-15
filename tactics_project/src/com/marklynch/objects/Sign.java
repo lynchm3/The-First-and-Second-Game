@@ -22,10 +22,16 @@ public class Sign extends Readable {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Sign makeCopy(Square square, String name, Object[] conversationText, Actor owner) {
 
 		Sign readable = new Sign();
-		instances.add(readable);
+		setInstances(readable);
 		super.setAttributesForCopy(readable, square, owner);
 		readable.name = name;
 		readable.conversation = readable.createConversation(conversationText);

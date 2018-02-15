@@ -243,7 +243,7 @@ public abstract class AIRoutine {
 
 		// Go to burrow and hide if can
 		SmallHidingPlace smallHidingPlace = (SmallHidingPlace) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20f,
-				false, false, true, false, false, false, 0, SmallHidingPlace.class);
+				false, false, true, false, false, false, 0, false, SmallHidingPlace.class);
 		if (smallHidingPlace != null) {
 
 			if (Game.level.activeActor.straightLineDistanceTo(smallHidingPlace.squareGameObjectIsOn) < 2) {
@@ -358,7 +358,7 @@ public abstract class AIRoutine {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SHOUTING_FOR_HELP;
 
 					Actor actorNearby = (Actor) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(20, false, true,
-							false, false, false, false, 0, Human.class);
+							false, false, false, false, 0, false, Human.class);
 
 					// if (this.actor.canSeeGameObject(actorNearby)) {
 					// } else {
@@ -1042,7 +1042,7 @@ public abstract class AIRoutine {
 
 		// 1. loot carcasses
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, true, true,
-				true, 0, Carcass.class);
+				true, 0, false, Carcass.class);
 		if (carcass != null) {
 			this.actor.thoughtBubbleImageTextureObject = carcass.imageTexture;
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
@@ -1064,7 +1064,7 @@ public abstract class AIRoutine {
 
 		// 1. loot carcasses
 		GameObject carcass = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, false, false, true, false, true,
-				true, 0, Carcass.class);
+				true, 0, false, Carcass.class);
 
 		if (carcass != null) {
 
@@ -1084,7 +1084,7 @@ public abstract class AIRoutine {
 	public boolean lootFromGround() {
 		// Pick up loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, false, true, true,
-				10, Junk.class, Food.class);
+				10, false, Junk.class, Food.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;
@@ -1102,7 +1102,7 @@ public abstract class AIRoutine {
 
 	public boolean eatFoodOnGround() {
 		GameObject food = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, 0, Food.class);
+				false, false, 0, false, Food.class);
 		if (food != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTextureObject = food.imageTexture;
@@ -1119,7 +1119,7 @@ public abstract class AIRoutine {
 
 	public boolean eatCarcassOnGround() {
 		GameObject corpse = target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(5f, true, false, true, false,
-				false, false, 0, Carcass.class);
+				false, false, 0, false, Carcass.class);
 		if (corpse != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_FEEDING;
 			this.actor.thoughtBubbleImageTextureObject = corpse.imageTexture;
@@ -1271,7 +1271,7 @@ public abstract class AIRoutine {
 			return false;
 
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false,
-				false, false, 0, Trader.class);
+				false, false, 0, false, Trader.class);
 
 		if (target == null) {
 			return false;
@@ -1290,7 +1290,6 @@ public abstract class AIRoutine {
 	}
 
 	public boolean replenishEquipment() {
-
 		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>();
 		for (int requiredTemplateId : requiredEquipmentTemplateIds) {
 			if (!actor.inventory.containsObjectWithTemplateId(requiredTemplateId)) {
@@ -1305,8 +1304,6 @@ public abstract class AIRoutine {
 		// find nearest shop keeper w/ pickaxe?
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
 				false, false, false, false, 0, false, Trader.class);
-
-		System.out.println("target = " + target);
 
 		if (target == null) {
 			return true;

@@ -21,6 +21,12 @@ public class LegArmor extends Armor {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Action getUtilityAction(Actor performer) {
 		return null;
 	}
@@ -28,7 +34,7 @@ public class LegArmor extends Armor {
 	@Override
 	public LegArmor makeCopy(Square square, Actor owner) {
 		LegArmor legArmor = new LegArmor();
-		instances.add(legArmor);
+		setInstances(legArmor);
 		setAttributesForCopy(legArmor, square, owner);
 		return legArmor;
 	}

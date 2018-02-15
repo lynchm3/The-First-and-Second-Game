@@ -42,6 +42,12 @@ public class RockGolem extends Monster {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public void draw1() {
 
 		// if (this.squareGameObjectIsOn.visibleToPlayer == false &&
@@ -161,7 +167,7 @@ public class RockGolem extends Monster {
 			GameObject[] mustHaves, GameObject[] mightHaves) {
 
 		RockGolem actor = new RockGolem();
-		instances.add(actor);
+		setInstances(actor);
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;
 		this.roomLivingIn = roomLivingIn;

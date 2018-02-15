@@ -15,9 +15,15 @@ public class Stampable extends GameObject {
 	}
 
 	@Override
+	public void setInstances(GameObject gameObject) {
+		instances.add(gameObject);
+		super.setInstances(gameObject);
+	}
+
+	@Override
 	public Stampable makeCopy(Square square, Actor owner) {
 		Stampable stampable = new Stampable();
-		instances.add(stampable);
+		setInstances(stampable);
 		super.setAttributesForCopy(stampable, square, owner);
 		return stampable;
 	}
