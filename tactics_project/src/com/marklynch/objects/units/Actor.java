@@ -327,6 +327,8 @@ public class Actor extends GameObject {
 			}
 
 			AIPath path = new AIPath(squarePath, squarePath.size(), completePath);
+			if (AStarSearch.maxedOut)
+				path.maxedOut = true;
 			return path;
 		}
 

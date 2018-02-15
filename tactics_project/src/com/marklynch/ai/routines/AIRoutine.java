@@ -36,7 +36,6 @@ import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
-import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTalk;
@@ -1329,7 +1328,7 @@ public abstract class AIRoutine {
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT;
 
 		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2)
-			new ActionMove(Game.level.activeActor, AIRoutineUtils.tempPath.squares.get(0), true).perform();
+			AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 		// AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
 		else {
 

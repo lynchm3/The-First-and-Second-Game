@@ -47,7 +47,11 @@ public class AStarSearch {
 	 * Find the path from the start node to the end node. A list of AStarNodes
 	 * is returned, or null if the path is not found.
 	 */
+	public static boolean maxedOut;
+
 	public LinkedList<AStarNode> findPath(Actor actor, AStarNode startNode, AStarNode goalNode, int maxCount) {
+
+		maxedOut = false;
 
 		AStarNode bestNodeFound = null;
 		float bestPathFoundDistanceToTarget = Integer.MAX_VALUE;
@@ -102,6 +106,7 @@ public class AStarSearch {
 			}
 
 			if (count == maxCount) {
+				maxedOut = true;
 				return constructPath(bestNodeFound);
 				// return constructPath(node);
 				// return null;

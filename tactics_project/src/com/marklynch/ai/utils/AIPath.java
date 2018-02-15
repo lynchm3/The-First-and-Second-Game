@@ -8,6 +8,7 @@ public class AIPath {
 	public Vector<Square> squares;
 	public int travelCost;
 	public boolean complete = false;
+	public boolean maxedOut = false;
 
 	public AIPath() {
 		squares = new Vector<Square>();
