@@ -36,6 +36,7 @@ import com.marklynch.objects.actions.ActionGiveItems;
 import com.marklynch.objects.actions.ActionHideInside;
 import com.marklynch.objects.actions.ActionLock;
 import com.marklynch.objects.actions.ActionMine;
+import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionShoutForHelp;
 import com.marklynch.objects.actions.ActionTakeItems;
 import com.marklynch.objects.actions.ActionTalk;
@@ -1305,7 +1306,13 @@ public abstract class AIRoutine {
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
 				false, false, false, false, 0, false, Trader.class);
 
+		System.out.println("target = " + target);
+
 		if (target == null) {
+			return true;
+		}
+
+		if (AIRoutineUtils.tempPath == null) {
 			return true;
 		}
 
@@ -1316,7 +1323,8 @@ public abstract class AIRoutine {
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT;
 
 		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2)
-			AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
+			new ActionMove(Game.level.activeActor, AIRoutineUtils.tempPath.squares.get(0), true).perform();
+		// AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
 		else {
 
 			// actor.sellItemsMarkedToSell(target);

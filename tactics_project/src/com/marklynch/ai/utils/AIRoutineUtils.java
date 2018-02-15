@@ -99,15 +99,17 @@ public class AIRoutineUtils {
 		return null;
 	}
 
+	public static AIPath tempPath = null;
+
 	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
 			boolean ignoreQuestObjects, int minimumValue, boolean REMOVETHIS, Class... types) {
 
-		if (maxDistance > Game.level.width) {
-			maxDistance = Game.level.width;
+		if (maxDistance > Game.level.width + Game.level.height) {
+			maxDistance = Game.level.width + Game.level.height;
 		}
 
-		// AIPath bestPath = null;
+		AIPath bestPath = null;
 		GameObject bestObject = null;
 		int bestPathTravelCost = Integer.MAX_VALUE;
 		ArrayList<GameObject> objects = new ArrayList<GameObject>();
@@ -115,15 +117,26 @@ public class AIRoutineUtils {
 			objects.addAll((ArrayList<GameObject>) getFieldValue(clazz, "instances"));
 		}
 
+		System.out.println("objects.size() = " + objects.size());
+		System.out.println("maxDistance = " + maxDistance);
+
 		for (GameObject object : objects) {
+			System.out.println("object = " + object);
+			System.out.println("Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn) = "
+					+ Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn));
 			if (Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn) <= maxDistance) {
+				System.out.println("a");
 				if (passesChecks(object, null, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
 						minimumValue)) {
-					Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(object.squareGameObjectIsOn, 0f);
-					AIPath path = Game.level.activeActor.getPathTo(square);
-					if (path != null && path.complete && path.travelCost < bestPathTravelCost) {
+					// Square square =
+					// calculateSquareToMoveToToBeWithinXSquaresToTarget(object.squareGameObjectIsOn,
+					// 0f);
+					// System.out.println("square = " + square);
+					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn);
+					System.out.println("path = " + path);
+					if (path != null && path.travelCost < bestPathTravelCost) {
 						bestObject = object;
-						// bestPath = path;
+						bestPath = path;
 						bestPathTravelCost = path.travelCost;
 					}
 				}
@@ -135,7 +148,8 @@ public class AIRoutineUtils {
 		if (bestPathTravelCost > maxDistance)
 			return null;
 
-		return null;
+		tempPath = bestPath;
+		return bestObject;
 
 	}
 
@@ -536,7 +550,7 @@ public class AIRoutineUtils {
 		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(square, 0f);
 
 		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
+			new ActionMove(Game.level.activeActor, square, true).perform();
 			return true;
 		} else {
 			return false;
