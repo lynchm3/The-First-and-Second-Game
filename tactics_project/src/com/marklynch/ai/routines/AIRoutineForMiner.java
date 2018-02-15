@@ -29,7 +29,7 @@ public class AIRoutineForMiner extends AIRoutine {
 	public void update() {
 		aiRoutineStart();
 
-		if (Game.level.hour > 20 && Game.level.hour < 6) {
+		if (Game.level.hour > 20 || Game.level.hour < 6) {
 			state = STATE.GO_TO_BED_AND_GO_TO_SLEEP;
 		} else {
 			state = STATE.MINING;
