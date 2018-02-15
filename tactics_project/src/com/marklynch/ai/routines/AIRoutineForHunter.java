@@ -138,7 +138,7 @@ public class AIRoutineForHunter extends AIRoutine {
 					AggressiveWildAnimal.class, CarnivoreNeutralWildAnimal.class, HerbivoreWildAnimal.class,
 					TinyNeutralWildAnimal.class);
 			if (target == null) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(actor.area.centreSuqare);
+				AIRoutineUtils.moveTowards(actor.area.centreSuqare);
 			} else {
 				if (target == null || target.squareGameObjectIsOn == null) {
 					target = null;

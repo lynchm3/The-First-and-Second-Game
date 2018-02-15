@@ -85,7 +85,7 @@ public class AIRoutineForBlind extends AIRoutine {
 			if (meatChunk != null) {
 				this.blind.activityDescription = "Eating!";
 
-				if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(meatChunk.squareGameObjectIsOn)) {
+				if (AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath)) {
 					failedToGetPathToFoodCount = 0;
 				} else {
 					failedToGetPathToFoodCount++;
@@ -127,7 +127,7 @@ public class AIRoutineForBlind extends AIRoutine {
 			if (bellSound != null) {
 				this.blind.activityDescription = "Dinner time!";
 				this.actor.thoughtBubbleImageTextureObject = ThoughtBubbles.MEAT_CHUNK;
-				if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(bellSound.sourceSquare)) {
+				if (AIRoutineUtils.moveTowards(bellSound.sourceSquare)) {
 					failedToGetPathToBellCount = 0;
 				} else {
 					failedToGetPathToBellCount++;

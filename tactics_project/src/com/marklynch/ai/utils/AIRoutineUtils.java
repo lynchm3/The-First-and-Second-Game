@@ -101,6 +101,26 @@ public class AIRoutineUtils {
 
 	public static AIPath tempPath = null;
 
+	public static boolean moveTowards(GameObject gameObject) {
+		return moveTowards(gameObject.squareGameObjectIsOn);
+	}
+
+	public static boolean moveTowards(Square square) {
+		return moveTowards(Game.level.activeActor.getPathTo(square));
+	}
+
+	public static boolean moveTowards(AIPath path) {
+		if (path == null)
+			return false;
+
+		if (path.squares.size() == 0)
+			return false;
+
+		new ActionMove(Game.level.activeActor, path.squares.get(0), true).perform();
+		return true;
+
+	}
+
 	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
 			boolean ignoreQuestObjects, int minimumValue, boolean REMOVETHIS, Class... types) {
@@ -114,19 +134,37 @@ public class AIRoutineUtils {
 		int bestPathTravelCost = Integer.MAX_VALUE;
 		ArrayList<GameObject> objects = new ArrayList<GameObject>();
 		for (Class clazz : types) {
-			System.out.println("class = " + clazz);
+			// System.out.println("class = " + clazz);
 			objects.addAll((ArrayList<GameObject>) getFieldValue(clazz, "instances"));
+		}
+
+		if (Game.level.activeActor.name.contains("Thief")) {
+			System.out.println("Thief getNearestForPurposeOfBeingAdjacent");
+			System.out.println("objects.size() = " + objects.size());
 		}
 
 		for (GameObject object : objects) {
 			if (Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn) <= maxDistance) {
+
+				if (Game.level.activeActor.name.contains("Thief")) {
+					System.out.println("straightLineDistanceTo");
+				}
+
 				if (passesChecks(object, null, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
 						minimumValue)) {
+
+					if (Game.level.activeActor.name.contains("Thief")) {
+						System.out.println("passesChecks");
+					}
 					// Square square =
 					// calculateSquareToMoveToToBeWithinXSquaresToTarget(object.squareGameObjectIsOn,
 					// 0f);
 					// System.out.println("square = " + square);
 					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn);
+
+					if (Game.level.activeActor.name.contains("Thief")) {
+						System.out.println("path = " + path);
+					}
 					if (path != null && path.travelCost < bestPathTravelCost) {
 						bestObject = object;
 						bestPath = path;
@@ -142,6 +180,9 @@ public class AIRoutineUtils {
 			return null;
 
 		tempPath = bestPath;
+		if (Game.level.activeActor.name.contains("Thief")) {
+			System.out.println("bestObject = " + bestObject);
+		}
 		return bestObject;
 
 	}
@@ -431,44 +472,46 @@ public class AIRoutineUtils {
 		}
 	}
 
-	public static boolean moveTowardsTargetToBeOn(GameObject target) {
-
-		// TODO
-		// currently if there's no path it crashes
-		// also... stay still fi ur already at the best part :P, issue (need to
-		// know ideal distance for this one though)
-		// is, its not in target's list of paths
-		// ehhhhhhhhhh.... if it's not fully reachable then just go
-		// closest as the crow flies?
-		// also... have ideal distance (for ranged VS melee for e.g.) (this is
-		// weapon distance, not travel distance)
-
-		// MOVE TOWARDS A POINT
-		// get as close to the point as possible
-		// with as few moves as possible
-
-		// Vector<Integer> idealWeaponDistances = new Vector<Integer>();
-		// idealWeaponDistances.add(2);
-
-		// TODO this needs to be calculated based on
-		// weapons available and the taret and their weapons
-		// TODO what if we're stuck being closed than ideal distance, need to
-		// run through this, and there could be a list of ideal distances......
-		// :/
-		// TODO ideal weapon distance could be on the other side of an object...
-		// need to factor this in when choosing a good square :/, when talking
-		// about targets squares I need to make list of attack squares, this
-		// shit is heavy
-
-		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(target.squareGameObjectIsOn, 0f);
-
-		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// public static boolean moveTowardsTargetToBeOn(GameObject target) {
+	//
+	// // TODO
+	// // currently if there's no path it crashes
+	// // also... stay still fi ur already at the best part :P, issue (need to
+	// // know ideal distance for this one though)
+	// // is, its not in target's list of paths
+	// // ehhhhhhhhhh.... if it's not fully reachable then just go
+	// // closest as the crow flies?
+	// // also... have ideal distance (for ranged VS melee for e.g.) (this is
+	// // weapon distance, not travel distance)
+	//
+	// // MOVE TOWARDS A POINT
+	// // get as close to the point as possible
+	// // with as few moves as possible
+	//
+	// // Vector<Integer> idealWeaponDistances = new Vector<Integer>();
+	// // idealWeaponDistances.add(2);
+	//
+	// // TODO this needs to be calculated based on
+	// // weapons available and the taret and their weapons
+	// // TODO what if we're stuck being closed than ideal distance, need to
+	// // run through this, and there could be a list of ideal distances......
+	// // :/
+	// // TODO ideal weapon distance could be on the other side of an object...
+	// // need to factor this in when choosing a good square :/, when talking
+	// // about targets squares I need to make list of attack squares, this
+	// // shit is heavy
+	//
+	// Square squareToMoveTo =
+	// calculateSquareToMoveToToBeWithinXSquaresToTarget(target.squareGameObjectIsOn,
+	// 0f);
+	//
+	// if (squareToMoveTo != null) {
+	// new ActionMove(Game.level.activeActor, squareToMoveTo, true).perform();
+	// return true;
+	// } else {
+	// return false;
+	// }
+	// }
 
 	public static boolean escapeFromAttacker(GameObject target) {
 
@@ -533,23 +576,24 @@ public class AIRoutineUtils {
 	// }
 	// }
 
-	public static boolean moveTowardsSquareToBeAdjacent(Square square) {
-		if (square == null)
-			return false;
-
-		if (Game.level.activeActor.straightLineDistanceTo(square) <= 1) {
-			return true;
-		}
-
-		Square squareToMoveTo = calculateSquareToMoveToToBeWithinXSquaresToTarget(square, 0f);
-
-		if (squareToMoveTo != null) {
-			new ActionMove(Game.level.activeActor, square, true).perform();
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// public static boolean moveTowardsSquareToBeAdjacent(Square square) {
+	// if (square == null)
+	// return false;
+	//
+	// if (Game.level.activeActor.straightLineDistanceTo(square) <= 1) {
+	// return true;
+	// }
+	//
+	// Square squareToMoveTo =
+	// calculateSquareToMoveToToBeWithinXSquaresToTarget(square, 0f);
+	//
+	// if (squareToMoveTo != null) {
+	// new ActionMove(Game.level.activeActor, square, true).perform();
+	// return true;
+	// } else {
+	// return false;
+	// }
+	// }
 
 	// public boolean moveTowardsNearestEnemyToAttack() {
 	//
@@ -1085,7 +1129,7 @@ public class AIRoutineUtils {
 			} else {
 				// boolean s = AIRoutineUtils
 				// .moveTowardsSquareToBeAdjacent(Game.level.activeActor.bed.squareGameObjectIsOn);
-				boolean s = AIRoutineUtils.moveTowardsTargetToBeOn(Game.level.activeActor.bed);
+				boolean s = AIRoutineUtils.moveTowards(Game.level.activeActor.bed);
 			}
 		} else {
 		}

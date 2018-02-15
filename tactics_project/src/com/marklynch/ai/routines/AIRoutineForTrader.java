@@ -114,7 +114,7 @@ public class AIRoutineForTrader extends AIRoutine {
 					new ActionWrite(trader, trader.shopSign, textForSign).perform();
 					shopkeepState = SHOPKEEP_STATE.SHOPKEEPING;
 				} else {
-					AIRoutineUtils.moveTowardsSquareToBeAdjacent(trader.shopSign.squareGameObjectIsOn);
+					AIRoutineUtils.moveTowards(trader.shopSign.squareGameObjectIsOn);
 				}
 			}
 		}

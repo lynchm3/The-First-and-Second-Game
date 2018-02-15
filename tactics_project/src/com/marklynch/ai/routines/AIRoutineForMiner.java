@@ -142,7 +142,7 @@ public class AIRoutineForMiner extends AIRoutine {
 					} else {
 						boolean mined = AIRoutineUtils.mine(target);
 						if (!mined) {
-							AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
+							AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 						}
 					}
 				}

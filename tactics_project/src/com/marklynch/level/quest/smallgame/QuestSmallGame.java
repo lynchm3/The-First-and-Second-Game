@@ -556,7 +556,7 @@ public class QuestSmallGame extends Quest {
 				if (actor.straightLineDistanceTo(Game.level.player.squareGameObjectIsOn) < 2) {
 					new ActionTalk(actor, Game.level.player).perform();
 				} else {
-					AIRoutineUtils.moveTowardsSquareToBeAdjacent(Game.level.player.squareGameObjectIsOn);
+					AIRoutineUtils.moveTowards(Game.level.player.squareGameObjectIsOn);
 				}
 			}
 		} else if (haveJournalLog(journalLogWolvesDead) && !haveJournalLog(journalLogAttackedWolves)) {

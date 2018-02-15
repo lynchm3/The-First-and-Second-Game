@@ -114,7 +114,7 @@ public class AIRoutineForCarnivoreNeutralWildAnimal extends AIRoutine {
 				if (this.wildAnimal.canSeeSquare(smallWildAnimal.squareGameObjectIsOn)) {
 					this.wildAnimal.addAttackerForThisAndGroupMembers(smallWildAnimal);
 				} else {
-					AIRoutineUtils.moveTowardsSquareToBeAdjacent(smallWildAnimal.squareGameObjectIsOn);
+					AIRoutineUtils.moveTowards(smallWildAnimal.squareGameObjectIsOn);
 				}
 				return;
 			}

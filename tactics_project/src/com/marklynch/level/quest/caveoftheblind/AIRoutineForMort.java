@@ -127,7 +127,7 @@ public class AIRoutineForMort extends AIRoutine {
 		if (mort.performingFeedingDemo) {
 
 			if (feedingDemoState == FEEDING_DEMO_STATE.WALK_TO_TROUGH) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.troughSquare);
+				AIRoutineUtils.moveTowards(mort.questCaveOfTheBlind.troughSquare);
 
 				if (mort.straightLineDistanceTo(mort.questCaveOfTheBlind.troughSquare) <= 1)
 					feedingDemoState = FEEDING_DEMO_STATE.PLACE_MEAT;
@@ -178,7 +178,7 @@ public class AIRoutineForMort extends AIRoutine {
 			if (feedingDemoState == FEEDING_DEMO_STATE.WAIT_FOR_BLIND_TO_LEAVE) {
 
 				// MOVE BACK
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(mort.questCaveOfTheBlind.safeSquare);
+				AIRoutineUtils.moveTowards(mort.questCaveOfTheBlind.safeSquare);
 				for (Blind blind : mort.questCaveOfTheBlind.blind) {
 					if (blind.remainingHealth > 0
 							&& blind.squareGameObjectIsOn.structureRoomSquareIsIn == mort.mortsMine) {

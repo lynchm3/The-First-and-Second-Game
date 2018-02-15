@@ -249,8 +249,8 @@ public abstract class AIRoutine {
 			if (Game.level.activeActor.straightLineDistanceTo(smallHidingPlace.squareGameObjectIsOn) < 2) {
 				new ActionHideInside(Game.level.activeActor, smallHidingPlace).perform();
 			} else {
-
-				AIRoutineUtils.moveTowardsTargetToBeOn(smallHidingPlace);
+				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+				// AIRoutineUtils.moveTowardsTargetToBeOn(smallHidingPlace);
 			}
 			return true;
 		}
@@ -363,7 +363,8 @@ public abstract class AIRoutine {
 					// if (this.actor.canSeeGameObject(actorNearby)) {
 					// } else {
 					if (actorNearby != null) {
-						AIRoutineUtils.moveTowardsSquareToBeAdjacent(actorNearby.squareGameObjectIsOn);
+						AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+						// AIRoutineUtils.moveTowardsSquareToBeAdjacent(actorNearby.squareGameObjectIsOn);
 						moved = true;
 						this.escapeCooldownAttacker = attacker;
 
@@ -824,7 +825,8 @@ public abstract class AIRoutine {
 
 				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
 						&& actor.canSeeGameObject(criminal)) {
-					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(criminal.squareGameObjectIsOn)) {
+
+					if (AIRoutineUtils.moveTowards(criminal.squareGameObjectIsOn)) {
 						actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 						actor.activityDescription = "Confiscating";
 						createSearchLocationsBasedOnVisibleAttackers();
@@ -844,7 +846,7 @@ public abstract class AIRoutine {
 
 				if (actor.sight > actor.straightLineDistanceTo(criminal.squareGameObjectIsOn)
 						&& actor.canSeeGameObject(criminal)) {
-					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(criminal.squareGameObjectIsOn)) {
+					if (AIRoutineUtils.moveTowards(criminal.squareGameObjectIsOn)) {
 						actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 						createSearchLocationsBasedOnVisibleAttackers();
 						return true;
@@ -862,7 +864,7 @@ public abstract class AIRoutine {
 					}
 
 					if (actor.canSeeSquare(stolenItemOnGround.squareGameObjectIsOn)) {
-						if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(stolenItemOnGround.squareGameObjectIsOn)) {
+						if (AIRoutineUtils.moveTowards(stolenItemOnGround.squareGameObjectIsOn)) {
 							actor.thoughtBubbleImageTextureObject = ThoughtBubbles.JUSTICE;
 							createSearchLocationsBasedOnVisibleAttackers();
 							return true;
@@ -1048,7 +1050,8 @@ public abstract class AIRoutine {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			boolean lootedCarcass = AIRoutineUtils.lootTarget(carcass);
 			if (!lootedCarcass) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(carcass.squareGameObjectIsOn);
+				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(carcass.squareGameObjectIsOn);
 			} else {
 			}
 			return true;
@@ -1072,7 +1075,8 @@ public abstract class AIRoutine {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_SKINNING;
 			boolean lootedCarcass = AIRoutineUtils.skinTarget(carcass);
 			if (!lootedCarcass) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(carcass.squareGameObjectIsOn);
+				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(carcass.squareGameObjectIsOn);
 			} else {
 			}
 			return true;
@@ -1091,7 +1095,8 @@ public abstract class AIRoutine {
 			this.actor.thoughtBubbleImageTextureAction = getGlobalImage("left.png", false);
 			boolean pickedUpLoot = AIRoutineUtils.pickupTarget(loot);
 			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);
+				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(loot.squareGameObjectIsOn);
 			} else {
 
 			}
@@ -1108,7 +1113,8 @@ public abstract class AIRoutine {
 			this.actor.thoughtBubbleImageTextureObject = food.imageTexture;
 			boolean ateFood = AIRoutineUtils.eatTarget(food);
 			if (!ateFood) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(food.squareGameObjectIsOn);
+				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(food.squareGameObjectIsOn);
 			} else {
 
 			}
@@ -1125,7 +1131,11 @@ public abstract class AIRoutine {
 			this.actor.thoughtBubbleImageTextureObject = corpse.imageTexture;
 			boolean ateCorpse = AIRoutineUtils.eatTarget(corpse);
 			if (!ateCorpse) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(corpse.squareGameObjectIsOn);
+				// Object o = AIRoutineUtils.tempPath;
+				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+				// new ActionMove(Game.level.activeActor,
+				// AIRoutineUtils.tempPath.squares.get(0), true).perform();
+				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(corpse.squareGameObjectIsOn);
 			} else {
 
 			}
@@ -1236,7 +1246,7 @@ public abstract class AIRoutine {
 				actor.thoughtBubbleImageTextureObject = door.imageTexture;
 				Action action = new ActionLock(this.actor, door);
 				if (actor.straightLineDistanceTo(door.squareGameObjectIsOn) > 1) {
-					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(door.squareGameObjectIsOn)) {
+					if (AIRoutineUtils.moveTowards(door.squareGameObjectIsOn)) {
 						return true;
 					}
 				} else if (!action.enabled) {
@@ -1250,7 +1260,7 @@ public abstract class AIRoutine {
 				actor.thoughtBubbleImageTextureObject = door.imageTexture;
 				Action action = new ActionClose(this.actor, door);
 				if (actor.straightLineDistanceTo(door.squareGameObjectIsOn) > 1) {
-					if (AIRoutineUtils.moveTowardsSquareToBeAdjacent(door.squareGameObjectIsOn)) {
+					if (AIRoutineUtils.moveTowards(door.squareGameObjectIsOn)) {
 						return true;
 					}
 				} else if (!action.enabled) {
@@ -1283,9 +1293,12 @@ public abstract class AIRoutine {
 
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
 
-		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2)
-			return AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
-		else
+		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2) {
+			AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
+			return true;
+			// return
+			// AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
+		} else
 			return actor.sellItemsMarkedToSell(target);
 	}
 
@@ -1306,10 +1319,6 @@ public abstract class AIRoutine {
 				false, false, false, false, 0, false, Trader.class);
 
 		if (target == null) {
-			return true;
-		}
-
-		if (AIRoutineUtils.tempPath == null) {
 			return true;
 		}
 
@@ -1348,7 +1357,7 @@ public abstract class AIRoutine {
 			new ActionWrite(actor, wantedPoster, wantedPoster.generateText()).perform();
 			return true;
 		} else {
-			return AIRoutineUtils.moveTowardsSquareToBeAdjacent(wantedPoster.squareGameObjectIsOn);
+			return AIRoutineUtils.moveTowards(wantedPoster.squareGameObjectIsOn);
 		}
 
 	}

@@ -80,7 +80,7 @@ public class AIRoutineForHerbivoreWildAnimal extends AIRoutine {
 			this.actor.thoughtBubbleImageTextureObject = food.imageTexture;
 			boolean pickedUpLoot = AIRoutineUtils.eatTarget(food);
 			if (!pickedUpLoot) {
-				AIRoutineUtils.moveTowardsSquareToBeAdjacent(food.squareGameObjectIsOn);
+				AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 			} else {
 
 			}
