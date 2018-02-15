@@ -3,13 +3,16 @@ package com.marklynch.level.quest.caveoftheblind;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.Level;
 import com.marklynch.level.constructs.area.Area;
 import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructurePath;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom.RoomPart;
 import com.marklynch.level.constructs.bounds.structure.StructureSection;
+import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
@@ -41,12 +44,18 @@ public class AreaMinorMine {
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[299][79], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[300][82], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[301][81], null));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[333][78], null));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[303][78], null));
 
 		Structure mine = new Structure("Minor Mine", mineSections, rooms, minePaths, mineFeatures,
 				new ArrayList<Square>(), "map_cave.png", 280, 76, 307, 97, true, null, squaresToRemove, extraWalls,
 				Templates.WALL, Square.STONE_TEXTURE, 5);
 		Game.level.structures.add(mine);
+
+		Bed bed = Templates.BED.makeCopy(Game.level.squares[303][90], null);
+		Actor miner = Templates.MINER.makeCopy("Miner Dan", Game.level.squares[302][90], Level.factions.townsPeople,
+				bed, 39,
+				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.LANTERN.makeCopy(null, null) },
+				new GameObject[] {}, AreaList.townForest);
 
 	}
 

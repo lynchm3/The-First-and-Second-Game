@@ -73,7 +73,7 @@ public abstract class AIRoutine {
 	public GameObject escapeCooldownAttacker = null;
 
 	enum STATE {
-		HUNTING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP
+		HUNTING, MINING, GO_TO_WILD_ANIMAL_AND_ATTACK, GO_TO_WILD_ANIMAL_AND_LOOT, GO_TO_BED_AND_GO_TO_SLEEP
 	};
 
 	public STATE state;

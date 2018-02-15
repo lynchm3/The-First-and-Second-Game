@@ -15,6 +15,7 @@ import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEatItems;
+import com.marklynch.objects.actions.ActionMine;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionSkin;
 import com.marklynch.objects.actions.ActionTakeItems;
@@ -867,6 +868,16 @@ public class AIRoutineUtils {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
 		if (weaponDistance <= 1) {
 			new ActionEatItems(Game.level.activeActor, target).perform();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean mine(GameObject target) {
+		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
+		if (weaponDistance <= 1) {
+			new ActionMine(Game.level.activeActor, target).perform();
 			return true;
 		} else {
 			return false;

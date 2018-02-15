@@ -108,6 +108,7 @@ public class Templates {
 
 	// General People
 	public static Human HUNTER;
+	public static Human MINER;
 
 	public static Human THIEF;
 

@@ -1,6 +1,7 @@
 package com.marklynch.objects.templates;
 
 import com.marklynch.ai.routines.AIRoutineForHunter;
+import com.marklynch.ai.routines.AIRoutineForMiner;
 import com.marklynch.ai.routines.AIRoutineForThief;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.quest.caveoftheblind.AIRoutineForMort;
@@ -62,6 +63,26 @@ public class TemplatesHumans {
 		Templates.HUNTER.aiRoutine = new AIRoutineForHunter(Templates.HUNTER);
 		Templates.HUNTER.templateId = GameObject.generateNewTemplateId();
 		Templates.HUNTER.flipYAxisInMirror = false;
+
+		// General People
+		Templates.MINER = new Human();
+		Templates.MINER.title = "Miner";
+		Templates.MINER.level = 1;
+		Templates.MINER.bluntDamage = 2;
+		Templates.MINER.totalHealth = Templates.MINER.remainingHealth = 10;
+		Templates.MINER.strength = 13;
+		Templates.MINER.dexterity = 5;
+		Templates.MINER.intelligence = 4;
+		Templates.MINER.endurance = 12;
+		Templates.MINER.imageTexturePath = "hunter.png";
+		Templates.MINER.weight = 110f;
+		Templates.MINER.handAnchorX = 88f;
+		Templates.MINER.handAnchorY = 54f;
+		Templates.MINER.canOpenDoors = true;
+		Templates.MINER.canEquipWeapons = true;
+		Templates.MINER.aiRoutine = new AIRoutineForMiner(Templates.MINER);
+		Templates.MINER.templateId = GameObject.generateNewTemplateId();
+		Templates.MINER.flipYAxisInMirror = false;
 
 		Templates.THIEF = new Human();
 		Templates.THIEF.title = "Thief";
