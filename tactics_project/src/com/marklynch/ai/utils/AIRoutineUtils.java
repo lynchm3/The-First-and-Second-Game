@@ -27,6 +27,8 @@ import com.marklynch.objects.weapons.Weapon;
 public class AIRoutineUtils {
 
 	public String name = "AI";
+	final static String ACTIVITY_DESCRIPTION_GOING_TO_BED = "Bed time";
+	final static String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 
 	public AIRoutineUtils() {
 		name = this.getClass().getSimpleName();
@@ -993,5 +995,21 @@ public class AIRoutineUtils {
 			return travelCostB - travelCostA;
 		}
 	};
+
+	public static void goToBedAndSleep() {
+
+		Game.level.activeActor.followersShouldFollow = false;
+		Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
+		if (Game.level.activeActor.bed != null) {
+			if (Game.level.activeActor.squareGameObjectIsOn == Game.level.activeActor.bed.squareGameObjectIsOn) {
+				Game.level.activeActor.sleeping = true;
+				Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
+			} else {
+				AIRoutineUtils.moveTowardsTargetToBeOn(Game.level.activeActor.bed);
+			}
+		} else {
+		}
+
+	}
 
 }

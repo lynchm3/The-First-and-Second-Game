@@ -38,6 +38,9 @@ public class AIRoutineForPig extends AIRoutine {
 	public void update() {
 		aiRoutineStart();
 
+		if (runSleepRoutine())
+			return;
+
 		// Escape
 		if (runEscapeRoutine())
 			return;
@@ -83,6 +86,11 @@ public class AIRoutineForPig extends AIRoutine {
 				if (AIRoutineUtils.moveTowardsTargetSquare(targetSquare))
 					return;
 			}
+		}
+
+		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+
+			AIRoutineUtils.goToBedAndSleep();
 		}
 	}
 

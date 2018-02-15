@@ -154,18 +154,8 @@ public class AIRoutineForMiner extends AIRoutine {
 		}
 
 		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
-			actor.followersShouldFollow = false;
-			this.actor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
-			if (this.actor.bed != null) {
-				if (this.actor.squareGameObjectIsOn == this.actor.bed.squareGameObjectIsOn) {
-					actor.sleeping = true;
-					this.actor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
-				} else {
-					AIRoutineUtils.moveTowardsTargetToBeOn(this.actor.bed);
-				}
-			} else {
-				state = STATE.HUNTING;
-			}
+
+			AIRoutineUtils.goToBedAndSleep();
 		}
 	}
 

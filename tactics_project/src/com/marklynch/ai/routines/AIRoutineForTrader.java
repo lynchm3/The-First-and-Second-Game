@@ -41,6 +41,9 @@ public class AIRoutineForTrader extends AIRoutine {
 
 		aiRoutineStart();
 
+		if (runSleepRoutine())
+			return;
+
 		// Update wanted poster
 		if (updateWantedPosterRoutine(trader.wantedPoster))
 			return;
@@ -114,6 +117,11 @@ public class AIRoutineForTrader extends AIRoutine {
 					AIRoutineUtils.moveTowardsSquareToBeAdjacent(trader.shopSign.squareGameObjectIsOn);
 				}
 			}
+		}
+
+		if (state == STATE.GO_TO_BED_AND_GO_TO_SLEEP) {
+
+			AIRoutineUtils.goToBedAndSleep();
 		}
 	}
 

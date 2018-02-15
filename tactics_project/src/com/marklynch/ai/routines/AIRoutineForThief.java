@@ -57,6 +57,9 @@ public class AIRoutineForThief extends AIRoutine {
 	public void update() {
 		aiRoutineStart();
 
+		if (runSleepRoutine())
+			return;
+
 		// Fight
 		if (runFightRoutine())
 			return;
