@@ -1,7 +1,6 @@
 package com.marklynch.objects;
 
 import com.marklynch.utils.ResourceUtils;
-
 import com.marklynch.utils.Texture;
 
 public class ThoughtBubbles {

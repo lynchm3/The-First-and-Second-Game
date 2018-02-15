@@ -1,5 +1,7 @@
 package com.marklynch.ai.routines;
 
+import static com.marklynch.utils.ResourceUtils.getGlobalImage;
+
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.objects.GameObject;
@@ -138,6 +140,8 @@ public class AIRoutineForMiner extends AIRoutine {
 					target = null;
 				} else {
 					this.actor.activityDescription = ACTIVITY_DESCRIPTION_MINING;
+					this.actor.thoughtBubbleImageTextureAction = getGlobalImage("action_mine.png", false);
+					this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
 					if (target.remainingHealth <= 0) {
 					} else {
 						boolean mined = AIRoutineUtils.mine(target);

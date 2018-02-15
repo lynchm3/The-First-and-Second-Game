@@ -1279,8 +1279,8 @@ public abstract class AIRoutine {
 		if (actor.inventory.itemsToSellCount <= 0)
 			return false;
 
-		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false,
-				false, false, 0, false, Trader.class);
+		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
+				false, false, false, false, 0, false, Trader.class);
 
 		if (target == null) {
 			return false;
@@ -1291,6 +1291,8 @@ public abstract class AIRoutine {
 		}
 
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_SELLING_LOOT;
+		this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
+		this.actor.thoughtBubbleImageTextureAction = Templates.GOLD.imageTexture;
 
 		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2) {
 			AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
@@ -1326,6 +1328,8 @@ public abstract class AIRoutine {
 		}
 
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT;
+		this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
+		this.actor.thoughtBubbleImageTextureAction = Templates.GOLD.imageTexture;
 
 		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2)
 			AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);

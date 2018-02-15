@@ -285,7 +285,7 @@ public class Actor extends GameObject {
 		}
 	}
 
-	public final static int aiMaxPathSize = 100;
+	public final static int aiMaxPathSize = 400;
 
 	public AIPath getPathTo(Square target) {
 

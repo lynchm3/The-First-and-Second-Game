@@ -147,12 +147,14 @@ public class AIRoutineUtils {
 		}
 
 		for (GameObject object : objects) {
-			if (Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn) <= maxDistance) {
+			int straightLineDistance = Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn);
+			if (straightLineDistance <= maxDistance) {
 
 				if (passesChecks(object, null, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
 						minimumValue)) {
 					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn);
-					if (path != null && path.travelCost < bestPathTravelCost && (path.complete || path.maxedOut)) {
+					if (path != null && path.travelCost < bestPathTravelCost
+							&& (path.complete || straightLineDistance > 20)) {
 						bestObject = object;
 						bestPath = path;
 						bestPathTravelCost = path.travelCost;
@@ -194,16 +196,17 @@ public class AIRoutineUtils {
 				for (Class clazz : classes) {
 					for (Faction faction : Game.level.factions) {
 						for (Actor actor : faction.actors) {
-							if (Game.level.activeActor.straightLineDistanceTo(actor.squareGameObjectIsOn) >= minRange
-									&& Game.level.activeActor
-											.straightLineDistanceTo(actor.squareGameObjectIsOn) <= maxRange) {
+							int straightLineDistance = Game.level.activeActor
+									.straightLineDistanceTo(actor.squareGameObjectIsOn);
+							if (straightLineDistance >= minRange && straightLineDistance <= maxRange) {
 								if (passesChecks(actor, clazz, fitsInInventory, mustContainObjects, mustBeUnowned,
 										ignoreQuestObjects, minimumValue)) {
 									// Square square =
 									// calculateSquareToMoveToToBeWithinXSquaresToTarget(
 									// actor.squareGameObjectIsOn, 0f);
 									AIPath path = Game.level.activeActor.getPathTo(actor.squareGameObjectIsOn);
-									if (path != null && (path.complete || path.maxedOut)) {
+									if (path != null && (path.complete || straightLineDistance > 20)) {
+										tempPath = path;
 										return actor;
 									}
 								}
@@ -230,16 +233,14 @@ public class AIRoutineUtils {
 
 				for (Class clazz : classes) {
 					for (GameObject gameObject : Game.level.inanimateObjectsOnGround.get(clazz)) {
-						if (Game.level.activeActor.straightLineDistanceTo(gameObject.squareGameObjectIsOn) >= minRange
-								&& Game.level.activeActor
-										.straightLineDistanceTo(gameObject.squareGameObjectIsOn) <= maxRange) {
+						int straightLineDistance = Game.level.activeActor
+								.straightLineDistanceTo(gameObject.squareGameObjectIsOn);
+						if (straightLineDistance >= minRange && straightLineDistance <= maxRange) {
 							if (!(gameObject instanceof Actor) && passesChecks(gameObject, clazz, fitsInInventory,
 									mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue)) {
-								// Square square =
-								// calculateSquareToMoveToToBeWithinXSquaresToTarget(
-								// gameObject.squareGameObjectIsOn, 1f);
 								AIPath path = Game.level.activeActor.getPathTo(gameObject.squareGameObjectIsOn);
-								if (path != null && (path.complete || path.maxedOut)) {
+								if (path != null && (path.complete || straightLineDistance > 20)) {
+									tempPath = path;
 									return gameObject;
 
 								}

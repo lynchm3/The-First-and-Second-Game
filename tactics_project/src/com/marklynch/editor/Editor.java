@@ -418,11 +418,11 @@ public class Editor {
 
 		new Templates();
 
-		Templates.MIRROR.makeCopy(Game.level.squares[0][4], null);
-		Templates.MIRROR.makeCopy(Game.level.squares[1][4], null);
-		Templates.MIRROR.makeCopy(Game.level.squares[2][4], null);
-		Templates.MIRROR.makeCopy(Game.level.squares[3][4], null);
-		Templates.MIRROR.makeCopy(Game.level.squares[4][4], null);
+		Templates.MIRROR.makeCopy(Game.level.squares[27][31], null);
+		// Templates.MIRROR.makeCopy(Game.level.squares[1][4], null);
+		// Templates.MIRROR.makeCopy(Game.level.squares[2][4], null);
+		// Templates.MIRROR.makeCopy(Game.level.squares[3][4], null);
+		// Templates.MIRROR.makeCopy(Game.level.squares[4][4], null);
 
 		// Add player
 		// West Security
