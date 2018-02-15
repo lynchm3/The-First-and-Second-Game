@@ -998,6 +998,12 @@ public class AIRoutineUtils {
 
 	public static void goToBedAndSleep() {
 
+		if (Game.level.activeActor.name.contains("Dan")) {
+			System.out.println("goToBedAndSleep()");
+			System.out.println("Game.level.activeActor.bed = " + Game.level.activeActor.bed);
+
+		}
+
 		Game.level.activeActor.followersShouldFollow = false;
 		Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_GOING_TO_BED;
 		if (Game.level.activeActor.bed != null) {
@@ -1005,7 +1011,13 @@ public class AIRoutineUtils {
 				Game.level.activeActor.sleeping = true;
 				Game.level.activeActor.activityDescription = ACTIVITY_DESCRIPTION_SLEEPING;
 			} else {
-				AIRoutineUtils.moveTowardsTargetToBeOn(Game.level.activeActor.bed);
+				// boolean s = AIRoutineUtils
+				// .moveTowardsSquareToBeAdjacent(Game.level.activeActor.bed.squareGameObjectIsOn);
+				boolean s = AIRoutineUtils.moveTowardsTargetToBeOn(Game.level.activeActor.bed);
+
+				if (Game.level.activeActor.name.contains("Dan")) {
+					System.out.println("s = " + s);
+				}
 			}
 		} else {
 		}

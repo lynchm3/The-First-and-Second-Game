@@ -64,6 +64,11 @@ public class Human extends Actor {
 		actor.templateId = templateId;
 		actor.aiRoutine = aiRoutine.getInstance(actor);
 
+		if (bed != null) {
+			actor.bed = bed;
+			bed.owner = actor;
+		}
+
 		actor.init(gold, mustHaves, mightHaves);
 		return actor;
 	}
