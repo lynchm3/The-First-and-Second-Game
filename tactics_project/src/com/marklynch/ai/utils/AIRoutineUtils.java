@@ -1,5 +1,6 @@
 package com.marklynch.ai.utils;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
@@ -76,9 +77,78 @@ public class AIRoutineUtils {
 		}
 	}
 
+	static Object getFieldValue(Class clazz, String fieldName) {
+
+		try {
+			Field myField = clazz.getDeclaredField(fieldName);
+			return myField.get(null);
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
+			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
+			boolean ignoreQuestObjects, int minimumValue, boolean REMOVETHIS, Class... types) {
+
+		if (maxDistance > Game.level.width) {
+			maxDistance = Game.level.width;
+		}
+
+		// AIPath bestPath = null;
+		GameObject bestObject = null;
+		int bestPathTravelCost = Integer.MAX_VALUE;
+		ArrayList<GameObject> objects = new ArrayList<GameObject>();
+		for (Class clazz : types) {
+			objects.addAll((ArrayList<GameObject>) getFieldValue(clazz, "instances"));
+		}
+
+		for (GameObject object : objects) {
+			if (Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn) <= maxDistance) {
+				if (passesChecks(object, null, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
+						minimumValue)) {
+					Square square = calculateSquareToMoveToToBeWithinXSquaresToTarget(object.squareGameObjectIsOn, 0f);
+					AIPath path = Game.level.activeActor.getPathTo(square);
+					if (path != null && path.complete && path.travelCost < bestPathTravelCost) {
+						bestObject = object;
+						// bestPath = path;
+						bestPathTravelCost = path.travelCost;
+					}
+				}
+			}
+		}
+
+		if (bestObject == null)
+			return null;
+		if (bestPathTravelCost > maxDistance)
+			return null;
+
+		return null;
+
+	}
+
 	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
 			boolean ignoreQuestObjects, int minimumValue, Class... classes) {
+
+		if (maxDistance > Game.level.width) {
+			maxDistance = Game.level.width;
+		}
+		if (maxDistance > Game.level.height) {
+			maxDistance = Game.level.height;
+		}
 
 		if (checkActors) {
 
@@ -251,8 +321,8 @@ public class AIRoutineUtils {
 			return false;
 
 		// check class
-		if (clazz != null && !clazz.isInstance(gameObject))
-			return false;
+		// if (clazz != null && !clazz.isInstance(gameObject))
+		// return false;
 
 		return true;
 

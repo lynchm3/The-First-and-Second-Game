@@ -8,6 +8,8 @@ import com.marklynch.objects.units.Actor;
 
 public class WaterSource extends GameObject {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public Effect[] effectsFromInteracting;
 
 	public WaterSource() {
@@ -32,6 +34,7 @@ public class WaterSource extends GameObject {
 	@Override
 	public WaterSource makeCopy(Square square, Actor owner) {
 		WaterSource waterSource = new WaterSource();
+		instances.add(waterSource);
 		super.setAttributesForCopy(waterSource, square, owner);
 		waterSource.effectsFromInteracting = effectsFromInteracting;
 		return waterSource;

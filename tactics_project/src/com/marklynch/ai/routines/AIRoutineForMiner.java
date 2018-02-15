@@ -4,6 +4,7 @@ import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Vein;
+import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.HerbivoreWildAnimal;
 
@@ -23,6 +24,7 @@ public class AIRoutineForMiner extends AIRoutine {
 
 		super(actor);
 		aiType = AI_TYPE.FIGHTER;
+		requiredEquipmentTemplateIds.add(Templates.PICKAXE.templateId);
 	}
 
 	@Override
@@ -103,16 +105,6 @@ public class AIRoutineForMiner extends AIRoutine {
 			return;
 		}
 
-		// if group leader wait for group
-		// if (this.actor.group != null && this.actor ==
-		// this.actor.group.getLeader()) {
-		// if (this.actor.group.leaderNeedsToWait()) {
-		// this.actor.activityDescription = "Waiting for " +
-		// this.actor.group.name;
-		// return;
-		// }
-		// }
-
 		// Defer to quest
 		if (deferToQuest()) {
 			this.actor.followersShouldFollow = true;
@@ -121,6 +113,11 @@ public class AIRoutineForMiner extends AIRoutine {
 
 		// Sell items
 		if (sellItems()) {
+			this.actor.followersShouldFollow = true;
+			return;
+		}
+
+		if (replenishEquipment()) {
 			this.actor.followersShouldFollow = true;
 			return;
 		}

@@ -2,6 +2,8 @@ package com.marklynch.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
@@ -9,6 +11,8 @@ import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class Wall extends GameObject {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	// 3+ connections
 	public boolean fullWall;
@@ -275,6 +279,7 @@ public class Wall extends GameObject {
 	@Override
 	public Wall makeCopy(Square square, Actor owner) {
 		Wall wall = new Wall();
+		instances.add(wall);
 		super.setAttributesForCopy(wall, square, owner);
 		if (wall.squareGameObjectIsOn != null) {
 			wall.drawX1 = (int) (wall.squareGameObjectIsOn.xInGridPixels + wall.drawOffsetRatioX);

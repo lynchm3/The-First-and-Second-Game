@@ -1,11 +1,15 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
 public class Roof extends GameObject {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public Roof() {
 		super();
@@ -48,6 +52,7 @@ public class Roof extends GameObject {
 	@Override
 	public Roof makeCopy(Square square, Actor owner) {
 		Roof roof = new Roof();
+		instances.add(roof);
 		setAttributesForCopy(roof, square, owner);
 		return roof;
 	}

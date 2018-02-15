@@ -95,6 +95,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class GameObject implements ActionableInWorld, ActionableInInventory, Comparable, InventoryParent, DamageDealer {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public final static String[] editableAttributes = { "name", "imageTexture", "totalHealth", "remainingHealth",
 			"owner", "inventory", "showInventory", "canShareSquare", "fitsInInventory", "canContainOtherObjects" };
 	public String guid = UUID.randomUUID().toString();
@@ -719,6 +721,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 	public GameObject makeCopy(Square square, Actor owner) {
 		GameObject gameObject = new GameObject();
+		instances.add(gameObject);
 		setAttributesForCopy(gameObject, square, owner);
 		return gameObject;
 	}

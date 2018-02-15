@@ -1,5 +1,7 @@
 package com.marklynch.level.quest.caveoftheblind;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
@@ -11,6 +13,8 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.objects.units.Monster;
 
 public class Blind extends Monster {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public StructureRoom roomLivingIn;
 
@@ -80,6 +84,7 @@ public class Blind extends Monster {
 			GameObject[] mightHaves) {
 
 		Blind actor = new Blind();
+		instances.add(actor);
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;
 		this.roomLivingIn = roomLivingIn;

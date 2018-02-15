@@ -37,6 +37,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class Player extends Human {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public static AIPath playerPathToDraw = null;
 	public static AIPath playerPathToMove = null;
 	public static Square playerTargetSquare = null;
@@ -88,6 +90,7 @@ public class Player extends Human {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		Player actor = new Player();
+		instances.add(actor);
 		setAttributesForCopy(actor, square, null);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;

@@ -1,5 +1,7 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.constructs.actionlisteners.ActionListener;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.squares.Square;
@@ -9,6 +11,8 @@ import com.marklynch.objects.units.Actor;
 
 public class Readable extends GameObject {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	Conversation conversation;
 	private ActionListener onReadListener;
 
@@ -17,19 +21,12 @@ public class Readable extends GameObject {
 
 		// BOOK / SCROLL
 
-
-
-
-
-
-
-
-
 	}
 
 	public Readable makeCopy(Square square, String name, Object[] conversationText, Actor owner) {
 
 		Readable readable = new Readable();
+		instances.add(readable);
 		super.setAttributesForCopy(readable, square, owner);
 		readable.conversation = readable.createConversation(conversationText);
 		return readable;

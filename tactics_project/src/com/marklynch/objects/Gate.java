@@ -1,9 +1,13 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 public class Gate extends Door {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	float soundDampeningWhenClosed;
 	boolean blocksLineOfSightWhenClosed;
 
@@ -13,8 +17,6 @@ public class Gate extends Door {
 		canBePickedUp = false;
 
 		fitsInInventory = false;
-
-
 
 		persistsWhenCantBeSeen = true;
 
@@ -28,6 +30,7 @@ public class Gate extends Door {
 			Actor owner, Key... keys) {
 
 		Gate door = new Gate();
+		instances.add(door);
 
 		super.setAttributesForCopy(door, square, locked, owner, keys);
 

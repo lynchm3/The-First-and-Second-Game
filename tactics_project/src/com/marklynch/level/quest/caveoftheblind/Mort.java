@@ -1,5 +1,7 @@
 package com.marklynch.level.quest.caveoftheblind;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
@@ -11,6 +13,8 @@ import com.marklynch.objects.tools.Bell;
 import com.marklynch.objects.units.Actor;
 
 public class Mort extends Actor {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public StructureRoom mortsMine;
 	public StructureSection mortsRooms;
@@ -43,6 +47,7 @@ public class Mort extends Actor {
 	public Mort makeCopy(String name, Square square, Faction faction, GameObject bed, int gold, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 		Mort actor = new Mort();
+		instances.add(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

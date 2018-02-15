@@ -1,6 +1,7 @@
 package com.marklynch.objects;
 
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
@@ -10,6 +11,8 @@ import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.TriangleUtils;
 
 public class GameObjectExploder extends GameObject {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public GameObjectExploder() {
 		super();
@@ -334,6 +337,7 @@ public class GameObjectExploder extends GameObject {
 	@Override
 	public GameObject makeCopy(Square square, Actor owner) {
 		GameObjectExploder gameObject = new GameObjectExploder();
+		instances.add(gameObject);
 		setAttributesForCopy(gameObject, square, owner);
 		return gameObject;
 	}

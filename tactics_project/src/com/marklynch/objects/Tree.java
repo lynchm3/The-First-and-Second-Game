@@ -13,6 +13,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class Tree extends GameObject {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	float appleMaxRatioSize = 0.25f;
 	float healthWhenLastDroppedFruit;
 
@@ -54,7 +56,8 @@ public class Tree extends GameObject {
 		float appleDrawOffsetYMin = -0.35f;
 		float appleDrawOffsetYMax = 0.35f;
 
-		apple.drawOffsetRatioX = appleDrawOffsetXMin + (float) (Math.random() * (appleDrawOffsetXMax - appleDrawOffsetXMin));
+		apple.drawOffsetRatioX = appleDrawOffsetXMin
+				+ (float) (Math.random() * (appleDrawOffsetXMax - appleDrawOffsetXMin));
 		apple.drawOffsetRatioY = apple.drawOffsetYInTree = appleDrawOffsetYMin
 				+ (float) (Math.random() * (appleDrawOffsetYMax - appleDrawOffsetYMin));
 
@@ -175,6 +178,7 @@ public class Tree extends GameObject {
 	@Override
 	public Tree makeCopy(Square square, Actor owner) {
 		Tree tree = new Tree();
+		instances.add(tree);
 		super.setAttributesForCopy(tree, square, owner);
 		healthWhenLastDroppedFruit = this.totalHealth;
 		return tree;

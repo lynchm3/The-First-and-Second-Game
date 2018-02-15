@@ -1,11 +1,15 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.TextureUtils;
 
 public class Window extends GameObjectExploder {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public Window() {
 		super();
@@ -14,7 +18,6 @@ public class Window extends GameObjectExploder {
 
 		fitsInInventory = false;
 		canShareSquare = false;
-
 
 		persistsWhenCantBeSeen = true;
 
@@ -83,6 +86,7 @@ public class Window extends GameObjectExploder {
 	@Override
 	public Window makeCopy(Square square, Actor owner) {
 		Window window = new Window();
+		instances.add(window);
 		setAttributesForCopy(window, square, owner);
 		return window;
 	}

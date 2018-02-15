@@ -9,12 +9,13 @@ import com.marklynch.level.constructs.Crime.CrimeListener;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.TextUtils;
 import com.marklynch.utils.TextureUtils;
 
-import com.marklynch.utils.Color;
-
 public class WantedPoster extends Sign implements CrimeListener {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public ArrayList<Crime> crimes;
 	public Actor criminal;
@@ -28,6 +29,7 @@ public class WantedPoster extends Sign implements CrimeListener {
 
 	public WantedPoster makeCopy(Square square, String name, ArrayList<Crime> crimes, Actor owner) {
 		WantedPoster wantedPoster = new WantedPoster();
+		instances.add(wantedPoster);
 		super.setAttributesForCopy(wantedPoster, square, owner);
 		wantedPoster.crimes = crimes;
 		conversation = createConversation(wantedPoster.generateText());

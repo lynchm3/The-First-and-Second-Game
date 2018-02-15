@@ -62,6 +62,7 @@ public abstract class AIRoutine {
 	final String ACTIVITY_DESCRIPTION_LOOTING = "Looting!";
 	final String ACTIVITY_DESCRIPTION_SKINNING = "Skinning";
 	final String ACTIVITY_DESCRIPTION_SELLING_LOOT = "Selling loot";
+	final String ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT = "Buying equipment";
 	final String ACTIVITY_DESCRIPTION_FEEDING = "Feeding";
 	final String ACTIVITY_DESCRIPTION_SLEEPING = "Zzzzzz";
 
@@ -91,6 +92,8 @@ public abstract class AIRoutine {
 	public ArrayList<StructureSection> sectionBounds = new ArrayList<StructureSection>();
 	public ArrayList<StructureRoom> roomBounds = new ArrayList<StructureRoom>();
 	public ArrayList<Square> squareBounds = new ArrayList<Square>();
+
+	ArrayList<Integer> requiredEquipmentTemplateIds = new ArrayList<Integer>();
 
 	public AIRoutine(Actor actor) {
 		this.actor = actor;
@@ -1268,6 +1271,7 @@ public abstract class AIRoutine {
 
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, true, false, false,
 				false, false, 0, Trader.class);
+
 		if (target == null) {
 			return false;
 		}
@@ -1282,6 +1286,43 @@ public abstract class AIRoutine {
 			return AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
 		else
 			return actor.sellItemsMarkedToSell(target);
+	}
+
+	public boolean replenishEquipment() {
+
+		ArrayList<Integer> equipmentNeeded = new ArrayList<Integer>();
+		for (int requiredTemplateId : requiredEquipmentTemplateIds) {
+			if (!actor.inventory.containsObjectWithTemplateId(requiredTemplateId)) {
+				equipmentNeeded.add(requiredTemplateId);
+			}
+		}
+
+		if (equipmentNeeded.size() == 0) {
+			return false;
+		}
+
+		// find nearest shop keeper w/ pickaxe?
+		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
+				false, false, false, false, 0, false, Trader.class);
+
+		if (target == null) {
+			return true;
+		}
+
+		if (target.knownCriminals.contains(actor)) {
+			return true;
+		}
+
+		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT;
+
+		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2)
+			AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
+		else {
+
+			// actor.sellItemsMarkedToSell(target);
+		}
+
+		return true;
 	}
 
 	public boolean updateWantedPosterRoutine(WantedPoster wantedPoster) {

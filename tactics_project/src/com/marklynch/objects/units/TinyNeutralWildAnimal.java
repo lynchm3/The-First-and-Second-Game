@@ -11,6 +11,8 @@ import com.marklynch.objects.actions.ActionSquash;
 
 public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public TinyNeutralWildAnimal() {
 		super();
 	}
@@ -42,6 +44,7 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 	public TinyNeutralWildAnimal makeCopy(String name, Square square, Faction faction, GameObject bed,
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 		TinyNeutralWildAnimal actor = new TinyNeutralWildAnimal();
+		instances.add(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

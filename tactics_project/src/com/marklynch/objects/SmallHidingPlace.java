@@ -13,6 +13,8 @@ import com.marklynch.objects.units.Actor;
 
 public class SmallHidingPlace extends Searchable {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public ArrayList<Actor> actorsHidingHere = new ArrayList<Actor>();
 	Group group;
 
@@ -59,6 +61,7 @@ public class SmallHidingPlace extends Searchable {
 	@Override
 	public SmallHidingPlace makeCopy(Square square, Actor owner) {
 		SmallHidingPlace smallHidingPlace = new SmallHidingPlace();
+		instances.add(smallHidingPlace);
 		super.setAttributesForCopy(smallHidingPlace, square, owner);
 		return smallHidingPlace;
 	}

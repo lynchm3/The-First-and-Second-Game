@@ -1,5 +1,7 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
@@ -7,6 +9,8 @@ import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class Mirror extends GameObject {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public Texture imageTextureBack;
 	public Texture imageTextureFront;
@@ -290,6 +294,7 @@ public class Mirror extends GameObject {
 	@Override
 	public Mirror makeCopy(Square square, Actor owner) {
 		Mirror mirror = new Mirror();
+		instances.add(mirror);
 		super.setAttributesForCopy(mirror, square, owner);
 		mirror.imageTextureBack = this.imageTextureBack;
 		mirror.imageTextureFront = this.imageTextureFront;

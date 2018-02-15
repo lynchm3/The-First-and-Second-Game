@@ -1,5 +1,7 @@
 package com.marklynch.objects.tools;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.constructs.effect.Effect;
 import com.marklynch.level.constructs.effect.EffectWet;
@@ -13,6 +15,8 @@ import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
 
 public class ContainerForLiquids extends Tool {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public float volume;
 	public Liquid liquid;
 
@@ -25,6 +29,7 @@ public class ContainerForLiquids extends Tool {
 	@Override
 	public ContainerForLiquids makeCopy(Square square, Actor owner) {
 		ContainerForLiquids weapon = new ContainerForLiquids();
+		instances.add(weapon);
 		setAttributesForCopy(weapon, square, owner);
 		weapon.volume = volume;
 		if (weapon.liquid != null)

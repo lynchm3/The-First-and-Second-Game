@@ -1,5 +1,7 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
@@ -8,6 +10,8 @@ import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
 public class BrokenGlass extends Stampable {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	GlassShard[] glassShards;
 	int glassShardsCount;
@@ -20,6 +24,7 @@ public class BrokenGlass extends Stampable {
 	@Override
 	public BrokenGlass makeCopy(Square square, Actor owner) {
 		BrokenGlass brokenGlass = new BrokenGlass();
+		instances.add(brokenGlass);
 		super.setAttributesForCopy(brokenGlass, square, owner);
 		brokenGlass.glassShardsCount = 10;// (int) (1d + Math.random() * 20d);
 		brokenGlass.glassShards = new GlassShard[brokenGlass.glassShardsCount];

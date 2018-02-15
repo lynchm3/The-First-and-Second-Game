@@ -17,6 +17,8 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Pig extends Animal {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public StructureRoom room;
 	public Structure shop;
 	public Readable shopSign;
@@ -56,6 +58,7 @@ public class Pig extends Animal {
 	public Pig makeCopy(String name, Square square, Faction faction, GameObject bed, GameObject[] mustHaves,
 			GameObject[] mightHaves, Area area) {
 		Pig actor = new Pig();
+		instances.add(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

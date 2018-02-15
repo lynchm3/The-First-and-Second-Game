@@ -10,6 +10,8 @@ import com.marklynch.objects.units.Actor;
 
 public class HidingPlace extends Searchable {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public ArrayList<Actor> actorsHidingHere = new ArrayList<Actor>();
 
 	public HidingPlace() {
@@ -22,7 +24,6 @@ public class HidingPlace extends Searchable {
 		canContainOtherObjects = true;
 
 		persistsWhenCantBeSeen = true;
-
 
 	}
 
@@ -55,6 +56,7 @@ public class HidingPlace extends Searchable {
 	public HidingPlace makeCopy(Square square, Actor owner) {
 
 		HidingPlace hidingPlace = new HidingPlace();
+		instances.add(hidingPlace);
 		super.setAttributesForCopy(hidingPlace, square, owner);
 		return hidingPlace;
 

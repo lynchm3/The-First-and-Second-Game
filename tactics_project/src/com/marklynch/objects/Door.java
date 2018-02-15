@@ -1,10 +1,14 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 public class Door extends Openable {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public float soundDampeningWhenClosed;
 	public boolean blocksLineOfSightWhenClosed;
 	protected boolean shouldBeClosed;
@@ -16,7 +20,6 @@ public class Door extends Openable {
 		canBePickedUp = false;
 
 		fitsInInventory = false;
-
 
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
@@ -74,6 +77,7 @@ public class Door extends Openable {
 			Actor owner, Key... keys) {
 
 		Door door = new Door();
+		instances.add(door);
 
 		super.setAttributesForCopy(door, square, locked, owner, keys);
 

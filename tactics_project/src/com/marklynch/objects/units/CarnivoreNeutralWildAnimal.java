@@ -1,5 +1,7 @@
 package com.marklynch.objects.units;
 
+import java.util.ArrayList;
+
 import com.marklynch.ai.routines.AIRoutineForCarnivoreNeutralWildAnimal;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
@@ -7,6 +9,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
 public class CarnivoreNeutralWildAnimal extends WildAnimal {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public CarnivoreNeutralWildAnimal() {
 		super();
@@ -27,6 +31,7 @@ public class CarnivoreNeutralWildAnimal extends WildAnimal {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		CarnivoreNeutralWildAnimal actor = new CarnivoreNeutralWildAnimal();
+		instances.add(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

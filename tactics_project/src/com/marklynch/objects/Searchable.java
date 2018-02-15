@@ -8,6 +8,8 @@ import com.marklynch.objects.units.Actor;
 
 public class Searchable extends GameObject {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public Effect[] effectsFromInteracting;
 
 	public Searchable() {
@@ -31,6 +33,7 @@ public class Searchable extends GameObject {
 	@Override
 	public Searchable makeCopy(Square square, Actor owner) {
 		Searchable searchable = new Searchable();
+		instances.add(searchable);
 		super.setAttributesForCopy(searchable, square, owner);
 		searchable.effectsFromInteracting = effectsFromInteracting;
 		return searchable;

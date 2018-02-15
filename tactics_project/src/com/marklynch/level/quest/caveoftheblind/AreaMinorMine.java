@@ -54,7 +54,8 @@ public class AreaMinorMine {
 		Bed bed = Templates.BED.makeCopy(Game.level.squares[303][90], null);
 		Actor miner = Templates.MINER.makeCopy("Miner Dan", Game.level.squares[302][90], Level.factions.townsPeople,
 				bed, 39,
-				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.LANTERN.makeCopy(null, null) },
+				new GameObject[] {
+						/* Templates.PICKAXE.makeCopy(null, null), */ Templates.LANTERN.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
 
 	}

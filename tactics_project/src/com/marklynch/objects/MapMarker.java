@@ -15,6 +15,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class MapMarker extends GameObject {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public static Texture RED_MAP_MARKER_TEXTURE;
 	public static Texture TREASURE_MAP_MARKER_TEXTURE;
 	public static Texture SKULL_MAP_MARKER_TEXTURE;
@@ -101,6 +103,7 @@ public class MapMarker extends GameObject {
 	@Override
 	public MapMarker makeCopy(Square square, Actor owner) {
 		MapMarker mapMarker = new MapMarker();
+		instances.add(mapMarker);
 		super.setAttributesForCopy(mapMarker, square, owner);
 		mapMarker.baseName = "";
 		mapMarker.name = "Marker";

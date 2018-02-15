@@ -1,11 +1,15 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.Level;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
 
 public class Discoverable extends GameObject {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public boolean discovered = false;
 	public Texture preDiscoverTexture; // if null the object is invisible if not
@@ -53,6 +57,7 @@ public class Discoverable extends GameObject {
 
 	public Discoverable makeCopy(Square square, Actor owner, int level) {
 		Discoverable discoverable = new Discoverable();
+		instances.add(discoverable);
 		super.setAttributesForCopy(discoverable, square, owner);
 		discoverable.level = level;
 		discoverable.preDiscoverTexture = preDiscoverTexture;

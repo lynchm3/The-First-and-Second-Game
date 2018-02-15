@@ -1,9 +1,13 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 public class Sign extends Readable {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public Sign() {
 		super();
@@ -13,9 +17,7 @@ public class Sign extends Readable {
 		fitsInInventory = false;
 		canShareSquare = false;
 
-
 		persistsWhenCantBeSeen = true;
-
 
 	}
 
@@ -23,6 +25,7 @@ public class Sign extends Readable {
 	public Sign makeCopy(Square square, String name, Object[] conversationText, Actor owner) {
 
 		Sign readable = new Sign();
+		instances.add(readable);
 		super.setAttributesForCopy(readable, square, owner);
 		readable.name = name;
 		readable.conversation = readable.createConversation(conversationText);

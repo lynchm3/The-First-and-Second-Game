@@ -1,9 +1,13 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 
 public class RemoteDoor extends Openable {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 	public float soundDampeningWhenClosed;
 	public boolean blocksLineOfSightWhenClosed;
 
@@ -16,10 +20,8 @@ public class RemoteDoor extends Openable {
 
 		fitsInInventory = false;
 
-
 		blocksLineOfSight = true;
 		persistsWhenCantBeSeen = true;
-
 
 	}
 
@@ -69,6 +71,7 @@ public class RemoteDoor extends Openable {
 	public RemoteDoor makeCopy(String name, Square square, boolean locked, Key... keys) {
 
 		RemoteDoor door = new RemoteDoor();
+		instances.add(door);
 
 		super.setAttributesForCopy(door, square, locked, null, keys);
 		door.soundDampeningWhenClosed = soundDampening;

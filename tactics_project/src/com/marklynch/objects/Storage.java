@@ -1,11 +1,15 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
 
 public class Storage extends Openable {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public Texture chestOpenTexture;
 	public Texture chestClosedTexture;
@@ -18,9 +22,6 @@ public class Storage extends Openable {
 		fitsInInventory = false;
 		canShareSquare = false;
 		canContainOtherObjects = true;
-
-
-
 
 	}
 
@@ -102,6 +103,7 @@ public class Storage extends Openable {
 	public Storage makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
 
 		Storage storage = new Storage();
+		instances.add(storage);
 		super.setAttributesForCopy(storage, square, locked, owner, keys);
 
 		storage.baseName = baseName;

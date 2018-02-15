@@ -2,14 +2,17 @@ package com.marklynch.objects;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
 
-import com.marklynch.utils.Texture;
-
 public class Bed extends GameObject {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	String imagePathCovers;
 	public Texture imageTextureCovers;
@@ -22,10 +25,6 @@ public class Bed extends GameObject {
 
 		fitsInInventory = false;
 
-
-
-
-
 	}
 
 	public void loadCoverImage() {
@@ -35,6 +34,7 @@ public class Bed extends GameObject {
 	@Override
 	public Bed makeCopy(Square square, Actor owner) {
 		Bed bed = new Bed();
+		instances.add(bed);
 		super.setAttributesForCopy(bed, square, owner);
 		bed.imageTextureCovers = imageTextureCovers;
 		return bed;

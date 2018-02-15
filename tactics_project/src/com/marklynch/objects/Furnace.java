@@ -1,11 +1,14 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
-
 import com.marklynch.utils.Texture;
 
 public class Furnace extends Openable {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	Texture chestOpenTexture;
 	Texture chestClosedTexture;
@@ -69,6 +72,7 @@ public class Furnace extends Openable {
 
 	public Furnace makeCopy(String name, Square square, boolean locked, Actor owner, Key... keys) {
 		Furnace furnace = new Furnace();
+		instances.add(furnace);
 		super.setAttributesForCopy(furnace, square, locked, owner, keys);
 		if (locked)
 			this.name = baseName + " (locked)";

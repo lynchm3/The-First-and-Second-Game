@@ -18,6 +18,8 @@ import com.marklynch.utils.TextureUtils;
 
 public class RockGolem extends Monster {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public StructureRoom roomLivingIn;
 	public boolean awake = false;
 	public Texture sleepingTexture;
@@ -159,6 +161,7 @@ public class RockGolem extends Monster {
 			GameObject[] mustHaves, GameObject[] mightHaves) {
 
 		RockGolem actor = new RockGolem();
+		instances.add(actor);
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;
 		this.roomLivingIn = roomLivingIn;

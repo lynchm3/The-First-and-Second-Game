@@ -1,5 +1,7 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.constructs.requirementtomeet.RequirementToMeet;
@@ -7,6 +9,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 public class Switch extends GameObject {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public String actionName;
 	public String actionVerb;
@@ -25,8 +29,6 @@ public class Switch extends GameObject {
 		canBePickedUp = false;
 
 		fitsInInventory = false;
-
-
 
 		persistsWhenCantBeSeen = true;
 
@@ -56,6 +58,7 @@ public class Switch extends GameObject {
 			RequirementToMeet[] requirementsToMeet) {
 
 		Switch zwitch = new Switch();
+		instances.add(zwitch);
 		super.setAttributesForCopy(zwitch, square, owner);
 		zwitch.actionName = actionName;
 		zwitch.actionVerb = actionVerb;

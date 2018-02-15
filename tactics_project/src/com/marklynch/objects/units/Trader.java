@@ -20,6 +20,8 @@ import com.marklynch.objects.weapons.Weapon;
 
 public class Trader extends Human implements Comparator<GameObject> {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public StructureRoom room;
 	public Structure shop;
 	public Sign shopSign;
@@ -91,6 +93,7 @@ public class Trader extends Human implements Comparator<GameObject> {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		Trader actor = new Trader();
+		instances.add(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

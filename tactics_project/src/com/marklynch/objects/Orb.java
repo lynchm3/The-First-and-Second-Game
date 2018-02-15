@@ -1,19 +1,17 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 public class Orb extends GameObject {
 
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
+
 	public Orb() {
 		super();
-
-
-
-
-
-
 
 		attackable = false;
 
@@ -26,6 +24,7 @@ public class Orb extends GameObject {
 
 	public Orb makeCopy(Square square, Actor owner, int value) {
 		Orb orb = new Orb();
+		instances.add(orb);
 
 		super.setAttributesForCopy(orb, square, owner);
 		orb.value = value;

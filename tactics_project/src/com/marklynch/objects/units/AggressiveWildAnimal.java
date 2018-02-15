@@ -1,5 +1,7 @@
 package com.marklynch.objects.units;
 
+import java.util.ArrayList;
+
 import com.marklynch.ai.routines.AIRoutineForWildAnimal;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
@@ -7,6 +9,8 @@ import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 
 public class AggressiveWildAnimal extends WildAnimal {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	public AggressiveWildAnimal() {
 		super();
@@ -28,6 +32,7 @@ public class AggressiveWildAnimal extends WildAnimal {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 
 		AggressiveWildAnimal actor = new AggressiveWildAnimal();
+		instances.add(actor);
 		actor.name = name;
 		actor.squareGameObjectIsOn = square;
 		actor.faction = faction;

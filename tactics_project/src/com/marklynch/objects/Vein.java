@@ -1,9 +1,13 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 public class Vein extends Wall {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	// public boolean fullWall;
 	// public boolean fullRightWall;
@@ -264,6 +268,7 @@ public class Vein extends Wall {
 	@Override
 	public Vein makeCopy(Square square, Actor owner) {
 		Vein vein = new Vein();
+		instances.add(vein);
 		super.setAttributesForCopy(vein, square, owner);
 		if (vein.squareGameObjectIsOn != null) {
 			vein.drawX1 = (int) (vein.squareGameObjectIsOn.xInGridPixels + vein.drawOffsetRatioX);

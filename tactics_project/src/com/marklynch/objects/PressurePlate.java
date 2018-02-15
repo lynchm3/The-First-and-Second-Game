@@ -1,11 +1,15 @@
 package com.marklynch.objects;
 
+import java.util.ArrayList;
+
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AILine;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
 
 public class PressurePlate extends Switch {
+
+	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
 	boolean pressed = false;
 	int targetWeight = 10;
@@ -56,6 +60,7 @@ public class PressurePlate extends Switch {
 			int targetWeight) {
 
 		PressurePlate pressurePlate = new PressurePlate();
+		instances.add(pressurePlate);
 		super.setAttributesForCopy(pressurePlate, square, owner);
 		pressurePlate.actionName = actionName;
 		pressurePlate.actionVerb = actionVerb;
