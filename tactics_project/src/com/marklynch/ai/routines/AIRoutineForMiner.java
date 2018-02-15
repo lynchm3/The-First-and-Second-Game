@@ -134,7 +134,6 @@ public class AIRoutineForMiner extends AIRoutine {
 			// if (target == null)
 			target = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(100, false, false, true, false, false, true, 0,
 					Vein.class);
-			System.out.println("target = " + target);
 			if (target == null) {
 				// AIRoutineUtils.moveTowardsSquareToBeAdjacent(actor.area.centreSuqare);
 			} else {

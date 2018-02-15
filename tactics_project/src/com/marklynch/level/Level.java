@@ -36,6 +36,7 @@ import com.marklynch.level.constructs.power.PowerHealTouch;
 import com.marklynch.level.constructs.power.PowerInferno;
 import com.marklynch.level.constructs.power.PowerPoisonBlast;
 import com.marklynch.level.constructs.power.PowerSuperPeek;
+import com.marklynch.level.constructs.power.PowerTimePlusSixHours;
 import com.marklynch.level.constructs.power.PowerUnlock;
 import com.marklynch.level.conversation.Conversation;
 import com.marklynch.level.quest.Quest;
@@ -428,6 +429,21 @@ public class Level {
 		});
 		bleedButton.enabled = true;
 		buttons.add(bleedButton);
+
+		Button timePlusSixButton = new LevelButton(440f, 120f, 100f, 30f, "undo_button.png", "undo_button_disabled.png",
+				"Time +6hrs", false, false, Color.BLACK, Color.WHITE, "DEV - Move time forward 6 hrs");
+		timePlusSixButton.setClickListener(new ClickListener() {
+			@Override
+			public void click() {
+				pausePlayer();
+				new ActionUsePower(Game.level.player, Game.level.player.squareGameObjectIsOn,
+						new PowerTimePlusSixHours(Game.level.player)).perform();
+				Game.level.popupMenuObjects.clear();
+				Game.level.popupMenuActions.clear();
+			}
+		});
+		timePlusSixButton.enabled = true;
+		buttons.add(timePlusSixButton);
 
 		showHideLogButton = new LevelButton(activityLogger.width, 64f, 70f, 30f, "undo_button.png",
 				"undo_button_disabled.png", " LOG [L] <", true, true, Color.BLACK, Color.WHITE,
@@ -1786,6 +1802,52 @@ public class Level {
 		return null;
 	}
 
+	public void changeTime(int s) {
+
+		// int seconds = s % 60;
+		// int m = seconds / 60;
+		// int minutes = m % 60;
+		// int hours = m / 60;
+
+		second += s;
+		// Time
+		while (second >= 60) {
+			second = second - 60;
+			minute++;
+			while (minute >= 60) {
+				minute = minute - 60;
+				hour++;
+				if (hour == 24) {
+					hour = 0;
+					day++;
+				}
+			}
+		}
+
+		if (second < 10) {
+			secondString = "0" + second;
+		} else {
+			secondString = "" + second;
+		}
+
+		if (minute < 10) {
+			minuteString = "0" + minute;
+		} else {
+			minuteString = "" + minute;
+		}
+
+		if (hour < 10) {
+			hourString = "0" + hour;
+		} else {
+			hourString = "" + hour;
+		}
+
+		timeString = "Day " + dayString + ", " + hourString + ":" + minuteString;// +
+																					// ":"
+																					// +
+
+	}
+
 	public void endTurn() {
 		addRemoveObjectToFromGround();
 		// this.logOnScreen(new ActivityLog(new Object[] { currentFactionMoving,
@@ -1794,42 +1856,7 @@ public class Level {
 		// Pre end turn
 		if (currentFactionMovingIndex == 0) {
 
-			// Time
-			second += 20;
-			if (second >= 60) {
-				second = second - 60;
-				minute++;
-				if (minute >= 60) {
-					minute = minute - 60;
-					hour++;
-					if (hour == 24) {
-						hour = 0;
-						day++;
-					}
-				}
-			}
-
-			if (second < 10) {
-				secondString = "0" + second;
-			} else {
-				secondString = "" + second;
-			}
-
-			if (minute < 10) {
-				minuteString = "0" + minute;
-			} else {
-				minuteString = "" + minute;
-			}
-
-			if (hour < 10) {
-				hourString = "0" + hour;
-			} else {
-				hourString = "" + hour;
-			}
-
-			timeString = "Day " + dayString + ", " + hourString + ":" + minuteString;// +
-																						// ":"
-																						// +
+			changeTime(20);
 			// secondString;
 
 			// If hiding in a place, add it's effects
