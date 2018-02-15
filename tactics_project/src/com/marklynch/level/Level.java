@@ -1814,14 +1814,17 @@ public class Level {
 		while (second >= 60) {
 			second = second - 60;
 			minute++;
-			while (minute >= 60) {
-				minute = minute - 60;
-				hour++;
-				if (hour == 24) {
-					hour = 0;
-					day++;
-				}
-			}
+		}
+
+		while (minute >= 60) {
+			minute = minute - 60;
+			hour++;
+
+		}
+
+		while (hour >= 24) {
+			hour = hour - 24;
+			day++;
 		}
 
 		if (second < 10) {
@@ -1841,6 +1844,8 @@ public class Level {
 		} else {
 			hourString = "" + hour;
 		}
+
+		dayString = "" + day;
 
 		timeString = "Day " + dayString + ", " + hourString + ":" + minuteString;// +
 																					// ":"
