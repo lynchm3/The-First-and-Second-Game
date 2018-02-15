@@ -128,6 +128,7 @@ public class Wall extends GameObject {
 
 		if (this.remainingHealth <= 0)
 			return;
+		super.draw1();
 
 		if (!Game.fullVisiblity) {
 			if (!this.squareGameObjectIsOn.seenByPlayer)

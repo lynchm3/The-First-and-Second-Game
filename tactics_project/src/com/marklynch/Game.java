@@ -39,6 +39,7 @@ public class Game {
 	// DEBUG
 	public static boolean fullVisiblity = false;
 	public static boolean redHighlightOnRestrictedSquares = false;
+
 	public static boolean showAILines = false;
 	public static boolean showTriggerLines = false;
 	public static boolean highlightPath = false;;
@@ -46,8 +47,12 @@ public class Game {
 	// PLAYER START POSITION
 
 	// Shop
-	public static int playerStartPosX = 3;
-	public static int playerStartPosY = 3;
+	// public static int playerStartPosX = 3;
+	// public static int playerStartPosY = 3;
+
+	// minor mine
+	public static int playerStartPosX = 292;
+	public static int playerStartPosY = 86;
 
 	// Dining room
 	// public static int playerStartPosX = 93;

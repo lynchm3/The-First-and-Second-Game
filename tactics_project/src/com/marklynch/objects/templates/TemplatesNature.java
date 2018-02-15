@@ -275,7 +275,7 @@ public class TemplatesNature {
 
 		Templates.VEIN = new Vein();
 		Templates.VEIN.name = "Vein";
-		Templates.VEIN.imageTexturePath = "wall.png";
+		Templates.VEIN.imageTexturePath = "vein.png";
 		Templates.VEIN.totalHealth = Templates.VEIN.remainingHealth = 1000;
 		Templates.VEIN.widthRatio = 1f;
 		Templates.VEIN.heightRatio = 1f;

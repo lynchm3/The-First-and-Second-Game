@@ -787,6 +787,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return action;
 		}
 
+		if (this instanceof Vein) {
+			Action action = new ActionMine(performer, this);
+			return action;
+		}
+
 		if (this instanceof Stump || this instanceof Tree) {
 			return new ActionChop(performer, this);
 		}
@@ -810,6 +815,11 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		if (diggable) {
 			return new ActionDig(performer, this);
+		}
+
+		if (this instanceof Vein) {
+			Action action = new ActionMine(performer, this);
+			return action;
 		}
 
 		if (this instanceof Stump || this instanceof Tree) {
