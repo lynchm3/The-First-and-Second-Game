@@ -285,6 +285,8 @@ public class Actor extends GameObject {
 		}
 	}
 
+	public final static int aiMaxPathSize = 100;
+
 	public AIPath getPathTo(Square target) {
 
 		// if (this instanceof Hunter && this == this.group.getLeader()) {
@@ -304,7 +306,7 @@ public class Actor extends GameObject {
 		// }
 
 		// ASTARSEACH.FINDPATH
-		int maxPathSize = 100;
+		int maxPathSize = aiMaxPathSize;
 		if (this instanceof Player) {
 			maxPathSize = 1000;
 		}

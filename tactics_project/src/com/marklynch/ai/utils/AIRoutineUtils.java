@@ -165,7 +165,8 @@ public class AIRoutineUtils {
 					if (Game.level.activeActor.name.contains("Thief")) {
 						System.out.println("path = " + path);
 					}
-					if (path != null && path.travelCost < bestPathTravelCost) {
+					if (path != null && path.travelCost < bestPathTravelCost
+							&& (path.complete || path.squares.size() >= Actor.aiMaxPathSize)) {
 						bestObject = object;
 						bestPath = path;
 						bestPathTravelCost = path.travelCost;
