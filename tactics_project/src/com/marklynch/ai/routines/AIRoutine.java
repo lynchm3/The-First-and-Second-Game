@@ -30,6 +30,7 @@ import com.marklynch.objects.SmallHidingPlace;
 import com.marklynch.objects.ThoughtBubbles;
 import com.marklynch.objects.WantedPoster;
 import com.marklynch.objects.actions.Action;
+import com.marklynch.objects.actions.ActionBuyItems;
 import com.marklynch.objects.actions.ActionClose;
 import com.marklynch.objects.actions.ActionDropItems;
 import com.marklynch.objects.actions.ActionGiveItems;
@@ -1331,13 +1332,24 @@ public abstract class AIRoutine {
 		this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
 		this.actor.thoughtBubbleImageTextureAction = Templates.GOLD.imageTexture;
 
-		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2)
+		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2) {
 			AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
-		// AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
-		else {
-
-			// actor.sellItemsMarkedToSell(target);
+			// AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
+		} else {
+			for (GameObject tradersGameObject : target.inventory.gameObjects) {
+				for (Integer requiredTemplateId : (ArrayList<Integer>) equipmentNeeded.clone()) {
+					if (tradersGameObject.toSell == true && tradersGameObject.templateId == requiredTemplateId) {
+						new ActionBuyItems(actor, target, tradersGameObject).perform();
+						equipmentNeeded.remove(requiredTemplateId);
+						continue;
+					}
+				}
+				if (equipmentNeeded.size() == 0)
+					return true;
+			}
 		}
+
+		// Fluff the remaining ones :P but... how do i make instances? eek
 
 		return true;
 	}

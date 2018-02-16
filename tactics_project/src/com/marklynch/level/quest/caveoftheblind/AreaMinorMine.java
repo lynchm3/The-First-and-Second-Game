@@ -17,6 +17,7 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.objects.units.Trader;
 
 public class AreaMinorMine {
 
@@ -38,8 +39,9 @@ public class AreaMinorMine {
 		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, new ArrayList<Actor>(),
 				new RoomPart(281, 77, 306, 91), new RoomPart(292, 92, 306, 96)));
 
-		rooms.add(new StructureRoom("Minor Mine Shop", 281, 93, false, new ArrayList<Actor>(),
-				new RoomPart(281, 93, 290, 96)));
+		StructureRoom shopRoom = new StructureRoom("Minor Mine Shop", 281, 93, false, new ArrayList<Actor>(),
+				new RoomPart(281, 93, 290, 96));
+		rooms.add(shopRoom);
 
 		// entry to mine
 		squaresToRemove.add(Game.level.squares[280][87]);
@@ -61,8 +63,22 @@ public class AreaMinorMine {
 		Bed bed = Templates.BED.makeCopy(Game.level.squares[303][90], null);
 		Actor miner = Templates.MINER.makeCopy("Miner Dan", Game.level.squares[302][90], Level.factions.townsPeople,
 				bed, 39,
-				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.LANTERN.makeCopy(null, null) },
+				new GameObject[] {
+						/* Templates.PICKAXE.makeCopy(null, null), */Templates.LANTERN.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
+
+		// 281, 93
+		// Trader Joe
+		Trader trader = Templates.TRADER.makeCopy("Trader Jake", Game.level.squares[281][93],
+				Game.level.factions.townsPeople, null, 10000,
+				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
+						Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
+						Templates.PICKAXE.makeCopy(null, null) },
+				new GameObject[] {}, null);
+
+		trader.shopRoom = shopRoom;
+		trader.shopSign = null;
+		trader.wantedPoster = null;
 
 	}
 

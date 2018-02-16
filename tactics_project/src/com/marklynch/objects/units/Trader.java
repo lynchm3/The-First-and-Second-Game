@@ -43,6 +43,9 @@ public class Trader extends Human implements Comparator<GameObject> {
 
 	public Object[] getTextForSign() {
 
+		if (shopSign == null)
+			return null;
+
 		ArrayList<GameObject> temp = (ArrayList<GameObject>) this.inventory.getGameObjects().clone();
 		temp.remove(equipped);
 		temp.remove(broom);
