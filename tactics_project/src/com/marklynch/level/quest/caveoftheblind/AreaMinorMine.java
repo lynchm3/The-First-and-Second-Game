@@ -36,9 +36,16 @@ public class AreaMinorMine {
 		mineSections.add(new StructureSection("Minor Mine", 280, 76, 307, 97, false));
 
 		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, new ArrayList<Actor>(),
-				new RoomPart(281, 77, 306, 96)));
+				new RoomPart(281, 77, 306, 91), new RoomPart(292, 92, 306, 96)));
 
+		rooms.add(new StructureRoom("Minor Mine Shop", 281, 93, false, new ArrayList<Actor>(),
+				new RoomPart(281, 93, 290, 96)));
+
+		// entry to mine
 		squaresToRemove.add(Game.level.squares[280][87]);
+
+		// entry to mine shop
+		squaresToRemove.add(Game.level.squares[285][92]);
 
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[284][91], null));
 		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[299][79], null));

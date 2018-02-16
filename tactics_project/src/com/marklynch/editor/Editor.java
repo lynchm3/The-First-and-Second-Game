@@ -519,8 +519,7 @@ public class Editor {
 		trader.inventory.add(Templates.HUNTING_BOW.makeCopy(null, null));
 		Templates.SHOP_COUNTER.makeCopy(Game.level.squares[7][1], null);
 
-		trader.shop = joesShop;
-		trader.room = shopAtriums.get(0);
+		trader.shopRoom = shopAtriums.get(0);
 		trader.shopSign = joesShopSign;
 		trader.wantedPoster = wantedPoster;
 		// ArrayList<Square> doorLocations2 = new ArrayList<Square>();

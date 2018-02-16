@@ -90,12 +90,12 @@ public class AIRoutineForTrader extends AIRoutine {
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 					if (trader.squareGameObjectIsOn == targetSquare || trader.getPathTo(targetSquare) == null)
 						targetSquare = null;
-				} else if (trader.squareGameObjectIsOn.structureSquareIsIn != trader.shop) {
-					targetSquare = AIRoutineUtils.getRandomSquareInRoom(trader.room);
+				} else if (trader.squareGameObjectIsOn.structureRoomSquareIsIn != trader.shopRoom) {
+					targetSquare = AIRoutineUtils.getRandomSquareInRoom(trader.shopRoom);
 					AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 				} else {
 					if (Math.random() < 0.05) {
-						targetSquare = AIRoutineUtils.getRandomSquareInRoom(trader.room);
+						targetSquare = AIRoutineUtils.getRandomSquareInRoom(trader.shopRoom);
 						AIRoutineUtils.moveTowardsTargetSquare(targetSquare);
 					}
 				}

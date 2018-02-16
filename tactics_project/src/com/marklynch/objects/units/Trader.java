@@ -8,7 +8,6 @@ import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutineForTrader;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.area.Area;
-import com.marklynch.level.constructs.bounds.structure.Structure;
 import com.marklynch.level.constructs.bounds.structure.StructureRoom;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -22,8 +21,8 @@ public class Trader extends Human implements Comparator<GameObject> {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
-	public StructureRoom room;
-	public Structure shop;
+	public StructureRoom shopRoom;
+	// public StructureRoom shop;
 	public Sign shopSign;
 	public WantedPoster wantedPoster;
 	public Weapon broom;
@@ -39,7 +38,7 @@ public class Trader extends Human implements Comparator<GameObject> {
 	}
 
 	public boolean isPlayerInTheShop() {
-		return Game.level.player.squareGameObjectIsOn.structureSquareIsIn == shop;
+		return Game.level.player.squareGameObjectIsOn.structureRoomSquareIsIn == shopRoom;
 	}
 
 	public Object[] getTextForSign() {
@@ -55,16 +54,16 @@ public class Trader extends Human implements Comparator<GameObject> {
 
 		if (temp.size() == 0) {
 			if (shopSign.getConversation().openingConversationPart.text.length != 1) {
-				return new Object[] { this.shop };
+				return new Object[] { this.shopRoom };
 			} else {
 				return null;
 			}
 
 		} else if (temp.size() == 1) {
 			if (shopSign.getConversation().openingConversationPart.text.length != 3) {
-				return new Object[] { this.shop, " - FEATURED INVENTORY - ", temp.get(0) };
+				return new Object[] { this.shopRoom, " - FEATURED INVENTORY - ", temp.get(0) };
 			} else if (shopSign.getConversation().openingConversationPart.text[2] != temp.get(0)) {
-				return new Object[] { this.shop, " - FEATURED INVENTORY - ", temp.get(0) };
+				return new Object[] { this.shopRoom, " - FEATURED INVENTORY - ", temp.get(0) };
 			} else {
 				return null;
 			}
@@ -72,10 +71,10 @@ public class Trader extends Human implements Comparator<GameObject> {
 		} else {
 			// shopSign.getConversation() = null
 			if (shopSign.getConversation().openingConversationPart.text.length != 5) {
-				return new Object[] { this.shop, " - FEATURED INVENTORY - ", temp.get(0), " - ", temp.get(1) };
+				return new Object[] { this.shopRoom, " - FEATURED INVENTORY - ", temp.get(0), " - ", temp.get(1) };
 			} else if (shopSign.getConversation().openingConversationPart.text[2] != temp.get(0)
 					|| shopSign.getConversation().openingConversationPart.text[4] != temp.get(1)) {
-				return new Object[] { this.shop, " - FEATURED INVENTORY - ", temp.get(0), " - ", temp.get(1) };
+				return new Object[] { this.shopRoom, " - FEATURED INVENTORY - ", temp.get(0), " - ", temp.get(1) };
 			} else {
 				return null;
 			}
