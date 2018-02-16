@@ -1276,7 +1276,7 @@ public abstract class AIRoutine {
 
 	public boolean sellItems() {
 
-		if (actor.inventory.itemsToSellCount <= 0)
+		if (actor.inventory.itemsToSellCount < 10)
 			return false;
 
 		Trader target = (Trader) AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(Integer.MAX_VALUE, false, true,
