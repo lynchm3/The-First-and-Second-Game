@@ -1328,8 +1328,6 @@ public abstract class AIRoutine {
 			return true;
 		}
 
-		System.out.println("replenishEquipment - c");
-
 		this.actor.activityDescription = ACTIVITY_DESCRIPTION_BUYING_EQUIPMENT;
 		this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
 		this.actor.thoughtBubbleImageTextureAction = Templates.GOLD.imageTexture;
@@ -1349,23 +1347,23 @@ public abstract class AIRoutine {
 				if (equipmentNeeded.size() == 0)
 					return true;
 			}
-		}
 
-		// Fluff the remaining ones :P but... how do i make instances? eek
-		for (Integer requiredTemplateId : equipmentNeeded) {
-			GameObject cheatGameObject = null;
-			if (requiredTemplateId == Templates.PICKAXE.templateId) {
-				cheatGameObject = Templates.PICKAXE.makeCopy(null, null);
+			// Fluff the remaining ones :P but... how do i make instances? eek
+			for (Integer requiredTemplateId : equipmentNeeded) {
+				GameObject cheatGameObject = null;
+				if (requiredTemplateId == Templates.PICKAXE.templateId) {
+					cheatGameObject = Templates.PICKAXE.makeCopy(null, null);
+				}
+
+				target.inventory.add(cheatGameObject);
+
+				if (actor.getCarriedGoldValue() < cheatGameObject.value) {
+					actor.inventory.add(Templates.GOLD.makeCopy(null, null, cheatGameObject.value));
+				}
+
+				new ActionBuyItems(actor, target, cheatGameObject).perform();
+
 			}
-
-			target.inventory.add(cheatGameObject);
-
-			if (actor.getCarriedGoldValue() < cheatGameObject.value) {
-				actor.inventory.add(Templates.GOLD.makeCopy(null, null, cheatGameObject.value));
-			}
-
-			new ActionBuyItems(actor, target, cheatGameObject).perform();
-
 		}
 
 		return true;

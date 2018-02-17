@@ -211,8 +211,9 @@ public class Actor extends GameObject {
 			this.faction.actors.add(this);
 		}
 
-		if (gold > 0)
-			inventory.add(Templates.GOLD.makeCopy(null, this, gold));
+		if (gold <= 0)
+			gold = 1;
+		inventory.add(Templates.GOLD.makeCopy(null, this, gold));
 
 		this.lastSquare = this.squareGameObjectIsOn;
 

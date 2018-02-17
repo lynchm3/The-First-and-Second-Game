@@ -146,6 +146,10 @@ public class AIRoutineUtils {
 					mustContainObjects, mustBeUnowned, ignoreQuestObjects, minimumValue, types);
 		}
 
+		// sortbystraightlinedistance
+
+		objects.sort(AIRoutineUtils.sortByStraightLineDistance);
+
 		for (GameObject object : objects) {
 			int straightLineDistance = Game.level.activeActor.straightLineDistanceTo(object.squareGameObjectIsOn);
 			if (straightLineDistance <= maxDistance) {
@@ -153,8 +157,24 @@ public class AIRoutineUtils {
 				if (passesChecks(object, null, fitsInInventory, mustContainObjects, mustBeUnowned, ignoreQuestObjects,
 						minimumValue)) {
 					AIPath path = Game.level.activeActor.getPathTo(object.squareGameObjectIsOn);
-					if (path != null && path.travelCost < bestPathTravelCost
-							&& (path.complete || straightLineDistance > 20)) {
+
+					if (path != null && path.complete) {
+						tempPath = path;
+						return object;
+					}
+
+					if (path != null && path.travelCost < bestPathTravelCost && straightLineDistance > 20) {
+
+						// if (Game.level.activeActor.name.contains("Miner")) {
+						// System.out.println("new best Object = " + object);
+						// System.out.println("old best Object = " +
+						// bestObject);
+						// System.out.println("new best travelCost = " +
+						// path.travelCost);
+						// System.out.println("old best travelCost = " +
+						// bestPathTravelCost);
+						// }
+
 						bestObject = object;
 						bestPath = path;
 						bestPathTravelCost = path.travelCost;
@@ -176,6 +196,11 @@ public class AIRoutineUtils {
 	public static GameObject getNearestForPurposeOfBeingAdjacent(float maxDistance, boolean fitsInInventory,
 			boolean checkActors, boolean checkInanimateObjects, boolean mustContainObjects, boolean mustBeUnowned,
 			boolean ignoreQuestObjects, int minimumValue, Class[] classes) {
+
+		// sortbystraightlinedistance
+		// like... it's going through ALL gameobjects
+		// why not go thru the square and get items on the sqrs?
+		// wtf
 
 		if (maxDistance > Game.level.width + Game.level.height) {
 			maxDistance = Game.level.width + Game.level.height;
@@ -1082,6 +1107,18 @@ public class AIRoutineUtils {
 				travelCostB = pathB.travelCost;
 
 			return travelCostA - travelCostB;
+		}
+	};
+
+	public static Comparator<GameObject> sortByStraightLineDistance = new Comparator<GameObject>() {
+
+		@Override
+		public int compare(GameObject a, GameObject b) {
+
+			int distanceA = Game.level.activeActor.straightLineDistanceTo(a.squareGameObjectIsOn);
+			int distanceB = Game.level.activeActor.straightLineDistanceTo(a.squareGameObjectIsOn);
+
+			return distanceA - distanceB;
 		}
 	};
 
