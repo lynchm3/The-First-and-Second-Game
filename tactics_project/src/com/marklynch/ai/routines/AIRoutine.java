@@ -1295,7 +1295,7 @@ public abstract class AIRoutine {
 		this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
 		this.actor.thoughtBubbleImageTextureAction = Templates.GOLD.imageTexture;
 
-		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2) {
+		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2 || !actor.canSeeGameObject(target)) {
 			AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 			return true;
 			// return
@@ -1332,7 +1332,7 @@ public abstract class AIRoutine {
 		this.actor.thoughtBubbleImageTextureObject = target.imageTexture;
 		this.actor.thoughtBubbleImageTextureAction = Templates.GOLD.imageTexture;
 
-		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2) {
+		if (actor.straightLineDistanceTo(target.squareGameObjectIsOn) > 2 || !actor.canSeeGameObject(target)) {
 			AIRoutineUtils.moveTowards(AIRoutineUtils.tempPath);
 			// AIRoutineUtils.moveTowardsSquareToBeAdjacent(target.squareGameObjectIsOn);
 		} else {
