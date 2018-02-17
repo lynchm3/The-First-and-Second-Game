@@ -11,9 +11,8 @@ import com.marklynch.objects.actions.ActionSpot;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
-
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class Structure {
 
@@ -104,7 +103,8 @@ public class Structure {
 					if (!floorSquares.contains(Game.level.squares[i][j])
 							&& !Game.level.squares[i][j].inventory.contains(Wall.class)) {
 
-						wallsInCave.add(wallTemplate.makeCopy(Game.level.squares[i][j], this.owner));
+						wallsInCave.add(
+								wallTemplate.makeCopy(Game.level.squares[i][j], this.owner));
 						wallSquares.add(Game.level.squares[i][j]);
 					}
 					if (!squaresToRemove.contains(Game.level.squares[i][j])) {

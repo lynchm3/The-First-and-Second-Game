@@ -4,9 +4,8 @@ import com.marklynch.Game;
 import com.marklynch.level.constructs.Crime;
 import com.marklynch.level.constructs.Sound;
 import com.marklynch.level.constructs.animation.AnimationTake;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
-import com.marklynch.objects.templates.Templates;
+import com.marklynch.objects.Vein;
 import com.marklynch.objects.tools.Pickaxe;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.ActivityLog;
@@ -18,10 +17,10 @@ public class ActionMine extends Action {
 	public static final String ACTION_NAME_NEED_PICKAXE = ACTION_NAME + " (need pickaxe)";
 
 	Actor performer;
-	GameObject target;
+	Vein target;
 
 	// Default for hostiles
-	public ActionMine(Actor attacker, GameObject vein) {
+	public ActionMine(Actor attacker, Vein vein) {
 		super(ACTION_NAME, "action_mine.png");
 		this.performer = attacker;
 		this.target = vein;
@@ -43,31 +42,40 @@ public class ActionMine extends Action {
 
 		Pickaxe pickaxe = (Pickaxe) performer.inventory.getGameObjectOfClass(Pickaxe.class);
 
-		float damage = target.totalHealth / 4f;
-		target.changeHealth(-damage, null, null);
-		performer.distanceMovedThisTurn = performer.travelDistance;
-		performer.hasAttackedThisTurn = true;
+		if (Game.level.shouldLog(target, performer))
+			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
 
+		if (!target.infinite) {
+			float damage = target.totalHealth / 4f;
+			target.changeHealth(-damage, null, null);
+			performer.distanceMovedThisTurn = performer.travelDistance;
+			performer.hasAttackedThisTurn = true;
+		}
+
+		Junk ore = null;
 		Actor oreOwner = performer;
 		if (target.owner != null)
 			oreOwner = target.owner;
 
-		Junk ore = Templates.ORE.makeCopy(target.squareGameObjectIsOn, oreOwner);
+		if (Math.random() < target.dropChance) {
+			ore = target.oreTemplate.makeCopy(target.squareGameObjectIsOn, oreOwner);
 
-		if (Game.level.openInventories.size() > 0) {
-		} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-			performer.secondaryAnimations.add(new AnimationTake(ore, performer, 0, 0, 1f));
+			if (Game.level.openInventories.size() > 0) {
+			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
+				performer.secondaryAnimations.add(new AnimationTake(ore, performer, 0, 0, 1f));
 
+			}
+			performer.inventory.add(ore);
+
+			if (Game.level.shouldLog(target, performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
+		} else {
+
+			if (Game.level.shouldLog(target, performer))
+				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received no ore" }));
 		}
-		performer.inventory.add(ore);
 
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " mined ", target, " with ", pickaxe }));
-
-		if (Game.level.shouldLog(target, performer))
-			Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " received ", ore }));
-
-		if (target.checkIfDestroyed(performer, this)) {
+		if (!target.infinite && target.checkIfDestroyed(performer, this)) {
 
 			if (Game.level.shouldLog(target, performer))
 				Game.level.logOnScreen(new ActivityLog(new Object[] { performer, " depleted ", target }));
@@ -86,6 +94,7 @@ public class ActionMine extends Action {
 			sound.play();
 
 		if (!legal) {
+
 			Crime crime = new Crime(this, this.performer, this.target.owner, Crime.TYPE.CRIME_THEFT, ore);
 			this.performer.crimesPerformedThisTurn.add(crime);
 			this.performer.crimesPerformedInLifetime.add(crime);

@@ -14,6 +14,7 @@ import com.marklynch.level.constructs.bounds.structure.StructureSection;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Door;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Vein;
 import com.marklynch.objects.actions.ActionAttack;
 import com.marklynch.objects.actions.ActionEatItems;
 import com.marklynch.objects.actions.ActionMine;
@@ -1008,7 +1009,7 @@ public class AIRoutineUtils {
 	public static boolean mine(GameObject target) {
 		int weaponDistance = Game.level.activeActor.straightLineDistanceTo(target.squareGameObjectIsOn);
 		if (weaponDistance <= 1) {
-			new ActionMine(Game.level.activeActor, target).perform();
+			new ActionMine(Game.level.activeActor, (Vein) target).perform();
 			return true;
 		} else {
 			return false;

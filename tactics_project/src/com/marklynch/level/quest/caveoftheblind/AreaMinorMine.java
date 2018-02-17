@@ -49,11 +49,11 @@ public class AreaMinorMine {
 		// entry to mine shop
 		squaresToRemove.add(Game.level.squares[285][92]);
 
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[284][91], null));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[299][79], null));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[300][82], null));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[301][81], null));
-		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[303][78], null));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[284][91], null, true, Templates.ORE, 0.1f));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[299][79], null, true, Templates.ORE, 0.1f));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[300][82], null, true, Templates.ORE, 0.1f));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[301][81], null, true, Templates.ORE, 0.1f));
+		extraWalls.add(Templates.VEIN.makeCopy(Game.level.squares[303][78], null, true, Templates.ORE, 0.1f));
 
 		Structure mine = new Structure("Minor Mine", mineSections, rooms, minePaths, mineFeatures,
 				new ArrayList<Square>(), "map_cave.png", 280, 76, 307, 97, true, null, squaresToRemove, extraWalls,

@@ -795,7 +795,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (this instanceof Vein) {
-			Action action = new ActionMine(performer, this);
+			Action action = new ActionMine(performer, (Vein) this);
 			return action;
 		}
 
@@ -825,7 +825,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		}
 
 		if (this instanceof Vein) {
-			Action action = new ActionMine(performer, this);
+			Action action = new ActionMine(performer, (Vein) this);
 			return action;
 		}
 
@@ -941,7 +941,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 
 		// Vein
 		if (this instanceof Vein) {
-			actions.add(new ActionMine(performer, this));
+			actions.add(new ActionMine(performer, (Vein) this));
 		}
 
 		// Window

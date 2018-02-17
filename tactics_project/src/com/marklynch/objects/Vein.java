@@ -9,6 +9,12 @@ public class Vein extends Wall {
 
 	public static final ArrayList<GameObject> instances = new ArrayList<GameObject>();
 
+	public boolean infinite = false;
+
+	public Junk oreTemplate;
+
+	public double dropChance;
+
 	// public boolean fullWall;
 	// public boolean fullRightWall;
 	// public boolean fullLeftWall;
@@ -271,10 +277,13 @@ public class Vein extends Wall {
 		super.setInstances(gameObject);
 	}
 
-	@Override
-	public Vein makeCopy(Square square, Actor owner) {
+	// , boolean infinite, Junk oreTemplate, double dropChance) {
+	public Vein makeCopy(Square square, Actor owner, boolean infinite, Junk oreTemplate, double dropChance) {
 		Vein vein = new Vein();
 		setInstances(vein);
+		vein.infinite = infinite;
+		vein.oreTemplate = oreTemplate;
+		vein.dropChance = dropChance;
 		super.setAttributesForCopy(vein, square, owner);
 		if (vein.squareGameObjectIsOn != null) {
 			vein.drawX1 = (int) (vein.squareGameObjectIsOn.xInGridPixels + vein.drawOffsetRatioX);
