@@ -1,6 +1,6 @@
 package com.marklynch.level.conversation;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -17,8 +17,8 @@ import com.marklynch.utils.Color;
 
 public class ConversationResponseDisplay {
 
-	public Vector<LevelButton> responseButtons = new Vector<LevelButton>();
-	public static Vector<LevelButton> standardButtons = new Vector<LevelButton>();
+	public ArrayList<LevelButton> responseButtons = new ArrayList<LevelButton>();
+	public static ArrayList<LevelButton> standardButtons = new ArrayList<LevelButton>();
 	public static LevelButton buttonTrade;
 	public final static String stringTrade = "TRADE [A]";
 	final static float tradeButtonWidth = Game.smallFont.getWidth(stringTrade);

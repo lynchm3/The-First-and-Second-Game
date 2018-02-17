@@ -2,7 +2,7 @@ package com.marklynch.editor;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor.EDITOR_STATE;
@@ -44,7 +44,7 @@ public class AttributesDialog {
 
 	public Object object;
 
-	public Vector<AtributesWindowButton> buttons = new Vector<AtributesWindowButton>();
+	public ArrayList<AtributesWindowButton> buttons = new ArrayList<AtributesWindowButton>();
 
 	public Editor editor;
 

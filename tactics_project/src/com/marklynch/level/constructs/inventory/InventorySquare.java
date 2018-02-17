@@ -1,7 +1,6 @@
 package com.marklynch.level.constructs.inventory;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import org.lwjgl.input.Keyboard;
 
@@ -13,13 +12,12 @@ import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Gold;
 import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class InventorySquare extends Square {
 
@@ -133,15 +131,15 @@ public class InventorySquare extends Square {
 
 			if (stack.get(0) instanceof Gold) {
 				String amtString = stack.get(0).value + "x";
-				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.smallFont.getWidth(amtString),
-						yInPixels + 7 + 20);
+				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels,
+						xInPixels + 10 + Game.smallFont.getWidth(amtString), yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
 						new Object[] { amtString });
 
 			} else {
 				String amtString = stack.size() + "x";
-				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels, xInPixels + 10 + Game.smallFont.getWidth(amtString),
-						yInPixels + 7 + 20);
+				QuadUtils.drawQuad(Color.BLACK, xInPixels, yInPixels,
+						xInPixels + 10 + Game.smallFont.getWidth(amtString), yInPixels + 7 + 20);
 				TextUtils.printTextWithImages(xInPixels + 10, yInPixels + 7, Integer.MAX_VALUE, false, null,
 						new Object[] { amtString });
 
@@ -253,10 +251,10 @@ public class InventorySquare extends Square {
 		return actions;
 	}
 
-	public Vector<InventorySquare> getAllInventorySquaresAtDistance(float distance) {
-		Vector<InventorySquare> squares = new Vector<InventorySquare>();
+	public ArrayList<InventorySquare> getAllInventorySquaresAtDistance(float distance) {
+		ArrayList<InventorySquare> squares = new ArrayList<InventorySquare>();
 		if (distance == 0) {
-			squares.addElement(this);
+			squares.add(this);
 			return squares;
 		}
 

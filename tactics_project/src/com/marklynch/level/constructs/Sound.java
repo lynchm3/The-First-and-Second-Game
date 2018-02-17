@@ -2,7 +2,7 @@ package com.marklynch.level.constructs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
@@ -53,24 +53,24 @@ public class Sound {
 		Square currentSquare = this.sourceSquare;
 		this.destinationSquares.add(currentSquare);
 
-		Vector<Square> startPath = new Vector<Square>();
+		ArrayList<Square> startPath = new ArrayList<Square>();
 		startPath.add(currentSquare);
-		squareToPath.put(currentSquare, new AIPath((Vector<Square>) startPath.clone(), 0, false));
+		squareToPath.put(currentSquare, new AIPath((ArrayList<Square>) startPath.clone(), 0, false));
 
 		for (int i = 0; i <= highestPathCostSeen; i++) {
 			// get all paths with that cost
-			Vector<AIPath> pathsWithCurrentCost = new Vector<AIPath>();
-			Vector<AIPath> pathsVector = new Vector<AIPath>();
+			ArrayList<AIPath> pathsWithCurrentCost = new ArrayList<AIPath>();
+			ArrayList<AIPath> pathsArrayList = new ArrayList<AIPath>();
 			for (AIPath path : squareToPath.values()) {
-				pathsVector.add(path);
+				pathsArrayList.add(path);
 			}
-			for (int j = 0; j < pathsVector.size(); j++) {
-				if (pathsVector.get(j).travelCost == i)
-					pathsWithCurrentCost.add(pathsVector.get(j));
+			for (int j = 0; j < pathsArrayList.size(); j++) {
+				if (pathsArrayList.get(j).travelCost == i)
+					pathsWithCurrentCost.add(pathsArrayList.get(j));
 			}
 
 			for (int j = 0; j < pathsWithCurrentCost.size(); j++) {
-				Vector<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
+				ArrayList<Square> squaresInThisPath = pathsWithCurrentCost.get(j).squares;
 				createDestinationSounds2(Direction.UP, squaresInThisPath, i);
 				createDestinationSounds2(Direction.RIGHT, squaresInThisPath, i);
 				createDestinationSounds2(Direction.DOWN, squaresInThisPath, i);
@@ -79,7 +79,7 @@ public class Sound {
 		}
 	}
 
-	public void createDestinationSounds2(Direction direction, Vector<Square> squaresInThisPath, int pathCost) {
+	public void createDestinationSounds2(Direction direction, ArrayList<Square> squaresInThisPath, int pathCost) {
 
 		if (pathCost > loudness)
 			return;
@@ -110,7 +110,7 @@ public class Sound {
 		}
 
 		if (newSquare != null && !squaresInThisPath.contains(newSquare) && !squareToPath.containsKey(newSquare)) {
-			Vector<Square> newPathSquares = (Vector<Square>) squaresInThisPath.clone();
+			ArrayList<Square> newPathSquares = (ArrayList<Square>) squaresInThisPath.clone();
 			newPathSquares.add(newSquare);
 			int newDistance = (int) (pathCost + newSquare.inventory.getSoundDampening());
 			if (newDistance > highestPathCostSeen)

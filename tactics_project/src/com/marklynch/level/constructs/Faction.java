@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIPath;
@@ -28,7 +28,7 @@ public class Faction {
 	 * Map relationships of this faction towards others +-100
 	 */
 	public transient Map<Faction, FactionRelationship> relationships = new HashMap<Faction, FactionRelationship>();
-	public transient Vector<Actor> actors = new Vector<Actor>();
+	public transient ArrayList<Actor> actors = new ArrayList<Actor>();
 
 	public transient Actor currentActor;
 	public transient int currentActorIndex = 0;
@@ -55,7 +55,7 @@ public class Faction {
 	}
 
 	public void loadImages() {
-		// actors = new Vector<Actor>();
+		// actors = new ArrayList<Actor>();
 		this.imageTexture = getGlobalImage(imageTexturePath, false);
 		// for (Actor actor : actors) {
 		// actor.loadImages();
@@ -63,7 +63,7 @@ public class Faction {
 	}
 
 	public void postLoad() {
-		this.actors = new Vector<Actor>();
+		this.actors = new ArrayList<Actor>();
 
 		currentStage = STAGE.SELECT;
 		relationships = new HashMap<Faction, FactionRelationship>();

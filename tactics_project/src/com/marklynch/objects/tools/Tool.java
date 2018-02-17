@@ -28,7 +28,7 @@ public class Tool extends Weapon {
 	// if (squares[i][j].reachableBySelectedCharater) {
 	// for (float range = getEffectiveMinRange(); range <=
 	// getEffectiveMaxRange(); range++) {
-	// Vector<Square> squaresInThisPath = new Vector<Square>();
+	// ArrayList<Square> squaresInThisPath = new ArrayList<Square>();
 	// squaresInThisPath.add(squares[i][j]);
 	// calculateAttackableSquares(squares, range, squares[i][j], Direction.UP,
 	// squaresInThisPath);
@@ -46,7 +46,7 @@ public class Tool extends Weapon {
 	//
 	// public void calculateAttackableSquares(Square[][] squares, float
 	// remainingRange, Square parentSquare,
-	// Direction direction, Vector<Square> squaresInThisPath) {
+	// Direction direction, ArrayList<Square> squaresInThisPath) {
 	// Square currentSquare = null;
 	//
 	// if (direction == Direction.UP) {

@@ -1,19 +1,18 @@
 package com.marklynch.ui;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.ResourceUtils;
 import com.marklynch.utils.TextUtils;
-import com.marklynch.utils.TextureUtils;
-
-import com.marklynch.utils.Color;
 import com.marklynch.utils.Texture;
+import com.marklynch.utils.TextureUtils;
 
 public class ActivityLogger implements Draggable, Scrollable {
 
-	public transient Vector<ActivityLog> logs = new Vector<ActivityLog>();
+	public transient ArrayList<ActivityLog> logs = new ArrayList<ActivityLog>();
 
 	public float totalHeight = 0;
 	public final static float width = 300;
@@ -94,8 +93,8 @@ public class ActivityLogger implements Draggable, Scrollable {
 	}
 
 	public void removeLastActivityLog() {
-		totalHeight -= logs.lastElement().height;
-		logs.remove(logs.lastElement());
+		totalHeight -= logs.get(logs.size() - 1).height;
+		logs.remove(logs.get(logs.size() - 1));
 
 	}
 

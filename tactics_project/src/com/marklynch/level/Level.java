@@ -5,7 +5,7 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Matrix4f;
@@ -114,7 +114,7 @@ public class Level {
 	public static transient GameOver gameOver = new GameOver();
 	public static transient HashMap<Integer, BestiaryKnowledge> bestiaryKnowledgeCollection = new HashMap<Integer, BestiaryKnowledge>();
 
-	// public Vector<Actor> actors;
+	// public ArrayList<Actor> actors;
 	public transient Player player;
 	public transient Actor activeActor;
 	public transient ArrayListMappedInanimateObjects<GameObject> inanimateObjectsOnGround;
@@ -1078,7 +1078,7 @@ public class Level {
 				if (!selectedPower.hasRange(Integer.MAX_VALUE)) {
 					for (int i = 0; i < 10; i++) {
 						if (selectedPower.hasRange(i)) {
-							Vector<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
+							ArrayList<Square> squaresToHighlight = Game.level.player.getAllSquaresAtDistance(i);
 							for (Square squareToHighlight : squaresToHighlight) {
 								if (squareToHighlight.visibleToPlayer) {
 									squareToHighlight.drawHighlight();

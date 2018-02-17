@@ -1,7 +1,7 @@
 package com.marklynch.script;
 
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -66,7 +66,7 @@ public class Script {
 	public void update(int delta) {
 		activateScriptEvent();
 
-		Vector<ScriptEvent> completedScriptEvents = new Vector<ScriptEvent>();
+		ArrayList<ScriptEvent> completedScriptEvents = new ArrayList<ScriptEvent>();
 
 		for (ScriptEvent activeScriptEvent : activeScriptEvents) {
 			activeScriptEvent.update(delta);

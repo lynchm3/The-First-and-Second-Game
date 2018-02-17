@@ -1,6 +1,6 @@
 package com.marklynch.ui.popups;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.Level;
@@ -11,7 +11,7 @@ import com.marklynch.ui.button.Button;
 public class PopupMenu {
 
 	public float width;
-	public Vector<PopupMenuButton> buttons = new Vector<PopupMenuButton>();
+	public ArrayList<PopupMenuButton> buttons = new ArrayList<PopupMenuButton>();
 	public Level level;
 	public Square square;
 	public PopupMenuButton selectSquareButton;

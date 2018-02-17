@@ -1,6 +1,6 @@
 package com.marklynch.script;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.script.trigger.ScriptTrigger;
 
@@ -8,14 +8,14 @@ public class ScriptEventGroup extends ScriptEvent {
 
 	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "scriptEvents" };
 
-	Vector<ScriptEvent> scriptEvents;
+	ArrayList<ScriptEvent> scriptEvents;
 	int scriptEventIndex = 0;
 
 	public ScriptEventGroup() {
 		name = "ScriptEventGroup";
 	}
 
-	public ScriptEventGroup(boolean blockUserInput, ScriptTrigger scriptTrigger, Vector<ScriptEvent> scriptEvents) {
+	public ScriptEventGroup(boolean blockUserInput, ScriptTrigger scriptTrigger, ArrayList<ScriptEvent> scriptEvents) {
 		super(blockUserInput, scriptTrigger);
 		this.scriptEvents = scriptEvents;
 	}
@@ -24,7 +24,7 @@ public class ScriptEventGroup extends ScriptEvent {
 	public boolean checkIfCompleted() {
 		if (scriptEventIndex >= scriptEvents.size())
 			return true;
-		if (scriptEventIndex == scriptEvents.size() - 1 && scriptEvents.lastElement().checkIfCompleted())
+		if (scriptEventIndex == scriptEvents.size() - 1 && scriptEvents.get(scriptEvents.size() - 1).checkIfCompleted())
 			return true;
 		return false;
 	}

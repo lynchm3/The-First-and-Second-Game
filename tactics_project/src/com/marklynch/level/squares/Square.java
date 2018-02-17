@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
-import java.util.Vector;
 
 import org.lwjgl.input.Keyboard;
 
@@ -73,7 +72,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public transient boolean visibleToPlayer = false;
 	public transient boolean seenByPlayer = false;
 	public transient boolean inPath = false;
-	public transient Vector<Weapon> weaponsThatCanAttack;
+	public transient ArrayList<Weapon> weaponsThatCanAttack;
 
 	// image
 	public String imageTexturePath;
@@ -144,7 +143,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		else
 			this.imageTexture = imageTexture;
 
-		weaponsThatCanAttack = new Vector<Weapon>();
+		weaponsThatCanAttack = new ArrayList<Weapon>();
 		this.inventory = inventory;
 		if (this.inventory != null) {
 			this.inventory.parent = this;
@@ -203,7 +202,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 	public void postLoad1() {
 		inventory.square = this;
 		inventory.postLoad1();
-		weaponsThatCanAttack = new Vector<Weapon>();
+		weaponsThatCanAttack = new ArrayList<Weapon>();
 
 		loadImages();
 	}
@@ -601,10 +600,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	}
 
-	public class PathComparator implements Comparator<Vector<Square>> {
+	public class PathComparator implements Comparator<ArrayList<Square>> {
 
 		@Override
-		public int compare(Vector<Square> path1, Vector<Square> path2) {
+		public int compare(ArrayList<Square> path1, ArrayList<Square> path2) {
 
 			int path1Distance = 0;
 			for (Square squareInPath : path1)
@@ -937,7 +936,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	@Override
 	public List getAllNeighbourSquaresThatCanBeMovedTo(Actor actor, AStarNode goalNode) {
-		Vector<Square> squares = new Vector<Square>();
+		ArrayList<Square> squares = new ArrayList<Square>();
 
 		for (Square square : neighbors) {
 			if (square.includableInPath(actor, goalNode)) {
@@ -958,10 +957,10 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		return this.straightLineDistanceTo(node) + node.cost - 1;
 	}
 
-	public Vector<Square> getAllSquaresAtDistance(float distance) {
-		Vector<Square> squares = new Vector<Square>();
+	public ArrayList<Square> getAllSquaresAtDistance(float distance) {
+		ArrayList<Square> squares = new ArrayList<Square>();
 		if (distance == 0) {
-			squares.addElement(this);
+			squares.add(this);
 			return squares;
 		}
 

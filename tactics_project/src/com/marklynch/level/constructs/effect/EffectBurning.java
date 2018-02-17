@@ -2,7 +2,7 @@ package com.marklynch.level.constructs.effect;
 
 import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.level.squares.Square;
@@ -52,7 +52,7 @@ public class EffectBurning extends Effect {
 					}
 				}
 
-				Vector<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
+				ArrayList<Square> adjacentSquares = target.getAllSquaresAtDistance(1);
 				for (Square adjacentSquare : adjacentSquares) {
 					for (GameObject gameObject : adjacentSquare.inventory.getGameObjects()) {
 						if (Math.random() * 100 > gameObject.getEffectiveFireResistance()) {
@@ -72,7 +72,7 @@ public class EffectBurning extends Effect {
 			// target.inventorySquareGameObjectIsOn;
 			// if (inventorySquareTargetIsOn != null) {
 			//
-			// Vector<InventorySquare> adjacentSquares =
+			// ArrayList<InventorySquare> adjacentSquares =
 			// inventorySquareTargetIsOn.getAllInventorySquaresAtDistance(1);
 			// for (InventorySquare adjacentSquare : adjacentSquares) {
 			// if (adjacentSquare.gameObject != null

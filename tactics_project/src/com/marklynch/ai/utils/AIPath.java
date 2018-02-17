@@ -1,23 +1,23 @@
 package com.marklynch.ai.utils;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
 
 public class AIPath {
-	public Vector<Square> squares;
+	public ArrayList<Square> squares;
 	public int travelCost;
 	public boolean complete = false;
 	public boolean maxedOut = false;
 
 	public AIPath() {
-		squares = new Vector<Square>();
+		squares = new ArrayList<Square>();
 		travelCost = 0;
 		complete = true;
 
 	}
 
-	public AIPath(Vector<Square> squares, int travelCost, boolean complete) {
+	public AIPath(ArrayList<Square> squares, int travelCost, boolean complete) {
 		super();
 		this.squares = squares;
 		this.travelCost = travelCost;

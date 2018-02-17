@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Vector;
 
 import com.marklynch.Game;
 import com.marklynch.ai.routines.AIRoutine;
@@ -93,7 +92,7 @@ public class Actor extends GameObject {
 	// Fight preview on hover
 	// public transient boolean showHoverFightPreview = false;
 	// public transient GameObject hoverFightPreviewDefender = null;
-	// public transient Vector<Fight> hoverFightPreviewFights;
+	// public transient ArrayList<Fight> hoverFightPreviewFights;
 
 	public transient AIRoutine aiRoutine;
 
@@ -316,14 +315,14 @@ public class Actor extends GameObject {
 				maxPathSize);
 
 		if (aStarNodesPath != null) {
-			Vector<Square> squarePath = new Vector<Square>();
+			ArrayList<Square> squarePath = new ArrayList<Square>();
 
 			for (AStarNode aStarNode : aStarNodesPath) {
 				squarePath.add((Square) aStarNode);
 			}
 
 			boolean completePath = false;
-			if (squarePath.size() > 0 && squarePath.lastElement() == target) {
+			if (squarePath.size() > 0 && squarePath.get(squarePath.size() - 1) == target) {
 				completePath = true;
 			}
 
@@ -702,15 +701,15 @@ public class Actor extends GameObject {
 		super.drawUI();
 	}
 
-	public Vector<Float> calculateIdealDistanceFromTargetToAttack(GameObject target) {
+	public ArrayList<Float> calculateIdealDistanceFromTargetToAttack(GameObject target) {
 
-		Vector<Float> idealDistances = new Vector<Float>();
+		ArrayList<Float> idealDistances = new ArrayList<Float>();
 		if (!canEquipWeapons) {
 			idealDistances.add(1f);
 			return idealDistances;
 		}
 
-		Vector<Fight> fights = new Vector<Fight>();
+		ArrayList<Fight> fights = new ArrayList<Fight>();
 		for (Weapon weapon : getWeaponsInInventory()) {
 			for (float range = weapon.getEffectiveMinRange(); range <= weapon.getEffectiveMaxRange(); range++) {
 				Fight fight = new Fight(this, weapon, target, target.bestCounterWeapon(this, weapon, range), range);

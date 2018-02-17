@@ -1,7 +1,7 @@
 package com.marklynch.ai.utils;
 
 import java.util.List;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.units.Actor;
@@ -27,7 +27,7 @@ public abstract class AStarNode implements Comparable {
 	public float xInGridPixels;
 	public float yInGridPixels;
 
-	public Vector<Square> neighbors;
+	public ArrayList<Square> neighbors;
 
 	// added by me
 	public int straightLineDistanceTo(AStarNode otherNode) {

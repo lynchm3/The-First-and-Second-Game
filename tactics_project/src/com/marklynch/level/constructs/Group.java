@@ -3,7 +3,7 @@ package com.marklynch.level.constructs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.ai.utils.AIRoutineUtils;
 import com.marklynch.level.quest.Quest;
@@ -87,9 +87,9 @@ public class Group {
 			if (currentTarget == leader.squareGameObjectIsOn
 					|| actor.straightLineDistanceTo(leader.squareGameObjectIsOn) > maxDistanceFromLeader) {
 
-				Vector<Square> possibleSquares = new Vector<Square>();
+				ArrayList<Square> possibleSquares = new ArrayList<Square>();
 				for (int i = 1; i <= maxDistanceFromLeader; i++) {
-					Vector<Square> squaresISquareAway = leader.getAllSquaresAtDistance(i);
+					ArrayList<Square> squaresISquareAway = leader.getAllSquaresAtDistance(i);
 					for (Square square : squaresISquareAway) {
 						if (square.inventory.canShareSquare()
 								&& square.structureSquareIsIn == leader.squareGameObjectIsOn.structureSquareIsIn

@@ -1,6 +1,6 @@
 package com.marklynch.editor.settingswindow;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.utils.Color;
 
@@ -12,7 +12,7 @@ import com.marklynch.utils.QuadUtils;
 
 public abstract class SettingsWindow {
 	public float width;
-	public Vector<SettingsWindowButton> buttons = new Vector<SettingsWindowButton>();
+	public ArrayList<SettingsWindowButton> buttons = new ArrayList<SettingsWindowButton>();
 	public Editor editor;
 
 	public final static String[] gameObjectFields = { "name", "strength", "dexterity", "intelligence", "endurance",

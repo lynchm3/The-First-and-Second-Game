@@ -1,6 +1,6 @@
 package com.marklynch.script;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
@@ -9,7 +9,7 @@ public class ScriptEventInlineSpeech extends ScriptEvent {
 
 	public final static String[] editableAttributes = { "name", "blockUserInput", "scriptTrigger", "speechParts" };
 
-	public Vector<SpeechPart> speechParts;
+	public ArrayList<SpeechPart> speechParts;
 	public transient int speechIndex = 0;
 	public transient int timeOnCurrentPart = 0;
 	public transient int timePerPart = 10000;
@@ -18,7 +18,7 @@ public class ScriptEventInlineSpeech extends ScriptEvent {
 		name = "ScriptEventInlineSpeech";
 	}
 
-	public ScriptEventInlineSpeech(boolean blockUserInput, Vector<SpeechPart> speechParts,
+	public ScriptEventInlineSpeech(boolean blockUserInput, ArrayList<SpeechPart> speechParts,
 			ScriptTrigger scriptTrigger) {
 		super(blockUserInput, scriptTrigger);
 		this.speechParts = speechParts;

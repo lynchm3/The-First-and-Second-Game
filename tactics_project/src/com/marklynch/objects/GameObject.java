@@ -4,7 +4,6 @@ import static com.marklynch.utils.ResourceUtils.getGlobalImage;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.Vector;
 
 import org.lwjgl.util.Point;
 import org.newdawn.slick.openal.Audio;
@@ -518,10 +517,10 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		return false;
 	}
 
-	public Vector<Square> getAllSquaresAtDistance(float distance) {
-		Vector<Square> squares = new Vector<Square>();
+	public ArrayList<Square> getAllSquaresAtDistance(float distance) {
+		ArrayList<Square> squares = new ArrayList<Square>();
 		if (distance == 0) {
-			squares.addElement(this.squareGameObjectIsOn);
+			squares.add(this.squareGameObjectIsOn);
 			return squares;
 		}
 
