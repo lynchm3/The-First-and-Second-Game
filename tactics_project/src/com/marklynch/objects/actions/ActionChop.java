@@ -65,7 +65,7 @@ public class ActionChop extends Action {
 			wood = Templates.WOOD.makeCopy(target.squareGameObjectIsOn, oreOwner);
 			if (Game.level.openInventories.size() > 0) {
 			} else if (performer.squareGameObjectIsOn.onScreen() && performer.squareGameObjectIsOn.visibleToPlayer) {
-				performer.secondaryAnimations.add(new AnimationTake(wood, performer, 0, 0, 0.25f));
+				performer.secondaryAnimations.add(new AnimationTake(wood, performer, 0, 0, 1f));
 			}
 			performer.inventory.add(wood);
 			if (Game.level.shouldLog(target, performer)) {
