@@ -14,6 +14,7 @@ import com.marklynch.level.constructs.journal.AreaList;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.Bed;
 import com.marklynch.objects.GameObject;
+import com.marklynch.objects.Sign;
 import com.marklynch.objects.Wall;
 import com.marklynch.objects.templates.Templates;
 import com.marklynch.objects.units.Actor;
@@ -39,7 +40,7 @@ public class AreaMinorMine {
 		rooms.add(new StructureRoom("Minor Mine", 281, 77, false, new ArrayList<Actor>(),
 				new RoomPart(281, 77, 306, 91), new RoomPart(292, 92, 306, 96)));
 
-		StructureRoom shopRoom = new StructureRoom("Minor Mine Shop", 281, 93, false, new ArrayList<Actor>(),
+		StructureRoom shopRoom = new StructureRoom("What's Mine is Yours*", 281, 93, false, new ArrayList<Actor>(),
 				new RoomPart(281, 93, 290, 96));
 		rooms.add(shopRoom);
 
@@ -63,24 +64,23 @@ public class AreaMinorMine {
 		Bed bed = Templates.BED.makeCopy(Game.level.squares[303][90], null);
 		Actor miner = Templates.MINER.makeCopy("Miner Dan", Game.level.squares[302][90], Level.factions.townsPeople,
 				bed, 0,
-				new GameObject[] {
-						/* Templates.PICKAXE.makeCopy(null, null), */Templates.LANTERN.makeCopy(null, null) },
+				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.LANTERN.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
 
 		// 281, 93
 		// Trader Joe
 		Trader trader = Templates.TRADER.makeCopy("Trader Jake", Game.level.squares[281][93],
 				Game.level.factions.townsPeople, null, 10000,
-				new GameObject[] { /*
-									 * Templates.PICKAXE.makeCopy(null, null),
-									 * Templates.PICKAXE.makeCopy(null, null),
-									 * Templates.PICKAXE.makeCopy(null, null),
-									 * Templates.PICKAXE.makeCopy(null, null),
-									 * Templates.PICKAXE.makeCopy(null, null)
-									 */ }, new GameObject[] {}, null);
+				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
+						Templates.PICKAXE.makeCopy(null, null), Templates.PICKAXE.makeCopy(null, null),
+						Templates.PICKAXE.makeCopy(null, null) },
+				new GameObject[] {}, null);
+
+		Sign shopSign = Templates.SIGN.makeCopy(Game.level.squares[288][91], shopRoom.name + " sign",
+				new Object[] { shopRoom.name }, trader);
 
 		trader.shopRoom = shopRoom;
-		trader.shopSign = null;
+		trader.shopSign = shopSign;
 		trader.wantedPoster = null;
 
 	}
