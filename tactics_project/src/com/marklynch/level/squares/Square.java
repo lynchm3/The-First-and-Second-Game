@@ -653,33 +653,69 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public GameObject getGameObjectMouseIsOver() {
 
-		if (!this.seenByPlayer)
-			return null;
+		// if (!this.seenByPlayer)
+		// return null;
 
-		for (int i = this.inventory.gameObjects.size() - 1; i >= 0; i--) {
+		ArrayList<GameObject> gameObjectsToCheck = new ArrayList<GameObject>();
 
-			GameObject gameObject = this.inventory.gameObjects.get(i);
+		// sqr @ +1,0
+		if (xInGrid + 1 < Game.level.squares.length) {
+			if (Game.level.squares[xInGrid + 1][yInGrid].seenByPlayer)
+				gameObjectsToCheck.addAll(Game.level.squares[xInGrid + 1][yInGrid].inventory.gameObjects);
+		}
+
+		// sqr @ +0,+0 (this sqr)
+		if (this.visibleToPlayer)
+			gameObjectsToCheck.addAll(inventory.gameObjects);
+
+		// sqr @ -1,+0
+		if (xInGrid - 1 > 0) {
+			if (Game.level.squares[xInGrid - 1][yInGrid].seenByPlayer)
+				gameObjectsToCheck.addAll(Game.level.squares[xInGrid - 1][yInGrid].inventory.gameObjects);
+		}
+
+		if (yInGrid + 1 < Game.level.squares[0].length) {
+			// sqr @ +1,+1
+			if (xInGrid + 1 < Game.level.squares.length) {
+				if (Game.level.squares[xInGrid + 1][yInGrid + 1].seenByPlayer)
+					gameObjectsToCheck.addAll(Game.level.squares[xInGrid + 1][yInGrid + 1].inventory.gameObjects);
+			}
+
+			// sqr @ 0,+1
+			if (Game.level.squares[xInGrid][yInGrid + 1].seenByPlayer)
+				gameObjectsToCheck.addAll(Game.level.squares[xInGrid][yInGrid + 1].inventory.gameObjects);
+
+			// sqr @ -11,+1
+			if (xInGrid - 1 > 0) {
+				if (Game.level.squares[xInGrid - 1][yInGrid + 1].seenByPlayer)
+					gameObjectsToCheck.addAll(Game.level.squares[xInGrid - 1][yInGrid + 1].inventory.gameObjects);
+			}
+		}
+
+		for (int i = gameObjectsToCheck.size() - 1; i >= 0; i--) {
+
+			GameObject gameObject = gameObjectsToCheck.get(i);
 			if (gameObject instanceof Discoverable) {
 				Discoverable d = (Discoverable) gameObject;
 				if (!d.discovered)
 					continue;
 			}
 
-			if (!this.visibleToPlayer && !gameObject.persistsWhenCantBeSeen)
+			if (!gameObject.squareGameObjectIsOn.visibleToPlayer && !gameObject.persistsWhenCantBeSeen)
 				continue;
 
 			// gameObject.imageTexture.getTexture().
 
-			int x = (int) (this.xInGridPixels + Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
-			int y = (int) (this.yInGridPixels + Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
+			int x = (int) (gameObject.squareGameObjectIsOn.xInGridPixels
+					+ Game.SQUARE_WIDTH * gameObject.drawOffsetRatioX);
+			int y = (int) (gameObject.squareGameObjectIsOn.yInGridPixels
+					+ Game.SQUARE_HEIGHT * gameObject.drawOffsetRatioY);
 			if (gameObject.primaryAnimation != null) {
 				x += gameObject.primaryAnimation.offsetX;
 				y += gameObject.primaryAnimation.offsetY;
 			}
 
-			// float x = this.xInGridPixels + gameObject.drawOffsetX;
-			// float y = this.yInGridPixels + gameObject.drawOffsetY;
-
+			// FirstCheckBounding box :P
 			if (UserInputLevel.mouseXTransformed > x && UserInputLevel.mouseXTransformed < x + gameObject.width
 					&& UserInputLevel.mouseYTransformed > y
 					&& UserInputLevel.mouseYTransformed < y + gameObject.height) {
