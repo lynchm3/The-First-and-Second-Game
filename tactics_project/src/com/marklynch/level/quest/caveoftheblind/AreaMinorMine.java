@@ -64,7 +64,8 @@ public class AreaMinorMine {
 		Bed bed = Templates.BED.makeCopy(Game.level.squares[303][90], null);
 		Actor miner = Templates.MINER.makeCopy("Miner Dan", Game.level.squares[302][90], Level.factions.townsPeople,
 				bed, 0,
-				new GameObject[] { Templates.PICKAXE.makeCopy(null, null), Templates.LANTERN.makeCopy(null, null) },
+				new GameObject[] {
+						/* Templates.PICKAXE.makeCopy(null, null), */Templates.LANTERN.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
 
 		// 281, 93
@@ -78,6 +79,9 @@ public class AreaMinorMine {
 
 		Sign shopSign = Templates.SIGN.makeCopy(Game.level.squares[288][91], shopRoom.name + " sign",
 				new Object[] { shopRoom.name }, trader);
+
+		// Random ground pickaxe
+		Templates.PICKAXE.makeCopy(Game.level.squares[292][91], null);
 
 		trader.shopRoom = shopRoom;
 		trader.shopSign = shopSign;

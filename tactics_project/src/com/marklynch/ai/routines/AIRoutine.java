@@ -1340,12 +1340,16 @@ public abstract class AIRoutine {
 				for (Integer requiredTemplateId : (ArrayList<Integer>) equipmentNeeded.clone()) {
 					if (tradersGameObject.toSell == true && tradersGameObject.templateId == requiredTemplateId) {
 						new ActionBuyItems(actor, target, tradersGameObject).perform();
-						equipmentNeeded.remove(requiredTemplateId);
 						continue;
 					}
 				}
-				if (equipmentNeeded.size() == 0)
-					return true;
+			}
+
+			equipmentNeeded.clear();
+			for (int requiredTemplateId : requiredEquipmentTemplateIds) {
+				if (!actor.inventory.containsObjectWithTemplateId(requiredTemplateId)) {
+					equipmentNeeded.add(requiredTemplateId);
+				}
 			}
 
 			// Fluff the remaining ones :P but... how do i make instances? eek
