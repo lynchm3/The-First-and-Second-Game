@@ -50,6 +50,7 @@ public class TemplatesFurniture {
 		Templates.MIRROR.imageTexturePath = "mirror.png";
 		Templates.MIRROR.imageTextureFront = getGlobalImage("mirror.png", true);
 		Templates.MIRROR.imageTextureBack = getGlobalImage("mirror_back.png", true);
+		Templates.MIRROR.imageTextureCrack = getGlobalImage("mirror_crack.png", true);
 		Templates.MIRROR.totalHealth = Templates.MIRROR.remainingHealth = 50;
 		Templates.MIRROR.widthRatio = 1f;
 		Templates.MIRROR.heightRatio = 1.5f;

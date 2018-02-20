@@ -14,6 +14,7 @@ public class Mirror extends GameObject {
 
 	public Texture imageTextureBack;
 	public Texture imageTextureFront;
+	public Texture imageTextureCrack;
 
 	int boundsX1;
 	int boundsY1;
@@ -156,6 +157,11 @@ public class Mirror extends GameObject {
 					}
 				}
 			}
+		}
+
+		if (remainingHealth * 2 != totalHealth) {
+			imageTexture = imageTextureCrack;
+			super.draw1();
 		}
 
 		imageTexture = imageTextureFront;
@@ -304,6 +310,7 @@ public class Mirror extends GameObject {
 		super.setAttributesForCopy(mirror, square, owner);
 		mirror.imageTextureBack = this.imageTextureBack;
 		mirror.imageTextureFront = this.imageTextureFront;
+		mirror.imageTextureCrack = this.imageTextureCrack;
 		return mirror;
 	}
 
