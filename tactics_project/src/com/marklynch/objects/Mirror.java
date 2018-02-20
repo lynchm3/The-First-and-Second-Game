@@ -163,7 +163,7 @@ public class Mirror extends GameObject {
 			}
 		}
 
-		if (remainingHealth * 2 != totalHealth) {
+		if (remainingHealth != totalHealth) {
 			imageTexture = imageTextureCrack;
 			super.draw1();
 		}
@@ -309,7 +309,7 @@ public class Mirror extends GameObject {
 
 	@Override
 	public void attackedBy(Object attacker, Action action) {
-		if (hasBeenAttackedBefore == false && attacker instanceof Actor) {
+		if (hasBeenAttackedBefore == false && attacker instanceof Actor && remainingHealth < totalHealth) {
 			((Actor) attacker).addEffect(new EffectCurse(this, (Actor) attacker, 5));
 		}
 		super.attackedBy(attacker, action);
