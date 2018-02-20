@@ -86,12 +86,12 @@ public class Blind extends Monster {
 		super.setInstances(gameObject);
 	}
 
-	public Blind makeCopy(Square square, Faction faction, StructureRoom roomLivingIn, GameObject[] mustHaves,
+	public Blind makeCopy(Square square, Faction faction, int gold, StructureRoom roomLivingIn, GameObject[] mustHaves,
 			GameObject[] mightHaves) {
 
 		Blind actor = new Blind();
 		setInstances(actor);
-		super.setAttributesForCopy(actor, square, faction, bed, 0, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(actor, square, faction, null, 0, mustHaves, mightHaves, area);
 
 		actor.roomLivingIn = roomLivingIn;
 		return actor;
