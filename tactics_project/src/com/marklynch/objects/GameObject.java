@@ -358,13 +358,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			if (hiding)
 				alpha = 0.5f;
 
-			// GL11.glTexParameterf(GL11.GL_TEXTURE_2D,
-			// GL11.GL_TEXTURE_BORDER_COLOR, Color.BLACK);
-			// GL11.glTexParameterf(GL11.GL_TEXTURE_2D,
-			// GL11.GL_TEXTURE_BORDER_COLOR, 1);
-			// GL45.glTextParameterfv.glTexParameterf(GL11.GL_TEXTURE_2D,
-			// GL11.GL_TEXTURE_BORDER_COLOR, Color.BLACK);
-
 			// GL11.glTexParameteri(target, pname, param);
 			TextureUtils.drawTexture(imageTexture, alpha, actorPositionXInPixels, actorPositionYInPixels,
 					actorPositionXInPixels + width, actorPositionYInPixels + height, backwards);
@@ -373,21 +366,7 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 				TextureUtils.drawTexture(imageTexture, 0.5f, actorPositionXInPixels, actorPositionYInPixels,
 						actorPositionXInPixels + width, actorPositionYInPixels + height, 0, 0, 0, 0, backwards, false,
 						flashColor, false);
-				// offset a bit
-				// TextureUtils.drawTexture(imageTexture, 0.5f,
-				// actorPositionXInPixels + 5, actorPositionYInPixels + 5,
-				// actorPositionXInPixels + width + 5, actorPositionYInPixels +
-				// height + 5, 0, 0, 0, 0, backwards,
-				// false, color, false);
 			}
-
-			// if (flash || this == Game.gameObjectMouseIsOver) {
-			// TextureUtils.drawTexture(imageTexture, alpha,
-			// actorPositionXInPixels, actorPositionYInPixels,
-			// actorPositionXInPixels + width, actorPositionYInPixels + height,
-			// 0, 0, 0, 0, backwards, false,
-			// Color.BLACK, false);
-			// }
 
 			if (remainingHealth != totalHealth) {
 				// draw sidebar on square
