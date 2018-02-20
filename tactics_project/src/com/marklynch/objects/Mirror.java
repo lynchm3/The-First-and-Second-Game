@@ -3,7 +3,9 @@ package com.marklynch.objects;
 import java.util.ArrayList;
 
 import com.marklynch.Game;
+import com.marklynch.level.constructs.effect.EffectCurse;
 import com.marklynch.level.squares.Square;
+import com.marklynch.objects.actions.Action;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.utils.Texture;
 import com.marklynch.utils.TextureUtils;
@@ -20,6 +22,8 @@ public class Mirror extends GameObject {
 	int boundsY1;
 	int boundsX2;
 	int boundsY2;
+
+	public boolean hasBeenAttackedBefore = false;
 
 	public Mirror() {
 		canBePickedUp = false;
@@ -301,6 +305,15 @@ public class Mirror extends GameObject {
 					false);
 		}
 
+	}
+
+	@Override
+	public void attackedBy(Object attacker, Action action) {
+		if (hasBeenAttackedBefore == false && attacker instanceof Actor) {
+			((Actor) attacker).addEffect(new EffectCurse(this, (Actor) attacker, 5));
+		}
+		super.attackedBy(attacker, action);
+		hasBeenAttackedBefore = true;
 	}
 
 	@Override
