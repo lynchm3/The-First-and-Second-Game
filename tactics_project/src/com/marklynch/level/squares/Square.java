@@ -719,7 +719,6 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 			if (UserInputLevel.mouseXTransformed > x && UserInputLevel.mouseXTransformed < x + gameObject.width
 					&& UserInputLevel.mouseYTransformed > y
 					&& UserInputLevel.mouseYTransformed < y + gameObject.height) {
-
 				Color color = getPixel(gameObject.imageTexture, (int) (UserInputLevel.mouseXTransformed - x),
 						(int) (UserInputLevel.mouseYTransformed - y));
 
@@ -746,7 +745,7 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 		// int r = texture.pixels[index] & 0xFF;
 		// int g = texture.pixels[index + 1] & 0xFF;
 		// int b = texture.pixels[index + 2] & 0xFF;
-		int a = texture.pixels[index] & 0xFF;
+		int a = texture.pixels[index + 3] & 0xFF;
 
 		return new Color(0, 0, 0, a);
 	}

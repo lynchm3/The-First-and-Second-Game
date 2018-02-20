@@ -19,7 +19,7 @@ public class TemplatesNature {
 
 		Templates.TREE = new Tree();
 		Templates.TREE.name = "Tree";
-		Templates.TREE.imageTexturePath = "tree_1.png";
+		Templates.TREE.imageTexturePath = "tree.png";
 		Templates.TREE.totalHealth = Templates.TREE.remainingHealth = 100;
 		Templates.TREE.widthRatio = 1f;
 		Templates.TREE.heightRatio = 1.5f;
@@ -38,7 +38,7 @@ public class TemplatesNature {
 
 		Templates.BIG_TREE = new Tree();
 		Templates.BIG_TREE.name = "Big Tree";
-		Templates.BIG_TREE.imageTexturePath = "tree_1.png";
+		Templates.BIG_TREE.imageTexturePath = "tree_big" + ".png";
 		Templates.BIG_TREE.totalHealth = Templates.BIG_TREE.remainingHealth = 150;
 		Templates.BIG_TREE.widthRatio = 1.5f;
 		Templates.BIG_TREE.heightRatio = 1.5f;
