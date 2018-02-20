@@ -82,6 +82,9 @@ public class AreaMinorMine {
 
 		// Random ground pickaxe
 		Templates.PICKAXE.makeCopy(Game.level.squares[292][91], null);
+		Templates.APPLE.makeCopy(Game.level.squares[293][91], null);
+		Templates.FUR.makeCopy(Game.level.squares[294][91], null);
+		Templates.HUNTING_BOW.makeCopy(Game.level.squares[295][91], null);
 
 		trader.shopRoom = shopRoom;
 		trader.shopSign = shopSign;

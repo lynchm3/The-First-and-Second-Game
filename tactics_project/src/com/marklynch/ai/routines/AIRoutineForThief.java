@@ -6,19 +6,10 @@ import com.marklynch.objects.Corpse;
 import com.marklynch.objects.Food;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.Junk;
-import com.marklynch.objects.Key;
 import com.marklynch.objects.Storage;
 import com.marklynch.objects.actions.ActionMove;
-import com.marklynch.objects.tools.Axe;
-import com.marklynch.objects.tools.Bell;
-import com.marklynch.objects.tools.ContainerForLiquids;
-import com.marklynch.objects.tools.Lantern;
-import com.marklynch.objects.tools.Pickaxe;
-import com.marklynch.objects.tools.Tool;
 import com.marklynch.objects.units.Actor;
-import com.marklynch.objects.weapons.BodyArmor;
-import com.marklynch.objects.weapons.Helmet;
-import com.marklynch.objects.weapons.LegArmor;
+import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
 
 public class AIRoutineForThief extends AIRoutine {
@@ -104,9 +95,7 @@ public class AIRoutineForThief extends AIRoutine {
 		// 1. pick up loot on ground, even if owned, all specific stuff, no
 		// stupid generic game object
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(18f, true, false, true, false, false, true,
-				0, false, Axe.class, Bell.class, Lantern.class, Pickaxe.class, Tool.class, BodyArmor.class,
-				Helmet.class, LegArmor.class, Weapon.class, ContainerForLiquids.class, Food.class, Junk.class,
-				Key.class, Junk.class);
+				0, false, Weapon.class, Armor.class, Food.class, Junk.class);
 		if (loot != null) {
 			if (loot.owner != null && loot.owner != actor)
 				this.actor.activityDescription = ACTIVITY_DESCRIPTION_THIEVING;

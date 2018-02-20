@@ -50,6 +50,7 @@ import com.marklynch.objects.units.Human;
 import com.marklynch.objects.units.NonHuman;
 import com.marklynch.objects.units.Pig;
 import com.marklynch.objects.units.Trader;
+import com.marklynch.objects.weapons.Armor;
 import com.marklynch.objects.weapons.Weapon;
 import com.marklynch.utils.MapUtil;
 
@@ -1088,7 +1089,7 @@ public abstract class AIRoutine {
 	public boolean lootFromGround() {
 		// Pick up loot on ground
 		GameObject loot = AIRoutineUtils.getNearestForPurposeOfBeingAdjacent(9f, true, false, true, false, true, true,
-				10, false, Junk.class, Food.class);
+				10, false, Junk.class, Food.class, Weapon.class, Armor.class);
 		if (loot != null) {
 			this.actor.activityDescription = ACTIVITY_DESCRIPTION_LOOTING;
 			this.actor.thoughtBubbleImageTextureObject = loot.imageTexture;

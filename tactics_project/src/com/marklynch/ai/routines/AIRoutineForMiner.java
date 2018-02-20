@@ -102,16 +102,12 @@ public class AIRoutineForMiner extends AIRoutine {
 		}
 
 		// Defer to group leader
-		if (deferToGroupLeader()) {
-			this.actor.followersShouldFollow = true;
+		if (deferToGroupLeader())
 			return;
-		}
 
 		// Defer to quest
-		if (deferToQuest()) {
-			this.actor.followersShouldFollow = true;
+		if (deferToQuest())
 			return;
-		}
 
 		// Sell items
 		if (sellItems()) {

@@ -45,7 +45,7 @@ public class TemplatesTools {
 		Templates.BROOM.poisonResistance = 0f;
 		Templates.BROOM.slashResistance = 0f;
 		Templates.BROOM.weight = 15;
-		Templates.BROOM.value = 3;
+		Templates.BROOM.value = 12;
 		Templates.BROOM.anchorX = 55;
 		Templates.BROOM.anchorY = 88;
 		Templates.BROOM.templateId = GameObject.generateNewTemplateId();
@@ -67,7 +67,7 @@ public class TemplatesTools {
 		Templates.PICKAXE.stackable = false;
 		Templates.PICKAXE.fireResistance = -50f;
 		Templates.PICKAXE.weight = 25f;
-		Templates.PICKAXE.value = 3;
+		Templates.PICKAXE.value = 29;
 		Templates.PICKAXE.anchorX = 32;
 		Templates.PICKAXE.anchorY = 94;
 		Templates.PICKAXE.templateId = GameObject.generateNewTemplateId();
@@ -83,7 +83,7 @@ public class TemplatesTools {
 		Templates.SHOVEL.stackable = false;
 		Templates.SHOVEL.fireResistance = -40f;
 		Templates.SHOVEL.weight = 28f;
-		Templates.SHOVEL.value = 6;
+		Templates.SHOVEL.value = 32;
 		Templates.SHOVEL.anchorX = 63;
 		Templates.SHOVEL.anchorY = 67;
 		Templates.SHOVEL.templateId = GameObject.generateNewTemplateId();
@@ -99,7 +99,7 @@ public class TemplatesTools {
 		Templates.FISHING_ROD.stackable = false;
 		Templates.FISHING_ROD.fireResistance = -60f;
 		Templates.FISHING_ROD.weight = 23f;
-		Templates.FISHING_ROD.value = 17;
+		Templates.FISHING_ROD.value = 31;
 		Templates.FISHING_ROD.anchorX = 55;
 		Templates.FISHING_ROD.anchorY = 89;
 		Templates.FISHING_ROD.templateId = GameObject.generateNewTemplateId();
@@ -208,7 +208,7 @@ public class TemplatesTools {
 		Templates.HAMMER.stackable = false;
 		Templates.HAMMER.fireResistance = -50f;
 		Templates.HAMMER.weight = 23f;
-		Templates.HAMMER.value = 16;
+		Templates.HAMMER.value = 41;
 		Templates.HAMMER.anchorX = 31;
 		Templates.HAMMER.anchorY = 98;
 		Templates.HAMMER.templateId = GameObject.generateNewTemplateId();
@@ -252,7 +252,7 @@ public class TemplatesTools {
 		Templates.WHIP.soundDampening = 1f;
 		Templates.WHIP.stackable = false;
 		Templates.WHIP.weight = 12f;
-		Templates.WHIP.value = 24;
+		Templates.WHIP.value = 54;
 		Templates.WHIP.anchorX = 18;
 		Templates.WHIP.anchorY = 80;
 		Templates.WHIP.templateId = GameObject.generateNewTemplateId();
@@ -273,7 +273,7 @@ public class TemplatesTools {
 		Templates.SERRATED_SPOON.soundDampening = 1f;
 		Templates.SERRATED_SPOON.stackable = false;
 		Templates.SERRATED_SPOON.weight = 7f;
-		Templates.SERRATED_SPOON.value = 6;
+		Templates.SERRATED_SPOON.value = 11;
 		Templates.SERRATED_SPOON.anchorX = 48;
 		Templates.SERRATED_SPOON.anchorY = 113;
 		Templates.SERRATED_SPOON.templateId = GameObject.generateNewTemplateId();
@@ -294,7 +294,7 @@ public class TemplatesTools {
 		Templates.DINNER_BELL.soundDampening = 1f;
 		Templates.DINNER_BELL.stackable = false;
 		Templates.DINNER_BELL.weight = 8f;
-		Templates.DINNER_BELL.value = 14;
+		Templates.DINNER_BELL.value = 34;
 		Templates.DINNER_BELL.anchorX = 53;
 		Templates.DINNER_BELL.anchorY = 103;
 		Templates.DINNER_BELL.templateId = GameObject.generateNewTemplateId();
@@ -316,7 +316,7 @@ public class TemplatesTools {
 		Templates.LANTERN.soundDampening = 1f;
 		Templates.LANTERN.stackable = false;
 		Templates.LANTERN.weight = 10f;
-		Templates.LANTERN.value = 19;
+		Templates.LANTERN.value = 43;
 		Templates.LANTERN.anchorX = 63;
 		Templates.LANTERN.anchorY = 6;
 		Templates.LANTERN.templateId = GameObject.generateNewTemplateId();

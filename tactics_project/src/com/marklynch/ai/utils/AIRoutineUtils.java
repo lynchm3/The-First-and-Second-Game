@@ -137,7 +137,6 @@ public class AIRoutineUtils {
 		int bestPathTravelCost = Integer.MAX_VALUE;
 		ArrayList<GameObject> objects = new ArrayList<GameObject>();
 		for (Class clazz : types) {
-			// System.out.println("class = " + clazz);
 			objects.addAll((ArrayList<GameObject>) getFieldValue(clazz, "instances"));
 		}
 
@@ -162,17 +161,6 @@ public class AIRoutineUtils {
 					}
 
 					if (path != null && path.travelCost < bestPathTravelCost && straightLineDistance > 20) {
-
-						// if (Game.level.activeActor.name.contains("Miner")) {
-						// System.out.println("new best Object = " + object);
-						// System.out.println("old best Object = " +
-						// bestObject);
-						// System.out.println("new best travelCost = " +
-						// path.travelCost);
-						// System.out.println("old best travelCost = " +
-						// bestPathTravelCost);
-						// }
-
 						bestObject = object;
 						bestPath = path;
 						bestPathTravelCost = path.travelCost;
