@@ -102,54 +102,12 @@ public class Trader extends Human implements Comparator<GameObject> {
 
 		Trader actor = new Trader();
 		setInstances(actor);
-		actor.name = name;
-		actor.squareGameObjectIsOn = square;
-		actor.faction = faction;
-		actor.area = area;
 
-		actor.title = title;
-		actor.level = level;
-		actor.totalHealth = actor.remainingHealth = totalHealth;
-		actor.strength = strength;
-		actor.dexterity = dexterity;
-		actor.intelligence = intelligence;
-		actor.endurance = endurance;
-		actor.imageTexturePath = imageTexturePath;
-		// actor.squareGameObjectIsOn = null;
-		actor.travelDistance = travelDistance;
-		actor.sight = sight;
-		// actor.bed = null;
-		// actor.inventory = new Inventory();
-		actor.widthRatio = widthRatio;
-		actor.heightRatio = heightRatio;
-		actor.drawOffsetRatioX = drawOffsetRatioX;
-		actor.drawOffsetRatioY = drawOffsetRatioY;
-		actor.soundWhenHit = soundWhenHit;
-		actor.soundWhenHitting = soundWhenHitting;
-		// actor.soundDampening = 1f;
-		// actor.stackable = false;
-		actor.weight = weight;
-		actor.handAnchorX = handAnchorX;
-		actor.handAnchorY = handAnchorY;
-		actor.headAnchorX = headAnchorX;
-		actor.headAnchorY = headAnchorY;
-		actor.bodyAnchorX = bodyAnchorX;
-		actor.bodyAnchorY = bodyAnchorY;
-		actor.legsAnchorX = legsAnchorX;
-		actor.legsAnchorY = legsAnchorY;
-		actor.canOpenDoors = canOpenDoors;
-		actor.canEquipWeapons = canEquipWeapons;
-		// gold
-		actor.templateId = templateId;
-		actor.aiRoutine = aiRoutine.getInstance(actor);
+		super.setAttributesForCopy(actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 
-		actor.init(gold, mustHaves, mightHaves);
 		actor.broom = Templates.BROOM.makeCopy(null, null);
 		actor.inventory.add(actor.broom);
 		actor.equip(actor.broom);
-		actor.bed = bed;
-		actor.aiRoutine = new AIRoutineForTrader(actor);
-		actor.area = area;
 		return actor;
 	}
 

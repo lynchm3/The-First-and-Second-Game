@@ -192,7 +192,6 @@ public class Actor extends GameObject {
 	}
 
 	public void init(int gold, GameObject[] mustHaves, GameObject[] mightHaves) {
-		super.init();
 
 		if (bed != null)
 			this.bedGUID = bed.guid;
@@ -1328,5 +1327,36 @@ public class Actor extends GameObject {
 					actorPositionYInPixels + Game.SQUARE_HEIGHT - Game.QUARTER_SQUARE_WIDTH);
 		}
 
+	}
+
+	public void setAttributesForCopy(Actor actor, Square square, Faction faction, GameObject bed, int gold,
+			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
+		super.setAttributesForCopy(actor, square, null);
+		actor.faction = faction;
+		actor.area = area;
+		actor.bed = bed;
+		if (bed != null)
+			bed.owner = actor;
+		actor.title = title;
+		actor.level = level;
+		actor.strength = strength;
+		actor.dexterity = dexterity;
+		actor.intelligence = intelligence;
+		actor.endurance = endurance;
+		actor.travelDistance = travelDistance;
+		actor.sight = sight;
+		actor.handAnchorX = handAnchorX;
+		actor.handAnchorY = handAnchorY;
+		actor.headAnchorX = headAnchorX;
+		actor.headAnchorY = headAnchorY;
+		actor.bodyAnchorX = bodyAnchorX;
+		actor.bodyAnchorY = bodyAnchorY;
+		actor.legsAnchorX = legsAnchorX;
+		actor.legsAnchorY = legsAnchorY;
+		actor.canOpenDoors = canOpenDoors;
+		actor.canEquipWeapons = canEquipWeapons;
+		if (aiRoutine != null)
+			actor.aiRoutine = aiRoutine.getInstance(actor);
+		actor.init(gold, mustHaves, mightHaves);
 	}
 }
