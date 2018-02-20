@@ -144,10 +144,11 @@ public class Trader extends Human implements Comparator<GameObject> {
 		actor.aiRoutine = aiRoutine.getInstance(actor);
 
 		actor.init(gold, mustHaves, mightHaves);
-		this.broom = Templates.BROOM.makeCopy(null, null);
-		this.inventory.add(this.broom);
-		this.equip(this.broom);
-		aiRoutine = new AIRoutineForTrader(this);
+		actor.broom = Templates.BROOM.makeCopy(null, null);
+		actor.inventory.add(actor.broom);
+		actor.equip(actor.broom);
+		actor.bed = bed;
+		actor.aiRoutine = new AIRoutineForTrader(actor);
 		actor.area = area;
 		return actor;
 	}
