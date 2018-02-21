@@ -69,6 +69,20 @@ public class PinWindow implements Draggable {
 		drawPositionX = 500;
 		drawPositionY = 10;
 
+		// Sizing if it's a square
+		if (square != null) {
+			width += 200;
+			if (height < 210)
+				height = 256;
+
+			// stats
+			statsImageX = width - 200 + 8;
+			statsTextX = width - 200 + 32;
+			statsY = titleBarHeight + borderWidth;
+
+		}
+
+		// Sizing if it's an actor
 		if (actor != null) {
 			width += 200;
 			if (height < 512)
@@ -182,6 +196,7 @@ public class PinWindow implements Draggable {
 				TextureUtils.drawTexture(square.imageTexture, drawPositionX + borderWidth,
 						drawPositionY + titleBarHeight, drawPositionX + Game.SQUARE_WIDTH,
 						drawPositionY + Game.SQUARE_HEIGHT);
+				drawSquareStats();
 			}
 		}
 
@@ -204,6 +219,53 @@ public class PinWindow implements Draggable {
 			QuadUtils.drawQuad(Color.BLACK, drawPositionX, drawPositionY + height - 2, drawPositionX + width,
 					drawPositionY + height);
 		}
+	}
+
+	private void drawSquareStats() {
+
+		// Name
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+				drawPositionY + statsY, drawPositionX + statsImageX + 20, drawPositionY + statsY + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, null,
+				"Location ", square.name);
+
+		// elevation
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+				drawPositionY + statsY + 30, drawPositionX + statsImageX + 20, drawPositionY + statsY + 30 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false, null,
+				"Elevation ", square.elevation);
+
+		// travelCost
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 60 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false, null,
+				"Movement Cost ", square.travelCost);
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+				drawPositionY + statsY + 90, drawPositionX + statsImageX + 20, drawPositionY + statsY + 90 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 90, width - 40, false, null,
+				"Restricted ", square.restricted);
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+				drawPositionY + statsY + 120, drawPositionX + statsImageX + 20, drawPositionY + statsY + 120 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 120, width - 40, false, null,
+				"Area ", square.areaSquareIsIn);
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+				drawPositionY + statsY + 150, drawPositionX + statsImageX + 20, drawPositionY + statsY + 150 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false, null,
+				"Structure ", square.structureSquareIsIn);
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+				drawPositionY + statsY + 180, drawPositionX + statsImageX + 20, drawPositionY + statsY + 180 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false, null,
+				"SubStructure ", square.structureSectionSquareIsIn);
+
+		TextureUtils.drawTexture(getGlobalImage("action_slash.png", false), drawPositionX + statsImageX,
+				drawPositionY + statsY + 210, drawPositionX + statsImageX + 20, drawPositionY + statsY + 210 + 20);
+		TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false, null,
+				"Room ", square.structureRoomSquareIsIn);
 	}
 
 	private void drawStats(Actor actor) {
