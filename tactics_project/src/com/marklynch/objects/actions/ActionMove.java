@@ -174,9 +174,8 @@ public class ActionMove extends Action {
 
 		GameObject objectInTheWay = target.inventory.getGameObjectThatCantShareSquare();
 
-		Actor actorInTheWay = null;
 		if (objectInTheWay instanceof Actor) {
-			actorInTheWay = (Actor) objectInTheWay;
+			Actor actorInTheWay = (Actor) objectInTheWay;
 
 			if (actorInTheWay == Game.level.player) {
 				return false;
@@ -198,7 +197,9 @@ public class ActionMove extends Action {
 				// tries to move
 				return false;
 			}
-		} else {
+		}
+
+		else if (objectInTheWay != null) {
 			return false;
 		}
 
