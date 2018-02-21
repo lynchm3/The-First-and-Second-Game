@@ -39,6 +39,7 @@ import com.marklynch.objects.actions.ActionHide;
 import com.marklynch.objects.actions.ActionMove;
 import com.marklynch.objects.actions.ActionOpenInventoryToDropItems;
 import com.marklynch.objects.actions.ActionOpenInventoryToThrowItems;
+import com.marklynch.objects.actions.ActionPin;
 import com.marklynch.objects.actions.ActionPlaceMapMarker;
 import com.marklynch.objects.actions.ActionPourContainerInInventory;
 import com.marklynch.objects.actions.ActionStopHiding;
@@ -732,6 +733,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 	public Color getPixel(Texture texture, int x, int y) {
 
+		if (texture == null)
+			return null;
 		// in method
 		if (x < 0 || y < 0)
 			return null;
@@ -917,6 +920,8 @@ public class Square extends AStarNode implements ActionableInWorld, InventoryPar
 
 		if (!this.inventory.contains(MapMarker.class))
 			actions.add(new ActionPlaceMapMarker(this));
+
+		actions.add(new ActionPin(performer, this));
 
 		return actions;
 	}

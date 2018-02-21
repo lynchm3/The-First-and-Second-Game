@@ -843,9 +843,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 			return actions;
 		}
 
-		if (!(this instanceof MapMarker))
-			actions.add(new ActionPin(performer, this));
-
 		// Map Marker
 		if (this instanceof MapMarker) {
 			MapMarker mapMarker = (MapMarker) this;
@@ -866,7 +863,6 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		if (this instanceof WaterSource) {
 			actions.add(new ActionFillContainersInInventory(performer, (WaterSource) this));
 			actions.add(new ActionFishing(performer, (WaterSource) this));
-			return actions;
 		}
 
 		// Skinnable
@@ -1024,6 +1020,9 @@ public class GameObject implements ActionableInWorld, ActionableInInventory, Com
 		// actions.add(new ActionCastDouse(performer, this));
 		// if (!decorative)
 		// actions.add(new ActionCastPoison(performer, this));
+
+		if (!(this instanceof MapMarker))
+			actions.add(new ActionPin(performer, this));
 
 		return actions;
 

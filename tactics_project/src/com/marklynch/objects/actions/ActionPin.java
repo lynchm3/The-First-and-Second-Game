@@ -2,7 +2,6 @@ package com.marklynch.objects.actions;
 
 import com.marklynch.Game;
 import com.marklynch.level.constructs.Sound;
-import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.PinWindow;
 
@@ -12,10 +11,10 @@ public class ActionPin extends Action {
 	public static final String ACTION_NAME_DISABLED = ACTION_NAME + " (duplicate)";
 
 	public Actor performer;
-	public GameObject target;
+	public Object target;
 
 	// Default for hostiles
-	public ActionPin(Actor reader, GameObject target) {
+	public ActionPin(Actor reader, Object target) {
 		super(ACTION_NAME, "action_search.png");
 		this.performer = reader;
 		this.target = target;
@@ -44,7 +43,7 @@ public class ActionPin extends Action {
 	@Override
 	public boolean check() {
 		for (PinWindow pinWindow : Game.level.pinWindows) {
-			if (pinWindow.gameObject == target) {
+			if (pinWindow.object == target) {
 				return false;
 			}
 		}

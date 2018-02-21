@@ -6,6 +6,7 @@ import com.marklynch.Game;
 import com.marklynch.level.Level;
 import com.marklynch.level.constructs.beastiary.BestiaryKnowledge;
 import com.marklynch.level.constructs.power.Power;
+import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
 import com.marklynch.objects.units.Actor;
 import com.marklynch.ui.button.ClickListener;
@@ -18,7 +19,10 @@ import com.marklynch.utils.TextureUtils;
 
 public class PinWindow implements Draggable {
 
+	public Object object;
 	public GameObject gameObject;
+	public Actor actor;
+	public Square square;
 	public float width;
 	public float height;
 
@@ -28,7 +32,6 @@ public class PinWindow implements Draggable {
 	public int titleBarHeight = 20;
 	public int borderWidth = 2;
 	public static Object[] unknownStats = new Object[] { "??" };
-	public Actor actor;
 
 	// Actor
 
@@ -50,14 +53,21 @@ public class PinWindow implements Draggable {
 
 	// Practical damage
 
-	public PinWindow(GameObject gameObject) {
-		this.gameObject = gameObject;
-		if (gameObject instanceof Actor)
-			actor = (Actor) gameObject;
+	public PinWindow(Object object) {
+		this.object = object;
+		if (object instanceof GameObject) {
+			this.gameObject = (GameObject) object;
+			if (object instanceof Actor)
+				this.actor = (Actor) object;
+			this.width = gameObject.imageTexture.getWidth() + borderWidth * 2;
+			this.height = gameObject.imageTexture.getHeight() + titleBarHeight + borderWidth;
+		} else if (object instanceof Square) {
+			this.square = (Square) object;
+			this.width = Game.SQUARE_WIDTH;
+			this.height = Game.SQUARE_HEIGHT;
+		}
 		drawPositionX = 500;
 		drawPositionY = 10;
-		this.width = gameObject.imageTexture.getWidth() + borderWidth * 2;
-		this.height = gameObject.imageTexture.getHeight() + titleBarHeight + borderWidth;
 
 		if (actor != null) {
 			width += 200;
@@ -115,22 +125,40 @@ public class PinWindow implements Draggable {
 	}
 
 	public void drawLine() {
-		if (!minimised && gameObject.squareGameObjectIsOn != null && gameObject.squareGameObjectIsOn.visibleToPlayer) {
 
-			// LINE
-			float lineX1 = this.drawPositionX + this.width / 2;
-			float lineY1 = drawPositionY + height / 2;
+		if (minimised)
+			return;
 
-			float gameObjectX = (gameObject.squareGameObjectIsOn.xInGridPixels);
-			float gameObjectY = (gameObject.squareGameObjectIsOn.yInGridPixels);
-			float lineX2 = (Game.windowWidth / 2) + (Game.zoom
-					* (gameObjectX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
-			float lineY2 = (Game.windowHeight / 2) + (Game.zoom
-					* (gameObjectY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
+		if (gameObject == null && square == null)
+			return;
+
+		// LINE
+		float lineX1 = this.drawPositionX + this.width / 2;
+		float lineY1 = drawPositionY + height / 2;
+		float objectX = 0;
+		float objectY = 0;
+
+		if (gameObject != null && gameObject.squareGameObjectIsOn != null
+				&& gameObject.squareGameObjectIsOn.visibleToPlayer) {
+
+			objectX = (gameObject.squareGameObjectIsOn.xInGridPixels);
+			objectY = (gameObject.squareGameObjectIsOn.yInGridPixels);
 
 			// Draw line from window to subject
-			LineUtils.drawLine(Color.BLACK, lineX1, lineY1, lineX2, lineY2, 5);
+		} else if (square != null) {
+
+			objectX = square.xInGridPixels;
+			objectY = square.yInGridPixels;
+
+		} else {
+			return;
 		}
+
+		float lineX2 = (Game.windowWidth / 2)
+				+ (Game.zoom * (objectX - Game.windowWidth / 2 + Game.getDragXWithOffset() + Game.HALF_SQUARE_WIDTH));
+		float lineY2 = (Game.windowHeight / 2)
+				+ (Game.zoom * (objectY - Game.windowHeight / 2 + Game.getDragYWithOffset() + Game.HALF_SQUARE_HEIGHT));
+		LineUtils.drawLine(Color.BLACK, lineX1, lineY1, lineX2, lineY2, 5);
 	}
 
 	public void drawStaticUI() {
@@ -142,10 +170,20 @@ public class PinWindow implements Draggable {
 			// Background
 			QuadUtils.drawQuad(Color.PINK, drawPositionX, drawPositionY, drawPositionX + width, drawPositionY + height);
 
-			// GameObject Image
-			TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
-					drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),
-					drawPositionY + gameObject.imageTexture.getHeight());
+			// Image
+			if (gameObject != null) {
+				TextureUtils.drawTexture(gameObject.imageTexture, drawPositionX + borderWidth,
+						drawPositionY + titleBarHeight, drawPositionX + gameObject.imageTexture.getWidth(),
+						drawPositionY + gameObject.imageTexture.getHeight());
+
+				if (actor != null) {
+					drawStats(actor);
+				}
+			} else if (square != null) {
+				TextureUtils.drawTexture(square.imageTexture, drawPositionX + borderWidth,
+						drawPositionY + titleBarHeight, drawPositionX + Game.SQUARE_WIDTH,
+						drawPositionY + Game.SQUARE_HEIGHT);
+			}
 
 			if (actor != null) {
 				drawStats(actor);
@@ -156,7 +194,7 @@ public class PinWindow implements Draggable {
 		titleBarButton.draw();
 
 		// Title bar text
-		TextUtils.printTextWithImages(drawPositionX + 2, drawPositionY, width - 40, false, null, gameObject);
+		TextUtils.printTextWithImages(drawPositionX + 2, drawPositionY, width - 40, false, null, object);
 
 		// Title bar buttons
 		this.closeButton.draw();
