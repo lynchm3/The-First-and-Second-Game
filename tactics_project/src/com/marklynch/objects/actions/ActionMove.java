@@ -198,6 +198,8 @@ public class ActionMove extends Action {
 				// tries to move
 				return false;
 			}
+		} else {
+			return false;
 		}
 
 		return true;

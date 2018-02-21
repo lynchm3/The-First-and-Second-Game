@@ -244,7 +244,7 @@ public class QuestSmallGame extends Quest {
 		// Add hunters
 		GameObject brontsBed = Templates.BED.makeCopy(Game.level.squares[108][10], null);
 		Actor hunterBront1 = Templates.HUNTER.makeCopy("Hunter Bront", Game.level.squares[103][7],
-				Game.level.factions.townsPeople, brontsBed, 1234, new GameObject[] {
+				Game.level.factions.townsPeople, brontsBed, 124, new GameObject[] {
 						Templates.HUNTING_BOW.makeCopy(null, null), Templates.HUNTING_KNIFE.makeCopy(null, null) },
 				new GameObject[] {}, AreaList.townForest);
 		GameObject bront2sBed = Templates.BED.makeCopy(Game.level.squares[106][10], null);
@@ -498,6 +498,10 @@ public class QuestSmallGame extends Quest {
 
 	@Override
 	public boolean update(Actor actor) {
+
+		if (1 == 1)
+			return false;
+
 		if (resolved)
 			return false;
 		if (hunterPack.contains(actor)) {

@@ -51,8 +51,8 @@ public class Game {
 	// public static int playerStartPosY = 3;
 
 	// minor mine
-	public static int playerStartPosX = 292;
-	public static int playerStartPosY = 86;
+	// public static int playerStartPosX = 292;
+	// public static int playerStartPosY = 86;
 
 	// Dining room
 	// public static int playerStartPosX = 93;
@@ -63,8 +63,8 @@ public class Game {
 	// public static int playerStartPosY = 46;
 
 	// Lodge
-	// public static int playerStartPosX = 106;
-	// public static int playerStartPosY = 6;
+	public static int playerStartPosX = 106;
+	public static int playerStartPosY = 6;
 
 	// Wolf
 	// public static int playerStartPosX = 129;

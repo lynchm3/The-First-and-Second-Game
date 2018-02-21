@@ -121,6 +121,9 @@ public class ActionCastPoison extends Action {
 			return false;
 		}
 
+		if (!performer.canSeeGameObject(target))
+			return false;
+
 		return true;
 	}
 

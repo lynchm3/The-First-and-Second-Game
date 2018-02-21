@@ -103,11 +103,6 @@ public class ActionDig extends Action {
 	@Override
 	public boolean checkRange() {
 
-		if (!performer.canSeeGameObject(target)) {
-			actionName = ACTION_NAME_CANT_REACH;
-			return false;
-		}
-
 		if (performer.straightLineDistanceTo(target.squareGameObjectIsOn) > 1) {
 			actionName = ACTION_NAME_CANT_REACH;
 			return false;
