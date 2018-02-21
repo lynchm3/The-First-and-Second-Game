@@ -274,12 +274,13 @@ public class PinWindow implements Draggable {
 		// GENERAL
 		if (bestiaryKnowledge.faction) {
 			TextUtils.printTextWithImages(drawPositionX + borderWidth,
-					drawPositionY + titleBarHeight + actor.imageTexture.getHeight(), 128, false, null, actor.faction);
+					drawPositionY + titleBarHeight + actor.imageTexture.getHeight(), 128, false, null, "Faction ",
+					actor.faction);
 		}
 
 		if (bestiaryKnowledge.group && actor.group != null) {
 			TextUtils.printTextWithImages(drawPositionX + borderWidth,
-					drawPositionY + titleBarHeight + actor.imageTexture.getHeight() + 30, 128, false, null,
+					drawPositionY + titleBarHeight + actor.imageTexture.getHeight() + 30, 128, false, null, "Group ",
 					actor.group.name);
 		}
 
@@ -288,11 +289,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY, drawPositionX + statsImageX + 20, drawPositionY + statsY + 20);
 		if (bestiaryKnowledge.name) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, null,
-					actor.name);
+					"Name ", actor.name);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY, width - 40, false, null,
-					unknownStats);
+					"Name ", unknownStats);
 
 		}
 
@@ -302,11 +303,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 30, drawPositionX + statsImageX + 20, drawPositionY + statsY + 30 + 20);
 		if (bestiaryKnowledge.level) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false,
-					null, "" + actor.level);
+					null, "Level ", "" + actor.level);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 30, width - 40, false,
-					null, unknownStats);
+					null, "Level ", unknownStats);
 
 		}
 
@@ -316,11 +317,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 60, drawPositionX + statsImageX + 20, drawPositionY + statsY + 60 + 20);
 		if (bestiaryKnowledge.totalHealth) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false,
-					null, "" + actor.totalHealth);
+					null, "Max Health ", "" + actor.totalHealth);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 60, width - 40, false,
-					null, unknownStats);
+					null, "Max Health ", unknownStats);
 
 		}
 
@@ -334,11 +335,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 150, drawPositionX + statsImageX + 20, drawPositionY + statsY + 150 + 20);
 		if (bestiaryKnowledge.strength) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false,
-					null, "" + actor.strength);
+					null, "STR ", "" + actor.strength);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 150, width - 40, false,
-					null, unknownStats);
+					null, "STR ", unknownStats);
 
 		}
 
@@ -348,11 +349,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 180, drawPositionX + statsImageX + 20, drawPositionY + statsY + 180 + 20);
 		if (bestiaryKnowledge.dexterity) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false,
-					null, "" + actor.dexterity);
+					null, "DEX ", "" + actor.dexterity);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 180, width - 40, false,
-					null, unknownStats);
+					null, "DEX ", unknownStats);
 
 		}
 
@@ -362,11 +363,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 210, drawPositionX + statsImageX + 20, drawPositionY + statsY + 210 + 20);
 		if (bestiaryKnowledge.intelligence) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false,
-					null, "" + actor.intelligence);
+					null, "INT ", "" + actor.intelligence);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 210, width - 40, false,
-					null, unknownStats);
+					null, "INT ", unknownStats);
 
 		}
 
@@ -376,11 +377,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + statsY + 240, drawPositionX + statsImageX + 20, drawPositionY + statsY + 240 + 20);
 		if (bestiaryKnowledge.endurance) {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false,
-					null, "" + actor.endurance);
+					null, "END ", "" + actor.endurance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + statsTextX, drawPositionY + statsY + 240, width - 40, false,
-					null, unknownStats);
+					null, "END ", unknownStats);
 
 		}
 
@@ -395,11 +396,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 60 + 20);
 		if (bestiaryKnowledge.slashResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
-					width - 40, false, null, "" + gameObject.slashResistance);
+					width - 40, false, null, "Slash ", "" + gameObject.slashResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 60,
-					width - 40, false, null, unknownStats);
+					width - 40, false, null, "Slash ", unknownStats);
 
 		}
 
@@ -410,11 +411,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 90 + 20);
 		if (bestiaryKnowledge.pierceResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
-					width - 40, false, null, "" + gameObject.pierceResistance);
+					width - 40, false, null, "Pierce ", "" + gameObject.pierceResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 90,
-					width - 40, false, null, unknownStats);
+					width - 40, false, null, "Pierce ", unknownStats);
 
 		}
 
@@ -425,11 +426,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 120 + 20);
 		if (bestiaryKnowledge.bluntResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
-					width - 40, false, null, "" + gameObject.bluntResistance);
+					width - 40, false, null, "Blunt ", "" + gameObject.bluntResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 120,
-					width - 40, false, null, unknownStats);
+					width - 40, false, null, "Blunt ", unknownStats);
 
 		}
 
@@ -439,11 +440,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 150 + 20);
 		if (bestiaryKnowledge.fireResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
-					width - 40, false, null, "" + gameObject.fireResistance);
+					width - 40, false, null, "Fire ", "" + gameObject.fireResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 150,
-					width - 40, false, null, unknownStats);
+					width - 40, false, null, "Fire ", unknownStats);
 
 		}
 
@@ -453,11 +454,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 180 + 20);
 		if (bestiaryKnowledge.waterResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
-					width - 40, false, null, "" + gameObject.waterResistance);
+					width - 40, false, null, "Water ", "" + gameObject.waterResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 180,
-					width - 40, false, null, unknownStats);
+					width - 40, false, null, "Water ", unknownStats);
 
 		}
 
@@ -468,11 +469,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 210 + 20);
 		if (bestiaryKnowledge.electricResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
-					width - 40, false, null, "" + gameObject.electricResistance);
+					width - 40, false, null, "Electric ", "" + gameObject.electricResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 210,
-					width - 40, false, null, unknownStats);
+					width - 40, false, null, "Electric ", unknownStats);
 
 		}
 
@@ -482,11 +483,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 240 + 20);
 		if (bestiaryKnowledge.poisonResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 240,
-					width - 40, false, null, "" + gameObject.poisonResistance);
+					width - 40, false, null, "Poison ", "" + gameObject.poisonResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 240,
-					width - 40, false, null, unknownStats);
+					width - 40, false, null, "Poison ", unknownStats);
 
 		}
 
@@ -496,11 +497,11 @@ public class PinWindow implements Draggable {
 				drawPositionY + resistancesY + 270 + 20);
 		if (bestiaryKnowledge.poisonResistance) {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 270,
-					width - 40, false, null, "" + gameObject.poisonResistance);
+					width - 40, false, null, "Bleed ", "" + gameObject.poisonResistance);
 
 		} else {
 			TextUtils.printTextWithImages(drawPositionX + resistancesTextX, drawPositionY + resistancesY + 270,
-					width - 40, false, null, unknownStats);
+					width - 40, false, null, "Bleed ", unknownStats);
 
 		}
 
