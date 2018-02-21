@@ -103,7 +103,7 @@ public class Trader extends Human implements Comparator<GameObject> {
 		Trader actor = new Trader();
 		setInstances(actor);
 
-		super.setAttributesForCopy(actor, square, faction, bed, gold, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 
 		actor.broom = Templates.BROOM.makeCopy(null, null);
 		actor.inventory.add(actor.broom);

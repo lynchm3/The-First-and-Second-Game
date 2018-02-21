@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 import com.marklynch.Game;
 import com.marklynch.ai.utils.AIRoutineUtils;
-import com.marklynch.level.Decoration;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.constructs.FactionRelationship;
 import com.marklynch.level.constructs.area.Area;
@@ -23,9 +22,6 @@ import com.marklynch.script.ScriptEventSpeech.SpeechPart;
 import com.marklynch.script.trigger.ScriptTrigger;
 import com.marklynch.ui.button.Link;
 import com.marklynch.ui.button.Tooltip;
-
-import com.marklynch.utils.Color;
-import com.marklynch.utils.Texture;
 
 public class TextUtils {
 
@@ -115,22 +111,6 @@ public class TextUtils {
 					offsetX = 0;
 				}
 
-				offsetX += textWidth;
-				offsetX += textureWidth;
-
-			} else if (content instanceof Decoration) {
-				Decoration decoration = (Decoration) content;
-
-				float textWidth = Game.smallFont.getWidth(decoration.name);
-				float textureWidth = 20;
-
-				float width = textWidth + textureWidth;
-				if (offsetX + width > maxWidth && offsetX != 0) {
-					offsetY += 20;
-					offsetX = 0;
-				}
-
-				// Name
 				offsetX += textWidth;
 				offsetX += textureWidth;
 
@@ -542,33 +522,6 @@ public class TextUtils {
 
 				float x = posX + offsetX;
 				TextureUtils.drawTexture(faction.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
-				offsetX += textureWidth;
-
-			} else if (content instanceof Decoration) {
-				Decoration decoration = (Decoration) content;
-
-				float textWidth = Game.smallFont.getWidth(decoration.name);
-				float textureWidth = 20;
-
-				float width = textWidth + textureWidth;
-				if (offsetX + width > maxWidth && offsetX != 0) {
-					if (wrap) {
-						offsetY += 20;
-						offsetX = 0;
-					} else {
-						return;
-					}
-				}
-
-				// Name
-
-				Game.smallFont.drawText(Game.activeBatch, decoration.name, posX + offsetX, posY + offsetY);
-				offsetX += textWidth;
-
-				// Image
-
-				float x = posX + offsetX;
-				TextureUtils.drawTexture(decoration.imageTexture, x, posY + offsetY, x + 20, posY + offsetY + 20);
 				offsetX += textureWidth;
 
 			} else if (content instanceof Area) {

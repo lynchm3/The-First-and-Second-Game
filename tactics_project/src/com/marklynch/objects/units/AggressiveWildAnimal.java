@@ -39,7 +39,7 @@ public class AggressiveWildAnimal extends WildAnimal {
 
 		AggressiveWildAnimal actor = new AggressiveWildAnimal();
 		setInstances(actor);
-		super.setAttributesForCopy(actor, square, faction, bed, 0, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(name, actor, square, faction, bed, 0, mustHaves, mightHaves, area);
 
 		return actor;
 	}

@@ -168,7 +168,7 @@ public class RockGolem extends Monster {
 
 		RockGolem actor = new RockGolem();
 		setInstances(actor);
-		super.setAttributesForCopy(actor, square, faction, bed, 0, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(name, actor, square, faction, bed, 0, mustHaves, mightHaves, area);
 
 		this.roomLivingIn = roomLivingIn;
 

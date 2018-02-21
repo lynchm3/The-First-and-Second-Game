@@ -65,7 +65,7 @@ public class Pig extends Animal {
 			GameObject[] mightHaves, Area area) {
 		Pig actor = new Pig();
 		setInstances(actor);
-		super.setAttributesForCopy(actor, square, faction, bed, 0, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(name, actor, square, faction, bed, 0, mustHaves, mightHaves, area);
 
 		return actor;
 	}

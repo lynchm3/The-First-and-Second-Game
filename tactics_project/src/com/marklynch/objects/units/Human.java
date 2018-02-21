@@ -28,7 +28,7 @@ public class Human extends Actor {
 			GameObject[] mightHaves, Area area) {
 		Human actor = new Human();
 		setInstances(actor);
-		super.setAttributesForCopy(actor, square, faction, bed, gold, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 
 		return actor;
 	}

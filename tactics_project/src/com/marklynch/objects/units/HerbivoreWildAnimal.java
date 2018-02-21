@@ -38,7 +38,7 @@ public class HerbivoreWildAnimal extends WildAnimal {
 
 		HerbivoreWildAnimal actor = new HerbivoreWildAnimal();
 		setInstances(actor);
-		super.setAttributesForCopy(actor, square, faction, bed, 0, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(name, actor, square, faction, bed, 0, mustHaves, mightHaves, area);
 
 		return actor;
 	}

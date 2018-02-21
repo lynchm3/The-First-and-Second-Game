@@ -54,7 +54,7 @@ public class Mort extends Actor {
 			GameObject[] mightHaves, Area area) {
 		Mort actor = new Mort();
 		setInstances(actor);
-		super.setAttributesForCopy(actor, square, faction, bed, gold, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 
 		actor.init(gold, mustHaves, mightHaves);
 		return actor;

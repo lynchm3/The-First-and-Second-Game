@@ -97,7 +97,7 @@ public class Player extends Human {
 
 		Player actor = new Player();
 		setInstances(actor);
-		super.setAttributesForCopy(actor, square, faction, bed, gold, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(name, actor, square, faction, bed, gold, mustHaves, mightHaves, area);
 
 		BestiaryKnowledge bestiaryKnowledge = Level.bestiaryKnowledgeCollection.get(templateId);
 

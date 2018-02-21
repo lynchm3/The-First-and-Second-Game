@@ -1329,9 +1329,10 @@ public class Actor extends GameObject {
 
 	}
 
-	public void setAttributesForCopy(Actor actor, Square square, Faction faction, GameObject bed, int gold,
+	public void setAttributesForCopy(String name, Actor actor, Square square, Faction faction, GameObject bed, int gold,
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 		super.setAttributesForCopy(actor, square, null);
+		actor.name = name;
 		actor.faction = faction;
 		actor.area = area;
 		actor.bed = bed;

@@ -2,11 +2,9 @@ package com.marklynch.editor;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.ArrayList;
 
 import com.marklynch.Game;
 import com.marklynch.editor.Editor.EDITOR_STATE;
-import com.marklynch.level.Decoration;
 import com.marklynch.level.constructs.Faction;
 import com.marklynch.level.squares.Square;
 import com.marklynch.objects.GameObject;
@@ -17,11 +15,10 @@ import com.marklynch.ui.EditorToast;
 import com.marklynch.ui.button.AtributesWindowButton;
 import com.marklynch.ui.button.Button;
 import com.marklynch.ui.button.ClickListener;
+import com.marklynch.utils.Color;
 import com.marklynch.utils.QuadUtils;
 import com.marklynch.utils.StringWithColor;
 import com.marklynch.utils.TextUtils;
-
-import com.marklynch.utils.Color;
 
 /**
  * 
@@ -112,8 +109,6 @@ public class AttributesDialog {
 								// editor.gameObjectTemplates.indexOf(object);//HACKED
 		} else if (object instanceof Color) {
 			title = "Color " + editor.colors.indexOf(object);
-		} else if (object instanceof Decoration) {
-			title = "Decoration...";
 		}
 
 		// Attribute buttons
@@ -232,19 +227,6 @@ public class AttributesDialog {
 					for (Faction faction : Game.level.factions) {
 						faction.relationships.remove(faction);
 					}
-					editor.settingsWindow.update();
-				}
-			});
-		} else if (object instanceof Decoration) {
-			final AtributesWindowButton button = new AtributesWindowButton(0, 0 + (count + 2) * 30, 200, 30, object,
-					"delete", true, true, this, 0);
-			buttons.add(button);
-			button.setClickListener(new ClickListener() {
-				@Override
-				public void click() {
-					depressButtons();
-					editor.clearSelectedObject();
-					editor.decorationsSettingsWindow.updateDecorationsButtons();
 					editor.settingsWindow.update();
 				}
 			});

@@ -51,7 +51,7 @@ public class TinyNeutralWildAnimal extends HerbivoreWildAnimal {
 			GameObject[] mustHaves, GameObject[] mightHaves, Area area) {
 		TinyNeutralWildAnimal actor = new TinyNeutralWildAnimal();
 		setInstances(actor);
-		super.setAttributesForCopy(actor, square, faction, bed, 0, mustHaves, mightHaves, area);
+		super.setAttributesForCopy(name, actor, square, faction, bed, 0, mustHaves, mightHaves, area);
 
 		return actor;
 	}
