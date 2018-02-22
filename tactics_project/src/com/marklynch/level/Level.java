@@ -1438,9 +1438,10 @@ public class Level {
 		}
 
 		if (aiTurn) {
-			int amountOfAiToUpdate = actors.size() * (delta / timeToMoveAll);
+			float amountOfAiToUpdate = actors.size() * ((float) delta / (float) timeToMoveAll);
+			System.out.println("amountOfAiToUpdate = " + amountOfAiToUpdate);
 			int start = lastActorUpdatedIndex + 1;
-			int end = start + amountOfAiToUpdate;
+			int end = (int) (start + amountOfAiToUpdate);
 			if (end >= actors.size())
 				end = actors.size() - 1;
 			for (int i = start; i <= end; i++) {
